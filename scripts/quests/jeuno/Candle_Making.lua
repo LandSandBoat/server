@@ -5,12 +5,12 @@
 -- Rouliette : !pos -24 -2 11 244
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CANDLE_MAKING)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CANDLE_MAKING)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     keyItem  = xi.ki.HOLY_CANDLE,
     title    = xi.title.BELIEVER_OF_ALTANA,
 }
@@ -19,8 +19,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CANDLELIGHT_VIGIL) == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CANDLELIGHT_VIGIL) == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.UPPER_JEUNO] =
@@ -38,7 +38,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.UPPER_JEUNO] =

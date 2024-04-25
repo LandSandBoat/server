@@ -22,7 +22,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 4)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 50, 0, 30)
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.DARK, { breakBind = false })
     return dmg
 end
 

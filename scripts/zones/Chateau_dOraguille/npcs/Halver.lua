@@ -18,13 +18,13 @@ entity.onTrigger = function(player, npc)
 
     -- Lure of the Wildcat San d'Oria
     if
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
         not utils.mask.getBit(wildcatSandy, 16)
     then
         player:startEvent(558)
     -- Blackmail quest
     elseif
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL) == xi.questStatus.QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
     then
         player:startEvent(549)

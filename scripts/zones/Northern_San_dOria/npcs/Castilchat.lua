@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
     if
         trade:hasItemQty(xi.item.MINI_TUNING_FORK_OF_ICE, 1) and
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE) == xi.questStatus.QUEST_ACCEPTED and
         player:getMainJob() == xi.job.SMN and
         count == 1
     then -- Trade mini fork of ice
@@ -21,16 +21,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local trialSizeByIce = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
+    local trialSizeByIce = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
 
     if
         player:getMainLvl() >= 20 and
         player:getMainJob() == xi.job.SMN and
-        trialSizeByIce == QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2
+        trialSizeByIce == xi.questStatus.QUEST_AVAILABLE and
+        player:getFameLevel(xi.fameArea.SANDORIA) >= 2
     then -- Requires player to be Summoner at least lvl 20
         player:startEvent(733, 0, xi.item.MINI_TUNING_FORK_OF_ICE, 4, 20)     --mini tuning fork of ice, zone, level
-    elseif trialSizeByIce == QUEST_ACCEPTED then
+    elseif trialSizeByIce == xi.questStatus.QUEST_ACCEPTED then
         local iceFork = player:hasItem(xi.item.MINI_TUNING_FORK_OF_ICE)
 
         if iceFork then
@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(737, 0, xi.item.MINI_TUNING_FORK_OF_ICE, 4, 20) -- Need another mini tuning fork
         end
-    elseif trialSizeByIce == QUEST_COMPLETED then
+    elseif trialSizeByIce == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(736) -- Defeated Avatar
     else
         player:startEvent(711) -- Standard dialog
@@ -53,7 +53,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.MINI_TUNING_FORK_OF_ICE)
         else
-            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
+            player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
             player:addItem(xi.item.MINI_TUNING_FORK_OF_ICE)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.MINI_TUNING_FORK_OF_ICE)
         end

@@ -6,12 +6,12 @@
 -- Waterfall Base : !pos -217.594 98.644 464.722 106
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DRACHENFALL)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.DRACHENFALL)
 
 quest.reward =
 {
     fame = 120,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     gil = 2000,
     title = xi.title.DRACHENFALL_ASCETIC,
 }
@@ -21,8 +21,8 @@ quest.sections =
     -- Section: Quest available
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getFameLevel(xi.fameArea.BASTOK) >= 2
         end,
 
         [xi.zone.BASTOK_MINES] =
@@ -46,7 +46,7 @@ quest.sections =
     -- Section: Quest accepted
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MINES] =

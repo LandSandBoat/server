@@ -28,7 +28,7 @@ quest.sections =
                 player:getCurrentMission(xi.mission.log_id.COP) < xi.mission.id.cop.THE_WARRIORS_PATH)
                 or
                 -- On Dawn, but past "the boss"
-                (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.DAWN and
+                (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
                 player:getCharVar('PromathiaStatus') >= 3)
                 or
                 -- Past Dawn

@@ -22,7 +22,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local skillLevel = player:getSkillLevel(xi.skill.ALCHEMY)
+    local skillLevel = xi.crafting.getRealSkill(player, xi.skill.ALCHEMY)
 
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.ALCHEMY) then
         player:startEvent(636, 2, skillLevel, 0, 511, 0, 0, 7, xi.item.IMPERIAL_BRONZE_PIECE)

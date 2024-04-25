@@ -8,12 +8,12 @@
 -- qm3      : !pos -399 -10 -438 100
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     gil = 560,
     title = xi.title.LOST_FOUND_OFFICER,
 }
@@ -29,8 +29,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TASTE_FOR_MEAT)
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_TASTE_FOR_MEAT)
         end,
 
         [xi.zone.PORT_SAN_DORIA] =
@@ -56,7 +56,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_SAN_DORIA] =

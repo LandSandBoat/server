@@ -11,7 +11,7 @@ local phanauetID = zones[xi.zone.PHANAUET_CHANNEL]
 local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY)
 
 quest.reward =
 {
@@ -25,9 +25,9 @@ quest.sections =
     -- who may know about it are the tight lipped Tonberries in Carpenters' Landing.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_COMPLETED and
-                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == xi.questStatus.QUEST_COMPLETED and
+                player:getFameLevel(xi.fameArea.SANDORIA) >= 4 and
                 not player:needToZone()
         end,
 
@@ -61,7 +61,7 @@ quest.sections =
     -- Return to Southern San d'Oria and talk to Sobane to complete the quest.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

@@ -12,7 +12,7 @@
 local pastBeaucedineID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SONGBIRDS_IN_A_SNOWSTORM)
+local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SONGBIRDS_IN_A_SNOWSTORM)
 
 quest.reward =
 {
@@ -30,8 +30,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BONDS_THAT_NEVER_DIE) and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BONDS_THAT_NEVER_DIE) and
                 player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.THE_WILL_OF_THE_WORLD)
         end,
 
@@ -91,7 +91,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =

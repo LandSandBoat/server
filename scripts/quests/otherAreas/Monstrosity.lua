@@ -11,7 +11,7 @@
 -- Two-leaf Mandy Bud  : !additem 4368
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MONSTROSITY)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.MONSTROSITY)
 
 quest.reward = {}
 
@@ -86,7 +86,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return xi.settings.main.ENABLE_MONSTROSITY == 1 and status == QUEST_AVAILABLE
+            return xi.settings.main.ENABLE_MONSTROSITY == 1 and status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PASHHOW_MARSHLANDS] =
@@ -104,7 +104,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -196,7 +196,7 @@ quest.sections =
     -- global, along with event update/finish wiring here.
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.PASHHOW_MARSHLANDS] =

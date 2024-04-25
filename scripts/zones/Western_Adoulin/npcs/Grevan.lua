@@ -10,15 +10,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local orderUp = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ORDER_UP)
+    local orderUp = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.ORDER_UP)
     local orderGrevan = utils.mask.getBit(player:getCharVar('Order_Up_NPCs'), 10)
 
-    if orderUp == QUEST_ACCEPTED and not orderGrevan then
+    if orderUp == xi.questStatus.QUEST_ACCEPTED and not orderGrevan then
         -- Progresses Quest: 'Order Up'
         player:startEvent(69)
     else
-        if player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.HYPOCRITICAL_OATH) == QUEST_COMPLETED then
-            if player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.NOTSOCLEAN_BILL) == QUEST_COMPLETED then
+        if player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.HYPOCRITICAL_OATH) == xi.questStatus.QUEST_COMPLETED then
+            if player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.NOTSOCLEAN_BILL) == xi.questStatus.QUEST_COMPLETED then
                 -- Standard dialogue after stamping out plague in Svenja quest line
                 player:startEvent(188)
             else

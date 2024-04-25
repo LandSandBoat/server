@@ -9,11 +9,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local circleOfTime   = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+    local circleOfTime   = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local circleProgress = player:getCharVar('circleTime')
 
     -- CIRCLE OF TIME
-    if circleOfTime == QUEST_ACCEPTED then
+    if circleOfTime == xi.questStatus.QUEST_ACCEPTED then
         if circleProgress == 1 then
             player:startEvent(30)
         elseif circleProgress == 2 then

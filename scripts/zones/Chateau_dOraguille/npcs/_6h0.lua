@@ -22,12 +22,12 @@ local function TrustMemory(player)
     end
 
     -- 8 - UNDER_OATH
-    if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH) then
+    if player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH) then
         memories = memories + 8
     end
 
     -- 16 - FIT_FOR_A_PRINCE
-    if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FIT_FOR_A_PRINCE) then
+    if player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.FIT_FOR_A_PRINCE) then
         memories = memories + 16
     end
 
@@ -43,15 +43,15 @@ end
 
 entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
-    local aBoysDream = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
-    local underOath = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
+    local aBoysDream = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
+    local underOath = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
 
     -- "Under Oath" (PLD AF Body)
     if player:getCharVar('UnderOathCS') == 8 then
         player:startEvent(89)
     elseif
         player:getMainJob() == xi.job.PLD and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and
-        aBoysDream == QUEST_COMPLETED and underOath == QUEST_AVAILABLE
+        aBoysDream == xi.questStatus.QUEST_COMPLETED and underOath == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(90) -- Start
 
@@ -85,18 +85,18 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.GALLANT_LEGGINGS)
         else
             if player:getMainJob() == xi.job.PLD then
-                player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
+                player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
             end
 
             player:delKeyItem(xi.ki.KNIGHTS_BOOTS)
             player:addItem(xi.item.GALLANT_LEGGINGS)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GALLANT_LEGGINGS) -- Gallant Leggings
             player:setCharVar('aBoysDreamCS', 0)
-            player:addFame(xi.quest.fame_area.SANDORIA, 40)
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
+            player:addFame(xi.fameArea.SANDORIA, 40)
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
         end
     elseif csid == 90 and option == 1 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         player:setCharVar('UnderOathCS', 0)
     elseif csid == 89 then
         if player:getFreeSlotsCount() == 0 then
@@ -105,9 +105,9 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.GALLANT_SURCOAT)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GALLANT_SURCOAT) -- Gallant Surcoat
             player:setCharVar('UnderOathCS', 9)
-            player:addFame(xi.quest.fame_area.SANDORIA, 60)
+            player:addFame(xi.fameArea.SANDORIA, 60)
             player:setTitle(xi.title.PARAGON_OF_PALADIN_EXCELLENCE)
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         end
     elseif csid == 574 and option == 2 then
         player:addSpell(xi.magic.spell.TRION, false, true)

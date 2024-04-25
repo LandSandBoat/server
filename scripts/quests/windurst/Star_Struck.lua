@@ -5,12 +5,12 @@
 -- Koru-Moru : !pos -120 -6 124 239
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.STAR_STRUCK)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.STAR_STRUCK)
 
 quest.reward =
 {
     fame     = 20,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     item     = xi.item.COMPOUND_EYE_CIRCLET,
 }
 
@@ -18,7 +18,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.WINDURST_WALLS] =
@@ -45,7 +45,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WALLS] =
@@ -76,7 +76,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:confirmTrade()
 
-                        xi.quest.setMustZone(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
+                        xi.quest.setMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
                     end
                 end,
             },
@@ -85,8 +85,8 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                not player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
+            return status == xi.questStatus.QUEST_COMPLETED and
+                not player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
         end,
 
         [xi.zone.WINDURST_WALLS] =

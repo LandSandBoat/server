@@ -29,26 +29,26 @@ end
 
 entity.onTrigger = function(player, npc)
     -- CHILDREN OF THE RUNE
-    local cotrQuestStatus = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
+    local cotrQuestStatus = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
     -- NOTE: The if-statements are ordered in reverse order from when they occur
     -- for natural fallthrough, to avoid needing `not` statements in them.
-    if cotrQuestStatus == QUEST_COMPLETED then
+    if cotrQuestStatus == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(28)
     elseif player:getCharVar('RUN_COTR') == cotrStates.REWARD_PENDING then
         player:startEvent(29)
     elseif player:getCharVar('RUN_COTR') == cotrStates.RUNE_ENHANCEMENT then
         player:startEvent(26, 1)
     elseif
-        cotrQuestStatus == QUEST_ACCEPTED and
+        cotrQuestStatus == xi.questStatus.QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.YAHSE_WILDFLOWER_PETAL)
     then
         player:startEvent(26)
-    elseif cotrQuestStatus == QUEST_ACCEPTED then
+    elseif cotrQuestStatus == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(25)
     elseif player:getCharVar('RUN_COTR') == cotrStates.TRIGGERED then
         player:startEvent(24)
     elseif
-        cotrQuestStatus == QUEST_AVAILABLE and
+        cotrQuestStatus == xi.questStatus.QUEST_AVAILABLE and
         player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL
     then
         player:startEvent(23)
@@ -81,7 +81,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if option == 0 then
             player:setCharVar('RUN_COTR', cotrStates.TRIGGERED)
         elseif option == 1 then
-            player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
+            player:addQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
         end
     elseif csid == 26 then
         if option == 0 then
@@ -99,7 +99,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_RUNE_FENCER)
             player:setCharVar('RUN_COTR', 0)
             player:delKeyItem(xi.ki.YAHSE_WILDFLOWER_PETAL)
-            player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
+            player:completeQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
         end
     end
 end

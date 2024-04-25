@@ -272,7 +272,6 @@ public:
     auto   getPacketName() -> std::string;
     void   renameEntity(std::string const& newName, sol::object const& arg2);
     void   hideName(bool isHidden);
-    bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
     uint16 getModelId();
     void   setModelId(uint16 modelId, sol::object const& slotObj);
     uint16 getCostume();
@@ -305,8 +304,12 @@ public:
 
     uint8 getGMLevel();
     void  setGMLevel(uint8 level);
+    void  setVisibleGMLevel(uint8 level);
+    uint8 getVisibleGMLevel();
     bool  getGMHidden();
     void  setGMHidden(bool isHidden);
+    bool  getWallhack();
+    void  setWallhack(bool enable);
 
     bool isJailed();
     void jail();
@@ -660,6 +663,7 @@ public:
 
     void   fold();
     void   doWildCard(CLuaBaseEntity* PEntity, uint8 total);
+    bool   doRandomDeal(CLuaBaseEntity* PTarget);
     bool   addCorsairRoll(uint8 casterJob, uint8 bustDuration, uint16 effectID, uint16 power, uint32 tick, uint32 duration,
                           sol::object const& arg6, sol::object const& arg7, sol::object const& arg8);
     bool   hasCorsairEffect();
@@ -677,7 +681,7 @@ public:
     void  setStatDebilitation(uint16 statDebil);
 
     // Damage Calculation
-    uint16 getStat(uint16 statId); // STR,DEX,VIT,AGI,INT,MND,CHR,ATT,DEF
+    uint16 getStat(uint16 statId, sol::variadic_args va); // STR,DEX,VIT,AGI,INT,MND,CHR,ATT,DEF
     uint16 getACC();
     uint16 getEVA();
     int    getRACC();

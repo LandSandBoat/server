@@ -8,12 +8,12 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local dngitl = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DO_NOT_GO_INTO_THE_LIGHT)
-    local vvc = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.VEGETABLE_VEGETABLE_CRISIS)
+    local dngitl = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.DO_NOT_GO_INTO_THE_LIGHT)
+    local vvc = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.VEGETABLE_VEGETABLE_CRISIS)
 
     -- DO NOT GO INTO THE LIGHT (Urunday Lumber, Damascus Ingot, Fire Crystal)
     if
-        dngitl == QUEST_ACCEPTED and
+        dngitl == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('DNGITL_Status') == 3 and
         npcUtil.tradeHas(trade, { 3927, 658, 4096 })
     then
@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
 
     -- VEGETABLE VEGETABLE CRISIS (Urunday Lumber, Midrium Ingot, Raaz Leather)
     elseif
-        vvc == QUEST_ACCEPTED and
+        vvc == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('VVC_Status') == 1 and
         npcUtil.tradeHas(trade, { 3927, 3919, 8708 })
     then
@@ -30,18 +30,18 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local dngitl = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DO_NOT_GO_INTO_THE_LIGHT)
-    local vvc = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.VEGETABLE_VEGETABLE_CRISIS)
+    local dngitl = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.DO_NOT_GO_INTO_THE_LIGHT)
+    local vvc = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.VEGETABLE_VEGETABLE_CRISIS)
 
     -- DO NOT GO INTO THE LIGHT
     if
-        dngitl == QUEST_ACCEPTED and
+        dngitl == xi.questStatus.QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.INVENTORS_COALITION_PICKAXE)
     then
         player:startEvent(5077)
 
     -- VEGETABLE VEGETABLE CRISIS
-    elseif vvc == QUEST_ACCEPTED and player:getCharVar('VVC_Status') == 1 then
+    elseif vvc == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('VVC_Status') == 1 then
         player:startEvent(5088)
     end
 end

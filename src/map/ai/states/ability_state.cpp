@@ -67,6 +67,11 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
         actionTarget.param     = PAbility->getID();
         PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
         m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", CLuaBaseEntity(m_PEntity), CLuaAbility(PAbility));
+
+        // face toward target
+        m_PEntity->loc.p.rotation = worldAngle(m_PEntity->loc.p, PTarget->loc.p);
+        m_PEntity->updatemask |= UPDATE_POS;
+        m_PEntity->loc.zone->UpdateEntityPacket(m_PEntity, ENTITY_UPDATE, UPDATE_POS);
     }
     else
     {
@@ -107,6 +112,17 @@ bool CAbilityState::CanChangeState()
 
 bool CAbilityState::Update(time_point tick)
 {
+    // Rotate towards target during ability
+    if (m_castTime > 0s && tick < GetEntryTime() + m_castTime)
+    {
+        CBaseEntity* PTarget = GetTarget();
+        if (PTarget)
+        {
+            m_PEntity->loc.p.rotation = worldAngle(m_PEntity->loc.p, PTarget->loc.p);
+            m_PEntity->loc.zone->UpdateEntityPacket(m_PEntity, ENTITY_UPDATE, UPDATE_POS);
+        }
+    }
+
     if (!IsCompleted() && tick > GetEntryTime() + m_castTime)
     {
         if (CanUseAbility())

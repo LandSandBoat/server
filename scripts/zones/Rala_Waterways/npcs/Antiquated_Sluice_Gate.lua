@@ -16,6 +16,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
+    -- TODO if instance creation fails, the player will be stuck in a cutscene
     if xi.instance.onEventUpdate(player, csid, option, npc) then
         if csid == 5511 and option == 843 then
             print(1)

@@ -8,11 +8,11 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local distantLoyalties = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
+    local distantLoyalties = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
 
     -- DISTANT LOYALTIES
     if
-        distantLoyalties == QUEST_ACCEPTED and
+        distantLoyalties == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('DistantLoyaltiesProgress') == 2 and
         npcUtil.tradeHas(trade, xi.item.MYTHRIL_INGOT)
     then
@@ -21,12 +21,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local distantLoyalties = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
+    local distantLoyalties = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
     local distantLoyaltiesProgress = player:getCharVar('DistantLoyaltiesProgress')
 
     -- DISTANT LOYALTIES
     if
-        distantLoyalties == QUEST_ACCEPTED and
+        distantLoyalties == xi.questStatus.QUEST_ACCEPTED and
         distantLoyaltiesProgress >= 1 and
         distantLoyaltiesProgress <= 3
     then

@@ -12,12 +12,12 @@ local ruludeID    = zones[xi.zone.RULUDE_GARDENS]
 local xarcabardID = zones[xi.zone.XARCABARD]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS)
 
 quest.reward =
 {
     fame = 40,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     title = xi.title.SUMMIT_BREAKER,
 }
 
@@ -26,7 +26,7 @@ quest.sections =
     -- Section: Quest available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getLevelCap() == 55 and
                 xi.settings.main.MAX_LEVEL >= 60
         end,
@@ -58,7 +58,7 @@ quest.sections =
     -- Section: Quest accepted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.RULUDE_GARDENS] =

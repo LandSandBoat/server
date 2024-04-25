@@ -16,8 +16,19 @@ zones[xi.zone.QUBIA_ARENA] =
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7061, -- Tallying conquest results...
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 7225, -- Your time in the battlefield is up! Now exiting...
+        PARTY_MEMBERS_ARE_ENGAGED     = 7240, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
+        NO_BATTLEFIELD_ENTRY          = 7243, -- A mysterious force is sealing the platform.
+        TESTIMONY_IS_TORN             = 7283, -- Your <item> is torn...
+        TESTIMONY_WEARS               = 7284, -- Your <item> [/rips into shreds!/is on the verge of tearing apart.../is showing signs of wear...] (# [use remains/uses remain].)
+        MEMBERS_OF_YOUR_PARTY         = 7531, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE      = 7532, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7534, -- The time limit for this battle is <number> minutes.
+        ORB_IS_CRACKED                = 7535, -- There is a crack in the %. It no longer contains a monster.
+        A_CRACK_HAS_FORMED            = 7536, -- A crack has formed on the <item>, and the beast inside has been unleashed!
         PARTY_MEMBERS_HAVE_FALLEN     = 7570, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7577, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        ENTERING_THE_BATTLEFIELD_FOR  = 7597, -- Entering the battlefield for [The Rank 5 Mission/Come Into My Parlor/E-vase-ive Action/Infernal Swarm/The Heir to the Light/Shattering Stars (PLD)/Shattering Stars (DRK)/Shattering Stars (BRD)/Demolition Squad/Die by the Sword/Let Sleeping Dogs Die/Brothers D'Aurphe/Undying Promise/Factory Rejects/Idol Thoughts/An Awful Autopsy/Celery/Mirror Images/A Furious Finale/Clash of the Comrades/Those Who Lurk in Shadows/Beyond Infinity/Factory Rejects/Demolition Squad/Brothers D'Aurphe/Mumor's Encore]!
         FLAT_PREPARE                  = 7636, -- I am Trion, of San d'Oria!
         FLAT_LAND                     = 7637, -- Feel the fire of my forefathers!
         RLB_PREPARE                   = 7638, -- The darkness before me that shrouds the light of good...
@@ -41,13 +52,8 @@ zones[xi.zone.QUBIA_ARENA] =
     },
     mob =
     {
-        HEIR_TO_THE_LIGHT_OFFSET   = 17621014,
-        ATORI_TUTORI_QM            =
-        {
-            17621302,
-            17621303,
-            17621304,
-        },
+        HEIR_TO_THE_LIGHT_OFFSET = 17621014,
+        ATORI_TUTORI             = GetFirstID('Atori-Tutori_qm')
     },
     npc =
     {

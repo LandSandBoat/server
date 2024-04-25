@@ -63,6 +63,7 @@
 #include "modifier.h"
 #include "notoriety_container.h"
 #include "packets/char_abilities.h"
+#include "packets/char_recast.h"
 #include "packets/char_sync.h"
 #include "packets/lock_on.h"
 #include "packets/pet_sync.h"
@@ -815,7 +816,7 @@ namespace battleutils
                 bool crit = battleutils::GetCritHitRate(PDefender, PAttacker, true) > xirand::GetRandomNumber(100);
 
                 // Dmg math.
-                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 1.f, skilltype);
+                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 1.f, skilltype, SLOT_MAIN);
                 uint16 dmg         = (uint32)((PDefender->GetMainWeaponDmg() + battleutils::GetFSTR(PDefender, PAttacker, SLOT_MAIN)) * DamageRatio);
                 dmg                = attackutils::CheckForDamageMultiplier(((CCharEntity*)PDefender), dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]), dmg,
                                                                            PHYSICAL_ATTACK_TYPE::NORMAL, SLOT_MAIN);
@@ -2746,7 +2747,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack)
+    uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack, SLOTTYPE weaponSlot)
     {
         int32 critHitRate = 5;
         if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_MIGHTY_STRIKES, 0) ||
@@ -2809,6 +2810,17 @@ namespace battleutils
             critHitRate += GetDexCritBonus(PAttacker, PDefender);
             critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
             critHitRate += PDefender->getMod(Mod::ENEMYCRITRATE);
+
+            // need to check for mods that only impact attacks with a specific weapon (like Senjuinrikio)
+            if (auto* player = dynamic_cast<CCharEntity*>(PAttacker))
+            {
+                auto* weapon = dynamic_cast<CItemWeapon*>(player->getEquip(weaponSlot));
+                if (weapon && weapon->getModifier(Mod::CRITHITRATE_ONLY_WEP) > 0)
+                {
+                    critHitRate += weapon->getModifier(Mod::CRITHITRATE_ONLY_WEP);
+                }
+            }
+
             critHitRate = std::clamp(critHitRate, 0, 100);
         }
         return (uint8)critHitRate;
@@ -2914,7 +2926,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, SKILLTYPE weaponType)
+    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, SKILLTYPE weaponType, SLOTTYPE weaponSlot)
     {
         float pDIF = 1.0f;
 
@@ -2932,7 +2944,7 @@ namespace battleutils
                 return pDIF;
             }
 
-            auto meleePDIFFuncResult = meleePDIFFunc(luaAttackerEntity, CLuaBaseEntity(PDefender), weaponType, bonusAttPercent, isCritical, levelCorrectionResult.get<bool>(0), false, 0.0, false);
+            auto meleePDIFFuncResult = meleePDIFFunc(luaAttackerEntity, CLuaBaseEntity(PDefender), weaponType, bonusAttPercent, isCritical, levelCorrectionResult.get<bool>(0), false, 0.0, false, weaponSlot);
             if (!meleePDIFFuncResult.valid())
             {
                 sol::error err = meleePDIFFuncResult;
@@ -4367,15 +4379,16 @@ namespace battleutils
         return damage;
     }
 
-    uint16 doConsumeManaEffect(CCharEntity* m_PChar, uint32 damage)
+    uint16 doConsumeManaEffect(CCharEntity* m_PChar)
     {
+        auto bonusDmg = 0;
         if (m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_CONSUME_MANA))
         {
-            damage += (uint32)(floor(m_PChar->health.mp / 10));
+            bonusDmg += (uint32)(floor(m_PChar->health.mp / 10));
             m_PChar->health.mp = 0;
             m_PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CONSUME_MANA);
         }
-        return damage;
+        return bonusDmg;
     }
 
     /************************************************************************
@@ -4819,7 +4832,9 @@ namespace battleutils
     {
         TracyZoneScoped;
 
-        if (PDefender == nullptr || (PDefender && PDefender->objtype != ENTITYTYPE::TYPE_MOB)) // Do not try to claim anything but mobs (trusts, pets, players don't count)
+        if (PDefender == nullptr ||
+            (PDefender && PDefender->objtype != ENTITYTYPE::TYPE_MOB) ||                                                   // Do not try to claim anything but mobs (trusts, pets, players don't count)
+            (PDefender && PDefender->objtype == ENTITYTYPE::TYPE_MOB && PDefender->allegiance == ALLEGIANCE_TYPE::PLAYER)) // Added mobs that are in allied with player
         {
             return;
         }
@@ -5861,6 +5876,106 @@ namespace battleutils
                 }
                 PTarget->addMP(PTarget->health.maxmp);
                 break;
+        }
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *   Does the random deal effect to a specific character (reset ability) *
+     *                                                                       *
+     ************************************************************************/
+    bool DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget)
+    {
+        std::vector<uint16> resetCandidateList;
+        std::vector<uint16> activeCooldownList;
+
+        if (PChar == nullptr || PTarget == nullptr)
+        {
+            // Invalid User or Target
+            return false;
+        }
+
+        RecastList_t* recastList = PTarget->PRecastContainer->GetRecastList(RECAST_ABILITY);
+
+        // Get position of abilites and add to the 2 lists
+        for (uint8 i = 0; i < recastList->size(); ++i)
+        {
+            Recast_t* recast = &recastList->at(i);
+
+            // Do not reset 2hrs or Random Deal
+            if (recast->ID != 0 && recast->ID != 196)
+            {
+                resetCandidateList.push_back(i);
+                if (recast->RecastTime > 0)
+                {
+                    activeCooldownList.push_back(i);
+                }
+            }
+        }
+
+        if (resetCandidateList.size() == 0 || activeCooldownList.size() == 0)
+        {
+            // Evade because we have no abilities that can be reset
+            return false;
+        }
+
+        uint8 loadedDeck       = PChar->PMeritPoints->GetMeritValue(MERIT_LOADED_DECK, PChar);
+        uint8 loadedDeckChance = 50 + loadedDeck;
+        uint8 resetTwoChance   = std::min<int8>(PChar->getMod(Mod::RANDOM_DEAL_BONUS), 50);
+
+        if (loadedDeck > 0) // Loaded Deck Merit Version
+        {
+            if (activeCooldownList.size() > 1)
+            {
+                // Shuffle active cooldowns and take first (loaded deck)
+                std::shuffle(std::begin(activeCooldownList), std::end(activeCooldownList), xirand::rng());
+                loadedDeckChance = 100;
+            }
+
+            if (loadedDeckChance >= xirand::GetRandomNumber(100))
+            {
+                PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, activeCooldownList.at(0));
+
+                // Reset 2 abilities by chance
+                if (activeCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(100))
+                {
+                    PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, activeCooldownList.at(1));
+                }
+                if (PChar != PTarget)
+                {
+                    // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
+                    PTarget->pushPacket(new CCharRecastPacket(PTarget));
+                }
+                return true;
+            }
+
+            // Evade because we failed to reset with loaded deck
+            return false;
+        }
+        else // Standard Version
+        {
+            if (resetCandidateList.size() > 1)
+            {
+                // Shuffle if more than 1 ability
+                std::shuffle(std::begin(resetCandidateList), std::end(resetCandidateList), xirand::rng());
+            }
+
+            // Reset first ability (shuffled or only)
+            PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(0));
+
+            // Reset 2 abilities by chance (could be 2 abilitie that don't need resets)
+            if (resetCandidateList.size() > 1 && activeCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(1, 100))
+            {
+                PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(1));
+            }
+
+            if (PChar != PTarget)
+            {
+                // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
+                PTarget->pushPacket(new CCharRecastPacket(PTarget));
+            }
+
+            return true;
         }
     }
 

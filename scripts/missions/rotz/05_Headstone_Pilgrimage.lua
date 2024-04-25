@@ -115,7 +115,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if
                         player:hasKeyItem(xi.ki.WIND_FRAGMENT) and
-                        not player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.WANDERING_SOULS)
+                        not player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.WANDERING_SOULS)
                     then
                         player:messageName(capeTerigganID.text.ALREADY_OBTAINED_FRAG, nil, xi.ki.WIND_FRAGMENT)
 
@@ -146,7 +146,7 @@ mission.sections =
                     if option == 1 then
                         npcUtil.giveKeyItem(player, xi.ki.WIND_FRAGMENT)
 
-                        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.WANDERING_SOULS)
+                        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.WANDERING_SOULS)
 
                         if hasAllFragments(player) then
                             mission:complete(player)
@@ -233,7 +233,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if
                         player:hasKeyItem(xi.ki.LIGHT_FRAGMENT) and
-                        not player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.SOUL_SEARCHING)
+                        not player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.SOUL_SEARCHING)
                     then
                         player:messageName(sanctuaryOfZitahID.text.ALREADY_OBTAINED_FRAG, nil, xi.ki.LIGHT_FRAGMENT)
 
@@ -264,7 +264,7 @@ mission.sections =
                     if option == 1 then
                         npcUtil.giveKeyItem(player, xi.ki.LIGHT_FRAGMENT)
 
-                        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.SOUL_SEARCHING)
+                        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.SOUL_SEARCHING)
 
                         if hasAllFragments(player) then
                             mission:complete(player)
@@ -346,7 +346,7 @@ mission.sections =
                     if option == 1 then
                         npcUtil.giveKeyItem(player, xi.ki.FIRE_FRAGMENT)
 
-                        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.WRATH_OF_THE_OPO_OPOS)
+                        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.WRATH_OF_THE_OPO_OPOS)
 
                         if hasAllFragments(player) then
                             mission:complete(player)

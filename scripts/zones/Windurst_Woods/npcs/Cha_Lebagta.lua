@@ -10,11 +10,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
+    local mihgosAmigo = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
 
-    if mihgosAmigo == QUEST_ACCEPTED then
+    if mihgosAmigo == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(85, 0, 498) -- Migho's Amigo hint dialog
-    elseif mihgosAmigo == QUEST_COMPLETED then
+    elseif mihgosAmigo == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(91, 0, 498) -- New standard dialog after Mihgo's Amigo completion
     end
 end

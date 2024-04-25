@@ -8,12 +8,12 @@ local eastRonfaureID     = zones[xi.zone.EAST_RONFAURE]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WATERS_OF_THE_CHEVAL)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.WATERS_OF_THE_CHEVAL)
 
 quest.reward =
 {
     fame       = 30,
-    fameArea   = xi.quest.fame_area.SANDORIA,
+    fameArea   = xi.fameArea.SANDORIA,
     item       = xi.item.WING_PENDANT,
     itemParams = { fromTrade = true },
     title      = xi.title.THE_PURE_ONE,
@@ -24,7 +24,7 @@ quest.sections =
     -- Speak with Miageau (L-7) just past the entrance to the Cathedral.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -50,7 +50,7 @@ quest.sections =
     -- Trade Cheval Water to Miageau.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =

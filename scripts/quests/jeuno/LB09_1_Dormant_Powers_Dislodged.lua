@@ -7,7 +7,7 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED)
 
 -- NOTE: Timing minigame was guesstimated! No capture available.
 -- The event seems to handle the actual timing. As in, it counts for us.
@@ -32,7 +32,7 @@ local itemWantedTable =
 quest.reward =
 {
     fame = 50,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     keyItem = xi.ki.SOUL_GEM,
 }
 
@@ -41,7 +41,7 @@ quest.sections =
     -- Section: Quest available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainLvl() >= 86 and
                 player:getLevelCap() == 90 and
                 xi.settings.main.MAX_LEVEL >= 95
@@ -73,7 +73,7 @@ quest.sections =
     -- Section: Quest accepted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.RULUDE_GARDENS] =

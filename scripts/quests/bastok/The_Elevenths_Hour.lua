@@ -7,12 +7,12 @@
 -- Old Toolbox : !pos 113.649 -32.8 79.617 143
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTHS_HOUR)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_ELEVENTHS_HOUR)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.SMALL_SWORD,
     title    = xi.title.PURSUER_OF_THE_TRUTH,
 }
@@ -21,9 +21,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL) and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3 and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL) and
+                player:getFameLevel(xi.fameArea.BASTOK) >= 3 and
                 not quest:getMustZone(player)
         end,
 
@@ -44,7 +44,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MINES] =
@@ -70,7 +70,7 @@ quest.sections =
             ['Parraggoh'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTHS_HOUR) then
+                    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_ELEVENTHS_HOUR) then
                         return quest:event(46)
                     end
                 end,

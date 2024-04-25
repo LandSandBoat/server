@@ -7,12 +7,12 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS)
 
 quest.reward =
 {
     fame = 50,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
 }
 
 quest.sections =
@@ -20,7 +20,7 @@ quest.sections =
     -- Section: Quest available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainLvl() >= 76 and
                 player:getLevelCap() == 80 and
                 xi.settings.main.MAX_LEVEL >= 85
@@ -49,7 +49,7 @@ quest.sections =
     -- Section: Quest accepted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.RULUDE_GARDENS] =

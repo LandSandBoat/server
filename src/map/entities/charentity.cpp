@@ -182,7 +182,6 @@ CCharEntity::CCharEntity()
     m_hasRaise            = 0;
     m_weaknessLvl         = 0;
     m_hasArise            = false;
-    m_hasAutoTarget       = 1;
     m_InsideTriggerAreaID = 0;
     m_LevelRestriction    = 0;
     m_lastBcnmTimePrompt  = 0;
@@ -235,7 +234,7 @@ CCharEntity::CCharEntity()
 
     m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 
-    chatFilterFlags = 0;
+    playerConfig = {};
 
     PAI = std::make_unique<CAIContainer>(this, nullptr, std::make_unique<CPlayerController>(this), std::make_unique<CTargetFind>(this));
 
@@ -256,6 +255,11 @@ CCharEntity::CCharEntity()
     m_mentorUnlocked   = false;
     m_jobMasterDisplay = false;
     m_EffectsChanged   = false;
+
+    visibleGmLevel        = 0;
+    wallhackEnabled       = false;
+    isSettingBazaarPrices = false;
+    isLinkDead            = false;
 }
 
 CCharEntity::~CCharEntity()
@@ -420,7 +424,32 @@ void CCharEntity::erasePackets(uint8 num)
 
 bool CCharEntity::isNewPlayer() const
 {
-    return menuConfigFlags.flags & NFLAG_NEWPLAYER;
+    return !playerConfig.NewAdventurerOffFlg;
+}
+
+bool CCharEntity::isSeekingParty() const
+{
+    return playerConfig.InviteFlg;
+}
+
+bool CCharEntity::isAnon() const
+{
+    return playerConfig.AnonymityFlg;
+}
+
+bool CCharEntity::isAway() const
+{
+    return playerConfig.AwayFlg;
+}
+
+bool CCharEntity::isMentor() const
+{
+    return playerConfig.MentorFlg;
+}
+
+bool CCharEntity::hasAutoTargetEnabled() const
+{
+    return !playerConfig.AutoTargetOffFlg;
 }
 
 void CCharEntity::setPetZoningInfo()
@@ -571,6 +600,31 @@ int8 CCharEntity::getShieldSize()
     }
 
     return PItem->getShieldSize();
+}
+
+bool CCharEntity::hasBazaar()
+{
+    if (isSettingBazaarPrices)
+    {
+        return false;
+    }
+
+    CItemContainer* playerInventory = getStorage(LOC_INVENTORY);
+
+    if (playerInventory)
+    {
+        for (uint8 slotID = 1; slotID <= playerInventory->GetSize(); ++slotID)
+        {
+            CItem* PItem = playerInventory->GetItem(slotID);
+
+            if ((PItem != nullptr) && (PItem->getCharPrice() != 0))
+            {
+                return true;
+                break;
+            }
+        }
+    }
+    return false;
 }
 
 void CCharEntity::SetName(const std::string& name)
@@ -947,8 +1001,7 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 bool CCharEntity::CanUseSpell(CSpell* PSpell)
 {
     TracyZoneScoped;
-    return charutils::hasSpell(this, static_cast<uint16>(PSpell->getID())) && CBattleEntity::CanUseSpell(PSpell) &&
-           !PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()));
+    return charutils::hasSpell(this, static_cast<uint16>(PSpell->getID())) && CBattleEntity::CanUseSpell(PSpell);
 }
 
 void CCharEntity::OnChangeTarget(CBattleEntity* PNewTarget)
@@ -1045,8 +1098,6 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
     }
 
     CBattleEntity::OnCastFinished(state, action);
-
-    PRecastContainer->Add(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()), action.recast);
 
     for (auto&& actionList : action.actionLists)
     {

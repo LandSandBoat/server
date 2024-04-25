@@ -12,12 +12,12 @@
 -- Latifah       : !pos 51.241 7.499 -55.407 236
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STAMP_HUNT)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.STAMP_HUNT)
 
 quest.reward =
 {
     fame = 50,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item = xi.item.LEATHER_GORGET,
     title = xi.title.STAMPEDER,
 }
@@ -33,7 +33,7 @@ quest.sections =
     -- Section: Quest available
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -54,7 +54,7 @@ quest.sections =
     -- Section: Quest accepted
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MARKETS] =

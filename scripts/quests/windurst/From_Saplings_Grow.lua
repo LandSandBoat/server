@@ -7,12 +7,12 @@ local windurstWoodsID = zones[xi.zone.WINDURST_WOODS]
 local capeTerigganID  = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
 }
 
 quest.sections =
@@ -20,7 +20,7 @@ quest.sections =
     -- Section: Quest available
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:canEquipItem(xi.item.BOW_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.ARCHERY) / 10 >= 250 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
@@ -53,7 +53,7 @@ quest.sections =
     -- Section: Quest accepted
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WOODS] =
@@ -89,7 +89,7 @@ quest.sections =
                     if option == 1 and not player:hasItem(xi.item.BOW_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.item.BOW_OF_TRIALS)
                     elseif option == 3 then
-                        player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW)
+                        player:delQuest(xi.questLog.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end

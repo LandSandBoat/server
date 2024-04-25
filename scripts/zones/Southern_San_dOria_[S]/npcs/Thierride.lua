@@ -14,9 +14,9 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local lufetSalt = trade:hasItemQty(xi.item.CHUNK_OF_LUFET_SALT, 1)
     local cnt = trade:getItemCount()
-    local beansAhoy = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
+    local beansAhoy = player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
 
-    if lufetSalt and cnt == 1 and beansAhoy == QUEST_ACCEPTED then
+    if lufetSalt and cnt == 1 and beansAhoy == xi.questStatus.QUEST_ACCEPTED then
         if player:getCharVar('BeansAhoy') == 0 then
             player:startEvent(337) -- Traded the Correct Item Dialogue (NOTE: You have to trade the Salts one at according to wiki)
         elseif not player:needToZone() then
@@ -28,18 +28,18 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local beansAhoy = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
+    local beansAhoy = player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
 
-    if beansAhoy == QUEST_AVAILABLE then
+    if beansAhoy == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(334) -- Quest Start
-    elseif beansAhoy == QUEST_ACCEPTED then
+    elseif beansAhoy == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(335) -- Quest Active, NPC Repeats what he says but as normal 'text' instead of cutscene.
     elseif
-        beansAhoy == QUEST_COMPLETED and
+        beansAhoy == xi.questStatus.QUEST_COMPLETED and
         player:getCharVar('BeansAhoy_ConquestWeek') == 0
     then
         player:startEvent(342)
-    elseif beansAhoy == QUEST_COMPLETED then
+    elseif beansAhoy == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(341)
     end
 end
@@ -49,7 +49,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 334 then
-        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
+        player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
     elseif csid == 337 then
         player:tradeComplete()
         player:setCharVar('BeansAhoy', 1)
@@ -65,7 +65,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.ANGLERS_CASSOULET)
             player:setCharVar('BeansAhoy_ConquestWeek', 1, NextConquestTally())
             if csid == 340 then
-                player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
+                player:completeQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
                 player:setCharVar('BeansAhoy', 0)
                 player:tradeComplete()
             end

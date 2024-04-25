@@ -27,7 +27,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 65 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
         player:setCharVar('TheHolyCrest_Event', 3)
     elseif csid == 62 and option == 0 then
         player:setCharVar('TheHolyCrest_Event', 4)

@@ -58,10 +58,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local transformations = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
+    local transformations = player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
 
     -- CRAFTING OTHER 3 BLUE MAGE ARMOR PIECES
-    if transformations >= QUEST_ACCEPTED then
+    if transformations >= xi.questStatus.QUEST_ACCEPTED then
         local remainingBLUAF = player:getCharVar('[BLUAF]Remaining') -- Bitmask of AF the player has NOT crafted
         local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
         local currentTask = player:getCharVar('[BLUAF]Current')

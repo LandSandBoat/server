@@ -13,26 +13,26 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theLostCardien = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
-    local cooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+    local theLostCardien = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
+    local cooksPride = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
 
     if
-        cooksPride == QUEST_COMPLETED and
-        theLostCardien == QUEST_AVAILABLE and
+        cooksPride == xi.questStatus.QUEST_COMPLETED and
+        theLostCardien == xi.questStatus.QUEST_AVAILABLE and
         player:getCharVar('theLostCardianVar') == 2
     then
         player:startEvent(33) -- Long CS & Finish Quest "The Lost Cardian"
 
     elseif
-        cooksPride == QUEST_COMPLETED and
-        theLostCardien == QUEST_AVAILABLE and
+        cooksPride == xi.questStatus.QUEST_COMPLETED and
+        theLostCardien == xi.questStatus.QUEST_AVAILABLE and
         player:getCharVar('theLostCardianVar') == 3
     then
         player:startEvent(34) -- Shot CS & Finish Quest "The Lost Cardian"
 
     elseif
-        theLostCardien == QUEST_COMPLETED and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED
+        theLostCardien == xi.questStatus.QUEST_COMPLETED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == xi.questStatus.QUEST_ACCEPTED
     then
         player:startEvent(32)
     end
@@ -72,9 +72,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.giveCurrency(player, 'gil', 2100)
         player:addKeyItem(xi.ki.TWO_OF_SWORDS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TWO_OF_SWORDS) -- Two of Swords (Key Item)
-        player:addFame(xi.quest.fame_area.JEUNO, 30)
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) -- Start next quest "THE_KING_CARDIAN"
+        player:addFame(xi.fameArea.JEUNO, 30)
+        player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) -- Start next quest "THE_KING_CARDIAN"
     elseif csid == 33 and option == 1 then
         player:setCharVar('theLostCardianVar', 3)
     end

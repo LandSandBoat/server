@@ -10,11 +10,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local makingHeadlines = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
+    local makingHeadlines = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
 
-    if makingHeadlines == QUEST_AVAILABLE then
+    if makingHeadlines == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(665)
-    elseif makingHeadlines == QUEST_ACCEPTED then
+    elseif makingHeadlines == xi.questStatus.QUEST_ACCEPTED then
         -- bitmask of progress: 0 = Kyume-Romeh, 1 = Yuyuju, 2 = Hiwom-Gomoi, 3 = Umumu, 4 = Mahogany Door
         local prog = player:getCharVar('QuestMakingHeadlines_var')
 
@@ -43,9 +43,9 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 665 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
     elseif csid == 670 or csid == 674 then
-        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES, {
+        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES, {
             title = xi.title.EDITORS_HATCHET_MAN,
             gil = 560,
             var = 'QuestMakingHeadlines_var',

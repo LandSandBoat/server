@@ -5,7 +5,7 @@
 -- Dominion Sergeant (Excenmille's Camp)
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DOMINION_OP_10_ALTEPA)
+local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DOMINION_OP_10_ALTEPA)
 
 quest.reward = {}
 
@@ -13,7 +13,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.ABYSSEA_ALTEPA] =

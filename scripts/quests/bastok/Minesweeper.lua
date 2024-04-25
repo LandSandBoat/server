@@ -5,12 +5,12 @@
 -- Gerbaum : !pos -119.899 -3.492 -74.651 234
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MINESWEEPER)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.MINESWEEPER)
 
 quest.reward =
 {
     fame     = 8,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     gil      = 150,
     title    = xi.title.ZERUHN_SWEEPER,
 }
@@ -19,7 +19,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.BASTOK_MINES] =
@@ -37,7 +37,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status ~= QUEST_AVAILABLE
+            return status ~= xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.BASTOK_MINES] =
@@ -58,8 +58,8 @@ quest.sections =
 
                     -- From previous implementation, award 75 fame (67 + 8) on first completion,
                     -- and 8 fame for any subsequent trade.
-                    if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_ACCEPTED then
-                        player:addFame(xi.quest.fame_area.BASTOK, 67)
+                    if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
+                        player:addFame(xi.fameArea.BASTOK, 67)
                     end
 
                     quest:complete(player)

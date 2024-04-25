@@ -75,6 +75,11 @@ uint16 CLuaPetSkill::getTotalTargets()
     return m_PLuaPetSkill->getTotalTargets();
 }
 
+uint32 CLuaPetSkill::getPrimaryTargetID()
+{
+    return m_PLuaPetSkill->getPrimaryTargetID();
+}
+
 uint16 CLuaPetSkill::getMsg()
 {
     return m_PLuaPetSkill->getMsg();
@@ -121,6 +126,7 @@ void CLuaPetSkill::Register()
     SOL_REGISTER("getParam", CLuaPetSkill::getParam);
     SOL_REGISTER("getID", CLuaPetSkill::getID);
     SOL_REGISTER("getTotalTargets", CLuaPetSkill::getTotalTargets);
+    SOL_REGISTER("getPrimaryTargetID", CLuaPetSkill::getPrimaryTargetID);
     SOL_REGISTER("getTP", CLuaPetSkill::getTP);
     SOL_REGISTER("getMobHPP", CLuaPetSkill::getMobHPP);
 }

@@ -14,8 +14,8 @@ end
 entity.onTrigger = function(player, npc)
     if xi.settings.main.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
         if
-            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
-            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER) == QUEST_AVAILABLE and
+            player:getQuestStatus(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == xi.questStatus.QUEST_ACCEPTED and
+            player:getQuestStatus(xi.questLog.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER) == xi.questStatus.QUEST_AVAILABLE and
             xi.abyssea.getHeldTraverserStones(player) >= 1
         then
             player:startEvent(0)
@@ -32,7 +32,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 0 then
-        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER)
+        player:addQuest(xi.questLog.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER)
     elseif csid == 1 then
         -- Killed Bennu
     elseif csid == 914 and option == 1 then

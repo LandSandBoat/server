@@ -4,7 +4,7 @@
 xi = xi or {}
 xi.ability = xi.ability or {}
 
-xi.ability.adjustDamage = function(dmg, mob, skill, target, skilltype, skillparam, shadowbehav) -- seems to only be used for Wyvern breaths
+xi.ability.adjustDamage = function(dmg, mob, skill, target, skilltype, skillparam, shadowbehav) -- seems to only be used for Wyvern breaths and chi blast
     -- physical attack missed, skip rest
     local msg = skill:getMsg()
     if

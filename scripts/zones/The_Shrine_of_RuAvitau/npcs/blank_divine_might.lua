@@ -13,8 +13,8 @@ end
 entity.onTrigger = function(player, npc)
     local currentZM    = player:getCurrentMission(xi.mission.log_id.ZILART)
     local zmProgress   = player:getMissionStatus(xi.mission.log_id.ZILART)
-    local dmStatus     = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
-    local dmRepeat     = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+    local dmStatus     = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
+    local dmRepeat     = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
     local aaKeyitems   = 0
     local dmEarrings   = 0
     local divineStatus = player:getCharVar('DivineMight')
@@ -45,29 +45,29 @@ entity.onTrigger = function(player, npc)
     -- Alternative cutscene for those that have done one or more AA fight
     elseif
         currentZM >= xi.mission.id.zilart.ARK_ANGELS and
-        dmStatus == QUEST_AVAILABLE and
+        dmStatus == xi.questStatus.QUEST_AVAILABLE and
         aaKeyitems > 0
     then
         player:startEvent(56, xi.item.SHEET_OF_PARCHMENT, xi.item.BOTTLE_OF_ILLUMININK, xi.item.ARK_PENTASPHERE)
 
     -- CS when player has completed Divine might, award earring
     elseif
-        dmStatus == QUEST_ACCEPTED and
+        dmStatus == xi.questStatus.QUEST_ACCEPTED and
         divineStatus >= 2
     then
         player:startEvent(55, xi.item.SUPPANOMIMI, xi.item.KNIGHTS_EARRING, xi.item.ABYSSAL_EARRING, xi.item.BEASTLY_EARRING, xi.item.BUSHINOMIMI)
 
     -- You threw away old Earring, start the repeat quest
     elseif
-        dmStatus == QUEST_COMPLETED and
+        dmStatus == xi.questStatus.QUEST_COMPLETED and
         dmEarrings < xi.settings.main.NUMBER_OF_DM_EARRINGS and
-        dmRepeat ~= QUEST_ACCEPTED
+        dmRepeat ~= xi.questStatus.QUEST_ACCEPTED
     then
         player:startEvent(57, player:getCharVar('DM_Earring'))
 
     -- Moonlight Ore/Ark Pentasphere reminders
     elseif
-        dmRepeat == QUEST_ACCEPTED and
+        dmRepeat == xi.questStatus.QUEST_ACCEPTED and
         divineStatus < 2
     then
         if not hasMoonOre then
@@ -78,7 +78,7 @@ entity.onTrigger = function(player, npc)
 
     -- Repeat turn in
     elseif
-        dmRepeat == QUEST_ACCEPTED and
+        dmRepeat == xi.questStatus.QUEST_ACCEPTED and
         divineStatus == 2 and
         hasMoonOre
     then
@@ -102,14 +102,14 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- Flag Divine Might
     if
         (csid == 54 or csid == 56) and
-        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_AVAILABLE
+        player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == xi.questStatus.QUEST_AVAILABLE
     then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
 
     -- Divine Might Repeat
     elseif csid == 57 then
-        player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+        player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
 
     -- Turning in Divine Might or Repeat
     elseif
@@ -139,9 +139,9 @@ entity.onEventFinish = function(player, csid, option, npc)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
 
                 if csid == 55 then
-                    player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
+                    player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
                 else
-                    player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+                    player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
                     player:delKeyItem(xi.ki.MOONLIGHT_ORE)
                 end
 

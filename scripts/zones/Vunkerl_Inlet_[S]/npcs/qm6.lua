@@ -12,9 +12,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local eati = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET)
+    local eati = player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET)
 
-    if eati == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.EVIL_WARDING_SEAL) then
+    if eati == xi.questStatus.QUEST_ACCEPTED and player:hasKeyItem(xi.ki.EVIL_WARDING_SEAL) then
         player:startEvent(112)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

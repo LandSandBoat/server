@@ -52,11 +52,10 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)-- TODO: We currently can't move old sabertooth logic from mob script to quest script due to how the quest works
     local players = mob:getZone():getPlayers()
-
-    for i, person in pairs(players) do
-        if
-            person:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE) == QUEST_ACCEPTED and
-            person:checkDistance(mob) < 32
+        for i, person in pairs(players) do -- can't use the variable name "player" because it's already being used
+            if
+                person:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE) == xi.questStatus.QUEST_ACCEPTED and
+                person:checkDistance(mob) < 32
         then
             if mob:getLocalVar('tookDamage') == 0 then
                 person:setCharVar('Quest[2][31]Prog', 1)

@@ -7,12 +7,12 @@
 local middleDelkfuttsID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL)
 
 quest.reward =
 {
     fame     = 60,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.CHAOS_BURGEONET,
     title    = xi.title.PARAGON_OF_DARK_KNIGHT_EXCELLENCE,
 }
@@ -21,8 +21,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET) and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.DARK_PUPPET) and
                 player:getMainJob() == xi.job.DRK
         end,
 
@@ -48,7 +48,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.MIDDLE_DELKFUTTS_TOWER] =

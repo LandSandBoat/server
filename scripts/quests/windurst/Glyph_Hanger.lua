@@ -6,13 +6,13 @@
 -- Ipupu        : !pos 251.745 -5.5 35.539 115
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
 
 quest.reward =
 {
     xp = 2000,
     fame = 120,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     keyItem = xi.ki.MAP_OF_THE_HORUTOTO_RUINS,
 }
 
@@ -20,7 +20,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -41,7 +41,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -111,8 +111,8 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                not player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
+            return status == xi.questStatus.QUEST_COMPLETED and
+                not player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CHASING_TALES)
         end,
 
         [xi.zone.WINDURST_WATERS] =

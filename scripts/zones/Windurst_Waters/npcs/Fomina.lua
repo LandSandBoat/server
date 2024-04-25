@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
             632,    110,  -- Kukuru Bean
             1411,  1656   -- Phalaenopsis
         }
-        xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
+        xi.shop.general(player, stock, xi.fameArea.WINDURST)
     end
 end
 

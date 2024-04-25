@@ -256,7 +256,6 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 kickerR
                 PMember->equip[slot] = 0;
                 if (slot == SLOT_LINK1)
                 {
-                    PMember->nameflags.flags &= ~FLAG_LINKSHELL;
                     PMember->updatemask |= UPDATE_HP;
                 }
 

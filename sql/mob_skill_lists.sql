@@ -1164,28 +1164,32 @@ INSERT INTO `mob_skill_lists` VALUES ('NidhoggWyrm',263,1041); -- Outside allian
 INSERT INTO `mob_skill_lists` VALUES ('NidhoggWyrm',263,957);
 INSERT INTO `mob_skill_lists` VALUES ('NidhoggWyrm',263,1046);
 INSERT INTO `mob_skill_lists` VALUES ('Shankha',264,1574); -- painful_whip
-INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,813);
-INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,814);
-INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,815);
-INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,816);
-INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,817);
-INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,818);
-INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,821);
-INSERT INTO `mob_skill_lists` VALUES ('Wyvern',266,813);
-INSERT INTO `mob_skill_lists` VALUES ('Wyvern',266,814);
-INSERT INTO `mob_skill_lists` VALUES ('Wyvern',266,815);
-INSERT INTO `mob_skill_lists` VALUES ('Wyvern',266,816);
-INSERT INTO `mob_skill_lists` VALUES ('Wyvern',266,817);
-INSERT INTO `mob_skill_lists` VALUES ('Wyvern',266,818);
-INSERT INTO `mob_skill_lists` VALUES ('Wyvern',266,821);
-INSERT INTO `mob_skill_lists` VALUES ('GuivreWyvern',267,813);
-INSERT INTO `mob_skill_lists` VALUES ('GuivreWyvern',267,814);
-INSERT INTO `mob_skill_lists` VALUES ('GuivreWyvern',267,815);
-INSERT INTO `mob_skill_lists` VALUES ('GuivreWyvern',267,816);
-INSERT INTO `mob_skill_lists` VALUES ('GuivreWyvern',267,817);
-INSERT INTO `mob_skill_lists` VALUES ('GuivreWyvern',267,818);
-INSERT INTO `mob_skill_lists` VALUES ('GuivreWyvern',267,821);
--- 268: Wyvern
+INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,813); -- Dispelling Wind
+INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,814); -- Deadly Drive
+INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,815); -- Wind Wall
+INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,816); -- Fang Rush
+INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,817); -- Dread Shriek
+INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,818); -- Tail Crush
+INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,819); -- Blizzard Breath
+INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,820); -- Thunder Breath
+INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,821); -- Radiant Breath
+INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,822); -- Chaos Breath
+-- INSERT INTO `mob_skill_lists` VALUES ('SimorgWyvern',265,2222); -- Hurricane Breath (unimplemented)
+INSERT INTO `mob_skill_lists` VALUES ('Wyvern',266,813);       -- Dispelling Wind
+INSERT INTO `mob_skill_lists` VALUES ('Wyvern',266,814);       -- Deadly Drive
+INSERT INTO `mob_skill_lists` VALUES ('Wyvern',266,815);       -- Wind Wall
+INSERT INTO `mob_skill_lists` VALUES ('Wyvern',266,816);       -- Fang Rush
+INSERT INTO `mob_skill_lists` VALUES ('Wyvern',266,817);       -- Dread Shriek
+INSERT INTO `mob_skill_lists` VALUES ('Wyvern',266,818);       -- Tail Crush
+INSERT INTO `mob_skill_lists` VALUES ('Wyvern',266,821);       -- Radiant Breath
+INSERT INTO `mob_skill_lists` VALUES ('GuivreWyvern',267,813); -- Dispelling Wind
+INSERT INTO `mob_skill_lists` VALUES ('GuivreWyvern',267,814); -- Deadly Drive
+INSERT INTO `mob_skill_lists` VALUES ('GuivreWyvern',267,815); -- Wind Wall
+INSERT INTO `mob_skill_lists` VALUES ('GuivreWyvern',267,816); -- Fang Rush
+INSERT INTO `mob_skill_lists` VALUES ('GuivreWyvern',267,817); -- Dread Shriek
+INSERT INTO `mob_skill_lists` VALUES ('GuivreWyvern',267,818); -- Tail Crush
+INSERT INTO `mob_skill_lists` VALUES ('GuivreWyvern',267,821); -- Radiant Breath
+-- 268: Ajattara type Wyvern?
 INSERT INTO `mob_skill_lists` VALUES ('Xzomit',269,1347);
 INSERT INTO `mob_skill_lists` VALUES ('Xzomit',269,1348);
 INSERT INTO `mob_skill_lists` VALUES ('Xzomit',269,1349);
@@ -2348,7 +2352,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Orc DRG',713,607);
 INSERT INTO `mob_skill_lists` VALUES ('Orc DRG',713,608);
 INSERT INTO `mob_skill_lists` VALUES ('Orc DRG',713,609);
 INSERT INTO `mob_skill_lists` VALUES ('Orc DRG',713,766);
-INSERT INTO `mob_skill_lists` VALUES ('Orc DRG',713,1064);
+INSERT INTO `mob_skill_lists` VALUES ('Orc DRG',713,733);
 INSERT INTO `mob_skill_lists` VALUES ('MobWyvern',714,900);
 INSERT INTO `mob_skill_lists` VALUES ('MobWyvern',714,901);
 INSERT INTO `mob_skill_lists` VALUES ('MobWyvern',714,902);
@@ -3780,7 +3784,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1175,1720);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1175,1721);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1175,1722);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1175,1723);
-INSERT INTO `mob_skill_lists` VALUES ('Supplespine_Mujwuj',1176,1064);
+INSERT INTO `mob_skill_lists` VALUES ('Supplespine_Mujwuj',1176,733);
 INSERT INTO `mob_skill_lists` VALUES ('Supplespine_Mujwuj',1176,609);
 
 -- Trial Sized Avatars
@@ -3852,6 +3856,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Copper_Borer',2002,1817); -- thermal_puls
 INSERT INTO `mob_skill_lists` VALUES ('Atkorkamuy',2003,463); -- whirlwind
 
 INSERT INTO `mob_skill_lists` VALUES ('Gharial',2004,2101); -- demoralizing_roar
+
+INSERT INTO `mob_skill_lists` VALUES ('Draketrader_Zlodgodd',2005,733);
 
 -- Next available ID: 2005
 

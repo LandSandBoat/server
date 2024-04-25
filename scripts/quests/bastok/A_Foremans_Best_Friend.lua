@@ -5,13 +5,13 @@
 -- Gudav : !pos -3.286 1.407 50.591 236
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FOREMANS_BEST_FRIEND)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.A_FOREMANS_BEST_FRIEND)
 
 quest.reward =
 {
     exp      = 2000,
     fame     = 60,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     keyItem  = xi.ki.MAP_OF_THE_GUSGEN_MINES,
 }
 
@@ -19,7 +19,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -37,7 +37,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_BASTOK] =

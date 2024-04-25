@@ -524,7 +524,7 @@ xi.spells.damage.calculateDayAndWeather = function(caster, spellId, spellElement
         isHelixSpell = true
     end
 
-    -- Calculate Weather bonus
+    -- Calculate Weather bonus + Iridescence bonus.
     if
         math.random(1, 100) <= 33 or
         caster:getMod(xi.combat.element.elementalObi[spellElement]) >= 1 or
@@ -532,15 +532,15 @@ xi.spells.damage.calculateDayAndWeather = function(caster, spellId, spellElement
     then
         -- Strong weathers.
         if weather == xi.combat.element.strongSingleWeather[spellElement] then
-            dayAndWeather = dayAndWeather + caster:getMod(xi.mod.IRIDESCENCE) * 0.1 + 0.1
+            dayAndWeather = dayAndWeather + 0.1 + caster:getMod(xi.mod.IRIDESCENCE) * 0.05
         elseif weather == xi.combat.element.strongDoubleWeather[spellElement] then
-            dayAndWeather = dayAndWeather + caster:getMod(xi.mod.IRIDESCENCE) * 0.1 + 0.25
+            dayAndWeather = dayAndWeather + 0.25 + caster:getMod(xi.mod.IRIDESCENCE) * 0.05
 
         -- Weak weathers.
         elseif weather == xi.combat.element.weakSingleWeather[spellElement] then
-            dayAndWeather = dayAndWeather - caster:getMod(xi.mod.IRIDESCENCE) * 0.1 - 0.1
+            dayAndWeather = dayAndWeather - 0.1 - caster:getMod(xi.mod.IRIDESCENCE) * 0.05
         elseif weather == xi.combat.element.weakDoubleWeather[spellElement] then
-            dayAndWeather = dayAndWeather - caster:getMod(xi.mod.IRIDESCENCE) * 0.1 - 0.25
+            dayAndWeather = dayAndWeather - 0.25 - caster:getMod(xi.mod.IRIDESCENCE) * 0.05
         end
     end
 
