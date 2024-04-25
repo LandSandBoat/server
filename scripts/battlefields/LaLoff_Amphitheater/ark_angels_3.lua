@@ -26,8 +26,16 @@ function content:entryRequirement(player, npc, isRegistrant, trade)
 end
 
 function content:onBattlefieldLoss(player, battlefield)
-    local exitPosition = tonumber(string.sub(entryNpc, -1)) - 1
+    local exitPosition = xi.battlefield.id.ARK_ANGELS_1 - battlefield:getID()
     player:startEvent(32002, 0, 0, 0, 0, 0, exitPosition, 180)
+end
+
+function content.onExitTrigger(player, npc)
+    if player:getBattlefield() then
+        local exitPosition = xi.battlefield.id.ARK_ANGELS_1 - battlefield:getID()
+
+        player:startEvent(32003, 0, 0, 0, 0, exitPosition, 180)
+    end
 end
 
 content.groups =

@@ -497,11 +497,12 @@ function Battlefield:register()
     end
 
     if setupExitNpcs and self.exitNpcs then
+        local exitTrigger = self.onExitTrigger and self.onExitTrigger or Battlefield.onExitTrigger
         for _, exitNpc in ipairs(self.exitNpcs) do
             utils.append(zoneSection, {
                 [exitNpc] =
                 {
-                    onTrigger = Battlefield.onExitTrigger,
+                    onTrigger = exitTrigger,
                 }
             })
         end
