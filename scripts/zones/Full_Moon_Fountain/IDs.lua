@@ -16,6 +16,7 @@ zones[xi.zone.FULL_MOON_FOUNTAIN] =
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7061, -- Tallying conquest results...
+        NO_BATTLEFIELD_ENTRY          = 7343, -- A strong magical force is whirling up from the platform.
         UNABLE_TO_PROTECT             = 7378, -- You were unable to protect Ajido-Marujido. Now leaving the battlefield.
         PARTY_MEMBERS_HAVE_FALLEN     = 7666, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7673, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
