@@ -45,26 +45,14 @@ zones[xi.zone.RUAUN_GARDENS] =
 
     npc =
     {
-        TREASURE_COFFER  = GetFirstID('Treasure_Coffer'),
+        TREASURE_COFFER    = GetFirstID('Treasure_Coffer'),
+        PINCERSTONE_OFFSET = GetFirstID('Pincerstone'),
+        PORTAL_OFFSET      = GetFirstID('_3mc'),
         PORTAL_TO_SEIRYU = 17310057,
         PORTAL_TO_GENBU  = 17310060,
         PORTAL_TO_BYAKKO = 17310063,
         PORTAL_TO_SUZAKU = 17310066,
 
-        PINCERSTONES =
-        {
-            -- [Pincerstone NPC ID] = Portal NPC ID
-            [17310032] = 17310055, -- Main to Seriyu
-            [17310034] = 17310056, -- Seriyu to Main
-            [17310036] = 17310058, -- Seriyu to Genbu
-            [17310038] = 17310059, -- Genbu to Seriyu
-            [17310040] = 17310061, -- Genbu to Byakko
-            [17310042] = 17310062, -- Byakko to Genbu
-            [17310044] = 17310064, -- Byakko to Suzaku
-            [17310046] = 17310065, -- Suzaku to Byakko
-            [17310048] = 17310067, -- Suzaku to Main
-            [17310050] = 17310068, -- Main to Suzaku
-        },
         PORTALS      =
         {
             { coords = {     -3, -54,   -583,      1, -50,   -579 }, event = 0          },
