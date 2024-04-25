@@ -36,11 +36,11 @@ zones[xi.zone.RUAUN_GARDENS] =
     mob =
     {
         DESPOT = GetFirstID('Despot'),
-        MIMIC     = 17309979,
-        GENBU     = 17309980,
-        SEIRYU    = 17309981,
-        BYAKKO    = 17309982,
-        SUZAKU    = 17309983,
+        MIMIC  = GetFirstID('Mimic'),
+        GENBU  = GetFirstID('Genbu'),
+        SEIRYU = GetFirstID('Seiryu'),
+        BYAKKO = GetFirstID('Byakko'),
+        SUZAKU = GetFirstID('Suzaku'),
     },
 
     npc =
@@ -48,10 +48,6 @@ zones[xi.zone.RUAUN_GARDENS] =
         TREASURE_COFFER    = GetFirstID('Treasure_Coffer'),
         PINCERSTONE_OFFSET = GetFirstID('Pincerstone'),
         PORTAL_OFFSET      = GetFirstID('_3mc'),
-        PORTAL_TO_SEIRYU = 17310057,
-        PORTAL_TO_GENBU  = 17310060,
-        PORTAL_TO_BYAKKO = 17310063,
-        PORTAL_TO_SUZAKU = 17310066,
 
         PORTALS      =
         {
