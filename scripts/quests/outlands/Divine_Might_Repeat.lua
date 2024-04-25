@@ -1,12 +1,12 @@
 -----------------------------------
--- Divine Might
+-- Divine Might (Repeat)
 -----------------------------------
--- Log ID: 5, Quest ID: 163
+-- Log ID: 5, Quest ID: 164
 -- blank_divine_might : !pos -40 0 -151 178
 -- Qu'Hau Spring      : !pos 0 -29 64 122
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
 
 quest.reward =
 {
@@ -22,44 +22,36 @@ local earringRewards =
     [5] = xi.item.BUSHINOMIMI,
 }
 
-local onTriggerIncomplete = function(player, npc)
-    local currentMission = player:getCurrentMission(xi.mission.log_id.ZILART)
-
-    if
-        currentMission == xi.mission.id.zilart.ARK_ANGELS and
-        player:getMissionStatus(xi.mission.log_id.ZILART) == 1
-    then
-        return quest:event(54, xi.item.SHEET_OF_PARCHMENT, xi.item.BOTTLE_OF_ILLUMININK, xi.item.ARK_PENTASPHERE)
-    elseif currentMission >= xi.mission.id.zilart.ARK_ANGELS then
-        -- NOTE: In order for a player to have the appropriate KI for an event to be displayed, they will be at least
-        -- at missionStatus 1, so no need to verify greater than.
-
-        for keyItemId = xi.ki.SHARD_OF_APATHY, xi.ki.SHARD_OF_RAGE do
-            if player:hasKeyItem(keyItemId) then
-                return quest:event(56, xi.item.SHEET_OF_PARCHMENT, xi.item.BOTTLE_OF_ILLUMININK, xi.item.ARK_PENTASPHERE)
-            end
-        end
-    end
-end
-
 quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE
+            return status ~= xi.questStatus.QUEST_ACCEPTED and
+                player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
         end,
 
         [xi.zone.THE_SHRINE_OF_RUAVITAU] =
         {
-            ['blank_divine_might'] = onTriggerIncomplete,
+            ['blank_divine_might'] =
+            {
+                onTrigger = function(player, npc)
+                    local numEarrings = 0
+                    for itemId = xi.item.SUPPANOMIMI, xi.item.BUSHINOMIMI do
+                        if player:hasItem(itemId) then
+                            numEarrings = numEarrings + 1
+                        end
+                    end
+
+                    if numEarrings < xi.settings.main.NUMBER_OF_DM_EARRINGS then
+                        return quest:progressEvent(57, player:getCharVar('DM_Earring'))
+                    end
+                end,
+            },
 
             onEventFinish =
             {
-                [54] = function(player, csid, option, npc)
-                    quest:begin(player)
-                end,
-
-                [56] = function(player, csid, option, npc)
+                [57] = function(player, csid, option, npc)
+                    player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
                     quest:begin(player)
                 end,
             },
@@ -76,17 +68,23 @@ quest.sections =
             ['blank_divine_might'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 1 then
-                        return quest:progressEvent(55, xi.item.SUPPANOMIMI, xi.item.KNIGHTS_EARRING, xi.item.ABYSSAL_EARRING, xi.item.BEASTLY_EARRING, xi.item.BUSHINOMIMI)
-                    else
-                        return onTriggerIncomplete(player, npc)
+                    local hasMoonOre = player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
+
+                    if quest:getVar(player, 'Prog') == 0 then
+                        if not hasMoonOre then
+                            return quest:event(58)
+                        else
+                            return quest:event(56, xi.item.SHEET_OF_PARCHMENT, xi.item.BOTTLE_OF_ILLUMININK, xi.item.ARK_PENTASPHERE)
+                        end
+                    elseif hasMoonOre then
+                        return quest:progressEvent(59)
                     end
                 end,
             },
 
             onEventUpdate =
             {
-                [55] = function(player, csid, option, npc)
+                [59] = function(player, csid, option, npc)
                     if option == 2 then
                         player:updateEvent(xi.item.SUPPANOMIMI, xi.item.KNIGHTS_EARRING, xi.item.ABYSSAL_EARRING, xi.item.BEASTLY_EARRING, xi.item.BUSHINOMIMI)
                     end
@@ -95,7 +93,7 @@ quest.sections =
 
             onEventFinish =
             {
-                [55] = function(player, csid, option, npc)
+                [59] = function(player, csid, option, npc)
                     local selectedReward = earringRewards[option]
 
                     if
@@ -120,11 +118,16 @@ quest.sections =
 
                     if
                         IsMoonFull() and
-                        (vanaHour >= 18 or vanaHour < 6) and
-                        npcUtil.tradeHasExactly(trade, { xi.item.BOTTLE_OF_ILLUMININK, xi.item.SHEET_OF_PARCHMENT })
+                        (vanaHour >= 18 or vanaHour < 6)
                     then
-                        return quest:progressEvent(7, xi.item.SHEET_OF_PARCHMENT, xi.item.BOTTLE_OF_ILLUMININK)
-                    end
+                        if npcUtil.tradeHasExactly(trade, { xi.item.BOTTLE_OF_ILLUMININK, xi.item.SHEET_OF_PARCHMENT }) then
+                            return quest:progressEvent(7, xi.item.SHEET_OF_PARCHMENT, xi.item.BOTTLE_OF_ILLUMININK)
+                        elseif
+                            npcUtil.tradeHasExactly(trade, xi.item.CHUNK_OF_LIGHT_ORE) and
+                            not player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
+                        then
+                            return quest:progressEvent(8)
+                        end
                 end,
             },
 
@@ -135,6 +138,11 @@ quest.sections =
                         player:confirmTrade()
                     end
                 end,
+
+                [8] = function(player, csid, option, npc)
+                    npcUtil.giveKeyItem(xi.ki.MOONLIGHT_ORE)
+                    player:confirmTrade()
+                end,
             },
         },
 
@@ -143,7 +151,9 @@ quest.sections =
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 1)
+                    if player:hasKeyItem(xi.ki.MOONLIGHT_ORE) then
+                        quest:setVar(player, 'Prog', 1)
+                    end
                 end,
             },
         },
