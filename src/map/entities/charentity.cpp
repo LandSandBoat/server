@@ -1533,14 +1533,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 action.recast = 0;
             }
         }
-        else if (PAbility->getID() == ABILITY_DEACTIVATE && PAutomaton && PAutomaton->health.hp == PAutomaton->GetMaxHP())
-        {
-            CAbility* PActivateAbility = ability::GetAbility(ABILITY_ACTIVATE);
-            if (PActivateAbility)
-            {
-                PRecastContainer->Del(RECAST_ABILITY, PActivateAbility->getRecastId());
-            }
-        }
         else if (PAbility->getRecastId() == 173 || PAbility->getRecastId() == 174) // BP rage, BP ward
         {
             uint16 favorReduction          = 0;
