@@ -1547,15 +1547,13 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
 
             int16 bloodPactDelayReduction = favorReduction + std::min<int16>(bloodPact_I_Reduction + bloodPact_II_Reduction + bloodPact_III_Reduction, 30);
-            action.recast                 = static_cast<uint16>(std::max<int16>(0, action.recast - bloodPactDelayReduction));
 
-            if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_PERFECT_DEFENSE) // old mobskill impl of Apogee. As things move to petskill this will need to be obsoleted. scripts/job_utils/summoner.lua handles apogee retail-like.
-            {
-                if (this->StatusEffectContainer->HasStatusEffect(EFFECT_APOGEE))
-                {
-                    action.recast = 0;
-                }
-            }
+            // Localvar will set the BP ability timer when the move consumes MP
+            // The delay is snapshot when the player uses the ability: https://www.bg-wiki.com/ffxi/Blood_Pact_Ability_Delay
+            this->SetLocalVar("bpRecastTime", static_cast<uint16>(std::max<int16>(0, action.recast - bloodPactDelayReduction)));
+
+            // Recast is actually triggered when the bp goes off (no recast packet at all on using a bp and the target moving out of range of the pet)
+            action.recast = 0;
         }
 
         // remove invisible if aggressive
@@ -1654,6 +1652,10 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                     }
 
                     addMP((int32)-mpCost);
+                    if (this->GetLocalVar("bpRecastTime") > 0) // This will go away when all smn petskills are handled via jobutils/summoner.lua
+                    {
+                        action.recast = this->GetLocalVar("bpRecastTime");
+                    }
 
                     if (PAbility->getValidTarget() == TARGET_SELF)
                     {

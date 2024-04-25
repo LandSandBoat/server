@@ -111,10 +111,12 @@ local function getBaseMPCost(player, ability)
 
     local baseMPCost = nil
 
-    if ability:getAddType() == xi.addType.ADDTYPE_ASTRAL_FLOW then
-        baseMPCost = player:getMainLvl() * 2
-    elseif ability ~= nil then
-        baseMPCost = baseMPCostMap[ability:getID()]
+    if ability then
+        if ability:getAddType() == xi.addType.ADDTYPE_ASTRAL_FLOW then
+            baseMPCost = player:getMainLvl() * 2
+        else
+            baseMPCost = baseMPCostMap[ability:getID()]
+        end
     end
 
     if baseMPCost == nil then
@@ -203,6 +205,7 @@ xi.job_utils.summoner.onUseBloodPact = function(target, petskill, summoner, acti
     local bloodPactAbility = GetAbility(petskill:getID()) -- Player abilities and Avatar abilities are mapped 1:1
     local baseMPCost       = getBaseMPCost(summoner, bloodPactAbility)
     local mpCost           = getMPCost(baseMPCost, summoner, bloodPactAbility)
+    local bloodPactRecast  = math.max(0, summoner:getLocalVar('bpRecastTime'))
 
     if summoner:hasStatusEffect(xi.effect.APOGEE) then
         summoner:resetRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID())
@@ -210,7 +213,14 @@ xi.job_utils.summoner.onUseBloodPact = function(target, petskill, summoner, acti
     end
 
     if target:getID() == action:getPrimaryTargetID() then
+        -- MP and Cooldown is only consumed if the ability goes off
         summoner:delMP(mpCost)
+        if xi.settings.map.BLOOD_PACT_SHARED_TIMER then
+            summoner:addRecast(xi.recast.ABILITY, xi.recastID.BLOODPACT_RAGE, bloodPactRecast)
+            summoner:addRecast(xi.recast.ABILITY, xi.recastID.BLOODPACT_WARD, bloodPactRecast)
+        else
+            summoner:addRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID(), bloodPactRecast)
+        end
     end
 end
 
