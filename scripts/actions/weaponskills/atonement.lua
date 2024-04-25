@@ -3,7 +3,7 @@
 -- TODO: This needs to be reworked, as this weapon skill does damage based on current enmity, not based on stat modifiers. http://wiki.ffxiclopedia.org/wiki/Atonement    http://www.bg-wiki.com/bg/Atonement
 -- Sword weapon skill
 -- Skill Level: N/A
--- Delivers a Twofold attack. Damage varies with TP. Conqueror: Aftermath effect varies with TP.
+-- Delivers a Twofold attack. Enmity varies with TP. Burtgang: Aftermath effect varies with TP.
 -- Available only after completing the Unlocking a Myth (Paladin) quest.
 -- Aligned with the Aqua Gorget, Flame Gorget & Light Gorget.
 -- Aligned with the Aqua Belt, Flame Belt & Light Belt.
