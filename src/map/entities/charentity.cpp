@@ -1567,12 +1567,19 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         }
 
         // remove invisible if aggressive
-        if (PAbility->getID() != ABILITY_TAME && PAbility->getID() != ABILITY_FIGHT)
+        if (PAbility->getID() != ABILITY_TAME && PAbility->getID() != ABILITY_FIGHT && PAbility->getID() != ABILITY_DEPLOY && PAbility->getID() != ABILITY_GAUGE)
         {
             if (PAbility->getValidTarget() & TARGET_ENEMY)
             {
-                // aggressive action
-                StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+                if (PAbility->getID() == ABILITY_ASSAULT)
+                {
+                    StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_INVISIBLE);
+                }
+                // generic aggressive action
+                else
+                {
+                    StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+                }
             }
             else if (PAbility->getID() != ABILITY_TRICK_ATTACK)
             {
