@@ -161,6 +161,7 @@ xi.mob.additionalEffect =
     TERROR     = 20,
     TP_DRAIN   = 21,
     WEIGHT     = 22,
+    ENAMNESIA  = 23,
 }
 xi.mob.ae = xi.mob.additionalEffect
 
@@ -381,6 +382,20 @@ local additionalEffects =
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
         eff         = xi.effect.SILENCE,
+        power       = 1,
+        duration    = 30,
+        minDuration = 1,
+        maxDuration = 30,
+    },
+
+    [xi.mob.ae.ENAMNESIA] =
+    {
+        chance      = 25,
+        ele         = xi.element.FIRE,
+        sub         = xi.subEffect.AMNESIA,
+        msg         = xi.msg.basic.ADD_EFFECT_STATUS,
+        applyEffect = true,
+        eff         = xi.effect.AMNESIA,
         power       = 1,
         duration    = 30,
         minDuration = 1,

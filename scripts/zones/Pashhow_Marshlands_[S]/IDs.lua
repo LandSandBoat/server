@@ -3,6 +3,8 @@
 -----------------------------------
 zones = zones or {}
 
+local nommoID = GetFirstID('Nommo')
+
 zones[xi.zone.PASHHOW_MARSHLANDS_S] =
 {
     text =
@@ -44,8 +46,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS_S] =
 
         NOMMO_PH =
         {
-            [17146007] = 17146012, -- -168.292 24.499 396.933
-            [17146008] = 17146012, -- -165.745 24.499 349.06
+            [nommoID - 5] = nommoID, -- -168.292 24.499 396.933
         },
 
         KINEPIKWA = 17146147,
