@@ -667,46 +667,6 @@ local function checkReqs(player, npc, bfid, registrant)
                 zilartStatus == 2
         end,
 
-        [288] = function() -- ZM14: Ark Angels (Hume)
-            return zilartMission == xi.mission.id.zilart.ARK_ANGELS and
-                zilartStatus == 1 and
-                npcId == getEntranceOffset(0) and
-                not player:hasKeyItem(xi.ki.SHARD_OF_APATHY)
-        end,
-
-        [289] = function() -- ZM14: Ark Angels (Tarutaru)
-            return zilartMission == xi.mission.id.zilart.ARK_ANGELS and
-                zilartStatus == 1 and
-                npcId == getEntranceOffset(1) and
-                not player:hasKeyItem(xi.ki.SHARD_OF_COWARDICE)
-        end,
-
-        [290] = function() -- ZM14: Ark Angels (Mithra)
-            return zilartMission == xi.mission.id.zilart.ARK_ANGELS and
-                zilartStatus == 1 and
-                npcId == getEntranceOffset(2) and
-                not player:hasKeyItem(xi.ki.SHARD_OF_ENVY)
-        end,
-
-        [291] = function() -- ZM14: Ark Angels (Elvaan)
-            return zilartMission == xi.mission.id.zilart.ARK_ANGELS and
-                zilartStatus == 1 and
-                npcId == getEntranceOffset(3) and
-                not player:hasKeyItem(xi.ki.SHARD_OF_ARROGANCE)
-        end,
-
-        [292] = function() -- ZM14: Ark Angels (Galka)
-            return zilartMission == xi.mission.id.zilart.ARK_ANGELS and
-                zilartStatus == 1 and
-                npcId == getEntranceOffset(4) and
-                not player:hasKeyItem(xi.ki.SHARD_OF_RAGE)
-        end,
-
-        [293] = function() -- ZM14 Divine Might
-            return player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == xi.questStatus.QUEST_ACCEPTED or
-                player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT) == xi.questStatus.QUEST_ACCEPTED
-        end,
-
         [320] = function() -- ZM16: The Celestial Nexus
             return zilartMission == xi.mission.id.zilart.THE_CELESTIAL_NEXUS
         end,
@@ -1330,26 +1290,6 @@ local function checkSkip(player, bfid)
 
         [256] = function() -- ZM8: Return to Delkfutt's Tower
             return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
-        end,
-
-        [288] = function() -- ZM14: Ark Angels (Hume)
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
-        end,
-
-        [289] = function() -- ZM14: Ark Angels (Tarutaru)
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
-        end,
-
-        [290] = function() -- ZM14: Ark Angels (Mithra)
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
-        end,
-
-        [291] = function() -- ZM14: Ark Angels (Elvaan)
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
-        end,
-
-        [292] = function() -- ZM14: Ark Angels (Galka)
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
         end,
 
         [320] = function() -- ZM16: The Celestial Nexus
