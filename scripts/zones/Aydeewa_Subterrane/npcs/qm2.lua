@@ -10,7 +10,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         npcUtil.tradeHas(trade, xi.item.PANDEMONIUM_KEY) and
-        npcUtil.popFromQM(player, npc, ID.mob.PANDEMONIUM_WARDEN)
+        npcUtil.popFromQM(player, npc, ID.mob.PANDEMONIUM_WARDEN + 1)
     then
         -- Trade Pandemonium Key
         player:confirmTrade()
