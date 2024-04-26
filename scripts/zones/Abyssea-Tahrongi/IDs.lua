@@ -71,27 +71,21 @@ zones[xi.zone.ABYSSEA_TAHRONGI] =
     },
     mob =
     {
-        HALIMEDE            = 16961917,
-        VETEHINEN           = 16961918,
-        OPHANIM             = 16961919,
-        CANNERED_NOZ        = 16961920,
-        TREBLE_NOCTULES     = 16961921,
-        GANCANAGH           = 16961922,
-        HEDETET             = 16961923,
-        ABAS                = 16961924,
-        ALECTRYON           = 16961925,
-        TEFENET             = 16961926,
-        MUSCALIET           = 16961927,
-        LACHRYMATER         = 16961928,
-        CHLORIS_1           = 16961929,
-        GLAVOID_1           = 16961930,
-        LACOVIE_1           = 16961931,
-        CHLORIS_2           = 16961946,
-        GLAVOID_2           = 16961947,
-        LACOVIE_2           = 16961948,
-        CHLORIS_3           = 16961949,
-        GLAVOID_3           = 16961950,
-        LACOVIE_3           = 16961951,
+        HALIMEDE        = GetFirstID('Halimede'),
+        VETEHINEN       = GetFirstID('Vetehinen'),
+        OPHANIM         = GetFirstID('Ophanim'),
+        CANNERED_NOZ    = GetFirstID('Cannered_Noz'),
+        TREBLE_NOCTULES = GetFirstID('Treble_Noctules'),
+        GANCANAGH       = GetFirstID('Gancanagh'),
+        HEDETET         = GetFirstID('Hedetet'),
+        ABAS            = GetFirstID('Abas'),
+        ALECTRYON       = GetFirstID('Alectryon'),
+        TEFENET         = GetFirstID('Tefenet'),
+        MUSCALIET       = GetFirstID('Muscaliet'),
+        LACHRYMATER     = GetFirstID('Lachrymater'),
+        CHLORIS_OFFSET  = GetFirstID('Chloris'), -- 3 Copies: +0, +17, +20
+        GLAVOID_OFFSET  = GetFirstID('Glavoid'), -- 3 Copies: +0, +17, +20
+        LACOVIE_OFFSET  = GetFirstID('Lacovie'), -- 3 Copies: +0, +17, +20
     },
 }
 
