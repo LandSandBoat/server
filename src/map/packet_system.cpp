@@ -425,11 +425,12 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 }
 
+// https://github.com/atom0s/XiPackets/tree/main/world/client/0x001A
 /************************************************************************
  *                                                                       *
- *  Character Information Request                                        *
- *  Occurs while player is zoning or entering the game.                  *
- *                                                                       *
+ *  GP_CLI_COMMAND_GAMEOK                                                *
+ *  Client is ready to receive packets from the server.                  *
+ *  Before this packet is sent, all commands are blocked locally.        *
  ************************************************************************/
 
 void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
@@ -1153,7 +1154,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             PChar->updatemask |= UPDATE_HP;
             PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_MOUNTED);
             // Workaround for a bug where dismounting out of update range would cause the character to stop rendering.
-            PChar->loc.zone->PushPacket(PChar, CHAR_INZONE, new CCharPacket(PChar, ENTITY_UPDATE, UPDATE_HP));
+            PChar->loc.zone->UpdateCharPacket(PChar, ENTITY_UPDATE, UPDATE_HP);
         }
         break;
         case 0x13: // tractor menu
