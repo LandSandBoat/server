@@ -5525,11 +5525,11 @@ void CLuaBaseEntity::setNewPlayer(bool newplayer)
 
     if (newplayer)
     {
-        PChar->playerConfig.NewAdventurerOffFlg = true;
+        PChar->playerConfig.NewAdventurerOffFlg = false;
     }
     else
     {
-        PChar->playerConfig.NewAdventurerOffFlg = false;
+        PChar->playerConfig.NewAdventurerOffFlg = true;
     }
 
     PChar->updatemask |= UPDATE_HP;
