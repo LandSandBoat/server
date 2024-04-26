@@ -20,19 +20,19 @@ zones[xi.zone.ALTAR_ROOM] =
     },
     mob =
     {
-        YAGUDO_AVATAR                = 17399809,
-        YAGUDOS_ELEMENTAL            = 17399810,
-        YAGUDOS_AVATAR               = 17399811,
-        LAA_YAKU_THE_AUSTERE         = 17399812,
-        DUU_MASA_THE_ONECUT          = 17399813,
-        FEE_JUGE_THE_RAMFIST         = 17399814,
-        POO_YOZO_THE_BABBLER         = 17399815,
-        KEE_TAW_THE_NIGHTINGALE      = 17399816,
-        GOO_PAKE_THE_BLOODHOUND      = 17399817,
+        YAGUDO_AVATAR           = GetFirstID('Yagudo_Avatar'),
+        YAGUDOS_ELEMENTAL       = GetFirstID('Yagudos_Elemental'),
+        YAGUDOS_AVATAR          = GetFirstID('Yagudos_Avatar'),
+        LAA_YAKU_THE_AUSTERE    = GetFirstID('Laa_Yaku_the_Austere'),
+        DUU_MASA_THE_ONECUT     = GetFirstID('Duu_Masa_the_Onecut'),
+        FEE_JUGE_THE_RAMFIST    = GetFirstID('Fee_Jugu_the_Ramfist'),
+        POO_YOZO_THE_BABBLER    = GetFirstID('Poo_Yozo_the_Babbler'),
+        KEE_TAW_THE_NIGHTINGALE = GetFirstID('Kee_Taw_the_Nightingale'),
+        GOO_PAKE_THE_BLOODHOUND = GetFirstID('Goo_Pake_the_Bloodhound'),
     },
     npc =
     {
-        STONE_LID = 17399859,
+        STONE_LID = GetFirstID('Stone_Lid'),
     },
 }
 
