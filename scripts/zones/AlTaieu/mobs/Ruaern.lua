@@ -21,15 +21,15 @@ entity.onMobDeath = function(mob, player, optParams)
     then
         local aernKills =
         {
-            [ID.mob.RUAERN_BASE + 0] = 'Ru_aern_1-1KILL',
-            [ID.mob.RUAERN_BASE + 1] = 'Ru_aern_1-2KILL',
-            [ID.mob.RUAERN_BASE + 2] = 'Ru_aern_1-3KILL',
-            [ID.mob.RUAERN_BASE + 3] = 'Ru_aern_2-1KILL',
-            [ID.mob.RUAERN_BASE + 4] = 'Ru_aern_2-2KILL',
-            [ID.mob.RUAERN_BASE + 5] = 'Ru_aern_2-3KILL',
-            [ID.mob.RUAERN_BASE + 6] = 'Ru_aern_3-1KILL',
-            [ID.mob.RUAERN_BASE + 7] = 'Ru_aern_3-2KILL',
-            [ID.mob.RUAERN_BASE + 8] = 'Ru_aern_3-3KILL',
+            [ID.mob.RUAERN_OFFSET + 0] = 'Ru_aern_1-1KILL',
+            [ID.mob.RUAERN_OFFSET + 1] = 'Ru_aern_1-2KILL',
+            [ID.mob.RUAERN_OFFSET + 2] = 'Ru_aern_1-3KILL',
+            [ID.mob.RUAERN_OFFSET + 3] = 'Ru_aern_2-1KILL',
+            [ID.mob.RUAERN_OFFSET + 4] = 'Ru_aern_2-2KILL',
+            [ID.mob.RUAERN_OFFSET + 5] = 'Ru_aern_2-3KILL',
+            [ID.mob.RUAERN_OFFSET + 6] = 'Ru_aern_3-1KILL',
+            [ID.mob.RUAERN_OFFSET + 7] = 'Ru_aern_3-2KILL',
+            [ID.mob.RUAERN_OFFSET + 8] = 'Ru_aern_3-3KILL',
         }
 
         local varToSet = aernKills[mob:getID()]
