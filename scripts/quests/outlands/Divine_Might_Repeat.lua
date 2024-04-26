@@ -128,6 +128,7 @@ quest.sections =
                         then
                             return quest:progressEvent(8)
                         end
+                    end
                 end,
             },
 
@@ -151,7 +152,10 @@ quest.sections =
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    if player:hasKeyItem(xi.ki.MOONLIGHT_ORE) then
+                    if
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.DIVINE_MIGHT and
+                        player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
+                    then
                         quest:setVar(player, 'Prog', 1)
                     end
                 end,

@@ -23,6 +23,7 @@ zones[xi.zone.LALOFF_AMPHITHEATER] =
         PARTY_MEMBERS_HAVE_FALLEN     = 7570, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7577, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         ENTERING_THE_BATTLEFIELD_FOR  = 7597, -- Entering the battlefield for [Ark Angels (1)/Ark Angels (2)/Ark Angels (3)/Ark Angels (4)/Ark Angels (5)/Divine Might/Ark Angels (1)/Ark Angels (2)/Ark Angels (3)/Ark Angels (4)/Ark Angels (5)/Divine Might]!
+        THE_SEAL_FADES                = 7608, -- The seal on the <item> flares brightly for an instant, then fades away!
     },
     mob =
     {

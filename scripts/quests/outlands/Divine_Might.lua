@@ -143,7 +143,9 @@ quest.sections =
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 1)
+                    if player:getLocalVar('battlefieldWin') == xi.battlefield.id.DIVINE_MIGHT then
+                        quest:setVar(player, 'Prog', 1)
+                    end
                 end,
             },
         },

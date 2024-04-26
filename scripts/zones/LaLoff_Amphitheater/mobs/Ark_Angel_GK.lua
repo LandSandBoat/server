@@ -15,7 +15,7 @@ local function spawnArkAngelPet(mob, target)
         local battlefieldId   = battlefield:getID()
         local battlefieldArea = battlefield:getArea()
         local content         = xi.battlefield.contents[battlefieldId]
-        local selectedPet     = 2
+        local selectedPet     = battlefieldId == xi.battlefield.id.DIVINE_MIGHT and 4 or 2
 
         mob:setAutoAttackEnabled(false)
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)

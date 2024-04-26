@@ -667,11 +667,6 @@ local function checkReqs(player, npc, bfid, registrant)
                 zilartStatus == 2
         end,
 
-        [293] = function() -- ZM14 Divine Might
-            return player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == xi.questStatus.QUEST_ACCEPTED or
-                player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT) == xi.questStatus.QUEST_ACCEPTED
-        end,
-
         [320] = function() -- ZM16: The Celestial Nexus
             return zilartMission == xi.mission.id.zilart.THE_CELESTIAL_NEXUS
         end,
