@@ -24442,7 +24442,7 @@ INSERT INTO `mob_droplist` VALUES (3035,0,0,1000,19208,222); -- Grand Crossbow (
 INSERT INTO `mob_droplist` VALUES (3036,0,0,1000,16030,@UNCOMMON); -- Soarer Earring (Uncommon, 10%)
 
 -- ZoneID:  90 - Nommo
-INSERT INTO `mob_droplist` VALUES (3037,0,0,1000,19306,250); -- Lyft Lance (25.0%)
+INSERT INTO `mob_droplist` VALUES (3037,0,0,1000,19306,@UNCOMMON); -- Lyft Lance (Uncommon, 10%)
 
 -- ZoneID:  91 - Delicieuse Delphine
 INSERT INTO `mob_droplist` VALUES (3038,0,0,1000,11406,@UNCOMMON); -- Stimulus Sabots (Uncommon, 10%)
@@ -24463,7 +24463,7 @@ INSERT INTO `mob_droplist` VALUES (3041,0,0,1000,2815,417); -- Aptant Of Arkhe (
 INSERT INTO `mob_droplist` VALUES (3041,0,0,1000,2816,167); -- Aptant Of Tachus (16.7%)
 
 -- ZoneID: 137 - Tikbalang
-INSERT INTO `mob_droplist` VALUES (3042,0,0,1000,19306,@UNCOMMON); -- Lyft Lance (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3042,0,0,1000,18609,@UNCOMMON); -- Lyft Pole (Uncommon, 10%)
 
 -- ZoneID:  84 - Burlibix Brawnback
 INSERT INTO `mob_droplist` VALUES (3043,0,0,1000,15854,113); -- Sortie Ring (11.3%)
