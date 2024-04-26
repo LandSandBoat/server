@@ -1,13 +1,6 @@
 -----------------------------------
 -- Area: LaLoff Amphitheater
 -- Name: Divine Might
---[[ caps:
-    7d01, 0, 529, 1, 950, 180, 6, 0, 0 --Neo AA HM
-    7d01, 0, 1400, 5, 1400, 180, 11, 0, 0  --Neo DM
-    7d01, 1, 405, 1, 1599, 180, 7, 0, 0 -- Neo AA TT
-    7d01, 1, 378, 3, 903, 180, 8, 0, 0 -- Neo AA MR
-    7d02, 0, 80, 1, 512, 4, 4, 180 -- Neo DM (lose)
-]]
 -----------------------------------
 local laLoffID = zones[xi.zone.LALOFF_AMPHITHEATER]
 -----------------------------------
@@ -19,9 +12,10 @@ local content = Battlefield:new({
     levelCap      = 99,
     timeLimit     = utils.minutes(30),
     index         = 5,
-    entryNpc      = 'qm1_1',
-    exitNpc       = 'qm2',
-    requiredItems = { xi.item.ARK_PENTASPHERE, wearMessage = laLoffID.text.THE_SEAL_FADES }, -- TODO: Find wornMessage for Ark Pentasphere
+    entryNpcs     = { 'qm1_1', 'qm1_2', 'qm1_3', 'qm1_4', 'qm1_5' },
+
+    -- TODO: wornMessage needs verification, but is necessary to ensure item cannot be reused.
+    requiredItems = { xi.item.ARK_PENTASPHERE, wearMessage = laLoffID.text.THE_SEAL_FADES, wornMessage = { laLoffID.text.LARGE_CRACK_RUNNING_DOWN, xi.item.ARK_PENTASPHERE } },
 })
 
 function content:entryRequirement(player, npc, isRegistrant, trade)
@@ -68,9 +62,9 @@ content.groups =
     {
         mobIds =
         {
-            laLoffID.mob.ARK_ANGEL_MR + 23,
-            laLoffID.mob.ARK_ANGEL_MR + 31,
-            laLoffID.mob.ARK_ANGEL_MR + 39,
+            { laLoffID.mob.ARK_ANGEL_MR + 23 },
+            { laLoffID.mob.ARK_ANGEL_MR + 31 },
+            { laLoffID.mob.ARK_ANGEL_MR + 39 },
         },
 
         spawned = false,
@@ -80,9 +74,9 @@ content.groups =
     {
         mobIds =
         {
-            laLoffID.mob.ARK_ANGEL_MR + 24,
-            laLoffID.mob.ARK_ANGEL_MR + 32,
-            laLoffID.mob.ARK_ANGEL_MR + 40,
+            { laLoffID.mob.ARK_ANGEL_MR + 24 },
+            { laLoffID.mob.ARK_ANGEL_MR + 32 },
+            { laLoffID.mob.ARK_ANGEL_MR + 40 },
         },
 
         spawned = false,
@@ -92,9 +86,9 @@ content.groups =
     {
         mobIds =
         {
-            laLoffID.mob.ARK_ANGEL_GK + 13,
-            laLoffID.mob.ARK_ANGEL_GK + 21,
-            laLoffID.mob.ARK_ANGEL_GK + 29,
+            { laLoffID.mob.ARK_ANGEL_GK + 13 },
+            { laLoffID.mob.ARK_ANGEL_GK + 21 },
+            { laLoffID.mob.ARK_ANGEL_GK + 29 },
         },
 
         spawned = false,

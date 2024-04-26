@@ -383,7 +383,13 @@ function Battlefield:new(data)
     obj.maxPlayers    = data.maxPlayers
     obj.timeLimit     = data.timeLimit
     obj.index         = data.index
-    obj.entryNpc      = data.entryNpc
+
+    if data.entryNpcs then
+        obj.entryNpcs = data.entryNpcs
+    elseif data.entryNpc then
+        obj.entryNpcs = { data.entryNpc }
+    end
+
     obj.area          = data.area
 
     if data.exitNpcs then
@@ -427,9 +433,9 @@ end
 
 function Battlefield:register()
     -- Only hookup the entry and exit listeners if there aren't any other battlefields already registered for that entrance
-    local setupEvents   = true
-    local setupEntryNpc = true
-    local setupExitNpcs = true
+    local setupEvents    = true
+    local setupEntryNpcs = true
+    local setupExitNpcs  = true
 
     if utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
         local contents = xi.battlefield.contentsByZone[self.zoneId]
@@ -437,9 +443,9 @@ function Battlefield:register()
         for _, content in ipairs(contents) do
             -- Always setup listeners if we're reloading a battlefield
             if self.battlefieldId == content.battlefieldId and content.hasListeners then
-                setupEvents   = true
-                setupEntryNpc = true
-                setupExitNpcs = true
+                setupEvents    = true
+                setupEntryNpcs = true
+                setupExitNpcs  = true
 
                 break
             end
@@ -448,8 +454,14 @@ function Battlefield:register()
             setupEvents = false
 
             -- Do not setup npcs if there is another battlefield using the same entry npc
-            if self.entryNpc == content.entryNpc then
-                setupEntryNpc = false
+            if self.entryNpcs then
+                for _, entryNpc in ipairs(self.entryNpcs) do
+                    if utils.contains(entryNpc, content.entryNpcs) then
+                        setupEntryNpcs = false
+
+                        break
+                    end
+                end
             end
 
             -- If there is any overlap between the exit NPCs then we do not setup the exit NPCs
@@ -486,14 +498,16 @@ function Battlefield:register()
         self.hasListeners = true
     end
 
-    if setupEntryNpc and self.entryNpc then
-        utils.append(zoneSection, {
-            [self.entryNpc] =
-            {
-                onTrade = Battlefield.onEntryTrade,
-                onTrigger = Battlefield.onEntryTrigger,
-            }
-        })
+    if setupEntryNpcs and self.entryNpcs then
+        for _, entryNpc in ipairs(self.entryNpcs) do
+            utils.append(zoneSection, {
+                [entryNpc] =
+                {
+                    onTrade   = Battlefield.onEntryTrade,
+                    onTrigger = Battlefield.onEntryTrigger,
+                }
+            })
+        end
     end
 
     if setupExitNpcs and self.exitNpcs then
@@ -520,7 +534,7 @@ function Battlefield:register()
 end
 
 function Battlefield:isValidEntry(player, npc)
-    return self.entryNpc == npc:getName()
+    return utils.contains(npc:getName(), self.entryNpcs)
 end
 
 -- Allow for Battlefield scripts to easily add additional requirements for entry by
@@ -638,7 +652,9 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
             local totalUses = xi.battlefield.itemUses[itemId] or 1
 
             if player:getWornUses(itemId) >= totalUses then
-                if totalUses > 1 then
+                if type(content.requiredItems.wornMessage) == 'table' then
+                    player:messageSpecial(unpack(content.requiredItems.wornMessage))
+                elseif totalUses > 1 then
                     player:messageSpecial(content.requiredItems.wornMessage, itemId)
                 else
                     player:messageSpecial(content.requiredItems.wornMessage, 0, 0, 0, itemId)
@@ -651,7 +667,7 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
 
     if not onUpdate then
         -- Open menu of valid battlefields
-        player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
+        return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
     end
 end
 
@@ -677,9 +693,7 @@ function Battlefield.onEntryTrigger(player, npc)
         end
 
         local options = utils.mask.setBit(0, content.index, true)
-        player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
-
-        return
+        return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
     end
 
     -- Player doesn't have battlefield status effect. That means player wants to register a new battlefield OR is attempting to enter a closed one.
@@ -712,7 +726,7 @@ function Battlefield.onEntryTrigger(player, npc)
         return
     end
 
-    player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
+    return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
 end
 
 -- Static function to lookup the correct battlefield to handle this event update
@@ -844,7 +858,7 @@ end
 
 function Battlefield.onExitTrigger(player, npc)
     if player:getBattlefield() then
-        player:startOptionalCutscene(32003)
+        return Battlefield:progressCutscene(32003)
     end
 end
 

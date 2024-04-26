@@ -22,6 +22,8 @@ zones[xi.zone.LALOFF_AMPHITHEATER] =
         TIME_LIMIT_FOR_THIS_BATTLE_IS = 7534, -- The time limit for this battle is <number> minutes.
         PARTY_MEMBERS_HAVE_FALLEN     = 7570, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7577, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        LARGE_CRACK_RUNNING_DOWN      = 7590, -- The <item> has a large crack running straight down the side.
+        NO_RESPONSE_CANNOT_ESCAPE     = 7593, -- There is no response. You cannot escape!
         ENTERING_THE_BATTLEFIELD_FOR  = 7597, -- Entering the battlefield for [Ark Angels (1)/Ark Angels (2)/Ark Angels (3)/Ark Angels (4)/Ark Angels (5)/Divine Might/Ark Angels (1)/Ark Angels (2)/Ark Angels (3)/Ark Angels (4)/Ark Angels (5)/Divine Might]!
         THE_SEAL_FADES                = 7608, -- The seal on the <item> flares brightly for an instant, then fades away!
     },
@@ -35,7 +37,6 @@ zones[xi.zone.LALOFF_AMPHITHEATER] =
     },
     npc =
     {
-        ENTRANCE_OFFSET = 17514792, -- used by scripts/globals/bcnm.lua
     },
 }
 
