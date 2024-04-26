@@ -1180,7 +1180,14 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             else
             {
-                PChar->requestedInfoSync = true;
+                PChar->loc.zone->ForEachChar([&](CCharEntity* tempChar)
+                {
+                    // Avoids two players zoning in at slightly different times and missing each-other's update packet
+                    if (PChar == tempChar || distance(PChar->loc.p, tempChar->loc.p) < 50)
+                    {
+                        tempChar->requestedInfoSync = true;
+                    } });
+
                 PChar->loc.zone->SpawnNPCs(PChar);
                 PChar->loc.zone->SpawnMOBs(PChar);
                 PChar->loc.zone->SpawnTRUSTs(PChar);
