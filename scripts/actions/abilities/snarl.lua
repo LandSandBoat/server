@@ -8,19 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if player:getPet() == nil then
-        return xi.msg.basic.REQUIRES_A_PET, 0
-    else
-        if player:getPet():getTarget() ~= nil and player:isJugPet() then
-            return 0, 0
-        else
-            return xi.msg.basic.PET_CANNOT_DO_ACTION, 0
-        end
-    end
+    return xi.job_utils.beastmaster.onAbilityCheckSnarl(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:transferEnmity(player:getPet(), 99, 11.5)
+    return xi.job_utils.beastmaster.onUseAbilitySnarl(player, target, ability)
 end
 
 return abilityObject

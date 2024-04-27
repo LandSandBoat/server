@@ -8,30 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    local pet = player:getPet()
-
-    if not pet then
-        return xi.msg.basic.REQUIRES_A_PET, 0
-    elseif
-        (not player:isJugPet() and pet:getObjType() ~= xi.objType.MOB) or
-        pet:getLocalVar('ReceivedFamiliar') == 1
-    then
-        return xi.msg.basic.NO_EFFECT_ON_PET, 0
-    end
-
-    pet:setLocalVar('ReceivedFamiliar', 1)
-    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
-
-    return 0, 0
+    return xi.job_utils.beastmaster.onAbilityCheckFamiliar(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:familiar()
-
-    -- pets powers increase!
-    ability:setMsg(xi.msg.basic.FAMILIAR_PC)
-
-    return 0
+    return xi.job_utils.beastmaster.onUseAbilityFamiliar(player, target, ability)
 end
 
 return abilityObject

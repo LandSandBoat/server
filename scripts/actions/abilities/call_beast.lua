@@ -8,26 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if player:getPet() ~= nil then
-        return xi.msg.basic.ALREADY_HAS_A_PET, 0
-    elseif not player:hasValidJugPetItem() then
-        return xi.msg.basic.NO_JUG_PET_ITEM, 0
-    elseif not player:canUseMisc(xi.zoneMisc.PET) then
-        return xi.msg.basic.CANT_BE_USED_IN_AREA, 0
-    end
-
-    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.CALL_BEAST_DELAY)))
-    return 0, 0
+    return xi.job_utils.beastmaster.onAbilityCheckJug(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    xi.pet.spawnPet(player, player:getWeaponSubSkillType(xi.slot.AMMO))
-    player:removeAmmo()
-    -- Briefly put the recastId for READY/SIC (102) into a recast state to
-    -- toggle charges accumulating. 102 is the shared recast id for all jug
-    -- pet abilities and for SIC when using a charmed mob.
-    -- see sql/abilities_charges and sql_abilities
-    player:addRecast(xi.recast.ABILITY, 102, 1)
+    return xi.job_utils.beastmaster.onUseAbilityJug(player, target, ability)
 end
 
 return abilityObject
