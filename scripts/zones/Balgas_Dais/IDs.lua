@@ -51,12 +51,15 @@ zones[xi.zone.BALGAS_DAIS] =
         ATORI_TUTORI            = GetFirstID('Atori-Tutori_qm'),
         BLACK_DRAGON            = GetFirstID('Black_Dragon'),
         BUU_XOLO_THE_BLOODFACED = GetFirstID('Buu_Xolo_the_Bloodfaced'),
+        CHEST_O_PLENTY          = GetFirstID('Chest_OPlenty'),
+        COFFER_O_PLENTY         = GetFirstID('Coffer_OPlenty'),
         DVOROVOI                = GetFirstID('Dvorovoi'),
         MAAT                    = GetFirstID('Maat'),
         VOO_TOLU_THE_GHOSTFIST  = GetFirstID('Voo_Tolu_the_Ghostfist'),
     },
     npc =
     {
+        TERMINAL_COFFER = GetFirstID('Terminal_Coffer')
     },
 }
 
