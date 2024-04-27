@@ -23,6 +23,7 @@
 #include "battleutils.h"
 #include "charutils.h"
 #include "entities/automatonentity.h"
+#include "instance.h"
 #include "itemutils.h"
 #include "job_points.h"
 #include "lua/luautils.h"
@@ -51,14 +52,33 @@ namespace puppetutils
             {
                 // Make sure we don't delete a pet that is active
                 auto* PZone = zoneutils::GetZone(PChar->PAutomaton->getZone());
-                if (PZone == nullptr || PZone->GetEntity(PChar->PAutomaton->targid, TYPE_PET) == nullptr)
+                if (PZone == nullptr)
                 {
                     destroy(PChar->PAutomaton);
                 }
                 else
                 {
-                    PChar->PAutomaton->PMaster = nullptr;
+                    if (PChar->PAutomaton->PInstance)
+                    {
+                        if (PChar->PAutomaton->PInstance->GetEntity(PChar->PAutomaton->targid, TYPE_PET) == nullptr)
+                        {
+                            destroy(PChar->PAutomaton);
+                        }
+                        else
+                        {
+                            PChar->PAutomaton->PMaster = nullptr;
+                        }
+                    }
+                    else if (PZone->GetEntity(PChar->PAutomaton->targid, TYPE_PET) == nullptr)
+                    {
+                        destroy(PChar->PAutomaton);
+                    }
+                    else
+                    {
+                        PChar->PAutomaton->PMaster = nullptr;
+                    }
                 }
+
                 PChar->PPet       = nullptr;
                 PChar->PAutomaton = nullptr;
             }
