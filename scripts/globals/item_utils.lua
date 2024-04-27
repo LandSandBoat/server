@@ -265,3 +265,26 @@ xi.itemUtils.removeMultipleEffects = function(target, effects, count, random)
         return removed
     end
 end
+
+-- for applying pet mods based on arbitrary conditions
+-- I.E. avatar attack only for a particular pet
+-- example usage in fervor_ring.lua
+-- can pass nil for petId to apply to all pets
+xi.itemUtils.handlePetLatentMods = function(owner, petId, mods, give)
+    local pet = owner:getPet()
+
+    if
+        pet and
+        (not petId or pet:getPetID() == petId)
+    then
+        if give then
+            for _, mod in ipairs(mods) do
+                pet:addMod(mod[1], mod[2])
+            end
+        else
+            for _, mod in ipairs(mods) do
+                pet:delMod(mod[1], mod[2])
+            end
+        end
+    end
+end

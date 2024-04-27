@@ -169,9 +169,12 @@ INSERT INTO `item_latents` VALUES (11727,68,1,16,4);
 INSERT INTO `item_latents` VALUES (11727,68,1,16,5);
 INSERT INTO `item_latents` VALUES (11727,68,1,16,6);
 
+-- Diabolos's Rope
+INSERT INTO `item_latents` VALUES (11752,346,1,9,16);    -- Diabolos perpetuation cost -1
+
 -- Destrier Beret
-INSERT INTO `item_latents` VALUES (11811,64,1,50,31);   -- Combat Skill Gain +1
-INSERT INTO `item_latents` VALUES (11811,65,1,50,31);   -- Magic Skill Gain +1
+INSERT INTO `item_latents` VALUES (11811,64,1,50,31);    -- Combat Skill Gain +1
+INSERT INTO `item_latents` VALUES (11811,65,1,50,31);    -- Magic Skill Gain +1
 INSERT INTO `item_latents` VALUES (11811,76,12,50,31);   -- MOVE_SPEED_GEAR_BONUS +12%
 INSERT INTO `item_latents` VALUES (11811,369,1,50,31);   -- Adds "Refresh"
 INSERT INTO `item_latents` VALUES (11811,370,1,50,31);   -- Adds "Regen"
@@ -220,6 +223,10 @@ INSERT INTO `item_latents` VALUES (12402,384,100,8,14);  -- Wyvern Targe Latent 
 INSERT INTO `item_latents` VALUES (12403,2,10,8,15);
 INSERT INTO `item_latents` VALUES (12403,5,5,8,15);
 INSERT INTO `item_latents` VALUES (12461,369,1,13,4);
+
+-- Accord Hat
+INSERT INTO `item_latents` VALUES (12493,346,1,9,9); -- Fenrir perpetuation cost -1
+
 INSERT INTO `item_latents` VALUES (12589,370,2,13,3);
 INSERT INTO `item_latents` VALUES (12621,370,2,13,3);
 INSERT INTO `item_latents` VALUES (12717,71,5,13,6);
@@ -756,7 +763,8 @@ INSERT INTO `item_latents` VALUES (14055,23,7,1,75);     -- Attack+7 when HP >75
 -- Unicorn Mittens +1
 INSERT INTO `item_latents` VALUES (14056,23,8,1,75);     -- Attack+8 when HP >75%
 
-INSERT INTO `item_latents` VALUES (14062,346,0,9,8);
+-- Carbunle Mitts
+INSERT INTO `item_latents` VALUES (14062,346,0,9,8);     -- Perpetuation placeholder (real logic is in status_effect_container.cpp)
 
 -- Garden Bangles / Feronia's Bangles
 INSERT INTO `item_latents` VALUES (14065,370,1,26,0);    -- Daytime: Regen +1HP/tick
@@ -905,8 +913,11 @@ INSERT INTO `item_latents` VALUES (14363,5,20,53,0);     -- MP +20 in areas insi
 -- Rasetsu Samue
 INSERT INTO `item_latents` VALUES (14376,291,1,0,25);    -- Counter+1 when HP <25%
 
-INSERT INTO `item_latents` VALUES (14401,346,1,9,7);
-INSERT INTO `item_latents` VALUES (14410,346,1,9,6);
+-- Duende Cotehardie
+INSERT INTO `item_latents` VALUES (14401,346,1,9,7);     -- Dark Spirit perpetuation -1
+
+-- Nimbus Doublet
+INSERT INTO `item_latents` VALUES (14410,346,1,9,6);     -- Light Spirit perpetuation -1
 
 -- Gaudy Harness
 INSERT INTO `item_latents` VALUES (14413,369,1,5,49);    -- "Refresh" effect while MP under 49 (actual number,not %)
@@ -2769,6 +2780,9 @@ INSERT INTO `item_latents` VALUES (23804,416,5,30,0);    -- Watersday: NULL_PHYS
 INSERT INTO `item_latents` VALUES (23804,476,5,30,0);    -- Watersday: MAGIC_NULL 5% chance
 INSERT INTO `item_latents` VALUES (23804,958,25,30,0);   -- Watersday: STATUSRES +20
 -- TODO: "Occasionaly null breath dmg" OR "Occasionally null all damage"
+
+-- Carbie Cap +1
+INSERT INTO `item_latents` VALUES (25633,346,1,9,8);     -- Carbuncle perpetuation -1
 
 INSERT INTO `item_latents` VALUES (27342,63,10,13,64);   -- Fallen's Sollerets,"Last Resort"+1
 INSERT INTO `item_latents` VALUES (27343,63,10,13,64);   -- Fallen's Sollerets +1,"Last Resort"+1

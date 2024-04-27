@@ -58884,6 +58884,9 @@ INSERT INTO `item_mods` VALUES (25629,68,36);    -- EVA: 36
 INSERT INTO `item_mods` VALUES (25629,161,-500); -- DMGPHYS: -500
 INSERT INTO `item_mods` VALUES (25629,384,700);  -- HASTE_GEAR: 700
 
+-- Carbie Cap +1
+INSERT INTO `item_mods` VALUES (25633,1,2);  -- DEF: 2
+
 -- Terminal Helm
 INSERT INTO `item_mods` VALUES (25634,1,111);    -- DEF: 111
 INSERT INTO `item_mods` VALUES (25634,2,41);     -- HP: 41
