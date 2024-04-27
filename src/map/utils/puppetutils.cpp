@@ -566,8 +566,7 @@ namespace puppetutils
 
     void LoadAutomatonStats(CCharEntity* PChar)
     {
-        // Save this since LoadPet() below changes it, but we don't want this changed
-        auto origPetID = PChar->petZoningInfo.petID;
+        auto origPetZoningInfo = PChar->petZoningInfo;
         switch (PChar->PAutomaton->getFrame())
         {
             default: // case FRAME_HARLEQUIN:
@@ -586,8 +585,13 @@ namespace puppetutils
                 petutils::LoadPet(PChar, PETID_STORMWAKERFRAME, false);
                 break;
         }
-        PChar->PPet                = nullptr; // already saved as PAutomaton, don't need it twice unless it's summoned
-        PChar->petZoningInfo.petID = origPetID;
+        PChar->PPet = nullptr; // already saved as PAutomaton, don't need it twice unless it's summoned
+
+        // The above LoadPet() calls change PChar->petZoningInfo, so we need to restore it if the original zoned pet was not an automaton
+        if (origPetZoningInfo.respawnPet && origPetZoningInfo.petType != PET_TYPE::AUTOMATON)
+        {
+            PChar->petZoningInfo = origPetZoningInfo;
+        }
     }
 
     void TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl)
