@@ -53,6 +53,7 @@ zones[xi.zone.HORLAIS_PEAK] =
     {
         ARMSMASTER_DEKBUK = GetFirstID('Armsmaster_Dekbuk'),
         ATORI_TUTORI      = GetFirstID('Atori-Tutori_qm'),
+        HELLTAIL_HARRY    = GetFirstID('Helltail_Harry'),
         MAAT              = GetFirstID('Maat'),
     },
     npc =
