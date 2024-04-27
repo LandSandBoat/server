@@ -96,50 +96,6 @@ local loot =
         },
     },
 
-    -- BCNM Dismemberment Brigade
-    [2] =
-    {
-        {
-            { itemid = xi.item.KABRAKANS_AXE, droprate = 250 }, -- kabrakans_axe
-            { itemid = xi.item.SARNGA,        droprate = 250 }, -- sarnga
-            { itemid = xi.item.DRAGVANDIL,    droprate = 250 }, -- dragvandil
-            { itemid = xi.item.HAMELIN_FLUTE, droprate = 250 }, -- hamelin_flute
-        },
-
-        {
-            { itemid = xi.item.NONE,            droprate = 400 }, -- nothing
-            { itemid = xi.item.SPECTACLES,      droprate = 200 }, -- spectacles
-            { itemid = xi.item.ASSAULT_EARRING, droprate = 200 }, -- assault_earring
-            { itemid = xi.item.PEACE_RING,      droprate = 200 }, -- peace_ring
-        },
-
-        {
-            { itemid = xi.item.NONE,             droprate = 200 }, -- nothing
-            { itemid = xi.item.TRANSLUCENT_ROCK, droprate = 200 }, -- translucent_rock
-            { itemid = xi.item.GREEN_ROCK,       droprate = 200 }, -- green_rock
-            { itemid = xi.item.YELLOW_ROCK,      droprate = 200 }, -- yellow_rock
-            { itemid = xi.item.PURPLE_ROCK,      droprate = 200 }, -- purple_rock
-        },
-
-        {
-            { itemid = xi.item.PAINITE,         droprate = 100 }, -- painite
-            { itemid = xi.item.JADEITE,         droprate = 100 }, -- jadeite
-            { itemid = xi.item.MYTHRIL_INGOT,   droprate = 100 }, -- mythril_ingot
-            { itemid = xi.item.STEEL_INGOT,     droprate = 100 }, -- steel_ingot
-            { itemid = xi.item.FLUORITE,        droprate = 100 }, -- fluorite
-            { itemid = xi.item.GOLD_INGOT,      droprate = 100 }, -- gold_ingot
-            { itemid = xi.item.ZIRCON,          droprate = 100 }, -- zircon
-            { itemid = xi.item.CHRYSOBERYL,     droprate = 100 }, -- chrysoberyl
-            { itemid = xi.item.DARKSTEEL_INGOT, droprate = 100 }, -- darksteel_ingot
-            { itemid = xi.item.MOONSTONE,       droprate = 100 }, -- moonstone
-        },
-
-        {
-            { itemid = xi.item.NONE,           droprate =  900 }, -- nothing
-            { itemid = xi.item.VILE_ELIXIR_P1, droprate =  100 }, -- vile_elixir_+1
-        },
-    },
-
     -- BCNM Hostile Herbivores
     [4] =
     {

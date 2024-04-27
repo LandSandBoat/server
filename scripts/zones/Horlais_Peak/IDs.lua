@@ -55,9 +55,10 @@ zones[xi.zone.HORLAIS_PEAK] =
     },
     npc =
     {
-        ATORI_TUTORI = GetFirstID('Atori-Tutori_qm'),
-        BLACK_DRAGON = GetFirstID('Black_Dragon'),
-        MAAT         = GetFirstID('Maat'),
+        ARMSMASTER_DEKBUK = GetFirstID('Armsmaster_Dekbuk')
+        ATORI_TUTORI      = GetFirstID('Atori-Tutori_qm'),
+        BLACK_DRAGON      = GetFirstID('Black_Dragon'),
+        MAAT              = GetFirstID('Maat'),
     },
 }
 
