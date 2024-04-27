@@ -49,10 +49,7 @@ zones[xi.zone.ARRAPAGO_REEF] =
     },
     mob =
     {
-        BLOODY_BONES_PH =
-        {
-            [16998653] = 16998655, -- 136.234 -6.831 468.779
-        },
+        BLOODY_BONES          = GetFirstID('Bloody_Bones'),
         MEDUSA                = GetFirstID('Medusa'),
         LIL_APKALLU           = GetFirstID('Lil_Apkallu'),
         VELIONIS              = GetFirstID('Velionis'),

@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.RAJA_2, { xi.ki.WARPED_CHARIOT_PLATE, xi.ki.SHATTERED_IRON_GIANT_CHAIN })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.RAJA_OFFSET + 4, { xi.ki.WARPED_CHARIOT_PLATE, xi.ki.SHATTERED_IRON_GIANT_CHAIN })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

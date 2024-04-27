@@ -7,9 +7,9 @@ local ID = zones[xi.zone.ALTAIEU]
 local antiquityVars =
 {
     -- [crystalOffset] = { thisFightDone, thisCsAcquired, otherCsAcquired1, otherCsAcquired2, firstCsParam, secondCsParam1, secondCsParam2 }
-    [0] = { '[SEA][AlTieu]SouthTower', '[SEA][AlTieu]SouthTowerCS', '[SEA][AlTieu]EastTowerCS', '[SEA][AlTieu]WestTowerCS', 0, 2, 1 },
-    [1] = { '[SEA][AlTieu]WestTower', '[SEA][AlTieu]WestTowerCS', '[SEA][AlTieu]SouthTowerCS', '[SEA][AlTieu]EastTowerCS', 2, 1, 0 },
-    [2] = { '[SEA][AlTieu]EastTower', '[SEA][AlTieu]EastTowerCS', '[SEA][AlTieu]SouthTowerCS', '[SEA][AlTieu]WestTowerCS', 1, 2, 0 },
+    [0] = { '[SEA][AlTieu]SouthTower', '[SEA][AlTieu]SouthTowerCS', '[SEA][AlTieu]EastTowerCS',  '[SEA][AlTieu]WestTowerCS', 0, 2, 1 },
+    [1] = { '[SEA][AlTieu]WestTower',  '[SEA][AlTieu]WestTowerCS',  '[SEA][AlTieu]SouthTowerCS', '[SEA][AlTieu]EastTowerCS', 2, 1, 0 },
+    [2] = { '[SEA][AlTieu]EastTower',  '[SEA][AlTieu]EastTowerCS',  '[SEA][AlTieu]SouthTowerCS', '[SEA][AlTieu]WestTowerCS', 1, 2, 0 },
 }
 
 return {
@@ -21,13 +21,13 @@ return {
         Event 163 third post-fight CS
         ..............................................................................................]]
     rubiousCrystalOnTrigger = function(player, npc)
-        local npcId = npc:getID()
-        local crystalOffset = npcId - ID.npc.RUBIOUS_CRYSTAL_BASE
-        local ruaernOffset = ID.mob.RUAERN_BASE + crystalOffset * 3
-        local cop = player:getCurrentMission(xi.mission.log_id.COP)
-        local copStat = player:getCharVar('PromathiaStatus')
-        local cVar = antiquityVars[crystalOffset]
-        local thisFightDone = player:getCharVar(cVar[1]) == 1
+        local npcId          = npc:getID()
+        local crystalOffset  = npcId - ID.npc.RUBIOUS_CRYSTAL_OFFSET
+        local ruaernOffset   = ID.mob.RUAERN_OFFSET + crystalOffset * 3
+        local cop            = player:getCurrentMission(xi.mission.log_id.COP)
+        local copStat        = player:getCharVar('PromathiaStatus')
+        local cVar           = antiquityVars[crystalOffset]
+        local thisFightDone  = player:getCharVar(cVar[1]) == 1
         local thisCsAcquired = player:getCharVar(cVar[2]) == 1
 
         -- spawn ru'aerns
@@ -67,9 +67,9 @@ return {
     end,
 
     rubiousCrystalOnEventFinish = function(player, csid, option, npc)
-        local npcId = player:getEventTarget():getID()
-        local crystalOffset = npcId - ID.npc.RUBIOUS_CRYSTAL_BASE
-        local cVar = antiquityVars[crystalOffset]
+        local npcId         = player:getEventTarget():getID()
+        local crystalOffset = npcId - ID.npc.RUBIOUS_CRYSTAL_OFFSET
+        local cVar          = antiquityVars[crystalOffset]
 
         if csid == 161 or csid == 162 or csid == 163 then
             player:setCharVar(cVar[1], 0)

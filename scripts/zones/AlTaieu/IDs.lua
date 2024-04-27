@@ -29,23 +29,20 @@ zones[xi.zone.ALTAIEU] =
     },
     mob =
     {
-        EUVHIS_WHITE         = 16912811,
-        EUVHIS_RED           = 16912817,
-        EUVHIS_BLACK         = 16912823,
-        RUAERN_BASE          = 16912829,
-        JAILER_OF_HOPE       = 16912838,
-        JAILER_OF_JUSTICE    = 16912839,
-        JAILER_OF_PRUDENCE_1 = 16912846,
-        JAILER_OF_PRUDENCE_2 = 16912847,
-        JAILER_OF_LOVE       = 16912848,
-        ABSOLUTE_VIRTUE      = 16912876,
+        EUVHIS_OFFSET      = GetFirstID('Aweuvhi'),
+        RUAERN_OFFSET      = GetFirstID('Ruaern'),
+        JAILER_OF_HOPE     = GetFirstID('Jailer_of_Hope'),
+        JAILER_OF_JUSTICE  = GetFirstID('Jailer_of_Justice'),
+        JAILER_OF_PRUDENCE = GetFirstID('Jailer_of_Prudence'),
+        JAILER_OF_LOVE     = GetFirstID('Jailer_of_Love'),
+        ABSOLUTE_VIRTUE    = GetFirstID('Absolute_Virtue'),
     },
     npc =
     {
-        RUBIOUS_CRYSTAL_BASE      = 16912900,
-        AURORAL_UPDRAFT_OFFSET    = 16912903,
-        SWIRLING_VORTEX_OFFSET    = 16912909,
-        DIMENSIONAL_PORTAL_OFFSET = 16912911,
+        RUBIOUS_CRYSTAL_OFFSET    = GetFirstID('_0x1'),
+        AURORAL_UPDRAFT_OFFSET    = GetFirstID('Auroral_Updraft'),
+        SWIRLING_VORTEX_OFFSET    = GetFirstID('Swirling_Vortex'),
+        DIMENSIONAL_PORTAL_OFFSET = GetFirstID('Dimensional_Portal'),
     },
 }
 

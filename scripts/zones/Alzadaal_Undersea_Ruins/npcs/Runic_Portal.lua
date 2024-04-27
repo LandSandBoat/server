@@ -21,9 +21,9 @@ entity.onTrigger = function(player, npc)
         not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE)
     then
         if xi.besieged.hasRunicPortal(player, xi.teleport.runic_portal.NYZUL) then
-            event = npcid == ID.npc.RUNIC_PORTAL_NORTH and 117 or 118
+            event = npcid == ID.npc.RUNIC_PORTAL_OFFSET and 117 or 118
         else
-            event = npcid == ID.npc.RUNIC_PORTAL_NORTH and 121 or 122
+            event = npcid == ID.npc.RUNIC_PORTAL_OFFSET and 121 or 122
         end
     else
         player:messageSpecial(ID.text.RESPONSE)
