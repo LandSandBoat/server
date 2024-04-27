@@ -1286,11 +1286,21 @@ INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039392,2);
 INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039393,2);
 INSERT INTO `bcnm_battlefield` VALUES (1124,1,17039400,3); -- shield_of_diplomacy
 INSERT INTO `bcnm_battlefield` VALUES (1156,1,17051694,3); -- puppet_in_peril
-INSERT INTO `bcnm_battlefield` VALUES (1153,1,17051655,3); -- shadows_of_the_mind TODO: Capture battlefields 2,3
+INSERT INTO `bcnm_battlefield` VALUES (1153,1,17051655,3); -- shadows_of_the_mind
 INSERT INTO `bcnm_battlefield` VALUES (1153,1,17051656,0);
 INSERT INTO `bcnm_battlefield` VALUES (1153,1,17051657,0);
 INSERT INTO `bcnm_battlefield` VALUES (1153,1,17051658,0);
 INSERT INTO `bcnm_battlefield` VALUES (1153,1,17051659,0);
+INSERT INTO `bcnm_battlefield` VALUES (1153,2,17051661,3);
+INSERT INTO `bcnm_battlefield` VALUES (1153,2,17051662,0);
+INSERT INTO `bcnm_battlefield` VALUES (1153,2,17051663,0);
+INSERT INTO `bcnm_battlefield` VALUES (1153,2,17051664,0);
+INSERT INTO `bcnm_battlefield` VALUES (1153,2,17051665,0);
+INSERT INTO `bcnm_battlefield` VALUES (1153,3,17051667,3);
+INSERT INTO `bcnm_battlefield` VALUES (1153,3,17051668,0);
+INSERT INTO `bcnm_battlefield` VALUES (1153,3,17051669,0);
+INSERT INTO `bcnm_battlefield` VALUES (1153,3,17051670,0);
+INSERT INTO `bcnm_battlefield` VALUES (1153,3,17051671,0);
 
 -- //////////////////////////////////////////////////////////////
 --               APOLLYON  SE
