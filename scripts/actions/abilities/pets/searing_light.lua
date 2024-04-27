@@ -16,7 +16,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     damage = damage + (dINT * 1.5)
     damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.LIGHT, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.LIGHT)
+    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.LIGHT, petskill)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, 1)
 
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHT)

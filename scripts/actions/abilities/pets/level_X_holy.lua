@@ -28,7 +28,7 @@ abilityObject.onPetAbility = function(target, pet, skill, master, action)
     -- Only have an effect if target's level is divisible by die roll
     if target:getMainLvl() % power == 0 then
         local info = xi.mobskills.mobMagicalMove(pet, target, skill, basedmg, ele, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 10)
-        dmg = xi.mobskills.mobAddBonuses(pet, target, info.dmg, ele)
+        dmg = xi.mobskills.mobAddBonuses(pet, target, info.dmg, ele, skill)
         dmg = xi.summon.avatarFinalAdjustments(dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, 1)
 
         -- TODO: Magic burst?

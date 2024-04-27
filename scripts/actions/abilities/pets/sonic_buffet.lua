@@ -18,7 +18,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local damage = math.floor(37.5 * (2.0 + 0.1 * tp / 150)) -- fTP starts at 2.0 and scales every 150 tp by .1 for a range of 2.0 to 4.0. Base value ballparked from retail.
     damage = damage + (dINT * 1.5)
     damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.WIND)
+    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.WIND, petskill)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.WIND, 1)
 
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.WIND)

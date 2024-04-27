@@ -16,7 +16,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local damage = math.floor(325 + 0.025 * tp)
     damage = damage + (dINT * 1.5)
     damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.THUNDER, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.THUNDER)
+    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.THUNDER, petskill)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, 1)
 
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.THUNDER)
