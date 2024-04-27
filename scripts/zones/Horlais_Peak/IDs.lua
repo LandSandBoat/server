@@ -12,6 +12,7 @@ zones[xi.zone.HORLAIS_PEAK] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
+        LOST_KEYITEM                  = 6394, -- Lost key item: <keyitem>.
         ITEMS_OBTAINED                = 6399, -- You obtain <number> <item>!
         NOTHING_OUT_OF_ORDINARY       = 6404, -- There is nothing out of the ordinary here.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
@@ -54,6 +55,9 @@ zones[xi.zone.HORLAIS_PEAK] =
     },
     npc =
     {
+        ATORI_TUTORI = GetFirstID('Atori-Tutori_qm'),
+        BLACK_DRAGON = GetFirstID('Black_Dragon'),
+        MAAT         = GetFirstID('Maat'),
     },
 }
 

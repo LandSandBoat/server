@@ -575,10 +575,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.RNG and mainLevel >= 66
         end,
 
-        [20] = function() -- Quest: Beyond Infinity
-            return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
-        end,
-
         [32] = function() -- San d'Oria 1-3: Save the Children
             local hasCompletedSaveTheChildren = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN)
 
