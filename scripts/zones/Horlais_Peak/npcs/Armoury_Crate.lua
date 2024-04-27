@@ -95,37 +95,6 @@ local loot =
             { itemid = xi.item.NONE,                  droprate =  0 }, -- nothing
         },
     },
-
-    -- BCNM Shots in the Dark
-    [14] =
-    {
-        {
-            { itemid = xi.item.GOLD_BEASTCOIN,    droprate = 500 }, -- gold_beastcoin
-            { itemid = xi.item.MYTHRIL_BEASTCOIN, droprate = 500 }, -- mythril_beastcoin
-        },
-
-        {
-            { itemid = xi.item.STEEL_INGOT, droprate = 500 }, -- steel_ingot
-            { itemid = xi.item.AQUAMARINE,  droprate = 500 }, -- aquamarine
-        },
-
-        {
-            { itemid = xi.item.NONE,         droprate = 500 }, -- nothing
-            { itemid = xi.item.DEMON_QUIVER, droprate = 500 }, -- demon_quiver
-        },
-
-        {
-            { itemid = xi.item.NONE,                droprate = 600 }, -- nothing
-            { itemid = xi.item.TELEPORT_RING_HOLLA, droprate = 200 }, -- teleport_ring_holla
-            { itemid = xi.item.TELEPORT_RING_VAHZL, droprate = 200 }, -- teleport_ring_vahzl
-        },
-
-        {
-            { itemid = xi.item.NONE,                droprate = 600 }, -- nothing
-            { itemid = xi.item.SAPIENT_CAPE,        droprate = 200 }, -- sapient_cape
-            { itemid = xi.item.TRAINERS_WRISTBANDS, droprate = 200 }, -- trainers_wristbands
-        },
-    },
 }
 
 entity.onTrade = function(player, npc, trade)
