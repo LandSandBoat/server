@@ -236,57 +236,6 @@ local loot =
         },
     },
 
-    -- BCNM Dropping Like Flies
-    [10] =
-    {
-        {
-            { itemid = xi.item.GIL, droprate = 1000, amount = 4000 }, -- Gil
-        },
-
-        {
-            { itemid = xi.item.INSECT_WING, droprate = 1000 }, -- Insect Wing
-        },
-
-        {
-            { itemid = xi.item.MANNEQUIN_HEAD, droprate = 1000 }, -- Mannequin Head
-        },
-
-        {
-            { itemid = xi.item.NONE,            droprate = 636 }, -- Nothing
-            { itemid = xi.item.EMPEROR_HAIRPIN, droprate = 364 }, -- Emperor Hairpin
-        },
-
-        {
-            { itemid = xi.item.ASHIGARU_TARGE,  droprate = 175 }, -- Ashigaru Targe
-            { itemid = xi.item.BEATERS_ASPIS,   droprate = 175 }, -- Beaters Aspis
-            { itemid = xi.item.VARLETS_TARGE,   droprate = 175 }, -- Varlets Targe
-            { itemid = xi.item.WRESTLERS_ASPIS, droprate = 175 }, -- Wrestlers Aspis
-            { itemid = xi.item.CLEAR_TOPAZ,     droprate = 100 }, -- Clear Topaz
-            { itemid = xi.item.LAPIS_LAZULI,    droprate = 100 }, -- Lapis Lazuli
-            { itemid = xi.item.LIGHT_OPAL,      droprate = 100 }, -- Light Opal
-        },
-
-        {
-            { itemid = xi.item.MERCENARY_MANTLE, droprate = 250 }, -- Mercenary Mantle
-            { itemid = xi.item.SINGERS_MANTLE,   droprate = 250 }, -- Singers Mantle
-            { itemid = xi.item.WIZARDS_MANTLE,   droprate = 250 }, -- Wizards Mantle
-            { itemid = xi.item.WYVERN_MANTLE,    droprate = 250 }, -- Wyvern Mantle
-        },
-
-        {
-            { itemid = xi.item.SCROLL_OF_UTSUSEMI_NI,   droprate =  70 }, -- Scroll Of Utsusemi Ni
-            { itemid = xi.item.SCROLL_OF_MAGIC_FINALE,  droprate =  70 }, -- Scroll Of Magic Finale
-            { itemid = xi.item.JUG_OF_QUADAV_BUG_BROTH, droprate = 150 }, -- Jug Of Quadav Bug Broth
-            { itemid = xi.item.ONYX,                    droprate = 100 }, -- Onyx
-            { itemid = xi.item.LAPIS_LAZULI,            droprate = 100 }, -- Lapis Lazuli
-            { itemid = xi.item.LIGHT_OPAL,              droprate = 100 }, -- Light Opal
-            { itemid = xi.item.SCROLL_OF_DISPEL,        droprate = 150 }, -- Scroll Of Dispel
-            { itemid = xi.item.SCROLL_OF_ERASE,         droprate = 100 }, -- Scroll Of Erase
-            { itemid = xi.item.ELM_LOG,                 droprate =  90 }, -- Elm Log
-            { itemid = xi.item.MANNEQUIN_BODY,          droprate =  70 }, -- Mannequin Body
-        },
-    },
-
     -- KSNM Horns of War
     [11] =
     {
