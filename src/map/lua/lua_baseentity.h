@@ -497,6 +497,7 @@ public:
 
     void addLearnedWeaponskill(uint8 wsUnlockId);
     bool hasLearnedWeaponskill(uint8 wsUnlockId);
+    void reloadWeaponskillList();
     void delLearnedWeaponskill(uint8 wsUnlockId);
 
     void trySkillUp(uint8 skill, uint8 level, sol::object const& forceSkillUpObj, sol::object const& useSubSkillObj);

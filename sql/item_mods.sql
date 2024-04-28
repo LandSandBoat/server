@@ -38554,9 +38554,6 @@ INSERT INTO `item_mods` VALUES (18849,2,31);  -- HP: 31
 INSERT INTO `item_mods` VALUES (18849,5,-31); -- MP: -31
 INSERT INTO `item_mods` VALUES (18849,10,6);  -- VIT: 6
 
--- Werebuster
-INSERT INTO `item_mods` VALUES (18851,8,8); -- STR: 8
-
 -- Spirit Maul
 INSERT INTO `item_mods` VALUES (18853,13,2);   -- MND: 2
 INSERT INTO `item_mods` VALUES (18853,22,3);   -- DARK_RES: 3

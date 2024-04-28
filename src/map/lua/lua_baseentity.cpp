@@ -9803,6 +9803,20 @@ bool CLuaBaseEntity::hasLearnedWeaponskill(uint8 wsUnlockId)
     return (charutils::hasLearnedWeaponskill(static_cast<CCharEntity*>(m_PBaseEntity), wsUnlockId) != 0);
 }
 
+void CLuaBaseEntity::reloadWeaponskillList()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    charutils::BuildingCharWeaponSkills(PChar);
+    PChar->pushPacket(new CCharAbilitiesPacket(PChar));
+}
+
 /************************************************************************
  *  Function: delLearnedWeaponskill()
  *  Purpose : Removes a learned weaponskill from the player
@@ -17755,6 +17769,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("addLearnedWeaponskill", CLuaBaseEntity::addLearnedWeaponskill);
     SOL_REGISTER("hasLearnedWeaponskill", CLuaBaseEntity::hasLearnedWeaponskill);
+    SOL_REGISTER("reloadWeaponskillList", CLuaBaseEntity::reloadWeaponskillList);
     SOL_REGISTER("delLearnedWeaponskill", CLuaBaseEntity::delLearnedWeaponskill);
     SOL_REGISTER("trySkillUp", CLuaBaseEntity::trySkillUp);
 

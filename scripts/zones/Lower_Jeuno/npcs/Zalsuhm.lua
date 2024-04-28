@@ -11,18 +11,21 @@ local function getQuestId(mainJobId)
 end
 
 entity.onTrade = function(player, npc, trade)
-    for i, wepId in pairs(xi.equipment.baseNyzulWeapons) do
+    for i, weaponData in pairs(xi.equipment.baseNyzulWeaponsFull) do
+        local wepId = weaponData.itemId
         if npcUtil.tradeHasExactly(trade, wepId) then
             local unlockingAMyth = player:getQuestStatus(xi.questLog.JEUNO, getQuestId(i))
             if unlockingAMyth == xi.questStatus.QUEST_ACCEPTED then
+                -- For use by "unlocking_a_myth" module to use pre-2014 ws point scaling on Nyzul Climb progress
+                local requiredWsPoints = xi.equipment.baseNyzulWeaponRequiredWsPoints(player)
                 local wsPoints = trade:getItem(0):getWeaponskillPoints()
-                if wsPoints <= 49 then
+                if wsPoints <= requiredWsPoints / 5 then
                     player:startEvent(10091)
-                elseif wsPoints <= 200 then
+                elseif wsPoints <= requiredWsPoints * 4 / 5 then
                     player:startEvent(10092)
-                elseif wsPoints <= 249 then
+                elseif wsPoints < requiredWsPoints then
                     player:startEvent(10093)
-                elseif wsPoints >= 250 then
+                elseif wsPoints >= requiredWsPoints then
                     player:startEvent(10088, i)
                 end
             end
@@ -71,31 +74,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         elseif option <= xi.job.SCH then
             player:addQuest(xi.questLog.JEUNO, questId)
         end
-    elseif csid == 10088 and option <= xi.job.SCH then
-        local jobs =
-        {
-            [xi.job.WAR] = xi.wsUnlock.KINGS_JUSTICE,
-            [xi.job.MNK] = xi.wsUnlock.ASCETICS_FURY,
-            [xi.job.WHM] = xi.wsUnlock.MYSTIC_BOON,
-            [xi.job.BLM] = xi.wsUnlock.VIDOHUNIR,
-            [xi.job.RDM] = xi.wsUnlock.DEATH_BLOSSOM,
-            [xi.job.THF] = xi.wsUnlock.MANDALIC_STAB,
-            [xi.job.PLD] = xi.wsUnlock.ATONEMENT,
-            [xi.job.DRK] = xi.wsUnlock.INSURGENCY,
-            [xi.job.BST] = xi.wsUnlock.PRIMAL_REND,
-            [xi.job.BRD] = xi.wsUnlock.MORDANT_RIME,
-            [xi.job.RNG] = xi.wsUnlock.TRUEFLIGHT,
-            [xi.job.SAM] = xi.wsUnlock.TACHI_RANA,
-            [xi.job.NIN] = xi.wsUnlock.BLADE_KAMU,
-            [xi.job.DRG] = xi.wsUnlock.DRAKESBANE,
-            [xi.job.SMN] = xi.wsUnlock.GARLAND_OF_BLISS,
-            [xi.job.BLU] = xi.wsUnlock.EXPIACION,
-            [xi.job.COR] = xi.wsUnlock.LEADEN_SALUTE,
-            [xi.job.PUP] = xi.wsUnlock.STRINGING_PUMMEL,
-            [xi.job.DNC] = xi.wsUnlock.PYRRHIC_KLEOS,
-            [xi.job.SCH] = xi.wsUnlock.OMNISCIENCE,
-        }
-        local skill = jobs[option]
+    elseif csid == 10088 and xi.equipment.baseNyzulWeaponsFull[option] then
+        local skill = xi.equipment.baseNyzulWeaponsFull[option].wsUnlockId
 
         player:completeQuest(xi.questLog.JEUNO, questId)
         player:messageSpecial(ID.text.MYTHIC_LEARNED, player:getMainJob())
