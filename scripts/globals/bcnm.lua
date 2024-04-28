@@ -555,18 +555,6 @@ local function checkReqs(player, npc, bfid, registrant)
                 nationStatus == 2
         end,
 
-        [5] = function() -- Quest: Shattering Stars (WAR LB5)
-            return mainJob == xi.job.WAR and mainLevel >= 66
-        end,
-
-        [6] = function() -- Quest: Shattering Stars (BLM LB5)
-            return mainJob == xi.job.BLM and mainLevel >= 66
-        end,
-
-        [7] = function() -- Quest: Shattering Stars (RNG LB5)
-            return mainJob == xi.job.RNG and mainLevel >= 66
-        end,
-
         [32] = function() -- San d'Oria 1-3: Save the Children
             local hasCompletedSaveTheChildren = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN)
 
