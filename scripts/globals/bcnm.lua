@@ -550,14 +550,6 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to register a battlefield
     local registerReqs =
     {
-        [0] = function() -- Mission 2-3
-            return nationStatus == 9 and
-                (
-                    bastokMission == xi.mission.id.bastok.THE_EMISSARY_SANDORIA2 or
-                    windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2
-                )
-        end,
-
         [3] = function() -- San d'Oria 7-2: The Secret Weapon
             return sandoriaMission == xi.mission.id.sandoria.THE_SECRET_WEAPON and
                 nationStatus == 2
@@ -1211,16 +1203,6 @@ local function checkSkip(player, bfid)
     -- Requirements to skip a battlefield
     local skipReqs =
     {
-        [0] = function() -- Mission 2-3
-            return player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA2) or
-                player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2) or
-                nationStatus > 9 and
-                (
-                    bastokMission == xi.mission.id.bastok.THE_EMISSARY_SANDORIA2 or
-                    windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2
-                )
-        end,
-
         [3] = function() -- San d'Oria 7-2: The Secret Weapon
             return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SECRET_WEAPON) or
                 (
