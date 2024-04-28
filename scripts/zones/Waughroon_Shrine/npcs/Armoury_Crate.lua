@@ -125,54 +125,6 @@ local loot =
         },
     },
 
-    -- BCNM Grove Guardians
-    [75] =
-    {
-        {
-            { itemid = xi.item.MANNEQUIN_BODY, droprate = 1000 }, -- mannequin_body
-        },
-
-        {
-            { itemid = xi.item.NONE,            droprate = 800 }, -- nothing
-            { itemid = xi.item.MANNEQUIN_HANDS, droprate = 200 }, -- mannequin_hands
-        },
-
-        {
-            { itemid = xi.item.NONE,             droprate = 250 }, -- nothing
-            { itemid = xi.item.WRESTLERS_MANTLE, droprate = 250 }, -- wrestlers_mantle
-            { itemid = xi.item.MAGICIANS_MANTLE, droprate = 250 }, -- magicians_mantle
-            { itemid = xi.item.PILFERERS_MANTLE, droprate = 250 }, -- pilferers_mantle
-        },
-
-        {
-            { itemid = xi.item.NONE,           droprate = 200 }, -- nothing
-            { itemid = xi.item.HEALERS_SHIELD, droprate = 200 }, -- healers_shield
-            { itemid = xi.item.GENIN_ASPIS,    droprate = 200 }, -- genin_aspis
-            { itemid = xi.item.KILLER_TARGE,   droprate = 200 }, -- killer_targe
-            { itemid = xi.item.STAFF_BELT,     droprate = 200 }, -- staff_belt
-        },
-
-        {
-            { itemid = xi.item.NONE,                   droprate = 250 }, -- nothing
-            { itemid = xi.item.BAG_OF_HERB_SEEDS,      droprate = 250 }, -- bag_of_herb_seeds
-            { itemid = xi.item.BAG_OF_VEGETABLE_SEEDS, droprate = 250 }, -- bag_of_vegetable_seeds
-            { itemid = xi.item.BAG_OF_GRAIN_SEEDS,     droprate = 250 }, -- bag_of_grain_seeds
-        },
-
-        {
-            { itemid = xi.item.NONE,                   droprate = 500 }, -- nothing
-            { itemid = xi.item.SCROLL_OF_DISPEL,       droprate = 125 }, -- scroll_of_dispel
-            { itemid = xi.item.SCROLL_OF_UTSUSEMI_NI,  droprate = 125 }, -- scroll_of_utsusemi_ni
-            { itemid = xi.item.SCROLL_OF_MAGIC_FINALE, droprate = 125 }, -- scroll_of_magic_finale
-            { itemid = xi.item.SCROLL_OF_ERASE,        droprate = 125 }, -- scroll_of_erase
-        },
-
-        {
-            { itemid = xi.item.NONE,            droprate = 800 }, -- nothing
-            { itemid = xi.item.SCORPION_QUIVER, droprate = 200 }, -- scorpion_quiver
-        },
-    },
-
     -- KSNM The Hills are Alive
     [76] =
     {
