@@ -31,12 +31,15 @@ entity.onMobFight = function(mob, target)
     end
 
     if timeBlock >= hateReset then
-        local bfID = mob:getBattlefield():getArea()
+        local battlefieldArea = mob:getBattlefield():getArea()
+        local mobIdOffset     = (battlefieldArea - 1) * 5
+
         mob:setLocalVar('hateResetTimer', hateReset + 1)
-        for i, v in ipairs(ID.MOBLIN_IDS[bfID].MOBLIN_IDS) do
-            local moblinAlive = GetMobByID(v)
+        for moblinId = ID.mob.MOVAMUQ + mobIdOffset, ID.mob.MOVAMUQ + mobIdOffset + 3 do
+            local moblinAlive = GetMobByID(moblinId)
+
             if moblinAlive:isAlive() then -- make sure we're not adding dead moblins into the table
-                table.insert(activeMoblins, v)
+                table.insert(activeMoblins, moblinId)
             end
         end
 
