@@ -550,11 +550,6 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to register a battlefield
     local registerReqs =
     {
-        [3] = function() -- San d'Oria 7-2: The Secret Weapon
-            return sandoriaMission == xi.mission.id.sandoria.THE_SECRET_WEAPON and
-                nationStatus == 2
-        end,
-
         [32] = function() -- San d'Oria 1-3: Save the Children
             local hasCompletedSaveTheChildren = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN)
 
@@ -1191,14 +1186,6 @@ local function checkSkip(player, bfid)
     -- Requirements to skip a battlefield
     local skipReqs =
     {
-        [3] = function() -- San d'Oria 7-2: The Secret Weapon
-            return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SECRET_WEAPON) or
-                (
-                    sandoriaMission == xi.mission.id.sandoria.THE_SECRET_WEAPON and
-                    nationStatus > 2
-                )
-        end,
-
         [32] = function() -- San d'Oria 1-3: Save the Children
             return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN) or
                 (

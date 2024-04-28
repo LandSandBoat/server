@@ -16,6 +16,12 @@ local content = Battlefield:new({
     entryNpc         = 'BC_Entrance',
     exitNpc          = 'Burning_Circle',
     requiredItems    = { xi.item.MOON_ORB, wearMessage = horlaisID.text.A_CRACK_HAS_FORMED, wornMessage = horlaisID.text.ORB_IS_CRACKED },
+    armouryCrates    =
+    {
+        horlaisID.mob.ARMSMASTER_DEKBUK + 6,
+        horlaisID.mob.ARMSMASTER_DEKBUK + 13,
+        horlaisID.mob.ARMSMASTER_DEKBUK + 20,
+    },
 })
 
 content.groups =
