@@ -907,9 +907,13 @@ void CMobController::DoRoamTick(time_point tick)
             // if I just disengaged check if I should despawn
             if (!PMob->getMobMod(MOBMOD_DONT_ROAM_HOME) && PMob->IsFarFromHome())
             {
-                if (PMob->CanRoamHome() && PMob->PAI->PathFind->PathTo(PMob->m_SpawnPoint))
+                if (PMob->CanRoamHome())
                 {
                     // walk back to spawn if too far away
+                    if (!PMob->PAI->PathFind->IsFollowingPath() && !PMob->PAI->PathFind->PathTo(PMob->m_SpawnPoint))
+                    {
+                        PMob->PAI->PathFind->PathInRange(PMob->m_SpawnPoint, PMob->m_maxRoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                    }
 
                     // limit total path to just 10 or
                     // else we'll move straight back to spawn
