@@ -1,8 +1,12 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
 --  NPC: Saphiriance T.K
+-- Type: Campaign Arbiter
+-- https://ffxiclopedia.fandom.com/wiki/Campaign_Arbiter
 -- !pos 113 1 -40 80
 -- Retrace NPC
+-----------------------------------
+require('scripts/globals/teleports/campaign_teleports')
 -----------------------------------
 local entity = {}
 
@@ -10,22 +14,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local allegiance =  player:getCampaignAllegiance()
-    local alliedNotes = player:getCurrency('allied_notes')
-
-    if allegiance ~= 0 then
-        player:startEvent(454, allegiance, 0, alliedNotes, 0, 0, 0, 0)
-    end
+    xi.campaign.teleports.campaignArbiterOnTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
+    xi.campaign.teleports.campaignArbiterOnEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 454 then
-        player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.RETRACE, 0, 3)
-        player:delCurrency('allied_notes', 30)
-    end
+    xi.campaign.teleports.campaignArbiterOnEventFinish(player, csid, option)
 end
 
 return entity

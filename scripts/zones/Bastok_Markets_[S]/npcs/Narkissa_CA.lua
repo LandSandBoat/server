@@ -1,8 +1,8 @@
 -----------------------------------
--- Area: Southern SandOria [S]
---  NPC: Scarlette C.A
--- !pos -27 2 -29 80
--- Campaign Teleporter
+-- Area: Bastok Markets (S)
+--  NPC: Narkissa, C.A.
+-- Type: Campaign Teleporter
+-- !pos -317.7 -12 -45.7 87
 -----------------------------------
 require('scripts/globals/teleports/campaign_teleports')
 -----------------------------------
