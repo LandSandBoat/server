@@ -125,54 +125,6 @@ local loot =
         },
     },
 
-    -- BCNM Crustacean Conundrum
-    [74] =
-    {
-        {
-            { itemid = xi.item.SLICE_OF_LAND_CRAB_MEAT, droprate = 1000 }, -- slice_of_land_crab_meat
-        },
-
-        {
-            { itemid = xi.item.MANNEQUIN_BODY, droprate = 1000 }, -- mannequin_body
-        },
-
-        {
-            { itemid = xi.item.NONE,       droprate = 334 }, -- nothing
-            { itemid = xi.item.CRAB_SHELL, droprate = 666 }, -- crab_shell
-        },
-
-        {
-            { itemid = xi.item.BEETLE_QUIVER,         droprate = 444 }, -- beetle_quiver
-            { itemid = xi.item.JUG_OF_FISH_OIL_BROTH, droprate = 556 }, -- jug_of_fish_oil_broth
-        },
-
-        {
-            { itemid = xi.item.NONE,         droprate = 450 }, -- nothing
-            { itemid = xi.item.BRASS_INGOT,  droprate = 100 }, -- brass_ingot
-            { itemid = xi.item.BRONZE_SHEET, droprate = 150 }, -- bronze_sheet
-            { itemid = xi.item.BRONZE_INGOT, droprate = 300 }, -- bronze_ingot
-        },
-
-        {
-            { itemid = xi.item.NONE,              droprate = 300 }, -- nothing
-            { itemid = xi.item.MYTHRIL_BEASTCOIN, droprate = 500 }, -- mythril_beastcoin
-            { itemid = xi.item.MANNEQUIN_HANDS,   droprate = 100 }, -- mannequin_hands
-            { itemid = xi.item.MANNEQUIN_HEAD,    droprate = 100 }, -- mannequin_head
-        },
-
-        {
-            { itemid = xi.item.NONE,            droprate = 200 }, -- nothing
-            { itemid = xi.item.PLATOON_CESTI,   droprate = 100 }, -- platoon_cesti
-            { itemid = xi.item.PLATOON_DAGGER,  droprate = 100 }, -- platoon_dagger
-            { itemid = xi.item.PLATOON_AXE,     droprate = 100 }, -- platoon_axe
-            { itemid = xi.item.PLATOON_BOW,     droprate = 100 }, -- platoon_bow
-            { itemid = xi.item.PLATOON_LANCE,   droprate = 100 }, -- platoon_lance
-            { itemid = xi.item.PLATOON_SWORD,   droprate = 100 }, -- platoon_sword
-            { itemid = xi.item.PLATOON_MACE,    droprate = 100 }, -- platoon_mace
-            { itemid = xi.item.PLATOON_ZAGHNAL, droprate = 100 }, -- platoon_zaghnal
-        },
-    },
-
     -- BCNM Grove Guardians
     [75] =
     {
