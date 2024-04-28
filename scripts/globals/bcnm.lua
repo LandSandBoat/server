@@ -822,11 +822,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)
         end,
 
-        [736] = function() -- PM5-3 L3: A Century of Hardship
-            return promathiaMission == xi.mission.id.cop.THREE_PATHS and
-                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) == 8
-        end,
-
         [738] = function() -- ENM: Bionic Bug
             return player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)
         end,
@@ -1314,14 +1309,6 @@ local function checkSkip(player, bfid)
         [706] = function() -- Quest: Waking Dreams
             return player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS)
-        end,
-
-        [736] = function() -- PM5-3 L3: A Century of Hardship
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
-                (
-                    promathiaMission == xi.mission.id.cop.THREE_PATHS and
-                    player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) > 8
-                )
         end,
 
         [768] = function() -- PM1-3: The Mothercrystals
