@@ -411,6 +411,7 @@ function Battlefield:new(data)
     obj.requiredKeyItems = data.requiredKeyItems or {}
     obj.lossEventParams  = data.lossEventParams or {}
     obj.armouryCrates    = data.armouryCrates or false
+    obj.experimental     = data.experimental or false
 
     obj.sections = { { [obj.zoneId] = {} } }
     obj.groups   = {}
@@ -891,6 +892,15 @@ function Battlefield:onBattlefieldInitialise(battlefield)
     local hasMultipleAreas = not self.area
     battlefield:addGroups(self.groups, hasMultipleAreas)
 
+    -- NOTE: Experimental battlefields are at most partially implemented.  Increase mob levels
+    -- for temporary tuning.
+    if self.experimental then
+        local battlefieldMobs = battlefield:getMobs(true, true)
+        for _, mobObj in ipairs(battlefieldMobs) do
+            mobObj:setMobLevel(math.min(mobObj:getMainLvl() * 2, 255))
+        end
+    end
+
     for mobId, path in pairs(self.paths) do
         GetMobByID(mobId):pathThrough(path, xi.path.flag.PATROL)
     end
@@ -1040,6 +1050,10 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     end
 
     player:messageSpecial(ID.text.TIME_LIMIT_FOR_THIS_BATTLE_IS, 0, 0, 0, math.floor(self.timeLimit / 60))
+
+    if self.experimental then
+        player:printToPlayer('This battlefield has been marked as experimental.  Enemy levels have increased!', xi.msg.channel.NS_SHOUT)
+    end
 end
 
 function Battlefield:onBattlefieldDestroy(battlefield)
@@ -1214,7 +1228,8 @@ function xi.battlefield.getBattlefieldOptions(player, npc, trade)
     for _, content in ipairs(contents) do
         if
             content:checkRequirements(player, npc, true, trade) and
-            not player:battlefieldAtCapacity(content.battlefieldId)
+            not player:battlefieldAtCapacity(content.battlefieldId) and
+            (xi.settings.map.BCNM_ENABLE_EXPERIMENTAL or not content.experimental)
         then
             result = utils.mask.setBit(result, content.index, true)
         end

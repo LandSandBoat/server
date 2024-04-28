@@ -225,6 +225,9 @@ xi.settings.map =
     -- Enable/disable level cap of mission battlefields stored in database.
     LV_CAP_MISSION_BCNM = false,
 
+    -- Allow players to enter BCNMs which are flagged as experimental
+    BCNM_ENABLE_EXPERIMENTAL = true,
+
     -- Max allowed merits points players can hold
     -- 10 classic
     -- 30 abyssea
