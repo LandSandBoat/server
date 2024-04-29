@@ -564,14 +564,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
         end,
 
-        [64] = function() -- Mission 2-3
-            return nationStatus == 10 and
-                (
-                    sandoriaMission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
-                    windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2
-                )
-        end,
-
         [68] = function() -- Quest: A Thief in Norg!?
             return player:getCharVar('Quest[5][142]Prog') == 6
         end,
@@ -1187,16 +1179,6 @@ local function checkSkip(player, bfid)
 
         [33] = function() -- Quest: The Holy Crest
             return player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
-        end,
-
-        [64] = function() -- Mission 2-3
-            return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK2) or
-                player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) or
-                nationStatus > 10 and
-                (
-                    sandoriaMission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
-                    windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2
-                )
         end,
 
         [161] = function() -- Bastok 9-2: Where Two Paths Converge
