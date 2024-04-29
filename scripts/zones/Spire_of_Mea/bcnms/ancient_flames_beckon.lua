@@ -46,7 +46,7 @@ battlefieldObject.onEventFinish = function(player, csid, option, npc)
         player:getLocalVar('toLufaise') ~= 1
     then
         player:addExp(1500)
-        xi.teleport.to(player, xi.teleport.id.EXITPROMDEM)
+        xi.teleport.to(player, xi.teleport.id.EXITPROMMEA)
     end
 end
 
