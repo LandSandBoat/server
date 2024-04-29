@@ -11,7 +11,12 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.DYINYINGA_PH, 10, 3600) -- 1 hour
+    local phTable =
+    {
+        [ID.mob.DYINYINGA - 1] = ID.mob.DYINYINGA,
+    }
+
+    xi.mob.phOnDespawn(mob, phTable, 10, 3600) -- 1 hour
 end
 
 return entity
