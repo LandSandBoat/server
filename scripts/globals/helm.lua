@@ -1561,6 +1561,10 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         end
 
         xi.helm.result(player, helmType, broke, itemID)
+
+        if type(func) == 'function' then
+            func(player)
+        end
     else
         player:messageSpecial(zones[zoneId].text[info.message], info.tool)
     end

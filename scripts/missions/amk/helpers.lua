@@ -44,26 +44,11 @@ xi.amk.helpers.helmTrade = function(player, helmType, broke)
         player:getCurrentMission(xi.mission.log_id.AMK) >= xi.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE
     then
         if
-            helmType == xi.helmType.MINING and
-            not player:hasKeyItem(xi.ki.STURDY_METAL_STRIP) and
+            helmMapping[helmType] and
             validRegions[regionId] and
             math.random(1, 100) <= amkChance
         then
-            npcUtil.giveKeyItem(player, xi.ki.STURDY_METAL_STRIP)
-        elseif
-            helmType == xi.helmType.LOGGING and
-            not player:hasKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK) and
-            validRegions[regionId] and
-            math.random(1, 100) <= amkChance
-        then
-            npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_RUGGED_TREE_BARK)
-        elseif
-            helmType == xi.helmType.HARVESTING and
-            not player:hasKeyItem(xi.ki.SAVORY_LAMB_ROAST) and
-            validRegions[regionId] and
-            math.random(1, 100) <= amkChance
-        then
-            npcUtil.giveKeyItem(player, xi.ki.SAVORY_LAMB_ROAST)
+            npcUtil.giveKeyItem(player, helmMapping[helmType])
         end
     end
 end
