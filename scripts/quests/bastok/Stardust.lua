@@ -6,12 +6,12 @@
 -- qm1     : !pos 238.524 2.661 -148.784 103
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.STARDUST)
 
 quest.reward =
 {
     fame     = 110,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     gil      = 300,
 }
 
@@ -19,8 +19,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getFameLevel(xi.fameArea.BASTOK) >= 2
         end,
 
         [xi.zone.METALWORKS] =
@@ -38,7 +38,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status ~= QUEST_AVAILABLE
+            return status ~= xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.METALWORKS] =

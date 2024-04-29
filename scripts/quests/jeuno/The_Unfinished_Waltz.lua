@@ -8,7 +8,7 @@
 local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
 
 quest.reward =
 {
@@ -20,7 +20,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.DNC and
                 player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL
         end,
@@ -40,7 +40,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.UPPER_JEUNO] =
@@ -141,8 +141,8 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
+            return status == xi.questStatus.QUEST_COMPLETED and
+                not player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
         end,
 
         [xi.zone.UPPER_JEUNO] =

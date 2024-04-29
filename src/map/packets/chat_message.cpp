@@ -44,7 +44,7 @@ CChatMessagePacket::CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE Mes
 
     ref<uint8>(0x04) = MessageType;
 
-    if (PChar->nameflags.flags & FLAG_GM && sender.empty())
+    if (PChar->visibleGmLevel >= 3 && sender.empty())
     {
         ref<uint8>(0x05) = 0x01;
     }

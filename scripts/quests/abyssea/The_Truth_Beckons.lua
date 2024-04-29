@@ -5,7 +5,7 @@
 -- Joachim : !pos -52.844 0 -9.978 246
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
+local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
 
 quest.reward = {}
 
@@ -18,7 +18,7 @@ quest.sections =
     -- This quest is flagged on completion of A Journey Begins.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_JEUNO] =
@@ -38,7 +38,7 @@ quest.sections =
             {
                 [327] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH)
+                        player:addQuest(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH)
                     end
                 end,
             },

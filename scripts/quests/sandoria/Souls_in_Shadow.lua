@@ -7,19 +7,19 @@ local bostaunieuxID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 local denOfRancorID = zones[xi.zone.DEN_OF_RANCOR]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
 }
 
 quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:canEquipItem(xi.item.SCYTHE_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.SCYTHE) / 10 >= 240 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
@@ -54,7 +54,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BOSTAUNIEUX_OUBLIETTE] =
@@ -90,7 +90,7 @@ quest.sections =
                     if option == 1 and not player:hasItem(xi.item.SCYTHE_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.item.SCYTHE_OF_TRIALS)
                     elseif option == 2 then
-                        player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)
+                        player:delQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end

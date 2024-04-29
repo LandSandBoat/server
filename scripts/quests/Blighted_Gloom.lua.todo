@@ -7,7 +7,7 @@
 -- qm1 (???) Ranguemont Pass !pos 54 10 -147 166
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BLIGHTED_GLOOM)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.BLIGHTED_GLOOM)
 
 quest.reward = {}
 
@@ -16,7 +16,7 @@ quest.sections = {
     -- Qm's normal state
      {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE or status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_AVAILABLE or status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.KORROLOKA_TUNNEL] = {
@@ -55,8 +55,8 @@ quest.sections = {
     -- Section: Begin quest
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
-                and player:getQuestStatus(xi.quest.log_id.JEUNO, PAST_REFLECTIONS) == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_AVAILABLE
+                and player:getQuestStatus(xi.questLog.JEUNO, PAST_REFLECTIONS) == xi.questStatus.QUEST_COMPLETED
                 and player:getFellowValue('bond') >= 45
         end,
 
@@ -79,7 +79,7 @@ quest.sections = {
     -- Section: Questing
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.UPPER_JEUNO] = {

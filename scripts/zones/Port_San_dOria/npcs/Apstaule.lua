@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
         trade:hasItemQty(xi.item.PARCEL_FOR_THE_AUCTION_HOUSE, 1) and
         trade:getItemCount() == 1
     then
-        local theBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+        local theBrugaireConsortium = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
         if theBrugaireConsortium == 1 then
             player:tradeComplete()
             player:startEvent(540)

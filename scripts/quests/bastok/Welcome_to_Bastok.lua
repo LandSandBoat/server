@@ -6,12 +6,12 @@
 -- Bartolomeo : !pos -84.967 1.896 -18.679 236
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
 
 quest.reward =
 {
     fame     = 80,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.SPATHA,
     title    = xi.title.BASTOK_WELCOMING_COMMITTEE,
 }
@@ -20,7 +20,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -40,7 +40,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_BASTOK] =

@@ -49,7 +49,7 @@ CCharHealthPacket::CCharHealthPacket(CCharEntity* PChar)
         ref<uint32>(0x1C) = monstrosity::GetPackedMonstrosityName(PChar);
     }
 
-    if (!(PChar->nameflags.flags & FLAG_ANON))
+    if (!PChar->isAnon())
     {
         ref<uint8>(0x20) = PChar->GetMJob();
         ref<uint8>(0x21) = PChar->GetMLevel();

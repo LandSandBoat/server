@@ -6,12 +6,12 @@
 -- Steel Bones : !pos -185.766 1.999 -57.631 236
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)
 
 quest.reward =
 {
     fame     = 80,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.TARGE,
 }
 
@@ -19,10 +19,10 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3 and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getFameLevel(xi.fameArea.BASTOK) >= 3 and
                 player:getMainLvl() >= 31 and
-                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
+                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -42,7 +42,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_BASTOK] =

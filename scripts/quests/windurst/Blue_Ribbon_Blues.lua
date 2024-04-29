@@ -9,12 +9,12 @@
 local eldiemeID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
 
 quest.reward =
 {
     fame  = 140,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     title = xi.title.GHOSTIE_BUSTER,
 }
 
@@ -22,9 +22,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WATER_WAY_TO_GO) and
-                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5 and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WATER_WAY_TO_GO) and
+                player:getFameLevel(xi.fameArea.WINDURST) >= 5 and
                 not quest:getMustZone(player)
         end,
 
@@ -101,7 +101,7 @@ quest.sections =
     -- to accepting, the Prog variable is reset to 0 when transitioning to this block.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.THE_ELDIEME_NECROPOLIS] =
@@ -231,7 +231,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 quest:getMustZone(player)
         end,
 

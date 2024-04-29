@@ -7,12 +7,12 @@
 local northenSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS)
 
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
 }
 
 local flowerItems =
@@ -54,7 +54,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status ~= QUEST_COMPLETED
+            return status ~= xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -99,7 +99,7 @@ quest.sections =
                         end
 
                         -- Start quest if it wasn't.
-                        if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_AVAILABLE then
+                        if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_AVAILABLE then
                             quest:begin(player)
                         end
                     end
@@ -110,7 +110,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =

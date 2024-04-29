@@ -71,22 +71,22 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local vault = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
+    local vault = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
     local mLvl = player:getMainLvl()
 
     if
-        vault == QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and
+        vault == xi.questStatus.QUEST_AVAILABLE and
+        player:getFameLevel(xi.fameArea.NORG) >= 3 and
         mLvl >= 5
     then
         player:startEvent(36, xi.ki.SEALED_IRON_BOX) -- Start quest
-    elseif vault == QUEST_ACCEPTED then
+    elseif vault == xi.questStatus.QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.SEALED_IRON_BOX) then
             player:startEvent(38) -- Finish quest
         else
             player:startEvent(37, xi.ki.MAP_OF_SEA_SERPENT_GROTTO) -- Reminder/Directions Dialogue
         end
-    elseif vault == QUEST_COMPLETED then
+    elseif vault == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(39) -- New Standard Dialogue for everyone who has completed the quest
     end
 end
@@ -96,7 +96,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 36 and option == 1 then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
     elseif csid == 38 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SCROLL_OF_TONKO_ICHI)
@@ -104,8 +104,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delKeyItem(xi.ki.SEALED_IRON_BOX)
             player:addItem(xi.item.SCROLL_OF_TONKO_ICHI) -- Scroll of Tonko: Ichi
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TONKO_ICHI)
-            player:addFame(xi.quest.fame_area.NORG, 50)
-            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
+            player:addFame(xi.fameArea.NORG, 50)
+            player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
         end
     end
 end

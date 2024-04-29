@@ -8,7 +8,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local imprimatursSpent = 0 -- TODO: Confirm this
-    local adoulinFame = player:getFameLevel(xi.quest.fame_area.ADOULIN)
+    local adoulinFame = player:getFameLevel(xi.fameArea.ADOULIN)
 
     -- TODO: Hook these up
     local pioneersRank = 0

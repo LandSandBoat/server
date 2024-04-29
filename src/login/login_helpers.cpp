@@ -175,6 +175,11 @@ namespace loginHelpers
             return -1;
         }
 
+        if (_sql->Query("INSERT INTO char_flags(charid) VALUES(%u) ON DUPLICATE KEY UPDATE disconnecting = disconnecting", charid) == SQL_ERROR)
+        {
+            return -1;
+        }
+
         if (_sql->Query("INSERT INTO char_jobs(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid",
                         charid, createchar->m_mjob) == SQL_ERROR)
         {

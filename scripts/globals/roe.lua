@@ -71,7 +71,7 @@ local checks =
     end,
 
     questComplete = function(self, player, params) -- Player has { KINGDOM, QUEST } marked complete
-        return player:getQuestStatus(self.reqs.questComplete[1], self.reqs.questComplete[2]) == QUEST_COMPLETED
+        return player:getQuestStatus(self.reqs.questComplete[1], self.reqs.questComplete[2]) == xi.questStatus.QUEST_COMPLETED
     end,
 
     missionComplete = function(self, player, params) -- Player has { NATION, MISSION } marked complete

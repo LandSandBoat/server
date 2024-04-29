@@ -5,12 +5,12 @@
 -- Sattal-Mansal : !pos 40 3 -53 245
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     keyItem = xi.ki.CORUSCANT_ROSARY,
 }
 
@@ -18,7 +18,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasKeyItem(xi.ki.SILVER_BELL)
         end,
 
@@ -36,7 +36,7 @@ quest.sections =
                 -- This event flags both Mysteries of Beadeaux I and II
                 [89] = function(player, csid, option, npc)
                     quest:begin(player)
-                    player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
+                    player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
                 end,
             },
         },
@@ -44,7 +44,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.LOWER_JEUNO] =

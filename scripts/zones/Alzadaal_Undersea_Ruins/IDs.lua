@@ -39,23 +39,18 @@ zones[xi.zone.ALZADAAL_UNDERSEA_RUINS] =
     },
     mob =
     {
-        NEPIONIC_SOULFLAYER     = 17072129,
-        COOKIEDUSTER_LIPIROON_PH =
-        {
-            [17072142] = 17072150,
-            [17072144] = 17072150,
-        },
-        OB                      = 17072171,
-        CHEESE_HOARDER_GIGIROON = 17072172,
-        ARMED_GEARS             = 17072178,
-        WULGARU                 = 17072179,
+        NEPIONIC_SOULFLAYER     = GetFirstID('Nepionic_Soulflayer'),
+        COOKIEDUSTER_LIPIROON   = GetFirstID('Cookieduster_Lipiroon'),
+        OB                      = GetFirstID('Ob'),
+        CHEESE_HOARDER_GIGIROON = GetFirstID('Cheese_Hoarder_Gigiroon'),
+        ARMED_GEARS             = GetFirstID('Armed_Gears'),
+        WULGARU                 = GetFirstID('Wulgaru'),
 
     },
     npc =
     {
-        RUNIC_PORTAL_NORTH      = 17072332,
-        RUNIC_PORTAL_SOUTH      = 17072333,
-        NEPIONIC_QM             = 17072367, -- blank_transformations in DB
+        RUNIC_PORTAL_OFFSET = GetFirstID('Runic_Portal'), -- North portal
+        NEPIONIC_QM         = GetFirstID('blank_transformations'),
     },
 }
 

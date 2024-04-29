@@ -8,13 +8,13 @@
 local beadeauxID = zones[xi.zone.BEADEAUX]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_RESCUE)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_RESCUE)
 
 quest.reward =
 {
     exp      = 2000,
     gil      = 5000,
-    fameArea = xi.quest.fame_area.SELBINA_RABAO,
+    fameArea = xi.fameArea.SELBINA_RABAO,
     keyItem  = xi.ki.MAP_OF_THE_RANGUEMONT_PASS,
     title    = xi.title.HONORARY_CITIZEN_OF_SELBINA,
 }
@@ -24,7 +24,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             -- TODO: Fame requirement needs verification
-            return status == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 1
+            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.SELBINA_RABAO) >= 1
         end,
 
         [xi.zone.SELBINA] =
@@ -44,7 +44,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SELBINA] =
@@ -101,7 +101,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.SELBINA] =

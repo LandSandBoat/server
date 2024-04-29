@@ -454,25 +454,26 @@ enum SKILLCHAIN_ELEMENT
 #define MAX_SKILLCHAIN_COUNT (5)
 DECLARE_FORMAT_AS_UNDERLYING(SKILLCHAIN_ELEMENT);
 
-enum IMMUNITY : uint16
+enum IMMUNITY : uint32
 {
-    IMMUNITY_NONE        = 0x00,
-    IMMUNITY_SLEEP       = 0x01,
-    IMMUNITY_GRAVITY     = 0x02,
-    IMMUNITY_BIND        = 0x04,
-    IMMUNITY_STUN        = 0x08,
-    IMMUNITY_SILENCE     = 0x10,   // 16
-    IMMUNITY_PARALYZE    = 0x20,   // 32
-    IMMUNITY_BLIND       = 0x40,   // 64
-    IMMUNITY_SLOW        = 0x80,   // 128
-    IMMUNITY_POISON      = 0x100,  // 256
-    IMMUNITY_ELEGY       = 0x200,  // 512
-    IMMUNITY_REQUIEM     = 0x400,  // 1024
-    IMMUNITY_LIGHT_SLEEP = 0x800,  // 2048
-    IMMUNITY_DARK_SLEEP  = 0x1000, // 4096
-    IMMUNITY_ASPIR       = 0x2000, // 8192
-    IMMUNITY_TERROR      = 0x4000, // 16384
-    IMMUNITY_DISPEL      = 0x8000, // 32768
+    IMMUNITY_NONE        = 0x00000000,
+    IMMUNITY_SLEEP       = 0x00000001,
+    IMMUNITY_GRAVITY     = 0x00000002,
+    IMMUNITY_BIND        = 0x00000004,
+    IMMUNITY_STUN        = 0x00000008,
+    IMMUNITY_SILENCE     = 0x00000010, // 16
+    IMMUNITY_PARALYZE    = 0x00000020, // 32
+    IMMUNITY_BLIND       = 0x00000040, // 64
+    IMMUNITY_SLOW        = 0x00000080, // 128
+    IMMUNITY_POISON      = 0x00000100, // 256
+    IMMUNITY_ELEGY       = 0x00000200, // 512
+    IMMUNITY_REQUIEM     = 0x00000400, // 1024
+    IMMUNITY_LIGHT_SLEEP = 0x00000800, // 2048
+    IMMUNITY_DARK_SLEEP  = 0x00001000, // 4096
+    IMMUNITY_ASPIR       = 0x00002000, // 8192
+    IMMUNITY_TERROR      = 0x00004000, // 16384
+    IMMUNITY_DISPEL      = 0x00008000, // 32768
+    IMMUNITY_PETRIFY     = 0x00010000, // 65536
 };
 DECLARE_FORMAT_AS_UNDERLYING(IMMUNITY);
 
@@ -567,6 +568,7 @@ public:
     bool isAlive();
     bool isInAssault();
     bool isInDynamis();
+    bool isInMogHouse();
     bool hasImmunity(uint32 imID);
     bool isAsleep();
     bool isMounted();
@@ -746,7 +748,7 @@ public:
     health_t health{}; // hp,mp,tp
     stats_t  stats{};
     skills_t WorkingSkills{};
-    uint16   m_Immunity;     // Mob immunity
+    uint32   m_Immunity;     // Mob immunity
     uint16   m_magicEvasion; // store this so it can be removed easily
     bool     m_unkillable;   // entity is not able to die (probably until some action removes this flag)
 

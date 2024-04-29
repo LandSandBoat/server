@@ -14,14 +14,14 @@
 local mhauraID = zones[xi.zone.MHAURA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ITS_RAINING_MANNEQUINS)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ITS_RAINING_MANNEQUINS)
 
 quest.sections =
 {
     -- Speak to Fyi Chalmwoh at G-8 in Mhaura (in the Goldsmithing shop).
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.MHAURA] =
@@ -40,7 +40,7 @@ quest.sections =
     -- Now go to Selbina and talk to Ramona at H-9 in the Weaver's shop. She'll give you Key Item Ye Olde Mannequin Catalogue.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 0
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 0
         end,
 
         [xi.zone.MHAURA] =
@@ -67,7 +67,7 @@ quest.sections =
     -- Now go to Northern San d'Oria and talk to Cheupirudaux at F-3 in front of the Woodworking Guild. He'll give you Key Item Mannequin Joint Diagrams.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 1
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 1
         end,
 
         [xi.zone.MHAURA] =
@@ -93,7 +93,7 @@ quest.sections =
     -- Now go back to Mhaura and trade all 5 pieces to Fyi Chalmwoh.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 2
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 2
         end,
 
         [xi.zone.MHAURA] =
@@ -134,7 +134,7 @@ quest.sections =
     -- You have to wait about one earth minute to get your reward.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 3
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 3
         end,
 
         [xi.zone.MHAURA] =

@@ -5,7 +5,7 @@
 -- LADYBUG_WING: !additem 2506
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS)
+local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS)
 
 quest.reward =
 {
@@ -18,7 +18,7 @@ quest.sections =
     -- After speaking with Wyatt, collect four Ladybug Wings.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =
@@ -42,7 +42,7 @@ quest.sections =
     -- Trade the wings to Wyatt to receive your reward.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED or status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_ACCEPTED or status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =

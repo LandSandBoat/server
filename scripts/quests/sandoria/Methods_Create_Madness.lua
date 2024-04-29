@@ -7,12 +7,12 @@ local southernSandOriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local seaSerpentGrottoID = zones[xi.zone.SEA_SERPENT_GROTTO]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
 }
 
 quest.sections =
@@ -20,7 +20,7 @@ quest.sections =
     -- Talk to Balasiel in Southern San d'Oria who will give you the Spear of Trials and the Weapon Training Guide.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:canEquipItem(xi.item.SPEAR_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.POLEARM) / 10 >= 240 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
@@ -58,7 +58,7 @@ quest.sections =
     -- Bring this back to Balasiel for your reward.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -94,7 +94,7 @@ quest.sections =
                     if option == 1 and not player:hasItem(xi.item.SPEAR_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.item.SPEAR_OF_TRIALS)
                     elseif option == 2 then
-                        player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS)
+                        player:delQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end

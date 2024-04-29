@@ -12,7 +12,7 @@
 local talaccaCoveID = zones[xi.zone.TALACCA_COVE]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
+local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
 
 quest.reward =
 {
@@ -26,7 +26,7 @@ quest.sections =
     -- Section: Quest available
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL
+            return status == xi.questStatus.QUEST_AVAILABLE and player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -51,7 +51,7 @@ quest.sections =
     -- Section: Quest accepted
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -141,9 +141,9 @@ quest.sections =
             -- but before finishing Equipped for all Occasions.
             -- This charvar is cleaned up on complete of 'Equipped for all Occasions' when quest:complete() is called.
 
-            return status == QUEST_COMPLETED and
-                xi.quest.getVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS, 'Stage') == 0 and
-                not player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
+            return status == xi.questStatus.QUEST_COMPLETED and
+                xi.quest.getVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS, 'Stage') == 0 and
+                not player:hasCompletedQuest(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -158,7 +158,7 @@ quest.sections =
             onEventFinish =
             {
                 [552] = function(player, csid, option, npc)
-                    xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS, 'Stage', 1)
+                    xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS, 'Stage', 1)
                 end,
             },
         },

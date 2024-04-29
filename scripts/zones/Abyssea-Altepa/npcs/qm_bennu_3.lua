@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.BENNU_3, { xi.ki.RESPLENDENT_ROC_QUILL })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.BENNU_OFFSET + 8, { xi.ki.RESPLENDENT_ROC_QUILL })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

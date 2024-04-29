@@ -7,7 +7,7 @@
 local yuhtungaID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.WRATH_OF_THE_OPO_OPOS)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.WRATH_OF_THE_OPO_OPOS)
 
 quest.reward =
 {
@@ -19,7 +19,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.YUHTUNGA_JUNGLE] =

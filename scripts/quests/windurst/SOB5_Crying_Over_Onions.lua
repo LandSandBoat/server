@@ -4,12 +4,12 @@
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
 
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
 }
 
 quest.sections =
@@ -17,8 +17,8 @@ quest.sections =
     -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.ONION_RINGS)
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -29,7 +29,7 @@ quest.sections =
                     if quest:getVar(player, 'Reward') == 1 then
                         if
                             player:getMainLvl() >= 5 and
-                            player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5 and
+                            player:getFameLevel(xi.fameArea.WINDURST) >= 5 and
                             not quest:getMustZone(player)
                         then
                             return quest:progressEvent(496) -- Quest starting event.
@@ -65,7 +65,7 @@ quest.sections =
     -- Section: Quest accepeted in time.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -215,8 +215,8 @@ quest.sections =
     -- Section: Quest completed.
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE) == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_COMPLETED and
+                player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_PROMISE) == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_WINDURST] =

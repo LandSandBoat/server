@@ -7,12 +7,12 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT)
 
 quest.reward =
 {
     fame = 50,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
 }
 
 quest.sections =
@@ -20,7 +20,7 @@ quest.sections =
     -- Section: Quest available. Player doesn't have Limit Breaker KI.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 xi.settings.main.MAX_LEVEL >= 75 and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
@@ -64,7 +64,7 @@ quest.sections =
     -- Section: Quest available. Got Limit Breaker KI. Era server section.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 xi.settings.main.MAX_LEVEL == 75 and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
@@ -85,7 +85,7 @@ quest.sections =
     -- Section: Quest available. Got Limit Breaker KI. Can actually raise level cap.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 xi.settings.main.MAX_LEVEL >= 80 and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
@@ -115,7 +115,7 @@ quest.sections =
     -- Section: Quest accepted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.RULUDE_GARDENS] =

@@ -13,13 +13,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local makingHeadlines = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
+    local makingHeadlines = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
 
     -- bitmask of progress: 0 = Kyume-Romeh, 1 = Yuyuju, 2 = Hiwom-Gomoi, 3 = Umumu, 4 = Mahogany Door
     local prog = player:getCharVar('QuestMakingHeadlines_var')
 
     if
-        makingHeadlines == QUEST_ACCEPTED and
+        makingHeadlines == xi.questStatus.QUEST_ACCEPTED and
         utils.mask.isFull(prog, 4) and
         not utils.mask.getBit(prog, 4)
     then

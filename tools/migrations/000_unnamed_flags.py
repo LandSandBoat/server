@@ -12,7 +12,13 @@ def check_preconditions(cur):
 def needs_to_run(cur):
     # ensure nnameflags does not exist
     cur.execute("SHOW COLUMNS FROM `chars` LIKE 'nnameflags';")
-    if not cur.fetchone():
+    nnameflags = cur.fetchone()
+
+    # ensure we haven't done the future migration yet
+    cur.execute("SHOW COLUMNS FROM `chars` LIKE 'settings';")
+    settings = cur.fetchone()
+
+    if not nnameflags and not settings:
         return True
     return False
 

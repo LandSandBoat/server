@@ -3,7 +3,7 @@
 -- Angelica !pos -64 -9.25 -9 238
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
 
 local poseItems =
 {
@@ -34,7 +34,7 @@ local poseItems =
 quest.reward =
 {
     fame = 75,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     item = xi.item.COPY_OF_ANCIENT_BLOOD,
     title = xi.title.SUPER_MODEL,
     keyItem = xi.ki.ANGELICAS_AUTOGRAPH,
@@ -45,7 +45,7 @@ quest.sections =
     -- Section: Quest available
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:needToZone() == false
+            return status == xi.questStatus.QUEST_AVAILABLE and player:needToZone() == false
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -94,7 +94,7 @@ quest.sections =
     -- Section: Quest accepted
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 0
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 0
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -116,7 +116,7 @@ quest.sections =
     -- Section: Finish quest
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog ~= 0
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog ~= 0
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -144,7 +144,7 @@ quest.sections =
                 end,
 
                 [102] = function(player, csid, option, npc) -- Quest failed.
-                    player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+                    player:delQuest(xi.questLog.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
                     quest:setVar(player, 'Prog', 0) -- TODO: Confirm that initial CS has to be repeated aswell upon quest failure. If not, set var to 1 here.
                     quest:setVar(player, 'Stage', 0)
                     player:addTitle(xi.title.LOWER_THAN_THE_LOWEST_TUNNEL_WORM)
@@ -157,7 +157,7 @@ quest.sections =
     -- Section: Quest Completed
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.WINDURST_WATERS] =

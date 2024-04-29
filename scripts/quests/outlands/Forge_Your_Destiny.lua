@@ -13,12 +13,12 @@ local norgID      = zones[xi.zone.NORG]
 local zitahID     = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.NORG,
+    fameArea = xi.fameArea.NORG,
     item = xi.item.MUMEITO,
     title = xi.title.BUSHIDO_BLADE,
 }
@@ -27,7 +27,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL
+            return status == xi.questStatus.QUEST_AVAILABLE and player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL
         end,
 
         [xi.zone.NORG] =
@@ -47,7 +47,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.KONSCHTAT_HIGHLANDS] =

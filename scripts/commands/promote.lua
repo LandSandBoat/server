@@ -80,26 +80,8 @@ commandObj.onTrigger = function(player, target, level)
             targ:delMod(xi.mod.MDEF, 2500)
         end
 
-        -- remove GM flags
-        local gmFlags =
-        {
-            GM     = 0x04000000,
-            SENIOR = 0x01000000, -- Do NOT set these flags. These are here to
-            LEAD   = 0x02000000, -- ensure all GM status is removed.
-        }
-
-        -- TODO: Convert this to a loop
-        if targ:checkNameFlags(gmFlags.GM) then
-            targ:setFlag(gmFlags.GM)
-        end
-
-        if targ:checkNameFlags(gmFlags.SENIOR) then
-            targ:setFlag(gmFlags.SENIOR)
-        end
-
-        if targ:checkNameFlags(gmFlags.LEAD) then
-            targ:setFlag(gmFlags.LEAD)
-        end
+        -- See https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037, flags0_t GmLevel
+        player:setVisibleGMLevel(0)
 
         -- remove hidden
         if targ:getCharVar('GMHidden') == 1 then
@@ -111,9 +93,7 @@ commandObj.onTrigger = function(player, target, level)
         targ:setCostume(0)
 
         -- remove wallhack
-        if targ:checkNameFlags(0x00000200) then
-            targ:setFlag(0x00000200)
-        end
+        targ:setWallhack(false)
     end
 
     player:printToPlayer(string.format('%s set to tier %i.', targ:getName(), level))

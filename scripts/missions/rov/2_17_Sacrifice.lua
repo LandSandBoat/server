@@ -35,9 +35,9 @@ mission.sections =
                     if mission:getVar(player, 'Status') <= 1 then
                         if not xi.rhapsodies.charactersAvailable(player) then
                             player:messageSpecial(walkOfEchoesID.text.CANNOT_PROGRESS_MISSION, 0, 2)
-                        elseif player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_FORBIDDEN_REUNION) == QUEST_ACCEPTED then
+                        elseif player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.A_FORBIDDEN_REUNION) == xi.questStatus.QUEST_ACCEPTED then
                             player:messageSpecial(walkOfEchoesID.text.CANNOT_PROGRESS_QUEST, 0, 1)
-                        elseif player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.CHAMPION_OF_THE_DAWN) == QUEST_ACCEPTED then
+                        elseif player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.CHAMPION_OF_THE_DAWN) == xi.questStatus.QUEST_ACCEPTED then
                             player:messageSpecial(walkOfEchoesID.text.CANNOT_PROGRESS_QUEST, 0, 0)
                         else
                             -- NOTE: Parameter 1 changes, but no text change was noted in comparisons.  The below event call is not

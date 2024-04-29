@@ -9,12 +9,12 @@ local eastRonfaureID     = zones[xi.zone.EAST_RONFAURE]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUES_SERMON)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_VICASQUES_SERMON)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     item     = xi.item.BRASS_RING,
     title    = xi.title.THE_BENEVOLENT_ONE,
 }
@@ -23,8 +23,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WATERS_OF_THE_CHEVAL)
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.WATERS_OF_THE_CHEVAL)
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -42,7 +42,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =

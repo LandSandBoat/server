@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FUMBLING_FRIAR) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FUMBLING_FRIAR) == xi.questStatus.QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.ORNATE_PACKAGE)
     then
         npcUtil.giveKeyItem(player, xi.ki.ORNATE_PACKAGE)

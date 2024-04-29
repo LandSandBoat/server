@@ -11,7 +11,7 @@
 local pastBatalliaID = zones[xi.zone.BATALLIA_DOWNS_S]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.CHASING_SHADOWS)
+local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.CHASING_SHADOWS)
 
 quest.reward =
 {
@@ -22,8 +22,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BLOOD_OF_HEROES) and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BLOOD_OF_HEROES) and
                 quest:getVar(player, 'Timer') <= VanadielUniqueDay()
         end,
 
@@ -43,7 +43,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =
@@ -182,7 +182,7 @@ quest.sections =
 
                 [117] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FACE_OF_THE_FUTURE)
+                        player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.FACE_OF_THE_FUTURE)
                         player:setPos(-49.903, 0.293, 436.922, 0, xi.zone.BATALLIA_DOWNS)
                     end
                 end,

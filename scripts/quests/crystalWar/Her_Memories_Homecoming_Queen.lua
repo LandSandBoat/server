@@ -12,7 +12,7 @@
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_HOMECOMING_QUEEN)
+local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_HOMECOMING_QUEEN)
 
 quest.reward =
 {
@@ -36,7 +36,7 @@ local function handleQuestCompletion(player, csid, option, npc)
         end
     end
 
-    player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, subQuestData[csid][1])
+    player:completeQuest(xi.questLog.CRYSTAL_WAR, subQuestData[csid][1])
 
     if numKeyItems < 2 then
         player:messageName(ID.text.FRAGMENT_FAR_TOO_SMALL, nil, subQuestData[csid][2])
@@ -58,7 +58,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getCurrentMission(xi.mission.log_id.WOTG) == xi.mission.id.wotg.HER_MEMORIES
         end,
 
@@ -85,8 +85,8 @@ quest.sections =
     -- Her Memories: Old Bean
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
-                player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_OLD_BEAN) ~= QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_ACCEPTED and
+                player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_OLD_BEAN) ~= xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.PORT_SAN_DORIA] =
@@ -111,7 +111,7 @@ quest.sections =
             onEventFinish =
             {
                 [792] = function(player, csid, option, npc)
-                    player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_OLD_BEAN)
+                    player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_OLD_BEAN)
 
                     npcUtil.giveKeyItem(player, xi.ki.THIERRIDES_BEAN_CREATION)
                 end,
@@ -147,8 +147,8 @@ quest.sections =
     -- Her Memories: The Faux Pas
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
-                player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_THE_FAUX_PAS) ~= QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_ACCEPTED and
+                player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_THE_FAUX_PAS) ~= xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -176,7 +176,7 @@ quest.sections =
             onEventFinish =
             {
                 [869] = function(player, csid, option, npc)
-                    player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_THE_FAUX_PAS)
+                    player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_THE_FAUX_PAS)
 
                     quest:setVar(player, 'Prog2', 1)
                 end,
@@ -189,8 +189,8 @@ quest.sections =
     -- Her Memories: The Grave Resolve
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
-                player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_THE_GRAVE_RESOLVE) ~= QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_ACCEPTED and
+                player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_THE_GRAVE_RESOLVE) ~= xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.CHATEAU_DORAGUILLE] =
@@ -209,7 +209,7 @@ quest.sections =
             onEventFinish =
             {
                 [571] = function(player, csid, option, npc)
-                    player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_THE_GRAVE_RESOLVE)
+                    player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_THE_GRAVE_RESOLVE)
 
                     quest:setVar(player, 'Prog3', 1)
                 end,

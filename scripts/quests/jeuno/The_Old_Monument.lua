@@ -10,7 +10,7 @@ local buburimuID   = zones[xi.zone.BUBURIMU_PENINSULA]
 local lowerJeunoID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT)
 
 quest.reward =
 {
@@ -22,7 +22,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL
         end,
 
@@ -83,7 +83,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return vars.Prog == 3 or
-                status == QUEST_COMPLETED
+                status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.BUBURIMU_PENINSULA] =

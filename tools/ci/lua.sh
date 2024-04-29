@@ -44,6 +44,7 @@ global_objects=(
 
     set
     printf
+    fmt
     switch
     getVanaMidnight
     getMidnight
@@ -68,10 +69,6 @@ global_objects=(
     BattlefieldQuest
     Limbus
     SeasonalEvent
-
-    QUEST_AVAILABLE
-    QUEST_ACCEPTED
-    QUEST_COMPLETED
 
     onBattlefieldHandlerInitialise
     applyResistanceAddEffect

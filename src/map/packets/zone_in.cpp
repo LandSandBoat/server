@@ -30,6 +30,111 @@
 #include "status_effect_container.h"
 #include "zone.h"
 
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x000A
+
+// PS2: GP_SERV_POS_HEAD
+struct GP_SERV_POS_HEAD
+{
+    uint32_t UniqueNo;      // PS2: UniqueNo
+    uint16_t ActIndex;      // PS2: ActIndex
+    uint8_t  padding00;     // PS2: (Removed; was SendFlg.)
+    int8_t   dir;           // PS2: dir
+    float    x;             // PS2: x
+    float    z;             // PS2: y
+    float    y;             // PS2: z
+    uint32_t flags1;        // PS2: (Multiple fields; bits.)
+    uint8_t  Speed;         // PS2: Speed
+    uint8_t  SpeedBase;     // PS2: SpeedBase
+    uint8_t  HpMax;         // PS2: HpMax
+    uint8_t  server_status; // PS2: server_status
+    uint32_t flags2;        // PS2: (Multiple fields; bits.)
+    uint32_t flags3;        // PS2: (Multiple fields; bits.)
+    uint32_t flags4;        // PS2: (Multiple fields; bits.)
+    uint32_t BtTargetID;    // PS2: BtTargetID
+};
+
+// PS2: SAVE_LOGIN_STATE
+enum class SAVE_LOGIN_STATE : uint32_t
+{
+    SAVE_LOGIN_STATE_NONE           = 0,
+    SAVE_LOGIN_STATE_MYROOM         = 1,
+    SAVE_LOGIN_STATE_GAME           = 2,
+    SAVE_LOGIN_STATE_POLEXIT        = 3,
+    SAVE_LOGIN_STATE_JOBEXIT        = 4,
+    SAVE_LOGIN_STATE_POLEXIT_MYROOM = 5,
+    SAVE_LOGIN_STATE_END            = 6
+};
+
+// PS2: GP_MYROOM_DANCER
+struct GP_MYROOM_DANCER_PKT
+{
+    uint16_t mon_no;       // PS2: mon_no
+    uint16_t face_no;      // PS2: face_no
+    uint8_t  mjob_no;      // PS2: mjob_no
+    uint8_t  hair_no;      // PS2: hair_no
+    uint8_t  size;         // PS2: size
+    uint8_t  sjob_no;      // PS2: sjob_no
+    uint32_t get_job_flag; // PS2: get_job_flag
+    int8_t   job_lev[16];  // PS2: job_lev
+    uint16_t bp_base[7];   // PS2: bp_base
+    int16_t  bp_adj[7];    // PS2: bp_adj
+    int32_t  hpmax;        // PS2: hpmax
+    int32_t  mpmax;        // PS2: mpmax
+    uint8_t  sjobflg;      // PS2: sjobflg
+    uint8_t  unknown00[3]; // Unknown
+};
+
+// PS2: SAVE_CONF
+struct SAVE_CONF_PKT
+{
+    uint32_t unknown00[3]; // PS2: (Multiple fields; bits.)
+};
+
+// PS2: GP_SERV_LOGIN
+struct GP_SERV_LOGIN
+{
+    uint16_t             id : 9;
+    uint16_t             size : 7;
+    uint16_t             sync;
+    GP_SERV_POS_HEAD     PosHead;            // PS2: PosHead
+    uint32_t             ZoneNo;             // PS2: ZoneNo
+    uint32_t             ntTime;             // PS2: ntTime
+    uint32_t             ntTimeSec;          // PS2: ntTimeSec
+    uint32_t             GameTime;           // PS2: GameTime
+    uint16_t             EventNo;            // PS2: EventNo
+    uint16_t             MapNumber;          // PS2: MapNumber
+    uint16_t             GrapIDTbl[9];       // PS2: GrapIDTbl
+    uint16_t             MusicNum[5];        // PS2: MusicNum
+    uint16_t             SubMapNumber;       // PS2: SubMapNumber
+    uint16_t             EventNum;           // PS2: EventNum
+    uint16_t             EventPara;          // PS2: EventPara
+    uint16_t             EventMode;          // PS2: EventMode
+    uint16_t             WeatherNumber;      // PS2: WeatherNumber
+    uint16_t             WeatherNumber2;     // PS2: WeatherNumber2
+    uint32_t             WeatherTime;        // PS2: WeatherTime
+    uint32_t             WeatherTime2;       // PS2: WeatherTime2
+    uint32_t             WeatherOffsetTime;  // PS2: WeatherOffsetTime
+    uint32_t             ShipStart;          // PS2: ShipStart
+    uint16_t             ShipEnd;            // PS2: ShipEnd
+    uint16_t             IsMonstrosity;      // PS2: (New; did not exist.)
+    SAVE_LOGIN_STATE     LoginState;         // PS2: LoginState
+    char                 name[16];           // PS2: name
+    int32_t              certificate[2];     // PS2: certificate
+    uint16_t             unknown00;          // Unknown
+    uint16_t             ZoneSubNo;          // PS2: (New; did not exist.)
+    uint32_t             PlayTime;           // PS2: PlayTime
+    uint32_t             DeadCounter;        // PS2: DeadCounter
+    uint8_t              MyroomSubMapNumber; // PS2: (New; did not exist.)
+    uint8_t              unknown01;          // Unknown
+    uint16_t             MyroomMapNumber;    // PS2: MyroomMapNumber
+    uint16_t             SendCount;          // PS2: SendCount
+    uint8_t              MyRoomExitBit;      // PS2: MyRoomExitBit
+    uint8_t              MogZoneFlag;        // PS2: MogZoneFlag
+    GP_MYROOM_DANCER_PKT Dancer;             // PS2: Dancer
+    SAVE_CONF_PKT        ConfData;           // PS2: ConfData
+    uint32_t             Ex;                 // PS2: (New; did not exist.)
+};
+
 // Returns the Model ID of the mog house to be used
 // This is not the same as the actual Zone ID!
 // (These used to be entries in the ZONEID enum, but that was wrong, knowing what we know now)
@@ -162,7 +267,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     look_t* look      = (PChar->getStyleLocked() ? &PChar->mainlook : &PChar->look);
     ref<uint8>(0x44)  = look->face;
     ref<uint8>(0x45)  = look->race;
-    ref<uint16>(0x46) = PChar->menuConfigFlags.flags & NFLAG_DISPLAY_HEAD ? 0 : look->head + 0x1000;
+    ref<uint16>(0x46) = PChar->playerConfig.DisplayHeadOffFlg ? 0x0 : look->head + 0x1000;
     ref<uint16>(0x48) = look->body + 0x2000;
     ref<uint16>(0x4A) = look->hands + 0x3000;
     ref<uint16>(0x4C) = look->legs + 0x4000;
@@ -245,15 +350,9 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
 
     ref<uint32>(0xE8) = PChar->GetMaxHP();
     ref<uint32>(0xEC) = PChar->GetMaxMP();
+    // ref<uint8>(0xEF) = TODO: implement flag of 1 = high for "has unlocked sub and can change jobs"
 
-    // MenuConfig (F4-F7) -- see CMenuConfigPacket
-    ref<uint8>(0xF4) = 0x18 | PChar->menuConfigFlags.byte1 | (PChar->nameflags.flags & static_cast<uint32>(FLAG_INVITE) ? static_cast<uint32>(NFLAG_INVITE) : 0);
-    ref<uint8>(0xF5) = PChar->menuConfigFlags.byte2 | (PChar->m_hasAutoTarget ? 0 : NFLAG_AUTOTARGET >> 8);
-    ref<uint8>(0xF6) = PChar->menuConfigFlags.byte3;
-    ref<uint8>(0xF7) = PChar->menuConfigFlags.byte4;
-
-    // ChatFilterFlags (F8-FF)
-    ref<uint64>(0xF8) = PChar->chatFilterFlags;
+    std::memcpy(&data[offsetof(GP_SERV_LOGIN, ConfData)], &PChar->playerConfig, sizeof(SAVE_CONF));
 
     ref<uint8>(0x100) = 0x01; // observed: RoZ = 3, CoP = 5, ToAU = 9, WoTG = 11, SoA/original areas = 1
 

@@ -55,7 +55,6 @@ public:
 
     uint16 getID() const;
     uint16 getAnimationID() const;
-    uint16 getPetAnimationID() const;
     uint8  getAoe() const;
     float  getDistance() const;
     uint8  getFlag() const;

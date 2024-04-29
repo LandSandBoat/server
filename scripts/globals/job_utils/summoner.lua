@@ -79,6 +79,28 @@ local function getBaseMPCost(player, ability)
         [xi.jobAbility.ECLIPSE_BITE]     = 109,
         [xi.jobAbility.LUNAR_BAY]        = 174,
         [xi.jobAbility.IMPACT]           = 222,
+        -- Shiva
+        [xi.jobAbility.AXE_KICK]         =  10,
+        [xi.jobAbility.BLIZZARD_II]      =  24,
+        [xi.jobAbility.SLEEPGA]          =  56,
+        [xi.jobAbility.FROST_ARMOR]      =  63,
+        [xi.jobAbility.DOUBLE_SLAP]      =  96,
+        [xi.jobAbility.BLIZZARD_IV]      = 118,
+        [xi.jobAbility.DIAMOND_STORM]    = 138,
+        [xi.jobAbility.RUSH]             = 164,
+        [xi.jobAbility.HEAVENLY_STRIKE]  = 182,
+        [xi.jobAbility.CRYSTAL_BLESSING] = 201,
+        -- Ramuh
+        [xi.jobAbility.SHOCK_STRIKE]     =   6,
+        [xi.jobAbility.THUNDER_II]       =  24,
+        [xi.jobAbility.THUNDERSPARK]     =  38,
+        [xi.jobAbility.ROLLING_THUNDER]  =  52,
+        [xi.jobAbility.SHOCK_SQUALL]     =  67,
+        [xi.jobAbility.LIGHTNING_ARMOR]  =  91,
+        [xi.jobAbility.THUNDER_IV]       = 118,
+        [xi.jobAbility.CHAOTIC_STRIKE]   = 164,
+        [xi.jobAbility.THUNDERSTORM]     = 182,
+        [xi.jobAbility.VOLT_STRIKE]      = 229,
         -- Siren
         [xi.jobAbility.WELT]             =   9,
         [xi.jobAbility.ROUNDHOUSE]       =  52,
@@ -151,6 +173,18 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility
         -- check if player is too far from target
         if target:checkDistance(player) >= 22 then
             return xi.msg.basic.TARG_OUT_OF_RANGE, 0
+        end
+
+        local petAction = pet:getCurrentAction()
+
+        -- check if avatar is under status effect
+        if petAction == xi.action.SLEEP or petAction == xi.action.STUN then
+            return xi.msg.basic.PET_CANNOT_DO_ACTION, 0 -- TODO: verify exact message in packet.
+        end
+
+        -- check if avatar is using a move already
+        if petAction == xi.action.PET_MOBABILITY_FINISH then
+            return xi.msg.basic.PET_CANNOT_DO_ACTION, 0 -- TODO: verify exact message in packet.
         end
 
         local baseMPCost = getBaseMPCost(player, petAbility)

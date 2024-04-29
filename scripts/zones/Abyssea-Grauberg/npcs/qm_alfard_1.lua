@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ALFARD_1, { xi.ki.VENOMOUS_HYDRA_FANG })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ALFARD_OFFSET, { xi.ki.VENOMOUS_HYDRA_FANG })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

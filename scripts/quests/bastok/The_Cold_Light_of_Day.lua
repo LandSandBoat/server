@@ -5,12 +5,12 @@
 -- Malene : !pos -173 -5 64 235
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     gil      = 500,
 }
 
@@ -18,7 +18,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -36,7 +36,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status >= QUEST_ACCEPTED
+            return status >= xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MARKETS] =

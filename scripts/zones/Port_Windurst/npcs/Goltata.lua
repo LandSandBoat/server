@@ -9,11 +9,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
+    local wonderWands = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
 
-    if wonderWands == QUEST_ACCEPTED then
+    if wonderWands == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(257, 0, 0, 17091)
-    elseif wonderWands == QUEST_COMPLETED then
+    elseif wonderWands == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(269)
     else
         player:startEvent(232)

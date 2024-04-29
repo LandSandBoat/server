@@ -15,22 +15,22 @@ entity.onTrade = function(player, npc, trade)
     if
         trade:hasItemQty(poeticParchmentID, 1) and
         trade:getItemCount() == 1 and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT) == QUEST_COMPLETED and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR) == QUEST_AVAILABLE
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT) == xi.questStatus.QUEST_COMPLETED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR) == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(101)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local painfulMemory  = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY)
-    local circleOfTime   = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+    local painfulMemory  = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY)
+    local circleOfTime   = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local job            = player:getMainJob()
     local level          = player:getMainLvl()
 
     -- PAINFUL MEMORY (Bard AF1)
     if
-        painfulMemory == QUEST_AVAILABLE and
+        painfulMemory == xi.questStatus.QUEST_AVAILABLE and
         job == xi.job.BRD and
         level >= xi.settings.main.AF1_QUEST_LEVEL
     then
@@ -40,23 +40,23 @@ entity.onTrigger = function(player, npc)
             player:startEvent(137) -- Short dialog for 'Painful Memory'
         end
 
-    elseif painfulMemory == QUEST_ACCEPTED then
+    elseif painfulMemory == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(136) -- During Quest 'Painful Memory'
 
     -- CIRCLE OF TIME (Bard AF3)
     elseif
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM) == QUEST_COMPLETED and
-        circleOfTime == QUEST_AVAILABLE and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_REQUIEM) == xi.questStatus.QUEST_COMPLETED and
+        circleOfTime == xi.questStatus.QUEST_AVAILABLE and
         job == xi.job.BRD and
         level >= xi.settings.main.AF3_QUEST_LEVEL
     then
         player:startEvent(139) -- Start "The Circle of Time"
 
-    elseif circleOfTime == QUEST_ACCEPTED then
+    elseif circleOfTime == xi.questStatus.QUEST_ACCEPTED then
         player:messageSpecial(ID.text.MERTAIRE_RING)
 
     -- DEFAULT DIALOG
-    elseif painfulMemory == QUEST_COMPLETED then
+    elseif painfulMemory == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(135) -- Standard dialog after completed "Painful Memory"
 
     else
@@ -72,8 +72,8 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 101 then
         npcUtil.giveCurrency(player, 'gil', 2100)
         player:tradeComplete()
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
-        player:addFame(xi.quest.fame_area.JEUNO, 30)
+        player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
+        player:addFame(xi.fameArea.JEUNO, 30)
 
         -- Placing this here allows the player to get additional poetic
         -- parchments should they drop them until this quest is complete
@@ -87,14 +87,14 @@ entity.onEventFinish = function(player, csid, option, npc)
         (csid == 137 or csid == 138) and
         option == 1
     then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY)
         player:setCharVar('PainfulMemoryCS', 0)
         player:addKeyItem(xi.ki.MERTAIRES_BRACELET)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MERTAIRES_BRACELET)
 
     -- CIRCLE OF TIME (Bard AF3)
     elseif csid == 139 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
         player:setCharVar('circleTime', 1)
     end
 end

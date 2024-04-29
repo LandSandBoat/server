@@ -9,22 +9,22 @@ local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.crafting.guildPointOnTrade(player, npc, trade, 732, 1)
+    xi.crafting.guildPointOnTrade(player, npc, trade, 732, xi.guild.WOODWORKING)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.crafting.guildPointOnTrigger(player, 731, 1)
+    xi.crafting.guildPointOnTrigger(player, 731, xi.guild.WOODWORKING)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 731 then
-        xi.crafting.guildPointOnEventFinish(player, option, npc, 1)
+        xi.crafting.guildPointOnEventFinish(player, option, npc, xi.guild.WOODWORKING)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 731 then
-        xi.crafting.guildPointOnEventFinish(player, option, npc, 1)
+        xi.crafting.guildPointOnEventFinish(player, option, npc, xi.guild.WOODWORKING)
     elseif csid == 732 then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end

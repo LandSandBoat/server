@@ -29,7 +29,7 @@ local params =
     reward =
     {
         fame = 30,
-        fameArea = xi.quest.fame_area.JEUNO,
+        fameArea = xi.fameArea.JEUNO,
         title = nil,
     },
 }

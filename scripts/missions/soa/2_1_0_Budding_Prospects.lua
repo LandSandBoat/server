@@ -30,11 +30,11 @@ mission.sections =
                     local waitTimer = mission:getVar(player, 'Timer')
 
                     if
-                        player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES) or
+                        player:hasCompletedQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES) or
                         (
                             waitTimer ~= 0 and
                             waitTimer <= VanadielUniqueDay() and
-                            xi.quest.getVar(player, xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES, 'Prog') >= 2
+                            xi.quest.getVar(player, xi.questLog.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES, 'Prog') >= 2
                         )
                     then
                         return mission:progressEvent(8)

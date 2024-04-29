@@ -9,7 +9,7 @@ entity.onTrade = function(player, npc, trade)
     if
         trade:getGil() == 300 and
         trade:getItemCount() == 1 and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_COMPLETED and
         player:getCurrentMission(xi.mission.log_id.TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
     then
         -- Needs a check for at least traded an invitation card to Naja Salaheem

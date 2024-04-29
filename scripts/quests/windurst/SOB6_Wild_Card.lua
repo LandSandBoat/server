@@ -4,12 +4,12 @@
 -- Honoi-Gumoi: !pos -195 -11 -120 238
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.WILD_CARD)
 
 quest.reward =
 {
     fame     = 10,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     title    = xi.title.DREAM_DWELLER,
 }
 
@@ -18,8 +18,8 @@ quest.sections =
     -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -29,7 +29,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMainLvl() >= 5 and
-                        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5 and
+                        player:getFameLevel(xi.fameArea.WINDURST) >= 5 and
                         not quest:getMustZone(player)
                     then
                         return quest:progressEvent(780) -- Quest starting event.
@@ -51,7 +51,7 @@ quest.sections =
     -- Section: Quest accepeted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -162,7 +162,7 @@ quest.sections =
     -- Section: Quest completed.
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.WINDURST_WATERS] =

@@ -4,7 +4,7 @@
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.THE_PROMISE)
 
 local function timedEvents(player, inTime, outATime)
     if
@@ -28,7 +28,7 @@ end
 quest.reward =
 {
     fame     = 10,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     item     = xi.item.PROMISE_BADGE,
 }
 
@@ -37,8 +37,8 @@ quest.sections =
     -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WILD_CARD)
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -48,7 +48,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMainLvl() >= 5 and
-                        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5 and
+                        player:getFameLevel(xi.fameArea.WINDURST) >= 5 and
                         not quest:getMustZone(player)
                     then
                         if player:getRank(xi.nation.WINDURST) < 9 then
@@ -83,7 +83,7 @@ quest.sections =
     -- Section: Quest accepeted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -231,7 +231,7 @@ quest.sections =
     -- Section: Quest completed.
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.PORT_WINDURST] =

@@ -22,52 +22,52 @@ entity.onTrigger = function(player, npc)
 
     -- Bastok Quests.
     local bastokQuests = 0xFFFFFFFE
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA) then
         bastokQuests = bastokQuests - 2         -- Beauty and the Galka.
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK) then
         bastokQuests = bastokQuests - 4         -- Welcome to Bastok.
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR) then
         bastokQuests = bastokQuests - 8         -- Guest of Hauteur.
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CIDS_SECRET) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.CIDS_SECRET) then
         bastokQuests = bastokQuests - 16        -- Cid's Secret.
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_USUAL) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_USUAL) then
         bastokQuests = bastokQuests - 32        -- The Usual.
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE) then
         bastokQuests = bastokQuests - 64        -- Love and Ice(pt.1).
         bastokQuests = bastokQuests - 128     -- Love and Ice(pt.2).
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) then
         bastokQuests = bastokQuests - 256       -- A Test of True Love(pt.1).
         bastokQuests = bastokQuests - 512     -- A Test of True Love(pt.2).
         bastokQuests = bastokQuests - 1024     -- A Test of True Love(pt.3).
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK) then
         bastokQuests = bastokQuests - 2048      -- Lovers in the Dusk
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST) then
         bastokQuests = bastokQuests - 4096      -- Ghosts of the Past(pt.1).
         bastokQuests = bastokQuests - 8192     -- Ghosts of the Past(pt.2).
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING) then
         bastokQuests = bastokQuests - 16384     -- The First Meeting(pt.1).
         bastokQuests = bastokQuests - 32768     -- The First Meeting(pt.2).
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) then
         bastokQuests = bastokQuests - 65536     -- Ayame and Kaede(pt.1).
         bastokQuests = bastokQuests - 131072     -- Ayame and Kaede(pt.2).
         bastokQuests = bastokQuests - 262144     -- Ayame and Kaede(pt.3).
@@ -75,20 +75,20 @@ entity.onTrigger = function(player, npc)
         bastokQuests = bastokQuests - 1048576     -- Ayame and Kaede(pt.5).
     end
 -- *Need to determine the correct csid/appropriate options for this cutscene
-    --if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) then
+    --if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) then
     --    bastokQuests = bastokQuests - 2097152   -- Trial by Earth.
     --end
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND) then
         bastokQuests = bastokQuests - 4194304   -- The Walls of Your Mind(pt.1).
         bastokQuests = bastokQuests - 8388608     -- The Walls of Your Mind(pt.2).
         bastokQuests = bastokQuests - 16777216     -- The Walls of Your Mind(pt.3).
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FADED_PROMISES) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.FADED_PROMISES) then
         bastokQuests = bastokQuests - 33554432  -- Faded Promises.
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.OUT_OF_THE_DEPTHS) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.OUT_OF_THE_DEPTHS) then
         bastokQuests = bastokQuests - 67108864  -- Out of the Depths(pt.1).
 
 -- *Need to determine the appropriate options for this cutscene
@@ -97,22 +97,22 @@ entity.onTrigger = function(player, npc)
 
     -- Other Quests.
     local otherQuests = 0xFFFFFFFE
-    if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER) then
+    if player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER) then
         otherQuests = otherQuests - 2 -- The Puppet Master(pt.1).
         otherQuests = otherQuests - 4 -- The Puppet Master(pt.2).
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS) then
+    if player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS) then
         otherQuests = otherQuests - 8  -- 20 in Pirate Years(pt.1).
         otherQuests = otherQuests - 16    -- 20 in Pirate Years(pt.2).
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) then
+    if player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) then
         otherQuests = otherQuests - 32 -- I'll Take the Big Box.
     end
 
 -- *Need the correct csids
-    -- if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CHASING_DREAMS) then
+    -- if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.CHASING_DREAMS) then
     --     otherQuests = otherQuests - 64  -- Chasing Dreams(pt.1).
     --     otherQuests = otherQuests - 128 -- Chasing Dreams(pt.2).
     -- end

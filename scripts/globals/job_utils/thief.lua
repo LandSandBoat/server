@@ -417,10 +417,18 @@ xi.job_utils.thief.useSteal = function(player, target, ability, action)
         if resist > 0.0625 then
             local auraStealChance = math.min(player:getMerit(xi.merit.AURA_STEAL), 95)
             if math.random(100) < auraStealChance then
+                local targetShadows = target:getMod(xi.mod.UTSUSEMI)
+
                 stolen = player:stealStatusEffect(target)
                 if stolen ~= 0 then
                     ability:setMsg(xi.msg.basic.STEAL_EFFECT)
                     action:setAnimation(target:getID(), 181)
+
+                    if stolen == xi.effect.COPY_IMAGE then
+                        if targetShadows > 0 then
+                            player:setMod(xi.mod.UTSUSEMI, targetShadows)
+                        end
+                    end
                 end
             -- else
             --     effect = target:dispelStatusEffect()

@@ -306,11 +306,20 @@ public:
 
     skills_t RealSkills; // The structure of all the real skills of the character, with an accuracy of 0.1 and not limited by the level
 
-    nameflags_t nameflags;
-    nameflags_t menuConfigFlags;     // These flags are used for MenuConfig packets. Some nameflags values are duplicated.
-    uint64      chatFilterFlags;     // Chat filter flags, raw object bytes from incoming packet
-    uint32      lastOnline{ 0 };     // UTC Unix Timestamp of the last time char zoned or logged out
-    bool        isNewPlayer() const; // Checks if new player bit is unset.
+    uint8 visibleGmLevel;        // See GmLevel of flags0_t
+    bool  wallhackEnabled;       // GM walk through walls
+    bool  isSettingBazaarPrices; // Is setting bazaar prices (temporarily hide bazaar)
+    bool  isLinkDead;            // Player is d/cing
+
+    SAVE_CONF playerConfig; // Various settings such as chat filter, display head flag, new adventurer, autotarget, etc.
+
+    uint32 lastOnline{ 0 };              // UTC Unix Timestamp of the last time char zoned or logged out
+    bool   isNewPlayer() const;          // Checks if new player bit is unset.
+    bool   isSeekingParty() const;       // is seeking party or not
+    bool   isAnon() const;               // is /anon
+    bool   isAway() const;               // is /away (tells will not go through)
+    bool   isMentor() const;             // If player is a mentor or not.
+    bool   hasAutoTargetEnabled() const; // has autotarget enabled
 
     profile_t       profile;
     capacityChain_t capacityChain;
@@ -462,7 +471,6 @@ public:
     uint8      m_hasRaise;        // checks if player has raise already
     uint8      m_weaknessLvl;     // tracks if the player was previously weakend
     bool       m_hasArise;        // checks if the white magic spell arise was cast on the player and a re-raise effect should be applied
-    uint8      m_hasAutoTarget;   // ability to use AutoTarget function
     position_t m_StartActionPos;  // action start position (item use, shooting start, tractor position)
     position_t m_ActionOffsetPos; // action offset position from the action packet(currently only used for repositioning of luopans)
 
@@ -486,6 +494,7 @@ public:
     CharHistory_t m_charHistory;
 
     int8 getShieldSize();
+    bool hasBazaar();
 
     bool getStyleLocked() const;
     void setStyleLocked(bool isStyleLocked);
@@ -521,7 +530,7 @@ public:
     uint32          nextFishTime; // When char is allowed to fish again
     uint32          lastCastTime; // When char last cast their rod
     uint32          fishingToken; // To track fishing process
-    uint16          hookDelay;    // How long it takes to hook a fish
+    uint8           hookDelay;    // How long it takes to hook a fish
 
     void ReloadPartyInc();
     void ReloadPartyDec();

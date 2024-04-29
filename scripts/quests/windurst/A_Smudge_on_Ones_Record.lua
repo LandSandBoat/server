@@ -5,13 +5,13 @@
 -- Hariga-Origa : !pos -62 -6 105 238
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONES_RECORD)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONES_RECORD)
 
 quest.reward =
 {
     xp = 2000,
     fame = 120,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     gil = 5000,
     keyItem = xi.ki.MAP_OF_FEIYIN,
 }
@@ -20,9 +20,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES) and
-                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CHASING_TALES) and
+                player:getFameLevel(xi.fameArea.WINDURST) >= 4 and
                 not quest:getMustZone(player)
         end,
 
@@ -43,7 +43,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -77,7 +77,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 quest:getMustZone(player)
         end,
 

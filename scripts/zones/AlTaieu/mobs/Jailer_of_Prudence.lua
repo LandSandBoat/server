@@ -17,7 +17,7 @@ entity.onMobInitialize = function(mob)
             return
         end
 
-        local otherPrudence = mobArg:getID() == ID.mob.JAILER_OF_PRUDENCE_1 and GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2) or GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
+        local otherPrudence = mobArg:getID() == ID.mob.JAILER_OF_PRUDENCE and GetMobByID(ID.mob.JAILER_OF_PRUDENCE + 1) or GetMobByID(ID.mob.JAILER_OF_PRUDENCE)
 
         if otherPrudence:isAlive() and otherPrudence:checkDistance(mob) <= 50 then
             otherPrudence:setLocalVar('mirrored_ws', 1)
@@ -58,11 +58,13 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    local firstPrudence  = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
-    local secondPrudence = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
-    local count          = player:getLocalVar('prudenceCount')
+    local count = player:getLocalVar('prudenceCount')
+    local mobId = mob:getID()
 
-    if firstPrudence or secondPrudence then
+    if
+        mobId == ID.mob.JAILER_OF_PRUDENCE or
+        mobId == ID.mob.JAILER_OF_PRUDENCE + 1
+    then
         player:setLocalVar('prudenceCount', count + 1)
     end
 
@@ -73,15 +75,16 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local firstPrudence  = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
-    local secondPrudence = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
+    if mob:getID() == ID.mob.JAILER_OF_PRUDENCE then
+        local secondPrudence = GetMobByID(ID.mob.JAILER_OF_PRUDENCE + 1)
 
-    if mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1 then
         secondPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
         secondPrudence:setAnimationSub(3) -- Mouth Open
         secondPrudence:addMod(xi.mod.ATTP, 100)
         secondPrudence:delMod(xi.mod.DEFP, -50)
     else
+        local firstPrudence = GetMobByID(ID.mob.JAILER_OF_PRUDENCE)
+
         firstPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
         firstPrudence:setAnimationSub(3) -- Mouth Open
         firstPrudence:addMod(xi.mod.ATTP, 100)

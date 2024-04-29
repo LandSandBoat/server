@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
         if player:hasKeyItem(xi.ki.MOONDROP) then
             player:messageSpecial(ID.text.CAN_SEE_SKY)
 
-        elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == QUEST_ACCEPTED then
+        elseif player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == xi.questStatus.QUEST_ACCEPTED then
 
             if IsMoonNew() or not correctTime then
                 player:messageSpecial(ID.text.CANNOT_SEE_MOON)

@@ -383,7 +383,13 @@ function Battlefield:new(data)
     obj.maxPlayers    = data.maxPlayers
     obj.timeLimit     = data.timeLimit
     obj.index         = data.index
-    obj.entryNpc      = data.entryNpc
+
+    if data.entryNpcs then
+        obj.entryNpcs = data.entryNpcs
+    elseif data.entryNpc then
+        obj.entryNpcs = { data.entryNpc }
+    end
+
     obj.area          = data.area
 
     if data.exitNpcs then
@@ -397,12 +403,15 @@ function Battlefield:new(data)
     obj.levelCap         = data.levelCap or 0
     obj.allowSubjob      = (data.allowSubjob == nil or data.allowSubjob) or false
     obj.hasWipeGrace     = (data.hasWipeGrace == nil or data.hasWipeGrace) or false
+    obj.isMission        = data.isMission and data.isMission or false
     obj.canLoseExp       = (data.canLoseExp == nil or data.canLoseExp) or false
     obj.showTimer        = (data.showTimer == nil or data.showTimer) or false
     obj.delayToExit      = data.delayToExit or 5
     obj.requiredItems    = data.requiredItems or {}
     obj.requiredKeyItems = data.requiredKeyItems or {}
     obj.lossEventParams  = data.lossEventParams or {}
+    obj.armouryCrates    = data.armouryCrates or false
+    obj.experimental     = data.experimental or false
 
     obj.sections = { { [obj.zoneId] = {} } }
     obj.groups   = {}
@@ -425,9 +434,9 @@ end
 
 function Battlefield:register()
     -- Only hookup the entry and exit listeners if there aren't any other battlefields already registered for that entrance
-    local setupEvents   = true
-    local setupEntryNpc = true
-    local setupExitNpcs = true
+    local setupEvents    = true
+    local setupEntryNpcs = true
+    local setupExitNpcs  = true
 
     if utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
         local contents = xi.battlefield.contentsByZone[self.zoneId]
@@ -435,9 +444,9 @@ function Battlefield:register()
         for _, content in ipairs(contents) do
             -- Always setup listeners if we're reloading a battlefield
             if self.battlefieldId == content.battlefieldId and content.hasListeners then
-                setupEvents   = true
-                setupEntryNpc = true
-                setupExitNpcs = true
+                setupEvents    = true
+                setupEntryNpcs = true
+                setupExitNpcs  = true
 
                 break
             end
@@ -446,8 +455,14 @@ function Battlefield:register()
             setupEvents = false
 
             -- Do not setup npcs if there is another battlefield using the same entry npc
-            if self.entryNpc == content.entryNpc then
-                setupEntryNpc = false
+            if self.entryNpcs then
+                for _, entryNpc in ipairs(self.entryNpcs) do
+                    if utils.contains(entryNpc, content.entryNpcs) then
+                        setupEntryNpcs = false
+
+                        break
+                    end
+                end
             end
 
             -- If there is any overlap between the exit NPCs then we do not setup the exit NPCs
@@ -484,22 +499,25 @@ function Battlefield:register()
         self.hasListeners = true
     end
 
-    if setupEntryNpc and self.entryNpc then
-        utils.append(zoneSection, {
-            [self.entryNpc] =
-            {
-                onTrade = Battlefield.onEntryTrade,
-                onTrigger = Battlefield.onEntryTrigger,
-            }
-        })
+    if setupEntryNpcs and self.entryNpcs then
+        for _, entryNpc in ipairs(self.entryNpcs) do
+            utils.append(zoneSection, {
+                [entryNpc] =
+                {
+                    onTrade   = Battlefield.onEntryTrade,
+                    onTrigger = Battlefield.onEntryTrigger,
+                }
+            })
+        end
     end
 
     if setupExitNpcs and self.exitNpcs then
+        local exitTrigger = self.onExitTrigger and self.onExitTrigger or Battlefield.onExitTrigger
         for _, exitNpc in ipairs(self.exitNpcs) do
             utils.append(zoneSection, {
                 [exitNpc] =
                 {
-                    onTrigger = Battlefield.onExitTrigger,
+                    onTrigger = exitTrigger,
                 }
             })
         end
@@ -517,7 +535,13 @@ function Battlefield:register()
 end
 
 function Battlefield:isValidEntry(player, npc)
-    return self.entryNpc == npc:getName()
+    return utils.contains(npc:getName(), self.entryNpcs)
+end
+
+-- Allow for Battlefield scripts to easily add additional requirements for entry by
+-- redefining this function
+function Battlefield:entryRequirement(player, npc, isRegistrant, trade)
+    return true
 end
 
 function Battlefield:checkRequirements(player, npc, isRegistrant, trade)
@@ -562,7 +586,9 @@ function Battlefield:checkRequirements(player, npc, isRegistrant, trade)
         end
     end
 
-    return true
+    -- Additional Requirements that may be necessary for battlefield entry
+    -- contained within the script itself, defaults to True
+    return self:entryRequirement(player, npc, isRegistrant, trade)
 end
 
 function Battlefield:checkSkipCutscene(player)
@@ -627,7 +653,9 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
             local totalUses = xi.battlefield.itemUses[itemId] or 1
 
             if player:getWornUses(itemId) >= totalUses then
-                if totalUses > 1 then
+                if type(content.requiredItems.wornMessage) == 'table' then
+                    player:messageSpecial(unpack(content.requiredItems.wornMessage))
+                elseif totalUses > 1 then
                     player:messageSpecial(content.requiredItems.wornMessage, itemId)
                 else
                     player:messageSpecial(content.requiredItems.wornMessage, 0, 0, 0, itemId)
@@ -640,7 +668,7 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
 
     if not onUpdate then
         -- Open menu of valid battlefields
-        player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
+        return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
     end
 end
 
@@ -666,9 +694,7 @@ function Battlefield.onEntryTrigger(player, npc)
         end
 
         local options = utils.mask.setBit(0, content.index, true)
-        player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
-
-        return
+        return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
     end
 
     -- Player doesn't have battlefield status effect. That means player wants to register a new battlefield OR is attempting to enter a closed one.
@@ -685,8 +711,8 @@ function Battlefield.onEntryTrigger(player, npc)
     -- No one in party/alliance has battlefield status effect. We want to register a new battlefield.
     local options = xi.battlefield.getBattlefieldOptions(player, npc)
 
-    -- GMs get access to all BCNMs (FLAG_GM = 0x04000000)
-    if player:getGMLevel() > 0 and player:checkNameFlags(0x04000000) then
+    -- GMs get access to all BCNMs with visible GM
+    if player:getGMLevel() > 0 and player:getVisibleGMLevel() >= 3 then
         options = 268435455
     end
 
@@ -701,7 +727,7 @@ function Battlefield.onEntryTrigger(player, npc)
         return
     end
 
-    player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
+    return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
 end
 
 -- Static function to lookup the correct battlefield to handle this event update
@@ -833,7 +859,7 @@ end
 
 function Battlefield.onExitTrigger(player, npc)
     if player:getBattlefield() then
-        player:startOptionalCutscene(32003)
+        return Battlefield:progressCutscene(32003)
     end
 end
 
@@ -859,12 +885,21 @@ function Battlefield:onEventFinishBattlefield(player, csid, option, npc)
 end
 
 function Battlefield:onBattlefieldInitialise(battlefield)
-    if #self.loot > 0 then
+    if self.loot and #self.loot > 0 then
         battlefield:setLocalVar('loot', 1)
     end
 
     local hasMultipleAreas = not self.area
     battlefield:addGroups(self.groups, hasMultipleAreas)
+
+    -- NOTE: Experimental battlefields are at most partially implemented.  Increase mob levels
+    -- for temporary tuning.
+    if self.experimental then
+        local battlefieldMobs = battlefield:getMobs(true, true)
+        for _, mobObj in ipairs(battlefieldMobs) do
+            mobObj:setMobLevel(math.min(mobObj:getMainLvl() * 2, 255))
+        end
+    end
 
     for mobId, path in pairs(self.paths) do
         GetMobByID(mobId):pathThrough(path, xi.path.flag.PATROL)
@@ -971,8 +1006,16 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
             end
         end
 
-        if self.requiredKeyItems.message ~= 0 then
+        if type(self.requiredKeyItems.message) == 'table' then
+            player:messageSpecial(self.requiredKeyItems.message[1], unpack(self.requiredKeyItems.message[2]))
+        elseif self.requiredKeyItems.message ~= 0 then
             player:messageSpecial(self.requiredKeyItems.message, unpack(items))
+        end
+
+        if not self.requiredKeyItems.keep and self.requiredKeyItems.deleteMessage then
+            for _, keyItemId in ipairs(items) do
+                player:messageSpecial(self.requiredKeyItems.deleteMessage, keyItemId)
+            end
         end
     end
 
@@ -1007,6 +1050,10 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     end
 
     player:messageSpecial(ID.text.TIME_LIMIT_FOR_THIS_BATTLE_IS, 0, 0, 0, math.floor(self.timeLimit / 60))
+
+    if self.experimental then
+        player:printToPlayer('This battlefield has been marked as experimental.  Enemy levels have increased!', xi.msg.channel.NS_SHOUT)
+    end
 end
 
 function Battlefield:onBattlefieldDestroy(battlefield)
@@ -1022,6 +1069,8 @@ end
 
 function Battlefield:onBattlefieldWin(player, battlefield)
     local _, clearTime, partySize = battlefield:getRecord()
+
+    player:setLocalVar('battlefieldWin', battlefield:getID())
     player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, 0)
 end
 
@@ -1088,8 +1137,16 @@ end
 function Battlefield:handleAllMonstersDefeated(battlefield, mob)
     local crateId = battlefield:getArmouryCrate()
 
+    -- NOTE: Default to core returning us a value, but if that fails, use the fallback
+    -- definition if available.  This should only be used where mobIds table has to be
+    -- used instead of mobs!
+    if crateId == 0 and self.armouryCrates then
+        crateId = self.armouryCrates[battlefield:getArea()]
+    end
+
     if crateId ~= 0 then
         local crate = GetNPCByID(crateId)
+
         npcUtil.showCrate(crate)
         crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(self.handleOpenArmouryCrate, self))
     else
@@ -1171,7 +1228,8 @@ function xi.battlefield.getBattlefieldOptions(player, npc, trade)
     for _, content in ipairs(contents) do
         if
             content:checkRequirements(player, npc, true, trade) and
-            not player:battlefieldAtCapacity(content.battlefieldId)
+            not player:battlefieldAtCapacity(content.battlefieldId) and
+            (xi.settings.map.BCNM_ENABLE_EXPERIMENTAL or not content.experimental)
         then
             result = utils.mask.setBit(result, content.index, true)
         end
@@ -1202,8 +1260,6 @@ BattlefieldMission.__eq    = function(m1, m2)
     return m1.name == m2.name
 end
 
-BattlefieldMission.isMission = true
-
 -- Creates a new Limbus Battlefield interaction
 -- Data takes the additional following keys:
 --  - missionArea: The mission area this battlefield is associated with (optional)
@@ -1217,6 +1273,7 @@ function BattlefieldMission:new(data)
     local obj = Battlefield:new(data)
 
     setmetatable(obj, self)
+    obj.isMission             = true
     obj.missionArea           = data.missionArea
     obj.mission               = data.mission
     obj.missionStatusArea     = data.missionStatusArea
@@ -1314,22 +1371,22 @@ function BattlefieldQuest:checkRequirements(player, npc, isRegistrant, trade)
         return false
     end
 
-    return player:getQuestStatus(self.questArea, self.quest) >= QUEST_ACCEPTED
+    return player:getQuestStatus(self.questArea, self.quest) >= xi.questStatus.QUEST_ACCEPTED
 end
 
 function BattlefieldQuest:checkSkipCutscene(player)
-    return player:getQuestStatus(self.questArea, self.quest) == QUEST_COMPLETED
+    return player:getQuestStatus(self.questArea, self.quest) == xi.questStatus.QUEST_COMPLETED
 end
 
 function BattlefieldQuest:onBattlefieldWin(player, battlefield)
     local status = player:getQuestStatus(self.questArea, self.quest)
 
-    if status == QUEST_ACCEPTED then
+    if status == xi.questStatus.QUEST_ACCEPTED then
         player:setLocalVar('battlefieldWin', battlefield:getID())
     end
 
     local _, clearTime, partySize = battlefield:getRecord()
-    local canSkipCS               = status ~= QUEST_ACCEPTED and 1 or 0
+    local canSkipCS               = status ~= xi.questStatus.QUEST_ACCEPTED and 1 or 0
 
     player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
 end

@@ -5,12 +5,12 @@
 -- Sattal-Mansal : !pos 40 3 -53 245
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     keyItem = xi.ki.BLACK_MATINEE_NECKLACE,
 }
 
@@ -19,7 +19,7 @@ quest.sections =
     -- This quest is flagged from an event contained in Mysteries of Beadeaux I
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.LOWER_JEUNO] =

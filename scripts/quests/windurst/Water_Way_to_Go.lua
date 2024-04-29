@@ -6,21 +6,21 @@
 -- Giddeus Spring : !pos -258 -2 -249 145
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WATER_WAY_TO_GO)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.WATER_WAY_TO_GO)
 
 quest.reward =
 {
     fame = 40,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
 }
 
 quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY) and
-                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY) and
+                player:getFameLevel(xi.fameArea.WINDURST) >= 3 and
                 not quest:getMustZone(player)
         end,
 
@@ -44,7 +44,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.GIDDEUS] =
@@ -110,7 +110,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 quest:getMustZone(player)
         end,
 

@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
             633,    14, -- Olive Oil
             951,   110  -- Wijnruit
         }
-        xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
+        xi.shop.general(player, stock, xi.fameArea.WINDURST)
     end
 end
 

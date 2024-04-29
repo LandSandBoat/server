@@ -4,39 +4,20 @@
 -- Alchemy Adv. Synthesis Image Support
 -- !pos 123.5 2 1 234
 -----------------------------------
-local ID = zones[xi.zone.BASTOK_MINES]
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local skillLevel  = player:getSkillLevel(xi.skill.ALCHEMY)
-    local cost        = xi.crafting.getAdvImageSupportCost(player, xi.skill.ALCHEMY)
-
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.ALCHEMY) then
-        if not player:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) then
-            player:startEvent(122, cost, skillLevel, 0, 0xB0001AF, player:getGil(), 0, 0, 0) -- Event doesn't work
-        else
-            player:startEvent(122, cost, skillLevel, 0, 0xB0001AF, player:getGil(), 0x6FE2, 0, 0)
-        end
-    else
-        player:startEvent(122)
-    end
+    xi.crafting.oldImageSupportOnTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.ALCHEMY)
-
-    if csid == 122 and option == 1 then
-        player:delGil(cost)
-        player:messageSpecial(ID.text.ALCHEMY_SUPPORT, 0, 7, 0)
-        player:addStatusEffect(xi.effect.ALCHEMY_IMAGERY, 3, 0, 480)
-    end
+    xi.crafting.oldImageSupportOnEventFinish(player, csid, option, npc)
 end
 
 return entity

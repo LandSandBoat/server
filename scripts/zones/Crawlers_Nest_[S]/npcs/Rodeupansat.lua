@@ -10,22 +10,22 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local evilAtTheInlet = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET)
+    local evilAtTheInlet = player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET)
 
     -- Change to BRASS_RIBBON_OF_SERVICE later when Campaign has been added.
     if
-        evilAtTheInlet == QUEST_AVAILABLE and
+        evilAtTheInlet == xi.questStatus.QUEST_AVAILABLE and
         player:hasKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE) and
         player:getMainLvl() >= 30
     then
         player:startEvent(107) -- Start quest "Evil at the Inlet"
-    elseif evilAtTheInlet == QUEST_ACCEPTED then
+    elseif evilAtTheInlet == xi.questStatus.QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.EVIL_WARDING_SEAL) then
             player:startEvent(108) -- During quest after receiving KI and before losing KI
         else
             player:startEvent(109) -- After losing KI and returning for reward
         end
-    elseif evilAtTheInlet == QUEST_COMPLETED then
+    elseif evilAtTheInlet == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(110) -- New standard dialog after "Evil at the Inlet"
     else
         player:startEvent(106) -- Standard dialog
@@ -37,10 +37,10 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 107 then
-        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET)
+        player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET)
         npcUtil.giveKeyItem(player, xi.ki.EVIL_WARDING_SEAL)
     elseif csid == 109 then
-        npcUtil.completeQuest(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET, { item = 4687 })
+        npcUtil.completeQuest(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET, { item = 4687 })
     end
 end
 

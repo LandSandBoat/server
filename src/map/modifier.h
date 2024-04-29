@@ -250,6 +250,7 @@ enum class Mod
 
     // Crit Damage / Delay
     CRITHITRATE              = 165, // Raises chance to crit
+    CRITHITRATE_ONLY_WEP     = 141, // Raises chance to crit (but only for attacks with the specific weapon that has the mod)
     CRIT_DMG_INCREASE        = 421, // Raises the damage of critical hit by percent %
     RANGED_CRIT_DMG_INCREASE = 964, // Increases ranged critical damage by a percent
     ENEMYCRITRATE            = 166, // Raises chance enemy will crit

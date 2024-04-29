@@ -10,11 +10,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local classReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
+    local classReunion = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
 
     -- CLASS REUNION
     if
-        classReunion == QUEST_ACCEPTED and
+        classReunion == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('ClassReunionProgress') >= 3 and
         player:getCharVar('ClassReunion_TalkedToFupepe') ~= 1
     then

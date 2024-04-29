@@ -30,119 +30,342 @@
 #include "ai/ai_container.h"
 #include "ai/states/death_state.h"
 #include "entities/charentity.h"
+#include "item_container.h"
 #include "status_effect_container.h"
 #include "utils/itemutils.h"
+
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037
+
+// Namespace to avoid compilation units using the same structs twice with different definitions
+namespace charUpateFlags
+{
+    struct flags0_t
+    {
+        uint32_t HideFlag : 1;
+        uint32_t SleepFlag : 1;
+        uint32_t GroundFlag : 1;
+        uint32_t CliPosInitFlag : 1;
+        uint32_t LfgFlag : 1;
+        uint32_t AnonymousFlag : 1;
+        uint32_t CfhFlag : 1;
+        uint32_t AwayFlag : 1;
+        uint32_t Gender : 1;
+        uint32_t unknown_1_9 : 1;
+        uint32_t unknown_1_10 : 1;
+        uint32_t GraphSize : 2;
+        uint32_t Chocobo_Index : 3;
+        uint32_t hpp : 8;
+        uint32_t PlayOnelineFlag : 1;
+        uint32_t LinkShellFlag : 1;
+        uint32_t LinkDeadFlag : 1;
+        uint32_t TargetOffFlag : 1;
+        uint32_t unknown_3_28 : 1;
+        uint32_t GmLevel : 3;
+    };
+
+    struct flags1_t
+    {
+        uint32_t Speed : 12;
+        uint32_t Hackmove : 1;
+        uint32_t FreezeFlag : 1;
+        uint32_t unknown_1_14 : 1;
+        uint32_t InvisFlag : 1;
+        uint32_t unknown_2_16 : 1;
+        uint32_t SpeedBase : 8;
+        uint32_t unknown_3_25 : 4;
+        uint32_t BazaarFlag : 1;
+        uint32_t CharmFlag : 1;
+        uint32_t GmIconFlag : 1;
+    };
+
+    struct flags2_t
+    {
+        uint32_t NamedFlag : 1;
+        uint32_t SingleFlag : 1;
+        uint32_t AutoPartyFlag : 1;
+        uint32_t PetIndex : 16;
+        uint32_t MotStopFlag : 1;
+        uint32_t CliPriorityFlag : 1;
+        uint32_t BallistaFlg : 8;
+        uint32_t unknown_3_29 : 3;
+    };
+
+    struct flags3_t
+    {
+        uint32_t LfgMasterFlag : 1;
+        uint32_t TrialFlag : 1;
+        uint32_t unknown_0_2 : 1;
+        uint32_t NewCharacterFlag : 1;
+        uint32_t MentorFlag : 1;
+        uint32_t unknown_0_5 : 1;
+        uint32_t unknown_0_6 : 1;
+        uint32_t unknown_0_7 : 1;
+        uint32_t BallistaTeam : 8;
+        uint32_t unknown_2_16 : 16;
+    };
+
+    struct flags4_t
+    {
+        uint8_t GeoIndiElement : 4;
+        uint8_t GeoIndiSize : 2;
+        uint8_t GeoIndiFlag : 1;
+        uint8_t JobMasterFlag : 1;
+    };
+
+    struct flags5_t
+    {
+        uint8_t unknown_0_0 : 2;
+        uint8_t unknown_0_2 : 2;
+        uint8_t unknown_0_4 : 4;
+    };
+
+    struct flags6_t
+    {
+        uint32_t unknown_0_0 : 1;
+        uint32_t unknown_0_1 : 1;
+        uint32_t unknown_0_2 : 1;
+        uint32_t unknown_0_3 : 1;
+        uint32_t unknown_0_4 : 1;
+        uint32_t unknown_0_5 : 1;
+        uint32_t unknown_0_6 : 1;
+        uint32_t unknown_0_7 : 25;
+    };
+} // namespace charUpateFlags
+
+struct status_bits_t
+{
+    uint8_t Status1 : 2;
+    uint8_t Status2 : 2;
+    uint8_t Status3 : 2;
+    uint8_t Status4 : 2;
+    uint8_t Status5 : 2;
+    uint8_t Status6 : 2;
+    uint8_t Status7 : 2;
+    uint8_t Status8 : 2;
+    uint8_t Status9 : 2;
+    uint8_t Status10 : 2;
+    uint8_t Status11 : 2;
+    uint8_t Status12 : 2;
+    uint8_t Status13 : 2;
+    uint8_t Status14 : 2;
+    uint8_t Status15 : 2;
+    uint8_t Status16 : 2;
+    uint8_t Status17 : 2;
+    uint8_t Status18 : 2;
+    uint8_t Status19 : 2;
+    uint8_t Status20 : 2;
+    uint8_t Status21 : 2;
+    uint8_t Status22 : 2;
+    uint8_t Status23 : 2;
+    uint8_t Status24 : 2;
+    uint8_t Status25 : 2;
+    uint8_t Status26 : 2;
+    uint8_t Status27 : 2;
+    uint8_t Status28 : 2;
+    uint8_t Status29 : 2;
+    uint8_t Status30 : 2;
+    uint8_t Status31 : 2;
+    uint8_t Status32 : 2;
+};
+
+// PS2: GP_SERV_SERVERSTATUS
+struct GP_SERV_SERVERSTATUS
+{
+    uint16_t                 id : 9;
+    uint16_t                 size : 7;
+    uint16_t                 sync;
+    uint8_t                  BufStatus[32];        // PS2: BufStatus
+    uint32_t                 UniqueNo;             // PS2: UniqueNo
+    charUpateFlags::flags0_t Flags0;               // PS2: <bits> (Nameless bitfield.)
+    charUpateFlags::flags1_t Flags1;               // PS2: <bits> (Nameless bitfield.)
+    uint8_t                  server_status;        // PS2: server_status
+    uint8_t                  r;                    // PS2: r
+    uint8_t                  g;                    // PS2: g
+    uint8_t                  b;                    // PS2: b
+    charUpateFlags::flags2_t Flags2;               // PS2: <bits> (Nameless bitfield.)
+    charUpateFlags::flags3_t Flags3;               // PS2: <bits> (New; did not exist.)
+    uint32_t                 dead_counter1;        // PS2: (New; did not exist.)
+    uint32_t                 dead_counter2;        // PS2: (New; did not exist.)
+    uint16_t                 costume_id;           // PS2: (New; did not exist.)
+    uint16_t                 warp_target_index;    // PS2: (New; did not exist.)
+    uint16_t                 fellow_target_index;  // PS2: (New; did not exist.)
+    uint8_t                  fishing_timer;        // PS2: (New; did not exist.)
+    uint8_t                  padding00;            // PS2: (New; did not exist.)
+    status_bits_t            BufStatusBits;        // PS2: (New; did not exist.)
+    uint16_t                 monstrosity_info;     // PS2: (New; did not exist.)
+    uint8_t                  monstrosity_name_id1; // PS2: (New; did not exist.)
+    uint8_t                  monstrosity_name_id2; // PS2: (New; did not exist.)
+    charUpateFlags::flags4_t Flags4;               // PS2: (New; did not exist.)
+    uint8_t                  model_hitbox_size;    // PS2: (New; did not exist.)
+    charUpateFlags::flags5_t Flags5;               // PS2: (New; did not exist.)
+    uint8_t                  mount_id;             // PS2: (New; did not exist.)
+    charUpateFlags::flags6_t Flags6;               // PS2: (New; did not exist.)
+};
 
 CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
 {
     this->setType(0x37);
     this->setSize(0x60);
 
-    memcpy(data + (0x04), PChar->StatusEffectContainer->m_StatusIcons, 32);
+    GP_SERV_SERVERSTATUS packet = {};
+    std::memset(&packet, 0, sizeof(packet));
 
-    ref<uint32>(0x24) = PChar->id;
-    ref<uint8>(0x2A)  = PChar->GetHPP();
+    packet.id   = 0x037;
+    packet.size = roundUpToNearestFour(sizeof(GP_SERV_SERVERSTATUS)) / 4;
 
-    ref<uint8>(0x28) = (PChar->nameflags.byte2 << 1);
-    ref<uint8>(0x2B) = (PChar->nameflags.byte4 << 5) + PChar->nameflags.byte3;
-    ref<uint8>(0x2F) = ((PChar->nameflags.byte4 >> 2) & 0xFE);
-    ref<uint8>(0x2F) |= PChar->isCharmed ? 0x40 : 0x00;
+    std::memcpy(packet.BufStatus, PChar->StatusEffectContainer->m_StatusIcons, 32);
+    std::memcpy(&packet.BufStatusBits, &PChar->StatusEffectContainer->m_Flags, sizeof(status_bits_t));
 
-    if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))
-    {
-        ref<uint8>(0x2D) = 0x80;
-    }
-
-    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK))
-    {
-        ref<uint8>(0x38) = 0x04;
-    }
-
-    if (PChar->menuConfigFlags.flags & NFLAG_MENTOR)
-    {
-        ref<uint8>(0x38) |= 0x10; // Mentor flag.
-    }
-
-    if (PChar->isNewPlayer())
-    {
-        ref<uint8>(0x38) |= 0x08; // New player ?
-    }
-
-    ref<uint8>(0x29) = PChar->GetGender() + (PChar->look.size << 3);
-    // ref<uint8>(0x29) |= 0x02; // this will display the old-style zone-wide treasure pool. All claimed mobs will show red name regardless of which party has claim.
-    ref<uint8>(0x2C) = PChar->GetSpeed();
-    ref<uint16>(0x2E) |= PChar->speedsub << 1; // Not sure about this, it was a work around when we set speedsub incorrectly..
-    ref<uint8>(0x30) = PChar->isInEvent() ? (uint8)ANIMATION_EVENT : PChar->animation;
+    packet.UniqueNo      = PChar->id;
+    packet.server_status = PChar->isInEvent() ? static_cast<uint8>(ANIMATION_EVENT) : PChar->animation;
 
     CItemLinkshell* linkshell = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
 
-    if ((linkshell != nullptr) && linkshell->isType(ITEM_LINKSHELL))
+    if (linkshell && linkshell->isType(ITEM_LINKSHELL))
     {
         lscolor_t LSColor = linkshell->GetLSColor();
 
-        ref<uint8>(0x31) = (LSColor.R << 4) + 15;
-        ref<uint8>(0x32) = (LSColor.G << 4) + 15;
-        ref<uint8>(0x33) = (LSColor.B << 4) + 15;
+        // This seems wrong, but displays correctly?
+        packet.r = (LSColor.R << 4) + 15;
+        packet.g = (LSColor.G << 4) + 15;
+        packet.b = (LSColor.B << 4) + 15;
     }
 
-    if (PChar->PPet != nullptr)
-    {
-        ref<uint16>(0x34) = PChar->PPet->targid << 3;
-    }
-
-    // Status flag: bit 4: frozen anim (terror),
-    //  bit 6/7/8 related to Ballista (6 set - normal, 7 set san d'oria, 6+7 set bastok, 8 set windurst)
-    uint8 flag = (static_cast<uint8>(PChar->allegiance) << 5);
-
-    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR))
-    {
-        flag |= 0x08;
-    }
-
-    ref<uint8>(0x36) = flag;
-
-    // Sword & Shield Icon (Campaign battles, etc?)
-    // ref<uint8>(0x37) = 0x01;
-
-    uint32 timeRemainingToForcedHomepoint = PChar->GetTimeRemainingUntilDeathHomepoint();
-    ref<uint32>(0x3C)                     = timeRemainingToForcedHomepoint;
-
-    // Vanatime at which the player should be forced back to homepoint while dead. Vanatime is in seconds so we must convert the time remaining to seconds.
-    ref<uint32>(0x40) = CVanaTime::getInstance()->getVanaTime() + timeRemainingToForcedHomepoint / 60;
-    ref<uint16>(0x44) = PChar->m_Costume;
+    packet.dead_counter1     = PChar->GetTimeRemainingUntilDeathHomepoint();
+    packet.dead_counter2     = CVanaTime::getInstance()->getVanaTime() + packet.dead_counter1 / 60;
+    packet.costume_id        = PChar->m_Costume;
+    packet.model_hitbox_size = 4; // TODO: verify this
+    packet.mount_id          = 0;
 
     if (PChar->animation == ANIMATION_FISHING_START)
     {
-        ref<uint16>(0x4A) = PChar->hookDelay;
+        packet.fishing_timer = PChar->hookDelay;
     }
 
-    ref<uint64>(0x4C) = PChar->StatusEffectContainer->m_Flags;
+    // flags 0 starts at 0x28
+    charUpateFlags::flags0_t flags0 = {};
+
+    flags0.HideFlag        = false; // This hides your UI. Probably used for the Live Vanadiel streams.
+    flags0.SleepFlag       = false; // Hides the player, probably also used for Live Vanadiel
+    flags0.GroundFlag      = false; // Do not ignore collision
+    flags0.CliPosInitFlag  = false; // Ready to render?
+    flags0.LfgFlag         = PChar->isSeekingParty();
+    flags0.CfhFlag         = false; // Orange name for CFH, players don't currently use this?
+    flags0.AwayFlag        = PChar->isAway();
+    flags0.AnonymousFlag   = PChar->isAnon();
+    flags0.Gender          = PChar->GetGender();
+    flags0.unknown_1_9     = PChar->loc.zone ? PChar->loc.zone->CanUseMisc(MISC_TREASURE) : 0; // Set global treasure pool;
+    flags0.unknown_1_10    = 0;
+    flags0.GraphSize       = PChar->look.size;
+    flags0.Chocobo_Index   = 0;
+    flags0.hpp             = PChar->GetHPP();
+    flags0.PlayOnelineFlag = false; // Deprecated POL icon from /pol command that was removed.
+    flags0.LinkShellFlag   = linkshell ? true : false;
+    flags0.LinkDeadFlag    = PChar->isLinkDead;
+    flags0.TargetOffFlag   = false; // Players are currently always targetable
+    flags0.unknown_3_28    = 0;     // Unknown
+    flags0.GmLevel         = PChar->visibleGmLevel;
+
+    if (auto* effect = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED))
+    {
+        packet.mount_id      = effect->GetPower();
+        flags0.Chocobo_Index = effect->GetSubPower();
+    }
+
+    // flags 1 starts at 0x2C
+    charUpateFlags::flags1_t flags1 = {};
+
+    flags1.Speed        = PChar->GetSpeed();
+    flags1.Hackmove     = PChar->wallhackEnabled; // GM wallhack, walk through walls
+    flags1.FreezeFlag   = 0;                      // Freeze client in place. Is this used?
+    flags1.unknown_1_14 = 0;                      // Unknown.
+    flags1.InvisFlag    = PChar->m_isGMHidden || PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE);
+    flags1.unknown_2_16 = 0; // Unknown.
+    flags1.SpeedBase    = PChar->speedsub;
+    flags1.unknown_3_25 = 0; // Unknown
+    flags1.BazaarFlag   = PChar->hasBazaar();
+    flags1.CharmFlag    = PChar->isCharmed;
+    flags1.GmIconFlag   = false; // If set, allows other icon flags to be shown in addition to the GM red/pink text for the name.
+
+    charUpateFlags::flags2_t flags2 = {};
+
+    flags2.NamedFlag       = false; // disable "The"
+    flags2.SingleFlag      = true;  // singular entity
+    flags2.AutoPartyFlag   = false; // Not implemented.
+    flags2.MotStopFlag     = PChar->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR);
+    flags2.CliPriorityFlag = PChar->priorityRender;
+    flags2.BallistaFlg     = static_cast<uint8>(PChar->allegiance);
+    flags2.unknown_3_29    = 0; // Unknown, one of three bits appears to be campaign battle Sword & Shield Icon?
+
+    if (PChar->PPet != nullptr)
+    {
+        flags2.PetIndex = PChar->PPet->targid;
+    }
+
+    // Flags3 starts at 0x38
+    charUpateFlags::flags3_t flags3 = {};
+
+    flags3.LfgMasterFlag    = false; // /inv icon WITH mastery star. Not currently implemented, this is set with the "Request" button in the Party menu.
+    flags3.TrialFlag        = false; // Trial account icon flag
+    flags3.unknown_0_2      = 0;     // Unknown.
+    flags3.NewCharacterFlag = PChar->isNewPlayer();
+    flags3.MentorFlag       = PChar->isMentor();
+    flags3.unknown_0_5      = 0; // unknown
+    flags3.unknown_0_6      = 0; // unknown
+    flags3.unknown_0_7      = 0;
+    flags3.BallistaTeam     = static_cast<uint8_t>(PChar->allegiance); // Different values used for Ballista
+    flags3.unknown_2_16     = 0;                                       // Unused
+
+    // Flags4 starts at 0x058
+    charUpateFlags::flags4_t flags4 = {};
+
+    flags4.GeoIndiElement = 0;
+    flags4.GeoIndiSize    = 1;
+    flags4.GeoIndiFlag    = 0;
+    flags4.JobMasterFlag  = PChar->getMod(Mod::SUPERIOR_LEVEL) == 5 && PChar->m_jobMasterDisplay;
 
     // GEO bubble effects, changes bubble effect depending on what effect is activated.
     if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_COLURE_ACTIVE))
     {
-        ref<uint8>(0x58) = 0x50 + PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COLURE_ACTIVE)->GetPower();
+        flags4.GeoIndiElement = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COLURE_ACTIVE)->GetPower();
+        flags4.GeoIndiFlag    = 1;
     }
 
-    if (PChar->getMod(Mod::SUPERIOR_LEVEL) == 5 && PChar->m_jobMasterDisplay)
+    // Size shouldn't change until the bubble is re-casted, but currently WIDENED COMPASS will widen the size of the bubble on the effect instantly, so this aligns with the code.
+    // TODO: fix the discrepancy with retail.
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_WIDENED_COMPASS))
     {
-        ref<uint8>(0x58) += 0x80;
+        flags4.GeoIndiSize = 2;
     }
 
-    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_MOUNTED))
-    {
-        ref<uint8>(0x29) |= static_cast<uint8>(PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetSubPower());
-        ref<uint16>(0x5B) = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetPower();
-    }
+    // flags5 starts at 0x5A
+    charUpateFlags::flags5_t flags5 = {}; // All unknown, see https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037
+
+    // flags6 starts at 0x5C
+    charUpateFlags::flags6_t flags6 = {}; // All unknown, see https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037
 
     if (PChar->m_PMonstrosity != nullptr)
     {
-        ref<uint32>(0x54) = monstrosity::GetPackedMonstrosityName(PChar);
+        // NOTE: Changing this 0x8000 to 0xC000 will hide the species name.
+        //     : This looks to be a quirk of the client and not intended.
+        packet.monstrosity_info     = 0x8000 | PChar->m_PMonstrosity->Species;
+        packet.monstrosity_name_id1 = PChar->m_PMonstrosity->NamePrefix1;
+        packet.monstrosity_name_id2 = PChar->m_PMonstrosity->NamePrefix2;
 
         // Sword & Shield icon only shows outside of the Feretory
         if (PChar->m_PMonstrosity->Belligerency && PChar->loc.zone->GetID() != ZONE_FERETORY)
         {
-            ref<uint8>(0x37) |= 0x01;
+            packet.Flags2.BallistaFlg |= 0x08; // 0x18?
         }
     }
+
+    packet.Flags0 = flags0;
+    packet.Flags1 = flags1;
+    packet.Flags2 = flags2;
+    packet.Flags3 = flags3;
+    packet.Flags4 = flags4;
+    packet.Flags5 = flags5;
+    packet.Flags6 = flags6;
+
+    std::memcpy(&data[0], &packet, sizeof(packet));
 }

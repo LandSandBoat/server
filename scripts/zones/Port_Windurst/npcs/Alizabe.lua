@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
             }
 
             player:showText(npc, ID.text.ALIZABE_OPEN_DIALOG)
-            xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
+            xi.shop.general(player, stock, xi.fameArea.WINDURST)
         end
     else
         player:showText(npc, ID.text.ALIZABE_COP_NOT_COMPLETED)

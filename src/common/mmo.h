@@ -33,102 +33,6 @@
 #define FIFOSIZE_SERVERLINK 256 * 1024
 
 #define FFXI_HEADER_SIZE 0x1C // common packet header size
-#define FFXI_CHANGE_ZONE 0x0A // change zone cmd
-
-// Flags shown in front of the character's name
-
-enum FLAGTYPE : uint32
-{
-    FLAG_INEVENT     = 0x00000002,
-    FLAG_CHOCOBO     = 0x00000040,
-    FLAG_WALLHACK    = 0x00000200,
-    FLAG_INVITE      = 0x00000800,
-    FLAG_ANON        = 0x00001000,
-    FLAG_UNKNOWN     = 0x00002000,
-    FLAG_AWAY        = 0x00004000,
-    FLAG_PLAYONLINE  = 0x00010000,
-    FLAG_LINKSHELL   = 0x00020000,
-    FLAG_DC          = 0x00040000,
-    FLAG_GM          = 0x04000000,
-    FLAG_GM_SUPPORT  = 0x04000000,
-    FLAG_GM_SENIOR   = 0x05000000,
-    FLAG_GM_LEAD     = 0x06000000,
-    FLAG_GM_PRODUCER = 0x07000000,
-    FLAG_BAZAAR      = 0x80000000,
-};
-DECLARE_FORMAT_AS_UNDERLYING(FLAGTYPE);
-
-enum NFLAGTYPE : uint32
-{
-    NFLAG_INVITE          = 0x00000001,
-    NFLAG_AWAY            = 0x00000002,
-    NFLAG_ANON            = 0x00000004,
-    NFLAG_SYSTEM_FILTER_L = 0x00000800,
-    NFLAG_SYSTEM_FILTER_H = 0x00001000,
-    NFLAG_AUTOTARGET      = 0x00004000,
-    NFLAG_AUTOGROUP       = 0x00008000,
-    NFLAG_MENTOR          = 0x02000000,
-    NFLAG_NEWPLAYER       = 0x04000000,
-    NFLAG_DISPLAY_HEAD    = 0x08000000,
-    NFLAG_RECRUIT         = 0x20000000,
-};
-DECLARE_FORMAT_AS_UNDERLYING(NFLAGTYPE);
-
-enum CHATFILTERTYPE : uint64
-{
-    CHATFILTER_SAY         = 0x00000000000001,
-    CHATFILTER_ASSIST_J    = 0x08000000000000,
-    CHATFILTER_ASSIST_E    = 0x10000000000000,
-    CHATFILTER_EMOTES      = 0x00000000000008,
-    CHATFILTER_SHOUT       = 0x00000000000002,
-    CHATFILTER_YELL        = 0x01000000000000,
-    CHATFILTER_BATTLE0     = 0x00000000000010,
-    CHATFILTER_BATTLE1     = 0x00000000000020,
-    CHATFILTER_BATTLE2     = 0x00000000000040,
-    CHATFILTER_BATTLE3     = 0x00000000000080,
-    CHATFILTER_BATTLE4     = 0x00000000000100,
-    CHATFILTER_BATTLE5     = 0x00000000000200,
-    CHATFILTER_BATTLE6     = 0x00000000800000,
-    CHATFILTER_BATTLE7     = 0x00000000002000,
-    CHATFILTER_BATTLE8     = 0x00000000004000,
-    CHATFILTER_BATTLE9     = 0x00000000008000,
-    CHATFILTER_BATTLE10    = 0x00000000010000,
-    CHATFILTER_BATTLE11    = 0x00000000020000,
-    CHATFILTER_BATTLE12    = 0x00000001000000,
-    CHATFILTER_BATTLE13    = 0x00000000040000,
-    CHATFILTER_BATTLE14    = 0x00000000080000,
-    CHATFILTER_BATTLE15    = 0x00000000100000,
-    CHATFILTER_BATTLE16    = 0x00000000200000,
-    CHATFILTER_BATTLE17    = 0x00000000400000,
-    CHATFILTER_BATTLE18    = 0x00020000000000,
-    CHATFILTER_BATTLE19    = 0x00010000000000,
-    CHATFILTER_BATTLE20    = 0x00001000000000,
-    CHATFILTER_BATTLE21    = 0x00002000000000,
-    CHATFILTER_BATTLE22    = 0x00004000000000,
-    CHATFILTER_BATTLE23    = 0x00008000000000,
-    CHATFILTER_BATTLE24    = 0x00000800000000,
-    CHATFILTER_BATTLE25    = 0x00000400000000,
-    CHATFILTER_BATTLE26    = 0x00000010000000,
-    CHATFILTER_BATTLE27    = 0x00000020000000,
-    CHATFILTER_BATTLE28    = 0x00000100000000,
-    CHATFILTER_BATTLE29    = 0x00000200000000,
-    CHATFILTER_BATTLE30    = 0x00000002000000,
-    CHATFILTER_BATTLE31    = 0x00000000000400,
-    CHATFILTER_BATTLE32    = 0x00000000000800,
-    CHATFILTER_BATTLE33    = 0x00000000001000,
-    CHATFILTER_SYNTHESIS   = 0x00000004000000,
-    CHATFILTER_LOT_RESULTS = 0x00000008000000,
-    CHATFILTER_CAMPAIGN    = 0x00040000000000,
-    CHATFILTER_TELL_SPAM   = 0x00080000000000,
-    CHATFILTER_YELL_SPAM   = 0x00100000000000,
-    CHATFILTER_JOBEMOTE    = 0x00800000000000,
-    CHATFILTER_ALTEREGO    = 0x02000000000000,
-    // System message filters are
-    // NFLAG_SYSTEM_FILTER_L
-    // NFLAG_SYSTEM_FILTER_H
-    // Filter level is 0-3
-};
-DECLARE_FORMAT_AS_UNDERLYING(CHATFILTERTYPE);
 
 enum MSGSERVTYPE : uint8
 {
@@ -262,6 +166,122 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
         default:
             return "Unknown";
     };
+};
+
+// For filters1_t, filters2_t and SAVE_CONF:
+// See https://github.com/atom0s/XiPackets/tree/main/world/server/0x00B4
+struct filters1_t
+{
+    uint32_t say : 1;
+    uint32_t shout : 1;
+    uint32_t unused02 : 1;
+    uint32_t emotes : 1;
+    uint32_t special_actions_started_on_by_you : 1;
+    uint32_t special_action_effects_on_by_you : 1;
+    uint32_t attacks_by_you : 1;
+    uint32_t missed_attacks_by_you : 1;
+    uint32_t attacks_you_evade : 1;
+    uint32_t damage_you_take : 1;
+    uint32_t special_action_effects_on_by_npcs : 1;
+    uint32_t attacks_by_npcs : 1;
+    uint32_t missed_attacks_by_npcs : 1;
+    uint32_t special_action_effects_on_by_party : 1;
+    uint32_t attacks_by_party : 1;
+    uint32_t missed_attacks_by_party : 1;
+    uint32_t attacks_evaded_by_party : 1;
+    uint32_t damage_taken_by_party : 1;
+    uint32_t special_action_effects_on_by_allies : 1;
+    uint32_t attacks_by_allies : 1;
+    uint32_t missed_attacks_by_allies : 1;
+    uint32_t attacks_evaded_by_allies : 1;
+    uint32_t damage_taken_by_allies : 1;
+    uint32_t special_actions_started_on_by_party : 1;
+    uint32_t special_actions_started_on_by_allies : 1;
+    uint32_t special_actions_started_on_by_npcs : 1;
+    uint32_t others_synthesis_and_fishing_results : 1;
+    uint32_t lot_results : 1;
+    uint32_t attacks_by_others : 1;
+    uint32_t missed_attacks_by_others : 1;
+    uint32_t unused30 : 1;
+    uint32_t unused31 : 1;
+};
+
+struct filters2_t
+{
+    uint32_t attacks_evaded_by_others : 1;
+    uint32_t damage_taken_by_others : 1;
+    uint32_t special_action_effects_on_by_others : 1;
+    uint32_t special_actions_started_on_by_others : 1;
+    uint32_t attacks_by_foes : 1;
+    uint32_t missed_attacks_by_foes : 1;
+    uint32_t attacks_evaded_by_foes : 1;
+    uint32_t damage_taken_by_foes : 1;
+    uint32_t special_action_effects_on_by_foes : 1;
+    uint32_t special_actions_started_on_by_foes : 1;
+    uint32_t campaign_related_data : 1;
+    uint32_t tell_messages_deemed_spam : 1;
+    uint32_t shout_yell_messages_deemed_spam : 1;
+    uint32_t unused13 : 1;
+    uint32_t unused14 : 1;
+    uint32_t job_specific_emote : 1;
+    uint32_t yell : 1;
+    uint32_t messages_from_alter_egos : 1;
+    uint32_t unused18 : 1;
+    uint32_t assist_j : 1;
+    uint32_t assist_e : 1;
+    uint32_t unused21 : 1;
+    uint32_t unused22 : 1;
+    uint32_t unused23 : 1;
+    uint32_t unused24 : 1;
+    uint32_t unused25 : 1;
+    uint32_t unused26 : 1;
+    uint32_t unused27 : 1;
+    uint32_t unused28 : 1;
+    uint32_t unused29 : 1;
+    uint32_t unused30 : 1;
+    uint32_t unused31 : 1;
+};
+
+struct SAVE_CONF
+{
+    uint8_t InviteFlg : 1;
+    uint8_t AwayFlg : 1;
+    uint8_t AnonymityFlg : 1;
+    uint8_t Language : 2;
+    uint8_t unknown05 : 3;
+
+    uint8_t unknown08 : 1;
+    uint8_t unknown09 : 1;
+    uint8_t unknown10 : 1;
+    uint8_t SysMesFilterLevel : 2;
+    uint8_t unknown13 : 1;
+    uint8_t AutoTargetOffFlg : 1;
+    uint8_t AutoPartyFlg : 1;
+
+    uint8_t unknown16 : 8;
+
+    uint8_t MentorUnlockedFlg : 1;
+    uint8_t MentorFlg : 1;
+    uint8_t NewAdventurerOffFlg : 1;
+    uint8_t DisplayHeadOffFlg : 1;
+    uint8_t unknown28 : 1;
+    uint8_t RecruitFlg : 1;
+    uint8_t unused : 2;
+
+    filters1_t MassageFilter;
+    filters2_t MassageFilter2;
+    uint16_t   PvpFlg;
+    uint8_t    AreaCode;
+};
+
+struct languages_t
+{
+    uint8_t Japanese : 1;
+    uint8_t English : 1;
+    uint8_t German : 1;
+    uint8_t French : 1;
+    uint8_t Other : 1;
+    uint8_t unused : 3;
 };
 
 // For characters, the size is stored in `size`.
