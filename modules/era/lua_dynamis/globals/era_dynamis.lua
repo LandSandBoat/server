@@ -1511,6 +1511,8 @@ xi.dynamis.timeExtensionOnTrigger = function(player, npc)
     for _, member in pairs(zone:getPlayers()) do
         member:changeMusic(0, 227) -- 0 Background Music (Sunbreeze Music)
         member:changeMusic(1, 227) -- 1 Background Music (Sunbreeze Music)
+        member:changeMusic(2, 227) -- 2 Combat Music (Sunbreeze Music)
+        member:changeMusic(3, 227) -- 3 Combat Music (Sunbreeze Music)
     end
 
     if npc:getID() == 16949396 then
