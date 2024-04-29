@@ -972,6 +972,7 @@ xi.chocoboDig.start = function(player, precheck)
 
         -- AMK mission 7 (index 6)
         if
+            xi.settings.main.ENABLE_AMK == 1 and
             player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.SHOCK_ARRANT_ABUSE_OF_AUTHORITY and
             xi.amk.helpers.chocoboDig(player, zoneId, text)
         then
