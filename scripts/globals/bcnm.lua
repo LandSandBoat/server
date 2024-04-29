@@ -572,10 +572,6 @@ local function checkReqs(player, npc, bfid, registrant)
                 )
         end,
 
-        [67] = function() -- Bastok 7-2: On My Way
-            return bastokMission == xi.mission.id.bastok.ON_MY_WAY and nationStatus == 2
-        end,
-
         [68] = function() -- Quest: A Thief in Norg!?
             return player:getCharVar('Quest[5][142]Prog') == 6
         end,
@@ -1200,14 +1196,6 @@ local function checkSkip(player, bfid)
                 (
                     sandoriaMission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
                     windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2
-                )
-        end,
-
-        [67] = function() -- Bastok 7-2: On My Way
-            return player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.ON_MY_WAY) or
-                (
-                    bastokMission == xi.mission.id.bastok.ON_MY_WAY and
-                    nationStatus > 2
                 )
         end,
 
