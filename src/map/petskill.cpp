@@ -47,7 +47,7 @@ CPetSkill::CPetSkill(uint16 id)
 
 bool CPetSkill::hasMissMsg() const
 {
-    return m_Message == 158 || m_Message == 188 || m_Message == 31 || m_Message == 30;
+    return m_Message == 324 || m_Message == 158 || m_Message == 188 || m_Message == 31 || m_Message == 30;
 }
 
 bool CPetSkill::isAoE() const
