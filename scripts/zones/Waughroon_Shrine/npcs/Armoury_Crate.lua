@@ -55,44 +55,6 @@ local loot =
         },
     },
 
-    -- BCNM Grimshell Shocktroopers
-    [66] =
-    {
-        {
-            { itemid = xi.item.NONE,             droprate = 250 }, -- nothing
-            { itemid = xi.item.ASSAULT_EARRING,  droprate = 125 }, -- assault_earring
-            { itemid = xi.item.VASSAGOS_SCYTHE,  droprate = 125 }, -- vassagos_scythe
-            { itemid = xi.item.CHICKEN_KNIFE,    droprate = 125 }, -- chicken_knife
-            { itemid = xi.item.FEY_WAND,         droprate = 125 }, -- fey_wand
-            { itemid = xi.item.ASTRAL_SHIELD,    droprate = 125 }, -- astral_shield
-            { itemid = xi.item.ENHANCING_MANTLE, droprate = 125 }, -- enhancing_mantle
-        },
-
-        {
-            { itemid = xi.item.MYTHRIL_INGOT,   droprate = 250 }, -- mythril_ingot
-            { itemid = xi.item.STEEL_INGOT,     droprate = 250 }, -- steel_ingot
-            { itemid = xi.item.GOLD_INGOT,      droprate = 250 }, -- gold_ingot
-            { itemid = xi.item.DARKSTEEL_INGOT, droprate = 250 }, -- darksteel_ingot
-        },
-
-        {
-            { itemid = xi.item.EBONY_LOG,     droprate = 250 }, -- ebony_log
-            { itemid = xi.item.CHRYSOBERYL,   droprate = 250 }, -- chrysoberyl
-            { itemid = xi.item.FLUORITE,      droprate = 250 }, -- fluorite
-            { itemid = xi.item.DREAM_PLATTER, droprate = 250 }, -- jadeite
-        },
-
-        {
-            { itemid = xi.item.NONE,               droprate = 875 }, -- nothing
-            { itemid = xi.item.SCROLL_OF_RAISE_II, droprate = 125 }, -- scroll_of_raise_ii
-        },
-
-        {
-            { itemid = xi.item.NONE,               droprate = 800 }, -- nothing
-            { itemid = xi.item.SCROLL_OF_RAISE_II, droprate = 200 }, -- hi-reraiser
-        },
-    },
-
     -- BCNM 3, 2, 1...
     [69] =
     {
