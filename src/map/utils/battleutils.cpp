@@ -1782,14 +1782,19 @@ namespace battleutils
         }
 
         float interruptRate = ((100.0f - (meritReduction + (float)PDefender->getMod(Mod::SPELLINTERRUPT))) / 100.0f);
-        check *= interruptRate;
-        uint8 chance = xirand::GetRandomNumber(100);
 
-        // caps, always give a 1% chance of interrupt
-        if (check < 1)
+        float chance = xirand::GetRandomNumber<float>(1.0f);
+
+        // caps, always give a 1% chance of interrupt // TODO: verify, perhaps there is a breakpoint where this no longer happens.
+        if (check < 0.01)
         {
-            check = 0;
+            check = 0.01;
         }
+
+        // SIRD reduces the interrupt after all the calculations are done -- as evidenced by the infamous "102% SIRD" builds.
+        // Anything less than 102% interrupt results in the ability to be interrupted.
+        // Note: the 102% is probably an x/256 x/1024 nonsense -- sometimes 101% works.
+        check *= interruptRate;
 
         if (chance < check)
         {
