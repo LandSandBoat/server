@@ -53,8 +53,8 @@ zones[xi.zone.WAUGHROON_SHRINE] =
 
     mob =
     {
-        ATORI_TUTORI      = GetFirstID('Atori-Tutori_qm')
-        YOBHU_HIDEOUSMASK = GetFirstID('YoBhu_Hideousmask')
+        ATORI_TUTORI      = GetFirstID('Atori-Tutori_qm'),
+        YOBHU_HIDEOUSMASK = GetFirstID('YoBhu_Hideousmask'),
     },
 
     npc =
