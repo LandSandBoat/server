@@ -28,7 +28,10 @@ entity.onTrigger = function(player, npc)
     then
         -- MAKING AMENDS: After Quest
         player:startEvent(279)
-    elseif makingAmends == xi.questStatus.QUEST_COMPLETED and makingAmens == xi.questStatus.QUEST_AVAILABLE then
+    elseif
+        makingAmends == xi.questStatus.QUEST_COMPLETED and
+        makingAmens == xi.questStatus.QUEST_AVAILABLE
+    then
         if pfame >= 4 and not needToZone then
             player:startEvent(280) -- Start Making Amens! if prerequisites are met
         else

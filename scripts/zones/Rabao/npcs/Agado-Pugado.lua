@@ -24,7 +24,10 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(xi.ki.DAZE_BREAKER_CHARM)
     then
         player:startEvent(86) -- get the wind pendulum, lets go to Cloister of Gales
-    elseif carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and carbuncleDebacleProgress == 6 then
+    elseif
+        carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and
+        carbuncleDebacleProgress == 6
+    then
         if not player:hasItem(xi.item.WIND_PENDULUM) then
             player:startEvent(87, 0, xi.item.WIND_PENDULUM, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?" This one too~???
         else

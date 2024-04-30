@@ -19,7 +19,10 @@ entity.onTrigger = function(player, npc)
 
     -----------------------------------
     -- Carbunlce Debacle
-    if carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and carbuncleDebacleProgress == 2 then
+    if
+        carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and
+        carbuncleDebacleProgress == 2
+    then
         player:startEvent(10022) -- get the lighning pendulum lets go to Cloister of Storms
     elseif
         carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and
@@ -40,9 +43,15 @@ entity.onTrigger = function(player, npc)
         not hasWhisperOfStorms
     then
         player:startEvent(10024, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Defeat against Ramuh : Need new Fork
-    elseif trialByLightning == xi.questStatus.QUEST_ACCEPTED and not hasWhisperOfStorms then
+    elseif
+        trialByLightning == xi.questStatus.QUEST_ACCEPTED and
+        not hasWhisperOfStorms
+    then
         player:startEvent(10017, 0, xi.ki.TUNING_FORK_OF_LIGHTNING, 5)
-    elseif trialByLightning == xi.questStatus.QUEST_ACCEPTED and hasWhisperOfStorms then
+    elseif
+        trialByLightning == xi.questStatus.QUEST_ACCEPTED and
+        hasWhisperOfStorms
+    then
         local numitem = 0
 
         if player:hasItem(xi.item.RAMUHS_STAFF) then

@@ -14,7 +14,10 @@ entity.onTrigger = function(player, npc)
 
     if wonderingstatus == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(638)                        -- WONDERING_MINSTREL: Quest Available / Quest Accepted
-    elseif wonderingstatus == xi.questStatus.QUEST_COMPLETED and player:needToZone() then
+    elseif
+        wonderingstatus == xi.questStatus.QUEST_COMPLETED and
+        player:needToZone()
+    then
         player:startEvent(641)                      -- WONDERING_MINSTREL: Quest After
     else
         player:startEvent(609)                          -- Standard Conversation

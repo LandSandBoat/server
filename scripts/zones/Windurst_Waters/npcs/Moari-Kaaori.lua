@@ -46,7 +46,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(514) -- Begin Say It with Flowers.
     elseif flowerProgress == 3 or flowerProgress == 1 then
         player:startEvent(515) -- Waiting for trade.
-    elseif sayFlowers == xi.questStatus.QUEST_COMPLETED and needToZone and flowerProgress == 0 then -- Must zone to retry quest.
+    elseif
+        sayFlowers == xi.questStatus.QUEST_COMPLETED and
+        needToZone and
+        flowerProgress == 0
+    then -- Must zone to retry quest.
         player:startEvent(521)
     elseif sayFlowers == xi.questStatus.QUEST_COMPLETED and flowerProgress == 0 then
         player:startEvent(523) -- Repeat Say It with Flowers.

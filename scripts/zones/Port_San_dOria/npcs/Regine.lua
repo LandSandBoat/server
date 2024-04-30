@@ -40,7 +40,10 @@ entity.onTrigger = function(player, npc)
     then
         -- all 15 flyers delivered
         player:startEvent(603)
-    elseif ffr == xi.questStatus.QUEST_ACCEPTED and not player:hasItem(xi.item.MAGICMART_FLYER) then -- on quest but out of flyers
+    elseif
+        ffr == xi.questStatus.QUEST_ACCEPTED and
+        not player:hasItem(xi.item.MAGICMART_FLYER)
+    then -- on quest but out of flyers
         player:startEvent(510, 3)
 
     -- DEFAULT MENU

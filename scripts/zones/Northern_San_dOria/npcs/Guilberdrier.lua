@@ -16,9 +16,15 @@ entity.onTrigger = function(player, npc)
     local exitTheGambler = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER)
     local exitTheGamblerStat = player:getCharVar('exitTheGamblerStat')
 
-    if exitTheGambler < xi.questStatus.QUEST_COMPLETED and exitTheGamblerStat == 0 then
+    if
+        exitTheGambler < xi.questStatus.QUEST_COMPLETED and
+        exitTheGamblerStat == 0
+    then
         player:startEvent(522)
-    elseif exitTheGambler == xi.questStatus.QUEST_ACCEPTED and exitTheGamblerStat == 1 then
+    elseif
+        exitTheGambler == xi.questStatus.QUEST_ACCEPTED and
+        exitTheGamblerStat == 1
+    then
         player:startEvent(518)
     else
         player:startEvent(514)

@@ -43,7 +43,10 @@ entity.onTrigger = function(player, npc)
         (trustWindurst == xi.questStatus.QUEST_COMPLETED or trustBastok == xi.questStatus.QUEST_COMPLETED)
     then
         player:startEvent(897, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
-    elseif trustSandoria == xi.questStatus.QUEST_ACCEPTED and sandoriaFirstTrust == 0 then
+    elseif
+        trustSandoria == xi.questStatus.QUEST_ACCEPTED and
+        sandoriaFirstTrust == 0
+    then
         player:startEvent(893, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
     elseif
         trustSandoria == xi.questStatus.QUEST_ACCEPTED and
@@ -52,7 +55,10 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(894)
         player:setLocalVar('ExcenmilleTrustChatFlag', 1)
-    elseif trustSandoria == xi.questStatus.QUEST_ACCEPTED and sandoriaFirstTrust == 2 then
+    elseif
+        trustSandoria == xi.questStatus.QUEST_ACCEPTED and
+        sandoriaFirstTrust == 2
+    then
         player:startEvent(895)
     elseif
         trustSandoria == xi.questStatus.QUEST_COMPLETED and

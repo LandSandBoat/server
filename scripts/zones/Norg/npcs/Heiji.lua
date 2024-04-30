@@ -15,7 +15,10 @@ entity.onTrade = function(player, npc, trade)
     local totalSubligar = subligar + turnedInVar
 
     if subligar > 0 and subligar == trade:getItemCount() then
-        if shiningSubligar == xi.questStatus.QUEST_ACCEPTED and turnedInVar + subligar >= 10 then -- complete quest
+        if
+            shiningSubligar == xi.questStatus.QUEST_ACCEPTED and
+            turnedInVar + subligar >= 10
+        then -- complete quest
             player:startEvent(125)
         elseif shiningSubligar == xi.questStatus.QUEST_ACCEPTED and turnedInVar <= 9 then -- turning in less than the amount needed to finish the quest
             player:tradeComplete()

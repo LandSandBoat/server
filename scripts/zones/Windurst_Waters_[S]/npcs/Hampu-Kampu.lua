@@ -22,7 +22,10 @@ entity.onTrigger = function(player, npc)
         sayItWithAHandbagCS == 3
     then
         player:startEvent(173)
-    elseif sayItWithAHandbag == xi.questStatus.QUEST_ACCEPTED and sayItWithAHandbagCS == 1 then
+    elseif
+        sayItWithAHandbag == xi.questStatus.QUEST_ACCEPTED and
+        sayItWithAHandbagCS == 1
+    then
         player:startEvent(172)
     elseif sayItWithAHandbag == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(170)

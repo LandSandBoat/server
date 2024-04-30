@@ -29,7 +29,10 @@ entity.onTrade = function(player, npc, trade)
         end
 
     -- THE ALL NEW C-3000
-    elseif allNewC3000 == xi.questStatus.QUEST_ACCEPTED or allNewC3000 == xi.questStatus.QUEST_COMPLETED then
+    elseif
+        allNewC3000 == xi.questStatus.QUEST_ACCEPTED or
+        allNewC3000 == xi.questStatus.QUEST_COMPLETED
+    then
         if npcUtil.tradeHas(trade, { 889, 939 }) then
             player:startEvent(657, 0, 889, 939) -- Correct items given, complete quest in onEventUpdate
         else
@@ -60,7 +63,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(659, 0, 889, 939)
 
     -- A GREETING CARDIAN
-    elseif aGreetingCardian == xi.questStatus.QUEST_ACCEPTED and aGreetingCardianCS == 5 then
+    elseif
+        aGreetingCardian == xi.questStatus.QUEST_ACCEPTED and
+        aGreetingCardianCS == 5
+    then
         player:startEvent(301) -- Supplemental text when aGreetingCardian in progress, right before completion
 
     -- LEGENDARY PLAN B

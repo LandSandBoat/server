@@ -61,7 +61,10 @@ entity.onTrigger = function(player, npc)
     elseif quotasProgress == 6 then
         player:startEvent(15) -- End of AF2
 
-    elseif quotasStatus == xi.questStatus.QUEST_COMPLETED and stalkerStatus == xi.questStatus.QUEST_AVAILABLE then
+    elseif
+        quotasStatus == xi.questStatus.QUEST_COMPLETED and
+        stalkerStatus == xi.questStatus.QUEST_AVAILABLE
+    then
         player:startEvent(16) -- Fluff text until DRG AF3
 
     -- Knight Stalker (DRG AF3)

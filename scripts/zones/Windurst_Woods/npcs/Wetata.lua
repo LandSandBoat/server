@@ -22,9 +22,15 @@ entity.onTrigger = function(player, npc)
         xi.settings.main.ENABLE_TRUST_QUESTS == 1 and
         trustWindurst == xi.questStatus.QUEST_AVAILABLE
     then
-        if trustBastok == xi.questStatus.QUEST_AVAILABLE and trustSandoria == xi.questStatus.QUEST_AVAILABLE then
+        if
+            trustBastok == xi.questStatus.QUEST_AVAILABLE and
+            trustSandoria == xi.questStatus.QUEST_AVAILABLE
+        then
             player:startEvent(863)
-        elseif trustBastok == xi.questStatus.QUEST_COMPLETED or trustSandoria == xi.questStatus.QUEST_COMPLETED then
+        elseif
+            trustBastok == xi.questStatus.QUEST_COMPLETED or
+            trustSandoria == xi.questStatus.QUEST_COMPLETED
+        then
             player:startEvent(867)
         end
     elseif player:hasKeyItem(xi.ki.GREEN_INSTITUTE_CARD) then

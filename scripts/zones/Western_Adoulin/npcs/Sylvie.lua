@@ -39,7 +39,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(39)
     elseif player:getCharVar('GEO_DWL_Luopan') == 1 then
         player:startEvent(36)
-    elseif dwlQuestStatus == xi.questStatus.QUEST_ACCEPTED and player:hasKeyItem(xi.ki.LUOPAN) then
+    elseif
+        dwlQuestStatus == xi.questStatus.QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.LUOPAN)
+    then
         player:startEvent(35)
     elseif dwlQuestStatus == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(33)

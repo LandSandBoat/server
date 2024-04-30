@@ -30,7 +30,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(32) -- During quest 'Under the sea' - 1st dialog
     elseif player:hasKeyItem(xi.ki.ETCHED_RING) then
         player:startEvent(37) -- Finish quest 'Under the sea'
-    elseif underTheSea == xi.questStatus.QUEST_COMPLETED and theSandCharm == xi.questStatus.QUEST_AVAILABLE then
+    elseif
+        underTheSea == xi.questStatus.QUEST_COMPLETED and
+        theSandCharm == xi.questStatus.QUEST_AVAILABLE
+    then
         player:startEvent(38) -- New dialog after 'Under the sea'
     elseif
         underTheSea == xi.questStatus.QUEST_COMPLETED and
@@ -40,7 +43,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(70, xi.item.DANCESHROOM) -- Start quest 'The gift'
     elseif theGift == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(71) -- During quest 'The gift'
-    elseif theGift == xi.questStatus.QUEST_COMPLETED and theSandCharm == xi.questStatus.QUEST_ACCEPTED then
+    elseif
+        theGift == xi.questStatus.QUEST_COMPLETED and
+        theSandCharm == xi.questStatus.QUEST_ACCEPTED
+    then
         player:startEvent(78) -- New dialog after 'The gift'
     elseif
         theGift == xi.questStatus.QUEST_COMPLETED and
