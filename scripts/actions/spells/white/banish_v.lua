@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Banish II
+-- Spell: Banish V
 -----------------------------------
 local spellObject = {}
 

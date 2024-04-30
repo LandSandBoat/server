@@ -85,6 +85,16 @@ local pTable =
     [xi.magic.spell.SLOW          ] = { xi.effect.SLOW,               xi.mod.MND, xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,        0,   0,      180,      2,   0,      128, true,       10 },
     [xi.magic.spell.SLOW_II       ] = { xi.effect.SLOW,               xi.mod.MND, xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,        0,   0,      180,      2,   0,      128, true,       10 },
     [xi.magic.spell.SLOWGA        ] = { xi.effect.SLOW,               xi.mod.MND, xi.mod.SLOWRES,     xi.mod.SLOW_MEVA,        0,   0,      180,      2,   0,      128, true,        0 },
+    [xi.magic.spell.BANISH        ] = { xi.effect.TOMAHAWK,           xi.mod.MND, 0,                  0,                       1,   0,       15,      0,   0,        0, false,       0 },
+    [xi.magic.spell.BANISH_II     ] = { xi.effect.TOMAHAWK,           xi.mod.MND, 0,                  0,                       2,   0,       30,      0,   0,        0, false,       0 },
+    [xi.magic.spell.BANISH_III    ] = { xi.effect.TOMAHAWK,           xi.mod.MND, 0,                  0,                       3,   0,       45,      0,   0,        0, false,       0 },
+    [xi.magic.spell.BANISH_IV     ] = { xi.effect.TOMAHAWK,           xi.mod.MND, 0,                  0,                       4,   0,       60,      0,   0,        0, false,       0 },
+    [xi.magic.spell.BANISH_V      ] = { xi.effect.TOMAHAWK,           xi.mod.MND, 0,                  0,                       4,   0,       60,      0,   0,        0, false,       0 },
+    [xi.magic.spell.BANISHGA      ] = { xi.effect.TOMAHAWK,           xi.mod.MND, 0,                  0,                       1,   0,       15,      0,   0,        0, false,       0 },
+    [xi.magic.spell.BANISHGA_II   ] = { xi.effect.TOMAHAWK,           xi.mod.MND, 0,                  0,                       2,   0,       30,      0,   0,        0, false,       0 },
+    [xi.magic.spell.BANISHGA_III  ] = { xi.effect.TOMAHAWK,           xi.mod.MND, 0,                  0,                       3,   0,       45,      0,   0,        0, false,       0 },
+    [xi.magic.spell.BANISHGA_IV   ] = { xi.effect.TOMAHAWK,           xi.mod.MND, 0,                  0,                       4,   0,       60,      0,   0,        0, false,       0 },
+    [xi.magic.spell.BANISHGA_V    ] = { xi.effect.TOMAHAWK,           xi.mod.MND, 0,                  0,                       4,   0,       60,      0,   0,        0, false,       0 },
 
     -- Ninjutsu
     [xi.magic.spell.AISHA_ICHI    ] = { xi.effect.ATTACK_DOWN,        xi.mod.INT, 0,                  0,                      15,   0,      120,      4,   1,        0, false,       0 },
@@ -134,6 +144,29 @@ local function getElementalDebuffPotency(caster, statUsed)
     potency = potency + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT) -- TODO: Add BLM Toban gear effect (potency) here.
 
     return potency
+end
+
+-- Used for damage spells that have additional effects (Banish, Ancient Magic, -Ja Spells, Ninjutsu Nukes, etc.)
+xi.spells.enfeebling.handleDamageSpellEnfeeble = function(caster, target, spell)
+    local spellId      = spell:getID()
+    local effect       = pTable[spellId][1]
+    local power        = pTable[spellId][5]
+    local duration     = pTable[spellId][7]
+
+    -- Banish debuffs vs Undead.
+    if
+        target:isUndead() and
+        (spellId >= xi.magic.spell.BANISH and spellId <= xi.magic.spell.BANISH_V) or
+        (spellId == xi.magic.spell.BANISHGA and spellId == xi.magic.spell.BANISHGA_V)
+    then
+        local gearModifier = caster:getMod(xi.mod.BANISH_POTENCY)
+
+        duration = (duration + caster:getMerit(xi.merit.BANISH_EFFECT))
+        target:addStatusEffectEx(effect, 0, power, 0, duration, 0, gearModifier, 0, 0)
+    end
+    -- TODO: Migrate Ancient Magic debuffs here
+    -- TODO: Implement -Ja type spell debuffs here.
+    -- TODO: Migrate Ninjutsu Nuke Debuffs here.
 end
 
 -- Calculate potency.

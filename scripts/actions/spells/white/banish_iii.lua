@@ -8,6 +8,8 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    xi.spells.enfeebling.handleDamageSpellEnfeeble(caster, target, spell)
+
     return xi.spells.damage.useDamageSpell(caster, target, spell)
 end
 
