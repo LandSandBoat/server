@@ -8,13 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
-
-    return 0, 0
+    return xi.job_utils.beastmaster.onAbilityCheckUnleash(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.UNLEASH, 9, 0, 60)
+    return xi.job_utils.beastmaster.onUseAbilityUnleash(player, target, ability)
 end
 
 return abilityObject

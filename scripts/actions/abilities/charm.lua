@@ -16,33 +16,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if player:getPet() ~= nil then
-        return xi.msg.basic.ALREADY_HAS_A_PET, 0
-    elseif target:getMaster() ~= nil and target:getMaster():isPC() then
-        return xi.msg.basic.THAT_SOMEONES_PET, 0
-    end
-
-    return 0, 0
+    return xi.job_utils.beastmaster.onAbilityCheckCharm(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    if target:isPC() then
-        ability:setMsg(xi.msg.basic.NO_EFFECT)
-    else
-        local isTamed = false
-
-        if player:getLocalVar('Tamed_Mob') == target:getID() then
-            player:addMod(xi.mod.CHARM_CHANCE, 10)
-            isTamed = true
-        end
-
-        player:charmPet(target)
-
-        if isTamed then
-            player:delMod(xi.mod.CHARM_CHANCE, 10)
-            player:setLocalVar('Tamed_Mob', 0)
-        end
-    end
+    return xi.job_utils.beastmaster.onUseAbilityCharm(player, target, ability)
 end
 
 return abilityObject

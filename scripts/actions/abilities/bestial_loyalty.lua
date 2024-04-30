@@ -8,19 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if player:getPet() ~= nil then
-        return xi.msg.basic.ALREADY_HAS_A_PET, 0
-    elseif not player:hasValidJugPetItem() then
-        return xi.msg.basic.NO_JUG_PET_ITEM, 0
-    elseif not player:canUseMisc(xi.zoneMisc.PET) then
-        return xi.msg.basic.CANT_BE_USED_IN_AREA, 0
-    end
-
-    return 0, 0
+    return xi.job_utils.beastmaster.onAbilityCheckJug(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    xi.pet.spawnPet(player, player:getWeaponSubSkillType(xi.slot.AMMO))
+    return xi.job_utils.beastmaster.onUseAbilityJug(player, target, ability)
 end
 
 return abilityObject
