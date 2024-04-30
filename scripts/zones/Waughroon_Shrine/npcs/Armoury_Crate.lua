@@ -54,38 +54,6 @@ local loot =
             { itemid = xi.item.RERAISER, droprate = 200 }, -- reraiser
         },
     },
-
-    -- BCNM 3, 2, 1...
-    [69] =
-    {
-        {
-            { itemid = xi.item.KAGEBOSHI, droprate = 500 }, -- kageboshi
-            { itemid = xi.item.ODENTA,    droprate = 500 }, -- odenta
-        },
-
-        {
-            { itemid = xi.item.OCEAN_BELT,  droprate = 200 }, -- ocean_belt
-            { itemid = xi.item.FOREST_BELT, droprate = 200 }, -- forest_belt
-            { itemid = xi.item.STEPPE_BELT, droprate = 200 }, -- steppe_belt
-            { itemid = xi.item.JUNGLE_BELT, droprate = 200 }, -- jungle_belt
-            { itemid = xi.item.DESERT_BELT, droprate = 200 }, -- desert_belt
-        },
-
-        {
-            { itemid = xi.item.NONE,                droprate = 250 }, -- nothing
-            { itemid = xi.item.SCROLL_OF_FREEZE,    droprate = 125 }, -- scroll_of_freeze
-            { itemid = xi.item.SCROLL_OF_QUAKE,     droprate = 125 }, -- scroll_of_quake
-            { itemid = xi.item.SCROLL_OF_RAISE_II,  droprate = 125 }, -- scroll_of_raise_ii
-            { itemid = xi.item.SCROLL_OF_REGEN_III, droprate = 125 }, -- scroll_of_regen_iii
-            { itemid = xi.item.FIRE_SPIRIT_PACT,    droprate = 125 }, -- fire_spirit_pact
-            { itemid = xi.item.LIGHT_SPIRIT_PACT,   droprate = 125 }, -- light_spirit_pact
-        },
-
-        {
-            { itemid = xi.item.NONE,          droprate = 800 }, -- nothing
-            { itemid = xi.item.PETRIFIED_LOG, droprate = 200 }, -- petrified_log
-        },
-    },
 }
 
 entity.onTrade = function(player, npc, trade)
