@@ -18,6 +18,7 @@ zones[xi.zone.PROMYVION_VAHZL] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         OVERFLOWING_MEMORIES          = 7223, -- It appears to be a barrier woven from the energy of overflowing memories...
         ON_NM_SPAWN                   = 7227, -- You sense a dark, empty presence...
+        NOTHING_OUT_OF_ORDINARY_MAP   = 7228, -- There is nothing out of the ordinary here.
         EERIE_GREEN_GLOW              = 7229, -- The sphere is emitting an eerie green glow.
         AMULET_RETURNED               = 7272, -- The <item> has been returned to you.
         LIGHT_OF_VAHZL                = 7273, -- You cannot remember when exactly, but you have obtained <item>!
@@ -40,33 +41,33 @@ zones[xi.zone.PROMYVION_VAHZL] =
             [16867619] = { 4, 7, 16867728 },
         },
 
-        PONDERER                 = 16867329,
-        PROPAGATOR               = 16867330,
-        SOLICITOR                = 16867333,
-        DEVIATOR                 = 16867465,
-        WAILER                   = 16867554,
-        PROVOKER                 = 16867657,
+        PONDERER   = GetFirstID('Ponderer'),
+        PROPAGATOR = GetFirstID('Propagator'),
+        SOLICITOR  = GetFirstID('Solicitor'),
+        DEVIATOR   = GetFirstID('Deviator'),
+        WAILER     = GetFirstID('Wailer'),
+        PROVOKER   = GetFirstID('Provoker'),
     },
     npc =
     {
         MEMORY_STREAMS =
         {
-            [11]        = {   -2, -2, -122,    2, 2, -117, { 45 } }, -- floor 1 return
-            [21]        = {  -40, -2,  197,  -37, 2,  202, { 41 } }, -- floor 2 return
-            [31]        = {  317, -2, -282,  322, 2, -277, { 42 } }, -- floor 3 return
-            [41]        = {  277, -2,   38,  282, 2,   42, { 43 } }, -- floor 4 return
-            [51]        = {  -42, -2,   -2,  -36, 2,    2, { 44 } }, -- floor 5 return
-            [16867720]  = {  -43, -2, -362,  -36, 2, -356, { 33 } }, -- floor 1 MR1
-            [16867721]  = {   76, -2,  -43,   82, 2,  -37, { 32 } }, -- floor 1 MR2
-            [16867718]  = { -163, -2,  197, -156, 2,  203, { 30 } }, -- floor 2 MR1
-            [16867719]  = { -162, -2,  117, -156, 2,  123, { 31 } }, -- floor 2 MR2
-            [16867723]  = {  155, -2, -163,  163, 2, -156, { 37 } }, -- floor 3 MR1
-            [16867724]  = {  236, -2,  -43,  243, 2,  -36, { 35 } }, -- floor 3 MR2
-            [16867725]  = {  236, -2, -243,  243, 2, -236, { 38 } }, -- floor 3 MR3
-            [16867726]  = {  356, -2,  -82,  362, 2,  -76, { 36 } }, -- floor 3 MR4
-            [16867722]  = {  116, -2,   37,  122, 2,   42, { 39 } }, -- floor 4 MR1
-            [16867727]  = {  435, -2,   38,  443, 2,   41, { 40 } }, -- floor 4 MR2
-            [16867728]  = {  436, -2,  276,  443, 2,  283, { 34 } }, -- floor 4 MR3
+            [11]       = {  -2, -2, -122,    2, 2, -117, { 45 } }, -- Floor 1 return
+            [21]       = { -40, -2,  197,  -37, 2,  202, { 41 } }, -- Floor 2 return
+            [31]       = { 317, -2, -282,  322, 2, -277, { 42 } }, -- Floor 3 return
+            [41]       = { 277, -2,   38,  282, 2,   42, { 43 } }, -- Floor 4 return
+            [51]       = { -42, -2,   -2,  -36, 2,    2, { 44 } }, -- Floor 5 return
+            [16867720] = { -43, -2, -362,  -36, 2, -356, { 32 } }, -- Floor 1 MR S
+            [16867721] = {  76, -2,  -43,   82, 2,  -37, { 33 } }, -- Floor 1 MR N
+            [16867718] = { 163, -2,  197, -156, 2,  203, { 30 } }, -- Floor 2 MR N
+            [16867719] = { 162, -2,  117, -156, 2,  123, { 31 } }, -- Floor 2 MR S
+            [16867723] = { 155, -2, -163,  163, 2, -156, { 35 } }, -- Floor 3 MR W
+            [16867724] = { 236, -2,  -43,  243, 2,  -36, { 36 } }, -- Floor 3 MR N
+            [16867725] = { 236, -2, -243,  243, 2, -236, { 37 } }, -- Floor 3 MR S
+            [16867726] = { 356, -2,  -82,  362, 2,  -76, { 38 } }, -- Floor 3 MR E
+            [16867722] = { 116, -2,   37,  122, 2,   42, { 34 } }, -- Floor 4 MR SW
+            [16867727] = { 435, -2,   38,  443, 2,   41, { 39 } }, -- Floor 4 MR SE
+            [16867728] = { 436, -2,  276,  443, 2,  283, { 40 } }, -- Floor 4 MR NE
         },
     },
 }
