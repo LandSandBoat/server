@@ -3,8 +3,6 @@
 -----------------------------------
 zones = zones or {}
 
-local erleID = GetFirstID('Erle')
-
 zones[xi.zone.ROLANBERRY_FIELDS_S] =
 {
     text =
@@ -39,10 +37,9 @@ zones[xi.zone.ROLANBERRY_FIELDS_S] =
             [17150279] = 17150280, -- -484.535 -23.756 -467.462
         },
 
-        ERLE_PH =
-        {
-            [erleID - 6] = erleID, -- -298.487 3.637 54.586
-        },
+        ERLE = GetFirstID('Erle'), -- PH at -341 4 6
+
+        DYINYINGA = GetFirstID('Dyinyinga'), -- PH at 170 -31.8 -170
 
         VOIDWALKER =
         {
