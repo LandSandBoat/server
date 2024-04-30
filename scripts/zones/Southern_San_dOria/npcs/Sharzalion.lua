@@ -18,9 +18,15 @@ entity.onTrigger = function(player, npc)
         peaceForTheSpirit == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(69)
-    elseif peaceForTheSpirit == xi.questStatus.QUEST_ACCEPTED and peaceForTheSpiritCS == 0 then
+    elseif
+        peaceForTheSpirit == xi.questStatus.QUEST_ACCEPTED and
+        peaceForTheSpiritCS == 0
+    then
         player:startEvent(64)
-    elseif peaceForTheSpirit == xi.questStatus.QUEST_ACCEPTED and peaceForTheSpiritCS == 1 then
+    elseif
+        peaceForTheSpirit == xi.questStatus.QUEST_ACCEPTED and
+        peaceForTheSpiritCS == 1
+    then
         player:startEvent(65)
     elseif
         peaceForTheSpirit == xi.questStatus.QUEST_ACCEPTED and

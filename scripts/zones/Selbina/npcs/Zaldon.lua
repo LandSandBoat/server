@@ -585,7 +585,10 @@ entity.onTrade = function(player, npc, trade)
         player:startEvent(85)
 
     -- INSIDE THE BELLY
-    elseif insideTheBelly == xi.questStatus.QUEST_ACCEPTED or insideTheBelly == xi.questStatus.QUEST_COMPLETED then
+    elseif
+        insideTheBelly == xi.questStatus.QUEST_ACCEPTED or
+        insideTheBelly == xi.questStatus.QUEST_COMPLETED
+    then
         for fish, v in pairs(fishRewards) do
             if npcUtil.tradeHas(trade, fish) then
                 tradeFish(player, fish)

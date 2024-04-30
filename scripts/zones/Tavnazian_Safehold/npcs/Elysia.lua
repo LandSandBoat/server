@@ -14,7 +14,10 @@ entity.onTrigger = function(player, npc)
 
     if unforgiven == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(200) -- start quest
-    elseif unforgiven == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('UnforgivenVar') == 1 then
+    elseif
+        unforgiven == xi.questStatus.QUEST_ACCEPTED and
+        player:getCharVar('UnforgivenVar') == 1
+    then
         player:startEvent(203) -- player hasn't talked to Pradiulot (2nd stage of Quest)
     elseif
         unforgiven == xi.questStatus.QUEST_ACCEPTED and

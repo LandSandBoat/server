@@ -15,7 +15,10 @@ entity.onTrade = function(player, npc, trade)
     local totalLeggings = legging + turnedInVar
 
     if legging > 0 and legging == trade:getItemCount() then
-        if shiningLeggings == xi.questStatus.QUEST_ACCEPTED and turnedInVar + legging >= 10 then -- complete quest
+        if
+            shiningLeggings == xi.questStatus.QUEST_ACCEPTED and
+            turnedInVar + legging >= 10
+        then -- complete quest
             player:startEvent(129)
         elseif shiningLeggings == xi.questStatus.QUEST_ACCEPTED and turnedInVar <= 9 then -- turning in less than the amount needed to finish the quest
             player:tradeComplete()

@@ -36,7 +36,10 @@ entity.onTrigger = function(player, npc)
         (player:getCharVar('PamamaVar') == 1 or player:getCharVar('PamamaVar') == 2)
     then
         player:messageSpecial(ID.text.ALTAR_COMPLETED)
-    elseif guardian == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('PamamaVar') == 0 then
+    elseif
+        guardian == xi.questStatus.QUEST_ACCEPTED and
+        player:getCharVar('PamamaVar') == 0
+    then
         player:messageSpecial(ID.text.ALTAR_INSPECT)
     else
         player:messageSpecial(ID.text.ALTAR_STANDARD)

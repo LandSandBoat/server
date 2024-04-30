@@ -56,7 +56,10 @@ entity.onTrigger = function(player, npc)
         player:getCharVar('QuestFeatherInOnesCap_var') == 1
     then
         player:startEvent(78, 0, 842) -- Quest Objective Reminder
-    elseif aFeatherInOnesCap == xi.questStatus.QUEST_COMPLETED and not player:needToZone() then
+    elseif
+        aFeatherInOnesCap == xi.questStatus.QUEST_COMPLETED and
+        not player:needToZone()
+    then
         player:startEvent(75, 0, 842) -- Repeatable Quest 'A Feather In One's Cap' offered
 
     -- default dialog

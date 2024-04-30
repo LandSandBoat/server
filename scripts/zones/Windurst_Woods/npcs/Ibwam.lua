@@ -54,7 +54,10 @@ entity.onTrigger = function(player, npc)
     local lureWindurst = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT)
     local wildcatWindurst = player:getCharVar('WildcatWindurst')
 
-    if lureWindurst ~= xi.questStatus.QUEST_COMPLETED and xi.settings.main.ENABLE_TOAU == 1 then
+    if
+        lureWindurst ~= xi.questStatus.QUEST_COMPLETED and
+        xi.settings.main.ENABLE_TOAU == 1
+    then
         if lureWindurst == xi.questStatus.QUEST_AVAILABLE then
             player:startEvent(736)
         else

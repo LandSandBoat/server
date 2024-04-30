@@ -37,7 +37,10 @@ entity.onTrigger = function(player, npc)
         not player:needToZone()
     then
         player:startEvent(135) -- Start Quest "I'll Take the Big Box"
-    elseif illTakeTheBigBox == xi.questStatus.QUEST_COMPLETED and trueWill == xi.questStatus.QUEST_AVAILABLE then
+    elseif
+        illTakeTheBigBox == xi.questStatus.QUEST_COMPLETED and
+        trueWill == xi.questStatus.QUEST_AVAILABLE
+    then
         player:startEvent(136) -- Start Quest "True Will"
     elseif
         player:hasKeyItem(xi.ki.OLD_TRICK_BOX) and

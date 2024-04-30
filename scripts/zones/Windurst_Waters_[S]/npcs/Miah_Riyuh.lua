@@ -19,7 +19,10 @@ entity.onTrigger = function(player, npc)
     local steamedRams = player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
     local greenLetter = player:hasKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER)
 
-    if steamedRams == xi.questStatus.QUEST_ACCEPTED or theFightingFourth == xi.questStatus.QUEST_ACCEPTED then
+    if
+        steamedRams == xi.questStatus.QUEST_ACCEPTED or
+        theFightingFourth == xi.questStatus.QUEST_ACCEPTED
+    then
         player:startEvent(122)
     elseif snakeOnThePlains == xi.questStatus.QUEST_AVAILABLE and greenLetter then
         player:startEvent(103)

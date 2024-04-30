@@ -12,7 +12,11 @@ entity.onTrade = function(player, npc, trade)
     local black = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
     local questState = player:getCharVar('BlackMailQuest')
 
-    if black == xi.questStatus.QUEST_ACCEPTED and questState == 2 or black == xi.questStatus.QUEST_COMPLETED then
+    if
+        black == xi.questStatus.QUEST_ACCEPTED and
+        questState == 2 or
+        black == xi.questStatus.QUEST_COMPLETED
+    then
         if
             trade:hasItemQty(xi.item.COPY_OF_THE_CASTLE_FLOOR_PLANS, 1) and
             trade:getItemCount() == 1
@@ -29,7 +33,11 @@ entity.onTrigger = function(player, npc)
     local homeRank = player:getRank(player:getNation())
     local questState = player:getCharVar('BlackMailQuest')
 
-    if blackMail == xi.questStatus.QUEST_AVAILABLE and sanFame >= 3 and homeRank >= 3 then
+    if
+        blackMail == xi.questStatus.QUEST_AVAILABLE and
+        sanFame >= 3 and
+        homeRank >= 3
+    then
         player:startEvent(643) -- 643 gives me letter
     elseif
         blackMail == xi.questStatus.QUEST_ACCEPTED and

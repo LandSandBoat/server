@@ -50,12 +50,22 @@ entity.onTrigger = function(player, npc)
         elseif mJob == xi.job.PLD and mLvl >= 40 and sharpeningTheSwordCS == 1 then
             player:startEvent(43) -- Start Quest 'Sharpening the Sword'
         end
-    elseif sharpeningTheSword == xi.questStatus.QUEST_ACCEPTED and not hasOrdelleWhetstone then
+    elseif
+        sharpeningTheSword == xi.questStatus.QUEST_ACCEPTED and
+        not hasOrdelleWhetstone
+    then
         player:startEvent(42) -- During Quest 'Sharpening the Sword'
-    elseif sharpeningTheSword == xi.questStatus.QUEST_ACCEPTED and hasOrdelleWhetstone then
+    elseif
+        sharpeningTheSword == xi.questStatus.QUEST_ACCEPTED and
+        hasOrdelleWhetstone
+    then
         player:startEvent(44) -- Finish Quest 'Sharpening the Sword'
     -- 'A Boy's Dream' Quest Dialogs
-    elseif aBoysDream == xi.questStatus.QUEST_AVAILABLE and mJob == xi.job.PLD and mLvl >= 50 then
+    elseif
+        aBoysDream == xi.questStatus.QUEST_AVAILABLE and
+        mJob == xi.job.PLD and
+        mLvl >= 50
+    then
         if aBoysDreamCS == 0 then
             player:startEvent(41) -- Start Quest 'A Boy's Dream' (long cs)
         else

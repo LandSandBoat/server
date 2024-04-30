@@ -33,7 +33,10 @@ entity.onTrigger = function(player, npc)
         end
     elseif wonderingstatus == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(635)                 -- WONDERING_MINSTREL: During Quest
-    elseif wonderingstatus == xi.questStatus.QUEST_COMPLETED and player:needToZone() then
+    elseif
+        wonderingstatus == xi.questStatus.QUEST_COMPLETED and
+        player:needToZone()
+    then
         player:startEvent(639)                 -- WONDERING_MINSTREL: After Quest
     else
         local hour = VanadielHour()

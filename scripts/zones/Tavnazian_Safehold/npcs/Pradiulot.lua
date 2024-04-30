@@ -14,7 +14,10 @@ end
 entity.onTrigger = function(player, npc)
     local unforgiven = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
 
-    if unforgiven == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('UnforgivenVar') == 1 then
+    if
+        unforgiven == xi.questStatus.QUEST_ACCEPTED and
+        player:getCharVar('UnforgivenVar') == 1
+    then
         player:startEvent(204) -- Dialogue for final stage of Unforgiven Quest
     elseif
         unforgiven == xi.questStatus.QUEST_COMPLETED and

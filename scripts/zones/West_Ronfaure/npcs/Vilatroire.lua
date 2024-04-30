@@ -17,7 +17,10 @@ entity.onTrigger = function(player, npc)
     local questIntermediateTeamwork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
     local questAdvancedTeamwork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK)
 
-    if questIntroToTeamwork == xi.questStatus.QUEST_AVAILABLE and sandyFame >= 2 then
+    if
+        questIntroToTeamwork == xi.questStatus.QUEST_AVAILABLE and
+        sandyFame >= 2
+    then
         player:startEvent(135) -- Starts first quest - 6 members same alliance
     elseif questIntroToTeamwork == xi.questStatus.QUEST_AVAILABLE and sandyFame < 2 then
         player:startEvent(134) -- You don't have the requirements to start the first quest
