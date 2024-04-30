@@ -53,12 +53,10 @@ entity.onMobDeath = function(mob, player, optParams)
             end
         end
     end
-end
 
-entity.onMobDespawn = function(mob)
     local currentMobID = mob:getID()
 
-    -- Ix'Aern (DRG) Placeholder mobs
+    -- Ix'Aern (DRG) Placeholder mob
     local IxAernDRGPH = GetServerVariable('[SEA]IxAernDRG_PH') -- Should be be the ID of the mob that spawns the actual PH.
 
     -- If the mob killed was the randomized PH, then Ix'Aern (DRG) in the specific spot, unclaimed and not aggroed.
@@ -78,6 +76,9 @@ entity.onMobDespawn = function(mob)
         SpawnMob(ID.mob.IXAERN_DRG)
         SetServerVariable('[SEA]IxAernDRG_PH', 0) -- Clear the variable because it is spawned!
     end
+end
+
+entity.onMobDespawn = function(mob)
 end
 
 return entity
