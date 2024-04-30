@@ -56,6 +56,8 @@ content.groups =
                 waughroonID.mob.YOBHU_HIDEOUSMASK + 19,
             },
         },
+
+        allDeath = utils.bind(content.handleAllMonstersDefeated, content),
     },
 }
 
