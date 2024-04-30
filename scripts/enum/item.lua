@@ -916,6 +916,7 @@ xi.item =
     POUCH_OF_PARRADAMO_STONES           = 1778,
     COTTON_POUCH                        = 1779,
     HANDFUL_OF_CHAMNAET_ICE             = 1780,
+    SYLVAN_STONE                        = 1781,
     FREE_CHOCOPASS                      = 1789,
     SUPERNAL_FRAGMENT                   = 1822,
     SHRIMP_LANTERN                      = 1823,
