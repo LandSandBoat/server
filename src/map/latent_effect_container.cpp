@@ -801,7 +801,10 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                     if (member->PPet != nullptr)
                     {
                         auto* PPet = (CPetEntity*)member->PPet;
-                        if (PPet->m_PetID == latentEffect.GetConditionsValue() && PPet->PAI->IsSpawned())
+                        if (
+                                !PPet->isDead() && PPet->m_PetID < 21 && // is a live avatar
+                                (PPet->m_PetID == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21)
+                            )
                         {
                             expression = true;
                             break;
@@ -812,7 +815,10 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             else if (m_POwner->PParty == nullptr && m_POwner->PPet != nullptr)
             {
                 auto* PPet = (CPetEntity*)m_POwner->PPet;
-                if (PPet->m_PetID == latentEffect.GetConditionsValue() && !PPet->isDead())
+                if (
+                        !PPet->isDead() && PPet->m_PetID < 21 && // is a live avatar
+                        (PPet->m_PetID == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21)
+                    )
                 {
                     expression = true;
                 }
