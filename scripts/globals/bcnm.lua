@@ -568,26 +568,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:getCharVar('Quest[5][142]Prog') == 6
         end,
 
-        [70] = function() -- Quest: Shattering Stars (RDM LB5)
-            return mainJob == xi.job.RDM and mainLevel >= 66
-        end,
-
-        [71] = function() -- Quest: Shattering Stars (THF LB5)
-            return mainJob == xi.job.THF and mainLevel >= 66
-        end,
-
-        [72] = function() -- Quest: Shattering Stars (BST LB5)
-            return mainJob == xi.job.BST and mainLevel >= 66
-        end,
-
-        [85] = function() -- Quest: Beyond Infinity
-            return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
-        end,
-
-        [116] = function() -- Quest: Beyond Infinity
-            return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
-        end,
-
         [128] = function() -- ZM4: The Temple of Uggalepih
             return zilartMission == xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH
         end,
