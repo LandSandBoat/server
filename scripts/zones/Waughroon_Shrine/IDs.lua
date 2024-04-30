@@ -11,6 +11,7 @@ zones[xi.zone.WAUGHROON_SHRINE] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
+        LOST_KEYITEM                  = 6394, -- Lost key item: <keyitem>.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
@@ -40,6 +41,7 @@ zones[xi.zone.WAUGHROON_SHRINE] =
         ALL_TENTACLES_WOUNDED         = 7716, -- All of the sea creature's tentacles have been wounded.
         SCORPION_IS_STUNNED           = 7717, -- The platoon scorpion does not have enough energy to attack!
         SCORPION_IS_BOUND             = 7718, -- The platoon scorpion's legs are lodged in the rocks!
+        SOUL_GEM_REACTS               = 7719, -- The <keyitem> reacts to the <keyitem>, sending a jolt of energy through your veins!
         PROMISE_ME_YOU_WONT_GO_DOWN   = 7734, -- Promise you won't go down too easy, okay?
         IM_JUST_GETTING_WARMED_UP     = 7735, -- Haha! I'm just getting warmed up!
         YOU_PACKED_MORE_OF_A_PUNCH    = 7736, -- Hah! You pack more of a punch than I thoughtaru. But I won't go down as easy as old Maat!
@@ -51,44 +53,18 @@ zones[xi.zone.WAUGHROON_SHRINE] =
 
     mob =
     {
-        ATORI_TUTORI = GetFirstID('Atori-Tutori_qm')
+        ATORI_TUTORI      = GetFirstID('Atori-Tutori_qm'),
+        DARK_DRAGON       = GetFirstID('Dark_Dragon'),
+        FLAYER_FRANZ      = GetFirstID('Flayer_Franz'),
+        GAKI              = GetFirstID('Gaki'),
+        KUJHU_GRANITESKIN = GetFirstID('KuJhu_Graniteskin'),
+        MAAT              = GetFirstID('Maat'),
+        PLATOON_SCORPION  = GetFirstID('Platoon_Scorpion'),
+        YOBHU_HIDEOUSMASK = GetFirstID('YoBhu_Hideousmask'),
     },
 
     npc =
     {
-    },
-
-    operationDesertSwarm =
-    {
-        [1] =
-        {
-            17367266,
-            17367267,
-            17367268,
-            17367269,
-            17367270,
-            17367271,
-        },
-
-        [2] =
-        {
-            17367273,
-            17367274,
-            17367275,
-            17367276,
-            17367277,
-            17367278,
-        },
-
-        [3] =
-        {
-            17367280,
-            17367281,
-            17367282,
-            17367283,
-            17367284,
-            17367285,
-        },
     },
 }
 

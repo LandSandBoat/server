@@ -530,7 +530,6 @@ local function checkReqs(player, npc, bfid, registrant)
     local mainLevel = player:getMainLvl()
 
     local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
-    local bastokMission    = player:getCurrentMission(xi.mission.log_id.BASTOK)
     local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
     local zilartMission    = player:getCurrentMission(xi.mission.log_id.ZILART)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
@@ -562,42 +561,6 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [33] = function() -- Quest: The Holy Crest
             return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
-        end,
-
-        [64] = function() -- Mission 2-3
-            return nationStatus == 10 and
-                (
-                    sandoriaMission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
-                    windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2
-                )
-        end,
-
-        [67] = function() -- Bastok 7-2: On My Way
-            return bastokMission == xi.mission.id.bastok.ON_MY_WAY and nationStatus == 2
-        end,
-
-        [68] = function() -- Quest: A Thief in Norg!?
-            return player:getCharVar('Quest[5][142]Prog') == 6
-        end,
-
-        [70] = function() -- Quest: Shattering Stars (RDM LB5)
-            return mainJob == xi.job.RDM and mainLevel >= 66
-        end,
-
-        [71] = function() -- Quest: Shattering Stars (THF LB5)
-            return mainJob == xi.job.THF and mainLevel >= 66
-        end,
-
-        [72] = function() -- Quest: Shattering Stars (BST LB5)
-            return mainJob == xi.job.BST and mainLevel >= 66
-        end,
-
-        [85] = function() -- Quest: Beyond Infinity
-            return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
-        end,
-
-        [116] = function() -- Quest: Beyond Infinity
-            return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
 
         [128] = function() -- ZM4: The Temple of Uggalepih
@@ -1191,24 +1154,6 @@ local function checkSkip(player, bfid)
 
         [33] = function() -- Quest: The Holy Crest
             return player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
-        end,
-
-        [64] = function() -- Mission 2-3
-            return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK2) or
-                player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) or
-                nationStatus > 10 and
-                (
-                    sandoriaMission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
-                    windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2
-                )
-        end,
-
-        [67] = function() -- Bastok 7-2: On My Way
-            return player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.ON_MY_WAY) or
-                (
-                    bastokMission == xi.mission.id.bastok.ON_MY_WAY and
-                    nationStatus > 2
-                )
         end,
 
         [161] = function() -- Bastok 9-2: Where Two Paths Converge

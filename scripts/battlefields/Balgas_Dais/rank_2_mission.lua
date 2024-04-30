@@ -19,12 +19,12 @@ local content = Battlefield:new({
 })
 
 function content:entryRequirement(player, npc, isRegistrant, trade)
-    local isCurrentMission   = player:getCurrentMission(xi.mission.log_id.SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2 or
+    local isCurrentMission    = player:getCurrentMission(xi.mission.log_id.SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2 or
         player:getCurrentMission(xi.mission.log_id.BASTOK) == xi.mission.id.bastok.THE_EMISSARY_WINDURST2
-    local currentRequiremets = isCurrentMission and player:hasKeyItem(xi.ki.DARK_KEY)
-    local nonRegistrantReqs  = player:hasCompletedMission(player:getNation(), 5) or currentRequiremets
+    local currentRequirements = isCurrentMission and player:hasKeyItem(xi.ki.DARK_KEY)
+    local nonRegistrantReqs   = player:hasCompletedMission(player:getNation(), 5) or currentRequirements
 
-    return (not isRegistrant and nonRegistrantReqs) or currentRequiremets
+    return (not isRegistrant and nonRegistrantReqs) or currentRequirements
 end
 
 function content:checkSkipCutscene(player)
