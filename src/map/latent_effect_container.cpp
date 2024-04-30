@@ -71,6 +71,26 @@ void CLatentEffectContainer::DelLatentEffects(uint8 reqLvl, uint8 slot)
                              m_LatentEffectList.end());
 }
 
+/************************************************************************
+*                                                                       *
+* Returns true if no latents for slot are inactive                      *
+*                                                                       *
+ ************************************************************************/
+
+bool CLatentEffectContainer::AllLatentsActive(uint8 slot)
+{
+    auto allActive = true;
+    for (auto iter = m_LatentEffectList.begin(); iter != m_LatentEffectList.end(); ++iter)
+    {
+        CLatentEffect& latent = *iter;
+        if (!latent.IsActivated() && latent.GetSlot() == slot)
+        {
+            allActive = false;
+        }
+    }
+    return allActive;
+}
+
 void CLatentEffectContainer::AddLatentEffect(LATENT conditionID, uint16 conditionValue, Mod modID, int16 modValue)
 {
     m_LatentEffectList.emplace_back(m_POwner, conditionID, conditionValue, MAX_SLOTTYPE, modID, modValue);

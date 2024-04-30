@@ -660,6 +660,7 @@ public:
 
     void addLatent(uint16 condID, uint16 conditionValue, uint16 mID, int16 modValue);
     bool delLatent(uint16 condID, uint16 conditionValue, uint16 mID, int16 modValue);
+    bool allLatentsActive(uint8 slot);
 
     void   fold();
     void   doWildCard(CLuaBaseEntity* PEntity, uint8 total);

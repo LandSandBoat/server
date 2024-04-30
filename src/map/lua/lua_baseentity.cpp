@@ -13085,6 +13085,24 @@ bool CLuaBaseEntity::delLatent(uint16 condID, uint16 conditionValue, uint16 mID,
 }
 
 /************************************************************************
+ *  Function: allLatentsActive()
+ *  Purpose : Returns false if any latents for the slot are not active
+ *  Example : player:allLatentsActive(xi.slot.NECK)
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::allLatentsActive(uint8 slot)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return false;
+    }
+
+    return static_cast<CCharEntity*>(m_PBaseEntity)->PLatentEffectContainer->AllLatentsActive(slot);
+}
+
+/************************************************************************
  *  Function: getMaxGearMod()
  *  Purpose : Returns the highest integer value of a specified Mod on all equiped items
  *  Example : local maxValue = player:getMaxGearMod(xi.mod.GEOMANCY_BONUS)
@@ -17916,6 +17934,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("addLatent", CLuaBaseEntity::addLatent);
     SOL_REGISTER("delLatent", CLuaBaseEntity::delLatent);
+    SOL_REGISTER("allLatentsActive", CLuaBaseEntity::allLatentsActive);
 
     SOL_REGISTER("fold", CLuaBaseEntity::fold);
     SOL_REGISTER("doWildCard", CLuaBaseEntity::doWildCard);
