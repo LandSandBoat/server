@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if not xi.bcnm.onTrigger(player, npc) then
-        player:messageSpecial(ID.text.DOOR_SHUT)
+        player:messageSpecial(ID.text.NO_BATTLEFIELD_ENTRY)
     end
 end
 
