@@ -59,44 +59,12 @@ zones[xi.zone.WAUGHROON_SHRINE] =
         GAKI              = GetFirstID('Gaki'),
         KUJHU_GRANITESKIN = GetFirstID('KuJhu_Graniteskin'),
         MAAT              = GetFirstID('Maat'),
+        PLATOON_SCORPION  = GetFirstID('Platoon_Scorpion'),
         YOBHU_HIDEOUSMASK = GetFirstID('YoBhu_Hideousmask'),
     },
 
     npc =
     {
-    },
-
-    operationDesertSwarm =
-    {
-        [1] =
-        {
-            17367266,
-            17367267,
-            17367268,
-            17367269,
-            17367270,
-            17367271,
-        },
-
-        [2] =
-        {
-            17367273,
-            17367274,
-            17367275,
-            17367276,
-            17367277,
-            17367278,
-        },
-
-        [3] =
-        {
-            17367280,
-            17367281,
-            17367282,
-            17367283,
-            17367284,
-            17367285,
-        },
     },
 }
 

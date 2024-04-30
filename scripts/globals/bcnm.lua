@@ -530,7 +530,6 @@ local function checkReqs(player, npc, bfid, registrant)
     local mainLevel = player:getMainLvl()
 
     local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
-    local bastokMission    = player:getCurrentMission(xi.mission.log_id.BASTOK)
     local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
     local zilartMission    = player:getCurrentMission(xi.mission.log_id.ZILART)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
