@@ -564,10 +564,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
         end,
 
-        [68] = function() -- Quest: A Thief in Norg!?
-            return player:getCharVar('Quest[5][142]Prog') == 6
-        end,
-
         [128] = function() -- ZM4: The Temple of Uggalepih
             return zilartMission == xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH
         end,
