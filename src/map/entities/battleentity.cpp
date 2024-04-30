@@ -47,6 +47,7 @@
 #include "utils/battleutils.h"
 #include "utils/petutils.h"
 #include "utils/puppetutils.h"
+#include "utils/zoneutils.h"
 #include "weapon_skill.h"
 
 CBattleEntity::CBattleEntity()
@@ -111,9 +112,10 @@ bool CBattleEntity::isAlive()
 
 bool CBattleEntity::isInDynamis()
 {
-    if (loc.zone != nullptr)
+    auto* PZone = loc.zone == nullptr ? zoneutils::GetZone(loc.destination) : loc.zone;
+    if (PZone)
     {
-        return loc.zone->GetTypeMask() & ZONE_TYPE::DYNAMIS;
+        return PZone->GetTypeMask() & ZONE_TYPE::DYNAMIS;
     }
     return false;
 }
