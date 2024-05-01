@@ -942,6 +942,8 @@ INSERT INTO `item_usable` VALUES (5072,'scroll_of_goddesss_hymnus',1,1,15,5,0,0,
 INSERT INTO `item_usable` VALUES (5073,'scroll_of_chocobo_mazurka',1,1,15,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5074,'scroll_of_maidens_virelai',1,1,15,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5075,'scroll_of_raptor_mazurka',1,1,15,5,0,0,0,0);
+INSERT INTO `item_usable` VALUES (5076,'scroll_of_foe_sirvente',1,1,15,5,0,0,0,0);
+INSERT INTO `item_usable` VALUES (5077,'scroll_of_adventurers_dirge',1,1,15,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5078,'scroll_of_sentinels_scherzo',1,1,15,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5079,'scroll_of_foe_lullaby_ii',1,1,15,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5082,'scroll_of_cura_ii',1,1,11,5,0,0,0,0);
