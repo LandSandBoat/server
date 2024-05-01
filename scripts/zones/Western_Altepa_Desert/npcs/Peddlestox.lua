@@ -9,11 +9,11 @@ local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 local entity = {}
 
 entity.onTrigger = function(player)
-    xi.bmt.handleNpcOnTrigger(player, ID.npc.BEASTMEN_TREASURE)
+    xi.bmt.handleNpcOnTrigger(player, ID.npc.BEASTMEN_TREASURE_OFFSET)
 end
 
 entity.onTrade = function(player, npc, trade)
-    xi.bmt.handleNpcOnTrade(player, trade, ID.npc.BEASTMEN_TREASURE)
+    xi.bmt.handleNpcOnTrade(player, trade, ID.npc.BEASTMEN_TREASURE_OFFSET)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

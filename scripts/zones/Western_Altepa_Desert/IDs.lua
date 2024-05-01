@@ -83,17 +83,7 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
     {
         ALTEPA_GATE       = 17289748,
         PEDDLESTOX        = 17289773,
-        BEASTMEN_TREASURE =
-        {
-            17289776, -- qm3
-            17289777, -- qm4
-            17289778, -- qm5
-            17289779, -- qm6
-            17289780, -- qm7
-            17289781, -- qm8
-            17289782, -- qm9
-            17289783, -- qm10
-        },
+        BEASTMEN_TREASURE_OFFSET = GetFirstID('qm3'),
     },
 }
 
