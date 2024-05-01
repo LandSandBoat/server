@@ -1147,6 +1147,7 @@ function Battlefield:handleAllMonstersDefeated(battlefield, mob)
     if crateId ~= 0 then
         local crate = GetNPCByID(crateId)
 
+        battlefield:insertEntity(crate:getTargID(), false, true)
         npcUtil.showCrate(crate)
         crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(self.handleOpenArmouryCrate, self))
     else
