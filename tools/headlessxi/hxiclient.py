@@ -17,7 +17,7 @@ class HXIClient:
         self.server = server
         self.slot = slot
         self.debug_packets = debug_packets
-        self.xiloaderVersionNumber = "1.0.0" # compatible xiloader version
+        self.xiloaderVersionNumber = "1.1.1"  # compatible xiloader version
 
         # Read from version.conf default
         if client_str == "":
@@ -60,7 +60,7 @@ class HXIClient:
 
         data[0x39] = 0x10  # Auto-login
 
-	# 17 bytes of reserved space starting at 0x50
+        # 17 bytes of reserved space starting at 0x50
         util.memcpy(self.password, 0, data, 0x30, len(self.password))
 
         util.memcpy(self.xiloaderVersionNumber, 0, data, 0x61, 5)
