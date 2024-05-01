@@ -5919,16 +5919,8 @@ uint8 CLuaBaseEntity::getSubJob()
 
 void CLuaBaseEntity::changeJob(uint8 newJob)
 {
-    if (m_PBaseEntity && m_PBaseEntity->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-
-        if (!PChar)
-        {
-            ShowWarning("CLuaBaseEntity::changeJob() - m_pBaseEntity is not of type Char.");
-            return;
-        }
-
         JOBTYPE prevjob = PChar->GetMJob();
 
         PChar->resetPetZoningInfo();
@@ -5985,26 +5977,12 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
         PChar->pushPacket(new CMonipulatorPacket2(PChar));
         PChar->pushPacket(new CCharSyncPacket(PChar));
     }
-    else
+    else if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
     {
-        auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity);
-
-        if (!PMob)
-        {
-            ShowWarning("CLuaBaseEntity::changeJob() - m_pBaseEntity is not a supported entity type for job changing.");
-            return;
-        }
-
         PMob->SetMJob(newJob);
 
         // Change weapon type based on new job
-        auto* PWeapon = dynamic_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN]);
-
-        if (PWeapon == nullptr)
-        {
-            PWeapon = new CItemWeapon(0);
-        }
-
+        CItemWeapon* PWeapon = new CItemWeapon(0);
         PWeapon->setDelay(4000);
         PWeapon->setBaseDelay(4000);
 
@@ -6068,7 +6046,13 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
                 break;
         }
 
+        PMob->m_Weapons[SLOT_MAIN] = PWeapon;
         mobutils::CalculateMobStats(PMob);
+    }
+    else
+    {
+        ShowWarning("CLuaBaseEntity::changeJob() - m_pBaseEntity is not a supported entity.");
+        return;
     }
 }
 
