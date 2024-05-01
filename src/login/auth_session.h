@@ -49,7 +49,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define LOGIN_ERROR_ALREADY_LOGGED_IN   0x0A
 #define LOGIN_ERROR_VERSION_UNSUPPORTED 0x0B
 
-#define SUPPORTED_XILOADER_VERSION "1.0.0"
+// Only the first 3 characters of the version string are matched
+// ie. 1.1.1 -> 1.1.x
+// Major.Minor.Patch
+// Major and minor version changes should be breaking, patch should not.
+#define SUPPORTED_XILOADER_VERSION "1.1.x"
 
 // NOTE: This collection of flags is 64-bits wide!
 enum AUTH_COMPONENTS
