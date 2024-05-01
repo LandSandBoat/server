@@ -422,31 +422,53 @@ xi.dynamis.mobOnDeathDiabolos = function(mob, player, optParams)
     end
 
     local allDead = true
+    mob:getID()
 
-    local aliveDiabolos = {}
-    if zone:getLocalVar("DiabolosClub") > 0 then
-        table.insert(aliveDiabolos, GetMobByID(zone:getLocalVar("DiabolosClub")))
+    -- Dynamic IDs - cannot trust a mob's ID outside the scope of its life
+    -- So we require another layer of indirection for persistence
+    if mob:getID() == zone:getLocalVar("DiabolosClub") then
+        zone:setLocalVar("DiabolosClubDeath", 1)
     end
 
-    if zone:getLocalVar("DiabolosHeart") > 0 then
-        table.insert(aliveDiabolos, GetMobByID(zone:getLocalVar("DiabolosHeart")))
+    if mob:getID() == zone:getLocalVar("DiabolosHeart") then
+        zone:setLocalVar("DiabolosHeartDeath", 1)
     end
 
-    if zone:getLocalVar("DiabolosSpade") > 0 then
-        table.insert(aliveDiabolos, GetMobByID(zone:getLocalVar("DiabolosSpade")))
+    if mob:getID() == zone:getLocalVar("DiabolosSpade") then
+        zone:setLocalVar("DiabolosSpadeDeath", 1)
     end
 
-    if zone:getLocalVar("DiabolosDiamond") > 0 then
-        table.insert(aliveDiabolos, GetMobByID(zone:getLocalVar("DiabolosDiamond")))
+    if mob:getID() == zone:getLocalVar("DiabolosDiamond") then
+        zone:setLocalVar("DiabolosDiamondDeath", 1)
     end
 
-    for _, v in pairs(aliveDiabolos) do
-        if
-            v ~= nil and
-            v:isAlive()
-        then
-            allDead = false
-        end
+    -- Check that each mob is dead
+    if
+        zone:getLocalVar("DiabolosClub") > 0 and
+        zone:getLocalVar("DiabolosClubDeath") == 0
+    then
+        allDead = false
+    end
+
+    if
+        zone:getLocalVar("DiabolosHeart") > 0 and
+        zone:getLocalVar("DiabolosHeartDeath") == 0
+    then
+        allDead = false
+    end
+
+    if
+        zone:getLocalVar("DiabolosSpade") > 0 and
+        zone:getLocalVar("DiabolosSpadeDeath") == 0
+    then
+        allDead = false
+    end
+
+    if
+        zone:getLocalVar("DiabolosDiamond") > 0 and
+        zone:getLocalVar("DiabolosDiamondDeath") == 0
+    then
+        allDead = false
     end
 
     if allDead then
@@ -464,48 +486,85 @@ xi.dynamis.mobOnDeathDiabolos = function(mob, player, optParams)
 end
 
 xi.dynamis.onMobEngagedDiabolos = function(mob, mobTarget)
+    local zone = mob:getZone()
     mob:setLocalVar("hasEngaged", 1)
+    if mob:getID() == zone:getLocalVar("DiabolosClub") then
+        zone:setLocalVar("DiabolosClubEngaged", 1)
+    end
+
+    if mob:getID() == zone:getLocalVar("DiabolosHeart") then
+        zone:setLocalVar("DiabolosHeartEngaged", 1)
+    end
+
+    if mob:getID() == zone:getLocalVar("DiabolosSpade") then
+        zone:setLocalVar("DiabolosSpadeEngaged", 1)
+    end
+
+    if mob:getID() == zone:getLocalVar("DiabolosDiamond") then
+        zone:setLocalVar("DiabolosDiamondEngaged", 1)
+    end
 end
 
 xi.dynamis.onMobRoamDiabolos = function(mob)
+    local zone = mob:getZone()
+    local noHate = true
+
+    -- do nothing if never engaged
     if mob:getLocalVar("hasEngaged") == 0 then
         return
     end
 
-    local zone = mob:getZone()
-    local noHate = true
-    local spawnedDiabolos = {}
-    if zone:getLocalVar("DiabolosClub") > 0 then
-        table.insert(spawnedDiabolos, GetMobByID(zone:getLocalVar("DiabolosClub")))
+    -- set engaged variables
+    if mob:getID() == zone:getLocalVar("DiabolosClub") then
+        zone:setLocalVar("DiabolosClubEngaged", 0)
     end
 
-    if zone:getLocalVar("DiabolosHeart") > 0 then
-        table.insert(spawnedDiabolos, GetMobByID(zone:getLocalVar("DiabolosHeart")))
+    if mob:getID() == zone:getLocalVar("DiabolosHeart") then
+        zone:setLocalVar("DiabolosHeartEngaged", 0)
     end
 
-    if zone:getLocalVar("DiabolosSpade") > 0 then
-        table.insert(spawnedDiabolos, GetMobByID(zone:getLocalVar("DiabolosSpade")))
+    if mob:getID() == zone:getLocalVar("DiabolosSpade") then
+        zone:setLocalVar("DiabolosSpadeEngaged", 0)
     end
 
-    if zone:getLocalVar("DiabolosDiamond") > 0 then
-        table.insert(spawnedDiabolos, GetMobByID(zone:getLocalVar("DiabolosDiamond")))
+    if mob:getID() == zone:getLocalVar("DiabolosDiamond") then
+        zone:setLocalVar("DiabolosDiamondEngaged", 0)
     end
 
-    for _, v in pairs(spawnedDiabolos) do
-        if
-            v ~= nil and
-            v:isEngaged()
-        then
-            noHate = false
-        end
+    -- Check all for hate
+    if
+        zone:getLocalVar("DiabolosClub") > 0 and
+        zone:getLocalVar("DiabolosDiamondEngaged") == 1
+    then
+        noHate = false
     end
 
-    mob:messageText(mob, ID.text.NOW_I_WILL_JOIN_THEM)
+    if
+        zone:getLocalVar("DiabolosHeart") > 0 and
+        zone:getLocalVar("DiabolosClubEngaged") == 1
+    then
+        noHate = false
+    end
+
+    if
+        zone:getLocalVar("DiabolosSpade") > 0 and
+        zone:getLocalVar("DiabolosSpadeEngaged") == 1
+    then
+        noHate = false
+    end
+
+    if
+        zone:getLocalVar("DiabolosDiamond") > 0 and
+        zone:getLocalVar("DiabolosDiamondEngaged") == 1
+    then
+        noHate = false
+    end
 
     if noHate then
-        for _, v in pairs(spawnedDiabolos) do
-            DespawnMob(v:getID())
-        end
+        mob:messageText(mob, ID.text.NOW_I_WILL_JOIN_THEM)
+
+        -- this will trigger on each on roam
+        DespawnMob(mob:getID())
 
         for i = 106, 109 do
             local mobID = zone:getLocalVar(string.format("%s", i))
