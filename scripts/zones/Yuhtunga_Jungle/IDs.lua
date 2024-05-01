@@ -55,37 +55,23 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
     },
     mob =
     {
-        MISCHIEVOUS_MICHOLAS_PH =
-        {
-            [17281148] = 17281149, -- -265.616 -0.5 -24.389
-        },
-        TIPHA                   = 17281030,
-        CARTHI                  = 17281031,
-        PYUU_THE_SPATEMAKER     = GetFirstID('Pyuu_the_Spatemaker'),
-        ROSE_GARDEN_PH          = 17281356,
-        ROSE_GARDEN             = 17281357,
-        VOLUPTUOUS_VILMA        = 17281358,
-        NASUS_OFFSET            = 17281491,
-        SIREN                   = GetFirstID('Siren'),
+        MISCHIEVOUS_MICHOLAS = GetFirstID('Mischievous_Micholas'),
+        TIPHA                = GetFirstID('Tipha'),
+        CARTHI               = GetFirstID('Carthi'),
+        PYUU_THE_SPATEMAKER  = GetFirstID('Pyuu_the_Spatemaker'),
+        ROSE_GARDEN          = GetFirstID('Rose_Garden'),
+        VOLUPTUOUS_VILMA     = GetFirstID('Voluptuous_Vilma'),
+        NASUS_OFFSET         = GetFirstID('Nasus'),
+        SIREN                = GetFirstID('Siren'),
     },
     npc =
     {
-        BLUE_RAFFLESIA_OFFSET = 17281587,
-        TUNING_OUT_QM         = 17281591, -- qm2 in npc_list
-        OVERSEER_BASE         = GetFirstID('Zorchorevi_RK'),
-        CERMET_HEADSTONE      = 17281626,
-        PEDDLESTOX            = 17281641,
-        BEASTMEN_TREASURE     =
-        {
-            17281644, -- qm3
-            17281645, -- qm4
-            17281646, -- qm5
-            17281647, -- qm6
-            17281648, -- qm7
-            17281649, -- qm8
-            17281650, -- qm9
-            17281651, -- qm10
-        },
+        BLUE_RAFFLESIA_OFFSET    = GetFirstID('Blue_Rafflesia'),
+        TUNING_OUT_QM            = GetFirstID('qm2'),
+        OVERSEER_BASE            = GetFirstID('Zorchorevi_RK'),
+        CERMET_HEADSTONE         = GetFirstID('Cermet_Headstone'),
+        PEDDLESTOX               = GetFirstID('Peddlestox'),
+        BEASTMEN_TREASURE_OFFSET = GetFirstID('qm3'),
 
         HARVESTING = GetTableOfIDs('Harvesting_Point'),
         LOGGING    = GetTableOfIDs('Logging_Point'),
