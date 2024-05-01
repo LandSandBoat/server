@@ -53,36 +53,15 @@ zones[xi.zone.XARCABARD] =
     },
     mob =
     {
-        BARBARIC_WEAPON_PH =
-        {
-            [17236026] = 17236027,
-        },
-        TIMEWORN_WARRIOR_PH =
-        {
-            [17236041] = 17236045,
-            [17236042] = 17236045,
-            [17236043] = 17236045,
-            [17236044] = 17236045,
-            [17236046] = 17236045,
-            [17236047] = 17236045,
-            [17236048] = 17236045,
-            [17236049] = 17236045,
-        },
-        SHADOW_EYE_PH =
-        {
-            [17236149] = 17236180, -- -223.872 -11.784 80.972
-            [17236174] = 17236180, -- -254.799 -15.003 -8.120
-            [17236175] = 17236180, -- -240.218 -12.523 42.568
-            [17236176] = 17236180, -- -245.251 -11.741 106.221
-            [17236177] = 17236180, -- -217.075 -8.306 51.115
-            [17236178] = 17236180, -- -234.354 -11.492 63.501
-        },
-        CHAOS_ELEMENTAL = 17236201,
-        BOREAL_HOUND    = 17236202,
-        BOREAL_COEURL   = 17236203,
-        BOREAL_TIGER    = 17236204,
-        KOENIGSTIGER    = 17236205,
-        VOIDWALKER      =
+        BARBARIC_WEAPON  = GetFirstID('Barbaric_Weapon'),
+        TIMEWORN_WARRIOR = GetFirstID('Timeworn_Warrior'),
+        SHADOW_EYE       = GetFirstID('Shadow_Eye'),
+        CHAOS_ELEMENTAL  = GetFirstID('Chaos_Elemental'),
+        BOREAL_HOUND     = GetFirstID('Boreal_Hound'),
+        BOREAL_COEURL    = GetFirstID('Boreal_Coeurl'),
+        BOREAL_TIGER     = GetFirstID('Boreal_Tiger'),
+        KOENIGSTIGER     = GetFirstID('Koenigstiger'),
+        VOIDWALKER       =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =
             {
