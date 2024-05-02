@@ -38,9 +38,9 @@ zones[xi.zone.THRONE_ROOM] =
     },
     mob =
     {
-        SHADOW_LORD_PHASE_1_OFFSET = 17453057,
-        SHADOW_LORD_PHASE_2_OFFSET = 17453060,
-        ZEID_BCNM_OFFSET           = 17453063,
+        SHADOW_LORD_PHASE_1_OFFSET = GetTableOfIDs('Shadow_Lord')[1],
+        SHADOW_LORD_PHASE_2_OFFSET = GetTableOfIDs('Shadow_Lord')[4],
+        ZEID_BCNM_OFFSET           = GetFirstID('Zeid'),
     },
     npc =
     {
