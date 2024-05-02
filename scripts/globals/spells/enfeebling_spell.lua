@@ -177,7 +177,7 @@ xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellE
 
         [xi.effect.PARALYSIS] = function()
             if spellId == xi.magic.spell.PARALYZE_II then
-                potency = utils.clamp(statDiff / 4 + 20, 10, 30)
+                potency = utils.clamp(statDiff / 4 + 24, 14, 34) -- Values from JP wiki: https://wiki.ffo.jp/html/3453.html
             else
                 potency = utils.clamp(statDiff / 4 + 15, 5, 25)
             end
@@ -207,7 +207,7 @@ xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellE
 
         [xi.effect.SLOW] = function()
             if spellId == xi.magic.spell.SLOW_II then
-                potency = utils.clamp(statDiff * 226 / 15 + 2380, 1250, 3510)
+                potency = utils.clamp(statDiff * 226 / 15 + 2780, 1650, 3910) -- https://wiki.ffo.jp/html/3454.html
             else
                 potency = utils.clamp(statDiff * 73 / 5 + 1825, 730, 2920)
             end
