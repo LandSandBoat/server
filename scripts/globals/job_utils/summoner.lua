@@ -214,19 +214,19 @@ xi.job_utils.summoner.onUseBloodPact = function(target, petskill, summoner, acti
     local mpCost           = getMPCost(baseMPCost, summoner, bloodPactAbility)
     local bloodPactRecast  = math.max(0, summoner:getLocalVar('bpRecastTime'))
 
-    if summoner:hasStatusEffect(xi.effect.APOGEE) then
-        summoner:resetRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID())
-        summoner:delStatusEffect(xi.effect.APOGEE)
-    end
-
     if target:getID() == action:getPrimaryTargetID() then
         -- MP and Cooldown is only consumed if the ability goes off
         summoner:delMP(mpCost)
-        if xi.settings.map.BLOOD_PACT_SHARED_TIMER then
-            summoner:addRecast(xi.recast.ABILITY, xi.recastID.BLOODPACT_RAGE, bloodPactRecast)
-            summoner:addRecast(xi.recast.ABILITY, xi.recastID.BLOODPACT_WARD, bloodPactRecast)
+        if summoner:hasStatusEffect(xi.effect.APOGEE) then
+            summoner:resetRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID())
+            summoner:delStatusEffect(xi.effect.APOGEE)
         else
-            summoner:addRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID(), bloodPactRecast)
+            if xi.settings.map.BLOOD_PACT_SHARED_TIMER then
+                summoner:addRecast(xi.recast.ABILITY, xi.recastID.BLOODPACT_RAGE, bloodPactRecast)
+                summoner:addRecast(xi.recast.ABILITY, xi.recastID.BLOODPACT_WARD, bloodPactRecast)
+            else
+                summoner:addRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID(), bloodPactRecast)
+            end
         end
     end
 end

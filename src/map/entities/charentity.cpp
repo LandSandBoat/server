@@ -1639,6 +1639,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                     {
                         mpCost *= 1.5f;
                         StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_BLOODPACT);
+                        this->SetLocalVar("bpRecastTime", 0);
                     }
 
                     // Blood Boon (does not affect Astral Flow BPs)
