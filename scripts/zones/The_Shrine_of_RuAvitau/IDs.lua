@@ -30,43 +30,16 @@ zones[xi.zone.THE_SHRINE_OF_RUAVITAU] =
     },
     mob =
     {
-        ULLIKUMMI        = 17506418,
-        OLLAS_OFFSET     = 17506667,
-        KIRIN            = 17506670,
-        MOTHER_GLOBE     = 17506396,
+        ULLIKUMMI       = GetFirstID('Ullikummi'),
+        OLLAS_OFFSET    = GetFirstID('Olla_Pequena'),
+        KIRIN           = GetFirstID('Kirin'),
+        MOTHER_GLOBE    = GetFirstID('Mother_Globe'),
     },
     npc =
     {
-        DOORS =
-        {
-            [ 0] = 'y', [ 4] = 'b',
-            [ 1] = 'y', [ 5] = 'b',
-            [ 2] = 'y', [ 6] = 'b',
-            [ 3] = 'y', [ 7] = 'b',
-            [ 8] = 'y', [ 9] = 'b',
-            [12] = 'y', [10] = 'b',
-            [13] = 'y', [11] = 'b',
-            [14] = 'y', [16] = 'b',
-            [15] = 'y', [17] = 'b',
-            [19] = 'y', [18] = 'b',
-            [21] = 'y', [20] = 'b',
-        },
-        MONOLITHS =
-        {
-            [ 0] = 'y', [ 4] = 'b',
-            [ 1] = 'y', [ 5] = 'b',
-            [ 2] = 'y', [ 6] = 'b',
-            [ 3] = 'y', [ 7] = 'b',
-            [ 9] = 'y', [ 8] = 'b',
-            [12] = 'y', [10] = 'b',
-            [13] = 'y', [11] = 'b',
-            [16] = 'y', [14] = 'b',
-            [17] = 'y', [15] = 'b',
-            [18] = 'y', [19] = 'b',
-        },
-        OLLAS_QM        = 17506692,
-        DOOR_OFFSET     = 17506719,
-        MONOLITH_OFFSET = 17506742,
+        OLLAS_QM        = GetFirstID('qm1'),
+        DOOR_OFFSET     = GetFirstID('_4y0'),
+        MONOLITH_OFFSET = GetFirstID('Monolith'),
     },
 }
 
