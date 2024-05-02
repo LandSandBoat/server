@@ -23,7 +23,7 @@ spellObject.onMobSpawn = function(mob)
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.HASSO,
         ai.r.JA, ai.s.SPECIFIC, xi.ja.HASSO)
-
+	
     mob:addSimpleGambit(ai.t.SELF, ai.c.HAS_TOP_ENMITY, 0,
         ai.r.JA, ai.s.SPECIFIC, xi.ja.THIRD_EYE)
 
