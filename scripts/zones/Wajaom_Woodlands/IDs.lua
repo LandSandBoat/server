@@ -39,26 +39,13 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
         {
             ['Marid'] = GetTableOfIDs('Chigoe', 5),
         },
-        JADED_JODY_PH          =
-        {
-            [16986376] = 16986378, -- -560 -8 -360
-            [16986390] = 16986378, -- -565 -7 -324
-        },
-        ZORAAL_JA_S_PKUUCHA_PH =
-        {
-            [16986191] = 16986197, -- 181.000 -18.000 -63.000
-            [16986192] = 16986197, -- 181.000 -19.000 -77.000
-            [16986193] = 16986197, -- 195.000 -18.000 -95.000
-            [16986194] = 16986197, -- 220.000 -19.000 -80.000
-            [16986195] = 16986197, -- 219.000 -18.000 -59.000
-            [16986196] = 16986197, -- 203.000 -16.000 -74.000
-        },
-        ZORAAL_JA_S_PKUUCHA    = 16986197,
-        PERCIPIENT_ZORAAL_JA   = 16986198,
-        VULPANGUE              = 16986428,
-        IRIZ_IMA               = 16986429,
-        GOTOH_ZHA_THE_REDOLENT = 16986430,
-        TINNIN                 = 16986431,
+        JADED_JODY             = GetFirstID('Jaded_Jody'),
+        ZORAAL_JA_S_PKUUCHA    = GetFirstID('Zoraal_Jas_Pkuucha'),
+        PERCIPIENT_ZORAAL_JA   = GetFirstID('Percipient_Zoraal_Ja'),
+        VULPANGUE              = GetFirstID('Vulpangue'),
+        IRIZ_IMA               = GetFirstID('Iriz_Ima'),
+        GOTOH_ZHA_THE_REDOLENT = GetFirstID('Gotoh_Zha_the_Redolent'),
+        TINNIN                 = GetFirstID('Tinnin'),
     },
     npc =
     {
