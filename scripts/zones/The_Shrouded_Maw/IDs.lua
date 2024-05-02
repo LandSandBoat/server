@@ -28,11 +28,11 @@ zones[xi.zone.THE_SHROUDED_MAW] =
     },
     mob =
     {
-        DIABOLOS_OFFSET = 16818177,
+        DIABOLOS_OFFSET = GetFirstID('Diabolos'),
     },
     npc =
     {
-        DARKNESS_NAMED_TILE_OFFSET = 16818260, -- _0a0 in npc_list
+        DARKNESS_NAMED_TILE_OFFSET = GetFirstID('_0a0'),
     },
 }
 
