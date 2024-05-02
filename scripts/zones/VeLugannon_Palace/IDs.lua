@@ -30,32 +30,17 @@ zones[xi.zone.VELUGANNON_PALACE] =
     },
     mob =
     {
-        MIMIC                   = 17502567,
-        BRIGANDISH_BLADE        = 17502568,
-        STEAM_CLEANER           = 17502569,
-        STEAM_CLEANER_DETECTORS =
-        {
-            -- E Lower Chamber
-            17502543,
-            17502545,
-            -- W Lower Chamber
-            17502547,
-            17502549,
-            -- NE Lower Chamber
-            17502551,
-            17502553,
-            -- NW Lower Chamber
-            17502555,
-            17502557,
-        },
+        MIMIC            = GetFirstID('Mimic'),
+        BRIGANDISH_BLADE = GetFirstID('Brigandish_Blade'),
+        STEAM_CLEANER    = GetFirstID('Steam_Cleaner'),
     },
     npc =
     {
-        QM3             = 17502583,
-        Y_DOOR_OFFSET   = 17502609,
-        B_DOOR_OFFSET   = 17502617,
-        Y_LITH_OFFSET   = 17502625,
-        B_LITH_OFFSET   = 17502635,
+        QM3             = GetFirstID('qm3'),
+        Y_DOOR_OFFSET   = GetFirstID('_4x0'),
+        B_DOOR_OFFSET   = GetFirstID('_4x8'),
+        Y_LITH_OFFSET   = GetTableOfIDs('Monolith')[1],
+        B_LITH_OFFSET   = GetTableOfIDs('Monolith')[6],
         TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
     },
 }
