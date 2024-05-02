@@ -54,19 +54,13 @@ zones[xi.zone.WEST_RONFAURE] =
     },
     mob =
     {
-        FUNGUS_BEETLE_PH      =
-        {
-            [17187026] = 17187047, -- -332.722 -21.032 -112.044
-        },
-        JAGGEDY_EARED_JACK_PH =
-        {
-            [17187110] = 17187111, -- -262.780 -22.384 -253.873
-        },
-        MARAUDER_DVOGZOG      = 17187273,
+        FUNGUS_BEETLE      = GetFirstID('Fungus_Beetle'),
+        JAGGEDY_EARED_JACK = GetFirstID('Jaggedy-Eared_Jack'),
+        MARAUDER_DVOGZOG   = GetFirstID('Marauder_Dvogzog'),
     },
     npc =
     {
-        SIGNPOST_OFFSET = 17187506,
+        SIGNPOST_OFFSET = GetFirstID('Signpost'),
         OVERSEER_BASE   = GetFirstID('Doladepaiton_RK'),
     },
 }
