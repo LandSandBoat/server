@@ -33,12 +33,12 @@ zones[xi.zone.VALLEY_OF_SORROWS] =
     },
     mob =
     {
-        ADAMANTOISE   = 17301537,
-        ASPIDOCHELONE = 17301538,
+        ADAMANTOISE   = GetFirstID('Adamantoise'),
+        ASPIDOCHELONE = GetFirstID('Aspidochelone'),
     },
     npc =
     {
-        ADAMANTOISE_QM = 17301568,
+        ADAMANTOISE_QM = GetFirstID('qm1'),
     },
 }
 
