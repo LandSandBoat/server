@@ -32,22 +32,10 @@ zones[xi.zone.UPPER_DELKFUTTS_TOWER] =
     },
     mob =
     {
-        ENKELADOS_PH =
-        {
-            [17424388] = 17424385, -- -371.586 -144.367 28.244
-            [17424426] = 17424423, -- -215.194 -144.099 19.528
-        },
-        IXTAB_PH =
-        {
-            [17424472] = 17424475,
-            [17424473] = 17424475,
-            [17424474] = 17424475,
-            [17424509] = 17424512,
-            [17424510] = 17424512,
-            [17424511] = 17424512,
-        },
-        PALLAS       = 17424444,
-        ALKYONEUS    = 17424480,
+        ENKELADOS = GetTableOfIDs('Enkelados'),
+        IXTAB     = GetTableOfIDs('Ixtab'),
+        PALLAS    = GetFirstID('Pallas'),
+        ALKYONEUS = GetFirstID('Alkyoneus'),
     },
     npc =
     {
