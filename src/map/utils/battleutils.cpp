@@ -5984,6 +5984,29 @@ namespace battleutils
         }
     }
 
+    // turn towards target unless mob behavior ignores this (but can be forced to anyway)
+    void turnTowardsTarget(CBaseEntity* PEntity, CBaseEntity* PTarget, bool force)
+    {
+        // Quick rejects
+        if (!PEntity || !PTarget)
+        {
+            return;
+        }
+
+        CMobEntity* PMob = dynamic_cast<CMobEntity*>(PEntity);
+
+        // Big mobs typically should ignore this -- Such as dragons/wyrms or other big things.
+        // Some TP moves like Petro Eyes from normal dragons _also_ ignore their standard behavior, so we must allow it sometimes.
+        if (PMob && (PMob->m_Behaviour & BEHAVIOUR_NO_TURN) && !force)
+        {
+            return;
+        }
+
+        PEntity->loc.p.rotation = worldAngle(PEntity->loc.p, PTarget->loc.p);
+        PEntity->updatemask |= UPDATE_POS;
+        PEntity->loc.zone->UpdateEntityPacket(PTarget, ENTITY_UPDATE, UPDATE_POS);
+    }
+
     /************************************************************************
      *                                                                       *
      *  Get the Snapshot shot time reduction                                 *
