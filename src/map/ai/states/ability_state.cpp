@@ -69,9 +69,13 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
         m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", CLuaBaseEntity(m_PEntity), CLuaAbility(PAbility));
 
         // face toward target
-        m_PEntity->loc.p.rotation = worldAngle(m_PEntity->loc.p, PTarget->loc.p);
-        m_PEntity->updatemask |= UPDATE_POS;
-        m_PEntity->loc.zone->UpdateEntityPacket(m_PEntity, ENTITY_UPDATE, UPDATE_POS);
+        auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity);
+        if (!PMob || !(PMob->m_Behaviour & BEHAVIOUR_NO_TURN))
+        {
+            m_PEntity->loc.p.rotation = worldAngle(m_PEntity->loc.p, PTarget->loc.p);
+            m_PEntity->updatemask |= UPDATE_POS;
+            m_PEntity->loc.zone->UpdateEntityPacket(m_PEntity, ENTITY_UPDATE, UPDATE_POS);
+        }
     }
     else
     {
@@ -118,8 +122,13 @@ bool CAbilityState::Update(time_point tick)
         CBaseEntity* PTarget = GetTarget();
         if (PTarget)
         {
-            m_PEntity->loc.p.rotation = worldAngle(m_PEntity->loc.p, PTarget->loc.p);
-            m_PEntity->loc.zone->UpdateEntityPacket(m_PEntity, ENTITY_UPDATE, UPDATE_POS);
+            auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity);
+            if (!PMob || !(PMob->m_Behaviour & BEHAVIOUR_NO_TURN))
+            {
+                m_PEntity->loc.p.rotation = worldAngle(m_PEntity->loc.p, PTarget->loc.p);
+                m_PEntity->updatemask |= UPDATE_POS;
+                m_PEntity->loc.zone->UpdateEntityPacket(m_PEntity, ENTITY_UPDATE, UPDATE_POS);
+            }
         }
     }
 
