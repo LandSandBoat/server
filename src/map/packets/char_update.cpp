@@ -290,7 +290,7 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     charUpateFlags::flags2_t flags2 = {};
 
     flags2.NamedFlag       = false; // disable "The"
-    flags2.SingleFlag      = true;  // singular entity
+    flags2.SingleFlag      = false; // singular entity
     flags2.AutoPartyFlag   = false; // Not implemented.
     flags2.MotStopFlag     = PChar->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR);
     flags2.CliPriorityFlag = PChar->priorityRender;
