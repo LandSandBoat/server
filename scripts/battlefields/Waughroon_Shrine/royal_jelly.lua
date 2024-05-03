@@ -20,7 +20,11 @@ local content = Battlefield:new({
     experimental = true,
 })
 
-content:addEssentialMobs({ 'Queen_Jelly', 'Princess_Jelly' })
+-- base queens that must be dead to get win, but doesn't start spawned
+content:addEssentialMobs({ 'Queen_Jelly' })
+content.groups[1].spawned = false
+
+content:addEssentialMobs({ 'Princess_Jelly' })
 
 content.loot =
 {
