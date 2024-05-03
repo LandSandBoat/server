@@ -3,9 +3,6 @@
 -- A Moogle Kupo d'Etat M14
 -- !addmission 10 13
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.SMASH_A_MALEVOLENT_MENACE)
 
