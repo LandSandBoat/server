@@ -18,15 +18,10 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     target:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, buffvalue, 0, duration)
     target:addStatusEffect(xi.effect.MAGIC_DEF_BOOST, 14 - buffvalue, 0, duration)
 
-    if target:addStatusEffect(xi.effect.PHALANX, 13, 0, duration) then
-        if target:getID() == action:getPrimaryTargetID() then
-            petskill:setMsg(xi.msg.basic.JA_RECEIVES_2_EFFECTS)
-        else
-            petskill:setMsg(xi.msg.basic.JA_RECEIVES_2_EFFECTS_2)
-        end
+    if target:getID() == action:getPrimaryTargetID() then
+        petskill:setMsg(xi.msg.basic.JA_RECEIVES_MAB_MDB)
     else
-        petskill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
-        return
+        petskill:setMsg(xi.msg.basic.JA_RECEIVES_MAB_MDB_2)
     end
 
     return 0
