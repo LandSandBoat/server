@@ -9,10 +9,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
     local duration = 90
     local dotdamage = 2
     local sleepTier = 1
@@ -20,7 +21,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local bonus = xi.summon.getSummoningSkillOverCap(pet)
     local resm = xi.mobskills.applyPlayerResistance(pet, -1, target, dINT, bonus, xi.element.DARK)
     if resm < 0.5 then
-        skill:setMsg(xi.msg.basic.JA_MISS_2) -- resist message
+        petskill:setMsg(xi.msg.basic.JA_MISS_2) -- resist message
         return xi.effect.SLEEP_I
     end
 
@@ -32,11 +33,11 @@ abilityObject.onPetAbility = function(target, pet, skill)
         target:hasStatusEffect(xi.effect.LULLABY)
     then
         --No effect
-        skill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
+        petskill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
     elseif target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, duration, 0, dotdamage, sleepTier) then
-        skill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
+        petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
     else
-        skill:setMsg(xi.msg.basic.JA_MISS_2)
+        petskill:setMsg(xi.msg.basic.JA_MISS_2)
     end
 
     return xi.effect.SLEEP_I
