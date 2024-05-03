@@ -872,7 +872,7 @@ namespace luautils
         // Mobs
         {
             auto query = fmt::sprintf("SELECT mobname, mobid FROM mob_spawn_points "
-                                      "WHERE ((mobid >> 12) & 0xFFF) = %i",
+                                      "WHERE ((mobid >> 12) & 0xFFF) = %i ORDER BY mobid ASC",
                                       zoneId);
             auto ret   = _sql->Query(query.c_str());
             while (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
@@ -887,7 +887,7 @@ namespace luautils
         // NPCs
         {
             auto query = fmt::sprintf("SELECT name, npcid FROM npc_list "
-                                      "WHERE ((npcid >> 12) & 0xFFF) = %i",
+                                      "WHERE ((npcid >> 12) & 0xFFF) = %i ORDER BY npcid ASC",
                                       zoneId);
             auto ret   = _sql->Query(query.c_str());
             while (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
