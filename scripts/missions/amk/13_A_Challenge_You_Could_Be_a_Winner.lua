@@ -24,9 +24,6 @@
 -- Craggy Pillar 3 : !pos -368 -52.5 -127.5 162
 -- Craggy Pillar 4 : !pos -236 -52 103 162
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.A_CHALLENGE_YOU_COULD_BE_A_WINNER)
 

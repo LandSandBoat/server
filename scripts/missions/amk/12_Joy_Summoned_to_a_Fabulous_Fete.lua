@@ -3,9 +3,6 @@
 -- A Moogle Kupo d'Etat M12
 -- !addmission 10 11
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.JOY_SUMMONED_TO_A_FABULOUS_FETE)
 

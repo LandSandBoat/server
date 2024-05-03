@@ -10,11 +10,6 @@
 -- RIPE_STARFRUIT : !addkeyitem 1143
 -- Shantotto      : !pos 122 -2 112 239
 -----------------------------------
-require('scripts/globals/confrontation')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 local horutotoID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
 

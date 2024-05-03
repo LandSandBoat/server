@@ -15,8 +15,6 @@
 -- STONE_OF_KETU           : !addkeyitem 1153
 -- NAVARATNA_TALISMAN      : !addkeyitem 1158
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
 local ID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 
