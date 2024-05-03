@@ -1786,6 +1786,7 @@ namespace battleutils
         float chance = xirand::GetRandomNumber<float>(1.0f);
 
         // caps, always give a 1% chance of interrupt // TODO: verify, perhaps there is a breakpoint where this no longer happens.
+        check /= 100.0f;
         if (check < 0.01)
         {
             check = 0.01;
