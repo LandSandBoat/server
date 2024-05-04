@@ -4,9 +4,6 @@
 -- !addmission 10 10
 -- Inconspicuous Door : !pos -15 1.300 68 244
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.RELIEF_A_TRIUMPHANT_RETURN)
 

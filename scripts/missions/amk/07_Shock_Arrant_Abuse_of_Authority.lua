@@ -6,10 +6,6 @@
 -- Note: KI aquisition is handled in chocobo_digging.lua
 -- MOLDY_WORM_EATEN_CHEST : !addkeyitem 1144
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
-require('scripts/missions/amk/helpers')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.SHOCK_ARRANT_ABUSE_OF_AUTHORITY)
 

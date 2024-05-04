@@ -3,9 +3,6 @@
 -- A Moogle Kupo d'Etat M10
 -- !addmission 10 9
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS)
 
