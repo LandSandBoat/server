@@ -33,7 +33,7 @@ zones[xi.zone.TALACCA_COVE] =
     },
     mob =
     {
-        GESSHO = 17010725,
+        GESSHO = GetFirstID('Gessho'),
     },
     npc =
     {
