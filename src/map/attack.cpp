@@ -190,13 +190,21 @@ bool CAttack::IsBlocked() const
     return m_isBlocked;
 }
 
-bool CAttack::IsParried()
+bool CAttack::IsParried() const
+{
+    return m_isParried;
+}
+
+bool CAttack::CheckParried()
 {
     if (m_attackType != PHYSICAL_ATTACK_TYPE::DAKEN)
     {
-        return attackutils::IsParried(m_attacker, m_victim);
+        if (attackutils::IsParried(m_attacker, m_victim))
+        {
+            m_isParried = true;
+        }
     }
-    return false;
+    return m_isParried;
 }
 
 bool CAttack::IsAnticipated() const
