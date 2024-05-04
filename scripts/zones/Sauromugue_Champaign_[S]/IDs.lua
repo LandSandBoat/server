@@ -33,12 +33,8 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
     },
     mob =
     {
-        BALAM_QUITZ_PH =
-        {
-            [17178778] = 17178803, -- 481.509 24.184 98.264
-        },
-
-        COQUECIGRUE = 17178689,
+        BALAM_QUITZ = GetFirstID('Balam-Quitz'),
+        COQUECIGRUE = GetFirstID('Coquecigrue'),
 
         VOIDWALKER =
         {

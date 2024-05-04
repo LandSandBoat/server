@@ -50,26 +50,13 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
     },
     mob =
     {
-        DEADLY_DODO_PH     =
-        {
-            [17268849] = 17268851, -- 238.000 40.000 332.000
-            [17268850] = 17268851, -- 369.564 39.658 345.197
-        },
-
-        BLIGHTING_BRAND_PH =
-        {
-            [17269013] = 17269016, -- 240.725 1.853 223.185
-        },
-
-        BASHE_PH =
-        {
-            [17268782] = 17268788, -- 537.188 6.167 -11.067
-        },
-
-        OLD_SABERTOOTH     = 17268808,
-        ROC                = 17269106,
-        CLIMBPIX_HIGHRISE  = 17269107,
-        DRIBBLIX_GREASEMAW = 17269114,
+        DEADLY_DODO        = GetFirstID('Deadly_Dodo'),
+        BLIGHTING_BRAND    = GetFirstID('Blighting_Brand'),
+        BASHE              = GetFirstID('Bashe'),
+        OLD_SABERTOOTH     = GetFirstID('Old_Sabertooth'),
+        ROC                = GetFirstID('Roc'),
+        CLIMBPIX_HIGHRISE  = GetFirstID('Climbpix_Highrise'),
+        DRIBBLIX_GREASEMAW = GetFirstID('Dribblix_Greasemaw'),
 
         VOIDWALKER =
         {
@@ -105,7 +92,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
 
     npc =
     {
-        QM2 = 17269229,
+        QM2 = GetFirstID('qm2'), -- THF AF2
     },
 }
 
