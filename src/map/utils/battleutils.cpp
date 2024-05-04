@@ -5974,7 +5974,7 @@ namespace battleutils
                 PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(1));
             }
 
-            if (PChar != PTarget)
+            if (PChar != PTarget && PTarget->objtype == TYPE_PC)
             {
                 // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
                 PTarget->pushPacket(new CCharRecastPacket(PTarget));
