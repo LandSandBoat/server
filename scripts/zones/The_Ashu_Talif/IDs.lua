@@ -46,34 +46,11 @@ zones[xi.zone.THE_ASHU_TALIF] =
 
     mob =
     {
-        -- The Black Coffin - Wave 1
-        GESSHO = 17022979,
-
-        [1] =
-        {
-            ASHU_TALIF_CREW_1 = 17022980,
-            ASHU_TALIF_CREW_2 = 17022981,
-            ASHU_TALIF_CREW_3 = 17022982,
-            ASHU_TALIF_CREW_4 = 17022983,
-            ASHU_TALIF_CREW_5 = 17022984,
-        },
-
-        -- The Black Coffin - Wave 2
-        [2] =
-        {
-            ASHU_TALIF_CAPTAIN = 17022985,
-            ASHU_TALIF_CREW_6  = 17022986,
-            ASHU_TALIF_CREW_7  = 17022987,
-            ASHU_TALIF_CREW_8  = 17022988,
-            ASHU_TALIF_CREW_9  = 17022989,
-        },
-
-        -- Against All Odds - Cor AF2
-        [54] =
-        {
-            GOWAM              = 17022977,
-            YAZQUHL            = 17022978,
-        },
+        GESSHO              = GetFirstID('Gessho'),
+        ASHU_CREW_OFFSET    = GetFirstID('Ashu_Talif_Crew'),
+        ASHU_CAPTAIN_OFFSET = GetFirstID('Ashu_Talif_Captain'),
+        GOWAM               = GetFirstID('Gowam'),
+        YAZQUHL             = GetFirstID('Yazquhl'),
     },
 
     npc =
