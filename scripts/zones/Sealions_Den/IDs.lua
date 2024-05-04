@@ -26,20 +26,13 @@ zones[xi.zone.SEALIONS_DEN] =
     },
     mob =
     {
-        ONE_TO_BE_FEARED_OFFSET = 16908289,
-        OMEGA_OFFSET = 16908294,
-        WARRIORS_PATH_OFFSET    = 16908310,
+        ONE_TO_BE_FEARED_OFFSET = GetFirstID('Mammet-22_Zeta'),
+        OMEGA_OFFSET            = GetFirstID('Omega'),
+        WARRIORS_PATH_OFFSET    = GetFirstID('Tenzen'),
     },
     npc =
     {
-        AIRSHIP_DOOR_OFFSET = 16908421,
-    },
-    aWarriorsPath =
-    {
-        TENZEN_ID         = 16908310,
-        MAKKI_SHAKKI_ID   = 16908311,
-        KUKKI_CHEBUKKI_ID = 16908312,
-        CHERUKKI_ID       = 16908313,
+        AIRSHIP_DOOR_OFFSET = GetFirstID('Airship_Door'),
     },
 }
 
