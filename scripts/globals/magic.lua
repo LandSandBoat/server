@@ -522,23 +522,23 @@ function applyResistanceEffect(caster, target, spell, params)
         percentBonus = percentBonus - xi.magic.getEffectResistance(target, effect)
     end
 
-    local p = getMagicHitRate(caster, target, skill, element, percentBonus, magicaccbonus)
+    local magicHitRate = getMagicHitRate(caster, target, skill, element, percentBonus, magicaccbonus)
 
-    return getMagicResist(p)
+    return getMagicResist(caster, target, skill, element, magicHitRate)
 end
 
 -- Applies resistance for things that may not be spells - ie. Quick Draw
 function applyResistanceAbility(player, target, element, skill, bonus)
-    local p = getMagicHitRate(player, target, skill, element, 0, bonus)
+    local magicHitRate = getMagicHitRate(player, target, skill, element, 0, bonus)
 
-    return getMagicResist(p)
+    return getMagicResist(player, target, skill, element, magicHitRate)
 end
 
 -- Applies resistance for additional effects
 function applyResistanceAddEffect(player, target, element, bonus)
-    local p = getMagicHitRate(player, target, 0, element, 0, bonus)
+    local magicHitRate = getMagicHitRate(player, target, 0, element, 0, bonus)
 
-    return getMagicResist(p)
+    return getMagicResist(player, target, xi.skill.NONE, element, magicHitRate)
 end
 
 function getMagicHitRate(caster, target, skillType, element, percentBonus, bonusAcc)
@@ -593,29 +593,8 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
 end
 
 -- Returns resistance value from given magic hit rate (p)
-function getMagicResist(magicHitRate)
-    local p = magicHitRate / 100
-    local resist = 1.0
-
-    -- Resistance thresholds based on p.  A higher p leads to lower resist rates, and a lower p leads to higher resist rates.
-    local half      = (1 - p)
-    local quart     = ((1 - p)^2)
-    local eighth    = ((1 - p)^3)
-    local sixteenth = ((1 - p)^4)
-    local resvar    = math.random()
-
-    -- Determine final resist based on which thresholds have been crossed.
-    if resvar <= sixteenth then
-        resist = 0.0625
-    elseif resvar <= eighth then
-        resist = 0.125
-    elseif resvar <= quart then
-        resist = 0.25
-    elseif resvar <= half then
-        resist = 0.5
-    end
-
-    return resist
+function getMagicResist(caster, target, skill, element, magicHitRate)
+    return xi.combat.magicHitRate.calculateResistRate(caster, target, skill, element, magicHitRate, 0)
 end
 
 -- Returns the amount of resistance the target has to the given effect
