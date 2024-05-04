@@ -2,6 +2,7 @@
 -- Image Support NPCs
 -----------------------------------
 require('scripts/globals/crafting/crafting_utils')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.crafting = xi.crafting or {}
@@ -86,7 +87,7 @@ xi.crafting.oldImageSupportOnTrigger = function(player, npc)
     local eventId          = npcTable[npcName][2]
     local paramOne         = xi.crafting.getCraftSkillCap(player, skillId) -- Param 1 (Skill cap OR Gil Cost)
     local skillLevel       = xi.crafting.getRealSkill(player, skillId)     -- Param 2
-    local messageParameter = npcTable[npcName][1]                  -- Param 3
+    local messageParameter = npcTable[npcName][1]                          -- Param 3
     local guildsJoined     = player:getCharVar('Guild_Member')             -- Param 4
     local playerGil        = player:getGil()                               -- Param 5
     local imageDuration    = 0                                             -- Param 6
@@ -114,10 +115,27 @@ xi.crafting.oldImageSupportOnEventFinish = function(player, csid, option, npc)
     local skillId          = npcTable[npcName][4]
     local effectId         = npcTable[npcName][5]
     local gilCost          = 0
+    local joinedGuildMask  = player:getCharVar('Guild_Member')
 
-    -- Calculate Gil cost.
+    -- Handle advance support.
     if messageParameter == 0 then
+        -- Calculate Gil cost.
         gilCost = (player:getSkillRank(skillId) + 1) * 30
+
+        -- Handle special initial messages.
+        if
+            guildId == xi.guild.GOLDSMITHING and                          -- Goldsmithing guild.
+            utils.mask.getBit(joinedGuildMask, xi.guild.GOLDSMITHING) and -- Has joined goldsnmithing guild.
+            not utils.mask.getBit(joinedGuildMask, 24)                    -- Has not spoken to npc after joining guild.
+        then
+            player:incrementCharVar('Guild_Member', bit.lshift(1, 24))
+        elseif
+            guildId == xi.guild.ALCHEMY and                          -- Alchemy guild.
+            utils.mask.getBit(joinedGuildMask, xi.guild.ALCHEMY) and -- Has joined alchemy guild.
+            not utils.mask.getBit(joinedGuildMask, 25)               -- Has not spoken to npc after joining guild.
+        then
+            player:incrementCharVar('Guild_Member', bit.lshift(1, 25))
+        end
     end
 
     -- Give status effect if aplicable.
@@ -165,11 +183,17 @@ xi.crafting.ahtUhrganImageSupportOnTrigger = function(player, npc)
 
     -- Calculate parameters
     local eventId          = npcTable[npcName][2]
+    local dialogueOptions  = 8
     local skillLevel       = 0
     local messageParameter = npcTable[npcName][1]
     local guildsJoined     = player:getCharVar('Guild_Member')
     local imageDuration    = 0
     local guildId          = npcTable[npcName][3]
+
+    -- Calculate dialogue options.
+    if messageParameter > 0 then
+        dialogueOptions = 4
+    end
 
     -- Calculate skill level
     if xi.crafting.hasJoinedGuild(player, guildId) then
@@ -182,7 +206,7 @@ xi.crafting.ahtUhrganImageSupportOnTrigger = function(player, npc)
     end
 
     -- Event handles everything with correct params.
-    player:startEvent(eventId, 8, skillLevel, messageParameter, guildsJoined, 0, imageDuration, guildId, xi.item.IMPERIAL_BRONZE_PIECE)
+    player:startEvent(eventId, dialogueOptions, skillLevel, messageParameter, guildsJoined, 0, imageDuration, guildId, xi.item.IMPERIAL_BRONZE_PIECE)
 end
 
 xi.crafting.ahtUhrganImageSupportOnEventFinish = function(player, csid, option, npc)
