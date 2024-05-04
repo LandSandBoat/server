@@ -42,7 +42,7 @@ zones[xi.zone.SELBINA] =
     },
     npc =
     {
-        EXPLORER_MOOGLE = 17793131,
+        EXPLORER_MOOGLE = GetFirstID('Explorer_Moogle'),
     },
 }
 
