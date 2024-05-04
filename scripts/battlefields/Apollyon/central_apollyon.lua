@@ -19,15 +19,11 @@ local content = Limbus:new({
     timeLimit        = utils.minutes(30),
     index            = 4,
     area             = 5,
-    entryNpc         = '_12i',
+    entryNpcs        = { '_12i', '_127' },
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, { xi.ki.RED_CARD, xi.ki.BLACK_CARD }, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     requiredItems    = { xi.item.SMALT_CHIP, xi.item.SMOKY_CHIP, xi.item.CHARCOAL_CHIP, xi.item.MAGENTA_CHIP },
     name             = 'CENTRAL_APOLLYON',
 })
-
-function content:isValidEntry(player, npc)
-    return self.entryNpc == '_12i' or self.entryNpc == '_127'
-end
 
 function content:onEntryEventUpdate(player, csid, option, npc)
     if Battlefield.onEntryEventUpdate(self, player, csid, option, npc) then
