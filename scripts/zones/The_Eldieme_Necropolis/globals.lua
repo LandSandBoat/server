@@ -63,7 +63,7 @@ local eldiemeGlobal =
 
                 -- Spawn all 7 Skulls
                 for skull = 1, 7 do
-                    SpawnMob(ID.mob.SKULL_OFFSET + skull)
+                    SpawnMob(ID.mob.LICH_C_MAGNUS + skull) -- IDs based off Lich C Magnus
                 end
 
                 break
