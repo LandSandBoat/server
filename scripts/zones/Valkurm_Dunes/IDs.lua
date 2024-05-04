@@ -49,23 +49,15 @@ zones[xi.zone.VALKURM_DUNES] =
     },
     mob =
     {
-        VALKURM_EMPEROR_PH =
-        {
-            [17199434] = 17199438, -- -228.957 2.776 -101.226
-        },
-        GOLDEN_BAT_PH      =
-        {
-            [17199562] = 17199564, -- -804.502 -8.567 22.082
-            [17199563] = 17199564, -- -798.674 -8.672 19.204
-            [17199461] = 17199564, -- -296.679 -0.510 -164.298
-        },
-        MARCHELUTE         = 17199566,
-        DOMAN              = 17199567,
-        ONRYO              = 17199568,
+        VALKURM_EMPEROR = GetFirstID('Valkurm_Emperor'),
+        GOLDEN_BAT      = GetFirstID('Golden_Bat'),
+        MARCHELUTE      = GetFirstID('Marchelute'),
+        DOMAN           = GetFirstID('Doman'),
+        ONRYO           = GetFirstID('Onryo'),
     },
     npc =
     {
-        SUNSAND_QM    = 17199700, -- qm1 in npc_list
+        SUNSAND_QM    = GetFirstID('qm1'),
         OVERSEER_BASE = GetFirstID('Quanteilleron_RK'),
     },
 }

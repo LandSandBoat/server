@@ -6,13 +6,26 @@ local ID = zones[xi.zone.VELUGANNON_PALACE]
 -----------------------------------
 local entity = {}
 
+local detectorPHTable =
+{
+
+    ID.mob.STEAM_CLEANER - 26, -- E Lower Chamber
+    ID.mob.STEAM_CLEANER - 24, -- E Lower Chamber
+    ID.mob.STEAM_CLEANER - 22, -- W Lower Chamber
+    ID.mob.STEAM_CLEANER - 20, -- W Lower Chamber
+    ID.mob.STEAM_CLEANER - 18, -- NE Lower Chamber
+    ID.mob.STEAM_CLEANER - 16, -- NE Lower Chamber
+    ID.mob.STEAM_CLEANER - 14, -- NW Lower Chamber
+    ID.mob.STEAM_CLEANER - 12, -- NW Lower Chamber
+}
+
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('petCount', 1)
 end
 
 local getMobToSpawn = function(detector)
     local detectorID              = detector:getID()
-    local canSpawnSteamCleaner    = GetServerVariable('[POP]SteamCleaner') < os.time() and utils.contains(detectorID, ID.mob.STEAM_CLEANER_DETECTORS)
+    local canSpawnSteamCleaner    = GetServerVariable('[POP]SteamCleaner') < os.time() and utils.contains(detectorID, detectorPHTable)
     local steamCleanerSpawnChance = 10 -- percent
     local steamCleaner            = GetMobByID(ID.mob.STEAM_CLEANER)
 

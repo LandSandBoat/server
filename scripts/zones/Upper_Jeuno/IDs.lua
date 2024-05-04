@@ -43,7 +43,7 @@ zones[xi.zone.UPPER_JEUNO] =
     },
     npc =
     {
-        MAPITOTO = 17776896,
+        MAPITOTO = GetFirstID('Mapitoto'),
     },
 }
 

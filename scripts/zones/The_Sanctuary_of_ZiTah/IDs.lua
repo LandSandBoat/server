@@ -56,25 +56,17 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
     },
     mob =
     {
-        KEEPER_OF_HALIDOM_PH =
-        {
-            [17272977] = 17272978, -- 319.939 -0.037 187.231
-        },
-        NOBLE_MOLD_PH   =
-        {
-            [17273276] = 17273278, -- -391.184 -0.269 -159.086
-            [17273277] = 17273278, -- -378.456 0.425 -162.489
-        },
-        GUARDIAN_TREANT = 17272838,
-        DOOMED_PILGRIMS = 17272839,
-        NOBLE_MOLD      = 17273278,
-        ISONADE         = 17273285,
-        GREENMAN        = 17273295,
+        KEEPER_OF_HALIDOM = GetFirstID('Keeper_of_Halidom'),
+        NOBLE_MOLD        = GetFirstID('Noble_Mold'),
+        GUARDIAN_TREANT   = GetFirstID('Guardian_Treant'),
+        DOOMED_PILGRIMS   = GetFirstID('Doomed_Pilgrims'),
+        ISONADE           = GetFirstID('Isonade'),
+        GREENMAN          = GetFirstID('Greenman'),
     },
     npc =
     {
-        OVERSEER_BASE    = GetFirstID('Credaurion_RK'),
-        CERMET_HEADSTONE = 17273391,
+        OVERSEER_BASE     = GetFirstID('Credaurion_RK'),
+        CERMET_HEADSTONE  = GetFirstID('Cermet_Headstone'),
     },
 }
 
