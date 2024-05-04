@@ -77,7 +77,7 @@ void CLatentEffectContainer::DelLatentEffects(uint8 reqLvl, uint8 slot)
 *                                                                       *
  ************************************************************************/
 
-bool CLatentEffectContainer::AllLatentsActive(uint8 slot)
+bool CLatentEffectContainer::HasAllLatentsActive(uint8 slot)
 {
     auto allActive = true;
     for (auto iter = m_LatentEffectList.begin(); iter != m_LatentEffectList.end(); ++iter)

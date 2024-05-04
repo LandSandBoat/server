@@ -19,7 +19,7 @@ end
 
 itemObject.onItemEquip  = function(user, item)
     local listenerName = fmt('{}_{}', listenerPrefix, item:getID())
-    if user:allLatentsActive(xi.slot.NECK) then
+    if user:hasAllLatentsActive(xi.slot.NECK) then
         user:setLocalVar(listenerName, 1)
         xi.itemUtils.handlePetLatentMods(user, latentPetId, latentMods, true)
     end
@@ -38,6 +38,7 @@ itemObject.onItemUnequip = function(user, item)
         xi.itemUtils.handlePetLatentMods(user, latentPetId, latentMods, false)
     end
 
+    user:setLocalVar(listenerName, 0)
     user:removeListener(listenerName)
 end
 

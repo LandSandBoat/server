@@ -13085,13 +13085,13 @@ bool CLuaBaseEntity::delLatent(uint16 condID, uint16 conditionValue, uint16 mID,
 }
 
 /************************************************************************
- *  Function: allLatentsActive()
+ *  Function: hasAllLatentsActive()
  *  Purpose : Returns false if any latents for the slot are not active
- *  Example : player:allLatentsActive(xi.slot.NECK)
+ *  Example : player:hasAllLatentsActive(xi.slot.NECK)
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::allLatentsActive(uint8 slot)
+bool CLuaBaseEntity::hasAllLatentsActive(uint8 slot)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -13099,7 +13099,7 @@ bool CLuaBaseEntity::allLatentsActive(uint8 slot)
         return false;
     }
 
-    return static_cast<CCharEntity*>(m_PBaseEntity)->PLatentEffectContainer->AllLatentsActive(slot);
+    return static_cast<CCharEntity*>(m_PBaseEntity)->PLatentEffectContainer->HasAllLatentsActive(slot);
 }
 
 /************************************************************************
@@ -17934,7 +17934,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("addLatent", CLuaBaseEntity::addLatent);
     SOL_REGISTER("delLatent", CLuaBaseEntity::delLatent);
-    SOL_REGISTER("allLatentsActive", CLuaBaseEntity::allLatentsActive);
+    SOL_REGISTER("hasAllLatentsActive", CLuaBaseEntity::hasAllLatentsActive);
 
     SOL_REGISTER("fold", CLuaBaseEntity::fold);
     SOL_REGISTER("doWildCard", CLuaBaseEntity::doWildCard);
