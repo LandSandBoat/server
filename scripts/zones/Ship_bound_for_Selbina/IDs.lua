@@ -23,7 +23,7 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA] =
     },
     mob =
     {
-        ENAGAKURE = 17678351,
+        ENAGAKURE = GetFirstID('Enagakure'),
     },
     npc =
     {

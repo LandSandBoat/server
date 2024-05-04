@@ -130,8 +130,8 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
             [17719306] = 46, -- Apairemant
             [17719493] = 49, -- Pourette
         },
-        LUSIANE  = 17719350,
-        ARPETION = 17719409,
+        LUSIANE  = GetFirstID('Lusiane'),
+        ARPETION = GetFirstID('Arpetion'),
     },
 }
 

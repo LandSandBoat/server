@@ -37,23 +37,16 @@ zones[xi.zone.SACRARIUM] =
     },
     mob =
     {
-        SWIFT_BELT_NMS          =
-        {
-            { 16892068, { [xi.race.HUME_M]   = true, [xi.race.HUME_F]   = true } }, -- Balor (hume)
-            { 16892069, { [xi.race.ELVAAN_M] = true, [xi.race.ELVAAN_F] = true } }, -- Luaith (elvaan)
-            { 16892070, { [xi.race.TARU_M]   = true, [xi.race.TARU_F]   = true } }, -- Lobais (tarutaru)
-            { 16892073, { [xi.race.MITHRA]   = true } },                            -- Caithleann (mithra)
-            { 16892074, { [xi.race.GALKA]    = true } },                            -- Indich (galka)
-        },
-        OLD_PROFESSOR_MARISELLE = 16891970,
+        SWIFT_BELT_NM_OFFSET    = GetFirstID('Balor'),
+        OLD_PROFESSOR_MARISELLE = GetFirstID('Old_Professor_Mariselle'),
         ELEL                    = GetFirstID('Elel'),
     },
     npc =
     {
-        STALE_DRAFT_OFFSET  = 16892097,
-        LABYRINTH_OFFSET    = 16892111,
-        SMALL_KEYHOLE       = 16892143,
-        QM_MARISELLE_OFFSET = 16892156, -- qm_professor_mariselle in npc_list.sql
+        STALE_DRAFT_OFFSET  = GetFirstID('Stale_Draft'),
+        LABYRINTH_OFFSET    = GetFirstID('_0sb'),
+        SMALL_KEYHOLE       = GetFirstID('Small_Keyhole'),
+        QM_MARISELLE_OFFSET = GetFirstID('qm_prof_0'),
         TREASURE_CHEST      = GetFirstID('Treasure_Chest'),
     },
 }
