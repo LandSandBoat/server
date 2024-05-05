@@ -4188,7 +4188,7 @@ INSERT INTO `mob_droplist` VALUES (465,0,0,1000,3155,@UNCOMMON); -- Raiders Seal
 -- ZoneID:  89 - Chigoe
 -- ZoneID:  91 - Chigoe
 INSERT INTO `mob_droplist` VALUES (466,0,0,1000,2229,@UNCOMMON); -- Vial Of Chimera Blood (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (466,0,0,1000,2365,20);        -- Vial Of Demon Blood (2.0%)
+INSERT INTO `mob_droplist` VALUES (466,0,0,1000,2365,@VRARE);    -- Vial Of Demon Blood (Very Rare, 1%)
 
 -- ZoneID:  68 - Chigre
 INSERT INTO `mob_droplist` VALUES (467,0,0,1000,2638,@ALWAYS); -- Chigre (Always, 100%)
