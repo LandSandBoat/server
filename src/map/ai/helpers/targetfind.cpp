@@ -70,9 +70,9 @@ void CTargetFind::reset()
     m_PMasterTarget = nullptr;
 }
 
-void CTargetFind::findSingleTarget(CBattleEntity* PTarget, uint8 flags)
+void CTargetFind::findSingleTarget(CBattleEntity* PTarget, uint8 findFlags, uint16 targetFlags)
 {
-    m_findFlags     = flags;
+    m_findFlags     = findFlags;
     m_zone          = m_PBattleEntity->getZone();
     m_PTarget       = nullptr;
     m_PRadiusAround = &PTarget->loc.p;
@@ -80,12 +80,13 @@ void CTargetFind::findSingleTarget(CBattleEntity* PTarget, uint8 flags)
     addEntity(PTarget, false);
 }
 
-void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, float radius, uint8 flags)
+void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, float radius, uint8 findFlags, uint16 targetFlags)
 {
     TracyZoneScoped;
-    m_findFlags = flags;
-    m_radius    = radius;
-    m_zone      = m_PBattleEntity->getZone();
+    m_findFlags   = findFlags;
+    m_targetFlags = targetFlags;
+    m_radius      = radius;
+    m_zone        = m_PBattleEntity->getZone();
 
     if (radiusType == AOE_RADIUS::ATTACKER)
     {
@@ -186,10 +187,11 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
     }
 }
 
-void CTargetFind::findWithinCone(CBattleEntity* PTarget, float distance, float angle, uint8 flags, uint8 aoeType)
+void CTargetFind::findWithinCone(CBattleEntity* PTarget, float distance, float angle, uint8 findFlags, uint16 targetFlags, uint8 aoeType)
 {
-    m_findFlags = flags;
-    m_conal     = true;
+    m_findFlags   = findFlags;
+    m_targetFlags = targetFlags;
+    m_conal       = true;
 
     m_APoint = &m_PBattleEntity->loc.p;
 
@@ -224,7 +226,7 @@ void CTargetFind::findWithinCone(CBattleEntity* PTarget, float distance, float a
     // calculate scalar
     m_scalar = (m_BPoint.x * m_CPoint.z) - (m_BPoint.z * m_CPoint.x);
 
-    findWithinArea(PTarget, AOE_RADIUS::ATTACKER, distance, flags);
+    findWithinArea(PTarget, AOE_RADIUS::ATTACKER, distance, findFlags, targetFlags);
 }
 
 void CTargetFind::addAllInMobList(CBattleEntity* PTarget, bool withPet)
@@ -454,6 +456,12 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
     }
 
     if (m_PTarget->allegiance != PTarget->allegiance)
+    {
+        return false;
+    }
+
+    // If offensive, don't target other entities with same allegiance
+    if ((m_targetFlags & TARGET_ENEMY) && m_PBattleEntity->allegiance == PTarget->allegiance)
     {
         return false;
     }
