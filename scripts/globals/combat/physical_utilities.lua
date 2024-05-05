@@ -233,10 +233,11 @@ xi.combat.physical.calculateFTP = function(actor, tpFactor)
     local scProp1, scProp2, scProp3 = actor:getWSSkillchainProp()
     local dayElement                = VanadielDayElement() + 1
 
-    local neckFtpBonus  = 0
-    local waistFtpBonus = 0
-    local headFtpBonus  = 0
-    local handsFtpBonus = 0
+    local neckFtpBonus   = 0
+    local waistFtpBonus  = 0
+    local headFtpBonus   = 0
+    local handsFtpBonus  = 0
+    local weaponFtpBonus = 0
 
     if actor:getObjType() == xi.objType.PC then
         -- Calculate Neck fTP bonus.
@@ -315,10 +316,22 @@ xi.combat.physical.calculateFTP = function(actor, tpFactor)
                 handsFtpBonus = 0.06
             end
         end
+
+        -- Calculate Weapon fTP bonus.
+        local weaponItem = actor:getEquipID(xi.slot.MAIN)
+
+        if
+            weaponItem == xi.item.PRESTER and
+            (wsElementalProperties[scProp1][xi.element.WIND] == 1 or
+            wsElementalProperties[scProp2][xi.element.WIND] == 1 or
+            wsElementalProperties[scProp3][xi.element.WIND] == 1)
+        then
+            weaponFtpBonus = 0.1
+        end
     end
 
     -- Add all bonuses and return.
-    fTP = fTP + neckFtpBonus + waistFtpBonus + headFtpBonus + handsFtpBonus
+    fTP = fTP + neckFtpBonus + waistFtpBonus + headFtpBonus + handsFtpBonus + weaponFtpBonus
 
     return fTP
 end
