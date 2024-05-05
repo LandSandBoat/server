@@ -101,6 +101,17 @@ local function getBaseMPCost(player, ability)
         [xi.jobAbility.CHAOTIC_STRIKE]   = 164,
         [xi.jobAbility.THUNDERSTORM]     = 182,
         [xi.jobAbility.VOLT_STRIKE]      = 229,
+        -- Diabolos
+        [xi.jobAbility.CAMISADO]         =  20,
+        [xi.jobAbility.ULTIMATE_TERROR]  =  27,
+        [xi.jobAbility.SOMNOLENCE]       =  30,
+        [xi.jobAbility.NIGHTMARE]        =  42,
+        [xi.jobAbility.NOCTOSHIELD]      =  92,
+        [xi.jobAbility.NETHER_BLAST]     = 109,
+        [xi.jobAbility.DREAM_SHROUD]     = 121,
+        [xi.jobAbility.BLINDSIDE]        = 147,
+        [xi.jobAbility.NIGHT_TERROR]     = 177,
+        [xi.jobAbility.PAVOR_NOCTURNUS]  = 246,
         -- Siren
         [xi.jobAbility.WELT]             =   9,
         [xi.jobAbility.ROUNDHOUSE]       =  52,
