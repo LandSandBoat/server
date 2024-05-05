@@ -5045,7 +5045,13 @@ INSERT INTO `mob_spell_lists` VALUES ('Mountain_Worm_NM',504,210,54,255); -- qua
 INSERT INTO `mob_spell_lists` VALUES ('Mountain_Worm_NM',504,238,18,50);  -- rasp (18~50)
 INSERT INTO `mob_spell_lists` VALUES ('Mountain_Worm_NM',504,258,7,255);  -- bind (7~255)
 
--- Next Available: 505
+-- Sarcopsylla (505)
+INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,146,1,255); -- fire_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,176,1,255); -- firaga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,204,1,255); -- flare (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,235,1,255); -- burn (1~255)
+
+-- Next Available: 506
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
