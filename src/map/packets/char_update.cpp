@@ -368,4 +368,15 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     packet.Flags6 = flags6;
 
     std::memcpy(&data[0], &packet, sizeof(packet));
+
+    // Mog wardrobe enabled bits (apparently used by windower in get_bag_info(N).enabled):
+    // 0x01 = Wardrobe 3
+    // 0x02 = Wardrobe 4
+    // 0x04 = Unknown (not set in retail?)
+    // 0x08 = Wardrobe 5
+    // 0x10 = Wardrobe 6
+    // 0x20 = Wardrobe 7
+    // 0x40 = Wardrobe 8
+    ref<uint8>(0x5C) = 0x7B;
+    // This field is probably deprecated because the client reads it in and doesn't use it.
 }
