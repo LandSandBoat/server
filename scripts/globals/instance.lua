@@ -441,12 +441,12 @@ xi.instance.onInstanceCreatedCallback = function(player, instance)
                     -- this makes the animation trigger reliably
                     v:release()
                     v:startEvent(unpack(lookupEntry[4]))
-                end
 
-                v:setInstance(instance)
-                local npc = player:getEventTarget()
-                if npc ~= nil then
-                    v:instanceEntry(npc, 4)
+                    v:setInstance(instance)
+                    local npc = player:getEventTarget()
+                    if npc ~= nil then
+                        v:instanceEntry(npc, 4)
+                    end
                 end
 
                 v:timer(35000, function(playerArg)
