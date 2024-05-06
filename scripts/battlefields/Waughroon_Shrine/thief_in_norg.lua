@@ -55,15 +55,6 @@ content.groups =
             battlefield:setStatus(xi.battlefield.status.WON)
         end,
     },
-
-    {
-        mobIds =
-        {
-            { waughroonID.mob.GAKI + 4  },
-            { waughroonID.mob.GAKI + 9  },
-            { waughroonID.mob.GAKI + 14 },
-        },
-    },
 }
 
 return content:register()
