@@ -157,6 +157,8 @@ INSERT INTO `item_latents` VALUES (11667,369,1,57,0);    -- Rollers Ring Refresh
 -- Oneiros Ring
 INSERT INTO `item_latents` VALUES (11671,302,2,55,100);  -- Triple Attack +2% when mp is greater than or equal to 100
 
+-- Fervor Ring (pet latent via item lua)
+
 -- Flock Ring
 INSERT INTO `item_latents` VALUES (11676,26,1,16,3);
 INSERT INTO `item_latents` VALUES (11676,26,1,16,4);
@@ -1246,10 +1248,9 @@ INSERT INTO `item_latents` VALUES (15516,26,-16,52,8);   -- cumulative ranged ac
 INSERT INTO `item_latents` VALUES (15519,370,1,58,0);    -- storm muffler regen +1
 INSERT INTO `item_latents` VALUES (15520,68,7,58,0);     -- storm torque eva +7
 
--- Sacrifice Torque
+-- Sacrifice Torque (pet latent via item lua)
 INSERT INTO `item_latents` VALUES (15528,369,-3,21,21); -- AVATAR_IN_PARTY: 21 - REFRESH: -3
 INSERT INTO `item_latents` VALUES (15528,370,-8,21,21); -- AVATAR_IN_PARTY: 21 - REGEN:   -8
--- TODO: INSERT INTO `item_latents` VALUES (15528,??,3,21,21); -- AVATAR_IN_PARTY: 21 - Avatar ATT: 3
 
 -- Ace's Locket
 INSERT INTO `item_latents` VALUES (15529,291,5,0,25); -- HP_UNDER_PERCENT: 25 - COUNTER: 5
