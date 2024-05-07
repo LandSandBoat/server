@@ -2763,6 +2763,7 @@ xi.keyItem =
     SHADOW_THRONE                            = 2833,
     LEAF_BENCH                               = 2834,
     ASTRAL_CUBE                              = 2835,
+    CHOCOBO_CHAIR_II                         = 2836,
     REISENJIMA_SANCTORIUM_ORB                = 2837,
     SAKURA_AND_THE_MAGICKED_NET              = 2838,
     REAPER                                   = 2839,
