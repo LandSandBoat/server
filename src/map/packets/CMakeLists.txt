@@ -34,6 +34,8 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/char_appearance.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/char_emote_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/char_emote_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_emotion.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_emotion.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_emotion_jump.cpp

@@ -96,6 +96,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/char_abilities.h"
 #include "packets/char_appearance.h"
 #include "packets/char_check.h"
+#include "packets/char_emote_list.h"
 #include "packets/char_emotion.h"
 #include "packets/char_emotion_jump.h"
 #include "packets/char_equip.h"
@@ -8315,6 +8316,16 @@ void SmallPacket0x118(map_session_data_t* const PSession, CCharEntity* const PCh
 
 /************************************************************************
  *                                                                        *
+ *  Request Emote List                                                    *
+ *                                                                        *
+ ************************************************************************/
+void SmallPacket0x119(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
+{
+    PChar->pushPacket(new CCharEmoteListPacket(PChar));
+}
+
+/************************************************************************
+ *                                                                        *
  *  Set Job Master Display                                                *
  *                                                                        *
  ************************************************************************/
@@ -8480,6 +8491,7 @@ void PacketParserInitialize()
     PacketSize[0x116] = 0x00; PacketParser[0x116] = &SmallPacket0x116;
     PacketSize[0x117] = 0x00; PacketParser[0x117] = &SmallPacket0x117;
     PacketSize[0x118] = 0x00; PacketParser[0x118] = &SmallPacket0x118;
+    PacketSize[0x119] = 0x00; PacketParser[0x119] = &SmallPacket0x119;
     PacketSize[0x11B] = 0x00; PacketParser[0x11B] = &SmallPacket0x11B;
     PacketSize[0x11D] = 0x00; PacketParser[0x11D] = &SmallPacket0x11D;
     // clang-format on
