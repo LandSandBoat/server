@@ -8,6 +8,7 @@ return {
     ['Cahaurme']    = { text = ID.text.NOTHING_TO_REPORT },
     ['Hae_Jakhya']  = { event = 610 },
     ['Rosel']       = { text = ID.text.ROSEL_GREETINGS },
+    ['HRouva']      = { event = 662 },
     ['Sobane']      = { text = ID.text.SOBANE_DIALOG },
     ['Valderotaux'] = { event = 58 },
 }

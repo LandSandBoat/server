@@ -20,7 +20,9 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH) and
-                player:getFameLevel(xi.fameArea.BASTOK) >= 2
+                player:getFameLevel(xi.fameArea.BASTOK) >= 2 and
+                player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES) ~= xi.questStatus.QUEST_ACCEPTED
+                -- quest is blocked if Distant Loyalties is active.
         end,
 
         [xi.zone.BASTOK_MARKETS] =

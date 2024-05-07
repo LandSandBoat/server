@@ -18,7 +18,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES) ~= xi.questStatus.QUEST_ACCEPTED
+            --quest is blocked if Distant Loyalties is started
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -40,7 +42,8 @@ quest.sections =
                 (
                     status == xi.questStatus.QUEST_COMPLETED and
                     player:getFameLevel(xi.fameArea.BASTOK) == 1 and
-                    not quest:getMustZone(player)
+                    not quest:getMustZone(player) or
+                    (player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)) -- allows repeat only after this quest is completed.
                 )
         end,
 

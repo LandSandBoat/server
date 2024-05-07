@@ -17,8 +17,6 @@ entity.onTrigger = function(player, npc)
         not utils.mask.getBit(wildcatSandy, 2)
     then
         player:startEvent(808)
-    else
-        player:startEvent(664)
     end
 end
 
