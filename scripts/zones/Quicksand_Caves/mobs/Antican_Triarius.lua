@@ -7,6 +7,16 @@ local ID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 local entity = {}
 
+local triariusPHTable =
+{
+    [ID.mob.TRIARIUS_X_XV + 9] = ID.mob.TRIARIUS_X_XV, -- -786.730 -0.5 -343.963
+}
+
+local hastatusPHTable =
+{
+    [ID.mob.HASTATUS_XI_XII - 4] = ID.mob.HASTATUS_XI_XII, -- -343.859 -0.411 751.608
+}
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 812, 2, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 813, 2, xi.regime.type.GROUNDS)
@@ -19,8 +29,8 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.TRIARIUS_X_XV_PH, 10, 7200) -- 2 hours
-    xi.mob.phOnDespawn(mob, ID.mob.HASTATUS_XI_XII_PH, 10, 3600) -- 1 hour
+    xi.mob.phOnDespawn(mob, triariusPHTable, 10, 7200) -- 2 hours
+    xi.mob.phOnDespawn(mob, hastatusPHTable, 10, 3600) -- 1 hour
 end
 
 return entity
