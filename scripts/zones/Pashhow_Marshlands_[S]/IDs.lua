@@ -3,8 +3,6 @@
 -----------------------------------
 zones = zones or {}
 
-local nommoID = GetFirstID('Nommo')
-
 zones[xi.zone.PASHHOW_MARSHLANDS_S] =
 {
     text =
@@ -35,21 +33,9 @@ zones[xi.zone.PASHHOW_MARSHLANDS_S] =
 
     mob =
     {
-        SUGAAR_PH =
-        {
-            [17145862] = 17145867, -- -412.599 24.437 -431.639
-            [17145863] = 17145867, -- -455.311 24.499 -472.247
-            [17145864] = 17145867, -- -446.738 24.499 -443.850
-            [17145865] = 17145867, -- -417.691 23.840 -485.922
-            [17145866] = 17145867, -- -444.380 24.499 -487.828
-        },
-
-        NOMMO_PH =
-        {
-            [nommoID - 5] = nommoID, -- -168.292 24.499 396.933
-        },
-
-        KINEPIKWA = 17146147,
+        SUGAAR    = GetFirstID('Sugaar'),
+        NOMMO     = GetFirstID('Nommo'),
+        KINEPIKWA = GetFirstID('Kinepikwa'),
 
         VOIDWALKER =
         {
