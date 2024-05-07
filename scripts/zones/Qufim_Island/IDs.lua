@@ -49,21 +49,9 @@ zones[xi.zone.QUFIM_ISLAND] =
 
     mob =
     {
-        SLIPPERY_SUCKER_PH =
-        {
-            [17293376] = 17293389,
-            [17293377] = 17293389,
-            [17293378] = 17293389,
-            [17293380] = 17293389,
-        },
-        TRICKSTER_KINETIX_PH =
-        {
-            [17293533] = 17293537, -- -138.180 -20.928 228.793
-            [17293534] = 17293537, -- -157.659 -25.501 235.862
-            [17293535] = 17293537, -- -152.269 -20 243
-            [17293536] = 17293537, -- -137.651 -23.507 231.528
-        },
-        OPHIOTAURUS = GetFirstID('Ophiotaurus'),
+        SLIPPERY_SUCKER   = GetFirstID('Slippery_Sucker'),
+        TRICKSTER_KINETIX = GetFirstID('Trickster_Kinetix'),
+        OPHIOTAURUS       = GetFirstID('Ophiotaurus'),
     },
 
     npc =
