@@ -31,18 +31,15 @@ zones[xi.zone.RANGUEMONT_PASS] =
     },
     mob =
     {
-        GLOOM_EYE_PH =
-        {
-            [17457200] = 17457204,
-        },
+        GLOOM_EYE    = GetFirstID('Gloom_Eye'),
         TAISAIJIN_PH =
         {
             17457213, -- -18.325 1.830 -114.932
             17457214, -- -5.188 11.730 -141.503
             17457215, -- 59.15 -120 50
         },
-        TAISAIJIN    = 17457216,
-        TROS         = 17457309,
+        TAISAIJIN    = GetFirstID('Taisaijin'),
+        TROS         = GetFirstID('Tros'),
     },
     npc =
     {
