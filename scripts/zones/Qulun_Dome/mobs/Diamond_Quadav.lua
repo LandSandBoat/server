@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     -- the quest version of this NM doesn't drop gil
-    if mob:getID() >= ID.mob.AFFABLE_ADAMANTKING_OFFSET then
+    if mob:getID() >= ID.mob.DIAMOND_QUADAV + 2 then
         mob:setMobMod(xi.mobMod.GIL_MAX, -1)
     end
 end
