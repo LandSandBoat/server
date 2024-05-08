@@ -218,6 +218,7 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
     --     {
     --         NO_LONGER_HAVE_CLEARANCE = 7061,
     --     },
+    --     entryZone = -- for tracking/setting cooldown for cleanup script
     -- },
 
     [xi.zone.DYNAMIS_BASTOK] = -- zoneID for array lookup
@@ -226,6 +227,7 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
         {
             NO_LONGER_HAVE_CLEARANCE = 7064,
         },
+        entryZone = xi.zone.BASTOK_MINES,
     },
 
     [xi.zone.DYNAMIS_BEAUCEDINE] = -- zoneID for array lookup
@@ -234,6 +236,7 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
         {
             NO_LONGER_HAVE_CLEARANCE = 7164,
         },
+        entryZone = xi.zone.BEAUCEDINE_GLACIER,
     },
     [xi.zone.DYNAMIS_BUBURIMU] = -- zoneID for array lookup
     {
@@ -241,6 +244,7 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
         {
             NO_LONGER_HAVE_CLEARANCE = 7323,
         },
+        entryZone = xi.zone.BUBURIMU_PENINSULA,
     },
     [xi.zone.DYNAMIS_JEUNO] = -- zoneID for array lookup
     {
@@ -248,6 +252,7 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
         {
             NO_LONGER_HAVE_CLEARANCE = 7064,
         },
+        entryZone = xi.zone.RULUDE_GARDENS,
     },
     [xi.zone.DYNAMIS_QUFIM] = -- zoneID for array lookup
     {
@@ -255,6 +260,7 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
         {
             NO_LONGER_HAVE_CLEARANCE = 7323,
         },
+        entryZone = xi.zone.QUFIM_ISLAND,
     },
     [xi.zone.DYNAMIS_SAN_DORIA] = -- zoneID for array lookup
     {
@@ -262,6 +268,7 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
         {
             NO_LONGER_HAVE_CLEARANCE = 7064,
         },
+        entryZone = xi.zone.SOUTHERN_SAN_DORIA,
     },
     [xi.zone.DYNAMIS_TAVNAZIA] = -- zoneID for array lookup
     {
@@ -269,6 +276,7 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
         {
             NO_LONGER_HAVE_CLEARANCE = 7323,
         },
+        entryZone = xi.zone.TAVNAZIAN_SAFEHOLD,
     },
     [xi.zone.DYNAMIS_VALKURM] = -- zoneID for array lookup
     {
@@ -276,6 +284,7 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
         {
             NO_LONGER_HAVE_CLEARANCE = 7323,
         },
+        entryZone = xi.zone.VALKURM_DUNES,
     },
     [xi.zone.DYNAMIS_WINDURST] = -- zoneID for array lookup
     {
@@ -287,7 +296,8 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
         {
             xi.dynamis.YING,
             xi.dynamis.YANG,
-        }
+        },
+        entryZone = xi.zone.WINDURST_WALLS,
     },
     [xi.zone.DYNAMIS_XARCABARD] = -- zoneID for array lookup
     {
@@ -295,6 +305,7 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
         {
             NO_LONGER_HAVE_CLEARANCE = 7064,
         },
+        entryZone = xi.zone.XARCABARD,
     },
 }
 
@@ -941,6 +952,12 @@ xi.dynamis.handleDynamis = function(zone)
         end
 
         if zoneExpireRoutine ~= 0 and zoneExpireRoutine <= os.time() then -- Checks to see if 30s passed between start and now.
+            if
+                GetServerVariable(string.format("[DYNA]ZoneCooldown_%s", xi.dynamis.dynaIDLookup[zoneID].entryZone)) == 0 -- if no cleanup timer is set
+            then
+                SetServerVariable(string.format("[DYNA]ZoneCooldown_%s", xi.dynamis.dynaIDLookup[zoneID].entryZone), os.time() + 90) -- Set a 90s timer for cleanup
+            end
+
             xi.dynamis.cleanupDynamis(zone) -- Runs cleanup function.
         end
     end
@@ -971,7 +988,13 @@ xi.dynamis.handleDynamis = function(zone)
 
     if zone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID)) ~= 0 then
         if zone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID)) <= os.time() then -- If cooldown period eclipses current OS time, cleanup.
-            xi.dynamis.cleanupDynamis(zone)
+            if
+                GetServerVariable(string.format("[DYNA]ZoneCooldown_%s", xi.dynamis.dynaIDLookup[zoneID].entryZone)) == 0 -- if no cleanup timer is set
+            then
+                SetServerVariable(string.format("[DYNA]ZoneCooldown_%s", xi.dynamis.dynaIDLookup[zoneID].entryZone), os.time() + 90) -- Set a 90s timer for cleanup
+            end
+
+            xi.dynamis.cleanupDynamis(zone) -- Runs cleanup function.
             return
         end
     end
@@ -1356,7 +1379,10 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
             local span = os.time() - playerRes
             span = span / 60
             player:messageSpecial(zones[zoneID].text.YOU_CANNOT_ENTER_DYNAMIS, math.ceil(span), xi.dynamis.entryInfoEra[zoneID].csBit)
+        elseif GetServerVariable(string.format("[DYNA]ZoneCooldown_%s", zoneID)) > os.time() then
+            player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.ANOTHER_GROUP, xi.dynamis.entryInfoEra[zoneID].csBit)
         else -- Proceed in starting new dynamis.
+            SetServerVariable(string.format("[DYNA]ZoneCooldown_%s", zoneID), 0)
             player:startEvent(xi.dynamis.entryInfoEra[zoneID].csRegisterGlass, xi.dynamis.entryInfoEra[zoneID].csBit, entered == 1 and 0 or 1, dynamisReservationCancel, dynamisReentryDays, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamisTimelessHourglass, dynamisPerpetual)
         end
     elseif
