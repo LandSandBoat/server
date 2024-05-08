@@ -6,7 +6,7 @@ local waughroonID = zones[xi.zone.WAUGHROON_SHRINE]
 -----------------------------------
 
 local content = Battlefield:new({
-    zoneId        = xi.zone.HORLAIS_PEAK,
+    zoneId        = xi.zone.WAUGHROON_SHRINE,
     battlefieldId = xi.battlefield.id.SHATTERING_STARS_RDM,
     maxPlayers    = 1,
     levelCap      = 99,
