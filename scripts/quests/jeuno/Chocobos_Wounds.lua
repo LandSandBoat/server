@@ -72,8 +72,10 @@ quest.sections =
                     if option == 1 then
                         quest:begin(player)
                         quest:setVar(player, 'Prog', 1)
-                        -- This quest is automatically flagged during this interaction.
-                        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
+                        if xi.settings.main.ENABLE_TOAU == 1 then
+                            -- This quest is automatically flagged during this interaction.
+                            player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
+                        end
                     else
                         -- Dialogue changes if the player fails to choose the correct option.
                         quest:setVar(player, 'Declined', 1)
