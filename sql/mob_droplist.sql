@@ -24603,7 +24603,7 @@ INSERT INTO `mob_droplist` VALUES (3083,0,0,1000,11496,48); -- Fenrirs Crown (4.
 INSERT INTO `mob_droplist` VALUES (3084,0,0,1000,16035,41); -- Altdorfs Earring (4.1%)
 
 -- ZoneID:  89 - Sarcopsylla
-INSERT INTO `mob_droplist` VALUES (3085,0,0,1000,11408,63); -- Moranas Pigaches (6.3%)
+INSERT INTO `mob_droplist` VALUES (3085,0,0,1000,11408,@RARE); -- Moranas Pigaches (Rare, 5%)
 
 -- ZoneID: 122 - Rogue Receptacle
 INSERT INTO `mob_droplist` VALUES (3086,0,0,1000,11533,333); -- Lyricists Gonnelle (33.3%)
