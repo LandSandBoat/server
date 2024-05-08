@@ -13,15 +13,18 @@ local function handleRegen(mob, broken)
     mob:setMod(xi.mod.REGAIN, math.floor(25 * multiplier))
 end
 
+entity.onMobInitialize = function(mob)
+    -- Set Immunities.
+    -- mob:addImmunity(xi.immunity.GRAVITY)
+    -- mob:addImmunity(xi.immunity.BIND)
+    -- mob:addImmunity(xi.immunity.PARALYZE)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 10)
     mob:setMod(xi.mod.UDMGMAGIC, -90)
     mob:setMod(xi.mod.POISON_MEVA, 100)
     mob:setMod(xi.mod.BLIND_MEVA, 100)
-    -- mob:addImmunity(xi.immunity.BIND)
-    -- mob:addImmunity(xi.immunity.GRAVITY)
-    -- mob:addImmunity(xi.immunity.PARALYZE)
-    -- mob:addImmunity(xi.immunity.TERROR)
     mob:setMod(xi.mod.SILENCE_MEVA, 100)
     mob:setMod(xi.mod.SLOW_MEVA, 100)
     mob:setMod(xi.mod.STUN_MEVA, 175)
@@ -29,6 +32,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DEFP, 35)
     mob:addMod(xi.mod.EVA, 15)
     mob:setMod(xi.mod.MAIN_DMG_RATING, 40)
+
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 15)
 end
 
