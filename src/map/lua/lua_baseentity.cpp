@@ -5919,69 +5919,141 @@ uint8 CLuaBaseEntity::getSubJob()
 
 void CLuaBaseEntity::changeJob(uint8 newJob)
 {
-    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-
-    if (!PChar)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        ShowWarning("CLuaBaseEntity::changeJob() - m_pBaseEntity is not of type Char.");
+        JOBTYPE prevjob = PChar->GetMJob();
+
+        PChar->resetPetZoningInfo();
+
+        PChar->jobs.unlocked |= (1 << newJob);
+        PChar->SetMJob(newJob);
+
+        if (newJob == JOB_BLU)
+        {
+            if (prevjob != JOB_BLU)
+            {
+                blueutils::LoadSetSpells(PChar);
+            }
+        }
+        else if (PChar->GetSJob() != JOB_BLU)
+        {
+            blueutils::UnequipAllBlueSpells(PChar);
+        }
+        puppetutils::LoadAutomaton(PChar);
+        charutils::SetStyleLock(PChar, false);
+        luautils::CheckForGearSet(PChar); // check for gear set on gear change
+        jobpointutils::RefreshGiftMods(PChar);
+        charutils::BuildingCharSkillsTable(PChar);
+        charutils::CalculateStats(PChar);
+        charutils::CheckValidEquipment(PChar);
+        PChar->PRecastContainer->ChangeJob();
+        charutils::BuildingCharAbilityTable(PChar);
+        charutils::BuildingCharTraitsTable(PChar);
+
+        // clang-format off
+        PChar->ForParty([](CBattleEntity* PMember)
+        {
+            ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs();
+        });
+        // clang-format on
+
+        PChar->UpdateHealth();
+        PChar->health.hp = PChar->GetMaxHP();
+        PChar->health.mp = PChar->GetMaxMP();
+
+        charutils::SaveCharStats(PChar);
+        charutils::SaveCharJob(PChar, PChar->GetMJob());
+        charutils::SaveCharExp(PChar, PChar->GetMJob());
+        PChar->updatemask |= UPDATE_HP;
+
+        PChar->pushPacket(new CCharJobsPacket(PChar));
+        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket(new CCharSkillsPacket(PChar));
+        PChar->pushPacket(new CCharRecastPacket(PChar));
+        PChar->pushPacket(new CCharAbilitiesPacket(PChar));
+        PChar->pushPacket(new CCharUpdatePacket(PChar));
+        PChar->pushPacket(new CMenuMeritPacket(PChar));
+        PChar->pushPacket(new CMonipulatorPacket1(PChar));
+        PChar->pushPacket(new CMonipulatorPacket2(PChar));
+        PChar->pushPacket(new CCharSyncPacket(PChar));
+    }
+    else if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
+    {
+        PMob->SetMJob(newJob);
+
+        // Change weapon type based on new job
+        CItemWeapon* PWeapon = new CItemWeapon(0);
+        PWeapon->setDelay(4000);
+        PWeapon->setBaseDelay(4000);
+
+        switch (newJob)
+        {
+            case JOB_MNK:
+            case JOB_PUP:
+                PWeapon->setSkillType(SKILL_HAND_TO_HAND);
+                PWeapon->setBaseDelay(8000);
+                PWeapon->setDelay(8000);
+                break;
+            case JOB_THF:
+            case JOB_BRD:
+            case JOB_RNG:
+            case JOB_COR:
+                PWeapon->setSkillType(SKILL_DAGGER);
+                break;
+            case JOB_RDM:
+            case JOB_PLD:
+            case JOB_BLU:
+                PWeapon->setSkillType(SKILL_SWORD);
+                break;
+            case JOB_RUN:
+                PWeapon->setSkillType(SKILL_GREAT_SWORD);
+                PWeapon->setDelay(8000);
+                PWeapon->setBaseDelay(8000);
+                break;
+            case JOB_WAR:
+            case JOB_BST:
+                PWeapon->setSkillType(SKILL_AXE);
+                break;
+            case JOB_DRK:
+                PWeapon->setSkillType(SKILL_SCYTHE);
+                PWeapon->setDelay(8000);
+                PWeapon->setBaseDelay(8000);
+                break;
+            case JOB_DRG:
+                PWeapon->setSkillType(SKILL_POLEARM);
+                PWeapon->setDelay(8000);
+                PWeapon->setBaseDelay(8000);
+                break;
+            case JOB_NIN:
+                PWeapon->setSkillType(SKILL_KATANA);
+                break;
+            case JOB_SAM:
+                PWeapon->setSkillType(SKILL_GREAT_KATANA);
+                PWeapon->setDelay(8000);
+                PWeapon->setBaseDelay(8000);
+                break;
+            case JOB_WHM:
+            case JOB_BLM:
+            case JOB_GEO:
+                PWeapon->setSkillType(SKILL_CLUB);
+                break;
+            case JOB_SMN:
+                PWeapon->setSkillType(SKILL_STAFF);
+                PWeapon->setDelay(8000);
+                PWeapon->setBaseDelay(8000);
+                break;
+            default:
+                break;
+        }
+
+        PMob->m_Weapons[SLOT_MAIN] = PWeapon;
+        mobutils::CalculateMobStats(PMob);
+    }
+    else
+    {
+        ShowWarning("CLuaBaseEntity::changeJob() - m_pBaseEntity is not a supported entity.");
         return;
     }
-
-    JOBTYPE prevjob = PChar->GetMJob();
-
-    PChar->resetPetZoningInfo();
-
-    PChar->jobs.unlocked |= (1 << newJob);
-    PChar->SetMJob(newJob);
-
-    if (newJob == JOB_BLU)
-    {
-        if (prevjob != JOB_BLU)
-        {
-            blueutils::LoadSetSpells(PChar);
-        }
-    }
-    else if (PChar->GetSJob() != JOB_BLU)
-    {
-        blueutils::UnequipAllBlueSpells(PChar);
-    }
-    puppetutils::LoadAutomaton(PChar);
-    charutils::SetStyleLock(PChar, false);
-    luautils::CheckForGearSet(PChar); // check for gear set on gear change
-    jobpointutils::RefreshGiftMods(PChar);
-    charutils::BuildingCharSkillsTable(PChar);
-    charutils::CalculateStats(PChar);
-    charutils::CheckValidEquipment(PChar);
-    PChar->PRecastContainer->ChangeJob();
-    charutils::BuildingCharAbilityTable(PChar);
-    charutils::BuildingCharTraitsTable(PChar);
-
-    // clang-format off
-    PChar->ForParty([](CBattleEntity* PMember)
-    {
-        ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs();
-    });
-    // clang-format on
-
-    PChar->UpdateHealth();
-    PChar->health.hp = PChar->GetMaxHP();
-    PChar->health.mp = PChar->GetMaxMP();
-
-    charutils::SaveCharStats(PChar);
-    charutils::SaveCharJob(PChar, PChar->GetMJob());
-    charutils::SaveCharExp(PChar, PChar->GetMJob());
-    PChar->updatemask |= UPDATE_HP;
-
-    PChar->pushPacket(new CCharJobsPacket(PChar));
-    PChar->pushPacket(new CCharStatsPacket(PChar));
-    PChar->pushPacket(new CCharSkillsPacket(PChar));
-    PChar->pushPacket(new CCharRecastPacket(PChar));
-    PChar->pushPacket(new CCharAbilitiesPacket(PChar));
-    PChar->pushPacket(new CCharUpdatePacket(PChar));
-    PChar->pushPacket(new CMenuMeritPacket(PChar));
-    PChar->pushPacket(new CMonipulatorPacket1(PChar));
-    PChar->pushPacket(new CMonipulatorPacket2(PChar));
-    PChar->pushPacket(new CCharSyncPacket(PChar));
 }
 
 /************************************************************************
