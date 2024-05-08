@@ -872,6 +872,8 @@ enum class Mod
     EAT_RAW_MEAT    = 413, // Without this, only Galka can eat raw meat (item cannot be used)
     DRINK_DISTILLED = 159, // Without this, Distilled Water cannot be consumed (item can still be used)
 
+    EQUIPMENT_ONLY_RACE = 276, // An 8-bit flag that denotes that only a certain race(s) can use this equipment (0 means all races can use)
+
     ENHANCES_CURSNA_RCVD     = 67,   // Potency of "Cursna" effects received
     ENHANCES_CURSNA          = 310,  // Used by gear with the "Enhances Cursna" or "Cursna+" attribute
     ENHANCES_HOLYWATER       = 495,  // Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
@@ -1015,7 +1017,7 @@ enum class Mod
     //
     // SPARE IDs:
     // 221 to 222
-    // 274 to 276
+    // 274 to 275
     //
     // SPARE = 1082 and onward
 };
