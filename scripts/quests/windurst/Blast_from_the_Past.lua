@@ -37,6 +37,7 @@ quest.sections =
                 [214] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
+                        quest:setVar(player, 'option', 215)
                     end
                 end,
             },
@@ -53,7 +54,7 @@ quest.sections =
             ['Koru-Moru'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.BURNITE_SHELL_STONE) then
+                    if npcUtil.tradeHas(trade, xi.item.BURNITE_SHELL_STONE) then
                         return quest:progressEvent(224)
                     else
                         return quest:event(225)
@@ -61,31 +62,39 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Option') == 2 then
-                        return quest:event(215)
-                    else
-                        return quest:event(216)
-                    end
+                    return quest:event(quest:getVar(player, 'option')) -- Koru-Moru alternates between 2 dialogs until turn in
                 end,
             },
 
             ['Yoran-Oran'] =
             {
                 onTrigger = function(player, npc)
-                    local questOption = quest:getVar(player, 'Option')
-
-                    if questOption == 1 then
-                        return quest:progressEvent(221)
-                    elseif questOption == 2 then
-                        return quest:event(222):importantEvent()
-                    end
+                    return quest:event(221):importantOnce() -- optional dialogue until turn in
                 end,
+            },
+
+            ['Bonchacha'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(218):importantOnce() -- optional dialogue until turn in
+                end
+            },
+
+            ['Maan-Pokuun'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(220):importantOnce() -- optional dialogue until turn in
+                end
             },
 
             onEventFinish =
             {
-                [221] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Option', 2)
+                [215] = function(player, csid, option, npc)
+                    quest:setVar(player, 'option', 216)
+                end,
+
+                [216] = function(player, csid, option, npc)
+                    quest:setVar(player, 'option', 215)
                 end,
 
                 [224] = function(player, csid, option, npc)
@@ -103,16 +112,7 @@ quest.sections =
             ['Tokaka'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Option') == 0 then
-                        return quest:progressEvent(318)
-                    end
-                end,
-            },
-
-            onEventFinish =
-            {
-                [318] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Option', 1)
+                    return quest:event(318):importantOnce() -- optional dialogue until turn in
                 end,
             },
         },
@@ -144,12 +144,13 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
-                not xi.quest.getMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.NOTHING_MATTERS)
+                xi.quest.getMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.NOTHING_MATTERS)
         end,
 
         [xi.zone.WINDURST_WALLS] =
         {
-            ['Yoran-Oran'] = quest:event(223):importantEvent(),
+            ['Koru-Moru']  = quest:event(226):importantEvent(),
+            ['Yoran-Oran'] = quest:event(222):importantEvent(),
         },
     },
 }
