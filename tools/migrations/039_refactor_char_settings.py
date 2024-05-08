@@ -59,6 +59,7 @@ def migrate(cur, db):
 
         # Add default row for each character into new char_flags table, on duplicate do nothing.
         cur.execute("INSERT INTO char_flags (charid) SELECT charid FROM chars ON DUPLICATE KEY UPDATE char_flags.disconnecting = char_flags.disconnecting;");
+        db.commit()
 
     except mariadb.Error as err:
         print("Something went wrong: {}".format(err))
