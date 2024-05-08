@@ -5377,7 +5377,7 @@ namespace charutils
 
         _sql->Query(Query, "chars", "gmlevel =", PChar->m_GMlevel, PChar->id);
 
-        _sql->Query(Query, "char_flags", "gmModeEnabled =", PChar->m_GMlevel >= 3 ? 1 : 0, PChar->id);
+        _sql->Query(Query, "char_flags", "gmModeEnabled =", PChar->visibleGmLevel >= 3 ? 1 : 0, PChar->id);
     }
 
     void SaveMentorFlag(CCharEntity* PChar)
