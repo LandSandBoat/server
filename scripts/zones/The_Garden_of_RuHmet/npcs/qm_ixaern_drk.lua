@@ -9,6 +9,7 @@
 -- !pos -280 5.00 240 35
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
+local gardenGlobal = require('scripts/zones/The_Garden_of_RuHmet/globals')
 -----------------------------------
 local entity = {}
 
@@ -43,7 +44,7 @@ entity.onTrigger = function(player, npc)
 
         -- move QM to random location, and reset animosity
         local pos = math.random(1, 4)
-        npcUtil.queueMove(npc, ID.npc.QM_IXAERN_DRK_POS[pos])
+        npcUtil.queueMove(npc, gardenGlobal.qmPosDRKTable[pos])
         npc:setLocalVar('position', pos)
         npc:setLocalVar('hatedPlayer', 0)
         npc:setLocalVar('hateTimer', 0)

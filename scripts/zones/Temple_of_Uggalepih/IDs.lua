@@ -50,43 +50,30 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
     },
     mob =
     {
-        SOZU_SARBERRY_PH         =
-        {
-            [17428551] = 17428554, -- 89 0.499 -23
-        },
-        SOZU_TERBERRY_PH         =
-        {
-            [17428608] = 17428611, -- -122 0.028 -13
-        },
-        TONBERRY_KINQ_PH         =
-        {
-            [17428673] = 17428677, -- -221.717 0.996 12.819
-            [17428675] = 17428677 -- -218 -0.792 24
-        },
-        FLAUROS_PH               =
-        {
-            [17428740] = 17428737, -- 259 0.03 80
-        },
-        TEMPLE_GUARDIAN          = 17428494,
-        NIO_A                    = 17428495,
-        NIO_HUM                  = 17428496,
-        MIMIC                    = 17428497,
-        SOZU_ROGBERRY            = 17428751,
-        CLEUVARION_M_RESOAIX     = 17428807,
-        ROMPAULION_S_CITALLE     = 17428808,
-        BERYL_FOOTED_MOLBERRY    = 17428809,
-        DEATH_FROM_ABOVE         = 17428810,
-        HABETROT                 = 17428811,
-        CRIMSON_TOOTHED_PAWBERRY = 17428813,
-        SACRIFICIAL_GOBLET       = 17428816,
-        YALLERY_BROWN            = 17428817,
+        SOZU_SARBERRY            = GetFirstID('Sozu_Sarberry'),
+        SOZU_TERBERRY            = GetFirstID('Sozu_Terberry'),
+        TONBERRY_KINQ            = GetFirstID('Tonberry_Kinq'),
+        FLAUROS                  = GetFirstID('Flauros'),
+        TEMPLE_GUARDIAN          = GetFirstID('Temple_Guardian'),
+        NIO_A                    = GetFirstID('Nio-A'),
+        NIO_HUM                  = GetFirstID('Nio-Hum'),
+        MIMIC                    = GetFirstID('Mimic'),
+        SOZU_ROGBERRY            = GetFirstID('Sozu_Rogberry'),
+        CLEUVARION_M_RESOAIX     = GetFirstID('Cleuvarion_M_Resoaix'),
+        ROMPAULION_S_CITALLE     = GetFirstID('Rompaulion_S_Citalle'),
+        BERYL_FOOTED_MOLBERRY    = GetFirstID('Beryl-footed_Molberry'),
+        DEATH_FROM_ABOVE         = GetFirstID('Death_from_Above'),
+        HABETROT                 = GetFirstID('Habetrot'),
+        CRIMSON_TOOTHED_PAWBERRY = GetFirstID('Crimson-toothed_Pawberry'),
+        SACRIFICIAL_GOBLET       = GetFirstID('Sacrificial_Goblet'),
+        YALLERY_BROWN            = GetFirstID('Yallery_Brown'),
     },
     npc =
     {
-        PLONGEUR_MONBERRY    = 17428934,
-        BOOK_OFFSET          = 17428974,
-        TEMPLE_GUARDIAN_DOOR = 17428979,
-        DOOR_TO_RANCOR       = 17428990,
+        PLONGEUR_MONBERRY    = GetFirstID('Plongeur_Monberry'),
+        BOOK_OFFSET          = GetFirstID('Worn_Book'),
+        TEMPLE_GUARDIAN_DOOR = GetFirstID('_mf1'),
+        DOOR_TO_RANCOR       = GetFirstID('_mfb'),
         TREASURE_COFFER      = GetFirstID('Treasure_Coffer'),
     },
 }

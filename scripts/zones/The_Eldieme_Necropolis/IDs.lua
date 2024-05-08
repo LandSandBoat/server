@@ -61,31 +61,24 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
     },
     mob =
     {
-        CWN_CYRFF_PH  =
-        {
-            [17576050] = 17576054, -- -375.862 0.542 382.17
-            [17576051] = 17576054, -- -399.941 0.027 379.055
-            [17576052] = 17576054, -- -384.019 0.509 384.26
-            [17576053] = 17576054, -- -376.974 0.586 343.750
-        },
-        LICH_C_MAGNUS       = 17575937,
-        YUM_KIMIL           = 17576264,
-        STURM               = 17576267,
-        TAIFUN              = 17576268,
-        TROMBE              = 17576269,
-        MIMIC               = 17576270,
+        CWN_CYRFF           = GetFirstID('Cwn_Cyrff'),
+        LICH_C_MAGNUS       = GetFirstID('Lich_C_Magnus'),
+        YUM_KIMIL           = GetFirstID('Yum_Kimil'),
+        STURM               = GetFirstID('Sturm'),
+        TAIFUN              = GetFirstID('Taifun'),
+        TROMBE              = GetFirstID('Trombe'),
+        MIMIC               = GetFirstID('Mimic'),
         APPARATUS_ELEMENTAL = 17576271,
-        NAMORODO            = 17576272,
-        SKULL_OFFSET        = 17575937,
+        NAMORODO            = GetFirstID('Namorodo'),
     },
     npc =
     {
-        GATE_OFFSET        = 17576307,
+        GATE_OFFSET        = GetFirstID('_5f1'),
         BRAZIER            = GetFirstID('Brazier'),
         TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
         TREASURE_COFFER    = GetFirstID('Treasure_Coffer'),
-        SARCOPHAGUS_OFFSET = 17576395,
-        CANDLE_OFFSET      = 17576335,
+        SARCOPHAGUS_OFFSET = GetFirstID('Sarcophagus'),
+        CANDLE_OFFSET      = GetFirstID('_5fu'),
     },
 }
 

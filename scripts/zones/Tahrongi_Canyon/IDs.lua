@@ -61,19 +61,10 @@ zones[xi.zone.TAHRONGI_CANYON] =
     },
     mob =
     {
-        SERPOPARD_ISHTAR_PH =
-        {
-            [17256560] = 17256563, -- -9.176 -8.191 -64.347 (south)
-            [17256686] = 17256690, -- 22.360 23.757 281.584 (north)
-        },
-
-        HERBAGE_HUNTER_PH =
-        {
-            [17256835] = 17256836, -- -119.301, 24.087, 448.636
-        },
-
-        HABROK            = 17256493,
-        YARA_MA_YHA_WHO   = 17256900,
+        SERPOPARD_ISHTAR = GetTableOfIDs('Serpopard_Ishtar'),
+        HERBAGE_HUNTER   = GetFirstID('Herbage_Hunter'),
+        HABROK           = GetFirstID('Habrok'),
+        YARA_MA_YHA_WHO  = GetFirstID('Yara_Ma_Yha_Who'),
 
         VOIDWALKER =
         {
@@ -109,7 +100,7 @@ zones[xi.zone.TAHRONGI_CANYON] =
 
     npc =
     {
-        SIGNPOST_OFFSET = 17257034,
+        SIGNPOST_OFFSET = GetFirstID('Signpost'),
         EXCAVATION      = GetTableOfIDs('Excavation_Point'),
     },
 }

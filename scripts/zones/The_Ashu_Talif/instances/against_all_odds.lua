@@ -6,6 +6,12 @@ local ID = zones[xi.zone.THE_ASHU_TALIF]
 -----------------------------------
 local instanceObject = {}
 
+local mobTable =
+{
+    ID.mob.GOWAM,
+    ID.mob.YAZQUHL,
+}
+
 instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.LIFE_FLOAT) and
         player:getCharVar('AgainstAllOdds') == 2
@@ -16,7 +22,7 @@ instanceObject.entryRequirements = function(player)
 end
 
 instanceObject.onInstanceCreated = function(instance)
-    for i, v in pairs(ID.mob[54]) do
+    for i, v in pairs(mobTable) do
         SpawnMob(v, instance)
     end
 end
