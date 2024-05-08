@@ -42,74 +42,27 @@ zones[xi.zone.QUICKSAND_CAVES] =
     },
     mob =
     {
-        SAGITTARIUS_X_XIII_PH   =
-        {
-            [17629296] = 17629301, -- 641 -16.786 -774
-        },
-        NUSSKNACKER_PH          =
-        {
-            [17629396] = 17629403, -- 189 2 4
-            [17629397] = 17629403, -- 200 2 -4
-        },
-        CENTURIO_X_I_PH         =
-        {
-            [17629237] = 17629238, -- 773.581 1.576 -568.904
-        },
-        ANTICAN_MAGISTER_PH     =
-        {
-            -- Antican Magister is a lottery of various Antica at (C-6).
-            -- https://www.bg-wiki.com/ffxi/Antican_Magister
-
-            -- Antican Hastatus
-            [17629409] = GetFirstID('Antican_Magister'),
-            -- Antican Princeps
-            [17629410] = GetFirstID('Antican_Magister'),
-            -- Antican Signifier
-            [17629411] = GetFirstID('Antican_Magister'),
-        },
-        ANTICAN_PRAEFECTUS_PH   =
-        {
-            [17629280] = 17629281, -- -90.01 -0.567 -29.424
-        },
-        ANTICAN_PROCONSUL_PH    =
-        {
-            [17629420] = 17629421, -- 89.575 -0.299 -196.206
-        },
-        DIAMOND_DAIG_PH         =
-        {
-            [17629439] = 17629430, -- -95.632 -0.5 -214.732
-        },
-        ANTICAN_TRIBUNUS_PH     =
-        {
-            [17629501] = 17629483, -- -575.455 -0.401 -433.802
-        },
-        TRIARIUS_X_XV_PH        =
-        {
-            [17629533] = 17629524, -- -786.730 -0.5 -343.963
-        },
-        HASTATUS_XI_XII_PH      =
-        {
-            [17629557] = 17629561, -- -343.859 -0.411 751.608
-        },
-        SABOTENDER_BAILARIN_PH  =
-        {
-            [17629261] = 17629264, -- 604 -5.5 -680
-            [17629262] = 17629264, -- 600 -5.5 -673
-        },
-        SABOTENDER_BAILARINA_PH =
-        {
-            [17629582] = 17629587, -- -458 0 780
-            [17629586] = 17629587, -- -522 1 779
-        },
-        VALOR                 = 17629185,
-        HONOR                 = 17629186,
-        CENTURIO_IV_VII       = 17629187,
-        TRIARIUS_IV_XIV       = 17629188,
-        PRINCEPS_IV_XLV       = 17629189,
-        MIMIC                 = 17629190,
-        ANCIENT_VESSEL        = 17629642,
-        TRIBUNUS_VII_I        = 17629643,
-        GIRTABLULU            = 17629645,
+        SAGITTARIUS_X_XIII    = GetFirstID('Sagittarius_X-XIII'),
+        NUSSKNACKER           = GetFirstID('Nussknacker'),
+        CENTURIO_X_I          = GetFirstID('Centurio_X-I'),
+        ANTICAN_MAGISTER      = GetFirstID('Antican_Magister'),
+        ANTICAN_PRAEFECTUS    = GetFirstID('Antican_Praefectus'),
+        ANTICAN_PROCONSUL     = GetFirstID('Antican_Proconsul'),
+        DIAMOND_DAIG          = GetFirstID('Diamond_Daig'),
+        ANTICAN_TRIBUNUS      = GetFirstID('Antican_Tribunus'),
+        TRIARIUS_X_XV         = GetFirstID('Triarius_X-XV'),
+        HASTATUS_XI_XII       = GetFirstID('Hastatus_XI-XII'),
+        SABOTENDER_BAILARIN   = GetFirstID('Sabotender_Bailarin'),
+        SABOTENDER_BAILARINA  = GetFirstID('Sabotender_Bailarina'),
+        VALOR                 = GetFirstID('Valor'),
+        HONOR                 = GetFirstID('Honor'),
+        CENTURIO_IV_VII       = GetFirstID('Centurio_IV-VII'),
+        TRIARIUS_IV_XIV       = GetFirstID('Triarius_IV-XIV'),
+        PRINCEPS_IV_XLV       = GetFirstID('Princeps_IV-XLV'),
+        MIMIC                 = GetFirstID('Mimic'),
+        ANCIENT_VESSEL        = GetFirstID('Ancient_Vessel'),
+        TRIBUNUS_VII_I        = GetFirstID('Tribunus_VII-I'),
+        GIRTABLULU            = GetFirstID('Girtablulu'),
     },
     npc =
     {
@@ -121,10 +74,10 @@ zones[xi.zone.QUICKSAND_CAVES] =
             [4] = { 814.000, -14.000, -761.000 },
         },
 
-        ORNATE_DOOR_OFFSET     = 17629694,
-        CHAINS_THAT_BIND_US_QM = 17629747,
+        ORNATE_DOOR_OFFSET     = GetFirstID('_5s0'),
+        CHAINS_THAT_BIND_US_QM = GetFirstID('qm6'),
         TREASURE_COFFER        = GetFirstID('Treasure_Coffer'),
-        ANTICAN_TAG_QM         = 17629770,
+        ANTICAN_TAG_QM         = GetFirstID('qm25'),
     },
 }
 

@@ -29,8 +29,7 @@ zones[xi.zone.QULUN_DOME] =
     },
     mob =
     {
-        DIAMOND_QUADAV             = 17383442,
-        AFFABLE_ADAMANTKING_OFFSET = 17383444,
+        DIAMOND_QUADAV             = GetFirstID('Diamond_Quadav'), -- Also used for An Affable Adamantking? offset
     },
     npc =
     {
