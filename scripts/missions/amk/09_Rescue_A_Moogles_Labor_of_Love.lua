@@ -25,6 +25,10 @@ mission.reward =
     nextMission = { xi.mission.log_id.AMK, xi.mission.id.amk.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS },
 }
 
+-- There are ten possible sets of QM locations that could be assigned to the player
+-- that give the stone KIs. The table below holds the 10 sets that can be
+-- randomly assigned, which stores the indices of the QM ids from a table
+-- that is pulled from the database
 local markerSets =
 {
     { 1, 2, 5, 7,  8,  11, 14, 19, 20 },
@@ -51,8 +55,8 @@ local getMarkerSet = function(player)
 end
 
 local hasAllStones = function(player)
-    for offset = 0, 8 do
-        if not player:hasKeyItem(xi.ki.STONE_OF_SURYA + offset) then
+    for keyItemId = xi.ki.STONE_OF_SURYA, xi.ki.STONE_OF_KETU do
+        if not player:hasKeyItem(keyItemId) then
             return false
         end
     end
@@ -66,7 +70,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-            player:getCharVar('Mission[10][8]progress') == 0
+                player:getCharVar('Mission[10][8]progress') == 0
         end,
 
         [xi.zone.QUICKSAND_CAVES] =
@@ -118,10 +122,9 @@ mission.sections =
 
                     -- Determine if QM triggered is in markerset
                     local keyItem = 0
-                    for setIndex = 1, 9 do
-                        local markerIdIndex = markerSets[amkMarkerSet][setIndex]
+                    for idx, markerIdIndex in ipairs(markerSets[amkMarkerSet]) do
                         if npc:getID() == ID.npc.QM_AMK[markerIdIndex] then
-                            keyItem = xi.ki.STONE_OF_SURYA + setIndex - 1
+                            keyItem = xi.ki.STONE_OF_SURYA + idx - 1
                         end
                     end
 
@@ -156,8 +159,8 @@ mission.sections =
             onEventFinish =
             {
                 [100] = function(player, csid, option, npc)
-                    for i = 0, 8 do
-                        player:delKeyItem(xi.ki.STONE_OF_SURYA + i)
+                    for keyItemId = xi.ki.STONE_OF_SURYA, xi.ki.STONE_OF_KETU do
+                        player:delKeyItem(keyItemId)
                     end
 
                     player:setCharVar('Mission[10][8]markerSet', 0)
