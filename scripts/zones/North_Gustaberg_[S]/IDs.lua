@@ -33,15 +33,8 @@ zones[xi.zone.NORTH_GUSTABERG_S] =
 
     mob =
     {
-        ANKABUT_PH =
-        {
-            [17137701] = 17137705, -- 656.399 -11.580 507.091
-        },
-
-        GLOOMANITA_PH =
-        {
-            [17137820] = 17137821, -- -19.961 0.5 623.989
-        },
+        ANKABUT    = GetFirstID('Ankabut'),
+        GLOOMANITA = GetFirstID('Gloomanita'),
 
         VOIDWALKER =
         {
