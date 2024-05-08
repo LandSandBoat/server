@@ -42,23 +42,14 @@ zones[xi.zone.ORDELLES_CAVES] =
     },
     mob =
     {
-        DONGGU_PH =
-        {
-            [17567797] = 17567801,
-        },
-        AGAR_AGAR_PH =
-        {
-            [17567897] = 17567901, -- -81.31 31.493 210.675
-            [17567898] = 17567901, -- -76.67 31.163 186.602
-            [17567899] = 17567901, -- -80.77 31.979 193.542
-            [17567900] = 17567901, -- -79.82 31.968 208.309
-        },
-        MORBOLGER           = 17568127,
-        POLEVIK             = 17568134,
-        DARK_PUPPET_OFFSET  = 17568135,
-        NECROPLASM          = 17568138,
-        APPARATUS_ELEMENTAL = 17568139,
-        AROMA_LEECH         = 17568140,
+        DONGGU              = GetFirstID('Donggu'),
+        AGAR_AGAR           = GetFirstID('Agar_Agar'),
+        MORBOLGER           = GetFirstID('Morbolger'),
+        POLEVIK             = GetFirstID('Polevik'),
+        DARK_PUPPET_OFFSET  = GetFirstID('Gerwitzs_Axe'),
+        NECROPLASM          = GetFirstID('Necroplasm'),
+        APPARATUS_ELEMENTAL = GetTableOfIDs('Air_Elemental')[2], -- Second elemental in the list
+        AROMA_LEECH         = GetFirstID('Aroma_Leech'),
     },
     npc =
     {

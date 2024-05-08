@@ -36,30 +36,17 @@ zones[xi.zone.OUTER_HORUTOTO_RUINS] =
     },
     mob =
     {
-        DESMODONT_PH                =
-        {
-            [17571868] = 17571870,
-        },
-        AH_PUCH_PH                  =
-        {
-            [17571893] = 17571903, -- -418, -1, 629
-            [17571894] = 17571903, -- -419, -1, 570
-            [17571895] = 17571903, -- -419, -1, 581
-            [17571896] = 17571903, -- -418, -1, 590
-            [17571897] = 17571903, -- -418, -1, 597
-            [17571898] = 17571903, -- -417, -1, 640
-            [17571899] = 17571903, -- -419, -1, 615
-            [17571900] = 17571903, -- -417, -1, 661
-        },
-        BALLOON_NM_OFFSET          = 17572141,
-        FULL_MOON_FOUNTAIN_OFFSET  = 17572197,
-        JESTER_WHOD_BE_KING_OFFSET = 17572201,
-        APPARATUS_ELEMENTAL        = 17572203,
-        CUSTOM_CARDIAN_OFFSET      = 17572204, -- Goes up to 17572218
+        DESMODONT                  = GetFirstID('Desmodont'),
+        AH_PUCH                    = GetFirstID('Ah_Puch'),
+        BALLOON_NM_OFFSET          = GetTableOfIDs('Balloon')[2], -- TODO: NM Needs audit. This only uses 2 of the NMs
+        FULL_MOON_FOUNTAIN_OFFSET  = GetFirstID('Jack_of_Cups'),
+        JESTER_WHOD_BE_KING_OFFSET = GetFirstID('Queen_of_Swords'),
+        APPARATUS_ELEMENTAL        = GetFirstID('Thunder_Elemental'),
+        CUSTOM_CARDIAN_OFFSET      = GetFirstID('Custom_Cardian'),
     },
     npc =
     {
-        GATE_MAGICAL_GIZMO = 17572249,
+        GATE_MAGICAL_GIZMO = GetFirstID('_5e9'),
         TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
     },
 }

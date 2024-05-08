@@ -28,19 +28,15 @@ zones[xi.zone.NEWTON_MOVALPOLOS] =
     },
     mob =
     {
-        SWASHSTOX_BEADBLINKER_PH =
-        {
-            [16826507] = 16826517, -- 92.145, 15.500, 66.595
-            [16826514] = 16826510, -- 88.412, 15.421, -19.950
-        },
-        MIMIC                    = 16826564,
-        BUGBEAR_MATMAN           = 16826570,
-        GOBLIN_COLLECTOR         = 16826569,
+        SWASHSTOX_BEADBLINKER = GetTableOfIDs('Swashstox_Beadblinker'), -- 2 NMs
+        MIMIC                 = GetFirstID('Mimic'),
+        BUGBEAR_MATMAN        = GetFirstID('Bugbear_Matman'),
+        GOBLIN_COLLECTOR      = GetFirstID('Goblin_Collector'),
     },
     npc =
     {
-        DOOR_OFFSET          = 16826585, -- _0c0 in npc_list
-        FURNACE_HATCH_OFFSET = 16826610,
+        DOOR_OFFSET          = GetFirstID('_0c0'),
+        FURNACE_HATCH_OFFSET = GetFirstID('Furnace_Hatch'),
         TREASURE_COFFER      = GetFirstID('Treasure_Coffer'),
         MINING               = GetTableOfIDs('Mining_Point'),
     },
