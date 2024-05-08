@@ -1257,6 +1257,7 @@ xi.weaponskills.handleWSGorgetBelt = function(attacker)
 
         local neck                      = attacker:getEquipID(xi.slot.NECK)
         local belt                      = attacker:getEquipID(xi.slot.WAIST)
+        local weapon                    = attacker:getEquipID(xi.slot.MAIN)
         local scProp1, scProp2, scProp3 = attacker:getWSSkillchainProp()
 
         for i, v in ipairs(elementalGorget) do
@@ -1296,6 +1297,15 @@ xi.weaponskills.handleWSGorgetBelt = function(attacker)
 
         if belt == xi.item.FOTIA_BELT then -- Fotia Belt
             accBonus = accBonus + 10
+            ftpBonus = ftpBonus + 0.1
+        end
+
+        if
+            weapon == xi.item.PRESTER and
+            (xi.magicburst.doesElementMatchWeaponskill(xi.element.WIND, scProp1) or
+            xi.magicburst.doesElementMatchWeaponskill(xi.element.WIND, scProp2) or
+            xi.magicburst.doesElementMatchWeaponskill(xi.element.WIND, scProp3))
+        then -- Prester
             ftpBonus = ftpBonus + 0.1
         end
     end

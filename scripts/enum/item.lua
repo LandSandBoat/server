@@ -6171,6 +6171,7 @@ xi.item =
     DORJE                               = 18594,
     KEBBIE                              = 18596,
     CATALYST                            = 18597,
+    PRESTER                             = 18598,
     RAM_STAFF                           = 18612,
     SAMUDRA                             = 18618,
     SPHARAI_85                          = 18637,
