@@ -33,18 +33,15 @@ zones[xi.zone.PSOXJA] =
     },
     mob =
     {
-        GYRE_CARLIN_PH =
-        {
-            [16814330] = 16814331,
-        },
-        GARGOYLE_OFFSET         = 16814081,
-        NUNYUNUWI               = 16814361,
-        GOLDEN_TONGUED_CULBERRY = 16814432,
+        GYRE_CARLIN             = GetFirstID('Gyre-Carlin'),
+        GARGOYLE_OFFSET         = GetFirstID('Gargoyle'),
+        NUNYUNUWI               = GetFirstID('Nunyunuwi'),
+        GOLDEN_TONGUED_CULBERRY = GetFirstID('Golden-Tongued_Culberry'),
     },
     npc =
     {
-        STONE_DOOR_OFFSET          = 16814446, -- _090 in npc_list
-        TREASURE_CHEST             = 16814558,
+        STONE_DOOR_OFFSET       = GetFirstID('_090'),
+        TREASURE_CHEST          = GetFirstID('Treasure_Chest'),
     },
 }
 

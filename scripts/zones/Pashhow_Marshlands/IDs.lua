@@ -49,24 +49,11 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
 
     mob =
     {
-        NI_ZHO_BLADEBENDER_PH =
-        {
-            [17223740] = 17223797, -- -429.953 24.5 -305.450
-            [17223789] = 17223797, -- 11.309 23.904 -337.923
-        },
-
-        JOLLY_GREEN_PH =
-        {
-            [17223888] = 17223889, -- 184.993 24.499 -41.790
-        },
-
-        BLOODPOOL_VORAX_PH =
-        {
-            [17224014] = 17224019, -- -351.884 24.014 513.531
-        },
-
-        BOWHO_WARMONGER = 17224104,
-        TOXIC_TAMLYN = GetFirstID('Toxic_Tamlyn'),
+        NI_ZHO_BLADEBENDER = GetFirstID('NiZho_Bladebender'),
+        JOLLY_GREEN        = GetFirstID('Jolly_Green'),
+        BLOODPOOL_VORAX    = GetFirstID('Bloodpool_Vorax'),
+        BOWHO_WARMONGER    = GetFirstID('BoWho_Warmonger'),
+        TOXIC_TAMLYN       = GetFirstID('Toxic_Tamlyn'),
 
         VOIDWALKER  =
         {

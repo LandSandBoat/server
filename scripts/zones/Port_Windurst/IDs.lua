@@ -80,7 +80,7 @@ zones[xi.zone.PORT_WINDURST] =
     },
     npc =
     {
-        EXPLORER_MOOGLE = 17760450,
+        EXPLORER_MOOGLE = GetFirstID('Explorer_Moogle'),
     },
 }
 
