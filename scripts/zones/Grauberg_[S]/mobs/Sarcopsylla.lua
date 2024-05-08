@@ -8,14 +8,18 @@ mixins = { require('scripts/mixins/families/chigoe_nm') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addImmunity(xi.IMMUNITY.IMMUNITY_LIGHT_SLEEP)
-    mob:addImmunity(xi.IMMUNITY.IMMUNITY_DARK_SLEEP)
-    mob:addImmunity(xi.IMMUNITY.IMMUNITY_GRAVITY)
-    mob:addImmunity(xi.IMMUNITY.IMMUNITY_BIND)
-    mob:addImmunity(xi.IMMUNITY.IMMUNITY_SILENCE)
-    mob:addImmunity(xi.IMMUNITY.IMMUNITY_PETRIFY)
+    -- Set immunities.
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.PETRIFY)
 
+    -- Set modifiers.
     mob:setMod(xi.mod.TRIPLE_ATTACK, 100)
+
+    -- Set mob modifiers.
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
