@@ -21,7 +21,7 @@ abilityObject.onPetAbility = function(target, pet, skill, master, action)
 
     duration = duration * resm
     if
-        target:hasImmunity(1) or
+        target:hasImmunity(xi.immunity.LIGHT_SLEEP) or
         target:hasStatusEffect(xi.effect.SLEEP_I) or
         target:hasStatusEffect(xi.effect.SLEEP_II) or
         target:hasStatusEffect(xi.effect.LULLABY)
