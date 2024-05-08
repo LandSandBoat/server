@@ -137,7 +137,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
             [17723492] = 52, -- Antonian
             [17723497] = 51, -- Attarena
         },
-        EXPLORER_MOOGLE = 17723648,
+        EXPLORER_MOOGLE = GetFirstID('Explorer_Moogle'),
     },
 }
 
