@@ -35,19 +35,10 @@ zones[xi.zone.ROMAEVE] =
     },
     mob =
     {
-        NIGHTMARE_VASE_PH =
-        {
-            [17276981] = 17276982, -- -101.575 -6.099 -1.520 (west)
-            [17276987] = 17276992, -- 59.825 -5.760 25.123 (east)
-        },
-        ROGUE_RECEPTACLE_PH =
-        {
-            [17277075] = 17277079,
-            [17277078] = 17277079,
-        },
-        MOKKURKALFI_I     = 17276929,
-        MOKKURKALFI_II    = 17276930,
-        ELDHRIMNIR        = 17277126,
+        NIGHTMARE_VASE   = GetTableOfIDs('Nightmare_Vase'), -- 2 NMs
+        ROGUE_RECEPTACLE = GetFirstID('Rogue_Receptacle'),
+        ELDHRIMNIR       = GetFirstID('Eldhrimnir'),
+        MOKKURKALFI      = GetFirstID('Mokkurkalfi'),
     },
     npc =
     {
@@ -65,8 +56,8 @@ zones[xi.zone.ROMAEVE] =
             [10] = { -160.000, -6.000, -107.000 }, -- D-10
         },
 
-        MOONGATE_OFFSET = 17277196,
-        BASTOK_7_1_QM   = 17277208,
+        MOONGATE_OFFSET = GetFirstID('_3e0'),
+        BASTOK_7_1_QM   = GetFirstID('qm2'),
     },
 }
 

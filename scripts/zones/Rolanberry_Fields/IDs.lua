@@ -49,27 +49,12 @@ zones[xi.zone.ROLANBERRY_FIELDS] =
 
     mob =
     {
-        BLACK_TRIPLE_STARS_PH =
-        {
-            [17227968] = 17227972, -- 4 -16 -119 (north)
-            [17227988] = 17227992, -- 76 -15 -209 (south)
-        },
-
-        DROOLING_DAISY_PH =
-        {
-            [17228235] = 17228236, -- -691.786 -34.802 -335.763
-        },
-
-        ELDRITCH_EDGE_PH  =
-        {
-            [17228152] = 17228150, -- 440 -28 -44
-            [17228148] = 17228150, -- 396.992 -24.01 -152.613
-            [17228149] = 17228150, -- 395 -24 -147
-        },
-
-        SILK_CATERPILLAR  = 17227782,
-        SIMURGH           = 17228242,
-        CHUGLIX_BERRYPAWS = 17228249,
+        BLACK_TRIPLE_STARS = GetTableOfIDs('Black_Triple_Stars'), -- 2 NMs
+        DROOLING_DAISY     = GetFirstID('Drooling_Daisy'),
+        ELDRITCH_EDGE      = GetFirstID('Eldritch_Edge'),
+        SILK_CATERPILLAR   = GetFirstID('Silk_Caterpillar'),
+        SIMURGH            = GetFirstID('Simurgh'),
+        CHUGLIX_BERRYPAWS  = GetFirstID('Chuglix_Berrypaws'),
 
         VOIDWALKER =
         {

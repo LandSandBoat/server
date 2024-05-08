@@ -32,14 +32,9 @@ zones[xi.zone.ROLANBERRY_FIELDS_S] =
     },
     mob =
     {
-        DELICIEUSE_DELPHINE_PH =
-        {
-            [17150279] = 17150280, -- -484.535 -23.756 -467.462
-        },
-
-        ERLE = GetFirstID('Erle'), -- PH at -341 4 6
-
-        DYINYINGA = GetFirstID('Dyinyinga'), -- PH at 170 -31.8 -170
+        DELICIEUSE_DELPHINE_PH = GetFirstID('Delicieuse_Delphine'),
+        ERLE                   = GetFirstID('Erle'), -- PH at -341 4 6
+        DYINYINGA              = GetFirstID('Dyinyinga'), -- PH at 170 -31.8 -170
 
         VOIDWALKER =
         {
