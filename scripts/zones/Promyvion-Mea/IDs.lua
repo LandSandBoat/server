@@ -42,29 +42,7 @@ zones[xi.zone.PROMYVION_MEA] =
     },
     npc =
     {
-        MEMORY_STREAMS =
-        {
-            [11]       = { -122, -4,  197, -117, 4,  202, { 46 } }, -- Floor 1 return
-            [21]       = {   -1, -4, -121,    2, 4, -118, { 41 } }, -- Floor 2 return
-            [31]       = { -161, -4,  158, -157, 4,  161, { 42 } }, -- Floor 3 (West) return
-            [32]       = {  158, -4, -281,  161, 4, -278, { 43 } }, -- Floor 3 (East) return
-            [41]       = {  -82, -4,  358,  -78, 4,  361, { 33 } }, -- Floor 4 return
-            -- TODO: Cleanup promyvions. It knows where you came from and will only return the apropiate event acordingly.
-            -- Event 44 -> Return to floor 3 West
-            -- Event 45 -> Return to floor 3 East
-
-            [16859483] = { -283, -4,  237, -276, 4,  242, { 30 } }, -- Floor 1 MR
-            [16859486] = {  -82, -4,  -42,  -78, 4,  -38, { 33 } }, -- Floor 2 MR N  - Destination: East
-            [16859490] = { -322, -4, -361, -318, 4, -357, { 37 } }, -- Floor 2 MR SW - Destination: West
-            [16859491] = {  -42, -4, -321,  -37, 4, -317, { 38 } }, -- Floor 2 MR S  - Destination: West
-            [16859492] = {   77, -4, -241,   81, 4, -238, { 39 } }, -- Floor 2 MR SE - Destination: East
-            [16859484] = { -321, -4,  -42, -318, 4,  -38, { 31 } }, -- Floor 3 (West) MR SW
-            [16859485] = { -241, -4,  -42, -238, 4,  -37, { 32 } }, -- Floor 3 (West) MR S
-            [16859487] = {  -42, -4,   -2,  -38, 4,    2, { 34 } }, -- Floor 3 (West) MR SE
-            [16859488] = {  198, -4,   -2,  201, 4,    2, { 35 } }, -- Floor 3 (East) MR NW
-            [16859489] = {  358, -4,  -41,  362, 4,  -38, { 36 } }, -- Floor 3 (East) MR NE
-            [16859493] = {  240, -4, -322,  244, 4, -317, { 40 } }, -- Floor 3 (East) MR SW
-        },
+        MEMORY_STREAM_OFFSET = GetFirstID('_0k1'),
     },
 }
 

@@ -2,9 +2,8 @@ xi = xi or {}
 xi.promyvion = xi.promyvion or {}
 
 -----------------------------------
--- LOCAL FUNCTIONS
+-- Local functions
 -----------------------------------
-
 local function maxFloor(ID)
     local m = 0
 
@@ -43,16 +42,19 @@ local function findMother(mob)
 end
 
 -----------------------------------
--- PUBLIC FUNCTIONS
+-- Zone global functions
 -----------------------------------
+xi.promyvion.handlePortal = function(player, npcId, eventId)
+    if
+        player:getAnimation() == xi.anim.NONE and
+        GetNPCByID(npcId):getAnimation() == xi.anim.OPEN_DOOR
+    then
+        player:startOptionalCutscene(eventId)
+    end
+end
 
 xi.promyvion.initZone = function(zone)
     local ID = zones[zone:getID()]
-
-    -- register teleporter trigger areas
-    for k, v in pairs(ID.npc.MEMORY_STREAMS) do
-        zone:registerTriggerArea(k, v[1], v[2], v[3], v[4], v[5], v[6])
-    end
 
     -- randomize floor exits
     for i = 1, maxFloor(ID) do
@@ -60,6 +62,9 @@ xi.promyvion.initZone = function(zone)
     end
 end
 
+-----------------------------------
+-- Stray global functions
+-----------------------------------
 xi.promyvion.strayOnSpawn = function(mob)
     local mother = GetMobByID(findMother(mob))
 
@@ -69,6 +74,9 @@ xi.promyvion.strayOnSpawn = function(mob)
     end
 end
 
+-----------------------------------
+-- Memory Receptacle global functions
+-----------------------------------
 xi.promyvion.receptacleOnFight = function(mob, target)
     if os.time() > mob:getLocalVar('[promy]nextStray') then
         local ID = zones[mob:getZoneID()]
