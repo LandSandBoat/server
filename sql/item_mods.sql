@@ -23277,7 +23277,7 @@ INSERT INTO `item_mods` VALUES (14645,5,30);   -- MP: 30
 INSERT INTO `item_mods` VALUES (14645,21,-30); -- LIGHT_RES: -30
 
 -- Shadow Ring
-INSERT INTO `item_mods` VALUES (14646,255,5);  -- DEATHRES: 5
+INSERT INTO `item_mods` VALUES (14646,255,20); -- DEATHRES: 20
 INSERT INTO `item_mods` VALUES (14646,476,13); -- MAGIC_NULL: 13
 
 -- Telluric Ring
