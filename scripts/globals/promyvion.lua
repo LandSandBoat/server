@@ -117,24 +117,3 @@ xi.promyvion.receptacleOnDeath = function(mob, optParams)
         end
     end
 end
-
-xi.promyvion.onTriggerAreaEnter = function(player, triggerArea)
-    if player:getAnimation() == 0 then
-        local ID = zones[player:getZoneID()]
-        local triggerAreaID = triggerArea:GetTriggerAreaID()
-        local event = nil
-
-        if triggerAreaID < 100 then
-            event = ID.npc.MEMORY_STREAMS[triggerAreaID][7][1]
-        else
-            local stream = GetNPCByID(triggerAreaID)
-            if stream ~= nil and stream:getAnimation() == xi.anim.OPEN_DOOR then
-                event = stream:getLocalVar('[promy]destination')
-            end
-        end
-
-        if event ~= nil then
-            player:startOptionalCutscene(event)
-        end
-    end
-end
