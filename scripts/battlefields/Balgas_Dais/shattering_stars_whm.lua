@@ -10,6 +10,7 @@ local content = Battlefield:new({
     battlefieldId = xi.battlefield.id.SHATTERING_STARS_WHM,
     maxPlayers    = 1,
     levelCap      = 99,
+    allowSubjob   = false,
     timeLimit     = utils.minutes(10),
     index         = 6,
     entryNpc      = 'BC_Entrance',
