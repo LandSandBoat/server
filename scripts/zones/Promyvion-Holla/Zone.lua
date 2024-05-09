@@ -1,12 +1,16 @@
 -----------------------------------
 -- Zone: Promyvion-Holla (16)
 -----------------------------------
+local ID = zones[xi.zone.PROMYVION_HOLLA]
+-----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
---    UpdateNMSpawnPoint(ID.mob.CEREBRATOR)
---    GetMobByID(ID.mob.CEREBRATOR):setRespawnTime(math.random(3600, 21600))
     xi.promyvion.initZone(zone)
+
+    -- Update NM between Floor 3 islands.
+    UpdateNMSpawnPoint(ID.mob.CEREBRATOR)
+    GetMobByID(ID.mob.CEREBRATOR):setRespawnTime(math.random(3600, 21600))
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

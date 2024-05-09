@@ -38,7 +38,7 @@ zones[xi.zone.PROMYVION_DEM] =
             [16851170] = { 4, 7, 16851288 },
         },
 
-        SATIATOR    = 16851267,
+        SATIATOR = GetFirstID('Satiator'),
     },
     npc =
     {

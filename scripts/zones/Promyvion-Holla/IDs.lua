@@ -38,7 +38,7 @@ zones[xi.zone.PROMYVION_HOLLA] =
             [16842958] = { 4, 7, 16843064 },
         },
 
-        CEREBRATOR    = 16843043,
+        CEREBRATOR = GetFirstID('Cerebrator'),
     },
     npc =
     {

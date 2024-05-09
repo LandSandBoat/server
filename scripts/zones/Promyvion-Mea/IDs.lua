@@ -38,7 +38,7 @@ zones[xi.zone.PROMYVION_MEA] =
             [16859394] = { 4, 7, 16859493 },
         },
 
-        COVETER    = 16859472,
+        COVETER = GetFirstID('Coveter'),
     },
     npc =
     {
