@@ -901,9 +901,18 @@ namespace luautils
 
         // Update GetFirstID to use this new lookup
         // clang-format off
-        lua.set_function("GetFirstID", [&](std::string const& name) -> uint32
+        lua.set_function("GetFirstID", [&](std::string const& name) -> std::optional<uint32>
         {
-            return lookup[name].front();
+            if (lookup.find(name) != lookup.end())
+            {
+                return lookup[name].front();
+            }
+            else
+            {
+                ShowWarning(fmt::format("GetFirstID({}) in zone {}: Returning nil", name, zoneName));
+
+                return std::nullopt;
+            }
         });
 
         std::unordered_map<std::string, sol::table> idLuaTables;
@@ -926,7 +935,7 @@ namespace luautils
                 // If we have no entries, bail out and return nil
                 if (lookup.find(name) == lookup.end())
                 {
-                    ShowWarning(fmt::format("GetTableOfIDs({}): Returning nil", name));
+                    ShowWarning(fmt::format("GetTableOfIDs({}) in zone {}: Returning nil", name, zoneName));
                     return sol::lua_nil;
                 }
 
@@ -934,7 +943,7 @@ namespace luautils
 
                 if (entriesVec.empty())
                 {
-                    ShowWarning(fmt::format("GetTableOfIDs({}): Returning empty table", name));
+                    ShowWarning(fmt::format("GetTableOfIDs({}) in zone {}: Returning empty table", name, zoneName));
                     return table;
                 }
 
@@ -964,7 +973,7 @@ namespace luautils
 
             if (table.empty())
             {
-                ShowWarning(fmt::format("Tried to look do ID lookup for {}, but found nothing.", name));
+                ShowWarning(fmt::format("GetTableOfIDs({}) in zone {}: Tried to look do ID lookup, but found nothing.", name, zoneName));
             }
 
             // Add to cache
