@@ -422,6 +422,7 @@ bool CAttack::IsCountered() const
 
 bool CAttack::CheckCounter()
 {
+    // TODO return false if boost is active (when boost gets refactored to be current retail accurate)
     if (m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
     {
         return false;
