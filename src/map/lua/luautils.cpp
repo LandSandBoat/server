@@ -909,7 +909,7 @@ namespace luautils
             }
             else
             {
-                ShowWarning(fmt::format("GetFirstID({}) in zone {}: Returning nil", name, zoneName));
+                ShowError(fmt::format("GetFirstID({}) in zone {}: Returning nil", name, zoneName));
 
                 return std::nullopt;
             }
@@ -935,7 +935,7 @@ namespace luautils
                 // If we have no entries, bail out and return nil
                 if (lookup.find(name) == lookup.end())
                 {
-                    ShowWarning(fmt::format("GetTableOfIDs({}) in zone {}: Returning nil", name, zoneName));
+                    ShowError(fmt::format("GetTableOfIDs({}) in zone {}: Returning nil", name, zoneName));
                     return sol::lua_nil;
                 }
 
@@ -943,7 +943,7 @@ namespace luautils
 
                 if (entriesVec.empty())
                 {
-                    ShowWarning(fmt::format("GetTableOfIDs({}) in zone {}: Returning empty table", name, zoneName));
+                    ShowError(fmt::format("GetTableOfIDs({}) in zone {}: Returning empty table", name, zoneName));
                     return table;
                 }
 
@@ -973,7 +973,7 @@ namespace luautils
 
             if (table.empty())
             {
-                ShowWarning(fmt::format("GetTableOfIDs({}) in zone {}: Tried to look do ID lookup, but found nothing.", name, zoneName));
+                ShowError(fmt::format("GetTableOfIDs({}) in zone {}: Tried to look do ID lookup, but found nothing.", name, zoneName));
             }
 
             // Add to cache
