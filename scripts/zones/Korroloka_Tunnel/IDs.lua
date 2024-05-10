@@ -36,38 +36,15 @@ zones[xi.zone.KORROLOKA_TUNNEL] =
     },
     mob =
     {
-        CARGO_CRAB_COLIN_PH =
-        {
-            [17486002] = 17485980, -- -30.384 1.000 -33.277
-            [17486095] = 17485980, -- -85.000 -0.500 -37.000
-        },
-
-        DAME_BLANCHE_PH =
-        {
-            [17486128] = 17486129, -- -345.369 0.716 119.486
-            [17486127] = 17486129, -- -319.266 -0.244 130.650
-            [17486126] = 17486129, -- -319.225 -0.146 109.776
-            [17486124] = 17486129, -- -296.821 -3.207 131.239
-            [17486125] = 17486129, -- -292.487 -5.993 141.408
-            [17486119] = 17486129, -- -277.338 -9.352 139.763
-            [17486118] = 17486129, -- -276.713 -9.954 135.353
-        },
-
-        FALCATUS_ARANEI_PH =
-        {
-            [17486033] = 17486031, -- -68.852 -5.029 141.069
-            [17486032] = 17486031, -- -94.545 -6.095 136.480
-            [17486034] = 17486031, -- -79.827 -6.046 133.982
-            [17486027] = 17486031, -- -25.445 -6.073 142.192
-            [17486028] = 17486031, -- -33.446 -6.038 141.987
-        },
-
-        KORROLOKA_LEECH = GetFirstID('Korroloka_Leech'),
-        MORION_WORM     = 17486190,
+        CARGO_CRAB_COLIN = GetFirstID('Cargo_Crab_Colin'),
+        DAME_BLANCHE     = GetFirstID('Dame_Blanche'),
+        FALCATUS_ARANEI  = GetFirstID('Falcatus_Aranei'),
+        KORROLOKA_LEECH  = GetFirstID('Korroloka_Leech'),
+        MORION_WORM      = GetFirstID('Morion_Worm'),
     },
     npc =
     {
-        MORION_WORM_QM = 17486216,
+        MORION_WORM_QM = GetFirstID('qm1'),
         EXCAVATION     = GetTableOfIDs('Excavation_Point'),
     },
 }
