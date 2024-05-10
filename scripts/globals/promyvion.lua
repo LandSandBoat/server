@@ -28,19 +28,6 @@ local function randomizeFloorExit(ID, floor)
     GetNPCByID(exitStreamId):setLocalVar('[promy]floorExit', 1)
 end
 
-local function findMother(mob)
-    local ID = zones[mob:getZoneID()]
-    local mobId = mob:getID()
-    local mother = 0
-    for k, v in pairs(ID.mob.MEMORY_RECEPTACLES) do
-        if k < mobId and k > mother then
-            mother = k
-        end
-    end
-
-    return mother
-end
-
 -----------------------------------
 -- Zone global functions
 -----------------------------------
@@ -65,13 +52,13 @@ end
 -----------------------------------
 -- Stray global functions
 -----------------------------------
-xi.promyvion.strayOnSpawn = function(mob)
-    local mother = GetMobByID(findMother(mob))
+xi.promyvion.strayOnMobSpawn = function(mob)
+    -- Strays only use animation-sub 13 and 14.
+    -- They, however, use diferent models and said model has a color set, each alligned to an element.
+    -- TODO: Investigate elements depending on model and animation-sub.
+    local animationSub = 13 + math.random(0, 1)
 
-    if mother ~= nil and mother:isSpawned() then
-        mob:setPos(mother:getXPos(), mother:getYPos() - 5, mother:getZPos())
-        mother:setAnimationSub(1)
-    end
+    mob:setAnimationSub(animationSub)
 end
 
 -----------------------------------
