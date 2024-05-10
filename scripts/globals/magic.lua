@@ -224,15 +224,6 @@ local function getSpellBonusAcc(caster, target, spell, params)
     return magicAccBonus
 end
 
-local function calculateMagicHitRate(magicacc, magiceva, percentBonus, casterLvl, targetLvl)
-    --add a scaling bonus or penalty based on difference of targets level from caster
-    local levelDiff = utils.clamp(casterLvl - targetLvl, -5, 5)
-
-    local p = 70 - 0.5 * (magiceva - magicacc) + levelDiff * 3 + percentBonus
-
-    return utils.clamp(p, 5, 95)
-end
-
 local function calculateMagicBurst(caster, spell, target, params)
     local burst = 1.0
     local skillchainburst = 1.0
@@ -590,7 +581,7 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
     local maccFood = magicacc * (caster:getMod(xi.mod.FOOD_MACCP) / 100)
     magicacc = magicacc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
-    return calculateMagicHitRate(magicacc, magiceva, percentBonus, caster:getMainLvl(), target:getMainLvl())
+    return xi.combat.magicHitRate.calculateMagicHitRate(magicacc, magiceva)
 end
 
 -- Returns the amount of resistance the target has to the given effect
@@ -598,7 +589,7 @@ local effectToResistanceMod =
 {
     [xi.effect.SLEEP_I      ] = xi.mod.SLEEPRES,
     [xi.effect.SLEEP_II     ] = xi.mod.SLEEPRES,
-    [xi.effect.LULLABY      ] = xi.mod.LULLABYRES,
+    [xi.effect.LULLABY      ] = xi.mod.SLEEPRES,
     [xi.effect.POISON       ] = xi.mod.POISONRES,
     [xi.effect.PARALYSIS    ] = xi.mod.PARALYZERES,
     [xi.effect.BLINDNESS    ] = xi.mod.BLINDRES,
