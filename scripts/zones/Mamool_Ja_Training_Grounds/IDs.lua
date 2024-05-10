@@ -55,13 +55,13 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
 
     npc =
     {
-        ANCIENT_LOCKBOX = 17047808,
-        RUNE_OF_RELEASE = 17047809,
-        BRUJEEL         = 17047810,
-        DOOR_1          = 17047899, -- north
-        DOOR_2          = 17047901, -- southwest
-        DOOR_3          = 17047903, -- southest
-        POT_HATCH       = 17047917,
+        ANCIENT_LOCKBOX = GetFirstID('Ancient_Lockbox'),
+        RUNE_OF_RELEASE = GetFirstID('Rune_of_Release'),
+        BRUJEEL         = GetFirstID('Brujeel'),
+        DOOR_1          = GetFirstID('_ju3'), -- north
+        DOOR_2          = GetFirstID('_ju5'), -- southwest
+        DOOR_3          = GetFirstID('_ju7'), -- southest
+        POT_HATCH       = GetFirstID('_jul'),
     },
 }
 
