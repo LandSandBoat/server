@@ -35,27 +35,20 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
     },
     mob =
     {
-        JAILER_OF_TEMPERANCE_PH =
-        {
-            16916489, -- -420 -1 757
-            16916508, --  -43 -1 460
-            16916525, -- -260 -1.5 43
-            16916541, -- -580 -1.5 43
-            16916560, -- -797 -1.5 460
-        },
-        IXGHRAH                 = 16916813,
-        JAILER_OF_TEMPERANCE    = 16916814,
-        IXAERN_MNK              = 16916815,
+        JAILER_OF_TEMPERANCE_PH = GetTableOfIDs('Eozdei_Still', 5), -- Get the first 5 in the zone
+        IXGHRAH                 = GetFirstID('Ixghrah'),
+        JAILER_OF_TEMPERANCE    = GetFirstID('Jailer_of_Temperance'),
+        IXAERN_MNK              = GetFirstID('Ixaern_MNK'),
     },
     npc =
     {
-        QM_IXAERN_MNK        = 16916819,
-        QUASILUMIN_OFFSET    = 16916898,
-        ESCORT_1_DOOR_OFFSET = 16916868,
-        ESCORT_2_DOOR_OFFSET = 16916871,
-        ESCORT_3_DOOR_OFFSET = 16916876,
-        ESCORT_4_DOOR_OFFSET = 16916881,
-        CERMET_ALCOVE_OFFSET = 16916928,
+        QM_IXAERN_MNK        = GetFirstID('qm_ixaern_mnk'),
+        QUASILUMIN_OFFSET    = GetFirstID('Quasilumin'),
+        ESCORT_1_DOOR_OFFSET = GetFirstID('_0y6'),
+        ESCORT_2_DOOR_OFFSET = GetFirstID('_iyn'),
+        ESCORT_3_DOOR_OFFSET = GetFirstID('_iyk'),
+        ESCORT_4_DOOR_OFFSET = GetFirstID('_iyd'),
+        CERMET_ALCOVE_OFFSET = GetFirstID('Cermet_Alcove'),
     },
 }
 
