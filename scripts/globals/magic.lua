@@ -1,3 +1,4 @@
+require('scripts/globals/combat/magic_hit_rate')
 require('scripts/globals/jobpoints')
 require('scripts/globals/magicburst')
 require('scripts/globals/utils')
@@ -468,8 +469,8 @@ params.skillType = $3
 params.bonus = $4
 params.effect = $5
 ]]
-function applyResistanceEffect(caster, target, spell, params)
-    local diff   = params.diff or (caster:getStat(params.attribute) - target:getStat(params.attribute))
+function applyResistanceEffect(actor, target, spell, params)
+    local diff   = params.diff or (actor:getStat(params.attribute) - target:getStat(params.attribute))
     local skill  = params.skillType
     local bonus  = params.bonus
     local effect = params.effect
@@ -479,10 +480,10 @@ function applyResistanceEffect(caster, target, spell, params)
         -- If Stymie is active, as long as the mob is not immune then the effect is not resisted
         if
             skill == xi.skill.ENFEEBLING_MAGIC and
-            caster:hasStatusEffect(xi.effect.STYMIE) and
+            actor:hasStatusEffect(xi.effect.STYMIE) and
             target:canGainStatusEffect(effect)
         then
-            caster:delStatusEffect(xi.effect.STYMIE)
+            actor:delStatusEffect(xi.effect.STYMIE)
             return 1
         -- Fealty allows the PLD to resist all status inflicting spells except Threnody and Requiem
         elseif
@@ -497,16 +498,16 @@ function applyResistanceEffect(caster, target, spell, params)
 
     if
         skill == xi.skill.SINGING and
-        caster:hasStatusEffect(xi.effect.TROUBADOUR)
+        actor:hasStatusEffect(xi.effect.TROUBADOUR)
     then
-        if math.random(0, 99) < caster:getMerit(xi.merit.TROUBADOUR) - 25 then
+        if math.random(0, 99) < actor:getMerit(xi.merit.TROUBADOUR) - 25 then
             return 1.0
         end
     end
 
     local element       = spell:getElement()
     local percentBonus  = 0
-    local magicaccbonus = getSpellBonusAcc(caster, target, spell, params)
+    local magicaccbonus = getSpellBonusAcc(actor, target, spell, params)
 
     if diff > 10 then
         magicaccbonus = magicaccbonus + 10 + (diff - 10) / 2
@@ -522,23 +523,23 @@ function applyResistanceEffect(caster, target, spell, params)
         percentBonus = percentBonus - xi.magic.getEffectResistance(target, effect)
     end
 
-    local magicHitRate = getMagicHitRate(caster, target, skill, element, percentBonus, magicaccbonus)
+    local magicHitRate = getMagicHitRate(actor, target, skill, element, percentBonus, magicaccbonus)
 
-    return getMagicResist(caster, target, skill, element, magicHitRate)
+    return xi.combat.magicHitRate.calculateResistRate(actor, target, skill, element, magicHitRate, 0)
 end
 
 -- Applies resistance for things that may not be spells - ie. Quick Draw
-function applyResistanceAbility(player, target, element, skill, bonus)
+function applyResistanceAbility(actor, target, element, skill, bonus)
     local magicHitRate = getMagicHitRate(player, target, skill, element, 0, bonus)
 
-    return getMagicResist(player, target, skill, element, magicHitRate)
+    return xi.combat.magicHitRate.calculateResistRate(actor, target, skill, element, magicHitRate, 0)
 end
 
 -- Applies resistance for additional effects
-function applyResistanceAddEffect(player, target, element, bonus)
-    local magicHitRate = getMagicHitRate(player, target, 0, element, 0, bonus)
+function applyResistanceAddEffect(actor, target, element, bonus)
+    local magicHitRate = getMagicHitRate(actor, target, 0, element, 0, bonus)
 
-    return getMagicResist(player, target, xi.skill.NONE, element, magicHitRate)
+    return xi.combat.magicHitRate.calculateResistRate(actor, target, xi.skill.NONE, element, magicHitRate, 0)
 end
 
 function getMagicHitRate(caster, target, skillType, element, percentBonus, bonusAcc)
@@ -590,11 +591,6 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
     magicacc = magicacc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
     return calculateMagicHitRate(magicacc, magiceva, percentBonus, caster:getMainLvl(), target:getMainLvl())
-end
-
--- Returns resistance value from given magic hit rate (p)
-function getMagicResist(caster, target, skill, element, magicHitRate)
-    return xi.combat.magicHitRate.calculateResistRate(caster, target, skill, element, magicHitRate, 0)
 end
 
 -- Returns the amount of resistance the target has to the given effect

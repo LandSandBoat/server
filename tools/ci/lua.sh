@@ -91,7 +91,6 @@ global_objects=(
     getBaseCureOld
     getElementalDamageReduction
     getMagicHitRate
-    getMagicResist
     handleThrenody
     isValidHealTarget
 

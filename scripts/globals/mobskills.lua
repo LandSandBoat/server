@@ -4,6 +4,7 @@
 -- What is known is that they roughly follow player Weaponskill calculations (pDIF, dMOD, ratio, etc) so this is what
 -- this set of functions emulates.
 -----------------------------------
+require('scripts/globals/combat/magic_hit_rate')
 require('scripts/globals/magicburst')
 require('scripts/globals/magic')
 require('scripts/globals/utils')
@@ -322,7 +323,7 @@ end
 -- effect = xi.effect.WHATEVER if enfeeble
 -- statmod = the stat to account for resist (INT, MND, etc) e.g. xi.mod.INT
 -- This determines how much the monsters ability resists on the player.
-xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, element)
+xi.mobskills.applyPlayerResistance = function(actor, effect, target, diff, bonus, element)
     local percentBonus  = 0
     local magicaccbonus = 0
 
@@ -340,9 +341,9 @@ xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, 
         percentBonus = percentBonus - xi.magic.getEffectResistance(target, effect)
     end
 
-    local magicHitRate = getMagicHitRate(mob, target, 0, element, percentBonus, magicaccbonus)
+    local magicHitRate = getMagicHitRate(actor, target, 0, element, percentBonus, magicaccbonus)
 
-    return getMagicResist(mob, target, xi.skill.NONE, element, magicHitRate)
+    return xi.combat.magicHitRate.calculateResistRate(actor, target, xi.skill.NONE, element, magicHitRate, 0)
 end
 
 xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, skill) -- used for SMN magical bloodpacts, despite the name.
