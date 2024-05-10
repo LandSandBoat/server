@@ -29,24 +29,10 @@ zones[xi.zone.GIDDEUS] =
     },
     mob =
     {
-        HOO_MJUU_THE_TORRENT_PH   =
-        {
-            [17371513] = 17371515, -- -39.073 0.597 -115.279
-        },
-        JUU_DUZU_THE_WHIRLWIND_PH =
-        {
-            [17371298] = 17371300, -- 116.667 -3.442 -261.079
-            [17371533] = 17371300, -- 85.728 -0.071 -248.141
-            [17371291] = 17371300, -- 99.902 -2.725 -213.337
-            [17371525] = 17371300, -- 81.263 0.498 -208.812
-            [17371529] = 17371300, -- 72.302 0.642 -202.985
-            [17371519] = 17371300, -- 20.353 -3.647 -169.309
-        },
-        VUU_PUQU_THE_BEGUILER_PH  =
-        {
-            [17371577] = 17371578, -- -23.973 0.459 -399.155
-        },
-        VAA_HUJA_THE_ERUDITE      = 17371579,
+        HOO_MJUU_THE_TORRENT   = GetFirstID('Hoo_Mjuu_the_Torrent'),
+        JUU_DUZU_THE_WHIRLWIND = GetFirstID('Juu_Duzu_the_Whirlwind'),
+        VUU_PUQU_THE_BEGUILER  = GetFirstID('Vuu_Puqu_the_Beguiler'),
+        VAA_HUJA_THE_ERUDITE   = GetFirstID('Vaa_Huja_the_Erudite'),
     },
     npc =
     {
