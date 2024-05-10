@@ -52,22 +52,15 @@ zones[xi.zone.GARLAIGE_CITADEL] =
     },
     mob =
     {
-        HAZMAT_PH =
-        {
-            [17596515] = 17596520,
-        },
-        HOVERING_HOTPOT_PH =
-        {
-            [17596623] = 17596628, -- 182.157 -0.012 29.941
-            [17596625] = 17596628, -- 188.229 -0.018 20.151
-        },
-        OLD_TWO_WINGS       = 17596506,
-        SKEWER_SAM          = 17596507,
-        CHANDELIER          = 17596533,
-        GUARDIAN_STATUE     = 17596643,
-        SERKET              = 17596720,
-        MIMIC               = 17596728,
-        APPARATUS_ELEMENTAL = 17596729,
+        HAZMAT              = GetFirstID('Hazmat'),
+        HOVERING_HOTPOT     = GetFirstID('Hovering_Hotpot'),
+        OLD_TWO_WINGS       = GetFirstID('Old_Two-Wings'),
+        SKEWER_SAM          = GetFirstID('Skewer_Sam'),
+        CHANDELIER          = GetFirstID('Chandelier'),
+        GUARDIAN_STATUE     = GetFirstID('Guardian_Statue'),
+        SERKET              = GetFirstID('Serket'),
+        MIMIC               = GetFirstID('Mimic'),
+        APPARATUS_ELEMENTAL = GetFirstID('Light_Elemental'),
     },
     npc =
     {
