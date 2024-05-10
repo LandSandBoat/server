@@ -35,17 +35,9 @@ zones[xi.zone.INNER_HORUTOTO_RUINS] =
     },
     mob =
     {
-        SLENDLIX_SPINDLETHUMB_PH =
-        {
-            [17563758] = 17563785, -- -238.315 -0.002 -179.249
-        },
-        NOCUOUS_WEAPON_PH =
-        {
-            [17563798] = 17563801, -- -236.855 0.476 -51.263
-            [17563799] = 17563801, -- -237.426 0.5 -23.412
-            [17563800] = 17563801, -- -230.732 -0.025 -52.324
-        },
-        MAGICKED_BONES = GetFirstID('Magicked_Bones'),
+        SLENDLIX_SPINDLETHUMB = GetFirstID('Slendlix_Spindlethumb'),
+        NOCUOUS_WEAPON        = GetFirstID('Nocuous_Weapon'),
+        MAGICKED_BONES        = GetFirstID('Magicked_Bones'),
         --[[
             -2    Goblin Thug
             -1    Goblin Weaver
@@ -55,7 +47,7 @@ zones[xi.zone.INNER_HORUTOTO_RUINS] =
     },
     npc =
     {
-        PORTAL_CIRCLE_BASE = 17563862,
+        PORTAL_CIRCLE_BASE = GetFirstID('_5cm'),
         TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
     },
 }
