@@ -323,27 +323,29 @@ end
 -- effect = xi.effect.WHATEVER if enfeeble
 -- statmod = the stat to account for resist (INT, MND, etc) e.g. xi.mod.INT
 -- This determines how much the monsters ability resists on the player.
-xi.mobskills.applyPlayerResistance = function(actor, effect, target, diff, bonus, element)
-    local percentBonus  = 0
-    local magicaccbonus = 0
+xi.mobskills.applyPlayerResistance = function(actor, effect, target, diff, bonusMacc, element)
+    local isEnfeeble = false
 
-    if diff > 10 then
-        magicaccbonus = magicaccbonus + 10 + (diff - 10) / 2
-    else
-        magicaccbonus = magicaccbonus + diff
+    if not bonusMacc then
+        bonusMacc = 0
     end
 
-    if bonus then
-        magicaccbonus = magicaccbonus + bonus
+    if diff > 10 then
+        bonusMacc = bonusMacc + 10 + (diff - 10) / 2
+    else
+        bonusMacc = bonusMacc + diff
     end
 
     if effect then
-        percentBonus = percentBonus - xi.magic.getEffectResistance(target, effect)
+        isEnfeeble = true
     end
 
-    local magicHitRate = getMagicHitRate(actor, target, 0, element, percentBonus, magicaccbonus)
+    local magicAcc     = xi.combat.magicHitRate.calculateNonSpellMagicAccuracy(actor, target, 0, xi.skill.NONE, element, bonusMacc)
+    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(actor, target, element, false, 0, 0) -- false = not an enfeeble.
+    local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
+    local resistRate   = xi.combat.magicHitRate.calculateResistRate(actor, target, xi.skill.NONE, element, magicHitRate, 0)
 
-    return xi.combat.magicHitRate.calculateResistRate(actor, target, xi.skill.NONE, element, magicHitRate, 0)
+    return resistRate
 end
 
 xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, skill) -- used for SMN magical bloodpacts, despite the name.

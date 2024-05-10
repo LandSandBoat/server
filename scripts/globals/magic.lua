@@ -460,128 +460,58 @@ params.skillType = $3
 params.bonus = $4
 params.effect = $5
 ]]
+
+-- TODO: This must be destroyed
 function applyResistanceEffect(actor, target, spell, params)
-    local diff   = params.diff or (actor:getStat(params.attribute) - target:getStat(params.attribute))
-    local skill  = params.skillType
-    local bonus  = params.bonus
-    local effect = params.effect
-    local family = spell:getSpellFamily()
+    local spellFamily = spell:getSpellFamily() or 0
+    local skillType   = params.skillType or 0
+    local element     = spell:getElement() or 0
+    local statUsed    = params.attribute or 0
+    local bonusMacc   = params.bonus or 0
 
-    if effect ~= nil then -- Dispel's script doesn't have an "effect" to send here, nor should it.
-        -- If Stymie is active, as long as the mob is not immune then the effect is not resisted
-        if
-            skill == xi.skill.ENFEEBLING_MAGIC and
-            actor:hasStatusEffect(xi.effect.STYMIE) and
-            target:canGainStatusEffect(effect)
-        then
-            actor:delStatusEffect(xi.effect.STYMIE)
-            return 1
-        -- Fealty allows the PLD to resist all status inflicting spells except Threnody and Requiem
-        elseif
-            target:hasStatusEffect(xi.effect.FEALTY) and
-            family ~= xi.magic.spellFamily.FOE_REQUIEM and
-            not (family >= xi.magic.spellFamily.FIRE_THRENODY and
-            family <= xi.magic.spellFamily.DARK_THRENODY)
-        then
-            return 0
+    -- GUESS stat if it isnt fed with params.
+    if statUsed == 0 then
+        if skillType == xi.skill.SINGING then
+            statUsed = xi.mod.CHR
+        else
+            statUsed = xi.mod.INT
         end
     end
 
-    if
-        skill == xi.skill.SINGING and
-        actor:hasStatusEffect(xi.effect.TROUBADOUR)
-    then
-        if math.random(0, 99) < actor:getMerit(xi.merit.TROUBADOUR) - 25 then
-            return 1.0
-        end
+    -- Is enfeeble?
+    local isEnfeeble = false
+    local effect     = params.effect or 0
+    if effect > 0 then
+        isEnfeeble  = true
     end
 
-    local element       = spell:getElement()
-    local percentBonus  = 0
-    local magicaccbonus = getSpellBonusAcc(actor, target, spell, params)
+    -- TODO: Convert enfeebling songs.
+    local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(actor, target, spellFamily, skillType, element, statUsed, bonusMacc)
+    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(actor, target, element, isEnfeeble, 0, 0) -- true = Is an enfeeble.
+    local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
+    local resistRate   = xi.combat.magicHitRate.calculateResistRate(actor, target, skillType, element, magicHitRate, 0)
 
-    if diff > 10 then
-        magicaccbonus = magicaccbonus + 10 + (diff - 10) / 2
-    else
-        magicaccbonus = magicaccbonus + diff
-    end
-
-    if bonus ~= nil then
-        magicaccbonus = magicaccbonus + bonus
-    end
-
-    if effect ~= nil then
-        percentBonus = percentBonus - xi.magic.getEffectResistance(target, effect)
-    end
-
-    local magicHitRate = getMagicHitRate(actor, target, skill, element, percentBonus, magicaccbonus)
-
-    return xi.combat.magicHitRate.calculateResistRate(actor, target, skill, element, magicHitRate, 0)
+    return resistRate
 end
 
 -- Applies resistance for things that may not be spells - ie. Quick Draw
-function applyResistanceAbility(actor, target, element, skill, bonus)
-    local magicHitRate = getMagicHitRate(player, target, skill, element, 0, bonus)
+function applyResistanceAbility(actor, target, element, skillType, bonusMacc)
+    local magicAcc     = xi.combat.magicHitRate.calculateNonSpellMagicAccuracy(actor, target, 0, skillType, element, bonusMacc)
+    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(actor, target, element, false, 0, 0) -- false = not an enfeeble.
+    local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
+    local resistRate   = xi.combat.magicHitRate.calculateResistRate(actor, target, skillType, element, magicHitRate, 0)
 
-    return xi.combat.magicHitRate.calculateResistRate(actor, target, skill, element, magicHitRate, 0)
+    return resistRate
 end
 
 -- Applies resistance for additional effects
-function applyResistanceAddEffect(actor, target, element, bonus)
-    local magicHitRate = getMagicHitRate(actor, target, 0, element, 0, bonus)
+function applyResistanceAddEffect(actor, target, element, bonusMacc)
+    local magicAcc     = xi.combat.magicHitRate.calculateNonSpellMagicAccuracy(actor, target, 0, xi.skill.NONE, element, bonusMacc)
+    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(actor, target, element, false, 0, 0) -- false = not an enfeeble.
+    local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
+    local resistRate   = xi.combat.magicHitRate.calculateResistRate(actor, target, xi.skill.NONE, element, magicHitRate, 0)
 
-    return xi.combat.magicHitRate.calculateResistRate(actor, target, xi.skill.NONE, element, magicHitRate, 0)
-end
-
-function getMagicHitRate(caster, target, skillType, element, percentBonus, bonusAcc)
-    -- resist everything if real magic shield is active (see effects/magic_shield)
-    if target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
-        local magicshieldsub = target:getStatusEffect(xi.effect.MAGIC_SHIELD)
-
-        if magicshieldsub:getSubPower() == 0 then
-            return 0
-        end
-    end
-
-    if bonusAcc == nil then
-        bonusAcc = 0
-    end
-
-    local magicacc = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
-
-    -- Get the base acc (just skill + skill mod (79 + skillID = ModID) + magic acc mod)
-    if skillType ~= 0 then
-        magicacc = magicacc + caster:getSkillLevel(skillType)
-    else
-        -- for mob skills / additional effects which don't have a skill
-        magicacc = magicacc + utils.getSkillLvl(1, caster:getMainLvl())
-    end
-
-    local resMod = 0 -- Some spells may possibly be non elemental, but have status effects.
-    if element ~= xi.element.NONE then
-        resMod = target:getMod(xi.magic.resistMod[element])
-
-        -- Add acc for elemental affinity accuracy and element specific accuracy
-        local affinityBonus = AffinityBonusAcc(caster, element)
-        local elementBonus = caster:getMod(spellAcc[element])
-
-        bonusAcc = bonusAcc + affinityBonus + elementBonus
-    end
-
-    magicacc = magicacc + caster:getMerit(xi.merit.MAGIC_ACCURACY)
-
-    magicacc = magicacc + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
-
-    -- Base magic evasion (base magic evasion plus resistances(players), plus elemental defense(mobs)
-    local magiceva = target:getMod(xi.mod.MEVA) + resMod
-
-    magicacc = magicacc + bonusAcc
-
-    -- Add macc% from food
-    local maccFood = magicacc * (caster:getMod(xi.mod.FOOD_MACCP) / 100)
-    magicacc = magicacc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
-
-    return xi.combat.magicHitRate.calculateMagicHitRate(magicacc, magiceva)
+    return resistRate
 end
 
 -- Returns the amount of resistance the target has to the given effect

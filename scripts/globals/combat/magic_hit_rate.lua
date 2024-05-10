@@ -284,6 +284,29 @@ local function magicAccuracyFromFood(actor, magicAccPreFood)
     return magicAcc
 end
 
+-- Global function to calculate magicc accuracy for addiional effects. (No stat, no magic burst bonuses)
+xi.combat.magicHitRate.calculateNonSpellMagicAccuracy = function(actor, target, spellGroup, skillType, spellElement, bonusMacc)
+    local finalMagicAcc = 0
+
+    local magicAccBase      = actor:getMod(xi.mod.MACC) + actor:getILvlMacc(xi.slot.MAIN)
+    local magicAccSkill     = magicAccuracyFromSkill(actor, skillType)
+    local magicAccElement   = magicAccuracyFromElement(actor, spellElement)
+    local magicAccEffects   = magicAccuracyFromStatusEffects(actor, spellGroup, skillType, spellElement)
+    local magicAccMerits    = magicAccuracyFromMerits(actor, skillType, spellElement)
+    local magicAccJobPoints = magicAccuracyFromJobPoints(actor, spellGroup, skillType)
+    local magicAccDay       = magicAccuracyFromDayElement(actor, spellElement)
+    local magicAccWeather   = magicAccuracyFromWeatherElement(actor, spellElement)
+
+    -- Add up all magic accuracy before calculating food mAcc %
+    local magicAccPreFood = magicAccBase + magicAccSkill + magicAccElement + magicAccEffects + magicAccMerits + magicAccJobPoints + magicAccDay + magicAccWeather + bonusMacc
+    local magicAccFood    = magicAccuracyFromFood(actor, magicAccPreFood)
+
+    -- Add up food magic accuracy.
+    finalMagicAcc = magicAccPreFood + magicAccFood
+
+    return finalMagicAcc
+end
+
 -- Global function to calculate total magicc accuracy.
 xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
     local finalMagicAcc = 0
