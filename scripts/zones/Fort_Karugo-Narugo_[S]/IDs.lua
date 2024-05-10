@@ -24,25 +24,10 @@ zones[xi.zone.FORT_KARUGO_NARUGO_S] =
     },
     mob =
     {
-        RATATOSKR_PH =
-        {
-            [17170472] = 17170475,
-        },
-        KIRTIMUKHA_PH =
-        {
-            [17170491] = 17170499,
-            [17170492] = 17170499,
-            [17170493] = 17170499,
-            [17170494] = 17170499,
-            [17170495] = 17170499,
-            [17170496] = 17170499,
-            [17170498] = 17170499,
-        },
-        DEMOISELLE_DESOLEE_PH =
-        {
-            [17170577] = 17170569,
-        },
-        TIGRESS_STRIKES_WAR_LYNX = 17170645,
+        RATATOSKR                = GetFirstID('Ratatoskr'),
+        KIRTIMUKHA               = GetFirstID('Kirtimukha'),
+        DEMOISELLE_DESOLEE       = GetFirstID('Demoiselle_Desolee'),
+        TIGRESS_STRIKES_WAR_LYNX = GetFirstID('War_Lynx'),
     },
     npc =
     {
