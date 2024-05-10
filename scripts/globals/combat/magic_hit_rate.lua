@@ -390,7 +390,11 @@ end
 
 xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, spellElement, magicHitRate, rankModifier)
     local targetResistRate = 0 -- The variable we return.
-    local targetResistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
+    local targetResistRank = 0
+
+    if spellElement ~= nil and spellElement ~= xi.element.NONE then
+        targetResistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
+    end
 
     ----------------------------------------
     -- Handle 'Magic Shield' status effect.
