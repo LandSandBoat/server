@@ -28,7 +28,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local resistThreshold = 0.5
     local returnEffect = xi.effect.DEFENSE_DOWN
 
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = applyResistanceEffect(caster, target, spell, params)
     if resist >= resistThreshold then
 
         local actionOne = target:addStatusEffect(xi.effect.DEFENSE_DOWN, 10, 0, duration * resist)

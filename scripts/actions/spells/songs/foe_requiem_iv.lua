@@ -21,7 +21,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.SINGING
     params.bonus = 0
     params.effect = nil
-    local resm = applyResistance(caster, target, spell, params)
+    local resm = applyResistanceEffect(caster, target, spell, params)
     if resm < 0.5 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST) -- resist message
         return 1

@@ -284,7 +284,7 @@ local function magicAccuracyFromFood(actor, magicAccPreFood)
     return magicAcc
 end
 
--- Global function to calculate magicc accuracy for addiional effects. (No stat, no magic burst bonuses)
+-- Global function to calculate magic accuracy for some non-spell magic actions. (No stat diff, no magic burst bonuses).
 xi.combat.magicHitRate.calculateNonSpellMagicAccuracy = function(actor, target, spellGroup, skillType, spellElement, bonusMacc)
     local finalMagicAcc = 0
 

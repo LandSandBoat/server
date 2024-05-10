@@ -326,6 +326,13 @@ end
 xi.mobskills.applyPlayerResistance = function(actor, effect, target, diff, bonusMacc, element)
     local isEnfeeble = false
 
+    if
+        effect and
+        effect > 0
+    then
+        isEnfeeble = true
+    end
+
     if not bonusMacc then
         bonusMacc = 0
     end
@@ -336,12 +343,8 @@ xi.mobskills.applyPlayerResistance = function(actor, effect, target, diff, bonus
         bonusMacc = bonusMacc + diff
     end
 
-    if effect then
-        isEnfeeble = true
-    end
-
     local magicAcc     = xi.combat.magicHitRate.calculateNonSpellMagicAccuracy(actor, target, 0, xi.skill.NONE, element, bonusMacc)
-    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(actor, target, element, false, 0, 0) -- false = not an enfeeble.
+    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(actor, target, element, isEnfeeble, 0, 0) -- false = not an enfeeble.
     local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
     local resistRate   = xi.combat.magicHitRate.calculateResistRate(actor, target, xi.skill.NONE, element, magicHitRate, 0)
 

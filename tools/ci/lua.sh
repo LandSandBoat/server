@@ -75,7 +75,6 @@ global_objects=(
 
     addBonuses
     addBonusesAbility
-    applyResistance
     applyResistanceAbility
     applyResistanceEffect
     adjustForTarget
@@ -90,7 +89,6 @@ global_objects=(
     getCureFinal
     getBaseCureOld
     getElementalDamageReduction
-    getMagicHitRate
     handleThrenody
     isValidHealTarget
 
