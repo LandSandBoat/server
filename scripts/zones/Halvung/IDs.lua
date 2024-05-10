@@ -33,18 +33,18 @@ zones[xi.zone.HALVUNG] =
     mob =
     {
         BIG_BOMB               = GetFirstID('Big_Bomb'),
-        GURFURLUR_THE_MENACING = 17031592,
-        DEXTROSE               = 17031598,
-        REACTON                = 17031599,
-        ACHAMOTH               = 17031600,
+        GURFURLUR_THE_MENACING = GetFirstID('Gurfurlur_the_Menacing'),
+        DEXTROSE               = GetFirstID('Dextrose'),
+        REACTON                = GetFirstID('Reacton'),
+        ACHAMOTH               = GetFirstID('Achamoth'),
     },
     npc =
     {
-        LEVER_AB_DOOR = 17031669,
-        LEVER_CD_DOOR = 17031673,
-        LEVER_EF_DOOR = 17031677,
-        LEVER_GH_DOOR = 17031681,
-        LEVER_IJ_DOOR = 17031685,
+        LEVER_AB_DOOR = GetFirstID('_1qf'),
+        LEVER_CD_DOOR = GetFirstID('_1qh'),
+        LEVER_EF_DOOR = GetFirstID('_1qj'),
+        LEVER_GH_DOOR = GetFirstID('_1ql'),
+        LEVER_IJ_DOOR = GetFirstID('_1qn'),
         MINING        = GetTableOfIDs('Mining_Point'),
     },
 }
