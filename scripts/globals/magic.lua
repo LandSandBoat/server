@@ -980,26 +980,6 @@ function handleThrenody(caster, target, spell, basePower, baseDuration, modifier
     return xi.effect.THRENODY
 end
 
--- Returns true if you can overwrite the effect
--- Example: canOverwrite(target, xi.effect.SLOW, 25)
-function canOverwrite(target, effect, power, mod)
-    mod = mod or 1
-
-    local statusEffect = target:getStatusEffect(effect)
-
-    -- effect not found so overwrite
-    if statusEffect == nil then
-        return true
-    end
-
-    -- overwrite if its weaker
-    if statusEffect:getPower() * mod > power then
-        return false
-    end
-
-    return true
-end
-
 function calculateDuration(duration, magicSkill, spellGroup, caster, target, useComposure)
     local casterJob = caster:getMainJob()
 
@@ -1059,5 +1039,3 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
 
     return math.floor(duration)
 end
-
-xi.ma = xi.magic
