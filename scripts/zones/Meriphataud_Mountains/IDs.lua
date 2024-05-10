@@ -50,25 +50,11 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
 
     mob =
     {
-        NAA_ZEKU_THE_UNWAITING_PH =
-        {
-            [17264763] = 17264768,
-        },
-
-        PATRIPATAN_PH =
-        {
-            [17264967] = 17264972, -- 551.767, -32.570, 590.205
-            [17264968] = 17264972, -- 646.199, -24.483, 644.477
-            [17264969] = 17264972, -- 535.318, -32.179, 602.055
-        },
-
-        DAGGERCLAW_DRACOS_PH =
-        {
-            [17264815] = 17264818, -- 583.725 -15.652 -388.159
-        },
-
-        WARAXE_BEAK         = 17264828,
-        COO_KEJA_THE_UNSEEN = 17264946,
+        NAA_ZEKU_THE_UNWAITING = GetFirstID('Naa_Zeku_the_Unwaiting'),
+        PATRIPATAN             = GetFirstID('Patripatan'),
+        DAGGERCLAW_DRACOS      = GetFirstID('Daggerclaw_Dracos'),
+        WARAXE_BEAK            = GetFirstID('Waraxe_Beak'),
+        COO_KEJA_THE_UNSEEN    = GetFirstID('Coo_Keja_the_Unseen'),
 
         VOIDWALKER =
         {
