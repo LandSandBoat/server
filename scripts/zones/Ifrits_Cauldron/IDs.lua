@@ -42,46 +42,20 @@ zones[xi.zone.IFRITS_CAULDRON] =
     },
     mob =
     {
-        TYRANNIC_TUNNOK_PH =
-        {
-            [17616996] = 17616999,
-            [17617000] = 17616999,
-            [17617001] = 17616999,
-        },
-        LINDWURM_PH =
-        {
-            [17617007] = 17617013,
-            [17617008] = 17617013,
-            [17617011] = 17617013,
-            [17617012] = 17617013,
-            [17617031] = 17617013,
-            [17617032] = 17617013,
-        },
-        FORESEER_ORAMIX_PH =
-        {
-            [17617055] = 17617062,
-            [17617066] = 17617062,
-            [17617069] = 17617062,
-        },
-        VOUIVRE_PH =
-        {
-            [17617117] = 17617130,
-            [17617118] = 17617130,
-            [17617121] = 17617130,
-            [17617122] = 17617130,
-            [17617125] = 17617130,
-            [17617129] = 17617130,
-        },
-        PIRATES_COVE_NMS = 17616897,
-        ASH_DRAGON       = 17617147,
-        MIMIC            = 17617157,
-        BOMB_QUEEN       = 17617158,
-        TARASQUE         = 17617164,
-        CAILLEACH_BHEUR  = 17617165,
+        TYRANNIC_TUNNOK  = GetFirstID('Tyrannic_Tunnok'),
+        LINDWURM         = GetFirstID('Lindwurm'),
+        FORESEER_ORAMIX  = GetFirstID('Foreseer_Oramix'),
+        VOUIVRE          = GetFirstID('Vouivre'),
+        PIRATES_COVE_NMS = GetFirstID('Salamander'),
+        ASH_DRAGON       = GetFirstID('Ash_Dragon'),
+        MIMIC            = GetFirstID('Mimic'),
+        BOMB_QUEEN       = GetFirstID('Bomb_Queen'),
+        TARASQUE         = GetFirstID('Tarasque'),
+        CAILLEACH_BHEUR  = GetFirstID('Cailleach_Bheur'),
     },
     npc =
     {
-        FLAME_SPOUT_OFFSET = 17617205,
+        FLAME_SPOUT_OFFSET = GetFirstID('Flame_Spout'),
         TREASURE_COFFER    = GetFirstID('Treasure_Coffer'),
         MINING             = GetTableOfIDs('Mining_Point'),
     },
