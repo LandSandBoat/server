@@ -71,13 +71,13 @@ zones[xi.zone.LEBROS_CAVERN] =
 
     npc =
     {
-        ANCIENT_LOCKBOX = 17035478,
-        RUNE_OF_RELEASE = 17035479,
-        _1rx            = 17035538,
-        _1ry            = 17035539,
-        _1rz            = 17035540,
-        _jr0            = 17035541,
-        _jr1            = 17035542,
+        ANCIENT_LOCKBOX = GetFirstID('Ancient_Lockbox'),
+        RUNE_OF_RELEASE = GetFirstID('Rune_of_Release'),
+        _1rx            = GetFirstID('_1rx'),
+        _1ry            = GetFirstID('_1ry'),
+        _1rz            = GetFirstID('_1rz'),
+        _jr0            = GetFirstID('_jr0'),
+        _jr1            = GetFirstID('_jr1'),
     }
 }
 
