@@ -38,18 +38,9 @@ zones[xi.zone.EAST_SARUTABARUTA] =
     },
     mob =
     {
-        SHARP_EARED_ROPIPI_PH =
-        {
-            [17252507] = 17252489, -- 363.152 -16.705 -326.213
-            [17252506] = 17252489, -- 303.282 -17.642 -415.870
-            [17252487] = 17252489, -- 224.258 -17.858 -486.256
-            [17252488] = 17252489, -- 227.825 -16.978 -317.467
-        },
-        SPINY_SPIPI_PH =
-        {
-            [17252656] = 17252657
-        },
-        DUKE_DECAPOD   = 17252725,
+        SHARP_EARED_ROPIPI = GetFirstID('Sharp-Eared_Ropipi'),
+        SPINY_SPIPI        = GetFirstID('Spiny_Spipi'),
+        DUKE_DECAPOD       = GetFirstID('Duke_Decapod'),
     },
     npc =
     {
