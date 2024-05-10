@@ -28,9 +28,9 @@ zones[xi.zone.MOG_GARDEN] =
     },
     npc =
     {
-        GREEN_THUMB_MOOGLE = 17924125,
-        MOG_DINGHY         = 17924126,
-        PORTER_MOOGLE      = 17924221,
+        GREEN_THUMB_MOOGLE = GetFirstID('Green_Thumb_Moogle'),
+        MOG_DINGHY         = GetFirstID('Mog_Dinghy'),
+        PORTER_MOOGLE      = GetFirstID('Porter_Moogle'),
     },
 }
 
