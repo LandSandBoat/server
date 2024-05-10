@@ -28,10 +28,10 @@ zones[xi.zone.MONASTIC_CAVERN] =
     },
     mob =
     {
-        ORCISH_OVERLORD               = 17391802,
-        BUGABOO                       = 17391804,
-        MIMIC                         = 17391805,
-        UNDERSTANDING_OVERLORD_OFFSET = 17391806,
+        ORCISH_OVERLORD               = GetTableOfIDs('Orcish_Overlord')[1], -- NM
+        UNDERSTANDING_OVERLORD_OFFSET = GetTableOfIDs('Orcish_Overlord')[2], -- Quest NM
+        BUGABOO                       = GetFirstID('Bugaboo'),
+        MIMIC                         = GetFirstID('Mimic'),
     },
     npc =
     {
