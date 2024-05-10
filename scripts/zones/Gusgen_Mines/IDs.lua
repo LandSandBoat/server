@@ -45,17 +45,17 @@ zones[xi.zone.GUSGEN_MINES] =
     },
     mob =
     {
-        BLIND_MOBY          = 17580038,
-        WANDERING_GHOST     = 17580337,
-        PUDDING_OFFSET      = 17580338,
-        APPARATUS_ELEMENTAL = 17580340,
-        AROMA_FLY           = 17580341,
-        ASPHYXIATED_AMSEL   = 17580044,
-        BURNED_BERGMANN     = 17580042,
-        CRUSHED_KRAUSE      = 17580040,
-        PULVERIZED_PFEFFER  = 17580041,
-        SMOTHERED_SCHMIDT   = 17580039,
-        WOUNDED_WURFEL      = 17580043,
+        BLIND_MOBY          = GetFirstID('Blind_Moby'),
+        WANDERING_GHOST     = GetFirstID('Wandering_Ghost'),
+        PUDDING_OFFSET      = GetFirstID('Pudding'),
+        AROMA_FLY           = GetFirstID('Aroma_Fly'),
+        ASPHYXIATED_AMSEL   = GetFirstID('Asphyxiated_Amsel'),
+        BURNED_BERGMANN     = GetFirstID('Burned_Bergmann'),
+        CRUSHED_KRAUSE      = GetFirstID('Crushed_Krause'),
+        PULVERIZED_PFEFFER  = GetFirstID('Pulverized_Pfeffer'),
+        SMOTHERED_SCHMIDT   = GetFirstID('Smothered_Schmidt'),
+        WOUNDED_WURFEL      = GetFirstID('Wounded_Wurfel'),
+        APPARATUS_ELEMENTAL = GetTableOfIDs('Earth_Elemental')[3], -- Last elemental in the list
     },
     npc =
     {
