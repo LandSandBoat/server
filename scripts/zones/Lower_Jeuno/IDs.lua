@@ -76,8 +76,8 @@ zones[xi.zone.LOWER_JEUNO] =
     },
     npc =
     {
-        VHANA_EHGAKLYWHA  = 17780880,
-        STREETLAMP_OFFSET = 17780881,
+        VHANA_EHGAKLYWHA  = GetFirstID('Vhana_Ehgaklywha'),
+        STREETLAMP_OFFSET = GetFirstID('_l00'),
     },
 }
 
