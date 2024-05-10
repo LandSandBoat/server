@@ -26,7 +26,7 @@ zones[xi.zone.FULL_MOON_FOUNTAIN] =
     },
     mob =
     {
-        MOON_READING_OFFSET = 17473540,
+        MOON_READING_OFFSET = GetFirstID('Ace_of_Cups'),
     },
     npc =
     {
