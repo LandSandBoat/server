@@ -564,6 +564,7 @@ public:
     int32 GetTimeRemainingUntilDeathHomepoint() const;
 
     int32 GetTimeCreated();
+    uint8 getHighestJobLevel();
 
     bool isInEvent();
     bool isNpcLocked();

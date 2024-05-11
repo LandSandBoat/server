@@ -2442,6 +2442,21 @@ int32 CCharEntity::GetTimeCreated()
     return 0;
 }
 
+uint8 CCharEntity::getHighestJobLevel()
+{
+    uint8 maxJobLevel = 0;
+
+    for (uint8 jobId = 0; jobId < MAX_JOBTYPE; jobId++)
+    {
+        if (jobs.job[jobId] > maxJobLevel)
+        {
+            maxJobLevel = jobs.job[jobId];
+        }
+    }
+
+    return maxJobLevel;
+}
+
 bool CCharEntity::hasMoghancement(uint16 moghancementID) const
 {
     return m_moghancementID == moghancementID;
