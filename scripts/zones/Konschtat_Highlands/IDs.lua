@@ -58,30 +58,13 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
     },
     mob =
     {
-        STRAY_MARY_PH  =
-        {
-            [17219791] = 17219795, -- -305.204 -11.695 -96.078
-            [17219928] = 17219933, -- -293.900  33.393 342.710
-        },
-
-        RAMPAGING_RAM_PH =
-        {
-            [17219885] = 17219886, -- 21 40 514
-            [17219987] = 17219886, -- -163.198 62.392 568.282
-            [17219886] = 17219887, -- Rampaging can't spawn if Steelfleece is up
-        },
-
-        STEELFLEECE_PH =
-        {
-            [17219885] = 17219887, -- 21 40 514
-            [17219886] = 17219887, -- 160 24 121
-            [17219987] = 17219887, -- -163.198 62.392 568.282
-            [17219887] = 17219886, -- Steelfleece can't spawn if Rampaging is up
-        },
-
-        FORGER         = 17219999,
-        HATY           = 17220000,
-        BENDIGEIT_VRAN = 17220001,
+        STRAY_MARY     = GetTableOfIDs('Stray_Mary'), -- 2 NMs
+        RAMPAGING_RAM  = GetFirstID('Rampaging_Ram'),
+        STEELFLEECE    = GetFirstID('Steelfleece_Baldarich'),
+        TREMMOR_RAM    = GetTableOfIDs('Tremor_Ram'), -- Used for Steelface pop
+        FORGER         = GetFirstID('Forger'),
+        HATY           = GetFirstID('Haty'),
+        BENDIGEIT_VRAN = GetFirstID('Bendigeit_Vran'),
 
         VOIDWALKER =
         {

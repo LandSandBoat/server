@@ -31,23 +31,15 @@ zones[xi.zone.KING_RANPERRES_TOMB] =
     },
     mob =
     {
-        GWYLLGI_PH            =
-        {
-            [17555661] = 17555664,
-        },
-        CRYPT_GHOST_PH        =
-        {
-            [17555665] = 17555668,
-            [17555666] = 17555668,
-            [17555667] = 17555668,
-        },
-        BARBASTELLE           = 17555721,
-        CHERRY_SAPLING_OFFSET = 17555748,
-        VRTRA                 = 17555763,
-        CORRUPTED_YORGOS      = 17555770,
-        CORRUPTED_SOFFEIL     = 17555771,
-        CORRUPTED_ULBRIG      = 17555772,
-        ANKOU                 = 17555709,
+        GWYLLGI               = GetFirstID('Gwyllgi'),
+        CRYPT_GHOST           = GetFirstID('Crypt_Ghost'),
+        BARBASTELLE           = GetFirstID('Barbastelle'),
+        CHERRY_SAPLING_OFFSET = GetFirstID('Cherry_Sapling'),
+        VRTRA                 = GetFirstID('Vrtra'),
+        CORRUPTED_YORGOS      = GetFirstID('Corrupted_Yorgos'),
+        CORRUPTED_SOFFEIL     = GetFirstID('Corrupted_Soffeil'),
+        CORRUPTED_ULBRIG      = GetFirstID('Corrupted_Ulbrig'),
+        ANKOU                 = GetFirstID('Ankou'),
     },
     npc =
     {
