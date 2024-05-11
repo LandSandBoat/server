@@ -1763,12 +1763,14 @@ local function givePrize(player, ki)
             end
 
             -- give prize
-            if player:getFreeSlotsCount() == 0 then
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, prize.itemId)
-            else
+            if
+                player:getFreeSlotsCount() ~= 0 and
                 player:addItem(prize.itemId, 1, unpack(addAug))
+            then
                 player:messageSpecial(ID.text.ITEM_OBTAINED, prize.itemId)
                 player:delKeyItem(ki)
+            else
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, prize.itemId)
             end
         end
     end
