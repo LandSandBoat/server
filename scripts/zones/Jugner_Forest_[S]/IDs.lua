@@ -45,13 +45,9 @@ zones[xi.zone.JUGNER_FOREST_S] =
 
     mob =
     {
-        DRUMSKULL_ZOGDREGG_PH =
-        {
-            [17113380] = 17113381, -- 195.578 -0.556 -347.699
-        },
-
-        FINGERFILCHER_DRADZAD = 17113462,
-        COBRACLAW_BUCHZVOTCH  = 17113464,
+        DRUMSKULL_ZOGDREGG    = GetFirstID('Drumskull_Zogdregg'),
+        FINGERFILCHER_DRADZAD = GetFirstID('Fingerfilcher_Dradzad'),
+        COBRACLAW_BUCHZVOTCH  = GetFirstID('Cobraclaw_Buchzvotch'),
 
         VOIDWALKER =
         {

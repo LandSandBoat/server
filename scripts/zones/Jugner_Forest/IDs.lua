@@ -52,26 +52,13 @@ zones[xi.zone.JUGNER_FOREST] =
 
     mob =
     {
-        PANZER_PERCIVAL_PH =
-        {
-            [17203581] = 17203585, -- 535.504 -1.517 152.171 (southeast)
-            [17203637] = 17203642, -- 239.541 -0.365 559.722 (northwest)
-        },
-
-        SUPPLESPINE_MUJWUJ_PH =
-        {
-            [17203437] = 17203475,
-        },
-
-        FRADUBIO_PH =
-        {
-            [17203447] = 17203448,
-        },
-
-        KING_ARTHRO          = 17203216,
-        FRAELISSA            = 17203447,
-        FRADUBIO             = 17203448,
-        METEORMAULER         = 17203414,
+        PANZER_PERCIVAL    = GetTableOfIDs('Panzer_Percival'), -- 2 NMs
+        SUPPLESPINE_MUJWUJ = GetFirstID('Supplespine_Mujwuj'),
+        KING_ARTHRO        = GetFirstID('King_Arthro'),
+        FRAELISSA          = GetFirstID('Fraelissa'),
+        FRADUBIO           = GetFirstID('Fradubio'),
+        METEORMAULER       = GetFirstID('Meteormauler_Zhagtegg'),
+        CERNUNNOS          = GetFirstID('Cernunnos'),
 
         VOIDWALKER =
         {
@@ -104,7 +91,6 @@ zones[xi.zone.JUGNER_FOREST] =
             }
         },
 
-        CERNUNNOS = 17203677,
     },
 
     npc =
