@@ -1124,7 +1124,7 @@ INSERT INTO `mob_groups` VALUES (5,3783,29,'Strato_Hippogryph',330,0,488,0,0,54,
 INSERT INTO `mob_groups` VALUES (6,2452,29,'Lunantishee',330,0,1550,0,0,55,58,0);
 INSERT INTO `mob_groups` VALUES (7,2051,29,'Ignidrake',330,0,1352,0,0,57,59,0);
 INSERT INTO `mob_groups` VALUES (8,2891,29,'Nitro_Cluster',960,0,1818,0,0,55,57,0);
-INSERT INTO `mob_groups` VALUES (9,4530,29,'Blazedrake',330,0,1352,0,0,85,87,0);
+INSERT INTO `mob_groups` VALUES (9,4530,29,'Blazedrake',330,0,3298,0,0,85,87,0);
 INSERT INTO `mob_groups` VALUES (10,71,29,'Air_Elemental',330,4,38,0,0,57,64,0);
 INSERT INTO `mob_groups` VALUES (11,2060,29,'Imdugud',0,32,1358,7000,0,56,60,0);
 INSERT INTO `mob_groups` VALUES (12,513,29,'Boroka',86400,0,341,8000,0,56,60,0);

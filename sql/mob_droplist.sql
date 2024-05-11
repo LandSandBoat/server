@@ -327,8 +327,8 @@ INSERT INTO `mob_droplist` VALUES (34,2,0,1000,838,0);   -- Spider Web (Steal)
 INSERT INTO `mob_droplist` VALUES (34,4,0,1000,838,0);   -- Spider Web (Despoil)
 
 -- ZoneID:  30 - Aiatar
-INSERT INTO `mob_droplist` VALUES (35,0,0,1000,1691,350);        -- Giant Scale (35.0%)
-INSERT INTO `mob_droplist` VALUES (35,0,0,1000,1122,270);        -- Wyvern Skin (27.0%)
+INSERT INTO `mob_droplist` VALUES (35,0,0,1000,1691,@VCOMMON);   -- Giant Scale (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (35,0,0,1000,1122,@VCOMMON);   -- Wyvern Skin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (35,0,0,1000,15367,@UNCOMMON); -- Falconers Hose (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (35,0,0,1000,15370,@UNCOMMON); -- Sable Cuisses (Uncommon, 10%)
 
@@ -445,8 +445,8 @@ INSERT INTO `mob_droplist` VALUES (41,0,0,1000,2725,@VRARE); -- Argute Bracers -
 
 -- ZoneID:  89 - Ajattara
 -- ZoneID: 212 - Typhoon Wyvern
-INSERT INTO `mob_droplist` VALUES (42,0,0,1000,1124,330); -- Wyvern Wing (33.0%)
-INSERT INTO `mob_droplist` VALUES (42,0,0,1000,1122,270); -- Wyvern Skin (27.0%)
+INSERT INTO `mob_droplist` VALUES (42,0,0,1000,1124,@RARE);     -- Wyvern Wing (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (42,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
 
 -- ZoneID: 102 - Akbaba
 -- ZoneID: 117 - Akbaba
@@ -3547,15 +3547,15 @@ INSERT INTO `mob_droplist` VALUES (388,0,0,1000,4370,110); -- Pot Of Honey (11.0
 INSERT INTO `mob_droplist` VALUES (388,2,0,1000,4370,0);   -- Pot Of Honey (Steal)
 
 -- ZoneID: 212 - Bune
-INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,990);  -- Wyvern Skin (99.0%)
-INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1124,630);  -- Wyvern Wing (63.0%)
-INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,500);  -- Wyvern Skin (50.0%)
-INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,330);  -- Wyvern Skin (33.0%)
-INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1124,310);  -- Wyvern Wing (31.0%)
-INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,250);  -- Wyvern Skin (25.0%)
-INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1124,210);  -- Wyvern Wing (21.0%)
-INSERT INTO `mob_droplist` VALUES (389,0,0,1000,16605,80);  -- Enhancing Sword (8.0%)
-INSERT INTO `mob_droplist` VALUES (389,0,0,1000,866,@RARE); -- Handful Of Wyvern Scales (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,@VCOMMON); -- Wyvern Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1124,@VCOMMON); -- Wyvern Wing (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,@VCOMMON); -- Wyvern Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,@VCOMMON); -- Wyvern Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1124,@VCOMMON); -- Wyvern Wing (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,@VCOMMON); -- Wyvern Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1124,@VCOMMON); -- Wyvern Wing (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (389,0,0,1000,16605,@RARE);   -- Enhancing Sword (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (389,0,0,1000,866,@RARE);     -- Handful Of Wyvern Scales (Rare, 5%)
 
 -- ZoneID:  77 - Crushed Krause
 -- ZoneID:  77 - Burned Bergmann
@@ -4188,7 +4188,7 @@ INSERT INTO `mob_droplist` VALUES (465,0,0,1000,3155,@UNCOMMON); -- Raiders Seal
 -- ZoneID:  89 - Chigoe
 -- ZoneID:  91 - Chigoe
 INSERT INTO `mob_droplist` VALUES (466,0,0,1000,2229,@UNCOMMON); -- Vial Of Chimera Blood (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (466,0,0,1000,2365,@VRARE);    -- Vial Of Demon Blood (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (466,0,0,1000,2365,20);        -- Vial Of Demon Blood (2.0%)
 
 -- ZoneID:  68 - Chigre
 INSERT INTO `mob_droplist` VALUES (467,0,0,1000,2638,@ALWAYS); -- Chigre (Always, 100%)
@@ -6865,9 +6865,9 @@ INSERT INTO `mob_droplist` VALUES (829,0,0,1000,2518,120); -- Smilodon Hide (12.
 INSERT INTO `mob_droplist` VALUES (829,0,0,1000,5668,40);  -- Smilodon Liver (4.0%)
 
 -- ZoneID:  30 - Firedrake
-INSERT INTO `mob_droplist` VALUES (830,0,0,1000,1691,270);       -- Giant Scale (27.0%)
-INSERT INTO `mob_droplist` VALUES (830,0,0,1000,1122,130);       -- Wyvern Skin (13.0%)
-INSERT INTO `mob_droplist` VALUES (830,0,0,1000,1124,@UNCOMMON); -- Wyvern Wing (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (830,0,0,1000,1691,@VCOMMON);  -- Giant Scale (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (830,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (830,0,0,1000,1124,@RARE);     -- Wyvern Wing (Rare, 5%)
 
 -- ZoneID:  61 - Fire Elemental
 -- ZoneID:  62 - Fire Elemental
@@ -6949,9 +6949,9 @@ INSERT INTO `mob_droplist` VALUES (840,0,0,1000,3497,15);       -- Forgotten Ste
 INSERT INTO `mob_droplist` VALUES (840,2,0,1000,1452,0);        -- Ordelle Bronzepiece (Steal)
 
 -- ZoneID:  30 - Flamedrake
-INSERT INTO `mob_droplist` VALUES (841,0,0,1000,1691,350); -- Giant Scale (35.0%)
-INSERT INTO `mob_droplist` VALUES (841,0,0,1000,1124,330); -- Wyvern Wing (33.0%)
-INSERT INTO `mob_droplist` VALUES (841,0,0,1000,1122,270); -- Wyvern Skin (27.0%)
+INSERT INTO `mob_droplist` VALUES (841,0,0,1000,1691,@VCOMMON);  -- Giant Scale (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (841,0,0,1000,1124,@RARE);     -- Wyvern Wing (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (841,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
 
 -- ZoneID: 216 - Flame Skimmer
 INSERT INTO `mob_droplist` VALUES (842,0,0,1000,3178,@UNCOMMON);  -- Ferine Seal Legs (Uncommon, 10%)
@@ -10263,10 +10263,10 @@ INSERT INTO `mob_droplist` VALUES (1251,0,0,1000,19212,@UNCOMMON); -- Black Tath
 INSERT INTO `mob_droplist` VALUES (1251,0,0,1000,909,@RARE);       -- Guivres Skull (Rare, 5%)
 
 -- ZoneID: 174 - Guivre
-INSERT INTO `mob_droplist` VALUES (1252,0,0,1000,1124,330);  -- Wyvern Wing (33.0%)
-INSERT INTO `mob_droplist` VALUES (1252,0,0,1000,1122,270);  -- Wyvern Skin (27.0%)
-INSERT INTO `mob_droplist` VALUES (1252,0,0,1000,866,70);    -- Handful Of Wyvern Scales (7.0%)
-INSERT INTO `mob_droplist` VALUES (1252,0,0,1000,909,@RARE); -- Guivres Skull (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1252,0,0,1000,1124,@COMMON);  -- Wyvern Wing (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1252,0,0,1000,1122,@COMMON);  -- Wyvern Skin (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1252,0,0,1000,866,@RARE);     -- Handful Of Wyvern Scales (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1252,0,0,1000,909,@VCOMMON);  -- Guivres Skull (Very Common, 24%)
 
 -- ZoneID: 216 - Gukumatz
 INSERT INTO `mob_droplist` VALUES (1253,0,0,1000,2961,1480);      -- Sanguine Spike (148.0%)
@@ -10844,9 +10844,9 @@ INSERT INTO `mob_droplist` VALUES (1339,0,0,1000,1649,@VRARE); -- Scarlet Stone 
 INSERT INTO `mob_droplist` VALUES (1339,2,0,1000,846,0);       -- Insect Wing (Steal)
 
 -- ZoneID: 205 - Hurricane Wyvern
-INSERT INTO `mob_droplist` VALUES (1340,0,0,1000,905,140);  -- Wyvern Skull (14.0%)
-INSERT INTO `mob_droplist` VALUES (1340,0,0,1000,1122,110); -- Wyvern Skin (11.0%)
-INSERT INTO `mob_droplist` VALUES (1340,0,0,1000,1124,40);  -- Wyvern Wing (4.0%)
+INSERT INTO `mob_droplist` VALUES (1340,0,0,1000,905,@UNCOMMON);  -- Wyvern Skull (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (1340,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (1340,0,0,1000,1124,@VRARE);    -- Wyvern Wing (Very Rare, 1%)
 
 -- ZoneID: 151 - Huu Xalmo The Savage
 INSERT INTO `mob_droplist` VALUES (1341,0,0,1000,1100,@ALWAYS); -- Xalmo Feather (Always, 100%)
@@ -11024,11 +11024,10 @@ INSERT INTO `mob_droplist` VALUES (1351,0,0,1000,1609,@UNCOMMON); -- Remnant Of 
 INSERT INTO `mob_droplist` VALUES (1351,4,0,1000,1606,0);         -- Remnant Of A Burning Memory (Despoil)
 
 -- ZoneID:  29 - Ignidrake
--- ZoneID:  29 - Blazedrake
-INSERT INTO `mob_droplist` VALUES (1352,0,0,1000,1691,350);   -- Giant Scale (35.0%)
-INSERT INTO `mob_droplist` VALUES (1352,0,0,1000,1122,@RARE); -- Wyvern Skin (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (1352,0,0,1000,1124,30);    -- Wyvern Wing (3.0%)
-INSERT INTO `mob_droplist` VALUES (1352,2,0,1000,1691,0);     -- Giant Scale (Steal)
+INSERT INTO `mob_droplist` VALUES (1352,0,0,1000,1691,@VCOMMON); -- Giant Scale (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1352,0,0,1000,1122,@RARE);    -- Wyvern Skin (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1352,0,0,1000,1124,@VRARE);   -- Wyvern Wing (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1352,2,0,1000,1691,0);        -- Giant Scale (Steal)
 
 -- ZoneID: 215 - Ignis Eruca
 INSERT INTO `mob_droplist` VALUES (1353,0,0,1000,839,220);  -- Piece Of Crawler Cocoon (22.0%)
@@ -12079,9 +12078,9 @@ INSERT INTO `mob_droplist` VALUES (1476,0,0,1000,1017,70); -- Scorpion Stinger (
 INSERT INTO `mob_droplist` VALUES (1476,4,0,1000,897,0);   -- Scorpion Claw (Despoil)
 
 -- ZoneID: 174 - Ladon
-INSERT INTO `mob_droplist` VALUES (1477,0,0,1000,1124,330); -- Wyvern Wing (33.0%)
-INSERT INTO `mob_droplist` VALUES (1477,0,0,1000,1122,270); -- Wyvern Skin (27.0%)
-INSERT INTO `mob_droplist` VALUES (1477,0,0,1000,866,70);   -- Handful Of Wyvern Scales (7.0%)
+INSERT INTO `mob_droplist` VALUES (1477,0,0,1000,1124,@RARE);     -- Wyvern Wing (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1477,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (1477,0,0,1000,866,@RARE);      -- Handful Of Wyvern Scales (Rare, 5%)
 
 -- ZoneID:  81 - Ladybug
 INSERT INTO `mob_droplist` VALUES (1478,0,0,1000,2506,310); -- Ladybug Wing (31.0%)
@@ -16350,9 +16349,9 @@ INSERT INTO `mob_droplist` VALUES (2047,0,0,1000,13180,@UNCOMMON); -- Republic S
 INSERT INTO `mob_droplist` VALUES (2047,0,0,1000,13181,@UNCOMMON); -- Federation Stables Scarf (Uncommon, 10%)
 
 -- ZoneID:  29 - Pyrodrake
-INSERT INTO `mob_droplist` VALUES (2048,0,0,1000,1691,290);    -- Giant Scale (29.0%)
-INSERT INTO `mob_droplist` VALUES (2048,0,0,1000,1122,@RARE);  -- Wyvern Skin (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (2048,0,0,1000,1124,@VRARE); -- Wyvern Wing (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2048,0,0,1000,1691,@VCOMMON); -- Giant Scale (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2048,0,0,1000,1122,@RARE);    -- Wyvern Skin (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2048,0,0,1000,1124,@VRARE);   -- Wyvern Wing (Very Rare, 1%)
 
 -- ZoneID:  15 - Qaitu
 INSERT INTO `mob_droplist` VALUES (2049,0,0,1000,2905,@UNCOMMON); -- Square Of Moonglow Cloth (Uncommon, 10%)
@@ -17307,9 +17306,9 @@ INSERT INTO `mob_droplist` VALUES (2181,0,0,1000,16783,@UNCOMMON); -- Plantreape
 INSERT INTO `mob_droplist` VALUES (2181,0,0,1000,1025,60);         -- Palborough Chest Key (6.0%)
 
 -- ZoneID:  89 - Scitalis
-INSERT INTO `mob_droplist` VALUES (2182,0,0,1000,16150,160); -- Saurian Helm (16.0%)
-INSERT INTO `mob_droplist` VALUES (2182,0,0,1000,1124,30);   -- Wyvern Wing (3.0%)
-INSERT INTO `mob_droplist` VALUES (2182,0,0,1000,1122,20);   -- Wyvern Skin (2.0%)
+INSERT INTO `mob_droplist` VALUES (2182,0,0,1000,16150,@COMMON);  -- Saurian Helm (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2182,0,0,1000,1124,@RARE);     -- Wyvern Wing (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2182,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
 
 -- ZoneID: 126 - Sea Bishop
 INSERT INTO `mob_droplist` VALUES (2183,0,0,1000,888,340); -- Seashell (34.0%)
@@ -17955,9 +17954,9 @@ INSERT INTO `mob_droplist` VALUES (2267,0,0,1000,15722,90);     -- Hikazu Sune-A
 INSERT INTO `mob_droplist` VALUES (2267,0,0,1000,16091,70);     -- Freyas Mask (7.0%)
 
 -- ZoneID:  52 - Skoffin
-INSERT INTO `mob_droplist` VALUES (2268,0,0,1000,1122,@COMMON); -- Wyvern Skin (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (2268,0,0,1000,1124,70);      -- Wyvern Wing (7.0%)
-INSERT INTO `mob_droplist` VALUES (2268,2,0,1000,1196,0);       -- Qiqirn Cape (Steal)
+INSERT INTO `mob_droplist` VALUES (2268,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2268,0,0,1000,1124,@RARE);     -- Wyvern Wing (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2268,2,0,1000,1196,0);         -- Qiqirn Cape (Steal)
 
 -- ZoneID:  81 - Skogs Fru
 INSERT INTO `mob_droplist` VALUES (2269,0,0,1000,15817,290); -- Ecphoria Ring (29.0%)
@@ -19850,14 +19849,14 @@ INSERT INTO `mob_droplist` VALUES (2520,0,0,1000,891,310); -- Bat Fang (31.0%)
 INSERT INTO `mob_droplist` VALUES (2520,0,0,1000,1037,20); -- Feiyin Chest Key (2.0%)
 
 -- ZoneID: 212 - Ungur
-INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,18141,@ALWAYS); -- Ungur Boomerang (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1124,330);      -- Wyvern Wing (33.0%)
-INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1122,270);      -- Wyvern Skin (27.0%)
-INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1124,170);      -- Wyvern Wing (17.0%)
-INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1122,140);      -- Wyvern Skin (14.0%)
-INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1122,90);       -- Wyvern Skin (9.0%)
-INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,866,70);        -- Handful Of Wyvern Scales (7.0%)
-INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1122,70);       -- Wyvern Skin (7.0%)
+INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,18141,@ALWAYS);  -- Ungur Boomerang (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1124,@VCOMMON);  -- Wyvern Wing (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1122,@VCOMMON);  -- Wyvern Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1124,@COMMON);   -- Wyvern Wing (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1122,@COMMON);   -- Wyvern Skin (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,866,@ALWAYS);    -- Handful Of Wyvern Scales (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1122,@RARE);     -- Wyvern Skin (Rare, 5%)
 
 -- ZoneID: 254 - Unseelie
 INSERT INTO `mob_droplist` VALUES (2522,0,0,1000,3272,@UNCOMMON); -- Unseelie Eye (Uncommon, 10%)
@@ -21277,9 +21276,10 @@ INSERT INTO `mob_droplist` VALUES (2590,0,0,1000,542,20);        -- Wild Rabbit 
 
 -- ZoneID: 205 - Vouivre
 INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,16885,@ALWAYS); -- Gae Bolg (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,1124,330);      -- Wyvern Wing (33.0%)
-INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,1122,270);      -- Wyvern Skin (27.0%)
-INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,866,70);        -- Handful Of Wyvern Scales (7.0%)
+INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,1124,@ALWAYS);  -- Wyvern Wing (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,1124,@VCOMMON); -- Wyvern Wing (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,1122,@VCOMMON); -- Wyvern Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,866,@ALWAYS);   -- Handful Of Wyvern Scales (Always, 100%)
 
 -- ZoneID: 190 - Vrtra
 INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,1712,@ALWAYS);    -- Clump Of Cashmere Wool (Always, 100%)
@@ -21550,9 +21550,9 @@ INSERT INTO `mob_droplist` VALUES (2627,0,0,1000,5668,40);  -- Smilodon Liver (4
 INSERT INTO `mob_droplist` VALUES (2627,2,0,1000,4372,0);   -- Slice Of Giant Sheep Meat (Steal)
 
 -- ZoneID:  65 - Watch Wyvern
-INSERT INTO `mob_droplist` VALUES (2628,0,0,1000,1124,330); -- Wyvern Wing (33.0%)
-INSERT INTO `mob_droplist` VALUES (2628,0,0,1000,1122,270); -- Wyvern Skin (27.0%)
-INSERT INTO `mob_droplist` VALUES (2628,2,0,1000,1196,0);   -- Qiqirn Cape (Steal)
+INSERT INTO `mob_droplist` VALUES (2628,0,0,1000,1124,@RARE);     -- Wyvern Wing (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2628,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2628,2,0,1000,1196,0);         -- Qiqirn Cape (Steal)
 
 -- ZoneID:   1 - Water Elemental
 -- ZoneID:   2 - Water Elemental
@@ -21986,10 +21986,9 @@ INSERT INTO `mob_droplist` VALUES (2678,0,0,1000,5367,@UNCOMMON); -- Cumulus Cel
 INSERT INTO `mob_droplist` VALUES (2678,0,0,1000,5369,@UNCOMMON); -- Stratus Cell (Uncommon, 10%)
 
 -- ZoneID: 213 - Wyvern
-INSERT INTO `mob_droplist` VALUES (2679,0,0,1000,1124,330); -- Wyvern Wing (33.0%)
-INSERT INTO `mob_droplist` VALUES (2679,0,0,1000,1122,270); -- Wyvern Skin (27.0%)
-INSERT INTO `mob_droplist` VALUES (2679,0,0,1000,866,70);   -- Handful Of Wyvern Scales (7.0%)
-INSERT INTO `mob_droplist` VALUES (2679,4,0,1000,866,0);    -- Handful Of Wyvern Scales (Despoil)
+INSERT INTO `mob_droplist` VALUES (2679,0,0,1000,1124,@RARE);     -- Wyvern Wing (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2679,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2679,4,0,1000,866,0);          -- Handful Of Wyvern Scales (Despoil)
 
 -- ZoneID: 212 - Wyvernpoacher Drachlox
 INSERT INTO `mob_droplist` VALUES (2680,0,0,1000,510,@ALWAYS); -- Goblin Armor (Always, 100%)
@@ -24610,7 +24609,7 @@ INSERT INTO `mob_droplist` VALUES (3083,0,0,1000,11496,48); -- Fenrirs Crown (4.
 INSERT INTO `mob_droplist` VALUES (3084,0,0,1000,16035,41); -- Altdorfs Earring (4.1%)
 
 -- ZoneID:  89 - Sarcopsylla
-INSERT INTO `mob_droplist` VALUES (3085,0,0,1000,11408,@RARE); -- Moranas Pigaches (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (3085,0,0,1000,11408,63); -- Moranas Pigaches (6.3%)
 
 -- ZoneID: 122 - Rogue Receptacle
 INSERT INTO `mob_droplist` VALUES (3086,0,0,1000,11533,333); -- Lyricists Gonnelle (33.3%)
@@ -26810,6 +26809,13 @@ INSERT INTO `mob_droplist` VALUES (3296,0,0,1000,2850,@UNCOMMON); -- Ingot of Sa
 
 -- ZoneID:  91 - Erle
 INSERT INTO `mob_droplist` VALUES (3297,0,0,1000,19122,@UNCOMMON); -- Courser's Pugio (Uncommon, 10%)
+
+-- ZoneID:  29 - Blazedrake
+INSERT INTO `mob_droplist` VALUES (3298,0,0,1000,1691,@VCOMMON);  -- Giant Scale (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3298,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3298,0,0,1000,1124,@RARE);     -- Wyvern Wing (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (3298,0,0,1000,2188,@RARE);     -- Wyvern Tailskin (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (3298,4,0,1000,866,0);          -- Handful Of Wyvern Scales (Despoil)
 
 -- ZoneID:  89 - Vasiliceratops
 INSERT INTO `mob_droplist` VALUES (3299,0,0,1000,18508,@UNCOMMON); -- Lyft Voulge (Uncommon, 10%)
