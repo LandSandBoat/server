@@ -440,6 +440,7 @@ namespace zoneutils
                                 PMob->m_SpawnPoint.x        = sql->GetFloatData(4);
                                 PMob->m_SpawnPoint.y        = sql->GetFloatData(5);
                                 PMob->m_SpawnPoint.z        = sql->GetFloatData(6);
+                                PMob->loc.p                 = PMob->m_SpawnPoint;
 
                                 PMob->m_RespawnTime = sql->GetUIntData(7) * 1000;
                                 PMob->m_SpawnType   = (SPAWNTYPE)sql->GetUIntData(8);
