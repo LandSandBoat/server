@@ -30,6 +30,7 @@ zones[xi.zone.SACRIFICIAL_CHAMBER] =
     },
     mob =
     {
+        GRAVITON = GetFirstID('Graviton'),
     },
     npc =
     {
