@@ -40,22 +40,18 @@ zones[xi.zone.MAZE_OF_SHAKHRAMI] =
     },
     mob =
     {
-        TREMBLER_TABITHA_PH =
-        {
-            [17588276] = 17588278,
-            [17588277] = 17588278,
-        },
-        ICHOROUS_IRE        = 17588225,
-        ARGUS               = 17588674,
-        LEECH_KING          = 17588685,
-        WYRMFLY_OFFSET      = 17588701,
-        APPARATUS_ELEMENTAL = 17588704,
-        AROMA_CRAWLER       = 17588705,
-        LOST_SOUL           = 17588706,
+        TREMBLER_TABITHA    = GetFirstID('Trembler_Tabitha'),
+        ICHOROUS_IRE        = GetFirstID('Ichorous_Ire'),
+        ARGUS               = GetFirstID('Argus'),
+        LEECH_KING          = GetFirstID('Leech_King'),
+        WYRMFLY_OFFSET      = GetFirstID('Wyrmfly'),
+        APPARATUS_ELEMENTAL = GetFirstID('Dark_Elemental'),
+        AROMA_CRAWLER       = GetFirstID('Aroma_Crawler'),
+        LOST_SOUL           = GetFirstID('Lost_Soul'),
     },
     npc =
     {
-        FOSSIL_ROCK_OFFSET = 17588738,
+        FOSSIL_ROCK_OFFSET = GetFirstID('Fossil_Rock'),
         TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
         EXCAVATION         = GetTableOfIDs('Excavation_Point'),
     },

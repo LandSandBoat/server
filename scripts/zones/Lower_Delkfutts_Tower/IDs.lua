@@ -33,21 +33,10 @@ zones[xi.zone.LOWER_DELKFUTTS_TOWER] =
     },
     mob =
     {
-        HIPPOLYTOS_PH =
-        {
-            [17531000] = 17530999, -- 337.079 -16.1 17.386
-            [17531002] = 17530999, -- 346.244 -16.126 10.373
-        },
-        EPIALTES_PH   =
-        {
-            [17530882] = 17530881, -- 432.952 -0.350 -3.719
-            [17530887] = 17530881, -- 484.735 0.046 23.048
-        },
-        EURYMEDON_PH  =
-        {
-            [17531118] = 17531114, -- 397.252 -32.128 -32.807
-        },
-        DISASTER_IDOL = 17531121,
+        HIPPOLYTOS    = GetFirstID('Hippolytos'),
+        EPIALTES      = GetFirstID('Epialtes'),
+        EURYMEDON     = GetFirstID('Eurymedon'),
+        DISASTER_IDOL = GetFirstID('Disaster_Idol'),
     },
     npc =
     {

@@ -55,9 +55,9 @@ zones[xi.zone.LEUJAOAM_SANCTUM] =
 
     npc =
     {
-        ANCIENT_LOCKBOX = 17060014,
-        RUNE_OF_RELEASE = 17060015,
-        MULWAHAH        = 17060026,
+        ANCIENT_LOCKBOX = GetFirstID('Ancient_Lockbox'),
+        RUNE_OF_RELEASE = GetFirstID('Rune_of_Release'),
+        MULWAHAH        = GetFirstID('Mulwahah'),
     }
 }
 

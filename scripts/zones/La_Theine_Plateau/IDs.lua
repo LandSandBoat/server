@@ -62,27 +62,11 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
     },
     mob =
     {
-        TUMBLING_TRUFFLE_PH =
-        {
-            [17195256] = 17195259, -- 450.472 70.657 238.237
-        },
-
-        LUMBERING_LAMBERT_PH =
-        {
-            [17195143] = 17195317, -- -372 -16 -6
-            [17195316] = 17195317, -- -117 -1 -136
-            [17195317] = 17195318, -- Lumbering can't spawn if Bloodtear is up
-        },
-
-        BLOODTEAR_PH =
-        {
-            [17195143] = 17195318, -- -372 -16 -6
-            [17195316] = 17195318, -- -117 -1 -136
-            [17195317] = 17195318, -- -216 -8 -107
-            [17195318] = 17195317, -- Bloodtear can't spawn if Lumbering is up
-        },
-
-        NIHNIKNOOVI = 17195475,
+        TUMBLING_TRUFFLE  = GetFirstID('Tumbling_Truffle'),
+        LUMBERING_LAMBERT = GetFirstID('Lumbering_Lambert'),
+        BLOODTEAR         = GetFirstID('Bloodtear_Baldurf'),
+        BATTERING_RAM     = GetTableOfIDs('Battering_Ram'),
+        NIHNIKNOOVI       = GetFirstID('Nihniknoovi'),
 
         VOIDWALKER =
         {
@@ -118,8 +102,8 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
 
     npc =
     {
-        FALLEN_EGG  = 17195583,
-        RAINBOW     = 17195608,
+        FALLEN_EGG  = GetFirstID('FallenEgg'),
+        RAINBOW     = GetFirstID('_2u0'),
     },
 }
 

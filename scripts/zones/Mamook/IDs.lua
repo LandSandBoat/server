@@ -28,28 +28,17 @@ zones[xi.zone.MAMOOK] =
     },
     mob =
     {
-        ZIZZY_ZILLAH_PH =
-        {
-            [17043560]           = 17043554,
-            [17043561]           = 17043554,
-            [17043562]           = 17043554,
-            [17043563]           = 17043554,
-            [17043564]           = 17043554,
-        },
-        FIREDANCE_MAGMAAL_JA_PH =
-        {
-            [17043773]           = 17043779, -- -201.522 17.209 -363.865
-            [17043774]           = 17043779, -- -206.458 17.525 -373.798
-        },
-        GULOOL_JA_JA             = 17043875,
-        CHAMROSH                 = 17043887,
-        IRIRI_SAMARIRI           = 17043888,
-        POROGGO_CASANOVA         = 17043881,
-        MIKILULU                 = 17043882,
-        MIKIRURU                 = 17043883,
-        NIKILULU                 = 17043884,
-        MIKILURU                 = 17043885,
-        MIKIRULU                 = 17043886,
+        ZIZZY_ZILLAH         = GetFirstID('Zizzy_Zillah'),
+        FIREDANCE_MAGMAAL_JA = GetFirstID('Firedance_Magmaal_Ja'),
+        GULOOL_JA_JA         = GetFirstID('Gulool_Ja_Ja'),
+        CHAMROSH             = GetFirstID('Chamrosh'),
+        IRIRI_SAMARIRI       = GetFirstID('Iriri_Samariri'),
+        POROGGO_CASANOVA     = GetFirstID('Poroggo_Casanova'),
+        MIKILULU             = GetFirstID('Mikilulu'),
+        MIKIRURU             = GetFirstID('Mikiruru'),
+        NIKILULU             = GetFirstID('Nikilulu'),
+        MIKILURU             = GetFirstID('Mikiluru'),
+        MIKIRULU             = GetFirstID('Mikirulu'),
     },
     npc =
     {

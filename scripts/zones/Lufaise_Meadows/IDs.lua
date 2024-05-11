@@ -33,24 +33,14 @@ zones[xi.zone.LUFAISE_MEADOWS] =
     },
     mob =
     {
-        PADFOOT               =
-        {
-            16875552, -- !pos -43.689 0.487 -328.028
-            16875578, -- !pos 260.445 -1.761 -27.862
-            16875615, -- !pos 412.447 -0.057 -200.161
-            16875703, -- !pos -378.950 -15.742 144.215
-            16875748, -- !pos -141.523 -15.529 91.709
-        },
+        PADFOOT               = GetTableOfIDs('Padfoot'),
         FLOCKBOCK             = GetFirstID('Flockbock'),
-        MEGALOBUGARD_PH       =
-        {
-            [16875720] = 16875741, -- -137.168 -15.390 91.016
-        },
-        LESHY_OFFSET          = 16875754,
-        COLORFUL_LESHY        = 16875762,
-        SPLINTERSPINE_GRUKJUK = 16875774,
-        KURREA                = 16875778,
-        AMALTHEIA             = 16875779,
+        MEGALOBUGARD          = GetFirstID('Megalobugard'),
+        LESHY_OFFSET          = GetFirstID('Leshy'),
+        COLORFUL_LESHY        = GetFirstID('Colorful_Leshy'),
+        SPLINTERSPINE_GRUKJUK = GetFirstID('Splinterspine_Grukjuk'),
+        KURREA                = GetFirstID('Kurrea'),
+        AMALTHEIA             = GetFirstID('Amaltheia'),
     },
     npc =
     {
