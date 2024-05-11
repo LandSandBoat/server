@@ -1496,7 +1496,7 @@ namespace fishingutils
 
         if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0)
         {
-            CItemFish* Fish = static_cast<CItemFish*>(itemutils::GetItem(FishID));
+            CItemFish* Fish = dynamic_cast<CItemFish*>(itemutils::GetItem(FishID));
 
             if (Fish == nullptr)
             {
