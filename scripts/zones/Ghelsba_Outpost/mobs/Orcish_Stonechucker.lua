@@ -7,11 +7,18 @@ local ID = zones[xi.zone.GHELSBA_OUTPOST]
 -----------------------------------
 local entity = {}
 
+local thousandarmPHTable =
+{
+    [ID.mob.THOUSANDARM_DESHGLESH - 9] = ID.mob.THOUSANDARM_DESHGLESH, -- 80.000 -0.249 328.000
+    [ID.mob.THOUSANDARM_DESHGLESH - 6] = ID.mob.THOUSANDARM_DESHGLESH, -- 96.763 -0.047 319.781
+    [ID.mob.THOUSANDARM_DESHGLESH - 2] = ID.mob.THOUSANDARM_DESHGLESH, -- 82.000 -0.500 366.000
+}
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.THOUSANDARM_DESHGLESH_PH, 5, 3600) -- 1 hour minimum
+    xi.mob.phOnDespawn(mob, thousandarmPHTable, 5, 3600) -- 1 hour minimum
 end
 
 return entity
