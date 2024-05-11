@@ -38,7 +38,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-            not player:hasKeyItem(xi.ki.GAUNTLET_CHALLENGE_KUPON)
+                not player:hasKeyItem(xi.ki.GAUNTLET_CHALLENGE_KUPON)
         end,
 
         [xi.zone.CASTLE_ZVAHL_BAILEYS] =
@@ -65,11 +65,11 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-            (mission:getVar(player, 'progress') == 1 or
-            currentMission > mission.missionId) and
-            not player:hasKeyItem(xi.ki.POCKET_MOGBOMB) and
-            not player:hasKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON) and
-            player:needToZone() == false
+                (mission:getVar(player, 'progress') == 1 or
+                currentMission > mission.missionId) and
+                not player:hasKeyItem(xi.ki.POCKET_MOGBOMB) and
+                not player:hasKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON) and
+                player:needToZone() == false
         end,
 
         [xi.zone.BEAUCEDINE_GLACIER] =
@@ -100,10 +100,10 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-            mission:getVar(player, 'progress') == 1 and
-            not player:hasKeyItem(xi.ki.POCKET_MOGBOMB) and
-            not player:hasKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON) and
-            player:needToZone() == true
+                mission:getVar(player, 'progress') == 1 and
+                not player:hasKeyItem(xi.ki.POCKET_MOGBOMB) and
+                not player:hasKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON) and
+                player:needToZone() == true
         end,
 
         [xi.zone.BEAUCEDINE_GLACIER] =
@@ -248,8 +248,8 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-            mission:getVar(player, 'progress') == 1 and
-            player:hasKeyItem(xi.ki.POCKET_MOGBOMB)
+                mission:getVar(player, 'progress') == 1 and
+                player:hasKeyItem(xi.ki.POCKET_MOGBOMB)
         end,
 
         [xi.zone.BEAUCEDINE_GLACIER] =
@@ -284,8 +284,8 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-            mission:getVar(player, 'progress') == 2 and
-            player:hasKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON)
+                mission:getVar(player, 'progress') == 2 and
+                player:hasKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON)
         end,
 
         [xi.zone.BEAUCEDINE_GLACIER] =
@@ -342,8 +342,8 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-            mission:getVar(player, 'progress') == 3 and
-            player:hasKeyItem(xi.ki.GAUNTLET_CHALLENGE_KUPON)
+                mission:getVar(player, 'progress') == 3 and
+                player:hasKeyItem(xi.ki.GAUNTLET_CHALLENGE_KUPON)
         end,
 
         [xi.zone.XARCABARD] =
@@ -445,8 +445,8 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-            mission:getVar(player, 'progress') == 4 and
-            player:hasKeyItem(xi.ki.FESTIVAL_SOUVENIR_KUPON)
+                mission:getVar(player, 'progress') == 4 and
+                player:hasKeyItem(xi.ki.FESTIVAL_SOUVENIR_KUPON)
         end,
 
         [xi.zone.CASTLE_ZVAHL_BAILEYS] =

@@ -89,8 +89,8 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-            missionStatus == 0 and
-            not player:hasKeyItem(xi.ki.RIPE_STARFRUIT)
+                missionStatus == 0 and
+                not player:hasKeyItem(xi.ki.RIPE_STARFRUIT)
         end,
 
         [xi.zone.WINDURST_WALLS] =
