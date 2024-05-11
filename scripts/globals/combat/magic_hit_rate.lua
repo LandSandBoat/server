@@ -389,24 +389,34 @@ end
 -----------------------------------
 
 xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, spellElement, magicHitRate, rankModifier)
-    local targetResistRate = 0 -- The variable we return.
-    local targetResistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
+    local targetResistRate = 1 -- The variable we return.
 
     ----------------------------------------
     -- Handle 'Magic Shield' status effect.
     ----------------------------------------
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
+        return 0
+    end
+
+    ----------------------------------------
+    -- Handle non elemental magic or user error.
+    ----------------------------------------
+    if
+        not spellElement or                -- You shouldnt be using this function.
+        spellElement <= xi.element.NONE or -- Non elemental magic (ex. Player Meteor) cannot be resisted.
+        spellElement > xi.element.DARK     -- That's not even an element.
+    then
         return targetResistRate
     end
 
     ----------------------------------------
     -- Handle target resistance rank.
     ----------------------------------------
+    local targetResistRank = target:getMod(xi.combat.element.resistRankMod[spellElement]) or 0
+
     -- Elemental resistance rank.
-    if spellElement ~= xi.element.NONE then
-        if targetResistRank > 4 then
-            targetResistRank = utils.clamp(targetResistRank - rankModifier, 4, 11)
-        end
+    if targetResistRank > 4 then
+        targetResistRank = utils.clamp(targetResistRank - rankModifier, 4, 11)
     end
 
     -- Skillchains lowers target resistance rank by 1.
