@@ -21,6 +21,7 @@ zones[xi.zone.LABYRINTH_OF_ONZOZO] =
         CONQUEST_BASE                 = 7061,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET        = 7220,  -- You can't fish here.
         CHEST_UNLOCKED                = 7328,  -- You unlock the chest!
+        NEST_OF_LARGE_BIRD            = 7336,  -- It looks like the nest of a very large bird.
         SENSE_OMINOUS_PRESENCE        = 7344,  -- You sense an ominous presence...
         REGIME_REGISTERED             = 9400,  -- New training regime registered!
         PLAYER_OBTAINS_ITEM           = 10452, -- <name> obtains <item>!

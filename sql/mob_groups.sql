@@ -10225,6 +10225,7 @@ INSERT INTO `mob_groups` VALUES (64,0,144,'Naji',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (65,0,144,'Naji',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (66,0,144,'Kupipi',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (67,0,144,'Excenmille',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (68,304,144,'Ayakashi',0,128,0,2400,0,66,67,0);
 
 -- ------------------------------------------------------------
 -- Giddeus (Zone 145)
