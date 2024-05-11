@@ -371,7 +371,7 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
             bonus     = 50 - target:getMod(xi.mod.GRAVITYRES),
         }
 
-        local resistRate = applyResistance(player, target, spell, params)
+        local resistRate = applyResistanceEffect(player, target, spell, params)
         if resistRate > 0.25 then
             target:delStatusEffectSilent(xi.effect.WEIGHT)
             target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60 * resistRate)
@@ -421,7 +421,7 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
         local cRatio, _ = xi.weaponskills.cMeleeRatio(player, target, params, 0, 1000)
         local dmg       = baseDmg * xi.weaponskills.generatePdif(cRatio[1], cRatio[2], true)
 
-        if applyResistance(player, target, spell, params) > 0.25 then
+        if applyResistanceEffect(player, target, spell, params) > 0.25 then
             target:addStatusEffect(xi.effect.STUN, 1, 0, 2)
         else
             ability:setMsg(xi.msg.basic.JA_DAMAGE)

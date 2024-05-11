@@ -27,7 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local duration = 30
     local returnEffect = xi.effect.BLINDNESS
 
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = applyResistanceEffect(caster, target, spell, params)
     if resist >= 0.5 then
 
         spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE) -- this doesn't seem to do much

@@ -21,7 +21,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.SINGING
     params.bonus = 0
     params.effect = nil
-    local resm = applyResistance(caster, target, spell, params)
+    local resm = applyResistanceEffect(caster, target, spell, params)
     if resm < 0.5 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST) -- resist message
         return 1
@@ -53,13 +53,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     -- Try to overwrite weaker slow / haste
-    if canOverwrite(target, effect, power) then
-        -- overwrite them
-        target:delStatusEffect(effect)
-        target:addStatusEffect(effect, power, 3, duration)
+    if target:addStatusEffect(effect, power, 3, duration) then
         spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
     else
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
     return effect
