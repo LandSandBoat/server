@@ -582,7 +582,7 @@ void CMobController::DoCombatTick(time_point tick)
         PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", CLuaBaseEntity(PMob));
         luautils::OnMobFight(PMob, PTarget);
 
-        if (PMob->PAI->IsCurrentState<CInactiveState>())
+        if (PMob->PAI->IsCurrentState<CInactiveState>() || !PMob->PAI->CanChangeState())
         {
             return;
         }
