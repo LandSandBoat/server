@@ -6061,7 +6061,7 @@ namespace battleutils
 
     void AddTraits(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level)
     {
-        CCharEntity* PChar = PEntity->objtype == TYPE_PC ? static_cast<CCharEntity*>(PEntity) : nullptr;
+        auto* PChar = dynamic_cast<CCharEntity*>(PEntity);
 
         for (auto&& PTrait : *traitList)
         {
