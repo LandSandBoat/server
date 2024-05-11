@@ -33,20 +33,9 @@ zones[xi.zone.EAST_RONFAURE_S] =
 
     mob =
     {
-        GOBLINTRAP_PH =
-        {
-            [17109295] = 17109296, -- 156 0 -438
-        },
-
-        SKOGS_FRU_PH =
-        {
-            [17109268] = 17109338,
-            [17109306] = 17109338,
-            [17109307] = 17109338,
-            [17109308] = 17109338,
-        },
-
-        MYRADROSH    = 17109235,
+        GOBLINTRAP = GetFirstID('Goblintrap'),
+        SKOGS_FRU  = GetFirstID('Skogs_Fru'),
+        MYRADROSH  = GetFirstID('Myradrosh'),
 
         VOIDWALKER =
         {

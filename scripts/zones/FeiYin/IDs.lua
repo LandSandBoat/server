@@ -44,42 +44,22 @@ zones[xi.zone.FEIYIN] =
     },
     mob =
     {
-        MIND_HOARDER_PH =
-        {
-            [17612856] = 17612859,
-            [17612857] = 17612859,
-            [17612858] = 17612859,
-        },
-        GOLIATH_PH  =
-        {
-            [17613052] = 17613045,
-        },
-        NORTHERN_SHADOW_PH  =
-        {
-            [17613098] = 17613102, -- -159.000 -16.000 146.000
-        },
-        EASTERN_SHADOW_PH   =
-        {
-            [17613107] = 17613109, -- -86.000 -15.000 152.000
-        },
-        SOUTHERN_SHADOW_PH  =
-        {
-            [17613117] = 17613120, -- -169.000 -16.000 87.000
-        },
-        WESTERN_SHADOW_PH   =
-        {
-            [17613094] = 17613095, -- -204.000 -15.000 118.000
-        },
-        ALTEDOUR_I_TAVNAZIA = 17612836,
-        MISER_MURPHY        = 17612849,
-        DABOTZS_GHOST       = 17613128,
-        CAPRICIOUS_CASSIE   = 17613129,
+        MIND_HOARDER        = GetFirstID('Mind_Hoarder'),
+        GOLIATH             = GetFirstID('Goliath'),
+        NORTHERN_SHADOW     = GetFirstID('Northern_Shadow'),
+        EASTERN_SHADOW      = GetFirstID('Eastern_Shadow'),
+        SOUTHERN_SHADOW     = GetFirstID('Southern_Shadow'),
+        WESTERN_SHADOW      = GetFirstID('Western_Shadow'),
+        ALTEDOUR_I_TAVNAZIA = GetFirstID('Altedour_I_Tavnazia'),
+        MISER_MURPHY        = GetFirstID('Miser_Murphy'),
+        DABOTZS_GHOST       = GetFirstID('Dabotzs_Ghost'),
+        CAPRICIOUS_CASSIE   = GetFirstID('Capricious_Cassie'),
     },
     npc =
     {
-        AFTERGRLOW_OFFSET       = 17613147,
+        AFTERGRLOW_OFFSET       = GetFirstID('Seed_Afterglow'),
         TREASURE_CHEST          = GetFirstID('Treasure_Chest'),
-        UNDERGROUND_POOL_OFFSET = 17613247,
+        UNDERGROUND_POOL_OFFSET = GetFirstID('Underground_Pool'),
     },
 }
 
