@@ -25,7 +25,7 @@ quest.sections =
                 not quest:getMustZone(player) and
                 player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST) and
                 player:getMainJob() == xi.job.MNK and
-                player:getMainLvl() >= 50
+                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
         end,
 
         [xi.zone.PORT_BASTOK] =

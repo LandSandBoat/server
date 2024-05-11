@@ -26,6 +26,7 @@ quest.sections =
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH) and
                 player:getMainJob() == xi.job.WAR and
+                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL and
                 quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
                 not quest:getMustZone(player)
         end,
