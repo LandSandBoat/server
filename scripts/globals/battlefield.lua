@@ -1071,7 +1071,7 @@ function Battlefield:onBattlefieldWin(player, battlefield)
     local _, clearTime, partySize = battlefield:getRecord()
 
     player:setLocalVar('battlefieldWin', battlefield:getID())
-    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, 0)
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), player:getZoneID(), self.index, 0)
 end
 
 function Battlefield:onBattlefieldLoss(player, battlefield)
@@ -1328,7 +1328,7 @@ function BattlefieldMission:onBattlefieldWin(player, battlefield)
     local _, clearTime, partySize = battlefield:getRecord()
     local canSkipCS               = (current ~= self.mission) and 1 or 0
 
-    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), player:getZoneID(), self.index, canSkipCS)
 end
 
 function BattlefieldMission:onEventFinishWin(player, csid, option, npc)
@@ -1389,7 +1389,7 @@ function BattlefieldQuest:onBattlefieldWin(player, battlefield)
     local _, clearTime, partySize = battlefield:getRecord()
     local canSkipCS               = status ~= xi.questStatus.QUEST_ACCEPTED and 1 or 0
 
-    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), player:getZoneID(), self.index, canSkipCS)
 end
 
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
