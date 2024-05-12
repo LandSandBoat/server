@@ -214,6 +214,7 @@ namespace luautils
         lua.set_function("GetMobRespawnTime", &luautils::GetMobRespawnTime);
         lua.set_function("DisallowRespawn", &luautils::DisallowRespawn);
         lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
+        lua.set_function("GetRecentFishers", &luautils::GetRecentFishers);
         lua.set_function("NearLocation", &luautils::NearLocation);
         lua.set_function("GetFurthestValidPosition", &luautils::GetFurthestValidPosition);
         lua.set_function("Terminate", &luautils::Terminate);
@@ -5089,6 +5090,45 @@ namespace luautils
 
         ShowError("luautils::GetMobAction: mob <%u> was not found", mobid);
         return 0;
+    }
+
+    /************************************************************************
+     *   Gets a list of players that have fished in the last specified mins *
+     *   where the specified param is between 1 and 60 mins                 *
+     ************************************************************************/
+
+    sol::table GetRecentFishers(uint16 minutes)
+    {
+        // limit the lookback time to prevent huge queries
+        uint16 lookbackTime = std::clamp<uint32>(minutes, 1, 60);
+
+        sol::table  fishers = lua.create_table();
+        const char* Query   = "SELECT cv.charid, c.charname, stats.mlvl, z.name, COALESCE(cs.value, 0) / 10 as skill "
+                              "FROM char_vars cv "
+                              "LEFT JOIN chars c ON c.charid  = cv.charid "
+                              "LEFT JOIN char_skills cs ON cs.charid = cv.charid AND cs.skillid = 48 "
+                              "INNER JOIN char_stats stats ON stats.charid = c.charid "
+                              "INNER JOIN zone_settings z ON z.zoneid = c.pos_zone "
+                              "WHERE "
+                              "varname = '[Fish]LastCastTime' AND "
+                              "FROM_UNIXTIME(cv.value) > NOW() - INTERVAL %u MINUTE "
+                              "ORDER BY z.name, z.name, stats.mlvl, skill";
+
+        if (_sql->Query(Query, lookbackTime) != SQL_ERROR && _sql->NumRows() != 0)
+        {
+            while (_sql->NextRow() == SQL_SUCCESS)
+            {
+                auto fisher          = lua.create_table();
+                auto charId          = _sql->GetUIntData(0);
+                fisher["playerName"] = _sql->GetStringData(1);
+                fisher["jobLevel"]   = _sql->GetUIntData(2);
+                fisher["zoneName"]   = _sql->GetStringData(3);
+                fisher["skill"]      = _sql->GetUIntData(4);
+                fishers[charId]      = fisher;
+            }
+        }
+
+        return fishers;
     }
 
     std::string GetServerMessage(uint8 language)
