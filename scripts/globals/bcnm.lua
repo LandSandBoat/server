@@ -563,10 +563,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
         end,
 
-        [128] = function() -- ZM4: The Temple of Uggalepih
-            return zilartMission == xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH
-        end,
-
         [163] = function() -- Quest: Survival of the Wisest (SCH LB5)
             return mainJob == xi.job.SCH and mainLevel >= 66
         end,
