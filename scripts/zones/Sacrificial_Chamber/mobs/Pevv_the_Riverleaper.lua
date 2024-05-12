@@ -20,7 +20,10 @@ entity.onMobFight = function(mob, target)
     local mobId = mob:getID()
     local pet   = GetMobByID(mobId + 2)
 
-    if pet:getCurrentAction() == xi.act.ROAMING then
+    if
+        pet:isSpawned() and
+        pet:getCurrentAction() == xi.act.ROAMING
+    then
         pet:updateEnmity(target)
     end
 end
