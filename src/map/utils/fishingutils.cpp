@@ -1496,7 +1496,7 @@ namespace fishingutils
 
         if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0)
         {
-            CItemFish* Fish = dynamic_cast<CItemFish*>(itemutils::GetItem(FishID));
+            CItemFish* Fish = GetFish(FishID);
 
             if (Fish == nullptr)
             {
@@ -2883,6 +2883,18 @@ namespace fishingutils
 
             break;
         }
+    }
+
+    CItemFish* GetFish(uint16 itemid)
+    {
+        CItem* PItem = itemutils::GetItemPointer(itemid);
+
+        if (PItem && FishList[itemid])
+        {
+            // CItemFish constructor uses `const CItem&` input so this is ok
+            return new CItemFish(*PItem);
+        }
+        return nullptr;
     }
 
     /************************************************************************
