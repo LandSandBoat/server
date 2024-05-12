@@ -26,7 +26,7 @@ quest.sections =
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL) == xi.questStatus.QUEST_COMPLETED and
                 player:getMainJob() == xi.job.RDM and
-                player:getMainLvl() >= 50
+                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
         end,
 
         [xi.zone.CHATEAU_DORAGUILLE] =

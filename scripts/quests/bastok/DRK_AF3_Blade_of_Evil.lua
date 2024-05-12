@@ -23,7 +23,8 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.DARK_PUPPET) and
-                player:getMainJob() == xi.job.DRK
+                player:getMainJob() == xi.job.DRK and
+                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL
         end,
 
         [xi.zone.BEADEAUX] =

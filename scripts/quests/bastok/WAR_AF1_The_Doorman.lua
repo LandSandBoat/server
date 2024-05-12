@@ -24,7 +24,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.WAR and
-                player:getMainLvl() >= 40
+                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL
         end,
 
         [xi.zone.BASTOK_MINES] =

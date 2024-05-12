@@ -25,7 +25,7 @@ quest.sections =
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_DOORMAN) and
                 player:getMainJob() == xi.job.WAR and
-                player:getMainLvl() >= 50
+                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
         end,
 
         [xi.zone.BASTOK_MINES] =
