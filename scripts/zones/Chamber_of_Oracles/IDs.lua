@@ -45,6 +45,7 @@ zones[xi.zone.CHAMBER_OF_ORACLES] =
     },
     mob =
     {
+        CENTURIO_V_III = GetFirstID('Centurio_V-III'),
     },
     npc =
     {

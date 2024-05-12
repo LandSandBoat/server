@@ -567,10 +567,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SCH and mainLevel >= 66
         end,
 
-        [192] = function() -- ZM6: Through the Quicksand Caves
-            return zilartMission == xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES
-        end,
-
         [194] = function() -- Quest: Shattering Stars (SAM LB5)
             return mainJob == xi.job.SAM and mainLevel >= 66
         end,
@@ -1158,10 +1154,6 @@ local function checkSkip(player, bfid)
                     bastokMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and
                     nationStatus > 4
                 )
-        end,
-
-        [192] = function() -- ZM6: Through the Quicksand Caves
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)
         end,
 
         [224] = function() -- Quest: The Moonlit Path
