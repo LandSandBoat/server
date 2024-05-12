@@ -96,7 +96,7 @@ local pTable =
 
     -- Flurry
     [xi.magic.spell.FLURRY       ] = { 1, xi.effect.FLURRY,        48,   15,  180, true,  false, 0 },
-    [xi.magic.spell.FLURRY_II    ] = { 2, xi.effect.FLURRY_II,     96,   30,  180, true,  false, 0 },
+    [xi.magic.spell.FLURRY_II    ] = { 2, xi.effect.FLURRY,        96,   30,  180, true,  false, 0 },
     -- Foil
     [xi.magic.spell.FOIL         ] = { 1, xi.effect.FOIL,          58,  150,   30, true,  false, 3 },
 
@@ -521,6 +521,20 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
             if target:hasStatusEffect(effectValue) then
                 target:delStatusEffect(effectValue)
             end
+        end
+    -- Haste
+    elseif spellEffect == xi.effect.HASTE then
+        -- Haste overwrites Flurry
+        if target:hasStatusEffect(xi.effect.FLURRY) then
+            target:delStatusEffect(xi.effect.FLURRY)
+        end
+    -- Flurry
+    elseif
+        spellEffect == xi.effect.FLURRY
+    then
+        -- Flurry overwrites Haste
+        if target:hasStatusEffect(xi.effect.HASTE) then
+            target:delStatusEffect(xi.effect.HASTE)
         end
     end
 
