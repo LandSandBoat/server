@@ -252,6 +252,16 @@ auto CLuaItem::getSignature() -> std::string
     return signature;
 }
 
+uint8 CLuaItem::getCurrentCharges()
+{
+    if (auto* PUsableItem = dynamic_cast<CItemUsable*>(m_PLuaItem))
+    {
+        return PUsableItem->getCurrentCharges();
+    }
+
+    return 0;
+}
+
 uint8 CLuaItem::getAppraisalID()
 {
     return m_PLuaItem->m_extra[0x16];
@@ -353,6 +363,7 @@ void CLuaItem::Register()
     SOL_REGISTER("getSignature", CLuaItem::getSignature);
     SOL_REGISTER("getAppraisalID", CLuaItem::getAppraisalID);
     SOL_REGISTER("setAppraisalID", CLuaItem::setAppraisalID);
+    SOL_REGISTER("getCurrentCharges", CLuaItem::getCurrentCharges);
     SOL_REGISTER("isInstalled", CLuaItem::isInstalled);
     SOL_REGISTER("setSoulPlateData", CLuaItem::setSoulPlateData);
     SOL_REGISTER("getSoulPlateData", CLuaItem::getSoulPlateData);
