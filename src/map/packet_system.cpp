@@ -1499,6 +1499,29 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
         if (ToSlotID < 82) // 80 + 1
         {
             ShowDebug("SmallPacket0x29: Trying to unite items", FromLocationID, FromSlotID);
+            CItem* PItem2 = PChar->getStorage(ToLocationID)->GetItem(ToSlotID);
+
+            if ((PItem2 != nullptr) && (PItem2->getID() == PItem->getID()) && (PItem2->getQuantity() < PItem2->getStackSize()) &&
+                !PItem2->isSubType(ITEM_LOCKED) && (PItem2->getReserve() == 0))
+            {
+                uint32 totalQty = PItem->getQuantity() + PItem2->getQuantity();
+                uint32 moveQty  = 0;
+
+                if (totalQty >= PItem2->getStackSize())
+                {
+                    moveQty = PItem2->getStackSize() - PItem2->getQuantity();
+                }
+                else
+                {
+                    moveQty = PItem->getQuantity();
+                }
+                if (moveQty > 0)
+                {
+                    charutils::UpdateItem(PChar, ToLocationID, ToSlotID, moveQty);
+                    charutils::UpdateItem(PChar, FromLocationID, FromSlotID, -(int32)moveQty);
+                }
+            }
+
             return;
         }
 
