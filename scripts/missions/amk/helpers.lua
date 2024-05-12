@@ -35,9 +35,9 @@ xi.amk.helpers.helmTrade = function(player, helmType, broke)
     local regionId = player:getCurrentRegion()
     local helmMapping =
     {
-        [xi.helm.type.MINING] = xi.ki.STURDY_METAL_STRIP,
-        [xi.helm.type.LOGGING] = xi.ki.PIECE_OF_RUGGED_TREE_BARK,
-        [xi.helm.type.HARVESTING] = xi.ki.SAVORY_LAMB_ROAST,
+        [xi.helmType.MINING] = xi.ki.STURDY_METAL_STRIP,
+        [xi.helmType.LOGGING] = xi.ki.PIECE_OF_RUGGED_TREE_BARK,
+        [xi.helmType.HARVESTING] = xi.ki.SAVORY_LAMB_ROAST,
     }
 
     if
