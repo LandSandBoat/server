@@ -531,7 +531,6 @@ local function checkReqs(player, npc, bfid, registrant)
 
     local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
     local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
-    local zilartMission    = player:getCurrentMission(xi.mission.log_id.ZILART)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
     local toauMission      = player:getCurrentMission(xi.mission.log_id.TOAU)
 --  local acpMission       = player:getCurrentMission(xi.mission.log_id.ACP) NOTE: UNUSED Until BCNMID 532 is Re-enabled
@@ -585,10 +584,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [225] = function() -- Windurst 9-2: Moon Reading
             return windurstMission == xi.mission.id.windurst.MOON_READING and
                 nationStatus == 2
-        end,
-
-        [320] = function() -- ZM16: The Celestial Nexus
-            return zilartMission == xi.mission.id.zilart.THE_CELESTIAL_NEXUS
         end,
 
         [416] = function() -- Quest: Trial by Wind
@@ -1161,10 +1156,6 @@ local function checkSkip(player, bfid)
                     windurstMission == xi.mission.id.windurst.MOON_READING and
                     nationStatus > 4
                 )
-        end,
-
-        [320] = function() -- ZM16: The Celestial Nexus
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS)
         end,
 
         [416] = function() -- Quest: Trial by Wind
