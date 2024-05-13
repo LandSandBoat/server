@@ -28,6 +28,7 @@ zones[xi.zone.STELLAR_FULCRUM] =
     },
     mob =
     {
+        KAMLANAUT = GetFirstID('Kamlanaut'),
     },
     npc =
     {

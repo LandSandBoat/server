@@ -538,7 +538,6 @@ local function checkReqs(player, npc, bfid, registrant)
     local asaMission       = player:getCurrentMission(xi.mission.log_id.ASA)
 
     local nationStatus    = player:getMissionStatus(player:getNation())
-    local zilartStatus    = player:getMissionStatus(xi.mission.log_id.ZILART)
     local promathiaStatus = player:getCharVar('PromathiaStatus')
     local toauStatus      = player:getMissionStatus(xi.mission.log_id.TOAU)
 
@@ -586,11 +585,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [225] = function() -- Windurst 9-2: Moon Reading
             return windurstMission == xi.mission.id.windurst.MOON_READING and
                 nationStatus == 2
-        end,
-
-        [256] = function() -- ZM8: Return to Delkfutt's Tower
-            return zilartMission == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and
-                zilartStatus == 2
         end,
 
         [320] = function() -- ZM16: The Celestial Nexus
@@ -1167,10 +1161,6 @@ local function checkSkip(player, bfid)
                     windurstMission == xi.mission.id.windurst.MOON_READING and
                     nationStatus > 4
                 )
-        end,
-
-        [256] = function() -- ZM8: Return to Delkfutt's Tower
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
         end,
 
         [320] = function() -- ZM16: The Celestial Nexus
