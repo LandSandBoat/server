@@ -7,6 +7,18 @@ mixins = { require('scripts/mixins/families/maat') }
 -----------------------------------
 local entity = {}
 
+entity.onMobFight = function(mob, target)
+    local mobId = mob:getID()
+    local pet   = GetMobByID(mobId + 1)
+
+    if
+        pet:isSpawned() and
+        pet:getCurrentAction() == xi.act.ROAMING
+    then
+        pet:updateEnmity(target)
+    end
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

@@ -154,13 +154,13 @@ xi.battlefield.id =
     KINDRED_SPIRITS                            = 162,
     SURVIVAL_OF_THE_WISEST                     = 163,
     SMASH_A_MALEVOLENT_MENACE                  = 164,
-    THROUGH_THE_QUICKSAND_CAVES                = 192,
-    LEGION_XI_COMITATENSIS                     = 193,
-    SHATTERING_STARS_SAM                       = 194,
-    SHATTERING_STARS_NIN                       = 195,
-    SHATTERING_STARS_DRG                       = 196,
+    THROUGH_THE_QUICKSAND_CAVES                = 192, -- Converted
+    LEGION_XI_COMITATENSIS                     = 193, -- Converted
+    SHATTERING_STARS_SAM                       = 194, -- Converted
+    SHATTERING_STARS_NIN                       = 195, -- Converted
+    SHATTERING_STARS_DRG                       = 196, -- Converted
     CACTUAR_SUAVE                              = 197,
-    EYE_OF_THE_STORM                           = 198,
+    EYE_OF_THE_STORM                           = 198, -- Converted
     SCARLET_KING                               = 199,
     CAT_BURGLAR_BARES_FANGS                    = 200,
     DRAGON_SCALES                              = 201,
@@ -1071,7 +1071,7 @@ function Battlefield:onBattlefieldWin(player, battlefield)
     local _, clearTime, partySize = battlefield:getRecord()
 
     player:setLocalVar('battlefieldWin', battlefield:getID())
-    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, 0)
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), player:getZoneID(), self.index, 0)
 end
 
 function Battlefield:onBattlefieldLoss(player, battlefield)
@@ -1328,7 +1328,7 @@ function BattlefieldMission:onBattlefieldWin(player, battlefield)
     local _, clearTime, partySize = battlefield:getRecord()
     local canSkipCS               = (current ~= self.mission) and 1 or 0
 
-    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), player:getZoneID(), self.index, canSkipCS)
 end
 
 function BattlefieldMission:onEventFinishWin(player, csid, option, npc)
@@ -1389,7 +1389,7 @@ function BattlefieldQuest:onBattlefieldWin(player, battlefield)
     local _, clearTime, partySize = battlefield:getRecord()
     local canSkipCS               = status ~= xi.questStatus.QUEST_ACCEPTED and 1 or 0
 
-    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), player:getZoneID(), self.index, canSkipCS)
 end
 
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
