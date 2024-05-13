@@ -18,10 +18,10 @@ zones[xi.zone.WALK_OF_ECHOES] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         CANNOT_PROGRESS_MISSION       = 7047, -- ou are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
         CANNOT_PROGRESS_QUEST         = 7048, -- ou are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the quest [Champion of the Dawn/A Forbidden Reunion].
-        PARTY_MEMBERS_HAVE_FALLEN     = 7651, -- All party members have fallen in battle. Now leaving the battlefield.
-        THE_PARTY_WILL_BE_REMOVED     = 7658, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        GATHERED_DAWNDROPS_LIGHT      = 7971, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
-        RETRACED_ALL_JUNCTIONS        = 7972, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
+        PARTY_MEMBERS_HAVE_FALLEN     = 7654, -- All party members have fallen in battle. Now leaving the battlefield.
+        THE_PARTY_WILL_BE_REMOVED     = 7661, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        GATHERED_DAWNDROPS_LIGHT      = 7974, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
+        RETRACED_ALL_JUNCTIONS        = 7975, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
     },
     mob =
     {

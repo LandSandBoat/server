@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
     if not player:hasKeyItem(xi.ki.MAP_OF_PROMYVION_DEM) then
         player:messageSpecial(ID.text.EERIE_GREEN_GLOW)
     else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY_MAP)
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
 
