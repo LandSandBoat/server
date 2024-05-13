@@ -1020,7 +1020,7 @@ namespace charutils
                             "WHERE charid = (?)";
 
         auto rset = db::preparedStmt(Query, PChar->id);
-        if (rset && rset->rowsCount())
+        if (rset)
         {
             // equipSlotData[equipSlotId] = { slotId, containerId }
             std::unordered_map<uint8, std::pair<uint8, uint8>> equipSlotData;
