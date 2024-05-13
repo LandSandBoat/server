@@ -18,14 +18,14 @@ zones[xi.zone.GIDDEUS] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7061, -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET        = 7220, -- You can't fish here.
-        OFFERED_UP_KEY_ITEM           = 7345, -- Offered up key item: <keyitem>!
-        SPRING_FILL_UP                = 7366, -- You fill your flask with water.
-        SPRING_DEFAULT                = 7367, -- Sparkling clear water bubbles up from the ground. If you have a container, you can fill it here.
-        CHEST_UNLOCKED                = 7417, -- You unlock the chest!
-        HARVESTING_IS_POSSIBLE_HERE   = 7425, -- Harvesting is possible here if you have <item>.
-        HOMEPOINT_SET                 = 7453, -- Home point set!
+        CONQUEST_BASE                 = 7064, -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET        = 7223, -- You can't fish here.
+        OFFERED_UP_KEY_ITEM           = 7348, -- Offered up key item: <keyitem>!
+        SPRING_FILL_UP                = 7369, -- You fill your flask with water.
+        SPRING_DEFAULT                = 7370, -- Sparkling clear water bubbles up from the ground. If you have a container, you can fill it here.
+        CHEST_UNLOCKED                = 7420, -- You unlock the chest!
+        HARVESTING_IS_POSSIBLE_HERE   = 7428, -- Harvesting is possible here if you have <item>.
+        HOMEPOINT_SET                 = 7456, -- Home point set!
     },
     mob =
     {
