@@ -33,46 +33,20 @@ zones[xi.zone.DEN_OF_RANCOR] =
     },
     mob =
     {
-        CELESTE_EYED_TOZBERRY_PH =
-        {
-            [17432622] = 17432624,
-        },
-        FRIAR_RUSH_PH =
-        {
-            [17432638] = 17432640,
-        },
-        CARMINE_TAILED_JANBERRY_PH =
-        {
-            [17432661] = 17432659,
-            [17432662] = 17432659,
-        },
-        TAWNY_FINGERED_MUGBERRY_PH =
-        {
-            [17432784] = 17432798,
-            [17432785] = 17432798,
-            [17432787] = 17432798,
-            [17432788] = 17432798,
-            [17432793] = 17432798,
-            [17432794] = 17432798,
-        },
-        BISTRE_HEARTED_MALBERRY_PH =
-        {
-            [17432822] = 17432845,
-        },
-        OGAMA_PH =
-        {
-            [17432972] = 17432974,
-            [17432978] = 17432974,
-            [17432979] = 17432974,
-        },
-        MIMIC       = 17432583,
-        HAKUTAKU    = 17433005,
-        MOKUMOKUREN = 17433006,
+        CELESTE_EYED_TOZBERRY   = GetFirstID('Celeste-eyed_Tozberry'),
+        FRIAR_RUSH              = GetFirstID('Friar_Rush'),
+        CARMINE_TAILED_JANBERRY = GetFirstID('Carmine-tailed_Janberry'),
+        TAWNY_FINGERED_MUGBERRY = GetFirstID('Tawny-fingered_Mugberry'),
+        BISTRE_HEARTED_MALBERRY = GetFirstID('Bistre-hearted_Malberry'),
+        OGAMA                   = GetFirstID('Ogama'),
+        MIMIC                   = GetFirstID('Mimic'),
+        HAKUTAKU                = GetFirstID('Hakutaku'),
+        MOKUMOKUREN             = GetFirstID('Mokumokuren'),
     },
     npc =
     {
-        LANTERN_OFFSET  = 17433048,
-        DROP_GATE       = 17433052,
+        LANTERN_OFFSET  = GetFirstID('_4g3'),
+        DROP_GATE       = GetFirstID('_4g0'),
         TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
     },
 }
