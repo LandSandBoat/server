@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/ai_container.h"
 #include "ai/helpers/targetfind.h"
 #include "ai/states/ability_state.h"
+#include "ai/states/attack_state.h"
 #include "ai/states/inactive_state.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/weaponskill_state.h"
@@ -796,25 +797,71 @@ void CMobController::HandleEnmity()
 {
     TracyZoneScoped;
     PMob->PEnmityContainer->DecayEnmity();
+    auto* PHighestEnmityTarget{ PMob->PEnmityContainer->GetHighestEnmity() };
+
     if (PMob->getMobMod(MOBMOD_SHARE_TARGET) > 0 && PMob->GetEntity(PMob->getMobMod(MOBMOD_SHARE_TARGET), TYPE_MOB))
     {
         ChangeTarget(static_cast<CMobEntity*>(PMob->GetEntity(PMob->getMobMod(MOBMOD_SHARE_TARGET), TYPE_MOB))->GetBattleTargetID());
 
         if (!PMob->GetBattleTargetID())
         {
-            auto* PTarget{ PMob->PEnmityContainer->GetHighestEnmity() };
-            if (PTarget)
+            if (PHighestEnmityTarget)
             {
-                ChangeTarget(PTarget ? PTarget->targid : 0);
+                ChangeTarget(PHighestEnmityTarget->targid);
             }
         }
     }
     else
     {
-        auto* PTarget{ PMob->PEnmityContainer->GetHighestEnmity() };
+        if (PHighestEnmityTarget)
+        {
+            ChangeTarget(PHighestEnmityTarget->targid);
+        }
+    }
+
+    // Bind special case
+    // Target the closest person on hate list with enmity
+    // TODO: do mobs with bind attack players *without* enmity if they are in the same party?
+    // TODO: do jug pets do this?
+    // TODO: This code is assuming charmed mobs can do this -- they DO keep an enmity table, after all..
+    if (PMob->objtype == TYPE_MOB && PMob->StatusEffectContainer && PMob->StatusEffectContainer->HasStatusEffect(EFFECT::EFFECT_BIND) && PMob->PAI->IsCurrentState<CAttackState>())
+    {
+        CBattleEntity*                PNewTarget = nullptr;
+        std::unique_ptr<CBasicPacket> m_errorMsg; // Ignored
+        if (PTarget && !PMob->CanAttack(PTarget, m_errorMsg) && PMob->PEnmityContainer)
+        {
+            float minDistance = 999999;
+            int32 totalEnmity = -1;
+
+            auto enmityList = PMob->PEnmityContainer->GetEnmityList();
+            for (auto enmityItem : *enmityList)
+            {
+                const EnmityObject_t& enmityObject = enmityItem.second;
+                CBattleEntity*        PEnmityOwner = enmityObject.PEnmityOwner;
+
+                // Check total enmity first
+                if (PEnmityOwner && (enmityObject.CE + enmityObject.VE) > totalEnmity)
+                {
+                    float targetDistance = distance(PEnmityOwner->loc.p, PMob->loc.p);
+
+                    if (targetDistance < minDistance && PMob->CanAttack(PEnmityOwner, m_errorMsg))
+                    {
+                        minDistance = targetDistance;
+                        totalEnmity = enmityObject.CE + enmityObject.VE;
+                        PNewTarget  = PEnmityOwner;
+                    }
+                }
+            }
+        }
+
+        if (PNewTarget)
+        {
+            ChangeTarget(PNewTarget->targid);
+        }
+
         if (PTarget)
         {
-            ChangeTarget(PTarget->targid);
+            FaceTarget(PTarget->targid);
         }
     }
 }
