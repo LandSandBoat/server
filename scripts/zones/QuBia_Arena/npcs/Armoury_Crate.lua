@@ -6,45 +6,6 @@ local entity = {}
 
 local loot =
 {
-    -- BCNM Let Sleeping Dogs Die
-    [522] =
-    {
-        {
-            { itemid = xi.item.WOLF_HIDE, droprate = 1000 }, -- wolf_hide
-        },
-
-        {
-            { itemid = xi.item.REVIVAL_TREE_ROOT, droprate = 1000 }, -- revival_tree_root
-        },
-
-        {
-            { itemid = xi.item.NONE,            droprate = 100 }, -- nothing
-            { itemid = xi.item.MANNEQUIN_HEAD,  droprate = 300 }, -- mannequin_head
-            { itemid = xi.item.MANNEQUIN_BODY,  droprate = 300 }, -- mannequin_body
-            { itemid = xi.item.MANNEQUIN_HANDS, droprate = 300 }, -- mannequin_hands
-        },
-
-        {
-            { itemid = xi.item.NONE,                  droprate = 250 }, -- nothing
-            { itemid = xi.item.SCROLL_OF_ABSORB_AGI,  droprate = 125 }, -- scroll_of_absorb-agi
-            { itemid = xi.item.SCROLL_OF_ABSORB_INT,  droprate = 125 }, -- scroll_of_absorb-int
-            { itemid = xi.item.SCROLL_OF_ABSORB_VIT,  droprate = 125 }, -- scroll_of_absorb-vit
-            { itemid = xi.item.SCROLL_OF_ERASE,       droprate = 125 }, -- scroll_of_erase
-            { itemid = xi.item.SCROLL_OF_UTSUSEMI_NI, droprate = 125 }, -- scroll_of_utsusemi_ni
-            { itemid = xi.item.SCROLL_OF_DISPEL,      droprate = 125 }, -- scroll_of_dispel
-        },
-
-        {
-            { itemid = xi.item.NONE,             droprate = 100 }, -- nothing
-            { itemid = xi.item.SINGERS_SHIELD,   droprate = 150 }, -- singers_shield
-            { itemid = xi.item.WARLOCKS_SHIELD,  droprate = 150 }, -- warlocks_shield
-            { itemid = xi.item.MAGICIANS_SHIELD, droprate = 150 }, -- magicians_shield
-            { itemid = xi.item.ASHIGARU_MANTLE,  droprate = 150 }, -- ashigaru_mantle
-            { itemid = xi.item.WIZARDS_MANTLE,   droprate = 150 }, -- wizards_mantle
-            { itemid = xi.item.KILLER_MANTLE,    droprate = 150 }, -- killer_mantle
-        },
-    },
-
     -- BCNM Undying Promise
     [524] =
     {
