@@ -1941,7 +1941,7 @@ void CStatusEffectContainer::TickRegen(time_point tick)
 
         if (poison)
         {
-            int16 damage = battleutils::HandleStoneskin(m_POwner, poison);
+            int16 damage = battleutils::HandleStoneskin(m_POwner, poison, ATTACK_TYPE::MAGICAL);
 
             if (damage > 0)
             {

@@ -47,7 +47,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
 
     damage = damage * (pdif / 1000)
 
-    damage = utils.stoneskin(target, damage)
+    damage = utils.stoneskin(target, damage, xi.attackType.PHYSICAL)
     target:takeDamage(damage, automaton, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     target:updateEnmityFromDamage(automaton, damage)
     target:addEnmity(automaton, 450, 900)

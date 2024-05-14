@@ -427,7 +427,7 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
             ability:setMsg(xi.msg.basic.JA_DAMAGE)
         end
 
-        dmg = utils.stoneskin(target, dmg)
+        dmg = utils.stoneskin(target, dmg, xi.attackType.PHYSICAL)
         target:takeDamage(dmg, player, xi.attackType.PHYSICAL, player:getWeaponDamageType(xi.slot.MAIN))
         target:updateEnmityFromDamage(player, dmg)
 

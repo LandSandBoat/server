@@ -24,7 +24,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
         dmg = dmg + (dmg * 0.01 * dmgBoost)
     end
 
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.stoneskin(target, dmg, xi.attackType.MAGICAL)
 
     target:takeDamage(dmg, pet, xi.attackType.MAGICAL, xi.damageType.NONE)
 

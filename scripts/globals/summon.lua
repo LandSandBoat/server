@@ -372,7 +372,7 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
     end
 
     -- handling stoneskin
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.stoneskin(target, dmg, skilltype)
 
     return dmg
 end

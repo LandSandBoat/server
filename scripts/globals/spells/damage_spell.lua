@@ -1001,7 +1001,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
 
     -- Handle Stoneskin
     if finalDamage > 0 then
-        finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
+        finalDamage = utils.clamp(utils.stoneskin(target, finalDamage, xi.attackType.MAGICAL), -99999, 99999)
     end
 
     -- Handle Magic Absorb

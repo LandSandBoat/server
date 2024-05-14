@@ -732,7 +732,7 @@ namespace battleutils
         {
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
             damage = HandleOneForAll(PDefender, damage);
-            damage = HandleStoneskin(PDefender, damage);
+            damage = HandleStoneskin(PDefender, damage, ATTACK_TYPE::MAGICAL);
         }
 
         damage = std::clamp(damage, -99999, 99999);
@@ -845,7 +845,7 @@ namespace battleutils
             {
                 spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                 spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
-                spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
+                spikesDamage = HandleStoneskin(PAttacker, spikesDamage, ATTACK_TYPE::MAGICAL);
             }
 
             if (spikesDamage < 0) // because spikes damage in action packet is uint16, we have to change the healed amount to a positive number and cast to uint16
@@ -991,7 +991,7 @@ namespace battleutils
             {
                 spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                 spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
-                spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
+                spikesDamage = HandleStoneskin(PAttacker, spikesDamage, ATTACK_TYPE::MAGICAL);
             }
 
             if (spikesDamage < 0) // fit healed spikes into uint16
@@ -1044,7 +1044,7 @@ namespace battleutils
                 {
                     spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                     spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
-                    spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
+                    spikesDamage = HandleStoneskin(PAttacker, spikesDamage, ATTACK_TYPE::MAGICAL);
                 }
                 else if (spikesDamage < 0) // fit healed spikes into uint16
                 {
@@ -2211,7 +2211,7 @@ namespace battleutils
         {
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
 
-            damage = HandleStoneskin(PDefender, damage);
+            damage = HandleStoneskin(PDefender, damage, ATTACK_TYPE::PHYSICAL);
             HandleAfflatusMiseryDamage(PDefender, damage);
         }
         damage = std::clamp(damage, -99999, 99999);
@@ -2388,7 +2388,7 @@ namespace battleutils
         if (damage > 0)
         {
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
-            damage = HandleStoneskin(PDefender, damage);
+            damage = HandleStoneskin(PDefender, damage, attackType);
         }
 
         if (!isRanged)
@@ -3918,7 +3918,7 @@ namespace battleutils
         {
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
             damage = HandleOneForAll(PDefender, damage);
-            damage = HandleStoneskin(PDefender, damage);
+            damage = HandleStoneskin(PDefender, damage, ATTACK_TYPE::SPECIAL);
             HandleAfflatusMiseryDamage(PDefender, damage);
         }
         damage = std::clamp(damage, -99999, 99999);
@@ -4346,7 +4346,7 @@ namespace battleutils
 
             if (bonusDamage >= 1)
             {
-                m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(bonusDamage * stalwartSoulBonus)));
+                m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(bonusDamage * stalwartSoulBonus), ATTACK_TYPE::PHYSICAL));
 
                 if (m_PChar->GetMJob() == JOB_DRK)
                 {
@@ -5289,7 +5289,7 @@ namespace battleutils
         return damage;
     }
 
-    int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage)
+    int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage, ATTACK_TYPE attackType)
     {
         int16 skin = PDefender->getMod(Mod::STONESKIN);
         if (damage > 0 && skin > 0)
@@ -5304,7 +5304,41 @@ namespace battleutils
             return damage - skin;
         }
 
+        CStatusEffect* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_STONESKIN);
+        if (PEffect != nullptr)
+        {
+            uint32 subID = PEffect->GetSubID();
+            skin         = PEffect->GetSubPower();
+            if (subID == 1)
+            {
+                if (damage > 0 && skin > 0 && attackType == ATTACK_TYPE::PHYSICAL)
+                {
+                    damage = HandleStoneskinSubPower(PDefender, PEffect, damage, skin);
+                }
+            }
+            else if (subID == 2)
+            {
+                if (damage > 0 && skin > 0 && (attackType == ATTACK_TYPE::MAGICAL || attackType == ATTACK_TYPE::BREATH || attackType == ATTACK_TYPE::SPECIAL))
+                {
+                    damage = HandleStoneskinSubPower(PDefender, PEffect, damage, skin);
+                }
+            }
+        }
+
         return damage;
+    }
+
+    int32 HandleStoneskinSubPower(CBattleEntity* PDefender, CStatusEffect* PEffect, int32 damage, int16 skin)
+    {
+        if (skin > damage)
+        {
+            PEffect->SetSubPower(skin - damage);
+            return 0;
+        }
+
+        PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_STONESKIN);
+
+        return damage - skin;
     }
 
     int32 HandleSevereDamage(CBattleEntity* PDefender, int32 damage, bool isPhysical)

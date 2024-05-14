@@ -522,7 +522,7 @@ local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonu
 
     -- Handle Stoneskin
     if damage > 0 then
-        damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)
+        damage = utils.clamp(utils.stoneskin(target, damage, xi.attackType.MAGICAL), -99999, 99999)
     end
 
     return damage

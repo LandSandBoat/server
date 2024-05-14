@@ -446,7 +446,7 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
     end
 
     -- handle stoneskin
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.stoneskin(target, dmg, attackType)
 
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
 

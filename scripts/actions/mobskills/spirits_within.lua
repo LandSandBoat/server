@@ -42,7 +42,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         return 0
     end
 
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.stoneskin(target, dmg, xi.attackType.BREATH)
 
     if dmg > 0 then
         target:wakeUp()

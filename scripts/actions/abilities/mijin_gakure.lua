@@ -19,7 +19,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     -- Job Point Bonus (3% per Level)
     dmg = dmg * (1 + (player:getJobPointLevel(xi.jp.MIJIN_GAKURE_EFFECT) * 0.03))
     dmg = dmg * resist
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.stoneskin(target, dmg, xi.attackType.SPECIAL)
 
     target:takeDamage(dmg, player, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
     player:setLocalVar('MijinGakure', 1)

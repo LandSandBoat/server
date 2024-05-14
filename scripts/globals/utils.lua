@@ -354,7 +354,7 @@ function utils.counter(predicate)
 end
 
 -- returns unabsorbed damage
-function utils.stoneskin(target, dmg)
+function utils.stoneskin(target, dmg, attackType)
     --handling stoneskin
     if dmg > 0 then
         local skin = target:getMod(xi.mod.STONESKIN)
@@ -365,12 +365,48 @@ function utils.stoneskin(target, dmg)
             else --absorbs some damage then wear
                 target:delStatusEffect(xi.effect.STONESKIN)
                 target:setMod(xi.mod.STONESKIN, 0)
-                return dmg - skin
+                dmg = dmg - skin
+            end
+        end
+    end
+
+    local effect = target:getStatusEffect(xi.effect.STONESKIN)
+
+    if effect ~= nil then
+        local subID = effect:getSubType()
+
+        if subID == 1 and dmg > 0 then
+            local physicalSkin = effect:getSubPower()
+
+            if physicalSkin > 0 and attackType == xi.attackType.PHYSICAL then
+                dmg = utils.stoneskinSubPower(target, effect, physicalSkin, dmg)
+            end
+        end
+
+        if subID == 2 and dmg > 0 then
+            local magicSkin = effect:getSubPower()
+
+            if
+                dmg > 0 and
+                magicSkin > 0 and
+                (attackType == xi.attackType.MAGICAL or attackType == xi.attackType.BREATH or attackType == xi.attackType.SPECIAL)
+            then
+                dmg = utils.stoneskinSubPower(target, effect, magicSkin, dmg)
             end
         end
     end
 
     return dmg
+end
+
+function utils.stoneskinSubPower(target, effect, skin, dmg)
+    if skin > dmg then --absorb all damage
+        effect:setSubPower(skin - dmg)
+        return 0
+    else --absorbs some damage then wear
+        target:delStatusEffect(xi.effect.STONESKIN)
+        return dmg - skin
+    end
 end
 
 -- returns reduced magic damage from RUN buff, 'One for All'
