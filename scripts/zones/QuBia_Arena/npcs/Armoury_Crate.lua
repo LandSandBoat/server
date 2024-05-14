@@ -109,43 +109,6 @@ local loot =
             { itemid = xi.item.CHUNK_OF_PLATINUM_ORE, droprate =  50 }, -- platinum_ore
         },
     },
-
-    -- BCNM Idol Thoughts
-    [526] =
-    {
-        {
-            { itemid = xi.item.GOLEM_SHARD, droprate = 1000 }, -- golem_shard
-        },
-
-        {
-            { itemid = xi.item.SLAB_OF_GRANITE, droprate = 1000 }, -- slab_of_granite
-        },
-
-        {
-            { itemid = xi.item.LIBATION_ABJURATION, droprate = 500 }, -- libation_abjuration
-            { itemid = xi.item.OBLATION_ABJURATION, droprate = 500 }, -- oblation_abjuration
-        },
-
-        {
-            { itemid = xi.item.NONE,             droprate = 875 }, -- nothing
-            { itemid = xi.item.SCROLL_OF_FREEZE, droprate = 125 }, -- scroll_of_freeze
-        },
-
-        {
-            { itemid = xi.item.NONE,           droprate = 200 }, -- nothing
-            { itemid = xi.item.OPTICAL_NEEDLE, droprate = 200 }, -- optical_needle
-            { itemid = xi.item.KAKANPU,        droprate = 200 }, -- kakanpu
-            { itemid = xi.item.MANTRA_COIN,    droprate = 200 }, -- mantra_coin
-            { itemid = xi.item.NAZAR_BONJUK,   droprate = 200 }, -- nazar_bonjuk
-        },
-
-        {
-            { itemid = xi.item.NONE,                 droprate = 100 }, -- nothing
-            { itemid = xi.item.CHUNK_OF_MYTHRIL_ORE, droprate = 300 }, -- chunk_of_mythril_ore
-            { itemid = xi.item.GOLD_INGOT,           droprate = 300 }, -- gold_ingot
-            { itemid = xi.item.PLATINUM_INGOT,       droprate = 300 }, -- platinum_ingot
-        },
-    },
 }
 
 entity.onTrade = function(player, npc, trade)
