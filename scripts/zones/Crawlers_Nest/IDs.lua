@@ -41,18 +41,12 @@ zones[xi.zone.CRAWLERS_NEST] =
     },
     mob =
     {
-        DEMONIC_TIPHIA_PH =
-        {
-            [17584392] = 17584398, -- -103.000 -1.000 311.000
-            [17584395] = 17584398, -- -89.000 -1.000 301.000
-            [17584396] = 17584398, -- -75.000 -1.000 299.000
-            [17584391] = 17584398, -- -101.000 -1.000 285.000
-        },
-        AWD_GOGGIE          = 17584135,
-        DYNAST_BEETLE       = 17584312,
-        DREADBUG            = 17584425,
-        MIMIC               = 17584426,
-        APPARATUS_ELEMENTAL = 17584427,
+        DEMONIC_TIPHIA      = GetFirstID('Demonic_Tiphia'),
+        AWD_GOGGIE          = GetFirstID('Awd_Goggie'),
+        DYNAST_BEETLE       = GetFirstID('Dynast_Beetle'),
+        DREADBUG            = GetFirstID('Dreadbug'),
+        MIMIC               = GetFirstID('Mimic'),
+        APPARATUS_ELEMENTAL = GetTableOfIDs('Water_Elemental')[9], -- 9th Water Elemental
     },
     npc =
     {

@@ -46,16 +46,10 @@ zones[xi.zone.CAPE_TERIGGAN] =
     },
     mob =
     {
-        FROSTMANE_PH           =
-        {
-            [17240374] = 17240376, -- -283.874 -0.660 485.504
-            [17240372] = 17240376, -- -272.224 -0.942 461.321
-            [17240373] = 17240376, -- -268.000 -0.558 440.000
-            [17240371] = 17240376, -- -262.000 -0.700 442.000
-        },
-        KREUTZET               = 17240413,
-        AXESARION_THE_WANDERER = 17240414,
-        STOLAS                 = 17240424,
+        FROSTMANE              = GetFirstID('Frostmane'),
+        KREUTZET               = GetFirstID('Kreutzet'),
+        AXESARION_THE_WANDERER = GetFirstID('Axesarion_the_Wanderer'),
+        STOLAS                 = GetFirstID('Stolas'),
         ZMEY_GORYNYCH          = GetFirstID('Zmey_Gorynych')
     },
     npc =

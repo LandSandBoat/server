@@ -38,29 +38,17 @@ zones[xi.zone.CARPENTERS_LANDING] =
     },
     mob =
     {
-        ORCTRAP_PH            =
-        {
-            [16785675] = 16785676, -- 181.819 -5.887 -524.872
-        },
-        TEMPEST_TIGON         = 16785593,
-        OVERGROWN_IVY         = 16785709,
-        CRYPTONBERRY_EXECUTOR = 16785710,
-        MYCOPHILE             = 16785722,
-        HERCULES_BEETLE       = 16785723,
+        ORCTRAP               = GetFirstID('Orctrap'),
+        TEMPEST_TIGON         = GetFirstID('Tempest_Tigon'),
+        OVERGROWN_IVY         = GetFirstID('Overgrown_Ivy'),
+        CRYPTONBERRY_EXECUTOR = GetFirstID('Cryptonberry_Executor'),
+        MYCOPHILE             = GetFirstID('Mycophile'),
+        HERCULES_BEETLE       = GetFirstID('Hercules_Beetle'),
     },
     npc =
     {
-        HERCULES_BEETLE_TREES =
-        {
-            16785730,
-            16785731,
-            16785732,
-            16785733,
-            16785734,
-            16785735,
-        },
-
-        LOGGING = GetTableOfIDs('Logging_Point'),
+        HERCULES_BEETLE_TREES = GetTableOfIDs('qm_hercules_beetle'),
+        LOGGING               = GetTableOfIDs('Logging_Point'),
     },
 }
 
