@@ -41,50 +41,25 @@ zones[xi.zone.DAVOI] =
     },
     mob =
     {
-        HAWKEYED_DNATBAT_PH =
-        {
-            [17387558] = 17387567, -- 337.116 -1.167 -110.483
-            [17387560] = 17387567, -- 336.498 -0.563 -138.502
-            [17387563] = 17387567, -- 371.525 0.235 -176.188
-        },
-        STEELBITER_GUDRUD_PH =
-        {
-            [17387578] = 17387585, -- 252.457 3.501 -248.655
-        },
-        TIGERBANE_BAKDAK_PH =
-        {
-            [17387602] = 17387606, -- 158 -0.662 -18
-            [17387603] = 17387606, -- 153.880 -0.769 -18.092
-        },
-        POISONHAND_GNADGAD_PH =
-        {
-            [17387634] = 17387644, -- -53.910 -0.583 56.606
-            [17387635] = 17387644, -- -62.647 -0.468 24.442
-            [17387636] = 17387644, -- -64.578 -0.658 61.273
-            [17387637] = 17387644, -- -59.013 -0.590 14.783
-            [17387638] = 17387644, -- -50.158 -0.537 22.257
-            [17387639] = 17387644, -- -56.626 -0.607 63.285
-            [17387640] = 17387644, -- -54.694 -0.545 42.385
-            [17387641] = 17387644, -- -60.057 -0.655 29.127
-        },
-        BLUBBERY_BULGE_PH   =
-        {
-            [17387919] = 17387920, -- -225.237 2.295 -294.764
-        },
-        GAVOTVUT            = 17387965,
-        BARAKBOK            = 17387966,
-        BILOPDOP            = 17387967,
-        DELOKNOK            = 17387968,
-        PURPLEFLASH_BRUKDOK = 17387969,
-        ONE_EYED_GWAJBOJ    = 17387970,
-        THREE_EYED_PROZPUZ  = 17387971,
-        HEMATIC_CYST        = 17387972,
+        HAWKEYED_DNATBAT    = GetFirstID('Hawkeyed_Dnatbat'),
+        STEELBITER_GUDRUD   = GetFirstID('Steelbiter_Gudrud'),
+        TIGERBANE_BAKDAK    = GetFirstID('Tigerbane_Bakdak'),
+        POISONHAND_GNADGAD  = GetFirstID('Poisonhand_Gnadgad'),
+        BLUBBERY_BULGE      = GetFirstID('Blubbery_Bulge'),
+        GAVOTVUT            = GetFirstID('Gavotvut'),
+        BARAKBOK            = GetFirstID('Barakbok'),
+        BILOPDOP            = GetFirstID('Bilopdop'),
+        DELOKNOK            = GetFirstID('Deloknok'),
+        PURPLEFLASH_BRUKDOK = GetFirstID('Purpleflash_Brukdok'),
+        ONE_EYED_GWAJBOJ    = GetFirstID('One-eyed_Gwajboj'),
+        THREE_EYED_PROZPUZ  = GetFirstID('Three-eyed_Prozpuz'),
+        HEMATIC_CYST        = GetFirstID('Hematic_Cyst'),
     },
     npc =
     {
         JAR              = GetFirstID('Jar'),
-        HIDE_FLAP_OFFSET = 17388024,
-        STORAGE_HOLE     = 17388026,
+        HIDE_FLAP_OFFSET = GetFirstID('Hide_Flap_1'),
+        STORAGE_HOLE     = GetFirstID('Storage_Hole'),
         TREASURE_CHEST   = GetFirstID('Treasure_Chest'),
     },
 }

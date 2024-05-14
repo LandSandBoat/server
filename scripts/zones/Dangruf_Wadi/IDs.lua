@@ -46,18 +46,15 @@ zones[xi.zone.DANGRUF_WADI] =
     },
     mob =
     {
-        TEPORINGO_PH  =
-        {
-            [17559583] = 17559584,
-        },
-        GEYSER_LIZARD       = 17559558,
-        CHOCOBOLEECH        = 17559869,
-        APPARATUS_ELEMENTAL = 17559870,
+        TEPORINGO           = GetFirstID('Teporingo'),
+        GEYSER_LIZARD       = GetFirstID('Geyser_Lizard'),
+        CHOCOBOLEECH        = GetFirstID('Chocoboleech'),
+        APPARATUS_ELEMENTAL = GetFirstID('Fire_Elemental'),
     },
     npc =
     {
-        GEYSER_OFFSET      = 17559900,
-        AN_EMPTY_VESSEL_QM = 17559912,
+        GEYSER_OFFSET      = GetFirstID('blank'),
+        AN_EMPTY_VESSEL_QM = GetFirstID('qm2'),
         TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
     },
 }
