@@ -110,42 +110,6 @@ local loot =
         },
     },
 
-    -- BCNM Factory Rejects
-    [525] =
-    {
-        {
-            { itemid = xi.item.DOLL_SHARD, droprate = 1000 }, -- doll_shard
-        },
-
-        {
-            { itemid = xi.item.VIAL_OF_MERCURY, droprate = 1000 }, -- vial_of_mercury
-        },
-
-        {
-            { itemid = xi.item.NONE,           droprate = 500 }, -- nothing
-            { itemid = xi.item.GOLD_BEASTCOIN, droprate = 500 }, -- gold_beastcoin
-        },
-
-        {
-            { itemid = xi.item.NONE,             droprate = 250 }, -- nothing
-            { itemid = xi.item.RAIFU,            droprate = 250 }, -- raifu
-            { itemid = xi.item.BUZZARD_TUCK,     droprate = 250 }, -- buzzard_tuck
-            { itemid = xi.item.JONGLEURS_DAGGER, droprate = 250 }, -- jongleurs_dagger
-        },
-
-        {
-            { itemid = xi.item.NONE,             droprate = 200 }, -- nothing
-            { itemid = xi.item.REARGUARD_MANTLE, droprate = 400 }, -- rearguard_mantle
-            { itemid = xi.item.AGILE_MANTLE,     droprate = 400 }, -- agile_mantle
-        },
-
-        {
-            { itemid = xi.item.NONE,                  droprate = 750 }, -- nothing
-            { itemid = xi.item.SCROLL_OF_UTSUSEMI_NI, droprate = 125 }, -- scroll_of_utsusemi_ni
-            { itemid = xi.item.SCROLL_OF_PHALANX,     droprate = 125 }, -- scroll_of_phalanx
-        },
-    },
-
     -- BCNM Idol Thoughts
     [526] =
     {
