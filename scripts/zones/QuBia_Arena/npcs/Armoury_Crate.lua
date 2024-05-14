@@ -6,58 +6,6 @@ local entity = {}
 
 local loot =
 {
-    -- BCNM Demolition Squad
-    [520] =
-    {
-        {
-            { itemid = xi.item.MARINE_M_GLOVES, droprate = 125 }, -- marine_m_gloves
-            { itemid = xi.item.MARINE_F_GLOVES, droprate = 125 }, -- marine_f_gloves
-            { itemid = xi.item.WOOD_GAUNTLETS,  droprate = 125 }, -- wood_gauntlets
-            { itemid = xi.item.WOOD_GLOVES,     droprate = 125 }, -- wood_gloves
-            { itemid = xi.item.CREEK_M_MITTS,   droprate = 125 }, -- creek_m_mitts
-            { itemid = xi.item.CREEK_F_MITTS,   droprate = 125 }, -- creek_f_mitts
-            { itemid = xi.item.RIVER_GAUNTLETS, droprate = 125 }, -- river_gauntlets
-            { itemid = xi.item.DUNE_BRACERS,    droprate = 125 }, -- dune_bracers
-        },
-
-        {
-            { itemid = xi.item.RED_CHIP,    droprate = 125 }, -- red_chip
-            { itemid = xi.item.BLUE_CHIP,   droprate = 125 }, -- blue_chip
-            { itemid = xi.item.YELLOW_CHIP, droprate = 125 }, -- yellow_chip
-            { itemid = xi.item.GREEN_CHIP,  droprate = 125 }, -- green_chip
-            { itemid = xi.item.CLEAR_CHIP,  droprate = 125 }, -- clear_chip
-            { itemid = xi.item.PURPLE_CHIP, droprate = 125 }, -- purple_chip
-            { itemid = xi.item.WHITE_CHIP,  droprate = 125 }, -- white_chip
-            { itemid = xi.item.BLACK_CHIP,  droprate = 125 }, -- black_chip
-        },
-
-        {
-            { itemid = xi.item.NONE,          droprate = 125 }, -- nothing
-            { itemid = xi.item.MYTHRIL_INGOT, droprate = 125 }, -- mythril_ingot
-            { itemid = xi.item.EBONY_LOG,     droprate = 125 }, -- ebony_log
-            { itemid = xi.item.PETRIFIED_LOG, droprate = 125 }, -- petrified_log
-            { itemid = xi.item.AQUAMARINE,    droprate = 125 }, -- aquamarine
-            { itemid = xi.item.PAINITE,       droprate = 125 }, -- painite
-            { itemid = xi.item.CHRYSOBERYL,   droprate = 125 }, -- chrysoberyl
-            { itemid = xi.item.MOONSTONE,     droprate = 125 }, -- moonstone
-        },
-
-        {
-            { itemid = xi.item.NONE,                      droprate = 625 }, -- nothing
-            { itemid = xi.item.SCROLL_OF_RERAISE_II,      droprate = 125 }, -- scroll_of_reraise_ii
-            { itemid = xi.item.SCROLL_OF_FLARE,           droprate = 125 }, -- scroll_of_flare
-            { itemid = xi.item.SCROLL_OF_VALOR_MINUET_IV, droprate = 125 }, -- scroll_of_valor_minuet_iv
-        },
-
-        {
-            { itemid = xi.item.NONE,           droprate = 700 }, -- nothing
-            { itemid = xi.item.HI_POTION_P3,   droprate =  75 }, -- hi-potion_+3
-            { itemid = xi.item.HI_RERAISER,    droprate = 150 }, -- hi-reraiser
-            { itemid = xi.item.VILE_ELIXIR,    droprate =  50 }, -- vile_elixir
-            { itemid = xi.item.VILE_ELIXIR_P1, droprate =  25 }, -- vile_elixir_+1
-        },
-    },
-
     -- BCNM Die by the Sword
     [521] =
     {
