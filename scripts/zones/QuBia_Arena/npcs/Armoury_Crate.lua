@@ -167,79 +167,6 @@ local loot =
         },
     },
 
-    -- BCNM Brothers D'Aurphe
-    [523] =
-    {
-        {
-            { itemid = xi.item.CREEK_M_CLOMPS,   droprate = 125 }, -- creek_m_clomps
-            { itemid = xi.item.CREEK_F_CLOMPS,   droprate = 125 }, -- creek_f_clomps
-            { itemid = xi.item.MARINE_M_BOOTS,   droprate = 125 }, -- marine_m_boots
-            { itemid = xi.item.MARINE_F_BOOTS,   droprate = 125 }, -- marine_f_boots
-            { itemid = xi.item.WOOD_M_LEDELSENS, droprate = 125 }, -- wood_m_ledelsens
-            { itemid = xi.item.WOOD_F_LEDELSENS, droprate = 125 }, -- wood_f_ledelsens
-            { itemid = xi.item.DUNE_SANDALS,     droprate = 125 }, -- dune_sandals
-            { itemid = xi.item.RIVER_GAITERS,    droprate = 125 }, -- river_gaiters
-        },
-
-        {
-            { itemid = xi.item.CROSS_COUNTERS, droprate =  43 }, -- cross-counters
-            { itemid = xi.item.CHRYSOBERYL,    droprate =  10 }, -- chrysoberyl
-            { itemid = xi.item.JADEITE,        droprate =  94 }, -- jadeite
-            { itemid = xi.item.SUNSTONE,       droprate = 113 }, -- sunstone
-            { itemid = xi.item.ZIRCON,         droprate =  75 }, -- zircon
-            { itemid = xi.item.CLEAR_CHIP,     droprate =  10 }, -- clear_chip
-            { itemid = xi.item.RED_CHIP,       droprate =  38 }, -- red_chip
-            { itemid = xi.item.YELLOW_CHIP,    droprate =  38 }, -- yellow_chip
-            { itemid = xi.item.GOLD_INGOT,     droprate = 151 }, -- gold_ingot
-            { itemid = xi.item.PURPLE_ROCK,    droprate =  19 }, -- purple_rock
-            { itemid = xi.item.WHITE_ROCK,     droprate =  19 }, -- white_rock
-        },
-
-        {
-            { itemid = xi.item.STEEL_INGOT,      droprate = 132 }, -- steel_ingot
-            { itemid = xi.item.TRANSLUCENT_ROCK, droprate = 113 }, -- translucent_rock
-            { itemid = xi.item.DARKSTEEL_INGOT,  droprate = 113 }, -- darksteel_ingot
-            { itemid = xi.item.PAINITE,          droprate =  50 }, -- painite
-            { itemid = xi.item.EBONY_LOG,        droprate = 132 }, -- ebony_log
-            { itemid = xi.item.WHITE_CHIP,       droprate =  10 }, -- white_chip
-            { itemid = xi.item.MOONSTONE,        droprate = 151 }, -- moonstone
-            { itemid = xi.item.ZIRCON,           droprate =  75 }, -- zircon
-            { itemid = xi.item.FLUORITE,         droprate =  57 }, -- fluorite
-            { itemid = xi.item.CHRYSOBERYL,      droprate =  57 }, -- chrysoberyl
-            { itemid = xi.item.GREEN_ROCK,       droprate =  38 }, -- green_rock
-            { itemid = xi.item.HI_RERAISER,      droprate =  38 }, -- hi-reraiser
-            { itemid = xi.item.VILE_ELIXIR_P1,   droprate =  38 }, -- vile_elixir_+1
-        },
-
-        {
-            { itemid = xi.item.SCROLL_OF_FLARE,           droprate = 283 }, -- scroll_of_flare
-            { itemid = xi.item.SCROLL_OF_VALOR_MINUET_IV, droprate = 358 }, -- scroll_of_valor_minuet_iv
-            { itemid = xi.item.SCROLL_OF_RERAISE_II,      droprate = 264 }, -- scroll_of_reraise_ii
-        },
-
-        {
-            { itemid = xi.item.NONE,        droprate = 957 }, -- nothing
-            { itemid = xi.item.EURYTOS_BOW, droprate =  43 }, -- eurytos_bow
-        },
-
-        {
-            { itemid = xi.item.NONE,          droprate = 582 }, -- nothing
-            { itemid = xi.item.MYTHRIL_INGOT, droprate = 302 }, -- mythril_ingot
-            { itemid = xi.item.BLUE_CHIP,     droprate =  19 }, -- blue_chip
-            { itemid = xi.item.BLACK_CHIP,    droprate =  38 }, -- black_chip
-            { itemid = xi.item.PURPLE_CHIP,   droprate =  10 }, -- purple_chip
-            { itemid = xi.item.GREEN_CHIP,    droprate =  19 }, -- green_chip
-            { itemid = xi.item.MAHOGANY_LOG,  droprate =  10 }, -- mahogany_log
-            { itemid = xi.item.RED_ROCK,      droprate =  10 }, -- red_rock
-            { itemid = xi.item.BLACK_ROCK,    droprate =  10 }, -- black_rock
-        },
-
-        {
-            { itemid = xi.item.NONE,         droprate = 887 }, -- nothing
-            { itemid = xi.item.HI_POTION_P3, droprate = 113 }, -- hi-potion_+3
-        },
-    },
-
     -- BCNM Undying Promise
     [524] =
     {
@@ -376,12 +303,6 @@ local loot =
             { itemid = xi.item.GOLD_INGOT,           droprate = 300 }, -- gold_ingot
             { itemid = xi.item.PLATINUM_INGOT,       droprate = 300 }, -- platinum_ingot
         },
-    },
-
-    -- BCNM An Awful Autopsy
-    [527] =
-    {
-
     },
 
     -- BCNM Celery
