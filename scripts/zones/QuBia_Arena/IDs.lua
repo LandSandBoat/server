@@ -52,8 +52,9 @@ zones[xi.zone.QUBIA_ARENA] =
     },
     mob =
     {
+        ATORI_TUTORI             = GetFirstID('Atori-Tutori_qm'),
         HEIR_TO_THE_LIGHT_OFFSET = GetFirstID('Warlord_Rojgnoj'),
-        ATORI_TUTORI             = GetFirstID('Atori-Tutori_qm')
+        CHAHNAMEEDS_STOMACH      = GetFirstID('Chahnameeds_Stomach'),
     },
     npc =
     {

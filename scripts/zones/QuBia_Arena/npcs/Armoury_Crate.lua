@@ -381,51 +381,7 @@ local loot =
     -- BCNM An Awful Autopsy
     [527] =
     {
-        {
-            { itemid = xi.item.UNDEAD_SKIN, droprate = 1000 }, -- undead_skin
-        },
 
-        {
-            { itemid = xi.item.NONE,         droprate = 500 }, -- nothing
-            { itemid = xi.item.RIVAL_RIBBON, droprate = 250 }, -- rival_ribbon
-            { itemid = xi.item.SUPER_RIBBON, droprate = 250 }, -- super_ribbon
-        },
-
-        {
-            { itemid = xi.item.NONE,          droprate = 250 }, -- nothing
-            { itemid = xi.item.IVORY_MITTS,   droprate = 250 }, -- ivory_mitts
-            { itemid = xi.item.RUSH_GLOVES,   droprate = 250 }, -- rush_gloves
-            { itemid = xi.item.SLY_GAUNTLETS, droprate = 250 }, -- sly_gauntlets
-        },
-
-        {
-            { itemid = xi.item.NONE,            droprate = 200 }, -- nothing
-            { itemid = xi.item.HEAVY_MANTLE,    droprate = 200 }, -- heavy_mantle
-            { itemid = xi.item.ESOTERIC_MANTLE, droprate = 200 }, -- esoteric_mantle
-            { itemid = xi.item.SNIPERS_MANTLE,  droprate = 200 }, -- snipers_mantle
-            { itemid = xi.item.TEMPLARS_MANTLE, droprate = 200 }, -- templars_mantle
-        },
-
-        {
-            { itemid = xi.item.NONE,             droprate = 200 }, -- nothing
-            { itemid = xi.item.HATEFUL_COLLAR,   droprate = 200 }, -- hateful_collar
-            { itemid = xi.item.STORM_GORGET,     droprate = 200 }, -- storm_gorget
-            { itemid = xi.item.INTELLECT_TORQUE, droprate = 200 }, -- intellect_torque
-            { itemid = xi.item.BENIGN_NECKLACE,  droprate = 200 }, -- benign_necklace
-        },
-
-        {
-            { itemid = xi.item.NONE,            droprate = 200 }, -- nothing
-            { itemid = xi.item.DARKSTEEL_INGOT, droprate = 200 }, -- darksteel_ingot
-            { itemid = xi.item.EBONY_LOG,       droprate = 200 }, -- ebony_log
-            { itemid = xi.item.PETRIFIED_LOG,   droprate = 200 }, -- petrified_log
-            { itemid = xi.item.GOLD_INGOT,      droprate = 200 }, -- gold_ingot
-        },
-
-        {
-            { itemid = xi.item.NONE,            droprate = 875 }, -- nothing
-            { itemid = xi.item.SCROLL_OF_QUAKE, droprate = 125 }, -- scroll_of_quake
-        },
     },
 
     -- BCNM Celery
