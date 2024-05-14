@@ -138,6 +138,9 @@ xi.settings.map =
     -- Amount of points allowed in crafts over the level defined above. Points are shared across all crafting skills. (Retail = 400; All skills can go to max = 3200)
     CRAFT_SPECIALIZATION_POINTS = 400,
 
+    -- Multiplier applied to high quality chance
+    CRAFT_HQ_CHANCE_MULTIPLIER = 1.0,
+
     -- Enables fishing. 0 = Disabled. 1 = Enable. ENABLE AT YOUR OWN RISK.
     FISHING_ENABLE = false,
 
