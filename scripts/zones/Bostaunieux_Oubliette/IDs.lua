@@ -39,7 +39,7 @@ zones[xi.zone.BOSTAUNIEUX_OUBLIETTE] =
     mob =
     {
         ARIOCH                  = GetFirstID('Arioch'),
-        BLOODSUCKER             = GetTableofIDs('Bloodsucker')[42],
+        BLOODSUCKER             = GetTableOfIDs('Bloodsucker')[42],
         BODACH                  = GetFirstID('Bodach'),
         DREXERION_THE_CONDEMNED = GetFirstID('Drexerion_the_Condemned'),
         MANES                   = GetFirstID('Manes'),
