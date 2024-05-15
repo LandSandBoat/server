@@ -36,23 +36,10 @@ zones[xi.zone.BATALLIA_DOWNS_S] =
 
     mob =
     {
-        BURLIBIX_BRAWNBACK_PH =
-        {
-            [17121398] = 17121399,
-            [17121402] = 17121399,
-        },
-
-        LA_VELUE_PH =
-        {
-            [17121554] = 17121576, -- -314.365 -18.745 -56.016
-        },
-
-        HABERGOASS_PH =
-        {
-            [17121602] = 17121603,
-        },
-
-        MENECHME = GetFirstID('Menechme'),
+        BURLIBIX_BRAWNBACK = GetFirstID('Burlibix_Brawnback'),
+        HABERGOASS         = GetFirstID('Habergoass'),
+        LA_VELUE           = GetFirstID('La_Velue'),
+        MENECHME           = GetFirstID('Menechme'),
 
         VOIDWALKER =
         {
