@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2022 LandSandBoat Dev Teams
@@ -141,7 +141,7 @@ HTTPServer::HTTPServer()
         m_httpServer.set_error_handler([](httplib::Request const& /*req*/, httplib::Response& res)
         {
             auto str = fmt::format("<p>Error Status: <span style='color:red;'>{} ({})</span></p>",
-                res.status, httplib::detail::status_message(res.status));
+                res.status, httplib::status_message(res.status));
 
             for (auto const& [key, val] : res.headers)
             {
@@ -156,12 +156,12 @@ HTTPServer::HTTPServer()
             // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
             if (res.status >= 500)
             {
-                ShowError(fmt::format("Server Error: {} ({})", res.status, httplib::detail::status_message(res.status)));
+                ShowError(fmt::format("Server Error: {} ({})", res.status, httplib::status_message(res.status)));
                 return;
             }
             else if (res.status >= 400)
             {
-                ShowError(fmt::format("Client Error: {} ({})", res.status, httplib::detail::status_message(res.status)));
+                ShowError(fmt::format("Client Error: {} ({})", res.status, httplib::status_message(res.status)));
                 return;
             }
         });
