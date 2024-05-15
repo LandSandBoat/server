@@ -58,8 +58,9 @@ zones[xi.zone.QUBIA_ARENA] =
         CHAHNAMEEDS_STOMACH      = GetFirstID('Chahnameeds_Stomach'),
         DOLL_FACTORY             = GetFirstID('Doll_Factory'),
         HEIR_TO_THE_LIGHT_OFFSET = GetFirstID('Warlord_Rojgnoj'),
-        VAICOLIAUX_B_DAURPHE     = GetFirstID('Vaicoliaux_B_DAurphe'),
         NEPHIYL_RAMPARTBREACHER  = GetFirstID('Nephiyl_Rampartbreacher'),
+        SEED_ORC                 = GetFirstID('Seed_Orc'),
+        VAICOLIAUX_B_DAURPHE     = GetFirstID('Vaicoliaux_B_DAurphe'),
     },
     npc =
     {
