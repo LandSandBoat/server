@@ -636,6 +636,7 @@ public:
     bool   addStatusEffect(sol::variadic_args va);
     bool   addStatusEffectEx(sol::variadic_args va);
     auto   getStatusEffect(uint16 StatusID, sol::object const& SubType) -> std::optional<CLuaStatusEffect>;
+    auto   getItemEnchantmentEffect(sol::object const& ItemID) -> std::optional<CLuaStatusEffect>;
     auto   getStatusEffects() -> sol::table;
     int16  getStatusEffectElement(uint16 statusId);
     bool   canGainStatusEffect(uint16 effect, sol::object const& powerObj);

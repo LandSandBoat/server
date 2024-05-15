@@ -12651,6 +12651,18 @@ std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID,
 }
 
 /************************************************************************
+ *  Function: getItemEnchantmentEffect()
+ *  Purpose : Returns the ENCHANTMENT effect Object of a specified Item ID
+ *  Example : local hasteBeltEffect = target:getItemEnchantmentEffect(xi.item.HASTE_BELT)
+ *  Notes   :
+ ************************************************************************/
+
+std::optional<CLuaStatusEffect> CLuaBaseEntity::getItemEnchantmentEffect(sol::object const& ItemID)
+{
+    return getStatusEffect(EFFECT_ENCHANTMENT, ItemID);
+}
+
+/************************************************************************
  *  Function: getStatusEffects()
  *  Purpose : Returns a Lua table of all Status Effects an Entity has
  *  Example : local effects = caster:getStatusEffects() -- can iterate over table
@@ -17991,6 +18003,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("addStatusEffect", CLuaBaseEntity::addStatusEffect);
     SOL_REGISTER("addStatusEffectEx", CLuaBaseEntity::addStatusEffectEx);
     SOL_REGISTER("getStatusEffect", CLuaBaseEntity::getStatusEffect);
+    SOL_REGISTER("getItemEnchantmentEffect", CLuaBaseEntity::getItemEnchantmentEffect);
     SOL_REGISTER("getStatusEffects", CLuaBaseEntity::getStatusEffects);
     SOL_REGISTER("getStatusEffectElement", CLuaBaseEntity::getStatusEffectElement);
     SOL_REGISTER("canGainStatusEffect", CLuaBaseEntity::canGainStatusEffect);
