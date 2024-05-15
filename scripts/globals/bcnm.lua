@@ -637,11 +637,6 @@ local function checkReqs(player, npc, bfid, registrant)
                 player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
         end,
 
-        [512] = function() -- Mission 5-1
-            return player:getCurrentMission(player:getNation()) == xi.mission.id.nation.ARCHLICH and
-                nationStatus == 11
-        end,
-
         [516] = function() -- San d'Oria 9-2: The Heir to the Light
             return sandoriaMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
                 nationStatus == 3
@@ -1149,14 +1144,6 @@ local function checkSkip(player, bfid)
         [480] = function() -- Quest: Trial by Ice
             return player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
-        end,
-
-        [512] = function() -- Mission 5-1
-            return player:hasCompletedMission(player:getNation(), xi.mission.id.nation.ARCHLICH) or
-                (
-                    player:getCurrentMission(player:getNation()) == xi.mission.id.nation.ARCHLICH and
-                    nationStatus > 11
-                )
         end,
 
         [516] = function() -- San d'Oria 9-2: The Heir to the Light

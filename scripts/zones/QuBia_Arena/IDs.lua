@@ -52,8 +52,10 @@ zones[xi.zone.QUBIA_ARENA] =
         YIKEY_WIKEYS                  = 8026, -- Yikey-wikeys! Get that thing away from meee!
         WHATS_THE_MATTARU             = 8027, -- <Pant, wheeze>... What's the mattaru, <name>? Too much of a pansy-wansy to fight fair?
     },
+
     mob =
     {
+        ARCHLICH_TABERQUOAN      = GetFirstID('Archlich_Taberquoan'),
         ATORI_TUTORI             = GetFirstID('Atori-Tutori_qm'),
         CHAHNAMEEDS_STOMACH      = GetFirstID('Chahnameeds_Stomach'),
         DOLL_FACTORY             = GetFirstID('Doll_Factory'),
@@ -64,6 +66,7 @@ zones[xi.zone.QUBIA_ARENA] =
         SEED_ORC                 = GetFirstID('Seed_Orc'),
         VAICOLIAUX_B_DAURPHE     = GetFirstID('Vaicoliaux_B_DAurphe'),
     },
+
     npc =
     {
     },
