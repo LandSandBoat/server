@@ -647,30 +647,8 @@ local function checkReqs(player, npc, bfid, registrant)
                 nationStatus == 3
         end,
 
-        [517] = function() -- Quest: Shattering Stars (PLD LB5)
-            return mainJob == xi.job.PLD and mainLevel >= 66
-        end,
-
-        [518] = function() -- Quest: Shattering Stars (DRK LB5)
-            return mainJob == xi.job.DRK and mainLevel >= 66
-        end,
-
-        [519] = function() -- Quest: Shattering Stars (BRD LB5)
-            return mainJob == xi.job.BRD and mainLevel >= 66
-        end,
-
         [530] = function() -- Quest: A Furious Finale (DNC LB5)
             return mainJob == xi.job.DNC and mainLevel >= 66
-        end,
-
-        -- Temp disabled pending BCNM mob fixes
-        -- [532] = function() -- Those Who Lurk in Shadows (ACP7)
-        --     return acpMission >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III and
-        --         player:hasKeyItem(xi.ki.MARK_OF_SEED)
-        -- end,
-
-        [533] = function() -- Quest: Beyond Infinity
-            return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
 
         [544] = function() -- Quest: Trial by Fire
