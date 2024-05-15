@@ -23,7 +23,10 @@
 #include "common/timer.h"
 
 #include "lua_statuseffect.h"
+#include "status_effect_container.h"
 #include "status_effect.h"
+
+#include "entities/battleentity.h"
 
 //======================================================//
 
@@ -34,6 +37,18 @@ CLuaStatusEffect::CLuaStatusEffect(CStatusEffect* StatusEffect)
     {
         ShowError("CLuaStatusEffect created with nullptr instead of valid CStatusEffect*!");
     }
+
+    m_PBaseEntity = nullptr;
+}
+
+void CLuaStatusEffect::SetBaseEntity(CBaseEntity* BaseEntity)
+{
+    if (BaseEntity == nullptr)
+    {
+        ShowError("CLuaStatusEffect trying to map to a nullptr CBaseEntity*!");
+    }
+
+    m_PBaseEntity = BaseEntity;
 }
 
 //======================================================//
@@ -221,6 +236,28 @@ bool CLuaStatusEffect::hasEffectFlag(uint32 flag)
     return m_PLuaStatusEffect->HasEffectFlag(flag);
 }
 
+void CLuaStatusEffect::delStatusEffect()
+{
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity || !PBattleEntity->StatusEffectContainer)
+    {
+        return;
+    }
+
+    PBattleEntity->StatusEffectContainer->RemoveStatusEffect(m_PLuaStatusEffect);
+}
+
+void CLuaStatusEffect::delStatusEffectSilent()
+{
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity || !PBattleEntity->StatusEffectContainer)
+    {
+        return;
+    }
+
+    PBattleEntity->StatusEffectContainer->RemoveStatusEffect(m_PLuaStatusEffect, true);
+}
+
 uint16 CLuaStatusEffect::getIcon()
 {
     return m_PLuaStatusEffect->GetIcon();
@@ -256,6 +293,8 @@ void CLuaStatusEffect::Register()
     SOL_REGISTER("addEffectFlag", CLuaStatusEffect::addEffectFlag);
     SOL_REGISTER("delEffectFlag", CLuaStatusEffect::delEffectFlag);
     SOL_REGISTER("hasEffectFlag", CLuaStatusEffect::hasEffectFlag);
+    SOL_REGISTER("delStatusEffect", CLuaStatusEffect::delStatusEffect);
+    SOL_REGISTER("delStatusEffectSilent", CLuaStatusEffect::delStatusEffectSilent);
     SOL_REGISTER("getIcon", CLuaStatusEffect::getIcon);
 }
 

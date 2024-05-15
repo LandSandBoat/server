@@ -12644,7 +12644,9 @@ std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID,
 
     if (PStatusEffect)
     {
-        return std::optional<CLuaStatusEffect>(PStatusEffect);
+        auto PLuaStatusEffect = std::optional<CLuaStatusEffect>(PStatusEffect);
+        PLuaStatusEffect->SetBaseEntity(m_PBaseEntity);
+        return PLuaStatusEffect;
     }
 
     return std::nullopt;
@@ -12674,9 +12676,11 @@ sol::table CLuaBaseEntity::getStatusEffects()
     auto table = lua.create_table();
     // clang-format off
     static_cast<CBattleEntity*>(m_PBaseEntity)->StatusEffectContainer->ForEachEffect(
-    [&table](CStatusEffect* PEffect)
+    [&table, &PBattleEntity](CStatusEffect* PEffect)
     {
-        table.add(CLuaStatusEffect(PEffect));
+        auto PLuaStatusEffect = std::optional<CLuaStatusEffect>(PEffect);
+        PLuaStatusEffect->SetBaseEntity(PBattleEntity);
+        table.add(PLuaStatusEffect);
     });
     // clang-format on
 

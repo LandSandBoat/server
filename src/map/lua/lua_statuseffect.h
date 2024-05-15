@@ -29,9 +29,11 @@ class CStatusEffect;
 class CLuaStatusEffect
 {
     CStatusEffect* m_PLuaStatusEffect;
+    CBaseEntity*   m_PBaseEntity;
 
 public:
     CLuaStatusEffect(CStatusEffect*);
+    void SetBaseEntity(CBaseEntity* entity);
 
     CStatusEffect* GetStatusEffect() const
     {
@@ -69,6 +71,8 @@ public:
     void   addEffectFlag(uint32 flag);
     void   delEffectFlag(uint32 flag);
     bool   hasEffectFlag(uint32 flag);
+    void   delStatusEffect();
+    void   delStatusEffectSilent();
 
     bool operator==(const CLuaStatusEffect& other) const
     {
