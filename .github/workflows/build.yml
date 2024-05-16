@@ -269,8 +269,8 @@ jobs:
     #    key: ${{ runner.os }}-gcc
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/gcc-13
-        export CXX=/usr/bin/g++-13
+        export CC=/usr/bin/gcc-13.1
+        export CXX=/usr/bin/g++-13.1
         mkdir -p build
         CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake -S . -B build
     - name: Build
