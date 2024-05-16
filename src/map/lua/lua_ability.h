@@ -58,6 +58,7 @@ public:
     uint16 getVE();
     void   setVE(uint16 ve);
     void   setRange(float range);
+    void   setAOE(uint8 aoe);
 
     bool operator==(const CLuaAbility& other) const
     {
