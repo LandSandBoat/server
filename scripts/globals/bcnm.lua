@@ -637,40 +637,13 @@ local function checkReqs(player, npc, bfid, registrant)
                 player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
         end,
 
-        [512] = function() -- Mission 5-1
-            return player:getCurrentMission(player:getNation()) == xi.mission.id.nation.ARCHLICH and
-                nationStatus == 11
-        end,
-
         [516] = function() -- San d'Oria 9-2: The Heir to the Light
             return sandoriaMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
                 nationStatus == 3
         end,
 
-        [517] = function() -- Quest: Shattering Stars (PLD LB5)
-            return mainJob == xi.job.PLD and mainLevel >= 66
-        end,
-
-        [518] = function() -- Quest: Shattering Stars (DRK LB5)
-            return mainJob == xi.job.DRK and mainLevel >= 66
-        end,
-
-        [519] = function() -- Quest: Shattering Stars (BRD LB5)
-            return mainJob == xi.job.BRD and mainLevel >= 66
-        end,
-
         [530] = function() -- Quest: A Furious Finale (DNC LB5)
             return mainJob == xi.job.DNC and mainLevel >= 66
-        end,
-
-        -- Temp disabled pending BCNM mob fixes
-        -- [532] = function() -- Those Who Lurk in Shadows (ACP7)
-        --     return acpMission >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III and
-        --         player:hasKeyItem(xi.ki.MARK_OF_SEED)
-        -- end,
-
-        [533] = function() -- Quest: Beyond Infinity
-            return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
 
         [544] = function() -- Quest: Trial by Fire
@@ -1171,14 +1144,6 @@ local function checkSkip(player, bfid)
         [480] = function() -- Quest: Trial by Ice
             return player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
-        end,
-
-        [512] = function() -- Mission 5-1
-            return player:hasCompletedMission(player:getNation(), xi.mission.id.nation.ARCHLICH) or
-                (
-                    player:getCurrentMission(player:getNation()) == xi.mission.id.nation.ARCHLICH and
-                    nationStatus > 11
-                )
         end,
 
         [516] = function() -- San d'Oria 9-2: The Heir to the Light
