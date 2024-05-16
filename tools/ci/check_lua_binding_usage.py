@@ -123,15 +123,15 @@ def main():
                     line = line.split("--", 1)[0]
 
                     # Don't look inside strings (replace with placeholder)
-                    line = re.sub('\"([^\"]*?)\"', "strVal", line)
-                    line = re.sub("\'([^\"]*?)\'", "strVal", line)
+                    line = re.sub(r'\"([^\"]*?)\"', "strVal", line)
+                    line = re.sub(r"\'([^\"]*?)\'", "strVal", line)
 
                     # Try and ignore function definitions
                     line = line.split("function", 1)[0]
 
                     line = line.replace("\n", "")
 
-                    for match in re.finditer('(?<=:)[^\(\/\\\: "]*', line):
+                    for match in re.finditer(r'(?<=:)[^\(\/\\\: "]*', line):
                         if (
                             len(match.group()) > 1
                             and match.group() not in function_names
