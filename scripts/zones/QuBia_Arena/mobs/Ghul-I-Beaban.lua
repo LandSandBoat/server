@@ -33,7 +33,7 @@ entity.onMobInitialize = function(GhulIBeabanMob)
                 blmMobObj:setSpawn(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos(), mob:getRotPos())
                 blmMobObj:spawn()
                 reraiseGhul(blmMobObj, 3, target)
-            end)    
+            end)
         end
     end)
 end

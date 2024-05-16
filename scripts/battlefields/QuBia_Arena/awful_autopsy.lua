@@ -25,7 +25,7 @@ local content = Battlefield:new({
 })
 
 local handleDeath = function(battlefield, mob)
-    mobIdOffset = qubiaID.mob.CHAHNAMEEDS_STOMACH + (battlefield:getArea() - 1) * 5
+    local mobIdOffset = qubiaID.mob.CHAHNAMEEDS_STOMACH + (battlefield:getArea() - 1) * 5
 
     for mobId = mobIdOffset, mobIdOffset + 2 do
         local mobObj = GetMobByID(mobId)

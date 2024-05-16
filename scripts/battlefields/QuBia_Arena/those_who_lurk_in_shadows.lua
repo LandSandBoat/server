@@ -38,7 +38,7 @@ function content:onEventFinishBattlefield(player, csid, option, npc)
         then
             player:setCharVar('LastIvoryKey', getMidnight())
             player:addKeyItem(xi.ki.IVORY_KEY)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.IVORY_KEY)
+            player:messageSpecial(qubiaID.text.KEYITEM_OBTAINED, xi.ki.IVORY_KEY)
         end
     end
 end

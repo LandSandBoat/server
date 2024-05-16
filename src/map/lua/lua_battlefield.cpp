@@ -506,7 +506,7 @@ void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas
             }
         }
 
-        bool superlink       = groupData.get_or("superlink", false);
+        bool  superlink      = groupData.get_or("superlink", false);
         uint8 superlinkGroup = groupData.get_or("superlinkGroup", 0);
 
         if (superlink && superlinkGroup)

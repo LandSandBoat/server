@@ -80,6 +80,7 @@ def main():
     function_names.append("onBattlefieldWin")
     function_names.append("onBattlefieldLoss")
     function_names.append("onBattlefieldWipe")
+    function_names.append("handleAllMonstersDefeated")
     function_names.append("handleWipe")
     function_names.append("unsetVarBit")
     function_names.append("addVar")
