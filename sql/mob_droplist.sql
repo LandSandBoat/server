@@ -5008,19 +5008,26 @@ INSERT INTO `mob_droplist` VALUES (568,0,0,1000,4111,400);     -- Dark Cluster (
 INSERT INTO `mob_droplist` VALUES (568,0,0,1000,4111,@COMMON); -- Dark Cluster (Common, 15%)
 
 -- ZoneID:   2 - Spunkie
+-- ZoneID:   2 - Will-o-the-Wisp
 -- ZoneID:  51 - Dark Esquire
 -- ZoneID:  52 - Dark Esquire
 -- ZoneID:  61 - Dark Esquire
+-- ZoneID: 103 - Will-o-the-Wisp
+-- ZoneID: 104 - Will-o-the-Wisp
 -- ZoneID: 105 - Ignis Fatuus
 -- ZoneID: 109 - Fox Fire
 -- ZoneID: 110 - Ignis Fatuus
 -- ZoneID: 113 - Enna-Enna
+-- ZoneID: 118 - Will-o-the-Wisp
+-- ZoneID: 119 - Will-o-the-Wisp
 -- ZoneID: 120 - Ignis Fatuus
 -- ZoneID: 121 - Puroboros
 -- ZoneID: 123 - Lava Bomb
 -- ZoneID: 124 - Puroboros
 -- ZoneID: 164 - Explosure
 -- ZoneID: 171 - Puroboros
+-- ZoneID: 192 - Will-o-the-Wisp
+-- ZoneID: 193 - Will-o-the-Wisp
 -- ZoneID: 200 - Puroboros
 INSERT INTO `mob_droplist` VALUES (569,0,0,1000,928,270);  -- Pinch Of Bomb Ash (27.0%)
 INSERT INTO `mob_droplist` VALUES (569,0,0,1000,17316,80); -- Bomb Arm (8.0%)
