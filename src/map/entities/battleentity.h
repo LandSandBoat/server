@@ -425,6 +425,7 @@ enum TARGETTYPE
     TARGET_PET                     = 0x100,
     TARGET_PLAYER_PARTY_ENTRUST    = 0x200,
     TARGET_IGNORE_BATTLEID         = 0x400, // Can hit targets that do not have the same battle ID
+    TARGET_MOB_AND_PLAYER          = 0x800, // Can hit targets from any allegiance simultaneously.
 };
 DECLARE_FORMAT_AS_UNDERLYING(TARGETTYPE);
 

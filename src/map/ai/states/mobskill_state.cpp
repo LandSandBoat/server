@@ -72,6 +72,13 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
         actionTarget.animation  = 0;
         actionTarget.param      = m_PSkill->getID();
         actionTarget.messageID  = 43;
+
+        if ((m_PSkill->getValidTargets() & TARGET_MOB_AND_PLAYER) && (m_PSkill->getValidTargets() & TARGET_SELF))
+        {
+            // This ability targets self for aoe skills (such as Frozen Mist)
+            action.actiontype         = ACTION_WEAPONSKILL_START;
+            actionList.ActionTargetID = action.id;
+        }
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
 
         // face toward target // TODO : add force param to turnTowardsTarget on certain TP moves like Petro Eyes

@@ -1911,7 +1911,19 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         return;
     }
 
-    uint16 targets = static_cast<uint16>(PAI->TargetFind->m_targets.size());
+    uint16 targets  = static_cast<uint16>(PAI->TargetFind->m_targets.size());
+    auto   skipSelf = false;
+
+    if ((PSkill->getValidTargets() & TARGET_MOB_AND_PLAYER) && (PSkill->getValidTargets() & TARGET_SELF))
+    {
+        // This ability targets self for aoe skills (such as Frozen Mist)
+        // Should be impossible for self to not be in target list, but just in case
+        if (targets > 0)
+        {
+            targets -= 1;
+        }
+        skipSelf = true;
+    }
 
     // No targets, perhaps something like Super Jump or otherwise untargetable
     if (targets == 0)
@@ -1940,6 +1952,14 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     bool first{ true };
     for (auto&& PTargetFound : PAI->TargetFind->m_targets)
     {
+        if (PTarget == PTargetFound && skipSelf)
+        {
+            // This ability targets self for aoe skills (such as Frozen Mist)
+            // Ignore self completely
+
+            continue;
+        }
+
         actionList_t& list = action.getNewActionList();
 
         list.ActionTargetID = PTargetFound->id;

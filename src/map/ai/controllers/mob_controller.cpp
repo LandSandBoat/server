@@ -345,11 +345,11 @@ bool CMobController::MobSkill(int wsList)
                 continue;
             }
 
-            if (PMobSkill->getValidTargets() == TARGET_ENEMY) // enemy
+            if (PMobSkill->getValidTargets() & TARGET_ENEMY) // enemy
             {
                 PActionTarget = PTarget;
             }
-            else if (PMobSkill->getValidTargets() == TARGET_SELF) // self
+            else if (PMobSkill->getValidTargets() & TARGET_SELF) // self
             {
                 PActionTarget = PMob;
             }

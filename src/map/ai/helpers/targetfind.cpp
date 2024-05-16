@@ -148,7 +148,17 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
     else
     {
         // handle this as a mob
-        if (m_PMasterTarget->objtype == TYPE_PC || m_PBattleEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
+        if (m_targetFlags & TARGET_MOB_AND_PLAYER)
+        {
+            m_findType = FIND_TYPE::MONSTER_PLAYER;
+            if ((m_targetFlags & TARGET_SELF) && m_PBattleEntity->GetBattleTarget())
+            {
+                // This ability targets self for aoe skills (such as Frozen Mist)
+                // We must update the base target for allegiance checks
+                m_PMasterTarget = findMaster(m_PBattleEntity->GetBattleTarget());
+            }
+        }
+        else if (m_PMasterTarget->objtype == TYPE_PC || m_PBattleEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
         {
             m_findType = FIND_TYPE::MONSTER_PLAYER;
         }
@@ -455,39 +465,59 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
         return true;
     }
 
-    if (m_PTarget->allegiance != PTarget->allegiance)
+    // short-circuit allegiance checks for aoe skills/abilities/spells that can hit players and mobs simultaneously
+    if (m_targetFlags & TARGET_MOB_AND_PLAYER)
     {
-        return false;
-    }
-
-    // If offensive, don't target other entities with same allegiance
-    // Cures can be AoE with Accession and Majesty, ideally we would use SPELLGROUP or some other mechanism, but TargetFind wasn't designed with that in mind
-    if ((m_targetFlags & TARGET_ENEMY) && !(m_targetFlags & TARGET_PLAYER_PARTY) &&
-        m_PBattleEntity->allegiance == PTarget->allegiance)
-    {
-        return false;
-    }
-
-    // shouldn't add if target is charmed by the enemy
-    if (PTarget->PMaster != nullptr)
-    {
-        if (m_findType == FIND_TYPE::MONSTER_PLAYER)
+        if (m_targetFlags & TARGET_SELF)
         {
-            if (PTarget->PMaster->objtype == TYPE_MOB)
+            if (m_PBattleEntity->allegiance == PTarget->allegiance)
             {
+                // TARGET_MOB_AND_PLAYER with TARGET_SELF means it should behave like TARGET_ENEMY
                 return false;
             }
         }
-        else if (m_findType == FIND_TYPE::PLAYER_MONSTER)
+        else if (m_PBattleEntity == PTarget)
         {
-            if (PTarget->PMaster->objtype == TYPE_PC)
-            {
-                return false;
-            }
+            // Don't erroneously include self when using TARGET_MOB_AND_PLAYER
+            return false;
         }
-        else if (m_findType == FIND_TYPE::MONSTER_MONSTER || m_findType == FIND_TYPE::PLAYER_PLAYER)
+    }
+    else
+    {
+        if (m_PTarget->allegiance != PTarget->allegiance)
         {
-            return PTarget->objtype == TYPE_TRUST;
+            return false;
+        }
+
+        // If offensive, don't target other entities with same allegiance
+        // Cures can be AoE with Accession and Majesty, ideally we would use SPELLGROUP or some other mechanism, but TargetFind wasn't designed with that in mind
+        if ((m_targetFlags & TARGET_ENEMY) && !(m_targetFlags & TARGET_PLAYER_PARTY) &&
+            m_PBattleEntity->allegiance == PTarget->allegiance)
+        {
+            return false;
+        }
+
+        // shouldn't add if target is charmed by the enemy
+        if (PTarget->PMaster != nullptr)
+        {
+            if (m_findType == FIND_TYPE::MONSTER_PLAYER)
+            {
+                if (PTarget->PMaster->objtype == TYPE_MOB)
+                {
+                    return false;
+                }
+            }
+            else if (m_findType == FIND_TYPE::PLAYER_MONSTER)
+            {
+                if (PTarget->PMaster->objtype == TYPE_PC)
+                {
+                    return false;
+                }
+            }
+            else if (m_findType == FIND_TYPE::MONSTER_MONSTER || m_findType == FIND_TYPE::PLAYER_PLAYER)
+            {
+                return PTarget->objtype == TYPE_TRUST;
+            }
         }
     }
 
