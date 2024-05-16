@@ -203,7 +203,7 @@ void CMobController::TryLink()
     // my pet should help as well
     if (PMob->PPet != nullptr && PMob->PPet->PAI->IsRoaming())
     {
-        PMob->PPet->PAI->Engage(PTarget->id);
+        PMob->PPet->PAI->Engage(PTarget->targid);
     }
 
     // Handle monster linking if they are close enough
