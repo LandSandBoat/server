@@ -16,11 +16,14 @@ zones[xi.zone.PHANAUET_CHANNEL] =
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7064, -- Tallying conquest results...
+        RICHE_MESSAGE                 = 7232, -- ...
         FISHING_MESSAGE_OFFSET        = 7233, -- You can't fish here.
+        ARE_WE_THERE_YET              = 7378, -- <Sigh> Are we there yet?
         RICHE_DAVOI_WATERFALL         = 7421, -- <item>...Davoi...waterfall...
     },
     mob =
     {
+        VODYANOI = GetFirstID('Vodyanoi'),
     },
     npc =
     {
