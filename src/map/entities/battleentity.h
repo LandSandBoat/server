@@ -316,10 +316,11 @@ enum class SPECEFFECT
 {
     NONE         = 0x00,
     BLOOD        = 0x02,
+    SELFAOE_MISS = 0x04,
     HIT          = 0x10,
     RAISE        = 0x11,
     RECOIL       = 0x20,
-    CRITICAL_HIT = 0x22
+    CRITICAL_HIT = 0x22,
 };
 DECLARE_FORMAT_AS_UNDERLYING(SPECEFFECT);
 

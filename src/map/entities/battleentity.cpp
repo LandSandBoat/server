@@ -1928,15 +1928,29 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     // No targets, perhaps something like Super Jump or otherwise untargetable
     if (targets == 0)
     {
-        action.actiontype         = ACTION_MOBABILITY_INTERRUPT;
-        action.actionid           = 28787; // Some hardcoded magic for interrupts
         actionList_t& actionList  = action.getNewActionList();
         actionList.ActionTargetID = id;
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // Hardcoded magic sent from the server
-        actionTarget.messageID       = 0;
-        actionTarget.reaction        = REACTION::ABILITY | REACTION::HIT;
+
+        if (skipSelf)
+        {
+            // This ability targets self for aoe skills (such as Frozen Mist)
+            // And it found no valid targets in range, the skill and animation should still trigger
+            // action.actiontype unchanged
+            actionTarget.animation  = PSkill->getAnimationID();
+            actionTarget.messageID  = 0;
+            actionTarget.reaction   = REACTION::MISS | REACTION::HIT | REACTION::GUARDED;
+            actionTarget.speceffect = SPECEFFECT::SELFAOE_MISS;
+        }
+        else
+        {
+            action.actiontype      = ACTION_MOBABILITY_INTERRUPT;
+            action.actionid        = 28787; // Some hardcoded magic for interrupts
+            actionTarget.animation = 0x1FC; // Hardcoded magic sent from the server
+            actionTarget.messageID = 0;
+            actionTarget.reaction  = REACTION::ABILITY | REACTION::HIT;
+        }
 
         return;
     }
