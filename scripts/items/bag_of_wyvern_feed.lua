@@ -6,20 +6,20 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
+itemObject.onItemCheck = function(target, user, item, param)
+    local effect = target:getItemEnchantmentEffect(item:getID())
     local pet = target:getPet()
     if not pet then
         return xi.msg.basic.REQUIRES_A_PET, 0
-    elseif effect ~= nil and effect:getSubType() == 18242 then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    elseif effect then
+        effect:delStatusEffect()
     end
 
     return 0
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 18242)
+itemObject.onItemUse = function(target, user, item)
+    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, item:getID())
 end
 
 itemObject.onEffectGain = function(target, effect)

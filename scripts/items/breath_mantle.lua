@@ -5,24 +5,17 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil then
-        if effect:getSubType() == 15486 then
-            target:delStatusEffect(xi.effect.ENCHANTMENT)
-        end
+itemObject.onItemCheck = function(target, user, item, param)
+    local effect = target:getItemEnchantmentEffect(item:getID())
+    if effect then
+        effect:delStatusEffect()
     end
 
     return 0
 end
 
-itemObject.onItemUse = function(target)
-    if target:hasStatusEffect(xi.effect.ENCHANTMENT) then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
-        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 15486)
-    else
-        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 15486)
-    end
+itemObject.onItemUse = function(target, user, item)
+    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, item:getID())
 end
 
 itemObject.onEffectGain = function(target, effect)

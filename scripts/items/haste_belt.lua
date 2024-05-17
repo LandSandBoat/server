@@ -1,11 +1,17 @@
 -----------------------------------
 -- ID: 15290
 -- Item: Haste Belt
--- Item Effect: 10% haste
+-- Item Effect: 10% haste, stacks with haste
+-- Notes: must remain equipped to keep the effect, overwrites existing haste enchantment
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, user, item, param)
+    local effect = target:getItemEnchantmentEffect(item:getID())
+    if effect then
+        effect:delStatusEffect()
+    end
+
     return 0
 end
 
