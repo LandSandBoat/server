@@ -11,6 +11,10 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
+    zone:registerTriggerArea(1, 233, -10, -546, 260, 10, -509) -- Barge while docked at South landing
+    zone:registerTriggerArea(2, -151, -10, 63, -100, 10, 80)   -- Barge while docked at Central landing
+    zone:registerTriggerArea(3, -326, -10, 534, -264, 10, 521) -- Barge while docked at North landing
+
     UpdateNMSpawnPoint(ID.mob.TEMPEST_TIGON)
     GetMobByID(ID.mob.TEMPEST_TIGON):setRespawnTime(math.random(900, 10800))
 
@@ -26,7 +30,11 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        player:setPos(6.509, -9.163, -819.333, 239)
+        if prevZone == xi.zone.PHANAUET_CHANNEL then
+            cs = xi.barge.onZoneIn(player)
+        else
+            player:setPos(6.509, -9.163, -819.333, 239)
+        end
     end
 
     return cs
@@ -45,12 +53,32 @@ zoneObject.onGameHour = function(zone)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    print('triger')
+    xi.barge.aboard(player, triggerArea:GetTriggerAreaID(), true)
+end
+
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
+    xi.barge.aboard(player, triggerArea:GetTriggerAreaID(), false)
+end
+
+zoneObject.onTransportEvent = function(player, transport)
+    print('transportevent')
+    xi.barge.onTransportEvent(player, transport)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
+    if csid == 11 then -- North Landing arriving
+        player:startEvent(13)
+    elseif csid == 10 then -- Central Landing arriving
+        player:startEvent(39)
+    elseif csid == 38 then -- South Landing arriving
+        player:startEvent(12)
+    elseif csid == 14 or csid == 16 or csid == 40 then -- Barge departing
+        player:setPos(0, 0, 0, 0, xi.zone.PHANAUET_CHANNEL)
+    end
 end
 
 return zoneObject

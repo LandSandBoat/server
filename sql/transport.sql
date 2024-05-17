@@ -54,3 +54,8 @@ INSERT INTO `transport` VALUES (16,'Manaclip_Bibiki-Purgonorgo',16793984,1679398
 INSERT INTO `transport` VALUES (17,'Manaclip_Purgonorgo-Bibiki',16793984,16793986,-392.000,0.000,-364.000,128,0,20,21,500,720,20,40,20,3);
 INSERT INTO `transport` VALUES (18,'Selbina-Mhaura_Boat_Pirates',17793088,17793087,9.294,0.000,-69.775,0,485,18,19,382,480,18,80,17,227);
 INSERT INTO `transport` VALUES (19,'Mhaura-Selbina_Boat_Pirates',17797182,17797181,-0.516,0.026,-8.409,0,493,18,19,382,480,18,80,17,228);
+INSERT INTO `transport` VALUES (20,'Carpenters_Landing-South-Arriving_Barge',16785748,16785756,246.38,0.0,-529.79,64,0,23,0,50,280,35,0,0,1);
+INSERT INTO `transport` VALUES (21,'Carpenters_Landing-South-Departing_Barge',16785748,16785756,246.38,0.0,-529.79,192,0,18,19,90,280,15,80,15,1);
+INSERT INTO `transport` VALUES (22,'Carpenters_Landing-Central_Barge',16785748,16785757,-125.04,0.000,72.79,160,0,20,21,50,280,15,0,0,1);
+INSERT INTO `transport` VALUES (23,'Carpenters_Landing-North-Arriving_Barge',16785748,16785758,-291.675,0.000,-516.18,32,0,22,0,50,280,35,0,0,1);
+INSERT INTO `transport` VALUES (24,'Carpenters_Landing-North-Departing_Barge',16785748,16785758,-291.675,0.000,-516.18,160,0,24,25,90,280,15,120,15,1);
