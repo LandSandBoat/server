@@ -140,7 +140,7 @@ local function spawnStray(mob, strayId)
     mob:setLocalVar('[Stray]Id', strayId)
 
     -- 1: Raise Receptacle.
-    mob:setAnimationSub(1)
+    mob:setAnimationSub(5)
 
     -- 2: Pop Stray.
     mob:timer(875, function(mobArg)
@@ -152,7 +152,12 @@ local function spawnStray(mob, strayId)
 
     -- 3: Lower Receptacle.
     mob:timer(1750, function(mobArg)
-        mobArg:setAnimationSub(2)
+        mobArg:setAnimationSub(6)
+    end)
+
+    -- 4: Reset Receptacle (Makes it SLIGHTLY brighter).
+    mob:timer(3000, function(mobArg)
+        mobArg:setAnimationSub(4)
     end)
 end
 
@@ -323,6 +328,11 @@ xi.promyvion.receptacleOnMobDespawn = function(mob)
         local newPortal  = GetNPCByID(groupTable[math.random(1, #groupTable)]) -- Fetch NPC object from table, at random.
 
         newPortal:setLocalVar('[Portal]Chosen', 1) -- Mark new portal.
+    end
+
+    -- Handle receptacle: Reset animationSub.
+    if mob:getAnimationSub() ~= 4 then
+        mob:setAnimationSub(4)
     end
 
     -- Handle decoration: Reset.
