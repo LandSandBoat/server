@@ -7,18 +7,20 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, user, item, param)
-    local effect = target:getItemEnchantmentEffect(item:getID())
     local pet = target:getPet()
     if not pet then
         return xi.msg.basic.REQUIRES_A_PET, 0
-    elseif effect then
-        effect:delStatusEffect()
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target, user, item)
+    local effect = target:getItemEnchantmentEffect(item:getID())
+    if effect then
+        effect:delStatusEffect()
+    end
+
     target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, item:getID())
 end
 
