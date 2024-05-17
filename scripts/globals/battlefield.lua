@@ -1281,6 +1281,8 @@ function BattlefieldMission:new(data)
     obj.missionStatus         = data.missionStatus
     obj.requiredMissionStatus = data.requiredMissionStatus
     obj.skipMissionStatus     = data.skipMissionStatus or data.requiredMissionStatus
+    obj.requiredVar           = data.requiredVar
+    obj.requiredValue         = data.requiredValue
     obj.canLoseExp            = data.canLoseExp or false
 
     return obj
@@ -1301,6 +1303,17 @@ function BattlefieldMission:checkRequirements(player, npc, isRegistrant, trade)
         return (not isRegistrant and (player:hasCompletedMission(missionArea, self.mission) or
             (current == self.mission and status >= self.requiredMissionStatus))) or
             (current == self.mission and status == self.requiredMissionStatus)
+    elseif self.requiredVar ~= nil then
+        -- COP Missions use a charVar to track since missionStatus is used to define menu settings.
+        -- When converting these, allow for the same structure of status, but with defined requiredVar (str)
+        -- and requiredValue (uint requirement).  These are currently mutually exclusive, and treated
+        -- as such.
+
+        status = player:getCharVar(self.requiredVar)
+
+        return (not isRegistrant and (player:hasCompletedMission(missionArea, self.mission) or
+            (current == self.mission and status >= self.requiredValue))) or
+            (current == self.mission and status == self.requiredValue)
     else
         return (not isRegistrant and player:hasCompletedMission(missionArea, self.mission)) or
             current == self.mission
