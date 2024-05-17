@@ -2130,13 +2130,20 @@ namespace battleutils
             if (isBlocked)
             {
                 uint8 absorb = 100;
+
+                // shield def bonus is a flat raw damage reduction that occurs before absorb
+                // however do not reduce below 0 or if damage is negative
+                if (damage > 0)
+                {
+                    damage = std::max(0, damage - PDefender->getMod(Mod::SHIELD_DEF_BONUS));
+                }
+
                 if (const auto PChar = dynamic_cast<CCharEntity*>(PDefender))
                 {
                     CItemEquipment* slotSub = PChar->getEquip(SLOT_SUB);
                     if (slotSub && slotSub->IsShield())
                     {
                         absorb = std::clamp(100 - slotSub->getShieldAbsorption(), 0, 100);
-                        absorb -= PDefender->getMod(Mod::SHIELD_DEF_BONUS); // Include Shield Defense Bonus in absorb amount
 
                         // Shield Mastery
                         if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&

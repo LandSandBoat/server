@@ -689,6 +689,7 @@ public:
     uint16 getRATT();
     uint16 getILvlMacc();
     uint16 getILvlSkill();
+    uint16 getILvlParry();
     bool   isSpellAoE(uint16 spellId);
 
     int32 physicalDmgTaken(double damage, sol::variadic_args va);

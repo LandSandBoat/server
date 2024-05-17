@@ -13665,6 +13665,23 @@ uint16 CLuaBaseEntity::getILvlSkill()
 }
 
 /************************************************************************
+ *  Function: getILvlParry()
+ *  Purpose : Returns the parry skill Bonus value of an equipped Main Weapon
+ *  Example : player:getILvlParry()
+ *  Notes   : Value of m_iLvlParry (private member of CItemWeapon)
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getILvlParry()
+{
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(static_cast<CBattleEntity*>(m_PBaseEntity)->m_Weapons[SLOT_MAIN]))
+    {
+        return weapon->getILvlParry();
+    }
+
+    return 0;
+}
+
+/************************************************************************
  *  Function: isSpellAoE()
  *  Purpose : Returns true if a specified spell is AoE
  *  Example : if caster:isSpellAoE(spell:getID()) then
@@ -18045,6 +18062,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getRATT", CLuaBaseEntity::getRATT);
     SOL_REGISTER("getILvlMacc", CLuaBaseEntity::getILvlMacc);
     SOL_REGISTER("getILvlSkill", CLuaBaseEntity::getILvlSkill);
+    SOL_REGISTER("getILvlParry", CLuaBaseEntity::getILvlParry);
 
     SOL_REGISTER("isSpellAoE", CLuaBaseEntity::isSpellAoE);
 
