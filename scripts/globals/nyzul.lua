@@ -534,7 +534,7 @@ xi.nyzul.specifiedEnemySet = function(mob)
     local instance = mob:getInstance()
 
     if instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
-        if instance:getLocalVar('Nyzul_Specified_Enemy') == mob:getID() then
+        if instance:getLocalVar('Nyzul_Specified_Enemy') == 0 then
             mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
         end
     end
