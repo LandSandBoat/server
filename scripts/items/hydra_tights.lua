@@ -1,6 +1,6 @@
 -----------------------------------
--- ID: 15290
--- Item: Haste Belt
+-- ID: 15596
+-- Item: Hydra Tights
 -- Item Effect: 10% haste, stacks with haste
 -- Notes: must remain equipped to keep the effect, overwrites existing haste enchantment
 -----------------------------------
