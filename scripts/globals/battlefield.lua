@@ -181,7 +181,7 @@ xi.battlefield.id =
     ARK_ANGELS_4                               = 291, -- Converted
     ARK_ANGELS_5                               = 292, -- Converted
     DIVINE_MIGHT                               = 293, -- Converted
-    CELESTIAL_NEXUS                            = 320,
+    CELESTIAL_NEXUS                            = 320, -- Converted
     FIAT_LUX                                   = 352,
     DARKNESS_DESCENDS                          = 353,
     BONDS_OF_MYTHRIL                           = 354,
@@ -223,7 +223,7 @@ xi.battlefield.id =
     CLASH_OF_THE_COMRADES                      = 531,
     THOSE_WHO_LURK_IN_SHADOWS                  = 532, -- Experimental
     BEYOND_INFINITY                            = 533, -- Converted
-    TRIAL_BY_FIRE                              = 544,
+    TRIAL_BY_FIRE                              = 544, -- Converted
     TRIAL_SIZE_TRIAL_BY_FIRE                   = 545,
     WAKING_THE_BEAST_CLOISTER_OF_FLAMES        = 546,
     SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FLAMES  = 547,
@@ -1008,7 +1008,7 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
 
         if type(self.requiredKeyItems.message) == 'table' then
             player:messageSpecial(self.requiredKeyItems.message[1], unpack(self.requiredKeyItems.message[2]))
-        elseif self.requiredKeyItems.message ~= 0 then
+        elseif self.requiredKeyItems.message then
             player:messageSpecial(self.requiredKeyItems.message, unpack(items))
         end
 

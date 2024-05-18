@@ -25,21 +25,19 @@ local content = BattlefieldMission:new({
 })
 
 -- TODO: This should be moved to mission script once converted to Interaction Framework
-function content:onEventFinishBattlefield(player, csid, option, npc)
-    if csid == 32001 then
-        if player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III then
-            player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III)
-            player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS)
-        end
+function content:onEventFinishWin(player, csid, option, npc)
+    if player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III then
+        player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III)
+        player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS)
+    end
 
-        if
-            not player:hasKeyItem(xi.ki.IVORY_KEY) and
-            player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III
-        then
-            player:setCharVar('LastIvoryKey', getMidnight())
-            player:addKeyItem(xi.ki.IVORY_KEY)
-            player:messageSpecial(qubiaID.text.KEYITEM_OBTAINED, xi.ki.IVORY_KEY)
-        end
+    if
+        not player:hasKeyItem(xi.ki.IVORY_KEY) and
+        player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III
+    then
+        player:setCharVar('LastIvoryKey', getMidnight())
+        player:addKeyItem(xi.ki.IVORY_KEY)
+        player:messageSpecial(qubiaID.text.KEYITEM_OBTAINED, xi.ki.IVORY_KEY)
     end
 end
 

@@ -22,43 +22,41 @@ local content = BattlefieldMission:new({
 })
 
 function content:onEventFinishBattlefield(player, csid, option, npc)
-    if csid == 32004 then
-        local playerCoords =
-        {
-            [1] = { -400, -201,  419, 61 },
-            [2] = {    0,   -1,   10, 61 },
-            [3] = {  399,  198, -381, 57 },
-        }
+    local playerCoords =
+    {
+        [1] = { -400, -201,  419, 61 },
+        [2] = {    0,   -1,   10, 61 },
+        [3] = {  399,  198, -381, 57 },
+    }
 
-        local trionCoords =
-        {
-            [1] = { -403, -201,  413, 58 },
-            [2] = {   -3,   -1,    4, 61 },
-            [3] = {  397,  198, -395, 64 },
-        }
+    local trionCoords =
+    {
+        [1] = { -403, -201,  413, 58 },
+        [2] = {   -3,   -1,    4, 61 },
+        [3] = {  397,  198, -395, 64 },
+    }
 
-        local battlefield     = player:getBattlefield()
-        local battlefieldArea = battlefield:getArea()
-        local phaseTwoOffset  = qubiaID.mob.WARLORD_ROJGNOJ + (battlefield:getArea() - 1) * 14
+    local battlefield     = player:getBattlefield()
+    local battlefieldArea = battlefield:getArea()
+    local phaseTwoOffset  = qubiaID.mob.WARLORD_ROJGNOJ + (battlefield:getArea() - 1) * 14
 
-        -- Bail out if anyone else got here first
-        for phaseTwoMobId = phaseTwoOffset, phaseTwoOffset + 2 do
-            if GetMobByID(phaseTwoMobId):isSpawned() then
-                return
-            end
+    -- Bail out if anyone else got here first
+    for phaseTwoMobId = phaseTwoOffset, phaseTwoOffset + 2 do
+        if GetMobByID(phaseTwoMobId):isSpawned() then
+            return
         end
-
-        -- Set up the Arena for Phase 2
-        for phaseTwoMobId = phaseTwoOffset, phaseTwoOffset + 2 do
-            SpawnMob(phaseTwoMobId)
-        end
-
-        -- Spawn Trion (Ally)
-        local trion = player:getBattlefield():insertEntity(75, true, true)
-        player:setPos(unpack(playerCoords[battlefieldArea]))
-        trion:setSpawn(unpack(trionCoords[battlefieldArea]))
-        trion:spawn()
     end
+
+    -- Set up the Arena for Phase 2
+    for phaseTwoMobId = phaseTwoOffset, phaseTwoOffset + 2 do
+        SpawnMob(phaseTwoMobId)
+    end
+
+    -- Spawn Trion (Ally)
+    local trion = player:getBattlefield():insertEntity(75, true, true)
+    player:setPos(unpack(playerCoords[battlefieldArea]))
+    trion:setSpawn(unpack(trionCoords[battlefieldArea]))
+    trion:spawn()
 end
 
 content.groups =
