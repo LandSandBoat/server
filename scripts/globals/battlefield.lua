@@ -798,7 +798,10 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
         local zone   = player:getZoneID()
 
         -- Handle traded items if not wearing them
-        if self.requiredItems.wearMessage == nil and #self.tradeItems > 0 then
+        if
+            self.requiredItems.wearMessage == nil and
+            #self.tradeItems > 0
+        then
             player:tradeComplete()
         end
 
