@@ -4,10 +4,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill, master, action)
+abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
     local holyRollOneAnimID = 164
     local primaryTargetID = action:getPrimaryTargetID()
 
@@ -27,16 +28,16 @@ abilityObject.onPetAbility = function(target, pet, skill, master, action)
     local basedmg = pet:getMainLvl() * power + (dMND * 1.5)
     -- Only have an effect if target's level is divisible by die roll
     if target:getMainLvl() % power == 0 then
-        local info = xi.mobskills.mobMagicalMove(pet, target, skill, basedmg, ele, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 10)
-        dmg = xi.mobskills.mobAddBonuses(pet, target, info.dmg, ele, skill)
-        dmg = xi.summon.avatarFinalAdjustments(dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, 1)
+        local info = xi.mobskills.mobMagicalMove(pet, target, petskill, basedmg, ele, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 10)
+        dmg = xi.mobskills.mobAddBonuses(pet, target, info.dmg, ele, petskill)
+        dmg = xi.summon.avatarFinalAdjustments(dmg, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, 1)
 
         -- TODO: Magic burst?
 
         target:takeDamage(dmg, pet, xi.attackType.MAGICAL, ele)
         target:updateEnmityFromDamage(pet, dmg)
     else
-        skill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
+        petskill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
     end
 
     return dmg
