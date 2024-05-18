@@ -646,19 +646,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.DNC and mainLevel >= 66
         end,
 
-        [544] = function() -- Quest: Trial by Fire
-            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_FIRE)
-        end,
-
-        [545] = function() -- Quest: Trial-size Trial by Fire
-            return mainJob == xi.job.SMN and mainLevel >= 20
-        end,
-
-        [547] = function() -- ASA4: Sugar-coated Directive
-            return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-                player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)
-        end,
-
         [576] = function() -- Quest: Trial by Earth
             return player:hasKeyItem(xi.ki.TUNING_FORK_OF_EARTH)
         end,
@@ -1132,11 +1119,6 @@ local function checkSkip(player, bfid)
                     sandoriaMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
                     nationStatus > 4
                 )
-        end,
-
-        [544] = function() -- Quest: Trial by Fire
-            return player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE) or
-                player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)
         end,
 
         [576] = function() -- Quest: Trial by Earth
