@@ -763,11 +763,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.CENSER_OF_ANIMUS)
         end,
 
-        [864] = function() -- PM5-2: Desires of Emptiness
-            return promathiaMission == xi.mission.id.cop.DESIRES_OF_EMPTINESS and
-                player:getCharVar('Mission[6][518]Status') == 2
-        end,
-
         [865] = function() -- ENM: Pulling the Plug
             return player:hasKeyItem(xi.ki.CENSER_OF_ACRIMONY)
         end,
@@ -1173,14 +1168,6 @@ local function checkSkip(player, bfid)
         [706] = function() -- Quest: Waking Dreams
             return player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS)
-        end,
-
-        [864] = function() -- PM5-2: Desires of Emptiness
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DESIRES_OF_EMPTINESS) or
-                (
-                    promathiaMission == xi.mission.id.cop.DESIRES_OF_EMPTINESS and
-                    player:getCharVar('Mission[6][518]Status') > 2
-                )
         end,
 
         [896] = function() -- Quest: Storms of Fate
