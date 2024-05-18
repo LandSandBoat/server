@@ -23,7 +23,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Softcaps at 12, should always do at least 1
     dmg = utils.clamp(dmg, 1, 12)
     -- Get resist multiplier (1x if no resist)
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = applyResistanceEffect(caster, target, spell, params)
     -- Get the resisted damage
     dmg = dmg * resist
     -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)

@@ -6,6 +6,25 @@ require('scripts/globals/utils')
 xi = xi or {}
 xi.crafting = xi.crafting or {}
 -----------------------------------
+-- Document the "Guild_Member" bitmask.
+-- Bit  0: Has joined Fishing guild.
+-- Bit  1: Has joined Woodworking guild.
+-- Bit  2: Has joined Smithing guild.
+-- Bit  3: Has joined Goldsmithing guild.
+-- Bit  4: Has joined Clothcraft guild.
+-- Bit  5: Has joined Leathercraft guild.
+-- Bit  6: Has joined Bonecraft guild.
+-- Bit  7: Has joined Alchemy guild.
+-- Bit  8: Has joined Cooking guild.
+
+-- Bit 24: Has spoken to "Fatimah" after joining Goldsmithing guild.
+-- Bit 25: Has spoken to "Azima" afer joining Alchemy guild.
+
+-- Bit 27: Unknown, but this bits are used. Captured them on a lvl 110 Alchemist with a stage 2 Escutcheon completed.
+-- Bit 28: Unknown, but this bits are used. Captured them on a lvl 110 Alchemist with a stage 2 Escutcheon completed.
+-- Bit 29: Unknown, but this bits are used. Captured them on a lvl 110 Alchemist with a stage 2 Escutcheon completed.
+-- Bit 30: Unknown, but this bits are used. Captured them on a lvl 110 Alchemist with a stage 2 Escutcheon completed.
+
 xi.crafting.guildTable =
 {
     --           [guild ID] = { skill used,            'currency used'      },

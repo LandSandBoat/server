@@ -27,21 +27,21 @@ end
 
 zoneObject.onInitialize = function(zone)
     -- Blue portals (Regular)
-    zone:registerTriggerArea(1,    1.125, 2, -581.300, 0, 0, 0) -- Entrance to Main Island
-    zone:registerTriggerArea(2,  149.875, 2, -447.275, 0, 0, 0) -- Main Island to Entrance (East)
-    zone:registerTriggerArea(3, -149.875, 2, -447.275, 0, 0, 0) -- Main Island to Entrance (West)
+    zone:registerTriggerArea(1,    1.125, 3, -581.300, 0, 0, 0) -- Entrance to Main Island
+    zone:registerTriggerArea(2,  149.875, 3, -447.275, 0, 0, 0) -- Main Island to Entrance (East)
+    zone:registerTriggerArea(3, -149.875, 3, -447.275, 0, 0, 0) -- Main Island to Entrance (West)
 
     -- Blue portals (Pincerstones)
-    zone:registerTriggerArea(4,   165.880, 2, -350.782, 0, 0, 0) -- Main Island to SE Island
-    zone:registerTriggerArea(5,   267.662, 2, -274.356, 0, 0, 0) -- SE Island to Main Island
-    zone:registerTriggerArea(6,   377.808, 2,   64.638, 0, 0, 0) -- SE Island to NE Island
-    zone:registerTriggerArea(7,   343.641, 2,  169.781, 0, 0, 0) -- NE Island to SE Island
-    zone:registerTriggerArea(8,    55.273, 2,  379.291, 0, 0, 0) -- NE Island to NW Island
-    zone:registerTriggerArea(9,   -55.280, 2,  379.287, 0, 0, 0) -- NW Island to NE Island
-    zone:registerTriggerArea(10, -343.647, 2,  169.776, 0, 0, 0) -- NW Island to SW Island
-    zone:registerTriggerArea(11, -377.806, 2,   64.631, 0, 0, 0) -- SW Island to NW Island
-    zone:registerTriggerArea(12, -267.659, 2, -274.364, 0, 0, 0) -- SW Island to Main Island
-    zone:registerTriggerArea(13, -165.880, 2, -350.782, 0, 0, 0) -- Main Island to SW Island
+    zone:registerTriggerArea(4,   165.880, 3, -350.782, 0, 0, 0) -- Main Island to SE Island
+    zone:registerTriggerArea(5,   267.662, 3, -274.356, 0, 0, 0) -- SE Island to Main Island
+    zone:registerTriggerArea(6,   377.808, 3,   64.638, 0, 0, 0) -- SE Island to NE Island
+    zone:registerTriggerArea(7,   343.641, 3,  169.781, 0, 0, 0) -- NE Island to SE Island
+    zone:registerTriggerArea(8,    55.273, 3,  379.291, 0, 0, 0) -- NE Island to NW Island
+    zone:registerTriggerArea(9,   -55.280, 3,  379.287, 0, 0, 0) -- NW Island to NE Island
+    zone:registerTriggerArea(10, -343.647, 3,  169.776, 0, 0, 0) -- NW Island to SW Island
+    zone:registerTriggerArea(11, -377.806, 3,   64.631, 0, 0, 0) -- SW Island to NW Island
+    zone:registerTriggerArea(12, -267.659, 3, -274.364, 0, 0, 0) -- SW Island to Main Island
+    zone:registerTriggerArea(13, -165.880, 3, -350.782, 0, 0, 0) -- Main Island to SW Island
 
     -- Red portals (To Laloff)
     zone:registerTriggerArea(14,  186, -43, -405,  190, -39, -401) -- Main Island to Laloff (SE / AA Galka)
@@ -63,10 +63,10 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(28, -276, -42, -379, -272, -38, -375) -- Laloff (SW / AA Taru)
 
     -- Yellow portals (To Sky Gods)
-    zone:registerTriggerArea(29,  455.288, 2, -147.932, 0, 0, 0) -- SE Island to Seiryu Island
-    zone:registerTriggerArea(30,  279.603, 2,  384.841, 0, 0, 0) -- NE Island to Genbu Island
-    zone:registerTriggerArea(31, -281.383, 2,  387.291, 0, 0, 0) -- NW Island to Byakko Island
-    zone:registerTriggerArea(32, -455.288, 2, -147.932, 0, 0, 0) -- SW Island to Suzaku Island
+    zone:registerTriggerArea(29,  455.288, 3, -147.932, 0, 0, 0) -- SE Island to Seiryu Island
+    zone:registerTriggerArea(30,  279.603, 3,  384.841, 0, 0, 0) -- NE Island to Genbu Island
+    zone:registerTriggerArea(31, -281.383, 3,  387.291, 0, 0, 0) -- NW Island to Byakko Island
+    zone:registerTriggerArea(32, -455.288, 3, -147.932, 0, 0, 0) -- SW Island to Suzaku Island
 
     -- Yellow portals (From Sky Gods)
     zone:registerTriggerArea(33,  543, -73,  -19,  547, -69,  -15) -- Seiryu Island to SE Island
@@ -101,7 +101,9 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea) : caseof {
+    local triggerAreaID = triggerArea:GetTriggerAreaID()
+
+    switch (triggerAreaID) : caseof {
         [1] = function()
             player:startOptionalCutscene(0)
         end,

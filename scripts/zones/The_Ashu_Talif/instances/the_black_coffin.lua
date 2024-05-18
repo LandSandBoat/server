@@ -6,6 +6,28 @@ local ID = zones[xi.zone.THE_ASHU_TALIF]
 -----------------------------------
 local instanceObject = {}
 
+local crewTable =
+{
+    -- The Black Coffin - Wave 1
+    [1] =
+    {
+        ID.mob.ASHU_CREW_OFFSET,
+        ID.mob.ASHU_CREW_OFFSET + 1,
+        ID.mob.ASHU_CREW_OFFSET + 2,
+        ID.mob.ASHU_CREW_OFFSET + 3,
+        ID.mob.ASHU_CREW_OFFSET + 4,
+    },
+    -- The Black Coffin - Wave 2
+    [2] =
+    {
+        ID.mob.ASHU_CAPTAIN_OFFSET,
+        ID.mob.ASHU_CAPTAIN_OFFSET + 1,
+        ID.mob.ASHU_CAPTAIN_OFFSET + 2,
+        ID.mob.ASHU_CAPTAIN_OFFSET + 3,
+        ID.mob.ASHU_CAPTAIN_OFFSET + 4,
+    },
+}
+
 instanceObject.registryRequirements = function(player)
     return player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.THE_BLACK_COFFIN and
         player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
@@ -18,7 +40,7 @@ end
 
 instanceObject.onInstanceCreated = function(instance)
     SpawnMob(ID.mob.GESSHO, instance)
-    for i, mob in pairs(ID.mob[1]) do
+    for i, mob in pairs(crewTable[1]) do
         SpawnMob(mob, instance)
     end
 end
@@ -49,7 +71,7 @@ end
 
 instanceObject.onInstanceProgressUpdate = function(instance, progress)
     if progress == 5 then
-        for i, mob in pairs(ID.mob[2]) do
+        for i, mob in pairs(crewTable[2]) do
             SpawnMob(mob, instance)
         end
     elseif progress >= 10 and not instance:completed() then
@@ -66,7 +88,7 @@ instanceObject.onInstanceComplete = function(instance)
     local players = instance:getChars()
 
     DespawnMob(ID.mob.GESSHO, instance)
-    for i, mob in pairs(ID.mob[2]) do
+    for i, mob in pairs(crewTable[2]) do
         DespawnMob(mob, instance)
     end
 

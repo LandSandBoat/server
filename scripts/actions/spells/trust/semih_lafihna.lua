@@ -42,7 +42,9 @@ spellObject.onMobSpawn = function(mob)
 
     mob:setAutoAttackEnabled(false)
 
-    mob:addMod(xi.mod.STORETP, 40)
+    -- Gets 252 TP per hit even at level 1, see https://www.bg-wiki.com/ffxi/BGWiki:Trusts#Semih_Lafihna
+    -- Using STP as a hack to ensure proper TP amount, as her delay is not that high on retail.
+    mob:addMod(xi.mod.STORETP, 86)
 
     mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.LONG_RANGE)
 end

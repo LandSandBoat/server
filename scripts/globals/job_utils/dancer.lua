@@ -246,7 +246,7 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
         player:delTP(100 + player:getMod(xi.mod.STEP_TP_CONSUMED))
     end
 
-    if math.random() <= xi.weaponskills.getHitRate(player, target, true, 10 + player:getMod(xi.mod.STEP_ACCURACY)) then
+    if math.random() <= xi.weaponskills.getHitRate(player, target, 10 + player:getMod(xi.mod.STEP_ACCURACY)) then
         local maxSteps         = player:getMainJob() == xi.job.DNC and 10 or 5
         local debuffEffect     = target:getStatusEffect(stepEffect)
         local origDebuffStacks = 0
@@ -360,7 +360,7 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
     setFinishingMoves(player, numMoves - 1)
 
     if
-        math.random() <= xi.weaponskills.getHitRate(player, target, true, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)) or
+        math.random() <= xi.weaponskills.getHitRate(player, target, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)) or
         (player:hasStatusEffect(xi.effect.SNEAK_ATTACK) and player:isBehind(target))
     then
         local spell  = GetSpell(xi.magic.spell.GRAVITY)
@@ -371,7 +371,7 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
             bonus     = 50 - target:getMod(xi.mod.GRAVITYRES),
         }
 
-        local resistRate = applyResistance(player, target, spell, params)
+        local resistRate = applyResistanceEffect(player, target, spell, params)
         if resistRate > 0.25 then
             target:delStatusEffectSilent(xi.effect.WEIGHT)
             target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60 * resistRate)
@@ -397,7 +397,7 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
     setFinishingMoves(player, numMoves - 1)
 
     if
-        math.random() <= xi.weaponskills.getHitRate(player, target, true, 100) or
+        math.random() <= xi.weaponskills.getHitRate(player, target, 100) or
         (player:hasStatusEffect(xi.effect.SNEAK_ATTACK) and player:isBehind(target))
     then
         local hitType = 3
@@ -421,7 +421,7 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
         local cRatio, _ = xi.weaponskills.cMeleeRatio(player, target, params, 0, 1000)
         local dmg       = baseDmg * xi.weaponskills.generatePdif(cRatio[1], cRatio[2], true)
 
-        if applyResistance(player, target, spell, params) > 0.25 then
+        if applyResistanceEffect(player, target, spell, params) > 0.25 then
             target:addStatusEffect(xi.effect.STUN, 1, 0, 2)
         else
             ability:setMsg(xi.msg.basic.JA_DAMAGE)

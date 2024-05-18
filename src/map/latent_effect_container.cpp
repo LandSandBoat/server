@@ -71,6 +71,26 @@ void CLatentEffectContainer::DelLatentEffects(uint8 reqLvl, uint8 slot)
                              m_LatentEffectList.end());
 }
 
+/************************************************************************
+*                                                                       *
+* Returns true if no latents for slot are inactive                      *
+*                                                                       *
+ ************************************************************************/
+
+bool CLatentEffectContainer::HasAllLatentsActive(uint8 slot)
+{
+    auto allActive = true;
+    for (auto iter = m_LatentEffectList.begin(); iter != m_LatentEffectList.end(); ++iter)
+    {
+        CLatentEffect& latent = *iter;
+        if (!latent.IsActivated() && latent.GetSlot() == slot)
+        {
+            allActive = false;
+        }
+    }
+    return allActive;
+}
+
 void CLatentEffectContainer::AddLatentEffect(LATENT conditionID, uint16 conditionValue, Mod modID, int16 modValue)
 {
     m_LatentEffectList.emplace_back(m_POwner, conditionID, conditionValue, MAX_SLOTTYPE, modID, modValue);
@@ -781,7 +801,10 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                     if (member->PPet != nullptr)
                     {
                         auto* PPet = (CPetEntity*)member->PPet;
-                        if (PPet->m_PetID == latentEffect.GetConditionsValue() && PPet->PAI->IsSpawned())
+                        if (
+                                !PPet->isDead() && PPet->m_PetID < 21 && // is a live avatar
+                                (PPet->m_PetID == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21)
+                            )
                         {
                             expression = true;
                             break;
@@ -792,7 +815,10 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             else if (m_POwner->PParty == nullptr && m_POwner->PPet != nullptr)
             {
                 auto* PPet = (CPetEntity*)m_POwner->PPet;
-                if (PPet->m_PetID == latentEffect.GetConditionsValue() && !PPet->isDead())
+                if (
+                        !PPet->isDead() && PPet->m_PetID < 21 && // is a live avatar
+                        (PPet->m_PetID == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21)
+                    )
                 {
                     expression = true;
                 }

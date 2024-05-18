@@ -329,7 +329,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     local finaldmg = math.floor(finalD * xi.spells.damage.calculateMTDR(spell))
 
     -- Resistance
-    finaldmg = math.floor(finaldmg * applyResistance(caster, target, spell, params))
+    finaldmg = math.floor(finaldmg * applyResistanceEffect(caster, target, spell, params))
 
     -- MAB/MDB/weather/day/affinity/burst effect on damage
     finaldmg = math.floor(addBonuses(caster, spell, target, finaldmg))
@@ -345,7 +345,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, 
         dmg = utils.clamp(dmg, 0, softCap)
     end
 
-    dmg = dmg * applyResistance(caster, target, spell, params)
+    dmg = dmg * applyResistanceEffect(caster, target, spell, params)
     dmg = addBonuses(caster, spell, target, dmg)
     dmg = adjustForTarget(target, dmg, spell:getElement())
 
@@ -404,7 +404,7 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params, isConal)
     dmg = dmg * (1 + (caster:getMod(xi.mod.BREATH_DMG_DEALT) / 100))
 
     -- Resistance
-    local resistance = applyResistance(caster, target, spell, params)
+    local resistance = applyResistanceEffect(caster, target, spell, params)
     dmg = math.floor(dmg * resistance)
 
     -- Final damage

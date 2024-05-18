@@ -3,8 +3,6 @@
 -----------------------------------
 zones = zones or {}
 
-local nommoID = GetFirstID('Nommo')
-
 zones[xi.zone.PASHHOW_MARSHLANDS_S] =
 {
     text =
@@ -18,38 +16,26 @@ zones[xi.zone.PASHHOW_MARSHLANDS_S] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET        = 7158, -- You can't fish here.
-        CAMPAIGN_RESULTS_TALLIED      = 7618, -- Campaign results tallied.
-        ALREADY_OBTAINED_TELE         = 7703, -- You already possess the gate crystal for this telepoint.
-        VOIDWALKER_DESPAWN            = 7999, -- The monster fades before your eyes, a look of disappointment on its face.
-        VOIDWALKER_NO_MOB             = 8046, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR        = 8047, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT           = 8048, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB          = 8049, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1       = 8051, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2       = 8052, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI           = 8053, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OBTAIN_KI          = 8054, -- Obtained key item: <keyitem>!
-        COMMON_SENSE_SURVIVAL         = 9083, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        FISHING_MESSAGE_OFFSET        = 7161, -- You can't fish here.
+        CAMPAIGN_RESULTS_TALLIED      = 7621, -- Campaign results tallied.
+        ALREADY_OBTAINED_TELE         = 7706, -- You already possess the gate crystal for this telepoint.
+        VOIDWALKER_DESPAWN            = 8002, -- The monster fades before your eyes, a look of disappointment on its face.
+        VOIDWALKER_NO_MOB             = 8049, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR        = 8050, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT           = 8051, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB          = 8052, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1       = 8054, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2       = 8055, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI           = 8056, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI          = 8057, -- Obtained key item: <keyitem>!
+        COMMON_SENSE_SURVIVAL         = 9086, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
 
     mob =
     {
-        SUGAAR_PH =
-        {
-            [17145862] = 17145867, -- -412.599 24.437 -431.639
-            [17145863] = 17145867, -- -455.311 24.499 -472.247
-            [17145864] = 17145867, -- -446.738 24.499 -443.850
-            [17145865] = 17145867, -- -417.691 23.840 -485.922
-            [17145866] = 17145867, -- -444.380 24.499 -487.828
-        },
-
-        NOMMO_PH =
-        {
-            [nommoID - 5] = nommoID, -- -168.292 24.499 396.933
-        },
-
-        KINEPIKWA = 17146147,
+        SUGAAR    = GetFirstID('Sugaar'),
+        NOMMO     = GetFirstID('Nommo'),
+        KINEPIKWA = GetFirstID('Kinepikwa'),
 
         VOIDWALKER =
         {

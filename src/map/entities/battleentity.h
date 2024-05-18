@@ -413,6 +413,7 @@ DECLARE_FORMAT_AS_UNDERLYING(SUBEFFECT);
 
 enum TARGETTYPE
 {
+    TARGET_NONE                    = 0x00,
     TARGET_SELF                    = 0x01,
     TARGET_PLAYER_PARTY            = 0x02,
     TARGET_ENEMY                   = 0x04,

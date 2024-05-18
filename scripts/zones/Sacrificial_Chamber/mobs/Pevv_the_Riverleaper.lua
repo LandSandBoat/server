@@ -7,13 +7,23 @@ mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            { id = xi.jsa.CALL_WYVERN, hpp = 75 },
+        },
+    })
+end
+
 entity.onMobFight = function(mob, target)
-    -- spawn pet wyvern and assign it a target
     local mobId = mob:getID()
-    local pet = GetMobByID(mobId + 2)
-    if not pet:isSpawned() then
-        SpawnMob(mobId + 2):updateEnmity(target)
-    elseif pet:getCurrentAction() == xi.act.ROAMING then
+    local pet   = GetMobByID(mobId + 2)
+
+    if
+        pet:isSpawned() and
+        pet:getCurrentAction() == xi.act.ROAMING
+    then
         pet:updateEnmity(target)
     end
 end

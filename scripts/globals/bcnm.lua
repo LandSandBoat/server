@@ -531,14 +531,12 @@ local function checkReqs(player, npc, bfid, registrant)
 
     local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
     local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
-    local zilartMission    = player:getCurrentMission(xi.mission.log_id.ZILART)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
     local toauMission      = player:getCurrentMission(xi.mission.log_id.TOAU)
 --  local acpMission       = player:getCurrentMission(xi.mission.log_id.ACP) NOTE: UNUSED Until BCNMID 532 is Re-enabled
     local asaMission       = player:getCurrentMission(xi.mission.log_id.ASA)
 
     local nationStatus    = player:getMissionStatus(player:getNation())
-    local zilartStatus    = player:getMissionStatus(xi.mission.log_id.ZILART)
     local promathiaStatus = player:getCharVar('PromathiaStatus')
     local toauStatus      = player:getMissionStatus(xi.mission.log_id.TOAU)
 
@@ -563,16 +561,8 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
         end,
 
-        [128] = function() -- ZM4: The Temple of Uggalepih
-            return zilartMission == xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH
-        end,
-
         [163] = function() -- Quest: Survival of the Wisest (SCH LB5)
             return mainJob == xi.job.SCH and mainLevel >= 66
-        end,
-
-        [192] = function() -- ZM6: Through the Quicksand Caves
-            return zilartMission == xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES
         end,
 
         [194] = function() -- Quest: Shattering Stars (SAM LB5)
@@ -594,15 +584,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [225] = function() -- Windurst 9-2: Moon Reading
             return windurstMission == xi.mission.id.windurst.MOON_READING and
                 nationStatus == 2
-        end,
-
-        [256] = function() -- ZM8: Return to Delkfutt's Tower
-            return zilartMission == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and
-                zilartStatus == 2
-        end,
-
-        [320] = function() -- ZM16: The Celestial Nexus
-            return zilartMission == xi.mission.id.zilart.THE_CELESTIAL_NEXUS
         end,
 
         [416] = function() -- Quest: Trial by Wind
@@ -656,40 +637,13 @@ local function checkReqs(player, npc, bfid, registrant)
                 player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
         end,
 
-        [512] = function() -- Mission 5-1
-            return player:getCurrentMission(player:getNation()) == xi.mission.id.nation.ARCHLICH and
-                nationStatus == 11
-        end,
-
         [516] = function() -- San d'Oria 9-2: The Heir to the Light
             return sandoriaMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
                 nationStatus == 3
         end,
 
-        [517] = function() -- Quest: Shattering Stars (PLD LB5)
-            return mainJob == xi.job.PLD and mainLevel >= 66
-        end,
-
-        [518] = function() -- Quest: Shattering Stars (DRK LB5)
-            return mainJob == xi.job.DRK and mainLevel >= 66
-        end,
-
-        [519] = function() -- Quest: Shattering Stars (BRD LB5)
-            return mainJob == xi.job.BRD and mainLevel >= 66
-        end,
-
         [530] = function() -- Quest: A Furious Finale (DNC LB5)
             return mainJob == xi.job.DNC and mainLevel >= 66
-        end,
-
-        -- Temp disabled pending BCNM mob fixes
-        -- [532] = function() -- Those Who Lurk in Shadows (ACP7)
-        --     return acpMission >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III and
-        --         player:hasKeyItem(xi.ki.MARK_OF_SEED)
-        -- end,
-
-        [533] = function() -- Quest: Beyond Infinity
-            return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
 
         [544] = function() -- Quest: Trial by Fire
@@ -797,36 +751,16 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)
         end,
 
-        [768] = function() -- PM1-3: The Mothercrystals
-            return promathiaMission == xi.mission.id.cop.BELOW_THE_ARKS or
-                (promathiaMission == xi.mission.id.cop.THE_MOTHERCRYSTALS and not player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA))
-        end,
-
         [769] = function() -- ENM: Simulant
             return player:hasKeyItem(xi.ki.CENSER_OF_ABANDONMENT)
-        end,
-
-        [800] = function() -- PM1-3: The Mothercrystals
-            return promathiaMission == xi.mission.id.cop.BELOW_THE_ARKS or
-                (promathiaMission == xi.mission.id.cop.THE_MOTHERCRYSTALS and not player:hasKeyItem(xi.ki.LIGHT_OF_DEM))
         end,
 
         [801] = function() -- ENM: You Are What You Eat
             return player:hasKeyItem(xi.ki.CENSER_OF_ANTIPATHY)
         end,
 
-        [832] = function() -- PM1-3: The Mothercrystals
-            return promathiaMission == xi.mission.id.cop.BELOW_THE_ARKS or
-                (promathiaMission == xi.mission.id.cop.THE_MOTHERCRYSTALS and not player:hasKeyItem(xi.ki.LIGHT_OF_MEA))
-        end,
-
         [833] = function() -- ENM: Playing Host
             return player:hasKeyItem(xi.ki.CENSER_OF_ANIMUS)
-        end,
-
-        [864] = function() -- PM5-2: Desires of Emptiness
-            return promathiaMission == xi.mission.id.cop.DESIRES_OF_EMPTINESS and
-                player:getCharVar('Mission[6][518]Status') == 2
         end,
 
         [865] = function() -- ENM: Pulling the Plug
@@ -1164,10 +1098,6 @@ local function checkSkip(player, bfid)
                 )
         end,
 
-        [192] = function() -- ZM6: Through the Quicksand Caves
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)
-        end,
-
         [224] = function() -- Quest: The Moonlit Path
             return player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON)
@@ -1179,14 +1109,6 @@ local function checkSkip(player, bfid)
                     windurstMission == xi.mission.id.windurst.MOON_READING and
                     nationStatus > 4
                 )
-        end,
-
-        [256] = function() -- ZM8: Return to Delkfutt's Tower
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
-        end,
-
-        [320] = function() -- ZM16: The Celestial Nexus
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS)
         end,
 
         [416] = function() -- Quest: Trial by Wind
@@ -1202,14 +1124,6 @@ local function checkSkip(player, bfid)
         [480] = function() -- Quest: Trial by Ice
             return player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
-        end,
-
-        [512] = function() -- Mission 5-1
-            return player:hasCompletedMission(player:getNation(), xi.mission.id.nation.ARCHLICH) or
-                (
-                    player:getCurrentMission(player:getNation()) == xi.mission.id.nation.ARCHLICH and
-                    nationStatus > 11
-                )
         end,
 
         [516] = function() -- San d'Oria 9-2: The Heir to the Light
@@ -1254,29 +1168,6 @@ local function checkSkip(player, bfid)
         [706] = function() -- Quest: Waking Dreams
             return player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS)
-        end,
-
-        [768] = function() -- PM1-3: The Mothercrystals
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS) or
-                player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA)
-        end,
-
-        [800] = function() -- PM1-3: The Mothercrystals
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS) or
-                player:hasKeyItem(xi.ki.LIGHT_OF_DEM)
-        end,
-
-        [832] = function() -- PM1-3: The Mothercrystals
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS) or
-                player:hasKeyItem(xi.ki.LIGHT_OF_MEA)
-        end,
-
-        [864] = function() -- PM5-2: Desires of Emptiness
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DESIRES_OF_EMPTINESS) or
-                (
-                    promathiaMission == xi.mission.id.cop.DESIRES_OF_EMPTINESS and
-                    player:getCharVar('Mission[6][518]Status') > 2
-                )
         end,
 
         [896] = function() -- Quest: Storms of Fate

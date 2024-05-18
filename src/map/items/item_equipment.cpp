@@ -132,6 +132,27 @@ void CItemEquipment::setSuperiorLevel(uint8 level)
     m_superiorLevel = level;
 }
 
+bool CItemEquipment::isEquippableByRace(uint8 race) const
+{
+    // first note that a single race actually represents a race and sex combination (for example hume-male)
+    // the EQUIPEMENT_ONLY_RACE mod is a multi-bit flag (where each set bit denotes that a specific race can use that equip)
+    // this is needed because many equips allow a subset of races
+    // for example Steppe Belt allows both taru-male and taru-female
+    // also note the default mod value of 0 denotes all races can wear
+    auto raceMod      = getModifier(Mod::EQUIPMENT_ONLY_RACE);
+    bool isEquippable = true;
+
+    // if a positive mod (so some race restriction(s) exist) then check against the char race
+    // do so by converting the race flag of a character (which is a value between 1 and 8)
+    // to a multi-bit style flag and then compare
+    if (raceMod > 0 && (raceMod & (1 << (race - 1))) == 0)
+    {
+        isEquippable = false;
+    }
+
+    return isEquippable;
+}
+
 // percentage of damage blocked by shield
 uint8 CItemEquipment::getShieldAbsorption() const
 {

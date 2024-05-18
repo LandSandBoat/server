@@ -4188,7 +4188,7 @@ INSERT INTO `mob_droplist` VALUES (465,0,0,1000,3155,@UNCOMMON); -- Raiders Seal
 -- ZoneID:  89 - Chigoe
 -- ZoneID:  91 - Chigoe
 INSERT INTO `mob_droplist` VALUES (466,0,0,1000,2229,@UNCOMMON); -- Vial Of Chimera Blood (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (466,0,0,1000,2365,20);        -- Vial Of Demon Blood (2.0%)
+INSERT INTO `mob_droplist` VALUES (466,0,0,1000,2365,@VRARE);    -- Vial Of Demon Blood (Very Rare, 1%)
 
 -- ZoneID:  68 - Chigre
 INSERT INTO `mob_droplist` VALUES (467,0,0,1000,2638,@ALWAYS); -- Chigre (Always, 100%)
@@ -5008,19 +5008,26 @@ INSERT INTO `mob_droplist` VALUES (568,0,0,1000,4111,400);     -- Dark Cluster (
 INSERT INTO `mob_droplist` VALUES (568,0,0,1000,4111,@COMMON); -- Dark Cluster (Common, 15%)
 
 -- ZoneID:   2 - Spunkie
+-- ZoneID:   2 - Will-o-the-Wisp
 -- ZoneID:  51 - Dark Esquire
 -- ZoneID:  52 - Dark Esquire
 -- ZoneID:  61 - Dark Esquire
+-- ZoneID: 103 - Will-o-the-Wisp
+-- ZoneID: 104 - Will-o-the-Wisp
 -- ZoneID: 105 - Ignis Fatuus
 -- ZoneID: 109 - Fox Fire
 -- ZoneID: 110 - Ignis Fatuus
 -- ZoneID: 113 - Enna-Enna
+-- ZoneID: 118 - Will-o-the-Wisp
+-- ZoneID: 119 - Will-o-the-Wisp
 -- ZoneID: 120 - Ignis Fatuus
 -- ZoneID: 121 - Puroboros
 -- ZoneID: 123 - Lava Bomb
 -- ZoneID: 124 - Puroboros
 -- ZoneID: 164 - Explosure
 -- ZoneID: 171 - Puroboros
+-- ZoneID: 192 - Will-o-the-Wisp
+-- ZoneID: 193 - Will-o-the-Wisp
 -- ZoneID: 200 - Puroboros
 INSERT INTO `mob_droplist` VALUES (569,0,0,1000,928,270);  -- Pinch Of Bomb Ash (27.0%)
 INSERT INTO `mob_droplist` VALUES (569,0,0,1000,17316,80); -- Bomb Arm (8.0%)
@@ -24603,7 +24610,7 @@ INSERT INTO `mob_droplist` VALUES (3083,0,0,1000,11496,48); -- Fenrirs Crown (4.
 INSERT INTO `mob_droplist` VALUES (3084,0,0,1000,16035,41); -- Altdorfs Earring (4.1%)
 
 -- ZoneID:  89 - Sarcopsylla
-INSERT INTO `mob_droplist` VALUES (3085,0,0,1000,11408,63); -- Moranas Pigaches (6.3%)
+INSERT INTO `mob_droplist` VALUES (3085,0,0,1000,11408,@RARE); -- Moranas Pigaches (Rare, 5%)
 
 -- ZoneID: 122 - Rogue Receptacle
 INSERT INTO `mob_droplist` VALUES (3086,0,0,1000,11533,333); -- Lyricists Gonnelle (33.3%)

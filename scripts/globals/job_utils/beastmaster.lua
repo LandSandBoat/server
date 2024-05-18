@@ -171,7 +171,7 @@ xi.job_utils.beastmaster.onAbilityCheckGauge = function(player, target, ability)
 end
 
 -- On Ability Use Gauge
-xi.job_utils.beastmaster.onUseAbilityGuage = function(player, target, ability)
+xi.job_utils.beastmaster.onUseAbilityGauge = function(player, target, ability)
     local charmChance = player:getCharmChance(target, false)
 
     if charmChance >= 75 then

@@ -102,6 +102,7 @@ CInstance* CInstanceLoader::LoadInstance()
             PMob->m_SpawnPoint.x        = _sql->GetFloatData(3);
             PMob->m_SpawnPoint.y        = _sql->GetFloatData(4);
             PMob->m_SpawnPoint.z        = _sql->GetFloatData(5);
+            PMob->loc.p                 = PMob->m_SpawnPoint;
 
             PMob->m_RespawnTime = _sql->GetUIntData(6) * 1000;
             PMob->m_SpawnType   = (SPAWNTYPE)_sql->GetUIntData(7);

@@ -1032,10 +1032,9 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_MOUNTED);
     }
 
-    if (PChar->m_Costume != 0)
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_COSTUME))
     {
-        PChar->m_Costume = 0;
-        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_COSTUME);
+        PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_COSTUME);
     }
 
     PChar->ReloadPartyInc();

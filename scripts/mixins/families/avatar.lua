@@ -25,6 +25,10 @@ g_mixins.families.avatar = function(avatarMob)
         mob:setAutoAttackEnabled(false)
         mob:setMagicCastingEnabled(false)
 
+        -- When GM is enabled, mobs will not automatically engage.  Update Enmity one more
+        -- time to ensure that the listener will actually be triggered.
+        mob:updateEnmity()
+
         -- If something goes wrong, the avatar will clean itself up in 5s
         mob:timer(5000, function(mobArg)
             if mobArg:isAlive() then

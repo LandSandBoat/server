@@ -723,19 +723,6 @@ namespace petutils
             ref<uint16>(&PPet->stats, counter) = (uint16)(raceStat + jobStat);
             counter += 2;
         }
-
-        // SMN Job Gift Bonuses, DRG and PUP handled in their respective functions
-        if (PMaster->GetMJob() == JOB_SMN)
-        {
-            PPet->addModifier(Mod::ATT, PMaster->getMod(Mod::PET_ATK_DEF));
-            PPet->addModifier(Mod::DEF, PMaster->getMod(Mod::PET_ATK_DEF));
-            PPet->addModifier(Mod::ACC, PMaster->getMod(Mod::PET_ACC_EVA));
-            PPet->addModifier(Mod::EVA, PMaster->getMod(Mod::PET_ACC_EVA));
-            PPet->addModifier(Mod::MATT, PMaster->getMod(Mod::PET_MAB_MDB));
-            PPet->addModifier(Mod::MDEF, PMaster->getMod(Mod::PET_MAB_MDB));
-            PPet->addModifier(Mod::MACC, PMaster->getMod(Mod::PET_MACC_MEVA));
-            PPet->addModifier(Mod::MEVA, PMaster->getMod(Mod::PET_MACC_MEVA));
-        }
     }
 
     void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
@@ -831,6 +818,7 @@ namespace petutils
         // Set E evasion and def
         PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, mLvl > 99 ? 99 : mLvl));
         PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, mLvl > 99 ? 99 : mLvl));
+
         // cap all magic skills so they play nice with spell scripts
         for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)
         {
@@ -864,6 +852,19 @@ namespace petutils
             PPet->addModifier(Mod::ATT, PChar->PJobPoints->GetJobPointValue(JP_SUMMON_PHYS_ATK_BONUS) * 2);
             PPet->addModifier(Mod::MAGIC_DAMAGE, PChar->PJobPoints->GetJobPointValue(JP_SUMMON_MAGIC_DMG_BONUS) * 5);
             PPet->addModifier(Mod::BP_DAMAGE, PChar->PJobPoints->GetJobPointValue(JP_BLOOD_PACT_DMG_BONUS) * 3);
+        }
+
+        // SMN Job Gift Bonuses, DRG and PUP handled in their respective functions
+        if (PMaster->GetMJob() == JOB_SMN)
+        {
+            PPet->addModifier(Mod::ATT, PMaster->getMod(Mod::PET_ATK_DEF));
+            PPet->addModifier(Mod::DEF, PMaster->getMod(Mod::PET_ATK_DEF));
+            PPet->addModifier(Mod::ACC, PMaster->getMod(Mod::PET_ACC_EVA));
+            PPet->addModifier(Mod::EVA, PMaster->getMod(Mod::PET_ACC_EVA));
+            PPet->addModifier(Mod::MATT, PMaster->getMod(Mod::PET_MAB_MDB));
+            PPet->addModifier(Mod::MDEF, PMaster->getMod(Mod::PET_MAB_MDB));
+            PPet->addModifier(Mod::MACC, PMaster->getMod(Mod::PET_MACC_MEVA));
+            PPet->addModifier(Mod::MEVA, PMaster->getMod(Mod::PET_MACC_MEVA));
         }
 
         PMaster->setModifier(Mod::AVATAR_PERPETUATION, PerpetuationCost(petID, mLvl));

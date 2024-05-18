@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Balga's Dais
+-- Area: Horlais Peak
 -- Name: Shattering stars - Maat Fight (RNG)
 -----------------------------------
 local horlaisID = zones[xi.zone.HORLAIS_PEAK]
@@ -10,6 +10,7 @@ local content = Battlefield:new({
     battlefieldId = xi.battlefield.id.SHATTERING_STARS_RNG,
     maxPlayers    = 1,
     levelCap      = 99,
+    allowSubjob   = false,
     timeLimit     = utils.minutes(10),
     index         = 7,
     entryNpc      = 'BC_Entrance',

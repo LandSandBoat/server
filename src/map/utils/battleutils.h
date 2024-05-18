@@ -250,6 +250,8 @@ namespace battleutils
     void    DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, uint8 roll);
     bool    DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget);
 
+    void turnTowardsTarget(CBaseEntity* PEntity, CBaseEntity* PTarget, bool force = false);
+
     void AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
     bool HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);
 

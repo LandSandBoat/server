@@ -1714,91 +1714,68 @@ namespace battleutils
 
     bool TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpell* PSpell)
     {
-        if (PDefender->objtype == TYPE_TRUST)
+        // Exceptions.
+        if (PDefender->objtype == TYPE_TRUST ||                                   // Caster is a trust.
+            PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_MANAFONT) || // Caster has Manafont.
+            (SKILLTYPE)PSpell->getSkillType() == SKILL_SINGING)                   // Spell is a song.
         {
             return false;
         }
 
-        // cannot interrupt when manafont is active
-        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_MANAFONT))
+        // Calculate level ratio.
+        int   baseRate   = (PDefender->objtype == TYPE_MOB) ? 5 : 50;
+        float levelRatio = (float)(baseRate + PAttacker->GetMLevel() - PDefender->GetMLevel()) / 100.0f;
+
+        if (levelRatio < 0.01)
         {
-            return false;
+            levelRatio = 0.01f;
         }
 
-        // Songs cannot be interrupted by physical attacks.
-        if ((SKILLTYPE)PSpell->getSkillType() == SKILL_SINGING)
-        {
-            return false;
-        }
-
-        // Reasonable assumption for the time being.
-        int base = 40;
-
-        int diff = PAttacker->GetMLevel() - PDefender->GetMLevel();
-
-        if (PDefender->objtype == TYPE_MOB)
-        {
-            base = 5;
-        }
-
-        float check          = (float)(base + diff);
+        // Calculate skill ratio.
+        float skillRatio     = 1.0f;
         uint8 meritReduction = 0;
 
         if (PDefender->objtype == TYPE_PC)
-        { // Check player's skill.
-            // For mobs, we can assume their skill is capped at their level, so this term is 1 anyway.
-            CCharEntity* PChar = (CCharEntity*)PDefender;
-            float        skill = PChar->GetSkill(PSpell->getSkillType());
-            if (skill <= 0)
-            {
-                skill = 1;
-            }
-
-            float cap = GetMaxSkill((SKILLTYPE)PSpell->getSkillType(), PChar->GetMJob(), PChar->GetMLevel());
-
-            // if cap is 0 then player is using a spell from their subjob
-            if (cap == 0)
-            {
-                cap = GetMaxSkill((SKILLTYPE)PSpell->getSkillType(), PChar->GetSJob(),
-                                  PChar->GetMLevel()); // This may need to be re-investigated in the future...
-            }
-
-            if (skill > cap)
-            {
-                skill = cap;
-            }
-
-            float ratio = cap / skill;
-            check *= ratio;
-
-            // prevent from spilling over 100 - resulting in players never being interupted
-            if (check > 100)
-            {
-                check = 100;
-            }
-
-            // apply any merit reduction
-            meritReduction = ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_SPELL_INTERUPTION_RATE, (CCharEntity*)PDefender);
-        }
-
-        float interruptRate = ((100.0f - (meritReduction + (float)PDefender->getMod(Mod::SPELLINTERRUPT))) / 100.0f);
-
-        float chance = xirand::GetRandomNumber<float>(1.0f);
-
-        // caps, always give a 1% chance of interrupt // TODO: verify, perhaps there is a breakpoint where this no longer happens.
-        if (check < 0.01)
         {
-            check = 0.01;
+            CCharEntity* PChar      = (CCharEntity*)PDefender;
+            float        skillCap   = GetMaxSkill((SKILLTYPE)PSpell->getSkillType(), PChar->GetMJob(), PChar->GetMLevel());
+            float        skillLevel = PChar->GetSkill(PSpell->getSkillType());
+
+            // If skill cap is 0, player may be using a spell from their subjob.
+            if (skillCap == 0)
+            {
+                skillCap = GetMaxSkill((SKILLTYPE)PSpell->getSkillType(), PChar->GetSJob(), PChar->GetMLevel()); // This may need to be re-investigated in the future.
+            }
+
+            // If skill level is 0, set ratio to 10.
+            if (skillLevel <= 0)
+            {
+                skillRatio = 10.0f;
+            }
+            else
+            {
+                skillRatio = skillCap / skillLevel;
+            }
+
+            // Fetch player-only interruption rate reduction from merits.
+            meritReduction = ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_SPELL_INTERUPTION_RATE, (CCharEntity*)PDefender);
         }
 
         // SIRD reduces the interrupt after all the calculations are done -- as evidenced by the infamous "102% SIRD" builds.
         // Anything less than 102% interrupt results in the ability to be interrupted.
         // Note: the 102% is probably an x/256 x/1024 nonsense -- sometimes 101% works.
-        check *= interruptRate;
+        float SIRDRatio = (100.0f - meritReduction - (float)PDefender->getMod(Mod::SPELLINTERRUPT)) / 100.0f;
+        float chance    = xirand::GetRandomNumber<float>(1.0f);
 
-        if (chance < check)
+        // This are all ratios.
+        // levelRatio : 0.01 to infinity.
+        // skillRatio:  1.0 to infinity.
+        // SIRDRatio:   No limits. Can be negative. A negative value will guarantee NOT being interrupted.
+        float finalRatio = levelRatio * skillRatio * SIRDRatio; // TL;DR Higher = Worse = More chances to get interrupted.
+
+        // You get interrupted. Handle aquaveil.
+        if (chance < finalRatio)
         {
-            // Prevent interrupt if Aquaveil is active, if it were to interrupt.
             if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_AQUAVEIL))
             {
                 auto aquaCount = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_AQUAVEIL)->GetPower();
@@ -1812,7 +1789,7 @@ namespace battleutils
                 }
                 return false;
             }
-            // Otherwise interrupt the spell cast.
+
             return true;
         }
 
@@ -2388,7 +2365,7 @@ namespace battleutils
             ((CMobEntity*)PDefender)->PEnmityContainer->UpdateEnmityFromDamage(PAttacker, 0);
         }
 
-        if (PAttacker->objtype == TYPE_PC && !isRanged)
+        if (PAttacker->objtype == TYPE_PC && !isRanged && !isCounter)
         {
             PAttacker->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ATTACK);
         }
@@ -5974,7 +5951,7 @@ namespace battleutils
                 PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(1));
             }
 
-            if (PChar != PTarget)
+            if (PChar != PTarget && PTarget->objtype == TYPE_PC)
             {
                 // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
                 PTarget->pushPacket(new CCharRecastPacket(PTarget));
@@ -5982,6 +5959,29 @@ namespace battleutils
 
             return true;
         }
+    }
+
+    // turn towards target unless mob behavior ignores this (but can be forced to anyway)
+    void turnTowardsTarget(CBaseEntity* PEntity, CBaseEntity* PTarget, bool force)
+    {
+        // Quick rejects
+        if (!PEntity || !PTarget)
+        {
+            return;
+        }
+
+        CMobEntity* PMob = dynamic_cast<CMobEntity*>(PEntity);
+
+        // Big mobs typically should ignore this -- Such as dragons/wyrms or other big things.
+        // Some TP moves like Petro Eyes from normal dragons _also_ ignore their standard behavior, so we must allow it sometimes.
+        if (PMob && (PMob->m_Behaviour & BEHAVIOUR_NO_TURN) && !force)
+        {
+            return;
+        }
+
+        PEntity->loc.p.rotation = worldAngle(PEntity->loc.p, PTarget->loc.p);
+        PEntity->updatemask |= UPDATE_POS;
+        PEntity->loc.zone->UpdateEntityPacket(PTarget, ENTITY_UPDATE, UPDATE_POS);
     }
 
     /************************************************************************
@@ -6061,7 +6061,7 @@ namespace battleutils
 
     void AddTraits(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level)
     {
-        CCharEntity* PChar = PEntity->objtype == TYPE_PC ? static_cast<CCharEntity*>(PEntity) : nullptr;
+        auto* PChar = dynamic_cast<CCharEntity*>(PEntity);
 
         for (auto&& PTrait : *traitList)
         {
@@ -6436,8 +6436,10 @@ namespace battleutils
         recast = static_cast<int32>(recast * ((100.0f - (fastCastReduction + inspirationRecastReduction)) / 100.0f));
 
         // Apply Haste (Magic and Gear)
-        int32 haste = PEntity->getMod(Mod::HASTE_MAGIC) + PEntity->getMod(Mod::HASTE_GEAR);
-        recast      = static_cast<int32>(recast * ((10000.0f - haste) / 10000.0f));
+        int32 hasteMagic = std::clamp<int32>(PEntity->getMod(Mod::HASTE_MAGIC), -10000, 4375); // 43.75% cap -- handle 100% slow for weakness
+        int32 hasteGear  = std::clamp<int32>(PEntity->getMod(Mod::HASTE_GEAR), -2500, 2500);   // 25%
+        int32 haste      = hasteMagic + hasteGear;
+        recast           = static_cast<int32>(recast * ((10000.0f - haste) / 10000.0f));
 
         if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
         {

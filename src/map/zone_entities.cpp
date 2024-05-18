@@ -631,7 +631,7 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
 
             if (validAggro && PController->CanAggroTarget(PChar))
             {
-                PCurrentMob->PEnmityContainer->AddBaseEnmity(PChar);
+                PCurrentMob->PAI->Engage(PChar->targid);
             }
         }
         else if (MOB != PChar->SpawnMOBList.end())
@@ -1552,7 +1552,7 @@ void CZoneEntities::ZoneServer(time_point tick)
                 CMobController* PController = static_cast<CMobController*>(PCurrentMob->PAI->GetController());
                 if (PController != nullptr && PController->CanAggroTarget(PMob))
                 {
-                    PCurrentMob->PEnmityContainer->AddBaseEnmity(PMob);
+                    PCurrentMob->PAI->Engage(PMob->targid);
                 }
             }
         }

@@ -125,7 +125,11 @@ void auth_session::read_func()
     std::string username(usernameBuffer, 16);
     std::string password(passwordBuffer, 32);
 
-    if (strncmp(version.c_str(), SUPPORTED_XILOADER_VERSION, 5) != 0)
+    // Only match on the first 3 characters of the version string
+    // ie. 1.1.1 -> 1.1.x
+    // Major.Minor.Patch
+    // Major and minor version changes should be breaking, patch should not.
+    if (strncmp(version.c_str(), SUPPORTED_XILOADER_VERSION, 3) != 0)
     {
         ref<uint8>(data_, 0) = LOGIN_ERROR_VERSION_UNSUPPORTED;
 

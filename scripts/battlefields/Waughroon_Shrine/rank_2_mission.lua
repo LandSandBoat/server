@@ -29,7 +29,7 @@ end
 
 function content:checkSkipCutscene(player)
     return player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) or
-        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.bastok.JOURNEY_TO_BASTOK2) or
+        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK2) or
         (player:getMissionStatus(player:getNation()) > 9 and
         (
             player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 or

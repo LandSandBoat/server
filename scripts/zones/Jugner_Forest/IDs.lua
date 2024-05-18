@@ -19,59 +19,46 @@ zones[xi.zone.JUGNER_FOREST] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7024,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7025,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7045,  -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7083,  -- Tallying conquest results...
-        BEASTMEN_BANNER               = 7164,  -- There is a beastmen's banner.
-        FISHING_MESSAGE_OFFSET        = 7716,  -- You can't fish here.
-        DIG_THROW_AWAY                = 7729,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
-        FIND_NOTHING                  = 7731,  -- You dig and you dig, but find nothing.
-        AMK_DIGGING_OFFSET            = 7797,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
-        LOGGING_IS_POSSIBLE_HERE      = 7909,  -- Logging is possible here if you have <item>.
-        VOIDWALKER_OBTAIN_KI          = 7916,  -- Obtained key item: <keyitem>!
-        CONQUEST                      = 8060,  -- You've earned conquest points!
-        GARRISON_BASE                 = 8428,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
-        PLAYER_OBTAINS_ITEM           = 8651,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 8652,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 8653,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 8654,  -- You already possess that temporary item.
-        NO_COMBINATION                = 8659,  -- You were unable to enter a combination.
-        VOIDWALKER_DESPAWN            = 8690,  -- The monster fades before your eyes, a look of disappointment on its face.
-        UNITY_WANTED_BATTLE_INTERACT  = 8721,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 10864, -- New training regime registered!
-        DRAWN_UNWANTED_ATTENTION      = 11918, -- Your presence has drawn unwanted attention!
-        SENSE_UNUSUAL_PRESENCE        = 11920, -- You sense an unusual presence in the area...
-        DELIVER_TO_AMAURE             = 11922, -- You must deliver the <item> to Amaura in Southern San d'Oria.
-        VOIDWALKER_NO_MOB             = 12082, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR        = 12083, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT           = 12084, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB          = 12085, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1       = 12087, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2       = 12088, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI           = 12089, -- The <keyitem> shatters into tiny fragments.
-        COMMON_SENSE_SURVIVAL         = 13093, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CONQUEST_BASE                 = 7086,  -- Tallying conquest results...
+        BEASTMEN_BANNER               = 7167,  -- There is a beastmen's banner.
+        FISHING_MESSAGE_OFFSET        = 7719,  -- You can't fish here.
+        DIG_THROW_AWAY                = 7732,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
+        FIND_NOTHING                  = 7734,  -- You dig and you dig, but find nothing.
+        AMK_DIGGING_OFFSET            = 7800,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
+        LOGGING_IS_POSSIBLE_HERE      = 7912,  -- Logging is possible here if you have <item>.
+        VOIDWALKER_OBTAIN_KI          = 7919,  -- Obtained key item: <keyitem>!
+        CONQUEST                      = 8063,  -- You've earned conquest points!
+        GARRISON_BASE                 = 8431,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        PLAYER_OBTAINS_ITEM           = 8654,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 8655,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 8656,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 8657,  -- You already possess that temporary item.
+        NO_COMBINATION                = 8662,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN            = 8693,  -- The monster fades before your eyes, a look of disappointment on its face.
+        UNITY_WANTED_BATTLE_INTERACT  = 8724,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 10867, -- New training regime registered!
+        DRAWN_UNWANTED_ATTENTION      = 11921, -- Your presence has drawn unwanted attention!
+        SENSE_UNUSUAL_PRESENCE        = 11923, -- You sense an unusual presence in the area...
+        DELIVER_TO_AMAURE             = 11925, -- You must deliver the <item> to Amaura in Southern San d'Oria.
+        VOIDWALKER_NO_MOB             = 12085, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR        = 12086, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT           = 12087, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB          = 12088, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1       = 12090, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2       = 12091, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI           = 12092, -- The <keyitem> shatters into tiny fragments.
+        COMMON_SENSE_SURVIVAL         = 13096, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
 
     mob =
     {
-        PANZER_PERCIVAL_PH =
-        {
-            [17203581] = 17203585, -- 535.504 -1.517 152.171 (southeast)
-            [17203637] = 17203642, -- 239.541 -0.365 559.722 (northwest)
-        },
-
-        SUPPLESPINE_MUJWUJ_PH =
-        {
-            [17203437] = 17203475,
-        },
-
-        FRADUBIO_PH =
-        {
-            [17203447] = 17203448,
-        },
-
-        KING_ARTHRO          = 17203216,
-        FRAELISSA            = 17203447,
-        FRADUBIO             = 17203448,
-        METEORMAULER         = 17203414,
+        PANZER_PERCIVAL    = GetTableOfIDs('Panzer_Percival'), -- 2 NMs
+        SUPPLESPINE_MUJWUJ = GetFirstID('Supplespine_Mujwuj'),
+        KING_ARTHRO        = GetFirstID('King_Arthro'),
+        FRAELISSA          = GetFirstID('Fraelissa'),
+        FRADUBIO           = GetFirstID('Fradubio'),
+        METEORMAULER       = GetFirstID('Meteormauler_Zhagtegg'),
+        CERNUNNOS          = GetFirstID('Cernunnos'),
 
         VOIDWALKER =
         {
@@ -104,7 +91,6 @@ zones[xi.zone.JUGNER_FOREST] =
             }
         },
 
-        CERNUNNOS = 17203677,
     },
 
     npc =

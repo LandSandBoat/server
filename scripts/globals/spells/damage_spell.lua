@@ -411,7 +411,7 @@ xi.spells.damage.calculateSDT = function(target, spellElement)
     -- https://www.bg-wiki.com/ffxi/Resist for some SDT info.
     -- *perhaps this simply means there is a cap/clamp limiting it there.
 
-    return sdt
+    return utils.clamp(sdt, 0, 3)
 end
 
 -- This function is used to calculate Resist tiers. The resist tiers work differently for enfeebles (which usually affect duration, not potency) than for nukes.

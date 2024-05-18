@@ -101,6 +101,11 @@ SqlConnection::~SqlConnection()
     }
 }
 
+std::string SqlConnection::GetDatabaseName()
+{
+    return fmt::format("database name: {}", settings::get<std::string>("network.SQL_DATABASE").c_str());
+}
+
 std::string SqlConnection::GetClientVersion()
 {
     return fmt::format("database client version: {}", MARIADB_PACKAGE_VERSION);

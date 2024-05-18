@@ -214,6 +214,7 @@ namespace luautils
         lua.set_function("GetMobRespawnTime", &luautils::GetMobRespawnTime);
         lua.set_function("DisallowRespawn", &luautils::DisallowRespawn);
         lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
+        lua.set_function("GetRecentFishers", &luautils::GetRecentFishers);
         lua.set_function("NearLocation", &luautils::NearLocation);
         lua.set_function("GetFurthestValidPosition", &luautils::GetFurthestValidPosition);
         lua.set_function("Terminate", &luautils::Terminate);
@@ -872,7 +873,7 @@ namespace luautils
         // Mobs
         {
             auto query = fmt::sprintf("SELECT mobname, mobid FROM mob_spawn_points "
-                                      "WHERE ((mobid >> 12) & 0xFFF) = %i",
+                                      "WHERE ((mobid >> 12) & 0xFFF) = %i ORDER BY mobid ASC",
                                       zoneId);
             auto ret   = _sql->Query(query.c_str());
             while (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
@@ -887,7 +888,7 @@ namespace luautils
         // NPCs
         {
             auto query = fmt::sprintf("SELECT name, npcid FROM npc_list "
-                                      "WHERE ((npcid >> 12) & 0xFFF) = %i",
+                                      "WHERE ((npcid >> 12) & 0xFFF) = %i ORDER BY npcid ASC",
                                       zoneId);
             auto ret   = _sql->Query(query.c_str());
             while (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
@@ -901,9 +902,18 @@ namespace luautils
 
         // Update GetFirstID to use this new lookup
         // clang-format off
-        lua.set_function("GetFirstID", [&](std::string const& name) -> uint32
+        lua.set_function("GetFirstID", [&](std::string const& name) -> std::optional<uint32>
         {
-            return lookup[name].front();
+            if (lookup.find(name) != lookup.end())
+            {
+                return lookup[name].front();
+            }
+            else
+            {
+                ShowError(fmt::format("GetFirstID({}) in zone {}: Returning nil", name, zoneName));
+
+                return std::nullopt;
+            }
         });
 
         std::unordered_map<std::string, sol::table> idLuaTables;
@@ -926,7 +936,7 @@ namespace luautils
                 // If we have no entries, bail out and return nil
                 if (lookup.find(name) == lookup.end())
                 {
-                    ShowWarning(fmt::format("GetTableOfIDs({}): Returning nil", name));
+                    ShowError(fmt::format("GetTableOfIDs({}) in zone {}: Returning nil", name, zoneName));
                     return sol::lua_nil;
                 }
 
@@ -934,7 +944,7 @@ namespace luautils
 
                 if (entriesVec.empty())
                 {
-                    ShowWarning(fmt::format("GetTableOfIDs({}): Returning empty table", name));
+                    ShowError(fmt::format("GetTableOfIDs({}) in zone {}: Returning empty table", name, zoneName));
                     return table;
                 }
 
@@ -964,7 +974,7 @@ namespace luautils
 
             if (table.empty())
             {
-                ShowWarning(fmt::format("Tried to look do ID lookup for {}, but found nothing.", name));
+                ShowError(fmt::format("GetTableOfIDs({}) in zone {}: Tried to look do ID lookup, but found nothing.", name, zoneName));
             }
 
             // Add to cache
@@ -5080,6 +5090,45 @@ namespace luautils
 
         ShowError("luautils::GetMobAction: mob <%u> was not found", mobid);
         return 0;
+    }
+
+    /************************************************************************
+     *   Gets a list of players that have fished in the last specified mins *
+     *   where the specified param is between 1 and 60 mins                 *
+     ************************************************************************/
+
+    sol::table GetRecentFishers(uint16 minutes)
+    {
+        // limit the lookback time to prevent huge queries
+        uint16 lookbackTime = std::clamp<uint32>(minutes, 1, 60);
+
+        sol::table  fishers = lua.create_table();
+        const char* Query   = "SELECT cv.charid, c.charname, stats.mlvl, z.name, COALESCE(cs.value, 0) / 10 as skill "
+                              "FROM char_vars cv "
+                              "LEFT JOIN chars c ON c.charid  = cv.charid "
+                              "LEFT JOIN char_skills cs ON cs.charid = cv.charid AND cs.skillid = 48 "
+                              "INNER JOIN char_stats stats ON stats.charid = c.charid "
+                              "INNER JOIN zone_settings z ON z.zoneid = c.pos_zone "
+                              "WHERE "
+                              "varname = '[Fish]LastCastTime' AND "
+                              "FROM_UNIXTIME(cv.value) > NOW() - INTERVAL %u MINUTE "
+                              "ORDER BY z.name, z.name, stats.mlvl, skill";
+
+        if (_sql->Query(Query, lookbackTime) != SQL_ERROR && _sql->NumRows() != 0)
+        {
+            while (_sql->NextRow() == SQL_SUCCESS)
+            {
+                auto fisher          = lua.create_table();
+                auto charId          = _sql->GetUIntData(0);
+                fisher["playerName"] = _sql->GetStringData(1);
+                fisher["jobLevel"]   = _sql->GetUIntData(2);
+                fisher["zoneName"]   = _sql->GetStringData(3);
+                fisher["skill"]      = _sql->GetUIntData(4);
+                fishers[charId]      = fisher;
+            }
+        }
+
+        return fishers;
     }
 
     std::string GetServerMessage(uint8 language)

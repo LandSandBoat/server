@@ -275,9 +275,6 @@ INSERT INTO `mob_pool_mods` VALUES (2499,240,90,0); -- SLEEPRES: 90
 -- Mammet-22 Zeta
 INSERT INTO `mob_pool_mods` VALUES (2500,240,90,0); -- SLEEPRES: 90
 
--- Memory Receptacle Ph
-INSERT INTO `mob_pool_mods` VALUES (2614,368,100,0); -- REGAIN: 100
-
 -- Meteormauler Zhagtegg
 INSERT INTO `mob_pool_mods` VALUES (2643,160,-50,0); -- DMG: -50
 

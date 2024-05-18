@@ -708,6 +708,8 @@ xi.mod =
     EAT_RAW_MEAT                    = 413, -- Without this, only Galka can eat raw meat (item cannot be used)
     DRINK_DISTILLED                 = 159, -- Without this, Distilled Water cannot be consumed (item can still be used)
 
+    EQUIPMENT_ONLY_RACE             = 276, -- An 8-bit flag that denotes that only a certain race(s) can use this equipment (0 means all races can use)
+
     ENHANCES_CURSNA_RCVD            = 67,   -- Potency of "Cursna" effects received
     ENHANCES_CURSNA                 = 310,  -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
     ENHANCES_HOLYWATER              = 495,  -- Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute

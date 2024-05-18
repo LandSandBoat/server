@@ -66,6 +66,7 @@ public:
 
     void AddLatentEffects(std::vector<CItemEquipment::itemLatent>& latentList, uint8 reqLvl, uint8 slot);
     void DelLatentEffects(uint8 reqLvl, uint8 slot);
+    bool HasAllLatentsActive(uint8 slot);
 
     void AddLatentEffect(LATENT conditionID, uint16 conditionValue, Mod modID, int16 modValue);
     bool DelLatentEffect(LATENT conditionID, uint16 conditionValue, Mod modID, int16 modValue);
