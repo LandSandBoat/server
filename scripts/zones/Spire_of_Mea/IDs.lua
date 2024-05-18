@@ -30,6 +30,7 @@ zones[xi.zone.SPIRE_OF_MEA] =
     },
     mob =
     {
+        DELVER = GetFirstID('Delver'),
     },
     npc =
     {

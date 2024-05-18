@@ -258,16 +258,16 @@ xi.battlefield.id =
     PULLING_THE_STRINGS                        = 739,
     AUTOMATON_ASSAULT                          = 740,
     MOBLINE_COMEDY                             = 741,
-    ANCIENT_FLAMES_BECKON_SPIRE_OF_HOLLA       = 768,
+    ANCIENT_FLAMES_BECKON_SPIRE_OF_HOLLA       = 768, -- Converted
     SIMULANT                                   = 769,
     EMPTY_HOPES                                = 770,
-    ANCIENT_FLAMES_BECKON_SPIRE_OF_DEM         = 800,
+    ANCIENT_FLAMES_BECKON_SPIRE_OF_DEM         = 800, -- Converted
     YOU_ARE_WHAT_YOU_EAT                       = 801,
     EMPTY_DREAMS                               = 802,
-    ANCIENT_FLAMES_BECKON_SPIRE_OF_MEA         = 832,
+    ANCIENT_FLAMES_BECKON_SPIRE_OF_MEA         = 832, -- Converted
     PLAYING_HOST                               = 833,
     EMPTY_DESIRES                              = 834,
-    DESIRES_OF_EMPTINESS                       = 864,
+    DESIRES_OF_EMPTINESS                       = 864, -- Converted
     PULLING_THE_PLUG                           = 865,
     EMPTY_ASPIRATIONS                          = 866,
     STORMS_OF_FATE                             = 896,
@@ -1281,6 +1281,8 @@ function BattlefieldMission:new(data)
     obj.missionStatus         = data.missionStatus
     obj.requiredMissionStatus = data.requiredMissionStatus
     obj.skipMissionStatus     = data.skipMissionStatus or data.requiredMissionStatus
+    obj.requiredVar           = data.requiredVar
+    obj.requiredValue         = data.requiredValue
     obj.canLoseExp            = data.canLoseExp or false
 
     return obj
@@ -1301,6 +1303,17 @@ function BattlefieldMission:checkRequirements(player, npc, isRegistrant, trade)
         return (not isRegistrant and (player:hasCompletedMission(missionArea, self.mission) or
             (current == self.mission and status >= self.requiredMissionStatus))) or
             (current == self.mission and status == self.requiredMissionStatus)
+    elseif self.requiredVar ~= nil then
+        -- COP Missions use a charVar to track since missionStatus is used to define menu settings.
+        -- When converting these, allow for the same structure of status, but with defined requiredVar (str)
+        -- and requiredValue (uint requirement).  These are currently mutually exclusive, and treated
+        -- as such.
+
+        local status = player:getCharVar(self.requiredVar)
+
+        return (not isRegistrant and (player:hasCompletedMission(missionArea, self.mission) or
+            (current == self.mission and status >= self.requiredValue))) or
+            (current == self.mission and status == self.requiredValue)
     else
         return (not isRegistrant and player:hasCompletedMission(missionArea, self.mission)) or
             current == self.mission
@@ -1314,19 +1327,23 @@ function BattlefieldMission:checkSkipCutscene(player)
     local status            = player:getMissionStatus(missionStatusArea, self.missionStatus)
 
     return player:hasCompletedMission(missionArea, self.mission) or
-        (current == self.mission and status > self.skipMissionStatus)
+        (self.requiredMissionStatus and current == self.mission and status > self.skipMissionStatus) or
+        (self.requiredValue and current == self.mission and player:getCharVar(self.requiredVar) > self.requiredValue)
 end
 
 function BattlefieldMission:onBattlefieldWin(player, battlefield)
-    local missionArea = self.missionArea or player:getNation()
-    local current     = player:getCurrentMission(missionArea)
+    local missionArea       = self.missionArea or player:getNation()
+    local current           = player:getCurrentMission(missionArea)
+    local missionStatusArea = self.missionStatusArea or player:getNation()
 
     if current == self.mission then
         player:setLocalVar('battlefieldWin', battlefield:getID())
     end
 
     local _, clearTime, partySize = battlefield:getRecord()
-    local canSkipCS               = (current ~= self.mission) and 1 or 0
+    local canSkipCS               = (player:hasCompletedMission(missionArea, self.mission) or
+        (self.requiredMissionStatus and current == self.mission and player:getMissionStatus(missionStatusArea, self.missionStatus) > self.skipMissionStatus) or
+        (self.requiredValue and current == self.mission and player:getCharVar(self.requiredVar) > self.requiredValue)) and 1 or 0
 
     player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), player:getZoneID(), self.index, canSkipCS)
 end

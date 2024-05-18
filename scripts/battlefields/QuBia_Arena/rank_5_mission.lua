@@ -13,7 +13,6 @@ local content = BattlefieldMission:new({
     levelCap              = 50,
     timeLimit             = utils.minutes(30),
     index                 = 0,
-    superlinkAll          = true,
     entryNpc              = 'BC_Entrance',
     exitNpc               = 'Burning_Circle',
     mission               = xi.mission.id.nation.ARCHLICH,

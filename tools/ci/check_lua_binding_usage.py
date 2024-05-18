@@ -84,7 +84,6 @@ def main():
     function_names.append("handleWipe")
     function_names.append("unsetVarBit")
     function_names.append("addVar")
-    function_names.append("getLocaLVar")
     function_names.append("register")
     function_names.append("addEssentialMobs")
     function_names.append("handleLootRolls")
