@@ -84052,7 +84052,8 @@ INSERT INTO `item_mods` VALUES (28649,109,112);  -- SHIELD: 112
 INSERT INTO `item_mods` VALUES (28649,160,-500); -- DMG: -500
 
 -- She-Slime Shield
-INSERT INTO `item_mods` VALUES (28650,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (28650,1,1); -- DEF: 1
+INSERT INTO `item_mods` VALUES (28650,2,2); -- HP: 2
 
 -- Metal Slime Shield
 INSERT INTO `item_mods` VALUES (28651,1,3); -- DEF: 3
