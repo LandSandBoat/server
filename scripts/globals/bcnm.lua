@@ -565,18 +565,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SCH and mainLevel >= 66
         end,
 
-        [194] = function() -- Quest: Shattering Stars (SAM LB5)
-            return mainJob == xi.job.SAM and mainLevel >= 66
-        end,
-
-        [195] = function() -- Quest: Shattering Stars (NIN LB5)
-            return mainJob == xi.job.NIN and mainLevel >= 66
-        end,
-
-        [196] = function() -- Quest: Shattering Stars (DRG LB5)
-            return mainJob == xi.job.DRG and mainLevel >= 66
-        end,
-
         [224] = function() -- Quest: The Moonlit Path
             return player:hasKeyItem(xi.ki.MOON_BAUBLE)
         end,
@@ -637,21 +625,12 @@ local function checkReqs(player, npc, bfid, registrant)
                 player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
         end,
 
-        [516] = function() -- San d'Oria 9-2: The Heir to the Light
-            return sandoriaMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
-                nationStatus == 3
-        end,
-
         [530] = function() -- Quest: A Furious Finale (DNC LB5)
             return mainJob == xi.job.DNC and mainLevel >= 66
         end,
 
         [577] = function() -- Quest: The Puppet Master
             return player:getCharVar('Quest[2][81]Prog') == 1
-        end,
-
-        [578] = function() -- Quest: Trial-size Trial by Earth
-            return mainJob == xi.job.SMN and mainLevel >= 20
         end,
 
         [580] = function() -- ASA4: Sugar-coated Directive
