@@ -734,10 +734,10 @@ public:
     void   removeAllSimpleGambits();
     void   setTrustTPSkillSettings(uint16 trigger, uint16 select, sol::object const& value);
 
-    bool isJugPet();
     bool hasValidJugPetItem();
 
     bool   hasPet();
+    bool   hasJugPet();
     auto   getPet() -> std::optional<CLuaBaseEntity>;
     uint32 getPetID();
     bool   isAutomaton();

@@ -105,7 +105,7 @@ xi.job_utils.beastmaster.onAbilityCheckFamiliar = function(player, target, abili
     if not pet then
         return xi.msg.basic.REQUIRES_A_PET, 0
     elseif
-        (not player:isJugPet() and pet:getObjType() ~= xi.objType.MOB) or
+        (not player:hasJugPet() and pet:getObjType() ~= xi.objType.MOB) or
         pet:getLocalVar('ReceivedFamiliar') == 1
     then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
@@ -252,7 +252,7 @@ xi.job_utils.beastmaster.onAbilityCheckReward = function(player, target, ability
     if not pet then
         return xi.msg.basic.REQUIRES_A_PET, 0 --TODO this currently will not hit this function. Returns You cannot attack that target. Targetfind.cpp line 564
     elseif
-        not player:isJugPet() and
+        not player:hasJugPet() and
         pet:getObjType() ~= xi.objType.MOB
     then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
@@ -421,7 +421,7 @@ xi.job_utils.beastmaster.onAbilityCheckNilPet = function(player, target, ability
     local pet = player:getPet()
 
     if
-        player:isJugPet() or
+        player:hasJugPet() or
         pet:getObjType() == xi.objType.MOB
     then
         if player:getPet() == nil then
@@ -444,7 +444,7 @@ xi.job_utils.beastmaster.onAbilityCheckSnarl = function(player, target, ability)
     else
         if
             player:getPet():getTarget() ~= nil and
-            player:isJugPet()
+            player:hasJugPet()
         then
             return 0, 0
         else
