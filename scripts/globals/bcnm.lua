@@ -646,10 +646,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.DNC and mainLevel >= 66
         end,
 
-        [576] = function() -- Quest: Trial by Earth
-            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_EARTH)
-        end,
-
         [577] = function() -- Quest: The Puppet Master
             return player:getCharVar('Quest[2][81]Prog') == 1
         end,
@@ -1119,11 +1115,6 @@ local function checkSkip(player, bfid)
                     sandoriaMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
                     nationStatus > 4
                 )
-        end,
-
-        [576] = function() -- Quest: Trial by Earth
-            return player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) or
-                player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)
         end,
 
         [608] = function() -- Quest: Trial by Water

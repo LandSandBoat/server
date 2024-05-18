@@ -9,7 +9,6 @@ local content = BattlefieldQuest:new({
     zoneId           = xi.zone.CLOISTER_OF_FLAMES,
     battlefieldId    = xi.battlefield.id.TRIAL_BY_FIRE,
     maxPlayers       = 6,
-    levelCap         = 99,
     timeLimit        = utils.minutes(30),
     index            = 0,
     entryNpc         = 'FP_Entrance',
