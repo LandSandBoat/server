@@ -25,7 +25,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(16,  440, 3,  279, 0, 0, 0) -- Floor 4: Portal NE
 
     -- Select portals.
-    xi.promyvion.initZone(zone)
+    xi.promyvion.setupInitialPortals(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

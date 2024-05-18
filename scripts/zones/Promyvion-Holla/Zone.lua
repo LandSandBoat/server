@@ -25,7 +25,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(16,  280, 3,  200, 0, 0, 0) -- Floor 3 (East): Portal SE
 
     -- Select portals.
-    xi.promyvion.initZone(zone)
+    xi.promyvion.setupInitialPortals(zone)
 
     -- Update NM between Floor 3 islands.
     UpdateNMSpawnPoint(ID.mob.CEREBRATOR)

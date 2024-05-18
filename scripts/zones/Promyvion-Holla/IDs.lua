@@ -22,22 +22,8 @@ zones[xi.zone.PROMYVION_HOLLA] =
     },
     mob =
     {
-        MEMORY_RECEPTACLES =
-        {
-            [16842781] = { 1, 3, 16843061 },
-            [16842841] = { 2, 5, 16843057 },
-            [16842848] = { 2, 5, 16843058 },
-            [16842855] = { 2, 5, 16843059 },
-            [16842862] = { 2, 5, 16843060 },
-            [16842888] = { 3, 7, 16843054 },
-            [16842897] = { 3, 7, 16843055 },
-            [16842906] = { 3, 7, 16843056 },
-            [16842940] = { 4, 7, 16843062 },
-            [16842949] = { 4, 7, 16843063 },
-            [16842958] = { 4, 7, 16843064 },
-        },
-
-        CEREBRATOR = GetFirstID('Cerebrator'),
+        MEMORY_RECEPTACLE_TABLE = GetTableOfIDs('Memory_Receptacle'),
+        CEREBRATOR              = GetFirstID('Cerebrator'),
     },
     npc =
     {
