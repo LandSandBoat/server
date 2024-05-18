@@ -283,7 +283,7 @@ namespace message
                     // make sure invitee isn't dead or in jail, they aren't a party member and don't already have an invite pending, and your party is not full
                     if (PInvitee->isDead() || jailutils::InPrison(PInvitee) || PInvitee->InvitePending.id != 0 ||
                         (PInvitee->PParty && inviteType == INVITE_PARTY) ||
-                        (inviteType == INVITE_ALLIANCE && (!PInvitee->PParty || PInvitee->PParty->GetLeader() != PInvitee || PInvitee->PParty->m_PAlliance)))
+                        (inviteType == INVITE_ALLIANCE && (!PInvitee->PParty || PInvitee->PParty->GetLeader() != PInvitee || (PInvitee->PParty && PInvitee->PParty->m_PAlliance))))
                     {
                         ref<uint32>((uint8*)extra.data(), 0) = ref<uint32>((uint8*)extra.data(), 6);
                         send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PInvitee, 0, 0, MsgStd::CannotInvite));
@@ -339,27 +339,35 @@ namespace message
                                               inviterId, inviteeId, PARTY_LEADER);
                         if (ret != SQL_ERROR && _sql->NumRows() == 2)
                         {
-                            if (PInviter->PParty->m_PAlliance)
+                            if (PInviter->PParty)
                             {
-                                ret = _sql->Query("SELECT * FROM accounts_parties WHERE allianceid <> 0 AND \
-                                                        allianceid = (SELECT allianceid FROM accounts_parties where \
-                                                        charid = %u) GROUP BY partyid",
-                                                  inviterId);
-                                if (ret != SQL_ERROR && _sql->NumRows() > 0 && _sql->NumRows() < 3)
+                                if (PInviter->PParty->m_PAlliance)
                                 {
-                                    PInviter->PParty->m_PAlliance->addParty(inviteeId);
+                                    ret = _sql->Query("SELECT * FROM accounts_parties WHERE allianceid <> 0 AND \
+                                                    allianceid = (SELECT allianceid FROM accounts_parties where \
+                                                    charid = %u) GROUP BY partyid",
+                                                      inviterId);
+                                    if (ret != SQL_ERROR && _sql->NumRows() > 0 && _sql->NumRows() < 3)
+                                    {
+                                        PInviter->PParty->m_PAlliance->addParty(inviteeId);
+                                    }
+                                    else
+                                    {
+                                        send(MSG_DIRECT, (uint8*)extra.data() + 6, sizeof(uint32),
+                                             new CMessageStandardPacket(PInviter, 0, 0, MsgStd::CannotBeProcessed));
+                                    }
                                 }
-                                else
+                                else if (PInviter->PParty)
                                 {
-                                    send(MSG_DIRECT, (uint8*)extra.data() + 6, sizeof(uint32),
-                                         new CMessageStandardPacket(PInviter, 0, 0, MsgStd::CannotBeProcessed));
+                                    // make new alliance
+                                    CAlliance* PAlliance = new CAlliance(PInviter);
+                                    PAlliance->addParty(inviteeId);
                                 }
                             }
-                            else
+                            else // Somehow, the inviter didn't have a party despite the database thinking they did.
                             {
-                                // make new alliance
-                                CAlliance* PAlliance = new CAlliance(PInviter);
-                                PAlliance->addParty(inviteeId);
+                                send(MSG_DIRECT, (uint8*)extra.data() + 6, sizeof(uint32),
+                                     new CMessageStandardPacket(PInviter, 0, 0, MsgStd::CannotBeProcessed));
                             }
                         }
                         else
