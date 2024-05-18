@@ -39,14 +39,8 @@ zones[xi.zone.BEAUCEDINE_GLACIER_S] =
 
     mob =
     {
+        GRANDGOULE         = GetFirstID('GrandGoule'),
         ORCISH_BLOODLETTER = GetFirstID('Orcish_Bloodletter'),
-
-        GRANDGOULE_PH =
-        {
-            [17334475] = 17334482,
-            [17334476] = 17334482,
-            [17334477] = 17334482,
-        },
 
         VOIDWALKER =
         {

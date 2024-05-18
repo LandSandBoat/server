@@ -101,8 +101,8 @@ zones[xi.zone.BASTOK_MINES] =
             [17735795] = 40, -- Proud Beard
             [17735818] = 44, -- Emaliveulaux
         },
-        LELEROON_BLUE_DOOR = 17735847,
-        EXPLORER_MOOGLE    = 17735856,
+        EXPLORER_MOOGLE    = GetFirstID('Explorer_Moogle'),
+        LELEROON_BLUE_DOOR = GetFirstID('Door_House'),
     },
 }
 

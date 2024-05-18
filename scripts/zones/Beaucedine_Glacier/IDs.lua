@@ -50,24 +50,10 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
     },
     mob =
     {
-        GARGANTUA_PH =
-        {
-            [17232078] = 17232079, -- 339 -0.472 -20
-        },
-
-        KIRATA_PH =
-        {
-            [17232042] = 17232044, -- 75.797 -0.335 -323.659
-            [17232043] = 17232044, -- 69.336 -0.234 -276.561
-        },
-
-        NUE_PH =
-        {
-            [17231969] = 17231971, -- -342.830 -100.584 168.662
-            [17231970] = 17231971, -- -322.000 -100.000 116.000
-        },
-
-        HUMBABA = 17232094,
+        GARGANTUA = GetFirstID('Gargantua'),
+        HUMBABA   = GetFirstID('Humbaba'),
+        KIRATA    = GetFirstID('Kirata'),
+        NUE       = GetFirstID('Nue'),
 
         VOIDWALKER =
         {
@@ -103,7 +89,7 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
 
     npc =
     {
-        MIRROR_POND_J8 = 17232207, -- Mirror_Pond_1 in npc_list
+        MIRROR_POND_J8 = GetFirstID('Mirror_Pond_1'),
         OVERSEER_BASE  = GetFirstID('Parledaire_RK'),
     },
 }

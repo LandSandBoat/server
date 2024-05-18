@@ -21,18 +21,9 @@ zones[xi.zone.BEADEAUX_S] =
     },
     mob =
     {
-        EATHO_CRUELHEART_PH =
-        {
-            [17154068] = 17154069,
-        },
-        BATHO_MERCIFULHEART_PH =
-        {
-            [17154147] = 17154148,
-        },
-        DA_DHA_HUNDREDMASK_PH =
-        {
-            [17154095] = 17154195, -- -37.741 0.344 -127.037
-        },
+        BATHO_MERCIFULHEART = GetFirstID('BaTho_Mercifulheart'),
+        DA_DHA_HUNDREDMASK  = GetFirstID('DaDha_Hundredmask'),
+        EATHO_CRUELHEART    = GetFirstID('EaTho_Cruelheart'),
     },
     npc =
     {
