@@ -3547,15 +3547,15 @@ INSERT INTO `mob_droplist` VALUES (388,0,0,1000,4370,110); -- Pot Of Honey (11.0
 INSERT INTO `mob_droplist` VALUES (388,2,0,1000,4370,0);   -- Pot Of Honey (Steal)
 
 -- ZoneID: 212 - Bune
+INSERT INTO `mob_droplist` VALUES (389,0,0,1000,866,@RARE);     -- Handful Of Wyvern Scales (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,@VCOMMON); -- Wyvern Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,@VCOMMON); -- Wyvern Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,@VCOMMON); -- Wyvern Skin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,@VCOMMON); -- Wyvern Skin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1124,@VCOMMON); -- Wyvern Wing (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,@VCOMMON); -- Wyvern Skin (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,@VCOMMON); -- Wyvern Skin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1124,@VCOMMON); -- Wyvern Wing (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1122,@VCOMMON); -- Wyvern Skin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (389,0,0,1000,1124,@VCOMMON); -- Wyvern Wing (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (389,0,0,1000,16605,@RARE);   -- Enhancing Sword (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (389,0,0,1000,866,@RARE);     -- Handful Of Wyvern Scales (Rare, 5%)
 
 -- ZoneID:  77 - Crushed Krause
 -- ZoneID:  77 - Burned Bergmann
@@ -19851,12 +19851,12 @@ INSERT INTO `mob_droplist` VALUES (2520,0,0,1000,1037,20); -- Feiyin Chest Key (
 -- ZoneID: 212 - Ungur
 INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,18141,@ALWAYS);  -- Ungur Boomerang (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1124,@VCOMMON);  -- Wyvern Wing (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1122,@VCOMMON);  -- Wyvern Skin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1124,@COMMON);   -- Wyvern Wing (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1122,@VCOMMON);  -- Wyvern Skin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1122,@COMMON);   -- Wyvern Skin (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,866,@ALWAYS);    -- Handful Of Wyvern Scales (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1122,@RARE);     -- Wyvern Skin (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,866,@ALWAYS);    -- Handful Of Wyvern Scales (Always, 100%)
 
 -- ZoneID: 254 - Unseelie
 INSERT INTO `mob_droplist` VALUES (2522,0,0,1000,3272,@UNCOMMON); -- Unseelie Eye (Uncommon, 10%)
