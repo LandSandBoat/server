@@ -166,15 +166,6 @@ local battlefields =
         { 4,  484,    0 },   -- Sugar-coated Directive (ASA4)
     --  { 5,    ?,    0 },   -- *Trial by Ice (HTMBF)
     },
-
-    [xi.zone.CLOISTER_OF_TIDES] =
-    {
-        { 0,  608,    0 },   -- Trial by Water (Quest)
-        { 1,  609, 1549 },   -- Trial-size Trial by Water (Quest)
-    --  { 2,  610,    0 },   -- Waking the Beast (Quest)
-        { 3,  611,    0 },   -- Sugar-coated Directive (ASA4)
-    --  { 4,    ?,    0 },   -- *Trial by Water (HTMBF)
-    },
 }
 
 -----------------------------------
@@ -288,11 +279,6 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [530] = function() -- Quest: A Furious Finale (DNC LB5)
             return mainJob == xi.job.DNC and mainLevel >= 66
-        end,
-
-        [611] = function() -- ASA4: Sugar-coated Directive
-            return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-                player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)
         end,
 
         [641] = function() -- ENM: Follow the White Rabbit
