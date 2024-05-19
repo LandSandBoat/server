@@ -19,7 +19,8 @@ local gazeAnimationSubs =
 local gazeEffects =
 {
     -- red eyes
-    [1] ={
+    [1] =
+    {
         [xi.effect.PETRIFICATION] =
         {
             duration = 15,
@@ -28,7 +29,8 @@ local gazeEffects =
 
     -- Orange eyes
     -- TODO verify this data for Oppressive Glare when skill is coded
-    [5] = {
+    [5] =
+    {
         [xi.effect.CURSE_II] =
         {
             power = 0,
@@ -47,8 +49,8 @@ g_mixins.families.peiste = function(peisteMob)
         if gazeAnimSub and not mob:getStatusEffect(xi.effect.BLINDNESS) then
             -- Sets glowy eyes, which triggers the combat tick aura gaze
             mob:setAnimationSub(gazeAnimSub)
-            mob:timer(math.random(30, 45) * 1000, function(mob)
-                mob:setAnimationSub(0)
+            mob:timer(math.random(30, 45) * 1000, function(mobArg)
+                mobArg:setAnimationSub(0)
             end)
         end
     end)
