@@ -16849,6 +16849,79 @@ void CLuaBaseEntity::addTreasure(uint16 itemID, sol::object const& arg1, sol::ob
 }
 
 /************************************************************************
+ *  Function: setStealItem()
+ *  Purpose : Used to reset the mob's steal table
+ *  Example : mob:setStealItem(xi.item.ITEM_NAME)
+ ************************************************************************/
+
+void CLuaBaseEntity::setStealItem(sol::object const& arg1)
+{
+    if (m_PBaseEntity->objtype != TYPE_MOB)
+    {
+        ShowWarning("Attempting to set steal item for invalid entity type (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    // TODO support arg1 as a table
+    std::vector<uint16> Items;
+    if (arg1.is<uint16>())
+    {
+        auto item = arg1.as<uint16>();
+        if (itemutils::GetItemPointer(item))
+        {
+            Items.emplace_back(item);
+        }
+    }
+
+    if (Items.size() == 0)
+    {
+        ShowWarning("Attempting to set steal items with no valid itemids (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+
+    if (PMob)
+    {
+        DropList_t* PDropList = itemutils::GetDropList(PMob->m_DropID);
+
+        if (!PDropList)
+        {
+            ShowWarning("Attempting to set steal item for mob with no drop table (%s).", m_PBaseEntity->getName());
+            return;
+        }
+
+        // Clear existing steal items
+        PMob->m_ItemStolen = false;
+        auto i             = 0;
+        while (i < PDropList->Items.size())
+        {
+            DropItem_t const& drop = PDropList->Items[i];
+            if (drop.DropType == DROP_STEAL)
+            {
+                ShowDebug("Removed existing steal item (%i).", drop.ItemID);
+                // unordered vector, just replace current item with item from end of list, then pop last item
+                if (i != PDropList->Items.size() - 1)
+                {
+                    PDropList->Items[i] = PDropList->Items.back();
+                }
+                PDropList->Items.pop_back();
+            }
+            else
+            {
+                i++;
+            }
+        }
+
+        // Add steal item
+        for (auto item : Items)
+        {
+            PDropList->Items.emplace_back(DROP_STEAL, item, 0);
+        }
+    }
+}
+
+/************************************************************************
  *  Function: getStealItem()
  *  Purpose : Used to return the Item ID of a mob's item which can be stolen
  *  Example : local steamItem = target:getStealItem()
@@ -18226,6 +18299,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getDropID", CLuaBaseEntity::getDropID);
     SOL_REGISTER("setDropID", CLuaBaseEntity::setDropID);
     SOL_REGISTER("addTreasure", CLuaBaseEntity::addTreasure);
+    SOL_REGISTER("setStealItem", CLuaBaseEntity::setStealItem);
     SOL_REGISTER("getStealItem", CLuaBaseEntity::getStealItem);
     SOL_REGISTER("getDespoilItem", CLuaBaseEntity::getDespoilItem);
     SOL_REGISTER("getDespoilDebuff", CLuaBaseEntity::getDespoilDebuff);
