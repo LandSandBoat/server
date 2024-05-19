@@ -233,10 +233,6 @@ local function checkReqs(player, npc, bfid, registrant)
                 player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
         end,
 
-        [448] = function() -- Quest: Trial by Lightning
-            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING)
-        end,
-
         [449] = function() -- Quest: Carbuncle Debacle
             return player:getCharVar('CarbuncleDebacleProgress') == 3
         end,
@@ -599,11 +595,6 @@ local function checkSkip(player, bfid)
         [416] = function() -- Quest: Trial by Wind
             return player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
-        end,
-
-        [448] = function() -- Quest: Trial by Lightning
-            return player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING) or
-                player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
         end,
 
         [672] = function() -- PM5-3 U2: Head Wind
