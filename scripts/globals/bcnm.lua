@@ -156,16 +156,6 @@ local battlefields =
         { 4,  452,    0 },   -- Sugar-coated Directive (ASA4)
     --  { 5,    ?,    0 },   -- *Trial by Lightning (HTMBF)
     },
-
-    [xi.zone.CLOISTER_OF_FROST] =
-    {
-        { 0,  480,    0 },   -- Trial by Ice (Quest)
-        { 1,  481, 1171 },   -- Class Reunion (Quest)
-        { 2,  482, 1545 },   -- Trial-size Trial by Ice (Quest)
-    --  { 3,  483,    0 },   -- Waking the Beast (Quest)
-        { 4,  484,    0 },   -- Sugar-coated Directive (ASA4)
-    --  { 5,    ?,    0 },   -- *Trial by Ice (HTMBF)
-    },
 }
 
 -----------------------------------
@@ -258,10 +248,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [452] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
-        end,
-
-        [481] = function() -- Quest: Class Reunion
-            return player:getCharVar('ClassReunionProgress') == 5
         end,
 
         [530] = function() -- Quest: A Furious Finale (DNC LB5)

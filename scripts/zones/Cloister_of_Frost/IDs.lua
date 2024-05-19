@@ -37,6 +37,7 @@ zones[xi.zone.CLOISTER_OF_FROST] =
     },
     mob =
     {
+        DRYAD           = GetFirstID('Dryad'),
         SHIVA_PRIME     = GetFirstID('Shiva_Prime_Trial'),
         SHIVA_PRIME_ASA = GetFirstID('Shiva_Prime_ASA'),
     },
