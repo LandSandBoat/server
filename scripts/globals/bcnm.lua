@@ -264,10 +264,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:getCharVar('ClassReunionProgress') == 5
         end,
 
-        [482] = function() -- Quest: Trial-size Trial by Ice
-            return mainJob == xi.job.SMN and mainLevel >= 20
-        end,
-
         [484] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL)

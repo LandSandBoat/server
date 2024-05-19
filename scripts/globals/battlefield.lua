@@ -198,7 +198,7 @@ xi.battlefield.id =
     SUGAR_COATED_DIRECTIVE_CLOISTER_OF_STORMS  = 452,
     TRIAL_BY_ICE                               = 480, -- Converted
     CLASS_REUNION                              = 481,
-    TRIAL_SIZE_TRIAL_BY_ICE                    = 482,
+    TRIAL_SIZE_TRIAL_BY_ICE                    = 482, -- Converted
     WAKING_THE_BEAST_CLOISTER_OF_FROST         = 483,
     SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FROST   = 484,
     RANK_5_MISSION                             = 512, -- Converted
@@ -1399,7 +1399,7 @@ function BattlefieldQuest:checkRequirements(player, npc, isRegistrant, trade)
         -- as such.
 
         local status      = player:getCharVar(self.requiredVar)
-        local hasAccepted = player:getQuestStatus(self.questArea, self.quest) == QUEST_ACCEPTED
+        local hasAccepted = player:getQuestStatus(self.questArea, self.quest) == xi.questStatus.QUEST_ACCEPTED
 
         return (not isRegistrant and (player:hasCompletedQuest(self.questArea, self.quest) or
             (hasAccepted and status >= self.requiredValue))) or

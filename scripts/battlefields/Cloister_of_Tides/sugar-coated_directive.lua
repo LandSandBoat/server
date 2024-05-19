@@ -30,9 +30,9 @@ content.groups =
     {
         mobIds =
         {
-            { cloisterOfFlamesID.mob.LEVIATHAN_PRIME_ASA     },
-            { cloisterOfFlamesID.mob.LEVIATHAN_PRIME_ASA + 1 },
-            { cloisterOfFlamesID.mob.LEVIATHAN_PRIME_ASA + 2 },
+            { cloisterOfTidesID.mob.LEVIATHAN_PRIME_ASA     },
+            { cloisterOfTidesID.mob.LEVIATHAN_PRIME_ASA + 1 },
+            { cloisterOfTidesID.mob.LEVIATHAN_PRIME_ASA + 2 },
         },
 
         allDeath = function(battlefield, mob)
