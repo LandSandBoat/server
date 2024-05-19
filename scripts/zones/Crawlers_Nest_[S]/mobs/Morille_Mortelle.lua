@@ -3,6 +3,8 @@
 --   NM: Morille Mortelle
 -- !pos 59.788 -0.939 22.316 171
 -----------------------------------
+mixins = { require('scripts/mixins/families/funguar_s') }
+-----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

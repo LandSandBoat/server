@@ -4,6 +4,7 @@
 -- Note: PH for Gloomanita
 -----------------------------------
 local ID = zones[xi.zone.NORTH_GUSTABERG_S]
+mixins = { require('scripts/mixins/families/funguar_s') }
 -----------------------------------
 local entity = {}
 
