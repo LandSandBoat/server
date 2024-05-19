@@ -210,10 +210,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:getCharVar('CarbuncleDebacleProgress') == 6
         end,
 
-        [418] = function() -- Quest: Trial-size Trial by Wind
-            return mainJob == xi.job.SMN and mainLevel >= 20
-        end,
-
         [420] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
