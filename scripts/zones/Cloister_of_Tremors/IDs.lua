@@ -33,7 +33,8 @@ zones[xi.zone.CLOISTER_OF_TREMORS] =
     },
     mob =
     {
-        TITAN_PRIME = GetFirstID('Titan_Prime_Trial'),
+        TITAN_PRIME     = GetFirstID('Titan_Prime_Trial'),
+        TITAN_PRIME_ASA = GetFirstID('Titan_Prime_ASA'),
     },
     npc =
     {

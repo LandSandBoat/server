@@ -633,11 +633,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:getCharVar('Quest[2][81]Prog') == 1
         end,
 
-        [580] = function() -- ASA4: Sugar-coated Directive
-            return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-                player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL)
-        end,
-
         [608] = function() -- Quest: Trial by Water
             return player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER)
         end,
