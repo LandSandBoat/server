@@ -1,25 +1,25 @@
 -----------------------------------
--- Area: Cloister of Tides
+-- Area: Cloister of Frost
 -- BCNM: Sugar Coated Directive (ASA-4)
 -----------------------------------
-local cloisterOfTidesID = zones[xi.zone.CLOISTER_OF_TIDES]
+local cloisterOfFrostID = zones[xi.zone.CLOISTER_OF_FROST]
 -----------------------------------
 
 local content = BattlefieldMission:new({
-    zoneId        = xi.zone.CLOISTER_OF_TIDES,
-    battlefieldId = xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TIDES,
+    zoneId        = xi.zone.CLOISTER_OF_FROST,
+    battlefieldId = xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FROST,
     isMission     = true,
     maxPlayers    = 6,
     levelCap      = 99,
     timeLimit     = utils.minutes(30),
-    index         = 3,
-    entryNpc      = 'WP_Entrance',
-    exitNpc       = 'Water_Protocrystal',
+    index         = 4,
+    entryNpc      = 'IP_Entrance',
+    exitNpc       = 'Ice_Protocrystal',
 
-    requiredKeyItems = { xi.ki.DOMINAS_CERULEAN_SEAL, keep = true },
+    requiredKeyItems = { xi.ki.DOMINAS_AZURE_SEAL, keep = true },
     missionArea      = xi.mission.log_id.ASA,
     mission          = xi.mission.id.asa.SUGAR_COATED_DIRECTIVE,
-    requiredVar      = 'Mission[11][3]Leviathan',
+    requiredVar      = 'Mission[11][3]Shiva',
     requiredValue    = 1,
 
     grantXP = 400,
@@ -30,9 +30,9 @@ content.groups =
     {
         mobIds =
         {
-            { cloisterOfTidesID.mob.LEVIATHAN_PRIME_ASA     },
-            { cloisterOfTidesID.mob.LEVIATHAN_PRIME_ASA + 1 },
-            { cloisterOfTidesID.mob.LEVIATHAN_PRIME_ASA + 2 },
+            { cloisterOfFrostID.mob.SHIVA_PRIME_ASA     },
+            { cloisterOfFrostID.mob.SHIVA_PRIME_ASA + 1 },
+            { cloisterOfFrostID.mob.SHIVA_PRIME_ASA + 2 },
         },
 
         allDeath = function(battlefield, mob)

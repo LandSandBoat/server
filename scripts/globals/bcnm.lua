@@ -264,11 +264,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:getCharVar('ClassReunionProgress') == 5
         end,
 
-        [484] = function() -- ASA4: Sugar-coated Directive
-            return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-                player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
-        end,
-
         [530] = function() -- Quest: A Furious Finale (DNC LB5)
             return mainJob == xi.job.DNC and mainLevel >= 66
         end,
