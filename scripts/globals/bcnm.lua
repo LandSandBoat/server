@@ -629,10 +629,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.DNC and mainLevel >= 66
         end,
 
-        [577] = function() -- Quest: The Puppet Master
-            return player:getCharVar('Quest[2][81]Prog') == 1
-        end,
-
         [608] = function() -- Quest: Trial by Water
             return player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER)
         end,

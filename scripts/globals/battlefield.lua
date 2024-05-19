@@ -228,7 +228,7 @@ xi.battlefield.id =
     WAKING_THE_BEAST_CLOISTER_OF_FLAMES        = 546,
     SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FLAMES  = 547, -- Converted
     TRIAL_BY_EARTH                             = 576, -- Converted
-    PUPPET_MASTER                              = 577,
+    PUPPET_MASTER                              = 577, -- Converted
     TRIAL_SIZE_TRIAL_BY_EARTH                  = 578, -- Converted
     WAKING_THE_BEAST_CLOISTER_OF_TREMORS       = 579,
     SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TREMORS = 580, -- Converted
@@ -1392,7 +1392,21 @@ function BattlefieldQuest:checkRequirements(player, npc, isRegistrant, trade)
         return false
     end
 
-    return player:getQuestStatus(self.questArea, self.quest) >= xi.questStatus.QUEST_ACCEPTED
+    if self.requiredVar ~= nil then
+        -- COP Missions use a charVar to track since missionStatus is used to define menu settings.
+        -- When converting these, allow for the same structure of status, but with defined requiredVar (str)
+        -- and requiredValue (uint requirement).  These are currently mutually exclusive, and treated
+        -- as such.
+
+        local status      = player:getCharVar(self.requiredVar)
+        local hasAccepted = player:getQuestStatus(self.questArea, self.quest) == QUEST_ACCEPTED
+
+        return (not isRegistrant and (player:hasCompletedQuest(self.questArea, self.quest) or
+            (hasAccepted and status >= self.requiredValue))) or
+            (hasAccepted and status == self.requiredValue)
+    else
+        return player:getQuestStatus(self.questArea, self.quest) >= xi.questStatus.QUEST_ACCEPTED
+    end
 end
 
 function BattlefieldQuest:checkSkipCutscene(player)
