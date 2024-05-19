@@ -237,11 +237,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:getCharVar('CarbuncleDebacleProgress') == 3
         end,
 
-        [452] = function() -- ASA4: Sugar-coated Directive
-            return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-                player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
-        end,
-
         [530] = function() -- Quest: A Furious Finale (DNC LB5)
             return mainJob == xi.job.DNC and mainLevel >= 66
         end,
