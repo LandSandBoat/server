@@ -2545,6 +2545,7 @@ xi.item =
     DRAGON_FRUIT                        = 5662,
     LYNX_MEAT                           = 5667,
     AILEENS_DELIGHT                     = 5674,
+    AGARICUS_MUSHROOM                   = 5680,
     ANGLERS_CASSOULET                   = 5704,
     HOMEMADE_SALISBURY_STEAK            = 5705,
     DISH_OF_HOMEMADE_CARBONARA          = 5706,
