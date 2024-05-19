@@ -12287,7 +12287,7 @@ INSERT INTO `mob_droplist` VALUES (1514,0,0,1000,842,390); -- Giant Bird Feather
 INSERT INTO `mob_droplist` VALUES (1514,0,0,1000,843,80);  -- Giant Bird Plume (8.0%)
 
 -- ZoneID:  88 - Lesser Wivre
-INSERT INTO `mob_droplist` VALUES (1515,0,0,1000,2427,30); -- Wivre Maul (3.0%)
+INSERT INTO `mob_droplist` VALUES (1515,0,0,1000,2427,@VRARE); -- Wivre Maul (Very Rare, 1%)
 
 -- ZoneID:  15 - Ley Clionid
 -- ZoneID:  15 - Ley Clionid
@@ -21861,13 +21861,13 @@ INSERT INTO `mob_droplist` VALUES (2663,0,0,1000,574,20); -- Bag Of Fruit Seeds 
 INSERT INTO `mob_droplist` VALUES (2663,4,0,1000,573,0);  -- Bag Of Vegetable Seeds (Despoil)
 
 -- ZoneID:  77 - Wivre
-INSERT INTO `mob_droplist` VALUES (2664,0,0,1000,2426,80);    -- Wivre Horn (8.0%)
-INSERT INTO `mob_droplist` VALUES (2664,0,0,1000,2428,80);    -- Wivre Hide (8.0%)
-INSERT INTO `mob_droplist` VALUES (2664,0,0,1000,2427,@RARE); -- Wivre Maul (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2664,0,0,1000,2426,@RARE);   -- Wivre Horn (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2664,0,0,1000,2428,@VRARE);  -- Wivre Hide (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2664,0,0,1000,2427,@COMMON); -- Wivre Maul (Common, 15%)
 
 -- ZoneID:  89 - Wivre
-INSERT INTO `mob_droplist` VALUES (2665,0,0,1000,2427,280); -- Wivre Maul (28.0%)
-INSERT INTO `mob_droplist` VALUES (2665,0,0,1000,2426,80);  -- Wivre Horn (8.0%)
+INSERT INTO `mob_droplist` VALUES (2665,0,0,1000,2427,@COMMON); -- Wivre Maul (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2665,0,0,1000,2426,@RARE);   -- Wivre Horn (Rare, 5%)
 
 -- ZoneID: 124 - Woodland Sage
 INSERT INTO `mob_droplist` VALUES (2666,0,0,1000,701,530);  -- Rosewood Log (53.0%)
@@ -24128,9 +24128,9 @@ INSERT INTO `mob_droplist` VALUES (2950,0,0,1000,17854,133); -- Cradle Horn (13.
 INSERT INTO `mob_droplist` VALUES (2951,0,0,1000,11409,167); -- Aoides Pumps (16.7%)
 
 -- ZoneID:  52 - Wivre
-INSERT INTO `mob_droplist` VALUES (2952,0,0,1000,2427,205);   -- Wivre Maul (20.5%)
-INSERT INTO `mob_droplist` VALUES (2952,0,0,1000,2426,60);    -- Wivre Horn (6.0%)
-INSERT INTO `mob_droplist` VALUES (2952,0,0,1000,2428,@RARE); -- Wivre Hide (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2952,0,0,1000,2427,@COMMON); -- Wivre Maul (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2952,0,0,1000,2426,@RARE);   -- Wivre Horn (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2952,0,0,1000,2428,@VRARE);  -- Wivre Hide (Very Rare, 1%)
 
 -- ZoneID:   7 - Sekhmet
 INSERT INTO `mob_droplist` VALUES (2953,0,0,1000,16374,140); -- Layqa Seraweels (14.0%)
@@ -26810,6 +26810,9 @@ INSERT INTO `mob_droplist` VALUES (3296,0,0,1000,2850,@UNCOMMON); -- Ingot of Sa
 
 -- ZoneID:  91 - Erle
 INSERT INTO `mob_droplist` VALUES (3297,0,0,1000,19122,@UNCOMMON); -- Courser's Pugio (Uncommon, 10%)
+
+-- ZoneID:  89 - Vasiliceratops
+INSERT INTO `mob_droplist` VALUES (3299,0,0,1000,18508,@UNCOMMON); -- Lyft Voulge (Uncommon, 10%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

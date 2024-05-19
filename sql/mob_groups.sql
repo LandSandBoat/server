@@ -5461,7 +5461,7 @@ INSERT INTO `mob_groups` VALUES (17,1638,89,'Goblin_Blastmaster',330,0,1024,0,0,
 INSERT INTO `mob_groups` VALUES (18,3912,89,'Thunder_Elemental',330,4,2410,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (19,6312,89,'Chigoe',330,0,466,0,0,43,46,0);
 INSERT INTO `mob_groups` VALUES (20,4883,89,'Sarcopsylla',7200,0,3085,7860,7000,72,72,0);
-INSERT INTO `mob_groups` VALUES (21,0,89,'Vasiliceratops',0,32,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (21,7073,89,'Vasiliceratops',0,32,3299,18750,0,88,89,0);
 INSERT INTO `mob_groups` VALUES (22,6473,89,'Vampire_Bat',330,2,80,0,0,40,45,0);
 INSERT INTO `mob_groups` VALUES (23,6238,89,'Onyx_Quadav',330,0,1862,0,0,61,64,0);
 INSERT INTO `mob_groups` VALUES (24,6236,89,'Young_Quadav',330,0,2786,0,0,61,63,0);
