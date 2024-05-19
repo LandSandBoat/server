@@ -26,6 +26,8 @@ zones[xi.zone.CLOISTER_OF_GALES] =
     },
     mob =
     {
+        GARUDA_PRIME     = GetFirstID('Garuda_Prime_Trial'),
+        GARUDA_PRIME_ASA = GetFirstID('Garuda_Prime_ASA'),
     },
     npc =
     {

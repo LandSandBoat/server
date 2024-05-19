@@ -206,10 +206,6 @@ local function checkReqs(player, npc, bfid, registrant)
                 nationStatus == 2
         end,
 
-        [416] = function() -- Quest: Trial by Wind
-            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_WIND)
-        end,
-
         [417] = function() -- Quest: Carbuncle Debacle
             return player:getCharVar('CarbuncleDebacleProgress') == 6
         end,
@@ -567,11 +563,6 @@ local function checkSkip(player, bfid)
                     windurstMission == xi.mission.id.windurst.MOON_READING and
                     nationStatus > 4
                 )
-        end,
-
-        [416] = function() -- Quest: Trial by Wind
-            return player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND) or
-                player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
         end,
 
         [672] = function() -- PM5-3 U2: Head Wind
