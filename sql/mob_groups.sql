@@ -5611,7 +5611,7 @@ INSERT INTO `mob_groups` VALUES (4,5133,90,'Thread_Leech_fished',0,128,2403,0,0,
 INSERT INTO `mob_groups` VALUES (5,3682,90,'Snipper_fished',0,128,2280,0,0,62,65,0);
 
 INSERT INTO `mob_groups` VALUES (6,4238,90,'Virulent_Peiste',330,0,2581,0,0,78,81,0);
-INSERT INTO `mob_groups` VALUES (7,4680,90,'Sugaar',0,32,2951,12000,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (7,4680,90,'Sugaar',0,32,2951,17000,0,83,83,0);
 INSERT INTO `mob_groups` VALUES (8,1445,90,'Gadfly',330,0,142,0,0,64,68,0);
 INSERT INTO `mob_groups` VALUES (9,1671,90,'Goblin_Guerrilla',330,0,1056,0,0,66,69,0);
 INSERT INTO `mob_groups` VALUES (10,4942,90,'Goblins_Dragonfly',0,128,0,0,0,61,64,0);

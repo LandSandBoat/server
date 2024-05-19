@@ -21190,8 +21190,8 @@ INSERT INTO `mob_droplist` VALUES (2579,2,0,1000,656,0);          -- Beastcoin (
 INSERT INTO `mob_droplist` VALUES (2580,0,0,1000,1122,270); -- Wyvern Skin (27.0%)
 
 -- ZoneID:  90 - Virulent Peiste
-INSERT INTO `mob_droplist` VALUES (2581,0,0,1000,2524,120); -- Peiste Stinger (12.0%)
-INSERT INTO `mob_droplist` VALUES (2581,0,0,1000,2523,70);  -- Peiste Skin (7.0%)
+INSERT INTO `mob_droplist` VALUES (2581,0,0,1000,2524,@UNCOMMON); -- Peiste Stinger (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2581,0,0,1000,2523,@RARE);     -- Peiste Skin (Rare, 5%)
 
 -- ZoneID: 162 - Viscount Morax
 INSERT INTO `mob_droplist` VALUES (2582,0,0,1000,886,300);  -- Demon Skull (30.0%)
@@ -24125,7 +24125,7 @@ INSERT INTO `mob_droplist` VALUES (2949,0,0,1000,18507,102); -- Kinship Axe (10.
 INSERT INTO `mob_droplist` VALUES (2950,0,0,1000,17854,133); -- Cradle Horn (13.3%)
 
 -- ZoneID:  90 - Sugaar
-INSERT INTO `mob_droplist` VALUES (2951,0,0,1000,11409,167); -- Aoides Pumps (16.7%)
+INSERT INTO `mob_droplist` VALUES (2951,0,0,1000,11409,@COMMON); -- Aoides Pumps (Common, 15%)
 
 -- ZoneID:  52 - Wivre
 INSERT INTO `mob_droplist` VALUES (2952,0,0,1000,2427,205);   -- Wivre Maul (20.5%)
