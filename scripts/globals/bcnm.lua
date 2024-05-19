@@ -175,7 +175,6 @@ local battlefields =
         { 3,  611,    0 },   -- Sugar-coated Directive (ASA4)
     --  { 4,    ?,    0 },   -- *Trial by Water (HTMBF)
     },
-
 }
 
 -----------------------------------
@@ -289,10 +288,6 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [530] = function() -- Quest: A Furious Finale (DNC LB5)
             return mainJob == xi.job.DNC and mainLevel >= 66
-        end,
-
-        [608] = function() -- Quest: Trial by Water
-            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER)
         end,
 
         [609] = function() -- Quest: Trial-size Trial by Water
@@ -747,11 +742,6 @@ local function checkSkip(player, bfid)
                     sandoriaMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
                     nationStatus > 4
                 )
-        end,
-
-        [608] = function() -- Quest: Trial by Water
-            return player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) or
-                player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
         end,
 
         [672] = function() -- PM5-3 U2: Head Wind
