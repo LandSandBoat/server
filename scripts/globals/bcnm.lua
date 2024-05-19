@@ -166,7 +166,6 @@ local function checkReqs(player, npc, bfid, registrant)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
     local toauMission      = player:getCurrentMission(xi.mission.log_id.TOAU)
 --  local acpMission       = player:getCurrentMission(xi.mission.log_id.ACP) NOTE: UNUSED Until BCNMID 532 is Re-enabled
-    local asaMission       = player:getCurrentMission(xi.mission.log_id.ASA)
 
     local nationStatus    = player:getMissionStatus(player:getNation())
     local promathiaStatus = player:getCharVar('PromathiaStatus')
@@ -208,11 +207,6 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [417] = function() -- Quest: Carbuncle Debacle
             return player:getCharVar('CarbuncleDebacleProgress') == 6
-        end,
-
-        [420] = function() -- ASA4: Sugar-coated Directive
-            return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-                player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
         end,
 
         [530] = function() -- Quest: A Furious Finale (DNC LB5)
