@@ -146,16 +146,6 @@ local battlefields =
         { 4,  420,    0 },   -- Sugar-coated Directive (ASA4)
     --  { 5,    ?,    0 },   -- *Trial by Wind (HTMBF)
     },
-
-    [xi.zone.CLOISTER_OF_STORMS] =
-    {
-        { 0,  448,    0 },   -- Trial by Lightning (Quest)
-        { 1,  449, 1172 },   -- Carbuncle Debacle (Quest)
-        { 2,  450, 1548 },   -- Trial-size Trial by Lightning (Quest)
-    --  { 3,  451,    0 },   -- Waking the Beast (Quest)
-        { 4,  452,    0 },   -- Sugar-coated Directive (ASA4)
-    --  { 5,    ?,    0 },   -- *Trial by Lightning (HTMBF)
-    },
 }
 
 -----------------------------------
@@ -231,10 +221,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [420] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
-        end,
-
-        [449] = function() -- Quest: Carbuncle Debacle
-            return player:getCharVar('CarbuncleDebacleProgress') == 3
         end,
 
         [530] = function() -- Quest: A Furious Finale (DNC LB5)

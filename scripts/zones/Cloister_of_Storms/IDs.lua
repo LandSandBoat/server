@@ -32,8 +32,9 @@ zones[xi.zone.CLOISTER_OF_STORMS] =
     },
     mob =
     {
-        RAMUH_PRIME     = GetFirstID('Ramuh_Prime_Trial'),
-        RAMUH_PRIME_ASA = GetFirstID('Ramuh_Prime_ASA'),
+        LIGHTNING_GREMLIN = GetFirstID('Lightning_Gremlin'),
+        RAMUH_PRIME       = GetFirstID('Ramuh_Prime_Trial'),
+        RAMUH_PRIME_ASA   = GetFirstID('Ramuh_Prime_ASA'),
     },
     npc =
     {
