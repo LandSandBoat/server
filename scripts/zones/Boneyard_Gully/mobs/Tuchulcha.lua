@@ -8,12 +8,42 @@ local ID = zones[xi.zone.BONEYARD_GULLY]
 -----------------------------------
 local entity = {}
 
+local sandpitID = 276
+
 entity.onMobSpawn = function(mob)
     -- Aggros via ambush, not superlinking
     mob:setMobMod(xi.mobMod.SUPERLINK, 0)
 
     -- Used with HPP to keep track of the number of Sandpits
     mob:setLocalVar('Sandpits', 0)
+
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'TUCHULCHA_SANDPIT', function(tuchulcha, skillID)
+        if skillID == sandpitID then
+            tuchulcha:disengage()
+            tuchulcha:setMobMod(xi.mobMod.NO_MOVE, 1)
+            tuchulcha:setMobMod(xi.mobMod.NO_REST, 1)
+            local posIndex = tuchulcha:getLocalVar('sand_pit' .. tuchulcha:getLocalVar('Sandpits'))
+            local coords   = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[posIndex]
+            local players  = tuchulcha:getBattlefield():getPlayers()
+            for _, char in pairs(players) do
+                char:messageSpecial(ID.text.TUCHULCHA_SANDPIT)
+                char:disengage()
+                if char:hasPet() then
+                    char:petRetreat()
+                end
+            end
+
+            -- ensure the client doesn't get the position update
+            tuchulcha:setStatus(xi.status.INVISIBLE)
+            tuchulcha:setPos(coords)
+        end
+    end)
+
+    mob:addListener('ENGAGE', 'TUCHULCHA_ENGAGE', function(mobArg)
+        if mobArg:getStatus() ~= xi.status.UPDATE then
+            mobArg:setStatus(xi.status.UPDATE)
+        end
+    end)
 end
 
 -- Reset restHP when re-engaging after a sandpit
@@ -33,24 +63,7 @@ entity.onMobFight = function(mob, target)
         (mob:getHPP() < 25 and mob:getLocalVar('Sandpits') == 2)
     then
         mob:setLocalVar('Sandpits', mob:getLocalVar('Sandpits') + 1)
-        mob:useMobAbility(276)
-        mob:timer(4000, function(tuchulcha)
-            tuchulcha:disengage()
-            tuchulcha:setMobMod(xi.mobMod.NO_MOVE, 1)
-            tuchulcha:setMobMod(xi.mobMod.NO_REST, 1)
-            local posIndex = tuchulcha:getLocalVar('sand_pit' .. tuchulcha:getLocalVar('Sandpits'))
-            local coords   = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[posIndex]
-
-            tuchulcha:setPos(coords)
-            local players = tuchulcha:getBattlefield():getPlayers()
-            for _, char in pairs(players) do
-                char:messageSpecial(ID.text.TUCHULCHA_SANDPIT)
-                char:disengage()
-                if char:hasPet() then
-                    char:petRetreat()
-                end
-            end
-        end)
+        mob:useMobAbility(sandpitID)
     end
 end
 
