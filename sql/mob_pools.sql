@@ -7147,6 +7147,10 @@ INSERT INTO `mob_pools` VALUES (7071,'Garrison','Garrison',145,0x0000B7040000000
 
 -- Magicked Bones with a Dagger Inner Horutoto Ruins
 INSERT INTO `mob_pools` VALUES (7072,'Magicked_Bones_dagger','Magicked_Bones_dagger',227,0x0000480400000000000000000000000000000000,1,1,5,240,100,0,1,0,0,0,0,0,714,129,0,0,0,0,0,227,227);
+
+-- Missing NM mob_pools
+INSERT INTO `mob_pools` VALUES (7073,'Vasiliceratops','Vasiliceratops',257,0x0000B90800000000000000000000000000000000,1,1,5,240,100,1024,0,0,0,2,0,0,7,131,0,0,0,0,0,257,257);
+
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
