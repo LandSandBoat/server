@@ -22,10 +22,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 
-    -- These are here as it doesn't look right otherwise
-    mob:hideName(false)
-    mob:setUntargetable(false)
-    mob:setAnimationSub(1)
     mob:setLocalVar('AMBUSH', 1) -- Used it for the last time!
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
