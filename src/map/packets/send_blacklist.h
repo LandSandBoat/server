@@ -29,10 +29,10 @@
 
 class CCharEntity;
 
-class CStopDownloadingPacket : public CBasicPacket
+class CSendBlacklist : public CBasicPacket
 {
 public:
-    CStopDownloadingPacket(CCharEntity* PChar, std::vector<std::pair<uint32, std::string>> blacklist);
+    CSendBlacklist(CCharEntity* PChar, std::vector<std::pair<uint32, std::string>> blacklist, bool resetClientBlist, bool lastBlistPacket);
 };
 
 #endif

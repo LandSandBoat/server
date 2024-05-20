@@ -19,18 +19,28 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#ifndef _CBLACKLISTPACKET_H
-#define _CBLACKLISTPACKET_H
+#include "common/socket.h"
 
-#include "basic.h"
-#include "common/cbasetypes.h"
+#include "blacklist_edit_response.h"
+#include "entities/charentity.h"
 
-class CCharEntity;
-
-class CBlacklistPacket : public CBasicPacket
+CBlacklistEditResponsePacket::CBlacklistEditResponsePacket(uint32 accid, const std::string& targetName, int8 action)
 {
-public:
-    CBlacklistPacket(uint32 accid, const std::string& targetName, int8 action);
-};
+    this->setType(0x42);
+    this->setSize(0x1C);
 
-#endif
+    switch (action)
+    {
+        case 0x00: // Added successfully..
+        case 0x01: // Removed successfully..
+            ref<uint32>(0x04) = accid;
+            ref<uint8>(0x18)  = action;
+            memcpy(data + 0x08, targetName.c_str(), targetName.size());
+            break;
+
+        case 0x02: // Command error..
+            ref<uint32>(0x04) = 0x00000000;
+            ref<uint8>(0x18)  = action;
+            break;
+    }
+}
