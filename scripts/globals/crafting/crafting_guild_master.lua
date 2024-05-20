@@ -210,12 +210,12 @@ xi.crafting.guildMasterOnEventFinish = function(player, csid, option, npc)
         -- Expert quest: Start.
         elseif option == 2 then
             if xi.crafting.hasJoinedGuild(player, guildId) then
-                player:setCharVar('FishingExpertQuest', 1)
+                player:setCharVar(npcTable[npcName][6], 1)
             end
 
         -- Expert quest fish (after getting KI)
         elseif option == 3 then
-            player:setCharVar('FishingExpertQuest', 2)
+            player:setCharVar(npcTable[npcName][6], 2)
 
         -- Rank renouncement.
         elseif
