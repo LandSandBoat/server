@@ -464,6 +464,7 @@ void CCharEntity::setPetZoningInfo()
     {
         return;
     }
+    petZoningInfo.petID = PPetEntity->m_PetID;
 
     switch (PPetEntity->getPetType())
     {
