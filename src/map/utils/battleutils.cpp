@@ -3702,6 +3702,17 @@ namespace battleutils
                 }
             }
 
+            Mod resistanceRankMods[] = { Mod::FIRE_RES_RANK, Mod::ICE_RES_RANK, Mod::WIND_RES_RANK, Mod::EARTH_RES_RANK, Mod::THUNDER_RES_RANK, Mod::ICE_RES_RANK, Mod::LIGHT_RES_RANK, Mod::DARK_RES_RANK };
+
+            // Reset any resistance rank mods on the defender
+            PDefender->delModifiers(&PSCEffect->modList);
+
+            // Reset the effects resistance rank mods
+            for (auto& resistanceRank : resistanceRankMods)
+            {
+                PSCEffect->setMod(resistanceRank, 0);
+            }
+
             if (skillchain != SC_NONE)
             {
                 PSCEffect->SetStartTime(server_clock::now());
@@ -3709,6 +3720,17 @@ namespace battleutils
                 PSCEffect->SetTier(GetSkillchainTier(skillchain));
                 PSCEffect->SetPower(skillchain);
                 PSCEffect->SetSubPower(std::min(PSCEffect->GetSubPower() + 1, 5)); // Linked, limited to 5
+
+                // Set new resistance rank modifiers
+                // https://www.bg-wiki.com/ffxi/Resist#Modifying_Resistance_Rank
+                for (auto& element : GetSkillchainMagicElement(skillchain))
+                {
+                    Mod resistanceRankMod = GetResistanceRankModFromElement(element);
+                    PSCEffect->setMod(resistanceRankMod, -1);
+                }
+
+                // Add the mods back to the player (effect cleanup will destroy the mods for us later)
+                PDefender->addModifiers(&PSCEffect->modList);
 
                 return (SUBEFFECT)GetSkillchainSubeffect(skillchain);
             }
@@ -3866,6 +3888,22 @@ namespace battleutils
         };
 
         return resonanceToElement.at(skillchain);
+    }
+
+    Mod GetResistanceRankModFromElement(ELEMENT& element)
+    {
+        static const std::unordered_map<ELEMENT, Mod> elementToMod = {
+            { ELEMENT_FIRE, Mod::FIRE_RES_RANK },
+            { ELEMENT_WATER, Mod::WATER_RES_RANK },
+            { ELEMENT_WIND, Mod::WIND_RES_RANK },
+            { ELEMENT_EARTH, Mod::EARTH_RES_RANK },
+            { ELEMENT_THUNDER, Mod::EARTH_RES_RANK },
+            { ELEMENT_ICE, Mod::ICE_RES_RANK },
+            { ELEMENT_LIGHT, Mod::LIGHT_RES_RANK },
+            { ELEMENT_DARK, Mod::DARK_RES_RANK },
+        };
+
+        return elementToMod.at(element);
     }
 
     int32 TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 lastSkillDamage, CBattleEntity* taChar)
