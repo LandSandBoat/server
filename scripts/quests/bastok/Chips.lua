@@ -2,20 +2,11 @@
 -- Chips
 -----------------------------------
 -- Log ID: 1, Quest ID: 82
--- NPC: Ghebi Damomohe !pos 17.05 -0.11 -5.53 245
--- NPC: Cid !pos -12.53 -10.98 1.09 237
 -----------------------------------
 local metalworksID = zones[xi.zone.METALWORKS]
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.CHIPS)
-
-local chips =
-{
-    xi.item.CARMINE_CHIP,
-    xi.item.CYAN_CHIP,
-    xi.item.GRAY_CHIP,
-}
 
 quest.reward =
 {
@@ -27,8 +18,9 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-            (player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.ONE_TO_BE_FEARED or
-            xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.ONE_TO_BE_FEARED, 'Status') == 1) and
+            (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.ONE_TO_BE_FEARED or
+            (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.ONE_TO_BE_FEARED and
+            player:getCharVar('Mission[6][638]Status') >= 1)) and
             not quest:getMustZone(player)
         end,
 
@@ -41,8 +33,7 @@ quest.sections =
                 [169] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
-                    else
-                        quest:setMustZone(player)
+                    else quest:setMustZone(player)
                     end
                 end,
             },
@@ -60,7 +51,11 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, chips) and
+                        npcUtil.tradeHasExactly(trade, {
+                        xi.item.CARMINE_CHIP,
+                        xi.item.CYAN_CHIP,
+                        xi.item.GRAY_CHIP
+                        }) and
                         not player:hasItem(xi.item.CCB_POLYMER_PUMP)
                     then
                         return quest:progressEvent(883)
@@ -95,7 +90,11 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, chips) and
+                        npcUtil.tradeHasExactly(trade, {
+                        xi.item.CARMINE_CHIP,
+                        xi.item.CYAN_CHIP,
+                        xi.item.GRAY_CHIP
+                        }) and
                         not player:hasItem(xi.item.CCB_POLYMER_PUMP)
                     then
                         return quest:progressEvent(884)
