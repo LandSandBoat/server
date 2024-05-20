@@ -141,7 +141,7 @@ quest.sections =
                 end,
 
                 [8] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(xi.ki.MOONLIGHT_ORE)
+                    npcUtil.giveKeyItem(player, xi.ki.MOONLIGHT_ORE)
                     player:confirmTrade()
                 end,
             },
