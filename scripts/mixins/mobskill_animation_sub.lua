@@ -15,6 +15,10 @@ g_mixins.mobskillAnimationSub = function(mobObject)
         [1282] = 2, -- touchdown
         [1292] = 2, -- touchdown
         [1302] = 2, -- touchdown
+        [1504] = 1, -- wheel_of_impregnability
+        [1505] = 2, -- bastion_of_twilight
+        [1508] = 3, -- luminous_lance
+        [3621] = 3, -- luminous_lance
     }
 
     -- creates a listener to set the mob's animation sub after the skill completes

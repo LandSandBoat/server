@@ -1,5 +1,6 @@
 -----------------------------------
---  Luminous Lance
+-- Luminous Lance
+-- Animation sub is changed by the mixin: mobskill_animation_sub.lua
 -----------------------------------
 local ID = zones[xi.zone.EMPYREAL_PARADOX]
 -----------------------------------
@@ -35,7 +36,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:entityAnimationPacket('ids0')
     mob:setLocalVar('lanceTime', mob:getBattleTime())
     mob:setLocalVar('lanceOut', 0)
-    target:setAnimationSub(3)
 
     -- Cannot be resisted
     target:addStatusEffect(xi.effect.TERROR, 0, 0, 20)
