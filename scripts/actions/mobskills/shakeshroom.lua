@@ -4,11 +4,12 @@
 -- Range is 14.7 yalms.
 -- Piercing damage Ranged Attack.
 -- Secondary modifiers: INT: 20%.
+-- Animation sub is changed by the mixin: mobskill_animation_sub.lua
 -----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getMobMod(xi.mobMod.VAR) == 2 then
+    if mob:getAnimationSub() == 2 then
         return 0
     end
 
@@ -16,7 +17,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    mob:setMobMod(xi.mobMod.VAR, 3)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2

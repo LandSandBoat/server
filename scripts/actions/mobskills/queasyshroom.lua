@@ -7,11 +7,12 @@
 -- Additional Effect: Poison is 3 HP/tick.
 -- Poison effect may not always process.
 -- Removes all Shadow Images on the target.
+-- Animation sub is changed by the mixin: mobskill_animation_sub.lua
 -----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getMobMod(xi.mobMod.VAR) == 0 then
+    if mob:getAnimationSub() == 0 then
         return 0
     end
 
@@ -19,7 +20,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    mob:setMobMod(xi.mobMod.VAR, 1)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2

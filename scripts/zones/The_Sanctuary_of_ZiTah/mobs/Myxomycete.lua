@@ -5,6 +5,8 @@
 -----------------------------------
 local ID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
+mixins = { require('scripts/mixins/mobskill_animation_sub') }
+-----------------------------------
 local entity = {}
 
 local nobleMoldPHTable =
