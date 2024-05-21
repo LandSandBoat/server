@@ -27,7 +27,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.ON_WAY_TO_NASHMAU, 0, 0) -- Earth Time, Vana Hours. Needs a get-time function for boat?
+    xi.transport.onBoatTimekeeperTrigger(player, xi.transport.routes.SILVER_SEA, ID.text.ON_WAY_TO_NASHMAU, ID.text.ARRIVING_SOON_NASHMAU)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
