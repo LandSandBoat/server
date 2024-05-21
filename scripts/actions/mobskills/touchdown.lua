@@ -1,7 +1,8 @@
 -----------------------------------
---  Touchdown
---  Description: Deals magical damage to enemies in an area of effect upon landing.
---  Further Notes:
+-- Touchdown
+-- Description: Deals magical damage to enemies in an area of effect upon landing.
+-- Further Notes:
+-- Animation sub is changed by the mixin: mobskill_animation_sub.lua
 -----------------------------------
 local mobskillObject = {}
 
@@ -16,7 +17,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.NONE)
     mob:delStatusEffect(xi.effect.ALL_MISS)
     mob:setMobSkillAttack(0)
-    mob:setAnimationSub(2)
     return dmg
 end
 

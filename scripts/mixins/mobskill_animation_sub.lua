@@ -11,6 +11,10 @@ g_mixins.mobskillAnimationSub = function(mobObject)
         [310]  = 1, -- queasyshroom
         [311]  = 2, -- numbshroom
         [312]  = 3, -- shakeshroom
+        [954]  = 2, -- touchdown
+        [1282] = 2, -- touchdown
+        [1292] = 2, -- touchdown
+        [1302] = 2, -- touchdown
     }
 
     -- creates a listener to set the mob's animation sub after the skill completes
