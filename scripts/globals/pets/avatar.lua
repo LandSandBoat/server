@@ -8,11 +8,14 @@ xi = xi or {}
 xi.pets = xi.pets or {}
 xi.pets.avatar = {}
 
-local buffModeVar          = 'AVATAR_BUFF_MODE_OFF'
-local lastCastTimeVar      = 'AVATAR_LAST_CASTINGTIME'
-local lastCastTimeStampVar = 'AVATAR_LAST_CAST_TIMESTAMP'
-local playerListenerVar    = 'SMN_SPIRIT_CAST_DELAY'
-local dummySpell           = xi.magic.spell.INDI_REGEN -- used to trigger a "valid" spell in TryCastSpell but not actually cast anything
+local buffModeVar                    = 'AVATAR_BUFF_MODE_OFF'
+local lastCastTimeVar                = 'AVATAR_LAST_CASTINGTIME'
+local lastCastTimeStampVar           = 'AVATAR_LAST_CAST_TIMESTAMP'
+local playerListenerVar              = 'SMN_SPIRIT_CAST_DELAY'
+local alexanderListenerVar           = 'ALEXANDER_ACTIONS'
+local alexanderSummonTimeVar         = 'ALEXANDER_SUMMON_TIME'
+local alexanderUsedPerfectDefenseVar = 'ALEXANDER_USED_PERFECT_DEFENSE'
+local dummySpell                     = xi.magic.spell.INDI_REGEN -- used to trigger a "valid" spell in TryCastSpell but not actually cast anything
 
 local printDebug = function(pet, textToPrint)
     -- prints to map server if pet has local var
@@ -136,6 +139,31 @@ xi.pets.avatar.onMobSpawn = function(pet)
                 petArg:setLocalVar(buffModeVar, 1)
             end
         end)
+    elseif pet:getPetID() == xi.petId.ALEXANDER then
+        pet:setLocalVar(alexanderSummonTimeVar, os.time())
+        pet:setSpeed(0)
+        pet:setAutoAttackEnabled(false)
+
+        master:addListener('TICK', alexanderListenerVar, function(player)
+            local playerPet = player:getPet()
+
+            if playerPet then
+                local summonTime = playerPet:getLocalVar(alexanderSummonTimeVar)
+                local currentTime = os.time()
+                local timeSinceSummon = currentTime - summonTime
+                local usedPerfectDefense = playerPet:getLocalVar(alexanderUsedPerfectDefenseVar) == 1
+
+                if timeSinceSummon >= 8 and usedPerfectDefense then
+                    player:despawnPet()
+                elseif
+                    timeSinceSummon >= 4 and
+                    not usedPerfectDefense
+                then
+                    playerPet:usePetAbility(xi.jobAbility.PERFECT_DEFENSE)
+                    playerPet:setLocalVar(alexanderUsedPerfectDefenseVar, 1)
+                end
+            end
+        end)
     end
 end
 
@@ -145,6 +173,7 @@ xi.pets.avatar.onMobDeath = function(pet)
     if master and master:getObjType() == xi.objType.PC then
         master:removeListener(playerListenerVar)
         master:removeListener(playerListenerVar .. 'ABILITY')
+        master:removeListener(alexanderListenerVar)
     end
 end
 

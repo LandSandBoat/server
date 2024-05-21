@@ -853,6 +853,7 @@ public:
     void castSpell(sol::object const& spell, sol::object const& entity); // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
     void useJobAbility(uint16 skillID, sol::object const& pet);          // forces a job ability use (players/pets only)
     void useMobAbility(sol::variadic_args va);                           // forces a mob to use a mobability (parameter = skill ID)
+    void usePetAbility(sol::variadic_args va);                           // forces a pet to use a petskill (parameter = skill ID)
     bool hasTPMoves();
 
     void weaknessTrigger(uint8 level);

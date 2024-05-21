@@ -79,6 +79,7 @@
 #include "ai/states/weaponskill_state.h"
 
 #include "ai/controllers/mob_controller.h"
+#include "ai/controllers/pet_controller.h"
 #include "ai/controllers/trust_controller.h"
 
 #include "ai/helpers/gambits_container.h"
@@ -16607,6 +16608,52 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
 }
 
 /************************************************************************
+ *  Function: usePetAbility()
+ *  Purpose : Uses a specified Pet Ability or the next one ready in the que
+ *  Example : pet:usePetAbility(671)
+ *  Notes   : Use single variable (Ability ID only) for base entity only
+ ************************************************************************/
+
+void CLuaBaseEntity::usePetAbility(sol::variadic_args va)
+{
+    if (m_PBaseEntity->objtype != TYPE_PET)
+    {
+        ShowWarning("Entity is not Pet (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    auto           skillid{ va.get<uint16>(0) };
+    CBattleEntity* PTarget{ nullptr };
+    auto*          PPetSkill{ battleutils::GetPetSkill(skillid) };
+
+    if (!PPetSkill)
+    {
+        return;
+    }
+
+    // clang-format off
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [PTarget, skillid, PPetSkill](auto PEntity)
+    {
+        if (PTarget)
+        {
+            PEntity->PAI->PetSkill(PTarget->targid, skillid);
+        }
+        else if (dynamic_cast<CMobEntity*>(PEntity))
+        {
+            if (PPetSkill->getValidTargets() & TARGET_ENEMY)
+            {
+                PEntity->PAI->PetSkill(static_cast<CMobEntity*>(PEntity)->GetBattleTargetID(), skillid);
+            }
+            else if (PPetSkill->getValidTargets() & TARGET_SELF)
+            {
+                PEntity->PAI->PetSkill(PEntity->targid, skillid);
+            }
+        }
+    }));
+    // clang-format on
+}
+
+/************************************************************************
  *  Function: hasTPMoves()
  *  Purpose : Returns true if a Mob has TP moves in its skill list
  *  Example : if mob:hasTPMoves() then
@@ -18214,6 +18261,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("castSpell", CLuaBaseEntity::castSpell);
     SOL_REGISTER("useJobAbility", CLuaBaseEntity::useJobAbility);
     SOL_REGISTER("useMobAbility", CLuaBaseEntity::useMobAbility);
+    SOL_REGISTER("usePetAbility", CLuaBaseEntity::usePetAbility);
     SOL_REGISTER("hasTPMoves", CLuaBaseEntity::hasTPMoves);
 
     SOL_REGISTER("weaknessTrigger", CLuaBaseEntity::weaknessTrigger);
