@@ -1,11 +1,12 @@
 -----------------------------------
---  Javelin Throw
+-- Javelin Throw
 --
---  Description: Ranged attack with the equipped weapon, which is lost.
---  Type: Ranged
---  Utsusemi/Blink absorb: 1 shadow
---  Range: 7.0
---  Notes: Only used by armed DRG Mamool Ja
+-- Description: Ranged attack with the equipped weapon, which is lost.
+-- Type: Ranged
+-- Utsusemi/Blink absorb: 1 shadow
+-- Range: 7.0
+-- Notes: Only used by armed DRG Mamool Ja
+-- Animation sub is changed by the mixin: mobskill_animation_sub.lua
 -----------------------------------
 local mobskillObject = {}
 
@@ -18,7 +19,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    mob:setAnimationSub(1)
     local numhits = 1
     local accmod = 1
     local dmgmod = 3

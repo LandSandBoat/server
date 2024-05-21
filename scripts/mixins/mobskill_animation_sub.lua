@@ -6,6 +6,7 @@ g_mixins = g_mixins or {}
 
 g_mixins.mobskillAnimationSub = function(mobObject)
     -- SELECT CONCAT("[",mob_skill_id,"] = X, -- ",mob_skill_name) FROM mob_skills WHERE mob_skill_name IN ("axe_throw"...
+    -- Typically "Weapon throw" mobskills change the mob's animation sub to 2, and animation sub 1 is used for weapon breaks
     local mobskillAnimationSubs =
     {
         [310]  = 1, -- queasyshroom
@@ -18,6 +19,10 @@ g_mixins.mobskillAnimationSub = function(mobObject)
         [1504] = 1, -- wheel_of_impregnability
         [1505] = 2, -- bastion_of_twilight
         [1508] = 3, -- luminous_lance
+        [1735] = 2, -- javelin_throw
+        [1736] = 2, -- axe_throw
+        [1925] = 2, -- stave_toss
+        [2361] = 2, -- stave_toss
         [3621] = 3, -- luminous_lance
     }
 

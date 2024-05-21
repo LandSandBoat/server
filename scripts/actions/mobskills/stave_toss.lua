@@ -1,5 +1,6 @@
 -----------------------------------
 -- Stave Toss (staff wielding Mamool Ja only!)
+-- Animation sub is changed by the mixin: mobskill_animation_sub.lua
 -----------------------------------
 local mobskillObject = {}
 
@@ -22,7 +23,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
 
-    mob:setAnimationSub(1) -- Mob loses Staff on using Stave Toss
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg
 end
