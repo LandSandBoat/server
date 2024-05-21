@@ -22,8 +22,8 @@ local content = BattlefieldQuest:new({
 })
 
 function content:onEventFinishWin(player, csid, option, npc)
-    if player:getCharVar('ClassReunionProgress') == 3 then
-        player:setCharVar('ClassReunionProgress', 4)
+    if player:getCharVar('CarbuncleDebacleProgress') == 3 then
+        player:setCharVar('CarbuncleDebacleProgress', 4)
     end
 end
 

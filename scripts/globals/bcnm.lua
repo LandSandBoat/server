@@ -136,16 +136,6 @@ local battlefields =
     --  { 4,    ?,    0 },   -- *The Moonlit Path (HTMBF)
     --  { 5,    ?,    0 },   -- *Waking the Beast (HTMBF)
     },
-
-    [xi.zone.CLOISTER_OF_GALES] =
-    {
-        { 0,  416,    0 },   -- Trial by Wind (Quest)
-        { 1,  417, 1174 },   -- Carbuncle Debacle (Quest)
-        { 2,  418, 1546 },   -- Trial-size Trial by Wind (Quest)
-    --  { 3,  419,    0 },   -- Waking the Beast (Quest)
-        { 4,  420,    0 },   -- Sugar-coated Directive (ASA4)
-    --  { 5,    ?,    0 },   -- *Trial by Wind (HTMBF)
-    },
 }
 
 -----------------------------------
@@ -203,10 +193,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [225] = function() -- Windurst 9-2: Moon Reading
             return windurstMission == xi.mission.id.windurst.MOON_READING and
                 nationStatus == 2
-        end,
-
-        [417] = function() -- Quest: Carbuncle Debacle
-            return player:getCharVar('CarbuncleDebacleProgress') == 6
         end,
 
         [530] = function() -- Quest: A Furious Finale (DNC LB5)

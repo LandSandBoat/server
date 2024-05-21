@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Cloister of Tremors
+-- Area: Cloister of Frost
 -- BCNM: Class Reunion
 -----------------------------------
 local cloisterOfFrostID = zones[xi.zone.CLOISTER_OF_FROST]

@@ -101,7 +101,7 @@ mission.sections =
 
         [xi.zone.CLOISTER_OF_GALES] =
         {
-            ['Wind_Protocrystal'] =
+            ['WP_Entrance'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -363,7 +363,7 @@ mission.sections =
 
         [xi.zone.CLOISTER_OF_GALES] =
         {
-            ['Wind_Protocrystal'] =
+            ['WP_Entrance'] =
             {
                 onTrigger = function(player, npc)
                     if

@@ -1,6 +1,6 @@
 -----------------------------------
--- Area: Cloister of Flames
--- BCNM: Trial-size Trial by Fire
+-- Area: Cloister of Tremors
+-- BCNM: Trial-size Trial by Earth
 -----------------------------------
 local cloisterOfTremorsID = zones[xi.zone.CLOISTER_OF_TREMORS]
 -----------------------------------
