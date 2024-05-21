@@ -134,6 +134,7 @@ namespace battleutils
     uint8                GetSkillchainSubeffect(SKILLCHAIN_ELEMENT skillchain);
     int16                GetSkillchainMinimumResistance(SKILLCHAIN_ELEMENT element, CBattleEntity* PDefender, ELEMENT* appliedEle);
     std::vector<ELEMENT> GetSkillchainMagicElement(SKILLCHAIN_ELEMENT skillchain);
+    Mod                  GetResistanceRankModFromElement(ELEMENT& element);
 
     bool IsParalyzed(CBattleEntity* PAttacker);
     bool IsAbsorbByShadow(CBattleEntity* PDefender, CBattleEntity* PAttacker);
