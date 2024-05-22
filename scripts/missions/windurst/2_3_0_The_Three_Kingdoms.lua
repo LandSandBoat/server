@@ -106,9 +106,13 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 0 then
-                        local needsSemihTrust = (not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and not player:findItem(xi.item.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
+                        if xi.settings.main.ENABLE_TRUST_QUESTS == 1 then
+                            local needsSemihTrust = (not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and not player:findItem(xi.item.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
 
-                        return mission:progressEvent(95, 0, 0, 0, xi.ki.LETTER_TO_THE_CONSULS_WINDURST, 0, 0, 0, needsSemihTrust)
+                            return mission:progressEvent(95, 0, 0, 0, xi.ki.LETTER_TO_THE_CONSULS_WINDURST, 0, 0, 0, needsSemihTrust)
+                        else
+                            return mission:progressEvent(95)
+                        end
                     elseif missionStatus == 11 then
                         return mission:progressEvent(101, 0, 0, xi.ki.ADVENTURERS_CERTIFICATE)
                     else
@@ -124,6 +128,7 @@ mission.sections =
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
 
                     if
+                        xi.settings.main.ENABLE_TRUST_QUESTS == 1 and
                         not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and
                         not player:findItem(xi.item.CIPHER_OF_SEMIHS_ALTER_EGO)
                     then
