@@ -2140,7 +2140,7 @@ namespace battleutils
 
                         // Shield Mastery
                         if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
-                            charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))
+                            PDefender->getMod(Mod::SHIELD_MASTERY_TP))
                         {
                             // If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
                             // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
