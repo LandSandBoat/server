@@ -5074,6 +5074,7 @@ xi.item =
     SCOUTERS_ROPE                       = 15302,
     EVOKERS_BOOTS                       = 15325,
     FUMA_SUNE_ATE                       = 15327,
+    BOUNDING_BOOTS                      = 15351,
     FIGHTERS_CALLIGAE_P1                = 15352,
     TEMPLE_GAITERS_P1                   = 15353,
     HEALERS_DUCKBILLS_P1                = 15354,
