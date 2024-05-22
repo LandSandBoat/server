@@ -763,7 +763,7 @@ namespace spell
                     return true;
                 }
             }
-            if (PCaster->GetSLevel() >= JobSLVL)
+            if (PCaster->GetSLevel() >= JobSLVL && !(requirements & SPELLREQ_MAIN_JOB_ONLY))
             {
                 usable = true;
                 if (requirements & SPELLREQ_TABULA_RASA)
