@@ -2,7 +2,7 @@
 -- Test My Mettle
 -----------------------------------
 -- Log ID: 4, Quest ID: 25
--- Devean : !pos -58 -10 6 248
+-- Devean : !pos 39.86 -14.56 40 248
 -- Jar    : !gotoname Jar
 -----------------------------------
 require('scripts/quests/otherAreas/helpers')

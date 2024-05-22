@@ -4153,6 +4153,7 @@ xi.item =
     GALKAN_SANDALS                      = 13009,
     HUME_F_BOOTS                        = 13010,
     ELVAAN_F_LEDELSENS                  = 13011,
+    POWER_SANDALS                       = 13012,
     STUMBLING_SANDALS                   = 13013,
     LEAPING_BOOTS                       = 13014,
     FUMA_KYAHAN                         = 13054,
