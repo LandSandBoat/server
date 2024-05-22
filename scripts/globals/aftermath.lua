@@ -644,7 +644,7 @@ xi.aftermath.onEffectGain = function(target, effect)
             end
 
             for i = 1, #aftermath.mods, 2 do
-                target:addMod(aftermath.mods[i], aftermath.mods[i + 1])
+                effect:addMod(aftermath.mods[i], aftermath.mods[i + 1])
             end
         end,
 
@@ -661,45 +661,13 @@ xi.aftermath.onEffectGain = function(target, effect)
             end
 
             for i = 1, #mods, 2 do
-                target:addMod(mods[i], mods[i + 1](tp))
+                effect:addMod(mods[i], mods[i + 1](tp))
             end
         end,
 
         -- Empyrean
         [3] = function(x)
-            target:addMod(aftermath.mod, aftermath.power[math.floor(effect:getSubPower() / 1000)])
-        end
-    }
-end
-
-xi.aftermath.onEffectLose = function(target, effect)
-    local aftermath = xi.aftermath.effects[effect:getPower()]
-    switch (effect:getTier()) : caseof
-    {
-        -- Relic
-        [1] = function(x)
-            local pet = nil
-            if aftermath.includePets then
-                pet = target:getPet()
-            end
-
-            for i = 1, #aftermath.mods, 2 do
-                target:delMod(aftermath.mods[i], aftermath.mods[i + 1])
-            end
-        end,
-
-        -- Mythic
-        [2] = function(x)
-            local tp = effect:getSubPower()
-            local mods = aftermath.mods[math.floor(tp / 1000)]
-            for i = 1, #mods, 2 do
-                target:delMod(mods[i], mods[i + 1](tp))
-            end
-        end,
-
-        -- Empyrean
-        [3] = function(x)
-            target:delMod(aftermath.mod, aftermath.power[math.floor(effect:getSubPower() / 1000)])
+            effect:addMod(aftermath.mod, aftermath.power[math.floor(effect:getSubPower() / 1000)])
         end
     }
 end
