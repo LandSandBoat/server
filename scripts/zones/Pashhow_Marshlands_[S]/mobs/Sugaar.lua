@@ -2,6 +2,8 @@
 -- Area: Pashhow Marshlands [S]
 --   NM: Sugaar
 -----------------------------------
+mixins = { require('scripts/mixins/families/peiste') }
+-----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
