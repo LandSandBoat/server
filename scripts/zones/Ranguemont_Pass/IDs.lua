@@ -21,6 +21,7 @@ zones[xi.zone.RANGUEMONT_PASS] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7064,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET        = 7223,  -- You can't fish here.
+        WATERS_OF_OBLIVION            = 7365,  -- You behold the Waters of Oblivion.
         REGIME_REGISTERED             = 9533,  -- New training regime registered!
         PLAYER_OBTAINS_ITEM           = 10585, -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 10586, -- You were unable to obtain the item.

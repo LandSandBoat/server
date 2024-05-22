@@ -13,25 +13,18 @@ end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
     -- RNG AF2 quest check
-    local fireAndBrimstoneCS = player:getCharVar('fireAndBrimstone')
-    local oldEarring         = 1113 -- TODO: Use items file.
+    local oldEarring         = xi.item.OLD_EARRING
 
     if
-        player:getZoneID() == 151 and fireAndBrimstoneCS == 5 and-- zone + quest match
+        player:getZoneID() == xi.zone.CASTLE_OZTROJA and
+        player:getCharVar('Quest[2][73]Prog') == 4 and-- zone + quest match
         not player:hasItem(oldEarring) and -- make sure player doesn't already have the earring
         player:getYPos() > -43 and player:getYPos() < -38 and -- Y match
         player:getXPos() > -85 and player:getXPos() < -73 and -- X match
         player:getZPos() > -85 and player:getZPos() < -75 and -- Z match
         math.random(1, 100) <= 50
     then
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, oldEarring)
-            return
-        else
-            player:addItem(oldEarring)
-            player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, oldEarring)
-        end
-
+        npcUtil.giveItem(player, oldEarring)
     else
         local bonuses        = (player:getMod(xi.mod.SCAVENGE_EFFECT) + player:getMerit(xi.merit.SCAVENGE_EFFECT)) / 100
         local arrowsToReturn = math.floor(math.floor(player:getLocalVar('ArrowsUsed') % 10000) * (player:getMainLvl() / 200 + bonuses))

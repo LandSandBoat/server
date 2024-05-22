@@ -23,8 +23,6 @@ entity.onTrigger = function(player, npc)
         SpawnMob(ID.mob.TROS):updateClaim(player)
     elseif player:hasKeyItem(xi.ki.MERTAIRES_BRACELET) and trosKilled == 1 then
         player:startEvent(8) -- Finish Quest 'Painful Memory'
-    else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
 

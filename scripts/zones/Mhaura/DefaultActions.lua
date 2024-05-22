@@ -5,6 +5,7 @@ return {
     ['Itzha_Delavhitta'] = { event = 900 },
     ['Jikka-Abukka']     = { event = 850 },
     ['Kotan-Purutan']    = { event = 140 },
+    ['Koh_Lenbalalako']  = { event = 10008 },
     ['Kupupu']           = { event = 800 },
     ['Lacia']            = { event = 10021 },
     ['Lakom-Lukom']      = { event = 600 },

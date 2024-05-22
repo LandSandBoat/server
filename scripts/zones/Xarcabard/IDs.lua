@@ -23,6 +23,7 @@ zones[xi.zone.XARCABARD] =
         BEASTMEN_BANNER                = 7156,  -- There was a curse on the beastmen's banner!
         ALREADY_OBTAINED_TELE          = 7386,  -- You already possess the gate crystal for this telepoint.
         CONQUEST                       = 7399,  -- You've earned conquest points!
+        MONSTER_DEEP_INSIDE            = 7240,  -- A monster appears from deep within the cave!
         ONLY_SHARDS                    = 7732,  -- Only shards of ice lie upon the ground.
         BLOCKS_OF_ICE                  = 7733,  -- You can hear blocks of ice moving from deep within the cave.
         PERENNIAL_SNOW_DEFAULT         = 7734,  -- How many millennia has this snow been here, hidden from the rays of the sun?

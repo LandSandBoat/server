@@ -45,6 +45,8 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
         CHEST_UNLOCKED                   = 7417,  -- You unlock the chest!
         SPIRIT_INCENSE_EMITS_PUTRID_ODOR = 7427,  -- The <item> emits a putrid odor and burns up. Your attempt this time has failed...
         SARCOPHAGUS_CANNOT_BE_OPENED     = 7444,  -- It is a stone sarcophagus with the lid sealed tight. It cannot be opened.
+        NAMES_OF_DECEASED                = 7455,  -- The names of the deceased are carved upon the stone.
+        SINNER_NOT_HERE                  = 7456,  -- ...The name of the sinner's daughter is not here.
         SEEMS_TO_BE_THE_END              = 7572,  -- That seems to be the end of it.
         GIRL_BACK_TO_JEUNO               = 7584,  -- I'll take the little girl back to Jeuno. Take care.
         NOT_TIME_TO_SEARCH               = 7596,  -- Now doesn't seem to be the time to search here.
@@ -73,12 +75,13 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
     },
     npc =
     {
-        GATE_OFFSET        = GetFirstID('_5f1'),
         BRAZIER            = GetFirstID('Brazier'),
+        CANDLE_OFFSET      = GetFirstID('_5fu'),
+        GATE_OFFSET        = GetFirstID('_5f1'),
+        GRAVESTONE_OFFSET  = GetFirstID('Gravestone'),
+        SARCOPHAGUS_OFFSET = GetFirstID('Sarcophagus'),
         TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
         TREASURE_COFFER    = GetFirstID('Treasure_Coffer'),
-        SARCOPHAGUS_OFFSET = GetFirstID('Sarcophagus'),
-        CANDLE_OFFSET      = GetFirstID('_5fu'),
     },
 }
 

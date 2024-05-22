@@ -130,12 +130,19 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == xi.questStaus.QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.WINDURST_WOODS] =
         {
-            ['Perih_Vashai'] = quest:event(348):replaceDefault(),
+            ['Perih_Vashai'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SIN_HUNTING) == xi.questStatus.QUEST_AVAILABLE then
+                        return quest:event(348):replaceDefault()--dialog changes after each quest in the series is completed.
+                    end
+                end,
+            },
         },
     },
 }
