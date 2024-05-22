@@ -18,7 +18,8 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         return 0
     end
 
-    petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
+    petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+
     return xi.effect.RERAISE
 end
 
