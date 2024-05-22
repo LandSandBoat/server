@@ -466,6 +466,7 @@ enum class Mod
     PALISADE_BLOCK_BONUS   = 1066, // Increases base block rate while under the effects of Palisade (additive, not multiplicative)
     REPRISAL_BLOCK_BONUS   = 1067, // Increases block rate while under the effects of Reprisal (multiplicative, not additive)
     REPRISAL_SPIKES_BONUS  = 1068, // Increases Reprisal spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
+    SHIELD_BARRIER         = 1082, // Grants a bonus to Protect spells cast by self while a shield is equipped.
 
     // Dark Knight
     ARCANE_CIRCLE_DURATION = 858,  // Arcane Circle extended duration in seconds
@@ -1019,7 +1020,7 @@ enum class Mod
     // 221 to 222
     // 274 to 275
     //
-    // SPARE = 1082 and onward
+    // SPARE = 1083 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

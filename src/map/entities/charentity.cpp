@@ -603,6 +603,18 @@ int8 CCharEntity::getShieldSize()
     return PItem->getShieldSize();
 }
 
+int16 CCharEntity::getShieldDefense()
+{
+    CItemEquipment* PItem = getEquip(SLOT_SUB);
+
+    if (PItem && PItem->IsShield())
+    {
+        return PItem->getModifier(Mod::DEF);
+    }
+
+    return 0;
+}
+
 bool CCharEntity::hasBazaar()
 {
     if (isSettingBazaarPrices)

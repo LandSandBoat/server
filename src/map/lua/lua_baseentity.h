@@ -253,7 +253,8 @@ public:
     void lockEquipSlot(uint8 slot);
     void unlockEquipSlot(uint8 slot);
 
-    int8 getShieldSize();
+    int8  getShieldSize();
+    int16 getShieldDefense();
 
     bool hasGearSetMod(uint8 modNameId);
     void addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue);

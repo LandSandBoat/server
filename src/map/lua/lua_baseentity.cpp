@@ -4731,6 +4731,27 @@ int8 CLuaBaseEntity::getShieldSize()
 }
 
 /************************************************************************
+ *  Function: getShieldDefense()
+ *  Purpose : Return the defense of the equipped shield
+ *  Example : player:getShieldDefense()
+ *  Notes   : Returns 0 if player does not have shield equipped
+ ************************************************************************/
+
+int16 CLuaBaseEntity::getShieldDefense()
+{
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        return static_cast<CCharEntity*>(m_PBaseEntity)->getShieldDefense();
+    }
+    else
+    {
+        ShowWarning("Entity is not a Player: (%s).", m_PBaseEntity->getName());
+    }
+
+    return 0;
+}
+
+/************************************************************************
  *  Function: addGearSetMod()
  *  Purpose : Need to research functionality more to provide description
  *  Example : player:addGearSetMod(setId, modId, modValue)
@@ -17622,6 +17643,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("unlockEquipSlot", CLuaBaseEntity::unlockEquipSlot);
 
     SOL_REGISTER("getShieldSize", CLuaBaseEntity::getShieldSize);
+    SOL_REGISTER("getShieldDefense", CLuaBaseEntity::getShieldDefense);
 
     SOL_REGISTER("addGearSetMod", CLuaBaseEntity::addGearSetMod);
     SOL_REGISTER("clearGearSetMods", CLuaBaseEntity::clearGearSetMods);
