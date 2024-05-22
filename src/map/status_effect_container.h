@@ -133,7 +133,7 @@ private:
     CBattleEntity* m_POwner = nullptr;
 
     // void ReplaceStatusEffect(EFFECT effect); //this needs to be implemented
-    void RemoveStatusEffect(uint32 id, bool silent = false);              // We remove the effect by its number in the container
+    void RemoveStatusEffect(uint32 id, bool silent = false); // We remove the effect by its number in the container
     void DeleteStatusEffects();
     void SetEffectParams(CStatusEffect* StatusEffect); // We set the effect of the effect
     void HandleAura(CStatusEffect* PStatusEffect);

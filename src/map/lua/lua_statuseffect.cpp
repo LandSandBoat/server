@@ -23,8 +23,8 @@
 #include "common/timer.h"
 
 #include "lua_statuseffect.h"
-#include "status_effect_container.h"
 #include "status_effect.h"
+#include "status_effect_container.h"
 
 #include "entities/battleentity.h"
 
@@ -207,6 +207,14 @@ void CLuaStatusEffect::setStartTime(uint32 time)
 void CLuaStatusEffect::addMod(uint16 mod, int16 amount)
 {
     m_PLuaStatusEffect->addMod(static_cast<Mod>(mod), amount);
+
+    // Since an effect's mod list is only applied to entity when adding the effect
+    // we need to add the mod to the entity manually if the effect is already applied
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (PBattleEntity)
+    {
+        PBattleEntity->addModifier(static_cast<Mod>(mod), amount);
+    }
 }
 
 //======================================================//
