@@ -12,13 +12,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local medicineWoman = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
-    local toCureaCough = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
+    local medicineWoman = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
+    local toCureaCough = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
 
     if
-        toCureaCough == QUEST_AVAILABLE and
+        toCureaCough == xi.questStatus.QUEST_AVAILABLE and
         player:getCharVar('toCureaCough') == 0 and
-        medicineWoman == QUEST_COMPLETED
+        medicineWoman == xi.questStatus.QUEST_COMPLETED
     then
         player:startEvent(538)
     elseif player:hasKeyItem(xi.ki.COUGH_MEDICINE) then
@@ -40,8 +40,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delKeyItem(xi.ki.COUGH_MEDICINE)
         player:addKeyItem(xi.ki.SCROLL_OF_TREASURE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCROLL_OF_TREASURE)
-        player:addFame(xi.quest.fame_area.SANDORIA, 30)
-        player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
+        player:addFame(xi.fameArea.SANDORIA, 30)
+        player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
     end
 end
 

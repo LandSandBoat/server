@@ -144,7 +144,7 @@ local function completeDominionOp(player, opID)
         xpMultiplier = xpMultiplier - (75 - player:getMainLvl()) * .02
     end
 
-    player:completeQuest(xi.quest.log_id.ABYSSEA, dominionOpQuests[opID][1])
+    player:completeQuest(xi.questLog.ABYSSEA, dominionOpQuests[opID][1])
     player:addExp(dominionOpQuests[opID][3] * xpMultiplier)
     player:addCurrency('cruor', dominionOpQuests[opID][3] / 5)
     player:messageSpecial(ID.text.CRUOR_TOTAL, dominionOpQuests[opID][3] / 5, player:getCurrency('cruor'))
@@ -218,7 +218,7 @@ xi.abyssea.sergeantOnEventFinish = function(player, csid, option, npc)
         local selectedOp = bit.rshift(option, 4)
         local opID       = 559 + opZone[player:getZoneID()] * 14 + selectedOp
 
-        player:addQuest(xi.quest.log_id.ABYSSEA, dominionOpQuests[opID][1])
+        player:addQuest(xi.questLog.ABYSSEA, dominionOpQuests[opID][1])
         player:setCharVar('activeDominionOp', opID)
         player:messageSpecial(ID.text.DOMINION_SIGNED_ON)
 
@@ -226,7 +226,7 @@ xi.abyssea.sergeantOnEventFinish = function(player, csid, option, npc)
     elseif finishType == 3 then
         local activeOp = player:getCharVar('activeDominionOp')
 
-        player:delQuest(xi.quest.log_id.ABYSSEA, dominionOpQuests[activeOp][1])
+        player:delQuest(xi.questLog.ABYSSEA, dominionOpQuests[activeOp][1])
         clearOpVars(player, activeOp)
         player:messageSpecial(ID.text.CANCELED_OBJECTIVE)
 

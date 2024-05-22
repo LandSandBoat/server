@@ -177,6 +177,7 @@ log/leaks.txt
 # Visual Studio
 **/*.vcxproj*
 **/*.sln
+enc_temp_folder
 
 # CMake files
 CMakeCache.txt

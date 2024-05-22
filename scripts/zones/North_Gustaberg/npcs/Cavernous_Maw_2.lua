@@ -15,8 +15,8 @@ entity.onTrigger = function(player, npc)
     if xi.settings.main.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
         if
             xi.abyssea.getHeldTraverserStones(player) >= 1 and
-            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
-            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.AN_ULCEROUS_URAGNITE) == QUEST_AVAILABLE
+            player:getQuestStatus(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == xi.questStatus.QUEST_ACCEPTED and
+            player:getQuestStatus(xi.questLog.ABYSSEA, xi.quest.id.abyssea.AN_ULCEROUS_URAGNITE) == xi.questStatus.QUEST_AVAILABLE
         then
             player:startEvent(0)
         else
@@ -32,7 +32,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 0 then
-        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.AN_ULCEROUS_URAGNITE)
+        player:addQuest(xi.questLog.ABYSSEA, xi.quest.id.abyssea.AN_ULCEROUS_URAGNITE)
     elseif csid == 1 then
         -- Killed Amphitrite
     elseif csid == 908 and option == 1 then

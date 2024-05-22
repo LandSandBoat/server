@@ -14,13 +14,13 @@ end
 entity.onTrigger = function(player, npc)
     local mJob   = player:getMainJob()
     local mLvl   = player:getMainLvl()
-    local efao   = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
-    local ntus   = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
+    local efao   = player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
+    local ntus   = player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
 
     -- NAVIGATING THE UNFRIENDLY SEAS
     if
-        efao == QUEST_COMPLETED and
-        ntus == QUEST_AVAILABLE and
+        efao == xi.questStatus.QUEST_COMPLETED and
+        ntus == xi.questStatus.QUEST_AVAILABLE and
         mJob == xi.job.COR and
         mLvl >= xi.settings.main.AF2_QUEST_LEVEL
     then
@@ -40,10 +40,10 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- NAVIGATING THE UNFRIENDLY SEAS
     if csid == 232 then
-        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
+        player:addQuest(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
         player:setCharVar('NavigatingtheUnfriendlySeas', 1)
     elseif csid == 233 then
-        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS, { item = 15601, var = { 'NavigatingtheUnfriendlySeas', 'HydrogauageTimer' } })
+        npcUtil.completeQuest(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS, { item = 15601, var = { 'NavigatingtheUnfriendlySeas', 'HydrogauageTimer' } })
     end
 end
 

@@ -32,7 +32,7 @@ local zoneId =
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS) == xi.questStatus.QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, xi.item.CLAY_TABLET)
     then
         local tablets = player:getCharVar('anExplorer-ClayTablets')
@@ -61,15 +61,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local anExplorersFootsteps = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
+    local anExplorersFootsteps = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
 
     -- AN EXPLORER'S FOOTSTEPS
     if
-        anExplorersFootsteps == QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 1
+        anExplorersFootsteps == xi.questStatus.QUEST_AVAILABLE and
+        player:getFameLevel(xi.fameArea.SELBINA_RABAO) >= 1
     then
         player:startEvent(40)
-    elseif anExplorersFootsteps == QUEST_ACCEPTED then
+    elseif anExplorersFootsteps == xi.questStatus.QUEST_ACCEPTED then
         if
             not player:hasItem(xi.item.CLAY_TABLET) and
             not player:hasItem(xi.item.LUMP_OF_SELBINA_CLAY)
@@ -108,7 +108,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         option ~= 0 and
         npcUtil.giveItem(player, xi.item.LUMP_OF_SELBINA_CLAY)
     then
-        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
+        player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
         player:setCharVar('anExplorer-ClayTablets', 0)
     elseif
         csid == 42 and
@@ -132,7 +132,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
 
         if csid == 47 then
-            player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
+            player:completeQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
             player:setCharVar('anExplorer-ClayTablets', 0)
         end
 

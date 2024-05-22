@@ -19,40 +19,33 @@ zones[xi.zone.EASTERN_ALTEPA_DESERT] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023,  -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7061,  -- Tallying conquest results...
-        BEASTMEN_BANNER               = 7142,  -- There is a beastmen's banner.
-        CONQUEST                      = 7229,  -- You've earned conquest points!
-        FISHING_MESSAGE_OFFSET        = 7562,  -- You can't fish here.
-        DIG_THROW_AWAY                = 7575,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
-        FIND_NOTHING                  = 7577,  -- You dig and you dig, but find nothing.
-        AMK_DIGGING_OFFSET            = 7643,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
-        ALREADY_OBTAINED_TELE         = 7671,  -- You already possess the gate crystal for this telepoint.
-        GARRISON_BASE                 = 7698,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
-        PLAYER_OBTAINS_ITEM           = 7771,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7772,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7773,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7774,  -- You already possess that temporary item.
-        NO_COMBINATION                = 7779,  -- You were unable to enter a combination.
-        UNITY_WANTED_BATTLE_INTERACT  = 7841,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 9957,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 11093, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CONQUEST_BASE                 = 7064,  -- Tallying conquest results...
+        BEASTMEN_BANNER               = 7145,  -- There is a beastmen's banner.
+        CONQUEST                      = 7232,  -- You've earned conquest points!
+        FISHING_MESSAGE_OFFSET        = 7565,  -- You can't fish here.
+        DIG_THROW_AWAY                = 7578,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
+        FIND_NOTHING                  = 7580,  -- You dig and you dig, but find nothing.
+        AMK_DIGGING_OFFSET            = 7646,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
+        ALREADY_OBTAINED_TELE         = 7674,  -- You already possess the gate crystal for this telepoint.
+        GARRISON_BASE                 = 7701,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        PLAYER_OBTAINS_ITEM           = 7774,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7775,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7776,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7777,  -- You already possess that temporary item.
+        NO_COMBINATION                = 7782,  -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7844,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 9960,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 11096, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
-        DUNE_WIDOW_PH     =
-        {
-            [17244395] = 17244396,
-        },
-        DONNERGUGI_PH     =
-        {
-            [17244258] = 17244268,
-            [17244263] = 17244268,
-        },
-        CENTURIO_XII_I    = 17244372,
-        NANDI             = 17244471,
-        DECURIO_I_III     = 17244523,
-        TSUCHIGUMO_OFFSET = 17244524,
-        CACTROT_RAPIDO    = 17244539,
+        DUNE_WIDOW        = GetFirstID('Dune_Widow'),
+        DONNERGUGI        = GetFirstID('Donnergugi'),
+        CENTURIO_XII_I    = GetFirstID('Centurio_XII-I'),
+        NANDI             = GetFirstID('Nandi'),
+        DECURIO_I_III     = GetFirstID('Decurio_I-III'),
+        TSUCHIGUMO_OFFSET = GetFirstID('Tsuchigumo'),
+        CACTROT_RAPIDO    = GetFirstID('Cactrot_Rapido'),
     },
     npc =
     {

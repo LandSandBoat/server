@@ -11,7 +11,7 @@
 -- Ranpi-Monpi     - !pos -116 -3 52 238
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_DAWN_OF_DELECTABILITY)
+local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_DAWN_OF_DELECTABILITY)
 
 quest.reward =
 {
@@ -23,7 +23,7 @@ quest.sections =
     -- Visit Ranpi-Monpi (S) in Windurst Waters (S) (E-9, north side) to start the quest.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.WINDURST_WATERS_S] =
@@ -43,7 +43,7 @@ quest.sections =
     -- Speak with Ranpi in the present and he'll request ingredients
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 1
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 1
         end,
 
         [xi.zone.WINDURST_WATERS_S] =
@@ -67,7 +67,7 @@ quest.sections =
     -- Trade Ranpi the ingredients
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 2
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 2
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -101,7 +101,7 @@ quest.sections =
     -- Speak with Ranpi before day is up
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 3 and
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 3 and
                 quest:getVar(player, 'Timer') > VanadielUniqueDay()
         end,
 
@@ -114,7 +114,7 @@ quest.sections =
     -- Speak with Ranpi after a game day wait
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 3 and
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 3 and
                 quest:getVar(player, 'Timer') <= VanadielUniqueDay()
         end,
 
@@ -136,7 +136,7 @@ quest.sections =
     -- Return to Windurst Waters (S) and feed Ranpi.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 4
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 4
         end,
 
         [xi.zone.WINDURST_WATERS_S] =
@@ -157,7 +157,7 @@ quest.sections =
     -- Return to Windurst Waters and finish the quest
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 5
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 5
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -178,7 +178,7 @@ quest.sections =
     -- New default text for Ranpi
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED or vars.Prog == 5
+            return status == xi.questStatus.QUEST_COMPLETED or vars.Prog == 5
         end,
 
         [xi.zone.WINDURST_WATERS_S] =

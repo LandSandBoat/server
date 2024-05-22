@@ -39,7 +39,7 @@ mission.sections =
 
         [xi.zone.CLOISTER_OF_FLAMES] =
         {
-            ['Fire_Protocrystal'] =
+            ['FP_Entrance'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -70,7 +70,7 @@ mission.sections =
 
         [xi.zone.CLOISTER_OF_FROST] =
         {
-            ['Ice_Protocrystal'] =
+            ['IP_Entrance'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -101,7 +101,7 @@ mission.sections =
 
         [xi.zone.CLOISTER_OF_GALES] =
         {
-            ['Wind_Protocrystal'] =
+            ['WP_Entrance'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -132,7 +132,7 @@ mission.sections =
 
         [xi.zone.CLOISTER_OF_STORMS] =
         {
-            ['Lightning_Protocrystal'] =
+            ['LP_Entrance'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -163,7 +163,7 @@ mission.sections =
 
         [xi.zone.CLOISTER_OF_TIDES] =
         {
-            ['Water_Protocrystal'] =
+            ['WP_Entrance'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -194,7 +194,7 @@ mission.sections =
 
         [xi.zone.CLOISTER_OF_TREMORS] =
         {
-            ['Earth_Protocrystal'] =
+            ['EP_Entrance'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -301,7 +301,7 @@ mission.sections =
 
         [xi.zone.CLOISTER_OF_FLAMES] =
         {
-            ['Fire_Protocrystal'] =
+            ['FP_Entrance'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -332,7 +332,7 @@ mission.sections =
 
         [xi.zone.CLOISTER_OF_FROST] =
         {
-            ['Ice_Protocrystal'] =
+            ['IP_Entrance'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -363,7 +363,7 @@ mission.sections =
 
         [xi.zone.CLOISTER_OF_GALES] =
         {
-            ['Wind_Protocrystal'] =
+            ['WP_Entrance'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -394,7 +394,7 @@ mission.sections =
 
         [xi.zone.CLOISTER_OF_STORMS] =
         {
-            ['Lightning_Protocrystal'] =
+            ['LP_Entrance'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -425,7 +425,7 @@ mission.sections =
 
         [xi.zone.CLOISTER_OF_TIDES] =
         {
-            ['Water_Protocrystal'] =
+            ['WP_Entrance'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -456,7 +456,7 @@ mission.sections =
 
         [xi.zone.CLOISTER_OF_TREMORS] =
         {
-            ['Earth_Protocrystal'] =
+            ['EP_Entrance'] =
             {
                 onTrigger = function(player, npc)
                     if

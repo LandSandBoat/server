@@ -806,6 +806,7 @@ public:
     void SetStartTime(time_point StartTime);
 
     void addMod(Mod modType, int16 amount);
+    void setMod(Mod modType, int16 value);
 
     void SetEffectName(std::string name);
 

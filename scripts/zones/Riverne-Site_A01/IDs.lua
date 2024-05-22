@@ -16,34 +16,26 @@ zones[xi.zone.RIVERNE_SITE_A01] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7061, -- Tallying conquest results...
-        A_GLOWING_MIST                = 7256, -- A glowing mist of ever-changing proportions floats before you...
-        PARTY_MEMBERS_HAVE_FALLEN     = 7570, -- All party members have fallen in battle. Now leaving the battlefield.
-        THE_PARTY_WILL_BE_REMOVED     = 7577, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        SD_VERY_SMALL                 = 7601, -- The spatial displacement is very small. If you only had some item that could make it bigger...
-        SD_HAS_GROWN                  = 7602, -- The spatial displacement has grown.
-        SPACE_SEEMS_DISTORTED         = 7603, -- The space around you seems oddly distorted and disrupted.
-        MONUMENT                      = 7610, -- Something has been engraved on this stone, but the message is too difficult to make out.
-        HOMEPOINT_SET                 = 7738, -- Home point set!
-        UNITY_WANTED_BATTLE_INTERACT  = 7796, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        CONQUEST_BASE                 = 7064, -- Tallying conquest results...
+        A_GLOWING_MIST                = 7259, -- A glowing mist of ever-changing proportions floats before you...
+        PARTY_MEMBERS_HAVE_FALLEN     = 7573, -- All party members have fallen in battle. Now leaving the battlefield.
+        THE_PARTY_WILL_BE_REMOVED     = 7580, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        SD_VERY_SMALL                 = 7604, -- The spatial displacement is very small. If you only had some item that could make it bigger...
+        SD_HAS_GROWN                  = 7605, -- The spatial displacement has grown.
+        SPACE_SEEMS_DISTORTED         = 7606, -- The space around you seems oddly distorted and disrupted.
+        MONUMENT                      = 7613, -- Something has been engraved on this stone, but the message is too difficult to make out.
+        HOMEPOINT_SET                 = 7741, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 7799, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {
-        HELIODROMOS_PH_OFFSET    = 16900107,
-        HELIODROMOS_OFFSET       = 16900110,
-        CARMINE_DOBSONFLY_OFFSET = 16900230,
+        HELIODROMOS_OFFSET       = GetFirstID('Heliodromos'),
+        CARMINE_DOBSONFLY_OFFSET = GetFirstID('Carmine_Dobsonfly'),
+        AIATAR                   = GetFirstID('Aiatar'),
     },
     npc =
     {
-        DISPLACEMENT_OFFSET = 16900335,
-    },
-    AIATAR_PH =
-    {
-        [16900301] = 16900306,
-        [16900302] = 16900306,
-        [16900303] = 16900306,
-        [16900304] = 16900306,
-        [16900305] = 16900306,
+        DISPLACEMENT_OFFSET = GetFirstID('Spatial_Displacement'),
     },
 }
 

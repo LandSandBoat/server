@@ -261,17 +261,30 @@ local attackTypeShields =
 }
 
 xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, damagetype, shadowbehav)
+    local missMessage = xi.msg.basic.SKILL_MISS
+    if mob:getCurrentAction() == xi.action.PET_MOBABILITY_FINISH then
+        missMessage = xi.msg.basic.JA_MISS_2
+    end
+
     -- Physical Attack Missed
     if
         skilltype == xi.attackType.PHYSICAL and
         dmg == 0
     then
+        skill:setMsg(missMessage)
+
         return 0
     end
 
     -- set message to damage
     -- this is for AoE because its only set once
-    skill:setMsg(xi.msg.basic.DAMAGE)
+    if mob:getCurrentAction() == xi.action.PET_MOBABILITY_FINISH then
+        if skill:getMsg() ~= xi.msg.basic.JA_MAGIC_BURST then
+            skill:setMsg(xi.msg.basic.USES_JA_TAKE_DAMAGE)
+        end
+    else
+        skill:setMsg(xi.msg.basic.DAMAGE)
+    end
 
     -- Handle shadows depending on shadow behaviour / skilltype
     dmg = utils.takeShadows(target, dmg, shadowbehav)
@@ -325,10 +338,12 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
 
     -- handle pd
     if
-        target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
-        target:hasStatusEffect(xi.effect.ALL_MISS) and
+        (target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
+        target:hasStatusEffect(xi.effect.ALL_MISS)) and
         skilltype == xi.attackType.PHYSICAL
     then
+        skill:setMsg(missMessage)
+
         return 0
     end
 

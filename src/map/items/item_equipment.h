@@ -82,6 +82,7 @@ public:
     uint8  getSuperiorLevel();
 
     bool IsShield() const;
+    bool isEquippableByRace(uint8 race) const;
 
     void setReqLvl(uint8 lvl);
     void setILvl(uint8 lvl);

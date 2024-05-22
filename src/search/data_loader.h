@@ -69,6 +69,8 @@ struct SearchEntity
     bool        mentor         = false;
     uint8       seacom_type    = 0;
     uint8       languages      = 0;
+    bool        gmHidden       = false;
+    bool        disconnecting  = false;
 };
 
 /************************************************************************

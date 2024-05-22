@@ -86,7 +86,8 @@ public:
     bool                      IsEvaded() const;                     // Gets the evaded flag.
     void                      SetEvaded(bool value);                // Sets the evaded flag.
     bool                      IsBlocked() const;                    // Returns the blocked flag.
-    bool                      IsParried();
+    bool                      IsParried() const;
+    bool                      CheckParried();
     bool                      IsAnticipated() const;
     bool                      CheckAnticipated();
     bool                      IsCountered() const;
@@ -106,17 +107,18 @@ private:
     uint8                     m_hitRate{ 0 };        // This attack's hitrate.
     bool                      m_isCritical{ false }; // Flag: Is this attack a critical attack?
     bool                      m_isGuarded{ false };  // Flag: Is this attack guarded by the victim?
+    bool                      m_isParried{ false };  // Flag: Is this attack parried by the victim?
     bool                      m_isBlocked{ false };  // Flag: Is this attack blocked by the victim?
     bool                      m_isEvaded{ false };   // Flag: Is this attack evaded by the victim?
     bool                      m_isCountered{ false };
     bool                      m_isCovered{ false }; // Flag: Is someone covering the victim?
     bool                      m_anticipated{ false };
-    bool                      m_isFirstSwing{ false };  // Flag: Is this attack the first swing?
-    float                     m_damageRatio{ false };   // The damage ratio.
-    int32                     m_damage{ 0 };            // The damage for this attack.
-    int32                     m_trickAttackDamage{ 0 }; // The damage from trick attack.
-    int32                     m_naturalH2hDamage{ 0 };  // The damage from natural H2H.
-    int32                     m_baseDamage{ 0 };        // The base damage.
+    bool                      m_isFirstSwing{ false };        // Flag: Is this attack the first swing?
+    float                     m_damageRatio{ false };         // The damage ratio.
+    int32                     m_damage{ 0 };                  // The damage for this attack.
+    int32                     m_bonusBasePhysicalDamage{ 0 }; // The raw increase of base weapon damage from trick attack/consume mana.
+    int32                     m_naturalH2hDamage{ 0 };        // The damage from natural H2H.
+    int32                     m_baseDamage{ 0 };              // The base damage.
 };
 
 #endif

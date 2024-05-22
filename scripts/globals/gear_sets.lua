@@ -2597,4 +2597,6 @@ xi.gear_sets.checkForGearSet = function(player)
             end
         end
     end
+
+    player:recalculateStats()
 end

@@ -205,9 +205,9 @@ namespace fishingutils
         return 0;
     }
 
-    uint16 GetHookTime(CCharEntity* PChar)
+    uint8 GetHookTime(CCharEntity* PChar)
     {
-        uint16         waitTime  = 13;
+        uint8          waitTime  = 13;
         uint8          moonPhase = GetMoonPhase();
         uint8          hour      = (uint8)CVanaTime::getInstance()->getHour();
         fishing_gear_t gear      = GetFishingGear(PChar);
@@ -1496,7 +1496,7 @@ namespace fishingutils
 
         if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0)
         {
-            CItemFish* Fish = static_cast<CItemFish*>(itemutils::GetItem(FishID));
+            CItemFish* Fish = GetFish(FishID);
 
             if (Fish == nullptr)
             {
@@ -1627,7 +1627,7 @@ namespace fishingutils
         // PChar->StatusEffectContainer->CopyConfrontationEffect(PMob);
         if ((mob->log < 255 && mob->quest < 255) || mob->questOnly || (PMob->m_TrueDetection && PMob->getMobMod(MOBMOD_DETECTION) & DETECT_SCENT) || !PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK))
         {
-            PMob->PEnmityContainer->AddBaseEnmity(PChar);
+            PMob->PAI->Engage(PChar->targid);
             battleutils::ClaimMob(PMob, (CBattleEntity*)PChar);
         }
 
@@ -1950,6 +1950,8 @@ namespace fishingutils
         }
         else
         {
+            auto secs = std::chrono::duration_cast<std::chrono::seconds>(server_clock::now().time_since_epoch());
+            PChar->setCharVar("[Fish]LastCastTime", secs.count());
             PChar->lastCastTime = vanaTime;
             PChar->nextFishTime = PChar->lastCastTime + 5;
         }
@@ -2881,6 +2883,18 @@ namespace fishingutils
 
             break;
         }
+    }
+
+    CItemFish* GetFish(uint16 itemid)
+    {
+        CItem* PItem = itemutils::GetItemPointer(itemid);
+
+        if (PItem && FishList[itemid])
+        {
+            // CItemFish constructor uses `const CItem&` input so this is ok
+            return new CItemFish(*PItem);
+        }
+        return nullptr;
     }
 
     /************************************************************************

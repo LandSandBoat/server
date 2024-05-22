@@ -5,7 +5,7 @@
 -- Moogle : (Mog House, Home Nation)
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
 
 quest.reward =
 {
@@ -19,8 +19,8 @@ quest.sections[1] = {}
 quest.sections[1].check = function(player, status, vars)
     local bedPlacedTime = quest:getVar(player, 'bedPlacedTime')
 
-    return status == QUEST_AVAILABLE and
-        player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC) and
+    return status == xi.questStatus.QUEST_AVAILABLE and
+        player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC) and
         xi.moghouse.isInMogHouseInHomeNation(player) and
         player:getFameLevel(player:getNation()) >= 7 and
         not quest:getMustZone(player) and
@@ -52,7 +52,7 @@ local questAvailable =
 
 quest.sections[2] = {}
 quest.sections[2].check = function(player, status, vars)
-    return status == QUEST_ACCEPTED
+    return status == xi.questStatus.QUEST_ACCEPTED
 end
 
 local questAccepted =

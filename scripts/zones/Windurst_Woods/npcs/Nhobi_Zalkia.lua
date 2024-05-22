@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
             4412,  299,  -- Thundermelon
             4491,  184   -- Watermelon
         }
-        xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
+        xi.shop.general(player, stock, xi.fameArea.WINDURST)
     end
 end
 

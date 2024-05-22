@@ -6,12 +6,12 @@
 -- Roh Latteh : !pos -11.823 6.999 -9.249 234
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
 
 quest.reward =
 {
     fame     = 20,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     title    = xi.title.RING_BEARER,
 }
 
@@ -29,7 +29,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status ~= QUEST_ACCEPTED and
+            return status ~= xi.questStatus.QUEST_ACCEPTED and
                 vars.Prog == 0
         end,
 
@@ -43,7 +43,7 @@ quest.sections =
                     if npcUtil.giveItem(player, xi.item.FIRE_CRYSTAL) then
                         quest:setVar(player, 'Prog', 1)
 
-                        if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_AVAILABLE then
+                        if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_AVAILABLE then
                             quest:begin(player)
                         end
                     end
@@ -54,7 +54,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status ~= QUEST_AVAILABLE and
+            return status ~= xi.questStatus.QUEST_AVAILABLE and
                 vars.Prog == 1
         end,
 

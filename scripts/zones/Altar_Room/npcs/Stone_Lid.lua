@@ -8,8 +8,11 @@ local ID = zones[xi.zone.ALTAR_ROOM]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local moralmanifest = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
-    if moralmanifest == QUEST_ACCEPTED and player:getCharVar('moral') == 7 then
+    local moralmanifest = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
+    if
+        moralmanifest == xi.questStatus.QUEST_ACCEPTED and
+        player:getCharVar('moral') == 7
+    then
         if trade:hasItemQty(xi.item.YAGUDO_HEADGEAR, 1) then -- Trade Yagudo Headgear
             player:tradeComplete()
             player:startEvent(50)
@@ -18,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- local moralmanifest = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
+    -- local moralmanifest = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
     local moral = player:getCharVar('moral')
     local head = player:getEquipID(xi.slot.HEAD)
     if moral == 5 and head == xi.item.YAGUDO_HEADGEAR then

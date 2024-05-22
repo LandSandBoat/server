@@ -18,42 +18,27 @@ zones[xi.zone.ULEGUERAND_RANGE] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7015, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7016, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7036, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7074, -- Tallying conquest results...
-        SOMETHING_GLITTERING          = 7345, -- You see something glittering beneath the surface of the ice.
-        WHAT_LIES_BENEATH             = 7346, -- There are many cold <item> scattered around the area. Could someone be trying to melt the ice to retrieve what lies beneath?
-        SOMETHING_GLITTERING_BUT      = 7347, -- You see something glittering below the surface here, but the ice encases it completely.
-        HOMEPOINT_SET                 = 8339, -- Home point set!
-        UNITY_WANTED_BATTLE_INTERACT  = 8397, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        CONQUEST_BASE                 = 7077, -- Tallying conquest results...
+        SOMETHING_GLITTERING          = 7348, -- You see something glittering beneath the surface of the ice.
+        WHAT_LIES_BENEATH             = 7349, -- There are many cold <item> scattered around the area. Could someone be trying to melt the ice to retrieve what lies beneath?
+        SOMETHING_GLITTERING_BUT      = 7350, -- You see something glittering below the surface here, but the ice encases it completely.
+        HOMEPOINT_SET                 = 8342, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 8400, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {
-        SKVADER_PH =
-        {
-            [16797769] = 16797770,
-        },
-        MAGNOTAUR_PH =
-        {
-            [16797966] = 16797968,
-            [16797967] = 16797968,
-        },
-        BONNACON_PH =
-        {
-            [16798050] = 16798056, -- -623.154 -40.604 -51.621
-            [16798051] = 16798056, -- -587.026 -40.994 -22.551
-            [16798052] = 16798056, -- -513.416 -40.490 -43.706
-            [16798053] = 16798056, -- -553.844 -38.958 -53.864
-            [16798054] = 16798056, -- -631.268 -40.257 0.709
-            [16798055] = 16798056, -- -513.999 -40.541 -34.928
-        },
-        JORMUNGAND  = 16797969,
-        GEUSH_URVAN = 16798078,
-        WHITE_CONEY = 16798079,
-        BLACK_CONEY = 16798080,
+        SKVADER     = GetFirstID('Skvader'),
+        MAGNOTAUR   = GetFirstID('Magnotaur'),
+        BONNACON    = GetFirstID('Bonnacon'),
+        JORMUNGAND  = GetFirstID('Jormungand'),
+        GEUSH_URVAN = GetFirstID('Geush_Urvan'),
+        WHITE_CONEY = GetFirstID('White_Coney'),
+        BLACK_CONEY = GetFirstID('Black_Coney'),
     },
     npc =
     {
-        WATERFALL = 16798113,
-        RABBIT_FOOTPRINT = 16798100,
+        WATERFALL        = GetFirstID('_058'),
+        RABBIT_FOOTPRINT = GetFirstID('Rabbit_Footprint'),
     },
 }
 

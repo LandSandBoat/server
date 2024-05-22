@@ -19,36 +19,36 @@ zones[xi.zone.BEHEMOTHS_DOMINION] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023,  -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7061,  -- Tallying conquest results...
-        AIR_AROUND_YOU_CHANGED        = 7326,  -- The air around you has suddenly changed!
-        SOMETHING_BETTER              = 7327,  -- Don't you have something better to do right now?
-        CANNOT_REMOVE_FRAG            = 7330,  -- It is an oddly shaped stone monument. A shining stone is embedded in it, but cannot be removed...
-        ALREADY_OBTAINED_FRAG         = 7331,  -- You have already obtained this monument's <keyitem>. Try searching for another.
-        FOUND_ALL_FRAGS               = 7333,  -- You have obtained <keyitem>! You now have all 8 fragments of light!
-        ZILART_MONUMENT               = 7334,  -- It is an ancient Zilart monument.
-        PLAYER_OBTAINS_ITEM           = 7355,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7356,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7357,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7358,  -- You already possess that temporary item.
-        NO_COMBINATION                = 7363,  -- You were unable to enter a combination.
-        UNITY_WANTED_BATTLE_INTERACT  = 7425,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 9541,  -- New training regime registered!
-        LEARNS_SPELL                  = 11530, -- <name> learns <spell>!
-        UNCANNY_SENSATION             = 11532, -- You are assaulted by an uncanny sensation.
-        COMMON_SENSE_SURVIVAL         = 11539, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CONQUEST_BASE                 = 7064,  -- Tallying conquest results...
+        AIR_AROUND_YOU_CHANGED        = 7329,  -- The air around you has suddenly changed!
+        SOMETHING_BETTER              = 7330,  -- Don't you have something better to do right now?
+        CANNOT_REMOVE_FRAG            = 7333,  -- It is an oddly shaped stone monument. A shining stone is embedded in it, but cannot be removed...
+        ALREADY_OBTAINED_FRAG         = 7334,  -- You have already obtained this monument's <keyitem>. Try searching for another.
+        FOUND_ALL_FRAGS               = 7336,  -- You have obtained <keyitem>! You now have all 8 fragments of light!
+        ZILART_MONUMENT               = 7337,  -- It is an ancient Zilart monument.
+        PLAYER_OBTAINS_ITEM           = 7358,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7359,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7360,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7361,  -- You already possess that temporary item.
+        NO_COMBINATION                = 7366,  -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7428,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 9544,  -- New training regime registered!
+        LEARNS_SPELL                  = 11533, -- <name> learns <spell>!
+        UNCANNY_SENSATION             = 11535, -- You are assaulted by an uncanny sensation.
+        COMMON_SENSE_SURVIVAL         = 11542, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
-        BEHEMOTH                = 17297440,
-        KING_BEHEMOTH           = 17297441,
-        TALEKEEPERS_GIFT_OFFSET = 17297446,
-        ANCIENT_WEAPON          = 17297449,
-        LEGENDARY_WEAPON        = 17297450,
+        BEHEMOTH                = GetFirstID('Behemoth'),
+        KING_BEHEMOTH           = GetFirstID('King_Behemoth'),
+        ANCIENT_WEAPON          = GetFirstID('Ancient_Weapon'),
+        LEGENDARY_WEAPON        = GetFirstID('Legendary_Weapon'),
+        TALEKEEPERS_GIFT_OFFSET = GetFirstID('Picklix_Longindex'),
     },
     npc =
     {
-        BEHEMOTH_QM      = 17297459,
-        CERMET_HEADSTONE = 17297494,
+        BEHEMOTH_QM      = GetFirstID('qm2'),
+        CERMET_HEADSTONE = GetFirstID('Cermet_Headstone'),
     },
 }
 

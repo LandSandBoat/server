@@ -10,11 +10,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local apbif = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
-    local soaMission = player:getCurrentMission(xi.mission.log_id.SOA)
-
-    if soaMission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER then
-        if apbif == QUEST_ACCEPTED and not player:hasStatusEffect(xi.effect.IONIS) then
+    if player:getCurrentMission(xi.mission.log_id.SOA) >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER then
+        if
+            player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND) == xi.questStatus.QUEST_ACCEPTED and
+            not player:hasStatusEffect(xi.effect.IONIS)
+        then
             -- Progresses Quest: 'A Pioneers Best (Imaginary) Friend'
             player:startEvent(2523)
         end

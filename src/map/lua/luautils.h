@@ -63,6 +63,15 @@ extern sol::state lua;
 #include "lua_trigger_area.h"
 #include "lua_zone.h"
 
+enum class SendToDBoxReturnCode : uint8
+{
+    SUCCESS                       = 0,
+    SUCCESS_LIMITED_TO_STACK_SIZE = 1,
+    PLAYER_NOT_FOUND              = 2,
+    ITEM_NOT_FOUND                = 3,
+    QUERY_ERROR                   = 4
+};
+
 class CAbility;
 class CSpell;
 class CBaseEntity;
@@ -319,7 +328,8 @@ namespace luautils
     void   DisallowRespawn(uint32 mobid, bool allowRespawn);
     void   UpdateNMSpawnPoint(uint32 mobid);
 
-    std::string GetServerMessage(uint8 language); // Get the message to be delivered to player on first zone in of a session
+    std::string GetServerMessage(uint8 language);               // Get the message to be delivered to player on first zone in of a session
+    auto        GetRecentFishers(uint16 minutes) -> sol::table; // returns a list of recently active fishers (that fished in the last specified minutes)
 
     int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);                                      // for mobs with additional effects
     int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, int32 damage);                                          // for mobs with spikes
@@ -354,6 +364,7 @@ namespace luautils
 
     // Retrive the first itemId that matches a name
     uint16 GetItemIDByName(std::string const& name);
+    auto   SendItemToDeliveryBox(std::string const& playerName, uint16 itemId, uint32 quantity, std::string senderText) -> SendToDBoxReturnCode;
 
     std::optional<CLuaBaseEntity> GenerateDynamicEntity(CZone* PZone, CInstance* PInstance, sol::table table);
 

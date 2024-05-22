@@ -29,12 +29,20 @@
 #include <string>
 #include <unordered_map>
 
+// TODO: mariadb-connector-cpp triggers this. Remove once they fix it.
+// 4263 'function': member function does not override any base class member functions
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable : 4263)
+#endif
+
 #include <conncpp.hpp>
 
+#ifdef WIN32
+#pragma warning(pop)
+#endif
+
 // @note Everything in database-land is 1-indexed, not 0-indexed.
-// TODO: Rename this namespace from db to sql when migration is complete.
-// mariadb-connector-cpp uses sql namespace for all of its classes, so it
-// will be clearer if we use it too.
 namespace db
 {
     namespace detail
@@ -59,8 +67,10 @@ namespace db
         inline constexpr bool always_false_v = always_false<T>::value;
 
         template <typename T>
-        void bindValue(std::unique_ptr<sql::PreparedStatement>& stmt, int counter, T&& value)
+        void bindValue(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter, T&& value)
         {
+            DebugSQL(fmt::format("binding {}: {}", counter, value));
+
             if constexpr (std::is_same_v<std::decay_t<T>, int32>)
             {
                 stmt->setInt(counter, value);
@@ -117,8 +127,6 @@ namespace db
             {
                 static_assert(always_false_v<T>, "Unsupported type in binder");
             }
-
-            ++counter;
         }
 
         // Base case
@@ -131,7 +139,7 @@ namespace db
         template <typename T>
         void binder(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter, T&& first)
         {
-            bindValue(stmt, counter, std::forward<T>(first));
+            bindValue(stmt, ++counter, std::forward<T>(first));
             binder(stmt, counter);
         }
 
@@ -139,10 +147,16 @@ namespace db
         template <typename T, typename... Args>
         void binder(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter, T&& first, Args&&... rest)
         {
-            bindValue(stmt, counter, std::forward<T>(first));
+            bindValue(stmt, ++counter, std::forward<T>(first));
             binder(stmt, counter, std::forward<Args>(rest)...);
         }
     } // namespace detail
+
+    // @brief Execute a query with the given query string.
+    // @param query The query string to execute.
+    // @return A unique pointer to the result set of the query.
+    // @note Everything in database-land is 1-indexed, not 0-indexed.
+    auto query(std::string const& rawQuery) -> std::unique_ptr<sql::ResultSet>;
 
     // @brief Execute a prepared statement with the given query string and arguments.
     // @param query The query string to execute.
@@ -182,8 +196,10 @@ namespace db
             auto& stmt = lazyPreparedStatements[rawQuery];
             try
             {
-                // NOTE: 1-indexed!
-                auto counter = 1;
+                DebugSQL(fmt::format("preparedStmt: {}", rawQuery));
+
+                // NOTE: Everything is 1-indexed, but we're going to increment right away insider binder!
+                auto counter = 0;
                 db::detail::binder(stmt, counter, std::forward<Args>(args)...);
                 return std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
             }
@@ -193,6 +209,86 @@ namespace db
                 ShowError(e.what());
                 return nullptr;
             }
+        });
+        // clang-format on
+    }
+
+    // @brief Execute a prepared statement with the given query string and arguments.
+    // @param query The query string to execute.
+    // @param args The arguments to bind to the prepared statement.
+    // @return A pair of: unique pointer to the result set of the query, number of rows affected by the query as told by MariaDB's ROW_COUNT().
+    // @note If the query hasn't been seen before it will generate a prepared statement for it to be used immediately and in the future.
+    // @note Everything in database-land is 1-indexed, not 0-indexed.
+    // @note This is a workaround for the fact that MariaDB's C++ connector hasn't yet implemented ResultSet::rowUpdated(), ResultSet::rowInserted(),
+    //       and ResultSet::rowDeleted().
+    template <typename... Args>
+    std::pair<std::unique_ptr<sql::ResultSet>, std::size_t> preparedStmtWithAffectedRows(std::string const& rawQuery, Args&&... args)
+    {
+        TracyZoneScoped;
+        TracyZoneString(rawQuery);
+
+        // clang-format off
+        return detail::getState().write([&](detail::State& state) -> std::pair<std::unique_ptr<sql::ResultSet>, std::size_t>
+        {
+            auto& lazyPreparedStatements = state.lazyPreparedStatements;
+
+            // TODO: combine the two versions of this function into one, with the string-handling version
+            // just being a wrapped which does the lookup below and then calls the enum version.
+
+            // If we don't have it, lazily make it
+            if (lazyPreparedStatements.find(rawQuery) == lazyPreparedStatements.end())
+            {
+                try
+                {
+                    lazyPreparedStatements[rawQuery] = std::unique_ptr<sql::PreparedStatement>(state.connection->prepareStatement(rawQuery.c_str()));
+                }
+                catch (const std::exception& e)
+                {
+                    ShowError("Failed to lazy prepare query: %s", str(rawQuery.c_str()));
+                    ShowError(e.what());
+                    return { nullptr, 0 };
+                }
+            }
+
+            auto rowCountQuery = "SELECT ROW_COUNT() AS count";
+            if (lazyPreparedStatements.find(rowCountQuery) == lazyPreparedStatements.end())
+            {
+                try
+                {
+                    lazyPreparedStatements[rowCountQuery] = std::unique_ptr<sql::PreparedStatement>(state.connection->prepareStatement(rowCountQuery));
+                }
+                catch (const std::exception& e)
+                {
+                    ShowError("Failed to lazy prepare query: %s", str(rowCountQuery));
+                    ShowError(e.what());
+                    return { nullptr, 0 };
+                }
+            }
+
+            auto& stmt      = lazyPreparedStatements[rawQuery];
+            auto& countStmt = lazyPreparedStatements[rowCountQuery];
+            try
+            {
+                // NOTE: Everything is 1-indexed, but we're going to increment right away insider binder!
+                auto counter = 0;
+                db::detail::binder(stmt, counter, std::forward<Args>(args)...);
+                auto rset  = std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
+                auto rset2 = std::unique_ptr<sql::ResultSet>(countStmt->executeQuery());
+                if (!rset2 || !rset2->next())
+                {
+                    ShowError("Failed to get row count");
+                    return { nullptr, 0 };
+                }
+                auto rowCount = rset2->getUInt("count");
+                return { std::move(rset), rowCount };
+            }
+            catch (const std::exception& e)
+            {
+                ShowError("Query Failed: %s", str(rawQuery.c_str()));
+                ShowError(e.what());
+                return { nullptr, 0 };
+            }
+
         });
         // clang-format on
     }
@@ -270,20 +366,16 @@ namespace db
 
         TracyZoneScoped;
 
-        std::memset(&destination, 0x00, sizeof(T));
-
         // If we use getString on a null blob we will get back garbage data.
         // This will introduce difficult to track down crashes.
         if (!rset->isNull(blobKey.c_str()))
         {
             auto blobStr = rset->getString(blobKey.c_str());
-            std::memcpy(&destination, blobStr.c_str(), sizeof(T));
+            // Login server creates new chars with null blobs. Map server then initializes.
+            // We don't want to overwrite the initialized map data with null blobs / 0 values.
+            // See: login_helpers.cpp saveCharacter() and charutils::LoadChar
+            std::memset(&destination, 0x00, sizeof(T));
+            std::memcpy(&destination, blobStr.c_str(), std::min(sizeof(T), blobStr.length()));
         }
     }
-
-    // @brief Execute a query with the given query string.
-    // @param query The query string to execute.
-    // @return A unique pointer to the result set of the query.
-    // @note Everything in database-land is 1-indexed, not 0-indexed.
-    auto query(std::string const& rawQuery) -> std::unique_ptr<sql::ResultSet>;
 } // namespace db

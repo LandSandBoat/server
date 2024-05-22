@@ -256,7 +256,7 @@ entity.onTrigger = function(player, npc)
     ]]
 
     if
-        player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED) and
+        player:hasCompletedQuest(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED) and
         player:getMainJob() == xi.job.PUP
     then
         local requiredLevel = (numUnlockedHeads + 1) * 10

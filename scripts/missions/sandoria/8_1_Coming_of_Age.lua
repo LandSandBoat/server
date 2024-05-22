@@ -181,7 +181,10 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    if mission:getVar(player, 'Progress') < os.time() then
+                    if
+                        mission:getVar(player, 'Progress') < os.time() and
+                        not player:isInMogHouse()
+                    then
                         return 16
                     end
                 end

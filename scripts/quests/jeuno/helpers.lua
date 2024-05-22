@@ -14,7 +14,7 @@ setmetatable(xi.jeuno.helpers.GobbiebagQuest, { __index = Quest })
 xi.jeuno.helpers.GobbiebagQuest.__index = xi.jeuno.helpers.GobbiebagQuest
 
 function xi.jeuno.helpers.GobbiebagQuest:new(params)
-    local quest = Quest:new(xi.quest.log_id.JEUNO, params.questId)
+    local quest = Quest:new(xi.questLog.JEUNO, params.questId)
 
     quest.reward = params.reward
 
@@ -31,16 +31,16 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
     end
 
     local getReqsMet = function(player)
-        return  player:getFameLevel(xi.quest.fame_area.JEUNO) >= params.fame and
+        return  player:getFameLevel(xi.fameArea.JEUNO) >= params.fame and
                 player:getContainerSize(xi.inv.INVENTORY) == params.startInventorySize and
-                (params.prerequisite == nil or player:hasCompletedQuest(xi.quest.log_id.JEUNO, params.prerequisite))
+                (params.prerequisite == nil or player:hasCompletedQuest(xi.questLog.JEUNO, params.prerequisite))
     end
 
     quest.sections =
     {
         {
             check = function(player, status, vars)
-                return status == QUEST_AVAILABLE and getReqsMet(player)
+                return status == xi.questStatus.QUEST_AVAILABLE and getReqsMet(player)
             end,
 
             [xi.zone.LOWER_JEUNO] =
@@ -48,7 +48,7 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                 ['Bluffnix'] =
                 {
                     onTrigger = function(player, npc)
-                        return quest:progressEvent(43, getPendingDialogueId(player), QUEST_AVAILABLE, getReqsMet(player) and 1 or 0)
+                        return quest:progressEvent(43, getPendingDialogueId(player), xi.questStatus.QUEST_AVAILABLE, getReqsMet(player) and 1 or 0)
                     end
                 },
 
@@ -65,7 +65,7 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
 
         {
             check = function(player, status, vars)
-                return status == QUEST_ACCEPTED and getReqsMet(player)
+                return status == xi.questStatus.QUEST_ACCEPTED and getReqsMet(player)
             end,
 
             [xi.zone.LOWER_JEUNO] =
@@ -79,12 +79,12 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                         then
                             return quest:progressEvent(73, getCompleteDiaglogueId(player))
                         else
-                            return quest:progressEvent(43, getPendingDialogueId(player), QUEST_ACCEPTED, 1)
+                            return quest:progressEvent(43, getPendingDialogueId(player), xi.questStatus.QUEST_ACCEPTED, 1)
                         end
                     end,
 
                     onTrigger = function(player, npc)
-                        return quest:progressEvent(43, getPendingDialogueId(player), QUEST_ACCEPTED, 1)
+                        return quest:progressEvent(43, getPendingDialogueId(player), xi.questStatus.QUEST_ACCEPTED, 1)
                     end,
                 },
 

@@ -233,10 +233,11 @@ xi.combat.physical.calculateFTP = function(actor, tpFactor)
     local scProp1, scProp2, scProp3 = actor:getWSSkillchainProp()
     local dayElement                = VanadielDayElement() + 1
 
-    local neckFtpBonus  = 0
-    local waistFtpBonus = 0
-    local headFtpBonus  = 0
-    local handsFtpBonus = 0
+    local neckFtpBonus   = 0
+    local waistFtpBonus  = 0
+    local headFtpBonus   = 0
+    local handsFtpBonus  = 0
+    local weaponFtpBonus = 0
 
     if actor:getObjType() == xi.objType.PC then
         -- Calculate Neck fTP bonus.
@@ -315,24 +316,36 @@ xi.combat.physical.calculateFTP = function(actor, tpFactor)
                 handsFtpBonus = 0.06
             end
         end
+
+        -- Calculate Weapon fTP bonus.
+        local weaponItem = actor:getEquipID(xi.slot.MAIN)
+
+        if
+            weaponItem == xi.item.PRESTER and
+            (wsElementalProperties[scProp1][xi.element.WIND] == 1 or
+            wsElementalProperties[scProp2][xi.element.WIND] == 1 or
+            wsElementalProperties[scProp3][xi.element.WIND] == 1)
+        then
+            weaponFtpBonus = 0.1
+        end
     end
 
     -- Add all bonuses and return.
-    fTP = fTP + neckFtpBonus + waistFtpBonus + headFtpBonus + handsFtpBonus
+    fTP = fTP + neckFtpBonus + waistFtpBonus + headFtpBonus + handsFtpBonus + weaponFtpBonus
 
     return fTP
 end
 
 -- WARNING: This function is used in src/utils/battleutils.cpp "GetDamageRatio" function.
 -- If you update this parameters, update them there aswell.
-xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor, isWeaponskill)
+xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor, isWeaponskill, weaponSlot)
     local pDif = 0
 
     ----------------------------------------
     -- Step 1: Attack / Defense Ratio
     ----------------------------------------
     local baseRatio     = 0
-    local actorAttack   = math.max(1, math.floor(actor:getStat(xi.mod.ATT) * wsAttackMod))
+    local actorAttack   = math.max(1, math.floor(actor:getStat(xi.mod.ATT, weaponSlot) * wsAttackMod))
     local targetDefense = math.max(1, target:getStat(xi.mod.DEF))
 
     -- Actor Weaponskill Specific Attack modifiers.

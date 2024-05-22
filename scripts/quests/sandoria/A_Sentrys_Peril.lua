@@ -6,12 +6,12 @@
 local westRonfaureID = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SENTRYS_PERIL)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_SENTRYS_PERIL)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     title = xi.title.RONFAURIAN_RESCUER,
     item = xi.item.BRONZE_SUBLIGAR,
 }
@@ -21,7 +21,7 @@ quest.sections =
     -- Talk to Glenne; she's worried about her husband, Aaveleon, a guard out on patrol, and gives you some healing ointment to take to him.
     {
         check = function(player, status)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -43,7 +43,7 @@ quest.sections =
     -- Trade Ointment to him and he'll give you the Ointment Case, so you can give it back to his wife.
     {
         check = function(player, status)
-            return status == QUEST_ACCEPTED and quest:getVar(player, 'TradedAaveleon') == 0
+            return status == xi.questStatus.QUEST_ACCEPTED and quest:getVar(player, 'TradedAaveleon') == 0
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -103,7 +103,7 @@ quest.sections =
     -- Trade the Ointment Case to Glenne to complete the quest.
     {
         check = function(player, status)
-            return status == QUEST_ACCEPTED and quest:getVar(player, 'TradedAaveleon') == 1
+            return status == xi.questStatus.QUEST_ACCEPTED and quest:getVar(player, 'TradedAaveleon') == 1
         end,
 
         [xi.zone.WEST_RONFAURE] =
@@ -160,7 +160,7 @@ quest.sections =
     -- Section: After quest completion
     {
         check = function(player, status)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

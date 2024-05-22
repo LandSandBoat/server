@@ -11,7 +11,7 @@ end
 
 entity.onTrigger = function(player, npc)
     -- CHILDREN OF THE RUNE
-    if player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE) == xi.questStatus.QUEST_ACCEPTED then
         npcUtil.giveKeyItem(player, xi.ki.YAHSE_WILDFLOWER_PETAL)
     end
 end

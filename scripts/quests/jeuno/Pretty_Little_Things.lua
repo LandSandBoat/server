@@ -7,12 +7,12 @@
 local portJeunoID = zones[xi.zone.PORT_JEUNO]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
 }
 
 local invalidRocks =
@@ -64,7 +64,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE or status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_AVAILABLE or status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_JEUNO] =
@@ -105,7 +105,7 @@ quest.sections =
                             player:setMoghouseFlag(mhflag + 0x0008)
                             player:messageSpecial(portJeunoID.text.MOGHOUSE_EXIT)
                         end
-                    elseif player:getQuestStatus(quest.areaId, quest.questId) == QUEST_AVAILABLE then
+                    elseif player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_AVAILABLE then
                         quest:begin(player)
                     end
                 end,
@@ -115,7 +115,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.PORT_JEUNO] =

@@ -31,7 +31,7 @@ local ID = zones[xi.zone.NORG]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.MAMA_MIA) == xi.questStatus.QUEST_ACCEPTED then
         -- check whether trade is an item with id 1202 to 1208
         local tradedItem
         local bitToSet
@@ -64,19 +64,19 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local mamaMia = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
-    local moonlitPath = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
+    local mamaMia = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
+    local moonlitPath = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
     local evokersRing = player:hasItem(xi.item.EVOKERS_RING)
     local questday = player:getCharVar('MamaMia_date')
 
     if
-        mamaMia == QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.NORG) >= 4 and
-        moonlitPath == QUEST_COMPLETED
+        mamaMia == xi.questStatus.QUEST_AVAILABLE and
+        player:getFameLevel(xi.fameArea.NORG) >= 4 and
+        moonlitPath == xi.questStatus.QUEST_COMPLETED
     then
         player:startEvent(191) -- Start Quest 'Mama Mia'
 
-    elseif mamaMia == QUEST_ACCEPTED then
+    elseif mamaMia == xi.questStatus.QUEST_ACCEPTED then
         local tradesMamaMia = player:getCharVar('tradesMamaMia')
 
         if utils.mask.isFull(tradesMamaMia, 7) then
@@ -89,10 +89,10 @@ entity.onTrigger = function(player, npc)
             player:startEvent(192) -- During Quest "Mama Mia"
         end
 
-    elseif mamaMia == QUEST_COMPLETED and evokersRing then
+    elseif mamaMia == xi.questStatus.QUEST_COMPLETED and evokersRing then
         player:startEvent(198) -- New standard dialog after "Mama Mia" is complete
 
-    elseif mamaMia == QUEST_COMPLETED and not evokersRing then
+    elseif mamaMia == xi.questStatus.QUEST_COMPLETED and not evokersRing then
         player:startEvent(243) -- Quest completed, but dropped ring
 
     else
@@ -105,7 +105,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 191 then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
     elseif csid == 193 then
         player:confirmTrade()
     elseif csid == 195 then
@@ -117,14 +117,14 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:addItem(xi.item.EVOKERS_RING) -- Evokers Ring
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.EVOKERS_RING) -- Evokers Ring
-            player:addFame(xi.quest.fame_area.NORG, 30) --idk how much fame the quest adds, just left at 30 which the levi quest gave.
-            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
+            player:addFame(xi.fameArea.NORG, 30) --idk how much fame the quest adds, just left at 30 which the levi quest gave.
+            player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
             player:setCharVar('tradesMamaMia', 0)
         end
     elseif csid == 243 then
         if option == 1 then
-            player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
-            player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
+            player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
+            player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
         end
     end
 end

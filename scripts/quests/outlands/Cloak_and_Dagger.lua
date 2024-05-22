@@ -7,19 +7,19 @@ local kazhamID       = zones[xi.zone.KAZHAM]
 local gustavTunnelID = zones[xi.zone.GUSTAV_TUNNEL]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.NORG,
+    fameArea = xi.fameArea.NORG,
 }
 
 quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:canEquipItem(xi.item.DAGGER_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.DAGGER) / 10 >= 230 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
@@ -51,7 +51,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.KAZHAM] =
@@ -90,7 +90,7 @@ quest.sections =
                     then
                         npcUtil.giveItem(player, xi.item.DAGGER_OF_TRIALS)
                     elseif option == 3 then
-                        player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER)
+                        player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end

@@ -7,7 +7,7 @@
 -- Hantileon      : !pos -2.675 -1.1 -105.287 230
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
 
 quest.reward =
 {
@@ -20,7 +20,7 @@ quest.sections =
     -- NOTE: This quest is flagged by Chocobo's Wounds
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.LA_THEINE_PLATEAU] =

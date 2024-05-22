@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     if
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS) > QUEST_AVAILABLE and
+        player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS) > xi.questStatus.QUEST_AVAILABLE and
         player:getCharVar('FLOWER_PROGRESS') == 3
     then
         if

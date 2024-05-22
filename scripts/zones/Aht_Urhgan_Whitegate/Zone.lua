@@ -26,10 +26,13 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         if prevZone == xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI then
+            player:setPos(-11, 5, -142, 192)
             cs = 201
-        elseif prevZone == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI then
-            cs = 204
-        elseif prevZone == xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU then
+        elseif
+            prevZone == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI or
+            prevZone == xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU
+        then
+            player:setPos(11, 5, 142, 64)
             cs = 204
         else
             -- MOG HOUSE EXIT
@@ -62,8 +65,8 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 
         [5] = function() -- AH mission
             if
-                player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_COMPLETED and
-                player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_AVAILABLE and
+                player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == xi.questStatus.QUEST_COMPLETED and
+                player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.COR and
                 player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL
             then
@@ -104,7 +107,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         player:setPos(60, 0, -71, 38)
     elseif csid == 797 then
         player:setCharVar('AgainstAllOdds', 1) -- Set For Corsair BCNM
-        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet
+        player:addQuest(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet
         player:addKeyItem(xi.ki.LIFE_FLOAT) -- BCNM KEY ITEM TO ENTER BCNM
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIFE_FLOAT)
         player:setCharVar('AgainstAllOddsTimer', getMidnight())

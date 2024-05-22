@@ -2384,13 +2384,13 @@ INSERT INTO `item_weapon` VALUES (18762,'custodes',1,0,0,0,0,4,1,528,4,0);
 INSERT INTO `item_weapon` VALUES (18763,'trainee_scissors',1,0,0,0,0,4,1,546,1,0);
 INSERT INTO `item_weapon` VALUES (18764,'oberons_knuckles',1,0,0,0,0,4,1,576,18,0);
 INSERT INTO `item_weapon` VALUES (18765,'oberons_sainti',1,0,0,0,0,4,1,531,15,0);
-INSERT INTO `item_weapon` VALUES (18766,'tyro_katars',1,0,0,0,0,4,1,564,6,0);
+INSERT INTO `item_weapon` VALUES (18766,'tyro_katars',1,0,0,0,0,1,1,564,6,0);
 INSERT INTO `item_weapon` VALUES (18767,'birdbanes',1,0,0,0,0,1,1,564,14,0);
 INSERT INTO `item_weapon` VALUES (18768,'poppet_katars',1,0,0,0,0,4,1,564,17,0);
 INSERT INTO `item_weapon` VALUES (18769,'severus_claws',1,0,0,0,0,4,1,541,15,0);
 INSERT INTO `item_weapon` VALUES (18770,'pygme_sainti',1,0,0,0,0,4,1,531,16,0);
 INSERT INTO `item_weapon` VALUES (18771,'lyft_sainti',1,0,0,0,0,4,1,531,18,0);
-INSERT INTO `item_weapon` VALUES (18772,'tyro_katars_+1',1,0,0,0,0,4,1,555,7,0);
+INSERT INTO `item_weapon` VALUES (18772,'tyro_katars_+1',1,0,0,0,0,1,1,555,7,0);
 INSERT INTO `item_weapon` VALUES (18773,'severus_claws_+1',1,0,0,0,0,4,1,536,16,0);
 INSERT INTO `item_weapon` VALUES (18774,'savate_fists',1,0,0,0,0,4,1,531,19,0);
 INSERT INTO `item_weapon` VALUES (18775,'savate_fists_+1',1,0,0,0,0,4,1,529,20,0);
@@ -4837,7 +4837,7 @@ INSERT INTO `item_weapon` VALUES (22279,'staunch_tathlum_+1',0,0,0,0,0,0,1,0,0,0
 INSERT INTO `item_weapon` VALUES (22280,'yamarang',0,0,0,0,0,0,1,0,0,0);                  -- Accuracy+15 Magic Accuracy+15 Evasion+15 Magic Evasion+15 "Store TP"+3 "Waltz" potency +5%
 INSERT INTO `item_weapon` VALUES (22281,'knobkierrie',0,0,0,0,0,0,1,0,0,0);               -- Attack+23 Weapon skill damage +6%
 INSERT INTO `item_weapon` VALUES (22282,'grudge',27,0,0,0,0,0,1,294,1,0);                 -- DMG:1 Delay:294
-INSERT INTO `item_weapon` VALUES (22283,'marvelous_cheer',42,0,0,0,0,0,1,240,0,0);
+INSERT INTO `item_weapon` VALUES (22283,'marvelous_cheer',0,0,0,0,0,0,1,240,0,0);         -- Says "Wind Instrument" but is actually cosmetic and should not unlock singing skill or a second song for sub BRD
 INSERT INTO `item_weapon` VALUES (22284,'abdhaljs_tome',0,0,0,0,0,0,1,0,0,0);             -- A copy of a book written by the great Abdhaljs. He has the only original copy. Hallmark Bonus: +200% Gallantry Bonus: +200%
 INSERT INTO `item_weapon` VALUES (22285,'beryllium_bolt',26,0,0,0,0,1,1,192,108,0);       -- DMG:108 Delay:192 Ranged Attack+12
 INSERT INTO `item_weapon` VALUES (22286,'c._palug_stone',0,0,0,0,0,0,0,0,0,0);

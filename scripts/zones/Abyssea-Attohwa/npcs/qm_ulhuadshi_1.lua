@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ULHUADSHI_1, { xi.ki.MUCID_WORM_SEGMENT, xi.ki.SHRIVELED_HECTEYES_STALK })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ULHUADSHI_OFFSET, { xi.ki.MUCID_WORM_SEGMENT, xi.ki.SHRIVELED_HECTEYES_STALK })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

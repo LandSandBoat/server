@@ -8,7 +8,7 @@ local ID = zones[xi.zone.RIVERNE_SITE_A01]
 local entity = {}
 
 local function disturbMob(mob)
-    local offset = mob:getID() - ID.mob.HELIODROMOS_PH_OFFSET
+    local offset = mob:getID() - ID.mob.HELIODROMOS_OFFSET - 3
     if offset >= 0 and offset <= 2 then
         SetServerVariable('Heliodromos_ToD', os.time() + math.random(43200, 54000)) -- 12 to 15 hours
     end
@@ -38,7 +38,7 @@ entity.onMobRoam = function(mob)
 
         if noHeliodromosSpawned then
             -- despawn placeholders
-            for i = ID.mob.HELIODROMOS_PH_OFFSET, ID.mob.HELIODROMOS_PH_OFFSET + 2 do
+            for i = ID.mob.HELIODROMOS_OFFSET - 3, ID.mob.HELIODROMOS_OFFSET - 1 do
                 DisallowRespawn(i, true)
                 DespawnMob(i)
             end

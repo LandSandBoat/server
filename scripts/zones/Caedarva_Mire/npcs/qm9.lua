@@ -12,11 +12,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theWaywardAutomaton = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)
+    local theWaywardAutomaton = player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)
     local theWaywardAutomatonProgress = player:getCharVar('TheWaywardAutomatonProgress')
 
     if
-        theWaywardAutomaton == QUEST_ACCEPTED and
+        theWaywardAutomaton == xi.questStatus.QUEST_ACCEPTED and
         theWaywardAutomatonProgress == 2
     then
         if player:getCharVar('TheWaywardAutomatonNM') >= 1 then

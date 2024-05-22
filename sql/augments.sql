@@ -404,7 +404,7 @@ INSERT INTO `augments` VALUES (320,0,357,1,0,0); -- Blood Pact ability delay -1
 INSERT INTO `augments` VALUES (321,0,346,1,0,0); -- Avatar perpetuation cost -1
 INSERT INTO `augments` VALUES (322,0,455,1,0,0); -- Song spellcasting time -1%
 INSERT INTO `augments` VALUES (323,0,519,1,0,0); -- Cure spellcasting time -1%
-INSERT INTO `augments` VALUES (324,0,572,1,0,0); -- Call Beast ability delay -1
+INSERT INTO `augments` VALUES (324,0,273,1,0,0); -- Call Beast ability delay -1
 INSERT INTO `augments` VALUES (325,0,1060,1,0,0); -- Quick Draw ability delay -1
 INSERT INTO `augments` VALUES (326,0,48,1,0,0); -- Weapon Skill Acc.+1
 INSERT INTO `augments` VALUES (327,0,840,1,0,0); -- Weapon skill damage+1% "However, some sources apply to all swings of the weapon skill (like Magian Trials Weapon Skill Damage +n% weapons)" (i.e. this indicates the augment is for all hits)

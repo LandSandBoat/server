@@ -5,12 +5,6 @@
 -----------------------------------
 local entity = {}
 
-local function replaceWithCrate(mob)
-    local crate = GetNPCByID(mob:getID() + 2)
-    crate:teleport(mob:getPos(), mob:getRotPos())
-    crate:setStatus(xi.status.NORMAL)
-end
-
 entity.onMobEngage = function(mob, target)
     local mobId = mob:getID()
     local small = GetMobByID(mobId - 1)
@@ -23,8 +17,8 @@ entity.onMobEngage = function(mob, target)
         DespawnMob(mobId + 1)
 
         if math.random(1, 3) == 1 then
-            DespawnMob(mobId)
-            replaceWithCrate(mob)
+            mob:setStatus(xi.status.INVISIBLE)
+            mob:setHP(0)
         else
             mob:setAnimationSub(1)
         end
@@ -32,9 +26,6 @@ entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if optParams.isKiller then
-        replaceWithCrate(mob)
-    end
 end
 
 return entity

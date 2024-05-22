@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('illTakeTheBigBoxCS') == 2
     then
         if trade:hasItemQty(xi.item.OAK_POLE, 1) and trade:getItemCount() == 1 then -- Trade Oak Pole
@@ -20,7 +20,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == xi.questStatus.QUEST_ACCEPTED then
         local illTakeTheBigBoxCS = player:getCharVar('illTakeTheBigBoxCS')
 
         if illTakeTheBigBoxCS == 1 then
@@ -37,7 +37,7 @@ entity.onTrigger = function(player, npc)
         elseif illTakeTheBigBoxCS == 4 then
             player:startEvent(95)
         end
-    elseif player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED then
+    elseif player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == xi.questStatus.QUEST_ACCEPTED then
         local trueWillCS = player:getCharVar('trueWillCS')
 
         if trueWillCS == 1 then
@@ -72,9 +72,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('trueWillCS', 2)
     elseif csid == 99 then
         if
-            npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL, {
+            npcUtil.completeQuest(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.TRUE_WILL, {
                 item = 13782, -- Ninja Chainmail
-                fameArea = xi.quest.fame_area.NORG,
+                fameArea = xi.fameArea.NORG,
                 title = xi.title.PARAGON_OF_NINJA_EXCELLENCE,
                 var = 'trueWillCS'
             })

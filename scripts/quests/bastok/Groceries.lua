@@ -9,12 +9,12 @@ local bastokMinesID = zones[xi.zone.BASTOK_MINES]
 local zeruhnMinesID = zones[xi.zone.ZERUHN_MINES]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GROCERIES)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GROCERIES)
 
 quest.reward =
 {
     fame     = 75,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.RABBIT_MANTLE,
 }
 
@@ -22,8 +22,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE or
-                (status == QUEST_ACCEPTED and vars.Prog == 0)
+            return status == xi.questStatus.QUEST_AVAILABLE or
+                (status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 0)
         end,
 
         [xi.zone.BASTOK_MINES] =
@@ -44,7 +44,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MINES] =
@@ -76,7 +76,7 @@ quest.sections =
             onEventFinish =
             {
                 [112] = function(player, csid, option, npc)
-                    player:addFame(xi.quest.fame_area.BASTOK, 8)
+                    player:addFame(xi.fameArea.BASTOK, 8)
                     npcUtil.giveCurrency(player, 'gil', 10)
 
                     quest:setVar(player, 'Prog', 0)

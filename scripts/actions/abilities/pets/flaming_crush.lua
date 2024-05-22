@@ -21,7 +21,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     --get the resisted damage
     damage.dmg = damage.dmg * resist
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    damage.dmg = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, 1)
+    damage.dmg = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.FIRE, petskill)
     local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, petskill, target, xi.attackType.PHYSICAL, xi.damageType.FIRE, numhits)
     target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.FIRE)
     target:updateEnmityFromDamage(pet, totaldamage)

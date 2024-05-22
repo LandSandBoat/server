@@ -85,7 +85,7 @@ mission.sections =
                             npcUtil.giveKeyItem(player, keyItemId)
                         end
 
-                        if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_ACCEPTED then
+                        if player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == xi.questStatus.QUEST_ACCEPTED then
                             player:setCharVar('DivineMight', 2)
                         end
                     end

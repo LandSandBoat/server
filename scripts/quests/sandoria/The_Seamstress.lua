@@ -5,12 +5,12 @@
 -- Hanaa Punaa : !pos -179.726 -8.8 27.574 230
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SEAMSTRESS)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_SEAMSTRESS)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     -- Repeatable Items handled within the Trigger:
     -- item = xi.item.LEATHER_GLOVES,
     -- title = xi.title.SILENCER_OF_THE_LAMBS,
@@ -20,7 +20,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -59,7 +59,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -68,11 +68,11 @@ quest.sections =
         },
     },
 
-    -- These functions check the status of ~= QUEST_AVAILABLE to support repeating
+    -- These functions check the status of ~= xi.questStatus.QUEST_AVAILABLE to support repeating
     -- the quest.  Does not have to be flagged again to complete an additional time.
     {
         check = function(player, status, vars)
-            return status ~= QUEST_AVAILABLE
+            return status ~= xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -95,7 +95,7 @@ quest.sections =
                         if not player:hasCompletedQuest(quest.areaId, quest.questId) then
                             quest:complete(player)
                         else
-                            player:addFame(xi.quest.fame_area.SANDORIA, 5)
+                            player:addFame(xi.fameArea.SANDORIA, 5)
                         end
                     end
                 end,
@@ -105,7 +105,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:getFameLevel(xi.quest.fame_area.SANDORIA) < 2
+            return status == xi.questStatus.QUEST_COMPLETED and player:getFameLevel(xi.fameArea.SANDORIA) < 2
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

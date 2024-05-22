@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(31, player:getFame(xi.quest.fame_area.SANDORIA))
+    player:startEvent(31, player:getFame(xi.fameArea.SANDORIA))
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

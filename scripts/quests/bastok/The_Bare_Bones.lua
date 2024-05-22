@@ -6,12 +6,12 @@
 -- Biggorf   : !pos -211.379 1.999 -142.024 235
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_BARE_BONES)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_BARE_BONES)
 
 quest.reward =
 {
     fame = 60,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     keyItem = xi.ki.MAP_OF_THE_DANGRUF_WADI,
     xp = 2000,
 }
@@ -21,7 +21,7 @@ quest.sections =
     -- Section: Quest available
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -40,7 +40,7 @@ quest.sections =
     -- Section: Quest accepted
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MARKETS] =

@@ -235,7 +235,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
-                        player:getLocalVar('battlefieldWin') == 67
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.ON_MY_WAY
                     then
                         npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_WEREI)
                         player:setMissionStatus(mission.areaId, 3)
@@ -295,9 +295,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA) and
-                        player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES) and
-                        player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RIVALS)
+                        player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA) and
+                        player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES) and
+                        player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.RIVALS)
                     then
                         return mission:progressEvent(622)
                     else

@@ -7,11 +7,16 @@ local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP]
 -----------------------------------
 local entity = {}
 
+local bifronsPHTable =
+{
+    [ID.mob.COUNT_BIFRONS - 1] = ID.mob.COUNT_BIFRONS, -- -204.000 -52.125 -95.000
+}
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.COUNT_BIFRONS_PH, 10, math.random(3600, 28800)) -- 1 to 8 hours
+    xi.mob.phOnDespawn(mob, bifronsPHTable, 10, 3600) -- 1 hour
 end
 
 return entity

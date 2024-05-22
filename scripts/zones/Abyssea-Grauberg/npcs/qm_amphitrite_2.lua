@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.AMPHITRITE_2, { xi.ki.VARIEGATED_URAGNITE_SHELL })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.AMPHITRITE_OFFSET + 4, { xi.ki.VARIEGATED_URAGNITE_SHELL })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

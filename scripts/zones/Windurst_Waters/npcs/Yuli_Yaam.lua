@@ -10,12 +10,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
-    local fame            = player:getFameLevel(xi.quest.fame_area.WINDURST)
+    local wonderingstatus = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
+    local fame            = player:getFameLevel(xi.fameArea.WINDURST)
 
     if wonderingstatus <= 1 and fame >= 5 then
         player:startEvent(637)                      -- WONDERING_MINSTREL: Quest Available / Quest Accepted
-    elseif wonderingstatus == QUEST_COMPLETED and player:needToZone() then
+    elseif
+        wonderingstatus == xi.questStatus.QUEST_COMPLETED and
+        player:needToZone()
+    then
         player:startEvent(641)                      -- WONDERING_MINSTREL: Quest After
     else
         local rand = math.random(1, 2)

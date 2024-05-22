@@ -20,32 +20,24 @@ zones[xi.zone.INNER_HORUTOTO_RUINS] =
         LOGIN_NUMBER                  = 7172,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         GEOMAGNETRON_ATTUNED          = 7181,  -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7192,  -- Your party is unable to participate because certain members' levels are restricted.
-        NOT_BROKEN_ORB                = 7246,  -- The Mana Orb in this receptacle is not broken.
-        EXAMINED_RECEPTACLE           = 7247,  -- You have already examined this receptacle.
-        DOOR_FIRMLY_CLOSED            = 7274,  -- The door is firmly closed.
-        CAT_BURGLARS_HIDEOUT          = 7275,  -- It looks like that Cat Burglar's hideout lies behind this door! You were able to confirm <keyitem>!
-        CHEST_UNLOCKED                = 7350,  -- You unlock the chest!
-        PLAYER_OBTAINS_ITEM           = 7413,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7414,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7415,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7416,  -- You already possess that temporary item.
-        NO_COMBINATION                = 7421,  -- You were unable to enter a combination.
-        REGIME_REGISTERED             = 9499,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 10547, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        NOT_BROKEN_ORB                = 7249,  -- The Mana Orb in this receptacle is not broken.
+        EXAMINED_RECEPTACLE           = 7250,  -- You have already examined this receptacle.
+        DOOR_FIRMLY_CLOSED            = 7277,  -- The door is firmly closed.
+        CAT_BURGLARS_HIDEOUT          = 7278,  -- It looks like that Cat Burglar's hideout lies behind this door! You were able to confirm <keyitem>!
+        CHEST_UNLOCKED                = 7353,  -- You unlock the chest!
+        PLAYER_OBTAINS_ITEM           = 7416,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7417,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7418,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7419,  -- You already possess that temporary item.
+        NO_COMBINATION                = 7424,  -- You were unable to enter a combination.
+        REGIME_REGISTERED             = 9502,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 10550, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
-        SLENDLIX_SPINDLETHUMB_PH =
-        {
-            [17563758] = 17563785, -- -238.315 -0.002 -179.249
-        },
-        NOCUOUS_WEAPON_PH =
-        {
-            [17563798] = 17563801, -- -236.855 0.476 -51.263
-            [17563799] = 17563801, -- -237.426 0.5 -23.412
-            [17563800] = 17563801, -- -230.732 -0.025 -52.324
-        },
-        MAGICKED_BONES = GetFirstID('Magicked_Bones'),
+        SLENDLIX_SPINDLETHUMB = GetFirstID('Slendlix_Spindlethumb'),
+        NOCUOUS_WEAPON        = GetFirstID('Nocuous_Weapon'),
+        MAGICKED_BONES        = GetFirstID('Magicked_Bones'),
         --[[
             -2    Goblin Thug
             -1    Goblin Weaver
@@ -55,7 +47,7 @@ zones[xi.zone.INNER_HORUTOTO_RUINS] =
     },
     npc =
     {
-        PORTAL_CIRCLE_BASE = 17563862,
+        PORTAL_CIRCLE_BASE = GetFirstID('_5cm'),
         TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
     },
 }

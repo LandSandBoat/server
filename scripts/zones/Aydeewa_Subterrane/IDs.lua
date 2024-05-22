@@ -18,24 +18,20 @@ zones[xi.zone.AYDEEWA_SUBTERRANE] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET        = 7058, -- You can't fish here.
-        MINING_IS_POSSIBLE_HERE       = 7329, -- Mining is possible here if you have <item>.
-        SENSE_OMINOUS_PRESENCE        = 8008, -- You sense an ominous presence...
-        BLOOD_STAINS                  = 8014, -- The ground is smeared with bloodstains...
-        DRAWS_NEAR                    = 8039, -- Something draws near!
-        COMMON_SENSE_SURVIVAL         = 8911, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        UNITY_WANTED_BATTLE_INTERACT  = 8975, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        FISHING_MESSAGE_OFFSET        = 7061, -- You can't fish here.
+        MINING_IS_POSSIBLE_HERE       = 7332, -- Mining is possible here if you have <item>.
+        SENSE_OMINOUS_PRESENCE        = 8011, -- You sense an ominous presence...
+        BLOOD_STAINS                  = 8017, -- The ground is smeared with bloodstains...
+        DRAWS_NEAR                    = 8042, -- Something draws near!
+        COMMON_SENSE_SURVIVAL         = 8914, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        UNITY_WANTED_BATTLE_INTERACT  = 8978, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {
-        BLUESTREAK_GYUGYUROON_PH =
-        {
-            [17055941] = 17056156, -- -221.7 13.762 -346.83
-            [17055942] = 17056156, -- -219 14.003 -364.83
-        },
-        NOSFERATU          = 17056157,
-        PANDEMONIUM_WARDEN = 17056168,
-        CHIGRE             = 17056186,
+        BLUESTREAK_GYUGYUROON = GetFirstID('Bluestreak_Gyugyuroon'),
+        NOSFERATU             = GetFirstID('Nosferatu'),
+        PANDEMONIUM_WARDEN    = GetFirstID('Pandemonium_Warden'), -- 2 Copies: +0, +1
+        CHIGRE                = GetFirstID('Chigre'),
     },
     npc =
     {

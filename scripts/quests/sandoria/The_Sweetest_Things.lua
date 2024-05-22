@@ -5,12 +5,12 @@
 -- Raimbroy : !pos -141 -3 34.6 230
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SWEETEST_THINGS)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_SWEETEST_THINGS)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     title    = xi.title.APIARIST,
 }
 
@@ -26,8 +26,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getFameLevel(xi.fameArea.SANDORIA) >= 2
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -72,7 +72,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -102,7 +102,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -121,7 +121,7 @@ quest.sections =
 
                         player:addTitle(xi.title.APIARIST)
                         player:addGil(400 * xi.settings.main.GIL_RATE)
-                        player:addFame(xi.quest.fame_area.SANDORIA, 5)
+                        player:addFame(xi.fameArea.SANDORIA, 5)
                     else
                         quest:setLocalVar(player, 'firstComplete', 0)
                     end

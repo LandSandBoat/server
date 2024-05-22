@@ -56,7 +56,7 @@ bool CMobSkill::isAoE() const
 
 bool CMobSkill::isConal() const
 {
-    return m_Aoe == 4;
+    return m_Aoe == 4 || m_Aoe == 8;
 }
 
 bool CMobSkill::isSingle() const
@@ -170,29 +170,6 @@ uint16 CMobSkill::getID() const
 
 uint16 CMobSkill::getAnimationID() const
 {
-    return m_AnimID;
-}
-
-uint16 CMobSkill::getPetAnimationID() const
-{
-    // shiva
-    if (m_AnimID >= 578 && m_AnimID <= 586)
-    {
-        return m_AnimID - 482;
-    }
-
-    // rumah
-    if (m_AnimID >= 591 && m_AnimID <= 599)
-    {
-        return m_AnimID - 479;
-    }
-
-    // wyvern
-    if (m_AnimID >= 621 && m_AnimID <= 632)
-    {
-        return m_AnimID - 493;
-    }
-
     return m_AnimID;
 }
 

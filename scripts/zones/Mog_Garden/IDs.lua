@@ -18,19 +18,19 @@ zones[xi.zone.MOG_GARDEN] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET        = 7220, -- You can't fish here.
-        STARS_ON_KEYITEM              = 7508, -- <number> star[/s] on your <item> [has/have] come aglow. A total of <number> star[/s] twinkle[s/] softly inside your <item>.
-        MOGLOCKER_MESSAGE_OFFSET      = 7524, -- Your particular paid period of Mog Locker patronage has been extended until the following time, kupo! Earth Time: #/#/# at #:#:#.
-        RETRIEVE_DIALOG_ID            = 8575, -- You retrieve <item> from the porter moogle's care.
+        FISHING_MESSAGE_OFFSET        = 7223, -- You can't fish here.
+        STARS_ON_KEYITEM              = 7511, -- <number> star[/s] on your <item> [has/have] come aglow. A total of <number> star[/s] twinkle[s/] softly inside your <item>.
+        MOGLOCKER_MESSAGE_OFFSET      = 7527, -- Your particular paid period of Mog Locker patronage has been extended until the following time, kupo! Earth Time: #/#/# at #:#:#.
+        RETRIEVE_DIALOG_ID            = 8578, -- You retrieve <item> from the porter moogle's care.
     },
     mob =
     {
     },
     npc =
     {
-        GREEN_THUMB_MOOGLE = 17924125,
-        MOG_DINGHY         = 17924126,
-        PORTER_MOOGLE      = 17924221,
+        GREEN_THUMB_MOOGLE = GetFirstID('Green_Thumb_Moogle'),
+        MOG_DINGHY         = GetFirstID('Mog_Dinghy'),
+        PORTER_MOOGLE      = GetFirstID('Porter_Moogle'),
     },
 }
 

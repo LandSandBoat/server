@@ -411,7 +411,7 @@ xi.spells.damage.calculateSDT = function(target, spellElement)
     -- https://www.bg-wiki.com/ffxi/Resist for some SDT info.
     -- *perhaps this simply means there is a cap/clamp limiting it there.
 
-    return sdt
+    return utils.clamp(sdt, 0, 3)
 end
 
 -- This function is used to calculate Resist tiers. The resist tiers work differently for enfeebles (which usually affect duration, not potency) than for nukes.
@@ -524,7 +524,7 @@ xi.spells.damage.calculateDayAndWeather = function(caster, spellId, spellElement
         isHelixSpell = true
     end
 
-    -- Calculate Weather bonus
+    -- Calculate Weather bonus + Iridescence bonus.
     if
         math.random(1, 100) <= 33 or
         caster:getMod(xi.combat.element.elementalObi[spellElement]) >= 1 or
@@ -532,15 +532,15 @@ xi.spells.damage.calculateDayAndWeather = function(caster, spellId, spellElement
     then
         -- Strong weathers.
         if weather == xi.combat.element.strongSingleWeather[spellElement] then
-            dayAndWeather = dayAndWeather + caster:getMod(xi.mod.IRIDESCENCE) * 0.1 + 0.1
+            dayAndWeather = dayAndWeather + 0.1 + caster:getMod(xi.mod.IRIDESCENCE) * 0.05
         elseif weather == xi.combat.element.strongDoubleWeather[spellElement] then
-            dayAndWeather = dayAndWeather + caster:getMod(xi.mod.IRIDESCENCE) * 0.1 + 0.25
+            dayAndWeather = dayAndWeather + 0.25 + caster:getMod(xi.mod.IRIDESCENCE) * 0.05
 
         -- Weak weathers.
         elseif weather == xi.combat.element.weakSingleWeather[spellElement] then
-            dayAndWeather = dayAndWeather - caster:getMod(xi.mod.IRIDESCENCE) * 0.1 - 0.1
+            dayAndWeather = dayAndWeather - 0.1 - caster:getMod(xi.mod.IRIDESCENCE) * 0.05
         elseif weather == xi.combat.element.weakDoubleWeather[spellElement] then
-            dayAndWeather = dayAndWeather - caster:getMod(xi.mod.IRIDESCENCE) * 0.1 - 0.25
+            dayAndWeather = dayAndWeather - 0.25 - caster:getMod(xi.mod.IRIDESCENCE) * 0.05
         end
     end
 

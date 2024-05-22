@@ -16,17 +16,17 @@ local trustMemory = function(player)
     end
 
     -- 4 - WONDER_WANDS
-    if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) then
+    if player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WONDER_WANDS) then
         memories = memories + 4
     end
 
     -- 8 - THE_TIGRESS_STIRS
-    if player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STIRS) then
+    if player:hasCompletedQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STIRS) then
         memories = memories + 8
     end
 
     -- 16 - I_CAN_HEAR_A_RAINBOW
-    if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) then
+    if player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) then
         memories = memories + 16
     end
 
@@ -45,14 +45,14 @@ end
 entity.onTrade = function(player, npc, trade)
     -- THE KIND CARDIAN
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == xi.questStatus.QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, xi.item.TEN_OF_CUPS_CARD)
     then
         player:startEvent(397)
 
         -- CAN CARDIANS CRY?
     elseif
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY) == xi.questStatus.QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, xi.item.BRUISED_STARFRUIT)
     then
         player:startEvent(325, 0, 20000, 5000)
@@ -60,13 +60,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local kindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
+    local kindCardian = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
     local kindCardianCS = player:getCharVar('theKindCardianVar')
-    local allNewC3000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
-    local canCardiansCry = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY)
+    local allNewC3000 = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
+    local canCardiansCry = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY)
 
         -- THE KIND CARDIAN
-    if kindCardian == QUEST_ACCEPTED then
+    if kindCardian == xi.questStatus.QUEST_ACCEPTED then
         if kindCardianCS == 0 then
             player:startEvent(392)
         elseif kindCardianCS == 1 then
@@ -77,14 +77,14 @@ entity.onTrigger = function(player, npc)
 
         -- CAN CARDIANS CRY?
     elseif
-        allNewC3000 == QUEST_COMPLETED and
-        canCardiansCry == QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5
+        allNewC3000 == xi.questStatus.QUEST_COMPLETED and
+        canCardiansCry == xi.questStatus.QUEST_AVAILABLE and
+        player:getFameLevel(xi.fameArea.WINDURST) >= 5
     then
         player:startEvent(319, 0, 20000) -- start quest
-    elseif canCardiansCry == QUEST_ACCEPTED then
+    elseif canCardiansCry == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(320, 0, 20000) -- reminder
-    elseif canCardiansCry == QUEST_COMPLETED then
+    elseif canCardiansCry == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(330) -- new standard dialog
 
         -- TRUST
@@ -108,15 +108,15 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 397 then
         player:delKeyItem(xi.ki.TWO_OF_SWORDS)
         player:setCharVar('theKindCardianVar', 2)
-        player:addFame(xi.quest.fame_area.WINDURST, 30)
+        player:addFame(xi.fameArea.WINDURST, 30)
         player:confirmTrade()
 
         -- CAN CARDIANS CRY?
     elseif csid == 319 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY)
     elseif
         csid == 325 and
-        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY, { gil = 5000 })
+        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY, { gil = 5000 })
     then
         player:confirmTrade()
 

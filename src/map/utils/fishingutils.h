@@ -933,7 +933,7 @@ namespace fishingutils
     // Calculations
     uint32              GetSundayMidnightTimestamp();
     uint8               GetMoonPhase();
-    uint16              GetHookTime(CCharEntity* PChar);
+    uint8               GetHookTime(CCharEntity* PChar);
     float               GetMonthlyTidalInfluence(fish_t* fish);
     float               GetHourlyModifier(fish_t* fish);
     float               GetMoonModifier(fish_t* fish);
@@ -1005,6 +1005,7 @@ namespace fishingutils
     fishresponse_t*  FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod, bait_t* bait, fishingarea_t* area);
     catchresponse_t* ReelCheck(CCharEntity* PChar, fishresponse_t* response, rod_t* rod);
     void             FishingAction(CCharEntity* PChar, FISHACTION action, uint16 stamina, uint32 special);
+    CItemFish*       GetFish(uint16 itemid); // creates a `new` CItemFish if possible
 
     // Initialization
     void LoadFishingMessages();

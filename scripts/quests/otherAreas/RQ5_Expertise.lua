@@ -9,7 +9,7 @@
 local mhauraID  = zones[xi.zone.MHAURA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.EXPERTISE)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.EXPERTISE)
 local daysPassed = 0
 local hoursLeft  = 0
 
@@ -24,8 +24,8 @@ quest.sections =
     -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR) == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR) == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.MHAURA] =
@@ -37,7 +37,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:getFameLevel(xi.quest.fame_area.WINDURST) > 2 and
+                        player:getFameLevel(xi.fameArea.WINDURST) > 2 and
                         player:getCharVar('Quest[4][3]DayCompleted') + 8 < VanadielUniqueDay()
                     then
                         return quest:progressEvent(61) -- Quest starting event.
@@ -60,7 +60,7 @@ quest.sections =
     -- Section: Quest accepeted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.MHAURA] =

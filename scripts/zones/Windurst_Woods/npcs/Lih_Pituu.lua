@@ -4,13 +4,11 @@
 -- Type: Bonecraft Adv. Image Support
 -- !pos -5.471 -6.25 -141.211 241
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WOODS]
------------------------------------
 local entity = {}
 
 local pathNodes =
 {
-    { x = -5.057, y = -5.250, z = -136.979, wait = 6000 },
+    { x = -5.057, y = -5.250, z = -136.979, wait =  6000 },
     { x = -9.271, y = -5.250, z = -139.831, wait = 10000 },
     { x = -4.695, y = -5.250, z = -141.494, wait = 10000 },
 }
@@ -25,31 +23,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local skillLevel = player:getSkillLevel(xi.skill.BONECRAFT)
-    local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.BONECRAFT)
-
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) then
-        if not player:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
-            player:startEvent(10018, cost, skillLevel, 0, 511, player:getGil(), 0, 7028, 0)
-        else
-            player:startEvent(10018, cost, skillLevel, 0, 511, player:getGil(), 28753, 3967, 0)
-        end
-    else
-        player:startEvent(10018) -- Standard Dialogue
-    end
+    xi.crafting.oldImageSupportOnTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.BONECRAFT)
-
-    if csid == 10018 and option == 1 then
-        player:delGil(cost)
-        player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 6, 0)
-        player:addStatusEffect(xi.effect.BONECRAFT_IMAGERY, 3, 0, 480)
-    end
+    xi.crafting.oldImageSupportOnEventFinish(player, csid, option, npc)
 end
 
 return entity

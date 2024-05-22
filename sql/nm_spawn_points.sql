@@ -252,12 +252,12 @@ INSERT INTO `nm_spawn_points` VALUES (16806227,49,-549.802,-8.944,-24.848);
 INSERT INTO `nm_spawn_points` VALUES (16806249,0,-490.195,-4.503,145.451); -- Ambusher Antlion
 INSERT INTO `nm_spawn_points` VALUES (16822423,0,4.609,11.472,-101.235); -- Bugbear Strongman (west)
 INSERT INTO `nm_spawn_points` VALUES (16822427,0,60.728,15.487,-118.886); -- Bugbear Strongman (east)
-INSERT INTO `nm_spawn_points` VALUES (16851267,0,-44.317,0.000,-242.987); -- Satiator
-INSERT INTO `nm_spawn_points` VALUES (16851267,1,-205.880,-0.500,268.850); -- Satiator on inaccessable island.
-INSERT INTO `nm_spawn_points` VALUES (16843043,0,117.680,-0.307,302.450); -- Cerebrator
-INSERT INTO `nm_spawn_points` VALUES (16843043,1,-236.055,-0.500,124.179); -- Cerebrator on inaccessable island.
-INSERT INTO `nm_spawn_points` VALUES (16859472,0,-169.471,0.000,84.318); -- Coveter
-INSERT INTO `nm_spawn_points` VALUES (16859472,1,-293.877,-0.500,-122.258); -- Coveter on inaccessable island.
+INSERT INTO `nm_spawn_points` VALUES (16851267,0,-44.317,0.000,-242.987);   -- Promyvion-Dem: Satiator
+INSERT INTO `nm_spawn_points` VALUES (16851267,1,-205.880,-0.500,268.850);  -- Promyvion-Dem: Satiator
+INSERT INTO `nm_spawn_points` VALUES (16843043,0,117.680,-0.307,302.450);   -- Promyvion-Holla: Cerebrator
+INSERT INTO `nm_spawn_points` VALUES (16843043,1,-236.055,-0.500,124.179);  -- Promyvion-Holla: Cerebrator
+INSERT INTO `nm_spawn_points` VALUES (16859472,0,-169.471,0.000,84.318);    -- Promyvion-Mea: Coveter
+INSERT INTO `nm_spawn_points` VALUES (16859472,1,-293.877,-0.500,-122.258); -- Promyvion-Mea: Coveter
 INSERT INTO `nm_spawn_points` VALUES (16875552,0,-88.575,-8.221,-272.966);
 INSERT INTO `nm_spawn_points` VALUES (16875552,1,-85.977,-8.096,-277.417);
 INSERT INTO `nm_spawn_points` VALUES (16875552,2,-80.868,-8.000,-281.892);
@@ -910,6 +910,7 @@ INSERT INTO `nm_spawn_points` VALUES (17125452,0,137.606,3.346,-279.050); -- Ash
 INSERT INTO `nm_spawn_points` VALUES (17137005,0,678.599,-10.219,532.811);
 INSERT INTO `nm_spawn_points` VALUES (17137705,0,678.599,-10.219,532.811); -- Ankabut
 INSERT INTO `nm_spawn_points` VALUES (17137821,0,49.650,1.692,630.371); -- Gloomanita
+INSERT INTO `nm_spawn_points` VALUES (17141885,0,276.142,25.332,-453.541); -- Vasiliceratops
 INSERT INTO `nm_spawn_points` VALUES (17141962,0,-23.892,-24.139,327.721); -- Kotan-kor Kamuy
 INSERT INTO `nm_spawn_points` VALUES (17141979,0,-140.354,-92.095,39.459); -- Scitalis
 INSERT INTO `nm_spawn_points` VALUES (17145867,0,-416.496,24.110,-441.589); -- Sugaar

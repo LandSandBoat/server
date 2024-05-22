@@ -45,11 +45,11 @@ entity.onTrade = function(player, npc, trade)
     -- 905       Wyvern Skull
     -- 1147      Ancient Salt
     -- 4600      Lucky Egg
-    local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
+    local opoOpoAndIStatus = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar('OPO_OPO_PROGRESS')
     local failed = player:getCharVar('OPO_OPO_FAILED')
 
-    if opoOpoAndIStatus == QUEST_ACCEPTED then
+    if opoOpoAndIStatus == xi.questStatus.QUEST_ACCEPTED then
         if progress == 0 or failed == 1 then
             if trade:hasItemQty(xi.item.BROKEN_MITHRAN_FISHING_ROD, 1) then -- first or second time trading correctly
                 player:startEvent(219)
@@ -71,17 +71,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
+    local opoOpoAndIStatus = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar('OPO_OPO_PROGRESS')
     local failed = player:getCharVar('OPO_OPO_FAILED')
     local retry = player:getCharVar('OPO_OPO_RETRY')
 
     if
         player:getCharVar('BathedInScent') == 1 and
-        opoOpoAndIStatus == QUEST_AVAILABLE
+        opoOpoAndIStatus == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(217, 0, 483)  -- 483 broken mithran fishing rod
-    elseif opoOpoAndIStatus == QUEST_ACCEPTED then
+    elseif opoOpoAndIStatus == xi.questStatus.QUEST_ACCEPTED then
         if retry == 1 then
             player:startEvent(239) -- gave 1st NPC wrong item instead of "Broken Mithran Fishing Rod"
         elseif retry == 2 then
@@ -117,7 +117,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 217 and option == 1  then                   -- Opo Opo and I quest start CS
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     elseif csid == 219 then
         if player:getCharVar('OPO_OPO_PROGRESS') == 0 then
             player:tradeComplete()

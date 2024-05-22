@@ -506,10 +506,32 @@ void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas
             }
         }
 
-        bool superlink = groupData.get_or("superlink", false);
-        if (superlink)
+        bool  superlink      = groupData.get_or("superlink", false);
+        uint8 superlinkGroup = groupData.get_or("superlinkGroup", 0);
+
+        if (superlink && superlinkGroup)
         {
-            ++superlinkId;
+            ShowWarning(fmt::format("Superlink bool and Group defined in the same mob group for Battlefield {}", m_PLuaBattlefield->GetID()));
+        }
+
+        if (superlink || superlinkGroup)
+        {
+            // Allow for all mobs existing in the battlefield to superlink and be
+            // associated with other groups.
+
+            // NOTE: Since this is battlefield specific, splitting the range for the
+            // two options mid-way at 500.  If there becomes a need for more than 500,
+            // these values will need to be adjusted.
+
+            if (superlinkGroup)
+            {
+                superlinkId = 1000 * m_PLuaBattlefield->GetArea() + 500 + superlinkGroup;
+            }
+            else
+            {
+                ++superlinkId;
+            }
+
             for (CBaseEntity* entity : groupEntities)
             {
                 auto PMob = dynamic_cast<CMobEntity*>(entity);

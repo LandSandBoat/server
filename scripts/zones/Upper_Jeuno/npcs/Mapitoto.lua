@@ -38,14 +38,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local fsaQuest = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FULL_SPEED_AHEAD)
+    local fsaQuest = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.FULL_SPEED_AHEAD)
     local fullSpeedAheadStatus = player:getCharVar('[QUEST]FullSpeedAhead')
 
-    if fsaQuest == QUEST_COMPLETED then
+    if fsaQuest == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(10226)
     elseif fullSpeedAheadStatus == 4 then -- Complete
         player:startEvent(10225, xi.ki.TRAINERS_WHISTLE, 15533, ID.npc.MAPITOTO)
-    elseif fsaQuest == QUEST_ACCEPTED then -- Retry
+    elseif fsaQuest == xi.questStatus.QUEST_ACCEPTED then -- Retry
         player:startEvent(10224, 1)
     elseif
         player:hasKeyItem(xi.ki.CHOCOBO_LICENSE) and
@@ -61,15 +61,15 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if (csid == 10223 or csid == 10224) and option == 1 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FULL_SPEED_AHEAD)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.FULL_SPEED_AHEAD)
         player:setCharVar('[QUEST]FullSpeedAhead', 1) -- Flag to start minigame
         player:setPos(475, 8.8, -159, 128, 105)
     elseif csid == 10223 and option == 2 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FULL_SPEED_AHEAD)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.FULL_SPEED_AHEAD)
     elseif csid == 10225 then
         -- Complete quest
         player:setCharVar('[QUEST]FullSpeedAhead', 0)
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FULL_SPEED_AHEAD)
+        player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.FULL_SPEED_AHEAD)
         npcUtil.giveKeyItem(player, xi.ki.TRAINERS_WHISTLE)
         npcUtil.giveKeyItem(player, xi.ki.RAPTOR_COMPANION)
     elseif csid == 10227 then

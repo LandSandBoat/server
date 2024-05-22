@@ -54,7 +54,7 @@ local nosTrades =
 }
 
 entity.onTrade = function(player, npc, trade)
-    local nameOfScience  = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
+    local nameOfScience  = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
     local itemInProgress = player:getCharVar('NAME_OF_SCIENCE_target')
 
     if
@@ -63,14 +63,14 @@ entity.onTrade = function(player, npc, trade)
     then
         player:startEvent(529, gorget, earring, obi)
     elseif
-        (nameOfScience == QUEST_ACCEPTED or nameOfScience == QUEST_COMPLETED) and
+        (nameOfScience == xi.questStatus.QUEST_ACCEPTED or nameOfScience == xi.questStatus.QUEST_COMPLETED) and
         npcUtil.tradeHas(trade, xi.item.APPLE_PIE) and
         itemInProgress > 0
     then
         -- apple pie hint
         player:startEvent(531, 4413, 0, nosTrades[itemInProgress].hint)
     elseif
-        (nameOfScience == QUEST_ACCEPTED or nameOfScience == QUEST_COMPLETED) and
+        (nameOfScience == xi.questStatus.QUEST_ACCEPTED or nameOfScience == xi.questStatus.QUEST_COMPLETED) and
         itemInProgress == 0
     then
         for k, v in pairs(nosTrades) do
@@ -86,17 +86,20 @@ end
 entity.onTrigger = function(player, npc)
     -- IN THE NAME OF SCIENCE
     if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH) then
-        local nameOfScience  = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
+        local nameOfScience  = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
         local itemInProgress = player:getCharVar('NAME_OF_SCIENCE_target')
 
-        if nameOfScience == QUEST_AVAILABLE then
+        if nameOfScience == xi.questStatus.QUEST_AVAILABLE then
             player:startEvent(524, obi, earring, gorget)
         elseif
-            (nameOfScience == QUEST_ACCEPTED or nameOfScience == QUEST_COMPLETED) and
+            (nameOfScience == xi.questStatus.QUEST_ACCEPTED or nameOfScience == xi.questStatus.QUEST_COMPLETED) and
             itemInProgress == 0
         then
             player:startEvent(525, obi, earring, gorget)
-        elseif nameOfScience == QUEST_ACCEPTED or nameOfScience == QUEST_COMPLETED then
+        elseif
+            nameOfScience == xi.questStatus.QUEST_ACCEPTED or
+            nameOfScience == xi.questStatus.QUEST_COMPLETED
+        then
             if math.random(1, 100) <= 30 then
                 player:startEvent(532, unpack(nosTrades[itemInProgress].base))
             else
@@ -116,14 +119,14 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 524 then
-        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
+        player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
     elseif csid == 531 then
         player:confirmTrade()
     elseif csid == 526 then
         player:confirmTrade()
     elseif csid == 529 then
         local itemInProgress = player:getCharVar('NAME_OF_SCIENCE_target')
-        if npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE, { item = itemInProgress, var = { 'NAME_OF_SCIENCE_target' } }) then
+        if npcUtil.completeQuest(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE, { item = itemInProgress, var = { 'NAME_OF_SCIENCE_target' } }) then
             player:confirmTrade()
         end
     end

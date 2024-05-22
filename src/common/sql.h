@@ -86,6 +86,7 @@ public:
     SqlConnection(const char* user, const char* passwd, const char* host, uint16 port, const char* db);
     ~SqlConnection();
 
+    std::string GetDatabaseName();
     std::string GetClientVersion();
     std::string GetServerVersion();
 

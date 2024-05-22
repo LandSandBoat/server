@@ -5,7 +5,7 @@
 -- Joachim : !pos -52.844 0 -9.978 246
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS)
+local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS)
 
 quest.reward =
 {
@@ -18,7 +18,7 @@ quest.sections =
     -- and is flagged if Abyssea is enabled in onGameIn.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and player:getMainLvl() >= 30
+            return status == xi.questStatus.QUEST_ACCEPTED and player:getMainLvl() >= 30
         end,
 
         [xi.zone.PORT_JEUNO] =
@@ -54,7 +54,7 @@ quest.sections =
                         -- retail behavior.  This can be confirmed by checking the currency tab on
                         -- retail servers.
                         player:setTraverserEpoch()
-                        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
+                        player:addQuest(xi.questLog.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
                     end
                 end,
             },

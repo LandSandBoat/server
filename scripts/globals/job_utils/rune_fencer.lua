@@ -133,7 +133,7 @@ local function getVallationValianceSDTType(type)
         [xi.effect.SULPOR]   = xi.mod.WATER_SDT,
         [xi.effect.UNDA]     = xi.mod.FIRE_SDT,
         [xi.effect.LUX]      = xi.mod.DARK_SDT,
-        [xi.effect.TENEBRAE] = xi.mod.LIGHT_SDT
+        [xi.effect.TENEBRAE] = xi.mod.LIGHT_SDT,
     }
 
     return runeSDTMap[type]
@@ -149,7 +149,7 @@ local function getLiementAbsorbType(type)
         [xi.effect.SULPOR]   = xi.damageType.WATER,
         [xi.effect.UNDA]     = xi.damageType.FIRE,
         [xi.effect.LUX]      = xi.damageType.DARK,
-        [xi.effect.TENEBRAE] = xi.damageType.LIGHT
+        [xi.effect.TENEBRAE] = xi.damageType.LIGHT,
     }
 
     return runeAbsorbMap[type]
@@ -165,7 +165,7 @@ local function getGambitSDTType(type)
         [xi.effect.SULPOR]   = xi.mod.THUNDER_SDT,
         [xi.effect.UNDA]     = xi.mod.WATER_SDT,
         [xi.effect.LUX]      = xi.mod.LIGHT_SDT,
-        [xi.effect.TENEBRAE] = xi.mod.DARK_SDT
+        [xi.effect.TENEBRAE] = xi.mod.DARK_SDT,
     }
 
     return runeSDTMap[type]
@@ -185,6 +185,39 @@ local function getBattutaSpikesType(type)
     }
 
     return runeSpikesMap[type]
+end
+
+local function getRaykeResistanceRankMod(type)
+    local runeModMap =
+    {
+        [xi.effect.IGNIS]    = xi.mod.FIRE_RES_RANK,
+        [xi.effect.GELUS]    = xi.mod.ICE_RES_RANK,
+        [xi.effect.FLABRA]   = xi.mod.WIND_RES_RANK,
+        [xi.effect.TELLUS]   = xi.mod.EARTH_RES_RANK,
+        [xi.effect.SULPOR]   = xi.mod.THUNDER_RES_RANK,
+        [xi.effect.UNDA]     = xi.mod.WATER_RES_RANK,
+        [xi.effect.LUX]      = xi.mod.LIGHT_RES_RANK,
+        [xi.effect.TENEBRAE] = xi.mod.DARK_RES_RANK,
+    }
+
+    return runeModMap[type]
+end
+
+-- used for packing damage types into Rayke
+local function getRaykeElement(type)
+    local runeAbsorbMap =
+    {
+        [xi.effect.IGNIS]    = xi.element.FIRE,
+        [xi.effect.GELUS]    = xi.element.ICE,
+        [xi.effect.FLABRA]   = xi.element.WIND,
+        [xi.effect.TELLUS]   = xi.element.EARTH,
+        [xi.effect.SULPOR]   = xi.element.THUNDER,
+        [xi.effect.UNDA]     = xi.element.WATER,
+        [xi.effect.LUX]      = xi.element.LIGHT,
+        [xi.effect.TENEBRAE] = xi.element.DARK,
+    }
+
+    return runeAbsorbMap[type]
 end
 
 local function getSpecEffectElementWard(type) -- verified via !injectaction 15 1 1-8, retail action packet dumps
@@ -721,17 +754,70 @@ xi.job_utils.rune_fencer.useGambit = function(player, target, ability, action)
     applyGambitSDTMods(target, sdtTypes, sdtPower, xi.effect.GAMBIT, duration)
 
     player:removeAllRunes()
+
+    -- Gambit doesn't seem to inform you if it had no effect? -- TODO: double check
 end
 
 -- see https://www.bg-wiki.com/ffxi/Rayke
 xi.job_utils.rune_fencer.useRayke = function(player, target, ability, action)
     local highestRune     = player:getHighestRuneEffect()
     local weaponSkillType = player:getWeaponSkillType(xi.slot.MAIN)
+    local meritValue      = player:getMerit(xi.merit.MERIT_RAYKE)
+    local duration        = 27 + player:getMerit(xi.merit.MERIT_RAYKE)              -- 1 merit = 30 seconds (27 + 3)
+    local modDuration     = (meritValue / 3) * player:getMod(xi.mod.RAYKE_DURATION) -- Futhark boots aug
 
     action:speceffect(target:getID(), getSpecEffectElementEffusion(highestRune)) -- set element color for animation.
     action:setAnimation(target:getID(), getAnimationEffusion(weaponSkillType, 20)) -- set animation for currently equipped weapon
 
-    -- TODO: implement
+    local effectAdded = target:addStatusEffect(xi.effect.RAYKE, 0, 0, duration + modDuration)
+
+    if effectAdded then
+        local effect        = target:getStatusEffect(xi.effect.RAYKE)
+        local raykeElements = 0
+        local i             = 0
+        local runeEffects   = player:getAllRuneEffects()
+
+        for _, rune in ipairs(runeEffects) do
+            local resRankMod = getRaykeResistanceRankMod(rune)
+            local element    = getRaykeElement(rune)
+
+            raykeElements = raykeElements + bit.lshift(element, 4 * i) -- pack 4 bit damage type into 16 bit int
+            target:addMod(resRankMod, -1)
+            effect:addMod(resRankMod, -1) -- Status effect handles removing the mods
+
+            i = i + 1
+        end
+
+        effect:setSubPower(raykeElements)
+
+        if i * 4 > 16 then -- This will trip if a custom module overrides current retail behavior and give RUN 5 runes or more.
+            print('ERROR: useRayke trying to pack more than 16 bits into 16 bit datatype! Does Rune Fencer have 5 or more runes enabled?')
+        end
+    end
+
+    player:removeAllRunes()
+
+    return xi.effect.RAYKE -- Rayke doesn't seem to inform you if it had no effect? -- TODO: double check
+end
+
+-- Used for nuke wall reduction of Rayke
+xi.job_utils.rune_fencer.isRaykeReducingElement = function(actor, element)
+    local effect = actor:getStatusEffect(xi.effect.RAYKE)
+
+    if effect then
+        local subpower = effect:getSubPower()
+
+        -- current bit size of subPower is 16 bits, 4*4 = 16
+        -- Step from 0 to 16 in increments of 4...
+        for i = 0, 16, 4 do
+            -- If element is bitpacked into rayke subeffect...
+            if bit.band(bit.rshift(subpower, i), 0xF) == element then
+                return true
+            end
+        end
+    end
+
+    return false
 end
 
 -- see https://www.bg-wiki.com/ffxi/One_for_All

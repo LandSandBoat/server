@@ -17,48 +17,17 @@ zones[xi.zone.PROMYVION_MEA] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        BARRIER_WOVEN                 = 7223, -- It appears to be a barrier woven from the energy of overflowing memories...
+        BARRIER_WOVEN                 = 7226, -- It appears to be a barrier woven from the energy of overflowing memories...
+        EERIE_GREEN_GLOW              = 7228, -- The sphere is emitting an eerie green glow.
     },
     mob =
     {
-        MEMORY_RECEPTACLES =
-        {
-            [16859155] = { 1, 3, 16859483 },
-            [16859205] = { 2, 5, 16859486 },
-            [16859212] = { 2, 5, 16859490 },
-            [16859219] = { 2, 5, 16859491 },
-            [16859226] = { 2, 5, 16859492 },
-            [16859296] = { 3, 7, 16859484 },
-            [16859305] = { 3, 7, 16859485 },
-            [16859314] = { 3, 7, 16859487 },
-            [16859376] = { 4, 7, 16859488 },
-            [16859385] = { 4, 7, 16859489 },
-            [16859394] = { 4, 7, 16859493 },
-        },
-
-        COVETER    = 16859472,
+        MEMORY_RECEPTACLE_TABLE = GetTableOfIDs('Memory_Receptacle'),
+        COVETER                 = GetFirstID('Coveter'),
     },
     npc =
     {
-        MEMORY_STREAMS =
-        {
-            [11]        = { -122, -4,  197, -117, 4,  202, { 46 } },     -- floor 1 return
-            [21]        = {   -1, -4, -121,    2, 4, -118, { 41 } },     -- floor 2 return
-            [31]        = { -161, -4,  158, -157, 4,  161, { 30 } },     -- floor 3 return
-            [32]        = {  158, -4, -281,  161, 4, -278, { 30 } },     -- floor 3 return
-            [41]        = {  -82, -4,  358,  -78, 4,  361, { 33 } },     -- floor 4 return
-            [16859483]  = { -283, -4,  237, -276, 4,  242, { 30 } },     -- floor 1 MR1
-            [16859486]  = {  -82, -4,  -42,  -78, 4,  -38, { 33, 37 } }, -- floor 2 MR1
-            [16859490]  = { -322, -4, -361, -318, 4, -357, { 33, 37 } }, -- floor 2 MR2
-            [16859491]  = {  -42, -4, -321,  -37, 4, -317, { 33, 37 } }, -- floor 2 MR3
-            [16859492]  = {   77, -4, -241,   81, 4, -238, { 33, 37 } }, -- floor 2 MR4
-            [16859484]  = { -321, -4,  -42, -318, 4,  -38, { 31 } },     -- floor 3 MR1
-            [16859485]  = { -241, -4,  -42, -238, 4,  -37, { 31 } },     -- floor 3 MR2
-            [16859487]  = {  -42, -4,   -2,  -38, 4,    2, { 31 } },     -- floor 3 MR3
-            [16859488]  = {  198, -4,   -2,  201, 4,    2, { 31 } },     -- floor 3 MR4
-            [16859489]  = {  358, -4,  -41,  362, 4,  -38, { 31 } },     -- floor 3 MR5
-            [16859493]  = {  240, -4, -322,  244, 4, -317, { 31 } },     -- floor 3 MR6
-        },
+        MEMORY_STREAM_OFFSET = GetFirstID('_0k1'),
     },
 }
 

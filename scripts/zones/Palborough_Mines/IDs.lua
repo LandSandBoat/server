@@ -19,34 +19,21 @@ zones[xi.zone.PALBOROUGH_MINES] =
         LOGIN_NUMBER                       = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         GEOMAGNETRON_ATTUNED               = 7012, -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
         MEMBERS_LEVELS_ARE_RESTRICTED      = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                      = 7061, -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET             = 7220, -- You can't fish here.
-        THE_MACHINE_SEEMS_TO_BE_WORKING    = 7380, -- The machine seems to be working, but you cannot discern its purpose.
-        SOMETHING_FALLS_OUT_OF_THE_MACHINE = 7383, -- Something falls out of the machine!
-        YOU_CANT_CARRY_ANY_MORE_ITEMS      = 7386, -- There seems to be more left in the machine, but you can't carry any more items.
-        MINING_IS_POSSIBLE_HERE            = 7407, -- Mining is possible here if you have <item>.
-        CHEST_UNLOCKED                     = 7422, -- You unlock the chest!
-        HOMEPOINT_SET                      = 7469, -- Home point set!
+        CONQUEST_BASE                      = 7064, -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET             = 7223, -- You can't fish here.
+        THE_MACHINE_SEEMS_TO_BE_WORKING    = 7383, -- The machine seems to be working, but you cannot discern its purpose.
+        SOMETHING_FALLS_OUT_OF_THE_MACHINE = 7386, -- Something falls out of the machine!
+        YOU_CANT_CARRY_ANY_MORE_ITEMS      = 7389, -- There seems to be more left in the machine, but you can't carry any more items.
+        MINING_IS_POSSIBLE_HERE            = 7410, -- Mining is possible here if you have <item>.
+        CHEST_UNLOCKED                     = 7425, -- You unlock the chest!
+        HOMEPOINT_SET                      = 7472, -- Home point set!
     },
     mob =
     {
-        BU_GHI_HOWLBLADE_PH =
-        {
-            [17363177] = 17363181, -- 170.000 -15.000 179.000
-            [17363178] = 17363181, -- 170.000 -16.000 165.000
-            [17363179] = 17363181, -- 166.000 -16.000 135.000
-            [17363180] = 17363181, -- 167.207 -18.027 159.374
-        },
-        ZI_GHI_BONEEATER_PH =
-        {
-            [17363205] = 17363208, -- 130.386 -32.313 73.967
-        },
-        BEHYA_HUNDREDWALL_PH =
-        {
-            [17363256] = 17363258,
-            [17363257] = 17363258,
-        },
-        NI_GHU_NESTFENDER   = 17363318,
+        BU_GHI_HOWLBLADE  = GetFirstID('BuGhi_Howlblade'),
+        ZI_GHI_BONEEATER  = GetFirstID('ZiGhi_Boneeater'),
+        BEHYA_HUNDREDWALL = GetFirstID('BeHya_Hundredwall'),
+        NI_GHU_NESTFENDER = GetFirstID('NiGhu_Nestfender'),
     },
     npc =
     {

@@ -5,12 +5,12 @@
 -- Salimah : !pos -173 -5 64 235
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GOURMET)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     title    = xi.title.MOMMYS_HELPER,
 }
 
@@ -29,7 +29,7 @@ local function tradeEventFinish(player, gilReward, additionalFame)
         player:confirmTrade()
 
         npcUtil.giveCurrency(player, 'gil', gilReward)
-        player:addFame(xi.quest.fame_area.BASTOK, additionalFame)
+        player:addFame(xi.fameArea.BASTOK, additionalFame)
         quest:setMustZone(player)
     end
 end
@@ -38,7 +38,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -56,7 +56,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status >= QUEST_ACCEPTED
+            return status >= xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MARKETS] =

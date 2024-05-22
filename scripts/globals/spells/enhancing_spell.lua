@@ -318,6 +318,14 @@ xi.spells.enhancing.calculateEnhancingFinalPower = function(caster, target, spel
             finalPower = finalPower + (tier * 2)
         end
 
+        -- Handle "Shield Barrier" Job Trait.
+        if
+            caster:isPC() and
+            caster:getMod(xi.mod.SHIELD_BARRIER) > 0
+        then
+            finalPower = finalPower + caster:getShieldDefense()
+        end
+
     -- Refresh
     elseif spellEffect == xi.effect.REFRESH then
         finalPower = finalPower + caster:getMod(xi.mod.ENHANCES_REFRESH)

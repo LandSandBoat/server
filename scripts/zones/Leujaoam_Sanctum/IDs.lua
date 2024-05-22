@@ -19,15 +19,15 @@ zones[xi.zone.LEUJAOAM_SANCTUM] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        PLAYER_OBTAINS_ITEM           = 7320, -- <name> obtains <item>!
-        ASSAULT_START_OFFSET          = 7455, -- Max MP Down removed for <name>.
-        TIME_TO_COMPLETE              = 7516, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
-        MISSION_FAILED                = 7517, -- The mission has failed. Leaving area.
-        RUNE_UNLOCKED_POS             = 7518, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
-        ASSAULT_POINTS_OBTAINED       = 7520, -- You gain <number> [Assault point/Assault points]!
-        TIME_REMAINING_MINUTES        = 7521, -- ime remaining: <number> [minute/minutes] (Earth time).
-        TIME_REMAINING_SECONDS        = 7522, -- ime remaining: <number> [second/seconds] (Earth time).
-        PARTY_FALLEN                  = 7524, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
+        PLAYER_OBTAINS_ITEM           = 7323, -- <name> obtains <item>!
+        ASSAULT_START_OFFSET          = 7458, -- Max MP Down removed for <name>.
+        TIME_TO_COMPLETE              = 7519, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
+        MISSION_FAILED                = 7520, -- The mission has failed. Leaving area.
+        RUNE_UNLOCKED_POS             = 7521, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
+        ASSAULT_POINTS_OBTAINED       = 7523, -- You gain <number> [Assault point/Assault points]!
+        TIME_REMAINING_MINUTES        = 7524, -- ime remaining: <number> [minute/minutes] (Earth time).
+        TIME_REMAINING_SECONDS        = 7525, -- ime remaining: <number> [second/seconds] (Earth time).
+        PARTY_FALLEN                  = 7527, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
     },
 
     mob =
@@ -55,9 +55,9 @@ zones[xi.zone.LEUJAOAM_SANCTUM] =
 
     npc =
     {
-        ANCIENT_LOCKBOX = 17060014,
-        RUNE_OF_RELEASE = 17060015,
-        MULWAHAH        = 17060026,
+        ANCIENT_LOCKBOX = GetFirstID('Ancient_Lockbox'),
+        RUNE_OF_RELEASE = GetFirstID('Rune_of_Release'),
+        MULWAHAH        = GetFirstID('Mulwahah'),
     }
 }
 

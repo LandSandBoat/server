@@ -7,7 +7,7 @@
 local zitahID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.SOUL_SEARCHING)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.SOUL_SEARCHING)
 
 quest.reward =
 {
@@ -19,7 +19,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.THE_SANCTUARY_OF_ZITAH] =

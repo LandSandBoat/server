@@ -10,21 +10,21 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theMissingPiece = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
+    local theMissingPiece = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
 
     if
-        theMissingPiece == QUEST_ACCEPTED and
+        theMissingPiece == xi.questStatus.QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC) and
         player:hasKeyItem(xi.ki.LETTER_FROM_ALFESAR)
     then
         player:startEvent(703) -- Continuing the Quest
     elseif
-        theMissingPiece == QUEST_ACCEPTED and
+        theMissingPiece == xi.questStatus.QUEST_ACCEPTED and
         os.time() < player:getCharVar('TheMissingPiece_date')
     then
         player:startEvent(704) -- didn't wait a day yet
     elseif
-        theMissingPiece == QUEST_ACCEPTED and
+        theMissingPiece == xi.questStatus.QUEST_ACCEPTED and
         os.time() >= player:getCharVar('TheMissingPiece_date')
     then
         player:startEvent(705) -- Quest Completed
@@ -46,8 +46,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         else -- give player teleport-altep
             player:addItem(xi.item.SCROLL_OF_TELEPORT_ALTEP)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_ALTEP)
-            player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
-            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
+            player:addFame(xi.fameArea.SELBINA_RABAO, 30)
+            player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
         end
     end
 end

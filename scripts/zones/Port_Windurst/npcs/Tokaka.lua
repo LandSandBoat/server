@@ -20,15 +20,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local somethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
+    local somethingFishy = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
 
-    if somethingFishy >= QUEST_ACCEPTED then
+    if somethingFishy >= xi.questStatus.QUEST_ACCEPTED then
         if player:needToZone() then
             player:startEvent(211)
         else
             player:startEvent(209, 0, xi.item.BASTORE_SARDINE)
         end
-    elseif somethingFishy == QUEST_AVAILABLE then
+    elseif somethingFishy == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(208, 0, xi.item.BASTORE_SARDINE)
     end
 end
@@ -38,16 +38,16 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 208 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
         player:setCharVar('TokakaSpokenTo', 1)
     elseif csid == 210 then
-        local somethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
+        local somethingFishy = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
 
-        if somethingFishy == QUEST_ACCEPTED then
-            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
-            player:addFame(xi.quest.fame_area.WINDURST, 60)
+        if somethingFishy == xi.questStatus.QUEST_ACCEPTED then
+            player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
+            player:addFame(xi.fameArea.WINDURST, 60)
         else
-            player:addFame(xi.quest.fame_area.WINDURST, 10)
+            player:addFame(xi.fameArea.WINDURST, 10)
         end
 
         player:tradeComplete()

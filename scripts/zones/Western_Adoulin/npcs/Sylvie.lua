@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- DANCES WITH LUOPANS
-    if player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS) == xi.questStatus.QUEST_ACCEPTED then
         if
             player:hasKeyItem(xi.ki.FISTFUL_OF_HOMELAND_SOIL) and
             npcUtil.tradeHas(trade, xi.item.PETRIFIED_LOG)
@@ -34,19 +34,22 @@ entity.onTrigger = function(player, npc)
     end
 
     -- DANCES WITH LUOPANS
-    local dwlQuestStatus = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS)
-    if dwlQuestStatus == QUEST_COMPLETED then
+    local dwlQuestStatus = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS)
+    if dwlQuestStatus == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(39)
     elseif player:getCharVar('GEO_DWL_Luopan') == 1 then
         player:startEvent(36)
-    elseif dwlQuestStatus == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.LUOPAN) then
+    elseif
+        dwlQuestStatus == xi.questStatus.QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.LUOPAN)
+    then
         player:startEvent(35)
-    elseif dwlQuestStatus == QUEST_ACCEPTED then
+    elseif dwlQuestStatus == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(33)
     elseif player:getCharVar('GEO_DWL_Triggered') == 1 then
         player:startEvent(32)
     elseif
-        dwlQuestStatus == QUEST_AVAILABLE and
+        dwlQuestStatus == xi.questStatus.QUEST_AVAILABLE and
         player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL
     then
         player:startEvent(31)
@@ -80,7 +83,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar('GEO_DWL_Triggered', 1)
         elseif option == 1 then
             player:setCharVar('GEO_DWL_Triggered', 0)
-            player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS)
+            player:addQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS)
         end
     elseif csid == 34 then
         player:confirmTrade()
@@ -92,7 +95,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME, 0)  -- You can now become a geomancer!
             npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_GEOMANCER)
             player:setCharVar('GEO_DWL_Luopan', 0)
-            player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS)
+            player:completeQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS)
         end
     end
 

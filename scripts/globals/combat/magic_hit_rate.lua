@@ -284,6 +284,29 @@ local function magicAccuracyFromFood(actor, magicAccPreFood)
     return magicAcc
 end
 
+-- Global function to calculate magic accuracy for some non-spell magic actions. (No stat diff, no magic burst bonuses).
+xi.combat.magicHitRate.calculateNonSpellMagicAccuracy = function(actor, target, spellGroup, skillType, spellElement, bonusMacc)
+    local finalMagicAcc = 0
+
+    local magicAccBase      = actor:getMod(xi.mod.MACC) + actor:getILvlMacc(xi.slot.MAIN)
+    local magicAccSkill     = magicAccuracyFromSkill(actor, skillType)
+    local magicAccElement   = magicAccuracyFromElement(actor, spellElement)
+    local magicAccEffects   = magicAccuracyFromStatusEffects(actor, spellGroup, skillType, spellElement)
+    local magicAccMerits    = magicAccuracyFromMerits(actor, skillType, spellElement)
+    local magicAccJobPoints = magicAccuracyFromJobPoints(actor, spellGroup, skillType)
+    local magicAccDay       = magicAccuracyFromDayElement(actor, spellElement)
+    local magicAccWeather   = magicAccuracyFromWeatherElement(actor, spellElement)
+
+    -- Add up all magic accuracy before calculating food mAcc %
+    local magicAccPreFood = magicAccBase + magicAccSkill + magicAccElement + magicAccEffects + magicAccMerits + magicAccJobPoints + magicAccDay + magicAccWeather + bonusMacc
+    local magicAccFood    = magicAccuracyFromFood(actor, magicAccPreFood)
+
+    -- Add up food magic accuracy.
+    finalMagicAcc = magicAccPreFood + magicAccFood
+
+    return finalMagicAcc
+end
+
 -- Global function to calculate total magicc accuracy.
 xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
     local finalMagicAcc = 0
@@ -389,31 +412,35 @@ end
 -----------------------------------
 
 xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, spellElement, magicHitRate, rankModifier)
-    local targetResistRate = 0 -- The variable we return.
-    local targetResistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
+    local targetResistRate = 1 -- The variable we return.
 
     ----------------------------------------
     -- Handle 'Magic Shield' status effect.
     ----------------------------------------
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
+        return 0
+    end
+
+    ----------------------------------------
+    -- Handle non elemental magic or user error.
+    ----------------------------------------
+    if
+        not spellElement or                -- You shouldnt be using this function.
+        spellElement <= xi.element.NONE or -- Non elemental magic (ex. Player Meteor) cannot be resisted.
+        spellElement > xi.element.DARK     -- That's not even an element.
+    then
         return targetResistRate
     end
 
     ----------------------------------------
     -- Handle target resistance rank.
     ----------------------------------------
+    -- Skillchains lower target resistance rank by 1 (handled in EFFECT_SKILLCHAIN in battleutils.cpp)
+    local targetResistRank = target:getMod(xi.combat.element.resistRankMod[spellElement]) or 0
+
     -- Elemental resistance rank.
-    if spellElement ~= xi.element.NONE then
-        if targetResistRank > 4 then
-            targetResistRank = utils.clamp(targetResistRank - rankModifier, 4, 11)
-        end
-    end
-
-    -- Skillchains lowers target resistance rank by 1.
-    local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target)
-
-    if skillchainCount > 0 then
-        targetResistRank = targetResistRank - 1
+    if targetResistRank > 4 then
+        targetResistRank = utils.clamp(targetResistRank - rankModifier, 4, 11)
     end
 
     -- TODO: Rayke logic might be needed here, depending on how it's implemented.

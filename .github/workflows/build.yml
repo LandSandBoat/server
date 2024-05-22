@@ -19,7 +19,7 @@ jobs:
   Sanity_Checks:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
     - name: Install Dependencies
@@ -31,7 +31,7 @@ jobs:
         npm install -g diff-so-fancy
     - id: changed-files
       name: Get Changed Files
-      uses: Ana06/get-changed-files@v2.2.0
+      uses: Ana06/get-changed-files@v2.3.0
       with:
         filter: |
           modules/**
@@ -116,7 +116,7 @@ jobs:
         exit 0
     - name: Upload CPP Formatting Diff
       if: hashFiles('cpp_formatting_checks.txt') != ''
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: clang_format_diff
         path: |
@@ -185,7 +185,7 @@ jobs:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 1
     - name: Install Dependencies
@@ -193,7 +193,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
     #- name: Cache 'build' folder
-    #  uses: actions/cache@v3
+    #  uses: actions/cache@v4
     #  with:
     #    path: build
     #    key: ${{ runner.os }}-clang
@@ -207,7 +207,7 @@ jobs:
       run: |
         cmake --build build -j4
     - name: Archive Executables
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: linux_executables
         path: |
@@ -224,7 +224,7 @@ jobs:
     - uses: claywar/workaround8649@4892524a133793c85e25513fae79fc968e63877c
       with:
         os: ubuntu-22.04
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 1
     - name: Install Dependencies
@@ -232,7 +232,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
     #- name: Cache 'build' folder
-    #  uses: actions/cache@v3
+    #  uses: actions/cache@v4
     #  with:
     #    path: build
     #    key: ${{ runner.os }}-clang
@@ -255,15 +255,21 @@ jobs:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 1
     - name: Install Dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
+
+        # Required for 22.04 Image, remove on transition to 24.04
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+        sudo apt-get update -y
+        sudo apt-get install gcc-13 g++-13
+
     #- name: Cache 'build' folder
-    #  uses: actions/cache@v3
+    #  uses: actions/cache@v4
     #  with:
     #    path: build
     #    key: ${{ runner.os }}-gcc
@@ -279,15 +285,15 @@ jobs:
 
   Windows_64bit_Debug:
     needs: Sanity_Checks
-    runs-on: windows-latest
+    runs-on: windows-2022
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
       - name: Cache 'build' folder
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: build
           key: ${{ runner.os }}-msvc64d
@@ -301,7 +307,7 @@ jobs:
         run: |
           cmake --build build -j4
       - name: Archive Executables
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: windows_executables
           path: |
@@ -312,15 +318,15 @@ jobs:
 
   Windows_64bit_Release_Tracy_Modules:
     needs: Sanity_Checks
-    runs-on: windows-latest
+    runs-on: windows-2022
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
       - name: Cache 'build' folder
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: build
           key: ${{ runner.os }}-msvc64-t
@@ -345,26 +351,15 @@ jobs:
 
   MacOS_64bit:
     needs: Sanity_Checks
-    # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
-    runs-on: macos-latest
+    # https://github.com/actions/runner-images/blob/main/images/macos/macos-13-Readme.md
+    runs-on: macos-13
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
       - name: Install Dependencies (Brew)
         run: |
-          brew install mariadb zeromq zmq
-      - name: Install Dependencies (LuaJIT)
-        run: |
-          git clone https://github.com/LuaJIT/LuaJIT.git
-          cd LuaJIT
-          sudo make install MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion) -j $(sysctl -n hw.physicalcpu)
-          sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
-      - name: Cache 'build' folder
-        uses: actions/cache@v3
-        with:
-          path: build
-          key: ${{ runner.os }}-osx
+          brew install mariadb zeromq zmq luajit
       - name: Configure CMake
         run: |
           mkdir -p build
@@ -386,10 +381,10 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 1
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: linux_executables
         path: .
@@ -421,7 +416,7 @@ jobs:
             f.write("renamer\n")
         EOF
     - name: Startup and character login checks
-      uses: nick-invision/retry@v2
+      uses: nick-invision/retry@v3
       with:
         timeout_minutes: 15
         max_attempts: 3
@@ -565,10 +560,10 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 1
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: linux_executables
         path: .
@@ -640,13 +635,13 @@ jobs:
         fi
 
   Full_Startup_Checks_Windows:
-    runs-on: windows-latest
+    runs-on: windows-2022
     needs: Windows_64bit_Debug
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 1
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: windows_executables
         path: .

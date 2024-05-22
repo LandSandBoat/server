@@ -13,8 +13,8 @@ entity.onTrade = function(player, npc, trade)
     local southernMummies = trade:hasItemQty(xi.item.SOUTHERN_MUMMY, 4)
 
     if
-        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED or
-        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_COMPLETED
+        player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == xi.questStatus.QUEST_ACCEPTED or
+        player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == xi.questStatus.QUEST_COMPLETED
     then
         if northernFurs and count == 4 then
             player:tradeComplete()
@@ -31,8 +31,8 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED or
-        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_COMPLETED
+        player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == xi.questStatus.QUEST_ACCEPTED or
+        player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == xi.questStatus.QUEST_COMPLETED
     then
         player:startEvent(16)
     else
@@ -45,32 +45,32 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 15 and option == 1 then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
     elseif csid == 17 then
         npcUtil.giveCurrency(player, 'gil', 1500)
-        if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED then
-            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
+        if player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == xi.questStatus.QUEST_ACCEPTED then
+            player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
         end
 
-        player:addFame(xi.quest.fame_area.NORG, 40)
+        player:addFame(xi.fameArea.NORG, 40)
         player:addTitle(xi.title.BLACK_MARKETEER)
         player:startEvent(20)
     elseif csid == 18 then
         npcUtil.giveCurrency(player, 'gil', 2000)
-        if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED then
-            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
+        if player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == xi.questStatus.QUEST_ACCEPTED then
+            player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
         end
 
-        player:addFame(xi.quest.fame_area.NORG, 50)
+        player:addFame(xi.fameArea.NORG, 50)
         player:addTitle(xi.title.BLACK_MARKETEER)
         player:startEvent(20)
     elseif csid == 19 then
         npcUtil.giveCurrency(player, 'gil', 3000)
-        if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED then
-            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
+        if player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == xi.questStatus.QUEST_ACCEPTED then
+            player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
         end
 
-        player:addFame(xi.quest.fame_area.NORG, 80)
+        player:addFame(xi.fameArea.NORG, 80)
         player:addTitle(xi.title.BLACK_MARKETEER)
         player:startEvent(20)
     end

@@ -8,11 +8,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local amazinScorpio = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO)
+    local amazinScorpio = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO)
 
-    if amazinScorpio == QUEST_COMPLETED then
+    if amazinScorpio == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(486)
-    elseif amazinScorpio == QUEST_ACCEPTED then
+    elseif amazinScorpio == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(483)
     else
         player:startEvent(420)

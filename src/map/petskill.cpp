@@ -41,12 +41,13 @@ CPetSkill::CPetSkill(uint16 id)
 , m_TP(0)
 , m_HPP(0)
 , m_TotalTargets(1)
+, m_PrimaryTargetID(0)
 {
 }
 
 bool CPetSkill::hasMissMsg() const
 {
-    return m_Message == 158 || m_Message == 188 || m_Message == 31 || m_Message == 30;
+    return m_Message == 324 || m_Message == 158 || m_Message == 188 || m_Message == 31 || m_Message == 30;
 }
 
 bool CPetSkill::isAoE() const
@@ -105,6 +106,11 @@ void CPetSkill::setSkillFinishCategory(uint8 category)
 void CPetSkill::setTotalTargets(uint16 targets)
 {
     m_TotalTargets = targets;
+}
+
+void CPetSkill::setPrimaryTargetID(uint32 targid)
+{
+    m_PrimaryTargetID = targid;
 }
 
 void CPetSkill::setAnimationID(uint16 animID)
@@ -187,6 +193,11 @@ uint8 CPetSkill::getHPP() const
 uint16 CPetSkill::getTotalTargets() const
 {
     return m_TotalTargets;
+}
+
+uint32 CPetSkill::getPrimaryTargetID() const
+{
+    return m_PrimaryTargetID;
 }
 
 uint16 CPetSkill::getMsg() const
