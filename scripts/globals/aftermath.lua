@@ -632,16 +632,19 @@ xi.aftermath.onEffectGain = function(target, effect)
     {
         -- Relic
         [1] = function(x)
-            local pet = nil
-            if aftermath.includePets then
-                pet = target:getPet()
+            local pet = target:getPet()
+            if
+                pet and
+                aftermath.includePets
+            then
+                -- pets gain same mods as the player, so give them the effect without a loss message
+                pet:delStatusEffectSilent(xi.effect.AFTERMATH)
+                pet:addStatusEffect(xi.effect.AFTERMATH, effect:getPower(), 0, effect:getDuration(), 0, effect:getSubPower(), effect:getTier())
+                pet:getStatusEffect(xi.effect.AFTERMATH):addEffectFlag(xi.effectFlag.NO_LOSS_MESSAGE)
             end
 
             for i = 1, #aftermath.mods, 2 do
                 target:addMod(aftermath.mods[i], aftermath.mods[i + 1])
-                if pet then
-                    pet:addMod(aftermath.mods[i], aftermath.mods[i + 1])
-                end
             end
         end,
 
@@ -650,11 +653,15 @@ xi.aftermath.onEffectGain = function(target, effect)
             local tp = effect:getSubPower()
             local mods = aftermath.mods[math.floor(tp / 1000)]
             local pet = target:getPet()
+            if pet then
+                -- pets gain same mods as the player, so give them the effect without a loss message
+                pet:delStatusEffectSilent(xi.effect.AFTERMATH)
+                pet:addStatusEffect(xi.effect.AFTERMATH, effect:getPower(), 0, effect:getDuration(), 0, effect:getSubPower(), effect:getTier())
+                pet:getStatusEffect(xi.effect.AFTERMATH):addEffectFlag(xi.effectFlag.NO_LOSS_MESSAGE)
+            end
+
             for i = 1, #mods, 2 do
                 target:addMod(mods[i], mods[i + 1](tp))
-                if pet then
-                    pet:addMod(mods[i], mods[i + 1](tp))
-                end
             end
         end,
 
@@ -678,9 +685,6 @@ xi.aftermath.onEffectLose = function(target, effect)
 
             for i = 1, #aftermath.mods, 2 do
                 target:delMod(aftermath.mods[i], aftermath.mods[i + 1])
-                if pet then
-                    pet:delMod(aftermath.mods[i], aftermath.mods[i + 1])
-                end
             end
         end,
 
@@ -688,12 +692,8 @@ xi.aftermath.onEffectLose = function(target, effect)
         [2] = function(x)
             local tp = effect:getSubPower()
             local mods = aftermath.mods[math.floor(tp / 1000)]
-            local pet = target:getPet()
             for i = 1, #mods, 2 do
                 target:delMod(mods[i], mods[i + 1](tp))
-                if pet then
-                    pet:delMod(mods[i], mods[i + 1](tp))
-                end
             end
         end,
 
