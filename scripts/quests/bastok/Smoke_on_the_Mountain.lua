@@ -3,6 +3,8 @@
 -----------------------------------
 -- Log ID: 1, Quest ID: 15
 -- Hungry Wolf : !pos -25.861 -11 -30.172 237
+-- Offa: !pos -283-6 -15.9 -140.3 235
+-- ??? (Campfire) !pos 461.8 -20.9 -578.5 107
 -----------------------------------
 local southGustabergID = zones[xi.zone.SOUTH_GUSTABERG]
 -----------------------------------
@@ -53,8 +55,6 @@ quest.sections =
                 end,
             },
 
-            ['Offa'] = quest:event(222),
-
             onEventFinish =
             {
                 [429] = function(player, csid, option, npc)
@@ -67,6 +67,11 @@ quest.sections =
                     quest:complete(player)
                 end,
             },
+        },
+
+        [xi.zone.BASTOK_MARKETS] =
+        {
+            ['Offa'] = quest:event(222),
         },
 
         [xi.zone.SOUTH_GUSTABERG] =
