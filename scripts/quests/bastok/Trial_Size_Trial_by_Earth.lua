@@ -101,6 +101,10 @@ quest.sections =
                             player:messageSpecial(tremorsID.text.TITAN_UNLOCKED, 0, 0, 1)
                         end
 
+                        if not player:hasItem(xi.item.SCROLL_OF_INSTANT_WARP) then
+                            npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP)
+                        end
+
                         quest:complete(player)
                     end
                 end,

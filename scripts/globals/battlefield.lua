@@ -181,26 +181,26 @@ xi.battlefield.id =
     ARK_ANGELS_4                               = 291, -- Converted
     ARK_ANGELS_5                               = 292, -- Converted
     DIVINE_MIGHT                               = 293, -- Converted
-    CELESTIAL_NEXUS                            = 320,
+    CELESTIAL_NEXUS                            = 320, -- Converted
     FIAT_LUX                                   = 352,
     DARKNESS_DESCENDS                          = 353,
     BONDS_OF_MYTHRIL                           = 354,
     MAIDEN_OF_THE_DUSK                         = 385,
-    TRIAL_BY_WIND                              = 416,
-    CARBUNCLE_DEBACLE_CLOISTER_OF_GALES        = 417,
-    TRIAL_SIZE_TRIAL_BY_WIND                   = 418,
+    TRIAL_BY_WIND                              = 416, -- Converted
+    CARBUNCLE_DEBACLE_CLOISTER_OF_GALES        = 417, -- Converted
+    TRIAL_SIZE_TRIAL_BY_WIND                   = 418, -- Converted
     WAKING_THE_BEAST_CLOISTER_OF_GALES         = 419,
-    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_GALES   = 420,
-    TRIAL_BY_LIGHTNING                         = 448,
-    CARBUNCLE_DEBACLE_CLOISTER_OF_STORMS       = 449,
-    TRIAL_SIZE_TRIAL_BY_LIGHTNING              = 450,
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_GALES   = 420, -- Converted
+    TRIAL_BY_LIGHTNING                         = 448, -- Converted
+    CARBUNCLE_DEBACLE_CLOISTER_OF_STORMS       = 449, -- Converted
+    TRIAL_SIZE_TRIAL_BY_LIGHTNING              = 450, -- Converted
     WAKING_THE_BEAST_CLOISTER_OF_STORMS        = 451,
-    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_STORMS  = 452,
-    TRIAL_BY_ICE                               = 480,
-    CLASS_REUNION                              = 481,
-    TRIAL_SIZE_TRIAL_BY_ICE                    = 482,
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_STORMS  = 452, -- Converted
+    TRIAL_BY_ICE                               = 480, -- Converted
+    CLASS_REUNION                              = 481, -- Converted
+    TRIAL_SIZE_TRIAL_BY_ICE                    = 482, -- Converted
     WAKING_THE_BEAST_CLOISTER_OF_FROST         = 483,
-    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FROST   = 484,
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FROST   = 484, -- Converted
     RANK_5_MISSION                             = 512, -- Converted
     COME_INTO_MY_PARLOR                        = 513,
     E_VASE_IVE_ACTION                          = 514,
@@ -223,19 +223,19 @@ xi.battlefield.id =
     CLASH_OF_THE_COMRADES                      = 531,
     THOSE_WHO_LURK_IN_SHADOWS                  = 532, -- Experimental
     BEYOND_INFINITY                            = 533, -- Converted
-    TRIAL_BY_FIRE                              = 544,
-    TRIAL_SIZE_TRIAL_BY_FIRE                   = 545,
+    TRIAL_BY_FIRE                              = 544, -- Converted
+    TRIAL_SIZE_TRIAL_BY_FIRE                   = 545, -- Converted
     WAKING_THE_BEAST_CLOISTER_OF_FLAMES        = 546,
-    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FLAMES  = 547,
-    TRIAL_BY_EARTH                             = 576,
-    PUPPET_MASTER                              = 577,
-    TRIAL_SIZE_TRIAL_BY_EARTH                  = 578,
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FLAMES  = 547, -- Converted
+    TRIAL_BY_EARTH                             = 576, -- Converted
+    PUPPET_MASTER                              = 577, -- Converted
+    TRIAL_SIZE_TRIAL_BY_EARTH                  = 578, -- Converted
     WAKING_THE_BEAST_CLOISTER_OF_TREMORS       = 579,
-    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TREMORS = 580,
-    TRIAL_BY_WATER                             = 608,
-    TRIAL_SIZE_TRIAL_BY_WATER                  = 609,
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TREMORS = 580, -- Converted
+    TRIAL_BY_WATER                             = 608, -- Converted
+    TRIAL_SIZE_TRIAL_BY_WATER                  = 609, -- Converted
     WAKING_THE_BEAST_CLOISTER_OF_TIDES         = 610,
-    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TIDES   = 611,
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TIDES   = 611, -- Converted
     FLAMES_FOR_THE_DEAD                        = 640,
     FOLLOW_THE_WHITE_RABBIT                    = 641,
     WHEN_HELL_FREEZES_OVER                     = 642,
@@ -302,24 +302,24 @@ xi.battlefield.id =
     MOMENT_OF_TRUTH                            = 1155,
     PUPPET_IN_PERIL                            = 1156,
     RIDER_COMETH                               = 1184,
-    NW_APOLLYON                                = 1290,
-    SW_APOLLYON                                = 1291,
-    NE_APOLLYON                                = 1292,
-    SE_APOLLYON                                = 1293,
-    CS_APOLLYON                                = 1294,
-    CS_APOLLYON_II                             = 1295,
-    CENTRAL_APOLLYON                           = 1296,
-    CENTRAL_APOLLYON_II                        = 1297,
-    TEMENOS_WESTERN_TOWER                      = 1298,
-    TEMENOS_NORTHERN_TOWER                     = 1299,
-    TEMENOS_EASTERN_TOWER                      = 1300,
-    CENTRAL_TEMENOS_BASEMENT                   = 1301,
-    CENTRAL_TEMENOS_BASEMENT_II                = 1302,
-    CENTRAL_TEMENOS_1ST_FLOOR                  = 1303,
-    CENTRAL_TEMENOS_2ND_FLOOR                  = 1304,
-    CENTRAL_TEMENOS_3RD_FLOOR                  = 1305,
-    CENTRAL_TEMENOS_4TH_FLOOR                  = 1306,
-    CENTRAL_TEMENOS_4TH_FLOOR_II               = 1307,
+    NW_APOLLYON                                = 1290, -- Converted
+    SW_APOLLYON                                = 1291, -- Converted
+    NE_APOLLYON                                = 1292, -- Converted
+    SE_APOLLYON                                = 1293, -- Converted
+    CS_APOLLYON                                = 1294, -- Converted
+    CS_APOLLYON_II                             = 1295, -- Converted
+    CENTRAL_APOLLYON                           = 1296, -- Converted
+    CENTRAL_APOLLYON_II                        = 1297, -- Converted
+    TEMENOS_WESTERN_TOWER                      = 1298, -- Converted
+    TEMENOS_NORTHERN_TOWER                     = 1299, -- Converted
+    TEMENOS_EASTERN_TOWER                      = 1300, -- Converted
+    CENTRAL_TEMENOS_BASEMENT                   = 1301, -- Converted
+    CENTRAL_TEMENOS_BASEMENT_II                = 1302, -- Converted
+    CENTRAL_TEMENOS_1ST_FLOOR                  = 1303, -- Converted
+    CENTRAL_TEMENOS_2ND_FLOOR                  = 1304, -- Converted
+    CENTRAL_TEMENOS_3RD_FLOOR                  = 1305, -- Converted
+    CENTRAL_TEMENOS_4TH_FLOOR                  = 1306, -- Converted
+    CENTRAL_TEMENOS_4TH_FLOOR_II               = 1307, -- Converted
     PURPLE_THE_NEW_BLACK                       = 2721,
 }
 
@@ -798,7 +798,10 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
         local zone   = player:getZoneID()
 
         -- Handle traded items if not wearing them
-        if self.requiredItems.wearMessage == nil and #self.tradeItems > 0 then
+        if
+            self.requiredItems.wearMessage == nil and
+            #self.tradeItems > 0
+        then
             player:tradeComplete()
         end
 
@@ -1008,7 +1011,7 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
 
         if type(self.requiredKeyItems.message) == 'table' then
             player:messageSpecial(self.requiredKeyItems.message[1], unpack(self.requiredKeyItems.message[2]))
-        elseif self.requiredKeyItems.message ~= 0 then
+        elseif self.requiredKeyItems.message then
             player:messageSpecial(self.requiredKeyItems.message, unpack(items))
         end
 
@@ -1389,7 +1392,21 @@ function BattlefieldQuest:checkRequirements(player, npc, isRegistrant, trade)
         return false
     end
 
-    return player:getQuestStatus(self.questArea, self.quest) >= xi.questStatus.QUEST_ACCEPTED
+    if self.requiredVar ~= nil then
+        -- COP Missions use a charVar to track since missionStatus is used to define menu settings.
+        -- When converting these, allow for the same structure of status, but with defined requiredVar (str)
+        -- and requiredValue (uint requirement).  These are currently mutually exclusive, and treated
+        -- as such.
+
+        local status      = player:getCharVar(self.requiredVar)
+        local hasAccepted = player:getQuestStatus(self.questArea, self.quest) == xi.questStatus.QUEST_ACCEPTED
+
+        return (not isRegistrant and (player:hasCompletedQuest(self.questArea, self.quest) or
+            (hasAccepted and status >= self.requiredValue))) or
+            (hasAccepted and status == self.requiredValue)
+    else
+        return player:getQuestStatus(self.questArea, self.quest) >= xi.questStatus.QUEST_ACCEPTED
+    end
 end
 
 function BattlefieldQuest:checkSkipCutscene(player)

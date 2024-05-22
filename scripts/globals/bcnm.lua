@@ -18,16 +18,6 @@ local battlefields =
         { bit, battlefieldIdInDatabase, requiredItemToTrade }
     },
 --]]
-    [xi.zone.BEARCLAW_PINNACLE] =
-    {
-        { 0,  640,    0 },   -- Flames of the Dead (PM5-3 U3)
-    --  { 1,  641,    0 },   -- Follow the White Rabbit (ENM)
-    --  { 2,  642,    0 },   -- When Hell Freezes Over (ENM)
-    --  { 3,  643,    0 },   -- Brothers (ENM) -- TODO: Chthonian Ray mobskill
-        { 4,  644,    0 },   -- Holy Cow (ENM)
-    --  { 5,    ?, 3454 },   -- Taurassic Park (HKC30)
-    },
-
     [xi.zone.BONEYARD_GULLY] =
     {
         { 0,  672,    0 },   -- Head Wind (PM5-3 U2)
@@ -49,53 +39,10 @@ local battlefields =
     --  { 3,    ?,    0 },   -- *Waking Dreams (HTMBF)
     },
 
-    [xi.zone.MINE_SHAFT_2716] =
-    {
-        { 0,  736,    0 },   -- A Century of Hardship (PM5-3 L3)
-    --  { 1,  737,    0 },   -- Return to the Depths (Quest)
-    --  { 2,  738,    0 },   -- Bionic Bug (ENM)
-    --  { 3,  739,    0 },   -- Pulling the Strings (ENM)
-    --  { 4,  740,    0 },   -- Automaton Assault (ENM)
-    --  { 5,  741, 3455 },   -- The Mobline Comedy (HKC50)
-    },
-
-    [xi.zone.SPIRE_OF_HOLLA] =
-    {
-        { 0,  768,    0 },   -- Ancient Flames Beckon (PM1-3)
-    --  { 1,  769,    0 },   -- Simulant (ENM)
-    --  { 2,  770, 3351 },   -- Empty Hopes (KC30)
-    },
-
-    [xi.zone.SPIRE_OF_DEM] =
-    {
-        { 0,  800,    0 },   -- Ancient Flames Beckon (PM1-3)
-    --  { 1,  801,    0 },   -- You Are What You Eat (ENM)
-    --  { 2,  802, 3351 },   -- Empty Dreams (KC30)
-    },
-
-    [xi.zone.SPIRE_OF_MEA] =
-    {
-        { 0,  832,    0 },   -- Ancient Flames Beckon (PM1-3)
-    --  { 1,  833,    0 },   -- Playing Host (ENM)
-    --  { 2,  834, 3351 },   -- Empty Desires (KC30)
-    },
-
-    [xi.zone.SPIRE_OF_VAHZL] =
-    {
-        { 0,  864,    0 },   -- Desires of Emptiness (PM5-2)
-    --  { 1,  865,    0 },   -- Pulling the Plug (ENM)
-    --  { 2,  866, 3352 },   -- Empty Aspirations (KC50)
-    },
-
     [xi.zone.RIVERNE_SITE_B01] =
     {
         { 0,  896,    0 },   -- Storms of Fate (Quest)
     --  { 1,  897, 2108 },   -- The Wyrmking Descends (BCNM)
-    },
-
-    [xi.zone.RIVERNE_SITE_A01] =
-    {
-    --  { 0,  928, 1842 },   -- Ouryu Cometh (BCNM)
     },
 
     [xi.zone.MONARCH_LINN] =
@@ -134,25 +81,6 @@ local battlefields =
     --  { 5,    ?,    0 },   -- Sealed Fate (Master Trial)
     },
 
-    [xi.zone.TEMENOS] =
-    {
-    --  { 0, 1299,    0 },   -- Northern Tower
-    --  { 1, 1300,    0 },   -- Eastern Tower
-    --  { 2, 1298,    0 },   -- Western Tower
-    --  { 3, 1306,   -1 },   -- Central 4th Floor (multiple items needed: 1907, 1908, 1986)
-    --  { 4, 1305, 1904 },   -- Central 3rd Floor
-    --  { 5, 1304, 1905 },   -- Central 2nd Floor
-    --  { 6, 1303, 1906 },   -- Central 1st Floor
-    --  { 7, 1301, 2127 },   -- Central Basement
-    --  { 8, 1302,    0 },   -- Central Basement II
-    --  { 9, 1307,    0 },   -- Central 4th Floor II
-    },
-
-    [xi.zone.ARRAPAGO_REEF] =
-    {
-    --  { 0,    ?,    0 },   -- Lamia Reprisal
-    },
-
     [xi.zone.TALACCA_COVE] =
     {
     --  { 0, 1088,    0 },   -- Call to Arms (ISNM)
@@ -163,11 +91,6 @@ local battlefields =
     --  { 5,    ?,    0 },   -- *Legacy of the Lost (HTMBF)
     },
 
-    [xi.zone.HALVUNG] =
-    {
-    --  { 0,    ?,    0 },   -- Halvung Invasion
-    },
-
     [xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
     {
     --  { 0, 1120,    0 },   -- Tough Nut to Crack (ISNM)
@@ -175,11 +98,6 @@ local battlefields =
         { 2, 1122,    0 },   -- Omens (BLU AF2)
         { 3, 1123, 2333 },   -- Achieving True Power (PUP LB5)
         { 4, 1124,    0 },   -- Shield of Diplomacy (TOAU22)
-    },
-
-    [xi.zone.MAMOOK] =
-    {
-    --  { 0,    ?,    0 },   -- Mamook Incursion
     },
 
     [xi.zone.JADE_SEPULCHER] =
@@ -192,62 +110,11 @@ local battlefields =
     --  { 5,    ?,    0 },   -- *Puppet in Peril (HTMBF)
     },
 
-    [xi.zone.HAZHALM_TESTING_GROUNDS] =
-    {
-    --  { 0, 1184,    0 },   -- The Rider Cometh (Quest)
-    },
-
     [xi.zone.LA_VAULE_S] =
     {
     --  { 0,    ?,    0 },   -- Splitting Heirs (S)
         { 1, 2721,    0 },   -- Purple, The New Black
     --  { 2,    ?,    0 },   -- The Blood-bathed Crown
-    },
-
-    [xi.zone.BEADEAUX_S] =
-    {
-    --  { 0,    ?,    0 },   -- Cracking Shells (B)
-    --  { 1,    ?,    0 },   -- The Buried God
-    },
-
-    [xi.zone.CASTLE_OZTROJA_S] =
-    {
-    --  { 0,    ?,    0 },   -- Plucking Wings (W)
-    --  { 1,    ?,    0 },   -- A Malicious Manifest
-    --  { 2,    ?,    0 },   -- Manifest Destiny
-    --  { 3,    ?,    0 },   -- At Journey's End
-    },
-
-    [xi.zone.HORLAIS_PEAK] =
-    {
-        {  0,    0,    0 },   -- The Rank 2 Final Mission (Mission 2-3)
-        {  1,    1, 1131 },   -- Tails of Woe (BS40)
-        {  2,    2, 1130 },   -- Dismemberment Brigade (BS60)
-        {  3,    3,    0 },   -- The Secret Weapon (San d'Oria 7-2)
-        {  4,    4, 1177 },   -- Hostile Herbivores (BS50)
-        {  5,    5, 1426 },   -- Shattering Stars (WAR LB5)
-        {  6,    6, 1429 },   -- Shattering Stars (BLM LB5)
-        {  7,    7, 1436 },   -- Shattering Stars (RNG LB5)
-        {  8,    8, 1552 },   -- Carapace Combatants (BS30)
-    --  {  9,    9, 1551 },   -- Shooting Fish (BS20) -- TODO: mobs use ranged attacks with knockback
-        { 10,   10, 1552 },   -- Dropping Like Flies (BS30)
-    --  { 11,   11, 1553 },   -- Horns of War (KS99) -- TODO: Chlevnik is unscripted
-        { 12,   12, 1131 },   -- Under Observation (BS40)
-        { 13,   13, 1177 },   -- Eye of the Tiger (BS50) -- TODO: Crossthrash mobskill
-    --  { 14,   14, 1130 },   -- Shots in the Dark (BS60) -- TODO: Warmachine combat behavior
-        { 15,   15, 1175 },   -- Double Dragonian (KS30) -- TODO: Chaos Blade strengthens after 2hr
-    --  { 16,   16, 1178 },   -- Today's Horoscope (KS30)
-        { 17,   17, 1180 },   -- Contaminated Colosseum (KS30)
-    --  { 18,   18, 3351 },   -- Kindergarten Cap (KC30)
-    --  { 19,   19, 3352 },   -- Last Orc-Shunned Hero (KC50)
-        { 20,   20,    0 },   -- Beyond Infinity (Quest)
-    --  { 21,    ?, 4062 },   -- *Tails of Woe (SKC10)
-    --  { 22,    ?, 4063 },   -- *Dismemberment Brigade (SKC20)
-    --  { 23,    ?,    0 },   -- A Feast Most Dire (Quest)
-    --  { 24,    ?,    0 },   -- A.M.A.N. Trove (Mars)
-    --  { 25,    ?,    0 },   -- A.M.A.N. Trove (Venus)
-    --  { 26,    ?,    0 },   -- Inv. from Excenmille
-    --  { 27,    ?,    0 },   -- Inv. from Excenmille and Co.
     },
 
     [xi.zone.GHELSBA_OUTPOST] =
@@ -260,118 +127,6 @@ local battlefields =
     --  { 5,   37,    0 },   -- Mirror, Mirror (Quest)
     },
 
-    [xi.zone.WAUGHROON_SHRINE] =
-    {
-        {  0,   64,    0 },   -- The Rank 2 Final Mission (Mission 2-3)
-        {  1,   65, 1131 },   -- The Worm's Turn (BS40)
-        {  2,   66, 1130 },   -- Grimshell Shocktroopers (BS60)
-        {  3,   67,    0 },   -- On My Way (Bastok 7-2)
-        {  4,   68, 1166 },   -- A Thief in Norg!? (Quest)
-        {  5,   69, 1177 },   -- 3, 2, 1... (BS50) -- TODO: Self Destruct does not display correct message in chat log
-        {  6,   70, 1430 },   -- Shattering Stars (RDM LB5)
-        {  7,   71, 1431 },   -- Shattering Stars (THF LB5)
-        {  8,   72, 1434 },   -- Shattering Stars (BST LB5)
-        {  9,   73, 1552 },   -- Birds of a Feather (BS30)
-    --  { 10,   74, 1551 },   -- Crustacean Conundrum (BS20) -- TODO: You can only do 0-2 damage no matter what your attack is
-        { 11,   75, 1552 },   -- Grove Guardians (BS30)
-    --  { 12,   76, 1553 },   -- The Hills are Alive (KS99) -- TODO: Tartaruga Gigante is not coded
-        { 13,   77, 1131 },   -- Royal Jelly (BS40)
-    --  { 14,   78, 1177 },   -- The Final Bout (BS50) -- TODO: mobskills Big Blow and Counterstance
-        { 15,   79, 1130 },   -- Up in Arms (BS60)
-    --  { 16,   80, 1175 },   -- Copycat (KS30)
-    --  { 17,   81, 1178 },   -- Operation Desert Swarm (KS30) -- TODO: Wild Rage gets stronger as they die. Build sleep resistance. Testing.
-    --  { 18,   82, 1180 },   -- Prehistoric Pigeons (KS30) -- TODO: Build resistance to sleep quickly. When one dies, remaining ones become more powerful.
-    --  { 19,   83, 3351 },   -- The Palborough Project (KC30)
-    --  { 20,   84, 3352 },   -- Shell Shocked (KC50)
-        { 21,   85,    0 },   -- Beyond Infinity (Quest)
-    --  { 22,    ?, 4062 },   -- *The Worm's Tail (SKC10)
-    --  { 23,    ?, 4063 },   -- *Grimshell Shocktroopers (SKC20)
-    --  { 24,    ?,    0 },   -- A Feast Most Dire (Quest)
-    --  { 25,    ?,    0 },   -- A.M.A.N. Trove (Mars)
-    --  { 26,    ?,    0 },   -- A.M.A.N. Trove (Venus)
-    --  { 27,    ?,    0 },   -- Invitation from Naji
-    --  { 28,    ?,    0 },   -- Invitation from Naji and Co.
-    },
-
-    [xi.zone.BALGAS_DAIS] =
-    {
-        {  0,   96,    0 },   -- The Rank 2 Final Mission (Mission 2-3)
-        {  1,   97, 1131 },   -- Steamed Sprouts (BS40)
-        {  2,   98, 1130 },   -- Divine Punishers (BS60)
-        {  3,   99,    0 },   -- Saintly Invitation (Windurst 6-2)
-        {  4,  100, 1177 },   -- Treasure and Tribulations (BS50)
-        {  5,  101, 1427 },   -- Shattering Stars (MNK LB5)
-        {  6,  102, 1428 },   -- Shattering Stars (WHM LB5)
-        {  7,  103, 1440 },   -- Shattering Stars (SMN LB5)
-        {  8,  104, 1552 },   -- Creeping Doom (BS30)
-        {  9,  105, 1551 },   -- Charming Trio (BS20)
-        { 10,  106, 1552 },   -- Harem Scarem (BS30)
-    --  { 11,  107, 1553 },   -- Early Bird Catches the Wyrm (KS99)
-        { 12,  108, 1131 },   -- Royal Succession (BS40)
-        { 13,  109, 1177 },   -- Rapid Raptors (BS50)
-        { 14,  110, 1130 },   -- Wild Wild Whiskers (BS60) -- TODO: should use petrifactive breath more often than other mobskill. Message before spellcasting.
-    --  { 15,  111, 1175 },   -- Seasons Greetings (KS30)
-    --  { 16,  112, 1178 },   -- Royale Ramble (KS30)
-    --  { 17,  113, 1180 },   -- Moa Constrictors (KS30)
-    --  { 18,  114, 3351 },   -- The V Formation (KC30)
-    --  { 19,  115, 3352 },   -- Avian Apostates (KC50)
-        { 20,  116,    0 },   -- Beyond Infinity (Quest)
-    --  { 21,    ?, 4062 },   -- *Steamed Sprouts (SKC10)
-    --  { 22,    ?, 4063 },   -- *Divine Punishers (SKC20)
-    --  { 23,    ?,    0 },   -- A Feast Most Dire (Quest)
-    --  { 24,    ?,    0 },   -- A.M.A.N. Trove (Mars)
-    --  { 25,    ?,    0 },   -- A.M.A.N. Trove (Venus)
-    --  { 26,    ?,    0 },   -- Inv. from Kupipi
-    --  { 27,    ?,    0 },   -- Inv. from Kupipi and Co.
-    },
-
-    [xi.zone.THRONE_ROOM_S] =
-    {
-    --  { 0,  352,    0 },   -- Fiat Lux (Campaign)
-    --  { 1,  353,    0 },   -- Darkness Descends (WOTG37)
-    --  { 2,  354,    0 },   -- Bonds of Mythril (Quest)
-    --  { 3,    ?,    0 },   -- Unafraid of the Dark (Merit Battlefield)
-    },
-
-    [xi.zone.SACRIFICIAL_CHAMBER] =
-    {
-        { 0,  128,    0 },   -- The Temple of Uggalepih (ZM4)
-        { 1,  129, 1130 },   -- Jungle Boogymen (BS60)
-        { 2,  130, 1130 },   -- Amphibian Assault (BS60)
-    --  { 3,  131,    0 },   -- Project: Shantottofication (ASA13)
-    --  { 4,  132, 3352 },   -- Whom Wilt Thou Call (KC50)
-    --  { 5,    ?, 4063 },   -- *Jungle Boogymen (SKC20)
-    --  { 6,    ?, 4063 },   -- *Amphibian Assault (SKC20)
-    },
-
-    [xi.zone.THRONE_ROOM] =
-    {
-        { 0,  160,    0 },   -- The Shadow Lord Battle (Mission 5-2)
-        { 1,  161,    0 },   -- Where Two Paths Converge (Bastok 9-2)
-    --  { 2,  162, 1130 },   -- Kindred Spirits (BS60)
-        { 3,  163, 2557 },   -- Survival of the Wisest (SCH LB5)
-    --  { 4,  164,    0 },   -- Smash! A Malevolent Menace (MKD14)
-    --  { 5,    ?, 4063 },   -- *Kindred Spirits (SKC20)
-    --  { 6,    ?,    0 },   -- *The Shadowlord Battle (HTMBF)
-    --  { 7,    ?,    0 },   -- True Love
-    --  { 8,    ?,    0 },   -- A Fond Farewell
-    },
-
-    [xi.zone.CHAMBER_OF_ORACLES] =
-    {
-        {  0,  192,    0 },   -- Through the Quicksand Caves (ZM6)
-        {  1,  193, 1130 },   -- Legion XI Comitatensis (BS60)
-        {  2,  194, 1437 },   -- Shattering Stars (SAM LB5)
-        {  3,  195, 1438 },   -- Shattering Stars (NIN LB5)
-        {  4,  196, 1439 },   -- Shattering Stars (DRG LB5)
-    --  {  5,  197, 1175 },   -- Cactuar Suave (KS30)
-        {  6,  198, 1178 },   -- Eye of the Storm (KS30)
-    --  {  7,  199, 1180 },   -- The Scarlet King (KS30)
-    --  {  8,  200,    0 },   -- Roar! A Cat Burglar Bares Her Fangs (MKD10)
-    --  {  9,  201, 3352 },   -- Dragon Scales (KC50)
-    --  { 10,    ?, 4063 },   -- *Legion XI Comitatensis (SKC20)
-    },
-
     [xi.zone.FULL_MOON_FOUNTAIN] =
     {
         { 0,  224,    0 },   -- The Moonlit Path (Quest)
@@ -381,139 +136,6 @@ local battlefields =
     --  { 4,    ?,    0 },   -- *The Moonlit Path (HTMBF)
     --  { 5,    ?,    0 },   -- *Waking the Beast (HTMBF)
     },
-
-    [xi.zone.STELLAR_FULCRUM] =
-    {
-        { 0,  256,    0 },   -- Return to Delkfutt's Tower (ZM8)
-    --  { 1,  257,    0 },   -- The Indomitable Triumvirate (Mog Bonanza)
-    --  { 2,  258,    0 },   -- The Dauntless Duo (Mog Bonanza)
-    --  { 3,  259,    0 },   -- The Solitary Demolisher (Mog Bonanza)
-    --  { 4,  260,    0 },   -- Heroine's Combat (Mog Bonanza)
-    --  { 5,  261,    0 },   -- Mercenary Camp (Mog Bonanza)
-    --  { 6,  262,    0 },   -- Ode of Life Bestowing (ACP11)
-    --  { 7,    ?,    0 },   -- *Return to Delkfutt's Tower (HTMBF)
-    --  { 8,    ?,    0 },   -- True Love
-    --  { 9,    ?,    0 },   -- A Fond Farewell
-    },
-
-    [xi.zone.LALOFF_AMPHITHEATER] =
-    {
-        {  0,  288,    0 },   -- Ark Angels 1 (ZM14)
-        {  1,  289,    0 },   -- Ark Angels 2 (ZM14)
-        {  2,  290,    0 },   -- Ark Angels 3 (ZM14)
-        {  3,  291,    0 },   -- Ark Angels 4 (ZM14)
-        {  4,  292,    0 },   -- Ark Angels 5 (ZM14)
-        {  5,  293, 1550 },   -- Divine Might (ZM14)
-    --  {  6,    ?,    0 },   -- *Ark Angels 1 (HTMBF)
-    --  {  7,    ?,    0 },   -- *Ark Angels 2 (HTMBF)
-    --  {  8,    ?,    0 },   -- *Ark Angels 3 (HTMBF)
-    --  {  9,    ?,    0 },   -- *Ark Angels 4 (HTMBF)
-    --  { 10,    ?,    0 },   -- *Ark Angels 5 (HTMBF)
-    --  { 11,    ?,    0 },   -- *Divine Might (HTMBF)
-    },
-
-    [xi.zone.THE_CELESTIAL_NEXUS] =
-    {
-        { 0,  320,    0 },   -- The Celestial Nexus (ZM16)
-    --  { 1,    ?,    0 },   -- *The Celestial Nexus (HTMBF)
-    },
-
-    [xi.zone.WALK_OF_ECHOES] =
-    {
-    --  { 0,    ?,    0 },   -- When Wills Collide (WOTG46)
-    --  { 1,  385,    0 },   -- Maiden of the Dusk (WOTG51)
-    --  { 2,    ?,    0 },   -- Champion of the Dawn (Quest)
-    --  { 3,    ?,    0 },   -- A Forbidden Reunion (Quest)
-    },
-
-    [xi.zone.CLOISTER_OF_GALES] =
-    {
-        { 0,  416,    0 },   -- Trial by Wind (Quest)
-        { 1,  417, 1174 },   -- Carbuncle Debacle (Quest)
-        { 2,  418, 1546 },   -- Trial-size Trial by Wind (Quest)
-    --  { 3,  419,    0 },   -- Waking the Beast (Quest)
-        { 4,  420,    0 },   -- Sugar-coated Directive (ASA4)
-    --  { 5,    ?,    0 },   -- *Trial by Wind (HTMBF)
-    },
-
-    [xi.zone.CLOISTER_OF_STORMS] =
-    {
-        { 0,  448,    0 },   -- Trial by Lightning (Quest)
-        { 1,  449, 1172 },   -- Carbuncle Debacle (Quest)
-        { 2,  450, 1548 },   -- Trial-size Trial by Lightning (Quest)
-    --  { 3,  451,    0 },   -- Waking the Beast (Quest)
-        { 4,  452,    0 },   -- Sugar-coated Directive (ASA4)
-    --  { 5,    ?,    0 },   -- *Trial by Lightning (HTMBF)
-    },
-
-    [xi.zone.CLOISTER_OF_FROST] =
-    {
-        { 0,  480,    0 },   -- Trial by Ice (Quest)
-        { 1,  481, 1171 },   -- Class Reunion (Quest)
-        { 2,  482, 1545 },   -- Trial-size Trial by Ice (Quest)
-    --  { 3,  483,    0 },   -- Waking the Beast (Quest)
-        { 4,  484,    0 },   -- Sugar-coated Directive (ASA4)
-    --  { 5,    ?,    0 },   -- *Trial by Ice (HTMBF)
-    },
-
-    [xi.zone.QUBIA_ARENA] =
-    {
-        {  0,  512,    0 },   -- The Rank 5 Mission (Mission 5-1)
-    --  {  1,  513, 1175 },   -- Come Into My Parlor (KS30)
-    --  {  2,  514, 1178 },   -- E-vase-ive Action (KS30)
-    --  {  3,  515, 1180 },   -- Infernal Swarm (KS30)
-        {  4,  516,    0 },   -- The Heir to the Light (San d'Oria 9-2)
-        {  5,  517, 1432 },   -- Shattering Stars (PLD LB5)
-        {  6,  518, 1433 },   -- Shattering Stars (DRK LB5)
-        {  7,  519, 1435 },   -- Shattering Stars (BRD LB5)
-        {  8,  520, 1130 },   -- Demolition Squad (BS60)
-    --  {  9,  521, 1552 },   -- Die by the Sword (BS30) -- TODO: mob damage type rotation mobskills furious flurry, smite of fury, whispers of ire
-        { 10,  522, 1552 },   -- Let Sleeping Dogs Die (BS30)
-        { 11,  523, 1130 },   -- Brothers D'Aurphe (BS60)
-        { 12,  524, 1131 },   -- Undying Promise (BS40) -- TODO: model size increases with each reraise
-        { 13,  525, 1131 },   -- Factory Rejects (BS40) -- TODO: dolls grow size/power based on hidden timer. (wikis disagree on TP moves? factory immune? factory model?)
-        { 14,  526, 1177 },   -- Idol Thoughts (BS50)
-        { 15,  527, 1177 },   -- An Awful Autopsy (BS50) -- TODO: mobskill Infernal Pestilence
-    --  { 16,  528, 1130 },   -- Celery (BS60) -- TODO: mobs do not have their specific weaknesses. mobskill Bane.
-    --  { 17,  529,    0 },   -- Mirror Images (Quest)
-        { 18,  530, 2556 },   -- A Furious Finale (DNC LB5)
-    --  { 19,  531,    0 },   -- Clash of the Comrades (Quest)
-    --  { 20,  532,    0 },   -- Those Who Lurk in Shadows (ACP7)
-        { 21,  533,    0 },   -- Beyond Infinity (Quest)
-    --  { 22,    ?, 4062 },   -- *Factory Rejects (SKC10)
-    --  { 23,    ?, 4063 },   -- *Demolition Squad (SKC20)
-    --  { 24,    ?, 4063 },   -- *Brothers D'Aurphe (SKC20)
-    --  { 25,    ?,    0 },   -- Mumor's Encore (Sunbreeze Festival)
-    },
-
-    [xi.zone.CLOISTER_OF_FLAMES] =
-    {
-        { 0,  544,    0 },   -- Trial by Fire (Quest)
-        { 1,  545, 1544 },   -- Trial-size Trial by Fire (Quest)
-    --  { 2,  546,    0 },   -- Waking the Beast (Quest)
-        { 3,  547,    0 },   -- Sugar-coated Directive (ASA4)
-    --  { 4,    ?,    0 },   -- *Trial by Fire (HTMBF)
-    },
-
-    [xi.zone.CLOISTER_OF_TREMORS] =
-    {
-        { 0,  576,    0 },   -- Trial by Earth (Quest)
-        { 1,  577, 1169 },   -- The Puppet Master (Quest)
-        { 2,  578, 1547 },   -- Trial-size Trial by Earth (Quest)
-    --  { 3,  579,    0 },   -- Waking the Beast (Quest)
-        { 4,  580,    0 },   -- Sugar-coated Directive (ASA4)
-    --  { 5,    ?,    0 },   -- *Trial by Earth (HTMBF)
-    },
-
-    [xi.zone.CLOISTER_OF_TIDES] =
-    {
-        { 0,  608,    0 },   -- Trial by Water (Quest)
-        { 1,  609, 1549 },   -- Trial-size Trial by Water (Quest)
-    --  { 2,  610,    0 },   -- Waking the Beast (Quest)
-        { 3,  611,    0 },   -- Sugar-coated Directive (ASA4)
-    --  { 4,    ?,    0 },   -- *Trial by Water (HTMBF)
-    },
-
 }
 
 -----------------------------------
@@ -534,7 +156,6 @@ local function checkReqs(player, npc, bfid, registrant)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
     local toauMission      = player:getCurrentMission(xi.mission.log_id.TOAU)
 --  local acpMission       = player:getCurrentMission(xi.mission.log_id.ACP) NOTE: UNUSED Until BCNMID 532 is Re-enabled
-    local asaMission       = player:getCurrentMission(xi.mission.log_id.ASA)
 
     local nationStatus    = player:getMissionStatus(player:getNation())
     local promathiaStatus = player:getCharVar('PromathiaStatus')
@@ -565,18 +186,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SCH and mainLevel >= 66
         end,
 
-        [194] = function() -- Quest: Shattering Stars (SAM LB5)
-            return mainJob == xi.job.SAM and mainLevel >= 66
-        end,
-
-        [195] = function() -- Quest: Shattering Stars (NIN LB5)
-            return mainJob == xi.job.NIN and mainLevel >= 66
-        end,
-
-        [196] = function() -- Quest: Shattering Stars (DRG LB5)
-            return mainJob == xi.job.DRG and mainLevel >= 66
-        end,
-
         [224] = function() -- Quest: The Moonlit Path
             return player:hasKeyItem(xi.ki.MOON_BAUBLE)
         end,
@@ -586,107 +195,8 @@ local function checkReqs(player, npc, bfid, registrant)
                 nationStatus == 2
         end,
 
-        [416] = function() -- Quest: Trial by Wind
-            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_WIND)
-        end,
-
-        [417] = function() -- Quest: Carbuncle Debacle
-            return player:getCharVar('CarbuncleDebacleProgress') == 6
-        end,
-
-        [418] = function() -- Quest: Trial-size Trial by Wind
-            return mainJob == xi.job.SMN and mainLevel >= 20
-        end,
-
-        [420] = function() -- ASA4: Sugar-coated Directive
-            return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-                player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
-        end,
-
-        [448] = function() -- Quest: Trial by Lightning
-            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING)
-        end,
-
-        [449] = function() -- Quest: Carbuncle Debacle
-            return player:getCharVar('CarbuncleDebacleProgress') == 3
-        end,
-
-        [450] = function() -- Quest: Trial-size Trial by Lightning
-            return mainJob == xi.job.SMN and mainLevel >= 20
-        end,
-
-        [452] = function() -- ASA4: Sugar-coated Directive
-            return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-                player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
-        end,
-
-        [480] = function() -- Quest: Trial by Ice
-            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_ICE)
-        end,
-
-        [481] = function() -- Quest: Class Reunion
-            return player:getCharVar('ClassReunionProgress') == 5
-        end,
-
-        [482] = function() -- Quest: Trial-size Trial by Ice
-            return mainJob == xi.job.SMN and mainLevel >= 20
-        end,
-
-        [484] = function() -- ASA4: Sugar-coated Directive
-            return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-                player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
-        end,
-
-        [516] = function() -- San d'Oria 9-2: The Heir to the Light
-            return sandoriaMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
-                nationStatus == 3
-        end,
-
         [530] = function() -- Quest: A Furious Finale (DNC LB5)
             return mainJob == xi.job.DNC and mainLevel >= 66
-        end,
-
-        [544] = function() -- Quest: Trial by Fire
-            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_FIRE)
-        end,
-
-        [545] = function() -- Quest: Trial-size Trial by Fire
-            return mainJob == xi.job.SMN and mainLevel >= 20
-        end,
-
-        [547] = function() -- ASA4: Sugar-coated Directive
-            return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-                player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)
-        end,
-
-        [576] = function() -- Quest: Trial by Earth
-            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_EARTH)
-        end,
-
-        [577] = function() -- Quest: The Puppet Master
-            return player:getCharVar('Quest[2][81]Prog') == 1
-        end,
-
-        [578] = function() -- Quest: Trial-size Trial by Earth
-            return mainJob == xi.job.SMN and mainLevel >= 20
-        end,
-
-        [580] = function() -- ASA4: Sugar-coated Directive
-            return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-                player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL)
-        end,
-
-        [608] = function() -- Quest: Trial by Water
-            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER)
-        end,
-
-        [609] = function() -- Quest: Trial-size Trial by Water
-            return mainJob == xi.job.SMN and mainLevel >= 20
-        end,
-
-        [611] = function() -- ASA4: Sugar-coated Directive
-            return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-                player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)
         end,
 
         [641] = function() -- ENM: Follow the White Rabbit
@@ -963,86 +473,6 @@ local function checkReqs(player, npc, bfid, registrant)
                 )
         end,
 
-        [1290] = function() -- NW Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.RED_CARD) and
-                npcId == getEntranceOffset(0)
-        end,
-
-        [1291] = function() -- SW Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.RED_CARD) and
-                npcId == getEntranceOffset(0)
-        end,
-
-        [1292] = function() -- NE Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.BLACK_CARD) and
-                npcId == getEntranceOffset(1)
-        end,
-
-        [1293] = function() -- SE Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.BLACK_CARD) and
-                npcId == getEntranceOffset(1)
-        end,
-
-        [1294] = function() -- CS Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                (
-                    (player:hasKeyItem(xi.ki.RED_CARD) and npcId == getEntranceOffset(0)) or
-                    (player:hasKeyItem(xi.ki.BLACK_CARD) and npcId == getEntranceOffset(1))
-                )
-        end,
-
-        [1296] = function() -- Central Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-            (
-                (player:hasKeyItem(xi.ki.RED_CARD) and npcId == getEntranceOffset(0)) or
-                (player:hasKeyItem(xi.ki.BLACK_CARD) and npcId == getEntranceOffset(1))
-            )
-        end,
-
-        [1298] = function() -- Temenos Western Tower
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1299] = function() -- Temenos Northern Tower
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1300] = function() -- Temenos Eastern Tower
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1301] = function() -- Central Temenos Basement
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1303] = function() -- Central Temenos 1st Floor
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1304] = function() -- Central Temenos 2nd Floor
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1305] = function() -- Central Temenos 3rd Floor
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1306] = function() -- Central Temenos 4th Floor
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
         [2721] = function() -- WOTG07: Purple, The New Black
             return player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK)
         end,
@@ -1109,44 +539,6 @@ local function checkSkip(player, bfid)
                     windurstMission == xi.mission.id.windurst.MOON_READING and
                     nationStatus > 4
                 )
-        end,
-
-        [416] = function() -- Quest: Trial by Wind
-            return player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND) or
-                player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
-        end,
-
-        [448] = function() -- Quest: Trial by Lightning
-            return player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING) or
-                player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
-        end,
-
-        [480] = function() -- Quest: Trial by Ice
-            return player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) or
-                player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
-        end,
-
-        [516] = function() -- San d'Oria 9-2: The Heir to the Light
-            return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT) or
-                (
-                    sandoriaMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
-                    nationStatus > 4
-                )
-        end,
-
-        [544] = function() -- Quest: Trial by Fire
-            return player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE) or
-                player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)
-        end,
-
-        [576] = function() -- Quest: Trial by Earth
-            return player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) or
-                player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)
-        end,
-
-        [608] = function() -- Quest: Trial by Water
-            return player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) or
-                player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
         end,
 
         [672] = function() -- PM5-3 U2: Head Wind
