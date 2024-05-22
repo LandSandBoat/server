@@ -833,6 +833,22 @@ INSERT INTO `instance_entities` VALUES (7701,17093481);
 INSERT INTO `instance_entities` VALUES (7701,17093482);
 INSERT INTO `instance_entities` VALUES (7701,17093483);
 
+-- Waking the Colossus/Divine Intereference
+-- mobs
+INSERT INTO `instance_entities` VALUES (7702,17093148);
+INSERT INTO `instance_entities` VALUES (7702,17093149);
+INSERT INTO `instance_entities` VALUES (7702,17093150);
+INSERT INTO `instance_entities` VALUES (7702,17093151);
+-- npcs
+INSERT INTO `instance_entities` VALUES (7702,17093419);
+INSERT INTO `instance_entities` VALUES (7702,17093420);
+INSERT INTO `instance_entities` VALUES (7702,17093421);
+INSERT INTO `instance_entities` VALUES (7702,17093422);
+INSERT INTO `instance_entities` VALUES (7702,17093423);
+INSERT INTO `instance_entities` VALUES (7702,17093424);
+INSERT INTO `instance_entities` VALUES (7702,17093425);
+INSERT INTO `instance_entities` VALUES (7702,17093440);
+
 -- Nyzul Isle Investigation
 -- npcs
 INSERT INTO `instance_entities` VALUES (7704,17092609); -- Chests

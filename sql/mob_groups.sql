@@ -3963,12 +3963,12 @@ INSERT INTO `mob_groups` VALUES (287,2066,77,'Imperial_Gear',0,128,0,0,0,75,75,0
 INSERT INTO `mob_groups` VALUES (288,2067,77,'Imperial_Gears',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (289,2800,77,'Naja_Salaheem',0,128,0,1000,0,75,75,1);
 INSERT INTO `mob_groups` VALUES (290,3332,77,'Razfahd',0,128,0,0,0,76,76,0);
-INSERT INTO `mob_groups` VALUES (291,82,77,'Alexander',0,128,0,0,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (291,82,77,'Alexander_NP',0,128,0,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (292,3327,77,'Raubahn',0,128,0,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (293,4489,77,'Zahak',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (294,334,77,'Balrahn',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (295,82,77,'Alexander',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (296,0,77,'Alexander_Image',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (295,7074,77,'Alexander_WTC',0,128,0,30000,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (296,7075,77,'Alexander_Image',0,128,0,2050,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (297,0,77,'Moon_Rabbit',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (298,0,77,'Unlucky_Beak',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (299,0,77,'Fortune_Ram',0,128,0,0,0,0,0,0);

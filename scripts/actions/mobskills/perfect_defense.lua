@@ -18,7 +18,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    xi.mobskills.mobBuffMove(mob, xi.effect.PERFECT_DEFENSE, 1, 0, skill:getParam())
+    xi.mobskills.mobBuffMove(mob, xi.effect.PERFECT_DEFENSE, 10000, 0, 10)
 
     skill:setMsg(xi.msg.basic.USES)
     return xi.effect.PERFECT_DEFENSE
