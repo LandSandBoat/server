@@ -26,6 +26,8 @@ end
 
 local moogleTriggerEvent =
 {
+    -- TODO: Does there need to be onZoneIn here?
+
     ['Moogle'] =
     {
         onTrigger = function(player, npc)
