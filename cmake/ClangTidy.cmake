@@ -12,12 +12,12 @@ if(ENABLE_CLANG_TIDY)
     message(WARNING "CMake_RUN_CLANG_TIDY is ON but clang-tidy is not found!")
     set(CMAKE_CXX_CLANG_TIDY "" CACHE STRING "" FORCE)
   else()
+    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND};-header-filter='(${CMAKE_SOURCE_DIR}/src/.*|${CMAKE_SOURCE_DIR}/ext/.*|${CMAKE_BINARY_DIR}/.*)';-format-style='file'")
     if(ENABLE_CLANG_TIDY_AUTO_FIX)
-      set(CLANG_TIDY_FIX "-fix")
+      set(CMAKE_CXX_CLANG_TIDY "${CMAKE_CXX_CLANG_TIDY};-fix")
     endif()
-    message(STATUS "CLANG_TIDY_FIX: ${CLANG_TIDY_FIX}")
-    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND};-header-filter='${CMAKE_SOURCE_DIR}/src/*';${CLANG_TIDY_FIX};-format-style='file'")
   endif()
+  message(STATUS "CMAKE_CXX_CLANG_TIDY: ${CMAKE_CXX_CLANG_TIDY}")
 
   # Create a preprocessor definition that depends on .clang-tidy content so
   # the compile command will change when .clang-tidy changes.  This ensures

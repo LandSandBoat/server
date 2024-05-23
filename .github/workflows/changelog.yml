@@ -20,7 +20,7 @@ jobs:
     - name: Generate changelog
       run: |
           # https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types
-          python3 tools/generate_changelog.py ci ${{ github.event.repository.name }}
+          python3 tools/generate_changelog.py ci ${{ github.repository }}
           cat changelog-$(date +'%Y-%m-%d').md
     - name: Capture date
       id: date

@@ -15,8 +15,8 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 option(ENABLE_IPO "Enable Interprocedural Optimization, aka Link Time Optimization (LTO)" ON)
-
-if(ENABLE_IPO)
+set(CMAKE_INTERPROCEDURAL_OPTIMIZATION OFF)
+if(ENABLE_IPO AND NOT CMAKE_BUILD_TYPE STREQUAL Debug)
   include(CheckIPOSupported)
   check_ipo_supported(
     RESULT
@@ -24,11 +24,12 @@ if(ENABLE_IPO)
     OUTPUT
     output)
   if(result)
-    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
   else()
     message(STATUS "IPO is not supported: ${output}")
   endif()
 endif()
+message(STATUS "CMAKE_INTERPROCEDURAL_OPTIMIZATION: ${CMAKE_INTERPROCEDURAL_OPTIMIZATION} (this implies /GL or -flto)")
 
 # Snippet from GLM: https://github.com/g-truc/glm (MIT)
 # NOTE: fast-math was on by default before the CMake build refactoring!
@@ -59,13 +60,20 @@ if(MSVC)
         /Oy- # Frame-Pointer Omission
         /MP # Build with Multiple Processes
         /bigobj # Allow bigger .obj files, which we have from mainly the sol templating
+        /utf-8 # Treat source files as UTF-8. This is needed because of certain symbols inside fmtlib's code. u-second, etc.
     )
 
-    if(CMAKE_CONFIGURATION_TYPES STREQUAL Debug)
-        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /INCREMENTAL /SAFESEH:NO")
+    if(CMAKE_BUILD_TYPE STREQUAL Debug)
+        # TODO: Where is this /Zi coming from?
+        # Command line warning D9025: overriding '/ZI' with '/Zi'
+        string(REPLACE "/Zi" "/ZI" CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
+        string(REPLACE "/Zi" "/ZI" CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
+        string(REPLACE "/Zi" "/ZI" CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO}")
+        string(REPLACE "/Zi" "/ZI" CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
+
+        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /INCREMENTAL /SAFESEH:NO /EDITANDCONTINUE")
         list(APPEND FLAGS_AND_DEFINES
-            # TODO: Restore old flag
-            # /ZI # Omit Default Library Name
+            /ZI # Omit Default Library Name
             /GR # Enable RTTI
         )
     else()

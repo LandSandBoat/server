@@ -17,7 +17,7 @@ class HXIClient:
         self.server = server
         self.slot = slot
         self.debug_packets = debug_packets
-        self.xiloaderVersionNumber = "1.0.0" # compatible xiloader version
+        self.xiloaderVersionNumber = "1.1.1"  # compatible xiloader version
 
         # Read from version.conf default
         if client_str == "":
@@ -39,6 +39,9 @@ class HXIClient:
     def login(self):
         self.ssl_context = ssl.create_default_context()
         self.ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+        self.ssl_context.minimum_version = ssl.TLSVersion.TLSv1_3
+        self.ssl_context.maximum_version = ssl.TLSVersion.TLSv1_3
+
         # TODO: load CA cert chain from windows/linux. For now, ignore remote verification.
         self.ssl_context.check_hostname = False
         self.ssl_context.verify_mode = ssl.CERT_NONE
@@ -60,7 +63,7 @@ class HXIClient:
 
         data[0x39] = 0x10  # Auto-login
 
-	# 17 bytes of reserved space starting at 0x50
+        # 17 bytes of reserved space starting at 0x50
         util.memcpy(self.password, 0, data, 0x30, len(self.password))
 
         util.memcpy(self.xiloaderVersionNumber, 0, data, 0x61, 5)
