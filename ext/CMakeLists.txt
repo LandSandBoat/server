@@ -1,5 +1,6 @@
 # add_subdirectory(lua) # Handled globally
-# add_subdirectory(mysql) # Handled globally
+# add_subdirectory(mariadb) # Handled globally
+# add_subdirectory(mariadbcpp) # Handled globally
 # add_subdirectory(zmq) # Handled globally
 # add_subdirectory(openssl) # Handled globally
 add_subdirectory(concurrentqueue)
@@ -8,7 +9,7 @@ add_subdirectory(sol)
 option(TRACY_ENABLE "Enable Tracy profiling." OFF)
 
 # Also handle close flags:
-if (ENABLE_TRACY OR TRACY_ENABLED OR TRACY)
+if(ENABLE_TRACY OR TRACY_ENABLED OR TRACY)
     set(TRACY_ENABLE ON)
 endif()
 
@@ -17,7 +18,7 @@ message(STATUS "TRACY_ENABLE: ${TRACY_ENABLE}")
 # CPM Modules
 if(TRACY_ENABLE)
     # Tracy version tag, without the leading 'v'
-    set(TRACY_VERSION 0.9)
+    set(TRACY_VERSION 0.10)
 
     # Download client library
     CPMAddPackage(
@@ -34,7 +35,7 @@ if(TRACY_ENABLE)
     )
 
     # Download Win32 server executables
-    if (MSVC)
+    if(MSVC)
         message(STATUS "Downloading Tracy client")
         file(DOWNLOAD
             https://github.com/wolfpld/tracy/releases/download/v${TRACY_VERSION}/Tracy-${TRACY_VERSION}.7z
@@ -74,11 +75,10 @@ CPMAddPackage(
         "SPDLOG_FMT_EXTERNAL ON"
 ) # defines: spdlog
 
-# NOTE: Using the 'release-2.0' branch
 CPMAddPackage(
     NAME recastnavigation
     GITHUB_REPOSITORY recastnavigation/recastnavigation
-    GIT_TAG 67c36bda750f36b2b4152db57a23170ed7a0683c
+    GIT_TAG cd898904b72a300011fbb24d578620bafa08ef2c
     OPTIONS
         "RECASTNAVIGATION_DEMO OFF"
         "RECASTNAVIGATION_TESTS OFF"
@@ -111,7 +111,7 @@ endif()
 CPMAddPackage(
     NAME efsw
     GITHUB_REPOSITORY SpartanJ/efsw
-    GIT_TAG 74ca09bff89bc8de1f7b8bf3faaa6275ce23b4c5
+    GIT_TAG 341934765471e4074e90bb5205ff4a65c16499c6
     OPTIONS
         "VERBOSE OFF"
         "NO_ATOMICS OFF"
@@ -127,6 +127,13 @@ CPMAddPackage(
     GIT_TAG 5332bbd46dcba5f028a844795cc0931e9f2ffdf4
 ) # defines: jthread-lite
 
+# TODO: std::expected lands in C++23. Remove this once all compilers for all platforms implement.
+CPMAddPackage(
+    NAME expected-lite
+    GITHUB_REPOSITORY martinmoene/expected-lite
+    GIT_TAG 45a54fac224e5aae5f8e70bb1c2423181ae554da
+) # defines: expected-lite
+
 CPMAddPackage(
     NAME cpp-httplib
     GITHUB_REPOSITORY yhirose/cpp-httplib
@@ -136,7 +143,7 @@ CPMAddPackage(
 CPMAddPackage(
     NAME json
     GITHUB_REPOSITORY nlohmann/json
-    GIT_TAG v3.11.2
+    GIT_TAG 254395e5f7731b5595e7c11ac4b929c923582114
 ) # defines: nlohmann_json::nlohmann_json
 
 CPMAddPackage(
@@ -144,9 +151,7 @@ CPMAddPackage(
     GITHUB_REPOSITORY imneme/pcg-cpp
     GIT_TAG 428802d1a5634f96bcd0705fab379ff0113bcf13
 ) # defines: pcg-cpp
-
-# pcg-cpp does not include cmake
-if(pcg-cpp_ADDED)
+if(pcg-cpp_ADDED) # pcg-cpp does not include cmake
     add_library(pcg-cpp INTERFACE)
     target_include_directories(pcg-cpp SYSTEM INTERFACE ${pcg-cpp_SOURCE_DIR}/include/)
 endif()
@@ -205,11 +210,34 @@ if(asio_ADDED)
     endif()
 endif()
 
+CPMAddPackage(
+    NAME bcrypt
+    GITHUB_REPOSITORY zach2good/libbcrypt
+    GIT_TAG fb50b847ae760f16ab84a367452027b246df13e1
+    DOWNLOAD_ONLY ON
+) # defines: bcrypt
+if(bcrypt_ADDED) # bcrypt's cmake isn't suitable for us
+    add_library(bcrypt
+        STATIC
+            ${bcrypt_SOURCE_DIR}/src/bcrypt.c
+            ${bcrypt_SOURCE_DIR}/src/crypt_blowfish.c
+            ${bcrypt_SOURCE_DIR}/src/crypt_gensalt.c
+            ${bcrypt_SOURCE_DIR}/src/wrapper.c
+            ${bcrypt_SOURCE_DIR}/src/x86.S
+    )
+    target_include_directories(bcrypt
+        SYSTEM INTERFACE
+            ${bcrypt_SOURCE_DIR}/include/
+            $<$<PLATFORM_ID:Linux>:${bcrypt_SOURCE_DIR}/include/bcrypt/>
+    )
+endif()
+
 set(EXTERNAL_LIBS
     fmt::fmt
     spdlog
     concurrentqueue
     mariadbclient
+    mariadbcpp
     RecastNavigation::Recast
     RecastNavigation::Detour
     fast_obj
@@ -218,10 +246,12 @@ set(EXTERNAL_LIBS
     task_system
     efsw
     jthread-lite
+    expected-lite
     httplib::httplib
     nlohmann_json::nlohmann_json
     pcg-cpp
     asio
+    bcrypt
 )
 
 if(WIN32)

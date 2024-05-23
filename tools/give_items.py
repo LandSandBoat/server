@@ -23,9 +23,9 @@ password = None
 
 
 def connect():
-    print("Loading conf/map.conf")
+    print("Loading settings/network.lua")
     # Grab mysql credentials
-    filename = "../conf/map.conf"
+    filename = "../settings/network.lua"
 
     global credentials, db, cur, database, host, port, login, password
 
@@ -34,15 +34,15 @@ def connect():
             line = f.readline()
             if not line:
                 break
-            match = re.match(r"(mysql_\w+):\s+(\S+)", line)
+            match = re.match(r"(SQL_\w+)\s+=\s+(\S+)", line)
             if match:
                 credentials[match.group(1)] = match.group(2)
 
-    database = credentials["mysql_database"]
-    host = credentials["mysql_host"]
-    port = int(credentials["mysql_port"])
-    login = credentials["mysql_login"]
-    password = credentials["mysql_password"]
+    database = credentials["SQL_DATABASE"]
+    host = credentials["SQL_HOST"]
+    port = int(credentials["SQL_PORT"])
+    login = credentials["SQL_LOGIN"]
+    password = credentials["SQL_PASSWORD"]
 
     try:
         db = mariadb.connect(
