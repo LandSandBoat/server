@@ -523,6 +523,8 @@ void CLatentEffectContainer::CheckLatentsJobLevel()
         {
             case LATENT::JOB_MULTIPLE:
             case LATENT::JOB_MULTIPLE_AT_NIGHT:
+            case LATENT::JOB_LEVEL_BELOW:
+            case LATENT::JOB_LEVEL_ABOVE:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
