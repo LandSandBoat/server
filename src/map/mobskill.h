@@ -37,6 +37,14 @@ enum SKILLFLAG
     SKILLFLAG_BLOODPACT_WARD = 0x080,
 };
 
+enum AOE_TYPE
+{
+    NONE      = 0,
+    ROUND     = 1, // Normal AoE type
+    CONE      = 4, // Forward conal AoE
+    REAR_CONE = 8, // conal AoE behind the source
+};
+
 #define MAX_MOBSKILL_ID 4262
 
 class CMobSkill
