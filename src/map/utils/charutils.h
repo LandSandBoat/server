@@ -97,6 +97,7 @@ namespace charutils
     void   DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob);
 
     void TrySkillUP(CCharEntity* PChar, SKILLTYPE SkillID, uint8 lvl, bool forceSkillUp = false, bool useSubSkill = false);
+    bool ArtsBonusActive(CCharEntity* PChar, SKILLTYPE SkillID);
     void BuildingCharSkillsTable(CCharEntity* PChar);
     void BuildingCharWeaponSkills(CCharEntity* PChar);
     void BuildingCharAbilityTable(CCharEntity* PChar);

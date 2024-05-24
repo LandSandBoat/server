@@ -3029,6 +3029,14 @@ namespace charutils
         }
     }
 
+    bool ArtsBonusActive(CCharEntity* PChar, SKILLTYPE SkillID)
+    {
+        return (SkillID >= SKILL_DIVINE_MAGIC && SkillID <= SKILL_ENFEEBLING_MAGIC &&
+                PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE })) ||
+               (SkillID >= SKILL_ENFEEBLING_MAGIC && SkillID <= SKILL_DARK_MAGIC &&
+                PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK }));
+    }
+
     /************************************************************************
      *                                                                       *
      *  Collect the work table of the character skills based on real.        *
@@ -3092,8 +3100,7 @@ namespace charutils
             int16  skillBonus   = 0;
 
             // apply arts bonuses
-            if ((i >= SKILL_DIVINE_MAGIC && i <= SKILL_ENFEEBLING_MAGIC && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE })) ||
-                (i >= SKILL_ENFEEBLING_MAGIC && i <= SKILL_DARK_MAGIC && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK })))
+            if (ArtsBonusActive(PChar, static_cast<SKILLTYPE>(i)))
             {
                 uint16 artsSkill    = battleutils::GetMaxSkill(SKILL_ENHANCING_MAGIC, JOB_RDM, PChar->GetMLevel());                  // B+ skill
                 uint16 skillCapD    = battleutils::GetMaxSkill((SKILLTYPE)i, JOB_SCH, PChar->GetMLevel());                           // D skill cap
@@ -3445,7 +3452,15 @@ namespace charutils
 
                 if ((CurSkill / 10) < (CurSkill + SkillAmount) / 10) // if gone up a level
                 {
-                    PChar->WorkingSkills.skill[SkillID] += 1;
+                    // Light/Dark Arts artificially boost certain skills, logic is too complex to duplicate, so just recalculate it all (similar to using the JA)
+                    if (ArtsBonusActive(PChar, SkillID))
+                    {
+                        charutils::BuildingCharSkillsTable(PChar);
+                    }
+                    else
+                    {
+                        PChar->WorkingSkills.skill[SkillID] += 1;
+                    }
                     PChar->pushPacket(new CCharSkillsPacket(PChar));
                     PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, SkillID, (CurSkill + SkillAmount) / 10, 53));
 
