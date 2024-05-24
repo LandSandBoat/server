@@ -13,7 +13,6 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(7, -208, -2, -556, -202, 0, -551)  -- map 5 porter (white)
     zone:registerTriggerArea(8,  323, -2, 591, 329, 0, 598)     -- map 6 east porter (white)
     zone:registerTriggerArea(9,  270, -2, 591, 276, 0, 598)     -- map 6 west porter (blue)
-    zone:registerTriggerArea(10, 442, -2, -557, 450, 0, -550)   -- map 7 porter (white)
     zone:registerTriggerArea(11, -63, -10,  56, -57, -8,  62)   -- map 8 NW/Arrapago porter
     zone:registerTriggerArea(12,  17, -6,  56,  23, -4,  62)    -- map 8 NE/Silver Sea/Khim porter
     zone:registerTriggerArea(13, -63, -10, -23, -57, -8, -16)   -- map 8 SW/Zhayolm/bird camp porter
@@ -29,6 +28,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(23, 394, -1, -619, 487, 1, -540)   -- map 7, Whole zone right before the door (as per BG-Wiki). https://www.bg-wiki.com/ffxi/Aht_Urhgan_Mission_9. ToAU mission 9.
     zone:registerTriggerArea(24,  52, -1, 774, 67, 1, 778)      -- transformations (quest)
     zone:registerTriggerArea(25, 134, -1, -584, 146, 1, -577)   -- transformations (quest)
+    zone:registerTriggerArea(26, 442, -2, -557, 450, 0, -550)   -- map 7 porter (white) (moved after region 23 to avoid spamming events)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -95,7 +95,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             player:startEvent(201)
         end,
 
-        [10] = function(x)
+        [26] = function(x)
             player:startEvent(213)
         end,
 
