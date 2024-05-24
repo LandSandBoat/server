@@ -279,7 +279,7 @@ INSERT INTO `item_latents` VALUES (13143,368,25,13,19);
 INSERT INTO `item_latents` VALUES (13143,368,25,13,193);
 
 -- Uggalepih Pendant
-INSERT INTO `item_latents` VALUES (13145,28,8,4,51);     -- "Magic Atk. Bonus" while MP <51%
+INSERT INTO `item_latents` VALUES (13145,28,8,45,51);     -- "Magic Atk. Bonus" while MP <51%
 
 -- Brisingamen +1
 INSERT INTO `item_latents` VALUES (13162,2,12,26,0);     -- Daytime: HP +12
@@ -1249,7 +1249,7 @@ INSERT INTO `item_latents` VALUES (15504,23,3,53,0);     -- ATK +3 in areas insi
 INSERT INTO `item_latents` VALUES (15504,25,3,53,0);     -- ACC +3 in areas inside own nation's control
 
 -- Parade Gorget
-INSERT INTO `item_latents` VALUES (15506,369,1,1,85);    -- Refresh when HP >=85%
+INSERT INTO `item_latents` VALUES (15506,369,1,46,85);    -- Refresh when HP >=85%
 
 -- Diabolos's Torque
 INSERT INTO `item_latents` VALUES (15516,24,7,52,8);     -- ranged acc+8 in Dark weather
