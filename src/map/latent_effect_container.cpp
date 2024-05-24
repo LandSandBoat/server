@@ -432,13 +432,15 @@ void CLatentEffectContainer::CheckLatentsHours()
 * activates them if the conditions are met.                             *
 *                                                                       *
  ************************************************************************/
-void CLatentEffectContainer::CheckLatentsPartyMembers(size_t members)
+void CLatentEffectContainer::CheckLatentsPartyMembers(size_t members, size_t trustCount)
 {
-    ProcessLatentEffects([this, members](CLatentEffect& latentEffect) {
+    ProcessLatentEffects([this, members, trustCount](CLatentEffect& latentEffect) {
+        size_t totalMembers = members + trustCount;
+
         switch (latentEffect.GetConditionsID())
         {
             case LATENT::PARTY_MEMBERS:
-                if (latentEffect.GetConditionsValue() <= members)
+                if (latentEffect.GetConditionsValue() <= totalMembers)
                 {
                     return latentEffect.Activate();
                 }
@@ -447,7 +449,7 @@ void CLatentEffectContainer::CheckLatentsPartyMembers(size_t members)
                     return latentEffect.Deactivate();
                 }
             case LATENT::PARTY_MEMBERS_IN_ZONE:
-                if (latentEffect.GetConditionsValue() <= members)
+                if (latentEffect.GetConditionsValue() <= totalMembers)
                 {
                     auto inZone = 0;
                     for (size_t m = 0; m < members; ++m)
@@ -457,6 +459,12 @@ void CLatentEffectContainer::CheckLatentsPartyMembers(size_t members)
                         {
                             inZone++;
                         }
+                    }
+
+                    auto* PLeader = (CCharEntity*)m_POwner->PParty->GetLeader();
+                    if (m_POwner->getZone() == PLeader->getZone())
+                    {
+                        inZone = inZone + static_cast<int>(trustCount);
                     }
 
                     if (inZone == latentEffect.GetConditionsValue())
@@ -777,8 +785,19 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             expression = !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_FOOD);
             break;
         case LATENT::PARTY_MEMBERS:
-            expression = m_POwner->PParty != nullptr && latentEffect.GetConditionsValue() <= m_POwner->PParty->members.size();
+        {
+            size_t partyCount = 0;
+            size_t trustCount = 0;
+            if (m_POwner->PParty != nullptr)
+            {
+                auto PLeader = (CCharEntity*)m_POwner->PParty->GetLeader();
+                trustCount = PLeader->PTrusts.size();
+                partyCount = m_POwner->PParty->members.size();
+            }
+
+            expression = latentEffect.GetConditionsValue() <= (partyCount + trustCount);
             break;
+        }
         case LATENT::PARTY_MEMBERS_IN_ZONE:
         {
             auto inZone = 0;
@@ -791,7 +810,14 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                         ++inZone;
                     }
                 }
+                
+                auto PLeader = (CCharEntity*)m_POwner->PParty->GetLeader();
+                if (m_POwner->getZone() == PLeader->getZone())
+                {
+                    inZone = inZone + static_cast<int>(PLeader->PTrusts.size());
+                }
             }
+
             expression = latentEffect.GetConditionsValue() <= inZone;
             break;
         }
@@ -839,13 +865,14 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                             break;
                         }
                     }
-                    for (auto* trust : static_cast<CCharEntity*>(member)->PTrusts)
+                }
+
+                for (auto* trust : static_cast<CCharEntity*>(m_POwner->PParty->GetLeader())->PTrusts)
+                {
+                    if (trust->GetMJob() == latentEffect.GetConditionsValue())
                     {
-                        if (trust->GetMJob() == latentEffect.GetConditionsValue())
-                        {
-                            expression = true;
-                            break;
-                        }
+                        expression = true;
+                        break;
                     }
                 }
             }

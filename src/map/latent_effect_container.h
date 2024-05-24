@@ -52,7 +52,7 @@ public:
     void CheckLatentsMoonPhase();
     void CheckLatentsHours();
     void CheckLatentsWeekDay();
-    void CheckLatentsPartyMembers(size_t members);
+    void CheckLatentsPartyMembers(size_t members, size_t trustCount);
     void CheckLatentsPartyJobs();
     void CheckLatentsPartyAvatar();
     void CheckLatentsJobLevel();
