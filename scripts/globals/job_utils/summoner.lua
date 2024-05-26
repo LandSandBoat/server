@@ -204,7 +204,7 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility
 
         -- check if avatar is using a move already
         if petAction == xi.action.PET_MOBABILITY_FINISH then
-            return xi.msg.basic.PET_CANNOT_DO_ACTION, 0 -- TODO: verify exact message in packet.
+            return 0, 0
         end
 
         local baseMPCost = getBaseMPCost(player, petAbility)
