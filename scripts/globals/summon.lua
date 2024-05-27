@@ -133,7 +133,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     -- Only bonuses are applied for avatar level correction
     if shouldApplyLevelCorrection then
         if levelDiff > 0 then
-            levelCorrection = math.max((levelDiff * 2), 0)
+            levelCorrection = math.max(levelDiff * 2, 0)
         end
     end
 
@@ -143,10 +143,10 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     -- Normal hits computed first
     local hitrateSubsequent = 75 + dAcc + levelCorrection
     local hitrateFirst      = hitrateSubsequent + 50 -- First hit gets a +100 ACC bonus which translates to +50 hit
-    hitrateSubsequent = hitrateSubsequent / 100
-    hitrateFirst      = hitrateFirst / 100
-    hitrateSubsequent = utils.clamp(hitrateSubsequent, minHitRate, maxHitRate)
-    hitrateFirst      = utils.clamp(hitrateFirst, minHitRate, maxHitRate)
+    hitrateSubsequent       = hitrateSubsequent / 100
+    hitrateFirst            = hitrateFirst / 100
+    hitrateSubsequent       = utils.clamp(hitrateSubsequent, minHitRate, maxHitRate)
+    hitrateFirst            = utils.clamp(hitrateFirst, minHitRate, maxHitRate)
 
     -- Compute hits first so we can exit early
     local firstHitLanded   = false
@@ -231,7 +231,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             end
 
             local qRatio = getRandRatio(wRatio)                  -- Get a random ratio from min and max.
-            local pDif   = qRatio * (1 + (math.random() * 0.05)) -- Final pDif is qRatio randomized with a 1-1.05 multiplier.
+            local pDif   = qRatio * (1 + math.random() * 0.05) -- Final pDif is qRatio randomized with a 1-1.05 multiplier.
 
             if isCrit then
                 pDif = pDif * critAttackBonus
@@ -348,27 +348,20 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
     end
 
     -- Calculate Blood Pact Damage before stoneskin
-    dmg = dmg + dmg * mob:getMod(xi.mod.BP_DAMAGE) / 100
+    dmg = math.floor(dmg + dmg * mob:getMod(xi.mod.BP_DAMAGE) / 100)
+
+    if dmg < 0 then
+        return dmg
+    end
 
     -- handle One For All, Liement
     if skilltype == xi.attackType.MAGICAL then
-        local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, damagetype) -- Apply checks for Liement, MDT/MDTII/DT
-
-        dmg = math.floor(dmg * targetMagicDamageAdjustment)
-        if dmg < 0 then
-            return dmg
-        end
-
         dmg = utils.oneforall(target, dmg)
     end
 
     -- Handle Phalanx
     if dmg > 0 then
         dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
-    end
-
-    if skilltype == xi.attackType.MAGICAL then
-        dmg = utils.oneforall(target, dmg)
     end
 
     -- handling stoneskin

@@ -8,13 +8,10 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    local dINT   = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
-    local tp     = pet:getTP()
-    local damage = math.floor(325 + 0.025 * tp)
-
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    damage = damage + (dINT * 1.5)
+    local damage = math.floor(325 + 0.025 * pet:getTP() + (pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)) * 1.5)
+
     damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.EARTH, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
     damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.EARTH, petskill)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, 1)
