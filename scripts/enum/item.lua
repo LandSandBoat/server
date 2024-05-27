@@ -865,6 +865,7 @@ xi.item =
     CORAL_CREST_KEY                     = 1659,
     BRONZE_KEY                          = 1660,
     CATHEDRAL_TAPESTRY                  = 1662,
+    CHAMELEON_DIAMOND                   = 1666,
     CLUSTER_CORE                        = 1667,
     CLEAN_SNAP_ROD                      = 1668,
     PINCH_OF_HOARY_BOMB_ASH             = 1669,
