@@ -516,6 +516,7 @@ public:
 
     void recalculateSkillsTable();
     void recalculateAbilitiesTable();
+    auto getEntitiesInRange(CLuaBaseEntity* PLuaEntityTarget, sol::variadic_args va) -> sol::table;
 
     // Parties and Alliances
     auto   getParty() -> sol::table;
