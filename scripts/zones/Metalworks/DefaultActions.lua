@@ -13,6 +13,7 @@ return {
     ['High_Bear']   = { event = 730 },
     ['Hungry_Wolf'] = { event = 421 },
     ['Iron_Eater']  = { event = 604 },
+    ['Izabele']     = { event = 745 },
     ['Karst']       = { event = 601 },
     ['Lucius']      = { event = 320 },
     ['Naji']        = { event = 700 },
