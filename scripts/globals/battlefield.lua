@@ -295,7 +295,7 @@ xi.battlefield.id =
     HAPPY_CASTER                               = 1121,
     OMENS                                      = 1122,
     ACHIEVING_TRUE_POWER                       = 1123,
-    SHIELD_OF_DIPLOMACY                        = 1124,
+    SHIELD_OF_DIPLOMACY                        = 1124, -- Converted
     MAKING_A_MOCKERY                           = 1152,
     SHADOWS_OF_THE_MIND                        = 1153,
     BEAST_WITHIN                               = 1154,
@@ -915,6 +915,11 @@ end
 function Battlefield:onEventFinishBattlefield(player, csid, option, npc)
 end
 
+-- Override this function if necessary to perform additional steps in battlefield
+-- initialise.
+function Battlefield:setupBattlefield(battlefield)
+end
+
 function Battlefield:onBattlefieldInitialise(battlefield)
     if self.loot and #self.loot > 0 then
         battlefield:setLocalVar('loot', 1)
@@ -935,6 +940,8 @@ function Battlefield:onBattlefieldInitialise(battlefield)
     for mobId, path in pairs(self.paths) do
         GetMobByID(mobId):pathThrough(path, xi.path.flag.PATROL)
     end
+
+    self:setupBattlefield(battlefield)
 end
 
 function Battlefield:onBattlefieldTick(battlefield, tick)

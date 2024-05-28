@@ -332,10 +332,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.PUP and mainLevel >= 66
         end,
 
-        [1124] = function() -- TOAU22: Shield of Diplomacy
-            return toauMission == xi.mission.id.toau.SHIELD_OF_DIPLOMACY and toauStatus == 2
-        end,
-
         [1154] = function() -- Quest: The Beast Within (BLU LB5)
             return mainJob == xi.job.BLU and mainLevel >= 66
         end,
