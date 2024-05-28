@@ -81,16 +81,6 @@ local battlefields =
     --  { 5,    ?,    0 },   -- Sealed Fate (Master Trial)
     },
 
-    [xi.zone.TALACCA_COVE] =
-    {
-    --  { 0, 1088,    0 },   -- Call to Arms (ISNM)
-    --  { 1, 1089,    0 },   -- Compliments to the Chef (ISNM)
-    --  { 2, 1090,    0 },   -- Puppetmaster Blues (Quest)
-        { 3, 1091, 2332 },   -- Breaking the Bonds of Fate (COR LB5)
-        { 4, 1092,    0 },   -- Legacy of the Lost (TOAU35)
-    --  { 5,    ?,    0 },   -- *Legacy of the Lost (HTMBF)
-    },
-
     [xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
     {
     --  { 0, 1120,    0 },   -- Tough Nut to Crack (ISNM)
@@ -331,10 +321,6 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [1091] = function() -- Quest: Breaking the Bonds of Fate (COR LB5)
             return mainJob == xi.job.COR and mainLevel >= 66
-        end,
-
-        [1092] = function() -- TOAU35: Legacy of the Lost
-            return toauMission == xi.mission.id.toau.LEGACY_OF_THE_LOST
         end,
 
         [1122] = function() -- Quest: Omens (BLU AF Quest 2)
