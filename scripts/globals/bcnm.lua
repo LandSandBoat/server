@@ -100,16 +100,6 @@ local battlefields =
         { 4, 1124,    0 },   -- Shield of Diplomacy (TOAU22)
     },
 
-    [xi.zone.JADE_SEPULCHER] =
-    {
-    --  { 0, 1152,    0 },   -- Making a Mockery (ISNM)
-    --  { 1, 1153,    0 },   -- Shadows of the Mind (ISNM)
-        { 2, 1154, 2331 },   -- The Beast Within (BLU LB5)
-    --  { 3, 1155,    0 },   -- Moment of Truth (Quest)
-        { 4, 1156,    0 },   -- Puppet in Peril (TOAU29)
-    --  { 5,    ?,    0 },   -- *Puppet in Peril (HTMBF)
-    },
-
     [xi.zone.LA_VAULE_S] =
     {
     --  { 0,    ?,    0 },   -- Splitting Heirs (S)
@@ -362,10 +352,6 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [1154] = function() -- Quest: The Beast Within (BLU LB5)
             return mainJob == xi.job.BLU and mainLevel >= 66
-        end,
-
-        [1156] = function() -- TOAU29: Puppet in Peril
-            return toauMission == xi.mission.id.toau.PUPPET_IN_PERIL and toauStatus == 1
         end,
 
         [2721] = function() -- WOTG07: Purple, The New Black
