@@ -81,15 +81,6 @@ local battlefields =
     --  { 5,    ?,    0 },   -- Sealed Fate (Master Trial)
     },
 
-    [xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
-    {
-    --  { 0, 1120,    0 },   -- Tough Nut to Crack (ISNM)
-    --  { 1, 1121,    0 },   -- Happy Caster (ISNM)
-        { 2, 1122,    0 },   -- Omens (BLU AF2)
-        { 3, 1123, 2333 },   -- Achieving True Power (PUP LB5)
-        { 4, 1124,    0 },   -- Shield of Diplomacy (TOAU22)
-    },
-
     [xi.zone.LA_VAULE_S] =
     {
     --  { 0,    ?,    0 },   -- Splitting Heirs (S)
@@ -134,12 +125,10 @@ local function checkReqs(player, npc, bfid, registrant)
     local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
     local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
-    local toauMission      = player:getCurrentMission(xi.mission.log_id.TOAU)
 --  local acpMission       = player:getCurrentMission(xi.mission.log_id.ACP) NOTE: UNUSED Until BCNMID 532 is Re-enabled
 
     local nationStatus    = player:getMissionStatus(player:getNation())
     local promathiaStatus = player:getCharVar('PromathiaStatus')
-    local toauStatus      = player:getMissionStatus(xi.mission.log_id.TOAU)
 
     local function getEntranceOffset(offset)
         return zones[player:getZoneID()].npc.ENTRANCE_OFFSET + offset
@@ -321,11 +310,6 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [1091] = function() -- Quest: Breaking the Bonds of Fate (COR LB5)
             return mainJob == xi.job.COR and mainLevel >= 66
-        end,
-
-        [1122] = function() -- Quest: Omens (BLU AF Quest 2)
-            return player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS) == xi.questStatus.QUEST_ACCEPTED and
-                xi.quest.getVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS, 'Prog') == 0
         end,
 
         [1123] = function() -- Quest: Achieving True Power (PUP LB5)

@@ -293,7 +293,7 @@ xi.battlefield.id =
     LEGACY_OF_THE_LOST                         = 1092, -- Converted
     TOUGH_NUT_TO_CRACK                         = 1120,
     HAPPY_CASTER                               = 1121,
-    OMENS                                      = 1122,
+    OMENS                                      = 1122, -- Converted
     ACHIEVING_TRUE_POWER                       = 1123,
     SHIELD_OF_DIPLOMACY                        = 1124, -- Converted
     MAKING_A_MOCKERY                           = 1152,
@@ -1011,6 +1011,9 @@ function Battlefield:onBattlefieldStatusChange(battlefield, status)
     end
 end
 
+function Battlefield:battlefieldEntry(player, battlefield)
+end
+
 function Battlefield:onBattlefieldEnter(player, battlefield)
     player:setLocalVar('battlefieldID', battlefield:getID())
 
@@ -1092,6 +1095,8 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     if self.experimental then
         player:printToPlayer('This battlefield has been marked as experimental.  Enemy levels have increased!', xi.msg.channel.NS_SHOUT)
     end
+
+    self:battlefieldEntry(player, battlefield)
 end
 
 function Battlefield:onBattlefieldDestroy(battlefield)

@@ -40,8 +40,8 @@ zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
     },
     mob =
     {
-        KHIMAIRA_13          = GetFirstID('Khimaira_13'),
-        IMMORTAL_FLAN_OFFSET = GetFirstID('Immortal_Flan'),
+        KHIMAIRA_13   = GetFirstID('Khimaira_13'),
+        IMMORTAL_FLAN = GetFirstID('Immortal_Flan'),
     },
     npc =
     {
