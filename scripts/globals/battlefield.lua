@@ -412,6 +412,7 @@ function Battlefield:new(data)
     obj.lossEventParams  = data.lossEventParams or {}
     obj.armouryCrates    = data.armouryCrates or false
     obj.experimental     = data.experimental or false
+    obj.allowedAreas     = data.allowedAreas
 
     obj.sections = { { [obj.zoneId] = {} } }
     obj.groups   = {}
@@ -748,11 +749,37 @@ function Battlefield.redirectEventUpdate(player, csid, option, npc)
     end
 end
 
+-- NOTE: Return values from this function impact if the server will honor update position
+-- requests or not.  The client will request each area, and so long as we return 0, it
+-- will still send the appropriate position packet, but not change the values for the player.
+
 function Battlefield:onEntryEventUpdate(player, csid, option, npc)
     local clearTime = 1
     local name      = 'Meme'
     local partySize = 1
     local area      = self.area or (player:getLocalVar('[battlefield]area') + 1)
+
+    -- NOTE: 'area' is used when there are not multiple arenas present, and cannot be used
+    -- if there are indeed multiple areas, but the implementation is partial.  allowedAreas
+    -- is used for this purpose, and additional logic on increment request below.  Setting area
+    -- for this purpose will cause issues with mob spawning if the implementation has placeholder
+    -- areas!  This should be used sparingly and removed upon proper captures for BCNM areas, as
+    -- this bypasses all registration logic if the battlefield area is flagged as disabled.
+
+    if
+        self.allowedAreas and
+        not self.allowedAreas[area]
+    then
+        if area < 3 then
+            player:setLocalVar('[battlefield]area', area)
+        else
+            player:updateEvent(xi.battlefield.returnCode.WAIT)
+        end
+
+        -- TODO: Remove the localVar when issue with function return is resolved
+        player:setLocalVar('noPosUpdate', 1)
+        return 0
+    end
 
     if self.area then
         area = self.area
@@ -766,12 +793,13 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
             if area < 3 then
                 player:setLocalVar('[battlefield]area', area)
             else
-                result = xi.battlefield.returnCode.WAIT
-                player:updateEvent(result)
+                player:updateEvent(xi.battlefield.returnCode.WAIT)
             end
         end
 
-        return false
+        -- TODO: Remove the localVar when issue with function return is resolved
+        player:setLocalVar('noPosUpdate', 1)
+        return 0
     end
 
     -- Only allow entrance if battlefield is open and player has battlefield effect, witch can be lost mid battlefield selection.
@@ -823,7 +851,7 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
     player:updateEvent(result, self.index, autoSkipCS, clearTime, partySize, self:checkSkipCutscene(player))
     player:updateEventString(name)
 
-    return status < xi.battlefield.status.LOCKED and result < xi.battlefield.returnCode.LOCKED
+    return (status < xi.battlefield.status.LOCKED and result < xi.battlefield.returnCode.LOCKED) and 1 or 0
 end
 
 function Battlefield.redirectEventCall(eventName, player, csid, option)

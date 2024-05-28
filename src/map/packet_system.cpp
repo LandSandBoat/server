@@ -3830,7 +3830,14 @@ void SmallPacket0x05C(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (data.ref<uint8>(0x1E) != 0)
         {
-            updatePosition = luautils::OnEventUpdate(PChar, EventID, Result) == 1;
+            // TODO: Currently the return value for onEventUpdate in Interaction Framework is not received.  Remove
+            // the localVar check when this is resolved.
+
+            int32  updateResult     = luautils::OnEventUpdate(PChar, EventID, Result);
+            uint32 noPositionUpdate = PChar->GetLocalVar("noPosUpdate");
+            updatePosition          = noPositionUpdate == 0 ? updateResult == 1 : false;
+
+            PChar->SetLocalVar("noPosUpdate", 0);
         }
         else
         {
