@@ -26,6 +26,7 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
         AMK_DIGGING_OFFSET            = 7326,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         NOTHING_FOUND                 = 7503,  -- You find nothing.
         CONQUEST                      = 7915,  -- You've earned conquest points!
+        AIR_IS_WARMER                 = 8266,  -- The air here is warmer than the surrounding area...
         ITEMS_ITEMS_LA_LA             = 8289,  -- You can hear a strange voice... Items, items, la la la la la
         GOBLIN_SLIPPED_AWAY           = 8295,  -- The Goblin slipped away when you were not looking...
         GARRISON_BASE                 = 8305,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?

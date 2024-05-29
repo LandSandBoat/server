@@ -4,16 +4,12 @@
 -- Involved in Quests: The Holy Crest, Lure of the Wildcat (San d'Oria)
 -- !pos -28 0.1 -6 233
 -----------------------------------
-local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local crestProgress = player:getCharVar('TheHolyCrest_Event')
-    local hasDragonCurseRemedy = player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
     local stalkerQuest = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
     local stalkerProgress = player:getCharVar('KnightStalker_Progress')
     local wildcatSandy = player:getCharVar('WildcatSandy')
@@ -23,12 +19,6 @@ entity.onTrigger = function(player, npc)
         not utils.mask.getBit(wildcatSandy, 17)
     then
         player:startEvent(559)
-    -- Need to speak with Rahal to get Dragon Curse Remedy
-    elseif crestProgress == 5 and not hasDragonCurseRemedy then
-        player:startEvent(60) -- Gives key item
-    elseif crestProgress == 5 and hasDragonCurseRemedy then
-        player:startEvent(122) -- Reminder to go to Gelsba
-
     -- Completed AF2, AF3 available, and currently on DRG.  No level check, since they cleared AF2.
     elseif
         player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS) == xi.questStatus.QUEST_COMPLETED and
@@ -63,10 +53,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 60 then
-        player:addKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DRAGON_CURSE_REMEDY)
-    elseif csid == 559 then
+    if csid == 559 then
         player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 17, true))
     elseif csid == 121 then
         if option == 1 then

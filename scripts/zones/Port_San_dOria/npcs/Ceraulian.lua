@@ -22,23 +22,19 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local quotasStatus    = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
-    local quotasProgress  = player:getCharVar('ChasingQuotas_Progress')
-    local quotasNo        = player:getCharVar('ChasingQuotas_No')
-    local stalkerStatus   = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
-    local stalkerProgress = player:getCharVar('KnightStalker_Progress')
-
-    if
-        player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL and
-        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST) == xi.questStatus.QUEST_AVAILABLE
-    then
-        player:startEvent(24)
+    local craftsmansStatus = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
+    local quotasStatus     = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
+    local quotasProgress   = player:getCharVar('ChasingQuotas_Progress')
+    local quotasNo         = player:getCharVar('ChasingQuotas_No')
+    local stalkerStatus    = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
+    local stalkerProgress  = player:getCharVar('KnightStalker_Progress')
 
     -- Chasing Quotas (DRG AF2)
-    elseif
+    if
+        craftsmansStatus == xi.questStatus.QUEST_COMPLETED and
         quotasStatus == xi.questStatus.QUEST_AVAILABLE and
         player:getMainJob() == xi.job.DRG and
-        player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
+        player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL and
         quotasNo == 0
     then
         player:startEvent(18) -- Long version of quest start
@@ -90,11 +86,8 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 24 then
-        player:setCharVar('TheHolyCrest_Event', 1)
-
     -- Chasing Quotas (DRG AF2)
-    elseif csid == 18 then
+    if csid == 18 then
         if option == 0 then
             player:setCharVar('ChasingQuotas_No', 1)
         else
