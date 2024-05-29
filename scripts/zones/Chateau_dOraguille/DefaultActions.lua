@@ -6,6 +6,7 @@ return {
     ['Arsha']       = { event = 513 },
     ['Chaphoire']   = { event = 512 },
     ['Chupaile']    = { event = 514 },
+    ['Curilla']     = { event = 530 },
     ['Ferdechiond'] = { event = 511 },
     ['Halver']      = { text = ID.text.HALVER_OFFSET + 1092 },
 }
