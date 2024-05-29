@@ -38,7 +38,7 @@ mission.sections =
                 end,
 
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar('battlefieldWin') == 1156 then
+                    if player:getLocalVar('battlefieldWin') == xi.battlefield.id.PUPPET_IN_PERIL then
                         mission:complete(player)
                     end
                 end,

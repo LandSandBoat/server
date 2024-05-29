@@ -73,6 +73,8 @@ def main():
     function_names.append("addContainer")
     function_names.append("isValidEntry")
     function_names.append("checkRequirements")
+    function_names.append("setupBattlefield")
+    function_names.append("battlefieldEntry")
     function_names.append("entryRequirement")
     function_names.append("onEntryEventUpdate")
     function_names.append("checkSkipCutscene")

@@ -290,17 +290,17 @@ xi.battlefield.id =
     COMPLIMENTS_TO_THE_CHEF                    = 1089,
     PUPPETMASTER_BLUES                         = 1090,
     BREAKING_THE_BONDS_OF_FATE                 = 1091,
-    LEGACY_OF_THE_LOST                         = 1092,
+    LEGACY_OF_THE_LOST                         = 1092, -- Converted
     TOUGH_NUT_TO_CRACK                         = 1120,
     HAPPY_CASTER                               = 1121,
-    OMENS                                      = 1122,
+    OMENS                                      = 1122, -- Converted
     ACHIEVING_TRUE_POWER                       = 1123,
-    SHIELD_OF_DIPLOMACY                        = 1124,
+    SHIELD_OF_DIPLOMACY                        = 1124, -- Converted
     MAKING_A_MOCKERY                           = 1152,
     SHADOWS_OF_THE_MIND                        = 1153,
     BEAST_WITHIN                               = 1154,
     MOMENT_OF_TRUTH                            = 1155,
-    PUPPET_IN_PERIL                            = 1156,
+    PUPPET_IN_PERIL                            = 1156, -- Converted
     RIDER_COMETH                               = 1184,
     NW_APOLLYON                                = 1290, -- Converted
     SW_APOLLYON                                = 1291, -- Converted
@@ -915,6 +915,11 @@ end
 function Battlefield:onEventFinishBattlefield(player, csid, option, npc)
 end
 
+-- Override this function if necessary to perform additional steps in battlefield
+-- initialise.
+function Battlefield:setupBattlefield(battlefield)
+end
+
 function Battlefield:onBattlefieldInitialise(battlefield)
     if self.loot and #self.loot > 0 then
         battlefield:setLocalVar('loot', 1)
@@ -935,6 +940,8 @@ function Battlefield:onBattlefieldInitialise(battlefield)
     for mobId, path in pairs(self.paths) do
         GetMobByID(mobId):pathThrough(path, xi.path.flag.PATROL)
     end
+
+    self:setupBattlefield(battlefield)
 end
 
 function Battlefield:onBattlefieldTick(battlefield, tick)
@@ -1002,6 +1009,9 @@ function Battlefield:onBattlefieldStatusChange(battlefield, status)
             end
         end
     end
+end
+
+function Battlefield:battlefieldEntry(player, battlefield)
 end
 
 function Battlefield:onBattlefieldEnter(player, battlefield)
@@ -1085,6 +1095,8 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     if self.experimental then
         player:printToPlayer('This battlefield has been marked as experimental.  Enemy levels have increased!', xi.msg.channel.NS_SHOUT)
     end
+
+    self:battlefieldEntry(player, battlefield)
 end
 
 function Battlefield:onBattlefieldDestroy(battlefield)
