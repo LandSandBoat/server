@@ -12,11 +12,8 @@
 name: "codeql"
 
 on:
-  schedule:
-    # At 12:00 every day.
-    - cron:  '0 12 * * *'
-  # Or by request
-  workflow_dispatch:
+  push:
+    branches: [ "base" ]
 
 jobs:
   analyze:

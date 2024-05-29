@@ -19,11 +19,19 @@ jobs:
   Sanity_Checks:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
     - name: Install Dependencies
       run: |
+        # https://mariadb.com/docs/connect/programming-languages/c/install/#connector-c-install-repo-configure-cs
+        # Ubuntu is using an old libmariadb but python3 pip expects it to be newer. Use the mariadb provided deb packages.
+        wget -P /tmp/ https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
+        # Note: there is a sha256sum command here according to the above link, but I am unsure if this file may change with time
+        chmod +x /tmp/mariadb_repo_setup
+        sudo /tmp/mariadb_repo_setup --mariadb-server-version="mariadb-10.6"
+        # Remove the above when it's no longer necessary
+
         sudo apt-get update
         sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server-10.6 mariadb-client-10.6 libmariadb-dev-compat binutils-dev
         pip install -r tools/requirements.txt
@@ -31,7 +39,7 @@ jobs:
         npm install -g diff-so-fancy
     - id: changed-files
       name: Get Changed Files
-      uses: Ana06/get-changed-files@v2.3.0
+      uses: Ana06/get-changed-files@v2.2.0
       with:
         filter: |
           modules/**
@@ -88,15 +96,15 @@ jobs:
           exit 1
         fi
         exit 0
-    - name: CPP Formatting Checks (clang-format-15)
+    - name: CPP Formatting Checks
       if: always()
       run: |
-        clang-format-15 -version
+        clang-format-14 -version
         touch cpp_formatting_checks.txt
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ -f $changed_file ]]; then
             if [[ $changed_file == *.cpp || $changed_file == *.h ]]; then
-              clang-format-15 -style=file -i ${changed_file}
+              clang-format-14 -style=file -i ${changed_file}
             fi
           fi
         done
@@ -116,7 +124,7 @@ jobs:
         exit 0
     - name: Upload CPP Formatting Diff
       if: hashFiles('cpp_formatting_checks.txt') != ''
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: clang_format_diff
         path: |
@@ -154,9 +162,6 @@ jobs:
             fi
           fi
         done
-
-        python3 tools/price_checker.py >> sql_checks.txt
-
         cat sql_checks.txt
         if [ -s sql_checks.txt ]
         then
@@ -181,11 +186,11 @@ jobs:
         fi
         exit 0
 
-  Linux_Clang15_64bit:
+  Linux_Clang14_64bit:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
     - name: Install Dependencies
@@ -193,21 +198,21 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
     #- name: Cache 'build' folder
-    #  uses: actions/cache@v4
+    #  uses: actions/cache@v3
     #  with:
     #    path: build
     #    key: ${{ runner.os }}-clang
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/clang-15
-        export CXX=/usr/bin/clang++-15
+        export CC=/usr/bin/clang-14
+        export CXX=/usr/bin/clang++-14
         mkdir -p build
         cmake -S . -B build
     - name: Build
       run: |
         cmake --build build -j4
     - name: Archive Executables
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: linux_executables
         path: |
@@ -216,15 +221,11 @@ jobs:
           xi_search
           xi_world
 
-  Linux_ClangTidy15_64bit:
+  Linux_ClangTidy14_64bit:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
-    # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
-    - uses: claywar/workaround8649@4892524a133793c85e25513fae79fc968e63877c
-      with:
-        os: ubuntu-22.04
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
     - name: Install Dependencies
@@ -232,14 +233,14 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
     #- name: Cache 'build' folder
-    #  uses: actions/cache@v4
+    #  uses: actions/cache@v3
     #  with:
     #    path: build
     #    key: ${{ runner.os }}-clang
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/clang-15
-        export CXX=/usr/bin/clang++-15
+        export CC=/usr/bin/clang-14
+        export CXX=/usr/bin/clang++-14
         mkdir -p build
         cmake -S . -B build -DENABLE_CLANG_TIDY=ON
     - name: Build
@@ -251,44 +252,67 @@ jobs:
             exit 1
         fi
 
-  Linux_GCC13_64bit:
+  Linux_GCC12_64bit:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
     - name: Install Dependencies
       run: |
-        sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-        sudo apt-get update -y
-        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev gcc-13 g++-13
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
     #- name: Cache 'build' folder
-    #  uses: actions/cache@v4
+    #  uses: actions/cache@v3
     #  with:
     #    path: build
     #    key: ${{ runner.os }}-gcc
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/gcc-13
-        export CXX=/usr/bin/g++-13
+        export CC=/usr/bin/gcc-12
+        export CXX=/usr/bin/g++-12
         mkdir -p build
         CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake -S . -B build
     - name: Build
       run: |
         cmake --build build -j4
 
-  Windows_64bit_Debug:
+  Windows_32bit:
     needs: Sanity_Checks
-    runs-on: windows-2022
+    runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: Cache 'build' folder
-        uses: actions/cache@v4
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-msvc32
+      - name: Configure CMake
+        shell: cmd
+        run: |
+          mkdir -p build
+          cmake -S . -B build -A Win32
+      - name: Build
+        shell: cmd
+        run: |
+          cmake --build build -j4
+
+  Windows_64bit_Debug:
+    needs: Sanity_Checks
+    runs-on: windows-latest
+    env:
+      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: Cache 'build' folder
+        uses: actions/cache@v3
         with:
           path: build
           key: ${{ runner.os }}-msvc64d
@@ -302,7 +326,7 @@ jobs:
         run: |
           cmake --build build -j4
       - name: Archive Executables
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: windows_executables
           path: |
@@ -313,27 +337,27 @@ jobs:
 
   Windows_64bit_Release_Tracy_Modules:
     needs: Sanity_Checks
-    runs-on: windows-2022
+    runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: Cache 'build' folder
-        uses: actions/cache@v4
+        uses: actions/cache@v3
         with:
           path: build
           key: ${{ runner.os }}-msvc64-t
-#      - name: Enable Modules
-#        shell: bash
-#        run: |
-#          python3 << EOF
-#          with open("modules/init.txt", "w") as f:
-#              f.write("custom\n")
-#              f.write("era\n")
-#              f.write("renamer\n")
-#          EOF
+      - name: Enable Modules
+        shell: bash
+        run: |
+          python3 << EOF
+          with open("modules/init.txt", "w") as f:
+              f.write("custom\n")
+              f.write("era\n")
+              f.write("renamer\n")
+          EOF
       - name: Configure CMake
         shell: cmd
         run: |
@@ -346,15 +370,26 @@ jobs:
 
   MacOS_64bit:
     needs: Sanity_Checks
-    # https://github.com/actions/runner-images/blob/main/images/macos/macos-13-Readme.md
-    runs-on: macos-13
+    # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
+    runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: Install Dependencies (Brew)
         run: |
-          brew install mariadb zeromq zmq luajit
+          brew install mariadb zeromq zmq
+      - name: Install Dependencies (LuaJIT)
+        run: |
+          git clone https://github.com/LuaJIT/LuaJIT.git
+          cd LuaJIT
+          sudo make install MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion) -j $(sysctl -n hw.physicalcpu)
+          sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
+      - name: Cache 'build' folder
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-osx
       - name: Configure CMake
         run: |
           mkdir -p build
@@ -365,7 +400,7 @@ jobs:
 
   Full_Startup_Checks_Linux:
     runs-on: ubuntu-22.04
-    needs: Linux_Clang15_64bit
+    needs: Linux_Clang14_64bit
     services:
       mysql:
         image: mariadb:10.6
@@ -376,10 +411,10 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v3
       with:
         name: linux_executables
         path: .
@@ -387,7 +422,6 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake mariadb-client-10.6 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
-        pip install bcrypt
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -401,25 +435,21 @@ jobs:
           echo -e "Importing $f into the database..."
           mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
-        for f in modules/era/sql_dynamis/*.sql; do
-          echo -e "Importing $f into the database..."
-          mysql xidb -h 127.0.0.1 -uroot -proot < $f
-        done
         mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
     - name: Copy settings
       run: |
         cp settings/default/* settings/
-#    - name: Enable Modules
-#      shell: bash
-#      run: |
-#        python3 << EOF
-#        with open("modules/init.txt", "w") as f:
-#            f.write("custom\n")
-#            f.write("era\n")
-#            f.write("renamer\n")
-#        EOF
+    - name: Enable Modules
+      shell: bash
+      run: |
+        python3 << EOF
+        with open("modules/init.txt", "w") as f:
+            f.write("custom\n")
+            f.write("era\n")
+            f.write("renamer\n")
+        EOF
     - name: Startup and character login checks
-      uses: nick-invision/retry@v3
+      uses: nick-invision/retry@v2
       with:
         timeout_minutes: 15
         max_attempts: 3
@@ -464,9 +494,8 @@ jobs:
           mysqlcmd "DELETE FROM char_unlocks;"
 
           # Create an account
-          PASSWORD_HASH=\$2a\$12\$piFoDKvu80KK68xLgQFpt.ZCqVPTjPmhSUfA31.Yw9n404dTsrR6q
           mysqlcmd "INSERT INTO accounts (id, login, password, timecreate, timelastmodify, status, priv)
-          VALUES(1000, 'admin1', '$PASSWORD_HASH', NOW(), NOW(), 1, 1);
+          VALUES(1000, 'admin', PASSWORD('admin'), NOW(), NOW(), 1, 1);
           SELECT id, login, content_ids FROM accounts;"
 
           # Create a character
@@ -505,7 +534,7 @@ jobs:
           import time
           try:
               from tools.headlessxi.hxiclient import HXIClient
-              hxi_client = HXIClient('admin1', 'admin1', 'localhost')
+              hxi_client = HXIClient('admin', 'admin', 'localhost')
               hxi_client.login()
               print('Sleeping 60s')
               time.sleep(60)
@@ -552,7 +581,7 @@ jobs:
 
   MultiInstance_Startup_Checks_Linux:
     runs-on: ubuntu-22.04
-    needs: Linux_Clang15_64bit
+    needs: Linux_Clang14_64bit
     services:
       mysql:
         image: mariadb:10.6
@@ -563,10 +592,10 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v3
       with:
         name: linux_executables
         path: .
@@ -584,10 +613,6 @@ jobs:
           mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
         for f in modules/era/sql/*.sql; do
-          echo -e "Importing $f into the database..."
-          mysql xidb -h 127.0.0.1 -uroot -proot < $f
-        done
-        for f in modules/era/sql_dynamis/*.sql; do
           echo -e "Importing $f into the database..."
           mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
@@ -646,13 +671,13 @@ jobs:
         fi
 
   Full_Startup_Checks_Windows:
-    runs-on: windows-2022
+    runs-on: windows-latest
     needs: Windows_64bit_Debug
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v3
       with:
         name: windows_executables
         path: .
@@ -673,10 +698,6 @@ jobs:
           mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
         for f in modules/era/sql/*.sql; do
-          echo -e "Importing $f into the database..."
-          mysql xidb -h 127.0.0.1 -uroot -proot < $f
-        done
-        for f in modules/era/sql_dynamis/*.sql; do
           echo -e "Importing $f into the database..."
           mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
