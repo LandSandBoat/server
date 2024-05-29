@@ -278,41 +278,17 @@ jobs:
       run: |
         cmake --build build -j4
 
-  Windows_32bit:
-    needs: Sanity_Checks
-    runs-on: windows-latest
-    env:
-      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-      - name: Cache 'build' folder
-        uses: actions/cache@v3
-        with:
-          path: build
-          key: ${{ runner.os }}-msvc32
-      - name: Configure CMake
-        shell: cmd
-        run: |
-          mkdir -p build
-          cmake -S . -B build -A Win32
-      - name: Build
-        shell: cmd
-        run: |
-          cmake --build build -j4
-
   Windows_64bit_Debug:
     needs: Sanity_Checks
-    runs-on: windows-latest
+    runs-on: windows-2022
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
       - name: Cache 'build' folder
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: build
           key: ${{ runner.os }}-msvc64d
@@ -326,7 +302,7 @@ jobs:
         run: |
           cmake --build build -j4
       - name: Archive Executables
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: windows_executables
           path: |
@@ -337,27 +313,27 @@ jobs:
 
   Windows_64bit_Release_Tracy_Modules:
     needs: Sanity_Checks
-    runs-on: windows-latest
+    runs-on: windows-2022
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
       - name: Cache 'build' folder
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: build
           key: ${{ runner.os }}-msvc64-t
-      - name: Enable Modules
-        shell: bash
-        run: |
-          python3 << EOF
-          with open("modules/init.txt", "w") as f:
-              f.write("custom\n")
-              f.write("era\n")
-              f.write("renamer\n")
-          EOF
+#      - name: Enable Modules
+#        shell: bash
+#        run: |
+#          python3 << EOF
+#          with open("modules/init.txt", "w") as f:
+#              f.write("custom\n")
+#              f.write("era\n")
+#              f.write("renamer\n")
+#          EOF
       - name: Configure CMake
         shell: cmd
         run: |
@@ -671,13 +647,13 @@ jobs:
         fi
 
   Full_Startup_Checks_Windows:
-    runs-on: windows-latest
+    runs-on: windows-2022
     needs: Windows_64bit_Debug
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 1
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: windows_executables
         path: .
