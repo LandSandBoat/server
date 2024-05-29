@@ -32,6 +32,7 @@ zones[xi.zone.VALKURM_DUNES] =
         SIGNPOST2                      = 7374,  -- Northeast: La Theine Plateau Southeast: Konschtat Highlands West: Selbina
         SIGNPOST1                      = 7375,  -- Northeast: La Theine Plateau Southeast: Konschtat Highlands Southwest: Selbina
         CONQUEST                       = 7385,  -- You've earned conquest points!
+        FOUL_PRESENSE                  = 7719,  -- You sense a foul presence.
         YOU_SENSE_AN_EVIL_PRESENCE     = 7729,  -- You sense an evil presence...
         WHAT_DO_YOU_THINK              = 7731,  -- What do you think you are doing!?
         AN_EMPTY_LIGHT_SWIRLS          = 7763,  -- An empty light swirls about the cave, eating away at the surroundings...
