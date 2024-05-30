@@ -24,11 +24,6 @@ local battlefields =
         { 2,  706,    0 },   -- Waking Dreams (Quest)
     },
 
-    [xi.zone.RIVERNE_SITE_B01] =
-    {
-        { 0,  896,    0 },   -- Storms of Fate (Quest)
-    },
-
     [xi.zone.SEALIONS_DEN] =
     {
         { 0,  992,    0 },   -- One to Be Feared (PM6-4)
@@ -128,11 +123,6 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [706] = function() -- Quest: Waking Dreams
             return player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)
-        end,
-
-        [896] = function() -- Quest: Storms of Fate
-            return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == xi.questStatus.QUEST_ACCEPTED and
-                player:getCharVar('StormsOfFate') == 2
         end,
 
         [992] = function() -- PM6-4: One to be Feared
@@ -274,16 +264,6 @@ local function checkSkip(player, bfid)
         [706] = function() -- Quest: Waking Dreams
             return player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS)
-        end,
-
-        [896] = function() -- Quest: Storms of Fate
-            local stormsOfFateStatus = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
-
-            return stormsOfFateStatus == xi.questStatus.QUEST_COMPLETED or
-                (
-                    stormsOfFateStatus == xi.questStatus.QUEST_ACCEPTED and
-                    player:getCharVar('StormsOfFate') > 2
-                )
         end,
 
         [993] = function() -- PM7-5: The Warrior's Path

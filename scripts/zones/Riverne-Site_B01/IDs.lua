@@ -17,8 +17,14 @@ zones[xi.zone.RIVERNE_SITE_B01] =
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7064, -- Tallying conquest results...
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 7228, -- Your time in the battlefield is up! Now exiting...
+        PARTY_MEMBERS_ARE_ENGAGED     = 7243, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
+        MEMBERS_OF_YOUR_PARTY         = 7534, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE      = 7535, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7537, -- The time limit for this battle is <number> minutes.
         PARTY_MEMBERS_HAVE_FALLEN     = 7573, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7580, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        ENTERING_THE_BATTLEFIELD_FOR  = 7600, -- Entering the battlefield for [Storms of Fate/The Wyrmking Descends]!
         SD_VERY_SMALL                 = 7602, -- The spatial displacement is very small. If you only had some item that could make it bigger...
         SD_HAS_GROWN                  = 7603, -- The spatial displacement has grown.
         SPACE_SEEMS_DISTORTED         = 7604, -- The space around you seems oddly distorted and disrupted.
@@ -30,6 +36,7 @@ zones[xi.zone.RIVERNE_SITE_B01] =
     },
     mob =
     {
+        BAHAMUT          = GetFirstID('Bahamut'),
         IMDUGUD          = GetFirstID('Imdugud'),
         UNSTABLE_CLUSTER = GetFirstID('Unstable_Cluster'),
     },
