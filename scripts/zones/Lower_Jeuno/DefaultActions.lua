@@ -9,6 +9,7 @@ return {
     ['Gurdern']         = { event = 112 },
     ['Harnek']          = { event = 217 },
     ['Muckvix']         = { event = 15 },
+    ['Odasel']          = { event = 162 },
     ['Omer']            = { event = 206 },
     ['Saprut']          = { event = 224 },
     ['Sattal-Mansal']   = { event = 96 },
