@@ -11,7 +11,7 @@ local latentMods =
     { xi.mod.MATT, 2 },
 }
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 

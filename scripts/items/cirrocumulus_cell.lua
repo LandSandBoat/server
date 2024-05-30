@@ -5,7 +5,7 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, item, param, caster)
     local encumbrance = target:getStatusEffect(xi.effect.ENCUMBRANCE_I)
     if encumbrance then
         local power = encumbrance:getPower()
