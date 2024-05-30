@@ -147,12 +147,6 @@ local function checkReqs(player, npc, bfid, registrant)
                 player:getCharVar('StormsOfFate') == 2
         end,
 
-        [960] = function() -- PM2-5: Ancient Vows
-            return promathiaMission == xi.mission.id.cop.ANCIENT_VOWS and
-                player:getCharVar('Mission[6][248]Status') == 2 and
-                player:getPreviousZone() == xi.zone.RIVERNE_SITE_A01
-        end,
-
         [961] = function() -- PM4-2: The Savage
             return promathiaMission == xi.mission.id.cop.THE_SAVAGE and
                 player:getCharVar('Mission[6][418]Status') == 1 and
@@ -309,10 +303,6 @@ local function checkSkip(player, bfid)
                     stormsOfFateStatus == xi.questStatus.QUEST_ACCEPTED and
                     player:getCharVar('StormsOfFate') > 2
                 )
-        end,
-
-        [960] = function() -- PM2-5: Ancient Vows
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS)
         end,
 
         [961] = function() -- PM4-2: The Savage
