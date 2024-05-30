@@ -29,12 +29,6 @@ local battlefields =
         { 0,  896,    0 },   -- Storms of Fate (Quest)
     },
 
-    [xi.zone.MONARCH_LINN] =
-    {
-        { 0,  960,    0 },   -- Ancient Vows (PM2-5)
-        { 1,  961,    0 },   -- The Savage (PM4-2)
-    },
-
     [xi.zone.SEALIONS_DEN] =
     {
         { 0,  992,    0 },   -- One to Be Feared (PM6-4)
@@ -77,18 +71,12 @@ local function checkReqs(player, npc, bfid, registrant)
         return battlefield:checkRequirements(player, npc, registrant)
     end
 
-    local npcId     = npc:getID()
-
     local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
     local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
 
     local nationStatus    = player:getMissionStatus(player:getNation())
     local promathiaStatus = player:getCharVar('PromathiaStatus')
-
-    local function getEntranceOffset(offset)
-        return zones[player:getZoneID()].npc.ENTRANCE_OFFSET + offset
-    end
 
     -- Requirements to register a battlefield
     local registerReqs =
@@ -145,12 +133,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [896] = function() -- Quest: Storms of Fate
             return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == xi.questStatus.QUEST_ACCEPTED and
                 player:getCharVar('StormsOfFate') == 2
-        end,
-
-        [961] = function() -- PM4-2: The Savage
-            return promathiaMission == xi.mission.id.cop.THE_SAVAGE and
-                player:getCharVar('Mission[6][418]Status') == 1 and
-                player:getPreviousZone() == xi.zone.RIVERNE_SITE_B01
         end,
 
         [992] = function() -- PM6-4: One to be Feared
@@ -239,7 +221,6 @@ local function checkSkip(player, bfid)
     end
 
     local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
-    local bastokMission    = player:getCurrentMission(xi.mission.log_id.BASTOK)
     local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
 
@@ -302,14 +283,6 @@ local function checkSkip(player, bfid)
                 (
                     stormsOfFateStatus == xi.questStatus.QUEST_ACCEPTED and
                     player:getCharVar('StormsOfFate') > 2
-                )
-        end,
-
-        [961] = function() -- PM4-2: The Savage
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_SAVAGE) or
-                (
-                    promathiaMission == xi.mission.id.cop.THE_SAVAGE and
-                    player:getCharVar('Mission[6][418]Status') > 1
                 )
         end,
 
@@ -441,14 +414,6 @@ xi.bcnm.onTrade = function(player, npc, trade, onUpdate)
 
     if not trade then
         return false
-
-    -- Chips for limbus
-    elseif npcUtil.tradeHasExactly(trade, { xi.item.SILVER_CHIP, xi.item.CERULEAN_CHIP, xi.item.ORCHID_CHIP }) then
-        itemId = -1
-
-    -- Chips for limbus
-    elseif npcUtil.tradeHasExactly(trade, { xi.item.SMALT_CHIP, xi.item.SMOKY_CHIP, xi.item.CHARCOAL_CHIP, xi.item.MAGENTA_CHIP }) then
-        itemId = -2
 
     -- Orbs / Testimonies
     else
@@ -633,12 +598,8 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
 
                 -- Handle traded items
                 if item ~= 0 then
-                    -- Remove limbus chips
-                    if zone == 37 or zone == 38 then
-                        player:tradeComplete()
-
                     -- Set other traded item to worn
-                    elseif player:hasItem(item) and player:getName() == initiatorName then
+                    if player:hasItem(item) and player:getName() == initiatorName then
                         player:incrementItemWear(item)
                     end
                 end
