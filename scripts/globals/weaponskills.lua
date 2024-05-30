@@ -92,7 +92,7 @@ local function souleaterBonus(attacker, wsParams)
         local bonusDamage       = math.floor(attacker:getHP() * (0.1 + souleaterEffect + souleaterEffectII))
 
         if bonusDamage >= 1 then
-            attacker:delHP(utils.stoneskin(attacker, bonusDamage * stalwartSoulBonus))
+            attacker:delHP(utils.stoneskin(attacker, bonusDamage * stalwartSoulBonus, xi.attackType.PHYSICAL))
 
             if attacker:getMainJob() ~= xi.job.DRK then
                 return math.floor(bonusDamage / 2)
@@ -349,7 +349,7 @@ local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcPara
                     magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
                     magicdmg = utils.clamp(magicdmg, 0, 99999)
                     magicdmg = utils.oneforall(target, magicdmg)
-                    magicdmg = utils.stoneskin(target, magicdmg)
+                    magicdmg = utils.stoneskin(target, magicdmg, xi.attackType.MAGICAL)
                 end
 
                 finaldmg = finaldmg + magicdmg
@@ -398,7 +398,7 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
         adjustedDamage = utils.clamp(adjustedDamage, 0, 99999)
     end
 
-    adjustedDamage = utils.stoneskin(target, adjustedDamage)
+    adjustedDamage = utils.stoneskin(target, adjustedDamage, xi.attackType.PHYSICAL)
 
     return adjustedDamage
 end
@@ -937,7 +937,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         end
 
         dmg = utils.oneforall(target, dmg)
-        dmg = utils.stoneskin(target, dmg)
+        dmg = utils.stoneskin(target, dmg, xi.attackType.MAGICAL)
 
         dmg = dmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     else

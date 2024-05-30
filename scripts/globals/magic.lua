@@ -457,7 +457,7 @@ function finalMagicAdjustments(caster, target, spell, dmg)
     dmg = utils.oneforall(target, dmg)
 
     --handling stoneskin
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.stoneskin(target, dmg, xi.attackType.MAGICAL)
     dmg = utils.clamp(dmg, -99999, 99999)
 
     if dmg < 0 then
@@ -490,7 +490,7 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     dmg = utils.oneforall(target, dmg)
 
     -- handling stoneskin
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.stoneskin(target, dmg, xi.attackType.MAGICAL)
 
     dmg = utils.clamp(dmg, -99999, 99999)
 

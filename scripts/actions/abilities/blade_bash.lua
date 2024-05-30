@@ -26,7 +26,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     local damage   = math.floor(player:getMod(xi.mod.WEAPON_BASH) + (jobLevel + 11) / 4)
 
     -- Calculating and applying Blade Bash damage
-    damage = utils.stoneskin(target, damage)
+    damage = utils.stoneskin(target, damage, xi.attackType.PHYSICAL)
     target:takeDamage(damage, player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     target:updateEnmityFromDamage(player, damage)
 

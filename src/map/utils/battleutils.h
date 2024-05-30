@@ -227,7 +227,8 @@ namespace battleutils
     void BindBreakCheck(CBattleEntity* PAttacker, CBattleEntity* PDefender);
 
     // returns damage taken
-    int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage);
+    int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage, ATTACK_TYPE attackType);
+    int32 HandleStoneskinSubPower(CBattleEntity* PDefender, CStatusEffect* effect, int32 damage, int16 skin);
     int32 HandleOneForAll(CBattleEntity* PDefender, int32 damage);
     int32 HandleFanDance(CBattleEntity* PDefender, int32 damage);
     void  HandleScarletDelirium(CBattleEntity* PDefender, int32 damage);

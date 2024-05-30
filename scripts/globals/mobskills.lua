@@ -419,7 +419,7 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, percent, base, element
 
     -- Handle Stoneskin
     if damage > 0 then
-        damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)
+        damage = utils.clamp(utils.stoneskin(target, damage, xi.attackType.BREATH), -99999, 99999)
     end
 
     -- breath mob skills are single hit so provide single Melee hit TP return if primary target
@@ -549,7 +549,7 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
         end
     end
 
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.stoneskin(target, dmg, attackType)
 
     if dmg > 0 then
         target:updateEnmityFromDamage(mob, dmg)
