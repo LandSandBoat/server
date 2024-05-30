@@ -5,9 +5,9 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target, player)
+itemObject.onItemCheck = function(target, item, param, caster)
     local result      = xi.msg.basic.ITEM_UNABLE_TO_USE
-    local battlefield = player:getBattlefieldID()
+    local battlefield = caster:getBattlefieldID()
 
     if
         battlefield == xi.battlefield.id.ONE_TO_BE_FEARED and
@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target, player)
         not target:hasStatusEffect(xi.effect.AMNESIA)
     then
         result = 0
-    elseif target:checkDistance(player) > 10 then
+    elseif target:checkDistance(caster) > 10 then
         result = xi.msg.basic.TOO_FAR_AWAY
     end
 

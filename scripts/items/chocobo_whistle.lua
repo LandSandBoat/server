@@ -8,7 +8,7 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, item, param, caster)
     if not target:canUseMisc(xi.zoneMisc.MOUNT) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA
     elseif not target:hasKeyItem(xi.ki.CHOCOBO_LICENSE) or target:hasEnmity() then

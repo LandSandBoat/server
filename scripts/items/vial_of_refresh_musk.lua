@@ -6,7 +6,7 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, item, param, caster)
     local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
     if effect ~= nil and effect:getSubType() == 18241 then
         target:delStatusEffect(xi.effect.ENCHANTMENT)

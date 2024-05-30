@@ -2590,7 +2590,7 @@ namespace luautils
             caster = CLuaBaseEntity(PCaster);
         }
 
-        auto result = onItemCheck(CLuaBaseEntity(PTarget), caster, static_cast<uint32>(param));
+        auto result = onItemCheck(CLuaBaseEntity(PTarget), CLuaItem(PItem), static_cast<uint32>(param), caster);
         if (!result.valid())
         {
             sol::error err = result;
