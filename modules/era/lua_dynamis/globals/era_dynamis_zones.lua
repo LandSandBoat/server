@@ -1,43 +1,42 @@
---------------------------------------------
---         Dynamis 75 Era Module          --
---------------------------------------------
---------------------------------------------
---       Module Required Scripts          --
---------------------------------------------
-require("scripts/globals/dynamis")
-require("modules/module_utils")
---------------------------------------------
---       Module Affected Scripts          --
---------------------------------------------
---------------------------------------------
-local m = Module:new("era_dynamis_zones")
+-----------------------------------
+--   Dynamis 75 Era Module       --
+-----------------------------------
+-----------------------------------
+--   Module Required Scripts     --
+-----------------------------------
+require('scripts/globals/dynamis')
+require('modules/module_utils')
+-----------------------------------
+--    Module Affected Scripts    --
+-----------------------------------
+local m = Module:new('era_dynamis_zones')
 
 local dynamisZones =
 {
-    { xi.zone.DYNAMIS_BASTOK, "Dynamis-Bastok", 2 },
-    { xi.zone.DYNAMIS_BEAUCEDINE, "Dynamis-Beaucedine", 5 },
-    { xi.zone.DYNAMIS_BUBURIMU, "Dynamis-Buburimu", 8 },
-    { xi.zone.DYNAMIS_JEUNO, "Dynamis-Jeuno", 4 },
-    { xi.zone.DYNAMIS_QUFIM, "Dynamis-Qufim", 9 },
-    { xi.zone.DYNAMIS_SAN_DORIA, "Dynamis-San_dOria", 1 },
-    { xi.zone.DYNAMIS_TAVNAZIA, "Dynamis-Tavnazia", 10 },
-    { xi.zone.DYNAMIS_VALKURM, "Dynamis-Valkurm", 7 },
-    { xi.zone.DYNAMIS_WINDURST, "Dynamis-Windurst", 3 },
-    { xi.zone.DYNAMIS_XARCABARD, "Dynamis-Xarcabard", 6 }
+    { xi.zone.DYNAMIS_BASTOK, 'Dynamis-Bastok', 2 },
+    { xi.zone.DYNAMIS_BEAUCEDINE, 'Dynamis-Beaucedine', 5 },
+    { xi.zone.DYNAMIS_BUBURIMU, 'Dynamis-Buburimu', 8 },
+    { xi.zone.DYNAMIS_JEUNO, 'Dynamis-Jeuno', 4 },
+    { xi.zone.DYNAMIS_QUFIM, 'Dynamis-Qufim', 9 },
+    { xi.zone.DYNAMIS_SAN_DORIA, 'Dynamis-San_dOria', 1 },
+    { xi.zone.DYNAMIS_TAVNAZIA, 'Dynamis-Tavnazia', 10 },
+    { xi.zone.DYNAMIS_VALKURM, 'Dynamis-Valkurm', 7 },
+    { xi.zone.DYNAMIS_WINDURST, 'Dynamis-Windurst', 3 },
+    { xi.zone.DYNAMIS_XARCABARD, 'Dynamis-Xarcabard', 6 }
 }
 
 local startingZones =
 {
-    { xi.zone.BASTOK_MINES, "Bastok_Mines", 2, xi.zone.DYNAMIS_BASTOK, "Trail_Markings" },
-    { xi.zone.BEAUCEDINE_GLACIER, "Beaucedine_Glacier", 5, xi.zone.DYNAMIS_BEAUCEDINE, "Trail_Markings" },
-    { xi.zone.BUBURIMU_PENINSULA, "Buburimu_Peninsula", 8, xi.zone.DYNAMIS_BUBURIMU, "Hieroglyphics" },
-    { xi.zone.RULUDE_GARDENS, "RuLude_Gardens", 4, xi.zone.DYNAMIS_JEUNO, "Trail_Markings" },
-    { xi.zone.QUFIM_ISLAND, "Qufim_Island", 9, xi.zone.QUFIM_ISLAND, "Hieroglyphics" },
-    { xi.zone.SOUTHERN_SAN_DORIA, "Southern_San_dOria", 1, xi.zone.DYNAMIS_SAN_DORIA, "Trail_Markings" },
-    { xi.zone.TAVNAZIAN_SAFEHOLD, "Tavnazian_Safehold", 10, xi.zone.DYNAMIS_TAVNAZIA, "Hieroglyphics" },
-    { xi.zone.VALKURM_DUNES, "Valkurm_Dunes", 7, xi.zone.DYNAMIS_VALKURM, "Hieroglyphics" },
-    { xi.zone.WINDURST_WALLS, "Windurst_Walls", 3, xi.zone.DYNAMIS_WINDURST, "Trail_Markings" },
-    { xi.zone.XARCABARD, "Xarcabard", 6, xi.zone.DYNAMIS_XARCABARD, "Trail_Markings" }
+    { xi.zone.BASTOK_MINES, 'Bastok_Mines', 2, xi.zone.DYNAMIS_BASTOK, 'Trail_Markings' },
+    { xi.zone.BEAUCEDINE_GLACIER, 'Beaucedine_Glacier', 5, xi.zone.DYNAMIS_BEAUCEDINE, 'Trail_Markings' },
+    { xi.zone.BUBURIMU_PENINSULA, 'Buburimu_Peninsula', 8, xi.zone.DYNAMIS_BUBURIMU, 'Hieroglyphics' },
+    { xi.zone.RULUDE_GARDENS, 'RuLude_Gardens', 4, xi.zone.DYNAMIS_JEUNO, 'Trail_Markings' },
+    { xi.zone.QUFIM_ISLAND, 'Qufim_Island', 9, xi.zone.QUFIM_ISLAND, 'Hieroglyphics' },
+    { xi.zone.SOUTHERN_SAN_DORIA, 'Southern_San_dOria', 1, xi.zone.DYNAMIS_SAN_DORIA, 'Trail_Markings' },
+    { xi.zone.TAVNAZIAN_SAFEHOLD, 'Tavnazian_Safehold', 10, xi.zone.DYNAMIS_TAVNAZIA, 'Hieroglyphics' },
+    { xi.zone.VALKURM_DUNES, 'Valkurm_Dunes', 7, xi.zone.DYNAMIS_VALKURM, 'Hieroglyphics' },
+    { xi.zone.WINDURST_WALLS, 'Windurst_Walls', 3, xi.zone.DYNAMIS_WINDURST, 'Trail_Markings' },
+    { xi.zone.XARCABARD, 'Xarcabard', 6, xi.zone.DYNAMIS_XARCABARD, 'Trail_Markings' }
 }
 
 local currencyHaggle =
@@ -110,52 +109,51 @@ local maps =
 
 local hourglassVendors =
 {
-    { "Davoi", "Lootblox", currencyLootblox, shopLootblox, 130 },
-    { "Castle_Oztroja", "Antiqix", currencyAntiqix, shopAntiqix, 50 },
-    { "Beadeaux", "Haggleblix", currencyHaggle, shopHaggle, 130 }
+    { 'Davoi', 'Lootblox', currencyLootblox, shopLootblox, 130 },
+    { 'Castle_Oztroja', 'Antiqix', currencyAntiqix, shopAntiqix, 50 },
+    { 'Beadeaux', 'Haggleblix', currencyHaggle, shopHaggle, 130 }
 }
 
 for _, zoneID in pairs(dynamisZones) do
-    m:addOverride(string.format("xi.zones.%s.Zone.onInitialize", zoneID[2]),
+    m:addOverride(string.format('xi.zones.%s.Zone.onInitialize', zoneID[2]),
     function(zone)
-        xi.dynamis.cleanupDynamis(zone) -- Run cleanupDynamis
         xi.dynamis.zoneOnZoneInitializeEra(zone) -- Run Init
     end)
 
-    m:addOverride(string.format("xi.zones.%s.Zone.onZoneOut", zoneID[2]),
+    m:addOverride(string.format('xi.zones.%s.Zone.onZoneOut', zoneID[2]),
     function(player)
         xi.dynamis.zoneOnZoneOut(player) -- Run onZoneIn functions.
     end)
 
-    m:addOverride(string.format("xi.zones.%s.Zone.onZoneIn", zoneID[2]),
+    m:addOverride(string.format('xi.zones.%s.Zone.onZoneIn', zoneID[2]),
     function(player, prevZone)
         xi.dynamis.zoneOnZoneInEra(player, prevZone) -- Run onZoneInEra functions.
     end)
 
-    m:addOverride(string.format("xi.zones.%s.Zone.onZoneTick", zoneID[2]),
+    m:addOverride(string.format('xi.zones.%s.Zone.onZoneTick', zoneID[2]),
     function(zone)
         xi.dynamis.handleDynamis(zone)
     end)
 
     if zoneID[3] >= 7 and zoneID[3] < 10 then
-        m:addOverride(string.format("xi.zones.%s.npcs.qm0.onTrigger", zoneID[2]),
+        m:addOverride(string.format('xi.zones.%s.npcs.qm0.onTrigger', zoneID[2]),
         function(player, npc)
             xi.dynamis.sjQMOnTrigger(npc)
         end)
     end
 
     if zoneID[3] == 10 then
-        m:addOverride(string.format("xi.zones.%s.npcs.qm0.onTrigger", zoneID[2]),
+        m:addOverride(string.format('xi.zones.%s.npcs.qm0.onTrigger', zoneID[2]),
         function(player, npc)
             xi.dynamis.timeExtensionOnTrigger(player, npc)
         end)
 
-        m:addOverride(string.format("xi.zones.%s.npcs.qm1.onTrigger", zoneID[2]),
+        m:addOverride(string.format('xi.zones.%s.npcs.qm1.onTrigger', zoneID[2]),
         function(player, npc)
             xi.dynamis.timeExtensionOnTrigger(player, npc)
         end)
 
-        m:addOverride(string.format("xi.zones.%s.Zone.onTriggerAreaEnter", zoneID[2]),
+        m:addOverride(string.format('xi.zones.%s.Zone.onTriggerAreaEnter', zoneID[2]),
         function(player, triggerArea)
             xi.dynamis.onTriggerAreaEnter(player, triggerArea)
         end)
@@ -163,34 +161,24 @@ for _, zoneID in pairs(dynamisZones) do
 end
 
 for _, zoneID in pairs(startingZones) do
-    m:addOverride(string.format("xi.zones.%s.npcs.%s.onTrade", zoneID[2], zoneID[5]),
+    m:addOverride(string.format('xi.zones.%s.npcs.%s.onTrade', zoneID[2], zoneID[5]),
     function(player, npc, trade)
         xi.dynamis.entryNpcOnTrade(player, npc, trade)
     end)
 
-    m:addOverride(string.format("xi.zones.%s.npcs.%s.onEventUpdate", zoneID[2], zoneID[5]),
+    m:addOverride(string.format('xi.zones.%s.npcs.%s.onEventUpdate', zoneID[2], zoneID[5]),
     function(player, npc, trade)
         xi.dynamis.entryNpcOnEventUpdate(player, npc, trade)
     end)
 
-    m:addOverride(string.format("xi.zones.%s.npcs.%s.onEventFinish", zoneID[2], zoneID[5]),
+    m:addOverride(string.format('xi.zones.%s.npcs.%s.onEventFinish', zoneID[2], zoneID[5]),
     function(player, npc, trade)
         xi.dynamis.entryNpcOnEventFinish(player, npc, trade)
-    end)
-
-    m:addOverride(string.format("xi.zones.%s.Zone.onZoneTick", zoneID[2]),
-    function(zone)
-        local dynamisZone = GetZone(zoneID[4])
-        if dynamisZone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", dynamisZone:getID())) ~= 0 then
-            if dynamisZone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", dynamisZone:getID())) <= os.time() then
-                xi.dynamis.cleanupDynamis(dynamisZone)
-            end
-        end
     end)
 end
 
 for _, npcEntry in pairs(hourglassVendors) do
-    m:addOverride(string.format("xi.zones.%s.npcs.%s.onTrade", npcEntry[1], npcEntry[2]), function(player, npc, trade)
+    m:addOverride(string.format('xi.zones.%s.npcs.%s.onTrade', npcEntry[1], npcEntry[2]), function(player, npc, trade)
         local gil = trade:getGil()
         local count = trade:getItemCount()
         local eventId = npcEntry[5]
@@ -226,7 +214,7 @@ for _, npcEntry in pairs(hourglassVendors) do
                         count == price and
                         trade:hasItemQty(npcEntry[3][2], price)
                     then
-                        player:setLocalVar("hundoItemBought", item)
+                        player:setLocalVar('hundoItemBought', item)
                         player:startEvent(eventId + 7, npcEntry[3][2], price, item)
 
                         break
@@ -236,7 +224,7 @@ for _, npcEntry in pairs(hourglassVendors) do
         end
     end)
 
-    m:addOverride(string.format("xi.zones.%s.npcs.%s.onTrigger", npcEntry[1], npcEntry[2]), function(player, npc)
+    m:addOverride(string.format('xi.zones.%s.npcs.%s.onTrigger', npcEntry[1], npcEntry[2]), function(player, npc)
         local eventId = npcEntry[5]
         if player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
             player:startEvent(eventId + 3, npcEntry[3][1], xi.settings.main.CURRENCY_EXCHANGE_RATE, npcEntry[3][2], xi.settings.main.CURRENCY_EXCHANGE_RATE, npcEntry[3][3], xi.settings.main.TIMELESS_HOURGLASS_COST, xi.items.TIMELESS_HOURGLASS, xi.settings.main.TIMELESS_HOURGLASS_COST)
@@ -245,7 +233,7 @@ for _, npcEntry in pairs(hourglassVendors) do
         end
     end)
 
-    m:addOverride(string.format("xi.zones.%s.npcs.%s.onEventUpdate", npcEntry[1], npcEntry[2]), function(player, csid, option)
+    m:addOverride(string.format('xi.zones.%s.npcs.%s.onEventUpdate', npcEntry[1], npcEntry[2]), function(player, csid, option)
         local eventId = npcEntry[5]
         if csid == eventId + 3 then
             if option == 1 then
@@ -273,7 +261,7 @@ for _, npcEntry in pairs(hourglassVendors) do
         end
     end)
 
-    m:addOverride(string.format("xi.zones.%s.npcs.%s.onEventFinish", npcEntry[1], npcEntry[2]), function(player, csid, option)
+    m:addOverride(string.format('xi.zones.%s.npcs.%s.onEventFinish', npcEntry[1], npcEntry[2]), function(player, csid, option)
         local eventId = npcEntry[5]
         if csid == eventId + 4 then -- Bought hourglass
             if player:getFreeSlotsCount() == 0 then
@@ -317,7 +305,7 @@ for _, npcEntry in pairs(hourglassVendors) do
             end
         -- bought item from shop
         elseif csid == eventId + 7 then
-            local item = player:getLocalVar("hundoItemBought")
+            local item = player:getLocalVar('hundoItemBought')
             if player:getFreeSlotsCount() == 0 then
                 player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, item)
             else
@@ -326,7 +314,7 @@ for _, npcEntry in pairs(hourglassVendors) do
                 player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, item)
             end
 
-            player:setLocalVar("hundoItemBought", 0)
+            player:setLocalVar('hundoItemBought', 0)
         end
     end)
 end
