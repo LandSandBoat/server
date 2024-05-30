@@ -320,7 +320,7 @@ xi.battlefield.id =
     CENTRAL_TEMENOS_3RD_FLOOR                  = 1305, -- Converted
     CENTRAL_TEMENOS_4TH_FLOOR                  = 1306, -- Converted
     CENTRAL_TEMENOS_4TH_FLOOR_II               = 1307, -- Converted
-    PURPLE_THE_NEW_BLACK                       = 2721,
+    PURPLE_THE_NEW_BLACK                       = 2721, -- Converted
 }
 
 xi.battlefield.itemUses =

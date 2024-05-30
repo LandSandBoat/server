@@ -8,62 +8,37 @@ require('scripts/globals/quests')
 xi = xi or {}
 xi.bcnm = xi.bcnm or {}
 
--- battlefields by zone
--- captured from client 2020-10-24
 local battlefields =
 {
---[[
-    [zoneId] =
-    {
-        { bit, battlefieldIdInDatabase, requiredItemToTrade }
-    },
---]]
     [xi.zone.BONEYARD_GULLY] =
     {
         { 0,  672,    0 },   -- Head Wind (PM5-3 U2)
-    --  { 1,  673,    0 },   -- Like the Wind (ENM) -- TODO: mob constantly runs during battle
+        { 1,  673,    0 },   -- Like the Wind (ENM) -- TODO: mob constantly runs during battle -- Experimental
         { 2,  674,    0 },   -- Sheep in Antlion's Clothing (ENM)
-    --  { 3,  675,    0 },   -- Shell We Dance? (ENM) -- TODO: Needs testing, cleanup, and mixin work
-    --  { 4,  676,    0 },   -- Totentanz (ENM)
-    --  { 5,  677,    0 },   -- Tango with a Tracker (Quest)
-    --  { 6,  678,    0 },   -- Requiem of Sin (Quest)
-    --  { 7,  679, 3454 },   -- Antagonistic Ambuscade (HKC30)
-    --  { 8,    ?,    0 },   -- *Head Wind (HTMBF)
+        { 3,  675,    0 },   -- Shell We Dance? (ENM) -- TODO: Needs testing, cleanup, and mixin work -- Experimental
     },
 
     [xi.zone.THE_SHROUDED_MAW] =
     {
         { 0,  704,    0 },   -- Darkness Named (PM3-5)
-    --  { 1,  705,    0 },   -- Test Your Mite (ENM)
         { 2,  706,    0 },   -- Waking Dreams (Quest)
-    --  { 3,    ?,    0 },   -- *Waking Dreams (HTMBF)
     },
 
     [xi.zone.RIVERNE_SITE_B01] =
     {
         { 0,  896,    0 },   -- Storms of Fate (Quest)
-    --  { 1,  897, 2108 },   -- The Wyrmking Descends (BCNM)
     },
 
     [xi.zone.MONARCH_LINN] =
     {
         { 0,  960,    0 },   -- Ancient Vows (PM2-5)
         { 1,  961,    0 },   -- The Savage (PM4-2)
-    --  { 2,  962,    0 },   -- Fire in the Sky (ENM)
-    --  { 3,  963,    0 },   -- Bad Seed (ENM)
-    --  { 4,  964,    0 },   -- Bugard in the Clouds (ENM)
-    --  { 5,  965,    0 },   -- Beloved of the Atlantes (ENM)
-    --  { 6,  966,    0 },   -- Uninvited Guests (Quest)
-    --  { 7,  967, 3455 },   -- Nest of Nightmares (HKC50)
-    --  { 8,    ?,    0 },   -- *The Savage (HTMBF)
     },
 
     [xi.zone.SEALIONS_DEN] =
     {
         { 0,  992,    0 },   -- One to Be Feared (PM6-4)
         { 1,  993,    0 },   -- The Warrior's Path (PM7-5)
-    --  { 2,    ?,    0 },   -- *The Warrior's Path (HTMBF)
-    --  { 3,    ?,    0 },   -- *One to Be Feared (HTMBF)
     },
 
     [xi.zone.THE_GARDEN_OF_RUHMET] =
@@ -75,17 +50,6 @@ local battlefields =
     {
         { 0, 1056,    0 },   -- Dawn (PM8-4)
         { 1, 1057,    0 },   -- Apocalypse Nigh (Quest)
-    --  { 2,    ?,    0 },   -- Both Paths Taken (ROVM2-9-2)
-    --  { 3,    ?,    0 },   -- *Dawn (HTMBF)
-    --  { 4,    ?,    0 },   -- The Winds of Time (ROVM3-1-26)
-    --  { 5,    ?,    0 },   -- Sealed Fate (Master Trial)
-    },
-
-    [xi.zone.LA_VAULE_S] =
-    {
-    --  { 0,    ?,    0 },   -- Splitting Heirs (S)
-        { 1, 2721,    0 },   -- Purple, The New Black
-    --  { 2,    ?,    0 },   -- The Blood-bathed Crown
     },
 
     [xi.zone.GHELSBA_OUTPOST] =
@@ -95,17 +59,12 @@ local battlefields =
         { 2,   34, 1551 },   -- Wings of Fury (BS20) -- TODO: mobskills Slipstream and Turbulence
         { 3,   35, 1552 },   -- Petrifying Pair (BS30)
         { 4,   36, 1552 },   -- Toadal Recall (BS30) -- TODO: shroom-in-cap mechanic
-    --  { 5,   37,    0 },   -- Mirror, Mirror (Quest)
     },
 
     [xi.zone.FULL_MOON_FOUNTAIN] =
     {
         { 0,  224,    0 },   -- The Moonlit Path (Quest)
         { 1,  225,    0 },   -- Moon Reading (Windurst 9-2)
-    --  { 2,  226,    0 },   -- Waking the Beast (Quest)
-    --  { 3,  227,    0 },   -- Battaru Royale (ASA10)
-    --  { 4,    ?,    0 },   -- *The Moonlit Path (HTMBF)
-    --  { 5,    ?,    0 },   -- *Waking the Beast (HTMBF)
     },
 }
 
@@ -119,13 +78,10 @@ local function checkReqs(player, npc, bfid, registrant)
     end
 
     local npcId     = npc:getID()
-    local mainJob   = player:getMainJob()
-    local mainLevel = player:getMainLvl()
 
     local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
     local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
---  local acpMission       = player:getCurrentMission(xi.mission.log_id.ACP) NOTE: UNUSED Until BCNMID 532 is Re-enabled
 
     local nationStatus    = player:getMissionStatus(player:getNation())
     local promathiaStatus = player:getCharVar('PromathiaStatus')
@@ -151,10 +107,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
         end,
 
-        [163] = function() -- Quest: Survival of the Wisest (SCH LB5)
-            return mainJob == xi.job.SCH and mainLevel >= 66
-        end,
-
         [224] = function() -- Quest: The Moonlit Path
             return player:hasKeyItem(xi.ki.MOON_BAUBLE)
         end,
@@ -162,18 +114,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [225] = function() -- Windurst 9-2: Moon Reading
             return windurstMission == xi.mission.id.windurst.MOON_READING and
                 nationStatus == 2
-        end,
-
-        [530] = function() -- Quest: A Furious Finale (DNC LB5)
-            return mainJob == xi.job.DNC and mainLevel >= 66
-        end,
-
-        [641] = function() -- ENM: Follow the White Rabbit
-            return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(2)
-        end,
-
-        [642] = function() -- ENM: When Hell Freezes Over
-            return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(4)
         end,
 
         [672] = function() -- PM5-3 U2: Head Wind
@@ -193,57 +133,13 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.MIASMA_FILTER)
         end,
 
-        [676] = function() -- ENM: Totentanz
-            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
-        end,
-
-        [677] = function() -- Quest: Tango with a Tracker
-            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)
-        end,
-
-        [678] = function() -- Quest: Requiem of Sin
-            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y)
-        end,
-
         [704] = function() -- PM3-5: Darkness Named
             return promathiaMission == xi.mission.id.cop.DARKNESS_NAMED and
                 player:getCharVar('Mission[6][358]Status') == 4
         end,
 
-        [705] = function() -- ENM: Test Your Mite
-            return player:hasKeyItem(xi.ki.ASTRAL_COVENANT)
-        end,
-
         [706] = function() -- Quest: Waking Dreams
             return player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)
-        end,
-
-        [738] = function() -- ENM: Bionic Bug
-            return player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)
-        end,
-
-        [739] = function() -- ENM: Pulling Your Strings
-            return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)
-        end,
-
-        [740] = function() -- ENM: Automaton Assault
-            return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)
-        end,
-
-        [769] = function() -- ENM: Simulant
-            return player:hasKeyItem(xi.ki.CENSER_OF_ABANDONMENT)
-        end,
-
-        [801] = function() -- ENM: You Are What You Eat
-            return player:hasKeyItem(xi.ki.CENSER_OF_ANTIPATHY)
-        end,
-
-        [833] = function() -- ENM: Playing Host
-            return player:hasKeyItem(xi.ki.CENSER_OF_ANIMUS)
-        end,
-
-        [865] = function() -- ENM: Pulling the Plug
-            return player:hasKeyItem(xi.ki.CENSER_OF_ACRIMONY)
         end,
 
         [896] = function() -- Quest: Storms of Fate
@@ -261,22 +157,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return promathiaMission == xi.mission.id.cop.THE_SAVAGE and
                 player:getCharVar('Mission[6][418]Status') == 1 and
                 player:getPreviousZone() == xi.zone.RIVERNE_SITE_B01
-        end,
-
-        [962] = function() -- ENM: Fire in the Sky
-            return player:hasKeyItem(xi.ki.MONARCH_BEARD)
-        end,
-
-        [963] = function() -- ENM: Bad Seed
-            return player:hasKeyItem(xi.ki.MONARCH_BEARD)
-        end,
-
-        [964] = function() -- ENM: Bugard in the Clouds
-            return player:hasKeyItem(xi.ki.MONARCH_BEARD)
-        end,
-
-        [965] = function() -- ENM: Beloved of Atlantes
-            return player:hasKeyItem(xi.ki.MONARCH_BEARD)
         end,
 
         [992] = function() -- PM6-4: One to be Feared
@@ -303,27 +183,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_ACCEPTED and
                 player:getCharVar('ApocalypseNigh') == 4
         end,
-
-        [1090] = function() -- Quest: Puppetmaster Blues
-            return player:hasKeyItem(xi.ki.TOGGLE_SWITCH)
-        end,
-
-        [1091] = function() -- Quest: Breaking the Bonds of Fate (COR LB5)
-            return mainJob == xi.job.COR and mainLevel >= 66
-        end,
-
-        [1123] = function() -- Quest: Achieving True Power (PUP LB5)
-            return mainJob == xi.job.PUP and mainLevel >= 66
-        end,
-
-        [1154] = function() -- Quest: The Beast Within (BLU LB5)
-            return mainJob == xi.job.BLU and mainLevel >= 66
-        end,
-
-        [2721] = function() -- WOTG07: Purple, The New Black
-            return player:getCurrentMission(xi.mission.log_id.WOTG) == xi.mission.id.wotg.PURPLE_THE_NEW_BLACK and
-                player:getMissionStatus(xi.mission.log_id.WOTG) == 1
-        end,
     }
 
     -- Requirements to enter a battlefield already registered by a party member
@@ -331,14 +190,6 @@ local function checkReqs(player, npc, bfid, registrant)
     {
         [640] = function() -- PM5-3 U3: Flames for the Dead
             return npc:getXPos() > -721 and npc:getXPos() < 719
-        end,
-
-        [641] = function() -- ENM: Follow the White Rabbit
-            return player:hasKeyItem(xi.ki.ZEPHYR_FAN)
-        end,
-
-        [642] = function() -- ENM: When Hell Freezes Over
-            return player:hasKeyItem(xi.ki.ZEPHYR_FAN)
         end,
 
         [673] = function() -- ENM: Like the Wind
@@ -353,60 +204,8 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.MIASMA_FILTER)
         end,
 
-        [676] = function() -- ENM: Totentanz
-            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
-        end,
-
-        [705] = function() -- ENM: Test Your Mite
-            return player:hasKeyItem(xi.ki.ASTRAL_COVENANT)
-        end,
-
-        [738] = function() -- ENM: Bionic Bug
-            return player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)
-        end,
-
-        [739] = function() -- ENM: Pulling Your Strings
-            return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)
-        end,
-
-        [740] = function() -- ENM: Automaton Assault
-            return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)
-        end,
-
-        [769] = function() -- ENM: Simulant
-            return player:hasKeyItem(xi.ki.CENSER_OF_ABANDONMENT)
-        end,
-
-        [801] = function() -- ENM: You Are What You Eat
-            return player:hasKeyItem(xi.ki.CENSER_OF_ANTIPATHY)
-        end,
-
-        [833] = function() -- ENM: Playing Host
-            return player:hasKeyItem(xi.ki.CENSER_OF_ANIMUS)
-        end,
-
-        [865] = function() -- ENM: Pulling the Plug
-            return player:hasKeyItem(xi.ki.CENSER_OF_ACRIMONY)
-        end,
-
         [897] = function() -- Quest: The Wyrmking Descends
             return player:hasKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING)
-        end,
-
-        [962] = function() -- ENM: Fire in the Sky
-            return player:hasKeyItem(xi.ki.MONARCH_BEARD)
-        end,
-
-        [963] = function() -- ENM: Bad Seed
-            return player:hasKeyItem(xi.ki.MONARCH_BEARD)
-        end,
-
-        [964] = function() -- ENM: Bugard in the Clouds
-            return player:hasKeyItem(xi.ki.MONARCH_BEARD)
-        end,
-
-        [965] = function() -- ENM: Beloved of Atlantes
-            return player:hasKeyItem(xi.ki.MONARCH_BEARD)
         end,
 
         [928] = function() -- Quest: Ouryu Cometh
@@ -423,10 +222,6 @@ local function checkReqs(player, npc, bfid, registrant)
                     player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_ACCEPTED and
                     player:getCharVar('ApocalypseNigh') == 4
                 )
-        end,
-
-        [2721] = function() -- WOTG07: Purple, The New Black
-            return player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK)
         end,
     }
 
@@ -470,14 +265,6 @@ local function checkSkip(player, bfid)
 
         [33] = function() -- Quest: The Holy Crest
             return player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
-        end,
-
-        [161] = function() -- Bastok 9-2: Where Two Paths Converge
-            return player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) or
-                (
-                    bastokMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and
-                    nationStatus > 4
-                )
         end,
 
         [224] = function() -- Quest: The Moonlit Path
@@ -558,10 +345,6 @@ local function checkSkip(player, bfid)
 
         [1057] = function() -- Apocalypse Nigh
             return player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
-        end,
-
-        [2721] = function() -- WOTG07: Purple, The New Black
-            return player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK)
         end,
     }
 
@@ -906,7 +689,6 @@ end
 -----------------------------------
 
 xi.bcnm.onEventFinish = function(player, csid, option, npc)
-    -- player:printToPlayer(string.format('EventFinishBCNM csid=%i option=%i', csid, option))
     player:setLocalVar('[battlefield]area', 0)
 
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
