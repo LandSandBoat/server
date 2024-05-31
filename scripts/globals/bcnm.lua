@@ -30,11 +30,6 @@ local battlefields =
         { 1,  993,    0 },   -- The Warrior's Path (PM7-5)
     },
 
-    [xi.zone.THE_GARDEN_OF_RUHMET] =
-    {
-        { 0, 1024,    0 },   -- When Angels Fall (PM8-3)
-    },
-
     [xi.zone.EMPYREAL_PARADOX] =
     {
         { 0, 1056,    0 },   -- Dawn (PM8-4)
@@ -109,11 +104,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [993] = function() -- PM7-5: The Warrior's Path
             return promathiaMission == xi.mission.id.cop.THE_WARRIORS_PATH and
                 player:getCharVar('Mission[6][748]Status') == 1
-        end,
-
-        [1024] = function() -- PM8-3: When Angels Fall
-            return promathiaMission == xi.mission.id.cop.WHEN_ANGELS_FALL and
-                promathiaStatus == 4
         end,
 
         [1056] = function() -- PM8-4: Dawn

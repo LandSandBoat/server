@@ -11,7 +11,7 @@ local maxAreas =
     { Max = 6, Zones = { 38 } },
 
     -- Dynamis
-    { Max = 1, Zones = { 39, 40, 41, 42, 134, 135, 185, 186, 187, 188, 29, 140 } }, -- riverneb, ghelsba
+    { Max = 1, Zones = { 39, 40, 41, 42, 134, 135, 185, 186, 187, 188, 29, 140, 35 } }, -- riverneb, ghelsba
 }
 
 function onBattlefieldHandlerInitialise(zone)
@@ -283,7 +283,7 @@ xi.battlefield.id =
     NEST_OF_NIGHTMARES                         = 967,
     ONE_TO_BE_FEARED                           = 992,
     WARRIORS_PATH                              = 993,
-    WHEN_ANGELS_FALL                           = 1024,
+    WHEN_ANGELS_FALL                           = 1024, -- Converted
     DAWN                                       = 1056,
     APOCALYPSE_NIGH                            = 1057,
     CALL_TO_ARMS                               = 1088,
