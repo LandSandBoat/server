@@ -61,6 +61,7 @@ quest.sections =
             {
                 [9] = function(player, csid, option, npc)
                     quest:complete(player)
+                    xi.quest.setMustZone(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.FOR_THE_BIRDS)
                 end,
             },
         },
