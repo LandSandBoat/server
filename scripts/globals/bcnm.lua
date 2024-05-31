@@ -38,7 +38,6 @@ local battlefields =
 
     [xi.zone.FULL_MOON_FOUNTAIN] =
     {
-        { 0,  224,    0 },   -- The Moonlit Path (Quest)
         { 1,  225,    0 },   -- Moon Reading (Windurst 9-2)
     },
 }
@@ -61,10 +60,6 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to register a battlefield
     local registerReqs =
     {
-        [224] = function() -- Quest: The Moonlit Path
-            return player:hasKeyItem(xi.ki.MOON_BAUBLE)
-        end,
-
         [225] = function() -- Windurst 9-2: Moon Reading
             return windurstMission == xi.mission.id.windurst.MOON_READING and
                 nationStatus == 2
@@ -136,18 +131,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.MIASMA_FILTER)
         end,
 
-        [897] = function() -- Quest: The Wyrmking Descends
-            return player:hasKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING)
-        end,
-
-        [928] = function() -- Quest: Ouryu Cometh
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS) or
-                (
-                    promathiaMission == xi.mission.id.cop.ANCIENT_VOWS and
-                    player:getCharVar('Mission[6][248]Status') >= 2
-                )
-        end,
-
         [1057] = function() -- Quest: Apocalypse Nigh
             return player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
                 (
@@ -185,11 +168,6 @@ local function checkSkip(player, bfid)
     -- Requirements to skip a battlefield
     local skipReqs =
     {
-        [224] = function() -- Quest: The Moonlit Path
-            return player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) or
-                player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON)
-        end,
-
         [225] = function() -- windurstMission 9-2: Moon Reading
             return player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) or
                 (

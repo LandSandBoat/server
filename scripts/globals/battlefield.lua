@@ -1,17 +1,47 @@
+-----------------------------------
+-- Battlefield Functions
+-----------------------------------
 require('scripts/globals/pathfind')
-
+-----------------------------------
 xi = xi or {}
 
 local maxAreas =
 {
-    -- Temenos
-    { Max = 8, Zones = { 37 } },
+    {
+        Max   = 8,
+        Zones =
+        {
+            xi.zone.TEMENOS,
+        },
+    },
 
-    -- Apollyon
-    { Max = 6, Zones = { 38 } },
+    {
+        Max   = 6,
+        Zones =
+        {
+            xi.zone.APOLLYON,
+        },
+    },
 
-    -- Dynamis
-    { Max = 1, Zones = { 39, 40, 41, 42, 134, 135, 185, 186, 187, 188, 29, 140, 35 } }, -- riverneb, ghelsba
+    {
+        Max   = 1,
+        Zones =
+        {
+            xi.zone.DYNAMIS_VALKURM,
+            xi.zone.DYNAMIS_BUBURIMU,
+            xi.zone.DYNAMIS_QUFIM,
+            xi.zone.DYNAMIS_TAVNAZIA,
+            xi.zone.DYNAMIS_BEAUCEDINE,
+            xi.zone.DYNAMIS_XARCABARD,
+            xi.zone.DYNAMIS_SAN_DORIA,
+            xi.zone.DYNAMIS_BASTOK,
+            xi.zone.DYNAMIS_WINDURST,
+            xi.zone.DYNAMIS_JEUNO,
+            xi.zone.RIVERNE_SITE_B01,
+            xi.zone.GHELSBA_OUTPOST,
+            xi.zone.THE_GARDEN_OF_RUHMET
+        },
+    },
 }
 
 function onBattlefieldHandlerInitialise(zone)
@@ -164,7 +194,7 @@ xi.battlefield.id =
     SCARLET_KING                               = 199,
     CAT_BURGLAR_BARES_FANGS                    = 200,
     DRAGON_SCALES                              = 201,
-    MOONLIT_PATH                               = 224,
+    MOONLIT_PATH                               = 224, -- Converted
     MOON_READING                               = 225,
     WAKING_THE_BEAST_FULLMOON                  = 226,
     BATTARU_ROYALE                             = 227,
