@@ -43,7 +43,6 @@ local battlefields =
 
     [xi.zone.GHELSBA_OUTPOST] =
     {
-        { 1,   33,    0 },   -- The Holy Crest (Quest)
         { 2,   34, 1551 },   -- Wings of Fury (BS20) -- TODO: mobskills Slipstream and Turbulence
         { 3,   35, 1552 },   -- Petrifying Pair (BS30)
         { 4,   36, 1552 },   -- Toadal Recall (BS30) -- TODO: shroom-in-cap mechanic
@@ -74,10 +73,6 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to register a battlefield
     local registerReqs =
     {
-        [33] = function() -- Quest: The Holy Crest
-            return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
-        end,
-
         [224] = function() -- Quest: The Moonlit Path
             return player:hasKeyItem(xi.ki.MOON_BAUBLE)
         end,
@@ -207,10 +202,6 @@ local function checkSkip(player, bfid)
     -- Requirements to skip a battlefield
     local skipReqs =
     {
-        [33] = function() -- Quest: The Holy Crest
-            return player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
-        end,
-
         [224] = function() -- Quest: The Moonlit Path
             return player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON)

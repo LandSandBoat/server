@@ -38,6 +38,7 @@ zones[xi.zone.GHELSBA_OUTPOST] =
     mob =
     {
         CARRION_DRAGON        = GetFirstID('Carrion_Dragon'),
+        CYRANUCE_M_CUTAULEON  = GetFirstID('Cyranuce_M_Cutauleon'),
         FODDERCHIEF_VOKDEK    = GetFirstID('Fodderchief_Vokdek'),
         THOUSANDARM_DESHGLESH = GetFirstID('Thousandarm_Deshglesh'),
     },
