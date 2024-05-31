@@ -35,11 +35,6 @@ local battlefields =
         { 0, 1056,    0 },   -- Dawn (PM8-4)
         { 1, 1057,    0 },   -- Apocalypse Nigh (Quest)
     },
-
-    [xi.zone.FULL_MOON_FOUNTAIN] =
-    {
-        { 1,  225,    0 },   -- Moon Reading (Windurst 9-2)
-    },
 }
 
 -----------------------------------
@@ -51,20 +46,12 @@ local function checkReqs(player, npc, bfid, registrant)
         return battlefield:checkRequirements(player, npc, registrant)
     end
 
-    local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
-
-    local nationStatus    = player:getMissionStatus(player:getNation())
-    local promathiaStatus = player:getCharVar('PromathiaStatus')
+    local promathiaStatus  = player:getCharVar('PromathiaStatus')
 
     -- Requirements to register a battlefield
     local registerReqs =
     {
-        [225] = function() -- Windurst 9-2: Moon Reading
-            return windurstMission == xi.mission.id.windurst.MOON_READING and
-                nationStatus == 2
-        end,
-
         [672] = function() -- PM5-3 U2: Head Wind
             return promathiaMission == xi.mission.id.cop.THREE_PATHS and
                 player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 7
@@ -159,23 +146,12 @@ local function checkSkip(player, bfid)
         return battlefield:checkSkipCutscene(player)
     end
 
-    local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
-
-    local nationStatus    = player:getMissionStatus(player:getNation())
-    local promathiaStatus = player:getCharVar('PromathiaStatus')
+    local promathiaStatus  = player:getCharVar('PromathiaStatus')
 
     -- Requirements to skip a battlefield
     local skipReqs =
     {
-        [225] = function() -- windurstMission 9-2: Moon Reading
-            return player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) or
-                (
-                    windurstMission == xi.mission.id.windurst.MOON_READING and
-                    nationStatus > 4
-                )
-        end,
-
         [672] = function() -- PM5-3 U2: Head Wind
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
                 (
