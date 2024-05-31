@@ -7,52 +7,6 @@ local entity = {}
 
 local loot =
 {
-    -- BCNM Wings of Fury
-    [34] =
-    {
-        {
-            { itemid = xi.item.BAT_FANG, droprate = 1000 }, -- Bat Fang
-        },
-
-        {
-            { itemid = xi.item.THUNDER_SPIRIT_PACT, droprate = 306 }, -- Thunder Spirit Pact
-            { itemid = xi.item.SCROLL_OF_INVISIBLE, droprate = 319 }, -- Scroll Of Invisible
-            { itemid = xi.item.SCROLL_OF_SNEAK,     droprate = 125 }, -- Scroll Of Sneak
-            { itemid = xi.item.SCROLL_OF_DEODORIZE, droprate = 222 }, -- Scroll Of Deodorize
-        },
-
-        {
-            { itemid = xi.item.GANKO,             droprate = 153 }, -- Ganko
-            { itemid = xi.item.PLATOON_EDGE,      droprate = 139 }, -- Platoon Edge
-            { itemid = xi.item.PLATOON_AXE,       droprate =  83 }, -- Platoon Axe
-            { itemid = xi.item.PLATOON_POLE,      droprate =  97 }, -- Platoon Pole
-            { itemid = xi.item.PLATOON_DAGGER,    droprate = 125 }, -- Platoon Dagger
-            { itemid = xi.item.MYTHRIL_BEASTCOIN, droprate = 444 }, -- Mythril Beastcoin
-            { itemid = xi.item.TRANSLUCENT_ROCK,  droprate =  56 }, -- Translucent Rock
-        },
-
-        {
-            { itemid = xi.item.GUNROMARU,      droprate = 111 }, -- Gunromaru
-            { itemid = xi.item.PLATOON_DAGGER, droprate = 139 }, -- Platoon Dagger
-            { itemid = xi.item.PLATOON_EDGE,   droprate = 139 }, -- Platoon Edge
-            { itemid = xi.item.PLATOON_LANCE,  droprate =  42 }, -- Platoon Lance
-            { itemid = xi.item.PLATOON_SWORD,  droprate = 181 }, -- Platoon Sword
-            { itemid = xi.item.PURPLE_ROCK,    droprate =  97 }, -- Purple Rock
-            { itemid = xi.item.RED_ROCK,       droprate =  69 }, -- Red Rock
-            { itemid = xi.item.WHITE_ROCK,     droprate =  14 }, -- White Rock
-            { itemid = xi.item.BLACK_ROCK,     droprate =  28 }, -- Black Rock
-            { itemid = xi.item.GREEN_ROCK,     droprate =  28 }, -- Green Rock
-            { itemid = xi.item.YELLOW_ROCK,    droprate =  14 }, -- Yellow Rock
-            { itemid = xi.item.BLUE_ROCK,      droprate =  69 }, -- Blue Rock
-        },
-
-        {
-            { itemid = xi.item.NONE,        droprate = 389 }, -- nothing
-            { itemid = xi.item.ASTRAL_RING, droprate = 167 }, -- astral_ring
-            { itemid = xi.item.BAT_WING,    droprate = 444 }, -- bat_wing
-        },
-    },
-
     -- BCNM Petrifying Pair
     [35] =
     {
