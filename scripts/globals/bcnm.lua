@@ -43,7 +43,6 @@ local battlefields =
 
     [xi.zone.GHELSBA_OUTPOST] =
     {
-        { 3,   35, 1552 },   -- Petrifying Pair (BS30)
         { 4,   36, 1552 },   -- Toadal Recall (BS30) -- TODO: shroom-in-cap mechanic
     },
 
