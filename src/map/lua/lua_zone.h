@@ -56,6 +56,7 @@ public:
     auto               getBattlefieldByInitiator(uint32 charID) -> std::optional<CLuaBattlefield>;
     bool               battlefieldsFull(int battlefieldId);
     WEATHER            getWeather();
+    uint32             getUptime();
     void               reloadNavmesh();
     bool               isNavigablePoint(const sol::table& position);
     auto               insertDynamicEntity(sol::table table) -> std::optional<CLuaBaseEntity>;
