@@ -41,11 +41,6 @@ local battlefields =
         { 1, 1057,    0 },   -- Apocalypse Nigh (Quest)
     },
 
-    [xi.zone.GHELSBA_OUTPOST] =
-    {
-        { 4,   36, 1552 },   -- Toadal Recall (BS30) -- TODO: shroom-in-cap mechanic
-    },
-
     [xi.zone.FULL_MOON_FOUNTAIN] =
     {
         { 0,  224,    0 },   -- The Moonlit Path (Quest)
