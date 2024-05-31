@@ -270,10 +270,10 @@ xi.battlefield.id =
     DESIRES_OF_EMPTINESS                       = 864, -- Converted
     PULLING_THE_PLUG                           = 865,
     EMPTY_ASPIRATIONS                          = 866,
-    STORMS_OF_FATE                             = 896,
+    STORMS_OF_FATE                             = 896, -- Converted
     WYRMKING_DESCENDS                          = 897,
     OURYU_COMETH                               = 928,
-    ANCIENT_VOWS                               = 960,
+    ANCIENT_VOWS                               = 960, -- Converted
     SAVAGE                                     = 961,
     FIRE_IN_THE_SKY                            = 962,
     BAD_SEED                                   = 963,
@@ -320,7 +320,7 @@ xi.battlefield.id =
     CENTRAL_TEMENOS_3RD_FLOOR                  = 1305, -- Converted
     CENTRAL_TEMENOS_4TH_FLOOR                  = 1306, -- Converted
     CENTRAL_TEMENOS_4TH_FLOOR_II               = 1307, -- Converted
-    PURPLE_THE_NEW_BLACK                       = 2721,
+    PURPLE_THE_NEW_BLACK                       = 2721, -- Converted
 }
 
 xi.battlefield.itemUses =
