@@ -37,8 +37,9 @@ zones[xi.zone.GHELSBA_OUTPOST] =
     },
     mob =
     {
-        THOUSANDARM_DESHGLESH = GetFirstID('Thousandarm_Deshglesh'),
         CARRION_DRAGON        = GetFirstID('Carrion_Dragon'),
+        FODDERCHIEF_VOKDEK    = GetFirstID('Fodderchief_Vokdek'),
+        THOUSANDARM_DESHGLESH = GetFirstID('Thousandarm_Deshglesh'),
     },
     npc =
     {

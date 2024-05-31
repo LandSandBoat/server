@@ -43,7 +43,6 @@ local battlefields =
 
     [xi.zone.GHELSBA_OUTPOST] =
     {
-        { 0,   32,    0 },   -- Save the Children (San d'Oria 1-3)
         { 1,   33,    0 },   -- The Holy Crest (Quest)
         { 2,   34, 1551 },   -- Wings of Fury (BS20) -- TODO: mobskills Slipstream and Turbulence
         { 3,   35, 1552 },   -- Petrifying Pair (BS30)
@@ -66,7 +65,6 @@ local function checkReqs(player, npc, bfid, registrant)
         return battlefield:checkRequirements(player, npc, registrant)
     end
 
-    local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
     local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
 
@@ -76,16 +74,6 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to register a battlefield
     local registerReqs =
     {
-        [32] = function() -- San d'Oria 1-3: Save the Children
-            local hasCompletedSaveTheChildren = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN)
-
-            return sandoriaMission == xi.mission.id.sandoria.SAVE_THE_CHILDREN and
-                (
-                    (hasCompletedSaveTheChildren and nationStatus <= 2) or
-                    (not hasCompletedSaveTheChildren and nationStatus == 2)
-                )
-        end,
-
         [33] = function() -- Quest: The Holy Crest
             return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
         end,
@@ -210,7 +198,6 @@ local function checkSkip(player, bfid)
         return battlefield:checkSkipCutscene(player)
     end
 
-    local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
     local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
 
@@ -220,14 +207,6 @@ local function checkSkip(player, bfid)
     -- Requirements to skip a battlefield
     local skipReqs =
     {
-        [32] = function() -- San d'Oria 1-3: Save the Children
-            return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN) or
-                (
-                    sandoriaMission == xi.mission.id.sandoria.SAVE_THE_CHILDREN and
-                    nationStatus > 2
-                )
-        end,
-
         [33] = function() -- Quest: The Holy Crest
             return player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
         end,
