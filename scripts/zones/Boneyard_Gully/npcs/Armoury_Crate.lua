@@ -28,35 +28,6 @@ local loot =
             { itemid = xi.item.HARMONIAS_TORQUE, droprate = 121 }, -- Harmonia's Torque
         },
     },
-
-    -- ENM: Shell We Dance?
-    [675] =
-    {
-        {
-            { itemid = xi.item.PIECE_OF_CASSIA_LUMBER,   droprate = 375 },  -- Cassia Lumber
-            { itemid = xi.item.SQUARE_OF_ELTORO_LEATHER, droprate = 328 },  -- Eltoro Leather
-            { itemid = xi.item.DRAGON_BONE,              droprate = 263 },  -- Dragon Bone
-        },
-
-        {
-            { itemid = xi.item.NONE,         droprate = 812 }, -- nothing
-            { itemid = xi.item.CLOUD_EVOKER, droprate = 188 }, -- Cloud Evoker
-        },
-
-        {
-            { itemid = xi.item.STONE_SPLITTER,          droprate = 150 }, -- Stone-splitter
-            { itemid = xi.item.FRENZY_FIFE,             droprate = 175 }, -- Frenzy Fife
-            { itemid = xi.item.BLAU_DOLCH,              droprate = 238 }, -- Blau Dolch
-            { itemid = xi.item.SCROLL_OF_ARMYS_PAEON_V, droprate = 238 }, -- Scroll of Army's Paeon V
-        },
-
-        {
-            { itemid = xi.item.STONE_SPLITTER,          droprate = 150 }, -- Stone-splitter
-            { itemid = xi.item.FRENZY_FIFE,             droprate = 175 }, -- Frenzy Fife
-            { itemid = xi.item.BLAU_DOLCH,              droprate = 238 }, -- Blau Dolch
-            { itemid = xi.item.SCROLL_OF_ARMYS_PAEON_V, droprate = 238 }, -- Scroll of Army's Paeon V
-        },
-    },
 }
 
 entity.onTrade = function(player, npc, trade)

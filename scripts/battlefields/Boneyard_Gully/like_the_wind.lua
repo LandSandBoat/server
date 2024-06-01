@@ -10,6 +10,7 @@ local content = Battlefield:new({
     zoneId           = xi.zone.BONEYARD_GULLY,
     battlefieldId    = xi.battlefield.id.LIKE_THE_WIND,
     maxPlayers       = 18,
+    levelCap         = 75,
     timeLimit        = utils.minutes(15),
     index            = 1,
     entryNpc         = '_081',
@@ -24,7 +25,7 @@ local content = Battlefield:new({
 -- TODO: Race Runner has a constant movement mechanic and different hate rules that need
 -- to be implemented.  See: https://ffxiclopedia.fandom.com/wiki/Like_the_Wind
 
-content:addEssentialMobs('Race_Runner')
+content:addEssentialMobs({ 'Race_Runner' })
 
 content.loot =
 {

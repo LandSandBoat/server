@@ -13,7 +13,6 @@ local battlefields =
     [xi.zone.BONEYARD_GULLY] =
     {
         { 2,  674,    0 },   -- Sheep in Antlion's Clothing (ENM)
-        { 3,  675,    0 },   -- Shell We Dance? (ENM) -- TODO: Needs testing, cleanup, and mixin work -- Experimental
     },
 
     [xi.zone.THE_SHROUDED_MAW] =
@@ -51,10 +50,6 @@ local function checkReqs(player, npc, bfid, registrant)
     local registerReqs =
     {
         [674] = function() -- ENM: Sheep in Antlion's Clothing
-            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
-        end,
-
-        [675] = function() -- ENM: Shell We Dance?
             return player:hasKeyItem(xi.ki.MIASMA_FILTER)
         end,
 
@@ -96,10 +91,6 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [674] = function() -- ENM: Sheep in Antlion's Clothing
-            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
-        end,
-
-        [675] = function() -- ENM: Shell We Dance?
             return player:hasKeyItem(xi.ki.MIASMA_FILTER)
         end,
 
@@ -152,14 +143,6 @@ local function checkSkip(player, bfid)
 
         [993] = function() -- PM7-5: The Warrior's Path
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH)
-        end,
-
-        [1024] = function() -- PM8-3: When Angels Fall
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL) or
-                (
-                    promathiaMission == xi.mission.id.cop.WHEN_ANGELS_FALL and
-                    promathiaStatus > 4
-                )
         end,
 
         [1056] = function() -- PM8-4: Dawn
