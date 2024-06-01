@@ -951,10 +951,6 @@ function Battlefield:setupBattlefield(battlefield)
 end
 
 function Battlefield:onBattlefieldInitialise(battlefield)
-    if self.loot and #self.loot > 0 then
-        battlefield:setLocalVar('loot', 1)
-    end
-
     local hasMultipleAreas = not self.area
     battlefield:addGroups(self.groups, hasMultipleAreas)
 
@@ -1499,7 +1495,6 @@ end
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     local killedallmobs = true
     local leavecode     = -1
-    local canLeave      = false
     local mobs          = battlefield:getMobs(true, false)
     local status        = battlefield:getStatus()
     local players       = battlefield:getPlayers()
@@ -1515,16 +1510,6 @@ function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     if leavecode ~= -1 then
         -- Artificially inflate the time we remain inside the battlefield.
         battlefield:setLocalVar('cutsceneTimer', cutsceneTimer + 1)
-
-        canLeave = battlefield:getLocalVar('loot') == 0
-
-        if status == xi.battlefield.status.WON and not canLeave then
-            if battlefield:getLocalVar('lootSpawned') == 0 and battlefield:spawnLoot() then
-                canLeave = false
-            elseif battlefield:getLocalVar('lootSeen') == 1 then
-                canLeave = true
-            end
-        end
     end
 
     -- Remove battlefield effect for players in alliance not inside battlefield once the battlefield gets locked. Do this only once.
@@ -1553,7 +1538,7 @@ function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     -- Cleanup battlefield.
     if
         not xi.battlefield.SendTimePrompts(battlefield, players) or -- If we cant send anymore time prompts, they are out of time.
-        (canLeave and cutsceneTimer >= 15)                          -- Players won and artificial time inflation is over.
+        cutsceneTimer >= 15                                         -- Players won and artificial time inflation is over.
     then
         battlefield:cleanup(true)
     elseif status == xi.battlefield.status.LOST then -- Players lost.
@@ -1657,57 +1642,5 @@ function xi.battlefield.HandleWipe(battlefield, players)
                 end
             end
         end
-    end
-end
-
-function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
-    players = players or battlefield:getPlayers()
-
-    if
-        battlefield:getStatus() == xi.battlefield.status.WON and
-        battlefield:getLocalVar('lootSeen') == 0
-    then
-        if npc then
-            npc:setAnimation(90)
-        end
-
-        for i = 1, #lootTable, 1 do
-            local lootGroup = lootTable[i]
-
-            if lootGroup then
-                local max = 0
-
-                for _, entry in pairs(lootGroup) do
-                    max = max + entry.droprate
-                end
-
-                local roll = math.random(max)
-
-                for _, entry in pairs(lootGroup) do
-                    max = max - entry.droprate
-
-                    if roll > max then
-                        if entry.itemid ~= 0 then
-                            if entry.itemid == 65535 then
-                                local gil = entry.amount / #players
-
-                                for j = 1, #players, 1 do
-                                    npcUtil.giveCurrency(players[j], 'gil', gil)
-                                end
-
-                                break
-                            end
-
-                            players[1]:addTreasure(entry.itemid, npc)
-                        end
-
-                        break
-                    end
-                end
-            end
-        end
-
-        battlefield:setLocalVar('cutsceneTimer', 10)
-        battlefield:setLocalVar('lootSeen', 1)
     end
 end

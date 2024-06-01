@@ -861,31 +861,6 @@ bool CBattlefield::LoadMobs()
     return true;
 }
 
-bool CBattlefield::SpawnLoot(CBaseEntity* PEntity)
-{
-    if (!PEntity)
-    {
-        const auto* fmtQuery = "SELECT npcId FROM bcnm_treasure_chests WHERE bcnmId = %u AND battlefieldNumber = %u";
-        auto        ret      = _sql->Query(fmtQuery, this->GetID(), this->GetArea());
-
-        if (ret == SQL_ERROR || _sql->NumRows() == 0)
-        {
-            ShowError("Battlefield::SpawnLoot() : Cannot find treasure chest for battlefield %i area %i ", this->GetID(), this->GetArea());
-            return false;
-        }
-        else
-        {
-            if (_sql->NextRow() == SQL_SUCCESS)
-            {
-                auto npcId = _sql->GetUIntData(0);
-                PEntity    = zoneutils::GetEntity(npcId);
-            }
-        }
-    }
-    SetLocalVar("lootSpawned", 1);
-    return InsertEntity(PEntity, true);
-}
-
 bool CBattlefield::CheckInProgress()
 {
     // clang-format off
