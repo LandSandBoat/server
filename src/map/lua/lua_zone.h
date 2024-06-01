@@ -54,7 +54,6 @@ public:
     REGION_TYPE        getRegionID();
     ZONE_TYPE          getTypeMask();
     auto               getBattlefieldByInitiator(uint32 charID) -> std::optional<CLuaBattlefield>;
-    bool               battlefieldsFull(int battlefieldId);
     WEATHER            getWeather();
     uint32             getUptime();
     void               reloadNavmesh();

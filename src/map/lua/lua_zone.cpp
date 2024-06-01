@@ -171,11 +171,6 @@ std::optional<CLuaBattlefield> CLuaZone::getBattlefieldByInitiator(uint32 charID
     return std::nullopt;
 }
 
-bool CLuaZone::battlefieldsFull(int battlefieldId)
-{
-    return m_pLuaZone->m_BattlefieldHandler && m_pLuaZone->m_BattlefieldHandler->ReachedMaxCapacity(battlefieldId);
-}
-
 WEATHER CLuaZone::getWeather()
 {
     return m_pLuaZone->GetWeather();
@@ -325,7 +320,6 @@ void CLuaZone::Register()
     SOL_REGISTER("getRegionID", CLuaZone::getRegionID);
     SOL_REGISTER("getTypeMask", CLuaZone::getTypeMask);
     SOL_REGISTER("getBattlefieldByInitiator", CLuaZone::getBattlefieldByInitiator);
-    SOL_REGISTER("battlefieldsFull", CLuaZone::battlefieldsFull);
     SOL_REGISTER("getWeather", CLuaZone::getWeather);
     SOL_REGISTER("getUptime", CLuaZone::getUptime);
     SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
