@@ -345,7 +345,7 @@ end
 -----------------------------------
 -- onEventUpdate
 -----------------------------------
-xi.bcnm.onEventUpdate = function(player, csid, option, extras)
+xi.bcnm.onEventUpdate = function(player, csid, option, npc)
     -- player:printToPlayer(string.format('EventUpdateBCNM csid=%i option=%i extras=%i', csid, option, extras))
 
     -- Requesting a battlefield
