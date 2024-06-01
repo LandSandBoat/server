@@ -1,17 +1,47 @@
+-----------------------------------
+-- Battlefield Functions
+-----------------------------------
 require('scripts/globals/pathfind')
-
+-----------------------------------
 xi = xi or {}
 
 local maxAreas =
 {
-    -- Temenos
-    { Max = 8, Zones = { 37 } },
+    {
+        Max   = 8,
+        Zones =
+        {
+            xi.zone.TEMENOS,
+        },
+    },
 
-    -- Apollyon
-    { Max = 6, Zones = { 38 } },
+    {
+        Max   = 6,
+        Zones =
+        {
+            xi.zone.APOLLYON,
+        },
+    },
 
-    -- Dynamis
-    { Max = 1, Zones = { 39, 40, 41, 42, 134, 135, 185, 186, 187, 188, 29, 140 } }, -- riverneb, ghelsba
+    {
+        Max   = 1,
+        Zones =
+        {
+            xi.zone.DYNAMIS_VALKURM,
+            xi.zone.DYNAMIS_BUBURIMU,
+            xi.zone.DYNAMIS_QUFIM,
+            xi.zone.DYNAMIS_TAVNAZIA,
+            xi.zone.DYNAMIS_BEAUCEDINE,
+            xi.zone.DYNAMIS_XARCABARD,
+            xi.zone.DYNAMIS_SAN_DORIA,
+            xi.zone.DYNAMIS_BASTOK,
+            xi.zone.DYNAMIS_WINDURST,
+            xi.zone.DYNAMIS_JEUNO,
+            xi.zone.RIVERNE_SITE_B01,
+            xi.zone.GHELSBA_OUTPOST,
+            xi.zone.THE_GARDEN_OF_RUHMET
+        },
+    },
 }
 
 function onBattlefieldHandlerInitialise(zone)
@@ -95,11 +125,11 @@ xi.battlefield.id =
     KINDERGARTEN_CAP                           = 18,
     LAST_ORC_SHUNNED_HERO                      = 19,
     BEYOND_INFINITY_HORLAIS_PEAK               = 20,  -- Converted
-    SAVE_THE_CHILDREN                          = 32,
-    HOLY_CREST                                 = 33,
-    WINGS_OF_FURY                              = 34,
-    PETRIFYING_PAIR                            = 35,
-    TOADAL_RECALL                              = 36,
+    SAVE_THE_CHILDREN                          = 32,  -- Converted
+    HOLY_CREST                                 = 33,  -- Converted
+    WINGS_OF_FURY                              = 34,  -- Converted
+    PETRIFYING_PAIR                            = 35,  -- Converted
+    TOADAL_RECALL                              = 36,  -- Converted
     MIRROR_MIRROR                              = 37,
     RANK_2_MISSION_2                           = 64,  -- Converted
     WORMS_TURN                                 = 65,  -- Converted
@@ -164,8 +194,8 @@ xi.battlefield.id =
     SCARLET_KING                               = 199,
     CAT_BURGLAR_BARES_FANGS                    = 200,
     DRAGON_SCALES                              = 201,
-    MOONLIT_PATH                               = 224,
-    MOON_READING                               = 225,
+    MOONLIT_PATH                               = 224, -- Converted
+    MOON_READING                               = 225, -- Converted
     WAKING_THE_BEAST_FULLMOON                  = 226,
     BATTARU_ROYALE                             = 227,
     RETURN_TO_DELKFUTTS_TOWER                  = 256,
@@ -236,15 +266,15 @@ xi.battlefield.id =
     TRIAL_SIZE_TRIAL_BY_WATER                  = 609, -- Converted
     WAKING_THE_BEAST_CLOISTER_OF_TIDES         = 610,
     SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TIDES   = 611, -- Converted
-    FLAMES_FOR_THE_DEAD                        = 640,
+    FLAMES_FOR_THE_DEAD                        = 640, -- Converted
     FOLLOW_THE_WHITE_RABBIT                    = 641,
     WHEN_HELL_FREEZES_OVER                     = 642,
-    BROTHERS                                   = 643,
-    HOLY_COW                                   = 644,
-    HEAD_WIND                                  = 672,
-    LIKE_THE_WIND                              = 673,
-    SHEEP_IN_ANTLIONS_CLOTHING                 = 674,
-    SHELL_WE_DANCE                             = 675,
+    BROTHERS                                   = 643, -- Converted
+    HOLY_COW                                   = 644, -- Converted
+    HEAD_WIND                                  = 672, -- Converted
+    LIKE_THE_WIND                              = 673, -- Experimental
+    SHEEP_IN_ANTLIONS_CLOTHING                 = 674, -- Converted
+    SHELL_WE_DANCE                             = 675, -- Experimental
     TOTENTANZ                                  = 676,
     TANGO_WITH_A_TRACKER                       = 677,
     REQUIEM_OF_A_SIN                           = 678,
@@ -283,7 +313,7 @@ xi.battlefield.id =
     NEST_OF_NIGHTMARES                         = 967,
     ONE_TO_BE_FEARED                           = 992,
     WARRIORS_PATH                              = 993,
-    WHEN_ANGELS_FALL                           = 1024,
+    WHEN_ANGELS_FALL                           = 1024, -- Converted
     DAWN                                       = 1056,
     APOCALYPSE_NIGH                            = 1057,
     CALL_TO_ARMS                               = 1088,

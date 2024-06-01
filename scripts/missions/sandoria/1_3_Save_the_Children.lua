@@ -149,7 +149,7 @@ mission.sections =
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar('battlefieldWin') == 32 then
+                    if player:getLocalVar('battlefieldWin') == xi.battlefield.id.SAVE_THE_CHILDREN then
                         npcUtil.giveKeyItem(player, xi.ki.ORCISH_HUT_KEY)
                         player:setTitle(xi.title.FODDERCHIEF_FLAYER)
                         player:setMissionStatus(mission.areaId, 3)

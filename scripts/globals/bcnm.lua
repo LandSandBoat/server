@@ -10,14 +10,6 @@ xi.bcnm = xi.bcnm or {}
 
 local battlefields =
 {
-    [xi.zone.BONEYARD_GULLY] =
-    {
-        { 0,  672,    0 },   -- Head Wind (PM5-3 U2)
-        { 1,  673,    0 },   -- Like the Wind (ENM) -- TODO: mob constantly runs during battle -- Experimental
-        { 2,  674,    0 },   -- Sheep in Antlion's Clothing (ENM)
-        { 3,  675,    0 },   -- Shell We Dance? (ENM) -- TODO: Needs testing, cleanup, and mixin work -- Experimental
-    },
-
     [xi.zone.THE_SHROUDED_MAW] =
     {
         { 0,  704,    0 },   -- Darkness Named (PM3-5)
@@ -30,30 +22,10 @@ local battlefields =
         { 1,  993,    0 },   -- The Warrior's Path (PM7-5)
     },
 
-    [xi.zone.THE_GARDEN_OF_RUHMET] =
-    {
-        { 0, 1024,    0 },   -- When Angels Fall (PM8-3)
-    },
-
     [xi.zone.EMPYREAL_PARADOX] =
     {
         { 0, 1056,    0 },   -- Dawn (PM8-4)
         { 1, 1057,    0 },   -- Apocalypse Nigh (Quest)
-    },
-
-    [xi.zone.GHELSBA_OUTPOST] =
-    {
-        { 0,   32,    0 },   -- Save the Children (San d'Oria 1-3)
-        { 1,   33,    0 },   -- The Holy Crest (Quest)
-        { 2,   34, 1551 },   -- Wings of Fury (BS20) -- TODO: mobskills Slipstream and Turbulence
-        { 3,   35, 1552 },   -- Petrifying Pair (BS30)
-        { 4,   36, 1552 },   -- Toadal Recall (BS30) -- TODO: shroom-in-cap mechanic
-    },
-
-    [xi.zone.FULL_MOON_FOUNTAIN] =
-    {
-        { 0,  224,    0 },   -- The Moonlit Path (Quest)
-        { 1,  225,    0 },   -- Moon Reading (Windurst 9-2)
     },
 }
 
@@ -66,56 +38,12 @@ local function checkReqs(player, npc, bfid, registrant)
         return battlefield:checkRequirements(player, npc, registrant)
     end
 
-    local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
-    local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
-
-    local nationStatus    = player:getMissionStatus(player:getNation())
-    local promathiaStatus = player:getCharVar('PromathiaStatus')
+    local promathiaStatus  = player:getCharVar('PromathiaStatus')
 
     -- Requirements to register a battlefield
     local registerReqs =
     {
-        [32] = function() -- San d'Oria 1-3: Save the Children
-            local hasCompletedSaveTheChildren = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN)
-
-            return sandoriaMission == xi.mission.id.sandoria.SAVE_THE_CHILDREN and
-                (
-                    (hasCompletedSaveTheChildren and nationStatus <= 2) or
-                    (not hasCompletedSaveTheChildren and nationStatus == 2)
-                )
-        end,
-
-        [33] = function() -- Quest: The Holy Crest
-            return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
-        end,
-
-        [224] = function() -- Quest: The Moonlit Path
-            return player:hasKeyItem(xi.ki.MOON_BAUBLE)
-        end,
-
-        [225] = function() -- Windurst 9-2: Moon Reading
-            return windurstMission == xi.mission.id.windurst.MOON_READING and
-                nationStatus == 2
-        end,
-
-        [672] = function() -- PM5-3 U2: Head Wind
-            return promathiaMission == xi.mission.id.cop.THREE_PATHS and
-                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 7
-        end,
-
-        [673] = function() -- ENM: Like the Wind
-            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
-        end,
-
-        [674] = function() -- ENM: Sheep in Antlion's Clothing
-            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
-        end,
-
-        [675] = function() -- ENM: Shell We Dance?
-            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
-        end,
-
         [704] = function() -- PM3-5: Darkness Named
             return promathiaMission == xi.mission.id.cop.DARKNESS_NAMED and
                 player:getCharVar('Mission[6][358]Status') == 4
@@ -135,11 +63,6 @@ local function checkReqs(player, npc, bfid, registrant)
                 player:getCharVar('Mission[6][748]Status') == 1
         end,
 
-        [1024] = function() -- PM8-3: When Angels Fall
-            return promathiaMission == xi.mission.id.cop.WHEN_ANGELS_FALL and
-                promathiaStatus == 4
-        end,
-
         [1056] = function() -- PM8-4: Dawn
             return promathiaMission == xi.mission.id.cop.DAWN and
                 promathiaStatus == 2
@@ -156,30 +79,6 @@ local function checkReqs(player, npc, bfid, registrant)
     {
         [640] = function() -- PM5-3 U3: Flames for the Dead
             return npc:getXPos() > -721 and npc:getXPos() < 719
-        end,
-
-        [673] = function() -- ENM: Like the Wind
-            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
-        end,
-
-        [674] = function() -- ENM: Sheep in Antlion's Clothing
-            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
-        end,
-
-        [675] = function() -- ENM: Shell We Dance?
-            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
-        end,
-
-        [897] = function() -- Quest: The Wyrmking Descends
-            return player:hasKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING)
-        end,
-
-        [928] = function() -- Quest: Ouryu Cometh
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS) or
-                (
-                    promathiaMission == xi.mission.id.cop.ANCIENT_VOWS and
-                    player:getCharVar('Mission[6][248]Status') >= 2
-                )
         end,
 
         [1057] = function() -- Quest: Apocalypse Nigh
@@ -210,49 +109,12 @@ local function checkSkip(player, bfid)
         return battlefield:checkSkipCutscene(player)
     end
 
-    local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
-    local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
-
-    local nationStatus    = player:getMissionStatus(player:getNation())
-    local promathiaStatus = player:getCharVar('PromathiaStatus')
+    local promathiaStatus  = player:getCharVar('PromathiaStatus')
 
     -- Requirements to skip a battlefield
     local skipReqs =
     {
-        [32] = function() -- San d'Oria 1-3: Save the Children
-            return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN) or
-                (
-                    sandoriaMission == xi.mission.id.sandoria.SAVE_THE_CHILDREN and
-                    nationStatus > 2
-                )
-        end,
-
-        [33] = function() -- Quest: The Holy Crest
-            return player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
-        end,
-
-        [224] = function() -- Quest: The Moonlit Path
-            return player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) or
-                player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON)
-        end,
-
-        [225] = function() -- windurstMission 9-2: Moon Reading
-            return player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) or
-                (
-                    windurstMission == xi.mission.id.windurst.MOON_READING and
-                    nationStatus > 4
-                )
-        end,
-
-        [672] = function() -- PM5-3 U2: Head Wind
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
-                (
-                    promathiaMission == xi.mission.id.cop.THREE_PATHS and
-                    player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) > 7
-                )
-        end,
-
         [704] = function() -- PM3-5: Darkness Named
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
                 (
@@ -268,14 +130,6 @@ local function checkSkip(player, bfid)
 
         [993] = function() -- PM7-5: The Warrior's Path
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH)
-        end,
-
-        [1024] = function() -- PM8-3: When Angels Fall
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL) or
-                (
-                    promathiaMission == xi.mission.id.cop.WHEN_ANGELS_FALL and
-                    promathiaStatus > 4
-                )
         end,
 
         [1056] = function() -- PM8-4: Dawn

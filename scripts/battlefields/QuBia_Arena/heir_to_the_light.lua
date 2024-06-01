@@ -15,9 +15,9 @@ local content = BattlefieldMission:new({
     index                 = 4,
     entryNpc              = 'BC_Entrance',
     exitNpc               = 'Burning_Circle',
-    missionArea           = xi.mission.log_id.WINDURST,
+    missionArea           = xi.mission.log_id.SANDORIA,
     mission               = xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT,
-    missionStatusArea     = xi.mission.log_id.WINDURST,
+    missionStatusArea     = xi.mission.log_id.SANDORIA,
     requiredMissionStatus = 3,
 })
 
