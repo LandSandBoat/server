@@ -197,7 +197,6 @@ public:
     bool         CanCleanup(bool cleanup = false);
     bool         Cleanup(time_point time, bool force);
     bool         LoadMobs();
-    bool         SpawnLoot(CBaseEntity* PEntity = nullptr);
 
     // Groups
     void addGroup(BattlefieldGroup group);
