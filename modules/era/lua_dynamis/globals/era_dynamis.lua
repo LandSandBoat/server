@@ -1037,6 +1037,9 @@ xi.dynamis.onNewDynamis = function(player)
         GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].sjRestrictionNPC):setStatus(xi.status.NORMAL)
     end
 
+    local winQM = GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].winQM) -- Find the winQM for the zone
+    winQM:setStatus(xi.status.INVISIBLE) -- Make invisible until allowed to spawn
+
     if zoneID == xi.zone.DYNAMIS_TAVNAZIA then
         xi.dynamis.dynamisTavnaziaOnNewDynamis(player, zone)
     end

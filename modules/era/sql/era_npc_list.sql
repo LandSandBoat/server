@@ -284,4 +284,91 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17359096" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "17359097" AND polutils_name = "Home Point #4";
 UPDATE npc_list SET status = 2 WHERE npcid = "17359098" AND polutils_name = "Home Point #5";
 
+-- Dynamis Xarc
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330779" AND `name` = "Somnial_Threshold";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330781" AND `name` = "qm1";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330782" AND `name` = "qm2";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330783" AND `name` = "qm3";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330784" AND `name` = "qm4";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330785" AND `name` = "qm5";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330786" AND `name` = "qm6";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330787" AND `name` = "qm7";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330788" AND `name` = "qm8";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330789" AND `name` = "qm9";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330790" AND `name` = "qm10";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330791" AND `name` = "qm11";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330792" AND `name` = "qm12";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330793" AND `name` = "qm13";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330794" AND `name` = "qm14";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330795" AND `name` = "qm15";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330796" AND `name` = "qm16";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330797" AND `name` = "qm17";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330798" AND `name` = "qm18";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330799" AND `name` = "qm19";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17330800" AND `name` = "qm20";
+
+-- Dynamis Beac
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17326799" AND `name` = "Somnial_Threshold";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17326801" AND `name` = "qm1";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17326802" AND `name` = "qm1";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17326803" AND `name` = "qm3";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17326804" AND `name` = "qm4";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17326805" AND `name` = "qm5";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17326806" AND `name` = "qm6";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17326807" AND `name` = "qm7";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17326808" AND `name` = "qm8";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17326809" AND `name` = "qm9";
+
+-- Dynamis Sandoria
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17535222" AND `name` = "Somnial_Threshold";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17535224" AND `name` = "qm1";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17535225" AND `name` = "qm2";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17535226" AND `name` = "qm3";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17535227" AND `name` = "qm4";
+
+-- Dynamis Bastok
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17539321" AND `name` = "Somnial_Threshold";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17539323" AND `name` = "qm1";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17539324" AND `name` = "qm2";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17539325" AND `name` = "qm3";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17539326" AND `name` = "qm4";
+
+-- Dynamis Windurst
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17543478" AND `name` = "Somnial_Threshold";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17543480" AND `name` = "qm1";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17543481" AND `name` = "qm2";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17543482" AND `name` = "qm3";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17543483" AND `name` = "qm4";
+
+-- Dynamis Jueno
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17547508" AND `name` = "Somnial_Threshold";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17547510" AND `name` = "qm1";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17547511" AND `name` = "qm2";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17547512" AND `name` = "qm3";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "17547513" AND `name` = "qm4";
+
+-- Dynamis Valk (Test sj restriction)
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16937584" AND `name` = "Somnial_Threshold";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16937585" AND `name` = "qm0";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16937587" AND `name` = "qm2";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16937588" AND `name` = "qm3";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16937589" AND `name` = "qm4";
+
+-- Dynamis Qufim
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16945637" AND `name` = "Somnial_Threshold";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16945640" AND `name` = "qm2";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16945641" AND `name` = "qm3";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16945642" AND `name` = "qm4";
+
+-- Dynamis Bubu
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16941675" AND `name` = "Somnial_Threshold";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16941678" AND `name` = "qm2";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16941679" AND `name` = "qm3";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16941680" AND `name` = "qm4";
+
+-- Dynamis Tav
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16949395" AND `name` = "Somnial_Threshold";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16949399" AND `name` = "qm3";
+UPDATE npc_list SET content_tag = "ABYSSEA" WHERE npcid = "16949400" AND `name` = "qm4";
+
 UNLOCK TABLES;

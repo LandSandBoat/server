@@ -442,7 +442,7 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                 end,
 
                 onMobDeath = function(mobArg, player, optParams)
-                    xi.dynamis.mobOnDeath(mobArg)
+                    xi.dynamis.mobOnDeath(mobArg, player, optParams)
                 end,
 
                 onMobDespawn = function(mob)
@@ -755,7 +755,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         onMobFight = mobFunctions[mobMobType]["onMobFight"][1],
         onMobRoam =  mobFunctions[mobMobType]["onMobRoam"][1],
         onMobDeath = function(mob, player, optParams)
-            xi.dynamis.mobOnDeath(mob)
+            xi.dynamis.mobOnDeath(mob, player, optParams)
         end,
 
         onMobDespawn = function(mob)
@@ -1212,8 +1212,8 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobWeaponSkill"] = { function(mob)
             end },
 
-            ["onMobDeath"] = { function(mob, player, optParams)
-                xi.dynamis.megaBossOnDeath(mob, player)
+            ["onMobDeath"] = { function(mobArg, player, optParams)
+                xi.dynamis.megaBossOnDeath(mobArg, player, optParams)
             end },
 
             ["mixins"] = {   },
@@ -1247,7 +1247,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             end },
 
             ["onMobDeath"] = { function(mob, player, optParams)
-                xi.dynamis.megaBossOnDeath(mob, player)
+                xi.dynamis.megaBossOnDeath(mob, player, optParams)
             end },
 
             ["mixins"] = {   },
@@ -1475,8 +1475,8 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobWeaponSkill"] = { function(mob)
             end },
 
-            ["onMobDeath"] = { function(mob, player, optParams)
-                xi.dynamis.megaBossOnDeath(mob, player)
+            ["onMobDeath"] = { function(mobArg, player, optParams)
+                xi.dynamis.megaBossOnDeath(mobArg, player, optParams)
             end },
 
             ["mixins"] = {   },
@@ -1508,8 +1508,8 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobWeaponSkill"] = { function(mob)
             end },
 
-            ["onMobDeath"] = { function(mob, player, optParams)
-                xi.dynamis.megaBossOnDeath(mob, player)
+            ["onMobDeath"] = { function(mobArg, player, optParams)
+                xi.dynamis.megaBossOnDeath(mobArg, player, optParams)
             end },
 
             ["mixins"] = {   },
@@ -1920,7 +1920,8 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobWeaponSkill"] = { function(mob)
             end },
 
-            ["onMobDeath"] = { function(mob) xi.dynamis.wormDeath(mob)
+            ["onMobDeath"] = { function(mobArg, player, optParams)
+                xi.dynamis.wormDeath(mobArg, player, optParams)
             end },
 
             ["mixins"] = {   },
@@ -1949,8 +1950,8 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobWeaponSkill"] = { function(mob)
             end },
 
-            ["onMobDeath"] = { function(mob)
-                xi.dynamis.antlionDeath(mob)
+            ["onMobDeath"] = { function(mobArg, player, optParams)
+                xi.dynamis.antlionDeath(mobArg, player, optParams)
             end },
 
             ["mixins"] = { require("scripts/mixins/families/antlion_ambush") },
@@ -1980,8 +1981,8 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobWeaponSkill"] = { function(mobTarget, mob, skill)
             end },
 
-            ["onMobDeath"] = { function(mob, player, optParams)
-                xi.dynamis.mobOnDeath(mob, player, optParams)
+            ["onMobDeath"] = { function(mobArg, player, optParams)
+                xi.dynamis.mobOnDeath(mobArg, player, optParams)
             end },
 
             ["mixins"] = {   },
