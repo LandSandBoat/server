@@ -10,11 +10,6 @@ xi.bcnm = xi.bcnm or {}
 
 local battlefields =
 {
-    [xi.zone.THE_SHROUDED_MAW] =
-    {
-        { 2,  706,    0 },   -- Waking Dreams (Quest)
-    },
-
     [xi.zone.SEALIONS_DEN] =
     {
         { 0,  992,    0 },   -- One to Be Feared (PM6-4)
@@ -43,10 +38,6 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to register a battlefield
     local registerReqs =
     {
-        [706] = function() -- Quest: Waking Dreams
-            return player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)
-        end,
-
         [992] = function() -- PM6-4: One to be Feared
             return promathiaMission == xi.mission.id.cop.ONE_TO_BE_FEARED and
                 player:getCharVar('Mission[6][638]Status') == 3
@@ -105,11 +96,6 @@ local function checkSkip(player, bfid)
     -- Requirements to skip a battlefield
     local skipReqs =
     {
-        [706] = function() -- Quest: Waking Dreams
-            return player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or
-                player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS)
-        end,
-
         [993] = function() -- PM7-5: The Warrior's Path
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH)
         end,

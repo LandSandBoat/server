@@ -9,9 +9,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
-    -- player:setCharVar('PromathiaStatus', 3)
-
     if
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
         player:getCharVar('PromathiaStatus') == 1
