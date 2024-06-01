@@ -269,7 +269,7 @@ end
 xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, actionElement, damageModifier, tpEffect, tpMultiplier)
     local returnInfo = {} -- TODO: Destroy
 
-    local finalDamage = 0
+    local finalDamage = baseDamage
 
     -- Base damage
     if tpEffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
