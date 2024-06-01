@@ -628,7 +628,7 @@ mission.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if
-                        player:getLocalVar('battlefieldWin') == 672 and
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.HEAD_WIND and
                         player:getMissionStatus(mission.areaId, xi.mission.status.COP.ULMIA) == 7
                     then
                         player:setMissionStatus(mission.areaId, 8, xi.mission.status.COP.ULMIA)

@@ -31,10 +31,13 @@ zones[xi.zone.BONEYARD_GULLY] =
     },
     mob =
     {
+        SHIKAREE_Z = GetFirstID('Shikaree_Z'),
     },
+
     npc =
     {
     },
+
     sheepInAntlionsClothing =
     {
         [1] =

@@ -12,7 +12,6 @@ local battlefields =
 {
     [xi.zone.BONEYARD_GULLY] =
     {
-        { 0,  672,    0 },   -- Head Wind (PM5-3 U2)
         { 1,  673,    0 },   -- Like the Wind (ENM) -- TODO: mob constantly runs during battle -- Experimental
         { 2,  674,    0 },   -- Sheep in Antlion's Clothing (ENM)
         { 3,  675,    0 },   -- Shell We Dance? (ENM) -- TODO: Needs testing, cleanup, and mixin work -- Experimental
@@ -52,11 +51,6 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to register a battlefield
     local registerReqs =
     {
-        [672] = function() -- PM5-3 U2: Head Wind
-            return promathiaMission == xi.mission.id.cop.THREE_PATHS and
-                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 7
-        end,
-
         [673] = function() -- ENM: Like the Wind
             return player:hasKeyItem(xi.ki.MIASMA_FILTER)
         end,
@@ -152,14 +146,6 @@ local function checkSkip(player, bfid)
     -- Requirements to skip a battlefield
     local skipReqs =
     {
-        [672] = function() -- PM5-3 U2: Head Wind
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
-                (
-                    promathiaMission == xi.mission.id.cop.THREE_PATHS and
-                    player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) > 7
-                )
-        end,
-
         [704] = function() -- PM3-5: Darkness Named
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
                 (
