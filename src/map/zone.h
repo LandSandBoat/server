@@ -482,10 +482,10 @@ DECLARE_FORMAT_AS_UNDERLYING(ZONEMISC);
 
 struct zoneMusic_t
 {
-    uint8 m_songDay;   // music (daytime)
-    uint8 m_songNight; // music (nighttime)
-    uint8 m_bSongS;    // battle music (solo)
-    uint8 m_bSongM;    // battle music (party)
+    uint16 m_songDay;   // music (daytime)
+    uint16 m_songNight; // music (nighttime)
+    uint16 m_bSongS;    // battle music (solo)
+    uint16 m_bSongM;    // battle music (party)
 };
 
 struct zoneWeather_t
@@ -554,15 +554,15 @@ public:
     const std::string& getName();
     zoneLine_t*        GetZoneLine(uint32 zoneLineID);
 
-    uint8 GetSoloBattleMusic() const;
-    uint8 GetPartyBattleMusic() const;
-    uint8 GetBackgroundMusicDay() const;
-    uint8 GetBackgroundMusicNight() const;
+    uint16 GetSoloBattleMusic() const;
+    uint16 GetPartyBattleMusic() const;
+    uint16 GetBackgroundMusicDay() const;
+    uint16 GetBackgroundMusicNight() const;
 
-    void SetSoloBattleMusic(uint8 music);
-    void SetPartyBattleMusic(uint8 music);
-    void SetBackgroundMusicDay(uint8 music);
-    void SetBackgroundMusicNight(uint8 music);
+    void SetSoloBattleMusic(uint16 music);
+    void SetPartyBattleMusic(uint16 music);
+    void SetBackgroundMusicDay(uint16 music);
+    void SetBackgroundMusicNight(uint16 music);
 
     auto queryEntitiesByName(std::string const& pattern) -> QueryByNameResult_t const&;
 
