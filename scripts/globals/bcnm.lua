@@ -12,7 +12,6 @@ local battlefields =
 {
     [xi.zone.THE_SHROUDED_MAW] =
     {
-        { 0,  704,    0 },   -- Darkness Named (PM3-5)
         { 2,  706,    0 },   -- Waking Dreams (Quest)
     },
 
@@ -44,11 +43,6 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to register a battlefield
     local registerReqs =
     {
-        [704] = function() -- PM3-5: Darkness Named
-            return promathiaMission == xi.mission.id.cop.DARKNESS_NAMED and
-                player:getCharVar('Mission[6][358]Status') == 4
-        end,
-
         [706] = function() -- Quest: Waking Dreams
             return player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)
         end,
@@ -77,10 +71,6 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to enter a battlefield already registered by a party member
     local enterReqs =
     {
-        [640] = function() -- PM5-3 U3: Flames for the Dead
-            return npc:getXPos() > -721 and npc:getXPos() < 719
-        end,
-
         [1057] = function() -- Quest: Apocalypse Nigh
             return player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
                 (
@@ -115,14 +105,6 @@ local function checkSkip(player, bfid)
     -- Requirements to skip a battlefield
     local skipReqs =
     {
-        [704] = function() -- PM3-5: Darkness Named
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
-                (
-                    promathiaMission == xi.mission.id.cop.DARKNESS_NAMED and
-                    player:getCharVar('Mission[6][358]Status') == 5
-                )
-        end,
-
         [706] = function() -- Quest: Waking Dreams
             return player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS)
