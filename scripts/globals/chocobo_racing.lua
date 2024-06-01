@@ -24,9 +24,20 @@ local debug = function(player, ...)
     end
 end
 
+local setTimer = nil
+setTimer = function(player, npcId)
+    player:timer(400, function(playerArg)
+        playerArg:sendEmptyEntityUpdateToPlayer(GetNPCByID(npcId))
+        setTimer(playerArg, npcId)
+    end)
+end
+
 local startRaceImpl = function(player)
     debug(player, 'Starting race')
     player:startEvent(210, 3885177, 3885177, -132554, -14500, 1344, -1, 610862737, 1)
+
+     -- 'Rungaga' seems to an anchor NPC that everything is orchestrated through?
+    setTimer(player, zones[xi.zone.CHOCOBO_CIRCUIT].npc.RUNGAGA)
 end
 
 xi.chocoboRacing.startRace = function()
@@ -57,20 +68,18 @@ xi.chocoboRacing.onEventUpdate = function(player, csid, option, npc)
     if csid == 210 then
         if option == 5 then
             debug(player, 'Intro banner')
-            player:updateEvent(1, 0, 0xFFFDFA36, 0xFFFFC75C, 0x17345260, 0xFFFFFFFF, 0x24690691, 0xFFFFFFFB)
+            player:updateEvent(1, 0, -132554, -14500, 389304928, -1, 610862737, -5)
         elseif option == 274 then
             debug(player, 'Names 1-4')
-            player:updateEventString(chocobos[1], chocobos[2], chocobos[3], chocobos[4],
-                0x000060B9, 0x000000B9)
-            player:updateEvent(70, 0, 7, 4, 0x17345260, 0xFFFFFFFF, 0x24690691, 0xFFFFFFFB)
+            player:updateEventString(chocobos[1], chocobos[2], chocobos[3], chocobos[4])
+            player:updateEvent(70, 0, 7, 4, 389304928, -1, 610862737, -5)
         elseif option == 510 or option == 530 then
             debug(player, 'Names 5-8 and Start')
-            player:updateEventString(chocobos[5], chocobos[6], chocobos[7], chocobos[8],
-                0x00002928, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00085735)
-            player:updateEvent(70, 0, 7, 4, 0x17345260, 0xFFFFFFFF, 0x24690691, 0xFFFFFFFB)
+            player:updateEventString(chocobos[5], chocobos[6], chocobos[7], chocobos[8])
+            player:updateEvent(70, 0, 7, 4, 389304928, -1, 610862737, -5)
         elseif option == 17 then
             debug(player, 'End and announce winnings')
-            player:updateEvent(70, 0, winningsPerQuill, 1, 0, 3, 3, 0xFFFFFFFB)
+            player:updateEvent(70, 0, winningsPerQuill, 1, 0, 3, 3, -5)
         end
     end
 end

@@ -2730,6 +2730,22 @@ void CLuaBaseEntity::sendEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate, ui
     }
 }
 
+// Seems to be needed for Chocobo Racing
+void CLuaBaseEntity::sendEmptyEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate)
+{
+    if (m_PBaseEntity->objtype == TYPE_PC && entityToUpdate->GetBaseEntity())
+    {
+        auto* packet = new CBasicPacket();
+        packet->setType(0x0E);
+        packet->setSize(0x50);
+        packet->ref<uint32>(0x04) = entityToUpdate->GetBaseEntity()->id;
+        packet->ref<uint16>(0x08) = entityToUpdate->GetBaseEntity()->targid;
+        packet->ref<uint8>(0x0A)  = 0x20; // Matches retail observation
+        packet->ref<uint8>(0x30)  = 0x01; // MODEL_TYPE::MODEL_EQUIPPED
+        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(packet);
+    }
+}
+
 void CLuaBaseEntity::forceRezone()
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
@@ -18446,6 +18462,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getPlayerTriggerAreaInZone", CLuaBaseEntity::getPlayerTriggerAreaInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
     SOL_REGISTER("sendEntityUpdateToPlayer", CLuaBaseEntity::sendEntityUpdateToPlayer);
+    SOL_REGISTER("sendEmptyEntityUpdateToPlayer", CLuaBaseEntity::sendEmptyEntityUpdateToPlayer);
     SOL_REGISTER("forceRezone", CLuaBaseEntity::forceRezone);
     SOL_REGISTER("forceLogout", CLuaBaseEntity::forceLogout);
 
