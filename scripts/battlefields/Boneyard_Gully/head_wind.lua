@@ -35,27 +35,36 @@ content.groups =
                 boneyardGullyID.mob.SHIKAREE_Z,
                 boneyardGullyID.mob.SHIKAREE_Z + 1,
                 boneyardGullyID.mob.SHIKAREE_Z + 2,
-                boneyardGullyID.mob.SHIKAREE_Z + 4,
             },
 
             {
                 boneyardGullyID.mob.SHIKAREE_Z + 5,
                 boneyardGullyID.mob.SHIKAREE_Z + 6,
                 boneyardGullyID.mob.SHIKAREE_Z + 7,
-                boneyardGullyID.mob.SHIKAREE_Z + 9,
             },
 
             {
                 boneyardGullyID.mob.SHIKAREE_Z + 10,
                 boneyardGullyID.mob.SHIKAREE_Z + 11,
                 boneyardGullyID.mob.SHIKAREE_Z + 12,
-                boneyardGullyID.mob.SHIKAREE_Z + 14,
             },
         },
 
-        allDeath = function(battlefield, mob)
+        superlinkGroup = 1,
+        allDeath       = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
         end,
+    },
+
+    {
+        mobIds =
+        {
+            { boneyardGullyID.mob.SHIKAREE_Z + 4   },
+            { boneyardGullyID.mob.SHIKAREE_Z + 9,  },
+            { boneyardGullyID.mob.SHIKAREE_Z + 14, },
+        },
+
+        superlinkGroup = 1,
     },
 
     -- NOTE: Rabbit is spawned on start, but wyvern is a result of an on engage action.
@@ -67,7 +76,8 @@ content.groups =
             { boneyardGullyID.mob.SHIKAREE_Z + 13 },
         },
 
-        spawned = false,
+        superlinkGroup = 1,
+        spawned        = false,
     },
 }
 

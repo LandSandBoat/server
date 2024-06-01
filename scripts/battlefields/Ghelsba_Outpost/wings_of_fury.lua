@@ -16,6 +16,10 @@ local content = Battlefield:new({
     area             = 1,
     entryNpc         = 'Hut_Door',
     requiredItems    = { xi.item.CLOUDY_ORB, wearMessage = ghelsbaID.text.A_CRACK_HAS_FORMED, wornMessage = ghelsbaID.text.ORB_IS_CRACKED },
+    armouryCrates    =
+    {
+        ghelsbaID.mob.COLO_COLO + 3,
+    },
 })
 
 -- TODO: MobSkills Slipstream and Turbulence need to be implemented/applied.

@@ -34,7 +34,7 @@ function content:onEventFinishWin(player, csid, option, npc)
 
         player:delKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
         player:unlockJob(xi.job.DRG)
-        player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_DRAGOON)
+        player:messageSpecial(ghelsbaID.text.YOU_CAN_NOW_BECOME_A_DRAGOON)
         player:setPetName(xi.petType.WYVERN, option + 1)
     end
 end

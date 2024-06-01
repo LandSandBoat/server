@@ -24,16 +24,16 @@ local content = BattlefieldMission:new({
 function content:onEventFinishBattlefield(player, csid, option, npc)
     local playerCoords =
     {
-        [1] = { -400, -201,  419, 61 },
-        [2] = {    0,   -1,   10, 61 },
-        [3] = {  399,  198, -381, 57 },
+        [1] = {  340.220,  48.557, -386.114, 190 },
+        [2] = {  -59.877,  10.577,   13.853, 190 },
+        [3] = { -459.974, -51.423,   373.86, 190 },
     }
 
     local ajidoCoords =
     {
-        [1] = { -403, -201,  413, 58 },
-        [2] = {   -3,   -1,    4, 61 },
-        [3] = {  397,  198, -395, 64 },
+        [1] = {  340.117,  48.752, -383.747, 64 },
+        [2] = {   -59.98,  10.752,    16.22, 64 },
+        [3] = { -379.826, -51.248,  376.227, 64 },
     }
 
     local battlefield     = player:getBattlefield()

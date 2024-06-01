@@ -16,6 +16,10 @@ local content = Battlefield:new({
     area             = 1,
     entryNpc         = 'Hut_Door',
     requiredItems    = { xi.item.SKY_ORB, wearMessage = ghelsbaID.text.A_CRACK_HAS_FORMED, wornMessage = ghelsbaID.text.ORB_IS_CRACKED },
+    armouryCrates    =
+    {
+        ghelsbaID.mob.TOADPILLOW + 4,
+    },
 })
 
 -- TODO: Shroom-in-Cap Mechanic

@@ -45,7 +45,8 @@ content.groups =
             ruHmetID.mob.IXZDEI_RDM + 3,
         },
 
-        allDeath = function(battlefield, mob)
+        superlink = true,
+        allDeath  = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
         end,
     },

@@ -3,8 +3,6 @@
 -- Boneyard Gully ENM, Miasma Filter
 -- !addkeyitem MIASMA_FILTER
 -----------------------------------
-local boneyardGullyID = zones[xi.zone.BONEYARD_GULLY]
------------------------------------
 
 local content = Battlefield:new({
     zoneId           = xi.zone.BONEYARD_GULLY,

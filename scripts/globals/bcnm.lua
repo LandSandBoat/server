@@ -10,11 +10,6 @@ xi.bcnm = xi.bcnm or {}
 
 local battlefields =
 {
-    [xi.zone.BONEYARD_GULLY] =
-    {
-        { 2,  674,    0 },   -- Sheep in Antlion's Clothing (ENM)
-    },
-
     [xi.zone.THE_SHROUDED_MAW] =
     {
         { 0,  704,    0 },   -- Darkness Named (PM3-5)
@@ -49,10 +44,6 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to register a battlefield
     local registerReqs =
     {
-        [674] = function() -- ENM: Sheep in Antlion's Clothing
-            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
-        end,
-
         [704] = function() -- PM3-5: Darkness Named
             return promathiaMission == xi.mission.id.cop.DARKNESS_NAMED and
                 player:getCharVar('Mission[6][358]Status') == 4
@@ -88,10 +79,6 @@ local function checkReqs(player, npc, bfid, registrant)
     {
         [640] = function() -- PM5-3 U3: Flames for the Dead
             return npc:getXPos() > -721 and npc:getXPos() < 719
-        end,
-
-        [674] = function() -- ENM: Sheep in Antlion's Clothing
-            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
         end,
 
         [1057] = function() -- Quest: Apocalypse Nigh
