@@ -12,7 +12,6 @@ local battlefields =
 {
     [xi.zone.BONEYARD_GULLY] =
     {
-        { 1,  673,    0 },   -- Like the Wind (ENM) -- TODO: mob constantly runs during battle -- Experimental
         { 2,  674,    0 },   -- Sheep in Antlion's Clothing (ENM)
         { 3,  675,    0 },   -- Shell We Dance? (ENM) -- TODO: Needs testing, cleanup, and mixin work -- Experimental
     },
@@ -51,10 +50,6 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to register a battlefield
     local registerReqs =
     {
-        [673] = function() -- ENM: Like the Wind
-            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
-        end,
-
         [674] = function() -- ENM: Sheep in Antlion's Clothing
             return player:hasKeyItem(xi.ki.MIASMA_FILTER)
         end,
@@ -98,10 +93,6 @@ local function checkReqs(player, npc, bfid, registrant)
     {
         [640] = function() -- PM5-3 U3: Flames for the Dead
             return npc:getXPos() > -721 and npc:getXPos() < 719
-        end,
-
-        [673] = function() -- ENM: Like the Wind
-            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
         end,
 
         [674] = function() -- ENM: Sheep in Antlion's Clothing
