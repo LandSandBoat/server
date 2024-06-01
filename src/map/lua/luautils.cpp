@@ -2070,41 +2070,6 @@ namespace luautils
         return result.get_type() == sol::type::number ? result.get<int32>() : 0;
     }
 
-    int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result, uint16 extras)
-    {
-        TracyZoneScoped;
-
-        EventPrep* previousPrep = PChar->eventPreparation;
-        PChar->eventPreparation = PChar->currentEvent;
-
-        auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
-        if (!onEventUpdate.valid())
-        {
-            ShowError("luautils::onEventUpdate: undefined procedure onEventUpdate");
-            return -1;
-        }
-
-        std::optional<CLuaBaseEntity> optTarget = std::nullopt;
-        if (PChar->currentEvent->targetEntity)
-        {
-            optTarget = CLuaBaseEntity(PChar->currentEvent->targetEntity);
-        }
-
-        auto func_result = onEventUpdate(CLuaBaseEntity(PChar), eventID, result, extras, optTarget);
-
-        PChar->eventPreparation = previousPrep;
-
-        if (!func_result.valid())
-        {
-            sol::error err = func_result;
-            ShowError("luautils::onEventUpdate: %s", err.what());
-            ReportErrorToPlayer(PChar, err.what());
-            return -1;
-        }
-
-        return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
-    }
-
     int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result)
     {
         TracyZoneScoped;

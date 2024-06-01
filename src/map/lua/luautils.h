@@ -225,7 +225,6 @@ namespace luautils
     void OnTimeServerTick();
 
     int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc);
-    int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result, uint16 extras); // triggered when game triggers event update during cutscene with extra parameters (battlefield)
     int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result);                // triggered when game triggers event update during cutscene
     int32 OnEventUpdate(CCharEntity* PChar, std::string const& updateString);              // triggered when game triggers event update during cutscene
     int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result);
