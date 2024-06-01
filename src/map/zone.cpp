@@ -1174,6 +1174,14 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         PChar->PTreasurePool->DelMember(PChar);
     }
 
+    // If zone-wide treasure pool but no players in zone then destroy current pool and create new pool
+    // this prevents loot from staying in zone pool after the last player leaves the zone
+    if (m_TreasurePool && m_TreasurePool->GetPoolType() == TREASUREPOOL_ZONE && m_zoneEntities->CharListEmpty())
+    {
+        destroy(m_TreasurePool);
+        m_TreasurePool = new CTreasurePool(TREASUREPOOL_ZONE);
+    }
+
     PChar->ClearTrusts(); // trusts don't survive zone lines
 
     if (PChar->isDead())
