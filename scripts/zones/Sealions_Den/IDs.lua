@@ -28,7 +28,7 @@ zones[xi.zone.SEALIONS_DEN] =
     {
         ONE_TO_BE_FEARED_OFFSET = GetFirstID('Mammet-22_Zeta'),
         OMEGA_OFFSET            = GetFirstID('Omega'),
-        WARRIORS_PATH_OFFSET    = GetFirstID('Tenzen'),
+        TENZEN                  = GetFirstID('Tenzen'),
     },
     npc =
     {

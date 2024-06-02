@@ -69,7 +69,10 @@ tenzenFunctions.wsSequence = function(mob)
         mob:useMobAbility(1399) -- Cosmic Elucidation
         mob:setLocalVar('step', 6)
         mob:timer(3000, function(mobArg)
-            mobArg:getBattlefield():setLocalVar('gameover', mobArg:getBattlefield():getRemainingTime()) -- initiate loss condition trigger & record the time remaining
+            mobArg:timer(10000, function(lostMobArg)
+                lostMobArg:getBattlefield():lose()
+            end)
+
             mobArg:setMobMod(xi.mobMod.NO_MOVE, 1)
             mobArg:showText(mobArg, ID.text.TENZEN_MSG_OFFSET + 1)
         end)

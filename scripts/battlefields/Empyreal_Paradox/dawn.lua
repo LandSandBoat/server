@@ -45,7 +45,7 @@ end
 function content:onEventFinishBattlefield(player, csid, option, npc)
     local battlefield     = player:getBattlefield()
     local battlefieldArea = battlefield:getArea()
-    local phaseTwoMobId   = empyrealParadoxID.mob.PROMATHIA + (battlefield:getArea() - 1) * 2 + 1
+    local phaseTwoMobId   = empyrealParadoxID.mob.PROMATHIA + (battlefieldArea - 1) * 2 + 1
 
     -- Bail out if anyone else got here first
     if GetMobByID(phaseTwoMobId):isSpawned() then
