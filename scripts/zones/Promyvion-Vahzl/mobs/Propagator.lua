@@ -4,6 +4,10 @@
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 240)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('maxBabies', 2)
 end

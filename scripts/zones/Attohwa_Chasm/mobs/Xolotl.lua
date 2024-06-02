@@ -6,6 +6,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setRespawnTime(0, true)
+    mob:setMobMod(xi.mobMod.SUPERLINK, 32)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

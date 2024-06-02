@@ -14,6 +14,10 @@ local function clearTowerVars(player, towerNum)
     player:setCharVar('Ru_aern_'..towerNum..'-3KILL', 0)
 end
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     if
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.GARDEN_OF_ANTIQUITY and

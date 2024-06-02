@@ -6,6 +6,10 @@ local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+end
+
 entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.REGAIN, 50)
 end

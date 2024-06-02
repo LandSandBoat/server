@@ -13,6 +13,7 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:setCarefulPathing(true)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 15)
 end
 
 entity.onMobSpawn = function(mob)
