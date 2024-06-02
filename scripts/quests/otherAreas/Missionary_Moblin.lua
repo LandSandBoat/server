@@ -60,7 +60,10 @@ quest.sections =
             onEventFinish =
             {
                 [9] = function(player, csid, option, npc)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:confirmTrade()
+                        xi.quest.setMustZone(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.FOR_THE_BIRDS) -- must zone prior to For the Birds
+                    end
                 end,
             },
         },
@@ -75,7 +78,9 @@ quest.sections =
             ['Koblakiq'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(12)
+                    if xi.quest.getMustZone(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.FOR_THE_BIRDS) then
+                        return quest:event(12)
+                    end
                 end,
             },
         },

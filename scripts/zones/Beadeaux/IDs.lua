@@ -29,6 +29,9 @@ zones[xi.zone.BEADEAUX] =
         YOU_CAN_NOW_BECOME_A_DARK_KNIGHT   = 7364, -- You can now become a dark knight!
         FOUL_SMELLING_SOIL_IS_SPILLING_OUT = 7365, -- Foul-smelling soil is spilling out.
         CHEST_UNLOCKED                     = 7375, -- You unlock the chest!
+        HU_URR                             = 7771, -- Hu-urr...!
+        GLITTERING_FRAGMENT_STOLEN         = 7773, -- The <item> is taken from you!
+        THE_QUADAV_ARE_ATTACKING           = 7774, -- The Quadav are attacking!
         LEARNS_SPELL                       = 7793, -- <name> learns <spell>!
         UNCANNY_SENSATION                  = 7795, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL              = 7802, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
@@ -41,6 +44,7 @@ zones[xi.zone.BEADEAUX] =
         GE_DHA_EVILEYE      = GetFirstID('GeDha_Evileye'),
         MIMIC               = GetFirstID('Mimic'),
         ZO_KHU_BLACKCLOUD   = GetFirstID('ZoKhu_Blackcloud'),
+        MAGNES_QUADAV       = GetFirstID('Magnes_Quadav'),
     },
     npc =
     {
