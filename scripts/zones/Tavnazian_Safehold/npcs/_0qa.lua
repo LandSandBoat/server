@@ -12,7 +12,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-        player:getCharVar('PromathiaStatus') == 5
+        player:getCharVar('PromathiaStatus') == 6
     then
         player:startEvent(543)
     end
@@ -23,7 +23,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 543 then
-        player:setCharVar('PromathiaStatus', 6)
+        player:setCharVar('PromathiaStatus', 7)
     end
 end
 

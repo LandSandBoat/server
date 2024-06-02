@@ -14,11 +14,6 @@ local battlefields =
         { 0,  992,    0 },   -- One to Be Feared (PM6-4)
         { 1,  993,    0 },   -- The Warrior's Path (PM7-5)
     },
-
-    [xi.zone.EMPYREAL_PARADOX] =
-    {
-        { 0, 1056,    0 },   -- Dawn (PM8-4)
-    },
 }
 
 -----------------------------------
@@ -44,11 +39,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [993] = function() -- PM7-5: The Warrior's Path
             return promathiaMission == xi.mission.id.cop.THE_WARRIORS_PATH and
                 player:getCharVar('Mission[6][748]Status') == 1
-        end,
-
-        [1056] = function() -- PM8-4: Dawn
-            return promathiaMission == xi.mission.id.cop.DAWN and
-                promathiaStatus == 2
         end,
     }
 
@@ -79,14 +69,6 @@ local function checkSkip(player, bfid)
     {
         [993] = function() -- PM7-5: The Warrior's Path
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH)
-        end,
-
-        [1056] = function() -- PM8-4: Dawn
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN) or
-                (
-                    promathiaMission == xi.mission.id.cop.DAWN and
-                    promathiaStatus > 2
-                )
         end,
     }
 

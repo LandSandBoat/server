@@ -23,12 +23,12 @@ entity.onTrigger = function(player, npc)
 
     if
         mission == xi.mission.id.cop.DAWN and
-        status == 4
+        status == 5
     then
         player:startEvent(129)
 
     elseif
-        (mission == xi.mission.id.cop.DAWN and status > 4) or
+        (mission == xi.mission.id.cop.DAWN and status > 5) or
         player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
     then
         local hasRing = false
@@ -73,7 +73,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 129 then
-        player:setCharVar('PromathiaStatus', 5)
+        player:setCharVar('PromathiaStatus', 6)
     elseif
         (csid == 84 or csid == 204) and
         option >= 5 and
