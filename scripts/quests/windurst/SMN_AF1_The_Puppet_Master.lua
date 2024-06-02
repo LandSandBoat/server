@@ -118,7 +118,7 @@ quest.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if
-                        player:getLocalVar('battlefieldWin') == 577 and
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.PUPPET_MASTER and
                         quest:getVar(player, 'Prog') == 1
                     then
                         quest:setVar(player, 'Prog', 2)

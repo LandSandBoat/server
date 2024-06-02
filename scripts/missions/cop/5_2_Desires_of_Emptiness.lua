@@ -204,7 +204,7 @@ mission.sections =
 
                 [32001] = function(player, csid, option, npc)
                     if
-                        player:getLocalVar('battlefieldWin') == 864 and
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.DESIRES_OF_EMPTINESS and
                         mission:getVar(player, 'Status') == 2
                     then
                         mission:setVar(player, 'Status', 3)

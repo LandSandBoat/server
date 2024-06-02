@@ -106,7 +106,7 @@ mission.sections =
 
                 [32001] = function(player, csid, option, npc)
                     if
-                        player:getLocalVar('battlefieldWin') == 992 and
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.ONE_TO_BE_FEARED and
                         mission:getVar(player, 'Status') == 3
                     then
                         -- While we could queue this, any disconnect would cause the player to have to
