@@ -50,7 +50,7 @@ mission.sections =
                         return mission:messageSpecial(flamesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_SCARLET_SEAL)
                     elseif
                         player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and
-                        player:getLocalVar('battlefieldWin') == 547
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FLAMES
                     then
                         return mission:progressEvent(2)
                     end
@@ -81,7 +81,7 @@ mission.sections =
                         return mission:messageSpecial(frostID.text.POWER_STYMIES, xi.keyItem.DOMINAS_AZURE_SEAL)
                     elseif
                         player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and
-                        player:getLocalVar('battlefieldWin') == 484
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FROST
                     then
                         return mission:progressEvent(2)
                     end
@@ -112,7 +112,7 @@ mission.sections =
                         return mission:messageSpecial(galesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_EMERALD_SEAL)
                     elseif
                         player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and
-                        player:getLocalVar('battlefieldWin') == 420
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_GALES
                     then
                         return mission:progressEvent(2)
                     end
@@ -143,7 +143,7 @@ mission.sections =
                         return mission:messageSpecial(stormsID.text.POWER_STYMIES, xi.keyItem.DOMINAS_VIOLET_SEAL)
                     elseif
                         player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and
-                        player:getLocalVar('battlefieldWin') == 452
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_STORMS
                     then
                         return mission:progressEvent(2)
                     end
@@ -174,7 +174,7 @@ mission.sections =
                         return mission:messageSpecial(tidesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_CERULEAN_SEAL)
                     elseif
                         player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and
-                        player:getLocalVar('battlefieldWin') == 611
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TIDES
                     then
                         return mission:progressEvent(2)
                     end
@@ -205,7 +205,7 @@ mission.sections =
                         return mission:messageSpecial(tremorsID.text.POWER_STYMIES, xi.keyItem.DOMINAS_AMBER_SEAL)
                     elseif
                         player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and
-                        player:getLocalVar('battlefieldWin') == 580
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TREMORS
                     then
                         return mission:progressEvent(2)
                     end
@@ -312,7 +312,7 @@ mission.sections =
                         return mission:messageSpecial(flamesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_SCARLET_SEAL)
                     elseif
                         player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and
-                        player:getLocalVar('battlefieldWin') == 547
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FLAMES
                     then
                         return mission:progressEvent(2)
                     end
@@ -343,7 +343,7 @@ mission.sections =
                         return mission:messageSpecial(frostID.text.POWER_STYMIES, xi.keyItem.DOMINAS_AZURE_SEAL)
                     elseif
                         player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and
-                        player:getLocalVar('battlefieldWin') == 484
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FROST
                     then
                         return mission:progressEvent(2)
                     end
@@ -374,7 +374,7 @@ mission.sections =
                         return mission:messageSpecial(galesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_EMERALD_SEAL)
                     elseif
                         player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and
-                        player:getLocalVar('battlefieldWin') == 420
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_GALES
                     then
                         return mission:progressEvent(2)
                     end
@@ -405,7 +405,7 @@ mission.sections =
                         return mission:messageSpecial(stormsID.text.POWER_STYMIES, xi.keyItem.DOMINAS_VIOLET_SEAL)
                     elseif
                         player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and
-                        player:getLocalVar('battlefieldWin') == 452
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_STORMS
                     then
                         return mission:progressEvent(2)
                     end
@@ -436,7 +436,7 @@ mission.sections =
                         return mission:messageSpecial(tidesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_CERULEAN_SEAL)
                     elseif
                         player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and
-                        player:getLocalVar('battlefieldWin') == 611
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TIDES
                     then
                         return mission:progressEvent(2)
                     end
@@ -467,7 +467,7 @@ mission.sections =
                         return mission:messageSpecial(tremorsID.text.POWER_STYMIES, xi.keyItem.DOMINAS_AMBER_SEAL)
                     elseif
                         player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and
-                        player:getLocalVar('battlefieldWin') == 580
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TREMORS
                     then
                         return mission:progressEvent(2)
                     end
