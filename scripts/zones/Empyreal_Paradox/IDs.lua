@@ -25,6 +25,7 @@ zones[xi.zone.EMPYREAL_PARADOX] =
     },
     mob =
     {
+        KAMLANAUT        = GetFirstID('Kamlanaut'),
         PROMATHIA_OFFSET = GetFirstID('Promathia'),
     },
     npc =

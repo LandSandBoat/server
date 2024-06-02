@@ -19,13 +19,10 @@ entity.onTrigger = function(player, npc)
         player:getCharVar('ApocalypseNigh') == 3
     then
         player:startEvent(4)
-    else
-        xi.bcnm.onTrigger(player, npc)
     end
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
-    xi.bcnm.onEventUpdate(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
@@ -33,8 +30,6 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('PromathiaStatus', 2)
     elseif csid == 4 then
         player:setCharVar('ApocalypseNigh', 4)
-    else
-        xi.bcnm.onEventFinish(player, csid, option, npc)
     end
 end
 

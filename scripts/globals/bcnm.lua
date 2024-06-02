@@ -3,7 +3,6 @@
 -----------------------------------
 require('scripts/globals/battlefield')
 require('scripts/globals/missions')
-require('scripts/globals/quests')
 -----------------------------------
 xi = xi or {}
 xi.bcnm = xi.bcnm or {}
@@ -19,7 +18,6 @@ local battlefields =
     [xi.zone.EMPYREAL_PARADOX] =
     {
         { 0, 1056,    0 },   -- Dawn (PM8-4)
-        { 1, 1057,    0 },   -- Apocalypse Nigh (Quest)
     },
 }
 
@@ -52,27 +50,10 @@ local function checkReqs(player, npc, bfid, registrant)
             return promathiaMission == xi.mission.id.cop.DAWN and
                 promathiaStatus == 2
         end,
-
-        [1057] = function() -- Apocalypse Nigh
-            return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_ACCEPTED and
-                player:getCharVar('ApocalypseNigh') == 4
-        end,
-    }
-
-    -- Requirements to enter a battlefield already registered by a party member
-    local enterReqs =
-    {
-        [1057] = function() -- Quest: Apocalypse Nigh
-            return player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
-                (
-                    player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_ACCEPTED and
-                    player:getCharVar('ApocalypseNigh') == 4
-                )
-        end,
     }
 
     -- Determine whether player meets battlefield requirements
-    local req = registrant and registerReqs[bfid] or enterReqs[bfid]
+    local req = registrant and registerReqs[bfid]
 
     if not req or req() then
         return true
@@ -106,10 +87,6 @@ local function checkSkip(player, bfid)
                     promathiaMission == xi.mission.id.cop.DAWN and
                     promathiaStatus > 2
                 )
-        end,
-
-        [1057] = function() -- Apocalypse Nigh
-            return player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
         end,
     }
 
