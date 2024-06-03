@@ -28,7 +28,7 @@ entity.onMobEngage = function(mob, target)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     -- three tarus fight with tenzen
     local mobId  = mob:getID()
-    local offset = mobId - ID.mob.WARRIORS_PATH_OFFSET
+    local offset = mobId - ID.mob.TENZEN
 
     if
         offset >= 0 and

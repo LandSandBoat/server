@@ -42,7 +42,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
                 player:getCharVar('COP_jabbos_story') == 1
             then
                 player:startEvent(122)
-            elseif player:getCharVar('PromathiaStatus') == 7 then
+            elseif player:getCharVar('PromathiaStatus') == 8 then
                 if player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == xi.questStatus.QUEST_AVAILABLE then
                     player:startEvent(142)
                 elseif
@@ -85,7 +85,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 122 then
-        player:setCharVar('PromathiaStatus', 4)
+        player:setCharVar('PromathiaStatus', 5)
         player:setCharVar('COP_3-taru_story', 0)
         player:setCharVar('COP_shikarees_story', 0)
         player:setCharVar('COP_louverance_story', 0)

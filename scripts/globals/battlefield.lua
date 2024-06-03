@@ -279,9 +279,9 @@ xi.battlefield.id =
     TANGO_WITH_A_TRACKER                       = 677,
     REQUIEM_OF_A_SIN                           = 678,
     ANTAGONISTIC_AMBUSCADE                     = 679,
-    DARKNESS_NAMED                             = 704,
+    DARKNESS_NAMED                             = 704, -- Converted
     TEST_YOUR_MITE                             = 705,
-    WAKING_DREAMS                              = 706,
+    WAKING_DREAMS                              = 706, -- Converted
     CENTURY_OF_HARDSHIP                        = 736, -- Converted
     RETURN_TO_THE_DEPTHS                       = 737,
     BIONIC_BUG                                 = 738,
@@ -311,11 +311,11 @@ xi.battlefield.id =
     BELOVED_OF_THE_ATLANTES                    = 965,
     UNINVITED_GUESTS                           = 966,
     NEST_OF_NIGHTMARES                         = 967,
-    ONE_TO_BE_FEARED                           = 992,
-    WARRIORS_PATH                              = 993,
+    ONE_TO_BE_FEARED                           = 992,  -- Converted
+    WARRIORS_PATH                              = 993,  -- Converted
     WHEN_ANGELS_FALL                           = 1024, -- Converted
-    DAWN                                       = 1056,
-    APOCALYPSE_NIGH                            = 1057,
+    DAWN                                       = 1056, -- Converted
+    APOCALYPSE_NIGH                            = 1057, -- Converted
     CALL_TO_ARMS                               = 1088,
     COMPLIMENTS_TO_THE_CHEF                    = 1089,
     PUPPETMASTER_BLUES                         = 1090,
@@ -444,7 +444,7 @@ function Battlefield:new(data)
     obj.experimental     = data.experimental or false
     obj.allowedAreas     = data.allowedAreas
 
-    obj.sections = { { [obj.zoneId] = {} } }
+    obj.sections = obj.sections or { { [obj.zoneId] = {} } }
     obj.groups   = {}
     obj.paths    = {}
     obj.loot     = {}
@@ -467,7 +467,6 @@ function Battlefield:register()
     -- Only hookup the entry and exit listeners if there aren't any other battlefields already registered for that entrance
     local setupEvents    = true
     local setupEntryNpcs = true
-    local setupExitNpcs  = true
 
     if utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
         local contents = xi.battlefield.contentsByZone[self.zoneId]
@@ -477,7 +476,6 @@ function Battlefield:register()
             if self.battlefieldId == content.battlefieldId and content.hasListeners then
                 setupEvents    = true
                 setupEntryNpcs = true
-                setupExitNpcs  = true
 
                 break
             end
@@ -490,17 +488,6 @@ function Battlefield:register()
                 for _, entryNpc in ipairs(self.entryNpcs) do
                     if utils.contains(entryNpc, content.entryNpcs) then
                         setupEntryNpcs = false
-
-                        break
-                    end
-                end
-            end
-
-            -- If there is any overlap between the exit NPCs then we do not setup the exit NPCs
-            if self.exitNpcs then
-                for _, exitNpc in ipairs(self.exitNpcs) do
-                    if utils.contains(exitNpc, content.exitNpcs) then
-                        setupExitNpcs = false
 
                         break
                     end
@@ -542,7 +529,7 @@ function Battlefield:register()
         end
     end
 
-    if setupExitNpcs and self.exitNpcs then
+    if self.exitNpcs then
         local exitTrigger = self.onExitTrigger and self.onExitTrigger or Battlefield.onExitTrigger
         for _, exitNpc in ipairs(self.exitNpcs) do
             utils.append(zoneSection, {
@@ -1492,77 +1479,6 @@ function BattlefieldQuest:onBattlefieldWin(player, battlefield)
     player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), player:getZoneID(), self.index, canSkipCS)
 end
 
-function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
-    local killedallmobs = true
-    local leavecode     = -1
-    local mobs          = battlefield:getMobs(true, false)
-    local status        = battlefield:getStatus()
-    local players       = battlefield:getPlayers()
-    local cutsceneTimer = battlefield:getLocalVar('cutsceneTimer')
-    local phaseChange   = battlefield:getLocalVar('phaseChange')
-
-    if status == xi.battlefield.status.LOST then
-        leavecode = 4
-    elseif status == xi.battlefield.status.WON then
-        leavecode = 2
-    end
-
-    if leavecode ~= -1 then
-        -- Artificially inflate the time we remain inside the battlefield.
-        battlefield:setLocalVar('cutsceneTimer', cutsceneTimer + 1)
-    end
-
-    -- Remove battlefield effect for players in alliance not inside battlefield once the battlefield gets locked. Do this only once.
-    if
-        status == xi.battlefield.status.LOCKED and
-        battlefield:getLocalVar('statusRemoval') == 0
-    then
-        battlefield:setLocalVar('statusRemoval', 1)
-
-        for _, player in pairs(players) do
-            local alliance = player:getAlliance()
-            for _, member in pairs(alliance) do
-                if
-                    member:hasStatusEffect(xi.effect.BATTLEFIELD) and
-                    not member:getBattlefield()
-                then
-                    member:delStatusEffect(xi.effect.BATTLEFIELD)
-                end
-            end
-        end
-    end
-
-    -- Check that players haven't all died or that their dead time is over.
-    xi.battlefield.HandleWipe(battlefield, players)
-
-    -- Cleanup battlefield.
-    if
-        not xi.battlefield.SendTimePrompts(battlefield, players) or -- If we cant send anymore time prompts, they are out of time.
-        cutsceneTimer >= 15                                         -- Players won and artificial time inflation is over.
-    then
-        battlefield:cleanup(true)
-    elseif status == xi.battlefield.status.LOST then -- Players lost.
-        for _, player in pairs(players) do
-            player:messageSpecial(zones[player:getZoneID()].text.PARTY_MEMBERS_HAVE_FALLEN)
-        end
-
-        battlefield:cleanup(true)
-    end
-
-    -- Check if theres at least 1 mob alive.
-    for _, mob in pairs(mobs) do
-        if mob:isAlive() then
-            killedallmobs = false
-            break
-        end
-    end
-
-    -- Set win status.
-    if killedallmobs and phaseChange == 0 then
-        battlefield:setStatus(xi.battlefield.status.WON)
-    end
-end
-
 -- returns false if out of time
 function xi.battlefield.SendTimePrompts(battlefield, players)
     local remainingTime  = battlefield:getRemainingTime()
@@ -1593,54 +1509,4 @@ function xi.battlefield.SendTimePrompts(battlefield, players)
     end
 
     return remainingTime > 0
-end
-
-function xi.battlefield.HandleWipe(battlefield, players)
-    local rekt     = true
-    local wipeTime = battlefield:getWipeTime()
-    local elapsed  = battlefield:getTimeInside()
-
-    players = players or battlefield:getPlayers()
-
-    -- If party has not yet wiped.
-    if wipeTime <= 0 then
-        -- Check if party has wiped.
-        for _, player in pairs(players) do
-            if player:getHP() ~= 0 then
-                rekt = false
-                break
-            end
-        end
-
-        -- Party has wiped. Save and send time remaining before being booted.
-        -- TODO: Add LUA Binding to check for BCNM flag - RULES_REMOVE_3MIN = 0x04,
-        if rekt then
-            if battlefield:getLocalVar('instantKick') == 0 then
-                for _, player in pairs(players) do
-                    player:messageSpecial(zones[player:getZoneID()].text.THE_PARTY_WILL_BE_REMOVED, 0, 0, 0, 3)
-                end
-
-                battlefield:setWipeTime(elapsed)
-            else
-                battlefield:setStatus(xi.battlefield.status.LOST)
-            end
-        end
-
-    -- Party has already wiped.
-    else
-        -- Time is over.
-        if (elapsed - wipeTime) > 180 then -- It will take aproximately 20 extra seconds to actually get kicked, but we have already lost.
-            battlefield:setStatus(xi.battlefield.status.LOST)
-
-        -- Check for comeback.
-        else
-            for _, player in pairs(players) do
-                if player:getHP() ~= 0 then
-                    battlefield:setWipeTime(0)
-                    rekt = false
-                    break
-                end
-            end
-        end
-    end
 end

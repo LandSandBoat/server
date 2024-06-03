@@ -171,15 +171,12 @@ public:
     void ForEachNpc(const std::function<void(CNpcEntity*)>& func);
     void ForEachAlly(const std::function<void(CMobEntity*)>& func);
 
-    void SetID(uint16 id);
     void SetName(std::string const& name);
     void SetInitiator(std::string const& name);
     void SetArea(uint8 area);
     void SetRecord(std::string const& name, duration time, size_t partySize);
     void SetStatus(uint8 status);
     void SetRuleMask(uint16 rulemask);
-    void SetStartTime(time_point time);
-    void SetFightTime(time_point time);
     void SetTimeLimit(duration time);
     void SetWipeTime(time_point time);
     void SetMaxParticipants(uint8 max);

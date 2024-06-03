@@ -2070,41 +2070,6 @@ namespace luautils
         return result.get_type() == sol::type::number ? result.get<int32>() : 0;
     }
 
-    int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result, uint16 extras)
-    {
-        TracyZoneScoped;
-
-        EventPrep* previousPrep = PChar->eventPreparation;
-        PChar->eventPreparation = PChar->currentEvent;
-
-        auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
-        if (!onEventUpdate.valid())
-        {
-            ShowError("luautils::onEventUpdate: undefined procedure onEventUpdate");
-            return -1;
-        }
-
-        std::optional<CLuaBaseEntity> optTarget = std::nullopt;
-        if (PChar->currentEvent->targetEntity)
-        {
-            optTarget = CLuaBaseEntity(PChar->currentEvent->targetEntity);
-        }
-
-        auto func_result = onEventUpdate(CLuaBaseEntity(PChar), eventID, result, extras, optTarget);
-
-        PChar->eventPreparation = previousPrep;
-
-        if (!func_result.valid())
-        {
-            sol::error err = func_result;
-            ShowError("luautils::onEventUpdate: %s", err.what());
-            ReportErrorToPlayer(PChar, err.what());
-            return -1;
-        }
-
-        return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
-    }
-
     int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result)
     {
         TracyZoneScoped;
@@ -3146,28 +3111,7 @@ namespace luautils
             return -1;
         }
 
-        auto zone = PBattlefield->GetZone()->getName();
-        auto name = PBattlefield->GetName();
-
-        // TODO: This will happen more often than needed, but not so often that it's a performance concern
-        auto filename = fmt::format("./scripts/zones/{}/bcnms/{}.lua", zone, name);
-        CacheLuaObjectFromFile(filename);
-
-        auto onBattlefieldInitialise = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldInitialise"];
-        if (!onBattlefieldInitialise.valid())
-        {
-            return invokeBattlefieldEvent(PBattlefield->GetID(), "onBattlefieldInitialise", CLuaBattlefield(PBattlefield));
-        }
-
-        auto result = onBattlefieldInitialise(CLuaBattlefield(PBattlefield));
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onBattlefieldInitialise: %s", err.what());
-            return -1;
-        }
-
-        return 0;
+        return invokeBattlefieldEvent(PBattlefield->GetID(), "onBattlefieldInitialise", CLuaBattlefield(PBattlefield));
     }
 
     int32 OnBattlefieldTick(CBattlefield* PBattlefield)
@@ -3179,31 +3123,16 @@ namespace luautils
             return -1;
         }
 
-        auto zone    = PBattlefield->GetZone()->getName();
         auto name    = PBattlefield->GetName();
         auto seconds = std::chrono::duration_cast<std::chrono::seconds>(PBattlefield->GetTimeInside()).count();
 
-        auto onBattlefieldTick = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldTick"];
-        if (!onBattlefieldTick.valid())
+        if (invokeBattlefieldEvent(PBattlefield->GetID(), "onBattlefieldTick", CLuaBattlefield(PBattlefield), seconds) == 0)
         {
-            if (invokeBattlefieldEvent(PBattlefield->GetID(), "onBattlefieldTick", CLuaBattlefield(PBattlefield), seconds) == 0)
-            {
-                return 0;
-            }
-
-            ShowError("luautils::onBattlefieldTick: Unable to find onBattlefieldTick function for %s", name);
-            return -1;
+            return 0;
         }
 
-        auto result = onBattlefieldTick(CLuaBattlefield(PBattlefield), seconds);
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onBattlefieldTick: %s", err.what());
-            return -1;
-        }
-
-        return 0;
+        ShowError("luautils::onBattlefieldTick: Unable to find onBattlefieldTick function for %s", name);
+        return -1;
     }
 
     int32 OnBattlefieldStatusChange(CBattlefield* PBattlefield)
@@ -3215,24 +3144,7 @@ namespace luautils
             return -1;
         }
 
-        auto zone = PBattlefield->GetZone()->getName();
-        auto name = PBattlefield->GetName();
-
-        auto onBattlefieldStatusChange = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldStatusChange"];
-        if (!onBattlefieldStatusChange.valid())
-        {
-            return invokeBattlefieldEvent(PBattlefield->GetID(), "onBattlefieldStatusChange", CLuaBattlefield(PBattlefield), PBattlefield->GetStatus());
-        }
-
-        auto result = onBattlefieldStatusChange(CLuaBattlefield(PBattlefield), PBattlefield->GetStatus());
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onBattlefieldStatusChange: %s", err.what());
-            return -1;
-        }
-
-        return 0;
+        return invokeBattlefieldEvent(PBattlefield->GetID(), "onBattlefieldStatusChange", CLuaBattlefield(PBattlefield), PBattlefield->GetStatus());
     }
 
     int32 OnMobEngage(CBaseEntity* PMob, CBaseEntity* PTarget)
@@ -4855,33 +4767,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        CZone* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
-
-        if (PZone == nullptr)
-        {
-            // Show log for the ID passed from GetZone, since the only way PZone can be null here is if
-            // loc.zone was null in the previous check.
-
-            ShowWarning("PZone was null for ZoneID %d.", PChar->loc.destination);
-            return;
-        }
-
-        auto zone = PZone->getName();
-        auto name = PBattlefield->GetName();
-
-        auto onBattlefieldEnter = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldEnter"];
-        if (!onBattlefieldEnter.valid())
-        {
-            invokeBattlefieldEvent(PBattlefield->GetID(), "onBattlefieldEnter", CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield));
-            return;
-        }
-
-        auto result = onBattlefieldEnter(CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield));
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onBattlefieldEnter: %s", err.what());
-        }
+        invokeBattlefieldEvent(PBattlefield->GetID(), "onBattlefieldEnter", CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield));
     }
 
     /************************************************************************
@@ -4900,38 +4786,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        CZone* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
-
-        if (PZone == nullptr)
-        {
-            // Show log for the ID passed from GetZone, since the only way PZone can be null here is if
-            // loc.zone was null in the previous check.
-
-            ShowWarning("PZone was null for ZoneID %d.", PChar->loc.destination);
-            return;
-        }
-
-        auto filename = fmt::format("./scripts/zones/{}/bcnms/{}.lua", PZone->getName(), PBattlefield->GetName());
-
-        auto zone = PZone->getName();
-        auto name = PBattlefield->GetName();
-
-        auto onBattlefieldLeave = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldLeave"];
-        if (!onBattlefieldLeave.valid())
-        {
-            invokeBattlefieldEvent(PBattlefield->GetID(), "onBattlefieldLeave", CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield), LeaveCode);
-            return;
-        }
-
-        PChar->eventPreparation->targetEntity = PChar;
-        PChar->eventPreparation->scriptFile   = filename;
-
-        auto result = onBattlefieldLeave(CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield), LeaveCode);
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onBattlefieldLeave: %s", err.what());
-        }
+        invokeBattlefieldEvent(PBattlefield->GetID(), "onBattlefieldLeave", CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield), LeaveCode);
     }
 
     void OnBattlefieldKick(CCharEntity* PChar)
@@ -4960,33 +4815,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        CZone* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
-
-        if (PZone == nullptr)
-        {
-            // Show log for the ID passed from GetZone, since the only way PZone can be null here is if
-            // loc.zone was null in the previous check.
-
-            ShowWarning("PZone was null for ZoneID %d.", PChar->loc.destination);
-            return;
-        }
-
-        auto zone = PZone->getName();
-        auto name = PBattlefield->GetName();
-
-        auto onBattlefieldRegister = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldRegister"];
-        if (!onBattlefieldRegister.valid())
-        {
-            invokeBattlefieldEvent(PBattlefield->GetID(), "onBattlefieldRegister", CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield));
-            return;
-        }
-
-        auto result = onBattlefieldRegister(CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield));
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onBattlefieldRegister: %s", err.what());
-        }
+        invokeBattlefieldEvent(PBattlefield->GetID(), "onBattlefieldRegister", CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield));
     }
 
     /************************************************************************
@@ -4998,22 +4827,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto zone = PBattlefield->GetZone()->getName();
-        auto name = PBattlefield->GetName();
-
-        auto onBattlefieldDestroy = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldDestroy"];
-        if (!onBattlefieldDestroy.valid())
-        {
-            invokeBattlefieldEvent(PBattlefield->GetID(), "onBattlefieldDestroy", CLuaBattlefield(PBattlefield));
-            return;
-        }
-
-        auto result = onBattlefieldDestroy(CLuaBattlefield(PBattlefield));
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onBattlefieldDestroy: %s", err.what());
-        }
+        invokeBattlefieldEvent(PBattlefield->GetID(), "onBattlefieldDestroy", CLuaBattlefield(PBattlefield));
     }
 
     void DisallowRespawn(uint32 mobid, bool allowRespawn)
@@ -5410,17 +5224,6 @@ namespace luautils
             if (funcFromInstance.valid())
             {
                 return funcFromInstance;
-            }
-        }
-
-        if (PChar->PBattlefield)
-        {
-            auto battlefield_filename = fmt::format("./scripts/zones/{}/bcnms/{}", PChar->loc.zone->getName(), PChar->PBattlefield->GetName());
-
-            auto funcFromBattlefield = GetCacheEntryFromFilename(battlefield_filename)[functionName];
-            if (funcFromBattlefield.valid())
-            {
-                return funcFromBattlefield;
             }
         }
 

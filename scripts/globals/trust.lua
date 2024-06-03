@@ -1,7 +1,6 @@
 -----------------------------------
 -- Trust
 -----------------------------------
-require('scripts/globals/bcnm')
 require('scripts/globals/magic')
 require('scripts/globals/roe')
 -----------------------------------
