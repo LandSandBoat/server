@@ -3053,7 +3053,7 @@ xi.dynamis.mobOnDeath = function(mob, player, optParams)
             if zoneID == xi.zone.DYNAMIS_VALKURM then
                 local flies = { 21, 22, 23 }
                 if mobIndex == flies[1] or mobIndex == flies[2] or mobIndex == flies[3] then
-                    xi.dynamis.nightmareFlyCheck(mob, zone, zoneID)
+                    xi.dynamis.nightmareFlyCheck(zone)
                 end
             end
         end
@@ -3086,27 +3086,32 @@ xi.dynamis.mobOnDespawn = function(mob)
     zone:setLocalVar(string.format("%s", mob:getID()), 0)
 end
 
-m:addOverride("xi.dynamis.megaBossOnDeath", function(mob, player)
-    local zoneID = mob:getZoneID()
-    local mobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
-    local mobVar = xi.dynamis.mobList[mob:getZoneID()][mobIndex].info[5]
+m:addOverride("xi.dynamis.megaBossOnDeath", function(mob, player, optParams)
+    if mob:getLocalVar("dynamisMobOnDeathTriggered") == 1 then return -- Don't trigger more than once.
+    else -- Stops execution of code below if the above is true.
+        local zoneID = mob:getZoneID()
+        local mobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
+        local mobVar = xi.dynamis.mobList[mob:getZoneID()][mobIndex].info[5]
 
-    if mob:getLocalVar("GaveTimeExtension") ~= 1 then -- Ensure we don't give more than 1 time extension.
-        xi.dynamis.mobOnDeath(mob, player, mobVar) -- Process time extension and wave spawning
-        local winQM = GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].winQM) -- Set winQM
-        local pos = mob:getPos()
-        winQM:setPos(pos.x, pos.y, pos.z, pos.rot) -- Set winQM to death pos
-        winQM:setStatus(xi.status.NORMAL) -- Make visible
-        mob:setLocalVar("GaveTimeExtension", 1)
-    end
-
-    local zone = mob:getZone()
-    if zone:getLocalVar('TitleGranted') < 1 then
-        for _, p in pairs(zone:getPlayers()) do
-            p:addTitle(xi.dynamis.dynaInfoEra[zoneID].winTitle) -- Give player the title
+        if mob:getLocalVar("GaveTimeExtension") ~= 1 then -- Ensure we don't give more than 1 time extension.
+            xi.dynamis.mobOnDeath(mob, player, mobVar) -- Process time extension and wave spawning
+            local winQM = GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].winQM) -- Set winQM
+            local pos = mob:getPos()
+            winQM:setPos(pos.x, pos.y, pos.z, pos.rot) -- Set winQM to death pos
+            winQM:setStatus(xi.status.NORMAL) -- Make visible
+            mob:setLocalVar("GaveTimeExtension", 1)
         end
 
-        zone:setLocalVar('TitleGranted', 1)
+        local zone = mob:getZone()
+        if zone:getLocalVar('TitleGranted') < 1 then
+            for _, p in pairs(zone:getPlayers()) do
+                p:addTitle(xi.dynamis.dynaInfoEra[zoneID].winTitle) -- Give player the title
+            end
+
+            zone:setLocalVar('TitleGranted', 1)
+        end
+
+        mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
     end
 end)
 
