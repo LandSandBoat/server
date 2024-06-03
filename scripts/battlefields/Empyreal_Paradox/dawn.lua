@@ -16,7 +16,6 @@ local content = BattlefieldMission:new({
     levelCap      = 75,
     timeLimit     = utils.minutes(30),
     index         = 0,
-    area          = 1,
     entryNpc      = 'TR_Entrance',
     exitNpc       = 'Transcendental_Radiance',
     missionArea   = xi.mission.log_id.COP,
@@ -33,12 +32,17 @@ function content:setupBattlefield(battlefield)
     local baseID = empyrealParadoxID.mob.PROMATHIA + (battlefield:getArea() - 1) * 2
     local pos    = GetMobByID(baseID):getSpawnPos()
 
+    -- TODO: Get table of spawn positions for Allies and set exactly.  Rot value
+    -- is not accurate.  lookAt is used to workaround at this time.
+
     local prishe = battlefield:insertEntity(11, true, true)
     prishe:setSpawn(pos.x - 6, pos.y, pos.z - 21.5, 192)
+    prishe:lookAt(pos)
     prishe:spawn()
 
     local selhteus = battlefield:insertEntity(12, true, true)
     selhteus:setSpawn(pos.x + 10, pos.y, pos.z - 17.5, 172)
+    prishe:lookAt(pos)
     selhteus:spawn()
 end
 
@@ -70,8 +74,9 @@ function content:onEventFinishWin(player, csid, option, npc)
         player:getCharVar('PromathiaStatus') == 2
     then
         player:setCharVar('PromathiaStatus', 3)
-        player:setPos(540, 0, -514, 63, xi.zone.EMPYREAL_PARADOX)
     end
+
+    player:setPos(540, 0, -514, 63, xi.zone.EMPYREAL_PARADOX)
 end
 
 content.groups =
@@ -101,6 +106,7 @@ content.groups =
             { empyrealParadoxID.mob.PROMATHIA + 5 },
         },
 
+        spawned  = false,
         allDeath = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
         end,

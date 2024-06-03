@@ -24,6 +24,7 @@ entity.onMobEngage = function(mob, target)
             end
         else
             v:addEnmity(mob, 0, 1)
+            v:updateEnmity(mob)
         end
     end
 end
@@ -38,7 +39,7 @@ entity.onMobFight = function(mob, target)
     for _, v in pairs(bcnmAllies) do
         if not v:getTarget() then
             v:addEnmity(mob, 0, 1)
-            v:updateEnmity()
+            v:updateEnmity(mob)
         end
     end
 end

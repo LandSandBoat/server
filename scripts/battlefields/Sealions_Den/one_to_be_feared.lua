@@ -11,9 +11,10 @@ local content = BattlefieldMission:new({
     isMission     = true,
     maxPlayers    = 6,
     levelCap      = 75,
-    timeLimit     = utils.minutes(30),
+    timeLimit     = utils.minutes(45),
     index         = 0,
     entryNpc      = '_0w0',
+    exitNpc       = 'Airship_Door',
     missionArea   = xi.mission.log_id.COP,
     mission       = xi.mission.id.cop.ONE_TO_BE_FEARED,
     requiredVar   = 'Mission[6][638]Status',
@@ -58,21 +59,84 @@ local function returnToAirship(player)
     end
 end
 
-function content:onEventFinishBattlefield(player, csid, option, npc)
-    if csid == 10 then
-        player:addTitle(xi.title.BRANDED_BY_LIGHTNING)
-        healCharacter(player)
-        returnToAirship(player)
+function content.onExitTrigger(player, npc)
+    return content:progressEvent(32003, npc:getID() - sealionsDenID.npc.AIRSHIP_DOOR_OFFSET + 1, player:getLocalVar('[OTBF]battleCompleted') * 2):setPriority(1001)
+end
 
-        player:setLocalVar('[OTBF]battleCompleted', 1)
-    elseif csid == 11 then
-        player:addTitle(xi.title.OMEGA_OSTRACIZER)
-        healCharacter(player)
-        returnToAirship(player)
+function content:onEventFinishExit(player, csid, option, npc)
+    if option >= 100 and option <= 102 then
+        local party = player:getParty()
 
-        player:setLocalVar('[OTBF]battleCompleted', 2)
+        if party ~= nil then
+            for _, v in pairs(party) do
+                if v:hasStatusEffect(xi.effect.BATTLEFIELD) then
+                    v:startEvent(v:getLocalVar('[OTBF]battleCompleted'), option - 99)
+                end
+            end
+        else
+            player:startEvent(player:getLocalVar('[OTBF]battleCompleted'), option - 99)
+        end
+
+    -- Leave battlefield.
+    elseif option == 4 then
+        if player:getBattlefield() then
+            player:leaveBattlefield(1)
+            player:setLocalVar('[OTBF]battleCompleted', 0)
+        end
     end
 end
+
+content.sections =
+{
+    {
+        [xi.zone.SEALIONS_DEN] =
+        {
+            onEventUpdate =
+            {
+                [1] = function(player, csid, option, npc)
+                    local battlefield = player:getBattlefield()
+
+                    if option == 0 then
+                        local omegaId = sealionsDenID.mob.MAMMET_22_ZETA + (7 * (battlefield:getArea() - 1)) + 5
+                        if not GetMobByID(omegaId):isSpawned() then
+                            SpawnMob(omegaId)
+                        end
+                    end
+                end,
+
+                [2] = function(player, csid, option, npc)
+                    local battlefield = player:getBattlefield()
+
+                    if option == 0 then
+                        local ultimaId = sealionsDenID.mob.MAMMET_22_ZETA + (7 * (battlefield:getArea() - 1)) + 6
+                        if not GetMobByID(ultimaId):isSpawned() then
+                            SpawnMob(ultimaId)
+                        end
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [10] = function(player, csid, option, npc)
+                    player:addTitle(xi.title.BRANDED_BY_LIGHTNING)
+                    healCharacter(player)
+                    returnToAirship(player)
+
+                    player:setLocalVar('[OTBF]battleCompleted', 1)
+                end,
+
+                [11] = function(player, csid, option, npc)
+                    player:addTitle(xi.title.OMEGA_OSTRACIZER)
+                    healCharacter(player)
+                    returnToAirship(player)
+
+                    player:setLocalVar('[OTBF]battleCompleted', 2)
+                end,
+            },
+        },
+    },
+}
 
 content.groups =
 {

@@ -2,8 +2,6 @@
 -- Area: Sealions Den
 --  Mob: Mammet-22 Zeta
 -----------------------------------
-local oneToBeFeared = require('scripts/zones/Sealions_Den/bcnms/one_to_be_feared_helper')
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -121,7 +119,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    oneToBeFeared.handleMammetBattleEnding(player, csid, option, npc)
 end
 
 return entity
