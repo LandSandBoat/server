@@ -126,7 +126,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
         return BATTLEFIELD_RETURN_CODE_CUTSCENE;
     }
 
-    auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar, true);
+    auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar);
 
     const auto* fmtQuery = "SELECT name, fastestName, fastestTime, fastestPartySize\
                             FROM bcnm_info i\

@@ -130,7 +130,7 @@ struct BattlefieldGroup
 class CBattlefield : public std::enable_shared_from_this<CBattlefield>
 {
 public:
-    CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator, bool isInteraction);
+    CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator);
     ~CBattlefield();
 
     uint16                        GetID() const;
@@ -158,7 +158,6 @@ public:
 
     bool CheckInProgress();
     bool IsOccupied() const;
-    bool isInteraction() const;
     bool isEntered(CCharEntity* PChar) const;
 
     void ForEachPlayer(const std::function<void(CCharEntity*)>& func);
@@ -230,7 +229,6 @@ private:
     uint8                  m_LevelCap;
     // Entity id of the Armoury Crate that appears upon victory
     uint32     m_armouryCrate = 0;
-    bool const m_isInteraction;
 
     time_point m_cleanupTime{};
     bool       m_cleanedPlayers = false;

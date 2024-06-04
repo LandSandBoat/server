@@ -52,7 +52,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "zone.h"
 #include <chrono>
 
-CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator, bool isInteraction)
+CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator)
 : m_isMission(false)
 , m_ID(id)
 , m_Zone(PZone)
@@ -63,7 +63,6 @@ CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PIn
 , m_LastPromptTime(0s)
 , m_MaxParticipants(8)
 , m_LevelCap(0)
-, m_isInteraction(isInteraction)
 {
     m_Initiator.id     = PInitiator->id;
     m_Initiator.name   = PInitiator->name;
@@ -292,11 +291,6 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
 bool CBattlefield::IsOccupied() const
 {
     return !m_EnteredPlayers.empty();
-}
-
-bool CBattlefield::isInteraction() const
-{
-    return m_isInteraction;
 }
 
 bool CBattlefield::isEntered(CCharEntity* PChar) const
