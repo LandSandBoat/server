@@ -8,6 +8,7 @@ local mineshaftID = zones[xi.zone.MINE_SHAFT_2716]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.MINE_SHAFT_2716,
     battlefieldId         = xi.battlefield.id.CENTURY_OF_HARDSHIP,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     levelCap              = 60,

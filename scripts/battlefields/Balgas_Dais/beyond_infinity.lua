@@ -8,6 +8,7 @@ local balgasID = zones[xi.zone.BALGAS_DAIS]
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.BALGAS_DAIS,
     battlefieldId    = xi.battlefield.id.BEYOND_INFINITY_BALGAS_DAIS,
+    canLoseExp       = false,
     maxPlayers       = 6,
     levelCap         = 99,
     timeLimit        = utils.minutes(10),

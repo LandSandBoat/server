@@ -11,6 +11,7 @@ local empyrealParadoxID = zones[xi.zone.EMPYREAL_PARADOX]
 local content = BattlefieldMission:new({
     zoneId        = xi.zone.EMPYREAL_PARADOX,
     battlefieldId = xi.battlefield.id.DAWN,
+    canLoseExp    = false,
     isMission     = true,
     maxPlayers    = 6,
     levelCap      = 75,

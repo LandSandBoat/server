@@ -8,6 +8,7 @@ local talaccaCoveID = zones[xi.zone.TALACCA_COVE]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.TALACCA_COVE,
     battlefieldId         = xi.battlefield.id.LEGACY_OF_THE_LOST,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     levelCap              = 99,

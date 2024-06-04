@@ -8,6 +8,7 @@ local cloisterOfFlamesID = zones[xi.zone.CLOISTER_OF_FLAMES]
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.CLOISTER_OF_FLAMES,
     battlefieldId    = xi.battlefield.id.TRIAL_BY_FIRE,
+    canLoseExp       = false,
     maxPlayers       = 6,
     timeLimit        = utils.minutes(30),
     index            = 0,

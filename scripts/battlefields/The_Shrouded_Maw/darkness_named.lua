@@ -8,6 +8,7 @@ local shroudedMawID = zones[xi.zone.THE_SHROUDED_MAW]
 local content = BattlefieldMission:new({
     zoneId        = xi.zone.THE_SHROUDED_MAW,
     battlefieldId = xi.battlefield.id.DARKNESS_NAMED,
+    canLoseExp    = false,
     isMission     = true,
     maxPlayers    = 6,
     levelCap      = 40,

@@ -8,6 +8,7 @@ local laLoffID = zones[xi.zone.LALOFF_AMPHITHEATER]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.LALOFF_AMPHITHEATER,
     battlefieldId         = xi.battlefield.id.ARK_ANGELS_2,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     levelCap              = 75,

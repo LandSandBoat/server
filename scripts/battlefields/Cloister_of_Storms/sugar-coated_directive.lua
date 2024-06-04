@@ -8,6 +8,7 @@ local cloisterOfStormsID = zones[xi.zone.CLOISTER_OF_STORMS]
 local content = BattlefieldMission:new({
     zoneId        = xi.zone.CLOISTER_OF_STORMS,
     battlefieldId = xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_STORMS,
+    canLoseExp    = false,
     isMission     = true,
     maxPlayers    = 6,
     levelCap      = 99,

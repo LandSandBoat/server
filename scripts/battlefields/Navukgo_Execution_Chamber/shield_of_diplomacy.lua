@@ -8,6 +8,7 @@ local navukgoID = zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.NAVUKGO_EXECUTION_CHAMBER,
     battlefieldId         = xi.battlefield.id.SHIELD_OF_DIPLOMACY,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     levelCap              = 99,

@@ -8,6 +8,7 @@ local qubiaID = zones[xi.zone.QUBIA_ARENA]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.QUBIA_ARENA,
     battlefieldId         = xi.battlefield.id.THOSE_WHO_LURK_IN_SHADOWS,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     levelCap              = 99,

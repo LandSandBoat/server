@@ -8,6 +8,7 @@ local qubiaID = zones[xi.zone.QUBIA_ARENA]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.QUBIA_ARENA,
     battlefieldId         = xi.battlefield.id.RANK_5_MISSION,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     levelCap              = 50,

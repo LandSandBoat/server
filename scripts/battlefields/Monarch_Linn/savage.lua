@@ -8,6 +8,7 @@ local monarchLinnID = zones[xi.zone.MONARCH_LINN]
 local content = BattlefieldMission:new({
     zoneId        = xi.zone.MONARCH_LINN,
     battlefieldId = xi.battlefield.id.SAVAGE,
+    canLoseExp    = false,
     isMission     = true,
     maxPlayers    = 6,
     levelCap      = 50,

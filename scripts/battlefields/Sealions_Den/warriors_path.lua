@@ -8,6 +8,7 @@ local sealionsDenID = zones[xi.zone.SEALIONS_DEN]
 local content = BattlefieldMission:new({
     zoneId        = xi.zone.SEALIONS_DEN,
     battlefieldId = xi.battlefield.id.WARRIORS_PATH,
+    canLoseExp    = false,
     isMission     = true,
     maxPlayers    = 6,
     levelCap      = 75,

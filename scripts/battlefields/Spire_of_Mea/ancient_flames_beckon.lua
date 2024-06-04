@@ -9,6 +9,7 @@ local spireOfMeaID = zones[xi.zone.SPIRE_OF_MEA]
 local content = Battlefield:new({
     zoneId        = xi.zone.SPIRE_OF_MEA,
     battlefieldId = xi.battlefield.id.ANCIENT_FLAMES_BECKON_SPIRE_OF_MEA,
+    canLoseExp    = false,
     isMission     = true,
     maxPlayers    = 6,
     levelCap      = 30,

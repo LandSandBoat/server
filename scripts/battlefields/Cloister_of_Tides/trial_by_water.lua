@@ -8,6 +8,7 @@ local cloisterOfTidesID = zones[xi.zone.CLOISTER_OF_TIDES]
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.CLOISTER_OF_TIDES,
     battlefieldId    = xi.battlefield.id.TRIAL_BY_WATER,
+    canLoseExp       = false,
     maxPlayers       = 6,
     timeLimit        = utils.minutes(30),
     index            = 0,

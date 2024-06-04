@@ -9,6 +9,7 @@ local balgasID = zones[xi.zone.BALGAS_DAIS]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.BALGAS_DAIS,
     battlefieldId         = xi.battlefield.id.SAINTLY_INVITATION,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     levelCap              = 75,

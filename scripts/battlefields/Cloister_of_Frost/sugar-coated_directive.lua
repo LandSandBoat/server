@@ -8,6 +8,7 @@ local cloisterOfFrostID = zones[xi.zone.CLOISTER_OF_FROST]
 local content = BattlefieldMission:new({
     zoneId        = xi.zone.CLOISTER_OF_FROST,
     battlefieldId = xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FROST,
+    canLoseExp    = false,
     isMission     = true,
     maxPlayers    = 6,
     levelCap      = 99,

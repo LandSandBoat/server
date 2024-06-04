@@ -8,6 +8,7 @@ local spireOfVahzlID = zones[xi.zone.SPIRE_OF_VAHZL]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.SPIRE_OF_VAHZL,
     battlefieldId         = xi.battlefield.id.DESIRES_OF_EMPTINESS,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     levelCap              = 50,

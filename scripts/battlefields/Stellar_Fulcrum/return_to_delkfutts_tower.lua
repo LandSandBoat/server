@@ -9,6 +9,7 @@ local stellarFulcrumID = zones[xi.zone.STELLAR_FULCRUM]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.STELLAR_FULCRUM,
     battlefieldId         = xi.battlefield.id.RETURN_TO_DELKFUTTS_TOWER,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     levelCap              = 75,

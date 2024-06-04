@@ -8,6 +8,7 @@ local cloisterOfFrostID = zones[xi.zone.CLOISTER_OF_FROST]
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.CLOISTER_OF_FROST,
     battlefieldId    = xi.battlefield.id.CLASS_REUNION,
+    canLoseExp       = false,
     maxPlayers       = 6,
     timeLimit        = utils.minutes(30),
     index            = 1,

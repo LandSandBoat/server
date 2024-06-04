@@ -8,6 +8,7 @@ local boneyardGullyID = zones[xi.zone.BONEYARD_GULLY]
 local content = BattlefieldMission:new({
     zoneId        = xi.zone.BONEYARD_GULLY,
     battlefieldId = xi.battlefield.id.HEAD_WIND,
+    canLoseExp    = false,
     isMission     = true,
     maxPlayers    = 6,
     levelCap      = 50,
