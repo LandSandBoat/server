@@ -256,11 +256,6 @@ void CLuaBattlefield::setStatus(uint8 status)
     m_PLuaBattlefield->SetStatus(status);
 }
 
-bool CLuaBattlefield::loadMobs()
-{
-    return m_PLuaBattlefield->LoadMobs();
-}
-
 std::optional<CLuaBaseEntity> CLuaBattlefield::insertEntity(uint16 targid, bool ally, bool inBattlefield)
 {
     BATTLEFIELDMOBCONDITION conditions = static_cast<BATTLEFIELDMOBCONDITION>(0);
@@ -731,7 +726,6 @@ void CLuaBattlefield::Register()
     SOL_REGISTER("setWipeTime", CLuaBattlefield::setWipeTime);
     SOL_REGISTER("setRecord", CLuaBattlefield::setRecord);
     SOL_REGISTER("setStatus", CLuaBattlefield::setStatus);
-    SOL_REGISTER("loadMobs", CLuaBattlefield::loadMobs);
     SOL_REGISTER("insertEntity", CLuaBattlefield::insertEntity);
     SOL_REGISTER("cleanup", CLuaBattlefield::cleanup);
     SOL_REGISTER("win", CLuaBattlefield::win);

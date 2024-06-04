@@ -826,41 +826,6 @@ bool CBattlefield::Cleanup(time_point time, bool force)
     return true;
 }
 
-bool CBattlefield::LoadMobs()
-{
-    // get ids from DB
-    const auto* fmtQuery = "SELECT monsterId, conditions \
-                            FROM bcnm_battlefield \
-                            WHERE bcnmId = %u AND battlefieldNumber = %u";
-
-    auto ret = _sql->Query(fmtQuery, this->GetID(), this->GetArea());
-
-    if (ret == SQL_ERROR || _sql->NumRows() == 0)
-    {
-        ShowError("Battlefield::LoadMobs() : Cannot find any monster IDs for battlefield %i area %i ", this->GetID(), this->GetArea());
-    }
-    else
-    {
-        while (_sql->NextRow() == SQL_SUCCESS)
-        {
-            auto  mobid     = _sql->GetUIntData(0);
-            auto  condition = _sql->GetUIntData(1);
-            auto* PMob      = static_cast<CMobEntity*>(zoneutils::GetEntity(mobid, TYPE_MOB | TYPE_PET));
-
-            if (PMob)
-            {
-                this->InsertEntity(PMob, true, static_cast<BATTLEFIELDMOBCONDITION>(condition));
-            }
-            else
-            {
-                ShowDebug("Battlefield::LoadMobs() mob %u not found", mobid);
-                return false;
-            }
-        }
-    }
-    return true;
-}
-
 bool CBattlefield::CheckInProgress()
 {
     // clang-format off

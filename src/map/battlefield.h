@@ -190,7 +190,6 @@ public:
     void         onTick(time_point time);
     bool         CanCleanup(bool cleanup = false);
     bool         Cleanup(time_point time, bool force);
-    bool         LoadMobs();
 
     // Groups
     void addGroup(BattlefieldGroup group);
