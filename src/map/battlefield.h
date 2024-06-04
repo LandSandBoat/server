@@ -36,9 +36,6 @@ enum BCRULES : uint8
 {
     RULES_ALLOW_SUBJOBS         = 0x01,
     RULES_LOSE_EXP              = 0x02,
-    RULES_REMOVE_3MIN           = 0x04,
-    RULES_SPAWN_TREASURE_ON_WIN = 0x08,
-    RULES_MAAT                  = 0x10
 };
 
 enum BATTLEFIELDMOBCONDITION : uint8
