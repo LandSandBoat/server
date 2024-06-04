@@ -3942,7 +3942,7 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
  *  Function: delItem()
  *  Purpose : Deletes an item from a player's inventory
  *  Example : player:delItem(4102, 12)
- *  Notes   : Can specify contianer using third variable
+ *  Notes   : Can specify container using third variable
  ************************************************************************/
 
 bool CLuaBaseEntity::delItem(uint16 itemID, int32 quantity, sol::object const& containerID)
@@ -3972,6 +3972,49 @@ bool CLuaBaseEntity::delItem(uint16 itemID, int32 quantity, sol::object const& c
     }
 
     return false;
+}
+
+/************************************************************************
+ *  Function: delContainerItems()
+ *  Purpose : Deletes all items from a specific player's container
+ *  Example : player:delContainerItems(xi.inv.INVENTORY)
+ *  Notes   : Used in delinventory command
+ ************************************************************************/
+
+bool CLuaBaseEntity::delContainerItems(sol::object const& containerID)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return false;
+    }
+
+    uint8 location = containerID.get_type() == sol::type::number ? containerID.as<uint8>() : 0;
+
+    if (location >= CONTAINER_ID::MAX_CONTAINER_ID)
+    {
+        ShowWarning("Lua::delContainerItems: Attempting to delete items from an invalid container. Defaulting to main inventory.");
+        return false;
+    }
+
+    auto* PChar          = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto* PItemContainer = PChar->getStorage(location);
+    uint8 containerSize  = PItemContainer->GetSize();
+
+    for (uint8 i = 1; i <= containerSize; ++i)
+    {
+        auto* PItem = PItemContainer->GetItem(i);
+
+        if (PItem != nullptr)
+        {
+            int32 quantity = PItem->getQuantity();
+
+            charutils::UpdateItem(PChar, location, i, -quantity);
+        }
+    }
+
+    PChar->pushPacket(new CInventoryFinishPacket());
+    return true;
 }
 
 /************************************************************************
@@ -17813,6 +17856,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getItemCount", CLuaBaseEntity::getItemCount);
     SOL_REGISTER("addItem", CLuaBaseEntity::addItem);
     SOL_REGISTER("delItem", CLuaBaseEntity::delItem);
+    SOL_REGISTER("delContainerItems", CLuaBaseEntity::delContainerItems);
     SOL_REGISTER("addUsedItem", CLuaBaseEntity::addUsedItem);
     SOL_REGISTER("addTempItem", CLuaBaseEntity::addTempItem);
     SOL_REGISTER("getWornUses", CLuaBaseEntity::getWornUses);
