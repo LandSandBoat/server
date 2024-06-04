@@ -16,7 +16,7 @@ local content = BattlefieldQuest:new({
     requiredKeyItems = { xi.ki.TUNING_FORK_OF_EARTH },
 
     questArea = xi.questLog.BASTOK,
-    quest     = xi.quest.id.outlands.TRIAL_BY_EARTH,
+    quest     = xi.quest.id.bastok.TRIAL_BY_EARTH,
 })
 
 content.groups =
