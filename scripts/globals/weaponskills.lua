@@ -779,7 +779,7 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
 
     -- Add in magic damage for hybrid weaponskills
     if wsParams.hybridWS then
-        finaldmg = calculateHybridMagicDamage(finaldmg, attacker, target, wsParams, calcParams, wsID)
+        finaldmg = finaldmg + calculateHybridMagicDamage(finaldmg, attacker, target, wsParams, calcParams, wsID)
     end
 
     -- Delete statuses that may have been spent by the WS
@@ -855,7 +855,7 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
 
     -- Add in magic damage for hybrid weaponskills
     if wsParams.hybridWS then
-        finaldmg = calculateHybridMagicDamage(finaldmg, attacker, target, wsParams, calcParams, wsID)
+        finaldmg = finaldmg + calculateHybridMagicDamage(finaldmg, attacker, target, wsParams, calcParams, wsID)
     end
 
     finaldmg            = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
