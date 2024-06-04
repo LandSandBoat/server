@@ -408,7 +408,7 @@ end
 -- https://wiki.ffo.jp/html/1261.html
 -- https://www.ffxiah.com/forum/topic/33470/the-sealed-dagger-a-ninja-guide/151/#3420836
 -- https://www.ffxiah.com/forum/topic/49614/blade-chi-damage-formula/2/#3171538
-local function calculateHybridMagicDamage(physicaldmg, attacker, target, wsParams, calcParams, wsID)
+local function calculateHybridMagicDamage(tp, physicaldmg, attacker, target, wsParams, calcParams, wsID)
     local ftp = xi.weaponskills.fTP(tp, wsParams.ftpMod)
     local magicdmg = physicaldmg * ftp + attacker:getMod(xi.mod.MAGIC_DAMAGE)
     local wsd = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS)
@@ -779,7 +779,7 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
 
     -- Add in magic damage for hybrid weaponskills
     if wsParams.hybridWS then
-        finaldmg = finaldmg + calculateHybridMagicDamage(finaldmg, attacker, target, wsParams, calcParams, wsID)
+        finaldmg = finaldmg + calculateHybridMagicDamage(tp, finaldmg, attacker, target, wsParams, calcParams, wsID)
     end
 
     -- Delete statuses that may have been spent by the WS
@@ -855,7 +855,7 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
 
     -- Add in magic damage for hybrid weaponskills
     if wsParams.hybridWS then
-        finaldmg = finaldmg + calculateHybridMagicDamage(finaldmg, attacker, target, wsParams, calcParams, wsID)
+        finaldmg = finaldmg + calculateHybridMagicDamage(tp, finaldmg, attacker, target, wsParams, calcParams, wsID)
     end
 
     finaldmg            = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
