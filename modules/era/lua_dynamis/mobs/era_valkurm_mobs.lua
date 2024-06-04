@@ -35,8 +35,8 @@ local function checkMorbolKills(mob)
     return killed
 end
 
-xi.dynamis.nightmareFlyCheck = function(mob, zone, zoneID)
-    local sjNPC = GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].sjRestrictionNPC)
+xi.dynamis.nightmareFlyCheck = function(zone)
+    local playersInZone = zone:getPlayers()
     local req = 0
     for _, fly in pairs(flies) do
         if zone:getLocalVar(fly) == 1 then
@@ -45,7 +45,13 @@ xi.dynamis.nightmareFlyCheck = function(mob, zone, zoneID)
     end
 
     if req == 3 and zone:getLocalVar("SJUnlock") ~= 1 then
-        xi.dynamis.sjQMOnTrigger(sjNPC)
+        for _, playerEntity in pairs(playersInZone) do
+            if  playerEntity:hasStatusEffect(xi.effect.SJ_RESTRICTION) then -- Does player have SJ restriction?
+                playerEntity:delStatusEffect(xi.effect.SJ_RESTRICTION) -- Remove SJ restriction
+            end
+        end
+
+        zone:setLocalVar('SJUnlock', 1)
     end
 end
 

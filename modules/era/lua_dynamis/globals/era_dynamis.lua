@@ -994,21 +994,21 @@ xi.dynamis.handleDynamis = function(zone)
 
     if
         #playersInZone == 0 and
-        zone:getLocalVar(string.format('[DYNA]NoPlayersInZone_%s', zoneID)) == 0 and
+        zone:getLocalVar(string.format('[DYNA]NoPlayerTimer_%s', zoneID)) == 0 and
         cleanupScript == 0  -- If player count in zone is 0 initiate cooldown for cleanup.
     then
-        zone:setLocalVar(string.format('[DYNA]NoPlayersInZone_%s', zoneID), (os.time() + (60 * 15))) -- Give 15 minutes for zone to repopulate.
+        zone:setLocalVar(string.format('[DYNA]NoPlayerTimer_%s', zoneID), (os.time() + (60 * 15))) -- Give 15 minutes for zone to repopulate.
     else
         if
             #playersInZone > 0
         then
-            zone:setLocalVar(string.format('[DYNA]NoPlayersInZone_%s', zoneID), 0)
+            zone:setLocalVar(string.format('[DYNA]NoPlayerTimer_%s', zoneID), 0)
         end
     end
 
-    if zone:getLocalVar(string.format('[DYNA]NoPlayersInZone_%s', zoneID)) ~= 0 then
+    if zone:getLocalVar(string.format('[DYNA]NoPlayerTimer_%s', zoneID)) ~= 0 then
         if
-            zone:getLocalVar(string.format('[DYNA]NoPlayersInZone_%s', zoneID)) <= os.time() and
+            zone:getLocalVar(string.format('[DYNA]NoPlayerTimer_%s', zoneID)) <= os.time() and
             cleanupScript == 0
         then -- If cooldown period eclipses current OS time, cleanup.
             if
