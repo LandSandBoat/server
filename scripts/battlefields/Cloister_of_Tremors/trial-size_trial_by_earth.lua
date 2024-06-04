@@ -17,7 +17,7 @@ local content = BattlefieldQuest:new({
     requiredItems    = { xi.item.MINI_TUNING_FORK_OF_EARTH },
 
     questArea = xi.questLog.BASTOK,
-    quest     = xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_EARTH,
+    quest     = xi.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH,
 })
 
 function content:entryRequirement(player, npc, isRegistrant, trade)
