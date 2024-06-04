@@ -302,11 +302,6 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
         {
             NO_LONGER_HAVE_CLEARANCE = 7064, -- ID Shift
         },
-        vars = -- Global Var Table Cleanup
-        {
-            xi.dynamis.YING,
-            xi.dynamis.YANG,
-        },
         entryZone = xi.zone.WINDURST_WALLS,
     },
     [xi.zone.DYNAMIS_XARCABARD] = -- zoneID for array lookup
@@ -314,6 +309,11 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
         text = -- text for table lookup
         {
             NO_LONGER_HAVE_CLEARANCE = 7064, -- ID Shift
+        },
+        vars = -- Global Var Table Cleanup
+        {
+            xi.dynamis.YING,
+            xi.dynamis.YANG,
         },
         entryZone = xi.zone.XARCABARD,
     },
@@ -783,14 +783,6 @@ local function checkEntryReqs(player, zoneId)
     return false
 end
 
-local function cleanupNeeded(zone, zoneMobs)
-    for _, mob in pairs(zoneMobs) do
-        if mob:isAlive() then
-            return xi.dynamis.cleanupDynamis(zone)
-        end
-    end
-end
-
 local function restoreInstance(zone)
     -- Restore snapshotted variables
     local zoneID = zone:getID()
@@ -798,7 +790,6 @@ local function restoreInstance(zone)
     {
         string.format('[DYNA]Token_%s', zoneID),
         string.format('[DYNA]InstanceID_%s', zoneID),
-        string.format('[DYNA]ExpireRoutine_%s', zoneID),
         string.format('[DYNA]Given10MinuteWarning_%s', zoneID),
         string.format('[DYNA]Given3MinuteWarning_%s', zoneID),
         string.format('[DYNA]Given1MinuteWarning_%s', zoneID),
@@ -851,7 +842,6 @@ local function snapshotInstance(zone)
     {
         string.format('[DYNA]Token_%s', zoneID),
         string.format('[DYNA]InstanceID_%s', zoneID),
-        string.format('[DYNA]ExpireRoutine_%s', zoneID),
         string.format('[DYNA]Given10MinuteWarning_%s', zoneID),
         string.format('[DYNA]Given3MinuteWarning_%s', zoneID),
         string.format('[DYNA]Given1MinuteWarning_%s', zoneID),
@@ -878,7 +868,6 @@ xi.dynamis.handleDynamis = function(zone)
     local zoneID = zone:getID()
     local zoneDynamistoken = zone:getLocalVar(string.format('[DYNA]Token_%s', zoneID))
     local zoneTimepoint = GetServerVariable(string.format('[DYNA]Timepoint_%s', zoneID))
-    local zoneExpireRoutine = zone:getLocalVar(string.format('[DYNA]ExpireRoutine_%s', zone:getID()))
     local zoneTimeRemaining = xi.dynamis.getDynaTimeRemaining(zoneTimepoint)
     local zone10Min = zone:getLocalVar(string.format('[DYNA]Given10MinuteWarning_%s', zoneID))
     local zone3Min = zone:getLocalVar(string.format('[DYNA]Given3MinuteWarning_%s', zoneID))
@@ -956,15 +945,10 @@ xi.dynamis.handleDynamis = function(zone)
         waveNumber = waveNumber + 1
     end
 
-    if zoneTimeRemaining <= 0 then -- If now is < 0 minutes remove players and flag cleanup.
-        xi.dynamis.ejectAllPlayers(zone) -- Eject players from the zone.
-        if zoneExpireRoutine == 0 then
-            zone:setLocalVar(string.format('[DYNA]ExpireRoutine_%s', zoneID), (os.time() + 30)) -- Flags zone to start cleanup.
-        end
+    if zoneTimeRemaining <= 0 then
+        xi.dynamis.ejectAllPlayers(zone)
 
         if
-            zoneExpireRoutine ~= 0 and
-            zoneExpireRoutine <= os.time() and
             cleanupScript == 0
         then -- Checks to see if 30s passed between start and now.
             if
@@ -1221,8 +1205,6 @@ end
 xi.dynamis.registerDynamis = function(player)
     local zoneID = player:getZoneID()
     local zone = GetZone(xi.dynamis.dynaInfoEra[zoneID].dynaZone)
-    local zoneMobs = zone:getMobs()
-    cleanupNeeded(zone, zoneMobs)
 
     -- luacheck: ignore 113
     local instanceID = RegisterDynamisInstance(zoneID, player:getID())
