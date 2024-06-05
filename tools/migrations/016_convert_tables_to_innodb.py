@@ -14,7 +14,7 @@ def needs_to_run(cur):
         "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'xidb' AND ENGINE = 'MyISAM' AND \
                 (TABLE_NAME LIKE 'char' OR TABLE_NAME LIKE 'account' OR TABLE_NAME LIKE 'audit' OR TABLE_NAME = 'delivery_box' OR \
                 TABLE_NAME = 'auction_house' OR TABLE_NAME = 'conquest_system' OR TABLE_NAME = 'unity_system' OR \
-                TABLE_NAME = 'server_variables' OR TABLE_NAME = 'linkshells' OR TABLE_NAME = 'bcnm_info')"
+                TABLE_NAME = 'server_variables' OR TABLE_NAME = 'linkshells' OR TABLE_NAME = 'bcnm_records')"
     )
     if cur.fetchone():
         return True
@@ -27,7 +27,7 @@ def migrate(cur, db):
             "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'xidb' AND ENGINE = 'MyISAM' AND \
                     (TABLE_NAME LIKE 'char' OR TABLE_NAME LIKE 'account' OR TABLE_NAME LIKE 'audit' OR TABLE_NAME = 'delivery_box' OR \
                     TABLE_NAME = 'auction_house' OR TABLE_NAME = 'conquest_system' OR TABLE_NAME = 'unity_system' OR \
-                    TABLE_NAME = 'server_variables' OR TABLE_NAME = 'linkshells' OR TABLE_NAME = 'bcnm_info')"
+                    TABLE_NAME = 'server_variables' OR TABLE_NAME = 'linkshells' OR TABLE_NAME = 'bcnm_records')"
         )
         for r in cur.fetchall():
             cur.execute("ALTER TABLE `{}` ROW_FORMAT=DYNAMIC;".format(r[0]))

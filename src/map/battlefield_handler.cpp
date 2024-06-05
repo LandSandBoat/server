@@ -129,7 +129,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
     auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar);
 
     const auto* fmtQuery = "SELECT name, fastestName, fastestTime, fastestPartySize\
-                            FROM bcnm_info i\
+                            FROM bcnm_records i\
                             WHERE bcnmId = %u";
 
     auto ret = _sql->Query(fmtQuery, registration.id);

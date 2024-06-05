@@ -800,7 +800,7 @@ bool CBattlefield::Cleanup(time_point time, bool force)
 
     if (m_Attacked && m_Status == BATTLEFIELD_STATUS_WON)
     {
-        const char* query        = "SELECT fastestTime FROM bcnm_info WHERE bcnmId = %u AND zoneId = %u";
+        const char* query        = "SELECT fastestTime FROM bcnm_records WHERE bcnmId = %u AND zoneId = %u";
         auto        ret          = _sql->Query(query, this->GetID(), this->GetZoneID());
         bool        updateRecord = true;
         if (ret != SQL_ERROR && _sql->NextRow() == SQL_SUCCESS)
@@ -810,7 +810,7 @@ bool CBattlefield::Cleanup(time_point time, bool force)
 
         if (updateRecord)
         {
-            query          = "UPDATE bcnm_info SET fastestName = '%s', fastestTime = %u, fastestPartySize = %u WHERE bcnmId = %u AND zoneid = %u";
+            query          = "UPDATE bcnm_records SET fastestName = '%s', fastestTime = %u, fastestPartySize = %u WHERE bcnmId = %u AND zoneid = %u";
             auto timeThing = std::chrono::duration_cast<std::chrono::seconds>(m_Record.time).count();
 
             _sql->Query(query, m_Record.name.c_str(), timeThing, m_Record.partySize, this->GetID(), GetZoneID());

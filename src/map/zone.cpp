@@ -431,7 +431,7 @@ void CZone::LoadZoneSettings()
                                "zone.zonetype,"
                                "bcnm.name "
                                "FROM zone_settings AS zone "
-                               "LEFT JOIN bcnm_info AS bcnm "
+                               "LEFT JOIN bcnm_records AS bcnm "
                                "USING (zoneid) "
                                "WHERE zoneid = %u "
                                "LIMIT 1";
