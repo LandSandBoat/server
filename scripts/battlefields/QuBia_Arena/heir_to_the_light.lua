@@ -8,6 +8,7 @@ local qubiaID = zones[xi.zone.QUBIA_ARENA]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.QUBIA_ARENA,
     battlefieldId         = xi.battlefield.id.HEIR_TO_THE_LIGHT,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     levelCap              = 75,

@@ -8,6 +8,7 @@ local waughroonID = zones[xi.zone.WAUGHROON_SHRINE]
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.WAUGHROON_SHRINE,
     battlefieldId    = xi.battlefield.id.BEYOND_INFINITY_WAUGHROON_SHRINE,
+    canLoseExp       = false,
     maxPlayers       = 6,
     levelCap         = 99,
     timeLimit        = utils.minutes(10),

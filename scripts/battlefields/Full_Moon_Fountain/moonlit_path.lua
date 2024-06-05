@@ -8,6 +8,7 @@ local fullMoonFountainID = zones[xi.zone.FULL_MOON_FOUNTAIN]
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.FULL_MOON_FOUNTAIN,
     battlefieldId    = xi.battlefield.id.MOONLIT_PATH,
+    canLoseExp       = false,
     maxPlayers       = 6,
     timeLimit        = utils.minutes(30),
     index            = 0,

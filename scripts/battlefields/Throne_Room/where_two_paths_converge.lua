@@ -9,6 +9,7 @@ local ID = zones[xi.zone.THRONE_ROOM]
 local content = BattlefieldMission:new({
     zoneId        = xi.zone.THRONE_ROOM,
     battlefieldId = xi.battlefield.id.WHERE_TWO_PATHS_CONVERGE,
+    canLoseExp    = false,
     maxPlayers    = 6,
     levelCap      = 75,
     timeLimit     = utils.minutes(30),

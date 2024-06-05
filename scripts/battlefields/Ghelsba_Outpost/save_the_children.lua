@@ -9,6 +9,7 @@ local ghelsbaID = zones[xi.zone.GHELSBA_OUTPOST]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.GHELSBA_OUTPOST,
     battlefieldId         = xi.battlefield.id.SAVE_THE_CHILDREN,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     levelCap              = 99,

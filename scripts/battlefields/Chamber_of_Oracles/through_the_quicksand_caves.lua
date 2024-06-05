@@ -9,6 +9,7 @@ local chamberOfOraclesID = zones[xi.zone.CHAMBER_OF_ORACLES]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.CHAMBER_OF_ORACLES,
     battlefieldId         = xi.battlefield.id.THROUGH_THE_QUICKSAND_CAVES,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     levelCap              = 75,

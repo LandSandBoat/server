@@ -9,6 +9,7 @@ local cloisterOfTremorsID = zones[xi.zone.CLOISTER_OF_TREMORS]
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.CLOISTER_OF_TREMORS,
     battlefieldId    = xi.battlefield.id.PUPPET_MASTER,
+    canLoseExp       = false,
     maxPlayers       = 18,
     timeLimit        = utils.minutes(30),
     index            = 1,

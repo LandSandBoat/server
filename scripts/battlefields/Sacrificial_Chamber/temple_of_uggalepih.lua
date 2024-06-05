@@ -8,6 +8,7 @@ local sacrificialChamberID = zones[xi.zone.SACRIFICIAL_CHAMBER]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.SACRIFICIAL_CHAMBER,
     battlefieldId         = xi.battlefield.id.TEMPLE_OF_UGGALEPIH,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     levelCap              = 75,

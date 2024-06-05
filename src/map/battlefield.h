@@ -34,11 +34,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 enum BCRULES : uint8
 {
-    RULES_ALLOW_SUBJOBS         = 0x01,
-    RULES_LOSE_EXP              = 0x02,
-    RULES_REMOVE_3MIN           = 0x04,
-    RULES_SPAWN_TREASURE_ON_WIN = 0x08,
-    RULES_MAAT                  = 0x10
+    RULES_ALLOW_SUBJOBS = 0x01,
+    RULES_LOSE_EXP      = 0x02,
 };
 
 enum BATTLEFIELDMOBCONDITION : uint8
@@ -133,7 +130,7 @@ struct BattlefieldGroup
 class CBattlefield : public std::enable_shared_from_this<CBattlefield>
 {
 public:
-    CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator, bool isInteraction);
+    CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator);
     ~CBattlefield();
 
     uint16                        GetID() const;
@@ -161,7 +158,6 @@ public:
 
     bool CheckInProgress();
     bool IsOccupied() const;
-    bool isInteraction() const;
     bool isEntered(CCharEntity* PChar) const;
 
     void ForEachPlayer(const std::function<void(CCharEntity*)>& func);
@@ -193,7 +189,6 @@ public:
     void         onTick(time_point time);
     bool         CanCleanup(bool cleanup = false);
     bool         Cleanup(time_point time, bool force);
-    bool         LoadMobs();
 
     // Groups
     void addGroup(BattlefieldGroup group);
@@ -233,8 +228,7 @@ private:
     size_t                 m_MaxParticipants;
     uint8                  m_LevelCap;
     // Entity id of the Armoury Crate that appears upon victory
-    uint32     m_armouryCrate = 0;
-    bool const m_isInteraction;
+    uint32 m_armouryCrate = 0;
 
     time_point m_cleanupTime{};
     bool       m_cleanedPlayers = false;

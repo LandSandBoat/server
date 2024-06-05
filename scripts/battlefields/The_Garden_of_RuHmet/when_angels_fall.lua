@@ -8,6 +8,7 @@ local ruHmetID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 local content = BattlefieldMission:new({
     zoneId        = xi.zone.THE_GARDEN_OF_RUHMET,
     battlefieldId = xi.battlefield.id.WHEN_ANGELS_FALL,
+    canLoseExp    = false,
     isMission     = true,
     maxPlayers    = 6,
     levelCap      = 75,

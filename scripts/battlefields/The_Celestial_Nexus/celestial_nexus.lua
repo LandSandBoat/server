@@ -8,6 +8,7 @@ local celestialNexusID = zones[xi.zone.THE_CELESTIAL_NEXUS]
 local content = BattlefieldMission:new({
     zoneId        = xi.zone.THE_CELESTIAL_NEXUS,
     battlefieldId = xi.battlefield.id.CELESTIAL_NEXUS,
+    canLoseExp    = false,
     isMission     = true,
     maxPlayers    = 6,
     levelCap      = 75,

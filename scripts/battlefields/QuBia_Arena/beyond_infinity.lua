@@ -8,6 +8,7 @@ local qubiaID = zones[xi.zone.QUBIA_ARENA]
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.QUBIA_ARENA,
     battlefieldId    = xi.battlefield.id.BEYOND_INFINITY,
+    canLoseExp       = false,
     maxPlayers       = 6,
     levelCap         = 99,
     timeLimit        = utils.minutes(10),

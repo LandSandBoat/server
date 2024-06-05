@@ -9,6 +9,7 @@ local laVauleID = zones[xi.zone.LA_VAULE_S]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.LA_VAULE_S,
     battlefieldId         = xi.battlefield.id.PURPLE_THE_NEW_BLACK,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     timeLimit             = utils.minutes(30),

@@ -9,6 +9,7 @@ local shroudedMawID = zones[xi.zone.THE_SHROUDED_MAW]
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.THE_SHROUDED_MAW,
     battlefieldId    = xi.battlefield.id.WAKING_DREAMS,
+    canLoseExp       = false,
     maxPlayers       = 6,
     timeLimit        = utils.minutes(30),
     index            = 2,

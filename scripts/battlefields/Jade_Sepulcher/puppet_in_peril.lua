@@ -8,6 +8,7 @@ local jadeSepulcherID = zones[xi.zone.JADE_SEPULCHER]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.JADE_SEPULCHER,
     battlefieldId         = xi.battlefield.id.PUPPET_IN_PERIL,
+    canLoseExp            = false,
     isMission             = true,
     maxPlayers            = 6,
     levelCap              = 99,
