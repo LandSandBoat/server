@@ -22,14 +22,6 @@ entity.onTrigger = function(player, npc)
         not utils.mask.getBit(wildcatSandy, 16)
     then
         player:startEvent(558)
-    -- Blackmail quest
-    elseif
-        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL) == xi.questStatus.QUEST_ACCEPTED and
-        player:hasKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
-    then
-        player:startEvent(549)
-        player:setCharVar('BlackMailQuest', 1)
-        player:delKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
     elseif pNation == xi.nation.SANDORIA then
         -- Rank 10 default dialogue
         if player:getRank(player:getNation()) == 10 then
