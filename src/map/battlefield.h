@@ -34,8 +34,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 enum BCRULES : uint8
 {
-    RULES_ALLOW_SUBJOBS         = 0x01,
-    RULES_LOSE_EXP              = 0x02,
+    RULES_ALLOW_SUBJOBS = 0x01,
+    RULES_LOSE_EXP      = 0x02,
 };
 
 enum BATTLEFIELDMOBCONDITION : uint8
@@ -228,7 +228,7 @@ private:
     size_t                 m_MaxParticipants;
     uint8                  m_LevelCap;
     // Entity id of the Armoury Crate that appears upon victory
-    uint32     m_armouryCrate = 0;
+    uint32 m_armouryCrate = 0;
 
     time_point m_cleanupTime{};
     bool       m_cleanedPlayers = false;

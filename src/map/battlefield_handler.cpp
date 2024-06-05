@@ -284,25 +284,10 @@ bool CBattlefieldHandler::ReachedMaxCapacity(int battlefieldId) const
         return true;
     }
 
-    // we have at least one free area and id has been passed so lets look it up
-    if (battlefieldId != -1)
-    {
-        std::string query("SELECT battlefieldNumber FROM bcnm_battlefield WHERE bcnmId = %i");
-        auto        ret = _sql->Query(query.c_str(), battlefieldId);
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
-        {
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                auto area = _sql->GetUIntData(0);
-                if (m_Battlefields.find(area) == m_Battlefields.end())
-                {
-                    return false; // this area hasnt been loaded in for this battlefield
-                }
-            }
-        }
-        // all areas for this battlefield are full
-        return true;
-    }
+    // NOTE: If allowedAreas is used for a BCNM, this check will return true, but instead
+    // the player will be rejected from the instance in the 32000 event update.  This is intentional
+    // at this time.
+
     // we have a free battlefield
     return false;
 }

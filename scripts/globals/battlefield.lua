@@ -1282,6 +1282,9 @@ function xi.battlefield.getBattlefieldOptions(player, npc, trade)
         return result
     end
 
+    -- TODO: if the battlefield is at capacity, the 32000 event should not start, but instead
+    -- a separate message is displayed on retail
+
     for _, content in ipairs(contents) do
         if
             content:checkRequirements(player, npc, true, trade) and
