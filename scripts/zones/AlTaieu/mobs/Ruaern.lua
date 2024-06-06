@@ -14,7 +14,9 @@ local function clearTowerVars(player, towerNum)
     player:setCharVar('Ru_aern_'..towerNum..'-3KILL', 0)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobDeath = function(mob, player, isKiller)
+    local missionVar = Mission.getVarPrefix(xi.mission.log_id.COP, xi.mission.id.cop.GARDEN_OF_ANTIQUITY)
+
     if
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.GARDEN_OF_ANTIQUITY and
         player:getCharVar('PromathiaStatus') < 3
@@ -43,7 +45,7 @@ entity.onMobDeath = function(mob, player, optParams)
             player:getCharVar('Ru_aern_1-2KILL') == 1 and
             player:getCharVar('Ru_aern_1-3KILL') == 1
         then
-            player:setCharVar('[SEA][AlTieu]SouthTower', 1)
+            player:setCharVar(missionVar .. 'SouthTower', 1)
             clearTowerVars(player, 1)
         end
 
@@ -52,7 +54,7 @@ entity.onMobDeath = function(mob, player, optParams)
             player:getCharVar('Ru_aern_2-2KILL') == 1 and
             player:getCharVar('Ru_aern_2-3KILL') == 1
         then
-            player:setCharVar('[SEA][AlTieu]WestTower', 1)
+            player:setCharVar(missionVar .. 'WestTower', 1)
             clearTowerVars(player, 2)
         end
 
@@ -61,7 +63,7 @@ entity.onMobDeath = function(mob, player, optParams)
             player:getCharVar('Ru_aern_3-2KILL') == 1 and
             player:getCharVar('Ru_aern_3-3KILL') == 1
         then
-            player:setCharVar('[SEA][AlTieu]EastTower', 1)
+            player:setCharVar(missionVar .. 'EastTower', 1)
             clearTowerVars(player, 3)
         end
     end
