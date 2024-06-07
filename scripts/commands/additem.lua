@@ -26,12 +26,12 @@ commandObj.onTrigger = function(player, item, quantity, aug0, aug0val, aug1, aug
         error(player, 'No Item ID given.')
         return
     elseif tonumber(item) == nil and item ~= nil then
-        -- Item was provided, but was not a number.  Try text lookup.
+        -- Item was provided, but was not a number. Try text lookup.
         local retItem = GetItemIDByName(tostring(item))
         if retItem > 0 and retItem < 65000 then
             itemToGet = retItem
         elseif retItem >= 65000 then
-            player:printToPlayer(string.format('Found %s instances matching "%s".  Use ID or exact name.', 65536 - retItem,  tostring(item)))
+            player:printToPlayer(string.format('Found %s instances matching "%s". Use ID or exact name.', 65536 - retItem, tostring(item)))
             return
         else
             player:printToPlayer(string.format('Item %s not found in database.', item))

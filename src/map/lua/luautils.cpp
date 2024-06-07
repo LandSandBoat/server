@@ -5553,21 +5553,22 @@ namespace luautils
 
     uint16 GetItemIDByName(std::string const& name)
     {
-        uint16      id    = 0;
-        const char* Query = "SELECT itemid FROM item_basic WHERE name LIKE '%s' OR sortname LIKE '%s'";
-        int32       ret   = _sql->Query(Query, name, name);
+        uint16 id   = 0;
+        auto   rset = db::preparedStmt("SELECT itemid FROM item_basic WHERE name LIKE ? OR sortname LIKE ?", name, name);
 
-        if (ret != SQL_ERROR && _sql->NumRows() == 1) // Found a single result
+        const uint16 rowCount = (rset && rset->rowsCount()) ? static_cast<uint16>(rset->rowsCount()) : 0U;
+
+        if (rset && rowCount == 1) // Found a single result
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                id = _sql->GetIntData(0);
+                id = rset->getUInt("itemid");
             }
         }
-        else if (ret != SQL_ERROR && _sql->NumRows() > 1)
+        else if (rset && rowCount > 1)
         {
             // 0xFFFF is gil, so we will always return a value less than that as a warning
-            id = 0xFFFF - _sql->NumRows() + 1;
+            id = 0xFFFF - rowCount + 1;
         }
 
         return id;
