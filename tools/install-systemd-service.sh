@@ -169,6 +169,6 @@ echo "$SYSTEMD_SEARCH" > /etc/systemd/system/xi_search.service
 echo "$SYSTEMD_WORLD" > /etc/systemd/system/xi_world.service
 chmod 755 /etc/systemd/system/xi*
 systemctl daemon-reload
-systemctl enable xi_map xi_connect xi_search
+systemctl enable xi_map xi_connect xi_search xi_world
 echo "Services installed!"
 echo "Start with 'systemctl start xi', enable start on boot with 'systemctl enable xi'."
