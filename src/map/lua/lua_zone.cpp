@@ -227,7 +227,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
  *  Purpose : Set Solo Battle music for zone
  ************************************************************************/
 
-void CLuaZone::setSoloBattleMusic(uint8 musicId)
+void CLuaZone::setSoloBattleMusic(uint16 musicId)
 {
     m_pLuaZone->SetSoloBattleMusic(musicId);
 }
@@ -242,7 +242,7 @@ auto CLuaZone::getSoloBattleMusic()
  *  Purpose : Set Party Battle music for zone
  ************************************************************************/
 
-void CLuaZone::setPartyBattleMusic(uint8 musicId)
+void CLuaZone::setPartyBattleMusic(uint16 musicId)
 {
     m_pLuaZone->SetPartyBattleMusic(musicId);
 }
@@ -257,7 +257,7 @@ auto CLuaZone::getPartyBattleMusic()
  *  Purpose : Set Background Day music for zone
  ************************************************************************/
 
-void CLuaZone::setBackgroundMusicDay(uint8 musicId)
+void CLuaZone::setBackgroundMusicDay(uint16 musicId)
 {
     m_pLuaZone->SetBackgroundMusicDay(musicId);
 }
@@ -272,7 +272,7 @@ auto CLuaZone::getBackgroundMusicDay()
  *  Purpose : Set Background Night music for zone
  ************************************************************************/
 
-void CLuaZone::setBackgroundMusicNight(uint8 musicId)
+void CLuaZone::setBackgroundMusicNight(uint16 musicId)
 {
     m_pLuaZone->SetBackgroundMusicNight(musicId);
 }

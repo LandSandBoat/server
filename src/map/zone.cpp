@@ -224,42 +224,42 @@ const std::string& CZone::getName()
     return m_zoneName;
 }
 
-uint8 CZone::GetSoloBattleMusic() const
+uint16 CZone::GetSoloBattleMusic() const
 {
     return m_zoneMusic.m_bSongS;
 }
 
-uint8 CZone::GetPartyBattleMusic() const
+uint16 CZone::GetPartyBattleMusic() const
 {
     return m_zoneMusic.m_bSongM;
 }
 
-uint8 CZone::GetBackgroundMusicDay() const
+uint16 CZone::GetBackgroundMusicDay() const
 {
     return m_zoneMusic.m_songDay;
 }
 
-uint8 CZone::GetBackgroundMusicNight() const
+uint16 CZone::GetBackgroundMusicNight() const
 {
     return m_zoneMusic.m_songNight;
 }
 
-void CZone::SetSoloBattleMusic(uint8 music)
+void CZone::SetSoloBattleMusic(uint16 music)
 {
     m_zoneMusic.m_bSongS = music;
 }
 
-void CZone::SetPartyBattleMusic(uint8 music)
+void CZone::SetPartyBattleMusic(uint16 music)
 {
     m_zoneMusic.m_bSongM = music;
 }
 
-void CZone::SetBackgroundMusicDay(uint8 music)
+void CZone::SetBackgroundMusicDay(uint16 music)
 {
     m_zoneMusic.m_songDay = music;
 }
 
-void CZone::SetBackgroundMusicNight(uint8 music)
+void CZone::SetBackgroundMusicNight(uint16 music)
 {
     m_zoneMusic.m_songNight = music;
 }

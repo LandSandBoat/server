@@ -67,7 +67,7 @@ public:
 
     void TOTDChange(TIMETYPE TOTD); // process the world's reactions to changing time of day
     void WeatherChange(WEATHER weather);
-    void MusicChange(uint8 BlockID, uint8 MusicTrackID);
+    void MusicChange(uint16 BlockID, uint16 MusicTrackID);
 
     void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // send a global package within the zone
 
