@@ -800,26 +800,6 @@ xi.job_utils.rune_fencer.useRayke = function(player, target, ability, action)
     return xi.effect.RAYKE -- Rayke doesn't seem to inform you if it had no effect? -- TODO: double check
 end
 
--- Used for nuke wall reduction of Rayke
-xi.job_utils.rune_fencer.isRaykeReducingElement = function(actor, element)
-    local effect = actor:getStatusEffect(xi.effect.RAYKE)
-
-    if effect then
-        local subpower = effect:getSubPower()
-
-        -- current bit size of subPower is 16 bits, 4*4 = 16
-        -- Step from 0 to 16 in increments of 4...
-        for i = 0, 16, 4 do
-            -- If element is bitpacked into rayke subeffect...
-            if bit.band(bit.rshift(subpower, i), 0xF) == element then
-                return true
-            end
-        end
-    end
-
-    return false
-end
-
 -- see https://www.bg-wiki.com/ffxi/One_for_All
 xi.job_utils.rune_fencer.useOneForAll = function(player, target, ability, action)
     local duration = 30 + player:getJobPointLevel(xi.jp.ONE_FOR_ALL_DURATION)
