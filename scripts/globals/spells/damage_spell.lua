@@ -894,9 +894,9 @@ xi.spells.damage.calculateNukeWallFactor = function(target, spellElement, finalD
 
     -- Initial check.
     if
-        not target:isNM() or
-        spellElement <= xi.element.NONE or
-        finalDamage < 0
+        not target:isNM() or               -- Target is not an NM.
+        spellElement <= xi.element.NONE or -- Action isn't elemental.
+        finalDamage < 0                    -- Action hals target.
     then
         return nukeWallFactor
     end
@@ -907,14 +907,33 @@ xi.spells.damage.calculateNukeWallFactor = function(target, spellElement, finalD
     if target:hasStatusEffect(xi.effect.NUKE_WALL) then
         local effect = target:getStatusEffect(xi.effect.NUKE_WALL)
 
+        -- Current nuke wall effect.
         if spellElement == effect:getSubPower() then
             potency = effect:getPower()
 
             -- Effect potency is reduced by 20% after 1 second and remains stable for the remaining time, unless refreshed.
             if effect:getTimeRemaining() <= 4000 then
-                potency = utils.clamp(potency - 2000, 0, 4000) -- Potency is reduced by 2000 after first second has happened. Can't go below 0.
+                potency = utils.clamp(potency - 2000, 0, 4000) -- Potency is reduced by 2000 (20%) after first second has happened. Can't go below 0.
             end
         end
+
+        -- Rayke effect.
+        if target:hasStatusEffect(xi.effect.RAYKE) then
+            local raykeSubpower = target:getStatusEffect(xi.effect.RAYKE):getSubPower()
+
+            -- current bit size of subPower is 16 bits, 4*4 = 16
+            -- Step from 0 to 16 in increments of 4...
+            for i = 0, 16, 4 do
+                -- If element is bitpacked into rayke subeffect...
+                if bit.band(bit.rshift(raykeSubpower, i), 0xF) == spellElement then
+                    potency = math.floor(potency / 2)
+
+                    break
+                end
+            end
+        end
+
+        target:delStatusEffectSilent(xi.effect.NUKE_WALL)
     end
 
     nukeWallFactor = 1 - potency / 10000
@@ -926,7 +945,6 @@ xi.spells.damage.calculateNukeWallFactor = function(target, spellElement, finalD
     local finalPotency = utils.clamp(math.floor(4000 * finalDamage / damageCap) + potency, 0, 4000)
 
     -- Renew status effect.
-    target:delStatusEffectSilent(xi.effect.NUKE_WALL)
     target:addStatusEffectEx(xi.effect.NUKE_WALL, 0, finalPotency, 0, 5, 0, spellElement)
 
     return nukeWallFactor
