@@ -4755,6 +4755,7 @@ INSERT INTO `synth_recipes` VALUES (75530,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,27
 INSERT INTO `synth_recipes` VALUES (75531,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,2773,2774,2774,2775,4161,0,0,2781,2781,2781,2781,1,1,1,1,'Enfeeb. Kit Sleep');
 INSERT INTO `synth_recipes` VALUES (75532,1,0,0,0,0,0,34,0,0,0,4100,4242,12994,0,0,0,0,0,0,0,818,818,848,848,2,3,1,2,'Shoes (desynth)');
 INSERT INTO `synth_recipes` VALUES (75533,1,0,0,0,0,25,0,0,0,0,4100,4242,12722,0,0,0,0,0,0,0,834,819,819,819,2,5,6,7,'Bracers (desynth)'); -- FFXIclopedia
+INSERT INTO `synth_recipes` VALUES (75534,1,0,0,0,45,0,0,0,0,0,4100,4242,14790,0,0,0,0,0,0,0,653,653,653,653,1,2,2,2,'Reraise Earring (desynth)'); -- FFXIclopedia
 
 -- -----------
 -- RECIPES END
