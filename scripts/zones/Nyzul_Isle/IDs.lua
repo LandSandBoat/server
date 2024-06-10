@@ -127,6 +127,7 @@ zones[xi.zone.NYZUL_ISLE] =
         ACCEPT_THY_DESTRUCTION        = 7553, -- Accept thy destruction... Wish for eternity...yearn for immortality... Sense thy transience...know thy insignificance...
         OMEGA_SPAM                    = 7554, -- OOOOOOO
         SHALL_KNOW_OBLIVION           = 7555, -- I am...Alexander... The fearful...shall be embraced... The bold...shall know oblivion...
+        LIGHTNING_CELL_SPARKS         = 7563, -- The % begins to crackle and emit sparks!
     },
 
     mob =
@@ -164,6 +165,15 @@ zones[xi.zone.NYZUL_ISLE] =
             ALEXANDER = 17093144,
             RAUBAHN   = 17093145,
         },
+
+        -- Waking the Colossus/Divine Interference
+        [60] =
+        {
+            ALEXANDER         = 17093148,
+            ALEXANDER_IMAGE_1 = 17093149,
+            ALEXANDER_IMAGE_2 = 17093150,
+            ALEXANDER_IMAGE_3 = 17093151,
+        }
     },
 
     npc =

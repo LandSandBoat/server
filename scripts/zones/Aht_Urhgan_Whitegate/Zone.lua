@@ -15,6 +15,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(7,   69,  0.0,    7,   73,  0.0,   11) -- Sets Mark for 'Led Astry' Quest cutscene.
     zone:registerTriggerArea(8,   10,  2.0,  -96,   14,  2.0,  -92) -- Sets Mark for 'Led Astry' Quest cutscene.
     zone:registerTriggerArea(9, -103,  0.0,  -16, -100,  0.0,  -12) -- Sets Mark for 'Striking a Balance' Quest cutscene.
+    zone:registerTriggerArea(10,  30, -7.0,  -51,   39, -5.0,  -40) -- Waking the Colossus/Divine Interference
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

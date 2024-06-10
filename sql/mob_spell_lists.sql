@@ -2329,7 +2329,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Amnaf_blu',212,641,1,255); -- hysteric_ba
 -- Raubahn (213)
 INSERT INTO `mob_spell_lists` VALUES ('Raubahn',213,557,1,255); -- eyes_on_me (1~255)
 
--- Alexander (214)
+-- Alexander_NP (214)
 INSERT INTO `mob_spell_lists` VALUES ('Alexander',214,22,1,255); -- holy_ii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Alexander',214,25,1,255); -- dia_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Alexander',214,31,1,255); -- banish_iv (1~255)
@@ -5051,7 +5051,25 @@ INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,176,1,255); -- firaga_ii
 INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,204,1,255); -- flare (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,235,1,255); -- burn (1~255)
 
--- Next Available: 506
+-- Alexander_WTC (506)
+INSERT INTO `mob_spell_lists` VALUES ('Alexander_WTC',506,22,1,255);  -- holy_ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Alexander_WTC',506,25,1,255);  -- dia_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Alexander_WTC',506,31,1,255);  -- banish_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Alexander_WTC',506,35,1,255);  -- diaga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Alexander_WTC',506,40,1,255);  -- banishga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Alexander_WTC',506,46,1,255);  -- protect_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Alexander_WTC',506,51,1,255);  -- shell_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Alexander_WTC',506,128,1,255); -- protectra_iv (63~255)
+INSERT INTO `mob_spell_lists` VALUES ('Alexander_WTC',506,133,1,255); -- shellra_iv (68~255)
+
+-- Alexander Image (507)
+INSERT INTO `mob_spell_lists` VALUES ('Alexander_Image',507,21,1,255);  -- holy (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Alexander_Image',507,30,1,255);  -- banish_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Alexander_Image',507,34,1,255);  -- diaga_ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Alexander_Image',507,40,1,255);  -- banishga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Alexander_Image',507,112,1,255); -- flash (1~255)
+
+-- Next Available: 508
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
