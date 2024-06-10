@@ -363,16 +363,14 @@ xi.spells.damage.calculateMTDR = function(spell)
     return multipleTargetReduction
 end
 
-xi.spells.damage.calculateEleStaffBonus = function(caster, spellElement)
-    local eleStaffBonus = caster:getMod(xi.combat.element.strongAffinityDmg[spellElement])
+xi.spells.damage.calculateElementalStaffBonus = function(caster, spellElement)
+    local elementalStaffBonus = 1
 
-    if eleStaffBonus > 0 then
-        eleStaffBonus = 1 + eleStaffBonus * 0.05
-    else
-        eleStaffBonus = 1
+    if spellElement > xi.element.NONE then
+        elementalStaffBonus = elementalStaffBonus + caster:getMod(xi.combat.element.strongAffinityDmg[spellElement]) * 0.05
     end
 
-    return eleStaffBonus
+    return elementalStaffBonus
 end
 
 xi.spells.damage.calculateMagianAffinity = function()
@@ -390,7 +388,7 @@ xi.spells.damage.calculateSDT = function(target, spellElement)
     local sdt    = 1 -- The variable we want to calculate
     local sdtMod = 0
 
-    if spellElement ~= xi.element.NONE then
+    if spellElement > xi.element.NONE then
         sdtMod = target:getMod(xi.combat.element.specificDmgTakenMod[spellElement])
 
     -- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
@@ -439,7 +437,7 @@ xi.spells.damage.calculateIfMagicBurst = function(target, spellElement)
     if skillchainCount > 0 then
         local rankBonus  = 0
 
-        if spellElement ~= xi.element.NONE then
+        if spellElement > xi.element.NONE then
             local resistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
             local rankTable  = { 1.15, 0.85, 0.6, 0.5, 0.4, 0.15, 0.05 }
 
@@ -512,9 +510,15 @@ end
 
 xi.spells.damage.calculateDayAndWeather = function(caster, spellId, spellElement)
     local dayAndWeather = 1 -- The variable we want to calculate
-    local weather       = caster:getWeather()
-    local dayElement    = VanadielDayElement()
-    local isHelixSpell  = false -- TODO: I'm not sure thats the correct way to handle helixes. This is how we handle it and im not gonna change it for now.
+
+    -- Return if no/incorrect element.
+    if spellElement <= xi.element.NONE then
+        return dayAndWeather
+    end
+
+    local weather      = caster:getWeather()
+    local dayElement   = VanadielDayElement()
+    local isHelixSpell = false -- TODO: I'm not sure thats the correct way to handle helixes. This is how we handle it and im not gonna change it for now.
 
     -- See if its a Helix type spell
     if
@@ -853,13 +857,20 @@ end
 
 xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
     local nukeAbsorbOrNullify = 1
+    local absorbElementMod    = 0
+    local nullifyElementMod   = 0
+
+    if spellElement > xi.element.NONE then
+        absorbElementMod  = xi.combat.element.absorbMod[spellElement]
+        nullifyElementMod = xi.combat.element.nullMod[spellElement]
+    end
 
     -- Calculate chance for spell absorption.
     local absorbChance = math.random(1, 100)
     if
-        absorbChance <= target:getMod(xi.mod.ABSORB_DMG_CHANCE) or               -- All damage.
-        absorbChance <= target:getMod(xi.mod.MAGIC_ABSORB) or                    -- Magical damage.
-        absorbChance <= target:getMod(xi.combat.element.absorbMod[spellElement]) -- Element damage.
+        absorbChance <= target:getMod(xi.mod.ABSORB_DMG_CHANCE) or -- All damage.
+        absorbChance <= target:getMod(xi.mod.MAGIC_ABSORB) or      -- Magical damage.
+        absorbChance <= target:getMod(absorbElementMod)            -- Element damage.
     then
         nukeAbsorbOrNullify = -1
     end
@@ -867,9 +878,9 @@ xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
     -- Calculate chance for spell nullification.
     local nullifyChance = math.random(1, 100)
     if
-        nullifyChance <= target:getMod(xi.mod.NULL_DAMAGE) or                   -- All damage.
-        nullifyChance <= target:getMod(xi.mod.NULL_MAGICAL_DAMAGE) or           -- Magical damage.
-        nullifyChance <= target:getMod(xi.combat.element.nullMod[spellElement]) -- Element damage.
+        nullifyChance <= target:getMod(xi.mod.NULL_DAMAGE) or         -- All damage.
+        nullifyChance <= target:getMod(xi.mod.NULL_MAGICAL_DAMAGE) or -- Magical damage.
+        nullifyChance <= target:getMod(nullifyElementMod)             -- Element damage.
     then
         nukeAbsorbOrNullify = 0
     end
@@ -884,7 +895,7 @@ xi.spells.damage.calculateNukeWallFactor = function(target, spellElement, finalD
     -- Initial check.
     if
         not target:isNM() or
-        spellElement ~= xi.element.NONE or
+        spellElement <= xi.element.NONE or
         finalDamage < 0
     then
         return nukeWallFactor
@@ -938,7 +949,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     -- Variables/steps to calculate finalDamage.
     local spellDamage                 = xi.spells.damage.calculateBaseDamage(caster, target, spellId, spellGroup, skillType, statUsed)
     local multipleTargetReduction     = xi.spells.damage.calculateMTDR(spell)
-    local eleStaffBonus               = xi.spells.damage.calculateEleStaffBonus(caster, spellElement)
+    local elementalStaffBonus         = xi.spells.damage.calculateElementalStaffBonus(caster, spellElement)
     local magianAffinity              = xi.spells.damage.calculateMagianAffinity()
     local sdt                         = xi.spells.damage.calculateSDT(target, spellElement)
     local resist                      = xi.spells.damage.calculateResist(caster, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
@@ -962,7 +973,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
 
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
     finalDamage = math.floor(spellDamage * multipleTargetReduction)
-    finalDamage = math.floor(finalDamage * eleStaffBonus)
+    finalDamage = math.floor(finalDamage * elementalStaffBonus)
     finalDamage = math.floor(finalDamage * magianAffinity)
     finalDamage = math.floor(finalDamage * sdt)
     finalDamage = math.floor(finalDamage * resist)
