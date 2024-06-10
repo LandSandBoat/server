@@ -12,7 +12,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.NIGHTINGALE, 0, 0, 60)
+    xi.job_utils.bard.useNightingale(player, target, ability)
 end
 
 return abilityObject
