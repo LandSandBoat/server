@@ -799,6 +799,7 @@ public:
     bool   isNM();
 
     uint8  getModelSize();
+    void   setMeleeRange(float range);
     void   setMobFlags(uint32 flags, sol::object const& mobId); // Used to manipulate the mob's flags, such as changing size.
     uint32 getMobFlags();
 
