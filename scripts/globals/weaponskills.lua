@@ -333,28 +333,6 @@ local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcPara
 
             finaldmg = (dmg + consumeManaBonus(attacker)) * ftp * calcParams.pdif
 
-            -- Duplicate the first hit with an added magical component for hybrid WSes
-            if calcParams.hybridHit then
-                -- Calculate magical bonuses and reductions
-                local magicdmg = addBonusesAbility(attacker, wsParams.ele, target, finaldmg, wsParams)
-
-                magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, calcParams.bonusAcc)
-                magicdmg = target:magicDmgTaken(magicdmg, wsParams.ele)
-
-                if magicdmg > 0 then
-                    magicdmg = adjustForTarget(target, magicdmg, wsParams.ele) -- this may absorb or nullify
-                end
-
-                if magicdmg > 0 then                                           -- handle nonzero damage if previous function does not absorb or nullify
-                    magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
-                    magicdmg = utils.clamp(magicdmg, 0, 99999)
-                    magicdmg = utils.oneforall(target, magicdmg)
-                    magicdmg = utils.stoneskin(target, magicdmg)
-                end
-
-                finaldmg = finaldmg + magicdmg
-            end
-
             calcParams.hitsLanded = calcParams.hitsLanded + 1
         else
             calcParams.shadowsAbsorbed = calcParams.shadowsAbsorbed + 1
@@ -426,6 +404,37 @@ local function calculateWsMods(attacker, calcParams, wsParams)
     return wsMods * calcParams.alpha + calcParams.fSTR
 end
 
+-- Compute magic damage component of hybrid weaponskill
+-- https://wiki.ffo.jp/html/1261.html
+-- https://www.ffxiah.com/forum/topic/33470/the-sealed-dagger-a-ninja-guide/151/#3420836
+-- https://www.ffxiah.com/forum/topic/49614/blade-chi-damage-formula/2/#3171538
+local function calculateHybridMagicDamage(tp, physicaldmg, attacker, target, wsParams, calcParams, wsID)
+    local ftp = xi.weaponskills.fTP(tp, wsParams.ftpMod)
+    local magicdmg = physicaldmg * ftp + attacker:getMod(xi.mod.MAGIC_DAMAGE)
+    local wsd = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS)
+    if attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then
+        wsd = wsd + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
+    end
+    magicdmg = magicdmg * (100 + wsd) / 100
+    magicdmg = addBonusesAbility(attacker, wsParams.ele, target, magicdmg, wsParams)
+    magicdmg = magicdmg + calcParams.bonusfTP * physicaldmg
+    magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, calcParams.bonusAcc)
+    magicdmg = target:magicDmgTaken(magicdmg, wsParams.ele)
+
+    if magicdmg > 0 then
+        magicdmg = adjustForTarget(target, magicdmg, wsParams.ele) -- this may absorb or nullify
+    end
+
+    if magicdmg > 0 then                                           -- handle nonzero damage if previous function does not absorb or nullify
+        magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
+        magicdmg = utils.clamp(magicdmg, 0, 99999)
+        magicdmg = utils.oneforall(target, magicdmg)
+        magicdmg = utils.stoneskin(target, magicdmg)
+    end
+
+    return magicdmg
+end
+
 -- Calculates the raw damage for a weaponskill, used by both xi.weaponskills.doPhysicalWeaponskill and xi.weaponskills.doRangedWeaponskill.
 -- Behavior of damage calculations can vary based on the passed in calcParams, which are determined by the calling function
 -- depending on the type of weaponskill being done, and any special cases for that weaponskill
@@ -460,6 +469,9 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     -- Calculate fTP multiplier
     local ftp = xi.weaponskills.fTP(tp, wsParams.ftpMod) + calcParams.bonusfTP
+    if calcParams.hybridHit then
+        ftp = 1 + calcParams.bonusfTP
+    end
 
     -- Calculate critrates
     -- TODO: calc per-hit with weapon crit+% on each hand (if dual wielding)
@@ -534,9 +546,8 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         end
     end
 
-    -- We've now accounted for any crit from SA/TA, or damage bonus for a Hybrid WS, so nullify them
+    -- We've now accounted for any crit from SA/TA, so nullify them
     calcParams.forcedFirstCrit = false
-    calcParams.hybridHit       = false
 
     -- For items that apply bonus damage to the first hit of a weaponskill (but not later hits),
     -- store bonus damage for first hit, for use after other calculations are done
@@ -766,6 +777,11 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
     calcParams     = xi.weaponskills.calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
     local finaldmg = calcParams.finalDmg
 
+    -- Add in magic damage for hybrid weaponskills
+    if wsParams.hybridWS then
+        finaldmg = finaldmg + calculateHybridMagicDamage(tp, finaldmg, attacker, target, wsParams, calcParams, wsID)
+    end
+
     -- Delete statuses that may have been spent by the WS
     attacker:delStatusEffectsByFlag(xi.effectFlag.DETECTABLE)
     attacker:delStatusEffect(xi.effect.SNEAK_ATTACK)
@@ -836,6 +852,11 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
     -- Calculate reductions
     finaldmg = target:rangedDmgTaken(finaldmg)
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
+
+    -- Add in magic damage for hybrid weaponskills
+    if wsParams.hybridWS then
+        finaldmg = finaldmg + calculateHybridMagicDamage(tp, finaldmg, attacker, target, wsParams, calcParams, wsID)
+    end
 
     finaldmg            = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
