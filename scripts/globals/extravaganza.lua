@@ -40,8 +40,9 @@ xi.extravaganza.shadowEraHide = function(npc)
     local active = xi.extravaganza.campaignActive()
 
     if
-        active == xi.extravaganza.campaign.NONE or
-        active == xi.extravaganza.campaign.SPRING_FALL
+        (active == xi.extravaganza.campaign.NONE or
+        active == xi.extravaganza.campaign.SPRING_FALL) and
+        xi.settings.main.ENABLE_WOTG == 1
     then
         GetNPCByID(npc):setStatus(xi.status.DISAPPEAR)
     end
