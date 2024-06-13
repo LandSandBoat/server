@@ -13849,7 +13849,7 @@ INSERT INTO `mob_groups` VALUES (5,3173,254,'Pond_Amoeban',300,0,779,0,900,83,85
 INSERT INTO `mob_groups` VALUES (6,1945,254,'Hillock_Murex',300,0,1307,0,900,84,85,0);
 INSERT INTO `mob_groups` VALUES (7,1621,254,'Glen_Crab',300,0,1005,0,0,81,82,0);
 INSERT INTO `mob_groups` VALUES (8,1487,254,'Gefyrst',300,0,0,0,900,81,83,0);
-INSERT INTO `mob_groups` VALUES (9,3108,254,'Peak_Pugil',300,0,0,0,0,81,82,0);
+INSERT INTO `mob_groups` VALUES (9,3108,254,'Peak_Pugil',300,0,3300,0,0,81,82,0);
 INSERT INTO `mob_groups` VALUES (10,1700,254,'Goblin_Plunderer',300,0,1139,0,0,81,82,0);
 INSERT INTO `mob_groups` VALUES (11,4099,254,'Ungeweder',300,0,0,0,900,85,90,0);
 INSERT INTO `mob_groups` VALUES (12,1686,254,'Goblin_Meatgrinder',300,0,1113,0,0,82,83,0);

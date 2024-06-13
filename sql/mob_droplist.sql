@@ -26820,6 +26820,10 @@ INSERT INTO `mob_droplist` VALUES (3298,4,0,1000,866,0);          -- Handful Of 
 -- ZoneID:  89 - Vasiliceratops
 INSERT INTO `mob_droplist` VALUES (3299,0,0,1000,18508,@UNCOMMON); -- Lyft Voulge (Uncommon, 10%)
 
+-- ZoneID: 254 - Peak Pugil
+INSERT INTO `mob_droplist` VALUES (3300,0,0,1000,3270,@RARE); -- High-Quality Pugil Scale
+INSERT INTO `mob_droplist` VALUES (3300,0,0,1000,868,@VCOMMON); -- Pugil Scales
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
