@@ -8,13 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
-
-    return 0, 0
+    xi.job_utils.blue_mage.checkUnbridledWisdom(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(xi.effect.UNBRIDLED_WISDOM, 16, 1, 30)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    xi.job_utils.blue_mage.useUnbridledWisdom(player, target, ability, action)
 end
 
 return abilityObject

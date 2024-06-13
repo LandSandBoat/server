@@ -8,17 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if player:hasStatusEffect(xi.effect.DIFFUSION) then
-        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
-    end
-
-    return 0, 0
+    xi.job_utils.blue_mage.checkDiffusion(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.DIFFUSION, 1, 0, 60)
-
-    return xi.effect.DIFFUSION
+abilityObject.onUseAbility = function(player, target, ability, action)
+    xi.job_utils.blue_mage.useDiffusion(player, target, ability, action)
 end
 
 return abilityObject
