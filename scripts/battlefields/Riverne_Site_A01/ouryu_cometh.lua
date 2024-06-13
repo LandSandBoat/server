@@ -15,7 +15,7 @@ local content = Battlefield:new({
     index         = 0,
     area          = 1,
     entryNpc      = 'Unstable_Displacement',
-    exitNpc       = 'Spatial_Displacement',
+    exitNpc       = 'Spatial_Displacement_BC',
     requiredItems =
     {
         xi.item.CLOUD_EVOKER,
