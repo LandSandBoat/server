@@ -190,6 +190,7 @@ CREATE TABLE `char_points` (
   `light_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
   `darkness_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
   `silver_aman_voucher` int(10) unsigned NOT NULL DEFAULT 0,
+  `plaudits` smallint(5) DEFAULT 0,
 
   PRIMARY KEY (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
