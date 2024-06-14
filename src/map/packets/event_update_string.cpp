@@ -31,7 +31,7 @@ CEventUpdateStringPacket::CEventUpdateStringPacket(std::string const& string0, s
                                                    uint32 param5, uint32 param6, uint32 param7, uint32 param8)
 {
     this->setType(0x5D);
-    this->setSize(0x58);
+    this->setSize(0x68);
 
     ref<uint32>(0x04) = param0;
     ref<uint32>(0x08) = param1;
