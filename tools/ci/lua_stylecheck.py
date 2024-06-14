@@ -322,9 +322,11 @@ class LuaStyleCheck:
                         self.error(f"Use of deprecated/unnecessary require: {deprecated_str}. This should be removed")
 
     def check_invalid_enum(self, line):
-            for invalid_enum in invalid_enums:
-                if invalid_enum in line:
-                    self.error(f"Potential invalid enum reference used: {invalid_enum}.  Did you mean the one without an s?")
+        for invalid_enum in invalid_enums:
+            if invalid_enum in line:
+                self.error(
+                    f"Potential invalid enum reference used: {invalid_enum}.  Did you mean the one without an s?"
+                )
 
     def check_function_parameters(self, line):
         # Iterate through all entries in the disallowed table
@@ -339,7 +341,6 @@ class LuaStyleCheck:
                 for position in param_locations:
                     if position < len(parameter_list) and parameter_list[position].strip().isnumeric():
                         self.error(f"Magic Number is not allowed at this location ({position}).")
-
 
     def run_style_check(self):
         if self.filename is None:
@@ -358,7 +359,7 @@ class LuaStyleCheck:
                 self.counter = self.counter + 1
 
                 # Ignore Block Comments
-                if "--[[" in line:
+                if "[[" in line:
                     in_block_comment = True
 
                 if "]]" in line:
@@ -460,7 +461,7 @@ class LuaStyleCheck:
                     # Multiline conditions
                     else:
                         in_condition = True
-                
+
             if "DefaultActions" not in self.filename and uses_id == True and not has_id_ref:
                 self.error("ID variable is assigned but unused", suppress_line_ref = True)
             # If you want to modify the files during the checks, write your changed lines to the appropriate

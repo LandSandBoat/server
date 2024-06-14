@@ -53,6 +53,7 @@ def main():
     function_names.append("replaceDefault")
     function_names.append("addContainers")
     function_names.append("addDefaultHandlers")
+    function_names.append("removeDefaultHandlers")
     function_names.append("afterZoneIn")
     function_names.append("onTrigger")
     function_names.append("onTrade")
@@ -101,6 +102,8 @@ def main():
     function_names.append("setEnableCheck")
     function_names.append("setStartFunction")
     function_names.append("setEndFunction")
+    function_names.append("match")
+    function_names.append("gmatch")
 
     # root_dir needs a trailing slash (i.e. /root/dir/)
     for filename in glob.iglob("./scripts/" + "**/*.lua", recursive=True):
@@ -111,10 +114,10 @@ def main():
                 for line in file.readlines():
                     counter = counter + 1
 
-                    if "--[[" in line:
+                    if "[[" in line:
                         in_block_comment = True
 
-                    if "]]--" in line:
+                    if "]]" in line:
                         in_block_comment = False
 
                     if in_block_comment:
