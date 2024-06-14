@@ -42,3 +42,36 @@ xi.packet.parseFromCaptureString = function(input)
 
     return data
 end
+
+-- Split and parse packets (splitting at date sections)
+function xi.packet.parseMultiplePackets(combinedData)
+    local function splitByDate(text)
+        local result   = {}
+        local pattern  = '%[(%d%d%d%d%-%d%d%-%d%d %d%d:%d%d:%d%d)%]' -- Pattern to match date/time
+        local startIdx = 1
+
+        while true do
+            local dateStart, dateEnd = text:find(pattern, startIdx)
+            if not dateStart then
+                break
+            end
+
+            table.insert(result, text:sub(startIdx, dateStart - 1))
+
+            startIdx = dateEnd + 1
+        end
+
+        table.insert(result, text:sub(startIdx))
+
+        return result
+    end
+
+    local splitData = splitByDate(combinedData)
+    local parsedData = {}
+
+    for _, data in ipairs(splitData) do
+        table.insert(parsedData, xi.packet.parseFromCaptureString(data))
+    end
+
+    return parsedData
+end
