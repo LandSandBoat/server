@@ -104,6 +104,8 @@ def main():
     function_names.append("setEndFunction")
     function_names.append("match")
     function_names.append("gmatch")
+    function_names.append("find")
+    function_names.append("sub")
 
     # root_dir needs a trailing slash (i.e. /root/dir/)
     for filename in glob.iglob("./scripts/" + "**/*.lua", recursive=True):
