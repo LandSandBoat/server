@@ -46,13 +46,13 @@ local combinedPacketData = [[
 [2024-06-08 16:51:01]
         |  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F      | 0123456789ABCDEF
     -----------------------------------------------------  ----------------------
-      0 | 69 64 6D 1B 02 00 60 00 41 00 00 00 E0 C0 60 80    0 | idm...`.A.....`.
-      1 | 00 00 08 15 41 00 00 00 E0 C0 60 80 00 00 06 21    1 | ....A.....`....!
-      2 | 62 00 00 00 C0 00 C0 FF 00 00 56 19 21 00 00 00    2 | b.........V.!...
-      3 | C0 80 C0 80 00 0C 24 12 62 00 00 00 C0 00 C0 FF    3 | ......$.b.......
-      4 | 00 00 22 22 41 00 00 00 E0 C0 60 80 00 04 22 11    4 | ..""A.....`...".
-      5 | 62 00 00 00 FF FF 40 40 00 00 20 10 30 00 00 00    5 | b.....@@.. .0...
-      6 | FF FF 00 00 00 00 22 23 00 00 00 00 00 00 00 00    6 | ......"#........
+      0 | 69 64 6D 1B 02 00 60 00 41 00 00 00 00 00 00 00    0 | idm...`.A.....`.
+      1 | 00 00 08 15 41 00 00 00 00 00 00 00 00 00 00 00    1 | ....A.....`....!
+      2 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    2 | b.........V.!...
+      3 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    3 | ......$.b.......
+      4 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    4 | ..""A.....`...".
+      5 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    5 | b.....@@.. .0...
+      6 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    6 | ......"#........
       7 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    7 | ................
       8 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    8 | ................
       9 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    9 | ................
@@ -149,6 +149,50 @@ local startRaceImpl = function(player)
     debug(player, 'Starting race')
 
     for _, packet in ipairs(xi.packet.parseMultiplePackets(combinedPacketData)) do
+        if packet[0x04 + 1] == 0x02 then
+            -- Races:
+            -- 0x0: Galka
+            -- 0x1: Hume M
+            -- 0x2: Hume F
+            -- 0x3: Elvaan M
+            -- 0x4: Elvaan F
+            -- 0x5: Tarutaru M
+            -- 0x6: Tarutaru F
+            -- 0x7: Mithra
+            local races = { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7 }
+
+            -- Colours:
+            -- 0x0: Yellow
+            -- 0x1: Yellow
+            -- 0x2: Black
+            -- 0x3: Black
+            -- 0x4: Blue
+            -- 0x5: Blue
+            -- 0x6: Red
+            -- 0x7: Red
+            -- 0x8: Green
+            local colours = { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8 }
+
+            for _, offset in ipairs({ 0x0C, 0x18, 0x24, 0x30, 0x3C, 0x48, 0x54, 0x60 }) do
+                local race   = utils.randomEntry(races)
+                local colour = utils.randomEntry(colours)
+
+                -- Remember Lua is 1-offset!
+                packet[offset + 0 + 1] = 0x0E
+                packet[offset + 1 + 1] = 0x0C
+                packet[offset + 2 + 1] = 0x60
+                packet[offset + 3 + 1] = 0x80
+                packet[offset + 4 + 1] = 0x00
+                packet[offset + 5 + 1] = 0x00
+                packet[offset + 6 + 1] = 0x08
+                packet[offset + 7 + 1] = bit.lshift(race, 4) + colour
+                packet[offset + 8 + 1] = 0x41
+                packet[offset + 9 + 1] = 0x00
+                packet[offset + 10 + 1] = 0x00
+                packet[offset + 11 + 1] = 0x00
+            end
+        end
+
         player:sendDebugPacket(packet)
     end
 
