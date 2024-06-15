@@ -31,18 +31,6 @@ local towerOption =
     ['_0x3'] = 1,
 }
 
-local function getRubiousMask(player)
-    local rubiousMask = 0
-
-    for bitNum = 0, 3 do
-        if getMissionStatusBit(player, bitNum) then
-            rubiousMask = utils.mask.setBit(rubiousMask, bitNum, true)
-        end
-    end
-
-    return rubiousMask
-end
-
 local function setMissionStatusBit(player, bitNum)
     local statusIndex   = bitNum == 0 and xi.mission.status.CID or xi.mission.status.RUBIOUS
     local adjustedBit   = bitNum == 0 and 3 or bitNum - 1
@@ -59,6 +47,18 @@ local function getMissionStatusBit(player, bitNum)
     return utils.mask.getBit(missionStatus, adjustedBit)
 end
 
+local function getRubiousMask(player)
+    local rubiousMask = 0
+
+    for bitNum = 0, 3 do
+        if getMissionStatusBit(player, bitNum) then
+            rubiousMask = utils.mask.setBit(rubiousMask, bitNum, true)
+        end
+    end
+
+    return rubiousMask
+end
+
 local rubiousOnTrigger = function(player, npc)
     local npcName    = npc:getName()
     local nmDefeated = utils.mask.getBit(mission:getLocalVar(player, 'nmDefeated'), towerOption[npcName])
@@ -72,7 +72,7 @@ local rubiousOnTrigger = function(player, npc)
             not nmDefeated and
             npcUtil.popFromQM(player, npc, { nmOffset, nmOffset + 1, nmOffset + 2 }, { hide = 0 })
         then
-            for _, member in player:getAlliance() do
+            for _, member in ipairs(player:getAlliance()) do
                 mission:setLocalVar(member, 'triggerNpc', npc:getID())
                 mission:setLocalVar(member, 'nmOffset', nmOffset)
             end

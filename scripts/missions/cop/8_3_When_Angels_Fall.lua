@@ -8,8 +8,10 @@
 -- Ebon_Panel_Elvaan : !pos 740.000 -5.180 -342.352 35
 -- Ebon_Panel_Taru   : !pos 257.650 -5.180 -699.999 35
 -- Ebon_Panel_Galka  : !pos 577.648 -5.180 -700.000 35
+-- _0z0              : !pos 420 -2.05 400 35
 -----------------------------------
-local ruhmetID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
+local altaieuID = zones[xi.zone.ALTAIEU]
+local ruhmetID  = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL)
@@ -96,7 +98,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 5 then
-                        return mission:progressEvent(205)
+                        return mission:progressEvent(204)
                     end
                 end,
             },
@@ -152,7 +154,7 @@ mission.sections =
                     mission:setVar(player, 'Status', 4)
                 end,
 
-                [205] = function(player, csid, option, npc)
+                [204] = function(player, csid, option, npc)
                     mission:setVar(player, 'Status', 6)
                 end,
 

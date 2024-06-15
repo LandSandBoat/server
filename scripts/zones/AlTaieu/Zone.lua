@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: AlTaieu (33)
 -----------------------------------
-local ID = zones[xi.zone.ALTAIEU]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

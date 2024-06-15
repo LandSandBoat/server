@@ -21,8 +21,8 @@ local content = BattlefieldMission:new({
     exitNpc       = 'Transcendental_Radiance',
     missionArea   = xi.mission.log_id.COP,
     mission       = xi.mission.id.cop.DAWN,
-    requiredVar   = 'PromathiaStatus',
-    requiredValue = 2,
+    requiredVar   = 'Mission[6][840]Status',
+    requiredValue = 1,
 
     grantXP = 2000,
     title   = xi.title.AVERTER_OF_THE_APOCALYPSE,
@@ -70,13 +70,6 @@ function content:onEventFinishBattlefield(player, csid, option, npc)
 end
 
 function content:onEventFinishWin(player, csid, option, npc)
-    if
-        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-        player:getCharVar('PromathiaStatus') == 2
-    then
-        player:setCharVar('PromathiaStatus', 3)
-    end
-
     player:setPos(540, 0, -514, 63, xi.zone.EMPYREAL_PARADOX)
 end
 

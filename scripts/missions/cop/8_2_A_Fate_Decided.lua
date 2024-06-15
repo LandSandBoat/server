@@ -41,7 +41,7 @@ mission.sections =
                 end,
             },
 
-            ['Ixgrah'] =
+            ['Ixghrah'] =
             {
                 onMobDeath = function(mob, player, optParams)
                     if mission:getVar(player, 'Status') == 0 then

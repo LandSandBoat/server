@@ -110,7 +110,6 @@ entity.onMobFight = function(mob, target)
 
     local hpp = mob:getHPP()
     local healpercent = mob:getLocalVar('healpercent')
-    print(healpercent)
     local heal = mob:getLocalVar('heal')
     local zdeiOne = GetMobByID(ID.mob.IXZDEI_BASE + 2)
     local zdeiTwo = GetMobByID(ID.mob.IXZDEI_BASE + 3)
