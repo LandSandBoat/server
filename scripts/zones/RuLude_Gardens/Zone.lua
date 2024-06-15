@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: RuLude_Gardens (243)
 -----------------------------------
-local ID = zones[xi.zone.RULUDE_GARDENS]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
@@ -38,20 +36,6 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DAWN, 'Status') == 8
         then
             if
-                player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) and
-                player:getCurrentMission(xi.mission.log_id.ZILART) == xi.mission.id.zilart.AWAKENING and
-                player:getMissionStatus(xi.mission.log_id.ZILART) == 3 and
-                player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == xi.questStatus.QUEST_AVAILABLE and
-                player:getCharVar('StormsOfFateWait') <= os.time()
-            then
-                player:startEvent(161)
-            elseif
-                player:hasKeyItem(xi.ki.PROMYVION_HOLLA_SLIVER) and
-                player:hasKeyItem(xi.ki.PROMYVION_MEA_SLIVER) and
-                player:hasKeyItem(xi.ki.PROMYVION_DEM_SLIVER)
-            then
-                player:startEvent(162)
-            elseif
                 player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) and
                 player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_AVAILABLE and
                 player:getLocalVar('ANZONE') == 0 and
@@ -70,19 +54,7 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 161 then
-        npcUtil.giveKeyItem(player, xi.ki.NOTE_WRITTEN_BY_ESHANTARL)
-        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
-        player:setCharVar('StormsOfFateWait', 0)
-    elseif csid == 162 then
-        player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
-        player:delKeyItem(xi.ki.PROMYVION_HOLLA_SLIVER)
-        player:delKeyItem(xi.ki.PROMYVION_DEM_SLIVER)
-        player:delKeyItem(xi.ki.PROMYVION_MEA_SLIVER)
-        player:messageSpecial(ID.text.YOU_HAND_THE_THREE_SLIVERS)
-        player:setLocalVar('ANZONE', 1)
-        player:setCharVar('ApocNighWait', getVanaMidnight())
-    elseif csid == 123 then
+    if csid == 123 then
         player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
         player:setCharVar('ApocalypseNigh', 1)
         player:setCharVar('ApocNighWait', 0)
