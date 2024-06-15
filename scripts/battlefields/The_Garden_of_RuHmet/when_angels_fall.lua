@@ -18,20 +18,13 @@ local content = BattlefieldMission:new({
     entryNpc      = '_0z0',
     missionArea   = xi.mission.log_id.COP,
     mission       = xi.mission.id.cop.WHEN_ANGELS_FALL,
-    requiredVar   = 'PromathiaStatus',
+    requiredVar   = 'Mission[6][828]Status',
     requiredValue = 4,
 
     grantXP = 1000,
 })
 
 function content:onEventFinishWin(player, csid, option, npc)
-    if
-        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and
-        player:getCharVar('PromathiaStatus') == 4
-    then
-        player:setCharVar('PromathiaStatus', 5)
-    end
-
     player:setPos(420, 0, 445, 192)
 end
 

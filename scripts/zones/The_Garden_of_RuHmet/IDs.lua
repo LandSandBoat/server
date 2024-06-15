@@ -24,6 +24,7 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
         THE_PARTY_WILL_BE_REMOVED     = 7421, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         CONQUEST_BASE                 = 7456, -- Tallying conquest results...
         ENTERING_THE_BATTLEFIELD_FOR  = 7619, -- Entering the battlefield for [When Angels Fall/]!
+        YOU_MUST_MOVE_CLOSER          = 7627, -- You must move closer.
         PORTAL_WONT_OPEN_ON_THIS_SIDE = 7629, -- The portal won't open from this side.
         NO_NEED_INVESTIGATE           = 7635, -- There is no need to investigate further.
         PORTAL_SEALED                 = 7664, -- The portal is firmly sealed by a mysterious energy.
