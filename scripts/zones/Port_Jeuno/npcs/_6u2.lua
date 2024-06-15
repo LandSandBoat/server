@@ -9,7 +9,6 @@ end
 
 entity.onTrigger = function(player, npc)
     player:startEvent(54)
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

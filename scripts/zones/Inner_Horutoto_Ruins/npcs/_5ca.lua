@@ -26,8 +26,6 @@ entity.onTrigger = function(player, npc)
         player:messageSpecial(ID.text.CAT_BURGLARS_HIDEOUT, 1, xi.ki.WINDURST_WOODS_SCOOP) -- Confirm Story
         player:setCharVar('QuestMakingHeadlines_var', utils.mask.setBit(prog, 4, true))
     end
-
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
