@@ -14,9 +14,7 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getCharVar('ApocalypseNigh') == 5 then
-        cs = 7
-    elseif
+    if
         player:getXPos() == 0 and
         player:getYPos() == 0 and
         player:getZPos() == 0
@@ -41,9 +39,7 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 7 then
-        player:setPos(-.0745, -10, -465.1132, 63, 33)
-    elseif csid == 100 and option == 1 then
+    if csid == 100 and option == 1 then
         player:setPos(-420, -1, 379.900, 62, 35)
     end
 end

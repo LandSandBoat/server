@@ -14,7 +14,10 @@
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
 
-mission.reward = {}
+mission.reward =
+{
+    nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE },
+}
 
 local ringItems =
 {
@@ -36,6 +39,16 @@ local ringOnEventFinish = function(player, csid, option, npc)
         npcUtil.giveItem(player, ringItems[option - 4])
     then
         mission:setVar(player, 'firstRing', 0)
+    end
+end
+
+local missionOnEventFinish = function(player, csid, option, npc)
+    if
+        option >= 1 and
+        option <= 4 and
+        mission:getVar(player, 'Status') == 8
+    then
+        mission:complete(player)
     end
 end
 
@@ -198,6 +211,15 @@ mission.sections =
                     player:addTitle(xi.title.BANISHER_OF_EMPTINESS)
                     mission:setVar(player, 'Status', 8)
                 end,
+            },
+        },
+
+        [xi.zone.NORG] =
+        {
+            onEventFinish =
+            {
+                [232] = missionOnEventFinish,
+                [234] = missionOnEventFinish,
             },
         },
     },
