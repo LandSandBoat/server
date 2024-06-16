@@ -54,7 +54,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.PROMYVION_DEM_SLIVER) then
-                        npcUtil.giveKeyItem(player, xi.ki.PROMYVION_DEM_SLIVER)
+                        return quest:keyItem(xi.ki.PROMYVION_DEM_SLIVER)
                     end
                 end,
             },
@@ -66,7 +66,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.PROMYVION_HOLLA_SLIVER) then
-                        npcUtil.giveKeyItem(player, xi.ki.PROMYVION_HOLLA_SLIVER)
+                        return quest:keyItem(xi.ki.PROMYVION_HOLLA_SLIVER)
                     end
                 end,
             },
@@ -78,7 +78,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.PROMYVION_MEA_SLIVER) then
-                        npcUtil.giveKeyItem(player, xi.ki.PROMYVION_MEA_SLIVER)
+                        return quest:keyItem(xi.ki.PROMYVION_MEA_SLIVER)
                     end
                 end,
             },

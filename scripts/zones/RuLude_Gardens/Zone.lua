@@ -28,23 +28,6 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    local triggerAreaID = triggerArea:GetTriggerAreaID()
-
-    if triggerAreaID == 1 then
-        if
-            player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-            xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DAWN, 'Status') == 8
-        then
-            if
-                player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) and
-                player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_AVAILABLE and
-                player:getLocalVar('ANZONE') == 0 and
-                player:getCharVar('ApocNighWait') <= os.time()
-            then
-                player:startEvent(123)
-            end
-        end
-    end
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
@@ -54,11 +37,6 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 123 then
-        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
-        player:setCharVar('ApocalypseNigh', 1)
-        player:setCharVar('ApocNighWait', 0)
-    end
 end
 
 return zoneObject
