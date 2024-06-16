@@ -513,7 +513,7 @@ end
 local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc) -- get these multipliers once and store them
     local multipliers = {}
 
-    multipliers.eleStaffBonus       = xi.spells.damage.calculateEleStaffBonus(player, element)
+    multipliers.eleStaffBonus       = xi.spells.damage.calculateElementalStaffBonus(player, element)
     multipliers.magianAffinity      = xi.spells.damage.calculateMagianAffinity() -- Presumed but untested.
     multipliers.SDT                 = xi.spells.damage.calculateSDT(target, element)
     multipliers.resist              = xi.spells.damage.calculateResist(player, target, 0, 0, element, 0, bonusMacc)
