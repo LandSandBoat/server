@@ -11,6 +11,7 @@ local content = BattlefieldMission:new({
     battlefieldId         = xi.battlefield.id.RETURN_TO_DELKFUTTS_TOWER,
     canLoseExp            = false,
     isMission             = true,
+    allowTrusts           = true,
     maxPlayers            = 6,
     levelCap              = 75,
     timeLimit             = utils.minutes(30),

@@ -8,6 +8,7 @@ local empyrealParadoxID = zones[xi.zone.EMPYREAL_PARADOX]
 local content = BattlefieldQuest:new({
     zoneId        = xi.zone.EMPYREAL_PARADOX,
     battlefieldId = xi.battlefield.id.APOCALYPSE_NIGH,
+    allowTrusts   = true,
     maxPlayers    = 6,
     timeLimit     = utils.minutes(30),
     index         = 1,

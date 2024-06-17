@@ -10,6 +10,7 @@ local content = BattlefieldMission:new({
     battlefieldId         = xi.battlefield.id.THOSE_WHO_LURK_IN_SHADOWS,
     canLoseExp            = false,
     isMission             = true,
+    allowTrusts           = true,
     maxPlayers            = 6,
     levelCap              = 99,
     timeLimit             = utils.minutes(30),
