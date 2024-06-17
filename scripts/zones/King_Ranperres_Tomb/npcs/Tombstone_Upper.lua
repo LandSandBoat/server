@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: King Ranperre's Tomb
---  NPC: Tombstone
+--  NPC: Tombstone (Upper)
 -- Involved in Quest: Grave Concerns
 -- !pos 1 0.1 -101 190
 -----------------------------------
@@ -16,12 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local xPos = npc:getXPos()
-    local zPos = npc:getZPos()
-
-    if xPos >= -1 and xPos <= 1 and zPos >= -106 and zPos <= -102 then
-        player:startEvent(2)
-    end
+    player:startEvent(2)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
