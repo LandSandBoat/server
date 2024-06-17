@@ -11,6 +11,7 @@ local content = Battlefield:new({
     battlefieldId = xi.battlefield.id.ANCIENT_FLAMES_BECKON_SPIRE_OF_MEA,
     canLoseExp    = false,
     isMission     = true,
+    allowTrusts   = true,
     maxPlayers    = 6,
     levelCap      = 30,
     timeLimit     = utils.minutes(30),

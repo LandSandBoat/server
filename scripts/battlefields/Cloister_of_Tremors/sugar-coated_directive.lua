@@ -10,6 +10,7 @@ local content = BattlefieldMission:new({
     battlefieldId = xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TREMORS,
     canLoseExp    = false,
     isMission     = true,
+    allowTrusts   = true,
     maxPlayers    = 6,
     levelCap      = 99,
     timeLimit     = utils.minutes(30),

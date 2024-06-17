@@ -10,6 +10,7 @@ local content = BattlefieldMission:new({
     battlefieldId = xi.battlefield.id.HEAD_WIND,
     canLoseExp    = false,
     isMission     = true,
+    allowTrusts   = true,
     maxPlayers    = 6,
     levelCap      = 50,
     timeLimit     = utils.minutes(30),

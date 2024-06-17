@@ -9,6 +9,7 @@ local content = Battlefield:new({
     zoneId        = xi.zone.LALOFF_AMPHITHEATER,
     battlefieldId = xi.battlefield.id.DIVINE_MIGHT,
     canLoseExp    = false,
+    allowTrusts   = true,
     maxPlayers    = 18,
     levelCap      = 99,
     timeLimit     = utils.minutes(30),

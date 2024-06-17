@@ -10,6 +10,7 @@ local content = BattlefieldMission:new({
     battlefieldId = xi.battlefield.id.ANCIENT_VOWS,
     canLoseExp    = false,
     isMission     = true,
+    allowTrusts   = true,
     maxPlayers    = 6,
     levelCap      = 40,
     timeLimit     = utils.minutes(30),

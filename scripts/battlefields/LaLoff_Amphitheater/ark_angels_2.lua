@@ -10,6 +10,7 @@ local content = BattlefieldMission:new({
     battlefieldId         = xi.battlefield.id.ARK_ANGELS_2,
     canLoseExp            = false,
     isMission             = true,
+    allowTrusts           = true,
     maxPlayers            = 6,
     levelCap              = 75,
     timeLimit             = utils.minutes(30),

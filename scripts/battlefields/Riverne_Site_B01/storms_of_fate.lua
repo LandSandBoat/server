@@ -9,6 +9,7 @@ local riverneID = zones[xi.zone.RIVERNE_SITE_B01]
 local content = BattlefieldQuest:new({
     zoneId        = xi.zone.RIVERNE_SITE_B01,
     battlefieldId = xi.battlefield.id.STORMS_OF_FATE,
+    allowTrusts   = true,
     maxPlayers    = 18,
     timeLimit     = utils.minutes(30),
     index         = 0,

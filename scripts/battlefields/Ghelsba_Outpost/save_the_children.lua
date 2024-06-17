@@ -11,6 +11,7 @@ local content = BattlefieldMission:new({
     battlefieldId         = xi.battlefield.id.SAVE_THE_CHILDREN,
     canLoseExp            = false,
     isMission             = true,
+    allowTrusts           = true,
     maxPlayers            = 6,
     levelCap              = 99,
     timeLimit             = utils.minutes(10),

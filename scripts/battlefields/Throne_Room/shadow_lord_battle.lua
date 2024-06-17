@@ -11,6 +11,7 @@ local content = BattlefieldMission:new({
     battlefieldId = xi.battlefield.id.SHADOW_LORD_BATTLE,
     canLoseExp    = false,
     isMission     = true,
+    allowTrusts   = true,
     maxPlayers    = 6,
     levelCap      = 75,
     timeLimit     = utils.minutes(30),

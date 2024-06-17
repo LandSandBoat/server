@@ -6,15 +6,16 @@ local qubiaID = zones[xi.zone.QUBIA_ARENA]
 -----------------------------------
 
 local content = BattlefieldQuest:new({
-    zoneId           = xi.zone.QUBIA_ARENA,
-    battlefieldId    = xi.battlefield.id.BEYOND_INFINITY,
-    canLoseExp       = false,
-    maxPlayers       = 6,
-    levelCap         = 99,
-    timeLimit        = utils.minutes(10),
-    index            = 21,
-    entryNpc         = 'BC_Entrance',
-    exitNpc          = 'Burning_Circle',
+    zoneId        = xi.zone.QUBIA_ARENA,
+    battlefieldId = xi.battlefield.id.BEYOND_INFINITY,
+    canLoseExp    = false,
+    allowTrusts   = true,
+    maxPlayers    = 6,
+    levelCap      = 99,
+    timeLimit     = utils.minutes(10),
+    index         = 21,
+    entryNpc      = 'BC_Entrance',
+    exitNpc       = 'Burning_Circle',
 
     questArea = xi.questLog.JEUNO,
     quest     = xi.quest.id.jeuno.BEYOND_INFINITY,
