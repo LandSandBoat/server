@@ -13,19 +13,19 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        12986, 9180, 1,    --Chestnut Sabbots
-        4128,  4445, 1,    --Ether
-        4112,   837, 1,    --Potion
-        17336,    6, 2,    --Crossbow bolt
-        4151,   720, 2,    --Echo Drops
-        12985, 1462, 2,    --Holly Clogs
-        4148,   284, 3,    --Antidote
-        12984,  111, 3,    --Ash Clogs
-        219,    900, 3,    --Ceramic Flowerpot
-        4150,  2335, 3,    --Eye Drops
-        1774,  1984, 3,    --Red Gravel
-        17318,    3, 3,    --Wooden Arrow
-        2862,  9200, 3,    --Kingdom Waystone
+        xi.item.CERAMIC_FLOWERPOT,    1040, 3,
+        xi.item.PILE_OF_RED_GRAVEL,   2293, 3,
+        xi.item.ASH_CLOGS,             128, 3,
+        xi.item.HOLLY_CLOGS,          1690, 2,
+        xi.item.CHESTNUT_SABOTS,      9547, 1,
+        xi.item.WOODEN_ARROW,            4, 3,
+        xi.item.CROSSBOW_BOLT,           6, 2,
+        xi.item.FLASK_OF_EYE_DROPS,   2698, 3,
+        xi.item.ANTIDOTE,              328, 3,
+        xi.item.FLASK_OF_ECHO_DROPS,   832, 2,
+        xi.item.POTION,                946, 1,
+        xi.item.ETHER,                5025, 1,
+        xi.item.KINGDOM_WAYSTONE,    10400, 3,
     }
 
     player:showText(npc, ID.text.PIRVIDIAUCE_SHOP_DIALOG)

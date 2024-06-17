@@ -13,23 +13,25 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4128,  4445, 1,    -- Ether
-        4112,   837, 1,    -- Potion
-        4151,   736, 2,    -- Echo Drops
-        4148,   290, 3,    -- Antidote
-        12472,  144, 3,    -- Circlet
-        12728,  118, 3,    -- Cuffs
-        4150,  2387, 3,    -- Eye Drops
-        1021,   450, 3,    -- Hatchet
-        13192,  382, 3,    -- Leather Belt
-        13193, 2430, 3,    -- Lizard Belt
-        605,    180, 3,    -- Pickaxe
-        12600,  216, 3,    -- Robe
-        12856,  172, 3,    -- Slops
+        xi.item.LEATHER_BELT,          442, 3,
+        xi.item.LIZARD_BELT,          2808, 3,
+        xi.item.SILVER_BELT,         11618, 1,
+        xi.item.CIRCLET,               166, 3,
+        xi.item.ROBE,                  249, 3,
+        xi.item.CUFFS,                 137, 3,
+        xi.item.SLOPS,                 199, 3,
+        xi.item.FLASK_OF_EYE_DROPS,   2698, 3,
+        xi.item.ANTIDOTE,              328, 3,
+        xi.item.FLASK_OF_ECHO_DROPS,   832, 2,
+        xi.item.POTION,                946, 1,
+        xi.item.ETHER,                5025, 1,
+        xi.item.PICKAXE,               208, 3,
+        xi.item.HATCHET,               520, 3,
     }
 
     local rank = GetNationRank(xi.nation.SANDORIA)
 
+    -- TODO: Check
     if rank ~= 1 then
         table.insert(stock, 1022)    -- Thief's Tools
         table.insert(stock, 3643)

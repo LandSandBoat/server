@@ -13,17 +13,17 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4441,  837, 1,    -- Grape Juice
-        4419, 6300, 1,    -- Mushroom Soup
-        4404,  540, 1,    -- Roast Trout
-        4423,  270, 2,    -- Apple Juice
-        4537,  468, 2,    -- Roast Carp
-        4560, 1355, 2,    -- Vegetable Soup
-        4356,  180, 2,    -- White Bread
-        4364,  108, 3,    -- Black Bread
-        4535,  360, 3,    -- Boiled Crayfish
-        4509,   10, 3,    -- Distilled Water
-        4455,  180, 3,    -- Pebble Soup
+        xi.item.LOAF_OF_BLACK_BREAD,       124, 3,
+        xi.item.LOAF_OF_WHITE_BREAD,       208, 2,
+        xi.item.BOWL_OF_PEBBLE_SOUP,       208, 3,
+        xi.item.BOWL_OF_VEGETABLE_SOUP,   1566, 2,
+        xi.item.BOWL_OF_MUSHROOM_SOUP,    7280, 1,
+        xi.item.FLASK_OF_DISTILLED_WATER,   12, 3,
+        xi.item.BOTTLE_OF_APPLE_JUICE,     312, 2,
+        xi.item.BOTTLE_OF_GRAPE_JUICE,     967, 1,
+        xi.item.BOILED_CRAYFISH,           416, 3,
+        xi.item.ROAST_CARP,                540, 2,
+        xi.item.ROAST_TROUT,               624, 1,
     }
 
     player:showText(npc, ID.text.CROUMANGUE_SHOP_DIALOG)

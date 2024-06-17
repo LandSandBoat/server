@@ -16,13 +16,13 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            612,    55,    -- Kazham Peppers
-            4432,   55,    -- Kazham Pineapple
-            4390,   36,    -- Mithran Tomato
-            626,   234,    -- Black Pepper
-            630,    88,    -- Ogre Pumpkin
-            632,   110,    -- Kukuru Bean
-            1411, 1656,    -- Phalaenopsis
+            xi.item.BUNCH_OF_KAZHAM_PEPPERS,   62,
+            xi.item.KAZHAM_PINEAPPLE,          62,
+            xi.item.MITHRAN_TOMATO,            41,
+            xi.item.PINCH_OF_BLACK_PEPPER,    265,
+            xi.item.OGRE_PUMPKIN,              99,
+            xi.item.KUKURU_BEAN,              124,
+            xi.item.PHALAENOPSIS,            1872,
         }
 
         player:showText(npc, ID.text.NIMIA_OPEN_DIALOG)
