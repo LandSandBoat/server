@@ -19,6 +19,7 @@ local content = BattlefieldMission:new({
     exitNpcs              = { '_1s1', '_1s2', '_1s3' },
     missionArea           = xi.mission.log_id.TOAU,
     mission               = xi.mission.id.toau.SHIELD_OF_DIPLOMACY,
+    missionStatusArea     = xi.mission.log_id.TOAU,
     requiredMissionStatus = 2,
 })
 
