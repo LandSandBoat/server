@@ -11752,6 +11752,26 @@ void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
 }
 
 /************************************************************************
+ *  Function: clearObjectiveUtility()
+ *  Purpose : Send 0-data packet to clear existing timers/objectiveUtility info
+ *  Example : player:clearObjectiveUtility()
+ ************************************************************************/
+
+void CLuaBaseEntity::clearObjectiveUtility()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    CCharEntity* PChar  = (CCharEntity*)m_PBaseEntity;
+    auto*        packet = new CObjectiveUtilityPacket();
+
+    PChar->pushPacket(packet);
+}
+
+/************************************************************************
  *  Function: enableEntities()
  *  Purpose : Enables/disables the list of given special hidden entities for just the target char
  *  Example : player:enableEntities({ 17207972, 17207973})
@@ -18399,6 +18419,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("countdown", CLuaBaseEntity::countdown);
     SOL_REGISTER("objectiveUtility", CLuaBaseEntity::objectiveUtility);
+    SOL_REGISTER("clearObjectiveUtility", CLuaBaseEntity::clearObjectiveUtility);
     SOL_REGISTER("enableEntities", CLuaBaseEntity::enableEntities);
     SOL_REGISTER("independentAnimation", CLuaBaseEntity::independentAnimation);
 

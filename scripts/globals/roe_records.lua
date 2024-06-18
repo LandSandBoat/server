@@ -9449,6 +9449,16 @@ xi.roe.records =
     },
 
     -----------------------------------
+    -- Unity - Wanted 1
+    -----------------------------------
+
+    [819] =
+    { -- Prickly Pitriv
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.PRICKLY_PITRIVS_COFFER, 1 } }, sparks = 500, xp = 2500 }
+    },
+
+    -----------------------------------
     -- Vana'versary - 15th Vana'versary I
     -----------------------------------
 

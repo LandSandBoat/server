@@ -2771,6 +2771,7 @@ xi.item =
     FRAYED_SACK_OF_HORROR_P1            = 6264,
     AGED_BOX_BAYLD                      = 6267,
     TOGAKUSHI_SHURIKEN_POUCH            = 6301,
+    PRICKLY_PITRIVS_COFFER              = 6314,
     BONEFISH                            = 6336,
     FRAYED_SACK_OF_HORROR_P2            = 6345,
     FRAYED_SACK_OF_BEAUTY               = 6346,

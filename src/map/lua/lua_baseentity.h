@@ -585,6 +585,7 @@ public:
 
     void countdown(sol::object const& secondsObj);
     void objectiveUtility(sol::object const& obj);
+    void clearObjectiveUtility();
     void enableEntities(sol::object const& obj);
     void independentAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode);
 
