@@ -1,5 +1,6 @@
 -----------------------------------
 -- A.M.A.N. Trove (Mars)
+-- Mars Orb : !additem 9275
 -----------------------------------
 local balgasID = zones[xi.zone.BALGAS_DAIS]
 -----------------------------------

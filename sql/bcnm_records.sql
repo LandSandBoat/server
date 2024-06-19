@@ -104,6 +104,7 @@ INSERT INTO `bcnm_records` VALUES (113,146,'moa_constrictors','nobody',0,1800);
 INSERT INTO `bcnm_records` VALUES (114,146,'v_formation','nobody',0,900);
 INSERT INTO `bcnm_records` VALUES (115,146,'avian_apostates','nobody',0,1800);
 INSERT INTO `bcnm_records` VALUES (116,146,'beyond_infinity','nobody',0,600);
+INSERT INTO `bcnm_records` VALUES (120,146,'aman_trove','nobody',0,600);
 INSERT INTO `bcnm_records` VALUES (128,163,'temple_of_uggalepih','nobody',0,1800);
 INSERT INTO `bcnm_records` VALUES (129,163,'jungle_boogymen','nobody',0,1800);
 INSERT INTO `bcnm_records` VALUES (130,163,'amphibian_assault','nobody',0,1800);
