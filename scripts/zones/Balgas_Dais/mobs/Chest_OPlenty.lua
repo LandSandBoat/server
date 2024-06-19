@@ -8,6 +8,10 @@ local entity = {}
 entity.onMobSpawn = function(mob)
 end
 
+entity.onTrigger = function(player, npc)
+    xi.amanTrove.chestOPlentyOnTrigger(player, npc)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

@@ -23,20 +23,28 @@ local terminalCoffers =
     balgasID.npc.TERMINAL_COFFER + 22,
 }
 
-function content:battlefieldSetup(battlefield)
+function content:setupBattlefield(battlefield)
     local battleArea     = battlefield:getArea()
     local terminalCoffer = GetNPCByID(terminalCoffers[battleArea])
 
     terminalCoffer:setStatus(xi.status.NORMAL)
     terminalCoffer:setUntargetable(false)
 
+    local mimicChest = math.random(0, 9)
+
+    for i = 0, 9 do
+        local chest = GetMobByID(balgasID.mob.CHEST_O_PLENTY + i + (battleArea - 1) * 11)
+
+        chest:setStatus(xi.status.NORMAL) -- Make mob triggerable
+        chest:setUntargetable(false)
+
+        if i == mimicChest then
+            chest:setLocalVar('Mimic', 1)
+        end
+    end
+
     -- TODO: Make necessary terminal coffer listener
     -- for handling opening, setting win state, and spitting out loot.
-
-    -- Chest Mobs below currently display as mobs and should have green names and
-    -- also be triggerable.
-
-    print("Battlefield Setup Called")
 end
 
 content.groups =
