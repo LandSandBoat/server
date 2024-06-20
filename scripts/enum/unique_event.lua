@@ -14,4 +14,5 @@ xi.uniqueEvent =
 {
     EKOKOKO_INTRODUCTION = 0,
     RECEIVED_NEXUS_CAPE  = 1,
+    SANRAKU_INTRODUCTION = 2,
 }
