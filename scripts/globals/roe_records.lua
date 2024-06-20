@@ -9452,10 +9452,349 @@ xi.roe.records =
     -- Unity - Wanted 1
     -----------------------------------
 
+    [817] =
+    { -- Hugemaw Harold
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.HUGEMAW_HAROLDS_COFFER, 1 } }, sparks = 500, xp = 2500 }
+    },
+
+    [818] =
+    {
+        -- Bounding Belinda
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.BOUNDING_BELINDAS_COFFER, 1 } }, sparks = 500, xp = 2500 }
+    },
+
     [819] =
     { -- Prickly Pitriv
         flags  = set { 'repeat' },
         reward = { item = { { xi.item.PRICKLY_PITRIVS_COFFER, 1 } }, sparks = 500, xp = 2500 }
+    },
+
+    [820] =
+    { -- Ironhorn Baldurno
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.IRONHORN_BALDURNOS_COFFER, 1 } }, sparks = 750, xp = 4000 }
+    },
+
+    [821] =
+    { -- Sleepy Mabel
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.SLEEPY_MABELS_COFFER, 1 } }, sparks = 750, xp = 4000 }
+    },
+
+    [822] =
+    { -- Valkurm Imperator
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.VALKURM_IMPERATORS_COFFER, 1 } }, sparks = 1000, xp = 5000, capacity = 1000 }
+    },
+
+    [823] =
+    { -- Serpopard Ninlil
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.SERPOPARD_NINLILS_COFFER, 1 } }, sparks = 750, xp = 4000 },
+    },
+
+    [824] =
+    { -- Abyssdiver
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.ABYSSDIVERS_COFFER, 1 } }, sparks = 1000, xp = 5000, capacity = 1000 }
+    },
+
+    [825] =
+    { -- Intuila
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.INTUILAS_COFFER, 1 } }, sparks = 1000, xp = 5000, capacity = 1000 }
+    },
+
+    [826] =
+    { -- Emperor Arthro
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.EMPEROR_ARTHROS_COFFER, 1 } }, sparks = 1250, xp = 6000, capacity = 1500 }
+    },
+
+    [827] =
+    { -- Orcfeltrap
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.ORCFELTRAPS_COFFER, 1 } }, sparks = 1000, xp = 5000, capacity = 1000 }
+    },
+
+    [828] =
+    { -- Lumber Jill
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.LUMBER_JILLS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [829] =
+    { -- Joyous Green
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.JOYOUS_GREENS_COFFER, 1 } }, sparks = 1250, xp = 6000, capacity = 1500 }
+    },
+
+    [830] =
+    { -- Strix
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.STRIXS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [831] =
+    { -- Warblade Beak
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.WARBLADE_BEAKS_COFFER, 1 } }, sparks = 1250, xp = 6000, capacity = 1500 }
+    },
+
+    [832] =
+    { -- Arke
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.ARKES_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [833] =
+    { -- Largantua
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.LARGANTUAS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [834] =
+    { -- Beist
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.BEISTS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [835] =
+    { -- Jester Malatrix
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.JESTER_MALATRIXS_COFFER, 1 } }, sparks = 1000, xp = 5000, capacity = 1000 }
+    },
+
+    [836] =
+    { -- Cactrot Veloz
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.CATROT_VELOZS_COFFER, 1 } }, sparks = 1250, xp = 6000, capacity = 1500 }
+    },
+
+    [837] =
+    { -- Woodland Mender
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.WOODLAND_MENDERS_COFFER, 1 } }, sparks = 1250, xp = 6000, capacity = 1500 }
+    },
+
+    [854] =
+    { -- Sybaritic Samantha
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.SYBARITIC_SAMANTHAS_COFFER, 1 } }, sparks = 1000, xp = 5000, capacity = 1000 }
+    },
+
+    [855] =
+    { -- Keeper of Heiligtum
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.KEEPER_OF_HEILIGTUMS_COFFER, 1 } }, sparks = 1250, xp = 6000, capacity = 1500 }
+    },
+
+    [856] =
+    { -- Douma Weapon
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.DOUMA_WEAPONS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [857] =
+    { -- King Uropygid
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.KING_UROPYGIDS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [858] =
+    { -- Vedrfolnir
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.VEDRFOLNIRS_COFFER, 1 } }, sparks = 1750, xp = 9000, capacity = 2500 }
+    },
+
+    -----------------------------------
+    -- Unity - Wanted 2
+    -----------------------------------
+
+    [859] =
+    { -- Immanibugard
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.IMMANIBUGARDS_COFFER, 1 } }, sparks = 1000, xp = 5000, capacity = 1000 }
+    },
+
+    [860] =
+    { -- Tiyanak
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.TIYANAKS_COFFER, 1 } }, sparks = 1250, xp = 6000, capacity = 1500 }
+    },
+
+    [861] =
+    { -- Muut
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.MUUTS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [862] =
+    { -- Camahueto
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.CAMAHUETOS_COFFER, 1 } }, sparks = 1750, xp = 9000, capacity = 2500 }
+    },
+
+    [863] =
+    { -- Voso
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.VOSOS_COFFER, 1 } }, sparks = 1250, xp = 6000, capacity = 1500 }
+    },
+
+    [864] =
+    { -- Mephitas
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.MEPHITASS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [865] =
+    { -- Coca
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.COCAS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [866] =
+    { -- Ayapec
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.AYAPECS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [867] =
+    { -- Specter Worm
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.SPECTER_WORMS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [868] =
+    { -- Azrael
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.AZRAELS_COFFER, 1 } }, sparks = 1750, xp = 9000, capacity = 2500 }
+    },
+
+    [869] =
+    { -- Borealis Shadow
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.BOREALIS_SHADOWS_COFFER, 1 } }, sparks = 1750, xp = 9000, capacity = 2500 }
+    },
+
+    [891] =
+    { -- Garbage Gel
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.GARBAGE_GELS_COFFER, 1 } }, sparks = 1250, xp = 6000, capacity = 1500 }
+    },
+
+    [892] =
+    { -- Bakunawa
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.BAKUNAWAS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [893] =
+    { -- Azure-toothed Clawberry
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.AZURE_TOOTHED_CLAWBERRYS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [894] =
+    { -- Vermillion Fishfly
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.VERMILLION_FISHFLYS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [895] =
+    { -- Volatile Cluster
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.VOLATILE_CLUSTERS_COFFER, 1 } }, sparks = 1750, xp = 9000, capacity = 2500 }
+    },
+
+    [896] =
+    { -- Kub. Ja's Mhuufya
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.MHUUFYAS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [897] =
+    { -- Grand Grenade
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.GRAND_GRENADES_COFFER, 1 } }, sparks = 1750, xp = 9000, capacity = 2500 }
+    },
+
+    [898] =
+    { -- Centurio XX-I
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.CENTURIO_XX_IS_COFFER, 1 } }, sparks = 1500, xp = 7500, capacity = 2000 }
+    },
+
+    [899] =
+    { -- Vidmapire
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.VIDMAPIRES_COFFER, 1 } }, sparks = 1750, xp = 9000, capacity = 2500 }
+    },
+
+    [914] =
+    { -- Sovereign Behemoth
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.SOVEREIGN_BEHEMOTHS_COFFER, 1 } }, sparks = 2250, xp = 12000, capacity = 3500 }
+    },
+
+    [915] =
+    { -- Hidhaegg
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.HIDHAEGGS_COFFER, 1 } }, sparks = 2250, xp = 12000, capacity = 3500 }
+    },
+
+    [916] =
+    { -- Tolba
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.TOLBAS_COFFER, 1 } }, sparks = 2250, xp = 12000, capacity = 3500 }
+    },
+
+    [918] =
+    { -- Carousing Celine
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.CAROUSING_CELINES_COFFER, 1 } }, sparks = 1750, xp = 9000, capacity = 2500 }
+    },
+
+    [919] =
+    { -- Glazemane
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.GLAZEMANES_COFFER, 1 } }, sparks = 1750, xp = 9000, capacity = 2500 }
+    },
+
+    [920] =
+    { -- Bambrox
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.WYVERNPOACHER_BAMBROXS_COFFER, 1 } }, sparks = 1750, xp = 9000, capacity = 2500 }
+    },
+
+    -----------------------------------
+    -- Unity - Wanted 3
+    -----------------------------------
+
+    [921] =
+    { -- Thu'ban
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.THUBANS_COFFER, 1 } }, sparks = 2250, xp = 12000, capacity = 3500 }
+    },
+
+    [922] =
+    { -- Sarama
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.SARAMAS_COFFER, 1 } }, sparks = 2250, xp = 12000, capacity = 3500 }
+    },
+
+    [923] =
+    { -- Shedu
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.SHEDUS_COFFER, 1 } }, sparks = 2250, xp = 12000, capacity = 3500 }
+    },
+
+    [924] =
+    { -- Tumult Curator
+        flags  = set { 'repeat' },
+        reward = { item = { { xi.item.TUMULT_CURATORS_COFFER, 1 } }, sparks = 3000, xp = 16500, capacity = 5000 }
     },
 
     -----------------------------------
