@@ -38,6 +38,7 @@ zones[xi.zone.THRONE_ROOM] =
     },
     mob =
     {
+        RIKO_KUPENREICH            = GetFirstID('Riko_Kupenreich'),
         SHADOW_LORD_PHASE_1_OFFSET = GetTableOfIDs('Shadow_Lord')[1],
         SHADOW_LORD_PHASE_2_OFFSET = GetTableOfIDs('Shadow_Lord')[4],
         ZEID_BCNM_OFFSET           = GetFirstID('Zeid'),
