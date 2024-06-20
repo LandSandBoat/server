@@ -24,7 +24,7 @@ local content = BattlefieldMission:new({
     -- TODO: Currently AMK does not depend on this fight in mission scripts.  Verify
     -- that this mission status is updated/correct once doing so.
     missionArea           = xi.mission.log_id.AMK,
-    mission               = xi.mission.id.zilart.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS,
+    mission               = xi.mission.id.amk.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS,
     missionStatusArea     = xi.mission.log_id.AMK,
     requiredMissionStatus = 0,
 
