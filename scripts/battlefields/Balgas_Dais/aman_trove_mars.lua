@@ -16,35 +16,8 @@ local content = Battlefield:new({
     requiredItems    = { xi.item.MARS_ORB, wearMessage = balgasID.text.A_CRACK_HAS_FORMED, wornMessage = balgasID.text.ORB_IS_CRACKED },
 })
 
-local terminalCoffers =
-{
-    balgasID.npc.TERMINAL_COFFER,
-    balgasID.npc.TERMINAL_COFFER + 11,
-    balgasID.npc.TERMINAL_COFFER + 22,
-}
-
 function content:setupBattlefield(battlefield)
-    local battleArea     = battlefield:getArea()
-    local terminalCoffer = GetNPCByID(terminalCoffers[battleArea])
-
-    terminalCoffer:setStatus(xi.status.NORMAL)
-    terminalCoffer:setUntargetable(false)
-
-    local mimicChest = math.random(0, 9)
-
-    for i = 0, 9 do
-        local chest = GetMobByID(balgasID.mob.CHEST_O_PLENTY + i + (battleArea - 1) * 11)
-
-        chest:setStatus(xi.status.NORMAL) -- Make mob triggerable
-        chest:setUntargetable(false)
-
-        if i == mimicChest then
-            chest:setLocalVar('Mimic', 1)
-        end
-    end
-
-    -- TODO: Make necessary terminal coffer listener
-    -- for handling opening, setting win state, and spitting out loot.
+    xi.amanTrove.setupBattlefield(battlefield)
 end
 
 content.groups =

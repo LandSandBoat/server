@@ -45,6 +45,7 @@ zones[xi.zone.BALGAS_DAIS] =
         HUH_IS_THAT_ALL               = 7695, -- Huh? Is that all? I haven't even broken a sweataru...
         YIKEY_WIKEYS                  = 7696, -- Yikey-wikeys! Get that thing away from meee!
         WHATS_THE_MATTARU             = 7697, -- <Pant, wheeze>... What's the mattaru, <name>? Too much of a pansy-wansy to fight fair?
+        LOUD_THUD                     = 7702, -- You hear a loud thud, as if a large amount of spoils spontaneously appeared.
     },
     mob =
     {
