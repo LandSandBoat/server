@@ -1,5 +1,12 @@
 -----------------------------------
 -- A.M.A.N. Trove
+--
+-- TODO: Make sure there's no funny business across multiple battle areas
+-- TODO: Make sure there's no funny business across multiple party members in different areas or BCs
+-- TODO: Make sure party members in the same BC all count towards the same BC
+-- TODO: Make sure nothing can be packet inspected or injected to guess outcomes
+-- TODO: Make sure there's a sanity routine to make sure a BC can't be _too_ valuable
+-- TODO: Make sure there's logging of BC state at setup, and how successful the player was (% of loot obtained, possible value)
 -----------------------------------
 xi = xi or {}
 xi.amanTrove = xi.amanTrove or {}
@@ -85,7 +92,31 @@ xi.amanTrove.venusGuaranteedLoot =
 }
 
 -----------------------------------
--- Functions
+-- Local Functions
+-----------------------------------
+
+local addSmallLoot = function(battlefield)
+    battlefield:setLocalVar('SmallLoot', battlefield:getLocalVar('SmallLoot') + 1)
+end
+
+local addMediumLoot = function(battlefield)
+    battlefield:setLocalVar('MediumLoot', battlefield:getLocalVar('MediumLoot') + 1)
+end
+
+local addLargeLoot = function(battlefield)
+    battlefield:setLocalVar('LargeLoot', battlefield:getLocalVar('LargeLoot') + 1)
+end
+
+local getLoot = function(battlefield)
+    return {
+        smallLoot  = battlefield:getLocalVar('SmallLoot'),
+        mediumLoot = battlefield:getLocalVar('MediumLoot'),
+        largeLoot  = battlefield:getLocalVar('LargeLoot'),
+    }
+end
+
+-----------------------------------
+-- Global Functions
 -----------------------------------
 xi.amantrove.setupBattlefield = function(battlefield)
     local zone = battlefield:getZone()
@@ -130,9 +161,8 @@ xi.amanTrove.chestOPlentyOnTrigger = function(player, npc)
     local zone = player:getZone()
     local ID   = zones[zone:getID()]
 
-    print("You have triggered the Chest O'Plenty.")
-
     player:showText(npc, ID.text.LOUD_THUD)
+    addSmallLoot(player:getBattlefield())
 
     npc:setAnimationSub(1)
     npc:setUntargetable(true)
@@ -150,9 +180,8 @@ xi.amanTrove.terminalCofferOnTrigger = function(player, npc)
     npc:setAnimationSub(1)
     npc:setUntargetable(true)
 
-    print("You have triggered the Terminal Coffer.")
-
     -- TODO: Count up thuds, etc. generate loot
+    local loot = getLoot(player:getBattlefield())
 
     -- TODO: We're going to predetermine how many thuds etc. there are
     --     : available at the start of the BC. If somehow we get to this point
@@ -162,8 +191,6 @@ xi.amanTrove.terminalCofferOnTrigger = function(player, npc)
 end
 
 xi.amanTrove.prepareMimic = function(player, npc)
-    print("The chest is a mimic!")
-
     npc:setStatus(xi.status.UPDATE)
     npc:setModelId(258)
     npc:setAnimation(1) -- Combat
