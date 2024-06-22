@@ -7430,8 +7430,8 @@ INSERT INTO `mob_groups` VALUES (59,1879,104,'Halforc_Dark_Knight',0,128,0,0,0,0
 INSERT INTO `mob_groups` VALUES (60,1883,104,'Halforc_Ranger',0,128,0,0,0,35,35,0);
 INSERT INTO `mob_groups` VALUES (61,1880,104,'Halforc_Dragoon',0,128,0,0,0,35,35,0);
 INSERT INTO `mob_groups` VALUES (62,3048,104,'Orcs_Wyvern',0,128,0,0,0,32,32,0);
-INSERT INTO `mob_groups` VALUES (63,1605,104,'Giollemitte_B_Feroun',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (64,3645,104,'Skeleton_Esquire',0,128,0,0,0,17,29,0);
+INSERT INTO `mob_groups` VALUES (63,1605,104,'Giollemitte_B_Feroun',0,128,0,3000,500,32,35,0);
+INSERT INTO `mob_groups` VALUES (64,3645,104,'Skeleton_Esquire',0,128,0,2000,500,17,29,0);
 
 -- garrison
 INSERT INTO `mob_groups` VALUES (65,3009,104,'Orcish_Fighter_G',0,128,3226,0,0,30,35,0);

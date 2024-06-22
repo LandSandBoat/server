@@ -4321,6 +4321,7 @@ xi.item =
     STEPPE_STONE                        = 13258,
     JUNGLE_STONE                        = 13259,
     DESERT_STONE                        = 13260,
+    MEDIEVAL_COLLAR                     = 13163,
     CORSETTE                            = 13271,
     TWINTHREAD_OBI                      = 13273,
     ARACHNE_OBI                         = 13275,

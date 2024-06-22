@@ -5051,7 +5051,10 @@ INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,176,1,255); -- firaga_ii
 INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,204,1,255); -- flare (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,235,1,255); -- burn (1~255)
 
--- Next Available: 506
+-- Giollemitte_B_Feroun (506)
+INSERT INTO `mob_spell_lists` VALUES ('Giollemitte_B_Feroun',506,112,1,255); -- flash (45~255)
+
+-- Next Available: 507
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

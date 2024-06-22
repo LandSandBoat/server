@@ -27,6 +27,9 @@ zones[xi.zone.JUGNER_FOREST] =
         AMK_DIGGING_OFFSET            = 7800,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         LOGGING_IS_POSSIBLE_HERE      = 7912,  -- Logging is possible here if you have <item>.
         VOIDWALKER_OBTAIN_KI          = 7919,  -- Obtained key item: <keyitem>!
+        DUG_UP                        = 8023,  -- Something was dug up here.
+        PRETERNATURAL_FORCES          = 8024,  -- For some reason, you are unable to investigate this spot. There is a preternatural force at work here...
+        FOREBODING                    = 8025,  -- A sense of foreboding fills the air...
         CONQUEST                      = 8063,  -- You've earned conquest points!
         GARRISON_BASE                 = 8431,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         PLAYER_OBTAINS_ITEM           = 8654,  -- <name> obtains <item>!
@@ -52,14 +55,14 @@ zones[xi.zone.JUGNER_FOREST] =
 
     mob =
     {
-        PANZER_PERCIVAL    = GetTableOfIDs('Panzer_Percival'), -- 2 NMs
-        SUPPLESPINE_MUJWUJ = GetFirstID('Supplespine_Mujwuj'),
-        KING_ARTHRO        = GetFirstID('King_Arthro'),
-        FRAELISSA          = GetFirstID('Fraelissa'),
-        FRADUBIO           = GetFirstID('Fradubio'),
-        METEORMAULER       = GetFirstID('Meteormauler_Zhagtegg'),
-        CERNUNNOS          = GetFirstID('Cernunnos'),
-
+        PANZER_PERCIVAL      = GetTableOfIDs('Panzer_Percival'), -- 2 NMs
+        SUPPLESPINE_MUJWUJ   = GetFirstID('Supplespine_Mujwuj'),
+        KING_ARTHRO          = GetFirstID('King_Arthro'),
+        FRAELISSA            = GetFirstID('Fraelissa'),
+        FRADUBIO             = GetFirstID('Fradubio'),
+        METEORMAULER         = GetFirstID('Meteormauler_Zhagtegg'),
+        CERNUNNOS            = GetFirstID('Cernunnos'),
+        GIOLLEMITTE_B_FEROUN = GetFirstID('Giollemitte_B_Feroun'),
         VOIDWALKER =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =
