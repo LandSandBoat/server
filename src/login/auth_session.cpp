@@ -51,7 +51,7 @@ namespace
 
     constexpr bool isBcryptHash(const std::string& passHash)
     {
-        return passHash.length() == 60 &&
+        return std::size(passHash) == 60 &&
                passHash[0] == '$' &&
                passHash[1] == '2' &&
                (passHash[2] == 'a' || passHash[2] == 'b' || passHash[2] == 'y' || passHash[2] == 'x') && // bcrypt hash versions
