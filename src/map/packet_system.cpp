@@ -5678,24 +5678,24 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                             ref<uint32>(packetData, 0) = PChar->id;
 
                             message::send(MSG_CHAT_YELL, packetData, sizeof packetData, new CChatMessagePacket(PChar, MESSAGE_YELL, (const char*)data[6]));
+
+                            if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_YELL"))
+                            {
+                                // clang-format off
+                                // NOTE: We capture rawMessage as a std::string because if we cast data[6] into a const char*, the underlying data might
+                                //     : be gone by the time we action this lambda on the worker thread.
+                                Async::getInstance()->query([name = PChar->getName(), zoneid = PChar->getZone(), rawMessage = std::string((const char*)data[6])](SqlConnection* _sql)
+                                {
+                                    auto message = _sql->EscapeString(rawMessage);
+                                    std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,zoneid,message,datetime) VALUES('%s','YELL','%d','%s',current_timestamp())",
+                                        name.c_str(), zoneid, message.c_str());
+                                });
+                                // clang-format on
+                            }
                         }
                         else // You must wait longer to perform that action.
                         {
                             PChar->pushPacket(new CMessageStandardPacket(PChar, 0, MsgStd::WaitLonger));
-                        }
-
-                        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_YELL"))
-                        {
-                            // clang-format off
-                            // NOTE: We capture rawMessage as a std::string because if we cast data[6] into a const char*, the underlying data might
-                            //     : be gone by the time we action this lambda on the worker thread.
-                            Async::getInstance()->query([name = PChar->getName(), zoneid = PChar->getZone(), rawMessage = std::string((const char*)data[6])](SqlConnection* _sql)
-                            {
-                                auto message = _sql->EscapeString(rawMessage);
-                                std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,zoneid,message,datetime) VALUES('%s','YELL','%d','%s',current_timestamp())",
-                                    name.c_str(), zoneid, message.c_str());
-                            });
-                            // clang-format on
                         }
                     }
                     else // You cannot use that command in this area.
