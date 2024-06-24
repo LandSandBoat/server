@@ -867,7 +867,15 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                     }
                 }
 
-                for (auto* trust : static_cast<CCharEntity*>(m_POwner->PParty->GetLeader())->PTrusts)
+                auto leader = (CCharEntity*)m_POwner->PParty->GetLeader();
+
+                if (leader == nullptr)
+                {
+                    expression = false;
+                    break;
+                }
+
+                for (auto* trust : leader->PTrusts)
                 {
                     if (trust->GetMJob() == latentEffect.GetConditionsValue())
                     {
