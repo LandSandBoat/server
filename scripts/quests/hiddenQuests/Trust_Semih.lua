@@ -8,7 +8,8 @@ quest.sections =
 {
     {
         check = function(player, questVars, vars)
-            return not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and
+            return xi.settings.main.ENABLE_TRUST_QUESTS == 1 and
+                not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and
                 not player:findItem(xi.item.CIPHER_OF_SEMIHS_ALTER_EGO) and
                 player:hasCompletedMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_PATH_UNTRAVELED)
         end,

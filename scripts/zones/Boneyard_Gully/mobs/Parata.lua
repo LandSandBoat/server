@@ -11,10 +11,11 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local hpp   = mob:getHPP()
-    local bfID  = mob:getBattlefield():getArea()
-    local adds  = mob:getLocalVar('adds')
-    local petID = 0
+    local hpp         = mob:getHPP()
+    local battlefield = mob:getBattlefield()
+    local bfID        = battlefield:getArea()
+    local adds        = mob:getLocalVar('adds')
+    local petID       = 0
 
     -- Pet #1 spawn at 95% hp or less
     if hpp <= 95 and adds == 0 then
@@ -37,6 +38,7 @@ entity.onMobFight = function(mob, target)
     -- If we have spawned a pet
     if petID ~= 0 then
         local pet = SpawnMob(petID)
+        battlefield:insertEntity(pet:getTargID(), false, true)
         pet:updateEnmity(target)
 
         local pos = mob:getPos()

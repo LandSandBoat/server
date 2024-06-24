@@ -126,75 +126,10 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
         return BATTLEFIELD_RETURN_CODE_CUTSCENE;
     }
 
-    // maxplayers being 0 means that all the battlefield information needs to come from the database
-    if (registration.maxPlayers == 0)
-    {
-        const auto* fmtQuery = "SELECT name, fastestName, fastestTime, fastestPartySize, timeLimit, levelCap, lootDropId, partySize, rules, isMission\
-                            FROM bcnm_info i\
-                            WHERE bcnmId = %u";
-
-        auto ret = _sql->Query(fmtQuery, registration.id);
-
-        if (ret == SQL_ERROR || _sql->NumRows() == 0 || _sql->NextRow() != SQL_SUCCESS)
-        {
-            ShowError("Cannot load battlefield : %u ", registration.id);
-            return BATTLEFIELD_RETURN_CODE_REQS_NOT_MET;
-        }
-
-        auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar, false);
-
-        auto name                 = _sql->GetStringData(0);
-        auto recordholder         = _sql->GetStringData(1);
-        auto recordtime           = std::chrono::seconds(_sql->GetUIntData(2));
-        auto recordPartySize      = _sql->GetUIntData(3);
-        auto timelimit            = std::chrono::seconds(_sql->GetUIntData(4));
-        auto levelcap             = _sql->GetUIntData(5);
-        auto lootid               = _sql->GetUIntData(6);
-        auto maxplayers           = _sql->GetUIntData(7);
-        auto rulemask             = _sql->GetUIntData(8);
-        PBattlefield->m_isMission = _sql->GetUIntData(9);
-
-        PBattlefield->SetName(name);
-        PBattlefield->SetRecord(recordholder, recordtime, recordPartySize);
-        PBattlefield->SetTimeLimit(timelimit);
-        PBattlefield->SetLevelCap(levelcap);
-
-        PBattlefield->SetMaxParticipants(maxplayers);
-        PBattlefield->SetRuleMask(rulemask);
-
-        m_Battlefields.insert(std::make_pair(PBattlefield->GetArea(), PBattlefield));
-
-        if (!PBattlefield->LoadMobs())
-        {
-            PBattlefield->SetStatus(BATTLEFIELD_STATUS_LOST);
-            PBattlefield->CanCleanup(true);
-            PBattlefield->Cleanup(time_point{}, true);
-            ShowDebug("battlefield loading failed");
-            return BATTLEFIELD_RETURN_CODE_WAIT;
-        }
-
-        if (lootid != 0)
-        {
-            PBattlefield->SetLocalVar("loot", lootid);
-        }
-
-        if (!PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD))
-        {
-            PChar->StatusEffectContainer->AddStatusEffect(
-                new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, PBattlefield->GetID(), 0, 0, PChar->id, PBattlefield->GetArea()), true);
-        }
-
-        luautils::OnBattlefieldRegister(PChar, PBattlefield);
-        luautils::OnBattlefieldInitialise(PBattlefield);
-        PBattlefield->InsertEntity(PChar, true);
-
-        return BATTLEFIELD_RETURN_CODE_CUTSCENE;
-    }
-
-    auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar, true);
+    auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar);
 
     const auto* fmtQuery = "SELECT name, fastestName, fastestTime, fastestPartySize\
-                            FROM bcnm_info i\
+                            FROM bcnm_records i\
                             WHERE bcnmId = %u";
 
     auto ret = _sql->Query(fmtQuery, registration.id);
@@ -349,25 +284,10 @@ bool CBattlefieldHandler::ReachedMaxCapacity(int battlefieldId) const
         return true;
     }
 
-    // we have at least one free area and id has been passed so lets look it up
-    if (battlefieldId != -1)
-    {
-        std::string query("SELECT battlefieldNumber FROM bcnm_battlefield WHERE bcnmId = %i");
-        auto        ret = _sql->Query(query.c_str(), battlefieldId);
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
-        {
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                auto area = _sql->GetUIntData(0);
-                if (m_Battlefields.find(area) == m_Battlefields.end())
-                {
-                    return false; // this area hasnt been loaded in for this battlefield
-                }
-            }
-        }
-        // all areas for this battlefield are full
-        return true;
-    }
+    // NOTE: If allowedAreas is used for a BCNM, this check will return true, but instead
+    // the player will be rejected from the instance in the 32000 event update.  This is intentional
+    // at this time.
+
     // we have a free battlefield
     return false;
 }

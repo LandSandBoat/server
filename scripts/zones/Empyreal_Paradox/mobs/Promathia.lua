@@ -15,7 +15,7 @@ end
 
 entity.onMobEngage = function(mob, target)
     local bcnmAllies = mob:getBattlefield():getAllies()
-    for i, v in pairs(bcnmAllies) do
+    for _, v in pairs(bcnmAllies) do
         if v:getName() == 'Prishe' then
             if not v:getTarget() then
                 v:entityAnimationPacket('prov')
@@ -24,6 +24,7 @@ entity.onMobEngage = function(mob, target)
             end
         else
             v:addEnmity(mob, 0, 1)
+            v:updateEnmity(mob)
         end
     end
 end
@@ -35,9 +36,10 @@ entity.onMobFight = function(mob, target)
     end
 
     local bcnmAllies = mob:getBattlefield():getAllies()
-    for i, v in pairs(bcnmAllies) do
+    for _, v in pairs(bcnmAllies) do
         if not v:getTarget() then
             v:addEnmity(mob, 0, 1)
+            v:updateEnmity(mob)
         end
     end
 end
@@ -49,31 +51,12 @@ entity.onSpellPrecast = function(mob, spell)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    local battlefield = mob:getBattlefield()
-    if player then
-        player:startEvent(32004, battlefield:getArea())
-    else
-        local players = battlefield:getPlayers()
-        for _, member in pairs(players) do
-            member:startEvent(32004, battlefield:getArea())
-        end
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 32004 then
-        DespawnMob(npc:getID())
-        local mob = SpawnMob(npc:getID() + 1)
-        local bcnmAllies = mob:getBattlefield():getAllies()
-        for i, v in pairs(bcnmAllies) do
-            v:resetLocalVars()
-            local spawn = v:getSpawnPos()
-            v:setPos(spawn.x, spawn.y, spawn.z, spawn.rot)
-        end
-    end
 end
 
 return entity

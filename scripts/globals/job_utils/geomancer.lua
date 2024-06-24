@@ -337,6 +337,9 @@ xi.job_utils.geomancer.geoOnMagicCastingCheck = function(caster, target, spell)
         return xi.msg.basic.ALREADY_HAS_A_PET
     elseif not caster:canUseMisc(xi.zoneMisc.PET) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA
+    elseif caster:getMainJob() ~= xi.job.GEO then
+        -- wikis are incorrect, does not require handbell
+        return xi.msg.basic.MAGIC_CANNOT_CAST
     else
         return 0
     end

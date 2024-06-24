@@ -493,8 +493,9 @@ public:
 
     CharHistory_t m_charHistory;
 
-    int8 getShieldSize();
-    bool hasBazaar();
+    int8  getShieldSize();
+    int16 getShieldDefense();
+    bool  hasBazaar();
 
     bool getStyleLocked() const;
     void setStyleLocked(bool isStyleLocked);

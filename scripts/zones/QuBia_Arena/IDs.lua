@@ -11,6 +11,7 @@ zones[xi.zone.QUBIA_ARENA] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
+        LOST_KEYITEM                  = 6394, -- Lost key item: <keyitem>.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
@@ -42,6 +43,7 @@ zones[xi.zone.QUBIA_ARENA] =
         TAKE_THAT_YOU_WHIPPERSNAPPER  = 7649, -- Take that, you whippersnapper!
         NOW_THAT_IM_WARMED_UP         = 7650, -- Now that I'm warmed up...
         THAT_LL_HURT_IN_THE_MORNING   = 7651, -- Ungh... That'll hurt in the morning...
+        SOUL_GEM_REACTS               = 8006, -- The <keyitem> reacts to the <keyitem>, sending a jolt of energy through your veins!
         PROMISE_ME_YOU_WONT_GO_DOWN   = 8021, -- Promise you won't go down too easy, okay?
         IM_JUST_GETTING_WARMED_UP     = 8022, -- Haha! I'm just getting warmed up!
         YOU_PACKED_MORE_OF_A_PUNCH    = 8023, -- Hah! You pack more of a punch than I thoughtaru. But I won't go down as easy as old Maat!
@@ -50,11 +52,21 @@ zones[xi.zone.QUBIA_ARENA] =
         YIKEY_WIKEYS                  = 8026, -- Yikey-wikeys! Get that thing away from meee!
         WHATS_THE_MATTARU             = 8027, -- <Pant, wheeze>... What's the mattaru, <name>? Too much of a pansy-wansy to fight fair?
     },
+
     mob =
     {
-        HEIR_TO_THE_LIGHT_OFFSET = GetFirstID('Warlord_Rojgnoj'),
-        ATORI_TUTORI             = GetFirstID('Atori-Tutori_qm')
+        ARCHLICH_TABERQUOAN      = GetFirstID('Archlich_Taberquoan'),
+        ATORI_TUTORI             = GetFirstID('Atori-Tutori_qm'),
+        CHAHNAMEEDS_STOMACH      = GetFirstID('Chahnameeds_Stomach'),
+        DOLL_FACTORY             = GetFirstID('Doll_Factory'),
+        GHUL_I_BEABAN            = GetFirstID('Ghul-I-Beaban'),
+        MAAT                     = GetFirstID('Maat'),
+        NEPHIYL_RAMPARTBREACHER  = GetFirstID('Nephiyl_Rampartbreacher'),
+        SEED_ORC                 = GetFirstID('Seed_Orc'),
+        VAICOLIAUX_B_DAURPHE     = GetFirstID('Vaicoliaux_B_DAurphe'),
+        WARLORD_ROJGNOJ          = GetFirstID('Warlord_Rojgnoj'),
     },
+
     npc =
     {
     },

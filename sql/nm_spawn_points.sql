@@ -910,6 +910,7 @@ INSERT INTO `nm_spawn_points` VALUES (17125452,0,137.606,3.346,-279.050); -- Ash
 INSERT INTO `nm_spawn_points` VALUES (17137005,0,678.599,-10.219,532.811);
 INSERT INTO `nm_spawn_points` VALUES (17137705,0,678.599,-10.219,532.811); -- Ankabut
 INSERT INTO `nm_spawn_points` VALUES (17137821,0,49.650,1.692,630.371); -- Gloomanita
+INSERT INTO `nm_spawn_points` VALUES (17141885,0,276.142,25.332,-453.541); -- Vasiliceratops
 INSERT INTO `nm_spawn_points` VALUES (17141962,0,-23.892,-24.139,327.721); -- Kotan-kor Kamuy
 INSERT INTO `nm_spawn_points` VALUES (17141979,0,-140.354,-92.095,39.459); -- Scitalis
 INSERT INTO `nm_spawn_points` VALUES (17145867,0,-416.496,24.110,-441.589); -- Sugaar

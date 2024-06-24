@@ -1,7 +1,6 @@
 -----------------------------------
 -- Trust
 -----------------------------------
-require('scripts/globals/bcnm')
 require('scripts/globals/magic')
 require('scripts/globals/roe')
 -----------------------------------
@@ -200,6 +199,17 @@ xi.trust.checkBattlefieldTrustCount = function(caster)
         local numPlayers       = battlefield:getPlayerCount()
         local numTrusts        = 0
 
+        -- RoV KI Battlefields are limited to LB5 fights which are restricted to
+        -- one participant which would cause the return to fail.  In this case,
+        -- set the maxParticipants value to 6 to allow summoning.
+
+        if
+            rovKIBattlefieldIDs[battlefield:getID()] and
+            caster:hasKeyItem(xi.ki.RHAPSODY_IN_UMBER)
+        then
+            maxParticipants = 6
+        end
+
         for _, entity in ipairs(participants) do
             local objType = entity:getObjType()
 
@@ -354,11 +364,17 @@ xi.trust.canCast = function(caster, spell, notAllowedTrustIds)
         return -1
     end
 
-    -- Some battlefields allow trusts after you get this ROV Key Item
+    -- Some battlefields allow trusts after you get this ROV Key Item, and this
+    -- rule should take precedence.  If it is not one of these, then fall back
+    -- to checking the battlefield's definitions.
     local casterBattlefieldID = caster:getBattlefieldID()
-    if
-        rovKIBattlefieldIDs[casterBattlefieldID] and
-        not caster:hasKeyItem(xi.ki.RHAPSODY_IN_UMBER)
+    if rovKIBattlefieldIDs[casterBattlefieldID] then
+        if not caster:hasKeyItem(xi.ki.RHAPSODY_IN_UMBER) then
+            return xi.msg.basic.TRUST_NO_CAST_TRUST
+        end
+    elseif
+        xi.battlefield.contents[casterBattlefieldID] and
+        not xi.battlefield.contents[casterBattlefieldID].allowTrusts
     then
         return xi.msg.basic.TRUST_NO_CAST_TRUST
     end

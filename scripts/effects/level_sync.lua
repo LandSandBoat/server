@@ -16,7 +16,7 @@ effectObject.onEffectGain = function(target, effect)
             if
                 pet and
                 pet:getObjType() == xi.objType.PET and
-                target:isJugPet() and -- isJugPet checks m_PBaseEntity->PPet's check type, not the target's pet type.
+                target:hasJugPet() and -- hasJugPet checks m_PBaseEntity->PPet's check type, not the target's pet type.
                 masterLevel < pet:getMinimumPetLevel()
             then
                 target:despawnPet()

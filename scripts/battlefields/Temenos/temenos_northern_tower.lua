@@ -224,11 +224,13 @@ content.groups =
     },
 
     {
-        mobs =
-        {
-            'Kindreds_Elemental',
-            'Kindreds_Avatar',
-        }
+        mobs    = { 'Kindreds_Avatar' },
+        mixins  = { require('scripts/mixins/families/avatar') },
+        spawned = false,
+    },
+
+    {
+        mobs = { 'Kindreds_Elemental' },
     },
 
     -- Floor 5
@@ -258,10 +260,15 @@ content.groups =
     },
 
     {
+        mobs    = { 'Tonberrys_Avatar' },
+        mixins  = { require('scripts/mixins/families/avatar') },
+        spawned = false,
+    },
+
+    {
         mobs =
         {
             'Tonberrys_Elemental',
-            'Tonberrys_Avatar',
         },
     },
 

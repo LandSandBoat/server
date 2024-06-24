@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobRoam = function(mob)
-    local promathia = ID.mob.PROMATHIA_OFFSET + (mob:getBattlefield():getArea() - 1) * 2
+    local promathia = ID.mob.PROMATHIA + (mob:getBattlefield():getArea() - 1) * 2
     local wait = mob:getLocalVar('wait')
     local ready = mob:getLocalVar('ready')
 
@@ -30,6 +30,7 @@ entity.onMobRoam = function(mob)
         mob:setLocalVar('wait', 0)
     elseif ready > 0 then
         mob:addEnmity(GetMobByID(ready), 0, 1)
+        mob:updateEnmity()
     else
         mob:setLocalVar('wait', wait + 3)
     end

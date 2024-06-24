@@ -1,7 +1,7 @@
 -----------------------------------
 --  Fuscous Ooze
 --  Family: Slugs
---  Description: A dusky slime inflicts encumberance and weight.
+--  Description: A dusky slime inflicts encumbrance and weight.
 --  Type: Magical
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Cone
@@ -13,8 +13,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    -- TODO: Encumberance seems to do nothing?
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 50, 0, 45)
+    local power    = math.random(1, 16)
+    local duration = math.random(30, 45)
+
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ENCUMBRANCE_II, power, 0, duration)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 50, 0, duration)
 
     local dmgmod = 1
     local baseDamage = mob:getWeaponDmg() * 3.7

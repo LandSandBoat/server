@@ -38,8 +38,8 @@ xi.cop.helpers.numPromyvionCompleted = function(player, excludeArea)
     return numKeyItems
 end
 
-xi.cop.helpers.hasCompletedPromyvion = function(player, prevZone)
-    return player:hasKeyItem(xi.cop.helpers.shatteredTelepointInfo[player:getZoneID()][5])
+xi.cop.helpers.hasCompletedPromyvion = function(player, zoneId)
+    return player:hasKeyItem(xi.cop.helpers.shatteredTelepointInfo[zoneId][5])
 end
 
 xi.cop.helpers.promyvionOnZoneIn =

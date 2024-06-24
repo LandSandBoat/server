@@ -50,9 +50,8 @@ quest.sections =
         check = function(player, questVars, vars)
             return  xi.trust.hasPermit(player) and
                 not player:hasSpell(xi.magic.spell.PRISHE) and
-                -- On Dawn, but past "the boss"
                 (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.DAWN and
-                player:getCharVar('PromathiaStatus') == 3)
+                xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DAWN, 'Status') >= 5)
                 -- TODO: Additional conditions
         end,
 

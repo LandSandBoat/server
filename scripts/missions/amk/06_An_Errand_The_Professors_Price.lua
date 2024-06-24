@@ -20,28 +20,36 @@ mission.reward =
     nextMission = { xi.mission.log_id.AMK, xi.mission.id.amk.SHOCK_ARRANT_ABUSE_OF_AUTHORITY },
 }
 
+-- TODO: Test and make sure this works
 local orbKeyItems =
 {
-    xi.ki.ORB_OF_SWORDS,
-    xi.ki.ORB_OF_CUPS,
-    xi.ki.ORB_OF_BATONS,
-    xi.ki.ORB_OF_COINS,
+    -- keyItem, mod, immune value, vulnerable value
+    { xi.ki.ORB_OF_SWORDS, xi.mod.SLASH_SDT,       0, 1000 },
+    { xi.ki.ORB_OF_CUPS,   xi.mod.BLUNT_SDT,       0, 1000 },
+    { xi.ki.ORB_OF_BATONS, xi.mod.PIERCE_SDT,      0, 1000 },
+    { xi.ki.ORB_OF_COINS,  xi.mod.UDMGMAGIC,  -10000,    0 },
 }
 
 local beginCardianFight = function(player, npc)
     local numToSpawn = 15
 
-    -- TODO: Add immunities to cardians
+    local modsToAdd = {}
 
-    -- Remove KIs
+    -- Count KI's so we know how many Cardians to spawn
     local removedKIs = 0
-    for _, keyItemId in ipairs(orbKeyItems) do
+    for _, entry in ipairs(orbKeyItems) do
+        local keyItemId   = entry[1]
+        local immunity    = entry[2]
+        local immuneValue = entry[3]
+        local vulnValue   = entry[4]
+
         if player:hasKeyItem(keyItemId) then
-            -- TODO: Remove damage immunity for the relevant mob.  The orbKeyItems table
-            -- may need to be expanded to support which mob receives which reduction.
+            table.insert(modsToAdd, { immunity, vulnValue })
 
             player:delKeyItem(keyItemId)
             removedKIs = removedKIs + 1
+        else
+            table.insert(modsToAdd, { immunity, immuneValue })
         end
     end
 
@@ -56,10 +64,23 @@ local beginCardianFight = function(player, npc)
         table.insert(cardianIds, cardianId)
     end
 
+    -- Spawn mobs and start battle
     xi.confrontation.start(player, npc, cardianIds, function(playerArg)
         npcUtil.giveKeyItem(playerArg, xi.keyItem.RIPE_STARFRUIT)
         npcUtil.giveKeyItem(playerArg, xi.keyItem.PEACH_CORAL_KEY)
     end)
+
+    -- Apply mods
+    for _, mobId in pairs(cardianIds) do
+        local mob = GetMobByID(mobId)
+        if mob then
+            for _, entry in pairs(modsToAdd) do
+                local mod = entry[1]
+                local val = entry[2]
+                mob:setMod(mod, val)
+            end
+        end
+    end
 end
 
 mission.sections =
@@ -67,7 +88,9 @@ mission.sections =
     -- Go get the Starfruit
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and not player:hasKeyItem(xi.ki.RIPE_STARFRUIT)
+            return currentMission >= mission.missionId and
+                missionStatus == 0 and
+                not player:hasKeyItem(xi.ki.RIPE_STARFRUIT)
         end,
 
         [xi.zone.WINDURST_WALLS] =
@@ -84,14 +107,27 @@ mission.sections =
         {
             ['qm1'] =
             {
+                -- Only need one KI orb to start fight
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(100)
+                    if
+                        player:hasKeyItem(xi.ki.ORB_OF_SWORDS) or
+                        player:hasKeyItem(xi.ki.ORB_OF_CUPS) or
+                        player:hasKeyItem(xi.ki.ORB_OF_BATONS) or
+                        player:hasKeyItem(xi.ki.ORB_OF_COINS)
+                    then
+                        -- Prompt to start the fight
+                        return mission:progressEvent(100)
+                    else
+                        -- Remind that orbs are needed
+                        return mission:messageSpecial(horutotoID.text.IF_HAD_ORBS, xi.ki.ORB_OF_SWORDS, xi.ki.ORB_OF_CUPS, xi.ki.ORB_OF_BATONS, xi.ki.ORB_OF_COINS)
+                    end
                 end,
             },
 
             onEventFinish =
             {
                 [100] = function(player, csid, option, npc)
+                    -- Violence was chosen, start fight
                     if option == 1 then
                         beginCardianFight(player, npc)
                     end
@@ -103,7 +139,8 @@ mission.sections =
     -- Got the Starfruit
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
+            return currentMission >= mission.missionId and
+                missionStatus == 0 and
                 player:hasKeyItem(xi.ki.RIPE_STARFRUIT) and
                 not player:needToZone()
         end,
@@ -124,10 +161,9 @@ mission.sections =
                     if option == 0 then -- Dont Pay
                         player:needToZone(true)
                     elseif option == 1 then -- Pay
-                        if mission:complete(player) then
-                            player:delGil(5000)
-                            player:delKeyItem(xi.ki.RIPE_STARFRUIT)
-                        end
+                        player:delGil(5000)
+                        player:delKeyItem(xi.ki.RIPE_STARFRUIT)
+                        player:setMissionStatus(xi.mission.log_id.AMK, 1)
                     end
                 end,
             },
@@ -137,9 +173,44 @@ mission.sections =
         {
             ['qm1'] =
             {
-                -- TODO: Reminder about the orbs
                 onTrigger = function(player, npc)
                     return mission:messageSpecial(horutotoID.text.CANNOT_ENTER_BATTLEFIELD, xi.ki.RIPE_STARFRUIT):setPriority(1000)
+                end,
+            },
+        },
+    },
+
+    -- Watch Shantotto uncurse the moogle and get digging instructions
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and missionStatus == 1
+        end,
+
+        [xi.zone.WINDURST_WALLS] =
+        {
+            ['Shantotto'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:progressEvent(509)
+                end,
+            },
+        },
+
+        [xi.zone.UPPER_JEUNO] =
+        {
+            ['Inconspicuous_Door'] =
+            {
+                onTrigger = function(player, npc)
+                    local diggingZone = xi.amk.helpers.getDiggingZone(player)
+                    local diggingZoneCsId = xi.amk.helpers.digSites[diggingZone].eventID
+                    return mission:progressEvent(10182, diggingZoneCsId)
+                end,
+            },
+
+            onEventFinish =
+            {
+                [10182] = function(player, csid, option, npc)
+                    mission:complete(player)
                 end,
             },
         },

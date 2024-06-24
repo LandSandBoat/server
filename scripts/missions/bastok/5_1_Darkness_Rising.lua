@@ -199,7 +199,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 11 and
-                        player:getLocalVar('battlefieldWin') == 512
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.RANK_5_MISSION
                     then
                         npcUtil.giveKeyItem(player, xi.ki.BURNT_SEAL)
                         player:setMissionStatus(mission.areaId, 12)

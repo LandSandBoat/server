@@ -5,7 +5,7 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, item, param, caster)
     return xi.salvage.onCellItemCheck(target, xi.effect.DEBILITATION, 0x020)
 end
 

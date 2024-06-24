@@ -435,18 +435,12 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
     ----------------------------------------
     -- Handle target resistance rank.
     ----------------------------------------
+    -- Skillchains lower target resistance rank by 1 (handled in EFFECT_SKILLCHAIN in battleutils.cpp)
     local targetResistRank = target:getMod(xi.combat.element.resistRankMod[spellElement]) or 0
 
     -- Elemental resistance rank.
     if targetResistRank > 4 then
         targetResistRank = utils.clamp(targetResistRank - rankModifier, 4, 11)
-    end
-
-    -- Skillchains lowers target resistance rank by 1.
-    local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target)
-
-    if skillchainCount > 0 then
-        targetResistRank = targetResistRank - 1
     end
 
     -- TODO: Rayke logic might be needed here, depending on how it's implemented.

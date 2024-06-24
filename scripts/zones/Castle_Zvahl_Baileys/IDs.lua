@@ -24,22 +24,18 @@ zones[xi.zone.CASTLE_ZVAHL_BAILEYS] =
     },
     mob =
     {
-        MARQUIS_SABNOCK_PH =
-        {
-            [17436879] = 17436881,
-            [17436882] = 17436881,
-        },
-        LIKHO            = 17436714,
-        MARQUIS_ALLOCEN  = 17436913,
-        MARQUIS_AMON     = 17436918,
-        DUKE_HABORYM     = 17436923,
-        GRAND_DUKE_BATYM = 17436927,
-        DARK_SPARK       = 17436964,
-        MIMIC            = 17436965,
+        MARQUIS_SABNOCK  = GetFirstID('Marquis_Sabnock'),
+        LIKHO            = GetFirstID('Likho'),
+        MARQUIS_ALLOCEN  = GetFirstID('Marquis_Allocen'),
+        MARQUIS_AMON     = GetFirstID('Marquis_Amon'),
+        DUKE_HABORYM     = GetFirstID('Duke_Haborym'),
+        GRAND_DUKE_BATYM = GetFirstID('Grand_Duke_Batym'),
+        DARK_SPARK       = GetFirstID('Dark_Spark'),
+        MIMIC            = GetFirstID('Mimic'),
     },
     npc =
     {
-        TORCH_OFFSET    = 17436985,
+        TORCH_OFFSET    = GetFirstID('Torch'),
         TREASURE_CHEST  = GetFirstID('Treasure_Chest'),
         TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
     },

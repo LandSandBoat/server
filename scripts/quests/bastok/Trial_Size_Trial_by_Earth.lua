@@ -95,10 +95,14 @@ quest.sections =
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar('battlefieldWin') == 578 then
+                    if player:getLocalVar('battlefieldWin') == xi.battlefield.id.TRIAL_SIZE_TRIAL_BY_EARTH then
                         if not player:hasSpell(xi.magic.spell.TITAN) then
                             player:addSpell(xi.magic.spell.TITAN)
                             player:messageSpecial(tremorsID.text.TITAN_UNLOCKED, 0, 0, 1)
+                        end
+
+                        if not player:hasItem(xi.item.SCROLL_OF_INSTANT_WARP) then
+                            npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP)
                         end
 
                         quest:complete(player)

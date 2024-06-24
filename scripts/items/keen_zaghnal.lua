@@ -7,7 +7,7 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, item, param, caster)
     if target:getEquipID(xi.slot.MAIN) ~= 18067 then
         target:delStatusEffect(xi.effect.ACCURACY_BOOST, 18067)
     end

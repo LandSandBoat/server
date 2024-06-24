@@ -14,8 +14,6 @@ entity.onTrigger = function(player, npc)
     if instance:completed() then
         player:startEvent(100, 3)
     end
-
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

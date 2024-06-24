@@ -29,7 +29,7 @@
 class CChangeMusicPacket : public CBasicPacket
 {
 public:
-    CChangeMusicPacket(uint8 BlockID, uint8 MusicTrackID);
+    CChangeMusicPacket(uint16 BlockID, uint16 MusicTrackID);
 };
 
 #endif

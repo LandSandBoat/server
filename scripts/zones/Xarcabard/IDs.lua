@@ -91,10 +91,13 @@ zones[xi.zone.XARCABARD] =
     },
     npc =
     {
-        OVERSEER_BASE      = GetFirstID('Jeantelas_RK'),
-        BOREAL_TIGER_QM    = GetFirstID('qm_boreal_tiger'),
-        BOREAL_COEURL_QM   = GetFirstID('qm_boreal_coeurl'),
-        BOREAL_HOUND_QM    = GetFirstID('qm_boreal_hound'),
+        OVERSEER_BASE    = GetFirstID('Jeantelas_RK'),
+        BOREAL_TIGER_QM  = GetFirstID('qm_boreal_tiger'),
+        BOREAL_COEURL_QM = GetFirstID('qm_boreal_coeurl'),
+        BOREAL_HOUND_QM  = GetFirstID('qm_boreal_hound'),
+        OPTION_ONE       = GetFirstID('Option_One'),
+        OPTION_TWO       = GetFirstID('Option_Two'),
+        OPTION_THREE     = GetFirstID('Option_Three'),
     },
 }
 

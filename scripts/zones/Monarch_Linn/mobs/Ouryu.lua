@@ -55,7 +55,6 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.MIST_MELTER)
 end
 
 return entity

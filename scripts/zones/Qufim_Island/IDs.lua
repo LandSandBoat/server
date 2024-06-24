@@ -46,14 +46,12 @@ zones[xi.zone.QUFIM_ISLAND] =
         COMMON_SENSE_SURVIVAL          = 12670, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         HOMEPOINT_SET                  = 12712, -- Home point set!
     },
-
     mob =
     {
         SLIPPERY_SUCKER   = GetFirstID('Slippery_Sucker'),
         TRICKSTER_KINETIX = GetFirstID('Trickster_Kinetix'),
         OPHIOTAURUS       = GetFirstID('Ophiotaurus'),
     },
-
     npc =
     {
         OVERSEER_BASE = GetFirstID('Pitoire_RK'),

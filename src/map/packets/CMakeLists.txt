@@ -16,8 +16,8 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_purchase.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_purchase.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/blacklist.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/blacklist.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/blacklist_edit_response.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/blacklist_edit_response.h
     ${CMAKE_CURRENT_SOURCE_DIR}/campaign_map.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/campaign_map.h
     ${CMAKE_CURRENT_SOURCE_DIR}/caught_fish.cpp
@@ -202,6 +202,8 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/roe_sparkupdate.h
     ${CMAKE_CURRENT_SOURCE_DIR}/roe_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/roe_update.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/send_blacklist.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/send_blacklist.h
     ${CMAKE_CURRENT_SOURCE_DIR}/server_ip.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/server_ip.h
     ${CMAKE_CURRENT_SOURCE_DIR}/server_message.cpp
@@ -216,8 +218,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/shop_menu.h
     ${CMAKE_CURRENT_SOURCE_DIR}/status_effects.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/status_effects.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/stop_downloading.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/stop_downloading.h
     ${CMAKE_CURRENT_SOURCE_DIR}/synth_animation.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/synth_animation.h
     ${CMAKE_CURRENT_SOURCE_DIR}/synth_message.cpp

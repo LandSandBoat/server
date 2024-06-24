@@ -8,25 +8,22 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    local dINT   = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
-    local tp     = pet:getTP() / 10
-    local master = pet:getMaster()
-    local merits = 0
-
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    if master ~= nil and master:isPC() then
-        merits = master:getMerit(xi.merit.WIND_BLADE)
+    local tp = pet:getTP()
+
+    -- Merit TP bonus.
+    local merits = 0
+
+    if summoner and summoner:isPC() then
+        merits = summoner:getMerit(xi.merit.WIND_BLADE)
     end
 
-    tp = tp + (merits - 40)
-    if tp > 300 then
-        tp = 300
-    end
+    tp = utils.clamp(tp + merits - 400, 0, 3000)
 
     --note: this formula is only accurate for level 75 - 76+ may have a different intercept and/or slope
-    local damage = math.floor(512 + 1.72 * (tp + 1))
-    damage = damage + (dINT * 1.5)
+    local damage = math.floor(512 + 0.172 * tp + (pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)) * 1.5)
+
     damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
     damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.WIND, petskill)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.WIND, 1)

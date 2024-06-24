@@ -204,10 +204,17 @@ mission.sections =
 
                 [32001] = function(player, csid, option, npc)
                     if
-                        player:getLocalVar('battlefieldWin') == 864 and
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.DESIRES_OF_EMPTINESS and
                         mission:getVar(player, 'Status') == 2
                     then
                         mission:setVar(player, 'Status', 3)
+
+                        -- NOTE: Only players on this mission are transported here on completion of
+                        -- the battlefield.  All other players will remain at the location of the
+                        -- 32001 event finish, and it is vital that arg7 (canSkipCS) is set, else
+                        -- the player will receive a black screen.
+
+                        player:setPos(-340.00, -100.25, 140.00, 64, xi.zone.BEAUCEDINE_GLACIER)
                     end
                 end,
             },

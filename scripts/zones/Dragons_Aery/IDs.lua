@@ -24,12 +24,12 @@ zones[xi.zone.DRAGONS_AERY] =
     },
     mob =
     {
-        FAFNIR  = 17408018,
-        NIDHOGG = 17408019,
+        FAFNIR  = GetFirstID('Fafnir'),
+        NIDHOGG = GetFirstID('Nidhogg'),
     },
     npc =
     {
-        FAFNIR_QM = 17408033,
+        FAFNIR_QM = GetFirstID('qm0'),
     },
 }
 

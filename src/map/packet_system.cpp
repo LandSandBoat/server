@@ -89,7 +89,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/bazaar_item.h"
 #include "packets/bazaar_message.h"
 #include "packets/bazaar_purchase.h"
-#include "packets/blacklist.h"
+#include "packets/blacklist_edit_response.h"
 #include "packets/campaign_map.h"
 #include "packets/change_music.h"
 #include "packets/char.h"
@@ -159,12 +159,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/roe_questlog.h"
 #include "packets/roe_sparkupdate.h"
 #include "packets/roe_update.h"
+#include "packets/send_blacklist.h"
 #include "packets/server_ip.h"
 #include "packets/server_message.h"
 #include "packets/shop_appraise.h"
 #include "packets/shop_buy.h"
 #include "packets/status_effects.h"
-#include "packets/stop_downloading.h"
 #include "packets/synth_suggestion.h"
 #include "packets/trade_action.h"
 #include "packets/trade_item.h"
@@ -2226,17 +2226,13 @@ void SmallPacket0x03B(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 }
 
-/************************************************************************
- *                                                                       *
- *  Unknown Packet                                                       *
- *  Assumed packet empty response for npcs/monsters/players.             *
- *                                                                       *
- ************************************************************************/
-
+// GP_CLI_COMMAND_BLACK_LIST
+// https://github.com/atom0s/XiPackets/tree/main/world/client/0x003C
+// Client is asking for blist because it wasn't initialized correctly?
 void SmallPacket0x03C(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
-    ShowWarning("SmallPacket0x03C");
+    blacklistutils::SendBlacklist(PChar);
 }
 
 /************************************************************************
@@ -2261,7 +2257,7 @@ void SmallPacket0x03D(map_session_data_t* const PSession, CCharEntity* const PCh
     if (ret == SQL_ERROR || _sql->NumRows() != 1 || _sql->NextRow() != SQL_SUCCESS)
     {
         // Send failed
-        PChar->pushPacket(new CBlacklistPacket(0, "", 0x02));
+        PChar->pushPacket(new CBlacklistEditResponsePacket(0, "", 0x02));
         return;
     }
 
@@ -2275,18 +2271,18 @@ void SmallPacket0x03D(map_session_data_t* const PSession, CCharEntity* const PCh
         if (blacklistutils::IsBlacklisted(PChar->id, charid))
         {
             // We cannot readd this person, fail to add
-            PChar->pushPacket(new CBlacklistPacket(0, "", 0x02));
+            PChar->pushPacket(new CBlacklistEditResponsePacket(0, "", 0x02));
             return;
         }
 
         // Attempt to add this person
         if (blacklistutils::AddBlacklisted(PChar->id, charid))
         {
-            PChar->pushPacket(new CBlacklistPacket(accid, name, cmd));
+            PChar->pushPacket(new CBlacklistEditResponsePacket(accid, name, cmd));
         }
         else
         {
-            PChar->pushPacket(new CBlacklistPacket(0, "", 0x02));
+            PChar->pushPacket(new CBlacklistEditResponsePacket(0, "", 0x02));
         }
     }
 
@@ -2296,24 +2292,24 @@ void SmallPacket0x03D(map_session_data_t* const PSession, CCharEntity* const PCh
         if (!blacklistutils::IsBlacklisted(PChar->id, charid))
         {
             // We cannot remove this person, fail to remove
-            PChar->pushPacket(new CBlacklistPacket(0, "", 0x02));
+            PChar->pushPacket(new CBlacklistEditResponsePacket(0, "", 0x02));
             return;
         }
 
         // Attempt to remove this person
         if (blacklistutils::DeleteBlacklisted(PChar->id, charid))
         {
-            PChar->pushPacket(new CBlacklistPacket(accid, name, cmd));
+            PChar->pushPacket(new CBlacklistEditResponsePacket(accid, name, cmd));
         }
         else
         {
-            PChar->pushPacket(new CBlacklistPacket(0, "", 0x02));
+            PChar->pushPacket(new CBlacklistEditResponsePacket(0, "", 0x02));
         }
     }
     else
     {
         // Send failed
-        PChar->pushPacket(new CBlacklistPacket(0, "", 0x02));
+        PChar->pushPacket(new CBlacklistEditResponsePacket(0, "", 0x02));
     }
 }
 
@@ -3834,7 +3830,14 @@ void SmallPacket0x05C(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (data.ref<uint8>(0x1E) != 0)
         {
-            updatePosition = luautils::OnEventUpdate(PChar, EventID, Result) == 1;
+            // TODO: Currently the return value for onEventUpdate in Interaction Framework is not received.  Remove
+            // the localVar check when this is resolved.
+
+            int32  updateResult     = luautils::OnEventUpdate(PChar, EventID, Result);
+            uint32 noPositionUpdate = PChar->GetLocalVar("noPosUpdate");
+            updatePosition          = noPositionUpdate == 0 ? updateResult == 1 : false;
+
+            PChar->SetLocalVar("noPosUpdate", 0);
         }
         else
         {
@@ -5691,11 +5694,11 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                             // clang-format off
                             // NOTE: We capture rawMessage as a std::string because if we cast data[6] into a const char*, the underlying data might
                             //     : be gone by the time we action this lambda on the worker thread.
-                            Async::getInstance()->query([name = PChar->getName(), rawMessage = std::string((const char*)data[6])](SqlConnection* _sql)
+                            Async::getInstance()->query([name = PChar->getName(), zoneid = PChar->getZone(), rawMessage = std::string((const char*)data[6])](SqlConnection* _sql)
                             {
                                 auto message = _sql->EscapeString(rawMessage);
-                                std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,message,datetime) VALUES('%s','YELL','%s',current_timestamp())",
-                                    name.c_str(), message.c_str());
+                                std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,zoneid,message,datetime) VALUES('%s','YELL','%d','%s',current_timestamp())",
+                                    name.c_str(), zoneid, message.c_str());
                             });
                             // clang-format on
                         }
@@ -5723,11 +5726,11 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                             // clang-format off
                             // NOTE: We capture rawMessage as a std::string because if we cast data[6] into a const char*, the underlying data might
                             //     : be gone by the time we action this lambda on the worker thread.
-                            Async::getInstance()->query([name = PChar->getName(), rawMessage = std::string((const char*)data[6])](SqlConnection* _sql)
+                            Async::getInstance()->query([name = PChar->getName(), unityLeader = PChar->PUnityChat->getLeader(), rawMessage = std::string((const char*)data[6])](SqlConnection* _sql)
                             {
                                 auto message = _sql->EscapeString(rawMessage);
-                                std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,message,datetime) VALUES('%s','UNITY','%s',current_timestamp())",
-                                    name.c_str(), message.c_str());
+                                std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,unity,message,datetime) VALUES('%s','UNITY','%d','%s',current_timestamp())",
+                                    name.c_str(), unityLeader, message.c_str());
                             });
                             // clang-format on
                         }

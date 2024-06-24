@@ -16,11 +16,11 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            4503,  184,    -- Buburimu Grape
-            1120, 1620,    -- Casablanca
-            4359,  220,    -- Dhalmel Meat
-            614,    72,    -- Mhaura Garlic
-            4445,   40,    -- Yagudo Cherry
+            xi.item.BULB_OF_MHAURA_GARLIC,      83,
+            xi.item.YAGUDO_CHERRY,              45,
+            xi.item.SLICE_OF_DHALMEL_MEAT,     249,
+            xi.item.BUNCH_OF_BUBURIMU_GRAPES,  208,
+            xi.item.CASABLANCA,               1872,
         }
 
         player:showText(npc, ID.text.FIVA_OPEN_DIALOG)

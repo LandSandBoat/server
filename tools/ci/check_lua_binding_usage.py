@@ -53,6 +53,7 @@ def main():
     function_names.append("replaceDefault")
     function_names.append("addContainers")
     function_names.append("addDefaultHandlers")
+    function_names.append("removeDefaultHandlers")
     function_names.append("afterZoneIn")
     function_names.append("onTrigger")
     function_names.append("onTrade")
@@ -73,6 +74,8 @@ def main():
     function_names.append("addContainer")
     function_names.append("isValidEntry")
     function_names.append("checkRequirements")
+    function_names.append("setupBattlefield")
+    function_names.append("battlefieldEntry")
     function_names.append("entryRequirement")
     function_names.append("onEntryEventUpdate")
     function_names.append("checkSkipCutscene")
@@ -80,10 +83,10 @@ def main():
     function_names.append("onBattlefieldWin")
     function_names.append("onBattlefieldLoss")
     function_names.append("onBattlefieldWipe")
+    function_names.append("handleAllMonstersDefeated")
     function_names.append("handleWipe")
     function_names.append("unsetVarBit")
     function_names.append("addVar")
-    function_names.append("getLocaLVar")
     function_names.append("register")
     function_names.append("addEssentialMobs")
     function_names.append("handleLootRolls")
@@ -99,6 +102,10 @@ def main():
     function_names.append("setEnableCheck")
     function_names.append("setStartFunction")
     function_names.append("setEndFunction")
+    function_names.append("match")
+    function_names.append("gmatch")
+    function_names.append("find")
+    function_names.append("sub")
 
     # root_dir needs a trailing slash (i.e. /root/dir/)
     for filename in glob.iglob("./scripts/" + "**/*.lua", recursive=True):
@@ -109,10 +116,10 @@ def main():
                 for line in file.readlines():
                     counter = counter + 1
 
-                    if "--[[" in line:
+                    if "[[" in line:
                         in_block_comment = True
 
-                    if "]]--" in line:
+                    if "]]" in line:
                         in_block_comment = False
 
                     if in_block_comment:
@@ -122,15 +129,15 @@ def main():
                     line = line.split("--", 1)[0]
 
                     # Don't look inside strings (replace with placeholder)
-                    line = re.sub('\"([^\"]*?)\"', "strVal", line)
-                    line = re.sub("\'([^\"]*?)\'", "strVal", line)
+                    line = re.sub(r'\"([^\"]*?)\"', "strVal", line)
+                    line = re.sub(r"\'([^\"]*?)\'", "strVal", line)
 
                     # Try and ignore function definitions
                     line = line.split("function", 1)[0]
 
                     line = line.replace("\n", "")
 
-                    for match in re.finditer('(?<=:)[^\(\/\\\: "]*', line):
+                    for match in re.finditer(r'(?<=:)[^\(\/\\\: "]*', line):
                         if (
                             len(match.group()) > 1
                             and match.group() not in function_names

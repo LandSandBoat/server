@@ -26,27 +26,13 @@ zones[xi.zone.PROMYVION_VAHZL] =
     },
     mob =
     {
-        MEMORY_RECEPTACLES =
-        {
-            [16867387] = { 1, 3, 16867720 },
-            [16867392] = { 1, 3, 16867721 },
-            [16867439] = { 2, 5, 16867718 },
-            [16867446] = { 2, 5, 16867719 },
-            [16867504] = { 3, 5, 16867723 },
-            [16867511] = { 3, 5, 16867724 },
-            [16867518] = { 3, 5, 16867725 },
-            [16867525] = { 3, 5, 16867726 },
-            [16867601] = { 4, 7, 16867722 },
-            [16867610] = { 4, 7, 16867727 },
-            [16867619] = { 4, 7, 16867728 },
-        },
-
-        PONDERER   = GetFirstID('Ponderer'),
-        PROPAGATOR = GetFirstID('Propagator'),
-        SOLICITOR  = GetFirstID('Solicitor'),
-        DEVIATOR   = GetFirstID('Deviator'),
-        WAILER     = GetFirstID('Wailer'),
-        PROVOKER   = GetFirstID('Provoker'),
+        MEMORY_RECEPTACLE_TABLE = GetTableOfIDs('Memory_Receptacle'),
+        PONDERER                = GetFirstID('Ponderer'),
+        PROPAGATOR              = GetFirstID('Propagator'),
+        SOLICITOR               = GetFirstID('Solicitor'),
+        DEVIATOR                = GetFirstID('Deviator'),
+        WAILER                  = GetFirstID('Wailer'),
+        PROVOKER                = GetFirstID('Provoker'),
     },
     npc =
     {

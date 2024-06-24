@@ -2130,17 +2130,24 @@ namespace battleutils
             if (isBlocked)
             {
                 uint8 absorb = 100;
+
+                // shield def bonus is a flat raw damage reduction that occurs before absorb
+                // however do not reduce below 0 or if damage is negative
+                if (damage > 0)
+                {
+                    damage = std::max(0, damage - PDefender->getMod(Mod::SHIELD_DEF_BONUS));
+                }
+
                 if (const auto PChar = dynamic_cast<CCharEntity*>(PDefender))
                 {
                     CItemEquipment* slotSub = PChar->getEquip(SLOT_SUB);
                     if (slotSub && slotSub->IsShield())
                     {
                         absorb = std::clamp(100 - slotSub->getShieldAbsorption(), 0, 100);
-                        absorb -= PDefender->getMod(Mod::SHIELD_DEF_BONUS); // Include Shield Defense Bonus in absorb amount
 
                         // Shield Mastery
                         if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
-                            charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))
+                            PDefender->getMod(Mod::SHIELD_MASTERY_TP))
                         {
                             // If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
                             // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
@@ -3702,6 +3709,17 @@ namespace battleutils
                 }
             }
 
+            Mod resistanceRankMods[] = { Mod::FIRE_RES_RANK, Mod::ICE_RES_RANK, Mod::WIND_RES_RANK, Mod::EARTH_RES_RANK, Mod::THUNDER_RES_RANK, Mod::ICE_RES_RANK, Mod::LIGHT_RES_RANK, Mod::DARK_RES_RANK };
+
+            // Reset any resistance rank mods on the defender
+            PDefender->delModifiers(&PSCEffect->modList);
+
+            // Reset the effects resistance rank mods
+            for (auto& resistanceRank : resistanceRankMods)
+            {
+                PSCEffect->setMod(resistanceRank, 0);
+            }
+
             if (skillchain != SC_NONE)
             {
                 PSCEffect->SetStartTime(server_clock::now());
@@ -3709,6 +3727,17 @@ namespace battleutils
                 PSCEffect->SetTier(GetSkillchainTier(skillchain));
                 PSCEffect->SetPower(skillchain);
                 PSCEffect->SetSubPower(std::min(PSCEffect->GetSubPower() + 1, 5)); // Linked, limited to 5
+
+                // Set new resistance rank modifiers
+                // https://www.bg-wiki.com/ffxi/Resist#Modifying_Resistance_Rank
+                for (auto& element : GetSkillchainMagicElement(skillchain))
+                {
+                    Mod resistanceRankMod = GetResistanceRankModFromElement(element);
+                    PSCEffect->setMod(resistanceRankMod, -1);
+                }
+
+                // Add the mods back to the player (effect cleanup will destroy the mods for us later)
+                PDefender->addModifiers(&PSCEffect->modList);
 
                 return (SUBEFFECT)GetSkillchainSubeffect(skillchain);
             }
@@ -3866,6 +3895,22 @@ namespace battleutils
         };
 
         return resonanceToElement.at(skillchain);
+    }
+
+    Mod GetResistanceRankModFromElement(ELEMENT& element)
+    {
+        static const std::unordered_map<ELEMENT, Mod> elementToMod = {
+            { ELEMENT_FIRE, Mod::FIRE_RES_RANK },
+            { ELEMENT_WATER, Mod::WATER_RES_RANK },
+            { ELEMENT_WIND, Mod::WIND_RES_RANK },
+            { ELEMENT_EARTH, Mod::EARTH_RES_RANK },
+            { ELEMENT_THUNDER, Mod::EARTH_RES_RANK },
+            { ELEMENT_ICE, Mod::ICE_RES_RANK },
+            { ELEMENT_LIGHT, Mod::LIGHT_RES_RANK },
+            { ELEMENT_DARK, Mod::DARK_RES_RANK },
+        };
+
+        return elementToMod.at(element);
     }
 
     int32 TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 lastSkillDamage, CBattleEntity* taChar)

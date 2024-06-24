@@ -225,3 +225,16 @@ void CStatusEffect::addMod(Mod modType, int16 amount)
     }
     modList.emplace_back(modType, amount);
 }
+
+void CStatusEffect::setMod(Mod modType, int16 value)
+{
+    for (auto& i : modList)
+    {
+        if (i.getModID() == modType)
+        {
+            i.setModAmount(value);
+            return;
+        }
+    }
+    modList.emplace_back(modType, value);
+}

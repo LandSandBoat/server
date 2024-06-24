@@ -112,6 +112,13 @@ local function getBaseMPCost(player, ability)
         [xi.jobAbility.BLINDSIDE]        = 147,
         [xi.jobAbility.NIGHT_TERROR]     = 177,
         [xi.jobAbility.PAVOR_NOCTURNUS]  = 246,
+        -- Cait Sith
+        [xi.jobAbility.REGAL_SCRATCH]    = 5,
+        [xi.jobAbility.MEWING_LULLABY]   = 61,
+        [xi.jobAbility.EARIE_EYE]        = 134,
+        [xi.jobAbility.LEVEL_QM_HOLY]    = 235,
+        [xi.jobAbility.RAISE_II]         = 160,
+        [xi.jobAbility.RERAISE_II]       = 80,
         -- Siren
         [xi.jobAbility.WELT]             =   9,
         [xi.jobAbility.ROUNDHOUSE]       =  52,
@@ -122,10 +129,12 @@ local function getBaseMPCost(player, ability)
 
     local baseMPCost = nil
 
-    if ability:getAddType() == xi.addType.ADDTYPE_ASTRAL_FLOW then
-        baseMPCost = player:getMainLvl() * 2
-    elseif ability ~= nil then
-        baseMPCost = baseMPCostMap[ability:getID()]
+    if ability then
+        if ability:getAddType() == xi.addType.ADDTYPE_ASTRAL_FLOW then
+            baseMPCost = player:getMainLvl() * 2
+        else
+            baseMPCost = baseMPCostMap[ability:getID()]
+        end
     end
 
     if baseMPCost == nil then
@@ -195,7 +204,7 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility
 
         -- check if avatar is using a move already
         if petAction == xi.action.PET_MOBABILITY_FINISH then
-            return xi.msg.basic.PET_CANNOT_DO_ACTION, 0 -- TODO: verify exact message in packet.
+            return 0, 0
         end
 
         local baseMPCost = getBaseMPCost(player, petAbility)
@@ -214,14 +223,22 @@ xi.job_utils.summoner.onUseBloodPact = function(target, petskill, summoner, acti
     local bloodPactAbility = GetAbility(petskill:getID()) -- Player abilities and Avatar abilities are mapped 1:1
     local baseMPCost       = getBaseMPCost(summoner, bloodPactAbility)
     local mpCost           = getMPCost(baseMPCost, summoner, bloodPactAbility)
-
-    if summoner:hasStatusEffect(xi.effect.APOGEE) then
-        summoner:resetRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID())
-        summoner:delStatusEffect(xi.effect.APOGEE)
-    end
+    local bloodPactRecast  = math.max(0, summoner:getLocalVar('bpRecastTime'))
 
     if target:getID() == action:getPrimaryTargetID() then
+        -- MP and Cooldown is only consumed if the ability goes off
         summoner:delMP(mpCost)
+        if summoner:hasStatusEffect(xi.effect.APOGEE) then
+            summoner:resetRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID())
+            summoner:delStatusEffect(xi.effect.APOGEE)
+        else
+            if xi.settings.map.BLOOD_PACT_SHARED_TIMER then
+                summoner:addRecast(xi.recast.ABILITY, xi.recastID.BLOODPACT_RAGE, bloodPactRecast)
+                summoner:addRecast(xi.recast.ABILITY, xi.recastID.BLOODPACT_WARD, bloodPactRecast)
+            else
+                summoner:addRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID(), bloodPactRecast)
+            end
+        end
     end
 end
 

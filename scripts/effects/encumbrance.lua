@@ -1,5 +1,5 @@
 -----------------------------------
--- xi.effect.ENCUMBERANCE
+-- xi.effect.ENCUMBRANCE
 -----------------------------------
 local effectObject = {}
 

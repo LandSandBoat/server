@@ -21,10 +21,7 @@ zones[xi.zone.CRAWLERS_NEST_S] =
     },
     mob =
     {
-        MORILLE_MORTELLE_PH =
-        {
-            [17477636] = 17477640, -- 61 0 -4
-        },
+        MORILLE_MORTELLE = GetFirstID('Morille_Mortelle'),
     },
     npc =
     {
