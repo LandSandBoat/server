@@ -146,14 +146,17 @@ local function corsairSetup(caster, ability, action, effect, job)
     caster:setLocalVar('corsairRollTotal', roll)
     action:speceffect(caster:getID(), roll)
 
-    local numBustEffects  = caster:numBustEffects()
-    local recastReduction = caster:getMerit(xi.merit.PHANTOM_ROLL_RECAST) + caster:getMod(xi.mod.PHANTOM_RECAST)
+    local recastReduction = utils.clamp(caster:getMerit(xi.merit.PHANTOM_ROLL_RECAST) + caster:getMod(xi.mod.PHANTOM_RECAST), 0, 45)
+    local recastTime      = ability:getRecast()
 
-    if checkForElevenRoll(caster) and numBustEffects == 0 then
-        action:setRecast((ability:getRecast() / 2) - recastReduction) -- halves phantom roll recast timer for all rolls while under the effects of an 11 without bust (upon first hitting 11, phantom roll cooldown is reset in double-up.lua)
-    else
-        action:setRecast(ability:getRecast() - recastReduction) -- Corsair Recast merits + Phantom Roll Recast Reduction
+    -- Halves phantom roll recast timer for all rolls while under the effects of an 11 without bust (upon first hitting 11, phantom roll cooldown is reset in double-up.lua)
+    if checkForElevenRoll(caster) and caster:numBustEffects() == 0 then
+        recastTime = math.floor(recastTime / 2)
     end
+
+    -- https://wiki-ffo-jp.translate.goog/html/3347.html?_x_tr_sl=ja&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc (Near the middle)
+    -- In short, it seems the minimum recast time is 15 seconds.
+    action:setRecast(utils.clamp(recastTime - recastReduction, 15, 300))
 
     checkForJobBonus(caster, job)
 end
