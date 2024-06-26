@@ -1,9 +1,9 @@
 -----------------------------------
--- Area: Carpenters' Landing
---  NPC: Felourie
--- !pos -300.134 -2.999 505.016 2
+-- Area: Phanauet Channel
+--  NPC: Eunirange
+-- !pos 5.945 -3.75 13.612 1
 -----------------------------------
-require('scripts/globals/barge')
+local ID = zones[xi.zone.PHANAUET_CHANNEL]
 -----------------------------------
 local entity = {}
 
@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.barge.timekeeperOnTrigger(player, xi.barge.location.NORTH_LANDING, 20)
+    player:showText(npc, ID.text.ARE_WE_THERE_YET)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
