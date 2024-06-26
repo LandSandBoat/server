@@ -25,6 +25,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "controller.h"
 #include "entities/mobentity.h"
 
+enum class FollowType : uint8
+{
+    None,
+    Roam,
+    RunAway,
+};
+
 class CMobController : public CController
 {
 public:
@@ -45,10 +52,13 @@ public:
     bool TryCastSpell();
     bool TrySpecialSkill();
 
+    bool         CanFollowTarget(CBattleEntity*);
     bool         CanAggroTarget(CBattleEntity*);
     void         TapDeaggroTime();
     void         TapDeclaimTime();
     virtual bool Cast(uint16 targid, SpellID spellid) override;
+    void         SetFollowTarget(CBaseEntity* PTarget, FollowType followType);
+    void         ClearFollowTarget();
 
 protected:
     virtual bool TryDeaggro();
@@ -76,6 +86,10 @@ protected:
 
     CBattleEntity* PTarget{ nullptr };
 
+    static constexpr float FollowRoamDistance{ 4.0f };
+    static constexpr float FollowRunAwayDistance{ 4.0f };
+    CBaseEntity*           PFollowTarget{ nullptr };
+
 private:
     CMobEntity* const PMob;
 
@@ -88,6 +102,7 @@ private:
     time_point m_NeutralTime;
     time_point m_WaitTime;
     time_point m_mobHealTime;
+    FollowType m_followType;
 
     bool       m_firstSpell{ true };
     time_point m_LastRoamScript{ time_point::min() };
