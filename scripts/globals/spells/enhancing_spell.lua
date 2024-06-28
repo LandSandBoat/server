@@ -187,8 +187,10 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
     ------------------------------------------------------------
 
     -- Aquaveil
-    if spellEffect == xi.effect.AQUAVEIL then
-        if skillLevel >= 200 then -- Cutoff point is estimated. https://www.bg-wiki.com/bg/Aquaveil
+    if spellEffect == xi.effect.AQUAVEIL then -- Skill Breakpoints per BG Wiki (2024-06-27): https://www.bg-wiki.com/bg/Aquaveil
+        if skillLevel > 500 then -- 501+ Skill = 3 Interruptions
+            basePower = basePower + 2
+        elseif skillLevel > 300 then -- 301+ Skill = 2 Interruptions
             basePower = basePower + 1
         end
 
@@ -301,8 +303,12 @@ xi.spells.enhancing.calculateEnhancingFinalPower = function(caster, target, spel
 
     -- TODO: Find a way to replace big if/else chain and still make it look good.
 
+    -- Aquaveil
+    if spellEffect == xi.effect.AQUAVEIL then
+        finalPower = finalPower + caster:getMod(xi.mod.AQUAVEIL_COUNT) -- Aquaveil+ from gear applies during accession (https://www.bg-wiki.com/ffxi/Aquaveil)
+
     -- Bar-Element
-    if spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
+    elseif spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
         finalPower = finalPower + caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_AMOUNT) + caster:getJobPointLevel(xi.jp.BAR_SPELL_EFFECT) * 2
 
     -- Bar-Status
