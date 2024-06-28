@@ -1020,7 +1020,7 @@ namespace charutils
                             "WHERE charid = (?)";
 
         auto rset = db::preparedStmt(Query, PChar->id);
-        if (rset && rset->rowsCount())
+        if (rset)
         {
             // equipSlotData[equipSlotId] = { slotId, containerId }
             std::unordered_map<uint8, std::pair<uint8, uint8>> equipSlotData;
@@ -1387,7 +1387,7 @@ namespace charutils
             {
                 if (PItem->getID() == ItemID)
                 {
-                    itemCount++;
+                    itemCount += PItem->getQuantity();
                 }
             });
             // clang-format on
@@ -1880,7 +1880,8 @@ namespace charutils
 
         if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
             (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
-            (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
+            (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])) ||
+            !PItem->isEquippableByRace(PChar->look.race))
         {
             return false;
         }
@@ -5377,7 +5378,7 @@ namespace charutils
 
         _sql->Query(Query, "chars", "gmlevel =", PChar->m_GMlevel, PChar->id);
 
-        _sql->Query(Query, "char_flags", "gmModeEnabled =", PChar->m_GMlevel >= 3 ? 1 : 0, PChar->id);
+        _sql->Query(Query, "char_flags", "gmModeEnabled =", PChar->visibleGmLevel >= 3 ? 1 : 0, PChar->id);
     }
 
     void SaveMentorFlag(CCharEntity* PChar)

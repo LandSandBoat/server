@@ -8,6 +8,11 @@ local ID = zones[xi.zone.DEN_OF_RANCOR]
 -----------------------------------
 local entity = {}
 
+local bistrePHTable =
+{
+    [ID.mob.BISTRE_HEARTED_MALBERRY - 23] = ID.mob.BISTRE_HEARTED_MALBERRY,
+}
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 798, 1, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 799, 2, xi.regime.type.GROUNDS)
@@ -15,7 +20,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.BISTRE_HEARTED_MALBERRY_PH, 10, 3600) -- 1 hour
+    xi.mob.phOnDespawn(mob, bistrePHTable, 10, 3600) -- 1 hour
 end
 
 return entity

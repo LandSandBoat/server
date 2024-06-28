@@ -71,8 +71,6 @@ public:
     void setRecord(std::string const& name, uint32 seconds);
     void setStatus(uint8 status);
     void setLocalVar(std::string const& name, uint64_t value);
-    bool loadMobs();
-    bool spawnLoot(sol::object const& PEntityObj);
     auto insertEntity(uint16 targid, bool ally, bool inBattlefield) -> std::optional<CLuaBaseEntity>;
     bool cleanup(bool cleanup);
     void win();

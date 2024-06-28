@@ -18,57 +18,43 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7024,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7025,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7045,  -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7083,  -- Tallying conquest results...
-        BEASTMEN_BANNER               = 7164,  -- There is a beastmen's banner.
-        FISHING_MESSAGE_OFFSET        = 7242,  -- You can't fish here.
-        DIG_THROW_AWAY                = 7255,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
-        FIND_NOTHING                  = 7257,  -- You dig and you dig, but find nothing.
-        AMK_DIGGING_OFFSET            = 7323,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
-        NOTHING_FOUND                 = 7500,  -- You find nothing.
-        CONQUEST                      = 7912,  -- You've earned conquest points!
-        ITEMS_ITEMS_LA_LA             = 8286,  -- You can hear a strange voice... Items, items, la la la la la
-        GOBLIN_SLIPPED_AWAY           = 8292,  -- The Goblin slipped away when you were not looking...
-        GARRISON_BASE                 = 8302,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
-        PLAYER_OBTAINS_ITEM           = 8349,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 8350,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 8351,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 8352,  -- You already possess that temporary item.
-        NO_COMBINATION                = 8357,  -- You were unable to enter a combination.
-        VOIDWALKER_DESPAWN            = 8388,  -- The monster fades before your eyes, a look of disappointment on its face.
-        UNITY_WANTED_BATTLE_INTERACT  = 8419,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 10597, -- New training regime registered!
-        VOIDWALKER_NO_MOB             = 11716, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR        = 11717, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT           = 11718, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB          = 11719, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1       = 11721, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2       = 11722, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI           = 11723, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OBTAIN_KI          = 11724, -- Obtained key item: <keyitem>!
-        COMMON_SENSE_SURVIVAL         = 12626, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CONQUEST_BASE                 = 7086,  -- Tallying conquest results...
+        BEASTMEN_BANNER               = 7167,  -- There is a beastmen's banner.
+        FISHING_MESSAGE_OFFSET        = 7245,  -- You can't fish here.
+        DIG_THROW_AWAY                = 7258,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
+        FIND_NOTHING                  = 7260,  -- You dig and you dig, but find nothing.
+        AMK_DIGGING_OFFSET            = 7326,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
+        NOTHING_FOUND                 = 7503,  -- You find nothing.
+        CONQUEST                      = 7915,  -- You've earned conquest points!
+        ITEMS_ITEMS_LA_LA             = 8289,  -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY           = 8295,  -- The Goblin slipped away when you were not looking...
+        GARRISON_BASE                 = 8305,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        PLAYER_OBTAINS_ITEM           = 8352,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 8353,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 8354,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 8355,  -- You already possess that temporary item.
+        NO_COMBINATION                = 8360,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN            = 8391,  -- The monster fades before your eyes, a look of disappointment on its face.
+        UNITY_WANTED_BATTLE_INTERACT  = 8422,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 10600, -- New training regime registered!
+        VOIDWALKER_NO_MOB             = 11719, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR        = 11720, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT           = 11721, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB          = 11722, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1       = 11724, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2       = 11725, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI           = 11726, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI          = 11727, -- Obtained key item: <keyitem>!
+        COMMON_SENSE_SURVIVAL         = 12629, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
 
     mob =
     {
-        NAA_ZEKU_THE_UNWAITING_PH =
-        {
-            [17264763] = 17264768,
-        },
-
-        PATRIPATAN_PH =
-        {
-            [17264967] = 17264972, -- 551.767, -32.570, 590.205
-            [17264968] = 17264972, -- 646.199, -24.483, 644.477
-            [17264969] = 17264972, -- 535.318, -32.179, 602.055
-        },
-
-        DAGGERCLAW_DRACOS_PH =
-        {
-            [17264815] = 17264818, -- 583.725 -15.652 -388.159
-        },
-
-        WARAXE_BEAK         = 17264828,
-        COO_KEJA_THE_UNSEEN = 17264946,
+        NAA_ZEKU_THE_UNWAITING = GetFirstID('Naa_Zeku_the_Unwaiting'),
+        PATRIPATAN             = GetFirstID('Patripatan'),
+        DAGGERCLAW_DRACOS      = GetFirstID('Daggerclaw_Dracos'),
+        WARAXE_BEAK            = GetFirstID('Waraxe_Beak'),
+        COO_KEJA_THE_UNSEEN    = GetFirstID('Coo_Keja_the_Unseen'),
 
         VOIDWALKER =
         {

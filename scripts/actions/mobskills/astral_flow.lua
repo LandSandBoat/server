@@ -6,6 +6,8 @@ local mobskillObject = {}
 local avatarOffsets =
 {
     [17444883] = 3, -- Vermilion-eared Noberry
+    [17444890] = 3, -- Vermilion-eared Noberry
+    [17444897] = 3, -- Vermilion-eared Noberry
     [17453078] = 3, -- Duke Dantalian
     [17453085] = 3, -- Duke Dantalian
     [17453092] = 3, -- Duke Dantalian

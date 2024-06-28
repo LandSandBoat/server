@@ -236,6 +236,48 @@ bool CLuaItem::isShield()
     return false;
 }
 
+uint8 CLuaItem::getShieldSize()
+{
+    if (CItemEquipment* PArmor = dynamic_cast<CItemEquipment*>(m_PLuaItem))
+    {
+        if (PArmor->IsShield())
+        {
+            return PArmor->getShieldSize();
+        }
+        else
+        {
+            ShowError("CLuaItem::getShieldSize - not a valid Shield.");
+        }
+    }
+    else
+    {
+        ShowError("CLuaItem::getShieldSize - not a valid Armor.");
+    }
+
+    return 0;
+}
+
+uint8 CLuaItem::getShieldAbsorptionRate()
+{
+    if (CItemEquipment* PArmor = dynamic_cast<CItemEquipment*>(m_PLuaItem))
+    {
+        if (PArmor->IsShield())
+        {
+            return PArmor->getShieldAbsorption();
+        }
+        else
+        {
+            ShowError("CLuaItem::getShieldSize - not a valid Shield.");
+        }
+    }
+    else
+    {
+        ShowError("CLuaItem::getShieldSize - not a valid Armor.");
+    }
+
+    return 0;
+}
+
 auto CLuaItem::getSignature() -> std::string
 {
     char signature[DecodeStringLength] = {};
@@ -250,6 +292,16 @@ auto CLuaItem::getSignature() -> std::string
     }
 
     return signature;
+}
+
+uint8 CLuaItem::getCurrentCharges()
+{
+    if (auto* PUsableItem = dynamic_cast<CItemUsable*>(m_PLuaItem))
+    {
+        return PUsableItem->getCurrentCharges();
+    }
+
+    return 0;
 }
 
 uint8 CLuaItem::getAppraisalID()
@@ -350,9 +402,12 @@ void CLuaItem::Register()
     SOL_REGISTER("isTwoHanded", CLuaItem::isTwoHanded);
     SOL_REGISTER("isHandToHand", CLuaItem::isHandToHand);
     SOL_REGISTER("isShield", CLuaItem::isShield);
+    SOL_REGISTER("getShieldSize", CLuaItem::getShieldSize);
+    SOL_REGISTER("getShieldAbsorptionRate", CLuaItem::getShieldAbsorptionRate);
     SOL_REGISTER("getSignature", CLuaItem::getSignature);
     SOL_REGISTER("getAppraisalID", CLuaItem::getAppraisalID);
     SOL_REGISTER("setAppraisalID", CLuaItem::setAppraisalID);
+    SOL_REGISTER("getCurrentCharges", CLuaItem::getCurrentCharges);
     SOL_REGISTER("isInstalled", CLuaItem::isInstalled);
     SOL_REGISTER("setSoulPlateData", CLuaItem::setSoulPlateData);
     SOL_REGISTER("getSoulPlateData", CLuaItem::getSoulPlateData);

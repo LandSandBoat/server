@@ -5,15 +5,16 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill, master, action)
+abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
     local returnEffect = xi.effect.NONE
     local duration = 30
     local ele = xi.element.LIGHT
     local bonus = pet:getStat(xi.mod.CHR) - target:getStat(xi.mod.CHR) - 10
-    if master ~= nil and master:isPC() then
+    if summoner ~= nil and summoner:isPC() then
         bonus = bonus + xi.summon.getSummoningSkillOverCap(pet)
     end
 
@@ -23,7 +24,7 @@ abilityObject.onPetAbility = function(target, pet, skill, master, action)
     -- TL;DR base 30s silence and 10s amnesia (also amnesia is fire element)
     if resist >= 0.5 then --Do it!
         if target:addStatusEffect(xi.effect.SILENCE, 1, 0, duration * resist) then
-            skill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
+            petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
             local resist2 = applyResistanceAbility(pet, target, xi.element.FIRE, xi.skill.ENFEEBLING_MAGIC, bonus)
             if
                 resist2 >= 0.5 and
@@ -34,10 +35,10 @@ abilityObject.onPetAbility = function(target, pet, skill, master, action)
                 returnEffect = xi.effect.SILENCE
             end
         else
-            skill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
+            petskill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
         end
     else
-        skill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
+        petskill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
     end
 
     return returnEffect

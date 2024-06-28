@@ -21,8 +21,6 @@ entity.onTrigger = function(player, npc)
     if guardian ~= nil and guardian:getHP() > 0 and guardian:getTarget() == nil then
         guardian:updateClaim(player)
     end
-
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

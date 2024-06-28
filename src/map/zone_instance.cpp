@@ -25,6 +25,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "entities/charentity.h"
 #include "lua/luautils.h"
 #include "status_effect_container.h"
+#include "utils/charutils.h"
 #include "utils/zoneutils.h"
 
 CZoneInstance::CZoneInstance(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
@@ -249,19 +250,30 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
                         .c_str());
 
         // instance no longer exists: put them outside (at exit)
-        PChar->loc.prevzone = GetID();
-
         uint16 zoneid = luautils::OnInstanceLoadFailed(this);
 
         CZone* PZone = zoneutils::GetZone(zoneid);
+        // At this stage, can only send the player to a zone on this map server
+        // reset position in the case of a zone crash while in an instance
+        PChar->loc.p.x = 0;
+        PChar->loc.p.y = 0;
+        PChar->loc.p.z = 0;
         if (PZone)
         {
             PZone->IncreaseZoneCounter(PChar);
         }
         else
         {
-            zoneutils::GetZone(PChar->loc.prevzone)->IncreaseZoneCounter(PChar);
+            // if we can't get the instance failed destination zone, get their previous zone
+            zoneid = PChar->loc.prevzone;
+            zoneutils::GetZone(zoneid)->IncreaseZoneCounter(PChar);
         }
+
+        // They are properly sent to zone, but bypassed the onZoneIn position fixup, do that now
+        PChar->loc.prevzone    = GetID();
+        PChar->loc.destination = zoneid;
+        luautils::OnZoneIn(PChar);
+        charutils::SaveCharPosition(PChar);
     }
 }
 

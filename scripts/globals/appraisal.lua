@@ -708,7 +708,7 @@ xi.appraisal.appraisalItems =
             items =
             {
                 { 95, xi.item.LEATHER_HIGHBOOTS },
-                {  5, xi.item.LEAPING_BOOTS     },
+                {  5, xi.item.BOUNDING_BOOTS    },
             },
         },
 

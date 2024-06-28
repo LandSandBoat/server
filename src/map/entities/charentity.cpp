@@ -464,6 +464,7 @@ void CCharEntity::setPetZoningInfo()
     {
         return;
     }
+    petZoningInfo.petID = PPetEntity->m_PetID;
 
     switch (PPetEntity->getPetType())
     {
@@ -600,6 +601,18 @@ int8 CCharEntity::getShieldSize()
     }
 
     return PItem->getShieldSize();
+}
+
+int16 CCharEntity::getShieldDefense()
+{
+    CItemEquipment* PItem = getEquip(SLOT_SUB);
+
+    if (PItem && PItem->IsShield())
+    {
+        return PItem->getModifier(Mod::DEF);
+    }
+
+    return 0;
 }
 
 bool CCharEntity::hasBazaar()
@@ -1288,11 +1301,11 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
         // TODO: revise parameters
         if (PWeaponSkill->isAoE())
         {
-            PAI->TargetFind->findWithinArea(PBattleTarget, AOE_RADIUS::TARGET, 10);
+            PAI->TargetFind->findWithinArea(PBattleTarget, AOE_RADIUS::TARGET, 10, FINDFLAGS_NONE, TARGET_NONE);
         }
         else
         {
-            PAI->TargetFind->findSingleTarget(PBattleTarget);
+            PAI->TargetFind->findSingleTarget(PBattleTarget, FINDFLAGS_NONE, TARGET_NONE);
         }
 
         // Assumed, it's very difficult to produce this due to WS being nearly instant
@@ -1468,7 +1481,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
     PAI->TargetFind->reset();
-    PAI->TargetFind->findSingleTarget(PTarget, findFlags);
+    PAI->TargetFind->findSingleTarget(PTarget, findFlags, PAbility->getValidTarget());
 
     // Check if target is untargetable
     if (PAI->TargetFind->m_targets.size() == 0)
@@ -1533,14 +1546,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 action.recast = 0;
             }
         }
-        else if (PAbility->getID() == ABILITY_DEACTIVATE && PAutomaton && PAutomaton->health.hp == PAutomaton->GetMaxHP())
-        {
-            CAbility* PActivateAbility = ability::GetAbility(ABILITY_ACTIVATE);
-            if (PActivateAbility)
-            {
-                PRecastContainer->Del(RECAST_ABILITY, PActivateAbility->getRecastId());
-            }
-        }
         else if (PAbility->getRecastId() == 173 || PAbility->getRecastId() == 174) // BP rage, BP ward
         {
             uint16 favorReduction          = 0;
@@ -1555,15 +1560,13 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
 
             int16 bloodPactDelayReduction = favorReduction + std::min<int16>(bloodPact_I_Reduction + bloodPact_II_Reduction + bloodPact_III_Reduction, 30);
-            action.recast                 = static_cast<uint16>(std::max<int16>(0, action.recast - bloodPactDelayReduction));
 
-            if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_PERFECT_DEFENSE) // old mobskill impl of Apogee. As things move to petskill this will need to be obsoleted. scripts/job_utils/summoner.lua handles apogee retail-like.
-            {
-                if (this->StatusEffectContainer->HasStatusEffect(EFFECT_APOGEE))
-                {
-                    action.recast = 0;
-                }
-            }
+            // Localvar will set the BP ability timer when the move consumes MP
+            // The delay is snapshot when the player uses the ability: https://www.bg-wiki.com/ffxi/Blood_Pact_Ability_Delay
+            this->SetLocalVar("bpRecastTime", static_cast<uint16>(std::max<int16>(0, action.recast - bloodPactDelayReduction)));
+
+            // Recast is actually triggered when the bp goes off (no recast packet at all on using a bp and the target moving out of range of the pet)
+            action.recast = 0;
         }
 
         // remove invisible if aggressive
@@ -1649,6 +1652,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                     {
                         mpCost *= 1.5f;
                         StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_BLOODPACT);
+                        this->SetLocalVar("bpRecastTime", 0);
                     }
 
                     // Blood Boon (does not affect Astral Flow BPs)
@@ -1662,6 +1666,10 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                     }
 
                     addMP((int32)-mpCost);
+                    if (this->GetLocalVar("bpRecastTime") > 0) // This will go away when all smn petskills are handled via jobutils/summoner.lua
+                    {
+                        action.recast = this->GetLocalVar("bpRecastTime");
+                    }
 
                     if (PAbility->getValidTarget() == TARGET_SELF)
                     {
@@ -1704,7 +1712,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
             float distance = PAbility->getRange();
 
-            PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, distance, findFlags);
+            PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, distance, findFlags, PAbility->getValidTarget());
 
             uint16 prevMsg = 0;
             for (auto&& PTargetFound : PAI->TargetFind->m_targets)
@@ -2440,6 +2448,21 @@ int32 CCharEntity::GetTimeCreated()
     }
 
     return 0;
+}
+
+uint8 CCharEntity::getHighestJobLevel()
+{
+    uint8 maxJobLevel = 0;
+
+    for (uint8 jobId = 0; jobId < MAX_JOBTYPE; jobId++)
+    {
+        if (jobs.job[jobId] > maxJobLevel)
+        {
+            maxJobLevel = jobs.job[jobId];
+        }
+    }
+
+    return maxJobLevel;
 }
 
 bool CCharEntity::hasMoghancement(uint16 moghancementID) const

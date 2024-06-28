@@ -136,6 +136,28 @@ ExecStart=$PPWD/xi_search
 [Install]
 WantedBy=xi.service
 """
+
+SYSTEMD_WORLD="""
+[Unit]
+Description=xi World Server
+Wants=network.target
+StartLimitIntervalSec=120
+StartLimitBurst=5
+PartOf=xi.service
+After=xi.service
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+User=$XI_USER
+Group=$XI_USER
+WorkingDirectory=$PPWD
+ExecStart=$PPWD/xi_world
+
+[Install]
+WantedBy=xi.service
+"""
 # Create services and enable child services
 usermod -aG $XI_USER $SUDO_USER
 chown -R $XI_USER:$XI_USER $PPWD
@@ -144,8 +166,9 @@ echo "$SYSTEMD_xi" > /etc/systemd/system/xi.service
 echo "$SYSTEMD_GAME" > /etc/systemd/system/xi_map.service
 echo "$SYSTEMD_CONNECT" > /etc/systemd/system/xi_connect.service
 echo "$SYSTEMD_SEARCH" > /etc/systemd/system/xi_search.service
+echo "$SYSTEMD_WORLD" > /etc/systemd/system/xi_world.service
 chmod 755 /etc/systemd/system/xi*
 systemctl daemon-reload
-systemctl enable xi_map xi_connect xi_search
+systemctl enable xi_map xi_connect xi_search xi_world
 echo "Services installed!"
 echo "Start with 'systemctl start xi', enable start on boot with 'systemctl enable xi'."

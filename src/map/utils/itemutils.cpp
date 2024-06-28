@@ -332,18 +332,6 @@ namespace itemutils
         return nullptr;
     }
 
-    LootList_t* GetLootList(uint16 LootID)
-    {
-        if (LootID < MAX_LOOTID)
-        {
-            // False positive: this is LootList_t*, so it's OK
-            // cppcheck-suppress CastIntegerToAddressAtReturn
-            return g_pLootList[LootID];
-        }
-        ShowWarning("LootID %u too big", LootID);
-        return nullptr;
-    }
-
     /************************************************************************
      *                                                                       *
      *  Load the items                                                       *

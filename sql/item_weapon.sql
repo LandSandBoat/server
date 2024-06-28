@@ -2384,13 +2384,13 @@ INSERT INTO `item_weapon` VALUES (18762,'custodes',1,0,0,0,0,4,1,528,4,0);
 INSERT INTO `item_weapon` VALUES (18763,'trainee_scissors',1,0,0,0,0,4,1,546,1,0);
 INSERT INTO `item_weapon` VALUES (18764,'oberons_knuckles',1,0,0,0,0,4,1,576,18,0);
 INSERT INTO `item_weapon` VALUES (18765,'oberons_sainti',1,0,0,0,0,4,1,531,15,0);
-INSERT INTO `item_weapon` VALUES (18766,'tyro_katars',1,0,0,0,0,4,1,564,6,0);
+INSERT INTO `item_weapon` VALUES (18766,'tyro_katars',1,0,0,0,0,1,1,564,6,0);
 INSERT INTO `item_weapon` VALUES (18767,'birdbanes',1,0,0,0,0,1,1,564,14,0);
 INSERT INTO `item_weapon` VALUES (18768,'poppet_katars',1,0,0,0,0,4,1,564,17,0);
 INSERT INTO `item_weapon` VALUES (18769,'severus_claws',1,0,0,0,0,4,1,541,15,0);
 INSERT INTO `item_weapon` VALUES (18770,'pygme_sainti',1,0,0,0,0,4,1,531,16,0);
 INSERT INTO `item_weapon` VALUES (18771,'lyft_sainti',1,0,0,0,0,4,1,531,18,0);
-INSERT INTO `item_weapon` VALUES (18772,'tyro_katars_+1',1,0,0,0,0,4,1,555,7,0);
+INSERT INTO `item_weapon` VALUES (18772,'tyro_katars_+1',1,0,0,0,0,1,1,555,7,0);
 INSERT INTO `item_weapon` VALUES (18773,'severus_claws_+1',1,0,0,0,0,4,1,536,16,0);
 INSERT INTO `item_weapon` VALUES (18774,'savate_fists',1,0,0,0,0,4,1,531,19,0);
 INSERT INTO `item_weapon` VALUES (18775,'savate_fists_+1',1,0,0,0,0,4,1,529,20,0);
@@ -4734,6 +4734,7 @@ INSERT INTO `item_weapon` VALUES (22065,'aern_staff',12,0,0,0,0,3,1,366,1,0);   
 INSERT INTO `item_weapon` VALUES (22066,'aern_staff_ii',12,0,0,0,0,3,1,366,1,0);          -- DMG:1 Delay:366
 INSERT INTO `item_weapon` VALUES (22068,'savage._pole',12,0,0,0,0,3,1,366,1,0);           -- DMG:1 Delay:366
 INSERT INTO `item_weapon` VALUES (22069,'hapy_staff',12,0,0,0,0,3,1,366,1,0);             -- DMG:1 Delay:366
+INSERT INTO `item_weapon` VALUES (22070,'ranine_staff',12,0,0,0,0,3,1,366,1,0);           -- DMG:1 Delay:366
 INSERT INTO `item_weapon` VALUES (22072,'lamia_staff',12,0,0,0,0,3,1,366,1,0);            -- DMG:1 Delay:366
 INSERT INTO `item_weapon` VALUES (22074,'arasy_staff',12,0,242,242,228,3,1,366,188,0);
 INSERT INTO `item_weapon` VALUES (22075,'arasy_staff_+1',12,0,242,242,228,3,1,356,189,0);

@@ -8,16 +8,21 @@ mixins = { require('scripts/mixins/nyzul_boss_drops') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    -- Set Immunities.
+    -- mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    -- mob:addImmunity(xi.immunity.DARK_SLEEP)
+    -- mob:addImmunity(xi.immunity.TERROR)
+
+    -- Set Mob Modifiers.
     -- mob:setMobMod(xi.mobMod.NO_MP, 1)
 end
 
 entity.onMobSpawn = function(mob)
-    -- mob:addImmunity(xi.immunity.SLEEP)
-    -- mob:addImmunity(xi.immunity.TERROR)
     mob:addMod(xi.mod.ATT, 150)
     mob:addMod(xi.mod.DEF, 90)
     mob:setMod(xi.mod.MAIN_DMG_RATING, 33)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
+
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 15)
 end
 

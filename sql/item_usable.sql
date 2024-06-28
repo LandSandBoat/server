@@ -1980,6 +1980,7 @@ INSERT INTO `item_usable` VALUES (10293,'chocobo_shirt',1,8,0,0,1,30,72000,0);
 INSERT INTO `item_usable` VALUES (10383,'dream_mittens_+1',1,6,24,0,1,30,7200,0);
 INSERT INTO `item_usable` VALUES (10796,'decennial_ring',1,3,76,0,10,15,3600,0);
 INSERT INTO `item_usable` VALUES (10812,'chocobo_shield_+1',1,8,0,0,1,30,86400,0);
+INSERT INTO `item_usable` VALUES (10848,'quadav_belt',1,1,0,0,1,30,3600,0);
 INSERT INTO `item_usable` VALUES (10875,'snowman_cap',1,1,0,0,1,30,3600,0);
 INSERT INTO `item_usable` VALUES (11002,'dragon_tank',1,1,55,0,5,30,60,0);
 INSERT INTO `item_usable` VALUES (11273,'custom_gilet_+1',1,8,0,0,1,30,72000,0);
@@ -1998,7 +1999,7 @@ INSERT INTO `item_usable` VALUES (11491,'snow_bunny_hat_+1',1,1,0,0,1,30,3600,0)
 INSERT INTO `item_usable` VALUES (11500,'chocobo_beret',1,1,0,0,1,30,3600,0);
 INSERT INTO `item_usable` VALUES (11538,'nexus_cape',1,8,79,0,1,30,72000,0);
 INSERT INTO `item_usable` VALUES (11666,'novennial_ring',1,3,76,0,10,15,3600,0);
-INSERT INTO `item_usable` VALUES (11788,'jesters_hat',1,3,0,0,1,10,600000,0);
+INSERT INTO `item_usable` VALUES (11788,'jesters_hat',1,3,0,0,1,30,600,0);
 INSERT INTO `item_usable` VALUES (11811,'destrier_beret',1,4,0,0,1,30,3600,0);
 INSERT INTO `item_usable` VALUES (11861,'hikogami_yukata',1,2,0,0,1,30,86400,0);
 INSERT INTO `item_usable` VALUES (11862,'himegami_yukata',1,2,0,0,1,30,86400,0);

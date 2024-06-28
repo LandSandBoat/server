@@ -143,7 +143,7 @@ mission.sections =
                 [155] = function(player, csid, option, npc)
                     -- This event only happens once since there is no sealing component.
                     mission:setVar(player, 'Status', 1)
-                    xi.cop.helpers.sendToPromyvionZone(player:getLocaLVar('toPromyvion'))
+                    xi.cop.helpers.sendToPromyvionZone(player:getLocalVar('toPromyvion'))
                 end,
             },
         },

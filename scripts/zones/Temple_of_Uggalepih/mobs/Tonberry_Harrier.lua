@@ -8,6 +8,11 @@ mixins = { require('scripts/mixins/families/tonberry') }
 -----------------------------------
 local entity = {}
 
+local terberryPHTable =
+{
+    [ID.mob.SOZU_TERBERRY - 3] = ID.mob.SOZU_TERBERRY, -- -122 0.028 -13
+}
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 790, 1, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 791, 1, xi.regime.type.GROUNDS)
@@ -18,7 +23,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.SOZU_TERBERRY_PH, 10, 3600) -- 1 hour
+    xi.mob.phOnDespawn(mob, terberryPHTable, 10, 3600) -- 1 hour
 end
 
 return entity

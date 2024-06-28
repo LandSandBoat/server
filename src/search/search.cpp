@@ -597,14 +597,26 @@ std::string searchTypeToString(uint8 type)
 
 void TCPComm(SOCKET socket)
 {
+    char               clientIP[INET_ADDRSTRLEN];
+    struct sockaddr_in addr;
+    socklen_t          addr_len = sizeof(addr);
+
+    if (getpeername(socket, (struct sockaddr*)&addr, &addr_len) == -1)
+    {
+        ShowError("getpeername failed with error: %d", errno);
+        return;
+    }
+
+    inet_ntop(AF_INET, &(addr.sin_addr), clientIP, INET_ADDRSTRLEN);
+
     CTCPRequestPacket PTCPRequest(&socket);
     if (!PTCPRequest.receiveFromSocket())
     {
         return;
     }
 
-    ShowInfo("Search Request: %s (%u), size: %u",
-             searchTypeToString(PTCPRequest.getPacketType()), PTCPRequest.getPacketType(), PTCPRequest.getSize());
+    ShowInfo("Search Request: %s (%u), size: %u, ip: %s",
+             searchTypeToString(PTCPRequest.getPacketType()), PTCPRequest.getPacketType(), PTCPRequest.getSize(), clientIP);
 
     switch (PTCPRequest.getPacketType())
     {

@@ -57,6 +57,7 @@ disallowed_numeric_parameters = {
     "addUsedItem"             : [ 0 ],
     "canLearnSpell"           : [ 0 ],
     "delItem"                 : [ 0 ],
+    "delContainerItems"       : [ 0 ],
     "delKeyItem"              : [ 0 ],
     "delSpell"                : [ 0 ],
     "delStatusEffect"         : [ 0 ],
@@ -118,19 +119,19 @@ class LuaStyleCheck:
         # [ ]{0,} : Any number of spaces
         # \n      : newline character
 
-        for _ in re.finditer("[ ]{0,}=[ ]{0,}\{[ ]{0,}\n", line):
+        for _ in re.finditer(r"[ ]{0,}=[ ]{0,}\{[ ]{0,}\n", line):
             self.error("Incorrectly defined table")
 
         # \{         : Opening curly brace
         # [^ \n\}] : Match single characters in list: NOT space or NOT newline or NOT closing curly brace
 
-        for _ in re.finditer("\{[^ \n\}]", line):
+        for _ in re.finditer(r"\{[^ \n\}]", line):
             self.error("Table opened without an appropriate following space or newline")
 
         # [^ \n\{] : Match single characters in list: NOT space or NOT newline or NOT opening curly brace
         # \}         : Closing curly brace
 
-        for _ in re.finditer("[^ \n\{]\}", line):
+        for _ in re.finditer(r"[^ \n\{]\}", line):
             self.error("Table closed without an appropriate preceding space or newline")
 
     def check_parameter_padding(self, line):
@@ -142,7 +143,7 @@ class LuaStyleCheck:
         """
         # ,[^ \n] : Any comma that does not have space or newline following
 
-        for _ in re.finditer(",[^ \n]", line):
+        for _ in re.finditer(r",[^ \n]", line):
             self.error("Multiple parameters used without an appropriate following space or newline")
 
     def check_conditional_padding(self, line):
@@ -150,7 +151,7 @@ class LuaStyleCheck:
 
         # lstrip current line to prevent false-positives from indentation
         code_line = line.lstrip()
-        if re.search("\s{2,}(and|or)(\s{1,}|$)|\s{1,}(and|or)\s{2,}", code_line):
+        if re.search(r"\s{2,}(and|or)(\s{1,}|$)|\s{1,}(and|or)\s{2,}", code_line):
             self.error("Multiple spaces detected around logical operator.")
 
     def check_semicolon(self, line):
@@ -160,12 +161,12 @@ class LuaStyleCheck:
         """
 
         # Ignore strings in line
-        quote_regex = regex.compile("\"(([^\"\"]+)|(?R))*+\"|\'(([^\'\']+)|(?R))*+\'", re.S)
+        quote_regex = regex.compile(r"\"(([^\"\"]+)|(?R))*+\"|\'(([^\'\']+)|(?R))*+\'", re.S)
         removed_quote_str = regex.sub(quote_regex, "", line)
 
         # ; : Any line that contains a semicolon.
 
-        for _ in re.finditer(";", removed_quote_str):
+        for _ in re.finditer(r";", removed_quote_str):
             self.error("Semicolon detected in line.")
 
     def check_variable_names(self, line):
@@ -178,7 +179,7 @@ class LuaStyleCheck:
         # [^(ID)])  : A token that is NOT 'ID'
         # (?=[A-Z]) : A token that starts with a capital letter
 
-        for match in re.finditer("local (?=[^(ID)])(?=[A-Z]){1,}", line):
+        for match in re.finditer(r"local (?=[^(ID)])(?=[A-Z]){1,}", line):
             self.error("Capitalised local name")
 
         if "local " in line and " =" in line:
@@ -206,14 +207,14 @@ class LuaStyleCheck:
         """
         # [^ =~\<\>][\=\+\*\~\/\>\<]|[\=\+\*\/\>\<][^ =\n] : Require space before and after >, <, >=, <=, ==, +, *, ~=, / operators or comparators
 
-        for _ in re.finditer("[^ =~\<\>][\=\+\*\~\/\>\<]|[\=\+\*\/\>\<][^ =\n]", line):
+        for _ in re.finditer(r"[^ =~\<\>][\=\+\*\~\/\>\<]|[\=\+\*\/\>\<][^ =\n]", line):
             self.error("Operator or comparator without padding detected at end of line")
 
         # For now, ignore all content in single-line tables to allow for formatting
         stripped_line = line.lstrip()
-        brace_regex = regex.compile("\{(([^\}\{]+)|(?R))*+\}", re.S)
+        brace_regex = regex.compile(r"\{(([^\}\{]+)|(?R))*+\}", re.S)
         stripped_line = regex.sub(brace_regex, "", stripped_line)
-        for _ in re.finditer("\s{2,}(>=|<=|==|~=|\+|\*|%|>|<|\^)|(>=|<=|==|~=|\+|\*|%|>|<|\^)\s{2,}", stripped_line):
+        for _ in re.finditer(r"\s{2,}(>=|<=|==|~=|\+|\*|%|>|<|\^)|(>=|<=|==|~=|\+|\*|%|>|<|\^)\s{2,}", stripped_line):
             self.error("Excessive padding detected around operator or comparator.")
 
     def check_parentheses_padding(self, line):
@@ -223,7 +224,7 @@ class LuaStyleCheck:
         See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-no-excess-whitespace
         """
 
-        if len(re.findall("\([ ]| [\)]", line)) > 0:
+        if len(re.findall(r"\([ ]| [\)]", line)) > 0:
             if not line.lstrip(' ')[0] == '(' and not line.lstrip(' ')[0] == ')': # Ignore large blocks ending or opening
                 self.error("No excess whitespace inside of parentheses or solely for alignment.")
 
@@ -283,7 +284,7 @@ class LuaStyleCheck:
         See: TBD
         """
 
-        if re.search("function\s{1,}\(", line):
+        if re.search(r"function\s{1,}\(", line):
             self.error("Padding detected between function and opening parenthesis")
 
     def check_multiline_condition_format(self, line):
@@ -293,7 +294,7 @@ class LuaStyleCheck:
         See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-formatting-conditional-blocks
         """
 
-        stripped_line = re.sub("\".*?\"|'.*?'", "", line) # Ignore data in quotes
+        stripped_line = re.sub(r"\".*?\"|'.*?'", "", line) # Ignore data in quotes
         if contains_word('if')(stripped_line) or contains_word('elseif')(stripped_line):
             condition_start = stripped_line.replace('elseif','').replace('if','').strip()
             if not 'then' in condition_start and condition_start != '':
@@ -321,9 +322,11 @@ class LuaStyleCheck:
                         self.error(f"Use of deprecated/unnecessary require: {deprecated_str}. This should be removed")
 
     def check_invalid_enum(self, line):
-            for invalid_enum in invalid_enums:
-                if invalid_enum in line:
-                    self.error(f"Potential invalid enum reference used: {invalid_enum}.  Did you mean the one without an s?")
+        for invalid_enum in invalid_enums:
+            if invalid_enum in line:
+                self.error(
+                    f"Potential invalid enum reference used: {invalid_enum}.  Did you mean the one without an s?"
+                )
 
     def check_function_parameters(self, line):
         # Iterate through all entries in the disallowed table
@@ -338,7 +341,6 @@ class LuaStyleCheck:
                 for position in param_locations:
                     if position < len(parameter_list) and parameter_list[position].strip().isnumeric():
                         self.error(f"Magic Number is not allowed at this location ({position}).")
-
 
     def run_style_check(self):
         if self.filename is None:
@@ -357,7 +359,7 @@ class LuaStyleCheck:
                 self.counter = self.counter + 1
 
                 # Ignore Block Comments
-                if "--[[" in line:
+                if "[[" in line:
                     in_block_comment = True
 
                 if "]]" in line:
@@ -367,12 +369,12 @@ class LuaStyleCheck:
                     continue
 
                 comment_header = line.rstrip("\n")
-                if re.search("^-+$", comment_header) and len(comment_header) > 2 and len(comment_header) != 35:
+                if re.search(r"^-+$", comment_header) and len(comment_header) > 2 and len(comment_header) != 35:
                     # For now, ignore empty comments with only `--`
                     self.error("Standard comment block lines of '-' should be 35 characters.")
 
                 # Remove in-line comments
-                code_line = re.sub("(?=--)(.*?)(?=\r\n|\n)", "", line).rstrip()
+                code_line = re.sub(r"(?=--)(.*?)(?=\r\n|\n)", "", line).rstrip()
 
                 # Before replacing strings, see if we're only using single quotes and check requires
                 if re.search(r"\"[^\"']*\"(?=(?:[^']*'[^']*')*[^']*$)", code_line):
@@ -383,8 +385,8 @@ class LuaStyleCheck:
                 code_line = code_line.replace("\\'", '')
                 code_line = code_line.replace('\\"', '')
 
-                code_line = re.sub('\"([^\"]*?)\"', "strVal", code_line)
-                code_line = re.sub("\'([^\"]*?)\'", "strVal", code_line)
+                code_line = re.sub(r'\"([^\"]*?)\"', "strVal", code_line)
+                code_line = re.sub(r"\'([^\"]*?)\'", "strVal", code_line)
 
                 # Checks that apply to all lines
                 self.check_table_formatting(code_line)
@@ -406,10 +408,10 @@ class LuaStyleCheck:
                 # Keep track of ID variable assignments and if they are referenced.
                 # TODO: Track each unique variable, and expand this to potentially something
                 # more generic for other tests.
-                if re.search("ID[ ]+=[ ]+zones\[", code_line):
+                if re.search(r"ID[ ]+=[ ]+zones\[", code_line):
                     uses_id = True
 
-                if uses_id == True and re.search("ID\.", code_line):
+                if uses_id == True and re.search(r"ID\.", code_line):
                     has_id_ref = True
 
                 # Multiline conditionals should not have data in if, elseif, or then
@@ -441,16 +443,16 @@ class LuaStyleCheck:
 
                     if contains_word('then')(code_line):
                         condition_str = full_condition.replace('elseif','').replace('if','').replace('then','').strip()
-                        paren_regex = regex.compile("\((([^\)\(]+)|(?R))*+\)", re.S)
+                        paren_regex = regex.compile(r"\((([^\)\(]+)|(?R))*+\)", re.S)
                         removed_paren_str = regex.sub(paren_regex, "", condition_str)
 
                         if removed_paren_str == "":
                             self.error("Outer parentheses should be removed in condition")
 
-                        if len(re.findall("== true|== false|~= true|~= false", condition_str)) > 0:
+                        if len(re.findall(r"== true|== false|~= true|~= false", condition_str)) > 0:
                             self.error("Boolean with explicit value check")
 
-                        if not in_condition and len(re.findall(" and | or ", condition_str)) > 0 and len(condition_str) > 72:
+                        if not in_condition and len(re.findall(r" and | or ", condition_str)) > 0 and len(condition_str) > 72:
                             self.error("Multiline conditional format required")
 
                         in_condition   = False
@@ -459,7 +461,7 @@ class LuaStyleCheck:
                     # Multiline conditions
                     else:
                         in_condition = True
-                
+
             if "DefaultActions" not in self.filename and uses_id == True and not has_id_ref:
                 self.error("ID variable is assigned but unused", suppress_line_ref = True)
             # If you want to modify the files during the checks, write your changed lines to the appropriate

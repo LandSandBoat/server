@@ -52,7 +52,7 @@ mission.sections =
                 end,
 
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar('battlefieldWin') == 1124 then
+                    if player:getLocalVar('battlefieldWin') == xi.battlefield.id.SHIELD_OF_DIPLOMACY then
                         mission:complete(player)
                     end
                 end,

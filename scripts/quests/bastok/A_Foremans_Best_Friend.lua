@@ -9,10 +9,8 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.A_FOREMANS_BEST_F
 
 quest.reward =
 {
-    exp      = 2000,
     fame     = 60,
     fameArea = xi.fameArea.BASTOK,
-    keyItem  = xi.ki.MAP_OF_THE_GUSGEN_MINES,
 }
 
 quest.sections =
@@ -58,6 +56,11 @@ quest.sections =
                 [112] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
+                        if player:hasKeyItem(xi.ki.MAP_OF_THE_GUSGEN_MINES) then
+                            player:addExp(2000)
+                        else
+                            npcUtil.giveKeyItem(player, xi.ki.MAP_OF_THE_GUSGEN_MINES)
+                        end
                     end
                 end,
             },

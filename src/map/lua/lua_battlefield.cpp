@@ -256,18 +256,6 @@ void CLuaBattlefield::setStatus(uint8 status)
     m_PLuaBattlefield->SetStatus(status);
 }
 
-bool CLuaBattlefield::loadMobs()
-{
-    return m_PLuaBattlefield->LoadMobs();
-}
-
-bool CLuaBattlefield::spawnLoot(sol::object const& PEntityObj)
-{
-    CBaseEntity* PEntity = PEntityObj.is<CLuaBaseEntity*>() ? PEntityObj.as<CLuaBaseEntity*>()->GetBaseEntity() : nullptr;
-
-    return m_PLuaBattlefield->SpawnLoot(PEntity);
-}
-
 std::optional<CLuaBaseEntity> CLuaBattlefield::insertEntity(uint16 targid, bool ally, bool inBattlefield)
 {
     BATTLEFIELDMOBCONDITION conditions = static_cast<BATTLEFIELDMOBCONDITION>(0);
@@ -506,10 +494,32 @@ void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas
             }
         }
 
-        bool superlink = groupData.get_or("superlink", false);
-        if (superlink)
+        bool  superlink      = groupData.get_or("superlink", false);
+        uint8 superlinkGroup = groupData.get_or("superlinkGroup", 0);
+
+        if (superlink && superlinkGroup)
         {
-            ++superlinkId;
+            ShowWarning(fmt::format("Superlink bool and Group defined in the same mob group for Battlefield {}", m_PLuaBattlefield->GetID()));
+        }
+
+        if (superlink || superlinkGroup)
+        {
+            // Allow for all mobs existing in the battlefield to superlink and be
+            // associated with other groups.
+
+            // NOTE: Since this is battlefield specific, splitting the range for the
+            // two options mid-way at 500.  If there becomes a need for more than 500,
+            // these values will need to be adjusted.
+
+            if (superlinkGroup)
+            {
+                superlinkId = 1000 * m_PLuaBattlefield->GetArea() + 500 + superlinkGroup;
+            }
+            else
+            {
+                ++superlinkId;
+            }
+
             for (CBaseEntity* entity : groupEntities)
             {
                 auto PMob = dynamic_cast<CMobEntity*>(entity);
@@ -716,8 +726,6 @@ void CLuaBattlefield::Register()
     SOL_REGISTER("setWipeTime", CLuaBattlefield::setWipeTime);
     SOL_REGISTER("setRecord", CLuaBattlefield::setRecord);
     SOL_REGISTER("setStatus", CLuaBattlefield::setStatus);
-    SOL_REGISTER("loadMobs", CLuaBattlefield::loadMobs);
-    SOL_REGISTER("spawnLoot", CLuaBattlefield::spawnLoot);
     SOL_REGISTER("insertEntity", CLuaBattlefield::insertEntity);
     SOL_REGISTER("cleanup", CLuaBattlefield::cleanup);
     SOL_REGISTER("win", CLuaBattlefield::win);

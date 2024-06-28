@@ -133,7 +133,7 @@ mission.sections =
                 end,
 
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar('battlefieldWin') == 256 then
+                    if player:getLocalVar('battlefieldWin') == xi.battlefield.id.RETURN_TO_DELKFUTTS_TOWER then
                         player:setMissionStatus(mission.areaId, 3)
                         player:setPos(-519.99, 1.076, -19.943, 64, xi.zone.STELLAR_FULCRUM)
                     end

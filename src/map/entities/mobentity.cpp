@@ -192,10 +192,10 @@ uint32 CMobEntity::GetRandomGil()
 
     if (min && max)
     {
-        // make sure divide won't crash server
+        // Assume we want this exact amount
         if (max <= min)
         {
-            max = min + 2;
+            return min;
         }
 
         if (max - min < 2)
@@ -1105,6 +1105,10 @@ void CMobEntity::OnEngage(CAttackState& state)
             PPet    = state.GetTarget();
             PTarget = ((CPetEntity*)PTarget)->PMaster;
         }
+
+        // TODO: Supertanking might be effected by this block when we don't want it to be.
+        // Things like Ambuscade "don't have" supertanking, though.
+        // This block apparently only effects rare things like NW apollyon, so might be ok for now.
         if (PTarget->objtype == TYPE_PC)
         {
             // clang-format off

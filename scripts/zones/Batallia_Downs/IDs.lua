@@ -20,60 +20,52 @@ zones[xi.zone.BATALLIA_DOWNS] =
         LOGIN_NUMBER                  = 7025,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7045,  -- Your party is unable to participate because certain members' levels are restricted.
         UNABLE_TO_PROGRESS            = 7069,  -- ou are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
-        CONQUEST_BASE                 = 7083,  -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET        = 7242,  -- You can't fish here.
-        DIG_THROW_AWAY                = 7255,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
-        FIND_NOTHING                  = 7257,  -- You dig and you dig, but find nothing.
-        SPARKLING_LIGHT               = 7351,  -- The ground is sparkling with a strange light.
-        SENSE_SOMETHING_LURKING       = 7441,  -- You sense something lurking close by!
-        NO_GRASS_GROWING_HERE         = 7490,  -- There is no grass growing here...
-        YOU_ARE_BEING_ATTACKED        = 7627,  -- You are being attacked!
-        YOU_FIND_NOTHING              = 7630,  -- You find nothing.
-        PLAYER_OBTAINS_ITEM           = 7702,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7703,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7704,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7705,  -- You already possess that temporary item.
-        NO_COMBINATION                = 7710,  -- You were unable to enter a combination.
-        VOIDWALKER_DESPAWN            = 7741,  -- The monster fades before your eyes, a look of disappointment on its face.
-        UNITY_WANTED_BATTLE_INTERACT  = 7772,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 9988,  -- New training regime registered!
-        FRAGMENT_FAR_TOO_SMALL        = 11326, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
-        FRAGMENTS_MELD                = 11327, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
-        SEE_WEATHERED_GRAVESTONE      = 11328, -- You see a weathered gravestone.
-        VOIDWALKER_NO_MOB             = 11329, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR        = 11330, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT           = 11331, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB          = 11332, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1       = 11334, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2       = 11335, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI           = 11336, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OBTAIN_KI          = 11337, -- Obtained key item: <keyitem>!
-        LEARNS_SPELL                  = 12837, -- <name> learns <spell>!
-        UNCANNY_SENSATION             = 12839, -- You are assaulted by an uncanny sensation.
-        COMMON_SENSE_SURVIVAL         = 12846, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        RAPTOR_OVERCOME_MUNCHIES      = 12999, -- The raptor has overcome the munchies! (<number>/<number>)
-        RAPTOR_SECOND_WIND            = 13000, -- The raptor has gained a second wind!
-        MEET_SYRILLIA                 = 13001, -- Meet up with Syrillia.
-        RAPTOR_SPEEDS_OFF             = 13002, -- The raptor speeds off into the sunset...
+        CONQUEST_BASE                 = 7086,  -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET        = 7245,  -- You can't fish here.
+        DIG_THROW_AWAY                = 7258,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
+        FIND_NOTHING                  = 7260,  -- You dig and you dig, but find nothing.
+        SPARKLING_LIGHT               = 7354,  -- The ground is sparkling with a strange light.
+        SENSE_SOMETHING_LURKING       = 7444,  -- You sense something lurking close by!
+        NO_GRASS_GROWING_HERE         = 7493,  -- There is no grass growing here...
+        YOU_ARE_BEING_ATTACKED        = 7630,  -- You are being attacked!
+        YOU_FIND_NOTHING              = 7633,  -- You find nothing.
+        PLAYER_OBTAINS_ITEM           = 7705,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7706,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7707,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7708,  -- You already possess that temporary item.
+        NO_COMBINATION                = 7713,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN            = 7744,  -- The monster fades before your eyes, a look of disappointment on its face.
+        UNITY_WANTED_BATTLE_INTERACT  = 7775,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 9991,  -- New training regime registered!
+        FRAGMENT_FAR_TOO_SMALL        = 11329, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
+        FRAGMENTS_MELD                = 11330, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
+        SEE_WEATHERED_GRAVESTONE      = 11331, -- You see a weathered gravestone.
+        VOIDWALKER_NO_MOB             = 11332, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR        = 11333, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT           = 11334, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB          = 11335, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1       = 11337, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2       = 11338, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI           = 11339, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI          = 11340, -- Obtained key item: <keyitem>!
+        LEARNS_SPELL                  = 12840, -- <name> learns <spell>!
+        UNCANNY_SENSATION             = 12842, -- You are assaulted by an uncanny sensation.
+        COMMON_SENSE_SURVIVAL         = 12849, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        RAPTOR_OVERCOME_MUNCHIES      = 13002, -- The raptor has overcome the munchies! (<number>/<number>)
+        RAPTOR_SECOND_WIND            = 13003, -- The raptor has gained a second wind!
+        MEET_SYRILLIA                 = 13004, -- Meet up with Syrillia.
+        RAPTOR_SPEEDS_OFF             = 13005, -- The raptor speeds off into the sunset...
     },
     mob =
     {
-        PRANKSTER_MAVERIX_PH =
-        {
-            [17207635] = 17207640,
-        },
-
-        TOTTERING_TOBY_PH =
-        {
-            [17207449] = 17207476, -- -194.234 -18.485 132.208
-        },
-
-        AHTU              = 17207657,
+        AHTU              = GetFirstID('Ahtu'),
         BADSHAH_OFFSET    = GetFirstID('Badshah'),
-        STURMTIGER        = 17207696,
-        SUPARNA           = 17207697,
-        SUPARNA_FLEDGLING = 17207698,
-        VEGNIX_GREENTHUMB = 17207710,
+        PRANKSTER_MAVERIX = GetFirstID('Prankster_Maverix'),
+        STURMTIGER        = GetFirstID('Sturmtiger'),
+        SUPARNA           = GetFirstID('Suparna'),
+        SUPARNA_FLEDGLING = GetFirstID('Suparna_Fledgling'),
+        TOTTERING_TOBY    = GetFirstID('Tottering_Toby'),
+        VEGNIX_GREENTHUMB = GetFirstID('Vegnix_Greenthumb'),
 
         VOIDWALKER =
         {
@@ -109,9 +101,9 @@ zones[xi.zone.BATALLIA_DOWNS] =
 
     npc =
     {
-        SYRILLIA         = GetFirstID('Syrillia'),
         BLUE_BEAM_BASE   = GetFirstID('NPC[2a4]'),
         RAPTOR_FOOD_BASE = GetFirstID('Raptors_Food_0'),
+        SYRILLIA         = GetFirstID('Syrillia'),
     },
 }
 

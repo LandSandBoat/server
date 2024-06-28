@@ -217,6 +217,7 @@ int32 do_init(int32 argc, char** argv)
     ShowInfo("do_init: connecting to database");
     _sql = std::make_unique<SqlConnection>();
 
+    ShowInfo(_sql->GetDatabaseName().c_str());
     ShowInfo(_sql->GetClientVersion().c_str());
     ShowInfo(_sql->GetServerVersion().c_str());
     _sql->CheckCharset();

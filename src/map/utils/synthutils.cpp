@@ -364,6 +364,7 @@ namespace synthutils
             // HQ success rate modifier.
             // See: https://www.bluegartr.com/threads/130586-CraftyMath-v2-Post-September-2017-Update page 3.
             chanceHQ = chanceHQ + 100.0f * PChar->getMod(Mod::SYNTH_HQ_RATE) / 512.0f;
+            chanceHQ = chanceHQ * settings::get<float>("map.CRAFT_HQ_CHANCE_MULTIPLIER"); // server configured additional HQ multiplier (default 1.0)
 
             // limit max hq chance
             if (chanceHQ > maxChanceHQ)

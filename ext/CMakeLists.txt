@@ -137,7 +137,7 @@ CPMAddPackage(
 CPMAddPackage(
     NAME cpp-httplib
     GITHUB_REPOSITORY yhirose/cpp-httplib
-    GIT_TAG v0.11.3
+    GIT_TAG v0.15.3
 ) # defines: httplib::httplib
 
 CPMAddPackage(

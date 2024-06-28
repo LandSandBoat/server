@@ -115,7 +115,6 @@ namespace itemutils
     CItemWeapon* GetUnarmedH2HItem();
 
     DropList_t* GetDropList(uint16 DropID);
-    LootList_t* GetLootList(uint16 LootDropID);
 
 }; // namespace itemutils
 #endif

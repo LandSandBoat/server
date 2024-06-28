@@ -5,7 +5,7 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, item, param, caster)
     if target:getZoneID() == xi.zone.THE_ASHU_TALIF then
         return 0
     end

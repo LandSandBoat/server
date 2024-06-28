@@ -17,37 +17,23 @@ zones[xi.zone.GRAUBERG_S] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET        = 7061, -- You can't fish here.
-        A_SHIVER_RUNS_DOWN            = 7431, -- A shiver runs down your spine...
-        ATTEND_TO_MORE_PRESSING       = 7432, -- Perhaps you should first attend to more pressing matters...
-        CAMPAIGN_RESULTS_TALLIED      = 7598, -- Campaign results tallied.
-        HARVESTING_IS_POSSIBLE_HERE   = 7699, -- Harvesting is possible here if you have <item>.
-        SUITABLE_PLACE_TO_SOAK        = 8271, -- This seems to be a suitable place to soak <item>.
-        MYSTERIOUS_COLUMN_ROTATES     = 8374, -- A mysterious column of floating stones rotates hypnotically before you.
-        YOU_HAVE_RETRACED_RIVER       = 8399, -- You have retraced the river of memories back to the mission "Maiden of the Dusk".
-        AIR_WARPED_AND_DISTORTED      = 8400, -- The air before you appears warped and distorted...
-        COMMON_SENSE_SURVIVAL         = 9304, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        FISHING_MESSAGE_OFFSET        = 7064, -- You can't fish here.
+        A_SHIVER_RUNS_DOWN            = 7434, -- A shiver runs down your spine...
+        ATTEND_TO_MORE_PRESSING       = 7435, -- Perhaps you should first attend to more pressing matters...
+        CAMPAIGN_RESULTS_TALLIED      = 7601, -- Campaign results tallied.
+        HARVESTING_IS_POSSIBLE_HERE   = 7702, -- Harvesting is possible here if you have <item>.
+        SUITABLE_PLACE_TO_SOAK        = 8274, -- This seems to be a suitable place to soak <item>.
+        MYSTERIOUS_COLUMN_ROTATES     = 8377, -- A mysterious column of floating stones rotates hypnotically before you.
+        YOU_HAVE_RETRACED_RIVER       = 8402, -- You have retraced the river of memories back to the mission "Maiden of the Dusk".
+        AIR_WARPED_AND_DISTORTED      = 8403, -- The air before you appears warped and distorted...
+        COMMON_SENSE_SURVIVAL         = 9307, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
-        KOTAN_KOR_KAMUY_PH =
-        {
-            [17141958] = 17141962,
-            [17141959] = 17141962,
-            [17141960] = 17141962,
-            [17141963] = 17141962,
-            [17141964] = 17141962,
-            [17141965] = 17141962,
-            [17141966] = 17141962,
-            [17141967] = 17141962,
-        },
-        SCITALIS_PH =
-        {
-            [17141977] = 17141979,
-            [17141978] = 17141979,
-            [17141981] = 17141979,
-        },
-        MIGRATORY_HIPPOGRYPH = 17142108,
+        KOTAN_KOR_KAMUY      = GetFirstID('Kotan-kor_Kamuy'),
+        SCITALIS             = GetFirstID('Scitalis'),
+        MIGRATORY_HIPPOGRYPH = GetFirstID('Migratory_Hippogryph'),
+        VASILICERATOPS       = GetFirstID('Vasiliceratops'),
     },
     npc =
     {

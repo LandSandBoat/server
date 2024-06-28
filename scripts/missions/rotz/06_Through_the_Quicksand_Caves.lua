@@ -30,7 +30,7 @@ mission.sections =
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar('battlefieldWin') == 192 then
+                    if player:getLocalVar('battlefieldWin') == xi.battlefield.id.THROUGH_THE_QUICKSAND_CAVES then
                         mission:complete(player)
                     end
                 end,

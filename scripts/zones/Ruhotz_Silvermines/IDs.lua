@@ -18,7 +18,7 @@ zones[xi.zone.RUHOTZ_SILVERMINES] =
     },
     mob =
     {
-        SAPPHIRINE_QUADAV_OFFSET = 17158192,
+        SAPPHIRINE_QUADAV_OFFSET = GetFirstID('Sapphirine_Quadav'),
     },
     npc =
     {

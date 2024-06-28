@@ -6,10 +6,14 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    -- mob:addImmunity(xi.immunity.SLEEP)
+    -- Set Immunities.
     -- mob:addImmunity(xi.immunity.BIND)
     -- mob:addImmunity(xi.immunity.POISON)
+    -- mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    -- mob:addImmunity(xi.immunity.DARK_SLEEP)
+
+    -- Set Mob Modifiers.
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

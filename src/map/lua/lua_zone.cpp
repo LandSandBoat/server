@@ -171,14 +171,19 @@ std::optional<CLuaBattlefield> CLuaZone::getBattlefieldByInitiator(uint32 charID
     return std::nullopt;
 }
 
-bool CLuaZone::battlefieldsFull(int battlefieldId)
-{
-    return m_pLuaZone->m_BattlefieldHandler && m_pLuaZone->m_BattlefieldHandler->ReachedMaxCapacity(battlefieldId);
-}
-
 WEATHER CLuaZone::getWeather()
 {
     return m_pLuaZone->GetWeather();
+}
+
+uint32 CLuaZone::getUptime()
+{
+    time_point currentTime   = std::chrono::system_clock::now(); // Gets the current time
+    time_point zoneStartTime = get_server_start_time();          // Gets the start time of the zone group (cluster)
+
+    long long uptime = std::chrono::duration_cast<std::chrono::seconds>(currentTime - zoneStartTime).count();
+    // returns the zone up time in seconds
+    return static_cast<uint32>(uptime);
 }
 
 void CLuaZone::reloadNavmesh()
@@ -222,7 +227,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
  *  Purpose : Set Solo Battle music for zone
  ************************************************************************/
 
-void CLuaZone::setSoloBattleMusic(uint8 musicId)
+void CLuaZone::setSoloBattleMusic(uint16 musicId)
 {
     m_pLuaZone->SetSoloBattleMusic(musicId);
 }
@@ -237,7 +242,7 @@ auto CLuaZone::getSoloBattleMusic()
  *  Purpose : Set Party Battle music for zone
  ************************************************************************/
 
-void CLuaZone::setPartyBattleMusic(uint8 musicId)
+void CLuaZone::setPartyBattleMusic(uint16 musicId)
 {
     m_pLuaZone->SetPartyBattleMusic(musicId);
 }
@@ -252,7 +257,7 @@ auto CLuaZone::getPartyBattleMusic()
  *  Purpose : Set Background Day music for zone
  ************************************************************************/
 
-void CLuaZone::setBackgroundMusicDay(uint8 musicId)
+void CLuaZone::setBackgroundMusicDay(uint16 musicId)
 {
     m_pLuaZone->SetBackgroundMusicDay(musicId);
 }
@@ -267,7 +272,7 @@ auto CLuaZone::getBackgroundMusicDay()
  *  Purpose : Set Background Night music for zone
  ************************************************************************/
 
-void CLuaZone::setBackgroundMusicNight(uint8 musicId)
+void CLuaZone::setBackgroundMusicNight(uint16 musicId)
 {
     m_pLuaZone->SetBackgroundMusicNight(musicId);
 }
@@ -315,8 +320,8 @@ void CLuaZone::Register()
     SOL_REGISTER("getRegionID", CLuaZone::getRegionID);
     SOL_REGISTER("getTypeMask", CLuaZone::getTypeMask);
     SOL_REGISTER("getBattlefieldByInitiator", CLuaZone::getBattlefieldByInitiator);
-    SOL_REGISTER("battlefieldsFull", CLuaZone::battlefieldsFull);
     SOL_REGISTER("getWeather", CLuaZone::getWeather);
+    SOL_REGISTER("getUptime", CLuaZone::getUptime);
     SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
     SOL_REGISTER("isNavigablePoint", CLuaZone::isNavigablePoint);
     SOL_REGISTER("insertDynamicEntity", CLuaZone::insertDynamicEntity);

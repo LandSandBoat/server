@@ -5,7 +5,7 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, item, param, caster)
     -- TODO: Should there be a failure message here?
     return target:hasKeyItem(xi.ki.MOG_PATIO_DESIGN_DOCUMENT) and 1 or 0
 end

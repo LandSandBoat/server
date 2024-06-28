@@ -4,7 +4,7 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, item, param, caster)
     if target:getFreeSlotsCount() == 0 then
         return xi.msg.basic.ITEM_UNABLE_TO_USE
     end

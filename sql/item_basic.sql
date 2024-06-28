@@ -886,7 +886,7 @@ INSERT INTO `item_basic` VALUES (901,0,'venomous_claw','venomous_claw',12,4,@BON
 INSERT INTO `item_basic` VALUES (902,0,'demon_horn','demon_horn',12,4,@BONECRAFT,0,666);
 INSERT INTO `item_basic` VALUES (903,0,'dragon_talon','dragon_talon',12,4,@BONECRAFT,0,1900);
 INSERT INTO `item_basic` VALUES (904,0,'set_of_giant_fish_bones','giant_fish_bones',1,57428,@NONE,0,312);
-INSERT INTO `item_basic` VALUES (905,0,'wyvern_skull','wyvern_skull',12,4,@BONECRAFT,0,731);
+INSERT INTO `item_basic` VALUES (905,0,'wyvern_skull','wyvern_skull',12,4,@BONECRAFT,0,730);
 INSERT INTO `item_basic` VALUES (906,0,'starmite_shell','starmite_shell',12,24660,@NONE,0,489);
 INSERT INTO `item_basic` VALUES (907,0,'cold_bone','cold_bone',1,32772,@BONECRAFT,0,724);
 INSERT INTO `item_basic` VALUES (908,0,'adamantoise_shell','adamantoise_shell',12,4,@BONECRAFT,0,14790);
@@ -1082,7 +1082,7 @@ INSERT INTO `item_basic` VALUES (1120,0,'casablanca','casablanca',12,4,@ALCHEMY,
 INSERT INTO `item_basic` VALUES (1121,0,'antican_robe','antican_robe',12,4,@BEAST_MADE,0,162);
 INSERT INTO `item_basic` VALUES (1122,0,'wyvern_skin','wyvern_skin',12,4,@LEATHERCRAFT,0,960);
 INSERT INTO `item_basic` VALUES (1123,0,'manticore_fang','manticore_fang',12,4,@BONECRAFT,0,630);
-INSERT INTO `item_basic` VALUES (1124,0,'wyvern_wing','wyvern_wing',12,4,@LEATHERCRAFT,0,2026);
+INSERT INTO `item_basic` VALUES (1124,0,'wyvern_wing','wyvern_wing',12,4,@LEATHERCRAFT,0,1987);
 INSERT INTO `item_basic` VALUES (1125,0,'carbuncles_ruby','carbuncles_ruby',1,61508,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (1126,0,'beastmens_seal','beastmens_seal',99,28740,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (1127,0,'kindreds_seal','kindreds_seal',99,28740,@NONE,1,0);

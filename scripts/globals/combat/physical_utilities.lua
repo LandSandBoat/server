@@ -70,6 +70,16 @@ xi.combat.physical.pDifWeaponCapTable =
     [xi.skill.THROWING        ] = { 3.25 },
 }
 
+local shieldSizeToBlockRateTable =
+{
+    [1] = 55, -- Buckler
+    [2] = 40, -- Round
+    [3] = 45, -- Kite
+    [4] = 30, -- Tower
+    [5] = 50, -- Aegis and Srivatsa
+    [6] = 100, -- Ochain  https://www.bg-wiki.com/ffxi/Category:Shields
+}
+
 local elementalGorget = -- Ordered by element.
 {
     xi.item.FLAME_GORGET,
@@ -233,10 +243,11 @@ xi.combat.physical.calculateFTP = function(actor, tpFactor)
     local scProp1, scProp2, scProp3 = actor:getWSSkillchainProp()
     local dayElement                = VanadielDayElement() + 1
 
-    local neckFtpBonus  = 0
-    local waistFtpBonus = 0
-    local headFtpBonus  = 0
-    local handsFtpBonus = 0
+    local neckFtpBonus   = 0
+    local waistFtpBonus  = 0
+    local headFtpBonus   = 0
+    local handsFtpBonus  = 0
+    local weaponFtpBonus = 0
 
     if actor:getObjType() == xi.objType.PC then
         -- Calculate Neck fTP bonus.
@@ -315,10 +326,22 @@ xi.combat.physical.calculateFTP = function(actor, tpFactor)
                 handsFtpBonus = 0.06
             end
         end
+
+        -- Calculate Weapon fTP bonus.
+        local weaponItem = actor:getEquipID(xi.slot.MAIN)
+
+        if
+            weaponItem == xi.item.PRESTER and
+            (wsElementalProperties[scProp1][xi.element.WIND] == 1 or
+            wsElementalProperties[scProp2][xi.element.WIND] == 1 or
+            wsElementalProperties[scProp3][xi.element.WIND] == 1)
+        then
+            weaponFtpBonus = 0.1
+        end
     end
 
     -- Add all bonuses and return.
-    fTP = fTP + neckFtpBonus + waistFtpBonus + headFtpBonus + handsFtpBonus
+    fTP = fTP + neckFtpBonus + waistFtpBonus + headFtpBonus + handsFtpBonus + weaponFtpBonus
 
     return fTP
 end
@@ -670,4 +693,286 @@ xi.combat.physical.calculateSecondaryHitCritical = function(actor, additionalPar
 end
 
 xi.combat.physical.calculateSecondaryHitDamage = function(actor, additionalParamsHere)
+end
+
+xi.combat.physical.canParry = function(defender, attacker)
+    local canParry = false
+
+    if
+        defender:isFacing(attacker) and
+        defender:isEngaged()
+    then
+        if defender:isPC() and defender:getSkillRank(xi.skill.PARRY) > 0 then
+            local mainWeapon = defender:getEquippedItem(xi.slot.MAIN)
+            if mainWeapon then
+                canParry = mainWeapon:getSkillType() ~= xi.skill.HAND_TO_HAND
+            end
+        elseif
+            defender:isMob() or
+            defender:isPet() or
+            defender:isTrust()
+        then
+            canParry = defender:getMobMod(xi.mobMod.CAN_PARRY) > 0
+        end
+    end
+
+    return canParry
+end
+
+xi.combat.physical.calculateParryRate = function(defender, attacker)
+    local parryRate = 0
+
+    -- http://wiki.ffxiclopedia.org/wiki/Talk:Parrying_Skill
+    -- {(Parry Skill x .125) + ([Player Agi - Enemy Dex] x .125)} x Diff
+
+    local parrySkill = defender:getSkillLevel(xi.skill.PARRY) + defender:getMod(xi.mod.PARRY)
+
+    if defender:isPC() then
+        parrySkill = parrySkill + defender:getILvlParry()
+    end
+
+    local levelDiffMult = 1 + (defender:getMainLvl() - attacker:getMainLvl()) / 15
+
+    -- two handed weapons get a bonus
+    if defender:isPC() and defender:isWeaponTwoHanded() then
+        levelDiffMult = levelDiffMult + 0.1
+    end
+
+    levelDiffMult = utils.clamp(levelDiffMult, 0.4, 1.4)
+
+    local attackerDex = attacker:getStat(xi.mod.DEX)
+    local defenderAgi = defender:getStat(xi.mod.AGI)
+
+    parryRate = utils.clamp(((parrySkill * 0.1 + (defenderAgi - attackerDex) * 0.125 + 10.0) * levelDiffMult), 5, 25)
+
+    -- Issekigan grants parry rate bonus
+    -- from best available data if you already capped out at 25% parry it grants another 25% bonus for ~50% parry rate
+    if defender:hasStatusEffect(xi.effect.ISSEKIGAN) then
+        parryRate = parryRate + defender:getStatusEffect(xi.effect.ISSEKIGAN):getPower()
+    end
+
+    -- Inquartata grants a flat parry rate bonus
+    parryRate = parryRate + defender:getMod(xi.mod.INQUARTATA)
+
+    return parryRate
+end
+
+xi.combat.physical.canGuard = function(defender, attacker)
+    local canGuard = false
+
+    -- per testing done by Genome guard can proc when petrified, stunned, or asleep
+    -- https://genomeffxi.livejournal.com/18269.html
+    if
+        defender:isFacing(attacker) and
+        defender:isEngaged()
+    then
+        if defender:isPC() and defender:getSkillRank(xi.skill.GUARD) > 0 then
+            local mainWeapon = defender:getEquippedItem(xi.slot.MAIN)
+            canGuard = (not mainWeapon) or mainWeapon:getSkillType() == xi.skill.HAND_TO_HAND
+        elseif
+            defender:isMob() or
+            defender:isPet() or
+            defender:isTrust()
+        then
+            canGuard = defender:getMainJob() == xi.job.MNK or defender:getMainJob() == xi.job.PUP
+        end
+    end
+
+    return canGuard
+end
+
+xi.combat.physical.calculateGuardRate = function(defender, attacker)
+    local guardRate = 0
+
+    -- default to using actual skill
+    local guardSkill = defender:getSkillLevel(xi.skill.GUARD)
+
+    -- non-players do not have guard skill set on creation
+    -- so use max skill at the level for the job
+    if
+        defender:isMob() or
+        defender:isPet()
+    then
+        guardSkill = defender:getMaxSkillLevel(defender:getMainLvl(), defender:getMainJob(), xi.skill.GUARD)
+    elseif defender:isTrust() then
+        -- TODO: check trust type for ilvl > 99 when implemented
+        guardSkill = defender:getMaxSkillLevel(math.min(defender:getMainLvl(), 99), defender:getMainJob(), xi.skill.GUARD)
+    end
+
+    guardSkill = guardSkill + defender:getMod(xi.mod.GUARD) + guardSkill * (defender:getMod(xi.mod.GUARD_PERCENT) / 100)
+
+    -- current assumption (from core) is that guard and parry Ilvl are the same
+    if defender:isPC() then
+        guardSkill = guardSkill + defender:getILvlParry()
+    end
+
+    local levelDiffMult = 1 + (defender:getMainLvl() - attacker:getMainLvl()) / 15
+    levelDiffMult = utils.clamp(levelDiffMult, 0.4, 1.4)
+
+    local attackerDex = attacker:getStat(xi.mod.DEX)
+    local defenderAgi = defender:getStat(xi.mod.AGI)
+
+    guardRate = utils.clamp(((guardSkill * 0.1 + (defenderAgi - attackerDex) * 0.125 + 10) * levelDiffMult), 5, 25)
+
+    return guardRate
+end
+
+xi.combat.physical.canBlock = function(defender, attacker)
+    local canBlock = false
+
+    if defender:isFacing(attacker) and not defender:hasPreventActionEffect() then
+        if defender:isPC() and defender:getSkillRank(xi.skill.SHIELD) > 0 then
+            local shield = defender:getEquippedItem(xi.slot.SUB)
+            if shield then
+                canBlock = shield:isShield()
+            end
+        elseif
+            defender:isMob() or
+            defender:isPet() or
+            defender:isTrust()
+        then
+            canBlock = defender:getMobMod(xi.mobMod.CAN_SHIELD_BLOCK) > 0
+        end
+    end
+
+    return canBlock
+end
+
+xi.combat.physical.calculateBlockRate = function(defender, attacker)
+    local blockRate = 0
+    local shieldSize = 3
+    local skillModifier = 0
+    local palisadeMod = defender:getMod(xi.mod.PALISADE_BLOCK_BONUS)
+    local reprisalMult = 1.0
+
+    -- assume bare hands case
+    local attackerSkillType = xi.skill.HAND_TO_HAND
+    if not attacker:isUsingH2H() then
+        attackerSkillType = attacker:getWeaponSkillType(xi.slot.MAIN)
+    end
+
+    local attackSkill = attacker:getSkillLevel(attackerSkillType)
+    local blockSkill = defender:getSkillLevel(xi.skill.SHIELD)
+
+    if defender:isPC() then
+        local shield = defender:getEquippedItem(xi.slot.SUB)
+        -- already checked in canBlock but check again here to make sure
+        if shield and shield:isShield() then
+            shieldSize = shield:getShieldSize()
+        else
+            return 0
+        end
+    elseif
+        defender:isMob() or
+        defender:isPet() or
+        defender:isTrust()
+    then
+        -- already checked in canBlock but check again here to make sure
+        if defender:getMobMod(xi.mobMod.CAN_SHIELD_BLOCK) > 0 then
+            blockRate = defender:getMod(xi.mod.SHIELDBLOCKRATE)
+            -- automations are a special case
+            if defender:isAutomaton() then
+                skillModifier = (defender:getSkillLevel(xi.skill.AUTOMATON_MELEE) - attackSkill) * 0.215
+                return math.max(0, blockRate + skillModifier)
+            -- mobs and trusts use max skill for job and level
+            elseif defender:isTrust() then
+                -- TODO: check trust type for ilvl > 99 when implemented
+                blockSkill = defender:getMaxSkillLevel(math.min(defender:getMainLvl(), 99), defender:getMainJob(), xi.skill.SHIELD)
+            else
+                blockSkill = defender:getMaxSkillLevel(defender:getMainLvl(), defender:getMainJob(), xi.skill.SHIELD)
+            end
+        else -- No block mobmod so zero rate
+            return 0
+        end
+    end
+
+    if defender:isPC() then
+        -- get blockrate from table and use default value of 0
+        blockRate = shieldSizeToBlockRateTable[shieldSize] or 0
+    end
+
+    -- Check for Reprisal and adjust skill and block rate bonus multiplier
+    if defender:hasStatusEffect(xi.effect.REPRISAL) then
+        blockSkill   = blockSkill * 1.15
+        reprisalMult = 1.5
+
+        -- Adamas and Priwen set the multiplier to 3.0x while equipped
+        if defender:getMod(xi.mod.REPRISAL_BLOCK_BONUS) > 0 then
+            reprisalMult = 3.0
+        end
+    end
+
+    skillModifier = (blockSkill - attackSkill) * 0.2325
+
+    -- Add skill and Palisade bonuses and multiply by Reprisals bonus
+    blockRate = (blockRate + skillModifier + palisadeMod) * reprisalMult
+
+    -- Apply the lower and upper caps
+    blockRate = utils.clamp(blockRate, 5, 100)
+
+    return blockRate
+end
+
+xi.combat.physical.handleBlock = function(defender, attacker, damage)
+    if
+        xi.combat.physical.canBlock(defender, attacker) and
+        xi.combat.physical.calculateBlockRate(defender, attacker) > math.random(100)
+    then
+        -- shield def bonus is a flat raw damage reduction that occurs before absorb
+        -- however do not reduce below 0 or if damage is negative
+        if damage > 0 then
+            damage = math.max(0, damage - defender:getMod(xi.mod.SHIELD_DEF_BONUS))
+        end
+
+        if defender:isPC() then
+            local shield = defender:getEquippedItem(xi.slot.SUB)
+            local absorb = 100
+            absorb = utils.clamp(absorb - shield:getShieldAbsorptionRate(), 0, 100)
+            damage = math.floor(damage * (absorb / 100))
+            defender:trySkillUp(xi.skill.SHIELD, attacker:getMainLvl())
+        else
+            damage = math.floor(damage * 0.5)
+        end
+    end
+
+    return damage
+end
+
+xi.combat.physical.isParried = function(defender, attacker)
+    local parried = false
+    if
+        xi.combat.physical.canParry(defender, attacker) and
+        xi.combat.physical.calculateParryRate(defender, attacker) > math.random(100)
+    then
+        parried = true
+        if defender:isPC() then
+            -- TODO: implement Turms mod here (when that mod is added to LSB)
+            defender:trySkillUp(xi.skill.PARRY, attacker:getMainLvl())
+            -- handle tactical parry
+            if defender:hasTrait(xi.trait.TACTICAL_PARRY) then
+                defender:addTP(defender:getMod(xi.mod.TACTICAL_PARRY))
+            end
+        end
+    end
+
+    return parried
+end
+
+xi.combat.physical.isGuarded = function(defender, attacker)
+    local guarded = false
+    if
+        xi.combat.physical.canGuard(defender, attacker) and
+        xi.combat.physical.calculateGuardRate(defender, attacker) > math.random(100)
+    then
+        guarded = true
+        if defender:isPC() then
+            defender:trySkillUp(xi.skill.GUARD, attacker:getMainLvl())
+            -- handle tactical guard
+            if defender:hasTrait(xi.trait.TACTICAL_GUARD) then
+                defender:addTP(defender:getMod(xi.mod.TACTICAL_GUARD))
+            end
+        end
+    end
+
+    return guarded
 end

@@ -6,6 +6,10 @@ mixins = { require('scripts/mixins/warders_cop') }
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setMobAbilityEnabled(false) -- ability use handled in mixin
     mob:setLocalVar('warder', 1)

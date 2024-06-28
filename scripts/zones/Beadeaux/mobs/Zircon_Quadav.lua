@@ -9,6 +9,11 @@ local ID = zones[xi.zone.BEADEAUX]
 -----------------------------------
 local entity = {}
 
+local zoKhuPHTable =
+{
+    [ID.mob.ZO_KHU_BLACKCLOUD - 2] = ID.mob.ZO_KHU_BLACKCLOUD, -- -294.223 -3.504 -206.657
+}
+
 entity.onSteal = function(player, target, ability, action)
     if
         player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN) == xi.questStatus.QUEST_ACCEPTED and
@@ -24,7 +29,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.ZO_KHU_BLACKCLOUD_PH, 10, math.random(3600, 18000)) -- 1 to 5 hours
+    xi.mob.phOnDespawn(mob, zoKhuPHTable, 10, 3600) -- 1 to 5 hours
 end
 
 return entity

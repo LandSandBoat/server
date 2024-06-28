@@ -275,9 +275,6 @@ INSERT INTO `mob_pool_mods` VALUES (2499,240,90,0); -- SLEEPRES: 90
 -- Mammet-22 Zeta
 INSERT INTO `mob_pool_mods` VALUES (2500,240,90,0); -- SLEEPRES: 90
 
--- Memory Receptacle Ph
-INSERT INTO `mob_pool_mods` VALUES (2614,368,100,0); -- REGAIN: 100
-
 -- Meteormauler Zhagtegg
 INSERT INTO `mob_pool_mods` VALUES (2643,160,-50,0); -- DMG: -50
 
@@ -440,15 +437,6 @@ INSERT INTO `mob_pool_mods` VALUES (4082,4,4,1); -- SIGHT_RANGE: 4
 INSERT INTO `mob_pool_mods` VALUES (4083,368,30,0); -- REGAIN: 30
 INSERT INTO `mob_pool_mods` VALUES (4083,370,1,0);  -- REGEN: 1
 
--- Vanguard_Alchemist
-INSERT INTO `mob_pool_mods` VALUES (4133,75,3,1); -- CAN_PARRY: 3
-
--- Vanguard_Ambusher
-INSERT INTO `mob_pool_mods` VALUES (4134,75,3,1); -- CAN_PARRY: 3
-
--- Vanguard_Amputator
-INSERT INTO `mob_pool_mods` VALUES (4135,75,3,1); -- CAN_PARRY: 3
-
 -- Vanguard_Armorer
 INSERT INTO `mob_pool_mods` VALUES (4136,75,3,1); -- CAN_PARRY: 3
 
@@ -470,12 +458,6 @@ INSERT INTO `mob_pool_mods` VALUES (4141,75,3,1); -- CAN_PARRY: 3
 -- Vanguard_Defender
 INSERT INTO `mob_pool_mods` VALUES (4143,75,3,1); -- CAN_PARRY: 3
 
--- Vanguard_Dollmaster
-INSERT INTO `mob_pool_mods` VALUES (4144,75,3,1); -- CAN_PARRY: 3
-
--- Vanguard_Dragon
-INSERT INTO `mob_pool_mods` VALUES (4145,75,3,1); -- CAN_PARRY: 3
-
 -- Vanguard_Drakekeeper
 INSERT INTO `mob_pool_mods` VALUES (4146,75,3,1); -- CAN_PARRY: 3
 
@@ -484,9 +466,6 @@ INSERT INTO `mob_pool_mods` VALUES (4147,75,3,1); -- CAN_PARRY: 3
 
 -- Vanguard_Exemplar
 INSERT INTO `mob_pool_mods` VALUES (4148,75,3,1); -- CAN_PARRY: 3
-
--- Vanguard_Eye
-INSERT INTO `mob_pool_mods` VALUES (4149,75,3,1); -- CAN_PARRY: 3
 
 -- Vanguard_Footsoldier
 INSERT INTO `mob_pool_mods` VALUES (4150,75,3,1); -- CAN_PARRY: 3
@@ -521,26 +500,14 @@ INSERT INTO `mob_pool_mods` VALUES (4159,75,3,1); -- CAN_PARRY: 3
 -- Vanguard_Maestro
 INSERT INTO `mob_pool_mods` VALUES (4160,75,3,1); -- CAN_PARRY: 3
 
--- Vanguard_Mesmerizer
-INSERT INTO `mob_pool_mods` VALUES (4162,75,3,1); -- CAN_PARRY: 3
-
--- Vanguard_Militant
-INSERT INTO `mob_pool_mods` VALUES (4163,75,3,1); -- CAN_PARRY: 3
-
 -- Vanguard_Minstrel
 INSERT INTO `mob_pool_mods` VALUES (4164,75,3,1); -- CAN_PARRY: 3
 
 -- Vanguard_Neckchopper
 INSERT INTO `mob_pool_mods` VALUES (4165,75,3,1); -- CAN_PARRY: 3
 
--- Vanguard_Necromancer
-INSERT INTO `mob_pool_mods` VALUES (4166,75,3,1); -- CAN_PARRY: 3
-
 -- Vanguard_Ogresoother
 INSERT INTO `mob_pool_mods` VALUES (4167,75,3,1); -- CAN_PARRY: 3
-
--- Vanguard_Oracle
-INSERT INTO `mob_pool_mods` VALUES (4168,75,3,1); -- CAN_PARRY: 3
 
 -- Vanguard_Partisan
 INSERT INTO `mob_pool_mods` VALUES (4169,75,3,1); -- CAN_PARRY: 3
@@ -554,18 +521,6 @@ INSERT INTO `mob_pool_mods` VALUES (4171,75,3,1); -- CAN_PARRY: 3
 -- Vanguard_Pillager
 INSERT INTO `mob_pool_mods` VALUES (4172,75,3,1); -- CAN_PARRY: 3
 
--- Vanguard_Pitfighter
-INSERT INTO `mob_pool_mods` VALUES (4173,75,3,1); -- CAN_PARRY: 3
-
--- Vanguard_Predator
-INSERT INTO `mob_pool_mods` VALUES (4174,75,3,1); -- CAN_PARRY: 3
-
--- Vanguard_Prelate
-INSERT INTO `mob_pool_mods` VALUES (4175,75,3,1); -- CAN_PARRY: 3
-
--- Vanguard_Priest
-INSERT INTO `mob_pool_mods` VALUES (4176,75,3,1); -- CAN_PARRY: 3
-
 -- Vanguard_Protector
 INSERT INTO `mob_pool_mods` VALUES (4177,75,3,1); -- CAN_PARRY: 3
 
@@ -574,15 +529,6 @@ INSERT INTO `mob_pool_mods` VALUES (4178,75,3,1); -- CAN_PARRY: 3
 
 -- Vanguard_Ronin
 INSERT INTO `mob_pool_mods` VALUES (4179,75,3,1); -- CAN_PARRY: 3
-
--- Vanguard_Salvager
-INSERT INTO `mob_pool_mods` VALUES (4180,75,3,1); -- CAN_PARRY: 3
-
--- Vanguard_Sentinel
-INSERT INTO `mob_pool_mods` VALUES (4181,75,3,1); -- CAN_PARRY: 3
-
--- Vanguard_Shaman
-INSERT INTO `mob_pool_mods` VALUES (4182,75,3,1); -- CAN_PARRY: 3
 
 -- Vanguard_Skirmisher
 INSERT INTO `mob_pool_mods` VALUES (4183,75,3,1); -- CAN_PARRY: 3

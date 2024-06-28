@@ -1,15 +1,16 @@
 -----------------------------------
--- Area: Balga's Dais
+-- Area: Waughroon Shrine
 -- Name: Shattering stars - Maat Fight (RDM)
 -----------------------------------
 local waughroonID = zones[xi.zone.WAUGHROON_SHRINE]
 -----------------------------------
 
 local content = Battlefield:new({
-    zoneId        = xi.zone.HORLAIS_PEAK,
+    zoneId        = xi.zone.WAUGHROON_SHRINE,
     battlefieldId = xi.battlefield.id.SHATTERING_STARS_RDM,
     maxPlayers    = 1,
     levelCap      = 99,
+    allowSubjob   = false,
     timeLimit     = utils.minutes(10),
     index         = 6,
     entryNpc      = 'BC_Entrance',

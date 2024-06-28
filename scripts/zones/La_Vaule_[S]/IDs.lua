@@ -15,26 +15,26 @@ zones[xi.zone.LA_VAULE_S] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET        = 7061, -- You can't fish here.
-        GATE_IS_LOCKED                = 7207, -- The gate is locked.
-        CAMPAIGN_RESULTS_TALLIED      = 7598, -- Campaign results tallied.
-        DOOR_IS_LOCKED                = 7728, -- The door is locked.
-        PARTY_MEMBERS_HAVE_FALLEN     = 8033, -- All party members have fallen in battle. Now leaving the battlefield.
-        THE_PARTY_WILL_BE_REMOVED     = 8040, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        GATHERED_DAWNDROPS_LIGHT      = 8348, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
-        RETRACED_ALL_JUNCTIONS        = 8349, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
+        FISHING_MESSAGE_OFFSET        = 7064, -- You can't fish here.
+        GATE_IS_LOCKED                = 7210, -- The gate is locked.
+        CAMPAIGN_RESULTS_TALLIED      = 7601, -- Campaign results tallied.
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 7691, -- Your time in the battlefield is up! Now exiting...
+        PARTY_MEMBERS_ARE_ENGAGED     = 7706, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
+        DOOR_IS_LOCKED                = 7731, -- The door is locked.
+        MEMBERS_OF_YOUR_PARTY         = 7997, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE      = 7998, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 8000, -- The time limit for this battle is <number> minutes.
+        PARTY_MEMBERS_HAVE_FALLEN     = 8036, -- All party members have fallen in battle. Now leaving the battlefield.
+        THE_PARTY_WILL_BE_REMOVED     = 8043, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        ENTERING_THE_BATTLEFIELD_FOR  = 8065, -- Entering the battlefield for [Splitting Heirs (S)/Purple, The New Black/The Blood-bathed Crown]!
+        GATHERED_DAWNDROPS_LIGHT      = 8351, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
+        RETRACED_ALL_JUNCTIONS        = 8352, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
     },
     mob =
     {
-        HAWKEYED_DNATBAT_PH =
-        {
-            [17125431] = 17125433, -- 375.737 0.272 -174.487
-        },
-
-        ASHMAKER_GOTBLUT_PH =
-        {
-            [17125450] = 17125452, -- 234.481 3.424 -241.751
-        },
+        ASHMAKER_GOTBLUT = GetFirstID('Ashmaker_Gotblut'),
+        HAWKEYED_DNATBAT = GetFirstID('Hawkeyed_Dnatbat'),
+        GALARHIGG        = GetFirstID('Galarhigg'),
     },
     npc =
     {

@@ -19,57 +19,42 @@ zones[xi.zone.ROLANBERRY_FIELDS] =
         LOGIN_NUMBER                  = 7025,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7045,  -- Your party is unable to participate because certain members' levels are restricted.
         UNABLE_TO_PROGRESS            = 7069,  -- ou are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
-        CONQUEST_BASE                 = 7083,  -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET        = 7242,  -- You can't fish here.
-        DIG_THROW_AWAY                = 7255,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
-        FIND_NOTHING                  = 7257,  -- You dig and you dig, but find nothing.
-        SIGN                          = 7412,  -- North: Grand Duchy of Jeuno, Sauromugue Champaign South: Pashhow Marshlands
-        PLAYER_OBTAINS_ITEM           = 7593,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7594,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7595,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7596,  -- You already possess that temporary item.
-        NO_COMBINATION                = 7601,  -- You were unable to enter a combination.
-        VOIDWALKER_DESPAWN            = 7632,  -- The monster fades before your eyes, a look of disappointment on its face.
-        UNITY_WANTED_BATTLE_INTERACT  = 7663,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 9779,  -- New training regime registered!
-        VOIDWALKER_NO_MOB             = 10952, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR        = 10953, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT           = 10954, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB          = 10955, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1       = 10957, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2       = 10958, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI           = 10959, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OBTAIN_KI          = 10960, -- Obtained key item: <keyitem>!
-        AWAIT_YOUR_CHALLENGE          = 12179, -- We await your challenge, traveler.
-        LACK_LEGION_POINTS            = 12216, -- It would seem that you lack the necessary amount of Legion points.
-        LEARNS_SPELL                  = 12264, -- <name> learns <spell>!
-        UNCANNY_SENSATION             = 12266, -- You are assaulted by an uncanny sensation.
-        COMMON_SENSE_SURVIVAL         = 12273, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CONQUEST_BASE                 = 7086,  -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET        = 7245,  -- You can't fish here.
+        DIG_THROW_AWAY                = 7258,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
+        FIND_NOTHING                  = 7260,  -- You dig and you dig, but find nothing.
+        SIGN                          = 7415,  -- North: Grand Duchy of Jeuno, Sauromugue Champaign South: Pashhow Marshlands
+        PLAYER_OBTAINS_ITEM           = 7596,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7597,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7598,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7599,  -- You already possess that temporary item.
+        NO_COMBINATION                = 7604,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN            = 7635,  -- The monster fades before your eyes, a look of disappointment on its face.
+        UNITY_WANTED_BATTLE_INTERACT  = 7666,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 9782,  -- New training regime registered!
+        VOIDWALKER_NO_MOB             = 10955, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR        = 10956, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT           = 10957, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB          = 10958, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1       = 10960, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2       = 10961, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI           = 10962, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI          = 10963, -- Obtained key item: <keyitem>!
+        AWAIT_YOUR_CHALLENGE          = 12182, -- We await your challenge, traveler.
+        LACK_LEGION_POINTS            = 12219, -- It would seem that you lack the necessary amount of Legion points.
+        LEARNS_SPELL                  = 12267, -- <name> learns <spell>!
+        UNCANNY_SENSATION             = 12269, -- You are assaulted by an uncanny sensation.
+        COMMON_SENSE_SURVIVAL         = 12276, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
 
     mob =
     {
-        BLACK_TRIPLE_STARS_PH =
-        {
-            [17227968] = 17227972, -- 4 -16 -119 (north)
-            [17227988] = 17227992, -- 76 -15 -209 (south)
-        },
-
-        DROOLING_DAISY_PH =
-        {
-            [17228235] = 17228236, -- -691.786 -34.802 -335.763
-        },
-
-        ELDRITCH_EDGE_PH  =
-        {
-            [17228152] = 17228150, -- 440 -28 -44
-            [17228148] = 17228150, -- 396.992 -24.01 -152.613
-            [17228149] = 17228150, -- 395 -24 -147
-        },
-
-        SILK_CATERPILLAR  = 17227782,
-        SIMURGH           = 17228242,
-        CHUGLIX_BERRYPAWS = 17228249,
+        BLACK_TRIPLE_STARS = GetTableOfIDs('Black_Triple_Stars'), -- 2 NMs
+        DROOLING_DAISY     = GetFirstID('Drooling_Daisy'),
+        ELDRITCH_EDGE      = GetFirstID('Eldritch_Edge'),
+        SILK_CATERPILLAR   = GetFirstID('Silk_Caterpillar'),
+        SIMURGH            = GetFirstID('Simurgh'),
+        CHUGLIX_BERRYPAWS  = GetFirstID('Chuglix_Berrypaws'),
 
         VOIDWALKER =
         {

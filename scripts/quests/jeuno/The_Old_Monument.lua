@@ -1,7 +1,7 @@
 -----------------------------------
 -- The Old Monument
 -----------------------------------
--- Log ID: 3, Quest ID: 20
+-- Log ID: 3, Quest ID: 11
 -- Mertaire    : !pos -17 0 -61 245
 -- Bki Tbujhja : !pos -22 0 -60 245
 -- Song Runes  : !pos -244 16 -280 118

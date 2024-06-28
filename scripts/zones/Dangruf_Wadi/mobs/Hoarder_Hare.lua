@@ -7,11 +7,16 @@ local ID = zones[xi.zone.DANGRUF_WADI]
 -----------------------------------
 local entity = {}
 
+local teporingoPHTable =
+{
+    [ID.mob.TEPORINGO - 1] = ID.mob.TEPORINGO,
+}
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.TEPORINGO_PH, 20, 3600) -- 1 hour
+    xi.mob.phOnDespawn(mob, teporingoPHTable, 20, 3600) -- 1 hour
 end
 
 return entity

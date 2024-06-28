@@ -384,7 +384,7 @@ void CZoneEntities::WeatherChange(WEATHER weather)
     }
 }
 
-void CZoneEntities::MusicChange(uint8 BlockID, uint8 MusicTrackID)
+void CZoneEntities::MusicChange(uint16 BlockID, uint16 MusicTrackID)
 {
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
     {
@@ -631,7 +631,7 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
 
             if (validAggro && PController->CanAggroTarget(PChar))
             {
-                PCurrentMob->PEnmityContainer->AddBaseEnmity(PChar);
+                PCurrentMob->PAI->Engage(PChar->targid);
             }
         }
         else if (MOB != PChar->SpawnMOBList.end())
@@ -1552,7 +1552,7 @@ void CZoneEntities::ZoneServer(time_point tick)
                 CMobController* PController = static_cast<CMobController*>(PCurrentMob->PAI->GetController());
                 if (PController != nullptr && PController->CanAggroTarget(PMob))
                 {
-                    PCurrentMob->PEnmityContainer->AddBaseEnmity(PMob);
+                    PCurrentMob->PAI->Engage(PMob->targid);
                 }
             }
         }

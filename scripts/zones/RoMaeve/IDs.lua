@@ -17,37 +17,28 @@ zones[xi.zone.ROMAEVE] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023,  -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7061,  -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET        = 7220,  -- You can't fish here.
-        PILE_OF_RUBBLE                = 7402,  -- It is nothing but a pile of rubble.
-        A_CHILL_RUNS_DOWN_SPINE       = 7403,  -- A chill runs down your spine.
-        SENSE_OMINOUS_PRESENCE        = 7406,  -- You sense an ominous presence...
-        ITEMS_ITEMS_LA_LA             = 7409,  -- You can hear a strange voice... Items, items, la la la la la
-        GOBLIN_SLIPPED_AWAY           = 7415,  -- The Goblin slipped away when you were not looking...
-        PLAYER_OBTAINS_ITEM           = 7438,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7439,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7440,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7441,  -- You already possess that temporary item.
-        NO_COMBINATION                = 7446,  -- You were unable to enter a combination.
-        UNITY_WANTED_BATTLE_INTERACT  = 7508,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 9624,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 11634, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CONQUEST_BASE                 = 7064,  -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET        = 7223,  -- You can't fish here.
+        PILE_OF_RUBBLE                = 7405,  -- It is nothing but a pile of rubble.
+        A_CHILL_RUNS_DOWN_SPINE       = 7406,  -- A chill runs down your spine.
+        SENSE_OMINOUS_PRESENCE        = 7409,  -- You sense an ominous presence...
+        ITEMS_ITEMS_LA_LA             = 7412,  -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY           = 7418,  -- The Goblin slipped away when you were not looking...
+        PLAYER_OBTAINS_ITEM           = 7441,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7442,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7443,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7444,  -- You already possess that temporary item.
+        NO_COMBINATION                = 7449,  -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7511,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 9627,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 11637, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
-        NIGHTMARE_VASE_PH =
-        {
-            [17276981] = 17276982, -- -101.575 -6.099 -1.520 (west)
-            [17276987] = 17276992, -- 59.825 -5.760 25.123 (east)
-        },
-        ROGUE_RECEPTACLE_PH =
-        {
-            [17277075] = 17277079,
-            [17277078] = 17277079,
-        },
-        MOKKURKALFI_I     = 17276929,
-        MOKKURKALFI_II    = 17276930,
-        ELDHRIMNIR        = 17277126,
+        NIGHTMARE_VASE   = GetTableOfIDs('Nightmare_Vase'), -- 2 NMs
+        ROGUE_RECEPTACLE = GetFirstID('Rogue_Receptacle'),
+        ELDHRIMNIR       = GetFirstID('Eldhrimnir'),
+        MOKKURKALFI      = GetFirstID('Mokkurkalfi'),
     },
     npc =
     {
@@ -65,8 +56,8 @@ zones[xi.zone.ROMAEVE] =
             [10] = { -160.000, -6.000, -107.000 }, -- D-10
         },
 
-        MOONGATE_OFFSET = 17277196,
-        BASTOK_7_1_QM   = 17277208,
+        MOONGATE_OFFSET = GetFirstID('_3e0'),
+        BASTOK_7_1_QM   = GetFirstID('qm2'),
     },
 }
 

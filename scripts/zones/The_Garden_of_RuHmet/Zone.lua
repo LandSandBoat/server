@@ -2,6 +2,7 @@
 -- Zone: The_Garden_of_RuHmet (35)
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
+local gardenGlobal = require('scripts/zones/The_Garden_of_RuHmet/globals')
 -----------------------------------
 local zoneObject = {}
 
@@ -47,18 +48,18 @@ zoneObject.onInitialize = function(zone)
 
     -- Give the Fortitude ??? a random spawn
     local qmFort = GetNPCByID(ID.npc.QM_JAILER_OF_FORTITUDE)
-    qmFort:setPos(unpack(ID.npc.QM_JAILER_OF_FORTITUDE_POS[math.random(1, 5)]))
+    qmFort:setPos(unpack(gardenGlobal.qmPosFortTable[math.random(1, 5)]))
 
     -- Give the Ix'Aern DRK ??? a random spawn
     local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK)
     local qmDrkPos = math.random(1, 4)
     qmDrk:setLocalVar('position', qmDrkPos)
-    qmDrk:setPos(unpack(ID.npc.QM_IXAERN_DRK_POS[qmDrkPos]))
+    qmDrk:setPos(unpack(gardenGlobal.qmPosDRKTable[qmDrkPos]))
     qmDrk:setLocalVar('hatedPlayer', 0)
 
     -- Give the Faith ??? a random spawn
     local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH)
-    qmFaith:setPos(unpack(ID.npc.QM_JAILER_OF_FAITH_POS[math.random(1, 5)]))
+    qmFaith:setPos(unpack(gardenGlobal.qmPosFaithTable[math.random(1, 5)]))
 
     -- Give Ix'DRG a random placeholder by picking one of the four groups at random, then adding a random number of 0-2 for the specific mob.
     local groups = ID.mob.AWAERN_DRG_GROUPS
@@ -89,7 +90,7 @@ zoneObject.onGameHour = function(zone)
     if vanadielHour % s == 0 then
         local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH) -- Jailer of Faith
         qmFaith:hideNPC(60) -- Hide it for 60 seconds
-        qmFaith:setPos(unpack(ID.npc.QM_JAILER_OF_FAITH_POS[math.random(1, 5)])) -- Set the new position
+        qmFaith:setPos(unpack(gardenGlobal.qmPosFaithTable[math.random(1, 5)])) -- Set the new position
     end
 
     -- Ix'DRK spawn randomiser
@@ -97,7 +98,7 @@ zoneObject.onGameHour = function(zone)
         qmDrk:hideNPC(30)
         local qmDrkPos = math.random(1, 4)
         qmDrk:setLocalVar('position', qmDrkPos)
-        qmDrk:setPos(unpack(ID.npc.QM_IXAERN_DRK_POS[qmDrkPos]))
+        qmDrk:setPos(unpack(gardenGlobal.qmPosDRKTable[qmDrkPos]))
     end
 end
 
@@ -114,13 +115,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         player:setPos(-351.136, -2.25, -380, 253)
-    end
-
-    if
-        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and
-        player:getCharVar('PromathiaStatus') == 0
-    then
-        cs = 201
     end
 
     player:setCharVar('Ru-Hmet-TP', 0)
@@ -212,12 +206,6 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('Ru-Hmet-TP', 0)
     elseif (csid > 149 and csid < 184) or csid == 102 or csid == 103 or csid == 101 then
         player:setCharVar('Ru-Hmet-TP', 0)
-    elseif csid == 201 then
-        player:setCharVar('PromathiaStatus', 1)
-        player:addKeyItem(xi.ki.MYSTERIOUS_AMULET_PRISHE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MYSTERIOUS_AMULET)
-    elseif csid == 32000 and option == 1 then
-        player:setPos(420, 0, 398, 68)
     end
 end
 

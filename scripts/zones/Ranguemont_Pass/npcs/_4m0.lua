@@ -7,7 +7,6 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    return 1
 end
 
 return entity

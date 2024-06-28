@@ -6,6 +6,11 @@ local ID = zones[xi.zone.JUGNER_FOREST]
 -----------------------------------
 local entity = {}
 
+local fradubioPHTable =
+{
+    [ID.mob.FRADUBIO - 1] = ID.mob.FRADUBIO,
+}
+
 local updateRegen = function(mob)
     local hour = VanadielHour()
     if hour >= 4 and hour < 20 then
@@ -33,7 +38,7 @@ end
 
 entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
-    if not xi.mob.phOnDespawn(mob, ID.mob.FRADUBIO_PH, 10, 75600) then -- 21 hour minimum
+    if not xi.mob.phOnDespawn(mob, fradubioPHTable, 10, 75600) then -- 21 hour minimum
         mob:setRespawnTime(math.random(3600, 4500)) -- 60 to 75 minutes
     end
 end

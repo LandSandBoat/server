@@ -2,26 +2,26 @@ xi.equipment = xi.equipment or {}
 
 xi.equipment.baseNyzulWeapons =
 {
-    18492, -- (WAR) Sturdy Axe
-    18753, -- (MNK) Burning Fists
-    18851, -- (WHM) Werebuster
-    18589, -- (BLM) Mage's Staff
-    17742, -- (RDM) Vorpal Sword
-    18003, -- (THF) Swordbreaker
-    17744, -- (PLD) Brave Blade
-    18944, -- (DRK) Death Sickle
-    17956, -- (BST) Double Axe
-    18034, -- (BRD) Dancing Dagger
-    18719, -- (RNG) Killer Bow
-    18443, -- (SAM) Windslicer
-    18426, -- (NIN) Sasuke Katana
-    18120, -- (DRG) Radiant Lance
-    18590, -- (SMN) Scepter Staff
-    17743, -- (BLU) Wightslayer
-    18720, -- (COR) Quicksilver
-    18754, -- (PUP) Inferno Claws
-    19102, -- (DNC) Main Gauche
-    18592  -- (SCH) Elder Staff
+    xi.item.STURDY_AXE,     -- (WAR)
+    xi.item.BURNING_FISTS,  -- (MNK)
+    xi.item.WEREBUSTER,     -- (WHM)
+    xi.item.MAGES_STAFF,    -- (BLM)
+    xi.item.VORPAL_SWORD,   -- (RDM)
+    xi.item.SWORDBREAKER,   -- (THF)
+    xi.item.BRAVE_BLADE,    -- (PLD)
+    xi.item.DEATH_SICKLE,   -- (DRK)
+    xi.item.DOUBLE_AXE,     -- (BST)
+    xi.item.DANCING_DAGGER, -- (BRD)
+    xi.item.KILLER_BOW,     -- (RNG)
+    xi.item.WINDSLICER,     -- (SAM)
+    xi.item.SASUKE_KATANA,  -- (NIN)
+    xi.item.RADIANT_LANCE,  -- (DRG)
+    xi.item.SCEPTER_STAFF,  -- (SMN)
+    xi.item.WIGHTSLAYER,    -- (BLU)
+    xi.item.QUICKSILVER,    -- (COR)
+    xi.item.INFERNO_CLAWS,  -- (PUP)
+    xi.item.MAIN_GAUCHE,    -- (DNC)
+    xi.item.ELDER_STAFF     -- (SCH)
 }
 
 -----------------------------------
@@ -52,67 +52,222 @@ xi.equipment.relicIDs =
 {
     [xi.equipment.relic.SPHARAI] =
     {
-        18264, 18265, 18637, 18651, 18665, 19746, 19839, 20480, 20481, 20509
+        xi.item.SPHARAI,
+        xi.item.SPHARAI_80,
+        xi.item.SPHARAI_85,
+        xi.item.SPHARAI_90,
+        xi.item.SPHARAI_95,
+        xi.item.SPHARAI_99,
+        xi.item.SPHARAI_99_II,
+        xi.item.SPHARAI_119,
+        xi.item.SPHARAI_119_II,
+        xi.item.SPHARAI_119_III,
     },
+
     [xi.equipment.relic.MANDAU] =
     {
-        18270, 18271, 18638, 18652, 18666, 19747, 19840, 20555, 20556, 20583
+        xi.item.MANDAU,
+        xi.item.MANDAU_80,
+        xi.item.MANDAU_85,
+        xi.item.MANDAU_90,
+        xi.item.MANDAU_95,
+        xi.item.MANDAU_99,
+        xi.item.MANDAU_99_II,
+        xi.item.MANDAU_119,
+        xi.item.MANDAU_119_II,
+        xi.item.MANDAU_119_III,
     },
+
     [xi.equipment.relic.EXCALIBUR] =
     {
-        18276, 18277, 18639, 18653, 18667, 19748, 19841, 20645, 20646, 20685
+        xi.item.EXCALIBUR,
+        xi.item.EXCALIBUR_80,
+        xi.item.EXCALIBUR_85,
+        xi.item.EXCALIBUR_90,
+        xi.item.EXCALIBUR_95,
+        xi.item.EXCALIBUR_99,
+        xi.item.EXCALIBUR_99_II,
+        xi.item.EXCALIBUR_119,
+        xi.item.EXCALIBUR_119_II,
+        xi.item.EXCALIBUR_119_III,
     },
+
     [xi.equipment.relic.RAGNAROK] =
     {
-        18282, 18283, 18640, 18654, 18668, 19749, 19842, 20745, 20746, 21683
+        xi.item.RAGNAROK,
+        xi.item.RAGNAROK_80,
+        xi.item.RAGNAROK_85,
+        xi.item.RAGNAROK_90,
+        xi.item.RAGNAROK_95,
+        xi.item.RAGNAROK_99,
+        xi.item.RAGNAROK_99_II,
+        xi.item.RAGNAROK_119,
+        xi.item.RAGNAROK_119_II,
+        xi.item.RAGNAROK_119_III,
     },
+
     [xi.equipment.relic.GUTTLER] =
     {
-        18288, 18289, 18641, 18655, 18669, 19750, 19843, 20790, 20791, 21750
+        xi.item.GUTTLER,
+        xi.item.GUTTLER_80,
+        xi.item.GUTTLER_85,
+        xi.item.GUTTLER_90,
+        xi.item.GUTTLER_95,
+        xi.item.GUTTLER_99,
+        xi.item.GUTTLER_99_II,
+        xi.item.GUTTLER_119,
+        xi.item.GUTTLER_119_II,
+        xi.item.GUTTLER_119_III,
     },
+
     [xi.equipment.relic.BRAVURA] =
     {
-        18294, 18295, 18642, 18656, 18670, 19751, 19844, 20835, 20836, 21756
+        xi.item.BRAVURA,
+        xi.item.BRAVURA_80,
+        xi.item.BRAVURA_85,
+        xi.item.BRAVURA_90,
+        xi.item.BRAVURA_95,
+        xi.item.BRAVURA_99,
+        xi.item.BRAVURA_99_II,
+        xi.item.BRAVURA_119,
+        xi.item.BRAVURA_119_II,
+        xi.item.BRAVURA_119_III,
     },
+
     [xi.equipment.relic.APOCALYPSE] =
     {
-        18306, 18307, 18644, 18658, 18672, 19753, 19846, 20880, 20881, 21808
+        xi.item.APOCALYPSE,
+        xi.item.APOCALYPSE_80,
+        xi.item.APOCALYPSE_85,
+        xi.item.APOCALYPSE_90,
+        xi.item.APOCALYPSE_95,
+        xi.item.APOCALYPSE_99,
+        xi.item.APOCALYPSE_99_II,
+        xi.item.APOCALYPSE_119,
+        xi.item.APOCALYPSE_119_II,
+        xi.item.APOCALYPSE_119_III,
     },
+
     [xi.equipment.relic.GUNGNIR] =
     {
-        18300, 18301, 18643, 18657, 18671, 19752, 19845, 20925, 20926, 21857
+        xi.item.GUNGNIR,
+        xi.item.GUNGNIR_80,
+        xi.item.GUNGNIR_85,
+        xi.item.GUNGNIR_90,
+        xi.item.GUNGNIR_95,
+        xi.item.GUNGNIR_99,
+        xi.item.GUNGNIR_99_II,
+        xi.item.GUNGNIR_119,
+        xi.item.GUNGNIR_119_II,
+        xi.item.GUNGNIR_119_III,
     },
+
     [xi.equipment.relic.KIKOKU] =
     {
-        18312, 18313, 18645, 18659, 18673, 19754, 19847, 20970, 20971, 21906
+        xi.item.KIKOKU,
+        xi.item.KIKOKU_80,
+        xi.item.KIKOKU_85,
+        xi.item.KIKOKU_90,
+        xi.item.KIKOKU_95,
+        xi.item.KIKOKU_99,
+        xi.item.KIKOKU_99_II,
+        xi.item.KIKOKU_119,
+        xi.item.KIKOKU_119_II,
+        xi.item.KIKOKU_119_III,
     },
+
     [xi.equipment.relic.AMANOMURAKUMO] =
     {
-        18318, 18319, 18646, 18660, 18674, 19755, 19848, 21015, 21016, 21954
+        xi.item.AMANOMURAKUMO,
+        xi.item.AMANOMURAKUMO_80,
+        xi.item.AMANOMURAKUMO_85,
+        xi.item.AMANOMURAKUMO_90,
+        xi.item.AMANOMURAKUMO_95,
+        xi.item.AMANOMURAKUMO_99,
+        xi.item.AMANOMURAKUMO_99_II,
+        xi.item.AMANOMURAKUMO_119,
+        xi.item.AMANOMURAKUMO_119_II,
+        xi.item.AMANOMURAKUMO_119_III,
     },
+
     [xi.equipment.relic.MJOLLNIR] =
     {
-        18324, 18325, 18647, 18661, 18675, 19756, 19849, 21060, 21061, 21077
+        xi.item.MJOLLNIR,
+        xi.item.MJOLLNIR_80,
+        xi.item.MJOLLNIR_85,
+        xi.item.MJOLLNIR_90,
+        xi.item.MJOLLNIR_95,
+        xi.item.MJOLLNIR_99,
+        xi.item.MJOLLNIR_99_II,
+        xi.item.MJOLLNIR_119,
+        xi.item.MJOLLNIR_119_II,
+        xi.item.MJOLLNIR_119_III,
     },
+
     [xi.equipment.relic.CLAUSTRUM] =
     {
-        18330, 18331, 18648, 18662, 18676, 19757, 19850, 21135, 21136, 22060
+        xi.item.CLAUSTRUM,
+        xi.item.CLAUSTRUM_80,
+        xi.item.CLAUSTRUM_85,
+        xi.item.CLAUSTRUM_90,
+        xi.item.CLAUSTRUM_95,
+        xi.item.CLAUSTRUM_99,
+        xi.item.CLAUSTRUM_99_II,
+        xi.item.CLAUSTRUM_119,
+        xi.item.CLAUSTRUM_119_II,
+        xi.item.CLAUSTRUM_119_III,
     },
+
     [xi.equipment.relic.YOICHINOYUMI] =
     {
-        18348, 18349, 18650, 18664, 18678, 19759, 19852, 21210, 21211, 22115, 22129
+        xi.item.YOICHINOYUMI,
+        xi.item.YOICHINOYUMI_80,
+        xi.item.YOICHINOYUMI_85,
+        xi.item.YOICHINOYUMI_90,
+        xi.item.YOICHINOYUMI_95,
+        xi.item.YOICHINOYUMI_99,
+        xi.item.YOICHINOYUMI_99_II,
+        xi.item.YOICHINOYUMI_119,
+        xi.item.YOICHINOYUMI_119_II,
+        xi.item.YOICHINOYUMI_119_III,
+        xi.item.YOICHINOYUMI_119_III_NO_QUIVER,
     },
+
     [xi.equipment.relic.ANNIHILATOR] =
     {
-        18336, 18337, 18649, 18663, 18677, 19758, 19851, 21260, 21261, 21267, 22140
+        xi.item.ANNIHILATOR,
+        xi.item.ANNIHILATOR_80,
+        xi.item.ANNIHILATOR_85,
+        xi.item.ANNIHILATOR_90,
+        xi.item.ANNIHILATOR_95,
+        xi.item.ANNIHILATOR_99,
+        xi.item.ANNIHILATOR_99_II,
+        xi.item.ANNIHILATOR_119,
+        xi.item.ANNIHILATOR_119_II,
+        xi.item.ANNIHILATOR_119_III,
+        xi.item.ANNIHILATOR_119_III_NO_QUIVER,
     },
+
     [xi.equipment.relic.GJALLARHORN] =
     {
-        18342, 18577, 18578, 18579, 18580, 18572, 18840
+        xi.item.GJALLARHORN,
+        xi.item.GJALLARHORN_80,
+        xi.item.GJALLARHORN_85,
+        xi.item.GJALLARHORN_90,
+        xi.item.GJALLARHORN_95,
+        xi.item.GJALLARHORN_99,
+        xi.item.GJALLARHORN_99_II,
     },
+
     [xi.equipment.relic.AEGIS] =
     {
-        15070, 16195, 16196, 16197, 16198, 11927, 16200
+        xi.item.AEGIS,
+        xi.item.AEGIS_80,
+        xi.item.AEGIS_85,
+        xi.item.AEGIS_90,
+        xi.item.AEGIS_95,
+        xi.item.AEGIS_99,
+        xi.item.AEGIS_99_II,
     },
 }
 
@@ -124,24 +279,24 @@ xi.equipment.relicIDs =
 local artifactArmorRanges =
 {
 --      Min,   Max
-    { 12511, 12520 }, -- Original Head
-    { 13855, 13857 },
-    { 13868, 13869 },
-    { 12638, 12650 }, -- Original Body
-    { 13781, 13782 },
-    { 13961, 13975 }, -- Original Hand
-    { 14089, 14103 }, -- Original Feet
-    { 14214, 14228 }, -- Original Legs
-    { 15265, 15267 }, -- ToAU Head
-    { 14521, 14523 }, -- ToAU Body
-    { 14928, 14930 }, -- ToAU Hand
-    { 15684, 15686 }, -- ToAU Feet
-    { 15600, 15602 }, -- ToAU Legs
-    { 16138, 16140 }, -- WotG Head
-    { 14578, 14580 }, -- WotG Body
-    { 15002, 15004 }, -- WotG Hand
-    { 15746, 15748 }, -- WotG Feet
-    { 15659, 15661 }, -- WotG Legs
+    { xi.item.FIGHTERS_MASK,       xi.item.EVOKERS_HORN         }, -- Original Head
+    { xi.item.HEALERS_CAP,         xi.item.CHORAL_ROUNDLET      },
+    { xi.item.MYOCHIN_KABUTO,      xi.item.NINJA_HATSUBURI      },
+    { xi.item.FIGHTERS_LORICA,     xi.item.EVOKERS_DOUBLET      }, -- Original Body
+    { xi.item.MYOCHIN_DOMARU,      xi.item.NINJA_CHAINMAIL      },
+    { xi.item.FIGHTERS_MUFFLERS,   xi.item.EVOKERS_BRACERS      }, -- Original Hand
+    { xi.item.FIGHTERS_CALLIGAE,   xi.item.EVOKERS_PIGACHES     }, -- Original Feet
+    { xi.item.FIGHTERS_CUISSES,    xi.item.EVOKERS_SPATS        }, -- Original Legs
+    { xi.item.MAGUS_KEFFIYEH,      xi.item.PUPPETRY_TAJ         }, -- ToAU Head
+    { xi.item.MAGUS_JUBBAH,        xi.item.PUPPETRY_TOBE        }, -- ToAU Body
+    { xi.item.MAGUS_BAZUBANDS,     xi.item.PUPPETRY_DASTANAS    }, -- ToAU Hand
+    { xi.item.MAGUS_CHARUQS,       xi.item.PUPPETRY_BABOUCHES   }, -- ToAU Feet
+    { xi.item.MAGUS_SHALWAR,       xi.item.PUPPETRY_CHURIDARS   }, -- ToAU Legs
+    { xi.item.DANCERS_TIARA_M,     xi.item.SCHOLARS_MORTARBOARD }, -- WotG Head
+    { xi.item.DANCERS_CASAQUE_M,   xi.item.SCHOLARS_GOWN        }, -- WotG Body
+    { xi.item.DANCERS_BANGLES_M,   xi.item.SCHOLARS_BRACERS     }, -- WotG Hand
+    { xi.item.DANCERS_TOE_SHOES_M, xi.item.SCHOLARS_LOAFERS     }, -- WotG Feet
+    { xi.item.DANCERS_TIGHTS_M,    xi.item.HOMAM_GAMBIERAS      }, -- WotG Legs "TODO / BUG?": SCHOLARS_PANTS = 16311
 }
 
 xi.equipment.isArtifactArmor = function(itemId)

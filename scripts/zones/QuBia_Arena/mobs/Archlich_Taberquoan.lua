@@ -11,19 +11,39 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 32)
 end
 
+entity.onMobEngage = function(mob, player)
+end
+
 entity.onMobFight = function(mob, target)
     local battleTime = mob:getBattleTime()
 
     if battleTime - mob:getLocalVar('RepopWarriors') > 30 then
         local warriorsSpawned = 0
-        for warrior = mob:getID() + 3, mob:getID() + 6 do
-            if not GetMobByID(warrior):isSpawned() and warriorsSpawned < 2 then
-                SpawnMob(warrior):updateEnmity(target)
-                if warriorsSpawned == 1 then
-                    GetMobByID(warrior):stun(5000)
-                end
 
+        -- Count Warriors.  This is necessary since if you are at the end
+        -- of the mob list, count may not be accurate if trying to do both
+        -- at the same time.
+        for warrior = mob:getID() + 3, mob:getID() + 6 do
+            if GetMobByID(warrior):isSpawned() then
                 warriorsSpawned = warriorsSpawned + 1
+            end
+        end
+
+        -- Iterate over possible warriors to find the next valid one and
+        -- spawn it.  Stagger them by 5s if two are being spawned in the same loop.
+        if warriorsSpawned < 2 then
+            local neededSpawns = 2 - warriorsSpawned
+            for warrior = mob:getID() + 3, mob:getID() + 6 do
+                if not GetMobByID(warrior):isSpawned() and neededSpawns > 0 then
+                    local warriorMob = SpawnMob(warrior)
+
+                    warriorMob:updateEnmity(target)
+                    if neededSpawns == 2 then
+                        warriorMob:stun(5000)
+                    end
+
+                    neededSpawns = neededSpawns - 1
+                end
             end
         end
 
@@ -32,7 +52,6 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.ARCHMAGE_ASSASSIN)
 end
 
 return entity

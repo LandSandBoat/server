@@ -16,13 +16,11 @@ local content = BattlefieldQuest:new({
     exitNpc          = 'Burning_Circle',
     requiredItems    = { xi.item.BANISHING_CHARM },
 
-    questArea = xi.questLog.OUTLANDS,
-    quest     = xi.quest.id.outlands.A_THIEF_IN_NORG,
+    questArea     = xi.questLog.OUTLANDS,
+    quest         = xi.quest.id.outlands.A_THIEF_IN_NORG,
+    requiredVar   = 'Quest[5][142]Prog',
+    requiredValue = 6,
 })
-
-function content:entryRequirement(player, npc, isRegistrant, trade)
-    return xi.quest.getVar(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG) == 6
-end
 
 content.groups =
 {
@@ -33,21 +31,18 @@ content.groups =
                 waughroonID.mob.GAKI,
                 waughroonID.mob.GAKI + 1,
                 waughroonID.mob.GAKI + 2,
-                waughroonID.mob.GAKI + 3,
             },
 
             {
                 waughroonID.mob.GAKI + 5,
                 waughroonID.mob.GAKI + 6,
                 waughroonID.mob.GAKI + 7,
-                waughroonID.mob.GAKI + 8,
             },
 
             {
                 waughroonID.mob.GAKI + 10,
                 waughroonID.mob.GAKI + 11,
                 waughroonID.mob.GAKI + 12,
-                waughroonID.mob.GAKI + 13,
             },
         },
 
@@ -56,6 +51,17 @@ content.groups =
         end,
     },
 
+    -- Elemental
+    {
+        mobIds =
+        {
+            { waughroonID.mob.GAKI + 3  },
+            { waughroonID.mob.GAKI + 8  },
+            { waughroonID.mob.GAKI + 13 },
+        },
+    },
+
+    -- Avatar
     {
         mobIds =
         {
@@ -63,6 +69,8 @@ content.groups =
             { waughroonID.mob.GAKI + 9  },
             { waughroonID.mob.GAKI + 14 },
         },
+
+        spawned = false,
     },
 }
 

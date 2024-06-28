@@ -438,6 +438,7 @@ xi.mod =
     PALISADE_BLOCK_BONUS            = 1066, -- Increases base block rate while under the effects of Palisade (additive, not multiplicative)
     REPRISAL_BLOCK_BONUS            = 1067, -- Increases block rate while under the effects of Reprisal (multiplicative, not additive)
     REPRISAL_SPIKES_BONUS           = 1068, -- Increases Reprisal spikes damage by percentage (e.g. mod value of 50 will increase spikes damage by 50%)
+    SHIELD_BARRIER                  = 1082, -- Grants a bonus to Protect spells cast by self while a shield is equipped.
 
     -- Dark Knight
     ARCANE_CIRCLE_POTENCY           = 1069, -- Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
@@ -707,6 +708,8 @@ xi.mod =
     EAT_RAW_FISH                    = 412, -- Without this, only Mithra can eat raw fish (item cannot be used)
     EAT_RAW_MEAT                    = 413, -- Without this, only Galka can eat raw meat (item cannot be used)
     DRINK_DISTILLED                 = 159, -- Without this, Distilled Water cannot be consumed (item can still be used)
+
+    EQUIPMENT_ONLY_RACE             = 276, -- An 8-bit flag that denotes that only a certain race(s) can use this equipment (0 means all races can use)
 
     ENHANCES_CURSNA_RCVD            = 67,   -- Potency of "Cursna" effects received
     ENHANCES_CURSNA                 = 310,  -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
