@@ -1387,7 +1387,7 @@ namespace charutils
             {
                 if (PItem->getID() == ItemID)
                 {
-                    itemCount++;
+                    itemCount += PItem->getQuantity();
                 }
             });
             // clang-format on
