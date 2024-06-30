@@ -10038,7 +10038,6 @@ INSERT INTO `mob_droplist` VALUES (1213,0,0,1000,886,@RARE);       -- Demon Skul
 -- ZoneID:  52 - Grand Marid
 INSERT INTO `mob_droplist` VALUES (1214,0,0,1000,2151,210);       -- Marid Hide (21.0%)
 INSERT INTO `mob_droplist` VALUES (1214,0,0,1000,2166,@UNCOMMON); -- Lock Of Marid Hair (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1214,0,0,1000,2147,30);        -- Marid Tusk (3.0%)
 INSERT INTO `mob_droplist` VALUES (1214,2,0,1000,2155,0);         -- Lesser Chigoe (Steal)
 
 -- ZoneID: 215 - Granite Borer
@@ -12948,15 +12947,11 @@ INSERT INTO `mob_droplist` VALUES (1616,0,0,1000,940,@VRARE);   -- Revival Tree 
 -- ZoneID:  51 - Marid
 INSERT INTO `mob_droplist` VALUES (1617,0,0,1000,2151,220);    -- Marid Hide (22.0%)
 INSERT INTO `mob_droplist` VALUES (1617,0,0,1000,2166,80);     -- Lock Of Marid Hair (8.0%)
-INSERT INTO `mob_droplist` VALUES (1617,0,0,1000,2147,20);     -- Marid Tusk (2.0%)
-INSERT INTO `mob_droplist` VALUES (1617,0,0,1000,2147,@VRARE); -- Marid Tusk (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1617,2,0,1000,2155,0);      -- Lesser Chigoe (Steal)
 
 -- ZoneID:  77 - Marid
 INSERT INTO `mob_droplist` VALUES (1618,0,0,1000,2151,210);       -- Marid Hide (21.0%)
 INSERT INTO `mob_droplist` VALUES (1618,0,0,1000,2166,@UNCOMMON); -- Lock Of Marid Hair (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1618,0,0,1000,2147,30);        -- Marid Tusk (3.0%)
-INSERT INTO `mob_droplist` VALUES (1618,0,0,1000,2147,20);        -- Marid Tusk (2.0%)
 INSERT INTO `mob_droplist` VALUES (1618,2,0,1000,2155,0);         -- Lesser Chigoe (Steal)
 
 -- ZoneID:  85 - Mariehene

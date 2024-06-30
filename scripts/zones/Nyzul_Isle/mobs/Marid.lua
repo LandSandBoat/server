@@ -2,6 +2,8 @@
 --  MOB: Marid
 -- Area: Nyzul Isle
 -----------------------------------
+mixins = { require('scripts/mixins/families/marid') }
+-----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
