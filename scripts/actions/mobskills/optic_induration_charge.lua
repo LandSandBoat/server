@@ -25,6 +25,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local chargeCount = mob:getLocalVar('chargeCount')
+
     if chargeCount == 0 then
         mob:setAutoAttackEnabled(false)
         mob:setLocalVar('chargeCount', 1)
@@ -33,8 +34,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             mob:useMobAbility(1464)
         end)
     else
-        chargeCount = chargeCount + 1
+        chargeCount       = chargeCount + 1
         local chargeTotal = mob:getLocalVar('chargeTotal')
+
         if chargeCount == chargeTotal then
             mob:timer(4000, function(mobArg)
                 mob:useMobAbility(1465, mob:getTarget())
@@ -54,6 +56,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     skill:setMsg(xi.msg.basic.NONE)
+
     return 0
 end
 

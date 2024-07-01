@@ -16,8 +16,9 @@ g_mixins.families.aern = function(aernMob)
             return
         end
 
-        local reraises = mob:getLocalVar('AERN_RERAISE_MAX')
+        local reraises    = mob:getLocalVar('AERN_RERAISE_MAX')
         local currReraise = mob:getLocalVar('AERN_RERAISES')
+
         if reraises == 0 then
             reraises = 1
         end
@@ -49,14 +50,19 @@ g_mixins.families.aern = function(aernMob)
 
         mob:timer(12000, function(mobArg)
             target = GetPlayerByID(targetID)
-            if target == nil then
+
+            if not target then
                 -- try mob
                 target = GetEntityByID(targetID, mobArg:getInstance(), true)
             end
 
-            if target == nil and masterID ~= 0 then
+            if
+                not target and
+                masterID > 0
+            then
                 target = GetPlayerByID(masterID)
-                if target == nil then
+
+                if not target then
                     -- try mob
                     target = GetEntityByID(masterID, mobArg:getInstance(), true)
                 end
@@ -67,6 +73,7 @@ g_mixins.families.aern = function(aernMob)
             mobArg:setLocalVar('AERN_RERAISES', currReraise + 1)
             mobArg:resetAI()
             mobArg:stun(3000)
+
             if
                 target and
                 mobArg:checkDistance(target) < 25 and
@@ -76,14 +83,19 @@ g_mixins.families.aern = function(aernMob)
                 mobArg:updateEnmity(target)
             else
                 local partySize = killer:getPartySize() -- Check for other available valid aggro targets
-                local i = 1
-                if killer ~= nil then
+                local i         = 1
+
+                if killer then
                     for _, partyMember in pairs(killer:getAlliance()) do --TODO add enmity list check when binding avail
+                        -- Engage
                         if partyMember:isAlive() and mobArg:checkDistance(partyMember) < 25 then
                             mobArg:updateClaim(partyMember)
                             mobArg:updateEnmity(partyMember)
+
                             break
-                        elseif i == partySize then --if all checks fail just disengage
+
+                        -- Disengage.
+                        elseif i == partySize then
                             mobArg:disengage()
                         end
 
