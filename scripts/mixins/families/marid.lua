@@ -6,7 +6,7 @@ g_mixins.families = g_mixins.families or {}
 g_mixins.families.marid = function(maridMob)
     -- 20% chance to break tusk on critical hit
     maridMob:addListener('CRITICAL_TAKE', 'MARID_CRITICAL_TAKE', function(mob)
-        if not utils.chance(20) then
+        if math.random() > 20 then
             return
         end
 

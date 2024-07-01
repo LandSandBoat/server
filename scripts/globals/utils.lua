@@ -217,10 +217,6 @@ function utils.uniqueRandomTable(minVal, maxVal, numEntries)
     return resultTable
 end
 
-function utils.chance(likelihood)
-    return math.random(100) <= likelihood
-end
-
 function utils.clamp(input, min_val, max_val)
     if min_val ~= nil and input < min_val then
         input = min_val

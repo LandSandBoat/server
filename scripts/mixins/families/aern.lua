@@ -22,8 +22,12 @@ g_mixins.families.aern = function(aernMob)
             reraises = 1
         end
 
-        if currReraise >= reraises or utils.chance(60) then
+        if
+            currReraise >= reraises or
+            math.random(1, 100) <= 60
+        then
             mob:setMobMod(xi.mobMod.NO_DROPS, 0)
+
             return
         end
 

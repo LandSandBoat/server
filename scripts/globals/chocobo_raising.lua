@@ -1151,7 +1151,7 @@ xi.chocoboRaising.initChocoboData = function(player)
             for _, condition in pairs(conditions) do
                 -- TODO: Use stats and history instead of pure chance to see what
                 --     : conditions might happen
-                if utils.chance(5) then
+                if math.random(1, 100) <= 5 then
                     setCondition(chocoState, condition, true)
                     break
                 end
@@ -2005,7 +2005,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 --     : let's make it 50/50 to start with, and then a small
                 --     : chance on top for a tie.
                 local winner = utils.randomEntry({ 0, 2 })
-                if utils.chance(5) then
+                if math.random(1, 100) <= 5 then
                     winner = 1
                 end
 
