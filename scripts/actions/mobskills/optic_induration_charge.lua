@@ -11,7 +11,12 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- Rarely used Optic Induration. Only charge if not an NM and in normal mode (no bars or rings)
-    if mob:isNM() or mob:getAnimationSub() >= 2 or utils.chance(75) then
+    if
+        mob:isNM() or
+        mob:getAnimationSub() >= 2 or
+        math.random(1, 100) <= 75
+    then
+
         return 1
     end
 
@@ -20,6 +25,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local chargeCount = mob:getLocalVar('chargeCount')
+
     if chargeCount == 0 then
         mob:setAutoAttackEnabled(false)
         mob:setLocalVar('chargeCount', 1)
@@ -28,8 +34,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             mob:useMobAbility(1464)
         end)
     else
-        chargeCount = chargeCount + 1
+        chargeCount       = chargeCount + 1
         local chargeTotal = mob:getLocalVar('chargeTotal')
+
         if chargeCount == chargeTotal then
             mob:timer(4000, function(mobArg)
                 mob:useMobAbility(1465, mob:getTarget())
@@ -49,6 +56,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     skill:setMsg(xi.msg.basic.NONE)
+
     return 0
 end
 
