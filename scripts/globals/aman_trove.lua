@@ -66,7 +66,7 @@ xi.amanTrove.marsGuaranteedLoot =
 -- Venus
 -----------------------------------
 xi.amanTrove.venusChanceOfPerfectRun = 0.5 -- % chance of being able to get through all chests without a mimic
-xi.amanTrove.venusMimicChance = (1.0 - math.pow(xi.amanTrove.chanceOfPerfectRun / 100, 1 / xi.amanTrove.numChests)) * 100
+xi.amanTrove.venusMimicChance = (1.0 - math.pow(xi.amanTrove.venusChanceOfPerfectRun / 100, 1 / xi.amanTrove.numChests)) * 100
 -- Works out to: 41.13% chance of a mimic on any chest
 
 -- This is the percentage of the remainder of the roll after the mimic check is done
@@ -118,7 +118,7 @@ end
 -----------------------------------
 -- Global Functions
 -----------------------------------
-xi.amantrove.setupBattlefield = function(battlefield)
+xi.amanTrove.setupBattlefield = function(battlefield)
     local zone = battlefield:getZone()
     local ID   = zones[zone:getID()]
 
@@ -201,4 +201,109 @@ xi.amanTrove.prepareMimic = function(player, npc)
 
     -- TODO: Make all other closed chests disappear, open chests remain.
     -- TODO: Change model into animated mimic, make name visible, set enmity, etc.
+end
+
+-----------------------------------
+-- Greyson
+-----------------------------------
+local EXPLORING_THE_TROVE = 1447
+
+xi.amanTrove.onGreysonTrade = function(player, npc, trade)
+    -- TODO: Try trading before flagging
+
+    -- TODO: What happens if you trade in an unused orb?
+    -- TODO: Whats the item list/distribution for what you could get back
+
+    -- 20085: Traded Silver Voucher
+    -- Args: 4, 1, <current gil?>, 0
+
+    -- Trading back used Orbs: Not a CS, just ID messaging?
+
+    -- The Key Item Moglification: A.M.A.N. Trove obtained by placing a Prismatic Chest icon.png Prismatic Chest in your Mog House decreases the chance of obtaining a Juice item when trading a used Mars Orb or Venus Orb to Greyson. This effect is around +5%.
+end
+
+xi.amanTrove.onGreysonTrigger = function(player, npc)
+    local playerAgeDays        = (os.time() - player:getTimeCreated()) / 86400
+    local playerOldEnough      = playerAgeDays >= 45 -- TODO: Extract into setting
+    local eminenceProgress     = player:getEminenceProgress(EXPLORING_THE_TROVE) -- nil: not flagged, 0: flagged and not completed, 1: flagged and completed
+    local eminenceCompleted    = player:getEminenceCompleted(EXPLORING_THE_TROVE)
+    local silverVouchersStored = player:getCurrency('silver_aman_voucher')
+
+    -- This is worked out as `5 - silverVouchersAvailableToBuy`, so 0 means 5 are available, 3 means 2 are available etc.
+    -- TODO: This will have to be a charvar, since we also need it during onEventFinish
+    -- TODO: This will have to reset once a month, or whenever, a setting?
+    local silverVouchersBought    = utils.clamp(player:getCharVar("[AMAN]SilverVouchersBought"), 0, 5)
+
+    local playerGil = player:getGil()
+
+    -- NOTE: Is the cost of vouchers hard coded into the CS? Yes
+    -- NOTE: Is the cost of orbs hard coded into the CS? Yes
+    -- NOTE: Is the number of buyable vouchers hard coded into the CS? Yes
+
+    if playerOldEnough and eminenceProgress == 0 and not eminenceCompleted then
+        -- Intro text
+        player:startEvent(20083)
+        return
+    end
+
+    if eminenceCompleted then
+        -- Main menu
+        -- TODO: Are there other menu options to hide 'buy single', and 'buy multiple' when those options aren't available?
+        player:startEvent(20084, silverVouchersStored, silverVouchersBought, playerGil)
+        return
+    end
+
+    -- Fall through to default rejection text
+    player:startEvent(20082)
+end
+
+xi.amanTrove.onGreysonEventUpdate = function(player, csid, option, npc)
+    -- TODO: Make sure to validate gil amounts/voucher levels before giving things in case of injection
+    print('update', csid, option)
+    -- TODO: Seemingly unused?
+end
+
+xi.amanTrove.onGreysonEventFinish = function(player, csid, option, npc)
+    print('finish', csid, option)
+
+    -- TODO: Make sure to validate gil amounts/voucher levels before giving things in case of injection
+
+    if csid == 20083 then -- Intro CS
+        if player:getEminenceProgress(EXPLORING_THE_TROVE) == 0 then
+            xi.roe.onRecordTrigger(player, EXPLORING_THE_TROVE)
+        end
+    elseif csid == 20084 then -- Menu
+        local playerGil               = player:getGil()
+        local vouchersPlayerCanAfford = math.min(math.floor(playerGil / 100000), 5)
+        local vouchersTotalCost       = vouchersPlayerCanAfford * 100000
+        local silverVouchersStored    = player:getCurrency('silver_aman_voucher')
+        local silverVouchersBought    = utils.clamp(player:getCharVar("[AMAN]SilverVouchersBought"), 0, 5)
+        local silverVouchersAvailable = 5 - silverVouchersBought
+
+        if option == 1 then -- Bought Mars Orb
+            if silverVouchersStored >= 6 and npcUtil.giveItem(player, xi.item.MARS_ORB) then
+                -- TODO: This handles the rejection logic if you already have the orb, but looks ugly. Needs retail capture.
+                player:delCurrency('silver_aman_voucher', 6)
+            end
+        elseif option == 2 then -- Bought Venus Orb
+            if silverVouchersStored >= 10 and npcUtil.giveItem(player, xi.item.VENUS_ORB) then
+                -- TODO: This handles the rejection logic if you already have the orb, but looks ugly. Needs retail capture.
+                player:delCurrency('silver_aman_voucher', 10)
+            end
+        elseif option == 3 then -- Bought single voucher
+            if silverVouchersAvailable > 0 then
+                player:addCurrency('silver_aman_voucher', 1)
+                player:setCharVar("[AMAN]SilverVouchersBought", silverVouchersBought + 1)
+                player:delGil(100000)
+            end
+        elseif option == 4 then -- Bought maximum vouchers
+            if silverVouchersAvailable > 0 then
+                -- TODO: This seems to take away more gil than it should...
+                local numVouchers = vouchersPlayerCanAfford
+                player:addCurrency('silver_aman_voucher', numVouchers)
+                player:setCharVar("[AMAN]SilverVouchersBought", silverVouchersBought + numVouchers)
+                player:delGil(vouchersTotalCost)
+            end
+        end
+    end
 end
