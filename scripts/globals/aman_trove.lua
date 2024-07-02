@@ -10,6 +10,7 @@
 -----------------------------------
 xi = xi or {}
 xi.amanTrove = xi.amanTrove or {}
+local lowerJeunoID = zones[xi.zone.LOWER_JEUNO]
 
 -- Balgas Dias
 -- 7702 : You hear a loud thud, as if a large amount of spoils spontaneously appeared.
@@ -208,39 +209,90 @@ end
 -----------------------------------
 local EXPLORING_THE_TROVE = 1447
 
+xi.amanTrove.greysonReturnRoll = function(player, tradedOrbType)
+    local roll = math.random(1, 100)
+
+    local rechargeChance = 1 -- 1% chance of recharge
+    if player:hasKeyItem(xi.ki.MOGLIFICATION_AMAN_TROVE) then
+        rechargeChance = rechargeChance + 5 -- Total: 6% chance of recharge
+    end
+
+    if roll <= rechargeChance then
+        return tradedOrbType
+    elseif roll <= rechargeChance + 10 then -- The next 10%
+        return xi.item.SP_DIAL_KEY
+    elseif roll <= rechargeChance + 20 then -- The next 10%
+        return xi.item.COPPER_AMAN_VOUCHER
+    end
+
+    -- Otherwise:
+    return utils.randomEntry({ xi.item.BOTTLE_OF_ORANGE_JUICE, xi.item.BOTTLE_OF_APPLE_JUICE })
+end
+
 xi.amanTrove.onGreysonTrade = function(player, npc, trade)
-    -- TODO: Try trading before flagging
+    local playerAgeDays         = (os.time() - player:getTimeCreated()) / 86400
+    local playerOldEnough       = playerAgeDays >= 45 -- TODO: Extract into setting
+    local playerLevelHighEnough = player:getMainLvl() >= 99
+    local eminenceCompleted     = player:getEminenceCompleted(EXPLORING_THE_TROVE)
 
-    -- TODO: What happens if you trade in an unused orb?
-    -- TODO: Whats the item list/distribution for what you could get back
+    -- TODO: If the trade contains a valid item, you'll get a message. If not, you won't.
+    local validItems = { xi.item.SILVER_VOUCHER, xi.item.MARS_ORB, xi.item.VENUS_ORB }
+    if not playerOldEnough or not playerLevelHighEnough or not eminenceCompleted then
+        player:messageSpecial(lowerJeunoID.text.NO_NEED_TO_HURRY)
+        return
+    end
 
-    -- 20085: Traded Silver Voucher
-    -- Args: 4, 1, <current gil?>, 0
+    local silverVouchersStored = player:getCurrency('silver_aman_voucher')
 
-    -- Trading back used Orbs: Not a CS, just ID messaging?
+    if npcUtil.tradeHas(trade, xi.item.SILVER_AMAN_VOUCHER) then
+        -- player:startEvent(20085, silverVouchersStored, 1, player:getGil(), 0)
 
-    -- The Key Item Moglification: A.M.A.N. Trove obtained by placing a Prismatic Chest icon.png Prismatic Chest in your Mog House decreases the chance of obtaining a Juice item when trading a used Mars Orb or Venus Orb to Greyson. This effect is around +5%.
+        -- TODO: Count up all the vouchers in the trade
+        local voucherCountAfterTrade = silverVouchersStored + trade:getItemCount()
+        if voucherCountAfterTrade > 255 then
+            player:messageSpecial(lowerJeunoID.text.CANT_CARRY_ANY_MORE)
+            return
+        end
+
+        -- Otherwise, store:
+        player:addCurrency('silver_aman_voucher', trade:getItemCount())
+    elseif npcUtil.tradeHasExactly(trade, xi.item.MARS_ORB) then
+        local item = trade:getItem()
+        if item:getWornUses() > 0 then
+            local loot = xi.amanTove.greysonRechargeRoll(xi.item.MARS_ORB)
+            if loot == xi.item.MARS_ORB then
+                player:messageSpecial(lowerJeunoID.text.ALREADY_BEEN_USED_ORB, loot)
+            else
+                player:messageSpecial(lowerJeunoID.text.ALREADY_BEEN_USED_ITEM, loot)
+            end
+            player:confirmTrade()
+
+            -- TODO: Give loot
+        else
+            player:messageSpecial(lowerJeunoID.text.THIS_ONE_HASNT_BEEN_USED)
+        end
+    elseif npcUtil.tradeHasExactly(trade, xi.item.VENUS_ORB) then
+        -- TODO
+    end
 end
 
 xi.amanTrove.onGreysonTrigger = function(player, npc)
-    local playerAgeDays        = (os.time() - player:getTimeCreated()) / 86400
-    local playerOldEnough      = playerAgeDays >= 45 -- TODO: Extract into setting
-    local eminenceProgress     = player:getEminenceProgress(EXPLORING_THE_TROVE) -- nil: not flagged, 0: flagged and not completed, 1: flagged and completed
-    local eminenceCompleted    = player:getEminenceCompleted(EXPLORING_THE_TROVE)
-    local silverVouchersStored = player:getCurrency('silver_aman_voucher')
+    local playerGil             = player:getGil()
+    local playerAgeDays         = (os.time() - player:getTimeCreated()) / 86400
+    local playerOldEnough       = playerAgeDays >= 45 -- TODO: Extract into setting
+    local playerLevelHighEnough = player:getMainLvl() >= 99
+    local eminenceProgress      = player:getEminenceProgress(EXPLORING_THE_TROVE) -- nil: not flagged, 0: flagged and not completed, 1: flagged and completed
+    local eminenceCompleted     = player:getEminenceCompleted(EXPLORING_THE_TROVE)
+    local silverVouchersStored  = player:getCurrency('silver_aman_voucher')
 
-    -- This is worked out as `5 - silverVouchersAvailableToBuy`, so 0 means 5 are available, 3 means 2 are available etc.
-    -- TODO: This will have to be a charvar, since we also need it during onEventFinish
     -- TODO: This will have to reset once a month, or whenever, a setting?
-    local silverVouchersBought    = utils.clamp(player:getCharVar("[AMAN]SilverVouchersBought"), 0, 5)
-
-    local playerGil = player:getGil()
+    local silverVouchersBought = player:getCharVar('[AMAN]SilverVouchersBought')
 
     -- NOTE: Is the cost of vouchers hard coded into the CS? Yes
     -- NOTE: Is the cost of orbs hard coded into the CS? Yes
     -- NOTE: Is the number of buyable vouchers hard coded into the CS? Yes
 
-    if playerOldEnough and eminenceProgress == 0 and not eminenceCompleted then
+    if playerOldEnough and playerLevelHighEnough and eminenceProgress == 0 and not eminenceCompleted then
         -- Intro text
         player:startEvent(20083)
         return
@@ -258,15 +310,13 @@ xi.amanTrove.onGreysonTrigger = function(player, npc)
 end
 
 xi.amanTrove.onGreysonEventUpdate = function(player, csid, option, npc)
-    -- TODO: Make sure to validate gil amounts/voucher levels before giving things in case of injection
-    print('update', csid, option)
-    -- TODO: Seemingly unused?
+    -- NOTE: Seemingly unused?
 end
 
 xi.amanTrove.onGreysonEventFinish = function(player, csid, option, npc)
     print('finish', csid, option)
 
-    -- TODO: Make sure to validate gil amounts/voucher levels before giving things in case of injection
+    -- NOTE: Make sure to validate gil amounts/voucher levels before giving things in case of injection
 
     if csid == 20083 then -- Intro CS
         if player:getEminenceProgress(EXPLORING_THE_TROVE) == 0 then
@@ -274,11 +324,11 @@ xi.amanTrove.onGreysonEventFinish = function(player, csid, option, npc)
         end
     elseif csid == 20084 then -- Menu
         local playerGil               = player:getGil()
-        local vouchersPlayerCanAfford = math.min(math.floor(playerGil / 100000), 5)
-        local vouchersTotalCost       = vouchersPlayerCanAfford * 100000
         local silverVouchersStored    = player:getCurrency('silver_aman_voucher')
-        local silverVouchersBought    = utils.clamp(player:getCharVar("[AMAN]SilverVouchersBought"), 0, 5)
+        local silverVouchersBought    = player:getCharVar('[AMAN]SilverVouchersBought')
         local silverVouchersAvailable = 5 - silverVouchersBought
+        local voucherCost             = 100000
+        local vouchersTotalCost       = silverVouchersAvailable * voucherCost
 
         if option == 1 then -- Bought Mars Orb
             if silverVouchersStored >= 6 and npcUtil.giveItem(player, xi.item.MARS_ORB) then
@@ -291,17 +341,15 @@ xi.amanTrove.onGreysonEventFinish = function(player, csid, option, npc)
                 player:delCurrency('silver_aman_voucher', 10)
             end
         elseif option == 3 then -- Bought single voucher
-            if silverVouchersAvailable > 0 then
+            if silverVouchersAvailable > 0 and playerGil >= voucherCost then
                 player:addCurrency('silver_aman_voucher', 1)
-                player:setCharVar("[AMAN]SilverVouchersBought", silverVouchersBought + 1)
-                player:delGil(100000)
+                player:setCharVar('[AMAN]SilverVouchersBought', silverVouchersBought + 1)
+                player:delGil(voucherCost)
             end
         elseif option == 4 then -- Bought maximum vouchers
-            if silverVouchersAvailable > 0 then
-                -- TODO: This seems to take away more gil than it should...
-                local numVouchers = vouchersPlayerCanAfford
-                player:addCurrency('silver_aman_voucher', numVouchers)
-                player:setCharVar("[AMAN]SilverVouchersBought", silverVouchersBought + numVouchers)
+            if silverVouchersAvailable > 0 and playerGil >= vouchersTotalCost then
+                player:addCurrency('silver_aman_voucher', silverVouchersAvailable)
+                player:setCharVar('[AMAN]SilverVouchersBought', silverVouchersBought + silverVouchersAvailable)
                 player:delGil(vouchersTotalCost)
             end
         end
