@@ -152,6 +152,7 @@ xi.amanTrove.chestOPlentyOnTrigger = function(player, npc)
     if npc:getLocalVar('Triggered') == 1 then
         return
     end
+
     npc:setLocalVar('Triggered', 1)
 
     if npc:getLocalVar('Mimic') == 1 then
@@ -176,6 +177,7 @@ xi.amanTrove.terminalCofferOnTrigger = function(player, npc)
     if npc:getLocalVar('Triggered') == 1 then
         return
     end
+
     npc:setLocalVar('Triggered', 1)
 
     npc:setAnimationSub(1)
@@ -207,7 +209,7 @@ end
 -----------------------------------
 -- Greyson
 -----------------------------------
-local EXPLORING_THE_TROVE = 1447
+local exploringTheTrove = 1447
 
 xi.amanTrove.greysonReturnRoll = function(player, tradedOrbType)
     local roll = math.random(1, 100)
@@ -233,46 +235,66 @@ xi.amanTrove.onGreysonTrade = function(player, npc, trade)
     local playerAgeDays         = (os.time() - player:getTimeCreated()) / 86400
     local playerOldEnough       = playerAgeDays >= 45 -- TODO: Extract into setting
     local playerLevelHighEnough = player:getMainLvl() >= 99
-    local eminenceCompleted     = player:getEminenceCompleted(EXPLORING_THE_TROVE)
+    local eminenceCompleted     = player:getEminenceCompleted(exploringTheTrove)
 
+    -- TODO: If you trade junk + a valid item, he'll respond to the valid item
     -- TODO: If the trade contains a valid item, you'll get a message. If not, you won't.
-    local validItems = { xi.item.SILVER_VOUCHER, xi.item.MARS_ORB, xi.item.VENUS_ORB }
-    if not playerOldEnough or not playerLevelHighEnough or not eminenceCompleted then
+    -- local validItems = { xi.item.SILVER_VOUCHER, xi.item.MARS_ORB, xi.item.VENUS_ORB }
+    if
+        not playerOldEnough or
+        not playerLevelHighEnough or not eminenceCompleted
+    then
         player:messageSpecial(lowerJeunoID.text.NO_NEED_TO_HURRY)
         return
     end
 
-    local silverVouchersStored = player:getCurrency('silver_aman_voucher')
-
     if npcUtil.tradeHas(trade, xi.item.SILVER_AMAN_VOUCHER) then
-        -- player:startEvent(20085, silverVouchersStored, 1, player:getGil(), 0)
-
-        -- TODO: Count up all the vouchers in the trade
-        local voucherCountAfterTrade = silverVouchersStored + trade:getItemCount()
-        if voucherCountAfterTrade > 255 then
+        local numVouchers = trade:getItemQty(xi.item.SILVER_AMAN_VOUCHER)
+        local silverVouchersStored = player:getCurrency('silver_aman_voucher')
+        if silverVouchersStored + numVouchers > 255 then
             player:messageSpecial(lowerJeunoID.text.CANT_CARRY_ANY_MORE)
             return
         end
 
-        -- Otherwise, store:
-        player:addCurrency('silver_aman_voucher', trade:getItemCount())
+        -- TODO: Confirm all silver vouchers in trade so they're removed during confirm
+
+        player:addCurrency('silver_aman_voucher', numVouchers)
+        silverVouchersStored = player:getCurrency('silver_aman_voucher')
+
+        player:startEvent(20085, silverVouchersStored)
+        player:confirmTrade()
     elseif npcUtil.tradeHasExactly(trade, xi.item.MARS_ORB) then
         local item = trade:getItem()
         if item:getWornUses() > 0 then
-            local loot = xi.amanTove.greysonRechargeRoll(xi.item.MARS_ORB)
+            local loot = xi.amanTrove.greysonReturnRoll(player, xi.item.MARS_ORB)
             if loot == xi.item.MARS_ORB then
                 player:messageSpecial(lowerJeunoID.text.ALREADY_BEEN_USED_ORB, loot)
             else
                 player:messageSpecial(lowerJeunoID.text.ALREADY_BEEN_USED_ITEM, loot)
             end
-            player:confirmTrade()
 
-            -- TODO: Give loot
+            -- If you have a full inventory and trade in an old orb, you'll still get the new item
+            player:confirmTrade()
+            player:addItem(loot)
         else
             player:messageSpecial(lowerJeunoID.text.THIS_ONE_HASNT_BEEN_USED)
         end
     elseif npcUtil.tradeHasExactly(trade, xi.item.VENUS_ORB) then
-        -- TODO
+        local item = trade:getItem()
+        if item:getWornUses() > 0 then
+            local loot = xi.amanTrove.greysonReturnRoll(player, xi.item.VENUS_ORB)
+            if loot == xi.item.VENUS_ORB then
+                player:messageSpecial(lowerJeunoID.text.ALREADY_BEEN_USED_ORB, loot)
+            else
+                player:messageSpecial(lowerJeunoID.text.ALREADY_BEEN_USED_ITEM, loot)
+            end
+
+            -- If you have a full inventory and trade in an old orb, you'll still get the new item
+            player:confirmTrade()
+            player:addItem(loot)
+        else
+            player:messageSpecial(lowerJeunoID.text.THIS_ONE_HASNT_BEEN_USED)
+        end
     end
 end
 
@@ -281,8 +303,8 @@ xi.amanTrove.onGreysonTrigger = function(player, npc)
     local playerAgeDays         = (os.time() - player:getTimeCreated()) / 86400
     local playerOldEnough       = playerAgeDays >= 45 -- TODO: Extract into setting
     local playerLevelHighEnough = player:getMainLvl() >= 99
-    local eminenceProgress      = player:getEminenceProgress(EXPLORING_THE_TROVE) -- nil: not flagged, 0: flagged and not completed, 1: flagged and completed
-    local eminenceCompleted     = player:getEminenceCompleted(EXPLORING_THE_TROVE)
+    local eminenceProgress      = player:getEminenceProgress(exploringTheTrove) -- nil: not flagged, 0: flagged and not completed, 1: flagged and completed
+    local eminenceCompleted     = player:getEminenceCompleted(exploringTheTrove)
     local silverVouchersStored  = player:getCurrency('silver_aman_voucher')
 
     -- TODO: This will have to reset once a month, or whenever, a setting?
@@ -292,7 +314,12 @@ xi.amanTrove.onGreysonTrigger = function(player, npc)
     -- NOTE: Is the cost of orbs hard coded into the CS? Yes
     -- NOTE: Is the number of buyable vouchers hard coded into the CS? Yes
 
-    if playerOldEnough and playerLevelHighEnough and eminenceProgress == 0 and not eminenceCompleted then
+    if
+        playerOldEnough and
+        playerLevelHighEnough and
+        eminenceProgress == 0 and
+        not eminenceCompleted
+    then
         -- Intro text
         player:startEvent(20083)
         return
@@ -313,14 +340,11 @@ xi.amanTrove.onGreysonEventUpdate = function(player, csid, option, npc)
     -- NOTE: Seemingly unused?
 end
 
+-- NOTE: Make sure to validate gil amounts/voucher levels before giving things in case of injection
 xi.amanTrove.onGreysonEventFinish = function(player, csid, option, npc)
-    print('finish', csid, option)
-
-    -- NOTE: Make sure to validate gil amounts/voucher levels before giving things in case of injection
-
     if csid == 20083 then -- Intro CS
-        if player:getEminenceProgress(EXPLORING_THE_TROVE) == 0 then
-            xi.roe.onRecordTrigger(player, EXPLORING_THE_TROVE)
+        if player:getEminenceProgress(exploringTheTrove) == 0 then
+            xi.roe.onRecordTrigger(player, exploringTheTrove)
         end
     elseif csid == 20084 then -- Menu
         local playerGil               = player:getGil()
@@ -336,7 +360,10 @@ xi.amanTrove.onGreysonEventFinish = function(player, csid, option, npc)
                 player:delCurrency('silver_aman_voucher', 6)
             end
         elseif option == 2 then -- Bought Venus Orb
-            if silverVouchersStored >= 10 and npcUtil.giveItem(player, xi.item.VENUS_ORB) then
+            if
+                silverVouchersStored >= 10 and
+                npcUtil.giveItem(player, xi.item.VENUS_ORB)
+            then
                 -- TODO: This handles the rejection logic if you already have the orb, but looks ugly. Needs retail capture.
                 player:delCurrency('silver_aman_voucher', 10)
             end
