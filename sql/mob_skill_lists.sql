@@ -3218,7 +3218,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Tablilla',950,541); -- Gravity_Field
 INSERT INTO `mob_skill_lists` VALUES ('Vadleany',951,2182); -- Spiral_Spin
 INSERT INTO `mob_skill_lists` VALUES ('Waugyl',952,1720); -- Wind_Shear
 INSERT INTO `mob_skill_lists` VALUES ('Waugyl',952,1723); -- Ill_Wind
--- INSERT INTO `mob_skill_lists` VALUES ('Waugyl',952,1724); -- White_Wind
+INSERT INTO `mob_skill_lists` VALUES ('Waugyl',952,1724); -- White_Wind
 INSERT INTO `mob_skill_lists` VALUES ('Anemic_Aloysius',953,424); -- Full-Force_Blow
 INSERT INTO `mob_skill_lists` VALUES ('Anemic_Aloysius',953,425); -- Gastric_Bomb
 INSERT INTO `mob_skill_lists` VALUES ('Anemic_Aloysius',953,426); -- Sandspin
@@ -3859,7 +3859,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Gharial',2004,2101); -- demoralizing_roar
 
 INSERT INTO `mob_skill_lists` VALUES ('Draketrader_Zlodgodd',2005,733);
 
--- Next available ID: 2005
+INSERT INTO `mob_skill_lists` VALUES ('Snaggletooth_Peapuk',2006,1718);
+INSERT INTO `mob_skill_lists` VALUES ('Snaggletooth_Peapuk',2006,1720);
+INSERT INTO `mob_skill_lists` VALUES ('Snaggletooth_Peapuk',2006,1721);
+INSERT INTO `mob_skill_lists` VALUES ('Snaggletooth_Peapuk',2006,1722);
+INSERT INTO `mob_skill_lists` VALUES ('Snaggletooth_Peapuk',2006,1724);
+
+-- Next available ID: 2007
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
