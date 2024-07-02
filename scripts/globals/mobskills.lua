@@ -713,3 +713,11 @@ xi.mobskills.mobHealMove = function(target, healAmount)
 
     return healAmount
 end
+
+xi.mobskills.calculateDuration = function(tp, minimum, maximum)
+    if tp <= 1000 then
+        return minimum
+    end
+
+    return minimum + (maximum - minimum) * ((tp - 1000) / 1000)
+end
