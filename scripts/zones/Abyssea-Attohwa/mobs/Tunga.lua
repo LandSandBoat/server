@@ -2,7 +2,7 @@
 -- Area: Abyssea-Attohwa
 --   NM: Tunga
 -----------------------------------
-mixins = { require('scripts/mixins/families/chigoe') }
+mixins = { require('scripts/mixins/families/chigoe_nm') }
 -----------------------------------
 local entity = {}
 

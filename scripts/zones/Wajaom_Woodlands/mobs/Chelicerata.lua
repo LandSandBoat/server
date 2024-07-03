@@ -2,7 +2,7 @@
 -- Area: Wajaom Woodlands
 --   NM: Chelicerata
 -----------------------------------
-mixins = { require('scripts/mixins/families/chigoe') }
+mixins = { require('scripts/mixins/families/chigoe_nm') }
 -----------------------------------
 local entity = {}
 
