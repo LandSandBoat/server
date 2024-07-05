@@ -255,6 +255,7 @@ public:
     void setEquipBlock(uint16 equipBlock);
     void lockEquipSlot(uint8 slot);
     void unlockEquipSlot(uint8 slot);
+    bool hasSlotEquipped(uint8 slot);
 
     int8  getShieldSize();
     int16 getShieldDefense();

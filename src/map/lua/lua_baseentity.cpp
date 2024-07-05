@@ -4785,6 +4785,25 @@ void CLuaBaseEntity::unlockEquipSlot(uint8 slot)
 }
 
 /************************************************************************
+ *  Function: hasSlotEquipped()
+ *  Purpose : Returns true if a player has an item equipped in the slot
+ *  Example : if player:hasSlotEquipped(xi.slot.RING1) then
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::hasSlotEquipped(uint8 slot)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Attempt to check item slot for a non-player (%s).", m_PBaseEntity->getName());
+        return false;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return charutils::hasSlotEquipped(PChar, slot);
+}
+
+/************************************************************************
  *  Function: getShieldSize()
  *  Purpose : Return the shield size of the equipped shield
  *  Example : player:getShieldSize()
@@ -17924,6 +17943,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setEquipBlock", CLuaBaseEntity::setEquipBlock);
     SOL_REGISTER("lockEquipSlot", CLuaBaseEntity::lockEquipSlot);
     SOL_REGISTER("unlockEquipSlot", CLuaBaseEntity::unlockEquipSlot);
+    SOL_REGISTER("hasSlotEquipped", CLuaBaseEntity::hasSlotEquipped);
 
     SOL_REGISTER("getShieldSize", CLuaBaseEntity::getShieldSize);
     SOL_REGISTER("getShieldDefense", CLuaBaseEntity::getShieldDefense);
