@@ -3683,13 +3683,13 @@ void SmallPacket0x053(map_session_data_t* const PSession, CCharEntity* const PCh
                     break;
             }
         }
-        charutils::UpdateRemovedSlots(PChar);
+        charutils::UpdateRemovedSlotsLookForLockStyle(PChar);
         PChar->RequestPersist(CHAR_PERSIST::EQUIP);
     }
     else if (type == 4)
     {
         charutils::SetStyleLock(PChar, true);
-        charutils::UpdateRemovedSlots(PChar);
+        charutils::UpdateRemovedSlotsLookForLockStyle(PChar);
         PChar->RequestPersist(CHAR_PERSIST::EQUIP);
     }
 
