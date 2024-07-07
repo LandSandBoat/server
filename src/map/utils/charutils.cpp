@@ -1851,6 +1851,12 @@ namespace charutils
         }
     }
 
+    bool hasSlotEquipped(CCharEntity* PChar, uint8 equipSlotID)
+    {
+        CItem* PItem = PChar->getEquip((SLOTTYPE)equipSlotID);
+        return PItem != nullptr && PItem->isType(ITEM_EQUIPMENT);
+    }
+
     void RemoveSub(CCharEntity* PChar)
     {
         CItemEquipment* PItem = PChar->getEquip(SLOT_SUB);
