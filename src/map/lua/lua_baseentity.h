@@ -905,6 +905,14 @@ public:
     void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);
     uint8 getMannequinPose(uint16 itemID);
 
+    void   submitContestFish(uint32 score);
+    void   withdrawContestFish();
+    uint32 getContestScore();
+    uint8  getContestRank();
+    auto   getContestRewardStatus() -> sol::table;
+    auto   getContestRankHistory() -> sol::table;
+    void   claimContestReward();
+
     void addPacketMod(uint16 packetId, uint16 offset, uint8 value);
     void clearPacketMods();
 

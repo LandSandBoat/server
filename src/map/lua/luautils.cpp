@@ -98,6 +98,7 @@
 
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
+#include "utils/fishingcontest.h"
 #include "utils/instanceutils.h"
 #include "utils/itemutils.h"
 #include "utils/mobutils.h"
@@ -236,6 +237,13 @@ namespace luautils
         lua.set_function("RoeParseTimed", &roeutils::ParseTimedSchedule);
         lua.set_function("GetSynergyRecipeByID", &luautils::GetSynergyRecipeByID);
         lua.set_function("GetSynergyRecipeByTrade", &luautils::GetSynergyRecipeByTrade);
+
+        // Fishing Contest Functions
+        lua.set_function("GetFishingContest", &luautils::GetFishingContest);
+        lua.set_function("InitNewFishingContest", &luautils::InitNewFishingContest);
+        lua.set_function("SetContestParameters", &luautils::SetContestParameters);
+        lua.set_function("ProgressFishingContest", &luautils::ProgressFishingContest);
+        lua.set_function("InitializeFishingContestSystem", &luautils::InitializeFishingContestSystem);
 
         // This binding specifically exists to forcefully crash the server.
         // clang-format off
@@ -5699,6 +5707,55 @@ namespace luautils
         PEntity->updatemask |= UPDATE_ALL_CHAR;
 
         return CLuaBaseEntity(PEntity);
+    }
+
+    // Fishing Contest utilities
+    auto GetFishingContest() -> sol::table
+    {
+        sol::table table = lua.create_table();
+
+        table["status"]     = fishingcontest::GetContestStatus();
+        table["criteria"]   = fishingcontest::GetContestCriteria();
+        table["measure"]    = fishingcontest::GetContestMeasure();
+        table["fishid"]     = fishingcontest::GetContestFish();
+        table["starttime"]  = fishingcontest::GetContestStartTime();
+        table["changetime"] = fishingcontest::GetContestChangeTime();
+
+        return table;
+    }
+
+    void InitNewFishingContest()
+    {
+        // This function will destroy the current contest and start a new one
+        fishingcontest::InitNewContest();
+    }
+
+    void SetContestParameters(uint16 fishId, uint8 measure, uint8 criteria)
+    {
+        // Note: Validation of fish item id should be done in lua, since the fish table is also in lua
+        fishingcontest::SetContestFish(fishId);
+        fishingcontest::SetContestMeasure(static_cast<FISHING_CONTEST_MEASURE>(measure));
+        fishingcontest::SetContestCriteria(static_cast<FISHING_CONTEST_CRITERIA>(criteria));
+    }
+
+    void ProgressFishingContest()
+    {
+        // This function will get called every tick when automatic progression is enabled
+        fishingcontest::ProgressContest();
+    }
+
+    void InitializeFishingContestSystem()
+    {
+        // IMPORTANT: This should only be called on the Zone Init in Selbina
+        // Do not run this from multiple server instances
+        if (zoneutils::IsZoneOnThisProcess(ZONEID::ZONE_SELBINA))
+        {
+            fishingcontest::InitializeFishingContestSystem();
+        }
+        else
+        {
+            ShowWarning("Attempted to initialize fishing contest from outside of Selbina.");
+        }
     }
 
     auto GetSynergyRecipeByID(uint32 id) -> sol::table

@@ -50,6 +50,8 @@ namespace zoneutils
     CCharEntity* GetCharFromWorld(uint32 charid, uint16 targid);  // returns pointer to character by id and target id
     CCharEntity* GetChar(uint32 id);                              // returns pointer to character by id
     CCharEntity* GetCharToUpdate(uint32 primary, uint32 ternary); // returns pointer to preferred char to update for party changes
+    auto         GetZonesOnThisProcess() -> std::vector<uint16>;
+    bool         IsZoneOnThisProcess(ZONEID zoneId);
     void         ForEachZone(const std::function<void(CZone*)>& func);
     uint64       GetZoneIPP(uint16 zoneid);                      // returns IPP for zone ID
     bool         IsResidentialArea(CCharEntity*);                // returns whether or not the area is a residential zone

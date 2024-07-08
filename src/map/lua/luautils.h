@@ -370,6 +370,13 @@ namespace luautils
 
     std::optional<CLuaBaseEntity> GenerateDynamicEntity(CZone* PZone, CInstance* PInstance, sol::table table);
 
+    // Fishing Contest
+    auto GetFishingContest() -> sol::table;
+    void InitNewFishingContest();
+    void SetContestParameters(uint16 fishId, uint8 measure, uint8 criteria);
+    void ProgressFishingContest();
+    void InitializeFishingContestSystem();
+
     template <typename... Targs>
     int32 invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args);
 

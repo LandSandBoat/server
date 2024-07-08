@@ -266,6 +266,11 @@ xi.settings.main =
     -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.
     ENABLE_LOGIN_CAMPAIGN = 0,
 
+    -- FISH RANKING CONTEST
+    -- Set to false to require manual progression of contest
+    AUTO_FISHING_CONTEST = true,
+    MAX_FAKE_ENTRIES     = 15,
+
     -- NYZUL
     RUNIC_DISK_SAVE      = true, -- Allow anyone participating in Nyzul to save progress. Set to false so only initiator can save progress.
     ENABLE_NYZUL_CASKETS = true, -- Enable Treasure casket pops from NMs.
