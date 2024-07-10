@@ -265,6 +265,8 @@ namespace luautils
     int32 OnMobRoam(CBaseEntity* PMob);
     int32 OnMobEngage(CBaseEntity* PMob, CBaseEntity* PTarget);
     int32 OnMobDisengage(CBaseEntity* PMob);
+    int32 OnMobFollow(CBaseEntity* PMob, CBaseEntity* PTarget);
+    int32 OnMobUnfollow(CBaseEntity* PMob, CBaseEntity* PTarget);
     int32 OnMobDrawIn(CBaseEntity* PMob, CBaseEntity* PTarget);
     int32 OnMobFight(CBaseEntity* PMob, CBaseEntity* PTarget);
     int32 OnCriticalHit(CBattleEntity* PMob, CBattleEntity* PAttacker);

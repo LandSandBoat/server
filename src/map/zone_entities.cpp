@@ -627,8 +627,17 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
 
             CMobController* PController = static_cast<CMobController*>(PCurrentMob->PAI->GetController());
 
-            bool validAggro = mobCheck > EMobDifficulty::TooWeak || PChar->isSitting() || PCurrentMob->getMobMod(MOBMOD_ALWAYS_AGGRO);
+            // Check if this mob follows targets and if so then it should not aggro
+            if (PCurrentMob->m_roamFlags & ROAMFLAG_FOLLOW)
+            {
+                if (PController->CanFollowTarget(PChar))
+                {
+                    PController->SetFollowTarget(PChar, FollowType::Roam);
+                }
+                continue;
+            }
 
+            bool validAggro = mobCheck > EMobDifficulty::TooWeak || PChar->isSitting() || PCurrentMob->getMobMod(MOBMOD_ALWAYS_AGGRO);
             if (validAggro && PController->CanAggroTarget(PChar))
             {
                 PCurrentMob->PAI->Engage(PChar->targid);

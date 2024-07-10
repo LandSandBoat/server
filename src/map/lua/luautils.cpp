@@ -3217,6 +3217,56 @@ namespace luautils
         return 0;
     }
 
+    int32 OnMobFollow(CBaseEntity* PMob, CBaseEntity* PTarget)
+    {
+        TracyZoneScoped;
+        if (PTarget == nullptr || PMob == nullptr)
+        {
+            return -1;
+        }
+
+        sol::function onMobFollow = getEntityCachedFunction(PMob, "onMobFollow");
+        if (!onMobFollow.valid())
+        {
+            return -1;
+        }
+
+        auto result = onMobFollow(CLuaBaseEntity(PMob), CLuaBaseEntity(PTarget));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onMobFollow: %s", err.what());
+            return -1;
+        }
+
+        return 0;
+    }
+
+    int32 OnMobUnfollow(CBaseEntity* PMob, CBaseEntity* PTarget)
+    {
+        TracyZoneScoped;
+        if (PTarget == nullptr || PMob == nullptr)
+        {
+            return -1;
+        }
+
+        sol::function onMobUnfollow = getEntityCachedFunction(PMob, "onMobUnfollow");
+        if (!onMobUnfollow.valid())
+        {
+            return -1;
+        }
+
+        auto result = onMobUnfollow(CLuaBaseEntity(PMob), CLuaBaseEntity(PTarget));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onMobUnfollow: %s", err.what());
+            return -1;
+        }
+
+        return 0;
+    }
+
     int32 OnMobDrawIn(CBaseEntity* PMob, CBaseEntity* PTarget)
     {
         TracyZoneScoped;

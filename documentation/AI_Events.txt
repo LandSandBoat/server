@@ -5,6 +5,7 @@ PATH - Entity
 ROAM_ACTION - Mob
 ROAM_TICK - Mob
 COMBAT_TICK - Entity, Master?, Target?
+RUN_AWAY - Mob, Target
 ON_TRIGGER - Player, Entity
 
 AUTOMATON_AI_TICK - Automaton, Target

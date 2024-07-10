@@ -2000,6 +2000,44 @@ void CLuaBaseEntity::wait(sol::object const& milliseconds)
 }
 
 /************************************************************************
+ *  Function: follow(target)
+ *  Purpose : Makes a Mob follow the provided target
+ *  Example : mob:follow(target, xi.followType.Roam)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::follow(CLuaBaseEntity* target, uint8 followType)
+{
+    if (m_PBaseEntity->objtype != TYPE_MOB)
+    {
+        ShowWarning("Invalid entity (%s) calling function.", m_PBaseEntity->getName());
+        return;
+    }
+
+    auto* controller = static_cast<CMobController*>(m_PBaseEntity->PAI->GetController());
+    controller->SetFollowTarget(target->m_PBaseEntity, static_cast<FollowType>(followType));
+}
+
+/************************************************************************
+ *  Function: unfollow()
+ *  Purpose : Makes a Mob stop following
+ *  Example : mob:unfollow()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::unfollow()
+{
+    if (m_PBaseEntity->objtype != TYPE_MOB)
+    {
+        ShowWarning("Invalid entity (%s) calling function.", m_PBaseEntity->getName());
+        return;
+    }
+
+    auto* controller = static_cast<CMobController*>(m_PBaseEntity->PAI->GetController());
+    controller->ClearFollowTarget();
+}
+
+/************************************************************************
  *  Function: setCarefulPathing(...)
  *  Purpose : Enables or disables careful pathing for an entity.
  *  Example : mob:setCarefulPathing(true)
@@ -17842,6 +17880,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("continuePath", CLuaBaseEntity::continuePath);
     SOL_REGISTER("checkDistance", CLuaBaseEntity::checkDistance);
     SOL_REGISTER("wait", CLuaBaseEntity::wait);
+    SOL_REGISTER("follow", CLuaBaseEntity::follow);
+    SOL_REGISTER("unfollow", CLuaBaseEntity::unfollow);
     SOL_REGISTER("setCarefulPathing", CLuaBaseEntity::setCarefulPathing);
 
     SOL_REGISTER("openDoor", CLuaBaseEntity::openDoor);

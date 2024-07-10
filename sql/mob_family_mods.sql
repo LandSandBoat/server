@@ -930,6 +930,9 @@ INSERT INTO `mob_family_mods` VALUES (481,42,989,1); -- TELEPORT_END: 989
 -- Astral Flow Pet
 INSERT INTO `mob_family_mods` VALUES (495,56,-1,1); -- HP_STANDBACK: -1
 
+-- Apkallu
+INSERT INTO `mob_family_mods` VALUES (27,4,5,1); -- SIGHT_RANGE: 5
+
 /*!40000 ALTER TABLE `mob_family_mods` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
