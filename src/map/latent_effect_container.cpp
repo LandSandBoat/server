@@ -788,9 +788,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         {
             size_t partyCount = 0;
             size_t trustCount = 0;
-            if (m_POwner->PParty != nullptr)
+            auto* PLeader = m_POwner->PParty != nullptr ? dynamic_cast<CCharEntity*>(m_POwner->PParty->GetLeader()) : nullptr;
+            if (PLeader)
             {
-                auto PLeader = (CCharEntity*)m_POwner->PParty->GetLeader();
                 trustCount = PLeader->PTrusts.size();
                 partyCount = m_POwner->PParty->members.size();
             }
@@ -801,7 +801,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         case LATENT::PARTY_MEMBERS_IN_ZONE:
         {
             auto inZone = 0;
-            if (m_POwner->PParty != nullptr)
+            if (m_POwner->PParty && dynamic_cast<CCharEntity*>(m_POwner->PParty->GetLeader()))
             {
                 for (auto* member : m_POwner->PParty->members)
                 {
@@ -810,7 +810,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                         ++inZone;
                     }
                 }
-                
+
                 auto PLeader = (CCharEntity*)m_POwner->PParty->GetLeader();
                 if (m_POwner->getZone() == PLeader->getZone())
                 {
