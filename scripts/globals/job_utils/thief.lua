@@ -301,8 +301,12 @@ xi.job_utils.thief.useLarceny = function(player, target, ability, action)
         local newPower    = effectStolen:getPower()
         local newTick     = effectStolen:getTick()
         local newDuration = effectStolen:getDuration() + jpValue
+        local newSubType  = effectStolen:getSubType()
+        local newSubPower = effectStolen:getSubPower()
+        local newTier     = effectStolen:getTier()
+        local newFlags    = effectStolen:getEffectFlags()
 
-        player:addStatusEffectEx(newID, newIcon, newPower, newTick, newDuration)
+        player:addStatusEffectEx(newID, newIcon, newPower, newTick, newDuration, newSubType, newSubPower, newTier, newFlags)
         target:delStatusEffect(newID)
 
         effectID = newID
