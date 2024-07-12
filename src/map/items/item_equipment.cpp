@@ -29,16 +29,17 @@ CItemEquipment::CItemEquipment(uint16 id)
 {
     setType(ITEM_EQUIPMENT);
 
-    m_jobs          = 0;
-    m_modelID       = 0;
-    m_removeSlotID  = 0;
-    m_shieldSize    = 0;
-    m_scriptType    = 0;
-    m_reqLvl        = 255;
-    m_iLvl          = 0;
-    m_equipSlotID   = 255;
-    m_absorption    = 0;
-    m_superiorLevel = 0;
+    m_jobs             = 0;
+    m_modelID          = 0;
+    m_removeSlotID     = 0;
+    m_removeSlotLookID = 0;
+    m_shieldSize       = 0;
+    m_scriptType       = 0;
+    m_reqLvl           = 255;
+    m_iLvl             = 0;
+    m_equipSlotID      = 255;
+    m_absorption       = 0;
+    m_superiorLevel    = 0;
 }
 
 CItemEquipment::~CItemEquipment()
@@ -60,9 +61,25 @@ uint16 CItemEquipment::getEquipSlotId() const
     return m_equipSlotID;
 }
 
+/// <summary>
+/// Gets the equip slots which should be unequipped when the item is equipped
+/// Used for items which occupy multiple equipslots - eg. Cloaks which occupy body and head
+/// </summary>
+/// <returns>An integer representing a bitmask corresponding to BattleEntity SLOTTYPE</returns>
 uint16 CItemEquipment::getRemoveSlotId() const
 {
     return m_removeSlotID;
+}
+
+/// <summary>
+/// Gets the equip slots which should be set to blank from the characters appearance when the item is equipped or lockstyled
+/// Used for items which occupy multiple appearance slots
+/// eg. Mandragora Suit which has a getRemoveSlotId of body and legs - but appearance wise occupies hands, body, legs, and feet
+/// </summary>
+/// <returns>An integer representing a bitmask corresponding to BattleEntity SLOTTYPE</returns>
+uint16 CItemEquipment::getRemoveSlotLookId() const
+{
+    return m_removeSlotLookID;
 }
 
 uint8 CItemEquipment::getReqLvl() const
@@ -110,9 +127,25 @@ void CItemEquipment::setEquipSlotId(uint16 equipSlot)
     m_equipSlotID = equipSlot;
 }
 
+/// <summary>
+/// Sets the equip slots which should be unequipped when the item is equipped
+/// Used for items which occupy multiple equipslots - eg. Cloaks which occupy body and head
+/// </summary>
+/// <param name="removeSlot">An integer representing a bitmask corresponding to BattleEntity SLOTTYPE</param>
 void CItemEquipment::setRemoveSlotId(uint16 removSlot)
 {
     m_removeSlotID = removSlot;
+}
+
+/// <summary>
+/// Sets the equip slots which should be set to blank from the characters appearance when the item is equipped or lockstyled
+/// Used for items which occupy multiple appearance slots
+/// eg. Mandragora Suit which has a getRemoveSlotId of body and legs - but appearance wise occupies hands, body, legs, and feet
+/// </summary>
+/// <param name="removeSlotLook">An integer representing a bitmask corresponding to BattleEntity SLOTTYPE</param>
+void CItemEquipment::setRemoveSlotLookId(uint16 removeSlotLook)
+{
+    m_removeSlotLookID = removeSlotLook;
 }
 
 uint8 CItemEquipment::getSlotType() const

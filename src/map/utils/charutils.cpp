@@ -1669,30 +1669,40 @@ namespace charutils
 
         if ((PItem != nullptr) && PItem->isType(ITEM_EQUIPMENT))
         {
-            auto removeSlotID = ((CItemEquipment*)PItem)->getRemoveSlotId();
+            // if removeSlotLookID is available it should be prioritized as it will encompass a larger set of slots
+            auto removeSlotLookID = ((CItemEquipment*)PItem)->getRemoveSlotLookId();
+            auto removeSlotID     = removeSlotLookID > 0 ? removeSlotLookID : ((CItemEquipment*)PItem)->getRemoveSlotId();
 
+            // When unequipping an item, revert all associated look slots to either default or the item which is equipped
             for (auto i = 0u; i < sizeof(removeSlotID) * 8; ++i)
             {
                 if (removeSlotID & (1 << i))
                 {
                     if (i >= SLOT_HEAD && i <= SLOT_FEET)
                     {
+                        int             itemLook     = 0;
+                        CItemEquipment* equippedItem = PChar->getEquip((SLOTTYPE)i);
+                        if (equippedItem)
+                        {
+                            itemLook = equippedItem->getModelId();
+                        }
+
                         switch (i)
                         {
                             case SLOT_HEAD:
-                                PChar->look.head = 0;
+                                PChar->look.head = itemLook;
                                 break;
                             case SLOT_BODY:
-                                PChar->look.body = 0;
+                                PChar->look.body = itemLook;
                                 break;
                             case SLOT_HANDS:
-                                PChar->look.hands = 0;
+                                PChar->look.hands = itemLook;
                                 break;
                             case SLOT_LEGS:
-                                PChar->look.legs = 0;
+                                PChar->look.legs = itemLook;
                                 break;
                             case SLOT_FEET:
-                                PChar->look.feet = 0;
+                                PChar->look.feet = itemLook;
                                 break;
                         }
                     }
@@ -1908,6 +1918,8 @@ namespace charutils
 
         UnequipItem(PChar, equipSlotID, false);
 
+        // When equipping PItem - Remove all equip in slots which are also restricted by PItem
+        // e.g. Equipping a Black Cloak should remove head equipment
         if (PItem->getEquipSlotId() & (1 << equipSlotID))
         {
             auto removeSlotID = PItem->getRemoveSlotId();
@@ -1941,6 +1953,8 @@ namespace charutils
                 }
             }
 
+            // When equipping PItem into a slot - Remove equip in other slots which may have restricted equip in this slot
+            // e.g. Equipping head equipment should result in the removal of an equipped Black Cloak
             for (uint8 i = 0; i < SLOT_BACK; ++i)
             {
                 CItemEquipment* armor = PChar->getEquip((SLOTTYPE)i);
@@ -2133,8 +2147,15 @@ namespace charutils
                 }
                 break;
             }
+
             PChar->equip[equipSlotID]    = slotID;
             PChar->equipLoc[equipSlotID] = containerID;
+
+            // Changed Visibile Equipment
+            if (equipSlotID >= SLOT_HEAD && equipSlotID <= SLOT_FEET)
+            {
+                UpdateRemovedSlotsLook(PChar);
+            }
         }
         else
         {
@@ -2328,7 +2349,13 @@ namespace charutils
         }
     }
 
-    void UpdateRemovedSlots(CCharEntity* PChar)
+    /// <summary>
+    /// Updates the Char's lockstyle look to account for gear that occupies multiple slots
+    /// This includes items like Black Cloak which restricts the equip AND look of headgear.
+    /// This also incluses items like Onca Suit which restricts equip and look of legs, but only look of hands and feet.
+    /// </summary>
+    /// <param name="PChar">Character to have Lockstyle look updated</param>
+    void UpdateRemovedSlotsLookForLockStyle(CCharEntity* PChar)
     {
         if (!PChar || !PChar->getStyleLocked())
         {
@@ -2349,7 +2376,7 @@ namespace charutils
                 continue;
             }
 
-            auto removeSlotID = PItem->getRemoveSlotId();
+            auto removeSlotID = PItem->getRemoveSlotLookId();
             if (removeSlotID > 0)
             {
                 for (auto i = 4u; i <= 8u; i++)
@@ -2372,6 +2399,53 @@ namespace charutils
                                 break;
                             case SLOT_FEET:
                                 PChar->mainlook.feet = PItem->getModelId();
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Updates the Char's look to account for gear that occupies multiple slots
+    /// This includes items like Black Cloak which restricts the equip AND look of headgear.
+    /// This also incluses items like Onca Suit which restricts equip and look of legs, but only look of hands and feet.
+    /// </summary>
+    /// <param name="PChar">Character to have look updated</param>
+    void UpdateRemovedSlotsLook(CCharEntity* PChar)
+    {
+        if (!PChar)
+        {
+            return;
+        }
+
+        for (int i = SLOT_HEAD; i < SLOT_FEET; i++)
+        {
+            CItemEquipment* armor = PChar->getEquip((SLOTTYPE)i);
+            if (armor && armor->isType(ITEM_EQUIPMENT) && armor->getRemoveSlotLookId())
+            {
+                auto removeSlotID = armor->getRemoveSlotLookId();
+                for (int j = SLOT_HEAD; j <= SLOT_FEET; j++)
+                {
+                    if (removeSlotID & (1 << j))
+                    {
+                        switch (j)
+                        {
+                            case SLOT_HEAD:
+                                PChar->look.head = armor->getModelId();
+                                break;
+                            case SLOT_BODY:
+                                PChar->look.body = armor->getModelId();
+                                break;
+                            case SLOT_HANDS:
+                                PChar->look.hands = armor->getModelId();
+                                break;
+                            case SLOT_LEGS:
+                                PChar->look.legs = armor->getModelId();
+                                break;
+                            case SLOT_FEET:
+                                PChar->look.feet = armor->getModelId();
                                 break;
                         }
                     }
