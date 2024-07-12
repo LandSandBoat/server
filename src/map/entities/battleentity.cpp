@@ -2183,6 +2183,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             actionTarget.reaction   = REACTION::EVADE;
             actionTarget.speceffect = SPECEFFECT::NONE;
         }
+        else if (attack.IsDeflected())
+        {
+            actionTarget.messageID  = 1;
+            actionTarget.reaction   = REACTION::PARRY | REACTION::HIT;
+            actionTarget.speceffect = SPECEFFECT::NONE;
+        }
         else if ((xirand::GetRandomNumber(100) < attack.GetHitRate() || attackRound.GetSATAOccured()) &&
                  !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_ALL_MISS))
         {

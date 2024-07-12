@@ -1,9 +1,6 @@
 -----------------------------------
 -- Granite Skin
--- Description: Physical Shield
--- TODO: This is a buff that makes target in front of target deal 0 physical damage.
--- This will need a new effect and some kind of check to zero it properly.
--- https://www.bg-wiki.com/ffxi/Locus_Wivre
+-- Description: Enhances defense and guarding skill (nullifies all physical damage from the front).
 -----------------------------------
 local mobskillObject = {}
 
@@ -12,9 +9,17 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    xi.mobskills.mobBuffMove(mob, xi.effect.PHYSICAL_SHIELD, 3, 0, 30)
-    skill:setMsg(xi.msg.basic.NONE)
-    return 0
+    -- This is a special case where the defense boost prevents damage
+    -- while the attacker is in front of the defender at the given subpower angle
+    local duration = xi.mobskills.calculateDuration(skill:getTP(), 60, 90)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 0, 0, duration))
+
+    if mob:hasStatusEffect(xi.effect.DEFENSE_BOOST) then
+        local effect = mob:getStatusEffect(xi.effect.DEFENSE_BOOST)
+        effect:setSubPower(90)
+    end
+
+    return xi.effect.DEFENSE_BOOST
 end
 
 return mobskillObject

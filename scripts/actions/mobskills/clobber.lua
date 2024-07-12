@@ -1,6 +1,6 @@
 -----------------------------------
---  Batterhorn
---  Description: Inflicts damage in a frontal area of effect. Additional effect: Knockback.
+--  Clobber
+--  Description: Only used when targets behind it gets hate.
 --  Type: Physical
 --  Utsusemi/Blink absorb: 2-3 shadows
 --  Range: Melee
@@ -8,7 +8,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if target:isInfront(mob) then
+    if target:isBehind(mob) then
         return 0
     end
 

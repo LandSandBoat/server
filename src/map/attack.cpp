@@ -212,6 +212,22 @@ bool CAttack::IsAnticipated() const
     return m_anticipated;
 }
 
+bool CAttack::IsDeflected() const
+{
+    if (!m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_DEFENSE_BOOST))
+    {
+        return false;
+    }
+
+    uint16 subpower = m_victim->StatusEffectContainer->GetStatusEffect(EFFECT_DEFENSE_BOOST)->GetSubPower();
+    if (subpower == 0)
+    {
+        return false;
+    }
+
+    return infront(m_attacker->loc.p, m_victim->loc.p, subpower);
+}
+
 /************************************************************************
  *                                                                      *
  *  Returns the isFirstSwing flag.                                      *
