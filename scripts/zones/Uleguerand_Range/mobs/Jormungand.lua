@@ -14,7 +14,8 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:setCarefulPathing(true)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 15)
+    mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, xi.drawin.NORMAL)
+    mob:setMobMod(xi.mobMod.DRAW_IN_TRIGGER_DIST, 15)
 end
 
 entity.onMobSpawn = function(mob)

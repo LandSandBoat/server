@@ -40,7 +40,7 @@ enum MOBMODIFIER : int
     MOBMOD_HP_HEAL_CHANCE         = 9,  // can cast cures below this HP %
     MOBMOD_SUBLINK                = 10, // sub link group
     MOBMOD_LINK_RADIUS            = 11, // link radius
-    MOBMOD_DRAW_IN                = 12, // 1 - player draw in, 2 - alliance draw in -- only add as a spawn mod!
+    MOBMOD_DRAW_IN_BITMASK        = 12, // bitmask with different binary options for draw-in (see DRAWIN enum for options)
     MOBMOD_SEVERE_SPELL_CHANCE    = 13, // % chance to use a severe spell like death or impact
     MOBMOD_SKILL_LIST             = 14, // uses given mob skill list
     MOBMOD_MUG_GIL                = 15, // amount gil carried for mugging
@@ -110,6 +110,8 @@ enum MOBMODIFIER : int
     MOBMOD_CANNOT_GUARD           = 79, // Check if the mob does not guard(despite being a MNK or PUP mob)
     MOBMOD_SKIP_ALLEGIANCE_CHECK  = 80, // Skip the allegiance check for valid target (allows for example a mob to cast a TARGET_ENEMY spell on itself)
     MOBMOD_ABILITY_RESPONSE       = 81, // Mob can respond to player ability use with onPlayerAbilityUse()
+    MOBMOD_DRAW_IN_TRIGGER_DIST   = 82, // Distance to trigger a draw-in (overrides a default of 2 * melee dist)
+    MOBMOD_DRAW_IN_MAX_RANGE      = 83, // Max range to draw-in an entity (overrides a default of entire zone)
 };
 
 #endif

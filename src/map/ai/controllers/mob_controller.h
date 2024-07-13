@@ -85,6 +85,7 @@ protected:
     bool         CanMoveForward(float currentDistance);
     bool         IsSpecialSkillReady(float currentDistance);
     bool         IsSpellReady(float currentDistance);
+    bool         HandleDrawin(float currentDistance);
 
     CBattleEntity* PTarget{ nullptr };
 

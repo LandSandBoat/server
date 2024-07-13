@@ -14,7 +14,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGEN, 50)
     mob:setMod(xi.mod.REGAIN, 100)
     mob:setMod(xi.mod.WIND_ABSORB, 100)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, xi.drawin.NORMAL)
 end
 
 entity.onMobEngage = function(mob)

@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 2)
+    mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, bit.bor(xi.drawin.NORMAL, xi.drawin.INCLUDE_ALLIANCE))
 end
 
 entity.onMobEngage = function(mob, target)

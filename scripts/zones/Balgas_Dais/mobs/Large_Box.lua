@@ -22,7 +22,7 @@ entity.onMobEngage = function(mob, target)
     then
         small:setLocalVar('engaged', 1)
 
-        mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+        mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, xi.drawin.NORMAL)
         DespawnMob(mobId - 2)
         DespawnMob(mobId - 1)
 

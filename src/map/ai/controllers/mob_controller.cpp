@@ -708,11 +708,11 @@ void CMobController::Move()
         if (((currentDistance > closeDistance) || move) && PMob->PAI->CanFollowPath())
         {
             // TODO: can this be moved to scripts entirely?
-            if (PMob->getMobMod(MOBMOD_DRAW_IN) > 0)
+            if ((PMob->getMobMod(MOBMOD_DRAW_IN_BITMASK) & DRAWIN::DRAWIN_NORMAL))
             {
-                if (currentDistance >= PMob->GetMeleeRange() * 2 && battleutils::DrawIn(PTarget, PMob, PMob->GetMeleeRange() - 0.2f))
+                bool didDrawin = HandleDrawin(currentDistance);
+                if (didDrawin)
                 {
-                    FaceTarget();
                     return;
                 }
             }
@@ -1414,4 +1414,27 @@ bool CMobController::IsSpellReady(float currentDistance)
     }
 
     return m_Tick >= m_nextMagicTime;
+}
+
+bool CMobController::HandleDrawin(float currentDistance)
+{
+    // get specific draw-in settings that can be set on any given mob otherwise use default values
+    const uint32 drawInTriggerDistance = PMob->getMobMod(MOBMOD_DRAW_IN_TRIGGER_DIST) ? PMob->getMobMod(MOBMOD_DRAW_IN_TRIGGER_DIST) : PMob->GetMeleeRange() * 2;
+    const uint32 drawInMaxDistance     = PMob->getMobMod(MOBMOD_DRAW_IN_MAX_RANGE) ? PMob->getMobMod(MOBMOD_DRAW_IN_MAX_RANGE) : std::numeric_limits<int16>::max();
+    const bool   includeAlliance       = (PMob->getMobMod(MOBMOD_DRAW_IN_BITMASK) & DRAWIN::DRAWIN_INCLUDE_ALLIANCE);
+    const bool   toFrontOfMob          = (PMob->getMobMod(MOBMOD_DRAW_IN_BITMASK) & DRAWIN::DRAWIN_TO_FRONT_OF_MOB);
+
+    bool didDrawin = false;
+
+    if (currentDistance >= drawInTriggerDistance)
+    {
+        bool didDrawin = battleutils::DrawIn(PTarget, PMob, PMob->GetMeleeRange() - 0.2f, drawInMaxDistance, includeAlliance, toFrontOfMob);
+
+        if (didDrawin)
+        {
+            FaceTarget();
+        }
+    }
+
+    return didDrawin;
 }

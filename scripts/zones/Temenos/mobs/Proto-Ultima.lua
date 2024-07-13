@@ -47,7 +47,7 @@ executeCitadelBusterState = function(mob)
         mob:setMagicCastingEnabled(true)
         mob:setAutoAttackEnabled(true)
         mob:setMobAbilityEnabled(true)
-        mob:setMobMod(xi.mobMod.DRAW_IN, 0)
+        mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, xi.drawin.NONE)
         -- Use Citadel Buster at a regular interval
         mob:setLocalVar('citadelBusterTime', os.time() + math.random(90, 100))
         return
@@ -64,7 +64,7 @@ entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(false)
     mob:setAutoAttackEnabled(true)
     mob:setMobAbilityEnabled(true)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 0)
+    mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, xi.drawin.NONE)
     mob:setMobMod(xi.mobMod.SKILL_LIST, 729)
 end
 
@@ -99,7 +99,7 @@ entity.onMobFight = function(mob, target)
         mob:setMobAbilityEnabled(false)
         mob:setMagicCastingEnabled(false)
         mob:setAutoAttackEnabled(false)
-        mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+        mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, xi.drawin.NORMAL)
         executeCitadelBusterState(mob)
     end
 end

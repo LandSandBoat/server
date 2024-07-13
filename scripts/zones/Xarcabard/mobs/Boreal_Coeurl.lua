@@ -86,6 +86,8 @@ entity.onMobEngage = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, bit.bor(xi.drawin.NORMAL, xi.drawin.INCLUDE_ALLIANCE))
+    mob:setMobMod(xi.mobMod.DRAW_IN_TRIGGER_DIST, 15)
     mob:setSpeed(baseSpeed)
     -- Failsafe to make sure NPC is down when NM is up
     if xi.settings.main.OLDSCHOOL_G2 then
