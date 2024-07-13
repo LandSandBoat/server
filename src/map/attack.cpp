@@ -393,16 +393,17 @@ bool CAttack::CheckAnticipated()
         m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
         return false;
     }
+    auto* weapon             = dynamic_cast<CItemWeapon*>(m_victim->m_Weapons[SLOT_MAIN]);
+    bool  isValid2HandWeapon = weapon && weapon->isTwoHanded();
+    bool  hasValidSeigan     = isValid2HandWeapon && m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN, 0);
 
-    bool hasSeigan = m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN, 0);
-
-    if (!hasSeigan && pastAnticipations == 0)
+    if (!hasValidSeigan && pastAnticipations == 0)
     {
         m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
         m_anticipated = true;
         return true;
     }
-    else if (!hasSeigan)
+    else if (!hasValidSeigan)
     {
         m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
         return false;
@@ -461,8 +462,12 @@ bool CAttack::CheckCounter()
 
     // counter check (rate AND your hit rate makes it land, else its just a regular hit)
     // having seigan active gives chance to counter at 25% of the zanshin proc rate
-    uint16 seiganChance = 0;
-    if (m_victim->objtype == TYPE_PC && m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN))
+    uint16 seiganChance       = 0;
+    auto*  weapon             = dynamic_cast<CItemWeapon*>(m_victim->m_Weapons[SLOT_MAIN]);
+    bool   isValid2HandWeapon = weapon && weapon->isTwoHanded();
+    bool   hasValidSeigan     = isValid2HandWeapon && m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN, 0);
+
+    if (m_victim->objtype == TYPE_PC && hasValidSeigan)
     {
         seiganChance = m_victim->getMod(Mod::ZANSHIN) + ((CCharEntity*)m_victim)->PMeritPoints->GetMeritValue(MERIT_ZASHIN_ATTACK_RATE, (CCharEntity*)m_victim);
         seiganChance = std::clamp<uint16>(seiganChance, 0, 100);
