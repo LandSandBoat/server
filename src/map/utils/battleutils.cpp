@@ -2223,6 +2223,8 @@ namespace battleutils
         }
         damage = std::clamp(damage, -99999, 99999);
 
+        damage = CheckAndApplyDamageCap(damage, PDefender);
+
         // Scarlet Delirium: Updates status effect power with damage bonus
         battleutils::HandleScarletDelirium(PDefender, damage);
 
@@ -2414,6 +2416,8 @@ namespace battleutils
         HandleAfflatusMiseryDamage(PDefender, damage);
         damage = std::clamp(damage, -99999, 99999);
 
+        damage = CheckAndApplyDamageCap(damage, PDefender);
+
         int32 corrected = PDefender->takeDamage(damage, PAttacker, attackType, damageType);
         if (damage < 0)
         {
@@ -2582,6 +2586,8 @@ namespace battleutils
 
     int32 TakeSwipeLungeDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
     {
+        damage = CheckAndApplyDamageCap(damage, PDefender);
+
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
         // Remove effects from damage
@@ -5023,6 +5029,35 @@ namespace battleutils
         PChar->PClaimedMob = nullptr;
     }
 
+    // Checks to see if the mob has a damage cap value
+    // This is used for instances like Suttung, Antaeus, Crustacean Conundrum bcnm, Colonization reives
+    int32 CheckAndApplyDamageCap(int32 damage, CBattleEntity* PDefender)
+    {
+        int32 damageCap     = PDefender->getMod(Mod::RECEIVED_DAMAGE_CAP);     // The max damage cap
+        int32 damageVariant = PDefender->getMod(Mod::RECEIVED_DAMAGE_VARIANT); // The value you want the damage to have a variance by
+
+        // If the target has no mod or the damage is less than the cap return normal damage
+        if (damageCap == 0 || damage < damageCap)
+        {
+            return damage;
+        }
+
+        damage = std::clamp(damage, 0, damageCap);
+
+        // If for whatever reason your damage variant is set too high set the variant to 0 as a fail safe
+        if (damageVariant > damageCap)
+        {
+            ShowWarning("battleutils::CheckAndApplyDamageCap - RECEIVED_DAMAGE_VARIANT is > than RECEIVED_DAMAGE_CAP");
+            damageVariant = 0;
+        }
+
+        // see https://bugs.llvm.org/show_bug.cgi?id=18767#c1 ; essentially, [min, max) range on this RNG call excludes the max
+        // so we must add +1 to our max to achieve the range we want
+        damage -= xirand::GetRandomNumber<int32>(0, damageVariant + 1);
+
+        return std::clamp(damage, damageCap - damageVariant, damageCap);
+    }
+
     int32 BreathDmgTaken(CBattleEntity* PDefender, int32 damage)
     {
         float resist = 1.0f + PDefender->getMod(Mod::UDMGBREATH) / 10000.f;
@@ -5052,6 +5087,8 @@ namespace battleutils
         {
             damage = HandleSevereDamage(PDefender, damage, false);
         }
+
+        damage = CheckAndApplyDamageCap(damage, PDefender);
 
         return damage;
     }
@@ -5108,6 +5145,8 @@ namespace battleutils
             damage = HandleSevereDamage(PDefender, damage, false);
         }
 
+        damage = CheckAndApplyDamageCap(damage, PDefender);
+
         return damage;
     }
 
@@ -5155,6 +5194,8 @@ namespace battleutils
             damage = HandleFanDance(PDefender, damage);
         }
 
+        damage = CheckAndApplyDamageCap(damage, PDefender);
+
         return damage;
     }
 
@@ -5199,6 +5240,8 @@ namespace battleutils
 
             damage = HandleFanDance(PDefender, damage);
         }
+
+        damage = CheckAndApplyDamageCap(damage, PDefender);
 
         return damage;
     }

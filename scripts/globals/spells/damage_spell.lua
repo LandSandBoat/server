@@ -1040,6 +1040,9 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
 
     -- Handle final adjustments. Most are located in core. TODO: Decide if we want core handling this.
     else
+        -- Check if the mob has a damage cap
+        finalDamage = target:checkDamageCap(finalDamage)
+
         -- Handle Bind break and TP?
         target:takeSpellDamage(caster, spell, finalDamage, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + spellElement)
 

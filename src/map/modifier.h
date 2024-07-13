@@ -189,18 +189,20 @@ enum class Mod
     FISHING_SKILL_GAIN    = 155, // food for fishing skill ups
 
     // Damage - 10000 base, 375 = 3.75%
-    DMG         = 160, // Damage Taken %
-    DMGPHYS     = 161, // Physical Damage Taken %
-    DMGPHYS_II  = 190, // Physical Damage Taken II % (Burtgang)
-    UDMGPHYS    = 387, // Uncapped Damage Multipliers
-    DMGBREATH   = 162, // Breath Damage Taken %
-    UDMGBREATH  = 388, // Used in sentinel, invincible, physical shield etc
-    DMGMAGIC    = 163, // Magic Damage Taken %
-    DMGMAGIC_II = 831, // Magic Damage Taken II % (Aegis)
-    UDMGMAGIC   = 389,
-    DMGRANGE    = 164, // Range Damage Taken %
-    UDMGRANGE   = 390,
-    DMG_AOE     = 158, // Damage Taken % when not main target of an AoE action. (Ex: Locus Mobs)
+    DMG                     = 160, // Damage Taken %
+    DMGPHYS                 = 161, // Physical Damage Taken %
+    DMGPHYS_II              = 190, // Physical Damage Taken II % (Burtgang)
+    UDMGPHYS                = 387, // Uncapped Damage Multipliers
+    DMGBREATH               = 162, // Breath Damage Taken %
+    UDMGBREATH              = 388, // Used in sentinel, invincible, physical shield etc
+    DMGMAGIC                = 163, // Magic Damage Taken %
+    DMGMAGIC_II             = 831, // Magic Damage Taken II % (Aegis)
+    UDMGMAGIC               = 389,
+    DMGRANGE                = 164, // Range Damage Taken %
+    UDMGRANGE               = 390,
+    DMG_AOE                 = 158, // Damage Taken % when not main target of an AoE action. (Ex: Locus Mobs)
+    RECEIVED_DAMAGE_CAP     = 221, // Caps the damage taken recieved by the attacker
+    RECEIVED_DAMAGE_VARIANT = 222, // The variance that you want the damage cap to changed by. Ex: If you want the damage to be from 90-100 instead of a flat 100 you can set this to 10. It will random the value between 90-100 if the damage is above 100.
 
     // Specific Damage Taken vs physical damage type
     // Value is stored as a percentage of damage reduction (to within 1000)
@@ -1017,7 +1019,6 @@ enum class Mod
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs:
-    // 221 to 222
     // 274 to 275
     //
     // SPARE = 1083 and onward
