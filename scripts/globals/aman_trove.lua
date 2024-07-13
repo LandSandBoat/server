@@ -120,7 +120,7 @@ end
 -- Global Functions
 -----------------------------------
 xi.amanTrove.setupBattlefield = function(battlefield)
-    local zone = battlefield:getZone()
+    local zone = GetZone(battlefield:getZoneID())
     local ID   = zones[zone:getID()]
 
     -- Setup Terminal Coffer
@@ -148,6 +148,8 @@ xi.amanTrove.setupBattlefield = function(battlefield)
 end
 
 xi.amanTrove.chestOPlentyOnTrigger = function(player, npc)
+    print('xi.amanTrove.chestOPlentyOnTrigger')
+
     -- Debouncing (just in case)
     if npc:getLocalVar('Triggered') == 1 then
         return
@@ -163,7 +165,7 @@ xi.amanTrove.chestOPlentyOnTrigger = function(player, npc)
     local zone = player:getZone()
     local ID   = zones[zone:getID()]
 
-    player:showText(npc, ID.text.LOUD_THUD)
+    player:messageSpecial(ID.text.LOUD_THUD)
     addSmallLoot(player:getBattlefield())
 
     npc:setAnimationSub(1)
@@ -173,6 +175,7 @@ xi.amanTrove.chestOPlentyOnTrigger = function(player, npc)
 end
 
 xi.amanTrove.terminalCofferOnTrigger = function(player, npc)
+    print('xi.amanTrove.terminalCofferOnTrigger')
     -- Debouncing (just in case)
     if npc:getLocalVar('Triggered') == 1 then
         return
@@ -184,7 +187,7 @@ xi.amanTrove.terminalCofferOnTrigger = function(player, npc)
     npc:setUntargetable(true)
 
     -- TODO: Count up thuds, etc. generate loot
-    local loot = getLoot(player:getBattlefield())
+    -- local loot = getLoot(player:getBattlefield())
 
     -- TODO: We're going to predetermine how many thuds etc. there are
     --     : available at the start of the BC. If somehow we get to this point
@@ -194,16 +197,40 @@ xi.amanTrove.terminalCofferOnTrigger = function(player, npc)
 end
 
 xi.amanTrove.prepareMimic = function(player, npc)
+    print('xi.amanTrove.prepareMimic')
+
+    local battlefield = player:getBattlefield()
+    local battleArea  = battlefield:getArea()
+    local ID = zones[player:getZoneID()]
+
+    -- Hide all non-mimic entities
+    local entitiesToHide = {}
+    for i = 0, 9 do
+        local chest = GetMobByID(ID.mob.CHEST_O_PLENTY + i + (battleArea - 1) * 11)
+        if
+            chest:getLocalVar('Mimic') ~= 1 and
+            chest:getLocalVar('Triggered') ~= 1 -- Triggered chests stay visible
+        then
+            table.insert(entitiesToHide, chest)
+        end
+    end
+
+    local terminalCoffer = GetNPCByID(ID.npc.TERMINAL_COFFER + (battleArea - 1) * 11)
+    table.insert(entitiesToHide, terminalCoffer)
+
+    for _, entity in ipairs(entitiesToHide) do
+        entity:setStatus(xi.status.DISAPPEAR)
+        entity:setUntargetable(true)
+    end
+
+    -- TODO: Making the mimic essentially unbeatable for now
+    --     : until there's more evidence of how powerful it is.
+
     npc:setStatus(xi.status.UPDATE)
     npc:setModelId(258)
-    npc:setAnimation(1) -- Combat
     npc:setAnimationSub(1) -- Mouth open
-
-    -- Make things disappear:
-    -- npc:entityAnimationPacket('kesu', npc)
-
-    -- TODO: Make all other closed chests disappear, open chests remain.
-    -- TODO: Change model into animated mimic, make name visible, set enmity, etc.
+    npc:setHP(1500000)
+    npc:addEnmity(player, 1, 0)
 end
 
 -----------------------------------
@@ -257,6 +284,7 @@ xi.amanTrove.onGreysonTrade = function(player, npc, trade)
         end
 
         -- TODO: Confirm all silver vouchers in trade so they're removed during confirm
+        -- CS amounts are correct, currency amounts are correct, the trade removed amount is incorrect
 
         player:addCurrency('silver_aman_voucher', numVouchers)
         silverVouchersStored = player:getCurrency('silver_aman_voucher')
