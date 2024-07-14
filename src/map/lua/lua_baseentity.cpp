@@ -7278,7 +7278,7 @@ uint8 CLuaBaseEntity::getQuestStatus(uint8 questLogID, uint16 questID)
 /************************************************************************
  *  Function: hasCompletedQuest()
  *  Purpose : Returns true if a player has completed a quest
- *  Example : if (player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)) then
+ *  Example : if (player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)) then
  ************************************************************************/
 
 bool CLuaBaseEntity::hasCompletedQuest(uint8 questLogID, uint16 questID)

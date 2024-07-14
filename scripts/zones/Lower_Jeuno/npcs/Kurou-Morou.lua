@@ -40,6 +40,8 @@ entity.onTrigger = function(player, npc)
         yourCrystalBall == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(194) -- Start 'Your Crystal Ball' quest
+    elseif yourCrystalBall == xi.questStatus.QUEST_ACCEPTED then
+        player:startEvent(191) -- reminder to get an Ahriman Lens and turn it into a divination sphere
 
     elseif
         jeunoFame >= 5 and
@@ -97,6 +99,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addFame(xi.fameArea.JEUNO, 30)
         player:tradeComplete()
         player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
+        player:messageSpecial(ID.text.KOROU_FORTUNE)
 
     elseif csid == 204 and option == 0 then
         player:incrementCharVar('QuestNeverToReturn_prog', 1)  -- Keep track of how many times the players fortune has been read
