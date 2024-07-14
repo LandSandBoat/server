@@ -8,6 +8,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:hasImmunity(xi.immunity.DISPEL) then
+        spell:setMsg(xi.msg.basic.MAGIC_COMPLETE_RESIST)
+        return
+    end
+
     -- Pull base stats.
     -- local dCHR = (caster:getStat(xi.mod.CHR) - target:getStat(xi.mod.CHR))
 
