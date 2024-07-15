@@ -2,6 +2,8 @@
 -- Area: Toraimarai Canal
 --  Mob: Poroggo Excavator
 -----------------------------------
+mixins = { require('scripts/mixins/families/poroggo') }
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

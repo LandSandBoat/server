@@ -1,6 +1,6 @@
 -----------------------------------
--- Area: The Eldieme Necropolis [S] (175)
---  Mob: Poroggo Servant
+-- Area: Mamook
+--  Mob: Poroggo
 -----------------------------------
 mixins = { require('scripts/mixins/families/poroggo') }
 -----------------------------------

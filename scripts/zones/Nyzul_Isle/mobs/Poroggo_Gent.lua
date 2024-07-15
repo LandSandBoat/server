@@ -3,6 +3,8 @@
 -- Area: Nyzul Isle
 -- Info: Specified Mob Group
 -----------------------------------
+mixins = { require('scripts/mixins/families/poroggo') }
+-----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
