@@ -649,7 +649,8 @@ public:
     bool   canGainStatusEffect(uint16 effect, sol::object const& powerObj);
     bool   hasStatusEffect(uint16 StatusID, sol::object const& SubType);
     uint16 hasStatusEffectByFlag(uint16 StatusID);
-    uint8  countEffect(uint16 StatusID); // Gets the number of effects of a specific type on the player
+    uint8  countEffect(uint16 StatusID);     // Gets the number of effects of a specific type on the entity
+    uint8  countEffectWithFlag(uint32 flag); // Gets the number of effects with a flag on the entity
 
     bool   delStatusEffect(uint16 StatusID, sol::object const& SubType);
     void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);
