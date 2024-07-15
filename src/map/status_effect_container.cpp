@@ -231,6 +231,19 @@ uint8 CStatusEffectContainer::GetEffectsCount(EFFECT ID)
     return count;
 }
 
+uint8 CStatusEffectContainer::GetEffectsCountWithFlag(EFFECTFLAG flag)
+{
+    uint8 count = 0;
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->HasEffectFlag(flag) && PStatusEffect->GetDuration() > 0 && !PStatusEffect->deleted)
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
 uint8 CStatusEffectContainer::GetLowestFreeSlot()
 {
     uint8 lowestFreeSlot = 1;
