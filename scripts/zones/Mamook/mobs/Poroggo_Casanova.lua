@@ -4,6 +4,7 @@
 -- ToAU Quest: Prince and the Hopper
 -----------------------------------
 local ID = zones[xi.zone.MAMOOK]
+mixins = { require('scripts/mixins/families/poroggo') }
 -----------------------------------
 local entity = {}
 

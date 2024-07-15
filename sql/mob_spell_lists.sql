@@ -5051,7 +5051,16 @@ INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,176,1,255); -- firaga_ii
 INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,204,1,255); -- flare (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,235,1,255); -- burn (1~255)
 
--- Next Available: 506
+-- Poroggo with Providence (506)
+INSERT INTO `mob_spell_lists` VALUES ('Providence',506,57,1,255); -- Haste (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Providence',506,365,1,255); -- Breakga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Providence',506,362,1,255); -- Bindga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Providence',506,361,1,255); -- Blindga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Providence',506,366,1,255); -- Graviga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Providence',506,357,1,255); -- Slowga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Providence',506,367,1,255); -- Death (1~255)
+
+-- Next Available: 507
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

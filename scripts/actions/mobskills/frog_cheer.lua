@@ -1,6 +1,6 @@
 -----------------------------------
 -- Frog Cheer
--- Increases magical attack and grants Elemental Seal xi.effect.
+-- Increases magical attack and grants Elemental Seal effect
 -----------------------------------
 local mobskillObject = {}
 
@@ -9,7 +9,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.MAGIC_ATK_BOOST, 25, 0, 300))
+    skill:setMsg(xi.mobskills.mobBuffMove(target, xi.effect.MAGIC_ATK_BOOST, 25, 0, 300))
+    target:addStatusEffect(xi.effect.ELEMENTAL_SEAL, 1, 0, 60)
 
     return xi.effect.MAGIC_ATK_BOOST
 end
