@@ -12,6 +12,7 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
         KEYITEM_LOST                  = 6394, -- Key item lost: <keyitem>.
+        NOT_HAVE_ENOUGH_GIL           = 6395, -- You do not have enough gil.
         FELLOW_MESSAGE_OFFSET         = 6419, -- I'm ready. I suppose.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
@@ -20,6 +21,7 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
         CONQUEST_BASE                 = 7064, -- Tallying conquest results...
         WAS_TAKEN_FROM_YOU            = 7752, -- The Dawn Talisman was taken from you...
         FISHING_MESSAGE_OFFSET        = 7583, -- You can't fish here.
+        NOTHING_OUT_OF_ORDINARY       = 7693, -- There is nothing out of the ordinary here.
         MINING_IS_POSSIBLE_HERE       = 7714, -- Mining is possible here if you have <item>.
         ALTANA_DIE                    = 7740, -- Aaaltaaanaaa...Diiieee!!!
         RAKOROK_DIALOGUE              = 7738, -- Nsy pipul. Gattohre! I bisynw!
@@ -29,14 +31,16 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
     },
     mob =
     {
-        BUGALLUG          = GetFirstID('Bugallug'),
-        BUGBEAR_STRONGMAN = GetTableOfIDs('Bugbear_Strongman'),
-        GOBLIN_WOLFMAN    = GetFirstID('Goblin_Wolfman'),
+        BUGALLUG                = GetFirstID('Bugallug'),
+        BUGBEAR_STRONGMAN       = GetTableOfIDs('Bugbear_Strongman'),
+        GOBLIN_WOLFMAN          = GetFirstID('Goblin_Wolfman'),
+        GENEROUS_GENERAL_OFFSET = GetFirstID('Goblin_Preceptor'),
     },
     npc =
     {
         SCRAWLED_WRITING = GetFirstID('Scrawled_Writing'),
         OVERSEER_BASE    = GetFirstID('Conquest_Banner'),
+        IRON_BOX         = GetFirstID('Iron_Box'),
         TREASURE_CHEST   = GetFirstID('Treasure_Chest'),
         MINING           = GetTableOfIDs('Mining_Point'),
     },

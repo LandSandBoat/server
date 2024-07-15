@@ -33,6 +33,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         GP_OBTAINED                    = 6843,  -- Obtained: <number> guild points.
         NOT_HAVE_ENOUGH_GP             = 6844,  -- You do not have enough guild points.
         RENOUNCE_CRAFTSMAN             = 6860,  -- You have successfully renounced your status as a [craftsman/artisan/adept] of the [Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.
+        QUEST_CANCELLED                = 6920,  -- The quest has been canceled!
         CONQUEST_BASE                  = 7066,  -- Tallying conquest results...
         YOU_ACCEPT_THE_MISSION         = 7230,  -- You accept the mission.
         ORIGINAL_MISSION_OFFSET        = 7241,  -- Bring me one of those axes, and your mission will be a success. No running away now; we've a proud country to defend!
