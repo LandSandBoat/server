@@ -53,6 +53,10 @@ zones[xi.zone.WINDURST_WATERS] =
         JOURILLE_CLOSED_DIALOG        = 8965,  -- Greetings! I am Jourille, your friendly neighborhood traveling merchant. I would most like to sell you something from Ronfaure right now, but I regret that I am waiting on my next shipment. Please call by later!
         YOU_SHOW_OFF_THE              = 9141,  -- You show off the <item>.
         CONQUEST                      = 9251,  -- You've earned conquest points!
+        FIRMLY_SHUT                   = 9604,  -- The door is firmly shut...
+        KNOCKING                      = 10027, -- ...You try knocking, but there is no response.
+        HOSTEL_CHEAT                  = 10032, -- But that was a wong, wong time ago... Wait a minute. You anshered all the queshtions in QUIZ DE VANA'DIEW correctwy.
+        HOSTEL_PRIZE                  = 10033, -- You weren't cheat-sheetin' now, were you? Well, no matter. Here's your prize. You earned it.
         TRICK_OR_TREAT                = 10200, -- Trick or treat...
         THANK_YOU_TREAT               = 10201, -- Thank you... And now for your treat...
         HERE_TAKE_THIS                = 10202, -- Here, take this...
@@ -80,6 +84,7 @@ zones[xi.zone.WINDURST_WATERS] =
             [17752103] = 62, -- Ahyeekih
         },
 
+        ACOLYTE_HOSTEL_DOOR_OFFSET = GetFirstID('Door_Acolyte_Hostel'),
         LELEROON_GREEN_DOOR = 17752333,
     },
 }

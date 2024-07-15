@@ -21,7 +21,7 @@ end
 
 entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 230 and option == 10 then
-        if player:delGil(500000) then
+        if player:delGil(500000) then -- this value is tied to a question in Nothing_Matters.lua
             player:addKeyItem(xi.ki.AIRSHIP_PASS)
             player:updateEvent(0, 1)
         else
