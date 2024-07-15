@@ -86,7 +86,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 10 and
-                        player:getLocalVar('battlefieldWin') == 64
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.RANK_2_MISSION_2
                     then
                         npcUtil.giveKeyItem(player, xi.ki.KINDRED_CREST)
                         player:delKeyItem(xi.ki.DARK_KEY)

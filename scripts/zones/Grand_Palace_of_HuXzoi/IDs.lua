@@ -17,6 +17,7 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7086, -- Tallying conquest results...
         DOES_NOT_RESPOND              = 7250, -- The gate does not respond...
+        PRESENCE_HAS_DRAWN            = 7366, -- Your presence has drawn unwanted attention!
         REQUEST_CONFIRMED             = 7371, -- Security portal access request confirmed. Commencing patrol routine. Stay on alert for intruder interference.
         PATROL_COMPLETED              = 7372, -- Patrol routine completed. Request transfer of final security portal access duty. Awaiting confirmation.
         DUTY_COMPLETE                 = 7373, -- Transfer of final security portal access duty complete.

@@ -8,6 +8,7 @@ local cloisterOfGalesID = zones[xi.zone.CLOISTER_OF_GALES]
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.CLOISTER_OF_GALES,
     battlefieldId    = xi.battlefield.id.CARBUNCLE_DEBACLE_CLOISTER_OF_GALES,
+    canLoseExp       = false,
     maxPlayers       = 18,
     timeLimit        = utils.minutes(30),
     index            = 1,

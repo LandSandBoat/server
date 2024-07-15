@@ -178,12 +178,10 @@ mission.sections =
                 end,
             },
 
-            -- TODO: This is another duplicate NPC in the database, separate these eventually
-            ['Tombstone'] =
+            ['Tombstone_Lower'] =
             {
                 onTrigger = function(player, npc)
                     if
-                        npc:getZPos() > 0 and
                         player:getMissionStatus(mission.areaId) == 3 and
                         not player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK)
                     then

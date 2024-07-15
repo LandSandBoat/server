@@ -78,7 +78,7 @@ jobs:
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ -f $changed_file ]]; then
             if [[ $changed_file == *.cpp ]]; then
-              bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt || true
+              bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt >> cpp_checks.txt || true
             fi
           fi
         done

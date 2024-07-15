@@ -1,7 +1,6 @@
 -----------------------------------
 -- Demoralizing Roar
 -- Description: Inflicts Attack Down (-50%) to players within a 10' area of effect
--- https://www.bg-wiki.com/ffxi/Locus_Wivre
 -----------------------------------
 local mobskillObject = {}
 
@@ -15,7 +14,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power = 500
-    local duration = 30
+    local duration = xi.mobskills.calculateDuration(skill:getTP(), 30, 90)
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, power, 0, duration)
 end

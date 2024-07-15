@@ -269,7 +269,7 @@ end
 xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, actionElement, damageModifier, tpEffect, tpMultiplier)
     local returnInfo = {} -- TODO: Destroy
 
-    local finalDamage = 0
+    local finalDamage = baseDamage
 
     -- Base damage
     if tpEffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
@@ -712,4 +712,12 @@ xi.mobskills.mobHealMove = function(target, healAmount)
     target:addHP(healAmount)
 
     return healAmount
+end
+
+xi.mobskills.calculateDuration = function(tp, minimum, maximum)
+    if tp <= 1000 then
+        return minimum
+    end
+
+    return minimum + (maximum - minimum) * ((tp - 1000) / 1000)
 end

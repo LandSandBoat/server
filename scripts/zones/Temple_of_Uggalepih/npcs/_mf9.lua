@@ -22,8 +22,6 @@ entity.onTrigger = function(player, npc)
     else
         npc:openDoor(11) -- retail timed
     end
-
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

@@ -6,14 +6,16 @@ local waughroonID = zones[xi.zone.WAUGHROON_SHRINE]
 -----------------------------------
 
 local content = BattlefieldQuest:new({
-    zoneId           = xi.zone.WAUGHROON_SHRINE,
-    battlefieldId    = xi.battlefield.id.BEYOND_INFINITY_WAUGHROON_SHRINE,
-    maxPlayers       = 6,
-    levelCap         = 99,
-    timeLimit        = utils.minutes(10),
-    index            = 21,
-    entryNpc         = 'BC_Entrance',
-    exitNpc          = 'Burning_Circle',
+    zoneId        = xi.zone.WAUGHROON_SHRINE,
+    battlefieldId = xi.battlefield.id.BEYOND_INFINITY_WAUGHROON_SHRINE,
+    canLoseExp    = false,
+    allowTrusts   = true,
+    maxPlayers    = 6,
+    levelCap      = 99,
+    timeLimit     = utils.minutes(10),
+    index         = 21,
+    entryNpc      = 'BC_Entrance',
+    exitNpc       = 'Burning_Circle',
 
     questArea = xi.questLog.JEUNO,
     quest     = xi.quest.id.jeuno.BEYOND_INFINITY,

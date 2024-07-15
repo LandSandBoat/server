@@ -7,6 +7,10 @@ local professorTables = require('scripts/zones/Sacrarium/globals')
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setCarefulPathing(true)
 

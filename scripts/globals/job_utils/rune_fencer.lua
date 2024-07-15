@@ -513,7 +513,7 @@ end
 local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc) -- get these multipliers once and store them
     local multipliers = {}
 
-    multipliers.eleStaffBonus       = xi.spells.damage.calculateEleStaffBonus(player, element)
+    multipliers.eleStaffBonus       = xi.spells.damage.calculateElementalStaffBonus(player, element)
     multipliers.magianAffinity      = xi.spells.damage.calculateMagianAffinity() -- Presumed but untested.
     multipliers.SDT                 = xi.spells.damage.calculateSDT(target, element)
     multipliers.resist              = xi.spells.damage.calculateResist(player, target, 0, 0, element, 0, bonusMacc)
@@ -798,26 +798,6 @@ xi.job_utils.rune_fencer.useRayke = function(player, target, ability, action)
     player:removeAllRunes()
 
     return xi.effect.RAYKE -- Rayke doesn't seem to inform you if it had no effect? -- TODO: double check
-end
-
--- Used for nuke wall reduction of Rayke
-xi.job_utils.rune_fencer.isRaykeReducingElement = function(actor, element)
-    local effect = actor:getStatusEffect(xi.effect.RAYKE)
-
-    if effect then
-        local subpower = effect:getSubPower()
-
-        -- current bit size of subPower is 16 bits, 4*4 = 16
-        -- Step from 0 to 16 in increments of 4...
-        for i = 0, 16, 4 do
-            -- If element is bitpacked into rayke subeffect...
-            if bit.band(bit.rshift(subpower, i), 0xF) == element then
-                return true
-            end
-        end
-    end
-
-    return false
 end
 
 -- see https://www.bg-wiki.com/ffxi/One_for_All

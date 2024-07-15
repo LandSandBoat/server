@@ -22,68 +22,68 @@ content:addEssentialMobs({ 'Dragonian_Berzerker', 'Dragonian_Minstrel' })
 content.loot =
 {
     {
-        { itemid = xi.item.SUBDUER,        droprate = 222 }, -- Subduer
-        { itemid = xi.item.DISSECTOR,      droprate = 302 }, -- Dissector
-        { itemid = xi.item.DESTROYERS,     droprate = 245 }, -- Destroyers
-        { itemid = xi.item.HEART_SNATCHER, droprate = 208 }, -- Heart Snatcher
+        { item = xi.item.SUBDUER,        weight = 222 }, -- Subduer
+        { item = xi.item.DISSECTOR,      weight = 302 }, -- Dissector
+        { item = xi.item.DESTROYERS,     weight = 245 }, -- Destroyers
+        { item = xi.item.HEART_SNATCHER, weight = 208 }, -- Heart Snatcher
     },
 
     {
         quantity = 2,
-        { itemid = xi.item.NONE,                 droprate = 638 }, -- Nothing
-        { itemid = xi.item.VIAL_OF_DRAGON_BLOOD, droprate =  10 }, -- Vial Of Dragon Blood
-        { itemid = xi.item.DRAGON_HEART,         droprate = 176 }, -- Dragon Heart
-        { itemid = xi.item.SLICE_OF_DRAGON_MEAT, droprate = 176 }, -- Slice Of Dragon Meat
+        { item = xi.item.NONE,                 weight = 638 }, -- Nothing
+        { item = xi.item.VIAL_OF_DRAGON_BLOOD, weight =  10 }, -- Vial Of Dragon Blood
+        { item = xi.item.DRAGON_HEART,         weight = 176 }, -- Dragon Heart
+        { item = xi.item.SLICE_OF_DRAGON_MEAT, weight = 176 }, -- Slice Of Dragon Meat
     },
 
     {
-        { itemid = xi.item.NONE,        droprate = 392 }, -- Nothing
-        { itemid = xi.item.SPEAR_STRAP, droprate = 354 }, -- Spear Strap
-        { itemid = xi.item.SWORD_STRAP, droprate = 165 }, -- Sword Strap
-        { itemid = xi.item.POLE_GRIP,   droprate =  89 }, -- Pole Grip
+        { item = xi.item.NONE,        weight = 392 }, -- Nothing
+        { item = xi.item.SPEAR_STRAP, weight = 354 }, -- Spear Strap
+        { item = xi.item.SWORD_STRAP, weight = 165 }, -- Sword Strap
+        { item = xi.item.POLE_GRIP,   weight =  89 }, -- Pole Grip
     },
 
     {
-        { itemid = xi.item.MINUET_EARRING,   droprate = 586 }, -- Minuet Earring
-        { itemid = xi.item.ADAMAN_INGOT,     droprate = 184 }, -- Adaman Ingot
-        { itemid = xi.item.ORICHALCUM_INGOT, droprate = 207 }, -- Orichalcum Ingot
+        { item = xi.item.MINUET_EARRING,   weight = 586 }, -- Minuet Earring
+        { item = xi.item.ADAMAN_INGOT,     weight = 184 }, -- Adaman Ingot
+        { item = xi.item.ORICHALCUM_INGOT, weight = 207 }, -- Orichalcum Ingot
     },
 
     {
-        { itemid = xi.item.SORROWFUL_HARP,  droprate = 238 }, -- Sorrowful Harp
-        { itemid = xi.item.ATTILAS_EARRING, droprate = 250 }, -- Attilas Earring
-        { itemid = xi.item.DURANDAL,        droprate = 225 }, -- Durandal
-        { itemid = xi.item.HOPLITES_HARPE,  droprate = 275 }, -- Hoplites Harpe
+        { item = xi.item.SORROWFUL_HARP,  weight = 238 }, -- Sorrowful Harp
+        { item = xi.item.ATTILAS_EARRING, weight = 250 }, -- Attilas Earring
+        { item = xi.item.DURANDAL,        weight = 225 }, -- Durandal
+        { item = xi.item.HOPLITES_HARPE,  weight = 275 }, -- Hoplites Harpe
     },
 
     {
-        { itemid = xi.item.CHUNK_OF_GOLD_ORE,        droprate = 122 }, -- Chunk Of Gold Ore
-        { itemid = xi.item.RERAISER,                 droprate =  54 }, -- Reraiser
-        { itemid = xi.item.CHUNK_OF_MYTHRIL_ORE,     droprate =  41 }, -- Chunk Of Mythril Ore
-        { itemid = xi.item.DEMON_HORN,               droprate =  81 }, -- Demon Horn
-        { itemid = xi.item.EBONY_LOG,                droprate = 149 }, -- Ebony Log
-        { itemid = xi.item.HANDFUL_OF_WYVERN_SCALES, droprate =  54 }, -- Handful Of Wyvern Scales
-        { itemid = xi.item.VILE_ELIXIR_P1,           droprate =  27 }, -- Vile Elixir +1
-        { itemid = xi.item.MAHOGANY_LOG,             droprate =  41 }, -- Mahogany Log
-        { itemid = xi.item.CORAL_FRAGMENT,           droprate =  95 }, -- Coral Fragment
-        { itemid = xi.item.PETRIFIED_LOG,            droprate = 108 }, -- Petrified Log
-        { itemid = xi.item.PHOENIX_FEATHER,          droprate = 135 }, -- Phoenix Feather
-        { itemid = xi.item.CHUNK_OF_PLATINUM_ORE,    droprate =  54 }, -- Chunk Of Platinum Ore
-        { itemid = xi.item.RAM_HORN,                 droprate =  14 }, -- Ram Horn
-        { itemid = xi.item.SQUARE_OF_RAINBOW_CLOTH,  droprate =  14 }, -- Square Of Rainbow Cloth
-        { itemid = xi.item.CHUNK_OF_DARKSTEEL_ORE,   droprate =  68 }, -- Chunk Of Darksteel Ore
-        { itemid = xi.item.HI_RERAISER,              droprate =  14 }, -- Hi-reraiser
-        { itemid = xi.item.SQUARE_OF_RAXA,           droprate = 135 }, -- Square Of Raxa
+        { item = xi.item.CHUNK_OF_GOLD_ORE,        weight = 122 }, -- Chunk Of Gold Ore
+        { item = xi.item.RERAISER,                 weight =  54 }, -- Reraiser
+        { item = xi.item.CHUNK_OF_MYTHRIL_ORE,     weight =  41 }, -- Chunk Of Mythril Ore
+        { item = xi.item.DEMON_HORN,               weight =  81 }, -- Demon Horn
+        { item = xi.item.EBONY_LOG,                weight = 149 }, -- Ebony Log
+        { item = xi.item.HANDFUL_OF_WYVERN_SCALES, weight =  54 }, -- Handful Of Wyvern Scales
+        { item = xi.item.VILE_ELIXIR_P1,           weight =  27 }, -- Vile Elixir +1
+        { item = xi.item.MAHOGANY_LOG,             weight =  41 }, -- Mahogany Log
+        { item = xi.item.CORAL_FRAGMENT,           weight =  95 }, -- Coral Fragment
+        { item = xi.item.PETRIFIED_LOG,            weight = 108 }, -- Petrified Log
+        { item = xi.item.PHOENIX_FEATHER,          weight = 135 }, -- Phoenix Feather
+        { item = xi.item.CHUNK_OF_PLATINUM_ORE,    weight =  54 }, -- Chunk Of Platinum Ore
+        { item = xi.item.RAM_HORN,                 weight =  14 }, -- Ram Horn
+        { item = xi.item.SQUARE_OF_RAINBOW_CLOTH,  weight =  14 }, -- Square Of Rainbow Cloth
+        { item = xi.item.CHUNK_OF_DARKSTEEL_ORE,   weight =  68 }, -- Chunk Of Darksteel Ore
+        { item = xi.item.HI_RERAISER,              weight =  14 }, -- Hi-reraiser
+        { item = xi.item.SQUARE_OF_RAXA,           weight = 135 }, -- Square Of Raxa
     },
 
     {
-        { itemid = xi.item.SQUARE_OF_DAMASCENE_CLOTH,  droprate =  96 }, -- Square Of Damascene Cloth
-        { itemid = xi.item.DAMASCUS_INGOT,             droprate =  27 }, -- Damascus Ingot
-        { itemid = xi.item.PHILOSOPHERS_STONE,         droprate = 164 }, -- Philosophers Stone
-        { itemid = xi.item.PHOENIX_FEATHER,            droprate = 260 }, -- Phoenix Feather
-        { itemid = xi.item.SPOOL_OF_MALBORO_FIBER,     droprate =  96 }, -- Spool Of Malboro Fiber
-        { itemid = xi.item.SQUARE_OF_RAXA,             droprate = 288 }, -- Square Of Raxa
-        { itemid = xi.item.VIAL_OF_BLACK_BEETLE_BLOOD, droprate =  41 }, -- Vial Of Black Beetle Blood
+        { item = xi.item.SQUARE_OF_DAMASCENE_CLOTH,  weight =  96 }, -- Square Of Damascene Cloth
+        { item = xi.item.DAMASCUS_INGOT,             weight =  27 }, -- Damascus Ingot
+        { item = xi.item.PHILOSOPHERS_STONE,         weight = 164 }, -- Philosophers Stone
+        { item = xi.item.PHOENIX_FEATHER,            weight = 260 }, -- Phoenix Feather
+        { item = xi.item.SPOOL_OF_MALBORO_FIBER,     weight =  96 }, -- Spool Of Malboro Fiber
+        { item = xi.item.SQUARE_OF_RAXA,             weight = 288 }, -- Square Of Raxa
+        { item = xi.item.VIAL_OF_BLACK_BEETLE_BLOOD, weight =  41 }, -- Vial Of Black Beetle Blood
     },
 }
 

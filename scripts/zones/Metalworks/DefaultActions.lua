@@ -2,6 +2,7 @@ local ID = zones[xi.zone.METALWORKS]
 
 return {
     ['_6ld']        = { event = 604 },
+    ['_6le']        = { messageSpecial = ID.text.ITS_LOCKED },
     ['_6lg']        = { messageSpecial = ID.text.ITS_LOCKED },
     ['Alois']       = { event = 370 },
     ['Ayame']       = { event = 701 },

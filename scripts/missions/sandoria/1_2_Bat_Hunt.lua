@@ -94,15 +94,10 @@ mission.sections =
 
         [xi.zone.KING_RANPERRES_TOMB] =
         {
-            ['Tombstone'] =
+            ['Tombstone_Upper'] =
             {
                 onTrigger = function(player, npc)
-                    local xPos = npc:getXPos()
-                    local zPos = npc:getZPos()
-
-                    if xPos >= -1 and xPos <= 1 and zPos >= -106 and zPos <= -102 then
-                        return mission:progressEvent(4)
-                    end
+                    return mission:progressEvent(4)
                 end,
             },
 

@@ -2,6 +2,7 @@ local ID = zones[xi.zone.PORT_WINDURST]
 
 return {
     ['Ada']                 = { event = 44 },
+    ['Chipmy-Popmy']        = { event = 202 },
     ['Eki_Kamalabi']        = { event = 10005 },
     ['Gold_Skull']          = { event = 43 },
     ['Gomada-Vulmada']      = { event = 363 },

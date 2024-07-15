@@ -83,7 +83,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         mission:getVar(player, 'Status') == 1 and
-                        player:getLocalVar('battlefieldWin') == 993
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.WARRIORS_PATH
                     then
                         mission:setVar(player, 'Status', 2)
                         player:setPos(612.057, 132.664, 776.920, 188, xi.zone.SEALIONS_DEN)

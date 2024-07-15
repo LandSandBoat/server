@@ -75,9 +75,11 @@ public:
     uint8  getSkillType();         // get skill type
     uint16 getWeaponskillPoints(); // get current ws points
 
-    bool isTwoHanded();  // is a two handed weapon
-    bool isHandToHand(); // is a hand to hand weapon (or unarmed H2H)
-    bool isShield();     // is a Shield
+    bool  isTwoHanded();             // is a two handed weapon
+    bool  isHandToHand();            // is a hand to hand weapon (or unarmed H2H)
+    bool  isShield();                // is a Shield
+    uint8 getShieldSize();           // get the shield size (used for block rate calculation)
+    uint8 getShieldAbsorptionRate(); // get the shield absorbtion rate (used for block rate calculation)
 
     auto getSignature() -> std::string;
 

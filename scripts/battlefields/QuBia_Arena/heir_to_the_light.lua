@@ -8,16 +8,18 @@ local qubiaID = zones[xi.zone.QUBIA_ARENA]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.QUBIA_ARENA,
     battlefieldId         = xi.battlefield.id.HEIR_TO_THE_LIGHT,
+    canLoseExp            = false,
     isMission             = true,
+    allowTrusts           = true,
     maxPlayers            = 6,
     levelCap              = 75,
     timeLimit             = utils.minutes(30),
     index                 = 4,
     entryNpc              = 'BC_Entrance',
     exitNpc               = 'Burning_Circle',
-    missionArea           = xi.mission.log_id.WINDURST,
+    missionArea           = xi.mission.log_id.SANDORIA,
     mission               = xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT,
-    missionStatusArea     = xi.mission.log_id.WINDURST,
+    missionStatusArea     = xi.mission.log_id.SANDORIA,
     requiredMissionStatus = 3,
 })
 
