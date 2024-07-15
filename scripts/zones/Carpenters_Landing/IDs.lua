@@ -28,9 +28,11 @@ zones[xi.zone.CARPENTERS_LANDING] =
         FISHING_MESSAGE_OFFSET        = 7285, -- You can't fish here.
         LOGGING_IS_POSSIBLE_HERE      = 7402, -- Logging is possible here if you have <item>.
         BEUGUNGEL_SHOP_DIALOG         = 7434, -- Hello, [sir/ma'am]! I'm selling goods direct from the Carpenters' Guild.
+        STENCH_OF_DECAY               = 7484, -- You are overwhelmed by the putrid stench of decay!
         CRYPTONBERRY_EXECUTOR_DIE     = 7486, -- ...Cleave our foesss with barren hate.
         CRYPTONBERRY_ASSASSIN_2HR     = 7487, -- ..Take up thy lanternsss. The truth we shall illuminate.
         CRYPTONBERRY_EXECUTOR_2HR     = 7488, -- Through this we ssseek our just reward...
+        POLISH                        = 7489, -- You polish the <item> with the glowing mushroom.
         MYCOPHILE_MUSHROOM            = 7505, -- There is a rotten mushroom here. There are 3 openings in its cap.
         HERCULES_TREE_NOTHING_YET     = 7507, -- There is nothing here yet. Check again in the morning.
         UNITY_WANTED_BATTLE_INTERACT  = 7550, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
@@ -42,6 +44,7 @@ zones[xi.zone.CARPENTERS_LANDING] =
         TEMPEST_TIGON         = GetFirstID('Tempest_Tigon'),
         OVERGROWN_IVY         = GetFirstID('Overgrown_Ivy'),
         CRYPTONBERRY_EXECUTOR = GetFirstID('Cryptonberry_Executor'),
+        PARA_OFFSET           = GetFirstID('Para'),
         MYCOPHILE             = GetFirstID('Mycophile'),
         HERCULES_BEETLE       = GetFirstID('Hercules_Beetle'),
     },
@@ -49,6 +52,7 @@ zones[xi.zone.CARPENTERS_LANDING] =
     {
         HERCULES_BEETLE_TREES = GetTableOfIDs('qm_hercules_beetle'),
         LOGGING               = GetTableOfIDs('Logging_Point'),
+        QM_PARA               = GetFirstID('qm_para')
     },
 }
 
