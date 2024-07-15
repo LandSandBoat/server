@@ -9,8 +9,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- TODO: Default cycles between 221 and 382, 382 in Default
-    player:startEvent(221)
+    if not player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.PARADISE_SALVATION_AND_MAPS) then
+        player:startEvent(221) -- cycles between 221 and 382(Default)
+    else
+        player:startEvent(222) -- cycles between 222 and 382(Default) after Paradise, Salvation, and Maps
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
