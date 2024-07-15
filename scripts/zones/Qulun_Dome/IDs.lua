@@ -33,6 +33,7 @@ zones[xi.zone.QULUN_DOME] =
     },
     npc =
     {
+        BEASTMENS_BANNER = GetFirstID('Beastmens_Banner'),
     },
 }
 

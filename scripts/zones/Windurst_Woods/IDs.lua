@@ -35,6 +35,7 @@ zones[xi.zone.WINDURST_WOODS] =
         GP_OBTAINED                   = 7268,  -- Obtained: <number> guild points.
         NOT_HAVE_ENOUGH_GP            = 7269,  -- You do not have enough guild points.
         RENOUNCE_CRAFTSMAN            = 7285,  -- You have successfully renounced your status as a [craftsman/artisan/adept] of the [Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.
+        QUEST_CANCELED                = 7453,  -- The quest has been canceled!
         VALERIANO_SHOP_DIALOG         = 7579,  -- Halfling philosophers and heroine beauties, welcome to the Troupe Valeriano show! And how gorgeous and green this fair town is!
         RAKOHBUUMA_OPEN_DIALOG        = 7676,  -- To expel those who would subvert the law and order of Windurst Woods... To protect the Mithra populace from all manner of threats and dangers... That is the job of us guards.
         RETTO_MARUTTO_DIALOG          = 7992,  -- Allo-allo! If you're after boneworking materials, then make sure you buy them herey in Windurst! We're the cheapest in the whole wide worldy!

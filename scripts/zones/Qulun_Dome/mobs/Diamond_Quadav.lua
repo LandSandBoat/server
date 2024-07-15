@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Qulun_Dome
 --   NM: Diamond Quadav
--- Note: PH for Za Dha Adamantking PH
+-- Note: PH for Za Dha Adamantking PH, QNM for An Affable Adamantking
 -- TODO: messages should be zone-wide
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
@@ -13,6 +13,7 @@ entity.onMobInitialize = function(mob)
     -- the quest version of this NM doesn't drop gil
     if mob:getID() >= ID.mob.DIAMOND_QUADAV + 2 then
         mob:setMobMod(xi.mobMod.GIL_MAX, -1)
+        mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180) -- 3 min despawn
     end
 end
 
@@ -46,6 +47,11 @@ entity.onMobDespawn = function(mob)
             mob:setRespawnTime(math.random(75600, 86400))
             SetServerVariable('[PH]Za_Dha_Adamantking', kills + 1)
         end
+    elseif
+        nqId == ID.mob.AFFABLE_ADAMANTKING_OFFSET and
+        mob:getLocalVar('died') ~= 1 -- check for idle despawn to trigger timer
+    then
+        GetNPCByID(ID.npc.BEASTMENS_BANNER):setLocalVar('engaged', os.time() + 180) -- 3 min wait from despawn
     end
 end
 
