@@ -3864,7 +3864,18 @@ INSERT INTO `mob_skill_lists` VALUES ('Snaggletooth_Peapuk',2006,1721);
 INSERT INTO `mob_skill_lists` VALUES ('Snaggletooth_Peapuk',2006,1722);
 INSERT INTO `mob_skill_lists` VALUES ('Snaggletooth_Peapuk',2006,1724);
 
--- Next available ID: 2007
+INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,642); -- flame_breath
+INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,643); -- poison_breath
+INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,644); -- wind_breath
+INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,645); -- body_slam
+INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,646); -- heavy_stomp
+INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,647); -- chaos_blade
+INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,648); -- petro_eyes
+INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,650); -- thornsong
+INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,651); -- lodesong
+INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,1792); -- nullsong
+
+-- Next available ID: 2008
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
