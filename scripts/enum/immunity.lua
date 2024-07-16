@@ -3,7 +3,7 @@ xi = xi or {}
 xi.immunity =
 {
     NONE        = 0x00000000,
-    SLEEP       = 0x00000001, -- Stop using this. TODO: Nuke. Replace with ADDLE.
+    ADDLE       = 0x00000001,
     GRAVITY     = 0x00000002,
     BIND        = 0x00000004,
     STUN        = 0x00000008,

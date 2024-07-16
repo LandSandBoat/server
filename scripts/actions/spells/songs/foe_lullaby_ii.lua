@@ -8,10 +8,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    if
-        target:hasImmunity(xi.immunity.SLEEP) or
-        target:hasImmunity(xi.immunity.LIGHT_SLEEP)
-    then
+    if target:hasImmunity(xi.immunity.LIGHT_SLEEP) then
         spell:setMsg(xi.msg.basic.MAGIC_COMPLETE_RESIST)
         return
     end
