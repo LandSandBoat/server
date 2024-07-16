@@ -5671,7 +5671,12 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                 {
                     if (PChar->loc.zone->CanUseMisc(MISC_YELL))
                     {
-                        if (gettick() >= PChar->m_LastYell)
+                        int yellBanned = PChar->getCharVar("[YELL]Banned");
+                        if (yellBanned == 1)
+                        {
+                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA));
+                        }
+                        else if (gettick() >= PChar->m_LastYell)
                         {
                             PChar->m_LastYell = gettick() + settings::get<uint16>("map.YELL_COOLDOWN") * 1000;
                             int8 packetData[4]{};
