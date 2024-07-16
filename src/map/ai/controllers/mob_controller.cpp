@@ -1339,6 +1339,11 @@ bool CMobController::CanMoveForward(float currentDistance)
 
     uint16 standbackRange = 20;
 
+    if (PMob->getMobMod(MOBMOD_STANDBACK_RANGE) > 0)
+    {
+        standbackRange = PMob->getMobMod(MOBMOD_STANDBACK_RANGE);
+    }
+
     if (PMob->m_Behaviour & BEHAVIOUR_STANDBACK && currentDistance < standbackRange && PMob->CanSeeTarget(PTarget))
     {
         return false;
