@@ -1052,7 +1052,11 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
 
     local enmityEntity = wsResults.taChar or attacker
 
-    if wsParams.overrideCE and wsParams.overrideVE then
+    if
+        wsParams.overrideCE and
+        wsParams.overrideVE and
+        wsResults.tpHitsLanded + wsResults.extraHitsLanded > 0
+    then
         defender:addEnmity(enmityEntity, wsParams.overrideCE, wsParams.overrideVE)
     else
         local enmityMult = wsParams.enmityMult or 1
