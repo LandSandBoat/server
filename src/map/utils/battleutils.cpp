@@ -2014,9 +2014,15 @@ namespace battleutils
             validWeapon = PDefender->GetMJob() == JOB_MNK || PDefender->GetMJob() == JOB_PUP;
         }
 
+        int16 cannotGuardMod = 0;
+        if (auto* PMob = dynamic_cast<CMobEntity*>(PDefender))
+        {
+            cannotGuardMod = PMob->getMobMod(MOBMOD_CANNOT_GUARD);
+        }
+
         bool hasGuardSkillRank = (GetSkillRank(SKILL_GUARD, PDefender->GetMJob()) > 0 || GetSkillRank(SKILL_GUARD, PDefender->GetSJob()) > 0);
 
-        if (validWeapon && hasGuardSkillRank && PDefender->PAI->IsEngaged())
+        if (validWeapon && cannotGuardMod == 0 && hasGuardSkillRank && PDefender->PAI->IsEngaged())
         {
             // assuming this is like parry
             float gbase = (float)PDefender->GetSkill(SKILL_GUARD) + PDefender->getMod(Mod::GUARD);

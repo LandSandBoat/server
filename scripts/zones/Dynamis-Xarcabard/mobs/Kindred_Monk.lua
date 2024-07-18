@@ -11,6 +11,10 @@ local ID = zones[xi.zone.DYNAMIS_XARCABARD]
 -----------------------------------
 local entity = {}
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.CANNOT_GUARD, 1)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

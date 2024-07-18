@@ -8,6 +8,7 @@ mixins = { require('scripts/mixins/job_special') }
 local entity = {}
 
 entity.onMobSpawn = function(mob, target)
+    mob:setMobMod(xi.mobMod.CANNOT_GUARD, 1)
     GetNPCByID(ID.npc.PORTAL_OFFSET + 2):setAnimation(xi.anim.CLOSE_DOOR)
 end
 
