@@ -14501,6 +14501,18 @@ int32 CLuaBaseEntity::takeSwipeLungeDamage(CLuaBaseEntity* caster, int32 damage,
 }
 
 /************************************************************************
+ *  Function: checkDamageCap()
+ *  Purpose : Checks to see if the mob has a damage cap value
+ *  Example : target:checkDamageCap(damage)
+ *  Notes   : This is used for mobs like Suttung that have a damage cap
+ ************************************************************************/
+
+int32 CLuaBaseEntity::checkDamageCap(int32 damage)
+{
+    return battleutils::CheckAndApplyDamageCap(damage, static_cast<CBattleEntity*>(m_PBaseEntity));
+}
+
+/************************************************************************
  *  Function: spawnPet()
  *  Purpose : Spawns a pet if a few correct conditions are met
  *  Example : caster:spawnPet(xi.petId.CARBUNCLE)
@@ -18515,6 +18527,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("takeWeaponskillDamage", CLuaBaseEntity::takeWeaponskillDamage);
     SOL_REGISTER("takeSpellDamage", CLuaBaseEntity::takeSpellDamage);
     SOL_REGISTER("takeSwipeLungeDamage", CLuaBaseEntity::takeSwipeLungeDamage);
+    SOL_REGISTER("checkDamageCap", CLuaBaseEntity::checkDamageCap);
 
     // Pets and Automations
     SOL_REGISTER("spawnPet", CLuaBaseEntity::spawnPet);

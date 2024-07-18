@@ -464,9 +464,18 @@ function finalMagicAdjustments(caster, target, spell, dmg)
         dmg = target:addHP(-dmg)
         spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
     else
+        -- Check if the mob has a damage cap
+        dmg = target:checkDamageCap(dmg)
+
+        -- Handle Bind break and TP?
         target:takeSpellDamage(caster, spell, dmg, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + spell:getElement())
+
+        -- Handle Afflatus Misery.
         target:handleAfflatusMiseryDamage(dmg)
+
+        -- Handle Enmity.
         target:updateEnmityFromDamage(caster, dmg)
+
         -- Only add TP if the target is a mob
         if target:getObjType() ~= xi.objType.PC and dmg > 0 then
             target:addTP(100)
