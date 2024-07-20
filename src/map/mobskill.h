@@ -25,6 +25,10 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 
+#include <vector>
+
+class CBattleEntity;
+
 enum SKILLFLAG
 {
     SKILLFLAG_NONE        = 0x000,
@@ -73,6 +77,7 @@ public:
     uint16 getValidTargets() const;
     int16  getTP() const;
     uint8  getHPP() const;
+    auto   getTargets() const -> const std::vector<CBattleEntity*>&;
     uint16 getTotalTargets() const;
     uint32 getPrimaryTargetID() const;
     uint16 getMsgForAction() const;
@@ -96,6 +101,7 @@ public:
     void setValidTargets(uint16 targ);
     void setTP(int16 tp);
     void setHPP(uint8 hpp);
+    void setTargets(const std::vector<CBattleEntity*>& targets);
     void setTotalTargets(uint16 targets);
     void setPrimaryTargetID(uint32 targid);
     void setParam(int16 value);
@@ -128,6 +134,8 @@ private:
     uint8  m_tertiarySkillchain;
 
     std::string m_name;
+
+    std::vector<CBattleEntity*> m_Targets;
 };
 
 #endif
