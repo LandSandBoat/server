@@ -87,9 +87,9 @@ local function AffinityBonusAcc(caster, ele)
 end
 
 local function calculateMagicBurst(caster, spell, target, params)
-    local burst = 1.0
-    local skillchainburst = 1.0
-    local modburst = 1.0
+    local burst           = 1
+    local skillchainburst = 1
+    local modburst        = 1
 
     if
         spell and
@@ -106,19 +106,22 @@ local function calculateMagicBurst(caster, spell, target, params)
     end
 
     -- Obtain first multiplier from gear, atma and job traits
-    modburst = modburst + (caster:getMod(xi.mod.MAG_BURST_BONUS) / 100) + params.AMIIburstBonus
+    modburst = modburst + params.AMIIburstBonus + caster:getMod(xi.mod.MAGIC_BURST_BONUS_CAPPED) / 100
 
     if caster:isBehind(target) and caster:hasStatusEffect(xi.effect.INNIN) then
-        modburst = modburst + (caster:getMerit(xi.merit.INNIN_EFFECT) / 100)
+        modburst = modburst + caster:getMerit(xi.merit.INNIN_EFFECT) / 100
     end
-
-    -- BLM Job Point: Magic Burst Damage
-    modburst = modburst + (caster:getJobPointLevel(xi.jp.MAGIC_BURST_DMG_BONUS) / 100)
 
     -- Cap bonuses from first multiplier at 40% or 1.4
     if modburst > 1.4 then
         modburst = 1.4
     end
+
+    -- JP gifts
+    modburst = modburst + caster:getMod(xi.mod.MAGIC_BURST_BONUS_UNCAPPED) / 100
+
+    -- BLM Job Point: Magic Burst Damage
+    modburst = modburst + caster:getJobPointLevel(xi.jp.MAGIC_BURST_DMG_BONUS) / 100
 
     -- Obtain second multiplier from skillchain
     -- Starts at 35% damage bonus, increases by 10% for every additional weaponskill in the chain
@@ -137,14 +140,12 @@ local function calculateMagicBurst(caster, spell, target, params)
             skillchainburst = 1.75
         else
             -- Something strange is going on if this occurs.
-            skillchainburst = 1.0
+            skillchainburst = 1
         end
     end
 
     -- Multiply
-    if skillchainburst > 1 then
-        burst = burst * modburst * skillchainburst
-    end
+    burst = modburst * skillchainburst
 
     return burst
 end
