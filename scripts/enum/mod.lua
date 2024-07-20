@@ -410,7 +410,7 @@ xi.mod =
     WIDESCAN                        = 340,
     BARRAGE_ACC                     = 420,
     BARRAGE_COUNT                   = 138, -- Increases Barrage shots by 1
-    ENSPELL                         = 341,
+    ENSPELL                         = 341, -- Stores the type of enspell active (0 if nothing)
     SPIKES                          = 342,
     ENSPELL_DMG                     = 343,
     ENSPELL_CHANCE                  = 856,
@@ -446,10 +446,11 @@ xi.mod =
     DESPERATE_BLOWS                 = 906,  -- Adds ability haste to Last Resort
     STALWART_SOUL                   = 907,  -- Reduces damage taken from Souleater
     DREAD_SPIKES_EFFECT             = 998,  -- Percent increase to total HP drain for Dread Spikes
-    ENHANCES_BLOOD_WEAPON           = 1070, -- Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
     DARK_MAGIC_CAST                 = 1071, -- Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
     DARK_MAGIC_DURATION             = 1072, -- Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
+    ENHANCES_BLOOD_WEAPON           = 1070, -- Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
     ENHANCES_DARK_SEAL              = 1073, -- Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
+    ENHANCES_DIABOLIC_EYE           = 275,  -- Diabolic Eye duration + "modifier-value" seconds per Diabolic Eye merit.
 
     -- Beastmaster
     TANDEM_STRIKE_POWER             = 271,  -- Grants a bonus to your and your pet's accuracy and magic accuracy when you and your pet are attacking the same target.

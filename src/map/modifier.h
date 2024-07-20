@@ -470,17 +470,18 @@ enum class Mod
     SHIELD_BARRIER         = 1082, // Grants a bonus to Protect spells cast by self while a shield is equipped.
 
     // Dark Knight
-    ARCANE_CIRCLE_DURATION = 858,  // Arcane Circle extended duration in seconds
-    ARCANE_CIRCLE_POTENCY  = 1069, // Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
-    SOULEATER_EFFECT       = 96,   // Souleater power in percents
-    SOULEATER_EFFECT_II    = 53,   // Uncapped additive Souleaterbonus in percents, 10 = .1
-    DESPERATE_BLOWS        = 906,  // Adds ability haste to Last Resort
-    STALWART_SOUL          = 907,  // Reduces damage taken from Souleater
-    DREAD_SPIKES_EFFECT    = 998,  // Percent increase to total HP drain for Dread Spikes
-    ENHANCES_BLOOD_WEAPON  = 1070, // Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
-    DARK_MAGIC_CAST        = 1071, // Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
-    DARK_MAGIC_DURATION    = 1072, // Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
-    ENHANCES_DARK_SEAL     = 1073, // Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
+    ARCANE_CIRCLE_DURATION        = 858,  // Arcane Circle extended duration in seconds
+    ARCANE_CIRCLE_POTENCY         = 1069, // Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
+    SOULEATER_EFFECT              = 96,   // Souleater power in percents
+    SOULEATER_EFFECT_II           = 53,   // Uncapped additive Souleaterbonus in percents, 10 = .1
+    DESPERATE_BLOWS               = 906,  // Adds ability haste to Last Resort
+    STALWART_SOUL                 = 907,  // Reduces damage taken from Souleater
+    DREAD_SPIKES_EFFECT           = 998,  // Percent increase to total HP drain for Dread Spikes
+    DARK_MAGIC_CAST               = 1071, // Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
+    DARK_MAGIC_DURATION           = 1072, // Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
+    ENHANCES_BLOOD_WEAPON         = 1070, // Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
+    ENHANCES_DARK_SEAL            = 1073, // Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
+    ENHANCES_DIABOLIC_EYE         = 275,  // Diabolic Eye duration + "modifier-value" seconds per Diabolic Eye merit.
 
     // Beastmaster
     TAME                = 304,  // Additional percent chance to charm
@@ -1020,10 +1021,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs:
-    // 275
-    //
-    // SPARE = 1083 and onward
+    // SPARE IDs: 1083 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
