@@ -159,6 +159,12 @@ xi.msg.basic =
     JA_MAGIC_BURST         = 379, -- <user> uses <ability>. Magic Burst! the <target> takes <amount> damage.
     JA_ENMITY_DECREASE     = 743, -- <user> uses <ability>. <target>'s enmity decreases.
 
+    -- "Fortified against" messages
+    FORTIFIED_DEMONS       = 149, -- <target> is fortified against demons.
+    FORTIFIED_DRAGONS      = 151, -- <target> is fortified against dragons.
+    FORTIFIED_UNDEAD       = 286, -- <target> is fortified against undead.
+    FORTIFIED_ARCANA       = 287, -- <target> is fortified against arcana.
+
     -- Misc Other
     DEFEATS_TARG           = 6,   -- The <player> defeats <target>.
     ALREADY_CLAIMED        = 12,  -- Cannot attack. Your target is already claimed.
