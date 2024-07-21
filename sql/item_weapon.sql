@@ -4732,6 +4732,7 @@ INSERT INTO `item_weapon` VALUES (22063,'nirvana',12,0,269,269,269,3,1,402,251,0
 INSERT INTO `item_weapon` VALUES (22064,'hvergelmir',12,0,269,269,269,3,1,390,275,0);
 INSERT INTO `item_weapon` VALUES (22065,'aern_staff',12,0,0,0,0,3,1,366,1,0);             -- DMG:1 Delay:366
 INSERT INTO `item_weapon` VALUES (22066,'aern_staff_ii',12,0,0,0,0,3,1,366,1,0);          -- DMG:1 Delay:366
+INSERT INTO `item_weapon` VALUES (22067,'levin',12,0,0,0,0,3,1,366,1,0);                  -- DMG:1 Delay:366
 INSERT INTO `item_weapon` VALUES (22068,'savage._pole',12,0,0,0,0,3,1,366,1,0);           -- DMG:1 Delay:366
 INSERT INTO `item_weapon` VALUES (22069,'hapy_staff',12,0,0,0,0,3,1,366,1,0);             -- DMG:1 Delay:366
 INSERT INTO `item_weapon` VALUES (22070,'ranine_staff',12,0,0,0,0,3,1,366,1,0);           -- DMG:1 Delay:366
