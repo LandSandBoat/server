@@ -124,9 +124,10 @@ xi.job_utils.dark_knight.useSoulEnslavement = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useSouleater = function(player, target, ability)
-    local jpValue = target:getJobPointLevel(xi.jp.SOULEATER_DURATION)
+    local duration = 60 + target:getJobPointLevel(xi.jp.SOULEATER_DURATION)
+    local subPower = target:getMod(xi.mod.ENHANCES_MUTED_SOUL) * target:getMerit(xi.merit.MUTED_SOUL) / 10 -- Origin: Abyss Flanchard +2
 
-    player:addStatusEffect(xi.effect.SOULEATER, 1, 0, 60 + jpValue)
+    player:addStatusEffect(xi.effect.SOULEATER, 1, 0, duration, 0, subPower)
 end
 
 xi.job_utils.dark_knight.useWeaponBash = function(player, target, ability)
