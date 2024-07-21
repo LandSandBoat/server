@@ -118,7 +118,7 @@ xi.job_utils.dark_knight.useScarletDelirium = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useSoulEnslavement = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SOUL_ENSLAVEMENT, 8, 1, 30)
+    player:addStatusEffect(xi.effect.SOUL_ENSLAVEMENT, 0, 0, 30)
 end
 
 xi.job_utils.dark_knight.useSouleater = function(player, target, ability)
