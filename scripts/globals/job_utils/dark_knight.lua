@@ -70,8 +70,7 @@ end
 
 xi.job_utils.dark_knight.useArcaneCrest = function(player, target, ability)
     local power    = 20
-    local jpValue  = player:getJobPointLevel(xi.jp.ARCANE_CREST_DURATION)
-    local duration = 180 + jpValue
+    local duration = 180 + player:getJobPointLevel(xi.jp.ARCANE_CREST_DURATION)
 
     target:addStatusEffect(xi.effect.ARCANE_CREST, power, 0, duration)
 end
