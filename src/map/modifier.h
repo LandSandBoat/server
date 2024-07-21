@@ -482,6 +482,7 @@ enum class Mod
     ENHANCES_BLOOD_WEAPON         = 1070, // Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
     ENHANCES_DARK_SEAL            = 1073, // Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
     ENHANCES_DIABOLIC_EYE         = 275,  // Diabolic Eye duration + "modifier-value" seconds per Diabolic Eye merit.
+    ENHANCES_NETHER_VOID          = 1083, // Enhances "Nether Void" effect (Increases the potency of the next Absorb or Drain Dark Magic by <value>%
 
     // Beastmaster
     TAME                = 304,  // Additional percent chance to charm
@@ -1021,7 +1022,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1083 and onward
+    // SPARE IDs: 1084 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

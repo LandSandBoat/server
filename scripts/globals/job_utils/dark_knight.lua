@@ -107,7 +107,10 @@ xi.job_utils.dark_knight.useLastResort = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useNetherVoid = function(player, target, ability)
-    player:addStatusEffect(xi.effect.NETHER_VOID, 8, 1, 30)
+    local power    = 50 + player:getMod(xi.mod.ENHANCES_NETHER_VOID) + 2 * player:getJobPointLevel(xi.jp.NETHER_VOID_EFFECT)
+    local duration = 60
+
+    player:addStatusEffect(xi.effect.NETHER_VOID, power, 0, duration)
 end
 
 xi.job_utils.dark_knight.useScarletDelirium = function(player, target, ability)
