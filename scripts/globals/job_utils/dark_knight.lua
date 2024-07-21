@@ -76,9 +76,10 @@ xi.job_utils.dark_knight.useArcaneCrest = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useBloodWeapon = function(player, target, ability)
+    local power    = 1
     local duration = 30 + player:getMod(xi.mod.ENHANCES_BLOOD_WEAPON)
 
-    target:addStatusEffect(xi.effect.BLOOD_WEAPON, 1, 0, duration)
+    target:addStatusEffect(xi.effect.BLOOD_WEAPON, power, 0, duration)
 end
 
 xi.job_utils.dark_knight.useConsumeMana = function(player, target, ability)
