@@ -93,6 +93,7 @@ public:
     void setID(uint16 id);
     void setAnimationID(uint16 aid);
     void setAoe(uint8 aoe);
+    void setAoeRadius(float aoeRadius);
     void setDistance(float distance);
     void setFlag(uint8 flag);
     void setAnimationTime(uint16 AnimationTime);
@@ -116,11 +117,12 @@ public:
 private:
     uint16 m_ID;
     uint16 m_TotalTargets;
-    uint32 m_primaryTargetID; // primary target ID
+    uint32 m_primaryTargetID; // Primary target ID
     int16  m_Param;
     uint16 m_AnimID;
-    uint8  m_Aoe;
-    float  m_Distance;
+    uint8  m_Aoe;       // Defines the type of AOE
+    float  m_AoeRadius; // Radius of any aoe skill
+    float  m_Distance;  // Distance at which the skill will be triggered
     uint8  m_Flag;
     uint16 m_ValidTarget;
     uint16 m_AnimationTime;  // how long the tp animation lasts for in ms

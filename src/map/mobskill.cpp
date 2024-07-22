@@ -29,6 +29,7 @@ CMobSkill::CMobSkill(uint16 id)
 , m_Param(0)
 , m_AnimID(0)
 , m_Aoe(0)
+, m_AoeRadius(0)
 , m_Distance(0)
 , m_Flag(0)
 , m_ValidTarget(0)
@@ -51,11 +52,16 @@ bool CMobSkill::hasMissMsg() const
 
 bool CMobSkill::isAoE() const
 {
+    // 0 -> single target
+    // 1 -> AOE around mob
+    // 2 -> AOE around target
     return m_Aoe > 0 && m_Aoe < 4;
 }
 
 bool CMobSkill::isConal() const
 {
+    // 4 -> Conal
+    // 8 -> Conal from mob centered on target
     return m_Aoe == 4 || m_Aoe == 8;
 }
 
@@ -130,6 +136,11 @@ void CMobSkill::setName(const std::string& name)
 void CMobSkill::setAoe(uint8 aoe)
 {
     m_Aoe = aoe;
+}
+
+void CMobSkill::setAoeRadius(float aoeRadius)
+{
+    m_AoeRadius = aoeRadius;
 }
 
 void CMobSkill::setDistance(float distance)
@@ -274,13 +285,20 @@ float CMobSkill::getDistance() const
 
 float CMobSkill::getRadius() const
 {
-    if (m_Aoe == 2)
+    // Lets check if the radius is 0 to default the values if the skill is AOE and the radius is still set to 0
+    if (m_AoeRadius <= 0)
     {
-        // centered around target, usually 8'
-        return 8.0f;
+        if (m_Aoe == 2) // If its a targeted AOE skill
+        {
+            return 8; // Keep the original 8 radius as defaulted
+        }
+        else
+        {
+            return m_Distance; // Return the base distance check as default
+        }
     }
 
-    return m_Distance;
+    return m_AoeRadius;
 }
 
 int16 CMobSkill::getParam() const
