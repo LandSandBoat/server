@@ -95,8 +95,9 @@ local pTable =
     [xi.magic.spell.ENWATER_II   ] = { 2, xi.effect.ENWATER_II,    60,    0,  180, true,  false, 0 },
 
     -- Flurry
-    [xi.magic.spell.FLURRY       ] = { 1, xi.effect.FLURRY,        48,   15,  180, true,  false, 0 },
-    [xi.magic.spell.FLURRY_II    ] = { 2, xi.effect.FLURRY_II,     96,   30,  180, true,  false, 0 },
+    [xi.magic.spell.FLURRY       ] = { 1, xi.effect.FLURRY_II,     48,   15,  180, true,  false, 0 }, -- Thats the actual effect. Not a typo.
+    [xi.magic.spell.FLURRY_II    ] = { 2, xi.effect.FLURRY_II,     96,   30,  180, true,  false, 0 }, -- Thats the actual effect. Not a typo.
+
     -- Foil
     [xi.magic.spell.FOIL         ] = { 1, xi.effect.FOIL,          58,  150,   30, true,  false, 3 },
 

@@ -4,14 +4,16 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.HASTE_MAGIC, effect:getPower())
+    -- Overwrites regular Flurry Effect
+    target:delStatusEffect(xi.effect.FLURRY_II)
+
+    effect:addMod(xi.mod.HASTE_MAGIC, effect:getPower())
 end
 
 effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.HASTE_MAGIC, effect:getPower())
 end
 
 return effectObject
