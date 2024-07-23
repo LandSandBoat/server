@@ -4,6 +4,9 @@ import zipfile
 import platform
 import tarfile
 import json
+import subprocess
+import re
+from collections import defaultdict
 
 current_os = platform.system()
 print(f"Current OS: {current_os}")
@@ -80,10 +83,38 @@ else:
     print(check_command)
     os.system(check_command)
 
+
 parsed_data = None
 with open("./check.json", "r") as file:
     parsed_data = json.load(file)
 
+
+def get_committer(file, line):
+    try:
+        result = subprocess.run(
+            ["git", "blame", "-L", f"{line + 1},{line + 1}", "--", file],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        output = result.stdout.strip()
+
+        match = re.search(
+            r"^\^?\w+\s+\(([^)]+?)\s+(\d{4}-\d{2}-\d{2})\s+\d{2}:\d{2}:\d{2}.*?\s+(\d+)\)",
+            output,
+            re.MULTILINE,
+        )
+        if match:
+            name_email_date = match.group(1).strip()
+            return name_email_date
+    except subprocess.CalledProcessError as e:
+        print(f"Error running git blame on {file}:{line + 1}")
+        print(e)
+        return "Unknown"
+    return "Unknown"
+
+
+error_list = []
 for file, issues in parsed_data.items():
     for issue in issues:
         line = issue["range"]["start"]["line"]
@@ -91,4 +122,58 @@ for file, issues in parsed_data.items():
         code = issue["code"]
         message = issue["message"]
 
-        print(f"{file}:{line}:{character} | {code} | {message}")
+        # Remove "file://" prefix for git blame to work
+        file_path = file.replace("file://", "")
+
+        last_editor = get_committer(file_path, line)
+
+        error_list.append(
+            {
+                "file": file_path,
+                "line": line,
+                "character": character,
+                "code": code,
+                "message": message,
+                "last_editor": last_editor,
+            }
+        )
+
+committer_errors = defaultdict(int)
+
+for error in error_list:
+    committer = error["last_editor"]
+    committer_errors[committer] += 1
+
+sorted_committers = sorted(committer_errors.items(), key=lambda x: x[1], reverse=True)
+
+
+# Write ranked table and detailed error information to a file and print to console
+with open("lua_lang_errors.txt", "w") as error_file:
+    # Write the ranked table of committers
+    header = f"{'Committer':<50} | {'Errors':<6}\n"
+    separator = "-" * 58 + "\n"
+    print(header, end="")
+    print(separator, end="")
+    error_file.write(header)
+    error_file.write(separator)
+    for committer, count in sorted_committers:
+        line = f"{committer:<50} | {count:<6}\n"
+        print(line, end="")
+        error_file.write(line)
+
+    # Add a newline between the table and the detailed errors
+    details_header = "\nDetailed error information:\n\n"
+    print(details_header, end="")
+    error_file.write(details_header)
+
+    # Write detailed error information
+    for error in error_list:
+        error_details = (
+            f"File: {error['file']}:{error['line'] + 1}:{error['character'] + 1}\n"
+            f"Last Editor: {error['last_editor']}\n"
+            f"Code: {error['code']}\n"
+            f"Message: {error['message']}\n"
+            "\n"
+        )
+        print(error_details, end="")
+        error_file.write(error_details)

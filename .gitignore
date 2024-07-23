@@ -172,6 +172,7 @@ log/leaks.txt
 .luarc.json
 lua-language-server*
 check.json
+lua_lang_errors.txt
 
 # VSCode
 .vscode

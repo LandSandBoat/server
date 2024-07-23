@@ -12,6 +12,7 @@
 
     "Lua.diagnostics.globals": [
         "bit",
+        "fmt",
 
         "xi",
         "ai",
