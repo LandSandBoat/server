@@ -84,10 +84,14 @@ else:
     os.system(check_command)
 
 
-parsed_data = None
+parsed_data = []
 with open("./check.json", "r") as file:
     parsed_data = json.load(file)
 
+if len(parsed_data) == 0:
+    print("No errors found, removing check.json and exiting.")
+    os.remove("./check.json")
+    exit()
 
 def get_committer(file, line):
     try:
@@ -120,6 +124,7 @@ for file, issues in parsed_data.items():
         line = issue["range"]["start"]["line"]
         character = issue["range"]["start"]["character"]
         code = issue["code"]
+        severity = issue["severity"]
         message = issue["message"]
 
         # Remove "file://" prefix for git blame to work
@@ -135,6 +140,7 @@ for file, issues in parsed_data.items():
                 "code": code,
                 "message": message,
                 "last_editor": last_editor,
+                "severity": severity,
             }
         )
 
@@ -146,8 +152,8 @@ for error in error_list:
 
 sorted_committers = sorted(committer_errors.items(), key=lambda x: x[1], reverse=True)
 
-
 # Write ranked table and detailed error information to a file and print to console
+print("\n\nWriting error information to lua_lang_errors.txt")
 with open("lua_lang_errors.txt", "w") as error_file:
     # Write the ranked table of committers
     header = f"{'Committer':<50} | {'Errors':<6}\n"
@@ -166,12 +172,20 @@ with open("lua_lang_errors.txt", "w") as error_file:
     print(details_header, end="")
     error_file.write(details_header)
 
+    severity_map = {
+        1: "Error",
+        2: "Warning",
+        3: "Information",
+        4: "Hint",
+    }
+
     # Write detailed error information
     for error in error_list:
         error_details = (
             f"File: {error['file']}:{error['line'] + 1}:{error['character'] + 1}\n"
             f"Last Editor: {error['last_editor']}\n"
             f"Code: {error['code']}\n"
+            f"Severity: {severity_map[error['severity']]}\n"
             f"Message: {error['message']}\n"
             "\n"
         )
