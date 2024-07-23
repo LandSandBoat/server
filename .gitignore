@@ -170,6 +170,8 @@ log/leaks.txt
 .vs
 /win32/.vs/xi/v15
 .luarc.json
+lua-language-server*
+check.json
 
 # VSCode
 .vscode

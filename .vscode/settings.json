@@ -10,8 +10,9 @@
     "editor.renderControlCharacters": true,
     "editor.trimAutoWhitespace": true,
 
-    "Lua.workspace.maxPreload": 20000,
     "Lua.diagnostics.globals": [
+        "bit",
+
         "xi",
         "ai",
         "os",
@@ -463,10 +464,12 @@
         "lowercase-global"
     ],
     "Lua.diagnostics.ignoredFiles": "Disable",
+    "Lua.diagnostics.workspaceEvent": "OnSave",
     "Lua.hint.enable": true,
     "Lua.hint.setType": true,
     "Lua.runtime.version": "LuaJIT",
-    "Lua.workspace.preloadFileSize": 10000,
+    "Lua.workspace.preloadFileSize": 100000,
+    "Lua.workspace.maxPreload": 100000,
     "Lua.workspace.ignoreDir": [
         ".vscode",
         "tools/ci/tests/stylecheck.lua"
