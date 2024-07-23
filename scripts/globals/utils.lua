@@ -207,7 +207,7 @@ function utils.uniqueRandomTable(minVal, maxVal, numEntries)
 
     if numEntries > #shuffledTable then
         print('utils.uniqueRandomTable(): numEntries exceeds length of shuffledTable!')
-        return nil
+        return resultTable
     end
 
     for i = 1, numEntries do

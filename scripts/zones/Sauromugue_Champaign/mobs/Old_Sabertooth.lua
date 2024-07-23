@@ -27,7 +27,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobAbilityEnabled(false)
     mob:setAutoAttackEnabled(false)
     mob:setRoamFlags(256, 512)
-    mob:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL))
+    mob:pathThrough(pathNodes, xi.path.flag.PATROL)
 
     mob:addListener('TAKE_DAMAGE', 'PRIME_TAKE_DAMAGE', function(tiger, amount, attacker)
         if attacker then
