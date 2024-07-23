@@ -66,11 +66,13 @@ lua_server_path = os.path.join("./lua-language-server", "bin", "lua-language-ser
 config_path = "./.vscode/settings.json"
 log_path = "."
 scripts_path = "./scripts"
+modules_path = "./modules/custom/lua"
 
 lua_server_path = os.path.abspath(lua_server_path)
 config_path = os.path.abspath(config_path)
 log_path = os.path.abspath(log_path)
 scripts_path = os.path.abspath(scripts_path)
+modules_path = os.path.abspath(modules_path)
 
 check_command = f'{lua_server_path} --loglevel="trace" --logpath="{log_path}" --configpath="{config_path}" --checklevel="Information" --check="{scripts_path}"'
 
@@ -153,7 +155,7 @@ for error in error_list:
 sorted_committers = sorted(committer_errors.items(), key=lambda x: x[1], reverse=True)
 
 # Write ranked table and detailed error information to a file and print to console
-print("\n\nWriting error information to lua_lang_errors.txt")
+print("\nWriting error information to lua_lang_errors.txt\n")
 with open("lua_lang_errors.txt", "w") as error_file:
     # Write the ranked table of committers
     header = f"{'Committer':<50} | {'Errors':<6}\n"
@@ -168,7 +170,7 @@ with open("lua_lang_errors.txt", "w") as error_file:
         error_file.write(line)
 
     # Add a newline between the table and the detailed errors
-    details_header = "\nDetailed error information:\n\n"
+    details_header = "\n=== Detailed error information ===\n"
     print(details_header, end="")
     error_file.write(details_header)
 
@@ -182,12 +184,11 @@ with open("lua_lang_errors.txt", "w") as error_file:
     # Write detailed error information
     for error in error_list:
         error_details = (
-            f"File: {error['file']}:{error['line'] + 1}:{error['character'] + 1}\n"
+            f"\nFile: {error['file']}:{error['line'] + 1}:{error['character'] + 1}\n"
             f"Last Editor: {error['last_editor']}\n"
             f"Code: {error['code']}\n"
             f"Severity: {severity_map[error['severity']]}\n"
             f"Message: {error['message']}\n"
-            "\n"
         )
         print(error_details, end="")
         error_file.write(error_details)

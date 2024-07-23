@@ -25,6 +25,7 @@
         "npcUtil",
         "item_utils",
 
+        "Module",
         "super",
 
         "mixins",
