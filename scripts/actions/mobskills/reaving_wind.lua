@@ -14,9 +14,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.element.NONE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.NONE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    local damage = mob:getWeaponDmg() * 3
+
+    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.NONE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.NONE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 
     if target:getTP() == 0 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
@@ -24,8 +25,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         target:setTP(target:getTP() - 1000)
     end
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.NONE)
-    return dmg
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.NONE)
+
+    return damage
 end
 
 return mobskillObject

@@ -12,8 +12,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    local damage = mob:getWeaponDmg() * 3
     local dmgmod = 1
 
+    -- TODO: Use TP for this? Or literally anything else?
     if mob:getName() == 'Kreutzet' then
         local stormwindDamage = mob:getLocalVar('stormwindDamage')
         if stormwindDamage == 2 then
@@ -23,11 +25,12 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         end
     end
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.element.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
-    return dmg
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
+
+    return damage
 end
 
 return mobskillObject
