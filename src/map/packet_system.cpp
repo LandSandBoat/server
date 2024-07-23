@@ -5499,7 +5499,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
 
     memcpy(&message, data[messagePosition], std::min(data.getSize() - messagePosition, sizeof(message)));
 
-    if (data.ref<uint8>(0x06) == '!' && !jailutils::InPrison(PChar) && CCommandHandler::call(lua, PChar, message) == 0)
+    if (data.ref<uint8>(0x06) == '!' && !jailutils::InPrison(PChar) && (CCommandHandler::call(lua, PChar, message) == 0 || PChar->m_GMlevel > 0))
     {
         // this makes sure a command isn't sent to chat
     }
