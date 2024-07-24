@@ -14,15 +14,15 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = 1
-    local bombTossHPP = skill:getMobHPP() / 100
-    local power = math.random(12, 18)
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * power * bombTossHPP, xi.element.FIRE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local damage = math.floor(mob:getWeaponDmg() * math.random(12, 18) * skill:getMobHPP() / 100)
 
+    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.FIRE, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     mob:setHP(0)
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
-    return dmg
+
+    return damage
 end
 
 return mobskillObject

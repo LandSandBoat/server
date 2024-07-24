@@ -267,9 +267,7 @@ end
 -- xi.mobskills.magicalTpBonus.DMG_BONUS and TP = 200, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2) / 100 = 600
 
 xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, actionElement, damageModifier, tpEffect, tpMultiplier)
-    local returnInfo = {} -- TODO: Destroy
-
-    local finalDamage = baseDamage
+    local finalDamage = 0
 
     -- Base damage
     if tpEffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
@@ -315,9 +313,7 @@ xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, action
         actor:addTP(tpReturn)
     end
 
-    returnInfo.dmg = finalDamage
-
-    return returnInfo
+    return finalDamage
 end
 
 -- effect = xi.effect.WHATEVER if enfeeble

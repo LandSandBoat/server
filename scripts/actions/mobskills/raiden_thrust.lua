@@ -13,13 +13,14 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = 1.25
+    local damage = mob:getWeaponDmg() * 4
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 4, xi.element.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
+    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.THUNDER, 1.25, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.THUNDER)
-    return dmg
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.THUNDER)
+
+    return damage
 end
 
 return mobskillObject

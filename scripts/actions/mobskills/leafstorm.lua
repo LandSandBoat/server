@@ -27,11 +27,14 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
         return count
     else
-        local dmgmod = 1
-        local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * math.random(4, 5), xi.element.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-        local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
-        target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
-        return dmg
+        local damage = mob:getWeaponDmg() * math.random(4, 5)
+
+        damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
+        damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+
+        target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
+
+        return damage
     end
 end
 
