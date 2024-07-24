@@ -1632,3 +1632,15 @@ INSERT INTO `item_mods_pet` VALUES (28605,30,7,1); -- Avatar - MACC: 7
 INSERT INTO `item_mods_pet` VALUES (28643,12,8,3); -- Automaton - INT: 8
 INSERT INTO `item_mods_pet` VALUES (28643,13,8,3); -- Automaton - MND: 8
 INSERT INTO `item_mods_pet` VALUES (28643,30,3,3); -- Automaton - MACC: 3
+
+-- Sancus Sachet
+INSERT INTO `item_mods_pet` VALUES (21394,25,15,1); -- Avatar - ACC: 15
+INSERT INTO `item_mods_pet` VALUES (21394,26,15,1); -- Avatar - RACC: 15
+INSERT INTO `item_mods_pet` VALUES (21394,30,15,1); -- Avatar - MACC: 15
+INSERT INTO `item_mods_pet` VALUES (21394,126,10,1); -- Avatar - BP_DAMAGE: 10
+
+-- Sancus Sachet +1
+INSERT INTO `item_mods_pet` VALUES (21395,25,20,1); -- Avatar - ACC: 20
+INSERT INTO `item_mods_pet` VALUES (21395,26,20,1); -- Avatar - RACC: 20
+INSERT INTO `item_mods_pet` VALUES (21395,30,20,1); -- Avatar - MACC: 20
+INSERT INTO `item_mods_pet` VALUES (21395,126,15,1); -- Avatar - BP_DAMAGE: 15
