@@ -1023,7 +1023,7 @@ namespace charutils
         if (rset)
         {
             // equipSlotData[equipSlotId] = { slotId, containerId }
-            std::unordered_map<uint8, std::pair<uint8, uint8>> equipSlotData;
+            std::map<uint8, std::pair<uint8, uint8>> equipSlotData;
 
             // NOTE: This data is stored in the above map since if the item has an augment, another db
             // query will occur, which will destroy the current query results.
