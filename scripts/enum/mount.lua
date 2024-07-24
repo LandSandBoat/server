@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class mount
 xi.mount =
 {
     CHOCOBO        = 0,

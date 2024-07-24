@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class allegiance
 xi.allegiance =
 {
     MOB       = 0,

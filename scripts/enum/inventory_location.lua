@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class inventoryLocation
 xi.inventoryLocation =
 {
     INVENTORY        = 0,
@@ -26,4 +27,5 @@ xi.inventoryLocation =
     MAX_CONTAINER_ID = 18,
 }
 
+---@alias inv inventoryLocation
 xi.inv = xi.inventoryLocation

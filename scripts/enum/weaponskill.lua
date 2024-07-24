@@ -9,6 +9,7 @@ xi = xi or {}
 -- Weaponskill IDs
 -----------------------------------
 
+---@class weaponskill
 xi.weaponskill =
 {
     -----------------------------------

@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class job
 xi.job =
 {
     NONE =  0,

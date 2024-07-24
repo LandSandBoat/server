@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class craftRank
 xi.craftRank =
 {
     AMATEUR     = 0,

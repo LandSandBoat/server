@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class behaviour
 xi.behavior =
 {
     NONE         = 0x000,

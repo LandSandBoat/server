@@ -4,6 +4,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class findFlag
 xi.findFlag =
 {
     NONE            = 0,

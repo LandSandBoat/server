@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class weather
 xi.weather =
 {
     NONE            =  0,

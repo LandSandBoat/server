@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class history
 xi.history =
 {
     ENEMIES_DEFEATED   = 0,

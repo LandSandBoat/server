@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class skill
 xi.skill =
 {
     -- Combat Skills

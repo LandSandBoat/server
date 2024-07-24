@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class followType
 xi.followType =
 {
     NONE     = 0,

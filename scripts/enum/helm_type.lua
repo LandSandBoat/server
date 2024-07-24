@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class helmType
 xi.helmType =
 {
     HARVESTING = 1,

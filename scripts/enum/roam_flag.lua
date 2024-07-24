@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class roamFlag
 xi.roamFlag =
 {
     NONE     = 0x000,

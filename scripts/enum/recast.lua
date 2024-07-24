@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class recast
 xi.recast =
 {
     ITEM     = 0,
@@ -10,6 +11,7 @@ xi.recast =
     ABILITY  = 2,
 }
 
+---@class recastID
 xi.recastID =
 {
     SIC            = 102,

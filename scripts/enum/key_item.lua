@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class keyItem
 xi.keyItem =
 {
     ZERUHN_REPORT                            = 1,
@@ -3220,4 +3221,5 @@ xi.keyItem =
     MOG_KUPON_I_ABY                          = 3346,
 }
 
+---@alias ki keyItem
 xi.ki = xi.keyItem

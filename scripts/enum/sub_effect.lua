@@ -4,6 +4,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class subEffect
 xi.subEffect =
 {
     -- ATTACKS

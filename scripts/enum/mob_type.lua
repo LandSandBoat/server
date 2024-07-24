@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class mobType
 xi.mobType =
 {
     NORMAL      = 0x00,

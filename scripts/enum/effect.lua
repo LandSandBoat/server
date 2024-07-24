@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class effect
 xi.effect =
 {
     KO                       = 0,

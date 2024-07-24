@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class wsUnlock
 xi.wsUnlock =
 {
     ASURAN_FISTS        = 1,

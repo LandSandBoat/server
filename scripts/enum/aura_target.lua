@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class auraTarget
 xi.auraTarget =
 {
     ALLIES  = 0,
