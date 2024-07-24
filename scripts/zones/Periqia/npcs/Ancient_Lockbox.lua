@@ -10,20 +10,20 @@ entity.onTrigger = function(player, npc)
         [xi.assault.mission.SEAGULL_GROUNDED] =
         {
             {
-                { itemid = xi.item.APPRAISAL_BOX,     droprate = 400 },
-                { itemid = xi.item.APPRAISAL_SWORD,   droprate = 200 },
-                { itemid = xi.item.APPRAISAL_POLEARM, droprate = 200 },
-                { itemid = xi.item.APPRAISAL_GLOVES,  droprate = 200 },
+                { itemid = xi.item.UNAPPRAISED_BOX,     droprate = 400 },
+                { itemid = xi.item.UNAPPRAISED_SWORD,   droprate = 200 },
+                { itemid = xi.item.UNAPPRAISED_POLEARM, droprate = 200 },
+                { itemid = xi.item.UNAPPRAISED_GLOVES,  droprate = 200 },
             },
         },
 
         [xi.assault.mission.REQUIEM] =
         {
             {
-                { itemid = xi.item.APPRAISAL_BOX,     droprate = 400 },
-                { itemid = xi.item.APPRAISAL_GLOVES,  droprate = 200 },
-                { itemid = xi.item.APPRAISAL_POLEARM, droprate = 200 },
-                { itemid = xi.item.APPRAISAL_AXE,     droprate = 200 },
+                { itemid = xi.item.UNAPPRAISED_BOX,     droprate = 400 },
+                { itemid = xi.item.UNAPPRAISED_GLOVES,  droprate = 200 },
+                { itemid = xi.item.UNAPPRAISED_POLEARM, droprate = 200 },
+                { itemid = xi.item.UNAPPRAISED_AXE,     droprate = 200 },
             },
         },
 

@@ -10,26 +10,26 @@ entity.onTrigger = function(player, npc)
         [xi.assault.mission.EXCAVATION_DUTY] =
         {
             {
-                { itemid = xi.item.APPRAISAL_BOX,     droprate = 300 },
-                { itemid = xi.item.APPRAISAL_EARRING, droprate = 700 },
+                { itemid = xi.item.UNAPPRAISED_BOX,     droprate = 300 },
+                { itemid = xi.item.UNAPPRAISED_EARRING, droprate = 700 },
             },
         },
 
         [xi.assault.mission.LEBROS_SUPPLIES] =
         {
             {
-                { itemid = xi.item.APPRAISAL_BOX,  droprate = 300 },
-                { itemid = xi.item.APPRAISAL_CAPE, droprate = 700 },
+                { itemid = xi.item.UNAPPRAISED_BOX,  droprate = 300 },
+                { itemid = xi.item.UNAPPRAISED_CAPE, droprate = 700 },
             },
         },
 
         [xi.assault.mission.TROLL_FUGITIVES] =
         {
             {
-                { itemid = xi.item.APPRAISAL_AXE,       droprate = 300 },
-                { itemid = xi.item.APPRAISAL_POLEARM,   droprate = 200 },
-                { itemid = xi.item.APPRAISAL_HEADPIECE, droprate = 100 },
-                { itemid = xi.item.APPRAISAL_BOX,       droprate = 400 },
+                { itemid = xi.item.UNAPPRAISED_AXE,       droprate = 300 },
+                { itemid = xi.item.UNAPPRAISED_POLEARM,   droprate = 200 },
+                { itemid = xi.item.UNAPPRAISED_HEADPIECE, droprate = 100 },
+                { itemid = xi.item.UNAPPRAISED_BOX,       droprate = 400 },
             },
         },
     }
