@@ -6,7 +6,27 @@ import tarfile
 import json
 import subprocess
 import re
+import argparse
 from collections import defaultdict
+
+parser = argparse.ArgumentParser(
+    description="Run Lua Language Server and parse results."
+)
+parser.add_argument(
+    "--blame",
+    default=None,
+    action="store_true",
+    help="Annotate each error with the last editor of the line. Also produces a ranked table errors per committers.",
+)
+
+args = parser.parse_args()
+
+if args.blame:
+    print("Running git blame on each error line to find the last editor.")
+else:
+    print(
+        "NOT running git blame on each error line to find the last editor (use --blame to enable)."
+    )
 
 current_os = platform.system()
 print(f"Current OS: {current_os}")
@@ -129,14 +149,23 @@ for file, issues in parsed_data.items():
         severity = issue["severity"]
         message = issue["message"]
 
-        # Remove "file://" prefix for git blame to work
-        file_path = file.replace("file://", "")
+        file = file.replace("file://", "")
 
-        last_editor = get_committer(file_path, line)
+        # Fix drive letter prefix
+        if platform.system() == "Windows":
+            if file[0] == "/" and file[2] == "%" and file[3] == "3" and file[4] == "A":
+                print("Fixing drive letter prefix")
+                file = file[5:]
+
+        file = os.path.abspath(file)
+
+        last_editor = "Unknown"
+        if args.blame:
+            last_editor = get_committer(file, line)
 
         error_list.append(
             {
-                "file": file_path,
+                "file": file,
                 "line": line,
                 "character": character,
                 "code": code,
@@ -157,19 +186,24 @@ sorted_committers = sorted(committer_errors.items(), key=lambda x: x[1], reverse
 # Write ranked table and detailed error information to a file and print to console
 print("\nWriting error information to lua_lang_errors.txt\n")
 with open("lua_lang_errors.txt", "w") as error_file:
-    # Write the ranked table of committers
-    header = f"{'Committer':<50} | {'Errors':<6}\n"
-    separator = "-" * 58 + "\n"
-    print(header, end="")
-    print(separator, end="")
-    error_file.write(header)
-    error_file.write(separator)
-    for committer, count in sorted_committers:
-        line = f"{committer:<50} | {count:<6}\n"
-        print(line, end="")
-        error_file.write(line)
+    if args.blame:
+        # Write the ranked table of committers
+        header = f"{'Committer':<50} | {'Errors':<6}\n"
+        separator = "-" * 58 + "\n"
+        print(header, end="")
+        print(separator, end="")
+        error_file.write(header)
+        error_file.write(separator)
+        for committer, count in sorted_committers:
+            line = f"{committer:<50} | {count:<6}\n"
+            print(line, end="")
+            error_file.write(line)
+    else:
+        # Print total error count
+        error_count = len(error_list)
+        print(f"=== Total errors: {error_count} ===")
+        error_file.write(f"=== Total errors: {error_count} ===")
 
-    # Add a newline between the table and the detailed errors
     details_header = "\n=== Detailed error information ===\n"
     print(details_header, end="")
     error_file.write(details_header)
@@ -190,5 +224,10 @@ with open("lua_lang_errors.txt", "w") as error_file:
             f"Severity: {severity_map[error['severity']]}\n"
             f"Message: {error['message']}\n"
         )
+
+        # If git blame is not enabled, remove the line that starts with Last Editor (using regex)
+        if not args.blame:
+            error_details = re.sub(r"Last Editor:.*\n", "", error_details)
+
         print(error_details, end="")
         error_file.write(error_details)
