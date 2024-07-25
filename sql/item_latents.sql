@@ -2042,6 +2042,9 @@ INSERT INTO `item_latents` VALUES (18099,23,24,6,1000);  -- Attack+24 while TP <
 INSERT INTO `item_latents` VALUES (18099,25,5,6,1000);   -- Accuracy+5 while TP <100%
 INSERT INTO `item_latents` VALUES (18099,287,5,6,1000);  -- DMG+5 while TP <100%
 
+-- Z's Trident
+INSERT INTO `item_latents` VALUES (18101,8,12,41,0);     -- STR+12 during WS
+
 -- Leviathan's Couse
 -- TODO: INSERT INTO `item_latents` VALUES (18109,431,1,21,12); -- Additional effect: Water damage while you or a party member has Leviathan summoned
 
