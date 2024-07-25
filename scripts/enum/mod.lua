@@ -111,10 +111,6 @@ xi.mod =
     FLEE_DURATION                   = 93,  -- Flee duration in seconds
     MEDITATE_DURATION               = 94,  -- Meditate duration in seconds
     WARDING_CIRCLE_DURATION         = 95,  -- Warding Circle duration in seconds
-    SOULEATER_EFFECT                = 96,  -- Souleater power in percents
-    SOULEATER_EFFECT_II             = 53,  -- Uncapped additive Souleaterbonus in percents, 10 = .1
-    DESPERATE_BLOWS                 = 906, -- Adds ability haste to Last Resort
-    STALWART_SOUL                   = 907, -- Reduces damage taken from Souleater
     BOOST_EFFECT                    = 97,  -- Boost power in tenths
     CAMOUFLAGE_DURATION             = 98,  -- Camouflage duration in percents
 
@@ -414,7 +410,7 @@ xi.mod =
     WIDESCAN                        = 340,
     BARRAGE_ACC                     = 420,
     BARRAGE_COUNT                   = 138, -- Increases Barrage shots by 1
-    ENSPELL                         = 341,
+    ENSPELL                         = 341, -- Stores the type of enspell active (0 if nothing)
     SPIKES                          = 342,
     ENSPELL_DMG                     = 343,
     ENSPELL_CHANCE                  = 856,
@@ -443,11 +439,20 @@ xi.mod =
     SHIELD_BARRIER                  = 1082, -- Grants a bonus to Protect spells cast by self while a shield is equipped.
 
     -- Dark Knight
+    ARCANE_CIRCLE_DURATION          = 858,  -- Arcane Circle extended duration in seconds
     ARCANE_CIRCLE_POTENCY           = 1069, -- Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
-    ENHANCES_BLOOD_WEAPON           = 1070, -- Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
+    SOULEATER_EFFECT                = 96,   -- Souleater power in percents
+    SOULEATER_EFFECT_II             = 53,   -- Uncapped additive Souleater bonus in percents, 10 = .1
+    DESPERATE_BLOWS                 = 906,  -- Adds ability haste to Last Resort
+    STALWART_SOUL                   = 907,  -- Reduces damage taken from Souleater
+    DREAD_SPIKES_EFFECT             = 998,  -- Percent increase to total HP drain for Dread Spikes
     DARK_MAGIC_CAST                 = 1071, -- Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
     DARK_MAGIC_DURATION             = 1072, -- Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
+    ENHANCES_BLOOD_WEAPON           = 1070, -- Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
     ENHANCES_DARK_SEAL              = 1073, -- Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
+    ENHANCES_DIABOLIC_EYE           = 275,  -- Diabolic Eye duration + "modifier-value" seconds per Diabolic Eye merit.
+    ENHANCES_NETHER_VOID            = 1083, -- Enhances "Nether Void" effect (Increases the potency of the next Absorb or Drain Dark Magic by <value>%
+    ENHANCES_MUTED_SOUL             = 1084, -- Enhances "Muted Soul" effect (Adds 3% Zanshin rate per MUTED_SOUL merit level)
 
     -- Beastmaster
     TANDEM_STRIKE_POWER             = 271,  -- Grants a bonus to your and your pet's accuracy and magic accuracy when you and your pet are attacking the same target.
@@ -862,7 +867,6 @@ xi.mod =
 
     -- Circle Abilities Extended Duration from AF/AF+1
     HOLY_CIRCLE_DURATION            = 857,
-    ARCANE_CIRCLE_DURATION          = 858,
     ANCIENT_CIRCLE_DURATION         = 859,
 
     -- Other
@@ -898,8 +902,6 @@ xi.mod =
 
     SUPERIOR_LEVEL  = 997, -- SU0..5
     ONE_HOUR_RECAST = 996, -- Decreases the recast time of one-hour abilities by n minutes.
-
-    DREAD_SPIKES_EFFECT = 998,
 
     PENGUIN_RING_EFFECT   = 152, -- +2 on fishing arrow delay / fish movement for mini - game
     ALBATROSS_RING_EFFECT = 153, -- adds 30 seconds to mini - game time

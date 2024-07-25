@@ -120,16 +120,16 @@ xi.jp =
     ENLIGHT_EFFECT           = jpCategory.PLD + 0x09, --+ enlight dmg +1 p.acc +1
 
     --DRK
-    BLOOD_WEAPON_EFFECT      = jpCategory.DRK + 0x00, --+ hp absorb +2%
-    SOUL_ENSLAVEMENT_EFFECT  = jpCategory.DRK + 0x02, --X tp absorb +1%
-    ARCANE_CIRCLE_EFFECT     = jpCategory.DRK + 0x01, --X dmg taken -1
-    LAST_RESORT_EFFECT       = jpCategory.DRK + 0x03, --+ p.atk +2
-    SOULEATER_DURATION       = jpCategory.DRK + 0x04, --+ dur. +1s
-    WEAPON_BASH_EFFECT       = jpCategory.DRK + 0x05, --+ dmg +10
-    NETHER_VOID_EFFECT       = jpCategory.DRK + 0x06, --X absorb +2% abs-attri status +1/10
-    ARCANE_CREST_DURATION    = jpCategory.DRK + 0x07, --X dur. +1s
-    SCARLET_DLRIUM_DURATION  = jpCategory.DRK + 0x08, --X dur. +1s
-    ENDARK_EFFECT            = jpCategory.DRK + 0x09, --+ enspell dmg, p.atk, p.acc +1
+    BLOOD_WEAPON_EFFECT       = jpCategory.DRK + 0x00, --+ hp absorb +2%
+    SOUL_ENSLAVEMENT_EFFECT   = jpCategory.DRK + 0x02, --X tp absorb +1%
+    ARCANE_CIRCLE_EFFECT      = jpCategory.DRK + 0x01, --X dmg taken -1
+    LAST_RESORT_EFFECT        = jpCategory.DRK + 0x03, --+ p.atk +2
+    SOULEATER_DURATION        = jpCategory.DRK + 0x04, --+ dur. +1s
+    WEAPON_BASH_EFFECT        = jpCategory.DRK + 0x05, --+ dmg +10
+    NETHER_VOID_EFFECT        = jpCategory.DRK + 0x06, --X absorb +2% abs-attri status +1/10
+    ARCANE_CREST_DURATION     = jpCategory.DRK + 0x07, --X dur. +1s
+    SCARLET_DELIRIUM_DURATION = jpCategory.DRK + 0x08, --X dur. +1s
+    ENDARK_EFFECT             = jpCategory.DRK + 0x09, --+ enspell dmg, p.atk, p.acc +1
 
     --BST
     FAMILIAR_EFFECT          = jpCategory.BST + 0x00, --X all pet attr. +3
