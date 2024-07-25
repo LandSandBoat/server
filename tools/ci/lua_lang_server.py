@@ -12,11 +12,19 @@ from collections import defaultdict
 parser = argparse.ArgumentParser(
     description="Run Lua Language Server and parse results."
 )
+
 parser.add_argument(
     "--blame",
     default=None,
     action="store_true",
     help="Annotate each error with the last editor of the line. Also produces a ranked table errors per committers.",
+)
+
+parser.add_argument(
+    "--force",
+    default=None,
+    action="store_true",
+    help="Force to run, even if there is an existing check.json result. The existing check.json result will be deleted.",
 )
 
 args = parser.parse_args()
@@ -95,6 +103,10 @@ scripts_path = os.path.abspath(scripts_path)
 modules_path = os.path.abspath(modules_path)
 
 check_command = f'{lua_server_path} --loglevel="trace" --logpath="{log_path}" --configpath="{config_path}" --checklevel="Information" --check="{scripts_path}"'
+
+if args.force and os.path.exists("./check.json"):
+    print("Force flag is enabled, removing existing check.json.")
+    os.remove("./check.json")
 
 if os.path.exists("./check.json"):
     print(
