@@ -1360,7 +1360,7 @@ namespace battleutils
 
             if (hasDrainDaze || hasAspirDaze || hasHasteDaze)
             {
-                int16 delay = PAttacker->GetWeaponDelay(false) / 10;
+                int32 delay = PAttacker->GetWeaponDelay(false) / 10;
 
                 EFFECT daze       = EFFECT_NONE;
                 uint32 attackerID = 0;
@@ -1682,7 +1682,7 @@ namespace battleutils
         return pdif;
     }
 
-    int16 CalculateBaseTP(int delay)
+    int16 CalculateBaseTP(int32 delay)
     {
         int16 x = 1;
         if (delay <= 180)
@@ -2310,13 +2310,13 @@ namespace battleutils
 
             if ((slot == SLOT_RANGED || slot == SLOT_AMMO) && PAttacker->objtype == TYPE_PC)
             {
-                int16 delay = PAttacker->GetRangedWeaponDelay(true);
+                int32 delay = PAttacker->GetRangedWeaponDelay(true);
 
-                baseTp = CalculateBaseTP((delay * 120) / 1000);
+                baseTp = CalculateBaseTP(delay * 120 / 1000);
             }
             else
             {
-                int16 delay      = PAttacker->GetWeaponDelay(true);
+                int32 delay      = PAttacker->GetWeaponDelay(true);
                 auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
 
                 if (sub_weapon && sub_weapon->getDmgType() > DAMAGE_TYPE::NONE && sub_weapon->getDmgType() < DAMAGE_TYPE::HTH &&
@@ -2332,7 +2332,7 @@ namespace battleutils
                     ratio = 2.0f;
                 }
 
-                baseTp = CalculateBaseTP((int16)(delay * 60.0f / 1000.0f / ratio));
+                baseTp = CalculateBaseTP(delay * 60.0f / 1000.0f / ratio);
             }
 
             if (giveTPtoAttacker)
@@ -2470,12 +2470,12 @@ namespace battleutils
 
             if (isRanged)
             {
-                int16 delay = PAttacker->GetRangedWeaponDelay(true);
+                int32 delay = PAttacker->GetRangedWeaponDelay(true);
                 baseTp      = CalculateBaseTP((delay * 120) / 1000);
             }
             else
             {
-                int16 delay = PAttacker->GetWeaponDelay(true);
+                int32 delay = PAttacker->GetWeaponDelay(true);
 
                 auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
 
@@ -2492,7 +2492,7 @@ namespace battleutils
                     ratio = 2.0f;
                 }
 
-                baseTp = (int16)(CalculateBaseTP((delay * 60) / 1000) / ratio);
+                baseTp = CalculateBaseTP(delay * 60 / 1000 / ratio);
             }
 
             // add tp to attacker
