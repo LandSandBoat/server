@@ -79,6 +79,7 @@ xi.job_utils.monk.useChiBlast = function(player, target, ability)
     local dmg = math.floor(player:getStat(xi.mod.MND) * (0.5 + (math.random() / 2))) * multiplier
 
     dmg = xi.ability.adjustDamage(dmg, target, ability, target, xi.attackType.BREATH, nil, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    target:takeDamage(dmg, player, xi.attackType.BREATH, xi.damageType.ELEMENTAL)
     target:updateClaim(player)
     player:delStatusEffect(xi.effect.BOOST)
 

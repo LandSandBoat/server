@@ -1286,6 +1286,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
     tp       = battleutils::CalculateWeaponSkillTP(this, PWeaponSkill, tp);
 
     PLatentEffectContainer->CheckLatentsTP();
+    PLatentEffectContainer->CheckLatentsWS(true);
 
     SLOTTYPE damslot    = SLOT_MAIN;
     bool     isRangedWS = (PWeaponSkill->getID() >= 192 && PWeaponSkill->getID() <= 218);
@@ -1455,6 +1456,8 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
             actionTarget.speceffect = SPECEFFECT::BLOOD;
         }
     }
+
+    PLatentEffectContainer->CheckLatentsWS(false);
 }
 
 void CCharEntity::OnAbility(CAbilityState& state, action_t& action)

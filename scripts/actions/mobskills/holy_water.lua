@@ -10,8 +10,7 @@ end
 local statii =
 {
     xi.effect.CURSE_I,
-    xi.effect.CURSE_II,
-    xi.effect.ZOMBIE,
+    xi.effect.CURSE_II, -- AKA "Zombie"
     xi.effect.DOOM,
 }
 
