@@ -18,10 +18,10 @@ end
 commandObj.onTrigger = function(player, value, target, days)
     -- validate value
     if
-        value ~= 'ban' or
+        value ~= 'ban' and
         value ~= 'unban'
     then
-        error(player)
+        error(player, 'Parameter not specified <ban/unban>')
         return
     end
 
@@ -48,8 +48,6 @@ commandObj.onTrigger = function(player, value, target, days)
 
         target:setCharVar('[YELL]Banned', 1, os.time() + utils.days(days))
         player:printToPlayer(string.format('%s has been banned from using the /yell command.', target:getName()))
-    else
-        error(player, 'Invalid value specified.')
     end
 end
 
