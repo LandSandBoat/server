@@ -4758,7 +4758,8 @@ INSERT INTO `synth_recipes` VALUES (75533,1,0,0,0,0,25,0,0,0,0,4100,4242,12722,0
 INSERT INTO `synth_recipes` VALUES (75534,1,0,0,0,57,0,0,0,0,0,4100,4242,14018,0,0,0,0,0,0,0,653,653,745,745,1,2,1,1,'Gigas Bracelets (desynth)');
 INSERT INTO `synth_recipes` VALUES (75535,1,0,0,0,69,0,0,0,0,0,4100,4242,16514,0,0,0,0,0,0,0,744,744,651,745,1,1,1,1,'Mailbreaker (desynth)');
 INSERT INTO `synth_recipes` VALUES (75536,1,0,0,0,69,0,0,0,0,0,4100,4242,16618,0,0,0,0,0,0,0,744,744,651,745,1,1,1,1,'Mailbreaker +1 (desynth)');
-INSERT INTO `synth_recipes` VALUES (75537,1,0,0,0,45,0,0,0,0,0,4100,4242,14790,0,0,0,0,0,0,0,653,653,653,653,1,2,2,2,'Reraise Earring (desynth)'); -- FFXIclopedia.
+INSERT INTO `synth_recipes` VALUES (75537,1,0,0,0,45,0,0,0,0,0,4100,4242,14790,0,0,0,0,0,0,0,653,653,653,653,1,2,2,2,'Reraise Earring (desynth)'); -- FFXIclopedia
+INSERT INTO `synth_recipes` VALUES (75538,1,0,0,0,0,0,0,82,0,0,4100,4242,13171,0,0,0,0,0,0,0,850,850,850,887,1,1,1,1,'Reraise Gorget (desynth)'); -- FFXIclopedia
 -- -----------
 -- RECIPES END
 
