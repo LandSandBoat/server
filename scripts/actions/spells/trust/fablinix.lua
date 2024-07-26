@@ -14,6 +14,8 @@ end
 spellObject.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
 	
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.ENWATER, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.ENWATER)
+	
     mob:addSimpleGambit(ai.t.TARGET, ai.c.RANDOM, 50, ai.r.RATTACK, 0, 0, 30) -- TODO: Verify rate of ranged attacks
 	
     mob:setTrustTPSkillSettings(ai.tp.CLOSER_UNTIL_TP, ai.s.HIGHEST, 1500)
