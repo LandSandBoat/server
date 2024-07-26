@@ -14,6 +14,11 @@ end
 spellObject.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
 	
+    mob:addSimpleGambit(ai.t.TANK, ai.c.HPP_LT, 75, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 50, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.SLEEP_I, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.SLEEP_II, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE)
+	
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.ENWATER, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.ENWATER)
 	
     mob:addSimpleGambit(ai.t.TARGET, ai.c.RANDOM, 50, ai.r.RATTACK, 0, 0, 30) -- TODO: Verify rate of ranged attacks
