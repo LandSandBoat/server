@@ -110,6 +110,25 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, 
     return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.RANGED)
 end
 
+-- helper function to handle a single hit and check for parrying, guarding, and blocking
+local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, tpEffect, minRatio, maxRatio)
+    -- if a non-ranged physical mobskill then can parry or guard
+    if
+        tpEffect == xi.mobskills.magicalTpBonus.RANGED or
+        (not xi.combat.physical.isParried(target, mob) and
+        not xi.combat.physical.isGuarded(target, mob))
+    then
+        local pdif = math.random((minRatio * 1000), (maxRatio * 1000)) --generate random PDIF
+        pdif = pdif / 1000 --multiplier set.
+        finaldmg = finaldmg + hitdamage * pdif
+        -- also handle blocking
+        finaldmg = xi.combat.physical.handleBlock(target, mob, finaldmg)
+        hitslanded = hitslanded + 1
+    end
+
+    return hitslanded, finaldmg
+end
+
 -----------------------------------
 -- Mob Physical Abilities
 -- accMod   : linear multiplier for accuracy (1 default)
@@ -202,21 +221,14 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmg
 
     firstHitChance = utils.clamp(firstHitChance, 35, 95)
 
-    --Applying pDIF
-    local pdif
     if (math.random() * 100) <= firstHitChance then
-        pdif = math.random((minRatio * 1000), (maxRatio * 1000)) --generate random PDIF
-        pdif = pdif / 1000 --multiplier set.
-        finaldmg = finaldmg + hitdamage * pdif
-        hitslanded = hitslanded + 1
+        -- use helper function check for parry guard and blocking and handle the hit
+        hitslanded, finaldmg = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, tpEffect, minRatio, maxRatio)
     end
 
     while hitsdone < numHits do
         if (math.random() * 100) <= hitrate then --it hit
-            pdif       = math.random(minRatio * 1000, maxRatio * 1000) --generate random PDIF
-            pdif       = pdif / 1000 --multiplier set.
-            finaldmg   = finaldmg + hitdamage * pdif
-            hitslanded = hitslanded + 1
+            hitslanded, finaldmg = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, tpEffect, minRatio, maxRatio)
         end
 
         hitsdone = hitsdone + 1
