@@ -267,11 +267,11 @@ end
 -- xi.mobskills.magicalTpBonus.DMG_BONUS and TP = 200, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2) / 100 = 600
 
 xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, actionElement, damageModifier, tpEffect, tpMultiplier)
-    local finalDamage = 0
+    local finalDamage = baseDamage
 
     -- Base damage
     if tpEffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
-        finalDamage = math.floor(baseDamage * action:getTP() * tpMultiplier / 1000)
+        finalDamage = math.floor(finalDamage * action:getTP() * tpMultiplier / 1000)
     end
 
     -- Get bonus macc.
