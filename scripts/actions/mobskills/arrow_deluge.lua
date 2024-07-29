@@ -8,7 +8,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getMainJob() == xi.job.RNG then
+    if mob:getAnimationSub() == 0 and mob:getMainJob() == xi.job.RNG then
         return 0
     else
         return 1
@@ -18,7 +18,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod  = 1
-    local dmgmod  = 2
+    local dmgmod  = 1.5
     local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg     = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
 
