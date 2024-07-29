@@ -15,10 +15,12 @@
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    local params = {}
-    params.numHits = 1
-    params.ftpMod = { 2.5, 2.75, 3.0 }
-    params.str_wsc = 0.2 params.vit_wsc = 0.5
+    local params     = {}
+    params.numHits   = 1
+    params.ftpMod    = { 2.5, 2.75, 3.0 }
+    params.atkVaries = { 1.5, 1.5, 1.5 } -- https://w.atwiki.jp/studiogobli/pages/93.html
+    params.str_wsc   = 0.2
+    params.vit_wsc   = 0.5
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.multiHitfTP = true -- http://wiki.ffo.jp/html/2422.html
