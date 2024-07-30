@@ -698,10 +698,6 @@ namespace spell
                 // ensure trust level is appropriate+
                 if (PCaster->objtype == TYPE_TRUST && PCaster->GetMLevel() < JobMLVL && PCaster->GetSLevel() < JobSLVL)
                 {
-                    if (spell->getID() == SpellID::Stun && !PCaster->name.compare("fablinix") && PCaster->GetMLevel() >= spell->getJob(JOB_BLM))
-                    {
-                        return true;
-                    }
                     return false;
                 }
 
