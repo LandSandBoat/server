@@ -3272,8 +3272,8 @@ INSERT INTO `mob_skills` VALUES (3257,1299,'shibaraku',1,7.0,2000,1500,4,0,0,1,1
 INSERT INTO `mob_skills` VALUES (3258,363,'shiko_no_mitate',0,7.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3259,364,'happobarai',1,7.0,2000,1500,4,0,0,0,5,8,0);
 INSERT INTO `mob_skills` VALUES (3260,354,'rinpyotosha',1,7.0,2000,1500,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3261,335,'bomb_toss',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3262,334,'goblin_rush',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3261,335,'bomb_toss',2,13.5,2000,1500,4,0,0,0,3,6,0);
+INSERT INTO `mob_skills` VALUES (3262,334,'goblin_rush',0,6.0,2000,1500,4,0,0,1,11,8,0);
 INSERT INTO `mob_skills` VALUES (3263,1625,'bear_killer',4,7.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Skillchain properties
 INSERT INTO `mob_skills` VALUES (3264,259,'salvation_scythe',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3265,3009,'elemental_sforzo',0,7.0,2000,0,1,2,0,0,0,0,0);

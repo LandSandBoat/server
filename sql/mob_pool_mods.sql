@@ -647,6 +647,9 @@ INSERT INTO `mob_pool_mods` VALUES (5915,6,100,0);      -- MPP: 100
 -- Trust: Lehko
 INSERT INTO `mob_pool_mods` VALUES (5922,6,150,0);      -- MPP: 150
 
+-- Trust: Fablinix
+INSERT INTO `mob_pool_mods` VALUES (5932,6,250,0);    -- MPP: 250
+
 -- Trust: Ferreous Coffin
 INSERT INTO `mob_pool_mods` VALUES (5944,3,-10,0);      -- HPP: -10
 INSERT INTO `mob_pool_mods` VALUES (5944,6,35,0);       -- MPP: 35

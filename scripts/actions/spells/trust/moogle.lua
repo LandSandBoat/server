@@ -12,7 +12,9 @@ spellObject.onSpellCast = function(caster, target, spell)
 end
 
 spellObject.onMobSpawn = function(mob)
-    xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
+    xi.trust.teamworkMessage(mob, {
+        [xi.magic.spell.FABLINIX] = xi.trust.messageOffset.TEAMWORK_1,
+    })
 
     local mlvl = mob:getMainLvl()
     local tick_amount
