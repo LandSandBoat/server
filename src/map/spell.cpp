@@ -30,6 +30,7 @@
 #include "spell.h"
 #include "status_effect_container.h"
 #include "utils/blueutils.h"
+#include "utils/mobutils.h"
 
 CSpell::CSpell(SpellID id)
 : m_ID(id)
@@ -696,7 +697,7 @@ namespace spell
                 }
 
                 // ensure trust level is appropriate+
-                if (PCaster->objtype == TYPE_TRUST && PCaster->GetMLevel() < JobMLVL && PCaster->GetSLevel() < JobSLVL)
+                if (PCaster->objtype == TYPE_TRUST && PCaster->GetMLevel() < mobutils::GetSpellMinLevel(static_cast<CMobEntity*>(PCaster), spell->getID()))
                 {
                     return false;
                 }
