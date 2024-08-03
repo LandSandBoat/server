@@ -287,23 +287,6 @@ namespace mobutils
 
     /************************************************************************
      *                                                                       *
-     *  Returns the min_level of a spell from a mob's spell list             *
-     *                                                                       *
-     ************************************************************************/
-    uint16 GetSpellMinLevel(CMobEntity* PMob, SpellID spellId)
-    {
-        for (std::vector<MobSpell_t>::iterator it = PMob->m_SpellListContainer->m_spellList.begin(); it != PMob->m_SpellListContainer->m_spellList.end(); ++it)
-        {
-            if (spellId == (*it).spellId)
-            {
-                return (*it).min_level;
-            }
-        }
-        return 255;
-    }
-
-    /************************************************************************
-     *                                                                       *
      *  Checks if the mob is in any Original/RoZ zone                        *
      *                                                                       *
      ************************************************************************/

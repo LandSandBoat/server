@@ -70,7 +70,6 @@ namespace mobutils
     uint16 GetBaseSkill(CMobEntity* PMob, uint8 rank);
     uint16 GetBaseToRank(uint8 rank, uint16 level);
     uint16 GetSubJobStats(uint8 rank, uint16 level, uint16 stat);
-    uint16 GetSpellMinLevel(CMobEntity* PMob, SpellID spellId);
     void   GetAvailableSpells(CMobEntity* PMob);
     void   InitializeMob(CMobEntity* PMob);
     void   LoadSqlModifiers();
