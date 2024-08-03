@@ -14820,13 +14820,8 @@ INSERT INTO `mob_droplist` VALUES (1834,0,0,1000,3090,200); -- Spheroid Plate (2
 
 -- ZoneID: 220 - Ocean Crab
 -- ZoneID: 221 - Ocean Crab
--- ZoneID: 227 - Ocean Crab
--- ZoneID: 228 - Ocean Crab
-INSERT INTO `mob_droplist` VALUES (1835,0,0,1000,580,980);        -- Bronze Box (98.0%)
-INSERT INTO `mob_droplist` VALUES (1835,0,0,1000,936,110);        -- Chunk Of Rock Salt (11.0%)
-INSERT INTO `mob_droplist` VALUES (1835,0,0,1000,4400,@UNCOMMON); -- Slice Of Land Crab Meat (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1835,0,0,1000,881,@VRARE);     -- Crab Shell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1835,2,0,1000,936,0);          -- Chunk Of Rock Salt (Steal)
+INSERT INTO `mob_droplist` VALUES (1835,0,0,1000,580,800); -- Bronze Box (80.0%)
+INSERT INTO `mob_droplist` VALUES (1835,2,0,1000,936,0);   -- Chunk Of Rock Salt (Steal)
 
 -- ZoneID: 176 - Ocean Sahagin
 INSERT INTO `mob_droplist` VALUES (1836,0,0,1000,1439,722); -- Dragoons Testimony (72.2%)
@@ -17316,12 +17311,10 @@ INSERT INTO `mob_droplist` VALUES (2183,0,0,1000,1726,20); -- Egret Fishing Rod 
 -- ZoneID: 221 - Sea Crab
 -- ZoneID: 227 - Sea Crab
 -- ZoneID: 228 - Sea Crab
-INSERT INTO `mob_droplist` VALUES (2184,0,0,1000,936,110);        -- Chunk Of Rock Salt (11.0%)
-INSERT INTO `mob_droplist` VALUES (2184,0,0,1000,4400,@UNCOMMON); -- Slice Of Land Crab Meat (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2184,0,0,1000,580,80);         -- Bronze Box (8.0%)
-INSERT INTO `mob_droplist` VALUES (2184,0,0,1000,881,@VRARE);     -- Crab Shell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2184,2,0,1000,656,0);          -- Beastcoin (Steal)
-INSERT INTO `mob_droplist` VALUES (2184,2,0,1000,936,0);          -- Chunk Of Rock Salt (Steal)
+INSERT INTO `mob_droplist` VALUES (2184,0,0,1000,936,@COMMON); -- Chunk Of Rock Salt (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2184,0,0,1000,4400,@VRARE); -- Slice Of Land Crab Meat (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2184,2,0,1000,656,0);       -- Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2184,2,0,1000,936,0);       -- Chunk Of Rock Salt (Steal)
 
 -- ZoneID: 176 - Sea Hog
 INSERT INTO `mob_droplist` VALUES (2185,0,0,1000,1274,@ALWAYS); -- Southern Pearl (Always, 100%)
@@ -26818,6 +26811,12 @@ INSERT INTO `mob_droplist` VALUES (3299,0,0,1000,18508,@UNCOMMON); -- Lyft Voulg
 -- ZoneID: 254 - Peak Pugil
 INSERT INTO `mob_droplist` VALUES (3300,0,0,1000,3270,@RARE); -- High-Quality Pugil Scale
 INSERT INTO `mob_droplist` VALUES (3300,0,0,1000,868,@VCOMMON); -- Pugil Scales
+
+-- ZoneID: 227 - Ocean Crab
+-- ZoneID: 228 - Ocean Crab
+INSERT INTO `mob_droplist` VALUES (3301,0,0,1000,936,@COMMON); -- Chunk Of Rock Salt (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (3301,0,0,1000,4400,@VRARE); -- Slice Of Land Crab Meat (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3301,2,0,1000,936,0);       -- Chunk Of Rock Salt (Steal)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
