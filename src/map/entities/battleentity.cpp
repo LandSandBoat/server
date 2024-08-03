@@ -2392,6 +2392,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
             // Check & Handle Afflatus Misery Accuracy Bonus
             battleutils::HandleAfflatusMiseryAccuracyBonus(this);
+
+            // player should still be able to skill up evasion on an evaded attack
+            if (auto* PChar = dynamic_cast<CCharEntity*>(PTarget))
+            {
+                charutils::TrySkillUP(PChar, SKILL_EVASION, GetMLevel());
+            }
         }
 
         // If we didn't hit at all, set param to 0 if we didn't blink any shadows.
