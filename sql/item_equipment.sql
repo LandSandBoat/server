@@ -4137,9 +4137,9 @@ INSERT INTO `item_equipment` VALUES (14380,'errant_hpl.',72,0,3850780,101,0,0,32
 INSERT INTO `item_equipment` VALUES (14381,'mahatma_hpl.',72,0,3850780,101,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (14382,'plastron',71,0,128,151,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (14383,'plastron_+1',71,0,128,151,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (14384,'opaline_dress',40,0,4194303,116,0,0,32,64,0,0);
-INSERT INTO `item_equipment` VALUES (14385,'ceremonial_dress',40,0,4194303,116,0,0,32,64,0,0);
-INSERT INTO `item_equipment` VALUES (14386,'wedding_dress',20,0,4194303,116,0,0,32,64,0,0);
+INSERT INTO `item_equipment` VALUES (14384,'opaline_dress',40,0,4194303,116,0,0,32,64,116,0);
+INSERT INTO `item_equipment` VALUES (14385,'ceremonial_dress',40,0,4194303,116,0,0,32,64,116,0);
+INSERT INTO `item_equipment` VALUES (14386,'wedding_dress',20,0,4194303,116,0,0,32,64,116,0);
 INSERT INTO `item_equipment` VALUES (14387,'shura_togi',73,0,6146,106,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (14388,'shura_togi_+1',73,0,6146,106,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (14389,'dragon_harness',73,0,32,110,0,0,32,0,0,0);
