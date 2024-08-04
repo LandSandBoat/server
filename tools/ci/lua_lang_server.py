@@ -36,6 +36,63 @@ else:
         "NOT running git blame on each error line to find the last editor (use --blame to enable)."
     )
 
+
+# Before running the Lua language server we're going to scrape all our Lua bindings and build the spec files for them
+# This assumes we're running from the root of the repository
+
+lua_bindings_cpp_path = "./src/map/lua"
+lua_specs_generation_folder = "./scripts/specs/generated"
+
+
+def generate_spec_file(file):
+    with open(file, "r") as f:
+        lines = f.readlines()
+
+        # Find the class name (SOL_USERTYPE("CZone", CLuaZone); -> CZone)
+        class_name = None
+        usertype_name = None
+        registered_function_names = []
+        function_definitions = []
+        for line in lines:
+            # Extract class name (SOL_USERTYPE("CZone", CLuaZone); -> CLuaZone)
+            # Extract class name (SOL_USERTYPE("CZone", CLuaZone); -> CZone)
+            if "SOL_USERTYPE" in line:
+                parts = line.split('"')
+                class_name = parts[2]
+                usertype_name = parts[1]
+
+            # Extract out function names (SOL_REGISTER("getSoloBattleMusic", CLuaZone::getSoloBattleMusic); -> getSoloBattleMusic)
+            if "SOL_REGISTER" in line:
+                function_name = line.split('"')[1]
+                registered_function_names.append(function_name)
+
+            # auto CLuaZone::getSoloBattleMusic()
+            if "::" in line and "(" in line:
+                function_name = line.split("::")[1].split("(")[0]
+                function_definitions.append(function_name)
+
+        if class_name:
+            print(f"Generating spec file for {class_name} ({usertype_name}) in {file}")
+            for function_name in registered_function_names:
+                if function_name not in function_definitions:
+                    print(
+                        f"Warning: {function_name} is registered but not defined in {file}"
+                    )
+            for function_name in function_definitions:
+                if function_name not in registered_function_names:
+                    print(
+                        f"Warning: {function_name} is defined but not registered in {file}"
+                    )
+
+
+# Find all files ending in *.cpp in the lua bindings directory
+for root, dirs, files in os.walk(lua_bindings_cpp_path):
+    for file in files:
+        if file.endswith(".cpp"):
+            generate_spec_file(os.path.join(root, file))
+
+exit()
+
 current_os = platform.system()
 print(f"Current OS: {current_os}")
 
