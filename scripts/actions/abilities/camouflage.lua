@@ -8,12 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.ranger.checkCamouflage(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    local duration = math.random(30, 300) * (1 + 0.01 * player:getMod(xi.mod.CAMOUFLAGE_DURATION))
-    player:addStatusEffect(xi.effect.CAMOUFLAGE, 1 , 0, math.floor(duration * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER))
+abilityObject.onUseAbility = function(player, target, ability, action)
+    return xi.job_utils.ranger.useCamouflage(player, target, ability, action)
 end
 
 return abilityObject

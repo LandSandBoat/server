@@ -8,12 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.ranger.checkSharpshot(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    local power = 40 + player:getMod(xi.mod.SHARPSHOT)
-    player:addStatusEffect(xi.effect.SHARPSHOT, power, 0, 60)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    return xi.job_utils.ranger.useSharpshot(player, target, ability, action)
 end
 
 return abilityObject
