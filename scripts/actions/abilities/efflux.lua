@@ -8,11 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.blue_mage.checkEfflux(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.EFFLUX, 16, 1, 60)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    xi.job_utils.blue_mage.useEfflux(player, target, ability, action)
 end
 
 return abilityObject

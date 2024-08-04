@@ -8,13 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.blue_mage.checkBurstAffinity(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.BURST_AFFINITY, 1, 0, 30)
-
-    return xi.effect.BURST_AFFINITY
+abilityObject.onUseAbility = function(player, target, ability, action)
+    xi.job_utils.blue_mage.useBurstAffinity(player, target, ability, action)
 end
 
 return abilityObject

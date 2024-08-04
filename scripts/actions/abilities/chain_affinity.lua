@@ -9,13 +9,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.blue_mage.checkChainAffinity(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.CHAIN_AFFINITY, 1, 0, 30)
-
-    return xi.effect.CHAIN_AFFINITY
+abilityObject.onUseAbility = function(player, target, ability, action)
+    xi.job_utils.blue_mage.useChainAffinity(player, target, ability, action)
 end
 
 return abilityObject
