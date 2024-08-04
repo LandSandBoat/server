@@ -1929,6 +1929,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         return;
     }
 
+    PSkill->setTargets(PAI->TargetFind->m_targets);
     PSkill->setTotalTargets(targets);
     PSkill->setPrimaryTargetID(PTarget->id);
     PSkill->setTP(state.GetSpentTP());

@@ -1836,10 +1836,10 @@ INSERT INTO `mob_skills` VALUES (1819,1294,'heat_barrier',0,7.0,2000,1000,1,0,0,
 INSERT INTO `mob_skills` VALUES (1820,1295,'vitriolic_shower',4,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1821,1283,'amplification',0,7.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1822,1284,'boiling_point',4,16.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1823,1285,'xenoglossia',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1823,1285,'xenoglossia',0,7.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1824,1286,'amorphic_spikes',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1825,1287,'amorphic_scythe',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1826,1288,'synergism',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1825,1287,'amorphic_scythe',4,10.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1826,1288,'synergism',1,15.0,2500,3000,1,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1827,1571,'metastasis',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1828,1308,'pyric_blast',4,15.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1829,1319,'pyric_bulwark',0,7.0,2000,1500,1,0,0,0,0,0,0);
