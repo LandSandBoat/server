@@ -19,22 +19,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local megaFlareQueue = mob:getLocalVar('MegaFlareQueue') - 1 -- decrement the amount of queued Megaflares.
-    mob:setLocalVar('MegaFlareQueue', megaFlareQueue)
+    -- Mob logic. TODO: Remove from here
+    mob:setLocalVar('MegaFlareQueue', mob:getLocalVar('MegaFlareQueue') - 1)
     mob:setLocalVar('FlareWait', 0) -- reset the variables for Megaflare.
     mob:setLocalVar('tauntShown', 0)
     mob:setMobAbilityEnabled(true) -- re-enable the other actions on success
     mob:setMagicCastingEnabled(true)
     mob:setAutoAttackEnabled(true)
+
     if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) == 0 then -- re-enable noturn
         mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
     end
 
-    local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 10, xi.element.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
-    return dmg
+    -- Damage calculation
+    local damage = mob:getWeaponDmg() * 10
+
+    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
+
+    return damage
 end
 
 return mobskillObject

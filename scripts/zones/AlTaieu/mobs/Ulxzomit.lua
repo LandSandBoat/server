@@ -2,43 +2,27 @@
 -- Area: Al'Taieu
 --  Mob: Ul'xzomit
 -----------------------------------
+mixins = { require('scripts/mixins/follow') }
+local ID = zones[xi.zone.ALTAIEU]
+-----------------------------------
 local entity = {}
 
-local followOptions = { forceRepathInterval = 1 }
+local leaders = {}
+for i = 0, 14 do
+    leaders[ID.mob.ULXZOMIT_OFFSET[1 + i * 3]] = 2
+end
+
+entity.onMobInitialize = function(mob)
+    xi.follow.assignLeaderMod(mob, leaders, 2)
+end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ROAM_COOL, 0)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 50)
 
-    local mobId = mob:getID()
-    local numFollowers = mob:getMobMod(xi.mobMod.LEADER)
-
-    if numFollowers == 0 then
-        -- Baby Ul'xzomit
+    -- Baby Ul'xzomit
+    if mob:getMobMod(xi.mobMod.LEADER) < 0 then
         mob:setMobFlags(1153)
-
-        for i = 1, 2 do
-            local leader = GetMobByID(mobId - i)
-
-            if leader and leader:getMobMod(xi.mobMod.LEADER) >= i then
-                mob:setLocalVar('leaderID', leader:getID())
-
-                if leader:isSpawned() then
-                    xi.follow.follow(mob, leader, followOptions)
-                end
-
-                return
-            end
-        end
-    else
-        -- Mother Ul'xzomit
-        for i = 1, numFollowers do
-            local follower = GetMobByID(mobId + i)
-
-            if follower and follower:isSpawned() then
-                xi.follow.follow(follower, mob, followOptions)
-            end
-        end
     end
 end
 
@@ -65,9 +49,6 @@ entity.onMobRoamAction = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if mob:getMobMod(xi.mobMod.LEADER) > 0 then
-        xi.follow.clearFollowers(mob)
-    end
 end
 
 return entity

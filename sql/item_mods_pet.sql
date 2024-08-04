@@ -173,6 +173,9 @@ INSERT INTO `item_mods_pet` VALUES (11619,368,25,1); -- Avatar - REGAIN: 25
 -- Ferine Earring
 INSERT INTO `item_mods_pet` VALUES (11711,25,3,0); -- All Pets - ACC: 3
 
+-- Mujin Obi
+INSERT INTO `item_mods_pet` VALUES (11776,23,10,1); -- Avatar - ATT: 10
+
 -- Cirque Earring
 INSERT INTO `item_mods_pet` VALUES (11720,23,2,3); -- Automaton - ATT: 2
 INSERT INTO `item_mods_pet` VALUES (11720,24,3,3); -- Automaton - RATT: 3

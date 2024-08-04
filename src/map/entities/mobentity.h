@@ -62,7 +62,8 @@ enum ROAMFLAG : uint16
     ROAMFLAG_AMBUSH   = 0x80,  // stays hidden until someone comes close (antlion)
     ROAMFLAG_SCRIPTED = 0x100, // calls lua method for roaming logic
     ROAMFLAG_IGNORE   = 0x200, // ignore all hate, except linking hate
-    ROAMFLAG_STEALTH  = 0x400  // stays name hidden and untargetable until someone comes close (chigoe)
+    ROAMFLAG_STEALTH  = 0x400, // stays name hidden and untargetable until someone comes close (chigoe)
+    ROAMFLAG_FOLLOW   = 0x800, // follows a player when sighted for a little while
 };
 
 enum MOBTYPE

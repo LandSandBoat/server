@@ -70,7 +70,7 @@ enum class LATENT : uint16
     JOB_MULTIPLE           = 38, // PARAM: 0: ODD, 2: EVEN, 3-X: DIVISOR
     JOB_MULTIPLE_AT_NIGHT  = 39, // PARAM: 0: ODD, 2: EVEN, 3-X: DIVISOR
     EQUIPPED_IN_SLOT       = 40, // When item is equipped in the specified slot (e.g. Dweomer Knife, Erlking's Sword, etc.) PARAM: slotID
-    // 41 free to use
+    DURING_WS              = 41, // During WS
     // 42 free to use
     WEAPON_DRAWN_HP_UNDER = 43, // PARAM: HP PERCENT
     NATION_CITIZEN        = 44, // Triggered by player being citizen of nation matching param: 0 San d'Oria, 1 Bastok, 2 Windurst

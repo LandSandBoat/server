@@ -70,7 +70,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         mission:getVar(player, 'Status') == 2 and
-                        player:getLocalVar('battlefieldWin') == 960
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.ANCIENT_VOWS
                     then
                         mission:complete(player)
                         player:setPos(694, -5.5, -619, 74, 107) -- South Gustaberg

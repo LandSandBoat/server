@@ -14,9 +14,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power    = 1500
-    local duration = 300
-
+    local power    = 3000
+    local duration = xi.mobskills.calculateDuration(mob:getTP(), 90, 120)
     skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.HASTE, power, 0, duration))
 
     return xi.effect.HASTE

@@ -367,6 +367,9 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
 
+    -- Check if the mob has a damage cap
+    dmg = target:checkDamageCap(dmg)
+
     return dmg
 end
 

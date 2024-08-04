@@ -21,7 +21,7 @@ g_mixins.weapon_break = function(weaponBreakMob)
             local animationSub = mob:getAnimationSub()
 
             -- break weapon
-            if animationSub ~= 1 then
+            if animationSub == 0 then
                 mob:setAnimationSub(1)
             end
         end

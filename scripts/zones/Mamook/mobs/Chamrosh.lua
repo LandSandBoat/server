@@ -66,8 +66,6 @@ entity.onMagicHit = function(caster, target, spell)
         target:setLocalVar('COPY_SPELL', spell:getID())
         target:setLocalVar('LAST_CAST', target:getBattleTime())
     end
-
-    return 1
 end
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -16,6 +16,13 @@ local krtID = zones[xi.zone.KING_RANPERRES_TOMB]
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.RANPERRES_FINAL_REST)
 
+local ranparresRestTable =
+{
+    krtID.mob.CORRUPTED_YORGOS,
+    krtID.mob.CORRUPTED_SOFFEIL,
+    krtID.mob.CORRUPTED_ULBRIG,
+}
+
 mission.reward =
 {
     rank = 7,
@@ -118,13 +125,8 @@ mission.sections =
 
                     if
                         missionStatus == 1 and
-                        not GetMobByID(krtID.mob.CORRUPTED_YORGOS):isSpawned() and
-                        not GetMobByID(krtID.mob.CORRUPTED_SOFFEIL):isSpawned() and
-                        not GetMobByID(krtID.mob.CORRUPTED_ULBRIG):isSpawned()
+                        npcUtil.popFromQM(player, npc, ranparresRestTable, { hide = 0, })
                     then
-                        SpawnMob(krtID.mob.CORRUPTED_YORGOS)
-                        SpawnMob(krtID.mob.CORRUPTED_SOFFEIL)
-                        SpawnMob(krtID.mob.CORRUPTED_ULBRIG)
                         return mission:messageSpecial(krtID.text.SENSE_SOMETHING_EVIL)
                     elseif
                         (missionStatus == 2 or missionStatus == 3) and
@@ -178,16 +180,16 @@ mission.sections =
                 end,
             },
 
-            -- TODO: This is another duplicate NPC in the database, separate these eventually
-            ['Tombstone'] =
+            ['Tombstone_Lower'] =
             {
                 onTrigger = function(player, npc)
                     if
-                        npc:getZPos() > 0 and
                         player:getMissionStatus(mission.areaId) == 3 and
                         not player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK)
                     then
                         return mission:progressEvent(8)
+                    elseif player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK) then
+                        return mission:messageSpecial(krtID.text.FINAL_RESTING_PLACE)
                     end
                 end,
             },

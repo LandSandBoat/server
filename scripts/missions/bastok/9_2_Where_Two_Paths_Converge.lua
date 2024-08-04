@@ -134,7 +134,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
-                        player:getLocalVar('battlefieldWin') == 161
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.WHERE_TWO_PATHS_CONVERGE
                     then
                         player:setMissionStatus(mission.areaId, 2)
                     end

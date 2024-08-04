@@ -13,7 +13,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local damage = 48 + pet:getMainLvl() * 8 + (pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)) * 1.5
 
     damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.EARTH, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.EARTH, petskill)
+    damage = xi.mobskills.mobAddBonuses(pet, target, damage, xi.element.EARTH, petskill)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, 1)
 
     summoner:setMP(0)

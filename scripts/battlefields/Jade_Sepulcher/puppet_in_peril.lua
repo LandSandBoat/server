@@ -8,7 +8,9 @@ local jadeSepulcherID = zones[xi.zone.JADE_SEPULCHER]
 local content = BattlefieldMission:new({
     zoneId                = xi.zone.JADE_SEPULCHER,
     battlefieldId         = xi.battlefield.id.PUPPET_IN_PERIL,
+    canLoseExp            = false,
     isMission             = true,
+    allowTrusts           = true,
     maxPlayers            = 6,
     levelCap              = 99,
     timeLimit             = utils.minutes(30),
@@ -18,6 +20,7 @@ local content = BattlefieldMission:new({
     exitNpcs              = { '_1v1', '_1v2', '_1v3' },
     missionArea           = xi.mission.log_id.TOAU,
     mission               = xi.mission.id.toau.PUPPET_IN_PERIL,
+    missionStatusArea     = xi.mission.log_id.TOAU,
     requiredMissionStatus = 1,
 })
 

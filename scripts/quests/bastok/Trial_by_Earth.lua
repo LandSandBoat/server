@@ -123,7 +123,7 @@ quest.sections =
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar('battlefieldWin') == 576 then
+                    if player:getLocalVar('battlefieldWin') == xi.battlefield.id.TRIAL_BY_EARTH then
                         npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_TREMORS)
                         player:addTitle(xi.title.HEIR_OF_THE_GREAT_EARTH)
                     end

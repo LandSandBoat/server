@@ -45152,6 +45152,10 @@ INSERT INTO `item_mods` VALUES (21694,355,60);  -- ADDS_WEAPONSKILL: 60
 -- TODO: Aftermath
 -- TODO: Ultimate Skillchain
 
+-- Nibiru Faussar
+INSERT INTO `item_mods` VALUES (21699,832,1);  -- AQUAVEIL_COUNT: 1
+-- TODO: non-AQUAVEIL MODS
+
 -- Blurred Claymore
 INSERT INTO `item_mods` VALUES (21700,25,20); -- ACC: 20
 
@@ -59267,6 +59271,10 @@ INSERT INTO `item_mods` VALUES (25643,68,33);   -- EVA: 33
 INSERT INTO `item_mods` VALUES (25643,170,8);   -- FASTCAST: 8
 INSERT INTO `item_mods` VALUES (25643,384,600); -- HASTE_GEAR: 600
 
+-- Chironic Hat
+INSERT INTO `item_mods` VALUES (25644,832,1);  -- AQUAVEIL_COUNT: 1
+-- TODO: non-AQUAVEIL MODS
+
 -- Crab Cap
 INSERT INTO `item_mods` VALUES (25652,1,1); -- DEF: 1
 
@@ -60510,6 +60518,10 @@ INSERT INTO `item_mods` VALUES (25823,31,48);   -- MEVA: 48
 INSERT INTO `item_mods` VALUES (25823,68,19);   -- EVA: 19
 INSERT INTO `item_mods` VALUES (25823,311,49);  -- MAGIC_DAMAGE: 49
 INSERT INTO `item_mods` VALUES (25823,384,400); -- HASTE_GEAR: 400
+
+-- Regal Cuffs
+INSERT INTO `item_mods` VALUES (25827,832,2);  -- AQUAVEIL_COUNT: 2
+-- TODO: non-AQUAVEIL MODS
 
 -- Fancy Trunks
 INSERT INTO `item_mods` VALUES (25838,1,2); -- DEF: 2

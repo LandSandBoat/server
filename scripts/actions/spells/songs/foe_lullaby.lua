@@ -8,6 +8,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:hasImmunity(xi.immunity.LIGHT_SLEEP) then
+        spell:setMsg(xi.msg.basic.MAGIC_COMPLETE_RESIST)
+        return
+    end
+
     local params     = {}
     params.diff      = nil
     params.attribute = xi.mod.CHR

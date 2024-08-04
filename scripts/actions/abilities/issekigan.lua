@@ -8,11 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.ninja.checkIssekigan(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(xi.effect.ISSEKIGAN, 25, 0, 60)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    xi.job_utils.ninja.useIssekigan(player, target, ability, action)
 end
 
 return abilityObject

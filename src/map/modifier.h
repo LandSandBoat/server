@@ -108,15 +108,14 @@ enum class Mod
 
     RATTP = 66, // % Ranged Attack
 
-    EVA             = 68,  // Evasion
-    RDEF            = 69,  // Ranged Defense
-    REVA            = 70,  // Ranged Evasion
-    MPHEAL          = 71,  // MP Recovered while healing
-    HPHEAL          = 72,  // HP Recovered while healing
-    STORETP         = 73,  // Increases the rate at which TP is gained
-    TACTICAL_PARRY  = 486, // Tactical Parry Tp Bonus
-    MAG_BURST_BONUS = 487, // Magic Burst Bonus Modifier (percent)
-    INHIBIT_TP      = 488, // Inhibits TP Gain (percent)
+    EVA            = 68,  // Evasion
+    RDEF           = 69,  // Ranged Defense
+    REVA           = 70,  // Ranged Evasion
+    MPHEAL         = 71,  // MP Recovered while healing
+    HPHEAL         = 72,  // HP Recovered while healing
+    STORETP        = 73,  // Increases the rate at which TP is gained
+    TACTICAL_PARRY = 486, // Tactical Parry Tp Bonus
+    INHIBIT_TP     = 488, // Inhibits TP Gain (percent)
 
     // Working Skills (weapon combat skills)
     // These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
@@ -189,18 +188,20 @@ enum class Mod
     FISHING_SKILL_GAIN    = 155, // food for fishing skill ups
 
     // Damage - 10000 base, 375 = 3.75%
-    DMG         = 160, // Damage Taken %
-    DMGPHYS     = 161, // Physical Damage Taken %
-    DMGPHYS_II  = 190, // Physical Damage Taken II % (Burtgang)
-    UDMGPHYS    = 387, // Uncapped Damage Multipliers
-    DMGBREATH   = 162, // Breath Damage Taken %
-    UDMGBREATH  = 388, // Used in sentinel, invincible, physical shield etc
-    DMGMAGIC    = 163, // Magic Damage Taken %
-    DMGMAGIC_II = 831, // Magic Damage Taken II % (Aegis)
-    UDMGMAGIC   = 389,
-    DMGRANGE    = 164, // Range Damage Taken %
-    UDMGRANGE   = 390,
-    DMG_AOE     = 158, // Damage Taken % when not main target of an AoE action. (Ex: Locus Mobs)
+    DMG                     = 160, // Damage Taken %
+    DMGPHYS                 = 161, // Physical Damage Taken %
+    DMGPHYS_II              = 190, // Physical Damage Taken II % (Burtgang)
+    UDMGPHYS                = 387, // Uncapped Damage Multipliers
+    DMGBREATH               = 162, // Breath Damage Taken %
+    UDMGBREATH              = 388, // Used in sentinel, invincible, physical shield etc
+    DMGMAGIC                = 163, // Magic Damage Taken %
+    DMGMAGIC_II             = 831, // Magic Damage Taken II % (Aegis)
+    UDMGMAGIC               = 389,
+    DMGRANGE                = 164, // Range Damage Taken %
+    UDMGRANGE               = 390,
+    DMG_AOE                 = 158, // Damage Taken % when not main target of an AoE action. (Ex: Locus Mobs)
+    RECEIVED_DAMAGE_CAP     = 221, // Caps the damage taken recieved by the attacker
+    RECEIVED_DAMAGE_VARIANT = 222, // The variance that you want the damage cap to changed by. Ex: If you want the damage to be from 90-100 instead of a flat 100 you can set this to 10. It will random the value between 90-100 if the damage is above 100.
 
     // Specific Damage Taken vs physical damage type
     // Value is stored as a percentage of damage reduction (to within 1000)
@@ -476,10 +477,13 @@ enum class Mod
     DESPERATE_BLOWS        = 906,  // Adds ability haste to Last Resort
     STALWART_SOUL          = 907,  // Reduces damage taken from Souleater
     DREAD_SPIKES_EFFECT    = 998,  // Percent increase to total HP drain for Dread Spikes
-    ENHANCES_BLOOD_WEAPON  = 1070, // Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
     DARK_MAGIC_CAST        = 1071, // Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
     DARK_MAGIC_DURATION    = 1072, // Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
+    ENHANCES_BLOOD_WEAPON  = 1070, // Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
     ENHANCES_DARK_SEAL     = 1073, // Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
+    ENHANCES_DIABOLIC_EYE  = 275,  // Diabolic Eye duration + "modifier-value" seconds per Diabolic Eye merit.
+    ENHANCES_NETHER_VOID   = 1083, // Enhances "Nether Void" effect (Increases the potency of the next Absorb or Drain Dark Magic by <value>%
+    ENHANCES_MUTED_SOUL    = 1084, // Enhances "Muted Soul" effect (Adds 3% Zanshin rate per MUTED_SOUL merit level)
 
     // Beastmaster
     TAME                = 304,  // Additional percent chance to charm
@@ -1011,16 +1015,15 @@ enum class Mod
     DAMAGE_LIMIT  = 1080, // Damage Limit increase, found on some traits. It's a flat value added to max pDIF (maxpDIF + DL/100) https://www.bg-wiki.com/ffxi/Damage_Limit%2B
     DAMAGE_LIMITP = 1081, // Damage Limit +% increase, found on some gear. It's a multiplier added after flat Damage Limit ((maxpDIF + DL/100)*(100 + DLP/100)/100) https://www.ffxiah.com/forum/topic/56649/physical-damage-limit/
 
+    MAGIC_BURST_BONUS_CAPPED   = 487, // Magic Burst Bonus I from gear, Ancient Magic Merits, Innin merits and Atmas. Cap at 40% bonus (1.4 multiplier)
+    MAGIC_BURST_BONUS_UNCAPPED = 274, // Magic Burst Bonus II from gear, JP Gifts, BLM JPs and Job traits. No known cap.
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs:
-    // 221 to 222
-    // 274 to 275
-    //
-    // SPARE = 1083 and onward
+    // SPARE IDs: 1085 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

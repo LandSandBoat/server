@@ -8,24 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
-    return 0, 0
+    xi.job_utils.ninja.checkMijinGakure(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    local dmg    = player:getHP() * 0.8 + player:getMainLvl() / 0.5
-    local resist = xi.mobskills.applyPlayerResistance(player, nil, target, player:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 0, xi.element.NONE)
-
-    -- Job Point Bonus (3% per Level)
-    dmg = dmg * (1 + (player:getJobPointLevel(xi.jp.MIJIN_GAKURE_EFFECT) * 0.03))
-    dmg = dmg * resist
-    dmg = utils.stoneskin(target, dmg)
-
-    target:takeDamage(dmg, player, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
-    player:setLocalVar('MijinGakure', 1)
-    player:setHP(0)
-
-    return dmg
+abilityObject.onUseAbility = function(player, target, ability, action)
+    xi.job_utils.ninja.useMijinGakure(player, target, ability, action)
 end
 
 return abilityObject

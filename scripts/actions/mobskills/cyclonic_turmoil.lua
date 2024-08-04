@@ -11,12 +11,14 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 2.8, xi.element.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    local damage = mob:getWeaponDmg() * 2.8
+
+    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+
     local dispel1 = target:dispelStatusEffect()
     local dispel2 = target:dispelStatusEffect()
-    local total = 0
+    local total   = 0
 
     if dispel1 ~= xi.effect.NONE then
         total = total + 1
@@ -26,12 +28,13 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         total = total + 1
     end
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
 
     if total == 0 then
-        return dmg
+        return damage
     else
         skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
+
         return total
     end
 end

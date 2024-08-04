@@ -384,7 +384,7 @@ void CZoneEntities::WeatherChange(WEATHER weather)
     }
 }
 
-void CZoneEntities::MusicChange(uint8 BlockID, uint8 MusicTrackID)
+void CZoneEntities::MusicChange(uint16 BlockID, uint16 MusicTrackID)
 {
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
     {
@@ -627,8 +627,17 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
 
             CMobController* PController = static_cast<CMobController*>(PCurrentMob->PAI->GetController());
 
-            bool validAggro = mobCheck > EMobDifficulty::TooWeak || PChar->isSitting() || PCurrentMob->getMobMod(MOBMOD_ALWAYS_AGGRO);
+            // Check if this mob follows targets and if so then it should not aggro
+            if (PCurrentMob->m_roamFlags & ROAMFLAG_FOLLOW)
+            {
+                if (PController->CanFollowTarget(PChar))
+                {
+                    PController->SetFollowTarget(PChar, FollowType::Roam);
+                }
+                continue;
+            }
 
+            bool validAggro = mobCheck > EMobDifficulty::TooWeak || PChar->isSitting() || PCurrentMob->getMobMod(MOBMOD_ALWAYS_AGGRO);
             if (validAggro && PController->CanAggroTarget(PChar))
             {
                 PCurrentMob->PAI->Engage(PChar->targid);

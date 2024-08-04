@@ -168,6 +168,25 @@ void CLatentEffectContainer::CheckLatentsTP()
 
 /************************************************************************
 *                                                                       *
+* Checks all latents that are occur during WS and activates them        *
+*                                                                       *
+ ************************************************************************/
+void CLatentEffectContainer::CheckLatentsWS(bool isDuringWs)
+{
+    ProcessLatentEffects([this, isDuringWs](CLatentEffect& latentEffect) {
+        switch (latentEffect.GetConditionsID())
+        {
+            case LATENT::DURING_WS:
+                return ProcessLatentEffect(latentEffect, isDuringWs);
+            default:
+                break;
+        }
+        return false;
+    });
+}
+
+/************************************************************************
+*                                                                       *
  * Checks all latents that are affected by MP and activates them if     *
  * the conditions are met.                                              *
 *                                                                       *
@@ -454,15 +473,15 @@ void CLatentEffectContainer::CheckLatentsPartyMembers(size_t members, size_t tru
                     auto inZone = 0;
                     for (size_t m = 0; m < members; ++m)
                     {
-                        auto* PMember = (CCharEntity*)m_POwner->PParty->members.at(m);
-                        if (PMember->getZone() == m_POwner->getZone())
+                        auto* PMember = dynamic_cast<CCharEntity*>(m_POwner->PParty->members.at(m));
+                        if (PMember != nullptr && PMember->getZone() == m_POwner->getZone())
                         {
                             inZone++;
                         }
                     }
 
-                    auto* PLeader = (CCharEntity*)m_POwner->PParty->GetLeader();
-                    if (m_POwner->getZone() == PLeader->getZone())
+                    auto* PLeader = dynamic_cast<CCharEntity*>(m_POwner->PParty->GetLeader());
+                    if (PLeader != nullptr && m_POwner->getZone() == PLeader->getZone())
                     {
                         inZone = inZone + static_cast<int>(trustCount);
                     }
@@ -686,7 +705,7 @@ void CLatentEffectContainer::ProcessLatentEffects(const std::function<bool(CLate
 
 // Processes a single CLatentEffect* and finds the expression to evaluate for
 // activation/deactivation and attempts to apply
-bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
+bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bool isDuringWs)
 {
     TracyZoneScoped;
     // Our default case un-finds our latent prevent us from toggling a latent we don't have programmed
@@ -788,9 +807,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         {
             size_t partyCount = 0;
             size_t trustCount = 0;
-            if (m_POwner->PParty != nullptr)
+            auto* PLeader = m_POwner->PParty != nullptr ? dynamic_cast<CCharEntity*>(m_POwner->PParty->GetLeader()) : nullptr;
+            if (PLeader)
             {
-                auto PLeader = (CCharEntity*)m_POwner->PParty->GetLeader();
                 trustCount = PLeader->PTrusts.size();
                 partyCount = m_POwner->PParty->members.size();
             }
@@ -801,7 +820,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         case LATENT::PARTY_MEMBERS_IN_ZONE:
         {
             auto inZone = 0;
-            if (m_POwner->PParty != nullptr)
+            if (m_POwner->PParty && dynamic_cast<CCharEntity*>(m_POwner->PParty->GetLeader()))
             {
                 for (auto* member : m_POwner->PParty->members)
                 {
@@ -810,7 +829,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                         ++inZone;
                     }
                 }
-                
+
                 auto PLeader = (CCharEntity*)m_POwner->PParty->GetLeader();
                 if (m_POwner->getZone() == PLeader->getZone())
                 {
@@ -867,7 +886,15 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                     }
                 }
 
-                for (auto* trust : static_cast<CCharEntity*>(m_POwner->PParty->GetLeader())->PTrusts)
+                auto leader = (CCharEntity*)m_POwner->PParty->GetLeader();
+
+                if (leader == nullptr)
+                {
+                    expression = false;
+                    break;
+                }
+
+                for (auto* trust : leader->PTrusts)
                 {
                     if (trust->GetMJob() == latentEffect.GetConditionsValue())
                     {
@@ -1214,6 +1241,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             break;
         case LATENT::EQUIPPED_IN_SLOT:
             expression = latentEffect.GetSlot() == latentEffect.GetConditionsValue();
+            break;
+        case LATENT::DURING_WS:
+            expression = isDuringWs;
             break;
         default:
             latentFound = false;

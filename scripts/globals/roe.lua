@@ -183,7 +183,7 @@ local function completeRecord(player, record)
     local rewards = recordEntry.reward
 
     if not player:getEminenceCompleted(record) and rewards['item'] then
-        if not npcUtil.giveItem(player, rewards['item']) then
+        if not npcUtil.giveItem(player, rewards['item'], { silent = true }) then
             player:messageBasic(xi.msg.basic.ROE_UNABLE_BONUS_ITEM)
             return false
         end
@@ -203,6 +203,24 @@ local function completeRecord(player, record)
         end
     end
 
+    if rewards['xp'] ~= nil and type(rewards['xp']) == 'number' then
+        player:addExp(rewards['xp'] * xi.settings.main.ROE_EXP_RATE)
+    end
+
+    if rewards['capacity'] ~= nil and type(rewards['capacity']) == 'number' then
+        player:addCapacityPoints(rewards['capacity'])
+    end
+
+    -- NOTE: To preserve retail order, messaging is here, but item is given if able at the beginning of this
+    -- function, since if it fails, it will need to bail out.
+    if rewards['item'] then
+        local itemQty   = type(rewards['item'][1]) == 'table' and rewards['item'][1][2] or 1
+        local itemId    = type(rewards['item'][1]) == 'table' and rewards['item'][1][1] or rewards['item'][1]
+        local messageId = itemQty > 1 and xi.msg.basic.ROE_BONUS_ITEM_PLURAL or xi.msg.basic.ROE_BONUS_ITEM
+
+        player:messageBasic(messageId, itemId, itemQty)
+    end
+
     if recordFlags['repeat'] then
         if recordFlags['timed'] then
             player:messageBasic(xi.msg.basic.ROE_TIMED_CLEAR)
@@ -213,14 +231,6 @@ local function completeRecord(player, record)
         player:setEminenceCompleted(record, true)
     else
         player:setEminenceCompleted(record)
-    end
-
-    if rewards['xp'] ~= nil and type(rewards['xp']) == 'number' then
-        player:addExp(rewards['xp'] * xi.settings.main.ROE_EXP_RATE)
-    end
-
-    if rewards['capacity'] ~= nil and type(rewards['capacity']) == 'number' then
-        player:addCapacityPoints(rewards['capacity'])
     end
 
     if

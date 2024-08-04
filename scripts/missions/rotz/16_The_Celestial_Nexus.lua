@@ -32,7 +32,7 @@ mission.sections =
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar('battlefieldWin') == 320 then
+                    if player:getLocalVar('battlefieldWin') == xi.battlefield.id.CELESTIAL_NEXUS then
                         mission:complete(player)
                     end
 

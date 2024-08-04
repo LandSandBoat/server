@@ -2,8 +2,6 @@
 -- Area: Sealions Den
 --   NM: Ultima
 -----------------------------------
-local oneToBeFeared = require('scripts/zones/Sealions_Den/bcnms/one_to_be_feared_helper')
------------------------------------
 local entity = {}
 
 local abilities = { 1259, 1260, 1269, 1270 }
@@ -77,7 +75,6 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    oneToBeFeared.handleUltimaDeath(mob, player, optParams)
 end
 
 return entity

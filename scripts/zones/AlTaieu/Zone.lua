@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: AlTaieu (33)
 -----------------------------------
-local ID = zones[xi.zone.ALTAIEU]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
@@ -23,13 +21,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-25, -1 , -620 , 33)
     end
 
-    if
-        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-        player:getCharVar('PromathiaStatus') == 0
-    then
-        cs = 167
-    end
-
     return cs
 end
 
@@ -40,11 +31,6 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 167 then
-        player:setCharVar('PromathiaStatus', 1)
-        player:delKeyItem(xi.ki.MYSTERIOUS_AMULET_PRISHE)
-        player:messageSpecial(ID.text.RETURN_AMULET_TO_PRISHE, xi.ki.MYSTERIOUS_AMULET)
-    end
 end
 
 zoneObject.afterZoneIn = function(player)
