@@ -27,6 +27,7 @@
 #include "blue_spell.h"
 #include "items/item_weapon.h"
 #include "map.h"
+#include "mob_spell_list.h"
 #include "spell.h"
 #include "status_effect_container.h"
 #include "utils/blueutils.h"
@@ -696,7 +697,7 @@ namespace spell
                 }
 
                 // ensure trust level is appropriate+
-                if (PCaster->objtype == TYPE_TRUST && PCaster->GetMLevel() < JobMLVL && PCaster->GetSLevel() < JobSLVL)
+                if (PCaster->objtype == TYPE_TRUST && PCaster->GetMLevel() < static_cast<CMobEntity*>(PCaster)->m_SpellListContainer->GetSpellMinLevel(spell->getID()))
                 {
                     return false;
                 }
