@@ -65,7 +65,7 @@ const std::vector<std::pair<uint16, uint8>> roeCapacityBonusRecords = {
 
 namespace charutils
 {
-    void LoadExpTable();
+    void LoadExpTables();
     auto LoadChar(uint32 charId) -> CCharEntity*;
     void LoadSpells(CCharEntity* PChar);
     void LoadInventory(CCharEntity* PChar);
@@ -84,6 +84,8 @@ namespace charutils
 
     uint32 GetBaseExp(uint8 charlvl, uint8 moblvl);
     uint32 GetExpNEXTLevel(uint8 charlvl);
+
+    void ApplyExpChainBonuses(uint8 mLvl, uint16& chainNumber, uint32& chainTime, float& exp, EMobDifficulty mobCheck, bool& chainactive);
 
     void DelExperiencePoints(CCharEntity* PChar, float retainpct, uint16 forcedXpLoss);
     void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob);

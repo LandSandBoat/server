@@ -252,7 +252,7 @@ int32 do_init(int32 argc, char** argv)
     automaton::LoadAutomatonAbilities();
 
     guildutils::Initialize();
-    charutils::LoadExpTable();
+    charutils::LoadExpTables();
     traits::LoadTraitsList();
     effects::LoadEffectsParameters();
     battleutils::LoadSkillTable();
