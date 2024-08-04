@@ -687,7 +687,7 @@ namespace spell
             uint8 JobSLVL      = spell->getJob(PCaster->GetSJob());
             uint8 requirements = spell->getRequirements();
 
-            if (PCaster->objtype == TYPE_MOB || (PCaster->objtype == TYPE_PET && static_cast<CPetEntity*>(PCaster)->getPetType() == PET_TYPE::AUTOMATON) ||
+            if (PCaster->objtype == TYPE_MOB || (PCaster->objtype == TYPE_PET && static_cast<CPetEntity*>(PCaster)->getPetType() != PET_TYPE::ADVENTURING_FELLOW) ||
                 PCaster->objtype == TYPE_TRUST)
             {
                 // cant cast cause im hidden or untargetable
@@ -696,8 +696,9 @@ namespace spell
                     return false;
                 }
 
-                // ensure trust level is appropriate+
-                if (PCaster->objtype == TYPE_TRUST && PCaster->GetMLevel() < static_cast<CMobEntity*>(PCaster)->m_SpellListContainer->GetSpellMinLevel(spell->getID()))
+                // Ensure pet or trust is level appropriate
+                if (((PCaster->objtype == TYPE_PET && static_cast<CPetEntity*>(PCaster)->getPetType() != PET_TYPE::AUTOMATON) || PCaster->objtype == TYPE_TRUST) &&
+                    PCaster->GetMLevel() < static_cast<CMobEntity*>(PCaster)->m_SpellListContainer->GetSpellMinLevel(spell->getID()))
                 {
                     return false;
                 }
