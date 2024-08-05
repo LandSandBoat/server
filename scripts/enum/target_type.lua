@@ -4,6 +4,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class targetType
 xi.targetType =
 {
     NONE                    = 0x00,

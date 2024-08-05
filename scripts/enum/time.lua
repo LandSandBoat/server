@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class time
 xi.time =
 {
     NONE        = 0,

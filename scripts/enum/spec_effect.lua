@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class specEffect
 xi.specEffect =
 {
     NONE           = 0x00,

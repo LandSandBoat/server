@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class objType
 xi.objType =
 {
     PC     = 0x01,

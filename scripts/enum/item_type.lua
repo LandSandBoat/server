@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class itemType
 xi.itemType =
 {
     BASIC       = 0x00,

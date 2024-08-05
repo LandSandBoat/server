@@ -69,6 +69,7 @@ local meritCategory =
     -- COUNT = 0x0D80,
 }
 
+---@class merit
 xi.merit =
 {
     -- HP

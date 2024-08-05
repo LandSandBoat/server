@@ -5,6 +5,7 @@ xi.magic = xi.magic or {}
 -- Spell flag bits
 -----------------------------------
 
+---@class spellFlag
 xi.magic.spellFlag =
 {
     NONE           = 0x00,
@@ -17,6 +18,7 @@ xi.magic.spellFlag =
 -- Spell AOE IDs
 -----------------------------------
 
+---@class aoe
 xi.magic.aoe =
 {
     NONE        = 0,
@@ -32,6 +34,7 @@ xi.magic.aoe =
 -- Spell Groups
 -----------------------------------
 
+---@class spellGroup
 xi.magic.spellGroup =
 {
     NONE      = 0,
@@ -49,6 +52,7 @@ xi.magic.spellGroup =
 -- Spell Families
 -----------------------------------
 
+---@class spellFamily
 xi.magic.spellFamily =
 {
     NONE               = 0,
@@ -214,6 +218,7 @@ xi.magic.spellFamily =
 -- Spell IDs
 -----------------------------------
 
+---@class spell
 xi.magic.spell =
 {
     CURE                  =    1,

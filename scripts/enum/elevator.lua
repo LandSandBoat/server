@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class elevator
 xi.elevator =
 {
     TIMED_AUTOMATIC           = 0,

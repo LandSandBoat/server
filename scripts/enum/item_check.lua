@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class itemCheck
 xi.itemCheck =
 {
     NONE    = 0,

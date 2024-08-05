@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class jobSpecialAbility
 xi.jobSpecialAbility =
 {
     MIGHTY_STRIKES      = 688,

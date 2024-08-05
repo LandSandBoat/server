@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class day
 xi.day =
 {
     FIRESDAY     = 0,

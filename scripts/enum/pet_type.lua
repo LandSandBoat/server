@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class petType
 xi.petType =
 {
     AVATAR             = 0,

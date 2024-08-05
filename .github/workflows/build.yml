@@ -181,6 +181,34 @@ jobs:
         fi
         exit 0
 
+  Linux_LuaLanguageServer:
+    needs: Sanity_Checks
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Or else we don't get full blame information
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
+        pip install -r tools/requirements.txt
+    - name: Run Lua Language Server
+      run: |
+        python3 tools/ci/lua_lang_server.py
+    - name: Upload Lua Language Server Output
+      if: hashFiles('lua_lang_errors.txt') != ''
+      uses: actions/upload-artifact@v4
+      with:
+        name: lua_lang_errors
+        path: lua_lang_errors.txt
+    # - name: Check Output
+    #   run: |
+    #     if [ -f lua_lang_errors.txt ]; then
+    #       cat lua_lang_errors.txt
+    #       exit 1
+    #     fi
+
   Linux_Clang15_64bit:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04

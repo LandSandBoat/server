@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class alliedNation
 xi.alliedNation =
 {
     NONE     = 0,

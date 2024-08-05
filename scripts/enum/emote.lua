@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class emote
 xi.emote =
 {
     POINT      = 0,

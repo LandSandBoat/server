@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class questLog
 xi.questLog =
 {
     SANDORIA    =  0,

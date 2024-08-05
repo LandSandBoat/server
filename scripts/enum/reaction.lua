@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class reaction
 xi.reaction =
 {
     NONE     = 0x00,

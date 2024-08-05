@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class petId
 xi.petId =
 {
     --  Summoner

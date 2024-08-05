@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class attackType
 xi.attackType =
 {
     NONE     = 0,

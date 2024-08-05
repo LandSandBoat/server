@@ -10,6 +10,7 @@ xi = xi or {}
 --
 -- DO NOT USE THIS FOR CUSTOM THINGS, IT WILL GET CLOBBERED BY UPSTREAM DEVS.
 
+---@class uniqueEvent
 xi.uniqueEvent =
 {
     EKOKOKO_INTRODUCTION = 0,

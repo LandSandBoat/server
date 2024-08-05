@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class zone
 xi.zone =
 {
     UNKNOWN                         = 0,
