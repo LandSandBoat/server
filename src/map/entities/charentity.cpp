@@ -1144,70 +1144,69 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
                 StatusEffectContainer->DelStatusEffectSilent(EFFECT_CHAIN_AFFINITY);
             }
 
-            if (actionTarget.param > 0 &&
+            // Immanence will create or extend a skillchain for elemental spells
+            if (actionTarget.param >= 0 &&
                 PSpell->dealsDamage() &&
                 PSpell->getSpellGroup() == SPELLGROUP_BLACK &&
                 (StatusEffectContainer->HasStatusEffect(EFFECT_IMMANENCE)))
             {
-                SUBEFFECT effect = SUBEFFECT_NONE;
+                auto      immanenceApplies = true;
+                auto      isHelix          = false;
+                SUBEFFECT effect           = SUBEFFECT_NONE;
                 switch (PSpell->getSpellFamily())
                 {
-                    case SPELLFAMILY_STONE:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 4, 0, 0);
-                        break;
                     case SPELLFAMILY_GEOHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 4, 0, 0);
-                        break;
-                    case SPELLFAMILY_WATER:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 5, 0, 0);
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_STONE:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_SCISSION, 0, 0);
                         break;
                     case SPELLFAMILY_HYDROHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 5, 0, 0);
-                        break;
-                    case SPELLFAMILY_AERO:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 6, 0, 0);
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_WATER:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_REVERBERATION, 0, 0);
                         break;
                     case SPELLFAMILY_ANEMOHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 6, 0, 0);
-                        break;
-                    case SPELLFAMILY_FIRE:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 3, 0, 0);
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_AERO:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_DETONATION, 0, 0);
                         break;
                     case SPELLFAMILY_PYROHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 3, 0, 0);
-                        break;
-                    case SPELLFAMILY_BLIZZARD:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 7, 0, 0);
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_FIRE:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_LIQUEFACTION, 0, 0);
                         break;
                     case SPELLFAMILY_CRYOHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 7, 0, 0);
-                        break;
-                    case SPELLFAMILY_THUNDER:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 8, 0, 0);
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_BLIZZARD:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_INDURATION, 0, 0);
                         break;
                     case SPELLFAMILY_IONOHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 8, 0, 0);
-                        break;
-                    case SPELLFAMILY_LUMINOHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 1, 0, 0);
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_THUNDER:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_IMPACTION, 0, 0);
                         break;
                     case SPELLFAMILY_NOCTOHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 2, 0, 0);
+                        isHelix = true;
+                        effect  = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_COMPRESSION, 0, 0);
+                        break;
+                    case SPELLFAMILY_LUMINOHELIX:
+                        isHelix = true;
+                        effect  = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_TRANSFIXION, 0, 0);
                         break;
                     default:
+                        immanenceApplies = false;
                         break;
                 }
 
-                if (PSpell->getSpellFamily() >= SPELLFAMILY_FIRE &&
-                    PSpell->getSpellFamily() <= SPELLFAMILY_WATER)
+                if (immanenceApplies)
                 {
-                    StatusEffectContainer->DelStatusEffectSilent(EFFECT_IMMANENCE);
-                }
-
-                if (PSpell->getSpellFamily() >= SPELLFAMILY_GEOHELIX &&
-                    PSpell->getSpellFamily() <= SPELLFAMILY_LUMINOHELIX)
-                {
-                    StatusEffectContainer->DelStatusEffectSilent(EFFECT_IMMANENCE);
+                    StatusEffectContainer->DelStatusEffect(EFFECT_IMMANENCE);
                 }
 
                 if (effect != SUBEFFECT_NONE)
@@ -1225,6 +1224,13 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
                         actionTarget.addEffectMessage = 287 + effect;
                     }
                     actionTarget.additionalEffect = effect;
+
+                    // Closing a skillchain with an immanence Helix will make the magic burst window longer
+                    auto scEffect = PTarget->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
+                    if (isHelix && scEffect)
+                    {
+                        scEffect->SetDuration(scEffect->GetDuration() + 2000);
+                    }
                 }
             }
         }
