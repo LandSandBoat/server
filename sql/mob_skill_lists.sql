@@ -694,11 +694,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1752); -- gusting_gouge
 INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1753); -- hysteric_barrage
 INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1754); -- dukkeripen_heal
 INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1755); -- dukkeripen_shadow
--- INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1756); -- dukkeripen
--- INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1757); -- dukkeripen
+INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1756); -- dukkeripen_para
+INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1757); -- dukkeripen_heal
 INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1758); -- tail_slap
 INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1759); -- hypnotic_sway
--- INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1761); -- arrow_deluge
+INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1761); -- arrow_deluge
 -- INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1809); -- pw_shadow_thrust
 -- INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1811); -- ?
 -- INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1812); -- pw_pinning_shot
@@ -767,6 +767,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Marid',180,1707);
 INSERT INTO `mob_skill_lists` VALUES ('MemoryReceptacle',181,542);
 INSERT INTO `mob_skill_lists` VALUES ('Merrow',182,1765); -- Gusting Gouge
 INSERT INTO `mob_skill_lists` VALUES ('Merrow',182,1766); -- Hysteric Barrage
+INSERT INTO `mob_skill_lists` VALUES ('Merrow',182,1767); -- Dukkeripen Heal
 INSERT INTO `mob_skill_lists` VALUES ('Merrow',182,1768); -- Dukkeripen Shadows
 INSERT INTO `mob_skill_lists` VALUES ('Merrow',182,1769); -- Dukkeripen Paralyze
 INSERT INTO `mob_skill_lists` VALUES ('Merrow',182,1770); -- Dukkeripen Heal
