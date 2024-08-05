@@ -84,14 +84,14 @@ def generate_spec_file(file):
                         f"Warning: {function_name} is defined but not registered in {file}"
                     )
 
-
-# Find all files ending in *.cpp in the lua bindings directory
-for root, dirs, files in os.walk(lua_bindings_cpp_path):
-    for file in files:
-        if file.endswith(".cpp"):
-            generate_spec_file(os.path.join(root, file))
-
-exit()
+# TODO:
+# # Find all files ending in *.cpp in the lua bindings directory
+# for root, dirs, files in os.walk(lua_bindings_cpp_path):
+#     for file in files:
+#         if file.endswith(".cpp"):
+#             generate_spec_file(os.path.join(root, file))
+#
+# exit()
 
 current_os = platform.system()
 print(f"Current OS: {current_os}")
