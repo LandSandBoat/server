@@ -43,7 +43,7 @@ xi.latent =
     JOB_MULTIPLE_AT_NIGHT    = 39, -- PARAM: 0: ODD, 2: EVEN, 3-99: DIVISOR
     EQUIPPED_IN_SLOT         = 40, -- When item is equipped in the specified slot (e.g. Dweomer Knife, Erlking's Sword, etc.) PARAM: slotID
     DURING_WS                = 41, -- During Weaponskill
-    -- 42 free to use
+    WEATHER_CONDITION        = 42, -- See weather.lua for xi.weather enum
     WEAPON_DRAWN_HP_UNDER    = 43, -- PARAM: HP PERCENT
     NATION_CITIZEN           = 44, -- Triggered by player being citizen of nation matching param: 0 San d'Oria, 1 Bastok, 2 Windurst
     MP_UNDER_VISIBLE_GEAR    = 45, -- mp less than or equal to %, calculated using MP bonuses from visible gear only
