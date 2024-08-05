@@ -1096,7 +1096,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Wamoura',253,1952);
 INSERT INTO `mob_skill_lists` VALUES ('Wamoura',253,1953);
 INSERT INTO `mob_skill_lists` VALUES ('Wamoura',253,1954);
 INSERT INTO `mob_skill_lists` VALUES ('Wamoura',253,1955);
--- INSERT INTO `mob_skill_lists` VALUES ('Wamoura',253,1956);
 INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_strech',254,1815);
 INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_strech',254,1816);
 INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_strech',254,1817);
