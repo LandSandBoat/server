@@ -3874,6 +3874,23 @@ INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,650); -- thornsong
 INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,651); -- lodesong
 INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,1792); -- nullsong
 
+INSERT INTO `mob_skill_lists` VALUES ('Fairy_Ring_Attack',2008,1620); -- mephitic_spore
+
+INSERT INTO `mob_skill_lists` VALUES ('Fairy_Ring_TP',2009,310);  -- queasyshroom
+INSERT INTO `mob_skill_lists` VALUES ('Fairy_Ring_TP',2009,311);  -- numbshroom
+INSERT INTO `mob_skill_lists` VALUES ('Fairy_Ring_TP',2009,314);  -- silence Gas
+INSERT INTO `mob_skill_lists` VALUES ('Fairy_Ring_TP',2009,315);  -- dark Spore
+INSERT INTO `mob_skill_lists` VALUES ('Fairy_Ring_TP',2009,1621); -- frogkick
+
+INSERT INTO `mob_skill_lists` VALUES ('Cirrate_Christelle',2010,1605); -- miasmic_breath
+INSERT INTO `mob_skill_lists` VALUES ('Cirrate_Christelle',2010,1607); -- fragrant_breath
+INSERT INTO `mob_skill_lists` VALUES ('Cirrate_Christelle',2010,1609); -- putrid_breath
+INSERT INTO `mob_skill_lists` VALUES ('Cirrate_Christelle',2010,1611); -- vampiric_lash
+
+INSERT INTO `mob_skill_lists` VALUE ('Nantina',2011,1617); -- blow
+
+INSERT INTO `mob_skill_lists` VALUE ('Stcemqestcint',2012,1612); -- gouging_branch
+
 -- Next available ID: 2008
 
 -- ------------------------------------------------------------
