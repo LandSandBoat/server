@@ -198,7 +198,7 @@ local csReq = -- add checks to this table
         end,
 
         [3] = function(player)
-            return player:hasCompletedQuest(xi.questLog.ZILART, xi.quest.id.outlands.DIVINE_MIGHT)
+            return player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
         end,
 
         [4] = function(player)

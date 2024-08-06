@@ -749,7 +749,7 @@ xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option, npc)
     end
 end
 
-xi.magian.deliveryCrateOnEventFinish = function(player, csid, option)
+xi.magian.deliveryCrateOnEventFinish = function(player, csid, option, npc)
     local optionMod     = bit.band(option, 0xFF)
     local trialId       = bit.rshift(option, 8)
     local tradedItemId  = player:getLocalVar('tradedItemId')

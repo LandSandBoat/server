@@ -84,7 +84,7 @@ local function getWaitRange(turbanType, trade)
         end
     end
 
-    return nil
+    return { 0, 0 }
 end
 
 local function getNumUnlockedHeads(player)

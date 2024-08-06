@@ -180,7 +180,7 @@ local function getBattutaSpikesType(type)
         [xi.effect.TELLUS]   = xi.subEffect.CLOD_SPIKES,
         [xi.effect.SULPOR]   = xi.subEffect.SHOCK_SPIKES,
         [xi.effect.UNDA]     = xi.subEffect.DELUGE_SPIKES,
-        [xi.effect.LUX]      = xi.subEffect.REPSIRAL,
+        [xi.effect.LUX]      = xi.subEffect.REPRISAL,
         [xi.effect.TENEBRAE] = xi.subEffect.DEATH_SPIKES,
     }
 
@@ -695,7 +695,7 @@ local function addPflugResistType(type, effect, power)
         [xi.effect.FLABRA]   = { xi.mod.PETRIFYRES, xi.mod.SLOWRES },
         [xi.effect.TELLUS]   = { xi.mod.STUNRES },
         [xi.effect.SULPOR]   = { xi.mod.POISONRES },
-        [xi.effect.UNDA]     = { xi.mod.AMNESIARES, xi.mod.PLAGUERES },
+        [xi.effect.UNDA]     = { xi.mod.AMNESIARES, xi.mod.VIRUSRES },
         [xi.effect.LUX]      = { xi.mod.SLEEPRES, xi.mod.BLINDRES, xi.mod.CURSERES },
         [xi.effect.TENEBRAE] = { xi.mod.CHARMRES },
     }

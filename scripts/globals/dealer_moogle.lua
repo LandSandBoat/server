@@ -275,21 +275,21 @@ local itemList =
     [10] =
     {
         { xi.item.VERETHRAGNA_90,  xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTCINDER, 60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
-        { xi.item.TWASHTAR_90,     xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTDROSS,  60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
+        { xi.item.TWASHTAR_90,     xi.item.DENSE_CLUSTER, { xi.item.CLUMP_OF_RIFTDROSS,  60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
         { xi.item.ALMACE_90,       xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTCINDER, 60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
-        { xi.item.CALADBOLG_90,    xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTDROSS,  60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
+        { xi.item.CALADBOLG_90,    xi.item.DENSE_CLUSTER, { xi.item.CLUMP_OF_RIFTDROSS,  60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
         { xi.item.FARSHA_90,       xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTCINDER, 60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
-        { xi.item.UKONVASARA_90,   xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTDROSS,  60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
+        { xi.item.UKONVASARA_90,   xi.item.DENSE_CLUSTER, { xi.item.CLUMP_OF_RIFTDROSS,  60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
         { xi.item.REDEMPTION_90,   xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTCINDER, 60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
         { xi.item.RHONGOMIANT_90,  xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTCINDER, 60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
-        { xi.item.KANNAGI_90,      xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTDROSS,  60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
+        { xi.item.KANNAGI_90,      xi.item.DENSE_CLUSTER, { xi.item.CLUMP_OF_RIFTDROSS,  60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
         { xi.item.MASAMUNE_90,     xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTCINDER, 60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
-        { xi.item.GAMBANTEINN_90,  xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTDROSS,  60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
-        { xi.item.HVERGELMIR_90,   xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTDROSS,  60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
+        { xi.item.GAMBANTEINN_90,  xi.item.DENSE_CLUSTER, { xi.item.CLUMP_OF_RIFTDROSS,  60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
+        { xi.item.HVERGELMIR_90,   xi.item.DENSE_CLUSTER, { xi.item.CLUMP_OF_RIFTDROSS,  60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
         { xi.item.GANDIVA_90,      xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTCINDER, 60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
-        { xi.item.ARMAGEDDON_90,   xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTDROSS,  60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
+        { xi.item.ARMAGEDDON_90,   xi.item.DENSE_CLUSTER, { xi.item.CLUMP_OF_RIFTDROSS,  60 }, { xi.item.RIFTBORN_BOULDER, 300 } },
         { xi.item.DAURDABLA_90,    xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTCINDER, 60 },                                    },
-        { xi.item.OCHAIN_90,       xi.item.DENSE_CLUSTER, { xi.item.PINCH_OF_RIFTDROSS,  60 },                                    },
+        { xi.item.OCHAIN_90,       xi.item.DENSE_CLUSTER, { xi.item.CLUMP_OF_RIFTDROSS,  60 },                                    },
     },
 
     -- Kupon A-E+2: Empyrean Armor +2 (MOG_KUPON_A_E2 = 3441)
@@ -715,7 +715,7 @@ local itemList =
         xi.item.KAGGENS_CUTICLE,
         xi.item.AKVANS_PENNON,
         xi.item.SUIT_OF_HAHAVAS_MAIL,
-        xi.item.PILS_TUILLIE,
+        xi.item.PILS_TUILLE,
         xi.item.CELAENOS_CLOTH,
     },
 
@@ -3379,7 +3379,7 @@ local debugInfo = function(player, item, list, option, altIDs, idx)
         if keyitem == 0 then
             player:messageSpecial(ID.text.ITEM_OBTAINED, item)
         else
-            player:messageSpecial(xi.msg.basic.KEYITEM_OBTAINED, item)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, item)
         end
     end
 
