@@ -270,7 +270,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             -- Does not stack with or replace other shadows
             if
                 attacker:hasStatusEffect(xi.effect.BLINK) or
-                attacker:hasStatusEffect(xi.effect.UTSUSEMI)
+                attacker:hasStatusEffect(xi.effect.COPY_IMAGE)
             then
                 return 0, 0, 0
             else
