@@ -2812,7 +2812,7 @@ namespace battleutils
 
             critHitRate += GetDexCritBonus(PAttacker, PDefender);
             critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
-            critHitRate += PDefender->getMod(Mod::ENEMYCRITRATE);
+            critHitRate -= PDefender->getMod(Mod::CRITICAL_HIT_EVASION); // Similar to merits. However, it can be possitive or negative. When mod is negative, it raises crit-hit-rate.
 
             // need to check for mods that only impact attacks with a specific weapon (like Senjuinrikio)
             if (auto* player = dynamic_cast<CCharEntity*>(PAttacker))
@@ -2903,7 +2903,7 @@ namespace battleutils
 
         critHitRate += GetAGICritBonus(PAttacker, PDefender);
         critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
-        critHitRate += PDefender->getMod(Mod::ENEMYCRITRATE);
+        critHitRate -= PDefender->getMod(Mod::CRITICAL_HIT_EVASION); // Similar to merits. However, it can be possitive or negative. When mod is negative, it raises crit-hit-rate.
         critHitRate = std::clamp(critHitRate, 0, 100);
 
         return (uint8)critHitRate;
