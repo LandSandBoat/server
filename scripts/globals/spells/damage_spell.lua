@@ -617,7 +617,7 @@ xi.spells.damage.calculateDivineSealMultiplier = function(caster, skillType)
 
     if
         caster:hasStatusEffect(xi.effect.DIVINE_SEAL) and
-        skillType == xi.skill.HEALING
+        skillType == xi.skill.HEALING_MAGIC
     then
         divineSealMultiplier = 2
         caster:delStatusEffect(xi.effect.DIVINE_SEAL)
