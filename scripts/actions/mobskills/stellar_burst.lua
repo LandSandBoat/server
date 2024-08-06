@@ -16,7 +16,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.NONE)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 30)
-    mob:resetEnmity(target)
+
+    if not target:isTrust() then
+        mob:resetEnmity(target)
+    end
 
     return damage
 end

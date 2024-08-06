@@ -67,6 +67,8 @@ xi.mobSkill =
 
     SHEEP_SONG_3      = 3433,
 
+    LIGHT_BLADE       = 3471,
+
     FOOT_KICK_3       = 3840,
     DUST_CLOUD_3      = 3841,
     WHIRL_CLAWS_3     = 3842,
