@@ -10,39 +10,12 @@ local ID = zones[xi.zone.WINDURST_WATERS]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local turmoil = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
-    local count = trade:getItemCount()
-
-    if turmoil == xi.questStatus.QUEST_ACCEPTED then
-        if
-            count == 3 and
-            trade:getGil() == 0 and
-            trade:hasItemQty(xi.item.STARMITE_SHELL, 3)
-        then
-            player:startEvent(791)
-        else
-            player:startEvent(786, 4500, xi.ki.RHINOSTERY_CERTIFICATE, xi.item.STARMITE_SHELL) -- Reminder of needed items
-        end
-    elseif turmoil == xi.questStatus.QUEST_COMPLETED then
-        if
-            count == 3 and
-            trade:getGil() == 0 and
-            trade:hasItemQty(xi.item.STARMITE_SHELL, 3)
-        then
-            player:startEvent(791)
-        else
-            player:startEvent(795, 4500, 0, xi.item.STARMITE_SHELL) -- Reminder of needed items for repeated quest
-        end
-    end
 end
 
 entity.onTrigger = function(player, npc)
-    local pfame = player:getFameLevel(xi.fameArea.WINDURST)
-    local turmoil = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
     local needToZone = player:needToZone()
     local sayFlowers = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     local flowerProgress = player:getCharVar('FLOWER_PROGRESS')
-    local blueRibbonBlues = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
 
     if
         (sayFlowers == xi.questStatus.QUEST_ACCEPTED or sayFlowers == xi.questStatus.QUEST_COMPLETED) and
@@ -55,19 +28,6 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(516, 0, 0, 0, 0, 950)
         end
-
-    -- Begin Toraimarai Turmoil Section
-    elseif
-        blueRibbonBlues == xi.questStatus.QUEST_COMPLETED and
-        turmoil == xi.questStatus.QUEST_AVAILABLE and
-        pfame >= 6 and
-        not needToZone
-    then
-        player:startEvent(785, 4500, xi.ki.RHINOSTERY_CERTIFICATE, xi.item.STARMITE_SHELL)
-    elseif turmoil == xi.questStatus.QUEST_ACCEPTED then
-        player:startEvent(786, 4500, xi.ki.RHINOSTERY_CERTIFICATE, xi.item.STARMITE_SHELL) -- Reminder of needed items
-    elseif turmoil == xi.questStatus.QUEST_COMPLETED then
-        player:startEvent(795, 4500, 0, xi.item.STARMITE_SHELL) -- Allows player to initiate repeat of Toraimarai Turmoil
     end
 end
 
@@ -85,24 +45,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         [5] = { itemid = 958, gil = 100 }  -- Marguerite
     }
 
-    -- Check Missions first (priority?)
-    local turmoil = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
-
-    if csid == 785 and option == 1 then -- Adds Toraimarai turmoil
-        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RHINOSTERY_CERTIFICATE)
-        player:addKeyItem(xi.ki.RHINOSTERY_CERTIFICATE) -- Rhinostery Certificate
-    elseif csid == 791 and turmoil == xi.questStatus.QUEST_ACCEPTED then -- Completes Toraimarai turmoil - first time
-        npcUtil.giveCurrency(player, 'gil', 4500)
-        player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
-        player:addFame(xi.fameArea.WINDURST, 100)
-        player:addTitle(xi.title.CERTIFIED_RHINOSTERY_VENTURER)
-        player:tradeComplete()
-    elseif csid == 791 and turmoil == 2 then -- Completes Toraimarai turmoil - repeats
-        npcUtil.giveCurrency(player, 'gil', 4500)
-        player:addFame(xi.fameArea.WINDURST, 50)
-        player:tradeComplete()
-    elseif csid == 516 then
+    if csid == 516 then
         if option < 7 then
             local choice = flowerList[option]
             if choice and player:getGil() >= choice.gil then
