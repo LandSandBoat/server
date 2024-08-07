@@ -12,8 +12,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local baseHeal = 500
-    local statusHeal = 300
     local effectCount = 0
     local dispel = mob:eraseStatusEffect()
 
@@ -24,7 +22,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     skill:setMsg(xi.msg.basic.SELF_HEAL)
-    return xi.mobskills.mobHealMove(mob, statusHeal * effectCount + baseHeal)
+    return xi.mobskills.mobHealMove(mob, (699 + (mob:getMainLvl() - 70) * 10) * effectCount)
 end
 
 return mobskillObject
