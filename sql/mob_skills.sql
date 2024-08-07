@@ -3477,14 +3477,14 @@ INSERT INTO `mob_skills` VALUES (3460,204,'',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3463,3207,'#1671',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3464,3208,'#1672',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3465,3209,'#1673',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3466,2472,'paralyzing_microtube',0,7.0,2000,1500,4,0,0,0,7,5,0);
+INSERT INTO `mob_skills` VALUES (3466,2472,'paralyzing_microtube',0,7.0,2000,1500,4,0,0,0,7,5,0); -- Adelheid
 INSERT INTO `mob_skills` VALUES (3467,2473,'silencing_microtube',0,7.0,2000,1500,4,0,0,0,3,6,0);
 INSERT INTO `mob_skills` VALUES (3468,2474,'binding_microtube',0,7.0,2000,1500,4,0,0,0,9,7,0);
 INSERT INTO `mob_skills` VALUES (3469,2475,'twirling_dervish',1,7.0,2000,1500,4,0,0,0,13,11,0);
-INSERT INTO `mob_skills` VALUES (3470,445,'great_wheel',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3471,447,'light_blade',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3472,444,'vortex',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3473,446,'stellar_burst',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3470,2493,'great_wheel',1,7.0,2000,1500,4,0,0,1,12,4,0); -- Mildaurion
+INSERT INTO `mob_skills` VALUES (3471,2495,'light_blade',0,7.0,2000,1500,4,0,0,0,13,11,0);
+INSERT INTO `mob_skills` VALUES (3472,2492,'vortex',0,7.0,2000,1500,4,0,0,0,10,5,0);
+INSERT INTO `mob_skills` VALUES (3473,2494,'stellar_burst',0,7.0,2000,1500,4,0,0,0,14,9,0);
 -- INSERT INTO `mob_skills` VALUES (3474,187,'bubble_curtain',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3475,192,'metallic_body',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3476,3220,'venom_storm',0,7.0,2000,1500,4,0,0,0,0,0,0);
