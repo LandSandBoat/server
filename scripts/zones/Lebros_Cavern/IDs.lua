@@ -34,6 +34,7 @@ zones[xi.zone.LEBROS_CAVERN] =
 
     mob =
     {
+        WAMOURA_OFFSET = GetTableOfIDs('Ranch_Wamoura'),
         [xi.assault.mission.EXCAVATION_DUTY] =
         {
             MOBS_START =

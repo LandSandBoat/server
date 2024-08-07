@@ -41,6 +41,7 @@ zones[xi.zone.MOUNT_ZHAYOLM] =
     },
     mob =
     {
+        WAMOURA_OFFSET        = GetTableOfIDs('Wamoura'),
         ENERGETIC_ERUCA       = GetFirstID('Energetic_Eruca'),
         IGNAMOTH              = GetFirstID('Ignamoth'),
         CERBERUS              = GetFirstID('Cerberus'),
