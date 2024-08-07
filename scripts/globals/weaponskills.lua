@@ -486,7 +486,11 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     for parameterName, modList in pairs(modParameters) do
         if attacker:getMod(modList[2]) > 0 then
-            wsParams[parameterName] = wsParams[parameterName] + (attacker:getMod(modList[2]) / 100)
+            if wsParams[parameterName] then
+                wsParams[parameterName] = wsParams[parameterName] + (attacker:getMod(modList[2]) / 100)
+            else
+                wsParams[parameterName] = attacker:getMod(modList[2]) / 100
+            end
         end
     end
 
