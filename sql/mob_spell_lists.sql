@@ -4200,15 +4200,7 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,273,31,55);  -- sleepga (
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,274,56,255); -- sleepga_ii (56~255)
 
 -- TRUST_Iroha (410)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha',410,125,7,255);  -- protectra (7~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha',410,126,27,255); -- protectra_ii (27~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha',410,127,47,255); -- protectra_iii (47~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha',410,128,63,255); -- protectra_iv (63~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha',410,129,75,255); -- protectra_v (75~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha',410,130,17,255); -- shellra (17~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha',410,131,37,255); -- shellra_ii (37~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha',410,132,57,255); -- shellra_iii (57~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha',410,133,68,255); -- shellra_iv (68~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha',410,134,75,255); -- shellra_v (75~255)
 
 -- TRUST_Ygnas (411)
@@ -4394,15 +4386,7 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Arciela_II',426,845,48,255); -- flu
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Arciela_II',426,846,96,255); -- flurry_ii (96~255)
 
 -- TRUST_Iroha_II (427)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha_II',427,125,7,255);  -- protectra (7~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha_II',427,126,27,255); -- protectra_ii (27~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha_II',427,127,47,255); -- protectra_iii (47~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha_II',427,128,63,255); -- protectra_iv (63~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha_II',427,129,75,255); -- protectra_v (75~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha_II',427,130,17,255); -- shellra (17~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha_II',427,131,37,255); -- shellra_ii (37~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha_II',427,132,57,255); -- shellra_iii (57~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha_II',427,133,68,255); -- shellra_iv (68~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha_II',427,134,75,255); -- shellra_v (75~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha_II',427,205,75,255); -- flare_ii (75~255)
 

@@ -654,8 +654,18 @@ INSERT INTO `mob_pool_mods` VALUES (5932,6,250,0);    -- MPP: 250
 INSERT INTO `mob_pool_mods` VALUES (5944,3,-10,0);      -- HPP: -10
 INSERT INTO `mob_pool_mods` VALUES (5944,6,35,0);       -- MPP: 35
 
+-- Trust: Iroha
+INSERT INTO `mob_pool_mods` VALUES (5997,6,50,0);       -- MPP: 50
+-- INSERT INTO `mob_pool_mods` VALUES (5997,880,400,0); -- Save TP: 400
+
 -- Trust: Prishe II
 INSERT INTO `mob_pool_mods` VALUES (6011,165,25,0);     -- CRITHITRATE: 25
+
+-- Trust: Iroha II
+INSERT INTO `mob_pool_mods` VALUES (6018,6,250,0);      -- MPP: 250
+INSERT INTO `mob_pool_mods` VALUES (6018,395,-85,0);    -- BLACK_MAGIC_CAST: -85
+-- INSERT INTO `mob_pool_mods` VALUES (6018,3,-5,0);    -- HPP: -5
+-- INSERT INTO `mob_pool_mods` VALUES (6018,880,400,0); -- Save TP: 400
 
 -- Trust: Shantotto II
 INSERT INTO `mob_pool_mods` VALUES (6019,3,-10,0);      -- HPP: -10
