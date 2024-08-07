@@ -28,7 +28,8 @@ zones[xi.zone.MINE_SHAFT_2716] =
     },
     mob =
     {
-        MOVAMUQ = GetFirstID('Movamuq'),
+        MOVAMUQ  = GetFirstID('Movamuq'),
+        TWILOTAK = GetFirstID('Twilotak'),
     },
     npc =
     {
