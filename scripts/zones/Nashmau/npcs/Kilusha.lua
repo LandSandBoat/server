@@ -29,11 +29,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local ichor = player:getCurrency('therion_ichor')
+    local ichor               = player:getCurrency('therion_ichor')
     local allowValkyrieBuying = 29360128 -- set this to 0 if you wish to allow players to buy feather key items without KI
-    local lampCost = 60000 -- base cost without RHAPSODY_IN_AZURE key item
-    local reentryTime = 20 -- in hours
-    local toau = player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES)
+    local lampCost            = 60000 -- base cost without RHAPSODY_IN_AZURE key item
+    local reentryTime         = 20 -- in hours
+    local toau                = player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES)
 
     if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
         lampCost = 1000
@@ -79,10 +79,10 @@ entity.onEventFinish = function(player, csid, option, npc)
             [4] =  { item = xi.item.RITTER_GORGET,        cost =  15000 },
             [5] =  { item = xi.item.KUBIRA_BEAD_NECKLACE, cost =  15000 },
             [6] =  { item = xi.item.MORGANAS_CHOKER,      cost =  15000 },
-            [7] =  { item = xi.item.BUCANEERS_BELT,       cost =  15000 },
+            [7] =  { item = xi.item.BUCCANEERS_BELT,      cost =  15000 },
             [8] =  { item = xi.item.IOTA_RING,            cost =  15000 },
             [9] =  { item = xi.item.OMEGA_RING,           cost =  15000 },
-            [10] = { item = xi.item.DELT_RING,            cost =  15000 },
+            [10] = { item = xi.item.DELTA_EARRING,        cost =  15000 },
             [11] = { item = xi.item.RUBBER_CAP,           cost =   5000 },
             [12] = { item = xi.item.RUBBER_HARNESS,       cost =   5000 },
             [13] = { item = xi.item.RUBBER_GLOVES,        cost =   5000 },

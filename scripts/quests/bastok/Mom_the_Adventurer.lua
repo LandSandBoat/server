@@ -12,7 +12,7 @@ quest.reward =
 {
     fame     = 20,
     fameArea = xi.fameArea.BASTOK,
-    title    = xi.title.RING_BEARER,
+    title    = xi.title.RINGBEARER,
 }
 
 local handleEventFinish = function(player, csid, option, npc)

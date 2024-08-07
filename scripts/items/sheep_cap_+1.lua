@@ -15,7 +15,7 @@ itemObject.onItemUse = function(target)
     local giftList =
     {
         xi.item.FAERIE_APPLE,
-        xi.item.SUNFLOWER_SEEDS,
+        xi.item.HANDFUL_OF_SUNFLOWER_SEEDS,
         xi.item.CLUMP_OF_RED_MOKO_GRASS,
         xi.item.LA_THEINE_CABBAGE,
         xi.item.CLUMP_OF_BOYAHDA_MOSS,
@@ -26,7 +26,8 @@ itemObject.onItemUse = function(target)
         xi.item.CLUMP_OF_MOKO_GRASS
     }
 
-    local gift = math.random(1, 11)
+    local gift = math.random(1, #giftList)
+
     npcUtil.giveItem(target, { { giftList[gift], 1 } })
 end
 

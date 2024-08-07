@@ -18,7 +18,6 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.MAIN_DMG_RATING, 42)
     mob:addMod(xi.mod.ATT, 150)
 
-    mob:setMobMod(xi.mobMod.NO_MP, 1)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 15)
 end
 

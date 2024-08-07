@@ -25,7 +25,7 @@ local orbKeyItems =
 {
     -- keyItem, mod, immune value, vulnerable value
     { xi.ki.ORB_OF_SWORDS, xi.mod.SLASH_SDT,       0, 1000 },
-    { xi.ki.ORB_OF_CUPS,   xi.mod.BLUNT_SDT,       0, 1000 },
+    { xi.ki.ORB_OF_CUPS,   xi.mod.IMPACT_SDT,      0, 1000 },
     { xi.ki.ORB_OF_BATONS, xi.mod.PIERCE_SDT,      0, 1000 },
     { xi.ki.ORB_OF_COINS,  xi.mod.UDMGMAGIC,  -10000,    0 },
 }
