@@ -6697,7 +6697,8 @@ namespace battleutils
             }
 
             // remove TP Bonus from offhand weapon
-            if (PChar->equip[SLOT_SUB] != 0)
+            // TODO -- don't remove TP bonus if this TP bonus is from an augment (or perhaps add a second TP bonus stat.)
+            if (PChar->m_Weapons[SLOT_SUB])
             {
                 tp -= battleutils::GetScaledItemModifier(PEntity, PChar->m_Weapons[SLOT_SUB], Mod::TP_BONUS);
             }
@@ -6705,7 +6706,7 @@ namespace battleutils
             // if ranged WS, remove TP bonus from mainhand weapon
             if (damslot == SLOT_RANGED)
             {
-                if (PChar->equip[SLOT_MAIN] != 0)
+                if (PChar->m_Weapons[SLOT_MAIN])
                 {
                     tp -= battleutils::GetScaledItemModifier(PEntity, PChar->m_Weapons[SLOT_MAIN], Mod::TP_BONUS);
                 }
@@ -6713,7 +6714,8 @@ namespace battleutils
             else
             {
                 // if melee WS, remove TP bonus from ranged weapon
-                if (PChar->equip[SLOT_RANGED] != 0)
+                // TODO -- don't remove TP bonus if this TP bonus is from an augment (or perhaps add a second TP bonus stat.)
+                if (PChar->m_Weapons[SLOT_RANGED])
                 {
                     tp -= battleutils::GetScaledItemModifier(PEntity, PChar->m_Weapons[SLOT_RANGED], Mod::TP_BONUS);
                 }
