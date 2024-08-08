@@ -24,14 +24,17 @@ commandObj.onTrigger = function(player, item, quantity, aug0, aug0val, aug1, aug
         return
     end
 
-    -- Load needed text ids for players current zone..
-    local ID        = zones[player:getZoneID()]
+    -----------------------------------
+    -- Validate first parameter (Item)
+    -----------------------------------
     local itemToGet = 0
+    local dataType  = tonumber(item)
 
-    -- validate item
-    if tonumber(item) == nil then
+    -- String or other.
+    if dataType == nil then
         -- Item was provided, but was not a number. Try text lookup.
         local retItem = GetItemIDByName(tostring(item))
+
         if retItem > 0 and retItem < 65000 then
             itemToGet = retItem
         elseif retItem >= 65000 then
@@ -41,9 +44,11 @@ commandObj.onTrigger = function(player, item, quantity, aug0, aug0val, aug1, aug
             player:printToPlayer(string.format('Item %s not found in database.', item))
             return
         end
+
+    -- Number
     else
         -- Number was provided, so just use it
-        itemToGet = tonumber(item)
+        itemToGet = dataType
     end
 
     -- At this point, if there's no item found, exit out of the function
@@ -52,7 +57,10 @@ commandObj.onTrigger = function(player, item, quantity, aug0, aug0val, aug1, aug
         return
     end
 
-    -- if quantity is nil, assume 1 qty
+    -----------------------------------
+    -- Validate second parameter (Quantity) (Optional)
+    -----------------------------------
+    local ID = zones[player:getZoneID()]
     quantity = quantity or 1
 
     -- TODO: check qty and stack size + remaining inventory space instead of hardcoded == 0 check
@@ -67,7 +75,9 @@ commandObj.onTrigger = function(player, item, quantity, aug0, aug0val, aug1, aug
         return
     end
 
+    -----------------------------------
     -- Give the GM the item
+    -----------------------------------
     local obtained = player:addItem(itemToGet, quantity, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val, trialId)
 
     if obtained then
