@@ -11,10 +11,10 @@ class CircularBuffer
 private:
     std::unique_ptr<T[]> buffer;
 
-    // TODO: Use atomics here to reduce the number of mutex locks
     std::size_t head = 0;
     std::size_t tail = 0;
     std::size_t max_size;
+    bool        full = false;
     T           empty_item;
 
     std::recursive_mutex mutex;
@@ -28,14 +28,16 @@ public:
     {
         std::lock_guard lock(mutex);
 
-        if (is_full())
-        {
-            throw std::runtime_error("buffer is full");
-        }
-
         buffer[tail] = item;
 
+        if (full)
+        {
+            head = (head + 1) % max_size;
+        }
+
         tail = (tail + 1) % max_size;
+
+        full = tail == head;
     }
 
     T dequeue()
@@ -49,10 +51,11 @@ public:
 
         T item = buffer[head];
 
-        T empty;
         buffer[head] = empty_item;
 
         head = (head + 1) % max_size;
+
+        full = false;
 
         return item;
     }
@@ -60,29 +63,43 @@ public:
     T front()
     {
         std::lock_guard lock(mutex);
+
+        if (is_empty())
+        {
+            throw std::runtime_error("buffer is empty");
+        }
+
         return buffer[head];
     }
 
     bool is_empty()
     {
         std::lock_guard lock(mutex);
-        return head == tail;
+
+        return (!full && (head == tail));
     }
 
     bool is_full()
     {
         std::lock_guard lock(mutex);
-        return tail == (head - 1) % max_size;
+
+        return full;
     }
 
     std::size_t size()
     {
         std::lock_guard lock(mutex);
+
+        if (full)
+        {
+            return max_size;
+        }
+
         if (tail >= head)
         {
             return tail - head;
         }
 
-        return max_size - head - tail;
+        return max_size - head + tail;
     }
 };
