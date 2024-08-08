@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -10598,9 +10598,9 @@ bool CLuaBaseEntity::hasPartyJob(uint8 job)
 
 std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uint8 allianceparty)
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    if (m_PBaseEntity->objtype == TYPE_NPC)
     {
-        ShowWarning("CLuaBaseEntity::getPartyMember() - Non-PC calling function.");
+        ShowWarning("CLuaBaseEntity::getPartyMember() - NPC calling function.");
         return std::nullopt;
     }
 
