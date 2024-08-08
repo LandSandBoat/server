@@ -5,8 +5,8 @@ local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
 local zoneObject = {}
 
-zoneObject.onChocoboDig = function(player, precheck)
-    return xi.chocoboDig.start(player, precheck)
+zoneObject.onChocoboDig = function(player)
+    return xi.chocoboDig.start(player)
 end
 
 zoneObject.onInitialize = function(zone)

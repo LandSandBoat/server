@@ -5316,20 +5316,22 @@ namespace luautils
         }
     }
 
-    bool OnChocoboDig(CCharEntity* PChar, bool pre)
+    bool OnChocoboDig(CCharEntity* PChar)
     {
         TracyZoneScoped;
 
-        auto name = PChar->loc.zone->getName();
-
+        // Check if zone can be digged in.
+        auto name         = PChar->loc.zone->getName();
         auto onChocoboDig = lua["xi"]["zones"][name]["Zone"]["onChocoboDig"];
+
         if (!onChocoboDig.valid())
         {
             ShowWarning("luautils::onChocoboDig");
             return false;
         }
 
-        auto result = onChocoboDig(CLuaBaseEntity(PChar), pre);
+        // Run lua-side chocobo digging.
+        auto result = onChocoboDig(CLuaBaseEntity(PChar));
         if (!result.valid())
         {
             sol::error err = result;

@@ -350,7 +350,7 @@ namespace luautils
     void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
     void OnPlayerVolunteer(CCharEntity* PChar, std::string const& text);
 
-    bool OnChocoboDig(CCharEntity* PChar, bool pre); // chocobo digging, pre = check
+    bool OnChocoboDig(CCharEntity* PChar); // chocobo digging
 
     // Utility method: checks for and loads a lua function for events
     auto LoadEventScript(CCharEntity* PChar, const char* functionName) -> sol::function;
