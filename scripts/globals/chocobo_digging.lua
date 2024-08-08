@@ -690,12 +690,12 @@ local digInfo =
 
 local function updatePlayerDigCount(player, increment)
     if increment == 0 then
-        player:setVolatileCharVar('[DIG]DigCount', 0)
+        player:setVar('[DIG]DigCount', 0)
     else
-        player:setVolatileCharVar('[DIG]DigCount', player:getCharVar('[DIG]DigCount') + increment)
+        player:setVar('[DIG]DigCount', player:getCharVar('[DIG]DigCount') + increment, NextJstDay())
     end
 
-    player:setVolatileCharVar('[DIG]LastDigTime', os.time())
+    player:setLocalVar('[DIG]LastDigTime', os.time())
 end
 
 --[[ Not Implemented
@@ -711,41 +711,25 @@ local function updateZoneDigCount(zoneId, increment)
 end
 ]]--
 
-local function canDig(player)
-    local digCount     = player:getCharVar('[DIG]DigCount')
-    local lastDigTime  = player:getCharVar('[DIG]LastDigTime')
-    local zoneItemsDug = GetServerVariable('[DIG]ZONE'..player:getZoneID()..'_ITEMS')
-    local zoneInTime   = player:getLocalVar('ZoneInTime')
-    local currentTime  = os.time()
-    local skillRank    = player:getSkillRank(xi.skill.DIG)
+-- This function handles cooldowns before digging can be attempted, and by extension, before any animation is sent.
+local function checkDiggingCooldowns(player)
+    local currentTime = os.time()
+    local skillRank   = player:getSkillRank(xi.skill.DIG)
 
-    -- base delay -5 for each rank
-    local digDelay     = 16 - (skillRank * 5)
-    local areaDigDelay = 60 - (skillRank * 5)
-    local prevMidnight = getMidnight() - 86400
-
-    -- Last dig was before today, so reset player fatigue
-    if lastDigTime < prevMidnight then
-        updatePlayerDigCount(player, 0)
-        digCount = 0
-    end
-
-    -- neither player nor zone have reached their dig limit
+    -- Check digging cooldowns.
+    local zoneCooldown = player:getLocalVar('ZoneInTime') + utils.clamp(60 - skillRank * 5, 10, 60)
+    local digCooldown  = player:getLocalVar('[DIG]LastDigTime') + utils.clamp(15 - skillRank * 5, 3, 16)
 
     if
-        (digCount < 100 and zoneItemsDug < 20) or
-        xi.settings.main.DIG_FATIGUE == 0
+        currentTime < zoneCooldown or
+        currentTime < digCooldown
     then
-        -- pesky delays
-        if
-            (zoneInTime + areaDigDelay) <= currentTime and
-            (lastDigTime + digDelay) <= currentTime
-        then
-            return true
-        end
+        player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0)
+
+        return false
     end
 
-    return false
+    return true
 end
 
 local function calculateSkillUp(player)
@@ -837,64 +821,81 @@ local function getChocoboDiggingItem(player)
     return itemId
 end
 
-xi.chocoboDig.start = function(player, precheck)
+xi.chocoboDig.start = function(player)
+    -- Handle digging cooldowns.
+    if not checkDiggingCooldowns(player) then
+        return false -- This means we do not send a digging animation.
+    end
+
+    -- Handle  AMK mission 7 (index 6) exception.
     local zoneId = player:getZoneID()
     local text   = zones[zoneId].text
 
-    -- make sure the player can dig before going any further
-    -- (and also cause i need a return before core can go any further with this)
-    if precheck then
-        return canDig(player)
-
-    else
-        local roll = math.random(0, 100)
-        local moon = VanadielMoonPhase()
-
-        -- 45-60% moon phase results in a much lower dig chance than the rest of the phases
-        if moon >= 45 and moon <= 60 then
-            roll = roll * .5
-        end
-
-        -- AMK mission 7 (index 6)
-        if
-            xi.settings.main.ENABLE_AMK == 1 and
-            player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.SHOCK_ARRANT_ABUSE_OF_AUTHORITY and
-            xi.amk.helpers.chocoboDig(player, zoneId, text)
-        then
-            return
-        end
-
-        -- dig chance failure
-        if roll > xi.settings.main.DIGGING_RATE then
-            player:messageText(player, text.FIND_NOTHING)
-
-        -- dig chance success
-        else
-            local itemId = getChocoboDiggingItem(player)
-
-            -- success!
-            if itemId ~= 0 then
-                -- make sure we have enough room for the item
-                if player:addItem(itemId) then
-                    player:messageSpecial(text.ITEM_OBTAINED, itemId)
-                else
-                    player:messageSpecial(text.DIG_THROW_AWAY, itemId)
-                end
-
-                player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
-
-            -- got a crystal ore, but lacked weather or skill to dig it up
-            else
-                player:messageText(player, text.FIND_NOTHING, false)
-            end
-
-            updatePlayerDigCount(player, 1)
-            -- updateZoneDigCount(zoneId, 1) -- TODO: implement mechanic for resetting zone dig count. until then, leave this commented out
-            -- TODO: learn abilities from chocobo raising
-        end
-
-        calculateSkillUp(player)
+    if
+        xi.settings.main.ENABLE_AMK == 1 and
+        player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.SHOCK_ARRANT_ABUSE_OF_AUTHORITY and
+        xi.amk.helpers.chocoboDig(player, zoneId, text)
+    then
+        -- Note: The helper function handles the messages.
+        player:setLocalVar('[DIG]LastDigTime', os.time())
 
         return true
     end
+
+    -- Handle auto-fail from fatigue.
+    local todayDigCount = player:getCharVar('[DIG]DigCount')
+
+    if
+        xi.settings.main.DIG_FATIGUE > 0 and
+        xi.settings.main.DIG_FATIGUE <= todayDigCount
+    then
+        player:messageText(player, text.FIND_NOTHING)
+        player:setLocalVar('[DIG]LastDigTime', os.time())
+
+        return true
+    end
+
+    -- Handel actual digging.
+    local roll = math.random(0, 100)
+    local moon = VanadielMoonPhase()
+
+    -- 40-60% moon phase results in a much lower dig chance than the rest of the phases
+    if moon >= 40 and moon <= 60 then
+        roll = roll / 2
+    end
+
+    -- dig chance failure
+    if roll > xi.settings.main.DIGGING_RATE then
+        player:messageText(player, text.FIND_NOTHING)
+        player:setLocalVar('[DIG]LastDigTime', os.time())
+
+        return true
+    end
+
+    -- dig chance success
+    local itemId = getChocoboDiggingItem(player)
+
+    -- success!
+    if itemId ~= 0 then
+        -- make sure we have enough room for the item
+        if player:addItem(itemId) then
+            player:messageSpecial(text.ITEM_OBTAINED, itemId)
+        else
+            player:messageSpecial(text.DIG_THROW_AWAY, itemId)
+        end
+
+        player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
+
+    -- got a crystal ore, but lacked weather or skill to dig it up
+    else
+        player:messageText(player, text.FIND_NOTHING, false)
+    end
+
+    updatePlayerDigCount(player, 1)
+    -- updateZoneDigCount(zoneId, 1) -- TODO: implement mechanic for resetting zone dig count. until then, leave this commented out
+    -- TODO: learn abilities from chocobo raising
+
+    calculateSkillUp(player)
+
+    return true
 end
