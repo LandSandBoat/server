@@ -827,7 +827,7 @@ xi.chocoboDig.start = function(player)
         return false -- This means we do not send a digging animation.
     end
 
-    -- Handle  AMK mission 7 (index 6) exception.
+    -- Handle AMK mission 7 (index 6) exception.
     local zoneId = player:getZoneID()
     local text   = zones[zoneId].text
 
@@ -854,6 +854,25 @@ xi.chocoboDig.start = function(player)
 
         return true
     end
+
+    -- Handle auto-fail from position.
+    local currentX = player:getXPos()
+    local currentZ = player:getZPos()
+    local lastX    = player:getLocalVar('[DIG]LastXPos')
+    local lastZ    = player:getLocalVar('[DIG]LastZPos')
+
+    if
+        currentX >= lastX - 2 and currentX <= lastX + 2 and -- Check current X axis to see if you are too close to your last X.
+        currentZ >= lastZ - 2 and currentZ <= lastZ + 2     -- Check current Z axis to see if you are too close to your last Z.
+    then
+        player:messageText(player, text.FIND_NOTHING)
+        player:setLocalVar('[DIG]LastDigTime', os.time())
+
+        return true
+    end
+
+    player:setLocalVar('[DIG]LastXPos', currentX)
+    player:setLocalVar('[DIG]LastZPos', currentZ)
 
     -- Handel actual digging.
     local roll = math.random(0, 100)
