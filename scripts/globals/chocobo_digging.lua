@@ -10,6 +10,69 @@ require('scripts/missions/amk/helpers')
 xi = xi or {}
 xi.chocoboDig = xi.chocoboDig or {}
 
+-- This contais all digging zones with the ones without loot tables defined commented out.
+local diggingZoneList =
+set{
+    xi.zone.CARPENTERS_LANDING,
+    xi.zone.BIBIKI_BAY,
+    -- xi.zone.ULEGUERAND_RANGE,
+    -- xi.zone.ATTOHWA_CHASM,
+    -- xi.zone.LUFAISE_MEADOWS,
+    -- xi.zone.MISAREAUX_COAST,
+    xi.zone.WAJAOM_WOODLANDS,
+    xi.zone.BHAFLAU_THICKETS,
+    -- xi.zone.CAEDARVA_MIRE,
+    -- xi.zone.EAST_RONFAURE_S,
+    -- xi.zone.JUGNER_FOREST_S,
+    -- xi.zone.VUNKERL_INLET_S,
+    -- xi.zone.BATALLIA_DOWNS_S,
+    -- xi.zone.NORTH_GUSTABERG_S,
+    -- xi.zone.GRAUBERG_S,
+    -- xi.zone.PASHHOW_MARSHLANDS_S,
+    -- xi.zone.ROLANBERRY_FIELDS_S,
+    -- xi.zone.WEST_SARUTABARUTA_S,
+    -- xi.zone.FORT_KARUGO_NARUGO_S,
+    -- xi.zone.MERIPHATAUD_MOUNTAINS_S,
+    -- xi.zone.SAUROMUGUE_CHAMPAIGN_S,
+    xi.zone.WEST_RONFAURE,
+    xi.zone.EAST_RONFAURE,
+    xi.zone.LA_THEINE_PLATEAU,
+    xi.zone.VALKURM_DUNES,
+    xi.zone.JUGNER_FOREST,
+    xi.zone.BATALLIA_DOWNS,
+    xi.zone.NORTH_GUSTABERG,
+    xi.zone.SOUTH_GUSTABERG,
+    xi.zone.KONSCHTAT_HIGHLANDS,
+    xi.zone.PASHHOW_MARSHLANDS,
+    xi.zone.ROLANBERRY_FIELDS,
+    -- xi.zone.BEAUCEDINE_GLACIER,
+    -- xi.zone.XARCABARD,
+    -- xi.zone.CAPE_TERIGGAN,
+    xi.zone.EASTERN_ALTEPA_DESERT,
+    xi.zone.WEST_SARUTABARUTA,
+    xi.zone.EAST_SARUTABARUTA,
+    xi.zone.TAHRONGI_CANYON,
+    xi.zone.BUBURIMU_PENINSULA,
+    xi.zone.MERIPHATAUD_MOUNTAINS,
+    xi.zone.SAUROMUGUE_CHAMPAIGN,
+    xi.zone.THE_SANCTUARY_OF_ZITAH,
+    xi.zone.YUHTUNGA_JUNGLE,
+    xi.zone.YHOATOR_JUNGLE,
+    xi.zone.WESTERN_ALTEPA_DESERT,
+    -- xi.zone.QUFIM_ISLAND,
+    -- xi.zone.BEHEMOTHS_DOMINION,
+    -- xi.zone.VALLEY_OF_SORROWS,
+    -- xi.zone.BEAUCEDINE_GLACIER_S,
+    -- xi.zone.XARCABARD_S,
+    -- xi.zone.YAHSE_HUNTING_GROUNDS,
+    -- xi.zone.CEIZAK_BATTLEGROUNDS,
+    -- xi.zone.FORET_DE_HENNETIEL,
+    -- xi.zone.YORCIA_WEALD,
+    -- xi.zone.MORIMAR_BASALT_FIELDS,
+    -- xi.zone.MARJAMI_RAVINE,
+    -- xi.zone.KAMIHR_DRIFTS,
+}
+
 local digReq =
 {
     NO_REQS = 0,
@@ -711,12 +774,20 @@ local function updateZoneDigCount(zoneId, increment)
 end
 ]]--
 
--- This function handles cooldowns before digging can be attempted, and by extension, before any animation is sent.
+-- This function handles zone and cooldown checks before digging can be attempted, before any animation is sent.
 local function checkDiggingCooldowns(player)
-    local currentTime = os.time()
-    local skillRank   = player:getSkillRank(xi.skill.DIG)
+    -- Check if current zone has digging enabled.
+    local isAllowedZone = diggingZoneList[player:getZoneID()] or false
+
+    if not isAllowedZone then
+        player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0)
+
+        return false
+    end
 
     -- Check digging cooldowns.
+    local currentTime  = os.time()
+    local skillRank    = player:getSkillRank(xi.skill.DIG)
     local zoneCooldown = player:getLocalVar('ZoneInTime') + utils.clamp(60 - skillRank * 5, 10, 60)
     local digCooldown  = player:getLocalVar('[DIG]LastDigTime') + utils.clamp(15 - skillRank * 5, 3, 16)
 

@@ -7,10 +7,6 @@ require('scripts/quests/i_can_hear_a_rainbow')
 -----------------------------------
 local zoneObject = {}
 
-zoneObject.onChocoboDig = function(player)
-    return xi.chocoboDig.start(player)
-end
-
 local function registerRegionAroundNPC(zone, NPCID, zoneID)
     local npc      = GetNPCByID(NPCID)
     local x        = npc:getXPos()

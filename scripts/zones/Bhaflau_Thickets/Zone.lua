@@ -5,10 +5,6 @@ local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
 local zoneObject = {}
 
-zoneObject.onChocoboDig = function(player)
-    return xi.chocoboDig.start(player)
-end
-
 zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.HARVESTMAN)
     GetMobByID(ID.mob.HARVESTMAN):setRespawnTime(math.random(900, 10800))

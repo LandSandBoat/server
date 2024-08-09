@@ -7,10 +7,6 @@ require('scripts/missions/amk/helpers')
 -----------------------------------
 local zoneObject = {}
 
-zoneObject.onChocoboDig = function(player)
-    return xi.chocoboDig.start(player)
-end
-
 zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.WARAXE_BEAK)
     GetMobByID(ID.mob.WARAXE_BEAK):setRespawnTime(math.random(900, 10800))

@@ -5320,10 +5320,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        // Check if zone can be digged in.
-        auto name         = PChar->loc.zone->getName();
-        auto onChocoboDig = lua["xi"]["zones"][name]["Zone"]["onChocoboDig"];
+        auto onChocoboDig = lua["xi"]["chocoboDig"]["start"];
 
+        // Check that the function exists.
         if (!onChocoboDig.valid())
         {
             ShowWarning("luautils::onChocoboDig");
