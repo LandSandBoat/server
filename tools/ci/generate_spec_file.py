@@ -1,13 +1,4 @@
-import os
-import requests
-import zipfile
-import platform
-import tarfile
-import json
-import subprocess
-import re
 import argparse
-from collections import defaultdict
 
 # 2 arguments:
 # 1. The file path of the input file
