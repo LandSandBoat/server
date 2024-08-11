@@ -64,6 +64,9 @@ function(set_project_warnings project_name)
       -Wno-missing-field-initializers
       -Wno-sign-compare
 
+      # TODO: fmt triggers this, a combination of the fast-math flag and `isfinite` 
+      -Wno-nan-infinity-disabled
+
       # TODO: This is good, but it's Clang only
       # -Wunused-private-field # warn on unused private fields
 
