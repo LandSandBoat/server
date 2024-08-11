@@ -243,14 +243,15 @@ void CItemEquipment::addModifier(CModifier modifier)
 
 int16 CItemEquipment::getModifier(Mod mod) const
 {
-    for (auto& i : modList)
+    int16 totalAmount = 0;
+    for (const auto& i : modList)
     {
         if (i.getModID() == mod)
         {
-            return i.getModAmount();
+            totalAmount += i.getModAmount();
         }
     }
-    return 0;
+    return totalAmount;
 }
 
 void CItemEquipment::addPetModifier(CPetModifier modifier)
