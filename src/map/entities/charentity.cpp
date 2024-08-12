@@ -2072,8 +2072,93 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     }
     battleutils::ClaimMob(PTarget, this);
     battleutils::RemoveAmmo(this, ammoConsumed);
-    // only remove detectables
-    StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+
+    // Handle Camouflage effects
+    if (this->StatusEffectContainer->HasStatusEffect(EFFECT_CAMOUFLAGE, 0))
+    {
+        int16 retainChance     = 40; // Estimate base ~40% chance to keep Camouflage on a ranged attack
+        uint8 rotAllowance     = 25; // Allow for some slight variance in direction faced to be "behind" or "beside" the mob
+        float distanceToTarget = distance(this->loc.p, PTarget->loc.p);
+        float meleeRange       = PTarget->GetMeleeRange();
+
+        if (isBarrage)
+        {
+            // Camouflage is never retained if Barrage is fired
+            retainChance = 0;
+        }
+        else if (behind(this->loc.p, PTarget->loc.p, rotAllowance))
+        {
+            // Max melee distance + .6 = safe
+            // Max melee distance + (.1~.5) = chance of deactivation
+            // Under max melee distance = certain deactivation
+            if (distanceToTarget > meleeRange + .6)
+            {
+                retainChance = 100;
+            }
+            else if (distanceToTarget > meleeRange + .1)
+            {
+                retainChance += 1.6 * distanceToTarget;
+            }
+            else
+            {
+                retainChance = 0;
+            }
+        }
+        else if (beside(this->loc.p, PTarget->loc.p, rotAllowance))
+        {
+            // Max melee distance + 5 yalms = safe
+            // (Max melee distance + 3.3) + (0.0~1.6) = chance of deactivation
+            // Under Max melee distance + 3.3 = certain deactivation
+            if (distanceToTarget > meleeRange + 5)
+            {
+                retainChance = 100;
+            }
+            else if (distanceToTarget > meleeRange + 3.3)
+            {
+                retainChance += 1.6 * distanceToTarget;
+            }
+            else
+            {
+                retainChance = 0;
+            }
+        }
+        else
+        {
+            // Max melee distance + 8.1 yalms = safe
+            // (Max melee distance + 7.1) + (0.0~.99) = chance of deactivation
+            // Under Max melee distance + 7.1 = certain deactivation
+            if (distanceToTarget > meleeRange + 8.1)
+            {
+                retainChance = 100;
+            }
+            else if (distanceToTarget > meleeRange + 7.1)
+            {
+                retainChance += 1.6 * distanceToTarget;
+            }
+            else
+            {
+                retainChance = 0;
+            }
+        }
+
+        if (xirand::GetRandomNumber(100) > retainChance)
+        {
+            // Camouflage was up, but is lost, so now all detectable effects must be dropped
+            StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+        }
+        else
+        {
+            // Camouflage up, and retained, but all other effects must be dropped
+            StatusEffectContainer->DelStatusEffect(EFFECT_SNEAK);
+            StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
+            StatusEffectContainer->DelStatusEffect(EFFECT_DEODORIZE);
+        }
+    }
+    else
+    {
+        // Camouflage not up, so remove all detectable status effects
+        StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+    }
 }
 
 bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
