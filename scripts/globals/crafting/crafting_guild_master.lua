@@ -173,18 +173,20 @@ xi.crafting.guildMasterOnTrigger = function(player, npc)
                 end
             end
 
+            local rankFromSetting = math.floor(xi.settings.map.CRAFT_COMMON_CAP / 100) -- If 700, it will return rank 7 (Artisan)
+
             -- Params 7 and 8.
             for skillChecked = xi.skill.WOODWORKING, xi.skill.COOKING do
                 rankChecked = player:getSkillRank(skillChecked)
 
                 -- Param 7: Count crafts over craftsman rank.
-                if rankChecked >= xi.craftRank.ARTISAN then
+                if rankChecked >= rankFromSetting then
                     artisanCount = artisanCount + 1
                 end
 
                 -- Param 8: Full mask except craft ids that CAN be renounced.
                 if
-                    rankChecked < xi.craftRank.ARTISAN or
+                    rankChecked < rankFromSetting or
                     skillChecked == highestSkillId
                 then
                     artisanBitmask = bit.bor(artisanBitmask, bit.lshift(1, skillChecked - 48))
@@ -238,8 +240,11 @@ xi.crafting.guildMasterOnEventFinish = function(player, csid, option, npc)
             option >= xi.skill.WOODWORKING and
             option <= xi.skill.COOKING
         then
-            player:setSkillRank(option, xi.craftRank.CRAFTSMAN)
-            player:setSkillLevel(option, 700)
+            local rankFromSetting = math.floor(xi.settings.map.CRAFT_COMMON_CAP / 100) - 1  -- If 700, it will return rank 6 (Craftsman)
+
+            player:setSkillRank(option, rankFromSetting)
+            player:setSkillLevel(option, xi.settings.map.CRAFT_COMMON_CAP)
+
             player:messageSpecial(ID.text.RENOUNCE_CRAFTSMAN, 0, option - 49)
         end
 
