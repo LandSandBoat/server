@@ -197,7 +197,7 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
             return false;
         }
 
-        if (!charutils::hasWeaponSkill(PChar, PWeaponSkill->getID()))
+        if (!charutils::hasWeaponSkill(PChar, PWeaponSkill->getID()) || !charutils::canUseWeaponSkill(PChar, wsid))
         {
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_WS));
             return false;

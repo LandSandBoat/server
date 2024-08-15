@@ -171,6 +171,7 @@ namespace charutils
     int32 addWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to add weapon skill
     int32 hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to check for weapon skill
     int32 delWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to delete weapon skill
+    bool  canUseWeaponSkill(CCharEntity* PChar, uint16 wsid);
 
     void SaveCharJob(CCharEntity* PChar, JOBTYPE job); // save the level for the selected character's jobs
     void SaveCharExp(CCharEntity* PChar, JOBTYPE job); // save experience for the selected character’s chosen job
