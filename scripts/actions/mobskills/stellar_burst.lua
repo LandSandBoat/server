@@ -9,13 +9,19 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg(), xi.element.NONE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.NONE, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
+    local damage = mob:getWeaponDmg()
+
+    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.NONE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.NONE, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
+
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.NONE)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 30)
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.NONE)
-    mob:resetEnmity(target)
-    return dmg
+
+    if not target:isTrust() then
+        mob:resetEnmity(target)
+    end
+
+    return damage
 end
 
 return mobskillObject

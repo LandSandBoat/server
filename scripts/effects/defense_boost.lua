@@ -1,5 +1,7 @@
 -----------------------------------
 -- xi.effect.DEFENSE_BOOST
+-- When a subpower is provided this buff acts as a 100% physical damage negation
+-- While the attacker is in front within the angle of the subpower
 -----------------------------------
 local effectObject = {}
 

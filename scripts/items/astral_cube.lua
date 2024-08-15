@@ -7,7 +7,7 @@ local itemObject = {}
 
 local keyItemId = xi.ki.ASTRAL_CUBE
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, item, param, caster)
     if target:hasKeyItem(keyItemId) then
         return xi.msg.basic.ALREADY_HAVE_KEY_ITEM, 0, keyItemId
     end

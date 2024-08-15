@@ -117,13 +117,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-351.136, -2.25, -380, 253)
     end
 
-    if
-        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and
-        player:getCharVar('PromathiaStatus') == 0
-    then
-        cs = 201
-    end
-
     player:setCharVar('Ru-Hmet-TP', 0)
     return cs
 end
@@ -213,12 +206,6 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('Ru-Hmet-TP', 0)
     elseif (csid > 149 and csid < 184) or csid == 102 or csid == 103 or csid == 101 then
         player:setCharVar('Ru-Hmet-TP', 0)
-    elseif csid == 201 then
-        player:setCharVar('PromathiaStatus', 1)
-        player:addKeyItem(xi.ki.MYSTERIOUS_AMULET_PRISHE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MYSTERIOUS_AMULET)
-    elseif csid == 32000 and option == 1 then
-        player:setPos(420, 0, 398, 68)
     end
 end
 

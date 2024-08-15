@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class detects
 xi.detects =
 {
     NONE              = 0x000,

@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class aoeType
 xi.aoeType =
 {
     NONE      = 0,

@@ -12,8 +12,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    -- TODO: Implement this ability
-    player:addStatusEffect(xi.effect.TENUTO, 0, 0, 60)
+    xi.job_utils.bard.useTenuto(player, target, ability)
 end
 
 return abilityObject

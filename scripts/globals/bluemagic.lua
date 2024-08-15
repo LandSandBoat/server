@@ -448,6 +448,9 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
     -- handle stoneskin
     dmg = utils.stoneskin(target, dmg)
 
+    -- Check if the mob has a damage cap
+    dmg = target:checkDamageCap(dmg)
+
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
 
     if not target:isPC() then

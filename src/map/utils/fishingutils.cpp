@@ -1933,6 +1933,13 @@ namespace fishingutils
             return;
         }
 
+        if (PChar->GetMLevel() < settings::get<uint8>("map.FISHING_MIN_LEVEL"))
+        {
+            PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Your level is too low to fish."));
+            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
+            return;
+        }
+
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HIDE);
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CAMOUFLAGE);
@@ -2647,7 +2654,7 @@ namespace fishingutils
 
     void FishingAction(CCharEntity* PChar, FISHACTION action, uint16 stamina, uint32 special)
     {
-        if (!settings::get<bool>("map.FISHING_ENABLE"))
+        if (!settings::get<bool>("map.FISHING_ENABLE") || PChar->GetMLevel() < settings::get<uint8>("map.FISHING_MIN_LEVEL"))
         {
             ShowWarning("Fishing is currently disabled, but somehow we have someone commencing a fishing action");
             // Unlikely anyone can get here legit, since we already disabled "startFishing"

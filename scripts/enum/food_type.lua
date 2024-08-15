@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class foodType
 xi.foodType =
 {
     BASIC    = 1,

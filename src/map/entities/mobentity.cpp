@@ -192,10 +192,10 @@ uint32 CMobEntity::GetRandomGil()
 
     if (min && max)
     {
-        // make sure divide won't crash server
+        // Assume we want this exact amount
         if (max <= min)
         {
-            max = min + 2;
+            return min;
         }
 
         if (max - min < 2)

@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class status
 xi.status =
 {
     NORMAL          =  0,

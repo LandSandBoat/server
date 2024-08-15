@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class jobAbility
 xi.jobAbility =
 {
     MIGHTY_STRIKES     = 16,

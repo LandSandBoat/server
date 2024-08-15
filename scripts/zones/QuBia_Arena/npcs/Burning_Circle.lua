@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
     -- Temp disabled pending fixes for the BCNM mobs.
 end
 
-entity.onEventUpdate = function(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

@@ -53,6 +53,8 @@ end
 
 Limbus         = setmetatable({ }, { __index = Battlefield })
 Limbus.__index = Limbus
+
+---@diagnostic disable-next-line: duplicate-set-field
 Limbus.__eq    = function(m1, m2)
     return m1.name == m2.name
 end
@@ -65,6 +67,7 @@ Limbus.serverVar = ''
 --  - name: The name of the Limbus area.
 --  - exitLocation: Where to boot the player out. This is specifically used for Apollyon areas.
 --  - timeExtension: How much time to grant when openning a time Armoury Crate.
+---@diagnostic disable-next-line: duplicate-set-field
 function Limbus:new(data)
     data.createsWornItem = false
     data.showTimer       = false
@@ -80,6 +83,7 @@ function Limbus:new(data)
     return obj
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
 function Limbus:register()
     Battlefield.register(self)
 
@@ -89,6 +93,7 @@ function Limbus:register()
     return self
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
 function Limbus:onEventFinishEnter(player, csid, option, npc)
     Battlefield.onEventFinishEnter(self, player, csid, option)
 
@@ -107,6 +112,7 @@ function Limbus:onEventFinishEnter(player, csid, option, npc)
     end
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
 function Limbus:onBattlefieldInitialise(battlefield)
     Battlefield.onBattlefieldInitialise(self, battlefield)
     SetServerVariable(self.serverVar, battlefield:getTimeLimit() / 60)
@@ -164,6 +170,7 @@ function Limbus:onBattlefieldInitialise(battlefield)
     end
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
 function Limbus:onBattlefieldTick(battlefield, tick)
     Battlefield.onBattlefieldTick(self, battlefield, tick)
 
@@ -172,22 +179,27 @@ function Limbus:onBattlefieldTick(battlefield, tick)
     end
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
 function Limbus:onBattlefieldRegister(player, battlefield)
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
 function Limbus:onBattlefieldEnter(player, battlefield)
     Battlefield.onBattlefieldEnter(self, player, battlefield)
     player:setCharVar('Cosmo_Cleanse_TIME', os.time())
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
 function Limbus:onBattlefieldDestroy(battlefield)
     SetServerVariable(self.serverVar, 0)
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
 function Limbus:onBattlefieldWin(player, battlefield)
     player:startEvent(32001, { [0] = self.exitLocation, [4] = self.zoneId, [5] = battlefield:getArea() - 1 })
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
 function Limbus:onBattlefieldLeave(player, battlefield, leavecode)
     Battlefield.onBattlefieldLeave(self, player, battlefield, leavecode)
 

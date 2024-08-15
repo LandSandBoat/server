@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class pathflag
 xi.pathflag =
 {
     NONE     = 0x00,

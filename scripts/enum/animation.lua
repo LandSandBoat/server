@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class animation
 xi.animation =
 {
     NONE                    = 0,

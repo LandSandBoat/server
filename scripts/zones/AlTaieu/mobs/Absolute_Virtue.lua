@@ -46,8 +46,6 @@ entity.onMagicHit = function(caster, target, spell)
             target:addMod(xi.mod.REGEN, -2)
         end
     end
-
-    return 1
 end
 
 entity.onMobDeath = function(mob, player, optParams)

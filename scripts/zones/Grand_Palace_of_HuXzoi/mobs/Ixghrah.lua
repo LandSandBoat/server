@@ -130,12 +130,6 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath  = function(mob, player, optParams)
-    if
-        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.A_FATE_DECIDED and
-        player:getCharVar('PromathiaStatus') == 1
-    then
-        player:setCharVar('PromathiaStatus', 2)
-    end
 end
 
 return entity

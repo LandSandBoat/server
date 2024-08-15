@@ -8,13 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
-
-    return 0, 0
+    return xi.job_utils.ranger.checkOverkill(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.OVERKILL, 11, 1, 60)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    return xi.job_utils.ranger.useOverkill(player, target, ability, action)
 end
 
 return abilityObject

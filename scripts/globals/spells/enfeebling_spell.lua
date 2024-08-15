@@ -13,8 +13,8 @@ xi.spells = xi.spells or {}
 xi.spells.enfeebling = xi.spells.enfeebling or {}
 -----------------------------------
 local pTable =
-{   --                                  1                             2           3                   4                    5      6    7         8       9    10        11         12
-    --                  [Spell ID ] = { Effect,                       Stat-Used,  Resist-Mod,         MEVA-Mod,            pBase, DoT, Duration, Resist, msg, immunity, pSaboteur, mAcc },
+{   --                                  1                             2           3                   4                    5      6    7         8       9    10                       11         12
+    --                  [Spell ID ] = { Effect,                       Stat-Used,  Resist-Mod,         MEVA-Mod,            pBase, DoT, Duration, Resist, msg, immunity,                pSaboteur, mAcc },
     -- Black Magic
     [xi.magic.spell.BIND          ] = { xi.effect.BIND,               xi.mod.INT, xi.mod.BINDRES,     xi.mod.BIND_MEVA,        0,   0,       60,      2,   0, xi.immunity.BIND,        false,       0 },
     [xi.magic.spell.BINDGA        ] = { xi.effect.BIND,               xi.mod.INT, xi.mod.BINDRES,     xi.mod.BIND_MEVA,        0,   0,       60,      2,   0, xi.immunity.BIND,        false,       0 },
@@ -26,8 +26,8 @@ local pTable =
     [xi.magic.spell.BURN          ] = { xi.effect.BURN,               xi.mod.INT, 0,                  0,                       0,   3,       90,      3,   1, xi.immunity.NONE,        true,        0 },
     [xi.magic.spell.CHOKE         ] = { xi.effect.CHOKE,              xi.mod.INT, 0,                  0,                       0,   3,       90,      3,   1, xi.immunity.NONE,        true,        0 },
     [xi.magic.spell.CURSE         ] = { xi.effect.CURSE_I,            xi.mod.INT, xi.mod.CURSERES,    xi.mod.CURSE_MEVA,      50,   0,      300,      2,   0, xi.immunity.NONE,        false,       0 },
-    [xi.magic.spell.DISPEL        ] = { xi.effect.NONE,               xi.mod.INT, 0,                  0,                       0,   0,        0,      4,   0, xi.immunity.NONE,        false,     175 },
-    [xi.magic.spell.DISPELGA      ] = { xi.effect.NONE,               xi.mod.INT, 0,                  0,                       0,   0,        0,      4,   0, xi.immunity.NONE,        false,       0 },
+    [xi.magic.spell.DISPEL        ] = { xi.effect.NONE,               xi.mod.INT, 0,                  0,                       0,   0,        0,      4,   0, xi.immunity.DISPEL,      false,     175 },
+    [xi.magic.spell.DISPELGA      ] = { xi.effect.NONE,               xi.mod.INT, 0,                  0,                       0,   0,        0,      4,   0, xi.immunity.DISPEL,      false,       0 },
     [xi.magic.spell.DISTRACT      ] = { xi.effect.EVASION_DOWN,       xi.mod.MND, 0,                  0,                       0,   0,      120,      2,   0, xi.immunity.NONE,        true,      150 },
     [xi.magic.spell.DISTRACT_II   ] = { xi.effect.EVASION_DOWN,       xi.mod.MND, 0,                  0,                       0,   0,      120,      2,   0, xi.immunity.NONE,        true,      150 },
     [xi.magic.spell.DISTRACT_III  ] = { xi.effect.EVASION_DOWN,       xi.mod.MND, 0,                  0,                       0,   0,      120,      2,   0, xi.immunity.NONE,        true,      150 },
@@ -73,7 +73,7 @@ local pTable =
     [xi.magic.spell.LUMINOHELIX_II] = { xi.effect.HELIX,              xi.mod.INT, 0,                  0,                       0,  10,       30,      0,   0, xi.immunity.NONE,        false,       0 },
 
     -- White Magic
-    [xi.magic.spell.ADDLE         ] = { xi.effect.ADDLE,              xi.mod.MND, 0,                  0,                      30,   0,      180,      2,   0, xi.immunity.NONE,        true,        0 },
+    [xi.magic.spell.ADDLE         ] = { xi.effect.ADDLE,              xi.mod.MND, 0,                  0,                      30,   0,      180,      2,   0, xi.immunity.ADDLE,       true,        0 },
     [xi.magic.spell.FLASH         ] = { xi.effect.FLASH,              xi.mod.MND, xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,     300,   0,       12,      4,   0, xi.immunity.NONE,        true,      200 },
     [xi.magic.spell.INUNDATION    ] = { xi.effect.INUNDATION,         xi.mod.MND, 0,                  0,                       1,   0,      300,      5,   0, xi.immunity.NONE,        false,       0 },
     [xi.magic.spell.PARALYZE      ] = { xi.effect.PARALYSIS,          xi.mod.MND, xi.mod.PARALYZERES, xi.mod.PARALYZE_MEVA,    0,   0,      120,      2,   0, xi.immunity.PARALYZE,    true,      -10 },
@@ -324,12 +324,11 @@ xi.spells.enfeebling.handleEffectNullification = function(caster, target, spell,
     if target:isMob() then
         local value = pTable[spellId][10]
 
-        -- Mob is completely immune. Set "Completely resists" message and nullify effect.
         if
             value > 0 and
             target:hasImmunity(value)
         then
-            spell:setMsg(xi.msg.basic.MAGIC_RESIST_2) -- TODO: Confirm correct message.
+            spell:setMsg(xi.msg.basic.MAGIC_COMPLETE_RESIST)
 
             return true
         end
@@ -488,6 +487,10 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     -- Bind: Dependant on target speed.
     if spellEffect == xi.effect.BIND then
         potency = target:getSpeed()
+
+    -- TODO: This is unnecesary, but, for now, we will comply with core.
+    elseif spellEffect == xi.effect.SLEEP_I then
+        subpotency = spellElement
 
     -- Addle: Has sub-effect.
     elseif spellEffect == xi.effect.ADDLE then

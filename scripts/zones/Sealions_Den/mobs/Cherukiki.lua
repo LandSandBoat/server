@@ -43,7 +43,7 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    local tenzenId = GetMobByID(ID.aWarriorsPath.WARRIORS_PATH_OFFSET + (bfID - 1))
+    local tenzenId = GetMobByID(ID.mob.TENZEN + (bfID - 1))
     if
         tenzenId:getHPP() <= 70 and
         battlefield:getLocalVar('fireworks') == 0

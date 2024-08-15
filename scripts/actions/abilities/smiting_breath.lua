@@ -16,7 +16,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-    xi.job_utils.dragoon.useSmitingBreath(player, target, ability, action, true)
+    xi.job_utils.dragoon.useSmitingBreath(player, target, ability, action)
 end
 
 return abilityObject

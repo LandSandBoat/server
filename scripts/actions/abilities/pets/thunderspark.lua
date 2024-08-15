@@ -13,9 +13,9 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local damage = math.floor(275 + pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
 
     -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage.dmg, xi.element.THUNDER, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.THUNDER, petskill)
-    damage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, 1)
+    damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.THUNDER, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
+    damage = xi.mobskills.mobAddBonuses(pet, target, damage, xi.element.THUNDER, petskill)
+    damage = xi.summon.avatarFinalAdjustments(damage, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, 1)
 
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.THUNDER)
     target:updateEnmityFromDamage(pet, damage)

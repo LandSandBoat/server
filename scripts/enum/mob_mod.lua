@@ -5,6 +5,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class mobMod
 xi.mobMod =
 {
     NONE                   = 0,
@@ -78,11 +79,12 @@ xi.mobMod =
     ALLI_HATE              = 68, -- Range around target to add alliance member to enmity list.
     NO_LINK                = 69, -- If set, mob cannot link until unset.
     NO_REST                = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
-    LEADER                 = 71, -- Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
+    LEADER                 = 71, -- Used for mob following. Positive number is how many followers a leader has. A negative number is the distance from this mob ID to the leader ID.
     MAGIC_RANGE            = 72, -- magic aggro range
     TARGET_DISTANCE_OFFSET = 73, -- Adjusts how close a mob will move to it's target. 12 = 1.2 yalm. Positive values to go closer, negative farther.
     ONE_WAY_LINKING        = 74, -- Will link with other mobs in its party (typically the same mob family) while roaming, but will not let others link with it once engaged
     CAN_PARRY              = 75, -- Check if a mob is allowed to have parry rank (Rank Value 1-5)
     NO_WIDESCAN            = 76, -- Disables widescan for a specific mob
     TRUST_DISTANCE         = 77, -- TRUSTS ONLY: Set movement type/distance. See trust.lua for details.
+    STANDBACK_RANGE        = 78, -- Applies a specific standback range for the mob
 }

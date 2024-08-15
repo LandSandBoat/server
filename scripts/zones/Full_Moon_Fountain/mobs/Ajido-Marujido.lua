@@ -7,31 +7,6 @@ local ID = zones[xi.zone.FULL_MOON_FOUNTAIN]
 -----------------------------------
 local entity = {}
 
-local function ajidoSelectTarget(mobArg)
-    -- pick a random living target from the two enemies
-    local inst       = mobArg:getBattlefield():getArea()
-    local instOffset = ID.mob.MOON_READING_OFFSET + (6 * (inst - 1))
-    local livingMobs = {}
-
-    for i = 4, 5 do
-        local mobTarget = GetMobByID(instOffset + i)
-        if not mobTarget:isDead() then
-            table.insert(livingMobs, mobTarget)
-        end
-    end
-
-    local target = nil
-    if #livingMobs > 0 then
-        target = livingMobs[math.random(1, #livingMobs)]
-    end
-
-    if target and not target:isDead() then
-        mobArg:addEnmity(target, 0, 1)
-    end
-
-    mobArg:engage(target:getID())
-end
-
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.REFRESH, 1)
     mob:setMobMod(xi.mobMod.TELEPORT_CD, 30)
@@ -47,14 +22,32 @@ entity.onMobSpawn = function(ajidoMob)
             mob:showText(mob, ID.text.YOU_SHOULD_BE_THANKFUL)
         end
     end)
-
-    -- TODO: This doesn't work, but the logic is here.
-    ajidoMob:timer(40000, function(mobArg)
-        ajidoSelectTarget(mobArg)
-    end)
 end
 
 entity.onMobRoam = function(mob)
+    local wait = mob:getLocalVar('wait')
+    if wait > 40 and not mob:getTarget() then
+        local battlefieldArea = mob:getBattlefield():getArea()
+        local mobOffset       = ID.mob.ACE_OF_CUPS + (battlefieldArea - 1) * 6 + 4
+
+        local livingMobs = {}
+        for mobId = mobOffset, mobOffset + 1 do
+            local target = GetMobByID(mobId)
+
+            if
+                target:isSpawned() and
+                not target:isDead()
+            then
+                table.insert(livingMobs, target)
+            end
+        end
+
+        local newTarget = livingMobs[math.random(1, #livingMobs)]
+        mob:addEnmity(newTarget, 0, 1)
+        mob:updateEnmity(newTarget)
+    else
+        mob:setLocalVar('wait', wait + 3)
+    end
 end
 
 entity.onMobEngage = function(mob, target)
@@ -73,9 +66,6 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDisengage = function(mob)
-    -- If the engaged enemy is defeated, select a new available
-    -- target from living enemies.
-    ajidoSelectTarget(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

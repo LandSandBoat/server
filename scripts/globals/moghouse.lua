@@ -111,6 +111,11 @@ xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
     local cs = -1
 
     player:eraseAllStatusEffect()
+    player:delStatusEffectSilent(xi.effect.POISON)
+    player:delStatusEffectSilent(xi.effect.BLINDNESS)
+    player:delStatusEffectSilent(xi.effect.PARALYSIS)
+    player:delStatusEffectSilent(xi.effect.SILENCE)
+
     player:setPos(0, 0, 0, 192)
 
     -- Moghouse data (bit-packed)

@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class title
 xi.title =
 {
     FODDERCHIEF_FLAYER                        = 1,
@@ -1060,7 +1061,7 @@ xi.title =
     KALUNGA_COLLAPSER                         = 1064,
     MBOZE_MAULER                              = 1065,
     ONGO_OBLITERATOR                          = 1066,
-    AREPATI_ASSAULTER                         = 1067,
+    AREBATI_ASSAULTER                         = 1067,
     BUMBA_BEFOULER                            = 1068,
     DHARTOK_DEFILER                           = 1069,
     GARTELL_GRINDER                           = 1070,

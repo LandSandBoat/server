@@ -20,29 +20,28 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     end
 
     local family = mob:getFamily()
-    local mobhp = mob:getHPP()
-    local result = 1
+    local mobHPP = mob:getHPP()
 
-    if family == 168 and mobhp <= 35 then -- Khimaira < 35%
-        result = 0
-    elseif family == 315 and mobhp <= 50 then -- Tyger < 50%
-        result = 0
+    if family == 168 and mobHPP <= 35 then -- Khimaira < 35%
+        return 0
+    elseif family == 315 and mobHPP <= 50 then -- Tyger < 50%
+        return 0
     end
 
-    return result
+    return 1
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    -- TODO: Hits all players near Khimaira, not just alliance.
+    local damage = mob:getWeaponDmg() * 4
 
-    local dmgmod = 3
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 4, xi.element.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.THUNDER, 3, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.THUNDER)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 40, 0, 60)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 4)
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.THUNDER)
-    return dmg
+    return damage
 end
 
 return mobskillObject

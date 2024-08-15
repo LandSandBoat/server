@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class damageType
 xi.damageType =
 {
     NONE      = 0,

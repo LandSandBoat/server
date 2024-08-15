@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class jobName
 xi.jobNames =
 {
     [ 0] = { 'NONE', 'None' },

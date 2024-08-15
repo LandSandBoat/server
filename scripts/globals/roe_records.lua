@@ -9482,7 +9482,7 @@ xi.roe.records =
     [4084] =
     { -- Heal for 500+ HP (D)
         trigger = xi.roeTrigger.HEAL_ALLY,
-        goal = 100,
+        goal = 30,
         reqs = { healMin = 500 },
         flags = set { 'daily' },
         reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },

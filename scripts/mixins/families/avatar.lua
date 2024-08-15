@@ -27,7 +27,13 @@ g_mixins.families.avatar = function(avatarMob)
 
         -- When GM is enabled, mobs will not automatically engage.  Update Enmity one more
         -- time to ensure that the listener will actually be triggered.
-        mob:updateEnmity()
+        local master = mob:getMaster()
+        if master ~= nil then
+            local target = master:getTarget()
+            if target ~= nil then
+                mob:updateEnmity(target)
+            end
+        end
 
         -- If something goes wrong, the avatar will clean itself up in 5s
         mob:timer(5000, function(mobArg)

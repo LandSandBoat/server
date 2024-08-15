@@ -9,25 +9,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local mabTotal = mob:getStatusEffect(xi.effect.MAGIC_ATK_BOOST)
-    local mdbTotal = mob:getStatusEffect(xi.effect.MAGIC_DEF_BOOST)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.MAGIC_DEF_BOOST, 30, 0, 120))
+    xi.mobskills.mobBuffMove(mob, xi.effect.MAGIC_ATK_BOOST, 30, 0, 120)
 
-    if mob:getStatusEffect(xi.effect.MAGIC_ATK_BOOST) ~= nil then -- mag atk bonus stacking
-        mabTotal = mabTotal:getPower() + 10
-    else
-        mabTotal = 10
-    end
-
-    if mob:getStatusEffect(xi.effect.MAGIC_DEF_BOOST) ~= nil then -- mag def bonus stacking
-        mdbTotal = mdbTotal:getPower() + 10
-    else
-        mdbTotal = 10
-    end
-
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.MAGIC_ATK_BOOST, mabTotal, 0, 180))
-    xi.mobskills.mobBuffMove(mob, xi.effect.MAGIC_DEF_BOOST, mdbTotal, 0, 180)
-
-    return xi.effect.MAGIC_ATK_BOOST
+    return xi.effect.MAGIC_DEF_BOOST
 end
 
 return mobskillObject

@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class questStatus
 xi.questStatus =
 {
     QUEST_AVAILABLE = 0,

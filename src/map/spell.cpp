@@ -27,6 +27,7 @@
 #include "blue_spell.h"
 #include "items/item_weapon.h"
 #include "map.h"
+#include "mob_spell_list.h"
 #include "spell.h"
 #include "status_effect_container.h"
 #include "utils/blueutils.h"
@@ -678,35 +679,26 @@ namespace spell
     // Check If user can cast spell
     bool CanUseSpell(CBattleEntity* PCaster, CSpell* spell)
     {
-        bool usable = false;
-
-        if (spell != nullptr)
+        if (spell == nullptr)
         {
-            uint8 JobMLVL      = spell->getJob(PCaster->GetMJob());
-            uint8 JobSLVL      = spell->getJob(PCaster->GetSJob());
-            uint8 requirements = spell->getRequirements();
+            return false;
+        }
 
-            if (PCaster->objtype == TYPE_MOB || (PCaster->objtype == TYPE_PET && static_cast<CPetEntity*>(PCaster)->getPetType() == PET_TYPE::AUTOMATON) ||
-                PCaster->objtype == TYPE_TRUST)
-            {
-                // cant cast cause im hidden or untargetable
+        bool  usable = false;
+        uint8 requirements;
+
+        switch (PCaster->objtype)
+        {
+            case TYPE_MOB:
+                // Unable to cast because caster is hidden or untargetable
                 if (PCaster->IsNameHidden() || static_cast<CMobEntity*>(PCaster)->GetUntargetable())
                 {
                     return false;
                 }
-
-                // ensure trust level is appropriate+
-                if (PCaster->objtype == TYPE_TRUST && PCaster->GetMLevel() < JobMLVL && PCaster->GetSLevel() < JobSLVL)
-                {
-                    return false;
-                }
-
                 // Mobs can cast any non-given char spell
                 return true;
-            }
 
-            if (PCaster->objtype == TYPE_PC)
-            {
+            case TYPE_PC:
                 if (spell->getSpellGroup() == SPELLGROUP_TRUST)
                 {
                     return true; // every PC can use trusts
@@ -715,35 +707,88 @@ namespace spell
                 {
                     return true;
                 }
-            }
+                [[fallthrough]];
+            case TYPE_FELLOW:
+            case TYPE_NPC:
+                requirements = spell->getRequirements();
 
-            if (PCaster->GetMLevel() >= JobMLVL)
-            {
-                usable = true;
-                if (requirements & SPELLREQ_TABULA_RASA)
+                // Make sure caster has the right main job and level
+                if (PCaster->GetMLevel() >= spell->getJob(PCaster->GetMJob()))
                 {
-                    if (!PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_TABULA_RASA))
+                    usable = true;
+                    if (requirements & SPELLREQ_TABULA_RASA)
                     {
-                        usable = false;
+                        if (!PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_TABULA_RASA))
+                        {
+                            usable = false;
+                        }
+                    }
+                    if (PCaster->GetMJob() == JOB_SCH)
+                    {
+                        if (requirements & SPELLREQ_ADDENDUM_BLACK)
+                        {
+                            if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_BLACK, EFFECT_ENLIGHTENMENT }))
+                            {
+                                usable = false;
+                            }
+                        }
+                        else if (requirements & SPELLREQ_ADDENDUM_WHITE)
+                        {
+                            if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_WHITE, EFFECT_ENLIGHTENMENT }))
+                            {
+                                usable = false;
+                            }
+                        }
+                    }
+                    if (spell->getSpellGroup() == SPELLGROUP_BLUE && PCaster->objtype == TYPE_PC)
+                    {
+                        if (requirements & SPELLREQ_UNBRIDLED_LEARNING)
+                        {
+                            if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_UNBRIDLED_LEARNING, EFFECT_UNBRIDLED_WISDOM }))
+                            {
+                                usable = false;
+                            }
+                        }
+                        else if (!blueutils::IsSpellSet((CCharEntity*)PCaster, (CBlueSpell*)spell))
+                        {
+                            usable = false;
+                        }
+                    }
+                    if (usable)
+                    {
+                        return true;
                     }
                 }
-                if (requirements & SPELLREQ_ADDENDUM_BLACK && PCaster->GetMJob() == JOB_SCH)
+
+                // Make sure caster has the right sub job and level
+                if (PCaster->GetSLevel() >= spell->getJob(PCaster->GetSJob()) && !(requirements & SPELLREQ_MAIN_JOB_ONLY))
                 {
-                    if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_BLACK, EFFECT_ENLIGHTENMENT }))
+                    usable = true;
+                    if (requirements & SPELLREQ_TABULA_RASA)
                     {
-                        usable = false;
+                        if (!PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_TABULA_RASA))
+                        {
+                            usable = false;
+                        }
                     }
-                }
-                else if (requirements & SPELLREQ_ADDENDUM_WHITE && PCaster->GetMJob() == JOB_SCH)
-                {
-                    if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_WHITE, EFFECT_ENLIGHTENMENT }))
+                    if (PCaster->GetSJob() == JOB_SCH)
                     {
-                        usable = false;
+                        if (requirements & SPELLREQ_ADDENDUM_BLACK)
+                        {
+                            if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_BLACK, EFFECT_ENLIGHTENMENT }))
+                            {
+                                usable = false;
+                            }
+                        }
+                        else if (requirements & SPELLREQ_ADDENDUM_WHITE)
+                        {
+                            if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_WHITE, EFFECT_ENLIGHTENMENT }))
+                            {
+                                usable = false;
+                            }
+                        }
                     }
-                }
-                else if (spell->getSpellGroup() == SPELLGROUP_BLUE)
-                {
-                    if (PCaster->objtype == TYPE_PC)
+                    if (spell->getSpellGroup() == SPELLGROUP_BLUE && PCaster->objtype == TYPE_PC)
                     {
                         if (requirements & SPELLREQ_UNBRIDLED_LEARNING)
                         {
@@ -758,55 +803,37 @@ namespace spell
                         }
                     }
                 }
+                return usable;
+
+            case TYPE_PET:
+                if (static_cast<CPetEntity*>(PCaster)->getPetType() == PET_TYPE::AUTOMATON)
+                {
+                    usable = true;
+                }
+                [[fallthrough]];
+            case TYPE_TRUST:
+                // Unable to cast because caster is hidden or untargetable
+                if (PCaster->IsNameHidden() || static_cast<CMobEntity*>(PCaster)->GetUntargetable())
+                {
+                    return false;
+                }
+
                 if (usable)
                 {
                     return true;
                 }
-            }
-            if (PCaster->GetSLevel() >= JobSLVL && !(requirements & SPELLREQ_MAIN_JOB_ONLY))
-            {
-                usable = true;
-                if (requirements & SPELLREQ_TABULA_RASA)
+
+                // Ensure pet or trust is level appropriate
+                if (PCaster->GetMLevel() < static_cast<CMobEntity*>(PCaster)->m_SpellListContainer->GetSpellMinLevel(spell->getID()))
                 {
-                    if (!PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_TABULA_RASA))
-                    {
-                        usable = false;
-                    }
+                    return false;
                 }
-                if (requirements & SPELLREQ_ADDENDUM_BLACK && PCaster->GetSJob() == JOB_SCH)
-                {
-                    if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_BLACK, EFFECT_ENLIGHTENMENT }))
-                    {
-                        usable = false;
-                    }
-                }
-                else if (requirements & SPELLREQ_ADDENDUM_WHITE && PCaster->GetSJob() == JOB_SCH)
-                {
-                    if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_WHITE, EFFECT_ENLIGHTENMENT }))
-                    {
-                        usable = false;
-                    }
-                }
-                else if (spell->getSpellGroup() == SPELLGROUP_BLUE)
-                {
-                    if (PCaster->objtype == TYPE_PC)
-                    {
-                        if (requirements & SPELLREQ_UNBRIDLED_LEARNING)
-                        {
-                            if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_UNBRIDLED_LEARNING, EFFECT_UNBRIDLED_WISDOM }))
-                            {
-                                usable = false;
-                            }
-                        }
-                        else if (!blueutils::IsSpellSet((CCharEntity*)PCaster, (CBlueSpell*)spell))
-                        {
-                            usable = false;
-                        }
-                    }
-                }
-            }
+                return true;
+
+            default:
+                break;
         }
-        return usable;
+        return false;
     }
 
     // This is a utility method for mobutils, when we want to work out if we can give monsters a spell

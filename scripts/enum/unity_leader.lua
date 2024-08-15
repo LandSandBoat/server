@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class unityLeader
 xi.unityLeader =
 {
     NONE              = 0,

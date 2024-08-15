@@ -146,7 +146,7 @@ quest.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if
-                        player:getLocalVar('battlefieldWin') == 1122 and
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.OMENS and
                         quest:getVar(player, 'Prog') == 0
                     then
                         quest:setVar(player, 'Prog', 1)

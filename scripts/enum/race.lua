@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class race
 xi.race =
 {
     HUME_M   = 1,

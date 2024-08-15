@@ -16,13 +16,11 @@ local content = BattlefieldQuest:new({
     exitNpc          = 'Burning_Circle',
     requiredItems    = { xi.item.BANISHING_CHARM },
 
-    questArea = xi.questLog.OUTLANDS,
-    quest     = xi.quest.id.outlands.A_THIEF_IN_NORG,
+    questArea     = xi.questLog.OUTLANDS,
+    quest         = xi.quest.id.outlands.A_THIEF_IN_NORG,
+    requiredVar   = 'Quest[5][142]Prog',
+    requiredValue = 6,
 })
-
-function content:entryRequirement(player, npc, isRegistrant, trade)
-    return xi.quest.getVar(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG, 'Prog') == 6
-end
 
 content.groups =
 {

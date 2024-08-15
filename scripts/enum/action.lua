@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class action
 xi.action =
 {
     NONE                  = 0,

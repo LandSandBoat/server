@@ -10,19 +10,16 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power    = 30
-    local resist   = xi.mobskills.applyPlayerResistance(mob, xi.effect.TERROR, target, mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT), 0, 0)
-    local duration = 30 * resist
+    local damage   = mob:getWeaponDmg()
+    local duration = math.floor(30 * xi.mobskills.applyPlayerResistance(mob, xi.effect.TERROR, target, mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT), 0, 0))
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, power, 0, duration)
+    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.ICE, 1.5, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ICE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 
-    local dmgmod = 1.5
-    local info   = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg(), xi.element.ICE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg    = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ICE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.ICE)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 30, 0, duration)
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.ICE)
-
-    return dmg
+    return damage
 end
 
 return mobskillObject

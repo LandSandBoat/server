@@ -5,6 +5,7 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     mob:setMod(xi.mod.WATER_ABSORB, 100)
 end
 

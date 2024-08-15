@@ -87,8 +87,9 @@ public:
     void LoadStatusEffects();                    // We load the character effects
     void SaveStatusEffects(bool logout = false); // We keep the character effects
 
-    uint8 GetEffectsCount(EFFECT ID); // We get the number of effects with the specified ID
-    uint8 GetLowestFreeSlot();        // returns the lowest free slot for songs/rolls
+    uint8 GetEffectsCount(EFFECT ID);               // We get the number of effects with the specified ID
+    uint8 GetEffectsCountWithFlag(EFFECTFLAG flag); // We get the number of effects with the specified flag
+    uint8 GetLowestFreeSlot();                      // returns the lowest free slot for songs/rolls
 
     bool ApplyCorsairEffect(CStatusEffect* PStatusEffect, uint8 maxRolls, uint8 bustDuration);
     bool CheckForElevenRoll();

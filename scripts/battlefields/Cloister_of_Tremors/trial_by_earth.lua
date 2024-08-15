@@ -8,6 +8,7 @@ local cloisterOfTremorsID = zones[xi.zone.CLOISTER_OF_TREMORS]
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.CLOISTER_OF_TREMORS,
     battlefieldId    = xi.battlefield.id.TRIAL_BY_EARTH,
+    canLoseExp       = false,
     maxPlayers       = 6,
     timeLimit        = utils.minutes(30),
     index            = 0,
@@ -16,7 +17,7 @@ local content = BattlefieldQuest:new({
     requiredKeyItems = { xi.ki.TUNING_FORK_OF_EARTH },
 
     questArea = xi.questLog.BASTOK,
-    quest     = xi.quest.id.outlands.TRIAL_BY_EARTH,
+    quest     = xi.quest.id.bastok.TRIAL_BY_EARTH,
 })
 
 content.groups =

@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@class guild
 xi.guild =
 {
     FISHING      = 0,

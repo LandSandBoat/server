@@ -68,7 +68,7 @@ mission.sections =
                     -- in various missions.
 
                     if
-                        player:getLocalVar('battlefieldWin') == 353 and
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.DARKNESS_DESCENDS and
                         mission:getVar(player, 'Status') == 1
                     then
                         mission:setVar(player, 'Status', 2)

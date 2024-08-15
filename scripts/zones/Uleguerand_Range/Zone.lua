@@ -31,13 +31,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(363.025, 16, -60, 12)
     end
 
-    if
-        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-        player:getCharVar('COP_louverance_story') == 1
-    then
-        cs = 17
-    end
-
     return cs
 end
 
@@ -48,9 +41,6 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 17 then
-        player:setCharVar('COP_louverance_story', 2)
-    end
 end
 
 zoneObject.onZoneWeatherChange = function(weather)

@@ -180,7 +180,7 @@ local function getBattutaSpikesType(type)
         [xi.effect.TELLUS]   = xi.subEffect.CLOD_SPIKES,
         [xi.effect.SULPOR]   = xi.subEffect.SHOCK_SPIKES,
         [xi.effect.UNDA]     = xi.subEffect.DELUGE_SPIKES,
-        [xi.effect.LUX]      = xi.subEffect.REPSIRAL,
+        [xi.effect.LUX]      = xi.subEffect.REPRISAL,
         [xi.effect.TENEBRAE] = xi.subEffect.DEATH_SPIKES,
     }
 
@@ -381,7 +381,7 @@ xi.job_utils.rune_fencer.onSwordplayEffectLose = function(target, effect)
 end
 
 xi.job_utils.rune_fencer.useVivaciousPulse = function(player, target, ability, effect)
-    return calculateVivaciousPulseHealing(player, target)
+    return calculateVivaciousPulseHealing(player)
 end
 
 xi.job_utils.rune_fencer.checkHaveRunes = function(player)
@@ -513,16 +513,23 @@ end
 local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc) -- get these multipliers once and store them
     local multipliers = {}
 
-    multipliers.eleStaffBonus       = xi.spells.damage.calculateEleStaffBonus(player, element)
+    multipliers.eleStaffBonus       = xi.spells.damage.calculateElementalStaffBonus(player, element)
     multipliers.magianAffinity      = xi.spells.damage.calculateMagianAffinity() -- Presumed but untested.
     multipliers.SDT                 = xi.spells.damage.calculateSDT(target, element)
     multipliers.resist              = xi.spells.damage.calculateResist(player, target, 0, 0, element, 0, bonusMacc)
-    multipliers.magicBurst          = xi.spells.damage.calculateIfMagicBurst(target, element)
-    multipliers.magicBurstBonus     = xi.spells.damage.calculateIfMagicBurstBonus(player, target, 0, 0, element)
     multipliers.dayAndWeather       = xi.spells.damage.calculateDayAndWeather(player, 0, element)
     multipliers.magicBonusDiff      = xi.spells.damage.calculateMagicBonusDiff(player, target, 0, 0, element)
     multipliers.TMDA                = xi.spells.damage.calculateTMDA(target, element)
     multipliers.nukeAbsorbOrNullify = xi.spells.damage.calculateNukeAbsorbOrNullify(target, element)
+    multipliers.magicBurst          = 1
+    multipliers.magicBurstBonus     = 1
+
+    local _, skillchainCount = xi.magicburst.formMagicBurst(element, target)
+
+    if skillchainCount > 0 then
+        multipliers.magicBurst          = xi.spells.damage.calculateIfMagicBurst(target, element, skillchainCount)
+        multipliers.magicBurstBonus     = xi.spells.damage.calculateIfMagicBurstBonus(player, target, 0, element)
+    end
 
     return multipliers
 end
@@ -688,7 +695,7 @@ local function addPflugResistType(type, effect, power)
         [xi.effect.FLABRA]   = { xi.mod.PETRIFYRES, xi.mod.SLOWRES },
         [xi.effect.TELLUS]   = { xi.mod.STUNRES },
         [xi.effect.SULPOR]   = { xi.mod.POISONRES },
-        [xi.effect.UNDA]     = { xi.mod.AMNESIARES, xi.mod.PLAGUERES },
+        [xi.effect.UNDA]     = { xi.mod.AMNESIARES, xi.mod.VIRUSRES },
         [xi.effect.LUX]      = { xi.mod.SLEEPRES, xi.mod.BLINDRES, xi.mod.CURSERES },
         [xi.effect.TENEBRAE] = { xi.mod.CHARMRES },
     }
@@ -798,26 +805,6 @@ xi.job_utils.rune_fencer.useRayke = function(player, target, ability, action)
     player:removeAllRunes()
 
     return xi.effect.RAYKE -- Rayke doesn't seem to inform you if it had no effect? -- TODO: double check
-end
-
--- Used for nuke wall reduction of Rayke
-xi.job_utils.rune_fencer.isRaykeReducingElement = function(actor, element)
-    local effect = actor:getStatusEffect(xi.effect.RAYKE)
-
-    if effect then
-        local subpower = effect:getSubPower()
-
-        -- current bit size of subPower is 16 bits, 4*4 = 16
-        -- Step from 0 to 16 in increments of 4...
-        for i = 0, 16, 4 do
-            -- If element is bitpacked into rayke subeffect...
-            if bit.band(bit.rshift(subpower, i), 0xF) == element then
-                return true
-            end
-        end
-    end
-
-    return false
 end
 
 -- see https://www.bg-wiki.com/ffxi/One_for_All

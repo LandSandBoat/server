@@ -4,6 +4,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class aoeRadius
 xi.aoeRadius =
 {
     ATTACKER = 1,

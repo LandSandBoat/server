@@ -6,24 +6,17 @@ local effectObject = {}
 effectObject.onEffectGain = function(target, effect)
     local power = -effect:getPower()
 
-    target:addMod(xi.mod.ACC, power)
-    target:addMod(xi.mod.EVA, power)
-    target:addMod(xi.mod.MACC, power)
-    target:addMod(xi.mod.MEVA, power)
-    target:addMod(xi.mod.STORETP, power)
+    effect:addMod(xi.mod.ACC, power)
+    effect:addMod(xi.mod.EVA, power)
+    effect:addMod(xi.mod.MACC, power)
+    effect:addMod(xi.mod.MEVA, power)
+    effect:addMod(xi.mod.STORETP, power)
 end
 
 effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    local power = -effect:getPower()
-
-    target:delMod(xi.mod.ACC, power)
-    target:delMod(xi.mod.EVA, power)
-    target:delMod(xi.mod.MACC, power)
-    target:delMod(xi.mod.MEVA, power)
-    target:delMod(xi.mod.STORETP, power)
 end
 
 return effectObject

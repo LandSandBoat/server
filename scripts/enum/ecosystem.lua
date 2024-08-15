@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class ecosystem
 xi.ecosystem =
 {
     ERROR          = 0,
@@ -29,4 +30,5 @@ xi.ecosystem =
     VORAGEAN       = 21,
 }
 
+---@alias eco ecosystem
 xi.eco = xi.ecosystem

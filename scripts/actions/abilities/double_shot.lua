@@ -8,11 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.ranger.checkDoubleShot(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.DOUBLE_SHOT, 40, 0, 90)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    return xi.job_utils.ranger.useDoubleShot(player, target, ability, action)
 end
 
 return abilityObject

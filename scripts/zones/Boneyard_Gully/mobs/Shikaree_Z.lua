@@ -5,7 +5,11 @@
 local entity = {}
 
 entity.onMobEngage = function(mob, target)
-    SpawnMob(mob:getID() + 3)
+    -- TODO: Need capture to see if this should actually be using 2HR ability as opposed to a direct
+    -- spawn.
+
+    local pet = SpawnMob(mob:getID() + 3)
+    pet:updateEnmity(target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

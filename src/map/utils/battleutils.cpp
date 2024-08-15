@@ -1360,7 +1360,7 @@ namespace battleutils
 
             if (hasDrainDaze || hasAspirDaze || hasHasteDaze)
             {
-                int16 delay = PAttacker->GetWeaponDelay(false) / 10;
+                int32 delay = PAttacker->GetWeaponDelay(false) / 10;
 
                 EFFECT daze       = EFFECT_NONE;
                 uint32 attackerID = 0;
@@ -1682,7 +1682,7 @@ namespace battleutils
         return pdif;
     }
 
-    int16 CalculateBaseTP(int delay)
+    int16 CalculateBaseTP(int32 delay)
     {
         int16 x = 1;
         if (delay <= 180)
@@ -2130,13 +2130,20 @@ namespace battleutils
             if (isBlocked)
             {
                 uint8 absorb = 100;
+
+                // shield def bonus is a flat raw damage reduction that occurs before absorb
+                // however do not reduce below 0 or if damage is negative
+                if (damage > 0)
+                {
+                    damage = std::max(0, damage - PDefender->getMod(Mod::SHIELD_DEF_BONUS));
+                }
+
                 if (const auto PChar = dynamic_cast<CCharEntity*>(PDefender))
                 {
                     CItemEquipment* slotSub = PChar->getEquip(SLOT_SUB);
                     if (slotSub && slotSub->IsShield())
                     {
                         absorb = std::clamp(100 - slotSub->getShieldAbsorption(), 0, 100);
-                        absorb -= PDefender->getMod(Mod::SHIELD_DEF_BONUS); // Include Shield Defense Bonus in absorb amount
 
                         // Shield Mastery
                         if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
@@ -2215,6 +2222,8 @@ namespace battleutils
             HandleAfflatusMiseryDamage(PDefender, damage);
         }
         damage = std::clamp(damage, -99999, 99999);
+
+        damage = CheckAndApplyDamageCap(damage, PDefender);
 
         // Scarlet Delirium: Updates status effect power with damage bonus
         battleutils::HandleScarletDelirium(PDefender, damage);
@@ -2301,13 +2310,13 @@ namespace battleutils
 
             if ((slot == SLOT_RANGED || slot == SLOT_AMMO) && PAttacker->objtype == TYPE_PC)
             {
-                int16 delay = PAttacker->GetRangedWeaponDelay(true);
+                int32 delay = PAttacker->GetRangedWeaponDelay(true);
 
-                baseTp = CalculateBaseTP((delay * 120) / 1000);
+                baseTp = CalculateBaseTP(delay * 120 / 1000);
             }
             else
             {
-                int16 delay      = PAttacker->GetWeaponDelay(true);
+                int32 delay      = PAttacker->GetWeaponDelay(true);
                 auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
 
                 if (sub_weapon && sub_weapon->getDmgType() > DAMAGE_TYPE::NONE && sub_weapon->getDmgType() < DAMAGE_TYPE::HTH &&
@@ -2323,7 +2332,7 @@ namespace battleutils
                     ratio = 2.0f;
                 }
 
-                baseTp = CalculateBaseTP((int16)(delay * 60.0f / 1000.0f / ratio));
+                baseTp = CalculateBaseTP(delay * 60.0f / 1000.0f / ratio);
             }
 
             if (giveTPtoAttacker)
@@ -2385,6 +2394,14 @@ namespace battleutils
         auto* weapon   = GetEntityWeapon(PAttacker, (SLOTTYPE)slot);
         bool  isRanged = (slot == SLOT_AMMO || slot == SLOT_RANGED);
 
+        if (attackType == ATTACK_TYPE::PHYSICAL &&
+            PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_DEFENSE_BOOST) &&
+            PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DEFENSE_BOOST)->GetSubPower() != 0 &&
+            infront(PAttacker->loc.p, PDefender->loc.p, PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DEFENSE_BOOST)->GetSubPower()))
+        {
+            damage = 0;
+        }
+
         if (damage > 0)
         {
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
@@ -2398,6 +2415,8 @@ namespace battleutils
 
         HandleAfflatusMiseryDamage(PDefender, damage);
         damage = std::clamp(damage, -99999, 99999);
+
+        damage = CheckAndApplyDamageCap(damage, PDefender);
 
         int32 corrected = PDefender->takeDamage(damage, PAttacker, attackType, damageType);
         if (damage < 0)
@@ -2451,12 +2470,12 @@ namespace battleutils
 
             if (isRanged)
             {
-                int16 delay = PAttacker->GetRangedWeaponDelay(true);
+                int32 delay = PAttacker->GetRangedWeaponDelay(true);
                 baseTp      = CalculateBaseTP((delay * 120) / 1000);
             }
             else
             {
-                int16 delay = PAttacker->GetWeaponDelay(true);
+                int32 delay = PAttacker->GetWeaponDelay(true);
 
                 auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
 
@@ -2473,7 +2492,7 @@ namespace battleutils
                     ratio = 2.0f;
                 }
 
-                baseTp = (int16)(CalculateBaseTP((delay * 60) / 1000) / ratio);
+                baseTp = CalculateBaseTP(delay * 60 / 1000 / ratio);
             }
 
             // add tp to attacker
@@ -2567,6 +2586,8 @@ namespace battleutils
 
     int32 TakeSwipeLungeDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
     {
+        damage = CheckAndApplyDamageCap(damage, PDefender);
+
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
         // Remove effects from damage
@@ -2791,7 +2812,7 @@ namespace battleutils
 
             critHitRate += GetDexCritBonus(PAttacker, PDefender);
             critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
-            critHitRate += PDefender->getMod(Mod::ENEMYCRITRATE);
+            critHitRate -= PDefender->getMod(Mod::CRITICAL_HIT_EVASION); // Similar to merits. However, it can be possitive or negative. When mod is negative, it raises crit-hit-rate.
 
             // need to check for mods that only impact attacks with a specific weapon (like Senjuinrikio)
             if (auto* player = dynamic_cast<CCharEntity*>(PAttacker))
@@ -2882,7 +2903,7 @@ namespace battleutils
 
         critHitRate += GetAGICritBonus(PAttacker, PDefender);
         critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
-        critHitRate += PDefender->getMod(Mod::ENEMYCRITRATE);
+        critHitRate -= PDefender->getMod(Mod::CRITICAL_HIT_EVASION); // Similar to merits. However, it can be possitive or negative. When mod is negative, it raises crit-hit-rate.
         critHitRate = std::clamp(critHitRate, 0, 100);
 
         return (uint8)critHitRate;
@@ -5008,6 +5029,35 @@ namespace battleutils
         PChar->PClaimedMob = nullptr;
     }
 
+    // Checks to see if the mob has a damage cap value
+    // This is used for instances like Suttung, Antaeus, Crustacean Conundrum bcnm, Colonization reives
+    int32 CheckAndApplyDamageCap(int32 damage, CBattleEntity* PDefender)
+    {
+        int32 damageCap     = PDefender->getMod(Mod::RECEIVED_DAMAGE_CAP);     // The max damage cap
+        int32 damageVariant = PDefender->getMod(Mod::RECEIVED_DAMAGE_VARIANT); // The value you want the damage to have a variance by
+
+        // If the target has no mod or the damage is less than the cap return normal damage
+        if (damageCap == 0 || damage < damageCap)
+        {
+            return damage;
+        }
+
+        damage = std::clamp(damage, 0, damageCap);
+
+        // If for whatever reason your damage variant is set too high set the variant to 0 as a fail safe
+        if (damageVariant > damageCap)
+        {
+            ShowWarning("battleutils::CheckAndApplyDamageCap - RECEIVED_DAMAGE_VARIANT is > than RECEIVED_DAMAGE_CAP");
+            damageVariant = 0;
+        }
+
+        // see https://bugs.llvm.org/show_bug.cgi?id=18767#c1 ; essentially, [min, max) range on this RNG call excludes the max
+        // so we must add +1 to our max to achieve the range we want
+        damage -= xirand::GetRandomNumber<int32>(0, damageVariant + 1);
+
+        return std::clamp(damage, damageCap - damageVariant, damageCap);
+    }
+
     int32 BreathDmgTaken(CBattleEntity* PDefender, int32 damage)
     {
         float resist = 1.0f + PDefender->getMod(Mod::UDMGBREATH) / 10000.f;
@@ -5037,6 +5087,8 @@ namespace battleutils
         {
             damage = HandleSevereDamage(PDefender, damage, false);
         }
+
+        damage = CheckAndApplyDamageCap(damage, PDefender);
 
         return damage;
     }
@@ -5093,6 +5145,8 @@ namespace battleutils
             damage = HandleSevereDamage(PDefender, damage, false);
         }
 
+        damage = CheckAndApplyDamageCap(damage, PDefender);
+
         return damage;
     }
 
@@ -5140,6 +5194,8 @@ namespace battleutils
             damage = HandleFanDance(PDefender, damage);
         }
 
+        damage = CheckAndApplyDamageCap(damage, PDefender);
+
         return damage;
     }
 
@@ -5184,6 +5240,8 @@ namespace battleutils
 
             damage = HandleFanDance(PDefender, damage);
         }
+
+        damage = CheckAndApplyDamageCap(damage, PDefender);
 
         return damage;
     }
@@ -6639,7 +6697,8 @@ namespace battleutils
             }
 
             // remove TP Bonus from offhand weapon
-            if (PChar->equip[SLOT_SUB] != 0)
+            // TODO -- don't remove TP bonus if this TP bonus is from an augment (or perhaps add a second TP bonus stat.)
+            if (PChar->m_Weapons[SLOT_SUB])
             {
                 tp -= battleutils::GetScaledItemModifier(PEntity, PChar->m_Weapons[SLOT_SUB], Mod::TP_BONUS);
             }
@@ -6647,7 +6706,7 @@ namespace battleutils
             // if ranged WS, remove TP bonus from mainhand weapon
             if (damslot == SLOT_RANGED)
             {
-                if (PChar->equip[SLOT_MAIN] != 0)
+                if (PChar->m_Weapons[SLOT_MAIN])
                 {
                     tp -= battleutils::GetScaledItemModifier(PEntity, PChar->m_Weapons[SLOT_MAIN], Mod::TP_BONUS);
                 }
@@ -6655,7 +6714,8 @@ namespace battleutils
             else
             {
                 // if melee WS, remove TP bonus from ranged weapon
-                if (PChar->equip[SLOT_RANGED] != 0)
+                // TODO -- don't remove TP bonus if this TP bonus is from an augment (or perhaps add a second TP bonus stat.)
+                if (PChar->m_Weapons[SLOT_RANGED])
                 {
                     tp -= battleutils::GetScaledItemModifier(PEntity, PChar->m_Weapons[SLOT_RANGED], Mod::TP_BONUS);
                 }

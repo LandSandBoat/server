@@ -335,7 +335,12 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
                     }
                 }
 
-                auto trustCount = static_cast<CCharEntity*>(m_PLeader)->PTrusts.size();
+                size_t trustCount = 0;
+                if (m_PLeader != nullptr)
+                {
+                    trustCount = static_cast<CCharEntity*>(m_PLeader)->PTrusts.size();
+                }
+
                 PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size(), trustCount);
 
                 PChar->pushPacket(new CPartyDefinePacket(nullptr));
@@ -855,7 +860,12 @@ void CParty::ReloadParty()
     {
         RefreshFlags(info);
         CBattleEntity* PLeader    = GetLeader();
-        auto           trustCount = static_cast<CCharEntity*>(PLeader)->PTrusts.size();
+        size_t         trustCount = 0;
+
+        if (PLeader != nullptr)
+        {
+            trustCount = static_cast<CCharEntity*>(PLeader)->PTrusts.size();
+        }
 
         // regular party
         for (auto& member : members)

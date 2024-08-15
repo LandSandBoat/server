@@ -50,7 +50,7 @@ mission.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if
-                        player:getLocalVar('battlefieldWin') == 961 and
+                        player:getLocalVar('battlefieldWin') == xi.battlefield.id.SAVAGE and
                         mission:getVar(player, 'Status') == 1
                     then
                         mission:setVar(player, 'Status', 2)

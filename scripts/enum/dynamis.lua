@@ -1,6 +1,7 @@
 xi = xi or {}
 xi.dynamis = xi.dynamis or {}
 
+---@class eye
 xi.dynamis.eye =
 {
     NONE    = 0,

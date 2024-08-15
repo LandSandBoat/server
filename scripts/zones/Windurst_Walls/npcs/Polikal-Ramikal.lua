@@ -8,13 +8,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local turmoil = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
-
-    if turmoil == xi.questStatus.QUEST_ACCEPTED then
-        player:startEvent(391)
-    else
-        player:startEvent(320)
-    end
+    player:startEvent(320)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

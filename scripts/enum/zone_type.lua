@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class zoneType
 xi.zoneType =
 {
     UNKNOWN   = 0x0000,

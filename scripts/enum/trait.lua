@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class trait
 xi.trait =
 {
     -- Offset by 1536 from ROM\181\72.dat

@@ -78,7 +78,6 @@ entity.onTrigger = function(player, npc)
     local moonlitPath = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
     local tuningIn = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TUNING_IN)
     local tuningOut = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TUNING_OUT)
-    local turmoil = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
 
     -- Tuning In
     if
@@ -146,8 +145,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(889) -- Reminder to go help Ildy in Kazham
     elseif moonlitPath == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(847, 0, 1125) -- Having completed Moonlit Path, this will indefinitely replace his standard dialogue!
-    elseif turmoil == xi.questStatus.QUEST_ACCEPTED then
-        player:startEvent(790, 0, xi.ki.RHINOSTERY_CERTIFICATE)
     end
 end
 

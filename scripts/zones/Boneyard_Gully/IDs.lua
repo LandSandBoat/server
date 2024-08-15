@@ -31,70 +31,15 @@ zones[xi.zone.BONEYARD_GULLY] =
     },
     mob =
     {
+        PARATA     = GetFirstID('Parata'),
+        SHIKAREE_Z = GetFirstID('Shikaree_Z'),
+        TUCHULCHA  = GetFirstID('Tuchulcha'),
     },
+
     npc =
     {
     },
-    sheepInAntlionsClothing =
-    {
-        [1] =
-        {
-            TUCHULCHA_ID      = 16810001,
-            SWIFT_HUNTER_ID   = 16810002,
-            SHREWD_HUNTER_ID  = 16810003,
-            ARMORED_HUNTER_ID = 16810004,
-            -- List of positions used to set
-            -- (1) Tuchulcha's location after using sand pit
-            -- (2) The starting position of the hunters
-            ant_positions =
-            {
-                { -517,    0, -521, 171 },
-                { -534,    0, -460, 171 },
-                { -552,  2.2, -440, 171 },
-                { -572, -3.6, -464, 171 },
-                { -573,  2.2, -427, 171 },
-                { -562,    0, -484, 171 },
-                { -593,    0, -480, 171 },
-                { -610, -1.5, -490, 171 },
-            },
-        },
-        [2] =
-        {
-            TUCHULCHA_ID      = 16810007,
-            SWIFT_HUNTER_ID   = 16810008,
-            SHREWD_HUNTER_ID  = 16810009,
-            ARMORED_HUNTER_ID = 16810010,
-            ant_positions =
-            {
-                {   43,    0,  40, 7 },
-                {   26,    0, 100, 7 },
-                {    7,  2.2, 118, 7 },
-                {  -13, -3.6,  95, 7 },
-                {  -13,  2.2, 133, 7 },
-                { -2.3,    0,  76, 7 },
-                {  -33,    0,  79, 7 },
-                {  -54, -1.5,  67, 7 },
-            },
-        },
-        [3] =
-        {
-            TUCHULCHA_ID      = 16810013,
-            SWIFT_HUNTER_ID   = 16810014,
-            SHREWD_HUNTER_ID  = 16810015,
-            ARMORED_HUNTER_ID = 16810016,
-            ant_positions =
-            {
-                { 522,    0, 521, 240 },
-                { 506,    0, 580, 240 },
-                { 466,  2.2, 614, 240 },
-                { 467, -3.6,  57, 240 },
-                { 488,  2.2, 598, 240 },
-                { 478,    0, 557, 240 },
-                { 446,    0, 558, 240 },
-                { 430, -1.5, 550, 240 },
-            },
-        },
-    },
+
     shellWeDance =
     {
         [1] =

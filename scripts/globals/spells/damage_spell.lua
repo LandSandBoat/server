@@ -363,16 +363,14 @@ xi.spells.damage.calculateMTDR = function(spell)
     return multipleTargetReduction
 end
 
-xi.spells.damage.calculateEleStaffBonus = function(caster, spellElement)
-    local eleStaffBonus = caster:getMod(xi.combat.element.strongAffinityDmg[spellElement])
+xi.spells.damage.calculateElementalStaffBonus = function(caster, spellElement)
+    local elementalStaffBonus = 1
 
-    if eleStaffBonus > 0 then
-        eleStaffBonus = 1 + eleStaffBonus * 0.05
-    else
-        eleStaffBonus = 1
+    if spellElement > xi.element.NONE then
+        elementalStaffBonus = elementalStaffBonus + caster:getMod(xi.combat.element.strongAffinityDmg[spellElement]) * 0.05
     end
 
-    return eleStaffBonus
+    return elementalStaffBonus
 end
 
 xi.spells.damage.calculateMagianAffinity = function()
@@ -390,7 +388,7 @@ xi.spells.damage.calculateSDT = function(target, spellElement)
     local sdt    = 1 -- The variable we want to calculate
     local sdtMod = 0
 
-    if spellElement ~= xi.element.NONE then
+    if spellElement > xi.element.NONE then
         sdtMod = target:getMod(xi.combat.element.specificDmgTakenMod[spellElement])
 
     -- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
@@ -432,89 +430,17 @@ xi.spells.damage.calculateResist = function(caster, target, spellGroup, skillTyp
     return resist
 end
 
-xi.spells.damage.calculateIfMagicBurst = function(target, spellElement)
-    local magicBurst         = 1 -- The variable we want to calculate
-    local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
-
-    if skillchainCount > 0 then
-        local rankBonus  = 0
-
-        if spellElement ~= xi.element.NONE then
-            local resistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
-            local rankTable  = { 1.15, 0.85, 0.6, 0.5, 0.4, 0.15, 0.05 }
-
-            if resistRank <= -3 then
-                rankBonus = 1.5
-            elseif resistRank >= 5 then
-                rankBonus = 0
-            else
-                rankBonus = rankTable[resistRank + 3]
-            end
-        end
-
-        magicBurst = 1.25 + (0.1 * skillchainCount) + rankBonus
-    end
-
-    return magicBurst
-end
-
-xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spellId, spellGroup, spellElement)
-    local magicBurstBonus        = 1 -- The variable we want to calculate
-    local modBurst               = 1
-    local ancientMagicBurstBonus = 0
-    local _, skillchainCount     = xi.magicburst.formMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
-
-    -- TODO: merge spellFamily and spell ID tables into one table in spell_data.lua, then maybe ad a family for all AM and use spellFamily here instead of spellID
-    if spellId >= xi.magic.spell.FLARE and spellId <= xi.magic.spell.FLOOD_II then
-        ancientMagicBurstBonus = caster:getMerit(xi.merit.ANCIENT_MAGIC_BURST_DMG) / 100
-    end
-
-    -- MBB = 1.0 + Gear + Atma/Atmacite + AMII Merits + others -- This Caps at 1.4
-    -- MBB = MBB + trait
-
-    if spellGroup == xi.magic.spellGroup.BLUE then
-        if
-            not caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
-            not caster:hasStatusEffect(xi.effect.AZURE_LORE)
-        then
-            return magicBurstBonus
-        end
-
-        caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
-    end
-
-    -- Obtain multiplier from gear, atma and job traits -- Job traits should be done separately
-    modBurst = modBurst + (caster:getMod(xi.mod.MAG_BURST_BONUS) / 100) + ancientMagicBurstBonus
-
-    -- Apply Innin Magic Burst bonus
-    if caster:isBehind(target) and caster:hasStatusEffect(xi.effect.INNIN) then
-        modBurst = modBurst + (caster:getMerit(xi.merit.INNIN_EFFECT) / 100)
-    end
-
-    -- BLM Job Point: Magic Burst Damage
-    modBurst = modBurst + (caster:getJobPointLevel(xi.jp.MAGIC_BURST_DMG_BONUS) / 100)
-
-    -- Cap bonuses from first multiplier at 40% or 1.4
-    if modBurst > 1.4 then
-        modBurst = 1.4
-    end
-
-    -- TODO: BLM job trait has to be separate from gear trait, since the job trait is NOT capped. At least, cap is not known.
-    -- Magic Burst Damage I is found in gear. caps at 40% with innin, AM2 and such
-    -- Magic Burst Damage II is found in other gear and BLM job traits pertain to this one OR to a third, separate one. neither has known cap
-
-    if skillchainCount > 0 then
-        magicBurstBonus = modBurst -- + modBurstTrait once investigated. Probably needs to be divided by 100
-    end
-
-    return magicBurstBonus
-end
-
 xi.spells.damage.calculateDayAndWeather = function(caster, spellId, spellElement)
     local dayAndWeather = 1 -- The variable we want to calculate
-    local weather       = caster:getWeather()
-    local dayElement    = VanadielDayElement()
-    local isHelixSpell  = false -- TODO: I'm not sure thats the correct way to handle helixes. This is how we handle it and im not gonna change it for now.
+
+    -- Return if no/incorrect element.
+    if spellElement <= xi.element.NONE then
+        return dayAndWeather
+    end
+
+    local weather      = caster:getWeather()
+    local dayElement   = VanadielDayElement()
+    local isHelixSpell = false -- TODO: I'm not sure thats the correct way to handle helixes. This is how we handle it and im not gonna change it for now.
 
     -- See if its a Helix type spell
     if
@@ -691,7 +617,7 @@ xi.spells.damage.calculateDivineSealMultiplier = function(caster, skillType)
 
     if
         caster:hasStatusEffect(xi.effect.DIVINE_SEAL) and
-        skillType == xi.skill.HEALING
+        skillType == xi.skill.HEALING_MAGIC
     then
         divineSealMultiplier = 2
         caster:delStatusEffect(xi.effect.DIVINE_SEAL)
@@ -853,13 +779,20 @@ end
 
 xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
     local nukeAbsorbOrNullify = 1
+    local absorbElementMod    = 0
+    local nullifyElementMod   = 0
+
+    if spellElement > xi.element.NONE then
+        absorbElementMod  = xi.combat.element.absorbMod[spellElement]
+        nullifyElementMod = xi.combat.element.nullMod[spellElement]
+    end
 
     -- Calculate chance for spell absorption.
     local absorbChance = math.random(1, 100)
     if
-        absorbChance <= target:getMod(xi.mod.ABSORB_DMG_CHANCE) or               -- All damage.
-        absorbChance <= target:getMod(xi.mod.MAGIC_ABSORB) or                    -- Magical damage.
-        absorbChance <= target:getMod(xi.combat.element.absorbMod[spellElement]) -- Element damage.
+        absorbChance <= target:getMod(xi.mod.ABSORB_DMG_CHANCE) or -- All damage.
+        absorbChance <= target:getMod(xi.mod.MAGIC_ABSORB) or      -- Magical damage.
+        absorbChance <= target:getMod(absorbElementMod)            -- Element damage.
     then
         nukeAbsorbOrNullify = -1
     end
@@ -867,14 +800,63 @@ xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
     -- Calculate chance for spell nullification.
     local nullifyChance = math.random(1, 100)
     if
-        nullifyChance <= target:getMod(xi.mod.NULL_DAMAGE) or                   -- All damage.
-        nullifyChance <= target:getMod(xi.mod.NULL_MAGICAL_DAMAGE) or           -- Magical damage.
-        nullifyChance <= target:getMod(xi.combat.element.nullMod[spellElement]) -- Element damage.
+        nullifyChance <= target:getMod(xi.mod.NULL_DAMAGE) or         -- All damage.
+        nullifyChance <= target:getMod(xi.mod.NULL_MAGICAL_DAMAGE) or -- Magical damage.
+        nullifyChance <= target:getMod(nullifyElementMod)             -- Element damage.
     then
         nukeAbsorbOrNullify = 0
     end
 
     return nukeAbsorbOrNullify
+end
+
+xi.spells.damage.calculateIfMagicBurst = function(target, spellElement, skillchainCount)
+    local magicBurst = 1 -- The variable we want to calculate
+
+    if spellElement > xi.element.NONE then
+        local resistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
+        local rankTable  = { 1.15, 0.85, 0.6, 0.5, 0.4, 0.15, 0.05 }
+        local rankBonus  = 0
+
+        if resistRank <= -3 then
+            rankBonus = 1.5
+        elseif resistRank >= 5 then
+            rankBonus = 0
+        else
+            rankBonus = rankTable[resistRank + 3]
+        end
+
+        magicBurst = 1.25 + rankBonus + skillchainCount / 10
+    end
+
+    return magicBurst
+end
+
+xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spellId, spellElement)
+    local magicBurstBonus = 1 -- The variable we want to calculate
+    local cappedBonus     = caster:getMod(xi.mod.MAGIC_BURST_BONUS_CAPPED) / 100
+    local uncappedBonus   = caster:getMod(xi.mod.MAGIC_BURST_BONUS_UNCAPPED) / 100
+
+    -- TODO: merge spellFamily and spell ID tables into one table in spell_data.lua, then maybe add a family for all AM and use spellFamily here instead of spellID
+    if spellId >= xi.magic.spell.FLARE and spellId <= xi.magic.spell.FLOOD_II then
+        cappedBonus = cappedBonus + caster:getMerit(xi.merit.ANCIENT_MAGIC_BURST_DMG) / 100
+    end
+
+    -- Apply Innin Magic Burst bonus
+    if caster:isBehind(target) and caster:hasStatusEffect(xi.effect.INNIN) then
+        cappedBonus = cappedBonus + caster:getMerit(xi.merit.INNIN_EFFECT) / 100
+    end
+
+    -- Cap bonuses from first step at 40% or 0.4
+    cappedBonus = utils.clamp(cappedBonus, 0, 0.4)
+
+    -- BLM Job Point: Magic Burst Damage
+    uncappedBonus = uncappedBonus + caster:getJobPointLevel(xi.jp.MAGIC_BURST_DMG_BONUS) / 100
+
+    -- Get final multiplier
+    magicBurstBonus = magicBurstBonus + cappedBonus + uncappedBonus
+
+    return magicBurstBonus
 end
 
 -- Consecutive Elemental Damage Penalty. Most commonly known as "Nuke Wall".
@@ -883,9 +865,9 @@ xi.spells.damage.calculateNukeWallFactor = function(target, spellElement, finalD
 
     -- Initial check.
     if
-        not target:isNM() or
-        spellElement ~= xi.element.NONE or
-        finalDamage < 0
+        not target:isNM() or               -- Target is not an NM.
+        spellElement <= xi.element.NONE or -- Action isn't elemental.
+        finalDamage < 0                    -- Action hals target.
     then
         return nukeWallFactor
     end
@@ -896,14 +878,33 @@ xi.spells.damage.calculateNukeWallFactor = function(target, spellElement, finalD
     if target:hasStatusEffect(xi.effect.NUKE_WALL) then
         local effect = target:getStatusEffect(xi.effect.NUKE_WALL)
 
+        -- Current nuke wall effect.
         if spellElement == effect:getSubPower() then
             potency = effect:getPower()
 
             -- Effect potency is reduced by 20% after 1 second and remains stable for the remaining time, unless refreshed.
             if effect:getTimeRemaining() <= 4000 then
-                potency = utils.clamp(potency - 2000, 0, 4000) -- Potency is reduced by 2000 after first second has happened. Can't go below 0.
+                potency = utils.clamp(potency - 2000, 0, 4000) -- Potency is reduced by 2000 (20%) after first second has happened. Can't go below 0.
             end
         end
+
+        -- Rayke effect.
+        if target:hasStatusEffect(xi.effect.RAYKE) then
+            local raykeSubpower = target:getStatusEffect(xi.effect.RAYKE):getSubPower()
+
+            -- current bit size of subPower is 16 bits, 4*4 = 16
+            -- Step from 0 to 16 in increments of 4...
+            for i = 0, 16, 4 do
+                -- If element is bitpacked into rayke subeffect...
+                if bit.band(bit.rshift(raykeSubpower, i), 0xF) == spellElement then
+                    potency = math.floor(potency / 2)
+
+                    break
+                end
+            end
+        end
+
+        target:delStatusEffectSilent(xi.effect.NUKE_WALL)
     end
 
     nukeWallFactor = 1 - potency / 10000
@@ -915,7 +916,6 @@ xi.spells.damage.calculateNukeWallFactor = function(target, spellElement, finalD
     local finalPotency = utils.clamp(math.floor(4000 * finalDamage / damageCap) + potency, 0, 4000)
 
     -- Renew status effect.
-    target:delStatusEffectSilent(xi.effect.NUKE_WALL)
     target:addStatusEffectEx(xi.effect.NUKE_WALL, 0, finalPotency, 0, 5, 0, spellElement)
 
     return nukeWallFactor
@@ -938,12 +938,10 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     -- Variables/steps to calculate finalDamage.
     local spellDamage                 = xi.spells.damage.calculateBaseDamage(caster, target, spellId, spellGroup, skillType, statUsed)
     local multipleTargetReduction     = xi.spells.damage.calculateMTDR(spell)
-    local eleStaffBonus               = xi.spells.damage.calculateEleStaffBonus(caster, spellElement)
+    local elementalStaffBonus         = xi.spells.damage.calculateElementalStaffBonus(caster, spellElement)
     local magianAffinity              = xi.spells.damage.calculateMagianAffinity()
     local sdt                         = xi.spells.damage.calculateSDT(target, spellElement)
     local resist                      = xi.spells.damage.calculateResist(caster, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
-    local magicBurst                  = xi.spells.damage.calculateIfMagicBurst(target, spellElement)
-    local magicBurstBonus             = xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, spellGroup, spellElement)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, spellId, spellElement)
     local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement)
     local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, spellElement)
@@ -960,14 +958,35 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local areaOfEffectResistance      = xi.spells.damage.calculateAreaOfEffectResistance(target, spell)
     local nukeAbsorbOrNullify         = xi.spells.damage.calculateNukeAbsorbOrNullify(target, spellElement)
 
+    -- Magic burst
+    local magicBurst      = 1
+    local magicBurstBonus = 1
+
+    -- If spell is NOT blue magic OR (if its blue magic AND has status effect)
+    if
+        spellGroup ~= xi.magic.spellGroup.BLUE or
+        (spellGroup == xi.magic.spellGroup.BLUE and
+        (caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
+        caster:hasStatusEffect(xi.effect.AZURE_LORE)))
+    then
+        local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
+
+        if skillchainCount > 0 then
+            magicBurst      = xi.spells.damage.calculateIfMagicBurst(target, spellElement, skillchainCount)
+            magicBurstBonus = xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, spellElement)
+
+            if spellGroup == xi.magic.spellGroup.BLUE then
+                caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
+            end
+        end
+    end
+
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
     finalDamage = math.floor(spellDamage * multipleTargetReduction)
-    finalDamage = math.floor(finalDamage * eleStaffBonus)
+    finalDamage = math.floor(finalDamage * elementalStaffBonus)
     finalDamage = math.floor(finalDamage * magianAffinity)
     finalDamage = math.floor(finalDamage * sdt)
     finalDamage = math.floor(finalDamage * resist)
-    finalDamage = math.floor(finalDamage * magicBurst)
-    finalDamage = math.floor(finalDamage * magicBurstBonus)
     finalDamage = math.floor(finalDamage * dayAndWeather)
     finalDamage = math.floor(finalDamage * magicBonusDiff)
     finalDamage = math.floor(finalDamage * targetMagicDamageAdjustment)
@@ -983,6 +1002,8 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * helixMeritMultiplier)
     finalDamage = math.floor(finalDamage * areaOfEffectResistance)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
+    finalDamage = math.floor(finalDamage * magicBurst)
+    finalDamage = math.floor(finalDamage * magicBurstBonus)
 
     -- Handle "Nuke Wall". It must be handled after all previous calculations, but before clamp.
     local nukeWallFactor = xi.spells.damage.calculateNukeWallFactor(target, spellElement, finalDamage)
@@ -1011,6 +1032,9 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
 
     -- Handle final adjustments. Most are located in core. TODO: Decide if we want core handling this.
     else
+        -- Check if the mob has a damage cap
+        finalDamage = target:checkDamageCap(finalDamage)
+
         -- Handle Bind break and TP?
         target:takeSpellDamage(caster, spell, finalDamage, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + spellElement)
 

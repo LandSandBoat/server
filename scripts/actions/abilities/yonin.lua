@@ -8,13 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.ninja.checkYonin(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    target:delStatusEffect(xi.effect.INNIN)
-    target:delStatusEffect(xi.effect.YONIN)
-    target:addStatusEffect(xi.effect.YONIN, 30, 15, 300, 0, 20)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    xi.job_utils.ninja.useYonin(player, target, ability, action)
 end
 
 return abilityObject

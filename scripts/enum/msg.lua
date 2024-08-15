@@ -8,6 +8,7 @@ xi.msg = xi.msg or {}
 -- Message Channels
 -----------------------------------
 
+---@class channel
 xi.msg.channel =
 {
     SAY            = 0,
@@ -46,6 +47,7 @@ xi.msg.channel =
 }
 
 -- used by player:printToArea
+---@class area
 xi.msg.area =
 {
     SYSTEM      = 0, -- Server wide like the purple stuff :)
@@ -60,6 +62,7 @@ xi.msg.area =
 -- Basic Messages
 -----------------------------------
 
+---@class basic
 xi.msg.basic =
 {
     NONE    = 0, -- Display nothing
@@ -102,6 +105,7 @@ xi.msg.basic =
     MAGIC_REMOVE_EFFECT_2  = 571, -- <number> of <target>'s status ailments disappear!
     MAGIC_ABSORB_AILMENT   = 572, -- <caster> casts <spell>. <caster> absorbs <number> of <target>'s status ailments.
     MAGIC_MUST_ASTRAL_FLOW = 581, -- Unable to cast <spell>. Astral Flow must be in effect to cast this spell.
+    MAGIC_COMPLETE_RESIST  = 655, -- <caster> casts <spell>. <target> completely resists the spell.
 
     -- Weaponskill / Mobskill (0-255 WS, 256+ monster skill)
     SKILL_RECOVERS_HP      = 103, -- The <player> uses .. <target> recovers .. HP.
@@ -157,6 +161,12 @@ xi.msg.basic =
     STATUS_BOOST_2         = 365, -- All of <target>'s status parameters are boosted.
     JA_MAGIC_BURST         = 379, -- <user> uses <ability>. Magic Burst! the <target> takes <amount> damage.
     JA_ENMITY_DECREASE     = 743, -- <user> uses <ability>. <target>'s enmity decreases.
+
+    -- "Fortified against" messages
+    FORTIFIED_DEMONS       = 149, -- <target> is fortified against demons.
+    FORTIFIED_DRAGONS      = 151, -- <target> is fortified against dragons.
+    FORTIFIED_UNDEAD       = 286, -- <target> is fortified against undead.
+    FORTIFIED_ARCANA       = 287, -- <target> is fortified against arcana.
 
     -- Misc Other
     DEFEATS_TARG           = 6,   -- The <player> defeats <target>.
@@ -396,6 +406,7 @@ xi.msg.basic =
 }
 
 -- Used to modify certain basic messages.
+---@class actionModifier
 xi.msg.actionModifier =
 {
     NONE        = 0x00,
@@ -409,6 +420,7 @@ xi.msg.actionModifier =
 -- System Messages
 -----------------------------------
 
+---@class system
 xi.msg.system =
 {
     GLOBAL_TRUST_OFFSET          = 0,

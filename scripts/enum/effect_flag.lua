@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@class effectFlag
 xi.effectFlag =
 {
     NONE            = 0x00000000,

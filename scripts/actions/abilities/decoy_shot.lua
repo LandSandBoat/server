@@ -8,11 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.ranger.checkDecoyShot(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(xi.effect.DECOY_SHOT, 11, 1, 30)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    return xi.job_utils.ranger.useDecoyShot(player, target, ability, action)
 end
 
 return abilityObject

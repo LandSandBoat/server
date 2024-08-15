@@ -3,21 +3,14 @@
 -----------------------------------
 local effectObject = {}
 
--- TODO: This should be crit evasion down, but is currently increasing
--- enemy crit rate (Is this the same thing?)
 effectObject.onEffectGain = function(target, effect)
-    local effectPower = effect:getPower()
-
-    target:addMod(xi.mod.ENEMYCRITRATE, effectPower)
+    effect:addMod(xi.mod.CRITICAL_HIT_EVASION, -effect:getPower()) -- Lowers target crtical hit evasion, effectively raising oponents critical hit rate.
 end
 
 effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    local effectPower = effect:getPower()
-
-    target:delMod(xi.mod.ENEMYCRITRATE, effectPower)
 end
 
 return effectObject

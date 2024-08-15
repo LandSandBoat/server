@@ -231,12 +231,12 @@ int main(int argc, char** argv)
 
     log_init(argc, argv);
     set_socket_type();
-    usercheck();
     signals_init();
     timer_init();
 
     lua_init();
     settings::init();
+    usercheck();
 
     socket_init();
 
