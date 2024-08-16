@@ -90,7 +90,12 @@ uint8 ConquestData::getRegionOwner(REGION_TYPE region) const
         return regionControls[regionNum].current;
     }
 
-    ShowError(fmt::format("Invalid conquest region passed to function ({})", regionNum));
+    // This can be called for Latent effects that work outside of conquest areas eg. Dynamis/Limbus
+    if (regionNum > (uint8)REGION_TYPE::LIMBUS)
+    {
+        ShowError(fmt::format("Invalid conquest region passed to function ({})", regionNum));
+    }
+
     return 0;
 }
 
