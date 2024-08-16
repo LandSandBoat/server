@@ -3822,6 +3822,12 @@ namespace charutils
         return delBit(WeaponSkillID, PChar->m_WeaponSkills, sizeof(PChar->m_WeaponSkills));
     }
 
+    bool canUseWeaponSkill(CCharEntity* PChar, uint16 wsid)
+    {
+        CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(wsid);
+        return PChar->GetSkill(PWeaponSkill->getType()) >= PWeaponSkill->getSkillLevel();
+    }
+
     /************************************************************************
      *                                                                       *
      *  Trait Functions                                                      *
