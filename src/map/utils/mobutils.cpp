@@ -900,6 +900,14 @@ namespace mobutils
                 {
                     PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 658); // catapult only used while at range
                 }
+                else if (PMob->m_Family == 246) // Trolls
+                {
+                    PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1747); // Zarraqa only used while at range
+                    PMob->defaultMobMod(MOBMOD_STANDBACK_COOL, 0);
+                    PMob->defaultMobMod(MOBMOD_SPECIAL_COOL, 14);
+                    PMob->defaultMobMod(MOBMOD_HP_STANDBACK, 70);
+                    break;
+                }
                 else if (PMob->m_Family == 3) // Aern
                 {
                     PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1388);

@@ -1068,15 +1068,19 @@ INSERT INTO `mob_skill_lists` VALUES ('Treant',245,328); -- drill_branch
 INSERT INTO `mob_skill_lists` VALUES ('Treant',245,329); -- pinecone_bomb
 INSERT INTO `mob_skill_lists` VALUES ('Treant',245,331); -- leafstorm
 INSERT INTO `mob_skill_lists` VALUES ('Treant',245,332); -- entangle
--- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1741);
--- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1742);
+INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1741);
+INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1742);
 INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1743);
 INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1744);
 INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1745);
 INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1746);
--- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1748);
--- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1749);
--- 247: Tube
+INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1748);
+INSERT INTO `mob_skill_lists` VALUES ('ArmoredTroll',247,1894);
+INSERT INTO `mob_skill_lists` VALUES ('ArmoredTroll',247,1895);
+INSERT INTO `mob_skill_lists` VALUES ('ArmoredTroll',247,1896);
+INSERT INTO `mob_skill_lists` VALUES ('ArmoredTroll',247,1897);
+INSERT INTO `mob_skill_lists` VALUES ('ArmoredTroll',247,1898);
+INSERT INTO `mob_skill_lists` VALUES ('ArmoredTroll',247,1899);
 -- 248 to 249: free
 INSERT INTO `mob_skill_lists` VALUES ('Uragnite_shell',250,1571); -- gas_shell
 INSERT INTO `mob_skill_lists` VALUES ('Uragnite_shell',250,1572); -- venom_shell
