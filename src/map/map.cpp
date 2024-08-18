@@ -40,6 +40,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <thread>
 
 #include "ability.h"
+#include "common/debug.h"
 #include "common/vana_time.h"
 #include "job_points.h"
 #include "linkshell.h"
@@ -186,6 +187,13 @@ int32 do_init(int32 argc, char** argv)
 
 #ifdef TRACY_ENABLE
     ShowInfo("*** TRACY IS ENABLED ***");
+
+    if (!debug::isUserRoot())
+    {
+        ShowWarning("You are NOT running as the root superuser or admin.");
+        ShowWarning("This is required for Tracy to work properly.");
+        std::this_thread::sleep_for(std::chrono::seconds(5));
+    }
 #endif // TRACY_ENABLE
 
     ShowInfo("do_init: begin server initialization");

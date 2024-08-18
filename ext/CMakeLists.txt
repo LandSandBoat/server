@@ -28,10 +28,14 @@ if(TRACY_ENABLE)
         OPTIONS
             "TRACY_ENABLE ON"
             "TRACY_ON_DEMAND ON"
-            "TRACY_CALLSTACK ON" # Value hardcoded to 8 in common/tracy.h
+            "TRACY_CALLSTACK ON" # Value hardcoded to 4 in common/tracy.h
             "TRACY_NO_BROADCAST ON"
+            "TRACY_NO_CONTEXT_SWITCH ON"
             "TRACY_NO_EXIT ON"
-            "TRACY_TIMER_FALLBACK OFF" # Maybe useful to set ON for Linux VMs?
+            "TRACY_NO_VSYNC_CAPTURE ON"
+            "TRACY_NO_FRAME_IMAGE ON"
+            # "TRACY_NO_SYSTEM_TRACING ON" # This is incredibly heavy, add this line back if you need to speed up profiling
+            # "TRACY_TIMER_FALLBACK OFF" # Maybe useful to set ON for Linux VMs?
             "TRACY_LIBBACKTRACE_ELF_DYNLOAD_SUPPORT ON"
     )
 

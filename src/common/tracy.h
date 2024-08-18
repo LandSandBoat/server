@@ -24,7 +24,7 @@
 // clang-format off
 #ifdef TRACY_ENABLE
 
-#define TRACY_CALLSTACK 8
+#define TRACY_CALLSTACK 4
 #include "tracy/Tracy.hpp"
 
 #include <cstdint>

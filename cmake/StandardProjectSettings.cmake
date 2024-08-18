@@ -64,16 +64,10 @@ if(MSVC)
     )
 
     if(CMAKE_BUILD_TYPE STREQUAL Debug)
-        # TODO: Where is this /Zi coming from?
-        # Command line warning D9025: overriding '/ZI' with '/Zi'
-        string(REPLACE "/Zi" "/ZI" CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
-        string(REPLACE "/Zi" "/ZI" CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
-        string(REPLACE "/Zi" "/ZI" CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO}")
-        string(REPLACE "/Zi" "/ZI" CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
-
-        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /INCREMENTAL /SAFESEH:NO /EDITANDCONTINUE")
+        # /EDITANDCONTINUE isn't supported, it messes with Tracy
+        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /INCREMENTAL /SAFESEH:NO")
         list(APPEND FLAGS_AND_DEFINES
-            /ZI # Omit Default Library Name
+            /Zi
             /GR # Enable RTTI
         )
     else()
