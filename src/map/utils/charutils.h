@@ -239,6 +239,7 @@ namespace charutils
     auto  GetConquestPointsName(CCharEntity* PChar) -> std::string;
     void  SendToZone(CCharEntity* PChar, uint8 type, uint64 ipp);
     void  ForceLogout(CCharEntity* PChar);
+    void  ForceDropConnection(CCharEntity* PChar);
     void  ForceRezone(CCharEntity* PChar);
     void  HomePoint(CCharEntity* PChar);
     bool  AddWeaponSkillPoints(CCharEntity*, SLOTTYPE, int);

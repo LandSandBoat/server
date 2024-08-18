@@ -56,6 +56,7 @@ struct map_session_data_t
     blowfish_t   blowfish           = {};      // unique decypher keys
     CCharEntity* PChar              = nullptr; // game char
     uint8        shuttingDown       = 0;       // prevents double session closing
+    bool         ignoreTraffic      = false;   // if true, all traffic for this session will be ignored. The client will eventually time out
 };
 
 extern uint32 map_amntplayers;
@@ -77,6 +78,7 @@ extern in_addr map_ip;
 extern uint16  map_port;
 
 extern inline map_session_data_t* mapsession_getbyipp(uint64 ipp);
+extern inline map_session_data_t* mapsession_getbychar(CCharEntity* PChar);
 extern inline map_session_data_t* mapsession_createsession(uint32 ip, uint16 port);
 
 extern std::unique_ptr<SqlConnection> _sql;

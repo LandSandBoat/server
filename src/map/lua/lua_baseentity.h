@@ -192,6 +192,7 @@ public:
 
     void forceRezone();
     void forceLogout();
+    void forceDropConnection();
 
     auto  getPos() -> sol::table;
     void  showPosition();

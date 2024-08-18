@@ -105,6 +105,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "puppetutils.h"
 #include "zoneutils.h"
 
+#include "map.h"
+
 /************************************************************************
  *                                                                       *
  *  Experience tables                                                    *
@@ -6530,6 +6532,14 @@ namespace charutils
     {
         PChar->status = STATUS_TYPE::SHUTDOWN;
         charutils::SendToZone(PChar, 1, 0);
+    }
+
+    void ForceDropConnection(CCharEntity* PChar)
+    {
+        if (auto* session = mapsession_getbychar(PChar))
+        {
+            session->ignoreTraffic = true;
+        }
     }
 
     void ForceRezone(CCharEntity* PChar)

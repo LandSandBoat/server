@@ -2453,14 +2453,14 @@ void CLuaBaseEntity::openSendBox()
 
 void CLuaBaseEntity::leaveGame()
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        charutils::ForceLogout(PChar);
+    }
+    else
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return;
     }
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    charutils::ForceLogout(PChar);
 }
 
 /************************************************************************
@@ -2828,6 +2828,14 @@ void CLuaBaseEntity::forceLogout()
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
         charutils::ForceLogout(PChar);
+    }
+}
+
+void CLuaBaseEntity::forceDropConnection()
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        charutils::ForceDropConnection(PChar);
     }
 }
 
@@ -18705,6 +18713,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("sendEmptyEntityUpdateToPlayer", CLuaBaseEntity::sendEmptyEntityUpdateToPlayer);
     SOL_REGISTER("forceRezone", CLuaBaseEntity::forceRezone);
     SOL_REGISTER("forceLogout", CLuaBaseEntity::forceLogout);
+    SOL_REGISTER("forceDropConnection", CLuaBaseEntity::forceDropConnection);
 
     // Abyssea
     SOL_REGISTER("getAvailableTraverserStones", CLuaBaseEntity::getAvailableTraverserStones);
