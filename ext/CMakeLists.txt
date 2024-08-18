@@ -18,27 +18,32 @@ message(STATUS "TRACY_ENABLE: ${TRACY_ENABLE}")
 # CPM Modules
 if(TRACY_ENABLE)
     # Tracy version tag, without the leading 'v'
-    set(TRACY_VERSION 0.10)
+    set(TRACY_VERSION 0.11.0)
 
     # Download client library
     CPMAddPackage(
-        NAME tracy
+        NAME TracyClient
         GITHUB_REPOSITORY wolfpld/tracy
         GIT_TAG v${TRACY_VERSION}
         OPTIONS
             "TRACY_ENABLE ON"
             "TRACY_ON_DEMAND ON"
-            "TRACY_NO_EXIT ON"
+            "TRACY_CALLSTACK ON" # Value hardcoded to 4 in common/tracy.h
             "TRACY_NO_BROADCAST ON"
-            "TRACY_NO_SYSTEM_TRACING ON"
-            "TRACY_TIMER_QPC ON"
+            "TRACY_NO_CONTEXT_SWITCH ON"
+            "TRACY_NO_EXIT ON"
+            "TRACY_NO_VSYNC_CAPTURE ON"
+            "TRACY_NO_FRAME_IMAGE ON"
+            # "TRACY_NO_SYSTEM_TRACING ON" # This is incredibly heavy, add this line back if you need to speed up profiling
+            # "TRACY_TIMER_FALLBACK OFF" # Maybe useful to set ON for Linux VMs?
+            "TRACY_LIBBACKTRACE_ELF_DYNLOAD_SUPPORT ON"
     )
 
     # Download Win32 server executables
     if(MSVC)
         message(STATUS "Downloading Tracy client")
         file(DOWNLOAD
-            https://github.com/wolfpld/tracy/releases/download/v${TRACY_VERSION}/Tracy-${TRACY_VERSION}.7z
+            https://github.com/wolfpld/tracy/releases/download/v${TRACY_VERSION}/windows-${TRACY_VERSION}.zip
             ${CMAKE_SOURCE_DIR}/tracy.tar.gz
             TIMEOUT 60
         )
