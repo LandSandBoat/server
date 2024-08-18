@@ -267,6 +267,11 @@ void CTreasurePool::LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
     }
 
     CItem* PItem = itemutils::GetItem(m_PoolItems[SlotID].ID);
+    if (PItem == nullptr)
+    {
+        ShowWarning(fmt::format("Player {} is trying to lot on an item that doesn't exist (PItem was nullptr) (Packet injection?)!", PChar->getName()).c_str());
+        return;
+    }
 
     // Cannot lot if player's inventory is full
     if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
