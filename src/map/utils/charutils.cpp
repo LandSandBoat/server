@@ -2729,6 +2729,9 @@ namespace charutils
                     PChar->PLatentEffectContainer->CheckLatentsEquip(equipSlotID);
                     PChar->addPetModifiers(&PItem->petModList);
 
+                    // Only call the lua onEquip if its a valid equip - e.g. has passed EquipArmor and other checks above
+                    luautils::OnItemEquip(PChar, PItem);
+
                     PChar->pushPacket(new CEquipPacket(slotID, equipSlotID, containerID));
                     PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_NODROP));
                 }
@@ -2752,11 +2755,6 @@ namespace charutils
 
             BuildingCharWeaponSkills(PChar);
             PChar->pushPacket(new CCharAbilitiesPacket(PChar));
-        }
-
-        if (PItem != nullptr)
-        {
-            luautils::OnItemEquip(PChar, PItem);
         }
 
         charutils::BuildingCharSkillsTable(PChar);
