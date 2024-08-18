@@ -144,6 +144,7 @@ private:
     std::vector<pathpoint_t> m_patrol;
     std::vector<position_t>  m_turnPoints;
     position_t               m_originalPoint;
+    position_t               m_destinationPoint; // TODO: optional<>?
     float                    m_distanceFromPoint;
 
     uint8  m_pathFlags;
