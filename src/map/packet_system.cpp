@@ -2311,7 +2311,6 @@ void SmallPacket0x03D(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x041(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
-    PrintPacket(data);
 
     uint8 SlotID = data.ref<uint8>(0x04);
 
@@ -2339,7 +2338,6 @@ void SmallPacket0x041(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x042(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
-    PrintPacket(data);
 
     uint8 SlotID = data.ref<uint8>(0x04);
 
@@ -8228,7 +8226,6 @@ void SmallPacket0x112(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x113(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
-    PrintPacket(data);
 
     if (PChar->status != STATUS_TYPE::NORMAL)
     {
