@@ -13214,8 +13214,8 @@ INSERT INTO `mob_groups` VALUES (75,4006,206,'Trion',0,128,0,0,0,75,75,1); -- al
 
 INSERT INTO `mob_groups` VALUES (1,4645,207,'Ifrit_Prime_TBF',0,128,0,7650,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (2,7052,207,'Ifrit_Prime_TSTBF',0,128,0,700,0,20,20,0);
-INSERT INTO `mob_groups` VALUES (3,4645,207,'Ifrit_Prime_WTB',0,128,0,0,0,85,85,0);
-INSERT INTO `mob_groups` VALUES (4,1341,207,'Fire_Elemental',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (3,2050,207,'Ifrit_Prime_WTB',0,128,0,25000,0,85,85,0);
+INSERT INTO `mob_groups` VALUES (4,1341,207,'Fire_Elemental',0,128,0,3000,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (5,7043,207,'Ifrit_Prime_ASA',0,128,0,4000,0,40,40,0);
 INSERT INTO `mob_groups` VALUES (6,4645,207,'Ifrit_Prime_HTBF',0,128,0,0,0,99,99,0);
 
