@@ -108,6 +108,7 @@ enum MOBMODIFIER : int
     MOBMOD_TRUST_DISTANCE         = 77, // TRUSTS ONLY: Set movement type/distance. See trust.lua for details.
     MOBMOD_STANDBACK_RANGE        = 78, // Applies a specific standback range for the mob
     MOBMOD_CANNOT_GUARD           = 79, // Check if the mob does not guard(despite being a MNK or PUP mob)
+    MOBMOD_SKIP_ALLEGIANCE_CHECK  = 80, // Skip the allegiance check for valid target (allows for example a mob to cast a TARGET_ENEMY spell on itself)
 };
 
 #endif
