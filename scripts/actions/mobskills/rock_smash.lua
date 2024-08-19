@@ -18,13 +18,18 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         end
     end
 
+    -- Do not use if still holding a weapon
+    if mob:getAnimationSub() == 0 then
+        return 1
+    end
+
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 2
-    local dmgmod = 3
+    local dmgmod = 2
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
     local power = math.random(25, 40) + mob:getMainLvl() / 3

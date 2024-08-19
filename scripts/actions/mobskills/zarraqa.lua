@@ -1,20 +1,16 @@
 -----------------------------------
---  Zarbzan
+--  Zarraqa
 --
---  Description: Launches a firebomb from its cannon.
+--  Description: Performs a fiery ranged attack with cannon.
 --  Type: Magical
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Unknown
---  Notes: Used by RNG trolls only as their ranged special attack.
+--  Notes: Used by RNG trolls only.
 -----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getMainJob() == xi.job.RNG then
-        return 0
-    end
-
-    return 1
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

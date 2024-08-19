@@ -13,17 +13,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local targetCurrentHP = target:getHP()
-    local targetmaxHP = target:getMaxHP()
-    local hpset = targetmaxHP * 0.10
-    local dmg = 0
+    local damage = math.max(0, target:getHP() - (target:getMaxHP() * 0.10))
 
-    if targetCurrentHP > hpset then
-        dmg = targetCurrentHP - hpset
-    end
-
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.NONE)
-    return dmg
+    target:takeDamage(damage, mob, xi.attackType.PHYSICAL, xi.damageType.NONE)
+    return damage
 end
 
 return mobskillObject
