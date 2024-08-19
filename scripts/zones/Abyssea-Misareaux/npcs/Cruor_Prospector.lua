@@ -182,7 +182,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif itemCategory == itemType.ENHANCEMENT then
         local enhanceData = prospectorItems[itemCategory][itemSelected]
 
-        if enhanceData <= cruorTotal then
+        if enhanceData[2] <= cruorTotal then
             for _, v in ipairs(enhanceData[1]) do
                 player:addStatusEffectEx(v[1], v[2], v[3] + xi.abyssea.getAbyssiteTotal(player, v[4]) * v[5])
 
