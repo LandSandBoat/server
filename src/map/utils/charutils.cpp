@@ -3823,6 +3823,13 @@ namespace charutils
     bool canUseWeaponSkill(CCharEntity* PChar, uint16 wsid)
     {
         CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(wsid);
+
+        if (PWeaponSkill == nullptr)
+        {
+            ShowError("Invalid Weaponskill ID passed to function.");
+            return false;
+        }
+
         return PChar->GetSkill(PWeaponSkill->getType()) >= PWeaponSkill->getSkillLevel();
     }
 
