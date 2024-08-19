@@ -512,7 +512,10 @@ end
 
 xi.job_utils.dragoon.useDeepBreathing = function(player, target, ability)
     local wyvern = getWyvern(player)
-    wyvern:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, 0, 0, 180) -- Message when effect is lost is 'Magic Attack boost wears off.'
+
+    if wyvern then
+        wyvern:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, 0, 0, 180) -- Message when effect is lost is 'Magic Attack boost wears off.'
+    end
 end
 
 xi.job_utils.dragoon.useSpiritBond = function(player, target, ability)
