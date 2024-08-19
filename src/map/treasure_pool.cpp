@@ -276,7 +276,7 @@ void CTreasurePool::LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
     }
 
     // Cannot lot if item is RARE and player already has it
-    if ((PItem->getFlag() & ITEM_FLAG_RARE) && charutils::HasItem(PChar, m_PoolItems[SlotID].ID))
+    if ((PItem != nullptr) && (PItem->getFlag() & ITEM_FLAG_RARE) && charutils::HasItem(PChar, m_PoolItems[SlotID].ID))
     {
         ShowError(fmt::format("Player {} is trying to lot on item {} (Rare) while already holding one (Packet injection)! ", PChar->getName(), m_PoolItems[SlotID].ID));
         return;
