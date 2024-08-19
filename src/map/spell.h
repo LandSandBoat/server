@@ -234,6 +234,18 @@ enum SPELLFLAG
     SPELLFLAG_IGNORE_SHADOWS = 0x04  // Ignore shadows and hit player anyways (example: Mobs "Death" spell)
 };
 
+enum SPELLTYPE
+{
+    SPELLTYPE_NONE   = 0x00,
+    SPELLTYPE_HEAL   = 0x01,
+    SPELLTYPE_CURE   = 0x02,
+    SPELLTYPE_BUFF   = 0x04,
+    SPELLTYPE_DEBUFF = 0x08,
+    SPELLTYPE_NA     = 0x10,
+    SPELLTYPE_RAISE  = 0x20,
+    SPELLTYPE_SEVERE = 0x40,
+};
+
 // clang-format off
 enum class SpellID : uint16
 {
@@ -1048,8 +1060,6 @@ public:
     virtual std::unique_ptr<CSpell> clone();
 
     bool canTargetEnemy() const;
-    bool isBuff() const;
-    bool isSevere();          // damage spells that have severe effects like Death or Impact
     bool dealsDamage() const; // checks if the spell deals hp damage to target, this is relative to message
 
     uint16             getTotalTargets() const;
@@ -1063,6 +1073,7 @@ public:
     uint16             getAnimationTime() const;
     SPELLGROUP         getSpellGroup();
     SPELLFAMILY        getSpellFamily();
+    uint8              getSpellType();
     uint8              getSkillType() const;
     uint16             getZoneMisc() const;
     uint8              getAOE() const;
@@ -1085,11 +1096,6 @@ public:
     uint32             getPrimaryTargetID() const;
     bool               tookEffect() const; // returns true if the spell landed, not resisted or missed
     bool               hasMPCost();        // checks if spell costs mp to use
-    bool               isHeal();           // is a heal spell
-    bool               isCure();           // is a Cure spell
-    bool               isDebuff();         // is a debuff spell
-    bool               isNa();             // is a -na spell
-    bool               isRaise();          // is a raise spell (e.g. Trust: Ferreous Coffin)
     bool               canHitShadow();     // check if spell ignores shadows
 
     void setRadius(float radius);
@@ -1104,6 +1110,7 @@ public:
     void setAnimationTime(uint16 AnimationTime);
     void setSpellGroup(SPELLGROUP SpellGroup);
     void setSpellFamily(SPELLFAMILY SpellFamily);
+    void setSpellType(uint8 SpellType);
     void setSkillType(uint8 SkillType);
     void setZoneMisc(uint16 Misc);
     void setAOE(uint8 AOE);
@@ -1148,6 +1155,7 @@ private:
     uint16      m_ValidTarget{};                   // target pc/npc/both
     SPELLGROUP  m_spellGroup{ SPELLGROUP_NONE };   // spellgroup
     SPELLFAMILY m_spellFamily{ SPELLFAMILY_NONE }; // spell family
+    uint8       m_spellType{};                     // spell type
     uint16      m_zoneMisc{};                      // spellcasting conditions
     uint8       m_AOE{};                           // aoe or single target spell
     uint16      m_base{};                          // spell base damage

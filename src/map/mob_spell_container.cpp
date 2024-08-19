@@ -58,41 +58,43 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
 
     // add spell to correct vector
     // try to add it to ga list first
-    uint8 aoe = battleutils::GetSpellAoEType(m_PMob, spell);
+    uint8 aoe       = battleutils::GetSpellAoEType(m_PMob, spell);
+    uint8 spellType = spell->getSpellType();
+
     if (aoe > 0 && spell->canTargetEnemy())
     {
         m_gaList.emplace_back(spellId);
     }
-    else if (spell->isSevere())
+    else if (spellType & SPELLTYPE_SEVERE)
     {
         // select spells like death and impact
         m_severeList.emplace_back(spellId);
     }
-    else if (spell->canTargetEnemy() && !spell->isSevere())
+    else if (spellType & SPELLTYPE_DEBUFF)
+    {
+        m_debuffList.emplace_back(spellId);
+    }
+    else if (spell->canTargetEnemy() && !(spellType & SPELLTYPE_SEVERE))
     {
         // add to damage list
         m_damageList.emplace_back(spellId);
     }
-    else if (spell->isDebuff())
-    {
-        m_debuffList.emplace_back(spellId);
-    }
-    else if (spell->isNa())
+    else if (spellType & SPELLTYPE_NA)
     {
         // na spell and erase
         m_naList.emplace_back(spellId);
     }
-    else if (spell->isRaise())
+    else if (spellType & SPELLTYPE_RAISE)
     {
         // raise family
         m_raiseList.emplace_back(spellId);
     }
-    else if (spell->isHeal())
+    else if (spellType & SPELLTYPE_HEAL)
     { // includes blue mage healing spells, wild carrot etc
         // add to healing
         m_healList.emplace_back(spellId);
     }
-    else if (spell->isBuff())
+    else if (spellType & SPELLTYPE_BUFF)
     {
         // buff
         m_buffList.emplace_back(spellId);

@@ -5525,7 +5525,7 @@ namespace battleutils
         if (PSpell->getAOE() == SPELLAOE_RADIAL_ACCE) // Divine Veil goes here because -na spells have AoE w/ Accession
         {
             if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_ACCESSION) ||
-                (PCaster->objtype == TYPE_PC && charutils::hasTrait((CCharEntity*)PCaster, TRAIT_DIVINE_VEIL) && PSpell->isNa() &&
+                (PCaster->objtype == TYPE_PC && charutils::hasTrait((CCharEntity*)PCaster, TRAIT_DIVINE_VEIL) && PSpell->getSpellType() & SPELLTYPE_NA &&
                  (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_DIVINE_SEAL) || xirand::GetRandomNumber(100) < PCaster->getMod(Mod::AOE_NA))))
             {
                 return SPELLAOE_RADIAL;
@@ -6420,7 +6420,7 @@ namespace battleutils
         {
             fastCast += PEntity->getMod(Mod::ELEMENTAL_CELERITY);
         }
-        else if (PSpell->isCure()) // Cure cast time reductions
+        else if (PSpell->getSpellType() & SPELLTYPE_CURE) // Cure cast time reductions
         {
             fastCast += PEntity->getMod(Mod::CURE_CAST_TIME);
             if (PEntity->objtype == TYPE_PC)
@@ -6439,7 +6439,7 @@ namespace battleutils
         int16 inspirationFastCast = std::clamp<int16>(PEntity->getMod(Mod::INSPIRATION_FAST_CAST), -100, 100);
 
         // Add in fast cast from Divine Benison
-        if (PSpell->isNa())
+        if (PSpell->getSpellType() & SPELLTYPE_NA)
         {
             uncappedFastCast = std::clamp<int16>(uncappedFastCast + PEntity->getMod(Mod::DIVINE_BENISON), -100, 100);
         }

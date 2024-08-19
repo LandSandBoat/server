@@ -1636,6 +1636,8 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     action.recast     = state.GetRecast();
     action.spellgroup = PSpell->getSpellGroup();
 
+    uint8 spellType = PSpell->getSpellType();
+
     uint16 msg = MSGBASIC_NONE;
 
     for (auto* PTarget : PAI->TargetFind->m_targets)
@@ -1739,7 +1741,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
             (this->PParty && PTarget->PParty &&
              ((this->PParty == PTarget->PParty) || (this->PParty->m_PAlliance && this->PParty->m_PAlliance == PTarget->PParty->m_PAlliance))))
         {
-            if (PSpell->isHeal())
+            if (spellType & SPELLTYPE_HEAL)
             {
                 roeutils::event(ROE_HEALALLY, static_cast<CCharEntity*>(this), RoeDatagram("heal", actionTarget.param));
 
@@ -1749,13 +1751,13 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
                     roeutils::event(ROE_HEAL_UNITYALLY, static_cast<CCharEntity*>(this), RoeDatagram("heal", actionTarget.param));
                 }
             }
-            else if (this != PTarget && PSpell->isBuff() && actionTarget.param)
+            else if (this != PTarget && spellType & SPELLTYPE_BUFF && actionTarget.param)
             {
                 roeutils::event(ROE_BUFFALLY, static_cast<CCharEntity*>(this), RoeDatagramList{});
             }
         }
     }
-    if ((!(PSpell->isHeal()) || PSpell->tookEffect()) && PActionTarget->isAlive())
+    if ((!(spellType & SPELLTYPE_HEAL) || PSpell->tookEffect()) && PActionTarget->isAlive())
     {
         if (objtype != TYPE_PET)
         {

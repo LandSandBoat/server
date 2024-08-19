@@ -478,28 +478,23 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
                 auto MSpellFamily = MSpell->getSpellFamily();
                 auto MSpellID     = MSpell->getID();
 
-                if (PSpell->isBuff())
+                uint8 PSpellType  = PSpell->getSpellType();
+
+                if (PSpellType & SPELLTYPE_BUFF || PSpellType & SPELLTYPE_DEBUFF)
                 {
                     if (PSpellFamily == MSpellFamily && spellid <= MSpellID)
                     {
                         canCast = false;
                     }
                 }
-                if (PSpell->isCure())
+                if (PSpellType & SPELLTYPE_CURE)
                 {
                     if (PTarget == MTarget && PTarget->GetHPP() > 50)
                     {
                         canCast = false;
                     }
                 }
-                if (PSpell->isDebuff())
-                {
-                    if (PSpellFamily == MSpellFamily && spellid <= MSpellID)
-                    {
-                        canCast = false;
-                    }
-                }
-                if (PSpell->isNa())
+                if (PSpellType & SPELLTYPE_NA)
                 {
                     if (PSpellFamily == MSpellFamily && spellid == MSpellID)
                     {

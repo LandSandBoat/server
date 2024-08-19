@@ -113,6 +113,11 @@ SPELLFAMILY CSpell::getSpellFamily()
     return m_spellFamily;
 }
 
+uint8 CSpell::getSpellType()
+{
+    return m_spellType;
+}
+
 void CSpell::setSpellGroup(SPELLGROUP SpellGroup)
 {
     m_spellGroup = SpellGroup;
@@ -121,6 +126,11 @@ void CSpell::setSpellGroup(SPELLGROUP SpellGroup)
 void CSpell::setSpellFamily(SPELLFAMILY SpellFamily)
 {
     m_spellFamily = SpellFamily;
+}
+
+void CSpell::setSpellType(uint8 SpellType)
+{
+    m_spellType = SpellType;
 }
 
 uint8 CSpell::getSkillType() const
@@ -133,11 +143,6 @@ void CSpell::setSkillType(uint8 SkillType)
     m_skillType = SkillType;
 }
 
-bool CSpell::isBuff() const
-{
-    return (getValidTarget() & TARGET_SELF) && !(getValidTarget() & TARGET_ENEMY);
-}
-
 bool CSpell::tookEffect() const
 {
     return !(m_message == 75 || m_message == 284 || m_message == 283 || m_message == 85);
@@ -146,39 +151,6 @@ bool CSpell::tookEffect() const
 bool CSpell::hasMPCost()
 {
     return m_spellGroup != SPELLGROUP_SONG && m_spellGroup != SPELLGROUP_NINJUTSU && m_spellGroup != SPELLGROUP_TRUST;
-}
-
-bool CSpell::isHeal()
-{
-    return ((getValidTarget() & TARGET_SELF) && getSkillType() == SKILL_HEALING_MAGIC) || m_ID == SpellID::Pollen || m_ID == SpellID::Wild_Carrot ||
-           m_ID == SpellID::Healing_Breeze || m_ID == SpellID::Magic_Fruit;
-}
-
-bool CSpell::isCure()
-{
-    return ((static_cast<uint16>(m_ID) >= 1 && static_cast<uint16>(m_ID) <= 11) || m_ID == SpellID::Cura || m_ID == SpellID::Cura_II ||
-            m_ID == SpellID::Cura_III);
-}
-
-bool CSpell::isDebuff()
-{
-    return ((getValidTarget() & TARGET_ENEMY) && getSkillType() == SKILL_ENFEEBLING_MAGIC) || m_spellFamily == SPELLFAMILY_ELE_DOT ||
-           m_spellFamily == SPELLFAMILY_BIO || m_ID == SpellID::Stun || m_ID == SpellID::Curse;
-}
-
-bool CSpell::isNa()
-{
-    return (static_cast<uint16>(m_ID) >= 14 && static_cast<uint16>(m_ID) <= 20) || m_ID == SpellID::Erase;
-}
-
-bool CSpell::isRaise()
-{
-    return (static_cast<uint16>(m_ID) >= 12 && static_cast<uint16>(m_ID) <= 13) || m_ID == SpellID::Raise_III || m_ID == SpellID::Arise;
-}
-
-bool CSpell::isSevere()
-{
-    return m_ID == SpellID::Death || m_ID == SpellID::Impact || m_ID == SpellID::Meteor || m_ID == SpellID::Meteor_II || m_ID == SpellID::Comet;
 }
 
 bool CSpell::canHitShadow()
@@ -452,7 +424,7 @@ namespace spell
     void LoadSpellList()
     {
         const char* Query = "SELECT spellid, name, jobs, `group`, family, validTargets, skill, castTime, recastTime, animation, animationTime, mpCost, \
-                             AOE, base, element, zonemisc, multiplier, message, magicBurstMessage, CE, VE, requirements, content_tag, spell_range \
+                             AOE, base, element, zonemisc, multiplier, message, magicBurstMessage, CE, VE, requirements, content_tag, type, spell_range \
                              FROM spell_list";
 
         int32 ret = _sql->Query(Query);
@@ -495,8 +467,9 @@ namespace spell
                 PSpell->setVE(_sql->GetIntData(20));
                 PSpell->setRequirements(_sql->GetIntData(21));
                 PSpell->setContentTag(_sql->GetStringData(22));
+                PSpell->setSpellType(_sql->GetIntData(23));
 
-                PSpell->setRange(static_cast<float>(_sql->GetIntData(23)) / 10);
+                PSpell->setRange(static_cast<float>(_sql->GetIntData(24)) / 10);
 
                 if (PSpell->getAOE())
                 {

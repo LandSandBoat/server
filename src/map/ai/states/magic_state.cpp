@@ -429,7 +429,8 @@ uint32 CMagicState::GetRecast()
 
 void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
 {
-    bool enmityApplied = false;
+    bool  enmityApplied = false;
+    uint8 m_PSpellType  = m_PSpell->getSpellType();
 
     if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_TRANQUILITY) && m_PSpell->getSpellGroup() == SPELLGROUP_WHITE)
     {
@@ -441,7 +442,7 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
         m_PEntity->addModifier(Mod::ENMITY, -m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_EQUANIMITY)->GetPower());
     }
 
-    if (m_PSpell->isNa())
+    if (m_PSpellType & SPELLTYPE_NA)
     {
         m_PEntity->addModifier(Mod::ENMITY, -(m_PEntity->getMod(Mod::DIVINE_BENISON) >> 1)); // Half of divine benison mod amount = -enmity
     }
@@ -469,7 +470,7 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
                     mob->m_DropItemTime = m_PSpell->getAnimationTime();
                 }
 
-                if (!(m_PSpell->isHeal()) || m_PSpell->tookEffect()) // can't claim mob with cure unless it does damage
+                if (!(m_PSpellType & SPELLTYPE_HEAL) || m_PSpell->tookEffect()) // can't claim mob with cure unless it does damage
                 {
                     mob->PEnmityContainer->UpdateEnmity(m_PEntity, ce, ve);
                     enmityApplied = true;
@@ -508,7 +509,7 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
         }
     }
 
-    if (m_PSpell->isNa())
+    if (m_PSpellType & SPELLTYPE_NA)
     {
         m_PEntity->delModifier(Mod::ENMITY, -(m_PEntity->getMod(Mod::DIVINE_BENISON) >> 1)); // Half of divine benison mod amount = -enmity
     }
