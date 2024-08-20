@@ -3348,10 +3348,14 @@ local getItemSelection = function(player, list, idx, idxAlt1, idxAlt2)
         if debug.ENABLED and not debug.SHOWITEM then
             item = 0
         else
+            --- TODO: Refactor function to always return table, and find better way to determine behavior based on list type.
+            ---@diagnostic disable-next-line: cast-local-type
             item = itemList[list][idxAlt1][idxAlt2]
         end
 
         if list == 12 then  -- Item, Quantity
+            --- TODO: Refactor function to always return table, and find better way to determine behavior based on list type.
+            ---@diagnostic disable-next-line: cast-local-type
             item = { item } -- Tabling here to save 100 pairs of { }
         end
     elseif
@@ -3363,6 +3367,8 @@ local getItemSelection = function(player, list, idx, idxAlt1, idxAlt2)
 
         item = itemID - (gender * modifier) -- Generate the actual itemID by subtracting the shift value from the base itemID
     else
+        --- TODO: Refactor function to always return table, and find better way to determine behavior based on list type.
+        ---@diagnostic disable-next-line: cast-local-type
         item = itemList[list][idx]
     end
 

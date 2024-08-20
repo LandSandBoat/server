@@ -165,8 +165,7 @@ xi.pets.avatar.onMobMagicPrepare = function(pet)
     -- meta checks for fresh pet, etc
     pet:setLocalVar(lastCastTimeVar, 0)
     pet:setLocalVar(lastCastTimeStampVar, os.time())
-    local spellID = 0
-    local spellTarget = nil
+
     -- early exit from casting a spell to prevent immediately casting a spell after being summoned
     if pet:getMobMod(xi.mobMod.MAGIC_COOL) == 1 then
         setMagicCastCooldown(pet)
@@ -178,7 +177,7 @@ xi.pets.avatar.onMobMagicPrepare = function(pet)
     pet:setLocalVar(buffModeVar, 1)
 
     -- Core functionality to decide which spell to use
-    spellID, spellTarget = xi.pets.avatar.getSpiritSpell(pet)
+    local spellID, spellTarget = xi.pets.avatar.getSpiritSpell(pet)
 
     -- Final items to cast the spell and ensure cast delay is proper
     local spell = GetSpell(spellID)
@@ -188,7 +187,6 @@ xi.pets.avatar.onMobMagicPrepare = function(pet)
             pet:setLocalVar(buffModeVar, 0)
         end
 
-        printDebug(pet, string.format('%s -> %s', spellTarget:getName(), spellID)) -- for debugging spell selection
         pet:castSpell(spellID, spellTarget or pet)
         setMagicCastCooldown(pet)
 
@@ -204,6 +202,8 @@ xi.pets.avatar.getSpiritSpell = function(pet)
     local petID = pet:getPetID()
     -- add more logic as needed with its own function
     if petID == xi.petId.LIGHT_SPIRIT then
+        -- TODO: Align spirit and light spirit functions for return consistency and consolidate.
+        ---@diagnostic disable-next-line: cast-local-type
         spellID, spellTarget = xi.pets.avatar.getLightSpiritSpell(pet)
     end
 

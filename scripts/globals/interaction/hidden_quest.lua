@@ -6,12 +6,15 @@ require('scripts/globals/interaction/container')
 
 HiddenQuest = setmetatable({ area = {} }, { __index = Container })
 HiddenQuest.__index = HiddenQuest
+
+---@diagnostic disable-next-line: duplicate-set-field
 HiddenQuest.__eq = function(q1, q2)
     return q1.name == q2.name
 end
 
 HiddenQuest.reward = {}
 
+---@diagnostic disable-next-line: duplicate-set-field
 function HiddenQuest:new(name)
     local obj = Container:new('HQuest[' .. name .. ']')
     setmetatable(obj, self)

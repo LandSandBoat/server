@@ -1724,7 +1724,10 @@ local function givePrize(player, ki)
 
             -- determine augments
             local addAug = {}
-            if prize.augments ~= nil then
+            if
+                prize and
+                prize.augments ~= nil
+            then
                 local pAug = {}
                 -- deep copy augments for prize
                 for k, v in pairs(prize.augments) do
@@ -1763,14 +1766,16 @@ local function givePrize(player, ki)
             end
 
             -- give prize
-            if
-                player:getFreeSlotsCount() ~= 0 and
-                player:addItem(prize.itemId, 1, unpack(addAug))
-            then
-                player:messageSpecial(ID.text.ITEM_OBTAINED, prize.itemId)
-                player:delKeyItem(ki)
-            else
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, prize.itemId)
+            if prize then
+                if
+                    player:getFreeSlotsCount() ~= 0 and
+                    player:addItem(prize.itemId, 1, unpack(addAug))
+                then
+                    player:messageSpecial(ID.text.ITEM_OBTAINED, prize.itemId)
+                    player:delKeyItem(ki)
+                else
+                    player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, prize.itemId)
+                end
             end
         end
     end
