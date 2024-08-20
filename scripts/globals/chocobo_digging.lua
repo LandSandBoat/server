@@ -761,19 +761,6 @@ local function updatePlayerDigCount(player, increment)
     player:setLocalVar('[DIG]LastDigTime', os.time())
 end
 
---[[ Not Implemented
-local function updateZoneDigCount(zoneId, increment)
-    local serverVar = '[DIG]ZONE' .. zoneId .. '_ITEMS'
-
-    -- 0 means we wanna wipe (probably only gonna happen onGameDay or something)
-    if increment == 0 then
-        SetServerVariable(serverVar, 0)
-    else
-        SetServerVariable(serverVar, GetServerVariable(serverVar) + increment)
-    end
-end
-]]--
-
 -- This function handles zone and cooldown checks before digging can be attempted, before any animation is sent.
 local function checkDiggingCooldowns(player)
     -- Check if current zone has digging enabled.
@@ -810,7 +797,7 @@ local function calculateSkillUp(player)
     local increment = 1
 
     -- this probably needs correcting
-    local roll = math.random(0, 100)
+    local roll = math.random(1, 100)
 
     -- make sure our skill isn't capped
     if realSkill < maxSkill then
