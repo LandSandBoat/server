@@ -202,12 +202,12 @@ jobs:
       with:
         name: lua_lang_errors
         path: lua_lang_errors.txt
-    # - name: Check Output
-    #   run: |
-    #     if [ -f lua_lang_errors.txt ]; then
-    #       cat lua_lang_errors.txt
-    #       exit 1
-    #     fi
+    - name: Check Output
+      run: |
+        if [ -f lua_lang_errors.txt ]; then
+            cat lua_lang_errors.txt
+            exit 1
+        fi
 
   Linux_Clang15_64bit:
     needs: Sanity_Checks
