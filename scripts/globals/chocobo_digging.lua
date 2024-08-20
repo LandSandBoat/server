@@ -73,13 +73,6 @@ set{
     -- xi.zone.KAMIHR_DRIFTS,
 }
 
-local digReq =
-{
-    NO_REQS = 0,
-    BURROW  = 1,
-    BORE    = 2,
-}
-
 local crystalMap =
 {
     -- Single weather by elemental order.
@@ -119,30 +112,62 @@ local oreMap =
 -- Table for common items without special conditions. [Zone ID] = { itemId, weight, dig requirement }
 -- Data from BG wiki: https://www.bg-wiki.com/ffxi/Category:Chocobo_Digging
 -----------------------------------
+local diggingLayer =
+{
+    TREASURE = 1, -- This layer takes precedence over all others AND no other layer will trigger if we manage to dig something from it.
+    REGULAR  = 2, -- Regular layers. Crystals from weather and ores are applied here.
+    BURROW   = 3, -- Special "Raised chocobo only" layer. Requires the mounted chocobo to have a concrete skill. It's an independent AND additional item dig.
+    BORE     = 4, -- Special "Raised chocobo only" layer. Requires the mounted chocobo to have a concrete skill. It's an independent AND additional item dig.
+}
+
 local digInfo =
 {
     [xi.zone.CARPENTERS_LANDING] = -- 2
     {
-        { xi.item.ARROWWOOD_LOG,           100, digReq.NO_REQS },
-        { xi.item.LITTLE_WORM,             100, digReq.NO_REQS },
-        { xi.item.ACORN,                    50, digReq.NO_REQS },
-        { xi.item.HOLLY_LOG,                50, digReq.NO_REQS },
-        { xi.item.MAPLE_LOG,                50, digReq.NO_REQS },
-        { xi.item.OAK_LOG,                  50, digReq.NO_REQS },
-        { xi.item.WILLOW_LOG,               50, digReq.NO_REQS },
-        { xi.item.YEW_LOG,                  50, digReq.BORE    },
-        { xi.item.PIECE_OF_ANCIENT_LUMBER,  10, digReq.NO_REQS },
-        { xi.item.EBONY_LOG,                10, digReq.NO_REQS },
-        { xi.item.ELM_LOG,                  10, digReq.BORE    },
-        { xi.item.SPRIG_OF_MISTLETOE,       10, digReq.NO_REQS },
-        { xi.item.ROSEWOOD_LOG,             10, digReq.BORE    },
-        { xi.item.SCREAM_FUNGUS,            10, digReq.NO_REQS },
-        { xi.item.KING_TRUFFLE,             10, digReq.NO_REQS },
-        { xi.item.LACQUER_TREE_LOG,         10, digReq.BORE    },
-        { xi.item.MAHOGANY_LOG,             10, digReq.BORE    },
-        { xi.item.FIRE_CRYSTAL,            100, digReq.NO_REQS },
-        { xi.item.CHUNK_OF_FIRE_ORE,        10, digReq.NO_REQS },
+        [diggingLayer.TREASURE] =
+        {
+            -- No entries
+        },
+
+        [diggingLayer.REGULAR] =
+        {
+            [1] = { xi.item.LITTLE_WORM,             100, xi.craftRank.AMATEUR },
+            [2] = { xi.item.ACORN,                    50, xi.craftRank.AMATEUR },
+            [3] = { xi.item.ARROWWOOD_LOG,           100, xi.craftRank.AMATEUR },
+            [4] = { xi.item.WILLOW_LOG,               50, xi.craftRank.AMATEUR },
+            [5] = { xi.item.MAPLE_LOG,                50, xi.craftRank.AMATEUR },
+            [6] = { xi.item.HOLLY_LOG,                50, xi.craftRank.AMATEUR },
+            [7] = { xi.item.SPRIG_OF_MISTLETOE,       10, xi.craftRank.AMATEUR },
+            [8] = { xi.item.SCREAM_FUNGUS,            10, xi.craftRank.AMATEUR },
+            [9] = { xi.item.KING_TRUFFLE,             10, xi.craftRank.AMATEUR },
+        },
+
+        [diggingLayer.BURROW] =
+        {
+            [1] = { xi.item.FIRE_CRYSTAL,      50, xi.craftRank.AMATEUR },
+            [2] = { xi.item.ICE_CRYSTAL,       50, xi.craftRank.AMATEUR },
+            [3] = { xi.item.WIND_CRYSTAL,      50, xi.craftRank.AMATEUR },
+            [4] = { xi.item.EARTH_CRYSTAL,     50, xi.craftRank.AMATEUR },
+            [5] = { xi.item.LIGHTNING_CRYSTAL, 50, xi.craftRank.AMATEUR },
+            [6] = { xi.item.WATER_CRYSTAL,     50, xi.craftRank.AMATEUR },
+            [7] = { xi.item.LIGHT_CRYSTAL,     50, xi.craftRank.AMATEUR },
+            [8] = { xi.item.DARK_CRYSTAL,      50, xi.craftRank.AMATEUR },
+        },
+
+        [diggingLayer.BORE] =
+        {
+            [1] = { xi.item.ARROWWOOD_LOG,           100, xi.craftRank.AMATEUR    },
+            [2] = { xi.item.YEW_LOG,                  50, xi.craftRank.RECRUIT    },
+            [3] = { xi.item.OAK_LOG,                  50, xi.craftRank.INITIATE   },
+            [4] = { xi.item.ELM_LOG,                  10, xi.craftRank.NOVICE     },
+            [5] = { xi.item.MAHOGANY_LOG,             10, xi.craftRank.APPRENTICE },
+            [6] = { xi.item.ROSEWOOD_LOG,             10, xi.craftRank.JOURNEYMAN },
+            [7] = { xi.item.EBONY_LOG,                10, xi.craftRank.CRAFTSMAN  },
+            [8] = { xi.item.PIECE_OF_ANCIENT_LUMBER,  10, xi.craftRank.ARTISAN    },
+            [9] = { xi.item.LACQUER_TREE_LOG,         10, xi.craftRank.ADEPT      },
+        },
     },
+
     [xi.zone.BIBIKI_BAY] = -- 4
     {
         { xi.item.BLACK_CHOCOBO_FEATHER,    100, digReq.BURROW  },
@@ -751,16 +776,6 @@ local digInfo =
     },
 }
 
-local function updatePlayerDigCount(player, increment)
-    if increment == 0 then
-        player:setVar('[DIG]DigCount', 0)
-    else
-        player:setVar('[DIG]DigCount', player:getCharVar('[DIG]DigCount') + increment, NextJstDay())
-    end
-
-    player:setLocalVar('[DIG]LastDigTime', os.time())
-end
-
 -- This function handles zone and cooldown checks before digging can be attempted, before any animation is sent.
 local function checkDiggingCooldowns(player)
     -- Check if current zone has digging enabled.
@@ -819,76 +834,86 @@ local function calculateSkillUp(player)
     end
 end
 
-local function getChocoboDiggingItem(player)
-    local allItems      = digInfo[player:getZoneID()]
-    local burrowAbility = (xi.settings.main.DIG_GRANT_BURROW == 1) and 1 or 0
-    local boreAbility   = (xi.settings.main.DIG_GRANT_BORE == 1) and 1 or 0
-    local weather       = player:getWeather()
-    local moon          = VanadielMoonPhase()
+local function  handleDiggingLayer(player, zoneId, currentLayer)
+    local digTable       = digInfo[zoneId][currentLayer]
+    local dTableItemIds  = {}
+    local rewardItem     = 0
+    local rollMultiplier = 1 -- Determined by moon and certain gear. Higher = WORSE
 
-    -- filter allItems to possibleItems and sum weights
-    local possibleItems = {}
-    local sum           = 0
+    -- Determine moon multiplier.
+    local moon = VanadielMoonPhase()
 
-    for i = 1, #allItems do
-        local item = allItems[i]
-        local itemReq = item[3]
-        if
-            (itemReq == digReq.NO_REQS) or
-            (itemReq == digReq.BURROW and burrowAbility == 1) or
-            (itemReq == digReq.BORE and boreAbility == 1)
-        then
-            sum = sum + item[2]
-            table.insert(possibleItems, item)
+    if moon >= 40 and moon <= 60 then
+        rollMultiplier = rollMultiplier * 2
+    end
+
+    -- TODO: Implement pants that lower common item chance and raise rare item chance.
+
+    -- Add valid items to dynamic table
+    if #digTable > 0 then
+        local playerRank = player:getSkillRank(xi.skill.DIG)
+        local itemEntry  = 0
+        localrandomRoll  = 1000
+
+        for i = 1, #digTable do
+            randomRoll = utils.clamp(math.floor(math.random(1, 1000) * rollMultiplier), 1, 1000)
+
+            if
+                randomRoll <= digTable[i][2] and -- Roll check
+                playerRank >= digTable[i][3]     -- Rank check
+            then
+                itemEntry = #dTableItemIds + 1 -- Calculate entry in dynamic table
+
+                table.insert(dTableItemIds, itemEntry, digTable[i][1]) -- Insert item ID to table.
+            end
         end
     end
 
-    -- pick weighted result
-    local itemId = 0
-    local pick   = math.random(sum)
-    sum          = 0
+    -- Add weather crystals and ores to regular layer only.
+    if currentLayer == diggingLayer.REGULAR then
+        local weather = player:getWeather()
 
-    for i = 1, #possibleItems do
-        sum = sum + possibleItems[i][2]
-        if sum >= pick then
-            itemId = possibleItems[i][1]
-            break
-        end
+        -- TODO: Add logic for Elemental Ores, Weather crystals and day geodes.
     end
 
-    -- item is a crystal or ore
-    if itemId == xi.item.FIRE_CRYSTAL then
-        if weather >= xi.weather.HOT_SPELL then
-            itemId = crystalMap[weather]
+    -- Choose a random entry from the valid item table.
+    if #dTableItemIds > 0 then
+        local chosenItem = math.random(1, #dTableItemIds)
+
+        rewardItem = dTableItemIds[chosenItem]
+    end
+
+    return rewardItem
+end
+
+local function handleItemObtained(itemId)
+    if itemId > 0 then
+        -- Make sure we have enough room for the item.
+        if player:addItem(itemId) then
+            player:messageSpecial(text.ITEM_OBTAINED, itemId)
         else
-            itemId = 0
-        end
-    elseif itemId == xi.item.CHUNK_OF_FIRE_ORE then
-        if
-            weather >= xi.weather.CLOUDS and
-            moon >= 10 and
-            moon <= 40 and
-            player:getSkillRank(xi.skill.DIG) >= 7
-        then
-            itemId = oreMap[VanadielDayOfTheWeek()]
-        else
-            itemId = 0
+            player:messageSpecial(text.DIG_THROW_AWAY, itemId)
         end
     end
-
-    return itemId
 end
 
 xi.chocoboDig.start = function(player)
-    -- Handle digging cooldowns.
+    local zoneId        = player:getZoneID()
+    local text          = zones[zoneId].text
+    local todayDigCount = player:getCharVar('[DIG]DigCount')
+    local currentX      = player:getXPos()
+    local currentZ      = player:getZPos()
+
+    -----------------------------------
+    -- Early returns and exceptions
+    -----------------------------------
+
+    -- Handle valid zones and digging cooldowns.
     if not checkDiggingCooldowns(player) then
         return false -- This means we do not send a digging animation.
     end
 
     -- Handle AMK mission 7 (index 6) exception.
-    local zoneId = player:getZoneID()
-    local text   = zones[zoneId].text
-
     if
         xi.settings.main.ENABLE_AMK == 1 and
         player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.SHOCK_ARRANT_ABUSE_OF_AUTHORITY and
@@ -901,8 +926,6 @@ xi.chocoboDig.start = function(player)
     end
 
     -- Handle auto-fail from fatigue.
-    local todayDigCount = player:getCharVar('[DIG]DigCount')
-
     if
         xi.settings.main.DIG_FATIGUE > 0 and
         xi.settings.main.DIG_FATIGUE <= todayDigCount
@@ -914,10 +937,8 @@ xi.chocoboDig.start = function(player)
     end
 
     -- Handle auto-fail from position.
-    local currentX = player:getXPos()
-    local currentZ = player:getZPos()
-    local lastX    = player:getLocalVar('[DIG]LastXPos')
-    local lastZ    = player:getLocalVar('[DIG]LastZPos')
+    local lastX = player:getLocalVar('[DIG]LastXPos')
+    local lastZ = player:getLocalVar('[DIG]LastZPos')
 
     if
         currentX >= lastX - 2 and currentX <= lastX + 2 and -- Check current X axis to see if you are too close to your last X.
@@ -929,50 +950,64 @@ xi.chocoboDig.start = function(player)
         return true
     end
 
+    -----------------------------------
+    -- Perform digging
+    -----------------------------------
+
+    -- Set player variables, no matter the result.
     player:setLocalVar('[DIG]LastXPos', currentX)
     player:setLocalVar('[DIG]LastZPos', currentZ)
+    player:setLocalVar('[DIG]LastDigTime', os.time())
+    player:setVar('[DIG]DigCount', todayDigCount + 1, NextJstDay())
 
-    -- Handel actual digging.
-    local roll = math.random(0, 100)
-    local moon = VanadielMoonPhase()
+    -- Handle chance modifiers
 
-    -- 40-60% moon phase results in a much lower dig chance than the rest of the phases
-    if moon >= 40 and moon <= 60 then
-        roll = roll / 2
-    end
+    -- Handle trasure layer. Incompatible with the other 3 layers. "Early" return.
+    local trasureItemId = handleDiggingLayer(player, zoneId, diggingLayer.TREASURE)
 
-    -- dig chance failure
-    if roll > xi.settings.main.DIGGING_RATE then
-        player:messageText(player, text.FIND_NOTHING)
-        player:setLocalVar('[DIG]LastDigTime', os.time())
+    if trasureItemId > 0 then
+        handleItemObtained(trasureItemId)
+        calculateSkillUp(player)
+        player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
 
         return true
     end
 
-    -- dig chance success
-    local itemId = getChocoboDiggingItem(player)
+    -- Handle regular layer. This also contains, elemental ores, weather crystals and day-element geodes.
+    local regularItemId = handleDiggingLayer(player, zoneId, diggingLayer.REGULAR)
+    local burrowItemId  = 0
+    local boreItemId    = 0
 
-    -- success!
-    if itemId ~= 0 then
-        -- make sure we have enough room for the item
-        if player:addItem(itemId) then
-            player:messageSpecial(text.ITEM_OBTAINED, itemId)
-        else
-            player:messageSpecial(text.DIG_THROW_AWAY, itemId)
-        end
+    handleItemObtained(regularItemId)
 
-        player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
+    -- Handle Burrow layer. Requires Burrow skill.
+    if xi.settings.main.DIG_GRANT_BURROW > 0 then -- TODO: Implement Chocobo Raising and Burrow chocobo skill. Good luck
+        burrowItemId = handleDiggingLayer(player, zoneId, diggingLayer.BURROW)
 
-    -- got a crystal ore, but lacked weather or skill to dig it up
-    else
-        player:messageText(player, text.FIND_NOTHING, false)
+        handleItemObtained(burrowItemId)
     end
 
-    updatePlayerDigCount(player, 1)
-    -- updateZoneDigCount(zoneId, 1) -- TODO: implement mechanic for resetting zone dig count. until then, leave this commented out
-    -- TODO: learn abilities from chocobo raising
+    -- Handle Bore layer. Requires Bore skill.
+    if xi.settings.main.DIG_GRANT_BORE > 0 then -- TODO: Implement Chocobo Raising and Bore chocobo skill. Good luck
+        boreItemId = handleDiggingLayer(player, zoneId, diggingLayer.BORE)
 
+        handleItemObtained(boreItemId)
+    end
+
+    -- Handle skill-up
     calculateSkillUp(player)
 
+    -- Handle no item OR record of eminence.
+    if
+        regularItemId == 0 and
+        burrowItemId  == 0 and
+        boreItemId    == 0
+    then
+        player:messageText(player, text.FIND_NOTHING)
+    else
+        player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
+    end
+
+    -- Dig ended. Send digging animation to players.
     return true
 end
