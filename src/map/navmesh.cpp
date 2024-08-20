@@ -36,12 +36,6 @@
 #include <set>
 #include <vector>
 
-constexpr unsigned int                   MAX_NAV_POLYS = 512;
-std::array<dtPolyRef, MAX_NAV_POLYS>     navMeshQueryPolyData{};
-std::array<float, MAX_NAV_POLYS * 3>     navMeshQueryStraightPathFloatData{};
-std::array<unsigned char, MAX_NAV_POLYS> navMeshQueryStraightPathFlagData{};
-std::array<dtPolyRef, MAX_NAV_POLYS>     navMeshQueryStraightPathPolyData{};
-
 constexpr int8  CNavMesh::ERROR_NEARESTPOLY;
 constexpr float smallPolyPickExt[3]  = { 0.5f, 1.0f, 0.5f };
 constexpr float polyPickExt[3]       = { 2.5f, 5.0f, 2.5f };
@@ -215,14 +209,14 @@ void CNavMesh::unload()
     m_navMesh = nullptr;
 }
 
-std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const position_t& end)
+auto CNavMesh::findPath(const position_t& start, const position_t& end) -> std::pair<PathResult, std::vector<pathpoint_t>>
 {
     TracyZoneScoped;
 
     if (!m_navMesh)
     {
         DebugNavmesh("CNavMesh::findPath No navmesh loaded (%u)", m_zoneID);
-        return {};
+        return { PathResult::Invalid, {} };
     }
 
     // Find the nearest relevant power of two to use as the maximum number of nav polys to search.
@@ -231,7 +225,8 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
     // TODO: Allocate all the relevant buffers at startup and wipe/resuse
     const auto maxNavPolys = std::clamp(static_cast<unsigned int>(std::pow(2U, std::ceil(std::log2(distance(start, end))))), 8U, MAX_NAV_POLYS);
 
-    DebugNavmesh("CNavMesh::findPath (%f, %f, %f)->(%f, %f, %f) (zone: %u) (maxNavPolys: %u)", start.x, start.y, start.z, end.x, end.y, end.z, m_zoneID, maxNavPolys);
+    // TODO: I think we're constructing the strings even if the setting is disabled? This is a waste of effort...
+    DebugNavmesh("CNavMesh::findPath (%f, %f, %f) -> (%f, %f, %f) (zone: %u) (maxNavPolys: %u)", start.x, start.y, start.z, end.x, end.y, end.z, m_zoneID, maxNavPolys);
 
     dtStatus status = 0;
 
@@ -257,7 +252,7 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
     {
         DebugNavmesh("CNavMesh::findPath start point invalid (%f, %f, %f) (%u)", spos[0], spos[1], spos[2], m_zoneID);
         ShowError(detourStatusString(status).c_str());
-        return {};
+        return { PathResult::Invalid, {} };
     }
 
     // Validate epos into endRef and eNearestPoint
@@ -266,7 +261,7 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
     {
         ShowError("CNavMesh::findPath end point invalid (%f, %f, %f) (%u)", epos[0], epos[1], epos[2], m_zoneID);
         ShowError(detourStatusString(status).c_str());
-        return {};
+        return { PathResult::Invalid, {} };
     }
 
     // TODO: Do we need these isValidPolyRef checks? We've just found the nearest polys and checked them with dtStatusFailed.
@@ -275,25 +270,25 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
     if (!m_navMesh->isValidPolyRef(startRef))
     {
         DebugNavmesh("CNavMesh::findPath Start poly invalid: (%f, %f, %f) (%u)", start.x, start.y, start.z, m_zoneID);
-        return {};
+        return { PathResult::Invalid, {} };
     }
 
     // Make sure the end poly is valid
     if (!m_navMesh->isValidPolyRef(endRef))
     {
         DebugNavmesh("CNavMesh::findPath End poly invalid: (%f, %f, %f) (%u)", end.x, end.y, end.z, m_zoneID);
-        return {};
+        return { PathResult::Invalid, {} };
     }
 
     // First, we're going to build up a list of polys that make up the path
     int32 pathPolyCount = 0;
 
-    status = m_navMeshQuery.findPath(startRef, endRef, sNearestPoint, eNearestPoint, &filter, navMeshQueryPolyData.data(), &pathPolyCount, maxNavPolys);
+    status = m_navMeshQuery.findPath(startRef, endRef, sNearestPoint, eNearestPoint, &filter, m_navMeshQueryPolyData.data(), &pathPolyCount, maxNavPolys);
     if (dtStatusFailed(status))
     {
         ShowError("CNavMesh::findPath findPath error (%u)", m_zoneID);
         ShowError(detourStatusString(status).c_str());
-        return {};
+        return { PathResult::Invalid, {} };
     }
 
     // At this point, findPath() has generated a list of polys that make up a path, but these polys aren't guaranteed to contain a complete path
@@ -303,21 +298,21 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
     if (pathPolyCount <= 0)
     {
         ShowError("CNavMesh::findPath Unable to generate polys for path (%f, %f, %f)->(%f, %f, %f) (%u)", start.x, start.y, start.z, end.x, end.y, end.z, m_zoneID);
-        return {};
+        return { PathResult::Invalid, {} };
     }
 
     // Find the best straight path possible between sNearestPoint and eNearestPoint within the bounds of all the polys in pathPolys.
     int32 straightPathCount = 0;
 
     // NOTE: The DT_STRAIGHTPATH_ALL_CROSSINGS flag can exasorbate the issue of getting trapped in local minima.
-    status = m_navMeshQuery.findStraightPath(sNearestPoint, eNearestPoint, navMeshQueryPolyData.data(), pathPolyCount,
-                                             navMeshQueryStraightPathFloatData.data(), navMeshQueryStraightPathFlagData.data(), navMeshQueryStraightPathPolyData.data(),
+    status = m_navMeshQuery.findStraightPath(sNearestPoint, eNearestPoint, m_navMeshQueryPolyData.data(), pathPolyCount,
+                                             m_navMeshQueryStraightPathFloatData.data(), m_navMeshQueryStraightPathFlagData.data(), m_navMeshQueryStraightPathPolyData.data(),
                                              &straightPathCount, maxNavPolys /*, DT_STRAIGHTPATH_ALL_CROSSINGS */);
     if (dtStatusFailed(status))
     {
         ShowError("CNavMesh::findPath findStraightPath error (%u)", m_zoneID);
         ShowError(detourStatusString(status).c_str());
-        return {};
+        return { PathResult::Invalid, {} };
     }
 
     // Now that we have list of sequential positions in straightPath, we need to check to see if eNearestPoint is the final point. If it isn't we've been given a partial path.
@@ -332,16 +327,18 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
     };
 
     const auto pathEndPosition = position_t{
-        navMeshQueryStraightPathFloatData[straightPathCount * 3 - 3],
-        navMeshQueryStraightPathFloatData[straightPathCount * 3 - 2],
-        navMeshQueryStraightPathFloatData[straightPathCount * 3 - 1],
+        m_navMeshQueryStraightPathFloatData[straightPathCount * 3 - 3],
+        m_navMeshQueryStraightPathFloatData[straightPathCount * 3 - 2],
+        m_navMeshQueryStraightPathFloatData[straightPathCount * 3 - 1],
         0,
         0,
     };
 
+    bool partialPath = false;
     if (straightPathCount > 2 && distance(eNearestPosition, pathEndPosition) > 5.0f)
     {
         DebugNavmesh("CNavMesh::findPath Partial path detected! (%u)", m_zoneID);
+        partialPath = true;
         straightPathCount -= 1;
     }
 
@@ -349,27 +346,27 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
     // We have now exhausted our path, return empty results.
     if (straightPathCount <= 1)
     {
-        return {};
+        return { PathResult::Invalid, {} };
     }
 
     // TODO: Detect local minima and re-try pathing with a larger buffer.
 
     // NOTE: i starts at 3 so the start position is ignored
-    std::vector<pathpoint_t> ret;
-    ret.reserve(straightPathCount - 1);
+    std::vector<pathpoint_t> outPoints;
+    outPoints.reserve(straightPathCount - 1);
     for (int i = 3; i < straightPathCount * 3;)
     {
         float pathPos[3];
-        pathPos[0] = navMeshQueryStraightPathFloatData[i++];
-        pathPos[1] = navMeshQueryStraightPathFloatData[i++];
-        pathPos[2] = navMeshQueryStraightPathFloatData[i++];
+        pathPos[0] = m_navMeshQueryStraightPathFloatData[i++];
+        pathPos[1] = m_navMeshQueryStraightPathFloatData[i++];
+        pathPos[2] = m_navMeshQueryStraightPathFloatData[i++];
 
         CNavMesh::ToFFXIPos(pathPos);
 
-        ret.emplace_back(pathpoint_t{ { pathPos[0], pathPos[1], pathPos[2], 0, 0 }, 0, false });
+        outPoints.emplace_back(pathpoint_t{ { pathPos[0], pathPos[1], pathPos[2], 0, 0 }, 0, false });
     }
 
-    return ret;
+    return { partialPath ? PathResult::Partial : PathResult::Complete, outPoints };
 }
 
 std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& start, float maxRadius)

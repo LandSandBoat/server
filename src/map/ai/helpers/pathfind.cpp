@@ -460,7 +460,9 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
         return false;
     }
 
-    m_points       = m_POwner->loc.zone->m_navMesh->findPath(start, end);
+    auto [result, points] = m_POwner->loc.zone->m_navMesh->findPath(start, end);
+
+    m_points       = std::move(points);
     m_currentPoint = 0;
 
     if (m_points.empty())
@@ -514,7 +516,9 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
     }
     if (m_turnPoints.size() > 0)
     {
-        m_points       = m_POwner->loc.zone->m_navMesh->findPath(start, m_turnPoints[0]);
+        auto [result, points] = m_POwner->loc.zone->m_navMesh->findPath(start, m_turnPoints[0]);
+
+        m_points       = std::move(points);
         m_currentPoint = 0;
     }
 
@@ -535,7 +539,9 @@ bool CPathFind::FindClosestPath(const position_t& start, const position_t& end)
         return false;
     }
 
-    m_points       = m_POwner->loc.zone->m_navMesh->findPath(start, end);
+    auto [result, points] = m_POwner->loc.zone->m_navMesh->findPath(start, end);
+
+    m_points       = std::move(points);
     m_currentPoint = 0;
 
     // TODO: This is just for testing, this wallhack behaviour is very important!

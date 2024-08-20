@@ -27,6 +27,7 @@ The NavMesh class will load and find paths given a start point and end point.
 
 #include <DetourNavMesh.h>
 #include <DetourNavMeshQuery.h>
+#include <DetourStatus.h>
 
 #include "common/logging.h"
 #include "common/mmo.h"
@@ -34,8 +35,9 @@ The NavMesh class will load and find paths given a start point and end point.
 #include <memory>
 #include <vector>
 
-static const int NAVMESHSET_MAGIC   = 'M' << 24 | 'S' << 16 | 'E' << 8 | 'T'; // 'MSET'
-static const int NAVMESHSET_VERSION = 1;
+constexpr unsigned int MAX_NAV_POLYS      = 512U;
+constexpr int          NAVMESHSET_MAGIC   = 'M' << 24 | 'S' << 16 | 'E' << 8 | 'T'; // 'MSET'
+constexpr int          NAVMESHSET_VERSION = 1;
 
 struct NavMeshSetHeader
 {
@@ -71,8 +73,15 @@ public:
     void reload();
     void unload();
 
-    std::vector<pathpoint_t>     findPath(const position_t& start, const position_t& end); // TODO: Return a status of whether or not the path return is complete or not
-    std::pair<int16, position_t> findRandomPosition(const position_t& start, float maxRadius);
+    enum PathResult
+    {
+        Complete,
+        Partial,
+        Invalid,
+    };
+
+    auto findPath(const position_t& start, const position_t& end) -> std::pair<PathResult, std::vector<pathpoint_t>>;
+    auto findRandomPosition(const position_t& start, float maxRadius) -> std::pair<int16, position_t>;
 
     // Returns true if the point is in water
     bool inWater(const position_t& point);
@@ -90,22 +99,6 @@ public:
 
     // Like validPosition(), but will also set the given position to the valid position that it finds.
     void snapToValidPosition(position_t& position);
-
-    // High level status.
-    static const unsigned int DT_FAILURE     = 1u << 31; // Operation failed.
-    static const unsigned int DT_SUCCESS     = 1u << 30; // Operation succeed.
-    static const unsigned int DT_IN_PROGRESS = 1u << 29; // Operation still in progress.
-
-    // Detail information for status.
-    static const unsigned int DT_STATUS_DETAIL_MASK = 0x0ffffff;
-    static const unsigned int DT_WRONG_MAGIC        = 1 << 0; // Input data is not recognized.
-    static const unsigned int DT_WRONG_VERSION      = 1 << 1; // Input data is in wrong version.
-    static const unsigned int DT_OUT_OF_MEMORY      = 1 << 2; // Operation ran out of memory.
-    static const unsigned int DT_INVALID_PARAM      = 1 << 3; // An input parameter was invalid.
-    static const unsigned int DT_BUFFER_TOO_SMALL   = 1 << 4; // Result buffer for the query was too small to store all results.
-    static const unsigned int DT_OUT_OF_NODES       = 1 << 5; // Query ran out of nodes during search.
-    static const unsigned int DT_PARTIAL_RESULT     = 1 << 6; // Query did not reach the end location, returning best guess.
-    static const unsigned int DT_ALREADY_OCCUPIED   = 1 << 7; // A tile has already been assigned to the given x,y coordinate
 
     [[nodiscard]] static inline auto detourStatusString(uint32 status) -> std::string
     {
@@ -171,6 +164,11 @@ private:
     dtPolyRef      m_hitPath[20]{};
     dtNavMesh*     m_navMesh;
     dtNavMeshQuery m_navMeshQuery;
+
+    std::array<dtPolyRef, MAX_NAV_POLYS>     m_navMeshQueryPolyData{};
+    std::array<float, MAX_NAV_POLYS * 3>     m_navMeshQueryStraightPathFloatData{};
+    std::array<unsigned char, MAX_NAV_POLYS> m_navMeshQueryStraightPathFlagData{};
+    std::array<dtPolyRef, MAX_NAV_POLYS>     m_navMeshQueryStraightPathPolyData{};
 };
 
 #endif
