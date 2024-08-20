@@ -24,6 +24,9 @@ commandObj.onTrigger = function(player, str)
 
     -- For safety measures we will nuke the os table..
     local oldOs = os
+
+    -- TODO: Intential assignment to remove access to os during calls
+    ---@diagnostic disable-next-line: assign-type-mismatch
     os = nil
 
     -- Define 'player' and 'target' inside the string for use by the caller

@@ -32,6 +32,11 @@ commandObj.onTrigger = function(player, target, value, logId, statusIndex)
         logInfo = logIdHelpers.getMissionLogInfo(player:getNation())
     end
 
+    if not logInfo then
+        error(player, 'Log Info not found!')
+        return
+    end
+
     logName = logInfo.full_name
     logId = logInfo.mission_log
 

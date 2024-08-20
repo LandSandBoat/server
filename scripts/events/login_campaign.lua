@@ -19,7 +19,11 @@ local loginCampaignDuration = 23 -- Duration is set in Earth days (Average is 23
 -- Checks if a Login Campaign is active.
 xi.events.loginCampaign.isCampaignActive = function()
     if xi.settings.main.ENABLE_LOGIN_CAMPAIGN == 1 then
+
+        --- TODO: Find common way to handle string|osdate return to be allowed to osdateparam?
+        ---@diagnostic disable-next-line: param-type-mismatch
         local localUtcOffset = os.time() - os.time(os.date('!*t'))
+
         local jstUtcOffset = 9 * 60 * 60
         local campaignStartDate = os.time({
             year = loginCampaignYear,

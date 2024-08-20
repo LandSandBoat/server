@@ -6,12 +6,15 @@ require('scripts/globals/interaction/container')
 
 Mission = setmetatable({ areaId = -1 }, { __index = Container })
 Mission.__index = Mission
+
+---@diagnostic disable-next-line: duplicate-set-field
 Mission.__eq = function(m1, m2)
     return m1.areaId == m2.areaId and m1.missionId == m2.missionId
 end
 
 Mission.reward = {}
 
+---@diagnostic disable-next-line: duplicate-set-field
 function Mission:new(areaId, missionId)
     local obj = Container:new(Mission.getVarPrefix(areaId, missionId))
     setmetatable(obj, self)
