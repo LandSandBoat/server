@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class objType
+---@enum objType
 xi.objType =
 {
     PC     = 0x01,

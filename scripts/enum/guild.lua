@@ -1,6 +1,6 @@
 xi = xi or {}
 
----@class guild
+---@enum guild
 xi.guild =
 {
     FISHING      = 0,

@@ -1,6 +1,6 @@
 xi = xi or {}
 
----@class jobName
+---@enum jobName
 xi.jobNames =
 {
     [ 0] = { 'NONE', 'None' },

@@ -5,7 +5,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class mobMod
+---@enum mobMod
 xi.mobMod =
 {
     NONE                   = 0,

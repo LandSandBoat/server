@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class continent
+---@enum continent
 xi.continent =
 {
     THE_MIDDLE_LANDS        = 1,

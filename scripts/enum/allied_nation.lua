@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class alliedNation
+---@enum alliedNation
 xi.alliedNation =
 {
     NONE     = 0,

@@ -1,6 +1,6 @@
 xi = xi or {}
 
----@class time
+---@enum time
 xi.time =
 {
     NONE        = 0,

@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class drop_rate
+---@enum drop_rate
 xi.drop_rate =
 {
     NEVER       = 0, --   0.00%

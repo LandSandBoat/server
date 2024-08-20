@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum mobSkill
 xi.mobSkill =
 {
     FOOT_KICK_1       =  257,

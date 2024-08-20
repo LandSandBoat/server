@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class slot
+---@enum slot
 xi.slot =
 {
     MAIN   = 0,

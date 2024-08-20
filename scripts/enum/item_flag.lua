@@ -2,7 +2,7 @@ xi = xi or {}
 
 -- Check Lua item with:
 -- local isEx = bit.band(item:getFlag(), xi.itemFlag.EX) ~= 0
----@class itemFlag
+---@enum itemFlag
 xi.itemFlag =
 {
     WALLHANGING  = 0x0001,

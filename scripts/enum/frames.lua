@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class frames
+---@enum frames
 xi.frames =
 {
     HARLEQUIN  = 0x20,

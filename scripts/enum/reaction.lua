@@ -1,6 +1,6 @@
 xi = xi or {}
 
----@class reaction
+---@enum reaction
 xi.reaction =
 {
     NONE     = 0x00,

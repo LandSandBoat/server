@@ -1,6 +1,6 @@
 xi = xi or {}
 
----@class status
+---@enum status
 xi.status =
 {
     NORMAL          =  0,
