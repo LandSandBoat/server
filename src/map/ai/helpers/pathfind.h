@@ -60,6 +60,7 @@ public:
 
     // find and walk to the given point
     bool PathTo(const position_t& point, uint8 pathFlags = 0, bool clear = true);
+
     // walk to the given point until in range
     bool PathInRange(const position_t& point, float range, uint8 pathFlags = 0, bool clear = true);
 
@@ -126,11 +127,7 @@ public:
 
 private:
     // find a valid path using polys
-    bool FindPath(const position_t& start, const position_t& end);
-
-    // cut some corners and find the fastest path
-    // this will make the mob run down cliffs
-    bool FindClosestPath(const position_t& start, const position_t& end);
+    bool FindPath(const position_t& start, const position_t& end, bool wallhack);
 
     // finds a random path around the given point
     bool FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, uint16 roamFlags);

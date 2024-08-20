@@ -122,22 +122,11 @@ bool CPathFind::PathTo(const position_t& point, uint8 pathFlags, bool clear)
 
     if (isNavMeshEnabled())
     {
-        bool result = false;
-
-        if (m_pathFlags & PATHFLAG_WALLHACK)
-        {
-            result = FindClosestPath(m_POwner->loc.p, point);
-        }
-        else
-        {
-            result = FindPath(m_POwner->loc.p, point);
-        }
-
+        bool result = FindPath(m_POwner->loc.p, point, m_pathFlags & PATHFLAG_WALLHACK);
         if (!result)
         {
             Clear();
         }
-
         return result;
     }
     else
@@ -446,7 +435,7 @@ void CPathFind::StepTo(const position_t& pos, bool run)
     m_POwner->updatemask |= UPDATE_POS;
 }
 
-bool CPathFind::FindPath(const position_t& start, const position_t& end)
+bool CPathFind::FindPath(const position_t& start, const position_t& end, bool wallhack)
 {
     TracyZoneScoped;
 
@@ -464,6 +453,11 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
 
     m_points       = std::move(points);
     m_currentPoint = 0;
+
+    if (result != CNavMesh::PathResult::Complete && wallhack)
+    {
+        m_points.emplace_back(pathpoint_t{ end, 0, false }); // this prevents exploits with navmesh / impassible terrain
+    }
 
     if (m_points.empty())
     {
@@ -523,39 +517,6 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
     }
 
     return !m_points.empty();
-}
-
-bool CPathFind::FindClosestPath(const position_t& start, const position_t& end)
-{
-    TracyZoneScoped;
-
-    if (arePositionsClose(start, end))
-    {
-        return false;
-    }
-
-    if (!isNavMeshEnabled())
-    {
-        return false;
-    }
-
-    auto [result, points] = m_POwner->loc.zone->m_navMesh->findPath(start, end);
-
-    m_points       = std::move(points);
-    m_currentPoint = 0;
-
-    // TODO: This is just for testing, this wallhack behaviour is very important!
-    // m_points.emplace_back(pathpoint_t{ end, 0, false }); // this prevents exploits with navmesh / impassible terrain
-
-    /* this check requirement is never met as intended since m_points are never empty when mob has a path
-    if (m_points.empty())
-    {
-        // this is a trick to make mobs go up / down impassible terrain
-        m_points.emplace_back(end);
-    }
-*/
-
-    return true;
 }
 
 void CPathFind::LookAt(const position_t& point)
