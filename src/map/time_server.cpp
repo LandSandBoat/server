@@ -19,23 +19,22 @@
 ===========================================================================
 */
 
-#include "time_server.h"
+#include "../common/logging.h"
 
-#include "common/logging.h"
-#include "common/vana_time.h"
-
-#include "common/vana_time.h"
+#include "conquest_system.h"
 #include "daily_system.h"
 #include "entities/charentity.h"
 #include "latent_effect_container.h"
 #include "lua/luautils.h"
 #include "roe.h"
+#include "time_server.h"
 #include "timetriggers.h"
 #include "transport.h"
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
 #include "utils/moduleutils.h"
 #include "utils/zoneutils.h"
+#include "vana_time.h"
 
 int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
 {
@@ -46,10 +45,12 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     // Weekly update for conquest (sunday at midnight)
     static time_point lastConquestTally  = tick - 1h;
     static time_point lastConquestUpdate = tick - 1h;
+    static time_point lastZnmPriceDecay = tick - 1h;
     if (CVanaTime::getInstance()->getJstWeekDay() == 1 && CVanaTime::getInstance()->getJstHour() == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
     {
         if (tick > (lastConquestTally + 1h))
         {
+            conquest::UpdateWeekConquest();
             roeutils::CycleWeeklyRecords();
             roeutils::CycleUnityRankings();
             lastConquestTally = tick;
@@ -60,8 +61,18 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastConquestUpdate + 1h))
         {
+            conquest::UpdateConquestSystem();
             roeutils::UpdateUnityRankings();
             lastConquestUpdate = tick;
+        }
+        // ZNM Pop-Item Prices Decay every 2 hours
+        if (CVanaTime::getInstance()->getJstHour() % 2 == 0)
+        {
+            if (tick > (lastZnmPriceDecay + 1h))
+            {
+                luautils::ZNMPopPriceDecay();
+                lastZnmPriceDecay = tick;
+            }
         }
     }
 
@@ -93,13 +104,10 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastTickedJstMidnight + 1h))
         {
-            if (settings::get<bool>("main.ENABLE_ROE"))
-            {
-                roeutils::CycleDailyRecords();
-            }
-
+            daily::UpdateDailyTallyPoints();
+            roeutils::CycleDailyRecords();
             guildutils::UpdateGuildPointsPattern();
-            luautils::OnJSTMidnight();
+            luautils::UpdateSanrakusMobs();
             lastTickedJstMidnight = tick;
         }
     }
