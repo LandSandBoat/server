@@ -137,6 +137,9 @@ xi.settings.main =
     DISABLE_PARTY_EXP_PENALTY        = false, -- true/false.
     ENABLE_IMMUNOBREAK               = true,  -- true/false. Allow/Disallow immunobreaks to happen.
 
+    ENABLE_EXP_PET_PENALTY           = false, -- true/false. Toggle the 2007-era Fellow and Charm pet exp penalty.
+    ENABLE_EXP_PET_PENALTY_MULTIPLER = 0.7,   -- float. If ENABLE_EXP_PET_PENALTY is enabled, this is how much exp will be multipled by.
+
     -- TRUSTS
     ENABLE_TRUST_CASTING           = 1,
     ENABLE_TRUST_QUESTS            = 1,

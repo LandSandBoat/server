@@ -1,0 +1,19 @@
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+DROP TABLE IF EXISTS `exp_per_monster_caps`;
+CREATE TABLE IF NOT EXISTS `exp_per_monster_caps` (
+  `upper_level` TINYINT NOT NULL DEFAULT '0',
+  `exp_cap` FLOAT NOT NULL DEFAULT '0',
+  PRIMARY KEY (`upper_level`)
+) ENGINE=Aria DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `exp_per_monster_caps` VALUES(50, 400.00);
+INSERT INTO `exp_per_monster_caps` VALUES(60, 500.00);
+
+-- Else, fall through to this:
+INSERT INTO `exp_per_monster_caps` VALUES(99, 600.00);
