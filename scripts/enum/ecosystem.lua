@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class ecosystem
+---@enum ecosystem
 xi.ecosystem =
 {
     ERROR          = 0,

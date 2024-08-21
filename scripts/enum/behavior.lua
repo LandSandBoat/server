@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class behaviour
+---@enum behaviour
 xi.behavior =
 {
     NONE         = 0x000,

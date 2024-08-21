@@ -1,6 +1,6 @@
 xi = xi or {}
 
----@class helmType
+---@enum helmType
 xi.helmType =
 {
     HARVESTING = 1,

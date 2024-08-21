@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class effect
+---@enum effect
 xi.effect =
 {
     KO                       = 0,

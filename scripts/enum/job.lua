@@ -1,6 +1,6 @@
 xi = xi or {}
 
----@class job
+---@enum job
 xi.job =
 {
     NONE =  0,

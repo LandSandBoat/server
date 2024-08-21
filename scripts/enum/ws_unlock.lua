@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class wsUnlock
+---@enum wsUnlock
 xi.wsUnlock =
 {
     ASURAN_FISTS        = 1,

@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class keyItem
+---@enum keyItem
 xi.keyItem =
 {
     ZERUHN_REPORT                            = 1,

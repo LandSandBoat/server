@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class effectFlag
+---@enum effectFlag
 xi.effectFlag =
 {
     NONE            = 0x00000000,

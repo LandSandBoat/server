@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class recast
+---@enum recast
 xi.recast =
 {
     ITEM     = 0,
@@ -11,7 +11,7 @@ xi.recast =
     ABILITY  = 2,
 }
 
----@class recastID
+---@enum recastID
 xi.recastID =
 {
     SIC            = 102,

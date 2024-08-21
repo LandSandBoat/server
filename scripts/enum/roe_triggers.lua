@@ -1,6 +1,6 @@
 xi = xi or {}
 
----@class roeTrigger
+---@enum roeTrigger
 xi.roeTrigger =
 {
     DEFEAT_MOB           = 1,  -- Player kills a Mob (Counts for mobs killed by partymembers)

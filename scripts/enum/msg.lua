@@ -8,7 +8,7 @@ xi.msg = xi.msg or {}
 -- Message Channels
 -----------------------------------
 
----@class channel
+---@enum channel
 xi.msg.channel =
 {
     SAY            = 0,
@@ -47,7 +47,7 @@ xi.msg.channel =
 }
 
 -- used by player:printToArea
----@class area
+---@enum area
 xi.msg.area =
 {
     SYSTEM      = 0, -- Server wide like the purple stuff :)
@@ -62,7 +62,7 @@ xi.msg.area =
 -- Basic Messages
 -----------------------------------
 
----@class basic
+---@enum basic
 xi.msg.basic =
 {
     NONE    = 0, -- Display nothing
@@ -406,7 +406,7 @@ xi.msg.basic =
 }
 
 -- Used to modify certain basic messages.
----@class actionModifier
+---@enum actionModifier
 xi.msg.actionModifier =
 {
     NONE        = 0x00,
@@ -420,7 +420,7 @@ xi.msg.actionModifier =
 -- System Messages
 -----------------------------------
 
----@class system
+---@enum system
 xi.msg.system =
 {
     GLOBAL_TRUST_OFFSET          = 0,

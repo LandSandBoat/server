@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class zoneType
+---@enum zoneType
 xi.zoneType =
 {
     UNKNOWN   = 0x0000,

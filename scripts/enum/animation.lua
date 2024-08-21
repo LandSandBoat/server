@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@class animation
+---@enum animation
 xi.animation =
 {
     NONE                    = 0,
