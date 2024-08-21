@@ -1,0 +1,1 @@
+NOTE! These will most likely be auto-generated in the future, and serve as placeholders for efforts outside of core.
