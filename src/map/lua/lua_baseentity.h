@@ -102,7 +102,6 @@ public:
     bool didGetMessage();   // Used by interaction framework to determine if player triggered something else
     void resetGotMessage(); // Used by interaction framework to reset if player triggered something else
 
-    void   setFlag(uint32 flags);
     uint16 getMoghouseFlag();
     void   setMoghouseFlag(uint16 flag);
     bool   needToZone(sol::object const& arg0);
@@ -262,8 +261,7 @@ public:
     int8  getShieldSize();
     int16 getShieldDefense();
 
-    bool hasGearSetMod(uint8 modNameId);
-    void addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue);
+    void addGearSetMod(uint8 setId, Mod modId, uint16 modValue);
     void clearGearSetMods();
 
     // Storing

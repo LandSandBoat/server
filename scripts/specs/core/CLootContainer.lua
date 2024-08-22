@@ -13,18 +13,18 @@ end
 ---@param groupRate integer
 ---@param items table
 ---@return nil
-function addGroup(groupRate, items)
+function CLootContainer:addGroup(groupRate, items)
 end
 
 ---@param item integer
 ---@param rate integer
 ---@param quantity integer?
 ---@return nil
-function addItemFixed(item, rate, quantity)
+function CLootContainer:addItemFixed(item, rate, quantity)
 end
 
 ---@param groupRate integer
 ---@param items table
 ---@return nil
-function addGroupFixed(groupRate, items)
+function CLootContainer:addGroupFixed(groupRate, items)
 end

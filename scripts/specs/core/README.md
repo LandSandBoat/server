@@ -7,6 +7,7 @@ Current Pattern:
 
 TODO:
 * Once Automation is applied, add @source annotations
+* If getter function, set nodiscard
 
 NOTE:
 * Lua Stylecheck will hit this directory, so function definitions need to follow formatting of end being on a newline
