@@ -4062,7 +4062,7 @@ bool CLuaBaseEntity::delContainerItems(sol::object const& containerID)
 
     if (location >= CONTAINER_ID::MAX_CONTAINER_ID)
     {
-        ShowWarning("Lua::delContainerItems: Attempting to delete items from an invalid container. Defaulting to main inventory.");
+        ShowWarning("Attempting to delete items from an invalid container.");
         return false;
     }
 
@@ -4089,8 +4089,7 @@ bool CLuaBaseEntity::delContainerItems(sol::object const& containerID)
 /************************************************************************
  *  Function: addUsedItem()
  *  Purpose : Add charged item with use timer already on full cooldown
- *  Example : player:addUsedItem(17040) -- Warp Cudgel
- *  Notes   : Currently unused, but should be
+ *  Example : player:addUsedItem(xi.item.WARP_CUDGEL)
  ************************************************************************/
 
 bool CLuaBaseEntity::addUsedItem(uint16 itemID)

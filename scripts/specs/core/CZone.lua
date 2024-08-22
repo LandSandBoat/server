@@ -14,7 +14,7 @@ function CZone:setLocalVar(key, value)
 end
 
 ---@return nil
-function resetLocalVars()
+function CZone:resetLocalVars()
 end
 
 ---@return nil
@@ -23,7 +23,7 @@ end
 
 ---@deprecated
 ---@return nil
-function levelRestriction()
+function CZone:levelRestriction()
 end
 
 ---@return table
@@ -119,5 +119,5 @@ end
 
 ---@param name string
 ---@return table
-function queryEntitiesByName(name)
+function CZone:queryEntitiesByName(name)
 end
