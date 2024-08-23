@@ -13038,7 +13038,7 @@ bool CLuaBaseEntity::hasStatusEffect(uint16 StatusID, sol::object const& SubType
  *  Notes   : More broad in scope than hasStatusEffect()
  ************************************************************************/
 
-uint16 CLuaBaseEntity::hasStatusEffectByFlag(uint16 StatusID)
+bool CLuaBaseEntity::hasStatusEffectByFlag(uint16 StatusID)
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
