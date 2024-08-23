@@ -1,5 +1,6 @@
 ---@meta
 
+-- luacheck: ignore 241
 ---@class CBaseEntity
 local CBaseEntity = {}
 
@@ -1172,33 +1173,53 @@ end
 function CBaseEntity:getNewPlayer()
 end
 
+---@param newplayer boolean
+---@return nil
 function CBaseEntity:setNewPlayer(newplayer)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:getMentor()
 end
 
+---@param mentor boolean
+---@return nil
 function CBaseEntity:setMentor(mentor)
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getGMLevel()
 end
 
+---@param level integer
+---@return nil
 function CBaseEntity:setGMLevel(level)
 end
 
+---@param level integer
+---@return nil
 function CBaseEntity:setVisibleGMLevel(level)
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getVisibleGMLevel()
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:getGMHidden()
 end
 
+---@param isHidden boolean
+---@return nil
 function CBaseEntity:setGMHidden(isHidden)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:getWallhack()
 end
 
