@@ -4,46 +4,57 @@
 ---@class CItem
 local CItem = {}
 
+---@nodiscard
 ---@return integer
 function CItem:getID()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getSubID()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getFlag()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getAHCat()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getQuantity()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getLocationID()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getSlotID()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getTrialNumber()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getWornUses()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getBasePrice()
 end
 
+---@nodiscard
 ---@param type integer
 ---@return boolean
 function CItem:isType(type)
@@ -54,6 +65,7 @@ end
 function CItem:setSubType(subtype)
 end
 
+---@nodiscard
 ---@param subtype integer
 ---@return boolean
 function CItem:isSubType(subtype)
@@ -64,22 +76,27 @@ end
 function CItem:setReservedValue(reserved)
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getReservedValue()
 end
 
+---@nodiscard
 ---@return string
 function CItem:getName()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getILvl()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getReqLvl()
 end
 
+---@nodiscard
 ---@param modID integer
 ---@return integer
 function CItem:getMod(modID)
@@ -97,43 +114,53 @@ end
 function CItem:delMod(modID, power)
 end
 
+---@nodiscard
 ---@param slot integer
 ---@return table
 function CItem:getAugment(slot)
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getSkillType()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getWeaponskillPoints()
 end
 
+---@nodiscard
 ---@return boolean
 function CItem:isTwoHanded()
 end
 
+---@nodiscard
 ---@return boolean
 function CItem:isHandToHand()
 end
 
+---@nodiscard
 ---@return boolean
 function CItem:isShield()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getShieldSize()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getShieldAbsorptionRate()
 end
 
+---@nodiscard
 ---@return string
 function CItem:getSignature()
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getAppraisalID()
 end
@@ -143,10 +170,12 @@ end
 function CItem:setAppraisalID(id)
 end
 
+---@nodiscard
 ---@return integer
 function CItem:getCurrentCharges()
 end
 
+---@nodiscard
 ---@return boolean
 function CItem:isInstalled()
 end
@@ -160,10 +189,12 @@ end
 function CItem:setSoulPlateData(name, mobFamily, zeni, skillIndex, fp)
 end
 
+---@nodiscard
 ---@return table
 function CItem:getSoulPlateData()
 end
 
+---@nodiscard
 ---@return table
 function CItem:getExData()
 end

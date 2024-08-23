@@ -4,50 +4,62 @@
 ---@class CStatusEffect
 local CStatusEffect = {}
 
+---@nodiscard
 ---@return integer
 function CStatusEffect:getEffectType()
 end
 
+---@nodiscard
 ---@return integer
 function CStatusEffect:getSubType()
 end
 
+---@nodiscard
 ---@return integer
 function CStatusEffect:getPower()
 end
 
+---@nodiscard
 ---@return integer
 function CStatusEffect:getSubPower()
 end
 
+---@nodiscard
 ---@return integer
 function CStatusEffect:getTier()
 end
 
+---@nodiscard
 ---@return integer
 function CStatusEffect:getDuration()
 end
 
+---@nodiscard
 ---@return integer
 function CStatusEffect:getStartTime()
 end
 
+---@nodiscard
 ---@return integer
 function CStatusEffect:getLastTick()
 end
 
+---@nodiscard
 ---@return integer
 function CStatusEffect:getTimeRemaining()
 end
 
+---@nodiscard
 ---@return integer
 function CStatusEffect:getTickCount()
 end
 
+---@nodiscard
 ---@return integer
 function CStatusEffect:getTick()
 end
 
+---@nodiscard
 ---@return integer
 function CStatusEffect:getIcon()
 end
@@ -97,6 +109,7 @@ end
 function CStatusEffect:addMod(mod, amount)
 end
 
+---@nodiscard
 ---@return integer
 function CStatusEffect:getEffectFlags()
 end
@@ -116,6 +129,7 @@ end
 function CStatusEffect:delEffectFlag(flag)
 end
 
+---@nodiscard
 ---@param flag integer
 ---@return boolean
 function CStatusEffect:hasEffectFlag(flag)
