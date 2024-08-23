@@ -3,7 +3,7 @@ xi.combat = xi.combat or {}
 xi.combat.treasureHunter = xi.combat.treasureHunter or {}
 
 -- https://forum.square-enix.com/ffxi/threads/56550
-local treasureHunterTable =
+xi.combat.treasureHunter.treasureHunterTable =
 {
 -- TH lvl    VC    C     UC    R     VR    SR   UR
     [ 0] = { 2400, 1500, 1000,  500,  100,  50,  10 },
@@ -23,7 +23,7 @@ local treasureHunterTable =
     [14] = { 8000, 7000, 3250, 2000, 1000, 500, 150 },
 }
 
-local thBracketTable =
+xi.combat.treasureHunter.dropBracketTable =
 {
     [1] = { 2400 },
     [2] = { 1500 },
@@ -53,7 +53,7 @@ xi.combat.treasureHunter.getDropRate = function(thLevel, dropRate)
     local thBracket = 0
 
     for i = 1, 7 do
-        if thDropRate >= thBracketTable[i][1] then
+        if thDropRate >= xi.combat.treasureHunter.dropBracketTable[i][1] then
             thBracket = i
 
             break
@@ -61,7 +61,7 @@ xi.combat.treasureHunter.getDropRate = function(thLevel, dropRate)
     end
 
     -- Calculate TH drop rate
-    local newDropRate = treasureHunterTable[thTier][thBracket]
+    local newDropRate = xi.combat.treasureHunter.treasureHunterTable[thTier][thBracket]
 
     return newDropRate
 end
