@@ -1,5 +1,6 @@
 ---@meta
 
+-- luacheck: ignore 241
 ---@class CMobSkill
 local CMobSkill = {}
 
