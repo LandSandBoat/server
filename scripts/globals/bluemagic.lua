@@ -217,6 +217,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     params.offcratiomod = params.offcratiomod * (caster:getMerit(xi.merit.PHYSICAL_POTENCY) + 100) / 100
     params.bonusacc     = params.bonusacc == nil and 0 or params.bonusacc
+    params.tphitslanded = 0
 
     -- params.critchance will only be non-nil if base critchance is passed from spell lua
     local nativecrit  = xi.combat.physical.calculateSwingCriticalRate(caster, target, 0, false)
@@ -240,7 +241,6 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
                                 spell:isAoE() == 0 and
                                 params.attackType ~= xi.attackType.RANGED) and
                                 caster:getTrickAttackChar(target) or nil
-
     while hitsdone < params.numhits do
         local chance = math.random()
 
@@ -271,9 +271,9 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
             hitslanded        = hitslanded + 1
             sneakIsApplicable = false
 
-            -- increment target's TP (100TP per hit landed)
+            -- Store number of hits that did > 0 damage
             if finaldmg > 0 then
-                target:addTP(100)
+                params.tphitslanded = params.tphitslanded + 1
             end
         end
 
@@ -422,9 +422,10 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
         dmg = 0
     end
 
-    dmg              = dmg * xi.settings.main.BLUE_POWER
-    local attackType = params.attackType or xi.attackType.NONE
-    local damageType = params.damageType or xi.damageType.NONE
+    dmg                 = dmg * xi.settings.main.BLUE_POWER
+    local attackType    = params.attackType or xi.attackType.NONE
+    local damageType    = params.damageType or xi.damageType.NONE
+    local extraTPGained = xi.combat.tp.calculateTPGainOnMagicalDamage(dmg, caster, target) * math.max(params.tphitslanded - 1, 0) -- Calculate extra TP gained from multihits. takeSpellDamage accounts for one already.
 
     -- handle MDT, One For All, Liement
     if attackType == xi.attackType.MAGICAL then
@@ -433,6 +434,7 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
 
         if dmg < 0 then
             target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
+            target:addTP(extraTPGained)
             -- TODO: verify Afflatus/enmity from absorb?
             return dmg
         end
@@ -452,6 +454,7 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
     dmg = target:checkDamageCap(dmg)
 
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
+    target:addTP(extraTPGained)
 
     if not target:isPC() then
         if trickAttackTarget then
