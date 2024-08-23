@@ -4,90 +4,112 @@
 ---@class CBattlefield
 local CBattlefield = {}
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getID()
 end
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getZoneID()
 end
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getArea()
 end
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getTimeLimit()
 end
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getTimeInside()
 end
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getRemainingTime()
 end
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getFightTick()
 end
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getWipeTime()
 end
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getFightTime()
 end
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getMaxParticipants()
 end
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getPlayerCount()
 end
 
+---@nodiscard
 ---@return table
 function CBattlefield:getPlayers()
 end
 
+---@nodiscard
 ---@return table
 function CBattlefield:getPlayersAndTrusts()
 end
 
+---@nodiscard
 ---@return table
 function CBattlefield:getMobs(required, adds)
 end
 
+---@nodiscard
 ---@return table
 function CBattlefield:getNPCs()
 end
 
+---@nodiscard
 ---@return table
 function CBattlefield:getAllies()
 end
 
+---@nodiscard
 ---@return table
 function CBattlefield:getRecord()
 end
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getStatus()
 end
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getLocalVar(name)
 end
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getLastTimeUpdate()
 end
 
+---@nodiscard
 ---@return table
 function CBattlefield:getInitiator()
 end
 
+---@nodiscard
 ---@return integer
 function CBattlefield:getArmouryCrate()
 end

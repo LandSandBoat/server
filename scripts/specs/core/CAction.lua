@@ -10,6 +10,7 @@ local CAction = {}
 function CAction:ID(actionTargetID, newActionTargetID)
 end
 
+---@nodiscard
 ---@return integer
 function CAction:getPrimaryTargetID()
 end
@@ -19,6 +20,7 @@ end
 function CAction:setRecast(recast)
 end
 
+---@nodiscard
 ---@return integer
 function CAction:getRecast()
 end
@@ -28,6 +30,7 @@ end
 function CAction:actionID(actionid)
 end
 
+---@nodiscard
 ---@param actionTargetID integer
 ---@return integer
 function CAction:getParam(actionTargetID)
@@ -45,11 +48,13 @@ end
 function CAction:messageID(actionTargetID, messageID)
 end
 
+---@nodiscard
 ---@param actionTargetID integer
 ---@return integer?
 function CAction:getMsg(actionTargetID)
 end
 
+---@nodiscard
 ---@param actionTargetID integer
 ---@return integer?
 function CAction:getAnimation(actionTargetID)
@@ -61,6 +66,7 @@ end
 function CAction:setAnimation(actionTargetID, animation)
 end
 
+---@nodiscard
 ---@return integer
 function CAction:getCategory()
 end

@@ -4,6 +4,7 @@
 ---@class CAttack
 local CAttack = {}
 
+---@nodiscard
 ---@return boolean
 function CAttack:getCritical()
 end

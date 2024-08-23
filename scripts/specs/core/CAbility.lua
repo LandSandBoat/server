@@ -4,34 +4,42 @@
 ---@class CAbility
 local CAbility = {}
 
+---@nodiscard
 ---@return integer
 function CAbility:getID()
 end
 
+---@nodiscard
 ---@return integer
 function CAbility:getMsg()
 end
 
+---@nodiscard
 ---@return integer
 function CAbility:getRecast()
 end
 
+---@nodiscard
 ---@return integer
 function CAbility:getRecastID()
 end
 
+---@nodiscard
 ---@return integer
 function CAbility:getRange()
 end
 
+---@nodiscard
 ---@return string
 function CAbility:getName()
 end
 
+---@nodiscard
 ---@return integer
 function CAbility:getAnimation()
 end
 
+---@nodiscard
 ---@return integer
 function CAbility:getAddType()
 end
@@ -51,6 +59,7 @@ end
 function CAbility:setRecast(recastTime)
 end
 
+---@nodiscard
 ---@return integer
 function CAbility:getCE()
 end
@@ -60,6 +69,7 @@ end
 function CAbility:setCE(ce)
 end
 
+---@nodiscard
 ---@return integer
 function CAbility:getVE()
 end

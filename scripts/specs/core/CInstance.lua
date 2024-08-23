@@ -4,76 +4,94 @@
 ---@class CInstance
 local CInstance = {}
 
+---@nodiscard
 ---@return integer
 function CInstance:getID()
 end
 
+---@nodiscard
 ---@return string
 function CInstance:getName()
 end
 
+---@nodiscard
 ---@return CZone
 function CInstance:getZone()
 end
 
+---@nodiscard
 ---@return integer
 function CInstance:getEntranceZoneID()
 end
 
+---@nodiscard
 ---@return table
 function CInstance:getAllies()
 end
 
+---@nodiscard
 ---@return table
 function CInstance:getChars()
 end
 
+---@nodiscard
 ---@return table
 function CInstance:getMobs()
 end
 
+---@nodiscard
 ---@return table
 function CInstance:getNpcs()
 end
 
+---@nodiscard
 ---@return table
 function CInstance:getPets()
 end
 
+---@nodiscard
 ---@return integer
 function CInstance:getTimeLimit()
 end
 
+---@nodiscard
 ---@return table
 function CInstance:getEntryPos()
 end
 
+---@nodiscard
 ---@return integer
 function CInstance:getLevelCap()
 end
 
+---@nodiscard
 ---@return integer
 function CInstance:getLastTimeUpdate()
 end
 
+---@nodiscard
 ---@return integer
 function CInstance:getProgress()
 end
 
+---@nodiscard
 ---@return integer
 function CInstance:getWipeTime()
 end
 
+---@nodiscard
 ---@param targid integer
 ---@param filterObj integer?
 ---@return CBaseEntity?
 function CInstance:getEntity(targid, filterObj)
 end
 
+---@nodiscard
 ---@return integer
 function CInstance:getStage()
 end
 
+---@nodiscard
 ---@param name string
 ---@return integer
 function CInstance:getLocalVar(name)

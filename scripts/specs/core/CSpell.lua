@@ -44,58 +44,72 @@ end
 function CSpell:setMPCost(mpcost)
 end
 
+---@nodiscard
 ---@return boolean
 function CSpell:canTargetEnemy()
 end
 
+---@nodiscard
 ---@return boolean
 function CSpell:isAoE()
 end
 
+---@nodiscard
 ---@return boolean
 function CSpell:tookEffect()
 end
 
+---@nodiscard
 ---@return integer
 function CSpell:getTotalTargets()
 end
 
+---@nodiscard
 ---@return integer
 function CSpell:getMagicBurstMessage()
 end
 
+---@nodiscard
 ---@return integer
 function CSpell:getElement()
 end
 
+---@nodiscard
 ---@return integer
 function CSpell:getID()
 end
 
+---@nodiscard
 ---@return integer
 function CSpell:getMPCost()
 end
 
+---@nodiscard
 ---@return integer
 function CSpell:getSkillType()
 end
 
+---@nodiscard
 ---@return integer
 function CSpell:getSpellGroup()
 end
 
+---@nodiscard
 ---@return integer
 function CSpell:getSpellFamily()
 end
 
+---@nodiscard
 ---@return integer
 function CSpell:getFlag()
 end
 
+---@nodiscard
 ---@return integer
 function CSpell:getCastTime()
 end
 
+---@nodiscard
 ---@return integer
 function CSpell:getPrimaryTargetID()
 end

@@ -4,6 +4,7 @@
 ---@class CZone
 local CZone = {}
 
+---@nodiscard
 ---@return integer
 function CZone:getLocalVar(key)
 end
@@ -27,43 +28,53 @@ end
 function CZone:levelRestriction()
 end
 
+---@nodiscard
 ---@return table
 function CZone:getPlayers()
 end
 
+---@nodiscard
 ---@return table
 function CZone:getNPCs()
 end
 
+---@nodiscard
 ---@return table
 function CZone:getMobs()
 end
 
+---@nodiscard
 ---@return zone
 function CZone:getID()
 end
 
+---@nodiscard
 ---@return string
 function CZone:getName()
 end
 
+---@nodiscard
 ---@return region
 function CZone:getRegionID()
 end
 
+---@nodiscard
 ---@return integer
 function CZone:getTypeMask()
 end
 
+---@nodiscard
 ---@param charID integer
 ---@return CBattlefield?
-function CZone:getBattlefieldByInitiator(charID)
+function CZone:getBattlefieldByInitiator(charID) -- Unused
 end
 
+---@nodiscard
 ---@return weather
 function CZone:getWeather()
 end
 
+---@nodiscard
 ---@return integer
 function CZone:getUptime()
 end
@@ -72,6 +83,7 @@ end
 function CZone:reloadNavmesh()
 end
 
+---@nodiscard
 ---@param position table
 ---@return boolean
 function CZone:isNavigablePoint(position)
@@ -82,18 +94,22 @@ end
 function CZone:insertDynamicEntity(entityTable)
 end
 
+---@nodiscard
 ---@return integer
 function CZone:getSoloBattleMusic()
 end
 
+---@nodiscard
 ---@return integer
 function CZone:getPartyBattleMusic()
 end
 
+---@nodiscard
 ---@return integer
 function CZone:getBackgroundMusicDay()
 end
 
+---@nodiscard
 ---@return integer
 function CZone:getBackgroundMusicNight()
 end
@@ -118,6 +134,7 @@ end
 function CZone:setBackgroundMusicNight(musicId)
 end
 
+---@nodiscard
 ---@param name string
 ---@return table
 function CZone:queryEntitiesByName(name)
