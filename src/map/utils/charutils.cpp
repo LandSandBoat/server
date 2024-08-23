@@ -4086,28 +4086,21 @@ namespace charutils
         }
     }
 
-    void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 droprate)
+    void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 dropRate)
     {
         TracyZoneScoped;
 
-        uint8 tries    = 0;
-        uint8 maxTries = 1;
-        uint8 bonus    = 0;
+        auto   thDropRateFunction = lua["xi"]["combat"]["treasureHunter"]["getDropRate"];
+        uint16 thDropRate         = dropRate * 10;
+
         if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
         {
-            // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
-            tries    = 0;
-            maxTries = 1 + (PMob->m_THLvl > 2 ? 2 : PMob->m_THLvl);
-            bonus    = (PMob->m_THLvl > 2 ? (PMob->m_THLvl - 2) * 10 : 0);
+            thDropRate = thDropRateFunction(PMob->m_THLvl, thDropRate);
         }
-        while (tries < maxTries)
+
+        if (thDropRate > 0 && xirand::GetRandomNumber(1, 10000) <= thDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
         {
-            if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
-            {
-                PChar->PTreasurePool->AddItem(itemid, PEntity);
-                break;
-            }
-            tries++;
+            PChar->PTreasurePool->AddItem(itemid, PEntity);
         }
     }
 
