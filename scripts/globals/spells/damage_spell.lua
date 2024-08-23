@@ -1044,11 +1044,6 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
         -- Handle Enmity.
         target:updateEnmityFromDamage(caster, finalDamage)
 
-        -- Only add TP if the target is a mob and if the spell actually does damage.
-        if target:getObjType() ~= xi.objType.PC and finalDamage > 0 then
-            target:addTP(100)
-        end
-
         -- Add "Magic Burst!" message
         if magicBurst > 1 then
             spell:setMsg(xi.msg.basic.MAGIC_BURST_DAMAGE)
