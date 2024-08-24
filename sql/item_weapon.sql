@@ -1775,7 +1775,7 @@ INSERT INTO `item_weapon` VALUES (18137,'holy_ampulla',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18138,'bailathorn',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18139,'bomb_core',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18140,'phtm._tathlum',0,0,0,0,0,0,1,999,0,0);
-INSERT INTO `item_weapon` VALUES (18141,'ungur_boomerang',27,0,0,0,0,0,1,220,30,0);
+INSERT INTO `item_weapon` VALUES (18141,'ungur_boomerang',27,0,0,0,0,1,1,220,30,0);
 INSERT INTO `item_weapon` VALUES (18142,'shigeto_bow',25,0,0,0,0,1,1,600,75,0);
 INSERT INTO `item_weapon` VALUES (18143,'shigeto_bow_+1',25,0,0,0,0,1,1,582,76,0);
 INSERT INTO `item_weapon` VALUES (18144,'bow_of_trials',25,0,0,0,0,1,1,360,39,300);
