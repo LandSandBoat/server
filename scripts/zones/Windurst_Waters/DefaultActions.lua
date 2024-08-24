@@ -2,6 +2,7 @@
 
 return {
     ['Akkeke']          = { event = 427 },
+    ['Chamama']         = { event = 651 },
     ['Chomoro-Kyotoro'] = { event = 432 },
     ['Cochal-Monchal']  = { event = 696 },
     ['Foi-Mui']         = { event = 430 },
