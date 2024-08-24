@@ -436,11 +436,12 @@ function CBaseEntity:continuePath()
 end
 
 ---@nodiscard
----@param arg0 number
+---@param arg0 number|table|CBaseEntity
 ---@param arg1 number
 ---@param arg2 number
 ---@return number
 ---@overload fun(arg0: table): number
+---@overload fun(arg0: CBaseEntity): number
 function CBaseEntity:checkDistance(arg0, arg1, arg2)
 end
 
@@ -716,10 +717,11 @@ end
 ---@param x number?
 ---@param y number?
 ---@param z number?
----@param rot number?
+---@param rot integer?
+---@param zoneId integer?
 ---@return nil
 ---@overload fun(arg0: table): nil
-function CBaseEntity:setPos(x, y, z, rot)
+function CBaseEntity:setPos(x, y, z, rot, zoneId)
 end
 
 ---@return nil

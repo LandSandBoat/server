@@ -8,3 +8,6 @@
 ---@field onItemDrop? fun(PUser: CBaseEntity, PItem: CItem): nil
 ---@field onEffectGain? fun(target: CBaseEntity, effect: CStatusEffect): nil
 ---@field onEffectLose? fun(target: CBaseEntity, effect: CStatusEffect): nil
+---@field onEffectTick? fun(target: CBaseEntity, effect: CStatusEffect): nil
+---@field onFurniturePlaced? fun(player: CBaseEntity): nil
+---@field onFurnitureRemoved? fun(player: CBaseEntity): nil

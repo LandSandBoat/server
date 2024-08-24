@@ -16,6 +16,11 @@ end
 
 itemObject.onItemUse = function(target)
     local pet = target:getPet()
+
+    if not pet then
+        return
+    end
+
     local totalHP = pet:getMaxHP() / 2
     pet:addHP(totalHP)
     pet:messageBasic(xi.msg.basic.RECOVERS_HP, 0, totalHP)

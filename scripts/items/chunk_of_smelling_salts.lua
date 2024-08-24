@@ -21,6 +21,11 @@ end
 itemObject.onItemUse = function(target)
     if target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 180, 5320) then
         local pet = target:getPet()
+
+        if not pet then
+            return
+        end
+
         -- TODO: Verify targeting and messages are correct
         target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.MEDICINE)
         pet:delStatusEffect(xi.effect.SLEEP_I)
