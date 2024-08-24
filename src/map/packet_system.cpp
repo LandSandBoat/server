@@ -314,7 +314,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
 
         PChar->m_ZonesList[PChar->getZone() >> 3] |= (1 << (PChar->getZone() % 8));
 
-        const char* fmtQuery = "UPDATE accounts_sessions SET targid = %u, session_key = x'%s', server_addr = %u, client_port = %u WHERE charid = %u";
+        const char* fmtQuery = "UPDATE accounts_sessions SET targid = %u, session_key = x'%s', server_addr = %u, client_port = %u, last_zoneout_time = 0 WHERE charid = %u";
 
         // Current zone could either be current zone or destination
         CZone* currentZone = zoneutils::GetZone(PChar->getZone());

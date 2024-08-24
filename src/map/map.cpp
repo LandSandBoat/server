@@ -1057,6 +1057,11 @@ int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
         {
             _sql->Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->charID);
         }
+        else
+        {
+            // Set client port to zero, indicating the client tried to zone out and no longer has a port until the next 0x00A
+            _sql->Query("UPDATE accounts_sessions SET client_port = 0, last_zoneout_time = NOW() WHERE charid = %u", map_session_data->charID);
+        }
 
         uint64 port64 = map_session_data->client_port;
         uint64 ipp    = map_session_data->client_addr;

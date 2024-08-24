@@ -335,6 +335,17 @@ void data_session::read_func()
                     hasActiveSession = true;
                 }
 
+                // If client was zoning out but was never seen at the destination, wait 30 seconds before allowing login again
+                if (_sql->Query("SELECT * \
+                                FROM accounts_sessions \
+                                WHERE accid = %u AND client_port = '0' AND last_zoneout_time >= SUBTIME(NOW(), \"00:00:30\")",
+                                session.accountID) != SQL_ERROR &&
+                    _sql->NumRows() != 0)
+                {
+                    _sql->NextRow();
+                    hasActiveSession = true;
+                }
+
                 uint64 exceptionTime = 0;
 
                 if (_sql->Query("SELECT UNIX_TIMESTAMP(exception) \
@@ -359,6 +370,7 @@ void data_session::read_func()
                     ShowWarning(fmt::format("data_session: account {} attempting to login when {} already has {} active session(s), limit is {}", session.accountID, ipAddress, sessionCount, loginLimit));
                 }
 
+                // TODO: it seems we may need to increment the key if we send this error? Client doesn't seem to ever recover.
                 if (hasActiveSession)
                 {
                     ShowWarning(fmt::format("data_session: account {} is already logged in.", session.accountID));
@@ -367,6 +379,7 @@ void data_session::read_func()
                         // Send error message to the client.
                         loginHelpers::generateErrorMessage(data->data_, loginErrors::errorCode::UNABLE_TO_CONNECT_TO_WORLD_SERVER); // "Unable to connect to world server. Specified operation failed"
                         data->do_write(0x24);
+
                         return;
                     }
                 }
