@@ -16,7 +16,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.STONESKIN, power, 0, 300))
 
     local effect = mob:getStatusEffect(xi.effect.STONESKIN)
-    effect:delEffectFlag(xi.effectFlag.DISPELABLE)
+    if effect then
+        effect:delEffectFlag(xi.effectFlag.DISPELABLE)
+    end
 
     return xi.effect.STONESKIN
 end

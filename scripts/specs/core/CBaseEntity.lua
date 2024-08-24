@@ -1892,7 +1892,7 @@ end
 ---@param attacker CBaseEntity?
 ---@param atkType integer?
 ---@param dmgType integer?
----@param flags integer?
+---@param flags table?
 ---@return nil
 function CBaseEntity:takeDamage(damage, attacker, atkType, dmgType, flags)
 end
@@ -2728,7 +2728,7 @@ end
 
 ---@param flagObj integer?
 ---@return integer
-function CBaseEntity:dispellAllStatusEffect(flagObj)
+function CBaseEntity:dispelAllStatusEffect(flagObj)
 end
 
 ---@param PTargetEntity CBaseEntity

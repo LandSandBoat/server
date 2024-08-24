@@ -11,6 +11,11 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local battletarget = mob:getTarget()
+
+    if not battletarget then
+        return
+    end
+
     local t = battletarget:getPos()
     t.rot = battletarget:getRotPos()
     local angle = math.random() * math.pi
