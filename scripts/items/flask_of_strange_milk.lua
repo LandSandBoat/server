@@ -3,6 +3,7 @@
 -- Item: Flask of Strange Milk
 -- Item Effect: Restores 500 HP over 300 seconds.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

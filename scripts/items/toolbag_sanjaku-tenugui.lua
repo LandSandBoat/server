@@ -3,6 +3,7 @@
 -- Toolbag Sanjaku-tenugui
 -- When used, you will obtain one stack of Sanjaku-tenugui
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

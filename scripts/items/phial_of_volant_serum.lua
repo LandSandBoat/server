@@ -3,6 +3,7 @@
 -- Phial of Volant Serum
 -- Enchantment: 60Min, Costume - bat
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Scroll of Sleep II
 -- Teaches the black magic Sleep II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

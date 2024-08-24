@@ -3,6 +3,7 @@
 -- Scroll of Fire Carol
 -- Teaches the song Fire Carol
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

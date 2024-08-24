@@ -2,6 +2,7 @@
 -- ID: 19468
 -- Item: Gandiva
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Scroll of Water Carol
 -- Teaches the song Water Carol
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Item: Kupo Rod
 -- Enchantment: Moogle Blessing (removes Weakness)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -5,6 +5,7 @@
 -- written by an anonymous individual.
 -- Adventurers note that reading it increases one's great axe skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

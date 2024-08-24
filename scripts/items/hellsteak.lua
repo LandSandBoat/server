@@ -12,6 +12,7 @@
 -- Ranged ATT % 18 (cap 145)
 -- Dragon Killer 5
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

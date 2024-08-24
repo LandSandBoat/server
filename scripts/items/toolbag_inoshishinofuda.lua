@@ -3,6 +3,7 @@
 -- Toolbag Ino
 -- When used, you will obtain one stack of inoshishinofuda
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

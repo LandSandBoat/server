@@ -3,6 +3,7 @@
 -- Scroll of Endark
 -- Teaches the white magic Endark
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

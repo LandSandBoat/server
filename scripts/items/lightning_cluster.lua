@@ -3,6 +3,7 @@
 -- Lighting Cluster
 -- Turn into a stack of lighting crystals
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

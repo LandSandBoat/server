@@ -3,6 +3,7 @@
 -- Fire Bracers
 --  Enchantment: "Enfire"
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

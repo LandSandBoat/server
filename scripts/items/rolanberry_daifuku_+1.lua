@@ -18,6 +18,7 @@
 -- Magic Accuracy +80
 -- https://www.bg-wiki.com/bg/Rolan._Daifuku_%2B1
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

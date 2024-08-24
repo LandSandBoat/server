@@ -2,6 +2,7 @@
 -- ID: 5412
 -- scapegoat
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -14,6 +14,7 @@
 -- Demon Killer +4
 -- Resist Sleep +3
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -4,6 +4,7 @@
 -- Scroll of thunder v
 -- Teaches the black magic thunder v
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

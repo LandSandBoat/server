@@ -3,6 +3,7 @@
 -- ID 5370
 -- Unlocks back and waist equipment
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

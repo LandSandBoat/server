@@ -4,6 +4,7 @@
 -- Item Effect: While Sha Wujing's Lance +1 is equipped:
 --   5m 1HP/tick Regen effect. Lance does not need to remain equipped after use.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

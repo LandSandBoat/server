@@ -5,6 +5,7 @@
 -- Latents are added to player before OnItemEquip is called
 -- Latents are removed from player before OnItemUnequip is called
 -----------------------------------
+---@type TItem
 local itemObject = {}
 local listenerPrefix = 'PET_MOD_LATENT'
 local latentPetId = nil

@@ -3,6 +3,7 @@
 -- Tarutaru Rice Cake
 -- Enchantment: 60Min, Costume - Tarutaru child (female)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Scroll of Barfira
 -- Teaches the white magic Barfira
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

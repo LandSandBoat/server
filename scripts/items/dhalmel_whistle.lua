@@ -4,6 +4,7 @@
 -- Item Effect: AGI +6
 -- Duration: 3 minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

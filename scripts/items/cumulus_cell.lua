@@ -3,6 +3,7 @@
 -- ID 5367
 -- Unlocks body equipment
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

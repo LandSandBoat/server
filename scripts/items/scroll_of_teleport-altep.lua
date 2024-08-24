@@ -3,6 +3,7 @@
 -- Scroll of Teleport-Altep
 -- Teaches the white magic Teleport-Altep
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

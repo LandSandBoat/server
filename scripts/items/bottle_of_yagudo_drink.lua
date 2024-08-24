@@ -3,6 +3,7 @@
 -- Item: Yagudo Drink
 -- Item Effect: Restores 120 MP over 3 minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

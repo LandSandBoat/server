@@ -3,6 +3,7 @@
 -- Item: Lucid Potion III
 -- Item Effect: Restores 2000 HP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

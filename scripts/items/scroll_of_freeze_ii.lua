@@ -3,6 +3,7 @@
 -- Scroll of Freeze II
 -- Teaches the black magic Freeze II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

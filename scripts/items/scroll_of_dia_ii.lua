@@ -3,6 +3,7 @@
 -- Scroll of Dia II
 -- Teaches the white magic Dia II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

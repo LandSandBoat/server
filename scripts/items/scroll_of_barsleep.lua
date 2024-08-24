@@ -3,6 +3,7 @@
 -- Scroll of Barsleep
 -- Teaches the white magic Barsleep
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

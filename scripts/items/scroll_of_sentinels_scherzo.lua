@@ -3,6 +3,7 @@
 -- Scroll of Sentinel's Scherzo
 -- Teaches the song Sentinel's Scherzo
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

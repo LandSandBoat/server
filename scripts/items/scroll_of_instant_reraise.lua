@@ -3,6 +3,7 @@
 --  Scroll of Instant ReRaise
 --  Brings you back from the dead~!
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Scroll of Huton: Ni
 -- Teaches the ninjutsu Huton: Ni
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

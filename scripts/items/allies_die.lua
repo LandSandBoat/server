@@ -3,6 +3,7 @@
 -- Allies' Die
 -- Teaches the job ability Allies Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

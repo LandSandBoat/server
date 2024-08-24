@@ -3,6 +3,7 @@
 -- Scroll of Absorb-INT
 -- Teaches the black magic Absorb-INT
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

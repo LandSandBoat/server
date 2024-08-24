@@ -11,6 +11,7 @@
 -- Ranged Attack +20% (cap 85)
 -- Subtle Blow +8
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

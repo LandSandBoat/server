@@ -3,6 +3,7 @@
 -- Dark Knight Die
 -- Teaches the job ability Chaos Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

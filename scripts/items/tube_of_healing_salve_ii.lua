@@ -3,6 +3,7 @@
 -- Item: tube_of_healing_salve_ii
 -- Item Effect: Instantly restores 100% of pet HP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

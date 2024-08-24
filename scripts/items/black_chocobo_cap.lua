@@ -3,6 +3,7 @@
 -- Black Chocobo Cap
 -- Enchantment: "Teleport" (Upper Jeuno Chocobo Stables)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -14,6 +14,7 @@
 -- Ranged Attack +23% (cap 125)
 -- Store TP +4
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

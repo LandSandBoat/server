@@ -3,6 +3,7 @@
 -- Scroll of Thunder IV
 -- Teaches the black magic Thunder IV
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

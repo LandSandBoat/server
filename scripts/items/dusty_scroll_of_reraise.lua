@@ -3,6 +3,7 @@
 -- name: dusty_scroll_of_reraise
 -- effect: grants reraise III for 10m
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

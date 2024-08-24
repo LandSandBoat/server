@@ -6,6 +6,7 @@
 -- MP +6% (cap 100)
 -- Increases rate of magic skill gains by 20%
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

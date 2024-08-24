@@ -6,6 +6,7 @@
 -- High-quality success rate +3
 -- Synthesis failure rate -6%
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

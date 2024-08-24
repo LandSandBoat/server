@@ -11,6 +11,7 @@
 -- Ranged ATT Cap 30
 -- Enmity -4
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

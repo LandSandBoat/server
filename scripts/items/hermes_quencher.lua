@@ -3,6 +3,7 @@
 -- Item: Hermes Quencher
 -- Item Effect: Flee for 30 seconds
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

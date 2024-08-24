@@ -3,6 +3,7 @@
 -- Piece of Elvaan Mochi
 -- Enchantment: 60Min, Costume - Elvaan Child (male)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

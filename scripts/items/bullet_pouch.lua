@@ -3,6 +3,7 @@
 -- Item: Bullet Pouch
 -- When used, you will obtain one stack of Bullets
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

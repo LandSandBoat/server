@@ -3,6 +3,7 @@
 -- Konron Hassen
 -- A fountain-type firework appears on the ground
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

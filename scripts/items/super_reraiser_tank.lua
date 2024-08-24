@@ -3,6 +3,7 @@
 -- Super Reraiser Tank
 -- When used, you will obtain one super reraiser
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

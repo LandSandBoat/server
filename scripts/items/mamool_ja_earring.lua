@@ -3,6 +3,7 @@
 -- Mamool Ja Earring
 --  This earring functions in the same way as the spell Reraise III.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

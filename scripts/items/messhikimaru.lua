@@ -4,6 +4,7 @@
 -- Enchantment: Arcana Killer
 -- Durration: 10 Mins
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

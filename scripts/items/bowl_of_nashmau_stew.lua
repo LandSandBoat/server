@@ -15,6 +15,7 @@
 -- Defense -100
 -- Evasion -100
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

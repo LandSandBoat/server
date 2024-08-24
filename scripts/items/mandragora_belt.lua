@@ -3,6 +3,7 @@
 -- Mandragora Belt
 -- Enchantment: 60Min, Costume - Mandragora
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

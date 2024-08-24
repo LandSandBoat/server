@@ -3,6 +3,7 @@
 -- Item: Adloquium Schema
 -- Teaches the white magic Adloquium
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

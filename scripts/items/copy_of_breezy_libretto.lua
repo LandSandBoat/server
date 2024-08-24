@@ -5,6 +5,7 @@
 -- Its notes symbolize a fragrant, early morning summer breeze.
 -- Adventurers note that reading it increases one's singing skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

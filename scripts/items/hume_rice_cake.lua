@@ -3,6 +3,7 @@
 -- Hume Rice Cake
 -- Enchantment: 60Min, Costume - Hume child (female)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

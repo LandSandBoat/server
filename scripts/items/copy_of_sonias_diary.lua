@@ -5,6 +5,7 @@
 -- on how to replicate the sheer brilliance of Annika Brilioth and the esoteric steps known as the Kriegstanz.
 -- Adventurers say that reading it increases their evasion skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

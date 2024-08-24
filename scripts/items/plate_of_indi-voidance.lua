@@ -3,6 +3,7 @@
 -- plate_of_indi-voidance
 -- Teaches INDI-VOIDANCE
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

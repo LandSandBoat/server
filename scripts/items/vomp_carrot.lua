@@ -2,6 +2,7 @@
 -- ID: 5607
 -- vomp_carrot
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- plate_of_indi-regen
 -- Teaches INDI-REGEN
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

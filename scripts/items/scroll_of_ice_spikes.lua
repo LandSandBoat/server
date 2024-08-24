@@ -3,6 +3,7 @@
 -- Scroll of Ice Spikes
 -- Teaches the black magic Ice Spikes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

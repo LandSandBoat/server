@@ -3,6 +3,7 @@
 -- Scroll of Sinewy Etude
 -- Teaches the song Sinewy Etude
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Item: Kingdom Signet Staff
 -- Effect: Signet
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, user)

@@ -8,6 +8,7 @@
 -- Attack/Ranged Attack +11% (cap 50 on master, cap 75 on pet)
 -- Master MAB + 3 , Pet MAB + 14
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

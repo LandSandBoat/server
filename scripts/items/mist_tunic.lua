@@ -3,6 +3,7 @@
 -- Item: Mist Tunic
 -- Item Effect: Evasion Boost
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Item: Leaf Bench
 -- Item Effect: Grant Leaf bench key item
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 local keyItemId = xi.ki.LEAF_BENCH

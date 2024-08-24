@@ -3,6 +3,7 @@
 -- Scroll of Absorb-DEX
 -- Teaches the black magic Absorb-DEX
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

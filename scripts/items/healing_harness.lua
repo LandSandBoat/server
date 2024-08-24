@@ -3,6 +3,7 @@
 -- Item: Healing Harness
 -- Item Effect: Restores 50-75 HP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

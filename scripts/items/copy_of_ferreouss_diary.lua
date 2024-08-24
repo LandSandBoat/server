@@ -5,6 +5,7 @@
 -- So many were there that his war hammer became coated with a thick layer of blood after all was said and done.
 -- Adventurers note that reading it increases one's club skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

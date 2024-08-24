@@ -4,6 +4,7 @@
 -- Item Effect: Pet Magical Attack +22
 -- Duration 5 Minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

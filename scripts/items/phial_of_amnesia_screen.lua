@@ -3,6 +3,7 @@
 -- Item: Amnesia Screen
 -- Effect: 2 Mins of immunity to "Amnesia" effects.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

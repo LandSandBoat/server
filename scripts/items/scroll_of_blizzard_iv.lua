@@ -3,6 +3,7 @@
 -- Scroll of Blizzard IV
 -- Teaches the black magic Blizzard IV
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

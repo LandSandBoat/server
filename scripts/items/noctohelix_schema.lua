@@ -3,6 +3,7 @@
 -- Noctohelix Schema
 -- Teaches the black magic Noctohelix
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

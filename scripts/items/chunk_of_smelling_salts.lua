@@ -4,6 +4,7 @@
 -- Item Effect: Recover Pets from Sleep
 -- Duration: 180 Secs Medicated
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

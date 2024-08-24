@@ -3,6 +3,7 @@
 -- Item: Olde Rarab Tail
 -- Effect: 90 Seconds of "Terror" effect.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -7,6 +7,7 @@
 -- Beast Killer 12
 -- Resist Sleep 12
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

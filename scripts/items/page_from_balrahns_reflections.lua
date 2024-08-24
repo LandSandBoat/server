@@ -4,6 +4,7 @@
 -- Grants 200 - 500 EXP
 -- Does not grant Limit Points.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

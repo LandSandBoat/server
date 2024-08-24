@@ -11,6 +11,7 @@
 -- Magic Def. Bonus +6
 -- Resist Slow +15
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

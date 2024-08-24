@@ -3,6 +3,7 @@
 --  Item: Intelligence Potion
 --  Intelligence 7
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

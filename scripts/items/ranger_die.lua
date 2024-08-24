@@ -3,6 +3,7 @@
 -- Ranger Die
 -- Teaches the job ability Hunter's Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

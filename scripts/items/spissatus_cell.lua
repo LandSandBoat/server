@@ -3,6 +3,7 @@
 -- ID 5384
 -- Removes MP Down effect
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

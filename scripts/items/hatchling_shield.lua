@@ -3,6 +3,7 @@
 -- Item: Hatchling Shield
 -- When used, you will obtain a random number of egg items
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

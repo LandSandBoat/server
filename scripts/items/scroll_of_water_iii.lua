@@ -3,6 +3,7 @@
 -- Scroll of Water III
 -- Teaches the black magic Water III
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Item: Bottle of Hallowed Water
 -- Item Effect: Removes curse. Better chance to remove doom.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

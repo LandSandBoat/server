@@ -4,6 +4,7 @@
 -- Item Effect: Food Effect with no obvious effects.
 -- Duration: 30 Minutes
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Klimaform Schema
 -- Teaches the black magic Klimaform
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

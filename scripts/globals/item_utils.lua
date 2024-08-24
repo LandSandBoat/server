@@ -4,8 +4,10 @@
 require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
+---@class xi.itemUtils
 xi.itemUtils = {}
 
+---@enum removableEffects
 xi.itemUtils.removableEffects =
 {
     xi.effect.PARALYSIS,
@@ -43,6 +45,10 @@ xi.itemUtils.removableEffects =
     xi.effect.MAGIC_ATK_DOWN
 }
 
+---@nodiscard
+---@param target CBaseEntity
+---@param foodType foodType
+---@return integer
 xi.itemUtils.foodOnItemCheck = function(target, foodType)
     local result     = 0
     local targetRace = target:getRace()
@@ -63,6 +69,9 @@ xi.itemUtils.foodOnItemCheck = function(target, foodType)
     return result
 end
 
+---@nodiscard
+---@param target CBaseEntity
+---@return integer
 xi.itemUtils.itemBoxOnItemCheck = function(target)
     local result = 0
     if target:getFreeSlotsCount() == 0 then
@@ -72,6 +81,10 @@ xi.itemUtils.itemBoxOnItemCheck = function(target)
     return result
 end
 
+---@nodiscard
+---@param target CBaseEntity
+---@param skillID integer
+---@return integer
 xi.itemUtils.skillBookCheck = function(target, skillID)
     local skill   = skillID
     local mainCap = target:getMaxSkillLevel(target:getMainLvl(), target:getMainJob(), skill) or 0
@@ -103,10 +116,17 @@ xi.itemUtils.skillBookCheck = function(target, skillID)
     return 0
 end
 
+---@param target CBaseEntity
+---@param skillID integer
+---@return nil
 xi.itemUtils.skillBookUse = function(target, skillID)
     target:trySkillUp(skillID, target:getMainLvl(), true, true)
 end
 
+---@nodiscard
+---@param target CBaseEntity
+---@param itemgroup table
+---@return integer
 xi.itemUtils.pickItemRandom = function(target, itemgroup) -- selects an item from a weighted result table
     -- possible results
     local items = itemgroup

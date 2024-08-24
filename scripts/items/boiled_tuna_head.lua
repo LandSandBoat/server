@@ -10,6 +10,7 @@
 -- Magic Regen While Healing 2
 -- Evasion 5
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -6,6 +6,7 @@
 -- Increases rate of synthesis success +5%
 -- Increases synthesis skill gain rate +5%
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Scroll of Absorb-MND
 -- Teaches the black magic Absorb-MND
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

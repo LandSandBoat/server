@@ -3,6 +3,7 @@
 -- Item: Eye Drops
 -- Item Effect: This potion remedies blindness.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

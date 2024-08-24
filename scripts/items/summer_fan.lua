@@ -3,6 +3,7 @@
 -- Summer Fan
 -- A paper fan appears in the user's right hand
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

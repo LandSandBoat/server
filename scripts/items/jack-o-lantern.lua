@@ -10,6 +10,7 @@
 -- Arcana Killer 4
 -- Dark Res 25
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

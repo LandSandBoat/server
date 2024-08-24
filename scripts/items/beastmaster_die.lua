@@ -3,6 +3,7 @@
 -- Beastmaster Die
 -- Teaches the job ability Beast Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Scroll of Reprisal
 -- Teaches the white magic Reprisal
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

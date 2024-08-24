@@ -3,6 +3,7 @@
 -- Item: Ice Trousers
 -- Item Effect: Ice Spikes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

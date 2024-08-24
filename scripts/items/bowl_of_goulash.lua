@@ -8,6 +8,7 @@
 -- Accuracy +10% (cap 54)
 -- DEF +10% (cap 30)
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -9,6 +9,7 @@
 -- Store TP 6
 -- Resist virus +12
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Persikos Tank
 -- When used, you will obtain one Persikos au lait
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Item: Portable Container
 -- Item Effect: Grant Portable container key item
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 local keyItemId = xi.ki.PORTABLE_CONTAINER

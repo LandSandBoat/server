@@ -11,6 +11,7 @@
 -- Ranged ACC +5% (cap 25)
 -- Sleep Resist +3
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

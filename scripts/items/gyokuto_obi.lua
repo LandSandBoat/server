@@ -3,6 +3,7 @@
 -- Gyokuto Obi
 -- Enchantment: 60Min, Costume - Large Rarab
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

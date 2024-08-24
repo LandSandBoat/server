@@ -10,6 +10,7 @@
 -- Vitality -5
 -- Ranged Accuracy +17
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

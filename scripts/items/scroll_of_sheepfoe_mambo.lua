@@ -3,6 +3,7 @@
 -- Scroll of Sheepfoe Mambo
 -- Teaches the song Sheepfoe Mambo
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

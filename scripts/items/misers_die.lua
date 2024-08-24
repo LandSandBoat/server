@@ -3,6 +3,7 @@
 -- Miser's Die
 -- Teaches the job ability Miser's Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

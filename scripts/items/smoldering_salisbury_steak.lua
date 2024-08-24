@@ -10,6 +10,7 @@
 -- Ranged Attack %20 Cap 160
 -- Dragon Killer +5
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

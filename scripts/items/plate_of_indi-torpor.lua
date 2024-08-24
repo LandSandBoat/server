@@ -3,6 +3,7 @@
 -- plate_of_indi-torpor
 -- Teaches INDI-TORPOR
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

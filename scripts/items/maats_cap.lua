@@ -3,6 +3,7 @@
 -- Item: Maats Cap
 -- Teleports to Ru'Lude gardens
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Snow bunny Hat +1
 -- Enchantment: 60Min, Costume - White Rarab
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

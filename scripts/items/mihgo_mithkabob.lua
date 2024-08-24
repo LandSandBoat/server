@@ -11,6 +11,7 @@
 -- Evasion +5
 -- Defense % 25 (cap 95)
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

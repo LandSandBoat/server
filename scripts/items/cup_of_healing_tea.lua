@@ -9,6 +9,7 @@
 -- Magic Regen While Healing 2
 -- Sleep resistance -40
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

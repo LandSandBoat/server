@@ -3,6 +3,7 @@
 -- Thunder Spirit Pact
 -- Teaches the summoning magic Thunder Spirit
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

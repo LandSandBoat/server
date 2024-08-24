@@ -5,6 +5,7 @@
 -- Every single name is crossed out in Azima's handwriting.
 -- Adventurers note that reading it increases one's elemental magic skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

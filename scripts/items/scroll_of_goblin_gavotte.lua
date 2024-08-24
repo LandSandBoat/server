@@ -3,6 +3,7 @@
 -- Scroll of Goblin Gavotte
 -- Teaches the song Goblin Gavotte
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

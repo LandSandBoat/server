@@ -3,6 +3,7 @@
 -- Item: Republic Stables Medal
 -- Teleports to Chocobo Stables (Bastok)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

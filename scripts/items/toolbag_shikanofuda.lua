@@ -3,6 +3,7 @@
 -- Toolbag Shika
 -- When used, you will obtain one stack of shikanofuda
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

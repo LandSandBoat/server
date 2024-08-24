@@ -3,6 +3,7 @@
 -- Item: wing gorget
 -- Item Effect: gives regain
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Scroll of Raiton: San
 -- Teaches the ninjutsu Raiton: San
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

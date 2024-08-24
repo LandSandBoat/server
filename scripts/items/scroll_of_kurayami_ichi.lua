@@ -3,6 +3,7 @@
 -- Scroll of Kurayami: Ichi
 -- Teaches the ninjutsu Kurayami: Ichi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

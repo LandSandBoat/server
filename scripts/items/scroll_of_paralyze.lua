@@ -3,6 +3,7 @@
 -- Scroll of Paralyze
 -- Teaches the white magic Paralyze
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

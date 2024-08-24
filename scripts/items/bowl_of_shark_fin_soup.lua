@@ -10,6 +10,7 @@
 -- Attack % 14 (cap 85)
 -- Ranged Attack % 14 (cap 85)
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

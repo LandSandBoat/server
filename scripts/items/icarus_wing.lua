@@ -3,6 +3,7 @@
 -- Icarus Wing
 -- Increases TP of the user by 1000
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

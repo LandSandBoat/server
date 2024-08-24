@@ -3,6 +3,7 @@
 -- Scroll of Puppets Operetta
 -- Teaches the song Puppets Operetta
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

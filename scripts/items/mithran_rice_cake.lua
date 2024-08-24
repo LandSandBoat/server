@@ -3,6 +3,7 @@
 -- Mithran Rice Cake
 -- Enchantment: 60Min, Costume - Mithra Child
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

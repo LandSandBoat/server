@@ -3,6 +3,7 @@
 -- Old Bullet Box +1
 -- When used, you will obtain one partial stack of Antique Bullets +1
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

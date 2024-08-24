@@ -3,6 +3,7 @@
 -- Item: Qiqirn Mine
 -- When used, Summons a bomb to blowup a wall
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

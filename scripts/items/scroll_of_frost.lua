@@ -3,6 +3,7 @@
 -- Scroll of Frost
 -- Teaches the black magic Frost
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

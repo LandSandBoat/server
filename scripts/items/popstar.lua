@@ -3,6 +3,7 @@
 -- Popstar
 -- A yellow star rises and bursts in the air
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

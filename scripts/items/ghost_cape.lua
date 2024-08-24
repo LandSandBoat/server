@@ -3,6 +3,7 @@
 -- Ghost Cape
 -- Enchantment: 60Min, Costume - Ghost
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

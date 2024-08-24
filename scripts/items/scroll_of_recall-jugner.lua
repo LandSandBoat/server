@@ -3,6 +3,7 @@
 -- Scroll of Recall-Jugner
 -- Teaches the white magic Recall-Jugner
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

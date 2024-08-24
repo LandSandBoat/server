@@ -3,6 +3,7 @@
 -- Prism Powder
 -- When applied, it makes things invisible.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Item: Panacea
 -- Item Effect: Removes any number of status effects
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

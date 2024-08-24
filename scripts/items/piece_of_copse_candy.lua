@@ -3,6 +3,7 @@
 -- Piece of Copse Candy
 -- Enchantment: 60Min, Costume - Leafkin
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

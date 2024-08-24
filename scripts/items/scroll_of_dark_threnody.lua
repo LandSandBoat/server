@@ -3,6 +3,7 @@
 -- Scroll of Dark Threnody
 -- Teaches the song Dark Threnody
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

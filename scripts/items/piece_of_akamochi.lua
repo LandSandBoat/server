@@ -10,6 +10,7 @@
 -- Attack + 16% Cap: 50 (Pet & Master) Pet Cap: 75
 -- R. Attack + 16% Cap: 50 (Pet & Master) Pet Cap: 75
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Scroll of Drain
 -- Teaches the black magic Drain
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

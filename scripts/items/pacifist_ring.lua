@@ -4,6 +4,7 @@
 -- Item Effect: Enmity -12
 -- Duration: 3 Minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

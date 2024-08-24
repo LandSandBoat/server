@@ -5,6 +5,7 @@
 -- Duration: 3 Mins 20 Secs
 -- TODO: Enhances duration of Sneak Effect
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

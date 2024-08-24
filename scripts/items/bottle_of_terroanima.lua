@@ -3,6 +3,7 @@
 -- Item: Bottle Of Terroanima
 -- Item Effect: Terror
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

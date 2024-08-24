@@ -3,6 +3,7 @@
 -- Item: Blissful Chapeau
 -- Item Effect: Restores 30-40 MP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

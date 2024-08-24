@@ -3,6 +3,7 @@
 -- Scroll of Bewitching Etude
 -- Teaches the song Bewitching Etude
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

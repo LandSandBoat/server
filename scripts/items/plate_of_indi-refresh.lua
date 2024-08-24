@@ -3,6 +3,7 @@
 -- plate_of_indi-refresh
 -- Teaches INDI-REFRESH
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

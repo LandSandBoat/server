@@ -3,6 +3,7 @@
 -- Scroll of Escape
 -- Teaches the black magic Escape
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

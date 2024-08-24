@@ -3,6 +3,7 @@
 -- Hi-Ether Tank
 -- When used, you will obtain one hi-ether
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Toolbag Sai
 -- When used, you will obtain one stack of sairui-ran
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

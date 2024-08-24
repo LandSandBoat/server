@@ -7,6 +7,7 @@
 -- Duration: 720 min
 -- Max bonus: 30000 exp
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

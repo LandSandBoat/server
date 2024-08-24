@@ -3,6 +3,7 @@
 -- Scroll of Thundara
 -- Teaches the black magic Thundara
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

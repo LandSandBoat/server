@@ -3,6 +3,7 @@
 -- Puppetmaster Die
 -- Teaches the job ability Puppet Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

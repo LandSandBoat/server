@@ -3,6 +3,7 @@
 -- Firestorm Schema
 -- Teaches the white magic Firestorm
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
