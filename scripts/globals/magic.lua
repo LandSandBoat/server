@@ -142,6 +142,8 @@ local function calculateMagicBurst(caster, spell, target, params)
             -- Something strange is going on if this occurs.
             skillchainburst = 1
         end
+    else
+        modburst = 1
     end
 
     -- Multiply
