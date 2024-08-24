@@ -2688,617 +2688,1123 @@ end
 function CBaseEntity:countEffect(StatusID)
 end
 
+---@nodiscard
+---@param flag integer
+---@return integer
 function CBaseEntity:countEffectWithFlag(flag)
 end
 
+---@param StatusID integer
+---@param SubType integer?
+---@return boolean
 function CBaseEntity:delStatusEffect(StatusID, SubType)
 end
 
+---@param flag integer
+---@param silent boolean?
+---@return nil
 function CBaseEntity:delStatusEffectsByFlag(flag, silent)
 end
 
+---@param StatusID integer
+---@return boolean
 function CBaseEntity:delStatusEffectSilent(StatusID)
 end
 
+---@return integer
 function CBaseEntity:eraseStatusEffect()
 end
 
+---@return integer
 function CBaseEntity:eraseAllStatusEffect()
 end
 
+---@param flagObj integer?
+---@return integer
 function CBaseEntity:dispelStatusEffect(flagObj)
 end
 
+---@param flagObj integer?
+---@return integer
 function CBaseEntity:dispellAllStatusEffect(flagObj)
 end
 
+---@param PTargetEntity CBaseEntity
+---@param flagObj integer?
+---@return integer
 function CBaseEntity:stealStatusEffect(PTargetEntity, flagObj)
 end
 
+---@param type integer
+---@param amount integer
+---@return nil
 function CBaseEntity:addMod(type, amount)
 end
 
+---@nodiscard
+---@param modID integer
+---@return integer
 function CBaseEntity:getMod(modID)
 end
 
+---@param modID integer
+---@param value integer
+---@return nil
 function CBaseEntity:setMod(modID, value)
 end
 
+---@param modID integer
+---@param value integer
+---@return nil
 function CBaseEntity:delMod(modID, value)
 end
 
+---@nodiscard
+---@param modId integer
+---@return integer
 function CBaseEntity:getMaxGearMod(modId)
 end
 
+---@param condID integer
+---@param conditionValue integer
+---@param mID integer
+---@param modValue integer
+---@return nil
 function CBaseEntity:addLatent(condID, conditionValue, mID, modValue)
 end
 
+---@param condID integer
+---@param conditionValue integer
+---@param mID integer
+---@param modValue integer
+---@return nil
 function CBaseEntity:delLatent(condID, conditionValue, mID, modValue)
 end
 
+---@nodiscard
+---@param slot integer
+---@return boolean
 function CBaseEntity:hasAllLatentsActive(slot)
 end
 
+---@return nil
 function CBaseEntity:fold()
 end
 
+---@param PEntity CBaseEntity
+---@param total integer
+---@return nil
 function CBaseEntity:doWildCard(PEntity, total)
 end
 
+---@nodiscard
+---@param PTarget CBaseEntity
+---@return boolean
 function CBaseEntity:doRandomDeal(PTarget)
 end
 
+---@nodiscard
+---@param casterJob integer
+---@param bustDuration integer
+---@param effectID integer
+---@param power integer
+---@param tick integer
+---@param duration integer
+---@param arg6 integer?
+---@param arg7 integer?
+---@param arg8 integer?
+---@return boolean
 function CBaseEntity:addCorsairRoll(casterJob, bustDuration, effectID, power, tick, duration, arg6, arg7, arg8)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:hasCorsairEffect()
 end
 
+---@nodiscard
+---@param id integer
+---@return boolean
 function CBaseEntity:hasBustEffect(id)
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:numBustEffects()
 end
 
+---@return integer
 function CBaseEntity:healingWaltz()
 end
 
+---@nodiscard
+---@param PEntity CBaseEntity
+---@param effectID integer
+---@param power integer
+---@param tick integer
+---@param duration integer
+---@param SubType integer
+---@param subPower integer
+---@param tier integer
+---@return boolean
 function CBaseEntity:addBardSong(PEntity, effectID, power, tick, duration, SubType, subPower, tier)
 end
 
+---@param target CBaseEntity
+---@return nil
 function CBaseEntity:charm(target)
 end
 
+---@return nil
 function CBaseEntity:uncharm()
 end
 
+---@nodiscard
+---@param element integer
+---@param burden integer
+---@return integer
 function CBaseEntity:addBurden(element, burden)
 end
 
+---@nodiscard
+---@param element integer
+---@return integer
 function CBaseEntity:getOverloadChance(element)
 end
 
+---@param statDebil integer
+---@return nil
 function CBaseEntity:setStatDebilitation(statDebil)
 end
 
-function CBaseEntity:getStat(statId, ...)
+---@nodiscard
+---@param statId integer
+---@param optSlot integer?
+---@return integer
+function CBaseEntity:getStat(statId, optSlot)
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getACC()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getEVA()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getRACC()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getRATT()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getIlvlMacc()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getIlvlSkill()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getIlvlParry()
 end
 
+---@nodiscard
+---@param spellId integer
+---@return boolean
 function CBaseEntity:isSpellAoE(spellId)
 end
 
-function CBaseEntity:physicalDmgTaken(damage, ...)
+---@nodiscard
+---@param damage number
+---@param damageType integer?
+---@return integer
+function CBaseEntity:physicalDmgTaken(damage, damageType)
 end
 
-function CBaseEntity:magicDmgTaken(damage, ...)
+---@nodiscard
+---@param damage number
+---@param element integer?
+---@return integer
+function CBaseEntity:magicDmgTaken(damage, element)
 end
 
-function CBaseEntity:rangedDmgTaken(damage, ...)
+---@nodiscard
+---@param damage number
+---@param damageType integer?
+---@return integer
+function CBaseEntity:rangedDmgTaken(damage, damageType)
 end
 
+---@nodiscard
+---@param damage number
+---@return integer
 function CBaseEntity:breathDmgTaken(damage)
 end
 
+---@param damage number
+---@return nil
 function CBaseEntity:handleAfflatusMiseryDamage(damage)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:isWeaponTwoHanded()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getWeaponDmg()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getWeaponDmgRank()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getOffhandDmg()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getOffhandDmgRank()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getRangedDmg()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getRangedDmgRank()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getAmmoDmg()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getWeaponHitCount(offhand)
 end
 
+---@return nil
 function CBaseEntity:removeAmmo()
 end
 
+---@nodiscard
+---@param slotID integer
+---@return integer
 function CBaseEntity:getWeaponSkillLevel(slotID)
 end
 
+---@nodiscard
+---@param slotID integer
+---@return integer
 function CBaseEntity:getWeaponDamageType(slotID)
 end
 
+---@nodiscard
+---@param slotID integer
+---@return integer
 function CBaseEntity:getWeaponSkillType(slotID)
 end
 
+---@nodiscard
+---@param slotID integer
+---@return integer
 function CBaseEntity:getWeaponSubSkillType(slotID)
 end
 
+---@nodiscard
+---@return table
 function CBaseEntity:getWSSkillchainProp()
 end
 
+---@nodiscard
+---@param attacker CBaseEntity
+---@param damage integer
+---@param atkType integer
+---@param dmgType integer
+---@param slot integer
+---@param primary boolean
+---@param tpMultiplier number
+---@param bonusTP integer
+---@param targetTPMultiplier number
+---@return integer
 function CBaseEntity:takeWeaponskillDamage(attacker, damage, atkType, dmgType, slot, primary, tpMultiplier, bonusTP, targetTPMultiplier)
 end
 
+---@nodiscard
+---@param caster CBaseEntity
+---@param spell CSpell
+---@param damage integer
+---@param atkType integer
+---@param dmgType integer
+---@return integer
 function CBaseEntity:takeSpellDamage(caster, spell, damage, atkType, dmgType)
 end
 
+---@nodiscard
+---@param caster CBaseEntity
+---@param damage integer
+---@param atkType integer
+---@param dmgType integer
+---@return integer
 function CBaseEntity:takeSwipeLungeDamage(caster, damage, atkType, dmgType)
 end
 
+---@nodiscard
+---@param damage integer
+---@return integer
 function CBaseEntity:checkDamageCap(damage)
 end
 
+---@param arg0 integer? Optional Pet ID
+---@return nil
 function CBaseEntity:spawnPet(arg0)
 end
 
+---@return nil
 function CBaseEntity:despawnPet()
 end
 
+---@param trustId integer
+---@return CBaseEntity?
 function CBaseEntity:spawnTrust(trustId)
 end
 
+---@return nil
 function CBaseEntity:clearTrusts()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getTrustID()
 end
 
+---@param messageId integer
+---@return nil
 function CBaseEntity:trustPartyMessage(messageId)
 end
 
+---@param targ integer
+---@param cond integer
+---@param condition_arg integer
+---@param react integer
+---@param select integer
+---@param selectorArg integer
+---@param retry integer?
+---@return string
 function CBaseEntity:addSimpleGambit(targ, cond, condition_arg, react, select, selectorArg, retry)
 end
 
+---@param id string
+---@return nil
 function CBaseEntity:removeSimpleGambit(id)
 end
 
+---@return nil
 function CBaseEntity:removeAllSimpleGambits()
 end
 
+---@param trigger integer
+---@param select integer
+---@param value integer?
+---@return nil
 function CBaseEntity:setTrustTPSkillSettings(trigger, select, value)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:hasValidJugPetItem()
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:hasPet()
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:hasJugPet()
 end
 
+---@nodiscard
+---@return CBaseEntity?
 function CBaseEntity:getPet()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getPetID()
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:isAutomaton()
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:isAvatar()
 end
 
+---@nodiscard
+---@return CBaseEntity?
 function CBaseEntity:getMaster()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getPetElement()
 end
 
+---@param petObj CBaseEntity?
+---@return nil
 function CBaseEntity:setPet(petObj)
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getMinimumPetLevel()
 end
 
+---@nodiscard
+---@return string
 function CBaseEntity:getPetName()
 end
 
+---@param pType integer
+---@param value integer
+---@param arg2 integer?
+---@return nil
 function CBaseEntity:setPetName(pType, value, arg2)
 end
 
+---@param value integer
+---@return nil
 function CBaseEntity:registerChocobo(value)
 end
 
+---@nodiscard
+---@param target CBaseEntity
+---@param mods boolean?
+---@return number
 function CBaseEntity:getCharmChance(target, mods)
 end
 
+---@param target CBaseEntity
+---@return nil
 function CBaseEntity:charmPet(target)
 end
 
+---@param PEntity CBaseEntity
+---@return nil
 function CBaseEntity:petAttack(PEntity)
 end
 
+---@param abilityID integer
+---@return nil
 function CBaseEntity:petAbility(abilityID)
 end
 
+---@return nil
 function CBaseEntity:petRetreat()
 end
 
+---@return nil
 function CBaseEntity:familiar()
 end
 
+---@param modID integer
+---@param amount integer
+---@return nil
 function CBaseEntity:addPetMod(modID, amount)
 end
 
+---@param modID integer
+---@param amount integer
+---@return nil
 function CBaseEntity:setPetMod(modID, amount)
 end
 
+---@param modID integer
+---@param amount integer
+---@return nil
 function CBaseEntity:delPetMod(modID, amount)
 end
 
+---@nodiscard
+---@param itemID integer
+---@return boolean
 function CBaseEntity:hasAttachment(itemID)
 end
 
+---@nodiscard
+---@return string
 function CBaseEntity:getAutomatonName()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getAutomatonFrame()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getAutomatonHead()
 end
 
+---@param itemID integer
+---@return boolean
 function CBaseEntity:unlockAttachment(itemID)
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getActiveManeuverCount()
 end
 
+---@return nil
 function CBaseEntity:removeOldestManeuver()
 end
 
+---@return nil
 function CBaseEntity:removeAllManeuvers()
 end
 
+---@nodiscard
+---@param slotId integer
+---@return CItem?
 function CBaseEntity:getAttachment(slotId)
 end
 
+---@nodiscard
+---@return CItem[]
 function CBaseEntity:getAttachments()
 end
 
+---@return nil
 function CBaseEntity:updateAttachments()
 end
 
+---@param percentReduction number
+---@param intReductionObj integer?
+---@return nil
 function CBaseEntity:reduceBurden(percentReduction, intReductionObj)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:isExceedingElementalCapacity()
 end
 
+---@nodiscard
+---@return table
 function CBaseEntity:getAllRuneEffects()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getActiveRuneCount()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getHighestRuneEffect()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getNewestRuneEffect()
 end
 
+---@return nil
 function CBaseEntity:removeOldestRune()
 end
 
+---@return nil
 function CBaseEntity:removeNewestRune()
 end
 
+---@return nil
 function CBaseEntity:removeAllRunes()
 end
 
+---@param level integer
+---@return nil
 function CBaseEntity:setMobLevel(level)
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getEcosystem()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getSuperFamily()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getFamily()
 end
 
+---@nodiscard
+---@param mobType integer
+---@return boolean
 function CBaseEntity:isMobType(mobType)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:isUndead()
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:isNM()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getModelSize()
 end
 
+---@param range number
+---@return nil
 function CBaseEntity:setMeleeRange(range)
 end
 
+---@param flags integer
+---@param mobId integer?
+---@return nil
 function CBaseEntity:setMobFlags(flags, mobId)
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getMobFlags()
 end
 
+---@param flags integer
+---@return nil
 function CBaseEntity:setNpcFlags(flags)
 end
 
+---@param despawnSec integer?
+---@param respawnSec integer?
+---@return nil
 function CBaseEntity:spawn(despawnSec, respawnSec)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:isSpawned()
 end
 
+---@nodiscard
+---@return table
 function CBaseEntity:getSpawnPos()
 end
 
+---@param x number
+---@param y number
+---@param z number
+---@param rot integer?
+---@return nil
 function CBaseEntity:setSpawn(x, y, z, rot)
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getRespawnTime()
 end
 
+---@param seconds integer
+---@return nil
 function CBaseEntity:setRespawnTime(seconds)
 end
 
+---@param groupID integer
+---@return nil
 function CBaseEntity:instantiateMob(groupID)
 end
 
+---@nodiscard
+---@param traitID integer
+---@return boolean
 function CBaseEntity:hasTrait(traitID)
 end
 
+---@nodiscard
+---@param immunityID integer
+---@return boolean
 function CBaseEntity:hasImmunity(immunityID)
 end
 
+---@param immunityID integer
+---@return nil
 function CBaseEntity:addImmunity(immunityID)
 end
 
+---@param immunityID integer
+---@return nil
 function CBaseEntity:delImmunity(immunityID)
 end
 
+---@param agressive boolean
+---@return nil
 function CBaseEntity:setAggressive(agressive)
 end
 
+---@param truedetection boolean
+---@return nil
 function CBaseEntity:setTrueDetection(truedetection)
 end
 
+---@param unkillable boolean
+---@return nil
 function CBaseEntity:setUnkillable(unkillable)
 end
 
+---@param untargetable boolean
+---@return nil
 function CBaseEntity:setUntargetable(untargetable)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:getUntargetable()
 end
 
+---@param isAggroable boolean
+---@return nil
 function CBaseEntity:setIsAggroable(isAggroable)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:isAggroable()
 end
 
+---@param delay integer
+---@return nil
 function CBaseEntity:setDelay(delay)
 end
 
+---@param damage integer
+---@return nil
 function CBaseEntity:setDamage(damage)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:hasSpellList()
 end
 
+---@param spellList integer
+---@return nil
 function CBaseEntity:setSpellList(spellList)
 end
 
+---@param state boolean
+---@return nil
 function CBaseEntity:setAutoAttackEnabled(state)
 end
 
+---@param state boolean
+---@return nil
 function CBaseEntity:setMagicCastingEnabled(state)
 end
 
+---@param state boolean
+---@return nil
 function CBaseEntity:setMobAbilityEnabled(state)
 end
 
+---@param listId integer
+---@return nil
 function CBaseEntity:setMobSkillAttack(listId)
 end
 
+---@nodiscard
+---@param mobModID integer
+---@return integer
 function CBaseEntity:getMobMod(mobModID)
 end
 
+---@param mobModID integer
+---@param value integer
+---@return nil
 function CBaseEntity:setMobMod(mobModID, value)
 end
 
+---@param mobModID integer
+---@param value integer
+---@return nil
 function CBaseEntity:addMobMod(mobModID, value)
 end
 
+---@param mobModID integer
+---@param value integer
+---@return nil
 function CBaseEntity:delMobMod(mobModID, value)
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getBattleTime()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getBehaviour()
 end
 
+---@param behavior integer
+---@return nil
 function CBaseEntity:setBehaviour(behavior)
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getRoamFlags()
 end
 
+---@param newRoamFlags integer
+---@return nil
 function CBaseEntity:setRoamFlags(newRoamFlags)
 end
 
+---@nodiscard
+---@return CBaseEntity?
 function CBaseEntity:getTarget()
 end
 
+---@return nil
 function CBaseEntity:updateTarget()
 end
 
+---@nodiscard
+---@return table
 function CBaseEntity:getEnmityList()
 end
 
+---@nodiscard
+---@param PLuaBaseEntity CBaseEntity
+---@return CBaseEntity?
 function CBaseEntity:getTrickAttackChar(PLuaBaseEntity)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:actionQueueEmpty()
 end
 
+---@param spell integer
+---@param entity CBaseEntity?
+---@return nil
 function CBaseEntity:castSpell(spell, entity)
 end
 
+---@param skillID integer
+---@param pet CBaseEntity?
+---@return nil
 function CBaseEntity:useJobAbility(skillID, pet)
 end
 
-function CBaseEntity:useMobAbility(...)
+---@param skillID integer
+---@param PLuaBaseEntity CBaseEntity?
+---@return nil
+---@overload fun(): nil
+function CBaseEntity:useMobAbility(skillID, PLuaBaseEntity)
 end
 
+---@nodiscard
+---@param skillID integer
+---@return number
 function CBaseEntity:getAbilityDistance(skillID)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:hasTPMoves()
 end
 
-function CBaseEntity:drawIn(...)
+---@param PLuaBaseEntity CBaseEntity
+---@return nil
+---@overload fun(): nil
+function CBaseEntity:drawIn(PLuaBaseEntity)
 end
 
+---@param level integer
+---@return nil
 function CBaseEntity:weaknessTrigger(level)
 end
 
+---@param PLuaBaseEntity CBaseEntity
+---@param restoreType integer
+---@return nil
 function CBaseEntity:restoreFromChest(PLuaBaseEntity, restoreType)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:hasPreventActionEffect()
 end
 
+---@param milliseconds integer
+---@return nil
 function CBaseEntity:stun(milliseconds)
 end
 
+---@param milliseconds integer
+---@return nil
 function CBaseEntity:untargetableAndUnactionable(milliseconds)
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getPool()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getDropID()
 end
 
+---@param dropID integer
+---@return nil
 function CBaseEntity:setDropID(dropID)
 end
 
+---@param itemID integer
+---@param arg1 CBaseEntity?
+---@param arg2 integer?
+---@return nil
 function CBaseEntity:addTreasure(itemID, arg1, arg2)
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getStealItem()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getDespoilItem()
 end
 
+---@nodiscard
+---@param itemID integer
+---@return integer
 function CBaseEntity:getDespoilDebuff(itemID)
 end
 
+---@nodiscard
+---@return boolean
 function CBaseEntity:itemStolen()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getTHlevel()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getAvailableTraverserStones()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getTraverserEpoch()
 end
 
+---@return nil
 function CBaseEntity:setTraverserEpoch()
 end
 
+---@nodiscard
+---@return integer
 function CBaseEntity:getClaimedTraverserStones()
 end
 
+---@param numStones integer
+---@return nil
 function CBaseEntity:addClaimedTraverserStones(numStones)
 end
 
+---@param totalStones integer
+---@return nil
 function CBaseEntity:setClaimedTraverserStones(totalStones)
 end
 
+---@nodiscard
+---@param index integer
+---@return integer
 function CBaseEntity:getHistory(index)
 end
 
+---@nodiscard
+---@return table
 function CBaseEntity:getChocoboRaisingInfo()
 end
 
-function CBaseEntity:setChocoboRaisingInfo()
+---@param chocoboInfo table
+---@return boolean
+function CBaseEntity:setChocoboRaisingInfo(chocoboInfo)
 end
 
+---@return boolean
 function CBaseEntity:deleteRaisedChocobo()
 end
 
+---@return nil
 function CBaseEntity:clearActionQueue()
 end
 
+---@return nil
 function CBaseEntity:clearTimerQueue()
 end
 
+---@param itemID integer
+---@param race integer
+---@param pose integer
+---@return nil
 function CBaseEntity:setMannequinPose(itemID, race, pose)
 end
 
+---@nodiscard
+---@param itemID integer
+---@return integer
 function CBaseEntity:getMannequinPose(itemID)
 end
 
+---@param packetId integer
+---@param offset integer
+---@param value integer
+---@return nil
 function CBaseEntity:addPacketMod(packetId, offset, value)
 end
 
+---@return nil
 function CBaseEntity:clearPacketMods()
 end
