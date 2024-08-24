@@ -2,6 +2,7 @@
 -- Mix: Insomniant - Negates Sleep.
 -- Monberaux only uses this on himself when hit with an attack that causes sleep.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -8,6 +8,7 @@
 --  Range: Unknown cone
 --  Notes: Water Damage Knockback.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

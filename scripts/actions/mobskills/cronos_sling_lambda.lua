@@ -2,6 +2,7 @@
 -- Cronos Sling: Lambda
 -- Deals damage in a fan-shaped area of effect.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

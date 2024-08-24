@@ -3,6 +3,7 @@
 -- Description: Chomps on a single target, reducing HP to one and resets enmity.
 -- Type: Physical
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

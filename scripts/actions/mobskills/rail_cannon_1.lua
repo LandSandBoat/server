@@ -2,6 +2,7 @@
 -- Rail Cannon 1 gear
 -- 1 Gear: Rail Cannon is single target and ignores Utsusemi
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

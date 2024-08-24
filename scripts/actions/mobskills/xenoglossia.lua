@@ -5,6 +5,7 @@
 -- Type: Enhancing
 -- Notes: Only used by notorious monsters.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

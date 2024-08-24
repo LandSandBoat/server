@@ -2,6 +2,7 @@
 -- Thunder Meeble Warble
 -- AOE Lightning Elemental damage, inflicts Stun and Shock (50 HP/tick).
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

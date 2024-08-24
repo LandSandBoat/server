@@ -4,6 +4,7 @@
 -- Description: Weakens defense of enemies within range.
 -- Type: Magical (Wind)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

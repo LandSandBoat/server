@@ -2,6 +2,7 @@
 -- Astral Flow
 -- make existing pet use astral flow skill
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 local function petInactive(pet)

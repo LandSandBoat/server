@@ -3,6 +3,7 @@
 -- Deals Earth damage to targets in a fan-shaped area of effect. Additional effect: Blind
 -- Range: 8' cone
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

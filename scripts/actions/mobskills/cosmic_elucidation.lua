@@ -6,6 +6,7 @@
 --  Range:
 --  Notes: Ejects all combatants from the battlefield, resulting in a failure.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

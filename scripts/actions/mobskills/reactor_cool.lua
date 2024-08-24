@@ -2,6 +2,7 @@
 -- Reactor Cool
 -- Gives Undispellable Ice Spikes and Defense Boost
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

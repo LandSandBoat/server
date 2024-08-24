@@ -7,6 +7,7 @@
 --  Range: Unknown radial
 --  Notes: Only used by notorious monsters, and from any Mamool Ja in besieged.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

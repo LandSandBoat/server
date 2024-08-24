@@ -3,6 +3,7 @@
 -- Deals Fire damage to enemies within a fan-shaped area.
 -- Breath Attack
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- Bomb Toss
 -- Throws a bomb at an enemy.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

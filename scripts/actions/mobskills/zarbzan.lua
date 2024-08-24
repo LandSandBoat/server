@@ -7,6 +7,7 @@
 --  Range: Unknown
 --  Notes: Used by RNG trolls only as their ranged special attack.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

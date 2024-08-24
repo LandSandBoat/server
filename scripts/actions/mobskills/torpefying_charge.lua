@@ -3,6 +3,7 @@
 --
 --  Description: Gaze paralysis for 2 minutes.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

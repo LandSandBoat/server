@@ -4,6 +4,7 @@
 --  Type: Magical
 --  additional effect : Silence.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -1,6 +1,7 @@
 -----------------------------------
 --  Shantotto II Melee
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- Shell Guard
 -- Increases defense of user.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

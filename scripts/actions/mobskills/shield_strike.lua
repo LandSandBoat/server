@@ -6,6 +6,7 @@
 --  1 shadow?
 --  Range: Melee front arc
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

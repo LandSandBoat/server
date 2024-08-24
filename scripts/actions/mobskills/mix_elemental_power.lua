@@ -1,6 +1,7 @@
 -----------------------------------
 -- Mix: Elemental Power - Applies Magic Attack Bonus to all party members for 60 seconds.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -4,6 +4,7 @@
 -- Description: Regain HP for party members within area of effect.
 --
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -7,6 +7,7 @@
 --  Range: 20
 --  Notes: Uses defense instead of attack. Curled form only.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

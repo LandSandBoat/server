@@ -3,6 +3,7 @@
 -- Description: Delivers a fourfold attack. Chance of params.critical hit varies with TP.
 -- Type: Physical
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

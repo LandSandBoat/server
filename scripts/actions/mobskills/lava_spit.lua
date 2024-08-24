@@ -2,6 +2,7 @@
 -- Lava_Spit
 -- Deals Fire damage to enemies within an area of effect.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

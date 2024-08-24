@@ -2,6 +2,7 @@
 -- Thunderous_Yowl
 -- Emits a booming cry, inflicting curse and plague
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

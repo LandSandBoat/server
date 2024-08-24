@@ -3,6 +3,7 @@
 --  Aern (NIN & MNK)
 --  Blinkable 1 hit, Knockback, Hate Reset
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

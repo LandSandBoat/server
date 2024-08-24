@@ -5,6 +5,7 @@
 -- Wipes Shadows
 -- Range: 10' radial
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

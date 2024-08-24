@@ -7,6 +7,7 @@
 --  Range: Unknown
 --  Notes: Can be Fire, Earth, Wind, or Water element.  Functions even at a distance (outside of melee range).
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

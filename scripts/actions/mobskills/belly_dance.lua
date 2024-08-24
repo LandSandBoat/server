@@ -7,6 +7,7 @@
 -- Range: 12' radial
 -- Notes: Used only by Lamia NM's, particularly in Besieged.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

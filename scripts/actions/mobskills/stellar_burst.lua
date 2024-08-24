@@ -2,6 +2,7 @@
 -- Stellar Burst
 -- A starburst damages targets in an area of effect. Additional effect: Silence
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

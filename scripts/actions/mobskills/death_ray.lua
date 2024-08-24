@@ -4,6 +4,7 @@
 --  Description: Deals dark damage to an enemy.
 --  Type: Magical (Dark)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

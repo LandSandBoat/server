@@ -4,6 +4,7 @@
 -- Type: Physical (AoE)
 -- Skillchain Properties: Light/Distortion
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

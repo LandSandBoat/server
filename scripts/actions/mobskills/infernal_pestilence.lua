@@ -7,6 +7,7 @@
 --  Range: Front arc
 --  Notes: Only used by Chahnameed's Stomach.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

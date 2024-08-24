@@ -6,6 +6,7 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Single target
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

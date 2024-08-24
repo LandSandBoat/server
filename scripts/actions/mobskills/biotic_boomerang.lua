@@ -3,6 +3,7 @@
 --  Aern (BST & WAR)
 --  Blinkable 2-3 hit, addtional effect plague on hit.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

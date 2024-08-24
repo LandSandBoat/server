@@ -2,6 +2,7 @@
 -- Malediction
 -- Steals an enemy's HP. Ineffective against undead.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

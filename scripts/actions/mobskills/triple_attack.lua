@@ -2,6 +2,7 @@
 --  Triple Attack
 --  Description: Delivers a threefold attack on a single target.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

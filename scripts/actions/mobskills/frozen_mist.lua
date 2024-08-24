@@ -3,6 +3,7 @@
 --  Description: Deals ice damage to enemies around the caster. Additional effect: Terror
 --  Type: Magical (Ice)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

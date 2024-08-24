@@ -1,6 +1,7 @@
 -----------------------------------
 -- Stave Toss (staff wielding Mamool Ja only!)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

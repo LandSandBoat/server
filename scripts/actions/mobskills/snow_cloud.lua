@@ -3,6 +3,7 @@
 -- Deals Ice damage to targets in a fan-shaped area of effect. Additional effect: Paralyze
 -- Range: 10' cone
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

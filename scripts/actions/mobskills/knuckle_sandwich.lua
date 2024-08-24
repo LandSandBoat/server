@@ -2,6 +2,7 @@
 -- Knuckle Sandwich
 -- Used by Trust: Prishe II
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

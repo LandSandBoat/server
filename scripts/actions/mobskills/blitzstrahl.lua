@@ -4,6 +4,7 @@
 --  Description: Deals lightning damage to an enemy. Additional effect: "Stun."
 --  Type: Magical (Lightning)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

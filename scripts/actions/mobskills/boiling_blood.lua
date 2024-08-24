@@ -3,6 +3,7 @@
 -- Description: Boiling Blood
 -- Foe gains Haste +25% and Berserk +50%
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

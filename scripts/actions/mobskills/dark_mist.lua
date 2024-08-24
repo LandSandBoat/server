@@ -7,6 +7,7 @@
 --  Range: Radial
 --  Notes: Only used when flying
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

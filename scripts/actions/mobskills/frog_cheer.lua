@@ -2,6 +2,7 @@
 -- Frog Cheer
 -- Increases magical attack and grants Elemental Seal effect
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

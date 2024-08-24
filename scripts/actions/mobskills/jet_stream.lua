@@ -2,6 +2,7 @@
 -- Jet Stream
 -- Delivers a threefold attack. Accuracy varies with TP.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

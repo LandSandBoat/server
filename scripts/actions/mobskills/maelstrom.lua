@@ -3,6 +3,7 @@
 --  Description: Deals water damage to enemies within range. Additional effect: STR Down.
 --  Type: Magical (Water)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

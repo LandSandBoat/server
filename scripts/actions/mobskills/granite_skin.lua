@@ -2,6 +2,7 @@
 -- Granite Skin
 -- Description: Enhances defense and guarding skill (nullifies all physical damage from the front).
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -4,6 +4,7 @@
 --  Description: Deals damage within a fan-shaped area. Additional effect: Silence.
 --  Type: Magical
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

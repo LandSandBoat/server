@@ -6,6 +6,7 @@
 --  Shadow per hit
 --  Range: Unknown range
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

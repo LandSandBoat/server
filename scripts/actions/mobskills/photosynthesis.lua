@@ -7,6 +7,7 @@
 -- Range: Self
 -- Notes: Only available during daytime.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

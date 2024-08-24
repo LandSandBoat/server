@@ -11,6 +11,7 @@
 -- "Cease thy struggles...
 -- I am immutable...indestructible...impervious...immortal..."
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

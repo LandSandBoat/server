@@ -5,6 +5,7 @@
 -- Utsusemi/Blink absorb: Wipes shadows
 -- Duration: Three minutes ?
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

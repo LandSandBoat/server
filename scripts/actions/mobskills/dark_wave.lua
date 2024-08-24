@@ -7,6 +7,7 @@
 --  Range: 10' radial
 --  Notes: Severity of Bio effect varies by time of day, from 8/tic at midday to 20/tic at midnight.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

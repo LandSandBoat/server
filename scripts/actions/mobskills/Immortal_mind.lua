@@ -4,6 +4,7 @@
 -- Type: Self
 -- Range: Self
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

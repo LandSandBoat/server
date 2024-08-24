@@ -2,6 +2,7 @@
 -- Crescent Fang
 -- Fenrir inflicts Paralysis along with a single attack to target.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

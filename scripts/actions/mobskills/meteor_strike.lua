@@ -2,6 +2,7 @@
 -- Meteor Strike
 -- Ifrit deals fire elemental damage to target.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

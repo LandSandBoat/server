@@ -7,6 +7,7 @@
 --  Range: 18' radial.
 --  Notes: Used only by Tiamat, Smok and Ildebrann while flying.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

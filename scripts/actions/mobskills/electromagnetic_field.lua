@@ -3,6 +3,7 @@
 -- Description: Deals thunder damage.
 -- Type: Magical (Thunder)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -4,6 +4,7 @@
 -- Type: Magical
 -- additional effect: WEIGHT
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

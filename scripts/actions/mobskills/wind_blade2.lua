@@ -4,6 +4,7 @@
 --  Type: Enhancing
 --  Used only by Kam'lanaut. Enaero aspect adds 70+ to his melee attacks.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

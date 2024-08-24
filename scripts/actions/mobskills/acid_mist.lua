@@ -2,6 +2,7 @@
 -- Acid Mist
 -- Deals Water damage to enemies within an area of effect. Additional effect: Attack Down
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

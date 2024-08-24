@@ -3,6 +3,7 @@
 -- Damage varies with TP.
 -- 0% TP: 2.25 / 150% TP: 3.50 / 300% TP: 4.75
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

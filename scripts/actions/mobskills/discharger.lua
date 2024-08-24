@@ -6,6 +6,7 @@
 -- Range: Self
 -- Notes: Used only by Omega
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

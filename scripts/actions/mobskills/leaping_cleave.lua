@@ -7,6 +7,7 @@
 --  Range: Melee
 --  Notes: Used only when wielding their initial sword.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

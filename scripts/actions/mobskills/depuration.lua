@@ -8,6 +8,7 @@
 -- Notes: Erases all negative effects on the mob.
 -- Aerns will generally not attempt to use this ability if no erasable effects exist on them.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

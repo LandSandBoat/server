@@ -7,6 +7,7 @@
 -- Range: Melee
 -- Notes: Target has to be facing user
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

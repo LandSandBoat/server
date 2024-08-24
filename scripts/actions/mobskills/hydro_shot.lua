@@ -2,6 +2,7 @@
 -- Hydro Shot
 -- Additional effect: Enmity Down. Chance of effect varies with TP.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

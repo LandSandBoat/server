@@ -3,6 +3,7 @@
 -- Deals critical damage. Chance of critical hit varies with TP.
 -- 100% TP: ??? / 200% TP: ??? / 300% TP: ???
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

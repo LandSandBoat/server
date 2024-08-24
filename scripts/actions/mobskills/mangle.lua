@@ -7,6 +7,7 @@
 --  Range: Front cone
 --  Notes: Used only when wielding their initial sword, or the dagger on their backs.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

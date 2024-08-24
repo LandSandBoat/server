@@ -2,6 +2,7 @@
 -- Energy_Screen
 -- Description: Invincible
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -4,6 +4,7 @@
 --  Type: Magical
 --  additional effect : Petrification.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

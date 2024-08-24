@@ -7,6 +7,7 @@
 -- Range: Unknown
 -- Notes: Used only by certain Notorious Monsters. Strong xi.effect.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

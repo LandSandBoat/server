@@ -7,6 +7,7 @@
 --  Range: Back
 --  Notes: Used only if a target with hate is behind them. Conal behind Cerberus.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

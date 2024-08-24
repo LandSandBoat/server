@@ -6,6 +6,7 @@
 -- Range: Self
 -- Notes: Used only by Proto-Omega whenever he switches forms for the first time or during final form.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

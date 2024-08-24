@@ -2,6 +2,7 @@
 -- Benediction
 -- Meant for Qn'aern (WHM) with Ix'Aern encounter
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

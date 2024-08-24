@@ -1,6 +1,7 @@
 -----------------------------------
 -- Mix: Gold Needle - Removes Petrification.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

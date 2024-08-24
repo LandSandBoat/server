@@ -7,6 +7,7 @@
 --  Range:
 --  Notes: Used by Bahamut when at 10% of its HP, and can use anytime afterwards at will.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

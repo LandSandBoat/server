@@ -3,6 +3,7 @@
 -- Description: Deals Wind damage to targets in a fan-shaped area of effect. Additional effect: Knockback
 -- Type: Magical (Wind)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- Whirl of Rage
 -- Delivers an area attack that stuns enemies. Damage varies with TP.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

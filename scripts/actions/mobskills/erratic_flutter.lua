@@ -16,6 +16,7 @@
 -- Erratic Flutter does overwrite Hojo: Ni, Hojo: Ichi, and Slow.
 -- Player Blue magic version is wind element instead of fire.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

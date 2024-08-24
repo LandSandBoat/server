@@ -7,6 +7,7 @@
 --  Range: 12.5
 --  Notes: Open form only.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

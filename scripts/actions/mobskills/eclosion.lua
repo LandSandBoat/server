@@ -2,6 +2,7 @@
 -- Eclosion
 -- Morphs a Wamouracampa into a Wamoura
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

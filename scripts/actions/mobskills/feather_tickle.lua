@@ -2,6 +2,7 @@
 -- Feather Tickle
 -- Description: Reduces tp to zero.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

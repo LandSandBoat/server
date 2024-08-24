@@ -2,6 +2,7 @@
 -- Mind Drain
 -- Steals mnd from target
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

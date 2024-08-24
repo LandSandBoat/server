@@ -7,6 +7,7 @@
 -- Range: Melee
 -- Notes: Despite the attack ignoring Utsusemi, it is physical, and therefore capable of missing entirely.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

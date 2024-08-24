@@ -2,6 +2,7 @@
 -- Brain Crush
 -- Deals damage to single target. Additional effect: Silence
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

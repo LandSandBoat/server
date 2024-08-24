@@ -3,6 +3,7 @@
 -- Description: Steals HP from any nearby flans.
 -- Type: Magical
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

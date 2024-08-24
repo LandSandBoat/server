@@ -4,6 +4,7 @@
 -- Type: Physical (Hand-to-Hand)
 -- Skillchain Properties: Fragmentation/Distortion
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

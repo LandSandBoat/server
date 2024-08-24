@@ -2,6 +2,7 @@
 -- Chaotic Strike
 -- Ramuh delivers a three-hit attack that also stuns target.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

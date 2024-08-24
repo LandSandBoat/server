@@ -5,6 +5,7 @@
 -- Single Target Attack
 -- Notes: not known if multiplier based on TP
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

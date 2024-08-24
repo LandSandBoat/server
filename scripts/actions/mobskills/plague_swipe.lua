@@ -6,6 +6,7 @@
 --  2-3 Shadows
 --  Range: Backward Arc
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

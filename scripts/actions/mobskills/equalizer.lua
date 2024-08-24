@@ -2,6 +2,7 @@
 -- Equalizer
 -- AoE damage (~600-800)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

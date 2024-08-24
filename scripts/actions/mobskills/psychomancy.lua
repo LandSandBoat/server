@@ -4,6 +4,7 @@
 -- Type: Magical
 -- Utsusemi/Blink absorb: ignore shadow
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

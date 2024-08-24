@@ -5,6 +5,7 @@
 --  Type: Enfeebling
 --  Notes: Removes one detrimental magic effect for party members within area of effect.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

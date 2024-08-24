@@ -6,6 +6,7 @@
 -- Utsusemi/Blink absorb: Absorbed by 3 shadows.
 -- Range: 11.5 yalms
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

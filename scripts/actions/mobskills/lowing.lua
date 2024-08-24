@@ -2,6 +2,7 @@
 -- Lowing
 -- Description: AoE Powerful plague
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Doctor's Orders
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

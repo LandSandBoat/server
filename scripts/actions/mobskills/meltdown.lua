@@ -2,6 +2,7 @@
 -- Meltdown
 -- Reactor failure causes self-destruct, dealing magic damage to targets in an area of effect.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

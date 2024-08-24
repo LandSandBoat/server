@@ -3,6 +3,7 @@
 --  Description: Delivers an area attack that lowers target's defense and magic defense. Damage varies with TP.
 --  Type: Physical (Piercing)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

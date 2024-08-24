@@ -7,6 +7,7 @@
 --  Range: Melee
 --  Notes: Only used by Mamool Ja with slashing weapons.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

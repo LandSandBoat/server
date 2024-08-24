@@ -2,6 +2,7 @@
 -- Noisome Powder
 -- Reduces attack of targets in area of effect.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

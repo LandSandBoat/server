@@ -1,6 +1,7 @@
 -----------------------------------
 -- Pounce: Deals damage to a single target.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

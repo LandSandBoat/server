@@ -1,6 +1,7 @@
 -----------------------------------
 -- Mix: Guard Drink - Applies Protect (+220 Defense) and Shell to all party members for 5 minutes.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

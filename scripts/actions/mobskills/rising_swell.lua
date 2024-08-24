@@ -3,6 +3,7 @@
 --  Description: Strips all players in an area of effect of all equipment.
 --  Type: Magical Enfeebling
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

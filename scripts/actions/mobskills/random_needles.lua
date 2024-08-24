@@ -4,6 +4,7 @@
 -- 'The Amigo Sabotender's special ability 1000 Needles has been renamed ??? Needles.''
 -- https://forum.square-enix.com/ffxi/threads/46068-Feb-19-2015-(JST)-Version-Update
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

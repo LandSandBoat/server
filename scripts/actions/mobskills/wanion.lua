@@ -2,6 +2,7 @@
 -- Wanion
 -- Transfers all ailments the Seether itself has to players in AoE range.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

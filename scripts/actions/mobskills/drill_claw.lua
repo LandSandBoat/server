@@ -2,6 +2,7 @@
 -- Drill Claw
 -- Physical damage + Max HP Down + Max TP Down.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

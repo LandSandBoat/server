@@ -2,6 +2,7 @@
 -- Thunder II
 -- Deals thunder elemental damage. Damage varies with TP.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

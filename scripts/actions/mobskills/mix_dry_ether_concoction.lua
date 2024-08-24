@@ -1,6 +1,7 @@
 -----------------------------------
 -- Mix: Dry Ether Concoction - Restores 160 MP to a single party member.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

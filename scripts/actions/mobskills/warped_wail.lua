@@ -4,6 +4,7 @@
 -- Emits a distorted scream, dealing damage and reducing max HP and MP.
 -- Notes: Wipes Shadows, used only by Zirnitra and Pteranodon
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

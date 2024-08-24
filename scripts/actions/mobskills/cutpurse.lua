@@ -5,6 +5,7 @@
 --  Ignore Shadows, Single target
 --  Note: If it takes off main weapon, anything held in Sub slot is unequipped as well.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

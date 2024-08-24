@@ -8,6 +8,7 @@
 --  Notes: Seems to be magical-based Drain.
 --    Witnessed Paladin taking lower damage from it than Ninja with Shell only.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

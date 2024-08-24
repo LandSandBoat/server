@@ -7,6 +7,7 @@
 -- Range: 10'
 -- Notes: Doesn't use this if its horn is broken.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

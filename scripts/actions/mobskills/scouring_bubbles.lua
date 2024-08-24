@@ -3,6 +3,7 @@
 -- Deals Water Magic damage in an Area of Effect
 -- Used by Mihli Aliapoh (Trust)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -6,6 +6,7 @@
 --  Range: Unknown cone, backwards
 --  Notes: Only used when Amphipteres are attacking with their tail.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- Big Scissors: Deals damage to a single target.
 -- Nightmare Crabs ignore shadows
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

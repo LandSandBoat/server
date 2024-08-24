@@ -7,6 +7,7 @@
 -- Range: 12' yalm around Nant'ina
 -- Notes: Only used by Nant'ina
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 --  1000 Needles
 --  Description: Shoots multiple needles at enemies within range.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

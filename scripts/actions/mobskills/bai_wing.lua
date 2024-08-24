@@ -7,6 +7,7 @@
 -- Range: 30' radial.
 -- Notes: Used only by Ouryu and Cuelebre while flying.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

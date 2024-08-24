@@ -6,6 +6,7 @@
 --  Range: Unknown
 --  Notes: Only used by Gurfurlur the Menacing with health below 20%.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

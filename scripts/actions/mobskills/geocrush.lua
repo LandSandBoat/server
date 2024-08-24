@@ -2,6 +2,7 @@
 -- Geocrush
 -- Titan deals Earth elemental damage and stuns target.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

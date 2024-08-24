@@ -7,6 +7,7 @@
 --  Range: Unknown
 --  Notes: Used by Limules affiliated with light element.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

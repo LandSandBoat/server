@@ -6,6 +6,7 @@
 -- Range: Melee
 -- Notes: In ToAU zones, this has an additional effect of absorbing all status effects, including food.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

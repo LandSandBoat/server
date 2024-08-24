@@ -4,6 +4,7 @@
 --  Type: Ranged
 --  Damage decreases the farther away the target is from him.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

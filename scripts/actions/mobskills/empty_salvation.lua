@@ -2,6 +2,7 @@
 -- Empty Salvation
 -- Damages all targets in range with the salvation of emptiness. Additional effect: Dispels 3 effects
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
