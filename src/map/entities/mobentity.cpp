@@ -35,6 +35,7 @@
 #include "enmity_container.h"
 #include "entities/charentity.h"
 #include "lua/lua_loot.h"
+#include "lua/luautils.h"
 #include "mob_modifier.h"
 #include "mob_spell_container.h"
 #include "mob_spell_list.h"
@@ -698,9 +699,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
     if (!getMobMod(MOBMOD_NO_DROPS) && dropList != nullptr && (!dropList->Items.empty() || !dropList->Groups.empty() || PAI->EventHandler.hasListener("ITEM_DROPS")))
     {
-        // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
-        int16 maxRolls = 1 + (m_THLvl > 2 ? 2 : m_THLvl);
-        int16 bonus    = (m_THLvl > 2 ? (m_THLvl - 2) * 10 : 0);
+        // THLvl determines the drop rate.
+        auto thDropRateFunction = lua["xi"]["combat"]["treasureHunter"]["getDropRate"];
 
         LootContainer loot(dropList);
 
@@ -715,49 +715,50 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                 total += item.DropRate;
             }
 
-            // NOTE: When switching over to the correct TH table method fixed rate means to not use the TH table
-            int16 rolls = group.hasFixedRate ? 1 : maxRolls;
+            uint16 groupDropRate = group.GroupRate * 10;
 
-            for (int16 roll = 0; roll < rolls; ++roll)
+            if (!group.hasFixedRate)
             {
-                // Determine if this group should drop an item
-                if (group.GroupRate > 0 && xirand::GetRandomNumber(1000) < group.GroupRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
+                groupDropRate = thDropRateFunction(m_THLvl, groupDropRate);
+            }
+
+            // Determine if this group should drop an item.
+            if (groupDropRate > 0 && xirand::GetRandomNumber(1, 10000) <= groupDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
+            {
+                // Each item in the group is given its own weight range which is the previous value to the previous value + item.DropRate
+                // Such as 2 items with drop rates of 200 and 800 would be 0-199 and 200-999 respectively
+                uint16 previousRateValue = 0;
+                uint16 itemRoll          = xirand::GetRandomNumber(total);
+                for (const DropItem_t& item : group.Items)
                 {
-                    // Each item in the group is given its own weight range which is the previous value to the previous value + item.DropRate
-                    // Such as 2 items with drop rates of 200 and 800 would be 0-199 and 200-999 respectively
-                    uint16 previousRateValue = 0;
-                    uint16 itemRoll          = xirand::GetRandomNumber(total);
-                    for (const DropItem_t& item : group.Items)
+                    if (itemRoll < previousRateValue + item.DropRate)
                     {
-                        if (previousRateValue + item.DropRate > itemRoll)
+                        if (AddItemToPool(item.ItemID, ++dropCount))
                         {
-                            if (AddItemToPool(item.ItemID, ++dropCount))
-                            {
-                                return;
-                            }
-                            break;
+                            return;
                         }
-                        previousRateValue += item.DropRate;
+                        break;
                     }
-                    break;
+                    previousRateValue += item.DropRate;
                 }
             }
         });
 
+        // Ungrouped drops. This are affected by TH UNLESS they have an specified fixed rate.
         loot.ForEachItem([&](const DropItem_t& item)
         {
-            // NOTE: When switching over to the correct TH table method fixed rate means to not use the TH table
-            int16 rolls = item.hasFixedRate ? 1 : maxRolls;
+            uint16 itemDropRate = item.DropRate * 10;
 
-            for (int16 roll = 0; roll < rolls; ++roll)
+            if (!item.hasFixedRate)
             {
-                if (item.DropRate > 0 && xirand::GetRandomNumber(1000) < item.DropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
+                itemDropRate = thDropRateFunction(m_THLvl, itemDropRate);
+            }
+
+            if (itemDropRate > 0 && xirand::GetRandomNumber(1, 10000) <= itemDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
+            {
+                if (AddItemToPool(item.ItemID, ++dropCount))
                 {
-                    if (AddItemToPool(item.ItemID, ++dropCount))
-                    {
-                        return;
-                    }
-                    break;
+                    return;
                 }
             }
         });
