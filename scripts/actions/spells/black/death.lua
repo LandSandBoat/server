@@ -35,7 +35,6 @@ spellObject.onSpellCast = function(caster, target, spell)
         end
 
         if instaDeath then
-            spell:setMsg(xi.msg.basic.FALL_TO_GROUND)
             target:setHP(0)
         else
             spell:setMsg(xi.msg.basic.MAGIC_DMG)
@@ -49,8 +48,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     -- Not-player spell.
     else
-        if math.random(1, 100) <= target:getMod(xi.mod.DEATHRES) then
-            spell:setMsg(xi.msg.basic.FALL_TO_GROUND)
+        if math.random(1, 100) > target:getMod(xi.mod.DEATHRES) then
             target:setHP(0)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
