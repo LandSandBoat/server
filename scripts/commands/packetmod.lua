@@ -28,6 +28,8 @@ commandObj.onTrigger = function(player, operation, packetId, offset, value)
     end
 
     if operation == 'add' then
+        -- TODO: Find the best way to handle number->int conversion
+        ---@diagnostic disable-next-line param-type-mismatch
         player:addPacketMod(tonumber(packetId), tonumber(offset), tonumber(value))
     elseif operation == 'del' then
         -- TODO

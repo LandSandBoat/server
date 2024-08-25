@@ -13,7 +13,11 @@ commandObj.cmdprops =
 
 commandObj.onTrigger = function(player)
     local pet = player:getPet()
-    if pet and pet:getLocalVar('GodMode') == 0 then
+    if not pet then
+        return
+    end
+
+    if pet:getLocalVar('GodMode') == 0 then
         -- Toggle GodMode on..
         pet:setLocalVar('GodMode', 1)
 

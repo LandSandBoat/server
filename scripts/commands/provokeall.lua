@@ -13,6 +13,10 @@ commandObj.cmdprops =
 
 commandObj.onTrigger = function(player)
     local zone = player:getZone()
+    if not zone then
+        return
+    end
+
     for _, mob in pairs(zone:getMobs()) do
         mob:updateEnmity(player)
         mob:setTP(3000)

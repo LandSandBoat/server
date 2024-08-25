@@ -79,7 +79,7 @@ commandObj.onTrigger = function(player, handlerName)
     end
 
     local varCache = interactionUtil.makeTableCache(function(varname)
-        return player:getVar(varname)
+        return player:getCharVar(varname)
     end)
 
     local containerVarCache = interactionUtil.makeContainerVarCache(player)

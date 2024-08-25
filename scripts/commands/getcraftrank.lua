@@ -49,6 +49,10 @@ commandObj.onTrigger = function(player, craftName, target)
         end
     end
 
+    if not targ then
+        return
+    end
+
     player:printToPlayer(string.format('%s\'s current skillID \'%s\' rank: %u', targ:getName(), craftName, targ:getSkillRank(skillID)))
 end
 

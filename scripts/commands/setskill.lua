@@ -61,6 +61,10 @@ commandObj.onTrigger = function(player, skillName, skillLV, target)
         end
     end
 
+    if not targ then
+        return
+    end
+
     targ:setSkillLevel(skillID, skillLV * 10)
     targ:messageBasic(xi.msg.basic.SKILL_REACHES_LEVEL, skillID, skillLV)
 

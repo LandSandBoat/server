@@ -19,6 +19,10 @@ end
 
 commandObj.onTrigger = function(player, mobId, noDepop)
     local zone = player:getZone()
+    if not zone then
+        return
+    end
+
     if zone:getTypeMask() == xi.zoneType.INSTANCED then
         local instance = player:getInstance()
         local targ

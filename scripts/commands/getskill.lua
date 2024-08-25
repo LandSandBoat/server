@@ -56,6 +56,10 @@ commandObj.onTrigger = function(player, skillName, target)
         end
     end
 
+    if not targ then
+        return
+    end
+
     -- Trying to break this wide line in any other more reasonable way results in lua throwing errors.. Parsing bug.
     player:printToPlayer(string.format('%s\'s current skillID \'%s\' Skill: %s (real value: %s)',
     targ:getName(), skillName, (targ:getCharSkillLevel(skillID) / 10) .. '.x', targ:getCharSkillLevel(skillID)))

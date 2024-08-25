@@ -60,6 +60,10 @@ commandObj.onTrigger = function(player, craftName, tier, target)
         end
     end
 
+    if not targ then
+        return
+    end
+
     targ:setSkillRank(skillID, craftRank)
     targ:printToPlayer(string.format('Your %s craft skill rank has been adjusted to: %s', craftName, craftRank))
     if targ ~= player then

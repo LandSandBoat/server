@@ -46,6 +46,10 @@ commandObj.onTrigger = function(player, command, target)
     end
 
     local zone = targ:getZone()
+    if not zone then
+        return
+    end
+
     switch(command): caseof
     {
         ['start'] = function()

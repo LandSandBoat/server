@@ -201,8 +201,20 @@ end
 ---@param EventID integer
 ---@param paramTable table
 ---@return nil
----@overload fun(EventID: integer, p0: integer?, p1: integer?, p2: integer?, p3: integer?, p4: integer?, p5: integer?, p6: integer?, p7: integer?, textTable: integer?): nil
 function CBaseEntity:startEvent(EventID, paramTable)
+end
+
+---@param EventID integer
+---@param p0 integer?
+---@param p1 integer?
+---@param p2 integer?
+---@param p3 integer?
+---@param p4 integer?
+---@param p5 integer?
+---@param p6 integer?
+---@param p7 integer?
+---@param textTable integer?
+function CBaseEntity:startEvent(EventID, p0, p1, p2, p3, p4, p5, p6, p7, textTable)
 end
 
 ---@param EventID integer
@@ -225,15 +237,39 @@ end
 ---@param EventID integer
 ---@param paramTable table
 ---@return nil
----@overload fun(EventID: integer, p0: integer?, p1: integer?, p2: integer?, p3: integer?, p4: integer?, p5: integer?, p6: integer?, p7: integer?, textTable: integer?): nil
 function CBaseEntity:startCutscene(EventID, paramTable)
+end
+
+---@param EventID integer
+---@param p0 integer?
+---@param p1 integer?
+---@param p2 integer?
+---@param p3 integer?
+---@param p4 integer?
+---@param p5 integer?
+---@param p6 integer?
+---@param p7 integer?
+---@param textTable integer?
+function CBaseEntity:startCutscene(EventID, p0, p1, p2, p3, p4, p5, p6, p7, textTable)
 end
 
 ---@param EventID integer
 ---@param paramTable table
 ---@return nil
----@overload fun(EventID: integer, p0: integer?, p1: integer?, p2: integer?, p3: integer?, p4: integer?, p5: integer?, p6: integer?, p7: integer?, textTable: integer?): nil
 function CBaseEntity:startOptionalCutscene(EventID, paramTable)
+end
+
+---@param EventID integer
+---@param p0 integer?
+---@param p1 integer?
+---@param p2 integer?
+---@param p3 integer?
+---@param p4 integer?
+---@param p5 integer?
+---@param p6 integer?
+---@param p7 integer?
+---@param textTable integer?
+function CBaseEntity:startOptionalCutscene(EventID, p0, p1, p2, p3, p4, p5, p6, p7, textTable)
 end
 
 ---@param ... integer?

@@ -15,6 +15,10 @@ commandObj.cmdprops =
 
 commandObj.onTrigger = function(player)
     local zone = player:getZone()
+    if not zone then
+        return
+    end
+
     player:printToPlayer('Reloading Navmesh for ' .. zone:getName())
     zone:reloadNavmesh()
 end
