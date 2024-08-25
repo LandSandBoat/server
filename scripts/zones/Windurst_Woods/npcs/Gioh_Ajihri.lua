@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
---  NPC: Gioh Ajihri
+-- NPC: Gioh Ajihri
 -- Starts & Finishes Repeatable Quest: Twinstone Bonding
 -----------------------------------
 local entity = {}
