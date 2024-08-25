@@ -13,4 +13,5 @@ return {
     ['Muhk_Johldy']   = { event = 339 },-- There is at current an unknown mission/quest/status that alters their dialog. Windurst citizens get something different than other nations.
     ['Perih_Vashai']  = { event = 338 },
     ['Roberta']       = { event = 436 },
+    ['Varun']         = { event = 432 },
 }
