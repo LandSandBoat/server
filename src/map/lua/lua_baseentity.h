@@ -852,6 +852,8 @@ public:
 
     uint16 getBehaviour();
     void   setBehaviour(uint16 behavior);
+    uint8  getLink();
+    void   setLink(uint8 link);
     uint16 getRoamFlags();
     void   setRoamFlags(uint16 newRoamFlags);
 

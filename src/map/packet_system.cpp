@@ -1902,7 +1902,13 @@ void SmallPacket0x036(map_session_data_t* const PSession, CCharEntity* const PCh
     uint32 npcid  = data.ref<uint32>(0x04);
     uint16 targid = data.ref<uint16>(0x3A);
 
-    CBaseEntity* PNpc = PChar->GetEntity(targid, TYPE_NPC);
+    CBaseEntity* PNpc = PChar->GetEntity(targid, TYPE_NPC | TYPE_MOB);
+
+    // Only allow trading with mobs if it's status is an NPC
+    if (PNpc != nullptr && PNpc->objtype == TYPE_MOB && PNpc->status != STATUS_TYPE::NORMAL)
+    {
+        return;
+    }
 
     if ((PNpc != nullptr) && (PNpc->id == npcid) && distance(PNpc->loc.p, PChar->loc.p) <= 10)
     {

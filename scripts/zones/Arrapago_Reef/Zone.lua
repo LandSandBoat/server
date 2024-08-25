@@ -44,6 +44,10 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     end
 end
 
+zoneObject.onGameDay = function()
+    xi.apkallu.updateHate(xi.zone.ARRAPAGO_REEF, -3)
+end
+
 zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
