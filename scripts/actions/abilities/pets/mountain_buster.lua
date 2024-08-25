@@ -1,6 +1,7 @@
 -----------------------------------
 -- Mountain Buster M=12
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

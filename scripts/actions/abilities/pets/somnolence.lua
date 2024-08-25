@@ -1,6 +1,7 @@
 -----------------------------------
 -- Somnolence
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -13,7 +14,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     -- Damage
     local damage = 10 + pet:getMainLvl() * 2
 
-    damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage.dmg, xi.element.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
+    damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
     damage = xi.mobskills.mobAddBonuses(pet, target, damage, xi.element.DARK, petskill)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.DARK, 1)
 

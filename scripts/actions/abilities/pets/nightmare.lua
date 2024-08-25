@@ -6,6 +6,7 @@
 --
 -- see mobskills/nightmare.lua for full explanation
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

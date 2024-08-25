@@ -1,6 +1,7 @@
 -----------------------------------
 -- Shock Strike M=3.5
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Eclipse Bite M=8 subsequent hits M=2
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

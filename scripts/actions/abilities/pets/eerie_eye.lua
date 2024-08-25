@@ -2,6 +2,7 @@
 -- Eerie Eye
 -- silence + amnesia
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

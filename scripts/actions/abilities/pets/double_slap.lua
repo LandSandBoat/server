@@ -1,6 +1,7 @@
 -----------------------------------
 -- Double Slap M=6, 2 (still guessing here)
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

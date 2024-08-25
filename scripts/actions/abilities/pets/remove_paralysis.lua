@@ -1,6 +1,7 @@
 -----------------------------------
 -- Remove Paralysis
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

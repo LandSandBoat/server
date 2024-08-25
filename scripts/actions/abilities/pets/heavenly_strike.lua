@@ -1,6 +1,7 @@
 -----------------------------------
 -- Heavenly Strike
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

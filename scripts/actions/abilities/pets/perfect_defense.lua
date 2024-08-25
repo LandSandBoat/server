@@ -1,6 +1,7 @@
 -----------------------------------
 -- Perfect Defense
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -18,12 +19,13 @@ abilityObject.onPetAbility = function(target, pet, skill, master)
         end
 
         duration = 30 + summoningSkill / 20
+        master:setMP(0)
     end
 
     target:delStatusEffect(xi.effect.PERFECT_DEFENSE)
     target:addStatusEffect(xi.effect.PERFECT_DEFENSE, power, 3, duration)
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
-    master:setMP(0)
+
     return xi.effect.PERFECT_DEFENSE
 end
 

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Level X Holy
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -18,7 +19,10 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     if primaryTargetID == target:getID() then
         action:setAnimation(primaryTargetID, holyRollOneAnimID + math.random(0, 5))
     else
-        action:setAnimation(target:getID(), action:getAnimation(primaryTargetID))
+        local animationId = action:getAnimation(primaryTargetID)
+        if animationId then
+            action:setAnimation(target:getID(), animationId)
+        end
     end
 
     local power = action:getAnimation(target:getID()) - 163
