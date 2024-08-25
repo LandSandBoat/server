@@ -16,6 +16,7 @@
 -- Ranged ATT % 18
 -- Ranged ATT Cap 90
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

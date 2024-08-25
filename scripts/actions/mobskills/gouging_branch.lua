@@ -6,6 +6,7 @@
 --  Range: Melee
 --  Notes: Only used by Stcemqestcint
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

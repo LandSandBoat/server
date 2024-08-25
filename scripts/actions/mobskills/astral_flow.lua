@@ -1,6 +1,7 @@
 -----------------------------------
 -- Astral Flow
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 local avatarOffsets =

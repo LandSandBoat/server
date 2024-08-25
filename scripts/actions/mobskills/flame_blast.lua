@@ -7,6 +7,7 @@
 --  Range: 30'
 --  Notes: Used only by KS99 Wyrm while flying. Only use in a dedicated flying skill set.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

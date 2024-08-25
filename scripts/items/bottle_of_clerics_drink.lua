@@ -4,6 +4,7 @@
 -- Item Effect: Instantly removes all negative status effects from nearby party members
 --              Does not remove Plague or Curse
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

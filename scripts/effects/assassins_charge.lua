@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ASSASSINS_CHARGE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -2,6 +2,7 @@
 -- func: exec
 -- desc: Allows you to execute a Lua string directly from chat.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -37,7 +38,11 @@ commandObj.onTrigger = function(player, str)
     local scriptObj, err0 = loadstring(definePlayer .. defineTarget .. str)
     if scriptObj == nil then
         player:printToPlayer('Failed to load the given string.')
-        player:printToPlayer(err0)
+
+        if err0 then
+            player:printToPlayer(err0)
+        end
+
         os = oldOs
         return
     end

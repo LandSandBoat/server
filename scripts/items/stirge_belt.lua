@@ -3,6 +3,7 @@
 -- Stirge Belt
 -- Enchantment: 60Min, Costume - Bat
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

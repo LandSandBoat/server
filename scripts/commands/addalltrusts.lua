@@ -2,6 +2,7 @@
 -- func: addalltrusts
 -- desc: Adds all trust spells to the given target. If no target then to the current player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -2,6 +2,7 @@
 -- Shadow Spread
 -- Description: A dark shroud renders any nearby targets blinded, asleep, and cursed.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

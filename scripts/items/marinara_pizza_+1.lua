@@ -8,6 +8,7 @@
 -- Accuracy +11% (cap 58)
 -- Undead Killer
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

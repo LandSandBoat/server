@@ -3,6 +3,7 @@
 -- Scroll of Barthunder
 -- Teaches the white magic Barthunder
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

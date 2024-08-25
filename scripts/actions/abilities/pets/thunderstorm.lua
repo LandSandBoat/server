@@ -1,6 +1,7 @@
 -----------------------------------
 -- Thunderstorm
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -5,6 +5,7 @@
 -- Recast Time: 0:20:00 (0:16:40 with full merits)
 -- Duration: Instant
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

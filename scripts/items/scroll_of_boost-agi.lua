@@ -3,6 +3,7 @@
 -- Scroll of Boost-AGI
 -- Teaches the white magic Boost-AGI
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

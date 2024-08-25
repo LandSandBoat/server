@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SPIRIT_SURGE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 -- https://www.bg-wiki.com/ffxi/Spirit_Surge

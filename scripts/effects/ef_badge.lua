@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.EF_BADGE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

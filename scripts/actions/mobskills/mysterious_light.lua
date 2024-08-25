@@ -3,6 +3,7 @@
 --  Description: Deals wind damage to enemies within range. Additional effect: Weight.
 --  Type: Magical (Wind)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

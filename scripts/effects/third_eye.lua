@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.THIRD_EYE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

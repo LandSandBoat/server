@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ICE_SPIKES
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

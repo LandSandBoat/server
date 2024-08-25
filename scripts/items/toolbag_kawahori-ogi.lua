@@ -3,6 +3,7 @@
 -- Toolbag Kawa
 -- When used, you will obtain one stack of kawahori-ogi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

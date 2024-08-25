@@ -3,6 +3,7 @@
 -- Description:
 -- Gives the user the effect of counterstance
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

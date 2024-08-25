@@ -5,6 +5,7 @@
 -- Recast Time: 1:00:00
 -- Duration: Stymie fades after either sixty seconds passes or a spell lands, but it does not fade if the spell is resisted.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

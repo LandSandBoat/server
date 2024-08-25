@@ -2,6 +2,7 @@
 -- Spell: Geo-Frailty
 -- Reduces defense for enemies within area of effect.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

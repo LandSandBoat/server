@@ -3,6 +3,7 @@
 -- Scroll of Flurry II
 -- Teaches the white magic Flurry II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

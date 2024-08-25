@@ -14,6 +14,7 @@
 -- Charisma 1
 -- HP Recovered While Healing 3
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -2,6 +2,7 @@
 -- func: takexp <amount> <player>
 -- desc: Removes experience points from the target player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

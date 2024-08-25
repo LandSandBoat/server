@@ -3,6 +3,7 @@
 -- Item: Nexus Cape
 -- Enchantment: "Teleport" (Party Leader)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

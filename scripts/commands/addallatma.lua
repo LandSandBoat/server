@@ -2,6 +2,7 @@
 -- func: !addallatma
 -- desc: Adds all Atma Key Items to the given player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

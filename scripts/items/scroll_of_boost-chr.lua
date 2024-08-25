@@ -3,6 +3,7 @@
 -- Scroll of Boost-CHR
 -- Teaches the white magic Boost-CHR
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

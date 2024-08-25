@@ -2,6 +2,7 @@
 -- Blastbomb
 -- Deals Fire damage in an area of effect and bind.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

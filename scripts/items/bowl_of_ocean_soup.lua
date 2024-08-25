@@ -10,6 +10,7 @@
 -- Ranged Attack +14% (cap 90)
 -- HP recovered while healing +9
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

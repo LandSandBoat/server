@@ -2,6 +2,7 @@
 -- Cross Attack
 -- Hits a single target twice in a cross motion.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

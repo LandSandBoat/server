@@ -3,6 +3,7 @@
 -- ID 5380
 -- Removes INT Down effect
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

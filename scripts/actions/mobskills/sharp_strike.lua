@@ -7,6 +7,7 @@
 -- Range: Self
 -- Notes: 50% Attack Boost.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

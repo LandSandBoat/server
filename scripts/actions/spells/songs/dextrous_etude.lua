@@ -2,6 +2,7 @@
 -- Spell: Dextrous Etude
 -- Static DEX Boost, BRD 32
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

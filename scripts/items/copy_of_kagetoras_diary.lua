@@ -5,6 +5,7 @@
 -- In it he details each and every one of his ninety-eight victories and ninety-nine losses against Yomi.
 -- Adventurers note that reading it increases one's katana skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

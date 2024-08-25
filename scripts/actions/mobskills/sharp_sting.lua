@@ -7,6 +7,7 @@
 --  Range: 10' single
 --  Notes: Appears to be very inaccurate.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

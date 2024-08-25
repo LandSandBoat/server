@@ -5,6 +5,7 @@
 -- Recast Time: 5:00
 -- Duration: Dependent on jug pet used.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

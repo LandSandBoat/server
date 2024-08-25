@@ -12,6 +12,7 @@
 -- Def +40
 -- Arcana Killer (guesstimated 5%)
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

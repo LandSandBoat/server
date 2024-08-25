@@ -1,6 +1,7 @@
 -----------------------------------
 -- Max Potion - Restores 500 HP.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

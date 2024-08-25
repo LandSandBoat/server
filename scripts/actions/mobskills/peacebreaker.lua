@@ -4,6 +4,7 @@
 -- Peacebreaker increases Magic Damage Taken on the target (~2x Magic Damage),
 -- making Naja a good fit with offensive magic jobs such as Rune Fencer.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

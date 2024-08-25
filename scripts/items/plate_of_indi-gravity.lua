@@ -3,6 +3,7 @@
 -- plate_of_indi-gravity
 -- Teaches INDI-GRAVITY
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

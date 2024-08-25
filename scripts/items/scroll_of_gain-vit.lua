@@ -3,6 +3,7 @@
 -- Scroll of Gain-VIT
 -- Teaches the white magic Gain-VIT
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

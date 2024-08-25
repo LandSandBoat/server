@@ -3,6 +3,7 @@
 -- Description: Restores HP.
 -- Copied from Healing Breeze: needs retail calculations
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

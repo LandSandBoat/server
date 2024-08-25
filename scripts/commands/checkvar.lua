@@ -2,6 +2,7 @@
 -- func: checkvar <varType> <varName>
 -- desc: checks player or server variable and returns result value.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -56,7 +57,7 @@ commandObj.onTrigger = function(player, arg1, arg2)
     -- show variable
     if targ == 'server' then
         player:printToPlayer(string.format('Server variable \'%s\' : %u ', varName, GetServerVariable(varName)))
-    else
+    elseif type(targ) == "userdata" then
         player:printToPlayer(string.format('%s\'s variable \'%s\' : %u', targ:getName(), varName, targ:getCharVar(varName)))
     end
 end

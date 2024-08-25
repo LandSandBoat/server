@@ -11,6 +11,7 @@
 -- Ranged Accuracy % 6
 -- Ranged Accuracy Cap 15
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

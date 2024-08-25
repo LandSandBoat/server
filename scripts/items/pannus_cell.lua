@@ -3,6 +3,7 @@
 -- ID 5376
 -- Removes STR Down effect
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

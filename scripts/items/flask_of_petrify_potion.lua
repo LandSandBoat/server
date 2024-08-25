@@ -3,6 +3,7 @@
 -- Item: Petrify Potion
 -- Item Effect: This potion induces petrify.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -7,6 +7,7 @@
 -- Vermin Killer 12
 -- Poison Resist 12
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

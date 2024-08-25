@@ -2,6 +2,7 @@
 -- func: yell
 -- desc: Bans a specified player from using /yell.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

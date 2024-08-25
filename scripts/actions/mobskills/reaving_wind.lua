@@ -7,6 +7,7 @@
 --  Range: Unknown radial
 --  Notes: Causes Amphipteres to enter into an aura state
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

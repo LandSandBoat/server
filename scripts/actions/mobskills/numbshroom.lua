@@ -5,6 +5,7 @@
 -- Piercing damage Ranged Attack.
 -- Secondary modifiers: INT: 20%.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

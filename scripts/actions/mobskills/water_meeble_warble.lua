@@ -2,6 +2,7 @@
 -- Water Meeble Warble
 -- AOE Water Elemental damage, inflicts Poison and Drown (50 HP/tick).
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

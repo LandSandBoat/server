@@ -4,6 +4,7 @@
 -- Item Effect: Ranged Accuracy 20
 -- Duration 3 Minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

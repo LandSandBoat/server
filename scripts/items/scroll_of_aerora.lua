@@ -3,6 +3,7 @@
 -- Scroll of Aerora
 -- Teaches the black magic Aerora
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Scroll of Teleport-Holla
 -- Teaches the white magic Teleport-Holla
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

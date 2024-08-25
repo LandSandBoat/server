@@ -3,6 +3,7 @@
 -- Crackler
 -- Bursts of light appear in front of the user with a crackling sound, with the word "Congratulations!"
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -6,6 +6,7 @@
 --  Ignores Shadows
 --  Range: 15' Cone
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

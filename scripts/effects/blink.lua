@@ -2,6 +2,7 @@
 -- xi.effect.BLINK
 -- No need for addMod since blinks never stack.
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

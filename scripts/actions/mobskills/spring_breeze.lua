@@ -2,6 +2,7 @@
 -- Spring Breeze
 -- Description: AoE TP-Reduction and Sleep xi.effect.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

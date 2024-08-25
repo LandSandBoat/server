@@ -2,6 +2,7 @@
 -- Crystal Shield
 -- Protect II
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -3,6 +3,7 @@
 -- Scroll of Holy II
 -- Teaches the white magic Holy II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

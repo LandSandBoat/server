@@ -3,6 +3,7 @@
 -- Self healing move
 -- Type: Magical
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- func: takegil <amount> <player>
 -- desc: Removes the amount of gil from the given player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -7,6 +7,7 @@
 -- 2.25x        2.75x    3.5x
 -- Delivers a twofold attack. Damage varies with TP.
 -----------------------------------
+---@type TWeaponSkill
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)

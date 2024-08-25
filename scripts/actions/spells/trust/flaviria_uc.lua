@@ -1,6 +1,7 @@
 -----------------------------------
 -- Trust: Flaviria UC
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -3,6 +3,7 @@
 -- Scroll of Foil
 -- Teaches the white magic Foil
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

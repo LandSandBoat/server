@@ -7,6 +7,7 @@
 --  Range: Melee
 --  Notes: Only used by Mamool Ja with staves.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

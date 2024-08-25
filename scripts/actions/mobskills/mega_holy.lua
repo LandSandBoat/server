@@ -10,6 +10,7 @@
 -- "Open thine eyes...
 -- My radiance...shall guide thee..."
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

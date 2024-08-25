@@ -2,6 +2,7 @@
 -- func: setplayernation
 -- desc: Sets the target players nation.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -3,6 +3,7 @@
 -- Steals an enemy's beneficial status effects.
 -- NOTE: Nether Void allows for two beneficial status effects to be absorbed.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

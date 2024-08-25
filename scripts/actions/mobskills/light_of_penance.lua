@@ -3,6 +3,7 @@
 -- Description: Reduces an enemy's TP. Additional effect: Blindness and "Bind".
 -- Type: Magical (Light)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- Spell: Geo-Precision
 -- Enhances accuracy for party members within area of effect.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

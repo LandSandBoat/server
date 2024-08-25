@@ -3,6 +3,7 @@
 -- Bonanza Biscuit
 -- Enchantment: 60Min, Costume - Gargantuan Moogle with Vest (Bonanza)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

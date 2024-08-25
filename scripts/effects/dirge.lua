@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.DIRGE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

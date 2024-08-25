@@ -6,6 +6,7 @@
 -- Utsusemi/Blink absorb: ???
 -- Range: Melee range radial
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

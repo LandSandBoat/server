@@ -4,6 +4,7 @@
 -- Item Effect: When applied, grants UDMGMAGIC -10000 for 20s
 --              Does not Grant Spell Immunity (nospellimmune = 1)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

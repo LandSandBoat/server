@@ -7,6 +7,7 @@
 -- Silence resistance +12
 -- MP recovered while healing +5
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

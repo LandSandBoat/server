@@ -2,6 +2,7 @@
 -- Spell: Puppet's Operetta
 -- Enhances resistance against silence for party members within the area of effect.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

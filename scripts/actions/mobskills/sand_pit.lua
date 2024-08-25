@@ -2,6 +2,7 @@
 -- Sand Pit
 -- Single target bind
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

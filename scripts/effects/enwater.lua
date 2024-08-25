@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ENWATER
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

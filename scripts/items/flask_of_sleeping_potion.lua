@@ -3,6 +3,7 @@
 -- Item: Sleeping Potion
 -- Item Effect: This potion induces sleep.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

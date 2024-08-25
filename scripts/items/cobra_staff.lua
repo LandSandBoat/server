@@ -3,6 +3,7 @@
 -- Cobra Staff
 -- Enchantment: "Retrace" (Windurst Waters[S])
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

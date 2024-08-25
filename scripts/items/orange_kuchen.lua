@@ -6,6 +6,7 @@
 -- Magic % 13
 -- Magic Cap 75
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

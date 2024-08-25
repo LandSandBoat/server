@@ -2,6 +2,7 @@
 -- func: givemagianitem <player> <trialId> (RewardItem = False)
 -- desc: Gives the Magian Item associated with the given Trial ID
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

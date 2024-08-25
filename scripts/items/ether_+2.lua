@@ -3,6 +3,7 @@
 -- Item: Ether +2
 -- Item Effect: Restores 30 MP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

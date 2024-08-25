@@ -7,6 +7,7 @@
 -- Plantoid Killer 12
 -- Slow Resist 12
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

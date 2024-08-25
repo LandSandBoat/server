@@ -3,6 +3,7 @@
 -- Checks eligibility to use
 -- maxBabies set by NM lua
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

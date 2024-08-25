@@ -2,6 +2,7 @@
 -- Sprout Spin
 -- Smacks around enemies in an area of effect. Additional effect: Knockback
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

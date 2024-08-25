@@ -3,6 +3,7 @@
 -- Description: Deals Water damage to targets in a fan-shaped area of effect. Additional effect: Slow
 -- Type: Breath
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

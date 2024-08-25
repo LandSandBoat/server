@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ARCANE_CREST
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -5,6 +5,7 @@
 -- It details the constant changes in the position of the front line and the withdrawal of Republic troops.
 -- Adventurers note that reading it increases one's scythe skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -2,6 +2,7 @@
 -- Zantetsuken
 -- Wanna bet this is made up?
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

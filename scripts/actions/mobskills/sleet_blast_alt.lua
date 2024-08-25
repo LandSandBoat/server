@@ -6,6 +6,7 @@
 -- Utsusemi/Blink absorb: Wipes shadows
 -- Notes: Used only by Tiamat, Smok and Ildebrann while flying in place of standard attacks
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

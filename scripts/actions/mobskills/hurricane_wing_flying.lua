@@ -7,6 +7,7 @@
 --  Range: 30' radial.
 --  Notes: Used only by Wyrm when in the air. Only use in a dedicated flying skill set.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

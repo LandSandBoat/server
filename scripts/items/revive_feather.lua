@@ -3,6 +3,7 @@
 -- Item: Revive Feather
 -- Status Effect: Reraise
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

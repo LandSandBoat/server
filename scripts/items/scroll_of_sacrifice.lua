@@ -3,6 +3,7 @@
 -- Scroll of Sacrifice
 -- Teaches the white magic Sacrifice
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

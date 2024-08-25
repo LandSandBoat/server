@@ -1,6 +1,7 @@
 -----------------------------------
 -- Mix: Para-b-gone - Removes Paralysis.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

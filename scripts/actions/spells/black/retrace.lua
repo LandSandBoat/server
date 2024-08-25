@@ -2,6 +2,7 @@
 -- Spell: Retrace
 -- Transports player to their Allied Nation. Can cast on allies.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

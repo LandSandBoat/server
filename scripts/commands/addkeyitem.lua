@@ -2,6 +2,7 @@
 -- func: addkeyitem <ID> <player>
 -- desc: Adds a key item to the player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -3,6 +3,7 @@
 -- Venom Bolt Quiver
 -- When used, you will obtain one stack of Venom Bolts
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

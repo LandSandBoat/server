@@ -5,6 +5,7 @@
 -- Type: Magical
 -- Notes: Ultima only.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

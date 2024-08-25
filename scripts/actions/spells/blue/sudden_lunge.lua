@@ -12,6 +12,7 @@
 -- Skillchain Element(s): Detonation
 -- Combos: Store TP
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

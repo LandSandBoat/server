@@ -2,6 +2,7 @@
 -- func: getcraftRank <craft skill or ID> (player)
 -- desc: returns target's RANK of specified craft skill
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -46,6 +47,10 @@ commandObj.onTrigger = function(player, craftName, target)
             player:printToPlayer(string.format('Player named "%s" not found!', target))
             return
         end
+    end
+
+    if not targ then
+        return
     end
 
     player:printToPlayer(string.format('%s\'s current skillID \'%s\' rank: %u', targ:getName(), craftName, targ:getSkillRank(skillID)))

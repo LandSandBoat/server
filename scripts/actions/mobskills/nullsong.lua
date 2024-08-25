@@ -6,6 +6,7 @@
 -- Range: 15' radial
 -- NOTE: Only used if target has 3 or more effects to dispel
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

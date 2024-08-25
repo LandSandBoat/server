@@ -3,6 +3,7 @@
 -- Scroll of Foe Requiem II
 -- Teaches the song Foe Requiem II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

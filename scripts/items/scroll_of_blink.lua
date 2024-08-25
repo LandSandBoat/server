@@ -3,6 +3,7 @@
 -- Scroll of Blink
 -- Teaches the white magic Blink
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

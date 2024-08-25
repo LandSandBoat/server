@@ -2,6 +2,7 @@
 -- Iridal Pierce
 -- Deals Light-elemental damage to targets within area of effect.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

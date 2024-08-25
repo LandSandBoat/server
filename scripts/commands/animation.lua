@@ -2,6 +2,7 @@
 -- func: animation
 -- desc: Sets the players current animation.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

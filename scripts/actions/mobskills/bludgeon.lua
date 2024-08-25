@@ -4,6 +4,7 @@
 --  Description: Delivers a threefold attack. Accuracy varies with TP.
 --  Type: Physical (Blunt)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

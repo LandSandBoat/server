@@ -3,6 +3,7 @@
 -- Item: Fire Feather
 -- Status Effect: Enfire
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

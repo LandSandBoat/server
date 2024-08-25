@@ -3,6 +3,7 @@
 -- Item: Reraiser
 -- Item Effect: +50% HP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

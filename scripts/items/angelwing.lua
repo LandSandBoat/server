@@ -3,6 +3,7 @@
 -- Item: Angelwing
 -- Adds angel wings to the user
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

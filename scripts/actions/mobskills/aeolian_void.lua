@@ -5,6 +5,7 @@
 -- Type: Earth Damage/Enfeebling
 -- Utsusemi/Blink absorb: Ignores shadows
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

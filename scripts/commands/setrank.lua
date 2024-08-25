@@ -2,6 +2,7 @@
 -- func: setrank
 -- desc: Sets the players rank.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

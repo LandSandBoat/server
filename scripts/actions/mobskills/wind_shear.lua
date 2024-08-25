@@ -7,6 +7,7 @@
 --  Range: 10' radial
 --  Notes: The knockback is rather severe. Vulpangue uses an enhanced version that inflicts Weight.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -7,6 +7,7 @@
 --  Range: 15' radial
 --  Notes: Has additional effect of Poison when used by King Vinegarroon.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 local platoonScorpionPoolID  = 3157

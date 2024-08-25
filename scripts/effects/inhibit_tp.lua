@@ -2,6 +2,7 @@
 -- xi.effect.INHIBIT_TP
 -- Reduces TP Gain By a % Factor
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

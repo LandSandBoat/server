@@ -2,6 +2,7 @@
 -- Demoralizing Roar
 -- Description: Inflicts Attack Down (-50%) to players within a 10' area of effect
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

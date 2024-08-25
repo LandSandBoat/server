@@ -7,6 +7,7 @@
 --  Range: Cone
 --  Notes: Burn is 10-30/tic
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -7,6 +7,7 @@
 --  Range: Melee
 -- Special weaponskill unique to Ark Angel GK. Deals ~100-300 damage.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -3,6 +3,7 @@
 -- Dream Hat +1
 -- Dispenses Ginger Cookies
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Item: Lucid Ether II
 -- Item Effect: Restores 500 MP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

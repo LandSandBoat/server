@@ -7,6 +7,7 @@
 -- and when they have reached a certain percentage
 -- of HP (usually 25%).
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

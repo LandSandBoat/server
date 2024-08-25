@@ -2,6 +2,7 @@
 -- Smoke Bomb
 -- Range: 10' cone
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

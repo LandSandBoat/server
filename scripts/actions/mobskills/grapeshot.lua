@@ -4,6 +4,7 @@
 -- Type: Physical
 -- Skillchain Properties: Reverberation/Transfixion
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- xi.effect.PROWESS
 -- Enhanced magic acc. and magic atk
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

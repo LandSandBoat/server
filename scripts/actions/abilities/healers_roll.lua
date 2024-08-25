@@ -24,6 +24,7 @@
 --
 -- Note that this roll will increase potency of cures received, not the potency of the caster's spells
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

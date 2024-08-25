@@ -6,6 +6,7 @@
 -- MP % 13 (cap 95)
 -- MP Recovered While Healing 2
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

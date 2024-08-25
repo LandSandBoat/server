@@ -3,6 +3,7 @@
 -- Scroll of Sage Etude
 -- Teaches the song Sage Etude
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

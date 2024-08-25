@@ -4,6 +4,7 @@
 --  Type: Magical
 --  additional effect : 40hp/tick Poison
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -3,6 +3,7 @@
 --  Item: Purple Drop
 --  Dexterity 5
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

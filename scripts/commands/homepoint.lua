@@ -2,6 +2,7 @@
 -- func: homepoint
 -- desc: Sends the target to their homepoint.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -2,6 +2,7 @@
 -- Ark Guardian: Tarutaru
 -- Begin Ark Angel TT teleport
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

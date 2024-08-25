@@ -7,6 +7,7 @@
 --  Range: 7.0
 --  Notes: Only used by armed BST Mamool Ja
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

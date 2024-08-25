@@ -3,6 +3,7 @@
 -- Scroll of Learned Etude
 -- Teaches the song Learned Etude
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -2,6 +2,7 @@
 -- Memento Mori
 -- Enhances Magic Attack.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- Spell: Goddess's Hymnus
 -- Grants pseudo Reraise III effect.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

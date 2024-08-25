@@ -6,6 +6,7 @@
 -- Duration: 2 hours
 -- Restriction: WHM main only
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

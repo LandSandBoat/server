@@ -2,6 +2,7 @@
 -- Thunderstorm
 -- Ramuh deals lightning damage to target.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

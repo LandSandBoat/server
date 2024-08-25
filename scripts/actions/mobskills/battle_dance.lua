@@ -3,6 +3,7 @@
 --  Description: Delivers an area attack. Additional effect: DEX Down. Duration of effect varies with TP.
 --  Type: Physical (Slashing)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- func: getskill <skill name or ID> <target>
 -- desc: returns target's level of specified skill
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -53,6 +54,10 @@ commandObj.onTrigger = function(player, skillName, target)
             player:printToPlayer(string.format('Player named "%s" not found!', target))
             return
         end
+    end
+
+    if not targ then
+        return
     end
 
     -- Trying to break this wide line in any other more reasonable way results in lua throwing errors.. Parsing bug.

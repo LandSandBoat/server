@@ -7,6 +7,7 @@
 -- Range: Cone gaze
 -- Notes: Only used when standing
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

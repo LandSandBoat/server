@@ -3,6 +3,7 @@
 -- Item: Mana Cloak
 -- Item Effect: Restores 20-35 MP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

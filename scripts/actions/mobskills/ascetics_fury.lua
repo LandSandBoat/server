@@ -3,6 +3,7 @@
 -- Description: Hand To Hand Weapon Skill
 -- Type: Physical
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

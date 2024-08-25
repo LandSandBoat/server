@@ -8,6 +8,7 @@
 --  Range: 20' radial
 --  Notes: Only used by Zirnitra, Turul, and Amhuluk under 50%
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

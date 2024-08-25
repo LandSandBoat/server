@@ -12,6 +12,7 @@
 -- Bursts on Light affects accuracy only
 -- Combos: Beast Killer
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

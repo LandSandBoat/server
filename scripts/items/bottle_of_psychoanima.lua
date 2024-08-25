@@ -3,6 +3,7 @@
 -- Item: Bottle Of Psychoanima
 -- Item Effect: Intimidate
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

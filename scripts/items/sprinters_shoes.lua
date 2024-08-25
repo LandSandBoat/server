@@ -3,6 +3,7 @@
 -- Item: Sprinter's Shoes
 -- Item Effect: Quickening for 60 minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

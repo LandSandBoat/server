@@ -2,6 +2,7 @@
 -- func: entityVisual
 -- desc: push entityVisual packet to player
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

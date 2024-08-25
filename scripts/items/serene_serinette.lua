@@ -3,6 +3,7 @@
 -- Item: Serene Serinette
 -- Item Effect: Change Music
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

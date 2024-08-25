@@ -2,6 +2,7 @@
 -- Saucepan
 -- Force feeds an unsavory dish.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

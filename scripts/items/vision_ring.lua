@@ -4,6 +4,7 @@
 -- Item Effect: ACC+2 RACC+2
 -- Duration: 30 Minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

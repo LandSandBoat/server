@@ -3,6 +3,7 @@
 --  Phaubo
 --  Blinkable 1 hit, plague on hit.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

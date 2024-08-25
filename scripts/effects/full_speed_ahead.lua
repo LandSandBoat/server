@@ -4,6 +4,7 @@
 -----------------------------------
 require('scripts/quests/full_speed_ahead')
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

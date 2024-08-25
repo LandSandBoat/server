@@ -2,6 +2,7 @@
 -- func: crash
 -- desc: force the server process to crash
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -3,6 +3,7 @@
 -- Scroll of Gekka: Ichi
 -- Teaches the ninjutsu Gekka: Ichi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

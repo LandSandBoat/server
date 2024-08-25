@@ -3,6 +3,7 @@
 -- Fancy Top
 -- Dispenses Persikos Snow Cone
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

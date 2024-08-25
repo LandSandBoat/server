@@ -13,6 +13,7 @@
 -- Ranged ATT Cap 150
 -- Poison Resist 5
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

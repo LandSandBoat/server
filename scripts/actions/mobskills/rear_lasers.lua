@@ -2,6 +2,7 @@
 -- Rear Lasers
 -- Fires aft lasers at players behind user. Additional effects: Petrification
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

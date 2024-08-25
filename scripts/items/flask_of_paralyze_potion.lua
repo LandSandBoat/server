@@ -3,6 +3,7 @@
 -- Item: Paralyze Potion
 -- Item Effect: This potion induces paralyze.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

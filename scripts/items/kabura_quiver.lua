@@ -3,6 +3,7 @@
 -- Kabura Quiver
 -- When used, you will obtain one stack of Kabura Arrows
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

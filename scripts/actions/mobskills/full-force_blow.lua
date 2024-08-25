@@ -3,6 +3,7 @@
 -- Deals damage to a single target. Additional effect: Knockback.
 -- 0% TP: ??? / 150% TP: ??? / 300% TP: ???
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

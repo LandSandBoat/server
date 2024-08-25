@@ -3,6 +3,7 @@
 -- Wind Cluster
 -- Turn into a stack of wind crystals
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

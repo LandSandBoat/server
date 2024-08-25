@@ -2,6 +2,7 @@
 -- func: animatesubnpc
 -- desc: Changes the animationSub of the given npc. (For testing purposes.)
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

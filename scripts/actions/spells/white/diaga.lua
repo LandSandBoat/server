@@ -2,6 +2,7 @@
 -- Spell: Diaga
 -- Lowers an enemy's defense and gradually deals light elemental damage.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -3,6 +3,7 @@
 -- Black Mage Die
 -- Teaches the job ability Wizard's Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

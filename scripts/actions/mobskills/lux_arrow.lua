@@ -3,6 +3,7 @@
 -- Trust: Semih Lafihna
 -- Fragmentation/Distortion skillchain properties
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

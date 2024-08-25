@@ -2,6 +2,7 @@
 -- func: delitem
 -- desc: Deletes a single item held by a player, if they have it.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

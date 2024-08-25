@@ -3,6 +3,7 @@
 -- Rabbit Belt
 -- Enchantment: 60Min, Costume - Rarab (brown)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

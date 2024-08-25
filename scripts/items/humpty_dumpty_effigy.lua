@@ -6,6 +6,7 @@
 -- Max HP % 6 (cap 160)
 -- Max MP % 6 (cap 160)
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

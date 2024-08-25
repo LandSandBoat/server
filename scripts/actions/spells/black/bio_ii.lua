@@ -2,6 +2,7 @@
 -- Spell: Bio II
 -- Deals dark damage that weakens an enemy's attacks and gradually reduces its HP.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

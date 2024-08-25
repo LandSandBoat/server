@@ -7,6 +7,7 @@
 --  Range: Less than or equal to 10.0
 --  Notes: Only used by Gulool Ja Ja.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

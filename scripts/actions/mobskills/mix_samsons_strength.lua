@@ -1,6 +1,7 @@
 -----------------------------------
 -- Mix: Samson's Strength - Gives all primary stats +10 for 60 seconds.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Stone 2
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

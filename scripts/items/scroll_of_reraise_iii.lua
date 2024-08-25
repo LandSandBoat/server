@@ -3,6 +3,7 @@
 -- Scroll of Reraise III
 -- Teaches the white magic Reraise III
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

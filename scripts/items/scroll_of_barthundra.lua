@@ -3,6 +3,7 @@
 -- Scroll of Barthundra
 -- Teaches the white magic Barthundra
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

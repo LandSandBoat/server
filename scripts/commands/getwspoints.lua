@@ -2,6 +2,7 @@
 -- func: getwspoints
 -- desc: prints current ws points, optionaly specifying the weapon slot to check (default main)
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

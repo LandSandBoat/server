@@ -3,6 +3,7 @@
 -- Item: kawahori_kabuto
 -- Effect: blindness
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

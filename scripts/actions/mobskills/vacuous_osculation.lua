@@ -5,6 +5,7 @@
 --  Type: Physical
 --  Utsusemi/Blink absorb: 1 shadow
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

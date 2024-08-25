@@ -8,6 +8,7 @@
 -- Bird Killer 12
 -- Resist Paralyze 12
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

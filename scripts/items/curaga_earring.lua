@@ -3,6 +3,7 @@
 -- Item: Curaga Earring
 -- Item Effect: Casts Curaga
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -2,6 +2,7 @@
 -- ID: 6186
 -- Slime Rocket
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

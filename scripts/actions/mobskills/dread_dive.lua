@@ -7,6 +7,7 @@
 -- Range: Melee
 -- Notes: Used instead of Gliding Spike by certain notorious monsters.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

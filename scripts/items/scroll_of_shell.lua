@@ -3,6 +3,7 @@
 -- Scroll of Shell
 -- Teaches the white magic Shell
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

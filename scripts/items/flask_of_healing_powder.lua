@@ -3,6 +3,7 @@
 -- Item: flask_of_healing_powder
 -- Item Effect: Restores 25% of Maximum HP to Party members within 10'
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -2,6 +2,7 @@
 -- func: setgil
 -- desc: Sets the players gil.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

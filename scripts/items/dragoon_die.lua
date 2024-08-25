@@ -3,6 +3,7 @@
 -- Dragoon Die
 -- Teaches the job ability Drachen Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

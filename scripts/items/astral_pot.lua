@@ -4,6 +4,7 @@
 -- Item Effect: Pet Magical Attack +22
 -- Duration 5 Minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
@@ -24,6 +25,11 @@ end
 
 itemObject.onEffectGain = function(target, effect)
     local pet = target:getPet()
+
+    if not pet then
+        return
+    end
+
     pet:addMod(xi.mod.MATT, 22)
 end
 

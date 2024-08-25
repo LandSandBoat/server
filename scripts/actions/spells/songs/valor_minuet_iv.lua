@@ -2,6 +2,7 @@
 -- Spell: Valor Minuet IV
 -- Grants Attack bonus to all allies.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

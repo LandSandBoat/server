@@ -1,6 +1,7 @@
 -----------------------------------
 -- Trust: Sylvie UC
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
@@ -14,6 +15,11 @@ end
 spellObject.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
     local master = mob:getMaster()
+
+    if not master then
+        return
+    end
+
     local mJob   = master:getMainJob()
 
     -- TODO: Nott weaponskill needs implemented and logic added here for Apururu to use at 50% MP at level 50.

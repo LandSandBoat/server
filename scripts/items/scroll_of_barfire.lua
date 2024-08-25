@@ -3,6 +3,7 @@
 -- Scroll of Barfire
 -- Teaches the white magic Barfire
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

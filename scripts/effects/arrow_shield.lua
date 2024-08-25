@@ -2,6 +2,7 @@
 -- xi.effect.ARROW_SHIELD
 -- Blocks all ranged attacks
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -4,6 +4,7 @@
 -- Enchantment: Increases movement speed.
 -- Durration: 60 Mins
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

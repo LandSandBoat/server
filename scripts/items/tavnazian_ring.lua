@@ -3,6 +3,7 @@
 -- Tavnazian Ring
 -- Enchantment: "Teleport-Tavnazia"
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

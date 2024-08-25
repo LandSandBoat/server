@@ -10,6 +10,7 @@
 -- Health Regen While Healing 2
 -- Defense % 12 (cap 60)
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

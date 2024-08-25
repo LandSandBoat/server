@@ -7,6 +7,7 @@
 --  Range: Unknown cone
 --  Notes: Slow is equivalent to Slow II.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

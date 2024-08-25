@@ -3,6 +3,7 @@
 -- Scroll of Silena
 -- Teaches the white magic Silena
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

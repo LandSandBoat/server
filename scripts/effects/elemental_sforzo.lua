@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ELEMENTAL_SFORZO
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

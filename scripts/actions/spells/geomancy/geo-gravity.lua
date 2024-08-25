@@ -2,6 +2,7 @@
 -- Spell: Geo-Gravity
 -- Weighs down enemies within area of effect and lowers their movement speed.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

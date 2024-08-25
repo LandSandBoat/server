@@ -4,6 +4,7 @@
 -- Type: Physical
 -- Skillchain Properties: Fusion/Impaction
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

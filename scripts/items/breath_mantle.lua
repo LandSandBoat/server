@@ -3,6 +3,7 @@
 -- Item: Breath Mantle
 -- Item Effect: HP+18 / Enmity+3
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

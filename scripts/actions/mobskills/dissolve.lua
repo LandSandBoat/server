@@ -6,6 +6,7 @@
 -- Peripheral targets that are hit by this attack will not have their enmity reset.
 -----------------------------------
 
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

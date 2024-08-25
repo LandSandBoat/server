@@ -3,6 +3,7 @@
 -- Scroll of Gold Capriccio
 -- Teaches the song Gold Capriccio
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

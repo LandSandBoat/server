@@ -3,6 +3,7 @@
 -- Scroll of Gain-MND
 -- Teaches the white magic Gain-MND
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -4,6 +4,7 @@
 -- Item Effect: MATK/MACC 50
 -----------------------------------
 
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

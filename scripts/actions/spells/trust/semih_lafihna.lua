@@ -1,6 +1,7 @@
 -----------------------------------
 -- Trust: Semih Lafihna
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

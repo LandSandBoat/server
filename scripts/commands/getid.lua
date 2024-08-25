@@ -2,6 +2,7 @@
 -- func: getid
 -- desc: Prints the ID of the currently selected target under the cursor
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

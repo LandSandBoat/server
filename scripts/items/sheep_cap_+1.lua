@@ -5,6 +5,7 @@
 --  Faerie Apple, Sunflower Seeds, Red Moko Grass, La Theine Cabbage, Boyahda Moss,
 --  Pine Nuts, Beaugreens, Acorn, Dung, Batagreens, and Moko Grass
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

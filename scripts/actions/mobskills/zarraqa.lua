@@ -7,6 +7,7 @@
 --  Range: Unknown
 --  Notes: Used by RNG trolls only.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

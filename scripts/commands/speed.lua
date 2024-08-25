@@ -2,6 +2,7 @@
 -- func: speed
 -- desc: Sets the players movement speed.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -7,6 +7,7 @@
 --  Range: Unknown
 --  Notes: Used only by Medusa.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

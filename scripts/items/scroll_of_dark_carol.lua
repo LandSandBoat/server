@@ -3,6 +3,7 @@
 -- Scroll of Dark Carol
 -- Teaches the song Dark Carol
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

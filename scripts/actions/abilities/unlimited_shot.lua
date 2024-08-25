@@ -5,6 +5,7 @@
 -- Recast Time: 3:00
 -- Duration: 1:00 or One Successful Ranged Attack.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

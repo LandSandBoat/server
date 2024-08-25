@@ -3,6 +3,7 @@
 --  Scroll of Instant ReRaise
 --  Brings you back from the dead~!
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
@@ -14,7 +15,13 @@ itemObject.onItemUse = function(target)
     local duration = 1800
     if target:hasStatusEffect(xi.effect.RERAISE) then
         local effect = target:getStatusEffect(xi.effect.RERAISE)
+
+        if not effect then
+            return
+        end
+
         local oPower = effect:getPower()
+
         if oPower > power then
             target:messageBasic(xi.msg.basic.NO_EFFECT)
         else

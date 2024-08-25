@@ -12,6 +12,7 @@
 -- 100%TP    200%TP    300%TP
 -- 3.00      3.50      4.00
 -----------------------------------
+---@type TWeaponSkill
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
@@ -20,14 +21,14 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ftpMod = { 3.0, 3.5, 4.0 }
     params.str_wsc = 0.3
 
-    local damage, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if damage > 0 and not target:hasStatusEffect(xi.effect.STUN) then
         local duration = (tp / 500) * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0)
         target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
     end
 
-    return tpHits, extraHits, damage
+    return tpHits, extraHits, criticalHit, damage
 end
 
 return weaponskillObject

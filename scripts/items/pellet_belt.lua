@@ -3,6 +3,7 @@
 --   Pellet Belt
 --   When used, you will obtain 12 Pebbles
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

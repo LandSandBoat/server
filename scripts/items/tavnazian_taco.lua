@@ -14,6 +14,7 @@
 -- MP Recovered While Healing 1
 -- Defense Cap 150
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

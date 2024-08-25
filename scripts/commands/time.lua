@@ -2,6 +2,7 @@
 -- func: time
 -- desc: Sets the custom time offset of the CVanaTime instance.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

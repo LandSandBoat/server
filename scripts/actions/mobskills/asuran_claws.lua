@@ -2,6 +2,7 @@
 -- Asuran Claws
 -- Gnole Mobs, only used when standing
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

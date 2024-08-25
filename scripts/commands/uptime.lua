@@ -2,6 +2,7 @@
 -- func: uptime
 -- desc: prints zone uptime
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.DEBILITATION
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 local statsBits =

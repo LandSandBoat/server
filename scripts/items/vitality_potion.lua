@@ -2,6 +2,7 @@
 -- ID: 4203
 -- vitality_potion
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -12,6 +12,7 @@
 -- Skillchain Element(s): Induration/Detonation
 -- Combos: Beast Killer
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

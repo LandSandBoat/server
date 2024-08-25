@@ -3,6 +3,7 @@
 -- Scroll of Tractor
 -- Teaches the black magic Tractor
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

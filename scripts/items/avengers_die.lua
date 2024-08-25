@@ -3,6 +3,7 @@
 -- Avenger's Die
 -- Teaches the job ability Avengers Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

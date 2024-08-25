@@ -4,6 +4,7 @@
 -- Gives the effect of "Stoneskin."
 -- Type: Magical
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- Fire II
 -- Deals fire elemental damage. Damage varies with TP.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

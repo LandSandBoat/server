@@ -8,6 +8,7 @@
 --  Note: There was not a lot of information about this spell available online, so
 --        the initial implementation is relatively basic.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

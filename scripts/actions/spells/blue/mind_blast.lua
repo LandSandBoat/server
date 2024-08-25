@@ -12,6 +12,7 @@
 -- Magic Bursts on: Impaction, Fragmentation, and Light
 -- Combos: Clear Mind
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

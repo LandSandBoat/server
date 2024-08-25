@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Reraise 2
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

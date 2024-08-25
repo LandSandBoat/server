@@ -2,6 +2,7 @@
 -- Sickle Slash
 -- Deals critical damage. Chance of critical hit varies with TP.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 -----------------------------------

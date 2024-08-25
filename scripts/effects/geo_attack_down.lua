@@ -1,6 +1,7 @@
 -----------------------------------
 -- Effect: GEO Attack Down
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

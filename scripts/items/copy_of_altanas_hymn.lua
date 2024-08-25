@@ -5,6 +5,7 @@
 -- The simple lyrics and enchanting meter were said to have soothed his soul.
 -- Adventurers note that reading it increases one's divine magic skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -2,6 +2,7 @@
 -- Grand Fall
 -- Leviathan deals water elemental damage to target.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

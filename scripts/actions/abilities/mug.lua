@@ -4,6 +4,7 @@
 -- Obtained: Thief Level 35
 -- Recast Time: 5:00
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

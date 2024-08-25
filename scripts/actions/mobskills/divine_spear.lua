@@ -3,6 +3,7 @@
 -- Description: Deals Light elemental damage within conal area of effect.
 -- Type: Magical (Light)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

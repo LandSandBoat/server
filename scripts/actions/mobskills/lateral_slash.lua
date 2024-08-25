@@ -7,6 +7,7 @@
 --  Range: Melee
 --  Notes: Reduces defense by 75%.  Can be removed with Monk Job Ability Counterstance.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

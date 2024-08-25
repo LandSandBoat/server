@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.CRIT_HIT_EVASION_DOWN
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -3,6 +3,7 @@
 -- Item: Echo Drops
 -- Item Effect: This potion remedies silence.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -2,6 +2,7 @@
 -- func: setplayermodel <modelid> <slot> <player>
 -- desc: Sets the look of the user or target player based on model id offset and slot (for testing).
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

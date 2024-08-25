@@ -2,6 +2,7 @@
 -- Spell: Gain-AGI
 -- Boosts AGI for the Caster
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

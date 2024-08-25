@@ -3,6 +3,7 @@
 -- Scroll of Sword Madrigal
 -- Teaches the song Sword Madrigal
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

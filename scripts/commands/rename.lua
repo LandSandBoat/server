@@ -3,6 +3,7 @@
 -- desc: Renames target NPC or MOB. Limited to 16 character spaces.
 --       Does not work on players. Does not alter database.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

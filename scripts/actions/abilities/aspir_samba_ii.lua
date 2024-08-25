@@ -6,6 +6,7 @@
 -- TP Cost: 25%
 -- Duration: 1:30
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

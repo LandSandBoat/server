@@ -4,6 +4,7 @@
 -- Item Effect: INT+2 MND+2
 -- Duration: 30 Minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

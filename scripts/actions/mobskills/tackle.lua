@@ -3,6 +3,7 @@
 --  Description: Stuns target. Chance of stunning varies with TP.
 --  Type: Physical
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

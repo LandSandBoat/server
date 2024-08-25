@@ -3,6 +3,7 @@
 -- Kitty Rod
 -- Enchantment: 60Min, Costume - Mithra child (Blue)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

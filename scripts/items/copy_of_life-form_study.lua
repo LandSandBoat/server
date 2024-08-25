@@ -5,6 +5,7 @@
 -- It covers the behavioral patterns and diets of almost every known family of beasts in existence.
 -- Adventurers note that reading it increases one's blue magic skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -7,6 +7,7 @@
 -- Magic 14
 -- Evasion 10
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

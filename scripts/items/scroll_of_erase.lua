@@ -3,6 +3,7 @@
 -- Scroll of Erase
 -- Teaches the white magic Erase
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Scroll of Goddess's Hymnus
 -- Teaches the song Goddess's Hymnus
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

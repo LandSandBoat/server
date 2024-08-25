@@ -2,6 +2,7 @@
 -- func: capskill
 -- desc: Caps a specific skill.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

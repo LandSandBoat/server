@@ -2,6 +2,7 @@
 -- Terror Touch
 -- Additional effect: Weakens attacks. Accuracy varies with TP.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

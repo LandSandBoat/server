@@ -4,6 +4,7 @@
 --  Type: Magical Dark (Element)
 --  Notes: Used by Fe'e in Up in Arms BCNM
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

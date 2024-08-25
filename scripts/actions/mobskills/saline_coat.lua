@@ -8,6 +8,7 @@
 -- Range: Self
 -- Notes: ~50% Magic DEF boost.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

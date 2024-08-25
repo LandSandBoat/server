@@ -3,6 +3,7 @@
 -- Scroll of Utsusemi: Ichi
 -- Teaches the ninjutsu Utsusemi: Ichi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

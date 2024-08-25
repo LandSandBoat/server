@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.DODGE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

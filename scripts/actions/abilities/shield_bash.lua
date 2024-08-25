@@ -5,6 +5,7 @@
 -- Recast Time: 1:00 minute (3:00 for Valoredge version)
 -- Duration: Instant
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

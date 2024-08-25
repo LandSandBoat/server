@@ -5,6 +5,7 @@
 -- and Alphonimile M Aurchiat that became all the rage in San d'Oria after appearing in a popular newspaper.
 -- Adventurers note that reading it increases one's polearm skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

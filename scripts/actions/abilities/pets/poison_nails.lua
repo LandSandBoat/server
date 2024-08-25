@@ -1,6 +1,7 @@
 -----------------------------------
 -- Poison Nails  M=3? guess
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

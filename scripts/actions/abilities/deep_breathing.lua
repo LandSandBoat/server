@@ -5,6 +5,7 @@
 -- Recast Time: 5 minutes
 -- Duration: 0:03:00 or until the next breath is executed
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

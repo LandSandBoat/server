@@ -3,6 +3,7 @@
 -- Consumes a Fire Card to enhance fire-based debuffs. Deals fire-based magic damage
 -- Burn effect: Enhanced DoT and INT-
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -70,7 +71,9 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)
 
             local newEffect = target:getStatusEffect(effectId)
-            newEffect:setStartTime(startTime)
+            if newEffect then
+                newEffect:setStartTime(startTime)
+            end
         end
     end
 

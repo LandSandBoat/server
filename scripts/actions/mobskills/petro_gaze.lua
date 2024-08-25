@@ -6,6 +6,7 @@
 -- Range: Single gaze
 -- Known users: Hecteyes in CoP areas, Sobbing Eyes in Under Observation, Shoggoth
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

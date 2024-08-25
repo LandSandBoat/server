@@ -3,6 +3,7 @@
 -- Teleport ring: Dem
 -- Enchantment: "Teleport-Dem"
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -9,6 +9,7 @@
 -- Player Blue Magic Version uses MaxHP instead of current HP: floor(MaxHP/7)*2
 -- The math for mob version is the same but uses current HP.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

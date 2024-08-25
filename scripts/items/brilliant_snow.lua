@@ -3,6 +3,7 @@
 -- Item: Briliant Snow
 -- Creates a spiral of "snow" effects
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

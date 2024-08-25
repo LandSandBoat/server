@@ -3,6 +3,7 @@
 -- ID 5370
 -- Unlocks back and waist equipment
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
@@ -19,6 +20,11 @@ end
 
 itemObject.onItemUse = function(target)
     local encumbrance = target:getStatusEffect(xi.effect.ENCUMBRANCE_I)
+
+    if not encumbrance then
+        return
+    end
+
     local power = encumbrance:getPower()
     local newpower = bit.band(power, bit.bnot(0x8400))
     target:delStatusEffectSilent(xi.effect.ENCUMBRANCE_I)

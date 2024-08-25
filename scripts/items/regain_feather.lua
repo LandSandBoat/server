@@ -4,6 +4,7 @@
 -- Status Effect: Medicated, 2 hours
 -- Instantly restors HP/MP full TP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

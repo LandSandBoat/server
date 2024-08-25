@@ -8,6 +8,7 @@
 -- You also subsequently cannot kill yourself using this JA.
 -- The increase in Life Cycle potency from Job points is applied in the same set as equipment bonuses.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -3,6 +3,7 @@
 --  Description: Creates shadow images that each absorb a single attack directed at you.
 --  Type: Magical (Wind)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -3,6 +3,7 @@
 -- Scroll of Absorb-VIT
 -- Teaches the black magic Absorb-VIT
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

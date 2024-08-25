@@ -3,6 +3,7 @@
 -- Consumes a Wind Card to enhance wind-based debuffs. Deals wind-based magic damage
 -- Choke Effect: Enhanced DoT and VIT-
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -79,7 +80,9 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)
 
             local newEffect = target:getStatusEffect(effectId)
-            newEffect:setStartTime(startTime)
+            if newEffect then
+                newEffect:setStartTime(startTime)
+            end
         end
     end
 

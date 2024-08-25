@@ -3,6 +3,7 @@
 -- plate_of_indi-haste
 -- Teaches INDI-HASTE
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

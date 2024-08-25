@@ -3,6 +3,7 @@
 -- Item: Chocobo Chair
 -- Item Effect: Grant Chocobo chair key item
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 local keyItemId = xi.ki.CHOCOBO_CHAIR

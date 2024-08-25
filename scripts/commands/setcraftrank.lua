@@ -2,6 +2,7 @@
 -- func: setcraftRank <craft skill or ID> <craft rank> <target>
 -- desc: sets target's RANK of specified craft skill
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -57,6 +58,10 @@ commandObj.onTrigger = function(player, craftName, tier, target)
             player:printToPlayer(string.format('Player named "%s" not found!', target))
             return
         end
+    end
+
+    if not targ then
+        return
     end
 
     targ:setSkillRank(skillID, craftRank)

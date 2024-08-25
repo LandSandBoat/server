@@ -7,6 +7,7 @@
 -- Strength -1
 -- MP % 10 (cap 90)
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

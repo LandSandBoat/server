@@ -2,6 +2,7 @@
 -- Chemical_Bomb
 -- Description: slow + elegy
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

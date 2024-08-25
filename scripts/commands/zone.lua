@@ -2,6 +2,7 @@
 -- func: zone
 -- desc: Teleports a player to the given zone.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

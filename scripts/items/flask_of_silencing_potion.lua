@@ -3,6 +3,7 @@
 -- Item: Silencing Potion
 -- Item Effect: This potion induces silence.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

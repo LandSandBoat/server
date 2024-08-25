@@ -3,6 +3,7 @@
 -- Scroll of Hyoton: Ichi
 -- Teaches the ninjutsu Hyoton: Ichi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

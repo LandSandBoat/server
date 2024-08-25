@@ -3,6 +3,7 @@
 -- Earth Card Case
 -- When used, you will obtain one stack of Earth Cards
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

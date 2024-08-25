@@ -3,6 +3,7 @@
 -- Scroll of Jubaku: Ichi
 -- Teaches the ninjutsu Jubaku: Ichi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

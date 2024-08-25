@@ -3,6 +3,7 @@
 -- Item: Blinding Potion
 -- Item Effect: This potion induces blindness.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

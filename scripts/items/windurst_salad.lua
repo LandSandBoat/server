@@ -9,6 +9,7 @@
 -- Ranged ACC % 8
 -- Ranged ACC Cap 10
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

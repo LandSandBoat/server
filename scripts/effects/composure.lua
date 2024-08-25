@@ -3,6 +3,7 @@
 -- Increases accuracy and lengthens recast time. Enhancement effects gained through white
 -- and black magic you cast on yourself last longer.
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

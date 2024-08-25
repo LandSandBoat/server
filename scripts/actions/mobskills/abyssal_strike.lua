@@ -5,6 +5,7 @@
 --  Type: Physical
 --  Notes: zeid and shadows of rage move
 ---------------------------------------------1
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

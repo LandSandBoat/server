@@ -3,6 +3,7 @@
 -- Scroll of Phalanx II
 -- Teaches the white magic Phalanx II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 --  Description: Deals magical damage to enemies in an area of effect upon landing.
 --  Further Notes:
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

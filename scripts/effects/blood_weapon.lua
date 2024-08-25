@@ -2,6 +2,7 @@
 -- xi.effect.BLOOD_WEAPON
 -- Does not overwritte any existing "Enspell" effect, including "Soul Enslavement"
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

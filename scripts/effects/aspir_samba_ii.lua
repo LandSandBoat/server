@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ASPIR_SAMBA_II
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

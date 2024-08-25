@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.MAZURKA
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

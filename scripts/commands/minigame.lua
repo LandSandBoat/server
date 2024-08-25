@@ -2,6 +2,7 @@
 -- func: minigame
 -- desc: Opens a menu to allow you to quickly test minigames.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

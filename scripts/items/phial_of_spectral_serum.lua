@@ -3,6 +3,7 @@
 -- Phial of spectral Serum
 -- Enchantment: 60Min, Costume - ghost
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

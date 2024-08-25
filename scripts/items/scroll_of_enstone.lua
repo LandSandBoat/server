@@ -3,6 +3,7 @@
 -- Scroll of Enstone
 -- Teaches the white magic Enstone
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

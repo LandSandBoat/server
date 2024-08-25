@@ -3,6 +3,7 @@
 -- Warp Cudgel
 -- Transports the user to their Home Point
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

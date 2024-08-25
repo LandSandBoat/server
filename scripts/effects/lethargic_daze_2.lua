@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.LETHARGIC_DAZE_2
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

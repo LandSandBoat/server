@@ -5,6 +5,7 @@
 -- Notes: Attack Down effect is 50%.
 -- Duration: Three minutes
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

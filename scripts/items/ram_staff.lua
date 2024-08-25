@@ -3,6 +3,7 @@
 -- Ram Staff
 -- Enchantment: "Retrace" (Southern San d'Oria[S])
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

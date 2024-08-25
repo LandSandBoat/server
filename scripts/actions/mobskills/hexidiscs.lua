@@ -7,6 +7,7 @@
 --  Range: Unknown cone
 --  Notes: Only used in "ball" form.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 -----------------------------------

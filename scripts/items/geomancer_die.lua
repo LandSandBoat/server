@@ -3,6 +3,7 @@
 -- Geomancer Die
 -- Teaches the job ability Naturalists Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

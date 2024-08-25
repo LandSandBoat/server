@@ -3,6 +3,7 @@
 -- Ouka Ranman
 -- Surrounds the user (and space in front of them) with falling cherry blossoms
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

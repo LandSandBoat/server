@@ -3,6 +3,7 @@
 -- Item: Poison Potion
 -- Item Effect: Poison 1HP / Removes 60 HP over 180 seconds
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

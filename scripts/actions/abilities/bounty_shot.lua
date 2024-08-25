@@ -4,6 +4,7 @@
 -- Obtained: RNG Level 87
 -- Recast Time: 00:01:00
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

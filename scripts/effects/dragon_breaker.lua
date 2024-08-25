@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.DRAGON_BREAKER
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 -- This is a debuff, delMod on gain

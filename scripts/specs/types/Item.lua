@@ -1,0 +1,13 @@
+---@meta
+
+---@class TItem
+---@field onItemCheck? fun(target: CBaseEntity, item: CItem?, param: integer?, caster: CBaseEntity?): (integer?, integer?, integer?)
+---@field onItemUse? fun(target: CBaseEntity, user: CBaseEntity?, item: CItem): nil
+---@field onItemUnequip? fun(PUser: CBaseEntity, PItem: CItem): nil
+---@field onItemEquip? fun(PUser: CBaseEntity, PItem: CItem): nil
+---@field onItemDrop? fun(PUser: CBaseEntity, PItem: CItem): nil
+---@field onEffectGain? fun(target: CBaseEntity, effect: CStatusEffect): nil
+---@field onEffectLose? fun(target: CBaseEntity, effect: CStatusEffect): nil
+---@field onEffectTick? fun(target: CBaseEntity, effect: CStatusEffect): nil
+---@field onFurniturePlaced? fun(player: CBaseEntity): nil
+---@field onFurnitureRemoved? fun(player: CBaseEntity): nil

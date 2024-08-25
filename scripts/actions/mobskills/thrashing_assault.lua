@@ -2,6 +2,7 @@
 -- Thrashing Assault
 -- Physical damage + Defense Down. Absorbed by 4 shadows.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

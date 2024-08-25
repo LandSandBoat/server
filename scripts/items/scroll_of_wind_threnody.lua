@@ -3,6 +3,7 @@
 -- Scroll of Wind Threnody
 -- Teaches the song Wind Threnody
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.YONIN
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect) --power=30 initially, subpower=20 for enmity

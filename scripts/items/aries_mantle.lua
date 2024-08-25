@@ -3,6 +3,7 @@
 -- Item: Aries Mantle
 -- Enchantment: Sleep
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

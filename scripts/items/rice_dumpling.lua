@@ -14,6 +14,7 @@
 -- Accuracy 5
 -- Resist Paralyze +4
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

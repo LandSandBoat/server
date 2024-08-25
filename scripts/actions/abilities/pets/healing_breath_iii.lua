@@ -1,6 +1,7 @@
 -----------------------------------
 -- Healing Breath III
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

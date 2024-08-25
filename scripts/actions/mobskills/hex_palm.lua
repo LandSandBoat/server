@@ -7,6 +7,7 @@
 -- Range: Front cone
 -- Notes: Used only when wielding no weapon.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

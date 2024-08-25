@@ -2,6 +2,7 @@
 -- Inspirit
 -- Restores HP to nearby allies.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

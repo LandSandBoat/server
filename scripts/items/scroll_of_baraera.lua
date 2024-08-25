@@ -3,6 +3,7 @@
 -- Scroll of Baraera
 -- Teaches the white magic Baraera
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

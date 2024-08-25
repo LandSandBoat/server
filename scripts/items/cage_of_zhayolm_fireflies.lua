@@ -2,6 +2,7 @@
 -- ID: 5345
 -- Item: Zhayolm Fireflies
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

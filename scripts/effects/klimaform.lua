@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.KLIMAFORM
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -2,6 +2,7 @@
 -- Spell: Chocobo Mazurka
 -- Gives party members enhanced movement
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

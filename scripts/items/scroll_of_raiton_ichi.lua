@@ -3,6 +3,7 @@
 -- Scroll of Raiton: Ichi
 -- Teaches the ninjutsu Raiton: Ichi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -9,6 +9,7 @@
 -- Notes: Used only by Merrows equipped with a spear.
 -- If they lost their spear, they'll use Hysteric Barrage instead.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

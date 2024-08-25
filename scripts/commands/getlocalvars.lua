@@ -2,6 +2,7 @@
 -- Func: getlocalvars
 -- Desc: Gets all local vars of a target
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

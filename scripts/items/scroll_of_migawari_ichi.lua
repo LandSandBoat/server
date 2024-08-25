@@ -3,6 +3,7 @@
 -- Scroll of Migawari: Ichi
 -- Teaches the ninjutsu Migawari: Ichi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

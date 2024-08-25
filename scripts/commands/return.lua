@@ -2,6 +2,7 @@
 -- func: return <player>
 -- desc: Warps GM or target player to their previous zone
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

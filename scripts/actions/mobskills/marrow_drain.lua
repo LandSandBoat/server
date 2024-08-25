@@ -2,6 +2,7 @@
 -- Marrow Drain
 -- Steals an enemy's MP. Ineffective against undead.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

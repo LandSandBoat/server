@@ -3,6 +3,7 @@
 -- Adaman Bolt Quiver
 -- When used, you will obtain one stack of Adaman Bolts
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

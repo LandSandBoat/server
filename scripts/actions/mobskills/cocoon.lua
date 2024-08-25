@@ -2,6 +2,7 @@
 -- Cocoon
 -- Enhances defense.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

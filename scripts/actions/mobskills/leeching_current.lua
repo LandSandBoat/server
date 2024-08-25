@@ -3,6 +3,7 @@
 -- Description: Steals HP with a water current from targets in an area of effect.
 -- Type: Magical (Water)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

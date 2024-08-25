@@ -7,6 +7,7 @@
 --  Range: Melee
 --  Notes: Used only when wielding no weapon, and only when the second weapon is not broken.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

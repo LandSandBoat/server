@@ -3,6 +3,7 @@
 -- plate_of_indi-precision
 -- Teaches INDI-PRECISION
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

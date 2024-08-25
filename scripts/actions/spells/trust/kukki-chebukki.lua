@@ -1,6 +1,7 @@
 -----------------------------------
 -- Trust: Kukki-Chebukki
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

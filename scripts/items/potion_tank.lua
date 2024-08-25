@@ -3,6 +3,7 @@
 -- Potion Tank
 -- When used, you will obtain one Potion
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

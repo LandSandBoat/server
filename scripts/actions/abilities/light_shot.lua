@@ -3,6 +3,7 @@
 -- Consumes a Light Card to enhance light-based debuffs. Additional effect: Light-based Sleep
 -- Dia Effect: Defense Down Effect +5% and DoT + 1
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -69,7 +70,9 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)
 
         local newEffect = target:getStatusEffect(effectId)
-        newEffect:setStartTime(startTime)
+        if newEffect then
+            newEffect:setStartTime(startTime)
+        end
     end
 
     if target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, duration) then

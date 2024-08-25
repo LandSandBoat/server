@@ -3,6 +3,7 @@
 -- Scroll of Inundation
 -- Teaches the white Inundation
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

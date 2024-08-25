@@ -3,6 +3,7 @@
 -- ID 5371
 -- Unlocks ranged and ammo equipment
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

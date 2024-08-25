@@ -2,6 +2,7 @@
 -- func: gotoname
 -- desc: Go to given mob or npc by name
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -66,6 +67,10 @@ commandObj.onTrigger = function(player, pattern, index)
     end
 
     local zone = player:getZone()
+    if not zone then
+        return
+    end
+
     local unfilteredEntities = zone:queryEntitiesByName(pattern)
     local entities = getValidEntities(unfilteredEntities)
 

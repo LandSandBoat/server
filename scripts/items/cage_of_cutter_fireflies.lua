@@ -3,6 +3,7 @@
 -- Cutter Fireflies
 -- Transports the user to Arrapago Reef
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

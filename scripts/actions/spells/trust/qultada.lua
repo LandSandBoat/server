@@ -1,6 +1,7 @@
 -----------------------------------
 -- Trust: Qultada
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

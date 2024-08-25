@@ -9,6 +9,7 @@
 -- Intelligence -8
 -- Demon Killer 10
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

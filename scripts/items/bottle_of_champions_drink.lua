@@ -4,6 +4,7 @@
 -- Item Effect: Haste (Magic) 18% - CRITHITRATE 5%
 -----------------------------------
 
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

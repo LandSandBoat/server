@@ -6,6 +6,7 @@
 -- HP + 30 VIT + 4 (Pet & Master)
 -- Accuracy/Ranged Accuracy +15% (cap 74 on master, cap 114 on pet)
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.AFFLATUS_MISERY
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

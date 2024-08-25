@@ -2,6 +2,7 @@
 -- Snowball
 -- Deals Ice damage in an area of effect.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

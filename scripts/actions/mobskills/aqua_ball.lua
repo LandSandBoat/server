@@ -2,6 +2,7 @@
 -- Aqua Ball
 -- Deals Water damage in a splash area of effect. Additional effect: STR Down
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

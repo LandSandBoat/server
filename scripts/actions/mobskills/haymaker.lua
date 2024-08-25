@@ -6,6 +6,7 @@
 --  Range: Front cone
 --  Notes: Only used by Gurfurlur the Menacing.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- func: setmerits <amount> <player>
 -- desc: Sets the target players merit count.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

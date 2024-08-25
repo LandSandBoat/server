@@ -3,6 +3,7 @@
 -- Item: Ephramadian Throne
 -- Item Effect: Grant Ephramadian throne key item
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 local keyItemId = xi.ki.EPHRAMADIAN_THRONE

@@ -4,6 +4,7 @@
 -- Item Effect: This potion remedies status ailments.
 -- Works on paralysis, silence, blindness, poison, and disease.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

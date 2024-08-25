@@ -12,6 +12,7 @@
 -- Magic Bursts on: Reverberation, Distortion, and Darkness
 -- Combos: Resist Gravity
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

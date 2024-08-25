@@ -3,6 +3,7 @@
 -- Description: Lowers the defense and magical defense of enemies within range.
 -- Type: Magical (Dark)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

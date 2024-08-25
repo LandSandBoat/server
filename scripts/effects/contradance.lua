@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.CONTRADANCE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

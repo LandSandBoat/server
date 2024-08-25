@@ -7,6 +7,7 @@
 --  Range: Unknown radial
 --  Notes: Poison can take around 10HP/tick
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

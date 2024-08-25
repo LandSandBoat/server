@@ -3,6 +3,7 @@
 -- Description: Additional effect: Poison. Chance of effect varies with TP.
 -- Type: Physical (Piercing)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

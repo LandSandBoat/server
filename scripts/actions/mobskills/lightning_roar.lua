@@ -3,6 +3,7 @@
 -- Emits the roar of an impact event, dealing damage in a fan-shaped area of effect. Lightning damage
 -- Ignores Shadows
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

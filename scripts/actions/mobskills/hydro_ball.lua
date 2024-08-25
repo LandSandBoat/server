@@ -5,6 +5,7 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Notes: STR reduced by 15%.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

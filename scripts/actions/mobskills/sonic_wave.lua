@@ -2,6 +2,7 @@
 -- Sonic Wave
 -- Reduces defense of enemies in an area of effect.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -5,6 +5,7 @@
 --  Utsusemi/Blink absorb: 2-3 shadows
 --  Range: Unknown cone
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

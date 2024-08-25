@@ -3,6 +3,7 @@
 -- Scroll of Light Threnody
 -- Teaches the song Light Threnody
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

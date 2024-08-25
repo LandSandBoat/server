@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.WARDING_CIRCLE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

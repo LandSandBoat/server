@@ -4,6 +4,7 @@
 -- Type: Physical
 -- Notes: Retail testing shows this is more like 45% to 55% of the targets current HP
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

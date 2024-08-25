@@ -6,6 +6,7 @@
 -- Duration (Charging): Until MP stored is 25% of Max HP or until HP = 50%
 -- Duration (Charged): 2 hours
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

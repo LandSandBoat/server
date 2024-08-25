@@ -7,6 +7,7 @@
 --  Range: AoE 15'
 --  Notes: Used only by certain NM's when their primary sword isn't broken.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

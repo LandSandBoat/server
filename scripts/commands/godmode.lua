@@ -3,6 +3,7 @@
 -- desc: Toggles god mode on the player, granting them several special abilities.
 -- Pass variable of 1 to command to enable a 'soft' god mode.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

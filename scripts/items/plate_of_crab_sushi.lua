@@ -8,6 +8,7 @@
 -- Accuracy % 13 (cap 64)
 -- Resist Sleep +1
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

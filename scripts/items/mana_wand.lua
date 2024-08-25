@@ -4,6 +4,7 @@
 -- Item Effect: MPHEAL +2
 -- Duration: 30 seconds
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

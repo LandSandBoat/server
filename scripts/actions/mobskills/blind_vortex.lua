@@ -7,6 +7,7 @@
 -- Range: Melee
 -- Notes: Used by some notorious monsters in place of Scratch.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

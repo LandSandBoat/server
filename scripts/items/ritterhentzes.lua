@@ -3,6 +3,7 @@
 -- Item: ritter
 -- Item Effect: Blaze Spikes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

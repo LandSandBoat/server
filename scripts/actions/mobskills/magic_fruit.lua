@@ -3,6 +3,7 @@
 -- Description: Restores HP for the target party member.
 -- Type: Magical (Light)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

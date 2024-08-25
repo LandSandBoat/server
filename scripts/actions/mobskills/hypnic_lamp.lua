@@ -4,6 +4,7 @@
 -- Type: Enfeebling
 -- Notes: Can't use this if its eyestalks are destroyed.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

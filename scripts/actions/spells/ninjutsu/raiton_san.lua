@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Raiton: San
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -3,6 +3,7 @@
 -- plate_of_indi-frailty
 -- Teaches INDI-FRAILTY
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

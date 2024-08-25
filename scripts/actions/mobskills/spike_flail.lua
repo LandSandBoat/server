@@ -2,6 +2,7 @@
 -- Spike Flail
 -- Deals extreme damage in a threefold attack to targets behind the user.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

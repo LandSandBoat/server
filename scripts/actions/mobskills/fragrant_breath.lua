@@ -7,6 +7,7 @@
 -- Range: Conal up to 12 or 20 depending on which NM was killed
 -- Notes: Only used by Cirrate Christelle
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

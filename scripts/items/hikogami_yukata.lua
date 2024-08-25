@@ -2,6 +2,7 @@
 -- ID: 11861
 -- hikogami_yukata
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

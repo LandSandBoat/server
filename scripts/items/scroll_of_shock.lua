@@ -3,6 +3,7 @@
 -- Scroll of Shock
 -- Teaches the black magic Shock
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

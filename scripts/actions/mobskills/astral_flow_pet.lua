@@ -2,6 +2,7 @@
 -- Astral Flow
 -- make existing pet use astral flow skill
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 local function petInactive(pet)
@@ -15,15 +16,14 @@ local function petInactive(pet)
 end
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    -- must have pet
-    if not mob:hasPet() then
-        return 1
-    end
-
     local pet = mob:getPet()
 
     -- pet must be an avatar, and active
-    if pet:getEcosystem() ~= 5 or petInactive(pet) then
+    if
+        not pet or
+        pet:getEcosystem() ~= 5 or
+        petInactive(pet)
+    then
         return 1
     end
 
@@ -45,6 +45,10 @@ local petAstralFlowAbility =
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local pet = mob:getPet()
+
+    if not pet then
+        return
+    end
 
     skill:setMsg(xi.msg.basic.USES)
 

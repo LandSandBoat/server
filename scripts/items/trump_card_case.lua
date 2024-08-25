@@ -3,6 +3,7 @@
 -- Lua By Reefed406
 -- ItemID : 5870
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

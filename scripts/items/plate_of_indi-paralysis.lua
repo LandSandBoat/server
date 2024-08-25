@@ -3,6 +3,7 @@
 -- plate_of_indi-paralysis
 -- Teaches INDI-PARALYSIS
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -2,6 +2,7 @@
 -- func: gotoid
 -- desc: Go to given mob or npc ID
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

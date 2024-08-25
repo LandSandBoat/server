@@ -3,6 +3,7 @@
 -- Item: Hydra Doublet
 -- Item Effect: gives refresh
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -6,6 +6,7 @@
 -- Duration: 0:00:15 - 0:00:35
 -- Info from https://www.bg-wiki.com/bg/Cover
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

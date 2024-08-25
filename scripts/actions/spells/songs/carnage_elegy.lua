@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Carnage Elegy
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

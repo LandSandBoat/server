@@ -1,6 +1,7 @@
 -----------------------------------
 -- Mix: Panacea-1 - Removes anything a Panacea can remove.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

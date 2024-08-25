@@ -2,6 +2,7 @@
 -- func: immortal <player>
 -- desc: Sets a target to be unkillable
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

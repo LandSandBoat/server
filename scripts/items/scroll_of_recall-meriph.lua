@@ -3,6 +3,7 @@
 -- Scroll of Recall-Meriph
 -- Teaches the white magic Recall-Meriph
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

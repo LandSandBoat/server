@@ -3,6 +3,7 @@
 -- Scroll of Enaero
 -- Teaches the white magic Enaero
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

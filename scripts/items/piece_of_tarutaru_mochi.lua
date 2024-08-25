@@ -3,6 +3,7 @@
 -- Piece of Tarutaru Mochi
 -- Enchantment: 60Min, Costume - Tarutaru child (male)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

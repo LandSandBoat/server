@@ -9,6 +9,7 @@
 --     : but will produce scary looking warnings in
 --     : the log.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

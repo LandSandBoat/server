@@ -3,6 +3,7 @@
 -- Scroll of Tornado II
 -- Teaches the black magic Tornado II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

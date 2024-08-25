@@ -2,6 +2,7 @@
 -- ID: 5412
 -- scapegoat
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
@@ -14,6 +15,11 @@ itemObject.onItemUse = function(target)
 
     if target:hasStatusEffect(xi.effect.RERAISE) then
         local effect = target:getStatusEffect(xi.effect.RERAISE)
+
+        if not effect then
+            return
+        end
+
         local oPower = effect:getPower()
 
         if oPower > power then

@@ -3,6 +3,7 @@
 -- Meifu Goma
 -- A spinning firework appears on the ground and sprays sparks in a circle
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

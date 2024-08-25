@@ -3,6 +3,7 @@
 -- Scroll of Barsilence
 -- Teaches the white magic Barsilence
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

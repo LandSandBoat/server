@@ -6,6 +6,7 @@
 -- Modeled after our cure_ii.lua, which was modeled after the below reference
 -- Shamelessly stolen from http://members.shaw.ca/pizza_steve/cure/Cure_Calculator.html
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

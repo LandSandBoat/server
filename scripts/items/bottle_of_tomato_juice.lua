@@ -3,6 +3,7 @@
 -- Item: Tomato Juice
 -- Item Effect: Restores 60 MP over 180 seconds.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

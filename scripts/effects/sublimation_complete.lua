@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SUBLIMATION_COMPLETE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

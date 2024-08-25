@@ -3,6 +3,7 @@
 -- Description: Damage varies with TP. Strikes a single target with a spike. Additional effect: Knockback + Stun
 -- Type: Physical (Piercing)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

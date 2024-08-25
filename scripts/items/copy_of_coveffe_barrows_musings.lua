@@ -4,6 +4,7 @@
 -- A collection of thoughts scribbled out by Ferreous Coffin on his visit to Coveffe Barrows.
 -- Adventurers note that reading it increases one's healing magic skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

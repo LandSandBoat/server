@@ -1,6 +1,7 @@
 -----------------------------------
 -- Concentric Pulse
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -9,6 +10,11 @@ end
 
 abilityObject.onPetAbility = function(target, pet, skill)
     local master             = pet:getMaster()
+
+    if not master then
+        return
+    end
+
     local masterEquippedHead = master:getEquipID(xi.slot.HEAD)
     local dmgBoost           = master:getJobPointLevel(xi.jp.CONCENTRIC_PULSE_EFFECT)
     local dmg                = pet:getHP()

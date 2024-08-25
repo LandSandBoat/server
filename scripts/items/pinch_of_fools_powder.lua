@@ -3,6 +3,7 @@
 -- Item: pinch_of_fools_powder
 -- Item Effect: When applied, grants UDMGMAGIC -10000 to party members in range for 60s
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

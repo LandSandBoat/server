@@ -2,6 +2,7 @@
 -- Spell: Meteor
 -- Deals non-elemental damage to an enemy.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -3,6 +3,7 @@
 -- Scroll of Regen IV
 -- Teaches the white magic Regen IV
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

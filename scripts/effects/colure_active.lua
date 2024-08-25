@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.COLURE_ACTIVE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

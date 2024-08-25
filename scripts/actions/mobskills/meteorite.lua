@@ -2,6 +2,7 @@
 --  meteorite
 --  Description: Carbuncle deals Light damage to an enemy.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

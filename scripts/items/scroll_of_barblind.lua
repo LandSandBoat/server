@@ -3,6 +3,7 @@
 -- Scroll of Barblind
 -- Teaches the white magic Barblind
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

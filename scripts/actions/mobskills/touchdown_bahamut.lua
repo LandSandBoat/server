@@ -3,6 +3,7 @@
 --  Description: Deals magical damage to enemies in an area of effect.
 --  Further Notes: Bahamut can use this as a regular move at will.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

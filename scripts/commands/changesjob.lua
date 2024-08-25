@@ -2,6 +2,7 @@
 -- func: changesjob
 -- desc: Changes the players current subjob.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

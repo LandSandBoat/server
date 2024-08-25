@@ -4,6 +4,7 @@
 -- Item Effect: VIT +3
 -- Duration: 60 seconds
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

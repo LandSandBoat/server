@@ -9,6 +9,7 @@
 -- HP Recovered While Healing 3
 -- MP Recovered While Healing 1
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

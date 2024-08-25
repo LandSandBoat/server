@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ENDARK
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

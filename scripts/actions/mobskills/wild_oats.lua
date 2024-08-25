@@ -3,6 +3,7 @@
 --  Description: Additional effect: Vitality Down. Duration of effect varies on TP.
 --  Type: Physical (Piercing)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

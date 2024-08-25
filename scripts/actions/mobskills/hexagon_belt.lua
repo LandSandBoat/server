@@ -2,6 +2,7 @@
 -- Hexagon Belt
 -- Enhances defense by 20%.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- func: addWeaponSkillPoints <slot> <points> (player)
 -- desc: Adds weapon skill points to an equipped item.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

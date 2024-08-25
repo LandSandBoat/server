@@ -2,6 +2,7 @@
 -- Spell: Gold Capriccio
 -- Enhances resistance against petrification for party members within the area of effect.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.DOUBLE_UP_CHANCE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -7,6 +7,7 @@
 -- Aquan Killer 12
 -- Sleep Resist 10
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Item: bottle_of_sprinters_drink
 -- Item Effect: Grants Flee for 60s
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

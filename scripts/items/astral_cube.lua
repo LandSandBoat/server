@@ -3,6 +3,7 @@
 -- Item: Astral Cube
 -- Item Effect: Grant Astral cube key item
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 local keyItemId = xi.ki.ASTRAL_CUBE
