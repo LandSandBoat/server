@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.EMBOLDEN
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 -- these functions are intentionally blank. See scripts/globals/spells/spell_enhancing.lua

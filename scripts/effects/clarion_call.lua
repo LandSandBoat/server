@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.CLARION_CALL
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

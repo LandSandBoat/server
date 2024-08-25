@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.DIVINE_EMBLEM
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

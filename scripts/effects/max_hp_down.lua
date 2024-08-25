@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.MAX_HP_DOWN
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

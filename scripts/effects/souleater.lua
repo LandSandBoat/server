@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SOULEATER
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

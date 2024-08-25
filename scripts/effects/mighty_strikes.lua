@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.MIGHTY_STRIKES
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

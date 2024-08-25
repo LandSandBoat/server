@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SHIVAS_FAVOR
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

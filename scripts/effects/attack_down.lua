@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ATTACK_DOWN
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

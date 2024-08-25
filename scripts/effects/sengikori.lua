@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SENGIKORI
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

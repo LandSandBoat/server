@@ -3,6 +3,7 @@
 -- Tier > 0 signals this is a bio that doesn't break sleep
 -- See mobskills/nightmare.lua for full explanation
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

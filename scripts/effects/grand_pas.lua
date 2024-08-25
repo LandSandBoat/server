@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.GRAND_PAS
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

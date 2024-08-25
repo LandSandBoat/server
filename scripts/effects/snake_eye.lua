@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SNAKE_EYE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

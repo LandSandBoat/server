@@ -3,6 +3,7 @@
 -- Allows you to counterattack but reduces movement speed.
 -- Unlike counter, grants TP like a regular melee attack.
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

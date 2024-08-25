@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.BUILDING_FLOURISH
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

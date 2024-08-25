@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.HOLY_CIRCLE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

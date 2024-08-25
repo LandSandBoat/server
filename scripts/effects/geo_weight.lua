@@ -1,6 +1,7 @@
 -----------------------------------
 -- Effect: Geo-Weight
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

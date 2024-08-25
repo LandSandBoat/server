@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.WEAKENED_DAZE_4
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

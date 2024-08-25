@@ -2,6 +2,7 @@
 -- xi.effect.HEALING
 -- Activated through the /heal command
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

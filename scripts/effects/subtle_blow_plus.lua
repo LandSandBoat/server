@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SUBTLE_BLOW_PLUS
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

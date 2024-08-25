@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.RAPTURE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

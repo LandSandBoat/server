@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ABYSSEA_AGI
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

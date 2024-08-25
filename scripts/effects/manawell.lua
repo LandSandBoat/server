@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.MANAWELL
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

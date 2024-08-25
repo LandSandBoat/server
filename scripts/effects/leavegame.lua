@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.LEAVEGAME
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

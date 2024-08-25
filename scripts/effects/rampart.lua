@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.RAMPART
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

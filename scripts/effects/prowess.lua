@@ -2,6 +2,7 @@
 -- xi.effect.PROWESS
 -- From GoV
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

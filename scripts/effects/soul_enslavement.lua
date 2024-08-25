@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SOUL_ENSLAVEMENT
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

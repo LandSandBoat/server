@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.CONSUME_MANA
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

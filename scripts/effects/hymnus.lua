@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.HYMNUS
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

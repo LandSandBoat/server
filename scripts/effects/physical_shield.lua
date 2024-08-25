@@ -12,6 +12,7 @@
 --  1 - DMG Reduction applies to Physical Damage, Physical WS/TP Moves, and certain Magical TP Moves
 --  2 - DMG Reduction applies to Physical Damage (but not WS/TP Moves, specific to Carnal Incense)
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

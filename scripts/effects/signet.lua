@@ -8,6 +8,7 @@
 --   Bonus experience earned in smaller parties
 --   Increased defense and evasion against attacks from your auto-attack target when even match or lower
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

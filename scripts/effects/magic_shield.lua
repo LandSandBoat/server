@@ -11,6 +11,7 @@
 --  0 Standard Magic Shield (adds magic immunity)
 --  1 Fake Magic Shield (does not resist non-damage spells)
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ENFIRE_II
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

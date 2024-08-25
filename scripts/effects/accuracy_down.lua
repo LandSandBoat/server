@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ACCURACY_DOWN
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

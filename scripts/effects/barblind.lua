@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.BARBLIND
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

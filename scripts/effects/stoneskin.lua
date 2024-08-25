@@ -2,6 +2,7 @@
 -- xi.effect.STONESKIN
 -- Absorbs a certain amount of damage from physical and magical attacks.
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

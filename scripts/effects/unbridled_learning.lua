@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.UNBRIDLED_LEARNING
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

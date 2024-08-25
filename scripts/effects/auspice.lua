@@ -4,6 +4,7 @@
 -- SubPower: Tracks Subtle Blow Bonus
 -- Tier: Used for Enspell Calculation
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

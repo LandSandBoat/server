@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.mod.COVER_EFFECT
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

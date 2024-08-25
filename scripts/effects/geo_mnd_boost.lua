@@ -1,6 +1,7 @@
 -----------------------------------
 -- Effect: GEO MND Boost
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

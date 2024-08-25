@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.NEGATE_AMNESIA
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

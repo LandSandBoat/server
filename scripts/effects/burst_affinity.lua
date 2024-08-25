@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.BURST_AFFINITY
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

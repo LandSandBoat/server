@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.COPY_IMAGE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

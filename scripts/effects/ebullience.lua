@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.EBULLIENCE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

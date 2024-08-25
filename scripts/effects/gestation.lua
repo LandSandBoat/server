@@ -16,6 +16,7 @@
 -- - Wait for the effect to wear off
 -- - Remove manually
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 local boostAmount = 50 -- +50% movement speed

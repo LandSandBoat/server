@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.DIVINE_CARESS
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.GALLANTS_ROLL
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
