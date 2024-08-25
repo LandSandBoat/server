@@ -24,6 +24,7 @@ return {
     ['Morjean']           = { event = 601 },
     ['Nouveil']           = { event = 574 },
     ['Odyssean_Passage']  = { messageSpecial = ID.text.NOTHING_HAPPENS },
+    ['Olbergieut']        = { event = 612 },
     ['Pellimie']          = { text = ID.text.PELLIMIE_DIALOG },
     ['Pepigort']          = { text = ID.text.PEPIGORT_DIALOG },
     ['Phaviane']          = { text = ID.text.PHAVIANE_DIALOG },

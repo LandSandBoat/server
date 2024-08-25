@@ -53,6 +53,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         COULLENE_DIALOG               = 11261, -- Goddess above, deliver us to Paradise!
         WILL_PROVIDE_PITTANCE         = 11277, -- I will provide you with <item> for a pittance of <number> gil.
         OLBERGIEUT_DIALOG             = 11303, -- Friar Faurbellant is on retreat at the Crag of Holla. Please give <item> to him.
+        OLBERGIEUT_DIALOG_II          = 11305, -- Friars spend every day in ascetic training. Greet them kindly; it will inspire them to strive ever harder.
         ABEAULE_DIALOG_HOME           = 11359, -- Amaura makes her home on Watchdog Alley. If you can't find her, ask someone along the way. I'll be waiting here!
         ABEAULE_DIALOG_THANKS         = 11361, -- You've been a great help, again. I don't know how to thank you!
         GUILERME_DIALOG               = 11375, -- Behold Chateau d'Oraguille, the greatest fortress in the realm!
