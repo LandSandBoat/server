@@ -158,7 +158,7 @@ namespace battleutils
     int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYSICAL_ATTACK_TYPE physicalAttackType, int32 damage, bool isBlocked,
                              uint8 slot, uint16 tpMultiplier, CBattleEntity* taChar, bool giveTPtoVictim, bool giveTPtoAttacker, bool isCounter = false,
                              bool isCovered = false, CBattleEntity* POriginalTarget = nullptr);
-    int32 TakeWeaponskillDamage(CCharEntity* PAttacker, CBattleEntity* PDefender, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType, uint8 slot,
+    int32 TakeWeaponskillDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType, uint8 slot,
                                 bool primary, float tpMultiplier, uint16 bonusTP, float targetTPMultiplier);
     int32 TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 lastSkillDamage, CBattleEntity* taChar);
     int32 TakeSpellDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType);
@@ -202,7 +202,7 @@ namespace battleutils
 
     uint16 doSoulEaterEffect(CCharEntity* m_PChar, uint32 damage);
     uint16 doConsumeManaEffect(CCharEntity* m_PChar);
-    int32  getOverWhelmDamageBonus(CCharEntity* m_PChar, CBattleEntity* PDefender, int32 damage);
+    int32  getOverWhelmDamageBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage);
 
     void  TransferEnmity(CBattleEntity* PHateReceiver, CBattleEntity* PHateGiver, CMobEntity* PMob, uint8 percentToTransfer);
     uint8 getBarrageShotCount(CCharEntity* PChar);
