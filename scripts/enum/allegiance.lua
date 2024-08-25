@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@enum allegiance
+---@enum xi.allegiance
 xi.allegiance =
 {
     MOB       = 0,

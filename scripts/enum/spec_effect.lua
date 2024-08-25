@@ -1,6 +1,6 @@
 xi = xi or {}
 
----@enum specEffect
+---@enum xi.specEffect
 xi.specEffect =
 {
     NONE           = 0x00,

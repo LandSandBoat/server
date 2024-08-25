@@ -4,7 +4,7 @@
 -----------------------------------
 xi = xi or {}
 
----@enum aoeRadius
+---@enum xi.aoeRadius
 xi.aoeRadius =
 {
     ATTACKER = 1,

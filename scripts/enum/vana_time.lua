@@ -4,7 +4,7 @@ xi = xi or {}
 -- See: https://www.bg-wiki.com/ffxi/Vana%27diel_Time
 local secondsPerTick = 2.4
 
----@enum vanaTime
+---@enum xi.vanaTime
 xi.vanaTime =
 {
     YEAR  = 518400 * secondsPerTick,

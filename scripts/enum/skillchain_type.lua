@@ -1,7 +1,7 @@
 xi = xi or {}
 xi.skillchainType = xi.skillchainType or {}
 
----@enum skillchainType
+---@enum xi.skillchainType
 xi.skillchainType =
 {
     NONE          =  0, -- Lv0 None

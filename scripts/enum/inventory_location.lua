@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@enum inventoryLocation
+---@enum xi.inventoryLocation
 xi.inventoryLocation =
 {
     INVENTORY        = 0,

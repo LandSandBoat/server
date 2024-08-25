@@ -1,6 +1,6 @@
 xi = xi or {}
 
----@enum job
+---@enum xi.job
 xi.job =
 {
     NONE =  0,

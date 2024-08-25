@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@enum title
+---@enum xi.title
 xi.title =
 {
     FODDERCHIEF_FLAYER                        = 1,

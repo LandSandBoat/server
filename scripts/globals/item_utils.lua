@@ -7,7 +7,7 @@ xi = xi or {}
 ---@class xi.itemUtils
 xi.itemUtils = {}
 
----@enum removableEffects
+---@enum xi.itemUtils.removableEffects
 xi.itemUtils.removableEffects =
 {
     xi.effect.PARALYSIS,

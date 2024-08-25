@@ -10,7 +10,7 @@ xi = xi or {}
 --
 -- DO NOT USE THIS FOR CUSTOM THINGS, IT WILL GET CLOBBERED BY UPSTREAM DEVS.
 
----@enum uniqueEvent
+---@enum xi.uniqueEvent
 xi.uniqueEvent =
 {
     EKOKOKO_INTRODUCTION = 0,

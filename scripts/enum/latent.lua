@@ -1,6 +1,6 @@
 xi = xi or {}
 
----@enum latent
+---@enum xi.latent
 xi.latent =
 {
     HP_UNDER_PERCENT         = 0,  -- hp less than or equal to % - PARAM: HP PERCENT

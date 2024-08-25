@@ -10,7 +10,7 @@
 -----------------------------------
 xi = xi or {}
 
----@enum mod
+---@enum xi.mod
 xi.mod =
 {
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!

@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@enum petName
+---@enum xi.petName
 xi.petName =
 {
     -- AZURE         = 1,

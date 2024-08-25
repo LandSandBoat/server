@@ -1,6 +1,6 @@
 xi = xi or {}
 
----@enum language
+---@enum xi.language
 xi.language =
 {
     JAPANESE = 0x01,

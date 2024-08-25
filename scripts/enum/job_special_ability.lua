@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@enum jobSpecialAbility
+---@enum xi.jobSpecialAbility
 xi.jobSpecialAbility =
 {
     MIGHTY_STRIKES      = 688,

@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@enum aoeType
+---@enum xi.aoeType
 xi.aoeType =
 {
     NONE      = 0,
