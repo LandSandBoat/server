@@ -62,7 +62,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(260) --Reminder for Wonder Wands
     elseif wonderWands == xi.questStatus.QUEST_COMPLETED then
         if player:getCharVar('SecondRewardVar') == 1 then
-            player:startEvent(267) --Initiates second reward ifWonder Wands has been completed.
+            player:startEvent(267) --Initiates second reward if Wonder Wands has been completed.
         end
     end
 -- End Wonder Wands Section
