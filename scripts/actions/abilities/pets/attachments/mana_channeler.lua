@@ -1,6 +1,7 @@
 -----------------------------------
 -- Attachment: Mana Channeler
 -----------------------------------
+---@type TAttachment
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet)
