@@ -2617,7 +2617,7 @@ end
 function CBaseEntity:clearEnmityForEntity(PEntity)
 end
 
----@param effectID integer
+---@param effectID integer|CStatusEffect
 ---@param power number
 ---@param tick number
 ---@param duration number
@@ -2625,7 +2625,7 @@ end
 ---@param subPower integer?
 ---@param tier integer?
 ---@return boolean
----@overload fun(effect: CStatusEffect): boolean
+---@overload fun(effectID: CStatusEffect): boolean
 function CBaseEntity:addStatusEffect(effectID, power, tick, duration, subType, subPower, tier)
 end
 
