@@ -61,7 +61,10 @@ spellObject.onMobSpawn = function(mob)
     -- Checks masters job, adjusts samba type if master has a healer main job.
     for i = 1, #healingJobs do
         local master  = mob:getMaster()
-        if master:getMainJob() == healingJobs[i] then
+        if
+            master and
+            master:getMainJob() == healingJobs[i]
+        then
             mob:addSimpleGambit(ai.t.SELF, ai.c.NO_SAMBA, ai.r.JA, 0, ai.s.SPECIFIC, xi.ja.HASTE_SAMBA)
         end
     end
