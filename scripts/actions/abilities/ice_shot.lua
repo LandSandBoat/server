@@ -3,6 +3,7 @@
 -- Consumes a Ice Card to enhance ice-based debuffs. Deals ice-based magic damage
 -- Frost Effect: Enhanced DoT and AGI-
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

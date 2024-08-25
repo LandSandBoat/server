@@ -5,6 +5,7 @@
 -- Recast Time: 1:30
 -- Duration: Instant
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 local idStrengths =

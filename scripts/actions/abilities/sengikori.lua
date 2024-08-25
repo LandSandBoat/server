@@ -5,6 +5,7 @@
 -- Recast Time: 00:03:00
 -- Duration: 0:01:00 or until next Weapon Skill.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

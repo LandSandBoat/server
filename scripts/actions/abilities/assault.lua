@@ -4,6 +4,7 @@
 -- Obtained: Summoner Level 1
 -- Recast Time: 10 sec
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

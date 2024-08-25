@@ -3,6 +3,7 @@
 -- Consumes a Earth Card to enhance earth-based debuffs. Deals earth-based magic damage
 -- Rasp Effect: Enhanced DoT and DEX-, Slow Effect +10%
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

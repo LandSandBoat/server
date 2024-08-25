@@ -3,6 +3,7 @@
 -- Consumes a Thunder Card to enhance lightning-based debuffs. Deals lightning-based magic damage
 -- Shock Effect: Enhanced DoT and MND-
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

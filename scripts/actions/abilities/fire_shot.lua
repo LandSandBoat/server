@@ -3,6 +3,7 @@
 -- Consumes a Fire Card to enhance fire-based debuffs. Deals fire-based magic damage
 -- Burn effect: Enhanced DoT and INT-
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

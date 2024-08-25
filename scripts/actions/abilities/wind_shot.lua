@@ -3,6 +3,7 @@
 -- Consumes a Wind Card to enhance wind-based debuffs. Deals wind-based magic damage
 -- Choke Effect: Enhanced DoT and VIT-
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -6,6 +6,7 @@
 -- Recast Time: 00:05
 -- Duration: First Step lasts 1 minute, each following Step extends its current duration by 30 seconds.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

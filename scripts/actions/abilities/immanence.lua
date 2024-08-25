@@ -4,6 +4,7 @@
 -- Obtained: Scholar Level 87
 -- Duration: 1 Black Magic Spell or 60 seconds, whichever occurs first.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

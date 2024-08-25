@@ -5,6 +5,7 @@
 -- Recast Time: 01:00
 -- Duration: instant
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 -- TODO: find out what checks can result in being unable to use ability on the pet --

@@ -6,6 +6,7 @@
 -- Duration: Instant
 -- Special: Only available if Dragoon is your main class.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

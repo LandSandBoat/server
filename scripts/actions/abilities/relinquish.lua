@@ -3,6 +3,7 @@
 -----------------------------------
 require('scripts/globals/monstrosity')
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

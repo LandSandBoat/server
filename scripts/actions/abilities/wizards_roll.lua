@@ -24,6 +24,7 @@
 --
 -- If the Corsair is a lower level than the player receiving Wizard's Roll, the +MAB will be reduced
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

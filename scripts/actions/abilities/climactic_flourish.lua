@@ -6,6 +6,7 @@
 -- Duration: 00:01:00
 -- Cost: 1-5 Finishing Move charges
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

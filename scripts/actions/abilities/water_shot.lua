@@ -3,6 +3,7 @@
 -- Consumes a Water Card to enhance water-based debuffs. Deals water-based magic damage
 -- Drown Effect: Enhanced DoT and STR-
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -5,6 +5,7 @@
 -- TP Required: 50%
 -- Recast Time: 00:10
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
