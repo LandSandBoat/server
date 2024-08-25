@@ -18,7 +18,10 @@ abilityObject.onUseAbility = function(player, target, ability)
     -- Reset the Call Wyvern Ability.
     local pet = player:getPet()
 
-    if pet:getHP() == pet:getMaxHP() then
+    if
+        pet and
+        pet:getHP() == pet:getMaxHP()
+    then
         player:resetRecast(xi.recast.ABILITY, 163) -- call_wyvern
     end
 

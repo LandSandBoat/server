@@ -71,7 +71,9 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)
 
             local newEffect = target:getStatusEffect(effectId)
-            newEffect:setStartTime(startTime)
+            if newEffect then
+                newEffect:setStartTime(startTime)
+            end
         end
     end
 

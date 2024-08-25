@@ -16,7 +16,10 @@ abilityObject.onUseAbility = function(player, target, ability)
     -- Reset the Activate ability.
     local pet = player:getPet()
 
-    if pet:getHP() == pet:getMaxHP() then
+    if
+        pet and
+        pet:getHP() == pet:getMaxHP()
+    then
         player:resetRecast(xi.recast.ABILITY, 205) -- activate
     end
 
