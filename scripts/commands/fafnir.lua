@@ -3,6 +3,7 @@
 -- desc: Summon a fightable Fafnir (no loot)
 -- note:
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

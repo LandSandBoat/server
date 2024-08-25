@@ -2,6 +2,7 @@
 -- func: provokeall
 -- desc: Makes all enemies in the current zone target you and sets their TP to 3000.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

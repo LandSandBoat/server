@@ -2,6 +2,7 @@
 -- func: hide
 -- desc: Hides the GM from other players.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

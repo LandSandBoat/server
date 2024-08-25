@@ -2,6 +2,7 @@
 -- Func: setquestvar
 -- Desc: Sets a quest variable on the target player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -2,6 +2,7 @@
 -- func: chocoboraising
 -- desc: Shows a custom debug menu for interacting with and debugging chocobo raising
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

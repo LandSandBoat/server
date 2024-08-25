@@ -2,6 +2,7 @@
 -- func: setjobpoints <amount> <player>
 -- desc: Sets the target players job points count.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

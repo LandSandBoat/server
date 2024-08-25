@@ -2,6 +2,7 @@
 -- func: costume2
 -- desc: Sets the players current costume2.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

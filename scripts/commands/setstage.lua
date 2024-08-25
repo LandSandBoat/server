@@ -2,6 +2,7 @@
 -- func: setStage
 -- desc: changes stage inside an instance
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

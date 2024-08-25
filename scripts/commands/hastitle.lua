@@ -2,6 +2,7 @@
 -- func: hastitle
 -- desc: Check if player already has a title.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

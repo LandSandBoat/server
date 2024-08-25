@@ -2,6 +2,7 @@
 -- func: exec
 -- desc: Allows you to execute a Lua string directly from chat.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

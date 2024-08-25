@@ -2,6 +2,7 @@
 -- func: setProgress
 -- desc: changes progress inside an instance
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

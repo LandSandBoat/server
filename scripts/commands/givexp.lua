@@ -2,6 +2,7 @@
 -- func: givexp <amount> <player>
 -- desc: Gives the GM or target player experience points.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

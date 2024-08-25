@@ -2,6 +2,7 @@
 -- func: checkvar <varType> <varName>
 -- desc: checks player or server variable and returns result value.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

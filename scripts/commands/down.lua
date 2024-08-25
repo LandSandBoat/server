@@ -2,6 +2,7 @@
 -- func: down <optional number> <optional target>
 -- desc: Alters vertical coordinate
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

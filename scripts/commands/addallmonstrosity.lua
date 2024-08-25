@@ -2,6 +2,7 @@
 -- func: addallmonstrosity
 -- desc: Adds all species, instincts, and variants for monstrosity
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

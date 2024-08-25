@@ -2,6 +2,7 @@
 -- func: togglegm
 -- desc: Toggles a GMs nameflags/icon.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

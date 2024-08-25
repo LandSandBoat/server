@@ -2,6 +2,7 @@
 -- func: spawnmob
 -- desc: Spawns a mob.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

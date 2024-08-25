@@ -2,6 +2,7 @@
 -- func: inject
 -- desc: Injects the given packet data.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

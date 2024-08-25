@@ -2,6 +2,7 @@
 -- func: cnation <target> <campaign allegiance>
 -- desc: check or alter target characters campaign allegiance
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

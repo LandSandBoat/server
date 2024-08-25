@@ -2,6 +2,7 @@
 -- func: logoff
 -- desc: Logs the target player off by force.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -2,6 +2,7 @@
 -- func: givebonanzapearl <player> <number> <eventnum>
 -- desc: Gives a bonanza pearl with <number> for <eventnum>
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

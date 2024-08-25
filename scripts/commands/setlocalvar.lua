@@ -2,6 +2,7 @@
 -- func: setlocalvar <varName> <player/mob/npc> <ID>
 -- desc: set player npc or mob local variable and value.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

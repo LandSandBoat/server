@@ -2,6 +2,7 @@
 -- func: addtempitem
 -- desc: Adds a temp item to the players inventory.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

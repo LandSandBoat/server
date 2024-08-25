@@ -3,6 +3,7 @@
 -- desc: Used to manipulate a mob's nameflags for testing.
 --       MUST either target a mob first or else specify a Mob ID.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

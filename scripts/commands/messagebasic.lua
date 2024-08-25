@@ -2,6 +2,7 @@
 -- func: messagebasic
 -- desc: Injects a message basic packet.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

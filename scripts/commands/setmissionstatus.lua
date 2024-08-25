@@ -4,6 +4,7 @@
 -----------------------------------
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -4,6 +4,7 @@
 -- A) The given zone
 -- B) another player
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

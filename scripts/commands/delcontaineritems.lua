@@ -2,6 +2,7 @@
 -- func: delcontaineritems
 -- desc: Deletes all items in a player's specified container, if they have any.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

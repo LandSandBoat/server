@@ -2,6 +2,7 @@
 -- func: build
 -- desc: Print the server's current build information
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -2,6 +2,7 @@
 -- func: pettp
 -- desc: Sets the players pet tp.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

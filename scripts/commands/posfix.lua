@@ -2,6 +2,7 @@
 -- func: posfix
 -- desc: Resets a targets account session and warps them to Jeuno.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

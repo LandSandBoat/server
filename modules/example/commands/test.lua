@@ -2,6 +2,7 @@
 -- func: test
 -- desc: A test command module
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

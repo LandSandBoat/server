@@ -2,6 +2,7 @@
 -- func: getenmity
 -- desc: prints the target mob's current CE and VE towards you
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

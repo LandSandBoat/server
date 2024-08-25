@@ -2,6 +2,7 @@
 -- func: getcraftRank <craft skill or ID> (player)
 -- desc: returns target's RANK of specified craft skill
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -2,6 +2,7 @@
 -- func: checkinstance
 -- desc: Displays Progress and Stage inside instance
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

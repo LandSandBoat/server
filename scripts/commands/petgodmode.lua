@@ -2,6 +2,7 @@
 -- func: petgodmode
 -- desc: Toggles god mode on the player's pet, granting them several special abilities.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

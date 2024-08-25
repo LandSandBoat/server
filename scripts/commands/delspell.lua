@@ -2,6 +2,7 @@
 -- func: delspell <spellID> <player>
 -- desc: Removes a spell from the players spell list.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

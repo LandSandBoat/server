@@ -2,6 +2,7 @@
 -- func: reloadinteractions
 -- desc: Reloads the interaction framework
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

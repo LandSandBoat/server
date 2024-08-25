@@ -5,6 +5,7 @@
 -- !garrison stop  (player) stops the garrison (if any) currently running in the player's zone
 -- !garrison win (player) win the garrison (if any) currently running in the player's zone
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

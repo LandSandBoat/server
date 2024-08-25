@@ -3,6 +3,7 @@
 -- desc: Sends the target player to jail. (Mordion Gaol)
 -- note: Only works if the target is on the same map process (cluster) as the GM or the target is offline
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

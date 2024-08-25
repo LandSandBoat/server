@@ -2,6 +2,7 @@
 -- func: getmobaction
 -- desc: Prints mob's current action to the command user.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

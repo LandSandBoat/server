@@ -2,6 +2,7 @@
 -- func: !checkinteraction (handlerName)
 -- desc:
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

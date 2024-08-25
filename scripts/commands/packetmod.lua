@@ -2,6 +2,7 @@
 -- func: packetmod
 -- desc: Adds a modifier for S->C packets
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

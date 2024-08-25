@@ -2,6 +2,7 @@
 -- func: setskill <skill name or ID> <skill level> <target>
 -- desc: sets target's level of specified skill
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

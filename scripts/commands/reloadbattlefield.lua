@@ -2,6 +2,7 @@
 -- func: reloadbattlefield
 -- desc: Attempt to reload specified battlefield lua without a restart.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

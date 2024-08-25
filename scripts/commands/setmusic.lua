@@ -2,6 +2,7 @@
 -- func: setmusic <typeID> <songID>
 -- desc: Temporarily changes music played by users client
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

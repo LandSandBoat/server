@@ -4,6 +4,7 @@
 -- note: This is for reloading the underlying navmesh object, is not intended
 --       to do anything to runtime pathing
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

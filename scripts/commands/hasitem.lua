@@ -2,6 +2,7 @@
 -- func: hasitem
 -- desc: Checks if a player has a specific item
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

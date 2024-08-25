@@ -2,6 +2,7 @@
 -- func: gotoname
 -- desc: Go to given mob or npc by name
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

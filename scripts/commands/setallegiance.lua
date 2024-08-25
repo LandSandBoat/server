@@ -2,6 +2,7 @@
 -- func: setallegiance
 -- desc: Sets the players allegiance.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

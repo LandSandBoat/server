@@ -2,6 +2,7 @@
 -- func: getskill <skill name or ID> <target>
 -- desc: returns target's level of specified skill
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

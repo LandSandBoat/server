@@ -2,6 +2,7 @@
 -- func: checklocalvar <varName> { 'player'/'mob'/'npc' } { name/ID }
 -- desc: checks player or npc local variable and returns result value.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
