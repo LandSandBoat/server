@@ -2394,7 +2394,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    int32 TakeWeaponskillDamage(CCharEntity* PAttacker, CBattleEntity* PDefender, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType, uint8 slot,
+    int32 TakeWeaponskillDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType, uint8 slot,
                                 bool primary, float tpMultiplier, uint16 bonusTP, float targetTPMultiplier)
     {
         auto* weapon   = GetEntityWeapon(PAttacker, (SLOTTYPE)slot);
@@ -4471,14 +4471,14 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    int32 getOverWhelmDamageBonus(CCharEntity* m_PChar, CBattleEntity* PDefender, int32 damage)
+    int32 getOverWhelmDamageBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage)
     {
-        if (m_PChar->objtype == TYPE_PC) // Some mobskills use TakeWeaponskillDamage function, which calls upon this one.
+        if (auto PChar = dynamic_cast<CCharEntity*>(PAttacker)) // Some mobskills use TakeWeaponskillDamage function, which calls upon this one.
         {
             // must be in front of mob
-            if (infront(m_PChar->loc.p, PDefender->loc.p, 64))
+            if (infront(PChar->loc.p, PDefender->loc.p, 64))
             {
-                uint8 meritCount = m_PChar->PMeritPoints->GetMeritValue(MERIT_OVERWHELM, m_PChar);
+                uint8 meritCount = PChar->PMeritPoints->GetMeritValue(MERIT_OVERWHELM, PChar);
                 float tmpDamage  = static_cast<float>(damage);
 
                 switch (meritCount)
