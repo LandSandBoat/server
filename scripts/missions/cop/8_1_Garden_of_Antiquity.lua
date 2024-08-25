@@ -60,37 +60,41 @@ local function getRubiousMask(player)
 end
 
 local rubiousOnTrigger = function(player, npc)
-    local npcName    = npc:getName()
-    local nmDefeated = utils.mask.getBit(mission:getLocalVar(player, 'nmDefeated'), towerOption[npcName])
-    local nmOffset   = altaieuID.mob.RUAERN + (npc:getID() - altaieuID.npc.RUBIOUS_CRYSTAL) * 3
+    local npcName = npc:getName()
+    local towerIndex = towerOption[npcName]  -- Identifies which Rubious Crystal we're dealing with
+    local nmDefeated = utils.mask.getBit(mission:getLocalVar(player, 'nmDefeated'), towerIndex)
+    local nmOffset = altaieuID.mob.RUAERN + (npc:getID() - altaieuID.npc.RUBIOUS_CRYSTAL) * 3
 
-    if
-        mission:getVar(player, 'Status') == 1 and
-        not getMissionStatusBit(player, towerOption[npcName])
-    then
-        if
-            not nmDefeated and
-            npcUtil.popFromQM(player, npc, { nmOffset, nmOffset + 1, nmOffset + 2 }, { hide = 0 })
-        then
+    -- Check if player is on the right mission step
+    if mission:getVar(player, 'Status') ~= 1 then
+        return
+    end
+
+    -- Check if NM is not defeated, then attempt to spawn
+    if not nmDefeated then
+        local spawned = npcUtil.popFromQM(player, npc, {nmOffset, nmOffset + 1, nmOffset + 2}, {hide = 0})
+        if spawned then
             for _, member in ipairs(player:getAlliance()) do
                 mission:setLocalVar(member, 'triggerNpc', npc:getID())
                 mission:setLocalVar(member, 'nmOffset', nmOffset)
             end
-
             return mission:messageSpecial(altaieuID.text.OMINOUS_SHADOW)
-        elseif nmDefeated then
-            setMissionStatusBit(player, towerOption[npcName])
-            local completedTowers = utils.mask.countBits(getRubiousMask(player), 3)
+        end
+    end
 
-            if completedTowers == 1 then
-                return mission:progressEvent(161, towerOption[npcName])
-            elseif completedTowers == 3 then
-                return mission:progressEvent(163)
-            else
-                for towerNum = 2, 0, -1 do
-                    if not getMissionStatusBit(player, towerNum) then
-                        return mission:progressEvent(162, towerNum)
-                    end
+    -- Check if the NM has been defeated and the cutscene hasn't been shown yet
+    if nmDefeated and not getMissionStatusBit(player, towerIndex) then
+        setMissionStatusBit(player, towerIndex)  -- Mark this tower as completed
+        local completedTowers = utils.mask.countBits(getRubiousMask(player), 3)
+
+        if completedTowers == 1 then
+            return mission:progressEvent(161, towerIndex)
+        elseif completedTowers == 3 then
+            return mission:progressEvent(163)
+        else
+            for towerNum = 2, 0, -1 do
+                if not getMissionStatusBit(player, towerNum) then
+                    return mission:progressEvent(162, towerNum)
                 end
             end
         end
@@ -126,24 +130,15 @@ mission.sections =
             ['Ruaern'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    local nmOffset    = mission:getLocalVar(player, 'nmOffset')
-                    local numDefeated = mission:getLocalVar(player, 'numDefeated')
+                    local nmOffset = mission:getLocalVar(player, 'nmOffset')
+                    local numDefeated = mission:getLocalVar(player, 'numDefeated') + 1
+                    mission:setLocalVar(player, 'numDefeated', numDefeated)
 
-                    if nmOffset > 0 then
-                        for nmId = nmOffset, nmOffset + 2 do
-                            if mob:getID() == nmId then
-                                numDefeated = numDefeated + 1
-                            end
-                        end
-
-                        if numDefeated == 3 then
-                            local npcObj      = GetNPCByID(mission:getLocalVar(player, 'triggerNpc'))
-                            local currentMask = mission:getLocalVar(player, 'nmDefeated')
-                            mission:setLocalVar(player, 'nmDefeated', utils.mask.setBit(currentMask, towerOption[npcObj:getName()], true))
-                            mission:setLocalVar(player, 'numDefeated', 0)
-                        else
-                            mission:setLocalVar(player, 'numDefeated', numDefeated)
-                        end
+                    if numDefeated == 3 then
+                        local npcObj = GetNPCByID(mission:getLocalVar(player, 'triggerNpc'))
+                        local currentMask = mission:getLocalVar(player, 'nmDefeated')
+                        mission:setLocalVar(player, 'nmDefeated', utils.mask.setBit(currentMask, towerOption[npcObj:getName()], true))
+                        mission:setLocalVar(player, 'numDefeated', 0)
                     end
                 end,
             },
