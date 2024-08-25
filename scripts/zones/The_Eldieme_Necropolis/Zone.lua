@@ -14,6 +14,9 @@ zoneObject.onInitialize = function(zone)
     if qm1 then
         qm1:setPos(unpack(eldiemeID.npc.QM1_POS[math.random(1, 4)]))
     end
+
+    SetServerVariable('[Escort]Cannau', 0) -- Set escort for hire servervariable to 0
+    zone:registerTriggerArea(1, 420, 10, -120, 0, 0, 0) -- Escort for Hire
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

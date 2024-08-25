@@ -7151,6 +7151,11 @@ INSERT INTO `mob_pools` VALUES (7072,'Magicked_Bones_dagger','Magicked_Bones_dag
 -- Missing NM mob_pools
 INSERT INTO `mob_pools` VALUES (7073,'Vasiliceratops','Vasiliceratops',257,0x0000B90800000000000000000000000000000000,1,1,5,240,100,1024,0,0,0,2,0,0,7,131,0,0,0,0,0,257,257);
 
+-- Escort for Hire NPCS
+INSERT INTO `mob_pools` VALUES (7074,'Wanzo-Unzozo','Wanzo-Unzozo',153,0x01000205111011201130034003507B6000700000,2,2,1,480,100,0,0,0,0,64,0,62,0,0,0,0,0,2,0,0,153);
+INSERT INTO `mob_pools` VALUES (7075,'Cannau','Cannau',145,0x010004043910392039300F400F50BD6019700000,7,7,3,240,100,0,0,0,0,64,0,62,0,0,0,0,0,2,0,0,145);
+INSERT INTO `mob_pools` VALUES (7076,'Olavia','Olavia',149,0x010002020A101A201B301B401B50AD6000700000,6,6,2,200,100,0,0,0,0,64,0,62,0,0,0,0,0,2,0,0,149);
+
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date

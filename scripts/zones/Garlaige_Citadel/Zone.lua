@@ -35,6 +35,9 @@ zoneObject.onInitialize = function(zone)
     GetMobByID(ID.mob.SERKET):setRespawnTime(math.random(900, 10800))
 
     xi.treasure.initZone(zone)
+
+    SetServerVariable('[Escort]Wanzo', 0) -- Set escort for hire servervariable to 0
+    zone:registerTriggerArea(30, -380, 10, 398, 0, 0, 0)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -56,24 +59,26 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    local triggerAreaID = triggerArea:GetTriggerAreaID()
-    local leverSet = math.floor(triggerAreaID / 9)                      -- The set of levers player is standing on (0, 1, 2)
-    local gateId   = ID.npc.BANISHING_GATE_OFFSET + (9 * leverSet) -- The ID of the related gate
+    if triggerArea:GetTriggerAreaID() ~= 30 then
+        local triggerAreaID = triggerArea:GetTriggerAreaID()
+        local leverSet = math.floor(triggerAreaID / 9)                      -- The set of levers player is standing on (0, 1, 2)
+        local gateId   = ID.npc.BANISHING_GATE_OFFSET + (9 * leverSet) -- The ID of the related gate
 
-    -- Logic when standing on the lever.
-    GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + triggerAreaID):setAnimation(xi.anim.OPEN_DOOR)
+        -- Logic when standing on the lever.
+        GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + triggerAreaID):setAnimation(xi.anim.OPEN_DOOR)
 
-    -- If all 4 levers of a set are down, open related gate for 30 seconds.
-    if
-        GetNPCByID(gateId):getAnimation() == xi.anim.CLOSE_DOOR and -- Avoid spamming.
+        -- If all 4 levers of a set are down, open related gate for 30 seconds.
+        if
+            GetNPCByID(gateId):getAnimation() == xi.anim.CLOSE_DOOR and -- Avoid spamming.
 
-        GetNPCByID(gateId + 1):getAnimation() == xi.anim.OPEN_DOOR and
-        GetNPCByID(gateId + 2):getAnimation() == xi.anim.OPEN_DOOR and
-        GetNPCByID(gateId + 3):getAnimation() == xi.anim.OPEN_DOOR and
-        GetNPCByID(gateId + 4):getAnimation() == xi.anim.OPEN_DOOR
-    then
-        player:messageSpecial(ID.text.BANISHING_GATES + leverSet)
-        GetNPCByID(gateId):openDoor(30)
+            GetNPCByID(gateId + 1):getAnimation() == xi.anim.OPEN_DOOR and
+            GetNPCByID(gateId + 2):getAnimation() == xi.anim.OPEN_DOOR and
+            GetNPCByID(gateId + 3):getAnimation() == xi.anim.OPEN_DOOR and
+            GetNPCByID(gateId + 4):getAnimation() == xi.anim.OPEN_DOOR
+        then
+            player:messageSpecial(ID.text.BANISHING_GATES + leverSet)
+            GetNPCByID(gateId):openDoor(30)
+        end
     end
 end
 
@@ -82,7 +87,9 @@ end
 -- However, if a lever is activated while it's related door is open, the lever will remain activated until the door closes.
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
-    GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + triggerArea:GetTriggerAreaID()):setAnimation(xi.anim.CLOSE_DOOR)
+    if triggerArea:GetTriggerAreaID() ~= 30 then
+        GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + triggerArea:GetTriggerAreaID()):setAnimation(xi.anim.CLOSE_DOOR)
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
