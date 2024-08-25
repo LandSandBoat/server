@@ -12,6 +12,7 @@
 -- Magic Bursts on: Induration, Distortion, Darkness
 -- Combos: None
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

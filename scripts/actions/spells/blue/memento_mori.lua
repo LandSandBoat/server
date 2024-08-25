@@ -12,6 +12,7 @@
 -----------------------------------
 -- Combos: Magic Attack Bonus
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

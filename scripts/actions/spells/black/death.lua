@@ -4,6 +4,7 @@
 -- (Player only) Consumes all MP no matter what.
 -- (Player only) If Death fails to knock out the target, it will instead deal darkness damage.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

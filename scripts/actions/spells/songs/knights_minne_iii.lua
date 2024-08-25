@@ -2,6 +2,7 @@
 -- Spell: Knight's Minne III
 -- Grants Defense bonus to all allies.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

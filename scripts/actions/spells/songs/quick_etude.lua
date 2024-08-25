@@ -2,6 +2,7 @@
 -- Spell: Quick Etude
 -- Static AGI Boost, BRD 28
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

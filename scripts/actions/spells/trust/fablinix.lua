@@ -1,6 +1,7 @@
 -----------------------------------
 -- Trust: Fablinix
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

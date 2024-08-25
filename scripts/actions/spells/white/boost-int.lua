@@ -2,6 +2,7 @@
 -- Spell: Boost-INT
 -- Boosts INT for Allies in AoE
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

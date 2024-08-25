@@ -13,6 +13,7 @@
 -----------------------------------
 -- Combos: Conserve MP
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

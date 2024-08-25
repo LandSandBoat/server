@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Foe Requiem IV
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

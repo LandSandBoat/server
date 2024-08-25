@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Threnody II - xi.mod.WIND_MEVA
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

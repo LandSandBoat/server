@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Teleport-Yhoat
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

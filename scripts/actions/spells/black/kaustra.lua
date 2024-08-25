@@ -3,6 +3,7 @@
 -- Consumes 20% of your maximum MP.
 -- Relentless dark damage slowly devours an enemy.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

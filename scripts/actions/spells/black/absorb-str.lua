@@ -2,6 +2,7 @@
 -- Spell: Absorb-STR
 -- Steals an enemy's strength.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

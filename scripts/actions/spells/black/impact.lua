@@ -3,6 +3,7 @@
 -- Deals dark damage to an enemy and
 -- decreases all 7 base stats by 20%
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

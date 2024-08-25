@@ -2,6 +2,7 @@
 -- Spell: Logical Etude
 -- Static MND Boost, BRD 64
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

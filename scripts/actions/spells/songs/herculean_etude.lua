@@ -2,6 +2,7 @@
 -- Spell: Herculean Etude
 -- Static STR Boost, BRD 74
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

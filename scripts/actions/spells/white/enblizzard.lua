@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Enblizzard
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

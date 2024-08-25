@@ -2,6 +2,7 @@
 -- Trust: Yoran-Oran UC
 -- All changes made are from BGWiki and in game observations. Wiki says he has Fast Cast, but doesn't specify how much so it has been left out.
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

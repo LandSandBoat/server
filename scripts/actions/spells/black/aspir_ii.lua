@@ -2,6 +2,7 @@
 -- Spell: Aspir
 -- Drain functions only on skill level!!
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

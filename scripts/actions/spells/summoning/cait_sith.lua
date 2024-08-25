@@ -2,6 +2,7 @@
 -- Spell: Cait Sith
 -- Summons Cait Sith avatar
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

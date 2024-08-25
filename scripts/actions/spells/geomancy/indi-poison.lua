@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Indi-Poison
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

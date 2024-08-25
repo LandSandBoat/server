@@ -7,6 +7,7 @@
 -- "Will close skillchains with players and other trusts if possible, otherwise uses a weapon skill at 3000 TP."
 -- TODO: We don't have a combination of OPENER and CLOSER for TP skill settings, so leaving as OPENER for now.
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Trust: Uka Totlihn
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 -- Define the main jobs with access to primary healing used to toggle Samba type

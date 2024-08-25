@@ -2,6 +2,7 @@
 -- Spell: Klimaform
 -- Increases magic accuracy for spells of the same element as current weather
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

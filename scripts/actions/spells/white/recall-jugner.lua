@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Recall-Jugner
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -2,6 +2,7 @@
 -- Spell: Maiden's Virelai
 -- Charms pet
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

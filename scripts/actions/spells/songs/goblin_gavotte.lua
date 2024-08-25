@@ -2,6 +2,7 @@
 -- Spell: Goblin Gavotte
 -- Enhances resistance against bind for party members within the area of effect.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
