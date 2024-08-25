@@ -10,16 +10,7 @@ local ID = zones[xi.zone.PORT_WINDURST]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_AMENDS) == xi.questStatus.QUEST_ACCEPTED then
-        if
-            trade:hasItemQty(xi.item.BLOCK_OF_ANIMAL_GLUE, 1) and
-            trade:getItemCount() == 1
-        then
-            player:startEvent(277, 1500)
-        else
-            player:startEvent(275, 0, xi.item.BLOCK_OF_ANIMAL_GLUE)
-        end
-    elseif player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.WONDER_WANDS) == xi.questStatus.QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.WONDER_WANDS) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.OAK_STAFF, 1) and
             trade:hasItemQty(xi.item.MYTHRIL_ROD, 1) and
@@ -42,15 +33,7 @@ entity.onTrigger = function(player, npc)
     local needToZone   = player:needToZone()
     local pFame        = player:getFameLevel(xi.fameArea.WINDURST)
 
--- Begin Making Amends Section
-    if makingAmends == xi.questStatus.QUEST_AVAILABLE and pFame >= 2 then
-            player:startEvent(274, 0, xi.item.BLOCK_OF_ANIMAL_GLUE) -- MAKING AMENDS + ANIMAL GLUE: Quest Start
-    elseif makingAmends == xi.questStatus.QUEST_ACCEPTED then
-            player:startEvent(275, 0, xi.item.BLOCK_OF_ANIMAL_GLUE) -- MAKING AMENDS + ANIMAL GLUE: Quest Objective Reminder
-    elseif makingAmends == xi.questStatus.QUEST_COMPLETED and needToZone then
-            player:startEvent(278) -- MAKING AMENDS: After Quest
---End Making Amends Section; Begin Wonder Wands Section
-    elseif
+    if
         makingAmends == xi.questStatus.QUEST_COMPLETED and
         makingAmens == xi.questStatus.QUEST_COMPLETED and
         wonderWands == xi.questStatus.QUEST_AVAILABLE and
@@ -72,16 +55,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 274 and option == 1 then
-            player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
-    elseif csid == 277 then
-            player:addGil(xi.settings.main.GIL_RATE * 1500)
-            player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
-            player:addFame(xi.fameArea.WINDURST, 75)
-            player:addTitle(xi.title.QUICK_FIXER)
-            player:needToZone(true)
-            player:tradeComplete()
-    elseif csid == 259 and option == 1 then
+    if csid == 259 and option == 1 then
             player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
     elseif csid == 267 then
         local rand = math.random(1, 3) --Setup random variable to determine which 2 items are returned upon quest completion

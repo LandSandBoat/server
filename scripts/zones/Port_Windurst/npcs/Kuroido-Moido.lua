@@ -18,24 +18,12 @@ entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
     local brokenWand = player:hasKeyItem(xi.ki.BROKEN_WAND)
 
-    if makingAmends == xi.questStatus.QUEST_ACCEPTED then -- MAKING AMENDS: During Quest
-        player:startEvent(276)
-    elseif
-        makingAmends == xi.questStatus.QUEST_COMPLETED and
-        makingAmens ~= xi.questStatus.QUEST_COMPLETED and
-        wonderWands ~= xi.questStatus.QUEST_COMPLETED and
-        needToZone
-    then
-        -- MAKING AMENDS: After Quest
-        player:startEvent(279)
-    elseif
+    if
         makingAmends == xi.questStatus.QUEST_COMPLETED and
         makingAmens == xi.questStatus.QUEST_AVAILABLE
     then
         if pfame >= 4 and not needToZone then
             player:startEvent(280) -- Start Making Amens! if prerequisites are met
-        else
-            player:startEvent(279) -- MAKING AMENDS: After Quest
         end
     elseif makingAmens == xi.questStatus.QUEST_ACCEPTED and not brokenWand then -- Reminder for Making Amens!
         player:startEvent(283)
