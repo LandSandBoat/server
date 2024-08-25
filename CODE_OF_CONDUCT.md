@@ -31,6 +31,7 @@ Examples of unacceptable behavior include:
 
 * The use of sexualized language or imagery, and sexual attention or advances of
   any kind
+* The use of innapropriate violent language or imagery
 * Trolling, insulting or derogatory comments, and personal or political attacks
 * Public or private harassment
 * Publishing others' private information, such as a physical or email address,
@@ -131,3 +132,9 @@ For answers to common questions about this code of conduct, see the FAQ at
 [Mozilla CoC]: https://github.com/mozilla/diversity
 [FAQ]: https://www.contributor-covenant.org/faq
 [translations]: https://www.contributor-covenant.org/translations
+
+## Modifications
+
+The following additions have been made to the underlying Contributor Covenant v2.1:
+
+- `Our Standards: unacceptable behavior: The use of innapropriate violent language or imagery`

@@ -37,6 +37,7 @@
 - Cite your sources. This can be comments in your code or your commit messages. Pull Request descriptions and comments will get lost over time.
 - If you're commiting work on someone else's behalf, use git's `--author` argument or GitHub's `Co-Authored-By:` feature so they get the credit they deserve.
 - Make your commit messages meaningful, or amend/rebase once you're ready to push.
+- If you want to report or resolve an exploitable issue please try and get in contact with staff privately. Staff are pretty easy to find across different Discords or by the emails their commits are attributed with. This software is used by many live servers with active players, and we want to distribute fixes for exploits in a responsible and private fashion before they're published to the public.
 
 ## Issue Report Contributions
 
