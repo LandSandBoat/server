@@ -774,7 +774,7 @@ xi.combat.physical.canGuard = function(defender, attacker)
             defender:isPet() or
             defender:isTrust()
         then
-            canGuard = defender:getMainJob() == xi.job.MNK or defender:getMainJob() == xi.job.PUP
+            canGuard = (defender:getMainJob() == xi.job.MNK or defender:getMainJob() == xi.job.PUP) and defender:getMobMod(xi.mobMod.CANNOT_GUARD) == 0
         end
     end
 
@@ -789,10 +789,7 @@ xi.combat.physical.calculateGuardRate = function(defender, attacker)
 
     -- non-players do not have guard skill set on creation
     -- so use max skill at the level for the job
-    if
-        defender:isMob() or
-        defender:isPet()
-    then
+    if defender:isPet() then
         guardSkill = defender:getMaxSkillLevel(defender:getMainLvl(), defender:getMainJob(), xi.skill.GUARD)
     elseif defender:isTrust() then
         -- TODO: check trust type for ilvl > 99 when implemented

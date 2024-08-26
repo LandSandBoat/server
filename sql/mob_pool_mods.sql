@@ -470,9 +470,6 @@ INSERT INTO `mob_pool_mods` VALUES (4148,75,3,1); -- CAN_PARRY: 3
 -- Vanguard_Footsoldier
 INSERT INTO `mob_pool_mods` VALUES (4150,75,3,1); -- CAN_PARRY: 3
 
--- Vanguard_Grappler
-INSERT INTO `mob_pool_mods` VALUES (4151,75,3,1); -- CAN_PARRY: 3
-
 -- Vanguard_Gutslasher
 INSERT INTO `mob_pool_mods` VALUES (4152,75,3,1); -- CAN_PARRY: 3
 

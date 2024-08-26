@@ -107,6 +107,7 @@ enum MOBMODIFIER : int
     MOBMOD_NO_WIDESCAN            = 76, // Disables widescan for a specific mob
     MOBMOD_TRUST_DISTANCE         = 77, // TRUSTS ONLY: Set movement type/distance. See trust.lua for details.
     MOBMOD_STANDBACK_RANGE        = 78, // Applies a specific standback range for the mob
+    MOBMOD_CANNOT_GUARD           = 79, // Check if the mob does not guard(despite being a MNK or PUP mob)
 };
 
 #endif
