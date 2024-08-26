@@ -60,6 +60,11 @@ entity.onMobFight = function(mob, target)
                 end
 
                 local pet = GetMobByID(petId)
+
+                if not pet then
+                    return
+                end
+
                 local pos = mob:getPos()
                 pet:setSpawn(pos.x + math.random(-2, 2), pos.y, pos.z + math.random(-2, 2), pos.rot)
                 pet:spawn()
@@ -78,7 +83,7 @@ entity.onMobDeath = function(mob, player, optParams)
         local mobId = mob:getID()
         for i = mobId + 1, mobId + 5 do
             local pet = GetMobByID(i)
-            if pet:isAlive() then
+            if pet and pet:isAlive() then
                 pet:setHP(0)
             end
         end

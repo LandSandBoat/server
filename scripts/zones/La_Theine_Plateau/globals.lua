@@ -77,6 +77,11 @@ local laTheineGlobal =
         }
 
         local fallenEgg = GetNPCByID(ID.npc.FALLEN_EGG)
+
+        if not fallenEgg then
+            return
+        end
+
         local newPosition = npcUtil.pickNewPosition(ID.npc.FALLEN_EGG, fallenEggPositions)
         if secondsHidden ~= nil and secondsHidden > 0 then
             fallenEgg:hideNPC(secondsHidden)

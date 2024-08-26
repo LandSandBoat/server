@@ -374,17 +374,17 @@ commandObj.onTrigger = function(player, bytes)
         else
             -- destination is a player name.
             target = dest
-            dest = GetPlayerByName(dest)
-            if dest == nil then
+            local playerObj = GetPlayerByName(dest)
+            if playerObj == nil then
                 error(player, string.format('Player named "%s" not found!', target))
                 return
             end
 
-            x = dest:getXPos()
-            y = dest:getYPos()
-            z = dest:getZPos()
-            rot = dest:getRotPos()
-            zone = dest:getZoneID()
+            x    = playerObj:getXPos()
+            y    = playerObj:getYPos()
+            z    = playerObj:getZPos()
+            rot  = playerObj:getRotPos()
+            zone = playerObj:getZoneID()
         end
     end
 

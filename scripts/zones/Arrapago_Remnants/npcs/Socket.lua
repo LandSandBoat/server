@@ -16,7 +16,11 @@ entity.onTrade = function(player, npc, trade)
     local spissatusCell = 5384
 
     for i = incusCell, spissatusCell do
-        if tradeCount <= 5 and trade:hasItemQty(i, tradeCount) then
+        if
+            mob and
+            tradeCount <= 5 and
+            trade:hasItemQty(i, tradeCount)
+        then
             SpawnMob(ID.mob[2][3].wahzil, instance):updateClaim(player)
             player:tradeComplete()
             mob:setLocalVar('Cell', i)

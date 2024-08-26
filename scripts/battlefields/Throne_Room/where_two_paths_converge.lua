@@ -44,8 +44,11 @@ function content:onEventFinishBattlefield(player, csid, option, npc)
 
     -- Set Phase 2 Zeid's HP to be same HPP as previous phase.
     local zeid1 = GetMobByID(zeidId)
-    local hpp   = zeid1:getHPP() / 100
-    zeid2:setHP(math.floor(zeid2:getMaxHP() * hpp))
+
+    if zeid1 and zeid2 then
+        local hpp   = zeid1:getHPP() / 100
+        zeid2:setHP(math.floor(zeid2:getMaxHP() * hpp))
+    end
 
     -- Spawn Volker helper NPC.
     local volker = player:getBattlefield():insertEntity(28, true, true)

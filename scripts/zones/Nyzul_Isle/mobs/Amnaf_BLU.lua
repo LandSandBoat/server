@@ -58,17 +58,28 @@ entity.onMobEngage = function(mob, target)
     end
 
     -- 4 more gears spawn on Stage 2 of the Fight
-    if form == 1 and form2Gears == 0 then
+    if
+        form == 1 and
+        form2Gears == 0
+    then
         mob:showText(mob, ID.text.SURRENDER)
-        local gear = SpawnMob(ID.mob[58].IMPERIAL_GEAR1, instance)
-        gear:updateEnmity(target)
-        gear = SpawnMob(ID.mob[58].IMPERIAL_GEAR2, instance)
-        gear:updateEnmity(target)
-        gear = SpawnMob(ID.mob[58].IMPERIAL_GEAR3, instance)
-        gear:updateEnmity(target)
-        gear = SpawnMob(ID.mob[58].IMPERIAL_GEAR4, instance)
-        gear:updateEnmity(target)
-        gear:setLocalVar('Form2Gears', 1)
+
+        local gearList =
+        {
+            ID.mob[58].IMPERIAL_GEAR1,
+            ID.mob[58].IMPERIAL_GEAR2,
+            ID.mob[58].IMPERIAL_GEAR3,
+            ID.mob[58].IMPERIAL_GEAR4,
+        }
+
+        for _, gearId in ipairs(gearList) do
+            local gear = SpawnMob(gearId, instance)
+
+            if gear then
+                gear:updateEnmity(target)
+                gear:setLocalVar('Form2Gears', 1)
+            end
+        end
     end
 end
 

@@ -28,7 +28,7 @@ entity.onMobInitialize = function(scorpion)
                     local potentialMimic = GetMobByID(allyId)
                     local dist           = mob:checkDistance(potentialMimic)
 
-                    if dist < mimicDistance then
+                    if potentialMimic and dist < mimicDistance then
                         -- set flag so prevent infinite loops
                         potentialMimic:setLocalVar('[ODS]mimic', 1)
                         if skillID == 354 then

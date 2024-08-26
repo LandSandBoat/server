@@ -71,6 +71,8 @@ entity.onMobFight = function(mob, target)
     -- Shen instant casts Flood to spawn a pet
     if
         os.time() >= petCooldown and
+        petOne and
+        petTwo and
         (not petOne:isSpawned() or not petTwo:isSpawned()) and
         mob:actionQueueEmpty()
     then
@@ -96,7 +98,7 @@ entity.onSpellPrecast = function(mob, spell)
     if spell:getID() == 214 then
         for i = 1, 2 do
             local pet = GetMobByID(mob:getID() + i)
-            if not pet:isSpawned() then
+            if pet and not pet:isSpawned() then
                 SpawnMob(pet:getID())
                 pet:updateEnmity(target)
                 pet:setPos(pos.x, pos.y, pos.z, pos.rot)
@@ -109,8 +111,10 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     local mobId = mob:getID()
     for i = 1, 2 do
-        local petID = GetMobByID(mobId + i)
-        petID:setHP(0)
+        local petObj = GetMobByID(mobId + i)
+        if petObj then
+            petObj:setHP(0)
+        end
     end
 
     mob:resetLocalVars()

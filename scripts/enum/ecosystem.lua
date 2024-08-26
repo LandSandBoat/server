@@ -30,5 +30,5 @@ xi.ecosystem =
     VORAGEAN       = 21,
 }
 
----@alias eco ecosystem
+---@alias xi.eco xi.ecosystem
 xi.eco = xi.ecosystem

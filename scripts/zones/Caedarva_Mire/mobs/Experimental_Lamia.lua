@@ -16,9 +16,12 @@ local function spawnMinions(mob, target)
 
     for i = ID.mob.EXPERIMENTAL_LAMIA + 1, ID.mob.EXPERIMENTAL_LAMIA + 3 do
         local minion = GetMobByID(i)
-        minion:setSpawn(x + math.random(-2, 2), y, z + math.random(-2, 2))
-        minion:spawn()
-        minion:updateEnmity(target)
+
+        if minion then
+            minion:setSpawn(x + math.random(-2, 2), y, z + math.random(-2, 2))
+            minion:spawn()
+            minion:updateEnmity(target)
+        end
     end
 end
 
@@ -30,7 +33,10 @@ entity.onMobFight = function(mob, target)
     -- make sure minions have a target
     for i = ID.mob.EXPERIMENTAL_LAMIA + 1, ID.mob.EXPERIMENTAL_LAMIA + 3 do
         local minion = GetMobByID(i)
-        if minion:getCurrentAction() == xi.act.ROAMING then
+        if
+            minion and
+            minion:getCurrentAction() == xi.act.ROAMING
+        then
             minion:updateEnmity(target)
         end
     end

@@ -57,7 +57,8 @@ commandObj.onTrigger = function(player, arg1, arg2)
     -- show variable
     if targ == 'server' then
         player:printToPlayer(string.format('Server variable \'%s\' : %u ', varName, GetServerVariable(varName)))
-    elseif type(targ) == "userdata" then
+    else
+        ---@diagnostic disable-next-line param-type-mismatch
         player:printToPlayer(string.format('%s\'s variable \'%s\' : %u', targ:getName(), varName, targ:getCharVar(varName)))
     end
 end

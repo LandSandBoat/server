@@ -10,7 +10,12 @@ local korrolokaGlobal = {}
 -- Move Morion Worm QM
 local moveMorionWormQM
 moveMorionWormQM = function()
-    local npc            = GetNPCByID(ID.npc.MORION_WORM_QM)
+    local npc = GetNPCByID(ID.npc.MORION_WORM_QM)
+
+    if not npc then
+        return
+    end
+
     local morionQmPoints =
     {
         [1] = { 254.652,   -6.039,  20.878 },

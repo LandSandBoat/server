@@ -40,7 +40,7 @@ g_mixins.follow = function(followMob)
 
         -- Setup the follower mob
         local leader = GetMobByID(mobID + leaderMod)
-        if leader:isSpawned() then
+        if leader and leader:isSpawned() then
             xi.follow.follow(mob, leader)
         end
     end)

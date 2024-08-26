@@ -20,8 +20,11 @@ entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller then
         local mobId = mob:getID()
         local nm    = GetMobByID(ID.mob.JAILER_OF_TEMPERANCE)
-        local ph    = nm:getLocalVar('ph')
+        if not nm then
+            return
+        end
 
+        local ph = nm:getLocalVar('ph')
         if ph == mobId and os.time() > nm:getLocalVar('pop') then
             local pos = mob:getSpawnPos()
             nm:setSpawn(pos.x, pos.y, pos.z)

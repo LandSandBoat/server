@@ -50,7 +50,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         for i = 1, 4 do
             local elemental = GetMobByID(mob:getID() + i)
 
-            if not elemental:isSpawned() then
+            if elemental and not elemental:isSpawned() then
                 SpawnMob(elemental:getID()):updateEnmity(target)
                 elemental:setPos(pos.x, pos.y, pos.z, pos.rot)
                 break
@@ -72,7 +72,7 @@ entity.onMobFight = function(mob, target)
         for i = 1, 4 do
             local elemental = GetMobByID(mob:getID() + i)
 
-            if elemental:isAlive() then
+            if elemental and elemental:isAlive() then
                 local elementalDamaged = elemental:getHPP() < 100
 
                 -- only target either the elemental or avatar
@@ -104,7 +104,7 @@ entity.onMobFight = function(mob, target)
         for i = 1, 4 do
             local elemental = GetMobByID(mob:getID() + i)
 
-            if elemental:isAlive() then
+            if elemental and elemental:isAlive() then
                 elemental:updateEnmity(target)
                 mob:setLocalVar('hateTimer', os.time() + math.random(10, 20))
             end

@@ -241,6 +241,10 @@ xi.beastmentreasure.updatePeddlestox = function(zone, peddlestoxID)
     only need to enable her on the appropriate day and disable her on the following day. ]]--
     local peddlestox = GetNPCByID(peddlestoxID)
 
+    if not peddlestox then
+        return
+    end
+
     if zoneData[zone].day == VanadielDayOfTheWeek() then
         peddlestox:setStatus(xi.status.NORMAL)
     elseif peddlestox:getStatus() == xi.status.NORMAL then

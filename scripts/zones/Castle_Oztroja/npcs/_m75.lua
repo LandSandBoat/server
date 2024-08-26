@@ -13,6 +13,7 @@ entity.onTrigger = function(player, npc)
 
     if
         npc:getAnimation() == xi.anim.CLOSE_DOOR and
+        brassDoor and
         brassDoor:getAnimation() == xi.anim.CLOSE_DOOR
     then
         player:startEvent(10)
@@ -27,12 +28,19 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if option == 1 then
         local brassDoor = GetNPCByID(ID.npc.BRASS_DOOR_FLOOR_4_H7)
-        if brassDoor:getAnimation() == xi.anim.CLOSE_DOOR then
+        if
+            brassDoor and
+            brassDoor:getAnimation() == xi.anim.CLOSE_DOOR
+        then
             brassDoor:openDoor(35)
+
             for i = 2, 5 do
                 local torch = GetNPCByID(ID.npc.BRASS_DOOR_FLOOR_4_H7 + i)
-                torch:setAnimation(xi.anim.CLOSE_DOOR)
-                torch:openDoor(39)
+
+                if torch then
+                    torch:setAnimation(xi.anim.CLOSE_DOOR)
+                    torch:openDoor(39)
+                end
             end
         else
             GetNPCByID(ID.npc.BRASS_DOOR_FLOOR_4_H7 + 5):openDoor()

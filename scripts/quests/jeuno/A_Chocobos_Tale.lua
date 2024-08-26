@@ -34,7 +34,11 @@ local function isNMDefeated()
     for nmId = batalliaID.mob.BADSHAH_OFFSET, batalliaID.mob.BADSHAH_OFFSET + 4 do
         local nmMob = GetMobByID(nmId)
 
-        if nmMob:isDead() or not nmMob:isSpawned() then
+        if
+            nmMob and
+            (nmMob:isDead() or
+            not nmMob:isSpawned())
+        then
             return true
         end
     end

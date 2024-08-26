@@ -20,9 +20,12 @@ entity.onEventFinish = function(player, csid, option, door)
         instance:setStage(2)
         instance:setProgress(0)
         door:setAnimation(8)
-        for i, v in pairs(ID.npc[1][3]) do
+        for _, v in pairs(ID.npc[1][3]) do
             local npc = GetNPCByID(v, instance)
-            npc:setUntargetable(true)
+
+            if npc then
+                npc:setUntargetable(true)
+            end
         end
     end
 end

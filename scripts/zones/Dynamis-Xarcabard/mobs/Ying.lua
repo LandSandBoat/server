@@ -12,7 +12,11 @@ end
 entity.onMobSpawn = function(mob)
     local dynaLord = GetMobByID(ID.mob.DYNAMIS_LORD)
 
-    if dynaLord:getLocalVar('magImmune') < 2 then -- both dragons have not been killed initially
+    if
+        dynaLord and
+        dynaLord:getLocalVar('magImmune') < 2
+    then
+        -- both dragons have not been killed initially
         dynaLord:setMod(xi.mod.UDMGMAGIC, -10000)
         dynaLord:setMod(xi.mod.UDMGBREATH, -10000)
         dynaLord:setLocalVar('magImmune', 0)
@@ -27,7 +31,11 @@ entity.onMobFight = function(mob, target)
     local yang = GetMobByID(ID.mob.YANG)
     local yangToD = mob:getLocalVar('YangToD')
 
-    if yang:getCurrentAction() == xi.act.NONE and os.time() > yangToD + 30 then
+    if
+        yang and
+        yang:getCurrentAction() == xi.act.NONE and
+        os.time() > yangToD + 30
+    then
         yang:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
         yang:spawn()
         yang:updateEnmity(target)
@@ -42,8 +50,14 @@ entity.onMobDespawn = function(mob)
     local dynaLord = GetMobByID(ID.mob.DYNAMIS_LORD)
 
     -- localVars clear on death, so setting it on its partner
-    yang:setLocalVar('YingToD', os.time())
-    if dynaLord:getLocalVar('magImmune') == 0 then
+    if yang then
+        yang:setLocalVar('YingToD', os.time())
+    end
+
+    if
+        dynaLord and
+        dynaLord:getLocalVar('magImmune') == 0
+    then
         dynaLord:setMod(xi.mod.UDMGMAGIC, 0)
         dynaLord:setMod(xi.mod.UDMGBREATH, 0)
         if dynaLord:getLocalVar('physImmune') == 1 then -- other dragon is also dead

@@ -12,6 +12,7 @@ entity.onTrigger = function(player, npc)
     if
         player:getXPos() > -43 and
         npc:getAnimation() == xi.anim.CLOSE_DOOR and
+        brassDoor and
         brassDoor:getAnimation() == xi.anim.CLOSE_DOOR
     then
         npc:openDoor(6.5)

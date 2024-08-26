@@ -318,6 +318,11 @@ instanceObject.onTrack = function(instance)
     }
 
     local mob = GetMobByID(ID.mob[xi.assault.mission.SEAGULL_GROUNDED].MOBS_START.EXCALIAC, instance)
+
+    if not mob then
+        return
+    end
+
     local chars = instance:getChars()
     local mobs = instance:getMobs()
     local missionActive = mob:getLocalVar('missionActive')

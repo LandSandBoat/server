@@ -37,6 +37,7 @@ local isGhostsAlive = function()
     for i = 0, 2 do
         local ghostMob = GetMobByID(kuftalID.mob.TALEKEEPER_OFFSET + i)
         if
+            ghostMob and
             ghostMob:isSpawned() and
             not ghostMob:isDead()
         then

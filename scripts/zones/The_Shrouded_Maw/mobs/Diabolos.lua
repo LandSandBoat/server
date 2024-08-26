@@ -23,23 +23,23 @@ entity.onMobFight = function(mob, target)
 
         local tileDrops =
         {
-            { 10, 'byc1', 'bya1', 'byY1' },
-            { 20, 'byc2', 'bya2', 'byY2' },
-            { 30, 'byc3', 'bya3', 'byY3' },
-            { 40, 'byc4', 'bya4', 'byY4' },
-            { 50, 'byc5', 'bya5', 'byY5' },
-            { 65, 'byc6', 'bya6', 'byY6' },
-            { 75, 'byc7', 'bya7', 'byY7' },
-            { 90, 'byc8', 'bya8', 'byY8' },
+            { 10, { 'byc1', 'bya1', 'byY1' } },
+            { 20, { 'byc2', 'bya2', 'byY2' } },
+            { 30, { 'byc3', 'bya3', 'byY3' } },
+            { 40, { 'byc4', 'bya4', 'byY4' } },
+            { 50, { 'byc5', 'bya5', 'byY5' } },
+            { 65, { 'byc6', 'bya6', 'byY6' } },
+            { 75, { 'byc7', 'bya7', 'byY7' } },
+            { 90, { 'byc8', 'bya8', 'byY8' } },
         }
 
         local hpp = (mob:getHP() / mob:getMaxHP()) * 100
-        for k, v in pairs(tileDrops) do
-            if hpp < v[1] then
-                local tileId = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (inst * 8) + (k - 1)
+        for index, percentTable in ipairs(tileDrops) do
+            if hpp < percentTable[1] then
+                local tileId = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (inst * 8) + (index - 1)
                 local tile = GetNPCByID(tileId)
-                if tile:getAnimation() == xi.anim.CLOSE_DOOR then
-                    SendEntityVisualPacket(tileId, v[inst + 2])  -- Animation for floor dropping
+                if tile and tile:getAnimation() == xi.anim.CLOSE_DOOR then
+                    SendEntityVisualPacket(tileId, percentTable[2][inst + 1])  -- Animation for floor dropping
                     SendEntityVisualPacket(tileId, 's123')     -- Tile dropping sound
                     tile:timer(5000, function(tileArg)
                         tileArg:setAnimation(xi.anim.OPEN_DOOR)     -- Floor opens

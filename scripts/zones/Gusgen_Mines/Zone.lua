@@ -54,7 +54,11 @@ zoneObject.onGameHour = function(zone)
 
         for i = 1, 6 do
             ghost = ghostTable[i].nm
-            if not ghost:isSpawned() and os.time() > ghost:getLocalVar('cooldown') then
+            if
+                ghost and
+                not ghost:isSpawned() and
+                os.time() > ghost:getLocalVar('cooldown')
+            then
                 SpawnMob(ghostTable[i].id)
             end
         end

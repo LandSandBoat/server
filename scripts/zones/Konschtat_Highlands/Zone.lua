@@ -61,12 +61,14 @@ zoneObject.onGameHour = function(zone)
         local time = os.time()
 
         if
+            haty and
             phase >= 90 and
             not haty:isSpawned() and
             time > haty:getLocalVar('cooldown')
         then
             SpawnMob(ID.mob.HATY)
         elseif
+            vran and
             phase <= 10 and
             not vran:isSpawned() and
             time > vran:getLocalVar('cooldown')

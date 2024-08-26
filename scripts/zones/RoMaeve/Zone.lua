@@ -33,36 +33,34 @@ end
 
 zoneObject.onGameHour = function(zone)
     local vanadielHour = VanadielHour()
+    local moongate1 = GetNPCByID(ID.npc.MOONGATE_OFFSET)
+    local moongate2 = GetNPCByID(ID.npc.MOONGATE_OFFSET + 1)
 
     -- Make Ro'Maeve come to life between 6pm and 6am during a full moon
-    if IsMoonFull() and (vanadielHour >= 18 or vanadielHour < 6) then
-        local moongate1 = GetNPCByID(ID.npc.MOONGATE_OFFSET)
-        local moongate2 = GetNPCByID(ID.npc.MOONGATE_OFFSET + 1)
+    if moongate1 and moongate2 then
+        if IsMoonFull() and (vanadielHour >= 18 or vanadielHour < 6) then
+            if moongate1:getLocalVar('romaeveActive') == 0 then
+                -- Loop over the affected NPCs: Moongates, bridges and fountain
+                for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
+                    GetNPCByID(i):setAnimation(xi.anim.OPEN_DOOR) -- Open them
+                end
 
-        if moongate1:getLocalVar('romaeveActive') == 0 then
-            -- Loop over the affected NPCs: Moongates, bridges and fountain
-            for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
-                GetNPCByID(i):setAnimation(xi.anim.OPEN_DOOR) -- Open them
+                moongate2:setUntargetable(true)
+                moongate1:setUntargetable(true)
+                moongate1:setLocalVar('romaeveActive', 1) -- Make this loop unavailable after firing
             end
 
-            moongate2:setUntargetable(true)
-            moongate1:setUntargetable(true)
-            moongate1:setLocalVar('romaeveActive', 1) -- Make this loop unavailable after firing
-        end
+        -- Clean up at 6am
+        elseif vanadielHour == 6 then
+            if moongate1:getLocalVar('romaeveActive') == 1 then
+                for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
+                    GetNPCByID(i):setAnimation(xi.anim.CLOSE_DOOR)
+                end
 
-    -- Clean up at 6am
-    elseif vanadielHour == 6 then
-        local moongate1 = GetNPCByID(ID.npc.MOONGATE_OFFSET)
-        local moongate2 = GetNPCByID(ID.npc.MOONGATE_OFFSET + 1)
-
-        if moongate1:getLocalVar('romaeveActive') == 1 then
-            for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
-                GetNPCByID(i):setAnimation(xi.anim.CLOSE_DOOR)
+                moongate2:setUntargetable(false)
+                moongate1:setUntargetable(false)
+                moongate1:setLocalVar('romaeveActive', 0) -- Make loop available again
             end
-
-            moongate2:setUntargetable(false)
-            moongate1:setUntargetable(false)
-            moongate1:setLocalVar('romaeveActive', 0) -- Make loop available again
         end
     end
 end

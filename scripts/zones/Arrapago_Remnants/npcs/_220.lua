@@ -14,9 +14,12 @@ entity.onEventFinish = function(player, csid, option, door)
         door:setAnimation(8)
         local instance = door:getInstance()
         -- spawn mobs, etc
-        for i, v in pairs(ID.npc[1][2]) do
+        for _, v in pairs(ID.npc[1][2]) do
             local npc = GetNPCByID(v, instance)
-            npc:setStatus(xi.status.NORMAL)
+
+            if npc then
+                npc:setStatus(xi.status.NORMAL)
+            end
         end
 
         for id = ID.mob[1][2].mobs_start, ID.mob[1][2].mobs_end do

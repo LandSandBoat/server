@@ -29,11 +29,11 @@ entity.onMobFight = function(mob, target)
         local orbitalOne = GetMobByID(mob:getID() + 3)
         local orbitalTwo = GetMobByID(mob:getID() + 4)
 
-        if not orbitalOne:isSpawned() then
+        if orbitalOne and not orbitalOne:isSpawned() then
             orbitalOne:setPos(mob:getPos())
             orbitalOne:spawn()
             orbitalOne:updateEnmity(target)
-        elseif not orbitalTwo:isSpawned() then
+        elseif orbitalTwo and not orbitalTwo:isSpawned() then
             orbitalTwo:setPos(mob:getPos())
             orbitalTwo:spawn()
             orbitalTwo:updateEnmity(target)
@@ -42,12 +42,6 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

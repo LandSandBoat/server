@@ -25,8 +25,11 @@ end
 entity.onMobEngage = function(mob, target)
     local mobId = mob:getID()
     for i = 1, 2 do
-        local guardID = GetMobByID(mobId + i)
-        guardID:updateEnmity(target)
+        local guardObj = GetMobByID(mobId + i)
+
+        if guardObj then
+            guardObj:updateEnmity(target)
+        end
     end
 end
 
@@ -34,10 +37,13 @@ entity.onMobRoam = function(mob)
     local mobId = mob:getID()
     for i = 1, 2 do
         local guard = GetMobByID(mobId + i)
-        if guard:isSpawned() and guard:getID() == mobId + 1 then
-            guard:pathTo(mob:getXPos() + 1, mob:getYPos() + 3, mob:getZPos() + 0.15)
-        elseif guard:isSpawned() and guard:getID() == mobId + 2 then
-            guard:pathTo(mob:getXPos() + 3, mob:getYPos() + 5, mob:getZPos() + 0.15)
+
+        if guard then
+            if guard:isSpawned() and guard:getID() == mobId + 1 then
+                guard:pathTo(mob:getXPos() + 1, mob:getYPos() + 3, mob:getZPos() + 0.15)
+            elseif guard:isSpawned() and guard:getID() == mobId + 2 then
+                guard:pathTo(mob:getXPos() + 3, mob:getYPos() + 5, mob:getZPos() + 0.15)
+            end
         end
     end
 end

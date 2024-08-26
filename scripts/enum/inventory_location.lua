@@ -27,5 +27,5 @@ xi.inventoryLocation =
     MAX_CONTAINER_ID = 18,
 }
 
----@alias inv inventoryLocation
+---@alias xi.inv xi.inventoryLocation
 xi.inv = xi.inventoryLocation

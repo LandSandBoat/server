@@ -21,7 +21,7 @@ function GetZone(zoneId)
 end
 
 ---@nodiscard
----@param itemId integer
+---@param itemId xi.item
 ---@return CItem?
 function GetItemByID(itemId)
 end
@@ -114,6 +114,7 @@ end
 
 ---@param mobid integer
 ---@param arg2 CInstance|integer?
+---@return nil
 function DespawnMob(mobid, arg2)
 end
 

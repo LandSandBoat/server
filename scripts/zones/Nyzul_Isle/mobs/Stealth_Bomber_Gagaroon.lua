@@ -46,6 +46,10 @@ local function dropBomb(mob)
     local target   = mob:getTarget()
     local pos      = mob:getPos()
 
+    if not bombMob then
+        return
+    end
+
     bombMob:setPos(pos.x, pos.y, pos.z, pos.rot)
     bombMob:setStatus(xi.status.UPDATE)
 

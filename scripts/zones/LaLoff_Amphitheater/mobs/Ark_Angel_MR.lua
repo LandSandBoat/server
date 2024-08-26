@@ -23,15 +23,17 @@ local function spawnArkAngelPet(mob, target)
             mobArg:entityAnimationPacket(xi.animationString.CAST_SUMMONER_STOP)
 
             local pet = SpawnMob(content.groups[selectedPet + 1]['mobIds'][battlefieldArea][1])
-            battlefield:insertEntity(pet:getTargID(), false, true)
+            if pet then
+                battlefield:insertEntity(pet:getTargID(), false, true)
 
-            pet:addListener('DEATH', 'AAMR_PET_DEATH', function(petArg)
-                local petBattlefield = petArg:getBattlefield()
+                pet:addListener('DEATH', 'AAMR_PET_DEATH', function(petArg)
+                    local petBattlefield = petArg:getBattlefield()
 
-                petBattlefield:setLocalVar('petRespawnMR', os.time() + 30)
-            end)
+                    petBattlefield:setLocalVar('petRespawnMR', os.time() + 30)
+                end)
 
-            pet:updateEnmity(target)
+                pet:updateEnmity(target)
+            end
 
             mobArg:setAutoAttackEnabled(true)
             mobArg:setMobMod(xi.mobMod.NO_MOVE, 0)

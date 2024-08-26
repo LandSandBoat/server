@@ -24,29 +24,35 @@ local content = Limbus:new({
 local setupItemCrate = function(crateID, floor)
     local crate = GetEntityByID(crateID)
 
-    xi.limbus.hideCrate(crate)
-    crate:setModelId(961)
-    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
-        npcUtil.openCrate(npc, function()
-            content:handleLootRolls(player:getBattlefield(), content.loot[floor], npc)
+    if crate then
+        xi.limbus.hideCrate(crate)
+        crate:setModelId(961)
+        crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
+            npcUtil.openCrate(npc, function()
+                content:handleLootRolls(player:getBattlefield(), content.loot[floor], npc)
+            end)
         end)
-    end)
+    end
 end
 
 local setupTimeCrate = function(crateID, floor)
     local crate = GetEntityByID(crateID)
 
-    xi.limbus.hideCrate(crate)
-    crate:setModelId(962)
-    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(content.handleOpenTimeCrate, content))
+    if crate then
+        xi.limbus.hideCrate(crate)
+        crate:setModelId(962)
+        crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(content.handleOpenTimeCrate, content))
+    end
 end
 
 local setupRecoverCrate = function(crateID, floor)
     local crate = GetEntityByID(crateID)
 
-    xi.limbus.hideCrate(crate)
-    crate:setModelId(960)
-    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(content.handleOpenRecoverCrate, content))
+    if crate then
+        xi.limbus.hideCrate(crate)
+        crate:setModelId(960)
+        crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(content.handleOpenRecoverCrate, content))
+    end
 end
 
 function content:onBattlefieldInitialise(battlefield)

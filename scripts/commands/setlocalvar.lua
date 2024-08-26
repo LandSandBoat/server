@@ -52,8 +52,10 @@ commandObj.onTrigger = function(player, arg1, arg2, arg3, arg4)
                 ---@diagnostic disable-next-line: param-type-mismatch
                 targ = instance:getEntity(bit.band(arg4, 0xFFF), xi.objType[entityType])
             elseif entityType == 'NPC' then
+                ---@diagnostic disable-next-line: param-type-mismatch
                 targ = GetNPCByID(arg4)
             else
+                ---@diagnostic disable-next-line: param-type-mismatch
                 targ = GetMobByID(arg4)
             end
         elseif entityType == 'PLAYER' then

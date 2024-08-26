@@ -17,6 +17,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         DisallowRespawn(mobID, true)
 
         local wamoura = GetMobByID(mobID + 1)
+        if not wamoura then
+            return
+        end
+
         wamoura:setSpawn(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos())
         SpawnMob(mobID + 1)
 

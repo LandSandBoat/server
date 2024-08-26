@@ -22,9 +22,12 @@ entity.onEventFinish = function(player, csid, option, door)
         door:setAnimation(8)
         SpawnMob(ID.mob[4].treasure_hunter1, instance)
         SpawnMob(ID.mob[4].qiqirn_mine_1, instance)
-        for i, v in pairs(ID.npc[4][1]) do
+        for _, v in pairs(ID.npc[4][1]) do
             local npc = GetNPCByID(v, instance)
-            npc:setUntargetable(true)
+
+            if npc then
+                npc:setUntargetable(true)
+            end
         end
     end
 end

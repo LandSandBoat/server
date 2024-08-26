@@ -176,7 +176,7 @@ mission.sections =
                     else
                         local mob = GetMobByID(presentJugnerID.mob.CERNUNNOS)
 
-                        if not mob:isSpawned() then
+                        if mob and not mob:isSpawned() then
                             SpawnMob(presentJugnerID.mob.CERNUNNOS):updateClaim(player)
 
                             return mission:messageSpecial(presentJugnerID.text.DRAWN_UNWANTED_ATTENTION)

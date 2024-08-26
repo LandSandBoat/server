@@ -30,9 +30,12 @@ entity.onMobInitialize = function(GhulIBeabanMob)
                 mobArg:setStatus(xi.status.DISAPPEAR)
                 local blmMobId  = mobArg:getID() + 1
                 local blmMobObj = GetMobByID(blmMobId)
-                blmMobObj:setSpawn(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos(), mob:getRotPos())
-                blmMobObj:spawn()
-                reraiseGhul(blmMobObj, 3, target)
+
+                if blmMobObj then
+                    blmMobObj:setSpawn(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos(), mob:getRotPos())
+                    blmMobObj:spawn()
+                    reraiseGhul(blmMobObj, 3, target)
+                end
             end)
         end
     end)

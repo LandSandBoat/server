@@ -8,14 +8,18 @@ require('scripts/quests/i_can_hear_a_rainbow')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    local kreutzet     = GetMobByID(ID.mob.KREUTZET)
     local zmeyGorynych = GetMobByID(ID.mob.ZMEY_GORYNYCH)
+    if zmeyGorynych then
+        zmeyGorynych:setRespawnTime(math.random(3600, 7200)) -- 1 to 2 hours
+    end
 
-    UpdateNMSpawnPoint(ID.mob.KREUTZET)
-    zmeyGorynych:setRespawnTime(3600, 7200) -- 1 to 2 hours
-    kreutzet:setRespawnTime(math.random(32400, 43200)) -- 9 to 12 hours
-    kreutzet:setLocalVar('cooldown', os.time() + kreutzet:getRespawnTime() / 1000)
-    DisallowRespawn(kreutzet:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
+    local kreutzet = GetMobByID(ID.mob.KREUTZET)
+    if kreutzet then
+        UpdateNMSpawnPoint(ID.mob.KREUTZET)
+        kreutzet:setRespawnTime(math.random(32400, 43200)) -- 9 to 12 hours
+        kreutzet:setLocalVar('cooldown', os.time() + kreutzet:getRespawnTime() / 1000)
+        DisallowRespawn(kreutzet:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
+    end
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
@@ -58,6 +62,7 @@ zoneObject.onZoneWeatherChange = function(weather)
     local kreutzet = GetMobByID(ID.mob.KREUTZET)
 
     if
+        kreutzet and
         not kreutzet:isSpawned() and
         os.time() > kreutzet:getLocalVar('cooldown') and
         (weather == xi.weather.WIND or weather == xi.weather.GALES)

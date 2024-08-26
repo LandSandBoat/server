@@ -221,6 +221,11 @@ end
 
 xi.job_utils.summoner.onUseBloodPact = function(target, petskill, summoner, action)
     local bloodPactAbility = GetAbility(petskill:getID()) -- Player abilities and Avatar abilities are mapped 1:1
+
+    if not bloodPactAbility then
+        return
+    end
+
     local baseMPCost       = getBaseMPCost(summoner, bloodPactAbility)
     local mpCost           = getMPCost(baseMPCost, summoner, bloodPactAbility)
     local bloodPactRecast  = math.max(0, summoner:getLocalVar('bpRecastTime'))

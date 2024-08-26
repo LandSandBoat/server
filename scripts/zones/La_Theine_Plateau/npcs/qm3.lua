@@ -35,7 +35,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:confirmTrade()
 
         local rainbow = GetNPCByID(ID.npc.RAINBOW)
-        rainbow:setLocalVar('setRainbow', 1)
+        if rainbow then
+            rainbow:setLocalVar('setRainbow', 1)
+        end
     end
 end
 

@@ -29,14 +29,20 @@ entity.onMobFight = function(mob, target)
         local petId = ID.mob.YING + i
         local pet = GetMobByID(petId)
 
-        if battleTime % 90 == 0 and battleTime >= 90 and not pet:isSpawned() then
-            pet:setSpawn(-414.282, -44, 20.427)
-            pet:spawn()
-            pet:updateEnmity(target)
-        end
+        if pet then
+            if
+                battleTime % 90 == 0 and
+                battleTime >= 90 and
+                not pet:isSpawned()
+            then
+                pet:setSpawn(-414.282, -44, 20.427)
+                pet:spawn()
+                pet:updateEnmity(target)
+            end
 
-        if pet:getCurrentAction() == xi.act.ROAMING then
-            pet:updateEnmity(target)
+            if pet:getCurrentAction() == xi.act.ROAMING then
+                pet:updateEnmity(target)
+            end
         end
     end
 end

@@ -48,6 +48,11 @@ local outerHorutotoGlobal =
         then
             local nmId = ID.mob.BALLOON_NM_OFFSET + math.random(1, 3)
             local nm   = GetMobByID(nmId)
+
+            if not nm then
+                return
+            end
+
             local pop  = nm:getLocalVar('pop')
 
             if os.time() > pop then

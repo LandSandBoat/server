@@ -137,7 +137,13 @@ mission.sections =
                         end
 
                         if numDefeated == 3 then
-                            local npcObj      = GetNPCByID(mission:getLocalVar(player, 'triggerNpc'))
+                            local npcObj = GetNPCByID(mission:getLocalVar(player, 'triggerNpc'))
+
+                            if not npcObj then
+                                print('ERROR: triggerNpc returned invalid NPC object.')
+                                return
+                            end
+
                             local currentMask = mission:getLocalVar(player, 'nmDefeated')
                             mission:setLocalVar(player, 'nmDefeated', utils.mask.setBit(currentMask, towerOption[npcObj:getName()], true))
                             mission:setLocalVar(player, 'numDefeated', 0)

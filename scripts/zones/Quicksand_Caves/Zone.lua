@@ -96,6 +96,13 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + triggerAreaID - 1)
         local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + triggerAreaID)
 
+        if
+            not plate or
+            not door
+        then
+            return
+        end
+
         local totalWeight = plate:getLocalVar('weight')
         if player then
             totalWeight = totalWeight + getWeight(player)
@@ -134,6 +141,10 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 
     if triggerAreaID < 30 then
         local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + triggerAreaID)
+
+        if not plate then
+            return
+        end
 
         local totalWeight = plate:getLocalVar('weight')
         totalWeight = totalWeight - getWeight(player)

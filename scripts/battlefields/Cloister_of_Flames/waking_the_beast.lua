@@ -39,7 +39,7 @@ content.groups =
             -- when avatar defeated then all elementals should also die
             for i = 1, 4 do
                 local elemental = GetMobByID(mob:getID() + i)
-                if elemental:isAlive() then
+                if elemental and elemental:isAlive() then
                     elemental:setHP(0)
                 end
             end

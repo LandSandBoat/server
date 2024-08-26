@@ -21,6 +21,7 @@ entity.onMobFight = function(mob, target)
     local pet   = GetMobByID(mobId + 2)
 
     if
+        pet and
         pet:isSpawned() and
         pet:getCurrentAction() == xi.act.ROAMING
     then

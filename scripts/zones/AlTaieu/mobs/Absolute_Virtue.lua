@@ -12,12 +12,14 @@ entity.onMobSpawn = function(mob)
 
     local jailerOfLove = GetMobByID(ID.mob.JAILER_OF_LOVE)
     -- Special check for regen modification by JoL pets killed
-    if jailerOfLove:getLocalVar('JoL_Qn_xzomit_Killed') == 9 then
-        mob:addMod(xi.mod.REGEN, -130)
-    end
+    if jailerOfLove then
+        if jailerOfLove:getLocalVar('JoL_Qn_xzomit_Killed') == 9 then
+            mob:addMod(xi.mod.REGEN, -130)
+        end
 
-    if jailerOfLove:getLocalVar('JoL_Qn_hpemde_Killed') == 9 then
-        mob:addMod(xi.mod.REGEN, -130)
+        if jailerOfLove:getLocalVar('JoL_Qn_hpemde_Killed') == 9 then
+            mob:addMod(xi.mod.REGEN, -130)
+        end
     end
 end
 

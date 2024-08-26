@@ -73,8 +73,11 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
         DespawnMob(ID.mob[58].AMNAF_BLU, instance)
     elseif progress == 24 then
         local v = GetMobByID(ID.mob[58].NAJA, instance)
-        v:setLocalVar('ready', 0)
-        v:setLocalVar('Stage', 2)
+
+        if v then
+            v:setLocalVar('ready', 0)
+            v:setLocalVar('Stage', 2)
+        end
 
         SpawnMob(ID.mob[58].AMNAF_BLU, instance)
     elseif progress >= 30 and progress < 40 then
@@ -83,8 +86,11 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
         SpawnMob(ID.mob[58].AMNAF_PSYCHEFLAYER, instance)
 
         local v = GetMobByID(ID.mob[58].NAJA, instance)
-        v:setLocalVar('ready', 0)
-        v:setLocalVar('Stage', 3)
+
+        if v then
+            v:setLocalVar('ready', 0)
+            v:setLocalVar('Stage', 3)
+        end
 
         local npcs = instance:getNpcs()
 

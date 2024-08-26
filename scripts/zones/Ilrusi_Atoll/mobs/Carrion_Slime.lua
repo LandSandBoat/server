@@ -14,7 +14,11 @@ entity.onMobDespawn = function(mob)
     local slimeMob = GetMobByID(ID.mob.UNDEAD_SLIME, instance)
     local randVal  = math.random(1, 5)
 
-    if randVal == 1 and slimeMob:getLocalVar('SlimeSpawned') == 0 then
+    if
+        randVal == 1 and
+        slimeMob and
+        slimeMob:getLocalVar('SlimeSpawned') == 0
+    then
         SpawnMob(ID.mob.UNDEAD_SLIME, instance)
         slimeMob:setLocalVar('SlimeSpawned', 1)
     else

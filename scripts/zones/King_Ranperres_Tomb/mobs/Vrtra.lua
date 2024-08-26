@@ -36,7 +36,7 @@ entity.onMobFight = function(mob, target)
         for i, offset in ipairs(offsets) do
             local pet = GetMobByID(mobId + offset)
 
-            if not pet:isSpawned() then
+            if pet and not pet:isSpawned() then
                 pet:spawn(60)
                 local pos = mob:getPos()
                 pet:setPos(pos.x, pos.y, pos.z)

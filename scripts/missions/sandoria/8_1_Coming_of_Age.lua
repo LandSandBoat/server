@@ -118,6 +118,8 @@ mission.sections =
                     local mobValor = GetMobByID(quicksandCavesID.mob.HONOR)
 
                     if
+                        mobHonor and
+                        mobValor and
                         (not mobHonor:isSpawned() or mobHonor:isDead()) and
                         (not mobValor:isSpawned() or mobValor:isDead())
                     then
@@ -143,6 +145,7 @@ mission.sections =
 
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
+                        mobValor and
                         (mobValor:isDead() or not mobValor:isSpawned())
                     then
                         player:setMissionStatus(mission.areaId, 3)
@@ -156,6 +159,7 @@ mission.sections =
                     local mobHonor = GetMobByID(quicksandCavesID.mob.VALOR)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
+                        mobHonor and
                         (mobHonor:isDead() or not mobHonor:isSpawned())
                     then
                         player:setMissionStatus(mission.areaId, 3)
