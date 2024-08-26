@@ -614,11 +614,12 @@ xi.conquest.toggleRegionalNPCs = function(zone)
         end)
 
         local firstPlaceZone  = rankings[1][2]
-        local secondPlaceZone = rankings[2][2]
+        -- check if the first and second are both rank 1 (thus a tie)
+        local firstAndSecondTie = rankings[1][1] == rankings[2][1]
 
         if
             firstPlaceZone == id and
-            firstPlaceZone ~= secondPlaceZone
+            not firstAndSecondTie
         then
             print('Showing regional conquest NPCs in: ' .. zone:getName())
         else
@@ -637,7 +638,7 @@ xi.conquest.toggleRegionalNPCs = function(zone)
                     -- If there is a clear winner, and not a tie, show the NPCs
                     if
                         id == firstPlaceZone and
-                        firstPlaceZone ~= secondPlaceZone
+                        not firstAndSecondTie
                     then
                         entity:setStatus(xi.status.NORMAL)
                     end
