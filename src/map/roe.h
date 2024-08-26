@@ -1,10 +1,7 @@
 ﻿/*
- * roe.h
- *      Author: Kreidos | github.com/kreidos
- *
 ===========================================================================
 
-  Copyright (c) 2020 Topaz Dev Teams
+  Copyright (c) 2020 Topaz Dev Teams | Author: Kreidos | github.com/kreidos
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
