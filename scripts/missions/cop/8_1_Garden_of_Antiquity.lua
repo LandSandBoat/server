@@ -32,7 +32,7 @@ local towerOption =
 }
 
 local function setMissionStatusBit(player, bitNum)
-    local statusIndex   = bitNum == 0 and xi.mission.status.CID or xi.mission.status.RUBIOUS
+    local statusIndex   = bitNum == 0 and xi.mission.status.COP.CID or xi.mission.status.COP.RUBIOUS
     local adjustedBit   = bitNum == 0 and 3 or bitNum - 1
     local missionStatus = player:getMissionStatus(mission.areaId, statusIndex)
 
@@ -40,7 +40,7 @@ local function setMissionStatusBit(player, bitNum)
 end
 
 local function getMissionStatusBit(player, bitNum)
-    local statusIndex   = bitNum == 0 and xi.mission.status.CID or xi.mission.status.RUBIOUS
+    local statusIndex   = bitNum == 0 and xi.mission.status.COP.CID or xi.mission.status.COP.RUBIOUS
     local adjustedBit   = bitNum == 0 and 3 or bitNum - 1
     local missionStatus = player:getMissionStatus(mission.areaId, statusIndex)
 
