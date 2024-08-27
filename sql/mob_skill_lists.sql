@@ -1920,7 +1920,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Capricious_Cassie',411,725);
 INSERT INTO `mob_skill_lists` VALUES ('Capricious_Cassie',411,726);
 INSERT INTO `mob_skill_lists` VALUES ('Capricious_Cassie',411,727);
 INSERT INTO `mob_skill_lists` VALUES ('Capricious_Cassie',411,728);
--- 412 to 435: free
+INSERT INTO `mob_skill_lists` VALUES ('Mocking_Colibri',412,1699);
+INSERT INTO `mob_skill_lists` VALUES ('Mocking_Colibri',412,1700);
+INSERT INTO `mob_skill_lists` VALUES ('Mocking_Colibri',412,1701);
+INSERT INTO `mob_skill_lists` VALUES ('Mocking_Colibri',412,1702);
+-- 413 to 435: free
 INSERT INTO `mob_skill_lists` VALUES ('Bloodlapper',436,2162);
 INSERT INTO `mob_skill_lists` VALUES ('Ghillie_Dhu',437,685);
 INSERT INTO `mob_skill_lists` VALUES ('Highlander_Lizard',438,371);
