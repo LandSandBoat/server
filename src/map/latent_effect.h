@@ -134,6 +134,7 @@ public:
     CLatentEffect(CLatentEffect&& o) noexcept
     {
         std::swap(m_POwner, o.m_POwner);
+        std::swap(m_PItem, o.m_PItem);
         std::swap(m_ConditionsID, o.m_ConditionsID);
         std::swap(m_ConditionsValue, o.m_ConditionsValue);
         std::swap(m_SlotID, o.m_SlotID);
@@ -144,6 +145,7 @@ public:
     CLatentEffect& operator=(CLatentEffect&& o) noexcept
     {
         std::swap(m_POwner, o.m_POwner);
+        std::swap(m_PItem, o.m_PItem);
         std::swap(m_ConditionsID, o.m_ConditionsID);
         std::swap(m_ConditionsValue, o.m_ConditionsValue);
         std::swap(m_SlotID, o.m_SlotID);
