@@ -17,6 +17,7 @@ return {
     ['Library_book2']   = { event = 368 },
     ['Mashuu-Ajuu']     = { event = 429 },
     ['Mimomo']          = { event = 436 },
+    ['Moari-Kaaori']    = { event = 512 },
     ['Ohbiru-Dohbiru']  = { event = 344 },
     ['Orn']             = { event = 652 },
     ['Paku-Nakku']      = { event = 431 },
