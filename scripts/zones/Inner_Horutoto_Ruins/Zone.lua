@@ -43,15 +43,19 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         triggerArea:AddCount(math.abs(triggerArea:GetCount()))
     end
 
+    -- TODO: Use common function for handling circles
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function()  -- Red Circle
             if player:getMainJob() == xi.job.RDM and triggerArea:AddCount(1) == 1 then
-                red:setAnimation(xi.anim.OPEN_DOOR)
-                red:entityAnimationPacket(xi.animationString.OPEN_DOOR)
+                if red then
+                    red:setAnimation(xi.anim.OPEN_DOOR)
+                    red:entityAnimationPacket(xi.animationString.OPEN_DOOR)
+                end
+
                 if
-                    white:getAnimation() == xi.anim.OPEN_DOOR and
-                    black:getAnimation() == xi.anim.OPEN_DOOR
+                    white and white:getAnimation() == xi.anim.OPEN_DOOR and
+                    black and black:getAnimation() == xi.anim.OPEN_DOOR
                 then
                     GetNPCByID(circle + 3):openDoor(30)
                     GetNPCByID(circle + 4):openDoor(30)
@@ -61,11 +65,14 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 
         [2] = function()  -- White Circle
             if player:getMainJob() == xi.job.WHM and triggerArea:AddCount(1) == 1 then
-                white:setAnimation(xi.anim.OPEN_DOOR)
-                white:entityAnimationPacket(xi.animationString.OPEN_DOOR)
+                if white then
+                    white:setAnimation(xi.anim.OPEN_DOOR)
+                    white:entityAnimationPacket(xi.animationString.OPEN_DOOR)
+                end
+
                 if
-                    red:getAnimation() == xi.anim.OPEN_DOOR and
-                    black:getAnimation() == xi.anim.OPEN_DOOR
+                    red and red:getAnimation() == xi.anim.OPEN_DOOR and
+                    black and black:getAnimation() == xi.anim.OPEN_DOOR
                 then
                     GetNPCByID(circle + 3):openDoor(30)
                     GetNPCByID(circle + 4):openDoor(30)
@@ -75,11 +82,14 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 
         [3] = function()  -- Black Circle
             if player:getMainJob() == xi.job.BLM and triggerArea:AddCount(1) == 1 then
-                black:setAnimation(xi.anim.OPEN_DOOR)
-                black:entityAnimationPacket(xi.animationString.OPEN_DOOR)
+                if black then
+                    black:setAnimation(xi.anim.OPEN_DOOR)
+                    black:entityAnimationPacket(xi.animationString.OPEN_DOOR)
+                end
+
                 if
-                    red:getAnimation() == xi.anim.OPEN_DOOR and
-                    white:getAnimation() == xi.anim.OPEN_DOOR
+                    red and red:getAnimation() == xi.anim.OPEN_DOOR and
+                    white and white:getAnimation() == xi.anim.OPEN_DOOR
                 then
                     GetNPCByID(circle + 3):openDoor(30)
                     GetNPCByID(circle + 4):openDoor(30)
@@ -102,21 +112,33 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function()  -- Red Circle
-            if player:getMainJob() == xi.job.RDM and triggerArea:DelCount(1) == 0 then
+            if
+                red and
+                player:getMainJob() == xi.job.RDM and
+                triggerArea:DelCount(1) == 0
+            then
                 red:setAnimation(xi.anim.CLOSE_DOOR)
                 red:entityAnimationPacket(xi.animationString.CLOSE_DOOR)
             end
         end,
 
         [2] = function()  -- White Circle
-            if player:getMainJob() == xi.job.WHM and triggerArea:DelCount(1) == 0 then
+            if
+                white and
+                player:getMainJob() == xi.job.WHM and
+                triggerArea:DelCount(1) == 0
+            then
                 white:setAnimation(xi.anim.CLOSE_DOOR)
                 white:entityAnimationPacket(xi.animationString.CLOSE_DOOR)
             end
         end,
 
         [3] = function()  -- Black Circle
-            if player:getMainJob() == xi.job.BLM and triggerArea:DelCount(1) == 0 then
+            if
+                black and
+                player:getMainJob() == xi.job.BLM and
+                triggerArea:DelCount(1) == 0
+            then
                 black:setAnimation(xi.anim.CLOSE_DOOR)
                 black:entityAnimationPacket(xi.animationString.CLOSE_DOOR)
             end

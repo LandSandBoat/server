@@ -80,10 +80,12 @@ function content:setupBattlefield(battlefield)
 
     -- Select Tuchulcha's sandpit positions
     local tuchulcha = GetMobByID(content.groups[1].mobIds[battlefieldArea][1])
-    tuchulcha:setLocalVar('sand_pit1', selectedPositions[4])
-    tuchulcha:setLocalVar('sand_pit2', selectedPositions[5])
-    tuchulcha:setLocalVar('sand_pit3', selectedPositions[6])
-    tuchulcha:setPos(antlionPositions[battlefieldArea][selectedPositions[7]])
+    if tuchulcha then
+        tuchulcha:setLocalVar('sand_pit1', selectedPositions[4])
+        tuchulcha:setLocalVar('sand_pit2', selectedPositions[5])
+        tuchulcha:setLocalVar('sand_pit3', selectedPositions[6])
+        tuchulcha:setPos(antlionPositions[battlefieldArea][selectedPositions[7]])
+    end
 end
 
 content.groups =

@@ -15,11 +15,13 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:timer(3000, function(mobArg)
-        if mob:isAlive() then
-            local gunpod = GetMobByID(mob:getID() + 1)
-            gunpod:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
-            gunpod:spawn()
-            gunpod:updateEnmity(utils.randomEntry(mob:getBattlefield():getPlayers()))
+        if mobArg:isAlive() then
+            local gunpod = GetMobByID(mobArg:getID() + 1)
+            if gunpod then
+                gunpod:setSpawn(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos(), mobArg:getRotPos())
+                gunpod:spawn()
+                gunpod:updateEnmity(utils.randomEntry(mobArg:getBattlefield():getPlayers()))
+            end
         end
     end)
 

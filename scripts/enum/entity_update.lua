@@ -1,7 +1,7 @@
 xi = xi or {}
 
 -- see `enum ENTITYUPDATE` in src\map\packets\basic.h
----@enum entityUpdate
+---@enum xi.entityUpdate
 xi.entityUpdate =
 {
     ENTITY_SPAWN   = 0,

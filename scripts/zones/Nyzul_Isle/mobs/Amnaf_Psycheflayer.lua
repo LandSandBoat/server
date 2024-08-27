@@ -18,7 +18,11 @@ end
 
 entity.onMobEngage = function(mob, target)
     local naja = GetMobByID(ID.mob[58].NAJA, mob:getInstance())
-    naja:setLocalVar('ready', 1)
+
+    if naja then
+        naja:setLocalVar('ready', 1)
+    end
+
     mob:showText(mob, ID.text.CANNOT_LET_YOU_PASS)
 end
 

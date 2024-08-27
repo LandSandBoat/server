@@ -9,7 +9,12 @@ local kuftalGlobal = {}
 
 local movePhantomWormQM
 movePhantomWormQM = function()
-    local npc             = GetNPCByID(ID.npc.PHANTOM_WORM_QM)
+    local npc = GetNPCByID(ID.npc.PHANTOM_WORM_QM)
+
+    if not npc then
+        return
+    end
+
     local phantomQmPoints =
     {
         [ 1] = {  75.943, 29.969, 118.854 },

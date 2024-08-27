@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
     local allLampsLit = true
     for i = 0, 11 do
         local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
-        if lamp:getAnimation() == xi.anim.CLOSE_DOOR then
+        if lamp and lamp:getAnimation() == xi.anim.CLOSE_DOOR then
             allLampsLit = false
             break
         end

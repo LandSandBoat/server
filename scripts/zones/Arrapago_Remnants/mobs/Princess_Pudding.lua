@@ -9,7 +9,10 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
     local slot = GetNPCByID(ID.npc[2][2].SLOT, instance)
+
+    if slot then
         slot:setStatus(xi.status.DISAPPEAR)
+    end
 end
 
 entity.onMobDeath = function(mob, player, optParams)

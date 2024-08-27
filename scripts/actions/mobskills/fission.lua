@@ -11,7 +11,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local fam = 1
     for i = momma + 1, momma + mob:getLocalVar('maxBabies') do
         local baby = GetMobByID(i)
-        if not baby:isSpawned() then
+        if baby and not baby:isSpawned() then
             fam = 0
             break
         end
@@ -25,8 +25,14 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local pos = mob:getPos()
     for babyID = momma + 1, momma + mob:getLocalVar('maxBabies') do
         local baby = GetMobByID(babyID)
-        if not baby:isSpawned() then
-            SpawnMob(babyID):updateEnmity(mob:getTarget())
+        if baby and not baby:isSpawned() then
+            SpawnMob(babyID)
+
+            local mobTarget = mob:getTarget()
+            if mobTarget then
+                baby:updateEnmity(mobTarget)
+            end
+
             baby:setPos(pos.x, pos.y, pos.z)
             break
         end

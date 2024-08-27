@@ -196,6 +196,8 @@ xi.pets.avatar.onMobMagicPrepare = function(pet)
     return 0
 end
 
+---@param pet CBaseEntity
+---@return integer, CBaseEntity?
 xi.pets.avatar.getSpiritSpell = function(pet)
     local spellID = 0
     local spellTarget = nil
@@ -203,7 +205,6 @@ xi.pets.avatar.getSpiritSpell = function(pet)
     -- add more logic as needed with its own function
     if petID == xi.petId.LIGHT_SPIRIT then
         -- TODO: Align spirit and light spirit functions for return consistency and consolidate.
-        ---@diagnostic disable-next-line: cast-local-type
         spellID, spellTarget = xi.pets.avatar.getLightSpiritSpell(pet)
     end
 
@@ -386,7 +387,7 @@ xi.pets.avatar.getLightSpiritSpell = function(pet)
     local master = pet:getMaster()
 
     if not master then
-        return
+        return 0, nil
     end
 
     local posTarget = nil

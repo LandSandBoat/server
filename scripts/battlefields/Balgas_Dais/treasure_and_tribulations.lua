@@ -22,9 +22,11 @@ function content:handleCrateDefeated(battlefield, mob)
     local crateId = battlefield:getArmouryCrate()
     local crate   = GetNPCByID(crateId)
 
-    crate:teleport(mob:getPos(), mob:getRotPos())
-    npcUtil.showCrate(crate)
-    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(self.handleOpenArmouryCrate, self))
+    if crate then
+        crate:teleport(mob:getPos(), mob:getRotPos())
+        npcUtil.showCrate(crate)
+        crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(self.handleOpenArmouryCrate, self))
+    end
 end
 
 content.groups =

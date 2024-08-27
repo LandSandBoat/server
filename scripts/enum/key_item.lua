@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@enum keyItem
+---@enum xi.keyItem
 xi.keyItem =
 {
     ZERUHN_REPORT                            = 1,
@@ -3221,5 +3221,5 @@ xi.keyItem =
     MOG_KUPON_I_ABY                          = 3346,
 }
 
----@alias ki keyItem
+---@alias xi.ki xi.keyItem
 xi.ki = xi.keyItem

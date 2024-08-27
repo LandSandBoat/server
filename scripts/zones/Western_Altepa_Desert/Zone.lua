@@ -60,6 +60,10 @@ end
 zoneObject.onZoneWeatherChange = function(weather)
     local kvMob = GetMobByID(ID.mob.KING_VINEGARROON)
 
+    if not kvMob then
+        return
+    end
+
     if
         kvMob:getCurrentAction() == xi.act.DESPAWN and
         (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM)

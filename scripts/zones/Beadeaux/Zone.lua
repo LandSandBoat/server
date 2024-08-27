@@ -107,10 +107,13 @@ end
 
 zoneObject.onZoneWeatherChange = function(weather)
     local qm1 = GetNPCByID(ID.npc.QM1) -- Quest: Beaudeaux Smog
-    if weather == xi.weather.RAIN or weather == xi.weather.SQUALL then
-        qm1:setStatus(xi.status.NORMAL)
-    else
-        qm1:setStatus(xi.status.DISAPPEAR)
+
+    if qm1 then
+        if weather == xi.weather.RAIN or weather == xi.weather.SQUALL then
+            qm1:setStatus(xi.status.NORMAL)
+        else
+            qm1:setStatus(xi.status.DISAPPEAR)
+        end
     end
 end
 

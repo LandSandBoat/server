@@ -14,7 +14,11 @@ entity.onMobDespawn = function(mob)
     local leechMob = GetMobByID(ID.mob.UNDEAD_LEECH, instance)
     local randVal  = math.random(1, 5)
 
-    if randVal == 1 and leechMob:getLocalVar('LeechSpawned') == 0 then
+    if
+        randVal == 1 and
+        leechMob and
+        leechMob:getLocalVar('LeechSpawned') == 0
+    then
         SpawnMob(ID.mob.UNDEAD_LEECH, instance)
         leechMob:setLocalVar('LeechSpawned', 1)
     else

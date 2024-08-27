@@ -16,7 +16,10 @@ entity.onTrade = function(player, npc, trade)
         local doorOffset = ID.npc.DOOR_OFFSET
         for i = doorOffset, doorOffset + 11 do
             local door = GetNPCByID(i)
-            door:setAnimation((door:getAnimation() == xi.anim.OPEN_DOOR) and xi.anim.CLOSE_DOOR or xi.anim.OPEN_DOOR)
+
+            if door then
+                door:setAnimation((door:getAnimation() == xi.anim.OPEN_DOOR) and xi.anim.CLOSE_DOOR or xi.anim.OPEN_DOOR)
+            end
         end
     else
         player:startEvent(20) -- no firesand message

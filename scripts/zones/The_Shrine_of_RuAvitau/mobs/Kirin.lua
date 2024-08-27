@@ -36,17 +36,20 @@ entity.onMobFight = function(mob, target)
         if #godsRemaining > 0 then
             local g   = godsRemaining[math.random(1, #godsRemaining)]
             local god = SpawnMob(ID.mob.KIRIN + g)
-            god:updateEnmity(target)
-            god:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos())
-            mob:setLocalVar('add'..g, 1)
-            mob:setLocalVar('numAdds', numAdds + 1)
+
+            if god then
+                god:updateEnmity(target)
+                god:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos())
+                mob:setLocalVar('add'..g, 1)
+                mob:setLocalVar('numAdds', numAdds + 1)
+            end
         end
     end
 
     -- ensure all spawned pets are doing stuff
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         local god = GetMobByID(i)
-        if god:getCurrentAction() == xi.act.ROAMING then
+        if god and god:getCurrentAction() == xi.act.ROAMING then
             god:updateEnmity(target)
         end
     end

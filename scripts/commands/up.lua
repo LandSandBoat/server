@@ -17,6 +17,7 @@ local function error(player, msg)
 end
 
 commandObj.onTrigger = function(player, number, target)
+    ---@type CBaseEntity?
     local entity = player
     local cursor = player:getCursorTarget()
 
@@ -33,16 +34,18 @@ commandObj.onTrigger = function(player, number, target)
         player:printToPlayer('Moving specified player.. ')
     end
 
-    local pos = entity:getPos()
-    local adjustYposBy = 0
+    if entity then
+        local pos = entity:getPos()
+        local adjustYposBy = 0
 
-    if number ~= nil and number > 0 then
-        adjustYposBy = pos.y -number
-    else
-        adjustYposBy = pos.y -0.5
+        if number ~= nil and number > 0 then
+            adjustYposBy = pos.y -number
+        else
+            adjustYposBy = pos.y -0.5
+        end
+
+        entity:setPos(pos.x, adjustYposBy, pos.z, pos.rot)
     end
-
-    entity:setPos(pos.x, adjustYposBy, pos.z, pos.rot)
 end
 
 return commandObj

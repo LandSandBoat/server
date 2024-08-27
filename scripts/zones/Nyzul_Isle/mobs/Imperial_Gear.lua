@@ -33,7 +33,10 @@ end
 
 entity.onMobEngage = function(mob, target)
     local naja = GetMobByID(ID.mob[58].NAJA, mob:getInstance())
-    naja:setLocalVar('ready', 1)
+
+    if naja then
+        naja:setLocalVar('ready', 1)
+    end
 end
 
 entity.onMobDeath = function(mob, player, optParams)

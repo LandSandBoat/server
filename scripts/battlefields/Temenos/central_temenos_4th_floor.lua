@@ -28,7 +28,7 @@ local despawnGroupCrates = function(crateGroup)
     for i = 1, crateGroup.count do
         local crate = GetEntityByID(crateGroup.offset + i - 1)
 
-        if crate:getLocalVar('opened') == 0 then
+        if crate and crate:getLocalVar('opened') == 0 then
             crate:setLocalVar('opened', 1)
             npcUtil.disappearCrate(crate)
         end
@@ -47,29 +47,33 @@ function content:onBattlefieldInitialise(battlefield)
             local crateID = group.offset + j - 1
             local crate   = GetEntityByID(crateID)
 
-            crate:setStatus(xi.status.NORMAL)
-            crate:setUntargetable(false)
-            crate:setAnimationSub(8)
-            crate:setModelId(961)
+            if crate then
+                crate:setStatus(xi.status.NORMAL)
+                crate:setUntargetable(false)
+                crate:setAnimationSub(8)
+                crate:setModelId(961)
 
-            crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
-                npcUtil.openCrate(npc, function()
-                    despawnGroupCrates(group)
+                crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
+                    npcUtil.openCrate(npc, function()
+                        despawnGroupCrates(group)
 
-                    if j == itemIndex then
-                        content:handleLootRolls(player:getBattlefield(), content.loot[1], npc)
-                    else
-                        -- Spawn a random mob from the corresponding mob group
-                        local mobGroup = ID.CENTRAL_TEMENOS_4TH_FLOOR.mob.GROUPS[index]
-                        local mobID    = mobGroup.offset + math.random(0, mobGroup.count - 1)
-                        local mob      = GetMobByID(mobID)
+                        if j == itemIndex then
+                            content:handleLootRolls(player:getBattlefield(), content.loot[1], npc)
+                        else
+                            -- Spawn a random mob from the corresponding mob group
+                            local mobGroup = ID.CENTRAL_TEMENOS_4TH_FLOOR.mob.GROUPS[index]
+                            local mobID    = mobGroup.offset + math.random(0, mobGroup.count - 1)
+                            local mob      = GetMobByID(mobID)
 
-                        mob:setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), npc:getRotPos())
-                        mob:spawn()
-                        mob:updateEnmity(player)
-                    end
+                            if mob then
+                                mob:setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), npc:getRotPos())
+                                mob:spawn()
+                                mob:updateEnmity(player)
+                            end
+                        end
+                    end)
                 end)
-            end)
+            end
         end
     end
 end

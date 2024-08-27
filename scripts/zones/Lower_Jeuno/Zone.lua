@@ -55,7 +55,10 @@ zoneObject.onGameHour = function(zone)
     if vanadielHour == 7 then
         for i = 0, 11 do
             local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
-            lamp:setAnimation(xi.anim.CLOSE_DOOR)
+
+            if lamp then
+                lamp:setAnimation(xi.anim.CLOSE_DOOR)
+            end
         end
 
     -- 8PM: make quest available
@@ -82,6 +85,11 @@ zoneObject.onGameHour = function(zone)
     elseif vanadielHour == 1 then
         if playerOnQuestId == 0 then
             local npc = GetNPCByID(ID.npc.VHANA_EHGAKLYWHA)
+
+            if not npc then
+                return
+            end
+
             npc:clearPath()
             npc:setStatus(0)
             npc:initNpcAi()

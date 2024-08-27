@@ -1213,9 +1213,11 @@ function Battlefield:handleAllMonstersDefeated(battlefield, mob)
     if crateId ~= 0 then
         local crate = GetNPCByID(crateId)
 
-        battlefield:insertEntity(crate:getTargID(), false, true)
-        npcUtil.showCrate(crate)
-        crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(self.handleOpenArmouryCrate, self))
+        if crate then
+            battlefield:insertEntity(crate:getTargID(), false, true)
+            npcUtil.showCrate(crate)
+            crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(self.handleOpenArmouryCrate, self))
+        end
     else
         battlefield:setLocalVar('cutsceneTimer', self.delayToExit)
         battlefield:setStatus(xi.battlefield.status.WON)

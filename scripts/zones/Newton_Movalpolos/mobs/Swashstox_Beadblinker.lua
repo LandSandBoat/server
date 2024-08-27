@@ -20,8 +20,11 @@ end
 entity.onMobFight = function(mob, target)
     local mobId = mob:getID()
     for i = 1, 2 do
-        local guardID = GetMobByID(mobId + i)
-        guardID:updateEnmity(target)
+        local guardObj = GetMobByID(mobId + i)
+
+        if guardObj then
+            guardObj:updateEnmity(target)
+        end
     end
 end
 
@@ -30,11 +33,11 @@ entity.onMobRoam = function(mob)
     local guard2 = GetMobByID(mob:getID() + 2)
 
     -- Tell guards to follow NM
-    if guard1:isSpawned() then
+    if guard1 and guard1:isSpawned() then
         guard1:pathTo(mob:getXPos() + 1, mob:getYPos(), mob:getZPos())
     end
 
-    if guard2:isSpawned() then
+    if guard2 and guard2:isSpawned() then
         guard2:pathTo(mob:getXPos() + 3, mob:getYPos(), mob:getZPos() + 1)
     end
 end

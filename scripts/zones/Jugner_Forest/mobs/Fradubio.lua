@@ -31,7 +31,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 329 then
         for i = ID.mob.FRADUBIO + 1, ID.mob.FRADUBIO + 5 do
             local pet = GetMobByID(i)
-            if not pet:isSpawned() then
+            if pet and not pet:isSpawned() then
                 pet:setSpawn(mob:getXPos() + 1, mob:getYPos(), mob:getZPos())
                 pet:spawn()
                 pet:updateEnmity(mob:getTarget())

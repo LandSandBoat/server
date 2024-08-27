@@ -176,6 +176,7 @@ function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
         if not allowCurrentPosition then
             -- Finding by comparing the NPC's coords
             if
+                npc and
                 math.floor(v[1]) == math.floor(npc:getXPos()) and
                 math.floor(v[2]) == math.floor(npc:getYPos()) and
                 math.floor(v[3]) == math.floor(npc:getZPos())
@@ -862,6 +863,11 @@ end
 
 function npcUtil.UpdateNPCSpawnPoint(id, minTime, maxTime, posTable, serverVar)
     local npc = GetNPCByID(id)
+
+    if not npc then
+        return
+    end
+
     local respawnTime = math.random(minTime, maxTime)
     local newPosition = npcUtil.pickNewPosition(npc:getID(), posTable, true)
     serverVar = serverVar or nil -- serverVar is optional

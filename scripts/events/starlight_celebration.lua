@@ -267,7 +267,9 @@ xi.events.starlightCelebration.generateEntities = function()
                     releaseIdOnDisappear = true,
                 })
 
-                table.insert(xi.events.starlightCelebration.entities, npc:getID())
+                if npc then
+                    table.insert(xi.events.starlightCelebration.entities, npc:getID())
+                end
             end
         end
     end

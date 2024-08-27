@@ -18,7 +18,7 @@ entity.onMobRoam = function(mob)
 
         for i = mobId + 5, mobId + 6 do
             local pet = GetMobByID(i)
-            if pet:isSpawned() then
+            if pet and pet:isSpawned() then
                 DespawnMob(i)
             end
         end
@@ -29,7 +29,7 @@ entity.onMobRoam = function(mob)
 
         for i = mobId + 7, mobId + 8 do
             local pet = GetMobByID(i)
-            if pet:isSpawned() then
+            if pet and pet:isSpawned() then
                 DespawnMob(i)
             end
         end
@@ -49,7 +49,7 @@ entity.onMobFight = function(mob, target)
 
         for i = mobId + 5, mobId + 6 do
             local pet = GetMobByID(i)
-            if not pet:isSpawned() then
+            if pet and not pet:isSpawned() then
                 pet:setSpawn(x + math.random(-2, 2), y, z + math.random(-2, 2), r)
                 pet:spawn()
             end
@@ -61,7 +61,7 @@ entity.onMobFight = function(mob, target)
 
         for i = mobId + 7, mobId + 8 do
             local pet = GetMobByID(i)
-            if not pet:isSpawned() then
+            if pet and not pet:isSpawned() then
                 pet:setSpawn(x + math.random(-2, 2), y, z + math.random(-2, 2), r)
                 pet:spawn()
             end
@@ -77,7 +77,7 @@ entity.onMobDespawn = function(mob)
 
     for i = mobId + 5, mobId + 8 do
         local pet = GetMobByID(i)
-        if pet:isSpawned() then
+        if pet and pet:isSpawned() then
             DespawnMob(i)
         end
     end

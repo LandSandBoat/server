@@ -12,7 +12,10 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     local qm = GetNPCByID(ID.npc.TUNING_OUT_QM)
-    qm:setLocalVar('NasusKilled', qm:getLocalVar('NasusKilled') + 1)
+
+    if qm then
+        qm:setLocalVar('NasusKilled', qm:getLocalVar('NasusKilled') + 1)
+    end
 end
 
 return entity

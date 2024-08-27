@@ -15,22 +15,24 @@ entity.changeState = function(mob, idle)
         local doorID = ID.npc.QNZDEI_DOOR_OFFSET + (mob:getID() - ID.mob.QNZDEI_OFFSET) / 4
         local door = GetNPCByID(doorID)
 
-        local doorIdle = door:getLocalVar('idle')
-        if idle == 0 then
-            doorIdle = math.max(0, doorIdle - 1)
-        else
-            doorIdle = math.min(doorIdle + 1, 4)
-        end
+        if door then
+            local doorIdle = door:getLocalVar('idle')
+            if idle == 0 then
+                doorIdle = math.max(0, doorIdle - 1)
+            else
+                doorIdle = math.min(doorIdle + 1, 4)
+            end
 
-        if doorIdle == 4 then
-            door:setAnimation(xi.animation.OPEN_DOOR)
-            door:setUntargetable(true)
-        else
-            door:setAnimation(xi.animation.CLOSE_DOOR)
-            door:setUntargetable(false)
-        end
+            if doorIdle == 4 then
+                door:setAnimation(xi.animation.OPEN_DOOR)
+                door:setUntargetable(true)
+            else
+                door:setAnimation(xi.animation.CLOSE_DOOR)
+                door:setUntargetable(false)
+            end
 
-        door:setLocalVar('idle', doorIdle)
+            door:setLocalVar('idle', doorIdle)
+        end
     end
 end
 

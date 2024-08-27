@@ -7,7 +7,7 @@ xi = xi or {}
 ---@class xi.itemUtils
 xi.itemUtils = {}
 
----@enum removableEffects
+---@enum xi.itemUtils.removableEffects
 xi.itemUtils.removableEffects =
 {
     xi.effect.PARALYSIS,
@@ -47,7 +47,7 @@ xi.itemUtils.removableEffects =
 
 ---@nodiscard
 ---@param target CBaseEntity
----@param foodType foodType
+---@param foodType xi.foodType
 ---@return integer
 xi.itemUtils.foodOnItemCheck = function(target, foodType)
     local result     = 0

@@ -4,7 +4,7 @@
 xi = xi or {}
 
 -- Note: events have opcodes that can set flags internally, these can be ignored or set for each unique cutscene.
----@enum cutsceneFlag
+---@enum xi.cutsceneFlag
 xi.cutsceneFlag =
 {
     UNKNOWN_1       = 0x01, -- Commonly set, effect unknown

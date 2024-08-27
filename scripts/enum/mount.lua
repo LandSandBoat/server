@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@enum mount
+---@enum xi.mount
 xi.mount =
 {
     CHOCOBO        = 0,

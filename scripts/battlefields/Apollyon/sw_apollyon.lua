@@ -302,20 +302,25 @@ content.groups =
 
             local position = positions[#positions]
             local mob      = GetMobByID(ID.SW_APOLLYON.mob.JIDRA_BOSS)
-            mob:setPos(position.x, position.y, position.z, position.rot)
+            if mob then
+                mob:setPos(position.x, position.y, position.z, position.rot)
+            end
         end,
 
         death = function(battlefield, mob, count)
             local addID = mob:getID() + 7
             local add   = GetMobByID(addID)
-            add:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
-            SpawnMob(addID)
 
-            local enmityList = mob:getEnmityList()
-            local target     = utils.randomEntry(enmityList)['entity']
+            if add then
+                add:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
+                SpawnMob(addID)
 
-            if target ~= nil then
-                add:updateEnmity(target)
+                local enmityList = mob:getEnmityList()
+                local target     = utils.randomEntry(enmityList)['entity']
+
+                if target ~= nil then
+                    add:updateEnmity(target)
+                end
             end
         end,
     },

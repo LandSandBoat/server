@@ -19,7 +19,11 @@ entity.onMobInitialize = function(mob)
 
         local otherPrudence = mobArg:getID() == ID.mob.JAILER_OF_PRUDENCE and GetMobByID(ID.mob.JAILER_OF_PRUDENCE + 1) or GetMobByID(ID.mob.JAILER_OF_PRUDENCE)
 
-        if otherPrudence:isAlive() and otherPrudence:checkDistance(mob) <= 50 then
+        if
+            otherPrudence and
+            otherPrudence:isAlive() and
+            otherPrudence:checkDistance(mob) <= 50
+        then
             otherPrudence:setLocalVar('mirrored_ws', 1)
             otherPrudence:useMobAbility(skillid)
         end
@@ -78,17 +82,21 @@ entity.onMobDespawn = function(mob)
     if mob:getID() == ID.mob.JAILER_OF_PRUDENCE then
         local secondPrudence = GetMobByID(ID.mob.JAILER_OF_PRUDENCE + 1)
 
-        secondPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
-        secondPrudence:setAnimationSub(3) -- Mouth Open
-        secondPrudence:addMod(xi.mod.ATTP, 100)
-        secondPrudence:delMod(xi.mod.DEFP, -50)
+        if secondPrudence then
+            secondPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
+            secondPrudence:setAnimationSub(3) -- Mouth Open
+            secondPrudence:addMod(xi.mod.ATTP, 100)
+            secondPrudence:delMod(xi.mod.DEFP, -50)
+        end
     else
         local firstPrudence = GetMobByID(ID.mob.JAILER_OF_PRUDENCE)
 
-        firstPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
-        firstPrudence:setAnimationSub(3) -- Mouth Open
-        firstPrudence:addMod(xi.mod.ATTP, 100)
-        firstPrudence:delMod(xi.mod.DEFP, -50)
+        if firstPrudence then
+            firstPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
+            firstPrudence:setAnimationSub(3) -- Mouth Open
+            firstPrudence:addMod(xi.mod.ATTP, 100)
+            firstPrudence:delMod(xi.mod.DEFP, -50)
+        end
     end
 end
 

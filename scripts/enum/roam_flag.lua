@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@enum roamFlag
+---@enum xi.roamFlag
 xi.roamFlag =
 {
     NONE     = 0x000,

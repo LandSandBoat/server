@@ -14,7 +14,11 @@ entity.onMobDespawn = function(mob)
     local crabMob  = GetMobByID(ID.mob.UNDEAD_CRAB, instance)
     local randVal  = math.random(1, 5)
 
-    if randVal == 1 and crabMob:getLocalVar('CrabSpawned') == 0 then
+    if
+        randVal == 1 and
+        crabMob and
+        crabMob:getLocalVar('CrabSpawned') == 0
+    then
         SpawnMob(ID.mob.UNDEAD_CRAB, instance)
         crabMob:setLocalVar('CrabSpawned', 1)
     else

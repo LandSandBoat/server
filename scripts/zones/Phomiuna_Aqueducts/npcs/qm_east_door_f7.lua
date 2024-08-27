@@ -12,7 +12,7 @@ end
 entity.onTrigger = function(player, npc)
     local door = GetNPCByID(npc:getID() - 1)
 
-    if door:getAnimation() == xi.anim.CLOSE_DOOR then
+    if door and door:getAnimation() == xi.anim.CLOSE_DOOR then
         player:startEvent(50)
     end
 end
@@ -24,7 +24,9 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 50 then
         local door = GetNPCByID(npc:getID() - 1)
 
-        door:openDoor(7) -- _0re
+        if door then
+            door:openDoor(7) -- _0re
+        end
     end
 end
 

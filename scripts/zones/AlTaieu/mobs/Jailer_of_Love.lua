@@ -52,10 +52,13 @@ entity.onMobFight = function(mob, target)
             local phuaboDn = {}
             for i = ID.mob.JAILER_OF_LOVE + 1, ID.mob.JAILER_OF_LOVE + 9 do
                 local phuabo = GetMobByID(i)
-                if phuabo:isAlive() then
-                    table.insert(phuaboUp, i)
-                elseif not phuabo:isSpawned() then
-                    table.insert(phuaboDn, i)
+
+                if phuabo then
+                    if phuabo:isAlive() then
+                        table.insert(phuaboUp, i)
+                    elseif not phuabo:isSpawned() then
+                        table.insert(phuaboDn, i)
+                    end
                 end
             end
 

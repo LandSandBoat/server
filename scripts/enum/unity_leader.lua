@@ -1,6 +1,6 @@
 xi = xi or {}
 
----@enum unityLeader
+---@enum xi.unityLeader
 xi.unityLeader =
 {
     NONE              = 0,

@@ -172,6 +172,8 @@ mission.sections =
                         player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY1) and
                         player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY2) and
                         player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY3) and
+                        nioA and
+                        nioHum and
                         (not nioA:isSpawned() or nioA:isDead()) and
                         (not nioHum:isSpawned() or nioHum:isDead())
                     then
@@ -195,6 +197,7 @@ mission.sections =
 
                     if
                         player:getMissionStatus(mission.areaId) == 5 and
+                        mobNioHum and
                         (mobNioHum:isDead() or not mobNioHum:isSpawned())
                     then
                         mission:setVar(player, 'Prog', 1)
@@ -209,6 +212,7 @@ mission.sections =
 
                     if
                         player:getMissionStatus(mission.areaId) == 5 and
+                        mobNioA and
                         (mobNioA:isDead() or not mobNioA:isSpawned())
                     then
                         mission:setVar(player, 'Prog', 1)

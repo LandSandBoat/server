@@ -10,6 +10,11 @@ end
 
 entity.onMobFight = function(mob, target)
     local auraGear = GetMobByID(mob:getID() + 1)
+
+    if not auraGear then
+        return
+    end
+
     local petCount = mob:getLocalVar('petCount')
 
     -- Summons an Aura Gear every 15 seconds.

@@ -32,8 +32,11 @@ local denOfRancorGlobal =
                 if total == 32 then
                     for i = ID.npc.LANTERN_OFFSET, ID.npc.LANTERN_OFFSET + 3 do
                         local lantern = GetNPCByID(i)
-                        lantern:closeDoor(1)
-                        lantern:openDoor(30)
+
+                        if lantern then
+                            lantern:closeDoor(1)
+                            lantern:openDoor(30)
+                        end
                     end
 
                     GetNPCByID(ID.npc.LANTERN_OFFSET + 4):openDoor(30)
@@ -67,8 +70,11 @@ local denOfRancorGlobal =
                     player:messageSpecial(ID.text.LANTERN_OFFSET + 12)
                     for i = ID.npc.LANTERN_OFFSET + 6, ID.npc.LANTERN_OFFSET + 7 do
                         local lantern = GetNPCByID(i)
-                        lantern:closeDoor(1)
-                        lantern:openDoor(30)
+
+                        if lantern then
+                            lantern:closeDoor(1)
+                            lantern:openDoor(30)
+                        end
                     end
 
                     GetNPCByID(ID.npc.LANTERN_OFFSET + 8):openDoor(30)
@@ -104,8 +110,11 @@ local denOfRancorGlobal =
                     player:messageSpecial(ID.text.LANTERN_OFFSET + 12)
                     for i = ID.npc.LANTERN_OFFSET + 9, ID.npc.LANTERN_OFFSET + 10 do
                         local lantern = GetNPCByID(i)
-                        lantern:closeDoor(1)
-                        lantern:openDoor(30)
+
+                        if lantern then
+                            lantern:closeDoor(1)
+                            lantern:openDoor(30)
+                        end
                     end
 
                     GetNPCByID(ID.npc.LANTERN_OFFSET + 11):openDoor(30)

@@ -29,17 +29,19 @@ local getMobToSpawn = function(detector)
     local steamCleanerSpawnChance = 10 -- percent
     local steamCleaner            = GetMobByID(ID.mob.STEAM_CLEANER)
 
-    if steamCleaner:isSpawned() then
-        -- If this is the Detector that spawned SC, then he should continue to return SC
-        if detector:getLocalVar('SpawnedSC') == 1 then
+    if steamCleaner then
+        if steamCleaner:isSpawned() then
+            -- If this is the Detector that spawned SC, then he should continue to return SC
+            if detector:getLocalVar('SpawnedSC') == 1 then
+                return steamCleaner
+            end
+
+            -- else fall through to the last return at the bottom that returns Caretaker
+        elseif canSpawnSteamCleaner and math.random(1, 100) <= steamCleanerSpawnChance then
+            -- Set this as the Detector that spawned SC
+            detector:setLocalVar('SpawnedSC', 1)
             return steamCleaner
         end
-
-        -- else fall through to the last return at the bottom that returns Caretaker
-    elseif canSpawnSteamCleaner and math.random(1, 100) <= steamCleanerSpawnChance then
-        -- Set this as the Detector that spawned SC
-        detector:setLocalVar('SpawnedSC', 1)
-        return steamCleaner
     end
 
     return GetMobByID(detectorID + 1) -- return this detector's caretaker

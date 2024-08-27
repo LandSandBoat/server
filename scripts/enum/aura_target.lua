@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@enum auraTarget
+---@enum xi.auraTarget
 xi.auraTarget =
 {
     ALLIES  = 0,

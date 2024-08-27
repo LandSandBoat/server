@@ -26,7 +26,7 @@ These are FOURCC (4 character codes). They will always be 4, not 5+.
 For most things you can get away with using the wrong one, and they still just work.
 --]]
 
----@enum animationString
+---@enum xi.animationString
 xi.animationString =
 {
     -- Physical

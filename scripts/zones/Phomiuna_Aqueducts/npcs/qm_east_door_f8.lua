@@ -13,7 +13,11 @@ entity.onTrigger = function(player, npc)
     local xPos = player:getXPos()
     local door = GetNPCByID(npc:getID() - 1)
 
-    if xPos <= -65 and door:getAnimation() == xi.anim.CLOSE_DOOR then
+    if
+        xPos <= -65 and
+        door and
+        door:getAnimation() == xi.anim.CLOSE_DOOR
+    then
         door:openDoor(15) -- _0rk
     end
 end

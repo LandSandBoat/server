@@ -27,7 +27,7 @@ local despawnFloorMobs = function(crateOffset, count)
     for i = 1, count do
         local mob = GetMobByID(mobOffset + i - 1)
 
-        if mob:isAlive() then
+        if mob and mob:isAlive() then
             -- Pseudo death as the mob shouldn't drop items, give xp or even broadcast a message that it has died
             mob:setAnimation(xi.animation.DEATH)
             mob:stun(16000) -- This will stop it from doing anything
@@ -42,7 +42,7 @@ local despawnFloorCrates = function(crateOffset, count)
     for i = 1, count do
         local crate = GetEntityByID(crateOffset + i - 1)
 
-        if crate:getLocalVar('opened') == 0 then
+        if crate and crate:getLocalVar('opened') == 0 then
             crate:setLocalVar('opened', 1)
             npcUtil.disappearCrate(crate)
         end
@@ -53,7 +53,7 @@ local lockFloorCrates = function(crateOffset, count)
     for i = 1, count do
         local crate = GetEntityByID(crateOffset + i - 1)
 
-        if crate:getLocalVar('opened') == 0 then
+        if crate and crate:getLocalVar('opened') == 0 then
             crate:setLocalVar('opened', 1)
             crate:addListener('ON_TRIGGER', 'TRIGGER_LOCKED_CRATE', function(player, npc)
                 player:messageSpecial(ID.text.CANNOT_OPEN_CHEST)
@@ -68,11 +68,14 @@ local unlockFloorCrates = function(floor, mobCount, battlefield, mob, count)
 
     for i = 1, mobCount do
         local crate = GetEntityByID(crateOffset + i - 1)
-        crate:removeListener('TRIGGER_LOCKED_CRATE')
 
-        if crate:getStatus() == xi.status.NORMAL then
-            crate:setLocalVar('opened', 0)
-            unlockedCrate = true
+        if crate then
+            crate:removeListener('TRIGGER_LOCKED_CRATE')
+
+            if crate:getStatus() == xi.status.NORMAL then
+                crate:setLocalVar('opened', 0)
+                unlockedCrate = true
+            end
         end
     end
 
@@ -84,81 +87,91 @@ end
 local setupItemCrate = function(crateID, floor, crateOffset, count)
     local crate = GetEntityByID(crateID)
 
-    xi.limbus.hideCrate(crate)
-    crate:setModelId(961)
-    crate:removeListener('TRIGGER_LOCKED_CRATE')
-    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
-        npcUtil.openCrate(npc, function()
-            despawnFloorMobs(crateOffset, count)
-            despawnFloorCrates(crateOffset, count)
-            content:handleLootRolls(player:getBattlefield(), content.loot[floor], npc)
+    if crate then
+        xi.limbus.hideCrate(crate)
+        crate:setModelId(961)
+        crate:removeListener('TRIGGER_LOCKED_CRATE')
+        crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
+            npcUtil.openCrate(npc, function()
+                despawnFloorMobs(crateOffset, count)
+                despawnFloorCrates(crateOffset, count)
+                content:handleLootRolls(player:getBattlefield(), content.loot[floor], npc)
 
-            -- Opening the last floor crate leads to victory
-            if floor == 7 then
-                local battlefield = player:getBattlefield()
-                battlefield:setLocalVar('cutsceneTimer', content.delayToExit)
-                battlefield:setStatus(xi.battlefield.status.WON)
-            else
-                content:openDoor(player:getBattlefield(), floor)
-            end
+                -- Opening the last floor crate leads to victory
+                if floor == 7 then
+                    local battlefield = player:getBattlefield()
+                    battlefield:setLocalVar('cutsceneTimer', content.delayToExit)
+                    battlefield:setStatus(xi.battlefield.status.WON)
+                else
+                    content:openDoor(player:getBattlefield(), floor)
+                end
+            end)
         end)
-    end)
+    end
 end
 
 local setupMysticCrate = function(crateID, floor, crateOffset, count)
     local crate = GetEntityByID(crateID)
 
-    xi.limbus.hideCrate(crate)
-    crate:setModelId(961)
-    crate:removeListener('TRIGGER_LOCKED_CRATE')
-    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
-        npcUtil.openCrate(npc, function()
-            despawnFloorMobs(crateOffset, count)
-            lockFloorCrates(crateOffset, count)
+    if crate then
+        xi.limbus.hideCrate(crate)
+        crate:setModelId(961)
+        crate:removeListener('TRIGGER_LOCKED_CRATE')
+        crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
+            npcUtil.openCrate(npc, function()
+                despawnFloorMobs(crateOffset, count)
+                lockFloorCrates(crateOffset, count)
 
-            -- Skip over the crates and mobs which are always equal in size
-            -- Spawn the Mystic Avatar
-            local mysticID = crateOffset + count * 2
-            local mystic   = GetMobByID(mysticID)
-            mystic:setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), npc:getRotPos())
-            mystic:spawn()
-            mystic:updateEnmity(player)
+                -- Skip over the crates and mobs which are always equal in size
+                -- Spawn the Mystic Avatar
+                local mysticID = crateOffset + count * 2
+                local mystic   = GetMobByID(mysticID)
+                if mystic then
+                    mystic:setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), npc:getRotPos())
+                    mystic:spawn()
+                    mystic:updateEnmity(player)
+                end
+            end)
         end)
-    end)
+    end
 end
 
 local setupTimeCrate = function(crateID, floor, crateOffset, count)
     local crate = GetEntityByID(crateID)
 
-    xi.limbus.hideCrate(crate)
-    crate:setModelId(962)
-    crate:removeListener('TRIGGER_LOCKED_CRATE')
-    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
-        npcUtil.openCrate(crate, function()
-            despawnFloorMobs(crateOffset, count)
-            despawnFloorCrates(crateOffset, count)
-            content:openDoor(player:getBattlefield(), floor)
-            content:extendTimeLimit(zones[content.zoneId], player:getBattlefield())
+    if crate then
+        xi.limbus.hideCrate(crate)
+        crate:setModelId(962)
+        crate:removeListener('TRIGGER_LOCKED_CRATE')
+        crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
+            npcUtil.openCrate(crate, function()
+                despawnFloorMobs(crateOffset, count)
+                despawnFloorCrates(crateOffset, count)
+                content:openDoor(player:getBattlefield(), floor)
+                content:extendTimeLimit(zones[content.zoneId], player:getBattlefield())
+            end)
         end)
-    end)
+    end
 end
 
 local setupRecoverCrate = function(crateID, floor, crateOffset, count)
     local crate = GetEntityByID(crateID)
 
-    xi.limbus.hideCrate(crate)
-    crate:setModelId(960)
-    crate:removeListener('TRIGGER_LOCKED_CRATE')
-    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
-        npcUtil.openCrate(crate, function()
-            despawnFloorMobs(crateOffset, count)
-            despawnFloorCrates(crateOffset, count)
-            content:openDoor(player:getBattlefield(), floor)
+    if crate then
+        xi.limbus.hideCrate(crate)
+        crate:setModelId(960)
+        crate:removeListener('TRIGGER_LOCKED_CRATE')
+        crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
+            npcUtil.openCrate(crate, function()
+                despawnFloorMobs(crateOffset, count)
+                despawnFloorCrates(crateOffset, count)
+                content:openDoor(player:getBattlefield(), floor)
 
-            -- Use wz_recover_all to heal players
-            crate:useMobAbility(1531, player)
+                -- Use wz_recover_all to heal players
+                crate:useMobAbility(1531, player)
+            end)
         end)
-    end)
+    end
 end
 
 function content:onBattlefieldInitialise(battlefield)

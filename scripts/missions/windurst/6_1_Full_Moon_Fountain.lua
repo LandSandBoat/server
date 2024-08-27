@@ -31,7 +31,7 @@ local function areJacksSpawned()
     for mobIdOffset = 0, 3 do
         local mobObj = GetMobByID(outerHorutotoID.mob.FULL_MOON_FOUNTAIN_OFFSET + mobIdOffset)
 
-        if mobObj:isSpawned() then
+        if mobObj and mobObj:isSpawned() then
             return true
         end
     end
@@ -50,6 +50,7 @@ local jackOnMobDeath = function(mob, player, optParams)
         local mobObj = GetMobByID(outerHorutotoID.mob.FULL_MOON_FOUNTAIN_OFFSET + mobIdOffset)
 
         if
+            mobObj and
             not mobObj:isDead() and
             mobObj:isSpawned()
         then

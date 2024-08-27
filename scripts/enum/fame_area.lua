@@ -3,7 +3,7 @@ xi = xi or {}
 -- NOTE: Duplicated areas should not be used here.  For example,
 -- Mhaura and Kazham fame use WINDURST fame area.  This table
 -- follows mapping of CLuaBaseEntity::addFame()
----@enum fameArea
+---@enum xi.fameArea
 xi.fameArea =
 {
     SANDORIA           =  0,

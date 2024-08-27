@@ -36,7 +36,7 @@ entity.onMobFight = function(mob, target)
             -- Force minions to 2hour
             for i = 1, 2 do
                 local minion = GetMobByID(mob:getID() + i)
-                if minion:getCurrentAction() ~= xi.act.NONE then
+                if minion and minion:getCurrentAction() ~= xi.act.NONE then
                     minion:useMobAbility(3411 + i) -- Chainspell or Benediction
                 end
             end
@@ -54,6 +54,10 @@ entity.onMobDespawn = function(mob)
     DespawnMob(mob:getID() + 2)
 
     local qm = GetNPCByID(ID.npc.QM_IXAERN_MNK)
+    if not qm then
+        return
+    end
+
     if math.random(0, 1) == 1 then
         qm:setPos(380, 0, 540, 0) -- G-7
     else

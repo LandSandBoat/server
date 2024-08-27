@@ -31,11 +31,14 @@ entity.onMobRoam = function(mob)
     if phIndex > 0 and os.time() > mob:getLocalVar('timeToGrow') then
         mob:setLocalVar('phIndex', 0)
         local nm = GetMobByID(ID.mob.TAISAIJIN)
-        DisallowRespawn(mob:getID(), true)
-        DespawnMob(mob:getID())
-        DisallowRespawn(nm:getID(), false)
-        SpawnMob(nm:getID())
-        nm:setLocalVar('phIndex', phIndex)
+
+        if nm then
+            DisallowRespawn(mob:getID(), true)
+            DespawnMob(mob:getID())
+            DisallowRespawn(nm:getID(), false)
+            SpawnMob(nm:getID())
+            nm:setLocalVar('phIndex', phIndex)
+        end
     end
 end
 

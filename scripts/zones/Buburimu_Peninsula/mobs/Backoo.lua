@@ -20,7 +20,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    GetMobByID(ID.mob.BACKOO):setRespawnTime(math.random(3600, 5400), true) -- 60-90 minute respawn, depending on if it's daytime
+    GetMobByID(ID.mob.BACKOO):setRespawnTime(math.random(3600, 5400)) -- 60-90 minute respawn, depending on if it's daytime
 end
 
 return entity

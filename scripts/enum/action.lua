@@ -3,7 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
----@enum action
+---@enum xi.action
 xi.action =
 {
     NONE                  = 0,

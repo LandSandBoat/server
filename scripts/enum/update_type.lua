@@ -1,7 +1,7 @@
 xi = xi or {}
 
 -- see `enum UPDATETYPE` in src\map\entities\baseentity.h
----@enum updateType
+---@enum xi.updateType
 xi.updateType =
 {
     UPDATE_NONE     = 0x00,

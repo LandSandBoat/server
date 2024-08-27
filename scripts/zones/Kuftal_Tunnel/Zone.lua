@@ -97,6 +97,7 @@ zoneObject.onGameHour = function(zone)
         local boulder = GetNPCByID(ID.npc.DOOR_ROCK)
 
         if
+            boulder and
             isInRange(VanadielMoonPhase(), phaseInfo) and
             boulder:getAnimation() == xi.anim.CLOSE_DOOR
         then

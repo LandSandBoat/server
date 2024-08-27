@@ -23,10 +23,12 @@ end
 function xi.limbus.showRecoverCrate(crateID)
     local crate = GetMobByID(crateID)
 
-    crate:setAnimationSub(8)
-    crate:setStatus(xi.status.NORMAL)
-    crate:setUntargetable(false)
-    crate:resetLocalVars()
+    if crate then
+        crate:setAnimationSub(8)
+        crate:setStatus(xi.status.NORMAL)
+        crate:setUntargetable(false)
+        crate:resetLocalVars()
+    end
 end
 
 function xi.limbus.hideCrate(crate)
@@ -37,7 +39,8 @@ end
 
 function xi.limbus.spawnFrom(mob, crateID)
     local crate = GetEntityByID(crateID)
-    if crate:getLocalVar('opened') == 0 then
+
+    if crate and crate:getLocalVar('opened') == 0 then
         crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
         crate:setStatus(xi.status.NORMAL)
         crate:setUntargetable(false)
@@ -47,8 +50,11 @@ end
 
 function xi.limbus.spawnRecoverFrom(mob, crateID)
     local crate = GetMobByID(crateID)
-    crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
-    xi.limbus.showRecoverCrate(crateID)
+
+    if crate then
+        crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
+        xi.limbus.showRecoverCrate(crateID)
+    end
 end
 
 Limbus         = setmetatable({ }, { __index = Battlefield })
@@ -125,8 +131,10 @@ function Limbus:onBattlefieldInitialise(battlefield)
         for i, crateID in ipairs(ID.npc.ITEM_CRATES) do
             local crate = GetEntityByID(crateID)
 
-            xi.limbus.hideCrate(crate)
-            crate:addListener('ON_TRIGGER', 'TRIGGER_ITEM_CRATE', utils.bind(self.handleOpenItemCrate, self))
+            if crate then
+                xi.limbus.hideCrate(crate)
+                crate:addListener('ON_TRIGGER', 'TRIGGER_ITEM_CRATE', utils.bind(self.handleOpenItemCrate, self))
+            end
         end
     end
 
@@ -135,8 +143,10 @@ function Limbus:onBattlefieldInitialise(battlefield)
         for i, crateID in ipairs(ID.npc.TIME_CRATES) do
             local crate = GetEntityByID(crateID)
 
-            xi.limbus.hideCrate(crate)
-            crate:addListener('ON_TRIGGER', 'TRIGGER_TIME_CRATE', utils.bind(self.handleOpenTimeCrate, self))
+            if crate then
+                xi.limbus.hideCrate(crate)
+                crate:addListener('ON_TRIGGER', 'TRIGGER_TIME_CRATE', utils.bind(self.handleOpenTimeCrate, self))
+            end
         end
     end
 
@@ -146,9 +156,11 @@ function Limbus:onBattlefieldInitialise(battlefield)
         for i, crateID in ipairs(ID.npc.RECOVER_CRATES) do
             local crate = GetEntityByID(crateID)
 
-            xi.limbus.hideCrate(crate)
-            crate:setBattleID(1) -- Different battle ID prevents the crate from being hit by AOEs
-            crate:addListener('ON_TRIGGER', 'TRIGGER_RECOVER_CRATE', utils.bind(self.handleOpenRecoverCrate, self))
+            if crate then
+                xi.limbus.hideCrate(crate)
+                crate:setBattleID(1) -- Different battle ID prevents the crate from being hit by AOEs
+                crate:addListener('ON_TRIGGER', 'TRIGGER_RECOVER_CRATE', utils.bind(self.handleOpenRecoverCrate, self))
+            end
         end
     end
 
@@ -156,8 +168,10 @@ function Limbus:onBattlefieldInitialise(battlefield)
     if ID.npc.LOOT_CRATE then
         local crate = GetEntityByID(ID.npc.LOOT_CRATE)
 
-        xi.limbus.hideCrate(crate)
-        crate:addListener('ON_TRIGGER', 'TRIGGER_LOOT_CRATE', utils.bind(self.handleOpenLootCrate, self))
+        if crate then
+            xi.limbus.hideCrate(crate)
+            crate:addListener('ON_TRIGGER', 'TRIGGER_LOOT_CRATE', utils.bind(self.handleOpenLootCrate, self))
+        end
     end
 
     -- Setup Linked Crates (can only open one)
@@ -165,7 +179,9 @@ function Limbus:onBattlefieldInitialise(battlefield)
         for crateID, _ in pairs(ID.LINKED_CRATES) do
             local mainCrate = GetEntityByID(crateID)
 
-            mainCrate:addListener('ON_TRIGGER', 'TRIGGER_LINKED_CRATE', utils.bind(self.handleLinkedCrate, self))
+            if mainCrate then
+                mainCrate:addListener('ON_TRIGGER', 'TRIGGER_LINKED_CRATE', utils.bind(self.handleLinkedCrate, self))
+            end
         end
     end
 end
@@ -254,15 +270,17 @@ function Limbus:handleLinkedCrate(player, npc)
     for _, crateID in ipairs(self.ID.LINKED_CRATES[npc:getID()]) do
         local crate = GetEntityByID(crateID)
 
-        crate:setLocalVar('opened', 1)
-        npcUtil.disappearCrate(crate)
+        if crate then
+            crate:setLocalVar('opened', 1)
+            npcUtil.disappearCrate(crate)
+        end
     end
 end
 
 function Limbus:openDoor(battlefield, floor)
     local door = GetNPCByID(self.ID.npc.PORTAL[floor])
 
-    if door:getAnimation() == xi.animation.OPEN_DOOR then
+    if not door or door:getAnimation() == xi.animation.OPEN_DOOR then
         return
     end
 

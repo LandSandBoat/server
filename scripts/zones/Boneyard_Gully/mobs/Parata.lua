@@ -38,11 +38,14 @@ entity.onMobFight = function(mob, target)
     -- If we have spawned a pet
     if petID ~= 0 then
         local pet = SpawnMob(petID)
-        battlefield:insertEntity(pet:getTargID(), false, true)
-        pet:updateEnmity(target)
 
-        local pos = mob:getPos()
-        pet:setPos(pos.x, pos.y, pos.z, pos.rot)
+        if pet then
+            battlefield:insertEntity(pet:getTargID(), false, true)
+            pet:updateEnmity(target)
+
+            local pos = mob:getPos()
+            pet:setPos(pos.x, pos.y, pos.z, pos.rot)
+        end
     end
 end
 
@@ -52,7 +55,7 @@ entity.onMobDeath = function(mob, player, optParams)
         local bfID = mob:getBattlefield():getArea()
         for _, petId in ipairs(ID.shellWeDance[bfID].PARATA_PET_IDS) do
             local pet = GetMobByID(petId)
-            if pet:isAlive() then
+            if pet and pet:isAlive() then
                 pet:setHP(0)
             end
         end

@@ -9,6 +9,11 @@ local zoneObject = {}
 
 local function registerRegionAroundNPC(zone, NPCID, zoneID)
     local npc      = GetNPCByID(NPCID)
+
+    if not npc then
+        return
+    end
+
     local x        = npc:getXPos()
     local y        = npc:getYPos()
     local z        = npc:getZPos()

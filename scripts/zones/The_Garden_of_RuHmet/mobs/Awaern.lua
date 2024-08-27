@@ -24,28 +24,30 @@ entity.onMobDeath = function(mob, player, optParams)
     -- Ix'Aern DRK animosity mechanic
     if optParams.isKiller then
         local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK)
-        local hatedPlayer = qmDrk:getLocalVar('hatedPlayer')
-        local isInTime = qmDrk:getLocalVar('hateTimer') > os.time()
 
-        if
-            qmDrk:getStatus() ~= xi.status.DISAPPEAR and
-            (hatedPlayer == 0 or not isInTime)
-        then
+        if qmDrk then
+            local hatedPlayer = qmDrk:getLocalVar('hatedPlayer')
+            local isInTime    = qmDrk:getLocalVar('hateTimer') > os.time()
 
-            -- if hated player took too long, reset
-            if hatedPlayer ~= 0 then
-                qmDrk:setLocalVar('hatedPlayer', 0)
-                qmDrk:setLocalVar('hateTimer', 0)
-            end
+            if
+                qmDrk:getStatus() ~= xi.status.DISAPPEAR and
+                (hatedPlayer == 0 or not isInTime)
+            then
+                -- if hated player took too long, reset
+                if hatedPlayer ~= 0 then
+                    qmDrk:setLocalVar('hatedPlayer', 0)
+                    qmDrk:setLocalVar('hateTimer', 0)
+                end
 
-            -- if aern belongs to QM group, chance for sheer animosity
-            local position = GetNPCByID(ID.npc.QM_IXAERN_DRK):getLocalVar('position')
-            local offset = mob:getID() - ID.mob.AWAERN_DRK_GROUPS[position]
-            if offset >= 0 and offset <= 2 then
-                if math.random(1, 8) == 1 then
-                    qmDrk:setLocalVar('hatedPlayer', player:getID())
-                    qmDrk:setLocalVar('hateTimer', os.time() + 600) -- player with animosity has 10 minutes to touch QM
-                    player:messageSpecial(ID.text.SHEER_ANIMOSITY)
+                -- if aern belongs to QM group, chance for sheer animosity
+                local position = GetNPCByID(ID.npc.QM_IXAERN_DRK):getLocalVar('position')
+                local offset = mob:getID() - ID.mob.AWAERN_DRK_GROUPS[position]
+                if offset >= 0 and offset <= 2 then
+                    if math.random(1, 8) == 1 then
+                        qmDrk:setLocalVar('hatedPlayer', player:getID())
+                        qmDrk:setLocalVar('hateTimer', os.time() + 600) -- player with animosity has 10 minutes to touch QM
+                        player:messageSpecial(ID.text.SHEER_ANIMOSITY)
+                    end
                 end
             end
         end

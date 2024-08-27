@@ -65,6 +65,11 @@ quest.sections =
                             return quest:messageSpecial(konschtatID.text.BLACKENED_NOTHING_HAPPENS, xi.item.LUMP_OF_ORIENTAL_STEEL)
                         else
                             local forgerMob = SpawnMob(konschtatID.mob.FORGER)
+
+                            if not forgerMob then
+                                return quest:noAction()
+                            end
+
                             forgerMob:updateClaim(player)
                             player:confirmTrade()
 
@@ -241,6 +246,11 @@ quest.sections =
                             return quest:messageSpecial(zitahID.text.STRANGE_FORCE_PREVENTS)
                         else
                             local treantMob = SpawnMob(zitahID.mob.GUARDIAN_TREANT)
+
+                            if not treantMob then
+                                return quest:noAction()
+                            end
+
                             treantMob:updateClaim(player)
                             player:confirmTrade()
 

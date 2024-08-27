@@ -50,7 +50,7 @@ local lowerJeunoGlobal =
             local lampsRemaining = 12
             for i = 0, 11 do
                 local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
-                if lamp:getAnimation() == xi.anim.OPEN_DOOR then
+                if lamp and lamp:getAnimation() == xi.anim.OPEN_DOOR then
                     lampsRemaining = lampsRemaining - 1
                 end
             end

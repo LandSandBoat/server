@@ -436,7 +436,7 @@ xi.nyzul.clearChests = function(instance)
     for _, cofferID in ipairs(ID.npc.TREASURE_COFFER) do
         local coffer = GetNPCByID(cofferID, instance)
 
-        if coffer:getStatus() ~= xi.status.DISAPPEAR then
+        if coffer and coffer:getStatus() ~= xi.status.DISAPPEAR then
             coffer:setStatus(xi.status.DISAPPEAR)
             coffer:setAnimationSub(0)
             coffer:resetLocalVars()
@@ -447,7 +447,7 @@ xi.nyzul.clearChests = function(instance)
         for _, casketID in ipairs(ID.npc.TREASURE_CASKET) do
             local casket = GetNPCByID(casketID, instance)
 
-            if casket:getStatus() ~= xi.status.DISAPPEAR then
+            if casket and casket:getStatus() ~= xi.status.DISAPPEAR then
                 casket:setStatus(xi.status.DISAPPEAR)
                 casket:setAnimationSub(0)
                 casket:resetLocalVars()
@@ -581,7 +581,7 @@ xi.nyzul.vigilWeaponDrop = function(player, mob)
     -- Only floor 100 Bosses to drop 1 random weapon guarenteed and 1 of the disk holders job
     -- will not drop diskholder's weapon if anyone already has it.
     if instance:getLocalVar('Nyzul_Current_Floor') == 100 then
-        local diskHolder = GetPlayerByID(instance:getLocalVar('diskHolder'), instance)
+        local diskHolder = GetPlayerByID(instance:getLocalVar('diskHolder'))
         local chars      = instance:getChars()
 
         if diskHolder ~= nil then
@@ -616,7 +616,7 @@ xi.nyzul.spawnChest = function(mob, player)
         for _, cofferID in ipairs(ID.npc.TREASURE_COFFER) do
             local coffer = GetNPCByID(cofferID, instance)
 
-            if coffer:getStatus() == xi.status.DISAPPEAR then
+            if coffer and coffer:getStatus() == xi.status.DISAPPEAR then
                 local pos = mob:getPos()
                 coffer:setUntargetable(false)
                 coffer:setPos(pos.x, pos.y, pos.z, pos.rot)
@@ -636,7 +636,7 @@ xi.nyzul.spawnChest = function(mob, player)
             for _, casketID in ipairs(ID.npc.TREASURE_CASKET) do
                 local casket = GetNPCByID(casketID, instance)
 
-                if casket:getStatus() == xi.status.DISAPPEAR then
+                if casket and casket:getStatus() == xi.status.DISAPPEAR then
                     local pos = mob:getPos()
                     casket:setPos(pos.x, pos.y, pos.z, pos.rot)
                     casket:setStatus(xi.status.NORMAL)

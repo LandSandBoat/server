@@ -16,7 +16,7 @@ entity.onMobFight = function(mob, target)
     local mobPet = GetMobByID((mob:getID() + 1), instance)
 
     if os.time() - popTime > 15 then
-        if not mobPet:isSpawned() then
+        if mobPet and not mobPet:isSpawned() then
             mobPet:setSpawn(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:useMobAbility(2034)
             mob:setLocalVar('lastPetPop', os.time())
@@ -26,7 +26,7 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    if mobPet:isSpawned() then
+    if mobPet and mobPet:isSpawned() then
         mobPet:updateEnmity(target)
     end
 end

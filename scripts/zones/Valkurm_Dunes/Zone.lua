@@ -82,10 +82,13 @@ end
 
 zoneObject.onZoneWeatherChange = function(weather)
     local qm1 = GetNPCByID(ID.npc.SUNSAND_QM) -- Quest: An Empty Vessel
-    if weather == xi.weather.DUST_STORM then
-        qm1:setStatus(xi.status.NORMAL)
-    else
-        qm1:setStatus(xi.status.DISAPPEAR)
+
+    if qm1 then
+        if weather == xi.weather.DUST_STORM then
+            qm1:setStatus(xi.status.NORMAL)
+        else
+            qm1:setStatus(xi.status.DISAPPEAR)
+        end
     end
 end
 

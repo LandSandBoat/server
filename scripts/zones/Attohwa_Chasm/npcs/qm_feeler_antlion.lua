@@ -10,6 +10,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local nm = GetMobByID(ID.mob.FEELER_ANTLION)
     if
+        nm and
         not nm:isSpawned() and
         trade:hasItemQty(xi.item.ANTLION_TRAP, 1) and
         trade:getItemCount() == 1

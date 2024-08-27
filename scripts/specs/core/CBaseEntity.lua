@@ -440,8 +440,13 @@ end
 ---@param arg1 number
 ---@param arg2 number
 ---@return boolean
----@overload fun(arg0: table): boolean
 function CBaseEntity:atPoint(arg0, arg1, arg2)
+end
+
+---@nodiscard
+---@param pointsTable table
+---@return boolean
+function CBaseEntity:atPoint(pointsTable)
 end
 
 ---@param x number
@@ -649,7 +654,7 @@ function CBaseEntity:getZone(arg0)
 end
 
 ---@nodiscard
----@return integer
+---@return xi.zone
 function CBaseEntity:getZoneID()
 end
 
@@ -659,13 +664,13 @@ function CBaseEntity:getZoneName()
 end
 
 ---@nodiscard
----@param zone integer
+---@param zone xi.zone
 ---@return boolean
 function CBaseEntity:hasVisitedZone(zone)
 end
 
 ---@nodiscard
----@return integer
+---@return xi.zone
 function CBaseEntity:getPreviousZone()
 end
 
@@ -905,7 +910,6 @@ end
 ---@return CItem?
 function CBaseEntity:findItem(itemID, location)
 end
-
 
 ---@param size integer
 ---@param arg1 integer?
