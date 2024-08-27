@@ -95,3 +95,12 @@ void WorldServer::Tick()
 {
     Application::Tick();
 }
+
+auto WorldServer::playersOnline_REQ_RECV(TestStruct) -> std::size_t
+{
+    return 0;
+}
+
+void WorldServer::playersOnline_RES_SEND(std::size_t)
+{
+}

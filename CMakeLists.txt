@@ -81,6 +81,33 @@ endif()
 add_library(project_options INTERFACE)
 target_compile_features(project_options INTERFACE cxx_std_17)
 
+# Find Python (defines ${Python_EXECUTABLE})
+find_package(Python REQUIRED)
+message(STATUS "Python_EXECUTABLE: ${Python_EXECUTABLE}")
+message(STATUS "Python_VERSION: ${Python_VERSION}")
+if(NOT ${Python_VERSION_MAJOR} EQUAL 3)
+    message(FATAL_ERROR "Python 3 is required")
+endif()
+
+# Generate RPC calls from IDL
+set_property(
+    DIRECTORY
+    APPEND
+    PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/tools/generate_rpc_stubs.py
+)
+message(STATUS "Generating RPC stubs")
+message(STATUS "Calling: ${Python_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tools/generate_rpc_stubs.py ${CMAKE_BINARY_DIR}")
+execute_process(
+    COMMAND ${Python_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tools/generate_rpc_stubs.py ${CMAKE_BINARY_DIR}
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    RESULT_VARIABLE RPC_EXIT_CODE
+)
+if (NOT RPC_EXIT_CODE EQUAL 0)
+    message(FATAL_ERROR "Failed to generate RPC stubs")
+endif()
+
+include_directories(${CMAKE_BINARY_DIR}/generated) # Globally include the build/generated directory
+
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
 add_library(project_warnings INTERFACE)
 set_project_warnings(project_warnings)

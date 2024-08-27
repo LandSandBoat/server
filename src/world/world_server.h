@@ -30,14 +30,19 @@
 #include "conquest_system.h"
 #include "http_server.h"
 #include "message_server.h"
+#include "rpc_world_service.h"
 
-class WorldServer final : public Application
+class WorldServer final : public Application, public IRPCWorldService
 {
 public:
     WorldServer(int argc, char** argv);
     ~WorldServer() override;
 
     void Tick() override;
+
+    // IRPCWorldService
+    auto playersOnline_REQ_RECV(TestStruct) -> std::size_t override;
+    void playersOnline_RES_SEND(std::size_t) override;
 
     std::unique_ptr<HTTPServer>               httpServer;
     std::unique_ptr<message_server_wrapper_t> messageServer;
