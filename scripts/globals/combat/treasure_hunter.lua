@@ -52,7 +52,7 @@ xi.combat.treasureHunter.getDropRate = function(thLevel, dropRate)
     -- Calculate original drop rate bracket.
     local thBracket = 0
 
-    for i = 1, 7 do
+    for i = 1, #xi.combat.treasureHunter.dropBracketTable do
         if thDropRate >= xi.combat.treasureHunter.dropBracketTable[i][1] then
             thBracket = i
 
