@@ -1924,7 +1924,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Mocking_Colibri',412,1699);
 INSERT INTO `mob_skill_lists` VALUES ('Mocking_Colibri',412,1700);
 INSERT INTO `mob_skill_lists` VALUES ('Mocking_Colibri',412,1701);
 INSERT INTO `mob_skill_lists` VALUES ('Mocking_Colibri',412,1702);
--- 413 to 435: free
+INSERT INTO `mob_skill_lists` VALUES ('Phantom_Puk',413,1720);
+INSERT INTO `mob_skill_lists` VALUES ('Phantom_Puk',413,1721);
+INSERT INTO `mob_skill_lists` VALUES ('Phantom_Puk',413,1723);
+INSERT INTO `mob_skill_lists` VALUES ('Phantom_Puk',413,1724);
+-- 414 to 435: free
 INSERT INTO `mob_skill_lists` VALUES ('Bloodlapper',436,2162);
 INSERT INTO `mob_skill_lists` VALUES ('Ghillie_Dhu',437,685);
 INSERT INTO `mob_skill_lists` VALUES ('Highlander_Lizard',438,371);
