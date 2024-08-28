@@ -1918,6 +1918,11 @@ end
 function CBaseEntity:setHP(value)
 end
 
+---@param value integer
+---@return nil
+function CBaseEntity:setMaxHP(value)
+end
+
 ---@param restoreAmt integer
 ---@return integer
 function CBaseEntity:restoreHP(restoreAmt)

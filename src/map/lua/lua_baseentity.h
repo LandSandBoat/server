@@ -464,6 +464,7 @@ public:
     int32 addHP(int32 hpAdd);              // Increase hp of Entity
     int32 addHPLeaveSleeping(int32 hpAdd); // Increase hp of Entity but do not awaken the Entity
     void  setHP(int32 value);              // Set hp of Entity to value
+    void  setMaxHP(int32 value);           // Set max hp of Entity to value
     int32 restoreHP(int32 restoreAmt);     // Modify hp of Entity, but check if alive first
     void  delHP(int32 delAmt);             // Decrease hp of Entity
     void  takeDamage(int32 damage, sol::object const& attacker, sol::object const& atkType,
@@ -639,16 +640,16 @@ public:
     void  clearEnmityForEntity(CLuaBaseEntity* PEntity);
 
     // Status Effects
-    bool   addStatusEffect(sol::variadic_args va);
-    bool   addStatusEffectEx(sol::variadic_args va);
-    auto   getStatusEffect(uint16 StatusID, sol::object const& SubType) -> std::optional<CLuaStatusEffect>;
-    auto   getStatusEffects() -> sol::table;
-    int16  getStatusEffectElement(uint16 statusId);
-    bool   canGainStatusEffect(uint16 effect, sol::object const& powerObj);
-    bool   hasStatusEffect(uint16 StatusID, sol::object const& SubType);
-    bool   hasStatusEffectByFlag(uint16 StatusID);
-    uint8  countEffect(uint16 StatusID);     // Gets the number of effects of a specific type on the entity
-    uint8  countEffectWithFlag(uint32 flag); // Gets the number of effects with a flag on the entity
+    bool  addStatusEffect(sol::variadic_args va);
+    bool  addStatusEffectEx(sol::variadic_args va);
+    auto  getStatusEffect(uint16 StatusID, sol::object const& SubType) -> std::optional<CLuaStatusEffect>;
+    auto  getStatusEffects() -> sol::table;
+    int16 getStatusEffectElement(uint16 statusId);
+    bool  canGainStatusEffect(uint16 effect, sol::object const& powerObj);
+    bool  hasStatusEffect(uint16 StatusID, sol::object const& SubType);
+    bool  hasStatusEffectByFlag(uint16 StatusID);
+    uint8 countEffect(uint16 StatusID);     // Gets the number of effects of a specific type on the entity
+    uint8 countEffectWithFlag(uint32 flag); // Gets the number of effects with a flag on the entity
 
     bool   delStatusEffect(uint16 StatusID, sol::object const& SubType);
     void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);
