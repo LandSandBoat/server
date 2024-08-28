@@ -39,6 +39,18 @@ void handler_session::start()
 {
     if (socket_.lowest_layer().is_open())
     {
+        // Enable keepalives for long sessions (view_session in particular)
+        socket_.lowest_layer().set_option(asio::socket_base::keep_alive(true));
+
+        socket_.lowest_layer().set_option(asio::detail::socket_option::integer<IPPROTO_TCP, TCP_KEEPINTVL>(5 * 60)); // interval between keepalive
+        socket_.lowest_layer().set_option(asio::detail::socket_option::integer<IPPROTO_TCP, TCP_KEEPCNT>(10));       // failed keepalives before declaring dead
+
+#ifdef __APPLE__
+        socket_.lowest_layer().set_option(asio::detail::socket_option::integer<IPPROTO_TCP, TCP_KEEPALIVE>(5 * 60)); // secs before keepalive probes
+#else
+        socket_.lowest_layer().set_option(asio::detail::socket_option::integer<IPPROTO_TCP, TCP_KEEPIDLE>(5 * 60)); // secs before keepalive probes
+#endif
+
         do_read();
     }
 }
