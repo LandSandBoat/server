@@ -86,6 +86,7 @@
 #include "roe.h"
 #include "spell.h"
 #include "status_effect_container.h"
+#include "trade_container.h"
 #include "trait.h"
 #include "treasure_pool.h"
 #include "unitychat.h"
@@ -103,6 +104,7 @@
 #include "itemutils.h"
 #include "petutils.h"
 #include "puppetutils.h"
+#include "synthutils.h"
 #include "zoneutils.h"
 
 /************************************************************************
@@ -6521,6 +6523,12 @@ namespace charutils
             PChar->resetPetZoningInfo();
         }
 
+        // If player somehow gets zoned, force crit fail their synth
+        if (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0)
+        {
+            charutils::forceSynthCritFail("SendToZone", PChar);
+        }
+
         PChar->pushPacket(new CServerIPPacket(PChar, type, ipp));
     }
 
@@ -7120,6 +7128,21 @@ namespace charutils
             return _sql->GetUIntData(0);
         }
         return 0;
+    }
+
+    void forceSynthCritFail(std::string sourceFunction, CCharEntity* PChar)
+    {
+        // NOTE:
+        // Supposed non-losable items are reportedly lost if this condition is met:
+        // https://ffxiclopedia.fandom.com/wiki/Lu_Shang%27s_Fishing_Rod
+        // The broken rod can never be lost in a normal failed synth. It will only be lost if the synth is
+        // interrupted in some way, such as by being attacked or moving to another area (e.g. ship docking).
+
+        ShowWarning("%s: %s attempting to zone in the middle of a synth, failing their synth!", sourceFunction, PChar->getName());
+        PChar->setModifier(Mod::SYNTH_FAIL_RATE, 10000); // Force crit fail
+        synthutils::doSynthFail(PChar);
+
+        PChar->CraftContainer->Clean(); // Clean to reset m_ItemCount to 0
     }
 
 }; // namespace charutils
