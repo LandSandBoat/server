@@ -1,6 +1,7 @@
 require('scripts/globals/common')
 require('scripts/globals/interaction/quest')
 
+---@class utils
 utils = {}
 
 -- Event cancelled constant, replaces the hardcoded value of 1073741824 in many
@@ -13,6 +14,8 @@ utils.MAX_UINT32 = 4294967295
 utils.MAX_INT32  = 2147483647
 
 -- Used to keep the linter quiet
+---@param ... any
+---@return nil
 function utils.unused(...)
 end
 
@@ -99,6 +102,9 @@ function utils.getDebugPlayerPrinter(settingOrCondition, prefix)
     return utils.getDebugPrinter('player', settingOrCondition, prefix)
 end
 
+---@param func function
+---@param ... any
+---@return function
 function utils.bind(func, ...)
     local args = packn(...)
     return function(...)
@@ -107,6 +113,12 @@ function utils.bind(func, ...)
 end
 
 -- Creates a slice of an input table and returns a new table
+---@nodiscard
+---@param inputTable table
+---@param first integer?
+---@param last integer?
+---@param step integer?
+---@return table
 function utils.slice(inputTable, first, last, step)
     local slicedTable = {}
     first = first or 1
@@ -123,6 +135,9 @@ function utils.slice(inputTable, first, last, step)
 end
 
 -- Shuffles a table and returns a new table containing the randomized result.
+---@nodiscard
+---@param inputTable table
+---@return table
 function utils.shuffle(inputTable)
     local shuffledTable = {}
 
@@ -138,6 +153,9 @@ utils.append = nil
 
 -- Recursively appends the input table into the provided base table.
 -- Non-table keys are overwritten by input.
+---@param base table
+---@param input table
+---@return table
 function utils.append(base, input)
     for k, v in pairs(input) do
         local baseValue = base[k]
@@ -153,6 +171,10 @@ end
 
 -- Returns a new table with the two input tables joined together.
 -- Values from second input have higher priority.
+---@nodiscard
+---@param input1 table
+---@param input2 table
+---@return table
 function utils.join(input1, input2)
     local result = {}
     utils.append(result, input1)
@@ -161,22 +183,35 @@ function utils.join(input1, input2)
 end
 
 -- For use alongside os.time()
+---@nodiscard
+---@param minutes integer
+---@return integer
 function utils.minutes(minutes)
     return minutes * 60
 end
 
+---@nodiscard
+---@param hours integer
+---@return integer
 -- For use alongside os.time()
 function utils.hours(hours)
     return hours * 60 * 60
 end
 
 -- For use alongside os.time()
+---@nodiscard
+---@param days integer
+---@return integer
 function utils.days(days)
     return days * 60 * 60 * 24
 end
 
 -- Generates a random permutation of integers >= min_val and <= max_val
 -- If a min_val isn't given, 1 is used (assumes permutation of lua indices)
+---@nodiscard
+---@param max_val integer
+---@param min_val integer?
+---@return table
 function utils.permgen(max_val, min_val)
     local indices = {}
     min_val = min_val or 1
@@ -201,6 +236,11 @@ end
 -- Examples:
 -- Input: (1, 3, 2)  Sample Output: { 3, 1 }    (randomized)
 -- Input: (1, 10, 3) Sample Output: { 4, 9, 2 } (randomized)
+---@nodiscard
+---@param minVal integer
+---@param maxVal integer
+---@param numEntries integer
+---@return table
 function utils.uniqueRandomTable(minVal, maxVal, numEntries)
     local resultTable = {}
     local shuffledTable = utils.permgen(maxVal, minVal)
@@ -217,6 +257,11 @@ function utils.uniqueRandomTable(minVal, maxVal, numEntries)
     return resultTable
 end
 
+---@nodiscard
+---@param input number
+---@param min_val number?
+---@param max_val number?
+---@return number
 function utils.clamp(input, min_val, max_val)
     if min_val ~= nil and input < min_val then
         input = min_val
@@ -229,6 +274,13 @@ end
 
 --  Returns a table containing all the elements in the specified range.
 --  Source: https://github.com/mebens/range
+---@nodiscard
+---@param from number
+---@param to number
+---@param step integer?
+---@return table
+---@overload fun(from: string, to: string, step: integer?): table
+---@overload fun(from: table, to: table, step: integer?): table
 function utils.range(from, to, step)
     local t = {}
     local argType = type(from)
@@ -270,6 +322,10 @@ end
 
 -- Given a table and a mapping function, returns a new table created by
 -- applying the given mapping function to the given table elements
+---@nodiscard
+---@param tbl table
+---@param func function
+---@return table
 function utils.map(tbl, func)
     local t = {}
 
@@ -283,6 +339,10 @@ end
 -- Given a table and a filter function, returns a new table composed of the
 -- elements that pass the given filter.
 -- e.g: utils.filter({ 'a', 'b', 'c', 'd' }, function(k, v) return v >= 'c' end)  --> { 'c', 'd }
+---@nodiscard
+---@param tbl table
+---@param func function
+---@return table
 function utils.filter(tbl, func)
     local out = {}
 
@@ -299,6 +359,10 @@ end
 -- elements that pass the given filter.
 -- Unlike utils.filter, this method will return an iterable table.
 -- e.g utils.filterArray({ 'a', 'b', 'c', 'd' }, function(k, v) return v >= 'c' end)  --> { 1 => 'c', 2 => 'd' }
+---@nodiscard
+---@param tbl table
+---@param func function
+---@return table
 function utils.filterArray(tbl, func)
     local out = {}
 
@@ -313,6 +377,10 @@ end
 
 -- Returns true if any member of the given table passes the given
 -- predicate function
+---@nodiscard
+---@param tbl table
+---@param predicate function
+---@return boolean
 function utils.any(tbl, predicate)
     for k, v in pairs(tbl) do
         if predicate(k, v) then
@@ -325,6 +393,10 @@ end
 
 -- Returns the sum of applying the given function to each element of the given table
 -- e.g: utils.sum({ 1, 2, 3 }, function(k, v) return v end)  --> 6
+---@nodiscard
+---@param tbl table
+---@param func function
+---@return number
 function utils.sum(tbl, func)
     local sum = 0
 
@@ -350,6 +422,10 @@ function utils.counter(predicate)
 end
 
 -- returns unabsorbed damage
+---@nodiscard
+---@param target CBaseEntity
+---@param dmg integer
+---@return integer
 function utils.stoneskin(target, dmg)
     --handling stoneskin
     if dmg > 0 then
@@ -370,6 +446,10 @@ function utils.stoneskin(target, dmg)
 end
 
 -- returns reduced magic damage from RUN buff, 'One for All'
+---@nodiscard
+---@param target CBaseEntity
+---@param dmg integer
+---@return integer
 function utils.oneforall(target, dmg)
     if dmg > 0 then
         local oneForAllEffect = target:getStatusEffect(xi.effect.ONE_FOR_ALL)
@@ -383,6 +463,10 @@ function utils.oneforall(target, dmg)
     return dmg
 end
 
+---@param target CBaseEntity
+---@param dmg integer
+---@param shadowbehav integer?
+---@return integer
 function utils.takeShadows(target, dmg, shadowbehav)
     if shadowbehav == nil then
         shadowbehav = 1
@@ -454,6 +538,13 @@ function utils.takeShadows(target, dmg, shadowbehav)
     return dmg
 end
 
+---@nodiscard
+---@param attacker CBaseEntity
+---@param target CBaseEntity
+---@param skill any TODO: This is currently unused
+---@param maxDamage any
+---@param minimumPercentage any
+---@return integer
 function utils.conalDamageAdjustment(attacker, target, skill, maxDamage, minimumPercentage)
     -- #TODO: Currently all cone attacks use static 45 degree (360 scale) angles in core, when cone attacks
     -- have different angles and there's a method to fetch the angle, use a line like the below
@@ -485,6 +576,8 @@ function utils.conalDamageAdjustment(attacker, target, skill, maxDamage, minimum
 end
 
 -- returns true if taken by third eye
+---@param target CBaseEntity
+---@return boolean
 function utils.thirdeye(target)
     --third eye doesnt care how many shadows, so attempt to anticipate, but reduce
     --chance of anticipate based on previous successful anticipates.
@@ -505,6 +598,9 @@ function utils.thirdeye(target)
     return false
 end
 
+---@nodiscard
+---@param actor CBaseEntity
+---@param job xi.job
 function utils.getActiveJobLevel(actor, job)
     local jobLevel = 0
 
@@ -545,6 +641,10 @@ local skillLevelTable =
 
 -- Get the corresponding table entry to use in skillLevelTable based on level range
 -- TODO: Minval for ranges 2 and 3 in the conditional is probably not necessary
+---@nodiscard
+---@param level integer
+---@param rank integer
+---@return integer
 local function getSkillLevelIndex(level, rank)
     local rangeId = 100
 
@@ -567,6 +667,10 @@ local function getSkillLevelIndex(level, rank)
     return rangeId
 end
 
+---@nodiscard
+---@param rank integer
+---@param level integer
+---@return integer
 function utils.getSkillLvl(rank, level)
     local levelTableIndex = getSkillLevelIndex(level, rank)
     local skillLevel      = (level - levelTableIndex) * skillLevelTable[levelTableIndex][rank][1] + skillLevelTable[levelTableIndex][rank][2]
@@ -574,6 +678,10 @@ function utils.getSkillLvl(rank, level)
     return skillLevel
 end
 
+---@nodiscard
+---@param rank integer
+---@param level integer
+---@return integer
 function utils.getMobSkillLvl(rank, level)
     if level > 50 then
         if rank == 1 then
@@ -657,6 +765,10 @@ local systemStrengthTable =
     [xi.eco.LUMINION] = { [xi.eco.LUMINIAN] = 1, },
 }
 
+---@nodiscard
+---@param attackerSystem xi.eco
+---@param defenderSystem xi.eco
+---@return integer
 function utils.getEcosystemStrengthBonus(attackerSystem, defenderSystem)
     for k, v in pairs(systemStrengthTable) do
         if k == attackerSystem then
@@ -675,12 +787,20 @@ end
 utils.mask =
 {
     -- return mask's pos-th bit as bool
+    ---@nodiscard
+    ---@param mask integer
+    ---@param pos integer
+    ---@return boolean
     getBit = function(mask, pos)
         return bit.band(mask, bit.lshift(1, pos)) ~= 0
     end,
 
     -- return value of mask after setting its pos-th bit
     -- val can be bool or number.  if number, any non-zero value will be treated as true.
+    ---@param mask integer
+    ---@param pos integer
+    ---@param val number|boolean
+    ---@return integer
     setBit = function(mask, pos, val)
         local state = false
 
@@ -701,6 +821,10 @@ utils.mask =
 
     -- return number of true bits in mask of length len
     -- if len is omitted, assume 32
+    ---@nodiscard
+    ---@param mask integer
+    ---@param len integer?
+    ---@return integer
     countBits = function(mask, len)
         if not len then
             len = 32
@@ -717,6 +841,10 @@ utils.mask =
 
     -- are all bits true in mask of length len?
     -- if len is omitted, assume 32
+    ---@nodiscard
+    ---@param mask integer
+    ---@param len integer?
+    ---@return boolean
     isFull = function(mask, len)
         if not len then
             len = 32
@@ -741,6 +869,10 @@ end
 -- Checks to see if a specific value is contained in a table.  This is often
 -- used for tables that do not define specific indices.
 -- See: Sigil NPCs
+---@nodiscard
+---@param value any
+---@param collection table?
+---@return boolean
 function utils.contains(value, collection)
     if collection == nil then
         return false
@@ -758,6 +890,10 @@ end
 -- Checks to see if a specific key is contained in the table.  This is used by
 -- tables that contain specific indices that may be non-sequential.
 -- See: xi.teleport.escape
+---@nodiscard
+---@param keyVal string|integer
+---@param collection table
+---@return boolean
 function utils.hasKey(keyVal, collection)
     for k, _ in pairs(collection) do
         if k == keyVal then
@@ -770,6 +906,9 @@ end
 
 -- Selects a random entry from a table, returns the index and the entry
 -- https://gist.github.com/jdev6/1e7ff30671edf88d03d4
+---@nodiscard
+---@param t table
+---@return integer|string, any
 function utils.randomEntryIdx(t)
     local keys = {}
 
@@ -781,6 +920,9 @@ function utils.randomEntryIdx(t)
     return index, t[index]
 end
 
+---@nodiscard
+---@param t table
+---@return any
 function utils.randomEntry(t)
     local _, item = utils.randomEntryIdx(t)
     return item
@@ -790,18 +932,35 @@ end
 -- These should only be used when working between quests, or outside
 -- of the quest script itself.  Quest vars will be deleted automatically
 -- when that quest:complete(player) is called!
-
+---@deprecated Use xi.quest or xi.mission functions
+---@nodiscard
+---@param player CBaseEntity
+---@param logId xi.questLog
+---@param questId integer
+---@param varName string
+---@return integer
 function utils.getQuestVar(player, logId, questId, varName)
     local charVarName = Quest.getVarPrefix(logId, questId) .. varName
     return player:getCharVar(charVarName)
 end
 
+---@deprecated Use xi.quest or xi.mission functions
+---@param player CBaseEntity
+---@param logId xi.questLog
+---@param questId integer
+---@param varName string
+---@param value integer
+---@return nil
 function utils.setQuestVar(player, logId, questId, varName, value)
     local charVarName = Quest.getVarPrefix(logId, questId) .. varName
     player:setCharVar(charVarName, value)
 end
 
 -- utils.splitStr('a.b.c', '.') => { 'a', 'b', 'c' }
+---@nodiscard
+---@param s string
+---@param sep string
+---@return table
 function utils.splitStr(s, sep)
     local fields = {}
     local pattern = string.format('([^%s]+)', sep)
@@ -813,12 +972,18 @@ function utils.splitStr(s, sep)
 end
 
 -- Remove whitespace from the beginning and end of a string
+---@nodiscard
+---@param s string
+---@return string, integer
 function utils.trimStr(s)
     local s1 = string.gsub(s, '^s%+', '')
     return string.gsub(s1, '%s+$', '')
 end
 
 -- Split a single string argument into multiple arguments
+---@nodiscard
+---@param s string
+---@return table
 function utils.splitArg(s)
     local comma   = string.gsub(s, ',', ' ')
     local spaces  = string.gsub(comma, '%s+', ' ')
@@ -827,19 +992,23 @@ function utils.splitArg(s)
     return utils.splitStr(trimmed, ' ')
 end
 
+---@param mob CBaseEntity
+---@param hideDuration integer
+---@param pos table?
+---@param disAnim xi.animationString?
+---@param reapAnim xi.animationString?
+---@return nil
 function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
-    --TODO Table of animations that are used for teleports for reference
-
     if hideDuration == nil then
         hideDuration = 5000
     end
 
     if disAnim == nil then
-        disAnim = 'kesu'
+        disAnim = xi.animationString.STATUS_DISAPPEAR
     end
 
     if reapAnim == nil then
-        reapAnim = 'deru'
+        reapAnim = xi.animationString.STATUS_VISIBLE
     end
 
     if pos == nil then
@@ -884,12 +1053,20 @@ end
 -----------------------------------
 -- Spatial position utilities
 -----------------------------------
+---@type number
 local ffxiRotConversionFactor = 360.0 / 255.0
 
+---@nodiscard
+---@param ffxiRot number
+---@return number
 function utils.ffxiRotToDegrees(ffxiRot)
     return ffxiRotConversionFactor * ffxiRot
 end
 
+---@nodiscard
+---@param origin table
+---@param translation table
+---@return table
 function utils.lateralTranslateWithOriginRotation(origin, translation)
     local degrees = utils.ffxiRotToDegrees(origin.rot)
     local rads = math.rad(degrees)
@@ -903,6 +1080,11 @@ function utils.lateralTranslateWithOriginRotation(origin, translation)
     return newCoords
 end
 
+---@nodiscard
+---@param origin table
+---@param offset number
+---@param radians number
+---@return table
 function utils.getNearPosition(origin, offset, radians)
     local destination =
     {
@@ -914,10 +1096,20 @@ function utils.getNearPosition(origin, offset, radians)
     return destination
 end
 
+---@nodiscard
+---@param A table
+---@param B table
+---@param ignoreVertical boolean?
+---@return number
 function utils.distance(A, B, ignoreVertical)
     return math.sqrt(utils.distanceSquared(A, B, ignoreVertical))
 end
 
+---@nodiscard
+---@param A table
+---@param B table
+---@param ignoreVertical boolean?
+---@return number
 function utils.distanceSquared(A, B, ignoreVertical)
     local dX = B.x - A.x
     local dY = (ignoreVertical and 0.0) or B.y - A.y
@@ -926,10 +1118,20 @@ function utils.distanceSquared(A, B, ignoreVertical)
     return dX * dX + dY * dY + dZ * dZ
 end
 
+---@nodiscard
+---@param A table
+---@param B table
+---@param within number
+---@param ignoreVertical boolean
+---@return boolean
 function utils.distanceWithin(A, B, within, ignoreVertical)
     return utils.distanceSquared(A, B, ignoreVertical) <= within * within
 end
 
+---@nodiscard
+---@param A table
+---@param B table
+---@return number
 function utils.getWorldAngle(A, B)
     -- lua math.atan functions like cpp atan2. On top of this, all ffxi world angles are positive.
     -- So we have to adjust the range of lua's math.atan from [-pi, pi] to [0, 2pi]
@@ -955,10 +1157,18 @@ function utils.getWorldAngle(A, B)
     return radians
 end
 
+---@nodiscard
+---@param A table
+---@param B table
+---@return number
 function utils.getWorldRotation(A, B)
     return utils.angleToRotation(utils.getWorldAngle(A, B))
 end
 
+---@nodiscard
+---@param a number
+---@param b number
+---@return number
 function utils.getAngleDifference(a, b)
     local diff = math.abs(b - a)
     if diff > math.pi then
@@ -969,6 +1179,12 @@ function utils.getAngleDifference(a, b)
 end
 
 -- Returns whether the angle formed between A and B with origin is <= within radians.
+---@nodiscard
+---@param origin table
+---@param A table
+---@param B table
+---@param within number
+---@return boolean
 function utils.angleWithin(origin, A, B, within)
     return utils.getAngleDifference(utils.getWorldAngle(origin, A), utils.getWorldAngle(origin, B)) <= within
 end
@@ -976,20 +1192,37 @@ end
 local ffxiRotationToAngleFactor = 2.0 * math.pi / 256.0
 local ffxiAngleToRotationFactor = 256.0 / (2.0 * math.pi)
 
+---@nodiscard
+---@param ffxiRotation number
+---@return number
 function utils.rotationToAngle(ffxiRotation)
     return ffxiRotation * ffxiRotationToAngleFactor
 end
 
+---@nodiscard
+---@param radians number
+---@return number
 function utils.angleToRotation(radians)
     return radians * ffxiAngleToRotationFactor
 end
 
 -- Returns 24h Clock Time (example: 04:30 = 430, 21:30 = 2130)
+---@nodiscard
+---@return number?
 function utils.vanadielClockTime()
-    return tonumber(VanadielHour() .. string.format('%02d', VanadielMinute()))
+    local clockTime = tonumber(VanadielHour() .. string.format('%02d', VanadielMinute()))
+
+    if not clockTime then
+        print('ERROR: clockTime was nil.')
+    end
+
+    return clockTime
 end
 
 -- Converts a number to a binary string
+---@nodiscard
+---@param x integer
+---@return string
 function utils.intToBinary(x)
     local bin = ''
 
@@ -1003,6 +1236,9 @@ function utils.intToBinary(x)
     return bin
 end
 
+---@nodiscard
+---@param value integer
+---@return integer, integer, integer, integer
 function utils.toBytes(value)
     local byte0 = bit.rshift(bit.band(value, 0x000000FF), 0)
     local byte1 = bit.rshift(bit.band(value, 0x0000FF00), 8)
@@ -1011,6 +1247,9 @@ function utils.toBytes(value)
     return byte0, byte1, byte2, byte3
 end
 
+---@nodiscard
+---@param value integer
+---@return integer, integer
 function utils.toWords(value)
     local word0 = bit.rshift(bit.band(value, 0x0000FFFF), 0)
     local word1 = bit.rshift(bit.band(value, 0xFFFF0000), 16)
