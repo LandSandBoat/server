@@ -1928,7 +1928,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Phantom_Puk',413,1720);
 INSERT INTO `mob_skill_lists` VALUES ('Phantom_Puk',413,1721);
 INSERT INTO `mob_skill_lists` VALUES ('Phantom_Puk',413,1723);
 INSERT INTO `mob_skill_lists` VALUES ('Phantom_Puk',413,1724);
--- 414 to 435: free
+INSERT INTO `mob_skill_lists` VALUES ('Imp_Bandsman',414,1709);
+INSERT INTO `mob_skill_lists` VALUES ('Imp_Bandsman',414,1710);
+INSERT INTO `mob_skill_lists` VALUES ('Imp_Bandsman',414,1711);
+INSERT INTO `mob_skill_lists` VALUES ('Imp_Bandsman',414,1712);
+-- 415 to 435: free
 INSERT INTO `mob_skill_lists` VALUES ('Bloodlapper',436,2162);
 INSERT INTO `mob_skill_lists` VALUES ('Ghillie_Dhu',437,685);
 INSERT INTO `mob_skill_lists` VALUES ('Highlander_Lizard',438,371);
