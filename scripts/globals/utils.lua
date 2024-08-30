@@ -1002,3 +1002,17 @@ function utils.intToBinary(x)
 
     return bin
 end
+
+function utils.toBytes(value)
+    local byte0 = bit.rshift(bit.band(value, 0x000000FF), 0)
+    local byte1 = bit.rshift(bit.band(value, 0x0000FF00), 8)
+    local byte2 = bit.rshift(bit.band(value, 0x00FF0000), 16)
+    local byte3 = bit.rshift(bit.band(value, 0xFF000000), 24)
+    return byte0, byte1, byte2, byte3
+end
+
+function utils.toWords(value)
+    local word0 = bit.rshift(bit.band(value, 0x0000FFFF), 0)
+    local word1 = bit.rshift(bit.band(value, 0xFFFF0000), 16)
+    return word0, word1
+end
