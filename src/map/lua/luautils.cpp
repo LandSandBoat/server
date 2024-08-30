@@ -89,6 +89,7 @@
 #include "spell.h"
 #include "status_effect_container.h"
 #include "timetriggers.h"
+#include "trade_container.h"
 #include "transport.h"
 #include "weapon_skill.h"
 #include "zone.h"
@@ -102,6 +103,7 @@
 #include "utils/mobutils.h"
 #include "utils/moduleutils.h"
 #include "utils/serverutils.h"
+#include "utils/synergyutils.h"
 #include "utils/zoneutils.h"
 
 void ReportErrorToPlayer(CBaseEntity* PEntity, std::string const& message = "") noexcept
@@ -232,6 +234,8 @@ namespace luautils
         lua.set_function("SendLuaFuncStringToZone", &luautils::SendLuaFuncStringToZone);
         lua.set_function("RoeParseRecords", &roeutils::ParseRecords);
         lua.set_function("RoeParseTimed", &roeutils::ParseTimedSchedule);
+        lua.set_function("GetSynergyRecipeByID", &luautils::GetSynergyRecipeByID);
+        lua.set_function("GetSynergyRecipeByTrade", &luautils::GetSynergyRecipeByTrade);
 
         // This binding specifically exists to forcefully crash the server.
         // clang-format off
@@ -5877,5 +5881,124 @@ namespace luautils
         PEntity->updatemask |= UPDATE_ALL_CHAR;
 
         return CLuaBaseEntity(PEntity);
+    }
+
+    auto GetSynergyRecipeByID(uint32 id) -> sol::table
+    {
+        auto maybeResult = synergyutils::GetSynergyRecipeByID(id);
+        if (!maybeResult.has_value())
+        {
+            return sol::lua_nil;
+        }
+        const auto result = *maybeResult;
+
+        sol::table table = lua.create_table();
+
+        table["id"]                    = result.id;
+        table["primary_skill"]         = result.primary_skill;
+        table["primary_rank"]          = result.primary_rank;
+        table["secondary_skill"]       = result.secondary_skill;
+        table["secondary_rank"]        = result.secondary_rank;
+        table["tertiary_skill"]        = result.tertiary_skill;
+        table["tertiary_rank"]         = result.tertiary_rank;
+        table["cost_fire_fewell"]      = result.cost_fire_fewell;
+        table["cost_ice_fewell"]       = result.cost_ice_fewell;
+        table["cost_wind_fewell"]      = result.cost_wind_fewell;
+        table["cost_earth_fewell"]     = result.cost_earth_fewell;
+        table["cost_lightning_fewell"] = result.cost_lightning_fewell;
+        table["cost_water_fewell"]     = result.cost_water_fewell;
+        table["cost_light_fewell"]     = result.cost_light_fewell;
+        table["cost_dark_fewell"]      = result.cost_dark_fewell;
+        table["ingredient1"]           = result.ingredient1;
+        table["ingredient2"]           = result.ingredient2;
+        table["ingredient3"]           = result.ingredient3;
+        table["ingredient4"]           = result.ingredient4;
+        table["ingredient5"]           = result.ingredient5;
+        table["ingredient6"]           = result.ingredient6;
+        table["ingredient7"]           = result.ingredient7;
+        table["ingredient8"]           = result.ingredient8;
+        table["result"]                = result.result;
+        table["resultHQ1"]             = result.resultHQ1;
+        table["resultHQ2"]             = result.resultHQ2;
+        table["resultHQ3"]             = result.resultHQ3;
+        table["resultQty"]             = result.resultQty;
+        table["resultHQ1Qty"]          = result.resultHQ1Qty;
+        table["resultHQ2Qty"]          = result.resultHQ2Qty;
+        table["resultHQ3Qty"]          = result.resultHQ3Qty;
+        table["resultName"]            = result.resultName;
+
+        return table;
+    }
+
+    auto GetSynergyRecipeByTrade(CLuaTradeContainer luaTradeContainer) -> sol::table
+    {
+        auto tradeContainer = luaTradeContainer.GetTradeContainer();
+
+        std::vector<uint16> itemIds;
+        for (uint8 i = 0; i < 8; i++)
+        {
+            auto itemId = tradeContainer->getItemID(i);
+            if (itemId == 0)
+            {
+                continue;
+            }
+            itemIds.push_back(itemId);
+        }
+
+        // We will sort now, because we want to insert zeroes at the end of the vector for lookup
+        std::sort(itemIds.begin(), itemIds.end());
+
+        // We will still need to fill out the call to GetSynergyRecipeByIngredients
+        // with zeroes for empty slots.
+        while (itemIds.size() < 8)
+        {
+            itemIds.push_back(0);
+        }
+
+        auto maybeResult = synergyutils::GetSynergyRecipeByIngredients(
+            itemIds[0], itemIds[1], itemIds[2], itemIds[3],
+            itemIds[4], itemIds[5], itemIds[6], itemIds[7]);
+        if (!maybeResult.has_value())
+        {
+            return sol::lua_nil;
+        }
+        const auto result = *maybeResult;
+
+        sol::table table = lua.create_table();
+
+        table["id"]                    = result.id;
+        table["primary_skill"]         = result.primary_skill;
+        table["primary_rank"]          = result.primary_rank;
+        table["secondary_skill"]       = result.secondary_skill;
+        table["secondary_rank"]        = result.secondary_rank;
+        table["tertiary_skill"]        = result.tertiary_skill;
+        table["tertiary_rank"]         = result.tertiary_rank;
+        table["cost_fire_fewell"]      = result.cost_fire_fewell;
+        table["cost_ice_fewell"]       = result.cost_ice_fewell;
+        table["cost_wind_fewell"]      = result.cost_wind_fewell;
+        table["cost_earth_fewell"]     = result.cost_earth_fewell;
+        table["cost_lightning_fewell"] = result.cost_lightning_fewell;
+        table["cost_water_fewell"]     = result.cost_water_fewell;
+        table["cost_light_fewell"]     = result.cost_light_fewell;
+        table["cost_dark_fewell"]      = result.cost_dark_fewell;
+        table["ingredient1"]           = result.ingredient1;
+        table["ingredient2"]           = result.ingredient2;
+        table["ingredient3"]           = result.ingredient3;
+        table["ingredient4"]           = result.ingredient4;
+        table["ingredient5"]           = result.ingredient5;
+        table["ingredient6"]           = result.ingredient6;
+        table["ingredient7"]           = result.ingredient7;
+        table["ingredient8"]           = result.ingredient8;
+        table["result"]                = result.result;
+        table["resultHQ1"]             = result.resultHQ1;
+        table["resultHQ2"]             = result.resultHQ2;
+        table["resultHQ3"]             = result.resultHQ3;
+        table["resultQty"]             = result.resultQty;
+        table["resultHQ1Qty"]          = result.resultHQ1Qty;
+        table["resultHQ2Qty"]          = result.resultHQ2Qty;
+        table["resultHQ3Qty"]          = result.resultHQ3Qty;
+        table["resultName"]            = result.resultName;
+
+        return table;
     }
 }; // namespace luautils
