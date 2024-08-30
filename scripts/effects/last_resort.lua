@@ -5,10 +5,19 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    effect:addMod(xi.mod.ATT, 2 * target:getJobPointLevel(xi.jp.LAST_RESORT_EFFECT))
-    effect:addMod(xi.mod.ATTP, 25 + target:getMerit(xi.merit.LAST_RESORT_EFFECT))
+    local targetMerit     = target:getMerit(xi.merit.LAST_RESORT_EFFECT)
+    local targetJobPoints = target:getJobPointLevel(xi.jp.LAST_RESORT_EFFECT)
+
+    -- Job point effect
+    effect:addMod(xi.mod.ATT, 2 * targetJobPoints)
+    effect:addMod(xi.mod.RATT, 2 * targetJobPoints)
+
+    -- Merit effect
+    effect:addMod(xi.mod.ATTP, 25 + targetMerit)
+    effect:addMod(xi.mod.RATTP, 25 + targetMerit)
+    effect:addMod(xi.mod.DEFP, -25 - targetMerit)
+
     effect:addMod(xi.mod.TWOHAND_HASTE_ABILITY, target:getMod(xi.mod.DESPERATE_BLOWS) + target:getMerit(xi.merit.DESPERATE_BLOWS))
-    effect:addMod(xi.mod.DEFP, -25 - target:getMerit(xi.merit.LAST_RESORT_EFFECT))
 end
 
 effectObject.onEffectTick = function(target, effect)
