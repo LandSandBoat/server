@@ -33,7 +33,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     if damage > 0 then
         if not target:hasStatusEffect(xi.effect.ATTACK_DOWN) then
-            local duration = tp / 1000 * 3 * applyResistanceAddEffect(player, target, xi.element.WATER, 0)
+            local duration = 120 * applyResistanceAddEffect(player, target, xi.element.WATER, 0)
             target:addStatusEffect(xi.effect.ATTACK_DOWN, 20, 0, duration)
         end
     end
