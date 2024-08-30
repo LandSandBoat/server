@@ -88,4 +88,5 @@ xi.mobMod =
     TRUST_DISTANCE         = 77, -- TRUSTS ONLY: Set movement type/distance. See trust.lua for details.
     STANDBACK_RANGE        = 78, -- Applies a specific standback range for the mob
     CANNOT_GUARD           = 79, -- Check if the mob does not guard (despite being a MNK or PUP mob)
+    SKIP_ALLEGIANCE_CHECK  = 80, -- Skip the allegiance check for valid target (allows for example a mob to cast a TARGET_ENEMY spell on itself)
 }
