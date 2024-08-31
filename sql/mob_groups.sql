@@ -4640,8 +4640,8 @@ INSERT INTO `mob_groups` VALUES (11,1558,83,'Gigas_Deckhand',330,0,985,0,0,78,82
 INSERT INTO `mob_groups` VALUES (12,1568,83,'Gigas_Jack',330,0,987,0,0,78,82,0);
 INSERT INTO `mob_groups` VALUES (13,1565,83,'Gigas_Helmsman',330,0,985,0,0,78,82,0);
 INSERT INTO `mob_groups` VALUES (14,1594,83,'Gigass_Tiger',0,128,0,0,0,73,75,0);
-INSERT INTO `mob_groups` VALUES (15,3085,83,'Pallas',0,32,1974,0,0,79,85,0);
-INSERT INTO `mob_groups` VALUES (16,3086,83,'Pallass_Tiger',0,128,0,0,0,72,74,0);
+INSERT INTO `mob_groups` VALUES (15,3085,83,'Pallas',0,32,1974,15000,0,79,85,0);
+INSERT INTO `mob_groups` VALUES (16,3086,83,'Pallass_Tiger',0,128,0,5000,0,72,74,0);
 INSERT INTO `mob_groups` VALUES (17,1660,83,'Goblin_Flagman',330,0,1056,0,0,66,69,0);
 INSERT INTO `mob_groups` VALUES (18,1669,83,'Goblin_Grenadier',330,0,1086,0,0,66,69,0);
 INSERT INTO `mob_groups` VALUES (19,1671,83,'Goblin_Guerrilla',330,0,1056,0,0,66,69,0);
