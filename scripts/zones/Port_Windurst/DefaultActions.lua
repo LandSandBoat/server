@@ -15,7 +15,9 @@ return {
     ['Pichichi']            = { event = 364 },
     ['Pyo_Nzon']            = { event = 366 },
     ['Shanruru']            = { event = 367 },
+    ['Sigismund']           = { event = 357 },
     ['Suspicious_Tarutaru'] = { event = 879 },
+    ['Tohopka']             = { event = 358 },
     ['Tokaka']              = { event = 207 },
     ['Yafa_Yaa']            = { event = 365 },
 }
