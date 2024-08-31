@@ -6,6 +6,7 @@
 
 -- TODO: Fill in with _commented out entries_ for all the things seen in each category
 -- https://www.bg-wiki.com/ffxi/Repeat_Login_Campaign/Past_Login_Campaign_Rewards
+---@class prizes : { [integer] : { ['price']: integer, ['items']: { [integer]: xi.item } } }
 local prizes =
 {
     [1] =

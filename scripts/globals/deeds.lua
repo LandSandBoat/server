@@ -21,6 +21,14 @@ local validatorNpcEvents =
 -- Raw Rewards from AMAN Validator
 -- NOTE: These tables are not configurable, and the client will not change
 -- based on the data provided below.
+---@class itemRewardEntry
+---@field itemId xi.item
+---@field qty integer
+
+---@class keyItemRewardEntry
+---@field keyItemId xi.keyItem
+
+---@type itemRewardEntry[]|keyItemRewardEntry[]
 local validatorRewards =
 {
     [  1] = { itemId    = xi.item.COPPER_AMAN_VOUCHER,            qty =  7 },

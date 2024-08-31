@@ -1698,13 +1698,13 @@ end
 function CBaseEntity:completeAssault(missionID)
 end
 
----@param keyItemID integer
+---@param keyItemID xi.keyItem
 ---@return nil
 function CBaseEntity:addKeyItem(keyItemID)
 end
 
 ---@nodiscard
----@param keyItemID integer
+---@param keyItemID xi.keyItem
 ---@return boolean
 function CBaseEntity:hasKeyItem(keyItemID)
 end
@@ -1715,12 +1715,12 @@ function CBaseEntity:delKeyItem(keyItemID)
 end
 
 ---@nodiscard
----@param keyItemID integer
+---@param keyItemID xi.keyItem
 ---@return boolean
 function CBaseEntity:seenKeyItem(keyItemID)
 end
 
----@param keyItemID integer
+---@param keyItemID xi.keyItem
 ---@return nil
 function CBaseEntity:unseenKeyItem(keyItemID)
 end
