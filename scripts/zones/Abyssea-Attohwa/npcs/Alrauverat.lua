@@ -3,6 +3,7 @@
 -- Zone: Abyssea - Attohwa
 -- !pos 23 -0.744 126 215
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

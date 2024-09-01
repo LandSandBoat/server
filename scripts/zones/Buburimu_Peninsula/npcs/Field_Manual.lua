@@ -2,6 +2,7 @@
 -- Field Manual
 -- Area: Buburimu Peninsula
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

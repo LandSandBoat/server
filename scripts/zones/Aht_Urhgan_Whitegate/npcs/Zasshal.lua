@@ -4,6 +4,7 @@
 -- Type: Salvage Key Item giver
 -- !pos 101.468 -1 -20.088 50
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

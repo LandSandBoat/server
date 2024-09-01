@@ -4,6 +4,7 @@
 -- Spawns Blanga
 -- !pos -615.221 -39.768 -16.079 253
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

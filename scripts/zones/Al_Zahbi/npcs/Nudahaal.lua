@@ -4,6 +4,7 @@
 -- Type: Bonecraft Normal/Adv. Image Support
 -- !pos -57.056 -7 -88.377 48
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

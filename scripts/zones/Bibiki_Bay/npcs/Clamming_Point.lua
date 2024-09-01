@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.BIBIKI_BAY]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 -- clammingItems = item id, weight, drop rate, improved drop rate

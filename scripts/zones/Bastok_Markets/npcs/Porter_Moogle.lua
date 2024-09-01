@@ -2,6 +2,7 @@
 -- Area: Bastok Markets
 --  NPC: Porter Moogle
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local e =

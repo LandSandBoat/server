@@ -4,6 +4,7 @@
 -- Type: Najelith's Attendant
 -- !pos -64.537 -8 37.928 48
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

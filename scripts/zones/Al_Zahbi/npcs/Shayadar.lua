@@ -4,6 +4,7 @@
 -- Type: Gadalar's Attendant
 -- !pos -107.177 -6.999 33.463 48
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- Area: Arrapago Remnants
 --  NPC: Armoury Crate (Arrapago)
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

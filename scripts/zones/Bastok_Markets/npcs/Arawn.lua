@@ -3,6 +3,7 @@
 --  NPC: Arawn
 -- !pos -121.492 -4 -123.923 235
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

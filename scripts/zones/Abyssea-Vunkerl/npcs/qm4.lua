@@ -4,6 +4,7 @@
 -- Spawns Dvalinn
 -- !pos -634 -48 -476 217
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

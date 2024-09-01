@@ -4,6 +4,7 @@
 -- Unlocks: Geo-Acumen
 -- !pos 275.620 -0.137 247.116 111
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

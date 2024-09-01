@@ -3,6 +3,7 @@
 --  NPC: Cruor Prospector
 -- Type: Cruor NPC
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 ---@type TProspectorItems

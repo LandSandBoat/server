@@ -3,6 +3,7 @@
 --  NPC: Marin
 -- !pos -340.060 -11.003 -148.181 235
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

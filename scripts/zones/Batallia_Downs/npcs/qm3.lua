@@ -4,6 +4,7 @@
 --  Involved in Mission 9-1 (San dOria)
 --  !pos 210 17 -615 105
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

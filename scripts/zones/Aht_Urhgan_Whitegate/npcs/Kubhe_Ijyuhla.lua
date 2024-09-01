@@ -3,6 +3,7 @@
 --  NPC: Kubhe Ijyuhla
 -- !pos 23.257 0.000 21.532 50
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
