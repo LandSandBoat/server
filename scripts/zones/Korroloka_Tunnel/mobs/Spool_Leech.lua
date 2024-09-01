@@ -2,6 +2,7 @@
 -- Area: Korroloka Tunnel
 --  Mob: Spool Leech
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

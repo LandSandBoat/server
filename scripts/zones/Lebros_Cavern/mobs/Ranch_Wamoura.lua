@@ -2,6 +2,7 @@
 -- Area: Lebros Cavern (Wamoura Farm Raid)
 --  Mob: Ranch Wamoura
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

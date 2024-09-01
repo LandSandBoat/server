@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.JUGNER_FOREST]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local fradubioPHTable =

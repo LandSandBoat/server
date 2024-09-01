@@ -2,6 +2,7 @@
 -- Area: Dynamis - Tavnazia
 --  Mob: Icon Prototype
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

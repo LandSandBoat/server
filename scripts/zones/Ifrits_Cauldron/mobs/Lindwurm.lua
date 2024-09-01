@@ -2,6 +2,7 @@
 -- Area: Ifrits Cauldron
 --   NM: Lindwurm
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

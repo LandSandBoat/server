@@ -2,6 +2,7 @@
 -- Area: Jugner Forest
 --   NM: Panzer Percival
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

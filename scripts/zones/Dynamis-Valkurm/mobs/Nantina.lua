@@ -2,6 +2,7 @@
 -- Area: Dynamis - Valkurm
 --  Mob: Nantina
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

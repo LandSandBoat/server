@@ -3,6 +3,7 @@
 --   NM: Galarhigg (17125681 or 17125682 or 17125683)
 --     : Fight for WOTG07 - Purple, The New Black
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

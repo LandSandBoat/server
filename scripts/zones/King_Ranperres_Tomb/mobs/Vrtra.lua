@@ -2,6 +2,7 @@
 -- Area: King Ranperre's Tomb
 --   NM: Vrtra
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local offsets = { 1, 3, 5, 2, 4, 6 }

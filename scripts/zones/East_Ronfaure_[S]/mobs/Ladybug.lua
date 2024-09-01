@@ -6,6 +6,7 @@
 local ID = zones[xi.zone.EAST_RONFAURE_S]
 mixins = { require('scripts/mixins/families/ladybug') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local skogsFruPHTable =

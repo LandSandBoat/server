@@ -2,6 +2,7 @@
 -- Area: Dynamis - Qufim
 --  Mob: Manifest Icon
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

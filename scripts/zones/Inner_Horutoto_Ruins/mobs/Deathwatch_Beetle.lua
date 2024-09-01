@@ -2,6 +2,7 @@
 -- Area: Inner Horutoto Ruins
 --  Mob: Deathwatch Beetle
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

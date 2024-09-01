@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.LEBROS_CAVERN]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

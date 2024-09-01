@@ -5,6 +5,7 @@
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 require('scripts/quests/tutorial')
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local tumblingPHTable =

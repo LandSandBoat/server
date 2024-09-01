@@ -2,6 +2,7 @@
 -- Area: Fort Karugo-Narugo [S]
 --   NM: Emela-ntouka
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

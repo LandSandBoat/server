@@ -2,6 +2,7 @@
 -- Area: Leujaoam Sanctum (Leujaoam Cleansing)
 --  Mob: Leujaoam Worm
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

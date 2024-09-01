@@ -2,6 +2,7 @@
 -- Area: Jugner Forest
 --  Mob: Screamer
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

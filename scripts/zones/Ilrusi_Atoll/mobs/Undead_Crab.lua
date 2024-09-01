@@ -2,6 +2,7 @@
 -- Area: Ilrusi Atoll (Extermination)
 --  Mob: Undead Crab
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

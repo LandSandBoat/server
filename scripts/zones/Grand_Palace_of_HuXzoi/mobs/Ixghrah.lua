@@ -2,6 +2,7 @@
 -- Area: Grand Palace of HuXzoi
 --  Mob: Ix'ghrah
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local spellTable =

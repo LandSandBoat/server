@@ -4,6 +4,7 @@
 -- Involved In Quest: Ghosts of the Past
 -- !pos -174 0.1 369 196
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

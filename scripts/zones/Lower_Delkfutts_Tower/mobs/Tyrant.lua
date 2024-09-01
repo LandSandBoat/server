@@ -2,6 +2,7 @@
 -- Area: Lower Delkfutt's Tower
 --   NM: Tyrant
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -2,6 +2,7 @@
 -- Area: Labyrinth of Onzozo
 --   NM: Peg Powler
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

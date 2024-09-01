@@ -3,6 +3,7 @@
 --   NM: Bomb Queen
 --  Vid: https://www.youtube.com/watch?v=AVsEbYjSAHM
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
