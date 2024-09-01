@@ -3,6 +3,7 @@
 --  NPC: Sachetan, I.M.
 -- !pos -82 -5 165 z 240
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local guardNation = xi.nation.BASTOK

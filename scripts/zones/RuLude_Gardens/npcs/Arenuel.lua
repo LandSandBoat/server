@@ -2,6 +2,7 @@
 -- Area: Ru'Lude Gardens
 --  NPC: Arenuel
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

@@ -4,6 +4,7 @@
 -- !pos 113 1 -40 80
 -- Retrace NPC
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

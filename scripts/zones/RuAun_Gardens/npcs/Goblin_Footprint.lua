@@ -2,6 +2,7 @@
 -- Area: Ru'Aun Gardens
 --  NPC: Goblin Footprint
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

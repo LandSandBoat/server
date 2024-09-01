@@ -4,6 +4,7 @@
 -- Test My Mettle
 -- !pos 39.858 -14.558 40.009
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

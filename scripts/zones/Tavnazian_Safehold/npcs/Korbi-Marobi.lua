@@ -2,6 +2,7 @@
 -- Area: Tavnazian Safehold
 --  NPC: Korbi-Marobi
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

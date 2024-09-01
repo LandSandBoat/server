@@ -4,6 +4,7 @@
 -- Type: Moghouse Renter
 -- !pos 201.651 -13 229.584 240
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 --  NPC: Raustigne
 -- !pos 4 -2 44 80
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

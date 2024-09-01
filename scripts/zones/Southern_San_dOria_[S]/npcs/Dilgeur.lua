@@ -4,6 +4,7 @@
 -- !pos 22 2 3 80
 -- Involved with Bridge Too Far Campaign Op
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

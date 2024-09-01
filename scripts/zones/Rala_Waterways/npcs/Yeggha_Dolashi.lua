@@ -3,6 +3,7 @@
 --  NPC: Yeggha Dolashi
 -- !pos 260.000 -5.768 60.000 258
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

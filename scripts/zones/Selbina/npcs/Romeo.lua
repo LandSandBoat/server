@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: Donate to Recycling
 -- !pos -11 -11 -6 248
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

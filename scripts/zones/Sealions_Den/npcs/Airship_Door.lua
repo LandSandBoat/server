@@ -2,6 +2,7 @@
 -- Area: Sealion's Den
 --  NPC: Airship_Door
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

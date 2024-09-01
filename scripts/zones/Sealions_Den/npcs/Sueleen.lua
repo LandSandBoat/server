@@ -3,6 +3,7 @@
 --  NPC: Sueleen
 -- !pos 612 132 774 32
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

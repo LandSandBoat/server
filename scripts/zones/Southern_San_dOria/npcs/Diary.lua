@@ -4,6 +4,7 @@
 -- Involved in Quest: To Cure a Cough, Over The Hills And Far Away
 -- !pos -75 -12 65 230
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

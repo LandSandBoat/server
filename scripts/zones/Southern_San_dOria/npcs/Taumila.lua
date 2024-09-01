@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: Tiger's Teeth (R)
 -- !pos -140 -5 -8 230
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

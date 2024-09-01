@@ -2,6 +2,7 @@
 -- Area: Ru'Lude Gardens
 --  NPC: High Wind
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

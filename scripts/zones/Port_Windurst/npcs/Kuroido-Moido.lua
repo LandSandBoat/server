@@ -5,6 +5,7 @@
 -- Starts and Finishes: Making Amens!, Orastery Woes
 -- !pos -112.5 -4.2 102.9 240
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

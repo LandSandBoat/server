@@ -4,6 +4,7 @@
 -- Type: Fish Ranking NPC
 -- !pos -13.472 -8.287 9.497 248
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

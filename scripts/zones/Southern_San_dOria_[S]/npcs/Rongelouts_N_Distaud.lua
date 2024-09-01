@@ -3,6 +3,7 @@
 --  NPC: Rongelouts N Distaud
 -- !pos 0.067 2 -22 80
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

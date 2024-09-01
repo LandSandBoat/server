@@ -4,6 +4,7 @@
 -- Legion NPC
 -- !pos 240 24.399 468
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

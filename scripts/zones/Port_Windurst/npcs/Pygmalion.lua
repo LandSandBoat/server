@@ -3,6 +3,7 @@
 --  NPC: Pygmalion
 -- !pos 228.710 -7 93.314 240
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

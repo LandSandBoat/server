@@ -4,6 +4,7 @@
 -- Involved In Quest: The Tenshodo Showdown
 -- !pos 61 -15 10 248
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
