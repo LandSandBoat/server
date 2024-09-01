@@ -21,6 +21,14 @@ local validatorNpcEvents =
 -- Raw Rewards from AMAN Validator
 -- NOTE: These tables are not configurable, and the client will not change
 -- based on the data provided below.
+---@class itemRewardEntry
+---@field itemId xi.item
+---@field qty integer
+
+---@class keyItemRewardEntry
+---@field keyItemId xi.keyItem
+
+---@type itemRewardEntry[]|keyItemRewardEntry[]
 local validatorRewards =
 {
     [  1] = { itemId    = xi.item.COPPER_AMAN_VOUCHER,            qty =  7 },
@@ -1310,7 +1318,6 @@ xi.deeds.validatorOnEventUpdate = function(player, csid, option, npc)
     -- be obtained.
     local updateAction = bit.rshift(option, 16)
     local updateOption = bit.band(option, 0xFFFF)
-    print(option)
 
     if
         (updateAction == 1 or updateAction == 3) and
@@ -1363,7 +1370,9 @@ xi.deeds.validatorOnEventUpdate = function(player, csid, option, npc)
             player:delKeyItem(voucherKeyItems[keyItemIndex + 1])
 
             for _, itemId in ipairs(rewardTable) do
-                npcUtil.giveItem(player, itemId)
+                if type(itemId) ~= 'boolean' then
+                    npcUtil.giveItem(player, itemId)
+                end
             end
         else
             local ID = zones[player:getZoneID()]

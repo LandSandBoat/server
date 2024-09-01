@@ -22,7 +22,7 @@ entity.onTrade = function(player, npc, trade)
         then
             player:confirmTrade()
         elseif
-            npcUtil.tradeHasExactly(trade, xi.item.SWEET_TEA) and
+            npcUtil.tradeHasExactly(trade, xi.item.CUP_OF_SWEET_TEA) and
             npcUtil.popFromQM(player, npc, ID.mob.NIDHOGG)
         then
             player:confirmTrade()

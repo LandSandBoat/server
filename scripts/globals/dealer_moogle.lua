@@ -3493,6 +3493,8 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option, npc)
                     end
                 else
                     if not player:hasKeyItem(item) then
+                        -- TODO: Refactor this so that we can more clearly define KI vs Item
+                        ---@diagnostic disable-next-line: param-type-mismatch
                         npcUtil.giveKeyItem(player, item)
                         player:delKeyItem(listToKeyItem(list))
                     else

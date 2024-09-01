@@ -16,6 +16,7 @@
     npcUtil.fishingAnimation(npc, phaseDuration, func)
 --]]
 
+---@class npcUtil
 npcUtil = {}
 
 --[[
@@ -33,6 +34,11 @@ npcUtil = {}
         if set a message will play if a entity spawns
 
 --]]
+---@param player CBaseEntity
+---@param qm CBaseEntity
+---@param mobId integer|integer[]
+---@param params table?
+---@return boolean
 function npcUtil.popFromQM(player, qm, mobId, params)
     local qmId = qm:getID()
 
@@ -137,16 +143,27 @@ end
     { x = x, y = y, z = z }
     { x = x, y = y, z = z, rot = r }
 --]]
+---@param x number
+---@param y number
+---@param z number
+---@param r integer?
+---@return function
+---@overload fun(posTable: { ['x']: number, ['y']: number, ['z']: number, ['rot']: integer? }): nil
 local function doMove(x, y, z, r)
     if not r then
         r = 0
     end
 
+    ---@param entity CBaseEntity
     return function(entity)
         entity:setPos(x, y, z, r)
     end
 end
 
+---@param npc CBaseEntity
+---@param point { ['x']: number, ['y']: number, ['z']: number, ['rot']: integer? }
+---@param delay integer?
+---@return nil
 function npcUtil.queueMove(npc, point, delay)
     if not delay then
         delay = 3000
@@ -158,12 +175,17 @@ function npcUtil.queueMove(npc, point, delay)
         point = { point.x, point.y, point.z }
     end
 
-    npc:queue(delay, doMove(unpack(point)))
+    local x, y, z, rot = unpack(point)
+    npc:queue(delay, doMove(x, y, z, rot))
 end
 
 -- Picks a new position for an NPC and excluding the current position.
 -- INPUT: npc = npcID, position = 2D table with coords: index, { x, y, z }
 -- RETURN: table index
+---@param npcID integer
+---@param positionTable table
+---@param allowCurrentPosition boolean?
+---@return table
 function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
     local npc = GetNPCByID(npcID)
     local positionIndex  = 1 -- Default to position one in the table if it can't be found.
@@ -221,6 +243,16 @@ end
         instead of
         "Come back again after sorting your inventory"
 --]]
+
+---@class itemQuantityEntry : { [xi.item]: xi.item, [integer]: integer }
+
+---@class multipleItemList
+---@field [integer] { [integer]: xi.item, [integer]: integer }|xi.item
+
+---@param player CBaseEntity
+---@param items xi.item|itemQuantityEntry|multipleItemList
+---@param params { silent: boolean?, fromTrade: boolean? }?
+---@return boolean
 function npcUtil.giveItem(player, items, params)
     params = params or {}
     local ID = zones[player:getZoneID()]
@@ -303,6 +335,10 @@ end
         instead of
         "Come back again after sorting your inventory"
 --]]
+---@param player CBaseEntity
+---@param items xi.item|itemQuantityEntry|multipleItemList
+---@param params { silent: boolean? }?
+---@return boolean
 function npcUtil.giveTempItem(player, items, params)
     params = params or {}
     local ID = zones[player:getZoneID()]
@@ -362,6 +398,10 @@ end
         gil, 500
         bayld, 1000
 --]]
+---@param player CBaseEntity
+---@param currency string
+---@param amount integer
+---@return boolean
 function npcUtil.giveCurrency(player, currency, amount)
     local ID = zones[player:getZoneID()]
 
@@ -413,20 +453,17 @@ end
         { xi.ki.PALBOROUGH_MINES_LOGS }
         { xi.ki.BLUE_ACIDITY_TESTER, xi.ki.RED_ACIDITY_TESTER }
 --]]
+---@param player CBaseEntity
+---@param keyitems xi.keyItem|{ [integer]: xi.keyItem }
+---@param msgId integer?
 function npcUtil.giveKeyItem(player, keyitems, msgId)
-    local ID = zones[player:getZoneID()]
-
-    -- create table of keyitems
-    local givenKeyItems = { keyitems }
-    if type(keyitems) == 'table' then
-        givenKeyItems = keyitems
-    elseif type(keyitems) ~= 'number' then
-        print(string.format('ERROR: invalid keyitems parameter given to npcUtil.giveKeyItem in zone %s.', player:getZoneName()))
-        return false
-    end
+    local ID            = zones[player:getZoneID()]
+    local givenKeyItems = type(keyitems) == 'table' and keyitems or { keyitems }
 
     -- give key items to player, with message
+
     for _, keyItemId in ipairs(givenKeyItems) do
+        ---@cast keyItemId xi.keyItem
         if not player:hasKeyItem(keyItemId) then
             player:addKeyItem(keyItemId)
 
@@ -462,6 +499,23 @@ end
             var = { 'foo1', 'foo2' }      -- variable(s) to set to 0. string or table
         })
 --]]
+
+---@class rewardParam
+---@field item xi.item|itemQuantityEntry|multipleItemList?
+---@field itemParams { silent: boolean?, fromTrade: boolean? }?
+---@field keyItem xi.keyItem|{ [integer]: xi.keyItem }?
+---@field ki xi.keyItem|{ [integer]: xi.keyItem }?
+---@field fame integer?
+---@field fameArea xi.fameArea?
+---@field bayld integer?
+---@field gil integer?
+---@field title xi.title?
+---@field var string|string[]?
+---@field xp integer?
+
+---@param player CBaseEntity
+---@param params rewardParam
+---@return boolean
 function npcUtil.giveReward(player, params)
     params = params or {}
 
@@ -515,6 +569,7 @@ function npcUtil.giveReward(player, params)
     if params['var'] ~= nil then
         local playerVarsToZero = {}
         if type(params['var']) == 'table' then
+            ---@cast params['var'] string[]
             playerVarsToZero = params['var']
         elseif type(params['var']) == 'string' then
             table.insert(playerVarsToZero, params['var'])
@@ -549,6 +604,12 @@ end
             var = { 'foo1', 'foo2' }      -- variable(s) to set to 0. string or table
         })
 --]]
+
+---@param player CBaseEntity
+---@param area xi.questLog
+---@param quest integer
+---@param params rewardParam
+---@return boolean
 function npcUtil.completeQuest(player, area, quest, params)
     params = params or {}
 
@@ -604,12 +665,13 @@ function npcUtil.completeQuest(player, area, quest, params)
     if params['var'] ~= nil then
         local playerVarsToZero = {}
         if type(params['var']) == 'table' then
+            ---@cast params['var'] string[]
             playerVarsToZero = params['var']
         elseif type(params['var']) == 'string' then
             table.insert(playerVarsToZero, params['var'])
         end
 
-        for _, v in pairs(playerVarsToZero) do
+        for _, v in ipairs(playerVarsToZero) do
             player:setCharVar(v, 0)
         end
     end

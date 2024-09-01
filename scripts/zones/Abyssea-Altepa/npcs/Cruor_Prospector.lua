@@ -5,17 +5,10 @@
 -----------------------------------
 local entity = {}
 
-local itemType =
-{
-    ITEM        = 1,
-    TEMP        = 2,
-    KEYITEM     = 3,
-    ENHANCEMENT = 4,
-}
-
+---@type TProspectorItems
 local prospectorItems =
 {
-    [itemType.ITEM] =
+    [xi.abyssea.itemType.ITEM] =
     {
     --  Sel      Item                            Cost
         [ 1] = { xi.item.RAVAGERS_MUFFLERS,     5000 },
@@ -30,7 +23,7 @@ local prospectorItems =
         [10] = { xi.item.SHADOW_THRONE,      2000000 },
     },
 
-    [itemType.TEMP] =
+    [xi.abyssea.itemType.TEMP] =
     {
     --  Sel      Item                               Cost
         [ 1] = { xi.item.LUCID_POTION_I,             80 },
@@ -52,7 +45,7 @@ local prospectorItems =
         [17] = { xi.item.PRIMEVAL_BREW,         2000000 },
     },
 
-    [itemType.KEYITEM] =
+    [xi.abyssea.itemType.KEYITEM] =
     {
     --  Sel     Item                                 Cost
         [1] = { xi.ki.MAP_OF_ABYSSEA_ALTEPA,         4500 },
@@ -152,7 +145,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     local itemSelected = bit.band(bit.rshift(option, 16), 0x1F)
     local cruorTotal = player:getCurrency('cruor')
 
-    if itemCategory == itemType.ITEM then
+    if itemCategory == xi.abyssea.itemType.ITEM then
         local itemData = prospectorItems[itemCategory][itemSelected]
         local itemQty = itemData[1] ~= xi.item.FORBIDDEN_KEY and 1 or bit.rshift(option, 24)
         local itemCost = itemData[2] * itemQty
@@ -163,7 +156,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         then
             player:delCurrency('cruor', itemCost)
         end
-    elseif itemCategory == itemType.TEMP then
+    elseif itemCategory == xi.abyssea.itemType.TEMP then
         local itemData = prospectorItems[itemCategory][itemSelected]
         local itemCost = itemData[2]
 
@@ -173,7 +166,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         then
             player:delCurrency('cruor', itemCost)
         end
-    elseif itemCategory == itemType.KEYITEM then
+    elseif itemCategory == xi.abyssea.itemType.KEYITEM then
         local itemData = prospectorItems[itemCategory][itemSelected]
 
         if
@@ -182,7 +175,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         then
             player:delCurrency('cruor', itemData[2])
         end
-    elseif itemCategory == itemType.ENHANCEMENT then
+    elseif itemCategory == xi.abyssea.itemType.ENHANCEMENT then
         local enhanceData = prospectorEnhancement[itemSelected]
 
         if enhanceData[2] <= cruorTotal then

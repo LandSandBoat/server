@@ -6,6 +6,7 @@
 
 -- TODO: Fill in with _commented out entries_ for all the things seen in each category
 -- https://www.bg-wiki.com/ffxi/Repeat_Login_Campaign/Past_Login_Campaign_Rewards
+---@class prizes : { [integer] : { ['price']: integer, ['items']: { [integer]: xi.item } } }
 local prizes =
 {
     [1] =
@@ -13,11 +14,11 @@ local prizes =
         ['price'] = 10,
         ['items'] =
         {
-            1126, -- Beastmen's Seal
-            1127, -- Kindred's Seal
-            2955, -- Kindred's Crest
-            2956, -- High Kindred's Crest
-            2957, -- Sacred Kindred's Crest
+            xi.item.BEASTMENS_SEAL,
+            xi.item.KINDREDS_SEAL,
+            xi.item.KINDREDS_CREST,
+            xi.item.HIGH_KINDREDS_CREST,
+            xi.item.SACRED_KINDREDS_CREST,
             -- 1857, -- Cordial Invite
             -- 2306, -- Martial Ball Invite
             -- 5364, -- Training Grounds Key
@@ -39,20 +40,20 @@ local prizes =
         ['price'] = 100,
         ['items'] =
         {
-            8734,  -- Mog Kupon I-S1
-            8966,  -- Eudaemon Blade
-            8967,  -- Eudaemon Cape
-            8968,  -- Eudaemon Ring
-            8969,  -- Eudaemon Sash
-            8970,  -- Eudaemon Shield
-            17006, -- Drill Calamary
-            17007, -- Dwarf Pugil
-            6413,  -- Astral Cube
+            xi.item.MOG_KUPON_I_S1,  -- Mog Kupon I-S1
+            xi.item.EUDAEMON_BLADE,  -- Eudaemon Blade
+            xi.item.EUDAEMON_CAPE,  -- Eudaemon Cape
+            xi.item.EUDAEMON_RING,  -- Eudaemon Ring
+            xi.item.EUDAEMON_SASH,  -- Eudaemon Sash
+            xi.item.EUDAEMON_SHIELD,  -- Eudaemon Shield
+            xi.item.DRILL_CALAMARY, -- Drill Calamary
+            xi.item.DWARF_PUGIL, -- Dwarf Pugil
+            xi.item.ASTRAL_CUBE,  -- Astral Cube
             -- 9891,  -- Zinnia Orb
             -- 10112, -- Cipher: Zeid
             -- 10113, -- Cipher: Lion
-            10118, -- Cipher: Naja
-            10120, -- Cipher: Lehko
+            xi.item.CIPHER_OF_NAJAS_ALTER_EGO, -- Cipher: Naja
+            xi.item.CIPHER_OF_LEHKOS_ALTER_EGO, -- Cipher: Lehko
             -- 10124, -- Cipher: Luzaf
             -- 10125, -- Cipher: Najelith
             -- 10129, -- Cipher: Domina
@@ -80,8 +81,8 @@ local prizes =
             -- 10178, -- Cipher: Ullegore
             -- 10179, -- Cipher: Teodor
             -- 10183, -- Cipher: Darrcuiln
-            20713, -- Excalipoor
-            6008,  -- Copse Candy
+            xi.item.EXCALIPOOR, -- Excalipoor
+            xi.item.PIECE_OF_COPSE_CANDY,  -- Copse Candy
         },
     },
 
@@ -91,12 +92,12 @@ local prizes =
         ['items'] =
         {
             -- 10187, -- Cipher: Shantotto II
-            10069, -- ♪Goobbue
-            10051, -- ♪Crab
-            10058, -- ♪Beetle
+            xi.item.MOUNT_GOOBBUE, -- ♪Goobbue
+            xi.item.MOUNT_CRAB, -- ♪Crab
+            xi.item.MOUNT_BEETLE, -- ♪Beetle
             -- TODO: The other mounts
-            10384, -- Cumulus Masque
-            20666, -- Blizzard Brand
+            xi.item.CUMULUS_MASQUE, -- Cumulus Masque
+            xi.item.BLIZZARD_BRAND, -- Blizzard Brand
             -- 25658, -- Wyrm. Masque +1
             -- 25757, -- Wyrmking Suit +1
             -- 5854,  -- Frayed Pouch (B)
@@ -120,7 +121,7 @@ local prizes =
         ['items'] =
         {
             -- TODO: Special month-to-month things
-            10073, -- ♪Dhalmel
+            xi.item.MOUNT_DHALMEL, -- ♪Dhalmel
         },
 
     },
@@ -130,15 +131,15 @@ local prizes =
         ['price'] = 750,
         ['items'] =
         {
-            3885, -- Melodious Plans
-            3886, -- Timbre Case Kit
-            3887, -- Musichinery Kit
+            xi.item.COPY_OF_MELODIOUS_PLANS, -- Melodious Plans
+            xi.item.TIMBRE_CASE_KIT, -- Timbre Case Kit
+            xi.item.MUSICHINERY_KIT, -- Musichinery Kit
             -- 9079, -- Kitchen Brick
             -- 9080, -- Kitchen Stove
             -- 9081, -- Kitchen Plate
-            3339, -- Honey Wine
-            3341, -- Beastly Shank
-            3343, -- Blue Pondweed
+            xi.item.JUG_OF_HONEY_WINE, -- Honey Wine
+            xi.item.BEASTLY_SHANK, -- Beastly Shank
+            xi.item.CLUMP_OF_BLUE_PONDWEED, -- Blue Pondweed
             -- 1873, -- Brigand's Chart
             -- 1874, -- Pirate's Chart
             -- 6381, -- Fisherman's Feast
@@ -156,8 +157,8 @@ local prizes =
         ['items'] =
         {
             -- 6499,  -- Patio Design Plans
-            26165, -- Facility Ring
-            26164, -- Caliber Ring
+            xi.item.FACILITY_RING, -- Facility Ring
+            xi.item.CALIBER_RING, -- Caliber Ring
             -- 6486,  -- Frayed Sack (Pel)
             -- 6487,  -- Frayed Sack (Fer)
             -- 6488,  -- Frayed Sack (Tau)
@@ -169,9 +170,9 @@ local prizes =
         ['price'] = 1500,
         ['items'] =
         {
-            3340, -- Sweet Tea
-            3342, -- Savory Shank
-            3344, -- Red Pondweed
+            xi.item.CUP_OF_SWEET_TEA, -- Sweet Tea
+            xi.item.SAVORY_SHANK, -- Savory Shank
+            xi.item.CLUMP_OF_RED_PONDWEED, -- Red Pondweed
             -- 8720, -- Maliya. Coral Orb
             -- 8722, -- Hepatizon Ingot
             -- 8724, -- Beryllium Ingot
@@ -180,4 +181,5 @@ local prizes =
         },
     },
 }
+
 return prizes
