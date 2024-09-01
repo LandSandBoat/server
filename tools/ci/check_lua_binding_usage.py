@@ -68,6 +68,7 @@ def main():
     function_names.append("sequence")
     function_names.append("setVarBit")
     function_names.append("isVarBitsSet")
+    function_names.append("countSetVarBits")
     function_names.append("importantEvent")
     function_names.append("replaceEvent")
     function_names.append("removeContainer")

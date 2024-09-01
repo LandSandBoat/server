@@ -145,6 +145,20 @@ function Container:unsetVarBit(player, name, bitNum)
     end
 end
 
+function Container:countSetVarBits(player, name)
+    local currentValue = player:getVar(self.varPrefix .. name)
+    local count = 0
+    while currentValue > 0 do
+        if bit.band(currentValue, 1) == 1 then
+            count = count + 1
+        end
+
+        currentValue = bit.rshift(currentValue, 1)
+    end
+
+    return count
+end
+
 -- These helper functions will set or get a localVar using varPrefix to determine
 -- if zoning/logout is required.  There is no clearing support at this time, outside
 -- of legitimate methods.
