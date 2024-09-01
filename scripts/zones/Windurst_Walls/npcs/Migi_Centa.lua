@@ -2,6 +2,7 @@
 -- Area: Windurst Walls
 --  NPC: Migi Centa
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

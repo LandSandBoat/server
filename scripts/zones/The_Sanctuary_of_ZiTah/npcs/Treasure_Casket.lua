@@ -2,6 +2,7 @@
 -- Area: The Sanctuary of Zi'Tah
 --  NPC: Treasure Casket
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

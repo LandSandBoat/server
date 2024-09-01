@@ -3,6 +3,7 @@
 --  NPC: Ekki-Mokki
 -- !pos -26.558 -4.5 62.930 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local function isFightInProgress()

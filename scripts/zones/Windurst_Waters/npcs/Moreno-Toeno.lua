@@ -3,6 +3,7 @@
 --  NPC: Moreno-Toeno
 -- !pos 169 -1.25 159 238
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

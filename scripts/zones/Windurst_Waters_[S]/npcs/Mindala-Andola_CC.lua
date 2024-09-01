@@ -4,6 +4,7 @@
 -- Type: Sigil NPC
 -- !pos -31.869 -6.009 226.793 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

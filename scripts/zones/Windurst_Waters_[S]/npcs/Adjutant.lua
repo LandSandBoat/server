@@ -3,6 +3,7 @@
 --  NPC: Adjutant
 -- !pos -67.819 -4.499 58.997 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

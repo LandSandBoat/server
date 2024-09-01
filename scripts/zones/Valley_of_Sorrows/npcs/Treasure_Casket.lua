@@ -2,6 +2,7 @@
 -- Area: Valley of Sorrows
 --  NPC: Treasure Casket
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

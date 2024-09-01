@@ -2,6 +2,7 @@
 -- Area: Windurst Woods
 --  NPC: Orahi-Karapahi
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

@@ -2,6 +2,7 @@
 -- Area: Zeruhn Mines
 --  NPC: Smoke Breath
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

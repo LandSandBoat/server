@@ -4,6 +4,7 @@
 -- Notes: CS for Windurst 9-2
 -- !pos -239.442 -1.000 -18.870 159
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

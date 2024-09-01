@@ -4,6 +4,7 @@
 -- Type: Great War Veteran NPC
 -- !pos 13.710 1.422 -83.198 241
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

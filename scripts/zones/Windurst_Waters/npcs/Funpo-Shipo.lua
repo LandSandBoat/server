@@ -3,6 +3,7 @@
 --  NPC: Funpo-Shipo
 -- !pos -44.091 -4.499 41.728 238
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

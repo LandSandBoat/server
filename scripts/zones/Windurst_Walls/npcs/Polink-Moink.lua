@@ -2,6 +2,7 @@
 -- Area: Windurst Walls
 --  NPC: Polink-Moink
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

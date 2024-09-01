@@ -3,6 +3,7 @@
 --  NPC: Cerite
 -- !pos -263.577 -72.999 425.885 100
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

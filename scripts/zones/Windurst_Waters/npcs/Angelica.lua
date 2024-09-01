@@ -4,6 +4,7 @@
 -- Starts and Finished Quest: A Pose By Any Other Name
 -- !pos -70 -10 -6 238
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- Area: Windurst Woods
 --  NPC: Gottah Maporushanoh
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

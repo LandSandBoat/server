@@ -3,6 +3,7 @@
 --  NPC: Chocobo
 -- Finishes Quest: Chocobo's Wounds
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

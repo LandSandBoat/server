@@ -3,6 +3,7 @@
 --  NPC: Hiwon-Biwon
 -- Involved In Quest: Making Headlines, Curses, Foiled...Again!?
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

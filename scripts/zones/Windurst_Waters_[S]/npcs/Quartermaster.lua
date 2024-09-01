@@ -3,6 +3,7 @@
 --  NPC: Quartermaster
 -- !pos -60.200 -4.7 32.500 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

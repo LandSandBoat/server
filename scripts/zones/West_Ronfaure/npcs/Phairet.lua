@@ -4,6 +4,7 @@
 -- Involved in Quest: The Trader in the Forest
 -- !pos -57 -2 -502 100
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

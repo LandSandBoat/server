@@ -3,6 +3,7 @@
 --  NPC: Ranna-Brunna
 -- !pos 123.085 -8.874 223.734 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

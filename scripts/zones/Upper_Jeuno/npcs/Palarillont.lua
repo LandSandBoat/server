@@ -2,6 +2,7 @@
 -- Area: Upper Jeuno
 --  NPC: Palarillont
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

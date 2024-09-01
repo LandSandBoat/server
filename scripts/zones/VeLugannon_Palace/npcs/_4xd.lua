@@ -3,6 +3,7 @@
 --  NPC: Door (Blue)
 -- !pos -160.000 -2.974 -380.000 177
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,6 +4,7 @@
 -- Type: Campaign Ops Overseer
 -- !pos 10.577 -2.478 32.680 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

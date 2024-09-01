@@ -4,6 +4,7 @@
 -- Dynamis Valkurm_Dunes Enter
 -- !pos 117 -10 133 103
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

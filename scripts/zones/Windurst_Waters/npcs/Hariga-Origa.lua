@@ -5,6 +5,7 @@
 -- Involved in Mission 2-1
 -- !pos -62 -6 105 238
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

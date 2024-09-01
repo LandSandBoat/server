@@ -3,6 +3,7 @@
 --  NPC: Catalia
 -- !pos -46.160 -0.501 -32.698 241
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

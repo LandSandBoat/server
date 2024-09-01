@@ -2,6 +2,7 @@
 -- Area: The_Garden_of_RuHmet
 --  NPC: Luminus convergence
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

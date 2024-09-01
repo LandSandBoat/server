@@ -3,6 +3,7 @@
 --  NPC: Etsa Rhuyuli
 -- !pos 62.482 -8.499 -139.836 241
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

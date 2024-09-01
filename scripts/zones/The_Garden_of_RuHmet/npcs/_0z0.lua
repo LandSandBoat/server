@@ -2,6 +2,7 @@
 -- Area: The_Garden_of_RuHmet
 --  NPC: _0z0
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
