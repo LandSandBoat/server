@@ -4,7 +4,7 @@
 require('scripts/globals/interaction/container')
 -----------------------------------
 
-Quest = setmetatable({ areaId = -1 }, { __index = Container })
+Quest = setmetatable({ areaId = 0 }, { __index = Container })
 Quest.__index = Quest
 
 ---@diagnostic disable-next-line: duplicate-set-field
@@ -14,6 +14,8 @@ end
 
 Quest.reward = {}
 
+---@param areaId xi.questLog
+---@param questId integer
 ---@diagnostic disable-next-line: duplicate-set-field
 function Quest:new(areaId, questId)
     local obj = Container:new(Quest.getVarPrefix(areaId, questId))
@@ -23,10 +25,14 @@ function Quest:new(areaId, questId)
     return obj
 end
 
+---@param areaId xi.questLog
+---@param questId integer
+---@return string
 function Quest.getVarPrefix(areaId, questId)
     return string.format('Quest[%d][%d]', areaId, questId)
 end
 
+---@param player CBaseEntity
 function Quest:getCheckArgs(player)
     return { player:getQuestStatus(self.areaId, self.questId) }
 end

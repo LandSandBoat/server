@@ -705,205 +705,207 @@ end
 -- (LOCAL) overseer stock
 -----------------------------------
 
+---@class overseerInvComming : { [integer] : { cp: integer, lvl: integer, item: xi.item, rank: integer? } }
 local overseerInvCommon =
 {
-    [32928] = { cp =     7, lvl =  1, item =  4182 },             -- scroll_of_instant_reraise
-    [32929] = { cp =    10, lvl =  1, item =  4181 },             -- scroll_of_instant_warp
-    [32930] = { cp =  2500, lvl =  1, item = 15542 },             -- return_ring
-    [32931] = { cp =  9000, lvl =  1, item = 15541 },             -- homing_ring
-    [32933] = { cp =   500, lvl =  1, item = 15761 },             -- chariot_band
-    [32934] = { cp =  1000, lvl =  1, item = 15762 },             -- empress_band
-    [32935] = { cp =  2000, lvl =  1, item = 15763 },             -- emperor_band
-    [32936] = { cp =  5000, lvl =  1, item = 28540 },             -- warp_ring
-    [32937] = { cp =  1000, lvl =  1, item = xi.item.CIPHER_OF_TENZENS_ALTER_EGO  },
-    [32938] = { cp =  1000, lvl =  1, item = xi.item.CIPHER_OF_RAHALS_ALTER_EGO   },
-    [32939] = { cp =  1000, lvl =  1, item = xi.item.CIPHER_OF_KUKKIS_ALTER_EGO   },
-    [32941] = { cp = 20000, lvl =  1, item = xi.item.REFINED_CHAIR_SET, rank = 10 },
-    [32942] = { cp =  1000, lvl =  1, item = xi.item.CIPHER_OF_MAKKIS_ALTER_EGO   },
+    [32928] = { cp =     7, lvl =  1, item = xi.item.SCROLL_OF_INSTANT_RERAISE   },
+    [32929] = { cp =    10, lvl =  1, item = xi.item.SCROLL_OF_INSTANT_WARP      },
+    [32930] = { cp =  2500, lvl =  1, item = xi.item.RETURN_RING                 },
+    [32931] = { cp =  9000, lvl =  1, item = xi.item.HOMING_RING                 },
+    [32933] = { cp =   500, lvl =  1, item = xi.item.CHARIOT_BAND                },
+    [32934] = { cp =  1000, lvl =  1, item = xi.item.EMPRESS_BAND                },
+    [32935] = { cp =  2000, lvl =  1, item = xi.item.EMPEROR_BAND                },
+    [32936] = { cp =  5000, lvl =  1, item = xi.item.WARP_RING                   },
+    [32937] = { cp =  1000, lvl =  1, item = xi.item.CIPHER_OF_TENZENS_ALTER_EGO },
+    [32938] = { cp =  1000, lvl =  1, item = xi.item.CIPHER_OF_RAHALS_ALTER_EGO  },
+    [32939] = { cp =  1000, lvl =  1, item = xi.item.CIPHER_OF_KUKKIS_ALTER_EGO  },
+    [32941] = { cp = 20000, lvl =  1, item = xi.item.REFINED_CHAIR_SET,           rank = 10 },
+    [32942] = { cp =  1000, lvl =  1, item = xi.item.CIPHER_OF_MAKKIS_ALTER_EGO  },
 }
 
+---@class overseerInvNation : { [xi.nation] : { [integer]: { rank: integer, cp: integer, lvl: integer, item: xi.item, place: integer? } } }
 local overseerInvNation =
 {
     [xi.nation.SANDORIA] =
     {
-        [32768] = { rank =  1, cp =  1000, lvl = 10, item = 17167 },                -- royal_archers_longbow
-        [32769] = { rank =  1, cp =  1000, lvl = 10, item = 16544 },                -- royal_archers_sword
-        [32770] = { rank =  1, cp =  1000, lvl = 10, item = 12510 },                -- royal_footmans_bandana
-        [32771] = { rank =  1, cp =  1000, lvl = 10, item = 12753 },                -- royal_footmans_gloves
-        [32772] = { rank =  1, cp =  1000, lvl = 10, item = 13004 },                -- royal_footmans_boots
-        [32773] = { rank =  1, cp =  1000, lvl = 10, item = 16691, place = 2 },     -- royal_archers_cesti
-        [32774] = { rank =  1, cp =  1000, lvl = 10, item = 13718, place = 1 },     -- royal_footmans_tunic
-        [32784] = { rank =  2, cp =  2000, lvl = 18, item = 16852 },                -- royal_spearmans_spear
-        [32785] = { rank =  2, cp =  2000, lvl = 10, item = 12630 },                -- royal_footmans_vest
-        [32786] = { rank =  2, cp =  2000, lvl = 20, item = 12882 },                -- royal_footmans_trousers
-        [32787] = { rank =  2, cp =  2000, lvl = 20, item = 17367, place = 2 },     -- royal_spearmans_horn
-        [32788] = { rank =  2, cp =  2000, lvl = 20, item = 13045, place = 1 },     -- royal_footmans_clogs
-        [32800] = { rank =  3, cp =  4000, lvl = 30, item = 16844 },                -- royal_squires_halberd
-        [32801] = { rank =  3, cp =  4000, lvl = 30, item = 13104 },                -- royal_squires_collar
-        [32802] = { rank =  3, cp =  4000, lvl = 30, item = 12431 },                -- royal_squires_helm
-        [32803] = { rank =  3, cp =  4000, lvl = 30, item = 12687 },                -- royal_squires_mufflers
-        [32804] = { rank =  3, cp =  4000, lvl = 30, item = 12943 },                -- royal_squires_sollerets
-        [32805] = { rank =  3, cp =  4000, lvl = 30, item = 16744, place = 2 },     -- royal_squires_dagger
-        [32806] = { rank =  3, cp =  4000, lvl = 30, item = 17150, place = 1 },     -- royal_squires_mace
-        [32807] = { rank =  3, cp =  4000, lvl =  1, item = 13495, place = 1 },     -- san_dorian_ring
-        [32816] = { rank =  4, cp =  8000, lvl = 40, item = 16601 },                -- royal_swordsmans_blade
-        [32817] = { rank =  4, cp =  8000, lvl = 40, item = 12559 },                -- royal_squires_chainmail
-        [32818] = { rank =  4, cp =  8000, lvl = 40, item = 12815 },                -- royal_squires_breeches
-        [32819] = { rank =  4, cp =  8000, lvl = 40, item = 13719, place = 2 },     -- royal_squires_robe
-        [32820] = { rank =  4, cp =  8000, lvl = 40, item = 12336, place = 1 },     -- royal_squires_shield
-        [32832] = { rank =  5, cp = 16000, lvl = 50, item = 16851 },                -- royal_knight_army_lance
-        [32833] = { rank =  5, cp = 16000, lvl = 50, item = 16571 },                -- temple_knight_army_sword
-        [32834] = { rank =  5, cp = 16000, lvl = 50, item = 12312 },                -- royal_knight_army_shield
-        [32835] = { rank =  5, cp = 16000, lvl = 50, item = 12313 },                -- temple_knight_army_shield
-        [32836] = { rank =  5, cp = 16000, lvl = 50, item = 13107 },                -- royal_knight_army_collar
-        [32837] = { rank =  5, cp = 16000, lvl = 50, item = 13105 },                -- temple_knight_army_collar
-        [32838] = { rank =  5, cp = 16000, lvl = 50, item = 12686 },                -- royal_knights_mufflers
-        [32839] = { rank =  5, cp = 16000, lvl = 50, item = 12942 },                -- royal_knights_sollerets
-        [32840] = { rank =  5, cp = 16000, lvl = 50, item = 13220, place = 2 },     -- royal_knights_belt
-        [32841] = { rank =  5, cp = 16000, lvl = 50, item = 13720, place = 1 },     -- royal_knights_cloak
-        [32848] = { rank =  6, cp = 24000, lvl = 55, item = 13580 },                -- royal_army_mantle
-        [32849] = { rank =  6, cp = 24000, lvl = 55, item = 13106 },                -- royal_guards_collar
-        [32850] = { rank =  6, cp = 24000, lvl = 55, item = 12430 },                -- royal_knights_bascinet
-        [32851] = { rank =  6, cp = 24000, lvl = 55, item = 13722 },                -- royal_knights_aketon
-        [32852] = { rank =  6, cp = 24000, lvl = 55, item = 12558, place = 1 },     -- royal_knights_chainmail
-        [32853] = { rank =  6, cp = 24000, lvl = 55, item = 12814, place = 1 },     -- royal_knights_breeches
-        [32854] = { rank =  6, cp = 24000, lvl = 55, item = 12321, place = 2 },     -- royal_guards_shield
-        [32855] = { rank =  6, cp = 24000, lvl = 55, item = 17067, place = 1 },     -- royal_guards_rod
-        [32856] = { rank =  6, cp = 24000, lvl = 55, item = 16599, place = 1 },     -- royal_guards_sword
-        [32857] = { rank =  6, cp = 24000, lvl = 55, item = 16805, place = 1 },     -- royal_guards_fleuret
-        [32864] = { rank =  7, cp = 32000, lvl = 60, item = 15956 },                -- temple_knights_quiver
-        [32865] = { rank =  7, cp = 32000, lvl = 60, item = 16886, place = 2 },     -- grand_knights_lance
-        [32866] = { rank =  7, cp = 32000, lvl = 60, item = 13557, place = 1 },     -- grand_knights_ring
-        [32880] = { rank =  8, cp = 40000, lvl = 65, item = 14013 },                -- grand_temple_knights_gauntlets
-        [32881] = { rank =  8, cp = 40000, lvl = 65, item = 14014, place = 2 },     -- grand_temple_knights_bangles
-        [32882] = { rank =  8, cp = 40000, lvl = 65, item = 13140, place = 1 },     -- grand_temple_knights_collar
-        [32896] = { rank =  9, cp = 48000, lvl = 71, item = 16953 },                -- reserve_captains_greatsword
-        [32897] = { rank =  9, cp = 48000, lvl = 71, item = 17934 },                -- reserve_captains_pick
-        [32898] = { rank =  9, cp = 48000, lvl = 71, item = 17458, place = 2 },     -- reserve_captains_mace
-        [32899] = { rank =  9, cp = 48000, lvl = 71, item = 16893, place = 1 },     -- reserve_captains_lance
-        [32912] = { rank = 10, cp = 56000, lvl =  1, item = 14428, place = 1 },     -- kingdom_aketon
-        [32932] = {            cp =  5000, lvl =  1, item = 17583 },                -- kingdom_signet_staff
-        [32940] = { rank = 10, cp = 10000, lvl =  1, item =  6377 },                -- imperial_chair_set
+        [32768] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.ROYAL_ARCHERS_LONGBOW          },
+        [32769] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.ROYAL_ARCHERS_SWORD            },
+        [32770] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.ROYAL_FOOTMANS_BANDANA         },
+        [32771] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.ROYAL_FOOTMANS_GLOVES          },
+        [32772] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.ROYAL_FOOTMANS_BOOTS           },
+        [32773] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.ROYAL_ARCHERS_CESTI,            place = 2 },
+        [32774] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.ROYAL_FOOTMANS_TUNIC,           place = 1 },
+        [32784] = { rank =  2, cp =  2000, lvl = 18, item = xi.item.ROYAL_SPEARMANS_SPEAR          },
+        [32785] = { rank =  2, cp =  2000, lvl = 10, item = xi.item.ROYAL_FOOTMANS_VEST            },
+        [32786] = { rank =  2, cp =  2000, lvl = 20, item = xi.item.ROYAL_FOOTMANS_TROUSERS        },
+        [32787] = { rank =  2, cp =  2000, lvl = 20, item = xi.item.ROYAL_SPEARMANS_HORN,           place = 2 },
+        [32788] = { rank =  2, cp =  2000, lvl = 20, item = xi.item.ROYAL_FOOTMANS_CLOGS,           place = 1 },
+        [32800] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.ROYAL_SQUIRES_HALBERD          },
+        [32801] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.ROYAL_SQUIRES_COLLAR           },
+        [32802] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.ROYAL_SQUIRES_HELM             },
+        [32803] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.ROYAL_SQUIRES_MUFFLERS         },
+        [32804] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.ROYAL_SQUIRES_SOLLERETS        },
+        [32805] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.ROYAL_SQUIRES_DAGGER,           place = 2 },
+        [32806] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.ROYAL_SQUIRES_MACE,             place = 1 },
+        [32807] = { rank =  3, cp =  4000, lvl =  1, item = xi.item.SAN_DORIAN_RING,                place = 1 },
+        [32816] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.ROYAL_SWORDSMANS_BLADE         },
+        [32817] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.ROYAL_SQUIRES_CHAINMAIL        },
+        [32818] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.ROYAL_SQUIRES_BREECHES         },
+        [32819] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.ROYAL_SQUIRES_ROBE,             place = 2 },
+        [32820] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.ROYAL_SQUIRES_SHIELD,           place = 1 },
+        [32832] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.ROYAL_KNIGHT_ARMY_LANCE        },
+        [32833] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.TEMPLE_KNIGHT_ARMY_SWORD       },
+        [32834] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.ROYAL_KNIGHT_ARMY_SHIELD       },
+        [32835] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.TEMPLE_KNIGHT_ARMY_SHIELD      },
+        [32836] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.ROYAL_KNIGHT_ARMY_COLLAR       },
+        [32837] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.TEMPLE_KNIGHT_ARMY_COLLAR      },
+        [32838] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.ROYAL_KNIGHTS_MUFFLERS         },
+        [32839] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.ROYAL_KNIGHTS_SOLLERETS        },
+        [32840] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.ROYAL_KNIGHTS_BELT,             place = 2 },
+        [32841] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.ROYAL_KNIGHTS_CLOAK,            place = 1 },
+        [32848] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.ROYAL_ARMY_MANTLE              },
+        [32849] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.ROYAL_GUARDS_COLLAR            },
+        [32850] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.ROYAL_KNIGHTS_BASCINET         },
+        [32851] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.ROYAL_KNIGHTS_AKETON           },
+        [32852] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.ROYAL_KNIGHTS_CHAINMAIL,        place = 1 },
+        [32853] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.ROYAL_KNIGHTS_BREECHES,         place = 1 },
+        [32854] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.ROYAL_GUARDS_SHIELD,            place = 2 },
+        [32855] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.ROYAL_GUARDS_ROD,               place = 1 },
+        [32856] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.ROYAL_GUARDS_SWORD,             place = 1 },
+        [32857] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.ROYAL_GUARDS_FLEURET,           place = 1 },
+        [32864] = { rank =  7, cp = 32000, lvl = 60, item = xi.item.TEMPLE_KNIGHTS_QUIVER          },
+        [32865] = { rank =  7, cp = 32000, lvl = 60, item = xi.item.GRAND_KNIGHTS_LANCE,            place = 2 },
+        [32866] = { rank =  7, cp = 32000, lvl = 60, item = xi.item.GRAND_KNIGHTS_RING,             place = 1 },
+        [32880] = { rank =  8, cp = 40000, lvl = 65, item = xi.item.GRAND_TEMPLE_KNIGHTS_GAUNTLETS },
+        [32881] = { rank =  8, cp = 40000, lvl = 65, item = xi.item.GRAND_TEMPLE_KNIGHTS_BANGLES,   place = 2 },
+        [32882] = { rank =  8, cp = 40000, lvl = 65, item = xi.item.GRAND_TEMPLE_KNIGHTS_COLLAR,    place = 1 },
+        [32896] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.RESERVE_CAPTAINS_GREATSWORD    },
+        [32897] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.RESERVE_CAPTAINS_PICK          },
+        [32898] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.RESERVE_CAPTAINS_MACE,          place = 2 },
+        [32899] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.RESERVE_CAPTAINS_LANCE,         place = 1 },
+        [32912] = { rank = 10, cp = 56000, lvl =  1, item = xi.item.KINGDOM_AKETON,                 place = 1 },
+        [32932] = {            cp =  5000, lvl =  1, item = xi.item.KINGDOM_SIGNET_STAFF           },
+        [32940] = { rank = 10, cp = 10000, lvl =  1, item = xi.item.IMPERIAL_CHAIR_SET             },
     },
 
     [xi.nation.BASTOK] =
     {
-        [32768] = { rank =  1, cp =  1000, lvl = 10, item = 16433 },                -- legionnaires_knuckles
-        [32769] = { rank =  1, cp =  1000, lvl = 10, item = 17223 },                -- legionnaires_crossbow
-        [32770] = { rank =  1, cp =  1000, lvl = 10, item = 16648 },                -- legionnaires_axe
-        [32771] = { rank =  1, cp =  1000, lvl = 10, item = 12509 },                -- legionnaires_cap
-        [32772] = { rank =  1, cp =  1000, lvl = 10, item = 12752 },                -- legionnaires_mittens
-        [32773] = { rank =  1, cp =  1000, lvl = 10, item = 13003 },                -- legionnaires_leggings
-        [32774] = { rank =  1, cp =  1000, lvl = 10, item = 17128, place = 2 },     -- legionnaires_staff
-        [32775] = { rank =  1, cp =  1000, lvl = 10, item = 16780, place = 1 },     -- legionnaires_scythe
-        [32784] = { rank =  2, cp =  2000, lvl = 18, item = 17048 },                -- decurions_hammer
-        [32785] = { rank =  2, cp =  2000, lvl = 10, item = 12629 },                -- legionnaires_harness
-        [32786] = { rank =  2, cp =  2000, lvl = 20, item = 12881 },                -- legionnaires_subligar
-        [32787] = { rank =  2, cp =  2000, lvl = 20, item = 16745, place = 2 },     -- decurions_dagger
-        [32788] = { rank =  2, cp =  2000, lvl = 20, item = 12337, place = 1 },     -- decurions_shield
-        [32800] = { rank =  3, cp =  4000, lvl = 30, item = 16712 },                -- centurions_axe
-        [32801] = { rank =  3, cp =  4000, lvl = 10, item = 13098 },                -- republican_bronze_medal
-        [32802] = { rank =  3, cp =  4000, lvl = 30, item = 12438 },                -- centurions_visor
-        [32803] = { rank =  3, cp =  4000, lvl = 30, item = 12566 },                -- centurions_scale_mail
-        [32804] = { rank =  3, cp =  4000, lvl = 30, item = 12694 },                -- centurions_finger_gauntlets
-        [32805] = { rank =  3, cp =  4000, lvl = 30, item = 12822 },                -- centurions_cuisses
-        [32806] = { rank =  3, cp =  4000, lvl = 30, item = 12950 },                -- centurions_greaves
-        [32807] = { rank =  3, cp =  4000, lvl = 30, item = 16806, place = 2 },     -- centurions_sword
-        [32808] = { rank =  3, cp =  4000, lvl = 30, item = 13830, place = 1 },     -- legionnaires_circlet
-        [32809] = { rank =  3, cp =  4000, lvl =  1, item = 13497, place = 1 },     -- bastokan_ring
-        [32816] = { rank =  4, cp =  8000, lvl = 40, item = 16516 },                -- junior_musketeers_tuck
-        [32817] = { rank =  4, cp =  8000, lvl = 40, item = 12422 },                -- iron_musketeers_armet
-        [32818] = { rank =  4, cp =  8000, lvl = 40, item = 12678 },                -- iron_musketeers_gauntlets
-        [32819] = { rank =  4, cp =  8000, lvl = 40, item = 12934 },                -- iron_musketeers_sabatons
-        [32820] = { rank =  4, cp =  8000, lvl = 40, item = 13721, place = 2 },     -- iron_musketeers_gambison
-        [32821] = { rank =  4, cp =  8000, lvl = 40, item = 17283, place = 1 },     -- junior_musketeers_chakram
-        [32832] = { rank =  5, cp = 16000, lvl = 50, item = 16529 },                -- musketeers_sword
-        [32833] = { rank =  5, cp = 16000, lvl = 30, item = 13099 },                -- republican_iron_medal
-        [32834] = { rank =  5, cp = 16000, lvl = 50, item = 12550 },                -- iron_musketeers_cuirass
-        [32835] = { rank =  5, cp = 16000, lvl = 50, item = 12806 },                -- iron_musketeers_cuisses
-        [32836] = { rank =  5, cp = 16000, lvl = 50, item = 17129, place = 2 },     -- musketeers_pole
-        [32837] = { rank =  5, cp = 16000, lvl = 50, item = 17253, place = 1 },     -- musketeer_gun
-        [32848] = { rank =  6, cp = 24000, lvl = 55, item = 13100 },                -- republican_mythril_medal
-        [32849] = { rank =  6, cp = 24000, lvl = 55, item = 13582 },                -- republican_army_mantle
-        [32850] = { rank =  6, cp = 24000, lvl = 55, item = 16557, place = 2 },     -- musketeer_commanders_falchion
-        [32851] = { rank =  6, cp = 24000, lvl = 55, item = 12304, place = 2 },     -- musketeer_commanders_shield
-        [32852] = { rank =  6, cp = 24000, lvl = 55, item = 17151, place = 1 },     -- musketeer_commanders_rod
-        [32853] = { rank =  6, cp = 24000, lvl = 55, item = 13064, place = 1 },     -- iron_musketeers_gorget
-        [32864] = { rank =  7, cp = 32000, lvl = 60, item = 15957 },                -- iron_musketeers_quiver
-        [32865] = { rank =  7, cp = 32000, lvl = 60, item = 17807, place = 2 },     -- gold_musketeers_uchigatana
-        [32866] = { rank =  7, cp = 32000, lvl = 60, item = 13558, place = 1 },     -- gold_musketeers_ring
-        [32880] = { rank =  8, cp = 40000, lvl = 65, item = 14015 },                -- praefectuss_gloves
-        [32881] = { rank =  8, cp = 40000, lvl = 65, item = 13880, place = 2 },     -- presidential_hairpin
-        [32882] = { rank =  8, cp = 40000, lvl = 65, item = 13141, place = 1 },     -- republican_gold_medal
-        [32896] = { rank =  9, cp = 48000, lvl = 71, item = 16799 },                -- senior_gold_musketeers_scythe
-        [32897] = { rank =  9, cp = 48000, lvl = 71, item = 17457 },                -- senior_gold_musketeers_rod
-        [32898] = { rank =  9, cp = 48000, lvl = 71, item = 18196, place = 2 },     -- senior_gold_musketeers_axe
-        [32899] = { rank =  9, cp = 48000, lvl = 71, item = 17655, place = 1 },     -- senior_gold_musketeers_scimitar
-        [32912] = { rank = 10, cp = 56000, lvl =  1, item = 14429, place = 1 },     -- republic_aketon
-        [32932] = {            cp =  5000, lvl =  1, item = 17584 },                -- republic_signet_staff
-        [32940] = { rank = 10, cp = 10000, lvl =  1, item =  6378 },                -- decorative_chair_set
+        [32768] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.LEGIONNAIRES_KNUCKLES            },
+        [32769] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.LEGIONNAIRES_CROSSBOW            },
+        [32770] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.LEGIONNAIRES_AXE                 },
+        [32771] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.LEGIONNAIRES_CAP                 },
+        [32772] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.LEGIONNAIRES_MITTENS             },
+        [32773] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.LEGIONNAIRES_LEGGINGS            },
+        [32774] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.LEGIONNAIRES_STAFF,               place = 2 },
+        [32775] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.LEGIONNAIRES_SCYTHE,              place = 1 },
+        [32784] = { rank =  2, cp =  2000, lvl = 18, item = xi.item.DECURIONS_HAMMER                 },
+        [32785] = { rank =  2, cp =  2000, lvl = 10, item = xi.item.LEGIONNAIRES_HARNESS             },
+        [32786] = { rank =  2, cp =  2000, lvl = 20, item = xi.item.LEGIONNAIRES_SUBLIGAR            },
+        [32787] = { rank =  2, cp =  2000, lvl = 20, item = xi.item.DECURIONS_DAGGER,                 place = 2 },
+        [32788] = { rank =  2, cp =  2000, lvl = 20, item = xi.item.DECURIONS_SHIELD,                 place = 1 },
+        [32800] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.CENTURIONS_AXE                   },
+        [32801] = { rank =  3, cp =  4000, lvl = 10, item = xi.item.REPUBLICAN_BRONZE_MEDAL          },
+        [32802] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.CENTURIONS_VISOR                 },
+        [32803] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.CENTURIONS_SCALE_MAIL            },
+        [32804] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.CENTURIONS_FINGER_GAUNTLETS      },
+        [32805] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.CENTURIONS_CUISSES               },
+        [32806] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.CENTURIONS_GREAVES               },
+        [32807] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.CENTURIONS_SWORD,                 place = 2 },
+        [32808] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.LEGIONNAIRES_CIRCLET,             place = 1 },
+        [32809] = { rank =  3, cp =  4000, lvl =  1, item = xi.item.BASTOKAN_RING,                    place = 1 },
+        [32816] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.JUNIOR_MUSKETEERS_TUCK           },
+        [32817] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.IRON_MUSKETEERS_ARMET            },
+        [32818] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.IRON_MUSKETEERS_GAUNTLETS        },
+        [32819] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.IRON_MUSKETEERS_SABATONS         },
+        [32820] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.IRON_MUSKETEERS_GAMBISON,         place = 2 },
+        [32821] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.JUNIOR_MUSKETEERS_CHAKRAM,        place = 1 },
+        [32832] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.MUSKETEERS_SWORD                 },
+        [32833] = { rank =  5, cp = 16000, lvl = 30, item = xi.item.REPUBLICAN_IRON_MEDAL            },
+        [32834] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.IRON_MUSKETEERS_CUIRASS          },
+        [32835] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.IRON_MUSKETEERS_CUISSES          },
+        [32836] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.MUSKETEERS_POLE,                  place = 2 },
+        [32837] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.MUSKETEER_GUN,                    place = 1 },
+        [32848] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.REPUBLICAN_MYTHRIL_MEDAL         },
+        [32849] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.REPUBLICAN_ARMY_MANTLE           },
+        [32850] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.MUSKETEER_COMMANDERS_FALCHION,    place = 2 },
+        [32851] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.MUSKETEER_COMMANDERS_SHIELD,      place = 2 },
+        [32852] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.MUSKETEER_COMMANDERS_ROD,         place = 1 },
+        [32853] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.IRON_MUSKETEERS_GORGET,           place = 1 },
+        [32864] = { rank =  7, cp = 32000, lvl = 60, item = xi.item.IRON_MUSKETEERS_QUIVER           },
+        [32865] = { rank =  7, cp = 32000, lvl = 60, item = xi.item.GOLD_MUSKETEERS_UCHIGATANA,       place = 2 },
+        [32866] = { rank =  7, cp = 32000, lvl = 60, item = xi.item.GOLD_MUSKETEERS_RING,             place = 1 },
+        [32880] = { rank =  8, cp = 40000, lvl = 65, item = xi.item.PRAEFECTUSS_GLOVES               },
+        [32881] = { rank =  8, cp = 40000, lvl = 65, item = xi.item.PRESIDENTIAL_HAIRPIN,             place = 2 },
+        [32882] = { rank =  8, cp = 40000, lvl = 65, item = xi.item.REPUBLICAN_GOLD_MEDAL,            place = 1 },
+        [32896] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.SENIOR_GOLD_MUSKETEERS_SCYTHE    },
+        [32897] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.SENIOR_GOLD_MUSKETEERS_ROD       },
+        [32898] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.SENIOR_GOLD_MUSKETEERS_AXE,       place = 2 },
+        [32899] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.SENIOR_GOLD_MUSKETEERS_SCIMITAR,  place = 1 },
+        [32912] = { rank = 10, cp = 56000, lvl =  1, item = xi.item.REPUBLIC_AKETON,                  place = 1 },
+        [32932] = {            cp =  5000, lvl =  1, item = xi.item.REPUBLIC_SIGNET_STAFF            },
+        [32940] = { rank = 10, cp = 10000, lvl =  1, item = xi.item.DECORATIVE_CHAIR_SET             },
     },
 
     [xi.nation.WINDURST] =
     {
-        [32768] = { rank =  1, cp =  1000, lvl = 10, item = 17159 },                -- freeswords_bow
-        [32769] = { rank =  1, cp =  1000, lvl = 10, item = 17028 },                -- freeswords_club
-        [32770] = { rank =  1, cp =  1000, lvl = 10, item = 16442 },                -- freeswords_baghnakhs
-        [32771] = { rank =  1, cp =  1000, lvl = 10, item = 12915, place = 2 },     -- freeswords_slops
-        [32772] = { rank =  1, cp =  1000, lvl = 10, item = 17130, place = 1 },     -- freeswords_staff
-        [32784] = { rank =  2, cp =  2000, lvl = 18, item = 17103 },                -- mercenarys_pole
-        [32785] = { rank =  2, cp =  2000, lvl = 20, item = 12484 },                -- mercenarys_hachimaki
-        [32786] = { rank =  2, cp =  2000, lvl = 20, item = 12653 },                -- mercenarys_gi
-        [32787] = { rank =  2, cp =  2000, lvl = 20, item = 12719 },                -- mercenarys_tekko
-        [32788] = { rank =  2, cp =  2000, lvl = 20, item = 12855 },                -- mercenarys_sitabaki
-        [32789] = { rank =  2, cp =  2000, lvl = 20, item = 12975 },                -- mercenarys_kyahan
-        [32790] = { rank =  2, cp =  2000, lvl = 20, item = 16746, place = 2 },     -- mercenarys_knife
-        [32791] = { rank =  2, cp =  2000, lvl = 20, item = 16930, place = 1 },     -- mercenarys_greatsword
-        [32800] = { rank =  3, cp =  4000, lvl = 30, item = 16776 },                -- mercenary_captains_scythe
-        [32801] = { rank =  3, cp =  4000, lvl = 30, item = 12470 },                -- mercenary_captains_headgear
-        [32802] = { rank =  3, cp =  4000, lvl = 30, item = 12598 },                -- mercenary_captains_doublet
-        [32803] = { rank =  3, cp =  4000, lvl = 30, item = 12726 },                -- mercenary_captains_gloves
-        [32804] = { rank =  3, cp =  4000, lvl = 30, item = 12854 },                -- mercenary_captains_hose
-        [32805] = { rank =  3, cp =  4000, lvl = 30, item = 12982 },                -- mercenary_captains_gaiters
-        [32806] = { rank =  3, cp =  4000, lvl = 30, item = 16747, place = 2 },     -- mercenary_captains_kukri
-        [32807] = { rank =  3, cp =  4000, lvl = 30, item = 13221, place = 1 },     -- mercenary_captains_belt
-        [32808] = { rank =  3, cp =  4000, lvl =  1, item = 13496, place = 1 },     -- windurstian_ring
-        [32816] = { rank =  4, cp =  8000, lvl = 40, item = 16463 },                -- combat_casters_dagger
-        [32817] = { rank =  4, cp =  8000, lvl = 40, item = 17282 },                -- combat_casters_boomerang
-        [32818] = { rank =  4, cp =  8000, lvl = 10, item = 13101 },                -- green_scarf
-        [32819] = { rank =  4, cp =  8000, lvl = 40, item = 12614 },                -- combat_casters_cloak
-        [32820] = { rank =  4, cp =  8000, lvl = 40, item = 12743 },                -- combat_casters_mitts
-        [32821] = { rank =  4, cp =  8000, lvl = 40, item = 12870 },                -- combat_casters_slacks
-        [32822] = { rank =  4, cp =  8000, lvl = 40, item = 12998 },                -- combat_casters_shoes
-        [32823] = { rank =  4, cp =  8000, lvl = 40, item = 16807, place = 2 },     -- combat_casters_scimitar
-        [32824] = { rank =  4, cp =  8000, lvl = 40, item = 16669, place = 1 },     -- combat_casters_axe
-        [32832] = { rank =  5, cp = 16000, lvl = 50, item = 17082, place = 2 },     -- tactician_magicians_wand
-        [32833] = { rank =  5, cp = 16000, lvl = 30, item = 13102 },                -- paisley_scarf
-        [32834] = { rank =  5, cp = 16000, lvl = 50, item = 12478, place = 2 },     -- tactician_magicians_hat
-        [32835] = { rank =  5, cp = 16000, lvl = 50, item = 12606 },                -- tactician_magicians_coat
-        [32836] = { rank =  5, cp = 16000, lvl = 50, item = 12734 },                -- tactician_magicians_cuffs
-        [32837] = { rank =  5, cp = 16000, lvl = 50, item = 12862 },                -- tactician_magicians_slops
-        [32838] = { rank =  5, cp = 16000, lvl = 50, item = 12990 },                -- tactician_magicians_pigaches
-        [32839] = { rank =  5, cp = 16000, lvl = 50, item = 16810 },                -- tactician_magicians_espadon
-        [32840] = { rank =  5, cp = 16000, lvl = 50, item = 16694, place = 1 },     -- tactician_magicians_hooks
-        [32848] = { rank =  6, cp = 24000, lvl = 55, item = 13103 },                -- checkered_scarf
-        [32849] = { rank =  6, cp = 24000, lvl = 55, item = 13581 },                -- federal_army_mantle
-        [32850] = { rank =  6, cp = 24000, lvl = 55, item = 17094, place = 2 },     -- wise_wizards_staff
-        [32851] = { rank =  6, cp = 24000, lvl = 55, item = 16808, place = 2 },     -- wise_wizards_bilbo
-        [32852] = { rank =  6, cp = 24000, lvl = 55, item = 16809, place = 1 },     -- wise_wizards_anelace
-        [32864] = { rank =  7, cp = 32000, lvl = 60, item = 15958 },                -- combat_casters_quiver
-        [32865] = { rank =  7, cp = 32000, lvl = 60, item = 12363, place = 2 },     -- patriarch_protectors_shield
-        [32866] = { rank =  7, cp = 32000, lvl = 60, item = 13559, place = 1 },     -- patriarch_protectors_ring
-        [32880] = { rank =  8, cp = 40000, lvl = 65, item = 14016 },                -- master_casters_mitts
-        [32881] = { rank =  8, cp = 40000, lvl = 65, item = 14017, place = 2 },     -- master_casters_bracelets
-        [32882] = { rank =  8, cp = 40000, lvl = 65, item = 13142, place = 1 },     -- windurstian_scarf
-        [32896] = { rank =  9, cp = 48000, lvl = 71, item = 18145 },                -- master_casters_bow
-        [32897] = { rank =  9, cp = 48000, lvl = 71, item = 17530 },                -- master_casters_pole
-        [32898] = { rank =  9, cp = 48000, lvl = 71, item = 17508, place = 2 },     -- master_casters_baghnakhs
-        [32899] = { rank =  9, cp = 48000, lvl = 71, item = 17617, place = 1 },     -- master_casters_knife
-        [32912] = { rank = 10, cp = 56000, lvl =  1, item = 14430, place = 1 },     -- federation_aketon
-        [32932] = {            cp =  5000, lvl =  1, item = 17585 },                -- federation_signet_staff
-        [32940] = { rank = 10, cp = 10000, lvl =  1, item =  6379 },                -- ornate_stool_set
+        [32768] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.FREESWORDS_BOW               },
+        [32769] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.FREESWORDS_CLUB              },
+        [32770] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.FREESWORDS_BAGHNAKHS         },
+        [32771] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.FREESWORDS_SLOPS,             place = 2 },
+        [32772] = { rank =  1, cp =  1000, lvl = 10, item = xi.item.FREESWORDS_STAFF,             place = 1 },
+        [32784] = { rank =  2, cp =  2000, lvl = 18, item = xi.item.MERCENARYS_POLE              },
+        [32785] = { rank =  2, cp =  2000, lvl = 20, item = xi.item.MERCENARYS_HACHIMAKI         },
+        [32786] = { rank =  2, cp =  2000, lvl = 20, item = xi.item.MERCENARYS_GI                },
+        [32787] = { rank =  2, cp =  2000, lvl = 20, item = xi.item.MERCENARYS_TEKKO             },
+        [32788] = { rank =  2, cp =  2000, lvl = 20, item = xi.item.MERCENARYS_SITABAKI          },
+        [32789] = { rank =  2, cp =  2000, lvl = 20, item = xi.item.MERCENARYS_KYAHAN            },
+        [32790] = { rank =  2, cp =  2000, lvl = 20, item = xi.item.MERCENARYS_KNIFE,             place = 2 },
+        [32791] = { rank =  2, cp =  2000, lvl = 20, item = xi.item.MERCENARYS_GREATSWORD,        place = 1 },
+        [32800] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.MERCENARY_CAPTAINS_SCYTHE    },
+        [32801] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.MERCENARY_CAPTAINS_HEADGEAR  },
+        [32802] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.MERCENARY_CAPTAINS_DOUBLET   },
+        [32803] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.MERCENARY_CAPTAINS_GLOVES    },
+        [32804] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.MERCENARY_CAPTAINS_HOSE      },
+        [32805] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.MERCENARY_CAPTAINS_GAITERS   },
+        [32806] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.MERCENARY_CAPTAINS_KUKRI,     place = 2 },
+        [32807] = { rank =  3, cp =  4000, lvl = 30, item = xi.item.MERCENARY_CAPTAINS_BELT,      place = 1 },
+        [32808] = { rank =  3, cp =  4000, lvl =  1, item = xi.item.WINDURSTIAN_RING,             place = 1 },
+        [32816] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.COMBAT_CASTERS_DAGGER        },
+        [32817] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.COMBAT_CASTERS_BOOMERANG     },
+        [32818] = { rank =  4, cp =  8000, lvl = 10, item = xi.item.GREEN_SCARF                  },
+        [32819] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.COMBAT_CASTERS_CLOAK         },
+        [32820] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.COMBAT_CASTERS_MITTS         },
+        [32821] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.COMBAT_CASTERS_SLACKS        },
+        [32822] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.COMBAT_CASTERS_SHOES         },
+        [32823] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.COMBAT_CASTERS_SCIMITAR,      place = 2 },
+        [32824] = { rank =  4, cp =  8000, lvl = 40, item = xi.item.COMBAT_CASTERS_AXE,           place = 1 },
+        [32832] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.TACTICIAN_MAGICIANS_WAND,     place = 2 },
+        [32833] = { rank =  5, cp = 16000, lvl = 30, item = xi.item.PAISLEY_SCARF                },
+        [32834] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.TACTICIAN_MAGICIANS_HAT,      place = 2 },
+        [32835] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.TACTICIAN_MAGICIANS_COAT     },
+        [32836] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.TACTICIAN_MAGICIANS_CUFFS    },
+        [32837] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.TACTICIAN_MAGICIANS_SLOPS    },
+        [32838] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.TACTICIAN_MAGICIANS_PIGACHES },
+        [32839] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.TACTICIAN_MAGICIANS_ESPADON  },
+        [32840] = { rank =  5, cp = 16000, lvl = 50, item = xi.item.TACTICIAN_MAGICIANS_HOOKS,    place = 1 },
+        [32848] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.CHECKERED_SCARF              },
+        [32849] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.FEDERAL_ARMY_MANTLE          },
+        [32850] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.WISE_WIZARDS_STAFF,           place = 2 },
+        [32851] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.WISE_WIZARDS_BILBO,           place = 2 },
+        [32852] = { rank =  6, cp = 24000, lvl = 55, item = xi.item.WISE_WIZARDS_ANELACE,         place = 1 },
+        [32864] = { rank =  7, cp = 32000, lvl = 60, item = xi.item.COMBAT_CASTERS_QUIVER        },
+        [32865] = { rank =  7, cp = 32000, lvl = 60, item = xi.item.PATRIARCH_PROTECTORS_SHIELD,  place = 2 },
+        [32866] = { rank =  7, cp = 32000, lvl = 60, item = xi.item.PATRIARCH_PROTECTORS_RING,    place = 1 },
+        [32880] = { rank =  8, cp = 40000, lvl = 65, item = xi.item.MASTER_CASTERS_MITTS         },
+        [32881] = { rank =  8, cp = 40000, lvl = 65, item = xi.item.MASTER_CASTERS_BRACELETS,     place = 2 },
+        [32882] = { rank =  8, cp = 40000, lvl = 65, item = xi.item.WINDURSTIAN_SCARF,            place = 1 },
+        [32896] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.MASTER_CASTERS_BOW           },
+        [32897] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.MASTER_CASTERS_POLE          },
+        [32898] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.MASTER_CASTERS_BAGHNAKHS,     place = 2 },
+        [32899] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.MASTER_CASTERS_KNIFE,         place = 1 },
+        [32912] = { rank = 10, cp = 56000, lvl =  1, item = xi.item.FEDERATION_AKETON,            place = 1 },
+        [32932] = {            cp =  5000, lvl =  1, item = xi.item.FEDERATION_SIGNET_STAFF      },
+        [32940] = { rank = 10, cp = 10000, lvl =  1, item = xi.item.ORNATE_STOOL_SET             },
     },
 }
 

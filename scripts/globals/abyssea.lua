@@ -69,6 +69,7 @@ xi.abyssea.abyssiteType =
     DEMILUNE     = 20,
 }
 
+---@enum xi.abyssea.itemType
 xi.abyssea.itemType =
 {
     ITEM        = 1,
@@ -777,7 +778,10 @@ xi.abyssea.giveNMDrops = function(mob, player, ID)
     local playerClaimed = GetPlayerByID(mob:getLocalVar('[ClaimedBy]'))
 
     for _, keyItemId in pairs(normalDrops) do
-        if xi.abyssea.canGiveNMKI(mob, 20) then
+        if
+            playerClaimed and
+            xi.abyssea.canGiveNMKI(mob, 20)
+        then
             npcUtil.giveKeyItem(playerClaimed, keyItemId, ID.text.PLAYER_KEYITEM_OBTAINED)
         end
     end

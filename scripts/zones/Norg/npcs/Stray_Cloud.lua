@@ -49,7 +49,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif
         csid == 227 and
         npcUtil.completeQuest(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE, {
-            item = 12375,
+            item = xi.item.LIGHT_BUCKLER,
             fameArea = xi.fameArea.NORG,
             fame = 50,
             var = 'anUndyingPledgeCS',

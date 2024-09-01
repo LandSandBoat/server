@@ -1318,7 +1318,6 @@ xi.deeds.validatorOnEventUpdate = function(player, csid, option, npc)
     -- be obtained.
     local updateAction = bit.rshift(option, 16)
     local updateOption = bit.band(option, 0xFFFF)
-    print(option)
 
     if
         (updateAction == 1 or updateAction == 3) and
@@ -1371,7 +1370,9 @@ xi.deeds.validatorOnEventUpdate = function(player, csid, option, npc)
             player:delKeyItem(voucherKeyItems[keyItemIndex + 1])
 
             for _, itemId in ipairs(rewardTable) do
-                npcUtil.giveItem(player, itemId)
+                if type(itemId) ~= 'boolean' then
+                    npcUtil.giveItem(player, itemId)
+                end
             end
         else
             local ID = zones[player:getZoneID()]

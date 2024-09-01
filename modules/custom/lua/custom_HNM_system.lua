@@ -67,7 +67,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.npcs.qm0.onTrade', function(player,
     if
         not GetMobByID(dragonsAeryID.mob.FAFNIR):isSpawned() and
         not GetMobByID(dragonsAeryID.mob.NIDHOGG):isSpawned() and
-        npcUtil.tradeHasExactly(trade, xi.item.SWEET_TEA) and
+        npcUtil.tradeHasExactly(trade, xi.item.CUP_OF_SWEET_TEA) and
         npcUtil.popFromQM(player, npc, dragonsAeryID.mob.NIDHOGG)
     then
         player:confirmTrade()
@@ -117,7 +117,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.npcs.qm1.onTrade', function(pl
     if
         not GetMobByID(valleySorrowsID.mob.ADAMANTOISE):isSpawned() and
         not GetMobByID(valleySorrowsID.mob.ASPIDOCHELONE):isSpawned() and
-        npcUtil.tradeHasExactly(trade, xi.item.RED_PONDWEED) and
+        npcUtil.tradeHasExactly(trade, xi.item.CLUMP_OF_RED_PONDWEED) and
         npcUtil.popFromQM(player, npc, valleySorrowsID.mob.ASPIDOCHELONE)
     then
         player:confirmTrade()

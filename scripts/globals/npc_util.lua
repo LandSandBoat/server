@@ -244,11 +244,13 @@ end
         "Come back again after sorting your inventory"
 --]]
 
+---@class itemQuantityEntry : { [xi.item]: xi.item, [integer]: integer }
+
 ---@class multipleItemList
 ---@field [integer] { [integer]: xi.item, [integer]: integer }|xi.item
 
 ---@param player CBaseEntity
----@param items xi.item|multipleItemList
+---@param items xi.item|itemQuantityEntry|multipleItemList
 ---@param params { silent: boolean?, fromTrade: boolean? }?
 ---@return boolean
 function npcUtil.giveItem(player, items, params)
@@ -334,7 +336,7 @@ end
         "Come back again after sorting your inventory"
 --]]
 ---@param player CBaseEntity
----@param items xi.item|xi.item[]|multipleItemList
+---@param items xi.item|itemQuantityEntry|multipleItemList
 ---@param params { silent: boolean? }?
 ---@return boolean
 function npcUtil.giveTempItem(player, items, params)
@@ -456,7 +458,7 @@ end
 ---@param msgId integer?
 function npcUtil.giveKeyItem(player, keyitems, msgId)
     local ID            = zones[player:getZoneID()]
-    local givenKeyItems = type(keyitems) == "table" and keyitems or { keyitems }
+    local givenKeyItems = type(keyitems) == 'table' and keyitems or { keyitems }
 
     -- give key items to player, with message
 
@@ -499,7 +501,7 @@ end
 --]]
 
 ---@class rewardParam
----@field item xi.item|xi.item[]|multipleItemList?
+---@field item xi.item|itemQuantityEntry|multipleItemList?
 ---@field itemParams { silent: boolean?, fromTrade: boolean? }?
 ---@field keyItem xi.keyItem|{ [integer]: xi.keyItem }?
 ---@field ki xi.keyItem|{ [integer]: xi.keyItem }?

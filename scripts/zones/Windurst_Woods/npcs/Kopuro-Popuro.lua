@@ -118,7 +118,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B)
     elseif
         csid == 314 and
-        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B, { item = 12749, gil = 700 })
+        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B, { item = xi.item.SCENTLESS_ARMLETS, gil = 700 })
     then
         player:confirmTrade()
         player:needToZone(true)
