@@ -63,7 +63,7 @@ function CTradeContainer:confirmItem(itemID, amountObj)
 end
 
 ---@param slotID integer
----@param amountObj integer
+---@param amountObj integer?
 ---@return boolean
 function CTradeContainer:confirmSlot(slotID, amountObj)
 end
