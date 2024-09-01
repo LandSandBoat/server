@@ -2,6 +2,7 @@
 -- Area: Crawlers' Nest
 --  Mob: Olid Funguar
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

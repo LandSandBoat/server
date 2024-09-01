@@ -2,6 +2,7 @@
 -- Area: Abyssea - Vunkerl
 --   NM: Sippoy
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobFight = function(mob, target)

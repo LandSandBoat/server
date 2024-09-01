@@ -2,6 +2,7 @@
 -- Area: Attohwa Chasm
 --  Mob: Feeler Antlion
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

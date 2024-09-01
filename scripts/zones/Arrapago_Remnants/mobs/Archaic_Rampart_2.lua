@@ -5,6 +5,7 @@
 mixins = { require('scripts/mixins/families/rampart') }
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

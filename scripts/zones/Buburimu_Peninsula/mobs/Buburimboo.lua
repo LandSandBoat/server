@@ -2,6 +2,7 @@
 -- Area: Buburimu Peninsula (118)
 --  Mob: Buburimboo
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

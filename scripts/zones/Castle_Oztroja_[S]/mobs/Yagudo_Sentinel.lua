@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.CASTLE_OZTROJA_S]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local aaXalmoPHTable =

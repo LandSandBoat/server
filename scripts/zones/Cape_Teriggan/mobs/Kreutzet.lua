@@ -2,6 +2,7 @@
 -- Area: Cape Teriggan
 --   NM: Kreutzet
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobRoam = function(mob)

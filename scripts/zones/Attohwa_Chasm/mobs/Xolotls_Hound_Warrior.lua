@@ -3,6 +3,7 @@
 --  Mob: Xolotl's Hound Warrior
 -- Note: Pet for Xolotl
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

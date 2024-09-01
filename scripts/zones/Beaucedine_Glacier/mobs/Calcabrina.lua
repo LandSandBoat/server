@@ -2,6 +2,7 @@
 -- Area: Beaucedine Glacier
 --   NM: Calcabrina
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

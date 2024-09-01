@@ -2,6 +2,7 @@
 -- Area: Arrapago Remnants
 --  Mob: Archaic Gear
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

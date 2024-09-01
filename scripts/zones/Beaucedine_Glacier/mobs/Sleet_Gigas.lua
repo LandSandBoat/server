@@ -2,6 +2,7 @@
 -- Area: Beaucedine Glacier
 --  Mob: Sleet Gigas
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

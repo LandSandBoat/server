@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobRoamAction = function(mob)

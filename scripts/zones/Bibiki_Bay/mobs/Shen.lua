@@ -2,6 +2,7 @@
 -- Area: Bibiki Bay
 --  Mob: Shen
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local function enterShell(mob)
