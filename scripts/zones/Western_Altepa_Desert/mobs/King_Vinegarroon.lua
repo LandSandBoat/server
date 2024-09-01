@@ -2,6 +2,7 @@
 -- Area: Western Altepa Desert
 --   NM: King Vinegarroon
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

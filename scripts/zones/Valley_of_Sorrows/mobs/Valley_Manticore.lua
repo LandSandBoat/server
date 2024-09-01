@@ -2,6 +2,7 @@
 -- Area: Valley of Sorrows
 --  Mob: Valley Manticore
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

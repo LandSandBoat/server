@@ -3,6 +3,7 @@
 --  Mob: Exoplates
 -- Zilart Mission 16 BCNM Fight
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

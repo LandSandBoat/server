@@ -2,6 +2,7 @@
 -- Area: Uleguerand Range
 --   NM: Magnotaur
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -2,6 +2,7 @@
 -- Area: West Sarutabaruta
 --  Mob: Giant Bee
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

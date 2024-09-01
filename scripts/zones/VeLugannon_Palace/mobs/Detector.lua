@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.VELUGANNON_PALACE]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local detectorPHTable =

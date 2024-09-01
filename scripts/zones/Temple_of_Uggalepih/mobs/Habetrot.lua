@@ -3,6 +3,7 @@
 --   NM: Habetrot
 -- !pos -60 -8 58 220
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

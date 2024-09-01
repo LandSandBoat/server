@@ -2,6 +2,7 @@
 -- Area: The Eldieme Necropolis [S] (175)
 --  Mob: Fiendish Leechkeeper
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,6 +2,7 @@
 -- Area: The Shrine of Ru'Avitau
 --  Mob: Decorative Weapon
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

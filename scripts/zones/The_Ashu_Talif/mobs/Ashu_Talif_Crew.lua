@@ -2,6 +2,7 @@
 -- Area: The Ashu Talif (The Black Coffin)
 --  Mob: Ashu Talif Crew
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)

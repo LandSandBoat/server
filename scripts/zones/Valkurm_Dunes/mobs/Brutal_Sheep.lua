@@ -2,6 +2,7 @@
 -- Area: Valkurm Dunes
 --  Mob: Brutal Sheep
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

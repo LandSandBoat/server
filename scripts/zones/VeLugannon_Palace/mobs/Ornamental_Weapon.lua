@@ -2,6 +2,7 @@
 -- Area: Ve'Lugannon Palace
 --  Mob: Ornamental Weapon
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

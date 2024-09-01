@@ -4,6 +4,7 @@
 -- BCNM: Crustacean Conundrum
 -- TODO: You can only do 0-2 damage no matter what your attack is.
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

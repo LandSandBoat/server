@@ -3,6 +3,7 @@
 --   NM: Isonade
 -- Involved in Quest: The Sacred Katana
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

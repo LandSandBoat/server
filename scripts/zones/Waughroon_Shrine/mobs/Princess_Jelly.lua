@@ -16,12 +16,14 @@ local elementalSpells =
     { xi.magic.spell.DIA,   xi.magic.spell.BANISH },
     { xi.magic.spell.BIO,   xi.magic.spell.DRAIN },
 }
+
 local centers =
 {
     { -177.5, 60, -142 },
     {   22.5,  0,  18 },
     {  222.5, -60, 138 },
 }
+
 local mevaList =
 {
     { xi.mod.WATER_MEVA,   xi.mod.FIRE_ABSORB },
@@ -34,6 +36,7 @@ local mevaList =
     { xi.mod.LIGHT_MEVA,   xi.mod.DARK_ABSORB },
 }
 
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

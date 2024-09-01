@@ -27,6 +27,7 @@ mixins =
 --    Do crit ws hits count differently than regular ws hits on retail?
 --    Should onCriticalHit count WS crit hits if regular WS hits do not count?
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -2,6 +2,7 @@
 -- Area: Ve'Lugannon Palace
 --  Mob: Mystic Weapon
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

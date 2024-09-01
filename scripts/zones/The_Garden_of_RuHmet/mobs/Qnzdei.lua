@@ -5,6 +5,7 @@
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 mixins = { require('scripts/mixins/families/zdei') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.changeState = function(mob, idle)
