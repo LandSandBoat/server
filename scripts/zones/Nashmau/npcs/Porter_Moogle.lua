@@ -4,6 +4,7 @@
 -- Type: Storage Moogle
 -- !zone 53
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local e =

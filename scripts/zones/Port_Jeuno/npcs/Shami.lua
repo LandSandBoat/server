@@ -4,6 +4,7 @@
 -- Orb Seller (BCNM)
 -- !pos -53.9 0 10.8 246
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 ---@class shamiSealItems

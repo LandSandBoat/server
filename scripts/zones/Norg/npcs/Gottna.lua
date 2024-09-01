@@ -2,6 +2,7 @@
 -- Area: Norg
 --  NPC: Gottna
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

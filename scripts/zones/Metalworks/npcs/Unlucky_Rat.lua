@@ -2,6 +2,7 @@
 -- Area: Metalworks
 --  NPC: Unlucky Rat
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

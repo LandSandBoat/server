@@ -3,6 +3,7 @@
 --  NPC: Ferghus
 -- Starts Quest: Too Many Chefs (1, 86)
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

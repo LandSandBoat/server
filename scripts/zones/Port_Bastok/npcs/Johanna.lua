@@ -2,6 +2,7 @@
 -- Area: Port Bastok
 --  NPC: Johanna
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -7,6 +7,7 @@
 -- Used in: scripts/quests/otherAreas/The_Clue.lua
 -- Used in: scripts/quests/otherAreas/The_Basics.lua
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

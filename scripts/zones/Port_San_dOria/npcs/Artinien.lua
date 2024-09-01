@@ -2,6 +2,7 @@
 -- Area: Port San d'Oria
 --  NPC: Artinien
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

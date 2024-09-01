@@ -4,6 +4,7 @@
 -- Involved In Quest: Wondering Minstrel
 -- !pos -19 -1 -58 245
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

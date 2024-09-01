@@ -5,6 +5,7 @@
 -- !pos 115 0 108 231
 -- Starts and Finishes: "Waters of the Cheval"
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

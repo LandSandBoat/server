@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: Fear of the dark
 -- !pos -160 -0 137 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

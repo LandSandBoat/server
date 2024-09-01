@@ -3,6 +3,7 @@
 --  NPC: Demonic Architrave (_7mk)
 -- !pos 197 58 -20 274
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

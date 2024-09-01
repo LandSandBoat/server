@@ -2,6 +2,7 @@
 -- Area: Metalworks
 --  NPC: Vladinek
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

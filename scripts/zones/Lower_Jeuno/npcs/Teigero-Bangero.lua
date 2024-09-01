@@ -4,6 +4,7 @@
 -- Involved in Quests: The Lost Cardian
 -- !pos -58 0 -143 245
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

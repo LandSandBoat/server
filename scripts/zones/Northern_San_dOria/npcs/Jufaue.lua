@@ -4,6 +4,7 @@
 -- Type: Past Event Watcher
 -- !pos 13.221 -1.199 -19.231 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

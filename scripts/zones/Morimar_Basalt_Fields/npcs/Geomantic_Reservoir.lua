@@ -4,6 +4,7 @@
 -- Unlocks: Geo-Malaise
 -- !pos -166.764 -1.377 -49.194 265
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

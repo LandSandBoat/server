@@ -2,6 +2,7 @@
 -- Area: Lower Jeuno
 --  NPC: Navisse
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

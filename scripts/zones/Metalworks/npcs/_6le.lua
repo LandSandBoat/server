@@ -3,6 +3,7 @@
 -- Door: _6le (Presidential Suite)
 -- !pos 113 -20 8 237
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

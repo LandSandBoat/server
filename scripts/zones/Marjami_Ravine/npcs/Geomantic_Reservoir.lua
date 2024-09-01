@@ -4,6 +4,7 @@
 -- Unlocks: Geo-Haste
 -- !pos 189.015 -40.000 241.025 266
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

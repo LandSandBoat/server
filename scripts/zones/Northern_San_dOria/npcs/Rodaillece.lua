@@ -3,6 +3,7 @@
 --  NPC: Rodaillece
 -- !pos -246.943 7.000 46.836 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

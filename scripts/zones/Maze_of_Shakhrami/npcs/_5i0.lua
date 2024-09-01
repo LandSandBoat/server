@@ -4,6 +4,7 @@
 --  NPC: Iron Door (Spawn Lost Soul)
 -- !pos 247.735 18.499 -142.267 198
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

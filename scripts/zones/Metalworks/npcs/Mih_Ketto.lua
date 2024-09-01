@@ -3,6 +3,7 @@
 --  NPC: Mih Ketto
 -- !pos 24.046 -17 32.751 237
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

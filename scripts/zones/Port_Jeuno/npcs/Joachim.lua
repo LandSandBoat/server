@@ -12,6 +12,7 @@
 -- 331 = CS after "Dawn of Death" completed.
 -- 332 = ???
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

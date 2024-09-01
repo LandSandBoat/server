@@ -3,6 +3,7 @@
 --  NPC: Valah Molkot
 -- !pos 59 8 -221 236
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

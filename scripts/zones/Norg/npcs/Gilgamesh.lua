@@ -3,6 +3,7 @@
 --  NPC: Gilgamesh
 -- !pos 122.452 -9.009 -12.052 252
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

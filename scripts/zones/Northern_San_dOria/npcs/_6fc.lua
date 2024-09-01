@@ -4,6 +4,7 @@
 -- Finish Mission: The Davoi Report
 -- !pos 131 -11 122 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

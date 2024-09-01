@@ -6,6 +6,7 @@
 -- _6lv  North Lower Elevator Door  -58.850 0.000 12.002
 -- _6lk  North Elevator Winch       -55.911 -14.221 11.958
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onSpawn = function(npc)

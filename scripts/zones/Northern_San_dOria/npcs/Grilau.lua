@@ -3,6 +3,7 @@
 --  NPC: Grilau
 -- !pos -241.987 6.999 57.887 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -6,6 +6,7 @@
 local ID = zones[xi.zone.NYZUL_ISLE]
 require('scripts/zones/Nyzul_Isle/instances/nyzul_isle_investigation')
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

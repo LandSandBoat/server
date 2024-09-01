@@ -3,6 +3,7 @@
 --  NPC: Rachocho
 -- !pos 3.789 7 -59.411 246
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

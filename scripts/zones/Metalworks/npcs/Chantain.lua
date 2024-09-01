@@ -4,6 +4,7 @@
 -- Type: Consulate Representative
 -- !pos 21.729 -17 -30.888 237
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

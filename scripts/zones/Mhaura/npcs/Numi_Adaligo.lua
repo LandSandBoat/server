@@ -4,6 +4,7 @@
 -----------------------------------
 -- Used in: scripts/quests/otherAreas/Rycharde_the_Chef.lua
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

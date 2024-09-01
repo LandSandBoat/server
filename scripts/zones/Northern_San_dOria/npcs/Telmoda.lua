@@ -2,6 +2,7 @@
 -- Area: Northern San d'Oria
 --  NPC: Telmoda
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

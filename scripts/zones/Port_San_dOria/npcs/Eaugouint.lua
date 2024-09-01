@@ -3,6 +3,7 @@
 --  NPC: Eaugouint
 -- !pos 28.555 -4.000 -74.860 232
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Mamool Ja Training Grounds
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,6 +4,7 @@
 -- Type: Warp NPC
 -- !pos 116.080 7.372 -31.820 236
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,6 +4,7 @@
 -- Notes: Open south door @ F-7
 -- !pos -75.329 -24.636 92.512 27
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

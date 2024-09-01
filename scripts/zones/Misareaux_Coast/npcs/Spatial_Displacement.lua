@@ -4,6 +4,7 @@
 -- Entrance to Riverne Site #A01 and #B01
 -- !pos -540 -30 360 25
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

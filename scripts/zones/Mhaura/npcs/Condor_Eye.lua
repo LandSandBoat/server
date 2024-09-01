@@ -2,6 +2,7 @@
 -- Area: Mhaura
 --  NPC: Condor Eye
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

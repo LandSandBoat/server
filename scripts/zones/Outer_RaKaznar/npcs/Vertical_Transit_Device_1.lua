@@ -3,6 +3,7 @@
 --  NPC: Vertical Transit Device (1)
 -- !pos -506.698 -141 -20 274
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
