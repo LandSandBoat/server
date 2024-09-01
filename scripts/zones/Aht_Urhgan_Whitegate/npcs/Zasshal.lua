@@ -70,6 +70,10 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     local currentday = tonumber(os.date('%j'))
 
+    if not currentday then
+        return
+    end
+
     if (csid == 818 or csid == 820) and option == 100 then
         if player:getLocalVar('SalvageValid') == 1 then
             player:addKeyItem(xi.ki.REMNANTS_PERMIT)

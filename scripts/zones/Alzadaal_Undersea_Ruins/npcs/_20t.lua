@@ -62,6 +62,9 @@ entity.onEventFinish = function(player, csid, option, npc)
     end
 end
 
+-- TODO: NPC does not support onInstanceCreated.  Move relevant
+-- code to instance script when created.
+--[[
 entity.onInstanceCreated = function(player, target, instance)
     if instance then
         player:setInstance(instance)
@@ -84,5 +87,6 @@ entity.onInstanceCreated = function(player, target, instance)
         player:instanceEntry(target, 3)
     end
 end
+]]
 
 return entity

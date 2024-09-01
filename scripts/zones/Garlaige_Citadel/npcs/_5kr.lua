@@ -26,7 +26,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(5)
     else
         player:messageSpecial(ID.text.OPEN_WITH_THE_RIGHT_KEY)
-        return 0
     end
 end
 

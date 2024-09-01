@@ -13,7 +13,6 @@ end
 
 entity.onTrigger = function(player, npc)
     func.plateOnTrigger(npc)
-    return 0
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

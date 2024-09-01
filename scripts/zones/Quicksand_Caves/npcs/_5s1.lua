@@ -21,7 +21,6 @@ entity.onTrigger = function(player, npc)
     end
 
     player:messageSpecial(ID.text.DOOR_FIRMLY_SHUT)
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

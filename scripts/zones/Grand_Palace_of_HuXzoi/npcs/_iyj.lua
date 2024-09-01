@@ -11,7 +11,7 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     if player:getXPos() < -240 then
         player:messageSpecial(ID.text.DOES_NOT_RESPOND)
-        return 1
+        return
     end
 
     return -1

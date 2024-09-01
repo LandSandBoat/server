@@ -5,16 +5,15 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.isBusy = false
-
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local state = GetElevatorState(xi.elevator.PALBOROUGH_MINES_LIFT)
+    local state  = GetElevatorState(xi.elevator.PALBOROUGH_MINES_LIFT)
+    local isBusy = npc:getLocalVar('isBusy')
 
     if
-        not entity.isBusy and
+        isBusy == 0 and
         (state == xi.elevatorState.BOTTOM or
         state == xi.elevatorState.TOP)
     then
@@ -26,8 +25,10 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
+    local isBusy = npc:getLocalVar('isBusy')
+
     if
-        not entity.isBusy and
+        isBusy == 0 and
         csid == 9 and
         option == 1
     then
@@ -40,10 +41,10 @@ entity.onEventFinish = function(player, csid, option, npc)
                 npc:setAnimation(xi.animation.OPEN_DOOR)
             end
 
-            entity.isBusy = true
+            npc:setLocalVar('isBusy', 1)
             npc:timer(3000, function()
                 RunElevator(xi.elevator.PALBOROUGH_MINES_LIFT)
-                entity.isBusy = false
+                npc:setLocalVar('isBusy', 0)
             end)
         end
     end

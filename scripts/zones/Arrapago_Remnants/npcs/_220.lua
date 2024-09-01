@@ -14,6 +14,11 @@ entity.onEventFinish = function(player, csid, option, door)
     if csid == 300 and option == 1 then
         door:setAnimation(8)
         local instance = door:getInstance()
+
+        if not instance then
+            return
+        end
+
         -- spawn mobs, etc
         for _, v in pairs(ID.npc[1][2]) do
             local npc = GetNPCByID(v, instance)

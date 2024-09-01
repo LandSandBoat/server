@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.tradeHas(trade, xi.item.AHRIMAN_LENS)
     then
         player:setCharVar('QuestYourCrystalBall_prog', 1)
-        player:confirmTrade(trade)
+        player:confirmTrade()
     end
 end
 

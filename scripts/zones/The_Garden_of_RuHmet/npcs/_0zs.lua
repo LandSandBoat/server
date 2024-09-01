@@ -6,7 +6,6 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    return 1
 end
 
 entity.onTrigger = function(player, npc)

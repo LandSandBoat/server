@@ -183,6 +183,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         then
             if
                 itemID and
+                sealCost and
                 npcUtil.giveItem(player, itemID)
             then
                 player:delSeals(sealCost, sealType)

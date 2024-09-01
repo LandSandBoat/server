@@ -27,10 +27,10 @@ entity.onTrade = function(player, npc, trade)
             end
         elseif rand == 3 then
             player:startEvent(657) -- IN A PICKLE: Too Light
-            player:tradeComplete(trade)
+            player:tradeComplete()
         elseif rand == 4 then
             player:startEvent(658) -- IN A PICKLE: Too Small
-            player:tradeComplete(trade)
+            player:tradeComplete()
         end
     end
 end
