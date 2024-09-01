@@ -265,6 +265,13 @@ end
 xi.spells.enfeebling.calculateDuration = function(caster, target, spellId, spellEffect, skillType)
     local duration = pTable[spellId][7] -- Get base duration.
 
+    -- BIND spells have a special random duration the follows a normal distribution with mean=30 and std=12
+    if spellEffect == xi.effect.BIND then
+        -- Use the Box-Muller transform to change uniform dist sample to the normal dist sample
+        local z0 = math.sqrt(-2 * math.log(math.random())) * math.cos(2 * math.pi * math.random())
+        duration = utils.clamp(math.floor(30 + z0 * 12), 1, duration)
+    end
+
     -- Additions to base duration.
     if
         spellEffect == xi.effect.BURN or
