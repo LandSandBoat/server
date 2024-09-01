@@ -61,8 +61,6 @@ entity.onMagicHit = function(caster, target, spell)
         target:setLocalVar('reflectTime', target:getBattleTime())
         target:setAnimationSub(1)
     end
-
-    return 1
 end
 
 entity.onMobDeath = function(mob, player, optParams)

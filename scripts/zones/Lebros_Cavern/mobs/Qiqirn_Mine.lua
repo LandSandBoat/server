@@ -9,6 +9,11 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
+
+    if not instance then
+        return
+    end
+
     local chars = instance:getChars()
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setAutoAttackEnabled(false)

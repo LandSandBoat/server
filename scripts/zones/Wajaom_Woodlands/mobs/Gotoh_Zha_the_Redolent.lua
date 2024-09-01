@@ -76,8 +76,6 @@ entity.onWeaponskillHit = function(mob, attacker, weaponskill)
     if mob:getAnimationSub() == 0 and randVal <= 10 then
         mob:setAnimationSub(1)
     end
-
-    return 0
 end
 
 entity.onMobDeath = function(mob, killer)

@@ -31,7 +31,12 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar('teleTime', mob:getBattleTime())
     end
 
-    if mob:checkDistance(mob:getTarget()) > 55 then
+    local mobTarget = mob:getTarget()
+
+    if
+        mobTarget and
+        mob:checkDistance(mobTarget) > 55
+    then
         mob:disengage()
         mob:resetEnmity(target)
     end

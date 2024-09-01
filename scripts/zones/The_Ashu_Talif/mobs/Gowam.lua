@@ -27,7 +27,9 @@ end
 
 entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
-    instance:setProgress(instance:getProgress() + 1)
+    if instance then
+        instance:setProgress(instance:getProgress() + 1)
+    end
 end
 
 return entity

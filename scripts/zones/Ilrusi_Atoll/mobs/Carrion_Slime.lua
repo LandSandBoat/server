@@ -12,6 +12,11 @@ end
 
 entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
+
+    if not instance then
+        return
+    end
+
     local slimeMob = GetMobByID(ID.mob.UNDEAD_SLIME, instance)
     local randVal  = math.random(1, 5)
 

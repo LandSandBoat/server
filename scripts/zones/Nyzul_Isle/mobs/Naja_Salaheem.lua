@@ -95,6 +95,10 @@ entity.onMobDeath = function(mob, player, optParams)
     -- Loss if Naja dies. Since player will be nil here, it'll only show once.
     mob:showText(mob, ID.text.ABQUHBAH)
     local instance = mob:getInstance()
+    if not instance then
+        return
+    end
+
     instance:fail()
 end
 

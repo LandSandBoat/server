@@ -14,6 +14,11 @@ end
 entity.onMobFight = function(mob, target)
     local hpp         = mob:getHPP()
     local battlefield = mob:getBattlefield()
+
+    if not battlefield then
+        return
+    end
+
     local bfID        = battlefield:getArea()
     local adds        = mob:getLocalVar('adds')
     local petID       = 0

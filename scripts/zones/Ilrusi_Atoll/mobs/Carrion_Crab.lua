@@ -12,6 +12,11 @@ end
 
 entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
+
+    if not instance then
+        return
+    end
+
     local crabMob  = GetMobByID(ID.mob.UNDEAD_CRAB, instance)
     local randVal  = math.random(1, 5)
 

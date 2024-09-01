@@ -62,6 +62,11 @@ entity.onMobFight = function(mob, target)
     end
 
     local battlefield = mob:getBattlefield()
+
+    if not battlefield then
+        return
+    end
+
     local respawnTime = battlefield:getLocalVar('petRespawnMR')
     if
         respawnTime ~= 0 and

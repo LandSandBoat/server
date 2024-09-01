@@ -28,6 +28,10 @@ end
 
 entity.onMobFight = function(mob, target)
     local battlefield = mob:getBattlefield()
+    if not battlefield then
+        return
+    end
+
     local battletime = mob:getBattleTime()
     local changetime = mob:getLocalVar('changetime')
     if battlefield:getLocalVar('fireworks') == 1 then

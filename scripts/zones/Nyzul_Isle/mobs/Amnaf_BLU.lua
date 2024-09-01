@@ -9,6 +9,9 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
+    if not instance then
+        return
+    end
 
     -- Stage 2 Adjustments
     if instance:getProgress() >= 10 then
@@ -106,6 +109,10 @@ entity.onMobFight = function(mob, target)
         if mob:getLocalVar('DespawnSignal') == 0 then
             mob:setLocalVar('DespawnSignal', 1)
             local instance = mob:getInstance()
+            if not instance then
+                return
+            end
+
             instance:setProgress(instance:getProgress() + 10)
         end
     end
@@ -126,6 +133,10 @@ end
 
 entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
+    if not instance then
+        return
+    end
+
     instance:setProgress(instance:getProgress() + 10)
 end
 

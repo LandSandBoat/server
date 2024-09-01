@@ -1,5 +1,5 @@
 -----------------------------------
---  MOB: Shielde Chariot
+--  MOB: Shielded Chariot
 -- Area: Nyzul Isle
 -- Info: Enemy Leader, Uses Mortal Revolution
 -----------------------------------
@@ -8,7 +8,7 @@ mixins = { require('scripts/mixins/families/chariot') }
 ---@type TMobEntity
 local entity = {}
 
-entity.onMonsterAbilityPrepare = function(mob)
+entity.onMobWeaponSkillPrepare = function(mob, target)
     if mob:getHPP() > 25 then
         return 0
     elseif math.random(1, 2) == 2 then

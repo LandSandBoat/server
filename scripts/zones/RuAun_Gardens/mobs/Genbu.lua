@@ -8,7 +8,7 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobSpawn = function(mob, target)
+entity.onMobSpawn = function(mob)
     GetNPCByID(ID.npc.PORTAL_OFFSET + 5):setAnimation(xi.anim.CLOSE_DOOR)
 end
 

@@ -45,7 +45,11 @@ end
 entity.onMobFight = function(mob, target)
     -- The captain gives up at <= 20% HP. Everyone disengages
     local instance = mob:getInstance()
-    if mob:getHPP() <= 20 and not instance:completed() then
+    if
+        mob:getHPP() <= 20 and
+        instance and
+        not instance:completed()
+    then
         instance:complete()
     end
 
@@ -63,7 +67,7 @@ entity.onMobFight = function(mob, target)
     end)
 end
 
-entity.onMobDisengage = function(mob, target)
+entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

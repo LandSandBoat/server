@@ -85,8 +85,10 @@ entity.onMobFight = function(mob, target)
         respawnTime <= os.time()
     then
         local battlefield = mob:getBattlefield()
-        battlefield:setLocalVar('petRespawnGK', 0)
-        spawnArkAngelPet(mob, target)
+        if battlefield then
+            battlefield:setLocalVar('petRespawnGK', 0)
+            spawnArkAngelPet(mob, target)
+        end
     end
 end
 

@@ -14,6 +14,11 @@ end
 entity.onMobDisengage = function(mob)
     local run = mob:getLocalVar('run')
     local instance = mob:getInstance()
+
+    if not instance then
+        return
+    end
+
     local stage = instance:getStage()
     local prog = instance:getProgress()
 
@@ -47,6 +52,11 @@ entity.onMobFight = function(mob, target)
     local isBusy = false
     local runTime = mob:getLocalVar('runTime')
     local instance = mob:getInstance()
+
+    if not instance then
+        return
+    end
+
     local stage = instance:getStage()
     local prog = instance:getProgress()
 

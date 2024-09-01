@@ -9,6 +9,11 @@ local entity = {}
 
 entity.onMobRoamAction = function(mob)
     local instance = mob:getInstance()
+
+    if not instance then
+        return
+    end
+
     local stage = instance:getStage()
     local prog = instance:getProgress()
 

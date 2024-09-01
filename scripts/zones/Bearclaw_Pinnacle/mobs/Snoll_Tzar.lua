@@ -14,7 +14,7 @@ end
 entity.onMobEngage = function(mob, target)
 end
 
-entity.onMobFight = function(mob, player, target)
+entity.onMobFight = function(mob, player)
     local changeTime = mob:getLocalVar('changeTime')
     local delay = mob:getLocalVar('delayed')
     local cd = mob:getLocalVar('cooldown')
@@ -87,6 +87,7 @@ entity.onMobDeath = function(mob, player, optParams)
 
     -- end BCNM
     if
+        bf and
         gameOver == 1 and
         mob:getBattleTime() - changeTime > 3
     then

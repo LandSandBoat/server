@@ -28,7 +28,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDisengage = function(mob, weather)
+entity.onMobDisengage = function(mob)
     mob:setLocalVar('everyonesRancorUsed', 0)
 end
 

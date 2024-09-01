@@ -50,7 +50,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDisengage = function(mob, weather)
+entity.onMobDisengage = function(mob)
     for i, offset in ipairs(offsets) do
         DespawnMob(mob:getID() + offset)
     end

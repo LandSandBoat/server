@@ -13,7 +13,7 @@ end
 
 entity.onMobSpawn = function(mob)
     if VanadielDayOfTheWeek() == xi.day.WATERSDAY then
-        mob:setMod(xi.mod.REGEN, 6, 3, 0)
+        mob:setMod(xi.mod.REGEN, 6)
     end
 end
 
