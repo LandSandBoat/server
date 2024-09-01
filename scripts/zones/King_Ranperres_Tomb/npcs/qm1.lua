@@ -4,6 +4,7 @@
 -- Notes: Used to teleport down the stairs
 -- !pos -81 -1 -97 190
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

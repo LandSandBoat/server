@@ -3,6 +3,7 @@
 --  NPC: Utsuitsui
 -- !pos 6.379 -26.5 -4.043 242
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

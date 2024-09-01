@@ -4,6 +4,7 @@
 -- Type: Weather Reporter
 -- !pos -97.145 0.001 -36.710 257
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

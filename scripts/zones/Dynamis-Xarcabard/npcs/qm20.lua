@@ -3,6 +3,7 @@
 --  NPC: ??? (qm20)
 -- Note: Spawns Animated Shield
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

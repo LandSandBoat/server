@@ -3,6 +3,7 @@
 --  NPC: Vestal Chamber (chamber of the Star Sibyl)
 -- !pos 0.1 -49 37 242
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

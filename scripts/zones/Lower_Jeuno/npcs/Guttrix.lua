@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: The Goblin Tailor
 -- !pos -36.010 4.499 -139.714 245
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local rseMap =

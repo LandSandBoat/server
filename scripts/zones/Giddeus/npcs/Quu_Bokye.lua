@@ -3,6 +3,7 @@
 --  NPC: Quu Bokye
 -- !pos -159 16 181 145
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

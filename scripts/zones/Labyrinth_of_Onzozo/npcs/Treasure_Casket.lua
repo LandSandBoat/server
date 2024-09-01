@@ -2,6 +2,7 @@
 -- Area: Labyrinth of Onzozo
 --  NPC: Treasure Casket
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

@@ -3,6 +3,7 @@
 --  NPC: ??? (qm0)
 -- Note: Spawns Antaeus / Arch Antaeus
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

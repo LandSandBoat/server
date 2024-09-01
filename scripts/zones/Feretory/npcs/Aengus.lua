@@ -5,6 +5,7 @@
 -----------------------------------
 require('scripts/globals/monstrosity')
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

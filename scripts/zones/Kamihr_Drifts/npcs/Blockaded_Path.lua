@@ -5,6 +5,7 @@
 -----------------------------------
 local kamihrID = zones[xi.zone.KAMIHR_DRIFTS]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

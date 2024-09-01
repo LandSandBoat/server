@@ -3,6 +3,7 @@
 --  NPC: Door: Back to Town
 -- !pos -92.357 -3.050 -82.322 284
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

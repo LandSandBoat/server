@@ -3,6 +3,7 @@
 --  NPC: Wind Protocrystal
 -- !pos -361 1 -381 201
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

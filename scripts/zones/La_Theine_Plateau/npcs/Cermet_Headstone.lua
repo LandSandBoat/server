@@ -4,6 +4,7 @@
 -- Involved in Mission: ZM5 Headstone Pilgrimage (Water Fragment)
 -- !pos -170 39 -504 102
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

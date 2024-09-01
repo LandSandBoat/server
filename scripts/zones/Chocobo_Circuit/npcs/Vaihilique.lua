@@ -3,6 +3,7 @@
 -- NPC: Vaihilique
 -- !pos -372.943 3.999 -524.775 70
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

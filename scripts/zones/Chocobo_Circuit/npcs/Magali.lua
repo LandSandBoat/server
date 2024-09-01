@@ -3,6 +3,7 @@
 -- NPC: Magali
 -- !pos -328.947 0.000 -295.444 70
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

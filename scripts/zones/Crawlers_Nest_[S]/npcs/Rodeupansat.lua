@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: EVIL_AT_THE_INLET
 -- !pos 129 -34 26 171
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

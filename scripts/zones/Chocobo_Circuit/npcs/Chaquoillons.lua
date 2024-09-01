@@ -3,6 +3,7 @@
 -- NPC: Chaquoillons
 -- !pos -270.716 -4.000 -465.199 70
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

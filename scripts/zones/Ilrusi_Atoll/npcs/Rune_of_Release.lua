@@ -3,6 +3,7 @@
 --  NPC: Rune of Release
 -- !pos 412 -9 54 55
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

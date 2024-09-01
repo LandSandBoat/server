@@ -3,6 +3,7 @@
 --  NPC: ??? (qm9)
 -- Note: Spawns Animated Tabar
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 --  NPC: Nebibi
 -- !pos 23.539 -27.25 22.589 242
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

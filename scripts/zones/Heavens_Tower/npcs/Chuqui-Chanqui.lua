@@ -2,6 +2,7 @@
 -- Area: Heaven's Tower
 --  NPC: Chuqui-Chanqui
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

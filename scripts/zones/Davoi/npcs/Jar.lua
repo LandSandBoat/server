@@ -5,6 +5,7 @@
 -- Notes: Used to obtain Power Sandals
 -- !pos <randomized>
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

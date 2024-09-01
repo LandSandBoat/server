@@ -3,6 +3,7 @@
 -- NPC: Jolande
 -- !pos -499.440 0.000 -371.312 70
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

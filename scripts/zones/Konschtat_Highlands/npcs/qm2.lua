@@ -4,6 +4,7 @@
 -- Involved in Quest: Forge Your Destiny
 -- !pos -709 2 102 108
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

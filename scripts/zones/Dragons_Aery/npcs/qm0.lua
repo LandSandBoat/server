@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.DRAGONS_AERY]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onSpawn = function(npc)

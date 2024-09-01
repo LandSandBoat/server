@@ -4,6 +4,7 @@
 -- !pos -118 -8 -518 104
 -- Teleports Players to Jugner Forest [S]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

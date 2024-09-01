@@ -4,6 +4,7 @@
 -- Involved in Quests: Steamed Rams
 -- !pos 380.015 -26.5 -22.525
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

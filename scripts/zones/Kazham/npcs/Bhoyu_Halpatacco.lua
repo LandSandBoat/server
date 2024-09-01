@@ -3,6 +3,7 @@
 --  NPC: Bhoyu Halpatacco
 -- !pos -18 -4 -15 250
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
