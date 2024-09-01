@@ -2,12 +2,6 @@
 -- Area: Wajaom Woodlands
 --  ZNM: Gotoh Zha the Redolent
 -----------------------------------
-mixins =
-{
-    require('scripts/mixins/job_special'),
-    require('scripts/mixins/rage')
-}
------------------------------------
 -- Detailed Notes & Todos
 -- (please remove these if you handle any)
 -- 1. Find out if stats (INT, MND, MAB..)
@@ -30,10 +24,7 @@ mixins =
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
-end
-
-entity.onMobSpawn = function(mob)
+    xi.applyMixins(mob, xi.mixins.rage, { rageTimer = utils.minutes(60) })
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -42,7 +33,11 @@ entity.onMobSpawn = function(mob)
         },
     })
 
-    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
+
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+end
+
+entity.onMobSpawn = function(mob)
     mob:setSpellList(296) -- Set BLM spell list
 end
 

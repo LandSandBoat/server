@@ -3,16 +3,14 @@
 --  ZNM: Brass Borer
 -- TODO: Halting movement during stance change.
 -----------------------------------
-mixins = { require('scripts/mixins/rage') }
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.rage, { rageTimer = utils.minutes(60) })
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setLocalVar('formTime', os.time() + math.random(43, 47))
     mob:setLocalVar('defUp', math.random(25, 50))
     mob:setLocalVar('DEF', math.random(3, 5))

@@ -5,15 +5,12 @@
 -- Spawned with Monkey Wine: @additem 2573
 -- Wiki: http://ffxiclopedia.wikia.com/wiki/Tinnin
 -----------------------------------
-mixins =
-{
-    require('scripts/mixins/job_special'),
-    require('scripts/mixins/rage')
-}
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.rage, { rageTimer = utils.minutes(60) })
+    xi.applyMixins(mob, xi.mixins.job_special)
+
     mob:setMobMod(xi.mobMod.GIL_MIN, 12000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 30000)
     mob:setMobMod(xi.mobMod.MUG_GIL, 8000)
@@ -23,7 +20,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setHP(mob:getMaxHP() / 2)
     mob:setUnkillable(true)
     mob:setMod(xi.mod.REGEN, 50)

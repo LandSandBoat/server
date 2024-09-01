@@ -6,6 +6,8 @@ local ID = zones[xi.zone.GUSTAV_TUNNEL]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    xi.mixins.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
+
     UpdateNMSpawnPoint(ID.mob.BUNE)
     GetMobByID(ID.mob.BUNE):setRespawnTime(math.random(900, 10800))
 end

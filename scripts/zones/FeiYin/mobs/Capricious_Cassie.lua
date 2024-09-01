@@ -2,11 +2,10 @@
 -- Area: Fei'Yin
 --   NM: Capricious Cassie
 -----------------------------------
-mixins = { require('scripts/mixins/rage') }
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.rage)
     mob:setMobMod(xi.mobMod.DRAW_IN, 2)
 end
 
