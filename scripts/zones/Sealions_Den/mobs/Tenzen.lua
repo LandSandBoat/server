@@ -5,6 +5,7 @@
 local ID = zones[xi.zone.SEALIONS_DEN]
 local tenzenFunctions = require('scripts/zones/Sealions_Den/helpers/TenzenFunctions')
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

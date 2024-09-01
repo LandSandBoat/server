@@ -5,6 +5,7 @@
 local ID = zones[xi.zone.SEALIONS_DEN]
 mixins = { require('scripts/mixins/warriors_path_taru') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

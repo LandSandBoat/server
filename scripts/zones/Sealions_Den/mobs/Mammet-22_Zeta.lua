@@ -2,6 +2,7 @@
 -- Area: Sealions Den
 --  Mob: Mammet-22 Zeta
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

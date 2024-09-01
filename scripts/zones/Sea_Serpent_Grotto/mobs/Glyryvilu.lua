@@ -5,6 +5,7 @@
 -- !pos 135 -9 220
 -- Involved in Quest: An Undying Pledge
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,6 +2,7 @@
 -- Area: Promyvion-Vahzl
 --   NM: Memory Receptacle
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

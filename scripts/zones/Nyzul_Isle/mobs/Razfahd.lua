@@ -2,6 +2,7 @@
 -- Area: Nyzul Isle (Nashmeira's Plea)
 --  Mob: Razfahd
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

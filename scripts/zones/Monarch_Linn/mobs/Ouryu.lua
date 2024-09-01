@@ -2,6 +2,7 @@
 -- Area: Monarch Linn
 --  Mob: Ouryu
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

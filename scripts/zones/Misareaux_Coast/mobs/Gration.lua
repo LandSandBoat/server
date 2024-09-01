@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/fomor_hate') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

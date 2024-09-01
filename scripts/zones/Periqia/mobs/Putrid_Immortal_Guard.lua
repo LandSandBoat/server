@@ -2,6 +2,7 @@
 -- Area: Periqia (Requiem)
 --  Mob: Putrid Immortal Guard
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,6 +2,7 @@
 -- Area: Pashhow Marshlands
 --   NM: Toxic Tamlyn
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

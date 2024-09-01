@@ -3,6 +3,7 @@
 -- Area: Nyzul Isle
 -- Info: Enemy Leader, Spams Frog Song
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMonsterAbilityPrepare = function(mob, skill)

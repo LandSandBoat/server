@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Rala Waterways [U]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)

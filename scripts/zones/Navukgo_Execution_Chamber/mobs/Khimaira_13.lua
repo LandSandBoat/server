@@ -2,6 +2,7 @@
 -- Area: Navukgo Execution Chamber
 --  Mob: Khimaira 13
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)

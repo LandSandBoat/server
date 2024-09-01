@@ -5,6 +5,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/families/chariot') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMonsterAbilityPrepare = function(mob)

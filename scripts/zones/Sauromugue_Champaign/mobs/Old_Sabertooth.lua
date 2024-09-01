@@ -4,6 +4,7 @@
 -- Involved in Quest: The Fanged One
 -- !pos 676 -10 -366 120
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local pathNodes =

@@ -2,6 +2,7 @@
 -- Area: Meriphataud Mountains [S]
 --   NM: Centipedal Centruroides
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

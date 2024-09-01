@@ -2,6 +2,7 @@
 -- Area: RuAun Gardens
 --   NM: Despot
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

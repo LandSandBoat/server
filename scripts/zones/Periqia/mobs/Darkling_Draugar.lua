@@ -2,6 +2,7 @@
 -- Area: Periqia (Requiem)
 --  Mob: Darkling Draugar
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

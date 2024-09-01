@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.QUBIA_ARENA]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onEventFinish = function(player, csid, option, npc)

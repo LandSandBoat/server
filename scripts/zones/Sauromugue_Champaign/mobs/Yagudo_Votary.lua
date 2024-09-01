@@ -2,6 +2,7 @@
 -- Area: Sauromugue Champaign
 --  Mob: Yagudo Votary
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

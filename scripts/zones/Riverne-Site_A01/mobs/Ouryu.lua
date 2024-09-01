@@ -3,6 +3,7 @@
 -- Riverne Site A, Cloud Evokers
 -- !pos 184 0 344 30
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

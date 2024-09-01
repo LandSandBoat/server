@@ -3,6 +3,7 @@
 --  Mob: Gambilox Wanderling
 -- Quest NM - "As Thick as Thieves"
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -2,6 +2,7 @@
 -- Area: Periqia (Requiem)
 --  Mob: Draconic Draugar
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)

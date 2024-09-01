@@ -2,6 +2,7 @@
 -- Area: Periqia (Shades of Vengeance)
 --  Mob: K23H1-LAMIA
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

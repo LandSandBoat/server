@@ -5,6 +5,7 @@
 local ID = zones[xi.zone.SACRARIUM]
 local professorTables = require('scripts/zones/Sacrarium/globals')
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
