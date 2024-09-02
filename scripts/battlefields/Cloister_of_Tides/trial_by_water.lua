@@ -2,8 +2,6 @@
 -- Area: Cloister of Tides
 -- BCNM: Trial by Water
 -----------------------------------
-local cloisterOfTidesID = zones[xi.zone.CLOISTER_OF_TIDES]
------------------------------------
 
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.CLOISTER_OF_TIDES,
@@ -28,13 +26,7 @@ end
 content.groups =
 {
     {
-        mobIds =
-        {
-            { cloisterOfTidesID.mob.LEVIATHAN_PRIME     },
-            { cloisterOfTidesID.mob.LEVIATHAN_PRIME + 1 },
-            { cloisterOfTidesID.mob.LEVIATHAN_PRIME + 2 },
-        },
-
+        mobs = { 'Leviathan_Prime_TBW' },
         allDeath = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
         end,
