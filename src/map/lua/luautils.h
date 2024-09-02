@@ -375,6 +375,8 @@ namespace luautils
     template <typename... Targs>
     int32 invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args);
 
+    auto GetSynergyRecipeByID(uint32 id) -> sol::table;
+    auto GetSynergyRecipeByTrade(CLuaTradeContainer luaTradeContainer) -> sol::table;
 }; // namespace luautils
 
 // template impl

@@ -172,6 +172,13 @@ bool CLuaTradeContainer::confirmSlot(uint8 slotID, sol::object const& amountObj)
 
 //======================================================//
 
+void CLuaTradeContainer::clean()
+{
+    m_pMyTradeContainer->Clean();
+}
+
+//======================================================//
+
 void CLuaTradeContainer::Register()
 {
     SOL_USERTYPE("CTradeContainer", CLuaTradeContainer);
@@ -186,6 +193,7 @@ void CLuaTradeContainer::Register()
     SOL_REGISTER("hasItemQty", CLuaTradeContainer::hasItemQty);
     SOL_REGISTER("confirmItem", CLuaTradeContainer::confirmItem);
     SOL_REGISTER("confirmSlot", CLuaTradeContainer::confirmSlot);
+    SOL_REGISTER("clean", CLuaTradeContainer::clean);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaTradeContainer& trade)

@@ -73,6 +73,7 @@
 #include "utils/moduleutils.h"
 #include "utils/petutils.h"
 #include "utils/serverutils.h"
+#include "utils/synergyutils.h"
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
@@ -279,6 +280,7 @@ int32 do_init(int32 argc, char** argv)
     jobpointutils::LoadGifts();
     daily::LoadDailyItems();
     roeutils::UpdateUnityRankings();
+    synergyutils::LoadSynergyRecipes();
 
     if (!std::filesystem::exists("./navmeshes/") || std::filesystem::is_empty("./navmeshes/"))
     {

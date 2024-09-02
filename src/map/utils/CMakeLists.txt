@@ -31,6 +31,8 @@ set(UTIL_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/puppetutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/serverutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/serverutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/synergyutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/synergyutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/synthutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/synthutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/trustutils.cpp
