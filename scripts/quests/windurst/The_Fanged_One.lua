@@ -96,7 +96,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.OLD_TIGERS_FANG)
                         player:unlockJob(xi.job.RNG)
                         npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_RANGER)
-                        return quest:messageSpecial(windurstWoodsID.text.PERIH_VASHAI_DIALOG)
+                        player:messageSpecial(windurstWoodsID.text.PERIH_VASHAI_DIALOG)
                     end
                 end,
             },

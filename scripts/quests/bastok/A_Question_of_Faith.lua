@@ -113,7 +113,7 @@ quest.sections =
             {
                 [6] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.DAWN_TALISMAN)
-                    return quest:messageSpecial(ID.text.WAS_TAKEN_FROM_YOU, 0, xi.ki.DAWN_TALISMAN)
+                    player:messageSpecial(ID.text.WAS_TAKEN_FROM_YOU, 0, xi.ki.DAWN_TALISMAN)
                 end,
             },
         },

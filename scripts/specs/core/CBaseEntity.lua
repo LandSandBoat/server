@@ -283,7 +283,7 @@ end
 function CBaseEntity:startOptionalCutscene(EventID, p0, p1, p2, p3, p4, p5, p6, p7, textTable)
 end
 
----@param ... integer?
+---@param ... integer|table?
 ---@return nil
 function CBaseEntity:updateEvent(...)
 end

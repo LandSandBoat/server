@@ -185,7 +185,7 @@ quest.sections =
                 [346] = function(player, csid, option, npc)
                     player:delQuest(quest.areaId, quest.questId)
                     player:delKeyItem(xi.ki.SMALL_BAG)
-                    quest:setVar('dueDate', 0)
+                    quest:setVar(player, 'dueDate', 0)
                     quest:setVar(player, 'Prog', 256)
                 end,
 
