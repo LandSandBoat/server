@@ -10,6 +10,7 @@
 local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET)
 
 quest.reward =

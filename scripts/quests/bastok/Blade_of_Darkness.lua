@@ -8,6 +8,7 @@
 local beadeauxID = zones[xi.zone.BEADEAUX]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS)
 
 quest.reward =

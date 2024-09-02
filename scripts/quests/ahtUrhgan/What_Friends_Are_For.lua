@@ -5,6 +5,7 @@
 -- Qm9 !pos -406 6.5 -440 68
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.WHAT_FRIENDS_ARE_FOR)
 
 quest.sections =

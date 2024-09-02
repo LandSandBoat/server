@@ -9,6 +9,7 @@
 -- qm1 (moves) : !pos 309.6 2.6 324 106
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_SIRENS_TEAR)
 
 quest.reward =

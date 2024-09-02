@@ -12,6 +12,7 @@
 -- Latifah       : !pos 51.241 7.499 -55.407 236
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.STAMP_HUNT)
 
 quest.reward =

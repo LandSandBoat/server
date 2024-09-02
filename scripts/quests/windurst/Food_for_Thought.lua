@@ -7,6 +7,7 @@
 -- Ohbiru-Dohbiru : !pos 23 -5 -193 238
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
 
 quest.reward =

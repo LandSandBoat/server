@@ -7,6 +7,7 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
 
 local function handleSandoriaTrade(player, npc, trade)

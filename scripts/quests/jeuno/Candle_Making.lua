@@ -5,6 +5,7 @@
 -- Rouliette : !pos -24 -2 11 244
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CANDLE_MAKING)
 
 quest.reward =

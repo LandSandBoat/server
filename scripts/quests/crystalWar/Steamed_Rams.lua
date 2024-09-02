@@ -11,6 +11,7 @@
 local southernSandoriaSID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
 
 quest.reward =

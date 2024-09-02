@@ -3,7 +3,10 @@
 -----------------------------------
 require('scripts/globals/interaction/container')
 -----------------------------------
-
+---@see TInteractionContainer
+---@class TQuest : TInteractionContainer
+---@field areaId xi.questLog
+---@field questId integer
 Quest = setmetatable({ areaId = 0 }, { __index = Container })
 Quest.__index = Quest
 
@@ -12,11 +15,15 @@ Quest.__eq = function(q1, q2)
     return q1.areaId == q2.areaId and q1.questId == q2.questId
 end
 
+---@type rewardParam
 Quest.reward = {}
+
+---@type TQuestSectionList
+Quest.sections = {}
 
 ---@param areaId xi.questLog
 ---@param questId integer
----@diagnostic disable-next-line: duplicate-set-field
+---@return TQuest
 function Quest:new(areaId, questId)
     local obj = Container:new(Quest.getVarPrefix(areaId, questId))
     setmetatable(obj, self)
@@ -33,6 +40,7 @@ function Quest.getVarPrefix(areaId, questId)
 end
 
 ---@param player CBaseEntity
+---@return { [integer]: xi.questStatus }
 function Quest:getCheckArgs(player)
     return { player:getQuestStatus(self.areaId, self.questId) }
 end
@@ -41,10 +49,14 @@ end
 -- Quest operations
 -----------------------------------
 
+---@param player CBaseEntity
+---@return nil
 function Quest:begin(player)
     player:addQuest(self.areaId, self.questId)
 end
 
+---@param player CBaseEntity
+---@return boolean
 function Quest:complete(player)
     local didComplete = npcUtil.completeQuest(player, self.areaId, self.questId, self.reward)
     if didComplete then

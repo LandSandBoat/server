@@ -6,6 +6,7 @@
 -- Tete   : !pos 15.249 -2.097 43.012 236
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_WISDOM_OF_ELDERS)
 
 quest.reward =

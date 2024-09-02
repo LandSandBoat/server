@@ -6,6 +6,7 @@
 -- Mhaura, Rycharde, !pos 17.451 -16.000 88.815 249
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE)
 
 quest.reward =

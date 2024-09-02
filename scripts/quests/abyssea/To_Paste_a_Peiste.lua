@@ -4,6 +4,7 @@
 -- !addquest 8 164
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.TO_PASTE_A_PEISTE)
 
 quest.reward = { }

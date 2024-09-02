@@ -7,6 +7,7 @@
 -- Enu    : !pos -253.673 -13 -92.326 235
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR)
 
 quest.reward =

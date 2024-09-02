@@ -5,6 +5,7 @@
 -- Moogle : (Mog House, Home Nation)
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
 
 quest.reward =
@@ -15,19 +16,22 @@ quest.reward =
 -- Since there are so many zones with interactions:
 quest.sections = {}
 
-quest.sections[1] = {}
-quest.sections[1].check = function(player, status, vars)
-    local bedPlacedTime = quest:getVar(player, 'bedPlacedTime')
+quest.sections[1] =
+{
+    check = function(player, status, vars)
+        local bedPlacedTime = quest:getVar(player, 'bedPlacedTime')
 
-    return status == xi.questStatus.QUEST_AVAILABLE and
-        xi.moghouse.isInMogHouseInHomeNation(player) and
-        player:getFameLevel(player:getNation()) >= 3 and
-        not quest:getMustZone(player) and
-        quest:getLocalVar(player, 'questSeen') == 0 and
-        bedPlacedTime ~= 0 and
-        os.time() > bedPlacedTime + 60
-end
+        return status == xi.questStatus.QUEST_AVAILABLE and
+            xi.moghouse.isInMogHouseInHomeNation(player) and
+            player:getFameLevel(player:getNation()) >= 3 and
+            not quest:getMustZone(player) and
+            quest:getLocalVar(player, 'questSeen') == 0 and
+            bedPlacedTime ~= 0 and
+            os.time() > bedPlacedTime + 60
+    end
+}
 
+---@type TQuestZoneSection
 local questAvailable =
 {
     ['Moogle'] =
@@ -49,11 +53,14 @@ local questAvailable =
     },
 }
 
-quest.sections[2] = {}
-quest.sections[2].check = function(player, status, vars)
-    return status == xi.questStatus.QUEST_ACCEPTED
-end
+quest.sections[2] =
+{
+    check = function(player, status, vars)
+        return status == xi.questStatus.QUEST_ACCEPTED
+    end
+}
 
+---@type TQuestZoneSection
 local questAccepted =
 {
     ['Moogle'] =

@@ -10,6 +10,7 @@
 local ordellesID = zones[xi.zone.ORDELLES_CAVES]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.DARK_PUPPET)
 
 quest.reward =

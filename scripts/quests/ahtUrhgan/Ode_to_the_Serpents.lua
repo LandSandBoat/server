@@ -5,6 +5,7 @@
 -- Fari-Wari: !pos 80 -6 -137 50
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.ODE_TO_THE_SERPENTS)
 
 quest.reward =

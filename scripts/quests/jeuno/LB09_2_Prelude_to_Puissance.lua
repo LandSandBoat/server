@@ -5,6 +5,7 @@
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
 
 -- TODO: Properly code timing minigame. Awaiting for a capture.

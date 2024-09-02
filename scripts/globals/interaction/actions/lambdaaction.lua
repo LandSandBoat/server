@@ -3,8 +3,13 @@
 -----------------------------------
 require('scripts/globals/interaction/actions/action')
 
+---@class TInteractionLambdaAction : TInteractionAction
+---@field actionFunc function
+---@field priority Action.Priority|integer
 LambdaAction = Action:new(Action.Type.LambdaAction)
 
+---@param actionFunc function
+---@param prio Action.Priority|integer
 function LambdaAction:new(actionFunc, prio)
     local obj = {}
     setmetatable(obj, self)

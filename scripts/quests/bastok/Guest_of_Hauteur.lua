@@ -6,6 +6,7 @@
 -- Steel Bones : !pos -185.766 1.999 -57.631 236
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)
 
 quest.reward =

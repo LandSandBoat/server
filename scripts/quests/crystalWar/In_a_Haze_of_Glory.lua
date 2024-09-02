@@ -7,6 +7,7 @@
 -- Wooden Crates : !pos -0.717 3.347 -99.535 164
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.IN_A_HAZE_OF_GLORY)
 
 quest.reward =

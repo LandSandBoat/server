@@ -8,6 +8,7 @@
 local gusgenMinesID = zones[xi.zone.GUSGEN_MINES]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST)
 
 quest.reward =

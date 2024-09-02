@@ -9,6 +9,7 @@ local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
 
 quest.reward =

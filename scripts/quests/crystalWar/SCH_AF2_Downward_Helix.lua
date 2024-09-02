@@ -6,6 +6,7 @@
 -- Indescript Markings : !pos 322 24 113 98
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
 
 quest.reward =

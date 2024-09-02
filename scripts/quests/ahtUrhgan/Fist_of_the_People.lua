@@ -9,6 +9,7 @@
 local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.FIST_OF_THE_PEOPLE)
 
 quest.reward =

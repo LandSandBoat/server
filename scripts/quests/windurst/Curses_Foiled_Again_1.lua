@@ -5,6 +5,7 @@
 -- Shantotto : !pos 122 -2 112 239
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
 
 quest.reward =

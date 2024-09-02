@@ -6,6 +6,7 @@
 -- Hot Springs : !pos 444 -37 -18 139
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
 
 quest.reward =

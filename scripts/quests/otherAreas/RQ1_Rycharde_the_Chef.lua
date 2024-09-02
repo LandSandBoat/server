@@ -8,6 +8,7 @@
 -- Mhaura, Numi Adaligo, !pos -80.332 -24.050 34.794 249
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF)
 
 quest.reward =

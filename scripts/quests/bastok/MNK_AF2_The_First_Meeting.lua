@@ -8,6 +8,7 @@
 local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
 
 quest.reward =

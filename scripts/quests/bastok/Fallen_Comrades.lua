@@ -5,6 +5,7 @@
 -- Pavvke : !pos 16.586 6.985 -14.843 234
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
 
 quest.reward =

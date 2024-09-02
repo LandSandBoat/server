@@ -8,6 +8,7 @@
 -- Pudith      : !pos -109.533 -0.150 56.939 257
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_THE_DARK)
 
 -- NOTE:

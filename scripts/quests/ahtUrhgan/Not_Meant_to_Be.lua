@@ -8,6 +8,7 @@
 local caedarvaMireID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
 
 quest.reward =

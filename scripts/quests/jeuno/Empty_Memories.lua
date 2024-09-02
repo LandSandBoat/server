@@ -5,6 +5,7 @@
 -- Harith : !pos -4.349 1 134.014 243
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES)
 
 quest.reward =

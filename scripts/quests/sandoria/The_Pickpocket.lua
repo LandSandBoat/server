@@ -9,6 +9,7 @@ local northernSandOriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 local westRonfaureID     = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET)
 
 quest.reward =
@@ -191,7 +192,7 @@ quest.sections =
         {
             ['Esca'] =
             {
-                onTrigger = function(player, npc, trade)
+                onTrigger = function(player, npc)
                     if player:hasItem(xi.item.GILT_GLASSES) then
                         return quest:event(123)
                     else

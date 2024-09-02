@@ -8,6 +8,7 @@
 local lufaiseID = zones[xi.zone.LUFAISE_MEADOWS]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.A_HARD_DAYS_KNIGHT)
 
 quest.reward =
@@ -134,14 +135,16 @@ quest.sections =
             {
                 [631] = function(player, csid, option, npc)
                     if quest:getVar(player, 'Prog') == 2 then
-                        return quest:progressEvent(632)
+                        -- TODO: This is most likely not retail accurate, and need to check captures
+                        -- for forced zoning events.
+                        player:startEvent(632)
                     end
                 end,
 
                 [632] = function(player, csid, option, npc)
                     player:confirmTrade()
                     quest:setVar(player, 'Prog', 0)
-                    return quest:keyItem(xi.ki.TEMPLE_KNIGHT_KEY)
+                    npcUtil.giveKeyItem(player, xi.ki.TEMPLE_KNIGHT_KEY)
                 end
             },
         },

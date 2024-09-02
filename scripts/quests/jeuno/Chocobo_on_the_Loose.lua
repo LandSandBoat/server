@@ -7,6 +7,7 @@
 -- Hantileon      : !pos -2.675 -1.1 -105.287 230
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
 
 quest.reward =

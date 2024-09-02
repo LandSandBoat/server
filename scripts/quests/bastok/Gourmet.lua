@@ -5,6 +5,7 @@
 -- Salimah : !pos -173 -5 64 235
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GOURMET)
 
 quest.reward =

@@ -5,6 +5,7 @@
 -- Joachim : !pos -52.844 0 -9.978 246
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.SCARS_OF_ABYSSEA)
 
 quest.reward = {}

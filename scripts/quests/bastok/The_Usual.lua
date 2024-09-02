@@ -6,6 +6,7 @@
 -- Raibaht : !pos -27 -10 -1 237
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_USUAL)
 
 quest.reward =

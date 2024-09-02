@@ -7,6 +7,7 @@
 -- Forbidding Portal : !pos 320 -10.835 158.699 137
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BLOOD_OF_HEROES)
 
 quest.reward =

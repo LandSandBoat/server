@@ -6,6 +6,7 @@
 -- Bartolomeo : !pos -84.967 1.896 -18.679 236
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
 
 quest.reward =
