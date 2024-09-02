@@ -16,11 +16,9 @@ end
 
 ---@param PLuaBaseEntity CBaseEntity
 ---@param messageID integer
----@param arg2 boolean
+---@param arg2 boolean|integer|table?
 ---@param arg3 integer?
 ---@return nil
----@overload fun(PLuaBaseEntity: CBaseEntity, messageID: integer, arg2: integer, arg3: integer?): nil
----@overload fun(PLuaBaseEntity: CBaseEntity, messageID: integer, arg2: table, arg3: integer?): nil
 function CBaseEntity:messageText(PLuaBaseEntity, messageID, arg2, arg3)
 end
 
@@ -107,11 +105,24 @@ end
 function CBaseEntity:getCharVar(varName)
 end
 
+---@nodiscard
+---@param varName string
+---@return integer
+function CBaseEntity:getVar(varName)
+end
+
 ---@param varName string
 ---@param value integer
 ---@param expiry integer?
 ---@return nil
 function CBaseEntity:setCharVar(varName, value, expiry)
+end
+
+---@param varName string
+---@param value integer
+---@param expiry integer?
+---@return nil
+function CBaseEntity:setVar(varName, value, expiry)
 end
 
 ---@param varName string
@@ -1517,7 +1528,7 @@ end
 ---@nodiscard
 ---@param questLogID integer
 ---@param questID integer
----@return integer
+---@return xi.questStatus
 function CBaseEntity:getQuestStatus(questLogID, questID)
 end
 
