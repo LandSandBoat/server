@@ -4,6 +4,7 @@
 -- EGRET_FISHING_ROD: !additem 1726
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.HOOK_LINE_AND_SINKER)
 
 quest.reward =

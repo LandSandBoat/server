@@ -7,6 +7,7 @@
 -- Chomoro-Kyotoro : !pos 133 -5 167 238
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE)
 
 quest.reward =

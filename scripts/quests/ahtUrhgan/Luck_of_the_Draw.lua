@@ -12,6 +12,7 @@
 local talaccaCoveID = zones[xi.zone.TALACCA_COVE]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
 
 quest.reward =

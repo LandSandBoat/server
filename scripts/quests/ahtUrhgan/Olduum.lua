@@ -5,6 +5,7 @@
 -- Leypoint !pos -200 -8.5 80 51
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OLDUUM)
 
 quest.reward =

@@ -7,6 +7,7 @@
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST)
 
 quest.reward =

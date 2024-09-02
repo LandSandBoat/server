@@ -5,6 +5,7 @@
 -- Raimbroy : !pos -141 -3 34.6 230
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_SWEETEST_THINGS)
 
 quest.reward =

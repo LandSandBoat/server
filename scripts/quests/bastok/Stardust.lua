@@ -6,6 +6,7 @@
 -- qm1     : !pos 238.524 2.661 -148.784 103
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.STARDUST)
 
 quest.reward =

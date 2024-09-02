@@ -8,6 +8,7 @@
 local foretID = zones[xi.zone.FORET_DE_HENNETIEL]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.IM_ON_A_BOAT)
 
 quest.reward =

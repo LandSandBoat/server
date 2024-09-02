@@ -8,6 +8,7 @@
 local lufaiseID = zones[xi.zone.LUFAISE_MEADOWS]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.A_HARD_DAYS_KNIGHT)
 
 quest.reward =

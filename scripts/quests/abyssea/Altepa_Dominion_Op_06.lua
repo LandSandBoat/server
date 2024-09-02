@@ -5,6 +5,7 @@
 -- Dominion Sergeant (Volker's Camp)
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DOMINION_OP_06_ALTEPA)
 
 quest.reward = {}

@@ -5,6 +5,7 @@
 -- Keshab-Menjab : !pos -15.6 -8 52 249
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.RECYCLING_RODS)
 
 quest.reward =

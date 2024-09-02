@@ -11,6 +11,7 @@
 -- qm0                   - !pos -141 1 -9 99
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_LOST_BOOK)
 
 quest.reward =

@@ -4,6 +4,7 @@
 -- !addquest 8 163
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)
 
 quest.reward = {}

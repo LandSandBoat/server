@@ -5,6 +5,7 @@
 -- Ilumida : !pos -75 -1 58 244
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CANDLELIGHT_VIGIL)
 
 quest.reward =

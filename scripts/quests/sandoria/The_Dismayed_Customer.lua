@@ -8,6 +8,7 @@
 -- qm3      : !pos -399 -10 -438 100
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
 
 quest.reward =

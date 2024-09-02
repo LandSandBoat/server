@@ -9,6 +9,7 @@
 -- Saldinor       : !pos -338.882 -1.000 -308.252 258
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.IT_SETS_MY_HEART_AFLUTTER)
 
 -- NOTE:

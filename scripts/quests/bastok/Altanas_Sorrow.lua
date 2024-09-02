@@ -7,6 +7,7 @@
 -- Eperdur : !pos 129 -6 96 231
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.ALTANAS_SORROW)
 
 quest.reward =

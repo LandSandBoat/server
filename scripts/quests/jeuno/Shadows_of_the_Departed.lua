@@ -9,6 +9,7 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
 
 quest.reward = {}

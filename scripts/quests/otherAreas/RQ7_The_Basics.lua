@@ -9,6 +9,7 @@
 local selbinaID = zones[xi.zone.SELBINA]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASICS)
 
 quest.reward =

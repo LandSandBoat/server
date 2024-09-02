@@ -5,6 +5,7 @@
 -- Carmelo : !pos -146.476 -7.48 -10.889 236
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
 
 quest.reward =

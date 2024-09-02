@@ -9,6 +9,7 @@
 local mamookID = zones[xi.zone.MAMOOK]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_PRINCE_AND_THE_HOPPER)
 
 local spawnedMobs =

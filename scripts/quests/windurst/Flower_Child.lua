@@ -7,6 +7,7 @@
 local windurstWallsID = zones[xi.zone.WINDURST_WALLS]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.FLOWER_CHILD)
 
 quest.reward =

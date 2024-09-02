@@ -3,6 +3,7 @@
 -- Angelica !pos -64 -9.25 -9 238
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
 
 local poseItems =

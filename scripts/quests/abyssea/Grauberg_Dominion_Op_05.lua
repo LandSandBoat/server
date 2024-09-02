@@ -5,6 +5,7 @@
 -- Dominion Sergeant : !pos -15.513 0.64 -482.04 254
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DOMINION_OP_05_GRAUBERG)
 
 quest.reward = {}

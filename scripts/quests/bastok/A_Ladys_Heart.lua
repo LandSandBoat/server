@@ -7,6 +7,7 @@
 local portBastokID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.A_LADYS_HEART)
 
 quest.reward =

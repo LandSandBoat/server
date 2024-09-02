@@ -5,6 +5,7 @@
 -- Hariga-Origa : !pos -62 -6 105 238
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONES_RECORD)
 
 quest.reward =

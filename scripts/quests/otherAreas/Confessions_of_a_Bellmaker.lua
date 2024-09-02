@@ -5,6 +5,7 @@
 -- Mevreauche !pos -193 11 148 231
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.CONFESSIONS_OF_A_BELLMAKER)
 
 quest.reward =

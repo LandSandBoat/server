@@ -6,6 +6,7 @@
 -- Guilerme : !pos -4.5 0 99 231
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER)
 
 quest.reward =

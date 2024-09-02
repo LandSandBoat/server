@@ -5,6 +5,7 @@
 -- Unlucky Rat : -59.724 1.999 30.179 237
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
 
 quest.reward =

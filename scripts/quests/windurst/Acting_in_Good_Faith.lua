@@ -9,6 +9,7 @@
 local eldiemeID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ACTING_IN_GOOD_FAITH)
 
 quest.reward =

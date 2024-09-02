@@ -6,6 +6,7 @@
 -- Monument : !pos 300 -62.803 498.2 106
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL)
 
 quest.reward =

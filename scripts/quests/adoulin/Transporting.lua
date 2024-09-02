@@ -9,6 +9,7 @@
 local ralaID = zones[xi.zone.RALA_WATERWAYS]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.TRANSPORTING)
 
 quest.reward =

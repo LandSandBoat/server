@@ -11,6 +11,7 @@ local onzozoID  = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 local valkurmID = zones[xi.zone.VALKURM_DUNES]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI)
 
 quest.reward =

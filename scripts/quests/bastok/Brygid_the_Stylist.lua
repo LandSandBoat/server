@@ -5,6 +5,7 @@
 -- Brygid : !pos -90 -4 -108 235
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST)
 
 quest.reward =
