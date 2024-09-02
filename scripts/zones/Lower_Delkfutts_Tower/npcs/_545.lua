@@ -3,6 +3,7 @@
 --  NPC: Cermet Door
 -- Notes: Involved in Missions: THREE_PATHS
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

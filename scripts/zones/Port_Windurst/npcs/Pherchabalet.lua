@@ -3,6 +3,7 @@
 --  NPC: Pherchabalet
 -- !pos 34.683 -5.999 137.447 240
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

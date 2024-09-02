@@ -2,6 +2,7 @@
 -- Area: The Shrine of Ru'Avitau
 --  NPC: Treasure Casket
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

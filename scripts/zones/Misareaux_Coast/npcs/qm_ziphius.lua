@@ -11,6 +11,7 @@
 -----------------------------------
 local misareauxGlobal = require('scripts/zones/Misareaux_Coast/globals')
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- Area: Lower Jeuno
 --  NPC: Omer
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

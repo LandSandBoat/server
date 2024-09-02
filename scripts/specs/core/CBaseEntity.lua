@@ -2687,9 +2687,29 @@ end
 ---@param effectFlag integer?
 ---@param silent boolean?
 ---@return boolean
----@overload fun(effectID: integer, effectIcon: integer, power: number, tick: number, duration: number, silent: boolean): boolean
----@overload fun(effectID: integer, effectIcon: integer, power: number, tick: number, duration: number, subType: integer, subPower: integer, silent: boolean): boolean
 function CBaseEntity:addStatusEffectEx(effectID, effectIcon, power, tick, duration, subType, subPower, tier, effectFlag, silent)
+end
+
+---@param effectID integer
+---@param effectIcon integer
+---@param power number
+---@param tick number
+---@param duration number
+---@param silent boolean?
+---@return boolean
+function CBaseEntity:addStatusEffectEx(effectID, effectIcon, power, tick, duration, silent)
+end
+
+---@param effectID integer
+---@param effectIcon integer
+---@param power number
+---@param tick number
+---@param duration number
+---@param subType integer
+---@param subPower integer
+---@param silent boolean?
+---@return boolean
+function CBaseEntity:addStatusEffectEx(effectID, effectIcon, power, tick, duration, subType, subPower, silent)
 end
 
 ---@nodiscard

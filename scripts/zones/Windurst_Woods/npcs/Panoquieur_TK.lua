@@ -3,6 +3,7 @@
 --  NPC: Panoquieur, T.K.
 -- !pos -60 0 -31 241
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local guardNation = xi.nation.SANDORIA

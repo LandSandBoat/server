@@ -3,6 +3,7 @@
 --  NPC: _0q1 (Sewer Entrance)
 -- !pos 28 -12 44 26
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

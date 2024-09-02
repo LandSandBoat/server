@@ -2,6 +2,7 @@
 -- Area: Port Windurst
 --  NPC: Seburoa-Mabilua
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

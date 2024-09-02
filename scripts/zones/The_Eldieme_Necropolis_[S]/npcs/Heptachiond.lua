@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: REQUIEM_FOR_THE_DEPARTED
 -- !pos 256 -32 20 175
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

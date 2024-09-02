@@ -2,6 +2,7 @@
 -- Area: The_Shrouded_Maw
 --  NPC: MementoCircle
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 --  NPC: Icoua
 -- !pos 87.719 -1 9.256 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

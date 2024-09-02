@@ -6,6 +6,7 @@
 -----------------------------------
 local nsandyID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

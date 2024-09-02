@@ -5,6 +5,7 @@
 -- Involved in Quests: Beat Around the Bushin
 -- !pos -175 2 -135 235
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

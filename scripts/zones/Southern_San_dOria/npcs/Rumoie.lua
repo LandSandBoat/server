@@ -4,6 +4,7 @@
 -- Type: Map Marker NPC
 -- !pos 149.696 -2.000 151.631 230
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

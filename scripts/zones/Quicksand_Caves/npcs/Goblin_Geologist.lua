@@ -4,6 +4,7 @@
 -- Type: Mission
 -- !pos -737.000 -11.125 -550.000 208
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

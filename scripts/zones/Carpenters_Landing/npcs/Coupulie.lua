@@ -3,6 +3,7 @@
 --  NPC: Coupulie
 -- !pos -313.585 -3.628 490.944 2
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 --  NPC: Dehn Harzhapan
 -- !pos -7.974 -7 152.633 240
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

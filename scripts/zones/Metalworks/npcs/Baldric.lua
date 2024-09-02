@@ -3,6 +3,7 @@
 --  NPC: Baldric
 -- !pos -50.858 1.777 -31.141 237
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

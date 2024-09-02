@@ -4,6 +4,7 @@
 -- Type: Crystal Strage NPC
 -- !pos -117.250 -2.000 60.890 238
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local triggerEvent = 1098

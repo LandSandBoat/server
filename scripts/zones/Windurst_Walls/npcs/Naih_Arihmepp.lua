@@ -3,6 +3,7 @@
 --  NPC: Naih Arihmepp
 -- !pos -64.578 -13.465 202.147 239
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

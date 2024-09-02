@@ -3,6 +3,7 @@
 --  NPC: ??? (qm6)
 -- Note: Spawns Animated Dagger
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

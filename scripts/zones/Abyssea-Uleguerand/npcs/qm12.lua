@@ -4,6 +4,7 @@
 -- Spawns Apademak
 -- !pos -332 -155 361 253
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,6 +4,7 @@
 -- Dynamis-Xarcabard Enter
 -- !pos 570 0 -272 112
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

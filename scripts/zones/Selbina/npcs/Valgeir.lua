@@ -6,6 +6,7 @@
 -- Used in: scripts/quests/otherAreas/Expertise.lua
 -- Used in: scripts/quests/otherAreas/The_Basics.lua
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

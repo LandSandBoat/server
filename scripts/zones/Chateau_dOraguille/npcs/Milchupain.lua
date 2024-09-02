@@ -2,6 +2,7 @@
 -- Area: Chateau d'Oraguille
 --  NPC: Milchupain
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

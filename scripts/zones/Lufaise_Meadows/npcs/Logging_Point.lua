@@ -2,6 +2,7 @@
 -- Area: Lufaise Meadows
 --  NPC: Logging Point
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

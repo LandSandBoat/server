@@ -2,6 +2,7 @@
 -- Area: Windurst Waters
 --  NPC: Rabiri-Tabiri
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

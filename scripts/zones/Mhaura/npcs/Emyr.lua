@@ -3,6 +3,7 @@
 --  NPC: Emyr
 -- !pos 45.021 -9 37.095 249
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

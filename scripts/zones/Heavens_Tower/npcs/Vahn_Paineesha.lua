@@ -3,6 +3,7 @@
 --  NPC: Vahn Paineesha
 -- !pos -2.502 -47.999 -15.083 242
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

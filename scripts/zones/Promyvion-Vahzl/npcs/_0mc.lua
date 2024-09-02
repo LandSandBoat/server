@@ -2,6 +2,7 @@
 -- Area: Promyvion vahzl
 --  NPC: Memory flux (1)
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

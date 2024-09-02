@@ -3,6 +3,7 @@
 --  NPC: _0r6 (Wooden Gate)
 -- !pos 118.625 -25.500 100.000 27
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

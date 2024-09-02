@@ -2,6 +2,7 @@
 -- Area: Chocobo_Circuit
 --  NPC: Channon
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

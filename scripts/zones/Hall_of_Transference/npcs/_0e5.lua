@@ -3,6 +3,7 @@
 --  NPC: Large Apparatus (Left) - Dem
 -- !pos -239 -41 -270 14
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

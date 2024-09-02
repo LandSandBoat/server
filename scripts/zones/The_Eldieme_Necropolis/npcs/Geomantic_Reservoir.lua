@@ -4,6 +4,7 @@
 -- Unlocks: Geo-Slip
 -- !pos 10.804 -0.031 -18.927 195
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,6 +4,7 @@
 -- Type: Leathercraft Synthesis Image Support
 -- !pos -191.050 -2.15 12.285 230
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

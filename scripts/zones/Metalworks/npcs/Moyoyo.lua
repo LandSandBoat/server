@@ -3,6 +3,7 @@
 --  NPC: Moyoyo
 -- !pos 19.508 -17 26.870 237
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

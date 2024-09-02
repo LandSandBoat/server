@@ -4,6 +4,7 @@
 -- !pos 109 0 -49 80
 -- Involved in WOTG04: The Queen of the Dance, WOTG21: Proof of Valor
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local requiredItems = 1

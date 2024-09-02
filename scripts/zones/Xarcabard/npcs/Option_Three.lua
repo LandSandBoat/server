@@ -4,6 +4,7 @@
 -- Involved in Mission: A Moogle Kupo d'Etat mission 13 - A Challenge! You Could Be a Winner
 -- !pos 1 -23 -103 112
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

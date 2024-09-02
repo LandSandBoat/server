@@ -3,6 +3,7 @@
 --  NPC: Chapal-Afal, W.W.
 -- !pos -55 -2 31 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local guardNation = xi.nation.WINDURST

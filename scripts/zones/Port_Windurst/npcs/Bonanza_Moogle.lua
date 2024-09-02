@@ -3,6 +3,7 @@
 --  NPC: Bonanza Moogle
 -- !pos -67.140 -4.055 143.542 240
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

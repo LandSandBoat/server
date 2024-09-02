@@ -3,6 +3,7 @@
 --  NPC: Greeter Moogle
 -- !pos 40.5 8.5 -242.276 236
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

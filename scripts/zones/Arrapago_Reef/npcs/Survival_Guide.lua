@@ -2,6 +2,7 @@
 -- Area: Arrapago Reef
 --  NPC: Survival Guide
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, targetNpc)

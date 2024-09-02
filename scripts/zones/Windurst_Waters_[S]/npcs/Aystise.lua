@@ -3,6 +3,7 @@
 --  NPC: Aystise
 -- !pos -69.805 -4.5 68.078 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

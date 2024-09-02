@@ -4,6 +4,7 @@
 -- Spawns Avalerion
 -- !pos 41 -16 81 216
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

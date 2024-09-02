@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

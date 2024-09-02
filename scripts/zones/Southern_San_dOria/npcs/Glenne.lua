@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: A Sentry's Peril
 -- !pos -122 -2 15 230
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

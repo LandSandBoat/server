@@ -3,6 +3,7 @@
 --  NPC: Emeige A.M.A.N.
 -- Type: Mentor Recruiter
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

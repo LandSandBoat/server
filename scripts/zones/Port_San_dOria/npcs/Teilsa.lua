@@ -5,6 +5,7 @@
 -- Only recieving Adv.Coupon and simple talk event are scrited
 -- This NPC participates in Quests and Missions
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

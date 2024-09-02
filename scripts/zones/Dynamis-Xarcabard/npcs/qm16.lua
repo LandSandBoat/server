@@ -3,6 +3,7 @@
 --  NPC: ??? (qm16)
 -- Note: Spawns Animated Staff
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

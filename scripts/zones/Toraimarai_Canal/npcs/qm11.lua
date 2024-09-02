@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.TORAIMARAI_CANAL]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

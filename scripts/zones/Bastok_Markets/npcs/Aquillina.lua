@@ -3,6 +3,7 @@
 --  NPC: Aquillina
 -- !pos -97 -5 -81 235
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

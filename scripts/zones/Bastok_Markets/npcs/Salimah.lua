@@ -3,6 +3,7 @@
 --  NPC: Salimah
 -- !pos -31.687 -6.824 -73.282 235
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

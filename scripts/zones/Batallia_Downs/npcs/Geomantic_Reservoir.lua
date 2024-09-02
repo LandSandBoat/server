@@ -4,6 +4,7 @@
 -- Unlocks: Geo-Barrier
 -- !pos -677.645 -32.000 157.981 105
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

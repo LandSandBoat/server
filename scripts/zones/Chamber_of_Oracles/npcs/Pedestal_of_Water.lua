@@ -4,6 +4,7 @@
 -- Involved in Zilart Mission 7
 -- !pos 199 -2 36 168
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

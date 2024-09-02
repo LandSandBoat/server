@@ -2,6 +2,7 @@
 -- Area: Dangruf Wadi
 --  NPC: Grounds Tome
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

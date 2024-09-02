@@ -3,6 +3,7 @@
 --  NPC: Swift
 -- !pos 2.017 -5 -1.880 250
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

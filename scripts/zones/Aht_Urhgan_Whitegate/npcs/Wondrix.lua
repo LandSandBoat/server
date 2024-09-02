@@ -3,6 +3,7 @@
 --  NPC: Wondrix
 -- Gobbie Mystery Box
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local events =

@@ -2,6 +2,7 @@
 -- Area: Alzadaal Undersea Ruins
 --  NPC: 19 (no name)
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

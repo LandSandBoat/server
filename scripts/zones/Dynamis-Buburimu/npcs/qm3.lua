@@ -3,6 +3,7 @@
 --  NPC: ??? (qm3)
 -- Note: Spawns Lost Alklha
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

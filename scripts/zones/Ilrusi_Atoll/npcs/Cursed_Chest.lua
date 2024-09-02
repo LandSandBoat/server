@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.ILRUSI_ATOLL]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -14,6 +15,11 @@ entity.onTrigger = function(player, npc)
 
     local npcID = npc:getID()
     local instance = npc:getInstance()
+
+    if not instance then
+        return
+    end
+
     local figureheadChest = instance:getProgress()
 
     if npcID == figureheadChest then

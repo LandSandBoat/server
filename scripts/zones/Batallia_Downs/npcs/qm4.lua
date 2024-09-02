@@ -2,6 +2,7 @@
 -- Area: Batallia Downs
 --  NPC: qm4 (???)
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

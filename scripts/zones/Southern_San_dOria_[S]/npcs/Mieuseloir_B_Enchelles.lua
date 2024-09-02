@@ -4,6 +4,7 @@
 -- !pos 120 0 104 80
 -- Dispatched with the Crimson Wolf Esquires in Campaign Battle
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

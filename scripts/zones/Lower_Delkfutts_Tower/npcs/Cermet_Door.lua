@@ -4,6 +4,7 @@
 -- Notes: Leads to Upper Delkfutt's Tower.
 -- !pos 524 16 20 184
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

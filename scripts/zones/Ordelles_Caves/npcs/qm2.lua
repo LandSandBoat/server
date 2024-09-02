@@ -4,6 +4,7 @@
 -- Involved in Quest: A Squire's Test II
 -- !pos -94 1 273 193
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

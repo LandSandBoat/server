@@ -4,6 +4,7 @@
 -- Type: NPC
 -- !pos -7.777 0.000 3.013 233
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

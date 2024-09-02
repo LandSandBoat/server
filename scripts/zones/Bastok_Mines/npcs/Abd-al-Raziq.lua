@@ -4,6 +4,7 @@
 -- Type: Alchemy Guild Master
 -- !pos 126.768 1.017 -0.234 234
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

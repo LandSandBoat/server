@@ -3,6 +3,7 @@
 --  NPC: Pattsu-Yabittsu
 -- Warps players to Windurst Waters
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

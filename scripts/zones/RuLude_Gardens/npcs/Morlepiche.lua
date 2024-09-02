@@ -3,6 +3,7 @@
 --  NPC: Morlepiche
 -- !pos -95 0 160 243
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local guardNation = xi.nation.OTHER

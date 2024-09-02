@@ -2,6 +2,7 @@
 -- Area: Bastok Markets
 --  NPC: Rabid Wolf, I.M.
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local guardNation = xi.nation.BASTOK

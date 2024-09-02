@@ -4,6 +4,7 @@
 -- Involved With Quest: 'Order Up'
 -- !pos 50 0 6 256
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

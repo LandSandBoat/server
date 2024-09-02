@@ -2,6 +2,7 @@
 -- Area: Abyssea-Attohwa
 --  NPC: Akta
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

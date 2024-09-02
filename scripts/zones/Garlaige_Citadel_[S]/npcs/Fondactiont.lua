@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: The Fumbling Friar
 -- !pos -95 0 196 164
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

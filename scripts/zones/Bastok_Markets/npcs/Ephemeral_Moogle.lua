@@ -4,6 +4,7 @@
 -- Type: Crystal Storage NPC
 -- !pos -185.750 -2.000 -3.860 230
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local triggerEvent = 617

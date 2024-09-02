@@ -3,6 +3,7 @@
 --  NPC: Buffalostalker Dodzbraz
 -- !pos -380.171 -24.89 -180.797 5
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

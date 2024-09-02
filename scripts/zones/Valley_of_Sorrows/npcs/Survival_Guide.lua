@@ -2,6 +2,7 @@
 -- Area: Valley of Sorrows
 --  NPC: Survival Guide
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, targetNpc)

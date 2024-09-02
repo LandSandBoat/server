@@ -2,13 +2,13 @@
 -- Area: The Shrine of Ru'Avitau
 --  NPC: Door (Blue)
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    return 0
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

@@ -3,6 +3,7 @@
 --  NPC: Bluffnix
 -- !pos -43.099 5.900 -114.788 245
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

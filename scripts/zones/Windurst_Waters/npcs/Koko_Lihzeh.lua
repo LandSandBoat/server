@@ -3,6 +3,7 @@
 --  NPC: Koko Lihzeh
 -- !pos 135 -6 162 238
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

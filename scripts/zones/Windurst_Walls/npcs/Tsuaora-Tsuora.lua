@@ -3,6 +3,7 @@
 --  NPC: Tsuaora-Tsuora
 -- !pos 71.489 -3.418 -67.809 239
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 --  NPC: Blank (TOAU-20 Cutscene, TOAU-27 Cutscene)
 -- !pos -298 36 -38 68
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

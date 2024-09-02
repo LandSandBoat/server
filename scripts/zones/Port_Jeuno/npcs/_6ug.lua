@@ -2,6 +2,7 @@
 -- Area: Port Jeuno
 --  NPC: Door: Arivals (from Windurst)
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -5,6 +5,7 @@
 -- Involved with Knot Quite There, A Manifest Problem
 -- Can be dispatched to all Sandy region Campaign Battles.
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,6 +4,7 @@
 --  Involved in Quest "The Gustaberg Tour"
 -- !pos -232.415 40.465 426.495 106
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

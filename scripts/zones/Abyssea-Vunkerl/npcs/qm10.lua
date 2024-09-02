@@ -4,6 +4,7 @@
 -- Spawns Armillaria
 -- !pos -396 -31 196 217
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

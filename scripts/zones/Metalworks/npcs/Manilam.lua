@@ -3,6 +3,7 @@
 --  NPC: Manilam
 -- !pos -57.300 -11 22.332 237
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

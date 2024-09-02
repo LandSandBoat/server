@@ -3,6 +3,7 @@
 --  NPC: Rakh Mhappyoh
 -- !pos -55.989 -4.5 48.365 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 --  NPC: Fochacha
 -- !pos 2.897 -1 -10.781 50
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

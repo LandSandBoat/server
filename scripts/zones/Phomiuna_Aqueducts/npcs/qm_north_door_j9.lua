@@ -4,6 +4,7 @@
 -- Notes: Opens north door @ J-9
 -- !pos 116.743 -24.636 27.518 27
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

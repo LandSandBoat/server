@@ -2,6 +2,7 @@
 -- Area: Windurst Waters
 --  NPC: Pulykiki
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

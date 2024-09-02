@@ -3,6 +3,7 @@
 --  NPC: Hayris
 -- !pos 45.296 -7.282 12.267 252
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

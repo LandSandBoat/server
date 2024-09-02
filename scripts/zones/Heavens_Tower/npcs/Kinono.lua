@@ -3,6 +3,7 @@
 --  NPC: Kinono
 -- !pos 9.316 -26.999 -11.200 242
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

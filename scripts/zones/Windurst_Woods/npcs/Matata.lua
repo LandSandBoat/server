@@ -4,6 +4,7 @@
 -- Involved in quest: In a Stew
 -- !pos 131 -5 -109 241
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

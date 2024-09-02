@@ -3,6 +3,7 @@
 --  NPC: Pahpe Rauulih
 -- !pos -39.740 -4.499 53.223 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

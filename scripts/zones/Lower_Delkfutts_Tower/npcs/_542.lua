@@ -5,6 +5,7 @@
 -- Bastok Mission 3.3 "Appointment to Jeuno"
 -- !pos 596 16 -19 184
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

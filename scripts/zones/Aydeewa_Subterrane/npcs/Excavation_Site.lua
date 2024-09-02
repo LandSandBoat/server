@@ -3,6 +3,7 @@
 --  NPC: Excavation Site (Olduum Ring quest)
 -- !pos 390 1 349 68
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

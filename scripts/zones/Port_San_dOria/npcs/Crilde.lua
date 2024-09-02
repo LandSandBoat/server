@@ -2,6 +2,7 @@
 -- Area: Port San d'Oria
 --  NPC: Crilde
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

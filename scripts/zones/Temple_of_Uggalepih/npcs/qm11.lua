@@ -3,6 +3,7 @@
 --  NPC: ??? (San dOria Mission 8-2)
 -- !pos -13 -17 -151 159
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

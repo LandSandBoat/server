@@ -3,6 +3,7 @@
 --  NPC: Andelain
 -- !pos 664.231 -12.849 -539.413 101
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

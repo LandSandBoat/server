@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.JUGNER_FOREST]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

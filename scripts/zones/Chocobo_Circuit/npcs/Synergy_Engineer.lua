@@ -3,6 +3,7 @@
 -- NPC: Synergy Engineer
 -- !pos -325.376 0.000 -524.698 70
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

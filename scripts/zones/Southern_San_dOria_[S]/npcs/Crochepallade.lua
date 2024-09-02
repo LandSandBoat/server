@@ -4,6 +4,7 @@
 -- !pos -46 2 -8 80
 -- Involved with Deep Cover Campaign Ops
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

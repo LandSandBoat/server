@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.PORT_JEUNO]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

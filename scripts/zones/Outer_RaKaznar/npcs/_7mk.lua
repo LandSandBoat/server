@@ -3,6 +3,7 @@
 --  NPC: ??? (_7mk) Door for Silvery Plate
 -- !pos -923 -192 -20 274
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

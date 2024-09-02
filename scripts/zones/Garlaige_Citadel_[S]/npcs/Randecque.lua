@@ -4,6 +4,7 @@
 -- !pos 61 -6 137 164
 -- Notes: Gives Red Letter required to start "Steamed Rams"
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,6 +4,7 @@
 -- Involved with Quests: 'Flavors of our Lives', 'Dont Ever Leaf Me'
 --  !pos -23 0 28 256
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

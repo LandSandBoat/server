@@ -3,6 +3,7 @@
 --  NPC: Swirling Vortex
 --  Entrance to Qufim Island
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

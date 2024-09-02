@@ -4,6 +4,7 @@
 -- Involved in quest "Full Speed Ahead"
 -- !pos -512.4 -16 207.160 105
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

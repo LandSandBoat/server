@@ -2,6 +2,7 @@
 -- Area: Upper Jeuno
 --  NPC: Balkehr
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

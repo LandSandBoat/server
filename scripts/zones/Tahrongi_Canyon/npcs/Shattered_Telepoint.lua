@@ -3,6 +3,7 @@
 --  NPC: Shattered Telepoint
 -- !pos 179 35 255 117
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

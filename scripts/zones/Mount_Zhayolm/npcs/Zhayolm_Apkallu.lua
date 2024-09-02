@@ -2,6 +2,7 @@
 -- Area: Mount Zhayolm
 --  NPO: Zhayolm Apkallu
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

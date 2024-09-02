@@ -4,6 +4,7 @@
 -- Quests: The Weight of Your Limits (Steel Cyclone WSNM "Greenman")
 -- !pos -324 1 474 121
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

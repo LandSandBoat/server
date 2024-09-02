@@ -4,6 +4,7 @@
 -- Outpost Teleporter NPC
 -- !pos 193.111 -12.999 215.638 240
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local teleporterNation = xi.nation.WINDURST

@@ -3,6 +3,7 @@
 --  NPC: Mushayra
 -- !pos -111.551 -6.999 -61.720 50
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

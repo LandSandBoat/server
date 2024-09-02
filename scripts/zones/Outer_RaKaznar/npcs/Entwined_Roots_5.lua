@@ -3,6 +3,7 @@
 --  NPC: Entwined Roots (5)
 -- !pos -460 -141 -66.807 274
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

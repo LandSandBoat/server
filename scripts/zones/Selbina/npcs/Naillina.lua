@@ -2,6 +2,7 @@
 -- Area: Selbina (248)
 --  NPC: Naillina
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

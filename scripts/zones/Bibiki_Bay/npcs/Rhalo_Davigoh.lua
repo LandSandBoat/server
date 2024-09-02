@@ -3,6 +3,7 @@
 --  NPC: Rhalo Davigoh
 -- !pos -407 -3 -419 4
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 --  NPC: Eih Lhogotan
 -- !pos -29.887 -5.999 91.042 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

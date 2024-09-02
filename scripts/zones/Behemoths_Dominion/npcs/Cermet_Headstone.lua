@@ -4,6 +4,7 @@
 -- Involved in Mission: ZM5 Headstone Pilgrimage (Lightning Headstone)
 -- !pos -74 -4 -87 127
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

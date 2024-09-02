@@ -7,6 +7,7 @@
 -- quickly earn gil. However, as this is not a legitimate concern on private servers players may
 -- complete this quest even with no fame.
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local zoneId =

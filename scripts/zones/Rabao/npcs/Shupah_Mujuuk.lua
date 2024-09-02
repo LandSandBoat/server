@@ -4,6 +4,7 @@
 -- Title Change NPC
 -- !pos 12 8 20 247
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local eventId = 1011

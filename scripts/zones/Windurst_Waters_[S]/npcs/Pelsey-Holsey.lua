@@ -3,6 +3,7 @@
 --  NPC: Pelsey-Holsey
 -- !pos 119.755 -4.5 209.754 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

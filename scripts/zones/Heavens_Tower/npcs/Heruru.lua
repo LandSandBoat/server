@@ -3,6 +3,7 @@
 --  NPC: Heruru
 -- !pos 2.321 -26.5 4.641 242
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

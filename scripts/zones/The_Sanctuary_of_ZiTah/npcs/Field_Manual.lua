@@ -2,6 +2,7 @@
 -- Field Manual
 -- Area: The Sanctuary of Zi'Tah
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

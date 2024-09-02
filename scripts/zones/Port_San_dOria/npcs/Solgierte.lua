@@ -2,6 +2,7 @@
 -- Area: Port San d'Oria
 --  NPC: Solgierte
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,6 +4,7 @@
 -- Spawns Amhuluk
 -- !pos 0 -16 -50 216
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

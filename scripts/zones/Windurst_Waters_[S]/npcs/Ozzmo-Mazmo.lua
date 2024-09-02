@@ -3,6 +3,7 @@
 --  NPC: Ozzmo-Mazmo
 -- !pos -61.677 -13.311 106.400 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

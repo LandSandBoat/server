@@ -4,6 +4,7 @@
 -- Involved In Quest: Making Headlines, Riding on the Clouds
 -- !pos -246 -5 -308 238
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
