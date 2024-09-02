@@ -2,6 +2,7 @@
 -- Area: Garlaige Citadel (164)
 --   NM: Hovering Hotpot
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

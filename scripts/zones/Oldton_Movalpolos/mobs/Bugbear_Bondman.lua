@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.OLDTON_MOVALPOLOS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local bugbearPHTable =

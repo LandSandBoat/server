@@ -5,6 +5,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/families/flan') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

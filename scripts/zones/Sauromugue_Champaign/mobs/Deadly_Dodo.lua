@@ -2,6 +2,7 @@
 -- Area: Sauromugue Champaign
 --   NM: Deadly Dodo
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,6 +2,7 @@
 -- Area: Eastern Altepa Desert
 -- NM  : Cactrot Rapido
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local pathNodes =

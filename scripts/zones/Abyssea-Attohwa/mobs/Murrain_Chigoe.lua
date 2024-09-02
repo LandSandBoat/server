@@ -3,6 +3,7 @@
 --  Mob: Murrain Chigoe
 -- Note: This mob does not need chigoe mixin
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

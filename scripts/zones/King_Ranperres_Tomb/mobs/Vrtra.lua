@@ -2,6 +2,7 @@
 -- Area: King Ranperre's Tomb
 --   NM: Vrtra
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local offsets = { 1, 3, 5, 2, 4, 6 }
@@ -49,7 +50,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDisengage = function(mob, weather)
+entity.onMobDisengage = function(mob)
     for i, offset in ipairs(offsets) do
         DespawnMob(mob:getID() + offset)
     end

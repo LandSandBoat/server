@@ -2,6 +2,7 @@
 -- Area: Gusgen Mines
 --  Mob: Mauthe Doog
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

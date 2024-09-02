@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local marquisPHTable =

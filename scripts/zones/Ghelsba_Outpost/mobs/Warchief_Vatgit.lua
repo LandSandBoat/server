@@ -3,6 +3,7 @@
 --  Mob: Warchief Vatgit
 -- Involved in Mission 2-3
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

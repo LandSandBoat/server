@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local hippolytosPHTable =

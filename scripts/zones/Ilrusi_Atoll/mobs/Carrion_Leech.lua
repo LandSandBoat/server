@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.ILRUSI_ATOLL]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -11,6 +12,11 @@ end
 
 entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
+
+    if not instance then
+        return
+    end
+
     local leechMob = GetMobByID(ID.mob.UNDEAD_LEECH, instance)
     local randVal  = math.random(1, 5)
 

@@ -2,6 +2,7 @@
 -- Area: Newton Movalpolos
 --   NM: Swashstox Beadblinker
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

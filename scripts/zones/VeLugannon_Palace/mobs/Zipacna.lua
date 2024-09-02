@@ -2,6 +2,7 @@
 -- Area: VeLugannon Palace
 --  Mob: Zipacna
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local pathNodes =

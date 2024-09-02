@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 -- TODO: Allegedly has a 12 hp/sec regen.  Determine if true, and add to onMobInitialize if so.
@@ -84,8 +85,10 @@ entity.onMobFight = function(mob, target)
         respawnTime <= os.time()
     then
         local battlefield = mob:getBattlefield()
-        battlefield:setLocalVar('petRespawnGK', 0)
-        spawnArkAngelPet(mob, target)
+        if battlefield then
+            battlefield:setLocalVar('petRespawnGK', 0)
+            spawnArkAngelPet(mob, target)
+        end
     end
 end
 

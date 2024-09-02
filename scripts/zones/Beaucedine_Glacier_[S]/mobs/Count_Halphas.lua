@@ -1,6 +1,7 @@
 -----------------------------------
 --  Count Halphas (WotG 19)
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

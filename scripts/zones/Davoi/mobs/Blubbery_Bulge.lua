@@ -3,6 +3,7 @@
 --   NM: Blubbery Bulge
 -- Involved in Quest: The Miraculous Dale
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

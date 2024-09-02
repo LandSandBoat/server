@@ -4,6 +4,7 @@
 -- Involved in Quests: Borghertz's Hands (AF Hands, Many job)
 -- !pos 63 -24 21 161
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

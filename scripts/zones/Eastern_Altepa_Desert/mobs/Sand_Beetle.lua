@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.EASTERN_ALTEPA_DESERT]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local donnergugiPHTable =

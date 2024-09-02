@@ -2,6 +2,7 @@
 -- Area: LaLoff Amphitheater
 --  Mob: Ark Angel's Mandragora
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 -- TODO: Determine spell list and behavior.  Potentially includes Breakga and Bindga, unless they're TP moves.

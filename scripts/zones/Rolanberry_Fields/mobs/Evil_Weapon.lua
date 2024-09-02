@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.ROLANBERRY_FIELDS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local eldritchPHTable =

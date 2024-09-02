@@ -2,6 +2,7 @@
 -- Area: Apollyon NE
 --   NM: Goobbue_Harvester
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

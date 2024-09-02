@@ -3,6 +3,7 @@
 -- Area: Nyzul Isle
 -- Info: NM
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

@@ -3,6 +3,7 @@
 --   NM: Medium Box
 -- BCNM: Treasures and Tribulations
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)

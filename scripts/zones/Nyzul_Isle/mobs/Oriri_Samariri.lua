@@ -3,6 +3,7 @@
 -- Area: Nyzul Isle
 -- Info: Enemy Leader
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -10,6 +11,10 @@ entity.onMobDeath = function(mob, player, optParams)
         xi.nyzul.spawnChest(mob, player)
         xi.nyzul.enemyLeaderKill(mob)
         local instance = mob:getInstance()
+        if not instance then
+            return
+        end
+
         local chars    = instance:getChars()
 
         for _, entities in ipairs(chars) do

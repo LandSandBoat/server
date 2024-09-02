@@ -2,6 +2,7 @@
 -- Area: Bibiki Bay
 --  Mob: Shen
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local function enterShell(mob)
@@ -93,6 +94,11 @@ end
 
 entity.onSpellPrecast = function(mob, spell)
     local target = mob:getTarget()
+
+    if not target then
+        return
+    end
+
     local pos = target:getPos()
 
     if spell:getID() == 214 then

@@ -5,6 +5,7 @@
 local ID = zones[xi.zone.XARCABARD_S]
 mixins = { require('scripts/mixins/families/amphiptere') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

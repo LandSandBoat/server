@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/families/gears') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)

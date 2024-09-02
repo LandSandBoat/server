@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local keeperPHTable =

@@ -2,6 +2,7 @@
 -- Area: Toraimarai Canal
 --   NM: Brazen Bones
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

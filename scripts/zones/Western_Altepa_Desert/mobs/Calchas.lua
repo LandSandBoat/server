@@ -2,6 +2,7 @@
 -- Area: Western Altepa Desert
 --   NM: Calchas
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

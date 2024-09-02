@@ -2,6 +2,7 @@
 -- Area: Labyrinth of Onzozo
 --   NM: Narasimha
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

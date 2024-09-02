@@ -6,6 +6,7 @@
 local ID = zones[xi.zone.WEST_SARUTABARUTA_S]
 mixins = { require('scripts/mixins/families/lycopodium') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local jeduahPHTable =

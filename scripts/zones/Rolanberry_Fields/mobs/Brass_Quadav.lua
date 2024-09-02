@@ -2,6 +2,7 @@
 -- Area: Rolanberry Fields
 --  Mob: Brass Quadav
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local balamPHTable =

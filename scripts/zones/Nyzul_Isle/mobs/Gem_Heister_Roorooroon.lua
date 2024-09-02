@@ -3,6 +3,7 @@
 -- Area: Nyzul Isle
 -- Info: Enemy Leader, Thief job, runs around dropping bombs
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local function pickRunPoint(mob)

@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.QUBIA_ARENA]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

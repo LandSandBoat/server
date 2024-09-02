@@ -2,6 +2,7 @@
 -- Area: Aydeewa Subterrane
 --   NM: Bluestreak Gyugyuroon
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

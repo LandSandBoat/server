@@ -2,6 +2,7 @@
 -- Area: Meriphataud Mountains
 --   NM: Daggerclaw Dracos
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

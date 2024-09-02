@@ -2,6 +2,7 @@
 -- Area: Garlaige Citadel
 --  Mob: Wingrats
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

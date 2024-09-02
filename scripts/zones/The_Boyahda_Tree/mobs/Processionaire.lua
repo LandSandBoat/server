@@ -2,6 +2,7 @@
 -- Area: The Boyahda Tree
 --  Mob: Processionaire
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

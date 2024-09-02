@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.ULEGUERAND_RANGE]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local ixtabPHTable =

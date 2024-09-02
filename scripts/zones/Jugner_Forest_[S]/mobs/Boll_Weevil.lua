@@ -2,6 +2,7 @@
 -- Area: Jugner_Forest_[S]
 --   NM: Boll Weevil
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

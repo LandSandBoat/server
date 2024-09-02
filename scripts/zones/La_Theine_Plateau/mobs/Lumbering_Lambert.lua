@@ -6,6 +6,7 @@ require('scripts/quests/tutorial')
 -----------------------------------
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local bloodtearPHTable =

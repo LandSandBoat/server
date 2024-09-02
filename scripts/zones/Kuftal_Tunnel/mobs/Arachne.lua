@@ -2,6 +2,7 @@
 -- Area: Kuftal Tunnel
 --   NM: Arachne
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

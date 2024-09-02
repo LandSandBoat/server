@@ -3,6 +3,7 @@
 --   NM: Scitalis
 -- https://www.bg-wiki.com/ffxi/Scitalis
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.CRAWLERS_NEST]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local tiphiaPHTable =

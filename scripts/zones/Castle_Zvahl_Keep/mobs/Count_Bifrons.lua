@@ -2,6 +2,7 @@
 -- Area: Castle Zvahl Keep (162)
 --  Mob: Count Bifrons
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

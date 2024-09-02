@@ -2,6 +2,7 @@
 -- Area: Xarcabard
 --  Mob: Shadow Dragon
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

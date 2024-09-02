@@ -2,6 +2,7 @@
 -- Area: Pashhow Marshlands
 --   NM: Ni'Zho Bladebender
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

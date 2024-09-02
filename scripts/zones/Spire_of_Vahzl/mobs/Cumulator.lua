@@ -2,6 +2,7 @@
 -- Area: Spire of Vahzl
 --  Mob: Cumulator
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

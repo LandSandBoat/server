@@ -2,6 +2,7 @@
 -- Area: East Ronfaure [S]
 --   NM: Myradrosh
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

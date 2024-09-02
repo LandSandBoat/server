@@ -2,6 +2,7 @@
 -- Area: Ghelsba Outpost (140)
 --  Mob: Orcish Barricader
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,6 +2,7 @@
 -- Area: Ilrusi Atoll
 --  Mob: Cursed Chest
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local function CheckForDrawnIn(centerX, centerY, centerZ, playerX, playerY, playerZ, rayon, maxRayon)

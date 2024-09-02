@@ -2,6 +2,7 @@
 -- Area: Sacrarium
 --   NM: Keremet
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobFight = function(mob, target)

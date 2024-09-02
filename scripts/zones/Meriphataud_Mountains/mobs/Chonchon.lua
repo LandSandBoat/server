@@ -2,6 +2,7 @@
 -- Area: Meriphataud Mountains
 --   NM: Chonchon
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

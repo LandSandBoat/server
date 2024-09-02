@@ -5,6 +5,7 @@
 -- Involved in Quest: The Walls of Your Mind
 -- !pos 29 16 -140 167
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

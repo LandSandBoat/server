@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local deadlyDodoPHTable =

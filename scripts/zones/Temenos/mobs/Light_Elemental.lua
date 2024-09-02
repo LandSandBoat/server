@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.TEMENOS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)

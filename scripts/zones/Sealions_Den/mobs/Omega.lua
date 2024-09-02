@@ -2,6 +2,7 @@
 -- Area: Sealions Den
 --  Mob: Omega
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -37,9 +38,6 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity
