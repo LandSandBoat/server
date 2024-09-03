@@ -1040,6 +1040,7 @@ namespace synthutils
     {
         doSynthResult(PChar);
 
+        PChar->CraftContainer->Clean();
         PChar->animation = ANIMATION_NONE;
         PChar->updatemask |= UPDATE_HP;
         PChar->pushPacket(new CCharUpdatePacket(PChar));
