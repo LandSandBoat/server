@@ -258,10 +258,8 @@ uint8 CBattleEntity::GetSpeed()
     // KIs, Gear penalties, Bolters Roll.
     float additiveMods = static_cast<float>(getMod(Mod::MOVE_SPEED_STACKABLE));
 
-    // Quickening and Mazurka. Only highest applies. Additive.
-    Mod modToUse = getMod(Mod::MOVE_SPEED_QUICKENING) > getMod(Mod::MOVE_SPEED_MAZURKA) ? Mod::MOVE_SPEED_QUICKENING : Mod::MOVE_SPEED_MAZURKA;
-
-    float effectAdditiveBonus = static_cast<float>(getMod(modToUse));
+    // Quickening and Mazurka. They share a cap. Additive.
+    float effectAdditiveBonus = std::clamp<float>(static_cast<float>(getMod(Mod::MOVE_SPEED_QUICKENING)) + static_cast<float>(getMod(Mod::MOVE_SPEED_MAZURKA)), 0.0f, 10.0f);
 
     // Flee.
     float fleeFactor = std::clamp<float>(1.0f + static_cast<float>(getMod(Mod::MOVE_SPEED_FLEE)) / 100.0f, 1.0f, 2.0f);
