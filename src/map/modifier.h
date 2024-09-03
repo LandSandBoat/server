@@ -273,7 +273,7 @@ enum class Mod
     SPELLINTERRUPT        = 168, // % Spell Interruption Rate
 
     // New movement speed modifiers.
-    MOVE_SPEED_OVERIDE        = 169,  // Modifier used to overide regular speed caps. (GM speed and Feast of Swords)
+    MOVE_SPEED_OVERRIDE       = 169,  // Modifier used to overide regular speed caps. (GM speed and Feast of Swords)
     MOVE_SPEED_STACKABLE      = 75,   // Gear movement speed penalties, flee bonus, etc.
     MOVE_SPEED_GEAR_BONUS     = 76,   // Gear movement speed bonuses. DOES NOT STACK with each other, only highest applies.
     MOVE_SPEED_WEIGHT_PENALTY = 77,   // For Gravity and curse.

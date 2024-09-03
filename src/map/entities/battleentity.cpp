@@ -255,16 +255,16 @@ uint8 CBattleEntity::GetSpeed()
         return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
     }
 
-    // KIs, Gear penalties, Bolters Roll.
+    // Gear penalties, Bolters Roll.
     float additiveMods = static_cast<float>(getMod(Mod::MOVE_SPEED_STACKABLE));
 
     // Quickening and Mazurka. They share a cap. Additive.
-    float effectAdditiveBonus = std::clamp<float>(static_cast<float>(getMod(Mod::MOVE_SPEED_QUICKENING)) + static_cast<float>(getMod(Mod::MOVE_SPEED_MAZURKA)), 0.0f, 10.0f);
+    float effectAdditiveBonus = std::clamp<float>(getMod(Mod::MOVE_SPEED_QUICKENING) + getMod(Mod::MOVE_SPEED_MAZURKA), 0.0f, 10.0f);
 
     // Flee.
     float fleeFactor = std::clamp<float>(1.0f + static_cast<float>(getMod(Mod::MOVE_SPEED_FLEE)) / 100.0f, 1.0f, 2.0f);
 
-    // Positive movement speed from gear. Only highest applies. Multiplicative to base speed.
+    // Positive movement speed from gear and from Atmas. Only highest applies. Multiplicative to base speed.
     float gearBonus = 1.0f;
 
     if (objtype == TYPE_PC)
@@ -288,9 +288,9 @@ uint8 CBattleEntity::GetSpeed()
     // TODO: Find exceptions. Add them here.
 
     // GM speed bypass.
-    if (getMod(Mod::MOVE_SPEED_OVERIDE) > 0)
+    if (getMod(Mod::MOVE_SPEED_OVERRIDE) > 0)
     {
-        outputSpeed = getMod(Mod::MOVE_SPEED_OVERIDE);
+        outputSpeed = getMod(Mod::MOVE_SPEED_OVERRIDE);
     }
 
     return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
