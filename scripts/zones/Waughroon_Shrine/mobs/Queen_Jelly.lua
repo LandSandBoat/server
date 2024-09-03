@@ -3,6 +3,7 @@
 -- Mob: Queen Jelly
 -- BCNM: Royal Jelly
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

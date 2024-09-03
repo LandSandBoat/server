@@ -2,6 +2,7 @@
 -- Area: Labyrinth of Onzozo
 --  Mob: Labyrinth Leech
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

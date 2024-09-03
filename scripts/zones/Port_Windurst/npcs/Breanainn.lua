@@ -3,6 +3,7 @@
 --  NPC: Breanainn
 -- !pos 212 -6 96 240
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- Area: Sea Serpent Grotto
 --  Mob: Mindgazer
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

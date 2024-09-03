@@ -3,6 +3,7 @@
 --  NPC: Tonberry Priest
 -- !pos 59.965 -1.01 -145.868 159
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -5,6 +5,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/families/poroggo') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -16,6 +17,10 @@ entity.onMobDeath = function(mob, player, optParams)
         xi.nyzul.spawnChest(mob, player)
         xi.nyzul.specifiedGroupKill(mob)
         local instance = mob:getInstance()
+        if not instance then
+            return
+        end
+
         local chars    = instance:getChars()
 
         for _, entities in ipairs(chars) do

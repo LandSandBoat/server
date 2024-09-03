@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.ULEGUERAND_RANGE]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 -- TODO: This logic needs to be verified, and conditions slimmed down.  Companion of Louverance is granted on completion of that path,

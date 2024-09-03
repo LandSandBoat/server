@@ -2,6 +2,7 @@
 -- Area: Behemoths Dominion
 --  Mob: Demonic Weapon
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

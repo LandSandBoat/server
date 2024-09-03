@@ -3,6 +3,7 @@
 --  NPC: Conflux Surveyor
 -- !pos 133.000 -72.738 -824.000 15
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

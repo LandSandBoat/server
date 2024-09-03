@@ -4,6 +4,7 @@
 -- Spawns Pascerpot
 -- !pos -214 -47 -593 217
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

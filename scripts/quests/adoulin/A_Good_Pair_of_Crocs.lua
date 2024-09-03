@@ -9,6 +9,7 @@
 -- Felmsy         : !pos -53.111 -0.150 88.456 257
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_GOOD_PAIR_OF_CROCS)
 
 -- NOTE:

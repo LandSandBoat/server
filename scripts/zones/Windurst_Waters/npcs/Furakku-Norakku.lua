@@ -4,6 +4,7 @@
 -- Involved in Quests: Early Bird Catches the Bookworm, Chasing Tales, Class Reunion
 -- !pos -19 -5 101 238
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

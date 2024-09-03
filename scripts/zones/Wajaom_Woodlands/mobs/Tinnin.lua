@@ -11,6 +11,7 @@ mixins =
     require('scripts/mixins/rage')
 }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

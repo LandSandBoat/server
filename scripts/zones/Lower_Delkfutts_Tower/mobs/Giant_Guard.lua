@@ -2,6 +2,7 @@
 -- Area: Lower Delkfutt's Tower
 --  Mob: Giant Guard
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

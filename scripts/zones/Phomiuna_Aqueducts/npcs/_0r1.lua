@@ -3,6 +3,7 @@
 --  NPC: _0r2 (Iron Gate)
 -- !pos -140.000 -25.500 49.000 27
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

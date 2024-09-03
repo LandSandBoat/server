@@ -4,6 +4,7 @@
 -- Type: Fields of Valor NMs
 -- !pos 400.000 -21.5 560.000 106
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

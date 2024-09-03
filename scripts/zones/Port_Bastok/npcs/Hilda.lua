@@ -3,6 +3,7 @@
 --  NPC: Hilda
 -- !pos -163 -8 13 236
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

@@ -3,6 +3,7 @@
 -- Area: Nyzul Isle
 -- Info: Enemy Leader, Only uses Frenetic Rip
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

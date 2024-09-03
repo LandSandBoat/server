@@ -3,6 +3,7 @@
 --  NPC: ??? (qm13)
 -- Note: Spawns Animated Kunai
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

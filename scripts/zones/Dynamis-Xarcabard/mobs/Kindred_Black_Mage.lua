@@ -9,6 +9,7 @@ mixins =
 }
 local ID = zones[xi.zone.DYNAMIS_XARCABARD]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

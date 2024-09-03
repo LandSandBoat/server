@@ -3,6 +3,7 @@
 --  NPC: Dilapidated Gate
 -- Note: Entrance to Misareaux Coast
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

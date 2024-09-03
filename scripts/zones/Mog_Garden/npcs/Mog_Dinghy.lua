@@ -2,6 +2,7 @@
 -- Area: Mog Dinghy
 -- !zone 280
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

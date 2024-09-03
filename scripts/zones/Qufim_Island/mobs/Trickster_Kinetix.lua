@@ -2,6 +2,7 @@
 -- Area: Qufim Island
 --   NM: Trickster Kinetix
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

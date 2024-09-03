@@ -4,6 +4,7 @@
 -- Orb Seller (BCNM)
 -- !pos -53.9 0 10.8 246
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 ---@class shamiSealItems
@@ -182,6 +183,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         then
             if
                 itemID and
+                sealCost and
                 npcUtil.giveItem(player, itemID)
             then
                 player:delSeals(sealCost, sealType)

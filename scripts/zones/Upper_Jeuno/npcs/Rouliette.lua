@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: Candle-making
 -- !pos -24 -2 11 244
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

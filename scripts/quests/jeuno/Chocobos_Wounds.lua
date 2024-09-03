@@ -8,6 +8,7 @@
 -- _6t2    : !pos -88.2 -7.65 -168.8 245
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS)
 
 quest.reward =
@@ -162,7 +163,9 @@ quest.sections =
                     quest:setVar(player, 'Timer', os.time() + 45)
                     quest:setVar(player, 'Prog', 4)
 
-                    return quest:event(99)
+                    -- TODO: This needs retail verification to confirm no zoning
+                    -- event has occurred
+                    player:startEvent(99)
                 end,
 
                 [60] = function(player, csid, option, npc)

@@ -5,6 +5,7 @@
 -- Lokpix : !pos -61.942 3.949 224.900 114
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.OPEN_SESAME)
 
 quest.reward =

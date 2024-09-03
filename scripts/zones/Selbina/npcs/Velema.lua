@@ -3,6 +3,7 @@
 --  NPC: Velema
 -- !pos 28.164 -3.947 -12.788 248
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

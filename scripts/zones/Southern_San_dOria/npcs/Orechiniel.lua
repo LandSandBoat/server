@@ -3,6 +3,7 @@
 --  NPC: Orechiniel
 -- Type: Leathercraft Adv. Synthesis Image Support
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

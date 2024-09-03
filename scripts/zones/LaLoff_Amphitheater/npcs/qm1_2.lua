@@ -3,6 +3,7 @@
 --  NPC: Shimmering Circle (BCNM Entrances)
 -- !pos -264.782 -137.313 374.516 180
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

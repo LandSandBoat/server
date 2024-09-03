@@ -4,6 +4,7 @@
 -- Involved in Quests: Trial by Fire, Trial Size Trial by Fire
 -- !pos -721 0 -598 207
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

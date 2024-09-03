@@ -2,6 +2,7 @@
 -- Area: Maze of Shakhrami
 --   NM: Lesath
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

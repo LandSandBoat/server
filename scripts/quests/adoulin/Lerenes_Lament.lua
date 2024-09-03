@@ -7,6 +7,7 @@
 local outerRaKaznarID = zones[xi.zone.OUTER_RAKAZNAR]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.LERENES_LAMENT)
 
 quest.reward =

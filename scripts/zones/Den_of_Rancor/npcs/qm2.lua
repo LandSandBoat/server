@@ -4,6 +4,7 @@
 -- Quests: Souls in Shadow (Spiral Hell WSNM "Mokumokuren")
 -- !pos 118 36 -281 160
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

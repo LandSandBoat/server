@@ -2,6 +2,7 @@
 -- Area: Gustav Tunnel
 --  Mob: Pygmytoise
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -2,6 +2,7 @@
 -- Area: Den of Rancor
 --  Mob: Puck
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

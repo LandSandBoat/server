@@ -7,6 +7,7 @@
 local portBastokID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT)
 
 quest.reward =
@@ -40,6 +41,9 @@ local wildcatNpcData =
     ['Vaghron']           = { 19, 503 }, -- !pos -39.162 -1 -92.147 234
 }
 
+---@param player CBaseEntity
+---@param npc CBaseEntity
+---@return QuestReturnType?
 local wildcatOnTrigger = function(player, npc)
     local npcData = wildcatNpcData[npc:getName()]
 

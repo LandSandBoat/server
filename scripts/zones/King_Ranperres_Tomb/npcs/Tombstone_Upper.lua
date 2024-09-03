@@ -4,6 +4,7 @@
 -- Involved in Quest: Grave Concerns
 -- !pos 1 0.1 -101 190
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

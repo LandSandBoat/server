@@ -4,6 +4,7 @@
 -- !pos -22 2 -3 80
 -- Involved in Stock and Awe, Material Storm, Search and Seizure Campaign Ops
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -9,6 +9,7 @@
 local konschtatID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
 
 quest.reward =

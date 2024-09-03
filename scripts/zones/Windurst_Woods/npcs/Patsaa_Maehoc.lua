@@ -2,6 +2,7 @@
 -- Area: Windurst Woods
 --  NPC: Patsaa Maehoc
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

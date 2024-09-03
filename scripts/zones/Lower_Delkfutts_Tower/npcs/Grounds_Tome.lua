@@ -2,6 +2,7 @@
 -- Area: Lower Delkfutt's Tower
 --  NPC: Grounds Tome
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,6 +4,7 @@
 -- Horlais Peak Burning Circle
 -- !pos -509 158 -211 139
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 --  NPC: Nivorajean
 -- !pos 15.890 -22.999 13.322 26
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -10,6 +10,7 @@
 -- Tataroon:        !pos -25.189 0 -39.022 53
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.LED_ASTRAY)
 
 quest.reward =

@@ -3,6 +3,7 @@
 --  NPC: Luto Mewrilah
 -- !pos -53 0 45 244
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -7,6 +7,7 @@ local portWindurstID = zones[xi.zone.PORT_WINDURST]
 local roMaeveID = zones[xi.zone.ROMAEVE]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ORASTERY_WOES)
 
 quest.reward =

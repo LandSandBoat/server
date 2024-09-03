@@ -8,6 +8,7 @@
 local jugnerSID = zones[xi.zone.JUGNER_FOREST_S]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON)
 
 quest.reward =

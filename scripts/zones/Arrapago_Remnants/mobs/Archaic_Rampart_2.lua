@@ -5,6 +5,7 @@
 mixins = { require('scripts/mixins/families/rampart') }
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -46,6 +47,11 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     local instance = mob:getInstance()
+
+    if not instance then
+        return
+    end
+
     if ID.mob[6].rampart1 == mob:getID() or ID.mob[6].rampart2 == mob:getID() then
         if instance:getStage() == 6 and instance:getProgress() >= 1 then
             if optParams.isKiller then

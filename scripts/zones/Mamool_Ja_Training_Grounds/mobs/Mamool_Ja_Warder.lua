@@ -5,6 +5,7 @@
 mixins = { require('scripts/mixins/weapon_break') }
 local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

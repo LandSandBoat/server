@@ -4,6 +4,7 @@
 -- Type: Outpost Vendor
 -- !pos -185 7 -63 113
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local vendorRegion  = xi.region.VOLLBOW

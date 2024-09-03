@@ -6,6 +6,7 @@
 -- Ipupu        : !pos 251.745 -5.5 35.539 115
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
 
 quest.reward =

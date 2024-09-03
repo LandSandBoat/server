@@ -5,6 +5,9 @@
 -----------------------------------
 local waughroonID = zones[xi.zone.WAUGHROON_SHRINE]
 -----------------------------------
+---@type TMobEntity
+local entity = {}
+
 local elementalSpells =
 {
     { xi.magic.spell.BURN,  xi.magic.spell.FIRE },
@@ -16,12 +19,14 @@ local elementalSpells =
     { xi.magic.spell.DIA,   xi.magic.spell.BANISH },
     { xi.magic.spell.BIO,   xi.magic.spell.DRAIN },
 }
+
 local centers =
 {
     { -177.5, 60, -142 },
     {   22.5,  0,  18 },
     {  222.5, -60, 138 },
 }
+
 local mevaList =
 {
     { xi.mod.WATER_MEVA,   xi.mod.FIRE_ABSORB },
@@ -33,8 +38,6 @@ local mevaList =
     { xi.mod.DARK_MEVA,    xi.mod.LIGHT_ABSORB },
     { xi.mod.LIGHT_MEVA,   xi.mod.DARK_ABSORB },
 }
-
-local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 40)
@@ -119,7 +122,7 @@ local function spawnQueenJelly(bfNum, target, zone)
     end
 end
 
-entity.onMobMagicPrepare = function(mob)
+entity.onMobMagicPrepare = function(mob, target, spellId)
     local element = mob:getLocalVar('mobElement')
     local spell = math.random()
 

@@ -2,6 +2,7 @@
 -- Area: Northern San d'Oria
 --  NPC: Achatere, T.K.
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local guardNation = xi.nation.SANDORIA

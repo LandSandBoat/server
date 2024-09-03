@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') } -- TODO: Is this right?
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

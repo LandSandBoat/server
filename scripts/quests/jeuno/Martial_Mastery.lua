@@ -7,6 +7,7 @@
 local ruLudeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.MARTIAL_MASTERY)
 
 quest.reward =

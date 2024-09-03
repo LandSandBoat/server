@@ -9,6 +9,7 @@
 -----------------------------------
 local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -16,8 +17,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local fertileGround    = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.FERTILE_GROUND)
-    local waywardWaypoints = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.WAYWARD_WAYPOINTS)
-    waywardWaypoints       = waywardWaypoints == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('WW_Need_Shipilolo') > 0
 
     if player:getCurrentMission(xi.mission.log_id.SOA) >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER then
         if
@@ -33,7 +32,8 @@ entity.onTrigger = function(player, npc)
             -- Progresses Quest: 'Fertile Ground'
             player:startEvent(2850)
         elseif
-            waywardWaypoints and
+            player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.WAYWARD_WAYPOINTS) == xi.questStatus.QUEST_ACCEPTED and
+            player:getCharVar('WW_Need_Shipilolo') > 0 and
             not player:hasKeyItem(xi.ki.WAYPOINT_RECALIBRATION_KIT)
         then
             -- Progresses Quest: 'Wayward Waypoints'

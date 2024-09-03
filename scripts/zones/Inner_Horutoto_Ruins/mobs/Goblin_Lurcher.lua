@@ -2,6 +2,7 @@
 -- Area: Inner Horutoto Ruins
 --  Mob: Goblin Lurcher
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

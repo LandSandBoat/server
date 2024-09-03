@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/warriors_path_taru') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -30,8 +31,13 @@ end
 
 entity.onMobFight = function(mob, target)
     local battlefield = mob:getBattlefield()
+    if not battlefield then
+        return
+    end
+
     local battletime = mob:getBattleTime()
     local changetime = mob:getLocalVar('changetime')
+
     if battlefield:getLocalVar('fireworks') == 1 then
         if battletime - changetime >= 3 then
             mob:setMagicCastingEnabled(false)

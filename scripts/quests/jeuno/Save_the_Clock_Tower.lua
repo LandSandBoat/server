@@ -5,6 +5,7 @@
 -- Derrick : !pos -32 -1 -7 245
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
 
 quest.reward =

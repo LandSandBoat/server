@@ -2,6 +2,7 @@
 -- Area: Upper Jeuno
 --  NPC: Sibila-Mobla
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

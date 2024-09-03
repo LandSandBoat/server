@@ -4,6 +4,7 @@
 -- Type: Morale Manager
 -- !pos 10.422 -2.478 24.616 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

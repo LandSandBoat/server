@@ -7,6 +7,7 @@
 local ID = zones[xi.zone.MONASTIC_CAVERN]
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

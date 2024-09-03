@@ -5,6 +5,7 @@
 -- Talib : !pos -101.133 4.649 28.803 236
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.SHADY_BUSINESS)
 
 quest.reward =

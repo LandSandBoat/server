@@ -3,6 +3,7 @@
 --  NPC: ??? divine might quest
 -- !pos -40 0 -151 178
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

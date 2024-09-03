@@ -4,6 +4,7 @@
 -- Notes: Bowl of Quadav Stew is a guaranteed steal with
 --  Quest THE_TENSHODO_SHOWDOWN active
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onSteal = function(player, target, ability, action)

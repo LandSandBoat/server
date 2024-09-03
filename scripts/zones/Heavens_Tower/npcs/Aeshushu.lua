@@ -3,6 +3,7 @@
 --  NPC: Aeshushu
 -- !pos 4.948 -26.5 -2.303 242
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

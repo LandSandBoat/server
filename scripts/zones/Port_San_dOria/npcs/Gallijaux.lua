@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.PORT_SAN_DORIA]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onSpawn = function(npc)

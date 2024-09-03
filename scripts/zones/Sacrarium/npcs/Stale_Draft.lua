@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.SACRARIUM]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local swiftBeltNMs =

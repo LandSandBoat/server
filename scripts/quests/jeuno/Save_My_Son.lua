@@ -6,6 +6,7 @@
 -- Nightflowers                  : !pos -264.775 -3.718 28.767 126
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
 
 quest.reward =

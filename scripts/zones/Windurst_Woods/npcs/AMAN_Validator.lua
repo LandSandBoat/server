@@ -3,6 +3,7 @@
 -- NPC: A.M.A.N Validator
 -- !pos 89.9 -4.2 -47.63 241
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- Area: Korroloka Tunnel
 --  Mob: Gigas Stonemason
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

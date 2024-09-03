@@ -5,6 +5,7 @@
 -- !pos 56 -1 16 212
 -- Involved in Quest: Cloak and Dagger
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

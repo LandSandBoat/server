@@ -3,6 +3,7 @@
 --  NPC: Kleh Engyumoh
 -- !pos -54.962 -4.5 57.701 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

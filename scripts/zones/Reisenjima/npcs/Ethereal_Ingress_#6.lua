@@ -3,6 +3,7 @@
 -- NPC: Ethereal Ingress #6
 -- !pos 242.5 -87.4 106 291
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

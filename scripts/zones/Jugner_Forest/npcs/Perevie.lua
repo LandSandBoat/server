@@ -4,6 +4,7 @@
 -- Type: Armor Storer
 -- !pos 5.190 -0.647 11.563 104
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

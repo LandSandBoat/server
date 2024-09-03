@@ -14,6 +14,7 @@
 local westernAdoulinID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
 
 quest.reward =

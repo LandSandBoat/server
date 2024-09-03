@@ -5,6 +5,7 @@
 -- Hanaa Punaa : !pos -179.726 -8.8 27.574 230
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.LIZARD_SKINS)
 
 quest.reward =

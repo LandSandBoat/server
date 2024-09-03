@@ -7,6 +7,7 @@
 local vunkerlID = zones[xi.zone.VUNKERL_INLET_S]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_PRICE_OF_VALOR)
 
 quest.reward =
@@ -159,6 +160,10 @@ quest.sections =
                     elseif questProgress == 5 then
                         if quest:getLocalVar(player, 'nmDefeated') == 0 then
                             local zoneObj = player:getZone()
+                            if not zoneObj then
+                                return
+                            end
+
                             local mobObj  = zoneObj:queryEntitiesByName('Madthrasher_Zradbodd')[1]
 
                             if not mobObj:isSpawned() then

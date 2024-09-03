@@ -16,11 +16,9 @@ end
 
 ---@param PLuaBaseEntity CBaseEntity
 ---@param messageID integer
----@param arg2 boolean
+---@param arg2 boolean|integer|table?
 ---@param arg3 integer?
 ---@return nil
----@overload fun(PLuaBaseEntity: CBaseEntity, messageID: integer, arg2: integer, arg3: integer?): nil
----@overload fun(PLuaBaseEntity: CBaseEntity, messageID: integer, arg2: table, arg3: integer?): nil
 function CBaseEntity:messageText(PLuaBaseEntity, messageID, arg2, arg3)
 end
 
@@ -107,11 +105,24 @@ end
 function CBaseEntity:getCharVar(varName)
 end
 
+---@nodiscard
+---@param varName string
+---@return integer
+function CBaseEntity:getVar(varName)
+end
+
 ---@param varName string
 ---@param value integer
 ---@param expiry integer?
 ---@return nil
 function CBaseEntity:setCharVar(varName, value, expiry)
+end
+
+---@param varName string
+---@param value integer
+---@param expiry integer?
+---@return nil
+function CBaseEntity:setVar(varName, value, expiry)
 end
 
 ---@param varName string
@@ -272,7 +283,7 @@ end
 function CBaseEntity:startOptionalCutscene(EventID, p0, p1, p2, p3, p4, p5, p6, p7, textTable)
 end
 
----@param ... integer?
+---@param ... integer|table?
 ---@return nil
 function CBaseEntity:updateEvent(...)
 end
@@ -1517,7 +1528,7 @@ end
 ---@nodiscard
 ---@param questLogID integer
 ---@param questID integer
----@return integer
+---@return xi.questStatus
 function CBaseEntity:getQuestStatus(questLogID, questID)
 end
 
@@ -2687,9 +2698,29 @@ end
 ---@param effectFlag integer?
 ---@param silent boolean?
 ---@return boolean
----@overload fun(effectID: integer, effectIcon: integer, power: number, tick: number, duration: number, silent: boolean): boolean
----@overload fun(effectID: integer, effectIcon: integer, power: number, tick: number, duration: number, subType: integer, subPower: integer, silent: boolean): boolean
 function CBaseEntity:addStatusEffectEx(effectID, effectIcon, power, tick, duration, subType, subPower, tier, effectFlag, silent)
+end
+
+---@param effectID integer
+---@param effectIcon integer
+---@param power number
+---@param tick number
+---@param duration number
+---@param silent boolean?
+---@return boolean
+function CBaseEntity:addStatusEffectEx(effectID, effectIcon, power, tick, duration, silent)
+end
+
+---@param effectID integer
+---@param effectIcon integer
+---@param power number
+---@param tick number
+---@param duration number
+---@param subType integer
+---@param subPower integer
+---@param silent boolean?
+---@return boolean
+function CBaseEntity:addStatusEffectEx(effectID, effectIcon, power, tick, duration, subType, subPower, silent)
 end
 
 ---@nodiscard

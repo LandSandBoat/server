@@ -11,6 +11,7 @@
 local pastBatalliaID = zones[xi.zone.BATALLIA_DOWNS_S]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.CHASING_SHADOWS)
 
 quest.reward =

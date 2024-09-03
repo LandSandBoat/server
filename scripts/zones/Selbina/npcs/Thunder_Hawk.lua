@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: The Rescue
 -- !pos -58 -10 6 248
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

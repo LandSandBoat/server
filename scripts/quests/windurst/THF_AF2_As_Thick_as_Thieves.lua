@@ -20,6 +20,7 @@ local northGustabergID = zones[xi.zone.NORTH_GUSTABERG]
 local sauromugueID     = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES)
 
 quest.reward =

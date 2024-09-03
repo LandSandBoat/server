@@ -3,6 +3,7 @@
 --  NPC: Romaa Mihgo
 -- !pos -1.967 -3 -26.337 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

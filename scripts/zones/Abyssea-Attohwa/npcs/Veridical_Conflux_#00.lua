@@ -3,6 +3,7 @@
 --  NPC: Veridical Conflux #00
 -- Aybssea Teleport NPC
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

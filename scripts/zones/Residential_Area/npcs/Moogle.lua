@@ -4,6 +4,7 @@
 -- Defunct Script - Should not be called by anything anymore
 -- Moogle scripts are in each zone, calling a function from moghouse.lua
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

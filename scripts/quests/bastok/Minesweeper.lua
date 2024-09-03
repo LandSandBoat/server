@@ -5,6 +5,7 @@
 -- Gerbaum : !pos -119.899 -3.492 -74.651 234
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.MINESWEEPER)
 
 quest.reward =

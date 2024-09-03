@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.WAUGHROON_SHRINE]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local mimicDistance = 15
@@ -65,7 +66,11 @@ entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller then
         -- This is used to increase the strength of Wild Rage as scorps die
         local bf = mob:getBattlefield()
-        -- should not have to verify because Platoon scorps are only ever in a BC
+
+        if not bf then
+            return
+        end
+
         local numScorpsDead = bf:getLocalVar('[ODS]NumScorpsDead')
         bf:setLocalVar('[ODS]NumScorpsDead', numScorpsDead + 1)
     end

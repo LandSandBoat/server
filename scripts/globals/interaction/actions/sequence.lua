@@ -4,6 +4,8 @@
 require('scripts/globals/interaction/actions/action')
 require('scripts/globals/interaction/actions/message')
 
+---@class TInteractionSequence : TInteractionAction
+---@field __nextAction any
 Sequence = Action:new(Action.Type.Sequence)
 
 -- Parse out a sequence from a table of actions.
@@ -28,6 +30,7 @@ function Sequence:new(unparsedSequence)
     local id = nil
     for _, entry in ipairs(unparsedSequence) do
         if entry.text then
+            ---@type TInteractionMessage
             local newLast = Message:new(entry.text)
             last.__nextAction = newLast
             last = newLast
@@ -47,11 +50,15 @@ function Sequence:new(unparsedSequence)
         -- Waits can be part of the other action
         if entry.wait then
             local newLast = { type = Action.Type.Wait, milliseconds = entry.wait }
+            -- TODO: Find a more elegant way to handle the inject field warnings
+            ---@diagnostic disable-next-line inject-field
             last.__nextAction = newLast
             last = newLast
         end
     end
 
+    -- TODO: Find a more elegant way to handle the inject field warnings
+    ---@diagnostic disable-next-line inject-field
     last.__nextAction = { type = Action.Type.Release }
 
     obj.id = id

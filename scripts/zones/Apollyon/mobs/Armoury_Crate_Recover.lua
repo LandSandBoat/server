@@ -2,6 +2,7 @@
 -- Area: Apollyon NW
 --  NPC: Armoury Crate (Recovery)
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

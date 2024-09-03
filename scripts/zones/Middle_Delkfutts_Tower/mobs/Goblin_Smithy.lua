@@ -2,6 +2,7 @@
 -- Area: Middle Delkfutt's Tower
 --  Mob: Goblin Smithy
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

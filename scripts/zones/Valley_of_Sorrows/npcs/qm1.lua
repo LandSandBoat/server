@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.VALLEY_OF_SORROWS]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onSpawn = function(npc)

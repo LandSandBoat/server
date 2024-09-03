@@ -2,6 +2,7 @@
 -- Area: Cape Teriggan
 --   NM: Tegmine
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

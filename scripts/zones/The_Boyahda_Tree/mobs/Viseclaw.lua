@@ -2,6 +2,7 @@
 -- Area: The Boyahda Tree
 --  Mob: Viseclaw
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

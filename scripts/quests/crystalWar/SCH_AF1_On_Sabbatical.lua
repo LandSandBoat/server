@@ -9,6 +9,7 @@
 local pashhowID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
 
 quest.reward =

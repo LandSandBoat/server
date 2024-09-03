@@ -9,6 +9,7 @@
 local southGustabergID = zones[xi.zone.SOUTH_GUSTABERG]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
 
 quest.reward =

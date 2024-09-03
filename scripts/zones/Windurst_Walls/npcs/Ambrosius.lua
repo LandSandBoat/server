@@ -4,6 +4,7 @@
 -----------------------------------
 -- Quest NPC for "The Postman Always KOs Twice"
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

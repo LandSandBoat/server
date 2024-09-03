@@ -4,6 +4,7 @@
 -- Unlocks: Geo-Frailty
 -- !pos -450.391 0.001 -0.491 261
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

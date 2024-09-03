@@ -5,6 +5,7 @@
 local ID = zones[xi.zone.VALLEY_OF_SORROWS]
 mixins = { require('scripts/mixins/rage') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

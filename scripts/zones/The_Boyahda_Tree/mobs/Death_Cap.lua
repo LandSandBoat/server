@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.THE_BOYAHDA_TREE]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local ellyllonPHTable =

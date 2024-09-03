@@ -2,6 +2,7 @@
 -- Area: Kuftal Tunnel
 --   NM: Gordov's Ghost
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -3,6 +3,7 @@
 -- Area: Nyzul Isle
 -- Info: Specified Mob Group and Eliminate all Group
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

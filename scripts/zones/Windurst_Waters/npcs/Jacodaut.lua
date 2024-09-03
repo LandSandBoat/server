@@ -4,6 +4,7 @@
 -- Type: Cooking Image Support
 -- !pos -125.890 -2.999 62.499 238
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

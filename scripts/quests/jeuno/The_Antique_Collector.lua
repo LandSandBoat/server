@@ -5,6 +5,7 @@
 -- Imasuke : !pos -165 11 94 246
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
 
 -- TODO: Quest reward has conflicting information from various resources.  Need to confirm

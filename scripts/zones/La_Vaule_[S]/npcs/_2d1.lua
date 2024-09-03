@@ -3,6 +3,7 @@
 --  NPC: _2d1 (Reinforced Gateway)
 -- !pos -114.386 -3.599 -179.804 85
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

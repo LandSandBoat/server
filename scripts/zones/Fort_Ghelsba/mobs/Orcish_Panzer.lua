@@ -4,6 +4,7 @@
 -- Note: PH for Chariotbuster Byakzak
 -- !pos 23.935 -48.474 35.489 141
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

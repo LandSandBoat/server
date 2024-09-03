@@ -4,6 +4,7 @@
 -- !pos 159.943 -72.109 -839.986 15
 -- Teleports Players to Konschatat Highlands
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

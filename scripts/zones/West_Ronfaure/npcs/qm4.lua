@@ -4,6 +4,7 @@
 -- Involved in Mission: San d'Orian Mission 7-1 (Prestige of the Papsque)
 -- !pos -695 -40 21 100
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

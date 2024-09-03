@@ -485,6 +485,12 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
         }
     }
 
+    // Duplicated from charUtils, it is theoretically possible through d/c magic to hit this block and not sendToZone
+    if (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0)
+    {
+        charutils::forceSynthCritFail("DecreaseZoneCounter", PChar);
+    }
+
     if (PChar->animation == ANIMATION_SYNTH)
     {
         PChar->CraftContainer->setQuantity(0, synthutils::SYNTHESIS_FAIL);

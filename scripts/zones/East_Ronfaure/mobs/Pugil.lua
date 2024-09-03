@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.EAST_RONFAURE]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local swamfiskPHTable =

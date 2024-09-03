@@ -3,6 +3,7 @@
 --  NPC: Dattata
 -- !pos -6.172 -26.5 5.310 242
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -5,6 +5,7 @@
 -- Raibaht : !gotoid 17748012
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TEAK_ME_TO_THE_STARS)
 
 quest.reward =
@@ -24,14 +25,17 @@ quest.sections =
 
         [xi.zone.METALWORKS] =
         {
-            onTrigger = function(player, npc)
-                local option = 0
-                if player:hasCompletedMission(xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING) then
-                    option = 2 -- additional dialogue regarding Crystal propulsion unit and hooded scientists as mentioned in cop wyrmking mission
-                end
+            ['Raibaht'] =
+            {
+                onTrigger = function(player, npc)
+                    local option = 0
+                    if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING) then
+                        option = 2 -- additional dialogue regarding Crystal propulsion unit and hooded scientists as mentioned in cop wyrmking mission
+                    end
 
-                return quest:progressEvent(864, 0, xi.item.GARHADA_TEAK_LUMBER, 0, 0, 0, 0, option)
-            end,
+                    return quest:progressEvent(864, 0, xi.item.GARHADA_TEAK_LUMBER, 0, 0, 0, 0, option)
+                end,
+            },
 
             onEventFinish =
             {

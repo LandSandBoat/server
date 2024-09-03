@@ -5,6 +5,7 @@
 -- Karl : !pos -60 0.1 -8 246
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CHILDS_PLAY)
 
 quest.reward =

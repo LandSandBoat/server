@@ -7,6 +7,7 @@ local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 local uggalepihID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION)
 
 quest.reward =

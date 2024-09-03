@@ -2,6 +2,7 @@
 -- Area: Meriphataud Mountains
 --   NM: Patripatan
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

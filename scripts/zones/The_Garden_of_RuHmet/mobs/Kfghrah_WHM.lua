@@ -2,6 +2,7 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Kf'ghrah WHM
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

@@ -3,6 +3,7 @@
 --   NM: Nommo
 -- https://www.bg-wiki.com/ffxi/Nommo
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

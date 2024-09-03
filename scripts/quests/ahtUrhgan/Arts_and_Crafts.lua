@@ -10,6 +10,7 @@
 -- Mhasbaf !pos 54 -7 11 50
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.ARTS_AND_CRAFTS)
 
 quest.reward =

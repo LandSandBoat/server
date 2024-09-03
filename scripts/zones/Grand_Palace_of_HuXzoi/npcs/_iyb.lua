@@ -3,6 +3,7 @@
 --  NPC: Particle Gate
 -- !pos 1 0.1 -320 34
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

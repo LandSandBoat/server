@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/families/marid') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

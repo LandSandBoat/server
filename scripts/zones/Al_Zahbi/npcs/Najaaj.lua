@@ -3,6 +3,7 @@
 --  NPC: Najaaj
 -- !pos 61.563 -1 36.264 48
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

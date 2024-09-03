@@ -7,6 +7,7 @@
 local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT)
 
 quest.reward =

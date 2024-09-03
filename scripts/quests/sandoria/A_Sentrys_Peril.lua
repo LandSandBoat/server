@@ -6,6 +6,7 @@
 local westRonfaureID = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_SENTRYS_PERIL)
 
 quest.reward =

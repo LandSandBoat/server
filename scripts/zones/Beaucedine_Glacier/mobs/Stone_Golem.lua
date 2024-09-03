@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.BEAUCEDINE_GLACIER]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local gargantuaPHTable =

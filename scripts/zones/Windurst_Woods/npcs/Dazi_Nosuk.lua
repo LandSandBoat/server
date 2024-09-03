@@ -2,6 +2,7 @@
 -- Area: Windurst Woods
 --  NPC: Dazi Nosuk
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

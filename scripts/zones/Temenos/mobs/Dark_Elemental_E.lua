@@ -2,6 +2,7 @@
 -- Area: Temenos Eastern Tower
 --  Mob: Dark Elemental
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

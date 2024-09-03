@@ -3,6 +3,7 @@
 --   NM: Charybdis
 -- !pos -152 48 -328 176
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

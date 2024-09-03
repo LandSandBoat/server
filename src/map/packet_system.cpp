@@ -553,18 +553,6 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
         PSession->shuttingDown = 2;
         _sql->Query("UPDATE char_stats SET zoning = 1 WHERE charid = %u", PChar->id);
         charutils::CheckEquipLogic(PChar, SCRIPT_CHANGEZONE, PChar->getZone());
-
-        if (PChar->CraftContainer->getItemsCount() > 0 && PChar->animation == ANIMATION_SYNTH)
-        {
-            // NOTE:
-            // Supposed non-losable items are reportely lost if this condition is met:
-            // https://ffxiclopedia.fandom.com/wiki/Lu_Shang%27s_Fishing_Rod
-            // The broken rod can never be lost in a normal failed synth. It will only be lost if the synth is
-            // interrupted in some way, such as by being attacked or moving to another area (e.g. ship docking).
-
-            ShowWarning("SmallPacket0x00D: %s attempting to zone in the middle of a synth, failing their synth!", PChar->getName());
-            synthutils::doSynthFail(PChar);
-        }
     }
 
     if (PChar->loc.zone != nullptr)
@@ -900,7 +888,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 return;
             }
 
-            if (PChar->m_Costume != 0 || PChar->animation == ANIMATION_SYNTH)
+            if (PChar->m_Costume != 0 || PChar->animation == ANIMATION_SYNTH || (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0))
             {
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::STANDARD));
                 return;
@@ -1594,8 +1582,9 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
             return;
         }
 
-        // If either player is crafting, don't allow the trade request
-        if (PChar->animation == ANIMATION_SYNTH || PTarget->animation == ANIMATION_SYNTH)
+        // If either player is crafting, don't allow the trade request.
+        if (PChar->animation == ANIMATION_SYNTH || (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0) ||
+            PTarget->animation == ANIMATION_SYNTH || (PTarget->CraftContainer && PTarget->CraftContainer->getItemsCount() > 0))
         {
             ShowDebug("%s trade request with %s was blocked.", PChar->getName(), PTarget->getName());
             PChar->pushPacket(new CTradeActionPacket(PTarget, 0x07));
@@ -2465,7 +2454,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    if (PChar->animation == ANIMATION_SYNTH)
+    if (PChar->animation == ANIMATION_SYNTH || (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0))
     {
         ShowWarning("SmallPacket0x04D: %s attempting to access delivery box in the middle of a synth!", PChar->getName());
         return;
@@ -5007,7 +4996,7 @@ void SmallPacket0x083(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x084(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
-    if (PChar->animation != ANIMATION_SYNTH)
+    if (PChar->animation != ANIMATION_SYNTH && (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() == 0))
     {
         uint32 quantity = data.ref<uint32>(0x04);
         uint16 itemID   = data.ref<uint16>(0x08);
@@ -5043,26 +5032,29 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
     CItem* gil   = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
     CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
 
-    if ((PItem != nullptr) && ((gil != nullptr) && gil->isType(ITEM_CURRENCY)))
+    if (PItem != nullptr && (gil != nullptr && gil->isType(ITEM_CURRENCY)))
     {
+        if (PChar->CraftContainer)
+        {
+            ShowWarning("SmallPacket0x085: Player %s trying to sell while in the middle of a synth!", PChar->getName());
+            return;
+        }
+
         if (quantity < 1 || quantity > PItem->getStackSize()) // Possible exploit
         {
-            ShowWarning("SmallPacket0x085: Player %s trying to sell invalid quantity %u of itemID %u [to VENDOR] ",
-                        PChar->getName(), quantity, PItem->getID());
+            ShowWarning("SmallPacket0x085: Player %s trying to sell invalid quantity %u of itemID %u [to VENDOR] ", PChar->getName(), quantity, PItem->getID());
             return;
         }
 
         if (PItem->isSubType(ITEM_LOCKED)) // Possible exploit
         {
-            ShowWarning("SmallPacket0x085: Player %s trying to sell %u of a LOCKED item! ID %i [to VENDOR] ",
-                        PChar->getName(), quantity, PItem->getID());
+            ShowWarning("SmallPacket0x085: Player %s trying to sell %u of a LOCKED item! ID %i [to VENDOR] ", PChar->getName(), quantity, PItem->getID());
             return;
         }
 
         if (PItem->getReserve() > 0) // Usually caused by bug during synth, trade, etc. reserving the item. We don't want such items sold in this state.
         {
-            ShowError("SmallPacket0x085: Player %s trying to sell %u of a RESERVED(%u) item! ID %i [to VENDOR] ",
-                      PChar->getName(), quantity, PItem->getReserve(), PItem->getID());
+            ShowError("SmallPacket0x085: Player %s trying to sell %u of a RESERVED(%u) item! ID %i [to VENDOR] ", PChar->getName(), quantity, PItem->getReserve(), PItem->getID());
             return;
         }
 
@@ -5093,7 +5085,7 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
 
     // If the player is already crafting, don't allow them to craft.
     // This prevents packet injection based multi-craft, or time-based exploits.
-    if (PChar->animation == ANIMATION_SYNTH)
+    if (PChar->animation == ANIMATION_SYNTH || (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0))
     {
         return;
     }
@@ -5428,7 +5420,7 @@ void SmallPacket0x0AB(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0AC(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
-    if (PChar->animation != ANIMATION_SYNTH)
+    if (PChar->animation != ANIMATION_SYNTH && (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() == 0))
     {
         if (PChar->PGuildShop != nullptr)
         {

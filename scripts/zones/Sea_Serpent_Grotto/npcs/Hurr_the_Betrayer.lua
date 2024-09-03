@@ -4,6 +4,7 @@
 -- Type: Involved in the 'Sahagin Key Quest'
 -- !pos 305.882 26.768 234.279 176
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

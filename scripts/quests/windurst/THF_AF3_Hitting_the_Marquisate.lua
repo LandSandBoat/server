@@ -18,6 +18,7 @@
 local garlaigeID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE)
 
 quest.reward =

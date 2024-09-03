@@ -2,6 +2,7 @@
 -- Area: Ranguemont Pass
 --   NM: Mucoid Mass
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

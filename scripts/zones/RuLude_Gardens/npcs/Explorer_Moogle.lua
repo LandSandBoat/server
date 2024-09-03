@@ -4,6 +4,7 @@
 -- Type: Mog Tablet
 -- !pos -5.687 8.999 -41.341 243
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

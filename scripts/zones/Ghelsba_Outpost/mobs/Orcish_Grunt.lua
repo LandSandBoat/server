@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.GHELSBA_OUTPOST]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local thousandarmPHTable =

@@ -201,7 +201,6 @@ xi.homepoint.onEventUpdate = function(player, csid, option, npc)
 
     if xi.settings.main.HOMEPOINT_TELEPORT == 1 then
         if choice >= selection.SET_LAYOUT and choice <= selection.REP_FAVORITE then
-
             local index = bit.rshift(bit.lshift(option, 8), 24) -- Ret HP #
 
             if choice == selection.ADD_FAVORITE then
@@ -230,6 +229,14 @@ xi.homepoint.onEventUpdate = function(player, csid, option, npc)
             end
 
             player:setTeleportMenu(xi.teleport.type.HOMEPOINT, favs)
+        elseif choice == selection.TELEPORT then
+            local hpIndex = bit.rshift(option, 16)
+            local origin  = player:getLocalVar('originIndex')
+
+            if not player:hasTeleport(xi.teleport.type.HOMEPOINT, hpIndex, math.floor(origin / 32)) then
+                print(string.format("Player %s tried to teleport to an HP without it's destination being unlocked", player:getName()))
+                player:release()
+            end
         end
 
         for x = 1, 3 do -- Condense arrays for event params

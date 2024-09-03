@@ -4,6 +4,7 @@
 -- Waughroon Shrine Burning Circle
 -- !pos -345 104 -260 144
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

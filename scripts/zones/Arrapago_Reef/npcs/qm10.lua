@@ -4,6 +4,7 @@
 -- Involved in quests: 'No Strings Attached'
 -- !pos 457.128 -8.249 60.795 54
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

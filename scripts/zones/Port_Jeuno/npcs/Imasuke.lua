@@ -3,6 +3,7 @@
 --  NPC: Imasuke
 -- !pos -165 11 94 246
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

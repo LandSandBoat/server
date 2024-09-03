@@ -3,6 +3,7 @@
 --  NPC: Gate Sentry
 -- !pos -265.235 -2.399 405.246 82
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

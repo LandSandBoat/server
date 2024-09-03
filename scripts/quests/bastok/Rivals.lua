@@ -7,6 +7,7 @@
 local bastokMinesID = zones[xi.zone.BASTOK_MINES]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.RIVALS)
 
 quest.reward =

@@ -3,6 +3,7 @@
 -- Machu-Kuchu
 -- Warps players to Windurst Walls
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

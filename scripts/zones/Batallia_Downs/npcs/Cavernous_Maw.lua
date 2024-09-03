@@ -4,6 +4,7 @@
 -- !pos -48 0.1 435 105
 -- Teleports Players to Batallia Downs [S]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: Sleepless Nights
 -- !pos 158 -6 17 230
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

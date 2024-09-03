@@ -2,6 +2,7 @@
 -- Area: Rolanberry Fields
 --  Mob: Death Wasp
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

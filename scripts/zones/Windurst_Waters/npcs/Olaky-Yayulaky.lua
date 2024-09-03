@@ -4,6 +4,7 @@
 -- Type: Item Depository
 -- !pos -61.247 -4.5 72.551 238
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

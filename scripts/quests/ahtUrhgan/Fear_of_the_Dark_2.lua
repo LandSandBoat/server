@@ -3,6 +3,7 @@
 -- Suldiran !pos 42 -7 -43 48
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.FEAR_OF_THE_DARK_II)
 
 quest.reward =

@@ -7,6 +7,7 @@
 -- Elfriede    : !pos 61 -15 10 248
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN)
 
 quest.reward =

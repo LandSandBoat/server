@@ -2,6 +2,7 @@
 --  MOB: Bouncing Ball
 -- Area: Nyzul Isle
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

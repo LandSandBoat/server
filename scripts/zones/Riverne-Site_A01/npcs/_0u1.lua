@@ -4,6 +4,7 @@
 -----------------------------------
 local riverneAGlobal = require('scripts/zones/Riverne-Site_A01/globals')
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

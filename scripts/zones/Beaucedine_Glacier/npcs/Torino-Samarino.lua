@@ -4,6 +4,7 @@
 -- Involved in Quests: Tuning Out
 -- !pos 105 -20 140 111
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- Area: Spire of Vahzl
 --  Mob: Procreator
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

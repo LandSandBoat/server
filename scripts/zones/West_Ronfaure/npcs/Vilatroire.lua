@@ -5,6 +5,7 @@
 -- "Advanced Teamwork"
 -- !pos -260.361 -70.999 423.420 100
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

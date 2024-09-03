@@ -5,6 +5,7 @@
 -- Starts Quests: The All-New C-2000, Legendary Plan B, The All-New C-3000
 -- Involved in quests: Lost Chick
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

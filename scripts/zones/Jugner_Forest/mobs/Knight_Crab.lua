@@ -5,6 +5,7 @@
 local ID = zones[xi.zone.JUGNER_FOREST]
 mixins = { require('scripts/mixins/rage') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

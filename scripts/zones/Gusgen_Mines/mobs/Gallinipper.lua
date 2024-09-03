@@ -2,6 +2,7 @@
 -- Area: Gusgen Mines
 --  Mob: Gallinipper
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

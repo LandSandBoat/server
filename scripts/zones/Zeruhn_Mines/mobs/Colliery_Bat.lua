@@ -2,6 +2,7 @@
 -- Area: Zeruhn Mines (172)
 --  Mob: Colliery Bat
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

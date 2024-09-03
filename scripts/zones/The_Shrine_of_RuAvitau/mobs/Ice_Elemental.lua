@@ -2,6 +2,7 @@
 -- Area: The Shrine of Ru'Avitau
 --  Mob: Ice Elemental
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -7,6 +7,7 @@ local windurstWallsID  = zones[xi.zone.WINDURST_WALLS]
 local ifritsCauldronID = zones[xi.zone.IFRITS_CAULDRON]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.BLOOD_AND_GLORY)
 
 quest.reward =

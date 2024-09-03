@@ -6,6 +6,7 @@ local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 local gardenGlobal = require('scripts/zones/The_Garden_of_RuHmet/globals')
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -60,8 +61,6 @@ entity.onMagicHit = function(caster, target, spell)
         target:setLocalVar('reflectTime', target:getBattleTime())
         target:setAnimationSub(1)
     end
-
-    return 1
 end
 
 entity.onMobDeath = function(mob, player, optParams)

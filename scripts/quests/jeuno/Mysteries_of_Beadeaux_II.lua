@@ -5,6 +5,7 @@
 -- Sattal-Mansal : !pos 40 3 -53 245
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
 
 quest.reward =

@@ -4,6 +4,7 @@
 -- Type: Standard AH Info NPC
 -- !pos 79 4 26 256
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

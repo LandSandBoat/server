@@ -4,6 +4,7 @@
 -- Quests: Bugi Soden (Blade: Ku WSNM "Megapod Megalops")
 -- !pos 110 15 162 213
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

@@ -7,6 +7,7 @@
 local shakhramiID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
 
 quest.reward =

@@ -4,6 +4,7 @@
 -- Teleports Players to Sauromugue_Champaign_S
 -- !pos 369 8 -227 120
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

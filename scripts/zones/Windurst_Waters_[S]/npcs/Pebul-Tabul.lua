@@ -3,6 +3,7 @@
 --  NPC: Pebul-Tabul
 -- !pos -68.500 -4.5 3.694 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

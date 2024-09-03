@@ -6,6 +6,7 @@
 -- Kotan-Purutan : !pos 40.32 -9 44.24 249
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY)
 
 quest.reward =
@@ -184,7 +185,7 @@ quest.sections =
                 [346] = function(player, csid, option, npc)
                     player:delQuest(quest.areaId, quest.questId)
                     player:delKeyItem(xi.ki.SMALL_BAG)
-                    quest:setVar('dueDate', 0)
+                    quest:setVar(player, 'dueDate', 0)
                     quest:setVar(player, 'Prog', 256)
                 end,
 

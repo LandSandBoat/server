@@ -4,6 +4,7 @@
 -- Involved in mission: The Lost Kingdom (TOAUM 13)
 -- !pos -389 6 -570 79
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

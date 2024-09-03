@@ -2,6 +2,7 @@
 -- Area: RuAun Gardens
 --  Mob: Eraser (Monster)
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

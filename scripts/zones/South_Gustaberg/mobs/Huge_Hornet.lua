@@ -2,6 +2,7 @@
 -- Area: South Gustaberg
 --  Mob: Huge Hornet
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

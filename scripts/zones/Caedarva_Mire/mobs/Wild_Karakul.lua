@@ -6,6 +6,7 @@
 mixins = { require('scripts/mixins/families/chigoe_pet') }
 local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local peallaidhPHTable =

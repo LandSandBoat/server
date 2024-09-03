@@ -4,6 +4,7 @@
 -- Involved in Quest: Chasing Quotas
 -- !pos -715.882, -10.75, 65.982 (105)
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

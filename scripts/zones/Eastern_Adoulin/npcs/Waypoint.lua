@@ -12,6 +12,7 @@
 -- Coronal Esplanade       : !pos 27.124 -40.15 -60.844 257
 -- Castle Gates            : !pos 95.994 -40.15 -74.541 257
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

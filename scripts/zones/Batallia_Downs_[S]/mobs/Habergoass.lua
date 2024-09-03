@@ -2,6 +2,7 @@
 -- Area: Batallia Downs [S]
 --   NM: Habergoass
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

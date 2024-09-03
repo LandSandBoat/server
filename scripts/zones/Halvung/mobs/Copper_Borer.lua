@@ -2,6 +2,7 @@
 -- Area: Halvung
 --   NM: Copper Borer
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

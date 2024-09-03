@@ -3,6 +3,7 @@
 --  Mob: Jagil
 -- Note: PH for Serra
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

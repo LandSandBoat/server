@@ -2,6 +2,7 @@
 -- Area: Windurst Waters
 --  NPC: Pia
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

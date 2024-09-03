@@ -10,6 +10,7 @@ require('scripts/quests/otherAreas/helpers')
 local selbinaID = zones[xi.zone.SELBINA]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TEST_MY_METTLE)
 
 quest.reward =
@@ -75,7 +76,7 @@ quest.sections =
                             quest:setVar(player, 'Reward', betAmount * rewardMultiplier[vanaHoursRemaining])
                             quest:begin(player)
                         else
-                            return quest:messageSpecial(selbinaID.text.DONT_HAVE_ENOUGH_GIL)
+                            player:messageSpecial(selbinaID.text.DONT_HAVE_ENOUGH_GIL)
                         end
                     end
                 end,

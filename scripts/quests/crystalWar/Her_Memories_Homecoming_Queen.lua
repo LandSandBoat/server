@@ -12,6 +12,7 @@
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_HOMECOMING_QUEEN)
 
 quest.reward =

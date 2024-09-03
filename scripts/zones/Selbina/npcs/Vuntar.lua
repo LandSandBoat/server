@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: Cargo (R)
 -- !pos 7 -2 -15 248
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

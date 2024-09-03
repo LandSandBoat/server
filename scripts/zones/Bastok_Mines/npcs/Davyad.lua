@@ -4,6 +4,7 @@
 -- Involved in Mission: Bastok 3-2
 -- !pos 83 0 30 234
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

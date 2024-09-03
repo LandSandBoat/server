@@ -4,6 +4,7 @@
 -- Type: Dynamis Vendor
 -- !pos -207.835 -0.751 -25.498 151
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

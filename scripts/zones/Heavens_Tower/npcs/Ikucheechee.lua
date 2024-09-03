@@ -3,6 +3,7 @@
 --  NPC: Ikucheechee
 -- !pos -2.661 -26.5 -5.747 242
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

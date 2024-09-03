@@ -2,6 +2,7 @@
 -- Area: East Sarutabaruta (116)
 --   NM: Sharp-Eared Ropipi
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

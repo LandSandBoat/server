@@ -5,6 +5,7 @@
 -- !pos 204.052 10.25 96.414 174
 -- Involved in Quest: The Potential Within
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

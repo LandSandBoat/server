@@ -3,6 +3,7 @@
 --  NPC: Keshab-Menjab
 -- !pos -15.727 -9.032 54.049 249
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 --  NPC: Chatarre
 -- !pos -266.850 -72.000 421.370 100
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

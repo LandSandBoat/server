@@ -5,6 +5,7 @@
 -- Mighty Fist : !pos -47 2 -30 237
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_DARKSMITH)
 
 quest.reward =

@@ -4,6 +4,7 @@
 -- Honoi-Gumoi: !pos -195 -11 -120 238
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.WILD_CARD)
 
 quest.reward =

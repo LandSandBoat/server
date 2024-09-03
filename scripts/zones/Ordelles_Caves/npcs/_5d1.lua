@@ -3,6 +3,7 @@
 --  NPC: Strange Apparatus
 -- !pos -294 28 -100 193
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

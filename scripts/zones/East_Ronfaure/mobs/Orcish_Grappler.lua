@@ -2,6 +2,7 @@
 -- Area: East Ronfaure
 --  Mob: Orcish Grappler
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

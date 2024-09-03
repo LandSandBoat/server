@@ -3,6 +3,7 @@
 --  NPC: Choyi Totlihpa
 -- !pos -58.927 -5.732 132.819 240
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

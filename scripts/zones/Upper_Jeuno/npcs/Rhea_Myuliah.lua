@@ -3,6 +3,7 @@
 --  NPC: Rhea Myuliah
 -- !pos -56.220 -1 101.805 244
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

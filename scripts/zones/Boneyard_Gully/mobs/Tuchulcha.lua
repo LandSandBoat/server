@@ -6,6 +6,7 @@
 mixins = { require('scripts/mixins/families/antlion_ambush') }
 local ID = zones[xi.zone.BONEYARD_GULLY]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local sandpitID = 276

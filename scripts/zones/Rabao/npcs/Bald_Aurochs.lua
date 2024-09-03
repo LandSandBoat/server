@@ -2,6 +2,7 @@
 -- Area: Rabao
 --  NPC: Bald Aurochs
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

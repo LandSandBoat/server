@@ -2,6 +2,7 @@
 -- Area: East Sarutabaruta (116)
 --   NM: Duke Decapod
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

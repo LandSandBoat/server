@@ -2,6 +2,7 @@
 -- Area: Qufim Island
 --  Mob: Greater Pugil
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

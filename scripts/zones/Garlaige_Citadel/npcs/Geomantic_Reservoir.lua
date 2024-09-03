@@ -4,6 +4,7 @@
 -- Unlocks: Geo-VIT
 -- !pos -83.898 5.568 139.600 200
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- Area: Abyssea - Tahrongi
 --   NM: Iratham
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobFight = function(mob, target)

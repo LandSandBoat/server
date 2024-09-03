@@ -7,6 +7,7 @@
 -----------------------------------
 local ID = zones[xi.zone.HEAVENS_TOWER]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local trustMemory = function(player)

@@ -3,6 +3,7 @@
 --  NPC: Emitt
 -- !pos -95 0 160 244
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local guardNation = xi.nation.OTHER

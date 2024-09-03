@@ -3,6 +3,7 @@
 --  NPC: Narito-Pettito
 -- !pos -52.674 -5.999 90.403 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

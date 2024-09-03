@@ -3,6 +3,7 @@
 --  NPC: Ambrotien
 -- !pos 93.419 -0.001 -57.347 230
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

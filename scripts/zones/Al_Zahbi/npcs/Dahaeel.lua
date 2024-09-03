@@ -3,6 +3,7 @@
 --  NPC: Dahaeel
 -- !pos -58.732 -6.999 68.096 48
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

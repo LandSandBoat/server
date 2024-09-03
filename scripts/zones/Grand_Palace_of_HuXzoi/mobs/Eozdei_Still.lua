@@ -5,6 +5,7 @@
 local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 mixins = { require('scripts/mixins/families/zdei') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onPath = function(mob)

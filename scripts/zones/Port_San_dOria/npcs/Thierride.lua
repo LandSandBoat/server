@@ -6,6 +6,7 @@
 -----------------------------------
 -- Starts and Finishes Quest: A Taste For Meat
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

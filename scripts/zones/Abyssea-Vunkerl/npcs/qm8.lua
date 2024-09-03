@@ -4,6 +4,7 @@
 -- Spawns Xan
 -- !pos 120 -39 -551 217
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

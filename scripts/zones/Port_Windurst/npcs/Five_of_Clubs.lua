@@ -2,6 +2,7 @@
 -- Area: Port Windurst
 --  NPC: Five of Clubs
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

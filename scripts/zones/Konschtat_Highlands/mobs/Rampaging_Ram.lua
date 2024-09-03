@@ -5,6 +5,7 @@
 local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 require('scripts/quests/tutorial')
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local steelfacePHTable =

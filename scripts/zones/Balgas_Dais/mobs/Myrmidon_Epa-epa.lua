@@ -3,6 +3,7 @@
 --  Mob: Myrmidon Epa-epa
 -- BCNM: Royal Succession
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

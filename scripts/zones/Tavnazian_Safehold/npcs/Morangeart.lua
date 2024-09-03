@@ -4,6 +4,7 @@
 -- Type: ENM Quest Activator
 -- !pos -74.308 -24.782 -28.475 26
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

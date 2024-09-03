@@ -4,6 +4,7 @@
 -- Spawns Sedna
 -- !pos 403 -31 390 217
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

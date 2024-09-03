@@ -2,6 +2,7 @@
 -- Area: Qufim Island
 -- Field Manual
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

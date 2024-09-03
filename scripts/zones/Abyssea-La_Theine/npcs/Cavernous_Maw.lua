@@ -4,6 +4,7 @@
 -- !pos -480.009, 0.000, 799.927 132
 -- Teleports Players to La Theine Plateau
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- Area: The Eldieme Necropolis
 --  Mob: Nekros Hound
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

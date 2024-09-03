@@ -5,6 +5,7 @@
 -- Involved in Quest: Old Wounds
 -- !pos -141.6 -2 450.48 208
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

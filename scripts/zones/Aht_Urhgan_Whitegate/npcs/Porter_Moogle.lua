@@ -4,6 +4,7 @@
 -- Type: Storage Moogle
 -- !pos ? ? ?  50
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local e =

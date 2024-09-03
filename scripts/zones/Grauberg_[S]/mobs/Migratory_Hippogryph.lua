@@ -3,6 +3,7 @@
 --   NM: Migratory Hippogryph
 -- Note: Spawned for quest "The Unfinished Waltz"
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

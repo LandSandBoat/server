@@ -6,6 +6,7 @@
 -- Saliyahf: !pos -60 0 65 50
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.STRIKING_A_BALANCE)
 
 local positionTable =

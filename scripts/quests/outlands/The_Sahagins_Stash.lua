@@ -6,6 +6,7 @@
 -- qm2      : !pos 295.276 27.129 213.043 176
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_STASH)
 
 quest.reward =

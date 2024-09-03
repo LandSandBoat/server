@@ -3,6 +3,7 @@
 --  NPC: Blank (Transformations Quest)
 -- !pos 529.704 0.000 649.682 72
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,6 +4,7 @@
 -- Involved in Mission: The Rescue Drill
 -- !pos -292 28 143 102
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

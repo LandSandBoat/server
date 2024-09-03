@@ -2,6 +2,7 @@
 -- Area: Windurst Waters
 --  NPC: Ramasese
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

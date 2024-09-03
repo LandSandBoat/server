@@ -3,6 +3,7 @@
 --  NPC: Fervent Horizon
 -- !pos -8 0 -61 256
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

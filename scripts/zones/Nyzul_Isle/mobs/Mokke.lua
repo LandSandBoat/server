@@ -3,6 +3,7 @@
 -- Area: Nyzul Isle
 -- Info: Enemy Leader, Only uses Abrasive Tantara
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

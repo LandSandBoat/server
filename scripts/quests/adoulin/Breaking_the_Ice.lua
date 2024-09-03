@@ -7,6 +7,7 @@
 local kamihrID = zones[xi.zone.KAMIHR_DRIFTS]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.BREAKING_THE_ICE)
 
 quest.reward =

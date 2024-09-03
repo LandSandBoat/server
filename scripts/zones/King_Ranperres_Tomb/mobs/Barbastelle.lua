@@ -2,6 +2,7 @@
 -- Area: King Ranperre's Tomb
 --   NM: Barbastelle
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

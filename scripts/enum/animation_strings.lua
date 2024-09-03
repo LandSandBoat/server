@@ -101,4 +101,24 @@ xi.animationString =
     SPECIAL_10                = 'sp10', -- Zdei vertical barriers off, etc...
     SPECIAL_20                = 'sp20', -- Zdei horizontal barriers on, etc...
     SPECIAL_30                = 'sp30', -- Zdei horizontal barriers off, etc...
+
+    -- Synergy
+    SYNERGY_COMPLETE          = 'ef40',
+    SYNERGY_FIRE_LEAK         = 'ef81',
+    SYNERGY_ICE_LEAK          = 'ef82',
+    SYNERGY_WIND_LEAK         = 'ef83',
+    SYNERGY_EARTH_LEAK        = 'ef84',
+    SYNERGY_LIGHTNING_LEAK    = 'ef85',
+    SYNERGY_WATER_LEAK        = 'ef86',
+    SYNERGY_LIGHT_LEAK        = 'ef87',
+    SYNERGY_DARK_LEAK         = 'ef88',
+    SYNERGY_FIRE_FEWELL       = 'ef91',
+    SYNERGY_ICE_FEWELL        = 'ef92',
+    SYNERGY_WIND_FEWELL       = 'ef93',
+    SYNERGY_EARTH_FEWELL      = 'ef94',
+    SYNERGY_LIGHTNING_FEWELL  = 'ef95',
+    SYNERGY_WATER_FEWELL      = 'ef96',
+    SYNERGY_LIGHT_FEWELL      = 'ef97',
+    SYNERGY_DARK_FEWELL       = 'ef98',
+    SYNERGY_STEAM             = 'efa0',
 }

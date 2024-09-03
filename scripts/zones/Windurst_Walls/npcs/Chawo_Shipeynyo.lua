@@ -3,6 +3,7 @@
 --  NPC: Chawo Shipeynyo
 -- !pos 3.593 -17 124.069 239
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

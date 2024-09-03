@@ -3,6 +3,7 @@
 --  NPC: Meret
 -- !pos 83.166 -25.082 4.633 26
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 -- [tradedItemId] = rewardItemId

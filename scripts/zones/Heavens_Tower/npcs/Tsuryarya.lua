@@ -3,6 +3,7 @@
 --  NPC: Tsuryarya
 -- !pos -0.881 -27 15.950 242
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -325,6 +325,9 @@
         "SendToJailOffline",
         "GetPlayerIDByName",
         "PlayerHasValidSession",
+
+        "GetSynergyRecipeByID",
+        "GetSynergyRecipeByTrade",
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
@@ -445,6 +448,11 @@
         "ranges": "cpp",
         "span": "cpp",
         "expected": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "cfenv": "cpp",
+        "cwctype": "cpp",
+        "scoped_allocator": "cpp",
+        "pointers": "cpp",
+        "*.inc": "cpp"
     },
 }

@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

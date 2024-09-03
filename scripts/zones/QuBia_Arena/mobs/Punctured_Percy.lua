@@ -3,6 +3,7 @@
 --  Mob: Punctured Percy
 -- BCNM: Celery
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)

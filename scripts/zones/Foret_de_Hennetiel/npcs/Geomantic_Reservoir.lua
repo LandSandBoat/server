@@ -4,6 +4,7 @@
 -- Unlocks: Geo-Gravity
 -- !pos 232.687 -0.500 152.658 262
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

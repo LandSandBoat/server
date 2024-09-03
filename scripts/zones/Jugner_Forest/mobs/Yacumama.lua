@@ -1,6 +1,7 @@
 -----------------------------------
 --  Mob: Yacumama
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -4,6 +4,7 @@
 -- Type: Room Renters
 -- !pos 118.871 -0.004 -83.916 234
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

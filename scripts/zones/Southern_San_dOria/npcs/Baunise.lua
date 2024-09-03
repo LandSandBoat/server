@@ -4,6 +4,7 @@
 -- Involved in Quest: A Knight's Test
 -- !pos -55 -8 -32 230
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

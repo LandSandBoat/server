@@ -2,6 +2,7 @@
 -- Area: Beaucedine Glacier
 --  Mob: Goblin Furrier
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

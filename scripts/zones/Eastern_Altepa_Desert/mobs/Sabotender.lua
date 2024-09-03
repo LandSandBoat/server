@@ -3,6 +3,7 @@
 -- NM  : Sabotender
 -- Notes: Set to linking in the mob_pool, to build a party with Cactro Rapido. Then linking disabled afterwards as they shouldn't link at all.
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

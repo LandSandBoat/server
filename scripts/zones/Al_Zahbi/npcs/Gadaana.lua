@@ -3,6 +3,7 @@
 --  NPC: Gadaana
 -- !pos 18.596 -1 -29.891 48
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

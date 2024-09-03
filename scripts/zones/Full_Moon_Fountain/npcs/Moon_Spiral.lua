@@ -4,6 +4,7 @@
 -- Involved in Quests: The Moonlit Path
 -- !pos -302 9 -260 170
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

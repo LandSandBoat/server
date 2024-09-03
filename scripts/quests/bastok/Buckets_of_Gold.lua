@@ -5,6 +5,7 @@
 -- Foss : !pos -283 -12 -37 235
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BUCKETS_OF_GOLD)
 
 quest.reward =

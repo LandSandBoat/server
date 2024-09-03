@@ -6,6 +6,7 @@
 mixins = { require('scripts/mixins/job_special') }
 local ID = zones[xi.zone.HALVUNG]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)

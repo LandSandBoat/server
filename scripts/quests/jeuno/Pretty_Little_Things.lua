@@ -7,6 +7,7 @@
 local portJeunoID = zones[xi.zone.PORT_JEUNO]
 -----------------------------------
 
+---@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS)
 
 quest.reward =

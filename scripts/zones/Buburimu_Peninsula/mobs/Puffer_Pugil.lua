@@ -2,6 +2,7 @@
 -- Area: Buburimu Peninsula
 --  Mob: Puffer Pugil
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

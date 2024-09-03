@@ -4,6 +4,7 @@
 -- Involved in Quest: A Sentry's Peril
 -- !pos -431 -45 343 100
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

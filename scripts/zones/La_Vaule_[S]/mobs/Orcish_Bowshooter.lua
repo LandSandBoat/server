@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.LA_VAULE_S]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local hawkeyedPHTable =

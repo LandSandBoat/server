@@ -5,6 +5,7 @@
 -- San d'Orian Mission 3.3 "Appointment to Jeuno"
 -- !pos 636 16 20 184
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
