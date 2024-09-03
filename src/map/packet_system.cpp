@@ -6807,7 +6807,7 @@ void SmallPacket0x0EA(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
 
     // Prevent sitting while crafting.
-    if (PChar->CraftContainer->getItemsCount() > 0 && PChar->animation == ANIMATION_SYNTH)
+    if (PChar->animation == ANIMATION_SYNTH || (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0))
     {
         return;
     }
