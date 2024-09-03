@@ -53,7 +53,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if player ~= nil and not player:hasTitle(xi.title.FISTULE_DRAINER) then
         player:addTitle(xi.title.FISTULE_DRAINER)
     end

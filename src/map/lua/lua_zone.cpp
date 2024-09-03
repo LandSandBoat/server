@@ -21,10 +21,12 @@
 
 #include "lua_zone.h"
 
+#include "campaign_system.h"
 #include "common/logging.h"
 
 #include "entities/charentity.h"
 #include "entities/npcentity.h"
+#include "instance.h"
 #include "lua_baseentity.h"
 #include "trigger_area.h"
 #include "utils/mobutils.h"
@@ -282,11 +284,41 @@ auto CLuaZone::getBackgroundMusicNight()
     return m_pLuaZone->GetBackgroundMusicNight();
 }
 
-sol::table CLuaZone::queryEntitiesByName(std::string const& name)
+sol::table CLuaZone::queryEntitiesByName(std::string const& name, sol::optional<CLuaInstance> maybeInstance)
 {
+    auto table = lua.create_table();
+
+    // Handle (slow) lookup if in an instance
+    // TODO: Move this routine into CInstance and memoize
+    if (maybeInstance.has_value())
+    {
+        CInstance* PInstance = (*maybeInstance).GetInstance();
+        for (auto [targid, PNpc] : PInstance->m_npcList)
+        {
+            if (PNpc->getName() == name)
+            {
+                table.add(CLuaBaseEntity(PNpc));
+            }
+        }
+
+        for (auto [targid, PMob] : PInstance->m_mobList)
+        {
+            if (PMob->getName() == name)
+            {
+                table.add(CLuaBaseEntity(PMob));
+            }
+        }
+
+        if (table.empty())
+        {
+            ShowWarning("Query for entity name: %s in instance zone: %s returned no results", name, m_pLuaZone->getName());
+        }
+
+        return table;
+    }
+
     const QueryByNameResult_t& entities = m_pLuaZone->queryEntitiesByName(name);
 
-    auto table = lua.create_table();
     for (CBaseEntity* entity : entities)
     {
         table.add(CLuaBaseEntity(entity));

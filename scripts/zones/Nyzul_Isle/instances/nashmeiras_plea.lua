@@ -59,7 +59,7 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
 
         DespawnMob(ID.mob[59].RAUBAHN, instance)
         DespawnMob(ID.mob[59].RAZFAHD, instance)
-        for i, v in pairs(chars) do
+        for _, v in pairs(chars) do
             v:startEvent(203)
             v:setPos(entryPos.x, entryPos.y, entryPos.z, entryPos.rot)
         end
@@ -74,7 +74,7 @@ end
 instanceObject.onInstanceComplete = function(instance)
     local chars = instance:getChars()
 
-    for i, v in pairs(chars) do
+    for _, v in pairs(chars) do
         if
             v:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and
             v:getMissionStatus(xi.mission.log_id.TOAU) == 1

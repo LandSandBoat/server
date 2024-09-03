@@ -5110,14 +5110,14 @@ INSERT INTO `mob_groups` VALUES (155,291,85,'Auroral_Alicorn',0,128,0,0,0,1,1,0)
 -- Everbloom_Hollow (Zone 86)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (3705,12,86,'7th_Cohors_Legionnaire',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3705,12,86,'7th_Cohors_Legionnaire',0,128,0,0,0,0,0,1);
 INSERT INTO `mob_groups` VALUES (3706,208,86,'Aragoneu_Knight',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3707,224,86,'Arch_Ahriman',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3708,756,86,'Cobra_Mercenary',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3708,756,86,'Cobra_Mercenary',0,128,0,0,0,0,0,1);
 INSERT INTO `mob_groups` VALUES (3709,1349,86,'Five_Moons',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3710,1545,86,'Giddy_Bomb',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3711,1706,86,'Goblin_Reaver',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3712,2103,86,'Iron_Ram_Knight',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3712,2103,86,'Iron_Ram_Knight',0,128,0,0,0,0,0,1);
 INSERT INTO `mob_groups` VALUES (3713,2254,86,'King_Arthro',0,128,1448,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3714,2271,86,'Knight_Crab',0,128,93,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3715,2322,86,'Lambton_Worm',0,128,1481,0,0,0,0,0);
@@ -5136,12 +5136,12 @@ INSERT INTO `mob_groups` VALUES (3727,3035,86,'Orcish_Stormer',0,128,0,0,0,0,0,0
 INSERT INTO `mob_groups` VALUES (3728,6284,86,'Orcish_Trooper',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3729,5154,86,'Orcish_Veteran',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3730,3229,86,'Pupil_Palliator_II',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3731,3387,86,'Romaa_Mihgo',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3732,3389,86,'Rongelouts_N_Distaud',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3733,3402,86,'Royal_Garrison',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3734,3403,86,'Royal_Guard',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3735,3404,86,'Royal_Infantry',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3736,3405,86,'Royal_Knight',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3731,3387,86,'Romaa_Mihgo',0,128,0,0,0,0,0,1);
+INSERT INTO `mob_groups` VALUES (3732,3389,86,'Rongelouts_N_Distaud',0,128,0,0,0,0,0,1);
+INSERT INTO `mob_groups` VALUES (3733,3402,86,'Royal_Garrison',0,128,0,0,0,0,0,1);
+INSERT INTO `mob_groups` VALUES (3734,3403,86,'Royal_Guard',0,128,0,0,0,0,0,1);
+INSERT INTO `mob_groups` VALUES (3735,3404,86,'Royal_Infantry',0,128,0,0,0,0,0,1);
+INSERT INTO `mob_groups` VALUES (3736,3405,86,'Royal_Knight',0,128,0,0,0,0,0,1);
 INSERT INTO `mob_groups` VALUES (3737,3410,86,'Ruby_Quadav',0,128,2128,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3738,3486,86,'Savage_Hound_Condottiere',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3739,3495,86,'Scarlet_Boar_Esquire',0,128,0,0,0,0,0,0);
@@ -5152,7 +5152,7 @@ INSERT INTO `mob_groups` VALUES (3743,4249,86,'Volker',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3744,6264,86,'Yagudo_Abbot',0,128,0,0,0,81,83,0);
 INSERT INTO `mob_groups` VALUES (3745,4433,86,'Yagudo_Missionary',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3746,4475,86,'Young_Behemoth',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3747,4493,86,'Zazarg',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3747,4493,86,'Zazarg',0,128,0,0,0,0,0,1);
 INSERT INTO `mob_groups` VALUES (11350,5785,86,'Fangmonger',0,128,0,12000,0,78,80,0);
 INSERT INTO `mob_groups` VALUES (11351,5786,86,'Excenmille',0,128,0,0,0,75,75,1);
 INSERT INTO `mob_groups` VALUES (11352,5787,86,'Maxcimille',0,128,0,0,0,75,75,1);

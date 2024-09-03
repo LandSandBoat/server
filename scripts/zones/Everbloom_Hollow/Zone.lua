@@ -1,5 +1,6 @@
 -----------------------------------
 -- Zone: Everbloom_Hollow
+-- !zone 86
 -----------------------------------
 local zoneObject = {}
 
@@ -9,9 +10,8 @@ end
 zoneObject.onInstanceZoneIn = function(player, instance)
     local cs = -1
 
-    if player:getInstance() == nil then
-        player:setPos(0, 0, 0, 0, 72)
-        return cs
+    if not player:getInstance() then
+        player:setPos(-34.2, -16, 58, 32, xi.zone.BATALLIA_DOWNS_S)
     end
 
     local pos = player:getPos()
@@ -33,7 +33,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 zoneObject.onInstanceLoadFailed = function()
-    return 72
+    return xi.zone.BATALLIA_DOWNS_S
 end
 
 return zoneObject

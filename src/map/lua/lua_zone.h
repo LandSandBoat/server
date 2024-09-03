@@ -70,7 +70,7 @@ public:
     void setBackgroundMusicDay(uint16 musicId);
     void setBackgroundMusicNight(uint16 musicId);
 
-    sol::table queryEntitiesByName(std::string const& name);
+    sol::table queryEntitiesByName(std::string const& name, sol::optional<CLuaInstance> maybeInstance);
 
     bool operator==(const CLuaZone& other) const
     {
