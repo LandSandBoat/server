@@ -273,14 +273,15 @@ enum class Mod
     SPELLINTERRUPT        = 168, // % Spell Interruption Rate
 
     // New movement speed modifiers.
-    MOVE_SPEED_OVERIDE        = 169, // Modifier used to overide regular speed caps. (GM speed and Feast of Swords)
-    MOVE_SPEED_STACKABLE      = 75,  // Gear movement speed penalties, flee bonus, etc.
-    MOVE_SPEED_GEAR_BONUS     = 76,  // Gear movement speed bonuses. DOES NOT STACK with each other, only highest applies.
-    MOVE_SPEED_WEIGHT_PENALTY = 77,  // For Gravity and curse.
-    MOVE_SPEED_QUICKENING     = 78,  // Jig, spreinter shoes, etc. Only highest of Mazurka OR quickening will take effect.
-    MOVE_SPEED_MAZURKA        = 79,  // Song movement speed. Only highest of Mazurka OR quickening will take effect.
+    MOVE_SPEED_OVERIDE        = 169,  // Modifier used to overide regular speed caps. (GM speed and Feast of Swords)
+    MOVE_SPEED_STACKABLE      = 75,   // Gear movement speed penalties, flee bonus, etc.
+    MOVE_SPEED_GEAR_BONUS     = 76,   // Gear movement speed bonuses. DOES NOT STACK with each other, only highest applies.
+    MOVE_SPEED_WEIGHT_PENALTY = 77,   // For Gravity and curse.
+    MOVE_SPEED_QUICKENING     = 78,   // Jig, spreinter shoes, etc. Only highest of Mazurka OR quickening will take effect.
+    MOVE_SPEED_MAZURKA        = 79,   // Song movement speed. Only highest of Mazurka OR quickening will take effect.
+    MOVE_SPEED_FLEE           = 1085, // Flee applies a separate multiplier to speed.
+    MOUNT_MOVE                = 972,  // % Mount Movement Speed
 
-    MOUNT_MOVE              = 972, // % Mount Movement Speed
     FASTCAST                = 170, // Increases Spell Cast Time (TRAIT)
     UFASTCAST               = 407, // uncapped fast cast
     CURE_CAST_TIME          = 519, // cure cast time reduction
@@ -1023,7 +1024,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1085 and onward
+    // SPARE IDs: 1086 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

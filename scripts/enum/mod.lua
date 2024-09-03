@@ -233,13 +233,17 @@ xi.mod =
     MAGIC_CRIT_DMG_INCREASE         = 563,
     HASTE_MAGIC                     = 167,
     SPELLINTERRUPT                  = 168,
-    MOVE_SPEED_OVERIDE              = 169, -- Modifier used to overide regular speed caps. (GM speed and Feast of Swords)
-    MOVE_SPEED_STACKABLE            =  75, -- Gear movement speed penalties, flee bonus, etc.
-    MOVE_SPEED_GEAR_BONUS           =  76, -- Gear movement speed bonuses. DOES NOT STACK with each other, only highest applies.
-    MOVE_SPEED_WEIGHT_PENALTY       =  77, -- For Gravity and curse.
-    MOVE_SPEED_QUICKENING           =  78, -- Jig, spreinter shoes, etc. Only highest of Mazurka OR quickening will take effect.
-    MOVE_SPEED_MAZURKA              =  79, -- Song movement speed. Only highest of Mazurka OR quickening will take effect.
-    MOUNT_MOVE                      = 972, -- % Mount Movement Speed
+
+    -- Movement speed modifiers
+    MOVE_SPEED_OVERIDE              =  169, -- Modifier used to overide regular speed caps. (GM speed and Feast of Swords)
+    MOVE_SPEED_STACKABLE            =   75, -- Gear movement speed penalties, etc.
+    MOVE_SPEED_GEAR_BONUS           =   76, -- Gear movement speed bonuses. DOES NOT STACK with each other, only highest applies.
+    MOVE_SPEED_WEIGHT_PENALTY       =   77, -- For Gravity and curse.
+    MOVE_SPEED_QUICKENING           =   78, -- Jig, spreinter shoes, etc. Only highest of Mazurka OR quickening will take effect.
+    MOVE_SPEED_MAZURKA              =   79, -- Song movement speed. Only highest of Mazurka OR quickening will take effect.
+    MOVE_SPEED_FLEE                 = 1085, -- Flee applies a separate multiplier to speed.
+    MOUNT_MOVE                      =  972, -- % Mount Movement Speed
+
     FASTCAST                        = 170,
     UFASTCAST                       = 407,
     CURE_CAST_TIME                  = 519,
