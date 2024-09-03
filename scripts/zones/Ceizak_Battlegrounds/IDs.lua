@@ -32,6 +32,11 @@ zones[xi.zone.CEIZAK_BATTLEGROUNDS] =
     },
     mob =
     {
+        UNFETTERED_TWITHERYM    = GetFirstID('Unfettered_Twitherym'),
+        SUPERNAL_CHAPULI        = GetFirstID('Supernal_Chapuli'),
+        TRANSCENDENT_SCORPION   = GetFirstID('Transcendent_Scorpion'),
+        MASTOP                  = GetFirstID('Mastop'),
+        TAXET                   = GetFirstID('Taxet'),
     },
     npc =
     {
