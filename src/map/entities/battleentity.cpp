@@ -255,27 +255,31 @@ uint8 CBattleEntity::GetSpeed()
         return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
     }
 
-    // Flee, KIs, Gear penalties, Bolters Roll.
-    float additiveMods = static_cast<float>(getMod(Mod::MOVE_SPEED_STACKABLE)) / 100.0f;
+    // KIs, Gear penalties, Bolters Roll.
+    float additiveMods = static_cast<float>(getMod(Mod::MOVE_SPEED_STACKABLE));
 
-    // Quickening and Mazurka. Only highest applies.
+    // Quickening and Mazurka. Only highest applies. Additive.
     Mod modToUse = getMod(Mod::MOVE_SPEED_QUICKENING) > getMod(Mod::MOVE_SPEED_MAZURKA) ? Mod::MOVE_SPEED_QUICKENING : Mod::MOVE_SPEED_MAZURKA;
 
-    float effectBonus = static_cast<float>(getMod(modToUse)) / 100.0f;
+    float effectAdditiveBonus = static_cast<float>(getMod(modToUse));
 
-    // Positive movement speed from gear. Only highest applies.
-    float gearBonus = 0.0f;
+    // Flee.
+    float fleeFactor = std::clamp<float>(1.0f + static_cast<float>(getMod(Mod::MOVE_SPEED_FLEE)) / 100.0f, 1.0f, 2.0f);
+
+    // Positive movement speed from gear. Only highest applies. Multiplicative to base speed.
+    float gearBonus = 1.0f;
 
     if (objtype == TYPE_PC)
     {
-        gearBonus = static_cast<float>(getMaxGearMod(Mod::MOVE_SPEED_GEAR_BONUS)) / 100.0f;
+        gearBonus = std::clamp<float>(1.0f + static_cast<float>(getMaxGearMod(Mod::MOVE_SPEED_GEAR_BONUS)) / 100.0f, 1.0f, 1.25f);
     }
 
     // Gravity and Curse. They seem additive to each other and the sum seems to be multiplicative.
-    float weightPenalties = static_cast<float>(getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY)) / 100.0f;
+    float weightPenalties = std::clamp<float>(1.0f - static_cast<float>(getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY)) / 100.0f, 0.1f, 1.0f);
 
     // We have all the modifiers needed. Calculate final speed.
-    float modifiedSpeed = static_cast<float>(baseSpeed) * std::clamp<float>(1.0f + additiveMods + effectBonus, 0.1f, 1.6f) * (1.0f + gearBonus) * std::clamp<float>(1.0f - weightPenalties, 0.1f, 1.0f);
+    // Final speed = (base speed + addtive bonuses/penalties) * flee * positive bonus from gear * weight penalties
+    float modifiedSpeed = static_cast<float>(baseSpeed + additiveMods + effectAdditiveBonus) * fleeFactor * gearBonus * weightPenalties;
 
     outputSpeed = static_cast<uint8>(modifiedSpeed);
 
