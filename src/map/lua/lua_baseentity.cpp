@@ -5481,6 +5481,11 @@ void CLuaBaseEntity::setAnimationSub(uint8 animationsub)
     }
 }
 
+void CLuaBaseEntity::setSpawnAnimation(uint8 spawnAnimation)
+{
+    m_PBaseEntity->spawnAnimation = static_cast<SPAWN_ANIMATION>(spawnAnimation);
+}
+
 /************************************************************************
  *  Function: getCallForHelpFlag()
  *  Purpose : Find out if CFH has been called on a mob.
@@ -18165,6 +18170,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setAnimation", CLuaBaseEntity::setAnimation);
     SOL_REGISTER("getAnimationSub", CLuaBaseEntity::getAnimationSub);
     SOL_REGISTER("setAnimationSub", CLuaBaseEntity::setAnimationSub);
+    SOL_REGISTER("setSpawnAnimation", CLuaBaseEntity::setSpawnAnimation);
     SOL_REGISTER("getCallForHelpFlag", CLuaBaseEntity::getCallForHelpFlag);
     SOL_REGISTER("setCallForHelpFlag", CLuaBaseEntity::setCallForHelpFlag);
     SOL_REGISTER("getCallForHelpBlocked", CLuaBaseEntity::getCallForHelpBlocked);
