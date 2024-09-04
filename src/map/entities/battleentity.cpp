@@ -256,32 +256,42 @@ uint8 CBattleEntity::GetSpeed()
     }
 
     // Gear penalties, Bolters Roll.
-    float additiveMods = static_cast<float>(getMod(Mod::MOVE_SPEED_STACKABLE));
+    uint8 additiveMods = static_cast<uint8>(getMod(Mod::MOVE_SPEED_STACKABLE));
 
-    // Quickening and Mazurka. They share a cap. Additive.
-    float effectAdditiveBonus = std::clamp<float>(getMod(Mod::MOVE_SPEED_QUICKENING) + getMod(Mod::MOVE_SPEED_MAZURKA), 0.0f, 10.0f);
+    // Gravity and Curse. They seem additive to each other and the sum seems to be multiplicative.
+    float weightFactor = std::clamp<float>(1.0f - static_cast<float>(getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY)) / 100.0f, 0.1f, 1.0f);
 
     // Flee.
     float fleeFactor = std::clamp<float>(1.0f + static_cast<float>(getMod(Mod::MOVE_SPEED_FLEE)) / 100.0f, 1.0f, 2.0f);
 
+    // Cheer KI's
+    float cheerFactor = (99.0f + static_cast<float>(getMod(Mod::MOVE_SPEED_CHEER))) / 99.0f;
+
+    // Bolter's Roll. Additive
+    uint8 boltersRollEffect = static_cast<uint8>(getMod(Mod::MOVE_SPEED_BOLTERS_ROLL));
+
     // Positive movement speed from gear and from Atmas. Only highest applies. Multiplicative to base speed.
-    float gearBonus = 1.0f;
+    float gearFactor = 1.0f;
 
     if (objtype == TYPE_PC)
     {
-        gearBonus = std::clamp<float>(1.0f + static_cast<float>(getMaxGearMod(Mod::MOVE_SPEED_GEAR_BONUS)) / 100.0f, 1.0f, 1.25f);
+        gearFactor = std::clamp<float>(1.0f + static_cast<float>(getMaxGearMod(Mod::MOVE_SPEED_GEAR_BONUS)) / 100.0f, 1.0f, 1.25f);
     }
 
-    // Gravity and Curse. They seem additive to each other and the sum seems to be multiplicative.
-    float weightPenalties = std::clamp<float>(1.0f - static_cast<float>(getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY)) / 100.0f, 0.1f, 1.0f);
+    // Quickening and Mazurka. They share a cap. Additive.
+    uint8 mazurkaQuickeningEffect = std::clamp<uint8>(getMod(Mod::MOVE_SPEED_QUICKENING) + getMod(Mod::MOVE_SPEED_MAZURKA), 0, 10);
 
     // We have all the modifiers needed. Calculate final speed.
-    // Final speed = (base speed + addtive bonuses/penalties) * flee * positive bonus from gear * weight penalties
-    float modifiedSpeed = static_cast<float>(baseSpeed + additiveMods + effectAdditiveBonus) * fleeFactor * gearBonus * weightPenalties;
+    // This MUST BE DONE IN THIS ORDER. Using uint8 data type, we use that to floor.
+    outputSpeed = baseSpeed + additiveMods;
+    outputSpeed = outputSpeed * weightFactor;
+    outputSpeed = outputSpeed * fleeFactor;
+    outputSpeed = outputSpeed * cheerFactor;
+    outputSpeed = outputSpeed + boltersRollEffect;
+    outputSpeed = outputSpeed * gearFactor;
+    outputSpeed = outputSpeed + mazurkaQuickeningEffect;
 
-    outputSpeed = static_cast<uint8>(modifiedSpeed);
-
-    // Set cap.
+    // Set cap (Default 80).
     outputSpeed = std::clamp<uint8>(outputSpeed, 0, 80 + settings::get<int8>("map.SPEED_MOD"));
 
     // Speed cap can be bypassed. Ex. Feast of swords. GM speed.
