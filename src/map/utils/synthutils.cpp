@@ -828,6 +828,8 @@ namespace synthutils
 
         if (!isRightRecipe(PChar))
         {
+            PChar->CraftContainer->Clean();
+
             return 0;
         }
 
