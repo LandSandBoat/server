@@ -7,7 +7,7 @@
 -----------------------------------
 local gugsenMinesID = zones[xi.zone.GUSGEN_MINES]
 -----------------------------------
-
+---@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
 
 quest.reward =

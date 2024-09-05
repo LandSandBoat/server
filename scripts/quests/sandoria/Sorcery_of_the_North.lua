@@ -4,7 +4,7 @@
 -- !addquest 0 83
 -- Eperdur: !pos 129 -6 96 231
 -----------------------------------
-
+---@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
 
 quest.reward =
