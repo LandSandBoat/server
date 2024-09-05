@@ -27,14 +27,11 @@ mission.sections =
 
         [xi.zone.LOWER_DELKFUTTS_TOWER] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if prevZone == xi.zone.QUFIM_ISLAND then
-                        return 22
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if prevZone == xi.zone.QUFIM_ISLAND then
+                    return 22
+                end
+            end,
 
             onEventFinish =
             {
@@ -70,12 +67,9 @@ mission.sections =
 
         [xi.zone.UPPER_JEUNO] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 2
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 2
+            end,
 
             onEventFinish =
             {

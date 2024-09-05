@@ -103,20 +103,17 @@ mission.sections =
         {
             ['Rashid'] = mission:messageSpecial(bastokMinesID.text.EXTENDED_MISSION_OFFSET + 12),
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    -- This is a continuation of event 204 from Zeruhn Mines.  Player is teleported
-                    -- here automatically, and this event will finish the sequence and complete the
-                    -- mission.
-                    if
-                        prevZone == xi.zone.ZERUHN_MINES and
-                        player:getMissionStatus(mission.areaId) == 5
-                    then
-                        return 176
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                -- This is a continuation of event 204 from Zeruhn Mines.  Player is teleported
+                -- here automatically, and this event will finish the sequence and complete the
+                -- mission.
+                if
+                    prevZone == xi.zone.ZERUHN_MINES and
+                    player:getMissionStatus(mission.areaId) == 5
+                then
+                    return 176
+                end
+            end,
 
             onEventFinish =
             {

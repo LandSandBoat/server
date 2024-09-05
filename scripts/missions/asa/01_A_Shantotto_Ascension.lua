@@ -23,17 +23,14 @@ mission.sections =
 
         [xi.zone.WINDURST_WALLS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        prevZone == xi.zone.WINDURST_WATERS or
-                        prevZone == xi.zone.WINDURST_WOODS
-                    then
-                        return 510
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    prevZone == xi.zone.WINDURST_WATERS or
+                    prevZone == xi.zone.WINDURST_WOODS
+                then
+                    return 510
+                end
+            end,
 
             onEventFinish =
             {

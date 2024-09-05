@@ -100,7 +100,7 @@ local function addHandlers(secondLevel, lookupSecondLevel, checkFunc, container)
         for _, keyName in ipairs(wrappedDefinitions) do
             if
                 secondLevelKey == keyName and
-                type(thirdLevel) == "function"
+                type(thirdLevel) == 'function'
             then
                 thirdLevel = { thirdLevel }
             end

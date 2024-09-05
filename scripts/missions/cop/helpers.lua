@@ -42,18 +42,15 @@ xi.cop.helpers.hasCompletedPromyvion = function(player, zoneId)
     return player:hasKeyItem(xi.cop.helpers.shatteredTelepointInfo[zoneId][5])
 end
 
-xi.cop.helpers.promyvionOnZoneIn =
-{
-    function(player, prevZone)
-        local missionOption = xi.mission.getVar(player, xi.mission.log_id.COP, player:getCurrentMission(xi.mission.log_id.COP), 'Option')
+xi.cop.helpers.promyvionOnZoneIn = function(player, prevZone)
+    local missionOption = xi.mission.getVar(player, xi.mission.log_id.COP, player:getCurrentMission(xi.mission.log_id.COP), 'Option')
 
-        if
-            missionOption == 0
-        then
-            return 50 + xi.cop.helpers.numPromyvionCompleted(player)
-        end
-    end,
-}
+    if
+        missionOption == 0
+    then
+        return 50 + xi.cop.helpers.numPromyvionCompleted(player)
+    end
+end
 
 xi.cop.helpers.sendToPromyvionZone = function(player, promyvionOffset)
     if promyvionOffset == xi.cop.helpers.promyvionCrags.HOLLA then

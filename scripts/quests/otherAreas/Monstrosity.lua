@@ -166,12 +166,9 @@ quest.sections =
 
         [xi.zone.FERETORY] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 2
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 2
+            end,
 
             onEventUpdate =
             {

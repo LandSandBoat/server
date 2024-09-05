@@ -23,14 +23,11 @@ mission.sections =
 
         [xi.zone.LUFAISE_MEADOWS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 0 then
-                        return 111
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 0 then
+                    return 111
+                end
+            end,
 
             onEventUpdate =
             {
@@ -72,14 +69,11 @@ mission.sections =
             ['Despachiaire']     = mission:event(318),
             ['Justinius']        = mission:event(135),
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return 114
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 1 then
+                    return 114
+                end
+            end,
 
             onEventFinish =
             {
@@ -107,14 +101,11 @@ mission.sections =
 
         [xi.zone.SEALIONS_DEN] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if not mission:isVarBitsSet(player, 'Option', 2) then
-                        return 14
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if not mission:isVarBitsSet(player, 'Option', 2) then
+                    return 14
+                end
+            end,
 
             onEventFinish =
             {

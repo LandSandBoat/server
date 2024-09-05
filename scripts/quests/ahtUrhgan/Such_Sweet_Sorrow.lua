@@ -24,14 +24,11 @@ quest.sections =
         {
             ['Dabhuh'] = quest:progressEvent(582, { text_table = 0 }),
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if quest:getVar(player, 'Option') == 2 then
-                        return { 956, 0 }
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if quest:getVar(player, 'Option') == 2 then
+                    return { 956, 0 }
+                end
+            end,
 
             onEventFinish =
             {
@@ -49,14 +46,11 @@ quest.sections =
 
         [xi.zone.CAEDARVA_MIRE] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if quest:getVar(player, 'Option') == 1 then
-                        return 29
-                    end
+            onZoneIn = function(player, prevZone)
+                if quest:getVar(player, 'Option') == 1 then
+                    return 29
                 end
-            },
+            end,
 
             onEventFinish =
             {
