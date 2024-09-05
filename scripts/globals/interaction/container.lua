@@ -38,48 +38,48 @@ end
 
 ---@param eventid integer
 ---@param ... integer|table
----@return TInteractionEvent
+---@return TEvent
 function Container:event(eventid, ...)
     return Event:new(eventid, ...)
 end
 
 ---@param eventid integer
 ---@param ... integer|table
----@return TInteractionEvent
+---@return TEvent
 function Container:cutscene(eventid, ...)
     return Event:new(eventid, ...):cutscene()
 end
 
 ---@param eventid integer
 ---@param ... integer|table
----@return TInteractionEvent
+---@return TEvent
 function Container:progressEvent(eventid, ...)
     return Event:new(eventid, ...):progress()
 end
 
 ---@param eventid integer
 ---@param ... integer|table
----@return TInteractionEvent
+---@return TEvent
 function Container:priorityEvent(eventid, ...)
     return Event:new(eventid, ...):progress()
 end
 
 ---@param eventid integer
 ---@param ... integer|table
----@return TInteractionEvent
+---@return TEvent
 function Container:progressCutscene(eventid, ...)
     return Event:new(eventid, ...):cutscene():progress()
 end
 
 ---@param eventid integer
 ---@param ... integer|table
----@return TInteractionEvent
+---@return TEvent
 function Container:replaceEvent(eventid, ...)
     return Event:new(eventid, ...):replaceDefault()
 end
 
 ---@param keyItemId xi.keyItem
----@return TInteractionKeyItem
+---@return TKeyItem
 function Container:keyItem(keyItemId)
     return KeyItemAction:new(keyItemId)
 end
@@ -87,28 +87,28 @@ end
 ---@param messageId integer
 ---@param messageType integer?
 ---@param ... integer?
----@return TInteractionMessage
+---@return TMessage
 function Container:message(messageId, messageType, ...)
     return Message:new(messageId, messageType, ...)
 end
 
 ---@param messageId integer
 ---@param ... integer?
----@return TInteractionMessage
+---@return TMessage
 function Container:messageText(messageId, ...)
     return Message:new(messageId, Message.Type.Text, ...)
 end
 
 ---@param messageId integer
 ---@param ... integer?
----@return TInteractionMessage
+---@return TMessage
 function Container:messageSpecial(messageId, ...)
     return Message:new(messageId, Message.Type.Special, ...)
 end
 
 ---@param messageId integer
 ---@param ... integer?
----@return TInteractionMessage
+---@return TMessage
 function Container:messageName(messageId, ...)
     return Message:new(messageId, Message.Type.Name, ...)
 end
@@ -119,7 +119,7 @@ function Container:replaceMessage(messageId, messageType, ...)
     return Message:new(messageId, messageType, ...):replaceDefault()
 end
 
----@return TInteractionSequence|TInteractionMessage?
+---@return TSequence|TMessage?
 function Container:sequence(...)
     if type(...) == 'number' then
         return Message:new(...)
@@ -128,7 +128,7 @@ function Container:sequence(...)
     end
 end
 
----@return TInteractionNoAction
+---@return TNoAction
 function Container:noAction(...)
     return NoAction:new(...)
 end

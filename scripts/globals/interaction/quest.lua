@@ -18,7 +18,7 @@ end
 ---@type rewardParam
 Quest.reward = {}
 
----@type TQuestSectionList
+---@type TQuestSection[]
 Quest.sections = {}
 
 ---@param areaId xi.questLog

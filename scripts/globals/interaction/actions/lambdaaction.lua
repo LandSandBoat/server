@@ -3,7 +3,7 @@
 -----------------------------------
 require('scripts/globals/interaction/actions/action')
 
----@class TInteractionLambdaAction : TInteractionAction
+---@class TLambdaAction : TAction
 ---@field actionFunc function
 ---@field priority Action.Priority|integer
 LambdaAction = Action:new(Action.Type.LambdaAction)
