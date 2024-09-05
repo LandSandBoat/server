@@ -5034,7 +5034,7 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PItem != nullptr && (gil != nullptr && gil->isType(ITEM_CURRENCY)))
     {
-        if (PChar->CraftContainer)
+        if (PChar->animation == ANIMATION_SYNTH || (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0))
         {
             ShowWarning("SmallPacket0x085: Player %s trying to sell while in the middle of a synth!", PChar->getName());
             return;
