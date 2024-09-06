@@ -3911,7 +3911,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_WTB',2013,844); -- Waking th
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_WTB',2013,845); -- Waking the Beast, fire iv
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_WTB',2013,847); -- Waking the Beast, meteor_strike
 
--- Next available ID: 2014
+INSERT INTO `mob_skill_lists` VALUES ('Shooting_Fish',2014,313); -- knockback aquaball - BCNM20 Shooting Fish
+
+-- Next available ID: 2015
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
