@@ -3,12 +3,12 @@
 -----------------------------------
 require('scripts/globals/interaction/actions/action')
 
----@class TInteractionKeyItem : TInteractionAction
+---@class TKeyItem : TAction
 ---@field id integer
 KeyItemAction = Action:new(Action.Type.KeyItem)
 
 ---@param keyItemId xi.keyItem
----@return TInteractionKeyItem
+---@return TKeyItem
 function KeyItemAction:new(keyItemId)
     local obj = {}
     setmetatable(obj, self)

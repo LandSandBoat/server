@@ -169,14 +169,11 @@ quest.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if quest:getVar(player, 'Prog') == 1 then
-                        return 1
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if quest:getVar(player, 'Prog') == 1 then
+                    return 1
+                end
+            end,
 
             onEventUpdate =
             {

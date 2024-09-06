@@ -4,7 +4,7 @@
 require('scripts/globals/interaction/actions/action')
 require('scripts/globals/interaction/actions/message')
 
----@class TInteractionSequence : TInteractionAction
+---@class TSequence : TAction
 ---@field __nextAction any
 Sequence = Action:new(Action.Type.Sequence)
 
@@ -30,7 +30,7 @@ function Sequence:new(unparsedSequence)
     local id = nil
     for _, entry in ipairs(unparsedSequence) do
         if entry.text then
-            ---@type TInteractionMessage
+            ---@type TMessage
             local newLast = Message:new(entry.text)
             last.__nextAction = newLast
             last = newLast

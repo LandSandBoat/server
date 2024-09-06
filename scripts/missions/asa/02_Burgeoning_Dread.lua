@@ -21,17 +21,14 @@ mission.sections =
 
         [xi.zone.EAST_SARUTABARUTA] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        prevZone == xi.zone.WINDURST_WOODS and
-                        not player:hasStatusEffect(xi.effect.MOUNTED)
-                    then
-                        return mission:event(71)
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    prevZone == xi.zone.WINDURST_WOODS and
+                    not player:hasStatusEffect(xi.effect.MOUNTED)
+                then
+                    return mission:event(71)
+                end
+            end,
 
             onEventUpdate =
             {
@@ -52,16 +49,13 @@ mission.sections =
 
         [xi.zone.WEST_SARUTABARUTA] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if prevZone == xi.zone.WINDURST_WATERS then
-                        return 62
-                    elseif prevZone == xi.zone.PORT_WINDURST then
-                        return 63
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if prevZone == xi.zone.WINDURST_WATERS then
+                    return 62
+                elseif prevZone == xi.zone.PORT_WINDURST then
+                    return 63
+                end
+            end,
 
             onEventUpdate =
             {

@@ -277,14 +277,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Option') == 2 then -- Fickbix CS
-                        return 10000
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Option') == 2 then -- Fickbix CS
+                    return 10000
+                end
+            end,
 
             onEventFinish =
             {

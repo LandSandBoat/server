@@ -3,7 +3,7 @@
 -----------------------------------
 require('scripts/globals/interaction/actions/action')
 
----@class TInteractionEvent : TInteractionAction
+---@class TEvent : TAction
 ---@field id integer
 ---@field options integer[]|table[]
 Event = Action:new(Action.Type.Event)
@@ -33,7 +33,7 @@ function Event:perform(player, targetEntity)
     return self.returnValue
 end
 
----@return TInteractionEvent
+---@return TEvent
 function Event:cutscene()
     self.isCutscene = true
     return self

@@ -3,7 +3,7 @@
 -----------------------------------
 require('scripts/globals/interaction/actions/action')
 
----@class TInteractionMessage: TInteractionAction
+---@class TMessage: TAction
 ---@field messageType Message.type
 ---@field id integer
 ---@field npcId integer?
@@ -22,7 +22,7 @@ Message.Type =
 ---@param messageId integer
 ---@param messageType Message.type?
 ---@param ... integer?
----@return TInteractionMessage
+---@return TMessage
 function Message:new(messageId, messageType, ...)
     local obj = {}
     setmetatable(obj, self)

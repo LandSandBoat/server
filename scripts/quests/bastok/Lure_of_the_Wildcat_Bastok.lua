@@ -41,9 +41,6 @@ local wildcatNpcData =
     ['Vaghron']           = { 19, 503 }, -- !pos -39.162 -1 -92.147 234
 }
 
----@param player CBaseEntity
----@param npc CBaseEntity
----@return QuestReturnType?
 local wildcatOnTrigger = function(player, npc)
     local npcData = wildcatNpcData[npc:getName()]
 

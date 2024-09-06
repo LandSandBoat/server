@@ -1,7 +1,7 @@
 -----------------------------------
 ----- Action base class
 -----------------------------------
----@class TInteractionAction
+---@class TAction
 Action = {}
 
 ---@enum Action.Priority
@@ -30,7 +30,7 @@ Action.Type =
 }
 
 ---@param type Action.Type
----@return TInteractionAction
+---@return TAction
 function Action:new(type)
     local obj = {}
     setmetatable(obj, self)
@@ -48,26 +48,26 @@ function Action:perform(player, targetEntity)
 end
 
 ---@param priorityArg Action.Priority|integer
----@return TInteractionAction
+---@return TAction
 function Action:setPriority(priorityArg)
     self.priority = priorityArg
     return self
 end
 
----@return TInteractionAction
+---@return TAction
 function Action:progress()
     -- Set highest priority for action
     return self:setPriority(Action.Priority.Progress)
 end
 
----@return TInteractionAction
+---@return TAction
 function Action:replaceDefault()
     -- Always prefer this over falling back to default in lua file
     return self:setPriority(Action.Priority.ReplaceDefault)
 end
 
 -- Perform the action as a Progress priority, and then default back to event
----@return TInteractionAction
+---@return TAction
 function Action:importantEvent()
     self.priority = Action.Priority.Progress
     self.secondaryPriority = Action.Priority.Event
@@ -75,7 +75,7 @@ function Action:importantEvent()
 end
 
 -- After the first time the action is performed, it will have a lower priority
----@return TInteractionAction
+---@return TAction
 function Action:importantOnce()
     self.priority = Action.Priority.Event
     self.secondaryPriority = Action.Priority.Default
@@ -83,19 +83,19 @@ function Action:importantOnce()
 end
 
 -- Only do this action once per zone, unless there's nothing else to do
----@return TInteractionAction
+---@return TAction
 function Action:oncePerZone()
     self.secondaryPriority = Action.Priority.Ignore
     return self
 end
 
----@return TInteractionAction
+---@return TAction
 function Action:openDoor()
     self.returnValue = -1
     return self
 end
 
----@return TInteractionAction
+---@return TAction
 function Action:open()
     return self:openDoor()
 end

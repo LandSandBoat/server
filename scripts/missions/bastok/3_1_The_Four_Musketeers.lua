@@ -141,14 +141,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 120
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 120
+                end
+            end,
 
             onEventFinish =
             {
@@ -161,23 +158,20 @@ mission.sections =
 
         [xi.zone.PASHHOW_MARSHLANDS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if prevZone == xi.zone.BEADEAUX then
-                        local missionStatus = player:getMissionStatus(mission.areaId)
+            onZoneIn = function(player, prevZone)
+                if prevZone == xi.zone.BEADEAUX then
+                    local missionStatus = player:getMissionStatus(mission.areaId)
 
-                        if
-                            missionStatus > 1 and
-                            missionStatus < 22
-                        then
-                            return 10
-                        elseif missionStatus == 22 then
-                            return 11
-                        end
+                    if
+                        missionStatus > 1 and
+                        missionStatus < 22
+                    then
+                        return 10
+                    elseif missionStatus == 22 then
+                        return 11
                     end
-                end,
-            },
+                end
+            end,
 
             onEventFinish =
             {

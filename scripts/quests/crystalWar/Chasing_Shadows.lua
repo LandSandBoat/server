@@ -86,17 +86,14 @@ quest.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        prevZone == xi.zone.BEAUCEDINE_GLACIER_S and
-                        quest:getVar(player, 'Prog') == 0
-                    then
-                        return 30
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    prevZone == xi.zone.BEAUCEDINE_GLACIER_S and
+                    quest:getVar(player, 'Prog') == 0
+                then
+                    return 30
+                end
+            end,
 
             onEventFinish =
             {
@@ -155,17 +152,14 @@ quest.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        prevZone == xi.zone.BEAUCEDINE_GLACIER_S and
-                        quest:getVar(player, 'Prog') == 5
-                    then
-                        return 114
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    prevZone == xi.zone.BEAUCEDINE_GLACIER_S and
+                    quest:getVar(player, 'Prog') == 5
+                then
+                    return 114
+                end
+            end,
 
             onEventFinish =
             {

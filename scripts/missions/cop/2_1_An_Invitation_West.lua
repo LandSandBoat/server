@@ -45,14 +45,11 @@ mission.sections =
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return 101
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 1 then
+                    return 101
+                end
+            end,
 
             onEventFinish =
             {

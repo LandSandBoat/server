@@ -4,39 +4,31 @@
 ---@meta
 
 -- Definitions for quest.sections{}
----@alias TQuestSectionList TQuestSection[]
-
 ---@class TQuestSection
 ---@field check fun(player: CBaseEntity, status: xi.questStatus, vars: { [string]: integer }): boolean
----@field [xi.zone] TQuestZoneSection
+---@field [xi.zone] ZoneSection
 
 -- TODO: Below here, we can most likely be generic and reuse these definitions for Hidden Quests, Missions,
 -- and perhaps Battlefields as well
----@class TQuestZoneSection
----@field onZoneIn? TQuestOnZoneIn
----@field onZoneOut? TQuestOnZoneFunction
----@field afterZoneIn? TQuestOnZoneFunction
----@field [string]? TQuestZoneEntity|QuestReturnType|fun(player: CBaseEntity, npc: CBaseEntity): QuestReturnType?
----@field onEventUpdate? TQuestEventSection
----@field onEventFinish? TQuestEventSection
----@field onTriggerAreaEnter? TQuestTriggerAreaSection
----@field onTriggerAreaLeave? TQuestTriggerAreaSection
+---@class ZoneSection
+---@field onZoneIn? fun(player: CBaseEntity, prevZone: xi.zone): integer|table<integer>?
+---@field onZoneOut? onZoneHandler
+---@field afterZoneIn? onZoneHandler
+---@field [string]? EntitySection|TAction|fun(player: CBaseEntity, npc: CBaseEntity): TAction?
+---@field onEventUpdate? onEventHandler
+---@field onEventFinish? onEventHandler
+---@field onTriggerAreaEnter? onTriggerAreaHandler
+---@field onTriggerAreaLeave? onTriggerAreaHandler
 
----@class TQuestOnZoneIn
----@field [integer] fun(player: CBaseEntity, prevZone: xi.zone): integer?
+---@alias onZoneHandler fun(player: CBaseEntity): TAction?
 
----@class TQuestOnZoneFunction
----@field [integer] fun(player: CBaseEntity): QuestReturnType?
+---@class onTriggerAreaHandler
+---@field [integer] fun(player: CBaseEntity, triggerArea: CTriggerArea): TAction?
 
----@class TQuestTriggerAreaSection
----@field [integer] fun(player: CBaseEntity, triggerArea: CTriggerArea): QuestReturnType?
-
----@class TQuestZoneEntity
----@field onTrade? QuestReturnType|fun(player: CBaseEntity, npc: CBaseEntity, trade: CTradeContainer): QuestReturnType?
----@field onTrigger? QuestReturnType|fun(player: CBaseEntity, npc: CBaseEntity): QuestReturnType?
+---@class EntitySection
+---@field onTrade? TAction|fun(player: CBaseEntity, npc: CBaseEntity, trade: CTradeContainer): TAction?
+---@field onTrigger? TAction|fun(player: CBaseEntity, npc: CBaseEntity): TAction?
 ---@field onMobDeath? fun(mob: CBaseEntity, player: CBaseEntity, optParams: { isKiller: boolean, noKiller: boolean, isWeaponSkillKill: boolean, weaponskillUsed: xi.weaponskill, weaponskillDamage: integer })
 
----@class TQuestEventSection
+---@class onEventHandler
 ---@field [integer] fun(player: CBaseEntity, csid: integer, option: integer, npc: CBaseEntity)
-
----@alias QuestReturnType TInteractionEvent|TInteractionKeyItem|TInteractionMessage|TInteractionSequence|TInteractionAction|TInteractionNoAction?

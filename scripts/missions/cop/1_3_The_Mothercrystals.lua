@@ -120,19 +120,16 @@ mission.sections =
                 onTrigger = largeApparatusOnTrigger,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        xi.cop.helpers.numPromyvionCompleted(player) == 2 and
-                        not xi.cop.helpers.hasCompletedPromyvion(player, prevZone) and
-                        mission:getVar(player, 'Status') == 0
-                    then
-                        player:setLocalVar('toPromyvion', xi.cop.helpers.shatteredTelepointInfo[prevZone][1])
-                        return 155
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    xi.cop.helpers.numPromyvionCompleted(player) == 2 and
+                    not xi.cop.helpers.hasCompletedPromyvion(player, prevZone) and
+                    mission:getVar(player, 'Status') == 0
+                then
+                    player:setLocalVar('toPromyvion', xi.cop.helpers.shatteredTelepointInfo[prevZone][1])
+                    return 155
+                end
+            end,
 
             onEventFinish =
             {
