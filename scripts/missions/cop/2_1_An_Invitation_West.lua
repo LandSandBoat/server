@@ -25,14 +25,11 @@ mission.sections =
 
         [xi.zone.LUFAISE_MEADOWS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 0 then
-                        return 110
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 0 then
+                    return 110
+                end
+            end,
 
             onEventFinish =
             {

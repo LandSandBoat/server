@@ -29,12 +29,9 @@ mission.sections =
 
         [xi.zone.KAMIHR_DRIFTS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 29
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 29
+            end,
 
             onEventFinish =
             {

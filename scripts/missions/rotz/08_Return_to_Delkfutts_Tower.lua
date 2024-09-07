@@ -61,12 +61,9 @@ mission.sections =
 
         [xi.zone.LOWER_DELKFUTTS_TOWER] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 15
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 15
+            end,
 
             onEventFinish =
             {
@@ -85,12 +82,9 @@ mission.sections =
 
         [xi.zone.STELLAR_FULCRUM] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 0
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 0
+            end,
 
             onEventUpdate =
             {
@@ -118,14 +112,11 @@ mission.sections =
 
         [xi.zone.STELLAR_FULCRUM] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 3 then
-                        return 17
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 3 then
+                    return 17
+                end
+            end,
 
             onEventFinish =
             {

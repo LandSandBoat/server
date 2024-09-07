@@ -36,7 +36,8 @@ mission.sections =
             onEventFinish =
             {
                 [510] = function(player, csid, option, npc)
-                    return mission:event(514)
+                    -- TODO: This is most likely a pos change, followed by onZoneIn event
+                    player:startEvent(514)
                 end,
 
                 [514] = function(player, csid, option, npc)

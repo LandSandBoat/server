@@ -186,14 +186,11 @@ mission.sections =
 
         [xi.zone.FULL_MOON_FOUNTAIN] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 3 then
-                        return 50
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 3 then
+                    return 50
+                end
+            end,
 
             onEventFinish =
             {

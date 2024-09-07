@@ -171,14 +171,11 @@ mission.sections =
 
         [xi.zone.ALTAIEU] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 6 then
-                        return 165
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 6 then
+                    return 165
+                end
+            end,
 
             onEventFinish =
             {
