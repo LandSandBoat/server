@@ -7,6 +7,7 @@
 -- Radford     : !pos -205.303 -8.000 26.874 87
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.AFFAIRS_OF_STATE)
 
 mission.reward =

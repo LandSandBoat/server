@@ -19,6 +19,7 @@
 local outerHorutotoID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING)
 
 mission.reward =

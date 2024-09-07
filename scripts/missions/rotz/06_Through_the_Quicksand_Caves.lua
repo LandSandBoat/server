@@ -6,6 +6,7 @@
 -- Shimmering Circle : !pos -220 0 12 168
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)
 
 mission.reward =

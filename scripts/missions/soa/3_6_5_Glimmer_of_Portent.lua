@@ -6,6 +6,7 @@
 -- Levil : !pos -87.204 3.350 12.655 256
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.GLIMMER_OF_PORTENT)
 
 mission.reward =

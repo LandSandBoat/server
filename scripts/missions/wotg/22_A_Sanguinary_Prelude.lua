@@ -5,6 +5,7 @@
 -- !addmission 5 21
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.A_SANGUINARY_PRELUDE)
 
 mission.reward =

@@ -8,6 +8,7 @@
 -- Savae E Paleade : !pos 23.724 -17.39 -43.360 237
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK)
 
 mission.reward = {}

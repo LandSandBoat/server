@@ -8,6 +8,7 @@
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.FATE_IN_HAZE)
 
 mission.reward =

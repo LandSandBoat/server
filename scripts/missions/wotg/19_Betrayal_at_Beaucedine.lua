@@ -8,6 +8,7 @@
 local pastBeaucedineID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.BETRAYAL_AT_BEAUCEDINE)
 
 mission.reward =

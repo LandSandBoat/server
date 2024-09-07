@@ -6,6 +6,7 @@
 -- Regal Pawprints (G-9) : !pos -145.266 -61.851 -174.171 136
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DUNGEONS_AND_DANCERS)
 
 mission.reward =

@@ -6,6 +6,7 @@
 -- Veridical Conflux : !pos -142.279 -6.749 585.239 89
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.WHISPERS_OF_DAWN)
 
 mission.reward =

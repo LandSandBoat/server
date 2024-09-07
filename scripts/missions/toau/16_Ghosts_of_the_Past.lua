@@ -8,6 +8,7 @@
 local whitegateShared = require('scripts/zones/Aht_Urhgan_Whitegate/Shared')
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.GHOSTS_OF_THE_PAST)
 
 mission.reward =

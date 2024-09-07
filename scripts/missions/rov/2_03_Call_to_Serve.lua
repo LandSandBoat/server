@@ -7,6 +7,7 @@
 local portJeunoID = zones[xi.zone.PORT_JEUNO]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.CALL_TO_SERVE)
 
 mission.reward =

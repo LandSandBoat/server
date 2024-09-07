@@ -9,6 +9,7 @@
 -- 3. Talk to Monberaux:    !pos -43 0 -1 244
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_RITES_OF_LIFE)
 
 mission.reward =

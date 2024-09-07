@@ -10,6 +10,7 @@
 -- Naji    : !pos 64 -14 -4 237
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.DARKNESS_RISING)
 
 mission.reward =

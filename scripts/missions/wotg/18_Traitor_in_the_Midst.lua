@@ -11,6 +11,7 @@
 -- Regal Pawprints (Naoi)    : !pos 53.812 0.307 -299.136 136
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.TRAITOR_IN_THE_MIDST)
 
 mission.reward =

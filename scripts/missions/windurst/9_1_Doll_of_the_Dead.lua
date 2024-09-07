@@ -15,6 +15,7 @@ local boyahdaTreeID   = zones[xi.zone.THE_BOYAHDA_TREE]
 local windurstWoodsID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.DOLL_OF_THE_DEAD)
 
 mission.reward =

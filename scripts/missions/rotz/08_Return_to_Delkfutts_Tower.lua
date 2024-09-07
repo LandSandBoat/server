@@ -10,6 +10,7 @@
 -- Qe'Lov Gate (BCNM)     : !pos -520 -4 17 179
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
 
 mission.reward =

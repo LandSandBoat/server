@@ -5,6 +5,7 @@
 -- !addmission 11 1
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.BURGEONING_DREAD)
 
 mission.reward =

@@ -7,6 +7,7 @@
 local ralaID = zones[xi.zone.RALA_WATERWAYS]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.WATERY_GRAVE)
 
 mission.reward =

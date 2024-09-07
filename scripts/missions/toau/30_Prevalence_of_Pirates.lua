@@ -5,6 +5,7 @@
 -- !addmission 4 29
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.PREVALENCE_OF_PIRATES)
 
 mission.reward =

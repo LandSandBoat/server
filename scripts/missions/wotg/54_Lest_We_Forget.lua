@@ -8,6 +8,7 @@
 local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.LEST_WE_FORGET)
 
 mission.reward = {}

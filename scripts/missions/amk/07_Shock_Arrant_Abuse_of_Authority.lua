@@ -7,6 +7,7 @@
 -- MOLDY_WORM_EATEN_CHEST : !addkeyitem 1144
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.SHOCK_ARRANT_ABUSE_OF_AUTHORITY)
 
 mission.reward =

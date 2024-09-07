@@ -8,6 +8,7 @@
 local uggalepihID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.THE_CURSED_TEMPLE)
 
 mission.reward =

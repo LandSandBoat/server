@@ -6,6 +6,7 @@
 -- Hollowed Pathway : !pos 215.371 39.025 -446.368 267
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.STONEWALLED)
 
 mission.reward =

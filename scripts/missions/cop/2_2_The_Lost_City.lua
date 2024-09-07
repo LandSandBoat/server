@@ -7,6 +7,7 @@
 -- Sewer Entrance : !pos 28 -12 44 26
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_LOST_CITY)
 
 mission.reward =

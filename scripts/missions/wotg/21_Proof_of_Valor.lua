@@ -8,6 +8,7 @@
 local pastSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.PROOF_OF_VALOR)
 
 mission.reward =

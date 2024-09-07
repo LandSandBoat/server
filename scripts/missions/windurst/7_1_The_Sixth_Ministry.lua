@@ -13,6 +13,7 @@
 local toraimaraiID = zones[xi.zone.TORAIMARAI_CANAL]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SIXTH_MINISTRY)
 
 mission.reward =

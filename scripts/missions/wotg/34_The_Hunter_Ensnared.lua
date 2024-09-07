@@ -6,6 +6,7 @@
 -- Rally Point: Red : !pos -106.071 -25.5 -52.841 137
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.THE_HUNTER_ENSNARED)
 
 mission.reward =

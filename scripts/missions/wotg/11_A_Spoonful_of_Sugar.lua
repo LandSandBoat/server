@@ -6,6 +6,7 @@
 -- Raustigne : !pos 3.979 -1.999 44.456 80
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.A_SPOONFUL_OF_SUGAR)
 
 mission.reward =

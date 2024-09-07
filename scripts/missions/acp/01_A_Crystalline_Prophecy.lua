@@ -5,6 +5,7 @@
 -- !addmission 9 0
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ACP, xi.mission.id.acp.A_CRYSTALLINE_PROPHECY)
 
 mission.reward =

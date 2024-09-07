@@ -11,6 +11,7 @@
 -- Kaa Toru the Just : !pos -100.188 -62.125 145.422 151
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.SAINTLY_INVITATION)
 
 mission.reward =

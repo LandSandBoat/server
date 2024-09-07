@@ -14,6 +14,7 @@
 local westernAltepaID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTES_LAST_WISHES)
 
 mission.reward =

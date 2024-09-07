@@ -8,6 +8,7 @@
 -- Norg : !zone 252
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER)
 
 mission.reward =

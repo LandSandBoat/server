@@ -5,6 +5,7 @@
 -- !addmission 4 44
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.RAGNAROK)
 
 mission.reward =

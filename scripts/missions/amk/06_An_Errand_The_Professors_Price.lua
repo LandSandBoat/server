@@ -13,6 +13,7 @@
 local horutotoID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE)
 
 mission.reward =

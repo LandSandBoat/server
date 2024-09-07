@@ -5,6 +5,7 @@
 -- !addmission 13 28
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
 
 mission.reward =

@@ -7,6 +7,7 @@
 -- Kipligg : !pos -32 0 22 256
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.INTO_THE_FIRE)
 
 mission.reward =

@@ -23,6 +23,7 @@ local yuhtungaJungleID    = zones[xi.zone.YUHTUNGA_JUNGLE]
 local sanctuaryOfZitahID  = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.HEADSTONE_PILGRIMAGE)
 
 mission.reward =

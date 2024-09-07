@@ -4,6 +4,7 @@
 -- !addmission 10 0
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.A_MOOGLE_KUPO_DETAT)
 
 mission.reward =

@@ -13,6 +13,7 @@
 -- qm1_5 : !pos 555.998 -38.205 520.627 180
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
 
 -- Table index based on Battlefield ID - Offset, this ordering is different

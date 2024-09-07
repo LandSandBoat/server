@@ -8,6 +8,7 @@
 local hallID = zones[xi.zone.HALL_OF_THE_GODS]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_HALL_OF_THE_GODS)
 
 mission.reward =

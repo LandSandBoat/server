@@ -12,6 +12,7 @@
 local westRonfaureID = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE)
 
 mission.reward =

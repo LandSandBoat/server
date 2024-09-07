@@ -7,6 +7,7 @@
 -- _6z0  : !pos 0 -12 48 251
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_DESOLATION)
 
 mission.reward =

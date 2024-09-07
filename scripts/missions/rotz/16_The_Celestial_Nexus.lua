@@ -7,6 +7,7 @@
 -- _515 (BCNM Entry)  : !pos -665.2291 -5.8232 -32.4834 181
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS)
 
 mission.reward =

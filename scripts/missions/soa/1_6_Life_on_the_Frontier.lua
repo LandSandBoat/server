@@ -8,6 +8,7 @@
 require('scripts/missions/soa/helpers')
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.LIFE_ON_THE_FRONTIER)
 
 mission.reward =

@@ -7,6 +7,7 @@
 -- YAGUDO_CAULK       : !additem 2759
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
 
 mission.reward =

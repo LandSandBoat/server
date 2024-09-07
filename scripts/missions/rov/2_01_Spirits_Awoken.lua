@@ -5,6 +5,7 @@
 -- !addmission 13 44
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.SPIRITS_AWOKEN)
 
 mission.reward =
