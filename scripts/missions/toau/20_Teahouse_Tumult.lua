@@ -6,6 +6,7 @@
 -- blank_toau20 : !pos -298 36 -38 68
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.TEAHOUSE_TUMULT)
 
 mission.reward =
@@ -31,14 +32,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 0 then
-                        return 10
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 0 then
+                    return 10
+                end
+            end,
 
             onEventFinish =
             {

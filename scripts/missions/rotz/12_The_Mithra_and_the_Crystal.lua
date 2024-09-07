@@ -11,6 +11,7 @@
 local quicksandCavesID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)
 
 mission.reward =

@@ -11,6 +11,7 @@
 local ralaID = zones[xi.zone.RALA_WATERWAYS]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.BEHIND_THE_SLUICES)
 
 mission.reward =
@@ -105,12 +106,9 @@ mission.sections =
 
         [xi.zone.RALA_WATERWAYS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 353
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 353
+            end,
 
             onEventFinish =
             {

@@ -6,6 +6,7 @@
 -- Levil : !pos -87.204 3.350 12.655 256
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_KEY_TO_THE_TURRIS)
 
 mission.reward =
@@ -40,14 +41,11 @@ mission.sections =
 
         [xi.zone.KAMIHR_DRIFTS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return 58
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 1 then
+                    return 58
+                end
+            end,
 
             onEventFinish =
             {

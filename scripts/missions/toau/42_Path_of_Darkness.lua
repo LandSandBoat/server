@@ -8,6 +8,7 @@
 -- _1e1 (Door)   : !pos 23 -6 -63 50
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.PATH_OF_DARKNESS)
 
 mission.reward =
@@ -75,14 +76,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 2 then
-                        return 7
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 2 then
+                    return 7
+                end
+            end,
 
             onEventFinish =
             {

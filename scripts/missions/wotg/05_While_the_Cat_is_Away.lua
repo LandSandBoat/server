@@ -7,6 +7,7 @@
 -- EAST_RONFAURE_S      : !zone 81
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.WHILE_THE_CAT_IS_AWAY)
 
 mission.reward =
@@ -23,14 +24,11 @@ mission.sections =
 
         [xi.zone.EAST_RONFAURE_S] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if prevZone == xi.zone.SOUTHERN_SAN_DORIA_S then
-                        return 7
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if prevZone == xi.zone.SOUTHERN_SAN_DORIA_S then
+                    return 7
+                end
+            end,
 
             onEventUpdate =
             {

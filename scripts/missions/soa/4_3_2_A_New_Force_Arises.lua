@@ -13,6 +13,7 @@ local kamihrID        = zones[xi.zone.MOUNT_KAMIHR]
 local outerRaKaznarID = zones[xi.zone.OUTER_RAKAZNAR]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.A_NEW_FORCE_ARISES)
 
 mission.reward =
@@ -59,20 +60,17 @@ mission.sections =
 
         [xi.zone.CELENNIA_MEMORIAL_LIBRARY] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    local numScales = getNumScales(player)
+            onZoneIn = function(player, prevZone)
+                local numScales = getNumScales(player)
 
-                    if
-                        numScales > 0 and
-                        numScales < 3 and
-                        not mission:isVarBitsSet(player, 'Option', 0)
-                    then
-                        return 6
-                    end
-                end,
-            },
+                if
+                    numScales > 0 and
+                    numScales < 3 and
+                    not mission:isVarBitsSet(player, 'Option', 0)
+                then
+                    return 6
+                end
+            end,
 
             onEventFinish =
             {
@@ -119,18 +117,15 @@ mission.sections =
 
         [xi.zone.MOUNT_KAMIHR] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    local numScales = getNumScales(player)
+            onZoneIn = function(player, prevZone)
+                local numScales = getNumScales(player)
 
-                    if numScales ~= 3 then
-                        return 4
-                    else
-                        return 5
-                    end
-                end,
-            },
+                if numScales ~= 3 then
+                    return 4
+                else
+                    return 5
+                end
+            end,
 
             onEventUpdate =
             {

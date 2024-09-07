@@ -10,6 +10,7 @@
 local giddeusID = zones[xi.zone.GIDDEUS]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST)
 
 mission.reward = {}
@@ -65,14 +66,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 3 then
-                        return 42
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 3 then
+                    return 42
+                end
+            end,
 
             onEventUpdate =
             {

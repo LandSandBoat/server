@@ -8,6 +8,7 @@
 local walkOfEchoesID = zones[xi.zone.WALK_OF_ECHOES]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.SACRIFICE)
 
 mission.reward =
@@ -53,21 +54,18 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    -- TODO: This event was observed with a character at minimum requirements for the mission, but not
-                    -- seen while Fate in Haze was active, or WotG and additional quests completed.  This may need to be
-                    -- updated over time as more data becomes available.
+            onZoneIn = function(player, prevZone)
+                -- TODO: This event was observed with a character at minimum requirements for the mission, but not
+                -- seen while Fate in Haze was active, or WotG and additional quests completed.  This may need to be
+                -- updated over time as more data becomes available.
 
-                    if
-                        player:getCurrentMission(xi.mission.log_id.WOTG) < xi.mission.id.wotg.FATE_IN_HAZE and
-                        xi.rhapsodies.charactersAvailable(player)
-                    then
-                        return 26
-                    end
-                end,
-            },
+                if
+                    player:getCurrentMission(xi.mission.log_id.WOTG) < xi.mission.id.wotg.FATE_IN_HAZE and
+                    xi.rhapsodies.charactersAvailable(player)
+                then
+                    return 26
+                end
+            end,
 
             onEventFinish =
             {
@@ -84,14 +82,11 @@ mission.sections =
 
         [xi.zone.GRAUBERG_S] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 2 then
-                        return 47
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 2 then
+                    return 47
+                end
+            end,
 
             onEventFinish =
             {

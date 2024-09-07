@@ -6,6 +6,7 @@
 -- Levil   : !pos -87.204 3.350 12.655 256
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.A_VOW_OF_TRUTH)
 
 mission.reward =
@@ -27,12 +28,9 @@ mission.sections =
 
         [xi.zone.WOH_GATES] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 7
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 7
+            end,
 
             onEventFinish =
             {

@@ -6,6 +6,7 @@
 -- Regal Pawprints (9) : !pos 54.437 -41.904 104.974 136
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DISTORTER_OF_TIME)
 
 mission.reward =
@@ -37,14 +38,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return 19
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 1 then
+                    return 19
+                end
+            end,
 
             onEventFinish =
             {

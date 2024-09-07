@@ -6,6 +6,7 @@
 -- Granite Door (_4fx) : !pos 340 -1.899 331.656 159
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.WISDOM_OF_OUR_FOREFATHERS)
 
 mission.reward =

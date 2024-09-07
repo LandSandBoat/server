@@ -6,6 +6,7 @@
 -- Waypoint : !pos -34.922 0.000 -30.966 245
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ONWARD_TO_ADOULIN)
 
 mission.reward =
@@ -50,12 +51,9 @@ mission.sections =
 
         [xi.zone.CEIZAK_BATTLEGROUNDS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 3
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 3
+            end,
 
             onEventFinish =
             {

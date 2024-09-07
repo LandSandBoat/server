@@ -13,6 +13,7 @@
 local outerHorutotoID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.FULL_MOON_FOUNTAIN)
 
 mission.reward =
@@ -185,14 +186,11 @@ mission.sections =
 
         [xi.zone.FULL_MOON_FOUNTAIN] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 3 then
-                        return 50
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 3 then
+                    return 50
+                end
+            end,
 
             onEventFinish =
             {

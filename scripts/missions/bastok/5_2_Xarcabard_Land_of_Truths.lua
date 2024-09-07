@@ -16,6 +16,7 @@ local metalworksID    = zones[xi.zone.METALWORKS]
 local portBastokID    = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS)
 
 mission.reward =
@@ -154,7 +155,8 @@ mission.sections =
                             player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER)
                         end
 
-                        return mission:progressEvent(7)
+                        -- TODO: This is most likely a pos change followed by onZoneIn event
+                        player:startEvent(7)
                     end
                 end,
 

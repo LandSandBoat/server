@@ -12,6 +12,7 @@
 -- Moreno-Toeno - !pos 169 -1.25 159 238
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME)
 
 mission.reward =

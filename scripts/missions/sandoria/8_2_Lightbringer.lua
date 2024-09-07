@@ -20,6 +20,7 @@ local chateauID   = zones[xi.zone.CHATEAU_DORAGUILLE]
 local uggalepihID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LIGHTBRINGER)
 
 mission.reward =

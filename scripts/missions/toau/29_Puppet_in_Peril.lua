@@ -6,6 +6,7 @@
 -- Ornamental Door : !pos 299 0 -199 67
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.PUPPET_IN_PERIL)
 
 mission.reward =

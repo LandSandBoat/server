@@ -6,6 +6,7 @@
 -- Levil : !pos -87.204 3.350 12.655 256
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.A_SHROUDED_CANOPY)
 
 mission.reward =
@@ -27,12 +28,9 @@ mission.sections =
 
         [xi.zone.LEAFALLIA] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 2
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 2
+            end,
 
             onEventFinish =
             {

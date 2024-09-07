@@ -13,6 +13,7 @@ local altaieuID = zones[xi.zone.ALTAIEU]
 local huxoiID   = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.GARDEN_OF_ANTIQUITY)
 
 mission.reward =

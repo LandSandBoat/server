@@ -6,6 +6,7 @@
 -- Undulating Confluence : !pos -204.531 -20.027 75.318 126
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.EDDIES_OF_DESPAIR_I)
 
 mission.reward =
@@ -41,12 +42,9 @@ mission.sections =
 
         [xi.zone.ESCHA_ZITAH] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 1
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 1
+            end,
 
             onEventUpdate =
             {

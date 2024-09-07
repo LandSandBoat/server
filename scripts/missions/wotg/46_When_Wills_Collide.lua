@@ -6,6 +6,7 @@
 -- Veridical Conflux : !pos -142.279 -6.749 585.239 89
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.WHEN_WILLS_COLLIDE)
 
 mission.reward =
@@ -71,14 +72,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 2 then
-                        return 2
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 2 then
+                    return 2
+                end
+            end,
 
             onEventUpdate =
             {

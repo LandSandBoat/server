@@ -6,6 +6,7 @@
 -- Weathered Gravestone : !pos 149.728 -5.109 -395.121 105
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.A_HAWK_IN_REPOSE)
 
 mission.reward =

@@ -7,6 +7,7 @@
 local ralaID = zones[xi.zone.RALA_WATERWAYS]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.WATERY_GRAVE)
 
 mission.reward =
@@ -23,31 +24,25 @@ mission.sections =
 
         [xi.zone.RALA_WATERWAYS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return 375
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 1 then
+                    return 375
+                end
+            end,
 
-            afterZoneIn =
-            {
-                function(player)
-                    if
-                        not player:hasKeyItem(xi.ki.ASH_RUNIC_BOARD) and
-                        mission:getVar(player, 'Status') == 0 and
-                        mission:getVar(player, 'Timer') <= VanadielUniqueDay()
-                    then
-                        -- TODO: This message needs verification, and need to determine if there
-                        -- is a unique event or message.  For future Instance implementation, on
-                        -- instance fail, Timer var should be set to VanadielUniqueDay() + 1
-                        player:delKeyItem(xi.ki.BLANK_ASH_RUNIC_BOARD)
-                        npcUtil.giveKeyItem(player, xi.ki.ASH_RUNIC_BOARD)
-                    end
-                end,
-            },
+            afterZoneIn = function(player)
+                if
+                    not player:hasKeyItem(xi.ki.ASH_RUNIC_BOARD) and
+                    mission:getVar(player, 'Status') == 0 and
+                    mission:getVar(player, 'Timer') <= VanadielUniqueDay()
+                then
+                    -- TODO: This message needs verification, and need to determine if there
+                    -- is a unique event or message.  For future Instance implementation, on
+                    -- instance fail, Timer var should be set to VanadielUniqueDay() + 1
+                    player:delKeyItem(xi.ki.BLANK_ASH_RUNIC_BOARD)
+                    npcUtil.giveKeyItem(player, xi.ki.ASH_RUNIC_BOARD)
+                end
+            end,
 
             onEventFinish =
             {

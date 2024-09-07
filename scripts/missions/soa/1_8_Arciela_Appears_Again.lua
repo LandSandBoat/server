@@ -8,6 +8,7 @@
 require('scripts/missions/soa/helpers')
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ARCIELA_APPEARS_AGAIN)
 
 mission.reward =

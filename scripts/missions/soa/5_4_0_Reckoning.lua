@@ -6,6 +6,7 @@
 -- Ominous Postern : !pos 118 37.5 20 277
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.RECKONING)
 
 mission.reward =
@@ -23,14 +24,11 @@ mission.sections =
 
         [xi.zone.RAKAZNAR_TURRIS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return 3
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 1 then
+                    return 3
+                end
+            end,
 
             onEventFinish =
             {
@@ -49,19 +47,16 @@ mission.sections =
 
         [xi.zone.RAKAZNAR_INNER_COURT] =
         {
-            afterZoneIn =
-            {
-                function(player)
-                    if
-                        not player:hasKeyItem(xi.ki.CRYSTALLIZED_PSYCHE) and
-                        mission:getVar(player, 'Status') == 0
-                    then
-                        -- TODO: This message needs verification, and need to determine if there
-                        -- is a unique event or message.
-                        npcUtil.giveKeyItem(player, xi.ki.CRYSTALLIZED_PSYCHE)
-                    end
-                end,
-            },
+            afterZoneIn = function(player)
+                if
+                    not player:hasKeyItem(xi.ki.CRYSTALLIZED_PSYCHE) and
+                    mission:getVar(player, 'Status') == 0
+                then
+                    -- TODO: This message needs verification, and need to determine if there
+                    -- is a unique event or message.
+                    npcUtil.giveKeyItem(player, xi.ki.CRYSTALLIZED_PSYCHE)
+                end
+            end,
         },
     },
 }

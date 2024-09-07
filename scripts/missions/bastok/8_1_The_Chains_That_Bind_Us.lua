@@ -18,6 +18,7 @@ local portBastokID    = zones[xi.zone.PORT_BASTOK]
 local quicksandID     = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US)
 
 mission.reward =

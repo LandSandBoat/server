@@ -6,6 +6,7 @@
 -- Darcia : !pos -36 -1 -15 245
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_GEOMAGNETRON)
 
 mission.reward =

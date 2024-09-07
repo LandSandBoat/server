@@ -7,6 +7,7 @@
 -- Numi Adaligo : !pos -80.3 -24 34.8 249
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.EMISSARY_FROM_THE_SEAS)
 
 mission.reward =

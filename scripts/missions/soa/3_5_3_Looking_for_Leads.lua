@@ -5,6 +5,7 @@
 -- !addmission 12 61
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.LOOKING_FOR_LEADS)
 
 mission.reward =

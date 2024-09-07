@@ -5,6 +5,7 @@
 -- !addmission 13 52
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.INESCAPABLE_BINDS)
 
 mission.reward =
@@ -30,12 +31,9 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return { 165, 0 }
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return { 165, 0 }
+            end,
 
             onEventUpdate =
             {

@@ -40,6 +40,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
                 if mobTarget then
                     pet:updateEnmity(mobTarget)
                 end
+
                 break
             end
         end

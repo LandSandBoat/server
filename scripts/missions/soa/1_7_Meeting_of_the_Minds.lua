@@ -6,6 +6,7 @@
 -- Ploh Trishbahk : !pos 100.580 -40.150 -63.830 257
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.MEETING_OF_THE_MINDS)
 
 mission.reward =

@@ -6,6 +6,7 @@
 -- Imperial Whitegate : !pos 152 -2 0 50
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.SEAL_OF_THE_SERPENT)
 
 mission.reward =

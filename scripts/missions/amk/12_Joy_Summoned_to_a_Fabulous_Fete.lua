@@ -4,6 +4,7 @@
 -- !addmission 10 11
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.JOY_SUMMONED_TO_A_FABULOUS_FETE)
 
 mission.reward =

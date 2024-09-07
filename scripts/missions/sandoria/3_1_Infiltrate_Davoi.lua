@@ -17,6 +17,7 @@ local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.INFILTRATE_DAVOI)
 
 mission.reward =
@@ -152,14 +153,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 2 then
-                        return 116
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 2 then
+                    return 116
+                end
+            end,
 
             onEventFinish =
             {

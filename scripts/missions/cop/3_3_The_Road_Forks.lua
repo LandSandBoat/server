@@ -30,6 +30,7 @@ local attohwaChasmID      = zones[xi.zone.ATTOHWA_CHASM]
 local carpentersLandingID = zones[xi.zone.CARPENTERS_LANDING]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_ROAD_FORKS)
 
 mission.reward =
@@ -418,15 +419,12 @@ mission.sections =
                 end,
             },
 
-            onZoneOut =
-            {
-                function(player)
-                    if player:hasKeyItem(xi.ki.MIMEO_JEWEL) then
-                        player:messageSpecial(attohwaChasmID.text.MIMEO_JEWEL_OFFSET + 4)
-                        player:delKeyItem(xi.ki.MIMEO_JEWEL)
-                    end
-                end,
-            },
+            onZoneOut = function(player)
+                if player:hasKeyItem(xi.ki.MIMEO_JEWEL) then
+                    player:messageSpecial(attohwaChasmID.text.MIMEO_JEWEL_OFFSET + 4)
+                    player:delKeyItem(xi.ki.MIMEO_JEWEL)
+                end
+            end,
 
             onEventFinish =
             {

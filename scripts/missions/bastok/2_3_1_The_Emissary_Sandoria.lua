@@ -11,6 +11,7 @@ local chateauID          = zones[xi.zone.CHATEAU_DORAGUILLE]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA)
 
 mission.reward = {}

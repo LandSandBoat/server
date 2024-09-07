@@ -7,6 +7,7 @@
 local pastSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.GANGED_UP_ON)
 
 mission.reward =
@@ -41,27 +42,24 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        xi.rhapsodies.charactersAvailable(player) and
-                        mission:getVar(player, 'Status') == 0
-                    then
-                        -- Lilisette is required for this event to occur, and was tested during repeat of
-                        -- Where It All Began to reobtain Moonshade earring.  There are two patterns of
-                        -- parameters that were captured, with the known breakpoint of being above or below
-                        -- WotG26 (Fate in Haze)
+            onZoneIn = function(player, prevZone)
+                if
+                    xi.rhapsodies.charactersAvailable(player) and
+                    mission:getVar(player, 'Status') == 0
+                then
+                    -- Lilisette is required for this event to occur, and was tested during repeat of
+                    -- Where It All Began to reobtain Moonshade earring.  There are two patterns of
+                    -- parameters that were captured, with the known breakpoint of being above or below
+                    -- WotG26 (Fate in Haze)
 
-                        -- WotG8          : 0, 0, 0, 0
-                        -- WotG26, WotG50 : 1, 1, 0, 0
+                    -- WotG8          : 0, 0, 0, 0
+                    -- WotG26, WotG50 : 1, 1, 0, 0
 
-                        return 183
-                    elseif mission:getVar(player, 'Option') == 0 then
-                        return 185
-                    end
-                end,
-            },
+                    return 183
+                elseif mission:getVar(player, 'Option') == 0 then
+                    return 185
+                end
+            end,
 
             onEventUpdate =
             {

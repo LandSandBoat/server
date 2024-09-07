@@ -5,6 +5,7 @@
 -- !addmission 5 36
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DARKNESS_DESCENDS)
 
 mission.reward =
@@ -21,18 +22,15 @@ mission.sections =
 
         [xi.zone.THRONE_ROOM_S] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    local missionStatus = mission:getVar(player, 'Status')
+            onZoneIn = function(player, prevZone)
+                local missionStatus = mission:getVar(player, 'Status')
 
-                    if missionStatus == 0 then
-                        return 8
-                    elseif missionStatus == 2 then
-                        return 10
-                    end
-                end,
-            },
+                if missionStatus == 0 then
+                    return 8
+                elseif missionStatus == 2 then
+                    return 10
+                end
+            end,
 
             onEventUpdate =
             {

@@ -10,6 +10,7 @@
 -- Vestal Chamber (_6q2) : !pos 0.1 -49 37 242
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_FINAL_SEAL)
 
 mission.reward =
@@ -135,14 +136,11 @@ mission.sections =
 
         [xi.zone.FEIYIN] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 10 then
-                        return 1
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 10 then
+                    return 1
+                end
+            end,
 
             onEventFinish =
             {

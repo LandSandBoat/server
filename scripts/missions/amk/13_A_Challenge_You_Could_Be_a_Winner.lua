@@ -25,6 +25,7 @@
 -- Craggy Pillar 4 : !pos -236 -52 103 162
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.A_CHALLENGE_YOU_COULD_BE_A_WINNER)
 
 mission.reward =

@@ -5,6 +5,7 @@
 -- !addmission 13 68
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.PRIME_NUMBER)
 
 mission.reward =
@@ -21,12 +22,9 @@ mission.sections =
 
         [xi.zone.ALZADAAL_UNDERSEA_RUINS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 124
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 124
+            end,
 
             onEventFinish =
             {
@@ -47,12 +45,9 @@ mission.sections =
 
         [xi.zone.THE_SHROUDED_MAW] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 12
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 12
+            end,
 
             onEventFinish =
             {

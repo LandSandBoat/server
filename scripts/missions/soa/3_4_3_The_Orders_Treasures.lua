@@ -6,6 +6,7 @@
 -- Levil : !pos -87.204 3.350 12.655 256
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_ORDERS_TREASURES)
 
 mission.reward =
@@ -27,12 +28,9 @@ mission.sections =
 
         [xi.zone.CELENNIA_MEMORIAL_LIBRARY] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 4
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 4
+            end,
 
             onEventFinish =
             {

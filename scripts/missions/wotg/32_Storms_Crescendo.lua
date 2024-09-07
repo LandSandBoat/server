@@ -8,6 +8,7 @@
 local pastXarcabardID = zones[xi.zone.XARCABARD_S]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.STORMS_CRESCENDO)
 
 mission.reward =
@@ -69,18 +70,15 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    local missionStatus = mission:getVar(player, 'Status')
+            onZoneIn = function(player, prevZone)
+                local missionStatus = mission:getVar(player, 'Status')
 
-                    if missionStatus == 2 then
-                        return 20
-                    elseif missionStatus == 4 then
-                        return 39
-                    end
-                end,
-            },
+                if missionStatus == 2 then
+                    return 20
+                elseif missionStatus == 4 then
+                    return 39
+                end
+            end,
 
             onEventFinish =
             {

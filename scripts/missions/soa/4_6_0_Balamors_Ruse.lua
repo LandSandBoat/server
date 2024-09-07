@@ -6,6 +6,7 @@
 -- Levil           : !pos -87.204 3.350 12.655 256
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.BALAMORS_RUSE)
 
 mission.reward =
@@ -57,14 +58,11 @@ mission.sections =
             ['Spoutdrenched_Toad'] = keyItemOnMobDeath,
             ['Waterway_Pugil']     = keyItemOnMobDeath,
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return 369
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 1 then
+                    return 369
+                end
+            end,
 
             onEventFinish =
             {

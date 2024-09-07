@@ -5,6 +5,7 @@
 -- Inconspicuous Door : !pos -15 1.300 68 244
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
 
 mission.reward =

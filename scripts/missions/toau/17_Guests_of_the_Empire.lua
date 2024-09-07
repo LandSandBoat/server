@@ -9,6 +9,7 @@
 local whitegateShared = require('scripts/zones/Aht_Urhgan_Whitegate/Shared')
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.GUESTS_OF_THE_EMPIRE)
 
 mission.reward =

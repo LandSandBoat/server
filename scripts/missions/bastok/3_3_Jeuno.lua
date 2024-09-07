@@ -14,6 +14,7 @@
 local lowerDelkfuttID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.JEUNO)
 
 mission.reward =

@@ -6,6 +6,7 @@
 -- Nashib : !pos -274.334 -9.287 -64.255 79
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.SHADES_OF_VENGEANCE)
 
 mission.reward =
@@ -35,14 +36,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 21
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 21
+                end
+            end,
 
             onEventFinish =
             {

@@ -6,6 +6,7 @@
 -- blank_toau20 : !pos -298 36 -38 68
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.MISPLACED_NOBILITY)
 
 mission.reward =

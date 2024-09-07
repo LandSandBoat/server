@@ -6,6 +6,7 @@
 -- Hollowed Pathway : !pos 215.371 39.025 -446.368 267
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.SOUL_SIPHON)
 
 mission.reward =
@@ -29,14 +30,11 @@ mission.sections =
         {
             ['Hollowed_Pathway'] = mission:progressEvent(32),
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 2 then
-                        mission:complete(player)
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 2 then
+                    mission:complete(player)
+                end
+            end,
 
             onEventFinish =
             {
@@ -51,14 +49,11 @@ mission.sections =
 
         [xi.zone.CIRDAS_CAVERNS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return 29
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 1 then
+                    return 29
+                end
+            end,
 
             onEventFinish =
             {

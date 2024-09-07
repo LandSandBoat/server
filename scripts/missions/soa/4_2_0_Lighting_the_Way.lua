@@ -7,6 +7,7 @@
 -- Alpine Trail : !pos -13.479 -1.047 488.863 267
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.LIGHTING_THE_WAY)
 
 mission.reward =
@@ -31,14 +32,11 @@ mission.sections =
         {
             ['Alpine_Trail'] = mission:progressEvent(44),
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 2 then
-                        mission:complete(player)
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 2 then
+                    mission:complete(player)
+                end
+            end,
 
             onEventFinish =
             {
@@ -53,14 +51,11 @@ mission.sections =
 
         [xi.zone.MOUNT_KAMIHR] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return 1
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 1 then
+                    return 1
+                end
+            end,
 
             onEventUpdate =
             {

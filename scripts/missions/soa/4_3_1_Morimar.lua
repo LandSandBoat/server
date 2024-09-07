@@ -7,6 +7,7 @@
 -- Alpine Trail : !pos -13.479 -1.047 488.863 267
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.MORIMAR)
 
 mission.reward =
@@ -44,14 +45,11 @@ mission.sections =
 
         [xi.zone.MOUNT_KAMIHR] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return 3
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 1 then
+                    return 3
+                end
+            end,
 
             onEventUpdate =
             {

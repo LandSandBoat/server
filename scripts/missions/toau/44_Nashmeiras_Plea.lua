@@ -7,6 +7,7 @@
 -- blank_lamp    : !pos 206.55 -1.5 20.05 72
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.NASHMEIRAS_PLEA)
 
 mission.reward =
@@ -54,14 +55,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 2 then
-                        return 10
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 2 then
+                    return 10
+                end
+            end,
 
             onEventFinish =
             {

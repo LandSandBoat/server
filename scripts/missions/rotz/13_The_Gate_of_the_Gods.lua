@@ -7,6 +7,7 @@
 -- RuAun_Gardens     : !zone 130
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_GATE_OF_THE_GODS)
 
 mission.reward =
@@ -23,12 +24,9 @@ mission.sections =
 
         [xi.zone.RUAUN_GARDENS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 51
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 51
+            end,
 
             onEventFinish =
             {

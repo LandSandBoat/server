@@ -8,6 +8,7 @@
 local uggalepihID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.THE_CURSED_TEMPLE)
 
 mission.reward =
@@ -41,21 +42,18 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    -- NOTE: This event appears to only be played if the player has completed ZM4 prior to logging this mission.  On
-                    -- ZM4 complete, if this mission is active, the player will be moved to Wisdom of our Forefathers, where this
-                    -- is not present.
+            onZoneIn = function(player, prevZone)
+                -- NOTE: This event appears to only be played if the player has completed ZM4 prior to logging this mission.  On
+                -- ZM4 complete, if this mission is active, the player will be moved to Wisdom of our Forefathers, where this
+                -- is not present.
 
-                    if
-                        player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH) and
-                        mission:getVar(player, 'Status') == 0
-                    then
-                        return 93
-                    end
-                end,
-            },
+                if
+                    player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH) and
+                    mission:getVar(player, 'Status') == 0
+                then
+                    return 93
+                end
+            end,
 
             onEventFinish =
             {

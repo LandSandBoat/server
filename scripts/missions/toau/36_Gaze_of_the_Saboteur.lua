@@ -6,6 +6,7 @@
 -- Entry Gate : !pos 486 -227.6 -20 78
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.GAZE_OF_THE_SABOTEUR)
 
 mission.reward =
@@ -33,14 +34,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 0 then
-                        return 6
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 0 then
+                    return 6
+                end
+            end,
 
             onEventFinish =
             {

@@ -15,6 +15,7 @@ local boyahdaTreeID   = zones[xi.zone.THE_BOYAHDA_TREE]
 local windurstWoodsID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.DOLL_OF_THE_DEAD)
 
 mission.reward =
@@ -78,14 +79,11 @@ mission.sections =
 
         [xi.zone.FULL_MOON_FOUNTAIN] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 7 then
-                        return 61
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 7 then
+                    return 61
+                end
+            end,
 
             onEventFinish =
             {
@@ -107,14 +105,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 335
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 335
+                end
+            end,
 
             onEventFinish =
             {

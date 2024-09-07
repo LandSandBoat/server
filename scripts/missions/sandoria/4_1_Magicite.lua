@@ -14,6 +14,7 @@
 -- Magicite (Aurastone)  : !pos 11 25 -81 148
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.MAGICITE)
 
 local function magiciteCounter(player)
@@ -321,14 +322,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Option') == 2 then -- Fickbix CS
-                        return 10000
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Option') == 2 then -- Fickbix CS
+                    return 10000
+                end
+            end,
 
             onEventFinish =
             {

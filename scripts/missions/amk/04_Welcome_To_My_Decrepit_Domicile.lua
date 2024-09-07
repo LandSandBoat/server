@@ -12,6 +12,7 @@
 -- Like in: scripts\quests\adoulin\Flavors_of_Our_Lives.lua
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE)
 
 mission.reward =

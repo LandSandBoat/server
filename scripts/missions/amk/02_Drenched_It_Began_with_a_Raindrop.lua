@@ -7,6 +7,7 @@
 -- YAGUDO_CAULK       : !additem 2759
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
 
 mission.reward =
@@ -17,13 +18,15 @@ mission.reward =
 -- Since there are so many zones with interactions:
 -- Populate each by hand
 mission.sections = {}
-mission.sections[1] = {} -- REMEMBER: Lua is 1-indexed!
+mission.sections[1] = -- REMEMBER: Lua is 1-indexed!
+{
+    check = function(player, currentMission, missionStatus, vars)
+        return currentMission == mission.missionId and
+            xi.moghouse.isInMogHouseInHomeNation(player)
+    end,
+}
 
-mission.sections[1].check = function(player, currentMission, missionStatus, vars)
-    return currentMission == mission.missionId and
-        xi.moghouse.isInMogHouseInHomeNation(player)
-end
-
+---@type ZoneSection
 local moogleTriggerEvent =
 {
     ['Moogle'] =

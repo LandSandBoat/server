@@ -5,6 +5,7 @@
 -- !addmission 13 28
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
 
 mission.reward =
@@ -28,26 +29,25 @@ local rovEntryZones =
 }
 
 mission.sections    = {}
-mission.sections[1] = {}
+mission.sections[1] =
+{
+    check = function(player, currentMission, missionStatus, vars)
+        local pNation = player:getNation()
 
-mission.sections[1].check = function(player, currentMission, missionStatus, vars)
-    local pNation = player:getNation()
+        return currentMission == mission.missionId and
+            (
+                player:getRank(pNation) > 5 or
+                (player:getCurrentMission(pNation) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(pNation) >= 4)
+            )
+    end,
+}
 
-    return currentMission == mission.missionId and
-        (
-            player:getRank(pNation) > 5 or
-            (player:getCurrentMission(pNation) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(pNation) >= 4)
-        )
-end
-
+---@type ZoneSection
 local rovZoneInEvent =
 {
-    onZoneIn =
-    {
-        function(player, prevZone)
-            return 30036
-        end,
-    },
+    onZoneIn = function(player, prevZone)
+        return 30036
+    end,
 
     onEventFinish =
     {

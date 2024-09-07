@@ -6,6 +6,7 @@
 -- Halver : !pos 2 0.1 0.1 233
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.CONFESSIONS_OF_ROYALTY)
 
 mission.reward =

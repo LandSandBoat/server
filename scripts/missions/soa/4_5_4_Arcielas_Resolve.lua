@@ -8,6 +8,7 @@
 -- Royal Sepulcher : !pos 319 -7.5 -300 258
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ARCIELAS_RESOLVE)
 
 mission.reward =

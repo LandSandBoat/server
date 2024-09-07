@@ -8,6 +8,7 @@
 local pastSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.PROOF_OF_VALOR)
 
 mission.reward =
@@ -34,7 +35,7 @@ local orcItems =
 
 local function completePetition(player, posBit, numSignatures)
     mission:setVarBit(player, 'Status', posBit)
-    mission:addVar(player, 'Option', numSignatures)
+    mission:incrementVar(player, 'Option', numSignatures)
 
     local totalSignatures = mission:getVar(player, 'Option')
 

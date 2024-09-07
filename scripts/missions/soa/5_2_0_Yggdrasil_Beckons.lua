@@ -6,6 +6,7 @@
 -- Levil : !pos -87.204 3.350 12.655 256
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.YGGDRASIL_BECKONS)
 
 mission.reward =
@@ -36,17 +37,14 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        mission:isVarBitsSet(player, 'Status', 3) and
-                        not player:hasKeyItem(xi.ki.DHOKMAKS_BLOOD_SIGIL)
-                    then
-                        return 36
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    mission:isVarBitsSet(player, 'Status', 3) and
+                    not player:hasKeyItem(xi.ki.DHOKMAKS_BLOOD_SIGIL)
+                then
+                    return 36
+                end
+            end,
 
             onEventFinish =
             {
@@ -95,17 +93,14 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        mission:isVarBitsSet(player, 'Status', 1) and
-                        not player:hasKeyItem(xi.ki.ASHRAKKS_BLOOD_SIGIL)
-                    then
-                        return 4
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    mission:isVarBitsSet(player, 'Status', 1) and
+                    not player:hasKeyItem(xi.ki.ASHRAKKS_BLOOD_SIGIL)
+                then
+                    return 4
+                end
+            end,
 
             onEventFinish =
             {

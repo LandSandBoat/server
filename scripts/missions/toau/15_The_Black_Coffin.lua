@@ -6,6 +6,7 @@
 -- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.THE_BLACK_COFFIN)
 
 mission.reward =
@@ -41,18 +42,15 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        prevZone == xi.zone.THE_ASHU_TALIF and
-                        player:getMissionStatus(mission.areaId) == 2
-                    then
-                        player:setPos(-456, -3, -405, 64)
-                        return 9
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    prevZone == xi.zone.THE_ASHU_TALIF and
+                    player:getMissionStatus(mission.areaId) == 2
+                then
+                    player:setPos(-456, -3, -405, 64)
+                    return 9
+                end
+            end,
 
             onEventFinish =
             {
@@ -69,21 +67,18 @@ mission.sections =
 
         [xi.zone.NASHMAU] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        prevZone == xi.zone.ARRAPAGO_REEF and
-                        player:getMissionStatus(mission.areaId) == 3 and
-                        player:getXPos() == 0 and
-                        player:getYPos() == 0 and
-                        player:getZPos() == 0
-                    then
-                        player:setPos(-13, 2, -62, 194)
-                        return 281
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    prevZone == xi.zone.ARRAPAGO_REEF and
+                    player:getMissionStatus(mission.areaId) == 3 and
+                    player:getXPos() == 0 and
+                    player:getYPos() == 0 and
+                    player:getZPos() == 0
+                then
+                    player:setPos(-13, 2, -62, 194)
+                    return 281
+                end
+            end,
 
             onEventFinish =
             {

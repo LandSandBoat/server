@@ -6,6 +6,7 @@
 -- YORCIA_WEALD : !zone 264
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ORTHARSYNE)
 
 mission.reward =
@@ -22,12 +23,9 @@ mission.sections =
 
         [xi.zone.YORCIA_WEALD] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 1
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 1
+            end,
 
             onEventFinish =
             {

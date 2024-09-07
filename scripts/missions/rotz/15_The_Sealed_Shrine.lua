@@ -8,6 +8,7 @@
 -- Ru'Avitau Main Entrance : !pos -0.2171 -45.013 -119.7575
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_SEALED_SHRINE)
 
 mission.reward =
@@ -68,14 +69,11 @@ mission.sections =
 
         [xi.zone.THE_SHRINE_OF_RUAVITAU] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 51
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 51
+                end
+            end,
 
             onEventFinish =
             {

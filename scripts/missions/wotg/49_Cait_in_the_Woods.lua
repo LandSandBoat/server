@@ -6,6 +6,7 @@
 -- Blank (Cait Sith) : !pos 221.857 -49.213 176.24 81
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_IN_THE_WOODS)
 
 mission.reward =

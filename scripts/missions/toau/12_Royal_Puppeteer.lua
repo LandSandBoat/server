@@ -7,6 +7,7 @@
 -- Pyopyoroon    : !pos 22.112 0 24.682 53
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.ROYAL_PUPPETEER)
 
 mission.reward =

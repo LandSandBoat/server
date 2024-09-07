@@ -6,6 +6,7 @@
 -- Levil : !pos -87.204 3.350 12.655 256
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_SMALLEST_OF_FAVORS)
 
 mission.reward =
@@ -27,19 +28,16 @@ mission.sections =
 
         [xi.zone.CEIZAK_BATTLEGROUNDS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    -- TODO: Do not include Waypoint teleports to Ceizak
+            onZoneIn = function(player, prevZone)
+                -- TODO: Do not include Waypoint teleports to Ceizak
 
-                    if
-                        prevZone == xi.zone.WESTERN_ADOULIN and
-                        mission:getVar(player, 'Timer') <= VanadielUniqueDay()
-                    then
-                        return 20
-                    end
-                end,
-            },
+                if
+                    prevZone == xi.zone.WESTERN_ADOULIN and
+                    mission:getVar(player, 'Timer') <= VanadielUniqueDay()
+                then
+                    return 20
+                end
+            end,
 
             onEventFinish =
             {

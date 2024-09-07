@@ -6,6 +6,7 @@
 -- Decorative Bronze Gate : !pos -601 10 -100 64
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.SHIELD_OF_DIPLOMACY)
 
 mission.reward =
@@ -32,14 +33,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 0 then
-                        return 1
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 0 then
+                    return 1
+                end
+            end,
 
             onEventFinish =
             {

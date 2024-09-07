@@ -8,6 +8,7 @@
 local norgID = zones[xi.zone.NORG]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.ENEMY_OF_THE_EMPIRE_I)
 
 mission.reward =

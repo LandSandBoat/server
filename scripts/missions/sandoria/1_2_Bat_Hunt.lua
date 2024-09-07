@@ -13,6 +13,7 @@
 -- Bat Fang          : ItemID 891
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BAT_HUNT)
 
 mission.reward =

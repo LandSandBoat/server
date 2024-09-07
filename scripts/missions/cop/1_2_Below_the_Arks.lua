@@ -11,6 +11,7 @@
 require('scripts/missions/cop/helpers')
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.BELOW_THE_ARKS)
 
 mission.reward =

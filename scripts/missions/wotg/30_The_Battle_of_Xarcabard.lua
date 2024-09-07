@@ -6,6 +6,7 @@
 -- Rally Point: Red : !pos -106.071 -25.5 -52.841 137
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.THE_BATTLE_OF_XARCABARD)
 
 mission.reward =
@@ -33,14 +34,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 0 then
-                        return 17
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 0 then
+                    return 17
+                end
+            end,
 
             onEventFinish =
             {

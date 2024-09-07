@@ -7,6 +7,7 @@
 -- LA_VAULE_S       : !zone 85
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.A_TIMESWEPT_BUTTERFLY)
 
 mission.reward =
@@ -23,14 +24,11 @@ mission.sections =
 
         [xi.zone.LA_VAULE_S] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if prevZone == xi.zone.JUGNER_FOREST_S then
-                        return 1
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if prevZone == xi.zone.JUGNER_FOREST_S then
+                    return 1
+                end
+            end,
 
             onEventFinish =
             {

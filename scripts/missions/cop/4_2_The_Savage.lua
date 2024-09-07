@@ -7,6 +7,7 @@
 -- Justinius        : !pos 76 -34 68 26
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_SAVAGE)
 
 mission.reward =

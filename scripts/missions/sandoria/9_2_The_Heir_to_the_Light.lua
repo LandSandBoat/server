@@ -12,6 +12,7 @@
 local chateauID = zones[xi.zone.CHATEAU_DORAGUILLE]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT)
 
 mission.reward =
@@ -125,7 +126,7 @@ mission.sections =
                     elseif missionStatus > 5 then
                         return mission:progressEvent(30)
                     elseif missionStatus > 4 then
-                        return mission:progressEvent(npc, chateauID.text.HEIR_TO_LIGHT_EXTRA)
+                        return mission:messageText(chateauID.text.HEIR_TO_LIGHT_EXTRA)
                     elseif missionStatus > 1 then
                         return mission:progressEvent(29)
                     end
@@ -184,14 +185,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 10
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 10
+                end
+            end,
 
             onEventFinish =
             {
@@ -229,18 +227,15 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    local missionStatus = player:getMissionStatus(mission.areaId)
+            onZoneIn = function(player, prevZone)
+                local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if missionStatus == 0 then
-                        return 1
-                    elseif missionStatus == 4 then
-                        return 0
-                    end
-                end,
-            },
+                if missionStatus == 0 then
+                    return 1
+                elseif missionStatus == 4 then
+                    return 0
+                end
+            end,
 
             onEventFinish =
             {
@@ -256,14 +251,11 @@ mission.sections =
 
         [xi.zone.FEIYIN] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 2 then
-                        return 23
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 2 then
+                    return 23
+                end
+            end,
 
             onEventFinish =
             {
@@ -372,14 +364,11 @@ mission.sections =
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Option') == 1 then
-                        return 0
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Option') == 1 then
+                    return 0
+                end
+            end,
 
             onEventFinish =
             {

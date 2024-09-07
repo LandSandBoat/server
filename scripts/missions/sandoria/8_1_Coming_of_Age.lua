@@ -14,6 +14,7 @@ local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.COMING_OF_AGE)
 
 mission.reward =
@@ -78,14 +79,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 0 then
-                        return 116
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 0 then
+                    return 116
+                end
+            end,
 
             onEventFinish =
             {
@@ -182,17 +180,14 @@ mission.sections =
         {
             ['Grilau'] = mission:messageSpecial(northernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 127):setPriority(1000),
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        mission:getVar(player, 'Progress') < os.time() and
-                        not player:isInMogHouse()
-                    then
-                        return 16
-                    end
+            onZoneIn = function(player, prevZone)
+                if
+                    mission:getVar(player, 'Progress') < os.time() and
+                    not player:isInMogHouse()
+                then
+                    return 16
                 end
-            },
+            end,
 
             onEventFinish =
             {

@@ -7,6 +7,7 @@
 -- Ploh Trishbahk : !pos 100.580 -40.150 -63.830 257
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.AN_EMERGENCY_CONVOCATION)
 
 mission.reward =
@@ -39,18 +40,15 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    local missionStatus = mission:getVar(player, 'Status')
+            onZoneIn = function(player, prevZone)
+                local missionStatus = mission:getVar(player, 'Status')
 
-                    if missionStatus == 1 then
-                        return 1551
-                    elseif missionStatus == 2 then
-                        return 1552
-                    end
-                end,
-            },
+                if missionStatus == 1 then
+                    return 1551
+                elseif missionStatus == 2 then
+                    return 1552
+                end
+            end,
 
             onEventUpdate =
             {

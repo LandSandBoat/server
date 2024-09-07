@@ -6,6 +6,7 @@
 -- qm7 : !pos 110.909 -0.095 -6.851 176
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.THE_TIES_THAT_BIND)
 
 mission.reward =

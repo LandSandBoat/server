@@ -14,6 +14,7 @@ local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS)
 
 mission.reward =

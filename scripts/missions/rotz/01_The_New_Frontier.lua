@@ -8,6 +8,7 @@
 -- Norg : !zone 252
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER)
 
 mission.reward =
@@ -26,12 +27,9 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 1
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 1
+            end,
 
             onEventFinish =
             {

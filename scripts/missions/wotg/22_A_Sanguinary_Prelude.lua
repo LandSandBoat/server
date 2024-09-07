@@ -5,6 +5,7 @@
 -- !addmission 5 21
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.A_SANGUINARY_PRELUDE)
 
 mission.reward =
@@ -22,12 +23,9 @@ mission.sections =
 
         [xi.zone.BEAUCEDINE_GLACIER_S] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 17
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 17
+            end,
 
             onEventFinish =
             {

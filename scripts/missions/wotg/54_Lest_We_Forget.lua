@@ -8,6 +8,7 @@
 local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.LEST_WE_FORGET)
 
 mission.reward = {}
@@ -68,17 +69,14 @@ mission.sections =
                 end,
             },
 
-            afterZoneIn =
-            {
-                function(player)
-                    if
-                        not player:hasItem(xi.item.MOONSHADE_EARRING) and
-                        mission:getVar(player, 'Status') == 0
-                    then
-                        mission:setLocalVar(player, 'Option', 1)
-                    end
-                end,
-            },
+            afterZoneIn = function(player)
+                if
+                    not player:hasItem(xi.item.MOONSHADE_EARRING) and
+                    mission:getVar(player, 'Status') == 0
+                then
+                    mission:setLocalVar(player, 'Option', 1)
+                end
+            end,
 
             onEventUpdate =
             {

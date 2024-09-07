@@ -11,6 +11,7 @@ local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_CRYSTAL_SPRING)
 
 mission.reward =
@@ -68,17 +69,14 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        prevZone == xi.zone.NORTHERN_SAN_DORIA and
-                        player:getMissionStatus(mission.areaId) == 2
-                    then
-                        return 555
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    prevZone == xi.zone.NORTHERN_SAN_DORIA and
+                    player:getMissionStatus(mission.areaId) == 2
+                then
+                    return 555
+                end
+            end,
 
             onEventFinish =
             {

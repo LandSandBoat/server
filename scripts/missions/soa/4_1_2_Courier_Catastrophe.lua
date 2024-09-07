@@ -10,6 +10,7 @@
 local westernAdoulinID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.COURIER_CATASTROPHE)
 
 mission.reward =

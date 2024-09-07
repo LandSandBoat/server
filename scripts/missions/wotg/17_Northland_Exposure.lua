@@ -6,6 +6,7 @@
 -- BEAUCEDINE_GLACIER_S : !zone 136
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.NORTHLAND_EXPOSURE)
 
 mission.reward =
@@ -23,12 +24,9 @@ mission.sections =
 
         [xi.zone.BEAUCEDINE_GLACIER_S] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 13
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 13
+            end,
 
             onEventFinish =
             {

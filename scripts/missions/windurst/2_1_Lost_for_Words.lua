@@ -16,6 +16,7 @@
 local mazeID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.LOST_FOR_WORDS)
 
 mission.reward =

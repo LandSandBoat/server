@@ -12,6 +12,7 @@
 -- Thone Room Door  : !pos -111 -6 0 165
 -----------------------------------
 
+---@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SHADOW_AWAITS)
 
 mission.reward =
@@ -142,7 +143,8 @@ mission.sections =
                             player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER)
                         end
 
-                        return mission:progressEvent(7)
+                        -- TODO: Check captures, the player is most likely zoned and this even triggered via onZoneIn
+                        player:startEvent(7)
                     end
                 end,
 
@@ -159,17 +161,14 @@ mission.sections =
 
         [xi.zone.CASTLE_ZVAHL_BAILEYS] =
         {
-            afterZoneIn =
-            {
-                function(player)
-                    if
-                        player:getMissionStatus(mission.areaId) == 4 and
-                        not player:hasKeyItem(xi.ki.SHADOW_FRAGMENT)
-                    then
-                        npcUtil.giveKeyItem(player, xi.ki.SHADOW_FRAGMENT)
-                    end
-                end,
-            },
+            afterZoneIn = function(player)
+                if
+                    player:getMissionStatus(mission.areaId) == 4 and
+                    not player:hasKeyItem(xi.ki.SHADOW_FRAGMENT)
+                then
+                    npcUtil.giveKeyItem(player, xi.ki.SHADOW_FRAGMENT)
+                end
+            end,
         },
     },
 }
