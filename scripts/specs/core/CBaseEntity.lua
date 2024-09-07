@@ -432,8 +432,12 @@ end
 ---@param arg1 number
 ---@param arg2 number
 ---@return nil
----@overload fun(arg0: table): nil
 function CBaseEntity:lookAt(arg0, arg1, arg2)
+end
+
+---@param posTable table
+---@return nil
+function CBaseEntity:lookAt(posTable)
 end
 
 ---@param PLuaBaseEntity CBaseEntity
@@ -492,9 +496,19 @@ end
 ---@param arg1 number
 ---@param arg2 number
 ---@return number
----@overload fun(arg0: table): number
----@overload fun(arg0: CBaseEntity): number
 function CBaseEntity:checkDistance(arg0, arg1, arg2)
+end
+
+---@nodiscard
+---@param posTable table
+---@return number
+function CBaseEntity:checkDistance(posTable)
+end
+
+---@nodiscard
+---@param targetEntity CBaseEntity
+---@return number
+function CBaseEntity:checkDistance(targetEntity)
 end
 
 ---@param milliseconds integer?
@@ -620,8 +634,15 @@ end
 ---@param target CBaseEntity
 ---@param degrees integer?
 ---@return integer
----@overload fun(posX: number?, posY: number?, posZ: number?): integer
 function CBaseEntity:getWorldAngle(target, degrees)
+end
+
+---@nodiscard
+---@param posX number
+---@param posY number
+---@param posZ number
+---@return integer
+function CBaseEntity:getWorldAngle(posX, posY, posZ)
 end
 
 ---@nodiscard
@@ -772,8 +793,12 @@ end
 ---@param rot integer?
 ---@param zoneId integer?
 ---@return nil
----@overload fun(arg0: table): nil
 function CBaseEntity:setPos(x, y, z, rot, zoneId)
+end
+
+---@param posTable table
+---@return nil
+function CBaseEntity:setPos(posTable)
 end
 
 ---@return nil
@@ -933,8 +958,13 @@ end
 ---@param arg2 integer
 ---@param arg3 integer
 ---@return nil
----@overload fun(itemID: integer, rawPrice: number): nil
 function CBaseEntity:addShopItem(itemID, rawPrice, arg2, arg3)
+end
+
+---@param itemID integer
+---@param rawPrice number
+---@return nil
+function CBaseEntity:addShopItem(itemID, rawPrice)
 end
 
 ---@nodiscard
@@ -2681,8 +2711,12 @@ end
 ---@param subPower integer?
 ---@param tier integer?
 ---@return boolean
----@overload fun(effectID: CStatusEffect): boolean
 function CBaseEntity:addStatusEffect(effectID, power, tick, duration, subType, subPower, tier)
+end
+
+---@param effect CStatusEffect
+---@return boolean
+function CBaseEntity:addStatusEffect(effect)
 end
 
 -- NOTE: Currently this function allows for an optional last parameter at any position.  This is represented
@@ -3711,8 +3745,11 @@ end
 ---@param skillID integer
 ---@param PLuaBaseEntity CBaseEntity?
 ---@return nil
----@overload fun(): nil
 function CBaseEntity:useMobAbility(skillID, PLuaBaseEntity)
+end
+
+---@return nil
+function CBaseEntity:useMobAbility()
 end
 
 ---@nodiscard
@@ -3728,8 +3765,11 @@ end
 
 ---@param PLuaBaseEntity CBaseEntity
 ---@return nil
----@overload fun(): nil
 function CBaseEntity:drawIn(PLuaBaseEntity)
+end
+
+---@return nil
+function CBaseEntity:drawIn()
 end
 
 ---@param level integer

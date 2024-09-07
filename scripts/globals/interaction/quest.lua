@@ -10,7 +10,6 @@ require('scripts/globals/interaction/container')
 Quest = setmetatable({ areaId = 0 }, { __index = Container })
 Quest.__index = Quest
 
----@diagnostic disable-next-line: duplicate-set-field
 Quest.__eq = function(q1, q2)
     return q1.areaId == q2.areaId and q1.questId == q2.questId
 end
@@ -21,6 +20,7 @@ Quest.reward = {}
 ---@type TQuestSection[]
 Quest.sections = {}
 
+---@nodiscard
 ---@param areaId xi.questLog
 ---@param questId integer
 ---@return TQuest
@@ -32,6 +32,7 @@ function Quest:new(areaId, questId)
     return obj
 end
 
+---@nodiscard
 ---@param areaId xi.questLog
 ---@param questId integer
 ---@return string
@@ -39,8 +40,9 @@ function Quest.getVarPrefix(areaId, questId)
     return string.format('Quest[%d][%d]', areaId, questId)
 end
 
+---@nodiscard
 ---@param player CBaseEntity
----@return { [integer]: xi.questStatus }
+---@return table<xi.questStatus>
 function Quest:getCheckArgs(player)
     return { player:getQuestStatus(self.areaId, self.questId) }
 end

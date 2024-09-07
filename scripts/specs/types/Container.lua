@@ -1,24 +1,15 @@
--- Supporting Class Definitions for Interaction Quests.  TQuest definition
--- is contained within scripts/globals/interaction/quest.lua
-
+-- Interaction Container definitions
 ---@meta
 
--- Definitions for quest.sections{}
----@class TQuestSection
----@field check fun(player: CBaseEntity, status: xi.questStatus, vars: { [string]: integer }): boolean
----@field [xi.zone] ZoneSection
-
--- TODO: Below here, we can most likely be generic and reuse these definitions for Hidden Quests, Missions,
--- and perhaps Battlefields as well
 ---@class ZoneSection
 ---@field onZoneIn? fun(player: CBaseEntity, prevZone: xi.zone): integer|table<integer>?
 ---@field onZoneOut? onZoneHandler
 ---@field afterZoneIn? onZoneHandler
----@field [string]? EntitySection|TAction|fun(player: CBaseEntity, npc: CBaseEntity): TAction?
 ---@field onEventUpdate? onEventHandler
 ---@field onEventFinish? onEventHandler
 ---@field onTriggerAreaEnter? onTriggerAreaHandler
 ---@field onTriggerAreaLeave? onTriggerAreaHandler
+---@field [string]? EntitySection|TAction|fun(player: CBaseEntity, npc: CBaseEntity): TAction?
 
 ---@alias onZoneHandler fun(player: CBaseEntity): TAction?
 
@@ -32,3 +23,12 @@
 
 ---@class onEventHandler
 ---@field [integer] fun(player: CBaseEntity, csid: integer, option: integer, npc: CBaseEntity)
+
+-- Quest and Mission sections vary slightly based on their check function (below):
+---@class TQuestSection
+---@field check fun(player: CBaseEntity, status: xi.questStatus, vars: { [string]: integer }): boolean
+---@field [xi.zone] ZoneSection
+
+---@class TMissionSection
+---@field check fun(player: CBaseEntity, currentMission: integer, missionStatus: integer, vars: { [string]: integer }): boolean
+---@field [xi.zone] ZoneSection
