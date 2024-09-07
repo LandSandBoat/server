@@ -902,72 +902,61 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
         return;
     }
 
-    for (auto& group : m_groups)
-    {
-        for (uint32 mobId : group.mobIds)
-        {
-            if (mobId == PEntity->id)
-            {
-                ++group.deathCount;
-
-                break;
-            }
-        }
-    }
-
+    // Create a copy of groups since m_groups may change during the callbacks
     auto groups(m_groups);
 
     for (auto& group : groups)
     {
+        // Calculate the total mobs that are dead for this group
+        uint8 deathCount = 0;
+
+        for (uint32 mobID : group.mobIds)
+        {
+            CMobEntity* PMob = dynamic_cast<CMobEntity*>(zoneutils::GetEntity(mobID, TYPE_MOB | TYPE_PET));
+            if (PMob == nullptr || PMob->isDead())
+            {
+                ++deathCount;
+            }
+        }
+
         for (uint32 mobId : group.mobIds)
         {
-            if (mobId == PEntity->id)
+            if (mobId != PEntity->id)
             {
-                if (group.deathCallback.valid())
-                {
-                    auto result = group.deathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity), group.deathCount);
-                    if (!result.valid())
-                    {
-                        sol::error err = result;
-                        ShowError("Error in battlefield %s group.death: %s", this->GetName(), err.what());
-                    }
-                }
-
-                if (group.allDeathCallback.valid() && group.deathCount >= group.mobIds.size())
-                {
-                    // Validate all mobs in the group are dead since they may have been revived
-                    uint16 deathCount = 0;
-                    for (auto& deathMobId : group.mobIds)
-                    {
-                        CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(deathMobId, TYPE_MOB | TYPE_PET);
-                        if (PMob != nullptr && PMob->isDead())
-                        {
-                            ++deathCount;
-                        }
-                    }
-
-                    if (deathCount == group.mobIds.size())
-                    {
-                        auto result = group.allDeathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity));
-                        if (!result.valid())
-                        {
-                            sol::error err = result;
-                            ShowError("Error in battlefield %s group.allDeath: %s", this->GetName(), err.what());
-                        }
-                    }
-                }
-
-                if (group.randomDeathCallback.valid() && mobId == group.randomMobId)
-                {
-                    auto result = group.randomDeathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity));
-                    if (!result.valid())
-                    {
-                        sol::error err = result;
-                        ShowError("Error in battlefield %s group.randomDeath: %s", this->GetName(), err.what());
-                    }
-                }
-                break;
+                continue;
             }
+
+            if (group.deathCallback.valid())
+            {
+                auto result = group.deathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity), deathCount);
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowError("Error in battlefield %s group.death: %s", this->GetName(), err.what());
+                }
+            }
+
+            if (group.allDeathCallback.valid() && deathCount >= group.mobIds.size())
+            {
+                auto result = group.allDeathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity));
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowError("Error in battlefield %s group.allDeath: %s", this->GetName(), err.what());
+                }
+            }
+
+            if (group.randomDeathCallback.valid() && mobId == group.randomMobId)
+            {
+                auto result = group.randomDeathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity));
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowError("Error in battlefield %s group.randomDeath: %s", this->GetName(), err.what());
+                }
+            }
+
+            break;
         }
     }
 }
