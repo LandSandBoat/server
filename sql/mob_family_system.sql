@@ -216,8 +216,8 @@ INSERT INTO `mob_family_system` VALUES (162,'HybridElemental-Water',87,'Hybrid_E
 
 INSERT INTO `mob_family_system` VALUES (163,'Hydra',88,'Hydra',10,'Dragon',4.00,40,90,90,2,3,1,2,1,5,3,1,2,1,3,6.0,2,0);
 INSERT INTO `mob_family_system` VALUES (164,'Hydra',88,'Hydra',10,'Dragon',4.00,40,90,90,2,3,1,2,1,5,3,1,2,1,3,6.0,2,0);
-INSERT INTO `mob_family_system` VALUES (165,'Imp',89,'Imp',9,'Demon',0.00,50,70,140,6,3,4,3,1,5,4,1,3,1,5,8.0,1,0);
-INSERT INTO `mob_family_system` VALUES (166,'Imp',89,'Imp',9,'Demon',0.00,50,70,140,6,3,4,3,1,5,4,1,3,1,5,8.0,1,0);
+INSERT INTO `mob_family_system` VALUES (165,'Imp',89,'Imp',9,'Demon',0.00,50,70,140,6,3,4,3,1,5,4,1,3,1,5,8.0,3,0);
+INSERT INTO `mob_family_system` VALUES (166,'Imp',89,'Imp',9,'Demon',0.00,50,70,140,6,3,4,3,1,5,4,1,3,1,5,8.0,3,0);
 INSERT INTO `mob_family_system` VALUES (167,'Karakul',90,'Sheep',6,'Beast',1.00,40,90,110,3,4,4,4,5,4,4,1,3,1,3,4.0,1,1);
 INSERT INTO `mob_family_system` VALUES (168,'Khimaira',91,'Khimaira',3,'Arcana',3.00,40,90,90,4,3,3,3,4,6,5,1,3,1,3,5.0,3,0);
 INSERT INTO `mob_family_system` VALUES (169,'Kindred',92,'Kindred',9,'Demon',0.00,50,110,140,1,2,4,4,1,2,4,1,3,1,3,8.0,257,0);
