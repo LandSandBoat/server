@@ -17646,6 +17646,129 @@ uint32 CLuaBaseEntity::getHistory(uint8 index)
     return outStat;
 }
 
+/************************************************************************
+ *  Function: getFishingStats()
+ *  Purpose : Gets a lua table with all player fishing stats
+ *  Example : player:getFishingStats()
+ ************************************************************************/
+
+auto CLuaBaseEntity::getFishingStats() -> sol::table
+{
+    // Return a table of 0s as a default
+    auto table                  = lua.create_table();
+    table["fishLinesCast"]      = 0;
+    table["fishReeled"]         = 0;
+    table["fishLongestId"]      = 0;
+    table["fishLongestLength"]  = 0;
+    table["fishHeaviestId"]     = 0;
+    table["fishHeaviestWeight"] = 0;
+
+    if (auto PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        table["fishLinesCast"]      = PChar->m_fishHistory.fishLinesCast;
+        table["fishReeled"]         = PChar->m_fishHistory.fishReeled;
+        table["fishLongestId"]      = PChar->m_fishHistory.fishLongestId;
+        table["fishLongestLength"]  = PChar->m_fishHistory.fishLongest;
+        table["fishHeaviestId"]     = PChar->m_fishHistory.fishHeaviestId;
+        table["fishHeaviestWeight"] = PChar->m_fishHistory.fishHeaviest;
+    }
+    else
+    {
+        ShowDebug("Called getFishingStats on object other than PC");
+    }
+
+    return table;
+}
+
+auto CLuaBaseEntity::getFishingCatches() -> sol::table
+{
+    auto table = lua.create_table();
+    table[0]   = 0;
+    table[1]   = 0;
+    table[2]   = 0;
+    table[3]   = 0;
+    table[4]   = 0;
+    table[5]   = 0;
+
+    if (auto PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        // The server sends the client the fish history bitmap as a series of 32-bit integers
+        uint32 vals[6] = { 0 };
+
+        for (uint8 i = 0; i < PChar->m_fishHistory.fishCatches.size(); i++)
+        {
+            vals[i / 32] |= (static_cast<uint8>(PChar->m_fishHistory.fishCatches.test(i)) << static_cast<uint8>(i % 32));
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            table[i] = vals[i];
+        }
+    }
+    else
+    {
+        ShowDebug("Called getFishingCatches on object other than PC");
+    }
+
+    return table;
+}
+
+uint32 CLuaBaseEntity::getFishingCatchCount()
+{
+    if (auto PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        return static_cast<uint32>(PChar->m_fishHistory.fishCatches.count());
+    }
+
+    return 0;
+}
+
+void CLuaBaseEntity::setFishCaught(uint16 fishId, bool isCaught)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        fishingutils::UpdatePlayerFishCatches(PChar, fishId, isCaught);
+    }
+}
+
+void CLuaBaseEntity::clearFishCaught()
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->m_fishHistory.fishCatches.reset();
+        charutils::WriteFishingHistory(PChar);
+    }
+}
+
+void CLuaBaseEntity::clearFishHistory()
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->m_fishHistory.fishLinesCast  = 0;
+        PChar->m_fishHistory.fishReeled     = 0;
+        PChar->m_fishHistory.fishLongest    = 0;
+        PChar->m_fishHistory.fishLongestId  = 0;
+        PChar->m_fishHistory.fishHeaviest   = 0;
+        PChar->m_fishHistory.fishHeaviestId = 0;
+        charutils::WriteFishingHistory(PChar);
+    }
+}
+
+bool CLuaBaseEntity::hasCaughtFish(uint16 fishId)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        uint8 fishIndex = fishingutils::GetFishBit(fishId);
+
+        if (fishIndex < PChar->m_fishHistory.fishCatches.size())
+        {
+            return PChar->m_fishHistory.fishCatches.test(fishIndex);
+        }
+    }
+
+    return false;
+}
+
 auto CLuaBaseEntity::getChocoboRaisingInfo() -> sol::table
 {
     ShowDebug("Getting Raising Chocobo Info (%s)", m_PBaseEntity->name);
@@ -18774,6 +18897,15 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setClaimedTraverserStones", CLuaBaseEntity::setClaimedTraverserStones);
 
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
+
+    // Fishing Data
+    SOL_REGISTER("getFishingStats", CLuaBaseEntity::getFishingStats);
+    SOL_REGISTER("getFishingCatches", CLuaBaseEntity::getFishingCatches);
+    SOL_REGISTER("getFishingCatchCount", CLuaBaseEntity::getFishingCatchCount);
+    SOL_REGISTER("setFishCaught", CLuaBaseEntity::setFishCaught);
+    SOL_REGISTER("hasCaughtFish", CLuaBaseEntity::hasCaughtFish);
+    SOL_REGISTER("clearFishCaught", CLuaBaseEntity::clearFishCaught);
+    SOL_REGISTER("clearFishHistory", CLuaBaseEntity::clearFishHistory);
 
     SOL_REGISTER("clearActionQueue", CLuaBaseEntity::clearActionQueue);
     SOL_REGISTER("clearTimerQueue", CLuaBaseEntity::clearTimerQueue);

@@ -895,6 +895,14 @@ public:
 
     uint32 getHistory(uint8 index);
 
+    auto   getFishingStats() -> sol::table;
+    auto   getFishingCatches() -> sol::table;
+    uint32 getFishingCatchCount();
+    void   setFishCaught(uint16 fishId, bool isCaught);
+    void   clearFishCaught();
+    void   clearFishHistory();
+    bool   hasCaughtFish(uint16 fishId);
+
     auto getChocoboRaisingInfo() -> sol::table;
     bool setChocoboRaisingInfo(sol::table const& table);
     bool deleteRaisedChocobo();

@@ -7000,6 +7000,73 @@ namespace charutils
         }
     }
 
+    void ReadFishingHistory(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        auto Query = "SELECT fish_catches, fish_linescast, fish_reeled, fish_longest, fish_longest_id, fish_heaviest, fish_heaviest_id "
+                     "FROM char_fishing_history "
+                     "WHERE charid = (?);";
+
+        auto ret = db::preparedStmt(Query, PChar->id);
+
+        if (ret && ret->rowsCount() > 0 && ret->next())
+        {
+            db::extractFromBlob(ret, "fish_catches", PChar->m_fishHistory.fishCatches);
+            PChar->m_fishHistory.fishLinesCast  = ret->getUInt("fish_linescast");
+            PChar->m_fishHistory.fishReeled     = ret->getUInt("fish_reeled");
+            PChar->m_fishHistory.fishLongest    = ret->getUInt("fish_longest");
+            PChar->m_fishHistory.fishLongestId  = ret->getUInt("fish_longest_id");
+            PChar->m_fishHistory.fishHeaviest   = ret->getUInt("fish_heaviest");
+            PChar->m_fishHistory.fishHeaviestId = ret->getUInt("fish_heaviest_id");
+        }
+    }
+
+    void WriteFishingHistory(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        // Replace will also handle insert if it doesn't exist
+        auto Query = "REPLACE INTO char_fishing_history "
+                     "(charid, fish_catches, fish_linescast, fish_reeled, fish_longest, fish_longest_id, fish_heaviest, fish_heaviest_id) "
+                     "VALUES("
+                     "{}, "   // charid
+                     "'{}', " // Fish List
+                     "{}, "   // Number of times the line has been cast
+                     "{}, "   // Number of fish successfully reeled in
+                     "{}, "   // Length in ilms of the longest fish caught
+                     "{}, "   // ID of the longest fish caught
+                     "{}, "   // Weight in ponzes of the heaviest fish caught
+                     "{} "    // ID of the heavieset fish caught
+                     ");";
+
+        auto fishCatches = db::encodeToBlob(PChar->m_fishHistory.fishCatches);
+        auto ret         = db::query(fmt::format(Query,
+                                                 PChar->id,
+                                                 fishCatches,
+                                                 PChar->m_fishHistory.fishLinesCast,
+                                                 PChar->m_fishHistory.fishReeled,
+                                                 PChar->m_fishHistory.fishLongest,
+                                                 PChar->m_fishHistory.fishLongestId,
+                                                 PChar->m_fishHistory.fishHeaviest,
+                                                 PChar->m_fishHistory.fishHeaviestId));
+
+        if (ret == nullptr)
+        {
+            ShowError("Error writing fishing history for: '%s'", PChar->name.c_str());
+        }
+    }
+
     uint8 getMaxItemLevel(CCharEntity* PChar)
     {
         uint8 maxItemLevel = 0;

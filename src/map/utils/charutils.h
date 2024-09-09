@@ -271,6 +271,9 @@ namespace charutils
     void ReadHistory(CCharEntity* PChar);
     void WriteHistory(CCharEntity* PChar);
 
+    void ReadFishingHistory(CCharEntity* PChar);
+    void WriteFishingHistory(CCharEntity* PChar);
+
     uint8 getMaxItemLevel(CCharEntity* PChar);
     uint8 getItemLevelDifference(CCharEntity* PChar);
     uint8 getMainhandItemLevel(CCharEntity* PChar);

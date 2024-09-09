@@ -254,6 +254,39 @@ struct CharHistory_t
     uint32 distanceTravelled = 0;
 };
 
+enum class FISHING_HISTORY : uint8
+{
+    CAUGHT = 0,
+    LINESCAST,
+    REELED,
+    LONGEST,
+    LONGEST_ID,
+    HEAVIEST,
+    HEAVIEST_ID,
+};
+
+struct CharFishing_t
+{
+    std::bitset<192> fishCatches;    // Index of the types of fish ever caught by player
+    uint32           fishLinesCast;  // Number of times the fishing line was cast
+    uint32           fishReeled;     // Number of fish caught (actual fish, not items)
+    uint32           fishLongest;    // Length in ilms of the longest fish caught
+    uint16           fishLongestId;  // ID of the longest fish caught
+    uint32           fishHeaviest;   // Weight in ponzes of the heaviest fish caught
+    uint16           fishHeaviestId; // ID of the heaviest fish caught
+
+    CharFishing_t()
+    {
+        fishCatches.reset();
+        fishLinesCast  = 0;
+        fishReeled     = 0;
+        fishLongest    = 0;
+        fishLongestId  = 0;
+        fishHeaviest   = 0;
+        fishHeaviestId = 0;
+    }
+};
+
 enum CHAR_SUBSTATE
 {
     SUBSTATE_NONE = 0,
@@ -492,6 +525,7 @@ public:
     uint16 m_moghancementID;
 
     CharHistory_t m_charHistory;
+    CharFishing_t m_fishHistory;
 
     int8  getShieldSize();
     int16 getShieldDefense();

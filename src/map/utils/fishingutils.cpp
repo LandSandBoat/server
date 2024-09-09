@@ -65,6 +65,7 @@ namespace fishingutils
     uint16                                            MessageOffset[MAX_ZONEID];
     fishing_area_pool                                 FishingPools[MAX_ZONEID];
     std::map<uint32, fish_t*>                         FishList;
+    std::map<uint16, uint8>                           FishIndex; // Maps storage bits to Fish IDs for catch history
     std::map<uint16, rod_t*>                          FishingRods;
     std::map<uint16, bait_t*>                         FishingBaits;
     std::map<uint16, std::map<uint32, fishmob_t*>>    FishZoneMobList;       // zoneid, mobid, mob
@@ -1525,6 +1526,22 @@ namespace fishingutils
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CCaughtFishPacket(PChar, FishID, MessageOffset + FISHMESSAGEOFFSET_CATCH, Count));
             }
 
+            // Update fishing statistics
+            PChar->m_fishHistory.fishReeled++;
+
+            if (length > PChar->m_fishHistory.fishLongest)
+            {
+                PChar->m_fishHistory.fishLongest   = length;
+                PChar->m_fishHistory.fishLongestId = Fish->getID();
+            }
+            if (weight > PChar->m_fishHistory.fishHeaviest)
+            {
+                PChar->m_fishHistory.fishHeaviest   = weight;
+                PChar->m_fishHistory.fishHeaviestId = Fish->getID();
+            }
+
+            UpdatePlayerFishCatches(PChar, FishID, true);
+
             return 1;
         }
         else
@@ -1939,6 +1956,8 @@ namespace fishingutils
             PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
             return;
         }
+
+        PChar->m_fishHistory.fishLinesCast++;
 
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HIDE);
@@ -2904,11 +2923,55 @@ namespace fishingutils
         return nullptr;
     }
 
+    uint8 GetFishBit(uint16 fishId)
+    {
+        if (FishIndex.contains(fishId))
+        {
+            return FishIndex[fishId];
+        }
+
+        return 0;
+    }
+
+    void UpdatePlayerFishCatches(CCharEntity* PChar, uint16 fishId, bool value)
+    {
+        uint8 fishIndex = GetFishBit(fishId);
+        bool  oldValue  = PChar->m_fishHistory.fishCatches.test(fishIndex);
+
+        if (value != oldValue)
+        {
+            if (value)
+            {
+                PChar->m_fishHistory.fishCatches.set(fishIndex);
+            }
+            else
+            {
+                PChar->m_fishHistory.fishCatches.reset(fishIndex);
+            }
+            charutils::WriteFishingHistory(PChar);
+        }
+    }
+
     /************************************************************************
      *                                                                       *
      *                            INITIALIZATION                             *
      *                                                                       *
      ************************************************************************/
+    void LoadFishIndex()
+    {
+        const char* Query = "SELECT fishindex, fishid FROM fishing_index";
+
+        auto ret = db::query(Query);
+
+        if (ret && ret->rowsCount() != 0)
+        {
+            while (ret->next())
+            {
+                FishIndex[ret->getUInt("fishid")] = ret->getUInt("fishindex");
+            }
+        }
+    }
+
     void LoadFishingMessages()
     {
         // clang-format off
@@ -3303,6 +3366,7 @@ namespace fishingutils
         LoadFishingAreas();
         LoadFishGroups();
         LoadFishingCatchLists();
+        LoadFishIndex();
         CreateFishingPools();
     }
 
