@@ -11,7 +11,6 @@ local phomiunaID  = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
 local misareauxID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.KNOCKING_ON_FORBIDDEN_DOORS)
 
 quest.sections =

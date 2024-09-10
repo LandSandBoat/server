@@ -5,7 +5,6 @@
 -- Ulamaal, Whitegate, !pos 93 -7.5 -128 50
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.DELIVERING_THE_GOODS)
 
 quest.reward =

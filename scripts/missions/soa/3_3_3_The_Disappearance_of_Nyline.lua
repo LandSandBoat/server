@@ -7,7 +7,6 @@
 -- Boarding House : !pos -41.693 -0.15 -38.29 257
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_DISAPPEARANCE_OF_NYLINE)
 
 mission.reward =

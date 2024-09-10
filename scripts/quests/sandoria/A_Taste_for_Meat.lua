@@ -6,7 +6,6 @@
 -- Thierride : !pos -67 -5 -28 232
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_TASTE_FOR_MEAT)
 
 quest.reward =

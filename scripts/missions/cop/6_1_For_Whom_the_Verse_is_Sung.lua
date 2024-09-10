@@ -7,7 +7,6 @@
 -- Marble Bridge : !pos -96.6 -0.2 92.3 244
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG)
 
 mission.reward =

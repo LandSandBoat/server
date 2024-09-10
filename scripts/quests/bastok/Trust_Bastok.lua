@@ -8,7 +8,6 @@
 local metalworksID = zones[xi.zone.METALWORKS]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
 
 quest.reward =

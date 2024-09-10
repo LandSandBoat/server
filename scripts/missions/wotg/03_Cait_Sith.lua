@@ -12,7 +12,6 @@
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH)
 
 mission.reward =

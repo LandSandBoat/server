@@ -7,7 +7,6 @@
 -- LA_VAULE_S       : !zone 85
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.A_TIMESWEPT_BUTTERFLY)
 
 mission.reward =

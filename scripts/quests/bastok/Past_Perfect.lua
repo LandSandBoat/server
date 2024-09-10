@@ -6,7 +6,6 @@
 -- qm1 : !pos -201 16 80 108
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.PAST_PERFECT)
 
 quest.reward =

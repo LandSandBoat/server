@@ -6,7 +6,6 @@
 -- Hunting Bear: !pos -235.7 40 424.5 106
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_GUSTABERG_TOUR)
 
 quest.reward =

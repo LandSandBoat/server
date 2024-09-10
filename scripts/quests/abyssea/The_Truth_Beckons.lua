@@ -5,7 +5,6 @@
 -- Joachim : !pos -52.844 0 -9.978 246
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
 
 quest.reward = {}

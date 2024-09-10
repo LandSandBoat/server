@@ -5,7 +5,6 @@
 -- !addmission 4 38
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.ALLIED_RUMBLINGS)
 
 mission.reward =

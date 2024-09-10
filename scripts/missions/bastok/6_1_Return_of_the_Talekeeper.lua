@@ -19,7 +19,6 @@ local portBastokID    = zones[xi.zone.PORT_BASTOK]
 local westernAltepaID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER)
 
 mission.reward =

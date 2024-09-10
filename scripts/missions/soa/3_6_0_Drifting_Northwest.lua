@@ -7,7 +7,6 @@
 local kamihrID = zones[xi.zone.KAMIHR_DRIFTS]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.DRIFTING_NORTHWEST)
 
 mission.reward =

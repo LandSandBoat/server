@@ -13,7 +13,6 @@
 -- Trap Door        : !pos 22.310 -1.087 -14.320 151
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT)
 
 mission.reward =

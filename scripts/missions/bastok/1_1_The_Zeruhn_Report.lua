@@ -17,7 +17,6 @@ local portBastokID    = zones[xi.zone.PORT_BASTOK]
 local zeruhnID        = zones[xi.zone.ZERUHN_MINES]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_ZERUHN_REPORT)
 
 local handleAcceptMission = function(player, csid, option, npc)

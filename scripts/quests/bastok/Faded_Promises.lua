@@ -8,7 +8,6 @@
 -- Alois    : !pos 96 -20 14 237
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.FADED_PROMISES)
 
 quest.reward =

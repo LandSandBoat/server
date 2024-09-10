@@ -7,7 +7,6 @@
 local middleDelkfuttsID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL)
 
 quest.reward =

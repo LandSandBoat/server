@@ -5,7 +5,6 @@
 -- Radeivepart : !pos 5 9 -39 243
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.NORTHWARD)
 
 quest.reward =

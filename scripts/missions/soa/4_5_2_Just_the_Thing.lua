@@ -7,7 +7,6 @@
 -- Andreine : !pos -91.944 -2.14 -91.538 284
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.JUST_THE_THING)
 
 mission.reward =

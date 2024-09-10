@@ -8,7 +8,6 @@
 local pastXarcabardID = zones[xi.zone.XARCABARD_S]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.STORMS_CRESCENDO)
 
 mission.reward =

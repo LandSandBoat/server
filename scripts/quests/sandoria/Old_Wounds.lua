@@ -7,7 +7,6 @@ local chateauID = zones[xi.zone.CHATEAU_DORAGUILLE]
 local quicksandCavesID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS)
 
 quest.reward =

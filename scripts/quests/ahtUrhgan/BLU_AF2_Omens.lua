@@ -9,7 +9,6 @@
 local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
 
 quest.reward =

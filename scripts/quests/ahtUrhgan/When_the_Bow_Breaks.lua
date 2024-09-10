@@ -8,7 +8,6 @@
 local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.WHEN_THE_BOW_BREAKS)
 
 quest.reward =

@@ -16,7 +16,6 @@ local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 local lowerDelkfuttID    = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO)
 
 mission.reward =

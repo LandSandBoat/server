@@ -7,7 +7,6 @@
 -- Aldo              : !pos 20 3 -58 245
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.ROMAEVE)
 
 mission.reward =

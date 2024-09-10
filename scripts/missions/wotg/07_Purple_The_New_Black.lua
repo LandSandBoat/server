@@ -8,7 +8,6 @@
 -- _2d1 (Reinforced Gateway) : !pos -114.386 -3.599 -179.804 85
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK)
 
 mission.reward =

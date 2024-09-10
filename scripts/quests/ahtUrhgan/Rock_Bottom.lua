@@ -3,7 +3,6 @@
 -- !pos 838.243 -14.475 231.871 61
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.ROCK_BOTTOM)
 
 quest.sections =

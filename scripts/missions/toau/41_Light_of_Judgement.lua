@@ -6,7 +6,6 @@
 -- Rodin-Comidin : !pos 17.205 -5.999 51.161 50
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.LIGHT_OF_JUDGMENT)
 
 mission.reward =

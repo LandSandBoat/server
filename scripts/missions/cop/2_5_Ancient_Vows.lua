@@ -6,7 +6,6 @@
 -- Dilapidated Gate : !pos -259 -30 276 25
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS)
 
 mission.reward =

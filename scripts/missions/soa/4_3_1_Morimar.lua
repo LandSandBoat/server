@@ -7,7 +7,6 @@
 -- Alpine Trail : !pos -13.479 -1.047 488.863 267
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.MORIMAR)
 
 mission.reward =

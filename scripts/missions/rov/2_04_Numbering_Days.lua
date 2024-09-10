@@ -6,7 +6,6 @@
 -- Marble Bridge Eatery (Door) : !pos -96.6 -0.2 92.3 244
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.NUMBERING_DAYS)
 
 mission.reward =

@@ -6,7 +6,6 @@
 -- Masad : !pos -28.182 -0.650 -91.991 256
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.BUDDING_PROSPECTS)
 
 mission.reward =

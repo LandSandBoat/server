@@ -4,7 +4,6 @@
 -- !addquest 8 176
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER)
 
 quest.reward = {}

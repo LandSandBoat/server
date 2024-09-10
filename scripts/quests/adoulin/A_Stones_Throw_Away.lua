@@ -7,7 +7,6 @@
 local morimarID = zones[xi.zone.MORIMAR_BASALT_FIELDS]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_STONES_THROW_AWAY)
 
 quest.reward =

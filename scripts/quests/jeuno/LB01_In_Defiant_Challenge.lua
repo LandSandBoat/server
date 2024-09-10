@@ -21,7 +21,6 @@ local eldiemeID  = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 local garlaigeID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE)
 
 -- Key Item removals

@@ -7,7 +7,6 @@ local kazhamID       = zones[xi.zone.KAZHAM]
 local gustavTunnelID = zones[xi.zone.GUSTAV_TUNNEL]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER)
 
 quest.reward =

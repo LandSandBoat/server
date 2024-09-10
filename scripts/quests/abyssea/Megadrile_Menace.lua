@@ -6,7 +6,6 @@
 local tahrongiID = zones[xi.zone.TAHRONGI_CANYON]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.MEGADRILE_MENACE)
 
 quest.reward = { }

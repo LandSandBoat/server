@@ -12,7 +12,6 @@
 -- Thone Room Door  : !pos -111 -6 0 165
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SHADOW_AWAITS)
 
 mission.reward =

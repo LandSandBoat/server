@@ -9,7 +9,6 @@ local eastRonfaureID     = zones[xi.zone.EAST_RONFAURE]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_VICASQUES_SERMON)
 
 quest.reward =

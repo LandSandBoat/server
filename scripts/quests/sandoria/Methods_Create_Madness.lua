@@ -7,7 +7,6 @@ local southernSandOriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local seaSerpentGrottoID = zones[xi.zone.SEA_SERPENT_GROTTO]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS)
 
 quest.reward =

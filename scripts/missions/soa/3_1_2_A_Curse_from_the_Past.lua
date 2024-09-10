@@ -9,7 +9,6 @@
 -- Erminold       : !pos 50.949 -40 -90.942 257
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.A_CURSE_FROM_THE_PAST)
 
 mission.reward =

@@ -119,7 +119,6 @@ function Container:replaceMessage(messageId, messageType, ...)
     return Message:new(messageId, messageType, ...):replaceDefault()
 end
 
----@return TSequence|TMessage?
 function Container:sequence(...)
     if type(...) == 'number' then
         return Message:new(...)

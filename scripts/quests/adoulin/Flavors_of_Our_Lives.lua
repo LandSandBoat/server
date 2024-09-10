@@ -10,7 +10,6 @@
 -- Sickle           : !additem 1020
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
 
 quest.reward =

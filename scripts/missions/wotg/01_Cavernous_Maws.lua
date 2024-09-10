@@ -9,7 +9,6 @@
 -- Sauromugue Champaign : !pos 369 8 -227 120
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAVERNOUS_MAWS)
 
 mission.reward =

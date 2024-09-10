@@ -5,7 +5,6 @@
 -- Hot Springs : !pos 444 -37 -18 139
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_GENERALS_SECRET)
 
 quest.reward =

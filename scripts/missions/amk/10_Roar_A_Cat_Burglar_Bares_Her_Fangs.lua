@@ -4,7 +4,6 @@
 -- !addmission 10 9
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS)
 
 mission.reward =

@@ -18,7 +18,6 @@ local portBastokID    = zones[xi.zone.PORT_BASTOK]
 local kuftalID        = zones[xi.zone.KUFTAL_TUNNEL]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.ENTER_THE_TALEKEEPER)
 
 mission.reward =

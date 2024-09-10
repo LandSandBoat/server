@@ -9,7 +9,6 @@
 -- qm10         : !pos 352 2 376 68
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.SOOTHING_WATERS)
 
 quest.reward =

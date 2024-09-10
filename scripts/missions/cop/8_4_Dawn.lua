@@ -12,7 +12,6 @@
 -- TODO: Add additional section to complete mission that aligns with Apocalypse Nigh
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
 
 mission.reward =

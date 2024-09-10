@@ -6,7 +6,6 @@
 -- RALA_WATERWAYS : !zone 258
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.HONOR_AND_AUDACITY)
 
 mission.reward =

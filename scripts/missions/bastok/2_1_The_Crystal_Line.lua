@@ -17,7 +17,6 @@ local metalworksID    = zones[xi.zone.METALWORKS]
 local portBastokID    = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_CRYSTAL_LINE)
 
 mission.reward =

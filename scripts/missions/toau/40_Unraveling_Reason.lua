@@ -6,7 +6,6 @@
 -- Pherimociel : !pos -31.627 1.002 67.956 243
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.UNRAVELING_REASON)
 
 mission.reward =

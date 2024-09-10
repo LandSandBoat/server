@@ -8,7 +8,6 @@
 local beadeauxID = zones[xi.zone.BEADEAUX]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_RESCUE)
 
 quest.reward =

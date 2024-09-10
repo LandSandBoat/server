@@ -7,7 +7,6 @@
 -- Mathilde    : !pos 12.578 -8.287 -7.576 248
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS)
 
 mission.reward =

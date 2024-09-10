@@ -5,7 +5,6 @@
 -- !addmission 4 36
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.PATH_OF_BLOOD)
 
 mission.reward =

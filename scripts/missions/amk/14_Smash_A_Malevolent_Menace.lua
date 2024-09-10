@@ -4,7 +4,6 @@
 -- !addmission 10 13
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.SMASH_A_MALEVOLENT_MENACE)
 
 mission.reward =

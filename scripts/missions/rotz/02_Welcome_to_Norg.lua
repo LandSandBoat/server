@@ -6,7 +6,6 @@
 -- _700 (Oaken Door) : !pos 97 -7 -12 252
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.WELCOME_TNORG)
 
 mission.reward =

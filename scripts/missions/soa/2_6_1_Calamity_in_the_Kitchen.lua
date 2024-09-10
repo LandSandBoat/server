@@ -6,7 +6,6 @@
 -- Chalvava : !pos -318.000 -1.000 -318.000 258
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.CALAMITY_IN_THE_KITCHEN)
 
 mission.reward =

@@ -6,7 +6,6 @@
 -- Cid : !pos -12 -12 1 237
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN)
 
 mission.reward =

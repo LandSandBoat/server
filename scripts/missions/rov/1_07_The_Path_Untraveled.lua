@@ -11,7 +11,6 @@
 local norgID = zones[xi.zone.NORG]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.THE_PATH_UNTRAVELED)
 
 mission.reward =

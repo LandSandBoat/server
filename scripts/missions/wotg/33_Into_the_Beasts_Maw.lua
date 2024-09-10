@@ -10,7 +10,6 @@ local pastBaileysID   = zones[xi.zone.CASTLE_ZVAHL_BAILEYS_S]
 local pastXarcabardID = zones[xi.zone.XARCABARD_S]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.INTO_THE_BEASTS_MAW)
 
 mission.reward =

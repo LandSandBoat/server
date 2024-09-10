@@ -13,7 +13,6 @@ local tidesID   = zones[xi.zone.CLOISTER_OF_TIDES]
 local tremorsID = zones[xi.zone.CLOISTER_OF_TREMORS]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.SUGAR_COATED_DIRECTIVE)
 
 mission.reward =

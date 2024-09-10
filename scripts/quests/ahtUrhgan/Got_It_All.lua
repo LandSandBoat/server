@@ -5,7 +5,6 @@
 -- Zabahf !pos -90.070 -1 10.140 50
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.GOT_IT_ALL)
 
 quest.reward =

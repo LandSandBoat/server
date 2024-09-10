@@ -6,7 +6,6 @@
 -- Ekhu Pesshyadha !pos -13.043 0.999 103.423 50
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.THREE_MEN_AND_A_CLOSET)
 
 quest.reward =

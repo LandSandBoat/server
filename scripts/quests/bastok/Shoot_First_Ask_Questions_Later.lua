@@ -7,7 +7,6 @@ local metalworksID = zones[xi.zone.METALWORKS]
 local boyahdaTreeID = zones[xi.zone.THE_BOYAHDA_TREE]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER)
 
 quest.reward =

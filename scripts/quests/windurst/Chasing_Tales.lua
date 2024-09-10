@@ -9,7 +9,6 @@
 -- TODO: This quest could be simplified with expanded use of Prog questVar.
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.CHASING_TALES)
 
 quest.reward =

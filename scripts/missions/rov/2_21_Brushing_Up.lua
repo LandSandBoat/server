@@ -6,7 +6,6 @@
 -- qm_rov2_20 : !pos -44.741 -23.753 568.504 25
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.BRUSHING_UP)
 
 mission.reward =

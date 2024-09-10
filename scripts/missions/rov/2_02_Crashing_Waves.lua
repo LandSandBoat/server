@@ -8,7 +8,6 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.CRASHING_WAVES)
 
 mission.reward =

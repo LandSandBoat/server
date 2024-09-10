@@ -7,7 +7,6 @@
 local yuhtungaID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.WRATH_OF_THE_OPO_OPOS)
 
 quest.reward =

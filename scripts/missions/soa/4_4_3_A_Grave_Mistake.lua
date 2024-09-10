@@ -13,7 +13,6 @@ local easternAdoulinID = zones[xi.zone.EASTERN_ADOULIN]
 local ralaID           = zones[xi.zone.RALA_WATERWAYS]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.A_GRAVE_MISTAKE)
 
 mission.reward =

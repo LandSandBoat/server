@@ -10,7 +10,6 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND)
 
 quest.reward =

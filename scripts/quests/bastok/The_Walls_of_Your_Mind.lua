@@ -7,7 +7,6 @@ local portBastokID = zones[xi.zone.PORT_BASTOK]
 local bostaunieuxID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND)
 
 quest.reward =

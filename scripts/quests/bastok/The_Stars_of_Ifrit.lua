@@ -6,7 +6,6 @@
 -- qm1     : !pos -9 -5 -13 223
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)
 
 quest.reward =

@@ -3,7 +3,6 @@
 -- Koblakiq !pos -64.851 21.834 -117.521 11
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.MISSIONARY_MOBLIN)
 
 quest.reward =

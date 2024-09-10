@@ -15,7 +15,6 @@ local metalworksID    = zones[xi.zone.METALWORKS]
 local portBastokID    = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.GEOLOGICAL_SURVEY)
 
 local handleAcceptMission = function(player, csid, option, npc)

@@ -7,7 +7,6 @@
 -- Gilgamesh : !pos 122.452 -9.009 -12.052 252
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
 
 quest.reward = {}

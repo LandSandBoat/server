@@ -6,7 +6,6 @@
 -- Entry Gate : !pos 486 -227.6 -20 78
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.GAZE_OF_THE_SABOTEUR)
 
 mission.reward =

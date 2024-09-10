@@ -7,7 +7,6 @@ local bastokMinesID = zones[xi.zone.BASTOK_MINES]
 local westernAltepaID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.INHERITANCE)
 
 quest.reward =

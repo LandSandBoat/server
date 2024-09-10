@@ -7,7 +7,6 @@
 -- EAST_RONFAURE_S      : !zone 81
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.WHILE_THE_CAT_IS_AWAY)
 
 mission.reward =

@@ -7,7 +7,6 @@
 -- Door: Neptune's Spire : !pos 35 0 -15 245
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.TENDING_AGED_WOUNDS)
 
 mission.reward =

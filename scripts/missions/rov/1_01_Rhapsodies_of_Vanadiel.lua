@@ -6,7 +6,6 @@
 -- !addmission 13 0
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
 
 mission.reward =

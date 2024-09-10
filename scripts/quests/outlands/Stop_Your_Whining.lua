@@ -8,7 +8,6 @@
 local yhoatorID = zones[xi.zone.YHOATOR_JUNGLE]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.STOP_YOUR_WHINING)
 
 quest.reward =

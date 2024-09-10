@@ -3,7 +3,6 @@
 -- Ququroon !pos -2.400 -1 66.824 53
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.COOK_A_ROON)
 
 quest.sections =

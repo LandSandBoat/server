@@ -8,7 +8,6 @@
 -- Endracion             : !pos -110 1 -34 230
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SECRET_WEAPON)
 
 mission.reward =

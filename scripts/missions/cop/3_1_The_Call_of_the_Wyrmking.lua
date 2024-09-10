@@ -7,7 +7,6 @@
 -- Cid            : !pos -12 -12 1 237
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
 
 mission.reward =

@@ -9,7 +9,6 @@
 local ID  = zones[xi.zone.OLDTON_MOVALPOLOS]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.A_QUESTION_OF_FAITH)
 
 quest.reward =

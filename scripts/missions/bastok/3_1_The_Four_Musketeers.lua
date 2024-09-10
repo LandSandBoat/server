@@ -10,7 +10,6 @@
 -- Iron Eater : !pos 92.936 -19.532 1.814 237
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_FOUR_MUSKETEERS)
 
 mission.reward =

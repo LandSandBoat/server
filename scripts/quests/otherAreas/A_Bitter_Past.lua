@@ -10,7 +10,6 @@
 local lufaiseID = zones[xi.zone.LUFAISE_MEADOWS]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.A_BITTER_PAST)
 local orcNM = lufaiseID.mob.BLACKBONE_FRAZDIZ
 

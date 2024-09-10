@@ -7,7 +7,6 @@
 local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)
 
 quest.reward =

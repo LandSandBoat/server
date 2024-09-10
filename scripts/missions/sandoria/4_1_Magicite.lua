@@ -14,7 +14,6 @@
 -- Magicite (Aurastone)  : !pos 11 25 -81 148
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.MAGICITE)
 
 local function magiciteCounter(player)

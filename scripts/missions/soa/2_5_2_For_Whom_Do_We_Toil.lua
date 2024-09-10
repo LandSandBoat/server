@@ -6,7 +6,6 @@
 -- Sluice_Gate_6 : !pos -561.522 -7.500 60.002 258
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.FOR_WHOM_DO_WE_TOIL)
 
 mission.reward =

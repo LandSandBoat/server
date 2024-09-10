@@ -5,7 +5,6 @@
 -- Raibaht : !gotoid 17748012
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TEAK_ME_TO_THE_STARS)
 
 quest.reward =

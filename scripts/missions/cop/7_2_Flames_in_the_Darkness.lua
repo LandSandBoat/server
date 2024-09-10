@@ -7,7 +7,6 @@
 -- Sueleen          : !pos 612 132 774 32
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.FLAMES_IN_THE_DARKNESS)
 
 mission.reward =

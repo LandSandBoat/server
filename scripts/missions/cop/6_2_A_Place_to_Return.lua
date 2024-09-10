@@ -9,7 +9,6 @@
 local misareauxID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.A_PLACE_TO_RETURN)
 
 mission.reward =

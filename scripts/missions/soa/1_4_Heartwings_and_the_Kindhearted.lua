@@ -6,7 +6,6 @@
 -- WESTERN_ADOULIN : !zone 256
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
 
 mission.reward =

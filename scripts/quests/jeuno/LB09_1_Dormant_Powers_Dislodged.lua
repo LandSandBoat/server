@@ -7,7 +7,6 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED)
 
 -- NOTE: Timing minigame was guesstimated! No capture available.

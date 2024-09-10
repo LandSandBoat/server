@@ -14,7 +14,6 @@
 local batalliaID = zones[xi.zone.BATALLIA_DOWNS]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BREAKING_BARRIERS)
 
 mission.reward =

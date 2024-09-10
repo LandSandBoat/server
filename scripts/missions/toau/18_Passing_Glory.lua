@@ -6,7 +6,6 @@
 -- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.PASSING_GLORY)
 
 mission.reward =

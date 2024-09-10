@@ -12,7 +12,6 @@
 -- Sauromugue Champaign [S] : !pos 369 8 -227 98
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.CAUTERIZE)
 
 mission.reward =

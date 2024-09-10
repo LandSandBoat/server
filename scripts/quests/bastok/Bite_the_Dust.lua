@@ -5,7 +5,6 @@
 -- Yazan : !pos -20.06 -3.3 24.471 236
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BITE_THE_DUST)
 
 quest.reward =

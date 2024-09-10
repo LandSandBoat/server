@@ -11,7 +11,6 @@
 -- Ranpi-Monpi     - !pos -116 -3 52 238
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_DAWN_OF_DELECTABILITY)
 
 quest.reward =

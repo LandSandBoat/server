@@ -6,7 +6,6 @@
 -- Ergon Locus : !pos -140.000 10.000 60.000 270
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.AN_AIMLESS_JOURNEY)
 
 mission.reward =

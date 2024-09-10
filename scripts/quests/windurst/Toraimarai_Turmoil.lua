@@ -9,7 +9,6 @@
 -- Giddeus Spring : !pos -258 -2 -249 145
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
 
 quest.reward =

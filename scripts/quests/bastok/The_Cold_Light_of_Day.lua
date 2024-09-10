@@ -5,7 +5,6 @@
 -- Malene : !pos -173 -5 64 235
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY)
 
 quest.reward =

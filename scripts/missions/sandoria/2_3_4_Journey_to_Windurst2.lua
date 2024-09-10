@@ -7,7 +7,6 @@
 -- Mourices  : !pos -50.646 -0.501 -27.642 241
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST2)
 
 mission.reward = {}

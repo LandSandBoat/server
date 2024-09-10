@@ -6,7 +6,6 @@
 -- Bulwark Gate : !pos -447.174 -1.831 342.417 98
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.THE_SCENT_OF_BATTLE)
 
 mission.reward =

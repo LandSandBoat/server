@@ -9,7 +9,6 @@
 local behemothsDominionID = zones[xi.zone.BEHEMOTHS_DOMINION]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT)
 
 quest.reward =

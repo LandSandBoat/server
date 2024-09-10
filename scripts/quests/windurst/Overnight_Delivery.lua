@@ -6,7 +6,6 @@
 -- Kotan-Purutan : !pos 40.32 -9 44.24 249
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY)
 
 quest.reward =

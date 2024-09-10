@@ -9,7 +9,6 @@
 local marjamiID = zones[xi.zone.MARJAMI_RAVINE]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.HIDE_AND_GO_PEAK)
 
 -- Note: There are multiple KI rewards here, and A Pair of Velkk Gloves is added prior
