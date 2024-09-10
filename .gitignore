@@ -132,10 +132,10 @@ UpgradeLog*.XML
 *.app
 
 # Generated executables
-/xi_connect
-/xi_map
-/xi_search
-/xi_world
+/xi_connect*
+/xi_map*
+/xi_search*
+/xi_world*
 
 # Generated files, mostly autotools-related
 .deps
