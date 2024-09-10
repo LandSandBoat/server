@@ -7,7 +7,6 @@
 local lufaiseID = zones[xi.zone.LUFAISE_MEADOWS]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.AN_INVITATION_WEST)
 
 mission.reward =

@@ -8,7 +8,6 @@
 -- Mahogany Door (BCNM) : !pos 299 0.1 349 163
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH)
 
 mission.reward =

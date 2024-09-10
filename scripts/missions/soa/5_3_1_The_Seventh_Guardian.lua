@@ -7,7 +7,6 @@
 -- Yeggha_Dolashi : !pos 260 -5.768 60 258
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_SEVENTH_GUARDIAN)
 
 mission.reward =

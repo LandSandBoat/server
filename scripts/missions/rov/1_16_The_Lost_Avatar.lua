@@ -8,7 +8,6 @@
 local yuhtungaID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.THE_LOST_AVATAR)
 
 mission.reward =

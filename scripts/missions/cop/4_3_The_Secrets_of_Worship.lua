@@ -12,7 +12,6 @@
 local sacrariumID = zones[xi.zone.SACRARIUM]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_SECRETS_OF_WORSHIP)
 
 local profQmOnTrigger = function(player, npc)

@@ -7,7 +7,6 @@
 -- Darkened Crevice : !pos 185.752 27.311 240.72 273
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_GATES)
 
 mission.reward =

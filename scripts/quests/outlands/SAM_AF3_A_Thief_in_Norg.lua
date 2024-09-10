@@ -8,7 +8,6 @@
 -- _6i8 (Door)     : !pos 70 7 2 234
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG)
 
 quest.reward =

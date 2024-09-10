@@ -13,7 +13,6 @@ require('scripts/missions/wotg/helpers')
 local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_OF_MALIGN_MALADIES)
 
 quest.reward =

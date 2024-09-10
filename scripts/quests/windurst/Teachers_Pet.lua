@@ -5,7 +5,6 @@
 -- Moreno-Toeno : !pos 169 -1.25 159 238
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.TEACHERS_PET)
 
 quest.reward =

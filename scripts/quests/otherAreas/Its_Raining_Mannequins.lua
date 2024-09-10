@@ -14,7 +14,6 @@
 local mhauraID = zones[xi.zone.MHAURA]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ITS_RAINING_MANNEQUINS)
 
 quest.sections =

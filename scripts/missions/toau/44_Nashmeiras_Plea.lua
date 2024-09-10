@@ -7,7 +7,6 @@
 -- blank_lamp    : !pos 206.55 -1.5 20.05 72
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.NASHMEIRAS_PLEA)
 
 mission.reward =

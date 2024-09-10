@@ -12,7 +12,6 @@
 -- Walk of Echoes          : !pos -702.325 0.399 -481.664
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.FORK_IN_THE_ROAD)
 
 mission.reward =

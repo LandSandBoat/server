@@ -7,7 +7,6 @@
 -- Selbina, Valgeir,  !pos 57.496 -15.273 20.229 248
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)
 
 quest.reward =

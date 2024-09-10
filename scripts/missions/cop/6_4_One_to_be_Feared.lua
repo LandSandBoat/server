@@ -7,7 +7,6 @@
 -- Iron Gate : !pos 612 132 774 32
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.ONE_TO_BE_FEARED)
 
 mission.reward =

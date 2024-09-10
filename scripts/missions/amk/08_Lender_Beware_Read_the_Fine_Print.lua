@@ -7,7 +7,6 @@
 -- Inconspicuous Door : !pos -15 1.300 68 244
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.LENDER_BEWARE_READ_THE_FINE_PRINT)
 
 mission.reward =

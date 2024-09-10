@@ -14,7 +14,6 @@
 local krtID = zones[xi.zone.KING_RANPERRES_TOMB]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.RANPERRES_FINAL_REST)
 
 local ranparresRestTable =

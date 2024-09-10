@@ -8,7 +8,6 @@
 local qufimID = zones[xi.zone.QUFIM_ISLAND]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.THE_LIONS_ROAR)
 
 mission.reward =

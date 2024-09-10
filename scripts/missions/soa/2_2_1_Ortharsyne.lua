@@ -6,7 +6,6 @@
 -- YORCIA_WEALD : !zone 264
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ORTHARSYNE)
 
 mission.reward =

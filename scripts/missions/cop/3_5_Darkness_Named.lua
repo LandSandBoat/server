@@ -9,7 +9,6 @@
 local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED)
 
 mission.reward =

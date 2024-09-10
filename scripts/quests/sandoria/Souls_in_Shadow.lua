@@ -7,7 +7,6 @@ local bostaunieuxID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 local denOfRancorID = zones[xi.zone.DEN_OF_RANCOR]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)
 
 quest.reward =

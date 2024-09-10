@@ -5,7 +5,6 @@
 -- LADYBUG_WING: !additem 2506
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS)
 
 quest.reward =

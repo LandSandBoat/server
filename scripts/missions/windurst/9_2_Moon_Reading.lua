@@ -14,7 +14,6 @@
 local heavensTowerID = zones[xi.zone.HEAVENS_TOWER]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING)
 
 mission.reward =

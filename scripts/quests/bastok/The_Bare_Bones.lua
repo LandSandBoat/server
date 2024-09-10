@@ -6,7 +6,6 @@
 -- Biggorf   : !pos -211.379 1.999 -142.024 235
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_BARE_BONES)
 
 quest.reward =

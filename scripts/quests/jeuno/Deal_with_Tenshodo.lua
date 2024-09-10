@@ -5,7 +5,6 @@
 -- Garnev : !pos 30 4 -36 245
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.DEAL_WITH_TENSHODO)
 
 quest.reward =

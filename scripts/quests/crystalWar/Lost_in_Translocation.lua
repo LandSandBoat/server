@@ -8,7 +8,6 @@
 -- Sarcophagus : !pos 336.594 -33.500 -56.728 175
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.LOST_IN_TRANSLOCATION)
 
 quest.reward =

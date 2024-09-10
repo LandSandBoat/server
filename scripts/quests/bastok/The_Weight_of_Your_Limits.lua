@@ -7,7 +7,6 @@ local metalworksID = zones[xi.zone.METALWORKS]
 local ziTahID      = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS)
 
 quest.reward =

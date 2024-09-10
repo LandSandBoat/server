@@ -7,7 +7,6 @@
 local eldiemeSID = zones[xi.zone.THE_ELDIEME_NECROPOLIS_S]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
 
 quest.reward =

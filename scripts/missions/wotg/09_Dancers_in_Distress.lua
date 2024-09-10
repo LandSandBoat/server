@@ -13,7 +13,6 @@ local pastJugnerID = zones[xi.zone.JUGNER_FOREST_S]
 local sandoriaSID  = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DANCERS_IN_DISTRESS)
 
 mission.reward =

@@ -21,7 +21,6 @@ local innerHorutotoRuinsID = zones[xi.zone.INNER_HORUTOTO_RUINS]
 local eastSarutabarutaID   = zones[xi.zone.EAST_SARUTABARUTA]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT)
 
 -- A unique title is awarded from accepting the mission at each gate guard

@@ -9,7 +9,6 @@
 local crawlersID = zones[xi.zone.CRAWLERS_NEST]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
 
 quest.reward =

@@ -10,7 +10,6 @@
 local northSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST)
 
 mission.reward = {}

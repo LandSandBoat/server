@@ -17,7 +17,6 @@ local caedarvaID  = zones[xi.zone.CAEDARVA_MIRE]
 local zhayolmID   = zones[xi.zone.MOUNT_ZHAYOLM]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES)
 
 local function handlePackage(player)

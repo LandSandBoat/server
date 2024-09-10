@@ -6,7 +6,6 @@
 -- _6s2   : !pos -80 0 104 244
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
 
 quest.reward =

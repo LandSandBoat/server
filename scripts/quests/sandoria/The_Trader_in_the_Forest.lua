@@ -6,7 +6,6 @@
 -- Phairet : !pos -57 -2 -502 100
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
 
 quest.reward =

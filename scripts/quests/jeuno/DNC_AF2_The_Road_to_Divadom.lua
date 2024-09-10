@@ -7,7 +7,6 @@
 -- Glowing Pebbles : !pos 104.2 4.1 443.6 82
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
 
 quest.reward =

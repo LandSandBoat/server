@@ -7,7 +7,6 @@
 -- Aged Stump : !pos -27.233 -2 33.508 281
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.A_PORTENT_MOST_OMINOUS)
 
 mission.reward =

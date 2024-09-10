@@ -5,7 +5,6 @@
 -- Corann : !pos 90.935 -8.772 32.564 236
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_QUADAVS_CURSE)
 
 quest.reward =

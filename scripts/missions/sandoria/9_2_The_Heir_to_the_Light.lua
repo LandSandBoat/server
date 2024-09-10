@@ -12,7 +12,6 @@
 local chateauID = zones[xi.zone.CHATEAU_DORAGUILLE]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT)
 
 mission.reward =

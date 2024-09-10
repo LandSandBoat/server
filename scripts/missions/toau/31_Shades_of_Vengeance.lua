@@ -6,7 +6,6 @@
 -- Nashib : !pos -274.334 -9.287 -64.255 79
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.SHADES_OF_VENGEANCE)
 
 mission.reward =

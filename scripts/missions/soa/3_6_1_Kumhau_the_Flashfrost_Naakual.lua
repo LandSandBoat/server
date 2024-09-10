@@ -6,7 +6,6 @@
 -- Crawling Cave : !pos -349.302 40.339 -379.79 267
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.KUMHAU_THE_FLASHFROST_NAAKUAL)
 
 mission.reward =

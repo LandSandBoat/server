@@ -6,7 +6,6 @@
 -- qm2      : !pos -120.041 2.621 415.989 191
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BREAKING_STONES)
 
 quest.reward =

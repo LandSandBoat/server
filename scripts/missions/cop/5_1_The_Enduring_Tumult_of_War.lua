@@ -13,7 +13,6 @@ local promyvionVahzlID = zones[xi.zone.PROMYVION_VAHZL]
 local psoXjaID         = zones[xi.zone.PSOXJA]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)
 
 mission.reward =

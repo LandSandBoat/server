@@ -14,7 +14,6 @@
 local easternAdoulinID = zones[xi.zone.EASTERN_ADOULIN]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_LONGEST_WAY_ROUND)
 
 quest.reward =

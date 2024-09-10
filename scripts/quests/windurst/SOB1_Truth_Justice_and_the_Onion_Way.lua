@@ -4,7 +4,6 @@
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
 
 quest.reward =

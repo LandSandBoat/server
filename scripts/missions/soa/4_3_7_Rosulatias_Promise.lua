@@ -9,7 +9,6 @@
 local leafalliaID = zones[xi.zone.LEAFALLIA]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ROSULATIAS_PROMISE)
 
 mission.reward =

@@ -6,7 +6,6 @@
 -- Biyaada:   !pos -65.802 -6.999 69.273 48
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.SAGA_OF_THE_SKYSERPENT)
 
 quest.reward =

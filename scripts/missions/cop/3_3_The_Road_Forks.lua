@@ -30,7 +30,6 @@ local attohwaChasmID      = zones[xi.zone.ATTOHWA_CHASM]
 local carpentersLandingID = zones[xi.zone.CARPENTERS_LANDING]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_ROAD_FORKS)
 
 mission.reward =

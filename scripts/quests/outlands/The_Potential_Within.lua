@@ -7,7 +7,6 @@ local norgID         = zones[xi.zone.NORG]
 local kuftalTunnelID = zones[xi.zone.KUFTAL_TUNNEL]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_POTENTIAL_WITHIN)
 
 quest.reward =

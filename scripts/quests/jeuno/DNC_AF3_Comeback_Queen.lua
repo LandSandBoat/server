@@ -7,7 +7,6 @@
 -- Harmodios    : !pos -79.928 -4.824 -135.114 235
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN)
 
 quest.reward =

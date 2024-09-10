@@ -6,7 +6,6 @@
 -- qm11 : !pos -409.553 17.356 -380.626 123
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.IMPURITY)
 
 mission.reward =

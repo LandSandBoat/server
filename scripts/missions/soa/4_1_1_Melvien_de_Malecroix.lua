@@ -8,7 +8,6 @@
 -- Port Storage : !pos 85.578 30.5 180.639 256
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.MELVIEN_DE_MALECROIX)
 
 mission.reward =

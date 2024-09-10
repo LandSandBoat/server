@@ -8,7 +8,6 @@
 local pastSauromugueID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.A_NATION_ON_THE_BRINK)
 
 mission.reward =

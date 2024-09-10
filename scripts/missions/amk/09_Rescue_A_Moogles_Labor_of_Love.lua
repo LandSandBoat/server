@@ -18,7 +18,6 @@
 local ID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.RESCUE_A_MOOGLES_LABOR_OF_LOVE)
 
 mission.reward =

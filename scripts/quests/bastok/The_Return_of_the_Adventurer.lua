@@ -5,7 +5,6 @@
 -- Gwill : !pos -317.829 -15.948 -177.375 235
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
 
 quest.reward =

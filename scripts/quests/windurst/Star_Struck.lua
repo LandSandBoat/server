@@ -5,7 +5,6 @@
 -- Koru-Moru : !pos -120 -6 124 239
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.STAR_STRUCK)
 
 quest.reward =

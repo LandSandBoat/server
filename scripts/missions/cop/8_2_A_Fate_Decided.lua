@@ -8,7 +8,6 @@
 local huxoiID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.A_FATE_DECIDED)
 
 mission.reward =

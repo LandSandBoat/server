@@ -5,7 +5,6 @@
 -- Westerly Breeze : !pos 62 32 123 256
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_STARVING)
 
 quest.reward =

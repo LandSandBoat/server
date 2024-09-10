@@ -8,7 +8,6 @@
 -- Dilapidated Gate : !pos 260 9 -435 25
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.SHELTERING_DOUBT)
 
 mission.reward =

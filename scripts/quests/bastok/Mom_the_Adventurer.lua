@@ -6,7 +6,6 @@
 -- Roh Latteh : !pos -11.823 6.999 -9.249 234
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
 
 quest.reward =

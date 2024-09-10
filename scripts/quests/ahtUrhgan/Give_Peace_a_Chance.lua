@@ -7,7 +7,6 @@
 -- require('cripts/globals/weather')
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.GIVE_PEACE_A_CHANCE)
 
 quest.reward =

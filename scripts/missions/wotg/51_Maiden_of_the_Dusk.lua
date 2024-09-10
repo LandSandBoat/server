@@ -7,7 +7,6 @@
 -- Ornate Door       : !pos -700 -20.25 -303.398 89
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.MAIDEN_OF_THE_DUSK)
 
 mission.reward =

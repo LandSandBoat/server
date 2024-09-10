@@ -6,7 +6,6 @@
 -- Qu'Hau Spring      : !pos 0 -29 64 122
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
 
 quest.reward =

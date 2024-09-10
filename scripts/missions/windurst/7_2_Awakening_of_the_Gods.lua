@@ -15,7 +15,6 @@
 -- Granite Door     : !pos 340 0.1 329 159
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.AWAKENING_OF_THE_GODS)
 
 mission.reward =

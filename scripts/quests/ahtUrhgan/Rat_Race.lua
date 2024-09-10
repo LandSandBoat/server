@@ -9,7 +9,6 @@
 -- Kyokyoroon     : !pos 18.020 -6.000 10.467 53
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.RAT_RACE)
 
 quest.reward =

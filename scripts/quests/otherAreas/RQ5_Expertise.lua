@@ -9,7 +9,6 @@
 local mhauraID  = zones[xi.zone.MHAURA]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.EXPERTISE)
 local daysPassed = 0
 local hoursLeft  = 0

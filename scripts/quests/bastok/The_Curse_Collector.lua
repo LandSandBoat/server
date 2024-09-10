@@ -6,7 +6,6 @@
 -- The Mute  : !pos -166.230 -1 -73.685 147
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR)
 
 quest.reward =

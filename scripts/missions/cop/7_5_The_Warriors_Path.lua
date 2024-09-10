@@ -8,7 +8,6 @@
 local altaieuID = zones[xi.zone.ALTAIEU]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH)
 
 mission.reward =

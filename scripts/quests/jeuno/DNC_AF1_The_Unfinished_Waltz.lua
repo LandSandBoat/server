@@ -8,7 +8,6 @@
 local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
 
 quest.reward =

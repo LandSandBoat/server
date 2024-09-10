@@ -9,7 +9,6 @@
 local caedarvaID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.LOST_KINGDOM)
 
 mission.reward =

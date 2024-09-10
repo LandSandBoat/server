@@ -8,7 +8,6 @@
 local ceizakID = zones[xi.zone.CEIZAK_BATTLEGROUNDS]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHT_WITHIN)
 
 mission.reward = {}

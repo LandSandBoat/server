@@ -6,7 +6,6 @@
 -- Hilda : !pos -163 -8 13 236
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.CIDS_SECRET)
 
 quest.reward =

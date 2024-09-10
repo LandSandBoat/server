@@ -9,7 +9,6 @@
 local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL)
 
 quest.reward =

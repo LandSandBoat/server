@@ -6,7 +6,6 @@
 -- Romilda : !pos 5.424 4.898 -18.699 236
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.FOREVER_TO_HOLD)
 
 quest.reward =

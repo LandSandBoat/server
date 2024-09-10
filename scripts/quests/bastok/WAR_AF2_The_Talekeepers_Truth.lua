@@ -9,7 +9,6 @@
 local palboroughMinesID = zones[xi.zone.PALBOROUGH_MINES]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH)
 
 quest.reward =

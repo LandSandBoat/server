@@ -6,7 +6,6 @@
 -- qm1 (for KI) : !pos -58.873 1.026 -116.665 147
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BEADEAUX_SMOG)
 
 quest.reward =

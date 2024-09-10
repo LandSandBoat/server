@@ -6,7 +6,6 @@
 -- Collet : !pos -44 0 107 244
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CLOCKMASTER)
 
 quest.reward =

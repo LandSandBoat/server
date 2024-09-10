@@ -11,7 +11,6 @@ local phanauetID = zones[xi.zone.PHANAUET_CHANNEL]
 local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY)
 
 quest.reward =

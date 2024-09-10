@@ -7,7 +7,6 @@
 -- Pellucid_Afflusion : !pos -175.100 1.700 387.700 263
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.IN_THE_PRESENCE_OF_ROYALTY)
 
 mission.reward =

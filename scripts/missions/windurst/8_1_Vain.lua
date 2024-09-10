@@ -12,7 +12,6 @@
 -- Sedal-Godjal     : !pos 185 -3 -116 149
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.VAIN)
 
 mission.reward =

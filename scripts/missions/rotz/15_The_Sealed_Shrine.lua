@@ -8,7 +8,6 @@
 -- Ru'Avitau Main Entrance : !pos -0.2171 -45.013 -119.7575
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_SEALED_SHRINE)
 
 mission.reward =

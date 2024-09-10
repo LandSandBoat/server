@@ -9,7 +9,6 @@
 local ordellesCavesID = zones[xi.zone.ORDELLES_CAVES]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST_II)
 
 quest.reward =

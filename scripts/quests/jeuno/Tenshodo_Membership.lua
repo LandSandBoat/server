@@ -7,7 +7,6 @@
 -- NOTE: Players can straight turn in Tenshodo Invite bypassing this quest. Quest never shows in log until completed.
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP)
 
 quest.reward =

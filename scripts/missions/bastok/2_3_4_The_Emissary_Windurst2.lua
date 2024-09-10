@@ -9,7 +9,6 @@
 local portWindurstID = zones[xi.zone.PORT_WINDURST]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2)
 
 mission.reward = {}

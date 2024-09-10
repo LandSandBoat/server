@@ -5,7 +5,6 @@
 -- Rholont : !pos -168 -2 56 80
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.PERILS_OF_THE_GRIFFON)
 
 quest.reward =

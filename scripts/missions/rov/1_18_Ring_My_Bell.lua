@@ -6,7 +6,6 @@
 -- Oaken Door : !pos 97 -7 -12 252
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.RING_MY_BELL)
 
 mission.reward =

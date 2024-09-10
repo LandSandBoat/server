@@ -8,7 +8,6 @@
 -- Shattered Telepoint (Tahrongi)  : !pos 179 35 255 117
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.A_LAND_AFTER_TIME)
 
 mission.reward =

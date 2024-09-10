@@ -16,7 +16,6 @@ local eastSarutabarutaID   = zones[xi.zone.EAST_SARUTABARUTA]
 local outerHorutotoRuinsID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HEART_OF_THE_MATTER)
 local msgBase = outerHorutotoRuinsID.text.ORB_ALREADY_PLACED
 

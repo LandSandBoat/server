@@ -5,7 +5,6 @@
 -- !addmission 5 40
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.HER_MEMORIES)
 
 mission.reward =

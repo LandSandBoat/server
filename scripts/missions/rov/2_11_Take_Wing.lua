@@ -5,7 +5,6 @@
 -- !addmission 13 66
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.TAKE_WING)
 
 mission.reward =

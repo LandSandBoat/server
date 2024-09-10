@@ -5,7 +5,6 @@
 -- Buffalostalker_Dodzbraz : !pos -380.171 -24.89 -180.797 5
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.BOMBS_AWAY)
 
 quest.reward =

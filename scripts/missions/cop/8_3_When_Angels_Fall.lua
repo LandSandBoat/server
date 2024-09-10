@@ -14,7 +14,6 @@ local altaieuID = zones[xi.zone.ALTAIEU]
 local ruhmetID  = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL)
 
 mission.reward =

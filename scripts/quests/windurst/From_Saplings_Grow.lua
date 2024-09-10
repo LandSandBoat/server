@@ -7,7 +7,6 @@ local windurstWoodsID = zones[xi.zone.WINDURST_WOODS]
 local capeTerigganID  = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW)
 
 quest.reward =

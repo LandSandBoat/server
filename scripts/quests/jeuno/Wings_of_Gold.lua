@@ -5,7 +5,6 @@
 -- Brutus : !pos -55 8 95 244
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD)
 
 quest.reward =

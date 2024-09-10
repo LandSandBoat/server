@@ -5,7 +5,6 @@
 -- Moogle : (Mog House, Home Nation)
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC)
 
 quest.reward =

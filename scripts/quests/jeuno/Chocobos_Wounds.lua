@@ -8,7 +8,6 @@
 -- _6t2    : !pos -88.2 -7.65 -168.8 245
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS)
 
 quest.reward =

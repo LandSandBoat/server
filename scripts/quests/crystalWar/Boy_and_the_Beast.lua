@@ -7,7 +7,6 @@
 -- Leafy Patch : !pos -418 -33 576
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST)
 
 quest.reward =

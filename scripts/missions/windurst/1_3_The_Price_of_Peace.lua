@@ -15,7 +15,6 @@
 local giddeusID = zones[xi.zone.GIDDEUS]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_PRICE_OF_PEACE)
 
 mission.reward =

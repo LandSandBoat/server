@@ -5,7 +5,6 @@
 -- Baudin : !pos -75 0 80 244
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI)
 
 quest.reward =

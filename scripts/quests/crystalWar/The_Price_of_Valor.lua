@@ -7,7 +7,6 @@
 local vunkerlID = zones[xi.zone.VUNKERL_INLET_S]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_PRICE_OF_VALOR)
 
 quest.reward =

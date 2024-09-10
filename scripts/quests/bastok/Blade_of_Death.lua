@@ -6,7 +6,6 @@
 -- qm2    : !pos 206 -60 -101 196
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH)
 
 quest.reward =

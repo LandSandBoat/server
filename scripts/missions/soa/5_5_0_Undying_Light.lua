@@ -6,7 +6,6 @@
 -- Ploh Trishbahk : !pos 100.580 -40.150 -63.830 257
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.UNDYING_LIGHT)
 
 mission.reward =

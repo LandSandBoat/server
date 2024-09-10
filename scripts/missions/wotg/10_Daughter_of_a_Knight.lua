@@ -12,7 +12,6 @@ local pastJugnerID = zones[xi.zone.JUGNER_FOREST_S]
 local presentJugnerID = zones[xi.zone.JUGNER_FOREST]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DAUGHTER_OF_A_KNIGHT)
 
 mission.reward =

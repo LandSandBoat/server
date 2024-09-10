@@ -10,7 +10,6 @@
 -- Vestal Chamber (_6q2) : !pos 0.1 -49 37 242
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_FINAL_SEAL)
 
 mission.reward =

@@ -14,7 +14,6 @@ local bibikiBayID  = zones[xi.zone.BIBIKI_BAY]
 local misareauxID  = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.CALM_BEFORE_THE_STORM)
 
 mission.reward =

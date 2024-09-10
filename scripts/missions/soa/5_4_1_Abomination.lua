@@ -6,7 +6,6 @@
 -- Ominous Postern : !pos 118 37.5 20 277
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ABOMINATION)
 
 mission.reward =

@@ -6,7 +6,6 @@
 -- Mhaura, Rycharde, !pos 17.451 -16.000 88.815 249
 -----------------------------------
 
----@type TQuest
 local quest          = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK)
 local daysPassed     = 0
 local totalHoursLeft = 0

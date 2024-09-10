@@ -7,7 +7,6 @@
 -- Cermet Door     : !pos -183 0 190 204
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
 
 quest.reward =

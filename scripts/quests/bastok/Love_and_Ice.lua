@@ -6,7 +6,6 @@
 -- Mirror Pond (J-8) : !pos -96.165 1.518 -392.700 111
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
 
 quest.reward =

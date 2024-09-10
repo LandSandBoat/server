@@ -7,7 +7,6 @@
 -- Ru'Lude Homepoint 1   : !pos -6 3 0.001 243
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
 
 mission.reward =

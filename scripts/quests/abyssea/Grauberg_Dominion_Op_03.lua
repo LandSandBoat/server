@@ -5,7 +5,6 @@
 -- Dominion Sergeant (Wolfgang's Camp)
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DOMINION_OP_03_GRAUBERG)
 
 quest.reward = {}

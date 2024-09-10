@@ -8,7 +8,6 @@
 -- Quu Bokye       : !pos -159 16 181 145
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
 
 quest.reward =

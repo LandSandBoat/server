@@ -8,7 +8,6 @@
 -- qm3          - !pos 439 -40 79 89
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.MESSAGE_ON_THE_WINDS)
 
 quest.reward =

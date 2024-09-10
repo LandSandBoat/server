@@ -6,7 +6,6 @@
 -- Unstable_Displacement : !pos -612.800 1.750 693.190 29
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
 
 quest.reward = {}

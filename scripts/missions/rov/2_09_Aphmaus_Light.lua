@@ -7,7 +7,6 @@
 local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.APHMAUS_LIGHT)
 
 mission.reward =

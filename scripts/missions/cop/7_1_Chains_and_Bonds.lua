@@ -7,7 +7,6 @@
 -- Sewer Entrance : !pos 28 -12 44 26
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.CHAINS_AND_BONDS)
 
 mission.reward =

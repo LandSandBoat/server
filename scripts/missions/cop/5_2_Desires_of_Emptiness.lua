@@ -12,7 +12,6 @@
 local promyvionVahzlID = zones[xi.zone.PROMYVION_VAHZL]
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.DESIRES_OF_EMPTINESS)
 
 mission.reward =

@@ -10,7 +10,6 @@ local alzadaalID  = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
 
 quest.reward =

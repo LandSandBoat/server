@@ -8,7 +8,6 @@
 local oztrojaID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH)
 
 quest.reward =

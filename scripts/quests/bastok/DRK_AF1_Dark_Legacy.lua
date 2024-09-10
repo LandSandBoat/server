@@ -11,7 +11,6 @@
 local giddeusID = zones[xi.zone.GIDDEUS]
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.DARK_LEGACY)
 
 quest.reward =

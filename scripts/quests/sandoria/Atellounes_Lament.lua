@@ -6,7 +6,6 @@
 -- TRAINEE_GLOVES: !additem 15008
 -----------------------------------
 
----@type TQuest
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.ATELLOUNES_LAMENT)
 
 quest.reward =

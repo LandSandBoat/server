@@ -6,7 +6,6 @@
 -- Regal Pawprints (9) : !pos 54.437 -41.904 104.974 136
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DISTORTER_OF_TIME)
 
 mission.reward =

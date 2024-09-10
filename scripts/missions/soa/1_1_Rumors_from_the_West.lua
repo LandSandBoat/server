@@ -7,7 +7,6 @@
 -- Darcia : !pos -36 -1 -15 245
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.RUMORS_FROM_THE_WEST)
 
 mission.reward =

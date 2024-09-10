@@ -11,7 +11,6 @@
 -- Gate of Light    : !pos -331 0 139 192
 -----------------------------------
 
----@type TMission
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS)
 
 mission.reward =
