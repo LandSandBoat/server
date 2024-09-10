@@ -4229,13 +4229,16 @@ namespace luautils
             return 0;
         }
 
-        sol::function onSteal = getEntityCachedFunction(PMob, "onSteal");
-        if (!onSteal.valid())
-        {
-            return 0;
-        }
+        auto zone     = PChar->loc.zone->getName();
+        auto name     = PMob->getName();
+        auto filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", zone, name);
 
-        auto result = onSteal(CLuaBaseEntity(PChar), CLuaBaseEntity(PMob), CLuaAbility(PAbility), CLuaAction(action));
+        ShowTrace("luautils::OnSteal: {} ({}) -> {}", PChar->getName(), zone, name);
+
+        auto onStealFramework = lua["InteractionGlobal"]["onSteal"];
+        auto onSteal          = GetCacheEntryFromFilename(filename)["onSteal"];
+
+        auto result = onStealFramework(CLuaBaseEntity(PChar), CLuaBaseEntity(PMob), CLuaAbility(PAbility), CLuaAction(action), onSteal);
         if (!result.valid())
         {
             sol::error err = result;

@@ -413,6 +413,7 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
     -- except those that should only perform one action at a time, like onTrigger and onTrade
     if
         fallbackHandler and
+        thirdLevelKey ~= 'onSteal' and
         thirdLevelKey ~= 'onTrigger' and
         thirdLevelKey ~= 'onTrade'
     then
@@ -458,6 +459,10 @@ end
 
 function InteractionLookup:afterZoneIn(player, fallbackFn)
     return onHandler(self.data, 'afterZoneIn', 1, { player }, fallbackFn)
+end
+
+function InteractionLookup:onSteal(player, mob, ability, action, fallbackFn)
+    return onHandler(self.data, mob:getName(), 'onSteal', { player, mob, ability, action }, fallbackFn)
 end
 
 function InteractionLookup:onTrigger(player, npc, fallbackFn)
