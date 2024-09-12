@@ -1932,7 +1932,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Imp_Bandsman',414,1709);
 INSERT INTO `mob_skill_lists` VALUES ('Imp_Bandsman',414,1710);
 INSERT INTO `mob_skill_lists` VALUES ('Imp_Bandsman',414,1711);
 INSERT INTO `mob_skill_lists` VALUES ('Imp_Bandsman',414,1712);
--- 415 to 435: free
+INSERT INTO `mob_skill_lists` VALUES ('Angler_Orobon',415,1695);
+INSERT INTO `mob_skill_lists` VALUES ('Angler_Orobon',415,1696);
+INSERT INTO `mob_skill_lists` VALUES ('Angler_Orobon',415,1697);
+INSERT INTO `mob_skill_lists` VALUES ('Angler_Orobon',415,1698);
+INSERT INTO `mob_skill_lists` VALUES ('Angler_Orobon',415,1978);
+-- 416 to 435: free
 INSERT INTO `mob_skill_lists` VALUES ('Bloodlapper',436,2162);
 INSERT INTO `mob_skill_lists` VALUES ('Ghillie_Dhu',437,685);
 INSERT INTO `mob_skill_lists` VALUES ('Highlander_Lizard',438,371);
