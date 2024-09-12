@@ -238,9 +238,8 @@ namespace synthutils
         uint8 maxChanceHQ     = 50;
         uint8 randomRoll      = 0; // 1 to 100.
 
-        if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // If it's a desynth, lower base success rate.
+        if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS)
         {
-            successRate = 45;
             maxChanceHQ = 80;
         }
 
@@ -260,8 +259,9 @@ namespace synthutils
             // Skill is involved.
             randomRoll      = xirand::GetRandomNumber(1, 100);    // Random call must be called for each involved skill.
             currentHQTier   = 0;                                  // This is reset at the start of every loop. "finalHQTier" is not.
-            synthDifficulty = getSynthDifficulty(PChar, skillID); // Get synth difficulty again, for each skill involved.
+            synthDifficulty = getSynthDifficulty(PChar, skillID); // Get synth difficulty for current skill.
 
+            // Skill is at or over synth recipe level.
             if (synthDifficulty <= 0)
             {
                 // Check what the current HQ tier is.
@@ -288,15 +288,18 @@ namespace synthutils
                     finalHQTier = currentHQTier;
                 }
             }
+
+            // Skill is under synth recipe level.
             else
             {
-                canHQ       = false; // Player skill level is lower than recipe skill level. Cannot HQ.
-                successRate = successRate - synthDifficulty * 10;
+                canHQ           = false; // Player skill level is lower than recipe skill level. Cannot HQ.
+                synthDifficulty = std::clamp<int16>(synthDifficulty, 1, 9);
+                successRate     = successRate - synthDifficulty * 10;
+            }
 
-                if (successRate < 5)
-                {
-                    successRate = 5;
-                }
+            if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // If it's a desynth, halve base success rate.
+            {
+                successRate = successRate / 2;
             }
 
             // Apply synthesis success rate modifier, based on synth type.
