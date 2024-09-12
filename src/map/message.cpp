@@ -832,14 +832,14 @@ namespace message
 
     void send_charvar_update(uint32 charId, std::string const& varName, uint32 value, uint32 expiry)
     {
-        uint32 size = sizeof(uint32) + sizeof(uint32) + sizeof(uint32) + sizeof(uint8) + static_cast<uint32>(varName.size());
-        char*  buf  = new char[size];
+        const uint32 size      = sizeof(uint32) + sizeof(uint32) + sizeof(uint32) + sizeof(uint8) + 256;
+        char         buf[size] = {};
         memset(&buf[0], 0, size);
 
         ref<uint32>(buf, 0) = charId;
         ref<int32>(buf, 4)  = value;
         ref<uint32>(buf, 8) = expiry;
-        ref<uint8>(buf, 12) = (uint8)varName.size();
+        ref<uint8>(buf, 12) = static_cast<uint8>(std::min<size_t>(varName.size(), 255));
         memcpy(buf + 13, varName.c_str(), varName.size());
 
         message::send(MSG_CHARVAR_UPDATE, buf, size, nullptr);
