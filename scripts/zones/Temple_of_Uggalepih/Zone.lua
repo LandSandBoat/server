@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Temple_of_Uggalepih (159)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

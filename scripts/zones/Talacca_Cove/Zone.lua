@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Talacca_Cove (57)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

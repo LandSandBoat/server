@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Maquette Abdhaljs-Legion B (287)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

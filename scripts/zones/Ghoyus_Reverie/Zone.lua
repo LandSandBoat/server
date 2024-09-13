@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Ghoyus_Reverie
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

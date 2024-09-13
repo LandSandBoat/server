@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Mine_Shaft_2716 (13)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

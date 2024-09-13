@@ -5,6 +5,7 @@ local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/missions/amk/helpers')
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

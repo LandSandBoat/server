@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Arrapago_Reef (54)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

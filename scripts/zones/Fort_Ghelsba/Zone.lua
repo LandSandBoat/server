@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Fort_Ghelsba (141)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

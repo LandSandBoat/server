@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = zones[xi.zone.MONASTIC_CAVERN]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

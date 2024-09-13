@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Eastern Adoulin (257)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 local defineZoneAroundXYZ = function(zone, id, x, y, z, distance)

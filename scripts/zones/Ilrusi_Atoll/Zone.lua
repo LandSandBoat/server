@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Ilrusi_Atoll (55)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

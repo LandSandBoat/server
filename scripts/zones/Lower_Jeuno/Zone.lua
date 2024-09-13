@@ -4,6 +4,7 @@
 local ID = zones[xi.zone.LOWER_JEUNO]
 local lowerJeunoGlobal = require('scripts/zones/Lower_Jeuno/globals')
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

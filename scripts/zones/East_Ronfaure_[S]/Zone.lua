@@ -5,6 +5,7 @@ require('scripts/globals/dark_ixion')
 -----------------------------------
 local ID = zones[xi.zone.EAST_RONFAURE_S]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

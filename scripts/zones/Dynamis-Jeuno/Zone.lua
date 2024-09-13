@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Dynamis-Jeuno
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

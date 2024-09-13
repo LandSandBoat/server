@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Bhaflau_Remnants
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

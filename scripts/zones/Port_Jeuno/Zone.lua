@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Port_Jeuno (246)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

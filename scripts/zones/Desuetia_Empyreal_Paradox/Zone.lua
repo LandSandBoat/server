@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Desuetia Empyreal Paradox (290)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

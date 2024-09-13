@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Hall_of_Transference
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

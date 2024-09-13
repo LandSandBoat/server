@@ -3,6 +3,7 @@
 -----------------------------------
 require('scripts/globals/dark_ixion')
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

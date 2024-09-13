@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = zones[xi.zone.GUSGEN_MINES]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

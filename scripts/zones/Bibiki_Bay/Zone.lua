@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Bibiki_Bay (4)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

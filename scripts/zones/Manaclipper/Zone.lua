@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = zones[xi.zone.MANACLIPPER]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

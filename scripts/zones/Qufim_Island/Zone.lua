@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Qufim_Island (126)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
