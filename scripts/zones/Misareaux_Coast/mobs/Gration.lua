@@ -9,6 +9,11 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 900)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 18000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 18000)
+    mob:addListener('ITEM_DROPS', 'ITEM_DROPS_GRATION', function(mobArg, loot)
+        loot:addItemFixed(xi.item.TATAMI_SHIELD, mob:getLocalVar('DropRate'))
+    end)
 end
 
 entity.onMobSpawn = function(mob)

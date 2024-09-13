@@ -4057,6 +4057,7 @@ xi.item =
     ASTRAL_SHIELD                       = 12351,
     VIKING_SHIELD                       = 12356,
     HICKORY_SHIELD                      = 12359,
+    TATAMI_SHIELD                       = 12360,
     PATRIARCH_PROTECTORS_SHIELD         = 12363,
     NYMPH_SHIELD                        = 12364,
     PICAROONS_SHIELD                    = 12370,

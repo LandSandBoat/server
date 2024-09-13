@@ -1008,7 +1008,7 @@ INSERT INTO `mob_groups` VALUES (54,4293,25,'Warder_Thalia',0,128,0,5000,0,62,63
 INSERT INTO `mob_groups` VALUES (55,466,25,'Bloody_Coffin',0,128,0,0,0,50,52,0);
 INSERT INTO `mob_groups` VALUES (56,484,25,'Boggelmann',0,128,0,7600,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (57,98,25,'Alsha',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (58,1792,25,'Gration',0,128,1218,30000,0,79,79,0);
+INSERT INTO `mob_groups` VALUES (58,1792,25,'Gration',0,128,0,30000,0,79,79,0);
 INSERT INTO `mob_groups` VALUES (59,4505,25,'Ziphius',0,128,2801,0,0,60,62,0);
 INSERT INTO `mob_groups` VALUES (60,6739,25,'Tsui-Goab',0,128,0,0,0,65,65,0);
 INSERT INTO `mob_groups` VALUES (61,6740,25,'Bloodswiller_Fly',0,128,0,0,0,0,0,0);
