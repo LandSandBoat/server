@@ -10066,8 +10066,7 @@ INSERT INTO `mob_droplist` VALUES (1217,0,0,1000,4374,500); -- Sleepshroom (50.0
 INSERT INTO `mob_droplist` VALUES (1217,0,0,1000,4374,250); -- Sleepshroom (25.0%)
 INSERT INTO `mob_droplist` VALUES (1217,2,0,1000,4374,0);   -- Sleepshroom (Steal)
 
--- ZoneID:  25 - Gration
-INSERT INTO `mob_droplist` VALUES (1218,0,0,1000,12360,500); -- Tatami Shield (50.0%)
+-- 1218 Available
 
 -- ZoneID:  89 - Grauberg Hippogryph
 INSERT INTO `mob_droplist` VALUES (1219,0,0,1000,1690,230); -- Hippogryph Tailfeather (23.0%)
