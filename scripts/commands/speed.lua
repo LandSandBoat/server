@@ -47,7 +47,7 @@ commandObj.onTrigger = function(player, speed)
         player:printToPlayer(string.format('New speed: %u', speed))
     end
 
-    player:setMod(xi.mod.MOVE_SPEED_OVERIDE, speed)
+    player:setMod(xi.mod.MOVE_SPEED_OVERRIDE, speed)
     player:setSpeed(baseSpeed)
 end
 

@@ -3,6 +3,7 @@
 -- Item: Talaria
 -- Enchantment: Increases movement speed.
 -- Durration: 60 Mins
+-- Base speed 10% or +5
 -----------------------------------
 ---@type TItem
 local itemObject = {}
@@ -18,11 +19,11 @@ itemObject.onItemUse = function(target)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.MOVE_SPEED_QUICKENING, 12)
+    target:addMod(xi.mod.MOVE_SPEED_QUICKENING, 5)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.MOVE_SPEED_QUICKENING, 12)
+    target:delMod(xi.mod.MOVE_SPEED_QUICKENING, 5)
 end
 
 return itemObject

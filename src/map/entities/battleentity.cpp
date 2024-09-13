@@ -255,40 +255,52 @@ uint8 CBattleEntity::GetSpeed()
         return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
     }
 
-    // Flee, KIs, Gear penalties, Bolters Roll.
-    float additiveMods = static_cast<float>(getMod(Mod::MOVE_SPEED_STACKABLE)) / 100.0f;
+    // Gear penalties, Bolters Roll.
+    uint8 additiveMods = static_cast<uint8>(getMod(Mod::MOVE_SPEED_STACKABLE));
 
-    // Quickening and Mazurka. Only highest applies.
-    Mod modToUse = getMod(Mod::MOVE_SPEED_QUICKENING) > getMod(Mod::MOVE_SPEED_MAZURKA) ? Mod::MOVE_SPEED_QUICKENING : Mod::MOVE_SPEED_MAZURKA;
+    // Gravity and Curse. They seem additive to each other and the sum seems to be multiplicative.
+    float weightFactor = std::clamp<float>(1.0f - static_cast<float>(getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY)) / 100.0f, 0.1f, 1.0f);
 
-    float effectBonus = static_cast<float>(getMod(modToUse)) / 100.0f;
+    // Flee.
+    float fleeFactor = std::clamp<float>(1.0f + static_cast<float>(getMod(Mod::MOVE_SPEED_FLEE)) / 100.0f, 1.0f, 2.0f);
 
-    // Positive movement speed from gear. Only highest applies.
-    float gearBonus = 0.0f;
+    // Cheer KI's
+    float cheerFactor = (99.0f + static_cast<float>(getMod(Mod::MOVE_SPEED_CHEER))) / 99.0f;
+
+    // Bolter's Roll. Additive
+    uint8 boltersRollEffect = static_cast<uint8>(getMod(Mod::MOVE_SPEED_BOLTERS_ROLL));
+
+    // Positive movement speed from gear and from Atmas. Only highest applies. Multiplicative to base speed.
+    float gearFactor = 1.0f;
 
     if (objtype == TYPE_PC)
     {
-        gearBonus = static_cast<float>(getMaxGearMod(Mod::MOVE_SPEED_GEAR_BONUS)) / 100.0f;
+        gearFactor = std::clamp<float>(1.0f + static_cast<float>(getMaxGearMod(Mod::MOVE_SPEED_GEAR_BONUS)) / 100.0f, 1.0f, 1.25f);
     }
 
-    // Gravity and Curse. They seem additive to each other and the sum seems to be multiplicative.
-    float weightPenalties = static_cast<float>(getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY)) / 100.0f;
+    // Quickening and Mazurka. They share a cap. Additive.
+    uint8 mazurkaQuickeningEffect = std::clamp<uint8>(getMod(Mod::MOVE_SPEED_QUICKENING) + getMod(Mod::MOVE_SPEED_MAZURKA), 0, 10);
 
     // We have all the modifiers needed. Calculate final speed.
-    float modifiedSpeed = static_cast<float>(baseSpeed) * std::clamp<float>(1.0f + additiveMods + effectBonus, 0.1f, 1.6f) * (1.0f + gearBonus) * std::clamp<float>(1.0f - weightPenalties, 0.1f, 1.0f);
+    // This MUST BE DONE IN THIS ORDER. Using uint8 data type, we use that to floor.
+    outputSpeed = baseSpeed + additiveMods;
+    outputSpeed = outputSpeed * weightFactor;
+    outputSpeed = outputSpeed * fleeFactor;
+    outputSpeed = outputSpeed * cheerFactor;
+    outputSpeed = outputSpeed + boltersRollEffect;
+    outputSpeed = outputSpeed * gearFactor;
+    outputSpeed = outputSpeed + mazurkaQuickeningEffect;
 
-    outputSpeed = static_cast<uint8>(modifiedSpeed);
-
-    // Set cap.
+    // Set cap (Default 80).
     outputSpeed = std::clamp<uint8>(outputSpeed, 0, 80 + settings::get<int8>("map.SPEED_MOD"));
 
     // Speed cap can be bypassed. Ex. Feast of swords. GM speed.
     // TODO: Find exceptions. Add them here.
 
     // GM speed bypass.
-    if (getMod(Mod::MOVE_SPEED_OVERIDE) > 0)
+    if (getMod(Mod::MOVE_SPEED_OVERRIDE) > 0)
     {
-        outputSpeed = getMod(Mod::MOVE_SPEED_OVERIDE);
+        outputSpeed = getMod(Mod::MOVE_SPEED_OVERRIDE);
     }
 
     return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
