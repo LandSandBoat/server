@@ -1937,7 +1937,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Angler_Orobon',415,1696);
 INSERT INTO `mob_skill_lists` VALUES ('Angler_Orobon',415,1697);
 INSERT INTO `mob_skill_lists` VALUES ('Angler_Orobon',415,1698);
 INSERT INTO `mob_skill_lists` VALUES ('Angler_Orobon',415,1978);
--- 416 to 435: free
+INSERT INTO `mob_skill_lists` VALUES ('Two-faced_Flan',416,1821);
+INSERT INTO `mob_skill_lists` VALUES ('Two-faced_Flan',416,1822);
+INSERT INTO `mob_skill_lists` VALUES ('Two-faced_Flan',416,1823);
+INSERT INTO `mob_skill_lists` VALUES ('Two-faced_Flan',416,1824);
+INSERT INTO `mob_skill_lists` VALUES ('Two-faced_Flan',416,1825);
+-- 417 to 435: free
 INSERT INTO `mob_skill_lists` VALUES ('Bloodlapper',436,2162);
 INSERT INTO `mob_skill_lists` VALUES ('Ghillie_Dhu',437,685);
 INSERT INTO `mob_skill_lists` VALUES ('Highlander_Lizard',438,371);

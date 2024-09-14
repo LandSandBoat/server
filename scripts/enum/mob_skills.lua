@@ -58,6 +58,8 @@ xi.mobSkill =
 
     HYPNIC_LAMP       = 1695,
 
+    XENOGLOSSIA       = 1823,
+
     SANDBLAST_2       = 1841,
     SANDPIT_2         = 1842,
     VENOM_SPRAY_2     = 1843,
