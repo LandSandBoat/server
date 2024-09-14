@@ -217,6 +217,54 @@ mission.sections =
             },
         },
     },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId)
+        end,
+
+        [xi.zone.KONSCHTAT_HIGHLANDS] =
+        {
+            ['Shattered_Telepoint'] = mission:event(913):replaceDefault(),
+
+            onEventFinish =
+            {
+                [913] = function(player, csid, option, npc)
+                    if option == 0 then
+                        player:setPos(-267.194, -40.634, -280.019, 0, 14) -- To Hall of Transference (R)
+                    end
+                end,
+            },
+        },
+
+        [xi.zone.TAHRONGI_CANYON] =
+        {
+            ['Shattered_Telepoint'] = mission:event(913):replaceDefault(),
+
+            onEventFinish =
+            {
+                [913] = function(player, csid, option, npc)
+                    if option == 0 then
+                        player:setPos(280.066, -80.635, -67.096, 191, 14)
+                    end
+                end,
+            },
+        },
+
+        [xi.zone.LA_THEINE_PLATEAU] =
+        {
+            ['Shattered_Telepoint'] = mission:event(202):replaceDefault(),
+
+            onEventFinish =
+            {
+                [202] = function(player, csid, option, npc)
+                    if option == 0 then
+                        player:setPos(-266.76, -0.635, 280.058, 0, 14) -- To Hall of Transference (R)
+                    end
+                end,
+            },
+        },
+    },
 }
 
 return mission
