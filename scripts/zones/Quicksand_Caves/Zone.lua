@@ -130,6 +130,8 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
                 -- retrigger if weight is still enough to do so
                 if plateArg:getLocalVar('weight') >= 3 then
                     -- retrigger, with nil as player arg, player is not necessary to re-open the door if weight is >= 3.
+                    -- TODO: Separate nil-based logic out of function call
+                    ---@diagnostic disable-next-line param-type-mismatch
                     zoneObject.onTriggerAreaEnter(nil, triggerArea)
                 end
             end)

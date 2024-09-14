@@ -19,12 +19,10 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onInstanceZoneIn = function(player, instance)
-    local cs = -1
-
     if player:getInstance() == nil then
         player:setPos(0, 0, 0, 0, xi.zone.ALZADAAL_UNDERSEA_RUINS)
 
-        return cs
+        return
     end
 
     local pos = player:getPos()
@@ -40,8 +38,6 @@ zoneObject.onInstanceZoneIn = function(player, instance)
     end
 
     player:addTempItem(5399)
-
-    return cs
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -52,6 +48,10 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     local instance = player:getInstance()
+    if not instance then
+        return
+    end
+
     local chars    = instance:getChars()
 
     if csid == 1 then

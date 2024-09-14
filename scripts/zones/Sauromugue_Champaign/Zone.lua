@@ -39,7 +39,7 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onGameDay = function(zone)
+zoneObject.onGameDay = function()
     for i = ID.npc.QM2, ID.npc.QM2 + 5 do
         GetNPCByID(i):resetLocalVars()
     end

@@ -8,11 +8,9 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onInstanceZoneIn = function(player, instance)
-    local cs = -1
-
     if player:getInstance() == nil then
         player:setPos(0, 0, 0, 0, 72)
-        return cs
+        return
     end
 
     local pos = player:getPos()
@@ -22,8 +20,6 @@ zoneObject.onInstanceZoneIn = function(player, instance)
     end
 
     player:addTempItem(5400)
-
-    return cs
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -36,7 +32,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 zoneObject.onInstanceLoadFailed = function()
-    return 72
+    return xi.zone.ALZADAAL_UNDERSEA_RUINS
 end
 
 return zoneObject

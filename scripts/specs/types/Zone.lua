@@ -12,10 +12,10 @@
 ---@field onTransportEvent? fun(player: CBaseEntity, transportId: integer)
 ---@field onConquestUpdate? fun(zone: CZone, type: integer, influence: integer, owner: integer, ranking: integer, isConquestAlliance: boolean)
 ---@field onGameDay? fun()
----@field onGameHour? fun()
+---@field onGameHour? fun(zone: CZone)
 ---@field onZoneWeatherChange? fun(weather: integer)
 ---@field onTOTDChange? fun(TOTD: integer)
 ---@field onInstanceZoneIn? fun(player: CBaseEntity, instance: CInstance)
 ---@field afterInstanceRegister? fun(player: CBaseEntity)
----@field onInstanceLoadFailed? fun(): integer?
+---@field onInstanceLoadFailed? fun(): xi.zone? Return value is zone ID to exit the player to.
 ---@field onZoneTick? fun(zone: CZone)
