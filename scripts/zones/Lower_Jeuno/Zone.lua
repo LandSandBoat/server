@@ -86,7 +86,6 @@ zoneObject.onGameHour = function(zone)
     elseif vanadielHour == 1 then
         if playerOnQuestId == 0 then
             local npc = GetNPCByID(ID.npc.VHANA_EHGAKLYWHA)
-
             if not npc then
                 return
             end

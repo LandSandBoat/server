@@ -12,15 +12,14 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDisengage = function(mob)
-    local run = mob:getLocalVar('run')
     local instance = mob:getInstance()
-
     if not instance then
         return
     end
 
+    local run   = mob:getLocalVar('run')
     local stage = instance:getStage()
-    local prog = instance:getProgress()
+    local prog  = instance:getProgress()
 
     if run == 1 then
         mob:pathThrough(ID.points[stage][prog - 1].point1, 9)
@@ -48,17 +47,16 @@ entity.onMobEngage = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local act = mob:getCurrentAction()
-    local isBusy = false
-    local runTime = mob:getLocalVar('runTime')
     local instance = mob:getInstance()
-
     if not instance then
         return
     end
 
-    local stage = instance:getStage()
-    local prog = instance:getProgress()
+    local act     = mob:getCurrentAction()
+    local isBusy  = false
+    local runTime = mob:getLocalVar('runTime')
+    local stage   = instance:getStage()
+    local prog    = instance:getProgress()
 
     if
         act == xi.act.MOBABILITY_START or

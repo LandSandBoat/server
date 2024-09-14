@@ -15,7 +15,6 @@ itemObject.onItemUse = function(target)
 
     if target:hasStatusEffect(xi.effect.RERAISE) then
         local effect = target:getStatusEffect(xi.effect.RERAISE)
-
         if not effect then
             return
         end

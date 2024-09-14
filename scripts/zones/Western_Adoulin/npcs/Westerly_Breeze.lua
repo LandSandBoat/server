@@ -13,7 +13,6 @@ entity.onTrade = function(player, npc, trade)
 
     if trade:getItemCount() == 1 and trade:getGil() == 0 then
         local item = trade:getItem(0)
-
         if not item then
             return
         end

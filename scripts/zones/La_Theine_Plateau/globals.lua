@@ -77,7 +77,6 @@ local laTheineGlobal =
         }
 
         local fallenEgg = GetNPCByID(ID.npc.FALLEN_EGG)
-
         if not fallenEgg then
             return
         end

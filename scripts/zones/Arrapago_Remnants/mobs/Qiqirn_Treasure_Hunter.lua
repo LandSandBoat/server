@@ -9,7 +9,6 @@ local entity = {}
 
 entity.onMobRoamAction = function(mob)
     local instance = mob:getInstance()
-
     if not instance then
         return
     end

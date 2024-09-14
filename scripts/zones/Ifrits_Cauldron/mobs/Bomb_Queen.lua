@@ -61,7 +61,6 @@ entity.onMobFight = function(mob, target)
                 end
 
                 local pet = GetMobByID(petId)
-
                 if not pet then
                     return
                 end

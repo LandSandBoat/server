@@ -6,7 +6,6 @@ local abilityObject = {}
 
 abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
-
     if not master then
         return
     end

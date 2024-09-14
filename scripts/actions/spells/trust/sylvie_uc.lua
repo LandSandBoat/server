@@ -14,8 +14,8 @@ end
 
 spellObject.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
-    local master = mob:getMaster()
 
+    local master = mob:getMaster()
     if not master then
         return
     end

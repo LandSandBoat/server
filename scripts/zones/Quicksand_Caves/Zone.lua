@@ -144,7 +144,6 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 
     if triggerAreaID < 30 then
         local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + triggerAreaID)
-
         if not plate then
             return
         end

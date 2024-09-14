@@ -60,7 +60,6 @@ end
 
 zoneObject.onZoneWeatherChange = function(weather)
     local kvMob = GetMobByID(ID.mob.KING_VINEGARROON)
-
     if not kvMob then
         return
     end

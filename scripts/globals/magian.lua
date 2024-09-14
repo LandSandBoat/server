@@ -918,7 +918,6 @@ xi.magian.onItemEquip = function(player, itemObj)
     end
 
     local trialData = xi.magian.trials[itemTrialId]
-
     if not trialData then
         return
     end

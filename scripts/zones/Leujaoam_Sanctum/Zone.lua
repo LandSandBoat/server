@@ -29,7 +29,6 @@ end
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 102 then
         local instance = player:getInstance()
-
         if not instance then
             return
         end

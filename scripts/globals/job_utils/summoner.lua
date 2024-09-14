@@ -221,7 +221,6 @@ end
 
 xi.job_utils.summoner.onUseBloodPact = function(target, petskill, summoner, action)
     local bloodPactAbility = GetAbility(petskill:getID()) -- Player abilities and Avatar abilities are mapped 1:1
-
     if not bloodPactAbility then
         return
     end

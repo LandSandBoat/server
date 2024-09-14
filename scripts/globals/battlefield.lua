@@ -708,7 +708,6 @@ function Battlefield.onEntryTrigger(player, npc)
         local status  = player:getStatusEffect(xi.effect.BATTLEFIELD)
         local id      = status:getPower()
         local content = xi.battlefield.contents[id]
-
         if not content then
             return
         end

@@ -16,7 +16,6 @@ end
 
 entity.onMobSpawn = function(mob)
     local battlefield = mob:getBattlefield()
-
     if not battlefield then
         return
     end

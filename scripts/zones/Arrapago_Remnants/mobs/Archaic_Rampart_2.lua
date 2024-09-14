@@ -47,7 +47,6 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     local instance = mob:getInstance()
-
     if not instance then
         return
     end

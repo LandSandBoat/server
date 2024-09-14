@@ -10,7 +10,6 @@ local kuftalGlobal = {}
 local movePhantomWormQM
 movePhantomWormQM = function()
     local npc = GetNPCByID(ID.npc.PHANTOM_WORM_QM)
-
     if not npc then
         return
     end

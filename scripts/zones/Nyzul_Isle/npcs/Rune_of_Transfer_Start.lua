@@ -12,7 +12,6 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local instance = player:getInstance()
-
     if not instance then
         return
     end
@@ -37,7 +36,6 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     local instance = npc:getInstance()
-
     if not instance then
         return
     end

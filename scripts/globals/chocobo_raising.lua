@@ -1062,7 +1062,6 @@ end
 
 xi.chocoboRaising.initChocoboData = function(player)
     local chocoState = player:getChocoboRaisingInfo()
-
     if not chocoState then
         return chocoState
     end

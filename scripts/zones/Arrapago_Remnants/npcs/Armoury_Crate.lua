@@ -7,7 +7,6 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local instance = npc:getInstance()
-
     if not instance then
         return
     end

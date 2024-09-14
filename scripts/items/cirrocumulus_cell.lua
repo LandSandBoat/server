@@ -20,7 +20,6 @@ end
 
 itemObject.onItemUse = function(target)
     local encumbrance = target:getStatusEffect(xi.effect.ENCUMBRANCE_I)
-
     if not encumbrance then
         return
     end

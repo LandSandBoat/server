@@ -69,7 +69,6 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     local currentday = tonumber(os.date('%j'))
-
     if not currentday then
         return
     end

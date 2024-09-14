@@ -240,7 +240,6 @@ xi.beastmentreasure.updatePeddlestox = function(zone, peddlestoxID)
     and once at the start of each new game day. Since Peddlestox is disabled in the db by default, we
     only need to enable her on the appropriate day and disable her on the following day. ]]--
     local peddlestox = GetNPCByID(peddlestoxID)
-
     if not peddlestox then
         return
     end

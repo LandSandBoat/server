@@ -38,7 +38,6 @@ entity.onMobDespawn = function(mob)
     end
 
     local instance = mob:getInstance()
-
     if not instance then
         return
     end

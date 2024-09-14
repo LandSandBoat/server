@@ -12,7 +12,6 @@ end
 
 entity.onMobFight = function(mob, target)
     local instance = mob:getInstance()
-
     if not instance then
         return
     end

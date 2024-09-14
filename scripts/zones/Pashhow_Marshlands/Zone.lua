@@ -48,7 +48,6 @@ end
 
 zoneObject.onZoneWeatherChange = function(weather)
     local toxicTamlyn = GetMobByID(ID.mob.TOXIC_TAMLYN)
-
     if not toxicTamlyn then
         return
     end

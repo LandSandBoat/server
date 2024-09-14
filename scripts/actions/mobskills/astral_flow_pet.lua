@@ -45,7 +45,6 @@ local petAstralFlowAbility =
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local pet = mob:getPet()
-
     if not pet then
         return
     end

@@ -11,7 +11,6 @@ local korrolokaGlobal = {}
 local moveMorionWormQM
 moveMorionWormQM = function()
     local npc = GetNPCByID(ID.npc.MORION_WORM_QM)
-
     if not npc then
         return
     end
