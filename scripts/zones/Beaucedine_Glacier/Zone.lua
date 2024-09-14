@@ -4,6 +4,7 @@
 local ID = zones[xi.zone.BEAUCEDINE_GLACIER]
 require('scripts/quests/i_can_hear_a_rainbow')
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

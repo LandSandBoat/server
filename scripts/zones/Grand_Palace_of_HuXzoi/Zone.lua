@@ -3,6 +3,7 @@
 -----------------------------------
 local huxzoiGlobal = require('scripts/zones/Grand_Palace_of_HuXzoi/globals')
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

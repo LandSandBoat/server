@@ -4,6 +4,7 @@
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 local gardenGlobal = require('scripts/zones/The_Garden_of_RuHmet/globals')
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

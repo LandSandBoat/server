@@ -31,9 +31,8 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     if mob:getLocalVar('dead') == 0 then
         mob:setLocalVar('dead', 1)
-        local mobID = mob:getID()
+        local mobID    = mob:getID()
         local instance = mob:getInstance()
-
         if not instance then
             return
         end

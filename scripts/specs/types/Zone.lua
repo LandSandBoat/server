@@ -1,0 +1,21 @@
+---@meta
+
+---@class TZone
+---@field onZoneIn? fun(player: CBaseEntity, prevZone: xi.zone): integer|table<integer>?
+---@field afterZoneIn? fun(player: CBaseEntity)
+---@field onZoneOut? fun(player: CBaseEntity)
+---@field onTriggerAreaEnter? fun(player: CBaseEntity, triggerArea: CTriggerArea, optInstance: CInstance?)
+---@field onTriggerAreaLeave? fun(player: CBaseEntity, triggerArea: CTriggerArea, optInstance: CInstance?)
+---@field onInitialize? fun(zone: CZone)
+---@field onEventUpdate? fun(player: CBaseEntity, csid: integer, option: integer, npc: CBaseEntity)
+---@field onEventFinish? fun(player: CBaseEntity, csid: integer, option: integer, npc: CBaseEntity)
+---@field onTransportEvent? fun(player: CBaseEntity, transportId: integer)
+---@field onConquestUpdate? fun(zone: CZone, type: integer, influence: integer, owner: integer, ranking: integer, isConquestAlliance: boolean)
+---@field onGameDay? fun()
+---@field onGameHour? fun(zone: CZone)
+---@field onZoneWeatherChange? fun(weather: integer)
+---@field onTOTDChange? fun(TOTD: integer)
+---@field onInstanceZoneIn? fun(player: CBaseEntity, instance: CInstance)
+---@field afterInstanceRegister? fun(player: CBaseEntity)
+---@field onInstanceLoadFailed? fun(): xi.zone? Return value is zone ID to exit the player to.
+---@field onZoneTick? fun(zone: CZone)

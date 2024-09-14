@@ -13,9 +13,8 @@ end
 entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.CHEST)
 
-    local npcID = npc:getID()
+    local npcID    = npc:getID()
     local instance = npc:getInstance()
-
     if not instance then
         return
     end

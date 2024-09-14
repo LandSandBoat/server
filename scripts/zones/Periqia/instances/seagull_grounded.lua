@@ -318,7 +318,6 @@ instanceObject.onTrack = function(instance)
     }
 
     local mob = GetMobByID(ID.mob[xi.assault.mission.SEAGULL_GROUNDED].MOBS_START.EXCALIAC, instance)
-
     if not mob then
         return
     end

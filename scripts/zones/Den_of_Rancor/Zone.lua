@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Den_of_Rancor (160)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

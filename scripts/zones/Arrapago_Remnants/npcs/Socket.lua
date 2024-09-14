@@ -10,8 +10,7 @@ local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local instance      = npc:getInstance()
-
+    local instance = npc:getInstance()
     if not instance then
         return
     end

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Beaucedine_Glacier_[S] (136)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -34,7 +34,6 @@ commandObj.onTrigger = function(player, arg1, arg2, arg3)
             arg3 = tonumber(arg3)
             if zone and zone:getTypeMask() == xi.zoneType.INSTANCED then
                 local instance = player:getInstance()
-
                 if not instance then
                     return
                 end

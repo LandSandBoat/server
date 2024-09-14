@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Valley_of_Sorrows (128)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

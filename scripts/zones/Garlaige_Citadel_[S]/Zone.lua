@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Garlaige_Citadel_[S] (164)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

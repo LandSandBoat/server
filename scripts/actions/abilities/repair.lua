@@ -64,8 +64,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    local pet                 = player:getPet()
-
+    local pet = player:getPet()
     if not pet then
         return
     end

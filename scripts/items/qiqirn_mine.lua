@@ -17,13 +17,11 @@ end
 
 itemObject.onItemUse = function(target)
     local instance = target:getInstance()
-
     if not instance then
         return
     end
 
     local bomb = instance:insertAlly(100)
-
     if not bomb then
         return
     end

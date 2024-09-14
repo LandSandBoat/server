@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Chamber_of_Oracles (168)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

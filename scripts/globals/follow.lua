@@ -40,7 +40,6 @@ end
 
 xi.follow.clearFollowers = function(leader)
     local followers = xi.follow.getFollowers(leader)
-
     if not followers then
         return
     end

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: RuLude_Gardens (243)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

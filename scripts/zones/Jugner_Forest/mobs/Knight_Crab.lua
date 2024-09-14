@@ -24,7 +24,6 @@ end
 
 entity.onMobDespawn = function(mob)
     local kingArthro = GetMobByID(ID.mob.KING_ARTHRO)
-
     if not kingArthro then
         return
     end

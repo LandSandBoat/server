@@ -62,7 +62,6 @@ entity.onMobFight = function(mob, target)
     end
 
     local battlefield = mob:getBattlefield()
-
     if not battlefield then
         return
     end

@@ -385,7 +385,6 @@ end
 xi.pets.avatar.getLightSpiritSpell = function(pet)
     -- returns the spirit's preferred target based on positioning
     local master = pet:getMaster()
-
     if not master then
         return 0, nil
     end

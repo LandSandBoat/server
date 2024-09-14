@@ -10,7 +10,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local zone = npc:getZone()
-
     if not zone then
         return
     end

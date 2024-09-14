@@ -4,6 +4,7 @@
 local ID = zones[xi.zone.DAVOI]
 require('scripts/quests/otherAreas/helpers')
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

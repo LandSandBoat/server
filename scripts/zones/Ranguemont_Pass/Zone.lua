@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = zones[xi.zone.RANGUEMONT_PASS]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

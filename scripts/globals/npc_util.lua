@@ -925,7 +925,6 @@ end
 
 function npcUtil.UpdateNPCSpawnPoint(id, minTime, maxTime, posTable, serverVar)
     local npc = GetNPCByID(id)
-
     if not npc then
         return
     end

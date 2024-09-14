@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Abyssea - La_Theine
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Silver Knife
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

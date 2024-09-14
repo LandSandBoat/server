@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Halvung (62)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

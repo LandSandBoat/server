@@ -11,7 +11,6 @@ end
 
 entity.onMobFight = function(mob, target)
     local auraGear = GetMobByID(mob:getID() + 1)
-
     if not auraGear then
         return
     end

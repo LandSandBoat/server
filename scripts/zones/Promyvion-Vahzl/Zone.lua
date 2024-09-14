@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = zones[xi.zone.PROMYVION_VAHZL]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

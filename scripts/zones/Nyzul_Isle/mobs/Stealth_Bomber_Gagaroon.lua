@@ -44,12 +44,12 @@ end
 local function dropBomb(mob)
     local instance = mob:getInstance()
     local bombMob  = GetMobByID(mob:getID() - 1, instance)
-    local target   = mob:getTarget()
-    local pos      = mob:getPos()
-
     if not bombMob then
         return
     end
+
+    local target = mob:getTarget()
+    local pos    = mob:getPos()
 
     bombMob:setPos(pos.x, pos.y, pos.z, pos.rot)
     bombMob:setStatus(xi.status.UPDATE)

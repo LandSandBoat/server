@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Silver_Sea_route_to_Nashmau
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

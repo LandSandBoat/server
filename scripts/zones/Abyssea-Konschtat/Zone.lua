@@ -7,6 +7,7 @@
 -- EventID 2180 Teleport?
 -- EventID 2181 DEBUG Menu
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

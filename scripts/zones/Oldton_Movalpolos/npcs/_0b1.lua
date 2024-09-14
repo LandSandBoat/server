@@ -8,7 +8,6 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local gate = GetNPCByID(npc:getID() + 4)
-
     if not gate then
         return
     end

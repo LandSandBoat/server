@@ -13,8 +13,8 @@ end
 entity.onEventFinish = function(player, csid, option, door)
     if csid == 300 and option == 1 then
         door:setAnimation(8)
-        local instance = door:getInstance()
 
+        local instance = door:getInstance()
         if not instance then
             return
         end

@@ -21,7 +21,6 @@ end
 entity.onEventFinish = function(player, csid, option, door)
     if csid == 300 and option == 1 then
         local instance = door:getInstance()
-
         if not instance then
             return
         end

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: VeLugannon_Palace (177)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
