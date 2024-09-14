@@ -3,6 +3,8 @@
 --  NPC: Shattered Telepoint
 -- !pos 179 35 255 117
 -----------------------------------
+local ID = zones[xi.zone.TAHRONGI_CANYON]
+-----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -12,6 +14,8 @@ end
 entity.onTrigger = function(player, npc)
     if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS) then
         player:startEvent(913)
+    else
+        player:messageSpecial(ID.text.TELEPOINT_HAS_BEEN_SHATTERED)
     end
 end
 
