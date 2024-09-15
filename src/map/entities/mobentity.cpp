@@ -1225,7 +1225,25 @@ void CMobEntity::OnCastFinished(CMagicState& state, action_t& action)
     TracyZoneScoped;
     CBattleEntity::OnCastFinished(state, action);
 
+    CMobController* mobController = dynamic_cast<CMobController*>(PAI->GetController());
+    if (mobController)
+    {
+        mobController->OnCastStopped(state, action);
+    }
+
     TapDeaggroTime();
+}
+
+void CMobEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBASIC_ID msg, bool blockedCast)
+{
+    TracyZoneScoped;
+    CBattleEntity::OnCastInterrupted(state, action, msg, blockedCast);
+
+    CMobController* mobController = dynamic_cast<CMobController*>(PAI->GetController());
+    if (mobController)
+    {
+        mobController->OnCastStopped(state, action);
+    }
 }
 
 bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
