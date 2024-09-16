@@ -1,9 +1,8 @@
 -----------------------------------
 -- Abyssea procs mixin
 -----------------------------------
-g_mixins = g_mixins or {}
 
-g_mixins.abyssea_weakness = function(mob)
+local mixin = function(mob, params)
     if mob:isNM() then
         mob:addListener('SPAWN', 'ABYSSEA_WEAKNESS_SPAWN', function(mobArg)
             mobArg:setLocalVar('[CanProc]', 1)
@@ -51,4 +50,4 @@ g_mixins.abyssea_weakness = function(mob)
     end
 end
 
-return g_mixins.abyssea_weakness
+return mixin

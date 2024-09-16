@@ -1,9 +1,8 @@
 -----------------------------------
--- Drops Lights
+-- Abyssea - Drops Lights
 -----------------------------------
-g_mixins = g_mixins or {}
 
-g_mixins.drop_lights = function(mob)
+local mixin = function(mob, params)
     mob:addListener('SPAWN', 'ABYSSEA_SPAWN', function(mobArg)
         xi.abyssea.AddDeathListeners(mobArg)
         mobArg:setDeathType(xi.abyssea.deathType.NONE)
@@ -12,4 +11,4 @@ g_mixins.drop_lights = function(mob)
     xi.abyssea.AddDeathListeners(mob)
 end
 
-return g_mixins.drop_lights
+return mixin

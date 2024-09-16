@@ -6,11 +6,13 @@
 xi = xi or {}
 
 xi.applyMixins = function(entity, mixins, params)
+    local mixinParams = params or {}
+
     if type(mixins) == 'string' or type(mixins) == 'function' then
         if type(mixins) == 'string' then
-            xi.mixins[mixins](entity, params)
+            xi.mixins[mixins](entity, mixinParams)
         else
-            mixins(entity, params)
+            mixins(entity, mixinParams)
         end
 
         return

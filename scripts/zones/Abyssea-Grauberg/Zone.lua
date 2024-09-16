@@ -7,6 +7,10 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(1, -570, 20, -810, -487.3, 35, -740)
     xi.helm.initZone(zone, xi.helmType.HARVESTING)
+
+    xi.applyZoneMobMixins(zone, xi.mixins.abyssea_weakness)
+    xi.applyZoneMobMixins(zone, xi.mixins.drop_lights)
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_pyxis)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

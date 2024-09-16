@@ -6,6 +6,10 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(1, 599.7, -20, 265, 690, -5, 640)
+
+    xi.applyZoneMobMixins(zone, xi.mixins.abyssea_weakness)
+    xi.applyZoneMobMixins(zone, xi.mixins.drop_lights)
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_pyxis)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

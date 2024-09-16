@@ -1,9 +1,8 @@
 -----------------------------------
 -- Sturdy Pyxis Mixin
 -----------------------------------
-g_mixins = g_mixins or {}
 
-g_mixins.spawn_pyxis = function(mob)
+local mixin = function(mob)
     mob:addListener('DEATH', 'DEATH_SPAWN_PYXIS', function(mobArg, player, isKiller)
         if player and not mobArg:isNM() then
             xi.pyxis.spawnPyxis(mobArg, player)
@@ -11,4 +10,4 @@ g_mixins.spawn_pyxis = function(mob)
     end)
 end
 
-return g_mixins.spawn_pyxis
+return mixin

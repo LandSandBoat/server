@@ -1,8 +1,6 @@
 -----------------------------------
 -- Nyzul Boss Drop ID Mixin
 -----------------------------------
-xi = xi or {}
-xi.mix = xi.mix or {}
 g_mixins = g_mixins or {}
 
 g_mixins.nyzul_boss_drop = function(nyzulMob)
