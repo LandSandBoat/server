@@ -2,15 +2,13 @@
 -- Wamouracampa family mixin
 -- TODO: Halting movement during stance change.
 -----------------------------------
-require('scripts/globals/mixins')
------------------------------------
-g_mixins = g_mixins or {}
-g_mixins.families = g_mixins.families or {}
-
--- This mobs curl up based on damage taken.
+-- These mobs curl up based on damage taken.
 -- If they take a hit higher than 5% oh their Max HP OR if they take a total of 1k (aprox) damage, they will curl.
 -- If they are already curled, they will reset conditions and remain curled.
 -- They will keep streched so long as none of the above conditions are met. Linked Wamouracampas will obviously stay streched.
+-----------------------------------
+g_mixins = g_mixins or {}
+g_mixins.families = g_mixins.families or {}
 
 local function curlUpRoaming(mob)
     mob:setAnimationSub(5) -- Curl

@@ -12,6 +12,7 @@ xi.applyMixins = function(entity, mixins, params)
         else
             mixins(entity, params)
         end
+
         return
     end
 
@@ -28,11 +29,13 @@ xi.applyMixins = function(entity, mixins, params)
                     end
                 end
             end
+
             return
         elseif type(mixins[1]) == 'table' then
             for _, mixin in ipairs(mixins) do
                 xi.applyMixins(entity, mixin[1], mixin[2])
             end
+
             return
         end
     end

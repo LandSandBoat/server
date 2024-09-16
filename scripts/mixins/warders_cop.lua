@@ -1,8 +1,6 @@
 -----------------------------------
 -- Mixin for Warder NMs in CoP
 -----------------------------------
-require('scripts/globals/mixins')
------------------------------------
 g_mixins = g_mixins or {}
 
 g_mixins.warders_cop = function(mob)

@@ -1,9 +1,6 @@
--- Dynamis procs mixin
--- Customization:
-
-require('scripts/globals/mixins')
-require('scripts/globals/dynamis')
-
+-----------------------------------
+-- Dynamis Dreamlands procs mixin
+-----------------------------------
 g_mixins = g_mixins or {}
 
 -- dynamis_currency values:

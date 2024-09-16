@@ -1,7 +1,6 @@
+-----------------------------------
 -- Casket Mixins
-require('scripts/globals/caskets')
-require('scripts/globals/mixins')
-
+-----------------------------------
 xi = xi or {}
 xi.mixins = xi.mixins or {}
 

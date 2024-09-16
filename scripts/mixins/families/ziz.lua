@@ -1,13 +1,12 @@
---[[
-https://ffxiclopedia.fandom.com/wiki/Ziz
-
-AnimationSub(1) small neck pouch
-AnimationSub(2) large neck pouch
-AnimationSub(3) sleeping z's
---]]
-require('scripts/globals/mixins')
 -----------------------------------
-
+-- Ziz Family Mixin
+-----------------------------------
+-- https://ffxiclopedia.fandom.com/wiki/Ziz
+--
+-- AnimationSub(1) small neck pouch
+-- AnimationSub(2) large neck pouch
+-- AnimationSub(3) sleeping z's
+-----------------------------------
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 

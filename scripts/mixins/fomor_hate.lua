@@ -1,6 +1,6 @@
-require('scripts/globals/mixins')
-require('scripts/globals/utils')
-
+-----------------------------------
+-- Fomor Hate
+-----------------------------------
 g_mixins = g_mixins or {}
 
 g_mixins.fomor_hate = function(fomorMob)

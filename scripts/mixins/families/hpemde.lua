@@ -1,10 +1,8 @@
---[[
-https://ffxiclopedia.fandom.com/wiki/Category:Hpemde
-https://www.bg-wiki.com/ffxi/Category:Hpemde
---]]
-require('scripts/globals/mixins')
 -----------------------------------
-
+-- Hpemde Family Mixin
+-- https://ffxiclopedia.fandom.com/wiki/Category:Hpemde
+-- https://www.bg-wiki.com/ffxi/Category:Hpemde
+-----------------------------------
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 

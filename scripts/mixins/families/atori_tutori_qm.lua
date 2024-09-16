@@ -1,5 +1,6 @@
-require('scripts/globals/mixins')
-
+-----------------------------------
+-- Atori-Tutori ??? (Beyond Infinity)
+-----------------------------------
 g_mixins = g_mixins or {}
 
 g_mixins.atori_tutori_qm = function(atoriMob)

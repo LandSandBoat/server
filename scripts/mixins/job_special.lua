@@ -1,4 +1,4 @@
---[[ -----------------------------
+--[[ -----------------------------------
 Mobs that use job special abilities.
 
 If required by a mob script, mob will use its main job's special sometime under 60 HPP.
@@ -82,10 +82,7 @@ xi.mix.jobSpecial.config(mob, {
         },
     },
 })
----------------------------------------------------------------- --]]
-require('scripts/globals/mixins')
-require('scripts/globals/utils')
------------------------------------
+----------------------------------- --]]
 xi = xi or {}
 xi.mix = xi.mix or {}
 xi.mix.jobSpecial = xi.mix.jobSpecial or {}

@@ -1,20 +1,15 @@
---[[ ------------------------------
-Mobs that follow another mob while roaming.
-
-This is useful when there is a designated leader and one or multiple followers such as with Ul'Xzomit.
-This is not useful for mobs that can act as a leader and a follower such as the Slave Globes for Mother Globe.
-
-This requires the xi.mobMod.LEADER to be set appropriately for both the leader and followers.
-The leader xi.mobMod.LEADER should be a positive value designating how many followers it has.
-The follower xi.mobMod.LEADER should be a negative value designating the distance from the follower ID to the leader ID.
-
-xi.follow.assignLeaderMod() can be used during mob initialization to more easily assign the xi.mobMod.LEADER.
-
------------------------------------ --]]
-require('scripts/globals/mixins')
-require('scripts/globals/utils')
 -----------------------------------
+-- Mobs that follow another mob while roaming.
 
+-- This is useful when there is a designated leader and one or multiple followers such as with Ul'Xzomit.
+-- This is not useful for mobs that can act as a leader and a follower such as the Slave Globes for Mother Globe.
+
+-- This requires the xi.mobMod.LEADER to be set appropriately for both the leader and followers.
+-- The leader xi.mobMod.LEADER should be a positive value designating how many followers it has.
+-- The follower xi.mobMod.LEADER should be a negative value designating the distance from the follower ID to the leader ID.
+
+-- xi.follow.assignLeaderMod() can be used during mob initialization to more easily assign the xi.mobMod.LEADER.
+-----------------------------------
 g_mixins = g_mixins or {}
 
 g_mixins.follow = function(followMob)

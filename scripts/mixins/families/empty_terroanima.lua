@@ -1,9 +1,6 @@
 -----------------------------------
---  Effect from the item Bottle of Terroanima --
+-- Effect from the item Bottle of Terroanima
 -----------------------------------
-
-require('scripts/globals/mixins')
-
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 

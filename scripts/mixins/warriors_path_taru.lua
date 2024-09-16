@@ -1,9 +1,6 @@
 -----------------------------------
 -- Warriors Path BCNM mixin for Tarus
 -----------------------------------
-require('scripts/globals/mixins')
------------------------------------
-
 g_mixins = g_mixins or {}
 
 local taruAnimitions =

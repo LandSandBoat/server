@@ -1,11 +1,11 @@
-require('scripts/globals/mixins')
-require('scripts/globals/utils')
-
+-----------------------------------
+-- Zdei Family Mixin
+-----------------------------------
 -- Animation Sub 0 Pot Form
 -- Animation Sub 1 Pot Form (reverse eye position)
 -- Animation Sub 2 Bar Form
 -- Animation Sub 3 Ring Form
-
+-----------------------------------
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 

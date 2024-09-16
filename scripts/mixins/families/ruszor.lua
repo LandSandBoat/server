@@ -1,5 +1,6 @@
-require('scripts/globals/mixins')
-
+-----------------------------------
+-- Ruszor Family Mixin
+-----------------------------------
 g_mixins = g_mixins or {}
 
 g_mixins.ruszor = function(ruszorMob)

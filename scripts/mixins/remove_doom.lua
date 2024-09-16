@@ -1,9 +1,8 @@
+-----------------------------------
 -- Dynamis Yagudo NM Mixin
 -- Yagudo NMs in dynamis remove doom upon death
 -- TODO: A benediction effect animation should play on doom removal
-
-require('scripts/globals/mixins')
-
+-----------------------------------
 xi = xi or {}
 xi.mix = xi.mix or {}
 xi.mix.clear_doom = xi.mix.clear_doom or {}

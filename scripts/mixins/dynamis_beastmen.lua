@@ -1,8 +1,6 @@
+-----------------------------------
 -- Dynamis procs mixin
-
-require('scripts/globals/mixins')
-require('scripts/globals/dynamis')
-
+-----------------------------------
 g_mixins = g_mixins or {}
 
 g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)

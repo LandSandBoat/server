@@ -1,14 +1,12 @@
---[[
-Mobs that enter rage mode after a specified amount of time in combat. Controlled by following vars that can be set onMobSpawn:
+-----------------------------------
+-- Mobs that enter rage mode after a specified amount of time in combat. Controlled by following vars that can be set onMobSpawn:
 
-localVar    default     description
---------    -------     -----------
-rageTimer   1200        seconds into combat at which point the mob will rage.
+-- localVar    default     description
+-- --------    -------     -----------
+-- rageTimer   1200        seconds into combat at which point the mob will rage.
 
-https://ffxiclopedia.fandom.com/wiki/Rage
---]]
-
-require('scripts/globals/mixins')
+-- https://ffxiclopedia.fandom.com/wiki/Rage
+-----------------------------------
 
 local mixin = function(rageMob, params)
     -- TODO: Refactor everyone to use params, not setting the local var

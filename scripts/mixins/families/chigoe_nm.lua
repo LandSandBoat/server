@@ -1,7 +1,6 @@
+-----------------------------------
 -- Chigoe family mixin (for NMs that do not instantly die from crit/ws/JA)
-
-require('scripts/globals/mixins')
-
+-----------------------------------
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 

@@ -1,7 +1,7 @@
-require('scripts/globals/mixins')
 -----------------------------------
+-- Lycopodium Family
 -- TODO: Lycopodiums should use a regen move on players with the title "Babban's Traveling Companion"
-
+-----------------------------------
 xi = xi or {}
 xi.mix = xi.mix or {}
 xi.mix.lycopodium = xi.mix.lycopodium or {}

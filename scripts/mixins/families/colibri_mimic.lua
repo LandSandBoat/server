@@ -1,18 +1,14 @@
---[[
-Colibri that copy spells cast on it.
+-----------------------------------
+-- Colibri that copy spells cast on it.
 
-localVar                        default     description
---------                        -------     -----------
-[colibri]reflect_blue_magic     0           set to 1 for this mob to also reflect blue magic cast on it
+-- localVar                        default     description
+-- --------                        -------     -----------
+-- [colibri]reflect_blue_magic     0           set to 1 for this mob to also reflect blue magic cast on it
 
-https://ffxiclopedia.fandom.com/wiki/Colibri
-https://ffxiclopedia.fandom.com/wiki/Greater_Colibri
-https://ffxiclopedia.fandom.com/wiki/Chamrosh
---]]
-
-require('scripts/globals/mixins')
-require('scripts/globals/magic')
-
+-- https://ffxiclopedia.fandom.com/wiki/Colibri
+-- https://ffxiclopedia.fandom.com/wiki/Greater_Colibri
+-- https://ffxiclopedia.fandom.com/wiki/Chamrosh
+-----------------------------------
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 

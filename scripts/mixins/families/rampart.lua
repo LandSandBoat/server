@@ -1,11 +1,12 @@
-require('scripts/globals/mixins')
-
-g_mixins = g_mixins or {}
-g_mixins.families = g_mixins.families or {}
-
+-----------------------------------
+-- Rampart Family Mixin
+-----------------------------------
 -- AnimationSub for Ramparts
 -- 0 = door closed
 -- 1 = door open
+-----------------------------------
+g_mixins = g_mixins or {}
+g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.rampart = function(rampartMob)
     rampartMob:addListener('SPAWN', 'RAMPART_SPAWN', function(mob)

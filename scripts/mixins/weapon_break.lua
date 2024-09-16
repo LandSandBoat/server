@@ -1,5 +1,6 @@
-require('scripts/globals/mixins')
-
+-----------------------------------
+-- Weapon Breaking Mixin
+-----------------------------------
 g_mixins = g_mixins or {}
 
 -- AnimationSub

@@ -1,6 +1,10 @@
-require('scripts/globals/mixins')
+-----------------------------------
+-- Avatar Mixin
+-----------------------------------
+g_mixins = g_mixins or {}
+g_mixins.families = g_mixins.families or {}
 
--- If you subtract 790 from the modelId, you're left with a key into to this table :)
+-- If you subtract 790 from the modelId, you're left with a key into to this table
 local abilityIds =
 {
     919, -- [modelId: 791] Carbuncle
@@ -12,9 +16,6 @@ local abilityIds =
     917, -- [modelId: 797] Shiva
     918, -- [modelId: 798] Ramuh
 }
-
-g_mixins = g_mixins or {}
-g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.avatar = function(avatarMob)
     avatarMob:addListener('SPAWN', 'AVATAR_SPAWN', function(mob)

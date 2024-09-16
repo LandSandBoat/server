@@ -1,9 +1,8 @@
+-----------------------------------
 -- Peiste family mixin
 -- Gaze-Aura effects: certain skills will cause the mob to have glowy eyes, which then afflicts effects in a gaze during the duration of the glowy eyes
---     Blind will short-circuit the gaze animation and effects
-
-require('scripts/globals/mixins')
-
+-- Blind will short-circuit the gaze animation and effects
+-----------------------------------
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 

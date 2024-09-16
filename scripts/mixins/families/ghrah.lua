@@ -1,6 +1,6 @@
-require('scripts/globals/mixins')
 -----------------------------------
-
+-- Grah Mixin
+-----------------------------------
 g_mixins = g_mixins or {}
 
 g_mixins.families.ghrah = function(ghrahMob)

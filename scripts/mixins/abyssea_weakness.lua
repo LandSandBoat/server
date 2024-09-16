@@ -1,9 +1,6 @@
+-----------------------------------
 -- Abyssea procs mixin
--- Customization:
-
-require('scripts/globals/mixins')
-require('scripts/globals/abyssea')
-
+-----------------------------------
 g_mixins = g_mixins or {}
 
 g_mixins.abyssea_weakness = function(mob)

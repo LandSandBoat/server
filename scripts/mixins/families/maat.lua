@@ -1,5 +1,6 @@
-require('scripts/globals/mixins')
-
+-----------------------------------
+-- Maat (LB5) Family
+-----------------------------------
 g_mixins = g_mixins or {}
 
 g_mixins.maat = function(maatMob)

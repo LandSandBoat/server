@@ -1,4 +1,5 @@
-require('scripts/globals/mixins')
+-----------------------------------
+-- Imp Family - Time of Day Detection
 -----------------------------------
 xi = xi or {}
 xi.mix = xi.mix or {}

@@ -1,27 +1,25 @@
---[[
-https://ffxiclopedia.fandom.com/wiki/Category:Uragnites
-https://www.bg-wiki.com/bg/Category:Uragnite
-
-Uragnite mob can optionally be modified by calling xi.mix.uragnite.config(mob, params) from within onMobSpawn.
-
-params is a table that can contain the following keys:
-    inShellSkillList : skill list given to mob when it enters shell (default: 250)
-    noShellSkillList : skill list given to mob when it exits shell (default: 251)
-    chanceToShell    : percent chance to enter shell when hit by a physical attack (default: 20)
-    timeInShellMin   : least time mob can stay in shell, in seconds (default: 30)
-    timeInShellMax   : most time mob can stay in shell, in seconds (default: 45)
-    inShellRegen     : amount of regen mob gets while in shell (default: 50)
-
-Example:
-
-xi.mix.uragnite.config(mob, {
-    chanceToShell = 10,
-    timeInShellMin = 45,
-    timeInShellMin = 60,
-})
-
---]]
-require('scripts/globals/mixins')
+-----------------------------------
+-- Uragnite Family Mixin
+-----------------------------------
+-- https://ffxiclopedia.fandom.com/wiki/Category:Uragnites
+-- https://www.bg-wiki.com/bg/Category:Uragnite
+-- 
+-- Uragnite mob can optionally be modified by calling xi.mix.uragnite.config(mob, params) from within onMobSpawn.
+-- 
+-- params is a table that can contain the following keys:
+--     inShellSkillList : skill list given to mob when it enters shell (default: 250)
+--     noShellSkillList : skill list given to mob when it exits shell (default: 251)
+--     chanceToShell    : percent chance to enter shell when hit by a physical attack (default: 20)
+--     timeInShellMin   : least time mob can stay in shell, in seconds (default: 30)
+--     timeInShellMax   : most time mob can stay in shell, in seconds (default: 45)
+--     inShellRegen     : amount of regen mob gets while in shell (default: 50)
+-- Example:
+-- 
+-- xi.mix.uragnite.config(mob, {
+--     chanceToShell = 10,
+--     timeInShellMin = 45,
+--     timeInShellMin = 60,
+-- })
 -----------------------------------
 xi = xi or {}
 xi.mix = xi.mix or {}

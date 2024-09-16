@@ -1,4 +1,5 @@
-require('scripts/globals/mixins')
+-----------------------------------
+-- Ladybug Family Mixin
 -----------------------------------
 xi = xi or {}
 xi.mix = xi.mix or {}

@@ -1,9 +1,6 @@
 -----------------------------------
 -- Sturdy Pyxis Mixin
 -----------------------------------
-require('scripts/globals/abyssea/sturdypyxis/spawn')
-require('scripts/globals/mixins')
------------------------------------
 g_mixins = g_mixins or {}
 
 g_mixins.spawn_pyxis = function(mob)
