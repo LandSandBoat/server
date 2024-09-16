@@ -1695,6 +1695,8 @@ void CZoneEntities::ZoneServer(time_point tick)
         ++it;
     }
 
+    std::vector<CCharEntity*> charsToLogout = {};
+
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
     {
         CCharEntity* PChar = (CCharEntity*)it->second;
@@ -1713,6 +1715,18 @@ void CZoneEntities::ZoneServer(time_point tick)
             PChar->PAI->Tick(tick);
             PChar->PTreasurePool->CheckItems(tick);
         }
+
+        // EFFECT_LEAVEGAME effect wore off or char got SHUTDOWN from some other location
+        if (PChar->status == STATUS_TYPE::SHUTDOWN)
+        {
+            charsToLogout.emplace_back(PChar);
+        }
+    }
+
+    // forceLogout eventually removes the char from m_charList -- so we must remove them here
+    for (auto PChar : charsToLogout)
+    {
+        charutils::ForceLogout(PChar);
     }
 
     if (tick > m_EffectCheckTime)
