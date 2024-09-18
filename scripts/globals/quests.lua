@@ -607,7 +607,7 @@ xi.quest.id =
         THE_KUFTAL_TOUR                 = 195,
         THE_IMMORTAL_LU_SHANG           = 196, -- ±
         TRIAL_SIZE_TRIAL_BY_WIND        = 197, -- ±
-        CHASING_DREAMS                  = 199,            -- CoP Quest
+        CHASING_DREAMS                  = 199, -- ± Converted       -- CoP Quest
         THE_SEARCH_FOR_GOLDMANE         = 200,            -- CoP Quest
         INDOMITABLE_SPIRIT              = 201, -- ±
     },
