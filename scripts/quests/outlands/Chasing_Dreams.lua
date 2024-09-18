@@ -131,7 +131,6 @@ quest.sections =
                 [209] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
                 end,
-
                 [221] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.WASHUS_FLASK) -- WASHU'S FLASK Key Item = 623
                     quest:setVar(player, 'Prog', 3)
@@ -239,7 +238,6 @@ quest.sections =
                     player:delKeyItem(xi.ki.FLASK_OF_CLAM_WATER)
                     npcUtil.giveKeyItem(player, xi.ki.STOREROOM_KEY)
                 end,
-
                 [211] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.STOREROOM_KEY)
                     quest:setVar(player, 'Prog', 5)
@@ -288,7 +286,6 @@ quest.sections =
                 [322] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 6)
                 end,
-
                 [323] = function(player, csid, option, npc)
                     player:confirmTrade()
                     quest:setVar(player, 'Prog', 7)
@@ -318,13 +315,11 @@ quest.sections =
         [xi.zone.LUFAISE_MEADOWS] =
         {
             onZoneIn =
-            {
                 function(player, prevZone)
                     if quest:getVar(player, 'Prog') == 8 then
                         return 4
                     end
                 end,
-            },
 
             onEventFinish =
             {
