@@ -26,6 +26,12 @@
 
 #include "basic.h"
 
+enum MESSAGE_COMBAT : uint16
+{
+    USE_OBTAIN_ESCHA_SILT = 765, // <name> uses <item>. <name> obtains <n> escha silt.
+    USE_OBTAIN_ESCHA_BEAD = 766, // <name> uses <item>. <name> obtains <n> escha beads.
+};
+
 class CBaseEntity;
 
 class CMessageCombatPacket : public CBasicPacket

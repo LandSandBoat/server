@@ -431,3 +431,14 @@ xi.msg.system =
     TRUST_NO_ENMITY              = 300, -- You cannot use Trust magic while having gained enmity.
     TRUST_SOLO_OR_LEADER         = 301, -- You cannot use Trust magic unless you are solo or the party leader.
 }
+
+-----------------------------------
+-- Combat/Action Messages (used with CMessageCombatPacket/:messageCombat())
+-----------------------------------
+
+---@enum xi.combat
+xi.msg.combat =
+{
+    USE_OBTAIN_ESCHA_SILT = 765, -- <name> uses <item>. <name> obtains <n> escha silt.
+    USE_OBTAIN_ESCHA_BEAD = 766, -- <name> uses <item>. <name> obtains <n> escha beads.
+}
