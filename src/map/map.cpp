@@ -62,6 +62,7 @@
 #include "latent_effect_container.h"
 #include "packets/basic.h"
 #include "packets/chat_message.h"
+#include "packets/server_ip.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/fishingutils.h"
@@ -85,8 +86,9 @@
 
 const char* MAP_CONF_FILENAME = nullptr;
 
-int8* g_PBuff   = nullptr; // Global packet clipboard
-int8* PTempBuff = nullptr; // Temporary packet clipboard
+int8* g_PBuff     = nullptr; // Global packet clipboard
+int8* g_PBuffCopy = nullptr; // Copy of above, used to decrypt a second time if necessary.
+int8* PTempBuff   = nullptr; // Temporary packet clipboard
 
 int32  map_fd          = 0; // main socket
 uint32 map_amntplayers = 0; // map amnt unique players
@@ -168,11 +170,18 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 
     int32 ret = _sql->Query(fmtQuery.c_str());
 
-    if (ret == SQL_ERROR || _sql->NumRows() == 0)
+    if (ret == SQL_ERROR)
     {
-        ShowError(fmt::format("recv_parse: Invalid login attempt from {}", ipstr));
+        ShowError("SQL query failed in mapsession_createsession!");
+    }
+
+    if (_sql->NumRows() == 0)
+    {
+        // This is noisy and not really necessary
+        DebugSockets(fmt::format("recv_parse: Invalid login attempt from {}", ipstr));
         return nullptr;
     }
+
     return map_session_data;
 }
 
@@ -319,8 +328,9 @@ int32 do_init(int32 argc, char** argv)
     _sql->Query("DELETE FROM char_vars WHERE expiry > 0 AND expiry <= %d", currentTimestamp);
     _sql->Query("DELETE FROM server_variables WHERE expiry > 0 AND expiry <= %d", currentTimestamp);
 
-    g_PBuff   = new int8[MAX_BUFFER_SIZE + 20];
-    PTempBuff = new int8[MAX_BUFFER_SIZE + 20];
+    g_PBuff     = new int8[MAX_BUFFER_SIZE + 20];
+    g_PBuffCopy = new int8[MAX_BUFFER_SIZE + 20];
+    PTempBuff   = new int8[MAX_BUFFER_SIZE + 20];
 
     std::memset(g_PBuff, 0, MAX_BUFFER_SIZE + 20);
     std::memset(PTempBuff, 0, MAX_BUFFER_SIZE + 20);
@@ -415,6 +425,7 @@ void do_final(int code)
     TracyZoneScoped;
 
     destroy_arr(g_PBuff);
+    destroy_arr(g_PBuffCopy);
     destroy_arr(PTempBuff);
 
     ability::CleanupAbilitiesList();
@@ -583,16 +594,39 @@ int32 do_sockets(fd_set* rfd, duration next)
 
             size_t size = ret;
 
-            if (recv_parse(g_PBuff, &size, &from, map_session_data) != -1)
+            int32 decryptCount = recv_parse(g_PBuff, &size, &from, map_session_data);
+            if (decryptCount != -1)
             {
                 // Update the time we last got a valid packet
                 map_session_data->last_update = time(nullptr);
 
-                // If the previous package was lost, then we do not collect a new one,
-                // and send the previous packet again
-                if (!parse(g_PBuff, &size, &from, map_session_data))
+                // DecryptCount of 0 means the main key decrypted the packet
+                if (decryptCount == 0)
                 {
-                    send_parse(g_PBuff, &size, &from, map_session_data);
+                    // If the previous package was lost, then we do not collect a new one,
+                    // and send the previous packet again
+                    if (!parse(g_PBuff, &size, &from, map_session_data))
+                    {
+                        send_parse(g_PBuff, &size, &from, map_session_data, false);
+                    }
+                }
+                else if (decryptCount == 1 && map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE)
+                {
+                    // TODO: Client will send 0x00D in response to 0x00B, so we are probably always sending an extra 0x00B when we don't need to.
+                    // However, the client will fail to decrypt this if they received it before, effectively being a no-op.
+                    // It could be beneficial to parse 0x00D here anyway.
+
+                    // Client failed to receive 0x00B, resend it
+                    if (auto PChar = map_session_data->PChar)
+                    {
+                        PChar->clearPacketList();
+                        PChar->pushPacket(new CServerIPPacket(PChar, map_session_data->zone_type, map_session_data->zone_ipp));
+                    }
+                    send_parse(g_PBuff, &size, &from, map_session_data, true);
+
+                    // Increment sync count with every packet
+                    // TODO: match incoming with a new parse that only cares about sync count
+                    map_session_data->server_packet_id += 1;
                 }
 
                 ret = sendudp(map_fd, g_PBuff, size, 0, (const struct sockaddr*)&from, fromlen);
@@ -604,7 +638,8 @@ int32 do_sockets(fd_set* rfd, duration next)
                 map_session_data->server_packet_size = size;
             }
 
-            if (map_session_data->shuttingDown > 0)
+            // If client is logging out, just close it.
+            if (map_session_data->shuttingDown == 1)
             {
                 map_close_session(server_clock::now(), map_session_data);
             }
@@ -624,7 +659,7 @@ int32 do_sockets(fd_set* rfd, duration next)
  *                                                                       *
  ************************************************************************/
 
-int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_session_data_t* map_session_data)
+int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_session_data_t* PSession, blowfish_t* pbfkey)
 {
     TracyZoneScoped;
 
@@ -641,8 +676,6 @@ int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_sessio
     uint32 ip = ntohl(from->sin_addr.s_addr);
 #endif
 
-    blowfish_t* pbfkey = &map_session_data->blowfish;
-
     for (i = 0; i < tmp; i += 2)
     {
         blowfish_decipher((uint32*)buff + i + 7, (uint32*)buff + i + 8, pbfkey->P, pbfkey->S[0]);
@@ -653,7 +686,11 @@ int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_sessio
         return 0;
     }
 
-    ShowError(fmt::format("map_decipher_packet: bad packet from <{}>", ip2str(ip)));
+    // We can fail to decipher if the client is attempting to zone.
+    if (PSession->blowfish.status != BLOWFISH_PENDING_ZONE)
+    {
+        ShowError(fmt::format("map_decipher_packet: bad packet from <{}>", ip2str(ip)));
+    }
     return -1;
 }
 
@@ -686,6 +723,13 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     if (checksumResult == 0)
     {
+        // We can only get here if an 0x00A (not encrypted) packet was here.
+        // If we were pending zones, delete our old char
+        if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE)
+        {
+            destroy(map_session_data->PChar);
+        }
+
         if (map_session_data->PChar == nullptr)
         {
             uint32 CharID = ref<uint32>(buff, FFXI_HEADER_SIZE + 0x0C);
@@ -708,23 +752,57 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             else
             {
                 db::extractFromBlob(rset, "session_key", map_session_data->blowfish.key);
+
+                map_session_data->initBlowfish();
             }
 
             map_session_data->PChar  = charutils::LoadChar(CharID);
             map_session_data->charID = CharID;
+
+            // If we're a new char on a new instance and prevzone != zone
+            if (map_session_data->blowfish.status == BLOWFISH_WAITING && map_session_data->PChar->loc.destination != map_session_data->PChar->loc.prevzone)
+            {
+                uint8 data[4]{};
+                ref<uint32>(data, 0) = CharID;
+
+                message::send(MSG_KILL_SESSION, data, sizeof data, nullptr);
+            }
         }
+
         map_session_data->client_packet_id = 0;
         map_session_data->server_packet_id = 0;
+        map_session_data->zone_ipp         = 0;
+        map_session_data->zone_type        = 0;
+
         return 0;
     }
     else
     {
-        // char packets
-        if (map_decipher_packet(buff, *buffsize, from, map_session_data) == -1)
+        if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE)
         {
-            *buffsize = 0;
-            return -1;
+            // Copy buff into the backup buffer. Blowfish can't be rewound currently.
+            std::memcpy(g_PBuffCopy, buff, *buffsize);
         }
+        int decryptCount = 0;
+        // char packets
+        if (map_decipher_packet(buff, *buffsize, from, map_session_data, &map_session_data->blowfish) == -1)
+        {
+            // If the client is pending zone, they might not have received 0x00B, and thus not incremented their key
+            // Check old blowfish data
+            if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE &&
+                map_decipher_packet(g_PBuffCopy, *buffsize, from, map_session_data, &map_session_data->prev_blowfish) != -1)
+            {
+                // Copy decrypted bytes back into buffer
+                std::memcpy(buff, g_PBuffCopy, *buffsize);
+                decryptCount++;
+            }
+            else
+            {
+                *buffsize = 0;
+                return -1;
+            }
+        }
+
         // reading data size
         uint32 PacketDataSize = ref<uint32>(buff, *buffsize - sizeof(int32) - 16);
         // creating buffer for decompress data
@@ -740,10 +818,10 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             memcpy(buff + FFXI_HEADER_SIZE, PacketDataBuff.get(), PacketDataSize);
             *buffsize = FFXI_HEADER_SIZE + PacketDataSize;
 
-            return 0;
+            return decryptCount;
         }
 
-        return 0;
+        return decryptCount;
     }
 }
 
@@ -879,7 +957,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
  *                                                                       *
  ************************************************************************/
 
-int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t* map_session_data)
+int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t* map_session_data, bool usePreviousKey)
 {
     TracyZoneScoped;
     // Modify the header of the outgoing packet
@@ -900,9 +978,10 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     CBasicPacket* PSmallPacket = nullptr;
 
-    uint32 PacketSize  = UINT32_MAX;
-    size_t PacketCount = std::clamp<size_t>(PChar->getPacketCount(), 0, MAX_PACKETS_PER_COMPRESSION);
-    uint8  packets     = 0;
+    uint32 PacketSize               = UINT32_MAX;
+    size_t PacketCount              = std::clamp<size_t>(PChar->getPacketCount(), 0, MAX_PACKETS_PER_COMPRESSION);
+    uint8  packets                  = 0;
+    bool   incrementKeyAfterEncrypt = false;
 
     TotalPacketsToSendPerTick += static_cast<uint32>(PChar->getPacketCount());
 
@@ -924,11 +1003,11 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                 packetList.pop_front();
 
                 PSmallPacket->setSequence(map_session_data->server_packet_id);
+                auto type = PSmallPacket->getType();
 
                 // Apply packet mods if available
                 if (!PacketMods[PChar->id].empty())
                 {
-                    auto type = PSmallPacket->getType();
                     if (PacketMods[PChar->id].find(type) != PacketMods[PChar->id].end())
                     {
                         for (auto& entry : PacketMods[PChar->id][type])
@@ -940,6 +1019,22 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                             PSmallPacket->ref<uint8>(offset) = value;
                         }
                     }
+                }
+
+                // Store zoneout packet in case we need to re-send this
+                if (type == 0x00B && map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE && map_session_data->zone_ipp == 0)
+                {
+                    auto IPPacket = dynamic_cast<CServerIPPacket*>(PSmallPacket);
+                    if (IPPacket)
+                    {
+                        map_session_data->zone_ipp  = IPPacket->ipp;
+                        map_session_data->zone_type = IPPacket->type;
+                    }
+
+                    incrementKeyAfterEncrypt = true;
+
+                    // Set client port to zero, indicating the client tried to zone out and no longer has a port until the next 0x00A
+                    _sql->Query("UPDATE accounts_sessions SET client_port = 0, last_zoneout_time = NOW() WHERE charid = %u", map_session_data->charID);
                 }
 
                 memcpy(buff + *buffsize, *PSmallPacket, PSmallPacket->getSize());
@@ -1002,11 +1097,32 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     uint32 CypherSize = (PacketSize / 4) & -2;
 
-    blowfish_t* pbfkey = &map_session_data->blowfish;
+    blowfish_t* pbfkey = nullptr;
+
+    if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE && usePreviousKey)
+    {
+        pbfkey = &map_session_data->prev_blowfish;
+    }
+    else
+    {
+        pbfkey = &map_session_data->blowfish;
+    }
 
     for (uint32 j = 0; j < CypherSize; j += 2)
     {
         blowfish_encipher((uint32*)(buff) + j + 7, (uint32*)(buff) + j + 8, pbfkey->P, pbfkey->S[0]);
+    }
+
+    // Increment the key after 0x00B was sent (otherwise the client would never get it!)
+    if (incrementKeyAfterEncrypt)
+    {
+        map_session_data->incrementBlowfish();
+
+        char session_key[20 * 2 + 1];
+        bin2hex(session_key, (uint8*)map_session_data->blowfish.key, 20);
+        const char* fmtQuery = "UPDATE accounts_sessions SET session_key = x'%s' WHERE charid = %u";
+
+        _sql->Query(fmtQuery, session_key, PChar->id);
     }
 
     // Control the size of the sent packet.
@@ -1050,29 +1166,23 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
 {
     TracyZoneScoped;
-    if (map_session_data != nullptr && map_session_data->server_packet_data != nullptr && map_session_data->PChar != nullptr)
+    if (map_session_data != nullptr && map_session_data->server_packet_data != nullptr)
     {
-        charutils::SavePlayTime(map_session_data->PChar);
-
         // clear accounts_sessions if character is logging out (not when zoning)
         if (map_session_data->shuttingDown == 1)
         {
             _sql->Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->charID);
-        }
-        else
-        {
-            // Set client port to zero, indicating the client tried to zone out and no longer has a port until the next 0x00A
-            _sql->Query("UPDATE accounts_sessions SET client_port = 0, last_zoneout_time = NOW() WHERE charid = %u", map_session_data->charID);
         }
 
         uint64 port64 = map_session_data->client_port;
         uint64 ipp    = map_session_data->client_addr;
         ipp |= port64 << 32;
 
-        map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(map_session_data->shuttingDown == 1);
-
         destroy_arr(map_session_data->server_packet_data);
-        destroy(map_session_data->PChar);
+        if (map_session_data->PChar)
+        {
+            destroy(map_session_data->PChar);
+        }
         destroy(map_session_data);
 
         map_session_list.erase(ipp);
@@ -1182,7 +1292,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 
                             PChar->status    = STATUS_TYPE::SHUTDOWN;
                             auto basicPacket = CBasicPacket();
-                            PacketParser[0x00D](map_session_data, PChar, basicPacket);
+                            charutils::removeCharFromZone(PChar);
                         }
                         else
                         {

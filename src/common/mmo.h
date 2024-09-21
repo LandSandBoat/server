@@ -57,6 +57,9 @@ enum MSGSERVTYPE : uint8
     MSG_LUA_FUNCTION,
     MSG_CHARVAR_UPDATE,
 
+    // Login/session related
+    MSG_KILL_SESSION, // Kill session on processes that receive this. Intended to delete sessions ahead of map cleanup
+
     // conquest, besieged, campaign..
     MSG_WORLD2MAP_REGIONAL_EVENT,
     MSG_MAP2WORLD_REGIONAL_EVENT,
@@ -163,6 +166,8 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
             return "MSG_RPC_RECV";
         case MSG_WORLD2MAP_REGIONAL_EVENT:
             return "MSG_WORLD2MAP_REGIONAL_EVENT";
+        case MSG_KILL_SESSION:
+            return "MSG_KILL_SESSION";
         default:
             return "Unknown";
     };

@@ -823,6 +823,28 @@ namespace message
 
                 break;
             }
+            case MSG_KILL_SESSION:
+            {
+                uint32 charID = ref<uint32>((uint8*)extra.data(), 0);
+
+                map_session_data_t* sessionToDelete = nullptr;
+                for (auto mapSession : map_session_list)
+                {
+                    auto session = mapSession.second;
+                    if (session->charID == charID)
+                    {
+                        sessionToDelete = session;
+                        break;
+                    }
+                }
+
+                if (sessionToDelete)
+                {
+                    DebugSockets(fmt::format("Closing session of charid {} on request of other process", charID));
+                    map_close_session(server_clock::now(), sessionToDelete);
+                }
+                break;
+            }
             default:
             {
                 ShowWarning("Message: unhandled message type %d", type);

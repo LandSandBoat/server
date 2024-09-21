@@ -266,6 +266,37 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             // no op
             break;
         }
+        case MSG_KILL_SESSION:
+        {
+            uint32      charid = ref<uint32>((uint8*)extra->data(), 0);
+            const char* query  = "SELECT pos_prevzone, pos_zone from chars where charid = '%d' LIMIT 1;";
+            auto        rset   = db::query(fmt::sprintf(query, charid));
+
+            // Get zone ID from query and try to send to _just_ the previous zone
+            if (rset && rset->rowsCount() && rset->next())
+            {
+                uint32 prevZoneID = rset->getUInt("pos_prevzone");
+                uint32 nextZoneID = rset->getUInt("pos_zone");
+
+                if (prevZoneID != nextZoneID)
+                {
+                    auto zoneSettings = zoneSettingsMap.at(prevZoneID);
+
+                    ShowDebug(fmt::format("Message: -> rerouting to {}", ipp_to_string(zoneSettings.ipp)));
+                    message_server_send(zoneSettings.ipp, type, extra, packet);
+                }
+            }
+            else
+            {
+                for (const auto& ipp : mapEndpoints)
+                {
+                    ShowDebug(fmt::format("Message: -> rerouting to {}", ipp_to_string(ipp)));
+                    message_server_send(ipp, type, extra, packet);
+                }
+            }
+
+            break;
+        }
         case MSG_MAP2WORLD_REGIONAL_EVENT:
         {
             uint8* data = (uint8*)extra->data();

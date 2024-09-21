@@ -241,7 +241,6 @@ void data_session::read_func()
             // Some kind of magic regarding the blowfish keys
             uint8 key3[20] = {};
             std::memcpy(key3, data_ + 1, sizeof(key3));
-            key3[16] -= 2;
 
             // https://github.com/atom0s/XiPackets/blob/main/lobby/S2C_0x000B_ResponseNextLogin.md
             lpkt_next_login characterSelectionResponse = {};
