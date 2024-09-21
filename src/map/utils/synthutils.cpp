@@ -238,9 +238,8 @@ namespace synthutils
         uint8 maxChanceHQ     = 50;
         uint8 randomRoll      = 0; // 1 to 100.
 
-        if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // If it's a desynth, lower base success rate.
+        if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS)
         {
-            successRate = 45;
             maxChanceHQ = 80;
         }
 
@@ -251,84 +250,91 @@ namespace synthutils
         {
             recipeSkill = PChar->CraftContainer->getQuantity(skillID - 40);
 
-            // Only do stuff if the recipe actually uses that skill.
-            if (recipeSkill != 0)
+            // Skip current iteration if skill isn't involved.
+            if (recipeSkill == 0)
             {
-                randomRoll      = xirand::GetRandomNumber(1, 100);    // Random call must be called for each involved skill.
-                currentHQTier   = 0;                                  // This is reset at the start of every loop. "finalHQTier" is not.
-                synthDifficulty = getSynthDifficulty(PChar, skillID); // Get synth difficulty again, for each skill involved.
+                continue;
+            }
 
-                if (synthDifficulty <= 0)
+            // Skill is involved.
+            randomRoll      = xirand::GetRandomNumber(1, 100);    // Random call must be called for each involved skill.
+            currentHQTier   = 0;                                  // This is reset at the start of every loop. "finalHQTier" is not.
+            synthDifficulty = getSynthDifficulty(PChar, skillID); // Get synth difficulty for current skill.
+
+            // Skill is at or over synth recipe level.
+            if (synthDifficulty <= 0)
+            {
+                // Check what the current HQ tier is.
+                if (synthDifficulty >= -10) // 0-10 levels over recipe.
                 {
-                    // Check what the current HQ tier is.
-                    if (synthDifficulty >= -10) // 0-10 levels over recipe.
-                    {
-                        currentHQTier = 1;
-                    }
-                    else if (synthDifficulty >= -30) // 11-30 levels over recipe.
-                    {
-                        currentHQTier = 2;
-                    }
-                    else if (synthDifficulty >= -50) // 31-50 levels over recipe.
-                    {
-                        currentHQTier = 3;
-                    }
-                    else // 51 or more levels over recipe.
-                    {
-                        currentHQTier = 4;
-                    }
-
-                    // Set final HQ Tier available if needed.
-                    if (currentHQTier < finalHQTier)
-                    {
-                        finalHQTier = currentHQTier;
-                    }
+                    currentHQTier = 1;
                 }
-                else
+                else if (synthDifficulty >= -30) // 11-30 levels over recipe.
                 {
-                    canHQ       = false; // Player skill level is lower than recipe skill level. Cannot HQ.
-                    successRate = successRate - synthDifficulty * 10;
-
-                    if (successRate < 5)
-                    {
-                        successRate = 5;
-                    }
+                    currentHQTier = 2;
+                }
+                else if (synthDifficulty >= -50) // 31-50 levels over recipe.
+                {
+                    currentHQTier = 3;
+                }
+                else // 51 or more levels over recipe.
+                {
+                    currentHQTier = 4;
                 }
 
-                // Apply synthesis success rate modifier, based on synth type.
-                if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS)
+                // Set final HQ Tier available if needed.
+                if (currentHQTier < finalHQTier)
                 {
-                    successRate = successRate + PChar->getMod(Mod::DESYNTH_SUCCESS);
+                    finalHQTier = currentHQTier;
                 }
-                else
-                {
-                    successRate = successRate + PChar->getMod(Mod::SYNTH_SUCCESS);
-                }
+            }
 
-                // Crafting ring handling.
-                if (!canSynthesizeHQ(PChar, skillID))
-                {
-                    canHQ       = false;           // Assuming here that if a crafting ring is used matching a recipe's subsynth, overall HQ will still be blocked
-                    successRate = successRate + 1; // The crafting rings that block HQ synthesis all also increase their respective craft's success rate by 1%
-                }
+            // Skill is under synth recipe level.
+            else
+            {
+                canHQ           = false; // Player skill level is lower than recipe skill level. Cannot HQ.
+                synthDifficulty = std::clamp<int16>(synthDifficulty, 1, 9);
+                successRate     = successRate - synthDifficulty * 10;
+            }
 
-                // Clamp success rate to 99%
-                // https://www.bluegartr.com/threads/120352-CraftyMath
-                // http://www.ffxiah.com/item/5781/kitron-macaron
-                if (successRate > 99)
-                {
-                    successRate = 99;
-                }
+            if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // If it's a desynth, halve base success rate.
+            {
+                successRate = successRate / 2;
+            }
 
-                if (randomRoll > successRate) // Synthesis broke. This is not a mistake, the break check HAS to be done per craft skill involved.
-                {
-                    // Keep the skill because of which the synthesis failed.
-                    // Use the slotID of the crystal cell, because it was removed at the beginning of the synthesis.
-                    PChar->CraftContainer->setInvSlotID(0, skillID);
-                    synthResult = SYNTHESIS_FAIL;
+            // Apply synthesis success rate modifier, based on synth type.
+            if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS)
+            {
+                successRate = successRate + PChar->getMod(Mod::DESYNTH_SUCCESS);
+            }
+            else
+            {
+                successRate = successRate + PChar->getMod(Mod::SYNTH_SUCCESS);
+            }
 
-                    break;
-                }
+            // Crafting ring handling.
+            if (!canSynthesizeHQ(PChar, skillID))
+            {
+                canHQ       = false;           // Assuming here that if a crafting ring is used matching a recipe's subsynth, overall HQ will still be blocked
+                successRate = successRate + 1; // The crafting rings that block HQ synthesis all also increase their respective craft's success rate by 1%
+            }
+
+            // Clamp success rate to 99%
+            // https://www.bluegartr.com/threads/120352-CraftyMath
+            // http://www.ffxiah.com/item/5781/kitron-macaron
+            if (successRate > 99)
+            {
+                successRate = 99;
+            }
+
+            if (randomRoll > successRate) // Synthesis broke. This is not a mistake, the break check HAS to be done per craft skill involved.
+            {
+                // Keep the skill because of which the synthesis failed.
+                // Use the slotID of the crystal cell, because it was removed at the beginning of the synthesis.
+                PChar->CraftContainer->setInvSlotID(0, skillID);
+                synthResult = SYNTHESIS_FAIL;
+
+                break;
             }
         }
 
