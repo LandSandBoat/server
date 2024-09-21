@@ -19,58 +19,21 @@
 ===========================================================================
 */
 
-#ifndef _MODULEUTILS_H
-#define _MODULEUTILS_H
+#pragma once
 
 #include "common/logging.h"
 #include "lua/luautils.h"
+#include "packets/basic.h"
 
 #include <memory>
 
 extern std::unique_ptr<SqlConnection> _sql;
 
 // Forward declare
+class CBasicPacket;
+class CCharEntity;
+class CZone;
 class CPPModule;
-namespace moduleutils
-{
-    void RegisterCPPModule(CPPModule* ptr);
-}
-
-class CPPModule
-{
-public:
-    CPPModule()
-    : lua(::lua)
-    , sql(::_sql)
-    {
-        moduleutils::RegisterCPPModule(this);
-    }
-
-    virtual ~CPPModule() = default;
-
-    // Required
-    virtual void OnInit() = 0;
-
-    // Optional
-    virtual void OnZoneTick(CZone* PZone){};
-    virtual void OnTimeServerTick(){};
-    virtual void OnCharZoneIn(CCharEntity* PChar){};
-    virtual void OnCharZoneOut(CCharEntity* PChar){};
-    virtual void OnPushPacket(CCharEntity* PChar, CBasicPacket* packet){};
-
-    template <typename T>
-    static T* Register()
-    {
-        return new T();
-    };
-
-protected:
-    sol::state&                     lua;
-    std::unique_ptr<SqlConnection>& sql;
-};
-
-#define REGISTER_CPP_MODULE(className) \
-    static CPPModule* classNamePtr = className::Register<className>();
 
 namespace moduleutils
 {
@@ -108,4 +71,38 @@ namespace moduleutils
     void ReportLuaModuleUsage();
 }; // namespace moduleutils
 
-#endif // _MODULEUTILS_H
+class CPPModule
+{
+public:
+    CPPModule()
+    : lua(::lua)
+    , sql(::_sql)
+    {
+        moduleutils::RegisterCPPModule(this);
+    }
+
+    virtual ~CPPModule() = default;
+
+    // Required
+    virtual void OnInit() = 0;
+
+    // Optional
+    virtual void OnZoneTick(CZone* PZone){};
+    virtual void OnTimeServerTick(){};
+    virtual void OnCharZoneIn(CCharEntity* PChar){};
+    virtual void OnCharZoneOut(CCharEntity* PChar){};
+    virtual void OnPushPacket(CCharEntity* PChar, CBasicPacket* packet){};
+
+    template <typename T>
+    static T* Register()
+    {
+        return new T();
+    };
+
+protected:
+    sol::state&                     lua;
+    std::unique_ptr<SqlConnection>& sql;
+};
+
+#define REGISTER_CPP_MODULE(className) \
+    static CPPModule* classNamePtr = className::Register<className>();

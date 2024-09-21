@@ -213,7 +213,7 @@ void CPetEntity::PostTick()
 
         if (PMaster && PMaster->PPet == this)
         {
-            ((CCharEntity*)PMaster)->pushPacket(new CPetSyncPacket((CCharEntity*)PMaster));
+            ((CCharEntity*)PMaster)->pushPacket<CPetSyncPacket>((CCharEntity*)PMaster);
         }
 
         updatemask = 0;

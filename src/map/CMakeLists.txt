@@ -196,7 +196,7 @@ target_include_directories(xi_map
     PUBLIC
         ${CMAKE_SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/src
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR} # src/map
         ${module_include_dirs}
 )
 

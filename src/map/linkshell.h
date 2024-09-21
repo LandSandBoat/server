@@ -54,7 +54,7 @@ public:
     void RemoveMemberByName(const std::string& MemberName, uint8 kickerRank, bool breakLinkshell = false);
     void ChangeMemberRank(const std::string& MemberName, uint8 toSack);
 
-    void PushPacket(uint32 senderID, CBasicPacket* packet);
+    void PushPacket(uint32 senderID, const std::unique_ptr<CBasicPacket>& packet);
     void PushLinkshellMessage(CCharEntity* PChar, bool ls1);
 
     std::vector<CCharEntity*> members;

@@ -453,6 +453,8 @@
         "cwctype": "cpp",
         "scoped_allocator": "cpp",
         "pointers": "cpp",
-        "*.inc": "cpp"
+        "*.inc": "cpp",
+        "multi_span": "cpp",
+        "string_span": "cpp"
     },
 }

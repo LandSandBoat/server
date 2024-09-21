@@ -43,7 +43,7 @@ enum ENTITYUPDATE
 
 /** Base class for all packets
  *
- * Contains a 0x104 byte sized buffer
+ * Contains a 0x1FF byte sized buffer
  * Access the raw data with ref<T>(index)
  *
  */
@@ -120,10 +120,9 @@ public:
     /// <summary>
     /// Copies the given packet data.
     /// </summary>
-    /// <param name="other"></param>
-    void copy(CBasicPacket* other)
+    auto copy() -> std::unique_ptr<CBasicPacket>
     {
-        memcpy(data, other->data, PACKET_SIZE);
+        return std::make_unique<CBasicPacket>(data);
     }
 
     /* Getters for the header */

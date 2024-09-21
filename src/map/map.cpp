@@ -386,8 +386,7 @@ int32 do_init(int32 argc, char** argv)
         }
 
         fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
-        PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3,
-            fmt::format("You have been set to GM level {}.", level), ""));
+        PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("You have been set to GM level {}.", level), "");
     });
 
     gConsoleService->RegisterCommand("reload_settings", "Reload settings files.",
@@ -620,7 +619,7 @@ int32 do_sockets(fd_set* rfd, duration next)
                     if (auto PChar = map_session_data->PChar)
                     {
                         PChar->clearPacketList();
-                        PChar->pushPacket(new CServerIPPacket(PChar, map_session_data->zone_type, map_session_data->zone_ipp));
+                        PChar->pushPacket<CServerIPPacket>(PChar, map_session_data->zone_type, map_session_data->zone_ipp);
                     }
                     send_parse(g_PBuff, &size, &from, map_session_data, true);
 
@@ -976,7 +975,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     CCharEntity* PChar = map_session_data->PChar;
     TracyZoneString(PChar->name);
 
-    CBasicPacket* PSmallPacket = nullptr;
+    std::unique_ptr<CBasicPacket> PSmallPacket = nullptr;
 
     uint32 PacketSize               = UINT32_MAX;
     size_t PacketCount              = std::clamp<size_t>(PChar->getPacketCount(), 0, MAX_PACKETS_PER_COMPRESSION);
@@ -994,12 +993,12 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         do
         {
             *buffsize               = FFXI_HEADER_SIZE;
-            PacketList_t packetList = PChar->getPacketList();
+            PacketList_t packetList = PChar->getPacketListCopy();
             packets                 = 0;
 
             while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && static_cast<size_t>(packets) < PacketCount)
             {
-                PSmallPacket = packetList.front();
+                PSmallPacket = std::move(packetList.front());
                 packetList.pop_front();
 
                 PSmallPacket->setSequence(map_session_data->server_packet_id);
@@ -1024,8 +1023,8 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                 // Store zoneout packet in case we need to re-send this
                 if (type == 0x00B && map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE && map_session_data->zone_ipp == 0)
                 {
-                    auto IPPacket = dynamic_cast<CServerIPPacket*>(PSmallPacket);
-                    if (IPPacket)
+                    // TODO: This is a horrible way to do dynamic_cast on unique_ptr
+                    if (auto IPPacket = dynamic_cast<CServerIPPacket*>(PSmallPacket.get()))
                     {
                         map_session_data->zone_ipp  = IPPacket->ipp;
                         map_session_data->zone_type = IPPacket->type;
@@ -1134,7 +1133,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     *buffsize = PacketSize + FFXI_HEADER_SIZE;
 
-    auto remainingPackets = PChar->getPacketList().size();
+    auto remainingPackets = PChar->getPacketListCopy().size();
     TotalPacketsDelayedPerTick += static_cast<uint32>(remainingPackets);
 
     if (settings::get<bool>("logging.DEBUG_PACKET_BACKLOG"))

@@ -656,7 +656,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 PMob->PEnmityContainer->Clear();
             }
         }
-        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityAnimationPacket(PEntity, PEntity, CEntityAnimationPacket::Fade_Out));
+        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, std::make_unique<CEntityAnimationPacket>(PEntity, PEntity, CEntityAnimationPacket::Fade_Out));
     }
 
     PEntity->PBattlefield = nullptr;

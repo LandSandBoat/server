@@ -112,7 +112,7 @@ namespace synthutils
 
                     if (currentSkill < (skillValue * 10 - 150)) // Check player skill against recipe level. Range must be 14 or less.
                     {
-                        PChar->pushPacket(new CSynthMessagePacket(PChar, SYNTH_NOSKILL));
+                        PChar->pushPacket<CSynthMessagePacket>(PChar, SYNTH_NOSKILL);
                         return false;
                     }
                 }
@@ -120,7 +120,7 @@ namespace synthutils
             }
         }
 
-        PChar->pushPacket(new CSynthMessagePacket(PChar, SYNTH_BADRECIPE));
+        PChar->pushPacket<CSynthMessagePacket>(PChar, SYNTH_BADRECIPE);
         return false;
     }
 
@@ -625,13 +625,13 @@ namespace synthutils
 
                 // Skill Up addition:
                 PChar->RealSkills.skill[skillID] += skillUpAmount;
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, skillUpAmount, 38));
+                PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillID, skillUpAmount, 38);
 
                 if ((charSkill / 10) < (charSkill + skillUpAmount) / 10)
                 {
                     PChar->WorkingSkills.skill[skillID] += 0x20;
-                    PChar->pushPacket(new CCharSkillsPacket(PChar));
-                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, 53));
+                    PChar->pushPacket<CCharSkillsPacket>(PChar);
+                    PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, 53);
                 }
 
                 charutils::SaveCharSkills(PChar, skillID);
@@ -640,13 +640,13 @@ namespace synthutils
                 if (skillCumulation > settings::get<uint16>("map.CRAFT_SPECIALIZATION_POINTS"))
                 {
                     PChar->RealSkills.skill[skillHighest] -= skillUpAmount;
-                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillHighest, skillUpAmount, 310));
+                    PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillHighest, skillUpAmount, 310);
 
                     if ((PChar->RealSkills.skill[skillHighest] + skillUpAmount) / 10 > (PChar->RealSkills.skill[skillHighest]) / 10)
                     {
                         PChar->WorkingSkills.skill[skillHighest] -= 0x20;
-                        PChar->pushPacket(new CCharSkillsPacket(PChar));
-                        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillHighest, (PChar->RealSkills.skill[skillHighest] - skillUpAmount) / 10, 53));
+                        PChar->pushPacket<CCharSkillsPacket>(PChar);
+                        PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillHighest, (PChar->RealSkills.skill[skillHighest] - skillUpAmount) / 10, 53);
                     }
 
                     charutils::SaveCharSkills(PChar, skillHighest);
@@ -725,7 +725,7 @@ namespace synthutils
                     }
                     else
                     {
-                        PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_NORMAL));
+                        PChar->pushPacket<CInventoryAssignPacket>(PItem, INV_NORMAL);
                     }
                 }
                 invSlotID = nextSlotID;
@@ -763,10 +763,10 @@ namespace synthutils
             currentZone != ZONE_49 &&
             currentZone < MAX_ZONEID)
         {
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CSynthResultMessagePacket(PChar, SYNTH_FAIL));
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CSynthResultMessagePacket>(PChar, SYNTH_FAIL));
         }
 
-        PChar->pushPacket(new CSynthMessagePacket(PChar, SYNTH_FAIL, 29695));
+        PChar->pushPacket<CSynthMessagePacket>(PChar, SYNTH_FAIL, 29695);
 
         return 0;
     }
@@ -879,22 +879,22 @@ namespace synthutils
                 if (PCraftItem != nullptr)
                 {
                     PCraftItem->setSubType(ITEM_LOCKED);
-                    PChar->pushPacket(new CInventoryAssignPacket(PCraftItem, INV_NOSELECT));
+                    PChar->pushPacket<CInventoryAssignPacket>(PCraftItem, INV_NOSELECT);
                 }
             }
         }
 
         PChar->animation = ANIMATION_SYNTH;
         PChar->updatemask |= UPDATE_HP;
-        PChar->pushPacket(new CCharUpdatePacket(PChar));
+        PChar->pushPacket<CCharUpdatePacket>(PChar);
 
         if (PChar->loc.zone->GetID() != 255 && PChar->loc.zone->GetID() != 0)
         {
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CSynthAnimationPacket(PChar, effect, result));
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CSynthAnimationPacket>(PChar, effect, result));
         }
         else
         {
-            PChar->pushPacket(new CSynthAnimationPacket(PChar, effect, result));
+            PChar->pushPacket<CSynthAnimationPacket>(PChar, effect, result);
         }
 
         return 0;
@@ -999,18 +999,18 @@ namespace synthutils
 
                     _sql->Query(fmtQuery, signature_esc, PChar->id, invSlotID);
                 }
-                PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_INVENTORY, invSlotID));
+                PChar->pushPacket<CInventoryItemPacket>(PItem, LOC_INVENTORY, invSlotID);
             }
 
-            PChar->pushPacket(new CInventoryFinishPacket());
+            PChar->pushPacket<CInventoryFinishPacket>();
             if (PChar->loc.zone->GetID() != 255 && PChar->loc.zone->GetID() != 0)
             {
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CSynthResultMessagePacket(PChar, SYNTH_SUCCESS, itemID, quantity));
-                PChar->pushPacket(new CSynthMessagePacket(PChar, SYNTH_SUCCESS, itemID, quantity));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CSynthResultMessagePacket>(PChar, SYNTH_SUCCESS, itemID, quantity));
+                PChar->pushPacket<CSynthMessagePacket>(PChar, SYNTH_SUCCESS, itemID, quantity);
             }
             else
             {
-                PChar->pushPacket(new CSynthMessagePacket(PChar, SYNTH_SUCCESS, itemID, quantity));
+                PChar->pushPacket<CSynthMessagePacket>(PChar, SYNTH_SUCCESS, itemID, quantity);
             }
 
             // Calculate what craft this recipe "belongs" to based on highest skill required
@@ -1051,7 +1051,7 @@ namespace synthutils
         PChar->CraftContainer->Clean();
         PChar->animation = ANIMATION_NONE;
         PChar->updatemask |= UPDATE_HP;
-        PChar->pushPacket(new CCharUpdatePacket(PChar));
+        PChar->pushPacket<CCharUpdatePacket>(PChar);
         return 0;
     }
 

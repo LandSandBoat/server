@@ -139,7 +139,7 @@ namespace conquest
         ref<uint32>(data, 6) = nation;
         ref<uint8>(data, 10) = (uint8)region;
 
-        // Do send the message
+        // Send the message
         message::send(MSG_MAP2WORLD_REGIONAL_EVENT, data, dataLength);
     }
 
@@ -475,7 +475,7 @@ namespace conquest
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_End, influence, owner, ranking, isConquestAlliance);
                 PZone->ForEachChar([](CCharEntity* PChar)
                 {
-                    PChar->pushPacket(new CConquestPacket(PChar));
+                    PChar->pushPacket<CConquestPacket>(PChar);
                     PChar->PLatentEffectContainer->CheckLatentsZone();
                 });
             }

@@ -139,7 +139,7 @@ namespace anticheat
         if (action & CHEAT_ACTION_WARN)
         {
             // The message in the warning column in DB is sent as a system message to the offender
-            PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, warningmsg));
+            PChar->pushPacket<CChatMessagePacket>(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, warningmsg);
         }
         if ((action & CHEAT_ACTION_JAIL) && (!settings::get<bool>("map.ANTICHEAT_JAIL_DISABLE")))
         {

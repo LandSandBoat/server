@@ -69,7 +69,7 @@ public:
     void WeatherChange(WEATHER weather);
     void MusicChange(uint16 BlockID, uint16 MusicTrackID);
 
-    void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // send a global package within the zone
+    void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, std::unique_ptr<CBasicPacket>&&); // send a global package within the zone
 
     void ZoneServer(time_point tick);
 

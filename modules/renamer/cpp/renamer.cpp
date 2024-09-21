@@ -1,6 +1,6 @@
-﻿#include "../src/map/packet_guard.h"
-#include "../src/map/utils/moduleutils.h"
-#include "../src/map/zone.h"
+﻿#include "map/packet_guard.h"
+#include "map/utils/moduleutils.h"
+#include "map/zone.h"
 
 extern uint8                                                                             PacketSize[512];
 extern std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
@@ -15,14 +15,14 @@ class RenamerModule : public CPPModule
             return;
         }
 
-        auto* customPacket = new CBasicPacket();
+        auto customPacket = std::make_unique<CBasicPacket>();
         customPacket->setType(0x1FF);
         customPacket->setSize(0x100);
         for (std::size_t i = 0; i < data.size(); ++i)
         {
             customPacket->ref<uint8>(0x04 + i) = data[i];
         }
-        PChar->pushPacket(customPacket);
+        PChar->pushPacket(std::move(customPacket));
     }
 
     void OnInit() override

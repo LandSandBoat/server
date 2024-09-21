@@ -150,10 +150,9 @@ namespace blueutils
                     {
                         if (charutils::addSpell(PBlueMage, static_cast<uint16>(PSpell->getID())))
                         {
-                            PBlueMage->pushPacket(
-                                new CMessageBasicPacket(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, MSGBASIC_LEARNS_SPELL));
+                            PBlueMage->pushPacket<CMessageBasicPacket>(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, MSGBASIC_LEARNS_SPELL);
                             charutils::SaveSpell(PBlueMage, static_cast<uint16>(PSpell->getID()));
-                            PBlueMage->pushPacket(new CCharSpellsPacket(PBlueMage));
+                            PBlueMage->pushPacket<CCharSpellsPacket>(PBlueMage);
                         }
                     }
                     break; // only one attempt at learning a spell, regardless of learn or not.
@@ -192,9 +191,9 @@ namespace blueutils
             }
         }
         charutils::BuildingCharTraitsTable(PChar);
-        PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
-        PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
-        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
+        PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
+        PChar->pushPacket<CCharStatsPacket>(PChar);
         charutils::CalculateStats(PChar);
         PChar->UpdateHealth();
         SaveSetSpells(PChar);

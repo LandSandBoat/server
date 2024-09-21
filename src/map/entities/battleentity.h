@@ -641,49 +641,10 @@ public:
     void removePetModifiers(CPetEntity* PPet);
 
     template <typename F, typename... Args>
-    void ForParty(F func, Args&&... args)
-    {
-        if (PParty)
-        {
-            for (auto PMember : PParty->members)
-            {
-                func(PMember, std::forward<Args>(args)...);
-            }
-        }
-        else
-        {
-            func(this, std::forward<Args>(args)...);
-        }
-    }
+    void ForParty(F func, Args&&... args);
 
     template <typename F, typename... Args>
-    void ForAlliance(F func, Args&&... args)
-    {
-        if (PParty)
-        {
-            if (PParty->m_PAlliance)
-            {
-                for (auto PAllianceParty : PParty->m_PAlliance->partyList)
-                {
-                    for (auto PMember : PAllianceParty->members)
-                    {
-                        func(PMember, std::forward<Args>(args)...);
-                    }
-                }
-            }
-            else
-            {
-                for (auto PMember : PParty->members)
-                {
-                    func(PMember, std::forward<Args>(args)...);
-                }
-            }
-        }
-        else
-        {
-            func(this);
-        }
-    }
+    void ForAlliance(F func, Args&&... args);
 
     virtual void addTrait(CTrait*);
     virtual void delTrait(CTrait*);
@@ -792,5 +753,54 @@ private:
     std::unordered_map<Mod, int16, EnumClassHash>                                                m_modStatSave; // saved state
     std::unordered_map<PetModType, std::unordered_map<Mod, int16, EnumClassHash>, EnumClassHash> m_petMod;
 };
+
+//
+// Inline functions
+//
+
+template <typename F, typename... Args>
+void CBattleEntity::ForParty(F func, Args&&... args)
+{
+    if (PParty)
+    {
+        for (auto PMember : PParty->members)
+        {
+            func(PMember, std::forward<Args>(args)...);
+        }
+    }
+    else
+    {
+        func(this, std::forward<Args>(args)...);
+    }
+}
+
+template <typename F, typename... Args>
+void CBattleEntity::ForAlliance(F func, Args&&... args)
+{
+    if (PParty)
+    {
+        if (PParty->m_PAlliance)
+        {
+            for (auto PAllianceParty : PParty->m_PAlliance->partyList)
+            {
+                for (auto PMember : PAllianceParty->members)
+                {
+                    func(PMember, std::forward<Args>(args)...);
+                }
+            }
+        }
+        else
+        {
+            for (auto PMember : PParty->members)
+            {
+                func(PMember, std::forward<Args>(args)...);
+            }
+        }
+    }
+    else
+    {
+        func(this);
+    }
+}
 
 #endif

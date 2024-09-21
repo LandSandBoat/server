@@ -116,6 +116,7 @@ struct actionTarget_t;
 
 enum ConquestUpdate : uint8;
 enum class Emote : uint8;
+enum class SpellID : uint16;
 
 namespace luautils
 {

@@ -59,8 +59,9 @@ public:
     virtual void FindPartyForMob(CBaseEntity* PEntity) override;         // looking for a party for the monster
     virtual void TransportDepart(uint16 boundary, uint16 zone) override; // ship/boat is leaving, passengers need to be collected
 
-    virtual void TOTDChange(TIMETYPE TOTD) override;                                    // process the world's reactions to changing time of day
-    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*) override; // send a global package within the zone
+    virtual void TOTDChange(TIMETYPE TOTD) override; // process the world's reactions to changing time of day
+
+    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, std::unique_ptr<CBasicPacket>&&) override; // send a global package within the zone
 
     virtual void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask) override;
     virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false) override;

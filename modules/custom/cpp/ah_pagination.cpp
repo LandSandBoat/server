@@ -54,14 +54,14 @@ class AHPaginationModule : public CPPModule
 
                     PChar->m_ah_history.clear();
                     PChar->m_AHHistoryTimestamp = curTick;
-                    PChar->pushPacket(new CAuctionHousePacket(action));
+                    PChar->pushPacket<CAuctionHousePacket>(action);
 
                     const char* Query = "SELECT itemid, price, stack FROM auction_house WHERE seller = %u and sale=0 ORDER BY id ASC LIMIT %u OFFSET %u;";
                     int32       ret   = sql->Query(Query, PChar->id, ITEMS_PER_PAGE, currentAHPage * ITEMS_PER_PAGE);
 
                     if (ret != SQL_ERROR && sql->NumRows() == 0)
                     {
-                        PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3, fmt::format("No results for page: {} of {}.", currentAHPage + 1, TOTAL_PAGES).c_str(), ""));
+                        PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("No results for page: {} of {}.", currentAHPage + 1, TOTAL_PAGES).c_str(), "");
 
                         // Reset to Page 1
                         const char* Query = "SELECT itemid, price, stack FROM auction_house WHERE seller = %u and sale=0 ORDER BY id ASC LIMIT %u OFFSET %u;";
@@ -74,7 +74,7 @@ class AHPaginationModule : public CPPModule
                         PChar->SetLocalVar("AH_PAGE", currentAHPage + 1);
                     }
 
-                    PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3, fmt::format("Current page: {} of {}. Showing {} items.", currentAHPage + 1, TOTAL_PAGES, sql->NumRows()).c_str(), ""));
+                    PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("Current page: {} of {}. Showing {} items.", currentAHPage + 1, TOTAL_PAGES, sql->NumRows()).c_str(), "");
 
                     if (ret != SQL_ERROR && sql->NumRows() != 0)
                     {
@@ -92,12 +92,12 @@ class AHPaginationModule : public CPPModule
                     auto totalItemsOnAh = PChar->m_ah_history.size();
                     for (size_t slot = 0; slot < totalItemsOnAh; slot++)
                     {
-                        PChar->pushPacket(new CAuctionHousePacket(0x0C, (uint8)slot, PChar));
+                        PChar->pushPacket<CAuctionHousePacket>(0x0C, (uint8)slot, PChar);
                     }
                 }
                 else
                 {
-                    PChar->pushPacket(new CAuctionHousePacket(action, 246, 0, 0, 0, 0)); // try again in a little while msg
+                    PChar->pushPacket<CAuctionHousePacket>(action, 246, 0, 0, 0, 0); // try again in a little while msg
                 }
             }
             else // Otherwise, call original handler

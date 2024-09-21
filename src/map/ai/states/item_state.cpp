@@ -126,12 +126,13 @@ CItemState::CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slo
     actionTarget.knockback  = 0;
 
     m_PEntity->PAI->EventHandler.triggerListener("ITEM_START", CLuaBaseEntity(PTarget), CLuaItem(m_PItem), CLuaAction(&action));
-    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
 
     m_PItem->setSubType(ITEM_LOCKED);
 
-    m_PEntity->pushPacket(new CInventoryAssignPacket(m_PItem, INV_NOSELECT));
-    m_PEntity->pushPacket(new CInventoryFinishPacket());
+    m_PEntity->pushPacket<CInventoryAssignPacket>(m_PItem, INV_NOSELECT);
+    m_PEntity->pushPacket<CInventoryFinishPacket>();
 }
 
 void CItemState::UpdateTarget(CBaseEntity* target)
@@ -182,7 +183,7 @@ bool CItemState::Update(time_point tick)
             FinishItem(action);
         }
         m_PEntity->PAI->EventHandler.triggerListener("ITEM_USE", CLuaBaseEntity(m_PEntity), CLuaItem(m_PItem), CLuaAction(&action));
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
         Complete();
     }
     else if (IsCompleted() && tick > GetEntryTime() + m_castTime + m_animationTime)
@@ -211,15 +212,15 @@ void CItemState::Cleanup(time_point tick)
 
     if (PItem && PItem == m_PItem)
     {
-        m_PEntity->pushPacket(new CInventoryAssignPacket(m_PItem, INV_NORMAL));
+        m_PEntity->pushPacket<CInventoryAssignPacket>(m_PItem, INV_NORMAL);
     }
     else
     {
         m_PItem = nullptr;
     }
 
-    m_PEntity->pushPacket(new CInventoryItemPacket(m_PItem, m_location, m_slot));
-    m_PEntity->pushPacket(new CInventoryFinishPacket());
+    m_PEntity->pushPacket<CInventoryItemPacket>(m_PItem, m_location, m_slot);
+    m_PEntity->pushPacket<CInventoryFinishPacket>();
 }
 
 bool CItemState::CanChangeState()
@@ -294,7 +295,7 @@ void CItemState::InterruptItem(action_t& action)
         actionTarget.messageID  = 0;
         actionTarget.knockback  = 0;
 
-        m_PEntity->pushPacket(m_errorMsg.release());
+        m_PEntity->pushPacket(std::move(m_errorMsg));
     }
 }
 

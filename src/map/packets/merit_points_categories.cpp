@@ -66,7 +66,7 @@ CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar)
     {
         MeritPointsCategoriesPacket(PChar, i * MAX_MERITS_IN_PACKET);
 
-        PChar->pushPacket(new CBasicPacket(*this));
+        PChar->pushPacket<CBasicPacket>(*this);
     }
     MeritPointsCategoriesPacket(PChar, static_cast<uint8>(5 * MAX_MERITS_IN_PACKET));
 }

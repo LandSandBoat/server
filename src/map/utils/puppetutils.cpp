@@ -213,7 +213,7 @@ namespace puppetutils
             if (addBit(id & 0xFF, (uint8*)PChar->m_unlockedAttachments.attachments, sizeof(PChar->m_unlockedAttachments.attachments)))
             {
                 SaveAutomaton(PChar);
-                PChar->pushPacket(new CCharJobExtraPacket(PChar, PChar->GetMJob() == JOB_PUP));
+                PChar->pushPacket<CCharJobExtraPacket>(PChar, PChar->GetMJob() == JOB_PUP);
                 return true;
             }
             return false;
@@ -223,7 +223,7 @@ namespace puppetutils
             if (addBit(id & 0x0F, &PChar->m_unlockedAttachments.frames, sizeof(PChar->m_unlockedAttachments.frames)))
             {
                 SaveAutomaton(PChar);
-                PChar->pushPacket(new CCharJobExtraPacket(PChar, PChar->GetMJob() == JOB_PUP));
+                PChar->pushPacket<CCharJobExtraPacket>(PChar, PChar->GetMJob() == JOB_PUP);
                 return true;
             }
             return false;
@@ -233,7 +233,7 @@ namespace puppetutils
             if (addBit(id & 0x0F, &PChar->m_unlockedAttachments.heads, sizeof(PChar->m_unlockedAttachments.heads)))
             {
                 SaveAutomaton(PChar);
-                PChar->pushPacket(new CCharJobExtraPacket(PChar, PChar->GetMJob() == JOB_PUP));
+                PChar->pushPacket<CCharJobExtraPacket>(PChar, PChar->GetMJob() == JOB_PUP);
                 return true;
             }
             return false;
@@ -695,7 +695,7 @@ namespace puppetutils
                 }
 
                 PChar->RealSkills.skill[SkillID] += SkillAmount;
-                PChar->pushPacket(new CMessageBasicPacket(PAutomaton, PAutomaton, SkillID, SkillAmount, 38));
+                PChar->pushPacket<CMessageBasicPacket>(PAutomaton, PAutomaton, SkillID, SkillAmount, 38);
 
                 if ((CurSkill / 10) < (CurSkill + SkillAmount) / 10) // if gone up a level
                 {
@@ -711,8 +711,8 @@ namespace puppetutils
                         PAutomaton->WorkingSkills.elemental       = amaSkill;
                         PAutomaton->WorkingSkills.dark            = amaSkill;
                     }
-                    PChar->pushPacket(new CCharJobExtraPacket(PChar, PChar->GetMJob() == JOB_PUP));
-                    PChar->pushPacket(new CMessageBasicPacket(PAutomaton, PAutomaton, SkillID, (CurSkill + SkillAmount) / 10, 53));
+                    PChar->pushPacket<CCharJobExtraPacket>(PChar, PChar->GetMJob() == JOB_PUP);
+                    PChar->pushPacket<CMessageBasicPacket>(PAutomaton, PAutomaton, SkillID, (CurSkill + SkillAmount) / 10, 53);
                 }
                 charutils::SaveCharSkills(PChar, SkillID);
             }

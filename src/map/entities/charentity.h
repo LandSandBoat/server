@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CHARENTITY_H
-#define _CHARENTITY_H
+#pragma once
 
 #include "event_info.h"
 #include "monstrosity.h"
@@ -33,6 +32,7 @@
 #include <bitset>
 #include <deque>
 #include <map>
+#include <memory>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -40,6 +40,7 @@
 #include "petentity.h"
 
 #include "utils/fishingutils.h"
+#include "utils/moduleutils.h"
 
 #define MAX_QUESTAREA    11
 #define MAX_QUESTID      256
@@ -49,8 +50,23 @@
 
 #define TIME_BETWEEN_PERSIST 2min
 
+//
+// Forward declarations
+//
+
+class CBasicPacket;
+class CCharEntity;
 class CItemWeapon;
 class CTrustEntity;
+
+namespace moduleutils
+{
+    void OnPushPacket(CCharEntity* PChar, CBasicPacket* packet);
+}
+
+//
+// Helper structs
+//
 
 struct jobs_t
 {
@@ -286,9 +302,9 @@ class CRangeState;
 class CItemState;
 class CItemUsable;
 
-typedef std::deque<CBasicPacket*>      PacketList_t;
-typedef std::map<uint32, CBaseEntity*> SpawnIDList_t;
-typedef std::vector<EntityID_t>        BazaarList_t;
+typedef std::deque<std::unique_ptr<CBasicPacket>> PacketList_t;
+typedef std::map<uint32, CBaseEntity*>            SpawnIDList_t;
+typedef std::vector<EntityID_t>                   BazaarList_t;
 
 class CCharEntity : public CBattleEntity
 {
@@ -366,34 +382,7 @@ public:
     std::vector<CTrustEntity*> PTrusts; // Active trusts
 
     template <typename F, typename... Args>
-    void ForPartyWithTrusts(F const& func, Args&&... args)
-    {
-        if (PParty)
-        {
-            for (auto* PMember : PParty->members)
-            {
-                func(PMember, std::forward<Args>(args)...);
-            }
-            for (auto* PMember : PParty->members)
-            {
-                if (auto* PCharMember = dynamic_cast<CCharEntity*>(PMember))
-                {
-                    for (auto* PTrust : PCharMember->PTrusts)
-                    {
-                        func(PTrust, std::forward<Args>(args)...);
-                    }
-                }
-            }
-        }
-        else
-        {
-            func(this, std::forward<Args>(args)...);
-            for (auto PTrust : this->PTrusts)
-            {
-                func(PTrust, std::forward<Args>(args)...);
-            }
-        }
-    }
+    void ForPartyWithTrusts(F const& func, Args&&... args);
 
     CBattleEntity* PClaimedMob;
 
@@ -410,17 +399,24 @@ public:
 
     uint8 GetGender();
 
-    void          clearPacketList();
-    void          pushPacket(CBasicPacket*);                                                     // Adding a copy of a package to the PacketList
-    void          pushPacket(std::unique_ptr<CBasicPacket>);                                     // Push packet to packet list
-    void          updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);     // Push or update a char packet
-    void          updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask); // Push or update an entity update packet
-    bool          isPacketListEmpty();
-    CBasicPacket* popPacket();     // Get first packet from PacketList
-    PacketList_t  getPacketList(); // Return a COPY of packet list
-    size_t        getPacketCount();
-    void          erasePackets(uint8 num); // Erase num elements from front of packet list
-    virtual void  HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
+    void clearPacketList();
+
+    template <typename T, typename... Args>
+    void pushPacket(Args&&... args);
+
+    template <typename T>
+    void pushPacket(std::unique_ptr<T>&& packet);
+
+    void updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);     // Push or update a char packet
+    void updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask); // Push or update an entity update packet
+    bool isPacketListEmpty();
+    auto popPacket() -> std::unique_ptr<CBasicPacket>; // Get first packet from PacketList
+    auto getPacketListCopy() -> PacketList_t;          // Return a COPY of packet list
+    auto getPacketList() -> PacketList_t&;             // Return a REFERENCE to packet list
+    auto getPacketCount() -> size_t;
+    void erasePackets(uint8 num); // Erase num elements from front of packet list
+
+    virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
 
     CLinkshell*    PLinkshell1;
     CLinkshell*    PLinkshell2;
@@ -523,7 +519,7 @@ public:
 
     CItemEquipment* getEquip(SLOTTYPE slot);
 
-    CBasicPacket* PendingPositionPacket = nullptr;
+    std::unique_ptr<CBasicPacket> PendingPositionPacket = nullptr;
 
     bool requestedInfoSync = false;
 
@@ -644,9 +640,81 @@ private:
     uint8      dataToPersist = 0;
     time_point nextDataPersistTime;
 
-    PacketList_t                                     PacketList;           // The list of packets to be sent to the character during the next network cycle
-    std::unordered_map<uint32, CCharPacket*>         PendingCharPackets;   // Keep track of which char packets are queued up for this char, such that they can be updated
-    std::unordered_map<uint32, CEntityUpdatePacket*> PendingEntityPackets; // Keep track of which entity update packets are queued up for this char, such that they can be updated
+    PacketList_t                                                     PacketList;           // The list of packets to be sent to the character during the next network cycle
+    std::unordered_map<uint32, std::unique_ptr<CCharPacket>>         PendingCharPackets;   // Keep track of which char packets are queued up for this char, such that they can be updated
+    std::unordered_map<uint32, std::unique_ptr<CEntityUpdatePacket>> PendingEntityPackets; // Keep track of which entity update packets are queued up for this char, such that they can be updated
 };
 
-#endif
+//
+// Inline functions
+//
+
+template <typename F, typename... Args>
+void CCharEntity::ForPartyWithTrusts(F const& func, Args&&... args)
+{
+    if (PParty)
+    {
+        for (auto* PMember : PParty->members)
+        {
+            func(PMember, std::forward<Args>(args)...);
+        }
+        for (auto* PMember : PParty->members)
+        {
+            if (auto* PCharMember = dynamic_cast<CCharEntity*>(PMember))
+            {
+                for (auto* PTrust : PCharMember->PTrusts)
+                {
+                    func(PTrust, std::forward<Args>(args)...);
+                }
+            }
+        }
+    }
+    else
+    {
+        func(this, std::forward<Args>(args)...);
+        for (auto PTrust : this->PTrusts)
+        {
+            func(PTrust, std::forward<Args>(args)...);
+        }
+    }
+}
+
+template <typename T, typename... Args>
+void CCharEntity::pushPacket(Args&&... args)
+{
+    TracyZoneScoped;
+
+    pushPacket<T>(std::make_unique<T>(std::forward<Args>(args)...));
+}
+
+template <typename T>
+void CCharEntity::pushPacket(std::unique_ptr<T>&& packet)
+{
+    TracyZoneScoped;
+    TracyZoneString(this->getName());
+    TracyZoneHex16(packet->getType());
+
+    // TODO: Don't use raw ptrs here
+    moduleutils::OnPushPacket(this, packet.get());
+    if (packet.get() == nullptr)
+    {
+        return;
+    }
+
+    if (packet->getType() == 0x5B)
+    {
+        if (PendingPositionPacket)
+        {
+            PendingPositionPacket = std::move(packet);
+        }
+        else
+        {
+            PendingPositionPacket = packet->copy();
+            PacketList.emplace_back(std::move(packet));
+        }
+    }
+    else
+    {
+        PacketList.emplace_back(std::move(packet));
+    }
+}
