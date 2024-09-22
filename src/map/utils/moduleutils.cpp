@@ -24,6 +24,7 @@
 #include "command_handler.h"
 #include "common/cbasetypes.h"
 #include "common/utils.h"
+#include "entities/charentity.h"
 #include "lua/luautils.h"
 
 #include <filesystem>

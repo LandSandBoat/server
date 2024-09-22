@@ -1836,7 +1836,7 @@ namespace mobutils
         actionTarget_t& target = list.getNewActionTarget();
         target.animation       = animationID;
         target.param           = 2582;
-        PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE, new CActionPacket(action));
+        PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE, std::make_unique<CActionPacket>(action));
     }
 
 }; // namespace mobutils

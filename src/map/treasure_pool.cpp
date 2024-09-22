@@ -221,7 +221,7 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
 
     for (auto& member : members)
     {
-        member->pushPacket(new CTreasureFindItemPacket(&m_PoolItems[FreeSlotID], PEntity, false));
+        member->pushPacket<CTreasureFindItemPacket>(&m_PoolItems[FreeSlotID], PEntity, false);
     }
     if (m_TreasurePoolType == TREASUREPOOL_SOLO)
     {
@@ -242,7 +242,7 @@ void CTreasurePool::UpdatePool(CCharEntity* PChar)
     {
         for (auto& m_PoolItem : m_PoolItems)
         {
-            PChar->pushPacket(new CTreasureFindItemPacket(&m_PoolItem, nullptr, true));
+            PChar->pushPacket<CTreasureFindItemPacket>(&m_PoolItem, nullptr, true);
         }
     }
 }
@@ -308,7 +308,7 @@ void CTreasurePool::LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
     // Player lots Item for XXX message
     for (auto& member : members)
     {
-        member->pushPacket(new CTreasureLotItemPacket(highestLotter, highestLot, PChar, SlotID, Lot));
+        member->pushPacket<CTreasureLotItemPacket>(highestLotter, highestLot, PChar, SlotID, Lot);
     }
 
     // if all lotters have lotted, evaluate immediately.
@@ -368,7 +368,7 @@ void CTreasurePool::PassItem(CCharEntity* PChar, uint8 SlotID)
     // Player lots Item for XXX message
     for (auto& member : members)
     {
-        member->pushPacket(new CTreasureLotItemPacket(highestLotter, highestLot, PChar, SlotID, PassedLot));
+        member->pushPacket<CTreasureLotItemPacket>(highestLotter, highestLot, PChar, SlotID, PassedLot);
     }
 
     // if all lotters have lotted, evaluate immediately.
@@ -528,7 +528,7 @@ void CTreasurePool::TreasureWon(CCharEntity* winner, uint8 SlotID)
 
     for (auto& member : members)
     {
-        member->pushPacket(new CTreasureLotItemPacket(winner, SlotID, 0, ITEMLOT_WIN));
+        member->pushPacket<CTreasureLotItemPacket>(winner, SlotID, 0, ITEMLOT_WIN);
     }
     m_count--;
 
@@ -548,7 +548,7 @@ void CTreasurePool::TreasureError(CCharEntity* winner, uint8 SlotID)
 
     for (auto& member : members)
     {
-        member->pushPacket(new CTreasureLotItemPacket(winner, SlotID, -1, ITEMLOT_WINERROR));
+        member->pushPacket<CTreasureLotItemPacket>(winner, SlotID, -1, ITEMLOT_WINERROR);
     }
     m_count--;
 
@@ -568,7 +568,7 @@ void CTreasurePool::TreasureLost(uint8 SlotID)
 
     for (auto& member : members)
     {
-        member->pushPacket(new CTreasureLotItemPacket(SlotID, ITEMLOT_WINERROR));
+        member->pushPacket<CTreasureLotItemPacket>(SlotID, ITEMLOT_WINERROR);
     }
     m_count--;
 

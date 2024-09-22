@@ -392,7 +392,7 @@ void CZoneEntities::MusicChange(uint16 BlockID, uint16 MusicTrackID)
 
         if (PCurrentChar != nullptr)
         {
-            PCurrentChar->pushPacket(new CChangeMusicPacket(BlockID, MusicTrackID));
+            PCurrentChar->pushPacket<CChangeMusicPacket>(BlockID, MusicTrackID);
         }
     }
 }
@@ -743,7 +743,7 @@ void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
                     PChar->SpawnTRUSTList.insert(SpawnTrustItr, SpawnIDList_t::value_type(PCurrentTrust->id, PCurrentTrust));
                     if (PMaster)
                     {
-                        PChar->pushPacket(new CEntitySetNamePacket(PCurrentTrust));
+                        PChar->pushPacket<CEntitySetNamePacket>(PCurrentTrust);
                         PChar->updateEntityPacket(PCurrentTrust, ENTITY_SPAWN, UPDATE_ALL_MOB);
                     }
                 }
@@ -973,7 +973,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
             CCharEntity* candidateChar            = candidatePair.second;
             PChar->SpawnPCList[candidateChar->id] = candidateChar;
             PChar->updateCharPacket(candidateChar, ENTITY_SPAWN, UPDATE_ALL_CHAR);
-            PChar->pushPacket(new CCharSyncPacket(candidateChar));
+            PChar->pushPacket<CCharSyncPacket>(candidateChar);
         }
     }
 }
@@ -1273,7 +1273,7 @@ void CZoneEntities::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, 
     }
 }
 
-void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, CBasicPacket* packet)
+void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, std::unique_ptr<CBasicPacket>&& packet)
 {
     TracyZoneScoped;
     TracyZoneHex16(packet->getType());
@@ -1289,7 +1289,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
         // Ensure this packet is not despawning us..
         if (packet->ref<uint8>(0x0A) != 0x20)
         {
-            destroy(packet);
+            packet = nullptr;
             return;
         }
     }
@@ -1304,7 +1304,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                 TracyZoneCString("CHAR_INRANGE_SELF");
                 if (PEntity->objtype == TYPE_PC)
                 {
-                    ((CCharEntity*)PEntity)->pushPacket(new CBasicPacket(*packet));
+                    ((CCharEntity*)PEntity)->pushPacket<CBasicPacket>(packet->copy());
                 }
             }
             [[fallthrough]];
@@ -1342,7 +1342,8 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                                 }
                                 else if (packetType == 0x028) // Action packet
                                 {
-                                    id     = packet->ref<uint32>(0x05);
+                                    id = packet->ref<uint32>(0x05);
+
                                     // Try char
                                     entity = GetCharByID(id);
 
@@ -1365,7 +1366,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                                     SpawnIDList_t::const_iterator iter = spawnlist.lower_bound(id);
                                     if (!(iter == spawnlist.end() || spawnlist.key_comp()(id, iter->first)))
                                     {
-                                        PCurrentChar->pushPacket(new CBasicPacket(*packet));
+                                        PCurrentChar->pushPacket<CBasicPacket>(packet->copy());
                                     }
                                 };
 
@@ -1392,7 +1393,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                             }
                             else
                             {
-                                PCurrentChar->pushPacket(new CBasicPacket(*packet));
+                                PCurrentChar->pushPacket<CBasicPacket>(packet->copy());
                             }
                         }
                     }
@@ -1410,7 +1411,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                         if (distance(PEntity->loc.p, PCurrentChar->loc.p) < 180 &&
                             ((PEntity->objtype != TYPE_PC) || (((CCharEntity*)PEntity)->m_moghouseID == PCurrentChar->m_moghouseID)))
                         {
-                            PCurrentChar->pushPacket(new CBasicPacket(*packet));
+                            PCurrentChar->pushPacket<CBasicPacket>(packet->copy());
                         }
                     }
                 }
@@ -1427,7 +1428,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                     {
                         if (PEntity != PCurrentChar)
                         {
-                            PCurrentChar->pushPacket(new CBasicPacket(*packet));
+                            PCurrentChar->pushPacket<CBasicPacket>(packet->copy());
                         }
                     }
                 }
@@ -1436,19 +1437,18 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
         }
         // clang-format on
     }
-    destroy(packet);
 }
 
 void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
 {
     TracyZoneScoped;
-    PChar->pushPacket(new CWideScanPacket(WIDESCAN_BEGIN));
+    PChar->pushPacket<CWideScanPacket>(WIDESCAN_BEGIN);
     for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)
     {
         CNpcEntity* PNpc = (CNpcEntity*)it->second;
         if (PNpc->isWideScannable() && distance(PChar->loc.p, PNpc->loc.p) < radius)
         {
-            PChar->pushPacket(new CWideScanPacket(PChar, PNpc));
+            PChar->pushPacket<CWideScanPacket>(PChar, PNpc);
         }
     }
     for (EntityList_t::const_iterator it = m_mobList.begin(); it != m_mobList.end(); ++it)
@@ -1456,10 +1456,10 @@ void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
         CMobEntity* PMob = (CMobEntity*)it->second;
         if (PMob->isWideScannable() && distance(PChar->loc.p, PMob->loc.p) < radius)
         {
-            PChar->pushPacket(new CWideScanPacket(PChar, PMob));
+            PChar->pushPacket<CWideScanPacket>(PChar, PMob);
         }
     }
-    PChar->pushPacket(new CWideScanPacket(WIDESCAN_END));
+    PChar->pushPacket<CWideScanPacket>(WIDESCAN_END);
 }
 
 void CZoneEntities::ZoneServer(time_point tick)

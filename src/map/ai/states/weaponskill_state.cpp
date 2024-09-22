@@ -68,7 +68,7 @@ CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint
     actionTarget.animation  = 0;
     actionTarget.param      = m_PSkill->getID();
     actionTarget.messageID  = 43;
-    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
 }
 
 CWeaponSkill* CWeaponSkillState::GetSkill()
@@ -118,7 +118,7 @@ bool CWeaponSkillState::Update(time_point tick)
             SpendCost();
 
             m_PEntity->OnWeaponSkillFinished(*this, action);
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
 
             // Reset Restraint bonus and trackers on weaponskill use
             if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_RESTRAINT))
@@ -169,7 +169,7 @@ bool CWeaponSkillState::Update(time_point tick)
             actionTarget.messageID = 0;
             actionTarget.reaction  = REACTION::ABILITY | REACTION::HIT;
 
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
         }
 
         auto delay   = m_PSkill->getAnimationTime(); // TODO: Is delay time a fixed number if the weaponskill is used out of range?

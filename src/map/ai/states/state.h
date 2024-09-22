@@ -52,7 +52,7 @@ public:
 
     bool HasErrorMsg() const;
     /* Releases ownership to the caller */
-    CBasicPacket* GetErrorMsg();
+    auto GetErrorMsg() -> std::unique_ptr<CBasicPacket>;
 
     bool DoUpdate(time_point tick);
     // try interrupt (on hit)

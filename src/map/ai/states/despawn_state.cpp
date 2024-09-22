@@ -31,7 +31,7 @@ CDespawnState::CDespawnState(CBaseEntity* _PEntity, bool instantDespawn)
 {
     if (!instantDespawn && (_PEntity->status != STATUS_TYPE::DISAPPEAR && !(static_cast<CMobEntity*>(_PEntity)->m_Behaviour & BEHAVIOUR_NO_DESPAWN)))
     {
-        _PEntity->loc.zone->PushPacket(_PEntity, CHAR_INRANGE, new CEntityAnimationPacket(_PEntity, _PEntity, CEntityAnimationPacket::Fade_Out));
+        _PEntity->loc.zone->PushPacket(_PEntity, CHAR_INRANGE, std::make_unique<CEntityAnimationPacket>(_PEntity, _PEntity, CEntityAnimationPacket::Fade_Out));
     }
 }
 

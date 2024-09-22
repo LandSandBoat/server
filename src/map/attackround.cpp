@@ -383,7 +383,7 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
                 PChar->RequestPersist(CHAR_PERSIST::EQUIP);
             }
             charutils::UpdateItem(PChar, loc, slot, -ammoCount);
-            PChar->pushPacket(new CInventoryFinishPacket());
+            PChar->pushPacket<CInventoryFinishPacket>();
         }
     }
 

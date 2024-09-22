@@ -59,7 +59,7 @@ bool CPlayerController::Cast(uint16 targid, SpellID spellid)
     }
     else
     {
-        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_CAST));
+        PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_CAST);
         return false;
     }
 }
@@ -80,7 +80,7 @@ bool CPlayerController::Engage(uint16 targid)
                 if (CController::Engage(targid))
                 {
                     PChar->PLatentEffectContainer->CheckLatentsWeaponDraw(true);
-                    PChar->pushPacket(new CLockOnPacket(PChar, PTarget));
+                    PChar->pushPacket<CLockOnPacket>(PChar, PTarget);
                     return true;
                 }
             }
@@ -119,7 +119,7 @@ bool CPlayerController::Ability(uint16 targid, uint16 abilityid)
         CAbility* PAbility = ability::GetAbility(abilityid);
         if (!PAbility)
         {
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
+            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA);
             return false;
         }
         if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
@@ -134,8 +134,8 @@ bool CPlayerController::Ability(uint16 targid, uint16 abilityid)
                 recastSeconds -= (recast->maxCharges - 1) * recast->chargeTime;
             }
 
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2));
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, recastSeconds, 0, MSGBASIC_TIME_LEFT));
+            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2);
+            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, recastSeconds, 0, MSGBASIC_TIME_LEFT);
             return false;
         }
         if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
@@ -146,7 +146,7 @@ bool CPlayerController::Ability(uint16 targid, uint16 abilityid)
     }
     else
     {
-        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
+        PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA);
         return false;
     }
 }
@@ -164,7 +164,7 @@ bool CPlayerController::RangedAttack(uint16 targid)
     }
     else
     {
-        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER));
+        PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER);
     }
     return false;
 }
@@ -193,25 +193,25 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
 
         if (PWeaponSkill == nullptr)
         {
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_WS));
+            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_WS);
             return false;
         }
 
         if (!charutils::hasWeaponSkill(PChar, PWeaponSkill->getID()) || !charutils::canUseWeaponSkill(PChar, wsid))
         {
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_WS));
+            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_WS);
             return false;
         }
 
         if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA) || (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_IMPAIRMENT) && (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_IMPAIRMENT)->GetPower() == 0x02 || PChar->StatusEffectContainer->GetStatusEffect(EFFECT_IMPAIRMENT)->GetPower() == 0x03)))
         {
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_ANY_WS));
+            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_ANY_WS);
             return false;
         }
 
         if (PChar->health.tp < 1000)
         {
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_NOT_ENOUGH_TP));
+            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_NOT_ENOUGH_TP);
             return false;
         }
 
@@ -224,7 +224,7 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
             // before allowing ranged weapon skill...
             if (PItem == nullptr || !weapon || !weapon->isRanged() || !ammo || !ammo->isRanged() || PChar->equip[SLOT_AMMO] == 0)
             {
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_NO_RANGED_WEAPON));
+                PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_NO_RANGED_WEAPON);
                 return false;
             }
         }
@@ -241,7 +241,7 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
 
             if (!facing(PChar->loc.p, PTarget->loc.p, 64) && PTarget != PChar)
             {
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PTarget, 0, 0, MSGBASIC_CANNOT_SEE));
+                PChar->pushPacket<CMessageBasicPacket>(PChar, PTarget, 0, 0, MSGBASIC_CANNOT_SEE);
                 return false;
             }
 
@@ -256,7 +256,7 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
     }
     else
     {
-        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_WS));
+        PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_WS);
     }
     return false;
 }

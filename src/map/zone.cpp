@@ -637,7 +637,7 @@ void CZone::SetWeather(WEATHER weather)
     m_Weather           = weather;
     m_WeatherChangeTime = CVanaTime::getInstance()->getVanaTime();
 
-    m_zoneEntities->PushPacket(nullptr, CHAR_INZONE, new CWeatherPacket(m_WeatherChangeTime, m_Weather, xirand::GetRandomNumber(4, 28)));
+    m_zoneEntities->PushPacket(nullptr, CHAR_INZONE, std::make_unique<CWeatherPacket>(m_WeatherChangeTime, m_Weather, xirand::GetRandomNumber(4, 28)));
 }
 
 void CZone::UpdateWeather()
@@ -889,10 +889,10 @@ CCharEntity* CZone::GetCharByID(uint32 id)
     return m_zoneEntities->GetCharByID(id);
 }
 
-void CZone::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, CBasicPacket* packet)
+void CZone::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, std::unique_ptr<CBasicPacket>&& packet)
 {
     TracyZoneScoped;
-    m_zoneEntities->PushPacket(PEntity, message_type, packet);
+    m_zoneEntities->PushPacket(PEntity, message_type, std::move(packet));
 }
 
 void CZone::UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
@@ -1213,12 +1213,12 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         if (PChar->PParty->m_PAlliance)
         {
             ref<uint32>(data, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
-            message::send(MSG_ALLIANCE_RELOAD, data, sizeof data, nullptr);
+            message::send(MSG_ALLIANCE_RELOAD, data, sizeof(data), nullptr);
         }
         else
         {
             ref<uint32>(data, 0) = PChar->PParty->GetPartyID();
-            message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+            message::send(MSG_PT_RELOAD, data, sizeof(data), nullptr);
         }
     }
 

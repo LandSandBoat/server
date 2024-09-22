@@ -56,17 +56,15 @@ bool CUnityChat::DelMember(CCharEntity* PChar)
     return !members.empty();
 }
 
-void CUnityChat::PushPacket(uint32 senderID, CBasicPacket* packet)
+void CUnityChat::PushPacket(uint32 senderID, std::unique_ptr<CBasicPacket>&& packet)
 {
     for (auto& member : members)
     {
         if (member->id != senderID && member->status != STATUS_TYPE::DISAPPEAR && !jailutils::InPrison(member))
         {
-            CBasicPacket* newPacket = new CBasicPacket(*packet);
-            member->pushPacket(newPacket);
+            member->pushPacket(packet->copy());
         }
     }
-    destroy(packet);
 }
 
 namespace unitychat

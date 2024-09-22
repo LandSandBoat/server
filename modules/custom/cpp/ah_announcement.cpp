@@ -51,7 +51,7 @@ class AHAnnouncementModule : public CPPModule
 
                 if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
                 {
-                    PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, 0, 0, 0, 0));
+                    PChar->pushPacket<CAuctionHousePacket>(action, 0xE5, 0, 0, 0, 0);
                 }
                 else
                 {
@@ -65,7 +65,7 @@ class AHAnnouncementModule : public CPPModule
                             {
                                 if (PChar->getStorage(LocID)->SearchItem(itemid) != ERROR_SLOTID)
                                 {
-                                    PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, 0, 0, 0, 0));
+                                    PChar->pushPacket<CAuctionHousePacket>(action, 0xE5, 0, 0, 0, 0);
                                     return;
                                 }
                             }
@@ -101,8 +101,8 @@ class AHAnnouncementModule : public CPPModule
                                 {
                                     charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)(price));
 
-                                    PChar->pushPacket(new CAuctionHousePacket(action, 0x01, itemid, price, quantity, PItem->getStackSize()));
-                                    PChar->pushPacket(new CInventoryFinishPacket());
+                                    PChar->pushPacket<CAuctionHousePacket>(action, 0x01, itemid, price, quantity, PItem->getStackSize());
+                                    PChar->pushPacket<CInventoryFinishPacket>();
 
                                     ret = sql->Query(R"(
                                         SELECT seller
@@ -132,8 +132,8 @@ class AHAnnouncementModule : public CPPModule
                                         name[0] = std::toupper(name[0]);
 
                                         // Send message to seller!
-                                        message::send(sellerId, new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3,
-                                            fmt::format("Your '{}' has sold to {} for {} gil!", name, PChar->name, price).c_str(), ""));
+                                        message::send(sellerId,
+                                            std::make_unique<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("Your '{}' has sold to {} for {} gil!", name, PChar->name, price).c_str(), ""));
                                         // clang-format on
                                     }
                                 }
@@ -143,11 +143,11 @@ class AHAnnouncementModule : public CPPModule
                     }
                     if (PItem)
                     {
-                        PChar->pushPacket(new CAuctionHousePacket(action, 0xC5, itemid, price, quantity, PItem->getStackSize()));
+                        PChar->pushPacket<CAuctionHousePacket>(action, 0xC5, itemid, price, quantity, PItem->getStackSize());
                     }
                     else
                     {
-                        PChar->pushPacket(new CAuctionHousePacket(action, 0xC5, itemid, price, quantity, 0));
+                        PChar->pushPacket<CAuctionHousePacket>(action, 0xC5, itemid, price, quantity, 0);
                     }
                 }
             }

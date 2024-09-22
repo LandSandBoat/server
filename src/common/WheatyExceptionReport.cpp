@@ -621,7 +621,7 @@ void WheatyExceptionReport::PrintSystemInfo()
     ::GetSystemInfo(&SystemInfo);
 
     MEMORYSTATUS MemoryStatus;
-    MemoryStatus.dwLength = sizeof (MEMORYSTATUS);
+    MemoryStatus.dwLength = sizeof(MEMORYSTATUS);
     ::GlobalMemoryStatus(&MemoryStatus);
     TCHAR sString[1024];
     if (_GetProcessorName(sString, static_cast<DWORD>(std::size(sString))))

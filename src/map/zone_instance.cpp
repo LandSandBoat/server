@@ -349,21 +349,21 @@ void CZoneInstance::TOTDChange(TIMETYPE TOTD)
     }
 }
 
-void CZoneInstance::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, CBasicPacket* packet)
+void CZoneInstance::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, std::unique_ptr<CBasicPacket>&& packet)
 {
     TracyZoneScoped;
     if (PEntity)
     {
         if (PEntity->PInstance)
         {
-            PEntity->PInstance->PushPacket(PEntity, message_type, packet);
+            PEntity->PInstance->PushPacket(PEntity, message_type, std::move(packet));
         }
     }
     else
     {
         for (const auto& instance : instanceList)
         {
-            instance->PushPacket(PEntity, message_type, packet);
+            instance->PushPacket(PEntity, message_type, packet->copy());
         }
     }
 }
