@@ -838,7 +838,7 @@ namespace message
                     }
                 }
 
-                if (sessionToDelete)
+                if (sessionToDelete && sessionToDelete->blowfish.status == BLOWFISH_PENDING_ZONE)
                 {
                     DebugSockets(fmt::format("Closing session of charid {} on request of other process", charID));
                     map_close_session(server_clock::now(), sessionToDelete);
