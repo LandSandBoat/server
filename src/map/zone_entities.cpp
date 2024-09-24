@@ -1717,20 +1717,17 @@ void CZoneEntities::ZoneServer(time_point tick)
             PChar->PTreasurePool->CheckItems(tick);
         }
 
-        // EFFECT_LEAVEGAME effect wore off or char got SHUTDOWN from some other location
-        if (PChar->status == STATUS_TYPE::SHUTDOWN)
+        // Else-if chain so only one end-result can be processed.
+        // This is done to prevent multiple-deletion of PChar
+        if (PChar->status == STATUS_TYPE::SHUTDOWN) // EFFECT_LEAVEGAME effect wore off or char got SHUTDOWN from some other location
         {
             charsToLogout.emplace_back(PChar);
         }
-
-        // EFFECT_TELEPORT can request players to warp
-        if (PChar->requestedWarp)
+        else if (PChar->requestedWarp) // EFFECT_TELEPORT can request players to warp
         {
             charsToWarp.emplace_back(PChar);
         }
-
-        // EFFECT_TELEPORT can request players to change zones
-        if (PChar->requestedZoneChange)
+        else if (PChar->requestedZoneChange) // EFFECT_TELEPORT can request players to change zones
         {
             charsToChangeZone.emplace_back(PChar);
         }
