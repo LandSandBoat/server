@@ -445,7 +445,8 @@ bool CAttack::CheckCounter()
         return false;
     }
 
-    if (!m_victim->PAI->IsEngaged())
+    // Don't counter if not engaged or stunned, slept, etc.
+    if (!m_victim->PAI->IsEngaged() || m_victim->StatusEffectContainer->HasPreventActionEffect(true))
     {
         m_isCountered = false;
         return m_isCountered;
@@ -473,20 +474,25 @@ bool CAttack::CheckCounter()
         seiganChance = std::clamp<uint16>(seiganChance, 0, 100);
         seiganChance /= 4;
     }
-    if ((xirand::GetRandomNumber(100) < std::clamp<uint16>(m_victim->getMod(Mod::COUNTER) + meritCounter, 0, 80) ||
-         xirand::GetRandomNumber(100) < seiganChance) &&
-        facing(m_victim->loc.p, m_attacker->loc.p, 64) && xirand::GetRandomNumber(100) < battleutils::GetHitRate(m_victim, m_attacker))
-    {
-        m_isCountered = true;
-        m_isCritical  = (xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(m_victim, m_attacker, false));
-    }
-    else if (m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_COUNTER))
-    { // Perfect Counter only counters hits that normal counter misses, always critical, can counter 1-3 times before wearing
-        m_isCountered = true;
-        m_isCritical  = true;
 
-        // TODO: Implement VIT-based formula for Perfect Counter wearing off, and add JP bonus
-        m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_PERFECT_COUNTER);
+    // Do not counter if PD is up
+    if (!m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_DODGE))
+    {
+        if ((xirand::GetRandomNumber(100) < std::clamp<uint16>(m_victim->getMod(Mod::COUNTER) + meritCounter, 0, 80) ||
+             xirand::GetRandomNumber(100) < seiganChance) &&
+            facing(m_victim->loc.p, m_attacker->loc.p, 64) && xirand::GetRandomNumber(100) < battleutils::GetHitRate(m_victim, m_attacker))
+        {
+            m_isCountered = true;
+            m_isCritical  = (xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(m_victim, m_attacker, false));
+        }
+        else if (m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_COUNTER))
+        { // Perfect Counter only counters hits that normal counter misses, always critical, can counter 1-3 times before wearing
+            m_isCountered = true;
+            m_isCritical  = true;
+
+            // TODO: Implement VIT-based formula for Perfect Counter wearing off, and add JP bonus
+            m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_PERFECT_COUNTER);
+        }
     }
     return m_isCountered;
 }
