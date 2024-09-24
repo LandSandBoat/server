@@ -445,7 +445,8 @@ bool CAttack::CheckCounter()
         return false;
     }
 
-    if (!m_victim->PAI->IsEngaged())
+    // Don't counter if not engaged or stunned, slept, etc.
+    if (!m_victim->PAI->IsEngaged() || m_victim->StatusEffectContainer->HasPreventActionEffect(true))
     {
         m_isCountered = false;
         return m_isCountered;
