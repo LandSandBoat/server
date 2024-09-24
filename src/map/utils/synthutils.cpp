@@ -630,6 +630,12 @@ namespace synthutils
                 if ((charSkill / 10) < (charSkill + skillUpAmount) / 10)
                 {
                     PChar->WorkingSkills.skill[skillID] += 0x20;
+
+                    if (PChar->RealSkills.skill[skillID] >= maxSkill)
+                    {
+                        PChar->WorkingSkills.skill[skillID] |= 0x8000; // blue capped text
+                    }
+
                     PChar->pushPacket(new CCharSkillsPacket(PChar));
                     PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, 53));
                 }
