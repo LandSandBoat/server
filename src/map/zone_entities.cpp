@@ -1694,8 +1694,9 @@ void CZoneEntities::ZoneServer(time_point tick)
     }
 
     // Store some lists for chars that may need post-processing for effects that could delete them from m_charList and cause crashes
-    std::vector<CCharEntity*> charsToLogout = {};
-    std::vector<CCharEntity*> charsToWarp   = {};
+    std::vector<CCharEntity*> charsToLogout     = {};
+    std::vector<CCharEntity*> charsToWarp       = {};
+    std::vector<CCharEntity*> charsToChangeZone = {};
 
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
     {
@@ -1727,18 +1728,43 @@ void CZoneEntities::ZoneServer(time_point tick)
         {
             charsToWarp.emplace_back(PChar);
         }
+
+        // EFFECT_TELEPORT can request players to change zones
+        if (PChar->requestedZoneChange)
+        {
+            charsToChangeZone.emplace_back(PChar);
+        }
     }
 
     // forceLogout eventually removes the char from m_charList -- so we must remove them here
     for (auto PChar : charsToLogout)
     {
+        PChar->clearPacketList();
         charutils::ForceLogout(PChar);
     }
 
     // Warp players (do not recover HP/MP)
     for (auto PChar : charsToWarp)
     {
+        PChar->clearPacketList();
         charutils::HomePoint(PChar, false);
+    }
+
+    // Change player's zone (teleports, etc)
+    for (auto PChar : charsToChangeZone)
+    {
+        PChar->clearPacketList();
+
+        auto ipp = zoneutils::GetZoneIPP(PChar->loc.destination);
+
+        // This is already checked in CLueBaseEntity::setPos, but better to have a check...
+        if (ipp == 0)
+        {
+            ShowWarning(fmt::format("Char {} requested zone ({}) returned IPP of 0", PChar->name, PChar->loc.destination));
+            continue;
+        }
+
+        charutils::SendToZone(PChar, 2, ipp);
     }
 
     if (tick > m_EffectCheckTime)

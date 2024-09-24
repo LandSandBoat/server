@@ -219,7 +219,8 @@ CCharEntity::CCharEntity()
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
 
-    requestedWarp = false;
+    requestedWarp       = false;
+    requestedZoneChange = false;
 
     retriggerLatents = false;
 
