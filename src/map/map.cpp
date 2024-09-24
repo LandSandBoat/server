@@ -886,7 +886,11 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
             if (PChar->loc.zone == nullptr && SmallPD_Type != 0x0A)
             {
-                ShowWarning("This packet is unexpected from %s - Received %03hX earlier without matching 0x0A", PChar->getName(), SmallPD_Type);
+                // Packets aren't unexpected from the old key under BLOWFISH_PENDING_ZONE
+                if (map_session_data->blowfish.status != BLOWFISH_PENDING_ZONE)
+                {
+                    ShowWarning("This packet is unexpected from %s - Received %03hX earlier without matching 0x0A", PChar->getName(), SmallPD_Type);
+                }
             }
             else
             {
