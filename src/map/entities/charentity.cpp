@@ -219,6 +219,8 @@ CCharEntity::CCharEntity()
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
 
+    requestedWarp = false;
+
     retriggerLatents = false;
 
     resetPetZoningInfo();
@@ -2204,7 +2206,7 @@ void CCharEntity::OnDeathTimer()
 {
     TracyZoneScoped;
     charutils::SetCharVar(this, "expLost", 0);
-    charutils::HomePoint(this);
+    charutils::HomePoint(this, true);
 }
 
 void CCharEntity::OnRaise()

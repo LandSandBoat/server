@@ -408,6 +408,8 @@ public:
     // currency_t        m_currency;                 // conquest points, imperial standing points etc
     teleport_t teleport; // Outposts, Runic Portals, Homepoints, Survival Guides, Maws, etc.
 
+    bool requestedWarp = false; // used in CLuaBaseEntity::warp(). This will be processed after the player's tick to warp.
+
     uint8 GetGender();
 
     void          clearPacketList();

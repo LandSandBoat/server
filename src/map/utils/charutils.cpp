@@ -6551,18 +6551,22 @@ namespace charutils
         SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
     }
 
-    void HomePoint(CCharEntity* PChar)
+    void HomePoint(CCharEntity* PChar, bool resetHPMP)
     {
         TracyZoneScoped;
 
-        // remove weakness on homepoint
-        PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_WEAKNESS);
-        PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
+        // player initiated warp/warp 2 or otherwise
+        if (resetHPMP)
+        {
+            // remove weakness on homepoint
+            PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_WEAKNESS);
+            PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
 
-        PChar->SetDeathTimestamp(0);
+            PChar->SetDeathTimestamp(0);
 
-        PChar->health.hp = PChar->GetMaxHP();
-        PChar->health.mp = PChar->GetMaxMP();
+            PChar->health.hp = PChar->GetMaxHP();
+            PChar->health.mp = PChar->GetMaxMP();
+        }
 
         PChar->loc.boundary    = 0;
         PChar->loc.p           = PChar->profile.home_point.p;

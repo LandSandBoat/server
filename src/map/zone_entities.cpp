@@ -497,16 +497,14 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
         synthutils::sendSynthDone(PChar);
     }
 
-    // TODO: There may be problems transitioning between the same zone (zone == prevzone)
-
-    m_charList.erase(PChar->targid);
-    charTargIds.erase(PChar->targid);
-
     // Need to interupt fishing on zone out otherwise fished up mobs get stuck in hooked state
-    if (PChar->hookedFish && PChar->hookedFish->hooked == true)
+    if (PChar->hookedFish && PChar->hookedFish->hooked)
     {
         fishingutils::InterruptFishing(PChar);
     }
+
+    m_charList.erase(PChar->targid);
+    charTargIds.erase(PChar->targid);
 
     ShowDebug("CZone:: %s DecreaseZoneCounter <%u> %s", m_zone->getName(), m_charList.size(), PChar->getName());
 }
@@ -1695,11 +1693,13 @@ void CZoneEntities::ZoneServer(time_point tick)
         ++it;
     }
 
+    // Store some lists for chars that may need post-processing for effects that could delete them from m_charList and cause crashes
     std::vector<CCharEntity*> charsToLogout = {};
+    std::vector<CCharEntity*> charsToWarp   = {};
 
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
     {
-        CCharEntity* PChar = (CCharEntity*)it->second;
+        CCharEntity* PChar = static_cast<CCharEntity*>(it->second);
 
         ShowTrace(fmt::format("CZoneEntities::ZoneServer: Char: {} ({})", PChar->getName(), PChar->id).c_str());
 
@@ -1721,12 +1721,24 @@ void CZoneEntities::ZoneServer(time_point tick)
         {
             charsToLogout.emplace_back(PChar);
         }
+
+        // EFFECT_TELEPORT can request players to warp
+        if (PChar->requestedWarp)
+        {
+            charsToWarp.emplace_back(PChar);
+        }
     }
 
     // forceLogout eventually removes the char from m_charList -- so we must remove them here
     for (auto PChar : charsToLogout)
     {
         charutils::ForceLogout(PChar);
+    }
+
+    // Warp players (do not recover HP/MP)
+    for (auto PChar : charsToWarp)
+    {
+        charutils::HomePoint(PChar, false);
     }
 
     if (tick > m_EffectCheckTime)
