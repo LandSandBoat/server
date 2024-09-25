@@ -3044,7 +3044,7 @@ namespace battleutils
             fstr = static_cast<int32>((dif + 13) / 2);
         }
 
-        if (SlotID == SLOT_RANGED)
+        if (SlotID == SLOT_RANGED || SlotID == SLOT_AMMO)
         {
             rank = PAttacker->GetRangedWeaponRank();
             // Different caps than melee weapons
