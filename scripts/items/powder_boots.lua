@@ -12,7 +12,7 @@ end
 
 itemObject.onItemUse = function(target)
     target:delStatusEffect(xi.effect.FLEE)
-    target:addStatusEffect(xi.effect.FLEE, 100, 0, 30)
+    target:addStatusEffect(xi.effect.FLEE, 10000, 0, 30)
 end
 
 return itemObject

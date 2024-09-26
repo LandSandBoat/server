@@ -231,7 +231,7 @@ mission.sections =
                         }
 
                         if option == 5 or option == 6 then
-                            player:addStatusEffect(xi.effect.FLEE, 100, 0, fleeDuration[option])
+                            player:addStatusEffect(xi.effect.FLEE, 10000, 0, fleeDuration[option])
                         end
                     end
                 end,

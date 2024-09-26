@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -262,7 +262,7 @@ uint8 CBattleEntity::GetSpeed()
     float weightFactor = std::clamp<float>(1.0f - static_cast<float>(getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY)) / 100.0f, 0.1f, 1.0f);
 
     // Flee.
-    float fleeFactor = std::clamp<float>(1.0f + static_cast<float>(getMod(Mod::MOVE_SPEED_FLEE)) / 100.0f, 1.0f, 2.0f);
+    float fleeFactor = std::clamp<float>(1.0f + static_cast<float>(getMod(Mod::MOVE_SPEED_FLEE)) / 10000.0f, 1.0f, 2.0f);
 
     // Cheer KI's
     float cheerFactor = (99.0f + static_cast<float>(getMod(Mod::MOVE_SPEED_CHEER))) / 99.0f;

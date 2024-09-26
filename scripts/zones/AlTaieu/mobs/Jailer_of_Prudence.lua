@@ -40,14 +40,14 @@ entity.onMobSpawn = function(mob)
                 cooldown = 120, -- "Both can use Perfect Dodge multiple times, and will do so almost incessantly." (guessing a 2 minute cooldown)
                 hpp = 95,
                 endCode = function(mobArg)
-                    mobArg:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 30) -- "Jailer of Prudence will however gain Flee speed during Perfect Dodge."
+                    mobArg:addStatusEffectEx(xi.effect.FLEE, 0, 10000, 0, 30) -- "Jailer of Prudence will however gain Flee speed during Perfect Dodge."
                 end,
             },
         },
     })
 
     mob:setAnimationSub(0) -- Mouth closed
-    mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 60)
+    mob:addStatusEffectEx(xi.effect.FLEE, 0, 10000, 0, 60)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 20)
     mob:setMod(xi.mod.REGEN, 10)
     mob:addMod(xi.mod.BIND_MEVA, 30)
