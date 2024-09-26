@@ -1889,6 +1889,12 @@ namespace fishingutils
                 if ((charSkill / 10) < (charSkill + skillAmount) / 10)
                 {
                     PChar->WorkingSkills.skill[SKILL_FISHING] += 0x20;
+
+                    if (PChar->RealSkills.skill[SKILL_FISHING] >= maxSkill)
+                    {
+                        PChar->WorkingSkills.skill[SKILL_FISHING] |= 0x8000; // blue capped text
+                    }
+
                     PChar->pushPacket(new CCharSkillsPacket(PChar));
                     PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, SKILL_FISHING, (charSkill + skillAmount) / 10, 53));
                 }
