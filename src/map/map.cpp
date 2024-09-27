@@ -1192,6 +1192,12 @@ int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
         destroy_arr(map_session_data->server_packet_data);
         if (map_session_data->PChar)
         {
+            CZone* PZone = map_session_data->PChar->loc.zone;
+            if (PZone)
+            {
+                // This should already be done in removeCharFromZone, but just to be safe...
+                PZone->DecreaseZoneCounter(map_session_data->PChar);
+            }
             destroy(map_session_data->PChar);
         }
         destroy(map_session_data);
