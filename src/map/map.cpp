@@ -730,6 +730,13 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             destroy(map_session_data->PChar);
         }
 
+        uint16 packetID = ref<uint16>(buff, FFXI_HEADER_SIZE) & 0x1FF;
+
+        if (packetID != 0x00A)
+        {
+            return -1;
+        }
+
         if (map_session_data->PChar == nullptr)
         {
             uint32 CharID = ref<uint32>(buff, FFXI_HEADER_SIZE + 0x0C);
@@ -1252,92 +1259,36 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 
                 if (PChar != nullptr)
                 {
-                    // Check if the PChar current zone is on this server
-                    CZone* PZone = nullptr;
+                    ShowDebug(fmt::format("Clearing map server session for player: '{}' in zone: '{}' (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->getName() : "None", otherMap ? "Yes" : "No"));
 
-                    // Get zone if available
-                    if (PChar->loc.zone && PChar->loc.zone->GetID() && (g_PZoneList.find(PChar->loc.zone->GetID()) != g_PZoneList.end()))
+                    // Player session is attached to this map process and has stopped responding.
+                    if (!otherMap)
                     {
-                        PZone = PChar->loc.zone;
-                    }
+                        map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
+                        _sql->Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->charID);
 
-                    if (map_session_data->shuttingDown == 0)
-                    {
-                        if (!otherMap)
+                        // Save position if d/c or logout/shutdown
+                        if (map_session_data->shuttingDown == 0 || map_session_data->shuttingDown == 1)
                         {
-                            // [Alliance] fix to stop server crashing:
-                            // if a party within an alliance only has 1 char (that char will be party leader)
-                            // if char then disconnects we need to tell the server about the alliance change
-                            if (PChar->PParty != nullptr && PChar->PParty->m_PAlliance != nullptr && PChar->PParty->GetLeader() == PChar)
-                            {
-                                if (PChar->PParty->HasOnlyOneMember())
-                                {
-                                    if (PChar->PParty->m_PAlliance->hasOnlyOneParty())
-                                    {
-                                        PChar->PParty->m_PAlliance->dissolveAlliance();
-                                    }
-                                    else
-                                    {
-                                        PChar->PParty->m_PAlliance->removeParty(PChar->PParty);
-                                    }
-                                }
-                            }
-
-                            // uncharm pet if player d/c
-                            if (PChar->PPet != nullptr && PChar->PPet->objtype == TYPE_MOB)
-                            {
-                                petutils::DespawnPet(PChar);
-                            }
-
-                            PChar->StatusEffectContainer->SaveStatusEffects(true);
                             charutils::SaveCharPosition(PChar);
-
-                            ShowDebug("map_cleanup: %s timed out, closing session", PChar->getName());
-
-                            PChar->status    = STATUS_TYPE::SHUTDOWN;
-                            auto basicPacket = CBasicPacket();
-                            charutils::removeCharFromZone(PChar);
-                        }
-                        else
-                        {
-                            ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->getName() : "None", otherMap ? "Yes" : "No"));
-
-                            if (PZone)
-                            {
-                                PZone->DecreaseZoneCounter(PChar);
-                            }
-
-                            destroy_arr(map_session_data->server_packet_data);
-                            destroy(map_session_data->PChar);
-                            destroy(map_session_data);
-
-                            map_session_list.erase(it++);
-                            continue;
                         }
                     }
-                    else
+
+                    // uncharm pet if player d/c
+                    if (PChar->PPet != nullptr && PChar->PPet->objtype == TYPE_MOB)
                     {
-                        if (!otherMap)
-                        {
-                            // Player session is attached to this map process and has stopped responding.
-                            map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
-                            _sql->Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->charID);
-                        }
-
-                        ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->getName() : "None", otherMap ? "Yes" : "No"));
-
-                        if (PZone)
-                        {
-                            PZone->DecreaseZoneCounter(PChar);
-                        }
-
-                        destroy_arr(map_session_data->server_packet_data);
-                        destroy(map_session_data->PChar);
-                        destroy(map_session_data);
-
-                        map_session_list.erase(it++);
-                        continue;
+                        petutils::DespawnPet(PChar);
                     }
+
+                    PChar->status = STATUS_TYPE::SHUTDOWN;
+
+                    charutils::removeCharFromZone(PChar);
+
+                    destroy_arr(map_session_data->server_packet_data);
+                    destroy(map_session_data->PChar);
+                    destroy(map_session_data);
+
+                    map_session_list.erase(it++);
                 }
                 else
                 {
@@ -1347,11 +1298,14 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                         const char* Query = "DELETE FROM accounts_sessions WHERE charid = %u";
                         _sql->Query(Query, map_session_data->charID);
                     }
+
                     destroy_arr(map_session_data->server_packet_data);
-                    map_session_list.erase(it++);
                     destroy(map_session_data);
-                    continue;
+
+                    map_session_list.erase(it++);
                 }
+
+                continue;
             }
         }
         else if (PChar != nullptr && PChar->isLinkDead)
