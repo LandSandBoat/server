@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -126,6 +126,26 @@ bool CBattleEntity::isInAssault()
     {
         return loc.zone->GetTypeMask() & ZONE_TYPE::INSTANCED &&
                (loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL);
+    }
+    return false;
+}
+
+bool CBattleEntity::isInAdoulin()
+{
+    if (loc.zone != nullptr)
+    {
+        ZONEID zoneid = loc.zone->GetID();
+        switch (zoneid)
+        {
+            case ZONEID::ZONE_WESTERN_ADOULIN:
+            case ZONEID::ZONE_EASTERN_ADOULIN:
+            case ZONEID::ZONE_MOG_GARDEN:
+            case ZONEID::ZONE_SILVER_KNIFE:
+            case ZONEID::ZONE_CELENNIA_MEMORIAL_LIBRARY:
+                return true;
+            default:
+                break;
+        }
     }
     return false;
 }

@@ -2821,6 +2821,10 @@ INSERT INTO `item_latents` VALUES (27367,399,16,52,5);   -- Pedagogy Loafers+1: 
 INSERT INTO `item_latents` VALUES (27367,399,16,52,6);   -- Pedagogy Loafers+1: Weather: Enhances Celerity and Alacrity Effect +16% (THUNDER)
 INSERT INTO `item_latents` VALUES (27367,399,16,52,7);   -- Pedagogy Loafers+1: Weather: Enhances Celerity and Alacrity Effect +16% (LIGHT)
 INSERT INTO `item_latents` VALUES (27367,399,16,52,8);   -- Pedagogy Loafers+1: Weather: Enhances Celerity and Alacrity Effect +16% (DARK)
+
+-- Councilor's Garb
+INSERT INTO `item_latents` VALUES (27923,76,24,63,0);   -- While in Adoulin: MOVE_SPEED_GEAR_BONUS +25% (retail testing shows +24%)
+
 INSERT INTO `item_latents` VALUES (28235,76,24,26,2);   -- Hachiya Kyahan: Dusk to dawn: MOVE_SPEED_GEAR_BONUS+25% (retail testing shows +24%)
 INSERT INTO `item_latents` VALUES (28256,76,24,26,2);   -- Hachiya Kyahan +1: Dusk to dawn: MOVE_SPEED_GEAR_BONUS+25% (retail testing shows +24%)
 INSERT INTO `item_latents` VALUES (28445,23,10,14,0);   -- Shetal Stone ATT +10 No Food Active

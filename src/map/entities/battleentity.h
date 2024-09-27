@@ -567,6 +567,7 @@ public:
 
     bool isDead();
     bool isAlive();
+    bool isInAdoulin();
     bool isInAssault();
     bool isInDynamis();
     bool isInMogHouse();
