@@ -30,13 +30,21 @@
 #include <unordered_map>
 
 // TODO: mariadb-connector-cpp triggers this. Remove once they fix it.
-// 4263 'function': member function does not override any base class member functions
 #ifdef WIN32
 #pragma warning(push)
-#pragma warning(disable : 4263)
+#pragma warning(disable : 4263) // 4263 'function': member function does not override any base class member functions
+#endif
+
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winconsistent-missing-override"
 #endif
 
 #include <conncpp.hpp>
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 
 #ifdef WIN32
 #pragma warning(pop)

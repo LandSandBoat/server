@@ -101,8 +101,7 @@ namespace guildutils
                     PItem->setInitialQuantity(_sql->GetIntData(5));
 
                     PItem->setQuantity(PItem->IsDailyIncrease() ? PItem->getInitialQuantity() : 0);
-                    PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *
-                                                                            (PItem->getMaxPrice() - PItem->getMinPrice())));
+                    PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) * (PItem->getMaxPrice() - PItem->getMinPrice())));
 
                     PGuildShop->InsertItem(PItem);
                 }
@@ -138,8 +137,7 @@ namespace guildutils
 
                 if (PItem != nullptr)
                 {
-                    PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *
-                                                                            (PItem->getMaxPrice() - PItem->getMinPrice())));
+                    PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) * (PItem->getMaxPrice() - PItem->getMinPrice())));
 
                     if (PItem->IsDailyIncrease())
                     {

@@ -181,14 +181,14 @@ bool CItemFurnishing::getOn2ndFloor()
 bool CItemFurnishing::isGardeningPot()
 {
     auto id = CItem::getID();
-    return id == 216 ||  // porcelain_flowerpot
-           id == 217 ||  // brass_flowerpot
-           id == 218 ||  // earthen_flowerpot
-           id == 219 ||  // ceramic_flowerpot
-           id == 220 ||  // wooden_flowerpot
-           id == 221 ||  // arcane_flowerpot
-           id == 3744 || // mandragora_pot
-           id == 3745 || // korrigan_pot
-           id == 3746 || // adenium_pot
-           id == 3747;   // citrullus_pot
+    return id == 216 || // porcelain_flowerpot
+        id == 217 ||    // brass_flowerpot
+        id == 218 ||    // earthen_flowerpot
+        id == 219 ||    // ceramic_flowerpot
+        id == 220 ||    // wooden_flowerpot
+        id == 221 ||    // arcane_flowerpot
+        id == 3744 ||   // mandragora_pot
+        id == 3745 ||   // korrigan_pot
+        id == 3746 ||   // adenium_pot
+        id == 3747;     // citrullus_pot
 }

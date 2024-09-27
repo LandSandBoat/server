@@ -93,8 +93,7 @@ void CPetController::DoRoamTick(time_point tick)
     {
         if (currentDistance < 35.0f)
         {
-            if (!PPet->PAI->PathFind->IsFollowingPath() ||
-                distance(PPet->PAI->PathFind->GetDestination(), PPet->PMaster->loc.p) > 2.0f) // recalculate path only if owner moves more than X yalms
+            if (!PPet->PAI->PathFind->IsFollowingPath() || distance(PPet->PAI->PathFind->GetDestination(), PPet->PMaster->loc.p) > 2.0f) // recalculate path only if owner moves more than X yalms
             {
                 if (!PPet->PAI->PathFind->PathAround(PPet->PMaster->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
                 {
@@ -142,9 +141,7 @@ bool CPetController::TryDeaggro()
     }
 
     // target is no longer valid, so wipe them from our enmity list
-    if (PTarget->isDead() || PTarget->isMounted() || PTarget->loc.zone->GetID() != PPet->loc.zone->GetID() ||
-        PPet->StatusEffectContainer->GetConfrontationEffect() != PTarget->StatusEffectContainer->GetConfrontationEffect() ||
-        PPet->getBattleID() != PTarget->getBattleID())
+    if (PTarget->isDead() || PTarget->isMounted() || PTarget->loc.zone->GetID() != PPet->loc.zone->GetID() || PPet->StatusEffectContainer->GetConfrontationEffect() != PTarget->StatusEffectContainer->GetConfrontationEffect() || PPet->getBattleID() != PTarget->getBattleID())
     {
         return true;
     }

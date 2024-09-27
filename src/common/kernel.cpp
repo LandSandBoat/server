@@ -121,9 +121,9 @@ sigfunc* compat_signal(int signo, sigfunc* func)
 #endif
 
     if (sigaction(signo, &sact, &oact) < 0)
-        return (SIG_ERR);
+        return SIG_ERR;
 
-    return (oact.sa_handler);
+    return oact.sa_handler;
 }
 #endif
 

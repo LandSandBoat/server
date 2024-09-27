@@ -238,7 +238,7 @@ if(NOT WIN32)
             )
         endif()
         add_library(mariadbclientcpp STATIC ${MACPP_SOURCES})
-        target_include_directories(mariadbclientcpp
+        target_include_directories(mariadbclientcpp SYSTEM
             PUBLIC
                 ${mariadb-connector-cpp_SOURCE_DIR}/include
             PRIVATE

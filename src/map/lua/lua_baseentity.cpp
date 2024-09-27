@@ -1653,15 +1653,7 @@ bool CLuaBaseEntity::canUseAbilities()
 {
     if (auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity))
     {
-        return !(PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SLEEP) ||
-                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_IMPAIRMENT) ||
-                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SLEEP_II) ||
-                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_STUN) ||
-                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA) ||
-                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_LULLABY) ||
-                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_PETRIFICATION) ||
-                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) ||
-                 !(m_PBaseEntity->PAI->CanChangeState()));
+        return !(PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SLEEP) || PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_IMPAIRMENT) || PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SLEEP_II) || PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_STUN) || PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA) || PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_LULLABY) || PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_PETRIFICATION) || PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) || !(m_PBaseEntity->PAI->CanChangeState()));
     }
 
     ShowError("canUseAbilities() : Wrong Entity Type");
@@ -1955,9 +1947,7 @@ float CLuaBaseEntity::checkDistance(sol::variadic_args va)
             posY = table.get<float>("y");
             posZ = table.get<float>("z");
         }
-        else if (va.get_type(0) == sol::type::number &&
-                 va.get_type(1) == sol::type::number &&
-                 va.get_type(2) == sol::type::number)
+        else if (va.get_type(0) == sol::type::number && va.get_type(1) == sol::type::number && va.get_type(2) == sol::type::number)
         {
             posX = va.get<float>(0);
             posY = va.get<float>(1);
@@ -5658,7 +5648,7 @@ bool CLuaBaseEntity::isSeekingParty()
         return false;
     }
 
-    return (static_cast<CCharEntity*>(m_PBaseEntity)->isSeekingParty());
+    return static_cast<CCharEntity*>(m_PBaseEntity)->isSeekingParty();
 }
 
 /************************************************************************
@@ -6724,7 +6714,7 @@ void CLuaBaseEntity::setMonstrosityData(sol::table table)
     // NOTE: This will populate m_PMonstrosity if it doesn't exist
     monstrosity::ReadMonstrosityData(PChar);
 
-    luautils::SetMonstrosityLuaTable(PChar, table);
+    luautils::SetMonstrosityLuaTable(PChar, std::move(table));
 
     monstrosity::WriteMonstrosityData(PChar);
 
@@ -7407,7 +7397,7 @@ uint8 CLuaBaseEntity::getQuestStatus(uint8 questLogID, uint16 questID)
         uint8 current  = PChar->m_questLog[questLogID].current[questID / 8] & (1 << (questID % 8));
         uint8 complete = PChar->m_questLog[questLogID].complete[questID / 8] & (1 << (questID % 8));
 
-        return (complete != 0 ? 2 : (current != 0 ? 1 : 0));
+        return complete != 0 ? 2 : (current != 0 ? 1 : 0);
     }
     else
     {
@@ -7757,7 +7747,7 @@ uint32 CLuaBaseEntity::getMissionStatus(uint8 missionLogID, sol::object const& m
                 ShowError("Lua::getMissionStatus: position %i is invalid", missionStatusPos);
                 return 0;
             }
-            return ((missionStatus >> (4 * missionStatusPos)) & 0xF);
+            return (missionStatus >> (4 * missionStatusPos)) & 0xF;
         }
         else
         {
@@ -7936,17 +7926,17 @@ void CLuaBaseEntity::triggerRoeEvent(uint8 eventNum, sol::object const& reqTable
 
     if (reqTable.get_type() == sol::type::table)
     {
-        for (const auto& kv : reqTable.as<sol::table>())
+        for (const auto& [key, value] : reqTable.as<sol::table>())
         {
-            if (kv.first.get_type() == sol::type::string)
+            if (key.get_type() == sol::type::string)
             {
-                if (kv.second.get_type() == sol::type::number)
+                if (value.get_type() == sol::type::number)
                 {
-                    roeEventData.emplace_back(RoeDatagram(kv.first.as<std::string>(), kv.second.as<uint32>()));
+                    roeEventData.emplace_back(key.as<std::string>(), value.as<uint32>());
                 }
-                else if (kv.second.get_type() == sol::type::string)
+                else if (value.get_type() == sol::type::string)
                 {
-                    roeEventData.emplace_back(RoeDatagram(kv.first.as<std::string>(), kv.second.as<std::string>()));
+                    roeEventData.emplace_back(key.as<std::string>(), value.as<std::string>());
                 }
             }
         }
@@ -9500,8 +9490,7 @@ void CLuaBaseEntity::takeDamage(int32 damage, sol::object const& attacker, sol::
     // Check to see if the target has a nightmare effect active, reset wakeUp accordingly
     // see mobskills/nightmare.lua for full explanation
     if (
-        PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP) &&
-        PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetTier() > 0)
+        PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP) && PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetTier() > 0)
     {
         // Don't break nightmare sleep from any dmg that doesn't break bind (DoT damage)
         if (breakBind == false)
@@ -9512,8 +9501,7 @@ void CLuaBaseEntity::takeDamage(int32 damage, sol::object const& attacker, sol::
         // Diabolos NM/mob ability
         // "Damage will not wake you up from Nightmare, only Cure and Benediction (Benediction will also remove the Bio effect)."
         if (
-            wakeUp == true &&
-            PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetTier() > 1)
+            wakeUp == true && PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetTier() > 1)
         {
             wakeUp = false;
         }
@@ -10068,7 +10056,7 @@ bool CLuaBaseEntity::hasLearnedWeaponskill(uint8 wsUnlockId)
         return false;
     }
 
-    return (charutils::hasLearnedWeaponskill(static_cast<CCharEntity*>(m_PBaseEntity), wsUnlockId) != 0);
+    return charutils::hasLearnedWeaponskill(static_cast<CCharEntity*>(m_PBaseEntity), wsUnlockId) != 0;
 }
 
 /************************************************************************
@@ -10644,8 +10632,7 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uint8
         {
             PTargetChar = PBattle->PParty->members[member];
         }
-        else if (PBattle->PParty->m_PAlliance != nullptr &&
-                 member <= PBattle->PParty->m_PAlliance->partyList.at(allianceparty)->members.size())
+        else if (PBattle->PParty->m_PAlliance != nullptr && member <= PBattle->PParty->m_PAlliance->partyList.at(allianceparty)->members.size())
         {
             PTargetChar = PBattle->PParty->m_PAlliance->partyList.at(allianceparty)->members[member];
         }
@@ -10733,8 +10720,7 @@ void CLuaBaseEntity::addPartyEffect(sol::variadic_args va)
         args[idx++] = v.get<uint16>();
     }
 
-    CStatusEffect* PEffect =
-        new CStatusEffect(static_cast<EFFECT>(args[0]), args[1], args[2], args[3], args[4], args[5], args[6]);
+    CStatusEffect* PEffect = new CStatusEffect(static_cast<EFFECT>(args[0]), args[1], args[2], args[3], args[4], args[5], args[6]);
 
     CBattleEntity* PEntity = ((CBattleEntity*)m_PBaseEntity);
 
@@ -11707,11 +11693,11 @@ void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
                 {
                     std::string barTitle = barObj.as<sol::table>().get<std::string>("title");
                     uint32      barValue = barObj.as<sol::table>().get<uint32>("value");
-                    bars.push_back(std::make_pair(barTitle, barValue));
+                    bars.emplace_back(barTitle, barValue);
                 }
                 else
                 {
-                    bars.push_back(std::make_pair("", 0));
+                    bars.emplace_back("", 0);
                 }
             }
             packet->addBars(std::move(bars));
@@ -12875,16 +12861,15 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
     auto tier       = va[7].is<uint16>() ? va[7].as<uint16>() : 0;
     auto effectFlag = va[8].is<uint32>() ? va[8].as<uint32>() : 0;
 
-    CStatusEffect* PEffect =
-        new CStatusEffect(effectID,
-                          effectIcon,
-                          power,
-                          tick,
-                          duration,
-                          subType,
-                          subPower,
-                          tier,
-                          effectFlag); // Effect Flag (i.e in lua xi.effectFlag.AURA will make this an aura effect)
+    CStatusEffect* PEffect = new CStatusEffect(effectID,
+                                               effectIcon,
+                                               power,
+                                               tick,
+                                               duration,
+                                               subType,
+                                               subPower,
+                                               tier,
+                                               effectFlag); // Effect Flag (i.e in lua xi.effectFlag.AURA will make this an aura effect)
 
     return ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->AddStatusEffect(PEffect, silent);
 }
@@ -13694,8 +13679,7 @@ bool CLuaBaseEntity::addBardSong(CLuaBaseEntity* PEntity, uint16 effectID, uint1
         CCharEntity* PCaster = static_cast<CCharEntity*>(PEntity->m_PBaseEntity);
         CItemWeapon* PItem   = static_cast<CItemWeapon*>(PCaster->getEquip(SLOT_RANGED));
 
-        if (PItem == nullptr || PItem->getID() == 65535 ||
-            !(PItem->getSkillType() == SKILL_STRING_INSTRUMENT || PItem->getSkillType() == SKILL_WIND_INSTRUMENT))
+        if (PItem == nullptr || PItem->getID() == 65535 || !(PItem->getSkillType() == SKILL_STRING_INSTRUMENT || PItem->getSkillType() == SKILL_WIND_INSTRUMENT))
         {
             maxSongs = 1;
         }
@@ -14711,7 +14695,7 @@ std::string CLuaBaseEntity::addSimpleGambit(uint16 targ, uint16 cond, uint32 con
     uint16 retry_delay = (retry != sol::lua_nil) ? retry.as<uint16>() : 0;
 
     Gambit_t g;
-    g.predicates.emplace_back(Predicate_t{ target, condition, condition_arg });
+    g.predicates.emplace_back(target, condition, condition_arg);
     g.actions.emplace_back(Action_t{ reaction, selector, selector_arg });
     g.retry_delay = retry_delay;
     g.identifier  = fmt::format("{}_{}_{}_{}_{}_{}_{}", targ, cond, condition_arg, react, select, selector_arg, retry_delay);

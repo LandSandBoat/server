@@ -159,7 +159,7 @@ bool CUContainer::IsLocked() const
 
 bool CUContainer::IsContainerEmpty()
 {
-    return (m_ContainerType == UCONTAINER_EMPTY);
+    return m_ContainerType == UCONTAINER_EMPTY;
 }
 
 /************************************************************************

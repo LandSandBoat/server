@@ -46,6 +46,7 @@ CTargetFind::CTargetFind(CBattleEntity* PBattleEntity)
 , m_zone(0)
 , m_findType{}
 , m_findFlags(0)
+, m_targetFlags(0)
 , m_conal(false)
 , m_scalar(0.0f)
 , m_APoint(nullptr)
@@ -339,8 +340,7 @@ void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, ALLEGIANCE
                 for (const auto& pair : list)
                 {
                     CBattleEntity* PBattleEntity = static_cast<CBattleEntity*>(pair.second);
-                    if (PBattleEntity && isWithinArea(&(PBattleEntity->loc.p)) && !PBattleEntity->isDead() &&
-                        PBattleEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
+                    if (PBattleEntity && isWithinArea(&(PBattleEntity->loc.p)) && !PBattleEntity->isDead() && PBattleEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
                     {
                         m_targets.emplace_back(PBattleEntity);
                     }
@@ -431,9 +431,7 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
         return false;
     }
 
-    if (m_PBattleEntity->StatusEffectContainer->GetConfrontationEffect() != PTarget->StatusEffectContainer->GetConfrontationEffect() ||
-        m_PBattleEntity->PBattlefield != PTarget->PBattlefield || m_PBattleEntity->PInstance != PTarget->PInstance ||
-        ((m_findFlags & FINDFLAGS_IGNORE_BATTLEID) == FINDFLAGS_NONE && m_PBattleEntity->getBattleID() != PTarget->getBattleID()))
+    if (m_PBattleEntity->StatusEffectContainer->GetConfrontationEffect() != PTarget->StatusEffectContainer->GetConfrontationEffect() || m_PBattleEntity->PBattlefield != PTarget->PBattlefield || m_PBattleEntity->PInstance != PTarget->PInstance || ((m_findFlags & FINDFLAGS_IGNORE_BATTLEID) == FINDFLAGS_NONE && m_PBattleEntity->getBattleID() != PTarget->getBattleID()))
     {
         return false;
     }
@@ -462,8 +460,7 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
 
     // If offensive, don't target other entities with same allegiance
     // Cures can be AoE with Accession and Majesty, ideally we would use SPELLGROUP or some other mechanism, but TargetFind wasn't designed with that in mind
-    if ((m_targetFlags & TARGET_ENEMY) && !(m_targetFlags & TARGET_PLAYER_PARTY) &&
-        m_PBattleEntity->allegiance == PTarget->allegiance)
+    if ((m_targetFlags & TARGET_ENEMY) && !(m_targetFlags & TARGET_PLAYER_PARTY) && m_PBattleEntity->allegiance == PTarget->allegiance)
     {
         return false;
     }

@@ -106,12 +106,12 @@ public:
     void addModifier(Mod mod, int16 modValue)
     {
         return addModifier(CModifier(mod, modValue));
-    };
+    }
     void addPetModifier(CPetModifier modifier);
     void addPetModifier(Mod mod, PetModType petType, int16 modValue)
     {
         return addPetModifier(CPetModifier(mod, petType, modValue));
-    };
+    }
     void addLatent(LATENT ConditionsID, uint16 ConditionsValue, Mod ModValue, int16 ModPower);
 
     bool delModifier(Mod mod, int16 modValue);

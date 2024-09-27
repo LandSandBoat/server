@@ -104,7 +104,7 @@ namespace synthutils
 
                 for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID) // range for all 8 synth skills
                 {
-                    skillValue   = (uint16)_sql->GetUIntData((skillID - 49 + 2));
+                    skillValue   = (uint16)_sql->GetUIntData(skillID - 49 + 2);
                     currentSkill = PChar->RealSkills.skill[skillID];
 
                     // skill write in the quantity field of cells 9-16
@@ -208,7 +208,7 @@ namespace synthutils
                 break;
         }
 
-        return (PChar->getMod(ModID) == 0);
+        return PChar->getMod(ModID) == 0;
     }
 
     /**************************************************************************************
@@ -764,10 +764,7 @@ namespace synthutils
         // Push "Synthesis failed" messages.
         uint16 currentZone = PChar->loc.zone->GetID();
 
-        if (currentZone &&
-            currentZone != ZONE_MONORAIL_PRE_RELEASE &&
-            currentZone != ZONE_49 &&
-            currentZone < MAX_ZONEID)
+        if (currentZone && currentZone != ZONE_MONORAIL_PRE_RELEASE && currentZone != ZONE_49 && currentZone < MAX_ZONEID)
         {
             PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CSynthResultMessagePacket(PChar, SYNTH_FAIL));
         }
@@ -924,8 +921,7 @@ namespace synthutils
                 // Check whether the cheat type action requires us to actively block the cheating attempt
                 // Note: Due to technical reasons jail action also forces us to break the synth
                 // (player cannot be zoned while synth in progress).
-                bool shouldblock = anticheat::GetCheatPunitiveAction(anticheat::CheatID::CHEAT_ID_FASTSYNTH, nullptr, 0) &
-                                   (anticheat::CHEAT_ACTION_BLOCK | anticheat::CHEAT_ACTION_JAIL);
+                bool shouldblock = anticheat::GetCheatPunitiveAction(anticheat::CheatID::CHEAT_ID_FASTSYNTH, nullptr, 0) & (anticheat::CHEAT_ACTION_BLOCK | anticheat::CHEAT_ACTION_JAIL);
                 if (shouldblock)
                 {
                     // Block the cheat by forcing the synth to fail

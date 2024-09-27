@@ -144,7 +144,7 @@ void CItem::setType(uint8 type)
 
 bool CItem::isType(ITEM_TYPE type) const
 {
-    return (m_type & type);
+    return m_type & type;
 }
 
 /************************************************************************
@@ -160,7 +160,7 @@ void CItem::setSubType(uint8 subtype)
 
 bool CItem::isSubType(ITEM_SUBTYPE subtype) const
 {
-    return (m_subtype & subtype);
+    return m_subtype & subtype;
 }
 
 /************************************************************************

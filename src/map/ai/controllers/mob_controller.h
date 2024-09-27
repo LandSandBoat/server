@@ -104,10 +104,10 @@ private:
     time_point m_NeutralTime;
     time_point m_WaitTime;
     time_point m_mobHealTime;
-    FollowType m_followType;
 
     bool       m_firstSpell{ true };
     time_point m_LastRoamScript{ time_point::min() };
+    FollowType m_followType{ FollowType::None };
 };
 
 #endif // _AI_CONTROLLER_H

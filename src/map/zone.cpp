@@ -343,7 +343,7 @@ zoneLine_t* CZone::GetZoneLine(uint32 zoneLineID)
     {
         if ((*i)->m_zoneLineID == zoneLineID)
         {
-            return (*i);
+            return *i;
         }
     }
     return nullptr;
@@ -697,10 +697,7 @@ void CZone::UpdateWeather()
 
     // This check is incorrect, fog is not simply a time of day, though it may consistently happen in SOME zones
     // (Al'Taieu likely has it every morning, while Atohwa Chasm can have it at random any time of day)
-    if ((CurrentVanaDate >= StartFogVanaDate) &&
-        (CurrentVanaDate < EndFogVanaDate) &&
-        (Weather < WEATHER_HOT_SPELL) &&
-        !(GetTypeMask() & ZONE_TYPE::CITY))
+    if ((CurrentVanaDate >= StartFogVanaDate) && (CurrentVanaDate < EndFogVanaDate) && (Weather < WEATHER_HOT_SPELL) && !(GetTypeMask() & ZONE_TYPE::CITY))
     {
         Weather = WEATHER_FOG;
         // Force the weather to change by 7 am
@@ -1008,13 +1005,11 @@ void CZone::ForEachNpc(std::function<void(CNpcEntity*)> const& func)
 void CZone::createZoneTimers()
 {
     TracyZoneScoped;
-    ZoneTimer =
-        CTaskMgr::getInstance()->AddTask(m_zoneName, server_clock::now(), this, CTaskMgr::TASK_INTERVAL, zone_server,
-                                         std::chrono::milliseconds(static_cast<uint32>(server_tick_interval)));
+    ZoneTimer = CTaskMgr::getInstance()->AddTask(m_zoneName, server_clock::now(), this, CTaskMgr::TASK_INTERVAL, zone_server,
+                                                 std::chrono::milliseconds(static_cast<uint32>(server_tick_interval)));
 
-    ZoneTimerTriggerAreas =
-        CTaskMgr::getInstance()->AddTask(m_zoneName + "TriggerAreas", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, zone_trigger_area,
-                                         std::chrono::milliseconds(static_cast<uint32>(server_trigger_area_interval)));
+    ZoneTimerTriggerAreas = CTaskMgr::getInstance()->AddTask(m_zoneName + "TriggerAreas", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, zone_trigger_area,
+                                                             std::chrono::milliseconds(static_cast<uint32>(server_trigger_area_interval)));
 }
 
 void CZone::CharZoneIn(CCharEntity* PChar)

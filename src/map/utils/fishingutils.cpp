@@ -128,11 +128,10 @@ namespace fishingutils
 
     void CreateFishingPools()
     {
-        const char* Query =
-            "SELECT fc.zoneid,fc.areaid,fg.fishid,fg.pool_size,fg.restock_rate "
-            "FROM fishing_group fg "
-            "JOIN fishing_catch fc USING(groupid)";
-        int32 ret = _sql->Query(Query);
+        const char* Query = "SELECT fc.zoneid,fc.areaid,fg.fishid,fg.pool_size,fg.restock_rate "
+                            "FROM fishing_group fg "
+                            "JOIN fishing_catch fc USING(groupid)";
+        int32       ret   = _sql->Query(Query);
 
         if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
@@ -378,7 +377,7 @@ namespace fishingutils
     {
         uint8 bonusAdd = (legendary) ? rod->lgdBonusAtk : 0;
 
-        return (uint16)std::floor(difficulty * (((static_cast<float>(rod->fishAttack) + bonusAdd) / 100.0f)) * 20.0f);
+        return (uint16)std::floor(difficulty * ((static_cast<float>(rod->fishAttack) + bonusAdd) / 100.0f) * 20.0f);
     }
 
     uint16 CalculateHeal(bool legendary, uint8 difficulty, rod_t* rod)
@@ -519,7 +518,7 @@ namespace fishingutils
         // Skill modifier
         if (catchSkill > fishingSkill + 7)
         {
-            penalty += (uint8)std::floor((catchSkill - (fishingSkill + 7)));
+            penalty += (uint8)std::floor(catchSkill - (fishingSkill + 7));
         }
         else if (fishingSkill + 10 > catchSkill)
         {
@@ -536,7 +535,7 @@ namespace fishingutils
         {
             bonus += 9;
         }
-        else if ((gameHour >= 8 && gameHour <= 15))
+        else if (gameHour >= 8 && gameHour <= 15)
         {
             bonus += 3;
         }
@@ -1073,7 +1072,7 @@ namespace fishingutils
 
     bool IsLiveBait(bait_t* bait)
     {
-        return (bait->baitID == DRILL_CALAMARY || bait->baitID == DWARF_PUGIL);
+        return bait->baitID == DRILL_CALAMARY || bait->baitID == DWARF_PUGIL;
     }
 
     uint8 GetFishingSkill(CCharEntity* PChar)
@@ -1298,7 +1297,7 @@ namespace fishingutils
             return true;
         }
 
-        return (dx * dx + dz * dz <= radius * radius);
+        return dx * dx + dz * dz <= radius * radius;
     }
 
     fishingarea_t* GetFishingArea(CCharEntity* PChar)
@@ -3253,7 +3252,8 @@ namespace fishingutils
             while (_sql->NextRow() == SQL_SUCCESS)
             {
                 FishingBaitAffinities[(uint16)_sql->GetUIntData(0)]
-                                     [_sql->GetUIntData(1)] = (uint8)_sql->GetUIntData(2);
+                                     [_sql->GetUIntData(1)]
+                    = (uint8)_sql->GetUIntData(2);
             }
         }
     }
@@ -3273,7 +3273,8 @@ namespace fishingutils
             while (_sql->NextRow() == SQL_SUCCESS)
             {
                 FishingGroups[(uint16)_sql->GetUIntData(0)]
-                             [_sql->GetUIntData(1)] = (uint16)_sql->GetUIntData(2);
+                             [_sql->GetUIntData(1)]
+                    = (uint16)_sql->GetUIntData(2);
             }
         }
     }
@@ -3293,7 +3294,8 @@ namespace fishingutils
             while (_sql->NextRow() == SQL_SUCCESS)
             {
                 FishingCatchLists[(uint16)_sql->GetUIntData(0)]
-                                 [(uint8)_sql->GetUIntData(1)] = (uint16)_sql->GetUIntData(2);
+                                 [(uint8)_sql->GetUIntData(1)]
+                    = (uint16)_sql->GetUIntData(2);
             }
         }
     }
@@ -3359,5 +3361,5 @@ namespace fishingutils
             destroy(fish.second);
         }
         FishList.clear();
-    };
+    }
 } // namespace fishingutils

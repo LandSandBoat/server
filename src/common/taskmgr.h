@@ -35,7 +35,7 @@ struct greater_equal
 { // functor for operator>
     bool operator()(const _Ty& _Left, const _Ty& _Right) const
     { // apply operator> to operands
-        return ((*_Left) > (*_Right));
+        return (*_Left) > (*_Right);
     }
 };
 
@@ -57,7 +57,7 @@ public:
     TaskList_t& getTaskList()
     {
         return m_TaskList;
-    };
+    }
 
     CTask* AddTask(CTask*);
     CTask* AddTask(std::string const& InitName, time_point InitTick, std::any InitData, TASKTYPE InitType, TaskFunc_t InitFunc, duration InitInterval = 1s);
@@ -83,7 +83,7 @@ public:
     , m_data(InitData)
     , m_func(InitFunc)
     {
-    };
+    }
 
     std::string m_name;
     TASKTYPE    m_type;
@@ -96,17 +96,17 @@ public:
 inline bool operator<(const CTaskMgr::CTask& a, const CTaskMgr::CTask& b)
 {
     return a.m_tick < b.m_tick;
-};
+}
 
 inline bool operator>(const CTaskMgr::CTask& a, const CTaskMgr::CTask& b)
 {
     return a.m_tick > b.m_tick;
-};
+}
 
 inline bool operator>=(const CTaskMgr::CTask& a, const CTaskMgr::CTask& b)
 {
     return a.m_tick >= b.m_tick;
-};
+}
 
 inline bool operator<=(const CTaskMgr::CTask& a, const CTaskMgr::CTask& b)
 {

@@ -38,5 +38,5 @@ CEntityVisualPacket::CEntityVisualPacket(CBaseEntity* PEntity, const char type[4
         ref<uint16>(0x10) = PEntity->targid;
         ref<uint16>(0x12) = PEntity->targid;
     }
-    memcpy(data + ((0x0C)), type, 4);
+    memcpy(data + (0x0C), type, 4);
 }

@@ -171,19 +171,19 @@ namespace mobutils
         switch (rank)
         {
             case 1:
-                return (5 + ((lvl - 1) * 50) / 100); // A
+                return 5 + ((lvl - 1) * 50) / 100; // A
             case 2:
-                return (4 + ((lvl - 1) * 45) / 100); // B
+                return 4 + ((lvl - 1) * 45) / 100; // B
             case 3:
-                return (4 + ((lvl - 1) * 40) / 100); // C
+                return 4 + ((lvl - 1) * 40) / 100; // C
             case 4:
-                return (3 + ((lvl - 1) * 35) / 100); // D
+                return 3 + ((lvl - 1) * 35) / 100; // D
             case 5:
-                return (3 + ((lvl - 1) * 30) / 100); // E
+                return 3 + ((lvl - 1) * 30) / 100; // E
             case 6:
-                return (2 + ((lvl - 1) * 25) / 100); // F
+                return 2 + ((lvl - 1) * 25) / 100; // F
             case 7:
-                return (2 + ((lvl - 1) * 20) / 100); // G
+                return 2 + ((lvl - 1) * 20) / 100; // G
         }
 
         return 0;
@@ -293,100 +293,7 @@ namespace mobutils
     bool CheckSubJobZone(CMobEntity* PMob)
     {
         auto zoneId = PMob->getZone();
-        if (zoneId != 0 && (zoneId == ZONE_WEST_RONFAURE ||
-                            zoneId == ZONE_EAST_RONFAURE ||
-                            zoneId == ZONE_LA_THEINE_PLATEAU ||
-                            zoneId == ZONE_VALKURM_DUNES ||
-                            zoneId == ZONE_JUGNER_FOREST ||
-                            zoneId == ZONE_BATALLIA_DOWNS ||
-                            zoneId == ZONE_NORTH_GUSTABERG ||
-                            zoneId == ZONE_SOUTH_GUSTABERG ||
-                            zoneId == ZONE_KONSCHTAT_HIGHLANDS ||
-                            zoneId == ZONE_PASHHOW_MARSHLANDS ||
-                            zoneId == ZONE_ROLANBERRY_FIELDS ||
-                            zoneId == ZONE_BEAUCEDINE_GLACIER ||
-                            zoneId == ZONE_XARCABARD ||
-                            zoneId == ZONE_CAPE_TERIGGAN ||
-                            zoneId == ZONE_EASTERN_ALTEPA_DESERT ||
-                            zoneId == ZONE_WEST_SARUTABARUTA ||
-                            zoneId == ZONE_EAST_SARUTABARUTA ||
-                            zoneId == ZONE_TAHRONGI_CANYON ||
-                            zoneId == ZONE_BUBURIMU_PENINSULA ||
-                            zoneId == ZONE_MERIPHATAUD_MOUNTAINS ||
-                            zoneId == ZONE_SAUROMUGUE_CHAMPAIGN ||
-                            zoneId == ZONE_THE_SANCTUARY_OF_ZITAH ||
-                            zoneId == ZONE_ROMAEVE ||
-                            zoneId == ZONE_YUHTUNGA_JUNGLE ||
-                            zoneId == ZONE_YHOATOR_JUNGLE ||
-                            zoneId == ZONE_WESTERN_ALTEPA_DESERT ||
-                            zoneId == ZONE_QUFIM_ISLAND ||
-                            zoneId == ZONE_BEHEMOTHS_DOMINION ||
-                            zoneId == ZONE_VALLEY_OF_SORROWS ||
-                            zoneId == ZONE_HORLAIS_PEAK ||
-                            zoneId == ZONE_GHELSBA_OUTPOST ||
-                            zoneId == ZONE_FORT_GHELSBA ||
-                            zoneId == ZONE_YUGHOTT_GROTTO ||
-                            zoneId == ZONE_PALBOROUGH_MINES ||
-                            zoneId == ZONE_WAUGHROON_SHRINE ||
-                            zoneId == ZONE_GIDDEUS ||
-                            zoneId == ZONE_BALGAS_DAIS ||
-                            zoneId == ZONE_BEADEAUX ||
-                            zoneId == ZONE_QULUN_DOME ||
-                            zoneId == ZONE_DAVOI ||
-                            zoneId == ZONE_MONASTIC_CAVERN ||
-                            zoneId == ZONE_CASTLE_OZTROJA ||
-                            zoneId == ZONE_ALTAR_ROOM ||
-                            zoneId == ZONE_THE_BOYAHDA_TREE ||
-                            zoneId == ZONE_DRAGONS_AERY ||
-                            zoneId == ZONE_MIDDLE_DELKFUTTS_TOWER ||
-                            zoneId == ZONE_UPPER_DELKFUTTS_TOWER ||
-                            zoneId == ZONE_TEMPLE_OF_UGGALEPIH ||
-                            zoneId == ZONE_DEN_OF_RANCOR ||
-                            zoneId == ZONE_CASTLE_ZVAHL_BAILEYS ||
-                            zoneId == ZONE_CASTLE_ZVAHL_KEEP ||
-                            zoneId == ZONE_SACRIFICIAL_CHAMBER ||
-                            zoneId == ZONE_THRONE_ROOM ||
-                            zoneId == ZONE_RANGUEMONT_PASS ||
-                            zoneId == ZONE_BOSTAUNIEUX_OUBLIETTE ||
-                            zoneId == ZONE_CHAMBER_OF_ORACLES ||
-                            zoneId == ZONE_TORAIMARAI_CANAL ||
-                            zoneId == ZONE_FULL_MOON_FOUNTAIN ||
-                            zoneId == ZONE_ZERUHN_MINES ||
-                            zoneId == ZONE_KORROLOKA_TUNNEL ||
-                            zoneId == ZONE_KUFTAL_TUNNEL ||
-                            zoneId == ZONE_SEA_SERPENT_GROTTO ||
-                            zoneId == ZONE_VELUGANNON_PALACE ||
-                            zoneId == ZONE_THE_SHRINE_OF_RUAVITAU ||
-                            zoneId == ZONE_STELLAR_FULCRUM ||
-                            zoneId == ZONE_LALOFF_AMPHITHEATER ||
-                            zoneId == ZONE_THE_CELESTIAL_NEXUS ||
-                            zoneId == ZONE_LOWER_DELKFUTTS_TOWER ||
-                            zoneId == ZONE_KING_RANPERRES_TOMB ||
-                            zoneId == ZONE_DANGRUF_WADI ||
-                            zoneId == ZONE_INNER_HORUTOTO_RUINS ||
-                            zoneId == ZONE_ORDELLES_CAVES ||
-                            zoneId == ZONE_OUTER_HORUTOTO_RUINS ||
-                            zoneId == ZONE_THE_ELDIEME_NECROPOLIS ||
-                            zoneId == ZONE_GUSGEN_MINES ||
-                            zoneId == ZONE_CRAWLERS_NEST ||
-                            zoneId == ZONE_MAZE_OF_SHAKHRAMI ||
-                            zoneId == ZONE_GARLAIGE_CITADEL ||
-                            zoneId == ZONE_CLOISTER_OF_GALES ||
-                            zoneId == ZONE_CLOISTER_OF_STORMS ||
-                            zoneId == ZONE_CLOISTER_OF_FROST ||
-                            zoneId == ZONE_FEIYIN ||
-                            zoneId == ZONE_IFRITS_CAULDRON ||
-                            zoneId == ZONE_QUBIA_ARENA ||
-                            zoneId == ZONE_CLOISTER_OF_FLAMES ||
-                            zoneId == ZONE_QUICKSAND_CAVES ||
-                            zoneId == ZONE_CLOISTER_OF_TREMORS ||
-                            zoneId == ZONE_CLOISTER_OF_TIDES ||
-                            zoneId == ZONE_GUSTAV_TUNNEL ||
-                            zoneId == ZONE_LABYRINTH_OF_ONZOZO ||
-                            zoneId == ZONE_SHIP_BOUND_FOR_SELBINA ||
-                            zoneId == ZONE_SHIP_BOUND_FOR_MHAURA ||
-                            zoneId == ZONE_SHIP_BOUND_FOR_SELBINA_PIRATES ||
-                            zoneId == ZONE_SHIP_BOUND_FOR_MHAURA_PIRATES))
+        if (zoneId != 0 && (zoneId == ZONE_WEST_RONFAURE || zoneId == ZONE_EAST_RONFAURE || zoneId == ZONE_LA_THEINE_PLATEAU || zoneId == ZONE_VALKURM_DUNES || zoneId == ZONE_JUGNER_FOREST || zoneId == ZONE_BATALLIA_DOWNS || zoneId == ZONE_NORTH_GUSTABERG || zoneId == ZONE_SOUTH_GUSTABERG || zoneId == ZONE_KONSCHTAT_HIGHLANDS || zoneId == ZONE_PASHHOW_MARSHLANDS || zoneId == ZONE_ROLANBERRY_FIELDS || zoneId == ZONE_BEAUCEDINE_GLACIER || zoneId == ZONE_XARCABARD || zoneId == ZONE_CAPE_TERIGGAN || zoneId == ZONE_EASTERN_ALTEPA_DESERT || zoneId == ZONE_WEST_SARUTABARUTA || zoneId == ZONE_EAST_SARUTABARUTA || zoneId == ZONE_TAHRONGI_CANYON || zoneId == ZONE_BUBURIMU_PENINSULA || zoneId == ZONE_MERIPHATAUD_MOUNTAINS || zoneId == ZONE_SAUROMUGUE_CHAMPAIGN || zoneId == ZONE_THE_SANCTUARY_OF_ZITAH || zoneId == ZONE_ROMAEVE || zoneId == ZONE_YUHTUNGA_JUNGLE || zoneId == ZONE_YHOATOR_JUNGLE || zoneId == ZONE_WESTERN_ALTEPA_DESERT || zoneId == ZONE_QUFIM_ISLAND || zoneId == ZONE_BEHEMOTHS_DOMINION || zoneId == ZONE_VALLEY_OF_SORROWS || zoneId == ZONE_HORLAIS_PEAK || zoneId == ZONE_GHELSBA_OUTPOST || zoneId == ZONE_FORT_GHELSBA || zoneId == ZONE_YUGHOTT_GROTTO || zoneId == ZONE_PALBOROUGH_MINES || zoneId == ZONE_WAUGHROON_SHRINE || zoneId == ZONE_GIDDEUS || zoneId == ZONE_BALGAS_DAIS || zoneId == ZONE_BEADEAUX || zoneId == ZONE_QULUN_DOME || zoneId == ZONE_DAVOI || zoneId == ZONE_MONASTIC_CAVERN || zoneId == ZONE_CASTLE_OZTROJA || zoneId == ZONE_ALTAR_ROOM || zoneId == ZONE_THE_BOYAHDA_TREE || zoneId == ZONE_DRAGONS_AERY || zoneId == ZONE_MIDDLE_DELKFUTTS_TOWER || zoneId == ZONE_UPPER_DELKFUTTS_TOWER || zoneId == ZONE_TEMPLE_OF_UGGALEPIH || zoneId == ZONE_DEN_OF_RANCOR || zoneId == ZONE_CASTLE_ZVAHL_BAILEYS || zoneId == ZONE_CASTLE_ZVAHL_KEEP || zoneId == ZONE_SACRIFICIAL_CHAMBER || zoneId == ZONE_THRONE_ROOM || zoneId == ZONE_RANGUEMONT_PASS || zoneId == ZONE_BOSTAUNIEUX_OUBLIETTE || zoneId == ZONE_CHAMBER_OF_ORACLES || zoneId == ZONE_TORAIMARAI_CANAL || zoneId == ZONE_FULL_MOON_FOUNTAIN || zoneId == ZONE_ZERUHN_MINES || zoneId == ZONE_KORROLOKA_TUNNEL || zoneId == ZONE_KUFTAL_TUNNEL || zoneId == ZONE_SEA_SERPENT_GROTTO || zoneId == ZONE_VELUGANNON_PALACE || zoneId == ZONE_THE_SHRINE_OF_RUAVITAU || zoneId == ZONE_STELLAR_FULCRUM || zoneId == ZONE_LALOFF_AMPHITHEATER || zoneId == ZONE_THE_CELESTIAL_NEXUS || zoneId == ZONE_LOWER_DELKFUTTS_TOWER || zoneId == ZONE_KING_RANPERRES_TOMB || zoneId == ZONE_DANGRUF_WADI || zoneId == ZONE_INNER_HORUTOTO_RUINS || zoneId == ZONE_ORDELLES_CAVES || zoneId == ZONE_OUTER_HORUTOTO_RUINS || zoneId == ZONE_THE_ELDIEME_NECROPOLIS || zoneId == ZONE_GUSGEN_MINES || zoneId == ZONE_CRAWLERS_NEST || zoneId == ZONE_MAZE_OF_SHAKHRAMI || zoneId == ZONE_GARLAIGE_CITADEL || zoneId == ZONE_CLOISTER_OF_GALES || zoneId == ZONE_CLOISTER_OF_STORMS || zoneId == ZONE_CLOISTER_OF_FROST || zoneId == ZONE_FEIYIN || zoneId == ZONE_IFRITS_CAULDRON || zoneId == ZONE_QUBIA_ARENA || zoneId == ZONE_CLOISTER_OF_FLAMES || zoneId == ZONE_QUICKSAND_CAVES || zoneId == ZONE_CLOISTER_OF_TREMORS || zoneId == ZONE_CLOISTER_OF_TIDES || zoneId == ZONE_GUSTAV_TUNNEL || zoneId == ZONE_LABYRINTH_OF_ONZOZO || zoneId == ZONE_SHIP_BOUND_FOR_SELBINA || zoneId == ZONE_SHIP_BOUND_FOR_MHAURA || zoneId == ZONE_SHIP_BOUND_FOR_SELBINA_PIRATES || zoneId == ZONE_SHIP_BOUND_FOR_MHAURA_PIRATES))
         {
             return true;
         }

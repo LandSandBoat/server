@@ -250,8 +250,7 @@ bool CAutomatonController::TryShieldBash()
 {
     CState* PState = PTarget->PAI->GetCurrentState();
 
-    if (m_shieldbashCooldown > 0s && PState && PState->CanInterrupt() &&
-        m_Tick > m_LastShieldBashTime + (m_shieldbashCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_SHIELD_BASH_DELAY))))
+    if (m_shieldbashCooldown > 0s && PState && PState->CanInterrupt() && m_Tick > m_LastShieldBashTime + (m_shieldbashCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_SHIELD_BASH_DELAY))))
     {
         return MobSkill(PTarget->targid, m_ShieldBashAbility);
     }
@@ -261,8 +260,7 @@ bool CAutomatonController::TryShieldBash()
 
 bool CAutomatonController::TrySpellcast(const CurrentManeuvers& maneuvers)
 {
-    if (!PAutomaton->PMaster || m_magicCooldown == 0s ||
-        m_Tick <= m_LastMagicTime + (m_magicCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_MAGIC_DELAY))) || !CanCastSpells())
+    if (!PAutomaton->PMaster || m_magicCooldown == 0s || m_Tick <= m_LastMagicTime + (m_magicCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_MAGIC_DELAY))) || !CanCastSpells())
     {
         return false;
     }
@@ -402,8 +400,7 @@ bool CAutomatonController::TrySpellcast(const CurrentManeuvers& maneuvers)
                 m_LastEnhanceTime = m_Tick;
                 return true;
             }
-            else if ((maneuvers.dark || PAutomaton->GetHPP() <= 75 || PAutomaton->GetMPP() <= 75) &&
-                     TryEnfeeble(maneuvers)) // Dark or self HPP/MPP <= 75 -> Enfeeble
+            else if ((maneuvers.dark || PAutomaton->GetHPP() <= 75 || PAutomaton->GetMPP() <= 75) && TryEnfeeble(maneuvers)) // Dark or self HPP/MPP <= 75 -> Enfeeble
             {
                 m_LastEnfeebleTime = m_Tick;
                 return true;
@@ -421,8 +418,7 @@ bool CAutomatonController::TrySpellcast(const CurrentManeuvers& maneuvers)
 
 bool CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers)
 {
-    if (!PAutomaton->PMaster || m_healCooldown == 0s ||
-        m_Tick <= m_LastHealTime + (m_healCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_HEALING_DELAY))))
+    if (!PAutomaton->PMaster || m_healCooldown == 0s || m_Tick <= m_LastHealTime + (m_healCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_HEALING_DELAY))))
     {
         return false;
     }
@@ -1424,8 +1420,7 @@ bool CAutomatonController::TryEnhance()
         Cast(PAutomaton->targid, SpellID::Shellra_V);
     }
 
-    if (PRegenTarget &&
-        !(PRegenTarget->StatusEffectContainer->HasStatusEffect(EFFECT_REGEN) || PRegenTarget->StatusEffectContainer->HasStatusEffect(EFFECT_GEO_REGEN)))
+    if (PRegenTarget && !(PRegenTarget->StatusEffectContainer->HasStatusEffect(EFFECT_REGEN) || PRegenTarget->StatusEffectContainer->HasStatusEffect(EFFECT_GEO_REGEN)))
     {
         if (Cast(PRegenTarget->targid, SpellID::Regen_III) || Cast(PRegenTarget->targid, SpellID::Regen_II) || Cast(PRegenTarget->targid, SpellID::Regen))
         {
@@ -1435,9 +1430,7 @@ bool CAutomatonController::TryEnhance()
 
     if (PProtectTarget)
     {
-        if (Cast(PProtectTarget->targid, SpellID::Protect_V) || Cast(PProtectTarget->targid, SpellID::Protect_IV) ||
-            Cast(PProtectTarget->targid, SpellID::Protect_III) || Cast(PProtectTarget->targid, SpellID::Protect_II) ||
-            Cast(PProtectTarget->targid, SpellID::Protect))
+        if (Cast(PProtectTarget->targid, SpellID::Protect_V) || Cast(PProtectTarget->targid, SpellID::Protect_IV) || Cast(PProtectTarget->targid, SpellID::Protect_III) || Cast(PProtectTarget->targid, SpellID::Protect_II) || Cast(PProtectTarget->targid, SpellID::Protect))
         {
             return true;
         }
@@ -1445,8 +1438,7 @@ bool CAutomatonController::TryEnhance()
 
     if (PShellTarget)
     {
-        if (Cast(PShellTarget->targid, SpellID::Shell_V) || Cast(PShellTarget->targid, SpellID::Shell_IV) || Cast(PShellTarget->targid, SpellID::Shell_III) ||
-            Cast(PShellTarget->targid, SpellID::Shell_II) || Cast(PShellTarget->targid, SpellID::Shell))
+        if (Cast(PShellTarget->targid, SpellID::Shell_V) || Cast(PShellTarget->targid, SpellID::Shell_IV) || Cast(PShellTarget->targid, SpellID::Shell_III) || Cast(PShellTarget->targid, SpellID::Shell_II) || Cast(PShellTarget->targid, SpellID::Shell))
         {
             return true;
         }
@@ -1498,8 +1490,7 @@ bool CAutomatonController::TryTPMove()
         for (auto skillid : FamilySkills)
         {
             auto* PSkill = battleutils::GetMobSkill(skillid);
-            if (PSkill && PAutomaton->GetSkill(skilltype) > PSkill->getParam() && PSkill->getParam() != -1 &&
-                distance(PAutomaton->loc.p, PTarget->loc.p) < PSkill->getRadius())
+            if (PSkill && PAutomaton->GetSkill(skilltype) > PSkill->getParam() && PSkill->getParam() != -1 && distance(PAutomaton->loc.p, PTarget->loc.p) < PSkill->getRadius())
             {
                 validSkills.emplace_back(PSkill);
             }
@@ -1690,14 +1681,14 @@ namespace automaton
     bool CanUseSpell(CAutomatonEntity* PCaster, SpellID spellid)
     {
         const AutomatonSpell& PSpell = autoSpellList[spellid];
-        return ((PCaster->GetSkill(SKILL_AUTOMATON_MAGIC) >= PSpell.skilllevel) && (PSpell.heads & (1 << ((uint8)PCaster->getHead() - 1))));
+        return (PCaster->GetSkill(SKILL_AUTOMATON_MAGIC) >= PSpell.skilllevel) && (PSpell.heads & (1 << ((uint8)PCaster->getHead() - 1)));
     }
 
     bool CanUseEnfeeble(CBattleEntity* PTarget, SpellID spell)
     {
         const AutomatonSpell& PSpell   = autoSpellList[spell];
         auto&                 statuses = PTarget->StatusEffectContainer;
-        return (!statuses->HasStatusEffect(PSpell.enfeeble) && !PTarget->hasImmunity(PSpell.immunity));
+        return !statuses->HasStatusEffect(PSpell.enfeeble) && !PTarget->hasImmunity(PSpell.immunity);
     }
 
     std::optional<SpellID> FindNaSpell(CStatusEffect* PStatus)

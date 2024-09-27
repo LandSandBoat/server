@@ -113,14 +113,7 @@ namespace synergyutils
         // TODO: Use a map instead of a vector for faster lookups
         for (const auto& recipe : synergyRecipes)
         {
-            if (recipe.ingredient1 == ingredient1 &&
-                recipe.ingredient2 == ingredient2 &&
-                recipe.ingredient3 == ingredient3 &&
-                recipe.ingredient4 == ingredient4 &&
-                recipe.ingredient5 == ingredient5 &&
-                recipe.ingredient6 == ingredient6 &&
-                recipe.ingredient7 == ingredient7 &&
-                recipe.ingredient8 == ingredient8)
+            if (recipe.ingredient1 == ingredient1 && recipe.ingredient2 == ingredient2 && recipe.ingredient3 == ingredient3 && recipe.ingredient4 == ingredient4 && recipe.ingredient5 == ingredient5 && recipe.ingredient6 == ingredient6 && recipe.ingredient7 == ingredient7 && recipe.ingredient8 == ingredient8)
             {
                 return recipe;
             }

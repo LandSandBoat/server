@@ -22,6 +22,7 @@
 #include "lua_zone.h"
 
 #include "common/logging.h"
+#include "common/timer.h"
 
 #include "entities/charentity.h"
 #include "entities/npcentity.h"
@@ -79,9 +80,7 @@ void CLuaZone::resetLocalVars()
 void CLuaZone::registerTriggerArea(uint32 triggerAreaID, float x1, float y1, float z1, float x2, float y2, float z2)
 {
     bool circleRegion = false;
-    if (approximatelyEqual(x2, 0.0f) &&
-        approximatelyEqual(y2, 0.0f) &&
-        approximatelyEqual(z2, 0.0f))
+    if (approximatelyEqual(x2, 0.0f) && approximatelyEqual(y2, 0.0f) && approximatelyEqual(z2, 0.0f))
     {
         circleRegion = true; // Parameters were 0, we must be a circle.
     }

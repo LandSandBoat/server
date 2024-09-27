@@ -74,9 +74,7 @@ namespace gambits
 
         // TODO: Is this necessary?
         // Not already doing something
-        if (POwner->PAI->IsCurrentState<CAbilityState>() || POwner->PAI->IsCurrentState<CRangeState>() || POwner->PAI->IsCurrentState<CMagicState>() ||
-            POwner->PAI->IsCurrentState<CWeaponSkillState>() || POwner->PAI->IsCurrentState<CMobSkillState>() ||
-            POwner->PAI->IsCurrentState<CPetSkillState>())
+        if (POwner->PAI->IsCurrentState<CAbilityState>() || POwner->PAI->IsCurrentState<CRangeState>() || POwner->PAI->IsCurrentState<CMagicState>() || POwner->PAI->IsCurrentState<CWeaponSkillState>() || POwner->PAI->IsCurrentState<CMobSkillState>() || POwner->PAI->IsCurrentState<CPetSkillState>())
         {
             return;
         }
@@ -271,8 +269,7 @@ namespace gambits
 
                 auto isValidMember = [this](CBattleEntity* PSettableTarget, CBattleEntity* PPartyTarget)
                 {
-                    return !PSettableTarget && PPartyTarget->isAlive() && POwner->loc.zone == PPartyTarget->loc.zone &&
-                           distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
+                    return !PSettableTarget && PPartyTarget->isAlive() && POwner->loc.zone == PPartyTarget->loc.zone && distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
                 };
 
                 // TODO: This whole section is messy and bonkers
@@ -723,8 +720,7 @@ namespace gambits
             case G_CONDITION::NO_SAMBA:
             {
                 bool noSamba = true;
-                if (trigger_target->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) ||
-                    trigger_target->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_SAMBA))
+                if (trigger_target->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) || trigger_target->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_SAMBA))
                 {
                     noSamba = false;
                 }

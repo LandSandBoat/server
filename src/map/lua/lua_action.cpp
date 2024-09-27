@@ -268,7 +268,7 @@ void CLuaAction::Register()
     SOL_REGISTER("addEffectParam", CLuaAction::addEffectParam);
     SOL_REGISTER("addEffectMessage", CLuaAction::addEffectMessage);
     SOL_REGISTER("addAdditionalTarget", CLuaAction::addAdditionalTarget);
-};
+}
 
 std::ostream& operator<<(std::ostream& os, const CLuaAction& action)
 {

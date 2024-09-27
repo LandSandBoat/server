@@ -49,7 +49,7 @@ void CLuaAttack::Register()
     SOL_USERTYPE("CAttack", CLuaAttack);
     SOL_REGISTER("getCritical", CLuaAttack::getCritical);
     SOL_REGISTER("setCritical", CLuaAttack::setCritical);
-};
+}
 
 std::ostream& operator<<(std::ostream& os, const CLuaAttack& attack)
 {

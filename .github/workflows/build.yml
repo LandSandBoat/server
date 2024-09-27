@@ -93,12 +93,11 @@ jobs:
     - name: CPP Formatting Checks (clang-format-18)
       if: always()
       run: |
-        clang-format-18 -version
         touch cpp_formatting_checks.txt
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ -f $changed_file ]]; then
             if [[ $changed_file == *.cpp || $changed_file == *.h ]]; then
-              clang-format-18 -style=file -i ${changed_file}
+              sh ./tools/run_clang_format.sh ${changed_file}
             fi
           fi
         done
@@ -196,7 +195,7 @@ jobs:
         python3 -m pip config set global.break-system-packages true
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
-        python3 -m pip install -r tools/requirements.txt --break-system-packages
+        python3 -m pip install -r tools/requirements.txt
     - name: Run Lua Language Server
       run: |
         python3 tools/ci/lua_lang_server.py
@@ -422,7 +421,7 @@ jobs:
         python3 -m pip config set global.break-system-packages true
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
-        python3 -m pip install bcrypt --break-system-packages
+        python3 -m pip install bcrypt
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -685,7 +684,7 @@ jobs:
         cp settings/default/* settings/
     - name: Install Python Dependencies
       run: |
-        python3 -m pip install -r tools/requirements.txt --break-system-packages
+        python3 -m pip install -r tools/requirements.txt
     - name: Import SQL files
       shell: bash
       run: |

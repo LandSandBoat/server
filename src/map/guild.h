@@ -44,7 +44,7 @@ struct GPItem_t
     , maxpoints(_maxpoints)
     , points(_points)
     {
-    };
+    }
 };
 
 class CGuild

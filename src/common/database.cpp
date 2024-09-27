@@ -59,7 +59,7 @@ int32 ping_connection(time_point tick, CTaskMgr::CTask* task)
     // clang-format on
 
     return 0;
-};
+}
 
 mutex_guarded<db::detail::State>& db::detail::getState()
 {

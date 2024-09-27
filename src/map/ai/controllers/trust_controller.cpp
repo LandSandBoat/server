@@ -40,7 +40,7 @@
 
 namespace
 {
-    enum TRUST_MOVEMENT_TYPE
+    enum TRUST_MOVEMENT_TYPE : int8
     {
         // NOTE: If you need to add special movement types, add descending into the minus values.
         //     : All of the positive values are taken for the ranged movement range.
@@ -175,8 +175,7 @@ void CTrustController::DoCombatTick(time_point tick)
                     {
                         if (currentDistanceToTarget > RoamDistance)
                         {
-                            if (currentDistanceToTarget < RoamDistance * 3.0f &&
-                                POwner->PAI->PathFind->PathAround(PTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+                            if (currentDistanceToTarget < RoamDistance * 3.0f && POwner->PAI->PathFind->PathAround(PTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
                             {
                                 POwner->PAI->PathFind->FollowPath(m_Tick);
                             }
@@ -294,8 +293,7 @@ void CTrustController::DoRoamTick(time_point tick)
         }
     }
 
-    if (POwner->CanRest() && m_Tick - POwner->LastAttacked > m_tickDelays.at(0) && m_Tick - m_CombatEndTime > m_tickDelays.at(0) &&
-        m_Tick - m_LastHealTickTime > m_tickDelays.at(m_NumHealingTicks))
+    if (POwner->CanRest() && m_Tick - POwner->LastAttacked > m_tickDelays.at(0) && m_Tick - m_CombatEndTime > m_tickDelays.at(0) && m_Tick - m_LastHealTickTime > m_tickDelays.at(m_NumHealingTicks))
     {
         if (POwner->health.hp != POwner->health.maxhp || POwner->health.mp != POwner->health.maxmp)
         {
@@ -360,8 +358,7 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
     }
 
     // Invalidate position and pick new one (limit: every 3s)
-    if ((currentDistanceToTarget < amount - 2.5f || currentDistanceToTarget > amount + 2.5f || !POwner->PAI->PathFind->ValidPosition(POwner->loc.p)) &&
-        m_Tick - m_LastRepositionTime > 3s && !m_InTransit)
+    if ((currentDistanceToTarget < amount - 2.5f || currentDistanceToTarget > amount + 2.5f || !POwner->PAI->PathFind->ValidPosition(POwner->loc.p)) && m_Tick - m_LastRepositionTime > 3s && !m_InTransit)
     {
         std::vector<position_t> positions(5);
         for (auto& position : positions)

@@ -234,7 +234,7 @@ namespace attackutils
     {
         if (facing(PDefender->loc.p, PAttacker->loc.p, 64))
         {
-            return (xirand::GetRandomNumber(100) < battleutils::GetParryRate(PAttacker, PDefender));
+            return xirand::GetRandomNumber(100) < battleutils::GetParryRate(PAttacker, PDefender);
         }
         return false;
     }
@@ -243,7 +243,7 @@ namespace attackutils
     {
         if (facing(PDefender->loc.p, PAttacker->loc.p, 64))
         {
-            return (xirand::GetRandomNumber(100) < battleutils::GetGuardRate(PAttacker, PDefender));
+            return xirand::GetRandomNumber(100) < battleutils::GetGuardRate(PAttacker, PDefender);
         }
         return false;
     }
@@ -252,7 +252,7 @@ namespace attackutils
     {
         if (facing(PDefender->loc.p, PAttacker->loc.p, 64) && !PDefender->StatusEffectContainer->HasPreventActionEffect())
         {
-            return (xirand::GetRandomNumber<float>(100) < battleutils::GetBlockRate(PAttacker, PDefender));
+            return xirand::GetRandomNumber<float>(100) < battleutils::GetBlockRate(PAttacker, PDefender);
         }
         return false;
     }

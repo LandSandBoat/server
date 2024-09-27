@@ -267,7 +267,7 @@ bool CMobEntity::CanStealGil()
 
 void CMobEntity::ResetGilPurse()
 {
-    uint32 purse = GetRandomGil() / ((xirand::GetRandomNumber(4, 7)));
+    uint32 purse = GetRandomGil() / (xirand::GetRandomNumber(4, 7));
     if (purse == 0)
     {
         purse = GetRandomGil();
@@ -652,8 +652,8 @@ void CMobEntity::DistributeRewards()
                 if (PMember->getZone() == PChar->getZone())
                 {
                     RoeDatagramList datagrams;
-                    datagrams.emplace_back(RoeDatagram("mob", this));
-                    datagrams.emplace_back(RoeDatagram("atkType", static_cast<uint8>(this->BattleHistory.lastHitTaken_atkType)));
+                    datagrams.emplace_back("mob", this);
+                    datagrams.emplace_back("atkType", static_cast<uint8>(this->BattleHistory.lastHitTaken_atkType));
                     roeutils::event(ROE_MOBKILL, (CCharEntity*)PMember, datagrams);
                 }
             });
@@ -666,9 +666,7 @@ void CMobEntity::DistributeRewards()
             }
 
             // check for gil (beastmen drop gil, some NMs drop gil)
-            if ((settings::get<float>("map.MOB_GIL_MULTIPLIER") > 0.0f && CanDropGil()) ||
-                (settings::get<float>("map.ALL_MOBS_GIL_BONUS") > 0 &&
-                 getMobMod(MOBMOD_GIL_MAX) >= 0)) // Negative value of MOBMOD_GIL_MAX is used to prevent gil drops in Dynamis/Limbus.
+            if ((settings::get<float>("map.MOB_GIL_MULTIPLIER") > 0.0f && CanDropGil()) || (settings::get<float>("map.ALL_MOBS_GIL_BONUS") > 0 && getMobMod(MOBMOD_GIL_MAX) >= 0)) // Negative value of MOBMOD_GIL_MAX is used to prevent gil drops in Dynamis/Limbus.
             {
                 charutils::DistributeGil(PChar, this); // TODO: REALISATION MUST BE IN TREASUREPOOL
             }

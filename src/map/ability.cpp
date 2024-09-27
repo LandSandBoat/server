@@ -43,7 +43,7 @@ CAbility::CAbility(uint16 id)
 
 bool CAbility::isPetAbility() const
 {
-    return ((getID() >= ABILITY_CONCENTRIC_PULSE && getID() <= ABILITY_RADIAL_ARCANA) || getID() >= ABILITY_HEALING_RUBY);
+    return (getID() >= ABILITY_CONCENTRIC_PULSE && getID() <= ABILITY_RADIAL_ARCANA) || getID() >= ABILITY_HEALING_RUBY;
 }
 
 bool CAbility::isAoE() const
@@ -569,7 +569,7 @@ namespace ability
             uint8 Job    = PAbilityList[AbilityID]->getJob();
             uint8 JobLvl = PAbilityList[AbilityID]->getLevel();
 
-            return ((PUser->GetMJob() == Job && PUser->GetMLevel() >= JobLvl) || (PUser->GetSJob() == Job && PUser->GetSLevel() >= JobLvl));
+            return (PUser->GetMJob() == Job && PUser->GetMLevel() >= JobLvl) || (PUser->GetSJob() == Job && PUser->GetSLevel() >= JobLvl);
         }
         return false;
     }

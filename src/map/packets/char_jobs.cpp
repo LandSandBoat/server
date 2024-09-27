@@ -47,9 +47,8 @@ CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar)
 
     ref<uint32>(0x44) = PChar->jobs.unlocked & 1; // The first bit in jobs.unlocked is responsible for an additional job
 
-    ref<uint16>(0x60) = PChar->m_EquipBlock; // Locked equipment slots
-    ref<uint16>(0x62) =
-        PChar->m_StatsDebilitation; // Bit field. Underestimation of physical characteristics, the characteristic turns red and a red arrlow appears next to it.
+    ref<uint16>(0x60) = PChar->m_EquipBlock;        // Locked equipment slots
+    ref<uint16>(0x62) = PChar->m_StatsDebilitation; // Bit field. Underestimation of physical characteristics, the characteristic turns red and a red arrlow appears next to it.
 
     ref<uint8>(0x64) = 0x01; // Unknown, set due to Retail reference; suspicion around mentor unlock
     ref<uint8>(0x65) = 0;    // Mentor Icon

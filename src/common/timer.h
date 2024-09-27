@@ -26,13 +26,13 @@
 
 #define DIFF_TICK(a, b) ((uint32)((a) - (b)))
 
-uint32 gettick(void);
-uint32 gettick_nocache(void);
+uint32 gettick();
+uint32 gettick_nocache();
 
-time_point get_server_start_time(void);
+time_point get_server_start_time();
 
-void timer_init(void);
-void timer_final(void);
+void timer_init();
+void timer_final();
 
 uint32 getCurrentTimeMs();
 

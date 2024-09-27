@@ -280,19 +280,19 @@ namespace petutils
         switch (rank)
         {
             case 1:
-                return (5 + ((lvl - 1) * 50) / 100);
+                return 5 + ((lvl - 1) * 50) / 100;
             case 2:
-                return (4 + ((lvl - 1) * 45) / 100);
+                return 4 + ((lvl - 1) * 45) / 100;
             case 3:
-                return (4 + ((lvl - 1) * 40) / 100);
+                return 4 + ((lvl - 1) * 40) / 100;
             case 4:
-                return (3 + ((lvl - 1) * 35) / 100);
+                return 3 + ((lvl - 1) * 35) / 100;
             case 5:
-                return (3 + ((lvl - 1) * 30) / 100);
+                return 3 + ((lvl - 1) * 30) / 100;
             case 6:
-                return (2 + ((lvl - 1) * 25) / 100);
+                return 2 + ((lvl - 1) * 25) / 100;
             case 7:
-                return (2 + ((lvl - 1) * 20) / 100);
+                return 2 + ((lvl - 1) * 20) / 100;
         }
         return 0;
     }
@@ -460,18 +460,14 @@ namespace petutils
 
         grade = 4;
 
-        raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
-                   (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
+        raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) + (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) + (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
         // raceStat = (int32)(statScale[grade][baseValueColumn] + statScale[grade][scaleTo60Column] * (mlvl - 1));
 
         // Calculation by main job
         grade = grade::GetJobGrade(mjob, 0);
 
-        jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                  (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
-                  (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
+        jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) + (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) + (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
         // Calculate Bonus HP
         bonusStat          = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
@@ -490,23 +486,20 @@ namespace petutils
         if (!(grade::GetJobGrade(mjob, 1) == 0 && grade::GetJobGrade(sjob, 1) == 0))
         {
             // calculate normal racial bonus
-            raceStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
-                       grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
+            raceStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 + grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
         }
 
         // For the main profession
         grade = grade::GetJobGrade(mjob, 1);
         if (grade > 0)
         {
-            jobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
-                      grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
+            jobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 + grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
         }
 
         grade = grade::GetJobGrade(sjob, 1);
         if (grade > 0)
         {
-            sJobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
-                       grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
+            sJobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 + grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
         }
 
         PPet->health.maxmp = (int32)((raceStat + jobStat + sJobStat) * petStats->MPscale);
@@ -631,18 +624,14 @@ namespace petutils
 
         grade = grade::GetRaceGrades(race, 0);
 
-        raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
-                   (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
+        raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) + (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) + (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
         // raceStat = (int32)(statScale[grade][baseValueColumn] + statScale[grade][scaleTo60Column] * (mlvl - 1));
 
         // Bonus HP calculation
         grade = grade::GetJobGrade(mjob, 0);
 
-        jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                  (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
-                  (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
+        jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) + (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) + (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
         // Bonus HP calculation
         bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
@@ -662,16 +651,14 @@ namespace petutils
         // If the main job does not have an MP rating, calculate the racial bonus based on the level of the subjob's level (assuming it has an MP rating)
         if (grade::GetJobGrade(mjob, 1) != 0)
         {
-            raceStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
-                       grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
+            raceStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 + grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
         }
 
         // For mainjob
         grade = grade::GetJobGrade(mjob, 1);
         if (grade > 0)
         {
-            jobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
-                      grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
+            jobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 + grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
         }
 
         PPet->health.maxmp = (int16)(raceStat + jobStat + sJobStat);
@@ -1111,8 +1098,7 @@ namespace petutils
             return;
         }
 
-        if (PMaster->objtype == TYPE_PC &&
-            (PetID == PETID_HARLEQUINFRAME || PetID == PETID_VALOREDGEFRAME || PetID == PETID_SHARPSHOTFRAME || PetID == PETID_STORMWAKERFRAME))
+        if (PMaster->objtype == TYPE_PC && (PetID == PETID_HARLEQUINFRAME || PetID == PETID_VALOREDGEFRAME || PetID == PETID_SHARPSHOTFRAME || PetID == PETID_STORMWAKERFRAME))
         {
             puppetutils::LoadAutomaton(static_cast<CCharEntity*>(PMaster));
             PMaster->PPet = static_cast<CCharEntity*>(PMaster)->PAutomaton;

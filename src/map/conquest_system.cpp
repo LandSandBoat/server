@@ -609,9 +609,7 @@ namespace conquest
 
     uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst)
     {
-        if (((sandoria > (bastok + windurst) && sandoria > bastok && sandoria > windurst) && sandoria > 9) ||
-            ((bastok > (sandoria + windurst) && bastok > sandoria && bastok > windurst) && bastok > 9) ||
-            ((windurst > (sandoria + bastok) && windurst > bastok && windurst > sandoria) && windurst > 9))
+        if (((sandoria > (bastok + windurst) && sandoria > bastok && sandoria > windurst) && sandoria > 9) || ((bastok > (sandoria + windurst) && bastok > sandoria && bastok > windurst) && bastok > 9) || ((windurst > (sandoria + bastok) && windurst > bastok && windurst > sandoria) && windurst > 9))
         {
             return 1;
         }
