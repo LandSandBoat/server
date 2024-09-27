@@ -1840,12 +1840,12 @@ CZone* CZoneEntities::GetZone()
     return m_zone;
 }
 
-EntityList_t CZoneEntities::GetCharList() const
+auto CZoneEntities::GetCharList() const -> const EntityList_t&
 {
     return m_charList;
 }
 
-EntityList_t CZoneEntities::GetMobList() const
+auto CZoneEntities::GetMobList() const -> const EntityList_t&
 {
     return m_mobList;
 }

@@ -406,7 +406,7 @@ CBasicPacket* CCharEntity::popPacket()
     return PPacket;
 }
 
-PacketList_t CCharEntity::getPacketList()
+PacketList_t CCharEntity::getPacketListCopy()
 {
     return PacketList;
 }

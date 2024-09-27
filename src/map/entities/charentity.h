@@ -419,8 +419,8 @@ public:
     void          updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);     // Push or update a char packet
     void          updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask); // Push or update an entity update packet
     bool          isPacketListEmpty();
-    CBasicPacket* popPacket();     // Get first packet from PacketList
-    PacketList_t  getPacketList(); // Return a COPY of packet list
+    CBasicPacket* popPacket();         // Get first packet from PacketList
+    PacketList_t  getPacketListCopy(); // cppcheck-suppress returnByReference
     size_t        getPacketCount();
     void          erasePackets(uint8 num); // Erase num elements from front of packet list
     virtual void  HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;

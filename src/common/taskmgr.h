@@ -81,7 +81,9 @@ public:
     , m_tick(InitTick)
     , m_interval(InitInterval)
     , m_data(InitData)
-    , m_func(InitFunc){};
+    , m_func(InitFunc)
+    {
+    };
 
     std::string m_name;
     TASKTYPE    m_type;

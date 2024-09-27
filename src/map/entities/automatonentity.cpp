@@ -143,7 +143,7 @@ void CAutomatonEntity::burdenTick()
     }
 }
 
-auto CAutomatonEntity::getBurden() -> std::array<uint8, 8>
+auto CAutomatonEntity::getBurden() -> const std::array<uint8, 8>&
 {
     return m_Burden;
 }

@@ -158,7 +158,7 @@ namespace settings
         return T();
     }
 
-    void visit(std::function<void(std::string, SettingsVariant_t)> visitor);
+    void visit(const std::function<void(std::string, SettingsVariant_t)>& visitor);
 } // namespace settings
 
 #endif // _SETTINGS_H

@@ -185,6 +185,7 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
     struct sockaddr_in remote_address
     {
     };
+
     int32 fd     = 0;
     int32 result = 0;
 
@@ -373,7 +374,7 @@ using AccessControl = struct _access_control
     uint32 mask;
 };
 
-enum _aco
+enum _aco : uint8
 {
     ACO_DENY_ALLOW,
     ACO_ALLOW_DENY,

@@ -70,4 +70,4 @@ namespace conquest
     uint8 GetRegionOwner(REGION_TYPE RegionID); // Get owner of the region
 
     uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp); // Add conquest points
-};                                                            // namespace conquest
+}; // namespace conquest

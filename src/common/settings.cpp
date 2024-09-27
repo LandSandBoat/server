@@ -58,12 +58,12 @@ namespace settings
     void init()
     {
         // Load defaults
-        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./settings/default/"))
+        for (const auto& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./settings/default/"))
         {
-            auto path     = entry.relative_path();
-            auto isLua    = path.extension() == ".lua";
-            auto filename = path.string();
-            auto key      = path.lexically_normal().replace_extension("").generic_string();
+            const auto path     = entry.relative_path();
+            const auto isLua    = path.extension() == ".lua";
+            const auto filename = path.string();
+            const auto key      = path.lexically_normal().replace_extension("").generic_string();
 
             if (isLua)
             {
@@ -96,14 +96,14 @@ namespace settings
         }
 
         // Scrape defaults into cpp's settingsMap
-        for (auto [outerKeyObj, outerValObj] : lua["xi"]["settings"].get<sol::table>())
+        for (const auto& [outerKeyObj, outerValObj] : lua["xi"]["settings"].get<sol::table>())
         {
-            auto outerKey = outerKeyObj.as<std::string>();
+            const auto outerKey = outerKeyObj.as<std::string>();
 
-            for (auto [innerKeyObj, innerValObj] : outerValObj.as<sol::table>())
+            for (const auto& [innerKeyObj, innerValObj] : outerValObj.as<sol::table>())
             {
-                auto innerKey = innerKeyObj.as<std::string>();
-                auto key      = to_upper(fmt::format("{}.{}", outerKey, innerKey));
+                const auto innerKey = innerKeyObj.as<std::string>();
+                const auto key      = to_upper(fmt::format("{}.{}", outerKey, innerKey));
 
                 if (innerValObj.is<bool>())
                 {
@@ -123,10 +123,10 @@ namespace settings
         // Load user settings
         for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./settings/"))
         {
-            auto path     = entry.relative_path();
-            auto isLua    = path.extension() == ".lua";
-            auto filename = path.string();
-            auto key      = path.lexically_normal().replace_extension("").generic_string();
+            const auto path     = entry.relative_path();
+            const auto isLua    = path.extension() == ".lua";
+            const auto filename = path.string();
+            const auto key      = path.lexically_normal().replace_extension("").generic_string();
 
             if (isLua)
             {
@@ -161,14 +161,14 @@ namespace settings
         // Scrape user settings into cpp's settingsMap
         // This will overwrite the defaults, if user settings exist. Otherwise the
         // defaults will be left intact.
-        for (auto [outerKeyObj, outerValObj] : lua["xi"]["settings"].get<sol::table>())
+        for (const auto& [outerKeyObj, outerValObj] : lua["xi"]["settings"].get<sol::table>())
         {
-            auto outerKey = outerKeyObj.as<std::string>();
+            const auto outerKey = outerKeyObj.as<std::string>();
 
-            for (auto [innerKeyObj, innerValObj] : outerValObj.as<sol::table>())
+            for (const auto& [innerKeyObj, innerValObj] : outerValObj.as<sol::table>())
             {
-                auto innerKey = innerKeyObj.as<std::string>();
-                auto key      = to_upper(fmt::format("{}.{}", outerKey, innerKey));
+                const auto innerKey = innerKeyObj.as<std::string>();
+                const auto key      = to_upper(fmt::format("{}.{}", outerKey, innerKey));
 
                 if (innerValObj.is<bool>())
                 {
@@ -184,14 +184,14 @@ namespace settings
                 }
 
                 // Apply any environment variables over the default/user settings.
-                auto envKey = fmt::format("XI_{}_{}", to_upper(outerKey), to_upper(innerKey));
+                const auto envKey = fmt::format("XI_{}_{}", to_upper(outerKey), to_upper(innerKey));
 
                 // If we try to assign this value in the if() statement, it will
                 // come back as a bool, so we have to check only then assign in the
                 // block.
                 if (std::getenv(envKey.c_str()))
                 {
-                    auto value = std::string(std::getenv(envKey.c_str()));
+                    const auto value = std::string(std::getenv(envKey.c_str()));
                     ShowInfo(fmt::format("Applying ENV VAR {}: {} -> {}", envKey, key, value));
 
                     // If we don't convert the PORTS to doubles (or ints), then the LUA
@@ -210,11 +210,12 @@ namespace settings
         }
 
         // Push the consolidated defaults + user settings back up into xi.settings
-        for (auto [key, value] : settingsMap)
+        for (const auto& [key, value] : settingsMap)
         {
-            auto parts                          = split(key, ".");
-            auto outer                          = to_lower(parts[0]);
-            auto inner                          = to_upper(parts[1]);
+            const auto parts = split(key, ".");
+            const auto outer = to_lower(parts[0]);
+            const auto inner = to_upper(parts[1]);
+
             lua["xi"]["settings"][outer][inner] = value;
         }
 
@@ -226,9 +227,9 @@ namespace settings
         // lua.safe_script("require('settings/main'); require('settings/default/main'); print(xi.settings)");
     }
 
-    void visit(std::function<void(std::string, SettingsVariant_t)> visitor)
+    void visit(const std::function<void(std::string, SettingsVariant_t)>& visitor)
     {
-        for (auto& [key, value] : settingsMap)
+        for (const auto& [key, value] : settingsMap)
         {
             visitor(key, value);
         }

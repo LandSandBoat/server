@@ -662,7 +662,10 @@ public:
         m_zone   = 0;
         m_nation = 0;
     };
-    ~char_mini(){};
+
+    ~char_mini()
+    {
+    };
 };
 
 #endif // _MMO_H

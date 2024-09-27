@@ -262,7 +262,6 @@ private:
 
     uint32 m_PingInterval;
     uint32 m_LastPing;
-    bool   m_LatencyWarning;
 
     std::thread::id m_ThreadId;
 };

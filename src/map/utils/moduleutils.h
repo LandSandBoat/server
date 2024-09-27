@@ -52,11 +52,11 @@ public:
     virtual void OnInit() = 0;
 
     // Optional
-    virtual void OnZoneTick(CZone* PZone){};
-    virtual void OnTimeServerTick(){};
-    virtual void OnCharZoneIn(CCharEntity* PChar){};
-    virtual void OnCharZoneOut(CCharEntity* PChar){};
-    virtual void OnPushPacket(CCharEntity* PChar, CBasicPacket* packet){};
+    virtual void OnZoneTick(CZone* PZone) {};
+    virtual void OnTimeServerTick() {};
+    virtual void OnCharZoneIn(CCharEntity* PChar) {};
+    virtual void OnCharZoneOut(CCharEntity* PChar) {};
+    virtual void OnPushPacket(CCharEntity* PChar, CBasicPacket* packet) {};
 
     template <typename T>
     static T* Register()
