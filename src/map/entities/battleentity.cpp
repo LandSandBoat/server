@@ -243,7 +243,7 @@ int32 CBattleEntity::GetMaxMP() const
 uint8 CBattleEntity::GetSpeed()
 {
     uint8 baseSpeed   = speed;
-    uint8 outputSpeed = 0;
+    int16 outputSpeed = 0;
 
     // Mount speed. Independent from regular speed and unaffected by most things.
     // Note: retail treats mounted speed as double what it actually is! 40 is in fact retail accurate!
@@ -255,8 +255,8 @@ uint8 CBattleEntity::GetSpeed()
         return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
     }
 
-    // Gear penalties, Bolters Roll.
-    uint8 additiveMods = static_cast<uint8>(getMod(Mod::MOVE_SPEED_STACKABLE));
+    // Gear penalties.
+    int8 additiveMods = static_cast<int8>(getMod(Mod::MOVE_SPEED_STACKABLE));
 
     // Gravity and Curse. They seem additive to each other and the sum seems to be multiplicative.
     float weightFactor = std::clamp<float>(1.0f - static_cast<float>(getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY)) / 100.0f, 0.1f, 1.0f);
@@ -282,17 +282,20 @@ uint8 CBattleEntity::GetSpeed()
     uint8 mazurkaQuickeningEffect = std::clamp<uint8>(getMod(Mod::MOVE_SPEED_QUICKENING) + getMod(Mod::MOVE_SPEED_MAZURKA), 0, 10);
 
     // We have all the modifiers needed. Calculate final speed.
-    // This MUST BE DONE IN THIS ORDER. Using uint8 data type, we use that to floor.
+    // This MUST BE DONE IN THIS ORDER. Using int8 data type, we use that to floor.
     outputSpeed = baseSpeed + additiveMods;
     outputSpeed = outputSpeed * weightFactor;
     outputSpeed = outputSpeed * fleeFactor;
     outputSpeed = outputSpeed * cheerFactor;
     outputSpeed = outputSpeed + boltersRollEffect;
     outputSpeed = outputSpeed * gearFactor;
-    outputSpeed = outputSpeed + mazurkaQuickeningEffect;
+    if (outputSpeed > 0)
+    {
+        outputSpeed = outputSpeed + mazurkaQuickeningEffect;
+    }
 
     // Set cap (Default 80).
-    outputSpeed = std::clamp<uint8>(outputSpeed, 0, 80 + settings::get<int8>("map.SPEED_MOD"));
+    outputSpeed = std::clamp<int16>(outputSpeed, 0, 80 + settings::get<int8>("map.SPEED_MOD"));
 
     // Speed cap can be bypassed. Ex. Feast of swords. GM speed.
     // TODO: Find exceptions. Add them here.
@@ -303,7 +306,7 @@ uint8 CBattleEntity::GetSpeed()
         outputSpeed = getMod(Mod::MOVE_SPEED_OVERRIDE);
     }
 
-    return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
+    return static_cast<uint8>(std::clamp<int16>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max()));
 }
 
 bool CBattleEntity::CanRest()
