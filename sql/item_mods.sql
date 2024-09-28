@@ -35667,8 +35667,8 @@ INSERT INTO `item_mods` VALUES (17812,8,1);  -- STR: 1
 INSERT INTO `item_mods` VALUES (17812,11,1); -- AGI: 1
 
 -- Raikiri
-INSERT INTO `item_mods` VALUES (17814,25,3);  -- ACC: 3
-INSERT INTO `item_mods` VALUES (17814,75,-5); -- MOVE_SPEED_STACKABLE: -5
+INSERT INTO `item_mods` VALUES (17814,25,3);   -- ACC: 3
+INSERT INTO `item_mods` VALUES (17814,75,-10); -- MOVE_SPEED_STACKABLE: -10
 
 -- Tachi Of Trials
 INSERT INTO `item_mods` VALUES (17815,2,20);  -- HP: 20
