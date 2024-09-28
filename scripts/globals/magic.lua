@@ -1,6 +1,7 @@
 require('scripts/globals/combat/magic_hit_rate')
 require('scripts/globals/jobpoints')
 require('scripts/globals/magicburst')
+require('scripts/globals/spells/damage_spell')
 require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
@@ -12,14 +13,14 @@ xi.magic = xi.magic or {}
 
 xi.magic.dayElement =
 {
-    [xi.day.FIRESDAY]     = xi.element.FIRE,
-    [xi.day.ICEDAY]       = xi.element.ICE,
-    [xi.day.WINDSDAY]     = xi.element.WIND,
-    [xi.day.EARTHSDAY]    = xi.element.EARTH,
+    [xi.day.FIRESDAY    ] = xi.element.FIRE,
+    [xi.day.ICEDAY      ] = xi.element.ICE,
+    [xi.day.WINDSDAY    ] = xi.element.WIND,
+    [xi.day.EARTHSDAY   ] = xi.element.EARTH,
     [xi.day.LIGHTNINGDAY] = xi.element.THUNDER,
-    [xi.day.WATERSDAY]    = xi.element.WATER,
-    [xi.day.LIGHTSDAY]    = xi.element.LIGHT,
-    [xi.day.DARKSDAY]     = xi.element.DARK,
+    [xi.day.WATERSDAY   ] = xi.element.WATER,
+    [xi.day.LIGHTSDAY   ] = xi.element.LIGHT,
+    [xi.day.DARKSDAY    ] = xi.element.DARK,
 }
 
 -----------------------------------
@@ -229,11 +230,12 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
         basecure = minCure
     end
 
-    local curePot = math.min(caster:getMod(xi.mod.CURE_POTENCY), 50) / 100 -- caps at 50%
-    local curePotII = math.min(caster:getMod(xi.mod.CURE_POTENCY_II), 30) / 100 -- caps at 30%
-    local potency = 1 + curePot + curePotII
+    local curePot         = math.min(caster:getMod(xi.mod.CURE_POTENCY), 50) / 100 -- caps at 50%
+    local curePotII       = math.min(caster:getMod(xi.mod.CURE_POTENCY_II), 30) / 100 -- caps at 30%
+    local potency         = 1 + curePot + curePotII
+    local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, spell:getID(), spell:getElement())
+    local dSeal           = 1
 
-    local dSeal = 1
     if caster:hasStatusEffect(xi.effect.DIVINE_SEAL) then
         dSeal = 2
     end
@@ -244,47 +246,6 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
             rapture = 1.5 + caster:getMod(xi.mod.RAPTURE_AMOUNT) / 100
             caster:delStatusEffectSilent(xi.effect.RAPTURE)
         end
-    end
-
-    local dayWeatherBonus = 1
-    local spellElement    = spell:getElement()
-    local castersWeather  = caster:getWeather()
-
-    -- Calculate Weather bonus + Iridescence bonus.
-    if
-        math.random(1, 100) <= 33 or
-        caster:getMod(elementalObi[spellElement]) >= 1
-    then
-        -- Strong weathers.
-        if castersWeather == xi.magic.singleWeatherStrong[spellElement] then
-            dayWeatherBonus = dayWeatherBonus + 0.1 + caster:getMod(xi.mod.IRIDESCENCE) * 0.05
-        elseif castersWeather == xi.magic.doubleWeatherStrong[spellElement] then
-            dayWeatherBonus = dayWeatherBonus + 0.25 + caster:getMod(xi.mod.IRIDESCENCE) * 0.05
-
-        -- Weak weathers.
-        elseif castersWeather == xi.magic.singleWeatherWeak[spellElement] then
-            dayWeatherBonus = dayWeatherBonus - 0.1 - caster:getMod(xi.mod.IRIDESCENCE) * 0.05
-        elseif castersWeather == xi.magic.doubleWeatherWeak[spellElement] then
-            dayWeatherBonus = dayWeatherBonus - 0.25 - caster:getMod(xi.mod.IRIDESCENCE) * 0.05
-        end
-    end
-
-    -- Calculate day element bonus.
-    local dayElement = VanadielDayElement()
-
-    if
-        math.random(1, 100) <= 33 or
-        caster:getMod(elementalObi[spellElement]) >= 1
-    then
-        if dayElement == spellElement then
-            dayWeatherBonus = dayWeatherBonus + 0.10
-        elseif dayElement == elementDescendant[spellElement] then
-            dayWeatherBonus = dayWeatherBonus - 0.10
-        end
-    end
-
-    if dayWeatherBonus > 1.4 then
-        dayWeatherBonus = 1.4
     end
 
     -- Floor and return.
@@ -529,12 +490,11 @@ function adjustForTarget(target, dmg, ele)
 end
 
 function addBonuses(caster, spell, target, dmg, params)
-    local ele = spell:getElement()
-    local affinityBonus = AffinityBonusDmg(caster, ele)
-    local magicDefense = getElementalDamageReduction(target, ele)
-    local dayWeatherBonus = 1.00
-    local weather = caster:getWeather()
-    local casterJob = caster:getMainJob()
+    local ele             = spell:getElement()
+    local affinityBonus   = AffinityBonusDmg(caster, ele)
+    local magicDefense    = getElementalDamageReduction(target, ele)
+    local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, spell:getID(), ele)
+    local casterJob       = caster:getMainJob()
 
     params = params or {}
     params.bonusmab = params.bonusmab or 0
@@ -542,43 +502,6 @@ function addBonuses(caster, spell, target, dmg, params)
 
     dmg = math.floor(dmg * affinityBonus)
     dmg = math.floor(dmg * magicDefense)
-
-    local dayWeatherBonusCheck = math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1
-
-    if dayWeatherBonusCheck then
-        if weather == xi.magic.singleWeatherStrong[ele] then
-            if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
-                dayWeatherBonus = dayWeatherBonus + 0.10
-            end
-
-            dayWeatherBonus = dayWeatherBonus + 0.10
-        elseif caster:getWeather() == xi.magic.singleWeatherWeak[ele] then
-            dayWeatherBonus = dayWeatherBonus - 0.10
-        elseif weather == xi.magic.doubleWeatherStrong[ele] then
-            if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
-                dayWeatherBonus = dayWeatherBonus + 0.10
-            end
-
-            dayWeatherBonus = dayWeatherBonus + 0.25
-        elseif weather == xi.magic.doubleWeatherWeak[ele] then
-            dayWeatherBonus = dayWeatherBonus - 0.25
-        end
-    end
-
-    local dayElement = VanadielDayElement()
-    if dayElement == ele then
-        dayWeatherBonus = dayWeatherBonus + caster:getMod(xi.mod.DAY_NUKE_BONUS) / 100 -- sorc. tonban(+1)/zodiac ring
-        if dayWeatherBonusCheck then
-            dayWeatherBonus = dayWeatherBonus + 0.10
-        end
-    elseif dayElement == elementDescendant[ele] then
-        if dayWeatherBonusCheck then
-            dayWeatherBonus = dayWeatherBonus - 0.10
-        end
-    end
-
-    dayWeatherBonus = math.min(dayWeatherBonus, 1.4)
-
     dmg = math.floor(dmg * dayWeatherBonus)
 
     local burst = calculateMagicBurst(caster, spell, target, params)
@@ -647,43 +570,7 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     local magicDefense = getElementalDamageReduction(target, ele)
     dmg = math.floor(dmg * magicDefense)
 
-    local dayWeatherBonus = 1.00
-    local weather = caster:getWeather()
-
-    if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
-        if weather == xi.magic.singleWeatherStrong[ele] then
-            if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
-                dayWeatherBonus = dayWeatherBonus + 0.10
-            end
-
-            dayWeatherBonus = dayWeatherBonus + 0.10
-        elseif caster:getWeather() == xi.magic.singleWeatherWeak[ele] then
-            dayWeatherBonus = dayWeatherBonus - 0.10
-        elseif weather == xi.magic.doubleWeatherStrong[ele] then
-            if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
-                dayWeatherBonus = dayWeatherBonus + 0.10
-            end
-
-            dayWeatherBonus = dayWeatherBonus + 0.25
-        elseif weather == xi.magic.doubleWeatherWeak[ele] then
-            dayWeatherBonus = dayWeatherBonus - 0.25
-        end
-    end
-
-    local dayElement = VanadielDayElement()
-    if dayElement == ele then
-        dayWeatherBonus = dayWeatherBonus + caster:getMod(xi.mod.DAY_NUKE_BONUS) / 100 -- sorc. tonban(+1)/zodiac ring
-        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
-            dayWeatherBonus = dayWeatherBonus + 0.10
-        end
-    elseif dayElement == elementDescendant[ele] then
-        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
-            dayWeatherBonus = dayWeatherBonus - 0.10
-        end
-    end
-
-    dayWeatherBonus = math.min(dayWeatherBonus, 1.4)
-
+    local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, 0, ele)
     dmg = math.floor(dmg * dayWeatherBonus)
 
     local mab = 1
