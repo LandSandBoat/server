@@ -2935,6 +2935,7 @@ xi.item =
     MOG_KUPON_I_MAT                     = 8794,
     MOG_KUPON_W_DEIII                   = 8795,
     MOG_KUPON_AW_MIS                    = 8796,
+    PINCH_OF_HIGH_PURITY_BAYLD          = 8798,
     BAYLD_CRYSTAL                       = 8799,
     MOBLIN_OIL                          = 8801,
     RANKA                               = 8803,
