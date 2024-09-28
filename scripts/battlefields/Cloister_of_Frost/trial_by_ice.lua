@@ -2,8 +2,6 @@
 -- Area: Cloister of Frost
 -- BCNM: Trial by Ice
 -----------------------------------
-local cloisterOfFrostID = zones[xi.zone.CLOISTER_OF_FROST]
------------------------------------
 
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.CLOISTER_OF_FROST,
@@ -28,13 +26,7 @@ end
 content.groups =
 {
     {
-        mobIds =
-        {
-            { cloisterOfFrostID.mob.SHIVA_PRIME     },
-            { cloisterOfFrostID.mob.SHIVA_PRIME + 1 },
-            { cloisterOfFrostID.mob.SHIVA_PRIME + 2 },
-        },
-
+        mobs = { 'Shiva_Prime_TBI' },
         allDeath = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
         end,

@@ -26,16 +26,24 @@ function content:entryRequirement(player, npc, isRegistrant, trade)
         player:getMainLvl() >= 20
 end
 
+function content:onEventFinishWin(player, csid, option, npc)
+    if not player:hasSpell(xi.magic.spell.TITAN) then
+        player:addSpell(xi.magic.spell.TITAN)
+        player:messageSpecial(cloisterOfTremorsID.text.TITAN_UNLOCKED, 0, 0, 2)
+    end
+
+    if not player:hasItem(xi.item.SCROLL_OF_INSTANT_WARP) then
+        npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP)
+    end
+
+    player:addFame(xi.fameArea.BASTOK, 30)
+    player:completeQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
+end
+
 content.groups =
 {
     {
-        mobIds =
-        {
-            { cloisterOfTremorsID.mob.TITAN_PRIME + 6 },
-            { cloisterOfTremorsID.mob.TITAN_PRIME + 7 },
-            { cloisterOfTremorsID.mob.TITAN_PRIME + 8 },
-        },
-
+        mobs = { 'Titan_Prime_TSTBE' },
         allDeath = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
         end,
