@@ -92,9 +92,10 @@ enum class LATENT : uint16
     VS_FAMILY              = 60, // Vs. Specific Family ID (e.g. Vs. Korrigan: Accuracy+3)
     VS_SUPERFAMILY         = 61, // Vs. Specific SuperFamily ID (e.g. Vs. Mandragora: Accuracy+3)
     MAINJOB                = 62, // mainjob - PARAM: JOBTYPE
+    IN_ADOULIN             = 63, //
 };
 
-#define MAX_LATENTEFFECTID 63
+#define MAX_LATENTEFFECTID 64
 
 /************************************************************************
  *                                                                       *

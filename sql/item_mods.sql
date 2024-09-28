@@ -4149,6 +4149,7 @@ INSERT INTO `item_mods` VALUES (10961,2,50); -- HP: 50
 
 -- Lavalier +1
 INSERT INTO `item_mods` VALUES (10962,2,60); -- HP: 60
+-- INSERT INTO `item_mods` VALUES (10962,75,-10); -- MOVE_SPEED_STACKABLE: -10 (unconfirmed)
 
 -- Airmids Gorget
 INSERT INTO `item_mods` VALUES (10963,1,9);  -- DEF: 9
@@ -31448,7 +31449,7 @@ INSERT INTO `item_mods` VALUES (16344,9,5);   -- DEX: 5
 INSERT INTO `item_mods` VALUES (16344,11,5);  -- AGI: 5
 INSERT INTO `item_mods` VALUES (16344,25,5);  -- ACC: 5
 INSERT INTO `item_mods` VALUES (16344,26,5);  -- RACC: 5
-INSERT INTO `item_mods` VALUES (16344,75,-5); -- MOVE_SPEED_STACKABLE: -5
+INSERT INTO `item_mods` VALUES (16344,75,-4); -- MOVE_SPEED_STACKABLE: -4
 
 -- Magus Shalwar +1
 INSERT INTO `item_mods` VALUES (16345,1,34);   -- DEF: 34
@@ -35666,8 +35667,8 @@ INSERT INTO `item_mods` VALUES (17812,8,1);  -- STR: 1
 INSERT INTO `item_mods` VALUES (17812,11,1); -- AGI: 1
 
 -- Raikiri
-INSERT INTO `item_mods` VALUES (17814,25,3);  -- ACC: 3
-INSERT INTO `item_mods` VALUES (17814,75,-5); -- MOVE_SPEED_STACKABLE: -5
+INSERT INTO `item_mods` VALUES (17814,25,3);   -- ACC: 3
+INSERT INTO `item_mods` VALUES (17814,75,-10); -- MOVE_SPEED_STACKABLE: -10
 
 -- Tachi Of Trials
 INSERT INTO `item_mods` VALUES (17815,2,20);  -- HP: 20
@@ -37617,7 +37618,7 @@ INSERT INTO `item_mods` VALUES (18518,25,5); -- ACC: 5
 
 -- Oneiros Axe
 INSERT INTO `item_mods` VALUES (18519,73,-15); -- STORETP: -15
-INSERT INTO `item_mods` VALUES (18519,75,-5);  -- MOVE_SPEED_STACKABLE: -5
+INSERT INTO `item_mods` VALUES (18519,75,-10);  -- MOVE_SPEED_STACKABLE: -10
 
 -- Laceratrice
 INSERT INTO `item_mods` VALUES (18520,165,4); -- CRITHITRATE: 4

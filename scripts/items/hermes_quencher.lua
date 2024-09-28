@@ -16,7 +16,7 @@ end
 
 itemObject.onItemUse = function(target)
     target:delStatusEffect(xi.effect.FLEE)
-    target:addStatusEffect(xi.effect.FLEE, 100, 0, 30)
+    target:addStatusEffect(xi.effect.FLEE, 8750, 0, 30)
     target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.FLEE)
     target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 900)
 end
