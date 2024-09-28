@@ -455,7 +455,12 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     return dmg
 end
 
+-- TODO: Use new function for spell absorbtion or nullification
 function adjustForTarget(target, dmg, ele)
+    if ele <= 0 then
+        return dmg
+    end
+
     if dmg > 0 and math.random(0, 99) < target:getMod(xi.magic.absorbMod[ele]) then
         return -dmg
     end
