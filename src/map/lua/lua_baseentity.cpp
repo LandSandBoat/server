@@ -13559,7 +13559,12 @@ bool CLuaBaseEntity::doRandomDeal(CLuaBaseEntity* PTarget)
         return false;
     }
 
-    return battleutils::DoRandomDealToEntity(static_cast<CCharEntity*>(m_PBaseEntity), static_cast<CCharEntity*>(PTarget->m_PBaseEntity));
+    if (auto PBattleTarget = dynamic_cast<CBattleEntity*>(PTarget->m_PBaseEntity))
+    {
+        return battleutils::DoRandomDealToEntity(static_cast<CCharEntity*>(m_PBaseEntity), PBattleTarget);
+    }
+
+    return false;
 }
 
 /************************************************************************

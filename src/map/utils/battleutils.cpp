@@ -5983,7 +5983,7 @@ namespace battleutils
      *   Does the random deal effect to a specific character (reset ability) *
      *                                                                       *
      ************************************************************************/
-    bool DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget)
+    bool DoRandomDealToEntity(CCharEntity* PChar, CBattleEntity* PTarget)
     {
         std::vector<uint16> resetCandidateList;
         std::vector<uint16> activeCooldownList;
@@ -6042,8 +6042,11 @@ namespace battleutils
                 }
                 if (PChar != PTarget)
                 {
-                    // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
-                    PTarget->pushPacket(new CCharRecastPacket(PTarget));
+                    if (auto PCharTarget = dynamic_cast<CCharEntity*>(PTarget))
+                    {
+                        // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
+                        PCharTarget->pushPacket(new CCharRecastPacket(PCharTarget));
+                    }
                 }
                 return true;
             }
@@ -6062,16 +6065,19 @@ namespace battleutils
             // Reset first ability (shuffled or only)
             PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(0));
 
-            // Reset 2 abilities by chance (could be 2 abilitie that don't need resets)
+            // Reset 2 abilities by chance (could be 2 abilities that don't need resets)
             if (resetCandidateList.size() > 1 && activeCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(1, 100))
             {
                 PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(1));
             }
 
-            if (PChar != PTarget && PTarget->objtype == TYPE_PC)
+            if (PChar != PTarget)
             {
-                // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
-                PTarget->pushPacket(new CCharRecastPacket(PTarget));
+                if (auto PCharTarget = dynamic_cast<CCharEntity*>(PTarget))
+                {
+                    // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
+                    PCharTarget->pushPacket(new CCharRecastPacket(PCharTarget));
+                }
             }
 
             return true;

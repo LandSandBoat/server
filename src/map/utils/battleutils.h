@@ -251,7 +251,7 @@ namespace battleutils
     bool    WeatherMatchesElement(WEATHER weather, uint8 element);
     bool    DrawIn(CBattleEntity* PEntity, CMobEntity* PMob, float offset);
     void    DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, uint8 roll);
-    bool    DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget);
+    bool    DoRandomDealToEntity(CCharEntity* PChar, CBattleEntity* PTarget);
 
     void turnTowardsTarget(CBaseEntity* PEntity, CBaseEntity* PTarget, bool force = false);
 
