@@ -152,6 +152,24 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 {
     TracyZoneScoped;
 
+    auto ipstr    = ip2str(ip);
+    auto fmtQuery = fmt::format("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '{}' LIMIT 1", ipstr);
+
+    int32 ret = _sql->Query(fmtQuery.c_str());
+
+    if (ret == SQL_ERROR)
+    {
+        ShowError("SQL query failed in mapsession_createsession!");
+        return nullptr;
+    }
+
+    if (_sql->NumRows() == 0)
+    {
+        // This is noisy and not really necessary
+        DebugSockets(fmt::format("recv_parse: Invalid login attempt from {}", ipstr));
+        return nullptr;
+    }
+
     map_session_data_t* map_session_data = new map_session_data_t();
 
     map_session_data->server_packet_data = new int8[MAX_BUFFER_SIZE + 20];
@@ -164,23 +182,6 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
     uint64 ipp    = ip;
     ipp |= port64 << 32;
     map_session_list[ipp] = map_session_data;
-
-    auto ipstr    = ip2str(map_session_data->client_addr);
-    auto fmtQuery = fmt::format("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '{}' LIMIT 1", ipstr);
-
-    int32 ret = _sql->Query(fmtQuery.c_str());
-
-    if (ret == SQL_ERROR)
-    {
-        ShowError("SQL query failed in mapsession_createsession!");
-    }
-
-    if (_sql->NumRows() == 0)
-    {
-        // This is noisy and not really necessary
-        DebugSockets(fmt::format("recv_parse: Invalid login attempt from {}", ipstr));
-        return nullptr;
-    }
 
     return map_session_data;
 }
