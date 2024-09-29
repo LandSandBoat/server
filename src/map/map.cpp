@@ -597,9 +597,6 @@ int32 do_sockets(fd_set* rfd, duration next)
             int32 decryptCount = recv_parse(g_PBuff, &size, &from, map_session_data);
             if (decryptCount != -1)
             {
-                // Update the time we last got a valid packet
-                map_session_data->last_update = time(nullptr);
-
                 // DecryptCount of 0 means the main key decrypted the packet
                 if (decryptCount == 0)
                 {
@@ -875,6 +872,12 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
             {
                 DebugPackets("parse: %03hX | %04hX %04hX %02hX from user: %s",
                              SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2), SmallPD_Size, PChar->getName());
+            }
+            else
+            {
+                // Update the time we last got a char sync packet
+                // The client can spam some other packets when trying to zone, preventing timely session deletions
+                map_session_data->last_update = time(nullptr);
             }
 
             if (settings::get<bool>("map.PACKETGUARD_ENABLED") && PacketGuard::IsRateLimitedPacket(PChar, SmallPD_Type))
