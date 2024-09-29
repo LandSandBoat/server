@@ -36859,7 +36859,7 @@ INSERT INTO `item_mods` VALUES (18276,431,1);   -- ITEM_ADDEFFECT_TYPE: DAMAGE
 INSERT INTO `item_mods` VALUES (18276,499,7);   -- ITEM_SUBEFFECT: ENLIGHT
 INSERT INTO `item_mods` VALUES (18276,506,50);  -- EXTRA_DMG_CHANCE: 50
 INSERT INTO `item_mods` VALUES (18276,507,300); -- OCC_DO_EXTRA_DMG: 300
-INSERT INTO `item_mods` VALUES (18276,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT
+INSERT INTO `item_mods` VALUES (18276,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT -- TODO: This should be "slashing", change once we have support for physical damage types.
 
 -- Excalibur
 INSERT INTO `item_mods` VALUES (18277,23,25);   -- ATT: 25
@@ -36869,7 +36869,7 @@ INSERT INTO `item_mods` VALUES (18277,431,1);   -- ITEM_ADDEFFECT_TYPE: DAMAGE
 INSERT INTO `item_mods` VALUES (18277,499,7);   -- ITEM_SUBEFFECT: ENLIGHT
 INSERT INTO `item_mods` VALUES (18277,506,50);  -- EXTRA_DMG_CHANCE: 50
 INSERT INTO `item_mods` VALUES (18277,507,300); -- OCC_DO_EXTRA_DMG: 300
-INSERT INTO `item_mods` VALUES (18277,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT
+INSERT INTO `item_mods` VALUES (18277,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT -- TODO: This should be "slashing", change once we have support for physical damage types.
 
 -- Valhalla
 INSERT INTO `item_mods` VALUES (18281,256,4);  -- AFTERMATH: 4
@@ -38079,7 +38079,7 @@ INSERT INTO `item_mods` VALUES (18639,431,1);   -- ITEM_ADDEFFECT_TYPE: DAMAGE
 INSERT INTO `item_mods` VALUES (18639,499,7);   -- ITEM_SUBEFFECT: ENLIGHT
 INSERT INTO `item_mods` VALUES (18639,506,50);  -- EXTRA_DMG_CHANCE: 50
 INSERT INTO `item_mods` VALUES (18639,507,300); -- OCC_DO_EXTRA_DMG: 300
-INSERT INTO `item_mods` VALUES (18639,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT
+INSERT INTO `item_mods` VALUES (18639,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT -- TODO: This should be "slashing", change once we have support for physical damage types.
 
 -- Ragnarok
 INSERT INTO `item_mods` VALUES (18640,25,30);   -- ACC: 30
@@ -38196,7 +38196,7 @@ INSERT INTO `item_mods` VALUES (18653,499,7);   -- ITEM_SUBEFFECT: ENLIGHT
 INSERT INTO `item_mods` VALUES (18653,506,50);  -- EXTRA_DMG_CHANCE: 50
 INSERT INTO `item_mods` VALUES (18653,507,300); -- OCC_DO_EXTRA_DMG: 300
 INSERT INTO `item_mods` VALUES (18653,613,25);  -- WSD+% (Knights Of Round): 25
-INSERT INTO `item_mods` VALUES (18653,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT
+INSERT INTO `item_mods` VALUES (18653,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT -- TODO: This should be "slashing", change once we have support for physical damage types.
 
 -- Ragnarok
 INSERT INTO `item_mods` VALUES (18654,25,35);   -- ACC: 35
@@ -38324,7 +38324,7 @@ INSERT INTO `item_mods` VALUES (18667,499,7);   -- ITEM_SUBEFFECT: ENLIGHT
 INSERT INTO `item_mods` VALUES (18667,506,130); -- EXTRA_DMG_CHANCE: 130
 INSERT INTO `item_mods` VALUES (18667,507,300); -- OCC_DO_EXTRA_DMG: 300
 INSERT INTO `item_mods` VALUES (18667,613,25);  -- WSD+% (Knights Of Round): 25
-INSERT INTO `item_mods` VALUES (18667,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT
+INSERT INTO `item_mods` VALUES (18667,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT -- TODO: This should be "slashing", change once we have support for physical damage types.
 
 -- Ragnarok
 INSERT INTO `item_mods` VALUES (18668,25,35);   -- ACC: 35
@@ -40872,7 +40872,7 @@ INSERT INTO `item_mods` VALUES (19748,499,7);   -- ITEM_SUBEFFECT: ENLIGHT
 INSERT INTO `item_mods` VALUES (19748,506,130); -- EXTRA_DMG_CHANCE: 130
 INSERT INTO `item_mods` VALUES (19748,507,300); -- OCC_DO_EXTRA_DMG: 300
 INSERT INTO `item_mods` VALUES (19748,613,40);  -- WSD+% (Knights Of Round): 40
-INSERT INTO `item_mods` VALUES (19748,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT
+INSERT INTO `item_mods` VALUES (19748,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT -- TODO: This should be "slashing", change once we have support for physical damage types.
 
 -- Ragnarok
 INSERT INTO `item_mods` VALUES (19749,25,40);   -- ACC: 40
@@ -41388,7 +41388,7 @@ INSERT INTO `item_mods` VALUES (19841,499,7);   -- ITEM_SUBEFFECT: ENLIGHT
 INSERT INTO `item_mods` VALUES (19841,506,130); -- EXTRA_DMG_CHANCE: 130
 INSERT INTO `item_mods` VALUES (19841,507,300); -- OCC_DO_EXTRA_DMG: 300
 INSERT INTO `item_mods` VALUES (19841,613,40);  -- WSD+% (Knights Of Round): 40
-INSERT INTO `item_mods` VALUES (19841,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT
+INSERT INTO `item_mods` VALUES (19841,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT -- TODO: This should be "slashing", change once we have support for physical damage types.
 
 -- Ragnarok
 INSERT INTO `item_mods` VALUES (19842,25,40);   -- ACC: 40
@@ -42277,7 +42277,7 @@ INSERT INTO `item_mods` VALUES (20645,499,7);   -- ITEM_SUBEFFECT: ENLIGHT
 INSERT INTO `item_mods` VALUES (20645,506,130); -- EXTRA_DMG_CHANCE: 130
 INSERT INTO `item_mods` VALUES (20645,507,300); -- OCC_DO_EXTRA_DMG: 300
 INSERT INTO `item_mods` VALUES (20645,613,40);  -- WSD+% (Knights Of Round): 40
-INSERT INTO `item_mods` VALUES (20645,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT
+INSERT INTO `item_mods` VALUES (20645,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT -- TODO: This should be "slashing", change once we have support for physical damage types.
 
 -- Excalibur
 INSERT INTO `item_mods` VALUES (20646,23,40);   -- ATT: 40
@@ -42288,7 +42288,7 @@ INSERT INTO `item_mods` VALUES (20646,499,7);   -- ITEM_SUBEFFECT: ENLIGHT
 INSERT INTO `item_mods` VALUES (20646,506,130); -- EXTRA_DMG_CHANCE: 130
 INSERT INTO `item_mods` VALUES (20646,507,300); -- OCC_DO_EXTRA_DMG: 300
 INSERT INTO `item_mods` VALUES (20646,613,40);  -- WSD+% (Knights Of Round): 40
-INSERT INTO `item_mods` VALUES (20646,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT
+INSERT INTO `item_mods` VALUES (20646,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT -- TODO: This should be "slashing", change once we have support for physical damage types.
 
 -- Murgleis
 INSERT INTO `item_mods` VALUES (20647,30,30);  -- MACC: 30
@@ -42396,7 +42396,7 @@ INSERT INTO `item_mods` VALUES (20685,499,7);   -- ITEM_SUBEFFECT: ENLIGHT
 INSERT INTO `item_mods` VALUES (20685,506,130); -- EXTRA_DMG_CHANCE: 130
 INSERT INTO `item_mods` VALUES (20685,507,300); -- OCC_DO_EXTRA_DMG: 300
 INSERT INTO `item_mods` VALUES (20685,613,40);  -- WSD+% (Knights Of Round): 40
-INSERT INTO `item_mods` VALUES (20685,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT
+INSERT INTO `item_mods` VALUES (20685,950,7);   -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT -- TODO: This should be "slashing", change once we have support for physical damage types.
 
 -- Murgleis
 INSERT INTO `item_mods` VALUES (20686,30,40);   -- MACC: 40
