@@ -728,6 +728,33 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             return -1;
         }
 
+        // Not big enough to be 0x00A
+        if (size < (FFXI_HEADER_SIZE + sizeof(GP_CLI_LOGIN)))
+        {
+            return -1;
+        }
+
+        GP_CLI_LOGIN loginPacket = {};
+
+        std::memcpy(&loginPacket, buff + FFXI_HEADER_SIZE, sizeof(GP_CLI_LOGIN));
+
+        // See LoginPacketCheck from https://github.com/atom0s/XiPackets/tree/main/world/client/0x000A
+        uint8 checksum = 0;
+
+        const auto checksumOffset = offsetof(GP_CLI_LOGIN, unknown01);
+        const auto checksumLength = sizeof(GP_CLI_LOGIN) - checksumOffset;
+
+        for (int i = 0; i < checksumLength; i++)
+        {
+            checksum += ref<uint8>(&loginPacket, checksumOffset + i);
+        }
+
+        // Failed checksum
+        if (checksum != loginPacket.LoginPacketCheck)
+        {
+            return -1;
+        }
+
         // We can only get here if an 0x00A (not encrypted) packet was here.
         // If we were pending zones, delete our old char
         if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE)
