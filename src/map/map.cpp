@@ -723,18 +723,18 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     if (checksumResult == 0)
     {
-        // We can only get here if an 0x00A (not encrypted) packet was here.
-        // If we were pending zones, delete our old char
-        if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE)
-        {
-            destroy(map_session_data->PChar);
-        }
-
         uint16 packetID = ref<uint16>(buff, FFXI_HEADER_SIZE) & 0x1FF;
 
         if (packetID != 0x00A)
         {
             return -1;
+        }
+
+        // We can only get here if an 0x00A (not encrypted) packet was here.
+        // If we were pending zones, delete our old char
+        if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE)
+        {
+            destroy(map_session_data->PChar);
         }
 
         if (map_session_data->PChar == nullptr)
