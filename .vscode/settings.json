@@ -453,6 +453,10 @@
         "cwctype": "cpp",
         "scoped_allocator": "cpp",
         "pointers": "cpp",
-        "*.inc": "cpp"
+        "*.inc": "cpp",
+        "__config": "cpp",
+        "__hash_table": "cpp",
+        "__node_handle": "cpp",
+        "__verbose_abort": "cpp"
     },
 }

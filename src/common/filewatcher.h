@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include <filesystem>
-#include <functional>
 #include <memory>
 #include <string>
 #include <vector>
@@ -13,11 +12,23 @@ class Filewatcher : public efsw::FileWatchListener
 {
 public:
     Filewatcher(std::vector<std::string> const& paths);
+
+    // efsw::FileWatchListener
     void handleFileAction(efsw::WatchID watchid, std::string const& dir, std::string const& filename, efsw::Action action, std::string oldFilename) override;
 
-    moodycamel::ConcurrentQueue<std::filesystem::path> modifiedQueue;
+    enum class Action
+    {
+        Add      = 1,
+        Delete   = 2,
+        Modified = 3,
+        Moved    = 4,
+    };
+
+    auto getActionQueue() -> std::vector<std::pair<std::filesystem::path, Action>>;
 
 private:
-    std::unique_ptr<efsw::FileWatcher> fileWatcher;
+    std::unique_ptr<efsw::FileWatcher> fileWatcherImpl;
     std::vector<std::string>           basePaths;
+
+    moodycamel::ConcurrentQueue<std::pair<std::filesystem::path, Action>> actionQueue;
 };

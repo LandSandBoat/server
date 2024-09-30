@@ -403,22 +403,15 @@ namespace luautils
 
     void ReloadFilewatchList()
     {
-        std::set<std::string> filenames; // For de-duping
-
-        std::filesystem::path path;
-        while (filewatcher->modifiedQueue.try_dequeue(path))
+        for (const auto& [filename, action] : filewatcher->getActionQueue())
         {
-            if (path.extension() == ".lua")
+            if (action == Filewatcher::Action::Add || action == Filewatcher::Action::Modified)
             {
-                std::string filename = path.relative_path().generic_string();
-                filenames.insert(filename);
+                ShowInfo("[FileWatcher] %s", filename.c_str());
+                CacheLuaObjectFromFile(filename, true);
             }
-        }
 
-        for (auto const& filename : filenames)
-        {
-            ShowInfo("[FileWatcher] %s", filename);
-            CacheLuaObjectFromFile(filename, true);
+            // TODO: Handle moved and deleted files
         }
     }
 
