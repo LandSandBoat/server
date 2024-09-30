@@ -477,7 +477,7 @@ end
 function addBonuses(caster, spell, target, dmg, params)
     local ele             = spell:getElement()
     local affinityBonus   = AffinityBonusDmg(caster, ele)
-    local magicDefense    = getElementalDamageReduction(target, ele)
+    local magicDefense    = xi.spells.damage.calculateSDT(target, ele)
     local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, spell:getID(), ele)
     local casterJob       = caster:getMainJob()
 
@@ -552,7 +552,7 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     local affinityBonus = AffinityBonusDmg(caster, ele)
     dmg = math.floor(dmg * affinityBonus)
 
-    local magicDefense = getElementalDamageReduction(target, ele)
+    local magicDefense = xi.spells.damage.calculateSDT(target, ele)
     dmg = math.floor(dmg * magicDefense)
 
     local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, 0, ele)
@@ -581,17 +581,6 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     dmg = math.floor(dmg * mab)
 
     return dmg
-end
-
--- get elemental damage reduction
-function getElementalDamageReduction(target, element)
-    local defense = 1
-    if element > 0 then
-        defense = 1 - (target:getMod(xi.magic.specificDmgTakenMod[element]) / 10000)
-        return utils.clamp(defense, 0.0, 2.0)
-    end
-
-    return defense
 end
 
 function handleThrenody(caster, target, spell, basePower, baseDuration, modifier)

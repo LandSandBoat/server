@@ -397,7 +397,7 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params, isConal)
     dmg = dmg * (1 + correlationMultiplier)
 
     -- Monster elemental adjustments
-    local mobEleAdjustments = getElementalDamageReduction(target, spell:getElement())
+    local mobEleAdjustments = xi.spells.damage.calculateSDT(target, spell:getElement())
     dmg = dmg * mobEleAdjustments
 
     -- Modifiers

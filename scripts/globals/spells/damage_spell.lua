@@ -384,30 +384,25 @@ xi.spells.damage.calculateMagianAffinity = function()
 end
 
 -- Elemental Specific Damage Taken (Elemental SDT)
+-- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
+-- Each of the 8 elements has an SDT modifier (Modifiers 54 to 61. Check script(globals/status.lua)
+-- Mob elemental modifiers are populated by the values set in "mob_resistances.sql" (The database). SDT columns.
+-- The value of the modifiers are base 10000. Positive numbers mean less damage taken. Negative mean more damage taken.
+-- Examples:
+-- A value of 5000 -> 50% LESS damage taken.
+-- A value of -5000 -> 50% MORE damage taken.
+-- A word on SDT as understood in some wikis, even if they are refering to resistance and not actual SDT
+-- SDT under 50% applies a flat 1/2 *, which was for a long time confused with an additional resist tier, which, in reality, its an independent multiplier.
+-- This is understandable, because in a way, it is effectively a whole tier, but recent testing with skillchains/magic bursts after resist was removed from them, proved this.
+-- SDT affects magic burst damage, but never in a "negative" way.
+-- https://www.bg-wiki.com/ffxi/Resist for some SDT info.
+-- *perhaps this simply means there is a cap/clamp limiting it there.
 xi.spells.damage.calculateSDT = function(target, spellElement)
-    local sdt    = 1 -- The variable we want to calculate
-    local sdtMod = 0
+    local sdt = 1 -- The variable we want to calculate
 
     if spellElement > xi.element.NONE then
-        sdtMod = target:getMod(xi.combat.element.specificDmgTakenMod[spellElement])
-
-    -- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
-    -- Each of the 8 elements has an SDT modifier (Modifiers 54 to 61. Check script(globals/status.lua)
-    -- Mob elemental modifiers are populated by the values set in "mob_resistances.sql" (The database). SDT columns.
-    -- The value of the modifiers are base 10000. Positive numbers mean less damage taken. Negative mean more damage taken.
-    -- Examples:
-    -- A value of 5000 -> 50% LESS damage taken.
-    -- A value of -5000 -> 50% MORE damage taken.
-
-        sdt = (sdtMod / -10000) + 1
+        sdt = 1 - target:getMod(xi.combat.element.specificDmgTakenMod[spellElement]) / 10000
     end
-
-    -- A word on SDT as understood in some wikis, even if they are refering to resistance and not actual SDT
-    -- SDT under 50% applies a flat 1/2 *, which was for a long time confused with an additional resist tier, which, in reality, its an independent multiplier.
-    -- This is understandable, because in a way, it is effectively a whole tier, but recent testing with skillchains/magic bursts after resist was removed from them, proved this.
-    -- SDT affects magic burst damage, but never in a "negative" way.
-    -- https://www.bg-wiki.com/ffxi/Resist for some SDT info.
-    -- *perhaps this simply means there is a cap/clamp limiting it there.
 
     return utils.clamp(sdt, 0, 3)
 end

@@ -397,7 +397,7 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, percent, base, element
     if element and element > 0 then
         -- no skill available, pass nil
         local resist  = xi.mobskills.applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 0, element)
-        local defense = getElementalDamageReduction(target, element)
+        local defense = xi.spells.damage.calculateSDT(target, element)
 
         damage = damage * resist * defense
     end
