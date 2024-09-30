@@ -403,12 +403,13 @@ namespace luautils
 
     void ReloadFilewatchList()
     {
-        for (const auto& [filename, action] : filewatcher->getActionQueue())
+        for (const auto& [filename, action] : filewatcher->getChangedLuaFiles())
         {
+            const auto pathStr = filename.generic_string();
             if (action == Filewatcher::Action::Add || action == Filewatcher::Action::Modified)
             {
-                ShowInfo("[FileWatcher] %s", filename.c_str());
-                CacheLuaObjectFromFile(filename, true);
+                ShowInfo("[FileWatcher] %s", pathStr.c_str());
+                CacheLuaObjectFromFile(pathStr, true);
             }
 
             // TODO: Handle moved and deleted files

@@ -17,9 +17,18 @@ Filewatcher::Filewatcher(std::vector<std::string> const& paths)
 {
     for (auto& path : paths)
     {
-        fileWatcherImpl->addWatch(path, this, true);
+        const auto watchId = fileWatcherImpl->addWatch(path, this, true);
+        registedWatchIds.push_back(watchId);
     }
     fileWatcherImpl->watch();
+}
+
+Filewatcher::~Filewatcher()
+{
+    for (const auto watchId : registedWatchIds)
+    {
+        fileWatcherImpl->removeWatch(watchId);
+    }
 }
 
 // cppcheck-suppress passedByValue
@@ -27,46 +36,49 @@ void Filewatcher::handleFileAction(efsw::WatchID watchid, std::string const& dir
 {
     TracySetThreadName("Filewatcher Thread");
     TracyZoneScoped;
-    std::filesystem::path fullPath = dir + "/" + filename;
+
+    const auto fullPath = std::filesystem::path(dir + filename);
     switch (action)
     {
         case efsw::Actions::Add:
-            actionQueue.enqueue({fullPath, Action::Add});
+            actionQueue.enqueue({ fullPath, Action::Add });
             break;
         case efsw::Actions::Delete:
-            actionQueue.enqueue({fullPath, Action::Delete});
+            actionQueue.enqueue({ fullPath, Action::Delete });
             break;
         case efsw::Actions::Modified:
-            actionQueue.enqueue({fullPath, Action::Modified});
+            actionQueue.enqueue({ fullPath, Action::Modified });
             break;
         case efsw::Actions::Moved:
-            actionQueue.enqueue({fullPath, Action::Moved});
+            actionQueue.enqueue({ fullPath, Action::Moved });
             break;
         default:
             break;
     }
 }
 
-auto Filewatcher::getActionQueue() -> std::vector<std::pair<std::filesystem::path, Action>>
+auto Filewatcher::getChangedLuaFiles() -> std::vector<std::pair<std::filesystem::path, Action>>
 {
     std::set<std::pair<std::filesystem::path, Action>> actions; // For de-duping
 
-    std::pair<std::filesystem::path, Action> action;
-    while (actionQueue.try_dequeue(action))
     {
-        if (action.first.extension() == ".lua")
+        std::pair<std::filesystem::path, Action> actionPair;
+        while (actionQueue.try_dequeue(actionPair))
         {
-            std::string filename = action.first.relative_path().generic_string();
-            actions.insert({filename, action.second});
+            const auto [path, action] = actionPair;
+            if (path.extension() == ".lua")
+            {
+                actions.insert({ path.relative_path(), action });
+            }
         }
     }
 
     std::vector<std::pair<std::filesystem::path, Action>> results;
     results.reserve(actions.size());
 
-    for (auto const& [filename, action] : actions)
+    for (auto const& [path, action] : actions)
     {
-        results.emplace_back(filename, action);
+        results.emplace_back(path, action);
     }
 
     return results;
