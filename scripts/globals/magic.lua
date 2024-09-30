@@ -246,22 +246,6 @@ function isValidHealTarget(caster, target)
             target:getObjType() == xi.objType.FELLOW)
 end
 
--- USED FOR DAMAGING MAGICAL SPELLS. Stage 3 of Calculating Magic Damage on wiki
--- Reduces damage ifit resists.
---
--- Output:
--- The factor to multiply down damage (1/2 1/4 1/8 1/16) - In this format so this func can be used for enfeebs on duration.
--- USED FOR Status Effect Enfeebs (blind, slow, para, etc.)
--- Output:
--- The factor to multiply down duration (1/2 1/4 1/8 1/16)
---[[
-local params = {}
-params.attribute = $2
-params.skillType = $3
-params.bonus = $4
-params.effect = $5
-]]
-
 -- TODO: This must be destroyed
 function applyResistanceEffect(actor, target, spell, params)
     local spellFamily = spell:getSpellFamily() or 0
@@ -313,42 +297,6 @@ function applyResistanceAddEffect(actor, target, element, bonusMacc)
     local resistRate   = xi.combat.magicHitRate.calculateResistRate(actor, target, xi.skill.NONE, element, magicHitRate, 0)
 
     return resistRate
-end
-
--- Returns the amount of resistance the target has to the given effect
-local effectToResistanceMod =
-{
-    [xi.effect.SLEEP_I      ] = xi.mod.SLEEPRES,
-    [xi.effect.SLEEP_II     ] = xi.mod.SLEEPRES,
-    [xi.effect.LULLABY      ] = xi.mod.SLEEPRES,
-    [xi.effect.POISON       ] = xi.mod.POISONRES,
-    [xi.effect.PARALYSIS    ] = xi.mod.PARALYZERES,
-    [xi.effect.BLINDNESS    ] = xi.mod.BLINDRES,
-    [xi.effect.SILENCE      ] = xi.mod.SILENCERES,
-    [xi.effect.PLAGUE       ] = xi.mod.VIRUSRES,
-    [xi.effect.DISEASE      ] = xi.mod.VIRUSRES,
-    [xi.effect.PETRIFICATION] = xi.mod.PETRIFYRES,
-    [xi.effect.BIND         ] = xi.mod.BINDRES,
-    [xi.effect.CURSE_I      ] = xi.mod.CURSERES,
-    [xi.effect.CURSE_II     ] = xi.mod.CURSERES,
-    [xi.effect.BANE         ] = xi.mod.CURSERES,
-    [xi.effect.WEIGHT       ] = xi.mod.GRAVITYRES,
-    [xi.effect.SLOW         ] = xi.mod.SLOWRES,
-    [xi.effect.ELEGY        ] = xi.mod.SLOWRES,
-    [xi.effect.STUN         ] = xi.mod.STUNRES,
-    [xi.effect.CHARM_I      ] = xi.mod.CHARMRES,
-    [xi.effect.CHARM_II     ] = xi.mod.CHARMRES,
-    [xi.effect.AMNESIA      ] = xi.mod.AMNESIARES,
-}
-
-xi.magic.getEffectResistance = function(target, effectId)
-    local statusResistance = target:getMod(xi.mod.STATUSRES)
-
-    if effectToResistanceMod[effectId] then
-        statusResistance = statusResistance + target:getMod(effectToResistanceMod[effectId])
-    end
-
-    return statusResistance
 end
 
 function finalMagicAdjustments(caster, target, spell, dmg)
