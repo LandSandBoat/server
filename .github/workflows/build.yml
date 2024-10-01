@@ -225,6 +225,15 @@ jobs:
     #  with:
     #    path: build
     #    key: ${{ runner.os }}-clang
+    - name: Enable Modules
+      shell: bash
+      run: |
+        python3 << EOF
+        with open("modules/init.txt", "w") as f:
+            f.write("custom\n")
+            f.write("era\n")
+            f.write("renamer\n")
+        EOF
     - name: Configure CMake
       run: |
         export CC=/usr/bin/clang-15
@@ -325,6 +334,15 @@ jobs:
         with:
           path: build
           key: ${{ runner.os }}-msvc64d
+      - name: Enable Modules
+        shell: cmd
+        run: |
+          python3 << EOF
+          with open("modules/init.txt", "w") as f:
+              f.write("custom\n")
+              f.write("era\n")
+              f.write("renamer\n")
+          EOF
       - name: Configure CMake
         shell: cmd
         run: |
@@ -429,6 +447,10 @@ jobs:
         for f in sql/*.sql; do
           echo -e "Importing $f into the database..."
           mysql xidb -h 127.0.0.1 -uroot -proot < $f
+        done
+        find modules/ -type f -name "*.sql" | while read sql_file; do
+          echo -e "Importing $sql_file into the database..."
+          mysql xidb -h 127.0.0.1 -uroot -proot < $sql_file
         done
         mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
     - name: Copy settings
@@ -608,6 +630,10 @@ jobs:
           echo -e "Importing $f into the database..."
           mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
+        find modules/ -type f -name "*.sql" | while read sql_file; do
+          echo -e "Importing $sql_file into the database..."
+          mysql xidb -h 127.0.0.1 -uroot -proot < $sql_file
+        done
         mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
     - name: Assign odd zones a different port
       run: |
@@ -688,6 +714,10 @@ jobs:
         for f in sql/*.sql; do
           echo -e "Importing $f into the database..."
           mysql xidb -h 127.0.0.1 -uroot -proot < $f
+        done
+        find modules/ -type f -name "*.sql" | while read sql_file; do
+          echo -e "Importing $sql_file into the database..."
+          mysql xidb -h 127.0.0.1 -uroot -proot < $sql_file
         done
         mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
     - name: Startup checks
