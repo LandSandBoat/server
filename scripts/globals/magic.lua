@@ -27,45 +27,20 @@ xi.magic.dayElement =
 -- Tables by element
 -----------------------------------
 
-local strongAffinityDmg      = { xi.mod.FIRE_AFFINITY_DMG,     xi.mod.ICE_AFFINITY_DMG,     xi.mod.WIND_AFFINITY_DMG,      xi.mod.EARTH_AFFINITY_DMG,     xi.mod.THUNDER_AFFINITY_DMG,       xi.mod.WATER_AFFINITY_DMG,      xi.mod.LIGHT_AFFINITY_DMG,  xi.mod.DARK_AFFINITY_DMG }
 local strongAffinityAcc      = { xi.mod.FIRE_AFFINITY_ACC,     xi.mod.ICE_AFFINITY_ACC,     xi.mod.WIND_AFFINITY_ACC,      xi.mod.EARTH_AFFINITY_ACC,     xi.mod.THUNDER_AFFINITY_ACC,       xi.mod.WATER_AFFINITY_ACC,      xi.mod.LIGHT_AFFINITY_ACC,  xi.mod.DARK_AFFINITY_ACC }
 xi.magic.resistMod           = { xi.mod.FIRE_MEVA,             xi.mod.ICE_MEVA,             xi.mod.WIND_MEVA,              xi.mod.EARTH_MEVA,             xi.mod.THUNDER_MEVA,               xi.mod.WATER_MEVA,              xi.mod.LIGHT_MEVA,          xi.mod.DARK_MEVA }
 xi.magic.specificDmgTakenMod = { xi.mod.FIRE_SDT,              xi.mod.ICE_SDT,              xi.mod.WIND_SDT,               xi.mod.EARTH_SDT,              xi.mod.THUNDER_SDT,                xi.mod.WATER_SDT,               xi.mod.LIGHT_SDT,           xi.mod.DARK_SDT }
 xi.magic.absorbMod           = { xi.mod.FIRE_ABSORB,           xi.mod.ICE_ABSORB,           xi.mod.WIND_ABSORB,            xi.mod.EARTH_ABSORB,           xi.mod.LTNG_ABSORB,                xi.mod.WATER_ABSORB,            xi.mod.LIGHT_ABSORB,        xi.mod.DARK_ABSORB }
-local nullMod                = { xi.mod.FIRE_NULL,             xi.mod.ICE_NULL,             xi.mod.WIND_NULL,              xi.mod.EARTH_NULL,             xi.mod.LTNG_NULL,                  xi.mod.WATER_NULL,              xi.mod.LIGHT_NULL,          xi.mod.DARK_NULL }
 local blmMerit               = { xi.merit.FIRE_MAGIC_POTENCY,  xi.merit.ICE_MAGIC_POTENCY,  xi.merit.WIND_MAGIC_POTENCY,   xi.merit.EARTH_MAGIC_POTENCY,  xi.merit.LIGHTNING_MAGIC_POTENCY,  xi.merit.WATER_MAGIC_POTENCY }
 xi.magic.barSpell            = { xi.effect.BARFIRE,            xi.effect.BARBLIZZARD,       xi.effect.BARAERO,             xi.effect.BARSTONE,            xi.effect.BARTHUNDER,              xi.effect.BARWATER }
 
 -- USED FOR DAMAGING MAGICAL SPELLS (Stages 1 and 2 in Calculating Magic Damage on wiki)
---Calculates magic damage using the standard magic damage calc.
---Does NOT handle resistance.
--- Inputs:
--- dmg - The base damage of the spell
--- multiplier - The INT multiplier of the spell
--- skilltype - The skill ID of the spell.
--- atttype - The attribute type (usually xi.mod.INT , except for things like Banish which is xi.mod.MND)
--- hasMultipleTargetReduction - true ifdamage is reduced on AoE. False otherwise (e.g. Charged Whisker vs -ga3 spells)
---
--- Output:
--- The total damage, before resistance and before equipment (so no HQ staff bonus worked out here).
 local softCap = 60 --guesstimated
 local hardCap = 120 --guesstimated
 
 -----------------------------------
 -- Returns the staff bonus for the caster and spell.
 -----------------------------------
--- affinities that strengthen/weaken the index element
-local function AffinityBonusDmg(caster, ele)
-    local affinity = caster:getMod(strongAffinityDmg[ele])
-    local bonus = 1.00 + affinity * 0.05 -- 5% per level of affinity
-    return bonus
-end
-
-local function AffinityBonusAcc(caster, ele)
-    local affinity = caster:getMod(strongAffinityAcc[ele])
-    local bonus = 0 + affinity * 10 -- 10 acc per level of affinity
-    return bonus
-end
 
 local function calculateMagicBurst(caster, spell, target, params)
     local burst           = 1
@@ -246,22 +221,6 @@ function isValidHealTarget(caster, target)
             target:getObjType() == xi.objType.FELLOW)
 end
 
--- USED FOR DAMAGING MAGICAL SPELLS. Stage 3 of Calculating Magic Damage on wiki
--- Reduces damage ifit resists.
---
--- Output:
--- The factor to multiply down damage (1/2 1/4 1/8 1/16) - In this format so this func can be used for enfeebs on duration.
--- USED FOR Status Effect Enfeebs (blind, slow, para, etc.)
--- Output:
--- The factor to multiply down duration (1/2 1/4 1/8 1/16)
---[[
-local params = {}
-params.attribute = $2
-params.skillType = $3
-params.bonus = $4
-params.effect = $5
-]]
-
 -- TODO: This must be destroyed
 function applyResistanceEffect(actor, target, spell, params)
     local spellFamily = spell:getSpellFamily() or 0
@@ -313,42 +272,6 @@ function applyResistanceAddEffect(actor, target, element, bonusMacc)
     local resistRate   = xi.combat.magicHitRate.calculateResistRate(actor, target, xi.skill.NONE, element, magicHitRate, 0)
 
     return resistRate
-end
-
--- Returns the amount of resistance the target has to the given effect
-local effectToResistanceMod =
-{
-    [xi.effect.SLEEP_I      ] = xi.mod.SLEEPRES,
-    [xi.effect.SLEEP_II     ] = xi.mod.SLEEPRES,
-    [xi.effect.LULLABY      ] = xi.mod.SLEEPRES,
-    [xi.effect.POISON       ] = xi.mod.POISONRES,
-    [xi.effect.PARALYSIS    ] = xi.mod.PARALYZERES,
-    [xi.effect.BLINDNESS    ] = xi.mod.BLINDRES,
-    [xi.effect.SILENCE      ] = xi.mod.SILENCERES,
-    [xi.effect.PLAGUE       ] = xi.mod.VIRUSRES,
-    [xi.effect.DISEASE      ] = xi.mod.VIRUSRES,
-    [xi.effect.PETRIFICATION] = xi.mod.PETRIFYRES,
-    [xi.effect.BIND         ] = xi.mod.BINDRES,
-    [xi.effect.CURSE_I      ] = xi.mod.CURSERES,
-    [xi.effect.CURSE_II     ] = xi.mod.CURSERES,
-    [xi.effect.BANE         ] = xi.mod.CURSERES,
-    [xi.effect.WEIGHT       ] = xi.mod.GRAVITYRES,
-    [xi.effect.SLOW         ] = xi.mod.SLOWRES,
-    [xi.effect.ELEGY        ] = xi.mod.SLOWRES,
-    [xi.effect.STUN         ] = xi.mod.STUNRES,
-    [xi.effect.CHARM_I      ] = xi.mod.CHARMRES,
-    [xi.effect.CHARM_II     ] = xi.mod.CHARMRES,
-    [xi.effect.AMNESIA      ] = xi.mod.AMNESIARES,
-}
-
-xi.magic.getEffectResistance = function(target, effectId)
-    local statusResistance = target:getMod(xi.mod.STATUSRES)
-
-    if effectToResistanceMod[effectId] then
-        statusResistance = statusResistance + target:getMod(effectToResistanceMod[effectId])
-    end
-
-    return statusResistance
 end
 
 function finalMagicAdjustments(caster, target, spell, dmg)
@@ -455,29 +378,10 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     return dmg
 end
 
--- TODO: Use new function for spell absorbtion or nullification
-function adjustForTarget(target, dmg, ele)
-    if ele <= 0 then
-        return dmg
-    end
-
-    if dmg > 0 and math.random(0, 99) < target:getMod(xi.magic.absorbMod[ele]) then
-        return -dmg
-    end
-
-    if math.random(0, 99) < target:getMod(nullMod[ele]) then
-        return 0
-    end
-
-    --Moved non element specific absorb and null mod checks to core
-    --TODO: update all lua calls to magicDmgTaken with appropriate element and remove this function
-    return dmg
-end
-
 function addBonuses(caster, spell, target, dmg, params)
     local ele             = spell:getElement()
-    local affinityBonus   = AffinityBonusDmg(caster, ele)
-    local magicDefense    = getElementalDamageReduction(target, ele)
+    local affinityBonus   = xi.spells.damage.calculateElementalStaffBonus(caster, ele)
+    local magicDefense    = xi.spells.damage.calculateSDT(target, ele)
     local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, spell:getID(), ele)
     local casterJob       = caster:getMainJob()
 
@@ -549,10 +453,10 @@ function addBonuses(caster, spell, target, dmg, params)
 end
 
 function addBonusesAbility(caster, ele, target, dmg, params)
-    local affinityBonus = AffinityBonusDmg(caster, ele)
+    local affinityBonus = xi.spells.damage.calculateElementalStaffBonus(caster, ele)
     dmg = math.floor(dmg * affinityBonus)
 
-    local magicDefense = getElementalDamageReduction(target, ele)
+    local magicDefense = xi.spells.damage.calculateSDT(target, ele)
     dmg = math.floor(dmg * magicDefense)
 
     local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, 0, ele)
@@ -583,20 +487,9 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     return dmg
 end
 
--- get elemental damage reduction
-function getElementalDamageReduction(target, element)
-    local defense = 1
-    if element > 0 then
-        defense = 1 - (target:getMod(xi.magic.specificDmgTakenMod[element]) / 10000)
-        return utils.clamp(defense, 0.0, 2.0)
-    end
-
-    return defense
-end
-
 function handleThrenody(caster, target, spell, basePower, baseDuration, modifier)
     -- Process resitances
-    local staff  = AffinityBonusAcc(caster, spell:getElement())
+    local staff  = caster:getMod(strongAffinityAcc[spell:getElement()]) * 10
     local params = {}
 
     params.attribute = xi.mod.CHR

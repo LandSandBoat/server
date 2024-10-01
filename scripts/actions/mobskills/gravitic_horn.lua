@@ -24,7 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         damage = math.floor(damage * 0.95)
     end
 
-    damage = math.floor(damage * getElementalDamageReduction(target, xi.element.WIND))
+    damage = math.floor(damage * xi.spells.damage.calculateSDT(target, xi.element.WIND))
     damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)

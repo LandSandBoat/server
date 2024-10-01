@@ -46,7 +46,7 @@ entity.onSpikesDamage = function(mob, target, damage)
         params.includemab = false
         dmg = addBonusesAbility(mob, xi.element.FIRE, target, dmg, params)
         dmg = dmg * applyResistanceAddEffect(mob, target, xi.element.FIRE, 0)
-        dmg = adjustForTarget(target, dmg, xi.element.FIRE)
+        dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, xi.element.FIRE)
         dmg = finalMagicNonSpellAdjustments(mob, target, xi.element.FIRE, dmg)
 
         if dmg < 0 then
