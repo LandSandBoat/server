@@ -335,7 +335,7 @@ jobs:
           path: build
           key: ${{ runner.os }}-msvc64d
       - name: Enable Modules
-        shell: cmd
+        shell: bash
         run: |
           python3 << EOF
           with open("modules/init.txt", "w") as f:

@@ -779,17 +779,27 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
     int32 ATT    = 8 + m_modStat[Mod::ATT];
     auto  ATTP   = m_modStat[Mod::ATTP];
     auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[slot]);
-    if (weapon && weapon->isTwoHanded())
+
+    // https://www.bg-wiki.com/ffxi/Strength
+    if (weapon && weapon->isTwoHanded()) // 2-handed weapon
     {
-        ATT += (STR() * 3) / 4;
+        ATT += STR();
     }
-    else if (weapon && weapon->isHandToHand())
+    else if (weapon && weapon->isHandToHand()) // H2H Weapon
     {
-        ATT += (STR() * 5) / 8;
+        ATT += STR() * 3 / 4;
     }
-    else
+    else if (slot == SLOT_RANGED || slot == SLOT_AMMO) // Ranged/ammo weapon.
     {
-        ATT += (STR() * 3) / 4;
+        ATT += STR();
+    }
+    else if (slot == SLOT_MAIN) // 1-handed weapon in main slot.
+    {
+        ATT += STR();
+    }
+    else // 1-handed weapon in sub slot.
+    {
+        ATT += STR() / 2;
     }
 
     if (this->StatusEffectContainer->HasStatusEffect(EFFECT_ENDARK))
