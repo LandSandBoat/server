@@ -27,7 +27,6 @@ xi.magic.dayElement =
 -- Tables by element
 -----------------------------------
 
-local strongAffinityDmg      = { xi.mod.FIRE_AFFINITY_DMG,     xi.mod.ICE_AFFINITY_DMG,     xi.mod.WIND_AFFINITY_DMG,      xi.mod.EARTH_AFFINITY_DMG,     xi.mod.THUNDER_AFFINITY_DMG,       xi.mod.WATER_AFFINITY_DMG,      xi.mod.LIGHT_AFFINITY_DMG,  xi.mod.DARK_AFFINITY_DMG }
 local strongAffinityAcc      = { xi.mod.FIRE_AFFINITY_ACC,     xi.mod.ICE_AFFINITY_ACC,     xi.mod.WIND_AFFINITY_ACC,      xi.mod.EARTH_AFFINITY_ACC,     xi.mod.THUNDER_AFFINITY_ACC,       xi.mod.WATER_AFFINITY_ACC,      xi.mod.LIGHT_AFFINITY_ACC,  xi.mod.DARK_AFFINITY_ACC }
 xi.magic.resistMod           = { xi.mod.FIRE_MEVA,             xi.mod.ICE_MEVA,             xi.mod.WIND_MEVA,              xi.mod.EARTH_MEVA,             xi.mod.THUNDER_MEVA,               xi.mod.WATER_MEVA,              xi.mod.LIGHT_MEVA,          xi.mod.DARK_MEVA }
 xi.magic.specificDmgTakenMod = { xi.mod.FIRE_SDT,              xi.mod.ICE_SDT,              xi.mod.WIND_SDT,               xi.mod.EARTH_SDT,              xi.mod.THUNDER_SDT,                xi.mod.WATER_SDT,               xi.mod.LIGHT_SDT,           xi.mod.DARK_SDT }
@@ -53,12 +52,6 @@ local hardCap = 120 --guesstimated
 -----------------------------------
 -- Returns the staff bonus for the caster and spell.
 -----------------------------------
--- affinities that strengthen/weaken the index element
-local function AffinityBonusDmg(caster, ele)
-    local affinity = caster:getMod(strongAffinityDmg[ele])
-    local bonus = 1.00 + affinity * 0.05 -- 5% per level of affinity
-    return bonus
-end
 
 local function AffinityBonusAcc(caster, ele)
     local affinity = caster:getMod(strongAffinityAcc[ele])
@@ -404,7 +397,7 @@ end
 
 function addBonuses(caster, spell, target, dmg, params)
     local ele             = spell:getElement()
-    local affinityBonus   = AffinityBonusDmg(caster, ele)
+    local affinityBonus   = xi.spells.damage.calculateElementalStaffBonus(caster, ele)
     local magicDefense    = xi.spells.damage.calculateSDT(target, ele)
     local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, spell:getID(), ele)
     local casterJob       = caster:getMainJob()
@@ -477,7 +470,7 @@ function addBonuses(caster, spell, target, dmg, params)
 end
 
 function addBonusesAbility(caster, ele, target, dmg, params)
-    local affinityBonus = AffinityBonusDmg(caster, ele)
+    local affinityBonus = xi.spells.damage.calculateElementalStaffBonus(caster, ele)
     dmg = math.floor(dmg * affinityBonus)
 
     local magicDefense = xi.spells.damage.calculateSDT(target, ele)
