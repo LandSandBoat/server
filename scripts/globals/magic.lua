@@ -35,29 +35,12 @@ local blmMerit               = { xi.merit.FIRE_MAGIC_POTENCY,  xi.merit.ICE_MAGI
 xi.magic.barSpell            = { xi.effect.BARFIRE,            xi.effect.BARBLIZZARD,       xi.effect.BARAERO,             xi.effect.BARSTONE,            xi.effect.BARTHUNDER,              xi.effect.BARWATER }
 
 -- USED FOR DAMAGING MAGICAL SPELLS (Stages 1 and 2 in Calculating Magic Damage on wiki)
---Calculates magic damage using the standard magic damage calc.
---Does NOT handle resistance.
--- Inputs:
--- dmg - The base damage of the spell
--- multiplier - The INT multiplier of the spell
--- skilltype - The skill ID of the spell.
--- atttype - The attribute type (usually xi.mod.INT , except for things like Banish which is xi.mod.MND)
--- hasMultipleTargetReduction - true ifdamage is reduced on AoE. False otherwise (e.g. Charged Whisker vs -ga3 spells)
---
--- Output:
--- The total damage, before resistance and before equipment (so no HQ staff bonus worked out here).
 local softCap = 60 --guesstimated
 local hardCap = 120 --guesstimated
 
 -----------------------------------
 -- Returns the staff bonus for the caster and spell.
 -----------------------------------
-
-local function AffinityBonusAcc(caster, ele)
-    local affinity = caster:getMod(strongAffinityAcc[ele])
-    local bonus = 0 + affinity * 10 -- 10 acc per level of affinity
-    return bonus
-end
 
 local function calculateMagicBurst(caster, spell, target, params)
     local burst           = 1
@@ -506,7 +489,7 @@ end
 
 function handleThrenody(caster, target, spell, basePower, baseDuration, modifier)
     -- Process resitances
-    local staff  = AffinityBonusAcc(caster, spell:getElement())
+    local staff  = caster:getMod(strongAffinityAcc[spell:getElement()]) * 10
     local params = {}
 
     params.attribute = xi.mod.CHR
