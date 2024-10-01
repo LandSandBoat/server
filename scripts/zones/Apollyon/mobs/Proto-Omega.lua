@@ -7,7 +7,6 @@ local entity = {}
 
 local quadrupedForm = function(mob)
     mob:setAnimationSub(1)
-    mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 100)
     mob:setMod(xi.mod.ATTP, 100)
     mob:setMod(xi.mod.UDMGPHYS, -9000)
     mob:setMod(xi.mod.UDMGRANGE, -9000)
@@ -17,7 +16,6 @@ end
 
 local bipedForm = function(mob)
     mob:setAnimationSub(2)
-    mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 0)
     mob:setMod(xi.mod.ATTP, 200)
     mob:setMod(xi.mod.UDMGPHYS, -3000)
     mob:setMod(xi.mod.UDMGRANGE, -3000)
@@ -39,6 +37,13 @@ end
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 25)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.BLIND)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
 end
 
 entity.onMobSpawn = function(mob)
@@ -47,6 +52,9 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGAIN, 50)
     mob:setMod(xi.mod.REGEN, 25)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+    -- base speed of 60 is based on retail capture and applies to all forms
+    -- also has standard boost (2.5x) up to 150 when target is out of range
+    mob:setSpeed(60)
     quadrupedForm(mob)
 end
 
