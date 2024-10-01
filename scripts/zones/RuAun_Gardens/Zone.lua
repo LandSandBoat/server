@@ -79,6 +79,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(37,  142, -41, -156,  145, -39, -153) -- Main Island (NE)
     zone:registerTriggerArea(38, -145, -41, -156, -142, -39, -153) -- Main Island (NW)
 
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     xi.treasure.initZone(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end

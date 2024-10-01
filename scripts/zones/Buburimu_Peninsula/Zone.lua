@@ -9,15 +9,14 @@ require('scripts/missions/amk/helpers')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    local hour = VanadielHour()
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.helm.initZone(zone, xi.helmType.LOGGING)
 
+    local hour = VanadielHour()
     if hour >= 6 and hour < 16 then
         GetMobByID(ID.mob.BACKOO):setRespawnTime(1)
     end
-
-    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
-
-    xi.helm.initZone(zone, xi.helmType.LOGGING)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

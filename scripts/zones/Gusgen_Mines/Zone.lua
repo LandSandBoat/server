@@ -7,6 +7,7 @@ local ID = zones[xi.zone.GUSGEN_MINES]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     xi.treasure.initZone(zone)
     xi.helm.initZone(zone, xi.helmType.MINING)
 end

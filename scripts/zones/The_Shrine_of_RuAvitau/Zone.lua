@@ -34,6 +34,8 @@ zoneObject.onInitialize = function(zone)
     -- MAP 6
     zone:registerTriggerArea(2, 777, -103, -503, 783, -99, -497) --> E (G-6)
     zone:registerTriggerArea(1, 816, -103, -503, 822, -99, -497) --> F (I-6)
+
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

@@ -7,6 +7,8 @@ local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
+
     UpdateNMSpawnPoint(ID.mob.DREXERION_THE_CONDEMNED)
     GetMobByID(ID.mob.DREXERION_THE_CONDEMNED):setRespawnTime(math.random(900, 10800))
 

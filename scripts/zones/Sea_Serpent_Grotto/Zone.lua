@@ -15,6 +15,7 @@ zoneObject.onInitialize = function(zone)
 
     DespawnMob(keys[math.random(1, #keys)])
 
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     xi.treasure.initZone(zone)
 end
 

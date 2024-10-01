@@ -8,6 +8,7 @@ require('scripts/quests/i_can_hear_a_rainbow')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     UpdateNMSpawnPoint(ID.mob.DUKE_DECAPOD)
     GetMobByID(ID.mob.DUKE_DECAPOD):setRespawnTime(math.random(3600, 4200))
 end

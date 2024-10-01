@@ -22,6 +22,7 @@ zoneObject.onInitialize = function(zone)
         DisallowRespawn(kreutzet:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
     end
 
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 

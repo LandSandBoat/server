@@ -12,6 +12,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(3, -257.8, 0, -24.9, -256.1, 1, -23.5) -- Black
     zone:registerTriggerArea(4, -261, -3, 182, -257, -1, 186) -- Teleport at H-6
 
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     xi.treasure.initZone(zone)
 end
 

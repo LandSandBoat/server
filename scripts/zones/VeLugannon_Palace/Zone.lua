@@ -5,6 +5,7 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     xi.treasure.initZone(zone)
     SetServerVariable('[POP]SteamCleaner', 0) -- should 'reset' on server repop
 end

@@ -11,6 +11,8 @@ zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.ROC)
     GetMobByID(ID.mob.ROC):setRespawnTime(math.random(900, 10800))
     GetNPCByID(ID.npc.QM2 + math.random(0, 5)):setLocalVar('Quest[2][70]Option', 1) -- Determine which QM is active today for THF AF2
+
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     xi.voidwalker.zoneOnInit(zone)
 end
 

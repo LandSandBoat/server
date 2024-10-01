@@ -19,6 +19,7 @@ zoneObject.onInitialize = function(zone)
         GetMobByID(ID.mob.LEECH_KING):setRespawnTime(math.random(900, 7200))
     end
 
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     xi.treasure.initZone(zone)
     xi.helm.initZone(zone, xi.helmType.EXCAVATION)
 end

@@ -11,6 +11,7 @@ zoneObject.onInitialize = function(zone)
     GetMobByID(ID.mob.DYNAST_BEETLE):setRespawnTime(math.random(5400, 7200))
 
     xi.treasure.initZone(zone)
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

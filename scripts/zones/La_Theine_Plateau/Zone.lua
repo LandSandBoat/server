@@ -10,6 +10,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     laTheineGlobal.moveFallenEgg()
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     xi.chocobo.initZone(zone)
     xi.voidwalker.zoneOnInit(zone)
 end

@@ -10,6 +10,8 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.SIMURGH)
     GetMobByID(ID.mob.SIMURGH):setRespawnTime(math.random(900, 7200))
+
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     xi.voidwalker.zoneOnInit(zone)
 end
 

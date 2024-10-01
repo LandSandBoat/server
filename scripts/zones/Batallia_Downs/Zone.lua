@@ -25,6 +25,8 @@ local function registerRegionAroundNPC(zone, NPCID, zoneID)
 end
 
 zoneObject.onInitialize = function(zone)
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
+
     UpdateNMSpawnPoint(ID.mob.AHTU)
     GetMobByID(ID.mob.AHTU):setRespawnTime(math.random(900, 10800))
 

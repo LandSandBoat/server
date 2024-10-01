@@ -17,6 +17,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(10, -415, -98, 104, -411, -97, 108) -- Seventh Floor  H-6 porter to Sixth Floor "J"
     zone:registerTriggerArea(11, -489, -130, 84, -484, -129, 88) -- Ninth Floor F-6 porter to Upper Delkfutt's Tower
 
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     xi.treasure.initZone(zone)
 end
 

@@ -34,6 +34,7 @@ zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.SERKET)
     GetMobByID(ID.mob.SERKET):setRespawnTime(math.random(900, 10800))
 
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     xi.treasure.initZone(zone)
 end
 

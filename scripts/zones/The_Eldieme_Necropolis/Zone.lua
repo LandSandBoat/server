@@ -7,6 +7,7 @@ local eldiemeID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     xi.treasure.initZone(zone)
 
     -- Give the Acting in Good Faith ??? a random spawn

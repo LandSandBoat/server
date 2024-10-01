@@ -15,6 +15,7 @@ zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.BARBASTELLE)
     GetMobByID(ID.mob.BARBASTELLE):setRespawnTime(math.random(1800, 5400))
 
+    xi.applyZoneMobMixins(zone, xi.mixins.spawn_casket)
     xi.treasure.initZone(zone)
 end
 
