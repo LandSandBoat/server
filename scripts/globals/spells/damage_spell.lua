@@ -778,13 +778,13 @@ xi.spells.damage.calculateAreaOfEffectResistance = function(target, spell)
 end
 
 xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
-    local nukeAbsorbOrNullify = 1
-    local absorbElementMod    = 0
-    local nullifyElementMod   = 0
+    local nukeAbsorbOrNullify    = 1
+    local absorbElementModValue  = 0
+    local nullifyElementModValue = 0
 
     if spellElement > xi.element.NONE then
-        absorbElementMod  = xi.combat.element.absorbMod[spellElement]
-        nullifyElementMod = xi.combat.element.nullMod[spellElement]
+        absorbElementModValue  = target:getMod(xi.combat.element.absorbMod[spellElement])
+        nullifyElementModValue = target:getMod(xi.combat.element.nullMod[spellElement])
     end
 
     -- Calculate chance for spell absorption.
@@ -792,7 +792,7 @@ xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
     if
         absorbChance <= target:getMod(xi.mod.ABSORB_DMG_CHANCE) or -- All damage.
         absorbChance <= target:getMod(xi.mod.MAGIC_ABSORB) or      -- Magical damage.
-        absorbChance <= target:getMod(absorbElementMod)            -- Element damage.
+        absorbChance <= absorbElementModValue                      -- Element damage.
     then
         nukeAbsorbOrNullify = -1
     end
@@ -802,7 +802,7 @@ xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
     if
         nullifyChance <= target:getMod(xi.mod.NULL_DAMAGE) or         -- All damage.
         nullifyChance <= target:getMod(xi.mod.NULL_MAGICAL_DAMAGE) or -- Magical damage.
-        nullifyChance <= target:getMod(nullifyElementMod)             -- Element damage.
+        nullifyChance <= nullifyElementModValue                       -- Element damage.
     then
         nukeAbsorbOrNullify = 0
     end
@@ -1025,8 +1025,12 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
         finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
     end
 
-    -- Handle Magic Absorb
-    if finalDamage < 0 then
+    -- Handle spell nullification message.
+    if nukeAbsorbOrNullify == 0 then
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+
+    -- Handle Magic Absorb message and HP recovery.
+    elseif finalDamage < 0 then
         finalDamage = target:addHP(-finalDamage)
         spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
 
