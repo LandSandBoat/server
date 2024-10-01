@@ -26,7 +26,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     dmg = addBonuses(caster, spell, target, dmg)
 
     --add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement())
+    dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement())
 
     --add in final adjustments
     if resist <= 0.125 then

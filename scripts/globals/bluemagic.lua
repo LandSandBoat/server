@@ -347,7 +347,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, 
 
     dmg = dmg * applyResistanceEffect(caster, target, spell, params)
     dmg = addBonuses(caster, spell, target, dmg)
-    dmg = adjustForTarget(target, dmg, spell:getElement())
+    dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement())
 
     -- limit damage
     if target:isUndead() then
