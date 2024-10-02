@@ -1,11 +1,15 @@
 -----------------------------------
 -- Area: Al'Taieu
 --  HNM: Absolute Virtue
+-- !pos 461.266 -1.643 -580.192 33
+-- !exec SpawnMob(zones[xi.zone.ALTAIEU].mob.ABSOLUTE_VIRTUE)
 -----------------------------------
 local ID = zones[xi.zone.ALTAIEU]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.experimental = true
 
 entity.onMobSpawn = function(mob)
     -- setMod
