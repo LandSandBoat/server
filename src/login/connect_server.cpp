@@ -77,9 +77,9 @@ ConnectServer::ConnectServer(int argc, char** argv)
         ShowInfo("creating ports");
 
         // Handler creates session of type T for specific port on connection.
-        handler<auth_session> auth(io_context, 54231);
-        handler<view_session> view(io_context, 54001);
-        handler<data_session> data(io_context, 54230);
+        handler<auth_session> auth(io_context, settings::get<uint32>("network.LOGIN_AUTH_PORT"));
+        handler<view_session> view(io_context, settings::get<uint32>("network.LOGIN_VIEW_PORT"));
+        handler<data_session> data(io_context, settings::get<uint32>("network.LOGIN_DATA_PORT"));
         asio::steady_timer    cleanup_callback(io_context, std::chrono::minutes(15));
 
         cleanup_callback.async_wait(std::bind(&ConnectServer::periodicCleanup, this, std::placeholders::_1, &cleanup_callback));
