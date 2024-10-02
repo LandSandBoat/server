@@ -4,6 +4,7 @@
 -----------------------------------
 require('scripts/globals/combat/element_tables')
 require('scripts/globals/combat/magic_hit_rate')
+require('scripts/globals/combat/status_effect_tables')
 require('scripts/globals/jobpoints')
 require('scripts/globals/magicburst')
 require('scripts/globals/utils')
@@ -101,20 +102,6 @@ local pTable =
     [xi.magic.spell.KURAYAMI_NI   ] = { xi.effect.BLINDNESS,          xi.mod.INT,   30,   0,      300,      2,   0, false,       0 },
     [xi.magic.spell.KURAYAMI_SAN  ] = { xi.effect.BLINDNESS,          xi.mod.INT,   40,   0,      420,      2,   0, false,       0 },
     [xi.magic.spell.YURIN_ICHI    ] = { xi.effect.INHIBIT_TP,         xi.mod.INT,   10,   0,      180,      3,   1, false,       0 },
-}
-
-local immunobreakTable =
-{
-    [xi.effect.SLEEP_I      ] = { xi.mod.SLEEP_IMMUNOBREAK    },
-    [xi.effect.POISON       ] = { xi.mod.POISON_IMMUNOBREAK   },
-    [xi.effect.PARALYSIS    ] = { xi.mod.PARALYZE_IMMUNOBREAK },
-    [xi.effect.BLINDNESS    ] = { xi.mod.BLIND_IMMUNOBREAK    },
-    [xi.effect.SILENCE      ] = { xi.mod.SILENCE_IMMUNOBREAK  },
-    [xi.effect.PETRIFICATION] = { xi.mod.PETRIFY_IMMUNOBREAK  },
-    [xi.effect.BIND         ] = { xi.mod.BIND_IMMUNOBREAK     },
-    [xi.effect.WEIGHT       ] = { xi.mod.GRAVITY_IMMUNOBREAK  },
-    [xi.effect.SLOW         ] = { xi.mod.SLOW_IMMUNOBREAK     },
-    [xi.effect.ADDLE        ] = { xi.mod.ADDLE_IMMUNOBREAK    },
 }
 
 local function getElementalDebuffPotency(caster, statUsed)
@@ -393,21 +380,11 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local spellElement = spell:getElement()
     local spellGroup   = spell:getSpellGroup()
     local statUsed     = pTable[spellId][2]
-    local mEvaMod      = xi.combat.statusEffect.getAssociatedMagicEvasionModifier(spellEffect)
     local resistStages = pTable[spellId][6]
     local message      = pTable[spellId][7]
     local bonusMacc    = pTable[spellId][9]
-    local rankModifier = target:getMod(xi.combat.statusEffect.getAssociatedImmunobreakModifier(spellEffect))
+    local resistRate   = xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, spellElement, statUsed, spellEffect, bonusMacc)
 
-    -- Magic Hit Rate calculations.
-    local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, spellGroup, skillType, spellElement, statUsed, bonusMacc)
-    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, true, mEvaMod, rankModifier)
-    local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
-    local resistRate   = xi.combat.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate, rankModifier)
-
-    ------------------------------
-    -- STEP 3: Check if spell resists and Immunobreak.
-    ------------------------------
     if spellEffect ~= xi.effect.NONE then
         -- Stymie
         if
@@ -422,10 +399,14 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
         end
     end
 
-    -- The effect will get resisted.
+    ------------------------------
+    -- STEP 3: Check if spell resists and Immunobreak.
+    ------------------------------
     if resistRate <= 1 / (2 ^ resistStages) then
         -- Attempt immunobreak. Fetch resistance rank modifier.
-        local resistRank = 0
+        local resistRank          = 0
+        local immunobreakModifier = xi.combat.statusEffect.getAssociatedImmunobreakModifier(spellEffect)
+        local rankModifier        = target:getMod(immunobreakModifier)
 
         if spellElement ~= xi.element.NONE then
             resistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
@@ -435,16 +416,16 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
             xi.settings.main.ENABLE_IMMUNOBREAK and
             caster:isPC() and
             target:isMob() and
-            immunobreakTable[spellEffect] and          -- Only certain effects can be immunobroken.
+            immunobreakModifier > 0 and                -- Only certain effects can be immunobroken.
             skillType == xi.skill.ENFEEBLING_MAGIC and -- Only Enfeebling magic can immunobreak.
-            resistRank > 4                             -- Only mobs with a resistance rank of 5+ (50% EEM) can be immunobroken.
+            (resistRank - rankModifier) > 4            -- Only mobs with a resistance rank of 5+ (50% EEM) can be immunobroken.
         then
             local immunobreakRandom = math.random(1, 100)
-            local immunobreakChance = magicHitRate / (1 + rankModifier) + caster:getMerit(xi.merit.IMMUNOBREAK_CHANCE)
+            local immunobreakChance = 16 / (1 + rankModifier) + caster:getMerit(xi.merit.IMMUNOBREAK_CHANCE)
 
             -- We successfully trigger Immunobreak. Change target modifier and set correct message.
             if immunobreakRandom <= immunobreakChance then
-                target:setMod(immunobreakTable[spellEffect][1], rankModifier + 1) -- TODO: Add equipment modifier (x2) here.
+                target:setMod(immunobreakModifier, rankModifier + 1) -- TODO: Add equipment modifier (x2) here.
 
                 spell:setModifier(xi.msg.actionModifier.IMMUNOBREAK)
             end

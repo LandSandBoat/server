@@ -81,7 +81,7 @@ end
 -- Helper functions to check target effect nullification.
 -----------------------------------
 xi.combat.statusEffect.isTargetImmune = function(target, effectId, actionElement)
-    if target:isMob() then
+    if not target:isMob() then
         return false
     end
 
