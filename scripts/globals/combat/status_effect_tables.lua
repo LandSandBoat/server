@@ -76,3 +76,47 @@ xi.combat.statusEffect.getAssociatedImmunobreakModifier = function(effectId)
 
     return associatedImmunobreakModifier
 end
+
+-----------------------------------
+-- Helper functions to check target effect nullification.
+-----------------------------------
+xi.combat.statusEffect.isTargetImmune = function(target, effectId, actionElement)
+    if target:isMob() then
+        return false
+    end
+
+    local immunityId = xi.combat.statusEffect.getAssociatedImmunity(effectId, actionElement)
+    if
+        immunityId > 0 and
+        target:hasImmunity(immunityId)
+    then
+        return true
+    end
+
+    return false
+end
+
+xi.combat.statusEffect.isTargetResistant = function(actor, target, effectId)
+    local modifierId = xi.combat.statusEffect.getAssociatedResistanceModifier(effectId)
+    if modifierId == 0 then
+        return false
+    end
+
+    local resistancePower = target:getMod(modifierId) + target:getMod(xi.mod.STATUSRES)
+    if resistancePower == 0 then
+        return false
+    end
+
+    local roll      = math.random(1, 100)
+    resistancePower = resistancePower + 5
+
+    if actor:isNM() then
+        resistancePower = math.floor(resistancePower / 2)
+    end
+
+    if roll <= resistancePower then
+        return true
+    end
+
+    return false
+end
