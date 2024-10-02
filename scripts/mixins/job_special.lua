@@ -87,8 +87,6 @@ xi = xi or {}
 xi.mix = xi.mix or {}
 xi.mix.jobSpecial = xi.mix.jobSpecial or {}
 
-g_mixins = g_mixins or {}
-
 local job2hr =
 {
     [xi.job.WAR] = xi.jsa.MIGHTY_STRIKES,
@@ -261,7 +259,7 @@ end
     mob listeners
 ---------------------------------------------------------------- --]]
 
-g_mixins.job_special = function(jobSpecialMob)
+local mixin = function(jobSpecialMob)
     -- At spawn, give mob its default main job 2hr, which it'll use at 40-60% HP.
     -- these defaults can be overwritten by using xi.mix.jobSpecial.config() in onMobSpawn.
 
@@ -327,4 +325,4 @@ g_mixins.job_special = function(jobSpecialMob)
     end)
 end
 
-return g_mixins.job_special
+return mixin

@@ -1,9 +1,8 @@
 -----------------------------------
 -- Dynamis procs mixin
 -----------------------------------
-g_mixins = g_mixins or {}
 
-g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
+local mixin = function(dynamisBeastmenMob)
     local procjobs =
     {
         [xi.job.WAR] = 'ws',
@@ -117,4 +116,4 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
     end)
 end
 
-return g_mixins.dynamis_beastmen
+return mixin

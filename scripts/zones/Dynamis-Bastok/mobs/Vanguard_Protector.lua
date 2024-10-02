@@ -2,14 +2,13 @@
 -- Area: Dynamis - Bastok
 --  Mob: Vanguard Protector
 -----------------------------------
-mixins =
-{
-    require('scripts/mixins/dynamis_beastmen'),
-    require('scripts/mixins/job_special')
-}
------------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.dynamis_beastmen)
+    xi.applyMixins(mob, xi.mixins.job_special)
+end
 
 entity.onMobDeath = function(mob, player, optParams)
 end

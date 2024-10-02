@@ -2,15 +2,15 @@
 -- Area: Dynamis - Xarcabard
 --  Mob: Kindred Monk
 -----------------------------------
-mixins =
-{
-    require('scripts/mixins/dynamis_beastmen'),
-    require('scripts/mixins/job_special')
-}
 local ID = zones[xi.zone.DYNAMIS_XARCABARD]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.dynamis_beastmen)
+    xi.applyMixins(mob, xi.mixins.job_special)
+end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.CANNOT_GUARD, 1)

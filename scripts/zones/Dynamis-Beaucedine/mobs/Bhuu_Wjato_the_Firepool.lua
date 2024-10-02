@@ -2,15 +2,13 @@
 -- Area: Dynamis - Beaucedine
 --  Mob: Bhuu Wjato the Firepool
 -----------------------------------
-mixins =
-{
-    require('scripts/mixins/dynamis_beastmen'),
-    require('scripts/mixins/job_special'),
-    require('scripts/mixins/remove_doom')
-}
------------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.dynamis_beastmen)
+    xi.applyMixins(mob, xi.mixins.job_special)
+end
 
 entity.onMobDeath = function(mob, player, optParams)
 end

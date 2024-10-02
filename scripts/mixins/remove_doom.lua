@@ -7,15 +7,13 @@ xi = xi or {}
 xi.mix = xi.mix or {}
 xi.mix.clear_doom = xi.mix.clear_doom or {}
 
-g_mixins = g_mixins or {}
-
 xi.mix.clear_doom.config = function(mob, params)
     if params.doomRemovalChance and type(params.doomRemovalChance) == 'number' then
         mob:setLocalVar('[remove_doom]removalChance', params.doomRemovalChance)
     end
 end
 
-g_mixins.clear_doom = function(doomMob)
+local mixin = function(doomMob)
     doomMob:addListener('SPAWN', 'REMOVE_DOOM_SPAWN', function(mob)
         mob:setLocalVar('[remove_doom]removalChance', 100)
     end)
@@ -35,4 +33,4 @@ g_mixins.clear_doom = function(doomMob)
     end)
 end
 
-return g_mixins.clear_doom
+return mixin
