@@ -1107,6 +1107,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     PChar->PLatentEffectContainer->CheckLatentsZone();
 
     charutils::ReadHistory(PChar);
+    charutils::ReadFishingHistory(PChar);
 
     moduleutils::OnCharZoneIn(PChar);
 }
@@ -1233,6 +1234,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     }
 
     charutils::WriteHistory(PChar);
+    charutils::WriteFishingHistory(PChar);
 }
 
 bool CZone::IsZoneActive() const

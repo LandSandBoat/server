@@ -3881,6 +3881,44 @@ end
 function CBaseEntity:getHistory(index)
 end
 
+--@nodiscard
+--@return table
+function CBaseEntity:getFishingStats()
+end
+
+--@nodiscard
+--@return table
+function CBaseEntity:getFishingCatches()
+end
+
+--@nodiscard
+--@return integer
+function CBaseEntity:getFishingCatchCount()
+end
+
+--@nodiscard
+--@param fishId integer
+--@param isCaught boolean
+--@return nil
+function CBaseEntity:setFishCaught(fishId, isCaught)
+end
+
+--@nodiscard
+--@return nil
+function CBaseEntity:clearFishCaught()
+end
+
+--@nodiscard
+--@return nil
+function CBaseEntity:clearFishHistory()
+end
+
+--@nodiscard
+--@param fishId integer
+--@return boolean
+function CBaseEntity:hasCaughtFish(fishId)
+end
+
 ---@nodiscard
 ---@return table
 function CBaseEntity:getChocoboRaisingInfo()

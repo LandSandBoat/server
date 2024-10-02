@@ -4,6 +4,7 @@ return {
     ['Hagain']           = { event = 10002 },
     ['Itzha_Delavhitta'] = { event = 900 },
     ['Jikka-Abukka']     = { event = 850 },
+    ['Katsunaga']        = { event = 190 },
     ['Kotan-Purutan']    = { event = 140 },
     ['Kupupu']           = { event = 800 },
     ['Lacia']            = { event = 10021 },
