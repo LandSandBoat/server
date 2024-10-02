@@ -191,6 +191,11 @@ CREATE TABLE `char_points` (
   `darkness_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
   `silver_aman_voucher` int(10) unsigned NOT NULL DEFAULT 0,
   `plaudits` smallint(5) DEFAULT 0,
+  `bloodshed_plans` smallint(5) unsigned NOT NULL DEFAULT 0,
+  `umbrage_plans` smallint(5) unsigned NOT NULL DEFAULT 0,
+  `ritualistic_plans` smallint(5) unsigned NOT NULL DEFAULT 0,
+  `tutelary_plans` smallint(5) unsigned NOT NULL DEFAULT 0,
+  `primacy_plans` smallint(5) unsigned NOT NULL DEFAULT 0,
 
   PRIMARY KEY (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
