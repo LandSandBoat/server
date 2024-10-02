@@ -119,7 +119,7 @@ mutex_guarded<db::detail::State>& db::detail::getState()
     return state;
 }
 
-std::unique_ptr<sql::ResultSet> db::query(std::string const& rawQuery)
+auto db::query(std::string const& rawQuery) -> std::unique_ptt<db::detail::ResultSetWrapper>
 {
     TracyZoneScoped;
     TracyZoneString(rawQuery);
@@ -131,7 +131,8 @@ std::unique_ptr<sql::ResultSet> db::query(std::string const& rawQuery)
         try
         {
             DebugSQL(fmt::format("query: {}", rawQuery));
-            return std::unique_ptr<sql::ResultSet>(stmt->executeQuery(rawQuery.data()));
+            auto rset = std::unique_ptr<sql::ResultSet>(stmt->executeQuery(rawQuery.data()));
+            return std::make_unique<db::detail::ResultSetWrapper>(std::move(rset));
         }
         catch (const std::exception& e)
         {

@@ -42,15 +42,110 @@
 #pragma warning(pop)
 #endif
 
-// @note Everything in database-land is 1-indexed, not 0-indexed.
+// @note Everything in sql:: database-land is 1-indexed, not 0-indexed.
 namespace db
 {
     namespace detail
     {
-        struct State
+        struct State final
         {
             std::unique_ptr<sql::Connection>                                         connection;
             std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>> lazyPreparedStatements;
+        };
+
+        class ResultSetWrapper final
+        {
+        public:
+            ResultSetWrapper(std::unique_ptr<sql::ResultSet>&& resultSet)
+            : resultSet(std::move(resultSet))
+            {
+            }
+
+            bool next()
+            {
+                return resultSet->next();
+            }
+
+            auto rowsCount() -> uint32
+            {
+                return resultSet->rowsCount();
+            }
+
+            template <typename T>
+            auto get(const std::string& key) -> T
+            {
+                T value{};
+
+                if (resultSet->isNull(key.c_str()))
+                {
+                    ShowWarning("ResultSetWrapper::get: key %s is null", key.c_str());
+                    return value;
+                }
+
+                if constexpr (std::is_same_v<std::decay_t<T>, int32>)
+                {
+                    value = static_cast<T>(resultSet->getInt(key.c_str()));
+                }
+                else if constexpr (std::is_same_v<std::decay_t<T>, uint32>)
+                {
+                    value = static_cast<T>(resultSet->getUInt(key.c_str()));
+                }
+                else if constexpr (std::is_same_v<std::decay_t<T>, int16>)
+                {
+                    value = static_cast<T>(resultSet->getShort(key.c_str()));
+                }
+                else if constexpr (std::is_same_v<std::decay_t<T>, uint16>)
+                {
+                    value = static_cast<T>(resultSet->getShort(key.c_str()));
+                }
+                else if constexpr (std::is_same_v<std::decay_t<T>, int8>)
+                {
+                    value = static_cast<T>(resultSet->getByte(key.c_str()));
+                }
+                else if constexpr (std::is_same_v<std::decay_t<T>, uint8>)
+                {
+                    value = static_cast<T>(resultSet->getByte(key.c_str()));
+                }
+                else if constexpr (std::is_same_v<std::decay_t<T>, bool>)
+                {
+                    value = static_cast<T>(resultSet->getBoolean(key.c_str()));
+                }
+                else if constexpr (std::is_same_v<std::decay_t<T>, double>)
+                {
+                    value = static_cast<T>(resultSet->getDouble(key.c_str()));
+                }
+                else if constexpr (std::is_same_v<std::decay_t<T>, float>)
+                {
+                    value = static_cast<T>(resultSet->getFloat(key.c_str()));
+                }
+                else if constexpr (std::is_same_v<std::decay_t<T>, const std::string>)
+                {
+                    value = resultSet->getString(key.c_str());
+                }
+                else if constexpr (std::is_same_v<std::decay_t<T>, std::string>)
+                {
+                    value = resultSet->getString(key.c_str());
+                }
+                else if constexpr (std::is_same_v<std::decay_t<T>, const char*>)
+                {
+                    value = resultSet->getString(key.c_str());
+                }
+                else if constexpr (std::is_same_v<std::decay_t<T>, char*>)
+                {
+                    value = resultSet->getString(key.c_str());
+                }
+                else
+                {
+                    static_assert(always_false_v<T>, "Unsupported type in binder");
+                }
+
+                // TODO: If a struct/blob type, use extractFromBlob
+
+                return value;
+            }
+
+        private:
+            std::unique_ptr<sql::ResultSet> resultSet;
         };
 
         auto getState() -> mutex_guarded<db::detail::State>&;
@@ -156,7 +251,7 @@ namespace db
     // @param query The query string to execute.
     // @return A unique pointer to the result set of the query.
     // @note Everything in database-land is 1-indexed, not 0-indexed.
-    auto query(std::string const& rawQuery) -> std::unique_ptr<sql::ResultSet>;
+    auto query(std::string const& rawQuery) -> std::unique_ptr<db::detail::ResultSetWrapper>;
 
     // @brief Execute a prepared statement with the given query string and arguments.
     // @param query The query string to execute.
@@ -165,13 +260,13 @@ namespace db
     // @note If the query hasn't been seen before it will generate a prepared statement for it to be used immediately and in the future.
     // @note Everything in database-land is 1-indexed, not 0-indexed.
     template <typename... Args>
-    std::unique_ptr<sql::ResultSet> preparedStmt(std::string const& rawQuery, Args&&... args)
+    auto preparedStmt(std::string const& rawQuery, Args&&... args) -> std::unique_ptr<sql::ResultSet>
     {
         TracyZoneScoped;
         TracyZoneString(rawQuery);
 
         // clang-format off
-        return detail::getState().write([&](detail::State& state) -> std::unique_ptr<sql::ResultSet>
+        return detail::getState().write([&](detail::State& state) -> std::unique_ptr<db::detail::ResultSetWrapper>
         {
             auto& lazyPreparedStatements = state.lazyPreparedStatements;
 
@@ -201,7 +296,8 @@ namespace db
                 // NOTE: Everything is 1-indexed, but we're going to increment right away insider binder!
                 auto counter = 0;
                 db::detail::binder(stmt, counter, std::forward<Args>(args)...);
-                return std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
+                auto rset = std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
+                return std::make_unique<db::detail::ResultSetWrapper>(std::move(rset));
             }
             catch (const std::exception& e)
             {
@@ -222,13 +318,13 @@ namespace db
     // @note This is a workaround for the fact that MariaDB's C++ connector hasn't yet implemented ResultSet::rowUpdated(), ResultSet::rowInserted(),
     //       and ResultSet::rowDeleted().
     template <typename... Args>
-    std::pair<std::unique_ptr<sql::ResultSet>, std::size_t> preparedStmtWithAffectedRows(std::string const& rawQuery, Args&&... args)
+    auto preparedStmtWithAffectedRows(std::string const& rawQuery, Args&&... args) -> std::pair<std::unique_ptr<sql::ResultSet>, std::size_t>
     {
         TracyZoneScoped;
         TracyZoneString(rawQuery);
 
         // clang-format off
-        return detail::getState().write([&](detail::State& state) -> std::pair<std::unique_ptr<sql::ResultSet>, std::size_t>
+        return detail::getState().write([&](detail::State& state) -> std::pair<std::unique_ptr<db::detail::ResultSetWrapper>, std::size_t>
         {
             auto& lazyPreparedStatements = state.lazyPreparedStatements;
 
@@ -280,7 +376,7 @@ namespace db
                     return { nullptr, 0 };
                 }
                 auto rowCount = rset2->getUInt("count");
-                return { std::move(rset), rowCount };
+                return { std::make_unique<db::detail::ResultSetWrapper>(std::move(rset)), rowCount };
             }
             catch (const std::exception& e)
             {
