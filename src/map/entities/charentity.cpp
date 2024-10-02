@@ -71,6 +71,8 @@
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
+#include "linkshell.h"
+#include "message.h"
 #include "mobskill.h"
 #include "modifier.h"
 #include "packets/char_job_extra.h"
@@ -81,6 +83,7 @@
 #include "trade_container.h"
 #include "treasure_pool.h"
 #include "trustentity.h"
+#include "unitychat.h"
 #include "universal_container.h"
 #include "utils/attackutils.h"
 #include "utils/battleutils.h"
@@ -275,6 +278,90 @@ CCharEntity::~CCharEntity()
         // remove myself
         PTreasurePool->DelMember(this);
     }
+
+    ClearTrusts(); // trusts don't survive zone lines
+
+    if (PLinkshell1 != nullptr)
+    {
+        PLinkshell1->DelMember(this);
+    }
+
+    if (PLinkshell2 != nullptr)
+    {
+        PLinkshell2->DelMember(this);
+    }
+
+    if (PUnityChat != nullptr)
+    {
+        PUnityChat->DelMember(this);
+    }
+
+    if (isDead())
+    {
+        charutils::SaveDeathTime(this);
+    }
+
+    if (m_LevelRestriction != 0)
+    {
+        if (PParty)
+        {
+            if (PParty->GetSyncTarget() == this || PParty->GetLeader() == this)
+            {
+                PParty->SetSyncTarget("", 551);
+            }
+            if (PParty->GetSyncTarget() != nullptr)
+            {
+                uint8 count = 0;
+                for (uint32 i = 0; i < PParty->members.size(); ++i)
+                {
+                    if (PParty->members.at(i) != this && PParty->members.at(i)->getZone() == PParty->GetSyncTarget()->getZone())
+                    {
+                        count++;
+                    }
+                }
+                if (count < 2) // 3, because one is zoning out - thus at least 2 will be left
+                {
+                    PParty->SetSyncTarget("", 552);
+                }
+            }
+        }
+        StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
+        StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_RESTRICTION);
+    }
+
+    if (PParty && loc.destination != 0 && m_moghouseID == 0)
+    {
+        uint8 data[4]{};
+
+        if (PParty->m_PAlliance)
+        {
+            ref<uint32>(data, 0) = PParty->m_PAlliance->m_AllianceID;
+            message::send(MSG_ALLIANCE_RELOAD, data, sizeof data, nullptr);
+        }
+        else
+        {
+            ref<uint32>(data, 0) = PParty->GetPartyID();
+            message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+        }
+    }
+
+    SpawnPCList.clear();
+    SpawnNPCList.clear();
+    SpawnMOBList.clear();
+    SpawnPETList.clear();
+    SpawnTRUSTList.clear();
+
+    if (PParty)
+    {
+        PParty->PopMember(this);
+    }
+
+    if (PAutomaton)
+    {
+        PAutomaton->PMaster = nullptr;
+    }
+
+    charutils::WriteHistory(this);
 
     destroy(TradeContainer);
     destroy(Container);
