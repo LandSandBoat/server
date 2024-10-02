@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -573,7 +573,7 @@ namespace luautils
     // Assumes filename in the form "./scripts/folder0/folder1/folder2/mob_name.lua
     // Object returned form that script will be cached to:
     // xi.folder0.folder1.folder2.mob_name
-    void CacheLuaObjectFromFile(std::string const& filename, bool overwriteCurrentEntry /* = false*/)
+    auto CacheLuaObjectFromFile(std::string const& filename, bool overwriteCurrentEntry /* = false*/) -> sol::table
     {
         TracyZoneScoped;
         TracyZoneString(filename);
@@ -581,7 +581,7 @@ namespace luautils
         auto path = std::filesystem::path(filename);
         if (path.empty() || path.extension() == "")
         {
-            return;
+            return sol::lua_nil;
         }
 
         // Handle filename -> path conversion
@@ -600,7 +600,7 @@ namespace luautils
             {
                 sol::error err = result;
                 ShowError("luautils::CacheLuaObjectFromFile: Load module error: %s: %s", filename, err.what());
-                return;
+                return sol::lua_nil;
             }
 
             // Commands are a special case, since they are not a "true" module
@@ -611,7 +611,7 @@ namespace luautils
             }
 
             ShowInfo("[FileWatcher] RE-RUNNING MODULE FILE %s", filename);
-            return;
+            return cmdTable;
         }
 
         // Handle Lua settings files, then return
@@ -622,21 +622,21 @@ namespace luautils
             {
                 sol::error err = result;
                 ShowError("luautils::CacheLuaObjectFromFile: Load settings error: %s: %s", filename, err.what());
-                return;
+                return sol::lua_nil;
             }
 
             ShowInfo("[FileWatcher] RELOADING ALL LUA SETTINGS FILES");
 
             settings::init();
 
-            return;
+            return sol::lua_nil;
         }
 
         auto it = std::find(parts.begin(), parts.end(), "scripts");
         if (it == parts.end())
         {
             ShowError("luautils::CacheLuaObjectFromFile: Invalid filename: %s", filename);
-            return;
+            return sol::lua_nil;
         }
 
         // Now that the list is verified, overwrite it with the same list; without "scripts"
@@ -658,11 +658,11 @@ namespace luautils
             {
                 sol::error err = result;
                 ShowError("luautils::CacheLuaObjectFromFile: Load global error: %s: %s", filename, err.what());
-                return;
+                return sol::lua_nil;
             }
 
             ShowInfo("[FileWatcher] GLOBAL %s -> \"%s\"", filename, requireName);
-            return;
+            return sol::lua_nil;
         }
 
         // Handle IDs then return
@@ -673,7 +673,7 @@ namespace luautils
 
             PopulateIDLookupsByFilename(zoneName);
             ShowInfo("[FileWatcher] IDs %s", filename);
-            return;
+            return sol::lua_nil;
         }
 
         // Handle Quests and Missions then return
@@ -717,19 +717,19 @@ namespace luautils
                 {
                     sol::error err = result;
                     ShowError("luautils::CacheLuaObjectFromFile: Load interaction error: %s: %s", filename, err.what());
-                    return;
+                    return sol::lua_nil;
                 }
 
                 ShowInfo("[FileWatcher] INTERACTION %s -> %s", requireName, parts[2]);
             }
 
-            return;
+            return sol::lua_nil;
         }
 
         if (!std::filesystem::exists(filename))
         {
             ShowTrace("luautils::CacheLuaObjectFromFile: Tried to load file but it does not exist: %s", filename);
-            return;
+            return sol::lua_nil;
         }
 
         // Try and load script
@@ -738,19 +738,19 @@ namespace luautils
         {
             sol::error err = file_result;
             ShowError("luautils::CacheLuaObjectFromFile: Load error: %s: %s", filename, err.what());
-            return;
+            return sol::lua_nil;
         }
 
         if (!file_result.return_count())
         {
             ShowError("luautils::CacheLuaObjectFromFile: No returned object to cache: %s", filename);
-            return;
+            return sol::lua_nil;
         }
 
         // file_result should be good, cache it!
 
-        auto        table   = lua["xi"].get_or_create<sol::table>();
-        std::string out_str = "xi";
+        auto table   = lua["xi"].get_or_create<sol::table>();
+        auto out_str = std::string("xi");
         for (auto& part : parts)
         {
             if (part == parts.back())
@@ -772,6 +772,8 @@ namespace luautils
         }
 
         moduleutils::TryApplyLuaModules();
+
+        return table[parts.back()];
     }
 
     sol::table GetCacheEntryFromFilename(std::string const& filename)
@@ -863,7 +865,13 @@ namespace luautils
             filename             = fmt::format("./scripts/actions/spells/trust/{}.lua", PEntity->getName());
         }
 
-        CacheLuaObjectFromFile(filename);
+        const sol::table entry = CacheLuaObjectFromFile(filename);
+
+        // Mark entity as experimental if `<object>.experimental = true` is present in the script
+        if (entry.valid() && entry.get_or("experimental", false))
+        {
+            PEntity->experimental = true;
+        }
     }
 
     void PopulateIDLookups(uint16 zoneId, std::string const& zoneName)

@@ -318,6 +318,14 @@ public:
 
     bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.
 
+    // If an entity is marked as experimental, it will inform the interacting player(s) by
+    // printing messages, removing loot drops, buffing the entity so it is unbeatable, etc.
+    // We do this in the hopes that contributors will be able to implement partial logic
+    // for the entity (while still being retail-accurate) without having to be perfect.
+    // Once the logic is complete, the entity can be marked as non-experimental.
+    // We use similar logic in quests, missions, battlefields, and instances.
+    bool experimental = false;
+
     bool m_bReleaseTargIDOnDisappear;
 
     SPAWN_ANIMATION spawnAnimation;

@@ -28,3 +28,4 @@
 ---@field onSpellPrecast? fun(mob: CBaseEntity, spell: CSpell)
 ---@field onSteal? fun(player: CBaseEntity, target: CBaseEntity, ability: CAbility, action: CAction): integer?
 ---@field onMagicCastingCheck? fun(mob: CBaseEntity, target: CBaseEntity, spell: CSpell): integer?
+---@field experimental? boolean
