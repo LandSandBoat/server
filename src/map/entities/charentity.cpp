@@ -406,7 +406,7 @@ CBasicPacket* CCharEntity::popPacket()
     return PPacket;
 }
 
-PacketList_t CCharEntity::getPacketList()
+PacketList_t CCharEntity::getPacketListCopy()
 {
     return PacketList;
 }
@@ -527,10 +527,7 @@ bool CCharEntity::shouldPetPersistThroughZoning()
         petType = petZoningInfo.petType;
     }
 
-    return petType == PET_TYPE::WYVERN ||
-           petType == PET_TYPE::AVATAR ||
-           petType == PET_TYPE::AUTOMATON ||
-           (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
+    return petType == PET_TYPE::WYVERN || petType == PET_TYPE::AVATAR || petType == PET_TYPE::AUTOMATON || (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
 }
 
 /************************************************************************
@@ -978,17 +975,13 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     bool isDifferentChar  = PInitiator != this;
 
     // Alliance member valid target.
-    if (targetsAlliance &&
-        isSameAlliance &&
-        isDifferentChar)
+    if (targetsAlliance && isSameAlliance && isDifferentChar)
     {
         return true;
     }
 
     // Party member valid targeting.
-    if ((targetsParty || hasPianissimo) &&
-        (isSameParty || isPartyPetMaster || isSoloPetMaster) &&
-        isDifferentChar)
+    if ((targetsParty || hasPianissimo) && (isSameParty || isPartyPetMaster || isSoloPetMaster) && isDifferentChar)
     {
         return true;
     }
@@ -1106,9 +1099,7 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
     // Only blue spells that act as a physical WS can TA.
     CBattleEntity* taChar = nullptr;
 
-    if (StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK) &&
-        PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
-        PSpell->dealsDamage())
+    if (StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK) && PSpell->getSpellGroup() == SPELLGROUP_BLUE && PSpell->dealsDamage())
     {
         taChar = battleutils::getAvailableTrickAttackChar(this, PTarget);
     }
@@ -1119,11 +1110,7 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
     {
         for (auto&& actionTarget : actionList.actionTargets)
         {
-            if (actionTarget.param > 0 &&
-                PSpell->dealsDamage() &&
-                PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
-                (StatusEffectContainer->HasStatusEffect(EFFECT_CHAIN_AFFINITY) || StatusEffectContainer->HasStatusEffect(EFFECT_AZURE_LORE)) &&
-                static_cast<CBlueSpell*>(PSpell)->getPrimarySkillchain() != 0)
+            if (actionTarget.param > 0 && PSpell->dealsDamage() && PSpell->getSpellGroup() == SPELLGROUP_BLUE && (StatusEffectContainer->HasStatusEffect(EFFECT_CHAIN_AFFINITY) || StatusEffectContainer->HasStatusEffect(EFFECT_AZURE_LORE)) && static_cast<CBlueSpell*>(PSpell)->getPrimarySkillchain() != 0)
             {
                 auto*     PBlueSpell = static_cast<CBlueSpell*>(PSpell);
                 SUBEFFECT effect     = battleutils::GetSkillChainEffect(PTarget, PBlueSpell->getPrimarySkillchain(), PBlueSpell->getSecondarySkillchain(), 0);
@@ -1148,10 +1135,7 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
             }
 
             // Immanence will create or extend a skillchain for elemental spells
-            if (actionTarget.param >= 0 &&
-                PSpell->dealsDamage() &&
-                PSpell->getSpellGroup() == SPELLGROUP_BLACK &&
-                (StatusEffectContainer->HasStatusEffect(EFFECT_IMMANENCE)))
+            if (actionTarget.param >= 0 && PSpell->dealsDamage() && PSpell->getSpellGroup() == SPELLGROUP_BLACK && (StatusEffectContainer->HasStatusEffect(EFFECT_IMMANENCE)))
             {
                 auto      immanenceApplies = true;
                 auto      isHelix          = false;
@@ -2021,8 +2005,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             auto attackType = (state.IsRapidShot()) ? PHYSICAL_ATTACK_TYPE::RAPID_SHOT : PHYSICAL_ATTACK_TYPE::RANGED;
             totalDamage     = attackutils::CheckForDamageMultiplier(this, PItem, totalDamage, attackType, slot, true);
         }
-        actionTarget.param =
-            battleutils::TakePhysicalDamage(this, PTarget, PHYSICAL_ATTACK_TYPE::RANGED, totalDamage, false, slot, realHits, nullptr, true, true);
+        actionTarget.param = battleutils::TakePhysicalDamage(this, PTarget, PHYSICAL_ATTACK_TYPE::RANGED, totalDamage, false, slot, realHits, nullptr, true, true);
 
         // absorb message
         if (actionTarget.param < 0)
@@ -2036,8 +2019,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         // or else sleep effect won't work
         // battleutils::HandleRangedAdditionalEffect(this,PTarget,&Action);
         // TODO: move all hard coded additional effect ammo to scripts
-        if ((PAmmo != nullptr && battleutils::GetScaledItemModifier(this, PAmmo, Mod::ITEM_ADDEFFECT_TYPE) > 0) ||
-            (PItem != nullptr && battleutils::GetScaledItemModifier(this, PItem, Mod::ITEM_ADDEFFECT_TYPE) > 0))
+        if ((PAmmo != nullptr && battleutils::GetScaledItemModifier(this, PAmmo, Mod::ITEM_ADDEFFECT_TYPE) > 0) || (PItem != nullptr && battleutils::GetScaledItemModifier(this, PItem, Mod::ITEM_ADDEFFECT_TYPE) > 0))
         {
             // TODO
         }
@@ -2278,7 +2260,7 @@ void CCharEntity::OnRaise()
             ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * static_cast<double>(1 - settings::get<uint8>("map.EXP_RETAIN"));
         }
 
-        addHP(((hpReturned < 1) ? 1 : hpReturned));
+        addHP((hpReturned < 1) ? 1 : hpReturned);
         updatemask |= UPDATE_HP;
         actionTarget.speceffect = SPECEFFECT::RAISE;
 
@@ -2444,9 +2426,7 @@ void CCharEntity::Die()
     // influence for conquest system
     conquest::LoseInfluencePoints(this);
 
-    if (GetLocalVar("MijinGakure") == 0 &&
-        (PBattlefield == nullptr || (PBattlefield->GetRuleMask() & RULES_LOSE_EXP) == RULES_LOSE_EXP) &&
-        GetMLevel() >= settings::get<uint8>("map.EXP_LOSS_LEVEL"))
+    if (GetLocalVar("MijinGakure") == 0 && (PBattlefield == nullptr || (PBattlefield->GetRuleMask() & RULES_LOSE_EXP) == RULES_LOSE_EXP) && GetMLevel() >= settings::get<uint8>("map.EXP_LOSS_LEVEL"))
     {
         float retainPercent = std::clamp(settings::get<uint8>("map.EXP_RETAIN") + getMod(Mod::EXPERIENCE_RETAINED) / 100.0f, 0.0f, 1.0f);
         charutils::DelExperiencePoints(this, retainPercent, 0);
@@ -2625,8 +2605,7 @@ void CCharEntity::UpdateMoghancement()
                 {
                     CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
                     // If aura is tied then use whichever furniture was placed most recently
-                    if (PFurniture->isInstalled() && !PFurniture->getOn2ndFloor() && PFurniture->getElement() == dominantElement &&
-                        (PFurniture->getAura() > bestAura || (PFurniture->getAura() == bestAura && PFurniture->getOrder() < bestOrder)))
+                    if (PFurniture->isInstalled() && !PFurniture->getOn2ndFloor() && PFurniture->getElement() == dominantElement && (PFurniture->getAura() > bestAura || (PFurniture->getAura() == bestAura && PFurniture->getOrder() < bestOrder)))
                     {
                         bestAura          = PFurniture->getAura();
                         bestOrder         = PFurniture->getOrder();

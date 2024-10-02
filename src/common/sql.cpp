@@ -468,7 +468,7 @@ int32 SqlConnection::GetIntData(size_t col)
     {
         if (col < NumColumns())
         {
-            return (self->row[col] ? atoi(self->row[col]) : 0);
+            return self->row[col] ? atoi(self->row[col]) : 0;
         }
     }
     ShowCritical("Query: %s", self->buf);
@@ -482,7 +482,7 @@ uint32 SqlConnection::GetUIntData(size_t col)
     {
         if (col < NumColumns())
         {
-            return (self->row[col] ? (uint32)strtoul(self->row[col], nullptr, 10) : 0);
+            return self->row[col] ? (uint32)strtoul(self->row[col], nullptr, 10) : 0;
         }
     }
     ShowCritical("Query: %s", self->buf);
@@ -496,7 +496,7 @@ uint64 SqlConnection::GetUInt64Data(size_t col)
     {
         if (col < NumColumns())
         {
-            return (self->row[col] ? (uint64)strtoull(self->row[col], nullptr, 10) : 0);
+            return self->row[col] ? (uint64)strtoull(self->row[col], nullptr, 10) : 0;
         }
     }
     ShowCritical("Query: %s", self->buf);
@@ -510,7 +510,7 @@ float SqlConnection::GetFloatData(size_t col)
     {
         if (col < NumColumns())
         {
-            return (self->row[col] ? (float)atof(self->row[col]) : 0.f);
+            return self->row[col] ? (float)atof(self->row[col]) : 0.f;
         }
     }
     ShowCritical("Query: %s", self->buf);
@@ -568,7 +568,7 @@ bool SqlConnection::GetAutoCommit()
 
         if (ret != SQL_ERROR && NumRows() > 0 && NextRow() == SQL_SUCCESS)
         {
-            return (GetUIntData(0) == 1);
+            return GetUIntData(0) == 1;
         }
     }
 

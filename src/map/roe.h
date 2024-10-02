@@ -117,11 +117,13 @@ struct RoeDatagram
     , data{ payload }
     {
     }
+
     RoeDatagram(std::string const& param, CMobEntity* payload)
     : luaKey{ param }
     , data{ payload }
     {
     }
+
     RoeDatagram(std::string const& param, std::string const& payload)
     : luaKey{ param }
     , data{ payload }

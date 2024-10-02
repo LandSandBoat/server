@@ -78,8 +78,7 @@ void data_session::read_func()
                     return;
                 }
 
-                const char* pfmtQuery =
-                    "SELECT charid, charname, pos_zone, pos_prevzone, mjob,\
+                const char* pfmtQuery = "SELECT charid, charname, pos_zone, pos_prevzone, mjob,\
                         race, face, head, body, hands, legs, feet, main, sub,\
                         war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng,\
                         sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run, \
@@ -274,8 +273,9 @@ void data_session::read_func()
             if (_sql->Query("SELECT zoneip, zoneport, zoneid, pos_prevzone, gmlevel, accid, charname \
                                              FROM zone_settings, chars \
                                              WHERE IF(pos_zone = 0, zoneid = pos_prevzone, zoneid = pos_zone) AND charid = %u AND accid = %u",
-                            charid, session.accountID) != SQL_ERROR &&
-                _sql->NumRows() != 0)
+                            charid, session.accountID)
+                    != SQL_ERROR
+                && _sql->NumRows() != 0)
             {
                 _sql->NextRow();
 
@@ -315,8 +315,9 @@ void data_session::read_func()
                 if (_sql->Query("SELECT COUNT(client_addr) \
                                 FROM accounts_sessions \
                                 WHERE client_addr = %u",
-                                accountIP) != SQL_ERROR &&
-                    _sql->NumRows() != 0)
+                                accountIP)
+                        != SQL_ERROR
+                    && _sql->NumRows() != 0)
                 {
                     _sql->NextRow();
                     sessionCount = (uint16)_sql->GetIntData(0);
@@ -327,8 +328,9 @@ void data_session::read_func()
                 if (_sql->Query("SELECT * \
                                 FROM accounts_sessions \
                                 WHERE accid = %u AND client_port != '0'",
-                                session.accountID) != SQL_ERROR &&
-                    _sql->NumRows() != 0)
+                                session.accountID)
+                        != SQL_ERROR
+                    && _sql->NumRows() != 0)
                 {
                     _sql->NextRow();
                     hasActiveSession = true;
@@ -338,8 +340,9 @@ void data_session::read_func()
                 if (_sql->Query("SELECT * \
                                 FROM accounts_sessions \
                                 WHERE accid = %u AND client_port = '0' AND last_zoneout_time >= SUBTIME(NOW(), \"00:00:30\")",
-                                session.accountID) != SQL_ERROR &&
-                    _sql->NumRows() != 0)
+                                session.accountID)
+                        != SQL_ERROR
+                    && _sql->NumRows() != 0)
                 {
                     _sql->NextRow();
                     hasActiveSession = true;
@@ -350,8 +353,9 @@ void data_session::read_func()
                 if (_sql->Query("SELECT UNIX_TIMESTAMP(exception) \
                                 FROM ip_exceptions \
                                 WHERE accid = %u",
-                                session.accountID) != SQL_ERROR &&
-                    _sql->NumRows() != 0)
+                                session.accountID)
+                        != SQL_ERROR
+                    && _sql->NumRows() != 0)
                 {
                     _sql->NextRow();
                     exceptionTime = _sql->GetUInt64Data(0);
@@ -402,7 +406,8 @@ void data_session::read_func()
                     if (_sql->Query("INSERT INTO accounts_sessions(accid,charid,session_key,server_addr,server_port,client_addr, version_mismatch) "
                                     "VALUES(%u,%u,x'%s',%u,%u,%u,%u)",
                                     session.accountID, charid, session_key, ZoneIP, ZonePort, accountIP,
-                                    session.versionMismatch ? 1 : 0) == SQL_ERROR)
+                                    session.versionMismatch ? 1 : 0)
+                        == SQL_ERROR)
                     {
                         if (auto data = session.view_session.get())
                         {
@@ -467,7 +472,8 @@ void data_session::read_func()
 
                 if (_sql->Query("INSERT INTO account_ip_record(login_time,accid,charid,client_ip) \
                             VALUES ('%s', %u, %u, '%s')",
-                                timeAndDate, session.accountID, charid, loginHelpers::ip2str(accountIP)) == SQL_ERROR)
+                                timeAndDate, session.accountID, charid, loginHelpers::ip2str(accountIP))
+                    == SQL_ERROR)
                 {
                     ShowError("data_session: Could not write info to account_ip_record.");
                 }

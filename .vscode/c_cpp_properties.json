@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "name": "Default",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "cStandard":"c23",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "${default}",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
+        }
+    ],
+    "version": 4
+}

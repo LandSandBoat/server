@@ -43,8 +43,7 @@
 //--------------------------------------------------
 int config_switch(const char* str)
 {
-    if (strcmpi(str, "true") == 0 || strcmpi(str, "on") == 0 || strcmpi(str, "yes") == 0 || strcmpi(str, "oui") == 0 || strcmpi(str, "ja") == 0 ||
-        strcmpi(str, "si") == 0)
+    if (strcmpi(str, "true") == 0 || strcmpi(str, "on") == 0 || strcmpi(str, "yes") == 0 || strcmpi(str, "oui") == 0 || strcmpi(str, "ja") == 0 || strcmpi(str, "si") == 0)
     {
         return 1;
     }
@@ -204,14 +203,14 @@ bool infront(const position_t& A, const position_t& B, uint8 coneAngle)
 {
     uint8 facingDiff = abs(facingAngle(B, A)); // Position swap intentional due to how angles are calculated
     uint8 halfAngle  = static_cast<uint8>(coneAngle / 2);
-    return (facingDiff < halfAngle);
+    return facingDiff < halfAngle;
 }
 
 bool behind(const position_t& A, const position_t& B, uint8 coneAngle)
 {
     uint8 facingDiff = abs(facingAngle(B, A));
     uint8 halfAngle  = static_cast<uint8>(coneAngle / 2);
-    return (facingDiff > 128 - halfAngle); // Abs(Facing Angle) values are always less than 128
+    return facingDiff > 128 - halfAngle; // Abs(Facing Angle) values are always less than 128
 }
 
 bool beside(const position_t& A, const position_t& B, uint8 coneAngle)
@@ -257,7 +256,7 @@ int32 hasBit(uint16 value, const uint8* BitArray, uint32 size)
         ShowError("hasBit: value (%u) is out of range", value);
         return 0;
     }
-    return (BitArray[value >> 3] & (1 << (value % 8)));
+    return BitArray[value >> 3] & (1 << (value % 8));
 }
 
 int32 addBit(uint16 value, uint8* BitArray, uint32 size)
@@ -341,7 +340,7 @@ uint32 packBitsBE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
     {
         ShowError("Pack Bits Error: packBitsBE(...) not implemented for targetsizes above 64 bits. Targetsize: %d", (lengthInBit + bitOffset));
     }
-    return ((byteOffset << 3) + bitOffset + lengthInBit);
+    return (byteOffset << 3) + bitOffset + lengthInBit;
 }
 
 uint64 unpackBitsBE(uint8* target, int32 bitOffset, uint8 lengthInBit)
@@ -446,7 +445,7 @@ uint32 packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
         destroy_arr(modifiedTarget);
     }
 
-    return ((byteOffset << 3) + bitOffset + lengthInBit);
+    return (byteOffset << 3) + bitOffset + lengthInBit;
 }
 
 uint64 unpackBitsLE(uint8* target, int32 bitOffset, uint8 lengthInBit)

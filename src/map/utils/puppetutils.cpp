@@ -94,10 +94,7 @@ namespace puppetutils
 
                 // If any of this happens then the Automaton failed to load properly and should just reset (Should only occur with older characters or if DB is
                 // missing)
-                if (tempEquip.Head < HEAD_HARLEQUIN ||
-                    tempEquip.Head > HEAD_SPIRITREAVER ||
-                    tempEquip.Frame < FRAME_HARLEQUIN ||
-                    tempEquip.Frame > FRAME_STORMWAKER)
+                if (tempEquip.Head < HEAD_HARLEQUIN || tempEquip.Head > HEAD_SPIRITREAVER || tempEquip.Frame < FRAME_HARLEQUIN || tempEquip.Frame > FRAME_STORMWAKER)
                 {
                     PChar->PAutomaton->setHead(HEAD_HARLEQUIN);
                     tempEquip.Head = HEAD_HARLEQUIN;
@@ -402,11 +399,11 @@ namespace puppetutils
             }
             else if (head == 5)
             {
-                PChar->PAutomaton->look.face = 0xD3 + ((frame - 32));
+                PChar->PAutomaton->look.face = 0xD3 + (frame - 32);
             }
             else if (head == 6)
             {
-                PChar->PAutomaton->look.face = 0xD7 + ((frame - 32));
+                PChar->PAutomaton->look.face = 0xD7 + (frame - 32);
             }
             else
             {
@@ -476,11 +473,11 @@ namespace puppetutils
             }
             else if (head == 5)
             {
-                PChar->PAutomaton->look.face = 0xD3 + ((frame - 32));
+                PChar->PAutomaton->look.face = 0xD3 + (frame - 32);
             }
             else if (head == 6)
             {
-                PChar->PAutomaton->look.face = 0xD7 + ((frame - 32));
+                PChar->PAutomaton->look.face = 0xD7 + (frame - 32);
             }
             else
             {

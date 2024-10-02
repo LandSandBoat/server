@@ -478,9 +478,7 @@ bool CAttack::CheckCounter()
     // Do not counter if PD is up
     if (!m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_DODGE))
     {
-        if ((xirand::GetRandomNumber(100) < std::clamp<uint16>(m_victim->getMod(Mod::COUNTER) + meritCounter, 0, 80) ||
-             xirand::GetRandomNumber(100) < seiganChance) &&
-            facing(m_victim->loc.p, m_attacker->loc.p, 64) && xirand::GetRandomNumber(100) < battleutils::GetHitRate(m_victim, m_attacker))
+        if ((xirand::GetRandomNumber(100) < std::clamp<uint16>(m_victim->getMod(Mod::COUNTER) + meritCounter, 0, 80) || xirand::GetRandomNumber(100) < seiganChance) && facing(m_victim->loc.p, m_attacker->loc.p, 64) && xirand::GetRandomNumber(100) < battleutils::GetHitRate(m_victim, m_attacker))
         {
             m_isCountered = true;
             m_isCritical  = (xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(m_victim, m_attacker, false));
@@ -528,9 +526,7 @@ void CAttack::ProcessDamage()
     auto saDmgBonus = false;
     auto taDmgBonus = false;
     // Sneak attack.
-    if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
-        (behind(m_attacker->loc.p, m_victim->loc.p, 64) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) ||
-         m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBT)))
+    if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) && (behind(m_attacker->loc.p, m_victim->loc.p, 64) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) || m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBT)))
     {
         m_bonusBasePhysicalDamage += m_attacker->DEX() * (1.0f + m_attacker->getMod(Mod::SNEAK_ATK_DEX) / 100.0f);
         saDmgBonus = true;
@@ -554,15 +550,15 @@ void CAttack::ProcessDamage()
     {
         m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
         m_baseDamage       = m_attacker->GetMainWeaponDmg();
-        m_damage           = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+        m_damage           = (uint32)((m_baseDamage + m_naturalH2hDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio);
     }
     else if (slot == SLOT_MAIN)
     {
-        m_damage = (uint32)(((m_attacker->GetMainWeaponDmg() + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+        m_damage = (uint32)((m_attacker->GetMainWeaponDmg() + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio);
     }
     else if (slot == SLOT_SUB)
     {
-        m_damage = (uint32)(((m_attacker->GetSubWeaponDmg() + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+        m_damage = (uint32)((m_attacker->GetSubWeaponDmg() + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio);
     }
     else if (slot == SLOT_AMMO)
     {
@@ -595,15 +591,13 @@ void CAttack::ProcessDamage()
     }
 
     // Set attack type to Samba if the attack type is normal.  Don't overwrite other types.  Used for Samba double damage.
-    if (m_attackType == PHYSICAL_ATTACK_TYPE::NORMAL && (m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) ||
-                                                         m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_SAMBA) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_SAMBA)))
+    if (m_attackType == PHYSICAL_ATTACK_TYPE::NORMAL && (m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_SAMBA) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_SAMBA)))
     {
         SetAttackType(PHYSICAL_ATTACK_TYPE::SAMBA);
     }
 
     // Get damage multipliers.
-    m_damage =
-        attackutils::CheckForDamageMultiplier((CCharEntity*)m_attacker, dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]), m_damage, m_attackType, slot, m_isFirstSwing);
+    m_damage = attackutils::CheckForDamageMultiplier((CCharEntity*)m_attacker, dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]), m_damage, m_attackType, slot, m_isFirstSwing);
 
     // Apply Sneak Attack Augment Mod
     if (m_attacker->getMod(Mod::AUGMENTS_SA) > 0 && saDmgBonus && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK))
@@ -631,8 +625,7 @@ void CAttack::ProcessDamage()
                 charutils::TrySkillUP((CCharEntity*)m_attacker, (SKILLTYPE)weapon->getSkillType(), m_victim->GetMLevel());
             }
         }
-        else if (m_attacker->objtype == TYPE_PET && m_attacker->PMaster && m_attacker->PMaster->objtype == TYPE_PC &&
-                 static_cast<CPetEntity*>(m_attacker)->getPetType() == PET_TYPE::AUTOMATON)
+        else if (m_attacker->objtype == TYPE_PET && m_attacker->PMaster && m_attacker->PMaster->objtype == TYPE_PC && static_cast<CPetEntity*>(m_attacker)->getPetType() == PET_TYPE::AUTOMATON)
         {
             puppetutils::TrySkillUP((CAutomatonEntity*)m_attacker, SKILL_AUTOMATON_MELEE, m_victim->GetMLevel());
         }

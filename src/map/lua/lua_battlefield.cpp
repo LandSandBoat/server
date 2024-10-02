@@ -261,8 +261,7 @@ std::optional<CLuaBaseEntity> CLuaBattlefield::insertEntity(uint16 targid, bool 
     BATTLEFIELDMOBCONDITION conditions = static_cast<BATTLEFIELDMOBCONDITION>(0);
     ENTITYTYPE              filter     = static_cast<ENTITYTYPE>(0x1F);
 
-    auto* PEntity =
-        ally ? mobutils::InstantiateAlly(targid, m_PLuaBattlefield->GetZoneID()) : m_PLuaBattlefield->GetZone()->GetEntity(targid, filter);
+    auto* PEntity = ally ? mobutils::InstantiateAlly(targid, m_PLuaBattlefield->GetZoneID()) : m_PLuaBattlefield->GetZone()->GetEntity(targid, filter);
 
     if (PEntity)
     {
@@ -731,7 +730,7 @@ void CLuaBattlefield::Register()
     SOL_REGISTER("win", CLuaBattlefield::win);
     SOL_REGISTER("lose", CLuaBattlefield::lose);
     SOL_REGISTER("addGroups", CLuaBattlefield::addGroups);
-};
+}
 
 std::ostream& operator<<(std::ostream& os, const CLuaBattlefield& battlefield)
 {

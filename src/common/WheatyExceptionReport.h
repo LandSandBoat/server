@@ -117,7 +117,16 @@ typedef std::set<SymbolPair> SymbolPairs;
 
 struct SymbolDetail
 {
-    SymbolDetail() : Prefix(), Type(), Suffix(), Name(), Value(), Logged(false), HasChildren(false) {}
+    SymbolDetail()
+    : Prefix()
+    , Type()
+    , Suffix()
+    , Name()
+    , Value()
+    , Logged(false)
+    , HasChildren(false)
+    {
+    }
 
     std::string ToString();
 

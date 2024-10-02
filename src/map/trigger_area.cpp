@@ -101,5 +101,5 @@ bool CTriggerArea::isPointInside(position_t pos) const
         return distance <= y1;
     }
 
-    return (x1 <= pos.x && y1 <= pos.y && z1 <= pos.z && x2 >= pos.x && y2 >= pos.y && z2 >= pos.z);
+    return x1 <= pos.x && y1 <= pos.y && z1 <= pos.z && x2 >= pos.x && y2 >= pos.y && z2 >= pos.z;
 }

@@ -33,7 +33,7 @@ namespace blacklistutils
         const char* query = "SELECT * FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u";
         int32       ret   = _sql->Query(query, ownerId, targetId);
 
-        return (ret != SQL_ERROR && _sql->NumRows() == 1);
+        return ret != SQL_ERROR && _sql->NumRows() == 1;
     }
 
     bool AddBlacklisted(uint32 ownerId, uint32 targetId)
@@ -44,7 +44,7 @@ namespace blacklistutils
         }
 
         const char* query = "INSERT INTO char_blacklist (charid_owner, charid_target) VALUES (%u, %u)";
-        return (_sql->Query(query, ownerId, targetId) != SQL_ERROR && _sql->AffectedRows() == 1);
+        return _sql->Query(query, ownerId, targetId) != SQL_ERROR && _sql->AffectedRows() == 1;
     }
 
     bool DeleteBlacklisted(uint32 ownerId, uint32 targetId)
@@ -55,7 +55,7 @@ namespace blacklistutils
         }
 
         const char* query = "DELETE FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u";
-        return (_sql->Query(query, ownerId, targetId) != SQL_ERROR && _sql->AffectedRows() == 1);
+        return _sql->Query(query, ownerId, targetId) != SQL_ERROR && _sql->AffectedRows() == 1;
     }
 
     void SendBlacklist(CCharEntity* PChar)

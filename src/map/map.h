@@ -26,6 +26,7 @@
 
 #include "common/blowfish.h"
 #include "common/kernel.h"
+#include "common/md52.h"
 #include "common/mmo.h"
 #include "common/socket.h"
 #include "common/sql.h"

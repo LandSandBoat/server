@@ -9,9 +9,7 @@
 #include <string>
 #include <vector>
 
-#if (defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__) || (defined(__BYTE_ORDER) && __BYTE_ORDER == __BIG_ENDIAN) ||           \
-    defined(__BIG_ENDIAN__) || defined(__ARMEB__) || defined(__THUMBEB__) || defined(__AARCH64EB__) || defined(_MIBSEB) || defined(__MIBSEB) || \
-    defined(__MIBSEB__)
+#if (defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__) || (defined(__BYTE_ORDER) && __BYTE_ORDER == __BIG_ENDIAN) || defined(__BIG_ENDIAN__) || defined(__ARMEB__) || defined(__THUMBEB__) || defined(__AARCH64EB__) || defined(_MIBSEB) || defined(__MIBSEB) || defined(__MIBSEB__)
 #define XI_BIG_ENDIAN 1
 #else
 #define XI_BIG_ENDIAN 0
@@ -40,7 +38,7 @@
 #endif
 
 // Resolve the next address in jump table (0 == no jump, 1 == next address)
-#define JMPBIT(table, i) (((table)[(i) / 8] >> ((i)&7)) & 1)
+#define JMPBIT(table, i) (((table)[(i) / 8] >> ((i) & 7)) & 1)
 
 struct zlib_jump
 {

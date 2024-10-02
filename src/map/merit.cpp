@@ -135,8 +135,8 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
     { 4, 10, 7 }, // MCATEGORY_RUN_2       catNumber 53
 };
 
-#define GetMeritCategory(merit) (((merit) >> 6) - 1)  // get category from merit
-#define GetMeritID(merit)       (((merit)&0x3F) >> 1) // get the offset in the category from merit
+#define GetMeritCategory(merit) (((merit) >> 6) - 1)    // get category from merit
+#define GetMeritID(merit)       (((merit) & 0x3F) >> 1) // get the offset in the category from merit
 
 CMeritPoints::CMeritPoints(CCharEntity* PChar)
 {

@@ -789,8 +789,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         {
             // If the client is pending zone, they might not have received 0x00B, and thus not incremented their key
             // Check old blowfish data
-            if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE &&
-                map_decipher_packet(g_PBuffCopy, *buffsize, from, map_session_data, &map_session_data->prev_blowfish) != -1)
+            if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE && map_decipher_packet(g_PBuffCopy, *buffsize, from, map_session_data, &map_session_data->prev_blowfish) != -1)
             {
                 // Copy decrypted bytes back into buffer
                 std::memcpy(buff, g_PBuffCopy, *buffsize);
@@ -997,9 +996,9 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     {
         do
         {
-            *buffsize               = FFXI_HEADER_SIZE;
-            PacketList_t packetList = PChar->getPacketList();
-            packets                 = 0;
+            *buffsize       = FFXI_HEADER_SIZE;
+            auto packetList = PChar->getPacketListCopy();
+            packets         = 0;
 
             while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && static_cast<size_t>(packets) < PacketCount)
             {
@@ -1138,7 +1137,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     *buffsize = PacketSize + FFXI_HEADER_SIZE;
 
-    auto remainingPackets = PChar->getPacketList().size();
+    auto remainingPackets = PChar->getPacketListCopy().size();
     TotalPacketsDelayedPerTick += static_cast<uint32>(remainingPackets);
 
     if (settings::get<bool>("logging.DEBUG_PACKET_BACKLOG"))

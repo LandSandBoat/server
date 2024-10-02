@@ -185,6 +185,7 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
     struct sockaddr_in remote_address
     {
     };
+
     int32 fd     = 0;
     int32 result = 0;
 
@@ -373,7 +374,7 @@ using AccessControl = struct _access_control
     uint32 mask;
 };
 
-enum _aco
+enum _aco : uint8
 {
     ACO_DENY_ALLOW,
     ACO_ALLOW_DENY,
@@ -509,7 +510,7 @@ static int connect_check_(uint32 ip)
         { // IP found
             if (hist->ddos)
             { // flagged as possible DDoS
-                return (connect_ok == 2 ? 1 : 0);
+                return connect_ok == 2 ? 1 : 0;
             }
             if ((server_clock::now() - hist->tick) < connect_interval)
             { // connection within connect_interval limit
@@ -518,7 +519,7 @@ static int connect_check_(uint32 ip)
                 { // to many attempts detected
                     hist->ddos = 1;
                     ShowWarning(fmt::format("connect_check: too many connection attempts detected from {}!", ip2str(ip)));
-                    return (connect_ok == 2 ? 1 : 0);
+                    return connect_ok == 2 ? 1 : 0;
                 }
                 return connect_ok;
             }
@@ -599,9 +600,9 @@ int access_ipmask(const char* str, AccessControl* acc)
     {
         if (((n = sscanf(str, "%u.%u.%u.%u/%u.%u.%u.%u", a, a + 1, a + 2, a + 3, m, m + 1, m + 2, m + 3)) != 8 && // not an ip + standard mask
              (n = sscanf(str, "%u.%u.%u.%u/%u", a, a + 1, a + 2, a + 3, m)) != 5 &&                               // not an ip + bit mask
-             (n = sscanf(str, "%u.%u.%u.%u", a, a + 1, a + 2, a + 3)) != 4) ||                                    // not an ip
-            a[0] > 255 ||
-            a[1] > 255 || a[2] > 255 || a[3] > 255 ||                             // invalid ip
+             (n = sscanf(str, "%u.%u.%u.%u", a, a + 1, a + 2, a + 3)) != 4)
+            ||                                                                    // not an ip
+            a[0] > 255 || a[1] > 255 || a[2] > 255 || a[3] > 255 ||               // invalid ip
             (n == 8 && (m[0] > 255 || m[1] > 255 || m[2] > 255 || m[3] > 255)) || // invalid standard mask
             (n == 5 && m[0] > 32))
         { // invalid bit mask
@@ -739,12 +740,12 @@ ParseFunc default_func_parse = null_parse;
 bool session_isValid(int fd)
 {
     TracyZoneScoped;
-    return (fd > 0 && fd < MAX_FD && sessions[fd] != nullptr);
+    return fd > 0 && fd < MAX_FD && sessions[fd] != nullptr;
 }
 bool session_isActive(int fd)
 {
     TracyZoneScoped;
-    return (session_isValid(fd) && !sessions[fd]->flag.eof);
+    return session_isValid(fd) && !sessions[fd]->flag.eof;
 }
 
 int32 makeConnection_tcp(uint32 ip, uint16 port)

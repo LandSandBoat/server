@@ -75,9 +75,9 @@ public:
 
     CZone* GetZone();
 
-    EntityList_t GetCharList() const;
-    EntityList_t GetMobList() const;
-    bool         CharListEmpty() const;
+    auto GetCharList() const -> const EntityList_t&;
+    auto GetMobList() const -> const EntityList_t&;
+    bool CharListEmpty() const;
 
     uint16 GetNewCharTargID();
     void   AssignDynamicTargIDandLongID(CBaseEntity* PEntity);

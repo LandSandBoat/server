@@ -230,14 +230,13 @@ void view_session::read_func()
                 // (optional) Check if the name is in use by NPC or Mob entities
                 if (settings::get<bool>("login.DISABLE_MOB_NPC_CHAR_NAMES"))
                 {
-                    auto query =
-                        "WITH results AS "
-                        "( "
-                        "    SELECT polutils_name AS `name` FROM npc_list "
-                        "    UNION "
-                        "    SELECT packet_name AS `name` FROM mob_pools "
-                        ") "
-                        "SELECT * FROM results WHERE REPLACE(REPLACE(UPPER(`name`), '-', ''), '_', '') LIKE REPLACE(REPLACE(UPPER('%s'), '-', ''), '_', '')";
+                    auto query = "WITH results AS "
+                                 "( "
+                                 "    SELECT polutils_name AS `name` FROM npc_list "
+                                 "    UNION "
+                                 "    SELECT packet_name AS `name` FROM mob_pools "
+                                 ") "
+                                 "SELECT * FROM results WHERE REPLACE(REPLACE(UPPER(`name`), '-', ''), '_', '') LIKE REPLACE(REPLACE(UPPER('%s'), '-', ''), '_', '')";
 
                     if (_sql->Query(query, nameStr) == SQL_ERROR)
                     {

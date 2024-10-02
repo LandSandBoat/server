@@ -3,7 +3,7 @@ if(NOT WIN32)
     CPMAddPackage(
         NAME mariadb-connector-cpp
         GITHUB_REPOSITORY mariadb-corporation/mariadb-connector-cpp
-        GIT_TAG b09555de99ed4b1d054a88ff85acbae996bce1d1
+        GIT_TAG db9241c72f6ed377b692bf65b74131d31be38eb7
         DOWNLOAD_ONLY YES
     )
     if(mariadb-connector-cpp_ADDED)
@@ -238,7 +238,7 @@ if(NOT WIN32)
             )
         endif()
         add_library(mariadbclientcpp STATIC ${MACPP_SOURCES})
-        target_include_directories(mariadbclientcpp
+        target_include_directories(mariadbclientcpp SYSTEM
             PUBLIC
                 ${mariadb-connector-cpp_SOURCE_DIR}/include
             PRIVATE

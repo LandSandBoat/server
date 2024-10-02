@@ -17,16 +17,18 @@ concurrency:
 
 jobs:
   Sanity_Checks:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
     - name: Install Dependencies
+      # TODO: Properly use python venv
       run: |
+        python3 -m pip config set global.break-system-packages true
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server-10.6 mariadb-client-10.6 libmariadb-dev-compat binutils-dev
-        pip install -r tools/requirements.txt
+        sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat binutils-dev
+        python3 -m pip install -r tools/requirements.txt
         luarocks install luacheck --local
         npm install -g diff-so-fancy
     - id: changed-files
@@ -88,15 +90,14 @@ jobs:
           exit 1
         fi
         exit 0
-    - name: CPP Formatting Checks (clang-format-15)
+    - name: CPP Formatting Checks (clang-format-18)
       if: always()
       run: |
-        clang-format-15 -version
         touch cpp_formatting_checks.txt
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ -f $changed_file ]]; then
             if [[ $changed_file == *.cpp || $changed_file == *.h ]]; then
-              clang-format-15 -style=file -i ${changed_file}
+              sh ./tools/run_clang_format.sh ${changed_file}
             fi
           fi
         done
@@ -183,16 +184,18 @@ jobs:
 
   Linux_LuaLanguageServer:
     needs: Sanity_Checks
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0 # Or else we don't get full blame information
     - name: Install Dependencies
+      # TODO: Properly use python venv
       run: |
+        python3 -m pip config set global.break-system-packages true
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
-        pip install -r tools/requirements.txt
+        python3 -m pip install -r tools/requirements.txt
     - name: Run Lua Language Server
       run: |
         python3 tools/ci/lua_lang_server.py
@@ -209,26 +212,28 @@ jobs:
             exit 1
         fi
 
-  Linux_Clang15_64bit:
+  Linux_Clang18_64bit:
     needs: Sanity_Checks
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 1
     - name: Install Dependencies
+      # TODO: Properly use python venv
       run: |
+        python3 -m pip config set global.break-system-packages true
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
-    #- name: Cache 'build' folder
-    #  uses: actions/cache@v4
-    #  with:
-    #    path: build
-    #    key: ${{ runner.os }}-clang
+    - name: Cache 'build' folder
+      uses: actions/cache@v4
+      with:
+        path: build
+        key: ${{ runner.os }}-clang
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/clang-15
-        export CXX=/usr/bin/clang++-15
+        export CC=/usr/bin/clang-18
+        export CXX=/usr/bin/clang++-18
         mkdir -p build
         cmake -S . -B build
     - name: Build
@@ -244,30 +249,28 @@ jobs:
           xi_search
           xi_world
 
-  Linux_ClangTidy15_64bit:
+  Linux_ClangTidy18_64bit:
     needs: Sanity_Checks
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
-    # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
-    - uses: claywar/workaround8649@4892524a133793c85e25513fae79fc968e63877c
-      with:
-        os: ubuntu-22.04
     - uses: actions/checkout@v4
       with:
         fetch-depth: 1
     - name: Install Dependencies
+      # TODO: Properly use python venv
       run: |
+        python3 -m pip config set global.break-system-packages true
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
-    #- name: Cache 'build' folder
-    #  uses: actions/cache@v4
-    #  with:
-    #    path: build
-    #    key: ${{ runner.os }}-clang
+    - name: Cache 'build' folder
+      uses: actions/cache@v4
+      with:
+        path: build
+        key: ${{ runner.os }}-clang-tidy
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/clang-15
-        export CXX=/usr/bin/clang++-15
+        export CC=/usr/bin/clang-18
+        export CXX=/usr/bin/clang++-18
         mkdir -p build
         cmake -S . -B build -DENABLE_CLANG_TIDY=ON
     - name: Build
@@ -279,32 +282,28 @@ jobs:
             exit 1
         fi
 
-  Linux_GCC13_64bit:
+  Linux_GCC14_64bit:
     needs: Sanity_Checks
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 1
     - name: Install Dependencies
+      # TODO: Properly use python venv
       run: |
+        python3 -m pip config set global.break-system-packages true
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
-
-        # Required for 22.04 Image, remove on transition to 24.04
-        sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-        sudo apt-get update -y
-        sudo apt-get install gcc-13 g++-13
-
-    #- name: Cache 'build' folder
-    #  uses: actions/cache@v4
-    #  with:
-    #    path: build
-    #    key: ${{ runner.os }}-gcc
+    - name: Cache 'build' folder
+      uses: actions/cache@v4
+      with:
+        path: build
+        key: ${{ runner.os }}-gcc
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/gcc-13
-        export CXX=/usr/bin/g++-13
+        export CC=/usr/bin/gcc-14
+        export CXX=/usr/bin/g++-14
         mkdir -p build
         CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake -S . -B build
     - name: Build
@@ -397,8 +396,8 @@ jobs:
           cmake --build build -j4
 
   Full_Startup_Checks_Linux:
-    runs-on: ubuntu-22.04
-    needs: Linux_Clang15_64bit
+    runs-on: ubuntu-24.04
+    needs: Linux_Clang18_64bit
     services:
       mysql:
         image: mariadb:10.6
@@ -417,10 +416,12 @@ jobs:
         name: linux_executables
         path: .
     - name: Install Dependencies
+      # TODO: Properly use python venv
       run: |
+        python3 -m pip config set global.break-system-packages true
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-client-10.6 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
-        pip install bcrypt
+        sudo apt-get install -y software-properties-common cmake mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
+        python3 -m pip install bcrypt
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -576,8 +577,8 @@ jobs:
         fi
 
   MultiInstance_Startup_Checks_Linux:
-    runs-on: ubuntu-22.04
-    needs: Linux_Clang15_64bit
+    runs-on: ubuntu-24.04
+    needs: Linux_Clang18_64bit
     services:
       mysql:
         image: mariadb:10.6
@@ -596,9 +597,11 @@ jobs:
         name: linux_executables
         path: .
     - name: Install Dependencies
+      # TODO: Properly use python venv
       run: |
+        python3 -m pip config set global.break-system-packages true
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-client-10.6 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
+        sudo apt-get install -y software-properties-common cmake mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -681,7 +684,7 @@ jobs:
         cp settings/default/* settings/
     - name: Install Python Dependencies
       run: |
-        pip install -r tools/requirements.txt
+        python3 -m pip install -r tools/requirements.txt
     - name: Import SQL files
       shell: bash
       run: |

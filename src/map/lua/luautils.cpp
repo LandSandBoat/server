@@ -2010,8 +2010,7 @@ namespace luautils
         std::optional<CLuaInstance> optInstance = std::nullopt;
         if (PChar->PInstance)
         {
-            filename =
-                std::string("./scripts/zones/") + PChar->loc.zone->getName() + "/instances/" + PChar->PInstance->GetName() + ".lua";
+            filename = std::string("./scripts/zones/") + PChar->loc.zone->getName() + "/instances/" + PChar->PInstance->GetName() + ".lua";
 
             optInstance = CLuaInstance(PChar->PInstance);
         }
@@ -2058,8 +2057,7 @@ namespace luautils
         std::optional<CLuaInstance> optInstance = std::nullopt;
         if (PChar->PInstance)
         {
-            filename =
-                std::string("scripts/zones/") + PChar->loc.zone->getName() + "/instances/" + PChar->PInstance->GetName() + ".lua";
+            filename = std::string("scripts/zones/") + PChar->loc.zone->getName() + "/instances/" + PChar->PInstance->GetName() + ".lua";
 
             optInstance = CLuaInstance(PChar->PInstance);
         }
@@ -3925,7 +3923,7 @@ namespace luautils
         return table;
     }
 
-    void SetMonstrosityLuaTable(CCharEntity* PChar, sol::table table)
+    void SetMonstrosityLuaTable(CCharEntity* PChar, sol::table&& table)
     {
         TracyZoneScoped;
 
@@ -5498,7 +5496,7 @@ namespace luautils
                                 "%u, "     // Quantity
                                 "%u, "     // Sender ID ( =Player ID )
                                 "'%s'); "; // Sender Text
-            int32 ret = _sql->Query(Query, playerID, itemId, quantity, playerID, senderText);
+            int32 ret = _sql->Query(Query, playerID, itemId, quantity, playerID, std::move(senderText));
 
             if (ret == SQL_ERROR)
             {

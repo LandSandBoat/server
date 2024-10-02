@@ -39,11 +39,11 @@ public:
     virtual bool CanChangeState() override
     {
         return false;
-    };
+    }
     virtual bool CanFollowPath() override
     {
         return false;
-    };
+    }
     virtual bool CanInterrupt() override
     {
         return false;

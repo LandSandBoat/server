@@ -48,21 +48,42 @@ public:
 
     virtual ~CPPModule() = default;
 
+    //
     // Required
+    //
     virtual void OnInit() = 0;
 
+    //
     // Optional
-    virtual void OnZoneTick(CZone* PZone){};
-    virtual void OnTimeServerTick(){};
-    virtual void OnCharZoneIn(CCharEntity* PChar){};
-    virtual void OnCharZoneOut(CCharEntity* PChar){};
-    virtual void OnPushPacket(CCharEntity* PChar, CBasicPacket* packet){};
+    //
+    virtual void OnZoneTick(CZone* PZone)
+    {
+    }
 
+    virtual void OnTimeServerTick()
+    {
+    }
+
+    virtual void OnCharZoneIn(CCharEntity* PChar)
+    {
+    }
+
+    virtual void OnCharZoneOut(CCharEntity* PChar)
+    {
+    }
+
+    virtual void OnPushPacket(CCharEntity* PChar, CBasicPacket* packet)
+    {
+    }
+
+    //
+    // Util
+    //
     template <typename T>
     static T* Register()
     {
         return new T();
-    };
+    }
 
 protected:
     sol::state&                     lua;

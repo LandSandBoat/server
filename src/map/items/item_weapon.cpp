@@ -133,7 +133,7 @@ bool CItemWeapon::isUnlockable() const
         return false;
     }
 
-    return (m_wsunlockpoints > 0);
+    return m_wsunlockpoints > 0;
 }
 
 /************************************************************************

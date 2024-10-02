@@ -282,10 +282,7 @@ bool CPetEntity::shouldDespawn(time_point tick)
         return true;
     }
 
-    if (PMaster != nullptr &&
-        PAI->IsSpawned() &&
-        m_PetType == PET_TYPE::JUG_PET &&
-        tick > m_jugSpawnTime + m_jugDuration)
+    if (PMaster != nullptr && PAI->IsSpawned() && m_PetType == PET_TYPE::JUG_PET && tick > m_jugSpawnTime + m_jugDuration)
     {
         return true;
     }

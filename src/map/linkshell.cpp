@@ -464,7 +464,8 @@ namespace linkshell
         if (IsValidLinkshellName(name))
         {
             if (_sql->Query("INSERT INTO linkshells (name, color, postrights) VALUES ('%s', %u, %u)", name, color,
-                            static_cast<uint8>(LSTYPE_PEARLSACK)) != SQL_ERROR)
+                            static_cast<uint8>(LSTYPE_PEARLSACK))
+                != SQL_ERROR)
             {
                 return LoadLinkshell((uint32)_sql->LastInsertId())->getID();
             }

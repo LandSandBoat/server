@@ -422,7 +422,7 @@ void CTreasurePool::CheckItems(time_point tick)
 {
     if (m_count != 0)
     {
-        if ((tick - m_Tick > treasure_checktime))
+        if (tick - m_Tick > treasure_checktime)
         {
             for (uint8 i = 0; i < TREASUREPOOL_SIZE; ++i)
             {
@@ -440,9 +440,7 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
         return;
     }
 
-    if ((tick - m_PoolItems[SlotID].TimeStamp) > treasure_livetime ||
-        (m_TreasurePoolType == TREASUREPOOL_SOLO && members[0]->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0) ||
-        m_PoolItems[SlotID].Lotters.size() == members.size())
+    if ((tick - m_PoolItems[SlotID].TimeStamp) > treasure_livetime || (m_TreasurePoolType == TREASUREPOOL_SOLO && members[0]->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0) || m_PoolItems[SlotID].Lotters.size() == members.size())
     {
         // Find item's highest lotter
         LotInfo highestInfo;

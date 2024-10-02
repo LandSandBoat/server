@@ -131,7 +131,7 @@ void CLuaLootContainer::Register()
     SOL_REGISTER("addGroup", CLuaLootContainer::addGroup);
     SOL_REGISTER("addItemFixed", CLuaLootContainer::addItemFixed);
     SOL_REGISTER("addGroupFixed", CLuaLootContainer::addGroupFixed);
-};
+}
 
 std::ostream& operator<<(std::ostream& os, const CLuaLootContainer& loot)
 {

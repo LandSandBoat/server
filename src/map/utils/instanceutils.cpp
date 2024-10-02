@@ -34,25 +34,24 @@ namespace instanceutils
 
     void LoadInstanceList()
     {
-        const char query[] =
-            "SELECT "
-            "instanceid,"                // 0
-            "instance_name,"             // 1
-            "instance_zone,"             // 2
-            "entrance_zone,"             // 3
-            "time_limit,"                // 4
-            "start_x,"                   // 5
-            "start_y,"                   // 6
-            "start_z,"                   // 7
-            "start_rot,"                 // 8
-            "instance_list.music_day,"   // 9
-            "instance_list.music_night," // 10
-            "instance_list.battlesolo,"  // 11
-            "instance_list.battlemulti," // 12
-            "zone_settings.name "        // 13
-            "FROM instance_list INNER JOIN zone_settings "
-            "ON instance_zone = zone_settings.zoneid "
-            "WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
+        const char query[] = "SELECT "
+                             "instanceid,"                // 0
+                             "instance_name,"             // 1
+                             "instance_zone,"             // 2
+                             "entrance_zone,"             // 3
+                             "time_limit,"                // 4
+                             "start_x,"                   // 5
+                             "start_y,"                   // 6
+                             "start_z,"                   // 7
+                             "start_rot,"                 // 8
+                             "instance_list.music_day,"   // 9
+                             "instance_list.music_night," // 10
+                             "instance_list.battlesolo,"  // 11
+                             "instance_list.battlemulti," // 12
+                             "zone_settings.name "        // 13
+                             "FROM instance_list INNER JOIN zone_settings "
+                             "ON instance_zone = zone_settings.zoneid "
+                             "WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
 
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);

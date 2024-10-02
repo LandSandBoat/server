@@ -549,8 +549,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
                             PChar->m_PMonstrosity->EquippedInstincts[idx] = value;
 
                             // Validate cost
-                            if (getTotalInstinctsCost(PChar->m_PMonstrosity->EquippedInstincts) > maxPoints ||
-                                instinctsContainDuplicates(PChar->m_PMonstrosity->EquippedInstincts))
+                            if (getTotalInstinctsCost(PChar->m_PMonstrosity->EquippedInstincts) > maxPoints || instinctsContainDuplicates(PChar->m_PMonstrosity->EquippedInstincts))
                             {
                                 // Reset to what it was before and don't handle mods
                                 PChar->m_PMonstrosity->EquippedInstincts = previousEquipped;

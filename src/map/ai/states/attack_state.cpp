@@ -125,8 +125,7 @@ void CAttackState::UpdateTarget(uint16 targid)
             {
                 for (auto&& PPotentialTarget : PChar->SpawnMOBList)
                 {
-                    if (PPotentialTarget.second->animation == ANIMATION_ATTACK && facing(PChar->loc.p, PPotentialTarget.second->loc.p, 64) &&
-                        distance(PChar->loc.p, PPotentialTarget.second->loc.p) <= 10)
+                    if (PPotentialTarget.second->animation == ANIMATION_ATTACK && facing(PChar->loc.p, PPotentialTarget.second->loc.p, 64) && distance(PChar->loc.p, PPotentialTarget.second->loc.p) <= 10)
                     {
                         std::unique_ptr<CBasicPacket> errMsg;
                         if (PChar->IsValidTarget(PPotentialTarget.second->targid, TARGET_ENEMY, errMsg))

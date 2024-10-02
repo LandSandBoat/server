@@ -121,7 +121,7 @@ shared_guarded<std::unordered_set<std::string>> gIPAddressWhitelist;
 // Implement using getsockname and inet_ntop
 std::string socketToString(SOCKET socket)
 {
-    sockaddr_storage addr;
+    sockaddr_storage addr{};
     socklen_t        len = sizeof(addr);
     getsockname(socket, (sockaddr*)&addr, &len);
 
@@ -263,7 +263,7 @@ int32 main(int32 argc, char** argv)
     SOCKET ClientSocket = INVALID_SOCKET;
 
     struct addrinfo* result = nullptr;
-    struct addrinfo  hints
+    struct addrinfo hints
     {
     };
 
@@ -597,9 +597,11 @@ std::string searchTypeToString(uint8 type)
 
 void TCPComm(SOCKET socket)
 {
-    char               clientIP[INET_ADDRSTRLEN];
-    struct sockaddr_in addr;
-    socklen_t          addr_len = sizeof(addr);
+    char clientIP[INET_ADDRSTRLEN];
+    struct sockaddr_in addr
+    {
+    };
+    socklen_t addr_len = sizeof(addr);
 
     if (getpeername(socket, (struct sockaddr*)&addr, &addr_len) == -1)
     {

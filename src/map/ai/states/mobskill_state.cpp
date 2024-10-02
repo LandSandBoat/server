@@ -95,8 +95,7 @@ void CMobSkillState::SpendCost()
             m_spentTP = m_PEntity->addTP(-1000);
             m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_SEKKANOKI);
         }
-        else if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_MEIKYO_SHISUI) &&
-                 m_PEntity->GetLocalVar("[MeikyoShisui]MobSkillCount") > 0)
+        else if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_MEIKYO_SHISUI) && m_PEntity->GetLocalVar("[MeikyoShisui]MobSkillCount") > 0)
         {
             auto currentCount = m_PEntity->GetLocalVar("[MeikyoShisui]MobSkillCount");
             m_PEntity->SetLocalVar("[MeikyoShisui]MobSkillCount", currentCount - 1);
@@ -181,8 +180,7 @@ void CMobSkillState::Cleanup(time_point tick)
         // charm -> build tp -> leave -> stun -> interrupt TP move with weapon bash -> charm and check TP. Note that weapon bash incurs damage and thus adds TP.
         // Note: this is very incomplete. Further testing shows that other statuses also reduce TP but in addition it seems that specific mobskills may reduce TP more or less than these numbers
         // Thus while incomplete, is better than nothing.
-        if (m_PEntity->StatusEffectContainer &&
-            m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT::EFFECT_STUN, EFFECT::EFFECT_TERROR, EFFECT::EFFECT_PETRIFICATION, EFFECT::EFFECT_SLEEP, EFFECT::EFFECT_SLEEP_II, EFFECT::EFFECT_LULLABY }))
+        if (m_PEntity->StatusEffectContainer && m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT::EFFECT_STUN, EFFECT::EFFECT_TERROR, EFFECT::EFFECT_PETRIFICATION, EFFECT::EFFECT_SLEEP, EFFECT::EFFECT_SLEEP_II, EFFECT::EFFECT_LULLABY }))
         {
             int16 tp = m_spentTP;
             if (tp >= 2900)

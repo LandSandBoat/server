@@ -209,16 +209,12 @@ namespace charutils
 
         grade = grade::GetRaceGrades(race, 0);
 
-        raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
-                   (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
+        raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) + (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) + (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
         // Calculation on Main Job
         grade = grade::GetJobGrade(mjob, 0);
 
-        jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                  (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
-                  (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
+        jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) + (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) + (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
         // Calculation of bonus HP.
         bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
@@ -228,8 +224,7 @@ namespace charutils
         {
             grade = grade::GetJobGrade(sjob, 0);
 
-            sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (slvl - 1)) +
-                       (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
+            sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (slvl - 1)) + (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
             sJobStat = sJobStat / 2;
         }
 
@@ -250,23 +245,20 @@ namespace charutils
         {
             if (grade::GetJobGrade(sjob, 1) != 0 && slvl > 0) // TODO: In this expression, an error
             {
-                raceStat =
-                    (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (slvl - 1)) / settings::get<float>("map.SJ_MP_DIVISOR"); // TODO: Here is a mistake
+                raceStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (slvl - 1)) / settings::get<float>("map.SJ_MP_DIVISOR"); // TODO: Here is a mistake
             }
         }
         else
         {
             // Calculation of a normal racial bonus
-            raceStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
-                       grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
+            raceStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 + grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
         }
 
         // Main Job
         grade = grade::GetJobGrade(mjob, 1);
         if (grade > 0)
         {
-            jobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
-                      grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
+            jobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 + grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
         }
 
         // Subjob
@@ -1738,8 +1730,7 @@ namespace charutils
 
             if (PItem->isSubType(ITEM_CHARGED))
             {
-                PChar->PRecastContainer->Del(RECAST_ITEM, PItem->getSlotID() << 8 |
-                                                              PItem->getLocationID()); // Also remove item from the Recast List no matter what bag its in
+                PChar->PRecastContainer->Del(RECAST_ITEM, PItem->getSlotID() << 8 | PItem->getLocationID()); // Also remove item from the Recast List no matter what bag its in
             }
             PItem->setSubType(ITEM_UNLOCKED);
 
@@ -1896,18 +1887,14 @@ namespace charutils
             return false;
         }
 
-        if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
-            (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
-            (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])) ||
-            !PItem->isEquippableByRace(PChar->look.race))
+        if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) || (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) || (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])) || !PItem->isEquippableByRace(PChar->look.race))
         {
             return false;
         }
 
         if (equipSlotID == SLOT_MAIN)
         {
-            if (!(slotID == PItem->getSlotID() && oldItem && (oldItem->isType(ITEM_WEAPON) && PItem->isType(ITEM_WEAPON)) &&
-                  (static_cast<CItemWeapon*>(PItem)->isTwoHanded() && static_cast<CItemWeapon*>(oldItem)->isTwoHanded())))
+            if (!(slotID == PItem->getSlotID() && oldItem && (oldItem->isType(ITEM_WEAPON) && PItem->isType(ITEM_WEAPON)) && (static_cast<CItemWeapon*>(PItem)->isTwoHanded() && static_cast<CItemWeapon*>(oldItem)->isTwoHanded())))
             {
                 CItemEquipment* PSubItem = PChar->getEquip(SLOT_SUB);
 
@@ -2082,8 +2069,7 @@ namespace charutils
                         CItemWeapon* weapon = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
                         if (weapon)
                         {
-                            if (static_cast<CItemWeapon*>(PItem)->getSkillType() != weapon->getSkillType() ||
-                                static_cast<CItemWeapon*>(PItem)->getSubSkillType() != weapon->getSubSkillType())
+                            if (static_cast<CItemWeapon*>(PItem)->getSkillType() != weapon->getSkillType() || static_cast<CItemWeapon*>(PItem)->getSubSkillType() != weapon->getSubSkillType())
                             {
                                 UnequipItem(PChar, SLOT_AMMO, false);
                             }
@@ -2101,8 +2087,7 @@ namespace charutils
                         CItemWeapon* weapon = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
                         if (weapon)
                         {
-                            if (static_cast<CItemWeapon*>(PItem)->getSkillType() != weapon->getSkillType() ||
-                                static_cast<CItemWeapon*>(PItem)->getSubSkillType() != weapon->getSubSkillType())
+                            if (static_cast<CItemWeapon*>(PItem)->getSkillType() != weapon->getSkillType() || static_cast<CItemWeapon*>(PItem)->getSubSkillType() != weapon->getSubSkillType())
                             {
                                 UnequipItem(PChar, SLOT_RANGED, false);
                             }
@@ -2617,9 +2602,7 @@ namespace charutils
                                 CItem* PItem  = PChar->getStorage(container)->GetItem(slot);
                                 auto*  PEquip = dynamic_cast<CItemEquipment*>(PItem);
 
-                                if ((PItem != nullptr && PItem->getID() == itemId && PEquip != nullptr) &&
-                                    (PEquip != PChar->getEquip(static_cast<SLOTTYPE>(equipSlot - 1)) &&
-                                     PEquip != PChar->getEquip(static_cast<SLOTTYPE>(equipSlot + 1))))
+                                if ((PItem != nullptr && PItem->getID() == itemId && PEquip != nullptr) && (PEquip != PChar->getEquip(static_cast<SLOTTYPE>(equipSlot - 1)) && PEquip != PChar->getEquip(static_cast<SLOTTYPE>(equipSlot + 1))))
                                 {
                                     found = true;
                                     charutils::EquipItem(PChar, PItem->getSlotID(), equipSlot, static_cast<CONTAINER_ID>(container));
@@ -2741,16 +2724,14 @@ namespace charutils
         }
         if (equipSlotID == SLOT_MAIN || equipSlotID == SLOT_RANGED || equipSlotID == SLOT_SUB)
         {
-            if (!PItem || !PItem->isType(ITEM_EQUIPMENT) ||
-                (((CItemWeapon*)PItem)->getSkillType() != SKILL_STRING_INSTRUMENT && ((CItemWeapon*)PItem)->getSkillType() != SKILL_WIND_INSTRUMENT))
+            if (!PItem || !PItem->isType(ITEM_EQUIPMENT) || (((CItemWeapon*)PItem)->getSkillType() != SKILL_STRING_INSTRUMENT && ((CItemWeapon*)PItem)->getSkillType() != SKILL_WIND_INSTRUMENT))
             {
                 // If the weapon ISN'T a wind based instrument or a string based instrument
                 PChar->health.tp = 0;
                 PChar->StatusEffectContainer->DelStatusEffect(EFFECT_AFTERMATH);
             }
 
-            if (!PChar->getEquip(SLOT_MAIN) || !PChar->getEquip(SLOT_MAIN)->isType(ITEM_EQUIPMENT) ||
-                PChar->m_Weapons[SLOT_MAIN] == itemutils::GetUnarmedH2HItem())
+            if (!PChar->getEquip(SLOT_MAIN) || !PChar->getEquip(SLOT_MAIN)->isType(ITEM_EQUIPMENT) || PChar->m_Weapons[SLOT_MAIN] == itemutils::GetUnarmedH2HItem())
             {
                 CheckUnarmedWeapon(PChar);
             }
@@ -3165,8 +3146,7 @@ namespace charutils
             int16  skillBonus   = 0;
 
             // apply arts bonuses
-            if ((i >= SKILL_DIVINE_MAGIC && i <= SKILL_ENFEEBLING_MAGIC && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE })) ||
-                (i >= SKILL_ENFEEBLING_MAGIC && i <= SKILL_DARK_MAGIC && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK })))
+            if ((i >= SKILL_DIVINE_MAGIC && i <= SKILL_ENFEEBLING_MAGIC && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE })) || (i >= SKILL_ENFEEBLING_MAGIC && i <= SKILL_DARK_MAGIC && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK })))
             {
                 uint16 artsSkill    = battleutils::GetMaxSkill(SKILL_ENHANCING_MAGIC, JOB_RDM, PChar->GetMLevel());                  // B+ skill
                 uint16 skillCapD    = battleutils::GetMaxSkill((SKILLTYPE)i, JOB_SCH, PChar->GetMLevel());                           // D skill cap
@@ -4903,8 +4883,7 @@ namespace charutils
         }
 
         // we check if the player is level capped and max exp..
-        if (PChar->jobs.job[PChar->GetMJob()] > 74 && PChar->jobs.job[PChar->GetMJob()] >= PChar->jobs.genkai &&
-            PChar->jobs.exp[PChar->GetMJob()] == GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) - 1)
+        if (PChar->jobs.job[PChar->GetMJob()] > 74 && PChar->jobs.job[PChar->GetMJob()] >= PChar->jobs.genkai && PChar->jobs.exp[PChar->GetMJob()] == GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) - 1)
         {
             onLimitMode = true;
         }
@@ -5941,7 +5920,7 @@ namespace charutils
         uint8 current  = PChar->m_questLog[log].current[quest / 8] & (1 << (quest % 8));
         uint8 complete = PChar->m_questLog[log].complete[quest / 8] & (1 << (quest % 8));
 
-        return (complete != 0 ? 2 : (current != 0 ? 1 : 0));
+        return complete != 0 ? 2 : (current != 0 ? 1 : 0);
     }
 
     uint16 AvatarPerpetuationReduction(CCharEntity* PChar)
@@ -6033,8 +6012,7 @@ namespace charutils
         CItem* PSubslot = PChar->getEquip(SLOT_SUB);
 
         // Main or sub job provides H2H skill, and sub slot is empty.
-        if ((battleutils::GetSkillRank(SKILL_HAND_TO_HAND, PChar->GetMJob()) > 0 || battleutils::GetSkillRank(SKILL_HAND_TO_HAND, PChar->GetSJob()) > 0) &&
-            (!PSubslot || !PSubslot->isType(ITEM_EQUIPMENT)))
+        if ((battleutils::GetSkillRank(SKILL_HAND_TO_HAND, PChar->GetMJob()) > 0 || battleutils::GetSkillRank(SKILL_HAND_TO_HAND, PChar->GetSJob()) > 0) && (!PSubslot || !PSubslot->isType(ITEM_EQUIPMENT)))
         {
             PChar->m_Weapons[SLOT_MAIN] = itemutils::GetUnarmedH2HItem();
             PChar->look.main            = 21; // The secret to H2H animations.  setModelId for UnarmedH2H didn't work.
@@ -6121,8 +6099,7 @@ namespace charutils
         }
         if ((PAbility->getAddType() & (ADDTYPE_JUGPET | ADDTYPE_CHARMPET)) == (ADDTYPE_JUGPET | ADDTYPE_CHARMPET))
         {
-            if (!PChar->PPet || !(PChar->PPet->objtype == TYPE_MOB ||
-                                  (PChar->PPet->objtype == TYPE_PET && static_cast<CPetEntity*>(PChar->PPet)->getPetType() == PET_TYPE::JUG_PET)))
+            if (!PChar->PPet || !(PChar->PPet->objtype == TYPE_MOB || (PChar->PPet->objtype == TYPE_PET && static_cast<CPetEntity*>(PChar->PPet)->getPetType() == PET_TYPE::JUG_PET)))
             {
                 return false;
             }
@@ -6284,9 +6261,7 @@ namespace charutils
             }
 
             CBattleEntity* PSyncTarget = PChar->PParty->GetSyncTarget();
-            if (PSyncTarget && PChar->getZone() == PSyncTarget->getZone() && !(PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC)) &&
-                PSyncTarget->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC) &&
-                PSyncTarget->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC)->GetDuration() == 0)
+            if (PSyncTarget && PChar->getZone() == PSyncTarget->getZone() && !(PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC)) && PSyncTarget->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC) && PSyncTarget->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC)->GetDuration() == 0)
             {
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, PSyncTarget->GetMLevel(), 540));
                 PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_SYNC, EFFECT_LEVEL_SYNC, PSyncTarget->GetMLevel(), 0, 0), true);

@@ -393,8 +393,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
             actionTarget.speceffect = SPECEFFECT::CRITICAL_HIT;
         }
 
-        actionTarget.param =
-            battleutils::TakePhysicalDamage(this, PTarget, PHYSICAL_ATTACK_TYPE::RANGED, totalDamage, false, slot, realHits, nullptr, true, true);
+        actionTarget.param = battleutils::TakePhysicalDamage(this, PTarget, PHYSICAL_ATTACK_TYPE::RANGED, totalDamage, false, slot, realHits, nullptr, true, true);
 
         // lower damage based on shadows taken
         if (shadowsTaken)
@@ -416,7 +415,9 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
         //battleutils::HandleRangedAdditionalEffect(this,PTarget,&Action);
         //TODO: move all hard coded additional effect ammo to scripts
         if ((PAmmo != nullptr && battleutils::GetScaledItemModifier(this, PAmmo, Mod::ADDITIONAL_EFFECT) > 0) ||
-            (PItem != nullptr && battleutils::GetScaledItemModifier(this, PItem, Mod::ADDITIONAL_EFFECT) > 0)) {}
+            (PItem != nullptr && battleutils::GetScaledItemModifier(this, PItem, Mod::ADDITIONAL_EFFECT) > 0))
+        // {
+        // }
         luautils::OnAdditionalEffect(this, PTarget, (PAmmo != nullptr ? PAmmo : PItem), &actionTarget, totalDamage);
          */
     }

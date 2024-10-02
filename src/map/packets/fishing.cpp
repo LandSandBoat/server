@@ -69,8 +69,7 @@ CFishingPacket::CFishingPacket(uint16 stamina, uint16 regen, uint16 response, ui
                                     // Ring is equipped with fishing support in effect, this value also decreases (investigating on decrease amount, seems like
                                     // 10% decrease rounded to nearest 10 or 20 if not integer result).
     ref<uint16>(0x10) = gameTime;   // how long you have to reel the fish in (base 60s)
-    ref<uint8>(0x12) =
-        sense;                   // 0 = small fish/item, 1 = large fish/monster (battle music), 2 = small fish/item (lightbulb), 3 = large fish/monster (lightbulb + fight music)
-    ref<uint32>(0x14) = special; // value will be returned in 0x110 on catch (LSB represents % chance of getting gold arrows while fishing) - value increases on
-                                 // use of "Duck ring" or on angler's discernment proc, both of which increase chance of gold arrows
+    ref<uint8>(0x12)  = sense;      // 0 = small fish/item, 1 = large fish/monster (battle music), 2 = small fish/item (lightbulb), 3 = large fish/monster (lightbulb + fight music)
+    ref<uint32>(0x14) = special;    // value will be returned in 0x110 on catch (LSB represents % chance of getting gold arrows while fishing) - value increases on
+                                    // use of "Duck ring" or on angler's discernment proc, both of which increase chance of gold arrows
 }

@@ -35,7 +35,8 @@ void CJobPoints::LoadJobPoints()
         _sql->Query("SELECT charid, jobid, capacity_points, job_points, job_points_spent, "
                     "jptype0, jptype1, jptype2, jptype3, jptype4, jptype5, jptype6, jptype7, jptype8, jptype9 "
                     "FROM char_job_points WHERE charid = %u ORDER BY jobid ASC",
-                    m_PChar->id) != SQL_ERROR)
+                    m_PChar->id)
+        != SQL_ERROR)
     {
         for (uint64 i = 0; i < _sql->NumRows(); i++)
         {
@@ -67,9 +68,7 @@ void CJobPoints::LoadJobPoints()
 
 bool CJobPoints::IsJobPointExist(JOBPOINT_TYPE jpType)
 {
-    if ((static_cast<uint16>(jpType) < JOBPOINTS_CATEGORY_START) ||
-        (JobPointsCategoryIndexByJpType(jpType) - 1 > JOBPOINTS_CATEGORY_COUNT) ||
-        (JobPointTypeIndex(jpType) > JOBPOINTS_JPTYPE_PER_CATEGORY))
+    if ((static_cast<uint16>(jpType) < JOBPOINTS_CATEGORY_START) || (JobPointsCategoryIndexByJpType(jpType) - 1 > JOBPOINTS_CATEGORY_COUNT) || (JobPointTypeIndex(jpType) > JOBPOINTS_JPTYPE_PER_CATEGORY))
     {
         return false;
     }

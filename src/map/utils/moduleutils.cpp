@@ -176,9 +176,7 @@ namespace moduleutils
             auto path          = std::filesystem::path(entry).relative_path();
             bool isHelpersFile = path.filename() == "module_utils.lua";
 
-            if (!isHelpersFile &&
-                !std::filesystem::is_directory(path) &&
-                path.extension() == ".lua")
+            if (!isHelpersFile && !std::filesystem::is_directory(path) && path.extension() == ".lua")
             {
                 std::string filename = path.filename().generic_string();
                 std::string relPath  = path.relative_path().generic_string();

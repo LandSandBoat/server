@@ -122,7 +122,7 @@ uint8 ConquestData::getPrevRegionControlCount(NATION_TYPE nation) const
     return count;
 }
 
-auto ConquestData::getRegionControls() -> std::vector<region_control_t> const
+auto ConquestData::getRegionControls() const -> const std::vector<region_control_t>&
 {
     return regionControls;
 }

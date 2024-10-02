@@ -267,8 +267,7 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
         }
 
         // Ambush Augment adds +1% Triple Attack per merit (need to satisfy conditions for Ambush)
-        if (charutils::hasTrait(PChar, TRAIT_AMBUSH) && PChar->getMod(Mod::AUGMENTS_AMBUSH) > 0 &&
-            abs(m_defender->loc.p.rotation - m_attacker->loc.p.rotation) < 23)
+        if (charutils::hasTrait(PChar, TRAIT_AMBUSH) && PChar->getMod(Mod::AUGMENTS_AMBUSH) > 0 && abs(m_defender->loc.p.rotation - m_attacker->loc.p.rotation) < 23)
         {
             tripleAttack += PChar->PMeritPoints->GetMerit(MERIT_AMBUSH)->count;
         }
@@ -351,8 +350,7 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
         uint8           ammoCount = 0;
 
         // Two handed and Hand-to-Hand
-        if (battleutils::GetScaledItemModifier(PChar, PMain, Mod::AMMO_SWING_TYPE) == 2 &&
-            xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
+        if (battleutils::GetScaledItemModifier(PChar, PMain, Mod::AMMO_SWING_TYPE) == 2 && xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
         {
             AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 1);
             ammoCount += 1;
@@ -360,14 +358,12 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
         // One handed
         else
         {
-            if (direction == RIGHTATTACK && battleutils::GetScaledItemModifier(PChar, PMain, Mod::AMMO_SWING_TYPE) == 1 &&
-                xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
+            if (direction == RIGHTATTACK && battleutils::GetScaledItemModifier(PChar, PMain, Mod::AMMO_SWING_TYPE) == 1 && xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
             {
                 AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, RIGHTATTACK, 1);
                 ammoCount += 1;
             }
-            if (direction == LEFTATTACK && PSub != nullptr && battleutils::GetScaledItemModifier(PChar, PSub, Mod::AMMO_SWING_TYPE) == 1 &&
-                xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
+            if (direction == LEFTATTACK && PSub != nullptr && battleutils::GetScaledItemModifier(PChar, PSub, Mod::AMMO_SWING_TYPE) == 1 && xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
             {
                 AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, LEFTATTACK, 1);
                 ammoCount += 1;

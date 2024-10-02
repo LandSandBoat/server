@@ -106,16 +106,7 @@ void CLatentEffect::SetModPower(int16 power)
 
 bool CLatentEffect::ModOnItemOnly(Mod modID)
 {
-    if (modID == Mod::DMG_RATING ||
-        modID == Mod::ITEM_ADDEFFECT_TYPE ||
-        modID == Mod::ITEM_SUBEFFECT ||
-        modID == Mod::ITEM_ADDEFFECT_DMG ||
-        modID == Mod::ITEM_ADDEFFECT_CHANCE ||
-        modID == Mod::ITEM_ADDEFFECT_ELEMENT ||
-        modID == Mod::ITEM_ADDEFFECT_STATUS ||
-        modID == Mod::ITEM_ADDEFFECT_POWER ||
-        modID == Mod::ITEM_ADDEFFECT_DURATION ||
-        modID == Mod::MOVE_SPEED_GEAR_BONUS)
+    if (modID == Mod::DMG_RATING || modID == Mod::ITEM_ADDEFFECT_TYPE || modID == Mod::ITEM_SUBEFFECT || modID == Mod::ITEM_ADDEFFECT_DMG || modID == Mod::ITEM_ADDEFFECT_CHANCE || modID == Mod::ITEM_ADDEFFECT_ELEMENT || modID == Mod::ITEM_ADDEFFECT_STATUS || modID == Mod::ITEM_ADDEFFECT_POWER || modID == Mod::ITEM_ADDEFFECT_DURATION || modID == Mod::MOVE_SPEED_GEAR_BONUS)
     {
         return true;
     }

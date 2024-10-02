@@ -497,7 +497,9 @@ struct zoneWeather_t
     zoneWeather_t(uint8 _normal, uint8 _common, uint8 _rare)
     : normal(_normal)
     , common(_common)
-    , rare(_rare){};
+    , rare(_rare)
+    {
+    }
 };
 
 /************************************************************************

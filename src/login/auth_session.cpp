@@ -51,11 +51,8 @@ namespace
 
     constexpr bool isBcryptHash(const std::string& passHash)
     {
-        return std::size(passHash) == 60 &&
-               passHash[0] == '$' &&
-               passHash[1] == '2' &&
-               (passHash[2] == 'a' || passHash[2] == 'b' || passHash[2] == 'y' || passHash[2] == 'x') && // bcrypt hash versions
-               passHash[3] == '$';
+        return std::size(passHash) == 60 && passHash[0] == '$' && passHash[1] == '2' && (passHash[2] == 'a' || passHash[2] == 'b' || passHash[2] == 'y' || passHash[2] == 'x') && // bcrypt hash versions
+            passHash[3] == '$';
     }
 } // namespace
 
@@ -382,7 +379,8 @@ void auth_session::read_func()
 
                 if (_sql->Query("INSERT INTO accounts(id,login,password,timecreate,timelastmodify,status,priv) \
                                 VALUES(%d,'%s','%s','%s',NULL,%d,%d)",
-                                accid, username, BCrypt::generateHash(escaped_pass), strtimecreate, ACCOUNT_STATUS_CODE::NORMAL, ACCOUNT_PRIVILEGE_CODE::USER) == SQL_ERROR)
+                                accid, username, BCrypt::generateHash(escaped_pass), strtimecreate, ACCOUNT_STATUS_CODE::NORMAL, ACCOUNT_PRIVILEGE_CODE::USER)
+                    == SQL_ERROR)
                 {
                     ref<uint8>(data_, 0) = LOGIN_ERROR_CREATE;
                     do_write(1);

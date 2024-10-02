@@ -122,14 +122,9 @@ void CMobSpellContainer::RemoveSpell(SpellID spellId)
 // Used in Gambits to see if the Trust can cast the spell
 std::optional<SpellID> CMobSpellContainer::GetAvailable(SpellID spellId)
 {
-    auto* spell    = spell::GetSpell(spellId);
-    bool  enoughMP = spell->getMPCost() <= m_PMob->health.mp ||
-                    spell->getSkillType() == SKILL_NINJUTSU ||
-                    spell->getSkillType() == SKILL_SINGING ||
-                    spell->getSkillType() == SKILL_WIND_INSTRUMENT ||
-                    spell->getSkillType() == SKILL_STRING_INSTRUMENT ||
-                    spell->getSkillType() == SKILL_GEOMANCY;
-    bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellId));
+    auto* spell         = spell::GetSpell(spellId);
+    bool  enoughMP      = spell->getMPCost() <= m_PMob->health.mp || spell->getSkillType() == SKILL_NINJUTSU || spell->getSkillType() == SKILL_SINGING || spell->getSkillType() == SKILL_WIND_INSTRUMENT || spell->getSkillType() == SKILL_STRING_INSTRUMENT || spell->getSkillType() == SKILL_GEOMANCY;
+    bool  isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellId));
 
     return (isNotInRecast && enoughMP) ? std::optional<SpellID>(spellId) : std::nullopt;
 }
@@ -142,15 +137,10 @@ std::optional<SpellID> CMobSpellContainer::GetBestAvailable(SPELLFAMILY family)
     {
         for (auto id : list)
         {
-            auto* spell      = spell::GetSpell(id);
-            bool  sameFamily = (family == SPELLFAMILY_NONE) ? true : spell->getSpellFamily() == family;
-            bool  enoughMP   = spell->getMPCost() <= m_PMob->health.mp ||
-                            spell->getSkillType() == SKILL_NINJUTSU ||
-                            spell->getSkillType() == SKILL_SINGING ||
-                            spell->getSkillType() == SKILL_WIND_INSTRUMENT ||
-                            spell->getSkillType() == SKILL_STRING_INSTRUMENT ||
-                            spell->getSkillType() == SKILL_GEOMANCY;
-            bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(id));
+            auto* spell         = spell::GetSpell(id);
+            bool  sameFamily    = (family == SPELLFAMILY_NONE) ? true : spell->getSpellFamily() == family;
+            bool  enoughMP      = spell->getMPCost() <= m_PMob->health.mp || spell->getSkillType() == SKILL_NINJUTSU || spell->getSkillType() == SKILL_SINGING || spell->getSkillType() == SKILL_WIND_INSTRUMENT || spell->getSkillType() == SKILL_STRING_INSTRUMENT || spell->getSkillType() == SKILL_GEOMANCY;
+            bool  isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(id));
             if (sameFamily && enoughMP && isNotInRecast)
             {
                 matches.emplace_back(id);
@@ -538,8 +528,7 @@ std::optional<SpellID> CMobSpellContainer::GetAggroSpell()
 std::optional<SpellID> CMobSpellContainer::GetSpell()
 {
     // prioritize curing if health low enough
-    if (HasHealSpells() && m_PMob->GetHPP() <= m_PMob->getMobMod(MOBMOD_HP_HEAL_CHANCE) &&
-        xirand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_HEAL_CHANCE))
+    if (HasHealSpells() && m_PMob->GetHPP() <= m_PMob->getMobMod(MOBMOD_HP_HEAL_CHANCE) && xirand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_HEAL_CHANCE))
     {
         return GetHealSpell();
     }

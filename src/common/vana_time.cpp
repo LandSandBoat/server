@@ -268,8 +268,7 @@ uint8 CVanaTime::getRSELocation() const
 
 TIMETYPE CVanaTime::SyncTime()
 {
-    m_vanaDate = (uint32)(this->getVanaTime() / 60.0 * 25) +
-                 886 * VTIME_YEAR; // convert vana time (from SE epoch in earth seconds) to vanadiel minutes and add 886 vana years
+    m_vanaDate = (uint32)(this->getVanaTime() / 60.0 * 25) + 886 * VTIME_YEAR; // convert vana time (from SE epoch in earth seconds) to vanadiel minutes and add 886 vana years
 
     m_vYear = m_vanaDate / VTIME_YEAR;
     m_vMon  = (m_vanaDate / VTIME_MONTH) % 12 + 1;

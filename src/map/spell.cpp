@@ -65,7 +65,7 @@ SpellID CSpell::getID()
 
 uint8 CSpell::getJob(JOBTYPE JobID)
 {
-    return (m_job[JobID] == CANNOT_USE_SPELL ? 255 : m_job[JobID]);
+    return m_job[JobID] == CANNOT_USE_SPELL ? 255 : m_job[JobID];
 }
 
 void CSpell::setJob(int8* jobs)
@@ -150,20 +150,17 @@ bool CSpell::hasMPCost()
 
 bool CSpell::isHeal()
 {
-    return ((getValidTarget() & TARGET_SELF) && getSkillType() == SKILL_HEALING_MAGIC) || m_ID == SpellID::Pollen || m_ID == SpellID::Wild_Carrot ||
-           m_ID == SpellID::Healing_Breeze || m_ID == SpellID::Magic_Fruit;
+    return ((getValidTarget() & TARGET_SELF) && getSkillType() == SKILL_HEALING_MAGIC) || m_ID == SpellID::Pollen || m_ID == SpellID::Wild_Carrot || m_ID == SpellID::Healing_Breeze || m_ID == SpellID::Magic_Fruit;
 }
 
 bool CSpell::isCure()
 {
-    return ((static_cast<uint16>(m_ID) >= 1 && static_cast<uint16>(m_ID) <= 11) || m_ID == SpellID::Cura || m_ID == SpellID::Cura_II ||
-            m_ID == SpellID::Cura_III);
+    return (static_cast<uint16>(m_ID) >= 1 && static_cast<uint16>(m_ID) <= 11) || m_ID == SpellID::Cura || m_ID == SpellID::Cura_II || m_ID == SpellID::Cura_III;
 }
 
 bool CSpell::isDebuff()
 {
-    return ((getValidTarget() & TARGET_ENEMY) && getSkillType() == SKILL_ENFEEBLING_MAGIC) || m_spellFamily == SPELLFAMILY_ELE_DOT ||
-           m_spellFamily == SPELLFAMILY_BIO || m_ID == SpellID::Stun || m_ID == SpellID::Curse;
+    return ((getValidTarget() & TARGET_ENEMY) && getSkillType() == SKILL_ENFEEBLING_MAGIC) || m_spellFamily == SPELLFAMILY_ELE_DOT || m_spellFamily == SPELLFAMILY_BIO || m_ID == SpellID::Stun || m_ID == SpellID::Curse;
 }
 
 bool CSpell::isNa()
@@ -856,8 +853,7 @@ namespace spell
         // brd gets bonus radius from string skill
         if (spell->getSpellGroup() == SPELLGROUP_SONG && (spell->getValidTarget() & TARGET_SELF))
         {
-            if (entity->objtype == TYPE_MOB || (entity->GetMJob() == JOB_BRD && entity->objtype == TYPE_PC && ((CCharEntity*)entity)->getEquip(SLOT_RANGED) &&
-                                                ((CItemWeapon*)((CCharEntity*)entity)->getEquip(SLOT_RANGED))->getSkillType() == SKILL_STRING_INSTRUMENT))
+            if (entity->objtype == TYPE_MOB || (entity->GetMJob() == JOB_BRD && entity->objtype == TYPE_PC && ((CCharEntity*)entity)->getEquip(SLOT_RANGED) && ((CItemWeapon*)((CCharEntity*)entity)->getEquip(SLOT_RANGED))->getSkillType() == SKILL_STRING_INSTRUMENT))
             {
                 total += ((float)entity->GetSkill(SKILL_STRING_INSTRUMENT) / 276) * 10;
             }

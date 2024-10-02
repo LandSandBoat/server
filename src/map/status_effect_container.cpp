@@ -753,8 +753,7 @@ void CStatusEffectContainer::ApplyStateAlteringEffects(CStatusEffect* StatusEffe
             }
         }
 
-        if (effect == EFFECT_SLEEP || effect == EFFECT_SLEEP_II || effect == EFFECT_STUN || effect == EFFECT_PETRIFICATION || effect == EFFECT_TERROR ||
-            effect == EFFECT_LULLABY || effect == EFFECT_PENALTY)
+        if (effect == EFFECT_SLEEP || effect == EFFECT_SLEEP_II || effect == EFFECT_STUN || effect == EFFECT_PETRIFICATION || effect == EFFECT_TERROR || effect == EFFECT_LULLABY || effect == EFFECT_PENALTY)
         {
             // change icon of sleep II and lullaby. Apparently they don't stop player movement.
             if (effect == EFFECT_SLEEP_II || effect == EFFECT_LULLABY)
@@ -809,9 +808,7 @@ void CStatusEffectContainer::DelStatusEffectsByFlag(uint32 flag, bool silent)
             // If this is an NM/Mob Nightmare sleep, it can be removed explictly by a cure
             // see mobskills/nightmare.lua for full explanation
             if (
-                flag & EFFECTFLAG_DAMAGE &&
-                PStatusEffect->GetStatusID() == EFFECT_SLEEP &&
-                PStatusEffect->GetTier() > 1)
+                flag & EFFECTFLAG_DAMAGE && PStatusEffect->GetStatusID() == EFFECT_SLEEP && PStatusEffect->GetTier() > 1)
             {
                 continue;
             }
@@ -852,10 +849,7 @@ EFFECT CStatusEffectContainer::HealingWaltz()
     std::vector<CStatusEffect*> waltzableList;
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
-        if ((PStatusEffect->HasEffectFlag(EFFECTFLAG_WALTZABLE) ||
-             PStatusEffect->HasEffectFlag(EFFECTFLAG_ERASABLE)) &&
-            PStatusEffect->GetDuration() > 0 &&
-            !PStatusEffect->deleted)
+        if ((PStatusEffect->HasEffectFlag(EFFECTFLAG_WALTZABLE) || PStatusEffect->HasEffectFlag(EFFECTFLAG_ERASABLE)) && PStatusEffect->GetDuration() > 0 && !PStatusEffect->deleted)
         {
             waltzableList.emplace_back(PStatusEffect);
         }
@@ -996,8 +990,7 @@ bool CStatusEffectContainer::ApplyBardEffect(CStatusEffect* PStatusEffect, uint8
                 {
                     oldestSong = ExistingStatusEffect;
                 }
-                else if (std::chrono::milliseconds(ExistingStatusEffect->GetDuration()) + ExistingStatusEffect->GetStartTime() <
-                         std::chrono::milliseconds(oldestSong->GetDuration()) + oldestSong->GetStartTime())
+                else if (std::chrono::milliseconds(ExistingStatusEffect->GetDuration()) + ExistingStatusEffect->GetStartTime() < std::chrono::milliseconds(oldestSong->GetDuration()) + oldestSong->GetStartTime())
                 {
                     oldestSong = ExistingStatusEffect;
                 }
@@ -1030,8 +1023,7 @@ bool CStatusEffectContainer::ApplyBardEffect(CStatusEffect* PStatusEffect, uint8
 bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, uint8 maxRolls, uint8 bustDuration)
 {
     // Don't process if not a COR roll.
-    if (!((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) ||
-          (PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL)))
+    if (!((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) || (PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL)))
     {
         return false;
     }
@@ -1046,11 +1038,9 @@ bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, ui
     CStatusEffect* oldestRoll   = nullptr;
     for (auto&& PEffect : m_StatusEffectSet)
     {
-        if ((PEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) ||
-            PEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL || PEffect->GetStatusID() == EFFECT_BUST) // is a cor effect
+        if ((PEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) || PEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL || PEffect->GetStatusID() == EFFECT_BUST) // is a cor effect
         {
-            if (PEffect->GetStatusID() == PStatusEffect->GetStatusID() && PEffect->GetSubID() == PStatusEffect->GetSubID() &&
-                PEffect->GetSubPower() < PStatusEffect->GetSubPower())
+            if (PEffect->GetStatusID() == PStatusEffect->GetStatusID() && PEffect->GetSubID() == PStatusEffect->GetSubID() && PEffect->GetSubPower() < PStatusEffect->GetSubPower())
             { // same type, double up
                 if (PStatusEffect->GetSubPower() < 12)
                 {
@@ -1086,8 +1076,7 @@ bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, ui
                 {
                     oldestRoll = PEffect;
                 }
-                else if (std::chrono::milliseconds(PEffect->GetDuration()) + PEffect->GetStartTime() <
-                         std::chrono::milliseconds(oldestRoll->GetDuration()) + oldestRoll->GetStartTime())
+                else if (std::chrono::milliseconds(PEffect->GetDuration()) + PEffect->GetStartTime() < std::chrono::milliseconds(oldestRoll->GetDuration()) + oldestRoll->GetStartTime())
                 {
                     oldestRoll = PEffect;
                 }
@@ -1115,8 +1104,7 @@ bool CStatusEffectContainer::HasCorsairEffect(uint32 charid)
 {
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
-        if ((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) ||
-            PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL || PStatusEffect->GetStatusID() == EFFECT_BUST) // is a cor effect
+        if ((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) || PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL || PStatusEffect->GetStatusID() == EFFECT_BUST) // is a cor effect
         {
             if (PStatusEffect->GetSubID() == charid || PStatusEffect->GetStatusID() == EFFECT_BUST)
             {
@@ -1132,8 +1120,7 @@ void CStatusEffectContainer::Fold(uint32 charid)
     CStatusEffect* oldestRoll = nullptr;
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
-        if ((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) ||
-            PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL || PStatusEffect->GetStatusID() == EFFECT_BUST) // is a cor effect
+        if ((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) || PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL || PStatusEffect->GetStatusID() == EFFECT_BUST) // is a cor effect
         {
             if (PStatusEffect->GetSubID() == charid || PStatusEffect->GetStatusID() == EFFECT_BUST)
             {
@@ -1514,16 +1501,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     EFFECT      effect = StatusEffect->GetStatusID();
 
     // Determine if this is a BRD Song or COR Effect.
-    if (subType == 0 ||
-        subType > 20000 ||
-        (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) ||
-        (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_NATURALISTS_ROLL) ||
-        effect == EFFECT_RUNEISTS_ROLL ||
-        effect == EFFECT_DRAIN_DAZE ||
-        effect == EFFECT_ASPIR_DAZE ||
-        effect == EFFECT_HASTE_DAZE ||
-        effect == EFFECT_ATMA ||
-        effect == EFFECT_BATTLEFIELD)
+    if (subType == 0 || subType > 20000 || (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) || (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_NATURALISTS_ROLL) || effect == EFFECT_RUNEISTS_ROLL || effect == EFFECT_DRAIN_DAZE || effect == EFFECT_ASPIR_DAZE || effect == EFFECT_HASTE_DAZE || effect == EFFECT_ATMA || effect == EFFECT_BATTLEFIELD)
     {
         name.insert(0, "effects/");
         name.insert(name.size(), effects::EffectsParams[effect].Name);
@@ -1590,8 +1568,7 @@ void CStatusEffectContainer::LoadStatusEffects()
                 auto timestamp = rset->getUInt("timestamp");
                 if (server_clock::now() < time_point() + std::chrono::seconds(timestamp) + std::chrono::seconds(duration))
                 {
-                    duration = (uint32)std::chrono::duration_cast<std::chrono::seconds>(time_point() + std::chrono::seconds(timestamp) +
-                                                                                        std::chrono::seconds(duration) - server_clock::now())
+                    duration = (uint32)std::chrono::duration_cast<std::chrono::seconds>(time_point() + std::chrono::seconds(timestamp) + std::chrono::seconds(duration) - server_clock::now())
                                    .count();
                 }
                 else if (effectID == EFFECT::EFFECT_VISITANT)
@@ -1606,16 +1583,15 @@ void CStatusEffectContainer::LoadStatusEffects()
                     continue;
                 }
             }
-            CStatusEffect* PStatusEffect =
-                new CStatusEffect(effectID,
-                                  (uint16)rset->getUInt("icon"),
-                                  (uint16)rset->getUInt("power"),
-                                  (uint16)rset->getUInt("tick"),
-                                  duration,
-                                  (uint16)rset->getUInt("subid"),
-                                  (uint16)rset->getUInt("subpower"),
-                                  (uint16)rset->getUInt("tier"),
-                                  flags);
+            CStatusEffect* PStatusEffect = new CStatusEffect(effectID,
+                                                             (uint16)rset->getUInt("icon"),
+                                                             (uint16)rset->getUInt("power"),
+                                                             (uint16)rset->getUInt("tick"),
+                                                             duration,
+                                                             (uint16)rset->getUInt("subid"),
+                                                             (uint16)rset->getUInt("subpower"),
+                                                             (uint16)rset->getUInt("tier"),
+                                                             flags);
 
             PEffectList.emplace_back(PStatusEffect);
 
@@ -1799,8 +1775,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
         {
             for (CBattleEntity* PTarget : *PEntity->PNotorietyContainer)
             { // Check for trust here so negitive effects wont affect trust
-                if (PTarget != nullptr && PTarget->objtype != TYPE_TRUST && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
-                    !PTarget->isDead())
+                if (PTarget != nullptr && PTarget->objtype != TYPE_TRUST && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range && !PTarget->isDead())
                 {
                     CStatusEffect* PEffect = PTarget->StatusEffectContainer->GetStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()));
 
@@ -1861,8 +1836,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
             for (auto& enmityPair : *enmityList)
             {
                 auto* PTarget = enmityPair.second.PEnmityOwner;
-                if (PTarget != nullptr && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
-                    !PTarget->isDead())
+                if (PTarget != nullptr && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range && !PTarget->isDead())
                 {
                     CStatusEffect* PEffect = PTarget->StatusEffectContainer->GetStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()));
 
@@ -1907,9 +1881,7 @@ void CStatusEffectContainer::TickEffects(time_point tick)
     {
         for (const auto& PStatusEffect : m_StatusEffectSet)
         {
-            if (PStatusEffect->GetTickTime() != 0 &&
-                PStatusEffect->GetElapsedTickCount() <=
-                    std::chrono::duration_cast<std::chrono::milliseconds>(tick - PStatusEffect->GetStartTime()).count() / PStatusEffect->GetTickTime())
+            if (PStatusEffect->GetTickTime() != 0 && PStatusEffect->GetElapsedTickCount() <= std::chrono::duration_cast<std::chrono::milliseconds>(tick - PStatusEffect->GetStartTime()).count() / PStatusEffect->GetTickTime())
             {
                 if (PStatusEffect->HasEffectFlag(EFFECTFLAG_AURA))
                 {
@@ -1967,8 +1939,7 @@ void CStatusEffectContainer::TickRegen(time_point tick)
                 // see mobskills/nightmare.lua for full explanation
                 if (
                     !(
-                        m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP) &&
-                        m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetTier() > 0))
+                        m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP) && m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetTier() > 0))
                 {
                     WakeUp();
                 }
@@ -1992,8 +1963,7 @@ void CStatusEffectContainer::TickRegen(time_point tick)
                         CPetEntity* PPet  = (CPetEntity*)m_POwner->PPet;
                         CItem*      hands = PChar->getEquip(SLOT_HANDS);
 
-                        if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR) &&
-                            ((PPet->m_PetID >= PETID_CARBUNCLE && PPet->m_PetID <= PETID_CAIT_SITH) || PPet->m_PetID == PETID_SIREN))
+                        if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR) && ((PPet->m_PetID >= PETID_CARBUNCLE && PPet->m_PetID <= PETID_CAIT_SITH) || PPet->m_PetID == PETID_SIREN))
                         {
                             perpetuation = static_cast<int16>(perpetuation * 1.2);
                         }
@@ -2080,9 +2050,7 @@ bool CStatusEffectContainer::CheckForElevenRoll()
 {
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
-        if ((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL &&
-             PStatusEffect->GetSubPower() == 11) ||
-            (PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL && PStatusEffect->GetSubPower() == 11))
+        if ((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL && PStatusEffect->GetSubPower() == 11) || (PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL && PStatusEffect->GetSubPower() == 11))
         {
             return true;
         }

@@ -428,10 +428,9 @@ namespace trustutils
         PTrust->m_OwnerID.targid = PMaster->targid;
 
         // spawn me randomly around master
-        PTrust->loc.p =
-            nearPosition(PMaster->loc.p, CTrustController::SpawnDistance + (PMaster->PTrusts.size() * CTrustController::SpawnDistance), (float)M_PI);
-        PTrust->look = trustData->look;
-        PTrust->name = trustData->name;
+        PTrust->loc.p = nearPosition(PMaster->loc.p, CTrustController::SpawnDistance + (PMaster->PTrusts.size() * CTrustController::SpawnDistance), (float)M_PI);
+        PTrust->look  = trustData->look;
+        PTrust->name  = trustData->name;
 
         PTrust->m_Pool         = trustData->pool;
         PTrust->packetName     = trustData->packet_name;
@@ -587,15 +586,11 @@ namespace trustutils
 
         grade = scaleToGrade(PTrust->HPscale);
 
-        raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
-                   (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
+        raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) + (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) + (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
         grade = grade::GetJobGrade(mJob, 0);
 
-        jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                  (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
-                  (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
+        jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) + (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) + (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
         bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
 
@@ -603,8 +598,7 @@ namespace trustutils
         {
             grade = grade::GetJobGrade(sJob, 0);
 
-            sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (sLvl - 1)) +
-                       (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
+            sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (sLvl - 1)) + (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
         }
 
         PTrust->health.maxhp = (int16)(settings::get<float>("map.ALTER_EGO_HP_MULTIPLIER") * (raceStat + jobStat + bonusStat + sJobStat));
@@ -625,16 +619,14 @@ namespace trustutils
         }
         else
         {
-            raceStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
-                       grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
+            raceStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 + grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
         }
 
         grade = grade::GetJobGrade(mJob, 1);
 
         if (grade > 0)
         {
-            jobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
-                      grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
+            jobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 + grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
         }
 
         if (sLvl > 0)
