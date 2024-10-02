@@ -1309,16 +1309,16 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
             case CHAR_INRANGE:
             {
                 TracyZoneCString("CHAR_INRANGE");
-                // todo: rewrite packet handlers and use enums instead of rawdog packet ids
+                // TODO: rewrite packet handlers and use enums instead of rawdog packet ids
                 // 30 yalms if action packet, 50 otherwise
-                const int checkDistanceSq = packet->getType() == 0x0028 ? 900 : 2500;
+                const int checkDistance = packet->getType() == 0x0028 ? 30 : 50;
 
                 for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
                 {
                     CCharEntity* PCurrentChar = (CCharEntity*)it->second;
                     if (PEntity != PCurrentChar)
                     {
-                        if (distanceSquared(PEntity->loc.p, PCurrentChar->loc.p) < checkDistanceSq &&
+                        if (distance(PEntity->loc.p, PCurrentChar->loc.p) < checkDistance &&
                             ((PEntity->objtype != TYPE_PC) || (((CCharEntity*)PEntity)->m_moghouseID == PCurrentChar->m_moghouseID)))
                         {
                             uint16 packetType = packet->getType();

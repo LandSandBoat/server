@@ -70,8 +70,8 @@ enum CHAT_MESSAGE_TYPE
 enum CHAT_MESSAGE_AREA
 {
     MESSAGE_AREA_SYSTEM = 0, // All zones world wide
-    MESSAGE_AREA_SAY    = 1, // Say range
-    MESSAGE_AREA_SHOUT  = 2, // Shout
+    MESSAGE_AREA_SAY    = 1, // Say range (50')
+    MESSAGE_AREA_SHOUT  = 2, // Shout (180')
     MESSAGE_AREA_PARTY  = 3, // Party and Alliance
     MESSAGE_AREA_YELL   = 4, // Yell zones only
     MESSAGE_AREA_UNITY  = 5, // Currently -all- unities

@@ -435,10 +435,10 @@ DECLARE_FORMAT_AS_UNDERLYING(ZONE_TYPE);
 
 enum GLOBAL_MESSAGE_TYPE
 {
-    CHAR_INRANGE,
-    CHAR_INRANGE_SELF,
-    CHAR_INSHOUT,
-    CHAR_INZONE
+    CHAR_INRANGE,      // All players within 50'
+    CHAR_INRANGE_SELF, // All players within 50' (including self)
+    CHAR_INSHOUT,      // All players within 180'
+    CHAR_INZONE,       // All players in zone
 };
 DECLARE_FORMAT_AS_UNDERLYING(GLOBAL_MESSAGE_TYPE);
 
