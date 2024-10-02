@@ -26,6 +26,8 @@
 #include "entities/baseentity.h"
 #include "entities/mobentity.h"
 #include "lua/luautils.h"
+#include "mob_modifier.h"
+#include "status_effect_container.h"
 #include "zone.h"
 
 #include <cfloat>
@@ -578,15 +580,54 @@ float CPathFind::GetRealSpeed()
         {
             realSpeed = 20;
         }
-        else if (m_POwner->animation == ANIMATION_ATTACK)
-        {
-            auto speedMod = settings::get<int8>("map.MOB_SPEED_MOD");
-            if (speedMod < -90)
-            {
-                speedMod = -90;
-            }
 
-            realSpeed *= 1.0f + speedMod / 100.0f;
+        if (settings::get<bool>("map.USE_MOB_SPEED_BOOST_MULTIPLIER"))
+        {
+            if (auto* mobEntity = dynamic_cast<CMobEntity*>(m_POwner))
+            {
+                bool mobIsPlayerPet = mobEntity->PMaster && mobEntity->PMaster->objtype == TYPE_PC;
+
+                auto* battleTarget         = mobEntity->GetBattleTarget();
+                bool  targetWouldBeDrawnin = battleTarget && (distance(mobEntity->loc.p, battleTarget->loc.p) - battleTarget->m_ModelRadius) > mobEntity->GetMeleeRange();
+                bool  isEngaged            = mobEntity->animation == ANIMATION_ATTACK;
+
+                if (isEngaged && !mobIsPlayerPet && targetWouldBeDrawnin && realSpeed > 0)
+                {
+                    // use default multiplier for most mobs
+                    uint16 intMultiplier = settings::get<uint16>("map.DEFAULT_MOB_SPEED_BOOST_MULTIPLIER");
+
+                    // unless the mob has a custom multiplier
+                    if (mobEntity->getMobMod(MOBMOD_SPEED_BOOST_MULT) > 0)
+                    {
+                        intMultiplier = static_cast<uint16>(mobEntity->getMobMod(MOBMOD_SPEED_BOOST_MULT));
+                    }
+
+                    // add warning for when speed boost multipler is lower than 1x as likely misconfiguration
+                    if (intMultiplier < 100 || intMultiplier > 25500)
+                    {
+                        ShowWarning("%s speed boost multiplier is lower than 100 (1x) or higher than 25550 (255x) and thus is misconfigured.", mobEntity->getName());
+                    }
+
+                    // convert the integer based multiplier (based on 100) to float multiplier
+                    float floatMultiplier = intMultiplier / 100.0f;
+
+                    // if some weight penalty (like gravity) then cut the boost multiplier according to retail
+                    // (for mobs with default retail boost of 2.5 then boost becomes 1.20)
+                    if (mobEntity->getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY) > 0)
+                    {
+                        floatMultiplier *= 0.48f;
+                    }
+
+                    // Ensure the float multiplier is at least 1.0 so that multiplier never decreases speed
+                    // For example if the server default or mob mod is 207 then with gravity the
+                    // multiplier would be (207/100) * 0.48 = 0.99 without this check
+                    floatMultiplier = std::max<float>(floatMultiplier, 1.0f);
+
+                    // apply the multiplier and also clamp to make sure of a valid speed (in case multiplier is large)
+                    uint16 newSpeed = std::clamp<uint16>(realSpeed * floatMultiplier, 0, 255);
+                    realSpeed       = static_cast<uint8>(newSpeed);
+                }
+            }
         }
     }
 

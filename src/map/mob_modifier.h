@@ -110,6 +110,7 @@ enum MOBMODIFIER : int
     MOBMOD_CANNOT_GUARD           = 79, // Check if the mob does not guard(despite being a MNK or PUP mob)
     MOBMOD_SKIP_ALLEGIANCE_CHECK  = 80, // Skip the allegiance check for valid target (allows for example a mob to cast a TARGET_ENEMY spell on itself)
     MOBMOD_ABILITY_RESPONSE       = 81, // Mob can respond to player ability use with onPlayerAbilityUse()
+    MOBMOD_SPEED_BOOST_MULT       = 82, // Multiplier for the base speed of a mob when the mob's target is out of range (range between 100 and 25500, 250 means 2.5x, mechanism is from retail)
 };
 
 #endif
