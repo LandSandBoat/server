@@ -10,3 +10,4 @@
 ---@field onTimeTrigger? fun(npc: CBaseEntity, triggerId: integer)
 ---@field onTrade? fun(player: CBaseEntity, npc: CBaseEntity, trade: CTradeContainer)
 ---@field onTrigger? fun(player: CBaseEntity, npc: CBaseEntity): -1|nil
+---@field experimental? boolean

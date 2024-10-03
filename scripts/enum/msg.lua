@@ -50,12 +50,12 @@ xi.msg.channel =
 ---@enum xi.area
 xi.msg.area =
 {
-    SYSTEM      = 0, -- Server wide like the purple stuff :)
-    SAY         = 1, -- Will display in small area around player
-    SHOUT       = 2, -- Will display in wide area around player
-    PARTY       = 3, -- Will display to players entire party/alliance
-    YELL        = 4, -- If yell is enabled in zone, will display.
-    UNITY       = 5, -- Also World Wide
+    SYSTEM = 0, -- Server-wide
+    SAY    = 1, -- Will display in small area around player (50')
+    SHOUT  = 2, -- Will display in wide area around player (180')
+    PARTY  = 3, -- Will display to players entire party/alliance
+    YELL   = 4, -- If yell is enabled in zone, will display.
+    UNITY  = 5, -- Also World Wide
 }
 
 -----------------------------------
