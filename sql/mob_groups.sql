@@ -14087,12 +14087,12 @@ INSERT INTO `mob_groups` VALUES (35,4749,261,'Lavender_Twitherym',0,128,0,19000,
 INSERT INTO `mob_groups` VALUES (36,4927,261,'Colkhab',0,128,0,0,9999,116,116,0);
 INSERT INTO `mob_groups` VALUES (37,0,261,'Rapier_Hornet',0,128,0,0,0,0,0,0);
 
--- delve
-INSERT INTO `mob_groups` VALUES (38,4862,261,'Unfettered_Twitherym',0,128,0,0,9999,116,116,0);
-INSERT INTO `mob_groups` VALUES (39,4863,261,'Supernal_Chapuli',0,128,0,0,0,107,109,0);
-INSERT INTO `mob_groups` VALUES (40,6911,261,'Transcendent_Scorpion',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (41,6912,261,'Mastop',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (42,4864,261,'Taxet',0,128,0,0,0,107,109,0);
+-- Outside Delve (Ceizak_Battlegrounds)
+INSERT INTO `mob_groups` VALUES (38,4862,261,'Unfettered_Twitherym',0,128,0,60000,9999,110,110,0);
+INSERT INTO `mob_groups` VALUES (39,4863,261,'Supernal_Chapuli',0,128,0,63000,0,110,110,0);
+INSERT INTO `mob_groups` VALUES (40,6911,261,'Transcendent_Scorpion',0,128,0,96500,0,110,110,0);
+INSERT INTO `mob_groups` VALUES (41,6912,261,'Mastop',0,128,0,63000,9999,110,110,0);
+INSERT INTO `mob_groups` VALUES (42,4864,261,'Taxet',0,128,0,75000,9999,110,110,0);
 
 -- ------------------------------------------------------------
 -- Foret_de_Hennetiel (Zone 262)
@@ -14135,7 +14135,7 @@ INSERT INTO `mob_groups` VALUES (30,4768,262,'Primrose_Jagil',0,128,0,20000,5000
 INSERT INTO `mob_groups` VALUES (31,4897,262,'Broadleaf_Palm',0,128,0,20000,5000,103,103,0);
 INSERT INTO `mob_groups` VALUES (32,4925,262,'Tchakka',0,128,0,0,9999,117,119,0);
 
--- delve
+-- Outside Delve (Foret_Hennetiel)
 INSERT INTO `mob_groups` VALUES (33,6916,262,'Faded_Craklaw',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (34,0,262,'Aberrant_Uragnite',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (35,6917,262,'Divagating_Jagil',0,128,0,0,0,0,0,0);
@@ -14663,16 +14663,18 @@ INSERT INTO `mob_groups` VALUES (26,0,271,'Catacomb_Marolith',0,128,0,0,0,0,0,0)
 INSERT INTO `mob_groups` VALUES (27,0,271,'Sepulchral_Lizard',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (28,0,271,'Wartless_Toad',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (29,0,271,'Ulcerous_Acuex',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (30,0,271,'Unfettered_Twitherym',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (31,0,271,'Supernal_Chapuli',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (32,0,271,'Transcendent_Scorpion',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (33,0,271,'Mastop',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (34,0,271,'Taxet',0,128,0,0,0,0,0,0);
+
+INSERT INTO `mob_groups` VALUES (30,4862,271,'Unfettered_Twitherym',0,128,0,80000,9999,110,110,0);
+INSERT INTO `mob_groups` VALUES (31,4863,271,'Supernal_Chapuli',0,128,0,83000,9999,110,110,0);
+INSERT INTO `mob_groups` VALUES (32,6911,271,'Transcendent_Scorpion',0,128,0,96500,9999,110,110,0);
+INSERT INTO `mob_groups` VALUES (33,6912,271,'Mastop',0,128,0,70500,9999,110,110,0);
+INSERT INTO `mob_groups` VALUES (34,4864,271,'Taxet',0,128,0,100000,9999,119,119,0);
 INSERT INTO `mob_groups` VALUES (35,0,271,'Muyingwa',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (36,0,271,'Fugacious_Eruca',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (37,0,271,'Fugacious_Beetle',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (38,0,271,'Fugacious_Diremite',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (39,0,271,'Fugacious_Luckybug',0,128,0,0,0,0,0,0);
+
 INSERT INTO `mob_groups` VALUES (40,0,271,'Faded_Craklaw',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (41,0,271,'Aberrant_Uragnite',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (42,0,271,'Divagating_Jagil',0,128,0,0,0,0,0,0);
