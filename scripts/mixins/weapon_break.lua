@@ -1,14 +1,12 @@
 -----------------------------------
 -- Weapon Breaking Mixin
 -----------------------------------
-g_mixins = g_mixins or {}
-
 -- AnimationSub
 -- 0 = main weapon out
 -- 1 = main weapon broken
 -- Lamia, Trolls, Mammols
 
-g_mixins.weapon_break = function(weaponBreakMob)
+local mixin = function(weaponBreakMob)
     -- set default 10% chance to break weapon on critical hit taken
     -- this can be overridden in onMobSpawn
 
@@ -29,4 +27,4 @@ g_mixins.weapon_break = function(weaponBreakMob)
     end)
 end
 
-return g_mixins.weapon_break
+return mixin

@@ -2,10 +2,12 @@
 -- Area: Bhaflau Thickets
 --  Mob: Troll Shieldbearer
 -----------------------------------
-mixins = { require('scripts/mixins/weapon_break') }
------------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.weapon_break)
+end
 
 entity.onMobDeath = function(mob, player, optParams)
 end

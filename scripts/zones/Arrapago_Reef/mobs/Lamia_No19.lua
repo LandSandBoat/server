@@ -2,10 +2,12 @@
 -- Area: Arrapago Reef
 --  Mob: Lamia No.19
 -----------------------------------
-mixins = { require('scripts/mixins/weapon_break') }
------------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.weapon_break)
+end
 
 entity.onMobEngage = function(mob, target)
     local mobId = mob:getID()

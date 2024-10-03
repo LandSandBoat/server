@@ -2,11 +2,14 @@
 -- Area: Mamool Ja Training Grounds (Imperial Agent Rescue)
 --  MOB: Mamool Ja Warder (NIN, WHM, BST)
 -----------------------------------
-mixins = { require('scripts/mixins/weapon_break') }
 local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.weapon_break)
+end
 
 entity.onMobSpawn = function(mob)
     xi.assault.adjustMobLevel(mob)

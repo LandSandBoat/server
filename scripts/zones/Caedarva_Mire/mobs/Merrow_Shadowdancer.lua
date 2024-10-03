@@ -3,14 +3,13 @@
 --  Mob: Merrow Shadowdancer
 -- Note: Minion of Experimental Lamia
 -----------------------------------
-mixins =
-    {
-        require('scripts/mixins/job_special'),
-        require('scripts/mixins/weapon_break')
-    }
------------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.job_special)
+    xi.applyMixins(mob, xi.mixins.weapon_break)
+end
 
 entity.onMobDeath = function(mob, player, optParams)
 end
