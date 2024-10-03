@@ -152,6 +152,24 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 {
     TracyZoneScoped;
 
+    auto ipstr    = ip2str(ip);
+    auto fmtQuery = fmt::format("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '{}' LIMIT 1", ipstr);
+
+    int32 ret = _sql->Query(fmtQuery.c_str());
+
+    if (ret == SQL_ERROR)
+    {
+        ShowError("SQL query failed in mapsession_createsession!");
+        return nullptr;
+    }
+
+    if (_sql->NumRows() == 0)
+    {
+        // This is noisy and not really necessary
+        DebugSockets(fmt::format("recv_parse: Invalid login attempt from {}", ipstr));
+        return nullptr;
+    }
+
     map_session_data_t* map_session_data = new map_session_data_t();
 
     map_session_data->server_packet_data = new int8[MAX_BUFFER_SIZE + 20];
@@ -164,23 +182,6 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
     uint64 ipp    = ip;
     ipp |= port64 << 32;
     map_session_list[ipp] = map_session_data;
-
-    auto ipstr    = ip2str(map_session_data->client_addr);
-    auto fmtQuery = fmt::format("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '{}' LIMIT 1", ipstr);
-
-    int32 ret = _sql->Query(fmtQuery.c_str());
-
-    if (ret == SQL_ERROR)
-    {
-        ShowError("SQL query failed in mapsession_createsession!");
-    }
-
-    if (_sql->NumRows() == 0)
-    {
-        // This is noisy and not really necessary
-        DebugSockets(fmt::format("recv_parse: Invalid login attempt from {}", ipstr));
-        return nullptr;
-    }
 
     return map_session_data;
 }
@@ -597,9 +598,6 @@ int32 do_sockets(fd_set* rfd, duration next)
             int32 decryptCount = recv_parse(g_PBuff, &size, &from, map_session_data);
             if (decryptCount != -1)
             {
-                // Update the time we last got a valid packet
-                map_session_data->last_update = time(nullptr);
-
                 // DecryptCount of 0 means the main key decrypted the packet
                 if (decryptCount == 0)
                 {
@@ -723,6 +721,40 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     if (checksumResult == 0)
     {
+        uint16 packetID = ref<uint16>(buff, FFXI_HEADER_SIZE) & 0x1FF;
+
+        if (packetID != 0x00A)
+        {
+            return -1;
+        }
+
+        // Not big enough to be 0x00A
+        if (size < (FFXI_HEADER_SIZE + sizeof(GP_CLI_LOGIN)))
+        {
+            return -1;
+        }
+
+        GP_CLI_LOGIN loginPacket = {};
+
+        std::memcpy(&loginPacket, buff + FFXI_HEADER_SIZE, sizeof(GP_CLI_LOGIN));
+
+        // See LoginPacketCheck from https://github.com/atom0s/XiPackets/tree/main/world/client/0x000A
+        uint8 checksum = 0;
+
+        const auto checksumOffset = offsetof(GP_CLI_LOGIN, unknown01);
+        const auto checksumLength = sizeof(GP_CLI_LOGIN) - checksumOffset;
+
+        for (int i = 0; i < checksumLength; i++)
+        {
+            checksum += ref<uint8>(&loginPacket, checksumOffset + i);
+        }
+
+        // Failed checksum
+        if (checksum != loginPacket.LoginPacketCheck)
+        {
+            return -1;
+        }
+
         // We can only get here if an 0x00A (not encrypted) packet was here.
         // If we were pending zones, delete our old char
         if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE)
@@ -868,6 +900,12 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
             {
                 DebugPackets("parse: %03hX | %04hX %04hX %02hX from user: %s",
                              SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2), SmallPD_Size, PChar->getName());
+            }
+            else
+            {
+                // Update the time we last got a char sync packet
+                // The client can spam some other packets when trying to zone, preventing timely session deletions
+                map_session_data->last_update = time(nullptr);
             }
 
             if (settings::get<bool>("map.PACKETGUARD_ENABLED") && PacketGuard::IsRateLimitedPacket(PChar, SmallPD_Type))
@@ -1185,6 +1223,12 @@ int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
         destroy_arr(map_session_data->server_packet_data);
         if (map_session_data->PChar)
         {
+            CZone* PZone = map_session_data->PChar->loc.zone;
+            if (PZone)
+            {
+                // This should already be done in removeCharFromZone, but just to be safe...
+                PZone->DecreaseZoneCounter(map_session_data->PChar);
+            }
             destroy(map_session_data->PChar);
         }
         destroy(map_session_data);
@@ -1252,92 +1296,36 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 
                 if (PChar != nullptr)
                 {
-                    // Check if the PChar current zone is on this server
-                    CZone* PZone = nullptr;
+                    ShowDebug(fmt::format("Clearing map server session for player: '{}' in zone: '{}' (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->getName() : "None", otherMap ? "Yes" : "No"));
 
-                    // Get zone if available
-                    if (PChar->loc.zone && PChar->loc.zone->GetID() && (g_PZoneList.find(PChar->loc.zone->GetID()) != g_PZoneList.end()))
+                    // Player session is attached to this map process and has stopped responding.
+                    if (!otherMap)
                     {
-                        PZone = PChar->loc.zone;
-                    }
+                        map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
+                        _sql->Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->charID);
 
-                    if (map_session_data->shuttingDown == 0)
-                    {
-                        if (!otherMap)
+                        // Save position if d/c or logout/shutdown
+                        if (map_session_data->shuttingDown == 0 || map_session_data->shuttingDown == 1)
                         {
-                            // [Alliance] fix to stop server crashing:
-                            // if a party within an alliance only has 1 char (that char will be party leader)
-                            // if char then disconnects we need to tell the server about the alliance change
-                            if (PChar->PParty != nullptr && PChar->PParty->m_PAlliance != nullptr && PChar->PParty->GetLeader() == PChar)
-                            {
-                                if (PChar->PParty->HasOnlyOneMember())
-                                {
-                                    if (PChar->PParty->m_PAlliance->hasOnlyOneParty())
-                                    {
-                                        PChar->PParty->m_PAlliance->dissolveAlliance();
-                                    }
-                                    else
-                                    {
-                                        PChar->PParty->m_PAlliance->removeParty(PChar->PParty);
-                                    }
-                                }
-                            }
-
-                            // uncharm pet if player d/c
-                            if (PChar->PPet != nullptr && PChar->PPet->objtype == TYPE_MOB)
-                            {
-                                petutils::DespawnPet(PChar);
-                            }
-
-                            PChar->StatusEffectContainer->SaveStatusEffects(true);
                             charutils::SaveCharPosition(PChar);
-
-                            ShowDebug("map_cleanup: %s timed out, closing session", PChar->getName());
-
-                            PChar->status    = STATUS_TYPE::SHUTDOWN;
-                            auto basicPacket = CBasicPacket();
-                            charutils::removeCharFromZone(PChar);
-                        }
-                        else
-                        {
-                            ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->getName() : "None", otherMap ? "Yes" : "No"));
-
-                            if (PZone)
-                            {
-                                PZone->DecreaseZoneCounter(PChar);
-                            }
-
-                            destroy_arr(map_session_data->server_packet_data);
-                            destroy(map_session_data->PChar);
-                            destroy(map_session_data);
-
-                            map_session_list.erase(it++);
-                            continue;
                         }
                     }
-                    else
+
+                    // uncharm pet if player d/c
+                    if (PChar->PPet != nullptr && PChar->PPet->objtype == TYPE_MOB)
                     {
-                        if (!otherMap)
-                        {
-                            // Player session is attached to this map process and has stopped responding.
-                            map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
-                            _sql->Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->charID);
-                        }
-
-                        ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->getName() : "None", otherMap ? "Yes" : "No"));
-
-                        if (PZone)
-                        {
-                            PZone->DecreaseZoneCounter(PChar);
-                        }
-
-                        destroy_arr(map_session_data->server_packet_data);
-                        destroy(map_session_data->PChar);
-                        destroy(map_session_data);
-
-                        map_session_list.erase(it++);
-                        continue;
+                        petutils::DespawnPet(PChar);
                     }
+
+                    PChar->status = STATUS_TYPE::SHUTDOWN;
+
+                    charutils::removeCharFromZone(PChar);
+
+                    destroy_arr(map_session_data->server_packet_data);
+                    destroy(map_session_data->PChar);
+                    destroy(map_session_data);
+
+                    map_session_list.erase(it++);
                 }
                 else
                 {
@@ -1347,11 +1335,14 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                         const char* Query = "DELETE FROM accounts_sessions WHERE charid = %u";
                         _sql->Query(Query, map_session_data->charID);
                     }
+
                     destroy_arr(map_session_data->server_packet_data);
-                    map_session_list.erase(it++);
                     destroy(map_session_data);
-                    continue;
+
+                    map_session_list.erase(it++);
                 }
+
+                continue;
             }
         }
         else if (PChar != nullptr && PChar->isLinkDead)

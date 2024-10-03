@@ -665,4 +665,26 @@ public:
     ~char_mini(){};
 };
 
+// https://github.com/atom0s/XiPackets/tree/main/world/client/0x000A
+// Defined here for use in both map.cpp and packet_system.cpp
+struct GP_CLI_LOGIN
+{
+    uint16_t id : 9;
+    uint16_t size : 7;
+    uint16_t sync;
+    uint8_t  LoginPacketCheck; // PS2: LoginPacketCheck
+    uint8_t  padding00;        // PS2: dam__
+    uint16_t unknown00;        // PS2: MyPort
+    uint32_t unknown01;        // PS2: MyIP
+    uint32_t UniqueNo;         // PS2: UniqueNo
+    uint16_t GrapIDTbl[9];     // PS2: GrapIDTbl
+    char     sName[15];        // PS2: sName
+    char     sAccunt[15];      // PS2: sAccunt
+    uint8_t  Ticket[16];       // PS2: Ticket
+    uint32_t Ver;              // PS2: Ver
+    uint8_t  sPlatform[4];     // PS2: sPlatform
+    uint16_t uCliLang;         // PS2: uCliLang
+    uint16_t dammyArea;        // PS2: dammyArea
+};
+
 #endif // _MMO_H
