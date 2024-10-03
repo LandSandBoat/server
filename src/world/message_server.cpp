@@ -129,7 +129,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         inet_ntop(AF_INET, &from_ip, from_address, INET_ADDRSTRLEN);
     }
 
-    auto forward_message = [&](auto&& rset)
+    auto forward_message = [&](std::unique_ptr<db::detail::ResultSetWrapper>&& rset)
     {
         // This is only used for cases where SQL is used to get the IPs (not cached).
         // E.g: When we get ips for a specific account_session.
@@ -144,8 +144,8 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
 
         while (rset->next())
         {
-            uint64      ip       = rset->getUInt("server_addr");
-            uint64      port     = rset->getUInt("server_port");
+            uint64      ip       = rset->get<uint64>("server_addr");
+            uint64      port     = rset->get<uint64>("server_port");
             uint64      ipp      = ip | (port << 32);
             std::string ipString = ipp_to_string(ipp);
 
@@ -275,8 +275,8 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             // Get zone ID from query and try to send to _just_ the previous zone
             if (rset && rset->rowsCount() && rset->next())
             {
-                uint32 prevZoneID = rset->getUInt("pos_prevzone");
-                uint32 nextZoneID = rset->getUInt("pos_zone");
+                uint32 prevZoneID = rset->get<uint32>("pos_prevzone");
+                uint32 nextZoneID = rset->get<uint32>("pos_zone");
 
                 if (prevZoneID != nextZoneID)
                 {
@@ -373,13 +373,13 @@ void cache_zone_settings()
     while (rset->next())
     {
         uint64 ip = 0;
-        inet_pton(AF_INET, rset->getString("zoneip").c_str(), &ip);
-        uint64 port = rset->getUInt64("zoneport");
+        inet_pton(AF_INET, rset->get<std::string>("zoneip").c_str(), &ip);
+        uint64 port = rset->get<uint64>("zoneport");
 
         zone_settings_t zone_settings{};
-        zone_settings.zoneid = rset->getUInt("zoneid");
+        zone_settings.zoneid = rset->get<uint16>("zoneid");
         zone_settings.ipp    = ip | (port << 32);
-        zone_settings.misc   = rset->getUInt("misc");
+        zone_settings.misc   = rset->get<uint32>("misc");
 
         mapEndpointSet.insert(zone_settings.ipp);
 

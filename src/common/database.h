@@ -90,7 +90,15 @@ namespace db
                     return value;
                 }
 
-                if constexpr (std::is_same_v<std::decay_t<T>, int32>)
+                if constexpr (std::is_same_v<std::decay_t<T>, int64>)
+                {
+                    value = static_cast<T>(resultSet->getInt64(key.c_str()));
+                }
+                else if constexpr (std::is_same_v<std::decay_t<T>, uint64>)
+                {
+                    value = static_cast<T>(resultSet->getUInt64(key.c_str()));
+                }
+                else if constexpr (std::is_same_v<std::decay_t<T>, int32>)
                 {
                     value = static_cast<T>(resultSet->getInt(key.c_str()));
                 }
@@ -144,7 +152,7 @@ namespace db
                 }
                 else
                 {
-                    static_assert(always_false_v<T>, "Unsupported type in binder");
+                    static_assert(always_false_v<T>, "Trying to extract unsupported type from ResultSetWrapper");
                 }
 
                 // TODO: If a struct/blob type, use extractFromBlob

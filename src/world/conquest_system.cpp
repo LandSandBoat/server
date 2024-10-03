@@ -195,10 +195,10 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
     }
 
     int influences[4] = {
-        rset->getInt("sandoria_influence"),
-        rset->getInt("bastok_influence"),
-        rset->getInt("windurst_influence"),
-        rset->getInt("beastmen_influence"),
+        rset->get<int>("sandoria_influence"),
+        rset->get<int>("bastok_influence"),
+        rset->get<int>("windurst_influence"),
+        rset->get<int>("beastmen_influence"),
     };
 
     if (influences[nation] == 5000)
@@ -244,7 +244,7 @@ void ConquestSystem::updateWeekConquest()
                             IF(windurst_influence > bastok_influence AND windurst_influence > sandoria_influence AND \
                             windurst_influence > beastmen_influence, 2, 3)))";
 
-    auto rset = db::query(query);
+    auto rset = db::preparedStmt(query);
     if (!rset)
     {
         ShowError("handleWeeklyUpdate() failed");
@@ -268,7 +268,7 @@ auto ConquestSystem::getRegionalInfluences() -> std::vector<influence_t> const
 {
     auto query = "SELECT sandoria_influence, bastok_influence, windurst_influence, beastmen_influence FROM conquest_system";
 
-    auto rset = db::query(query);
+    auto rset = db::preparedStmt(query);
 
     std::vector<influence_t> influences;
     if (rset && rset->rowsCount())
@@ -276,10 +276,10 @@ auto ConquestSystem::getRegionalInfluences() -> std::vector<influence_t> const
         while (rset->next())
         {
             influence_t influence{};
-            influence.sandoria_influence = rset->getInt("sandoria_influence");
-            influence.bastok_influence   = rset->getInt("bastok_influence");
-            influence.windurst_influence = rset->getInt("windurst_influence");
-            influence.beastmen_influence = rset->getInt("beastmen_influence");
+            influence.sandoria_influence = rset->get<uint16>("sandoria_influence");
+            influence.bastok_influence   = rset->get<uint16>("bastok_influence");
+            influence.windurst_influence = rset->get<uint16>("windurst_influence");
+            influence.beastmen_influence = rset->get<uint16>("beastmen_influence");
             influences.emplace_back(influence);
         }
     }
@@ -291,7 +291,7 @@ auto ConquestSystem::getRegionControls() -> std::vector<region_control_t> const
 {
     auto query = "SELECT region_control, region_control_prev FROM conquest_system";
 
-    auto rset = db::query(query);
+    auto rset = db::preparedStmt(query);
 
     std::vector<region_control_t> controllers;
     if (rset && rset->rowsCount())
@@ -299,8 +299,8 @@ auto ConquestSystem::getRegionControls() -> std::vector<region_control_t> const
         while (rset->next())
         {
             region_control_t regionControl{};
-            regionControl.current = rset->getInt("region_control");
-            regionControl.prev    = rset->getInt("region_control_prev");
+            regionControl.current = rset->get<uint8>("region_control");
+            regionControl.prev    = rset->get<uint8>("region_control_prev");
             controllers.emplace_back(regionControl);
         }
     }

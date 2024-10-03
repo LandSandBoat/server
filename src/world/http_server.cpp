@@ -190,16 +190,16 @@ void HTTPServer::LockingUpdate()
 
         // Total active sessions
         {
-            auto rset = db::query("SELECT COUNT(*) AS `count` FROM accounts_sessions");
+            auto rset = db::preparedStmt("SELECT COUNT(*) AS `count` FROM accounts_sessions");
             if (rset && rset->next())
             {
-                data.activeSessionCount = rset->getUInt("count");
+                data.activeSessionCount = rset->get<uint32>("count");
             }
         }
 
         // Chars per zone
         {
-            auto rset = db::query("SELECT chars.pos_zone, COUNT(*) AS `count` "
+            auto rset = db::preparedStmt("SELECT chars.pos_zone, COUNT(*) AS `count` "
                                   "FROM chars "
                                   "INNER JOIN accounts_sessions "
                                   "ON chars.charid = accounts_sessions.charid "
@@ -208,8 +208,8 @@ void HTTPServer::LockingUpdate()
             {
                 while (rset->next())
                 {
-                    auto zoneId = rset->getUInt("pos_zone");
-                    auto count  = rset->getUInt("count");
+                    auto zoneId = rset->get<uint16>("pos_zone");
+                    auto count  = rset->get<uint32>("count");
 
                     data.zonePlayerCounts[zoneId] = count;
                 }
