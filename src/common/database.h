@@ -481,4 +481,6 @@ namespace db
             std::memcpy(&destination, blobStr.c_str(), std::min(sizeof(T), blobStr.length()));
         }
     }
+
+    auto escapeString(std::string const& str) -> std::string;
 } // namespace db

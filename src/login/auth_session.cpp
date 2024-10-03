@@ -157,16 +157,8 @@ void auth_session::read_func()
         return;
     }
 
-    auto _sql = std::make_unique<SqlConnection>();
-
-    char escaped_name[16 * 2 + 1] = {};
-    char escaped_pass[32 * 2 + 1] = {};
-
-    _sql->EscapeString(escaped_name, username.c_str());
-    _sql->EscapeString(escaped_pass, password.c_str());
-
-    username = escaped_name;
-    password = escaped_pass;
+    username = db::escapeString(username);
+    password = db::escapeString(password);
 
     switch (code)
     {
@@ -182,10 +174,10 @@ void auth_session::read_func()
             // clang-format off
             auto passHash = [&]() -> std::string
             {
-                auto ret = _sql->Query("SELECT accounts.password FROM accounts WHERE accounts.login = '%s'", username);
-                if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+                const auto rset = db::query(fmt::sprintf("SELECT accounts.password FROM accounts WHERE accounts.login = '%s'", username));
+                if (rset && rset->rowsCount() != 0 && rset->next())
                 {
-                    return _sql->GetStringData(0);
+                    return rset->get<std::string>("password");
                 }
                 return "";
             }();
@@ -208,10 +200,10 @@ void auth_session::read_func()
             {
                 // It's not a BCrypt hash, so we need to use Maria's PASSWORD() to check if the password is actually correct,
                 // and then update the password to a BCrypt hash.
-                auto ret = _sql->Query("SELECT PASSWORD('%s')", password);
-                if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+                const auto rset = db::query(fmt::sprintf("SELECT PASSWORD('%s')", password));
+                if (rset && rset->rowsCount() != 0 && rset->next())
                 {
-                    if (_sql->GetStringData(0) != passHash)
+                    if (rset->get<std::string>("PASSWORD('%s')") != passHash)
                     {
                         ref<uint8>(data_, 0) = LOGIN_ERROR;
                         do_write(1);
@@ -220,8 +212,7 @@ void auth_session::read_func()
                     else
                     {
                         passHash = BCrypt::generateHash(password);
-                        _sql->Query("UPDATE accounts SET accounts.password = '%s' WHERE accounts.login = '%s'", passHash.c_str(), username);
-
+                        db::query(fmt::sprintf("UPDATE accounts SET accounts.password = '%s' WHERE accounts.login = '%s'", passHash.c_str(), username));
                         if (!BCrypt::validatePassword(password, passHash))
                         {
                             ref<uint8>(data_, 0) = LOGIN_ERROR;
@@ -233,31 +224,30 @@ void auth_session::read_func()
             }
 
             // We've validated the password by this point, get account info
-            int32 ret = _sql->Query("SELECT accounts.id, accounts.status FROM accounts WHERE accounts.login = '%s'", username);
-            if (ret != SQL_ERROR && _sql->NumRows() != 0)
+            const auto rset = db::query(fmt::sprintf("SELECT accounts.id, accounts.status FROM accounts WHERE accounts.login = '%s'", username));
+            if (rset && rset->rowsCount() != 0 && rset->next())
             {
-                ret = _sql->NextRow();
-
-                uint32 accountID = _sql->GetUIntData(0);
-                uint32 status    = _sql->GetUIntData(1);
+                uint32 accountID = rset->get<uint32>("id");
+                uint32 status    = rset->get<uint32>("status");
 
                 if (status & ACCOUNT_STATUS_CODE::NORMAL)
                 {
-                    _sql->Query("UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d", accountID);
+                    db::query(fmt::sprintf("UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d", accountID));
 
-                    ret = _sql->Query("SELECT charid, server_addr, server_port \
+                    const auto rset = db::query(fmt::sprintf("SELECT charid, server_addr, server_port \
                                         FROM accounts_sessions JOIN accounts \
                                         ON accounts_sessions.accid = accounts.id \
                                         WHERE accounts.id = %d",
-                                      accountID);
+                                      accountID));
 
-                    if (ret != SQL_ERROR && _sql->NumRows() == 1)
+                    if (rset && rset->rowsCount() == 1)
                     {
-                        while (_sql->NextRow() == SQL_SUCCESS)
+                        while (rset->next())
                         {
-                            /*uint32 charid = _sql->GetUIntData(0);
-                            uint64 ip     = _sql->GetUIntData(1);
-                            uint64 port   = _sql->GetUIntData(2);
+                            /*
+                            uint32 charid = rset->get<uint32>("charid");
+                            uint64 ip     = rset->get<uint64>("ip");
+                            uint64 port   = rset->get<uint64>("port");
 
                             ip |= (port << 32);
 
@@ -277,14 +267,16 @@ void auth_session::read_func()
                     // TODO: Lock out same account logging in multiple times. Can check data/view session existence on same IP/account?
                     // Not a real problem because the account is locked out when a character is logged in.
 
-                    /* fmtQuery = "SELECT charid \
+                    /*
+                    fmtQuery = "SELECT charid \
                             FROM accounts_sessions \
                             WHERE accid = %u LIMIT 1";
 
-                    if (_sql->Query(fmtQuery, accountID) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+                    const auto rset = db::query(fmtQuery, accountID);
+                    if (rset && rset->rowsCount() != 0 && rset->next())
                     {
                         // TODO: kick player out of map server if already logged in
-                        // uint32 charid = _sql->GetUIntData(0);
+                        // uint32 charid = rset->get<uint32>("charid");
 
                         // This error message doesn't work when sent this way. Unknown how to transmit "1039" error message to a client already logged in.
                         // session_t& authenticatedSession = get_authenticated_session(socket_, session.sentAccountID);
@@ -343,23 +335,23 @@ void auth_session::read_func()
             }
 
             // looking for same login
-            if (_sql->Query("SELECT accounts.id FROM accounts WHERE accounts.login = '%s'", username) == SQL_ERROR)
+            const auto rset = db::query(fmt::sprintf("SELECT accounts.id FROM accounts WHERE accounts.login = '%s'", username));
+            if (!rset)
             {
                 ref<uint8>(data_, 0) = LOGIN_ERROR_CREATE;
                 do_write(1);
                 return;
             }
 
-            if (_sql->NumRows() == 0)
+            if (rset->rowsCount() == 0)
             {
                 // creating new account_id
                 uint32 accid = 0;
 
-                if (_sql->Query("SELECT max(accounts.id) FROM accounts") != SQL_ERROR && _sql->NumRows() != 0)
+                const auto rset1 = db::preparedStmt("SELECT max(accounts.id) FROM accounts");
+                if (rset1 && rset1->rowsCount() != 0 && rset1->next())
                 {
-                    _sql->NextRow();
-
-                    accid = _sql->GetUIntData(0) + 1;
+                    accid = rset1->get<uint32>("max(accounts.id)") + 1;
                 }
                 else
                 {
@@ -380,9 +372,10 @@ void auth_session::read_func()
                 char strtimecreate[128];
                 strftime(strtimecreate, sizeof(strtimecreate), "%Y:%m:%d %H:%M:%S", &timecreateinfo);
 
-                if (_sql->Query("INSERT INTO accounts(id,login,password,timecreate,timelastmodify,status,priv) \
+                const auto rset2 = db::query(fmt::sprintf("INSERT INTO accounts(id,login,password,timecreate,timelastmodify,status,priv) \
                                 VALUES(%d,'%s','%s','%s',NULL,%d,%d)",
-                                accid, username, BCrypt::generateHash(escaped_pass), strtimecreate, ACCOUNT_STATUS_CODE::NORMAL, ACCOUNT_PRIVILEGE_CODE::USER) == SQL_ERROR)
+                                accid, username, BCrypt::generateHash(escaped_pass), strtimecreate, ACCOUNT_STATUS_CODE::NORMAL, ACCOUNT_PRIVILEGE_CODE::USER));
+                if (!rset2)
                 {
                     ref<uint8>(data_, 0) = LOGIN_ERROR_CREATE;
                     do_write(1);
@@ -407,10 +400,10 @@ void auth_session::read_func()
             // clang-format off
             auto passHash = [&]() -> std::string
             {
-                auto ret = _sql->Query("SELECT accounts.password FROM accounts WHERE accounts.login = '%s'", username);
-                if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+                const auto rset = db::query(fmt::sprintf("SELECT accounts.password FROM accounts WHERE accounts.login = '%s'", username));
+                if (rset && rset->rowsCount() != 0 && rset->next())
                 {
-                    return _sql->GetStringData(0);
+                    return rset->get<std::string>("password");
                 }
                 return "";
             }();
@@ -433,10 +426,10 @@ void auth_session::read_func()
             {
                 // It's not a BCrypt hash, so we need to use Maria's PASSWORD() to check if the password is actually correct,
                 // and then update the password to a BCrypt hash.
-                auto ret = _sql->Query("SELECT PASSWORD('%s')", password);
-                if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+                const auto rset = db::query(fmt::sprintf("SELECT PASSWORD('%s')", password));
+                if (rset && rset->rowsCount() != 0 && rset->next())
                 {
-                    if (_sql->GetStringData(0) != passHash)
+                    if (rset->get<std::string>("PASSWORD('%s')") != passHash)
                     {
                         ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
                         do_write(1);
@@ -445,8 +438,7 @@ void auth_session::read_func()
                     else
                     {
                         passHash = BCrypt::generateHash(password);
-                        _sql->Query("UPDATE accounts SET accounts.password = '%s' WHERE accounts.login = '%s'", passHash.c_str(), username);
-
+                        db::query(fmt::sprintf("UPDATE accounts SET accounts.password = '%s' WHERE accounts.login = '%s'", passHash.c_str(), username));
                         if (!BCrypt::validatePassword(password, passHash))
                         {
                             ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
@@ -457,11 +449,11 @@ void auth_session::read_func()
                 }
             }
 
-            int32 ret = _sql->Query("SELECT accounts.id, accounts.status \
+            const auto rset = db::query(fmt::sprintf("SELECT accounts.id, accounts.status \
                                     FROM accounts \
                                     WHERE accounts.login = '%s'",
-                                    username);
-            if (ret == SQL_ERROR || _sql->NumRows() == 0)
+                                    username));
+            if (rset == nullptr || rset->rowsCount() == 0)
             {
                 ShowWarningFmt("login_parse: user <{}> could not be found using the provided information. Aborting.", username);
                 ref<uint8>(data_, 0) = LOGIN_ERROR;
@@ -469,10 +461,10 @@ void auth_session::read_func()
                 return;
             }
 
-            ret = _sql->NextRow();
+            rset->next();
 
-            uint32 accid  = _sql->GetUIntData(0);
-            uint8  status = (uint8)_sql->GetUIntData(1);
+            uint32 accid  = rset->get<uint32>("id");
+            uint8  status = rset->get<uint8>("status");
 
             if (status & ACCOUNT_STATUS_CODE::BANNED)
             {
@@ -494,16 +486,13 @@ void auth_session::read_func()
                     return;
                 }
 
-                char escaped_updated_password[32 * 2 + 1];
-                _sql->EscapeString(escaped_updated_password, updated_password.c_str());
+                updated_password = db::escapeString(updated_password);
 
-                updated_password = escaped_updated_password;
+                db::query("UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d", accid);
 
-                _sql->Query("UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d", accid);
-
-                ret = _sql->Query("UPDATE accounts SET accounts.password = '%s' WHERE accounts.id = %d",
+                ret = db::query("UPDATE accounts SET accounts.password = '%s' WHERE accounts.id = %d",
                                   BCrypt::generateHash(updated_password), accid);
-                if (ret == SQL_ERROR)
+                if (rset == nullptr)
                 {
                     ShowWarningFmt("login_parse: Error trying to update password in database for user <{}>.", username);
                     ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
