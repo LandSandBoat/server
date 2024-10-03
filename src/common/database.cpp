@@ -119,13 +119,13 @@ mutex_guarded<db::detail::State>& db::detail::getState()
     return state;
 }
 
-auto db::query(std::string const& rawQuery) -> std::unique_ptt<db::detail::ResultSetWrapper>
+auto db::query(std::string const& rawQuery) -> std::unique_ptr<db::detail::ResultSetWrapper>
 {
     TracyZoneScoped;
     TracyZoneString(rawQuery);
 
     // clang-format off
-    return detail::getState().write([&](detail::State& state) -> std::unique_ptr<sql::ResultSet>
+    return detail::getState().write([&](detail::State& state) -> std::unique_ptr<db::detail::ResultSetWrapper>
     {
         auto stmt = state.connection->createStatement();
         try

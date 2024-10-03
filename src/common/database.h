@@ -47,6 +47,14 @@ namespace db
 {
     namespace detail
     {
+        // Helpers to provide information to the static_assert below
+        template <class>
+        struct always_false : std::false_type
+        {
+        };
+
+        template <class T>
+        inline constexpr bool always_false_v = always_false<T>::value;
         struct State final
         {
             std::unique_ptr<sql::Connection>                                         connection;
@@ -152,15 +160,6 @@ namespace db
 
         auto sanitise(std::string const& query) -> std::string;
 
-        // Helpers to provide information to the static_assert below
-        template <class>
-        struct always_false : std::false_type
-        {
-        };
-
-        template <class T>
-        inline constexpr bool always_false_v = always_false<T>::value;
-
         template <typename T>
         void bindValue(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter, T&& value)
         {
@@ -260,7 +259,7 @@ namespace db
     // @note If the query hasn't been seen before it will generate a prepared statement for it to be used immediately and in the future.
     // @note Everything in database-land is 1-indexed, not 0-indexed.
     template <typename... Args>
-    auto preparedStmt(std::string const& rawQuery, Args&&... args) -> std::unique_ptr<sql::ResultSet>
+    auto preparedStmt(std::string const& rawQuery, Args&&... args) -> std::unique_ptr<db::detail::ResultSetWrapper>
     {
         TracyZoneScoped;
         TracyZoneString(rawQuery);
@@ -318,7 +317,7 @@ namespace db
     // @note This is a workaround for the fact that MariaDB's C++ connector hasn't yet implemented ResultSet::rowUpdated(), ResultSet::rowInserted(),
     //       and ResultSet::rowDeleted().
     template <typename... Args>
-    auto preparedStmtWithAffectedRows(std::string const& rawQuery, Args&&... args) -> std::pair<std::unique_ptr<sql::ResultSet>, std::size_t>
+    auto preparedStmtWithAffectedRows(std::string const& rawQuery, Args&&... args) -> std::pair<std::unique_ptr<db::detail::ResultSetWrapper>, std::size_t>
     {
         TracyZoneScoped;
         TracyZoneString(rawQuery);
