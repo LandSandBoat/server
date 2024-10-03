@@ -25,9 +25,6 @@ xi = xi or {}
 xi.mix = xi.mix or {}
 xi.mix.uragnite = xi.mix.uragnite or {}
 
-g_mixins = g_mixins or {}
-g_mixins.families = g_mixins.families or {}
-
 local function enterShell(mob)
     mob:setAnimationSub(mob:getAnimationSub() + 1)
     mob:setAutoAttackEnabled(false)
@@ -78,7 +75,7 @@ xi.mix.uragnite.config = function(mob, params)
     end
 end
 
-g_mixins.families.uragnite = function(uragniteMob)
+local mixin = function(uragniteMob)
     -- at spawn, give mob default skill lists for in-shell and out-of-shell states
     -- these defaults can be overwritten by using xi.mix.uragnite.config() in onMobSpawn.
 
@@ -107,4 +104,4 @@ g_mixins.families.uragnite = function(uragniteMob)
     end)
 end
 
-return g_mixins.families.uragnite
+return mixin

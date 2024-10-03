@@ -1,15 +1,13 @@
 -----------------------------------
 -- Dynamis Dreamlands procs mixin
 -----------------------------------
-g_mixins = g_mixins or {}
-
 -- dynamis_currency values:
 --  t.whiteshell: 1449
 --  o. bronzepiece: 1452
 --  1 byne bill: 1455
 --  random: 0
 
-g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
+local mixin = function(dynamisDreamlandMob)
     local proctimes =
     {
         WS =
@@ -147,4 +145,4 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
     end)
 end
 
-return g_mixins.dynamis_dreamland
+return mixin

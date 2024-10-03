@@ -2,14 +2,13 @@
 -- Area: Dynamis - Buburimu
 --  Mob: Nightmare Uragnite
 -----------------------------------
-mixins =
-{
-    require('scripts/mixins/dynamis_dreamland'),
-    require('scripts/mixins/families/uragnite'),
-}
------------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.dynamis_dreamland)
+    xi.applyMixins(mob, xi.mixins.families.uragnite)
+end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('dynamis_currency', 1455)

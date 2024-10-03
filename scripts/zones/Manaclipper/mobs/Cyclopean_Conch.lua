@@ -2,10 +2,12 @@
 -- Area: Manaclipper
 --   NM: Cyclopean Conch
 -----------------------------------
-mixins = { require('scripts/mixins/families/uragnite') }
------------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.families.uragnite)
+end
 
 entity.onMobDeath = function(mob, player, optParams)
 end

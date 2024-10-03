@@ -2,10 +2,12 @@
 -- Area: Dynamis - Valkurm
 --  Mob: Nightmare Manticore
 -----------------------------------
-mixins = { require('scripts/mixins/dynamis_dreamland') }
------------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.dynamis_dreamland)
+end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('dynamis_currency', 1449)
