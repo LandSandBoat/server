@@ -682,7 +682,7 @@ public:
     bool   addBardSong(CLuaBaseEntity* PEntity, uint16 effectID, uint16 power, uint16 tick,
                        uint16 duration, uint16 SubType, uint16 subPower, uint16 tier);
 
-    void charm(CLuaBaseEntity const* target);
+    void charm(CLuaBaseEntity const* target, sol::object const& p0);
     void uncharm();
 
     uint8 addBurden(uint8 element, uint8 burden);
@@ -760,9 +760,6 @@ public:
     auto getPetName() -> const std::string;
     void setPetName(uint8 pType, uint16 value, sol::object const& arg2);
     void registerChocobo(uint32 value);
-
-    float getCharmChance(CLuaBaseEntity const* target, sol::object const& mods);
-    void  charmPet(CLuaBaseEntity const* target);
 
     void petAttack(CLuaBaseEntity* PEntity);
     void petAbility(uint16 abilityID); // Function exists, but is not implemented.  Warning will be displayed.

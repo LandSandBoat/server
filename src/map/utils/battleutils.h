@@ -194,11 +194,8 @@ namespace battleutils
 
     bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool);
 
-    float GetCharmChance(CBattleEntity* PCharmer, CBattleEntity* PTarget, bool includeCharmAffinityAndChanceMods = true);
-    bool  TryCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim);
-    void  tryToCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim);
-    void  applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, duration charmTime = 0s);
-    void  unCharm(CBattleEntity* PEntity);
+    void applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, duration charmTime = 0s);
+    void unCharm(CBattleEntity* PEntity);
 
     uint16 doSoulEaterEffect(CCharEntity* m_PChar, uint32 damage);
     uint16 doConsumeManaEffect(CCharEntity* m_PChar);
