@@ -97,6 +97,10 @@ xi.mobSkill =
     RANGED_ATTACK_13         = 1213,
     RANGED_ATTACK_14         = 1214,
 
+    MANTLE_PIERCE            = 1349,
+    AERIAL_COLLISION         = 1353,
+    SINUATE_RUSH             = 1367,
+
     HOWLING_MOON_3           = 1520, -- Unknown usage.
 
     FOOT_KICK_2              = 1567,
