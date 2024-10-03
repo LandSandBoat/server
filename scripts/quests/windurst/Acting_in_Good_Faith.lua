@@ -3,8 +3,11 @@
 -----------------------------------
 -- !addquest 2 64
 -- Gantineux : !pos -83 -9 3 238
--- qm1       : !pos -17 0 59 195 (I-10)
 -- Eperdur   : !pos 129 -6 96 231
+-- QM1       : !pos -460.85, -1.5, 425.14 (D-5)
+--           : !pos -24.10, -9.303, 258.993 (I-7)
+--           : !pos -19.624,-1.631,60.368 (I-10)
+--           : !pos 256.757, -20.489, 335.920 (M-6)
 -----------------------------------
 local eldiemeID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
@@ -88,6 +91,8 @@ quest.sections =
                 [50] = function(player, csid, option, npc)
                     player:messageSpecial(eldiemeID.text.SPIRIT_INCENSE_EMITS_PUTRID_ODOR, xi.ki.SPIRIT_INCENSE)
                     player:delKeyItem(xi.ki.SPIRIT_INCENSE)
+
+                    npc:setPos(unpack(eldiemeID.npc.QM1_POS[math.random(1, 4)])) -- move QM1 randomly on quest completion
                 end,
             },
         },
