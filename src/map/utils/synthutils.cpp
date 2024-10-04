@@ -226,7 +226,7 @@ namespace synthutils
         // Section 1: Variable definitions.
         //------------------------------
         uint8 synthResult = SYNTHESIS_SUCCESS; // We assume that we succeed.
-        uint8 successRate = 95;                // We assume that success rate is maxed (95%).
+        uint8 successRate = 0;                 // Define success rate.
         uint8 finalHQTier = 4;                 // We assume that max HQ tier is available.
         bool  canHQ       = true;              // We assume that we can HQ.
 
@@ -257,6 +257,7 @@ namespace synthutils
             }
 
             // Skill is involved.
+            successRate     = 95;                                 // Assume sucess rate is maxed.
             randomRoll      = xirand::GetRandomNumber(1, 100);    // Random call must be called for each involved skill.
             currentHQTier   = 0;                                  // This is reset at the start of every loop. "finalHQTier" is not.
             synthDifficulty = getSynthDifficulty(PChar, skillID); // Get synth difficulty for current skill.
@@ -346,19 +347,19 @@ namespace synthutils
             switch (finalHQTier)
             {
                 case 4: // 1 in 2
-                    chanceHQ = 50.0;
+                    chanceHQ = 50.0f;
                     break;
                 case 3: // 1 in 4
-                    chanceHQ = 25.0;
+                    chanceHQ = 25.0f;
                     break;
                 case 2: // 1 in 20
-                    chanceHQ = 5.0;
+                    chanceHQ = 5.0f;
                     break;
                 case 1: // 1 in 100
-                    chanceHQ = 1.0;
+                    chanceHQ = 1.0f;
                     break;
                 default: // No chance
-                    chanceHQ = 0.0;
+                    chanceHQ = 0.0f;
                     break;
             }
 
@@ -377,6 +378,8 @@ namespace synthutils
             {
                 chanceHQ = maxChanceHQ;
             }
+
+            randomRoll = xirand::GetRandomNumber(1, 100);
 
             if (randomRoll <= chanceHQ) // We HQ. Proceed to selct HQ Tier
             {
