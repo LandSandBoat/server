@@ -1770,6 +1770,8 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
             PChar->ForPartyWithTrusts([&](CBattleEntity* PMember)
             {
                 if (PMember != nullptr &&
+                    m_POwner->loc.zone &&
+                    PMember->loc.zone &&
                     m_POwner->loc.zone->GetID() == PMember->loc.zone->GetID() &&
                     distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
@@ -1799,7 +1801,10 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
         {
             for (CBattleEntity* PTarget : *PEntity->PNotorietyContainer)
             { // Check for trust here so negitive effects wont affect trust
-                if (PTarget != nullptr && PTarget->objtype != TYPE_TRUST && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
+                if (PTarget != nullptr &&
+                    PTarget->loc.zone &&
+                    PEntity->loc.zone &&
+                    PTarget->objtype != TYPE_TRUST && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
                     !PTarget->isDead())
                 {
                     CStatusEffect* PEffect = PTarget->StatusEffectContainer->GetStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()));
@@ -1830,7 +1835,10 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
             // clang-format off
             PEntity->ForParty([&](CBattleEntity* PMember)
             {
-                if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
+                if (PMember != nullptr &&
+                    m_POwner->loc.zone &&
+                    PMember->loc.zone &&
+                    PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
                 {
                     CStatusEffect* PEffect = PMember->StatusEffectContainer->GetStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()));
@@ -1861,7 +1869,10 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
             for (auto& enmityPair : *enmityList)
             {
                 auto* PTarget = enmityPair.second.PEnmityOwner;
-                if (PTarget != nullptr && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
+                if (PTarget != nullptr &&
+                    PTarget->loc.zone &&
+                    PEntity->loc.zone &&
+                    PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
                     !PTarget->isDead())
                 {
                     CStatusEffect* PEffect = PTarget->StatusEffectContainer->GetStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()));
