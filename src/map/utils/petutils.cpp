@@ -1791,7 +1791,7 @@ namespace petutils
         {
             uint8 spawnLevel = static_cast<CCharEntity*>(PMaster)->petZoningInfo.petLevel;
             PPet->setSpawnLevel(spawnLevel > 0 ? spawnLevel : UINT8_MAX);
-            PPet->setJugDuration(static_cast<int32>(PPetData->time));
+            PPet->setJugDuration(PPetData->time);
             CalculateJugPetStats(PMaster, PPet);
         }
         else if (PPet->getPetType() == PET_TYPE::WYVERN)

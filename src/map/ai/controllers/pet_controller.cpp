@@ -40,10 +40,30 @@ void CPetController::Tick(time_point tick)
     TracyZoneScoped;
     TracyZoneString(PPet->getName());
 
-    if (PPet->objtype == TYPE_PET && static_cast<CPetEntity*>(PPet)->shouldDespawn(tick))
+    bool isPlayerPet = PPet->objtype == TYPE_PET || (PPet->objtype == TYPE_MOB && PPet->PMaster && PPet->PMaster->objtype == TYPE_PC);
+
+    // if a player pet then check if a charmed mob or jug pet and if it should despawn
+    if (isPlayerPet)
     {
-        petutils::DespawnPet(PPet->PMaster);
-        return;
+        // if a charmed mob and charm time is up then despawn
+        if (PPet->isCharmed && tick > PPet->charmTime)
+        {
+            petutils::DespawnPet(PPet->PMaster);
+            return;
+        }
+
+        // if a jug pet and the current time > jug spawn time + jug duration then despawn
+        auto* PPetEntity = dynamic_cast<CPetEntity*>(PPet);
+        if (PPetEntity && PPetEntity->isAlive() && PPetEntity->getPetType() == PET_TYPE::JUG_PET)
+        {
+            // need to covert tick to unix time (in seconds) because getJugSpawnTime and getJugDuration give unix time
+            auto tickAsUnixTime = static_cast<uint32>(std::chrono::duration_cast<std::chrono::seconds>(tick.time_since_epoch()).count());
+            if (tickAsUnixTime > PPetEntity->getJugSpawnTime() + PPetEntity->getJugDuration())
+            {
+                petutils::DespawnPet(PPetEntity->PMaster);
+                return;
+            }
+        }
     }
     CMobController::Tick(tick);
 }
