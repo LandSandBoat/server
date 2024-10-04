@@ -1064,7 +1064,9 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     bool targetsParty     = targetFlags & TARGET_PLAYER_PARTY;
     bool targetsAlliance  = targetFlags & TARGET_PLAYER_ALLIANCE;
     bool hasPianissimo    = (targetFlags & TARGET_PLAYER_PARTY_PIANISSIMO) && PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO);
+    bool hasEntrust       = (targetFlags & TARGET_PLAYER_PARTY_ENTRUST) && PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST);
     bool isDifferentChar  = PInitiator != this;
+    bool isTrust          = PInitiator->objtype == TYPE_TRUST;
 
     // Alliance member valid target.
     if (targetsAlliance &&
@@ -1082,22 +1084,9 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return true;
     }
 
-    if (targetFlags & TARGET_PLAYER_PARTY_ENTRUST)
+    if (hasEntrust && (isSameParty || isTrust))
     {
-        if (PInitiator->objtype == TYPE_TRUST)
-        {
-            return true;
-        }
-
-        // Can cast on self and others in party but potency gets no bonuses from equipment mods if entrust is active
-        if (!PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) && PInitiator == this)
-        {
-            return true;
-        }
-        else if (PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) && ((PParty && PInitiator->PParty == PParty) || PInitiator == this))
-        {
-            return true;
-        }
+        return true;
     }
 
     return false;
