@@ -2963,8 +2963,9 @@ function CBaseEntity:addBardSong(PEntity, effectID, power, tick, duration, SubTy
 end
 
 ---@param target CBaseEntity
+---@param p0 integer?
 ---@return nil
-function CBaseEntity:charm(target)
+function CBaseEntity:charm(target, p0)
 end
 
 ---@return nil
