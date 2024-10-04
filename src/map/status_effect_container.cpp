@@ -1103,9 +1103,12 @@ bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, ui
     }
     else
     {
-        // i'm a liar, can overwrite rolls
-        PStatusEffect->SetEffectSlot(oldestRoll->GetEffectSlot());
-        DelStatusEffect(oldestRoll->GetStatusID());
+        if (oldestRoll)
+        {
+            // i'm a liar, can overwrite rolls
+            PStatusEffect->SetEffectSlot(oldestRoll->GetEffectSlot());
+            DelStatusEffect(oldestRoll->GetStatusID());
+        }
         AddStatusEffect(PStatusEffect);
         return true;
     }
