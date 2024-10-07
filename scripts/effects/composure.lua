@@ -7,22 +7,34 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    local jpValue = target:getJobPointLevel(xi.jp.COMPOSURE_EFFECT)
-    local cLevel = target:getMainLevel()
-    local accPower = math.floor(((24 * cLevel) + 74) / 49)
+    local player = target:getMaster() or target
+    local mLevel = player:getMainLvl()
+    local jpValue = player:getJobPointLevel(xi.jp.COMPOSURE_EFFECT)
+    local accPower = math.floor(((24 * mLevel) + 74) / 49)
+    effect:setPower(accPower + jpValue)
 
-    target:addMod(xi.mod.ACC, accPower + jpValue)
+    player:addMod(xi.mod.ACC, effect:getPower())
 end
 
 effectObject.onEffectTick = function(target, effect)
+    -- Recalculate accuracy every tick in case of level change
+    local player = target:getMaster() or target
+    local mLevel = player:getMainLvl()
+    local jpValue = player:getJobPointLevel(xi.jp.COMPOSURE_EFFECT)
+    local newAccPower = math.floor(((24 * mLevel) + 74) / 49)
+    local newPower = newAccPower + jpValue
+
+    if newPower ~= effect:getPower() then
+        player:delMod(xi.mod.ACC, effect:getPower())  -- Remove old bonus
+        effect:setPower(newPower)                     -- Update stored power
+        player:addMod(xi.mod.ACC, newPower)           -- Apply new bonus
+    end
 end
 
 effectObject.onEffectLose = function(target, effect)
-    local jpValue = target:getJobPointLevel(xi.jp.COMPOSURE_EFFECT)
-    local cLevel = target:getMainLevel()
-    local accPower = math.floor(((24 * cLevel) + 74) / 49)
+    local player = target:getMaster() or target
 
-    target:delMod(xi.mod.ACC, accPower + jpValue)
+    player:delMod(xi.mod.ACC, effect:getPower())
 end
 
 return effectObject
