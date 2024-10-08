@@ -7,22 +7,15 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    local player = target:getMaster() or target
-    local mLevel = player:getMainLvl()
-    local jpValue = player:getJobPointLevel(xi.jp.COMPOSURE_EFFECT)
-    local accPower = math.floor(((24 * mLevel) + 74) / 49)
-    effect:setPower(accPower + jpValue)
+	local power = math.floor((24 * target:getMainLvl() + 74) / 49) + target:getJobPointLevel(xi.jp.COMPOSURE_EFFECT)
 
-    player:addMod(xi.mod.ACC, effect:getPower())
+	effect:addMod(xi.mod.ACC, power)
 end
 
 effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    local player = target:getMaster() or target
-
-    player:delMod(xi.mod.ACC, effect:getPower())
 end
 
 return effectObject
