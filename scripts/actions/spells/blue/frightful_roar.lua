@@ -12,6 +12,7 @@
 -- Magic Bursts on: Detonation, Fragmentation, and Light
 -- Combos: Auto Refresh
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

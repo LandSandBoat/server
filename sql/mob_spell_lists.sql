@@ -5051,6 +5051,31 @@ INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,176,1,255); -- firaga_ii
 INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,204,1,255); -- flare (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Sarcopsylla',505,235,1,255); -- burn (1~255)
 
+-- Poroggo with Providence (506)
+INSERT INTO `mob_spell_lists` VALUES ('Providence',506,57,1,255); -- Haste (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Providence',506,365,1,255); -- Breakga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Providence',506,362,1,255); -- Bindga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Providence',506,361,1,255); -- Blindga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Providence',506,366,1,255); -- Graviga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Providence',506,357,1,255); -- Slowga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Providence',506,367,1,255); -- Death (1~255)
+
+-- Two-faced Flan from Happy Caster ISNM3000
+INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,147,1,255); -- fire_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,152,1,255); -- blizzard_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,157,1,255); -- aero_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,162,1,255); -- stone_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,167,1,255); -- thunder_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,172,1,255); -- water_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,176,1,255); -- firaga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,181,1,255); -- blizzaga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,186,1,255); -- aeroga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,191,1,255); -- stonega_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,196,1,255); -- thundaga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,201,1,255); -- waterga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,274,1,255); -- sleepga_ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,362,1,255); -- bindga (1~255)
+
 -- Supernal Chapuli (508)
 INSERT INTO `mob_spell_lists` VALUES ('Supernal_Chapuli',508,157,72,255); -- Aero IV (72-255)
 INSERT INTO `mob_spell_lists` VALUES ('Supernal_Chapuli',508,187,75,255); -- Aeroga IV (75-255)
@@ -5092,6 +5117,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,178,99,255); -- Firaga V (99~2
 INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,496,90,255); -- Firaja (90~255)
 
 -- Next Available: 513
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

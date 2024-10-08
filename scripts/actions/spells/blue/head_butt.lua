@@ -12,6 +12,7 @@
 -- Skillchain Element(s): Impaction
 -- Combos: None
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

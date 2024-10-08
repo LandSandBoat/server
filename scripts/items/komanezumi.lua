@@ -2,6 +2,7 @@
 -- ID: 6268
 -- Komanezumi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

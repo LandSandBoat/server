@@ -32,7 +32,7 @@ local towerOption =
 }
 
 local function setMissionStatusBit(player, bitNum)
-    local statusIndex   = bitNum == 0 and xi.mission.status.CID or xi.mission.status.RUBIOUS
+    local statusIndex   = bitNum == 0 and xi.mission.status.COP.CID or xi.mission.status.COP.RUBIOUS
     local adjustedBit   = bitNum == 0 and 3 or bitNum - 1
     local missionStatus = player:getMissionStatus(mission.areaId, statusIndex)
 
@@ -40,7 +40,7 @@ local function setMissionStatusBit(player, bitNum)
 end
 
 local function getMissionStatusBit(player, bitNum)
-    local statusIndex   = bitNum == 0 and xi.mission.status.CID or xi.mission.status.RUBIOUS
+    local statusIndex   = bitNum == 0 and xi.mission.status.COP.CID or xi.mission.status.COP.RUBIOUS
     local adjustedBit   = bitNum == 0 and 3 or bitNum - 1
     local missionStatus = player:getMissionStatus(mission.areaId, statusIndex)
 
@@ -137,7 +137,13 @@ mission.sections =
                         end
 
                         if numDefeated == 3 then
-                            local npcObj      = GetNPCByID(mission:getLocalVar(player, 'triggerNpc'))
+                            local npcObj = GetNPCByID(mission:getLocalVar(player, 'triggerNpc'))
+
+                            if not npcObj then
+                                print('ERROR: triggerNpc returned invalid NPC object.')
+                                return
+                            end
+
                             local currentMask = mission:getLocalVar(player, 'nmDefeated')
                             mission:setLocalVar(player, 'nmDefeated', utils.mask.setBit(currentMask, towerOption[npcObj:getName()], true))
                             mission:setLocalVar(player, 'numDefeated', 0)

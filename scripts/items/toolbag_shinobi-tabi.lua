@@ -3,6 +3,7 @@
 -- Toolbag Shinobi-tabi
 -- When used, you will obtain one stack of Shinobi-tabi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

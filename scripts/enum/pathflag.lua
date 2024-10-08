@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum xi.pathflag
 xi.pathflag =
 {
     NONE     = 0x00,

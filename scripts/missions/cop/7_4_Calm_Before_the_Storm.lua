@@ -98,9 +98,11 @@ mission.sections =
                         elseif not isCarpentersNmSpawned() then
                             local executor = GetMobByID(carpentersID.mob.CRYPTONBERRY_EXECUTOR)
 
-                            executor:spawn()
-                            executor:updateClaim(player)
-                            executor:setCE(player, 0)
+                            if executor then
+                                executor:spawn()
+                                executor:updateClaim(player)
+                                executor:setCE(player, 0)
+                            end
 
                             return mission:messageSpecial(carpentersID.text.CRYPTONBERRY_EXECUTOR_POP)
                         end

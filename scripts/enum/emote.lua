@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.emote
 xi.emote =
 {
     POINT      = 0,

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Throne_Room (165)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -4,6 +4,7 @@
 -- Type: Manaclipper Timekeeper
 -- !pos -392 -3 -385 4
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local timekeeperLocation = xi.manaclipper.location.PURGONORGO_ISLE

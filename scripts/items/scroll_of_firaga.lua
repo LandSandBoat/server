@@ -3,6 +3,7 @@
 -- Scroll of Firaga
 -- Teaches the black magic Firaga
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

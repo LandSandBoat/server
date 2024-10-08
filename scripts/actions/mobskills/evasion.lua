@@ -7,6 +7,7 @@
 -- Range: Self
 -- Notes: 25% Evasion Boost.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -231,6 +231,19 @@ uint8 CStatusEffectContainer::GetEffectsCount(EFFECT ID)
     return count;
 }
 
+uint8 CStatusEffectContainer::GetEffectsCountWithFlag(EFFECTFLAG flag)
+{
+    uint8 count = 0;
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->HasEffectFlag(flag) && PStatusEffect->GetDuration() > 0 && !PStatusEffect->deleted)
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
 uint8 CStatusEffectContainer::GetLowestFreeSlot()
 {
     uint8 lowestFreeSlot = 1;
@@ -261,17 +274,12 @@ bool CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect)
         case EFFECT_SLEEP_II:
         case EFFECT_LULLABY:
         {
-            if (m_POwner->hasImmunity(IMMUNITY_SLEEP))
-            {
-                return false;
-            }
-
             uint16 subPower = PStatusEffect->GetSubPower();
             if (subPower == ELEMENT_LIGHT && m_POwner->hasImmunity(IMMUNITY_LIGHT_SLEEP))
             {
                 return false;
             }
-            if (subPower == ELEMENT_DARK && m_POwner->hasImmunity(IMMUNITY_DARK_SLEEP))
+            else if (subPower == ELEMENT_DARK && m_POwner->hasImmunity(IMMUNITY_DARK_SLEEP))
             {
                 return false;
             }
@@ -340,6 +348,12 @@ bool CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect)
             break;
         case EFFECT_TERROR:
             if (m_POwner->hasImmunity(IMMUNITY_TERROR))
+            {
+                return false;
+            }
+            break;
+        case EFFECT_PETRIFICATION:
+            if (m_POwner->hasImmunity(IMMUNITY_PETRIFY))
             {
                 return false;
             }
@@ -1316,7 +1330,8 @@ CStatusEffect* CStatusEffectContainer::StealStatusEffect(EFFECTFLAG flag)
 
         // make a copy
         CStatusEffect* EffectCopy = new CStatusEffect(oldEffect->GetStatusID(), oldEffect->GetIcon(), oldEffect->GetPower(), oldEffect->GetTickTime() / 1000,
-                                                      oldEffect->GetDuration() / 1000);
+                                                      oldEffect->GetDuration() / 1000, oldEffect->GetSubID(), oldEffect->GetSubPower(), oldEffect->GetTier(),
+                                                      oldEffect->GetEffectFlags());
 
         RemoveStatusEffect(oldEffect);
 
@@ -1755,6 +1770,8 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
             PChar->ForPartyWithTrusts([&](CBattleEntity* PMember)
             {
                 if (PMember != nullptr &&
+                    m_POwner->loc.zone &&
+                    PMember->loc.zone &&
                     m_POwner->loc.zone->GetID() == PMember->loc.zone->GetID() &&
                     distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
@@ -1784,7 +1801,10 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
         {
             for (CBattleEntity* PTarget : *PEntity->PNotorietyContainer)
             { // Check for trust here so negitive effects wont affect trust
-                if (PTarget != nullptr && PTarget->objtype != TYPE_TRUST && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
+                if (PTarget != nullptr &&
+                    PTarget->loc.zone &&
+                    PEntity->loc.zone &&
+                    PTarget->objtype != TYPE_TRUST && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
                     !PTarget->isDead())
                 {
                     CStatusEffect* PEffect = PTarget->StatusEffectContainer->GetStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()));
@@ -1815,7 +1835,10 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
             // clang-format off
             PEntity->ForParty([&](CBattleEntity* PMember)
             {
-                if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
+                if (PMember != nullptr &&
+                    m_POwner->loc.zone &&
+                    PMember->loc.zone &&
+                    PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
                 {
                     CStatusEffect* PEffect = PMember->StatusEffectContainer->GetStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()));
@@ -1846,7 +1869,10 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
             for (auto& enmityPair : *enmityList)
             {
                 auto* PTarget = enmityPair.second.PEnmityOwner;
-                if (PTarget != nullptr && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
+                if (PTarget != nullptr &&
+                    PTarget->loc.zone &&
+                    PEntity->loc.zone &&
+                    PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
                     !PTarget->isDead())
                 {
                     CStatusEffect* PEffect = PTarget->StatusEffectContainer->GetStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()));

@@ -4,6 +4,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.aoeRadius
 xi.aoeRadius =
 {
     ATTACKER = 1,

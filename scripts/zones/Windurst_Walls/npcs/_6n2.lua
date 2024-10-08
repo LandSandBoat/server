@@ -4,6 +4,7 @@
 -- Involved In Quest: Know One's Onions, Onion Rings, The Puppet Master, Class Reunion
 -- !pos -26 -13 260 239
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

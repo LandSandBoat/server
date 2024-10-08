@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum xi.race
 xi.race =
 {
     HUME_M   = 1,

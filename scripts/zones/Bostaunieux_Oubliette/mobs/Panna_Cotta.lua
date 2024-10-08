@@ -2,6 +2,7 @@
 -- Area: Bostaunieux Oubliette
 --  Mob: Panna Cotta
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

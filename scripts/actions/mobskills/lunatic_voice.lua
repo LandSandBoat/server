@@ -1,6 +1,7 @@
 -----------------------------------
 -- Lunatic Voice
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- ID: 19001
 -- Item: Gastraphetes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -11,6 +11,7 @@
 -- Evasion +5% (cap 90)
 -- Resist Slow +10
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

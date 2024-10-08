@@ -3,6 +3,7 @@
 -- Scroll of Blaze Spikes
 -- Teaches the black magic Blaze Spikes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

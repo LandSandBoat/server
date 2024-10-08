@@ -3,6 +3,7 @@
 -- Item: Healing Vest
 -- Item Effect: Restores 90-105 HP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Scroll of Aisha: Ichi
 -- Teaches the ninjutsu Aisha: Ichi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.VALIANCE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

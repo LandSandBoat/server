@@ -3,6 +3,7 @@
 --  NPC: Olgald
 -- !pos -53.072 -1 103.380 244
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,6 +4,7 @@
 -- Notes: Dynamis Tavnazia Enter
 -- !pos 3.674 -7.278 -27.856 26
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

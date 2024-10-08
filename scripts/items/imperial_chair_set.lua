@@ -3,6 +3,7 @@
 -- Item: Imperial Chair
 -- Item Effect: Grant Imperial chair key item
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 local keyItemId = xi.ki.IMPERIAL_CHAIR

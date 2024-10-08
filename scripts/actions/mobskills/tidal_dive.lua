@@ -7,6 +7,7 @@
 --  Range: Unknown radial
 --  Notes: Only used over deep water.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

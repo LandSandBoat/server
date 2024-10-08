@@ -3,6 +3,7 @@
 --
 -- Adds Haste and Critical Hit Rate
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

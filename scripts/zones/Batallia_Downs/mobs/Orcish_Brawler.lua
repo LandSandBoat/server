@@ -2,6 +2,7 @@
 -- Area: Batallia Downs
 --  Mob: Orcish Brawler
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.sendToDBoxReturnCode
 xi.sendToDBoxReturnCode =
 {
     -- Successfully delivered the requested quantity

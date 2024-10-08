@@ -3,6 +3,7 @@
 -- Blizzard Gloves
 --  Enchantment: "Enblizzard"
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

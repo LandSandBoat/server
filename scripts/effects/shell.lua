@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SHELL
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

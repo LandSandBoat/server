@@ -152,14 +152,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 2 then
-                        return 116
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 2 then
+                    return 116
+                end
+            end,
 
             onEventFinish =
             {

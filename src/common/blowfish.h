@@ -29,6 +29,7 @@ enum BLOWFISH
     BLOWFISH_WAITING,
     BLOWFISH_SENT,
     BLOWFISH_ACCEPTED,
+    BLOWFISH_PENDING_ZONE,
 };
 
 struct blowfish_t

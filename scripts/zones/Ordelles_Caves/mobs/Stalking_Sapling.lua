@@ -2,6 +2,7 @@
 -- Area: Ordelle's Caves
 --  Mob: Stalking Sapling
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

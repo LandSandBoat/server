@@ -2,6 +2,7 @@
 -- Area: Selbina
 --  NPC: Pascaut
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

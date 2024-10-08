@@ -6,6 +6,7 @@
 -- HP % 10 Cap 200
 -- HP Healing 3
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

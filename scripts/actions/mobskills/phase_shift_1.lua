@@ -2,6 +2,7 @@
 -- Phase Shift
 -- A shockwave deals damage to targets in an area of effect. Additional effect: Stun + Bind
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -5,6 +5,7 @@
 --  Faerie Apple, Sunflower Seeds, Red Moko Grass, La Theine Cabbage, Boyahda Moss,
 --  Pine Nuts, Beaugreens, Acorn, Dung, Batagreens, and Moko Grass
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
@@ -15,7 +16,7 @@ itemObject.onItemUse = function(target)
     local giftList =
     {
         xi.item.FAERIE_APPLE,
-        xi.item.SUNFLOWER_SEEDS,
+        xi.item.HANDFUL_OF_SUNFLOWER_SEEDS,
         xi.item.CLUMP_OF_RED_MOKO_GRASS,
         xi.item.LA_THEINE_CABBAGE,
         xi.item.CLUMP_OF_BOYAHDA_MOSS,
@@ -26,7 +27,8 @@ itemObject.onItemUse = function(target)
         xi.item.CLUMP_OF_MOKO_GRASS
     }
 
-    local gift = math.random(1, 11)
+    local gift = math.random(1, #giftList)
+
     npcUtil.giveItem(target, { { giftList[gift], 1 } })
 end
 

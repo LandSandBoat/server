@@ -2,6 +2,7 @@
 -- Area: Ifrit's Cauldron
 --   NM: Tyrannic Tunnok
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

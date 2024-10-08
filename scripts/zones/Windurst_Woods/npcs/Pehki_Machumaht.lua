@@ -3,6 +3,7 @@
 --  NPC: Pehki Machumaht
 -- Map Seller NPC
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

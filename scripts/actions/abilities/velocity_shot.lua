@@ -5,14 +5,15 @@
 -- Recast Time: 5:00 minutes
 -- Duration: 2 hours
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.ranger.checkVelocityShot(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.VELOCITY_SHOT, 1, 0, 7200)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    return xi.job_utils.ranger.useVelocityShot(player, target, ability, action)
 end
 
 return abilityObject

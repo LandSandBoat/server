@@ -12,6 +12,7 @@
 -- Skillchain Element(s): Liquefaction/Impaction
 -- Combos: Counter
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

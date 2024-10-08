@@ -3,6 +3,7 @@
 -- Scroll of Teleport-Yhoat
 -- Teaches the white magic Teleport-Yhoat
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

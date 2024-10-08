@@ -2,6 +2,7 @@
 -- func: resetlights
 -- desc: resets all lights to 0
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

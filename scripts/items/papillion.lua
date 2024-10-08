@@ -3,6 +3,7 @@
 -- Papillion
 -- Adds butterfly wings to the user
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

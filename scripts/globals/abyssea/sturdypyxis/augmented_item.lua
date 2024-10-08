@@ -516,6 +516,9 @@ local function GetAugment(npc, itemid, slot)
     end
 
     randaugment1 = math.random(1, #augs[itemid].augments - augTierDeduction[itemid][tier])
+
+    --- TODO: Find consistent method for table vs integer assignments
+    ---@diagnostic disable-next-line: cast-local-type
     aug1 = augs[itemid].augments[randaugment1]
 
     multival1 = math.random(aug1.min, aug1.max)
@@ -538,6 +541,8 @@ local function GetAugment(npc, itemid, slot)
         end
 
         if randaugment2 ~= 0 then
+            --- TODO: Find consistent method for table vs integer assignments
+            ---@diagnostic disable-next-line: cast-local-type
             aug2 = augs[itemid].augments[randaugment2]
 
             multival2 = math.random(aug2.min, aug2.max)

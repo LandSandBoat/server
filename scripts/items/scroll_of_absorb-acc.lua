@@ -3,6 +3,7 @@
 -- Scroll of Absorb-ACC
 -- Teaches the black magic Absorb-ACC
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

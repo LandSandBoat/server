@@ -4,6 +4,7 @@
 -- Involved in Quest: Trial by Earth
 -- !pos -539 1 -493 209
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

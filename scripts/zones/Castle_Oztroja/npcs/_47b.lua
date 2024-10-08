@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
@@ -17,6 +18,7 @@ entity.onTrigger = function(player, npc)
     if xPos < 21.6 and xPos > 18 and zPos > -15.6 and zPos < -12.4 then
         if VanadielDayOfTheYear() % 2 == 1 then
             if
+                brassDoor and
                 brassDoor:getAnimation() == xi.anim.CLOSE_DOOR and
                 npc:getAnimation() == xi.anim.CLOSE_DOOR
             then
@@ -26,6 +28,7 @@ entity.onTrigger = function(player, npc)
             end
         else
             if
+                trapDoor and
                 trapDoor:getAnimation() == xi.anim.CLOSE_DOOR and
                 npc:getAnimation() == xi.anim.CLOSE_DOOR
             then

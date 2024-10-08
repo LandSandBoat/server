@@ -2,6 +2,7 @@
 -- Area: Gustav Tunnel
 --  Mob: Robber Crab
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

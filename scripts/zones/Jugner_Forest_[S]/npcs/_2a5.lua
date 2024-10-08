@@ -3,6 +3,7 @@
 --  NPC: Wooden Gate
 -- !pos -200 -10.965 -511.129 82
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- xi.effect.PROWESS
 -- Increased crystal yield
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

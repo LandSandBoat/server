@@ -3,6 +3,7 @@
 --  NPC: Rarab
 -- Nonstandard NPC w/o Nametag
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

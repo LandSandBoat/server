@@ -7,10 +7,15 @@
 --  Range: Unknown cone
 --  Notes: Used only by certain Lamia NMs (e.g. Lamia No.3). If they lost their staff, they'll use Hysteric Barrage instead.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    return 0
+    if mob:getAnimationSub() == 0 then
+        return 0
+    end
+
+    return 1
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- Area: Yhoator Jungle
 --  NPC: Logging Point
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

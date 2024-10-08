@@ -3,6 +3,7 @@
 -- Ionohelix Schema
 -- Teaches the black magic Ionohelix
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

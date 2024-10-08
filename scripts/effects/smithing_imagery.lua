@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SMITHING_IMAGERY
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

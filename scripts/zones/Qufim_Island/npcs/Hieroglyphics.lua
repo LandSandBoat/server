@@ -4,6 +4,7 @@
 -- Dynamis Qufim Entrance
 -- !pos 16 -19 162 126
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

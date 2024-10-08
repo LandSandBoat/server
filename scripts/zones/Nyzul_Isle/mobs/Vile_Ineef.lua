@@ -3,6 +3,7 @@
 -- Area: Nyzul Isle
 -- Info: Enemy Leader
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -3,6 +3,7 @@
 --  Mob: Kam'lanaut
 -- Apocalypse Nigh Final Fight
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local skillToAbsorb =

@@ -2,6 +2,7 @@
 -- Spell: Dragonfoe Mambo
 -- Grants evasion bonus to all members.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

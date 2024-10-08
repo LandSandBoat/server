@@ -2,6 +2,7 @@
 -- Area: Rabao
 --  NPC: Angry Goat
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

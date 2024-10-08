@@ -2,6 +2,7 @@
 -- ID: 15543
 -- Rajas Ring
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

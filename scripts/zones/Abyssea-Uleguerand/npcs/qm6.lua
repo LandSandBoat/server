@@ -4,6 +4,7 @@
 -- Spawns Upas-Kamuy
 -- !pos -212 -184 449 253
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

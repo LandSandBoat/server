@@ -3,6 +3,7 @@
 --  Mob: Race Runner
 --  ENM: Like the Wind
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local pathNodes =

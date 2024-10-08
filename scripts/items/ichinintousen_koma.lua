@@ -2,6 +2,7 @@
 -- ID: 5532
 -- Ichinintousen Koma
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

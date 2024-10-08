@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: Hat in Hand
 -- !pos -66 -3 -148 238
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

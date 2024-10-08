@@ -4,6 +4,7 @@
 -- Involved in quest: Wayward Automaton
 -- !pos 29.89 -6 55.83 53
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

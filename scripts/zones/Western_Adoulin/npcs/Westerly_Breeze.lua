@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -12,6 +13,10 @@ entity.onTrade = function(player, npc, trade)
 
     if trade:getItemCount() == 1 and trade:getGil() == 0 then
         local item = trade:getItem(0)
+        if not item then
+            return
+        end
+
         local itemId = item:getID()
         local ahCategory = item:getAHCat()
 
@@ -86,7 +91,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addExp(1500 * xi.settings.main.EXP_RATE)
         player:addCurrency('bayld', 1000 * xi.settings.main.BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.main.BAYLD_RATE)
-        player:addFame(xi.fameArea.ADOULIN)
+
+        -- TODO: Verify fame value added
+        player:addFame(xi.fameArea.ADOULIN, 30)
         player:setCharVar('Westerly_Breeze_Wait', 0)
     elseif csid == 3014 then
         -- Consuming wrong food item given to him during his quests

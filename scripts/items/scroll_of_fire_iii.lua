@@ -3,6 +3,7 @@
 -- Scroll of Fire III
 -- Teaches the black magic Fire III
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

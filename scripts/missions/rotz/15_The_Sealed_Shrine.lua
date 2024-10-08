@@ -68,14 +68,11 @@ mission.sections =
 
         [xi.zone.THE_SHRINE_OF_RUAVITAU] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 51
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 51
+                end
+            end,
 
             onEventFinish =
             {

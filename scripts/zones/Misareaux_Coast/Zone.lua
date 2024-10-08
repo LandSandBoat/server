@@ -3,6 +3,7 @@
 -----------------------------------
 local misareauxGlobal = require('scripts/zones/Misareaux_Coast/globals')
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

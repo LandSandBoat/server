@@ -4,6 +4,7 @@
 -- Type: Map Viewer
 -- !pos -28.768 -2 -11.300 245
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

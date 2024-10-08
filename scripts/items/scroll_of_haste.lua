@@ -3,6 +3,7 @@
 -- Scroll of Haste
 -- Teaches the white magic Haste
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

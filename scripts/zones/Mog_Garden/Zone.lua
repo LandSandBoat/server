@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Mog Garden (280)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

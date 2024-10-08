@@ -8,6 +8,7 @@
 -- Ranged Attack +24% Cap 185
 -- Vermin Killer +6
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

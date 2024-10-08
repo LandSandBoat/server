@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ASTRAL_FLOW
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

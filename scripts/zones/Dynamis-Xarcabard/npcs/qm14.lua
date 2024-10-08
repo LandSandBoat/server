@@ -3,6 +3,7 @@
 --  NPC: ??? (qm14)
 -- Note: Spawns Animated Tachi
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

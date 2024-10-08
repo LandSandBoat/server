@@ -2,6 +2,7 @@
 -- func: where
 -- desc: Tells the player about their current position.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

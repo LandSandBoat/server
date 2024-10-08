@@ -5,6 +5,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)
@@ -18,6 +19,10 @@ end
 
 entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
+    if not instance then
+        return
+    end
+
     instance:setProgress(instance:getProgress() + 1)
 end
 

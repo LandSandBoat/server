@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.VISITANT
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 local remainingTimeLimits = { 300, 240, 180, 120, 60, 30, 10, 5, 4, 3, 2, 1 }
@@ -67,19 +68,17 @@ reportTimeRemaining = function(player, effect)
 end
 
 effectObject.onEffectGain = function(target, effect)
-    local visEffect = target:getStatusEffect(xi.effect.VISITANT)
-
-    visEffect:addEffectFlag(xi.effectFlag.OFFLINE_TICK)
-    visEffect:addEffectFlag(xi.effectFlag.NO_CANCEL)
-    visEffect:addEffectFlag(xi.effectFlag.ON_ZONE)
-    visEffect:addEffectFlag(xi.effectFlag.HIDE_TIMER)
+    effect:addEffectFlag(xi.effectFlag.OFFLINE_TICK)
+    effect:addEffectFlag(xi.effectFlag.NO_CANCEL)
+    effect:addEffectFlag(xi.effectFlag.ON_ZONE)
+    effect:addEffectFlag(xi.effectFlag.HIDE_TIMER)
 
     target:setLocalVar('lastTimeUpdate', effect:getTimeRemaining() / 1000 + 1)
 end
 
 effectObject.onEffectTick = function(target, effect)
     if not xi.abyssea.isInAbysseaZone(target) then
-        target:delStatusEffect(effect)
+        target:delStatusEffect(effect:getEffectType())
     end
 
     -- Searing Ward Tether is set and reset in zone onTriggerAreaLeave and

@@ -3,6 +3,7 @@
 -- Elvaan Rice Cake
 -- Enchantment: 60Min, Costume - Elvaan Child (female)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

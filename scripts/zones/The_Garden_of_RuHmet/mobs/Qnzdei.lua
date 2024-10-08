@@ -5,9 +5,10 @@
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 mixins = { require('scripts/mixins/families/zdei') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
-entity.changeState = function(mob, idle)
+local changeState = function(mob, idle)
     if mob:getLocalVar('idle') ~= idle then
         mob:setLocalVar('idle', idle)
 
@@ -15,22 +16,24 @@ entity.changeState = function(mob, idle)
         local doorID = ID.npc.QNZDEI_DOOR_OFFSET + (mob:getID() - ID.mob.QNZDEI_OFFSET) / 4
         local door = GetNPCByID(doorID)
 
-        local doorIdle = door:getLocalVar('idle')
-        if idle == 0 then
-            doorIdle = math.max(0, doorIdle - 1)
-        else
-            doorIdle = math.min(doorIdle + 1, 4)
-        end
+        if door then
+            local doorIdle = door:getLocalVar('idle')
+            if idle == 0 then
+                doorIdle = math.max(0, doorIdle - 1)
+            else
+                doorIdle = math.min(doorIdle + 1, 4)
+            end
 
-        if doorIdle == 4 then
-            door:setAnimation(xi.animation.OPEN_DOOR)
-            door:setUntargetable(true)
-        else
-            door:setAnimation(xi.animation.CLOSE_DOOR)
-            door:setUntargetable(false)
-        end
+            if doorIdle == 4 then
+                door:setAnimation(xi.animation.OPEN_DOOR)
+                door:setUntargetable(true)
+            else
+                door:setAnimation(xi.animation.CLOSE_DOOR)
+                door:setUntargetable(false)
+            end
 
-        door:setLocalVar('idle', doorIdle)
+            door:setLocalVar('idle', doorIdle)
+        end
     end
 end
 
@@ -40,7 +43,7 @@ end
 local spinSpeeds = { 4, 8, 16, 64 }
 
 entity.onMobSpawn = function(mob)
-    entity.changeState(mob, 1)
+    changeState(mob, 1)
 
     -- Qn'Zdei randomly spin at speeds 4, 8, 16, 64 and can be reversed (negative)
     mob:setLocalVar('spinSpeed', utils.randomEntry(spinSpeeds))
@@ -50,7 +53,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    entity.changeState(mob, 0)
+    changeState(mob, 0)
 end
 
 entity.onPath = function(mob)
@@ -58,7 +61,7 @@ entity.onPath = function(mob)
     mob:pathThrough({ spawnPos.x, spawnPos.y, spawnPos.z })
     local pos = mob:getPos()
     if spawnPos.x == pos.x and spawnPos.z == pos.z then
-        entity.changeState(mob, 1)
+        changeState(mob, 1)
 
         local speed = mob:getLocalVar('spinSpeed')
         if mob:getLocalVar('reversed') == 1 then
@@ -70,7 +73,7 @@ entity.onPath = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    entity.changeState(mob, 0)
+    changeState(mob, 0)
 end
 
 return entity

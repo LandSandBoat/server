@@ -3,6 +3,7 @@
 -- plate_of_indi-str
 -- Teaches INDI-STR
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

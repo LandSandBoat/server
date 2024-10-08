@@ -19,8 +19,8 @@ local keyItems =
     xi.ki.ELECTROLOCOMOTIVE,
 }
 
-quest.hasKeyItem = function(player)
-    for i, v in pairs(keyItems) do
+local hasQuestKeyItem = function(player)
+    for _, v in pairs(keyItems) do
         if player:hasKeyItem(v) then
             return true
         end
@@ -67,7 +67,7 @@ quest.sections =
             ['Dkhaaya'] =
             {
                 onTrigger = function(player, npc)
-                    if quest.hasKeyItem(player) then
+                    if hasQuestKeyItem(player) then
                         return quest:progressEvent(6)
                     else
                         return quest:event(5)
@@ -93,7 +93,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:hasItem(xi.item.OLDUUM_RING) and
-                        not quest.hasKeyItem(player) and
+                        not hasQuestKeyItem(player) and
                         npcUtil.tradeHasExactly(trade, xi.item.PICKAXE)
                     then
                         if math.random(1, 10) > 5 then
@@ -134,7 +134,7 @@ quest.sections =
             ['Dkhaaya'] =
             {
                 onTrigger = function(player, npc)
-                    if quest.hasKeyItem(player) then
+                    if hasQuestKeyItem(player) then
                         return quest:progressEvent(8)
                     elseif
                         player:hasItem(xi.item.OLDUUM_RING) or
@@ -201,7 +201,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:hasItem(xi.item.OLDUUM_RING) and
-                        not quest.hasKeyItem(player) and
+                        not hasQuestKeyItem(player) and
                         npcUtil.tradeHasExactly(trade, xi.item.PICKAXE)
                     then
                         if math.random(1, 10) > 5 then

@@ -2,6 +2,7 @@
 -- Area: Fei'Yin
 --  Mob: Underworld Bats
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

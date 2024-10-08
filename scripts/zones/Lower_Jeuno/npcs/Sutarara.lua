@@ -4,6 +4,7 @@
 -- Involved in Quests: Tenshodo Membership
 -- !pos 30 0.1 -2 245
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

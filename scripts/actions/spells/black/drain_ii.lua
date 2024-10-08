@@ -2,6 +2,7 @@
 -- Spell: Drain II
 -- Drain functions only on skill level!!
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
@@ -35,7 +36,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
     dmg = addBonuses(caster, spell, target, dmg)
     --add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement())
+    dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement())
 
     if dmg < 0 then
         dmg = 0

@@ -3,6 +3,7 @@
 -- ID 5378
 -- Removes VIT Down effect
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -2,6 +2,7 @@
 -- func: masterjob
 -- desc: Masters the player's current job
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

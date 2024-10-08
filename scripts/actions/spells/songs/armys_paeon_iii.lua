@@ -2,6 +2,7 @@
 -- Spell: Army's Paeon III
 -- Gradually restores target's HP.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

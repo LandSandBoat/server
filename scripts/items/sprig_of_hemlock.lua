@@ -4,6 +4,7 @@
 -- Food Effect: 5 Min, All Races
 -- Paralysis
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

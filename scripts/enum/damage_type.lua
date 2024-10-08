@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.damageType
 xi.damageType =
 {
     NONE      = 0,

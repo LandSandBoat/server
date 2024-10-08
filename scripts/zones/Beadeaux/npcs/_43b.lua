@@ -4,6 +4,7 @@
 -- Involved in Quests: The Rescue
 -- !pos 56 0.1 -23 147
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

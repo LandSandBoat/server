@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.THE_ASHU_TALIF]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

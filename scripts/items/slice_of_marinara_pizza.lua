@@ -8,6 +8,7 @@
 -- Attack +20% (cap 50 @ 250 base attack)
 -- Undead Killer
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

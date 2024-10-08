@@ -2,6 +2,7 @@
 -- Spell: Boost-STR
 -- Boosts STR for Allies in AoE
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

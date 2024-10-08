@@ -2,6 +2,7 @@
 -- ID: 19007
 -- Item: Death Penalty
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

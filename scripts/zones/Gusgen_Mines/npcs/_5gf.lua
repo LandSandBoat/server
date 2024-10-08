@@ -3,6 +3,7 @@
 --  NPC: _5gf (Lever C)
 -- !pos 44 -40.561 -54.199 196
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

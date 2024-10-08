@@ -2,6 +2,7 @@
 -- Spell: Uncanny Etude
 -- Static DEX Boost, BRD 72
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -3,6 +3,7 @@
 -----------------------------------
 require('scripts/globals/monstrosity')
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

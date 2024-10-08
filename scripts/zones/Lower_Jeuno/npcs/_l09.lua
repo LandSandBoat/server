@@ -6,6 +6,7 @@
 -----------------------------------
 local lowerJeunoGlobal = require('scripts/zones/Lower_Jeuno/globals')
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

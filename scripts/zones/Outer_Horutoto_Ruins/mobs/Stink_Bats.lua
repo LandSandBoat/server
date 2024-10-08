@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local desmodontPHTable =

@@ -13,6 +13,7 @@
 -- Magic Bursts on: Transfixion, Fusion, and Light
 -- Combos: Auto Regen
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -4,6 +4,7 @@
 --  Description: Damage varies with TP. Additional effect: "Stun."
 --  Type: Physical (Blunt)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

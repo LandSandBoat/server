@@ -2,6 +2,7 @@
 -- Area: East Ronfaure [S]
 --   NM: Melusine
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,6 +2,7 @@
 -- Area: Lufaise Meadows
 --   NM: Amaltheia
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

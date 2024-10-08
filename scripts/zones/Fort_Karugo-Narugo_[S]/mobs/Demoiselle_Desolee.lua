@@ -2,6 +2,7 @@
 -- Area: Fort Karugo-Narugo [S]
 --   NM: Demoiselle Desolee
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

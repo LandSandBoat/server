@@ -2,6 +2,7 @@
 -- Area: Mhaura
 --  NPC: Explorer Moogle
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local eventId = 334

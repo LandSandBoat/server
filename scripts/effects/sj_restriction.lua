@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SJ_RESTRICTION
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

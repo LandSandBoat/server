@@ -2,6 +2,7 @@
 --  ID: 15698
 --  Sneaking Boots
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

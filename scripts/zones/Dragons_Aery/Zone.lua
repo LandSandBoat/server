@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Dragons_Aery (154)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

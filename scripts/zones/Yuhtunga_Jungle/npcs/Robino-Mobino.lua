@@ -4,6 +4,7 @@
 -- Type: Outpost Vendor
 -- !pos -244 0 -401 123
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local vendorRegion  = xi.region.ELSHIMOLOWLANDS

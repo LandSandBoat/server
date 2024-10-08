@@ -7,6 +7,7 @@
 --  Range: Melee
 --  Notes: Only used by "destroyers" (carrying massive warhammers).
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -3,6 +3,7 @@
 --  Mob: Chahnameed's Stomach
 -- BCNM: An Awful Autopsy
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobFight = function(mob, target)

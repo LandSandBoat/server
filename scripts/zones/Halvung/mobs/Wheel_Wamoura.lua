@@ -3,6 +3,7 @@
 --  Mob: Wheel Wamoura
 -- TODO: Damage resistances in streched and curled stances. Halting movement during stance change.
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

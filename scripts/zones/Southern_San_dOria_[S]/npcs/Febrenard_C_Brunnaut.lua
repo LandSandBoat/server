@@ -4,6 +4,7 @@
 -- !pos 30 1.33 8.8 80
 -- Appears in Campaign Battle as commander of the Temple Knights
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

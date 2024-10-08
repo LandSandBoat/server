@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Ra'Kaznar Inner Court (276)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

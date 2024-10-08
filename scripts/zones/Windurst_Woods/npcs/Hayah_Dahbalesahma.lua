@@ -3,6 +3,7 @@
 --  NPC: Hayah Dahbalesahma
 -- !pos -50.363 -1.292 -147.883 241
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -1,20 +1,20 @@
 ﻿/*
 ===========================================================================
 
-Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2010-2015 Darkstar Dev Teams
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
@@ -168,6 +168,25 @@ void CLatentEffectContainer::CheckLatentsTP()
 
 /************************************************************************
 *                                                                       *
+* Checks all latents that are occur during WS and activates them        *
+*                                                                       *
+ ************************************************************************/
+void CLatentEffectContainer::CheckLatentsWS(bool isDuringWs)
+{
+    ProcessLatentEffects([this, isDuringWs](CLatentEffect& latentEffect) {
+        switch (latentEffect.GetConditionsID())
+        {
+            case LATENT::DURING_WS:
+                return ProcessLatentEffect(latentEffect, isDuringWs);
+            default:
+                break;
+        }
+        return false;
+    });
+}
+
+/************************************************************************
+*                                                                       *
  * Checks all latents that are affected by MP and activates them if     *
  * the conditions are met.                                              *
 *                                                                       *
@@ -285,6 +304,7 @@ void CLatentEffectContainer::CheckLatentsStatusEffect()
         switch (latentEffect.GetConditionsID())
         {
             case LATENT::STATUS_EFFECT_ACTIVE:
+            case LATENT::WEATHER_CONDITION:
             case LATENT::WEATHER_ELEMENT:
             case LATENT::NATION_CONTROL:
                 return ProcessLatentEffect(latentEffect);
@@ -454,15 +474,15 @@ void CLatentEffectContainer::CheckLatentsPartyMembers(size_t members, size_t tru
                     auto inZone = 0;
                     for (size_t m = 0; m < members; ++m)
                     {
-                        auto* PMember = (CCharEntity*)m_POwner->PParty->members.at(m);
-                        if (PMember->getZone() == m_POwner->getZone())
+                        auto* PMember = dynamic_cast<CCharEntity*>(m_POwner->PParty->members.at(m));
+                        if (PMember != nullptr && PMember->getZone() == m_POwner->getZone())
                         {
                             inZone++;
                         }
                     }
 
-                    auto* PLeader = (CCharEntity*)m_POwner->PParty->GetLeader();
-                    if (m_POwner->getZone() == PLeader->getZone())
+                    auto* PLeader = dynamic_cast<CCharEntity*>(m_POwner->PParty->GetLeader());
+                    if (PLeader != nullptr && m_POwner->getZone() == PLeader->getZone())
                     {
                         inZone = inZone + static_cast<int>(trustCount);
                     }
@@ -602,6 +622,8 @@ void CLatentEffectContainer::CheckLatentsZone()
             case LATENT::ZONE:
             case LATENT::IN_ASSAULT:
             case LATENT::IN_DYNAMIS:
+            case LATENT::IN_ADOULIN:
+            case LATENT::WEATHER_CONDITION:
             case LATENT::WEATHER_ELEMENT:
             case LATENT::NATION_CONTROL:
             case LATENT::NATION_CITIZEN:
@@ -640,6 +662,11 @@ void CLatentEffectContainer::CheckLatentsWeather(uint16 weather)
         if (latent.GetConditionsID() == LATENT::WEATHER_ELEMENT)
         {
             auto element = zoneutils::GetWeatherElement(battleutils::GetWeather((CBattleEntity*)m_POwner, false, weather));
+            return ApplyLatentEffect(latent, latent.GetConditionsValue() == element);
+        }
+        else if (latent.GetConditionsID() == LATENT::WEATHER_CONDITION)
+        {
+            auto element = battleutils::GetWeather((CBattleEntity*)m_POwner, false, weather);
             return ApplyLatentEffect(latent, latent.GetConditionsValue() == element);
         }
         return false;
@@ -686,7 +713,7 @@ void CLatentEffectContainer::ProcessLatentEffects(const std::function<bool(CLate
 
 // Processes a single CLatentEffect* and finds the expression to evaluate for
 // activation/deactivation and attempts to apply
-bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
+bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bool isDuringWs)
 {
     TracyZoneScoped;
     // Our default case un-finds our latent prevent us from toggling a latent we don't have programmed
@@ -788,9 +815,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         {
             size_t partyCount = 0;
             size_t trustCount = 0;
-            if (m_POwner->PParty != nullptr)
+            auto* PLeader = m_POwner->PParty != nullptr ? dynamic_cast<CCharEntity*>(m_POwner->PParty->GetLeader()) : nullptr;
+            if (PLeader)
             {
-                auto PLeader = (CCharEntity*)m_POwner->PParty->GetLeader();
                 trustCount = PLeader->PTrusts.size();
                 partyCount = m_POwner->PParty->members.size();
             }
@@ -801,7 +828,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         case LATENT::PARTY_MEMBERS_IN_ZONE:
         {
             auto inZone = 0;
-            if (m_POwner->PParty != nullptr)
+            if (m_POwner->PParty && dynamic_cast<CCharEntity*>(m_POwner->PParty->GetLeader()))
             {
                 for (auto* member : m_POwner->PParty->members)
                 {
@@ -810,7 +837,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                         ++inZone;
                     }
                 }
-                
+
                 auto PLeader = (CCharEntity*)m_POwner->PParty->GetLeader();
                 if (m_POwner->getZone() == PLeader->getZone())
                 {
@@ -867,7 +894,15 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                     }
                 }
 
-                for (auto* trust : static_cast<CCharEntity*>(m_POwner->PParty->GetLeader())->PTrusts)
+                auto leader = (CCharEntity*)m_POwner->PParty->GetLeader();
+
+                if (leader == nullptr)
+                {
+                    expression = false;
+                    break;
+                }
+
+                for (auto* trust : leader->PTrusts)
                 {
                     if (trust->GetMJob() == latentEffect.GetConditionsValue())
                     {
@@ -1111,6 +1146,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         case LATENT::IN_ASSAULT:
             expression = m_POwner->isInAssault();
             break;
+        case LATENT::IN_ADOULIN:
+            expression = m_POwner->isInAdoulin();
+            break;
         case LATENT::FOOD_ACTIVE:
             expression = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_FOOD) &&
                          m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_FOOD)->GetSubID() == latentEffect.GetConditionsValue();
@@ -1120,6 +1158,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             break;
         case LATENT::JOB_LEVEL_ABOVE:
             expression = m_POwner->GetMLevel() >= latentEffect.GetConditionsValue();
+            break;
+        case LATENT::WEATHER_CONDITION:
+            expression = latentEffect.GetConditionsValue() == battleutils::GetWeather((CBattleEntity*)m_POwner, false);
             break;
         case LATENT::WEATHER_ELEMENT:
             expression = latentEffect.GetConditionsValue() == zoneutils::GetWeatherElement(battleutils::GetWeather((CBattleEntity*)m_POwner, false));
@@ -1214,6 +1255,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             break;
         case LATENT::EQUIPPED_IN_SLOT:
             expression = latentEffect.GetSlot() == latentEffect.GetConditionsValue();
+            break;
+        case LATENT::DURING_WS:
+            expression = isDuringWs;
             break;
         default:
             latentFound = false;

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: La_Vaule_[S] (85)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

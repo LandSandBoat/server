@@ -22,17 +22,14 @@ mission.sections =
 
         [xi.zone.ARRAPAGO_REEF] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        prevZone == xi.zone.CAEDARVA_MIRE and
-                        player:getMissionStatus(mission.areaId) == 0
-                    then
-                        return 13
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    prevZone == xi.zone.CAEDARVA_MIRE and
+                    player:getMissionStatus(mission.areaId) == 0
+                then
+                    return 13
+                end
+            end,
 
             onTriggerAreaEnter =
             {

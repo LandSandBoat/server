@@ -5,6 +5,7 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -22,7 +23,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = 1
+    local power = 100
     local duration = 60
 
     skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BOOST, power, 0, duration))

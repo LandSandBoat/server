@@ -3,6 +3,7 @@
 --  NPC: Aja-Panja
 -- !pos -7.251 -6.55 -134.127 241
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

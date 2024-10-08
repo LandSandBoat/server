@@ -5,6 +5,7 @@
 -- Obtained: Dragoon Level 50
 -- Duration: Instant
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -6,6 +6,7 @@
 --  Wipes Shadows
 --  Range: Melee range radial
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -20,7 +21,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    mob:resetEnmity(target)
+
+    if not target:isTrust() then
+        mob:resetEnmity(target)
+    end
+
     return dmg
 end
 

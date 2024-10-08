@@ -4,6 +4,7 @@
 -- Obtained: BLM Level 87
 -- Recast Time: 0:10:00
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

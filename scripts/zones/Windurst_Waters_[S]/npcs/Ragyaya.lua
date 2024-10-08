@@ -3,6 +3,7 @@
 --  NPC: Ragyaya
 -- !pos -95.376 -3 60.795 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

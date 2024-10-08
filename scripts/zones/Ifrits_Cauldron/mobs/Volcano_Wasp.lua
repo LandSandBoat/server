@@ -2,6 +2,7 @@
 -- Area: Ifrit's Cauldron
 --  Mob: Volcano Wasp
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

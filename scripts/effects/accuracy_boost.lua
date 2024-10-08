@@ -4,6 +4,7 @@
 -- getPower     = ACC
 -- getSubPower  = RACC
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

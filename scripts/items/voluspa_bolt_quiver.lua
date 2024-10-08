@@ -3,6 +3,7 @@
 -- Voluspa Volt Quiver
 -- When used, you will obtain one stack of Voluspa Bolts
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

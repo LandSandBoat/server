@@ -6,6 +6,7 @@
 -- Vitality 3
 -- Defense % 27 (cap 65)
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

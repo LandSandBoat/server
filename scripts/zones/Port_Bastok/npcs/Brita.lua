@@ -3,6 +3,7 @@
 --  NPC: Brita
 -- !pos 58.161 -3.101 -6.695 236
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

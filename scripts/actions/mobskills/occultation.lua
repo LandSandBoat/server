@@ -4,6 +4,7 @@
 -- Description: Creates 25 shadows
 -- Type: Magical (Wind)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

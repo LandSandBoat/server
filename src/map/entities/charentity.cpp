@@ -71,8 +71,12 @@
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
+#include "linkshell.h"
+#include "message.h"
+#include "mob_modifier.h"
 #include "mobskill.h"
 #include "modifier.h"
+#include "notoriety_container.h"
 #include "packets/char_job_extra.h"
 #include "packets/status_effects.h"
 #include "petskill.h"
@@ -81,6 +85,7 @@
 #include "trade_container.h"
 #include "treasure_pool.h"
 #include "trustentity.h"
+#include "unitychat.h"
 #include "universal_container.h"
 #include "utils/attackutils.h"
 #include "utils/battleutils.h"
@@ -219,6 +224,9 @@ CCharEntity::CCharEntity()
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
 
+    requestedWarp       = false;
+    requestedZoneChange = false;
+
     retriggerLatents = false;
 
     resetPetZoningInfo();
@@ -272,6 +280,90 @@ CCharEntity::~CCharEntity()
         // remove myself
         PTreasurePool->DelMember(this);
     }
+
+    ClearTrusts(); // trusts don't survive zone lines
+
+    if (PLinkshell1 != nullptr)
+    {
+        PLinkshell1->DelMember(this);
+    }
+
+    if (PLinkshell2 != nullptr)
+    {
+        PLinkshell2->DelMember(this);
+    }
+
+    if (PUnityChat != nullptr)
+    {
+        PUnityChat->DelMember(this);
+    }
+
+    if (isDead())
+    {
+        charutils::SaveDeathTime(this);
+    }
+
+    if (m_LevelRestriction != 0)
+    {
+        if (PParty)
+        {
+            if (PParty->GetSyncTarget() == this || PParty->GetLeader() == this)
+            {
+                PParty->SetSyncTarget("", 551);
+            }
+            if (PParty->GetSyncTarget() != nullptr)
+            {
+                uint8 count = 0;
+                for (uint32 i = 0; i < PParty->members.size(); ++i)
+                {
+                    if (PParty->members.at(i) != this && PParty->members.at(i)->getZone() == PParty->GetSyncTarget()->getZone())
+                    {
+                        count++;
+                    }
+                }
+                if (count < 2) // 3, because one is zoning out - thus at least 2 will be left
+                {
+                    PParty->SetSyncTarget("", 552);
+                }
+            }
+        }
+        StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
+        StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_RESTRICTION);
+    }
+
+    if (PParty && loc.destination != 0 && m_moghouseID == 0)
+    {
+        uint8 data[4]{};
+
+        if (PParty->m_PAlliance)
+        {
+            ref<uint32>(data, 0) = PParty->m_PAlliance->m_AllianceID;
+            message::send(MSG_ALLIANCE_RELOAD, data, sizeof data, nullptr);
+        }
+        else
+        {
+            ref<uint32>(data, 0) = PParty->GetPartyID();
+            message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+        }
+    }
+
+    SpawnPCList.clear();
+    SpawnNPCList.clear();
+    SpawnMOBList.clear();
+    SpawnPETList.clear();
+    SpawnTRUSTList.clear();
+
+    if (PParty)
+    {
+        PParty->PopMember(this);
+    }
+
+    if (PAutomaton)
+    {
+        PAutomaton->PMaster = nullptr;
+    }
+
+    charutils::WriteHistory(this);
 
     destroy(TradeContainer);
     destroy(Container);
@@ -972,7 +1064,9 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     bool targetsParty     = targetFlags & TARGET_PLAYER_PARTY;
     bool targetsAlliance  = targetFlags & TARGET_PLAYER_ALLIANCE;
     bool hasPianissimo    = (targetFlags & TARGET_PLAYER_PARTY_PIANISSIMO) && PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO);
+    bool hasEntrust       = (targetFlags & TARGET_PLAYER_PARTY_ENTRUST) && PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST);
     bool isDifferentChar  = PInitiator != this;
+    bool isTrust          = PInitiator->objtype == TYPE_TRUST;
 
     // Alliance member valid target.
     if (targetsAlliance &&
@@ -990,22 +1084,9 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return true;
     }
 
-    if (targetFlags & TARGET_PLAYER_PARTY_ENTRUST)
+    if (hasEntrust && (isSameParty || isTrust))
     {
-        if (PInitiator->objtype == TYPE_TRUST)
-        {
-            return true;
-        }
-
-        // Can cast on self and others in party but potency gets no bonuses from equipment mods if entrust is active
-        if (!PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) && PInitiator == this)
-        {
-            return true;
-        }
-        else if (PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) && ((PParty && PInitiator->PParty == PParty) || PInitiator == this))
-        {
-            return true;
-        }
+        return true;
     }
 
     return false;
@@ -1144,70 +1225,69 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
                 StatusEffectContainer->DelStatusEffectSilent(EFFECT_CHAIN_AFFINITY);
             }
 
-            if (actionTarget.param > 0 &&
+            // Immanence will create or extend a skillchain for elemental spells
+            if (actionTarget.param >= 0 &&
                 PSpell->dealsDamage() &&
                 PSpell->getSpellGroup() == SPELLGROUP_BLACK &&
                 (StatusEffectContainer->HasStatusEffect(EFFECT_IMMANENCE)))
             {
-                SUBEFFECT effect = SUBEFFECT_NONE;
+                auto      immanenceApplies = true;
+                auto      isHelix          = false;
+                SUBEFFECT effect           = SUBEFFECT_NONE;
                 switch (PSpell->getSpellFamily())
                 {
-                    case SPELLFAMILY_STONE:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 4, 0, 0);
-                        break;
                     case SPELLFAMILY_GEOHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 4, 0, 0);
-                        break;
-                    case SPELLFAMILY_WATER:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 5, 0, 0);
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_STONE:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_SCISSION, 0, 0);
                         break;
                     case SPELLFAMILY_HYDROHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 5, 0, 0);
-                        break;
-                    case SPELLFAMILY_AERO:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 6, 0, 0);
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_WATER:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_REVERBERATION, 0, 0);
                         break;
                     case SPELLFAMILY_ANEMOHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 6, 0, 0);
-                        break;
-                    case SPELLFAMILY_FIRE:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 3, 0, 0);
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_AERO:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_DETONATION, 0, 0);
                         break;
                     case SPELLFAMILY_PYROHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 3, 0, 0);
-                        break;
-                    case SPELLFAMILY_BLIZZARD:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 7, 0, 0);
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_FIRE:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_LIQUEFACTION, 0, 0);
                         break;
                     case SPELLFAMILY_CRYOHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 7, 0, 0);
-                        break;
-                    case SPELLFAMILY_THUNDER:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 8, 0, 0);
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_BLIZZARD:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_INDURATION, 0, 0);
                         break;
                     case SPELLFAMILY_IONOHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 8, 0, 0);
-                        break;
-                    case SPELLFAMILY_LUMINOHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 1, 0, 0);
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_THUNDER:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_IMPACTION, 0, 0);
                         break;
                     case SPELLFAMILY_NOCTOHELIX:
-                        effect = battleutils::GetSkillChainEffect(PTarget, 2, 0, 0);
+                        isHelix = true;
+                        effect  = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_COMPRESSION, 0, 0);
+                        break;
+                    case SPELLFAMILY_LUMINOHELIX:
+                        isHelix = true;
+                        effect  = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_TRANSFIXION, 0, 0);
                         break;
                     default:
+                        immanenceApplies = false;
                         break;
                 }
 
-                if (PSpell->getSpellFamily() >= SPELLFAMILY_FIRE &&
-                    PSpell->getSpellFamily() <= SPELLFAMILY_WATER)
+                if (immanenceApplies)
                 {
-                    StatusEffectContainer->DelStatusEffectSilent(EFFECT_IMMANENCE);
-                }
-
-                if (PSpell->getSpellFamily() >= SPELLFAMILY_GEOHELIX &&
-                    PSpell->getSpellFamily() <= SPELLFAMILY_LUMINOHELIX)
-                {
-                    StatusEffectContainer->DelStatusEffectSilent(EFFECT_IMMANENCE);
+                    StatusEffectContainer->DelStatusEffect(EFFECT_IMMANENCE);
                 }
 
                 if (effect != SUBEFFECT_NONE)
@@ -1225,6 +1305,13 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
                         actionTarget.addEffectMessage = 287 + effect;
                     }
                     actionTarget.additionalEffect = effect;
+
+                    // Closing a skillchain with an immanence Helix will make the magic burst window longer
+                    auto scEffect = PTarget->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
+                    if (isHelix && scEffect)
+                    {
+                        scEffect->SetDuration(scEffect->GetDuration() + 2000);
+                    }
                 }
             }
         }
@@ -1286,6 +1373,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
     tp       = battleutils::CalculateWeaponSkillTP(this, PWeaponSkill, tp);
 
     PLatentEffectContainer->CheckLatentsTP();
+    PLatentEffectContainer->CheckLatentsWS(true);
 
     SLOTTYPE damslot    = SLOT_MAIN;
     bool     isRangedWS = (PWeaponSkill->getID() >= 192 && PWeaponSkill->getID() <= 218);
@@ -1455,6 +1543,8 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
             actionTarget.speceffect = SPECEFFECT::BLOOD;
         }
     }
+
+    PLatentEffectContainer->CheckLatentsWS(false);
 }
 
 void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
@@ -1789,6 +1879,18 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
 
             state.ApplyEnmity();
+
+            // Some mobs respond to abilities (ex. Absolute Virtue / Ob)
+            for (CBattleEntity* PBattleEntity : *PNotorietyContainer)
+            {
+                if (CMobEntity* PMob = dynamic_cast<CMobEntity*>(PBattleEntity))
+                {
+                    if (PMob->getMobMod(MOBMOD_ABILITY_RESPONSE) && PMob->getZone() == this->getZone())
+                    {
+                        luautils::OnPlayerAbilityUse(PMob, this, PAbility);
+                    }
+                }
+            }
         }
 
         if (charge)
@@ -2007,7 +2109,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         if (slot == SLOT_RANGED)
         {
             auto attackType = (state.IsRapidShot()) ? PHYSICAL_ATTACK_TYPE::RAPID_SHOT : PHYSICAL_ATTACK_TYPE::RANGED;
-            totalDamage     = attackutils::CheckForDamageMultiplier(this, PItem, totalDamage, attackType, true);
+            totalDamage     = attackutils::CheckForDamageMultiplier(this, PItem, totalDamage, attackType, slot, true);
         }
         actionTarget.param =
             battleutils::TakePhysicalDamage(this, PTarget, PHYSICAL_ATTACK_TYPE::RANGED, totalDamage, false, slot, realHits, nullptr, true, true);
@@ -2063,8 +2165,93 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     }
     battleutils::ClaimMob(PTarget, this);
     battleutils::RemoveAmmo(this, ammoConsumed);
-    // only remove detectables
-    StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+
+    // Handle Camouflage effects
+    if (this->StatusEffectContainer->HasStatusEffect(EFFECT_CAMOUFLAGE, 0))
+    {
+        int16 retainChance     = 40; // Estimate base ~40% chance to keep Camouflage on a ranged attack
+        uint8 rotAllowance     = 25; // Allow for some slight variance in direction faced to be "behind" or "beside" the mob
+        float distanceToTarget = distance(this->loc.p, PTarget->loc.p);
+        float meleeRange       = PTarget->GetMeleeRange();
+
+        if (isBarrage)
+        {
+            // Camouflage is never retained if Barrage is fired
+            retainChance = 0;
+        }
+        else if (behind(this->loc.p, PTarget->loc.p, rotAllowance))
+        {
+            // Max melee distance + .6 = safe
+            // Max melee distance + (.1~.5) = chance of deactivation
+            // Under max melee distance = certain deactivation
+            if (distanceToTarget > meleeRange + .6)
+            {
+                retainChance = 100;
+            }
+            else if (distanceToTarget > meleeRange + .1)
+            {
+                retainChance += 1.6 * distanceToTarget;
+            }
+            else
+            {
+                retainChance = 0;
+            }
+        }
+        else if (beside(this->loc.p, PTarget->loc.p, rotAllowance))
+        {
+            // Max melee distance + 5 yalms = safe
+            // (Max melee distance + 3.3) + (0.0~1.6) = chance of deactivation
+            // Under Max melee distance + 3.3 = certain deactivation
+            if (distanceToTarget > meleeRange + 5)
+            {
+                retainChance = 100;
+            }
+            else if (distanceToTarget > meleeRange + 3.3)
+            {
+                retainChance += 1.6 * distanceToTarget;
+            }
+            else
+            {
+                retainChance = 0;
+            }
+        }
+        else
+        {
+            // Max melee distance + 8.1 yalms = safe
+            // (Max melee distance + 7.1) + (0.0~.99) = chance of deactivation
+            // Under Max melee distance + 7.1 = certain deactivation
+            if (distanceToTarget > meleeRange + 8.1)
+            {
+                retainChance = 100;
+            }
+            else if (distanceToTarget > meleeRange + 7.1)
+            {
+                retainChance += 1.6 * distanceToTarget;
+            }
+            else
+            {
+                retainChance = 0;
+            }
+        }
+
+        if (xirand::GetRandomNumber(100) > retainChance)
+        {
+            // Camouflage was up, but is lost, so now all detectable effects must be dropped
+            StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+        }
+        else
+        {
+            // Camouflage up, and retained, but all other effects must be dropped
+            StatusEffectContainer->DelStatusEffect(EFFECT_SNEAK);
+            StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
+            StatusEffectContainer->DelStatusEffect(EFFECT_DEODORIZE);
+        }
+    }
+    else
+    {
+        // Camouflage not up, so remove all detectable status effects
+        StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+    }
 }
 
 bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
@@ -2110,7 +2297,7 @@ void CCharEntity::OnDeathTimer()
 {
     TracyZoneScoped;
     charutils::SetCharVar(this, "expLost", 0);
-    charutils::HomePoint(this);
+    charutils::HomePoint(this, true);
 }
 
 void CCharEntity::OnRaise()

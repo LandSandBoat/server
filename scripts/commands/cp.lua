@@ -2,6 +2,7 @@
 -- func: cp
 -- desc: Adds the given amount cp to the player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

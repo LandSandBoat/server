@@ -14,6 +14,7 @@
 -- Resist Sleep +3
 -- Resist Stun +4
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

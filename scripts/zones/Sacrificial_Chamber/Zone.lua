@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Sacrificial_Chamber (163)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

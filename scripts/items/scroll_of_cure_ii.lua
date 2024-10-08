@@ -3,6 +3,7 @@
 -- Scroll of Cure II
 -- Teaches the white magic Cure II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

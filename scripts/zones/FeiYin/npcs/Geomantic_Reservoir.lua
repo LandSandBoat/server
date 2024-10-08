@@ -4,6 +4,7 @@
 -- Unlocks: Geo-Paralysis
 -- !pos 4.239 -0.009 255.206 204
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

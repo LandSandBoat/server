@@ -2,6 +2,7 @@
 -- Area: Eastern Altepa Desert
 --  Mob: Desert Dhalmel
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

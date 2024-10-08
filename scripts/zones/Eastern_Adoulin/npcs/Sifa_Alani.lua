@@ -6,6 +6,7 @@
 -----------------------------------
 local eastAdoulinID = zones[xi.zone.EASTERN_ADOULIN]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 -- NOTE: This table is 1-Indexed and needs to be subtracted by

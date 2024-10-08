@@ -3,6 +3,7 @@
 -- Air Spirit Pact
 -- Teaches the summoning magic Air Spirit
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

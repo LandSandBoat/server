@@ -12,6 +12,7 @@
 -- Skillchain property: Transfixion
 -- Combos: Plantoid Killer
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

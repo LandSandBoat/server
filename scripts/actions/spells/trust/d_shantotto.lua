@@ -1,6 +1,7 @@
 -----------------------------------
 -- Trust: D Shantotto
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

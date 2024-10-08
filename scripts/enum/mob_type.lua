@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.mobType
 xi.mobType =
 {
     NORMAL      = 0x00,

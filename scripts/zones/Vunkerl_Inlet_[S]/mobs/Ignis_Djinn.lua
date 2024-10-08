@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.VUNKERL_INLET_S]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

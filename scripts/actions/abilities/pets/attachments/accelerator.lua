@@ -1,6 +1,7 @@
 -----------------------------------
 -- Attachment: Accelerator
 -----------------------------------
+---@type TAttachment
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet, attachment)

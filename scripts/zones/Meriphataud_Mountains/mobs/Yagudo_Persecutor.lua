@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local naaZekuPHTable =

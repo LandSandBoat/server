@@ -2,6 +2,7 @@
 -- Area: Aht Urhgan Whitegate
 --  NPC: Sashosho
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -5,6 +5,9 @@
 -----------------------------------
 local waughroonID = zones[xi.zone.WAUGHROON_SHRINE]
 -----------------------------------
+---@type TMobEntity
+local entity = {}
+
 local elementalSpells =
 {
     { xi.magic.spell.BURN,  xi.magic.spell.FIRE },
@@ -16,12 +19,14 @@ local elementalSpells =
     { xi.magic.spell.DIA,   xi.magic.spell.BANISH },
     { xi.magic.spell.BIO,   xi.magic.spell.DRAIN },
 }
+
 local centers =
 {
     { -177.5, 60, -142 },
     {   22.5,  0,  18 },
     {  222.5, -60, 138 },
 }
+
 local mevaList =
 {
     { xi.mod.WATER_MEVA,   xi.mod.FIRE_ABSORB },
@@ -33,8 +38,6 @@ local mevaList =
     { xi.mod.DARK_MEVA,    xi.mod.LIGHT_ABSORB },
     { xi.mod.LIGHT_MEVA,   xi.mod.DARK_ABSORB },
 }
-
-local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 40)
@@ -71,7 +74,7 @@ local function allJellysInCenter(bfNum, zone)
             totalInCenter = totalInCenter + 1
         end
 
-        if princess:isAlive() then
+        if princess and princess:isAlive() then
             totalMobsAlive = totalMobsAlive + 1
         end
     end
@@ -89,7 +92,7 @@ local function princessesTotalHP(bfNum, zone)
 
     for i = 1, 8 do
         local princess = GetMobByID(getQueenJellyID(bfNum) + i)
-        if princess:isAlive() then
+        if princess and princess:isAlive() then
             totalHP = totalHP + princess:getHP()
         end
     end
@@ -100,7 +103,7 @@ end
 local function spawnQueenJelly(bfNum, target, zone)
     local queen = GetMobByID(getQueenJellyID(bfNum))
 
-    if not queen:isSpawned() then
+    if queen and not queen:isSpawned() then
         SpawnMob(queen:getID())
         queen:setHP(princessesTotalHP(bfNum, zone))
         queen:setPos(centers[bfNum][1], centers[bfNum][2], centers[bfNum][3], 0)
@@ -119,7 +122,7 @@ local function spawnQueenJelly(bfNum, target, zone)
     end
 end
 
-entity.onMobMagicPrepare = function(mob)
+entity.onMobMagicPrepare = function(mob, target, spellId)
     local element = mob:getLocalVar('mobElement')
     local spell = math.random()
 
@@ -140,7 +143,11 @@ entity.onMobFight = function(mob, target)
     mob:pathThrough(center, xi.path.flag.SCRIPT)
 
     if getDistanceFromCenter(bfNum, mob) <= 0.5 then
-        if not queen:isSpawned() and allJellysInCenter(bfNum, mob:getZone()) then
+        if
+            queen and
+            not queen:isSpawned() and
+            allJellysInCenter(bfNum, mob:getZone())
+        then
             spawnQueenJelly(bfNum, target, mob:getZone())
         end
     end
@@ -160,7 +167,11 @@ entity.onMobDeath = function(mob, player, optParams)
     local bfNum = mob:getBattlefield():getArea()
     local queen = GetMobByID(getQueenJellyID(bfNum))
 
-    if not queen:isSpawned() and allJellysInCenter(bfNum, mob:getZone()) then
+    if
+        queen and
+        not queen:isSpawned() and
+        allJellysInCenter(bfNum, mob:getZone())
+    then
         spawnQueenJelly(bfNum, player, mob:getZone())
     end
 end

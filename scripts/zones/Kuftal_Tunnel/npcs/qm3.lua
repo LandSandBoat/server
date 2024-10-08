@@ -4,6 +4,7 @@
 -- Quests: The Potential Within (Tachi: Kasha WSNM "Kettenkaefer")
 -- !pos 200 11 99 174
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

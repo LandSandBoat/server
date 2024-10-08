@@ -43,28 +43,29 @@ enum class PHYSICAL_ATTACK_TYPE;
 
 enum ENSPELL
 {
-    ENSPELL_NONE         = 0,
-    ENSPELL_I_FIRE       = 1,
-    ENSPELL_I_ICE        = 2,
-    ENSPELL_I_WIND       = 3,
-    ENSPELL_I_EARTH      = 4,
-    ENSPELL_I_THUNDER    = 5,
-    ENSPELL_I_WATER      = 6,
-    ENSPELL_I_LIGHT      = 7,
-    ENSPELL_I_DARK       = 8,
-    ENSPELL_II_FIRE      = 9,
-    ENSPELL_II_ICE       = 10,
-    ENSPELL_II_WIND      = 11,
-    ENSPELL_II_EARTH     = 12,
-    ENSPELL_II_THUNDER   = 13,
-    ENSPELL_II_WATER     = 14,
-    ENSPELL_II_LIGHT     = 15,
-    ENSPELL_II_DARK      = 16,
-    ENSPELL_BLOOD_WEAPON = 17,
-    ENSPELL_AUSPICE      = 18,
-    ENSPELL_DRAIN_SAMBA  = 19,
-    ENSPELL_ASPIR_SAMBA  = 20,
-    ENSPELL_HASTE_SAMBA  = 21
+    ENSPELL_NONE             = 0,
+    ENSPELL_I_FIRE           = 1,
+    ENSPELL_I_ICE            = 2,
+    ENSPELL_I_WIND           = 3,
+    ENSPELL_I_EARTH          = 4,
+    ENSPELL_I_THUNDER        = 5,
+    ENSPELL_I_WATER          = 6,
+    ENSPELL_I_LIGHT          = 7,
+    ENSPELL_I_DARK           = 8,
+    ENSPELL_II_FIRE          = 9,
+    ENSPELL_II_ICE           = 10,
+    ENSPELL_II_WIND          = 11,
+    ENSPELL_II_EARTH         = 12,
+    ENSPELL_II_THUNDER       = 13,
+    ENSPELL_II_WATER         = 14,
+    ENSPELL_II_LIGHT         = 15,
+    ENSPELL_II_DARK          = 16,
+    ENSPELL_BLOOD_WEAPON     = 17,
+    ENSPELL_AUSPICE          = 18,
+    ENSPELL_DRAIN_SAMBA      = 19,
+    ENSPELL_ASPIR_SAMBA      = 20,
+    ENSPELL_HASTE_SAMBA      = 21,
+    ENSPELL_SOUL_ENSLAVEMENT = 22
 };
 
 enum SPIKES
@@ -157,7 +158,7 @@ namespace battleutils
     int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYSICAL_ATTACK_TYPE physicalAttackType, int32 damage, bool isBlocked,
                              uint8 slot, uint16 tpMultiplier, CBattleEntity* taChar, bool giveTPtoVictim, bool giveTPtoAttacker, bool isCounter = false,
                              bool isCovered = false, CBattleEntity* POriginalTarget = nullptr);
-    int32 TakeWeaponskillDamage(CCharEntity* PAttacker, CBattleEntity* PDefender, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType, uint8 slot,
+    int32 TakeWeaponskillDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType, uint8 slot,
                                 bool primary, float tpMultiplier, uint16 bonusTP, float targetTPMultiplier);
     int32 TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 lastSkillDamage, CBattleEntity* taChar);
     int32 TakeSpellDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType);
@@ -193,15 +194,12 @@ namespace battleutils
 
     bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool);
 
-    float GetCharmChance(CBattleEntity* PCharmer, CBattleEntity* PTarget, bool includeCharmAffinityAndChanceMods = true);
-    bool  TryCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim);
-    void  tryToCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim);
-    void  applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, duration charmTime = 0s);
-    void  unCharm(CBattleEntity* PEntity);
+    void applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, duration charmTime = 0s);
+    void unCharm(CBattleEntity* PEntity);
 
     uint16 doSoulEaterEffect(CCharEntity* m_PChar, uint32 damage);
     uint16 doConsumeManaEffect(CCharEntity* m_PChar);
-    int32  getOverWhelmDamageBonus(CCharEntity* m_PChar, CBattleEntity* PDefender, int32 damage);
+    int32  getOverWhelmDamageBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage);
 
     void  TransferEnmity(CBattleEntity* PHateReceiver, CBattleEntity* PHateGiver, CMobEntity* PMob, uint8 percentToTransfer);
     uint8 getBarrageShotCount(CCharEntity* PChar);
@@ -216,6 +214,7 @@ namespace battleutils
     int32 PhysicalDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered = false);
     int32 RangedDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered = false);
     int32 HandleSteamJacket(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType);
+    int32 CheckAndApplyDamageCap(int32 damage, CBattleEntity* PDefender);
 
     void  HandleIssekiganEnmityBonus(CBattleEntity* PDefender, CBattleEntity* PAttacker);
     int32 HandleSevereDamage(CBattleEntity* PDefender, int32 damage, bool isPhysical);
@@ -249,7 +248,7 @@ namespace battleutils
     bool    WeatherMatchesElement(WEATHER weather, uint8 element);
     bool    DrawIn(CBattleEntity* PEntity, CMobEntity* PMob, float offset);
     void    DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, uint8 roll);
-    bool    DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget);
+    bool    DoRandomDealToEntity(CCharEntity* PChar, CBattleEntity* PTarget);
 
     void turnTowardsTarget(CBaseEntity* PEntity, CBaseEntity* PTarget, bool force = false);
 

@@ -3,6 +3,7 @@
 -- Scroll of Katon: San
 -- Teaches the ninjutsu Katon: San
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

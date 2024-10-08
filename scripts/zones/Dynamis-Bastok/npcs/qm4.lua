@@ -3,6 +3,7 @@
 --  NPC: ??? (qm4)
 -- Note: Spawns Bu'Bho Truesteel
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

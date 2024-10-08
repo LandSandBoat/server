@@ -3,6 +3,7 @@
 -- Bhaflau Fireflies
 -- Transports the user to Mamool Ja Staging Point
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

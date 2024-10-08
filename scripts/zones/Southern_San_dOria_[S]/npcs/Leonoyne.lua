@@ -5,6 +5,7 @@
 -- Can be dispatched to Beaucedine Glacier (S) and Xarcabard (S)
 -- once San d'Oria regains most territory in their cordon.
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

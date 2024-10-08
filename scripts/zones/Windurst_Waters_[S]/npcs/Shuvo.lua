@@ -4,7 +4,7 @@
 -- Type: Alter Ego Extravaganza
 -- !gotoid 17163023
 -----------------------------------
-
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

@@ -2,6 +2,7 @@
 -- func: breaklinkshell
 -- desc: Breaks a linkshell and all pearls/sacks
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

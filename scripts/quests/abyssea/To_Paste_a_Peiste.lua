@@ -42,12 +42,9 @@ quest.sections =
 
         [xi.zone.KONSCHTAT_HIGHLANDS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 1
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 1
+            end,
 
             onEventUpdate =
             {

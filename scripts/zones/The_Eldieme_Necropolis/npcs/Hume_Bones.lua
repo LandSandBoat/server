@@ -4,6 +4,7 @@
 -- Involved in Quests: Blue Ribbon Blues
 -- !pos 299 0.1 19 195
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

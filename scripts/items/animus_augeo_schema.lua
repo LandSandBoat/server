@@ -3,6 +3,7 @@
 -- Item: Animus Augeo Schema
 -- Teaches the white magic Animus Augeo
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

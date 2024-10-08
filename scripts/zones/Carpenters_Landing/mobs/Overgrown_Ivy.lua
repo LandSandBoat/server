@@ -2,6 +2,7 @@
 -- Area: Carpenters_Landing
 --  Mob: Overgrown Ivy
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

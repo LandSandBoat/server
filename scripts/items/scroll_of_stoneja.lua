@@ -3,6 +3,7 @@
 -- Scroll of Stoneja
 -- Teaches the black magic Stoneja
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

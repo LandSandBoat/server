@@ -3,6 +3,7 @@
 --  NPC: Hari Pakhroib
 -- Starts and Finishes Quest: Greetings to the Guardian
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

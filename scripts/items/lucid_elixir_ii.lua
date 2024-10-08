@@ -3,6 +3,7 @@
 -- Item: Lucid Elixir II
 -- Item Effect: Restores 75% of HP and MP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

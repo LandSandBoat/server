@@ -2,6 +2,7 @@
 -- Area: Grauberg [S]
 --   NM: Kotan-kor Kamuy
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

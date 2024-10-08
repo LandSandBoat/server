@@ -3,6 +3,7 @@
 --  NPC: Solitary Ant
 -- Involved in Quests: Fire in the Hole
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

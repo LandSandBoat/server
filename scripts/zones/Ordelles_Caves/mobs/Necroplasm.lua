@@ -3,6 +3,7 @@
 --   NM: Necroplasm
 -- Involved in Eco Warrior (San d'Oria)
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

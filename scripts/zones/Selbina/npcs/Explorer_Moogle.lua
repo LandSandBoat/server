@@ -2,6 +2,7 @@
 -- Area: Selbina
 --  NPC: Explorer Moogle
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local eventId = 1135

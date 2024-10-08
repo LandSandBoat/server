@@ -4,6 +4,7 @@
 -- Spawns Pantokrator
 -- !pos -199 -175 155 253
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

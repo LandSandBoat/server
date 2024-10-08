@@ -4,6 +4,7 @@
 -- Starts Quest: Under the sea
 -- !pos -19 -2 -16 248
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

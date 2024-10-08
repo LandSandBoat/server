@@ -3,6 +3,7 @@
 -- Voidstorm Schema
 -- Teaches the white magic Voidstorm
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

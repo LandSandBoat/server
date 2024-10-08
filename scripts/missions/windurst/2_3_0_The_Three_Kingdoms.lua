@@ -217,7 +217,8 @@ mission.sections =
                     elseif missionStatus == 7 then
                         return mission:progressEvent(547)
                     elseif missionStatus == 11 then
-                        player:showText(northernSandoriaID.text.KASARORO_DIALOG + 20)
+                        player:showText(npc, northernSandoriaID.text.KASARORO_DIALOG + 20)
+                        return mission:noAction()
                     end
                 end,
             },

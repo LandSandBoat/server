@@ -2,6 +2,7 @@
 -- Area: Abyssea_Vunkeral
 --  NPC: Parcarin
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

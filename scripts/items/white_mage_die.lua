@@ -3,6 +3,7 @@
 -- White Mage Die
 -- Teaches the job ability Healer's Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

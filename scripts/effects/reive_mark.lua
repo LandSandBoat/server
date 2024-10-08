@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.REIVE_MARK
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

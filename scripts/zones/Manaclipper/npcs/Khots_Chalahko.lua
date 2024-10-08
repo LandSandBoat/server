@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.MANACLIPPER]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- Carousel
 -- Becomes a merry-go-round of pain that damages players in range.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

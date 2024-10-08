@@ -4,6 +4,7 @@
 -- Spawns Dhorme Khimaira
 -- !pos -281.411 -155.568 267.682 253
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

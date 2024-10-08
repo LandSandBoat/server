@@ -2,6 +2,7 @@
 -- Area: Lower Jeuno
 --  NPC: Honorine
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- func: addtempitem
 -- desc: Adds a temp item to the players inventory.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -36,7 +37,7 @@ commandObj.onTrigger = function(player, itemId, quantity)
     end
 
     -- add temp item
-    player:addTempItem(itemId, quantity, 0, 0, 0, 0, 0, 0, 0, 0)
+    player:addTempItem(itemId, quantity)
     if quantity and quantity > 1 then
         player:messageSpecial(ID.text.ITEM_OBTAINED + 9, itemId , quantity)
     else

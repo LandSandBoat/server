@@ -7,6 +7,7 @@
 -- Lizard Killer 10
 -- Petrify resistance +10
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

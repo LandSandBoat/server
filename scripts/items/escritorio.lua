@@ -3,6 +3,7 @@
 -- Escritorio
 -- Dispense: Cone Calamary
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

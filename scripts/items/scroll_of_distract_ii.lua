@@ -3,6 +3,7 @@
 -- Scroll of Distract
 -- Teaches the black magic Distract II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

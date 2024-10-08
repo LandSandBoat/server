@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.INNIN
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect) -- Power = 30 initially, subpower = 20 for enmity

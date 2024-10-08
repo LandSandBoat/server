@@ -5,6 +5,7 @@
 -- he and Yomi lost themselves in their studies of the martial arts
 -- Adventurers note that reading it increases one's parrying skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

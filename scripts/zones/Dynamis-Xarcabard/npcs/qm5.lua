@@ -3,6 +3,7 @@
 --  NPC: ??? (qm5)
 -- Note: Spawns Animated Knuckles
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

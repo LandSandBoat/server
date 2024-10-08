@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.COURSERS_ROLL
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

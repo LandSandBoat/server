@@ -12,6 +12,7 @@
 -- Skillchain Element(s): Distortion
 -- Combos: Accuracy Bonus
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

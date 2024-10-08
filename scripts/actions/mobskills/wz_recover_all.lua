@@ -4,6 +4,7 @@
 -- Description: Recovers all players in an area of effect.
 -- Utsusemi/Blink absorb: N/A
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

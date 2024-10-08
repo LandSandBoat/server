@@ -1,6 +1,7 @@
 xi = xi or {}
 xi.assault = xi.assault or {}
 
+---@enum xi.assaultArea
 xi.assault.assaultArea =
 {
     LEUJAOAM_SANCTUM           = 0,
@@ -11,6 +12,7 @@ xi.assault.assaultArea =
     NYZUL_ISLE                 = 5,
 }
 
+---@enum xi.mission
 xi.assault.mission =
 {
     LEUJAOAM_CLEANSING                = 1,
@@ -67,6 +69,7 @@ xi.assault.mission =
     NYZUL_ISLE_UNCHARTED_AREA_SURVEY  = 52,
 }
 
+---@enum xi.missionInfo
 xi.assault.missionInfo =
 {
     [xi.assault.mission.LEUJAOAM_CLEANSING]               = { suggestedLevel = 50, minimumPoints = 1000 },

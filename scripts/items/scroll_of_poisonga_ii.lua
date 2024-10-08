@@ -3,6 +3,7 @@
 -- Scroll of Poisonga II
 -- Teaches the black magic Poisonga II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

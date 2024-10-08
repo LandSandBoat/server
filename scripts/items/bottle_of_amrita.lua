@@ -3,6 +3,7 @@
 -- Item: Amrita
 -- Item Effect: Restores 500 HP and MP over 300 seconds.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

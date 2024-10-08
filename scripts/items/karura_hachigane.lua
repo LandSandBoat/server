@@ -3,6 +3,7 @@
 -- Karura Hachigane
 -- Pet mod via latent effect
 -----------------------------------
+---@type TItem
 local itemObject = {}
 local listenerPrefix = 'PET_MOD_LATENT'
 local latentPetId = xi.petId.GARUDA

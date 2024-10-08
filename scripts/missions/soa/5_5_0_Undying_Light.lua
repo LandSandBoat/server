@@ -22,19 +22,16 @@ mission.sections =
 
         [xi.zone.WESTERN_ADOULIN] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    -- TODO: This event does not occur on retail if warping from Ceizak to
-                    -- Adoulin, and only occurs if they enter through the gate.
-                    if
-                        prevZone == xi.zone.CEIZAK_BATTLEGROUNDS and
-                        mission:getVar(player, 'Status') == 0
-                    then
-                        return 182
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                -- TODO: This event does not occur on retail if warping from Ceizak to
+                -- Adoulin, and only occurs if they enter through the gate.
+                if
+                    prevZone == xi.zone.CEIZAK_BATTLEGROUNDS and
+                    mission:getVar(player, 'Status') == 0
+                then
+                    return 182
+                end
+            end,
 
             onEventUpdate =
             {
@@ -66,14 +63,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 2 then
-                        return 1549
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 2 then
+                    return 1549
+                end
+            end,
 
             onEventFinish =
             {

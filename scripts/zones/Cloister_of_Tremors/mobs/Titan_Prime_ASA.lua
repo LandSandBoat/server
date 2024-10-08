@@ -3,6 +3,7 @@
 --  Mob: Titan Prime
 -- Involved in Mission: ASA-4 Sugar Coated Directive
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

@@ -4,6 +4,7 @@
 -- Outpost Conquest Guards
 -- !pos 139.394 -7.885 100.384 103
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local guardNation = xi.nation.BASTOK

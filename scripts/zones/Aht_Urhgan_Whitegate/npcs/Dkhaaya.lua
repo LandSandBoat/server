@@ -3,6 +3,7 @@
 --  NPC: Dkhaaya
 -- !pos -73.212 -1 -5.842 50
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

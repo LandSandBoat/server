@@ -1,20 +1,20 @@
 ﻿/*
 ===========================================================================
 
-Copyright (c) 2023 LandSandBoat Dev Teams
+  Copyright (c) 2023 LandSandBoat Dev Teams
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
@@ -39,6 +39,18 @@ void handler_session::start()
 {
     if (socket_.lowest_layer().is_open())
     {
+        // Enable keepalives for long sessions (view_session in particular)
+        socket_.lowest_layer().set_option(asio::socket_base::keep_alive(true));
+
+        socket_.lowest_layer().set_option(asio::detail::socket_option::integer<IPPROTO_TCP, TCP_KEEPINTVL>(5 * 60)); // interval between keepalive
+        socket_.lowest_layer().set_option(asio::detail::socket_option::integer<IPPROTO_TCP, TCP_KEEPCNT>(10));       // failed keepalives before declaring dead
+
+#ifdef __APPLE__
+        socket_.lowest_layer().set_option(asio::detail::socket_option::integer<IPPROTO_TCP, TCP_KEEPALIVE>(5 * 60)); // secs before keepalive probes
+#else
+        socket_.lowest_layer().set_option(asio::detail::socket_option::integer<IPPROTO_TCP, TCP_KEEPIDLE>(5 * 60)); // secs before keepalive probes
+#endif
+
         do_read();
     }
 }

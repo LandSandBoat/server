@@ -11,6 +11,7 @@
 -- Recast Time: 56 seconds
 -- Combos: Auto Refresh
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

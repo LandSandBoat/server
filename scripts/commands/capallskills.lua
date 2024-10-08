@@ -2,6 +2,7 @@
 -- func: capallskills
 -- desc: Caps all the players skills.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

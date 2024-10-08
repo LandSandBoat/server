@@ -3,6 +3,7 @@
 -- Scroll of Foe Lullaby II
 -- Teaches the song Foe Lullaby II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

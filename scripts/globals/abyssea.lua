@@ -11,15 +11,15 @@ xi.abyssea = xi.abyssea or {}
 
 xi.abyssea.exitPositions =
 {
-    [xi.zone.ABYSSEA_KONSCHTAT]  = {   88.4, -68.09, -579.97, 128, 108 },
-    [xi.zone.ABYSSEA_TAHRONGI]   = {  -28.6,  46.17,  -680.3, 192, 117 },
-    [xi.zone.ABYSSEA_LA_THEINE]  = {   -562,      0,     640, 158, 102 },
-    [xi.zone.ABYSSEA_ATTOHWA]    = {   -340, -23.36,   48.49,  31, 118 },
-    [xi.zone.ABYSSEA_MISAREAUX]  = { 363.47,      0, -119.72, 129, 103 },
-    [xi.zone.ABYSSEA_VUNKERL]    = { 242.98,   0.24,    8.72, 157, 104 },
-    [xi.zone.ABYSSEA_ALTEPA]     = {    340,  -0.52,    -668, 192, 107 },
+    [xi.zone.ABYSSEA_KONSCHTAT ] = {   88.4, -68.09, -579.97, 128, 108 },
+    [xi.zone.ABYSSEA_TAHRONGI  ] = {  -28.6,  46.17,  -680.3, 192, 117 },
+    [xi.zone.ABYSSEA_LA_THEINE ] = {   -562,      0,     640, 158, 102 },
+    [xi.zone.ABYSSEA_ATTOHWA   ] = {   -340, -23.36,   48.49,  31, 118 },
+    [xi.zone.ABYSSEA_MISAREAUX ] = { 363.47,      0, -119.72, 129, 103 },
+    [xi.zone.ABYSSEA_VUNKERL   ] = { 242.98,   0.24,    8.72, 157, 104 },
+    [xi.zone.ABYSSEA_ALTEPA    ] = {    340,  -0.52,    -668, 192, 107 },
     [xi.zone.ABYSSEA_ULEGUERAND] = {    270,   -7.8,     -82,  64, 112 },
-    [xi.zone.ABYSSEA_GRAUBERG]   = {    -64,      0,     600,   0, 106 },
+    [xi.zone.ABYSSEA_GRAUBERG  ] = {    -64,      0,     600,   0, 106 },
 }
 
 xi.abyssea.lightType =
@@ -69,6 +69,7 @@ xi.abyssea.abyssiteType =
     DEMILUNE     = 20,
 }
 
+---@enum xi.abyssea.itemType
 xi.abyssea.itemType =
 {
     ITEM        = 1,
@@ -316,7 +317,7 @@ xi.abyssea.mob =
     ['Pallid_Percy']  = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.MUCID_WORM_SEGMENT         } },
     ['Smok']          = { ['Atma'] = { xi.ki.ATMA_OF_THE_SMOLDERING_SKY    }, ['Normal'] = {                                  } },
     ['Svarbhanu']     = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.HOLLOW_DRAGON_EYE          } },
-    ['Titlacauan']    = { ['Atma'] = { xi.ki.ATMA_OF_UNDYING               }, ['Normal'] = {                                  } },
+    ['Titlacauan']    = { ['Atma'] = { xi.ki.ATMA_OF_THE_UNDYING           }, ['Normal'] = {                                  } },
     ['Tunga']         = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.DISTENDED_CHIGOE_ABDOMEN   } },
     ['Ulhuadshi']     = { ['Atma'] = { xi.ki.ATMA_OF_THE_DESERT_WORM       }, ['Normal'] = {                                  } },
     ['Warbler']       = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.JADE_ABYSSITE_OF_MERIT     } },
@@ -336,7 +337,7 @@ xi.abyssea.mob =
     ['Gukumatz']            = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.MOLTED_PEISTE_SKIN               } },
     ['Heqet']               = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.DOFFED_POROGGO_HAT               } },
     ['Ironclad_Observer']   = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.SCALDING_IRONCLAD_SPIKE          } },
-    ['Ironclad_Pulverizer'] = { ['Atma'] = { xi.ki.ATMA_OF_THE_RAZED_RUIN        }, ['Normal'] = {                                        } },
+    ['Ironclad_Pulverizer'] = { ['Atma'] = { xi.ki.ATMA_OF_THE_RAZED_RUINS       }, ['Normal'] = {                                        } },
     ['Karkatakam']          = { ['Atma'] = { xi.ki.ATMA_OF_THE_CRADLE            }, ['Normal'] = {                                        } },
     ['Kutharei']            = { ['Atma'] = { xi.ki.ATMA_OF_THE_MOUNTED_CHAMPION  }, ['Normal'] = {                                        } },
     ['Manohra']             = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.CLIPPED_BIRD_WING                } },
@@ -368,7 +369,7 @@ xi.abyssea.mob =
     ['Pascerpot']              = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.CRIMSON_ABYSSITE_OF_CONFLUENCE } },
     ['Quasimodo']              = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.OSSIFIED_GARGOUILLE_HAND       } },
     ['Rakshas']                = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.WARPED_SMILODON_CHOKER         } },
-    ['Seps']                   = { ['Atma'] = { xi.ki.ATMA_OF_THE_APPARITIONS         }, ['Normal'] = {                                      } },
+    ['Seps']                   = { ['Atma'] = { xi.ki.ATMA_OF_APPARITIONS             }, ['Normal'] = {                                      } },
     ['Sedna']                  = { ['Atma'] = { xi.ki.ATMA_OF_THE_TUSKED_TERROR       }, ['Normal'] = {                                      } },
     ['Sippoy']                 = { ['Atma'] = { xi.ki.ATMA_OF_THE_WOULD_BE_KING       }, ['Normal'] = {                                      } },
     ['Xan']                    = { ['Atma'] = { xi.ki.ATMA_OF_THE_SHIMMERING_SHELL    }, ['Normal'] = {                                      } },
@@ -394,7 +395,7 @@ xi.abyssea.mob =
 
     -- Abyssea - Uleguerand (zone 253)
     ['Apademak']              = { ['Atma'] = { xi.ki.ATMA_OF_THE_WAR_LION            }, ['Normal'] = {                                                                  } },
-    ['Awahondo']              = { ['Atma'] = { xi.ki.ATMA_OF_THE_PERSISTANT_PREDATOR }, ['Normal'] = { xi.ki.DECAYING_DIREMITE_FANG                                     } },
+    ['Awahondo']              = { ['Atma'] = { xi.ki.ATMA_OF_THE_PERSISTENT_PREDATOR }, ['Normal'] = { xi.ki.DECAYING_DIREMITE_FANG                                     } },
     ['Blanga']                = { ['Atma'] = { xi.ki.ATMA_OF_THE_STONE_GOD           }, ['Normal'] = {                                                                  } },
     ['Dhorme_Khimaira']       = { ['Atma'] = { xi.ki.ATMA_OF_PURGATORY               }, ['Normal'] = { xi.ki.TORN_KHIMAIRA_WING                                         } },
     ['Empousa']               = { ['Atma'] = { xi.ki.ATMA_OF_THE_SHRIEKING_ONE       }, ['Normal'] = {                                                                  } },
@@ -407,20 +408,20 @@ xi.abyssea.mob =
     ['Resheph']               = { ['Atma'] = { xi.ki.ATMA_OF_THE_PLAGUEBRINGER       }, ['Normal'] = {                                                                  } },
     ['Veri_Selen']            = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.VERMILLION_ABYSSITE_OF_GUERDON                             } },
     ['Yaguarogui']            = { ['Atma'] = { xi.ki.ATMA_OF_THE_SUN_EATER           }, ['Normal'] = {                                                                  } },
-    ['Chione']                = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.VERMILLION_ABYSSITE_OF_PERSPICACITY                        } },
+    ['Chione']                = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.VERM_ABYSSITE_OF_PERSPICACITY                              } },
     ['Ogopogo']               = { ['Atma'] = { xi.ki.ATMA_OF_THE_LAKE_LURKER         }, ['Normal'] = {                                                                  } },
 
     -- Abyssea - Grauberg (zone 254)
     ['Alfard']                  = { ['Atma'] = { xi.ki.ATMA_OF_THE_SOLITARY_ONE      }, ['Normal'] = {                                                             } },
-    ['Amphitrite']              = { ['Atma'] = { xi.ki.ATMA_OF_THE_SEA_DAUGTER       }, ['Normal'] = {                                                             } },
+    ['Amphitrite']              = { ['Atma'] = { xi.ki.ATMA_OF_THE_SEA_DAUGHTER      }, ['Normal'] = {                                                             } },
     ['Assailer_Chariot']        = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.WARPED_CHARIOT_PLATE, xi.ki.IVORY_ABYSSITE_OF_SOJOURN } },
     ['Azdaja']                  = { ['Atma'] = { xi.ki.ATMA_OF_THE_WINGED_GLOOM      }, ['Normal'] = {                                                             } },
     ['Bomblix_Flamefinger']     = { ['Atma'] = { xi.ki.ATMA_OF_FIRES_AND_FLARES      }, ['Normal'] = {                                                             } },
     ['Deelgeed']                = { ['Atma'] = { xi.ki.ATMA_OF_THE_HORNED_BEAST      }, ['Normal'] = { xi.ki.VACANT_BUGARD_EYE                                     } },
     ['Fleshflayer_Killakriq']   = { ['Atma'] = { xi.ki.ATMA_OF_THE_FOE_FLAYER        }, ['Normal'] = {                                                             } },
-    ['Fuath']                   = { ['Atma'] = { xi.ki.ATMA_OF_THE_HATEFUL_STEAM     }, ['Normal'] = {                                                             } },
+    ['Fuath']                   = { ['Atma'] = { xi.ki.ATMA_OF_THE_HATEFUL_STREAM    }, ['Normal'] = {                                                             } },
     ['Ironclad_Sunderer']       = { ['Atma'] = { xi.ki.ATMA_OF_THE_SUNDERING_SLASH   }, ['Normal'] = { xi.ki.SHATTERED_IRON_GIANT_CHAIN                            } },
-    ['Melo_Melo']               = { ['Atma'] = { xi.ki.ATMA_OF_AQUADIC_ARDOR         }, ['Normal'] = { xi.ki.VARIEGATED_URAGNITE_SHELL                             } },
+    ['Melo_Melo']               = { ['Atma'] = { xi.ki.ATMA_OF_AQUATIC_ARDOR         }, ['Normal'] = { xi.ki.VARIEGATED_URAGNITE_SHELL                             } },
     ['Ningishzida']             = { ['Atma'] = { xi.ki.ATMA_OF_ENTWINED_SERPENTS     }, ['Normal'] = { xi.ki.VENOMOUS_HYDRA_FANG                                   } },
     ['Raja']                    = { ['Atma'] = { xi.ki.ATMA_OF_THE_DESPOT            }, ['Normal'] = {                                                             } },
     ['Teugghia']                = { ['Atma'] = { xi.ki.ATMA_OF_THE_FALLEN_ONE        }, ['Normal'] = {                                                             } },
@@ -777,22 +778,27 @@ xi.abyssea.giveNMDrops = function(mob, player, ID)
     local playerClaimed = GetPlayerByID(mob:getLocalVar('[ClaimedBy]'))
 
     for _, keyItemId in pairs(normalDrops) do
-        if xi.abyssea.canGiveNMKI(mob, 20) then
+        if
+            playerClaimed and
+            xi.abyssea.canGiveNMKI(mob, 20)
+        then
             npcUtil.giveKeyItem(playerClaimed, keyItemId, ID.text.PLAYER_KEYITEM_OBTAINED)
         end
     end
 
     for _, keyItemId in pairs(atmaDrops) do
-        local ally = playerClaimed:getAlliance()
+        if playerClaimed then
+            local ally = playerClaimed:getAlliance()
 
-        for _, member in ipairs(ally) do
-            if not member:hasKeyItem(keyItemId) and xi.abyssea.canGiveNMKI(mob, 10) then
-                npcUtil.giveKeyItem(member, keyItemId, ID.text.PLAYER_KEYITEM_OBTAINED)
+            for _, member in ipairs(ally) do
+                if not member:hasKeyItem(keyItemId) and xi.abyssea.canGiveNMKI(mob, 10) then
+                    npcUtil.giveKeyItem(member, keyItemId, ID.text.PLAYER_KEYITEM_OBTAINED)
+                end
             end
-        end
 
-        if not playerClaimed:hasKeyItem(keyItemId) then
-            npcUtil.giveKeyItem(playerClaimed, keyItemId, ID.text.PLAYER_KEYITEM_OBTAINED)
+            if not playerClaimed:hasKeyItem(keyItemId) then
+                npcUtil.giveKeyItem(playerClaimed, keyItemId, ID.text.PLAYER_KEYITEM_OBTAINED)
+            end
         end
     end
 
@@ -813,17 +819,19 @@ xi.abyssea.getDemiluneAbyssite = function(player)
 end
 
 xi.abyssea.getNewYellowWeakness = function(mob)
-    local day = VanadielDayOfTheWeek()
-    local weakness = math.random(day - 1, day + 1)
+    local currentDay = VanadielDayOfTheWeek()                      -- Fetch current day.
+    local chosenDay  = math.random(currentDay - 1, currentDay + 1) -- It can be the element of the same day, the day before or the day after.
 
-    if weakness < 0 then
-        weakness = 7
-    elseif weakness > 7 then
-        weakness = 0
+    -- Acount for day element cycling.
+    if chosenDay < xi.day.FIRESDAY then
+        chosenDay = xi.day.DARKSDAY
+    elseif chosenDay > xi.day.DARKSDAY then
+        chosenDay = xi.day.FIRESDAY
     end
 
-    local element = xi.magic.dayElement[weakness]
-    return yellowWeakness[element][math.random(#yellowWeakness[element])]
+    local element = xi.magic.dayElement[chosenDay]
+
+    return yellowWeakness[element][math.random(1, #yellowWeakness[element])] -- Choose an specific spell the mob is weak to.
 end
 
 xi.abyssea.getNewRedWeakness = function(mob)

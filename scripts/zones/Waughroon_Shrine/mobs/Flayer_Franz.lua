@@ -3,6 +3,7 @@
 --  Mob: Flayer Franz
 -- BCNM: The Worm's Turn
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

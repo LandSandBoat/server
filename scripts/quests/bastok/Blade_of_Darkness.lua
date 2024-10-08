@@ -45,18 +45,15 @@ quest.sections =
 
         [xi.zone.ZERUHN_MINES] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if prevZone == xi.zone.PALBOROUGH_MINES then
-                        if quest:getVar(player, 'Prog') == 0 then
-                            return 130
-                        elseif not player:hasItem(xi.item.CHAOSBRINGER) then
-                            return 131
-                        end
+            onZoneIn = function(player, prevZone)
+                if prevZone == xi.zone.PALBOROUGH_MINES then
+                    if quest:getVar(player, 'Prog') == 0 then
+                        return 130
+                    elseif not player:hasItem(xi.item.CHAOSBRINGER) then
+                        return 131
                     end
-                end,
-            },
+                end
+            end,
 
             onEventFinish =
             {
@@ -74,17 +71,14 @@ quest.sections =
 
         [xi.zone.BEADEAUX] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        prevZone == xi.zone.PASHHOW_MARSHLANDS and
-                        player:getCharVar('ChaosbringerKills') >= 100
-                    then
-                        return 121
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    prevZone == xi.zone.PASHHOW_MARSHLANDS and
+                    player:getCharVar('ChaosbringerKills') >= 100
+                then
+                    return 121
+                end
+            end,
 
             onEventFinish =
             {

@@ -2,6 +2,7 @@
 -- Area: Castle Zvahl Keep (162)
 --  Mob: Viscount Morax
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

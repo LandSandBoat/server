@@ -3,6 +3,7 @@
 -- Sends a storm of feathers to a single target.
 -- Additional effect: Bio & Amnesia
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -6,6 +6,7 @@
 -- Recast Time: 1:00
 -- Duration: 2:00
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -22,7 +23,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         player:delStatusEffect(xi.effect.WEIGHT)
     end
 
-    player:addStatusEffect(xi.effect.QUICKENING, 20, 0, finalDuration)
+    player:addStatusEffect(xi.effect.QUICKENING, 10, 0, finalDuration)
 end
 
 return abilityObject

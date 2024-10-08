@@ -5,6 +5,7 @@
 --     : If the target doesn't respond with a correct answer
 --     : within 30 seconds, they will be set to 0hp.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

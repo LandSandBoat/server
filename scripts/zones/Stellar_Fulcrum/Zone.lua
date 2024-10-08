@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Stellar_Fulcrum
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

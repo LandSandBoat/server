@@ -2,6 +2,7 @@
 -- func: addallattachments
 -- desc: Unlocks all attachments
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

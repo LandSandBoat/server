@@ -3,6 +3,7 @@
 -- Water Spirit Pact
 -- Teaches the summoning magic Water Spirit
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

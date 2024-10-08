@@ -2,6 +2,7 @@
 -- Shadow Claw
 -- Deals damage to a single target. Additional effect: Blindness
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

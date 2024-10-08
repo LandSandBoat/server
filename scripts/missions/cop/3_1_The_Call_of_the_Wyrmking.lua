@@ -23,14 +23,11 @@ mission.sections =
 
         [xi.zone.SOUTH_GUSTABERG] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 0 then
-                        return 906
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 0 then
+                    return 906
+                end
+            end,
 
             onEventFinish =
             {

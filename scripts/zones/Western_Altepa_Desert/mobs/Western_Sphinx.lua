@@ -2,6 +2,7 @@
 -- Area: Western Altepa Desert
 --  Mob: Western Sphinx
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

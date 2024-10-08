@@ -5,6 +5,7 @@
 -- "Advanced Teamwork"
 -- !pos -260.361 -70.999 423.420 100
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -167,7 +168,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:getLocalVar('introToTmwrk_pass') == 1
         then
             npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK, {
-                item = 13442,
+                item = xi.item.SHELL_RING,
                 fame = 80, -- fame defaults to 30 if not set
                 title = xi.title.THIRD_RATE_ORGANIZER,
             })
@@ -176,7 +177,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:getLocalVar('intermedTmwrk_pass') == 1
         then
             npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK, {
-                item = 4994,
+                item = xi.item.SCROLL_OF_MAGES_BALLAD,
                 fame = 80, -- fame defaults to 30 if not set
                 title = xi.title.SECOND_RATE_ORGANIZER,
             })
@@ -185,7 +186,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:getLocalVar('advTmwrk_pass') == 1
         then
             npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK, {
-                item = 13459,
+                item = xi.item.HORN_RING,
                 fame = 80, -- fame defaults to 30 if not set
                 title = xi.title.FIRST_RATE_ORGANIZER,
             })

@@ -2,6 +2,7 @@
 -- Area: Lower Jeuno
 --  NPC: Amhu Saboroleka
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -12,6 +12,7 @@
 -- Skillchain Element: Compression
 -- Combos: Store TP
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

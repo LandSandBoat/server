@@ -4,6 +4,7 @@
 -- Outpost Conquest Guards
 -- !pos -257 8 -249 114
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local guardNation = xi.nation.SANDORIA

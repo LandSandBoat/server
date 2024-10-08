@@ -89,6 +89,7 @@ public:
     bool                      IsParried() const;
     bool                      CheckParried();
     bool                      IsAnticipated() const;
+    bool                      IsDeflected() const;
     bool                      CheckAnticipated();
     bool                      IsCountered() const;
     bool                      CheckCounter();

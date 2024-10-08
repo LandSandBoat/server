@@ -2,6 +2,7 @@
 -- Area: Yuhtunga Jungle
 --  Mob: Soldier Crawler
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,6 +2,7 @@
 -- Area: Temple of Uggalepih
 --  Mob: Temple Opo-opo
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

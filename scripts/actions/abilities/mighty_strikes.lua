@@ -2,6 +2,7 @@
 -- Ability: Mighty Strikes
 -- Job: Warrior
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

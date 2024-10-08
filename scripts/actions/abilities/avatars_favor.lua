@@ -1,6 +1,7 @@
 -----------------------------------
 -- Avatars Favor - Ability
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

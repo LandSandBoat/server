@@ -2,6 +2,7 @@
 -- Ninjutsu Elemental Debuff
 -- Reduces a targets given elemental resistance
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

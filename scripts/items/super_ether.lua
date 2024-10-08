@@ -3,6 +3,7 @@
 -- Item: Super Ether
 -- Item Effect: Restores 100 MP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

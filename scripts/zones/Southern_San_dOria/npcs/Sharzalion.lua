@@ -3,6 +3,7 @@
 --  NPC: Sharzalion
 -- !pos 95 0 111 230
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

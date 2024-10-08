@@ -2,6 +2,7 @@
 -- Area: Ordelle's Caves
 --  Mob: Targe Beetle
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

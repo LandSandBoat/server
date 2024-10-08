@@ -2,6 +2,7 @@
 -- Area: King Ranperre's Tomb
 --   NM: Vrtra
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local offsets = { 1, 3, 5, 2, 4, 6 }
@@ -36,7 +37,7 @@ entity.onMobFight = function(mob, target)
         for i, offset in ipairs(offsets) do
             local pet = GetMobByID(mobId + offset)
 
-            if not pet:isSpawned() then
+            if pet and not pet:isSpawned() then
                 pet:spawn(60)
                 local pos = mob:getPos()
                 pet:setPos(pos.x, pos.y, pos.z)
@@ -49,7 +50,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDisengage = function(mob, weather)
+entity.onMobDisengage = function(mob)
     for i, offset in ipairs(offsets) do
         DespawnMob(mob:getID() + offset)
     end

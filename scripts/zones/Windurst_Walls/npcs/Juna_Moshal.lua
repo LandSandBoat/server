@@ -2,6 +2,7 @@
 -- Area: Windurst Walls
 --  NPC: Juna Moshal
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

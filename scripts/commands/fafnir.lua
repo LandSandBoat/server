@@ -3,6 +3,7 @@
 -- desc: Summon a fightable Fafnir (no loot)
 -- note:
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -12,11 +13,16 @@ commandObj.cmdprops =
 }
 
 commandObj.onTrigger = function(player)
+    ---@type CZone|CInstance?
     local zoneOrInstanceObj = player:getZone()
 
     local instance = player:getInstance()
     if instance then
         zoneOrInstanceObj = instance
+    end
+
+    if not zoneOrInstanceObj then
+        return
     end
 
     local mob = zoneOrInstanceObj:insertDynamicEntity({
@@ -67,13 +73,14 @@ commandObj.onTrigger = function(player)
         specialSpawnAnimation = true,
     })
 
+    if not mob then
+        return
+    end
+
     -- Use the mob object as you normally would
     mob:setSpawn(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
-
     mob:setDropID(0) -- No loot!
-
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
-
     mob:spawn()
 
     player:printToPlayer(string.format('Spawning Fafnir (Lv: %i, HP: %i)\n%s', mob:getMainLvl(), mob:getMaxHP(), mob))

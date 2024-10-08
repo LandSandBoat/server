@@ -2,6 +2,7 @@
 -- Area: Xarcabard
 --   NM: Ereshkigal
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

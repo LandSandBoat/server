@@ -78,6 +78,10 @@ xi.manaclipper.timekeeperOnTrigger = function(player, location, eventId)
             end
         end
 
+        if not nextEvent then
+            return
+        end
+
         local gameMins = nextEvent.time - currentTime
         local earthSecs = gameMins * 60 / 25 -- one earth second is 25 game seconds
 
@@ -111,6 +115,10 @@ xi.manaclipper.onZoneIn = function(player)
                 nextEvent = schedule[i]
                 break
             end
+        end
+
+        if not nextEvent then
+            return -1
         end
 
         if nextEvent.route == dest.PURGONORGO_ISLE then

@@ -2,6 +2,7 @@
 -- Area: Gustav Tunnel
 --  Mob: Boulder Eater
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

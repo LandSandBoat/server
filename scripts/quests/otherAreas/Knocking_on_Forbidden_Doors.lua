@@ -46,7 +46,7 @@ quest.sections =
         {
             ['Chemioue'] =
             {
-                onTrigger = function(player, csid, option, npc)
+                onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 0 then
                         return quest:progressEvent(536)
                     end
@@ -140,13 +140,13 @@ quest.sections =
                         quest:getVar(player, 'Prog') == 3 and
                         npcUtil.popFromQM(player, npc, misareauxID.mob.ALSHA, { claim = true, hide = 0 })
                     then
-                        return quest:messageSpecial(misareauxID.text.FOUL_STENCH)
+                        player:messageSpecial(misareauxID.text.FOUL_STENCH)
                     end
                 end,
 
                 [558] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 5)
-                    return quest:keyItem(xi.ki.BETTER_HUMES_AND_MANNEQUINS)
+                    npcUtil.giveKeyItem(player, xi.ki.BETTER_HUMES_AND_MANNEQUINS)
                 end,
             },
         },
@@ -155,7 +155,7 @@ quest.sections =
         {
             ['Fyi_Chalmwoh'] =
             {
-                onTrigger = function(player, csid, option, npc)
+                onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 5 then
                         return quest:progressEvent(321, { [0] = 704,
                             [1] = xi.mannequin.getMannequins(player),
@@ -188,7 +188,7 @@ quest.sections =
         {
             ['Fyi_Chalmwoh'] =
             {
-                onTrigger = function(player, csid, option, npc)
+                onTrigger = function(player, npc)
                     return quest:progressEvent(321, { [1] = xi.mannequin.getMannequins(player),
                         [2] = xi.mannequin.cost.PURCHASE,
                         [3] = xi.mannequin.cost.TRADE,

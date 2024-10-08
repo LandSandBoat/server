@@ -46,7 +46,7 @@ xi.aftermath.effects =
     -----------------------------------
     -- Tier 2 Relic
     -----------------------------------
-    [15] = { mods = { xi.mod.SUBTLE_BLOW, 10, xi.mod.KICK_ATTACK, 15 }, duration = getTier2RelicDuration }, -- Spharai
+    [15] = { mods = { xi.mod.SUBTLE_BLOW, 10, xi.mod.KICK_ATTACK_RATE, 15 }, duration = getTier2RelicDuration }, -- Spharai
     [16] = { mods = { xi.mod.CRITHITRATE, 5, xi.mod.CRIT_DMG_INCREASE, 5 }, duration = getTier2RelicDuration }, -- Mandau
     [17] = { mods = { xi.mod.REGEN, 30, xi.mod.REFRESH, 3 }, duration = getTier2RelicDuration }, -- Excalibur
     [18] = { mods = { xi.mod.CRITHITRATE, 10, xi.mod.ACC, 15 }, duration = getTier2RelicDuration }, -- Ragnarok

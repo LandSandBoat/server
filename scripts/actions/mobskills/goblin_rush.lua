@@ -3,6 +3,7 @@
 -- Delivers a threefold attack. Accuracy varies with TP.
 -- 100% TP: ??? / 250% TP: ??? / 300% TP: ???
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

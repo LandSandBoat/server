@@ -8,6 +8,7 @@
 -- TODO Requre check for other 3 quests An Understanding General, A Generous General,
 -- TODO: Convert this quest to interaction.
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -105,14 +105,11 @@ mission.sections =
 
         [xi.zone.BATALLIA_DOWNS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 903
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 903
+                end
+            end,
 
             onEventUpdate =
             {
@@ -128,14 +125,11 @@ mission.sections =
 
         [xi.zone.BEAUCEDINE_GLACIER] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 116
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 116
+                end
+            end,
 
             onEventUpdate =
             {
@@ -147,14 +141,11 @@ mission.sections =
 
         [xi.zone.BUBURIMU_PENINSULA] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 5
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 5
+                end
+            end,
 
             onEventUpdate =
             {
@@ -220,14 +211,11 @@ mission.sections =
 
         [xi.zone.EAST_RONFAURE] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 23
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 23
+                end
+            end,
 
             onEventUpdate =
             {
@@ -243,14 +231,11 @@ mission.sections =
 
         [xi.zone.EAST_SARUTABARUTA] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 52
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 52
+                end
+            end,
 
             onEventUpdate =
             {
@@ -276,14 +261,11 @@ mission.sections =
 
         [xi.zone.KONSCHTAT_HIGHLANDS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 106
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 106
+                end
+            end,
 
             onEventUpdate =
             {
@@ -299,14 +281,11 @@ mission.sections =
 
         [xi.zone.LA_THEINE_PLATEAU] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 125
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 125
+                end
+            end,
 
             onEventUpdate =
             {
@@ -318,14 +297,11 @@ mission.sections =
 
         [xi.zone.MERIPHATAUD_MOUNTAINS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 34
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 34
+                end
+            end,
 
             onEventUpdate =
             {
@@ -341,14 +317,11 @@ mission.sections =
 
         [xi.zone.NORTH_GUSTABERG] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 246
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 246
+                end
+            end,
 
             onEventUpdate =
             {
@@ -364,14 +337,11 @@ mission.sections =
 
         [xi.zone.PASHHOW_MARSHLANDS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 15
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 15
+                end
+            end,
 
             onEventUpdate =
             {
@@ -385,14 +355,11 @@ mission.sections =
 
         [xi.zone.ROLANBERRY_FIELDS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 4
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 4
+                end
+            end,
 
             onEventUpdate =
             {
@@ -417,14 +384,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 3
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 3
+                end
+            end,
 
             onEventFinish =
             {
@@ -436,14 +400,11 @@ mission.sections =
 
         [xi.zone.SAUROMUGUE_CHAMPAIGN] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 5
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 5
+                end
+            end,
 
             onEventUpdate =
             {
@@ -464,14 +425,11 @@ mission.sections =
 
         [xi.zone.SOUTH_GUSTABERG] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 37
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 37
+                end
+            end,
 
             onEventUpdate =
             {
@@ -489,14 +447,11 @@ mission.sections =
 
         [xi.zone.TAHRONGI_CANYON] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 37
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 37
+                end
+            end,
 
             onEventUpdate =
             {
@@ -515,14 +470,11 @@ mission.sections =
 
         [xi.zone.THE_SANCTUARY_OF_ZITAH] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 4
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 4
+                end
+            end,
 
             onEventUpdate =
             {
@@ -538,14 +490,11 @@ mission.sections =
 
         [xi.zone.VALKURM_DUNES] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 5
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 5
+                end
+            end,
 
             onEventUpdate =
             {
@@ -563,14 +512,11 @@ mission.sections =
 
         [xi.zone.WEST_RONFAURE] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 53
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 53
+                end
+            end,
 
             onEventUpdate =
             {
@@ -582,14 +528,11 @@ mission.sections =
 
         [xi.zone.WEST_SARUTABARUTA] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 50
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 50
+                end
+            end,
 
             onEventUpdate =
             {
@@ -605,14 +548,11 @@ mission.sections =
 
         [xi.zone.XARCABARD] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 11
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 11
+                end
+            end,
 
             onEventUpdate =
             {

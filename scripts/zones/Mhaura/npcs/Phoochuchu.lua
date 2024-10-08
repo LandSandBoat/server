@@ -4,6 +4,7 @@
 -- Involved in Quest: A Thief in Norg!?
 -- !pos -4 -4 69 249
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

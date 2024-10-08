@@ -2,6 +2,7 @@
 -- Area: Dangruf Wadi (191)
 --  Mob: Geyser Lizard
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

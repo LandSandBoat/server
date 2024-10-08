@@ -4,6 +4,7 @@
 -- Unlocks: Geo-Focus
 -- !pos -20.869 -59.736 -180.233 196
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

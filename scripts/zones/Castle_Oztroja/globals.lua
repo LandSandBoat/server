@@ -33,8 +33,11 @@ local oztrojaGlobal =
         for i = 0, 3 do
             local realLever = GetNPCByID(ID.npc.HANDLE_DOOR_FLOOR_2 + 2 + i)
             local hintLever = GetNPCByID(ID.npc.HINT_HANDLE_OFFSET + i)
-            realLever:setAnimation(xi.anim.CLOSE_DOOR)
-            hintLever:setAnimation(combo[i])
+
+            if realLever and hintLever then
+                realLever:setAnimation(xi.anim.CLOSE_DOOR)
+                hintLever:setAnimation(combo[i])
+            end
         end
     end,
 
@@ -61,7 +64,12 @@ local oztrojaGlobal =
             for i = 0, 3 do
                 local realLever = GetNPCByID(ID.npc.HANDLE_DOOR_FLOOR_2 + 2 + i)
                 local hintLever = GetNPCByID(ID.npc.HINT_HANDLE_OFFSET + i)
-                if realLever:getAnimation() ~= hintLever:getAnimation() then
+
+                if
+                    realLever and
+                    hintLever and
+                    realLever:getAnimation() ~= hintLever:getAnimation()
+                then
                     comboFound = false
                     break
                 end

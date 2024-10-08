@@ -3,6 +3,7 @@
 --  NPC: Chyuk-Kochak
 -- !pos -252.162 -6.319 -307.011 238
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

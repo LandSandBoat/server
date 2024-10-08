@@ -2,6 +2,7 @@
 -- Antigravity w/ 3 Gears
 -- Knockback and damage, knockback varies with gear count
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

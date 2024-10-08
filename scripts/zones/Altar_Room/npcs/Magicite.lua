@@ -4,6 +4,7 @@
 -- Involved in Mission: Magicite
 -- !pos -344 25 43 152
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

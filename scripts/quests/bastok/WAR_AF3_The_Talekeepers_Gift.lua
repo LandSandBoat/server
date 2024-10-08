@@ -129,17 +129,14 @@ quest.sections =
 
         [xi.zone.QUFIM_ISLAND] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        prevZone == xi.zone.BEHEMOTHS_DOMINION and
-                        quest:getVar(player, 'Prog') == 7
-                    then
-                        return 100
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    prevZone == xi.zone.BEHEMOTHS_DOMINION and
+                    quest:getVar(player, 'Prog') == 7
+                then
+                    return 100
+                end
+            end,
 
             onEventFinish =
             {

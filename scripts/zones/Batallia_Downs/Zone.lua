@@ -5,14 +5,15 @@ local ID = zones[xi.zone.BATALLIA_DOWNS]
 require('scripts/quests/full_speed_ahead')
 require('scripts/quests/i_can_hear_a_rainbow')
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
-zoneObject.onChocoboDig = function(player, precheck)
-    return xi.chocoboDig.start(player, precheck)
-end
-
 local function registerRegionAroundNPC(zone, NPCID, zoneID)
-    local npc      = GetNPCByID(NPCID)
+    local npc = GetNPCByID(NPCID)
+    if not npc then
+        return
+    end
+
     local x        = npc:getXPos()
     local y        = npc:getYPos()
     local z        = npc:getZPos()

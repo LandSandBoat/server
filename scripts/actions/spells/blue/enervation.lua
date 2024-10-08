@@ -12,6 +12,7 @@
 -- Magic Bursts on: Compression, Gravitation, and Darkness
 -- Combos: Counter
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

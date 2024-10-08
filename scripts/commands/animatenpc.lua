@@ -2,6 +2,7 @@
 -- func: animatenpc
 -- desc: Changes the animation of the given npc. (For testing purposes.)
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -25,6 +26,7 @@ commandObj.onTrigger = function(player, arg1, arg2)
         animationId = arg1
     else
         -- player provided npcId and animationId.
+        ---@diagnostic disable-next-line param-type-mismatch
         targ = GetNPCByID(tonumber(arg1))
         animationId = arg2
     end

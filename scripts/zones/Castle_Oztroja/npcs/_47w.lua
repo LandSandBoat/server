@@ -4,6 +4,7 @@
 -- Notes: Opens door _473 from behind
 -- !pos -41.377 -17.084 17.036 151
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
@@ -12,6 +13,7 @@ entity.onTrigger = function(player, npc)
     if
         player:getXPos() > -43 and
         npc:getAnimation() == xi.anim.CLOSE_DOOR and
+        brassDoor and
         brassDoor:getAnimation() == xi.anim.CLOSE_DOOR
     then
         npc:openDoor(6.5)

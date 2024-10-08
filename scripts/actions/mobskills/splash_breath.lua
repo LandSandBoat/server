@@ -2,6 +2,7 @@
 -- Splash Breath
 -- Deals Water damage in a fan-shaped cone area of effect.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -569,7 +569,12 @@ xi.dynamis.timeExtensionOnDeath = function(mob, player, optParams)
             end
         end
 
-        if found then
+        -- TODO: Refactor the above loops to not need the 'found' variable, and only use
+        -- non-nil te value.
+        if
+            found and
+            te
+        then
             -- award KI and extension to those who have not yet received it
             local effect = player:getStatusEffect(xi.effect.DYNAMIS)
             if effect and not player:hasKeyItem(te.ki) then

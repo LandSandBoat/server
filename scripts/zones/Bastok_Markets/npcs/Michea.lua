@@ -5,6 +5,7 @@
 -- Involed in: Distant Loyalties
 -- !pos -298 -16 -157 235
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

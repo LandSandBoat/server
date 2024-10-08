@@ -8,6 +8,7 @@
 -- Intelligence 2
 -- Wind Res 5
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

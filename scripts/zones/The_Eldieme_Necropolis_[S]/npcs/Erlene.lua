@@ -3,6 +3,7 @@
 --  NPC: Erlene
 -- !pos 376.936 -39.999 17.914 175
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

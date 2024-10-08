@@ -24,6 +24,7 @@
 -----------------------------------
 local ID = zones[xi.zone.HORLAIS_PEAK]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local extremelyBadBreathID = 1332

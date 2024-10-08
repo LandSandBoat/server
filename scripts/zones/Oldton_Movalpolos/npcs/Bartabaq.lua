@@ -4,6 +4,7 @@
 -- Type: Outpost Vendor
 -- !pos -261.930 6.999 -49.145 11
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

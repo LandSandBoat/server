@@ -3,6 +3,7 @@
 -- Scroll of Protect III
 -- Teaches the white magic Protect III
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

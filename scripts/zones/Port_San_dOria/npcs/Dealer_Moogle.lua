@@ -3,6 +3,7 @@
 --  NPC: Dealer Moogle
 -- !pos 13.026 -4.000 -87.403 232
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

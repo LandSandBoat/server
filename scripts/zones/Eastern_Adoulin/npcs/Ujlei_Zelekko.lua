@@ -5,6 +5,7 @@
 -- !pos -102.754 -0.65 16.161 257
 -- !gotoid 17830177
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local items =

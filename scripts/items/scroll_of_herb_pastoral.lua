@@ -3,6 +3,7 @@
 -- Scroll of Herb Pastoral
 -- Teaches the song Herb Pastoral
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

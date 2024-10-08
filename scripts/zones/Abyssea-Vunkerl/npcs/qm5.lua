@@ -4,6 +4,7 @@
 -- Spawns Kadraeth the Hatespawn
 -- !pos -475 -40 -280 217
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

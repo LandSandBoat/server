@@ -2,6 +2,7 @@
 -- Venom Sting
 -- Deals Water damage to targets in a fan-shaped area of effect. Additional effect: Poison
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -5,6 +5,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -21,6 +22,7 @@ entity.onMobFight = function(mob, target)
     local pet   = GetMobByID(mobId + 2)
 
     if
+        pet and
         pet:isSpawned() and
         pet:getCurrentAction() == xi.act.ROAMING
     then

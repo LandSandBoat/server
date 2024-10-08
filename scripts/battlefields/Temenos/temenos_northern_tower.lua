@@ -348,7 +348,7 @@ content.loot =
         {
             { item = xi.item.NONE,                     weight = xi.loot.weight.VERY_HIGH },
             { item = xi.item.CHUNK_OF_SNOWY_CERMET,    weight = xi.loot.weight.LOW       },
-            { item = xi.item.SPOOL_OF_CHAMELEON_YARN,  weight = xi.loot.weight.LOW       },
+            { item = xi.item.SPOOL_OF_SCARLET_ODOSHI,  weight = xi.loot.weight.LOW       },
             { item = xi.item.SPOOL_OF_GLITTERING_YARN, weight = xi.loot.weight.LOW       },
             { item = xi.item.SQUARE_OF_BRILLIANTINE,   weight = xi.loot.weight.LOW       },
         },

@@ -149,6 +149,8 @@ mission.sections =
 
                     if
                         player:getMissionStatus(mission.areaId) == 3 and
+                        suparnaMob and
+                        fledglingMob and
                         (not suparnaMob:isSpawned() or suparnaMob:isDead()) and
                         (not fledglingMob:isSpawned() or fledglingMob:isDead())
                     then
@@ -170,6 +172,7 @@ mission.sections =
 
                     if
                         player:getMissionStatus(mission.areaId) == 3 and
+                        mobSuparnaFledgling and
                         (mobSuparnaFledgling:isDead() or not mobSuparnaFledgling:isSpawned())
                     then
                         mission:setVar(player, 'Prog', 1)
@@ -184,6 +187,7 @@ mission.sections =
 
                     if
                         player:getMissionStatus(mission.areaId) == 3 and
+                        mobSuparna and
                         (mobSuparna:isDead() or not mobSuparna:isSpawned())
                     then
                         mission:setVar(player, 'Prog', 1)

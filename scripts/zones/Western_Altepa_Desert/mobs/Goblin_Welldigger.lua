@@ -2,6 +2,7 @@
 -- Area: Western Altepa Desert
 --  Mob: Goblin Welldigger
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

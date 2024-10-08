@@ -12,6 +12,7 @@
 --  4              4           4        new
 -- 1.125      1.125      1.125        old
 -----------------------------------
+---@type TWeaponSkill
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)

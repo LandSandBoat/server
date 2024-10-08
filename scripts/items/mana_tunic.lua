@@ -2,6 +2,7 @@
 -- ID: 14490
 -- mana_tunic
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -4,6 +4,7 @@
 -- Type: Chocobo Vendor
 -- !pos 441.782 24.231 20.254 102
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local eventSucceed = 120

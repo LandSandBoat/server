@@ -2,6 +2,7 @@
 -- Artifical Gravity w/ 2 Gears
 -- Damage plus Weight effect
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -3,6 +3,7 @@
 -- Scroll of Earth Threnody
 -- Teaches the song Earth Threnody
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

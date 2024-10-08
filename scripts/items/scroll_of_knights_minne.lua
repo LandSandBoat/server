@@ -3,6 +3,7 @@
 -- Scroll of Knights Minne
 -- Teaches the song Mages Ballad
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

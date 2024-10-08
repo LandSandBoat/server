@@ -3,6 +3,7 @@
 --  NPC: Ajen-Myoojen
 -- !pos -44.542 -5.999 238.996 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

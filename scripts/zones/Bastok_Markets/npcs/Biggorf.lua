@@ -3,6 +3,7 @@
 --  NPC: Biggorf
 -- Involved in Quest: The Bare Bones
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

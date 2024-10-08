@@ -3,6 +3,7 @@
 --  NPC: Khea Mhyyih
 -- !pos -53.927 -4.499 56.215 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

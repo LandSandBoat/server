@@ -15,6 +15,9 @@ xi.zoneUtil.ImperialAgent_PotHatch = function(player, npc, posX, posZ, posR)
 
     if npc:getID() == instance:getProgress() then
         local ally = GetNPCByID(ID.npc.BRUJEEL, instance)
+        if not ally then
+            return
+        end
 
         instance:setProgress(0)
         npc:timer(2000, function(npcArg)

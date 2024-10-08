@@ -3,6 +3,7 @@
 -- Scroll of Instant Stoneskin
 -- Grants the user a 200 HP Stoneskin effect
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

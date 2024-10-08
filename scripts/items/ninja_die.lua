@@ -3,6 +3,7 @@
 -- Ninja Die
 -- Teaches the job ability Ninja Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

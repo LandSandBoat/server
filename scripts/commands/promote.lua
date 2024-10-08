@@ -2,6 +2,7 @@
 -- func: promote
 -- desc: Promotes the player to a new GM level.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

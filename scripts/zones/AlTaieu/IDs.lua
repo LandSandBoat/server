@@ -30,6 +30,8 @@ zones[xi.zone.ALTAIEU] =
     mob =
     {
         EUVHIS_OFFSET      = GetFirstID('Aweuvhi'),
+        ULXZOMIT_OFFSET    = GetTableOfIDs('Ulxzomit'),
+        OMXZOMIT_OFFSET    = GetTableOfIDs('Omxzomit'),
         RUAERN             = GetFirstID('Ruaern'),
         JAILER_OF_HOPE     = GetFirstID('Jailer_of_Hope'),
         JAILER_OF_JUSTICE  = GetFirstID('Jailer_of_Justice'),

@@ -5,6 +5,7 @@
 -- It details the Republic's victory over King Raigegue the Lupine's San d'Orian army.
 -- Adventurers note that reading it increases one's axe skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

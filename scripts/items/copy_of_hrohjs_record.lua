@@ -5,6 +5,7 @@
 -- as kept by Hrohj Wagrehsa.
 -- Adventurers note that reading it increases one's geomancy skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

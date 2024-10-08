@@ -159,6 +159,10 @@ quest.sections =
                     elseif questProgress == 5 then
                         if quest:getLocalVar(player, 'nmDefeated') == 0 then
                             local zoneObj = player:getZone()
+                            if not zoneObj then
+                                return
+                            end
+
                             local mobObj  = zoneObj:queryEntitiesByName('Madthrasher_Zradbodd')[1]
 
                             if not mobObj:isSpawned() then

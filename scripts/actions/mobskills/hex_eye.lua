@@ -5,6 +5,7 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Line of sight
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

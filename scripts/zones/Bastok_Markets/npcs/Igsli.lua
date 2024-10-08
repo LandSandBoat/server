@@ -3,6 +3,7 @@
 -- NPC : Igsli
 -- Unity NPC
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

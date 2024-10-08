@@ -3,6 +3,7 @@
 -- Thunderstorm Schema
 -- Teaches the white magic Thunderstorm
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

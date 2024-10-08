@@ -2,6 +2,7 @@
 -- Area: Ro'Maeve
 --  NPC: _3e0 (Moongate)
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

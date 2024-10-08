@@ -3,6 +3,7 @@
 --  NPC: Parraggoh
 -- Finishes Quest: Beauty and the Galka
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 --  NPC: Vishwas
 -- !pos 44.028 -7.282 13.663 252
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

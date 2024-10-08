@@ -3,6 +3,7 @@
 -- plate_of_indi-slip
 -- Teaches INDI-SLIP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

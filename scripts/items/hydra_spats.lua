@@ -4,6 +4,7 @@
 -- Item Effect: Eva +15
 -- Duration: 20 Minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

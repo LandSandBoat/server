@@ -4,13 +4,13 @@
 -- Starts Quest: Chocobo's Wounds, Save My Son, Path of the Beastmaster, Wings of gold, Scattered into Shadow, Chocobo on the Loose!
 -- !pos -55 8 95 244
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local pathOfTheBeastmaster = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)
     local wingsOfGold = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD)
     local scatteredIntoShadow = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW)
     local scatteredIntoShadowStat = player:getCharVar('scatIntoShadowCS')
@@ -18,28 +18,8 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
-    -- WINGS OF GOLD
-    if
-        pathOfTheBeastmaster == xi.questStatus.QUEST_COMPLETED and
-        wingsOfGold == xi.questStatus.QUEST_AVAILABLE and
-        mJob == xi.job.BST and
-        mLvl >= xi.settings.main.AF1_QUEST_LEVEL
-    then
-        if player:getCharVar('wingsOfGold_shortCS') == 1 then
-            player:startEvent(137) -- Start Quest 'Wings of gold' (Short dialog)
-        else
-            player:setCharVar('wingsOfGold_shortCS', 1)
-            player:startEvent(139) -- Start Quest 'Wings of gold' (Long dialog)
-        end
-    elseif wingsOfGold == xi.questStatus.QUEST_ACCEPTED then
-        if not player:hasKeyItem(xi.ki.GUIDING_BELL) then
-            player:startEvent(136)
-        else
-            player:startEvent(138) -- Finish Quest 'Wings of gold'
-        end
-
     -- SCATTERED INTO SHADOW
-    elseif
+    if
         wingsOfGold == xi.questStatus.QUEST_COMPLETED and
         scatteredIntoShadow == xi.questStatus.QUEST_AVAILABLE and
         mJob == xi.job.BST and
@@ -77,18 +57,8 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    -- WINGS OF GOLD
-    if (csid == 137 or csid == 139) and option == 1 then
-        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD)
-        player:setCharVar('wingsOfGold_shortCS', 0)
-    elseif
-        csid == 138 and
-        npcUtil.completeQuest(player, xi.questLog.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD, { item = 16680, fame = 20 })
-    then
-        player:delKeyItem(xi.ki.GUIDING_BELL)
-
     -- SCATTERED INTO SHADOW
-    elseif (csid == 141 or csid == 143) and option == 1 then
+    if (csid == 141 or csid == 143) and option == 1 then
         player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW)
         player:setCharVar('scatIntoShadow_shortCS', 0)
         npcUtil.giveKeyItem(player, { xi.ki.AQUAFLORA1, xi.ki.AQUAFLORA2, xi.ki.AQUAFLORA3 })

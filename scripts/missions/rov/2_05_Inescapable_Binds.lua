@@ -30,12 +30,9 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return { 165, 0 }
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return { 165, 0 }
+            end,
 
             onEventUpdate =
             {

@@ -4,6 +4,7 @@
 --  NPC: Rutango-Botango
 --  Involved in Quest: To Bee or Not to Bee?
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

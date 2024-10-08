@@ -3,6 +3,7 @@
 -- Scroll of Boost-INT
 -- Teaches the white magic Boost-INT
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

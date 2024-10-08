@@ -18,8 +18,14 @@ instanceObject.onInstanceCreated = function(instance)
 
     local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)
     local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
-    rune:setPos(-376.272, -9.893, 89.189, 0)
-    box:setPos(-384.097, -10, 84.954, 49)
+
+    if rune then
+        rune:setPos(-376.272, -9.893, 89.189, 0)
+    end
+
+    if box then
+        box:setPos(-384.097, -10, 84.954, 49)
+    end
 end
 
 instanceObject.onInstanceCreatedCallback = function(player, instance)
@@ -57,8 +63,14 @@ instanceObject.onInstanceComplete = function(instance)
 
     local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)
     local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
-    rune:setStatus(xi.status.NORMAL)
-    box:setStatus(xi.status.NORMAL)
+
+    if rune then
+        rune:setStatus(xi.status.NORMAL)
+    end
+
+    if box then
+        box:setStatus(xi.status.NORMAL)
+    end
 end
 
 instanceObject.onEventUpdate = function(player, csid, option, npc)

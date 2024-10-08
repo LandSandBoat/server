@@ -2,6 +2,7 @@
 -- Area: Outer Horutoto Ruins
 --   NM: Desmodont
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

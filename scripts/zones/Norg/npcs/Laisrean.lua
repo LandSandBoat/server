@@ -3,6 +3,7 @@
 --  NPC: Laisrean
 -- !pos -2.251 -1 21.654 252
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

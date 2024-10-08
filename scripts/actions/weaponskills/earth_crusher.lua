@@ -10,6 +10,7 @@
 -- 100%TP    200%TP    300%TP
 -- 1.00      2.31      3.63
 -----------------------------------
+---@type TWeaponSkill
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)

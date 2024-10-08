@@ -3,6 +3,7 @@
 --  NPC: Tilian
 -- !pos -118.460 4.999 -68.090 236
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

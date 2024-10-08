@@ -37,17 +37,14 @@ mission.sections =
 
         [xi.zone.CEIZAK_BATTLEGROUNDS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        mission:getVar(player, 'Status') == 1 and
-                        mission:getVar(player, 'Timer') <= VanadielUniqueDay()
-                    then
-                        return 30
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    mission:getVar(player, 'Status') == 1 and
+                    mission:getVar(player, 'Timer') <= VanadielUniqueDay()
+                then
+                    return 30
+                end
+            end,
 
             onEventUpdate =
             {
@@ -78,14 +75,11 @@ mission.sections =
 
         [xi.zone.LEAFALLIA] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 2 then
-                        return 13
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 2 then
+                    return 13
+                end
+            end,
 
             onEventUpdate =
             {

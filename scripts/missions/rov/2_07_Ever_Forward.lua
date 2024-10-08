@@ -68,21 +68,20 @@ mission.sections =
     },
 }
 
-mission.sections[2] = {}
+mission.sections[2] =
+{
+    check = function(player, currentMission, missionStatus, vars)
+        return currentMission == mission.missionId and
+            player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.ROYAL_PUPPETEER
+    end,
+}
 
-mission.sections[2].check = function(player, currentMission, missionStatus, vars)
-    return currentMission == mission.missionId and
-        player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.ROYAL_PUPPETEER
-end
-
+---@type ZoneSection
 local rovZoneInEvent =
 {
-    onZoneIn =
-    {
-        function(player, prevZone)
-            return 30039
-        end,
-    },
+    onZoneIn = function(player, prevZone)
+        return 30039
+    end,
 
     onEventFinish =
     {

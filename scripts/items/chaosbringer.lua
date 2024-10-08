@@ -2,6 +2,7 @@
 -- ID: 16607
 -- Chaosbringer
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemDrop = function(target, item)

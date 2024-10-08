@@ -3,6 +3,7 @@
 -- Scroll of Teleport-Vahzl
 -- Teaches the white magic Teleport-Vahzl
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

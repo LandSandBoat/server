@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.IMPAIRMENT
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

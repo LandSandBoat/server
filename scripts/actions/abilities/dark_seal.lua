@@ -5,6 +5,7 @@
 -- Recast Time: 00:05:00
 -- Duration: 1 Spell or 60 seconds, whichever occurs first.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

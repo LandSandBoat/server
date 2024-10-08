@@ -2,6 +2,7 @@
 -- func: raise <power> <player>
 -- desc: Sends raise menu to GM or target player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

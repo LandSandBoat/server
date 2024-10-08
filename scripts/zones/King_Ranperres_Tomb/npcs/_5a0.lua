@@ -3,6 +3,7 @@
 -- DOOR: _5a0 (Heavy Stone Door)
 -- !pos -39.000 4.823 20.000 190
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

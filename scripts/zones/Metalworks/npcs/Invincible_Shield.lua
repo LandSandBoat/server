@@ -4,6 +4,7 @@
 -- Type: Ballista
 -- !pos -51.083 -11 2.126 237
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

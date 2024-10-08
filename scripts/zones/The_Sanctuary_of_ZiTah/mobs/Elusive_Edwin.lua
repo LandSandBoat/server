@@ -2,6 +2,7 @@
 -- Area: The Sanctuary of Zi'Tah
 --   NM: Elusive Edwin
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

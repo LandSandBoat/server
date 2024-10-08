@@ -3,6 +3,7 @@
 -- Scroll of Poisona
 -- Teaches the white magic Poisona
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

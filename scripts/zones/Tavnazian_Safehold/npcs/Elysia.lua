@@ -4,6 +4,7 @@
 -- Starts Quest: Unforgiven
 -- !pos -50.410 -22.204 -41.640 26
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

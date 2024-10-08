@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.BARPOISON
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

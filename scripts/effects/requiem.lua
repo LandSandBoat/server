@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.REQUIEM
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

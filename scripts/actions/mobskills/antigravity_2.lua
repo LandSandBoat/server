@@ -6,6 +6,7 @@
 -- the number of gears in the enemy formation. A single gear produces only a
 -- slight knockback, whereas triple gears produce a very strong knockback.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

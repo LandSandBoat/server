@@ -4,6 +4,7 @@
 -- Starts Windurst Missions
 -- !pos -227 -8 184 240
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

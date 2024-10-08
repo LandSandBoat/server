@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.meritCategory
 local meritCategory =
 {
     HP_MP      = 0x0040,
@@ -69,6 +70,7 @@ local meritCategory =
     -- COUNT = 0x0D80,
 }
 
+---@enum xi.merit
 xi.merit =
 {
     -- HP

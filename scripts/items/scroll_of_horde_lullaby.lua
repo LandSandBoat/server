@@ -3,6 +3,7 @@
 -- Scroll of Horde Lullaby
 -- Teaches the song Horde Lullaby
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

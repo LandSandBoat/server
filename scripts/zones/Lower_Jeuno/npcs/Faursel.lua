@@ -5,6 +5,7 @@
 -- Involved in Quests: The Road to Aht Urhgan
 -- !pos 37.985 3.118 -45.208 245
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

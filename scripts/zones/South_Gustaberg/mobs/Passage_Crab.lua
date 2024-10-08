@@ -2,6 +2,7 @@
 -- Area: South Gustaberg
 --  Mob: Passage Crab
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

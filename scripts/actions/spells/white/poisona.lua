@@ -2,6 +2,7 @@
 -- Spell: Poisona
 -- Removes poison from target.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

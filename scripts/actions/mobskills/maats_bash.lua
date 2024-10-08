@@ -1,6 +1,7 @@
 -----------------------------------
 --  Maat's Bash
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

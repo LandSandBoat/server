@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.DARK_ARTS
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -7,6 +7,7 @@
 --  Range: Single target
 --  Notes:
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

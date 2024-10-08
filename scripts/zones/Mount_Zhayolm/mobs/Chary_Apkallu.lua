@@ -2,6 +2,7 @@
 -- Area: Mount Zhayolm
 --   NM: Chary Apkallu
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

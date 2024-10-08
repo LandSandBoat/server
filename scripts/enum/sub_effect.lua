@@ -4,6 +4,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.subEffect
 xi.subEffect =
 {
     -- ATTACKS

@@ -4,6 +4,7 @@
 -- Type: Abyssea Warp NPC
 -- !pos 4 0 -65 243
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

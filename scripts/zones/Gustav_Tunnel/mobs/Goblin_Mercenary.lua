@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.GUSTAV_TUNNEL]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local wyvernpoacherPHTable =

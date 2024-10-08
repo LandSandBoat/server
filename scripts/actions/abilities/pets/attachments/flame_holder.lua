@@ -1,6 +1,7 @@
 -----------------------------------
 -- Attachment: Flame Holder
 -----------------------------------
+---@type TAttachment
 local attachmentObject = {}
 
 local validskills = set{

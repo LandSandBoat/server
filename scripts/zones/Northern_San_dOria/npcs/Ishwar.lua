@@ -3,6 +3,7 @@
 --  NPC: Ishwar
 -- !pos -47.103 -1.999 -19.582 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

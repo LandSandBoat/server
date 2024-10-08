@@ -4,6 +4,7 @@
 -- Involved in quest Children of the Rune
 -- pos 370.6285 0.6692 153.3728
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

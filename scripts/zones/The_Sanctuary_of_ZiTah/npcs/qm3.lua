@@ -4,6 +4,7 @@
 -- Involved In Quest: The Sacred Katana
 -- !pos -416 0 46 121
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

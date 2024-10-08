@@ -3,6 +3,7 @@
 --  NPC: Katsunaga
 -- !pos -4.726 -2.148 23.183 249
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

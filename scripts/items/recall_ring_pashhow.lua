@@ -3,6 +3,7 @@
 -- Recall ring: Pashhow
 -- Enchantment: "Recall-Pashhow"
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

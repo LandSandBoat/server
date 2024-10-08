@@ -2,6 +2,7 @@
 -- Wire_Cutter
 -- Single-target damage (~500-1500), absorbed by 2 Utsusemi shadows.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

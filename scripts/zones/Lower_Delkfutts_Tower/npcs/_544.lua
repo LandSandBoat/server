@@ -4,6 +4,7 @@
 -- Notes: Door opens when you trade Delkfutt Key to it
 -- !pos 345 0.1 20 184
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

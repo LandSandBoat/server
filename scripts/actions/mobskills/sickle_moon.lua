@@ -2,6 +2,7 @@
 -- Sickle Moon
 -- Delivers a two-hit attack. Damage varies with TP.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

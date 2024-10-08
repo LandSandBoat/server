@@ -3,6 +3,7 @@
 --  NPC: Vertical Transit Device (1)
 -- !pos 747 119 20 276
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

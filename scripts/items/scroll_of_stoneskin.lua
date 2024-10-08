@@ -3,6 +3,7 @@
 -- Scroll of Stoneskin
 -- Teaches the white magic Stoneskin
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

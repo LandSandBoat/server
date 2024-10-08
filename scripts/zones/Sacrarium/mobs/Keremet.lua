@@ -2,6 +2,7 @@
 -- Area: Sacrarium
 --   NM: Keremet
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobFight = function(mob, target)
@@ -10,7 +11,8 @@ entity.onMobFight = function(mob, target)
     -- Send spawned skeleton "pets" to Keremet's target
     for i = keremet + 1, keremet + 12 do
         local m = GetMobByID(i)
-        if m:getCurrentAction() == xi.act.ROAMING then
+
+        if m and m:getCurrentAction() == xi.act.ROAMING then
             m:updateEnmity(target)
         end
     end

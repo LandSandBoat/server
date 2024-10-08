@@ -3,6 +3,7 @@
 --  Description: Deals Flame breath damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Flame)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -3,6 +3,7 @@
 -- Scroll of Kakka: Ichi
 -- Teaches the ninjutsu Kakka: Ichi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

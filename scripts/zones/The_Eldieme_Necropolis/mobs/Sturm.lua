@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.DRAIN_SAMBA
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

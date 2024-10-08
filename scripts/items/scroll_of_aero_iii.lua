@@ -3,6 +3,7 @@
 -- Scroll of Aero III
 -- Teaches the black magic Aero III
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

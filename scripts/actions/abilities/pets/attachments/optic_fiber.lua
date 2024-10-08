@@ -2,6 +2,7 @@
 -- Attachment: Optic Fiber
 -- Increases the performance of other attachments by a percentage
 -----------------------------------
+---@type TAttachment
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet, attachment)

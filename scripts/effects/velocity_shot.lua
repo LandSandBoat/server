@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.VELOCITY_SHOT
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

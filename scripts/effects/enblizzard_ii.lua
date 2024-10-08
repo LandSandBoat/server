@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ENBLIZZARD_II
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

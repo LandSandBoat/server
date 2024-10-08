@@ -2,6 +2,7 @@
 -- Spell: Indi-Slow
 -- Slows enemies near the caster.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

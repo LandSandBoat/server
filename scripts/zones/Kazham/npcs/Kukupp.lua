@@ -2,6 +2,7 @@
 -- Area: Kazham
 --  NPC: Kukupp
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

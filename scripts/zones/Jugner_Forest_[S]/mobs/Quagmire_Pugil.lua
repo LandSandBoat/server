@@ -1,6 +1,7 @@
 -----------------------------------
 --  Mob: Quagmire Pugil
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

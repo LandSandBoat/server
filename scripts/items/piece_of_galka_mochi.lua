@@ -3,6 +3,7 @@
 -- Piece of Galka Mochi
 -- Enchantment: 60Min, Costume - Galka Child
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

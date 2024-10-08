@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.ULEGUERAND_RANGE]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local points =

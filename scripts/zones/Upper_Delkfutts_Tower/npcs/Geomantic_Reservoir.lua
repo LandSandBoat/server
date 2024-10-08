@@ -4,6 +4,7 @@
 -- Unlocks: Geo-Vex
 -- !pos -358.799 -175.425 82.985 158
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

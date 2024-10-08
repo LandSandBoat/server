@@ -5,6 +5,7 @@
 -- Starts and finishes Quest: Stop Your Whining
 -- !pos 49 -6 15 252
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

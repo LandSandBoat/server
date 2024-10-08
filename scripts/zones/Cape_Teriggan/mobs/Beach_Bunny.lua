@@ -2,6 +2,7 @@
 -- Area: Cape Teriggan
 --  Mob: Beach Bunny
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

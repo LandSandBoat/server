@@ -2,6 +2,7 @@
 -- func: setplayervar
 -- desc: Sets a variable on the target player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

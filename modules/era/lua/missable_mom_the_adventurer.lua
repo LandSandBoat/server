@@ -10,7 +10,7 @@ m:addOverride('xi.server.onServerStart', function()
 
     xi.module.modifyInteractionEntry('scripts/quests/bastok/Mom_the_Adventurer', function(quest)
         quest.sections[1].check = function(player, status, vars)
-            return status ~= QUEST_ACCEPTED and
+            return status ~= xi.questStatus.QUEST_ACCEPTED and
                 player:getFameLevel(xi.quest.fame_area.BASTOK) < 2 and
                 vars.Prog == 0
         end

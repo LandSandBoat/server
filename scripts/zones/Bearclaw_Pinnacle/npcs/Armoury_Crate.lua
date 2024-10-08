@@ -2,6 +2,7 @@
 -- Area: Bearclaw Pinnacle
 --  NPC: Armoury Crate
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 -- Leaving this loot here until their respective battlefields are implemented

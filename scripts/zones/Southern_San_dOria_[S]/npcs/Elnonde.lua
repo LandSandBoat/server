@@ -4,6 +4,7 @@
 -- !pos 86 2 -0 80
 -- Involved in Gifts of the Griffon
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Cloister_of_Tremors (209)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

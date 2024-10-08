@@ -2,6 +2,7 @@
 -- Area: Windurst Woods
 --  NPC: Seno Zarhin
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

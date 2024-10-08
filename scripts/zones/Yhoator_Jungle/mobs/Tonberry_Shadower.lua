@@ -6,6 +6,7 @@
 local ID = zones[xi.zone.YHOATOR_JUNGLE]
 mixins = { require('scripts/mixins/families/tonberry') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

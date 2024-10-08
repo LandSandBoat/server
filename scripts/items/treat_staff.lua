@@ -14,6 +14,7 @@
 --
 -- Calling it 10% proc rate, this is tough to get a decent sample for even during harvest fest event.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

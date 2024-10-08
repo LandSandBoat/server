@@ -2,6 +2,7 @@
 -- Area: Apollyon NW, Floor 4
 --  Mob: Cynoprosopi
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local points =

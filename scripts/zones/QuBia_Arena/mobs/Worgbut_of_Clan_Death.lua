@@ -3,12 +3,10 @@
 --  Mob: Worgbut of Clan Death
 -- Mission 9-2 San d'Oria
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -1,20 +1,20 @@
 ﻿/*
 ===========================================================================
 
-Copyright (c) 2023 LandSandBoat Dev Teams
+  Copyright (c) 2023 LandSandBoat Dev Teams
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
@@ -241,7 +241,6 @@ void data_session::read_func()
             // Some kind of magic regarding the blowfish keys
             uint8 key3[20] = {};
             std::memcpy(key3, data_ + 1, sizeof(key3));
-            key3[16] -= 2;
 
             // https://github.com/atom0s/XiPackets/blob/main/lobby/S2C_0x000B_ResponseNextLogin.md
             lpkt_next_login characterSelectionResponse = {};
@@ -335,6 +334,17 @@ void data_session::read_func()
                     hasActiveSession = true;
                 }
 
+                // If client was zoning out but was never seen at the destination, wait 30 seconds before allowing login again
+                if (_sql->Query("SELECT * \
+                                FROM accounts_sessions \
+                                WHERE accid = %u AND client_port = '0' AND last_zoneout_time >= SUBTIME(NOW(), \"00:00:30\")",
+                                session.accountID) != SQL_ERROR &&
+                    _sql->NumRows() != 0)
+                {
+                    _sql->NextRow();
+                    hasActiveSession = true;
+                }
+
                 uint64 exceptionTime = 0;
 
                 if (_sql->Query("SELECT UNIX_TIMESTAMP(exception) \
@@ -359,6 +369,7 @@ void data_session::read_func()
                     ShowWarning(fmt::format("data_session: account {} attempting to login when {} already has {} active session(s), limit is {}", session.accountID, ipAddress, sessionCount, loginLimit));
                 }
 
+                // TODO: it seems we may need to increment the key if we send this error? Client doesn't seem to ever recover.
                 if (hasActiveSession)
                 {
                     ShowWarning(fmt::format("data_session: account {} is already logged in.", session.accountID));
@@ -367,6 +378,7 @@ void data_session::read_func()
                         // Send error message to the client.
                         loginHelpers::generateErrorMessage(data->data_, loginErrors::errorCode::UNABLE_TO_CONNECT_TO_WORLD_SERVER); // "Unable to connect to world server. Specified operation failed"
                         data->do_write(0x24);
+
                         return;
                     }
                 }

@@ -3,6 +3,7 @@
 -- Main effect: Increases the casting time of the target.
 -- Sub effect: Lowers target magic accuracy.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

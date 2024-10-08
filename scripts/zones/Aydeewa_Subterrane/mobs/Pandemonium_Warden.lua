@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 -- Pet Arrays, we'll alternate between phases
@@ -86,9 +87,12 @@ entity.onMobEngage = function(mob, target)
     -- pop pets
     for i = 1, 8 do
         local pet = GetMobByID(petIDs[1][i])
-        pet:setModelId(1841)
-        pet:spawn()
-        pet:updateEnmity(target)
+
+        if pet then
+            pet:setModelId(1841)
+            pet:spawn()
+            pet:updateEnmity(target)
+        end
     end
 end
 

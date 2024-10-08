@@ -4,6 +4,7 @@
 -- Spawns Anemic Aloysius
 -- !pos 440 -51 142 253
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

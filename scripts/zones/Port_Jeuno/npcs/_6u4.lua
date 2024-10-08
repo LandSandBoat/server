@@ -3,6 +3,7 @@
 --  NPC: Door: Departures Exit (for San D'Oria)
 -- !pos -76 8 54 246
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

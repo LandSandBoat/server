@@ -3,6 +3,7 @@
 --  NPC: Bjibar
 -- !pos -105.178 0.999 60.115 48
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

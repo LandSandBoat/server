@@ -3,6 +3,7 @@
 -- Item: Elixir
 -- Item Effect: Instantly restores 25% of HP and MP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

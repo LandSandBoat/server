@@ -1,6 +1,7 @@
 -----------------------------------
 -- Mix: Dark Potion - Deals 666 damage to a single enemy.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

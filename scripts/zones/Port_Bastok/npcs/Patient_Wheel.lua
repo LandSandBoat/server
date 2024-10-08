@@ -3,6 +3,7 @@
 --  NPC: Patient Wheel
 -- !pos -107.988 3.898 52.557 236
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

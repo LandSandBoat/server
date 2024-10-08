@@ -2,6 +2,7 @@
 -- Area: Attohwa Chasm
 --  Mob: Citipati
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobRoam = function(mob)

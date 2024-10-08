@@ -4,6 +4,7 @@
 -- Type: Outpost Conquest Guards
 -- !pos -294.470 15.806 420.117 119
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local guardNation = xi.nation.WINDURST

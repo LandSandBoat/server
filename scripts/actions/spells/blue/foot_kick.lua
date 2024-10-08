@@ -12,6 +12,7 @@
 -- Skillchain Property: Detonation
 -- Combos: Lizard Killer
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -2,6 +2,7 @@
 -- Spinning Dive
 -- Leviathan delivers a single-hit attack on target.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

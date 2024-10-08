@@ -2,6 +2,7 @@
 --  Nuclear Waste
 --  Description: Reduces elemental resistances by 50 to players in range.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

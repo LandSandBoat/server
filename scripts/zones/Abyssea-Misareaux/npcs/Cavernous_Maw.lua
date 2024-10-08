@@ -4,6 +4,7 @@
 -- !pos 676.070, -16.063, 318.999 216
 -- Teleports Players to Valkrum Dunes
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

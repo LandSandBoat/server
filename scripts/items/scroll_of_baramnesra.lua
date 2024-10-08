@@ -3,6 +3,7 @@
 -- Scroll of Baramnesra
 -- Teaches the white magic Baramnesra
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

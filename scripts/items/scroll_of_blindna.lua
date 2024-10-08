@@ -3,6 +3,7 @@
 -- Scroll of Blindna
 -- Teaches the white magic Blindna
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

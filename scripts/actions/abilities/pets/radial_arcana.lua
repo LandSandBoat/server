@@ -2,6 +2,7 @@
 -- Ability: Radial Arcana
 -- Causes your luopan to vanish and restores MP of party members within area of effect.
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

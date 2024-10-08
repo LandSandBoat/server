@@ -5,6 +5,7 @@
 -- Recast Time: 5:00
 -- Duration: Instant
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -41,27 +42,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         basePower = 0
     end
 
-    local weatherDayBonus = 1
-    local dayElement      = VanadielDayElement()
-    local weather         = player:getWeather()
-
-    -- Day bonus/penalty
-    if dayElement == xi.magic.dayStrong[spiritEle] then
-        weatherDayBonus = weatherDayBonus + 0.1
-    elseif dayElement == xi.magic.dayWeak[spiritEle] then
-        weatherDayBonus = weatherDayBonus - 0.1
-    end
-
-    -- Weather bonus/penalty
-    if weather == xi.magic.singleWeatherStrong[spiritEle] then
-        weatherDayBonus = weatherDayBonus + 0.1
-    elseif weather == xi.magic.singleWeatherWeak[spiritEle] then
-        weatherDayBonus = weatherDayBonus - 0.1
-    elseif weather == xi.magic.doubleWeatherStrong[spiritEle] then
-        weatherDayBonus = weatherDayBonus + 0.25
-    elseif weather == xi.magic.doubleWeatherWeak[spiritEle] then
-        weatherDayBonus = weatherDayBonus - 0.25
-    end
+    local weatherDayBonus = xi.spells.damage.calculateDayAndWeather(spirit, 0, spiritEle)
 
     local power  = math.floor(basePower * weatherDayBonus)
     power        = utils.clamp(power, 0, spirit:getMP()) -- cap MP drained at spirit's MP

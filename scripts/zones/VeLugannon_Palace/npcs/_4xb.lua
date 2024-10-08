@@ -3,13 +3,13 @@
 --  NPC: Door (Blue)
 -- !pos -380.000 -2.974 0.000 177
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    return 0
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

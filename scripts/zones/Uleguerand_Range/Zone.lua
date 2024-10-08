@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = zones[xi.zone.ULEGUERAND_RANGE]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
@@ -46,13 +47,15 @@ end
 zoneObject.onZoneWeatherChange = function(weather)
     local waterfall = GetNPCByID(ID.npc.WATERFALL)
 
-    if weather == xi.weather.SNOW or weather == xi.weather.BLIZZARDS then
-        if waterfall:getAnimation() ~= xi.anim.CLOSE_DOOR then
-            waterfall:setAnimation(xi.anim.CLOSE_DOOR)
-        end
-    else
-        if waterfall:getAnimation() ~= xi.anim.OPEN_DOOR then
-            waterfall:setAnimation(xi.anim.OPEN_DOOR)
+    if waterfall then
+        if weather == xi.weather.SNOW or weather == xi.weather.BLIZZARDS then
+            if waterfall:getAnimation() ~= xi.anim.CLOSE_DOOR then
+                waterfall:setAnimation(xi.anim.CLOSE_DOOR)
+            end
+        else
+            if waterfall:getAnimation() ~= xi.anim.OPEN_DOOR then
+                waterfall:setAnimation(xi.anim.OPEN_DOOR)
+            end
         end
     end
 end

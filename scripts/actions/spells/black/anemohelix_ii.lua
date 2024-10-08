@@ -2,6 +2,7 @@
 -- Spell: Anemohelix II
 -- Deals wind damage that gradually reduces target's HP.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

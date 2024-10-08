@@ -2,6 +2,7 @@
 -- Spell: Indi-Barrier
 -- Enhances defense for party members near the caster.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

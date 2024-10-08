@@ -3,6 +3,7 @@
 --  NPC: Arienh
 -- !pos -37.292 -2.000 -6.817 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

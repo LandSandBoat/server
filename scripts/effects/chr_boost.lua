@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.CHR_BOOST
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

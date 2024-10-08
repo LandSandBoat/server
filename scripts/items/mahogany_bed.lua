@@ -2,6 +2,7 @@
 -- ID: 4
 -- Item: Mahogany Bed
 -----------------------------------
+---@type TItemFurniture
 local itemObject = {}
 
 itemObject.onFurniturePlaced = function(player)

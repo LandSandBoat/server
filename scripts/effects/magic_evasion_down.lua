@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.MAGIC_EVASION_DOWN
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

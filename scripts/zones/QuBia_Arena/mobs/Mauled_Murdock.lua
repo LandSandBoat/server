@@ -3,6 +3,7 @@
 --  Mob: Mauled Murdock
 -- BCNM: Celery
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)

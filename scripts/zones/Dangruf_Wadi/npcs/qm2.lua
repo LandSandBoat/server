@@ -6,6 +6,7 @@
 -- Starts and Finishes: Breaking Stones, An Empty Vessel
 -- only spawns if the weather is SUNNY or CLEAR
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

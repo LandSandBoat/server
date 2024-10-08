@@ -2,6 +2,7 @@
 -- Area: Outer Horutoto Ruins
 --  Mob: Fetor Bats
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

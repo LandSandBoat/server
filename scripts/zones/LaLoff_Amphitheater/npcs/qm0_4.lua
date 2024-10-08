@@ -2,6 +2,7 @@
 -- Area: LaLoff_Amphitheater
 --  NPC: qm0 (warp player outside after they win fight)
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

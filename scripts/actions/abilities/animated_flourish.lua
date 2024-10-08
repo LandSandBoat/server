@@ -5,6 +5,7 @@
 -- Finishing Moves Used: 1-2
 -- Recast Time: 00:30
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

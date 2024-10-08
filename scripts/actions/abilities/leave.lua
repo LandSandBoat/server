@@ -4,6 +4,7 @@
 -- Obtained: Beastmaster Level 35
 -- Recast Time: 10 seconds
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

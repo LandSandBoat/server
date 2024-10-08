@@ -3,6 +3,7 @@
 -- plate_of_indi-dex
 -- Teaches INDI-DEX
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

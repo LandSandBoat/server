@@ -3,6 +3,7 @@
 -- Scroll of Crusade
 -- Teaches the white magic Crusade
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

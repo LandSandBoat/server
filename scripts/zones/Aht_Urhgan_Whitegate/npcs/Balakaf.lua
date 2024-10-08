@@ -3,6 +3,7 @@
 --  NPC: Balakaf
 -- !pos 25.505 -6.999 126.478 50
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

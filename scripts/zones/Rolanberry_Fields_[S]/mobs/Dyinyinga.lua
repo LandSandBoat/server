@@ -7,6 +7,7 @@
 -- Has en-slow that overwrites and prevents Haste 2.
 -- When slow is active on the player, the NM moves out to melee at a normal range and stops trying to stand on them until it wears. Aura ceases at this time too.
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

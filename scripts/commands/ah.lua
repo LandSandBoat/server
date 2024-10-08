@@ -2,6 +2,7 @@
 -- func: ah
 -- desc: opens the Auction House menu anywhere in the world
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

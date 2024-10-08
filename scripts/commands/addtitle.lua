@@ -2,6 +2,7 @@
 -- func: addtitle
 -- desc: Add and set player title.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

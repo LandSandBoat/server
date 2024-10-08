@@ -3,6 +3,7 @@
 -- Toolbag Jinko
 -- When used, you will obtain one stack of jinko
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

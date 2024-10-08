@@ -2,6 +2,7 @@
 -- Wanion
 -- Transfers all ailments the Seether itself has to players in AoE range.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -18,8 +19,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         xi.effect.DEFENSE_DOWN, xi.effect.MAGIC_DEF_DOWN, xi.effect.MAGIC_ACC_DOWN, xi.effect.MAGIC_ATK_DOWN }
 
     for i, effect in ipairs(effects) do
-        if mob:hasStatusEffect(effect) then
-            local currentEffect = mob:getStatusEffect(effect)
+        local currentEffect = mob:getStatusEffect(effect)
+
+        if currentEffect then
             xi.mobskills.mobStatusEffectMove(mob, target, effect, currentEffect:getPower(), currentEffect:getTick(), currentEffect:getTimeRemaining() / 1000)
             mob:delStatusEffect(effect)
         end

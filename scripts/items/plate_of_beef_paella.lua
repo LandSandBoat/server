@@ -9,6 +9,7 @@
 -- Attack % 18 Cap 90
 -- Undead Killer 5
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

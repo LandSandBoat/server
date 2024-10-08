@@ -6,6 +6,7 @@
 --  Range: 15
 --  Applies 100hp/tick poison if it hits.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

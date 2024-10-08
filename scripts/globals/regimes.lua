@@ -1108,7 +1108,6 @@ xi.regime.bookOnEventUpdate = function(player, option, regimeType)
     -- check valid option
     local opts = getUpdateOpts(regimeType)
     local opt  = opts[option]
-
     if not opt then
         return
     end
@@ -1154,7 +1153,6 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
     -- check valid option
     local opts = getFinishOpts(regimeType)
     local opt  = opts[option]
-
     if not opt then
         return
     end

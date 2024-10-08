@@ -2,6 +2,7 @@
 -- func: getstats
 -- desc: prints stats of cursor target into chatlog, for debugging.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 local options =

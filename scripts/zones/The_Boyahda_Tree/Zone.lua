@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: The_Boyahda_Tree (153)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -3,6 +3,7 @@
 -- Decennial Dress +1
 -- Dispense: Bowl of Moogurt
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

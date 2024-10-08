@@ -2,6 +2,7 @@
 -- Area: Labyrinth of Onzozo
 --  NPC: Survival Guide
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, targetNpc)

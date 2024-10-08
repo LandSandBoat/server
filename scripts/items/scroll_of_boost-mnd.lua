@@ -3,6 +3,7 @@
 -- Scroll of Boost-MND
 -- Teaches the white magic Boost-MND
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

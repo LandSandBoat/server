@@ -117,7 +117,7 @@ xi.garrison.getAllyInfo = function(zoneID, zoneData, nationID)
         pos == nil
     then
         local zone = GetZone(zoneID)
-        debugLogf('Garrison NPC data missing for %s level %u (%s).', nationName[nationID], zoneData.levelCap, zone:getName())
+        debugLogf('Garrison NPC data missing for %s level %u (%s).', nationName[nationID], zoneData.levelCap, zone and zone:getName() or 'UNKNOWN')
         return nil
     end
 

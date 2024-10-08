@@ -4,6 +4,7 @@
 -- Starts and Ends Quest: An Undying Pledge
 -- !pos-20.617, 1.097, -29.165, 133
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -49,7 +50,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif
         csid == 227 and
         npcUtil.completeQuest(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE, {
-            item = 12375,
+            item = xi.item.LIGHT_BUCKLER,
             fameArea = xi.fameArea.NORG,
             fame = 50,
             var = 'anUndyingPledgeCS',

@@ -3,6 +3,7 @@
 --  NPC: Seven of Diamonds
 -- !pos 6.612 -3.5 278.553 239
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

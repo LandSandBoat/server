@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Reisenjima_Henge (292)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

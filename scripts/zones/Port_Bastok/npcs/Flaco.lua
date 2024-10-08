@@ -4,6 +4,7 @@
 -- Fame Checker
 -- !zone 236
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

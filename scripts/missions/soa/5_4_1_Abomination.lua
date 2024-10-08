@@ -22,14 +22,11 @@ mission.sections =
 
         [xi.zone.RAKAZNAR_TURRIS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return 4
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 1 then
+                    return 4
+                end
+            end,
 
             onEventFinish =
             {
@@ -49,14 +46,11 @@ mission.sections =
 
         [xi.zone.CEIZAK_BATTLEGROUNDS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 2 then
-                        return 29
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 2 then
+                    return 29
+                end
+            end,
 
             onEventFinish =
             {
@@ -68,19 +62,16 @@ mission.sections =
 
         [xi.zone.RAKAZNAR_INNER_COURT] =
         {
-            afterZoneIn =
-            {
-                function(player)
-                    if
-                        not player:hasKeyItem(xi.ki.AWAKENED_CRYSTALLIZED_PSYCHE) and
-                        mission:getVar(player, 'Status') == 0
-                    then
-                        -- TODO: This message needs verification, and need to determine if there
-                        -- is a unique event or message.
-                        npcUtil.giveKeyItem(player, xi.ki.AWAKENED_CRYSTALLIZED_PSYCHE)
-                    end
-                end,
-            },
+            afterZoneIn = function(player)
+                if
+                    not player:hasKeyItem(xi.ki.AWAKENED_CRYSTALLIZED_PSYCHE) and
+                    mission:getVar(player, 'Status') == 0
+                then
+                    -- TODO: This message needs verification, and need to determine if there
+                    -- is a unique event or message.
+                    npcUtil.giveKeyItem(player, xi.ki.AWAKENED_CRYSTALLIZED_PSYCHE)
+                end
+            end,
         },
     },
 }

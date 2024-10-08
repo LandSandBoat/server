@@ -3,6 +3,7 @@
 --  NPC: Brakobrik
 -- !pos 164.605 10.992 -91.253 11
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

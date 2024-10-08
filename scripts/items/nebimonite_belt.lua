@@ -3,6 +3,7 @@
 -- nebimonite_belt
 -- Dispense: Nebimonite
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

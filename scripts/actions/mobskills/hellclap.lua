@@ -2,6 +2,7 @@
 -- Hellclap
 -- Deals magical damage to enemies within a fan-shaped area. Additional effect: Weight
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

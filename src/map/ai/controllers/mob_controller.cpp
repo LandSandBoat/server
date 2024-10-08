@@ -1,20 +1,20 @@
 ﻿/*
 ===========================================================================
 
-Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2010-2015 Darkstar Dev Teams
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
@@ -438,8 +438,6 @@ bool CMobController::TryCastSpell()
         return false;
     }
 
-    m_LastMagicTime = m_Tick - std::chrono::milliseconds(xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_MAGIC_COOL) / 2));
-
     // Find random spell from list
     std::optional<SpellID> chosenSpellId;
     if (m_firstSpell)
@@ -568,40 +566,59 @@ void CMobController::DoCombatTick(time_point tick)
     HandleEnmity();
     PTarget = static_cast<CBattleEntity*>(PMob->GetEntity(PMob->GetBattleTargetID()));
 
+    if (TryDeaggro())
+    {
+        Disengage();
+        return;
+    }
+
+    TryLink();
+
+    PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", CLuaBaseEntity(PMob));
+    luautils::OnMobFight(PMob, PTarget);
+
+    if (PMob->PAI->IsCurrentState<CInactiveState>() || !PMob->PAI->CanChangeState())
+    {
+        return;
+    }
+
+    if (PFollowTarget != nullptr && m_followType == FollowType::RunAway)
+    {
+        if (distance(PMob->loc.p, PFollowTarget->loc.p) > FollowRunAwayDistance)
+        {
+            if (!PMob->PAI->PathFind->IsFollowingPath())
+                PMob->PAI->PathFind->PathTo(PFollowTarget->loc.p);
+            PMob->PAI->PathFind->FollowPath(m_Tick);
+        }
+        else
+        {
+            PMob->PAI->EventHandler.triggerListener("RUN_AWAY", CLuaBaseEntity(PMob), CLuaBaseEntity(PFollowTarget));
+            ClearFollowTarget();
+        }
+        return;
+    }
+
     if (PTarget)
     {
-        if (TryDeaggro())
-        {
-            Disengage();
-            return;
-        }
-
-        TryLink();
-
         float currentDistance = distance(PMob->loc.p, PTarget->loc.p);
 
-        PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", CLuaBaseEntity(PMob));
-        luautils::OnMobFight(PMob, PTarget);
-
-        if (PMob->PAI->IsCurrentState<CInactiveState>() || !PMob->PAI->CanChangeState())
-        {
-            return;
-        }
-        else if (IsSpecialSkillReady(currentDistance) && TrySpecialSkill())
-        {
-            return;
-        }
-        else if (IsSpellReady(currentDistance) && TryCastSpell()) // Try to spellcast (this is done first so things like Chainspell spam is prioritised over TP moves etc.
-        {
-            return;
-        }
-        else if (m_Tick >= m_LastMobSkillTime && xirand::GetRandomNumber(1, 10000) <= PMob->TPUseChance() && MobSkill())
+        if (IsSpecialSkillReady(currentDistance) && TrySpecialSkill())
         {
             return;
         }
 
-        Move();
+        if (IsSpellReady(currentDistance) && TryCastSpell()) // Try to spellcast (this is done first so things like Chainspell spam is prioritised over TP moves etc.
+        {
+            return;
+        }
+
+        if (m_Tick >= m_LastMobSkillTime && xirand::GetRandomNumber(1, 10000) <= PMob->TPUseChance() && MobSkill())
+        {
+            return;
+        }
     }
+
+    Move();
 }
 
 void CMobController::FaceTarget(uint16 targid)
@@ -900,6 +917,12 @@ void CMobController::DoRoamTick(time_point tick)
         PMob->m_OwnerID.clean();
     }
 
+    if (PFollowTarget != nullptr && m_followType == FollowType::Roam && distance(PMob->loc.p, PFollowTarget->loc.p) > FollowRoamDistance)
+    {
+        PMob->PAI->PathFind->PathAround(PFollowTarget->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+        PMob->PAI->PathFind->FollowPath(m_Tick);
+    }
+
     if (m_Tick >= m_mobHealTime + 10s && PMob->getMobMod(MOBMOD_NO_REST) == 0 && PMob->CanRest())
     {
         // recover 10% health and lose tp
@@ -977,8 +1000,7 @@ void CMobController::DoRoamTick(time_point tick)
                 {
                     // I spawned a pet
                 }
-                else if (PMob->GetMJob() == JOB_SMN && CanCastSpells() && PMob->SpellContainer->HasBuffSpells() &&
-                         m_Tick >= m_LastMagicTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_MAGIC_COOL)))
+                else if (PMob->GetMJob() == JOB_SMN && CanCastSpells() && PMob->SpellContainer->HasBuffSpells() && m_Tick >= m_nextMagicTime)
                 {
                     // summon pet
                     auto spellID = PMob->SpellContainer->GetBuffSpell();
@@ -1003,11 +1025,10 @@ void CMobController::DoRoamTick(time_point tick)
                     luautils::OnMobRoamAction(PMob);
                     m_LastActionTime = m_Tick;
                 }
-                else if (PMob->CanRoam() && PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(),
-                                                                            (uint8)PMob->getMobMod(MOBMOD_ROAM_TURNS), PMob->m_roamFlags))
+                else if (PMob->CanRoam() && PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(), (uint8)PMob->getMobMod(MOBMOD_ROAM_TURNS), PMob->m_roamFlags))
                 {
                     // TODO: #AIToScript (event probably)
-                    if (PMob->m_roamFlags & ROAMFLAG_WORM)
+                    if (PMob->m_roamFlags & ROAMFLAG_WORM && !PMob->PAI->IsCurrentState<CMagicState>())
                     {
                         // move down
                         PMob->animationsub = 1;
@@ -1123,6 +1144,7 @@ void CMobController::Reset()
     m_NeutralTime   = m_Tick;
 
     PTarget = nullptr;
+    ClearFollowTarget();
 }
 
 bool CMobController::MobSkill(uint16 targid, uint16 wsid)
@@ -1172,11 +1194,16 @@ bool CMobController::Engage(uint16 targid)
     {
         m_firstSpell = true;
 
+        if (PFollowTarget != nullptr && m_followType == FollowType::Roam)
+        {
+            ClearFollowTarget();
+        }
+
         // Don't cast magic or use special ability right away
         if (PMob->getBigMobMod(MOBMOD_MAGIC_DELAY) != 0)
         {
-            m_LastMagicTime =
-                m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_MAGIC_COOL) + xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_MAGIC_DELAY)));
+            m_nextMagicTime =
+                m_Tick + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_MAGIC_COOL) + xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_MAGIC_DELAY)));
         }
 
         if (PMob->getBigMobMod(MOBMOD_SPECIAL_DELAY) != 0)
@@ -1192,6 +1219,11 @@ bool CMobController::Engage(uint16 targid)
         }
     }
     return ret;
+}
+
+bool CMobController::CanFollowTarget(CBattleEntity* PTarget)
+{
+    return !PMob->m_neutral && (PMob->m_roamFlags & ROAMFLAG_FOLLOW) && PFollowTarget == nullptr && m_followType == FollowType::None && CanAggroTarget(PTarget);
 }
 
 bool CMobController::CanAggroTarget(CBattleEntity* PTarget)
@@ -1264,11 +1296,55 @@ bool CMobController::Cast(uint16 targid, SpellID spellid)
     return CController::Cast(targid, spellid);
 }
 
+void CMobController::SetFollowTarget(CBaseEntity* PTarget, FollowType followType)
+{
+    if (PFollowTarget == PTarget && m_followType == followType)
+    {
+        return;
+    }
+
+    if (PTarget != nullptr)
+    {
+        luautils::OnMobFollow(PMob, PTarget);
+    }
+    else if (m_followType == FollowType::Roam)
+    {
+        PMob->m_neutral = true;
+        m_NeutralTime   = m_Tick + 30s;
+        luautils::OnMobUnfollow(PMob, PFollowTarget);
+        if (PMob->health.hp == PMob->GetMaxHP())
+        {
+            PMob->m_OwnerID.clean();
+            PMob->PEnmityContainer->Clear();
+        }
+    }
+
+    PFollowTarget = PTarget;
+    m_followType  = followType;
+}
+
+void CMobController::ClearFollowTarget()
+{
+    PFollowTarget = nullptr;
+    m_followType  = FollowType::None;
+}
+
+void CMobController::OnCastStopped(CMagicState& state, action_t& action)
+{
+    int32 magicCool = PMob->getBigMobMod(MOBMOD_MAGIC_COOL);
+    m_nextMagicTime = m_Tick + std::chrono::milliseconds(xirand::GetRandomNumber(magicCool / 2, magicCool));
+}
+
 bool CMobController::CanMoveForward(float currentDistance)
 {
     TracyZoneScoped;
 
     uint16 standbackRange = 20;
+
+    if (PMob->getMobMod(MOBMOD_STANDBACK_RANGE) > 0)
+    {
+        standbackRange = PMob->getMobMod(MOBMOD_STANDBACK_RANGE);
+    }
 
     if (PMob->m_Behaviour & BEHAVIOUR_STANDBACK && currentDistance < standbackRange && PMob->CanSeeTarget(PTarget))
     {
@@ -1325,17 +1401,17 @@ bool CMobController::IsSpecialSkillReady(float currentDistance)
 bool CMobController::IsSpellReady(float currentDistance)
 {
     TracyZoneScoped;
-    int32 bonusTime = 0;
-    if (currentDistance > 5)
-    {
-        // Mobs use ranged attacks quicker when standing back
-        bonusTime = PMob->getBigMobMod(MOBMOD_STANDBACK_COOL);
-    }
 
     if (PMob->StatusEffectContainer->HasStatusEffect({ EFFECT_CHAINSPELL, EFFECT_MANAFONT }))
     {
         return true;
     }
 
-    return (m_Tick >= m_LastMagicTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_MAGIC_COOL) - bonusTime));
+    if (currentDistance > 5)
+    {
+        // Mobs use magic quicker when standing back
+        return m_Tick >= (m_nextMagicTime - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_STANDBACK_COOL)));
+    }
+
+    return m_Tick >= m_nextMagicTime;
 }

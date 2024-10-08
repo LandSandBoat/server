@@ -3,6 +3,7 @@
 -- Scroll of Uncanny Etude
 -- Teaches the song Uncanny Etude
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

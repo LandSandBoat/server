@@ -3,6 +3,7 @@
 -- Scroll of Curaga
 -- Teaches the white magic Curaga
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

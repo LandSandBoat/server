@@ -4,6 +4,7 @@
 -- Quests: The Walls of Your Mind (Asuran Fists WSNM "Bodach")
 -- !pos 20 17 -140 236
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

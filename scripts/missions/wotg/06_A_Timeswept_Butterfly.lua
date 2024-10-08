@@ -23,14 +23,11 @@ mission.sections =
 
         [xi.zone.LA_VAULE_S] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if prevZone == xi.zone.JUGNER_FOREST_S then
-                        return 1
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if prevZone == xi.zone.JUGNER_FOREST_S then
+                    return 1
+                end
+            end,
 
             onEventFinish =
             {

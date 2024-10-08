@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MARKETS_S]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

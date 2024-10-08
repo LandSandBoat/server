@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.MHAURA]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local messages =

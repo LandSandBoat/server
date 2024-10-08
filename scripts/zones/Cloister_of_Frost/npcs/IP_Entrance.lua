@@ -4,6 +4,7 @@
 -- Involved in Quests: Trial by Ice, Trial Size Trial by Ice
 -- !pos 558 0 596 203
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

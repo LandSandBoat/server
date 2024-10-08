@@ -3,6 +3,7 @@
 --   NM: Korroloka Leech
 -- Involved in Quest: Ayame and Kaede
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

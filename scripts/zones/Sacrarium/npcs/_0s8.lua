@@ -4,6 +4,7 @@
 -- Involved in Mission: Secrets of Worship
 -- !pos 45.500 -1.500 10.000 28
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

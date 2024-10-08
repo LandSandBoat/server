@@ -3,6 +3,7 @@
 -- Scroll of Fowl Aubade
 -- Teaches the song Fowl Aubade
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

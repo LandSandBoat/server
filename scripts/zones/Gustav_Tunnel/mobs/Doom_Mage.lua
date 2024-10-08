@@ -2,6 +2,7 @@
 -- Area: Gustav Tunnel
 --  Mob: Doom Mage
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

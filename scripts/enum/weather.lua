@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum xi.weather
 xi.weather =
 {
     NONE            =  0,

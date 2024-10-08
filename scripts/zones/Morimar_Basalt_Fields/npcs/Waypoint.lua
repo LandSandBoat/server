@@ -9,6 +9,7 @@
 -- Bivouac #4       : !pos -323 -32 2 265
 -- Bivouac #5       : !pos -78.2 -47.284 303 265
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

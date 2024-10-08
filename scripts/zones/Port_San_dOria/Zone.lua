@@ -3,6 +3,7 @@
 -----------------------------------
 require('scripts/quests/flyers_for_regine')
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

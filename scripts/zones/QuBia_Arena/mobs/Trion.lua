@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.QUBIA_ARENA]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -40,6 +41,7 @@ entity.onMobRoam = function(mob)
             local target = GetMobByID(mobId)
 
             if
+                target and
                 target:isSpawned() and
                 not target:isDead()
             then

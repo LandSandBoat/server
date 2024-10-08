@@ -8,6 +8,7 @@
 -----------------------------------
 local ID = zones[xi.zone.INNER_HORUTOTO_RUINS]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

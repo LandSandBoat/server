@@ -3,6 +3,7 @@
 -- Door: _6lg (Cornelia's Room)
 -- !pos 114 -20 -7 237
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

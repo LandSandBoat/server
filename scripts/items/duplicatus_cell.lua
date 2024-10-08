@@ -3,6 +3,7 @@
 -- ID 5373
 -- Unlocks support job
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

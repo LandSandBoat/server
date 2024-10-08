@@ -2,6 +2,7 @@
 -- ID: 15296
 -- tathlum_belt
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

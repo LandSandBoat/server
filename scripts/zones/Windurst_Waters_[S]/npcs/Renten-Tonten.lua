@@ -3,6 +3,7 @@
 --  NPC: Renten-Tonten
 -- !pos 133.840 -6.75 173.305 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

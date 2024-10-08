@@ -3,6 +3,7 @@
 --  Zedi, while in Animation form 3 (Rings)
 --  Blinkable 1-3 hit, addtional effect Plague on hit.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

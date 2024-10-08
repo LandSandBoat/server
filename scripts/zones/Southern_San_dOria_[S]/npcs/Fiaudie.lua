@@ -5,6 +5,7 @@
 -- Explains Campaign Ops, freelances
 -- Trigger event 313 for ENDLESS DEBUG HELL
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

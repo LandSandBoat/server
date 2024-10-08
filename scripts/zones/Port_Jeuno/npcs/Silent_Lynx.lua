@@ -2,6 +2,7 @@
 -- Area: Port Jeuno
 --  NPC: Silent Lynx
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

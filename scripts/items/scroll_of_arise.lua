@@ -3,6 +3,7 @@
 -- Scroll of Arise
 -- Teaches the white magic Arise
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -2,6 +2,7 @@
 -- Victory Beacon
 -- Used by Rughadjeen (Trust)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

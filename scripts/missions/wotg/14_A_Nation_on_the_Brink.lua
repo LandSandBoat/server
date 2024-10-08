@@ -12,7 +12,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.A_NATION_
 
 mission.reward =
 {
-    title       = xi.ki.BATTLE_OF_JEUNO_VETERAN,
+    title       = xi.title.BATTLE_OF_JEUNO_VETERAN,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.CROSSROADS_OF_TIME },
 }
 
@@ -56,22 +56,19 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    local missionStatus = player:getMissionStatus(mission.areaId)
+            onZoneIn = function(player, prevZone)
+                local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if missionStatus == 2 then
-                        return 4
-                    elseif missionStatus == 3 then
-                        return 20
-                    elseif missionStatus == 4 then
-                        return 21
-                    elseif missionStatus == 5 then
-                        return 22
-                    end
-                end,
-            },
+                if missionStatus == 2 then
+                    return 4
+                elseif missionStatus == 3 then
+                    return 20
+                elseif missionStatus == 4 then
+                    return 21
+                elseif missionStatus == 5 then
+                    return 22
+                end
+            end,
 
             onEventUpdate =
             {

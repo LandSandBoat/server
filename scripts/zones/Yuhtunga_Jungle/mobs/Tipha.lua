@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDisengage = function(mob)

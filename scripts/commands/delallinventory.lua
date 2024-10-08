@@ -2,6 +2,7 @@
 -- func: delallinventory
 -- desc: Deletes all items in a player's inventory, if they have any.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

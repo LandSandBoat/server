@@ -4,12 +4,13 @@
 -----------------------------------
 local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     if player:getXPos() < -440 then
         player:messageSpecial(ID.text.DOES_NOT_RESPOND)
-        return 1
+        return
     end
 
     return -1

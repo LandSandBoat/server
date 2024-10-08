@@ -182,11 +182,6 @@ namespace logging
 
     void AddBacktrace(std::string const& str)
     {
-        if (BacktraceBuffer.is_full())
-        {
-            BacktraceBuffer.dequeue();
-        }
-
         BacktraceBuffer.enqueue(str);
     }
 
@@ -194,6 +189,7 @@ namespace logging
     {
         std::vector<std::string> backtrace;
 
+        // Emptying in this manner will mean the oldest is returned first, and the most recent is returned last
         while (!BacktraceBuffer.is_empty())
         {
             backtrace.push_back(BacktraceBuffer.dequeue());

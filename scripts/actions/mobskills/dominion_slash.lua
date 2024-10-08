@@ -6,6 +6,7 @@
 -- Range: Unknown radial
 -- One source also mentions that it "can dispel important buffs."
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.elevator
 xi.elevator =
 {
     TIMED_AUTOMATIC           = 0,

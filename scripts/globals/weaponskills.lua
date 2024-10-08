@@ -381,7 +381,7 @@ local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcPara
         magicdmg = target:magicDmgTaken(magicdmg, wsParams.ele)
 
         if magicdmg > 0 then
-            magicdmg = adjustForTarget(target, magicdmg, wsParams.ele) -- this may absorb or nullify
+            magicdmg = magicdmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, wsParams.ele) -- this may absorb or nullify
         end
 
         if magicdmg > 0 then -- handle nonzero damage if previous function does not absorb or nullify
@@ -486,7 +486,11 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     for parameterName, modList in pairs(modParameters) do
         if attacker:getMod(modList[2]) > 0 then
-            wsParams[parameterName] = wsParams[parameterName] + (attacker:getMod(modList[2]) / 100)
+            if wsParams[parameterName] then
+                wsParams[parameterName] = wsParams[parameterName] + (attacker:getMod(modList[2]) / 100)
+            else
+                wsParams[parameterName] = attacker:getMod(modList[2]) / 100
+            end
         end
     end
 
@@ -966,7 +970,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
             return dmg
         end
 
-        dmg = adjustForTarget(target, dmg, wsParams.ele)
+        dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, wsParams.ele)
 
         if dmg > 0 then
             dmg = dmg - target:getMod(xi.mod.PHALANX)
@@ -1052,7 +1056,11 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
 
     local enmityEntity = wsResults.taChar or attacker
 
-    if wsParams.overrideCE and wsParams.overrideVE then
+    if
+        wsParams.overrideCE and
+        wsParams.overrideVE and
+        wsResults.tpHitsLanded + wsResults.extraHitsLanded > 0
+    then
         defender:addEnmity(enmityEntity, wsParams.overrideCE, wsParams.overrideVE)
     else
         local enmityMult = wsParams.enmityMult or 1

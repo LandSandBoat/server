@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = zones[xi.zone.MHAURA]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onGameHour = function(zone)

@@ -3,6 +3,7 @@
 -- Item: Kingdom Stables Collar
 -- Teleports to Chocobo Stables (San d'Oria)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

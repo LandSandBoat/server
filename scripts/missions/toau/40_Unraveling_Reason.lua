@@ -64,23 +64,20 @@ mission.sections =
 
         [xi.zone.WAJAOM_WOODLANDS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    -- Each of these 3 cutscenes that follow Ru'Lude 10098 are onZone events.  It is possible
-                    -- to not require this, but is retail accurate.
+            onZoneIn = function(player, prevZone)
+                -- Each of these 3 cutscenes that follow Ru'Lude 10098 are onZone events.  It is possible
+                -- to not require this, but is retail accurate.
 
-                    local missionStatus = player:getMissionStatus(mission.areaId)
+                local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if missionStatus == 0 then
-                        return 11
-                    elseif missionStatus == 1 then
-                        return 21
-                    else
-                        return 22
-                    end
-                end,
-            },
+                if missionStatus == 0 then
+                    return 11
+                elseif missionStatus == 1 then
+                    return 21
+                else
+                    return 22
+                end
+            end,
 
             onEventFinish =
             {

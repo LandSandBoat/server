@@ -2,6 +2,7 @@
 -- Area: Fei'Yin
 --   NM: Southern Shadow
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

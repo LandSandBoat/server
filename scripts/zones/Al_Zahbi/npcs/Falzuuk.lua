@@ -4,6 +4,7 @@
 -- Type: Imperial Gate Guard
 -- !pos -60.486 0.999 105.397 48
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

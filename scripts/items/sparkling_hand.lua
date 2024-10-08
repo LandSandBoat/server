@@ -3,6 +3,7 @@
 -- Sparkling Hand
 -- The user's right hand glows in a white light
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

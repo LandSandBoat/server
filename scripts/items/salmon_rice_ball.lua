@@ -12,6 +12,7 @@
 -- Atk +40
 -- Def +40
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

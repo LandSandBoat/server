@@ -3,6 +3,7 @@
 -- Scroll of Watera
 -- Teaches the black magic Watera
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -2,6 +2,7 @@
 -- Area: Ranguemont Pass
 --  Mob: Stirge
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

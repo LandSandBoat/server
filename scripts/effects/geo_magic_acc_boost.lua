@@ -1,6 +1,7 @@
 -----------------------------------
 -- Effect: GEO Magic acc Boost
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

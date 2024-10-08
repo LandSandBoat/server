@@ -9,6 +9,7 @@
 -- Store TP 6
 -- hHP +1
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -14,6 +14,7 @@
 -----------------------------------
 local ID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -62,7 +63,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- 3: purchase hiking
     -- 4: purchase jeuno tour
     if csid == 10108 and option >= 1 and option <= 4 then
-        if player:getGil(3500) then
+        if player:getGil() < 3500 then
             player:messageSpecial(ID.text.NOT_HAVE_ENOUGH_GIL)
             return
         end

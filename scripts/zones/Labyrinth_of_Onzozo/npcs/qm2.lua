@@ -4,6 +4,7 @@
 -- Involved in Quest: Yomi Okuri
 -- !pos -176 10 -60 213
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

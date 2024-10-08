@@ -7,6 +7,7 @@
 -- Range: 10' radial?
 -- Notes: Used only by Medusa. Starts using it at 25%.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

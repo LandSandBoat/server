@@ -4,6 +4,7 @@
 -- Involved in Quest: In Defiant Challenge
 -- !pos 105.275 -32 92.551 195
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

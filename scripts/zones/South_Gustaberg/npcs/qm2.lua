@@ -4,6 +4,7 @@
 -- Involved in Quest: Smoke on the Mountain
 -- !pos 461 -21 -580 107
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -49,7 +49,7 @@ mission.sections =
         {
             ['_6tc'] =
             {
-                onTrigger = function(player, csid, option, npc)
+                onTrigger = function(player, npc)
                     if not utils.mask.getBit(player:getMissionStatus(mission.areaId), 1) then
                         return mission:event(20)
                     end
@@ -67,14 +67,11 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if not utils.mask.getBit(player:getMissionStatus(mission.areaId), 0) then
-                        return 176
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if not utils.mask.getBit(player:getMissionStatus(mission.areaId), 0) then
+                    return 176
+                end
+            end,
 
             onEventFinish =
             {

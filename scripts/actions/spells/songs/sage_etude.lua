@@ -2,6 +2,7 @@
 -- Spell: Sage Etude
 -- Static INT Boost, BRD 66
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

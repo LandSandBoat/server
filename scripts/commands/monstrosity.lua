@@ -2,6 +2,7 @@
 -- func: monstrosity
 -- desc: scripts/globals/monstrosity.lua for a general overview of how Monstrosity works and is designed.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

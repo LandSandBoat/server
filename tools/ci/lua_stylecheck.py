@@ -391,7 +391,11 @@ class LuaStyleCheck:
                 # Checks that apply to all lines
                 self.check_table_formatting(code_line)
                 self.check_parameter_padding(code_line)
-                self.check_variable_names(code_line)
+
+                # If this is a spec file, allow for uppercase definitions
+                if "/specs/" not in self.filename:
+                    self.check_variable_names(code_line)
+
                 self.check_semicolon(code_line)
                 self.check_indentation(code_line)
                 self.check_conditional_padding(code_line)

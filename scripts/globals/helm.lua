@@ -417,7 +417,7 @@ local helmInfo =
                     { 2130, xi.item.CHUNK_OF_ROCK_SALT     },
                     { 1700, xi.item.SEASHELL               },
                     {  430, xi.item.CRAB_SHELL             },
-                    { 1490, xi.item.FISH_SCALES            },
+                    { 1490, xi.item.HANDFUL_OF_FISH_SCALES },
                     { 2130, xi.item.LUGWORM                },
                     { 1060, xi.item.SHELL_BUG              },
                     {  100, xi.item.CORAL_FRAGMENT         },

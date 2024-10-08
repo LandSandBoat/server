@@ -3,6 +3,7 @@
 -- Luminohelix Schema
 -- Teaches the black magic Luminohelix
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

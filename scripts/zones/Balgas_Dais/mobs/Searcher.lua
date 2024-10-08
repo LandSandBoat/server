@@ -3,6 +3,7 @@
 --  Mob: Searcher
 -- Mission 2-3 BCNM Fight
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

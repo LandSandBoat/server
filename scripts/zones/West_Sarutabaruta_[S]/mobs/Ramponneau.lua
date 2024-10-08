@@ -2,6 +2,7 @@
 -- Area: West Sarutabaruta [S]
 --   NM: Ramponneau
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

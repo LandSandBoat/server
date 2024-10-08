@@ -3,6 +3,7 @@
 -- Goblin Belt
 -- Enchantment: 60Min, Costume - Goblin (dagger)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

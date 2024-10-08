@@ -3,6 +3,7 @@
 --  NPC: Door: Departures Exit
 -- !pos -62 1 -8 236
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

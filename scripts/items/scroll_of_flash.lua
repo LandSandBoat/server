@@ -3,6 +3,7 @@
 -- Scroll of Flash
 -- Teaches the white magic Flash
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

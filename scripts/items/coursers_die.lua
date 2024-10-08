@@ -3,6 +3,7 @@
 -- Courser's Die
 -- Teaches the job ability Coursers Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

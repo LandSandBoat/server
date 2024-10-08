@@ -2,6 +2,7 @@
 -- Area: Bastok Markets
 --  NPC: Tancredi
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

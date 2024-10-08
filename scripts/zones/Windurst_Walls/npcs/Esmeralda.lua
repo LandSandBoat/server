@@ -4,6 +4,7 @@
 -- Type: Consul. Rep.
 -- !pos 128.629 -12.5 139.387 239
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

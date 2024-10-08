@@ -4,6 +4,7 @@
 -- Type: Goldsmithing Adv. Synthesis Image Support
 -- !pos -193.849 -7.824 -56.372 235
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

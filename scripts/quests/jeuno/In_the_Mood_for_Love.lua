@@ -5,6 +5,7 @@
 -- Odasel  !pos -58 -6 -111 245
 -- Matoaka !pos -37 -6 -122 245
 -----------------------------------
+
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.IN_THE_MOOD_FOR_LOVE)
 
 quest.reward =

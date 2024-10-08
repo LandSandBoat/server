@@ -3,6 +3,7 @@
 -- plate_of_indi-focus
 -- Teaches INDI-FOCUS
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

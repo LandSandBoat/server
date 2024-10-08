@@ -2,6 +2,7 @@
 -- func: givels
 -- desc: Makes a linkpearl for the given linkshell (pearlsack for gm)
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

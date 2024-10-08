@@ -3,6 +3,7 @@
 --  MOB: Taifun
 -- Involved in Quest: A New Dawn (BST AF3)
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -68,17 +68,14 @@ mission.sections =
                 end,
             },
 
-            afterZoneIn =
-            {
-                function(player)
-                    if
-                        not player:hasItem(xi.item.MOONSHADE_EARRING) and
-                        mission:getVar(player, 'Status') == 0
-                    then
-                        mission:setLocalVar(player, 'Option', 1)
-                    end
-                end,
-            },
+            afterZoneIn = function(player)
+                if
+                    not player:hasItem(xi.item.MOONSHADE_EARRING) and
+                    mission:getVar(player, 'Status') == 0
+                then
+                    mission:setLocalVar(player, 'Option', 1)
+                end
+            end,
 
             onEventUpdate =
             {

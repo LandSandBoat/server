@@ -3,6 +3,7 @@
 -- Scroll of Aeroja
 -- Teaches the black magic Aeroja
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

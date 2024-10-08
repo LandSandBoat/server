@@ -346,7 +346,6 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
                 PChar->pushPacket(new CPartyDefinePacket(nullptr));
                 PChar->pushPacket(new CPartyMemberUpdatePacket(PChar, 0, 0, PChar->getZone()));
                 PChar->pushPacket(new CCharUpdatePacket(PChar));
-                PChar->PParty = nullptr;
 
                 _sql->Query("DELETE FROM accounts_parties WHERE charid = %u", PChar->id);
 
@@ -370,7 +369,9 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
                     PChar->PTreasurePool->UpdatePool(PChar);
                 }
             }
+
             members.erase(memberToDelete);
+            PEntity->PParty = nullptr;
         }
     }
 }

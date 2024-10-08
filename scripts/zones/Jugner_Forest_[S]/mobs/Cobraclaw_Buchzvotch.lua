@@ -3,6 +3,7 @@
 --  Mob: Cobraclaw Buchzvotch
 -- Wrath of the Griffon Fight
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

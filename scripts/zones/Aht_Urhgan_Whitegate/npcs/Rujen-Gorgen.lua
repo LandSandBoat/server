@@ -2,6 +2,7 @@
 -- Area: Aht Urhgan Whitegate
 --  NPC: Rujen-Gorgen
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

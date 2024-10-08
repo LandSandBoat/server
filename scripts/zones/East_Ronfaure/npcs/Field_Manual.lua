@@ -2,6 +2,7 @@
 -- Field Manual
 -- Area: East Ronfaure
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -8,6 +8,7 @@
 -- Duration: 8Min
 -- Leathercraft Skill +3
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

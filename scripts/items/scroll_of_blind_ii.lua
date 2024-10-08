@@ -3,6 +3,7 @@
 -- Scroll of Blind II
 -- Teaches the black magic Blind II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

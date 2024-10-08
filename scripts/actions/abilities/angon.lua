@@ -8,6 +8,7 @@
 -- Range: 10.0 yalms
 -- Notes: Only fails if it can't apply the def down status.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

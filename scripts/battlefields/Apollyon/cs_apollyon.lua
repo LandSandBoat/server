@@ -54,7 +54,7 @@ function content:onBattlefieldTick(battlefield, tick)
     -- Get which player is going to be aggrod
     local player = GetPlayerByID(battlefield:getLocalVar('AutoAggroTarget'))
 
-    if player:isDead() then
+    if player and player:isDead() then
         -- Need to find a new target
         local players = battlefield:getPlayers()
 
@@ -79,13 +79,14 @@ function content:onBattlefieldTick(battlefield, tick)
     end
 
     local boss = GetMobByID(nextBoss)
+    if player and boss then
+        battlefield:setLocalVar('AutoAggro', boss:getID())
+        battlefield:setLocalVar('AutoAggroTime', os.time() + utils.minutes(7))
+        battlefield:setLocalVar('AutoAggroTarget', player:getID())
 
-    battlefield:setLocalVar('AutoAggro', boss:getID())
-    battlefield:setLocalVar('AutoAggroTime', os.time() + utils.minutes(7))
-    battlefield:setLocalVar('AutoAggroTarget', player:getID())
-
-    if boss:isAlive() then
-        boss:updateEnmity(player)
+        if boss:isAlive() then
+            boss:updateEnmity(player)
+        end
     end
 end
 
@@ -117,8 +118,10 @@ function content.handleBossCombatTick(boss, supportOffsets, otherSupportOffsets)
 
     for _, offset in ipairs(offsets) do
         local support = GetMobByID(bossID + offset)
-        support:setSpawn(bossX + math.random(-2, 2), bossY, bossZ + math.random(-2, 2))
-        support:spawn()
+        if support then
+            support:setSpawn(bossX + math.random(-2, 2), bossY, bossZ + math.random(-2, 2))
+            support:spawn()
+        end
     end
 
     -- Alternate which support group to spawn

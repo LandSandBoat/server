@@ -19,7 +19,7 @@ local misareauxGlobal =
             end
         elseif vHour >= 22 or vHour < 4 then -- Spawn traps for Ziphius
             local random = GetNPCByID(ID.npc.ZIPHIUS_QM_BASE + math.random(0, 5))
-            if random:getStatus() == xi.status.DISAPPEAR then
+            if random and random:getStatus() == xi.status.DISAPPEAR then
                 random:setLocalVar('[Ziphius]Spawn', 1)
             end
 

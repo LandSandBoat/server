@@ -9,6 +9,7 @@
 -- MP recovered while healing 2
 -- Undead Killer 5
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

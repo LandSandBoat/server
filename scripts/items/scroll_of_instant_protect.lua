@@ -3,6 +3,7 @@
 --  Scroll of Instant Protect
 --  Grants the effect of Protect
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

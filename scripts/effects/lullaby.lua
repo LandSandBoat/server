@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.LULLABY
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

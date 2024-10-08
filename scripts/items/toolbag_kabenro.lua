@@ -3,6 +3,7 @@
 -- Toolbag Kaben
 -- When used, you will obtain one stack of kabenro
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

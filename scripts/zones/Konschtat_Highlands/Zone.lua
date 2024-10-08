@@ -5,11 +5,8 @@ local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/missions/amk/helpers')
 -----------------------------------
+---@type TZone
 local zoneObject = {}
-
-zoneObject.onChocoboDig = function(player, precheck)
-    return xi.chocoboDig.start(player, precheck)
-end
 
 zoneObject.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
@@ -65,12 +62,14 @@ zoneObject.onGameHour = function(zone)
         local time = os.time()
 
         if
+            haty and
             phase >= 90 and
             not haty:isSpawned() and
             time > haty:getLocalVar('cooldown')
         then
             SpawnMob(ID.mob.HATY)
         elseif
+            vran and
             phase <= 10 and
             not vran:isSpawned() and
             time > vran:getLocalVar('cooldown')

@@ -3,6 +3,7 @@
 -- Item: Anemohelix Schema
 -- Teaches the black magic Anemohelix
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

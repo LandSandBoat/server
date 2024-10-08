@@ -4,6 +4,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.targetType
 xi.targetType =
 {
     NONE                    = 0x00,

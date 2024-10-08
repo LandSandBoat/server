@@ -3,6 +3,7 @@
 -- Scroll of Choke
 -- Teaches the black magic Choke
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -1360,7 +1360,7 @@ namespace battleutils
 
             if (hasDrainDaze || hasAspirDaze || hasHasteDaze)
             {
-                int16 delay = PAttacker->GetWeaponDelay(false) / 10;
+                int32 delay = PAttacker->GetWeaponDelay(false) / 10;
 
                 EFFECT daze       = EFFECT_NONE;
                 uint32 attackerID = 0;
@@ -1682,7 +1682,7 @@ namespace battleutils
         return pdif;
     }
 
-    int16 CalculateBaseTP(int delay)
+    int16 CalculateBaseTP(int32 delay)
     {
         int16 x = 1;
         if (delay <= 180)
@@ -2014,9 +2014,15 @@ namespace battleutils
             validWeapon = PDefender->GetMJob() == JOB_MNK || PDefender->GetMJob() == JOB_PUP;
         }
 
+        int16 cannotGuardMod = 0;
+        if (auto* PMob = dynamic_cast<CMobEntity*>(PDefender))
+        {
+            cannotGuardMod = PMob->getMobMod(MOBMOD_CANNOT_GUARD);
+        }
+
         bool hasGuardSkillRank = (GetSkillRank(SKILL_GUARD, PDefender->GetMJob()) > 0 || GetSkillRank(SKILL_GUARD, PDefender->GetSJob()) > 0);
 
-        if (validWeapon && hasGuardSkillRank && PDefender->PAI->IsEngaged())
+        if (validWeapon && cannotGuardMod == 0 && hasGuardSkillRank && PDefender->PAI->IsEngaged())
         {
             // assuming this is like parry
             float gbase = (float)PDefender->GetSkill(SKILL_GUARD) + PDefender->getMod(Mod::GUARD);
@@ -2223,6 +2229,8 @@ namespace battleutils
         }
         damage = std::clamp(damage, -99999, 99999);
 
+        damage = CheckAndApplyDamageCap(damage, PDefender);
+
         // Scarlet Delirium: Updates status effect power with damage bonus
         battleutils::HandleScarletDelirium(PDefender, damage);
 
@@ -2308,13 +2316,13 @@ namespace battleutils
 
             if ((slot == SLOT_RANGED || slot == SLOT_AMMO) && PAttacker->objtype == TYPE_PC)
             {
-                int16 delay = PAttacker->GetRangedWeaponDelay(true);
+                int32 delay = PAttacker->GetRangedWeaponDelay(true);
 
-                baseTp = CalculateBaseTP((delay * 120) / 1000);
+                baseTp = CalculateBaseTP(delay * 120 / 1000);
             }
             else
             {
-                int16 delay      = PAttacker->GetWeaponDelay(true);
+                int32 delay      = PAttacker->GetWeaponDelay(true);
                 auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
 
                 if (sub_weapon && sub_weapon->getDmgType() > DAMAGE_TYPE::NONE && sub_weapon->getDmgType() < DAMAGE_TYPE::HTH &&
@@ -2330,7 +2338,7 @@ namespace battleutils
                     ratio = 2.0f;
                 }
 
-                baseTp = CalculateBaseTP((int16)(delay * 60.0f / 1000.0f / ratio));
+                baseTp = CalculateBaseTP(delay * 60.0f / 1000.0f / ratio);
             }
 
             if (giveTPtoAttacker)
@@ -2346,8 +2354,14 @@ namespace battleutils
 
             if (giveTPtoVictim)
             {
+                uint32 sBlowMerit = 0;
+                if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(PAttacker))
+                {
+                    sBlowMerit = PChar->PMeritPoints->GetMeritValue(MERIT_TYPE::MERIT_SUBTLE_BLOW_EFFECT, PChar);
+                }
+
                 // account for attacker's subtle blow which reduces the baseTP gain for the defender
-                float sBlow1    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW), -50.0f, 50.0f);
+                float sBlow1    = std::clamp((float)(PAttacker->getMod(Mod::SUBTLE_BLOW) + sBlowMerit), -50.0f, 50.0f);
                 float sBlow2    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW_II), -50.0f, 50.0f);
                 float sBlowMult = ((100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 75.0f)) / 100.0f);
 
@@ -2386,11 +2400,19 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    int32 TakeWeaponskillDamage(CCharEntity* PAttacker, CBattleEntity* PDefender, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType, uint8 slot,
+    int32 TakeWeaponskillDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType, uint8 slot,
                                 bool primary, float tpMultiplier, uint16 bonusTP, float targetTPMultiplier)
     {
         auto* weapon   = GetEntityWeapon(PAttacker, (SLOTTYPE)slot);
         bool  isRanged = (slot == SLOT_AMMO || slot == SLOT_RANGED);
+
+        if (attackType == ATTACK_TYPE::PHYSICAL &&
+            PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_DEFENSE_BOOST) &&
+            PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DEFENSE_BOOST)->GetSubPower() != 0 &&
+            infront(PAttacker->loc.p, PDefender->loc.p, PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DEFENSE_BOOST)->GetSubPower()))
+        {
+            damage = 0;
+        }
 
         if (damage > 0)
         {
@@ -2405,6 +2427,8 @@ namespace battleutils
 
         HandleAfflatusMiseryDamage(PDefender, damage);
         damage = std::clamp(damage, -99999, 99999);
+
+        damage = CheckAndApplyDamageCap(damage, PDefender);
 
         int32 corrected = PDefender->takeDamage(damage, PAttacker, attackType, damageType);
         if (damage < 0)
@@ -2458,12 +2482,12 @@ namespace battleutils
 
             if (isRanged)
             {
-                int16 delay = PAttacker->GetRangedWeaponDelay(true);
+                int32 delay = PAttacker->GetRangedWeaponDelay(true);
                 baseTp      = CalculateBaseTP((delay * 120) / 1000);
             }
             else
             {
-                int16 delay = PAttacker->GetWeaponDelay(true);
+                int32 delay = PAttacker->GetWeaponDelay(true);
 
                 auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
 
@@ -2480,7 +2504,7 @@ namespace battleutils
                     ratio = 2.0f;
                 }
 
-                baseTp = (int16)(CalculateBaseTP((delay * 60) / 1000) / ratio);
+                baseTp = CalculateBaseTP(delay * 60 / 1000 / ratio);
             }
 
             // add tp to attacker
@@ -2491,8 +2515,14 @@ namespace battleutils
                                                (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker))))));
             }
 
+            uint32 sBlowMerit = 0;
+            if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(PAttacker))
+            {
+                sBlowMerit = PChar->PMeritPoints->GetMeritValue(MERIT_TYPE::MERIT_SUBTLE_BLOW_EFFECT, PChar);
+            }
+
             // account for attacker's subtle blow which reduces the baseTP gain for the defender
-            float sBlow1    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW), -50.0f, 50.0f);
+            float sBlow1    = std::clamp((float)(PAttacker->getMod(Mod::SUBTLE_BLOW) + sBlowMerit), -50.0f, 50.0f);
             float sBlow2    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW_II), -50.0f, 50.0f);
             float sBlowMult = (100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 75.0f)) / 100.0f;
 
@@ -2547,7 +2577,7 @@ namespace battleutils
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
         // Remove effects from damage
-        if (PSpell->canTargetEnemy() && damage > 0 && PSpell->dealsDamage())
+        if (PSpell->canTargetEnemy() && damage > 0)
         {
             PDefender->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DAMAGE);
 
@@ -2558,9 +2588,12 @@ namespace battleutils
             int16 tp = battleutils::CalculateSpellTP(PAttacker, PSpell);
             PAttacker->addTP(tp);
 
-            // Targets of damaging spells gain 50 tp + store tp bonus
-            float storeTPMultiplier = 1.0f + 0.01f * static_cast<float>(PDefender->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PDefender));
-            PDefender->addTP(static_cast<int16>(50 * storeTPMultiplier));
+            // Targets of damaging spells gain TP
+            auto tpGainFunc = lua["xi"]["combat"]["tp"]["calculateTPGainOnMagicalDamage"];
+            if (tpGainFunc.valid())
+            {
+                PDefender->addTP(tpGainFunc(damage, CLuaBaseEntity(PAttacker), CLuaBaseEntity(PDefender)));
+            }
         }
 
         return damage;
@@ -2574,6 +2607,8 @@ namespace battleutils
 
     int32 TakeSwipeLungeDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
     {
+        damage = CheckAndApplyDamageCap(damage, PDefender);
+
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
         // Remove effects from damage
@@ -2798,7 +2833,7 @@ namespace battleutils
 
             critHitRate += GetDexCritBonus(PAttacker, PDefender);
             critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
-            critHitRate += PDefender->getMod(Mod::ENEMYCRITRATE);
+            critHitRate -= PDefender->getMod(Mod::CRITICAL_HIT_EVASION); // Similar to merits. However, it can be possitive or negative. When mod is negative, it raises crit-hit-rate.
 
             // need to check for mods that only impact attacks with a specific weapon (like Senjuinrikio)
             if (auto* player = dynamic_cast<CCharEntity*>(PAttacker))
@@ -2889,7 +2924,7 @@ namespace battleutils
 
         critHitRate += GetAGICritBonus(PAttacker, PDefender);
         critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
-        critHitRate += PDefender->getMod(Mod::ENEMYCRITRATE);
+        critHitRate -= PDefender->getMod(Mod::CRITICAL_HIT_EVASION); // Similar to merits. However, it can be possitive or negative. When mod is negative, it raises crit-hit-rate.
         critHitRate = std::clamp(critHitRate, 0, 100);
 
         return (uint8)critHitRate;
@@ -3009,7 +3044,7 @@ namespace battleutils
             fstr = static_cast<int32>((dif + 13) / 2);
         }
 
-        if (SlotID == SLOT_RANGED)
+        if (SlotID == SLOT_RANGED || SlotID == SLOT_AMMO)
         {
             rank = PAttacker->GetRangedWeaponRank();
             // Different caps than melee weapons
@@ -4442,14 +4477,14 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    int32 getOverWhelmDamageBonus(CCharEntity* m_PChar, CBattleEntity* PDefender, int32 damage)
+    int32 getOverWhelmDamageBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage)
     {
-        if (m_PChar->objtype == TYPE_PC) // Some mobskills use TakeWeaponskillDamage function, which calls upon this one.
+        if (auto PChar = dynamic_cast<CCharEntity*>(PAttacker)) // Some mobskills use TakeWeaponskillDamage function, which calls upon this one.
         {
             // must be in front of mob
-            if (infront(m_PChar->loc.p, PDefender->loc.p, 64))
+            if (infront(PChar->loc.p, PDefender->loc.p, 64))
             {
-                uint8 meritCount = m_PChar->PMeritPoints->GetMeritValue(MERIT_OVERWHELM, m_PChar);
+                uint8 meritCount = PChar->PMeritPoints->GetMeritValue(MERIT_OVERWHELM, PChar);
                 float tmpDamage  = static_cast<float>(damage);
 
                 switch (meritCount)
@@ -4556,96 +4591,6 @@ namespace battleutils
         return shotCount;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Calculate BST Charm duration                                         *
-     *                                                                       *
-     ************************************************************************/
-
-    void tryToCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim)
-    {
-        // Gear with Charm + does not affect the success rate of Charm, but increases the duration of the Charm.
-        // Each +1 to Charm increases the duration of charm by 5%; +20 Charm doubles the duration of charm.
-
-        // Too Weak          30 Minutes
-        // Easy Prey         20 Minutes
-        // Decent Challenge  10 Minutes
-        // Even Match        3.0 Minutes
-        // Tough             1.5 Minutes
-        // VT                1 minute    guess
-        // IT                30 seconds  guess
-        uint32 CharmTime = 0;
-
-        // player charming mob
-        CMobEntity* PMob = dynamic_cast<CMobEntity*>(PVictim);
-        if (PMob && PCharmer->objtype == TYPE_PC)
-        {
-            // Bind uncharmable mobs and pets for 1 to 5 seconds
-            if (((CMobEntity*)PVictim)->getMobMod(MOBMOD_CHARMABLE) == 0 || PVictim->PMaster != nullptr)
-            {
-                PVictim->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_BIND, EFFECT_BIND, 1, 0, xirand::GetRandomNumber(1, 5)));
-                return;
-            }
-
-            // mob is charmable
-            const EMobDifficulty mobCheck = charutils::CheckMob(PCharmer->GetMLevel(), PVictim->GetMLevel());
-            switch (mobCheck)
-            {
-                case EMobDifficulty::TooWeak:
-                    CharmTime = 1800000;
-                    break;
-
-                case EMobDifficulty::IncrediblyEasyPrey:
-                case EMobDifficulty::EasyPrey:
-                    CharmTime = 1200000;
-                    break;
-
-                case EMobDifficulty::DecentChallenge:
-                    CharmTime = 600000;
-                    break;
-
-                case EMobDifficulty::EvenMatch:
-                    CharmTime = 180000;
-                    break;
-
-                case EMobDifficulty::Tough:
-                    CharmTime = 90000;
-                    break;
-
-                case EMobDifficulty::VeryTough:
-                    CharmTime = 45000;
-                    break;
-
-                case EMobDifficulty::IncrediblyTough:
-                    CharmTime = 22500;
-                    break;
-
-                default:
-                    // no-op
-                    break;
-            }
-
-            // apply charm time extension from gear
-            uint16 charmModValue = (PCharmer->getMod(Mod::CHARM_TIME));
-            // adds 5% increase
-            uint32 extraCharmTime = (uint32)(CharmTime * (charmModValue * 0.5f) / 10.f);
-            CharmTime += extraCharmTime;
-
-            // randomize charm time if > EM
-            if (mobCheck > EMobDifficulty::EvenMatch)
-            {
-                CharmTime = (uint32)(CharmTime * xirand::GetRandomNumber(0.75f, 1.25f));
-            }
-
-            if (!TryCharm(PCharmer, PVictim))
-            {
-                return;
-            }
-        }
-
-        applyCharm(PCharmer, PVictim, std::chrono::milliseconds(CharmTime));
-    }
-
     void applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, duration charmTime)
     {
         PVictim->isCharmed = true;
@@ -4733,126 +4678,6 @@ namespace battleutils
             }
             PEntity->updatemask |= UPDATE_ALL_CHAR;
         }
-    }
-
-    /************************************************************************
-     *                                                                       *
-     *  Return the percentage chance that one entity has to charm another.   *
-     *                                                                       *
-     ************************************************************************/
-
-    float GetCharmChance(CBattleEntity* PCharmer, CBattleEntity* PTarget, bool includeCharmAffinityAndChanceMods)
-    {
-        //---------------------------------------------------------
-        // chance of charm is based on:
-        //  CHR - both entities
-        //  Victims M level
-        //  charmers BST level (not main level)
-        //
-        //  75 with a BST SJ Lvl l0 will struggle on EP
-        //  75 with a BST SJ Lvl 75 will not - this player has bst leveled to 75 and is using it as SJ
-        //---------------------------------------------------------
-
-        // Paranoid check
-        if (!PCharmer || !PTarget)
-        {
-            return 0.f;
-        }
-
-        // Can the target even be charmed?
-        CMobEntity* PTargetAsMob = dynamic_cast<CMobEntity*>(PTarget);
-        if (PTargetAsMob)
-        {
-            // Cannot charm pets, or other non-charmable mobs
-            if (!PTargetAsMob->getMobMod(MOBMOD_CHARMABLE) || PTargetAsMob->PMaster)
-            {
-                return 0.f;
-            }
-        }
-
-        uint8 charmerLvl = PCharmer->GetMLevel();
-        uint8 targetLvl  = PTarget->GetMLevel();
-
-        EMobDifficulty mobCheck    = charutils::CheckMob(charmerLvl, targetLvl);
-        float          charmChance = 0.f;
-
-        switch (mobCheck)
-        {
-            case EMobDifficulty::TooWeak:
-                charmChance = 90.f;
-                break;
-            case EMobDifficulty::IncrediblyEasyPrey:
-            case EMobDifficulty::EasyPrey:
-                charmChance = 75.f;
-                break;
-            case EMobDifficulty::DecentChallenge:
-                charmChance = 60.f;
-                break;
-            case EMobDifficulty::EvenMatch:
-                charmChance = 40.f;
-                break;
-            case EMobDifficulty::Tough:
-                charmChance = 30.f;
-                break;
-            case EMobDifficulty::VeryTough:
-                charmChance = 20.f;
-                break;
-            case EMobDifficulty::IncrediblyTough:
-                charmChance = 10.f;
-                break;
-            default:
-                // no-op
-                break;
-        }
-
-        uint8 charmerBSTlevel = 0;
-
-        if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(PCharmer))
-        {
-            uint8 charmerBRDlevel = PChar->jobs.job[JOB_BRD];
-            charmerBSTlevel       = PChar->jobs.job[JOB_BST];
-            if (PCharmer->GetMJob() == JOB_BRD && charmerBRDlevel > charmerBSTlevel)
-            {
-                charmerBSTlevel = charmerBRDlevel;
-            }
-
-            charmerBSTlevel = std::min(charmerBSTlevel, charmerLvl);
-        }
-        else if (PCharmer->objtype == TYPE_MOB)
-        {
-            charmerBSTlevel = charmerLvl;
-        }
-
-        // TODO: Obtain and adjust with accurate Level and CHR data.
-        const float levelRatio = (charmerBSTlevel - targetLvl) / 100.f;
-        charmChance *= (1.f + levelRatio);
-
-        const float chrRatio = (PCharmer->CHR() - PTarget->CHR()) / 100.f;
-        charmChance *= (1.f + chrRatio);
-
-        // Retail doesn't take light/apollo into account for Gauge
-        if (includeCharmAffinityAndChanceMods)
-        {
-            // NQ elemental staves have 2 affinity, HQ have 3 affinity. Boost is 10/15% respectively so multiply by 5.
-            const float charmAffintyMods = PCharmer->getMod(Mod::LIGHT_AFFINITY_ACC) * 5.f;
-            const float charmChanceMods  = (float)PCharmer->getMod(Mod::CHARM_CHANCE);
-
-            charmChance *= (1.f + (charmChanceMods + charmAffintyMods) / 100.0f);
-        }
-
-        // Cap chance at 95%
-        return std::clamp(charmChance, 0.f, 95.f);
-    }
-
-    /************************************************************************
-     *                                                                       *
-     *  Calculate Charm success Rate                                         *
-     *                                                                       *
-     ************************************************************************/
-
-    bool TryCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim)
-    {
-        return GetCharmChance(PCharmer, PVictim) > xirand::GetRandomNumber(100.f);
     }
 
     void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
@@ -5015,6 +4840,35 @@ namespace battleutils
         PChar->PClaimedMob = nullptr;
     }
 
+    // Checks to see if the mob has a damage cap value
+    // This is used for instances like Suttung, Antaeus, Crustacean Conundrum bcnm, Colonization reives
+    int32 CheckAndApplyDamageCap(int32 damage, CBattleEntity* PDefender)
+    {
+        int32 damageCap     = PDefender->getMod(Mod::RECEIVED_DAMAGE_CAP);     // The max damage cap
+        int32 damageVariant = PDefender->getMod(Mod::RECEIVED_DAMAGE_VARIANT); // The value you want the damage to have a variance by
+
+        // If the target has no mod or the damage is less than the cap return normal damage
+        if (damageCap == 0 || damage < damageCap)
+        {
+            return damage;
+        }
+
+        damage = std::clamp(damage, 0, damageCap);
+
+        // If for whatever reason your damage variant is set too high set the variant to 0 as a fail safe
+        if (damageVariant > damageCap)
+        {
+            ShowWarning("battleutils::CheckAndApplyDamageCap - RECEIVED_DAMAGE_VARIANT is > than RECEIVED_DAMAGE_CAP");
+            damageVariant = 0;
+        }
+
+        // see https://bugs.llvm.org/show_bug.cgi?id=18767#c1 ; essentially, [min, max) range on this RNG call excludes the max
+        // so we must add +1 to our max to achieve the range we want
+        damage -= xirand::GetRandomNumber<int32>(0, damageVariant + 1);
+
+        return std::clamp(damage, damageCap - damageVariant, damageCap);
+    }
+
     int32 BreathDmgTaken(CBattleEntity* PDefender, int32 damage)
     {
         float resist = 1.0f + PDefender->getMod(Mod::UDMGBREATH) / 10000.f;
@@ -5044,6 +4898,8 @@ namespace battleutils
         {
             damage = HandleSevereDamage(PDefender, damage, false);
         }
+
+        damage = CheckAndApplyDamageCap(damage, PDefender);
 
         return damage;
     }
@@ -5100,6 +4956,8 @@ namespace battleutils
             damage = HandleSevereDamage(PDefender, damage, false);
         }
 
+        damage = CheckAndApplyDamageCap(damage, PDefender);
+
         return damage;
     }
 
@@ -5147,6 +5005,8 @@ namespace battleutils
             damage = HandleFanDance(PDefender, damage);
         }
 
+        damage = CheckAndApplyDamageCap(damage, PDefender);
+
         return damage;
     }
 
@@ -5191,6 +5051,8 @@ namespace battleutils
 
             damage = HandleFanDance(PDefender, damage);
         }
+
+        damage = CheckAndApplyDamageCap(damage, PDefender);
 
         return damage;
     }
@@ -5911,7 +5773,7 @@ namespace battleutils
      *   Does the random deal effect to a specific character (reset ability) *
      *                                                                       *
      ************************************************************************/
-    bool DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget)
+    bool DoRandomDealToEntity(CCharEntity* PChar, CBattleEntity* PTarget)
     {
         std::vector<uint16> resetCandidateList;
         std::vector<uint16> activeCooldownList;
@@ -5970,8 +5832,11 @@ namespace battleutils
                 }
                 if (PChar != PTarget)
                 {
-                    // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
-                    PTarget->pushPacket(new CCharRecastPacket(PTarget));
+                    if (auto PCharTarget = dynamic_cast<CCharEntity*>(PTarget))
+                    {
+                        // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
+                        PCharTarget->pushPacket(new CCharRecastPacket(PCharTarget));
+                    }
                 }
                 return true;
             }
@@ -5990,16 +5855,19 @@ namespace battleutils
             // Reset first ability (shuffled or only)
             PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(0));
 
-            // Reset 2 abilities by chance (could be 2 abilitie that don't need resets)
+            // Reset 2 abilities by chance (could be 2 abilities that don't need resets)
             if (resetCandidateList.size() > 1 && activeCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(1, 100))
             {
                 PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(1));
             }
 
-            if (PChar != PTarget && PTarget->objtype == TYPE_PC)
+            if (PChar != PTarget)
             {
-                // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
-                PTarget->pushPacket(new CCharRecastPacket(PTarget));
+                if (auto PCharTarget = dynamic_cast<CCharEntity*>(PTarget))
+                {
+                    // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
+                    PCharTarget->pushPacket(new CCharRecastPacket(PCharTarget));
+                }
             }
 
             return true;
@@ -6646,7 +6514,8 @@ namespace battleutils
             }
 
             // remove TP Bonus from offhand weapon
-            if (PChar->equip[SLOT_SUB] != 0)
+            // TODO -- don't remove TP bonus if this TP bonus is from an augment (or perhaps add a second TP bonus stat.)
+            if (PChar->m_Weapons[SLOT_SUB])
             {
                 tp -= battleutils::GetScaledItemModifier(PEntity, PChar->m_Weapons[SLOT_SUB], Mod::TP_BONUS);
             }
@@ -6654,7 +6523,7 @@ namespace battleutils
             // if ranged WS, remove TP bonus from mainhand weapon
             if (damslot == SLOT_RANGED)
             {
-                if (PChar->equip[SLOT_MAIN] != 0)
+                if (PChar->m_Weapons[SLOT_MAIN])
                 {
                     tp -= battleutils::GetScaledItemModifier(PEntity, PChar->m_Weapons[SLOT_MAIN], Mod::TP_BONUS);
                 }
@@ -6662,7 +6531,8 @@ namespace battleutils
             else
             {
                 // if melee WS, remove TP bonus from ranged weapon
-                if (PChar->equip[SLOT_RANGED] != 0)
+                // TODO -- don't remove TP bonus if this TP bonus is from an augment (or perhaps add a second TP bonus stat.)
+                if (PChar->m_Weapons[SLOT_RANGED])
                 {
                     tp -= battleutils::GetScaledItemModifier(PEntity, PChar->m_Weapons[SLOT_RANGED], Mod::TP_BONUS);
                 }
@@ -6973,7 +6843,7 @@ namespace battleutils
                 if (runeAbsorbCount > 0)
                 {
                     PBattleEntity->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LIEMENT); // Liement absorbs once and disappears.
-                    float absorbMultiplier = (75 + runeAbsorbCount * absorbPower) / 100.0;
+                    float absorbMultiplier = (85 + runeAbsorbCount * absorbPower) / 100.0;
 
                     return absorbMultiplier * -1;
                 }
@@ -6981,5 +6851,4 @@ namespace battleutils
         }
         return 1.0;
     }
-
 }; // namespace battleutils

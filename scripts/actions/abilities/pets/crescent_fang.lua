@@ -1,6 +1,7 @@
 -----------------------------------
 -- Crescent Fang M=6
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

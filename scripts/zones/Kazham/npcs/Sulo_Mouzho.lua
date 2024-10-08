@@ -2,6 +2,7 @@
 -- Area: Kazham
 --  NPC: Sulo Mouzho
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

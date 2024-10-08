@@ -4,6 +4,7 @@
 -- Spawns Isgebind
 -- !pos 145 -117 471 253
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

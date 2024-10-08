@@ -86,10 +86,11 @@ local casketInfo =
 
 -----------------------------------
 -- Desc: Helper function for making it easier to read time between spawns.
+-- TODO: Simplify and deprecate this function, as its only used in timeElapsedCheck
 -----------------------------------
 local function convertTime(rawTime)
     local rawSeconds = tonumber(rawTime)
-    local timeTable = { 0, 0, 0 }
+    local timeTable = { '', '', '' }
 
     timeTable[1] = string.format('%02.f', math.floor(rawSeconds / 3600))
     timeTable[2] = string.format('%02.f', math.floor(rawSeconds / 60 - (timeTable[1] * 60)))

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Tidal Roar
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -15,7 +16,9 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
         -- The status effect requires the NO_LOSS_MESSAGE flag to be set
         local statusEffect = target:getStatusEffect(xi.effect.ATTACK_DOWN)
-        statusEffect:addEffectFlag(xi.effectFlag.NO_LOSS_MESSAGE)
+        if statusEffect then
+            statusEffect:addEffectFlag(xi.effectFlag.NO_LOSS_MESSAGE)
+        end
 
         -- TODO: Verify enmity gain total
         target:addEnmity(pet, 1, 60)

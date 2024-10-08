@@ -2,6 +2,7 @@
 -- Area: Mamook
 --   NM: Dragonscaled Bugaal Ja
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

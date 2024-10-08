@@ -2,6 +2,7 @@
 -- Area: Spire of Vahzl
 --  Mob: Cumulator
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -20,7 +21,7 @@ end
 entity.onMobFight = function(mob, target)
     if mob:getHPP() < 20 then
         local nextMob = GetMobByID(mob:getID() - 5) --Procreator aggros at <20%
-        if not nextMob:isEngaged() then
+        if nextMob and not nextMob:isEngaged() then
             nextMob:updateEnmity(target)
         end
     end

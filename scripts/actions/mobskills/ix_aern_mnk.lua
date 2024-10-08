@@ -2,6 +2,7 @@
 -- Hundred Fists
 -- Meant for Ix'Aern (MNK)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

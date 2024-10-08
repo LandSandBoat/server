@@ -33,17 +33,19 @@ function content:onEventFinishBattlefield(player, csid, option, npc)
         local phaseTwoId  = content.groups[4]['mobIds'][battlefield:getArea()][1]
         local phaseTwo    = GetMobByID(phaseTwoId)
 
-        if phaseTwo:isSpawned() then
-            return
+        if phaseTwo then
+            if phaseTwo:isSpawned() then
+                return
+            end
+
+            DespawnMob(content.groups[1]['mobIds'][battlefield:getArea()][1])
+            SpawnMob(phaseTwoId)
+
+            phaseTwo:setLocalVar('targetId', player:getTargID())
+            phaseTwo:timer(30000, function(mobArg)
+                phaseTwo:engage(mobArg:getLocalVar('targetId'))
+            end)
         end
-
-        DespawnMob(content.groups[1]['mobIds'][battlefield:getArea()][1])
-        SpawnMob(phaseTwoId)
-
-        phaseTwo:setLocalVar('targetId', player:getTargID())
-        phaseTwo:timer(30000, function(mobArg)
-            phaseTwo:engage(mobArg:getLocalVar('targetId'))
-        end)
     end
 end
 

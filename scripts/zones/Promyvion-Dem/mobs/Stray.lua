@@ -2,6 +2,7 @@
 -- Area: Promyvion-Dem
 --   NM: Stray
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

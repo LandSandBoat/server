@@ -4,6 +4,7 @@
 -- Obtained: SMN Level 87
 -- Recast Time: 00:05:00
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

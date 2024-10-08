@@ -514,11 +514,17 @@ INSERT INTO `mob_family_mods` VALUES (165,10,13,1); -- SUBLINK: 13
 INSERT INTO `mob_family_mods` VALUES (165,29,24,0); -- MDEF: 24
 INSERT INTO `mob_family_mods` VALUES (165,36,50,1); -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (165,51,3,1);  -- ROAM_TURNS: 3
+INSERT INTO `mob_family_mods` VALUES (165,56,-1,1); -- HP_STANDBACK: -1
+INSERT INTO `mob_family_mods` VALUES (165,4,10,1);  -- SIGHT_RANGE: 10
+INSERT INTO `mob_family_mods` VALUES (165,5,5,1);   -- SOUND_RANGE: 5
 
 -- Imp
 INSERT INTO `mob_family_mods` VALUES (166,10,13,1); -- SUBLINK: 13
 INSERT INTO `mob_family_mods` VALUES (166,36,50,1); -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (166,51,3,1);  -- ROAM_TURNS: 3
+INSERT INTO `mob_family_mods` VALUES (166,56,-1,1); -- HP_STANDBACK: -1
+INSERT INTO `mob_family_mods` VALUES (166,4,10,1);  -- SIGHT_RANGE: 10
+INSERT INTO `mob_family_mods` VALUES (166,5,5,1);   -- SOUND_RANGE: 5
 
 -- Kindred
 INSERT INTO `mob_family_mods` VALUES (169,10,1,1);    -- SUBLINK: 1
@@ -929,6 +935,13 @@ INSERT INTO `mob_family_mods` VALUES (481,42,989,1); -- TELEPORT_END: 989
 
 -- Astral Flow Pet
 INSERT INTO `mob_family_mods` VALUES (495,56,-1,1); -- HP_STANDBACK: -1
+
+-- Apkallu
+INSERT INTO `mob_family_mods` VALUES (27,4,5,1); -- SIGHT_RANGE: 5
+
+-- Flan
+INSERT INTO `mob_family_mods` VALUES (112,56,-1,1); -- HP_STANDBACK: -1
+INSERT INTO `mob_family_mods` VALUES (112,69,1,1);  -- NO_LINK: 1
 
 /*!40000 ALTER TABLE `mob_family_mods` ENABLE KEYS */;
 UNLOCK TABLES;

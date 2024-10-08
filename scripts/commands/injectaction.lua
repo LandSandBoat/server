@@ -2,6 +2,7 @@
 -- func: injectaction
 -- desc: Injects an action packet with the specified action and animation id.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

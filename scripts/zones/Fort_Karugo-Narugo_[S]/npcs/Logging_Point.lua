@@ -2,6 +2,7 @@
 -- Area: Fort Karugo-Narugo [S]
 --  NPC: Logging Point
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

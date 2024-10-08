@@ -30,14 +30,11 @@ mission.sections =
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if prevZone == xi.zone.EAST_RONFAURE_S then
-                        return 67
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if prevZone == xi.zone.EAST_RONFAURE_S then
+                    return 67
+                end
+            end,
 
             onEventFinish =
             {

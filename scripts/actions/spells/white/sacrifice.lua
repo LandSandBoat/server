@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Sacrifice
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
@@ -12,10 +13,9 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     -- remove one effect and add it to me
     for i, effect in ipairs(removables) do
-        if target:hasStatusEffect(effect) then
+        local statusEffect = target:getStatusEffect(effect)
+        if statusEffect then
             spell:setMsg(xi.msg.basic.MAGIC_ABSORB_AILMENT)
-
-            local statusEffect = target:getStatusEffect(effect)
 
             -- only add it to me if I don't have it
             if not caster:hasStatusEffect(effect) then

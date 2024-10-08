@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/rage') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 -- Todo: Pups can make it change frames, Overload causes Rage
 

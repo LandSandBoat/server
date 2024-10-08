@@ -2,6 +2,7 @@
 -- Incinerate
 -- Description: Deals Fire damage to targets in a fan-shaped area of effect.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

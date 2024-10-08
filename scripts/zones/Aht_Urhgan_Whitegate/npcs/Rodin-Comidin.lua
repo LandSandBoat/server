@@ -3,6 +3,7 @@
 --  NPC: Rodin-Comidin
 -- !pos 17.205 -5.999 51.161 50
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

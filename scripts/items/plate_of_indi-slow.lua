@@ -3,6 +3,7 @@
 -- plate_of_indi-slow
 -- Teaches INDI-SLOW
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

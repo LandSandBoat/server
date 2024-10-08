@@ -3,6 +3,7 @@
 --  NPC: Vikhu Nakuaino
 -- !zone 246
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

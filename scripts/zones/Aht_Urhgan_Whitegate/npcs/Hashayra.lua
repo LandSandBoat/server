@@ -2,6 +2,7 @@
 -- Area: Aht Urhgan Whitegate
 --  NPC: Hashayra
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

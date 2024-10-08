@@ -3,6 +3,7 @@
 -- Scroll of Hojo: Ni
 -- Teaches the ninjutsu Hojo: Ni
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

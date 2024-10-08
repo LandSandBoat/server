@@ -3,6 +3,7 @@
 -- NPC: Eschan Portal #3
 -- !pos -455 -3.5 -147.5 289
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

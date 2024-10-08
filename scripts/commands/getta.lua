@@ -2,6 +2,7 @@
 -- func: getta
 -- desc: returns the name of the entity that would be chosen for trick attack given the current (mob) target
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

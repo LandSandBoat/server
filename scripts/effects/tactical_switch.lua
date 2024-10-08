@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.TACTICAL_SWITCH
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

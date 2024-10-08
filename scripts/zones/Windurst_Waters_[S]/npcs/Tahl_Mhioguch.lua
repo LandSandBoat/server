@@ -3,6 +3,7 @@
 --  NPC: Tahl Mhioguch
 -- !pos -64.907 -5.947 81.391 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

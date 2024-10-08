@@ -12,6 +12,7 @@
 -- Skillchain Element(s): Transfixion
 -- Combos: Rapid Shot
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

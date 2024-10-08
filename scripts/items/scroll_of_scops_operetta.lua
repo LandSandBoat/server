@@ -3,6 +3,7 @@
 -- Scroll of Scops Operetta
 -- Teaches the song Scops Operetta
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

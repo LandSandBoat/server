@@ -7,6 +7,7 @@
 --  Range: 7.0
 --  Notes: Only used by armed BST Mamool Ja
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -18,12 +19,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    mob:setAnimationSub(1)
-
     local numhits = 1
     local accmod  = 1
-    local dmgmod  = 3
-    local info    = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local dmgmod  = 1
+    local info    = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.ACC_VARIES)
     local dmg     = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.SLASHING, info.hitslanded)
 
     target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.SLASHING)

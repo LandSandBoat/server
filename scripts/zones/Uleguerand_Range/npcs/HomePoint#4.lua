@@ -2,6 +2,7 @@
 -- Area: Uleguerand_Range
 --  NPC: HomePoint#4
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local hpEvent = 8703

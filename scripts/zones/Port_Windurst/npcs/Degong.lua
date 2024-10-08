@@ -4,6 +4,7 @@
 -- Type: Fishing Synthesis Image Support
 -- !pos -178.400 -3.835 60.480 240
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

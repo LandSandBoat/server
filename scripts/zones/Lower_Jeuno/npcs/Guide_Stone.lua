@@ -3,6 +3,7 @@
 --  NPC: Guide Stone
 -- !pos  19 -3 47 245
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

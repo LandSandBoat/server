@@ -3,6 +3,7 @@
 --  NPC: Abbudin
 -- !pos -56.338 2.777 -31.446 237
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

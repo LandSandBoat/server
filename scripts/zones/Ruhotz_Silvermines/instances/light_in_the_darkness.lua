@@ -57,7 +57,8 @@ instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     local deadCount = 0
     for i = 0, 9 do
         local mob = GetMobByID(ID.mob.SAPPHIRINE_QUADAV_OFFSET + i, instance)
-        if mob:isDead() then
+
+        if mob and mob:isDead() then
             deadCount = deadCount + 1
         end
     end

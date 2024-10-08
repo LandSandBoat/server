@@ -2,6 +2,7 @@
 -- Fear Touch
 -- Touches a single target. Additional effect: Slow
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

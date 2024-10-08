@@ -4,6 +4,7 @@
 -- !pos -58.6 2 -10 80
 -- Involved in WOTG21: Proof of Valor, The Long March North
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

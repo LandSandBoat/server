@@ -2,6 +2,7 @@
 -- func: addspell <spellID> <player>
 -- desc: adds the ability to use a spell to the player
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

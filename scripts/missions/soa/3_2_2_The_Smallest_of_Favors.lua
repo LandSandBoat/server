@@ -27,19 +27,16 @@ mission.sections =
 
         [xi.zone.CEIZAK_BATTLEGROUNDS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    -- TODO: Do not include Waypoint teleports to Ceizak
+            onZoneIn = function(player, prevZone)
+                -- TODO: Do not include Waypoint teleports to Ceizak
 
-                    if
-                        prevZone == xi.zone.WESTERN_ADOULIN and
-                        mission:getVar(player, 'Timer') <= VanadielUniqueDay()
-                    then
-                        return 20
-                    end
-                end,
-            },
+                if
+                    prevZone == xi.zone.WESTERN_ADOULIN and
+                    mission:getVar(player, 'Timer') <= VanadielUniqueDay()
+                then
+                    return 20
+                end
+            end,
 
             onEventFinish =
             {

@@ -3,6 +3,7 @@
 -- Scroll of Enwater
 -- Teaches the white magic Enwater
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

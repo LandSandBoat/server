@@ -6,6 +6,7 @@
 -----------------------------------
 local psoXjaGlobal = require('scripts/zones/PsoXja/globals')
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

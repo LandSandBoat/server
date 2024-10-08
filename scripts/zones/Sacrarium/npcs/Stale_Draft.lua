@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.SACRARIUM]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local swiftBeltNMs =
@@ -39,7 +40,12 @@ entity.onTrade = function(player, npc, trade)
         local race = player:getRace()
         local hate = player:getCharVar('FOMOR_HATE')
 
-        if races[race] and not nm:isSpawned() and hate >= 50 then
+        if
+            races[race] and
+            nm and
+            not nm:isSpawned() and
+            hate >= 50
+        then
             player:tradeComplete()
             player:setCharVar('FOMOR_HATE', 0)
             SpawnMob(nmId):updateClaim(player)

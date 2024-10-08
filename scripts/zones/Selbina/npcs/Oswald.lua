@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: Under the sea (finish), The gift, The real gift
 -- !pos 48 -15 9 248
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -71,21 +72,21 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('underTheSeaVar', 2)
     elseif
         csid == 37 and
-        npcUtil.completeQuest(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNDER_THE_SEA, { item = 13335, fame_area = xi.fameArea.SELBINA_RABAO, title = xi.title.LIL_CUPID, var = 'underTheSeaVar' })
+        npcUtil.completeQuest(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNDER_THE_SEA, { item = xi.item.AMBER_EARRING, fame_area = xi.fameArea.SELBINA_RABAO, title = xi.title.LIL_CUPID, var = 'underTheSeaVar' })
     then
         player:delKeyItem(xi.ki.ETCHED_RING)
     elseif csid == 70 and option == 50 then
         player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_GIFT)
     elseif
         csid == 72 and
-        npcUtil.completeQuest(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_GIFT, { item = 16497, fame_area = xi.fameArea.SELBINA_RABAO, title = xi.title.SAVIOR_OF_LOVE })
+        npcUtil.completeQuest(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_GIFT, { item = xi.item.SLEEP_DAGGER, fame_area = xi.fameArea.SELBINA_RABAO, title = xi.title.SAVIOR_OF_LOVE })
     then
         player:confirmTrade()
     elseif csid == 73 and option == 50 then
         player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT)
     elseif
         csid == 75 and
-        npcUtil.completeQuest(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT, { item = 17385, fame_area = xi.fameArea.SELBINA_RABAO, title = xi.title.THE_LOVE_DOCTOR })
+        npcUtil.completeQuest(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT, { item = xi.item.GLASS_FIBER_FISHING_ROD, fame_area = xi.fameArea.SELBINA_RABAO, title = xi.title.THE_LOVE_DOCTOR })
     then
         player:confirmTrade()
     end

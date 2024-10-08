@@ -2,6 +2,7 @@
 -- Double Claw
 -- Single target damage
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

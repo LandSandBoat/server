@@ -25,6 +25,7 @@
 -- The AMOUNT of damage done to the target is irrelevant to the behavior of nightmare sleep, only the source of the damage and the source of the Nightmare.
 -----------------------------------
 
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

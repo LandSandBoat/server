@@ -1,6 +1,7 @@
 -----------------------------------
 -- Rock Buster M=4
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -2,6 +2,7 @@
 -- Spell: Absorb-MND
 -- Steals an enemy's mind.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

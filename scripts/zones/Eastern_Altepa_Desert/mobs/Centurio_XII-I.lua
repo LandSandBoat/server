@@ -2,6 +2,7 @@
 -- Area: Eastern Altepa Desert (114)
 --   NM: Centurio XII-I
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

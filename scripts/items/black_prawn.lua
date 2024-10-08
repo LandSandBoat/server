@@ -7,6 +7,7 @@
 -- VIT +3
 -- DEF +16% (cap 50)
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -138,11 +138,14 @@ xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc)
     -- Tag mobs with the confrontation effect
     for _, mobId in pairs(mobs) do
         local mob = GetMobByID(mobId)
-        mob:addStatusEffect(xi.effect.CONFRONTATION, lookupKey, 0, 0)
-        mob:addListener('DEATH', 'CONFRONTATION_DEATH', function(mobArg)
-            mobArg:removeListener('CONFRONTATION_DEATH')
-            xi.confrontation.check(npc, false)
-        end)
+
+        if mob then
+            mob:addStatusEffect(xi.effect.CONFRONTATION, lookupKey, 0, 0)
+            mob:addListener('DEATH', 'CONFRONTATION_DEATH', function(mobArg)
+                mobArg:removeListener('CONFRONTATION_DEATH')
+                xi.confrontation.check(npc, false)
+            end)
+        end
     end
 
     -- Cache the lists into the global lookup

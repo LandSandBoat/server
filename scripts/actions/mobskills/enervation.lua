@@ -3,6 +3,7 @@
 -- Description: Lowers the defense and magical defense of enemies within range.
 -- Type: Magical (Dark)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -21,15 +22,14 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.DEFENSE_DOWN
-    local silenced   = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 10, 0, 120)
-    local blinded    = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MAGIC_DEF_DOWN, 8, 0, 120)
+    local defDown    = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 50, 0, 30)
+    local mdefDown   = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MAGIC_DEF_DOWN, 50, 0, 30)
 
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
 
-    -- display silenced first, else blind
-    if silenced == xi.msg.basic.SKILL_ENFEEB_IS then
+    if defDown == xi.msg.basic.SKILL_ENFEEB_IS then
         typeEffect = xi.effect.DEFENSE_DOWN
-    elseif blinded == xi.msg.basic.SKILL_ENFEEB_IS then
+    elseif mdefDown == xi.msg.basic.SKILL_ENFEEB_IS then
         typeEffect = xi.effect.MAGIC_DEF_DOWN
     else
         skill:setMsg(xi.msg.basic.SKILL_MISS)

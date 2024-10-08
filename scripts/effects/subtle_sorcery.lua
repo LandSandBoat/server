@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SUBTLE_SORCERY
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 -- Spell Cumulative Enmity reduction handled in magic_state.cpp

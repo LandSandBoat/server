@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.ATTOHWA_CHASM]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local citipatiPHTable =

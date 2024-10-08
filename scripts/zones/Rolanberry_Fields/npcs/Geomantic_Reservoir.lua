@@ -4,6 +4,7 @@
 -- Unlocks: Geo-MND
 -- !pos 243.900 -31.194 -255.254 110
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

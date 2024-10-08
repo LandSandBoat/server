@@ -4,6 +4,7 @@
 -- Log ID: 3, Quest ID: 12
 -- Mertaire : !pos -17 0 -61 245
 -----------------------------------
+
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
 
 quest.reward =

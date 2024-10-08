@@ -3,6 +3,7 @@
 -- Item: Invisible Mantle
 -- Item Effect: gives invisible
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

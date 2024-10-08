@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.FEIYIN]
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

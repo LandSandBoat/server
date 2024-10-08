@@ -3,6 +3,7 @@
 -- Scroll of Barsilencera
 -- Teaches the white magic Barsilencera
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

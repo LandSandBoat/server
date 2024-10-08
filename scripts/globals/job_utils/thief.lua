@@ -261,7 +261,7 @@ xi.job_utils.thief.useFlee = function(player, target, ability)
         player:delStatusEffect(xi.effect.WEIGHT)
     end
 
-    player:addStatusEffect(xi.effect.FLEE, 100, 0, duration)
+    player:addStatusEffect(xi.effect.FLEE, 10000, 0, duration)
 end
 
 xi.job_utils.thief.useHide = function(player, target, ability)
@@ -301,8 +301,12 @@ xi.job_utils.thief.useLarceny = function(player, target, ability, action)
         local newPower    = effectStolen:getPower()
         local newTick     = effectStolen:getTick()
         local newDuration = effectStolen:getDuration() + jpValue
+        local newSubType  = effectStolen:getSubType()
+        local newSubPower = effectStolen:getSubPower()
+        local newTier     = effectStolen:getTier()
+        local newFlags    = effectStolen:getEffectFlags()
 
-        player:addStatusEffectEx(newID, newIcon, newPower, newTick, newDuration)
+        player:addStatusEffectEx(newID, newIcon, newPower, newTick, newDuration, newSubType, newSubPower, newTier, newFlags)
         target:delStatusEffect(newID)
 
         effectID = newID

@@ -5,6 +5,7 @@
 -- !pos 115 14.68 164.1 213
 -- Involved in Quest: Bugi Soden
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

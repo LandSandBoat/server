@@ -6,6 +6,7 @@
 local ID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
 mixins = { require('scripts/mixins/families/gargouille') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local grandgoulePHTable =

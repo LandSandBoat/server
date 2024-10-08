@@ -4,6 +4,7 @@
 -- Involved in Quests: Under the sea
 -- !pos -15 -2 -16 248
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

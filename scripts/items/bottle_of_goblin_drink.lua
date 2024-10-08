@@ -3,6 +3,7 @@
 -- Item: Goblin Drink
 -- Item Effect: Restores 1 MP while healing / 3 tick 180 mins.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

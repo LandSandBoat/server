@@ -7,6 +7,7 @@
 --  Range: 10' cone
 --  Notes: Used by Murex affiliated with lightning element. Shock effect is fairly strong (28/tick).
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

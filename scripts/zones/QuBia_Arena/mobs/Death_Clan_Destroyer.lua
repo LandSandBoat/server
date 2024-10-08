@@ -4,10 +4,8 @@
 -----------------------------------
 local ID = zones[xi.zone.QUBIA_ARENA]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
-
-entity.onEventFinish = function(player, csid, option, npc)
-end
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.HP_STANDBACK, 60)

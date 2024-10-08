@@ -4,6 +4,7 @@
 -- !pos 105 0 -53 80
 -- Gate Guard
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

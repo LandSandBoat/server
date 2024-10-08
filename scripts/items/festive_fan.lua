@@ -3,6 +3,7 @@
 -- Festive Fan
 -- A paper fan appears in the user's left hand
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

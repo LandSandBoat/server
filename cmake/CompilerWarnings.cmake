@@ -79,6 +79,10 @@ function(set_project_warnings project_name)
       # TODO: -Wunused-macros    # warn on unused macros
   )
 
+  if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 18)
+      list(APPEND CLANG_WARNINGS -Wno-nan-infinity-disabled) # TODO: fmt triggers this, a combination of the fast-math flag and `isfinite`
+  endif()
+
   set(GCC_WARNINGS
       ${CLANG_WARNINGS}
       -Wmisleading-indentation # warn if indentation implies blocks where blocks do not exist

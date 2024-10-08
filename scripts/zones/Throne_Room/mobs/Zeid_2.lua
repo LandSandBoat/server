@@ -5,6 +5,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -24,6 +25,8 @@ entity.onMobFight = function(mob, target)
     if
         mob:getHPP() <= 77 and
         mob:getTP() >= 1000 and
+        shadow1 and
+        shadow2 and
         shadow1:isDead() and
         shadow2:isDead()
     then

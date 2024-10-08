@@ -6,6 +6,7 @@
 -- Duration: 00:01:00
 -- Cost: 1-5 Finishing Move charges
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -25,7 +26,7 @@ end
 abilityObject.onUseAbility = function(player, target, ability)
     for move = xi.effect.FINISHING_MOVE_1, xi.effect.FINISHING_MOVE_5 do
         player:delStatusEffect(move)
-        player:addStatusEffect(xi.effect.CLIMACTIC_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.CLIMACTIC_FLOURISH_EFFECT))
+        player:addStatusEffect(xi.effect.CLIMACTIC_FLOURISH, 3, 0, 60) -- TODO: player:getMerit(xi.merit.CLIMACTIC_FLOURISH_EFFECT) This was here and maybe it refered to FLOURISH_III job points?
     end
 end
 

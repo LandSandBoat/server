@@ -3,6 +3,7 @@
 -- Scroll of Enlight
 -- Teaches the white magic Enlight
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

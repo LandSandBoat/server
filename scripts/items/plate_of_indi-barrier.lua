@@ -3,6 +3,7 @@
 -- plate_of_indi-barrier
 -- Teaches INDI-BARRIER
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

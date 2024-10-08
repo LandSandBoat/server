@@ -4,11 +4,8 @@
 local func = require('scripts/zones/Carpenters_Landing/globals')
 local ID = zones[xi.zone.CARPENTERS_LANDING]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
-
-zoneObject.onChocoboDig = function(player, precheck)
-    return xi.chocoboDig.start(player, precheck)
-end
 
 zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.TEMPEST_TIGON)

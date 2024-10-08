@@ -3,6 +3,7 @@
 --  NPC: ??? (qm4)
 -- Note: Spawns Cavanneche
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

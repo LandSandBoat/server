@@ -2,6 +2,7 @@
 -- Area: Periqia
 --  NPC: Excaliace
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

@@ -2,13 +2,11 @@
 -- Area: Bibiki Bay
 --   NM: Dalham
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
-end
-
-entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.WATER_ABSORB, 100)
 end
 

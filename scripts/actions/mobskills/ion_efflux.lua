@@ -4,6 +4,7 @@
 -- Type: Magical
 -- Range: 10 yalms
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

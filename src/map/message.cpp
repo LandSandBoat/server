@@ -1,20 +1,20 @@
 /*
 ===========================================================================
 
-Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2010-2015 Darkstar Dev Teams
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
@@ -823,6 +823,28 @@ namespace message
 
                 break;
             }
+            case MSG_KILL_SESSION:
+            {
+                uint32 charID = ref<uint32>((uint8*)extra.data(), 0);
+
+                map_session_data_t* sessionToDelete = nullptr;
+                for (auto mapSession : map_session_list)
+                {
+                    auto session = mapSession.second;
+                    if (session->charID == charID)
+                    {
+                        sessionToDelete = session;
+                        break;
+                    }
+                }
+
+                if (sessionToDelete && sessionToDelete->blowfish.status == BLOWFISH_PENDING_ZONE)
+                {
+                    DebugSockets(fmt::format("Closing session of charid {} on request of other process", charID));
+                    map_close_session(server_clock::now(), sessionToDelete);
+                }
+                break;
+            }
             default:
             {
                 ShowWarning("Message: unhandled message type %d", type);
@@ -832,14 +854,14 @@ namespace message
 
     void send_charvar_update(uint32 charId, std::string const& varName, uint32 value, uint32 expiry)
     {
-        uint32 size = sizeof(uint32) + sizeof(uint32) + sizeof(uint32) + sizeof(uint8) + static_cast<uint32>(varName.size());
-        char*  buf  = new char[size];
+        const uint32 size      = sizeof(uint32) + sizeof(uint32) + sizeof(uint32) + sizeof(uint8) + 256;
+        char         buf[size] = {};
         memset(&buf[0], 0, size);
 
         ref<uint32>(buf, 0) = charId;
         ref<int32>(buf, 4)  = value;
         ref<uint32>(buf, 8) = expiry;
-        ref<uint8>(buf, 12) = (uint8)varName.size();
+        ref<uint8>(buf, 12) = static_cast<uint8>(std::min<size_t>(varName.size(), 255));
         memcpy(buf + 13, varName.c_str(), varName.size());
 
         message::send(MSG_CHARVAR_UPDATE, buf, size, nullptr);

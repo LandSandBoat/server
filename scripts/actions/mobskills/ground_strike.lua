@@ -1,6 +1,7 @@
 -----------------------------------
 -- Ground Strike
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

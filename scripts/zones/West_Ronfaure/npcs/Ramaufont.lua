@@ -3,6 +3,7 @@
 --  NPC: Ramaufont
 -- !pos -267.956 -71.999 414.399 100
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

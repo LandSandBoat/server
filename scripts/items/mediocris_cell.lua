@@ -3,6 +3,7 @@
 -- ID 5382
 -- Removes CHR Down effect
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

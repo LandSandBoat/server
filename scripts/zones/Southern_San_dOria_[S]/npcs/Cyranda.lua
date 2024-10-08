@@ -4,6 +4,7 @@
 -- !pos -76.5 2 -53.5 80
 -- Map vendor, event 676
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

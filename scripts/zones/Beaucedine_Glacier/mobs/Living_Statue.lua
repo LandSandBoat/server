@@ -2,6 +2,7 @@
 -- Area: Beaucedine Glacier
 --  Mob: Living Statue
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

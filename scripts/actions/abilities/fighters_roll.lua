@@ -22,6 +22,7 @@
 -- 11          |18%     |24%
 -- 12+         |-6%     |-6%
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -2,6 +2,7 @@
 -- Area: Middle Delkfutt's Tower
 --  Mob: Stirge
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

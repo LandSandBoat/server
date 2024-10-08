@@ -29,7 +29,7 @@ mission.sections =
 
         [xi.zone.WESTERN_ADOULIN] =
         {
-            ['Levil'] = mission:event(40, 256, 0, 0, 3, 1, 0, utils.max_UINT32, 4),
+            ['Levil'] = mission:event(40, 256, 0, 0, 3, 1, 0, utils.MAX_UINT32, 4),
         },
 
         [xi.zone.EASTERN_ADOULIN] =

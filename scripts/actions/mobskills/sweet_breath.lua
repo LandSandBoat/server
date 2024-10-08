@@ -3,6 +3,7 @@
 -- Description: Deals water damage to enemies within a fan-shaped area originating from the caster.
 -- Type: Magical Water (Element)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

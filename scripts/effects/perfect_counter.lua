@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.PERFECT_COUNTER
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -3,6 +3,7 @@
 --  NPC: cermet portal
 -- !pos 420 0 401 34
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

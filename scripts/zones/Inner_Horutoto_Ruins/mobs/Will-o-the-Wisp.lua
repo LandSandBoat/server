@@ -2,6 +2,7 @@
 -- Area: Inner Horutoto Ruins
 --  Mob: Will-o-the-Wisp
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

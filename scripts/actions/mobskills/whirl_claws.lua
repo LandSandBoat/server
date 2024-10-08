@@ -3,6 +3,7 @@
 -- Deals damage in an area of effect.
 -- 100% TP: ??? / 200% TP: ??? / 300% TP: ???
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

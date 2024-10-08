@@ -4,6 +4,7 @@
 -- !pos -367.367 2.999 229.020 191
 -- Involved in quest "As Thick As Thieves"
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

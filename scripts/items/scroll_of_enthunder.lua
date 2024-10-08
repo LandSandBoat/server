@@ -3,6 +3,7 @@
 -- Scroll of Enthunder
 -- Teaches the white magic Enthunder
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

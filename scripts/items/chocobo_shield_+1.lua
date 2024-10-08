@@ -3,6 +3,7 @@
 -- Item: Chocobo Shield +1
 -- Dispense: Sakura Biscuit
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

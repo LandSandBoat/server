@@ -3,6 +3,7 @@
 -- Pyrohelix Schema
 -- Teaches the black magic Pyrohelix
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

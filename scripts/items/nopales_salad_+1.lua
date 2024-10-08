@@ -8,6 +8,7 @@
 -- Ranged Accuracy +25
 -- Ranged Attack +15
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

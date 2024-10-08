@@ -2,6 +2,7 @@
 -- Spell: Vital Etude
 -- Static VIT Boost, BRD 70
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

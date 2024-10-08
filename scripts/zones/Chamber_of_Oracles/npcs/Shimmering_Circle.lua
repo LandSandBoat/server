@@ -3,6 +3,7 @@
 --  NPC: Shimmering Circle
 -- !pos -220 0 12 168
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

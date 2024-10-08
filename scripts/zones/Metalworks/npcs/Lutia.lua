@@ -3,6 +3,7 @@
 --  NPC: Lutia
 -- !pos 24.076 -17 -33.060 237
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local slaveGlobes =
@@ -30,7 +31,7 @@ local getSlaves = function()
     for _, slaveGlobeID in ipairs(slaveGlobes) do
         local slaveGlobe = GetMobByID(slaveGlobeID)
 
-        if slaveGlobe:isSpawned() then
+        if slaveGlobe and slaveGlobe:isSpawned() then
             table.insert(spawnedSlaves, slaveGlobe)
         else
             table.insert(notSpawnedSlaves, slaveGlobe)
@@ -69,12 +70,28 @@ end
 
 -- spawn the slave and update any enmity
 local spawnSlaveGlobe = function(mg, slaveGlobe, spawnPos)
-    slaveGlobe:setSpawn(spawnPos.x, spawnPos.y, spawnPos.z, spawnPos.rot)
-    slaveGlobe:spawn()
+    mg:entityAnimationPacket(xi.animationString.CAST_SUMMONER_START)
+    mg:timer(5000, function(mob)
+        mg:entityAnimationPacket(xi.animationString.CAST_SUMMONER_STOP)
+        slaveGlobe:setSpawn(spawnPos.x, spawnPos.y, spawnPos.z, spawnPos.rot)
+        slaveGlobe:spawn()
+        if mg:isEngaged() then
+            slaveGlobe:updateEnmity(mg:getTarget())
+        end
 
-    if mg:isEngaged() then
-        slaveGlobe:updateEnmity(mg:getTarget())
-    end
+        local followTarget = mg
+        for _, slaveGlobeID in ipairs(slaveGlobes) do
+            local currentSlave = GetMobByID(slaveGlobeID)
+
+            if currentSlave then
+                local action = currentSlave:getCurrentAction()
+                if action ~= xi.act.NONE and action ~= xi.act.DEATH then
+                    currentSlave:follow(followTarget, xi.followType.ROAM)
+                    followTarget = currentSlave
+                end
+            end
+        end
+    end)
 end
 
 -- set the next spawn time, if it's at a max, set to zero
@@ -108,20 +125,6 @@ local trySpawnSlaveGlobe = function(mg, nowTime, spawnedSlaves, notSpawnedSlaves
     end
 end
 
-local handleSlaveGlobesRoam = function(mg, validSlavePositions)
-    local mgPos = mg:getPos()
-    local positionsIndex = 1
-
-    local spawnedSlaves, _ = getSlaves()
-
-    for _, slaveGlobe in ipairs(spawnedSlaves) do
-        local slaveGlobePos = validSlavePositions[positionsIndex]
-        positionsIndex = positionsIndex + 1
-        slaveGlobe:pathTo(slaveGlobePos.x, slaveGlobePos.y, slaveGlobePos.z)
-        slaveGlobe:setRotation(mgPos.rot)
-    end
-end
-
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('nextSlaveSpawnTime', os.time() + 30) -- spawn first 30s from now
     mob:addStatusEffectEx(xi.effect.SHOCK_SPIKES, 0, 60, 0, 0) -- ~60 damage
@@ -133,7 +136,7 @@ entity.onMobFight = function(mob, target)
     -- Keep pets linked
     for _, slaveGlobeID in ipairs(slaveGlobes) do
         local pet = GetMobByID(slaveGlobeID)
-        if pet:getCurrentAction() == xi.act.ROAMING then
+        if pet and pet:getCurrentAction() == xi.act.ROAMING then
             pet:updateEnmity(target)
         end
     end
@@ -148,7 +151,6 @@ entity.onMobRoam = function(mob)
     local validSlavePositions = calculateValidSlaveGlobePositions(mob:getZone(), mob:getPos(), startingSpacingDistance)
 
     trySpawnSlaveGlobe(mob, os.time(), spawnedSlaves, notSpawnedSlaves, validSlavePositions)
-    handleSlaveGlobesRoam(mob, validSlavePositions)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -161,7 +163,7 @@ entity.onMobDeath = function(mob, player, optParams)
 
     for _, slaveGlobeID in ipairs(slaveGlobes) do
         local pet = GetMobByID(slaveGlobeID)
-        if pet:isSpawned() then
+        if pet and pet:isSpawned() then
             DespawnMob(slaveGlobeID)
         end
     end

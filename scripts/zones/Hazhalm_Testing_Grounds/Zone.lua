@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Hazhalm_Testing_Grounds (78)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -4,6 +4,7 @@
 -- Type: ZNM assistant
 -- !pos -127.086 0.999 22.693 50
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

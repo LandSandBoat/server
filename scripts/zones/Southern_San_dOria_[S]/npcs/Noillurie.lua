@@ -6,6 +6,7 @@
 -- Involved in WOTG16: Sandswept Memories, WOTG20: On Thin Ice, WOTG21: Proof of Valor,
 -- WOTG22: A Sanguinary Prelude, WOTG25: The Will of the World
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

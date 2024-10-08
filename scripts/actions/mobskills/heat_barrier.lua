@@ -6,6 +6,7 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -13,9 +14,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    -- TODO: Enfire power, Blaze Spikes reduced power in Salvage zones
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BLAZE_SPIKES, math.random(50, 67), 0, 180))
-    -- xi.mobskills.mobBuffMove(mob, xi.effect.ENFIRE, ???, 0, 180)
+    -- TODO: Blaze Spikes reduced power in Salvage zones
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BLAZE_SPIKES, mob:getMainLvl() * 0.8, 0, 180))
+    xi.mobskills.mobBuffMove(mob, xi.effect.ENFIRE, mob:getMainLvl() * 0.4, 0, 300)
 
     return xi.effect.BLAZE_SPIKES
 end

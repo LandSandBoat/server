@@ -3,6 +3,7 @@
 -- Old Bolt Box
 -- When used, you will obtain one partial stack of Dogbolt
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -2,6 +2,7 @@
 -- Spell: Spirited Etude
 -- Static MND Boost, BRD 24
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

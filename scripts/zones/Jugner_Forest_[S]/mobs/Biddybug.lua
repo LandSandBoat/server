@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/families/ladybug') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

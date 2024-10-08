@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SUPER_BUFF
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

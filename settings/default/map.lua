@@ -144,6 +144,9 @@ xi.settings.map =
     -- Enables fishing. 0 = Disabled. 1 = Enable. ENABLE AT YOUR OWN RISK.
     FISHING_ENABLE = false,
 
+    -- Sets the minimum level a character must be to fish.
+    FISHING_MIN_LEVEL = 1,
+
     -- Multiplier for fishing skill-up chance. Default = 1.0, very hard.
     FISHING_SKILL_MULTIPLIER = 1.0,
 

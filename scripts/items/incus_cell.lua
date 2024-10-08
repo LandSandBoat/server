@@ -3,6 +3,7 @@
 -- ID 5365
 -- Unlocks weapons and shields
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

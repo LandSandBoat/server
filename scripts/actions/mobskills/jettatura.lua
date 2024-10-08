@@ -6,6 +6,7 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Cone gaze
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -3,6 +3,7 @@
 -- Scroll of Stone II
 -- Teaches the black magic Stone II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

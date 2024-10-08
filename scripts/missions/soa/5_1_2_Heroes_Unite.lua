@@ -30,14 +30,11 @@ mission.sections =
         {
             ['Alpine_Trail'] = mission:progressEvent(60, 267, 300, 200, 100, 4063, 1999, 1999, 0),
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 2 then
-                        mission:complete(player)
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 2 then
+                    mission:complete(player)
+                end
+            end,
 
             onEventFinish =
             {
@@ -52,14 +49,11 @@ mission.sections =
 
         [xi.zone.MOUNT_KAMIHR] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return 6
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 1 then
+                    return 6
+                end
+            end,
 
             onEventUpdate =
             {

@@ -3,6 +3,7 @@
 --  Mob: Opo-opo Heir
 -- BCNM: Royal Succession
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

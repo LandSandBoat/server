@@ -2,6 +2,7 @@
 -- Spell: Vivacious Etude
 -- Static VIT Boost, BRD 30
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

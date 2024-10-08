@@ -2,6 +2,7 @@
 -- Area: Boneyard_Gully
 --  NPC: _086 (Dark Miasma)
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

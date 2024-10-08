@@ -3,6 +3,7 @@
 -- plate_of_indi-poison
 -- Teaches INDI-POISON
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

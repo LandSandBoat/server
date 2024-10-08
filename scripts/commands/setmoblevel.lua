@@ -2,6 +2,7 @@
 -- func: setmoblevel
 -- desc: Sets the target monsters level.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

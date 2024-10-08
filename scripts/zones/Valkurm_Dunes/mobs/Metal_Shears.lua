@@ -2,6 +2,7 @@
 -- Area: Valkurm Dunes
 --   NM: Metal Shears
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

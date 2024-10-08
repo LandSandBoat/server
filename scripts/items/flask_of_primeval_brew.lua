@@ -23,6 +23,7 @@
 -- Ranged Accuracy +1000
 -- Ranged Attack +9000
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

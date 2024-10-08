@@ -2,6 +2,7 @@
 -- Spell: Indi-AGI
 -- Enhances Agillity for party members near the caster.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -2,6 +2,7 @@
 -- Area: Dynamis
 --  NPC: Somnial Threshold
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

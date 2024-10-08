@@ -470,9 +470,6 @@ INSERT INTO `mob_pool_mods` VALUES (4148,75,3,1); -- CAN_PARRY: 3
 -- Vanguard_Footsoldier
 INSERT INTO `mob_pool_mods` VALUES (4150,75,3,1); -- CAN_PARRY: 3
 
--- Vanguard_Grappler
-INSERT INTO `mob_pool_mods` VALUES (4151,75,3,1); -- CAN_PARRY: 3
-
 -- Vanguard_Gutslasher
 INSERT INTO `mob_pool_mods` VALUES (4152,75,3,1); -- CAN_PARRY: 3
 
@@ -646,6 +643,9 @@ INSERT INTO `mob_pool_mods` VALUES (5915,6,100,0);      -- MPP: 100
 
 -- Trust: Lehko
 INSERT INTO `mob_pool_mods` VALUES (5922,6,150,0);      -- MPP: 150
+
+-- Trust: Fablinix
+INSERT INTO `mob_pool_mods` VALUES (5932,6,250,0);    -- MPP: 250
 
 -- Trust: Ferreous Coffin
 INSERT INTO `mob_pool_mods` VALUES (5944,3,-10,0);      -- HPP: -10

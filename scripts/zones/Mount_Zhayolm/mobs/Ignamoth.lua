@@ -2,6 +2,7 @@
 -- Area: Mount Zhayolm
 --   NM: Ignamoth
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

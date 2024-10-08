@@ -2,6 +2,7 @@
 -- Area: RoMaeve
 --  Mob: Cursed Puppet
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

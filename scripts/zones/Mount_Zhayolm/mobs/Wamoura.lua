@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local ignamothPHTable =

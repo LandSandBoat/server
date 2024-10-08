@@ -2,6 +2,7 @@
 --  Voiceless Storm
 --  Description: AOE Damage, Silence, strips Utsusemi (xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

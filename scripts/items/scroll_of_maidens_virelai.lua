@@ -3,6 +3,7 @@
 -- Scroll of Maiden's Virelai
 -- Teaches the song Maiden's Virelai
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

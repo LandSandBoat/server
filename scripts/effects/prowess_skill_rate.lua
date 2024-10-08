@@ -2,6 +2,7 @@
 -- xi.effect.PROWESS
 -- Increased combat and magic skill gain
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -4,6 +4,7 @@
 -- Type: Title Changer
 -- !pos -13.564 -2 10.673 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

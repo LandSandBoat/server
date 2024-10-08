@@ -2,6 +2,7 @@
 -- Spell: Swift Etude
 -- Static AGI Boost, BRD 68
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

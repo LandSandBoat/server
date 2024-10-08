@@ -1,6 +1,7 @@
 -----------------------------------
 -- Trust: Trion
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

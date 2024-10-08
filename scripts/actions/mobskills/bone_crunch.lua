@@ -2,6 +2,7 @@
 -- Bone Crunch
 -- Deals damage to a single target. Additional effect: Plague
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

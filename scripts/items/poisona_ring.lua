@@ -3,6 +3,7 @@
 -- Item: Antidote
 -- Item Effect: This potion remedies poison.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

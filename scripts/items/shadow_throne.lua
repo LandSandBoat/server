@@ -3,6 +3,7 @@
 -- Item: Shadow Throne
 -- Item Effect: Grant Leaf bench key item
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 local keyItemId = xi.ki.SHADOW_THRONE

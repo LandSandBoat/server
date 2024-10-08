@@ -3,6 +3,7 @@
 -- desc: Used to get a mob's entity flags for testing.
 --       MUST either target a mob first or else specify a Mob ID.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

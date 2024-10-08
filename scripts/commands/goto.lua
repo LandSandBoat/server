@@ -2,6 +2,7 @@
 -- func: goto
 -- desc: Goes to the target player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

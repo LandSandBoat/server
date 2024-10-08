@@ -3,6 +3,7 @@
 --  NPC: Mashua
 -- !pos -7.399 -0.5 4.580 242
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

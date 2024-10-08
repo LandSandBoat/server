@@ -8,6 +8,7 @@
 -- Store TP 6
 -- Resist sleep 10
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

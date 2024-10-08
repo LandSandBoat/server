@@ -2,6 +2,7 @@
 -- func: checklocalvar <varName> { 'player'/'mob'/'npc' } { name/ID }
 -- desc: checks player or npc local variable and returns result value.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -31,12 +32,20 @@ commandObj.onTrigger = function(player, arg1, arg2, arg3)
         local entityType = string.upper(arg2)
         if entityType == 'NPC' or entityType == 'MOB' then
             arg3 = tonumber(arg3)
-            if zone:getTypeMask() == xi.zoneType.INSTANCED then
+            if zone and zone:getTypeMask() == xi.zoneType.INSTANCED then
                 local instance = player:getInstance()
+                if not instance then
+                    return
+                end
+
+                -- TODO: Solve param type mismatch from number? to integer
+                ---@diagnostic disable-next-line: param-type-mismatch
                 targ = instance:getEntity(bit.band(arg3, 0xFFF), xi.objType[entityType])
             elseif entityType == 'NPC' then
+                ---@diagnostic disable-next-line param-type-mismatch
                 targ = GetNPCByID(arg3)
             else
+                ---@diagnostic disable-next-line param-type-mismatch
                 targ = GetMobByID(arg3)
             end
         elseif entityType == 'PLAYER' then

@@ -2,6 +2,7 @@
 -- func: cs2
 -- desc: Starts the given event for the player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

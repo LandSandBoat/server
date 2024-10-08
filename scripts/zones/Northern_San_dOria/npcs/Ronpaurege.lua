@@ -3,6 +3,7 @@
 --  NPC: Ronpaurege
 -- !pos 65.739 -0.199 74.275 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

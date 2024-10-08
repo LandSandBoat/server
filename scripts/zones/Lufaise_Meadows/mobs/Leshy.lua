@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.LUFAISE_MEADOWS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local function disturbMob(mob)
@@ -11,6 +12,7 @@ local function disturbMob(mob)
     if offset >= 0 and offset <= 7 then
         local nm = GetMobByID(ID.mob.COLORFUL_LESHY)
         if
+            nm and
             not nm:isSpawned() and
             not GetMobByID(ID.mob.COLORFUL_LESHY + 1):isSpawned()
         then
@@ -33,6 +35,7 @@ entity.onMobRoam = function(mob)
     if offset >= 0 and offset <= 7 then
         local nm = GetMobByID(ID.mob.COLORFUL_LESHY)
         if
+            nm and
             not nm:isSpawned() and
             not GetMobByID(ID.mob.COLORFUL_LESHY + 1):isSpawned() and
             os.time() > nm:getLocalVar('timeToGrow') and

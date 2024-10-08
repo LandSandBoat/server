@@ -266,6 +266,11 @@ xi.settings.main =
     -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.
     ENABLE_LOGIN_CAMPAIGN = 0,
 
+    -- FISH RANKING CONTEST
+    -- Set to false to require manual progression of contest
+    AUTO_FISHING_CONTEST = true,
+    MAX_FAKE_ENTRIES     = 15,
+
     -- NYZUL
     RUNIC_DISK_SAVE      = true, -- Allow anyone participating in Nyzul to save progress. Set to false so only initiator can save progress.
     ENABLE_NYZUL_CASKETS = true, -- Enable Treasure casket pops from NMs.
@@ -282,6 +287,9 @@ xi.settings.main =
     CHOCOBO_RAISING_DISABLE_RETIREMENT  = false, -- true/false.
     CHOCOBO_RAISING_STAT_GROWTH_CAP     = 512,   -- int.
 
+    -- SYNERGY (HEAVILY-IN-DEVELOPMENT, USE AT YOUR OWN RISK)
+    ENABLE_SYNERGY = false, -- true/false. Enable Synergy features.
+
     -- MISC
     RIVERNE_PORTERS              = 120,   -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
     LANTERNS_STAY_LIT            = 1200,  -- time in seconds that lanterns in the Den of Rancor stay lit.
@@ -291,7 +299,7 @@ xi.settings.main =
     NUMBER_OF_DM_EARRINGS        = 1,     -- Number of earrings players can simultaneously own from Divine Might before scripts start blocking them (Default: 1)
     HOMEPOINT_TELEPORT           = 1,     -- Enables the homepoint teleport system
     DIG_ABUNDANCE_BONUS          = 0,     -- Increase chance of digging up an item (450  = item digup chance +45)
-    DIG_FATIGUE                  = 1,     -- Set to 0 to disable Dig Fatigue
+    DIG_FATIGUE                  = 100,   -- Allowed succesful digs per day. Set to 0 to disable Dig Fatigue
     DIG_GRANT_BURROW             = 0,     -- Set to 1 to grant burrow ability
     DIG_GRANT_BORE               = 0,     -- Set to 1 to grant bore ability
     ENM_COOLDOWN                 = 120,   -- Number of hours before a player can obtain same KI for ENMs (default: 5 days)

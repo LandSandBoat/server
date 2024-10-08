@@ -2,6 +2,7 @@
 -- func: completerecord <recordID> <player>
 -- desc: Completes the given quest for the GM or target player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

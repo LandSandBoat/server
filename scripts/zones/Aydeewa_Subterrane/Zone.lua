@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Aydeewa_Subterrane (68)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

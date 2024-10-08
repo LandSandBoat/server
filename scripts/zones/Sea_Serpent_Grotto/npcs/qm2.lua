@@ -3,6 +3,7 @@
 --  NPC: ??? Used for Norg quest "The Sahagin's Stash"
 -- !pos 295.276 27.129 213.043 176
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

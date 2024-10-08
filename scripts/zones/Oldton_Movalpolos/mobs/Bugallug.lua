@@ -3,6 +3,7 @@
 --  Mob: Bugallug
 -- Note: NM for quest: A Question of Faith
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

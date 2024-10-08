@@ -3,6 +3,7 @@
 -- Scroll of Banishga II
 -- Teaches the white magic Banishga II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

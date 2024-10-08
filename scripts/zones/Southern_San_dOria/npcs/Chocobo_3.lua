@@ -3,6 +3,7 @@
 --  NPC: Chocobo
 -- Chocobo
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

@@ -3,6 +3,7 @@
 -- Scroll of Banish III
 -- Teaches the white magic Banish III
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

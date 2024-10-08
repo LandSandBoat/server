@@ -3,6 +3,7 @@
 -- Cryohelix Schema
 -- Teaches the black magic Cryohelix
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

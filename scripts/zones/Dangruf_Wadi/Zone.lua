@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = zones[xi.zone.DANGRUF_WADI]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
@@ -62,6 +63,10 @@ end
 
 zoneObject.onGameHour = function(zone)
     local nm = GetMobByID(ID.mob.GEYSER_LIZARD)
+    if not nm then
+        return
+    end
+
     local pop = nm:getLocalVar('pop')
 
     if

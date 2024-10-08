@@ -3,6 +3,7 @@
 -- Item: flask_of_mana_mist
 -- Item Effect: Restores 300 MP to Party members within 10'
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

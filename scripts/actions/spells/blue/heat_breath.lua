@@ -12,6 +12,7 @@
 -- Magic Bursts on: Liquefaction, Fusion, Light
 -- Combos: Magic Attack Bonus
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

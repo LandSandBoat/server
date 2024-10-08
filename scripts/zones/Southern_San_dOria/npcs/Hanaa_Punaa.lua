@@ -4,6 +4,7 @@
 -- Starts and Finishes: The Seamstress, Lizard Skins, and Black Tiger Skins
 -- !pos -179.726 -8.8 27.574 230
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

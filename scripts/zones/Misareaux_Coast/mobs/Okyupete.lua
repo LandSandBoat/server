@@ -2,6 +2,7 @@
 -- Area: Misareaux Coast
 --   NM: Okyupete
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

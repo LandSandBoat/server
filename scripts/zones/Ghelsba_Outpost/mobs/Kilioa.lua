@@ -3,6 +3,7 @@
 --  Mob: Kilioa
 -- BCNM: Petrifying Pair
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

@@ -2,6 +2,7 @@
 -- Spell: Victory March
 -- Gives party members Haste
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

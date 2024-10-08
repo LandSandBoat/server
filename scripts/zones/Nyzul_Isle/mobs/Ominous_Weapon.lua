@@ -2,6 +2,7 @@
 --  MOB: Ominous Weapon
 -- Area: Nyzul Isle
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

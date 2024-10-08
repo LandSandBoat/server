@@ -3,6 +3,7 @@
 -- Scroll of Refresh II
 -- Teaches the white magic Refresh II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

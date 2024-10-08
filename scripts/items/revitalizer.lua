@@ -3,6 +3,7 @@
 -- Item: Revitalizer
 -- Item Effect: Resets all Job Ability Timers
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

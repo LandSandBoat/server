@@ -2,6 +2,7 @@
 -- Spell: Learned Etude
 -- Static INT Boost, BRD 26
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -3,6 +3,7 @@
 --  NPC: Nhel Urhahn
 -- !pos -47.348 -4.499 47.117 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

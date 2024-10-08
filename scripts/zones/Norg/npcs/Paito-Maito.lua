@@ -2,6 +2,7 @@
 -- Area: Norg
 --  NPC: Paito-Maito
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

@@ -8,6 +8,7 @@
 -- Attack + 17% Cap: 54 (Pet & Master) Pet Cap: 81
 -- Accuracy + 11% Cap: 54 (Pet & Master) Pet Cap: 81
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Attachment: Eraser
 -----------------------------------
+---@type TAttachment
 local attachmentObject = {}
 
 local removable =

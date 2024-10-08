@@ -4,6 +4,7 @@
 -----------------------------------
 -- lights: 1: pearl, 2: azure, 3: ruby, 4: amber, 5: gold, 6: silver, 7: ebon
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

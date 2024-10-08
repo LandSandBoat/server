@@ -2,6 +2,7 @@
 -- self_destruct_321
 -- Weapon skill for Time Bomb (BCNM 50 3, 2, 1...)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

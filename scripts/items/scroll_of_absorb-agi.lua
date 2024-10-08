@@ -3,6 +3,7 @@
 -- Scroll of Absorb-AGI
 -- Teaches the black magic Absorb-AGI
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

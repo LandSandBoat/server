@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Chocobo_Circuit
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

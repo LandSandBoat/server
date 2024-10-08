@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum xi.history
 xi.history =
 {
     ENEMIES_DEFEATED   = 0,

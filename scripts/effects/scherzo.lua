@@ -2,6 +2,7 @@
 -- xi.effect.SCHERZO
 -- TODO: MOD_CRITICAL_DAMAGE_REDUCTION
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

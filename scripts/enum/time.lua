@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum xi.time
 xi.time =
 {
     NONE        = 0,

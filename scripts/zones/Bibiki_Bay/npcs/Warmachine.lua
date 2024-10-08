@@ -3,6 +3,7 @@
 --  NPC: Warmachine
 -- !pos -345.236 -3.188 -976.563 4
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

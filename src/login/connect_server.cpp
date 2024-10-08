@@ -1,20 +1,20 @@
 ﻿/*
 ===========================================================================
 
-Copyright (c) 2023 LandSandBoat Dev Teams
+  Copyright (c) 2023 LandSandBoat Dev Teams
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
@@ -77,9 +77,9 @@ ConnectServer::ConnectServer(int argc, char** argv)
         ShowInfo("creating ports");
 
         // Handler creates session of type T for specific port on connection.
-        handler<auth_session> auth(io_context, 54231);
-        handler<view_session> view(io_context, 54001);
-        handler<data_session> data(io_context, 54230);
+        handler<auth_session> auth(io_context, settings::get<uint32>("network.LOGIN_AUTH_PORT"));
+        handler<view_session> view(io_context, settings::get<uint32>("network.LOGIN_VIEW_PORT"));
+        handler<data_session> data(io_context, settings::get<uint32>("network.LOGIN_DATA_PORT"));
         asio::steady_timer    cleanup_callback(io_context, std::chrono::minutes(15));
 
         cleanup_callback.async_wait(std::bind(&ConnectServer::periodicCleanup, this, std::placeholders::_1, &cleanup_callback));

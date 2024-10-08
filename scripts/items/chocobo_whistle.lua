@@ -6,6 +6,7 @@
 --    Can't normally use enchantments when level sync'd below items level so no need to check.
 --    Per wiki, can actually obtain without license, but cannot use, so we DO check that.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

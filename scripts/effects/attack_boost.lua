@@ -4,6 +4,7 @@
 -- getPower()       = ATTP
 -- getSubPower()    = RATTP
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

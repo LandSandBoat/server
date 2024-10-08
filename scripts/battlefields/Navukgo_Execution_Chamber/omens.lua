@@ -36,7 +36,7 @@ function content:battlefieldEntry(player, battlefield)
         local mobOffset       = math.floor(additionalEntered / 3)
         local flanObj         = GetMobByID(navukgoID.mob.IMMORTAL_FLAN + (battlefieldArea - 1) * 7 + mobOffset)
 
-        if not flanObj:isSpawned() then
+        if flanObj and not flanObj:isSpawned() then
             flanObj:spawn()
             battlefield:setLocalVar('numSpawned', mobOffset)
         end
@@ -50,6 +50,7 @@ local handleDeath = function(battlefield, mob)
         local mobObj = GetMobByID(mobId)
 
         if
+            mobObj and
             mobObj:isSpawned() and
             not mobObj:isDead()
         then

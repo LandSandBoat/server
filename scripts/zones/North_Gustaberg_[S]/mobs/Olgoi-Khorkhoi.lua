@@ -2,6 +2,7 @@
 -- Area: North Gustaberg [S]
 --   NM: Olgoi-Khorkhoi
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

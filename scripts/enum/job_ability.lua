@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum xi.jobAbility
 xi.jobAbility =
 {
     MIGHTY_STRIKES     = 16,

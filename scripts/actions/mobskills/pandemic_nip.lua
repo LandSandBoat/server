@@ -7,6 +7,7 @@
 --  Range: Melee
 --  Notes: Transfers debuffs to the target player (maximum 5). Includes Dancer's Quickstep's Evasion Down and Box Step's Defense Down.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

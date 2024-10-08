@@ -3,6 +3,7 @@
 -- Item: Yogurt
 -- Item Effect: Restores 60 HP over 180 seconds
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

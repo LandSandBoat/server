@@ -1,20 +1,20 @@
 ﻿/*
 ===========================================================================
 
-Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2010-2015 Darkstar Dev Teams
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
@@ -40,6 +40,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <thread>
 
 #include "ability.h"
+#include "common/debug.h"
 #include "common/vana_time.h"
 #include "job_points.h"
 #include "linkshell.h"
@@ -61,6 +62,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "latent_effect_container.h"
 #include "packets/basic.h"
 #include "packets/chat_message.h"
+#include "packets/server_ip.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/fishingutils.h"
@@ -72,6 +74,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/moduleutils.h"
 #include "utils/petutils.h"
 #include "utils/serverutils.h"
+#include "utils/synergyutils.h"
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
@@ -83,8 +86,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 const char* MAP_CONF_FILENAME = nullptr;
 
-int8* g_PBuff   = nullptr; // Global packet clipboard
-int8* PTempBuff = nullptr; // Temporary packet clipboard
+int8* g_PBuff     = nullptr; // Global packet clipboard
+int8* g_PBuffCopy = nullptr; // Copy of above, used to decrypt a second time if necessary.
+int8* PTempBuff   = nullptr; // Temporary packet clipboard
 
 int32  map_fd          = 0; // main socket
 uint32 map_amntplayers = 0; // map amnt unique players
@@ -148,6 +152,24 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 {
     TracyZoneScoped;
 
+    auto ipstr    = ip2str(ip);
+    auto fmtQuery = fmt::format("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '{}' LIMIT 1", ipstr);
+
+    int32 ret = _sql->Query(fmtQuery.c_str());
+
+    if (ret == SQL_ERROR)
+    {
+        ShowError("SQL query failed in mapsession_createsession!");
+        return nullptr;
+    }
+
+    if (_sql->NumRows() == 0)
+    {
+        // This is noisy and not really necessary
+        DebugSockets(fmt::format("recv_parse: Invalid login attempt from {}", ipstr));
+        return nullptr;
+    }
+
     map_session_data_t* map_session_data = new map_session_data_t();
 
     map_session_data->server_packet_data = new int8[MAX_BUFFER_SIZE + 20];
@@ -161,16 +183,6 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
     ipp |= port64 << 32;
     map_session_list[ipp] = map_session_data;
 
-    auto ipstr    = ip2str(map_session_data->client_addr);
-    auto fmtQuery = fmt::format("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '{}' LIMIT 1", ipstr);
-
-    int32 ret = _sql->Query(fmtQuery.c_str());
-
-    if (ret == SQL_ERROR || _sql->NumRows() == 0)
-    {
-        ShowError(fmt::format("recv_parse: Invalid login attempt from {}", ipstr));
-        return nullptr;
-    }
     return map_session_data;
 }
 
@@ -186,10 +198,20 @@ int32 do_init(int32 argc, char** argv)
 
 #ifdef TRACY_ENABLE
     ShowInfo("*** TRACY IS ENABLED ***");
+
+    if (!debug::isUserRoot())
+    {
+        ShowWarning("You are NOT running as the root superuser or admin.");
+        ShowWarning("This is required for Tracy to work properly.");
+        std::this_thread::sleep_for(std::chrono::seconds(5));
+    }
 #endif // TRACY_ENABLE
 
     ShowInfo("do_init: begin server initialization");
+
+    // These aren't set unless --ip or --port is set, respectively.
     map_ip.s_addr = 0;
+    map_port      = 0;
 
     for (int i = 1; i < argc; i++)
     {
@@ -268,6 +290,7 @@ int32 do_init(int32 argc, char** argv)
     jobpointutils::LoadGifts();
     daily::LoadDailyItems();
     roeutils::UpdateUnityRankings();
+    synergyutils::LoadSynergyRecipes();
 
     if (!std::filesystem::exists("./navmeshes/") || std::filesystem::is_empty("./navmeshes/"))
     {
@@ -306,8 +329,9 @@ int32 do_init(int32 argc, char** argv)
     _sql->Query("DELETE FROM char_vars WHERE expiry > 0 AND expiry <= %d", currentTimestamp);
     _sql->Query("DELETE FROM server_variables WHERE expiry > 0 AND expiry <= %d", currentTimestamp);
 
-    g_PBuff   = new int8[MAX_BUFFER_SIZE + 20];
-    PTempBuff = new int8[MAX_BUFFER_SIZE + 20];
+    g_PBuff     = new int8[MAX_BUFFER_SIZE + 20];
+    g_PBuffCopy = new int8[MAX_BUFFER_SIZE + 20];
+    PTempBuff   = new int8[MAX_BUFFER_SIZE + 20];
 
     std::memset(g_PBuff, 0, MAX_BUFFER_SIZE + 20);
     std::memset(PTempBuff, 0, MAX_BUFFER_SIZE + 20);
@@ -402,6 +426,7 @@ void do_final(int code)
     TracyZoneScoped;
 
     destroy_arr(g_PBuff);
+    destroy_arr(g_PBuffCopy);
     destroy_arr(PTempBuff);
 
     ability::CleanupAbilitiesList();
@@ -568,16 +593,38 @@ int32 do_sockets(fd_set* rfd, duration next)
                 }
             }
 
-            map_session_data->last_update = time(nullptr);
-            size_t size                   = ret;
+            size_t size = ret;
 
-            if (recv_parse(g_PBuff, &size, &from, map_session_data) != -1)
+            int32 decryptCount = recv_parse(g_PBuff, &size, &from, map_session_data);
+            if (decryptCount != -1)
             {
-                // If the previous package was lost, then we do not collect a new one,
-                // and send the previous packet again
-                if (!parse(g_PBuff, &size, &from, map_session_data))
+                // DecryptCount of 0 means the main key decrypted the packet
+                if (decryptCount == 0)
                 {
-                    send_parse(g_PBuff, &size, &from, map_session_data);
+                    // If the previous package was lost, then we do not collect a new one,
+                    // and send the previous packet again
+                    if (!parse(g_PBuff, &size, &from, map_session_data))
+                    {
+                        send_parse(g_PBuff, &size, &from, map_session_data, false);
+                    }
+                }
+                else if (decryptCount == 1 && map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE)
+                {
+                    // TODO: Client will send 0x00D in response to 0x00B, so we are probably always sending an extra 0x00B when we don't need to.
+                    // However, the client will fail to decrypt this if they received it before, effectively being a no-op.
+                    // It could be beneficial to parse 0x00D here anyway.
+
+                    // Client failed to receive 0x00B, resend it
+                    if (auto PChar = map_session_data->PChar)
+                    {
+                        PChar->clearPacketList();
+                        PChar->pushPacket(new CServerIPPacket(PChar, map_session_data->zone_type, map_session_data->zone_ipp));
+                    }
+                    send_parse(g_PBuff, &size, &from, map_session_data, true);
+
+                    // Increment sync count with every packet
+                    // TODO: match incoming with a new parse that only cares about sync count
+                    map_session_data->server_packet_id += 1;
                 }
 
                 ret = sendudp(map_fd, g_PBuff, size, 0, (const struct sockaddr*)&from, fromlen);
@@ -588,7 +635,9 @@ int32 do_sockets(fd_set* rfd, duration next)
                 map_session_data->server_packet_data = data;
                 map_session_data->server_packet_size = size;
             }
-            if (map_session_data->shuttingDown > 0)
+
+            // If client is logging out, just close it.
+            if (map_session_data->shuttingDown == 1)
             {
                 map_close_session(server_clock::now(), map_session_data);
             }
@@ -608,7 +657,7 @@ int32 do_sockets(fd_set* rfd, duration next)
  *                                                                       *
  ************************************************************************/
 
-int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_session_data_t* map_session_data)
+int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_session_data_t* PSession, blowfish_t* pbfkey)
 {
     TracyZoneScoped;
 
@@ -625,8 +674,6 @@ int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_sessio
     uint32 ip = ntohl(from->sin_addr.s_addr);
 #endif
 
-    blowfish_t* pbfkey = &map_session_data->blowfish;
-
     for (i = 0; i < tmp; i += 2)
     {
         blowfish_decipher((uint32*)buff + i + 7, (uint32*)buff + i + 8, pbfkey->P, pbfkey->S[0]);
@@ -637,7 +684,11 @@ int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_sessio
         return 0;
     }
 
-    ShowError(fmt::format("map_encipher_packet: bad packet from <{}>", ip2str(ip)));
+    // We can fail to decipher if the client is attempting to zone.
+    if (PSession->blowfish.status != BLOWFISH_PENDING_ZONE)
+    {
+        ShowError(fmt::format("map_decipher_packet: bad packet from <{}>", ip2str(ip)));
+    }
     return -1;
 }
 
@@ -670,6 +721,47 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     if (checksumResult == 0)
     {
+        uint16 packetID = ref<uint16>(buff, FFXI_HEADER_SIZE) & 0x1FF;
+
+        if (packetID != 0x00A)
+        {
+            return -1;
+        }
+
+        // Not big enough to be 0x00A
+        if (size < (FFXI_HEADER_SIZE + sizeof(GP_CLI_LOGIN)))
+        {
+            return -1;
+        }
+
+        GP_CLI_LOGIN loginPacket = {};
+
+        std::memcpy(&loginPacket, buff + FFXI_HEADER_SIZE, sizeof(GP_CLI_LOGIN));
+
+        // See LoginPacketCheck from https://github.com/atom0s/XiPackets/tree/main/world/client/0x000A
+        uint8 checksum = 0;
+
+        const auto checksumOffset = offsetof(GP_CLI_LOGIN, unknown01);
+        const auto checksumLength = sizeof(GP_CLI_LOGIN) - checksumOffset;
+
+        for (int i = 0; i < checksumLength; i++)
+        {
+            checksum += ref<uint8>(&loginPacket, checksumOffset + i);
+        }
+
+        // Failed checksum
+        if (checksum != loginPacket.LoginPacketCheck)
+        {
+            return -1;
+        }
+
+        // We can only get here if an 0x00A (not encrypted) packet was here.
+        // If we were pending zones, delete our old char
+        if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE)
+        {
+            destroy(map_session_data->PChar);
+        }
+
         if (map_session_data->PChar == nullptr)
         {
             uint32 CharID = ref<uint32>(buff, FFXI_HEADER_SIZE + 0x0C);
@@ -692,22 +784,57 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             else
             {
                 db::extractFromBlob(rset, "session_key", map_session_data->blowfish.key);
+
+                map_session_data->initBlowfish();
             }
 
-            map_session_data->PChar = charutils::LoadChar(CharID);
+            map_session_data->PChar  = charutils::LoadChar(CharID);
+            map_session_data->charID = CharID;
+
+            // If we're a new char on a new instance and prevzone != zone
+            if (map_session_data->blowfish.status == BLOWFISH_WAITING && map_session_data->PChar->loc.destination != map_session_data->PChar->loc.prevzone)
+            {
+                uint8 data[4]{};
+                ref<uint32>(data, 0) = CharID;
+
+                message::send(MSG_KILL_SESSION, data, sizeof data, nullptr);
+            }
         }
+
         map_session_data->client_packet_id = 0;
         map_session_data->server_packet_id = 0;
+        map_session_data->zone_ipp         = 0;
+        map_session_data->zone_type        = 0;
+
         return 0;
     }
     else
     {
-        // char packets
-        if (map_decipher_packet(buff, *buffsize, from, map_session_data) == -1)
+        if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE)
         {
-            *buffsize = 0;
-            return -1;
+            // Copy buff into the backup buffer. Blowfish can't be rewound currently.
+            std::memcpy(g_PBuffCopy, buff, *buffsize);
         }
+        int decryptCount = 0;
+        // char packets
+        if (map_decipher_packet(buff, *buffsize, from, map_session_data, &map_session_data->blowfish) == -1)
+        {
+            // If the client is pending zone, they might not have received 0x00B, and thus not incremented their key
+            // Check old blowfish data
+            if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE &&
+                map_decipher_packet(g_PBuffCopy, *buffsize, from, map_session_data, &map_session_data->prev_blowfish) != -1)
+            {
+                // Copy decrypted bytes back into buffer
+                std::memcpy(buff, g_PBuffCopy, *buffsize);
+                decryptCount++;
+            }
+            else
+            {
+                *buffsize = 0;
+                return -1;
+            }
+        }
+
         // reading data size
         uint32 PacketDataSize = ref<uint32>(buff, *buffsize - sizeof(int32) - 16);
         // creating buffer for decompress data
@@ -723,10 +850,10 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             memcpy(buff + FFXI_HEADER_SIZE, PacketDataBuff.get(), PacketDataSize);
             *buffsize = FFXI_HEADER_SIZE + PacketDataSize;
 
-            return 0;
+            return decryptCount;
         }
 
-        return 0;
+        return decryptCount;
     }
 }
 
@@ -751,6 +878,15 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
     uint16 SmallPD_Size = 0;
     uint16 SmallPD_Type = 0;
     uint16 SmallPD_Code = ref<uint16>(buff, 0);
+
+    // TODO: figure out what exactly the client sends when you're not in a CS. there's no C2S packets being sent via the client,
+    // and yet we receive something here. It doesnt look like a valid packet, as it has no size and the type is 0x001 which is not valid.
+    if (map_session_data->blowfish.status != BLOWFISH_PENDING_ZONE && map_session_data->blowfish.status != BLOWFISH_WAITING)
+    {
+        // Update the time we last got a char sync packet
+        // The client can spam some other packets when trying to zone, preventing timely session deletions
+        map_session_data->last_update = time(nullptr);
+    }
 
     for (int8* SmallPD_ptr = PacketData_Begin; SmallPD_ptr + (ref<uint8>(SmallPD_ptr, 1) & 0xFE) * 2 <= PacketData_End && (ref<uint8>(SmallPD_ptr, 1) & 0xFE);
          SmallPD_ptr       = SmallPD_ptr + SmallPD_Size * 2)
@@ -791,7 +927,11 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
             if (PChar->loc.zone == nullptr && SmallPD_Type != 0x0A)
             {
-                ShowWarning("This packet is unexpected from %s - Received %03hX earlier without matching 0x0A", PChar->getName(), SmallPD_Type);
+                // Packets aren't unexpected from the old key under BLOWFISH_PENDING_ZONE
+                if (map_session_data->blowfish.status != BLOWFISH_PENDING_ZONE)
+                {
+                    ShowWarning("This packet is unexpected from %s - Received %03hX earlier without matching 0x0A", PChar->getName(), SmallPD_Type);
+                }
             }
             else
             {
@@ -862,7 +1002,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
  *                                                                       *
  ************************************************************************/
 
-int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t* map_session_data)
+int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t* map_session_data, bool usePreviousKey)
 {
     TracyZoneScoped;
     // Modify the header of the outgoing packet
@@ -883,9 +1023,10 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     CBasicPacket* PSmallPacket = nullptr;
 
-    uint32 PacketSize  = UINT32_MAX;
-    size_t PacketCount = std::clamp<size_t>(PChar->getPacketCount(), 0, MAX_PACKETS_PER_COMPRESSION);
-    uint8  packets     = 0;
+    uint32 PacketSize               = UINT32_MAX;
+    size_t PacketCount              = std::clamp<size_t>(PChar->getPacketCount(), 0, MAX_PACKETS_PER_COMPRESSION);
+    uint8  packets                  = 0;
+    bool   incrementKeyAfterEncrypt = false;
 
     TotalPacketsToSendPerTick += static_cast<uint32>(PChar->getPacketCount());
 
@@ -907,11 +1048,11 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                 packetList.pop_front();
 
                 PSmallPacket->setSequence(map_session_data->server_packet_id);
+                auto type = PSmallPacket->getType();
 
                 // Apply packet mods if available
                 if (!PacketMods[PChar->id].empty())
                 {
-                    auto type = PSmallPacket->getType();
                     if (PacketMods[PChar->id].find(type) != PacketMods[PChar->id].end())
                     {
                         for (auto& entry : PacketMods[PChar->id][type])
@@ -923,6 +1064,22 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                             PSmallPacket->ref<uint8>(offset) = value;
                         }
                     }
+                }
+
+                // Store zoneout packet in case we need to re-send this
+                if (type == 0x00B && map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE && map_session_data->zone_ipp == 0)
+                {
+                    auto IPPacket = dynamic_cast<CServerIPPacket*>(PSmallPacket);
+                    if (IPPacket)
+                    {
+                        map_session_data->zone_ipp  = IPPacket->ipp;
+                        map_session_data->zone_type = IPPacket->type;
+                    }
+
+                    incrementKeyAfterEncrypt = true;
+
+                    // Set client port to zero, indicating the client tried to zone out and no longer has a port until the next 0x00A
+                    _sql->Query("UPDATE accounts_sessions SET client_port = 0, last_zoneout_time = NOW() WHERE charid = %u", map_session_data->charID);
                 }
 
                 memcpy(buff + *buffsize, *PSmallPacket, PSmallPacket->getSize());
@@ -985,11 +1142,32 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     uint32 CypherSize = (PacketSize / 4) & -2;
 
-    blowfish_t* pbfkey = &map_session_data->blowfish;
+    blowfish_t* pbfkey = nullptr;
+
+    if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE && usePreviousKey)
+    {
+        pbfkey = &map_session_data->prev_blowfish;
+    }
+    else
+    {
+        pbfkey = &map_session_data->blowfish;
+    }
 
     for (uint32 j = 0; j < CypherSize; j += 2)
     {
         blowfish_encipher((uint32*)(buff) + j + 7, (uint32*)(buff) + j + 8, pbfkey->P, pbfkey->S[0]);
+    }
+
+    // Increment the key after 0x00B was sent (otherwise the client would never get it!)
+    if (incrementKeyAfterEncrypt)
+    {
+        map_session_data->incrementBlowfish();
+
+        char session_key[20 * 2 + 1];
+        bin2hex(session_key, (uint8*)map_session_data->blowfish.key, 20);
+        const char* fmtQuery = "UPDATE accounts_sessions SET session_key = x'%s' WHERE charid = %u";
+
+        _sql->Query(fmtQuery, session_key, PChar->id);
     }
 
     // Control the size of the sent packet.
@@ -1033,24 +1211,29 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
 {
     TracyZoneScoped;
-    if (map_session_data != nullptr && map_session_data->server_packet_data != nullptr && map_session_data->PChar != nullptr)
+    if (map_session_data != nullptr && map_session_data->server_packet_data != nullptr)
     {
-        charutils::SavePlayTime(map_session_data->PChar);
-
         // clear accounts_sessions if character is logging out (not when zoning)
         if (map_session_data->shuttingDown == 1)
         {
-            _sql->Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->PChar->id);
+            _sql->Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->charID);
         }
 
         uint64 port64 = map_session_data->client_port;
         uint64 ipp    = map_session_data->client_addr;
         ipp |= port64 << 32;
 
-        map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(map_session_data->shuttingDown == 1);
-
         destroy_arr(map_session_data->server_packet_data);
-        destroy(map_session_data->PChar);
+        if (map_session_data->PChar)
+        {
+            CZone* PZone = map_session_data->PChar->loc.zone;
+            if (PZone)
+            {
+                // This should already be done in removeCharFromZone, but just to be safe...
+                PZone->DecreaseZoneCounter(map_session_data->PChar);
+            }
+            destroy(map_session_data->PChar);
+        }
         destroy(map_session_data);
 
         map_session_list.erase(ipp);
@@ -1082,7 +1265,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
         {
             if (PChar != nullptr && !PChar->isLinkDead)
             {
-                _sql->Query("UPDATE char_flags SET disconnecting = 1 WHERE charid = %u", PChar->id);
+                _sql->Query("UPDATE char_flags SET disconnecting = 1 WHERE charid = %u", map_session_data->charID);
 
                 PChar->isLinkDead = true;
                 PChar->updatemask |= UPDATE_HP;
@@ -1093,132 +1276,81 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                     PChar->loc.zone->SpawnPCs(PChar);
                 }
             }
+
             if ((time(nullptr) - map_session_data->last_update) > settings::get<uint16>("map.MAX_TIME_LASTUPDATE"))
             {
+                bool otherMap = false;
+
+                // check if session is attached to a different map server...
+                const char* fmtQuery = "select server_addr, server_port from accounts_sessions WHERE charid = %u";
+                _sql->Query(fmtQuery, map_session_data->charID);
+                if (_sql->NextRow() == SQL_SUCCESS)
+                {
+                    uint32 server_addr = _sql->GetUIntData(0);
+                    uint32 server_port = _sql->GetUIntData(1);
+
+                    // s_addr of 0 is single process map server without IP address set explicitly in commandline
+                    // map_port is 0 without the port being explicitly set in commandline
+                    if ((map_ip.s_addr != 0 && server_addr != map_ip.s_addr) || (map_port != 0 && server_port != map_port))
+                    {
+                        otherMap = true;
+                    }
+                }
+
                 if (PChar != nullptr)
                 {
-                    // Check if the PChar current zone is on this server
-                    CZone* PZone    = nullptr;
-                    bool   otherMap = false;
+                    ShowDebug(fmt::format("Clearing map server session for player: '{}' in zone: '{}' (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->getName() : "None", otherMap ? "Yes" : "No"));
 
-                    // Get zone if available
-                    if (PChar->loc.zone && PChar->loc.zone->GetID() && (g_PZoneList.find(PChar->loc.zone->GetID()) != g_PZoneList.end()))
+                    // Player session is attached to this map process and has stopped responding.
+                    if (!otherMap)
                     {
-                        PZone = PChar->loc.zone;
-                    }
+                        map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
+                        _sql->Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->charID);
 
-                    // if PChar->loc.zone != null, maybe we didn't receive 0x00D, check accounts_sessions
-                    if (PZone)
-                    {
-                        const char* fmtQuery = "select server_addr, server_port from accounts_sessions WHERE charid = %u";
-                        _sql->Query(fmtQuery, PChar->id);
-                        if (_sql->NextRow() == SQL_SUCCESS)
+                        // Save position if d/c or logout/shutdown
+                        if (map_session_data->shuttingDown == 0 || map_session_data->shuttingDown == 1)
                         {
-                            uint32 server_addr = _sql->GetUIntData(0);
-                            uint32 server_port = _sql->GetUIntData(1);
-
-                            if (server_addr != PZone->GetIP() || server_port != PZone->GetPort())
-                            {
-                                otherMap = true;
-                            }
-                        }
-                    }
-
-                    if (map_session_data->shuttingDown == 0)
-                    {
-                        if (!otherMap)
-                        {
-                            // [Alliance] fix to stop server crashing:
-                            // if a party within an alliance only has 1 char (that char will be party leader)
-                            // if char then disconnects we need to tell the server about the alliance change
-                            if (PChar->PParty != nullptr && PChar->PParty->m_PAlliance != nullptr && PChar->PParty->GetLeader() == PChar)
-                            {
-                                if (PChar->PParty->HasOnlyOneMember())
-                                {
-                                    if (PChar->PParty->m_PAlliance->hasOnlyOneParty())
-                                    {
-                                        PChar->PParty->m_PAlliance->dissolveAlliance();
-                                    }
-                                    else
-                                    {
-                                        PChar->PParty->m_PAlliance->removeParty(PChar->PParty);
-                                    }
-                                }
-                            }
-
-                            // uncharm pet if player d/c
-                            if (PChar->PPet != nullptr && PChar->PPet->objtype == TYPE_MOB)
-                            {
-                                petutils::DespawnPet(PChar);
-                            }
-
-                            PChar->StatusEffectContainer->SaveStatusEffects(true);
                             charutils::SaveCharPosition(PChar);
-
-                            ShowDebug("map_cleanup: %s timed out, closing session", PChar->getName());
-
-                            PChar->status    = STATUS_TYPE::SHUTDOWN;
-                            auto basicPacket = CBasicPacket();
-                            PacketParser[0x00D](map_session_data, PChar, basicPacket);
-                        }
-                        else
-                        {
-                            ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->getName() : "None", otherMap ? "Yes" : "No"));
-
-                            if (PZone)
-                            {
-                                PZone->DecreaseZoneCounter(PChar);
-                            }
-
-                            destroy_arr(map_session_data->server_packet_data);
-                            destroy(map_session_data->PChar);
-                            destroy(map_session_data);
-
-                            map_session_list.erase(it++);
-                            continue;
                         }
                     }
-                    else
+
+                    // uncharm pet if player d/c
+                    if (PChar->PPet != nullptr && PChar->PPet->objtype == TYPE_MOB)
                     {
-                        if (!otherMap)
-                        {
-                            // Player session is attached to this map process and has stopped responding.
-                            map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
-                            _sql->Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->PChar->id);
-                        }
-
-                        ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->getName() : "None", otherMap ? "Yes" : "No"));
-
-                        if (PZone)
-                        {
-                            PZone->DecreaseZoneCounter(PChar);
-                        }
-
-                        destroy_arr(map_session_data->server_packet_data);
-                        destroy(map_session_data->PChar);
-                        destroy(map_session_data);
-
-                        map_session_list.erase(it++);
-                        continue;
+                        petutils::DespawnPet(PChar);
                     }
-                }
-                else if (map_session_data->shuttingDown == 0)
-                {
-                    ShowWarning("map_cleanup: WHITHOUT CHAR timed out, session closed");
 
-                    const char* Query = "DELETE FROM accounts_sessions WHERE client_addr = %u AND client_port = %u";
-                    _sql->Query(Query, map_session_data->client_addr, map_session_data->client_port);
+                    PChar->status = STATUS_TYPE::SHUTDOWN;
+
+                    charutils::removeCharFromZone(PChar);
 
                     destroy_arr(map_session_data->server_packet_data);
-                    map_session_list.erase(it++);
+                    destroy(map_session_data->PChar);
                     destroy(map_session_data);
-                    continue;
+
+                    map_session_list.erase(it++);
                 }
+                else
+                {
+                    ShowWarning("map_cleanup: WITHOUT CHAR timed out, session closed on this process");
+                    if (!otherMap)
+                    {
+                        const char* Query = "DELETE FROM accounts_sessions WHERE charid = %u";
+                        _sql->Query(Query, map_session_data->charID);
+                    }
+
+                    destroy_arr(map_session_data->server_packet_data);
+                    destroy(map_session_data);
+
+                    map_session_list.erase(it++);
+                }
+
+                continue;
             }
         }
         else if (PChar != nullptr && PChar->isLinkDead)
         {
-            _sql->Query("UPDATE char_flags SET disconnecting = 0 WHERE charid = %u", PChar->id);
+            _sql->Query("UPDATE char_flags SET disconnecting = 0 WHERE charid = %u", map_session_data->charID);
 
             PChar->isLinkDead = false;
             PChar->updatemask |= UPDATE_HP;

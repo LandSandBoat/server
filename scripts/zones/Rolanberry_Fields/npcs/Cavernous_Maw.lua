@@ -4,6 +4,7 @@
 -- !pos -198 8 361 110
 -- Teleports Players to Rolanberry Fields [S]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

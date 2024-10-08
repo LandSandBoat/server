@@ -4,6 +4,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.findFlag
 xi.findFlag =
 {
     NONE            = 0,

@@ -2,6 +2,7 @@
 -- Area: Windurst Woods
 --  NPC: Eight of Spades
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

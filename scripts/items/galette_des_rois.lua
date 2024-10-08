@@ -8,6 +8,7 @@
 -- Intelligence +2
 -- Random Jewel
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

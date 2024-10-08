@@ -1,3 +1,4 @@
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

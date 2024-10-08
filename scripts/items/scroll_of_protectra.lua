@@ -3,6 +3,7 @@
 -- Scroll of Protectra
 -- Teaches the white magic Protectra
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

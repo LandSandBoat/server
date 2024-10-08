@@ -3,6 +3,7 @@
 --  NPC: ??? (qm0)
 -- Note: Spawns Overlord's Tombstone / Arch Overlord's Tombstone
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

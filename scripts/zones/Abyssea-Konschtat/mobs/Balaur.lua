@@ -4,6 +4,7 @@
 -- TODO: When its HP is under 50%, Balaur has a chance to gain
 -- a spikes effect after using Breath attacks (matches element of breath)
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobFight = function(mob, target)

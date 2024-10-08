@@ -4,6 +4,7 @@
 -- Spawns Durinn
 -- !pos -555 -47 -564 217
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

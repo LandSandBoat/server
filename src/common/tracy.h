@@ -24,10 +24,10 @@
 // clang-format off
 #ifdef TRACY_ENABLE
 
-#include <cstdint>
-#include <fmt/format.h>
-
+#define TRACY_CALLSTACK 4
 #include "tracy/Tracy.hpp"
+
+#include <cstdint>
 #include <fmt/format.h>
 #include <string>
 

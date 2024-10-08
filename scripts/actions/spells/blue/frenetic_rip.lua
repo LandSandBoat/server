@@ -12,6 +12,7 @@
 -- Skillchain Element: Induration
 -- Combos: Accuracy Bonus
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
@@ -23,7 +24,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ecosystem = xi.ecosystem.DEMON
     params.tpmod = xi.spells.blue.tpMod.DAMAGE
     params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.H2H
+    params.damageType = xi.damageType.HTH
     params.scattr = xi.skillchainType.INDURATION
     params.numhits = 3
     params.multiplier = 1.36

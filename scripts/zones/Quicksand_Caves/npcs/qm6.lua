@@ -4,6 +4,7 @@
 -- Bastok Mission 8.1 "The Chains That Bind Us"
 -- !pos -469 0 620 208
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 -- Fourth Staff
 -- Enchantment: "Retrace" (Bastok Markets[S])
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

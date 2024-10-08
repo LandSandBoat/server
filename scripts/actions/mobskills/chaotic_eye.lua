@@ -4,6 +4,7 @@
 -- Description: Silences an enemy.
 -- Type: Magical (Wind)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

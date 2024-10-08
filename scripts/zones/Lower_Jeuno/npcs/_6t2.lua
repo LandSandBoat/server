@@ -4,6 +4,7 @@
 -- Starts & Finishes Quest: Save My Son
 -- Optional Involvement in Quest: Chocobo's Wounds, Path of the Beastmaster
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

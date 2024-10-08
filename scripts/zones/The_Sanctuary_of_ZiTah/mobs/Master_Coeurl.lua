@@ -2,6 +2,7 @@
 -- Area: The Sanctuary of ZiTah
 --  Mob: Master Coeurl
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

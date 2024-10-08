@@ -148,16 +148,16 @@ enum JOBPOINT_TYPE : uint16
     JP_ENLIGHT_EFFECT       = JPCATEGORY_PLD + 0x09, // ae.dmg +1 p.acc +1
 
     // DRK
-    JP_BLOOD_WEAPON_EFFECT     = JPCATEGORY_DRK + 0x00, // hp absorb +2%
-    JP_SOUL_ENSLAVEMENT_EFFECT = JPCATEGORY_DRK + 0x02, // tp absorb +1%
-    JP_ARCANE_CIRCLE_EFFECT    = JPCATEGORY_DRK + 0x01, // dmg taken -1
-    JP_LAST_RESORT_EFFECT      = JPCATEGORY_DRK + 0x03, // p.atk +2
-    JP_SOULEATER_DURATION      = JPCATEGORY_DRK + 0x04, // dur. +1s
-    JP_WEAPON_BASH_EFFECT      = JPCATEGORY_DRK + 0x05, // dmg +10
-    JP_NETHER_VOID_EFFECT      = JPCATEGORY_DRK + 0x06, // absorb +2% abs-attri status +1/10
-    JP_ARCANE_CREST_DURATION   = JPCATEGORY_DRK + 0x07, // dur. +1s
-    JP_SCARLET_DLRIUM_DURATION = JPCATEGORY_DRK + 0x08, // dur. +1s
-    JP_ENDARK_EFFECT           = JPCATEGORY_DRK + 0x09, // p.dmg p.atk p.acc +1
+    JP_BLOOD_WEAPON_EFFECT       = JPCATEGORY_DRK + 0x00, // hp absorb +2%
+    JP_SOUL_ENSLAVEMENT_EFFECT   = JPCATEGORY_DRK + 0x02, // tp absorb +1%
+    JP_ARCANE_CIRCLE_EFFECT      = JPCATEGORY_DRK + 0x01, // dmg taken -1
+    JP_LAST_RESORT_EFFECT        = JPCATEGORY_DRK + 0x03, // p.atk +2
+    JP_SOULEATER_DURATION        = JPCATEGORY_DRK + 0x04, // dur. +1s
+    JP_WEAPON_BASH_EFFECT        = JPCATEGORY_DRK + 0x05, // dmg +10
+    JP_NETHER_VOID_EFFECT        = JPCATEGORY_DRK + 0x06, // absorb +2% abs-attri status +1/10
+    JP_ARCANE_CREST_DURATION     = JPCATEGORY_DRK + 0x07, // dur. +1s
+    JP_SCARLET_DELIRIUM_DURATION = JPCATEGORY_DRK + 0x08, // dur. +1s
+    JP_ENDARK_EFFECT             = JPCATEGORY_DRK + 0x09, // p.dmg p.atk p.acc +1
 
     // BST
     JP_FAMILIAR_EFFECT    = JPCATEGORY_BST + 0x00, // all pet attr. +3

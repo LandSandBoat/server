@@ -3,6 +3,7 @@
 -- Scroll of Blizzard II
 -- Teaches the black magic Blizzard II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

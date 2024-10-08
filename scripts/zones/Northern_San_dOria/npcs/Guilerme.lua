@@ -4,6 +4,7 @@
 --  Involved in Quest: Rosel the Armorer
 -- !pos -4.500 0.000 99.000 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

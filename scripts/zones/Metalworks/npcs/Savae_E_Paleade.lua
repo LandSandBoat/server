@@ -4,6 +4,7 @@
 -- Involved In Mission: Journey Abroad
 -- !pos 23.724 -17.39 -43.360 237
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

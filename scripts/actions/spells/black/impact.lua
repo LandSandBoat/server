@@ -3,6 +3,7 @@
 -- Deals dark damage to an enemy and
 -- decreases all 7 base stats by 20%
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
@@ -68,7 +69,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
     dmg = addBonuses(caster, spell, target, dmg)
     -- Add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement())
+    dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement())
     -- Add in final adjustments
     dmg = finalMagicAdjustments(caster, target, spell, dmg)
 

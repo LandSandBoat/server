@@ -2,6 +2,7 @@
 -- Area: Batallia Downs [S]
 --   NM: Chaneque
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -2,6 +2,7 @@
 -- Megalith Throw
 -- Titan delivers a ranged attack that slows target.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

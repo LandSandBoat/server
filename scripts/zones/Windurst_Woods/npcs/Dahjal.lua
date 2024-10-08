@@ -4,6 +4,7 @@
 -- Type: Conquest Troupe
 -- !pos 11.639 1.267 -57.706 241
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

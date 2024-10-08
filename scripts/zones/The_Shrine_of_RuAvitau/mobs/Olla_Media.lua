@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

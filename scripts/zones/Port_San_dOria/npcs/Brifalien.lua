@@ -4,6 +4,7 @@
 -- Involved in Quests: Riding on the Clouds
 -- !pos -20 -4 -74 232
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

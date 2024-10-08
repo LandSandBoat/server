@@ -3,6 +3,7 @@
 -- Item: Hi-Potion +1
 -- Item Effect: Restores 110 HP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

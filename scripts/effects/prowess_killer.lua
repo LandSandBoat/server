@@ -2,6 +2,7 @@
 -- xi.effect.PROWESS
 -- "Killer" effects bonus
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

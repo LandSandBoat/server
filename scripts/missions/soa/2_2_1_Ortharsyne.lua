@@ -22,12 +22,9 @@ mission.sections =
 
         [xi.zone.YORCIA_WEALD] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 1
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 1
+            end,
 
             onEventFinish =
             {

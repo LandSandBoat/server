@@ -2,6 +2,7 @@
 -- Lunar Revolution
 -- Deals damage in a fan-shaped area extending from the user.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

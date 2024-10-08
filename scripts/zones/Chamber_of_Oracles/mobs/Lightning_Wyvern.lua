@@ -3,6 +3,7 @@
 --  Mob: Lightning Wyvern
 -- KSNM: Eye of the Storm
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

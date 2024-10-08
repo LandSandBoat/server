@@ -3,6 +3,7 @@
 --  NPC: Kochahy-Muwachahy
 -- !pos 40 0 6 246
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local guardNation = xi.nation.OTHER

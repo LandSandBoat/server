@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/families/rampart') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -11,12 +12,16 @@ end
 
 entity.onMobFight = function(mob, target)
     local instance = mob:getInstance()
+    if not instance then
+        return
+    end
+
     local popTime = mob:getLocalVar('lastPetPop')
     local mobPos = mob:getPos()
     local mobPet = GetMobByID((mob:getID() + 1), instance)
 
     if os.time() - popTime > 15 then
-        if not mobPet:isSpawned() then
+        if mobPet and not mobPet:isSpawned() then
             mobPet:setSpawn(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:useMobAbility(2034)
             mob:setLocalVar('lastPetPop', os.time())
@@ -26,7 +31,7 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    if mobPet:isSpawned() then
+    if mobPet and mobPet:isSpawned() then
         mobPet:updateEnmity(target)
     end
 end

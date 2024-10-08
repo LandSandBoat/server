@@ -26,12 +26,9 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 1
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 1
+            end,
 
             onEventFinish =
             {

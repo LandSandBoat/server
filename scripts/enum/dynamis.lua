@@ -1,6 +1,7 @@
 xi = xi or {}
 xi.dynamis = xi.dynamis or {}
 
+---@enum xi.eye
 xi.dynamis.eye =
 {
     NONE    = 0,

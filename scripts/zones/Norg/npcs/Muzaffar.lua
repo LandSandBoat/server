@@ -4,6 +4,7 @@
 -- Quests: Black Market
 -- !pos 16.678, -2.044, -14.600 252
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -7,6 +7,7 @@
 -- !pos 99 -33 98 195 (F-7)
 -- !pos 259 -33 -58 195 (H-9)
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

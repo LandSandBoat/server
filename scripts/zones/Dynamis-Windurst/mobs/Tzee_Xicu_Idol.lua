@@ -3,6 +3,7 @@
 --  Mob: Tzee Xicu Idol
 -- Note: Mega Boss
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)

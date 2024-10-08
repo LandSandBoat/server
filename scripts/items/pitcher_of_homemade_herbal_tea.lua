@@ -9,6 +9,7 @@
 -- Ranged Attack +10% (cap 40)
 -- hHP +1
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

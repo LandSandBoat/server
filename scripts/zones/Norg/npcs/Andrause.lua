@@ -4,6 +4,7 @@
 -- NPC for A Shantotto Ascension Mission 5: The Enemy of the Empire I
 -- Working ???
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

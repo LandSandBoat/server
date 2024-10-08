@@ -2,6 +2,7 @@
 -- Area: RuAun Gardens
 --   NM: Despot
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -12,7 +13,11 @@ entity.onMobSpawn = function(mob)
         local killerId = ph:getLocalVar('killer')
         if killerId ~= 0 then
             local killer = GetPlayerByID(killerId)
-            if not killer:isEngaged() and killer:checkDistance(mob) <= 50 then
+            if
+                killer and
+                not killer:isEngaged() and
+                killer:checkDistance(mob) <= 50
+            then
                 mob:updateClaim(killer)
             end
         end

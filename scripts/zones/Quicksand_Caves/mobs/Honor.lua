@@ -3,6 +3,7 @@
 --  Mob: Honor
 -- Coming of Age (San dOria Mission 8-1)
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

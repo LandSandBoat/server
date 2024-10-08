@@ -6,6 +6,7 @@
 -- qm2   : !pos -94.073 -0.999 22.295 124
 -----------------------------------
 local yhoatorID = zones[xi.zone.YHOATOR_JUNGLE]
+-----------------------------------
 
 local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.STOP_YOUR_WHINING)
 

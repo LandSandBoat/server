@@ -7,6 +7,7 @@
 --  Range: 20' cone
 --  Notes: Used when someone pulls hate from behind Bahamut.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- Area: Beaucedine Glacier [S]
 --   NM: Came-cruse
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

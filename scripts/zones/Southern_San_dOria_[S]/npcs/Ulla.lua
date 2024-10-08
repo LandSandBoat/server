@@ -4,6 +4,7 @@
 -- !pos -65 2 -50 80 (not allied)
 -- Campaign Freelance accompanied by Kilhwch.
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

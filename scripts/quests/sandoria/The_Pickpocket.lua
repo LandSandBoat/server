@@ -191,7 +191,7 @@ quest.sections =
         {
             ['Esca'] =
             {
-                onTrigger = function(player, npc, trade)
+                onTrigger = function(player, npc)
                     if player:hasItem(xi.item.GILT_GLASSES) then
                         return quest:event(123)
                     else

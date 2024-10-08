@@ -4,10 +4,15 @@
 -----------------------------------
 local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
+    if not instance then
+        return
+    end
+
     local progress = instance:getProgress()
 
     if progress >= 24 then
@@ -33,7 +38,10 @@ end
 
 entity.onMobEngage = function(mob, target)
     local naja = GetMobByID(ID.mob[58].NAJA, mob:getInstance())
-    naja:setLocalVar('ready', 1)
+
+    if naja then
+        naja:setLocalVar('ready', 1)
+    end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -41,6 +49,10 @@ end
 
 entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
+    if not instance then
+        return
+    end
+
     instance:setProgress(instance:getProgress() + 1)
 end
 

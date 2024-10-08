@@ -2,6 +2,7 @@
 -- Area: Bastok Markets (S) (F-8)
 --  NPC: Bottomless Gorge
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- Area: Meriphataud Mountains
 --   NM: Naa Zeku the Unwaiting
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

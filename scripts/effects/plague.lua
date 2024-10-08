@@ -4,6 +4,7 @@
 -- Also, causes Steps to only grant One Finishing Move when Main Job is Dancer.
 -- Normal power is 5.
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

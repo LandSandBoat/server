@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.VALLEY_OF_SORROWS]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onSpawn = function(npc)
@@ -22,7 +23,7 @@ entity.onTrade = function(player, npc, trade)
         then
             player:confirmTrade()
         elseif
-            npcUtil.tradeHasExactly(trade, xi.item.RED_PONDWEED) and
+            npcUtil.tradeHasExactly(trade, xi.item.CLUMP_OF_RED_PONDWEED) and
             npcUtil.popFromQM(player, npc, ID.mob.ASPIDOCHELONE)
         then
             player:confirmTrade()

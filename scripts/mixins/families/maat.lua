@@ -38,7 +38,7 @@ g_mixins.maat = function(maatMob)
         local engagedID = mob:getLocalVar('engaged')
         if engagedID ~= 0 then
             local player = GetPlayerByID(engagedID)
-            if player:getHP() == 0 then
+            if player and player:getHP() == 0 then
                 local ID = zones[mob:getZoneID()]
                 mob:showText(mob, ID.text.LOOKS_LIKE_YOU_WERENT_READY)
             end

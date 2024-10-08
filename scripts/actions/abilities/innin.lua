@@ -5,16 +5,15 @@
 -- Recast Time: 3:00
 -- Duration: 5:00
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.ninja.checkInnin(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    target:delStatusEffect(xi.effect.INNIN)
-    target:delStatusEffect(xi.effect.YONIN)
-    target:addStatusEffect(xi.effect.INNIN, 30, 15, 300, 0, 20)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    xi.job_utils.ninja.useInnin(player, target, ability, action)
 end
 
 return abilityObject

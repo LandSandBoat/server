@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SIRVENTE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

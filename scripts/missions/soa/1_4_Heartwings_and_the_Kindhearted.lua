@@ -22,12 +22,9 @@ mission.sections =
 
         [xi.zone.WESTERN_ADOULIN] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 2
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 2
+            end,
 
             onEventFinish =
             {

@@ -4,6 +4,7 @@
 -- Item Effect: Attack +25, Ranged Attack +25
 -- Duration: 3 Minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

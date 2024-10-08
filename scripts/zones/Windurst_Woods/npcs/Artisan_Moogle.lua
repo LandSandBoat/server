@@ -2,6 +2,7 @@
 -- Area: Windurst Woods
 --  NPC: Artisan Moogle
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

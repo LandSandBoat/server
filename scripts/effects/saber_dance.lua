@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SABER_DANCE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

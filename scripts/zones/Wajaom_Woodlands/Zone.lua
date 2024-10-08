@@ -1,11 +1,8 @@
 -----------------------------------
 -- Zone: Wajaom_Woodlands (51)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
-
-zoneObject.onChocoboDig = function(player, precheck)
-    return xi.chocoboDig.start(player, precheck)
-end
 
 zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helmType.HARVESTING)

@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.KORROLOKA_TUNNEL]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local colinPHTable =

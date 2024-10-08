@@ -3,6 +3,7 @@
 --  NPC: Mystrix
 -- Gobbie Mystery Box
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local events =

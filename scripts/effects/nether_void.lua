@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.NETHER_VOID
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

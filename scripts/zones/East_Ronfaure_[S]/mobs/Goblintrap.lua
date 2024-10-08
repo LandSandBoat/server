@@ -4,6 +4,7 @@
 -- Note: Goblintrap NM
 -- !pos 168 0 -440 81
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

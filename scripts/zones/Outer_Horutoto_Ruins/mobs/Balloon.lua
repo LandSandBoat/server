@@ -5,6 +5,7 @@
 -----------------------------------
 local func = require('scripts/zones/Outer_Horutoto_Ruins/globals')
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

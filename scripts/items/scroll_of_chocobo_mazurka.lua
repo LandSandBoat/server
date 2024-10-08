@@ -3,6 +3,7 @@
 -- Scroll of Chocobo Mazurka
 -- Teaches the song Chocobo Mazurka
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

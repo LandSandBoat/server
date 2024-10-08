@@ -2,6 +2,7 @@
 -- Brain Spike
 -- Deals damage to single target. Additional effect: Paralyze
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

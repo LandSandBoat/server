@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.RAMUHS_FAVOR
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

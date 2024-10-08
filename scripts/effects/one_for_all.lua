@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ONE_FOR_ALL
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 -- intentionally empty, effects of buff handled by using the power of the effect.

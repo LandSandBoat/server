@@ -2,6 +2,7 @@
 -- func: setplayerlevel
 -- desc: Sets the target players level.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

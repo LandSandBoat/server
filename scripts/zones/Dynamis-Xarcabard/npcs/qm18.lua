@@ -3,6 +3,7 @@
 --  NPC: ??? (qm18)
 -- Note: Spawns Animated Gun
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

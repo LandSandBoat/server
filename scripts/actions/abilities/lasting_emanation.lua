@@ -7,6 +7,7 @@
 -- Notes: Base HP drain rate is 24 HP/tic. With Lasting Emenation it is 17HP/tic.
 -- Operates on a shared recast timer with Ecliptic Attrition.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

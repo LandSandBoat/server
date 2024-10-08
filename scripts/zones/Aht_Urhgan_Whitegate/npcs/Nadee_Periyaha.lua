@@ -3,6 +3,7 @@
 --  NPC: Nadee Periyaha
 -- !pos -10.802 0.000 -1.198 50
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -11,6 +11,7 @@ mixins =
     require('scripts/mixins/families/gears')
 }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

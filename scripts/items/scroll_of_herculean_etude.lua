@@ -3,6 +3,7 @@
 -- Scroll of Herculean Etude
 -- Teaches the song Herculean Etude
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

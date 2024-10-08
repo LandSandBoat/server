@@ -1,6 +1,7 @@
 -----------------------------------
 -- Echo Drops - Removes Silence.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

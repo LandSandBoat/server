@@ -3,6 +3,7 @@
 --  NPC: Machionage
 -- !pos -255 -3 109 80
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- Spell: Absorb-CHR
 -- Steals an enemy's Charism.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

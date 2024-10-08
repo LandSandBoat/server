@@ -78,14 +78,11 @@ mission.sections =
 
         [xi.zone.FULL_MOON_FOUNTAIN] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 7 then
-                        return 61
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 7 then
+                    return 61
+                end
+            end,
 
             onEventFinish =
             {
@@ -107,14 +104,11 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 335
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 1 then
+                    return 335
+                end
+            end,
 
             onEventFinish =
             {

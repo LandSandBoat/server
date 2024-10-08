@@ -3,6 +3,7 @@
 -- Scroll of Advancing March
 -- Teaches the song Advancing March
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

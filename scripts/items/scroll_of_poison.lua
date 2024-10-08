@@ -3,6 +3,7 @@
 -- Scroll of Poison
 -- Teaches the black magic Poison
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

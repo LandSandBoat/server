@@ -12,6 +12,7 @@
 -- Skillchain Properties: Transfixion/Impaction
 -- Combos: Accuracy Bonus
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
@@ -23,7 +24,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ecosystem = xi.ecosystem.UNDEAD
     params.tpmod = xi.spells.blue.tpMod.ATTACK
     params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.H2H
+    params.damageType = xi.damageType.HTH
     params.scattr = xi.skillchainType.TRANSFIXION
     params.scattr2 = xi.skillchainType.IMPACTION
     params.numhits = 1

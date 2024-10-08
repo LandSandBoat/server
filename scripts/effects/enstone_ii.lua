@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ENSTONE_II
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

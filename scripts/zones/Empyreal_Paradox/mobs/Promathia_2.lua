@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.EMPYREAL_PARADOX]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -15,6 +16,10 @@ end
 
 entity.onMobSpawn = function(mob)
     local battlefield = mob:getBattlefield()
+    if not battlefield then
+        return
+    end
+
     if GetMobByID(ID.mob.PROMATHIA + (battlefield:getArea() - 1) * 2):isDead() then
         battlefield:setLocalVar('phaseChange', 0)
     end

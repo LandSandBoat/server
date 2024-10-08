@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.itemCheck
 xi.itemCheck =
 {
     NONE    = 0,

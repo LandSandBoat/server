@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: unknown (0)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

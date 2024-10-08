@@ -5,6 +5,7 @@
 -- Type: Enfeebling
 -- Utsusemi/Blink absorb: 2-3 shadows
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -23,9 +24,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = utils.takeShadows(target, 1, math.random(2, 3)) --removes 2-3 shadows
     --if removed more shadows than were up or there weren't any
     if dmg > 0 then
-        for i, effect in ipairs(removables) do
-            if mob:hasStatusEffect(effect) then
-                local statusEffect = mob:getStatusEffect(effect)
+        for _, effect in ipairs(removables) do
+            local statusEffect = mob:getStatusEffect(effect)
+
+            if statusEffect then
                 target:addStatusEffect(effect, statusEffect:getPower(), statusEffect:getTickCount(), statusEffect:getDuration())
                 mob:delStatusEffect(effect)
             end

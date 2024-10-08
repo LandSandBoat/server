@@ -2,6 +2,7 @@
 -- Area: Sauromugue Champaign [S]
 --   NM: Herensugue
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

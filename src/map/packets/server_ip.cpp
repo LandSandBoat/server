@@ -30,6 +30,10 @@ CServerIPPacket::CServerIPPacket(CCharEntity* PChar, uint8 type, uint64 ipp)
     this->setType(0x0B);
     this->setSize(0x1C);
 
+    // Store inputs to reconstruct later in map.cpp in case we detect the player needs the packet again
+    this->type = type;
+    this->ipp  = ipp;
+
     ref<uint8>(0x04)  = type;
     ref<uint32>(0x08) = (uint32)ipp;
     ref<uint16>(0x0C) = (uint16)(ipp >> 32);

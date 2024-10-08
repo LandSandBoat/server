@@ -2,6 +2,7 @@
 -- Area: RoMaeve
 --   NM: Nargun
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

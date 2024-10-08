@@ -5,6 +5,7 @@
 -- It also includes some tips on how to swing special swords.
 -- Adventurers note that reading it increases one's enhancing magic skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

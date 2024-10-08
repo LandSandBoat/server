@@ -3,6 +3,7 @@
 -- Scroll of Burst II
 -- Teaches the black magic Burst II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

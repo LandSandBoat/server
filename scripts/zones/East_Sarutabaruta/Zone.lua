@@ -4,11 +4,8 @@
 local ID = zones[xi.zone.EAST_SARUTABARUTA]
 require('scripts/quests/i_can_hear_a_rainbow')
 -----------------------------------
+---@type TZone
 local zoneObject = {}
-
-zoneObject.onChocoboDig = function(player, precheck)
-    return xi.chocoboDig.start(player, precheck)
-end
 
 zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.DUKE_DECAPOD)

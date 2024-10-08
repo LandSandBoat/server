@@ -57,25 +57,22 @@ quest.sections =
 
         [xi.zone.WAJAOM_WOODLANDS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if quest:getVar(player, 'Prog') == 0 then
-                        local xPos = player:getXPos()
-                        local yPos = player:getYPos()
-                        local zPos = player:getZPos()
+            onZoneIn = function(player, prevZone)
+                if quest:getVar(player, 'Prog') == 0 then
+                    local xPos = player:getXPos()
+                    local yPos = player:getYPos()
+                    local zPos = player:getZPos()
 
-                        if
-                            xPos >= 680.0 and yPos >= -19.0 and zPos >= 218.0 and
-                            xPos <= 691.0 and yPos <= -14.0 and zPos <= 221.0
-                        then
-                            return 513
-                        end
-                    elseif quest:getVar(player, 'Prog') == 2 then
-                        return 20
+                    if
+                        xPos >= 680.0 and yPos >= -19.0 and zPos >= 218.0 and
+                        xPos <= 691.0 and yPos <= -14.0 and zPos <= 221.0
+                    then
+                        return 513
                     end
-                end,
-            },
+                elseif quest:getVar(player, 'Prog') == 2 then
+                    return 20
+                end
+            end,
 
             onEventFinish =
             {
@@ -133,14 +130,11 @@ quest.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if quest:getVar(player, 'Prog') == 3 then
-                        return 227
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if quest:getVar(player, 'Prog') == 3 then
+                    return 227
+                end
+            end,
 
             onEventFinish =
             {

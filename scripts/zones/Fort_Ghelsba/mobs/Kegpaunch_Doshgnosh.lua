@@ -2,6 +2,7 @@
 -- Area: Fort Ghelsba
 --   NM: Kegpaunch Doshgnosh
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

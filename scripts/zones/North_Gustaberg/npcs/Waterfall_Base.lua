@@ -4,6 +4,7 @@
 -- Involved In Quest: Drachenfall
 -- !pos -217.594 98.644 464.722 106
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

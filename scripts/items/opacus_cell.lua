@@ -3,6 +3,7 @@
 -- 5374
 -- Unlocks job abilities, weapon skills
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

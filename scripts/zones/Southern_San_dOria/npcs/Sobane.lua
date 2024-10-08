@@ -6,6 +6,7 @@
 -- !pos -190 -3 97 230
 -- csid: 52  732  733  734  735  736  737  738  739  740  741
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

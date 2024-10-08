@@ -7,6 +7,7 @@
 -- Accuracy % 10 (cap 52)
 -- HP Recovered While Healing 2
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

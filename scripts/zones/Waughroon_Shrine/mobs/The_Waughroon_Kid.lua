@@ -3,6 +3,7 @@
 --  Mob: The Waughroon Kid
 -- BCNM: The Final Bout
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

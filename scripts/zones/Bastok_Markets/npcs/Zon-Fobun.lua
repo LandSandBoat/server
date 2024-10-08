@@ -3,6 +3,7 @@
 --  NPC: Zon-Fobun
 -- !pos -241.293 -3 63.406 235
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

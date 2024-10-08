@@ -3,6 +3,7 @@
 -- Scroll of Invisible
 -- Teaches the white magic Invisible
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

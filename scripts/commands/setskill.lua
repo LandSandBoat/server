@@ -2,6 +2,7 @@
 -- func: setskill <skill name or ID> <skill level> <target>
 -- desc: sets target's level of specified skill
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -58,6 +59,10 @@ commandObj.onTrigger = function(player, skillName, skillLV, target)
             player:printToPlayer(string.format('Player named "%s" not found!', target))
             return
         end
+    end
+
+    if not targ then
+        return
     end
 
     targ:setSkillLevel(skillID, skillLV * 10)

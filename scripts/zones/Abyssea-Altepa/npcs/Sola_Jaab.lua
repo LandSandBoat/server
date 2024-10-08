@@ -2,6 +2,7 @@
 -- Area: Abyssea_Altepa
 --  NPC: Sola Jaab
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

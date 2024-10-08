@@ -3,6 +3,7 @@
 -- Item: Apple au Lait
 -- Item Effect: Restores 120 HP over 180 seconds
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -1,17 +1,16 @@
 -----------------------------------
 -- Zone: Rala Waterways U
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onInstanceZoneIn = function(player, instance)
-    local cs = -1
-
     if player:getInstance() == nil then
         player:setPos(0, 0, 0, 0, 72)
-        return cs
+        return
     end
 
     local pos = player:getPos()
@@ -19,8 +18,6 @@ zoneObject.onInstanceZoneIn = function(player, instance)
         local entrypos = instance:getEntryPos()
         player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
     end
-
-    return cs
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -36,7 +33,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 zoneObject.onInstanceLoadFailed = function()
-    return 258 -- Rala Waterways
+    return xi.zone.RALA_WATERWAYS
 end
 
 return zoneObject

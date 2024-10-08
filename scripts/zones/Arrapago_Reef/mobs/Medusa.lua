@@ -7,6 +7,7 @@
 local ID = zones[xi.zone.ARRAPAGO_REEF]
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -45,7 +46,10 @@ entity.onMobFight = function(mob, target)
 
     for i = ID.mob.MEDUSA + 1, ID.mob.MEDUSA + 4 do
         local pet = GetMobByID(i)
-        if pet:getCurrentAction() == xi.act.ROAMING then
+        if
+            pet and
+            pet:getCurrentAction() == xi.act.ROAMING
+        then
             pet:updateEnmity(target)
         end
     end

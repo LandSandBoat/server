@@ -3,6 +3,7 @@
 --   NM: Mahishasura
 -- !pos 206.510 -16.320 357.724 52
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -3,6 +3,7 @@
 -- Toolbag Ranka
 -- When used, you will obtain one stack of Ranka
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: Prelude of Black and White (Start), Pieuje's Decision (Start)
 -- !pos -37 -3 31 233
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

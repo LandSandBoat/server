@@ -3,6 +3,7 @@
 -- Piece of Hume Mochi
 -- Enchantment: 60Min, Costume - Hume child (male)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

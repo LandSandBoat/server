@@ -5,6 +5,7 @@
 -- Recast Time: 0:00:15
 -- Duration: 00:01:00
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -12,7 +13,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.PIANISSIMO, 0, 0, 60)
+    xi.job_utils.bard.usePianissimo(player, target, ability)
 end
 
 return abilityObject

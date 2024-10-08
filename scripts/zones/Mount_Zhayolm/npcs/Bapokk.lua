@@ -4,6 +4,7 @@
 -- Handles access to Alzadaal Ruins
 -- !pos -20 -6 276 61
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

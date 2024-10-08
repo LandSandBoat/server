@@ -2,6 +2,7 @@
 -- Area: Carpenters' Landing
 --   NM: Tempest Tigon
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

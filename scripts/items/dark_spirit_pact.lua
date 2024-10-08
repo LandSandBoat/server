@@ -3,6 +3,7 @@
 -- Dark Spirit Pact
 -- Teaches the summoning magic Dark Spirit
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -4,6 +4,7 @@
 -- !pos 597 -32 279 97
 -- Teleports Players to Meriphataud Mountains
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

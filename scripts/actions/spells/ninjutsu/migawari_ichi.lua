@@ -3,6 +3,7 @@
 -- Effect Power: Damage Threshold %
 -- Effect Sub Power: Damage Reduction % (In this case, 100%)
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

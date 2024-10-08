@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Castle_Zvahl_Baileys_[S] (138)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

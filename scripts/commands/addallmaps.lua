@@ -2,6 +2,7 @@
 -- func: addallmaps
 -- desc: Adds all maps to the given player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

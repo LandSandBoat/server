@@ -12,6 +12,7 @@
 -- Skillchain Element(s): Transfixion
 -- Combos: Beast Killer
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

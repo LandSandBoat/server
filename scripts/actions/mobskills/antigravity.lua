@@ -3,6 +3,7 @@
 -- Always single gear
 -- Knockback and damage, knockback varies with gear count
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

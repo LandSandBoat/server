@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -18,7 +19,11 @@ end
 
 entity.onMobEngage = function(mob, target)
     local naja = GetMobByID(ID.mob[58].NAJA, mob:getInstance())
-    naja:setLocalVar('ready', 1)
+
+    if naja then
+        naja:setLocalVar('ready', 1)
+    end
+
     mob:showText(mob, ID.text.CANNOT_LET_YOU_PASS)
 end
 
@@ -54,6 +59,10 @@ end
 
 entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
+    if not instance then
+        return
+    end
+
     instance:setProgress(instance:getProgress() + 2)
 end
 

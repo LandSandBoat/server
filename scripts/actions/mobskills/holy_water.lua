@@ -1,6 +1,7 @@
 -----------------------------------
 -- Holy Water - Removes Curse, Zombie, and Doom.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -10,8 +11,7 @@ end
 local statii =
 {
     xi.effect.CURSE_I,
-    xi.effect.CURSE_II,
-    xi.effect.ZOMBIE,
+    xi.effect.CURSE_II, -- AKA "Zombie"
     xi.effect.DOOM,
 }
 

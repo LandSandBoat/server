@@ -3,6 +3,7 @@
 -- Description: Delivers an area attack. Damage varies with TP.
 -- Type: Physical (Blunt)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

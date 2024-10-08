@@ -7,6 +7,7 @@ local ID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
 -----------------------------------
 mixins = { require('scripts/mixins/families/peiste') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local sugaarPHTable =

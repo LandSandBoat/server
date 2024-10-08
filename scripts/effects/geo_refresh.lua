@@ -1,6 +1,7 @@
 -----------------------------------
 -- Effect: Geo-Refresh
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

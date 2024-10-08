@@ -4,6 +4,7 @@
 -- Involved In Windurst Mission 7-2 (Optional Dialogue)
 -- !pos 346 0 343 159 <many>
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

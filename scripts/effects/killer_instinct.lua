@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.KILLER_INSTINCT
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

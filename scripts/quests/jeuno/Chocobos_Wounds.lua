@@ -162,7 +162,9 @@ quest.sections =
                     quest:setVar(player, 'Timer', os.time() + 45)
                     quest:setVar(player, 'Prog', 4)
 
-                    return quest:event(99)
+                    -- TODO: This needs retail verification to confirm no zoning
+                    -- event has occurred
+                    player:startEvent(99)
                 end,
 
                 [60] = function(player, csid, option, npc)

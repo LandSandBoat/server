@@ -1889,6 +1889,12 @@ namespace fishingutils
                 if ((charSkill / 10) < (charSkill + skillAmount) / 10)
                 {
                     PChar->WorkingSkills.skill[SKILL_FISHING] += 0x20;
+
+                    if (PChar->RealSkills.skill[SKILL_FISHING] >= maxSkill)
+                    {
+                        PChar->WorkingSkills.skill[SKILL_FISHING] |= 0x8000; // blue capped text
+                    }
+
                     PChar->pushPacket(new CCharSkillsPacket(PChar));
                     PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, SKILL_FISHING, (charSkill + skillAmount) / 10, 53));
                 }
@@ -1929,6 +1935,13 @@ namespace fishingutils
         {
             ShowWarning("Fishing is currently disabled");
             PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Fishing is currently disabled"));
+            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
+            return;
+        }
+
+        if (PChar->GetMLevel() < settings::get<uint8>("map.FISHING_MIN_LEVEL"))
+        {
+            PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Your level is too low to fish."));
             PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
             return;
         }
@@ -2647,7 +2660,7 @@ namespace fishingutils
 
     void FishingAction(CCharEntity* PChar, FISHACTION action, uint16 stamina, uint32 special)
     {
-        if (!settings::get<bool>("map.FISHING_ENABLE"))
+        if (!settings::get<bool>("map.FISHING_ENABLE") || PChar->GetMLevel() < settings::get<uint8>("map.FISHING_MIN_LEVEL"))
         {
             ShowWarning("Fishing is currently disabled, but somehow we have someone commencing a fishing action");
             // Unlikely anyone can get here legit, since we already disabled "startFishing"

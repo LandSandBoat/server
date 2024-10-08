@@ -5,8 +5,8 @@
 -- ZONE,   NPC,      POS
 -- Mhaura, Rycharde, !pos 17.451 -16.000 88.815 249
 -----------------------------------
+
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE)
------------------------------------
 
 quest.reward =
 {

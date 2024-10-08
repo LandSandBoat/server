@@ -2,6 +2,7 @@
 -- Area: Maze of Shakhrami
 --  Mob: Crypterpillar
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

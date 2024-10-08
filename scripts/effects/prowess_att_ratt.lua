@@ -2,6 +2,7 @@
 -- xi.effect.PROWESS
 -- Increased treasure casket discovery.
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

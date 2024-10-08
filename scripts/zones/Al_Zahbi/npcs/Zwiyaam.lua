@@ -3,6 +3,7 @@
 --  NPC: Zwiyaam
 -- !pos 14.814 -7.667 41.889 48
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

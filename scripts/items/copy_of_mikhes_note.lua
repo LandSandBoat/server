@@ -5,6 +5,7 @@
 -- "Just throw your guard up and it'll all work out."
 -- Adventurers note that reading it increases one's guarding skill.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

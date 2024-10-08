@@ -3,6 +3,7 @@
 -- onnagimi_yukata
 -- Dispense: Datechochin x99
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

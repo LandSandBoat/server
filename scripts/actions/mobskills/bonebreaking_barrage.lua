@@ -2,6 +2,7 @@
 -- Bonebreaking Barrage
 -- Deals damage to a single target. Additional effect: Gravity, Max HP Down (-50%)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

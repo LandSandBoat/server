@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local supportOffsets1 = { 3, 4, 5 }

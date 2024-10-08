@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum xi.foodType
 xi.foodType =
 {
     BASIC    = 1,

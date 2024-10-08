@@ -40,14 +40,11 @@ mission.sections =
 
         [xi.zone.KAMIHR_DRIFTS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return 58
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 1 then
+                    return 58
+                end
+            end,
 
             onEventFinish =
             {

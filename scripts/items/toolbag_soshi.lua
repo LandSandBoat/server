@@ -3,6 +3,7 @@
 -- Toolbag Soshi
 -- When used, you will obtain one stack of soshi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

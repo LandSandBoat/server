@@ -97,6 +97,11 @@ void CMobSkill::setMsg(uint16 msg)
     m_Message = msg;
 }
 
+void CMobSkill::setTargets(const std::vector<CBattleEntity*>& targets)
+{
+    m_Targets = targets;
+}
+
 void CMobSkill::setTotalTargets(uint16 targets)
 {
     m_TotalTargets = targets;
@@ -182,6 +187,11 @@ int16 CMobSkill::getTP() const
 uint8 CMobSkill::getHPP() const
 {
     return m_HPP;
+}
+
+auto CMobSkill::getTargets() const -> const std::vector<CBattleEntity*>&
+{
+    return m_Targets;
 }
 
 uint16 CMobSkill::getTotalTargets() const

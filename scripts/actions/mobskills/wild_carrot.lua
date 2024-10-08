@@ -2,6 +2,7 @@
 -- Wild Carrot
 -- Description: Restores HP.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

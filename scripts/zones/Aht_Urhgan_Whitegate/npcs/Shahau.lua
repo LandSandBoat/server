@@ -4,6 +4,7 @@
 -- Type: Alchemy Image Support
 -- !pos -10.470 -6.25 -141.700 241
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

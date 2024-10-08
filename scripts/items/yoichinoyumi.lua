@@ -2,6 +2,7 @@
 -- ID: 18348, 18349, 18650, 18664, 18678, 19759, 19852, 21210, 21211, 22115
 -- Item: Yoichinoyumi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

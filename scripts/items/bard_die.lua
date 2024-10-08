@@ -3,6 +3,7 @@
 -- Bard Die
 -- Teaches the job ability Choral Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

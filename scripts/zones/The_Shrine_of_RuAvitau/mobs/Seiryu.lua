@@ -2,7 +2,12 @@
 -- Area: The Shrine of Ru'Avitau
 --  Mob: Seiryu (Pet version)
 -----------------------------------
+---@type TMobEntity
 local entity = {}
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.CANNOT_GUARD, 1)
+end
 
 entity.onMobMagicPrepare = function(mob, target, spellId)
     if not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS, 0) then

@@ -2,6 +2,7 @@
 -- Area: East Sarutabaruta
 --  Mob: Bolster
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

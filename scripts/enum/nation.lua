@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.nation
 xi.nation =
 {
     SANDORIA = 0,

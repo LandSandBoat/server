@@ -68,17 +68,14 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        prevZone == xi.zone.NORTHERN_SAN_DORIA and
-                        player:getMissionStatus(mission.areaId) == 2
-                    then
-                        return 555
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    prevZone == xi.zone.NORTHERN_SAN_DORIA and
+                    player:getMissionStatus(mission.areaId) == 2
+                then
+                    return 555
+                end
+            end,
 
             onEventFinish =
             {

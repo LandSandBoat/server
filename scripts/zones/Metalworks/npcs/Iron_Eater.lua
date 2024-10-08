@@ -5,6 +5,7 @@
 -- Starts and Finishes; The Weight of Your Limits
 -- !pos 92.936 -19.532 1.814 237
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 --  NPC: Gatita
 -- !pos -60.207 7.002 -59.143 246
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

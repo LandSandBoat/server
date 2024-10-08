@@ -4,6 +4,7 @@
 -- Standard Merchant NPC
 -- !pos 68 -9 -74 232
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -5,16 +5,15 @@
 -- Recast Time: 1:00:00
 -- Duration: 0:00:30
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
-
-    return 0, 0
+    xi.job_utils.blue_mage.checkAzureLore(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.AZURE_LORE, 1, 0, 30)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    xi.job_utils.blue_mage.useAzureLore(player, target, ability, action)
 end
 
 return abilityObject

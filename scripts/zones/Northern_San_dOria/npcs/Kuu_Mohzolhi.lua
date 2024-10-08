@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: Growing Flowers
 -- !pos -123 0 80 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

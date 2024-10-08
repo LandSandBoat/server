@@ -1,6 +1,7 @@
 -----------------------------------
 -- Effect: GEO STR Boost
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

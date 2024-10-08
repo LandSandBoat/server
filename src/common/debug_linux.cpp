@@ -83,4 +83,10 @@ bool debug::isRunningUnderDebugger()
     }
     return underDebugger;
 }
+
+bool debug::isUserRoot()
+{
+    return getuid() == 0 && getgid() == 0;
+}
+
 #endif // __linux__

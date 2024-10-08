@@ -3,6 +3,7 @@
 -- Deals damage to nearby players with a surreal dance.
 -- Additional effect: Knockback & Bind
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

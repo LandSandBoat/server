@@ -2,6 +2,7 @@
 -- func: bring <player>
 -- desc: Brings the target to the player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

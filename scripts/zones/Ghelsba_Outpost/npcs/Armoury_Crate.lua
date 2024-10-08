@@ -3,6 +3,7 @@
 --  NPC: Armoury Crate
 -- Ghelsba_Outpost Armoury_Crate
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

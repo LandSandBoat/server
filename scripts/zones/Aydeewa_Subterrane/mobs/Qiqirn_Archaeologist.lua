@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local bluestreakGyugyuroonPHTable =

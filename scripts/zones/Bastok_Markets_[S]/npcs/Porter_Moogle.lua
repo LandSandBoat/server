@@ -5,6 +5,7 @@
 -- !zone 87
 -- !pos TODO
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local e =

@@ -2,6 +2,7 @@
 -- Area: Apollyon NW, Floor 5
 --  Mob: Kaiser Behemoth
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onSpellPrecast = function(mob, spell)

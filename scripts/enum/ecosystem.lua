@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.ecosystem
 xi.ecosystem =
 {
     ERROR          = 0,
@@ -29,4 +30,5 @@ xi.ecosystem =
     VORAGEAN       = 21,
 }
 
+---@alias xi.eco xi.ecosystem
 xi.eco = xi.ecosystem

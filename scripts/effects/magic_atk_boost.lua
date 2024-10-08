@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.MAGIC_ATK_BOOST
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

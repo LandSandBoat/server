@@ -3,6 +3,7 @@
 --  NPC: Adolie
 -- !pos -35 2 59 243
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

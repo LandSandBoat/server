@@ -4,6 +4,7 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos -98 -2 31 230
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

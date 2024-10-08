@@ -2,6 +2,7 @@
 -- Area: Mhaura (249)
 -- Ambuscade_Tome : !pos -28.030 -15.500 52.279 249
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

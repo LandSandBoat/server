@@ -6,6 +6,7 @@
 -- Duration: Instant
 -- Target: Party member, cannot target self.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

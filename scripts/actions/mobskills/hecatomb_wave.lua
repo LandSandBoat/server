@@ -3,6 +3,7 @@
 --  Description: Deals wind damage to enemies within a fan-shaped area originating from the caster. Additional effect: Blindness.
 --  Type: Magical (Wind)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

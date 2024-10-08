@@ -3,6 +3,7 @@
 --  NPC: ??? (qm0)
 -- Note: Spawns Gu'Dha Effigy / Arch Gu'Dha Effigy
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

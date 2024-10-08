@@ -3,6 +3,7 @@
 --  NPC: Rukususu
 -- !pos -194.133 -0.986 191.077 204
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

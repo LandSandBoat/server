@@ -3,6 +3,7 @@
 -- Goshikitenge
 -- A launcher appears on the ground and fires 2 volleys of airbursts
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

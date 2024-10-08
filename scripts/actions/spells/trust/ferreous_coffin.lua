@@ -8,6 +8,7 @@
 -- Will use TP as soon as he gets it, so he is good at maintaining enemy Evasion Down and initiating Light skillchains.
 -- Casts Haste on party members regardless of job.
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

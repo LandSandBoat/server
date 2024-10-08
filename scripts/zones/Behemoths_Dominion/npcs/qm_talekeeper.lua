@@ -4,6 +4,7 @@
 -- Involved In Quest: The Talekeeper's Gift
 -- !pos 211 4 -79 127
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

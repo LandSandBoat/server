@@ -2,6 +2,7 @@
 -- Area: Dynamis - San d'Oria
 --  Mob: Warchief Tombstone
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

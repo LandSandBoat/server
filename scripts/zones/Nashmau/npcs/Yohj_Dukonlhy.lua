@@ -3,6 +3,7 @@
 --  NPC: Yohj Dukonlhy
 -- !pos 10.05 2 -103.45 53
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

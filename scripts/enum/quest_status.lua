@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum xi.questStatus
 xi.questStatus =
 {
     QUEST_AVAILABLE = 0,

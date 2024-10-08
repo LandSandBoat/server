@@ -6,6 +6,7 @@
 -- Health 10
 -- Magic 10
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -27,31 +27,32 @@ mission.sections =
 
         [xi.zone.LOWER_DELKFUTTS_TOWER] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if prevZone == xi.zone.QUFIM_ISLAND then
-                        return 22
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if prevZone == xi.zone.QUFIM_ISLAND then
+                    return 22
+                end
+            end,
 
             onEventFinish =
             {
+                -- TODO: These are most likely a series of pos changes that trigger
+                -- onZoneIn events.  In addition, set status vars after each one
+                -- so that on disconnect, it will resume at the latest state.  This
+                -- pattern should also change in section 3
                 [22] = function(player, csid, option, npc)
-                    return mission:event(36)
+                    player:startEvent(36)
                 end,
 
                 [36] = function(player, csid, option, npc)
-                    return mission:event(37)
+                    player:startEvent(37)
                 end,
 
                 [37] = function(player, csid, option, npc)
-                    return mission:event(38)
+                    player:startEvent(38)
                 end,
 
                 [38] = function(player, csid, option, npc)
-                    return mission:event(39)
+                    player:startEvent(39)
                 end,
 
                 [39] = function(player, csid, option, npc)
@@ -70,12 +71,9 @@ mission.sections =
 
         [xi.zone.UPPER_JEUNO] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 2
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 2
+            end,
 
             onEventFinish =
             {
@@ -99,11 +97,11 @@ mission.sections =
             onEventFinish =
             {
                 [10] = function(player, csid, option, npc)
-                    return mission:event(206)
+                    player:startEvent(206)
                 end,
 
                 [206] = function(player, csid, option, npc)
-                    return mission:event(207)
+                    player:startEvent(207)
                 end,
 
                 [207] = function(player, csid, option, npc)

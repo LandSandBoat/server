@@ -2,6 +2,7 @@
 -- func: gmhome
 -- desc: Sends you to zone 210 (GM_HOME), if you are a GM
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

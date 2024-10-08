@@ -2,6 +2,7 @@
 -- Spell: Blade Madrigal
 -- Gives party members accuracy
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Chaotic Strike M=9 , 2
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

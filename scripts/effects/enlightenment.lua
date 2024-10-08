@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ENLIGHTENMENT
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

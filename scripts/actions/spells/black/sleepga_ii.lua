@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Sleepga II
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = zones[xi.zone.ORDELLES_CAVES]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

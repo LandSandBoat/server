@@ -4,6 +4,7 @@
 -- Scroll of blizzaja
 -- Teaches the black magic blizzaja
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

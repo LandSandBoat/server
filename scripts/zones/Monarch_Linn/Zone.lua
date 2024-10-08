@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Monarch_Linn
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

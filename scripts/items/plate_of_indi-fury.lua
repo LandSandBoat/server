@@ -3,6 +3,7 @@
 -- plate_of_indi-fury
 -- Teaches INDI-FURY
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

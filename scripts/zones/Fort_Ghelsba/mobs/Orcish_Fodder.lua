@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.FORT_GHELSBA]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local hundredscarPHTable =

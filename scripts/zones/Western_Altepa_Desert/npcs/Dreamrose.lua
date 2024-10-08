@@ -3,6 +3,7 @@
 --  NPC: Dreamrose
 -- Involved in Mission: San D'Oria 6-1
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

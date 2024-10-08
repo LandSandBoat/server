@@ -5,6 +5,7 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Skillchain Properties: Fragmentation
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

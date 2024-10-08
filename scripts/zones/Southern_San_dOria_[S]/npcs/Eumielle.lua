@@ -4,6 +4,7 @@
 -- !pos 15 2 2 80
 -- Involved in WOTG21: Proof of Valor
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

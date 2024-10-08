@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

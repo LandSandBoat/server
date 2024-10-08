@@ -6,6 +6,7 @@
 local ID = zones[xi.zone.TAHRONGI_CANYON]
 require('scripts/quests/tutorial')
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local serpopardPHTable =

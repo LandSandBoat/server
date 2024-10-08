@@ -7,6 +7,7 @@
 --  Range: Unknown
 --  Notes: Additional effect - paralyze
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

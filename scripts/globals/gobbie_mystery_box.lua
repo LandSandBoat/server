@@ -309,7 +309,7 @@ xi.gobbieMysteryBox.onEventUpdate = function(player, csid, option, events)
             local optionType = option % 8
             local dialUsed = false
             local dialCost = costs[dial]
-            local dialMask = false
+            local dialMask = nil
 
             if dial >= 6 then
                 dialMask = dial - 6

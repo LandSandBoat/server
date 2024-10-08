@@ -4,6 +4,7 @@
 -- Type: Entry to Alzadaal Undersea Ruins
 -- !pos -639.000 12.323 -260.000 79
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

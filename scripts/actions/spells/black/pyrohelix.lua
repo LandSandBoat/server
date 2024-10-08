@@ -2,6 +2,7 @@
 -- Spell: Pyrohelix
 -- Deals fire damage that gradually reduces a target's HP.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

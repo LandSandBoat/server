@@ -3,6 +3,7 @@
 -- Scroll of Protect IV
 -- Teaches the white magic Protect IV
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

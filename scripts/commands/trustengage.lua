@@ -2,6 +2,7 @@
 -- func: trustengage
 -- desc: Sets the engagement type of a players trusts
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

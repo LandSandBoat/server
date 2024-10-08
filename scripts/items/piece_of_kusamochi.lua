@@ -8,6 +8,7 @@
 -- Attack + 20% Cap: 72 (Pet & Master) Pet Cap: 113
 -- Ranged Attack + 20% Cap: 72 (Pet & Master) Pet Cap: 113
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

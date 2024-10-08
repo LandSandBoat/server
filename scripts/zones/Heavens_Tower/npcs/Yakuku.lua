@@ -2,6 +2,7 @@
 -- Area: Heaven's Tower
 --  NPC: Yakuku
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

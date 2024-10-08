@@ -545,7 +545,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
 
                 power = addBonusesAbility(mob, ae.ele, target, power, ae.bonusAbilityParams)
                 power = power * applyResistanceAddEffect(mob, target, ae.ele, 0)
-                power = adjustForTarget(target, power, ae.ele)
+                power = power * xi.spells.damage.calculateNukeAbsorbOrNullify(target, ae.ele)
 
                 if ae.sub ~= xi.subEffect.TP_DRAIN and ae.sub ~= xi.subEffect.MP_DRAIN then
                     power = finalMagicNonSpellAdjustments(mob, target, ae.ele, power)

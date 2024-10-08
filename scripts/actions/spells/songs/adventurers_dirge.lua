@@ -2,6 +2,7 @@
 -- Spell: Adventurer's Dirge
 -- Reduces target party member's enmity.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

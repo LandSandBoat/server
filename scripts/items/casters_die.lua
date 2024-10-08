@@ -3,6 +3,7 @@
 -- Casters Die
 -- Teaches the job ability Casters Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

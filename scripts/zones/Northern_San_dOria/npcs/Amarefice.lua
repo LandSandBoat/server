@@ -4,6 +4,7 @@
 -- Type: Woodworking Synthesis Image Support
 -- !pos -181.506 10.15 259.905 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

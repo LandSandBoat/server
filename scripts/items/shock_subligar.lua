@@ -3,6 +3,7 @@
 -- Item: shock subligar
 -- Item Effect: Shock Spikes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

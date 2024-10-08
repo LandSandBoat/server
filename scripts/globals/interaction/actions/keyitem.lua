@@ -3,8 +3,12 @@
 -----------------------------------
 require('scripts/globals/interaction/actions/action')
 
+---@class TKeyItem : TAction
+---@field id integer
 KeyItemAction = Action:new(Action.Type.KeyItem)
 
+---@param keyItemId xi.keyItem
+---@return TKeyItem
 function KeyItemAction:new(keyItemId)
     local obj = {}
     setmetatable(obj, self)
@@ -14,6 +18,8 @@ function KeyItemAction:new(keyItemId)
     return obj
 end
 
+---@param player CBaseEntity
+---@param targetEntity CBaseEntity
 function KeyItemAction:perform(player, targetEntity)
     return npcUtil.giveKeyItem(player, self.id)
 end

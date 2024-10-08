@@ -4,6 +4,7 @@
 -- Border Conquest Guards
 -- !pos -560.292 -0.961 -576.655 100
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local guardNation = xi.nation.BASTOK

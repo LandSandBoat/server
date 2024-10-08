@@ -102,14 +102,11 @@ mission.sections =
 
         [xi.zone.PORT_BASTOK] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 0 then
-                        return 306
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 0 then
+                    return 306
+                end
+            end,
 
             onEventFinish =
             {
@@ -184,18 +181,15 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        player:getXPos() == -300 and
-                        prevZone == xi.zone.BEAUCEDINE_GLACIER and
-                        mission:getVar(player, 'Status') == 2
-                    then
-                        return 1
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    player:getXPos() == -300 and
+                    prevZone == xi.zone.BEAUCEDINE_GLACIER and
+                    mission:getVar(player, 'Status') == 2
+                then
+                    return 1
+                end
+            end,
 
             onEventFinish =
             {
@@ -213,14 +207,11 @@ mission.sections =
 
         [xi.zone.PROMYVION_VAHZL] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 4 then
-                        return 50
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 4 then
+                    return 50
+                end
+            end,
 
             onEventFinish =
             {

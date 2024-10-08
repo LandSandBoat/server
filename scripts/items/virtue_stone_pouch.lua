@@ -3,6 +3,7 @@
 -- virtue_stone_pouch.lua
 -- When used, you will obtain one stack of virtue stone
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

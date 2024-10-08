@@ -3,6 +3,7 @@
 -- plate_of_indi-agi
 -- Teaches INDI-AGI
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -2,6 +2,7 @@
 -- Area: North Gustaberg [S]
 --   NM: Gloomanita
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

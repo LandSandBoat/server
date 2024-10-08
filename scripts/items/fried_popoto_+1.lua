@@ -9,6 +9,7 @@
 -- DEF +21% (cap 150)
 -- Subtle Blow +9
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

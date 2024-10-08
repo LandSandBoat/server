@@ -2,6 +2,7 @@
 -- Spell: Warp II
 -- Transports player to their home point. Can cast on allies.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

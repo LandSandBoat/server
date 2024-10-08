@@ -3,6 +3,7 @@
 --  NPC: Churara
 -- !pos 4.119 -26.5 -6.264 242
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

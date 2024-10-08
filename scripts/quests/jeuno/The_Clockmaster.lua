@@ -13,7 +13,7 @@ quest.reward =
     fame     = 30,
     fameArea = xi.fameArea.JEUNO,
     item     = xi.item.TIME_HAMMER,
-    title    = xi.title.THE_CLOCKMASTER,
+    title    = xi.title.TIMEKEEPER,
 }
 
 quest.sections =

@@ -3,6 +3,7 @@
 -- Item: Protect Ring
 -- Item Effect: Protect II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

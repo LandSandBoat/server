@@ -3,6 +3,7 @@
 --  NPC: Juroro
 -- !pos 32 7 -41 236
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

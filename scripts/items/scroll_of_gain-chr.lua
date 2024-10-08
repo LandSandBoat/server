@@ -3,6 +3,7 @@
 -- Scroll of Gain-CHR
 -- Teaches the white magic Gain-CHR
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

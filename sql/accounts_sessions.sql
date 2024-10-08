@@ -33,6 +33,7 @@ CREATE TABLE `accounts_sessions` (
   `version_mismatch` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `seacom_type` TINYINT(1) unsigned NOT NULL DEFAULT '0',
   `seacom_message` TINYBLOB NULL DEFAULT NULL,
+  `last_zoneout_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`charid`),
   UNIQUE KEY `accid` (`accid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

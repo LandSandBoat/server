@@ -8,6 +8,7 @@
 -- Magic Accuracy +21% (cap 50)
 -- Magic Defense +1
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

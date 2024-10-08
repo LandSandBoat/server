@@ -3,6 +3,7 @@
 -- Consumes a Earth Card to enhance earth-based debuffs. Deals earth-based magic damage
 -- Rasp Effect: Enhanced DoT and DEX-, Slow Effect +10%
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -36,7 +37,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
     local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
     dmg            = dmg * applyResistanceAbility(player, target, xi.element.EARTH, xi.skill.NONE, bonusAcc)
-    dmg            = adjustForTarget(target, dmg, xi.element.EARTH)
+    dmg            = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, xi.element.EARTH)
 
     params.targetTPMult = 0 -- Quick Draw does not feed TP
     dmg = xi.ability.takeDamage(target, player, params, true, dmg, xi.attackType.MAGICAL, xi.damageType.EARTH, xi.slot.RANGED, 1, 0, 0, 0, action, nil)
@@ -73,7 +74,10 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             target:delStatusEffectSilent(effectId)
             target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)
             local newEffect = target:getStatusEffect(effectId)
-            newEffect:setStartTime(startTime)
+
+            if newEffect then
+                newEffect:setStartTime(startTime)
+            end
         end
     end
 

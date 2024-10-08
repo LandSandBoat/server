@@ -1,6 +1,7 @@
 
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
@@ -20,6 +21,10 @@ end
 entity.onEventFinish = function(player, csid, option, door)
     if csid == 300 and option == 1 then
         local instance = door:getInstance()
+        if not instance then
+            return
+        end
+
         instance:setStage(7)
         instance:setProgress(0)
         SpawnMob(ID.mob[6].rampart3, instance)

@@ -49,6 +49,7 @@ zones[xi.zone.ARRAPAGO_REEF] =
     },
     mob =
     {
+        APKALLU_NPC           = GetFirstID('Arrapago_Apkallu'),
         BLOODY_BONES          = GetFirstID('Bloody_Bones'),
         MEDUSA                = GetFirstID('Medusa'),
         LIL_APKALLU           = GetFirstID('Lil_Apkallu'),

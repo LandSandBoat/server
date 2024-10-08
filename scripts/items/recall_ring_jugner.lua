@@ -3,6 +3,7 @@
 -- Recall ring: Jugner
 -- Enchantment: "Recall-Jugner"
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

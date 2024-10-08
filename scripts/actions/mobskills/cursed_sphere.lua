@@ -3,6 +3,7 @@
 --  Description: Deals water damage to enemies within area of effect.
 --  Type: Magical Water (Element)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -10,11 +11,14 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 2.6, xi.element.WATER, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
-    return dmg
+    local damage = mob:getWeaponDmg() * 2.6
+
+    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WATER, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
+
+    return damage
 end
 
 return mobskillObject

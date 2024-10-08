@@ -3,6 +3,7 @@
 -- Item: Wizards Drink
 -- Item Effect: +100% MP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

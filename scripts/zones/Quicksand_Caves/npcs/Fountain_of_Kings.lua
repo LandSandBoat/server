@@ -4,6 +4,7 @@
 -- Involved in Mission: San d'Oria 8-1
 -- !pos 567 18 -939 208
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

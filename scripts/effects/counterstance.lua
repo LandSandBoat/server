@@ -2,6 +2,7 @@
 -- xi.effect..COUNTERSTANCE
 -- DEF is removed in core as equip swaps can mess this up otherwise!
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

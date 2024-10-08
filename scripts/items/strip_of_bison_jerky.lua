@@ -8,6 +8,7 @@
 -- Attack % 18
 -- Attack Cap 70
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

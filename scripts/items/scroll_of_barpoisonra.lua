@@ -3,6 +3,7 @@
 -- Scroll of Barpoisonra
 -- Teaches the white magic Barpoisonra
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

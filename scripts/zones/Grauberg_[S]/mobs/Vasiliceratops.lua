@@ -3,6 +3,7 @@
 --   NM: Vasiliceratops
 -- https://www.bg-wiki.com/ffxi/Vasiliceratops
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

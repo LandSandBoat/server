@@ -3,6 +3,7 @@
 -- Scroll of Raise II
 -- Teaches the white magic Raise II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

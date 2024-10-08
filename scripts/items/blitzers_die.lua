@@ -3,6 +3,7 @@
 -- Blitzer's Die
 -- Teaches the job ability Blitzers Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

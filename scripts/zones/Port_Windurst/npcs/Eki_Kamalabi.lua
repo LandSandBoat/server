@@ -3,6 +3,7 @@
 --  NPC: Eki Kamalabi
 -- !pos 21.324 -2 19.102 240
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

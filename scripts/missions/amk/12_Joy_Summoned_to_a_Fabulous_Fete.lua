@@ -20,12 +20,9 @@ mission.sections =
 
         [xi.zone.CASTLE_ZVAHL_BAILEYS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 88
-                end
-            },
+            onZoneIn = function(player, prevZone)
+                return 88
+            end,
 
             onEventFinish =
             {

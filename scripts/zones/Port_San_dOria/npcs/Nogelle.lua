@@ -3,6 +3,7 @@
 --  NPC: Nogelle
 -- Starts Lufet's Lake Salt
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -13,6 +13,7 @@
 -----------------------------------
 -- Combos: Max MP Boost
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

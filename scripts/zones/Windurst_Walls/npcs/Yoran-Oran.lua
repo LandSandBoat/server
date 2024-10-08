@@ -3,6 +3,7 @@
 --  NPC: Yoran-Oran
 -- !pos -109.987 -14 203.338 239
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -25,14 +26,11 @@ end
 
 entity.onTrigger = function(player, npc)
     local mandragoraMad = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MANDRAGORA_MAD)
-    local turmoil = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
 
     if mandragoraMad == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(249)
     elseif mandragoraMad == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(256)
-    elseif turmoil == xi.questStatus.QUEST_ACCEPTED then
-        player:startEvent(392)
     end
 end
 

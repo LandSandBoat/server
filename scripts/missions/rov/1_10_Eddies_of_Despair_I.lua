@@ -41,12 +41,9 @@ mission.sections =
 
         [xi.zone.ESCHA_ZITAH] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 1
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 1
+            end,
 
             onEventUpdate =
             {

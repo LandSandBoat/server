@@ -4,6 +4,7 @@
 -- Quests: Cloak and Dagger (Evisceration WSNM "Baronial Bat")
 -- !pos 52.8, -1, 19.9 212
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

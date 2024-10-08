@@ -3,6 +3,7 @@
 --  NPC: Monument
 -- !pos 300.000 -62.803 498.200 106
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -81,18 +81,15 @@ mission.sections =
 
         [xi.zone.EMPYREAL_PARADOX] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    local missionStatus = mission:getVar(player, 'Status')
+            onZoneIn = function(player, prevZone)
+                local missionStatus = mission:getVar(player, 'Status')
 
-                    if missionStatus == 2 then
-                        return 6
-                    elseif missionStatus == 3 then
-                        return 3
-                    end
-                end,
-            },
+                if missionStatus == 2 then
+                    return 6
+                elseif missionStatus == 3 then
+                    return 3
+                end
+            end,
 
             ['TR_Entrance'] =
             {
@@ -267,14 +264,11 @@ mission.sections =
 
         [xi.zone.ULEGUERAND_RANGE] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'LProg') == 1 then
-                        return 17
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'LProg') == 1 then
+                    return 17
+                end
+            end,
 
             onEventFinish =
             {
@@ -357,12 +351,9 @@ mission.sections =
 
         [xi.zone.MHAURA] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 322
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 322
+            end,
 
             onEventFinish =
             {
@@ -384,12 +375,9 @@ mission.sections =
 
         [xi.zone.OLDTON_MOVALPOLOS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 57
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 57
+            end,
 
             onEventFinish =
             {

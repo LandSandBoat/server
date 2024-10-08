@@ -3,6 +3,7 @@
 --  NPC: Storage Compartment
 --  COP spawn Boggelmann.
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

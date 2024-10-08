@@ -6,6 +6,7 @@
 --  Range: Unknown
 -- Special weaponskill unique to Ark Angel MR. Deals ~100-300 damage.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -3,6 +3,7 @@
 --  NPC: Rakih Lyhall
 -- !pos -48.111 -4.5 69.712 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

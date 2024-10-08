@@ -5,6 +5,7 @@
 -- Recast Time: 0:10:00 (+5% MP granted per additional upgrade)
 -- Duration: Instant
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

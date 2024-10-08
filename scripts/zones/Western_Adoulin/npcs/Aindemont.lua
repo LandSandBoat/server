@@ -3,6 +3,7 @@
 --  NPC: Aindemont
 -- !pos 171 4 -33 256
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

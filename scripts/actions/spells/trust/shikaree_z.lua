@@ -9,6 +9,7 @@
 -- Saves Cure for party members under 50% HP or affected by Sleep
 -- Prioritizes Haste over other spells, except to cast Erase when Slow would prevent Haste.
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

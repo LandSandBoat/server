@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local zuugPHTable =

@@ -3,6 +3,7 @@
 -- Tactician's Die
 -- Teaches the job ability Tactician's Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

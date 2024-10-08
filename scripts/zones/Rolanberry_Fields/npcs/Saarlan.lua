@@ -6,48 +6,49 @@
 -----------------------------------
 local ID = zones[xi.zone.ROLANBERRY_FIELDS]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local wares =
 {
-    [0x0001000A] = { ki = xi.ki.LEGION_TOME_PAGE_MAXIMUS, gil = 360000 }, -- Legion Tome Page Maximus
-    [0x0001000B] = { ki = xi.ki.LEGION_TOME_PAGE_MINIMUS, gil = 180000 }, -- Legion Tome Page Minimus
+    [0x0001000A] = { ki = xi.ki.LEGION_TOME_PAGE_MAXIMUS, gil = 360000 },
+    [0x0001000B] = { ki = xi.ki.LEGION_TOME_PAGE_MINIMUS, gil = 180000 },
 
-    [0x00000002] = { item = 10775, lp = 1000 }, -- Gaiardas Ring
-    [0x00010002] = { item = 10776, lp = 1000 }, -- Gaubious Ring
-    [0x00020002] = { item = 10777, lp = 1000 }, -- Caloussu Ring
-    [0x00030002] = { item = 10778, lp = 1000 }, -- Nanger Ring
-    [0x00040002] = { item = 10779, lp = 1000 }, -- Sophia Ring
-    [0x00050002] = { item = 10780, lp = 1000 }, -- Quies Ring
-    [0x00060002] = { item = 10781, lp = 1000 }, -- Cynosure Ring
-    [0x00070002] = { item = 10782, lp = 1000 }, -- Ambuscade Ring
-    [0x00080002] = { item = 10783, lp = 1000 }, -- Veneficium Ring
+    [0x00000002] = { item = xi.item.GAIARDAS_RING,   lp = 1000 },
+    [0x00010002] = { item = xi.item.GAUBIOUS_RING,   lp = 1000 },
+    [0x00020002] = { item = xi.item.CALOUSSU_RING,   lp = 1000 },
+    [0x00030002] = { item = xi.item.NANGER_RING,     lp = 1000 },
+    [0x00040002] = { item = xi.item.SOPHIA_RING,     lp = 1000 },
+    [0x00050002] = { item = xi.item.QUIES_RING,      lp = 1000 },
+    [0x00060002] = { item = xi.item.CYNOSURE_RING,   lp = 1000 },
+    [0x00070002] = { item = xi.item.AMBUSCADE_RING,  lp = 1000 },
+    [0x00080002] = { item = xi.item.VENEFICIUM_RING, lp = 1000 },
 
-    [0x00090002] = { item = 10890, lp = 4500, title = xi.title.SUBJUGATOR_OF_THE_LOFTY   }, -- Calma Armet
-    [0x000A0002] = { item = 10891, lp = 4500, title = xi.title.SUBJUGATOR_OF_THE_LOFTY   }, -- Mustela Mask
-    [0x000B0002] = { item = 10892, lp = 4500, title = xi.title.SUBJUGATOR_OF_THE_LOFTY   }, -- Magavan Beret
-    [0x000C0002] = { item = 10512, lp = 3000, title = xi.title.SUBJUGATOR_OF_THE_MIRED   }, -- Calma Gauntlets
-    [0x000D0002] = { item = 10513, lp = 3000, title = xi.title.SUBJUGATOR_OF_THE_MIRED   }, -- Mustela Gloves
-    [0x000E0002] = { item = 10514, lp = 3000, title = xi.title.SUBJUGATOR_OF_THE_MIRED   }, -- Magavan Mitts
-    [0x000F0002] = { item = 11980, lp = 4500, title = xi.title.SUBJUGATOR_OF_THE_SOARING }, -- Calma Hose
-    [0x00100002] = { item = 11981, lp = 4500, title = xi.title.SUBJUGATOR_OF_THE_SOARING }, -- Mustela Brais
-    [0x00110002] = { item = 11982, lp = 4500, title = xi.title.SUBJUGATOR_OF_THE_SOARING }, -- Magavan Slops
-    [0x00120002] = { item = 10610, lp = 3000, title = xi.title.SUBJUGATOR_OF_THE_VEILED  }, -- Calma Leggings
-    [0x00130002] = { item = 10611, lp = 3000, title = xi.title.SUBJUGATOR_OF_THE_VEILED  }, -- Mustela Boots
-    [0x00140002] = { item = 10612, lp = 3000, title = xi.title.SUBJUGATOR_OF_THE_VEILED  }, -- Magavan Clogs
-    [0x00150002] = { item = 10462, lp = 10000, title = xi.title.LEGENDARY_LEGIONNAIRE    }, -- Calma Breastplate
-    [0x00160002] = { item = 10463, lp = 10000, title = xi.title.LEGENDARY_LEGIONNAIRE    }, -- Mustela Harness
-    [0x00170002] = { item = 10464, lp = 10000, title = xi.title.LEGENDARY_LEGIONNAIRE    }, -- Magavan Frock
-    [0x00180002] = { item = 11044, lp = 3000, title = xi.title.SUBJUGATOR_OF_THE_LOFTY   }, -- Corybant Pearl
-    [0x00190002] = { item = 11045, lp = 3000, title = xi.title.SUBJUGATOR_OF_THE_MIRED   }, -- Saviesa Pearl
-    [0x001A0002] = { item = 11046, lp = 3000, title = xi.title.SUBJUGATOR_OF_THE_SOARING }, -- Ouesk Pearl
-    [0x001B0002] = { item = 11047, lp = 3000, title = xi.title.SUBJUGATOR_OF_THE_SOARING }, -- Belatz Pearl
-    [0x001C0002] = { item = 11048, lp = 3000, title = xi.title.SUBJUGATOR_OF_THE_VEILED  }, -- Cytherea Pearl
-    [0x001D0002] = { item = 11049, lp = 3000, title = xi.title.SUBJUGATOR_OF_THE_VEILED  }, -- Myrddin Pearl
-    [0x001E0002] = { item = 11050, lp = 3000, title = xi.title.SUBJUGATOR_OF_THE_VEILED  }, -- Puissant Pearl
-    [0x001F0002] = { item = 10784, lp = 6000, title = xi.title.LEGENDARY_LEGIONNAIRE     }, -- Dhanurveda Ring
-    [0x00200002] = { item = 10785, lp = 6000, title = xi.title.LEGENDARY_LEGIONNAIRE     }, -- Provocare Ring
-    [0x00210002] = { item = 10786, lp = 6000, title = xi.title.LEGENDARY_LEGIONNAIRE     }, -- Mediator's Ring
+    [0x00090002] = { item = xi.item.CALMA_ARMET,       lp = 4500,  title = xi.title.SUBJUGATOR_OF_THE_LOFTY   },
+    [0x000A0002] = { item = xi.item.MUSTELA_MASK,      lp = 4500,  title = xi.title.SUBJUGATOR_OF_THE_LOFTY   },
+    [0x000B0002] = { item = xi.item.MAGAVAN_BERET,     lp = 4500,  title = xi.title.SUBJUGATOR_OF_THE_LOFTY   },
+    [0x000C0002] = { item = xi.item.CALMA_GAUNTLETS,   lp = 3000,  title = xi.title.SUBJUGATOR_OF_THE_MIRED   },
+    [0x000D0002] = { item = xi.item.MUSTELA_GLOVES,    lp = 3000,  title = xi.title.SUBJUGATOR_OF_THE_MIRED   },
+    [0x000E0002] = { item = xi.item.MAGAVAN_MITTS,     lp = 3000,  title = xi.title.SUBJUGATOR_OF_THE_MIRED   },
+    [0x000F0002] = { item = xi.item.CALMA_HOSE,        lp = 4500,  title = xi.title.SUBJUGATOR_OF_THE_SOARING },
+    [0x00100002] = { item = xi.item.MUSTELA_BRAIS,     lp = 4500,  title = xi.title.SUBJUGATOR_OF_THE_SOARING },
+    [0x00110002] = { item = xi.item.MAGAVAN_SLOPS,     lp = 4500,  title = xi.title.SUBJUGATOR_OF_THE_SOARING },
+    [0x00120002] = { item = xi.item.CALMA_LEGGINGS,    lp = 3000,  title = xi.title.SUBJUGATOR_OF_THE_VEILED  },
+    [0x00130002] = { item = xi.item.MUSTELA_BOOTS,     lp = 3000,  title = xi.title.SUBJUGATOR_OF_THE_VEILED  },
+    [0x00140002] = { item = xi.item.MAGAVAN_CLOGS,     lp = 3000,  title = xi.title.SUBJUGATOR_OF_THE_VEILED  },
+    [0x00150002] = { item = xi.item.CALMA_BREASTPLATE, lp = 10000, title = xi.title.LEGENDARY_LEGIONNAIRE     },
+    [0x00160002] = { item = xi.item.MUSTELA_HARNESS,   lp = 10000, title = xi.title.LEGENDARY_LEGIONNAIRE     },
+    [0x00170002] = { item = xi.item.MAGAVAN_FROCK,     lp = 10000, title = xi.title.LEGENDARY_LEGIONNAIRE     },
+    [0x00180002] = { item = xi.item.CORYBANT_PEARL,    lp = 3000,  title = xi.title.SUBJUGATOR_OF_THE_LOFTY   },
+    [0x00190002] = { item = xi.item.SAVIESA_PEARL,     lp = 3000,  title = xi.title.SUBJUGATOR_OF_THE_MIRED   },
+    [0x001A0002] = { item = xi.item.OUESK_PEARL,       lp = 3000,  title = xi.title.SUBJUGATOR_OF_THE_SOARING },
+    [0x001B0002] = { item = xi.item.BELATZ_PEARL,      lp = 3000,  title = xi.title.SUBJUGATOR_OF_THE_SOARING },
+    [0x001C0002] = { item = xi.item.CYTHEREA_PEARL,    lp = 3000,  title = xi.title.SUBJUGATOR_OF_THE_VEILED  },
+    [0x001D0002] = { item = xi.item.MYRDDIN_PEARL,     lp = 3000,  title = xi.title.SUBJUGATOR_OF_THE_VEILED  },
+    [0x001E0002] = { item = xi.item.PUISSANT_PEARL,    lp = 3000,  title = xi.title.SUBJUGATOR_OF_THE_VEILED  },
+    [0x001F0002] = { item = xi.item.DHANURVEDA_RING,   lp = 6000,  title = xi.title.LEGENDARY_LEGIONNAIRE     },
+    [0x00200002] = { item = xi.item.PROVOCARE_RING,    lp = 6000,  title = xi.title.LEGENDARY_LEGIONNAIRE     },
+    [0x00210002] = { item = xi.item.MEDIATORS_RING,    lp = 6000,  title = xi.title.LEGENDARY_LEGIONNAIRE     },
 }
 
 entity.onTrade = function(player, npc, trade)

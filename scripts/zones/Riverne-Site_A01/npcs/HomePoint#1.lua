@@ -2,6 +2,7 @@
 -- Area: Riverne-Site A01
 --  NPC: HomePoint#1
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local hpEvent = 8700

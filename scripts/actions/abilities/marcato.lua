@@ -5,6 +5,7 @@
 -- Recast Time: 10:00
 -- Duration: 1:00, or until next song is cast.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -12,7 +13,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.MARCATO, 0, 0, 60)
+    xi.job_utils.bard.useMarcato(player, target, ability)
 end
 
 return abilityObject

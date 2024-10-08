@@ -3,6 +3,7 @@
 -- Item: pair_of_lucid_wings_ii
 -- Item Effect: Grants 1000 TP to Party members within 10'
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Item: custom top +1
 -- Teleport's user to Purgonorgo Isle
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 

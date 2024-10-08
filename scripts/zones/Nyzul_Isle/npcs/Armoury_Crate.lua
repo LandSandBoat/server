@@ -3,6 +3,7 @@
 -- NPC:   Armoury Crate
 -- Notes: 100% drop from NMs for ??? items and ?% drop from normal mobs for Temp items
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

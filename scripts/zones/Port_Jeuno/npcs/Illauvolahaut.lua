@@ -5,6 +5,7 @@
 
 -- event 41:  without addons (ZM) ?
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.BARD_SONG_32
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

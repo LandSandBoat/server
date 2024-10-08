@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Foret de Hennetiel
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

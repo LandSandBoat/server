@@ -3,6 +3,7 @@
 --  NPC: Malfine
 -- !pos 136.943 0.000 132.305 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

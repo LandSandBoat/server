@@ -2,6 +2,7 @@
 -- Area: Gusgen Mines
 --   NM: Wounded Wurfel
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobRoam = function(mob)

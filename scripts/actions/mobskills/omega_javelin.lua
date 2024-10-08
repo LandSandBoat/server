@@ -2,6 +2,7 @@
 -- Omega Javelin
 -- Pierces a single target with an ethereal javelin. Additional effect: Petrification
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

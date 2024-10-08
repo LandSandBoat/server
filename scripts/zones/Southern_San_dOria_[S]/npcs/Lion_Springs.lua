@@ -3,6 +3,7 @@
 --  NPC: Door: Lion Springs
 -- !pos 96 0 106 80
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

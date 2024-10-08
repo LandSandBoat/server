@@ -3,6 +3,7 @@
 -- ID 5372
 -- Unlocks earring and ring equipment
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

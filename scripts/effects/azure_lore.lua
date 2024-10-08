@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.AZURE_LORE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

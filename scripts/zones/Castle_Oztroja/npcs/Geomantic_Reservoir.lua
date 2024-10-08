@@ -4,6 +4,7 @@
 -- Unlocks: Geo-AGI
 -- !pos -210.032 -16.000 95.255 151
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

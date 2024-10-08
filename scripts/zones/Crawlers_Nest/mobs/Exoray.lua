@@ -2,6 +2,7 @@
 -- Area: Crawlers' Nest
 --  Mob: Exoray
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

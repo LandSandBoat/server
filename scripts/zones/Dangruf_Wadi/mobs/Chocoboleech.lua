@@ -2,6 +2,7 @@
 -- Area: Dangruf Wadi
 --   NM: Chocoboleech
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

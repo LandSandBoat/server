@@ -2,6 +2,7 @@
 -- ID: 22117, 22131
 -- Item: Fail-Not
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

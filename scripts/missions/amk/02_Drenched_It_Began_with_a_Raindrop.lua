@@ -17,13 +17,15 @@ mission.reward =
 -- Since there are so many zones with interactions:
 -- Populate each by hand
 mission.sections = {}
-mission.sections[1] = {} -- REMEMBER: Lua is 1-indexed!
+mission.sections[1] = -- REMEMBER: Lua is 1-indexed!
+{
+    check = function(player, currentMission, missionStatus, vars)
+        return currentMission == mission.missionId and
+            xi.moghouse.isInMogHouseInHomeNation(player)
+    end,
+}
 
-mission.sections[1].check = function(player, currentMission, missionStatus, vars)
-    return currentMission == mission.missionId and
-        xi.moghouse.isInMogHouseInHomeNation(player)
-end
-
+---@type ZoneSection
 local moogleTriggerEvent =
 {
     ['Moogle'] =

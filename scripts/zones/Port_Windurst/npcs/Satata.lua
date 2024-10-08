@@ -2,6 +2,7 @@
 -- Area: Port Windurst
 --  NPC: Satata
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onSpawn = function(npc)

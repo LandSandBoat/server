@@ -27,6 +27,7 @@ zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
         A_CRACK_HAS_FORMED            = 7539, -- A crack has formed on the <item>, and the beast inside has been unleashed!
         PARTY_MEMBERS_HAVE_FALLEN     = 7573, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7580, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        IMPERIAL_ORDER_BREAKS         = 7588, -- The <item> breaks!
         ENTERING_THE_BATTLEFIELD_FOR  = 7601, -- Entering the battlefield for [Tough Nut to Crack/Happy Caster/Omens/Achieving True Power/Shield of Diplomacy]!
         KARABABA_ENOUGH               = 7646, -- That's quite enough...
         KARABABA_ROUGH                = 7647, -- Time for me to start playing rough!

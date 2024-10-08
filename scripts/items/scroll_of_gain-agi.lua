@@ -3,6 +3,7 @@
 -- Scroll of Gain-AGI
 -- Teaches the white magic Gain-AGI
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

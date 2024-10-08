@@ -3,6 +3,7 @@
 --  NPC: Migliorozz
 -- !pos -37.760 -2.499 12.924 244
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

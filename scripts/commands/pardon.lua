@@ -2,6 +2,7 @@
 -- func: pardon
 -- desc: Pardons a player from jail. (Mordion Gaol)
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

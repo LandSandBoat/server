@@ -3,6 +3,7 @@
 -- Scroll of Barvirus
 -- Teaches the white magic Barvirus
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

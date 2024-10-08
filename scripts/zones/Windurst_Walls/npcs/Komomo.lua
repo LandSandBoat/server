@@ -2,6 +2,7 @@
 -- Area: Windurst Walls
 --  NPC: Komomo
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

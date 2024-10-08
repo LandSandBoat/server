@@ -3,6 +3,7 @@
 --  NPC: Ruirara
 -- !pos -87.378 -2 -158.019 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

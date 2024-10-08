@@ -3,6 +3,7 @@
 -- Scroll of Hojo: Ichi
 -- Teaches the ninjutsu Hojo: Ichi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

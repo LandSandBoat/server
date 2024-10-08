@@ -9,6 +9,7 @@
 -- Black chocobo with all look changes: !chocobo black head feet tail
 -- etc.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

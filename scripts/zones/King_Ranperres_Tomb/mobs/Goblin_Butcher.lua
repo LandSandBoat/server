@@ -2,6 +2,7 @@
 -- Area: King Ranperres Tomb
 --  Mob: Goblin Butcher
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

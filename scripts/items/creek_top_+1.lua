@@ -3,6 +3,7 @@
 -- Creek Top +1
 -- Dispense: Berry Snowcone
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

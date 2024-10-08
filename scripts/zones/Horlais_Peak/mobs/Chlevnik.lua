@@ -3,6 +3,7 @@
 --  Mob: Chlevnik
 -- KSNM99
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onAdditionalEffect = function(mob, target, damage)

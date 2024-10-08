@@ -2,6 +2,7 @@
 -- Area: Windurst Waters [S]
 --  NPC: Moogle
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

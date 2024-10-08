@@ -3,6 +3,7 @@
 -- Scroll of Waterga III
 -- Teaches the black magic Waterga III
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

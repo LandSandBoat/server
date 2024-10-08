@@ -12,6 +12,7 @@
 -- Skillchain Element(s): Impaction
 -- Combos: Rapid Shot
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

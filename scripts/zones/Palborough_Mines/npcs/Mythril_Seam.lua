@@ -6,6 +6,7 @@
 -- !pos -68 -7 173 143
 -- Rock Racketeer !pos 210 -32 -63 143
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

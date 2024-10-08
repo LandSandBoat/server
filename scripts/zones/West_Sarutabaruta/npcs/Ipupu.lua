@@ -4,6 +4,7 @@
 -- Note: Involved in Quest "Glyph Hanger"
 -- !pos 251.745 -5.5 35.539 115
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

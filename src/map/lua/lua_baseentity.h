@@ -102,7 +102,6 @@ public:
     bool didGetMessage();   // Used by interaction framework to determine if player triggered something else
     void resetGotMessage(); // Used by interaction framework to reset if player triggered something else
 
-    void   setFlag(uint32 flags);
     uint16 getMoghouseFlag();
     void   setMoghouseFlag(uint16 flag);
     bool   needToZone(sol::object const& arg0);
@@ -140,6 +139,8 @@ public:
     void  continuePath();                                                          // resumes previous pathfind if it was paused
     float checkDistance(sol::variadic_args va);                                    // Check Distance and returns distance number
     void  wait(sol::object const& milliseconds);                                   // make the npc wait a number of ms and then back into roam
+    void  follow(CLuaBaseEntity* target, uint8 followType);                        // makes an npc follow or runaway from another target
+    void  unfollow();                                                              // makes an npc stop following
     // int32 WarpTo(lua_Stat* L);           // warp to the given point -- These don't exist, breaking them just in case someone uncomments
     // int32 RoamAround(lua_Stat* L);       // pick a random point to walk to
     // int32 LimitDistance(lua_Stat* L);    // limits the current path distance to given max distance
@@ -255,12 +256,12 @@ public:
     void setEquipBlock(uint16 equipBlock);
     void lockEquipSlot(uint8 slot);
     void unlockEquipSlot(uint8 slot);
+    bool hasSlotEquipped(uint8 slot);
 
     int8  getShieldSize();
     int16 getShieldDefense();
 
-    bool hasGearSetMod(uint8 modNameId);
-    void addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue);
+    void addGearSetMod(uint8 setId, Mod modId, uint16 modValue);
     void clearGearSetMods();
 
     // Storing
@@ -463,6 +464,7 @@ public:
     int32 addHP(int32 hpAdd);              // Increase hp of Entity
     int32 addHPLeaveSleeping(int32 hpAdd); // Increase hp of Entity but do not awaken the Entity
     void  setHP(int32 value);              // Set hp of Entity to value
+    void  setMaxHP(int32 value);           // Set max hp of Entity to value
     int32 restoreHP(int32 restoreAmt);     // Modify hp of Entity, but check if alive first
     void  delHP(int32 delAmt);             // Decrease hp of Entity
     void  takeDamage(int32 damage, sol::object const& attacker, sol::object const& atkType,
@@ -638,15 +640,16 @@ public:
     void  clearEnmityForEntity(CLuaBaseEntity* PEntity);
 
     // Status Effects
-    bool   addStatusEffect(sol::variadic_args va);
-    bool   addStatusEffectEx(sol::variadic_args va);
-    auto   getStatusEffect(uint16 StatusID, sol::object const& SubType) -> std::optional<CLuaStatusEffect>;
-    auto   getStatusEffects() -> sol::table;
-    int16  getStatusEffectElement(uint16 statusId);
-    bool   canGainStatusEffect(uint16 effect, sol::object const& powerObj);
-    bool   hasStatusEffect(uint16 StatusID, sol::object const& SubType);
-    uint16 hasStatusEffectByFlag(uint16 StatusID);
-    uint8  countEffect(uint16 StatusID); // Gets the number of effects of a specific type on the player
+    bool  addStatusEffect(sol::variadic_args va);
+    bool  addStatusEffectEx(sol::variadic_args va);
+    auto  getStatusEffect(uint16 StatusID, sol::object const& SubType) -> std::optional<CLuaStatusEffect>;
+    auto  getStatusEffects() -> sol::table;
+    int16 getStatusEffectElement(uint16 statusId);
+    bool  canGainStatusEffect(uint16 effect, sol::object const& powerObj);
+    bool  hasStatusEffect(uint16 StatusID, sol::object const& SubType);
+    bool  hasStatusEffectByFlag(uint16 StatusID);
+    uint8 countEffect(uint16 StatusID);     // Gets the number of effects of a specific type on the entity
+    uint8 countEffectWithFlag(uint32 flag); // Gets the number of effects with a flag on the entity
 
     bool   delStatusEffect(uint16 StatusID, sol::object const& SubType);
     void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);
@@ -679,7 +682,7 @@ public:
     bool   addBardSong(CLuaBaseEntity* PEntity, uint16 effectID, uint16 power, uint16 tick,
                        uint16 duration, uint16 SubType, uint16 subPower, uint16 tier);
 
-    void charm(CLuaBaseEntity const* target);
+    void charm(CLuaBaseEntity const* target, sol::object const& p0);
     void uncharm();
 
     uint8 addBurden(uint8 element, uint8 burden);
@@ -726,6 +729,7 @@ public:
 
     int32 takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, int32 damage, uint8 atkType, uint8 dmgType);
     int32 takeSwipeLungeDamage(CLuaBaseEntity* caster, int32 damage, uint8 atkType, uint8 dmgType);
+    int32 checkDamageCap(int32 damage);
 
     // Pets and Automations
     void spawnPet(sol::object const& arg0);
@@ -756,9 +760,6 @@ public:
     auto getPetName() -> const std::string;
     void setPetName(uint8 pType, uint16 value, sol::object const& arg2);
     void registerChocobo(uint32 value);
-
-    float getCharmChance(CLuaBaseEntity const* target, sol::object const& mods);
-    void  charmPet(CLuaBaseEntity const* target);
 
     void petAttack(CLuaBaseEntity* PEntity);
     void petAbility(uint16 abilityID); // Function exists, but is not implemented.  Warning will be displayed.
@@ -801,6 +802,7 @@ public:
     bool   isNM();
 
     uint8  getModelSize();
+    void   setMeleeRange(float range);
     void   setMobFlags(uint32 flags, sol::object const& mobId); // Used to manipulate the mob's flags, such as changing size.
     uint32 getMobFlags();
 
@@ -846,6 +848,8 @@ public:
 
     uint16 getBehaviour();
     void   setBehaviour(uint16 behavior);
+    uint8  getLink();
+    void   setLink(uint8 link);
     uint16 getRoamFlags();
     void   setRoamFlags(uint16 newRoamFlags);
 
@@ -897,6 +901,14 @@ public:
 
     void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);
     uint8 getMannequinPose(uint16 itemID);
+
+    void   submitContestFish(uint32 score);
+    void   withdrawContestFish();
+    uint32 getContestScore();
+    uint8  getContestRank();
+    auto   getContestRewardStatus() -> sol::table;
+    auto   getContestRankHistory() -> sol::table;
+    void   claimContestReward();
 
     void addPacketMod(uint16 packetId, uint16 offset, uint8 value);
     void clearPacketMods();

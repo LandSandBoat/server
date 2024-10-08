@@ -1,6 +1,7 @@
 -----------------------------------
 -- Mix: Dragon Shield - Applies Magic Defense Bonus to all party members for 60 seconds.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

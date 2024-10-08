@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.BERSERK
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 -- DEFP penalty reduction from Warrior's Calligae NQ/+1/+2 handled by latent effect

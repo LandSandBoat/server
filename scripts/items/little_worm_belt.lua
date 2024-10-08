@@ -2,6 +2,7 @@
 -- ID: 15454
 -- little_worm_belt
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -5,6 +5,7 @@
 --  Type: Physical (Blunt)
 -- RDM, THF, PLD, BST, BRD, RNG, NIN, and COR fomors).
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 local validJobs = set{

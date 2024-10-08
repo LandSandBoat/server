@@ -3,6 +3,7 @@
 -- Scroll of Valor Minuet IV
 -- Teaches the song Valor Minuet IV
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

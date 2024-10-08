@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ALACRITY
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

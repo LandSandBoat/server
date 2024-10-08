@@ -3,6 +3,7 @@
 -- ID 5378
 -- Unlocks magic
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

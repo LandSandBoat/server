@@ -4,6 +4,7 @@
 -- !pos 133 0 81 80
 -- Involved with Beast from the East
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

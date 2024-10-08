@@ -7,10 +7,15 @@
 local ID = zones[xi.zone.NYZUL_ISLE]
 require('scripts/zones/Nyzul_Isle/instances/nyzul_isle_investigation')
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local instance      = player:getInstance()
+    local instance = player:getInstance()
+    if not instance then
+        return
+    end
+
     local tokens        = player:getCurrency('nyzul_isle_assault_point')
     local prefered      = player:getCharVar('[Nyzul]preferredItems')
     local floorGroup    = math.floor(player:getCharVar('NyzulFloorProgress') / 5)
@@ -31,7 +36,11 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     local instance = npc:getInstance()
-    local chars    = instance:getChars()
+    if not instance then
+        return
+    end
+
+    local chars = instance:getChars()
 
     if
         csid == 94 and

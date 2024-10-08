@@ -7,6 +7,7 @@
 -----------------------------------
 local ID = zones[xi.zone.EASTERN_ADOULIN]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 -- Various quest states for Children Of The Rune (COTR).

@@ -3,6 +3,7 @@
 -- Taillegeas - !gotoid 17772720
 -- Log ID [3] - Quest ID [68]
 -----------------------------------
+
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.DUCAL_HOSPITALITY)
 
 local questItemSets =

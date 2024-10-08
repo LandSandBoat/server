@@ -2,6 +2,7 @@
 -- Area: Nashmau
 --  NPC: Momoroon
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- Area: Promyvion - Vahzl
 --   NM: Solicitor
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

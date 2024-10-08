@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

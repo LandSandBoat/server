@@ -2,6 +2,7 @@
 -- Area: Windurst Waters
 --  NPC: Yohra-Ora
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

@@ -5,6 +5,7 @@
 -- Finish Mission: Bastok 6-1
 -- !pos 71 7 -7 234
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

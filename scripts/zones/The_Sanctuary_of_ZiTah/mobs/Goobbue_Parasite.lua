@@ -2,6 +2,7 @@
 -- Area: The Sanctuary of ZiTah
 --  Mob: Goobbue Parasite
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -12,6 +12,7 @@
 -- Skillchain Element(s): Fragmentation
 -- Combos: Lizard Killer
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

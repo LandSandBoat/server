@@ -1141,8 +1141,10 @@ local function lampsActivate(instance)
         local runicLamp1 = GetNPCByID(ID.npc.RUNIC_LAMP_OFFSET, instance)
 
         -- Spawn lamps.
-        runicLamp1:setPos(dTableLampPoints[spawnPoint])
-        runicLamp1:setStatus(xi.status.NORMAL)
+        if runicLamp1 then
+            runicLamp1:setPos(dTableLampPoints[spawnPoint])
+            runicLamp1:setStatus(xi.status.NORMAL)
+        end
 
         -- Save data.
         instance:setLocalVar('[Lamp]PartySize', instance:getLocalVar('partySize'))
@@ -1272,7 +1274,9 @@ xi.nyzul.prepareMobs = function(instance)
 
                     -- Set mobs of the specified group to CHECK_AS_NM
                     local groupMob = GetMobByID(enemy, instance)
-                    groupMob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
+                    if groupMob then
+                        groupMob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
+                    end
 
                     -- Remove table entry.
                     table.remove(dTableSpawnPoint, spawnPointIndex)

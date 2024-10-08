@@ -5,6 +5,7 @@
 -- Can be dispatched to Jugner Forest (S) and Southern San d'Oria (S)
 -- as the leader of the Silver Fox Archers
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

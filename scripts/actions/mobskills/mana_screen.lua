@@ -2,6 +2,7 @@
 -- Mana_Screen
 -- Description: Magic Shield
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

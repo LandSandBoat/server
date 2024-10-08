@@ -2,6 +2,7 @@
 -- func: setProgress
 -- desc: changes progress inside an instance
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -12,9 +13,16 @@ commandObj.cmdprops =
 
 commandObj.onTrigger = function(player, progress)
     local zone = player:getZone()
+    if not zone then
+        return
+    end
 
     if zone:getTypeMask() == xi.zoneType.INSTANCED then
         local instance = player:getInstance()
+        if not instance then
+            return
+        end
+
         local startProgress = instance:getProgress()
 
         instance:setProgress(progress)

@@ -3,6 +3,7 @@
 --  NPC: Fhe Maksojha
 -- !pos 19.084 -7 71.287 53
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

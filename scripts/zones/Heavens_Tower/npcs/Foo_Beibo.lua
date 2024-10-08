@@ -3,6 +3,7 @@
 --  NPC: Foo Beibo
 -- !pos 10.717 -46 -28.629 242
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

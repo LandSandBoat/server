@@ -2,6 +2,7 @@
 -- Area: Windurst Walls
 --  NPC: Suhie-Kaihie
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

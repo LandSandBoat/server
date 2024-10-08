@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local ImperialPieces =
@@ -83,7 +84,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         player:delCurrency('imperial_standing', quantity * price)
         npc:showText(npc, ID.text.UGRIHD_PURCHASE_DIALOGUE)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, item)
+        player:messageSpecial(ID.text.ITEM_OBTAINED + 9, item, quantity)
     end
 end
 

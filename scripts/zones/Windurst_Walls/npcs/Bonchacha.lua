@@ -2,6 +2,7 @@
 -- Area: Windurst Walls
 --  NPC: Bonchacha
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

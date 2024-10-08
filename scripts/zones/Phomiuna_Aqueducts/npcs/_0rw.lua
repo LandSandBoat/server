@@ -4,6 +4,7 @@
 -- Opens Door at J-7 from inside.
 -- !pos 104 -26 83
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

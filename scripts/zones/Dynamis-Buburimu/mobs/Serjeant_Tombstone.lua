@@ -2,6 +2,7 @@
 -- Area: Dynamis - Buburimu
 --  Mob: Serjeant Tombstone
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

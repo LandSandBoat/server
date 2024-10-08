@@ -217,6 +217,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     params.offcratiomod = params.offcratiomod * (caster:getMerit(xi.merit.PHYSICAL_POTENCY) + 100) / 100
     params.bonusacc     = params.bonusacc == nil and 0 or params.bonusacc
+    params.tphitslanded = 0
 
     -- params.critchance will only be non-nil if base critchance is passed from spell lua
     local nativecrit  = xi.combat.physical.calculateSwingCriticalRate(caster, target, 0, false)
@@ -229,17 +230,24 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     -- Perform the attacks --
     -------------------------
 
-    local hitsdone   = 0
-    local hitslanded = 0
-    local finaldmg   = 0
-    local sneakIsApplicable = caster:hasStatusEffect(xi.effect.SNEAK_ATTACK) and
-                                spell:isAoE() == 0 and
-                                params.attackType ~= xi.attackType.RANGED and
-                                (caster:isBehind(target) or caster:hasStatusEffect(xi.effect.HIDE))
-    local trickAttackTarget = (caster:hasStatusEffect(xi.effect.TRICK_ATTACK) and
-                                spell:isAoE() == 0 and
-                                params.attackType ~= xi.attackType.RANGED) and
-                                caster:getTrickAttackChar(target) or nil
+    local hitsdone          = 0
+    local hitslanded        = 0
+    local finaldmg          = 0
+    local sneakIsApplicable = false
+    local trickAttackTarget = nil
+
+    if spell:isAoE() == 0 and params.attackType ~= xi.attackType.RANGED then
+        if
+            caster:hasStatusEffect(xi.effect.SNEAK_ATTACK) and
+            (caster:isBehind(target) or caster:hasStatusEffect(xi.effect.HIDE))
+        then
+            sneakIsApplicable = true
+        end
+
+        if caster:hasStatusEffect(xi.effect.TRICK_ATTACK) then
+            trickAttackTarget = caster:getTrickAttackChar(target)
+        end
+    end
 
     while hitsdone < params.numhits do
         local chance = math.random()
@@ -271,9 +279,9 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
             hitslanded        = hitslanded + 1
             sneakIsApplicable = false
 
-            -- increment target's TP (100TP per hit landed)
+            -- Store number of hits that did > 0 damage
             if finaldmg > 0 then
-                target:addTP(100)
+                params.tphitslanded = params.tphitslanded + 1
             end
         end
 
@@ -337,36 +345,62 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, nil)
 end
 
--- Perform a draining magical Blue Magic spell
-xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, mpDrain)
-    -- determine base damage
-    local dmg = params.dmgMultiplier * math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11)
-    if softCap > 0 then
-        dmg = utils.clamp(dmg, 0, softCap)
-    end
+-- Spell script Helper function.
+xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap, mpDrain)
+    local finalDamage = 0
 
-    dmg = dmg * applyResistanceEffect(caster, target, spell, params)
-    dmg = addBonuses(caster, spell, target, dmg)
-    dmg = adjustForTarget(target, dmg, spell:getElement())
-
-    -- limit damage
-    if target:isUndead() then
+    -- Early returns
+    if
+        target:isUndead() or
+        xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement()) == 0 -- Drain spells cannot be absorbed, but they can be nullified.
+    then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    else
-        -- only drain what the mob has
-        if mpDrain then
-            dmg = dmg * xi.settings.main.BLUE_POWER
-            dmg = utils.clamp(dmg, 0, target:getMP())
-            target:delMP(dmg)
-            caster:addMP(dmg)
-        else
-            dmg = utils.clamp(dmg, 0, target:getHP())
-            dmg = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params, nil)
-            caster:addHP(dmg)
-        end
+
+        return 0
     end
 
-    return dmg
+    -- Base damage
+    finalDamage = math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11)
+    finalDamage = math.floor(finalDamage * params.dmgMultiplier)
+    if damageCap > 0 then
+        finalDamage = utils.clamp(finalDamage, 0, damageCap)
+    end
+
+    -- Multipliers
+    finalDamage = math.floor(finalDamage * applyResistanceEffect(caster, target, spell, params))
+    finalDamage = math.floor(addBonuses(caster, spell, target, finalDamage))
+    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateTMDA(target, spell:getElement()))
+    finalDamage = math.floor(finalDamage * xi.settings.main.BLUE_POWER)
+
+    -- MP drain
+    if mpDrain then
+        finalDamage = utils.clamp(finalDamage, 0, target:getMP())
+
+        target:delMP(finalDamage)
+        caster:addMP(finalDamage)
+
+        return finalDamage
+    end
+
+    -- Handle Phalanx, One for All, Stoneskin and target HP (Cant be higher than current HP)
+    finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
+    finalDamage = utils.clamp(utils.oneforall(target, finalDamage), 0, 99999)
+    finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
+    finalDamage = utils.clamp(finalDamage, 0, target:getHP())
+
+    -- Check if the mob has a damage cap
+    finalDamage = target:checkDamageCap(finalDamage)
+
+    target:takeSpellDamage(caster, spell, finalDamage, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + spell:getElement())
+
+    if not target:isPC() then
+        target:updateEnmityFromDamage(caster, finalDamage)
+    end
+
+    target:handleAfflatusMiseryDamage(finalDamage)
+    caster:addHP(finalDamage)
+
+    return finalDamage
 end
 
 -- Get the damage and resistance for a breath Blue Magic spell
@@ -376,9 +410,9 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params, isConal)
     results[2] = 0 -- resistance (used in spell to determine added effect resistance)
 
     -- Initial damage
-    local dmg = (caster:getHP() / params.hpMod)
+    local dmg = caster:getHP() / params.hpMod
     if params.lvlMod > 0 then
-        dmg = dmg + (caster:getMainLvl() / params.lvlMod)
+        dmg = dmg + caster:getMainLvl() / params.lvlMod
     end
 
     -- Conal breath spells
@@ -394,14 +428,14 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params, isConal)
 
     -- Monster correlation
     local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getEcosystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
-    dmg = dmg * (1 + correlationMultiplier)
+    dmg = math.floor(dmg * (1 + correlationMultiplier))
 
     -- Monster elemental adjustments
-    local mobEleAdjustments = getElementalDamageReduction(target, spell:getElement())
-    dmg = dmg * mobEleAdjustments
+    local mobEleAdjustments = xi.spells.damage.calculateSDT(target, spell:getElement())
+    dmg = math.floor(dmg * mobEleAdjustments)
 
     -- Modifiers
-    dmg = dmg * (1 + (caster:getMod(xi.mod.BREATH_DMG_DEALT) / 100))
+    dmg = math.floor(dmg * (1 + caster:getMod(xi.mod.BREATH_DMG_DEALT) / 100))
 
     -- Resistance
     local resistance = applyResistanceEffect(caster, target, spell, params)
@@ -418,24 +452,26 @@ end
 
 -- Apply spell damage
 xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, trickAttackTarget)
-    if dmg < 0 then
-        dmg = 0
-    end
-
-    dmg              = dmg * xi.settings.main.BLUE_POWER
-    local attackType = params.attackType or xi.attackType.NONE
-    local damageType = params.damageType or xi.damageType.NONE
+    dmg                 = math.floor(dmg * xi.settings.main.BLUE_POWER)
+    local attackType    = params.attackType or xi.attackType.NONE
+    local damageType    = params.damageType or xi.damageType.NONE
+    local tpHits        = params.tphitslanded or 0
+    local extraTPGained = xi.combat.tp.calculateTPGainOnMagicalDamage(dmg, caster, target) * math.max(tpHits - 1, 0) -- Calculate extra TP gained from multihits. takeSpellDamage accounts for one already.
 
     -- handle MDT, One For All, Liement
     if attackType == xi.attackType.MAGICAL then
-        local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
-        dmg                               = math.floor(dmg * targetMagicDamageAdjustment)
+        local absorbOrNullify = xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement())
+        dmg                   = math.floor(dmg * absorbOrNullify)
 
         if dmg < 0 then
             target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
+            target:addTP(extraTPGained)
             -- TODO: verify Afflatus/enmity from absorb?
             return dmg
         end
+
+        local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, spell:getElement())
+        dmg                               = math.floor(dmg * targetMagicDamageAdjustment)
 
         dmg = utils.oneforall(target, dmg)
     end
@@ -448,7 +484,11 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
     -- handle stoneskin
     dmg = utils.stoneskin(target, dmg)
 
+    -- Check if the mob has a damage cap
+    dmg = target:checkDamageCap(dmg)
+
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
+    target:addTP(extraTPGained)
 
     if not target:isPC() then
         if trickAttackTarget then

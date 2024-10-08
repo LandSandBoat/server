@@ -4,6 +4,7 @@
 -- Type: Clothcraft Image Support
 -- !pos -34.800 -2.25 -119.950 241
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

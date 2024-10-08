@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.NUKE_WALL
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

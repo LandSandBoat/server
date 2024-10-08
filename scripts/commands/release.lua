@@ -2,6 +2,7 @@
 -- func: release
 -- desc: Releases the player from current events.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

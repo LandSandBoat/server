@@ -2,6 +2,7 @@
 -- func: setmod
 -- desc: Sets the specified modifier to the specified value on the cursor target or player
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -2,6 +2,7 @@
 -- Vortex
 -- Creates a vortex that damages targets in an area of effect. Additional effect: Terror
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -17,7 +18,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.TERROR, 1, 0, 9)
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.BIND, 1, 0, 30)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    mob:resetEnmity(target)
+
+    if not target:isTrust() then
+        mob:resetEnmity(target)
+    end
+
     return dmg
 end
 

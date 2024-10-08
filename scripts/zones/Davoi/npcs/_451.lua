@@ -3,6 +3,7 @@
 --  NPC: _451 (Elevator Lever)
 -- Notes: Used to operate Elevator @450 (actual npc script is _454)
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

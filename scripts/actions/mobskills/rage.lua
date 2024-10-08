@@ -7,6 +7,7 @@
 -- Range: Self
 -- Notes: 25% Attack UP, -25% defense DOWN
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

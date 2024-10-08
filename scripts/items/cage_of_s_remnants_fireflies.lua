@@ -3,6 +3,7 @@
 -- S. Rem. Fireflies
 -- Transports the user out of Silver Sea Remnants
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = zones[xi.zone.OPEN_SEA_ROUTE_TO_MHAURA]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

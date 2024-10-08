@@ -2,6 +2,7 @@
 -- Area: Rolanberry Fields
 --   NM: Ravenous Crawler
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

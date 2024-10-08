@@ -4,6 +4,7 @@
 -- Start Quest: The Sand Charmz
 -- !pos 23 -7 41 249
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

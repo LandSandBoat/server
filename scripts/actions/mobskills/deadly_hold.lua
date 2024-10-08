@@ -7,6 +7,7 @@
 --  Range: Melee
 --  Notes: One shotted a 75 nin/dnc for 1142 dmg.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

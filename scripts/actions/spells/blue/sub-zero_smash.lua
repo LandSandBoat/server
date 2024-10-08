@@ -12,6 +12,7 @@
 -- Skillchain Element(s): Fragmentation
 -- Combos: Fast Cast
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

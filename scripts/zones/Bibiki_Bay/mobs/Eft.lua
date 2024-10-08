@@ -3,6 +3,7 @@
 --  Mob: Eft
 -- Note: PH for Intulo
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

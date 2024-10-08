@@ -3,6 +3,7 @@
 --  Mob: Time Bomb
 -- BCNM: 3, 2, 1...
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)

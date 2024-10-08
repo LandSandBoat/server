@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/families/zdei') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onPath = function(mob)

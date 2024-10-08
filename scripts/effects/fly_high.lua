@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.FLY_HIGH
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

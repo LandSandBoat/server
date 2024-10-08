@@ -3,6 +3,7 @@
 -- Raphael's Rod
 -- Grants Reraise III.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

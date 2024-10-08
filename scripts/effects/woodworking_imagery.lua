@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.WOODWORKING_IMAGERY
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

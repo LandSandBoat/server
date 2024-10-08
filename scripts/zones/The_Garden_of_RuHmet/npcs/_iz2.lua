@@ -3,6 +3,7 @@
 --  NPC: _iz2 (Ebon_Panel)
 -- !pos 422.351 -5.180 -100.000 35 | Hume Tower
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

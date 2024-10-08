@@ -5,6 +5,7 @@
 -- Uses Provoke in either role to maintain enmity as a tank or off-tank.
 -- Uses weapon skills at 2000 TP with Warrior's Charge if it's available; does not try to skillchain. (TODO)
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

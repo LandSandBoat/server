@@ -2,6 +2,7 @@
 -- Area: Southern San d'Oria [S]
 --  NPC: Hunt Registry
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

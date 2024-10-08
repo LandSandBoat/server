@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.FUTAE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

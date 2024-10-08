@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: The Merchant's Bidding (R)
 -- !pos -169 -1 13 230
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

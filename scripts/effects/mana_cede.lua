@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.MANA_CEDE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

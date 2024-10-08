@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.CAMOUFLAGE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

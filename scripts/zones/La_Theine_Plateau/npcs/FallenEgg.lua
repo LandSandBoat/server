@@ -6,12 +6,17 @@
 local laTheineGlobal = require('scripts/zones/La_Theine_Plateau/globals')
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local random = math.random(1, 100)
     local nm = GetMobByID(ID.mob.NIHNIKNOOVI)
-    if random <= 20 and not nm:isSpawned() then
+    if
+        nm and
+        random <= 20 and
+        not nm:isSpawned()
+    then
         local x = npc:getXPos()
         local y = npc:getYPos()
         local z = npc:getZPos()

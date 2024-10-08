@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: The_Shrine_of_RuAvitau (178)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

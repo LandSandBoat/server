@@ -11,6 +11,7 @@ xi.crafting = xi.crafting or {}
 -----------------------------------
 -- Data
 -----------------------------------
+---@class hqCrystals : { id: xi.item, cost: integer }
 local hqCrystals =
 {
     [0] = { id = xi.item.ROBBER_RIG,       cost = 1500 }, -- Robber Rig is located in category 3. Not a typo.

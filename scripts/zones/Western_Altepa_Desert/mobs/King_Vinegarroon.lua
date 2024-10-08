@@ -2,7 +2,18 @@
 -- Area: Western Altepa Desert
 --   NM: King Vinegarroon
 -----------------------------------
+---@type TMobEntity
 local entity = {}
+
+local mobRegen = function(mob)
+    local hour = VanadielHour()
+
+    if hour >= 6 and hour <= 20 then
+        mob:setMod(xi.mod.REGEN, 125)
+    else
+        mob:setMod(xi.mod.REGEN, 250)
+    end
+end
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
@@ -28,7 +39,7 @@ end
 
 entity.onMobRoam = function(mob)
     local weather = mob:getWeather()
-    entity.mobRegen(mob)
+    mobRegen(mob)
 
     if weather ~= xi.weather.DUST_STORM and weather ~= xi.weather.SAND_STORM then
         DespawnMob(mob:getID())
@@ -44,18 +55,8 @@ entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
 end
 
-entity.mobRegen = function(mob)
-    local hour = VanadielHour()
-
-    if hour >= 6 and hour <= 20 then
-        mob:setMod(xi.mod.REGEN, 125)
-    else
-        mob:setMod(xi.mod.REGEN, 250)
-    end
-end
-
 entity.onMobFight = function(mob, target)
-    entity.mobRegen(mob)
+    mobRegen(mob)
 end
 
 return entity

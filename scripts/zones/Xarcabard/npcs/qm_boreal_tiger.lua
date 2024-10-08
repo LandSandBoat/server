@@ -4,6 +4,7 @@
 -- Involved in Quests: Atop the Highest Mountains (for Boreal Tiger)
 -- !pos 341 -29 370 112
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 -- Scroll of Vital Etude
 -- Teaches the song Vital Etude
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

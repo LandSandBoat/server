@@ -2,6 +2,7 @@
 -- Spell: Warp
 -- Transports the user to their Home Point
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

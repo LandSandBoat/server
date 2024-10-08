@@ -2,6 +2,7 @@
 -- Winter Breeze
 -- Description: AoE Dispel (Only removes one effect) and Stun
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

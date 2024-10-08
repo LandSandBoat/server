@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local bifronsPHTable =

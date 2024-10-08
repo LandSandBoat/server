@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 -- TODO: Allegedly has a 12 hp/sec regen.  Determine if true, and add to onMobInitialize if so.
@@ -20,16 +21,20 @@ local function spawnArkAngelPet(mob, target)
         mob:setAutoAttackEnabled(false)
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
         mob:injectActionPacket(mob:getID(), 11, 438, 0, 0x18, 101, 732, 55)
+
         local pet = SpawnMob(content.groups[selectedPet]['mobIds'][battlefieldArea][1])
-        battlefield:insertEntity(pet:getTargID(), false, true)
+        if pet then
+            battlefield:insertEntity(pet:getTargID(), false, true)
 
-        pet:addListener('DEATH', 'AAGK_PET_DEATH', function(petArg)
-            local petBattlefield = petArg:getBattlefield()
+            pet:addListener('DEATH', 'AAGK_PET_DEATH', function(petArg)
+                local petBattlefield = petArg:getBattlefield()
 
-            petBattlefield:setLocalVar('petRespawnGK', os.time() + 30)
-        end)
+                petBattlefield:setLocalVar('petRespawnGK', os.time() + 30)
+            end)
 
-        pet:updateEnmity(target)
+            pet:updateEnmity(target)
+        end
+
         mob:setAutoAttackEnabled(true)
         mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     end
@@ -80,8 +85,10 @@ entity.onMobFight = function(mob, target)
         respawnTime <= os.time()
     then
         local battlefield = mob:getBattlefield()
-        battlefield:setLocalVar('petRespawnGK', 0)
-        spawnArkAngelPet(mob, target)
+        if battlefield then
+            battlefield:setLocalVar('petRespawnGK', 0)
+            spawnArkAngelPet(mob, target)
+        end
     end
 end
 

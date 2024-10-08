@@ -3,6 +3,7 @@
 -- Rotten Quiver
 -- When used, you will obtain 18 Old Arrows
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

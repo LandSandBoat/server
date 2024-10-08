@@ -1,6 +1,7 @@
 -----------------------------------
 -- Frost Breath
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

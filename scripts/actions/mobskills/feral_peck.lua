@@ -7,6 +7,7 @@
 --  Range: Melee
 --  Notes: Used only by Zirnitra and Turul
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

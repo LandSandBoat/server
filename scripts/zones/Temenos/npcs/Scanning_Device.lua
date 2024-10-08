@@ -3,6 +3,7 @@
 --  NPC: Scanning_Device
 -- !pos 586 0 66 37
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 -- Scroll of Flare
 -- Teaches the black magic Flare
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 --  NPC: Leigon-Moigon
 -- !pos 106.567 -21.249 140.770 111
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

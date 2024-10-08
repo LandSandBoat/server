@@ -3,6 +3,7 @@
 -- Description: Reset recasts on abilities
 -- Type: Physical (Blunt)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

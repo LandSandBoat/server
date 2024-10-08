@@ -5,6 +5,7 @@
 -- Recast Time: 5:00
 -- Duration: 0:30 + an additional 3 for every merit after the first
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

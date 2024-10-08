@@ -3,6 +3,7 @@
 --  NPC: Transcendental Radiance
 -- !pos 540 0 -594 36
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

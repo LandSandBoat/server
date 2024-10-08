@@ -4,6 +4,7 @@
 -- Speak to Eppel-Treppel to enter the Celennia Memorial Library.
 -- !pos -90.922 -2.650 -80.891 257
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

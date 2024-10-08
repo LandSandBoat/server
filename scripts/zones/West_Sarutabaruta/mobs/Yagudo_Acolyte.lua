@@ -2,6 +2,7 @@
 -- Area: West Sarutabaruta
 --  Mob: Yagudo Acolyte
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

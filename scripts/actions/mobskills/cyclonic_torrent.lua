@@ -7,6 +7,7 @@
 --  Range: 20' radial
 --  Notes: Only used by Urd, Verthandi, and Carabosse.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

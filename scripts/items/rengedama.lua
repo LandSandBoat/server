@@ -3,6 +3,7 @@
 -- Item: Rengedama
 -- Effect: Far East Firework
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum xi.questLog
 xi.questLog =
 {
     SANDORIA    =  0,

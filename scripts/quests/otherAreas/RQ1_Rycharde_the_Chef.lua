@@ -34,7 +34,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 2 then
                         quest:progressEvent(70, xi.item.SLICE_OF_DHALMEL_MEAT)
                     elseif quest:getVar(player, 'Prog') > 2 then
-                        quest:progressEvent(71, xi.item.SLICE_OF_DHALMEL_MEATs)
+                        quest:progressEvent(71, xi.item.SLICE_OF_DHALMEL_MEAT)
                     end
                 end,
             },

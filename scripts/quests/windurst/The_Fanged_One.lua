@@ -7,8 +7,9 @@
 -- Keeping Old Sabertooth and Tiger Bones in separate lua's due to special functions.
 -----------------------------------
 local windurstWoodsID = zones[xi.zone.WINDURST_WOODS]
-local sauromugueID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
+local sauromugueID    = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
 -----------------------------------
+
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE)
 
 quest.reward =
@@ -93,8 +94,8 @@ quest.sections =
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.OLD_TIGERS_FANG)
                         player:unlockJob(xi.job.RNG)
-                        npcUtil.giveKeyItem(xi.ki.JOB_GESTURE_RANGER)
-                        return quest:messageSpecial(windurstWoodsID.text.PERIH_VASHAI_DIALOG)
+                        npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_RANGER)
+                        player:messageSpecial(windurstWoodsID.text.PERIH_VASHAI_DIALOG)
                     end
                 end,
             },

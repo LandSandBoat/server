@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.elevatorState
 xi.elevatorState =
 {
     BOTTOM  = 0,

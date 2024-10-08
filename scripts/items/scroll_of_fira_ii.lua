@@ -3,6 +3,7 @@
 -- Scroll of Fira II
 -- Teaches the black magic Fira II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

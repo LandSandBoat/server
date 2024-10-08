@@ -7,6 +7,7 @@
 -- Range: Unknown radial
 -- Notes: Paralysis effect has a very long duration.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

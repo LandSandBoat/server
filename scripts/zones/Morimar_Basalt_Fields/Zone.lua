@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Morimar Basalt Fields
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

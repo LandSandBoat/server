@@ -3,6 +3,7 @@
 -- NPC: Pollante
 -- !pos -325.119 -4.000 -430.698 70
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

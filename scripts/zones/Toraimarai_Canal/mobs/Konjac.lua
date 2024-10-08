@@ -2,6 +2,7 @@
 -- Area: Toraimarai Canal
 --   NM: Konjac
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -5,6 +5,7 @@
 -- Involved in Missions: Windurst 8-1/8-2
 -- !pos 185 -3 -116 149
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

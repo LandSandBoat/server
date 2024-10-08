@@ -5,6 +5,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -37,9 +38,11 @@ entity.onMobFight = function(mob, target)
                 if not GetMobByID(warrior):isSpawned() and neededSpawns > 0 then
                     local warriorMob = SpawnMob(warrior)
 
-                    warriorMob:updateEnmity(target)
-                    if neededSpawns == 2 then
-                        warriorMob:stun(5000)
+                    if warriorMob then
+                        warriorMob:updateEnmity(target)
+                        if neededSpawns == 2 then
+                            warriorMob:stun(5000)
+                        end
                     end
 
                     neededSpawns = neededSpawns - 1

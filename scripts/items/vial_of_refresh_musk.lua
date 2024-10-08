@@ -4,6 +4,7 @@
 -- Item Effect: 60 seconds
 -- Duration: 30 Seconds
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -14,7 +14,7 @@ local jobAbilities = set{
     xi.jobAbility.TOMAHAWK,
     xi.jobAbility.ANGON,
     xi.jobAbility.QUICKSTEP,
-    xi.jobAbility.BOXSTEP,
+    xi.jobAbility.BOX_STEP,
     xi.jobAbility.STUTTER_STEP,
     xi.jobAbility.FEATHER_STEP,
 }

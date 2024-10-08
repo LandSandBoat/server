@@ -3,6 +3,7 @@
 -- Scroll of Adventurer's Dirge
 -- Teaches the song Adventurer's Dirge
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

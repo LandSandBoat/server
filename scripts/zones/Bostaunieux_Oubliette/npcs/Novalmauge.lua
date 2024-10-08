@@ -5,6 +5,7 @@
 -- Involved in Quest: The Holy Crest, Trouble at the Sluice
 -- !pos 70 -24 21 167
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

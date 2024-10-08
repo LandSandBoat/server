@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobFight = function(mob, target)
@@ -16,7 +17,7 @@ entity.onMobFight = function(mob, target)
 
     for i = mobId + 1, mobId + 3 do
         local wynav = GetMobByID(i)
-        if not wynav:isSpawned() then
+        if wynav and not wynav:isSpawned() then
             local repopWynavs = wynav:getLocalVar('repop') -- see Wynav script
             if mob:getBattleTime() - repopWynavs > 10 then
                 wynav:setSpawn(x + math.random(1, 5), y, z + math.random(1, 5))

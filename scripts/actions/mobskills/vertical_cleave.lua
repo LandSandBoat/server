@@ -3,6 +3,7 @@
 --  Description: Damage varies with TP.
 --  Type: Physical (Slashing)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

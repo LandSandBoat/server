@@ -5,6 +5,7 @@
 -- Recast Time: 1:00
 -- Duration: Instant
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -21,7 +22,6 @@ end
 
 abilityObject.onUseAbility = function(player, target, ability)
     local pet = player:getPet()
-
     if pet then
         local enmitylist            = target:getEnmityList()
         local playerfound, petfound = false, false

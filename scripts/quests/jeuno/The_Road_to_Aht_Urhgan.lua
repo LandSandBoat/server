@@ -222,21 +222,18 @@ quest.sections =
 
         [xi.zone.WAJAOM_WOODLANDS] =
         {
-            afterZoneIn =
-            {
-                function(player)
-                    -- Player won't see these messages due to teleporting at the
-                    -- end of the cutscene if awarded then. Display after they zone in.
-                    -- NOTE: Prog value of 4 is set immediately before teleporting the player.
-                    if
-                        quest:getVar(player, 'Prog') == 4
-                    then
-                        npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
-                        npcUtil.giveKeyItem(player, xi.ki.MAP_OF_WAJAOM_WOODLANDS)
-                        quest:setVar(player, 'Prog', 5)
-                    end
-                end,
-            },
+            afterZoneIn = function(player)
+                -- Player won't see these messages due to teleporting at the
+                -- end of the cutscene if awarded then. Display after they zone in.
+                -- NOTE: Prog value of 4 is set immediately before teleporting the player.
+                if
+                    quest:getVar(player, 'Prog') == 4
+                then
+                    npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
+                    npcUtil.giveKeyItem(player, xi.ki.MAP_OF_WAJAOM_WOODLANDS)
+                    quest:setVar(player, 'Prog', 5)
+                end
+            end,
         },
     },
 

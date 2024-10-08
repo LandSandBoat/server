@@ -3,6 +3,7 @@
 --  NPC: ??? (qm2)
 -- Note: Spawns Ra'Gho Darkfount
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

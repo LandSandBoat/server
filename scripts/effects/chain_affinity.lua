@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.CHAIN_AFFINITY
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

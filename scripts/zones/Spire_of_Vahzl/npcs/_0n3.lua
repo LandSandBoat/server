@@ -2,6 +2,7 @@
 -- Area: Spire_of_vahlz
 --  NPC: web of regret
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

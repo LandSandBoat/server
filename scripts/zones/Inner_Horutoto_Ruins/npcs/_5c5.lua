@@ -4,6 +4,7 @@
 -- Involved In Mission: The Horutoto Ruins Experiment
 -- !pos 419 0 -27 192
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

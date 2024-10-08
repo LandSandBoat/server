@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.EAST_RONFAURE_S]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local goblintrapPHTable =

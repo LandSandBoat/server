@@ -3,6 +3,7 @@
 --  NPC: ??? (qm3)
 -- Note: Spawns Bloodfist Voshgrosh
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

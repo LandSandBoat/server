@@ -3,6 +3,7 @@
 -- Scroll of Yain: Ichi
 -- Teaches the ninjutsu Yain: Ichi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

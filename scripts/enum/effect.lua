@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.effect
 xi.effect =
 {
     KO                       = 0,

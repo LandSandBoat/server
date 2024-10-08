@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.ALTAIEU]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -35,9 +36,12 @@ end
 
 entity.onMobDespawn = function(mob)
     local jailerOfLove = GetMobByID(ID.mob.JAILER_OF_LOVE)
-    local numHpemdeKilled = jailerOfLove:getLocalVar('JoL_Qn_hpemde_Killed')
 
-    jailerOfLove:setLocalVar('JoL_Qn_hpemde_Killed', numHpemdeKilled + 1)
+    if jailerOfLove then
+        local numHpemdeKilled = jailerOfLove:getLocalVar('JoL_Qn_hpemde_Killed')
+
+        jailerOfLove:setLocalVar('JoL_Qn_hpemde_Killed', numHpemdeKilled + 1)
+    end
 end
 
 return entity

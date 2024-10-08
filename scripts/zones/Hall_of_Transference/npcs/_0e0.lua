@@ -3,6 +3,7 @@
 --  NPC: Cermet Gate - Holla
 -- !pos -219 -6 280 14
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,6 +2,7 @@
 -- Spell: Sinewy Etude
 -- Static STR Boost, BRD 24
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

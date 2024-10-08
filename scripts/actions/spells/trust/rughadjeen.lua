@@ -7,6 +7,7 @@
 -- Tries to use weapon skills at 1000 TP, but it is lower priority.
 -- Uses Chivalry at 50% MP if it's available.
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

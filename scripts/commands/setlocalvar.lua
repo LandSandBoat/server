@@ -2,6 +2,7 @@
 -- func: setlocalvar <varName> <player/mob/npc> <ID>
 -- desc: set player npc or mob local variable and value.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -37,12 +38,24 @@ commandObj.onTrigger = function(player, arg1, arg2, arg3, arg4)
         local entityType = string.upper(arg3)
         if (entityType == 'NPC') or (entityType == 'MOB') then
             arg4 = tonumber(arg4)
+            if not zone then
+                return
+            end
+
             if zone:getTypeMask() == xi.zoneType.INSTANCED then
                 local instance = player:getInstance()
+                if not instance then
+                    return
+                end
+
+                -- TODO: Solve param type mismatch from number? to integer
+                ---@diagnostic disable-next-line: param-type-mismatch
                 targ = instance:getEntity(bit.band(arg4, 0xFFF), xi.objType[entityType])
             elseif entityType == 'NPC' then
+                ---@diagnostic disable-next-line: param-type-mismatch
                 targ = GetNPCByID(arg4)
             else
+                ---@diagnostic disable-next-line: param-type-mismatch
                 targ = GetMobByID(arg4)
             end
         elseif entityType == 'PLAYER' then

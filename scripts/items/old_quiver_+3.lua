@@ -3,6 +3,7 @@
 -- Old Quiver +3
 -- When used, you will obtain one partial stack of Crude Arrows +3
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

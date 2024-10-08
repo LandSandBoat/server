@@ -2,6 +2,7 @@
 -- func: setweather
 -- desc: Sets the current weather for the current zone.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

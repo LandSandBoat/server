@@ -4,6 +4,7 @@
 -- Type: Salvage Key Item giver
 -- !pos 101.468 -1 -20.088 50
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -68,6 +69,9 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     local currentday = tonumber(os.date('%j'))
+    if not currentday then
+        return
+    end
 
     if (csid == 818 or csid == 820) and option == 100 then
         if player:getLocalVar('SalvageValid') == 1 then

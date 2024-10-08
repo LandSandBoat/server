@@ -3,6 +3,7 @@
 -- Bolter's Die
 -- Teaches the job ability Bolters Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

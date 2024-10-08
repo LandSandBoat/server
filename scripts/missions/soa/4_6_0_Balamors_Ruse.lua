@@ -57,14 +57,11 @@ mission.sections =
             ['Spoutdrenched_Toad'] = keyItemOnMobDeath,
             ['Waterway_Pugil']     = keyItemOnMobDeath,
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return 369
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 1 then
+                    return 369
+                end
+            end,
 
             onEventFinish =
             {

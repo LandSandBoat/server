@@ -2,6 +2,7 @@
 -- (Vulture 3)
 -- Dummy ability used for 2hr animation.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

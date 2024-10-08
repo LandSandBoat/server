@@ -3,6 +3,7 @@
 -- Scroll of Magic Finale
 -- Teaches the song Magic Finale
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

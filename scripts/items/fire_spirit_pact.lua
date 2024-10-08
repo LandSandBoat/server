@@ -3,6 +3,7 @@
 -- Fire Spirit Pact
 -- Teaches the summoning magicFire Spirit
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

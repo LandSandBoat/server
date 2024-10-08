@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/families/tonberry') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

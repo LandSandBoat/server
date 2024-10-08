@@ -2,6 +2,7 @@
 -- func: addcurrency <currency type> <amount> <target player>
 -- desc: Adds the specified currency to the player
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

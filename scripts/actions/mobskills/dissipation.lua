@@ -2,6 +2,7 @@
 -- Dissipation
 -- Dispels all buffs add terror effect
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

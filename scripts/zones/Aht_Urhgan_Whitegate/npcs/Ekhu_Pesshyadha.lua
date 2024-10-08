@@ -3,6 +3,7 @@
 --  NPC: Ekhu Pesshyadha
 -- !pos -13.043 0.999 103.423 50
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

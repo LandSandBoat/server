@@ -3,6 +3,7 @@
 -- Recall ring: Meriphataud
 -- Enchantment: "Recall-Meriphataud"
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -4,6 +4,7 @@
 -- https://www.bg-wiki.com/ffxi/Erle
 -- TODO allow deaggro based on distance (core CMobEntity::CanDeaggro() forces NM and Battlefield mobs to never stop chasing)
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

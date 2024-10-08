@@ -2,6 +2,7 @@
 -- Area: Dangruf Wadi
 --  Mob: Goblin Mugger
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

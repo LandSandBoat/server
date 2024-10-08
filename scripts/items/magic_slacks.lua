@@ -3,6 +3,7 @@
 -- Item: Magic Slacks
 -- Item Effect: Restores 30-39 MP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

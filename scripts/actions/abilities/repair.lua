@@ -5,6 +5,7 @@
 -- Recast Time: 3:00
 -- Duration: Instant
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 local removableEffectIds =
@@ -63,7 +64,11 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    local pet                 = player:getPet()
+    local pet = player:getPet()
+    if not pet then
+        return
+    end
+
     local petMaxHP            = pet:getMaxHP()
     local numRemovableEffects = player:getMod(xi.mod.REPAIR_EFFECT)
 

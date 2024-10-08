@@ -6,6 +6,7 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Unknown
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -14,7 +15,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power = 25
-    local duration = 90
+    local duration = 150
 
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, power, 0, duration))
 

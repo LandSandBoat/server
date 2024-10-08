@@ -9,6 +9,7 @@
 -- "Offer thy worship...
 -- I shall burn away...thy transgressions..."
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

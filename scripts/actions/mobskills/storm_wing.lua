@@ -4,6 +4,7 @@
 --  Description: Deals damage within a fan-shaped area. Additional effect: Silence.
 --  Type: Magical
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -11,12 +12,15 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    local damage = math.floor(mob:getWeaponDmg() * 1.5)
+
+    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, 3, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
+
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 60)
-    local dmgmod = 3
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 1.5, xi.element.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
-    return dmg
+
+    return damage
 end
 
 return mobskillObject

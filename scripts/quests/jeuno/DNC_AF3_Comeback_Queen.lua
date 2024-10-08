@@ -112,22 +112,19 @@ quest.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    local questProgress = quest:getVar(player, 'Prog')
+            onZoneIn = function(player, prevZone)
+                local questProgress = quest:getVar(player, 'Prog')
 
-                    if questProgress == 4 then
-                        return 10208
-                    elseif questProgress == 5 then
-                        return 10209
-                    elseif questProgress == 6 then
-                        return 10210
-                    elseif questProgress == 7 then
-                        return 10211
-                    end
-                end,
-            },
+                if questProgress == 4 then
+                    return 10208
+                elseif questProgress == 5 then
+                    return 10209
+                elseif questProgress == 6 then
+                    return 10210
+                elseif questProgress == 7 then
+                    return 10211
+                end
+            end,
 
             onEventFinish =
             {

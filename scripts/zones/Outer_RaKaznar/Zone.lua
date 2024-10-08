@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Outer Ra’Kanzar (274)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

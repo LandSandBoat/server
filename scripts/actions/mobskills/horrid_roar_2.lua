@@ -2,6 +2,7 @@
 -- Horrid Roar (Nidhogg)
 -- Dispels all buffs including food. Lowers Enmity.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

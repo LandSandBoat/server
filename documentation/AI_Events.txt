@@ -1,11 +1,18 @@
 States/Actions
 
 TICK - Entity
+PATH - Entity
+ROAM_ACTION - Mob
 ROAM_TICK - Mob
-COMBAT_TICK - Mob
+COMBAT_TICK - Entity, Master?, Target?
+RUN_AWAY - Mob, Target
+ON_TRIGGER - Player, Entity
 
-EFFECTS_TICK - Entity
+AUTOMATON_AI_TICK - Automaton, Target
+AUTOMATON_ATTACHMENT_CHECK - Automaton, Target
+
 EFFECT_GAIN - Entity, Effect
+EFFECTS_TICK - Entity
 EFFECT_LOSE - Entity, Effect
 
 ITEM_START - Entity, Item, action
@@ -16,17 +23,19 @@ WEATHER_CHANGE - Entity, weather, weather element
 
 SPAWN - Entity
 ENGAGE - Entity, Target
-ATTACK - Attacker, defender, action
-ATTACKED - Defender, attacker, action
 DISENGAGE - Entity
-DEATH - Entity, optionalKiller
-DESPAWN - Entity
+DEATH - Entity, Killer?
 DEFEATED_MOB - Mob, Attacker, optParams (Note: optParams is the same table in onMobDeath)
 EXPERIENCE_POINTS - Entity, exp
 ITEM_DROPS - Entity, Loot
+DESPAWN - Entity
 
 TAKE_DAMAGE - Entity, amount, optionalAttacker, attackType, damageType
+
+MELEE_SWING_HIT - Entity, Target, attack
 CRITICAL_TAKE - Target, Attacker
+ATTACK - Attacker, defender, action
+ATTACKED - Defender, attacker, action
 
 RANGE_START - Entity, action
 RANGE_STATE_EXIT - Entity, Target, action
@@ -37,11 +46,12 @@ ABILITY_TAKE - Target, Entity, Ability, action
 ABILITY_STATE_EXIT - Entity, Ability
 
 WEAPONSKILL_STATE_ENTER - Entity, Skillid
+WEAPONSKILL_BEFORE_USE - Entity, Skillid
 WEAPONSKILL_USE - Entity, Target, Skillid, TP, action
 WEAPONSKILL_TAKE - Target, Entity, Skillid, TP, action
 WEAPONSKILL_STATE_EXIT - Entity, Skillid
 
 MAGIC_START - Entity, Spell, action
 MAGIC_USE - Entity, Target, Spell, action
+MAGIC_TAKE - Target, Entity, Spell, action
 MAGIC_STATE_EXIT - Entity, Spell
-MAGIC_TAKE - Target, Entity, Spell, ?action?

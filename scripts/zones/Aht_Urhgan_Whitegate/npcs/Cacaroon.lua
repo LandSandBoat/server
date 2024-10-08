@@ -3,6 +3,7 @@
 --  NPC: Cacaroon
 -- !pos -72.026 0.000 -82.337 50
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -6,6 +6,7 @@
 -- Refunds some of the MP consumed by the Geocolure spell that created the luopan.
 -- Amount of MP restored varies depending on remaining Luopan HP.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

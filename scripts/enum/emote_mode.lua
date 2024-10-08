@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum xi.emoteMode
 xi.emoteMode =
 {
     ALL    = 0,

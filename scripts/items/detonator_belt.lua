@@ -3,6 +3,7 @@
 -- Detonator Belt
 -- Enchantment: 60Min, Costume - Cluster (Black)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

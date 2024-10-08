@@ -3,6 +3,7 @@
 -- Little Comet
 -- Several sparkles rise and fall, twinkling steadily
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

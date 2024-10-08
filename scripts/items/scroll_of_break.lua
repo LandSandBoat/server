@@ -3,6 +3,7 @@
 -- Scroll of Break
 -- Teaches the black magic Break
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

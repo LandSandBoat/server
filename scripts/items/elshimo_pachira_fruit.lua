@@ -3,6 +3,7 @@
 -- Item: Elshimo Pachira Fruit
 -- Item Effect:  Poison 1HP / Removes 40 HP over 120 seconds
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

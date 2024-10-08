@@ -2,6 +2,7 @@
 -- Area: Windurst Woods
 --  NPC: Harara, W.W.
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local guardNation = xi.nation.WINDURST

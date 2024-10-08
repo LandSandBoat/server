@@ -3,6 +3,7 @@
 --  NPC: Dancing Wolf
 -- !pos 7.619 7 81.209 247
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

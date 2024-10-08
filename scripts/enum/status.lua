@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum xi.status
 xi.status =
 {
     NORMAL          =  0,

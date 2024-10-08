@@ -66,7 +66,11 @@ local function GiveItem(player, npc, itemnum)
         else
             player:addItem(itemList[itemnum], 1, 0, 0, 0, 0)
             xi.pyxis.messageChest(player, ID.text.OBTAINS_ITEM, itemList[itemnum], 0, 0, 0, npc)
-            chest:setLocalVar('POPITEM' .. itemnum, 0)
+
+            if chest then
+                chest:setLocalVar('POPITEM' .. itemnum, 0)
+            end
+
             itemList[itemnum] = 0
         end
     end

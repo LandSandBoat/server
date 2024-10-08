@@ -3,6 +3,7 @@
 -- Dusty Wing
 -- Increases TP of the user by 3000
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

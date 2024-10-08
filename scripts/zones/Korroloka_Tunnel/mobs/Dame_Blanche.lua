@@ -2,6 +2,7 @@
 -- Area: Korroloka Tunnel (173)
 --   NM: Dame Blanche
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -5,6 +5,7 @@
 -- Recast Time: 01:00
 -- Duration: instant
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 -- TODO: find out what checks can result in being unable to use ability on the pet --
@@ -16,7 +17,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-    xi.job_utils.dragoon.useSmitingBreath(player, target, ability, action, true)
+    xi.job_utils.dragoon.useSmitingBreath(player, target, ability, action)
 end
 
 return abilityObject

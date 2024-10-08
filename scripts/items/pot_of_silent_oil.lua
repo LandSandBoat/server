@@ -3,6 +3,7 @@
 -- Silent oil
 -- This lubricant cuts down 99.99% of all friction
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

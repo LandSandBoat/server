@@ -4,6 +4,7 @@
 -- Involved In Quest: Signed In Blood and The Goblin Tailor
 -- !zone 193
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

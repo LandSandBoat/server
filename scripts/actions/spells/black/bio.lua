@@ -2,6 +2,7 @@
 -- Spell: Bio
 -- Deals dark damage that weakens an enemy's attacks and gradually reduces its HP.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
@@ -31,7 +32,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
     dmg = addBonuses(caster, spell, target, dmg)
     -- Add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement())
+    dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement())
     -- Add in final adjustments including the actual damage dealt
     local final = finalMagicAdjustments(caster, target, spell, dmg)
 

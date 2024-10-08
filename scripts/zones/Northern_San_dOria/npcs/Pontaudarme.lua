@@ -3,6 +3,7 @@
 --  NPC: Pontaudarme
 -- !pos -51.628 -0.199 16.593 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

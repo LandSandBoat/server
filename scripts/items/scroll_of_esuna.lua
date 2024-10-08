@@ -3,6 +3,7 @@
 -- Scroll of Esuna
 -- Teaches the white magic Esuna
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

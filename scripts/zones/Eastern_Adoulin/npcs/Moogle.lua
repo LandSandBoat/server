@@ -2,6 +2,7 @@
 -- Area: Eastern Adoulin (257)
 --  NPC: Moogle
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

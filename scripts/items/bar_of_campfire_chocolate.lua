@@ -6,6 +6,7 @@
 -- Mind +1
 -- MP recovered while healing +2
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

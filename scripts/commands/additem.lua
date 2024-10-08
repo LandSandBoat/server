@@ -2,6 +2,7 @@
 -- func: additem <itemId> <quantity> <aug1> <v1> <aug2> <v2> <aug3> <v3> <aug4> <v4> <trial>
 -- desc: Adds an item to the GMs inventory.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -16,18 +17,25 @@ local function error(player, msg)
 end
 
 commandObj.onTrigger = function(player, item, quantity, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val, trialId)
-    -- Load needed text ids for players current zone..
-    local ID = zones[player:getZoneID()]
-    local itemToGet = 0
-
-    -- validate item
+    -- Early return
     if item == nil then
         -- No Item Provided
         error(player, 'No Item ID given.')
+
         return
-    elseif tonumber(item) == nil and item ~= nil then
+    end
+
+    -----------------------------------
+    -- Validate first parameter (Item)
+    -----------------------------------
+    local itemToGet = 0
+    local dataType  = tonumber(item)
+
+    -- String or other.
+    if dataType == nil then
         -- Item was provided, but was not a number. Try text lookup.
         local retItem = GetItemIDByName(tostring(item))
+
         if retItem > 0 and retItem < 65000 then
             itemToGet = retItem
         elseif retItem >= 65000 then
@@ -37,19 +45,24 @@ commandObj.onTrigger = function(player, item, quantity, aug0, aug0val, aug1, aug
             player:printToPlayer(string.format('Item %s not found in database.', item))
             return
         end
+
+    -- Number
     else
         -- Number was provided, so just use it
-        itemToGet = tonumber(item)
+        itemToGet = dataType
     end
-
-    -- if quantity is nil, assume 1 qty
-    quantity = quantity or 1
 
     -- At this point, if there's no item found, exit out of the function
     if itemToGet == 0 then
         error(player, 'Item not found.')
         return
     end
+
+    -----------------------------------
+    -- Validate second parameter (Quantity) (Optional)
+    -----------------------------------
+    local ID = zones[player:getZoneID()]
+    quantity = quantity or 1
 
     -- TODO: check qty and stack size + remaining inventory space instead of hardcoded == 0 check
     -- Ensure the GM has room to obtain the item...
@@ -63,8 +76,11 @@ commandObj.onTrigger = function(player, item, quantity, aug0, aug0val, aug1, aug
         return
     end
 
-    -- Give the GM the item...
+    -----------------------------------
+    -- Give the GM the item
+    -----------------------------------
     local obtained = player:addItem(itemToGet, quantity, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val, trialId)
+
     if obtained then
         if quantity and quantity > 1 then
             player:messageSpecial(ID.text.ITEM_OBTAINED + 9, itemToGet, quantity)

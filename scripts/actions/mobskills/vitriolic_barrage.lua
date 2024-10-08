@@ -7,6 +7,7 @@
 --  Range: AoE 10'
 --  Notes: Poison is 20/tic
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

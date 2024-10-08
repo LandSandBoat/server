@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: The Setting Sun
 -- !pos -137.070 10.999 161.855 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

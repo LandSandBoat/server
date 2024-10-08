@@ -3,6 +3,7 @@
 -- Scroll of Rasp
 -- Teaches the black magic Rasp
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

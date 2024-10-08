@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local elmPHTable =

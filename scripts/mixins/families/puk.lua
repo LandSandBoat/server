@@ -13,57 +13,21 @@ g_mixins.families.puk = function(mob)
     mob:addListener('TAKE_DAMAGE', 'PUK_TAKE_DAMAGE', function(puk, amount, attacker, attackType, damageType)
         local elements =
         {
-            { xi.damageType.FIRE,    xi.day.FIRESDAY      },
-            { xi.damageType.EARTH,   xi.day.EARTHSDAY     },
-            { xi.damageType.WATER,   xi.day.WATERSDAY     },
-            { xi.damageType.WIND,    xi.day.WINDSDAY      },
-            { xi.damageType.ICE,     xi.day.ICEDAY        },
-            { xi.damageType.THUNDER, xi.day.LIGHTNINGSDAY },
-            { xi.damageType.LIGHT,   xi.day.LIGHTSDAY     },
-            { xi.damageType.DARK,    xi.day.DARKSDAY      }
+            { xi.damageType.FIRE,    xi.day.FIRESDAY     },
+            { xi.damageType.EARTH,   xi.day.EARTHSDAY    },
+            { xi.damageType.WATER,   xi.day.WATERSDAY    },
+            { xi.damageType.WIND,    xi.day.WINDSDAY     },
+            { xi.damageType.ICE,     xi.day.ICEDAY       },
+            { xi.damageType.THUNDER, xi.day.LIGHTNINGDAY },
+            { xi.damageType.LIGHT,   xi.day.LIGHTSDAY    },
+            { xi.damageType.DARK,    xi.day.DARKSDAY     }
         }
 
         -- If the element corresponding to the elemental day of the in-game Vana'diel week is used on a Puk, it will get 100% TP instantly.
         for k, v in pairs(elements) do
             if damageType == v[1] and VanadielDayOfTheWeek() == v[2] then
-                puk:addTP(3000)
+                puk:addTP(1000)
             end
-        end
-    end)
-
-    mob:addListener('ROAM_TICK', 'PUK_ROAM_TICK', function(puk)
-        if
-            (VanadielDayOfTheWeek() == xi.day.WINDSDAY or
-            puk:getWeather() == xi.weather.WIND or
-            puk:getWeather() == xi.weather.GALES) and
-            puk:getMod(xi.mod.REGAIN) == 0
-        then
-            puk:setMod(xi.mod.REGAIN, 30)
-        elseif
-            VanadielDayOfTheWeek() ~= xi.day.WINDSDAY and
-            puk:getWeather() == xi.weather.WIND and
-            puk:getWeather() == xi.weather.GALES and
-            puk:getMod(xi.mod.REGAIN) ~= 0
-        then
-            puk:setMod(xi.mod.REGAIN, 0)
-        end
-    end)
-
-    mob:addListener('COMBAT_TICK', 'PUK_COMBAT_TICK', function(puk)
-        if
-            (VanadielDayOfTheWeek() == xi.day.WINDSDAY or
-            puk:getWeather() == xi.weather.WIND or
-            puk:getWeather() == xi.weather.GALES) and
-            puk:getMod(xi.mod.REGAIN) == 0
-        then
-            puk:setMod(xi.mod.REGAIN, 30)
-        elseif
-            VanadielDayOfTheWeek() ~= xi.day.WINDSDAY and
-            puk:getWeather() == xi.weather.WIND and
-            puk:getWeather() == xi.weather.GALES and
-            puk:getMod(xi.mod.REGAIN) ~= 0
-        then
-            puk:setMod(xi.mod.REGAIN, 0)
         end
     end)
 end

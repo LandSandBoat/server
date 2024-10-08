@@ -2,6 +2,7 @@
 -- func: wallhack <optional target>
 -- desc: Allows the player to walk through walls.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

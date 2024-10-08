@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.INNER_HORUTOTO_RUINS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

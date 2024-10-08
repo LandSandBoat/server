@@ -3,6 +3,7 @@
 -- desc: Tell Lua to run a full garbage collection
 -- note: For testing only (GM level 5)
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

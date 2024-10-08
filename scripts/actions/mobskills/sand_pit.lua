@@ -2,6 +2,7 @@
 -- Sand Pit
 -- Single target bind
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -35,8 +36,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
         if spawnId > 0 then
             local executioner = GetMobByID(spawnId)
-            executioner:setSpawn(npcX-1, npcY-2, npcZ-1) -- Set its spawn location.
-            SpawnMob(spawnId):updateEnmity(target)
+            if executioner then
+                executioner:setSpawn(npcX-1, npcY-2, npcZ-1) -- Set its spawn location.
+                SpawnMob(spawnId):updateEnmity(target)
+            end
         end
     elseif poolID == 4046 then
         -- Tuchulcha (Sheep in Antlion's Clothing)

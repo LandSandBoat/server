@@ -3,6 +3,7 @@
 --  NPC: ??? Rhapsodies of Vanadiel Mission 1-15 Impurity
 -- !pos -409.553 17.356 -380.626 123
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

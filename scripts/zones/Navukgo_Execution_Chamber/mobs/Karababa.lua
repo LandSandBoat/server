@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobFight = function(mob, target)

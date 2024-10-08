@@ -3,6 +3,7 @@
 -- Item: Stoneskin Torque
 -- Item Effect: Stoneskin
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

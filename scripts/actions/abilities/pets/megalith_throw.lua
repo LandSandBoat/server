@@ -1,6 +1,7 @@
 -----------------------------------
 -- Megalith Throw M=5.5 (guesstimated)
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

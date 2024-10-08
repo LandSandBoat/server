@@ -2,6 +2,7 @@
 -- Calcifying Claw
 -- Deals damage to a single target. Additional effect: Petrification, Knockback
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

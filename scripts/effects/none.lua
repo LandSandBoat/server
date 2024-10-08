@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.NONE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

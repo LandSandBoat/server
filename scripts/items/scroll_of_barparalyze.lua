@@ -3,6 +3,7 @@
 -- Scroll of Barparalyze
 -- Teaches the white magic Barparalyze
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

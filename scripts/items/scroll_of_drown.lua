@@ -3,6 +3,7 @@
 -- Scroll of Drown
 -- Teaches the black magic Drown
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

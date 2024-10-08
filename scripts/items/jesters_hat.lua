@@ -3,6 +3,7 @@
 -- Item: Jester's Hat
 -- Item Effect: Casts Cure II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

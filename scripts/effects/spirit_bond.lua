@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SPIRIT_BOND
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

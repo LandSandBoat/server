@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
@@ -96,6 +97,13 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + triggerAreaID - 1)
         local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + triggerAreaID)
 
+        if
+            not plate or
+            not door
+        then
+            return
+        end
+
         local totalWeight = plate:getLocalVar('weight')
         if player then
             totalWeight = totalWeight + getWeight(player)
@@ -122,6 +130,8 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
                 -- retrigger if weight is still enough to do so
                 if plateArg:getLocalVar('weight') >= 3 then
                     -- retrigger, with nil as player arg, player is not necessary to re-open the door if weight is >= 3.
+                    -- TODO: Separate nil-based logic out of function call
+                    ---@diagnostic disable-next-line param-type-mismatch
                     zoneObject.onTriggerAreaEnter(nil, triggerArea)
                 end
             end)
@@ -134,6 +144,9 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 
     if triggerAreaID < 30 then
         local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + triggerAreaID)
+        if not plate then
+            return
+        end
 
         local totalWeight = plate:getLocalVar('weight')
         totalWeight = totalWeight - getWeight(player)

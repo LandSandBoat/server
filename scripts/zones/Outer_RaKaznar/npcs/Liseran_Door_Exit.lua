@@ -4,6 +4,7 @@
 -- Zones out to Kamihr Drifts (zone 267)
 -- !pos -34.549 -181.334 -20.031 274
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

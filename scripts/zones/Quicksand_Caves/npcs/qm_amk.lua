@@ -4,7 +4,7 @@
 -- Mission: AMK9 - Rescue! A Moogle's Labor of Love
 -- This script is shared across 20 qm npcs to handle logic for AMK mission 9
 -----------------------------------
-
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

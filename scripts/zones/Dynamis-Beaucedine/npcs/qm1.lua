@@ -3,6 +3,7 @@
 --  NPC: ??? (qm1)
 -- Note: Spawns Taquede
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

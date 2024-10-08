@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.TABULA_RASA
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -14,6 +14,7 @@
 -- _3x6  winch2 (lever's gear)
 -- ALL THAT FOR ONE PLATFORM.
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onSpawn = function(npc)

@@ -2,7 +2,7 @@
 -- Area: Inner Horutoto Ruins
 --  Mob: Magicked Bones
 -----------------------------------
-
+---@type TMobEntity
 local entity = {}
 
 entity.onMobRoam = function(mob)

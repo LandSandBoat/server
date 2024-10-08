@@ -3,6 +3,7 @@
 -- Jug of Miracle Milk
 -- Enchantment: 60Min, Costume - Chigoe (red)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

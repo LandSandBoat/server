@@ -21,6 +21,14 @@ local validatorNpcEvents =
 -- Raw Rewards from AMAN Validator
 -- NOTE: These tables are not configurable, and the client will not change
 -- based on the data provided below.
+---@class itemRewardEntry
+---@field itemId xi.item
+---@field qty integer
+
+---@class keyItemRewardEntry
+---@field keyItemId xi.keyItem
+
+---@type itemRewardEntry[]|keyItemRewardEntry[]
 local validatorRewards =
 {
     [  1] = { itemId    = xi.item.COPPER_AMAN_VOUCHER,            qty =  7 },
@@ -703,7 +711,7 @@ local voucherData =
         [13] = { xi.item.VISHAP_FINGER_GAUNTLETS_P2 },
         [14] = { xi.item.CONVOKERS_BRACERS_P2       },
         [15] = { xi.item.ASSIMILATORS_BAZUBANDS_P2  },
-        [16] = { xi.item.LAKSAMANAS_GANTS_P2        },
+        [16] = { xi.item.LASKAMANAS_GANTS_P2        },
         [17] = { xi.item.FOIRE_DASTANAS_P2          },
         [18] =
         {
@@ -746,9 +754,9 @@ local voucherData =
             [1] = { xi.item.MAXIXI_TIGHTS_M_P2 },
         },
 
-        [19] = { xi.item.ACADEMICS_PANTS_P2  },
-        [20] = { xi.item.GEOMANCY_PANTS_P2   },
-        [21] = { xi.item.RUNEIST_TROUSERS_P2 },
+        [19] = { xi.item.ACADEMICS_PANTS_P2   },
+        [20] = { xi.item.GEOMANCY_PANTS_P2    },
+        [21] = { xi.item.RUNIESTS_TROUSERS_P2 },
     },
 
     [10] = -- Deed Voucher +2: Feet
@@ -1211,7 +1219,7 @@ local voucherData =
         [13] = { xi.item.PTEROSLAVER_BRAIS_P2    },
         [14] = { xi.item.GLYPHIC_SPATS_P2        },
         [15] = { xi.item.LUHLAZA_SHALWAR_P2      },
-        [16] = { xi.item.LANUN_CULOTTES_P2       },
+        [16] = { xi.item.LANUN_TREWS_P2          },
         [17] = { xi.item.PITRE_CHURIDARS_P2      },
         [18] = { xi.item.HOROS_TIGHTS_P2         },
         [19] = { xi.item.PEDAGOGY_PANTS_P2       },
@@ -1310,7 +1318,6 @@ xi.deeds.validatorOnEventUpdate = function(player, csid, option, npc)
     -- be obtained.
     local updateAction = bit.rshift(option, 16)
     local updateOption = bit.band(option, 0xFFFF)
-    print(option)
 
     if
         (updateAction == 1 or updateAction == 3) and
@@ -1363,7 +1370,9 @@ xi.deeds.validatorOnEventUpdate = function(player, csid, option, npc)
             player:delKeyItem(voucherKeyItems[keyItemIndex + 1])
 
             for _, itemId in ipairs(rewardTable) do
-                npcUtil.giveItem(player, itemId)
+                if type(itemId) ~= 'boolean' then
+                    npcUtil.giveItem(player, itemId)
+                end
             end
         else
             local ID = zones[player:getZoneID()]

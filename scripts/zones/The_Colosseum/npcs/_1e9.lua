@@ -3,6 +3,7 @@
 --  NPC: _1e9 (Gate: The Pit)
 -- !pos -604 -1.949 40 71
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

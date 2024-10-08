@@ -3,6 +3,7 @@
 -- 5379
 -- Removes AGI Down effect
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -2,6 +2,7 @@
 -- Area: Inner Horutoto Ruins
 --   NM: Nocuous Weapon
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

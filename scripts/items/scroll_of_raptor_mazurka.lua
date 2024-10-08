@@ -3,6 +3,7 @@
 -- Scroll of Raptor Mazurka
 -- Teaches the song Raptor Mazurka
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

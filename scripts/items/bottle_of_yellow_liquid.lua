@@ -2,6 +2,7 @@
 --  ID: 5264
 --  Item: Yellow Liquid
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

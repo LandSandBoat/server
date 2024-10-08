@@ -3,6 +3,7 @@
 -- Scroll of Ice Carol
 -- Teaches the song Ice Carol
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

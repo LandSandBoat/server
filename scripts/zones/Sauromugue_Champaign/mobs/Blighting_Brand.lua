@@ -2,6 +2,7 @@
 -- Area: Sauromugue Champaign
 --   NM: Blighting Brand
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -44,18 +44,15 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    local missionStatus = mission:getVar(player, 'Status')
+            onZoneIn = function(player, prevZone)
+                local missionStatus = mission:getVar(player, 'Status')
 
-                    if missionStatus == 1 then
-                        return 154
-                    elseif missionStatus == 2 then
-                        return 155
-                    end
-                end,
-            },
+                if missionStatus == 1 then
+                    return 154
+                elseif missionStatus == 2 then
+                    return 155
+                end
+            end,
 
             onEventUpdate =
             {

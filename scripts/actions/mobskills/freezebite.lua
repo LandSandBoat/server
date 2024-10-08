@@ -10,6 +10,7 @@
 -- 100%TP    200%TP    300%TP
 -- 1.00      1.50      3.00
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

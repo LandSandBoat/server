@@ -3,6 +3,7 @@
 -- Scroll of Barblizzard
 -- Teaches the white magic Barblizzard
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

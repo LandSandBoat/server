@@ -8,6 +8,7 @@
 -- Special Attacks: Hits harder at night than during the day.
 -- Earring may or may not drop only if the ToD was at night.
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

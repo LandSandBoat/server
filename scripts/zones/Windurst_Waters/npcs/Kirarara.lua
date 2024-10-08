@@ -3,6 +3,7 @@
 --  NPC: Kirarara
 -- !pos 132 -7 172 238
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

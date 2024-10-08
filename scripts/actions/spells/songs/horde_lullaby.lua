@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Horde Lullaby
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
@@ -8,6 +9,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:hasImmunity(xi.immunity.LIGHT_SLEEP) then
+        spell:setMsg(xi.msg.basic.MAGIC_COMPLETE_RESIST)
+        return
+    end
+
     local duration = 30
     -- local pCHR = caster:getStat(xi.mod.CHR)
     -- local mCHR = target:getStat(xi.mod.CHR)

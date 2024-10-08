@@ -3,6 +3,7 @@
 --  NPC: Rohn Ehlbalna
 -- !pos -43.473 -4.5 46.496 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

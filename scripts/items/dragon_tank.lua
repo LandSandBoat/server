@@ -3,6 +3,7 @@
 -- Dragon Tank
 -- Dispense: Flask of Dragon Fruit au Lait
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

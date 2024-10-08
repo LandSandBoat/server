@@ -2,6 +2,7 @@
 -- func: addallweaponskills
 -- desc: Adds all learned weaponskills to the given target. If no target then to the current player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

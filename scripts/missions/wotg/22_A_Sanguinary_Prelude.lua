@@ -22,12 +22,9 @@ mission.sections =
 
         [xi.zone.BEAUCEDINE_GLACIER_S] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 17
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 17
+            end,
 
             onEventFinish =
             {

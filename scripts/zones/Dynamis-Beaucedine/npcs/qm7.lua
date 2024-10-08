@@ -3,6 +3,7 @@
 --  NPC: ??? (qm7)
 -- Note: Spawns Mildaunegeux
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

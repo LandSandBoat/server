@@ -2,6 +2,7 @@
 -- Feeble Bleat
 -- Emits a unnerving bleat that paralyzes down players in range.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

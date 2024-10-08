@@ -2,6 +2,7 @@
 -- ID: 5881
 -- Shisai Kaboku
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

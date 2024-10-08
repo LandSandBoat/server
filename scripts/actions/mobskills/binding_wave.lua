@@ -2,6 +2,7 @@
 -- Binding Wave
 -- Additional effect: bind
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

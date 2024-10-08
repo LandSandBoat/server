@@ -6,6 +6,7 @@
 local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 mixins = { require('scripts/mixins/families/eruca') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local erucaPHTable =

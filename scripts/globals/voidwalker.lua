@@ -71,7 +71,7 @@ local function getMobsFromAbyssites(zoneId, abyssites)
             for _, mobId in ipairs(zones[zoneId].mob.VOIDWALKER[keyitem]) do
                 local mob = GetMobByID(mobId)
 
-                if mob:isAlive() and mob:getLocalVar('[VoidWalker]PopedBy') == 0 then
+                if mob and mob:isAlive() and mob:getLocalVar('[VoidWalker]PopedBy') == 0 then
                     table.insert(results, { mobId = mobId, keyItem = keyitem })
                 end
             end
@@ -338,9 +338,12 @@ local function DespawnPet(mob)
 
         for i, petId in ipairs(petIds) do
             local pet = GetMobByID(petId)
-            DespawnMob(petId)
-            pet:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
-            pet:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos())
+
+            if pet then
+                DespawnMob(petId)
+                pet:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
+                pet:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos())
+            end
         end
     end
 end
@@ -502,7 +505,10 @@ xi.voidwalker.onMobDeath = function(mob, player, optParams, keyItem)
             local outOfParty  = true
 
             for _, member in pairs(alliance) do
-                if member:getID() == playerpoped:getID() then
+                if
+                    playerpoped and
+                    member:getID() == playerpoped:getID()
+                then
                     outOfParty = false
                     break
                 end
@@ -510,6 +516,7 @@ xi.voidwalker.onMobDeath = function(mob, player, optParams, keyItem)
 
             if
                 outOfParty and
+                playerpoped and
                 not playerpoped:hasKeyItem(keyItem)
             then
                 checkUpgrade(playerpoped, mob, keyItem)
@@ -552,6 +559,10 @@ xi.voidwalker.onHealing = function(player)
         player:messageSpecial(zoneTextTable.VOIDWALKER_NO_MOB, abyssites[1])
     elseif mobNearest.distance <= 4 then
         local mob = GetMobByID(mobNearest.mobId)
+        if not mob then
+            return
+        end
+
         mob:setLocalVar('[VoidWalker]PopedBy', player:getID())
         mob:setLocalVar('[VoidWalker]PopedWith', mobNearest.keyItem)
         mob:setLocalVar('[VoidWalker]PopedAt', os.time())

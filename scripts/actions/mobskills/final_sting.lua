@@ -3,6 +3,7 @@
 --  Description: Deals damage proportional to HP. Reduces HP to 1 after use. Damage varies with TP.
 --  Type: Physical (Slashing)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

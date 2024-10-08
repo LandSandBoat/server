@@ -2,6 +2,7 @@
 -- func: updateconquest
 -- desc: Updates all conquest guard. (Need modify in db first.)
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

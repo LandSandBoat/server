@@ -2,8 +2,6 @@
 -- Area: Cloister of Storms
 -- BCNM: Trial by Lightning
 -----------------------------------
-local cloisterOfStormsID = zones[xi.zone.CLOISTER_OF_STORMS]
------------------------------------
 
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.CLOISTER_OF_STORMS,
@@ -28,13 +26,7 @@ end
 content.groups =
 {
     {
-        mobIds =
-        {
-            { cloisterOfStormsID.mob.RAMUH_PRIME     },
-            { cloisterOfStormsID.mob.RAMUH_PRIME + 1 },
-            { cloisterOfStormsID.mob.RAMUH_PRIME + 2 },
-        },
-
+        mobs = { 'Ramuh_Prime_TBL' },
         allDeath = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
         end,

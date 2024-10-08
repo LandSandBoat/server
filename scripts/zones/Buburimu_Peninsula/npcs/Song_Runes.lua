@@ -3,6 +3,7 @@
 --  NPC: Song Runes
 -- !pos -244 16 -280 118
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

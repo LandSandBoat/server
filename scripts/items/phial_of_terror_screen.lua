@@ -3,6 +3,7 @@
 -- Item: Terror Screen
 -- Effect: 2 Mins of immunity to "Terror" effects.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

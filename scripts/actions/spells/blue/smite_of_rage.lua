@@ -12,6 +12,7 @@
 -- Skillchain Element(s): Detonation
 -- Combos: Undead Killer
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

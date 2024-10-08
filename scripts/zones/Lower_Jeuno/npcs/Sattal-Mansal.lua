@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: Mysteries of Beadeaux I & II
 -- !pos 40 3 -53 245
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

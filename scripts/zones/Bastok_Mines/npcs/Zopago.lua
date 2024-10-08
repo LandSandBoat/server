@@ -4,6 +4,7 @@
 -- Type: VCS Chocobo Trainer
 -- !pos 51.706 -0.126 -109.065 234
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

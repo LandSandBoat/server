@@ -2,6 +2,7 @@
 -- Area: Fort Karugo-Narugo [S]
 --   NM: Kirtimukha
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

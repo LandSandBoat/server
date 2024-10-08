@@ -3,6 +3,7 @@
 --  NPC: Anxaberoute
 -- !pos 108.892 0.000 -49.038 230
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

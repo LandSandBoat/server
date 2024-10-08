@@ -4,6 +4,7 @@
 -- Item Effect: Regain 20
 -- Duration: 2 Minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

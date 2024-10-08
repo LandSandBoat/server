@@ -1,20 +1,20 @@
 ﻿/*
 ===========================================================================
 
-Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2010-2015 Darkstar Dev Teams
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
@@ -121,13 +121,15 @@ namespace charutils
     void   EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID);
     void   UnequipItem(CCharEntity* PChar, uint8 equipSlotID,
                        bool update = true); // call with update == false to prevent calls to UpdateHealth() - used for correct handling of stats on armor swaps
+    bool   hasSlotEquipped(CCharEntity* PChar, uint8 equipSlotID);
     void   RemoveSub(CCharEntity* PChar);
     bool   EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID);
     void   CheckUnarmedWeapon(CCharEntity* PChar);
     void   SetStyleLock(CCharEntity* PChar, bool isStyleLocked);
     void   UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemEquipment* PItem);
     void   UpdateArmorStyle(CCharEntity* PChar, uint8 equipSlotID);
-    void   UpdateRemovedSlots(CCharEntity* PChar);
+    void   UpdateRemovedSlotsLookForLockStyle(CCharEntity* PChar);
+    void   UpdateRemovedSlotsLook(CCharEntity* PChar);
     void   AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity);
     void   EmptyRecycleBin(CCharEntity* PChar);
 
@@ -169,6 +171,7 @@ namespace charutils
     int32 addWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to add weapon skill
     int32 hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to check for weapon skill
     int32 delWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to delete weapon skill
+    bool  canUseWeaponSkill(CCharEntity* PChar, uint16 wsid);
 
     void SaveCharJob(CCharEntity* PChar, JOBTYPE job); // save the level for the selected character's jobs
     void SaveCharExp(CCharEntity* PChar, JOBTYPE job); // save experience for the selected character’s chosen job
@@ -237,7 +240,7 @@ namespace charutils
     void  SendToZone(CCharEntity* PChar, uint8 type, uint64 ipp);
     void  ForceLogout(CCharEntity* PChar);
     void  ForceRezone(CCharEntity* PChar);
-    void  HomePoint(CCharEntity* PChar);
+    void  HomePoint(CCharEntity* PChar, bool resetHPMP);
     bool  AddWeaponSkillPoints(CCharEntity*, SLOTTYPE, int);
 
     int32 GetCharVar(CCharEntity* PChar, std::string const& var);
@@ -276,6 +279,10 @@ namespace charutils
     bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity);
 
     uint32 getCharIdFromName(std::string const& name);
+
+    void forceSynthCritFail(std::string sourceFunction, CCharEntity* PChar);
+
+    void removeCharFromZone(CCharEntity* PChar);
 }; // namespace charutils
 
 #endif // _CHARUTILS_H

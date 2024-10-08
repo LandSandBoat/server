@@ -2,6 +2,7 @@
 -- Spell: Meteor
 -- Deals non-elemental damage to an enemy.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
@@ -30,7 +31,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     --add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement())
+    dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement())
     --add in final adjustments
     dmg = finalMagicAdjustments(caster, target, spell, dmg)
     return dmg

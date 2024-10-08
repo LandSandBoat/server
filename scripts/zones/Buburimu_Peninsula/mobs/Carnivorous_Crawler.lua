@@ -2,6 +2,7 @@
 -- Area: Buburimu Peninsula
 --  Mob: Carnivorous Crawler
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

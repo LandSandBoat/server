@@ -3,6 +3,7 @@
 -- Scroll of Addle
 -- Teaches the magic Addle
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

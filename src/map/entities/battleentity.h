@@ -458,7 +458,7 @@ DECLARE_FORMAT_AS_UNDERLYING(SKILLCHAIN_ELEMENT);
 enum IMMUNITY : uint32
 {
     IMMUNITY_NONE        = 0x00000000,
-    IMMUNITY_SLEEP       = 0x00000001,
+    IMMUNITY_ADDLE       = 0x00000001,
     IMMUNITY_GRAVITY     = 0x00000002,
     IMMUNITY_BIND        = 0x00000004,
     IMMUNITY_STUN        = 0x00000008,
@@ -567,6 +567,7 @@ public:
 
     bool isDead();
     bool isAlive();
+    bool isInAdoulin();
     bool isInAssault();
     bool isInDynamis();
     bool isInMogHouse();

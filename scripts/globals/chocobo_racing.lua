@@ -137,7 +137,9 @@ local debug = function(player, ...)
     end
 end
 
-local setTimer = nil
+local setTimer = function(player, npcId)
+end
+
 setTimer = function(player, npcId)
     player:timer(400, function(playerArg)
         playerArg:sendEmptyEntityUpdateToPlayer(GetNPCByID(npcId))

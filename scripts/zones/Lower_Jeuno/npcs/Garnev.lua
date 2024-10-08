@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: Deal with Tenshodo
 -- !pos 30 4 -36 245
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

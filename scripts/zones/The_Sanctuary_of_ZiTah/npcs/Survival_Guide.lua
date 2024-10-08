@@ -2,6 +2,7 @@
 -- Area: The Sanctuary of Zi'Tah
 --  NPC: Survival Guide
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, targetNpc)

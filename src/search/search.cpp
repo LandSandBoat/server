@@ -1,20 +1,20 @@
 ﻿/*
 ===========================================================================
 
-Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2010-2015 Darkstar Dev Teams
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
@@ -597,14 +597,26 @@ std::string searchTypeToString(uint8 type)
 
 void TCPComm(SOCKET socket)
 {
+    char               clientIP[INET_ADDRSTRLEN];
+    struct sockaddr_in addr;
+    socklen_t          addr_len = sizeof(addr);
+
+    if (getpeername(socket, (struct sockaddr*)&addr, &addr_len) == -1)
+    {
+        ShowError("getpeername failed with error: %d", errno);
+        return;
+    }
+
+    inet_ntop(AF_INET, &(addr.sin_addr), clientIP, INET_ADDRSTRLEN);
+
     CTCPRequestPacket PTCPRequest(&socket);
     if (!PTCPRequest.receiveFromSocket())
     {
         return;
     }
 
-    ShowInfo("Search Request: %s (%u), size: %u",
-             searchTypeToString(PTCPRequest.getPacketType()), PTCPRequest.getPacketType(), PTCPRequest.getSize());
+    ShowInfo("Search Request: %s (%u), size: %u, ip: %s",
+             searchTypeToString(PTCPRequest.getPacketType()), PTCPRequest.getPacketType(), PTCPRequest.getSize(), clientIP);
 
     switch (PTCPRequest.getPacketType())
     {

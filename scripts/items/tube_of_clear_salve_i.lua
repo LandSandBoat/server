@@ -3,6 +3,7 @@
 -- Item: tube_of_clear_salve_i
 -- Item Effect: Instantly removes 1-2 negative status effects at random from pet
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

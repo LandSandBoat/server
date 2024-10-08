@@ -2,6 +2,7 @@
 -- xi.effect.HASTE_SAMBA_HASTE
 -- JA Haste 5-10%
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

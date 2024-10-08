@@ -2,6 +2,7 @@
 -- Area: Northern San d'Oria
 --  NPC: Commojourt
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,6 +3,7 @@
 -- Scroll of Boost-VIT
 -- Teaches the white magic Boost-VIT
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -4,10 +4,15 @@
 -----------------------------------
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobRoamAction = function(mob)
     local instance = mob:getInstance()
+    if not instance then
+        return
+    end
+
     local stage = instance:getStage()
     local prog = instance:getProgress()
 
@@ -42,7 +47,10 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar('runTime', os.time())
         entity.onMobRoamAction(mob)
     elseif mob:isFollowingPath() then
-        if os.time() - popTime > 7 then
+        if
+            mobPet and
+            os.time() - popTime > 7
+        then
             mobPet:updateEnmity(target)
             mobPet:setPos(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:setLocalVar('popTime', os.time())

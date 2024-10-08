@@ -4,6 +4,7 @@
 -- Involved in Quest: Forge Your Destiny, The Sacred Katana
 -- !pos 15 0 23 252
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

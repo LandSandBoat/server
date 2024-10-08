@@ -4,6 +4,7 @@
 -- !pos 418 25 27 90
 -- Teleports Players to Pashhow_Marshlands
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

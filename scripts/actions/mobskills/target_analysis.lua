@@ -3,6 +3,7 @@
 -- Description: AoE Absorb All with randomness
 -- Type: Magical
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 local attributesDown =

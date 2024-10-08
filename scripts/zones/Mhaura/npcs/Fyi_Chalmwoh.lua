@@ -3,6 +3,7 @@
 --  NPC: Fyi_Chalmwoh
 -- !pos -39.273 -16.000 70.126 249
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

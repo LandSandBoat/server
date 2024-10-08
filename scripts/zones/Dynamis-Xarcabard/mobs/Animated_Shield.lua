@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = zones[xi.zone.DYNAMIS_XARCABARD]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)

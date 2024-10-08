@@ -6,6 +6,7 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -13,15 +14,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local status = mob:getStatusEffect(xi.effect.DEFENSE_BOOST)
-    local power  = 100
+    local power = 20
 
-    if status ~= nil then
-        -- This is as accurate as we get until effects applied by mob moves can use subpower..
-        power = status:getPower() * 2
-    end
-
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, power, 0, 60))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, power, 0, 120))
 
     return xi.effect.DEFENSE_BOOST
 end

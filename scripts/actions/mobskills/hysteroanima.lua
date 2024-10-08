@@ -3,6 +3,7 @@
 -- Used by Trust: Prishe II
 -- Grants a temporary magic shield
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

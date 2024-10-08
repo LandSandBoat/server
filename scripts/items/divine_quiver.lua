@@ -3,6 +3,7 @@
 -- Divine Quiver
 -- When used, you will obtain one stack of Divine Arrows
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

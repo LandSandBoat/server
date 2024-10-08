@@ -3,6 +3,7 @@
 --  NPC: Miiri-Wohri
 -- !pos 106.766 -6 -30.492 241
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

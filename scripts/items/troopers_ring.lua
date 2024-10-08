@@ -3,6 +3,7 @@
 -- Item: Trooper's Ring
 -- Item Effect: Restores 100-115 HP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

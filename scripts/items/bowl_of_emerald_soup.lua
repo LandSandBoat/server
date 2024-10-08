@@ -8,6 +8,7 @@
 -- Health Regen While Healing 3
 -- Ranged ACC 6
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -4,6 +4,7 @@
 -----------------------------------
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -30,6 +31,11 @@ commandObj.onTrigger = function(player, target, value, logId, statusIndex)
     local logInfo = logIdHelpers.getMissionLogInfo(logId)
     if logInfo == nil then
         logInfo = logIdHelpers.getMissionLogInfo(player:getNation())
+    end
+
+    if not logInfo then
+        error(player, 'Log Info not found!')
+        return
     end
 
     logName = logInfo.full_name

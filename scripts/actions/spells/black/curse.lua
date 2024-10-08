@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Curse
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

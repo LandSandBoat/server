@@ -3,6 +3,7 @@
 -- Item: Juji Shr. Pouch
 -- When used, you will obtain one stack of Juji Shurikens
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

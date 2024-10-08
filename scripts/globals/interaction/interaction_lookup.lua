@@ -87,6 +87,25 @@ local function addHandlers(secondLevel, lookupSecondLevel, checkFunc, container)
 
     -- Loop through the given second level table, and add them to lookup as needed
     for secondLevelKey, thirdLevel in pairs(secondLevel) do
+        -- The following keys are restricted in CI to function definitions, but to preserve
+        -- backwards-compatibility and ease of use in this system, wrap them in tables if
+        -- encountered.
+        local wrappedDefinitions =
+        {
+            'onZoneIn',
+            'onZoneOut',
+            'afterZoneIn',
+        }
+
+        for _, keyName in ipairs(wrappedDefinitions) do
+            if
+                secondLevelKey == keyName and
+                type(thirdLevel) == 'function'
+            then
+                thirdLevel = { thirdLevel }
+            end
+        end
+
         lookupSecondLevel[secondLevelKey] = lookupSecondLevel[secondLevelKey] or {}
 
         -- If only given a function or an action definition as third level, that will default to be an onTrigger handler
@@ -196,6 +215,7 @@ function InteractionLookup:addContainer(container, validZoneTable)
         for zoneId, secondLevel in pairs(section) do
             if zoneId ~= 'check' and (validZoneTable == nil or validZoneTable[zoneId]) then
                 self.data[zoneId] = self.data[zoneId] or {}
+
                 addHandlers(secondLevel, self.data[zoneId], checkFunc, container)
             end
         end

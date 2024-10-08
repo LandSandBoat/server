@@ -3,6 +3,7 @@
 -- Scroll of Stonera II
 -- Teaches the black magic Stonera II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

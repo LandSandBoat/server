@@ -3,6 +3,7 @@
 -- Scroll of Temper
 -- Teaches the white magic Temper
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

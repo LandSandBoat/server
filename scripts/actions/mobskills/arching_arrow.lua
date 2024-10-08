@@ -5,6 +5,7 @@
 -- Modifiers: STR:20%; AGI:50%
 -- Darkness/Gravitation skillchain properties, AoE damage
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

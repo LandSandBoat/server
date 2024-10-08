@@ -2,6 +2,7 @@
 -- Area: Garlaige Citadel
 --  Mob: Warden Beetle
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,6 +2,7 @@
 -- Eclipse Bite
 -- Delivers a threefold attack.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

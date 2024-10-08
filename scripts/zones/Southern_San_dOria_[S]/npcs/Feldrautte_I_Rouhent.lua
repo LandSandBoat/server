@@ -4,6 +4,7 @@
 -- !pos-264 -3.6 80 80
 -- Appears during Campaign Battles as the leader of the Norvallen Knights
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

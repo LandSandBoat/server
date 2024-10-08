@@ -3,6 +3,7 @@
 -- Not enough information to accurately recreate!
 -- Also, not implemented, increased tendency to overload prior to 2015!
 -----------------------------------
+---@type TAttachment
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet, attachment)

@@ -13,6 +13,7 @@
 -- Lizard Killer +5
 -- hHP +5
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

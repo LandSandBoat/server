@@ -1911,6 +1911,8 @@ INSERT INTO `item_usable` VALUES (6377,'imperial_chair_set',1,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6378,'decorative_chair_set',1,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6379,'ornate_stool_set',1,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6380,'refined_chair_set',1,1,0,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6391,'silt_pouch',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6392,'bead_pouch',1,1,55,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6394,'pork_cutlet',1,1,24,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6395,'pork_cutlet_+1',1,1,24,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6396,'cutlet_sandwich',1,1,24,0,0,0,0,0);

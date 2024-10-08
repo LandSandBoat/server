@@ -2,6 +2,7 @@
 -- func: hp <amount> <player>
 -- desc: Sets the GM or target players health.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

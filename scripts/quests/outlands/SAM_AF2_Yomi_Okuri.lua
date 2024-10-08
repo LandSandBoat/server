@@ -216,6 +216,8 @@ quest.sections =
                         (vanadielHour >= 18 or vanadielHour < 5)
                     then
                         if
+                            domanMob and
+                            onryoMob and
                             not domanMob:isSpawned() and
                             not onryoMob:isSpawned()
                         then

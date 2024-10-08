@@ -657,8 +657,8 @@ xi.combat.physical.calculateSwingCriticalRate = function(actor, target, actorTP,
     local buildingFlourishBonus = xi.combat.physical.criticalRateFromFlourish(actor)
     local modifierBonus         = actor:getMod(xi.mod.CRITHITRATE) / 100
     local meritBonus            = actor:getMerit(xi.merit.CRIT_HIT_RATE) / 100
-    local targetModifierBonus   = target:getMod(xi.mod.ENEMYCRITRATE) / 100
-    local meritPenalty          = target:getMerit(xi.merit.ENEMY_CRIT_RATE) / 100
+    local targetCriticalEvasion = target:getMod(xi.mod.CRITICAL_HIT_EVASION) / 100
+    local targetMeritPenalty    = target:getMerit(xi.merit.ENEMY_CRIT_RATE) / 100
     local tpFactor              = 0
 
     -- For weaponskills.
@@ -667,7 +667,7 @@ xi.combat.physical.calculateSwingCriticalRate = function(actor, target, actorTP,
     end
 
     -- Add all different bonuses and clamp.
-    finalCriticalRate = baseCriticalRate + statBonus + inninBonus + fencerBonus + buildingFlourishBonus + modifierBonus + meritBonus + targetModifierBonus - meritPenalty + tpFactor
+    finalCriticalRate = baseCriticalRate + statBonus + inninBonus + fencerBonus + buildingFlourishBonus + modifierBonus + meritBonus - targetCriticalEvasion - targetMeritPenalty + tpFactor
 
     return utils.clamp(finalCriticalRate, 0.05, 1) -- TODO: Need confirmation of no upper cap.
 end
@@ -774,7 +774,7 @@ xi.combat.physical.canGuard = function(defender, attacker)
             defender:isPet() or
             defender:isTrust()
         then
-            canGuard = defender:getMainJob() == xi.job.MNK or defender:getMainJob() == xi.job.PUP
+            canGuard = (defender:getMainJob() == xi.job.MNK or defender:getMainJob() == xi.job.PUP) and defender:getMobMod(xi.mobMod.CANNOT_GUARD) == 0
         end
     end
 
@@ -789,10 +789,7 @@ xi.combat.physical.calculateGuardRate = function(defender, attacker)
 
     -- non-players do not have guard skill set on creation
     -- so use max skill at the level for the job
-    if
-        defender:isMob() or
-        defender:isPet()
-    then
+    if defender:isPet() then
         guardSkill = defender:getMaxSkillLevel(defender:getMainLvl(), defender:getMainJob(), xi.skill.GUARD)
     elseif defender:isTrust() then
         -- TODO: check trust type for ilvl > 99 when implemented

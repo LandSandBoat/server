@@ -4,11 +4,13 @@
 -- Item Effect: Pet Regen
 -- Duration 3 Minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
     local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    local pet = target:getPet()
+    local pet    = target:getPet()
+
     if not pet then
         return xi.msg.basic.REQUIRES_A_PET, 0
     elseif effect ~= nil and effect:getSubType() == 18242 then
@@ -24,6 +26,10 @@ end
 
 itemObject.onEffectGain = function(target, effect)
     local pet = target:getPet()
+    if not pet then
+        return
+    end
+
     pet:addMod(xi.mod.REGEN, 3)
 end
 

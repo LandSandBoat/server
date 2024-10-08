@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -14,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.tradeHas(trade, xi.item.AHRIMAN_LENS)
     then
         player:setCharVar('QuestYourCrystalBall_prog', 1)
-        player:confirmTrade(trade)
+        player:confirmTrade()
     end
 end
 

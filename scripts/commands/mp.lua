@@ -2,6 +2,7 @@
 -- func: mp <amount> <player>
 -- desc: Sets the GM or target players mana.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

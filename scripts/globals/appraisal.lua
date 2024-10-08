@@ -369,9 +369,9 @@ xi.appraisal.appraisalItems =
         {
             items =
             {
-                { 20, xi.item.HOLLY_STAFF_HQ },
+                { 20, xi.item.HOLLY_STAFF_P1 },
                 { 40, xi.item.BRASS_ZAGHNAL  },
-                { 20, xi.item.WILLOW_WAND_HQ },
+                { 20, xi.item.WILLOW_WAND_P1 },
                 {  5, xi.item.PUK_LANCE      },
                 { 15, xi.item.SPARK_SPEAR    },
             },
@@ -382,8 +382,8 @@ xi.appraisal.appraisalItems =
             items =
             {
                 { 20, xi.item.SPARK_SPEAR       },
-                { 20, xi.item.WILLOW_WAND_HQ    },
-                { 15, xi.item.HOLLY_STAFF_HQ    },
+                { 20, xi.item.WILLOW_WAND_P1    },
+                { 15, xi.item.HOLLY_STAFF_P1    },
                 { 35, xi.item.BRASS_ZAGHNAL     },
                 { 10, xi.item.VOLUNTEERS_SCYTHE },
             },
@@ -485,7 +485,7 @@ xi.appraisal.appraisalItems =
             items =
             {
                 { 60, xi.item.HATCHET        },
-                { 10, xi.item.TOMAHAWK_HQ    },
+                { 10, xi.item.TOMAHAWK_P1    },
                 { 15, xi.item.WAMOURA_AXE    },
                 { 15, xi.item.PROMINENCE_AXE },
             },
@@ -698,7 +698,7 @@ xi.appraisal.appraisalItems =
             {
                 {  5, xi.item.STORM_CRACKOWS     },
                 { 35, xi.item.ASH_CLOGS          },
-                { 25, xi.item.BRONZE_LEGGINGS_HQ },
+                { 25, xi.item.BRONZE_LEGGINGS_P1 },
                 { 35, xi.item.LEATHER_HIGHBOOTS  },
             },
         },
@@ -757,7 +757,7 @@ xi.appraisal.appraisalItems =
             {
                 {  5, xi.item.STORM_TURBAN    },
                 { 20, xi.item.COTTON_HEADGEAR },
-                { 15, xi.item.BRONZE_CAP_HQ   },
+                { 15, xi.item.BRONZE_CAP_P1   },
                 { 30, xi.item.LEATHER_BANDANA },
                 { 30, xi.item.CIRCLET         },
             },

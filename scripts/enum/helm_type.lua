@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum xi.helmType
 xi.helmType =
 {
     HARVESTING = 1,

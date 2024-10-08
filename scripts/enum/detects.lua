@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.detects
 xi.detects =
 {
     NONE              = 0x000,

@@ -2,6 +2,7 @@
 -- func: delcurrency <currency type> <amount> <target player>
 -- desc: Removes the specified currency from the player
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

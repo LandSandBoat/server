@@ -3,6 +3,7 @@
 -- Scroll of Auspice
 -- Teaches the white magic Auspice
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

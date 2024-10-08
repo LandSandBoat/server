@@ -4,6 +4,7 @@
 -- Involved In Quest: Enveloped in Darkness
 -- !zone 197
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

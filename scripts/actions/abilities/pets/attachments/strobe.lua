@@ -2,6 +2,7 @@
 -- Attachment: Strobe
 -- http://forum.square-enix.com/ffxi/threads/49065?p=565264#post565264
 -----------------------------------
+---@type TAttachment
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet, attachment)

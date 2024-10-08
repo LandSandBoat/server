@@ -4,6 +4,7 @@
 -- Type: Outpost Vendor
 -- !pos -586 39 61 106
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local vendorRegion  = xi.region.GUSTABERG

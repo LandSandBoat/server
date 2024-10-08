@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ALL_MISS
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

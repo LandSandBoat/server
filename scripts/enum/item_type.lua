@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.itemType
 xi.itemType =
 {
     BASIC       = 0x00,

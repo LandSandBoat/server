@@ -1,6 +1,7 @@
 -----------------------------------
 -- Economizer
 -----------------------------------
+---@type TAbilityAutomaton
 local abilityObject = {}
 
 abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)

@@ -2,6 +2,7 @@
 -- func: setbag
 -- desc: Sets the players bag size
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 local bagparam =

@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.NEGATE_POISON
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

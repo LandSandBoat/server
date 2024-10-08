@@ -57,7 +57,10 @@ local function pickSetPoint(instance)
     for _, npcID in pairs(ID.npc.RUNE_OF_TRANSFER) do
         local runeOfTransfer = GetNPCByID(npcID, instance)
 
-        if runeOfTransfer:getStatus() == xi.status.DISAPPEAR then
+        if
+            runeOfTransfer and
+            runeOfTransfer:getStatus() == xi.status.DISAPPEAR
+        then
             runeOfTransfer:setAnimationSub(0)
             runeOfTransfer:setPos(posX, posY, posZ)
             runeOfTransfer:setStatus(xi.status.NORMAL)

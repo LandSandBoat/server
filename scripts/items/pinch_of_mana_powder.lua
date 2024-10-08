@@ -3,6 +3,7 @@
 -- Item: bottle_of_mana_powder
 -- Item Effect: Restores 25% of Maximum MP to Party members within 10'
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -36,35 +36,32 @@ mission.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        xi.rhapsodies.charactersAvailable(player) and
-                        mission:getVar(player, 'Retrieve') == 0
-                    then
-                        -- Note: Working with the assumption that there are four variable parameters for this mission,
-                        -- the following observations have been made.  The first parameter *does* have an impact on dialogue
-                        -- however, it was not observed in caps (A 1-value makes Prishe sound at best more vulnerable).  The
-                        -- second parameter seems to align with having completed Darkness Named, which like previous events,
-                        -- moves from a 0-value to 2.
+            onZoneIn = function(player, prevZone)
+                if
+                    xi.rhapsodies.charactersAvailable(player) and
+                    mission:getVar(player, 'Retrieve') == 0
+                then
+                    -- Note: Working with the assumption that there are four variable parameters for this mission,
+                    -- the following observations have been made.  The first parameter *does* have an impact on dialogue
+                    -- however, it was not observed in caps (A 1-value makes Prishe sound at best more vulnerable).  The
+                    -- second parameter seems to align with having completed Darkness Named, which like previous events,
+                    -- moves from a 0-value to 2.
 
-                        -- Unknown ----------------------------.
-                        -- Unknown -------------------------.  |
-                        -- CoP Progress  ----------------.  |  |
-                        -- Unknown -------------------.  |  |  |
-                        --                            |  |  |  |
-                        -- Minimum Progress         : 0, 0, 1, 1
-                        -- Darkness Named Completed : 0, 2, 1, 1
+                    -- Unknown ----------------------------.
+                    -- Unknown -------------------------.  |
+                    -- CoP Progress  ----------------.  |  |
+                    -- Unknown -------------------.  |  |  |
+                    --                            |  |  |  |
+                    -- Minimum Progress         : 0, 0, 1, 1
+                    -- Darkness Named Completed : 0, 2, 1, 1
 
-                        -- Inferring the second parameter to the above scheme, and leaving the other three values as static.
+                    -- Inferring the second parameter to the above scheme, and leaving the other three values as static.
 
-                        return 399
-                    elseif mission:getVar(player, 'Status') == 0 then
-                        return 402
-                    end
-                end,
-            },
+                    return 399
+                elseif mission:getVar(player, 'Status') == 0 then
+                    return 402
+                end
+            end,
 
             onEventUpdate =
             {

@@ -2,6 +2,7 @@
 -- Eald2 Warp In
 -- Begin Eald'Narche ZM16 (phase 2) teleport
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

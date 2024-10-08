@@ -16,6 +16,7 @@
 -- Ranged Accuracy 6
 -- Evasion 6
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

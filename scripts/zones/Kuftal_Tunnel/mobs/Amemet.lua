@@ -3,6 +3,7 @@
 --  NM: Amemet
 -----------------------------------
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local pathStart =

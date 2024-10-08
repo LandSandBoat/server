@@ -9,6 +9,8 @@ set(UTIL_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/blueutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/charutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/charutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/fishingcontest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/fishingcontest.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fishingutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/fishingutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/gardenutils.cpp
@@ -31,6 +33,8 @@ set(UTIL_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/puppetutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/serverutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/serverutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/synergyutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/synergyutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/synthutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/synthutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/trustutils.cpp

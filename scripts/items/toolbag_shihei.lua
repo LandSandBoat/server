@@ -3,6 +3,7 @@
 -- Toolbag Shihei
 -- When used, you will obtain one stack of Shihei
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

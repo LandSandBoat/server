@@ -2,6 +2,7 @@
 -- Blockhead
 -- Deals damage to a single target. Additional effect: Knockback
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

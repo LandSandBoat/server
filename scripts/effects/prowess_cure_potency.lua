@@ -2,6 +2,7 @@
 -- xi.effect.PROWESS
 -- Enhanced "Cure" potency
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

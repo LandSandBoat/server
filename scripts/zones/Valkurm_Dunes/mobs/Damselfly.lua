@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.VALKURM_DUNES]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local emperorPHList =

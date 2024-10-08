@@ -3,6 +3,7 @@
 -- Scroll of Shellra
 -- Teaches the white magic Shellra
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

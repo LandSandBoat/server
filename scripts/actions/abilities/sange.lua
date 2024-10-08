@@ -5,16 +5,15 @@
 -- Recast Time: 3 minutes
 -- Duration: 1 minute
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.ninja.checkSange(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    local potency = player:getMerit(xi.merit.SANGE)-1
-
-    player:addStatusEffect(xi.effect.SANGE, potency * 25, 0, 60)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    xi.job_utils.ninja.useSange(player, target, ability, action)
 end
 
 return abilityObject

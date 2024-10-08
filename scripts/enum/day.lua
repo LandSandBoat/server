@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum xi.day
 xi.day =
 {
     FIRESDAY     = 0,

@@ -5,6 +5,7 @@
 -- Recast Time: 5.00
 -- Duration: Instant
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -17,7 +18,10 @@ abilityObject.onUseAbility = function(player, target, ability)
     -- Reset the Call Wyvern Ability.
     local pet = player:getPet()
 
-    if pet:getHP() == pet:getMaxHP() then
+    if
+        pet and
+        pet:getHP() == pet:getMaxHP()
+    then
         player:resetRecast(xi.recast.ABILITY, 163) -- call_wyvern
     end
 

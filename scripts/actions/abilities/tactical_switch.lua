@@ -4,6 +4,7 @@
 -- Obtained: PUP Level 79
 -- Recast Time: 00:03:00
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

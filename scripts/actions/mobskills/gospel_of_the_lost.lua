@@ -10,6 +10,7 @@
 -- "Bask in my glory..."
 -- "Mine existence...stretches into infinity..."
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

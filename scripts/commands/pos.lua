@@ -2,6 +2,7 @@
 -- func: pos <x> <y> <z> <optional zone> <optional target>
 -- desc: Sets the players position. If none is given, prints out the position instead.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

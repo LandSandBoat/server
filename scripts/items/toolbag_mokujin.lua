@@ -3,6 +3,7 @@
 -- Toolbag Moku
 -- When used, you will obtain one stack of mokujin
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

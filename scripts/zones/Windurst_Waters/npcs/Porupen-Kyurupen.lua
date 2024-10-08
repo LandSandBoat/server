@@ -2,6 +2,7 @@
 -- Area: Windurst Waters
 --  NPC: Porupen-Kyurupen
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

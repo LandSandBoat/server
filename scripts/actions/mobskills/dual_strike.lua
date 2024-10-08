@@ -8,6 +8,7 @@
 -- Range: Melee
 -- Notes: Double attacks a single target. Additional effect: Stun
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

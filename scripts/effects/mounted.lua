@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.MOUNTED
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

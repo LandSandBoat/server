@@ -12,6 +12,7 @@
 -- Magic Bursts on: Liquefaction, Fusion, and Light
 -- Combos: Conserve MP
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

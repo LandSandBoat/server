@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local ophionPHTable =

@@ -2,6 +2,7 @@
 -- Area: West Ronfaure
 --   NM: Amanita
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)

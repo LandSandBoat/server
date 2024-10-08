@@ -3,6 +3,7 @@
 -- Item: Blink Band
 -- Item Effect: 3 shadows
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

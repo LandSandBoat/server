@@ -3,6 +3,7 @@
 --  NPC: Leonhardt
 -- Involved in Quest: Too Many Chefs
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

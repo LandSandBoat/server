@@ -3,6 +3,7 @@
 -- Red Mage Die
 -- Teaches the job ability Warlock's Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

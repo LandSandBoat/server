@@ -3,6 +3,7 @@
 -- Hailstorm Schema
 -- Teaches the white magic Hailstorm
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

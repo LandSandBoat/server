@@ -4,6 +4,7 @@
 -- Type: Event Scene Replayer
 -- !pos -54.104 10.999 -34.144 243
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

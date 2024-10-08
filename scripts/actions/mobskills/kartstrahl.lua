@@ -3,6 +3,7 @@
 -- Description: Single target damage with sleep.
 -- Type: Physical
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

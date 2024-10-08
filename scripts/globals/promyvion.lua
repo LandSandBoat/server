@@ -145,9 +145,10 @@ local function spawnStray(mob, strayId)
     -- 2: Pop Stray.
     mob:timer(875, function(mobArg)
         local stray = GetMobByID(mobArg:getLocalVar('[Stray]Id'))
-        mobArg:setLocalVar('[Stray]Id', 0)
-
-        stray:spawn()
+        if stray then
+            mobArg:setLocalVar('[Stray]Id', 0)
+            stray:spawn()
+        end
     end)
 
     -- 3: Lower Receptacle.
@@ -171,7 +172,9 @@ xi.promyvion.setupInitialPortals = function(zone)
         local groupTable = portalGroupTable[zoneId][portalGroup]  -- Fetch the whole group entry.
         local newPortal  = GetNPCByID(groupTable[math.random(1, #groupTable)]) -- Fetch an NPC object from table, at random.
 
-        newPortal:setLocalVar('[Portal]Chosen', 1) -- Mark new portal.
+        if newPortal then
+            newPortal:setLocalVar('[Portal]Chosen', 1) -- Mark new portal.
+        end
     end
 end
 
@@ -211,8 +214,9 @@ xi.promyvion.receptacleOnMobSpawn = function(mob)
 
     -- Handle decoration: Fade-in.
     local decoration = GetNPCByID(mob:getID() - 1)
-
-    decoration:updateToEntireZone(xi.status.NORMAL, xi.anim.NONE)
+    if decoration then
+        decoration:updateToEntireZone(xi.status.NORMAL, xi.anim.NONE)
+    end
 end
 
 xi.promyvion.receptacleOnMobRoam = function(mob)
@@ -266,6 +270,7 @@ xi.promyvion.receptacleOnMobFight = function(mob, target)
         local stray = GetMobByID(strayId)
 
         if
+            stray and
             stray:isSpawned() and
             not stray:isEngaged()
         then
@@ -302,7 +307,7 @@ xi.promyvion.receptacleOnMobDeath = function(mob, optParams)
             -- Handle portal: Open if it's the chosen portal.
             local portal = GetNPCByID(receptacleInfoTable[zoneId][mobId][3]) -- Fetch mob's associated portal.
 
-            if portal:getLocalVar('[Portal]Chosen') == 1 then
+            if portal and portal:getLocalVar('[Portal]Chosen') == 1 then
                 portal:openDoor(180) -- Open portal for 3 minutes.
             end
 
@@ -319,7 +324,7 @@ xi.promyvion.receptacleOnMobDespawn = function(mob)
     -- Handle portal: Choose new portal.
     local portal = GetNPCByID(receptacleInfoTable[zoneId][mobId][3]) -- Fetch mob's associated portal.
 
-    if portal:getLocalVar('[Portal]Chosen') == 1 then
+    if portal and portal:getLocalVar('[Portal]Chosen') == 1 then
         portal:setLocalVar('[Portal]Chosen', 0) -- Reset.
 
         -- Choose new portal.
@@ -327,7 +332,9 @@ xi.promyvion.receptacleOnMobDespawn = function(mob)
         local groupTable = portalGroupTable[zoneId][mobGroup]                  -- Fetch the whole group table.
         local newPortal  = GetNPCByID(groupTable[math.random(1, #groupTable)]) -- Fetch NPC object from table, at random.
 
-        newPortal:setLocalVar('[Portal]Chosen', 1) -- Mark new portal.
+        if newPortal then
+            newPortal:setLocalVar('[Portal]Chosen', 1) -- Mark new portal.
+        end
     end
 
     -- Handle receptacle: Reset animationSub.
@@ -337,7 +344,8 @@ xi.promyvion.receptacleOnMobDespawn = function(mob)
 
     -- Handle decoration: Reset.
     local decoration = GetNPCByID(mobId - 1)
-
-    decoration:updateToEntireZone(xi.status.CUTSCENE_ONLY, xi.anim.DESPAWN)
-    decoration:entityAnimationPacket(xi.animationString.STATUS_VISIBLE)
+    if decoration then
+        decoration:updateToEntireZone(xi.status.CUTSCENE_ONLY, xi.anim.DESPAWN)
+        decoration:entityAnimationPacket(xi.animationString.STATUS_VISIBLE)
+    end
 end

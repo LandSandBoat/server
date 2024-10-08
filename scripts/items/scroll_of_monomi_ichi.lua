@@ -3,6 +3,7 @@
 -- Scroll of Monomi: Ichi
 -- Teaches the ninjutsu Monomi: Ichi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

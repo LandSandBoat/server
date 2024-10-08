@@ -2,6 +2,7 @@
 -- Mewing Lullaby
 -- aoe light based sleep and lowers mob TP to zero
 -----------------------------------
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

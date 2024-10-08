@@ -3,6 +3,7 @@
 -- Scroll of Gravity II
 -- Teaches the black magic Gravity II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

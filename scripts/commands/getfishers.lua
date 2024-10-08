@@ -4,6 +4,7 @@
 --       The default period to look back is 5 minutes but command
 --       accepts parameter between 1 and 60 minutes
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

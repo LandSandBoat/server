@@ -3,6 +3,7 @@
 -- Scroll of Bio
 -- Teaches the black magic Bio
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

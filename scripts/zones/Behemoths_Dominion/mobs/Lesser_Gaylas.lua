@@ -2,6 +2,7 @@
 -- Area: Behemoths Dominion
 --  Mob: Lesser Gaylas
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

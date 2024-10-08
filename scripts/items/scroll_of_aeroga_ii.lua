@@ -3,6 +3,7 @@
 -- Scroll of Aeroga II
 -- Teaches the black magic Aeroga II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

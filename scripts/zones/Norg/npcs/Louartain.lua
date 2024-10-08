@@ -2,6 +2,7 @@
 -- Area: Norg
 --  NPC: Louartain
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

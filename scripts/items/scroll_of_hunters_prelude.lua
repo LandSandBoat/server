@@ -3,6 +3,7 @@
 -- Scroll of Hunters Prelude
 -- Teaches the song Hunters Prelude
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -4,6 +4,7 @@
 -- Unlocks: Geo-Languor
 -- !pos -13.337 0.009 -333.022 167
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

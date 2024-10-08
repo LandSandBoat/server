@@ -4,6 +4,7 @@
 -- Involved in Quests: The Sand Charm
 -- !pos 30 -8 25 249
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

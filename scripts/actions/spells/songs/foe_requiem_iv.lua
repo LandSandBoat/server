@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Foe Requiem IV
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
@@ -8,6 +9,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:hasImmunity(xi.immunity.REQUIEM) then
+        spell:setMsg(xi.msg.basic.MAGIC_COMPLETE_RESIST)
+        return
+    end
+
     local effect = xi.effect.REQUIEM
     local duration = 111
     local power = 4

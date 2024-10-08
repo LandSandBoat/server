@@ -76,7 +76,7 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
         end
     elseif progress >= 10 and not instance:completed() then
         local ally = GetMobByID(ID.mob.GESSHO, instance)
-        if ally:isAlive() then
+        if ally and ally:isAlive() then
             ally:setLocalVar('ready', 2)
         end
 

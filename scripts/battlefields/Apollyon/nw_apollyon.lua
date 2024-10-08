@@ -41,8 +41,10 @@ end
 
 local depowerBoss = function(bossID)
     local boss = GetMobByID(bossID)
-    boss:delMod(xi.mod.ATTP, 100)
-    boss:delMod(xi.mod.ACC, 50)
+    if boss then
+        boss:delMod(xi.mod.ATTP, 100)
+        boss:delMod(xi.mod.ACC, 50)
+    end
 end
 
 content.paths =

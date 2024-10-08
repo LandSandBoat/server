@@ -3,6 +3,7 @@
 -- Consumes a Dark Card to enhance dark-based debuffs. Additional effect: Dark-based Dispel
 -- Bio Effect: Attack Down Effect +5% and DoT + 3
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -71,7 +72,10 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         target:delStatusEffectSilent(effectId)
         target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)
         local newEffect = target:getStatusEffect(effectId)
-        newEffect:setStartTime(startTime)
+
+        if newEffect then
+            newEffect:setStartTime(startTime)
+        end
     end
 
     ability:setMsg(xi.msg.basic.JA_REMOVE_EFFECT_2)

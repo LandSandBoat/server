@@ -9,6 +9,7 @@
 --
 -- Data unknown
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

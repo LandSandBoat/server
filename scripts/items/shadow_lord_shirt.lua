@@ -3,6 +3,7 @@
 -- Item: Shadow Lord Shirt
 -- Teleports user to Castle Zvahl Keep
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.QUICKENING
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

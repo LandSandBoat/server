@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 -- Item 1019 = Lufet Salt

@@ -2,6 +2,7 @@
 -- Area: Port Bastok
 --  NPC: Flying Axe, I.M.
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local guardNation = xi.nation.BASTOK

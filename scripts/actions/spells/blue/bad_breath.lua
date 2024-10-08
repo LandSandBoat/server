@@ -12,6 +12,7 @@
 -- Magic Bursts on: Scission, Gravitation, Darkness
 -- Combos: Fast Cast
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

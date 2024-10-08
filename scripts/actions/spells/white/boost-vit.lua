@@ -2,6 +2,7 @@
 -- Spell: Boost-VIT
 -- Boosts VIT for Allies in AoE
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

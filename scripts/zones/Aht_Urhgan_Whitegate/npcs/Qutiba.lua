@@ -3,6 +3,7 @@
 --  NPC: Qutiba
 -- !pos 92.341 -7.5 -129.980 50
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -23,12 +23,9 @@ mission.sections =
 
         [xi.zone.LOWER_JEUNO] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 10094
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 10094
+            end,
 
             onEventUpdate =
             {

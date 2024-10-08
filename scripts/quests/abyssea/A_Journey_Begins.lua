@@ -32,14 +32,11 @@ quest.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if quest:getVar(player, 'Prog') == 0 then
-                        return 324
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if quest:getVar(player, 'Prog') == 0 then
+                    return 324
+                end
+            end,
 
             onEventFinish =
             {

@@ -3,6 +3,7 @@
 -- desc: Spawns a MOB and then moves it to the current position, if in same zone.
 --       Errors will despawn the MOB unless 'noDepop' was specified (any value works).
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -18,6 +19,10 @@ end
 
 commandObj.onTrigger = function(player, mobId, noDepop)
     local zone = player:getZone()
+    if not zone then
+        return
+    end
+
     if zone:getTypeMask() == xi.zoneType.INSTANCED then
         local instance = player:getInstance()
         local targ

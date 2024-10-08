@@ -2,6 +2,7 @@
 -- Spell: Wind Carol
 -- Increases wind resistance for party members within the area of effect.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

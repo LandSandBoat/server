@@ -2,6 +2,7 @@
 -- Area: Monarch Linn
 --  Mob: Ouryu
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -11,7 +12,11 @@ end
 
 entity.onMobFight = function(mob, target)
     local bf = mob:getBattlefield()
-    if bf:getID() == 961 and mob:getHPP() < 30 then
+    if
+        bf and
+        bf:getID() == 961 and
+        mob:getHPP() < 30
+    then
         bf:win()
         return
     end

@@ -3,6 +3,7 @@
 -- Scholar Die
 -- Teaches the job ability Scholars Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

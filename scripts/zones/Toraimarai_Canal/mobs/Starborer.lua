@@ -2,6 +2,7 @@
 -- Area: Toraimarai Canal
 --  Mob: Starborer
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -3,6 +3,7 @@
 -- desc: Used to manipulate a mob's nameflags for testing.
 --       MUST either target a mob first or else specify a Mob ID.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -42,6 +43,7 @@ commandObj.onTrigger = function(player, flags, target)
     end
 
     -- set flags
+    ---@diagnostic disable-next-line param-type-mismatch
     player:setMobFlags(flags, targ:getID())
     local hex = '0x' .. string.format('%08x', flags)
     player:printToPlayer(string.format('Set %s %i flags to %s (%i).', targ:getName(), targ:getID(), hex, flags))

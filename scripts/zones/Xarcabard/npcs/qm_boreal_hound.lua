@@ -4,6 +4,7 @@
 -- Involved in Quests: Atop the Highest Mountains (for Boreal Hound)
 -- !pos -21 -25 -490 112
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

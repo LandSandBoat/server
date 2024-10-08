@@ -2,6 +2,7 @@
 -- Spell: IceSpirit
 -- Summons IceSpirit to fight by your side
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

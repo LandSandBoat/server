@@ -2,6 +2,7 @@
 -- Area: Eastern Altepa Desert (114)
 --   NM: Nandi
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

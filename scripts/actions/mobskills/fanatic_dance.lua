@@ -7,6 +7,7 @@
 -- Range: AoE around user
 -- Notes: Dynamis NM Orcs only
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

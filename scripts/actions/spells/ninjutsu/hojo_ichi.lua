@@ -1,6 +1,7 @@
 -----------------------------------
 -- Spell: Hojo:Ichi
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

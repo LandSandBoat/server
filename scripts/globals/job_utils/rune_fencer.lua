@@ -180,7 +180,7 @@ local function getBattutaSpikesType(type)
         [xi.effect.TELLUS]   = xi.subEffect.CLOD_SPIKES,
         [xi.effect.SULPOR]   = xi.subEffect.SHOCK_SPIKES,
         [xi.effect.UNDA]     = xi.subEffect.DELUGE_SPIKES,
-        [xi.effect.LUX]      = xi.subEffect.REPSIRAL,
+        [xi.effect.LUX]      = xi.subEffect.REPRISAL,
         [xi.effect.TENEBRAE] = xi.subEffect.DEATH_SPIKES,
     }
 
@@ -381,7 +381,7 @@ xi.job_utils.rune_fencer.onSwordplayEffectLose = function(target, effect)
 end
 
 xi.job_utils.rune_fencer.useVivaciousPulse = function(player, target, ability, effect)
-    return calculateVivaciousPulseHealing(player, target)
+    return calculateVivaciousPulseHealing(player)
 end
 
 xi.job_utils.rune_fencer.checkHaveRunes = function(player)
@@ -517,12 +517,19 @@ local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc
     multipliers.magianAffinity      = xi.spells.damage.calculateMagianAffinity() -- Presumed but untested.
     multipliers.SDT                 = xi.spells.damage.calculateSDT(target, element)
     multipliers.resist              = xi.spells.damage.calculateResist(player, target, 0, 0, element, 0, bonusMacc)
-    multipliers.magicBurst          = xi.spells.damage.calculateIfMagicBurst(target, element)
-    multipliers.magicBurstBonus     = xi.spells.damage.calculateIfMagicBurstBonus(player, target, 0, 0, element)
     multipliers.dayAndWeather       = xi.spells.damage.calculateDayAndWeather(player, 0, element)
     multipliers.magicBonusDiff      = xi.spells.damage.calculateMagicBonusDiff(player, target, 0, 0, element)
     multipliers.TMDA                = xi.spells.damage.calculateTMDA(target, element)
     multipliers.nukeAbsorbOrNullify = xi.spells.damage.calculateNukeAbsorbOrNullify(target, element)
+    multipliers.magicBurst          = 1
+    multipliers.magicBurstBonus     = 1
+
+    local _, skillchainCount = xi.magicburst.formMagicBurst(element, target)
+
+    if skillchainCount > 0 then
+        multipliers.magicBurst          = xi.spells.damage.calculateIfMagicBurst(target, element, skillchainCount)
+        multipliers.magicBurstBonus     = xi.spells.damage.calculateIfMagicBurstBonus(player, target, 0, element)
+    end
 
     return multipliers
 end
@@ -688,7 +695,7 @@ local function addPflugResistType(type, effect, power)
         [xi.effect.FLABRA]   = { xi.mod.PETRIFYRES, xi.mod.SLOWRES },
         [xi.effect.TELLUS]   = { xi.mod.STUNRES },
         [xi.effect.SULPOR]   = { xi.mod.POISONRES },
-        [xi.effect.UNDA]     = { xi.mod.AMNESIARES, xi.mod.PLAGUERES },
+        [xi.effect.UNDA]     = { xi.mod.AMNESIARES, xi.mod.VIRUSRES },
         [xi.effect.LUX]      = { xi.mod.SLEEPRES, xi.mod.BLINDRES, xi.mod.CURSERES },
         [xi.effect.TENEBRAE] = { xi.mod.CHARMRES },
     }
@@ -848,7 +855,7 @@ xi.job_utils.rune_fencer.useLiement = function(player, target, ability, action)
     end
 
     local runeEffects = target:getAllRuneEffects()
-    local absorbPower = 25
+    local absorbPower = 15 -- in core -> 85 + 15 * (1, 2, or 3) = 100, 115, 130
     local duration    = 10 + player:getMod(xi.mod.LIEMENT_DURATION)
     local absorbTypes = {} -- one absorb type per rune which can be additive
     local i           = 0

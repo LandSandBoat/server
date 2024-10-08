@@ -3,6 +3,7 @@
 --  NPC: Nargoht
 -- !pos 25 0 117 256
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

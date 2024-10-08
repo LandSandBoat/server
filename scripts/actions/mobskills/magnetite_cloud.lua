@@ -2,6 +2,7 @@
 -- Magnetite Cloud
 -- Deals earth damage to enemies within a fan-shaped area originating from the caster. Additional effect: Weight.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

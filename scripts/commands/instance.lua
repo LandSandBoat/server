@@ -2,6 +2,7 @@
 -- func: !instance <instance_id>
 -- desc: Load an instance and take you there
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

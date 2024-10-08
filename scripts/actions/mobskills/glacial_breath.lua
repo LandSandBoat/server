@@ -7,6 +7,7 @@
 --  Range: Unknown cone
 --  Notes: Used only by Jormungand and Isgebind
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

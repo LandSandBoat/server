@@ -3,6 +3,7 @@
 -- Item: bottle_of_fanatics_tonic
 -- Item Effect: When applied, grants DMGPHYS -5000 for 60s
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

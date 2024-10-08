@@ -2,6 +2,7 @@
 -- Spell: Enchanting Etude
 -- Static CHR Boost, BRD 22
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

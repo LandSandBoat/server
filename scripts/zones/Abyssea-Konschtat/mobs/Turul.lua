@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/families/amphiptere') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobFight = function(mob, target)

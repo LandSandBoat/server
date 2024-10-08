@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = { require('scripts/mixins/rage') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 -- Todo: add enailments, Drain samba on target if all ailments on, very fast enmity decay, capture speed
 

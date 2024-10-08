@@ -2,6 +2,7 @@
 -- Area: Ordelle's Caves
 --   NM: Donggu
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

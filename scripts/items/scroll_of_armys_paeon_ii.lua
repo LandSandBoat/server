@@ -3,6 +3,7 @@
 -- Scroll of Armys Paeton II
 -- Teaches the song Armys Paeton II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

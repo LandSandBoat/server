@@ -2,6 +2,7 @@
 -- Royal Savior
 -- Grants effect of Protect
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

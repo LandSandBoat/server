@@ -3,6 +3,7 @@
 -- Scroll of Ice Threnody
 -- Teaches the song Ice Threnody
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

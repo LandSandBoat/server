@@ -4,6 +4,7 @@
 -- Type: Weather Reporter
 -- Involved in Quest: Flyers for Regine
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

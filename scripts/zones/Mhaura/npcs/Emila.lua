@@ -3,6 +3,7 @@
 --  NPC: Emila
 -- !pos -30.578 -9 26.342 249
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

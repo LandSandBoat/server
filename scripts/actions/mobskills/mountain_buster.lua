@@ -2,6 +2,7 @@
 -- Mountain Buster
 -- Titan delivers an earth-shattering attack that roots its target in place.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -7,6 +7,7 @@
 -- HP % 12 (cap 185)
 -- Resist Sleep +10
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

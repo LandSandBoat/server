@@ -2,6 +2,7 @@
 --  MOB: Archaic Gear
 -- Area: Nyzul Isle
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobEngage = function(mob, target)

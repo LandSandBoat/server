@@ -3,6 +3,7 @@
 -- Mandragora Beret
 -- Enchantment: 60Min, Costume - Mandragora (white)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

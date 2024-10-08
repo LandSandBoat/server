@@ -2,6 +2,7 @@
 -- Area: Windurst Walls
 --  NPC: Pakeke
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

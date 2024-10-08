@@ -3,6 +3,7 @@
 -- ID 5369
 -- Unlocks leg and feet equipment
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

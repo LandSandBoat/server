@@ -7,6 +7,7 @@
 -----------------------------------
 local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local sandyQuests = xi.quest.id.sandoria

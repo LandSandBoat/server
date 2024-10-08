@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.FINISHING_MOVE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

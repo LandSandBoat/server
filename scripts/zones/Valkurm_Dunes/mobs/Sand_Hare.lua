@@ -2,6 +2,7 @@
 -- Area: Valkurm Dunes
 --  Mob: Sand Hare
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

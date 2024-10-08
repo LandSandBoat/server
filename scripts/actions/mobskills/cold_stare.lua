@@ -3,6 +3,7 @@
 -- Silences enemies in a line area of effect.
 -- Notes: Only applies when face-to-face with the dhalmel.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

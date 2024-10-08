@@ -3,6 +3,7 @@
 --  NPC: Gioh Ajihri
 -- Starts & Finishes Repeatable Quest: Twinstone Bonding
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

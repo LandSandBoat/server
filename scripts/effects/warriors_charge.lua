@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.WARRIORS_CHARGE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -3,6 +3,7 @@
 -- ID 5381
 -- Removes MND Down effect
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

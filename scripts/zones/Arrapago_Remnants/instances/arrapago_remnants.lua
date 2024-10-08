@@ -20,9 +20,12 @@ instanceObject.afterInstanceRegister = function(player)
 end
 
 instanceObject.onInstanceCreated = function(instance)
-    for i, v in pairs(ID.npc[1][1]) do
+    for _, v in pairs(ID.npc[1][1]) do
         local npc = GetNPCByID(v, instance)
-        npc:setStatus(xi.status.NORMAL)
+
+        if npc then
+            npc:setStatus(xi.status.NORMAL)
+        end
     end
 
     instance:setStage(1)
@@ -71,12 +74,14 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress, elapsed)
         GetNPCByID(ID.npc[6].DOOR, instance):setLocalVar('start', os.time())
     elseif instance:getStage() == 7 and progress == 0 then
         local door = GetNPCByID(ID.npc[6].DOOR, instance)
-        door:setLocalVar('current', os.time())
-        if door:getLocalVar('current') - door:getLocalVar('start') <= 420 then
-            SpawnMob(ID.mob[6].treasure_hunter1, instance)
-            SpawnMob(ID.mob[6].treasure_hunter2, instance)
-            SpawnMob(ID.mob[6].qiqirn_mine_1, instance)
-            SpawnMob(ID.mob[6].qiqirn_mine_2, instance)
+        if door then
+            door:setLocalVar('current', os.time())
+            if door:getLocalVar('current') - door:getLocalVar('start') <= 420 then
+                SpawnMob(ID.mob[6].treasure_hunter1, instance)
+                SpawnMob(ID.mob[6].treasure_hunter2, instance)
+                SpawnMob(ID.mob[6].qiqirn_mine_1, instance)
+                SpawnMob(ID.mob[6].qiqirn_mine_2, instance)
+            end
         end
     end
 end

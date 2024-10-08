@@ -3167,8 +3167,8 @@ local slipItems =
         xi.item.RUNEIST_BANDEAU_P2,
         xi.item.RUNEIST_COAT_P2,
         xi.item.RUNEIST_MITONS_P2,
-        xi.item.RUNIEST_TROUSERS_P2,
-        xi.item.RUNEIST_BOOTS_P2,
+        xi.item.RUNIESTS_TROUSERS_P2,
+        xi.item.RUNEIST_BOTTES_P2,
     },
 
     [xi.item.MOOGLE_STORAGE_SLIP_25] =
@@ -3287,7 +3287,7 @@ local slipItems =
         xi.item.RUNEIST_COAT_P3,
         xi.item.RUNEIST_MITONS_P3,
         xi.item.RUNEIST_TROUSERS_P3,
-        xi.item.RUNEIST_BOOTS_P3,
+        xi.item.RUNEIST_BOTTES_P3,
     },
 
     [xi.item.MOOGLE_STORAGE_SLIP_26] =

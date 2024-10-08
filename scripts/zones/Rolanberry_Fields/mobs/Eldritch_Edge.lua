@@ -2,6 +2,7 @@
 -- Area: Rolanberry Fields
 --   NM: Eldritch Edge
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -4,6 +4,7 @@
 -- !pos 80 -1.949 -107.94
 -- Used to enter 'The Colosseum' zone.
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

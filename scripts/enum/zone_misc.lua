@@ -1,5 +1,6 @@
 xi = xi or {}
 
+---@enum xi.zoneMisc
 xi.zoneMisc =
 {
     NONE                  = 0x0000, -- Able to be used in any area

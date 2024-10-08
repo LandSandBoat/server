@@ -31,6 +31,7 @@ local handleDeath = function(battlefield, mob)
         local mobObj = GetMobByID(mobId)
 
         if
+            mobObj and
             mobObj:isSpawned() and
             not mobObj:isDead()
         then

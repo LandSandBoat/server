@@ -9,6 +9,7 @@
 -----------------------------------
 local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local passwordTable =

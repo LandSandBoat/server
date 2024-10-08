@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Crawlers_Nest_[S] (171)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

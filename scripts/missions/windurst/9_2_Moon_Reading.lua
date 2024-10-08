@@ -79,17 +79,14 @@ mission.sections =
 
         [xi.zone.CHAMBER_OF_ORACLES] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if
-                        prevZone == xi.zone.QUICKSAND_CAVES and
-                        player:getMissionStatus(mission.areaId) >= 1
-                    then
-                        return 3
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if
+                    prevZone == xi.zone.QUICKSAND_CAVES and
+                    player:getMissionStatus(mission.areaId) >= 1
+                then
+                    return 3
+                end
+            end,
 
             onEventFinish =
             {
@@ -214,14 +211,11 @@ mission.sections =
 
         [xi.zone.WINDURST_WALLS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 4 then
-                        return 443
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if player:getMissionStatus(mission.areaId) == 4 then
+                    return 443
+                end
+            end,
 
             onEventFinish =
             {

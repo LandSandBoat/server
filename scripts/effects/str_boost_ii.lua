@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.STR_BOOST_II
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

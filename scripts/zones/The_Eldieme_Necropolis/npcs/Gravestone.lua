@@ -4,6 +4,7 @@
 -- Involved in Quests: fire and brimstone (Rng AF2)
 -- !zone 195
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

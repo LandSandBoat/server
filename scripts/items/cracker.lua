@@ -3,6 +3,7 @@
 -- Cracker
 -- Creates a simple puff of smoke with a "crack" noise
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -4,6 +4,7 @@
 -- Item Effect: Acc +3
 -- Duration: 30 Minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Item: CCB Polymer Pump
 -- Used during CoP 6-4 One To Be Feared on Ultima or Omega to inflict a 1 minute amnesia
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

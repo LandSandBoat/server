@@ -11,6 +11,7 @@
 -- as other ranged attackers have the amount at level one he doesn't until level 90.
 -- I can't help but wonder if he is simply bugged on retail and nobody ever realized it.
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

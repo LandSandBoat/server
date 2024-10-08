@@ -2,6 +2,7 @@
 -- Area: Lower Delkfutt's Tower
 --  Mob: Gigas Sculptor
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

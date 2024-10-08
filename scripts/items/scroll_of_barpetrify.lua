@@ -3,6 +3,7 @@
 -- Scroll of Barpetrify
 -- Teaches the white magic Barpetrify
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

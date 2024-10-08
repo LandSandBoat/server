@@ -4,6 +4,7 @@
 require('scripts/globals/interaction/actions/action')
 require('scripts/globals/interaction/actions/message')
 
+---@class TSequence : TAction
 Sequence = Action:new(Action.Type.Sequence)
 
 -- Parse out a sequence from a table of actions.
@@ -14,13 +15,15 @@ Sequence = Action:new(Action.Type.Sequence)
 --      * send message 11470, and wait 1 second
 --      * send message 11471 and face 82, and wait 2 seconds
 --      * face 115
+---@param unparsedSequence any
+---@return TSequence
 function Sequence:new(unparsedSequence)
     local obj = {}
     setmetatable(obj, self)
     self.__index = self
 
     if not unparsedSequence or #unparsedSequence == 0 then
-        return nil
+        return obj
     end
 
     local dummyFirst = { }
@@ -28,6 +31,7 @@ function Sequence:new(unparsedSequence)
     local id = nil
     for _, entry in ipairs(unparsedSequence) do
         if entry.text then
+            ---@type TMessage
             local newLast = Message:new(entry.text)
             last.__nextAction = newLast
             last = newLast
@@ -47,11 +51,15 @@ function Sequence:new(unparsedSequence)
         -- Waits can be part of the other action
         if entry.wait then
             local newLast = { type = Action.Type.Wait, milliseconds = entry.wait }
+            -- TODO: Find a more elegant way to handle the inject field warnings
+            ---@diagnostic disable-next-line inject-field
             last.__nextAction = newLast
             last = newLast
         end
     end
 
+    -- TODO: Find a more elegant way to handle the inject field warnings
+    ---@diagnostic disable-next-line inject-field
     last.__nextAction = { type = Action.Type.Release }
 
     obj.id = id

@@ -2,6 +2,7 @@
 -----------------------------------
 -- Cait Sith's Favor - Effect
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

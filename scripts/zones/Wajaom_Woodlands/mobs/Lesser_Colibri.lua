@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local zoraalPHTable =

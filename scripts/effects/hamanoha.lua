@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.HAMANOHA
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

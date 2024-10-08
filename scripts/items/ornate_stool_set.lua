@@ -3,6 +3,7 @@
 -- Item: Ornate Stool
 -- Item Effect: Grant Ornate stool key item
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 local keyItemId = xi.ki.ORNATE_STOOL

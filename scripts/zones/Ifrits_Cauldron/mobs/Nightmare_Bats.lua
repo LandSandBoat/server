@@ -2,6 +2,7 @@
 -- Area: Ifrit's Cauldron
 --  Mob: Nightmare Bats
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

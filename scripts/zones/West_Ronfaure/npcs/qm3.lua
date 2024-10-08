@@ -4,6 +4,7 @@
 -- Involved in Quest: The Dismayed Customer
 -- !pos -399 -10 -438 100
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

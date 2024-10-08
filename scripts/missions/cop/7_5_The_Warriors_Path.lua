@@ -51,14 +51,11 @@ mission.sections =
 
             ['Sueleen'] = mission:event(28),
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 2 then
-                        return 34
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 2 then
+                    return 34
+                end
+            end,
 
             onEventUpdate =
             {
@@ -94,16 +91,13 @@ mission.sections =
 
         [xi.zone.ALTAIEU] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 3 then
-                        -- NOTE: Event Options 1 and 2 come for update requests, no observed responses
-                        -- this may be related to RotZ progress, since Kam'Lanaut shows up as ???
-                        return 1
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Status') == 3 then
+                    -- NOTE: Event Options 1 and 2 come for update requests, no observed responses
+                    -- this may be related to RotZ progress, since Kam'Lanaut shows up as ???
+                    return 1
+                end
+            end,
 
             onEventFinish =
             {
@@ -140,14 +134,11 @@ mission.sections =
         {
             ['Sueleen'] = mission:event(12),
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if mission:getVar(player, 'Option') == 1 then
-                        return 18
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if mission:getVar(player, 'Option') == 1 then
+                    return 18
+                end
+            end,
 
             onEventFinish =
             {

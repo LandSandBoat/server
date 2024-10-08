@@ -65,7 +65,7 @@ INSERT INTO `mob_resistances` VALUES (34,'Avatar-Carbuncle_Prime',1.0,1.0,1.0,1.
 INSERT INTO `mob_resistances` VALUES (35,'Avatar-Diabolos_CoP',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,4);
 INSERT INTO `mob_resistances` VALUES (36,'Avatar-Fenrir_Prime',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,-2,11);
 INSERT INTO `mob_resistances` VALUES (37,'Avatar-Garuda_Prime',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,11,-3,11,11,11,11,11,11);
-INSERT INTO `mob_resistances` VALUES (38,'Avatar-Ifrit_Prime',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,11,11,11,11,11,-3,11,11);
+INSERT INTO `mob_resistances` VALUES (38,'Avatar-Ifrit_Prime_WTB',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,-3,11,4,4,4,-3,4,4);
 INSERT INTO `mob_resistances` VALUES (39,'Monoceros',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,2,2,2,-2,6,2,0,4); -- Ixion, not Alicorn.
 INSERT INTO `mob_resistances` VALUES (40,'Avatar-Leviathan_Prime',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,11,11,11,11,-3,11,11,11);
 INSERT INTO `mob_resistances` VALUES (41,'Avatar-Odin_Image',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-3,11);

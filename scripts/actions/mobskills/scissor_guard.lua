@@ -2,6 +2,7 @@
 -- Scissor Guard
 -- Enhances defense 100%.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

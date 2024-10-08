@@ -5,13 +5,13 @@
 local ID = zones[xi.zone.JUGNER_FOREST]
 mixins = { require('scripts/mixins/rage') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
     -- If respawn and variable is not 0, then it respawned before someone killed all 10 crabs
     local kingArthro = GetMobByID(ID.mob.KING_ARTHRO)
-
-    if kingArthro:getLocalVar('[POP]King_Arthro') > 0 then
+    if kingArthro and kingArthro:getLocalVar('[POP]King_Arthro') > 0 then
         kingArthro:setLocalVar('[POP]King_Arthro', kingArthro:getLocalVar('[POP]King_Arthro')  - 1)
     end
 
@@ -24,6 +24,9 @@ end
 
 entity.onMobDespawn = function(mob)
     local kingArthro = GetMobByID(ID.mob.KING_ARTHRO)
+    if not kingArthro then
+        return
+    end
 
     kingArthro:setLocalVar('[POP]King_Arthro', kingArthro:getLocalVar('[POP]King_Arthro') + 1)
 

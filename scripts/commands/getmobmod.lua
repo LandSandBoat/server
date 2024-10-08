@@ -2,6 +2,7 @@
 -- func: getmobmod <modID>
 -- desc: gets a mod by ID on the player or cursor target
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

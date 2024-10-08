@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.HEADY_ARTIFICE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

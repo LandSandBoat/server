@@ -3,6 +3,7 @@
 -- Consumes a Ice Card to enhance ice-based debuffs. Deals ice-based magic damage
 -- Frost Effect: Enhanced DoT and AGI-
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -36,7 +37,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
     local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
     dmg            = dmg * applyResistanceAbility(player, target, xi.element.ICE, xi.skill.NONE, bonusAcc)
-    dmg            = adjustForTarget(target, dmg, xi.element.ICE)
+    dmg            = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, xi.element.ICE)
 
     params.targetTPMult = 0 -- Quick Draw does not feed TP
     dmg                 = xi.ability.takeDamage(target, player, params, true, dmg, xi.attackType.MAGICAL, xi.damageType.ICE, xi.slot.RANGED, 1, 0, 0, 0, action, nil)
@@ -75,7 +76,9 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)
 
             local newEffect = target:getStatusEffect(effectId)
-            newEffect:setStartTime(startTime)
+            if newEffect then
+                newEffect:setStartTime(startTime)
+            end
         end
     end
 

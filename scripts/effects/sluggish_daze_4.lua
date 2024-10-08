@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SLUGGISH_DAZE_4
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

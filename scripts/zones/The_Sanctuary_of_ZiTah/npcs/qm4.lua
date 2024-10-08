@@ -2,6 +2,7 @@
 -- Area: The Sanctuary of Zitah
 --  NPC: ???
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

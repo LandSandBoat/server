@@ -4,6 +4,7 @@
 -- Gives qualified players access to Ru'Aun Gardens.
 -- !pos 0 -12 48 251
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

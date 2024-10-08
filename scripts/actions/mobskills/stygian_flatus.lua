@@ -5,6 +5,7 @@
 -- Range: Melee?
 -- Duration: 9:00
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

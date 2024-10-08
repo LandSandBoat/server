@@ -4,6 +4,7 @@
 -- Spawns Bukhis
 -- !pos -202 -40 -280 217
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

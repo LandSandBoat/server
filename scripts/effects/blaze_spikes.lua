@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.BLAZE_SPIKES
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

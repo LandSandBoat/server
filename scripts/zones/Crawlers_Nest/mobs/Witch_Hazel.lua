@@ -2,6 +2,7 @@
 -- Area: Crawlers' Nest
 --  Mob: Witch Hazel
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

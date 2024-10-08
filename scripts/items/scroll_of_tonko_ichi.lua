@@ -3,6 +3,7 @@
 -- Scroll of Tonko: Ichi
 -- Teaches the ninjutsu Tonko: Ichi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

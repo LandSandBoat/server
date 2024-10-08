@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.GRADUAL_PETRIFICATION
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -3,6 +3,7 @@
 -- Worm Belt
 -- Enchantment: 60Min, Costume - Worm (orange/brown)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

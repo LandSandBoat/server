@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.TROUBADOUR
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: Pretty Little Things
 -- !pos -175 -5 -4 246
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

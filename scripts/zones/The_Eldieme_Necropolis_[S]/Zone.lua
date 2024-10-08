@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: The_Eldieme_Necropolis_[S] (175)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

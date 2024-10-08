@@ -4,6 +4,7 @@
 -- Involved in Quest: Sin Hunting - RNG AF1
 -- !pos -10.946 -1.000 313.810 104
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

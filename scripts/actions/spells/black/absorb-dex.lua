@@ -2,6 +2,7 @@
 -- Spell: Absorb-DEX
 -- Steals an enemy's dexterity.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

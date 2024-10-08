@@ -4,6 +4,7 @@
 -- Type: ENM Quest Timer
 -- !pos 116.294 -6 -98.164 241
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

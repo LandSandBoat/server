@@ -3,6 +3,7 @@
 -- Scroll of Flood II
 -- Teaches the black magic Flood II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

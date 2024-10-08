@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = zones[xi.zone.DRAGONS_AERY]
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onSpawn = function(npc)
@@ -22,7 +23,7 @@ entity.onTrade = function(player, npc, trade)
         then
             player:confirmTrade()
         elseif
-            npcUtil.tradeHasExactly(trade, xi.item.SWEET_TEA) and
+            npcUtil.tradeHasExactly(trade, xi.item.CUP_OF_SWEET_TEA) and
             npcUtil.popFromQM(player, npc, ID.mob.NIDHOGG)
         then
             player:confirmTrade()

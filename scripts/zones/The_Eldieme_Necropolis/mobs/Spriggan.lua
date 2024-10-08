@@ -2,6 +2,7 @@
 -- Area: The Eldieme Necropolis
 --  Mob: Spriggan
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

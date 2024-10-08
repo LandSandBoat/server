@@ -9,6 +9,7 @@ xi = xi or {}
 -- Weaponskill IDs
 -----------------------------------
 
+---@enum xi.weaponskill
 xi.weaponskill =
 {
     -----------------------------------

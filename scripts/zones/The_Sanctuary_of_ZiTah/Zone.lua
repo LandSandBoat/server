@@ -5,11 +5,8 @@ local ID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/missions/amk/helpers')
 -----------------------------------
+---@type TZone
 local zoneObject = {}
-
-zoneObject.onChocoboDig = function(player, precheck)
-    return xi.chocoboDig.start(player, precheck)
-end
 
 zoneObject.onInitialize = function(zone)
     GetMobByID(ID.mob.NOBLE_MOLD):setLocalVar('pop', os.time() + math.random(43200, 57600)) -- 12 to 16 hr

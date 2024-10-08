@@ -3,6 +3,7 @@
 --  NPC: Ransnana
 -- !pos -22.008 -13.339 122.819 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

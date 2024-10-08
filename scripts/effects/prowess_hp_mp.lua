@@ -2,6 +2,7 @@
 -- xi.effect.PROWESS
 -- Increased HP and MP
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

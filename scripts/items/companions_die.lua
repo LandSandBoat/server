@@ -3,6 +3,7 @@
 -- Companions Die
 -- Teaches the job ability Companions Roll
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

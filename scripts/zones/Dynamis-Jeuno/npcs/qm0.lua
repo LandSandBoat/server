@@ -3,6 +3,7 @@
 --  NPC: ??? (qm0)
 -- Note: Spawns Goblin Golem / Arch Goblin Golem
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

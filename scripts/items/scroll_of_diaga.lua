@@ -3,6 +3,7 @@
 -- Scroll of Diaga
 -- Teaches the white magic Diaga
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

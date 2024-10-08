@@ -3,6 +3,7 @@
 -- Scroll of Gain-INT
 -- Teaches the white magic Gain-INT
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

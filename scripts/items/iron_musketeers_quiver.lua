@@ -3,6 +3,7 @@
 -- Iron Musketeer's Quiver
 -- When used, you will obtain one Iron Musketeer's Bolt
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

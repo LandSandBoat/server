@@ -4,6 +4,7 @@
 -- Involved in Quest: A Squire's Test II (Optional), The Holy Crest
 -- !pos 99 0 116 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

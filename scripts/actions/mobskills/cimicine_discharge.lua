@@ -3,6 +3,7 @@
 -- Reduces the attack speed of enemies within range.
 -- Duration: Variable, with max of 3 min
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

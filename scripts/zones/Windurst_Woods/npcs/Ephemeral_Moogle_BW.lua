@@ -5,6 +5,7 @@
 -- !pos -10.500 -5.250 -143.400 241 - Boneworker's Guild
 -- !pos -34.840 -1.250 -114.490 241 - Weaver's Guild
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local triggerEvent = 895

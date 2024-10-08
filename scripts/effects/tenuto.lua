@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.TENUTO
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

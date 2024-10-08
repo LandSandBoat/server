@@ -50,12 +50,9 @@ mission.sections =
 
         [xi.zone.CEIZAK_BATTLEGROUNDS] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 3
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 3
+            end,
 
             onEventFinish =
             {

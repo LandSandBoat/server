@@ -5,6 +5,7 @@
 local ID = zones[xi.zone.SEALIONS_DEN]
 mixins = { require('scripts/mixins/warriors_path_taru') }
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -30,8 +31,13 @@ entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    local bfID = mob:getBattlefield():getArea()
     local battlefield = mob:getBattlefield()
+    if not battlefield then
+        return
+    end
+
+    local bfID = battlefield:getArea()
+
     local changetime = mob:getLocalVar('changetime')
     local battletime = mob:getBattleTime()
     if battlefield:getLocalVar('fireworks') == 1 then
@@ -43,13 +49,14 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    local tenzenId = GetMobByID(ID.mob.TENZEN + (bfID - 1))
+    local tenzenObj = GetMobByID(ID.mob.TENZEN + (bfID - 1))
     if
-        tenzenId:getHPP() <= 70 and
+        tenzenObj and
+        tenzenObj:getHPP() <= 70 and
         battlefield:getLocalVar('fireworks') == 0
     then
         if mob:getLocalVar('cooldown') == 0 then
-            mob:castSpell(4, tenzenId)
+            mob:castSpell(4, tenzenObj)
             mob:setLocalVar('cooldown', 70) -- every 30 seconds Cherukiki will cast Cure IV on tenzen
         end
     else

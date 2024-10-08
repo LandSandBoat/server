@@ -3,6 +3,7 @@
 -- Nomad Moogle Shield
 -- Enchantment: 60Min, Costume - Moogle
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

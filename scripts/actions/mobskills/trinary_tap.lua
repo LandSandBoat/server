@@ -6,6 +6,7 @@
 -- Range: Melee
 -- Notes: Can be any (positive) buff, including food. Will drain about 100HP if it can't take any buffs
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

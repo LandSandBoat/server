@@ -3,6 +3,7 @@
 -- ID 5368
 -- Unlocks hand equipment
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

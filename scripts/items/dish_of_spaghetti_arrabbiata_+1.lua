@@ -12,6 +12,7 @@
 -- Store TP +6
 -- Sleep resistance +8
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

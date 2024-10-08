@@ -2,6 +2,7 @@
 -- func: spawnmob
 -- desc: Spawns a mob.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -17,6 +18,10 @@ end
 
 commandObj.onTrigger = function(player, mobId, despawntime, respawntime)
     local zone = player:getZone()
+    if not zone then
+        return
+    end
+
     if zone:getTypeMask() == xi.zoneType.INSTANCED then
         local instance = player:getInstance()
 

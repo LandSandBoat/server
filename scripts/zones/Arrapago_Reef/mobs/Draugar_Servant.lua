@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local bloodyBonesPHTable =

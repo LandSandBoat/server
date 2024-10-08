@@ -5,6 +5,7 @@
 local ID = zones[xi.zone.SEALIONS_DEN]
 local tenzenFunctions = require('scripts/zones/Sealions_Den/helpers/TenzenFunctions')
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -81,6 +82,7 @@ entity.onMobFight = function(mob, target)
     -- win condition set
     local battlefield = mob:getBattlefield()
     if
+        battlefield and
         battlefield:getID() == 993 and
         mob:getHPP() <= 15
     then -- Tenzen gives up at 15% - win

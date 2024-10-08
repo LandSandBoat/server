@@ -3,6 +3,7 @@
 -- plate_of_indi-mnd
 -- Teaches INDI-MND
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

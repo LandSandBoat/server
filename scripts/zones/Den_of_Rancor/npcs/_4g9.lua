@@ -5,6 +5,7 @@
 -----------------------------------
 local denOfRancorGlobal = require('scripts/zones/Den_of_Rancor/globals')
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

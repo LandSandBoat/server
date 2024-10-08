@@ -2,6 +2,7 @@
 -- Area: Ranguemont Pass
 --  NPC: Grounds Tome
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

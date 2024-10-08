@@ -2,6 +2,7 @@
 -- func: tp <amount> <player>
 -- desc: Sets a players tp. If they have a pet, also sets pet tp.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

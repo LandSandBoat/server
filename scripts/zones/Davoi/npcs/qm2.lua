@@ -4,6 +4,7 @@
 -- Involved in Quest: Tea with a Tonberry
 -- !pos 189.201 1.2553 -383.921 149
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

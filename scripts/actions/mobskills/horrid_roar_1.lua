@@ -2,6 +2,7 @@
 -- Horrid Roar (Fafnir, Cynoprosopi, Smok)
 -- Dispels a single buff at random which could be food.  Lowers Enmity.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

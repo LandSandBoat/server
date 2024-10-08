@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.OVERLOAD
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

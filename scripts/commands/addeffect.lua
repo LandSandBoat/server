@@ -2,6 +2,7 @@
 -- func: addeffect
 -- desc: Adds the given effect to the given player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -2,6 +2,7 @@
 -- Area: Gustav Tunnel
 --  Mob: Demonic Pugil
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

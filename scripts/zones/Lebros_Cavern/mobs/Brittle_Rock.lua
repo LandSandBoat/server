@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = zones[xi.zone.LEBROS_CAVERN]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -30,8 +31,11 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     if mob:getLocalVar('dead') == 0 then
         mob:setLocalVar('dead', 1)
-        local mobID = mob:getID()
+        local mobID    = mob:getID()
         local instance = mob:getInstance()
+        if not instance then
+            return
+        end
 
         if mobID == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK1 then
             GetNPCByID(ID.npc._1rx, instance):setAnimation(xi.animation.OPEN_DOOR)

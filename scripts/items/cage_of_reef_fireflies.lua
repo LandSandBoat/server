@@ -3,6 +3,7 @@
 -- Reef Fireflies
 -- Transports the user to Ilrusi Atoll Staging Point
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

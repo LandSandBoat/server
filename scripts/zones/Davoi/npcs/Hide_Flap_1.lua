@@ -3,6 +3,7 @@
 --  NPC: Hide Flap 1
 -- !pos 293 3 -213 149
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

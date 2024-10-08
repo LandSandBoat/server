@@ -2,6 +2,7 @@
 -- xi.effect.DEDICATION
 -- Handled in map/utils/charutils
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

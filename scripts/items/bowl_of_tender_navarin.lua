@@ -12,6 +12,7 @@
 -- Ranged ATT % 27 (cap 35)
 -- Evasion 5
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

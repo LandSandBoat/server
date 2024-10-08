@@ -9,6 +9,7 @@
 -- Mind -2
 -- Ranged ACC 5
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

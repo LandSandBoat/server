@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: EVIL_AT_THE_INLET
 -- !pos 129 -34 26 171
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -40,7 +41,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET)
         npcUtil.giveKeyItem(player, xi.ki.EVIL_WARDING_SEAL)
     elseif csid == 109 then
-        npcUtil.completeQuest(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET, { item = 4687 })
+        npcUtil.completeQuest(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET, { item = xi.item.SCROLL_OF_RECALL_JUGNER })
     end
 end
 

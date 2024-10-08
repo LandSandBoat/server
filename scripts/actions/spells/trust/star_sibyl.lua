@@ -1,6 +1,7 @@
 -----------------------------------
 -- Trust: Star Sibyl
 -----------------------------------
+---@type TSpellTrust
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

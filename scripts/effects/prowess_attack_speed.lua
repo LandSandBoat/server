@@ -4,6 +4,7 @@
 -- Note: Doesn't alter TP gain like -delay would, and
 -- doesn't alter JA timers like other sources of haste.
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

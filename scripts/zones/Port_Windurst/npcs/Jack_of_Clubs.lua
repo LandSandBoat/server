@@ -3,6 +3,7 @@
 --  NPC: Jack of Clubs
 -- Adventurer's Assistant
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

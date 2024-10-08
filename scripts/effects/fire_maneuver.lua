@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.FIRE_MANEUVER
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

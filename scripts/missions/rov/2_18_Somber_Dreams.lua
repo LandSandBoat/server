@@ -57,7 +57,7 @@ mission.sections =
 
             ['Cetus'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     -- NOTE: Current Cetus implementation is set to level 150 until fully implemented.  In addition,
                     -- when this mob is implemented, there is a 15 minute (non-displayed) timer mechanice for fight
                     -- length, and on failure, the player must zone prior to being able to pop again.  Logging out
@@ -84,21 +84,18 @@ mission.sections =
 
         [xi.zone.WALK_OF_ECHOES] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    -- TODO: Find if there's a message displayed if not charactersAvailable.  At this time, the event
-                    -- will not trigger, and mission will not be completed.
+            onZoneIn = function(player, prevZone)
+                -- TODO: Find if there's a message displayed if not charactersAvailable.  At this time, the event
+                -- will not trigger, and mission will not be completed.
 
-                    if
-                        prevZone == xi.zone.GRAUBERG_S and
-                        mission:getVar(player, 'Status') == 2 and
-                        xi.rhapsodies.charactersAvailable(player)
-                    then
-                        return 28
-                    end
-                end,
-            },
+                if
+                    prevZone == xi.zone.GRAUBERG_S and
+                    mission:getVar(player, 'Status') == 2 and
+                    xi.rhapsodies.charactersAvailable(player)
+                then
+                    return 28
+                end
+            end,
 
             onEventUpdate =
             {

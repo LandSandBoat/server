@@ -3,6 +3,7 @@
 --  NPC: Corbrere
 -- !pos -46.925 -4.5 49.006 94
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -38,18 +38,15 @@ mission.sections =
 
         [xi.zone.SACRIFICIAL_CHAMBER] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    local missionStatus = player:getMissionStatus(mission.areaId)
+            onZoneIn = function(player, prevZone)
+                local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if missionStatus == 1 then
-                        return 7
-                    elseif missionStatus == 2 then
-                        return 8
-                    end
-                end,
-            },
+                if missionStatus == 1 then
+                    return 7
+                elseif missionStatus == 2 then
+                    return 8
+                end
+            end,
 
             onEventUpdate =
             {

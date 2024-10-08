@@ -2,6 +2,7 @@
 -- Area: Garlaige Citadel [S]
 --   NM: Elatha
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

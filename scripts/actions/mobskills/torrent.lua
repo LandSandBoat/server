@@ -4,6 +4,7 @@
 --  Type: Magical Enfeebling
 --  Ignore Shadows, Single target
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

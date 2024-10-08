@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.HUNDRED_FISTS
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

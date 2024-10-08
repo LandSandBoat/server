@@ -2,6 +2,7 @@
 -- Area: West Ronfaure
 --  Mob: Wild Sheep
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

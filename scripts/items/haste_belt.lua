@@ -3,6 +3,7 @@
 -- Item: Haste Belt
 -- Item Effect: 10% haste
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

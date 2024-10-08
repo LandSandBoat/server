@@ -4,6 +4,7 @@
 -- Starts and Finishes Quest: The Fanged One, From Saplings Grow
 -- !pos 117 -3 92 241
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -14,16 +14,18 @@ mission.reward =
 -- Since there are so many zones with interactions:
 -- Populate each by hand
 mission.sections = {}
-mission.sections[1] = {} -- REMEMBER: Lua is 1-indexed!
+mission.sections[1] = -- REMEMBER: Lua is 1-indexed!
+{
+    check = function(player, currentMission, missionStatus, vars)
+        return currentMission == mission.missionId and
+            xi.settings.main.ENABLE_AMK == 1 and
+            xi.moghouse.isInMogHouseInHomeNation(player) and
+            player:getMainLvl() >= 10 and
+            player:getCharVar('HQuest[moghouseExpo]notSeen') == 0
+    end,
+}
 
-mission.sections[1].check = function(player, currentMission, missionStatus, vars)
-    return currentMission == mission.missionId and
-        xi.settings.main.ENABLE_AMK == 1 and
-        xi.moghouse.isInMogHouseInHomeNation(player) and
-        player:getMainLvl() >= 10 and
-        player:getCharVar('HQuest[moghouseExpo]notSeen') == 0
-end
-
+---@type ZoneSection
 local moogleTriggerEvent =
 {
     -- TODO: Does there need to be onZoneIn here?

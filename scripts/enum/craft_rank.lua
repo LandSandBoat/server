@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.craftRank
 xi.craftRank =
 {
     AMATEUR     = 0,

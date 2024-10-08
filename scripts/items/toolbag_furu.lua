@@ -3,6 +3,7 @@
 -- Toolbag Furu
 -- When used, you will obtain one stack of Furusumi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -11,6 +11,7 @@
 -- Earth Res 10
 -- Ranged Accuracy +6% (cap 15)
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

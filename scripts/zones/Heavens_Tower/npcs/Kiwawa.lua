@@ -3,6 +3,7 @@
 --  NPC: Kiwawa
 -- !pos 13.369 -27.25 18.718 242
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

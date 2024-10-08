@@ -13,6 +13,7 @@
 -- Magic Bursts on: Compression, Gravitation, and Darkness
 -- Combos: Clear Mind
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

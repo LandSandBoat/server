@@ -2,6 +2,7 @@
 -- Area: Misareaux Coast
 --   NM: Goaftrap
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

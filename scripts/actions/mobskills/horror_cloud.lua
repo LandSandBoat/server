@@ -7,6 +7,7 @@
 -- Range: Melee
 -- Notes: Can be overwritten and blocked by Haste.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

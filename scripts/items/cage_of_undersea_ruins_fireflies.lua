@@ -3,6 +3,7 @@
 -- Alzadaal Fireflies
 -- Transports the user to Nyzul Isle Staging Point
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

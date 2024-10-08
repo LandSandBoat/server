@@ -71,7 +71,7 @@ quest.sections =
                     if
                         player:hasKeyItem(xi.ki.ARAGONEU_PIZZA) and -- No free ride after delivering Pizza.
                         player:getZPos() > 38.5 and -- Pos check.
-                        quest:setVar(player, 'Prog') == 0 -- Hasn't taken the free ride.
+                        quest:getVar(player, 'Prog') == 0 -- Hasn't taken the free ride.
                     then
                         return quest:progressEvent(230) -- Free ride. 1 time only. Non-Mandatory step.
                     end

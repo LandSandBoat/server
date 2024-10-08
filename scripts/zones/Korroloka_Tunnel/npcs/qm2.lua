@@ -4,6 +4,7 @@
 -- Involved In Quest: Ayame and Kaede
 -- !pos -208 -9 176 173
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

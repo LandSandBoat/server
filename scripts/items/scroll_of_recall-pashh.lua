@@ -3,6 +3,7 @@
 -- Scroll of Recall-Pashh
 -- Teaches the white magic Recall-Pashh
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

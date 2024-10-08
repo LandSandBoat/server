@@ -73,18 +73,15 @@ mission.sections =
         {
             ['Lion_Springs'] = mission:progressEvent(70, 1, 0, 2964, 0, 66453367, 8366690, 4095, 131140),
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    local missionStatus = player:getMissionStatus(mission.areaId)
+            onZoneIn = function(player, prevZone)
+                local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if missionStatus == 3 then
-                        return mission:progressEvent(152)
-                    elseif missionStatus == 4 then
-                        return mission:progressEvent(153)
-                    end
-                end,
-            },
+                if missionStatus == 3 then
+                    return mission:progressEvent(152)
+                elseif missionStatus == 4 then
+                    return mission:progressEvent(153)
+                end
+            end,
 
             onEventUpdate =
             {

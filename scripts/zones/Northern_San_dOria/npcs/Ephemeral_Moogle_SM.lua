@@ -5,6 +5,7 @@
 -- !pos -176.090 12.000 268.910 231 - Carpenter's Guild
 -- !pos -186.440 12.000 140.310 231 - Blacksmith's Guild
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local triggerEvent = 914

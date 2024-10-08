@@ -2,6 +2,7 @@
 -- Fire Arrow
 -- Deals Fire damage.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

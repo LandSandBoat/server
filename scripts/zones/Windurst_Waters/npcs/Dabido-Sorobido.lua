@@ -3,6 +3,7 @@
 --  NPC: Dabido-Sorobido
 -- !pos -93.586 -4.499 19.321 238
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

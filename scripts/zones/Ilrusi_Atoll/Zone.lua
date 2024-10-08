@@ -1,17 +1,16 @@
 -----------------------------------
 -- Zone: Ilrusi_Atoll (55)
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onInstanceZoneIn = function(player, instance)
-    local cs = -1
-
     if player:getInstance() == nil then
         player:setPos(0, 0, 0, 0, 79)
-        return cs
+        return
     end
 
     local pos = player:getPos()
@@ -21,8 +20,6 @@ zoneObject.onInstanceZoneIn = function(player, instance)
     end
 
     player:addTempItem(5347)
-
-    return cs
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -38,7 +35,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 zoneObject.onInstanceLoadFailed = function()
-    return 79
+    return xi.zone.ARRAPAGO_REEF
 end
 
 return zoneObject

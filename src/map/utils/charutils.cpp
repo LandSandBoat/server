@@ -1,20 +1,20 @@
 ﻿/*
 ===========================================================================
 
-Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2010-2015 Darkstar Dev Teams
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
@@ -86,6 +86,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "roe.h"
 #include "spell.h"
 #include "status_effect_container.h"
+#include "trade_container.h"
 #include "trait.h"
 #include "treasure_pool.h"
 #include "unitychat.h"
@@ -103,6 +104,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "itemutils.h"
 #include "petutils.h"
 #include "puppetutils.h"
+#include "synthutils.h"
 #include "zoneutils.h"
 
 /************************************************************************
@@ -1023,7 +1025,7 @@ namespace charutils
         if (rset)
         {
             // equipSlotData[equipSlotId] = { slotId, containerId }
-            std::unordered_map<uint8, std::pair<uint8, uint8>> equipSlotData;
+            std::map<uint8, std::pair<uint8, uint8>> equipSlotData;
 
             // NOTE: This data is stored in the above map since if the item has an augment, another db
             // query will occur, which will destroy the current query results.
@@ -1387,7 +1389,7 @@ namespace charutils
             {
                 if (PItem->getID() == ItemID)
                 {
-                    itemCount++;
+                    itemCount += PItem->getQuantity();
                 }
             });
             // clang-format on
@@ -1669,30 +1671,40 @@ namespace charutils
 
         if ((PItem != nullptr) && PItem->isType(ITEM_EQUIPMENT))
         {
-            auto removeSlotID = ((CItemEquipment*)PItem)->getRemoveSlotId();
+            // if removeSlotLookID is available it should be prioritized as it will encompass a larger set of slots
+            auto removeSlotLookID = ((CItemEquipment*)PItem)->getRemoveSlotLookId();
+            auto removeSlotID     = removeSlotLookID > 0 ? removeSlotLookID : ((CItemEquipment*)PItem)->getRemoveSlotId();
 
+            // When unequipping an item, revert all associated look slots to either default or the item which is equipped
             for (auto i = 0u; i < sizeof(removeSlotID) * 8; ++i)
             {
                 if (removeSlotID & (1 << i))
                 {
                     if (i >= SLOT_HEAD && i <= SLOT_FEET)
                     {
+                        int             itemLook     = 0;
+                        CItemEquipment* equippedItem = PChar->getEquip((SLOTTYPE)i);
+                        if (equippedItem)
+                        {
+                            itemLook = equippedItem->getModelId();
+                        }
+
                         switch (i)
                         {
                             case SLOT_HEAD:
-                                PChar->look.head = 0;
+                                PChar->look.head = itemLook;
                                 break;
                             case SLOT_BODY:
-                                PChar->look.body = 0;
+                                PChar->look.body = itemLook;
                                 break;
                             case SLOT_HANDS:
-                                PChar->look.hands = 0;
+                                PChar->look.hands = itemLook;
                                 break;
                             case SLOT_LEGS:
-                                PChar->look.legs = 0;
+                                PChar->look.legs = itemLook;
                                 break;
                             case SLOT_FEET:
-                                PChar->look.feet = 0;
+                                PChar->look.feet = itemLook;
                                 break;
                         }
                     }
@@ -1851,6 +1863,12 @@ namespace charutils
         }
     }
 
+    bool hasSlotEquipped(CCharEntity* PChar, uint8 equipSlotID)
+    {
+        CItem* PItem = PChar->getEquip((SLOTTYPE)equipSlotID);
+        return PItem != nullptr && PItem->isType(ITEM_EQUIPMENT);
+    }
+
     void RemoveSub(CCharEntity* PChar)
     {
         CItemEquipment* PItem = PChar->getEquip(SLOT_SUB);
@@ -1902,6 +1920,8 @@ namespace charutils
 
         UnequipItem(PChar, equipSlotID, false);
 
+        // When equipping PItem - Remove all equip in slots which are also restricted by PItem
+        // e.g. Equipping a Black Cloak should remove head equipment
         if (PItem->getEquipSlotId() & (1 << equipSlotID))
         {
             auto removeSlotID = PItem->getRemoveSlotId();
@@ -1935,6 +1955,8 @@ namespace charutils
                 }
             }
 
+            // When equipping PItem into a slot - Remove equip in other slots which may have restricted equip in this slot
+            // e.g. Equipping head equipment should result in the removal of an equipped Black Cloak
             for (uint8 i = 0; i < SLOT_BACK; ++i)
             {
                 CItemEquipment* armor = PChar->getEquip((SLOTTYPE)i);
@@ -1948,8 +1970,6 @@ namespace charutils
             {
                 case SLOT_MAIN:
                 {
-                    CItemWeapon* weapon = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_MAIN));
-
                     if (PItem->isType(ITEM_WEAPON))
                     {
                         switch (static_cast<CItemWeapon*>(PItem)->getSkillType())
@@ -1994,11 +2014,6 @@ namespace charutils
                             }
                         }
                         PChar->m_Weapons[SLOT_MAIN] = PItem;
-
-                        if (weapon && weapon->isTwoHanded())
-                        {
-                            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_SEIGAN); // TODO: make seigan-specific effects not function without a 2H weapon so it doesn't have to be deleted if a weapon is removed
-                        }
                     }
                     PChar->look.main = PItem->getModelId();
                     UpdateWeaponStyle(PChar, equipSlotID, (CItemWeapon*)PItem);
@@ -2127,8 +2142,15 @@ namespace charutils
                 }
                 break;
             }
+
             PChar->equip[equipSlotID]    = slotID;
             PChar->equipLoc[equipSlotID] = containerID;
+
+            // Changed Visibile Equipment
+            if (equipSlotID >= SLOT_HEAD && equipSlotID <= SLOT_FEET)
+            {
+                UpdateRemovedSlotsLook(PChar);
+            }
         }
         else
         {
@@ -2322,7 +2344,13 @@ namespace charutils
         }
     }
 
-    void UpdateRemovedSlots(CCharEntity* PChar)
+    /// <summary>
+    /// Updates the Char's lockstyle look to account for gear that occupies multiple slots
+    /// This includes items like Black Cloak which restricts the equip AND look of headgear.
+    /// This also incluses items like Onca Suit which restricts equip and look of legs, but only look of hands and feet.
+    /// </summary>
+    /// <param name="PChar">Character to have Lockstyle look updated</param>
+    void UpdateRemovedSlotsLookForLockStyle(CCharEntity* PChar)
     {
         if (!PChar || !PChar->getStyleLocked())
         {
@@ -2343,7 +2371,7 @@ namespace charutils
                 continue;
             }
 
-            auto removeSlotID = PItem->getRemoveSlotId();
+            auto removeSlotID = PItem->getRemoveSlotLookId();
             if (removeSlotID > 0)
             {
                 for (auto i = 4u; i <= 8u; i++)
@@ -2366,6 +2394,53 @@ namespace charutils
                                 break;
                             case SLOT_FEET:
                                 PChar->mainlook.feet = PItem->getModelId();
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Updates the Char's look to account for gear that occupies multiple slots
+    /// This includes items like Black Cloak which restricts the equip AND look of headgear.
+    /// This also incluses items like Onca Suit which restricts equip and look of legs, but only look of hands and feet.
+    /// </summary>
+    /// <param name="PChar">Character to have look updated</param>
+    void UpdateRemovedSlotsLook(CCharEntity* PChar)
+    {
+        if (!PChar)
+        {
+            return;
+        }
+
+        for (int i = SLOT_HEAD; i < SLOT_FEET; i++)
+        {
+            CItemEquipment* armor = PChar->getEquip((SLOTTYPE)i);
+            if (armor && armor->isType(ITEM_EQUIPMENT) && armor->getRemoveSlotLookId())
+            {
+                auto removeSlotID = armor->getRemoveSlotLookId();
+                for (int j = SLOT_HEAD; j <= SLOT_FEET; j++)
+                {
+                    if (removeSlotID & (1 << j))
+                    {
+                        switch (j)
+                        {
+                            case SLOT_HEAD:
+                                PChar->look.head = armor->getModelId();
+                                break;
+                            case SLOT_BODY:
+                                PChar->look.body = armor->getModelId();
+                                break;
+                            case SLOT_HANDS:
+                                PChar->look.hands = armor->getModelId();
+                                break;
+                            case SLOT_LEGS:
+                                PChar->look.legs = armor->getModelId();
+                                break;
+                            case SLOT_FEET:
+                                PChar->look.feet = armor->getModelId();
                                 break;
                         }
                     }
@@ -2656,6 +2731,9 @@ namespace charutils
                     PChar->PLatentEffectContainer->CheckLatentsEquip(equipSlotID);
                     PChar->addPetModifiers(&PItem->petModList);
 
+                    // Only call the lua onEquip if its a valid equip - e.g. has passed EquipArmor and other checks above
+                    luautils::OnItemEquip(PChar, PItem);
+
                     PChar->pushPacket(new CEquipPacket(slotID, equipSlotID, containerID));
                     PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_NODROP));
                 }
@@ -2679,11 +2757,6 @@ namespace charutils
 
             BuildingCharWeaponSkills(PChar);
             PChar->pushPacket(new CCharAbilitiesPacket(PChar));
-        }
-
-        if (PItem != nullptr)
-        {
-            luautils::OnItemEquip(PChar, PItem);
         }
 
         charutils::BuildingCharSkillsTable(PChar);
@@ -3749,6 +3822,19 @@ namespace charutils
         return delBit(WeaponSkillID, PChar->m_WeaponSkills, sizeof(PChar->m_WeaponSkills));
     }
 
+    bool canUseWeaponSkill(CCharEntity* PChar, uint16 wsid)
+    {
+        CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(wsid);
+
+        if (PWeaponSkill == nullptr)
+        {
+            ShowError("Invalid Weaponskill ID passed to function.");
+            return false;
+        }
+
+        return PChar->GetSkill(PWeaponSkill->getType()) >= PWeaponSkill->getSkillLevel();
+    }
+
     /************************************************************************
      *                                                                       *
      *  Trait Functions                                                      *
@@ -4002,28 +4088,21 @@ namespace charutils
         }
     }
 
-    void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 droprate)
+    void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 dropRate)
     {
         TracyZoneScoped;
 
-        uint8 tries    = 0;
-        uint8 maxTries = 1;
-        uint8 bonus    = 0;
+        auto   thDropRateFunction = lua["xi"]["combat"]["treasureHunter"]["getDropRate"];
+        uint16 thDropRate         = dropRate * 10;
+
         if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
         {
-            // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
-            tries    = 0;
-            maxTries = 1 + (PMob->m_THLvl > 2 ? 2 : PMob->m_THLvl);
-            bonus    = (PMob->m_THLvl > 2 ? (PMob->m_THLvl - 2) * 10 : 0);
+            thDropRate = thDropRateFunction(PMob->m_THLvl, thDropRate);
         }
-        while (tries < maxTries)
+
+        if (thDropRate > 0 && xirand::GetRandomNumber(1, 10000) <= thDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
         {
-            if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
-            {
-                PChar->PTreasurePool->AddItem(itemid, PEntity);
-                break;
-            }
-            tries++;
+            PChar->PTreasurePool->AddItem(itemid, PEntity);
         }
     }
 
@@ -6444,7 +6523,15 @@ namespace charutils
             PChar->resetPetZoningInfo();
         }
 
+        // If player somehow gets zoned, force crit fail their synth
+        if (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0)
+        {
+            charutils::forceSynthCritFail("SendToZone", PChar);
+        }
+
         PChar->pushPacket(new CServerIPPacket(PChar, type, ipp));
+
+        removeCharFromZone(PChar);
     }
 
     void ForceLogout(CCharEntity* PChar)
@@ -6464,18 +6551,22 @@ namespace charutils
         SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
     }
 
-    void HomePoint(CCharEntity* PChar)
+    void HomePoint(CCharEntity* PChar, bool resetHPMP)
     {
         TracyZoneScoped;
 
-        // remove weakness on homepoint
-        PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_WEAKNESS);
-        PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
+        // player initiated warp/warp 2 or otherwise
+        if (resetHPMP)
+        {
+            // remove weakness on homepoint
+            PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_WEAKNESS);
+            PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
 
-        PChar->SetDeathTimestamp(0);
+            PChar->SetDeathTimestamp(0);
 
-        PChar->health.hp = PChar->GetMaxHP();
-        PChar->health.mp = PChar->GetMaxMP();
+            PChar->health.hp = PChar->GetMaxHP();
+            PChar->health.mp = PChar->GetMaxMP();
+        }
 
         PChar->loc.boundary    = 0;
         PChar->loc.p           = PChar->profile.home_point.p;
@@ -7037,12 +7128,131 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        auto ret = _sql->Query("SELECT charid FROM chars WHERE charname = %s LIMIT 1", name.c_str());
+        auto ret = _sql->Query("SELECT charid FROM chars WHERE charname = '%s' LIMIT 1", name.c_str());
         if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
             return _sql->GetUIntData(0);
         }
         return 0;
+    }
+
+    void forceSynthCritFail(std::string sourceFunction, CCharEntity* PChar)
+    {
+        // NOTE:
+        // Supposed non-losable items are reportedly lost if this condition is met:
+        // https://ffxiclopedia.fandom.com/wiki/Lu_Shang%27s_Fishing_Rod
+        // The broken rod can never be lost in a normal failed synth. It will only be lost if the synth is
+        // interrupted in some way, such as by being attacked or moving to another area (e.g. ship docking).
+
+        ShowWarning("%s: %s attempting to zone in the middle of a synth, failing their synth!", sourceFunction, PChar->getName());
+        PChar->setModifier(Mod::SYNTH_FAIL_RATE, 10000); // Force crit fail
+        synthutils::doSynthFail(PChar);
+
+        PChar->CraftContainer->Clean(); // Clean to reset m_ItemCount to 0
+    }
+
+    void removeCharFromZone(CCharEntity* PChar)
+    {
+        map_session_data_t* PSession = nullptr;
+
+        for (auto session : map_session_list)
+        {
+            if (session.second->charID == PChar->id)
+            {
+                PSession = session.second;
+                break;
+            }
+        }
+
+        // Store old blowfish, recalculate expected new blowfish
+        if (PSession)
+        {
+            PSession->blowfish.status = BLOWFISH_PENDING_ZONE;
+        }
+
+        PChar->TradePending.clean();
+        PChar->InvitePending.clean();
+        PChar->PWideScanTarget = nullptr;
+
+        if (PChar->animation == ANIMATION_ATTACK)
+        {
+            PChar->animation = ANIMATION_NONE;
+            PChar->updatemask |= UPDATE_HP;
+        }
+
+        if (!PChar->PTrusts.empty())
+        {
+            PChar->ClearTrusts();
+        }
+
+        if (PChar->status == STATUS_TYPE::SHUTDOWN)
+        {
+            if (PChar->PParty != nullptr)
+            {
+                if (PChar->PParty->m_PAlliance != nullptr)
+                {
+                    if (PChar->PParty->GetLeader() == PChar)
+                    {
+                        if (PChar->PParty->HasOnlyOneMember())
+                        {
+                            if (PChar->PParty->m_PAlliance->hasOnlyOneParty())
+                            {
+                                PChar->PParty->m_PAlliance->dissolveAlliance();
+                            }
+                            else
+                            {
+                                PChar->PParty->m_PAlliance->removeParty(PChar->PParty);
+                            }
+                        }
+                        else
+                        { // party leader logged off - will pass party lead
+                            PChar->PParty->RemoveMember(PChar);
+                        }
+                    }
+                    else
+                    { // not party leader - just drop from party
+                        PChar->PParty->RemoveMember(PChar);
+                    }
+                }
+                else
+                {
+                    // normal party - just drop group
+                    PChar->PParty->RemoveMember(PChar);
+                }
+            }
+
+            if (PChar->shouldPetPersistThroughZoning())
+            {
+                PChar->setPetZoningInfo();
+            }
+            else
+            {
+                PChar->resetPetZoningInfo();
+            }
+
+            PSession->shuttingDown = 1;
+            _sql->Query("UPDATE char_stats SET zoning = 0 WHERE charid = %u", PChar->id);
+        }
+        else
+        {
+            PSession->shuttingDown = 2;
+            _sql->Query("UPDATE char_stats SET zoning = 1 WHERE charid = %u", PChar->id);
+            charutils::CheckEquipLogic(PChar, SCRIPT_CHANGEZONE, PChar->getZone());
+        }
+
+        if (PChar->loc.zone != nullptr)
+        {
+            PChar->loc.zone->DecreaseZoneCounter(PChar);
+        }
+
+        PChar->StatusEffectContainer->SaveStatusEffects(PSession->shuttingDown == 1);
+        PChar->PersistData();
+        charutils::SavePlayTime(PChar);
+        charutils::SaveCharStats(PChar);
+        charutils::SaveCharExp(PChar, PChar->GetMJob());
+        charutils::SaveEminenceData(PChar);
+
+        PChar->status = STATUS_TYPE::DISAPPEAR;
     }
 
 }; // namespace charutils

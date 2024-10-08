@@ -2,6 +2,7 @@
 -- xi.effect.PROWESS
 -- Increased weapon skill damage
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

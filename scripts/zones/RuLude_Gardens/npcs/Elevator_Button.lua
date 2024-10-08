@@ -3,6 +3,7 @@
 --  NPC: Elevator Button
 -- Mog House Enterance
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

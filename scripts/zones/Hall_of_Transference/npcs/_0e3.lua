@@ -3,6 +3,7 @@
 --  NPC: Large Apparatus (Left) - Holla
 -- !pos -239 -1 290 14
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

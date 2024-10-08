@@ -3,6 +3,7 @@
 -- Scroll of Earth Carol
 -- Teaches the song Earth Carol
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

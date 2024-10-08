@@ -7,6 +7,7 @@
 --  Range: Melee
 -- Special weaponskill unique to Ark Angel HM. Deals ~500-900 damage.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

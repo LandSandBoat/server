@@ -3,6 +3,7 @@
 -- Ducal Guard Ring
 -- Enchantment: "Teleport-RuLude Gardens"
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

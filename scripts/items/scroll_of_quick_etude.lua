@@ -3,6 +3,7 @@
 -- Scroll of Quick Etude
 -- Teaches the song Quick Etude
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

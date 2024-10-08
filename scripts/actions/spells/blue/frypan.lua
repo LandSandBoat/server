@@ -12,6 +12,7 @@
 -- Skillchain Element(s): Impcation
 -- Combos: Max HP Boost
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -2,6 +2,7 @@
 -- Spell: Mage's Ballad
 -- Gradually restores target's MP.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

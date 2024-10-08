@@ -2,6 +2,7 @@
 -- Area: Inner Horutoto Ruins
 --  NPC: Treasure Casket
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

@@ -4,6 +4,7 @@
 -- Type: Quest NPC
 -- !pos  175.346 8.038 -419.244 84
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

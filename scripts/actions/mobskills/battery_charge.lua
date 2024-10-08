@@ -3,6 +3,7 @@
 -- Description: Gradually restores MP.
 -- Type: Magical (Light)
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

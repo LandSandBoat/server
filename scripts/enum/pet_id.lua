@@ -3,6 +3,7 @@
 -----------------------------------
 xi = xi or {}
 
+---@enum xi.petId
 xi.petId =
 {
     --  Summoner

@@ -22,6 +22,7 @@
 -- 11          |+22     |+30
 -- Bust        |-8      |-8
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

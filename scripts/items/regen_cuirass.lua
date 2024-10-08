@@ -3,6 +3,7 @@
 -- Item: regen cuirass
 -- Item Effect: gives regen
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

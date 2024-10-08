@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.UNLIMITED_SHOT
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -2,6 +2,7 @@
 -- Area: Cape Teriggan
 --  Mob: Robber Crab
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

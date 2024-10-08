@@ -2,6 +2,7 @@
 -- Area: The Garden of Ru'Hmet
 --  NPC: particle gate
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

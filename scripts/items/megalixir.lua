@@ -3,6 +3,7 @@
 -- Item: Megalixir
 -- Item Effect: Instantly restores 100% of HP and MP
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

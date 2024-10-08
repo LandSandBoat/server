@@ -3,6 +3,7 @@
 --  NPC: Gilipese
 -- !pos -155.088 0.000 120.300 231
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

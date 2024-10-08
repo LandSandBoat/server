@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = zones[xi.zone.SHIP_BOUND_FOR_SELBINA]
 -----------------------------------
+---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

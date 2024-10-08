@@ -3,6 +3,7 @@
 --  NPC: _47n
 -- !pos -40.811 -17.492 -140.000 151
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)

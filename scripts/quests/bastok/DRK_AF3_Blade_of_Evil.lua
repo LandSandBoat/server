@@ -29,14 +29,11 @@ quest.sections =
 
         [xi.zone.BEADEAUX] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if prevZone == xi.zone.PASHHOW_MARSHLANDS then
-                        return 122
-                    end
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                if prevZone == xi.zone.PASHHOW_MARSHLANDS then
+                    return 122
+                end
+            end,
 
             onEventFinish =
             {

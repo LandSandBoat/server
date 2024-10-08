@@ -4,6 +4,7 @@
 -- Spawns Nehebkau
 -- !pos 321 23 -355 216
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

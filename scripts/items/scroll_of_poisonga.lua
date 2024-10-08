@@ -3,6 +3,7 @@
 -- Scroll of Poisonga
 -- Teaches the black magic Poisonga
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

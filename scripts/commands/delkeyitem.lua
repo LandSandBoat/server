@@ -2,6 +2,7 @@
 -- func: delkeyitem
 -- desc: Deletes the given key item from the player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

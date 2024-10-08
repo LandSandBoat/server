@@ -292,7 +292,7 @@ xi.waypoint.onTrigger = function(player, npc)
 
         -- Note: The '4' Value is setting the discount value for waypoints, which appears to always
         -- be the case on retail now.
-        local menuParams = bit.bor(4, bit.bor(bit.lshift(destConfirmation, 3)))
+        local menuParams = bit.bor(4, bit.lshift(destConfirmation, 3))
 
         -- Waypoint Event ID
         local eventId = waypointInfo[waypointIndex][3]

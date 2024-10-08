@@ -3,6 +3,7 @@
 -- Scroll of Protect
 -- Teaches the white magic Protect
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

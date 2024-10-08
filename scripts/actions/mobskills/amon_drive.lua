@@ -7,6 +7,7 @@
 -- Range: Melee range radial
 -- Special weaponskill unique to Ark Angel TT. Deals ~100-400 damage.
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

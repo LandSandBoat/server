@@ -2,6 +2,7 @@
 -- Spikeball
 -- Throws a spiky projectile at a single target. Additional effect: Poison
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

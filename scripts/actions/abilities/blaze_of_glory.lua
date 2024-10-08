@@ -8,6 +8,7 @@
 -- Notes: Luopan Potency +50%
 -- Blaze of Glory has to be active first before using any Geocolure spell.
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -6,6 +6,7 @@
 mixins = { require('scripts/mixins/families/tonberry') }
 local ID = zones[xi.zone.DEN_OF_RANCOR]
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 local celestePHTable =

@@ -2,6 +2,7 @@
 -- Area: Meriphataud Mountains (119)
 --   NM: Waraxe Beak
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)

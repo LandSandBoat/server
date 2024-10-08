@@ -2,6 +2,7 @@
 -- Spell: Dark Carol
 -- Increases dark resistance for party members within the area of effect.
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

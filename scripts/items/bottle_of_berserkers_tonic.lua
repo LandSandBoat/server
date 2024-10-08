@@ -4,6 +4,7 @@
 -- Item Effect: Double Attack +50
 -----------------------------------
 
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

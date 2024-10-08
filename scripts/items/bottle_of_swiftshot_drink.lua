@@ -4,6 +4,7 @@
 -- Item Effect: Double Shot +100
 -----------------------------------
 
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

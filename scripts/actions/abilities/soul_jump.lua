@@ -4,6 +4,7 @@
 -- Obtained: DRG Level 85
 -- Recast Time: 2:00
 -----------------------------------
+---@type TAbility
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

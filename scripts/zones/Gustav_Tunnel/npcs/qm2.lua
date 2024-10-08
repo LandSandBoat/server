@@ -4,6 +4,7 @@
 -- Note: Part of mission "The Salt of the Earth"
 -- !pos -130 1.256 252.696 212
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -12,6 +12,7 @@
 -- Skillchain Element(s): Liquefaction
 -- Combos: Undead Killer
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
@@ -30,7 +31,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.H2H
+    params.damageType = xi.damageType.HTH
     params.scattr = xi.skillchainType.LIQUEFACTION
     params.numhits = 3
     params.multiplier = 1.0

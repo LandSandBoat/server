@@ -2,6 +2,7 @@
 -- Area: Port Windurst
 --  NPC: Seven of Clubs
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 local pathNodes =

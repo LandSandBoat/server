@@ -3,6 +3,7 @@
 -- Item: Federation Stables Scarf
 -- Teleports to Chocobo Stables (Windurst)
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Scroll of Slow II
 -- Teaches the white magic Slow II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

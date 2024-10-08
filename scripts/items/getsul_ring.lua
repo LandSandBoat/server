@@ -4,6 +4,7 @@
 -- Item Effect: +20% HP
 -- Duration 3 Minutes
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

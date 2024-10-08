@@ -2,6 +2,7 @@
 -- func: stun
 -- desc: stuns a non-NPC target for an hour. good for testing damage/mechanics on a punching bag.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

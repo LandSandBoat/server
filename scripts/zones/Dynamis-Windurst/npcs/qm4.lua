@@ -3,6 +3,7 @@
 --  NPC: ??? (qm4)
 -- Note: Spawns Tee Zaksa the Ceaseless
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.ADDENDUM_WHITE
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -2,6 +2,7 @@
 -- ID: 18052
 -- Tredecim Scythe
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemEquip = function(target, item)

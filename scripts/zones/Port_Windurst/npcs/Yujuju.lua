@@ -4,6 +4,7 @@
 --  Involved In Quest: Making Headlines
 -- !pos 201.523 -4.785 138.978 240
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

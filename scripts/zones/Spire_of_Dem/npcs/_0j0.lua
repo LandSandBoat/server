@@ -3,6 +3,7 @@
 --  NPC: Web of Recollections
 -- !pos 0.000 -2.0 247.992 19
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

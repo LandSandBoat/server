@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.GEO_REGEN
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

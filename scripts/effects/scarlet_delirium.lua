@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SCARLET_DELIRIUM
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

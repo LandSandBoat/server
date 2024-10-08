@@ -4,6 +4,7 @@
 -- !pos 102 1 109 80
 -- Allied Notes Notorious Monster Proprietor
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

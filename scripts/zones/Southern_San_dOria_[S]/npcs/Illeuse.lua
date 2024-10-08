@@ -3,6 +3,7 @@
 --  NPC: Illeuse
 -- !pos -44.203 2 -36.216 80
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

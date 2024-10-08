@@ -2,6 +2,7 @@
 -- Area: King Ranperre's Tomb
 --  NPC: Survival Guide
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, targetNpc)

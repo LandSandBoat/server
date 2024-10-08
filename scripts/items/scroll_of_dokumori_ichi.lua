@@ -3,6 +3,7 @@
 -- Scroll of Dokumori: Ichi
 -- Teaches the ninjutsu Dokumori: Ichi
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

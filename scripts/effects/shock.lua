@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SHOCK
 -----------------------------------
+---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

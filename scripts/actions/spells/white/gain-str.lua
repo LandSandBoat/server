@@ -2,6 +2,7 @@
 -- Spell: Gain-STR
 -- Boosts STR for the Caster
 -----------------------------------
+---@type TSpell
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

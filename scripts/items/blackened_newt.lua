@@ -10,6 +10,7 @@
 -- Virus Resist 4
 -- Curse Resist 4
 -----------------------------------
+---@type TItemFood
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

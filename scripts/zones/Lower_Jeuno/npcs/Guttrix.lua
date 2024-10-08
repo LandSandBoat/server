@@ -4,19 +4,21 @@
 -- Starts and Finishes Quest: The Goblin Tailor
 -- !pos -36.010 4.499 -139.714 245
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
+---@class rseMap : { [xi.race] : xi.item[] }
 local rseMap =
 {
     -- [race] = { body, hands, legs, feet }
-    [xi.race.HUME_M]   = { 12654, 12761, 12871, 13015 },
-    [xi.race.HUME_F]   = { 12655, 12762, 12872, 13016 },
-    [xi.race.ELVAAN_M] = { 12656, 12763, 12873, 13017 },
-    [xi.race.ELVAAN_F] = { 12657, 12764, 12874, 13018 },
-    [xi.race.TARU_M]   = { 12658, 12765, 12875, 13019 },
-    [xi.race.TARU_F]   = { 12658, 12765, 12875, 13019 },
-    [xi.race.MITHRA]   = { 12659, 12766, 12876, 13020 },
-    [xi.race.GALKA]    = { 12660, 12767, 12877, 13021 },
+    [xi.race.HUME_M  ] = { xi.item.CUSTOM_TUNIC,     xi.item.CUSTOM_M_GLOVES,  xi.item.CUSTOM_SLACKS,    xi.item.CUSTOM_M_BOOTS    },
+    [xi.race.HUME_F  ] = { xi.item.CUSTOM_VEST,      xi.item.CUSTOM_F_GLOVES,  xi.item.CUSTOM_PANTS,     xi.item.CUSTOM_F_BOOTS    },
+    [xi.race.ELVAAN_M] = { xi.item.MAGNA_JERKIN,     xi.item.MAGNA_GAUNTLETS,  xi.item.MAGNA_M_CHAUSSES, xi.item.MAGNA_M_LEDELSENS },
+    [xi.race.ELVAAN_F] = { xi.item.MAGNA_BODICE,     xi.item.MAGNA_GLOVES,     xi.item.MAGNA_F_CHAUSSES, xi.item.MAGNA_F_LEDELSENS },
+    [xi.race.TARU_M  ] = { xi.item.WONDER_KAFTAN,    xi.item.WONDER_MITTS,     xi.item.WONDER_BRACCAE,   xi.item.WONDER_CLOMPS     },
+    [xi.race.TARU_F  ] = { xi.item.WONDER_KAFTAN,    xi.item.WONDER_MITTS,     xi.item.WONDER_BRACCAE,   xi.item.WONDER_CLOMPS     },
+    [xi.race.MITHRA  ] = { xi.item.SAVAGE_SEPARATES, xi.item.SAVAGE_GAUNTLETS, xi.item.SAVAGE_LOINCLOTH, xi.item.SAVAGE_GAITERS    },
+    [xi.race.GALKA   ] = { xi.item.ELDERS_SURCOAT,   xi.item.ELDERS_BRACERS,   xi.item.ELDERS_BRAGUETTE, xi.item.ELDERS_SANDALS    },
 }
 
 local function hasRSE(player)

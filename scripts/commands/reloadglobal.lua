@@ -10,6 +10,7 @@
 --
 -- specify 'I_am_sure' without quotes to attempt to reload things that are not in \scripts\globals\
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

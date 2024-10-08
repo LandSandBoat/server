@@ -4,6 +4,7 @@
 -- Involved in Missions: San dOria Mission 8-2
 -- !pos -50 -17 -154
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

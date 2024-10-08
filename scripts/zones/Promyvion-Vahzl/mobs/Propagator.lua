@@ -2,6 +2,7 @@
 -- Area: Promyvion - Vahzl
 --   NM: Propagator
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -17,7 +18,7 @@ entity.onMobDeath = function(mob, player, optParams)
 
     for i = momma + 1, momma + mob:getLocalVar('maxBabies') do
         local baby = GetMobByID(i)
-        if baby:isSpawned() then
+        if baby and baby:isSpawned() then
             baby:setHP(0)
         end
     end

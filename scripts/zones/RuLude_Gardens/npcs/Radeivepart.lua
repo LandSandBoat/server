@@ -3,6 +3,7 @@
 --  NPC: Radeivepart
 -- !pos 5 9 -39 243
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

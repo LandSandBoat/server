@@ -3,6 +3,7 @@
 -- Jumping Attack, only used by dragoon orcs.
 -- 100% TP: ??? / 200% TP: ??? / 300% TP: ???
 -----------------------------------
+---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

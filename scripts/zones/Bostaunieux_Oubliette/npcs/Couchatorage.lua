@@ -3,6 +3,7 @@
 --  NPC: Couchatorage
 -- !pos -20.502 -19 17.765 167
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

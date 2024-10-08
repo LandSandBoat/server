@@ -3,19 +3,13 @@
 --  NPC: Cruor Prospector
 -- Type: Cruor NPC
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
-local itemType =
-{
-    ITEM        = 1,
-    TEMP        = 2,
-    KEYITEM     = 3,
-    ENHANCEMENT = 4,
-}
-
+---@type TProspectorItems
 local prospectorItems =
 {
-    [itemType.ITEM] =
+    [xi.abyssea.itemType.ITEM] =
     {
     --  Sel      Item                        Cost
         [1] = { xi.item.CREED_ARMET,        5000 },
@@ -27,7 +21,7 @@ local prospectorItems =
         [7] = { xi.item.SHADOW_THRONE,   2000000 },
     },
 
-    [itemType.TEMP] =
+    [xi.abyssea.itemType.TEMP] =
     {
     --  Sel      Item                               Cost
         [ 1] = { xi.item.LUCID_POTION_I,             80 },
@@ -49,7 +43,7 @@ local prospectorItems =
         [17] = { xi.item.PRIMEVAL_BREW,         2000000 },
     },
 
-    [itemType.KEYITEM] =
+    [xi.abyssea.itemType.KEYITEM] =
     {
     --  Sel     Item                                 Cost
         [1] = { xi.ki.MAP_OF_ABYSSEA_MISAREAUX,      4500 },
@@ -58,76 +52,76 @@ local prospectorItems =
         [4] = { xi.ki.LUNAR_ABYSSITE1,             100000 },
         [5] = { xi.ki.CLEAR_DEMILUNE_ABYSSITE,        300 },
     },
+}
 
-    -- Each selection can contain multiple effects in the format of { abysseaEffect, actualEffect, Amt, keyItemRequired, bonusMultiplier }
-    -- and after that table, the cruor cost is defined.
-    [itemType.ENHANCEMENT] =
+-- Each selection can contain multiple effects in the format of { abysseaEffect, actualEffect, Amt, keyItemRequired, bonusMultiplier }
+-- and after that table, the cruor cost is defined.
+local prospectorEnhancement =
+{
+    [6] =
     {
-        [6] =
         {
-            {
-                { xi.effect.ABYSSEA_HP, xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT, 10 },
-            },
-
-            50,
+            { xi.effect.ABYSSEA_HP, xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT, 10 },
         },
 
-        [7] =
-        {
-            {
-                { xi.effect.ABYSSEA_MP, xi.effect.MAX_MP_BOOST, 10, xi.abyssea.abyssiteType.MERIT, 5 },
-            },
+        50,
+    },
 
-            120,
+    [7] =
+    {
+        {
+            { xi.effect.ABYSSEA_MP, xi.effect.MAX_MP_BOOST, 10, xi.abyssea.abyssiteType.MERIT, 5 },
         },
 
-        [8] =
-        {
-            {
-                { xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                { xi.effect.ABYSSEA_DEX, xi.effect.DEX_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-            },
+        120,
+    },
 
-            120,
+    [8] =
+    {
+        {
+            { xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+            { xi.effect.ABYSSEA_DEX, xi.effect.DEX_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
         },
 
-        [9] =
-        {
-            {
-                { xi.effect.ABYSSEA_VIT, xi.effect.VIT_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                { xi.effect.ABYSSEA_AGI, xi.effect.AGI_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-            },
+        120,
+    },
 
-            100,
+    [9] =
+    {
+        {
+            { xi.effect.ABYSSEA_VIT, xi.effect.VIT_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+            { xi.effect.ABYSSEA_AGI, xi.effect.AGI_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
         },
 
-        [10] =
-        {
-            {
-                { xi.effect.ABYSSEA_INT, xi.effect.INT_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                { xi.effect.ABYSSEA_CHR, xi.effect.CHR_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                { xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-            },
+        100,
+    },
 
-            100,
+    [10] =
+    {
+        {
+            { xi.effect.ABYSSEA_INT, xi.effect.INT_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+            { xi.effect.ABYSSEA_CHR, xi.effect.CHR_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+            { xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST, 10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
         },
 
-        [11] =
-        {
-            {
-                { xi.effect.ABYSSEA_HP,  xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT,       10 },
-                { xi.effect.ABYSSEA_MP,  xi.effect.MAX_MP_BOOST, 10, xi.abyssea.abyssiteType.MERIT,        5 },
-                { xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                { xi.effect.ABYSSEA_DEX, xi.effect.DEX_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                { xi.effect.ABYSSEA_VIT, xi.effect.VIT_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                { xi.effect.ABYSSEA_AGI, xi.effect.AGI_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                { xi.effect.ABYSSEA_INT, xi.effect.INT_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                { xi.effect.ABYSSEA_CHR, xi.effect.CHR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-                { xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
-            },
+        100,
+    },
 
-            470,
+    [11] =
+    {
+        {
+            { xi.effect.ABYSSEA_HP,  xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT,       10 },
+            { xi.effect.ABYSSEA_MP,  xi.effect.MAX_MP_BOOST, 10, xi.abyssea.abyssiteType.MERIT,        5 },
+            { xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+            { xi.effect.ABYSSEA_DEX, xi.effect.DEX_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+            { xi.effect.ABYSSEA_VIT, xi.effect.VIT_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+            { xi.effect.ABYSSEA_AGI, xi.effect.AGI_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+            { xi.effect.ABYSSEA_INT, xi.effect.INT_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+            { xi.effect.ABYSSEA_CHR, xi.effect.CHR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+            { xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
         },
+
+        470,
     },
 }
 
@@ -149,7 +143,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     local itemSelected = bit.band(bit.rshift(option, 16), 0x1F)
     local cruorTotal = player:getCurrency('cruor')
 
-    if itemCategory == itemType.ITEM then
+    if itemCategory == xi.abyssea.itemType.ITEM then
         local itemData = prospectorItems[itemCategory][itemSelected]
         local itemQty = itemData[1] ~= xi.item.FORBIDDEN_KEY and 1 or bit.rshift(option, 24)
         local itemCost = itemData[2] * itemQty
@@ -160,7 +154,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         then
             player:delCurrency('cruor', itemCost)
         end
-    elseif itemCategory == itemType.TEMP then
+    elseif itemCategory == xi.abyssea.itemType.TEMP then
         local itemData = prospectorItems[itemCategory][itemSelected]
         local itemCost = itemData[2]
 
@@ -170,7 +164,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         then
             player:delCurrency('cruor', itemCost)
         end
-    elseif itemCategory == itemType.KEYITEM then
+    elseif itemCategory == xi.abyssea.itemType.KEYITEM then
         local itemData = prospectorItems[itemCategory][itemSelected]
 
         if
@@ -179,12 +173,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         then
             player:delCurrency('cruor', itemData[2])
         end
-    elseif itemCategory == itemType.ENHANCEMENT then
-        local enhanceData = prospectorItems[itemCategory][itemSelected]
+    elseif itemCategory == xi.abyssea.itemType.ENHANCEMENT then
+        local enhanceData = prospectorEnhancement[itemSelected]
 
-        if enhanceData <= cruorTotal then
+        if enhanceData[2] <= cruorTotal then
             for _, v in ipairs(enhanceData[1]) do
-                player:addStatusEffectEx(v[1], v[2], v[3] + xi.abyssea.getAbyssiteTotal(player, v[4]) * v[5])
+                player:addStatusEffectEx(v[1], v[2], v[3] + xi.abyssea.getAbyssiteTotal(player, v[4]) * v[5], 0, 0)
 
                 if v[1] == xi.effect.ABYSSEA_HP then
                     player:addHP(v[3] + xi.abyssea.getAbyssiteTotal(player, v[4]) * v[5])

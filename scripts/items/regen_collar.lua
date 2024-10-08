@@ -3,6 +3,7 @@
 -- Item: Regen Collar
 -- Item Effect: Restores 40 HP over 120 seconds
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

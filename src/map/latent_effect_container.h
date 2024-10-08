@@ -42,6 +42,7 @@ class CLatentEffectContainer
 public:
     void CheckLatentsHP();
     void CheckLatentsTP();
+    void CheckLatentsWS(bool isDuringWs);
     void CheckLatentsMP();
     void CheckLatentsEquip(uint8 slot);
     void CheckLatentsWeaponDraw(bool drawn);
@@ -78,7 +79,7 @@ private:
     std::vector<CLatentEffect> m_LatentEffectList;
 
     void ProcessLatentEffects(const std::function<bool(CLatentEffect&)>& logic);
-    bool ProcessLatentEffect(CLatentEffect& latentEffect);
+    bool ProcessLatentEffect(CLatentEffect& latentEffect, bool isDuringWs = false);
     bool ApplyLatentEffect(CLatentEffect& effect, bool expression);
 };
 

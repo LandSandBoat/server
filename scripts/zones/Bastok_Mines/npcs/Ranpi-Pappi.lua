@@ -3,6 +3,7 @@
 --  NPC: Ranpi-Pappi
 -- !pos -4.535 -1.044 49.881 234
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

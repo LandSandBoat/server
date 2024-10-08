@@ -3,6 +3,7 @@
 -- Scroll of Battlefield Elegy
 -- Teaches the song Battlefield Elegy
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

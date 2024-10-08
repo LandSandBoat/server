@@ -3,6 +3,7 @@
 -- Scroll of Carnage Elegy
 -- Teaches the song Carnage Elegy
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

@@ -3,6 +3,7 @@
 -- Stone Bangles
 --  Enchantment: "Enstone"
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

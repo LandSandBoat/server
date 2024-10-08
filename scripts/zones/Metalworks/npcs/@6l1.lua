@@ -6,6 +6,7 @@
 -- @6l1  South Elevator Platform    -55.978 -13.100 -12.020
 -- _6lj  South Elevator Winch       -56.126 -14.221 -11.988
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onSpawn = function(npc)

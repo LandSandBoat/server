@@ -2,6 +2,7 @@
 -- func: messagespecial
 -- desc: Injects a message special packet.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

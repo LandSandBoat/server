@@ -2,6 +2,7 @@
 -- Area: Toraimarai Canal
 --  Mob: Sodden Bones
 -----------------------------------
+---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

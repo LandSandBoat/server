@@ -3,6 +3,7 @@
 -- Water Card Case
 -- When used, you will obtain one stack of Water Cards
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

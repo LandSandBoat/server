@@ -190,12 +190,9 @@ quest.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 695
-                end,
-            },
+            onZoneIn = function(player, prevZone)
+                return 695
+            end,
 
             onEventFinish =
             {

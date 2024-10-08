@@ -3,6 +3,7 @@
 --  NPC: ???
 -- Involved in Mission: Bastok 8-2
 -----------------------------------
+---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

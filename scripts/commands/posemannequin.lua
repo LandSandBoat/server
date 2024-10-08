@@ -2,6 +2,7 @@
 -- func: posemannequin
 -- desc: changes the pose of a mannequin
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

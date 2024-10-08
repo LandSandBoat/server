@@ -3,6 +3,7 @@
 -- Scroll of Sleepga II
 -- Teaches the black magic Sleepga II
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

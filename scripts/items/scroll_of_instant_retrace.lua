@@ -3,6 +3,7 @@
 -- Scroll of Instant Retrace
 -- Transports the user to their Allied Nation.
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)

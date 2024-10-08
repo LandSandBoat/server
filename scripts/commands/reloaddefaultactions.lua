@@ -2,6 +2,7 @@
 -- func: reloaddefaultactions
 -- desc: Reloads default actions for current zone or all
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

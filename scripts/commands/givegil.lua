@@ -2,6 +2,7 @@
 -- func: givegil <amount> <player>
 -- desc: Gives the specified amount of gil to GM or target player.
 -----------------------------------
+---@type TCommand
 local commandObj = {}
 
 commandObj.cmdprops =

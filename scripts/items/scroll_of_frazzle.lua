@@ -3,6 +3,7 @@
 -- Scroll of Frazzle
 -- Teaches the black magic Frazzle
 -----------------------------------
+---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
