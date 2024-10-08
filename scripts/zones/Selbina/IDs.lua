@@ -35,7 +35,7 @@ zones[xi.zone.SELBINA] =
         ABELARD_DIALOG                = 7377, -- I'm Abelard, mayor of this village.
         WENZEL_DELIVERY_DIALOG        = 7600, -- My independent survey confirms the town entrance as the preferred location from which adventurers send parcels.
         BORIS_DELIVERY_DIALOG         = 7601, -- My independent survey confirms the inn as the preferred location from which adventurers send parcels.
-        INSUFFICIENT_GIL              = 7630, -- You don't seem to have enough gil...
+        INSUFFICIENT_GIL              = 7634, -- You don't seem to have enough gil...
         RETRIEVE_DIALOG_ID            = 7761, -- You retrieve <item> from the porter moogle's care.
     },
     mob =

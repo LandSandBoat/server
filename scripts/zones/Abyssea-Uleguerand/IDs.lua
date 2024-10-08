@@ -68,7 +68,7 @@ zones[xi.zone.ABYSSEA_ULEGUERAND] =
         BOUNDLESS_RAGE                = 7487,  -- You sense an aura of boundless rage...
         INFO_KI                       = 7488,  -- Your keen senses tell you that something may happen if only you had [this item/these items].
         USE_KI                        = 7491,  -- Use the [key item/key items]? Yes. No.
-        OBTAINS_DOMINION_NOTES        = 7880,  -- <name> obtains <number> Dominion note[/s] (Total: <number>).
+        OBTAINS_DOMINION_NOTES        = 7780,  -- <name> obtains <number> Dominion note[/s] (Total: <number>).
         DOMINION_SIGNED_ON            = 10300, -- You have signed on for Dominion Ops!
         CANCELED_OBJECTIVE            = 10301, -- You have canceled your objective.
     },
