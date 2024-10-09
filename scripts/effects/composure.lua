@@ -7,18 +7,15 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    local jpValue = target:getJobPointLevel(xi.jp.COMPOSURE_EFFECT)
+    local power = math.floor((24 * target:getMainLvl() + 74) / 49) + target:getJobPointLevel(xi.jp.COMPOSURE_EFFECT)
 
-    target:addMod(xi.mod.ACC, 15 + jpValue)
+    effect:addMod(xi.mod.ACC, power)
 end
 
 effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    local jpValue = target:getJobPointLevel(xi.jp.COMPOSURE_EFFECT)
-
-    target:delMod(xi.mod.ACC, 15 + jpValue)
 end
 
 return effectObject
