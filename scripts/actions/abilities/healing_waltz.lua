@@ -10,14 +10,16 @@ local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
     local waltzCost = 200 - player:getMod(xi.mod.WALTZ_COST) * 10
+    local returnCode = 0
+    local canUseAbility = false
     if target:getHP() == 0 then
-        return xi.msg.basic.CANNOT_ON_THAT_TARG, 0
+        returnCode = xi.msg.basic.CANNOT_ON_THAT_TARG
     elseif player:hasStatusEffect(xi.effect.SABER_DANCE) then
-        return xi.msg.basic.UNABLE_TO_USE_JA2, 0
+        returnCode = xi.msg.basic.UNABLE_TO_USE_JA2
     elseif player:hasStatusEffect(xi.effect.TRANCE) then
-        return 0, 0
+        canUseAbility = true
     elseif player:getTP() < waltzCost then
-        return xi.msg.basic.NOT_ENOUGH_TP, 0
+        returnCode = xi.msg.basic.NOT_ENOUGH_TP
     else
         --[[ Apply "Waltz Ability Delay" reduction
             1 modifier = 1 second]]
@@ -36,14 +38,28 @@ abilityObject.onAbilityCheck = function(player, target, ability)
             end
         end
 
-        return 0, 0
+        canUseAbility = true
     end
+
+    if
+        canUseAbility and
+        player:getStatusEffect(xi.effect.CONTRADANCE)
+    then
+        ability:setAOE(1)
+        ability:setRange(10)
+        player:delStatusEffect(xi.effect.CONTRADANCE)
+    end
+
+    return returnCode, 0
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability, action)
     local waltzCost = 200 - player:getMod(xi.mod.WALTZ_COST) * 10
     -- Only remove TP if the player doesn't have Trance.
-    if not player:hasStatusEffect(xi.effect.TRANCE) then
+    if
+        not player:hasStatusEffect(xi.effect.TRANCE) and
+        action:getPrimaryTargetID() == target:getID()
+    then
         player:delTP(waltzCost)
     end
 
