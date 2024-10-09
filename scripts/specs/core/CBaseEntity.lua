@@ -1196,6 +1196,11 @@ end
 function CBaseEntity:setAnimationSub(animationsub)
 end
 
+---@param spawnAnimation integer
+---@return nil
+function CBaseEntity:setSpawnAnimation(spawnAnimation)
+end
+
 ---@nodiscard
 ---@return boolean
 function CBaseEntity:getCallForHelpFlag()

@@ -29,11 +29,19 @@ zones[xi.zone.FULL_MOON_FOUNTAIN] =
         PLAY_TIME_IS_OVER             = 7769, -- Play time is over! Powers of dark mana, answer my call!
         YOU_SHOULD_BE_THANKFUL        = 7770, -- You should be thankful. I'll give you a shortaru trip back to the hell you came from!
         DONT_GIVE_UP                  = 7771, -- Don't give up, adventurer! You are Windurst's guiding star, our beacon of hope!
+        LEAVE_THE_AFFAIRS_OF_GODS_TO  = 7829, -- Leave the affairs of gods to gods, mortal. If you choose to stay, then be prepared to face our wrath!
+        FALSE_GODS                    = 7830, -- False gods... They are the ones...who have...betrayed you...
+        WARPED_LOGIC                  = 7831, -- Warped logic... This is what...has truly...divided you...
+        TAINTED_JUSTICE               = 7832, -- Tainted justice... This is what...has truly...destroyed you...
+        BASELESS_TIES                 = 7833, -- Baseless ties... These are what...have truly...cursed you....
+        CORRUPTED_POWER               = 7834, -- Corrupted power... This is what...has truly misled you...
+        DECEPTIVE_APPEARANCES         = 7835, -- Deceptive appearances... These are what...have truly been...your downfall...
     },
     mob =
     {
-        FENRIR_PRIME = GetFirstID('Fenrir_Prime'),
-        ACE_OF_CUPS  = GetFirstID('Ace_of_Cups'),
+        FENRIR_PRIME    = GetFirstID('Fenrir_Prime'),
+        CARBUNCLE_PRIME = GetFirstID('Carbuncle_Prime'),
+        ACE_OF_CUPS     = GetFirstID('Ace_of_Cups'),
     },
     npc =
     {

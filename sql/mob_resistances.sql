@@ -61,7 +61,7 @@ INSERT INTO `mob_resistances` VALUES (30,'Automaton-Stormwaker',1.0,1.0,1.0,1.0,
 INSERT INTO `mob_resistances` VALUES (31,'Automaton-Valoredge',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,-1,-1,-1,-1);
 INSERT INTO `mob_resistances` VALUES (32,'Avatar-Atomos_Prime',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (33,'Avatar-Alexander_ToAU',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,11,5);
-INSERT INTO `mob_resistances` VALUES (34,'Avatar-Carbuncle_Prime',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,6,6,6,6,6,6,11,0);
+INSERT INTO `mob_resistances` VALUES (34,'Avatar-Carbuncle_Prime',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,11,0);
 INSERT INTO `mob_resistances` VALUES (35,'Avatar-Diabolos_CoP',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,4);
 INSERT INTO `mob_resistances` VALUES (36,'Avatar-Fenrir_Prime',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,-2,11);
 INSERT INTO `mob_resistances` VALUES (37,'Avatar-Garuda_Prime',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,11,-3,11,11,11,11,11,11);
@@ -509,3 +509,4 @@ INSERT INTO `mob_resistances` VALUES (515,'Wyvern - Ajattara',1.0,1.0,1.0,1.0,0,
 INSERT INTO `mob_resistances` VALUES (516,'Gigas - Alkyoneus',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (517,'Gigas - Blizzard',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,-2,4,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (518,'Proto - Omega',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0,11);
+INSERT INTO `mob_resistances` VALUES (519,'Avatar-Carbuncle_Prime_WTB',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,11,0);
