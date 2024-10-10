@@ -2,6 +2,8 @@
 -- Area: Castle Zvahl Keep (162)
 --  Mob: Baron Vapula
 -----------------------------------
+mixins = { require('scripts/mixins/job_special') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

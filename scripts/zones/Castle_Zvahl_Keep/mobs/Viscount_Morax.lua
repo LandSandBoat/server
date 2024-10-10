@@ -2,6 +2,8 @@
 -- Area: Castle Zvahl Keep (162)
 --  Mob: Viscount Morax
 -----------------------------------
+mixins = { require('scripts/mixins/job_special') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
