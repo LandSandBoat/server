@@ -5915,7 +5915,7 @@ INSERT INTO `item_equipment` VALUES (16165,'storm_shield',70,0,2421,39,2,0,2,0,0
 INSERT INTO `item_equipment` VALUES (16166,'januwiyah_-1',73,0,193,54,4,0,2,0,0,0);
 INSERT INTO `item_equipment` VALUES (16167,'tariqah_-1',73,0,2421,53,2,0,2,0,0,0);
 INSERT INTO `item_equipment` VALUES (16168,'sentinel_shield',50,0,2385,47,3,0,2,0,0,0);
-INSERT INTO `item_equipment` VALUES (16169,'caballero_shield',70,0,193,22,3,0,2,0,0,0);
+INSERT INTO `item_equipment` VALUES (16169,'caballero_shield',70,0,193,24,3,0,2,0,0,0);
 INSERT INTO `item_equipment` VALUES (16170,'wivre_shield',58,0,193,30,3,0,2,0,0,0);
 INSERT INTO `item_equipment` VALUES (16171,'wivre_shield_+1',58,0,193,30,3,0,2,0,0,0);
 INSERT INTO `item_equipment` VALUES (16172,'iron_ram_shield',60,0,193,27,3,0,2,0,0,0);
