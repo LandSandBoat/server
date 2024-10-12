@@ -85,7 +85,7 @@ bool CPetEntity::isBstPet()
     return getPetType() == PET_TYPE::JUG_PET || objtype == TYPE_MOB;
 }
 
-int32 CPetEntity::getJugSpawnTime()
+uint32 CPetEntity::getJugSpawnTime()
 {
     if (m_PetType != PET_TYPE::JUG_PET)
     {
@@ -94,10 +94,10 @@ int32 CPetEntity::getJugSpawnTime()
     }
 
     const auto epoch = m_jugSpawnTime.time_since_epoch();
-    return static_cast<int32>(std::chrono::duration_cast<std::chrono::seconds>(epoch).count());
+    return static_cast<uint32>(std::chrono::duration_cast<std::chrono::seconds>(epoch).count());
 }
 
-void CPetEntity::setJugSpawnTime(int32 spawnTime)
+void CPetEntity::setJugSpawnTime(uint32 spawnTime)
 {
     if (m_PetType != PET_TYPE::JUG_PET)
     {
@@ -105,10 +105,10 @@ void CPetEntity::setJugSpawnTime(int32 spawnTime)
         return;
     }
 
-    m_jugSpawnTime = std::chrono::system_clock::time_point(std::chrono::duration<int>(spawnTime));
+    m_jugSpawnTime = std::chrono::system_clock::time_point(std::chrono::duration<uint32>(spawnTime));
 }
 
-int32 CPetEntity::getJugDuration()
+uint32 CPetEntity::getJugDuration()
 {
     if (m_PetType != PET_TYPE::JUG_PET)
     {
@@ -116,10 +116,10 @@ int32 CPetEntity::getJugDuration()
         return 0;
     }
 
-    return static_cast<int32>(std::chrono::duration_cast<std::chrono::seconds>(m_jugDuration).count());
+    return static_cast<uint32>(std::chrono::duration_cast<std::chrono::seconds>(m_jugDuration).count());
 }
 
-void CPetEntity::setJugDuration(int32 seconds)
+void CPetEntity::setJugDuration(uint32 seconds)
 {
     if (m_PetType != PET_TYPE::JUG_PET)
     {
@@ -270,27 +270,6 @@ void CPetEntity::Spawn()
     // TODO: Calling a grand-parent's impl. of an overridden function is bad
     CBattleEntity::Spawn();
     luautils::OnMobSpawn(this);
-}
-
-bool CPetEntity::shouldDespawn(time_point tick)
-{
-    // This check was moved from the original call site when this method was added.
-    // It is in theory not needed, but we are not removing it without further testing.
-    // TODO: Consider removing this when possible.
-    if (isCharmed && tick > charmTime)
-    {
-        return true;
-    }
-
-    if (PMaster != nullptr &&
-        PAI->IsSpawned() &&
-        m_PetType == PET_TYPE::JUG_PET &&
-        tick > m_jugSpawnTime + m_jugDuration)
-    {
-        return true;
-    }
-
-    return false;
 }
 
 void CPetEntity::loadPetZoningInfo()

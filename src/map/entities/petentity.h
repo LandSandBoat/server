@@ -55,9 +55,9 @@ public:
     PET_TYPE          getPetType();
     uint8             getSpawnLevel();
     void              setSpawnLevel(uint8 level);
-    int32             getJugSpawnTime();             // initial spawn time (in seconds since epoch) of this pet if it's a jug pet
-    int32             getJugDuration();              // duration of this jug pet in seconds
-    void              setJugDuration(int32 seconds); // sets the duration of this jug pet in seconds
+    uint32            getJugSpawnTime();              // initial spawn time (in seconds since epoch) of this pet if it's a jug pet
+    uint32            getJugDuration();               // duration of this jug pet in seconds
+    void              setJugDuration(uint32 seconds); // sets the duration of this jug pet in seconds
     bool              isBstPet();
     uint32            m_PetID;
     const std::string GetScriptName();
@@ -66,9 +66,8 @@ public:
     virtual void      FadeOut() override;
     virtual void      Die() override;
     virtual void      Spawn() override;
-    bool              shouldPersistThroughZone();     // if true, zoning should not cause a currently active pet to despawn
-    bool              shouldDespawn(time_point tick); // if true, the pet should despawn at this point in time
-    void              loadPetZoningInfo();            // loads info from previous zone (hp / mp / tp / spawn time). This MUST be called after Spawn()
+    bool              shouldPersistThroughZone(); // if true, zoning should not cause a currently active pet to despawn
+    void              loadPetZoningInfo();        // loads info from previous zone (hp / mp / tp / spawn time). This MUST be called after Spawn()
     virtual void      OnAbility(CAbilityState&, action_t&) override;
     virtual bool      ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
     void              OnPetSkillFinished(CPetSkillState& state, action_t& action);
@@ -80,7 +79,7 @@ private:
     time_point m_jugSpawnTime; // original spawn time of a jug pet
     duration   m_jugDuration;  // Time before the jug is despawned after being called
 
-    void setJugSpawnTime(int32 spawnTime); // sets the initial spawn time of this pet in seconds since epoch
+    void setJugSpawnTime(uint32 spawnTime); // sets the initial spawn time of this pet in seconds since epoch
 };
 
 #endif

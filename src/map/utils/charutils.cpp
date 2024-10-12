@@ -703,8 +703,8 @@ namespace charutils
                 PChar->petZoningInfo.petType      = static_cast<PET_TYPE>(rset->getUInt("pet_type"));
                 PChar->petZoningInfo.petLevel     = rset->getUInt("pet_level");
                 PChar->petZoningInfo.respawnPet   = true;
-                PChar->petZoningInfo.jugSpawnTime = PChar->getCharVar("jugpet-spawn-time");
-                PChar->petZoningInfo.jugDuration  = PChar->getCharVar("jugpet-duration-seconds");
+                PChar->petZoningInfo.jugSpawnTime = static_cast<uint32>(PChar->getCharVar("jugpet-spawn-time"));
+                PChar->petZoningInfo.jugDuration  = static_cast<uint32>(PChar->getCharVar("jugpet-duration-seconds"));
 
                 // clear the charvars used for jug state
                 PChar->clearCharVarsWithPrefix("jugpet-");
@@ -5439,8 +5439,8 @@ namespace charutils
 
         // These two are jug only variables. We should probably move pet char stats into its own table, but in the meantime
         // we use charvars for jug specific things
-        PChar->setCharVar("jugpet-spawn-time", PChar->petZoningInfo.jugSpawnTime);
-        PChar->setCharVar("jugpet-duration-seconds", PChar->petZoningInfo.jugDuration);
+        PChar->setCharVar("jugpet-spawn-time", static_cast<int32>(PChar->petZoningInfo.jugSpawnTime));
+        PChar->setCharVar("jugpet-duration-seconds", static_cast<int32>(PChar->petZoningInfo.jugDuration));
     }
 
     /************************************************************************

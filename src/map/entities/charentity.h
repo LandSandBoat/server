@@ -186,8 +186,8 @@ struct teleport_t
 struct PetInfo_t
 {
     bool     respawnPet;   // Used for spawning pet on zone
-    int32    jugSpawnTime; // Keeps track of original spawn time in seconds since epoch
-    int32    jugDuration;  // Number of seconds a jug pet should last after its original spawn time
+    uint32   jugSpawnTime; // Keeps track of original spawn time in seconds since epoch
+    uint32   jugDuration;  // Number of seconds a jug pet should last after its original spawn time
     uint8    petID;        // ID as in wyvern(48) , carbuncle(8) ect..
     PET_TYPE petType;      // Type of pet being transferred
     uint8    petLevel;     // Level the pet was spawned with
