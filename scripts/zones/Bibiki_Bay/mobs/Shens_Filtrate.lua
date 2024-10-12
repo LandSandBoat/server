@@ -11,6 +11,10 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.REGEN, 120)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.STUN)
+    mob:addImmunity(xi.immunity.POISON)
+    mob:setMobMod(xi.mobMod.SKIP_ALLEGIANCE_CHECK, 1)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
