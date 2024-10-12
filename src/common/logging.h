@@ -146,15 +146,17 @@ inline auto format_as(type v) \
 #define DebugSQL(...)      LOGGER_ENABLE("logging.DEBUG_SQL", ShowDebug(__VA_ARGS__))
 #define DebugIDLookup(...) LOGGER_ENABLE("logging.DEBUG_ID_LOOKUP", ShowDebug(__VA_ARGS__))
 #define DebugModules(...)  LOGGER_ENABLE("logging.DEBUG_MODULES", ShowDebug(__VA_ARGS__))
+#define DebugBazaars(...)  LOGGER_ENABLE("logging.DEBUG_BAZAARS", ShowDebug(__VA_ARGS__))
 
 // Debug Loggers fmt variants
-#define DebugSocketsFmt(...)  LOGGER_ENABLE("logging.DEBUG_SOCKETS", ShowDebugFmt(__VA_ARGS__)) STATEMENT_CLOSE
-#define DebugNavmeshFmt(...)  LOGGER_ENABLE("logging.DEBUG_NAVMESH", ShowDebugFmt(__VA_ARGS__)) STATEMENT_CLOSE
-#define DebugPacketsFmt(...)  LOGGER_ENABLE("logging.DEBUG_PACKETS", ShowDebugFmt(__VA_ARGS__)) STATEMENT_CLOSE
-#define DebugActionsFmt(...)  LOGGER_ENABLE("logging.DEBUG_ACTIONS", ShowDebugFmt(__VA_ARGS__)) STATEMENT_CLOSE
-#define DebugSQLFmt(...)      LOGGER_ENABLE("logging.DEBUG_SQL", ShowDebugFmt(__VA_ARGS__)) STATEMENT_CLOSE
-#define DebugIDLookupFmt(...) LOGGER_ENABLE("logging.DEBUG_ID_LOOKUP", ShowDebugFmt(__VA_ARGS__)) STATEMENT_CLOSE
-#define DebugModulesFmt(...)  LOGGER_ENABLE("logging.DEBUG_MODULES", ShowDebugFmt(__VA_ARGS__)) STATEMENT_CLOSE
+#define DebugSocketsFmt(...)  LOGGER_ENABLE("logging.DEBUG_SOCKETS", ShowDebugFmt(__VA_ARGS__))
+#define DebugNavmeshFmt(...)  LOGGER_ENABLE("logging.DEBUG_NAVMESH", ShowDebugFmt(__VA_ARGS__))
+#define DebugPacketsFmt(...)  LOGGER_ENABLE("logging.DEBUG_PACKETS", ShowDebugFmt(__VA_ARGS__))
+#define DebugActionsFmt(...)  LOGGER_ENABLE("logging.DEBUG_ACTIONS", ShowDebugFmt(__VA_ARGS__))
+#define DebugSQLFmt(...)      LOGGER_ENABLE("logging.DEBUG_SQL", ShowDebugFmt(__VA_ARGS__))
+#define DebugIDLookupFmt(...) LOGGER_ENABLE("logging.DEBUG_ID_LOOKUP", ShowDebugFmt(__VA_ARGS__))
+#define DebugModulesFmt(...)  LOGGER_ENABLE("logging.DEBUG_MODULES", ShowDebugFmt(__VA_ARGS__))
+#define DebugBazaarsFmt(...)  LOGGER_ENABLE("logging.DEBUG_BAZAARS", ShowDebugFmt(__VA_ARGS__))
 
 // clang-format on
 
