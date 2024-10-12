@@ -227,6 +227,7 @@ function applyResistanceEffect(actor, target, spell, params)
     local skillType   = params.skillType or 0
     local element     = spell:getElement() or 0
     local statUsed    = params.attribute or 0
+    local effectId    = params.effect or 0
     local bonusMacc   = params.bonus or 0
 
     -- GUESS stat if it isnt fed with params.
@@ -238,40 +239,17 @@ function applyResistanceEffect(actor, target, spell, params)
         end
     end
 
-    -- Is enfeeble?
-    local isEnfeeble = false
-    local effect     = params.effect or 0
-    if effect > 0 then
-        isEnfeeble  = true
-    end
-
-    -- TODO: Convert enfeebling songs.
-    local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(actor, target, spellFamily, skillType, element, statUsed, bonusMacc)
-    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(actor, target, element, isEnfeeble, 0, 0) -- true = Is an enfeeble.
-    local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
-    local resistRate   = xi.combat.magicHitRate.calculateResistRate(actor, target, skillType, element, magicHitRate, 0)
-
-    return resistRate
+    return xi.combat.magicHitRate.calculateResistRate(actor, target, spellFamily, skillType, element, statUsed, effectId, bonusMacc)
 end
 
 -- Applies resistance for things that may not be spells - ie. Quick Draw
 function applyResistanceAbility(actor, target, element, skillType, bonusMacc)
-    local magicAcc     = xi.combat.magicHitRate.calculateNonSpellMagicAccuracy(actor, target, 0, skillType, element, bonusMacc)
-    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(actor, target, element, false, 0, 0) -- false = not an enfeeble.
-    local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
-    local resistRate   = xi.combat.magicHitRate.calculateResistRate(actor, target, skillType, element, magicHitRate, 0)
-
-    return resistRate
+    return xi.combat.magicHitRate.calculateResistRate(actor, target, 0, skillType, element, 0, 0, bonusMacc)
 end
 
 -- Applies resistance for additional effects
 function applyResistanceAddEffect(actor, target, element, bonusMacc)
-    local magicAcc     = xi.combat.magicHitRate.calculateNonSpellMagicAccuracy(actor, target, 0, xi.skill.NONE, element, bonusMacc)
-    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(actor, target, element, false, 0, 0) -- false = not an enfeeble.
-    local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
-    local resistRate   = xi.combat.magicHitRate.calculateResistRate(actor, target, xi.skill.NONE, element, magicHitRate, 0)
-
-    return resistRate
+    return xi.combat.magicHitRate.calculateResistRate(actor, target, 0, xi.skill.NONE, element, 0, 0, bonusMacc)
 end
 
 function finalMagicAdjustments(caster, target, spell, dmg)
