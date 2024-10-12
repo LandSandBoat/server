@@ -1361,7 +1361,6 @@ INSERT INTO `mob_spell_lists` VALUES ('Animated_Shield',96,273,37,255); -- sleep
 INSERT INTO `mob_spell_lists` VALUES ('Stubborn_Dredvodd',97,54,1,255); -- stoneskin (1~255)
 
 -- Demonic_Tiphia (98)
-INSERT INTO `mob_spell_lists` VALUES ('Demonic_Tiphia',98,5,1,255);   -- cure_v (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Demonic_Tiphia',98,143,1,255); -- erase (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Demonic_Tiphia',98,274,1,255); -- sleepga_ii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Demonic_Tiphia',98,356,1,255); -- paralyga (1~255)
