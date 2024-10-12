@@ -1862,7 +1862,9 @@ INSERT INTO `item_usable` VALUES (6176,'copy_of_astral_homeland',1,1,117,0,0,0,0
 INSERT INTO `item_usable` VALUES (6177,'copy_of_life-form_study',1,1,117,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6178,'copy_of_hrohjs_record',1,1,117,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6179,'copy_of_the_bell_tolls',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6180,'pluton_case',1,1,24,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6181,'beitetsu_parcel',1,1,24,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6182,'boulder_case',1,1,24,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6183,'pluton_box',1,1,24,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6184,'beitetsu_box',1,1,24,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6185,'boulder_box',1,1,24,0,0,0,0,0);
