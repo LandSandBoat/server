@@ -309,7 +309,7 @@ CCharEntity::~CCharEntity()
         {
             if (PParty->GetSyncTarget() == this || PParty->GetLeader() == this)
             {
-                PParty->SetSyncTarget("", 551);
+                PParty->SetSyncTarget("", MsgStd::LevelSyncDeactivateLeftArea);
             }
             if (PParty->GetSyncTarget() != nullptr)
             {
@@ -323,7 +323,7 @@ CCharEntity::~CCharEntity()
                 }
                 if (count < 2) // 3, because one is zoning out - thus at least 2 will be left
                 {
-                    PParty->SetSyncTarget("", 552);
+                    PParty->SetSyncTarget("", MsgStd::LevelSyncRemoveTooFewMembers);
                 }
             }
         }

@@ -1144,6 +1144,34 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     moduleutils::OnCharZoneOut(PChar);
     luautils::OnZoneOut(PChar);
 
+    if (PChar->m_LevelRestriction != 0)
+    {
+        if (PChar->PParty)
+        {
+            if (PChar->PParty->GetSyncTarget() == PChar || PChar->PParty->GetLeader() == PChar)
+            {
+                PChar->PParty->SetSyncTarget("", MsgStd::LevelSyncDeactivateLeftArea);
+            }
+            if (PChar->PParty->GetSyncTarget() != nullptr)
+            {
+                uint8 count = 0;
+                for (uint32 i = 0; i < PChar->PParty->members.size(); ++i)
+                {
+                    if (PChar->PParty->members.at(i) != PChar && PChar->PParty->members.at(i)->getZone() == PChar->PParty->GetSyncTarget()->getZone())
+                    {
+                        count++;
+                    }
+                }
+                if (count < 2) // 3, because one is zoning out - thus at least 2 will be left
+                {
+                    PChar->PParty->SetSyncTarget("", MsgStd::LevelSyncRemoveTooFewMembers);
+                }
+            }
+        }
+        PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
+        PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_RESTRICTION);
+    }
+
     if (PChar->PTreasurePool != nullptr) // TODO: Condition for eliminating problems with MobHouse, we need to solve it once and for all!
     {
         PChar->PTreasurePool->DelMember(PChar);
@@ -1167,6 +1195,8 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     {
         PChar->loc.prevzone = m_zoneID;
     }
+
+    charutils::WriteHistory(PChar);
 }
 
 bool CZone::IsZoneActive() const
