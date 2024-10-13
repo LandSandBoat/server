@@ -90,7 +90,7 @@ namespace gardenutils
         for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
         {
             CItemContainer* PContainer = PChar->getStorage(containerID);
-            for (int slotID = 0; slotID < PContainer->GetSize(); ++slotID)
+            for (int slotID = 1; slotID <= PContainer->GetSize(); ++slotID)
             {
                 CItem* PItem = PContainer->GetItem(slotID);
                 if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
@@ -218,6 +218,7 @@ namespace gardenutils
         {
             strength = elements[PItem->getCommonCrystalFeed()];
         }
+
         if (PItem->isTree())
         {
             if (PItem->getExtraCrystalFeed() == FLOWERPOT_ELEMENT_NONE)
@@ -245,12 +246,13 @@ namespace gardenutils
 
         if (settings::get<bool>("map.GARDEN_MH_AURA_MATTERS"))
         {
-            // Add up all of the installed furniture auras
+            // Add up all of the installed furniture auras NOT including element.NONE
+            // Therefore there are only 8 possible auras to add up
             std::array<uint16, 8> auras = { 0 };
             for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
             {
                 CItemContainer* PContainer = PChar->getStorage(containerID);
-                for (int slotID = 0; slotID < PContainer->GetSize(); ++slotID)
+                for (int slotID = 1; slotID <= PContainer->GetSize(); ++slotID)
                 {
                     CItem* PItemContained = PContainer->GetItem(slotID);
                     if (PItemContained != nullptr && PItemContained->isType(ITEM_FURNISHING))
@@ -258,9 +260,10 @@ namespace gardenutils
                         auto PFurniture = dynamic_cast<CItemFurnishing*>(PItemContained);
                         if (PFurniture && PFurniture->isInstalled())
                         {
-                            // -1 because element values range from 1-8
-                            // Converts from lua 1 based index to c/c++ 0 based index
-                            auras[PFurniture->getElement() - 1] += PFurniture->getAura();
+                            // Convert to an element index because we're not counting element.NONE
+                            // in our auras array.
+                            const auto elementIndex = PFurniture->getElement() - 1;
+                            auras[elementIndex] += PFurniture->getAura();
                         }
                     }
                 }
@@ -275,7 +278,14 @@ namespace gardenutils
             strength += dominantAura / 10;
         }
 
-        strength += (int16)((100 - strength) * (PItem->getStrength() / 32.0f));
+        strength += (int16)((100 - strength) * (PItem->getStrength() / 31.0f));
+
+        // NOTE: resultElement isn't used for anything
+        int resultElement = PItem->getCommonCrystalFeed();
+        if (PItem->isTree())
+        {
+            resultElement += PItem->getExtraCrystalFeed() << 4;
+        }
 
         uint32 resultUid = (PItem->getPlant() << 8) + (PItem->getCommonCrystalFeed() << 4) + PItem->getExtraCrystalFeed();
 
