@@ -10,7 +10,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     -- 'Draw in' should only trigger when target is beyond 20' (out of Radiant_Sacrament range)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, xi.drawin.NORMAL)
 
     mob:addListener('WEAPONSKILL_STATE_ENTER', 'WS_START_MSG', function(mobArg, skillID)
         -- Radiant Sacrament

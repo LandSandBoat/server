@@ -246,7 +246,7 @@ namespace battleutils
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar);
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar, uint16 zoneWeather);
     bool    WeatherMatchesElement(WEATHER weather, uint8 element);
-    bool    DrawIn(CBattleEntity* PEntity, CMobEntity* PMob, float offset);
+    bool    DrawIn(CBattleEntity* PEntity, CMobEntity* PMob, float offset, int16 maxDistance, bool includeAlli, bool toFrontOfMob);
     void    DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, uint8 roll);
     bool    DoRandomDealToEntity(CCharEntity* PChar, CBattleEntity* PTarget);
 

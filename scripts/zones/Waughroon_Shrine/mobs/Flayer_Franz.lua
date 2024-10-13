@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, xi.drawin.NORMAL)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

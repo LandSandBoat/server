@@ -17061,8 +17061,8 @@ bool CLuaBaseEntity::hasTPMoves()
 
 /************************************************************************
  *  Function: drawIn()
- *  Purpose : Draws in the target, or current target if not specified
- *  Example : mob:drawIn()     mob:drawIn(player)
+ *  Purpose : Draws in the target or current the curent battle target if not specified
+ *  Example : mob:drawIn()
  *  Notes   : Draws in a player even if within the draw-in leash
  ************************************************************************/
 void CLuaBaseEntity::drawIn(sol::variadic_args va)
@@ -17073,39 +17073,58 @@ void CLuaBaseEntity::drawIn(sol::variadic_args va)
         return;
     }
 
-    auto mobObj = dynamic_cast<CMobEntity*>(m_PBaseEntity);
-
-    if (va.size() == 0)
+    if (auto mobObj = dynamic_cast<CMobEntity*>(m_PBaseEntity))
     {
-        auto defaultTarget = mobObj->GetBattleTarget();
+        // default to current battle target
+        auto drawInTarget = mobObj->GetBattleTarget();
 
-        if (defaultTarget == nullptr)
+        // check the first param as it could be a battle target
+        CLuaBaseEntity* drawInTargetParam = va.get<CLuaBaseEntity*>(0);
+        if (drawInTargetParam)
+        {
+            if (auto drawInTargetParamBattle = dynamic_cast<CBattleEntity*>(drawInTargetParam->m_PBaseEntity))
+            {
+                drawInTarget = drawInTargetParamBattle;
+            }
+        }
+
+        if (drawInTarget == nullptr)
         {
             return;
         }
-        battleutils::DrawIn(defaultTarget, mobObj, mobObj->GetMeleeRange() - 0.2f);
-        return;
-    }
 
-    CLuaBaseEntity* PLuaBaseEntity = va.get<CLuaBaseEntity*>(0);
+        uint32 maxDist = std::numeric_limits<int16>::max();
+        if (va.get_type(1) == sol::type::number)
+        {
+            maxDist = va.get<uint32>(1);
+        }
+        else if (mobObj->getMobMod(MOBMOD_DRAW_IN_MAX_RANGE) > 0)
+        {
+            maxDist = mobObj->getMobMod(MOBMOD_DRAW_IN_MAX_RANGE);
+        }
 
-    if (!PLuaBaseEntity)
-    {
-        ShowError("Attempt to draw-in non-valid target.");
-        return;
-    }
+        bool includeAlliance = false;
+        if (va.get_type(2) == sol::type::boolean)
+        {
+            includeAlliance = va.get<bool>(2);
+        }
+        else if ((mobObj->getMobMod(MOBMOD_DRAW_IN_BITMASK) & DRAWIN::DRAWIN_INCLUDE_ALLIANCE) > 0)
+        {
+            includeAlliance = true;
+        }
 
-    CBaseEntity*   PBaseEntity = PLuaBaseEntity->m_PBaseEntity;
-    CBattleEntity* PTarget     = nullptr;
+        bool toFrontOfMob = false;
+        if (va.get_type(3) == sol::type::boolean)
+        {
+            toFrontOfMob = va.get<bool>(3);
+        }
+        else if ((mobObj->getMobMod(MOBMOD_DRAW_IN_BITMASK) & DRAWIN::DRAWIN_TO_FRONT_OF_MOB) > 0)
+        {
+            toFrontOfMob = true;
+        }
 
-    if (PBaseEntity)
-    {
-        PTarget = dynamic_cast<CBattleEntity*>(PBaseEntity);
-    }
-
-    if (PTarget)
-    {
-        battleutils::DrawIn(PTarget, mobObj, mobObj->GetMeleeRange() - 0.2f);
+        // call draw-in with the params and a draw-in distance of 0, thus the target will be drawn in unless they are 0 distance from the mob
+        battleutils::DrawIn(drawInTarget, mobObj, mobObj->GetMeleeRange() - 0.2f, maxDist, includeAlliance, toFrontOfMob);
     }
 
     return;

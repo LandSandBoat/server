@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
             { id = xi.jsa.HUNDRED_FISTS, cooldown = 60, hpp = math.random(85, 95) },
         },
     })
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, xi.drawin.NORMAL)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

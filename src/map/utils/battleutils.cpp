@@ -5582,8 +5582,13 @@ namespace battleutils
         }
     }
 
-    bool DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset)
+    bool DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset, int16 maxDistance, bool includeAlli, bool toFrontOfMob)
     {
+        if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
+        {
+            return false;
+        }
+
         position_t& pos        = PMob->loc.p;
         position_t  nearEntity = nearPosition(pos, offset, (float)0);
 
@@ -5609,19 +5614,15 @@ namespace battleutils
         // Move the target a little higher, just in case
         nearEntity.y -= 1.0f;
 
-        bool  success        = false;
-        float drawInDistance = (float)(PMob->getMobMod(MOBMOD_DRAW_IN) > 1 ? PMob->getMobMod(MOBMOD_DRAW_IN) : PMob->GetMeleeRange() * 2);
+        bool success = false;
 
-        if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
-        {
-            return false;
-        }
-
-        std::function<void(CBattleEntity*)> drawInFunc = [PMob, drawInDistance, &nearEntity, &success](CBattleEntity* PMember)
+        std::function<void(CBattleEntity*)> drawInFunc = [PMob, maxDistance, toFrontOfMob, &nearEntity, &success](CBattleEntity* PMember)
         {
             float pDistance = distance(PMob->loc.p, PMember->loc.p);
 
-            if (PMob->loc.zone == PMember->loc.zone && pDistance > drawInDistance && PMember->status != STATUS_TYPE::CUTSCENE_ONLY)
+            if (PMob->loc.zone == PMember->loc.zone &&
+                pDistance < maxDistance &&
+                PMember->status != STATUS_TYPE::CUTSCENE_ONLY)
             {
                 // don't draw in dead players for now!
                 // see tractor
@@ -5631,10 +5632,18 @@ namespace battleutils
                 }
                 else
                 {
-                    // draw in!
-                    PMember->loc.p.x = nearEntity.x;
-                    PMember->loc.p.y = nearEntity.y;
-                    PMember->loc.p.z = nearEntity.z;
+                    if (toFrontOfMob)
+                    {
+                        PMember->loc.p.x = nearEntity.x;
+                        PMember->loc.p.y = nearEntity.y;
+                        PMember->loc.p.z = nearEntity.z;
+                    }
+                    else
+                    {
+                        PMember->loc.p.x = PMob->loc.p.x;
+                        PMember->loc.p.y = nearEntity.y;
+                        PMember->loc.p.z = PMob->loc.p.z;
+                    }
 
                     if (PMember->objtype == TYPE_PC)
                     {
@@ -5654,7 +5663,7 @@ namespace battleutils
         };
 
         // check if i should draw-in party/alliance
-        if (PMob->getMobMod(MOBMOD_DRAW_IN) > 1)
+        if (includeAlli)
         {
             PTarget->ForAlliance(drawInFunc);
         }

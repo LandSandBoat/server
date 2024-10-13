@@ -9,6 +9,8 @@ mixins = { require('scripts/mixins/rage') }
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, xi.drawin.NORMAL)
+    mob:setMobMod(xi.mobMod.DRAW_IN_TRIGGER_DIST, 20)
     mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 50) -- Level 90 + 50 = 140 Base Weapon Damage
 

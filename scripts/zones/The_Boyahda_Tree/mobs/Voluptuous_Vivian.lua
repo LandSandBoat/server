@@ -8,7 +8,7 @@ mixins = { require('scripts/mixins/job_special') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 2)
+    mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, bit.bor(xi.drawin.NORMAL, xi.drawin.INCLUDE_ALLIANCE))
 end
 
 entity.onMobDeath = function(mob, player, optParams)

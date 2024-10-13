@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, xi.drawin.NORMAL)
     mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
 end
 

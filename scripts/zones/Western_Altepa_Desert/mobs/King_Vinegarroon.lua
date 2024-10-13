@@ -17,7 +17,8 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 2)
+    mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, bit.bor(xi.drawin.NORMAL, xi.drawin.INCLUDE_ALLIANCE))
+    mob:setMobMod(xi.mobMod.DRAW_IN_TRIGGER_DIST, 15)
 end
 
 entity.onMobDrawIn = function(mob, target)

@@ -14,6 +14,8 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, xi.drawin.NORMAL)
+    mob:setMobMod(xi.mobMod.DRAW_IN_TRIGGER_DIST, 25)
     mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
 
     -- Despawn the ???

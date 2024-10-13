@@ -18,7 +18,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 12000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 30000)
     mob:setMobMod(xi.mobMod.MUG_GIL, 8000)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_BITMASK, xi.drawin.NORMAL)
     mob:setMod(xi.mod.UDMGBREATH, -10000) -- immune to breath damage
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
