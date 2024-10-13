@@ -717,6 +717,7 @@ function Battlefield.onEntryTrigger(player, npc)
         end
 
         local options = utils.mask.setBit(0, content.index, true)
+        player:setLocalVar('[BCNM]EnterExisting', 1)
         return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
     end
 
@@ -817,6 +818,11 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
             else
                 player:updateEvent(xi.battlefield.returnCode.WAIT)
             end
+        elseif result == xi.battlefield.returnCode.REQS_NOT_MET then
+            -- Ensure Battlefield Effect is removed
+            -- If you cant enter now, you cant enter by trying again right now...
+            player:delStatusEffect(xi.effect.BATTLEFIELD)
+            player:updateEvent(xi.battlefield.returnCode.REQS_NOT_MET)
         end
 
         -- TODO: Remove the localVar when issue with function return is resolved

@@ -234,10 +234,29 @@ uint8 CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, const Battlef
                 break;
             }
         }
+        // If the player has no Registered Battlefield...
+        if (!PBattlefield)
+        {
+            // ...but they do have the BCNM Status Effect somehow (This should not happen, but keeping to be safe)
+            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
+            {
+                // Do not allow them to attain a new registration
+                return BATTLEFIELD_RETURN_CODE_REQS_NOT_MET;
+            }
+            // ...but they did have the flag to enter an existing one
+            if (PChar->GetLocalVar("[BCNM]EnterExisting") == 1)
+            {
+                // Reset the flag, and do not allow them to attain a new registration
+                PChar->SetLocalVar("[BCNM]EnterExisting", 0);
+                return BATTLEFIELD_RETURN_CODE_REQS_NOT_MET;
+            }
+        }
     }
-    // Entity wasn't found in battlefield, assume they have the effect but not physically inside battlefield
-    if (PBattlefield)
+    // If they have a Registered Battlefield -AND- they have the Battlefield Status Effect
+    if (PBattlefield && PChar->StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
     {
+        // Reset their progress var to 0 and proceed to attempt to enter them into the BCNM
+        PChar->SetLocalVar("[BCNM]EnterExisting", 0);
         if (!PBattlefield->CheckInProgress())
         {
             // players haven't started fighting yet, try entering
