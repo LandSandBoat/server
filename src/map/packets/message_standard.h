@@ -110,6 +110,7 @@ enum class MsgStd
     LevelSyncWarning             = 235, // Warning! This is a Level Sync party ...
     CannotInviteLevelSync        = 236, // You cannot invite that person at this time. This player is either undergoing Level Sync...
     CannotJoinLevelSync          = 237, // You cannot join this party.  You are either undergoing Level Sync...
+    LevelSyncSet                 = 238, // The party's level has been restricted to <level>.
     Compass                      = 239, // The compass reads: ...
     CannotHere                   = 256, // You cannot use that command in this area.
     HeadgearShow                 = 260,
@@ -133,6 +134,21 @@ enum class MsgStd
     TrustEnmity                  = 300, // You cannot use Trust magic while having gained enmity.
     TrustSoloOrLeader            = 301, // You cannot use Trust magic unless you are solo or the party leader.
     AnErrorHasOccured            = 308, // An error has occurred.
+    LevelSyncActivated           = 540, // Level Sync activated. Your level has been restricted to <Level>. Equipment effected by the level restriction will be adjusted accordingly. Experience...
+    LevelSyncDesigneeBelowMin    = 541, // Level Sync could not be activated. The designated player is below level 10.
+    LevelSyncDesigneeInOtherArea = 542, // Level Sync could not be activated. The designated player is in a different area.
+    LevelSyncPreventedByStatus   = 543, // Level Sync could not be activated. One or more party members are currently under the effect of a status which prevents synchronization.
+    LevelSyncWillBeRemoved       = 544, // Level synchronization will be removed in x seconds.
+    LevelSyncNoExpTooFarOrUnc    = 545, // No experience points gained... The Level Sync designee is either too far from the enemy, or unconcious.
+    LevelSyncIneligibleForExp    = 548, // The party member you selected is incapable of receiving experience points, and as such cannot be a Level Sync designee.
+    LevelSyncNoExpIneligible     = 549, // No experience points gained... The Level Sync designee is incapable of receiving experience points.
+    LevelSyncDeactivateForStatus = 550, // Level sync will be deactivated in 30 seconds. One or more party members have received the effect of a status which prevents synchronization.
+    LevelSyncDeactivateLeftArea  = 551, // Level sync will be deactivated in 30 seconds. The party leader or the Level Sync designee has left the area.
+    LevelSyncRemoveTooFewMembers = 552, // Level sync will be deactivated in 30 seconds. Less than two party members fulfill the requirements for Level Sync.
+    LevelSyncRemoveLeftParty     = 553, // Level sync will be deactivated in 30 seconds. The party leader has removed synchronization, or the Level Sync designee has left the party.
+    LevelSyncRemoveLowLevel      = 554, // Level sync will be deactivated in 30 seconds. The Level Sync designee has fallen below level 10.
+    LevelSyncRemoveJobChange     = 555, // Level sync will be deactivated in 30 seconds. A party member has undergone a job change.
+    LevelSyncRemoveIneligibleExp = 556, // Level sync will be deactivated in 30 seconds. The Level Sync designee is incapable of receiving experience points.
 };
 
 class CCharEntity;

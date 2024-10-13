@@ -148,7 +148,7 @@ void CParty::DisbandParty(bool playerInitiated)
             CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
             if (sync && sync->GetDuration() == 0)
             {
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, MsgStd::LevelSyncRemoveLeftParty));
                 sync->SetStartTime(server_clock::now());
                 sync->SetDuration(30000);
             }
@@ -207,10 +207,10 @@ void CParty::AssignPartyRole(const std::string& MemberName, uint8 role)
             SetQuarterMaster("");
             break;
         case 6:
-            SetSyncTarget(MemberName, 238);
+            SetSyncTarget(MemberName, MsgStd::LevelSyncSet);
             break;
         case 7:
-            SetSyncTarget("", 553);
+            SetSyncTarget("", MsgStd::LevelSyncRemoveLeftParty);
             break;
     }
     uint8 data[4]{};
@@ -311,11 +311,11 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
                 }
                 if (m_PSyncTarget == PChar)
                 {
-                    SetSyncTarget("", 553);
+                    SetSyncTarget("", MsgStd::LevelSyncRemoveLeftParty);
                     CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
                     if (sync && sync->GetDuration() == 0)
                     {
-                        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
+                        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, MsgStd::LevelSyncRemoveLeftParty));
                         sync->SetStartTime(server_clock::now());
                         sync->SetDuration(30000);
                     }
@@ -328,7 +328,7 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
                         CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
                         if (sync && sync->GetDuration() == 0)
                         {
-                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
+                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, MsgStd::LevelSyncRemoveLeftParty));
                             sync->SetStartTime(server_clock::now());
                             sync->SetDuration(30000);
                         }
@@ -407,11 +407,11 @@ void CParty::DelMember(CBattleEntity* PEntity)
                 }
                 if (m_PSyncTarget == PChar)
                 {
-                    SetSyncTarget("", 553);
+                    SetSyncTarget("", MsgStd::LevelSyncRemoveLeftParty);
                     CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
                     if (sync && sync->GetDuration() == 0)
                     {
-                        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
+                        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, MsgStd::LevelSyncRemoveLeftParty));
                         sync->SetStartTime(server_clock::now());
                         sync->SetDuration(30000);
                     }
@@ -424,7 +424,7 @@ void CParty::DelMember(CBattleEntity* PEntity)
                         CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
                         if (sync && sync->GetDuration() == 0)
                         {
-                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
+                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, MsgStd::LevelSyncRemoveLeftParty));
                             sync->SetStartTime(server_clock::now());
                             sync->SetDuration(30000);
                         }
@@ -637,7 +637,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
         {
             if (PChar->getZone() == m_PSyncTarget->getZone())
             {
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, m_PSyncTarget->GetMLevel(), 540));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, m_PSyncTarget->GetMLevel(), MsgStd::LevelSyncActivated));
                 PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_SYNC, EFFECT_LEVEL_SYNC, m_PSyncTarget->GetMLevel(), 0, 0), true);
                 PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ON_ZONE);
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CCharSyncPacket(PChar));
@@ -1057,7 +1057,7 @@ void CParty::SetLeader(const std::string& MemberName)
     }
 }
 
-void CParty::SetSyncTarget(const std::string& MemberName, uint16 message)
+void CParty::SetSyncTarget(const std::string& MemberName, MsgStd message)
 {
     CBattleEntity* PEntity = GetMemberByName(MemberName);
 
@@ -1069,12 +1069,12 @@ void CParty::SetSyncTarget(const std::string& MemberName, uint16 message)
             // enable level sync
             if (PChar->GetMLevel() < 10)
             {
-                ((CCharEntity*)GetLeader())->pushPacket(new CMessageBasicPacket((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 10, 541));
+                ((CCharEntity*)GetLeader())->pushPacket(new CMessageBasicPacket((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 10, MsgStd::LevelSyncDesigneeBelowMin));
                 return;
             }
             else if (PChar->getZone() != GetLeader()->getZone())
             {
-                ((CCharEntity*)GetLeader())->pushPacket(new CMessageBasicPacket((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 0, 542));
+                ((CCharEntity*)GetLeader())->pushPacket(new CMessageBasicPacket((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 0, MsgStd::LevelSyncDesigneeInOtherArea));
                 return;
             }
             else
@@ -1083,7 +1083,7 @@ void CParty::SetSyncTarget(const std::string& MemberName, uint16 message)
                 {
                     if (member->StatusEffectContainer->HasStatusEffect({ EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_SYNC, EFFECT_SJ_RESTRICTION, EFFECT_CONFRONTATION, EFFECT_BATTLEFIELD }))
                     {
-                        ((CCharEntity*)GetLeader())->pushPacket(new CMessageBasicPacket((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 0, 543));
+                        ((CCharEntity*)GetLeader())->pushPacket(new CMessageBasicPacket((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 0, MsgStd::LevelSyncPreventedByStatus));
                         return;
                     }
                 }
@@ -1099,7 +1099,7 @@ void CParty::SetSyncTarget(const std::string& MemberName, uint16 message)
 
                     if (member->status != STATUS_TYPE::DISAPPEAR && member->getZone() == PChar->getZone())
                     {
-                        member->pushPacket(new CMessageStandardPacket(PChar->GetMLevel(), 0, 0, 0, static_cast<MsgStd>(message)));
+                        member->pushPacket(new CMessageStandardPacket(PChar->GetMLevel(), 0, 0, 0, message));
                         member->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_SYNC, EFFECT_LEVEL_SYNC, PChar->GetMLevel(), 0, 0), true);
                         member->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ON_ZONE);
                         member->loc.zone->PushPacket(member, CHAR_INRANGE, new CCharSyncPacket(member));
@@ -1130,7 +1130,7 @@ void CParty::SetSyncTarget(const std::string& MemberName, uint16 message)
                         CStatusEffect* sync = member->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
                         if (sync && sync->GetDuration() == 0)
                         {
-                            member->pushPacket(new CMessageBasicPacket(member, member, 10, 30, message));
+                            member->pushPacket(new CMessageBasicPacket(member, member, 0, 30, message));
                             sync->SetStartTime(server_clock::now());
                             sync->SetDuration(30000);
                         }
@@ -1227,7 +1227,7 @@ void CParty::RefreshSync()
     uint8        syncLevel = sync->jobs.job[sync->GetMJob()];
     if (syncLevel < 10)
     {
-        SetSyncTarget("", 554);
+        SetSyncTarget("", MsgStd::LevelSyncRemoveLowLevel);
     }
     for (auto& i : members)
     {
@@ -1267,7 +1267,7 @@ void CParty::RefreshSync()
             charutils::CheckValidEquipment(member);
             member->pushPacket(new CCharAbilitiesPacket(member));
         }
-        member->pushPacket(new CMessageBasicPacket(member, member, 0, syncLevel, 540));
+        member->pushPacket(new CMessageBasicPacket(member, member, 0, syncLevel, MsgStd::LevelSyncActivated));
     }
     m_PSyncTarget = sync;
 }

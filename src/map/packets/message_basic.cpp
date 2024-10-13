@@ -22,6 +22,7 @@
 #include "common/socket.h"
 
 #include "message_basic.h"
+#include "message_standard.h"
 
 #include "entities/baseentity.h"
 
@@ -39,6 +40,11 @@ CMessageBasicPacket::CMessageBasicPacket(CBaseEntity* PSender, CBaseEntity* PTar
     ref<uint32>(0x0C) = param;
     ref<uint32>(0x10) = value;
     ref<uint16>(0x18) = messageID;
+}
+
+CMessageBasicPacket::CMessageBasicPacket(CBaseEntity* PSender, CBaseEntity* PTarget, int32 param, int32 value, MsgStd messageID)
+: CMessageBasicPacket(PSender, PTarget, param, value, static_cast<uint16>(messageID))
+{
 }
 
 uint16 CMessageBasicPacket::getMessageID()
