@@ -6,6 +6,25 @@ local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
 local instanceObject = {}
 
+instanceObject.entitiesToBeLoaded = {
+    ID.mob[59].RAZFAHD,
+    ID.mob[59].ALEXANDER,
+    ID.mob[59].RAUBAHN,
+
+    ID.npc.WEATHER,
+    ID.npc.QM1,
+    ID.npc.BLANK1,
+    ID.npc.BLANK2,
+    ID.npc.BLANK3,
+    ID.npc.NASHMEIRA1,
+    ID.npc.NASHMEIRA2,
+    ID.npc.RAZFAHD,
+    ID.npc.CSNPC1,
+    ID.npc.GHATSAD,
+    ID.npc.ALEXANDER,
+    ID.npc.CSNPC2,
+}
+
 instanceObject.registryRequirements = function(player)
     return player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and
         player:hasKeyItem(xi.ki.MYTHRIL_MIRROR) and

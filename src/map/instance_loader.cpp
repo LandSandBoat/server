@@ -67,6 +67,14 @@ CInstanceLoader::~CInstanceLoader()
 CInstance* CInstanceLoader::LoadInstance()
 {
     TracyZoneScoped;
+
+    const auto instanceId = instance->GetID();
+
+    // TODO: Use instanceId to look up ID.lua file and associated entity IDs for use in the query below
+    //     : getting rid of the need for instance_entities.sql
+
+    // lua["zones"][instance->GetZone()->GetID()];
+
     const char* Query = "SELECT mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
             respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
             modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
@@ -86,7 +94,7 @@ CInstance* CInstanceLoader::LoadInstance()
             INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
             WHERE instanceid = %u AND NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0)";
 
-    int32 ret = _sql->Query(Query, instance->GetID());
+    int32 ret = _sql->Query(Query, instanceId);
 
     if (!instance->Failed() && ret != SQL_ERROR /*&& sql->NumRows() != 0*/)
     {
