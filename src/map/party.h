@@ -24,6 +24,7 @@
 
 #include "common/cbasetypes.h"
 #include "map.h"
+#include "packets/message_standard.h"
 
 #include <vector>
 
@@ -86,7 +87,7 @@ public:
     void   SetPartyID(uint32 id);                // set new party ID
     void   AssignPartyRole(const std::string& MemberName, uint8 role);
     void   DisableSync();
-    void   SetSyncTarget(const std::string& MemberName, uint16 message);
+    void   SetSyncTarget(const std::string& MemberName, MsgStd message);
     void   RefreshSync();
     void   SetPartyNumber(uint8 number);
     bool   HasOnlyOneMember() const;

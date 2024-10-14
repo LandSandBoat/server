@@ -24,6 +24,8 @@
 
 #include "common/cbasetypes.h"
 
+#include "message_standard.h"
+
 #include "basic.h"
 
 /*
@@ -221,7 +223,9 @@ class CBaseEntity;
 class CMessageBasicPacket : public CBasicPacket
 {
 public:
+    // TODO: Replace uint16 with MsgStd version
     CMessageBasicPacket(CBaseEntity* PSender, CBaseEntity* PTarget, int32 param, int32 value, uint16 messageID);
+    CMessageBasicPacket(CBaseEntity* PSender, CBaseEntity* PTarget, int32 param, int32 value, MsgStd messageID);
     uint16 getMessageID();
 };
 
