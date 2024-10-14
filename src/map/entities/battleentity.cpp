@@ -314,8 +314,11 @@ uint8 CBattleEntity::GetSpeed()
         outputSpeed = outputSpeed + mazurkaQuickeningEffect;
     }
 
-    // Set cap (Default 80).
-    outputSpeed = std::clamp<int16>(outputSpeed, 0, 80 + settings::get<int8>("map.SPEED_MOD"));
+    // Set cap if a PC (Default 80).
+    if (objtype == TYPE_PC)
+    {
+        outputSpeed = std::clamp<int16>(outputSpeed, 0, 80 + settings::get<int8>("map.SPEED_MOD"));
+    }
 
     // Speed cap can be bypassed. Ex. Feast of swords. GM speed.
     // TODO: Find exceptions. Add them here.

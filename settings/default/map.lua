@@ -112,8 +112,13 @@ xi.settings.map =
     -- Note retail treats the mounted speed as double what it actually is.
     MOUNT_SPEED_MOD = 0,
 
-    -- This is an integer percentage. Modifier to apply to agro'd monster speed (i.e. while engaged in combat). 0 is the retail accurate default. Negative numbers will reduce ALL mobs's speed.
-    MOB_SPEED_MOD = 0,
+    -- Enable or disable a mechanism for boosting the speed of engaged mobs (by a multiplier) when their target is out of range.
+    -- This is a retail mechanism that makes kiting more difficult
+    USE_MOB_SPEED_BOOST_MULTIPLIER = true,
+    -- The default boost multiplier of almost all mobs on retail is 250 (so 2.5x or 2.5 times their normal speed)
+    -- The minimum value is 100 (1x) which means that mobs get no such speed boost (though better to use the boolean toggle above)
+    -- The maximum value is 25500 (255x) which would put the speed of any mob at the system cap
+    DEFAULT_MOB_SPEED_BOOST_MULTIPLIER = 250,
 
     -- Allows you to manipulate the constant multiplier in the skill-up rate formulas, having a potent effect on skill-up rates.
     SKILLUP_CHANCE_MULTIPLIER = 1.0,
