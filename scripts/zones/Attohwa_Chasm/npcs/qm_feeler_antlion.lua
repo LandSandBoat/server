@@ -19,6 +19,7 @@ entity.onTrade = function(player, npc, trade)
         player:tradeComplete()
         nm:setSpawn(npc:getXPos() - 3, npc:getYPos() - 2, npc:getZPos() - 1)
         SpawnMob(ID.mob.FEELER_ANTLION):updateClaim(player)
+        npc:setStatus(xi.status.DISAPPEAR)
     end
 end
 
