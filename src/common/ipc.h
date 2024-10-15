@@ -31,6 +31,8 @@
 #include "ipc_structs.h"
 #include "ipc_stubs.h"
 
+#include <alpaca/alpaca.h>
+
 namespace ipc
 {
     // Forward declarations
@@ -78,16 +80,14 @@ namespace ipc
             return std::nullopt;
         }
 
-        return object;
+        return std::move(object);
     }
 
     // Message handler implementation
     class IPCMessageHandler : public IIPCMessageHandler
     {
     private:
-        void handleMessage_SomeData(const SomeData& message) override
-        {
-            // TODO
-        }
+        // Don't handle this message type if we get it
+        void handleMessage_SomeData(const SomeData& message) override = default;
     };
 } // namespace ipc

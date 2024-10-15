@@ -1,12 +1,16 @@
-# This script generates build/generated/ipc_stubs.h, which contains the MessageType enum, struct forward declarations,
-# and the getEnumType function helpers.
+# On a build this script is automatically run, generating build/generated/ipc_stubs.h, which contains:
+# - MessageType enum
+# - getEnumType(MessageType) helper
+# - toString(MessageType) helper
+# - IIPCMessageHandler interface
+
 
 # fmt: off
 import os
 import sys
 
 
-# Define the struct names that will be used to generate build/generated/ipc_stubs.h.
+# Define the struct names that will be used to generate build/generated/ipc_stubs.h
 IPC_STRUCT_NAMES = [
     "SomeData",  # Example struct. Remove this once we have real structs.
 ]
@@ -26,12 +30,14 @@ def generate_ipc_stubs(output_dir, struct_names):
         f.write("#include <cstdint>\n")
         f.write("#include <type_traits>\n\n")
         f.write("#include \"ipc.h\"\n\n")
+        f.write("#include \"logging.h\"\n\n")
         f.write("namespace ipc\n{\n\n")
 
         generate_message_type_enum(f, struct_names)
         generate_forward_declarations(f, struct_names)
         generate_struct_completion_traits(f)
         generate_get_enum_type_function(f, struct_names)
+        generate_enum_to_string_function(f, struct_names)
         generate_message_handler_interface(f, struct_names)
 
         f.write("} // namespace ipc\n")
@@ -76,14 +82,30 @@ def generate_get_enum_type_function(file, struct_names):
         file.write(f"template<>\n")
         file.write(f"auto getEnumType<{name}>() -> MessageType\n")
         file.write("{\n")
-        file.write(f"    static_assert(is_struct_complete<{name}>::value, \"You must fully define this struct in the ipc_structs.h.\");\n")
+        file.write(f"    static_assert(is_struct_complete<{name}>::value, \"You must fully define this struct in common/ipc_structs.h.\");\n")
         file.write(f"    return MessageType::{name};\n")
         file.write("}\n\n")
 
 
+def generate_enum_to_string_function(file, struct_names):
+    file.write("auto toString(MessageType type) -> std::string\n")
+    file.write("{\n")
+    file.write("    switch (type)\n")
+    file.write("    {\n")
+
+    for name in struct_names:
+        file.write(f"        case MessageType::{name}:\n")
+        file.write(f"            return \"{name}\";\n")
+
+    file.write("        default:\n")
+    file.write("            return \"Unknown\";\n")
+    file.write("    }\n")
+    file.write("}\n\n")
+
+
 def generate_message_handler_interface(file, struct_names):
     file.write("template<typename T>\n")
-    file.write("auto from_bytes(const std::vector<uint8_t>& message) -> std::optional<T>;\n\n")
+    file.write("auto fromBytes(const std::vector<uint8_t>& message) -> std::optional<T>;\n\n")
     file.write("class IIPCMessageHandler\n")
     file.write("{\n")
     file.write("public:\n")
@@ -101,6 +123,7 @@ def generate_message_handler_interface(file, struct_names):
         file.write(f"                const auto object = ipc::fromBytes<{name}>(message);\n")
         file.write("                if (!object.has_value())\n")
         file.write("                {\n")
+        file.write(f"                    ShowError(\"Failed to deserialize {name} message.\");\n")
         file.write("                    break;\n")
         file.write("                }\n")
         file.write(f"                handleMessage_{name}(*object);\n")
