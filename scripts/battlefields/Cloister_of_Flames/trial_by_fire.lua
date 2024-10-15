@@ -2,8 +2,6 @@
 -- Area: Cloister of Flames
 -- BCNM: Trial by Fire
 -----------------------------------
-local cloisterOfFlamesID = zones[xi.zone.CLOISTER_OF_FLAMES]
------------------------------------
 
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.CLOISTER_OF_FLAMES,
@@ -28,13 +26,7 @@ end
 content.groups =
 {
     {
-        mobIds =
-        {
-            { cloisterOfFlamesID.mob.IFRIT_PRIME     },
-            { cloisterOfFlamesID.mob.IFRIT_PRIME + 1 },
-            { cloisterOfFlamesID.mob.IFRIT_PRIME + 2 },
-        },
-
+        mobs = { 'Ifrit_Prime_TBF' },
         allDeath = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
         end,
