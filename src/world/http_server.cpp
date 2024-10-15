@@ -32,6 +32,7 @@
 using json = nlohmann::json;
 
 HTTPServer::HTTPServer()
+: m_apiDataCache(APIDataCache{})
 {
     if (!settings::get<bool>("network.ENABLE_HTTP"))
     {
@@ -59,20 +60,31 @@ HTTPServer::HTTPServer()
         m_httpServer.Get("/api/sessions", [&](httplib::Request const& req, httplib::Response& res)
         {
             LockingUpdate();
+            m_apiDataCache.read([&](const auto& apiDataCache)
+            {
+                json j = apiDataCache.activeSessionCount;
+                res.set_content(j.dump(), "application/json");
+            });
+        });
 
-            std::unique_lock<std::mutex> lock(m_updateBottleneck);
-            json j;
-            j = m_apiDataCache.activeSessionCount;
-            res.set_content(j.dump(), "application/json");
+        m_httpServer.Get("/api/ips", [&](httplib::Request const& req, httplib::Response& res)
+        {
+            LockingUpdate();
+            m_apiDataCache.read([&](const auto& apiDataCache)
+            {
+                json j = apiDataCache.activeUniqueIPCount;
+                res.set_content(j.dump(), "application/json");
+            });
         });
 
         m_httpServer.Get("/api/zones", [&](httplib::Request const& req, httplib::Response& res)
         {
             LockingUpdate();
-
-            std::unique_lock<std::mutex> lock(m_updateBottleneck);
-            json j = m_apiDataCache.zonePlayerCounts;
-            res.set_content(j.dump(), "application/json");
+            m_apiDataCache.read([&](const auto& apiDataCache)
+            {
+                json j = apiDataCache.zonePlayerCounts;
+                res.set_content(j.dump(), "application/json");
+            });
         });
 
         m_httpServer.Get(R"(/api/zones/(\d+))", [&](httplib::Request const& req, httplib::Response& res)
@@ -82,10 +94,11 @@ HTTPServer::HTTPServer()
             if (zoneId && zoneId < ZONEID::MAX_ZONEID)
             {
                 LockingUpdate();
-
-                std::unique_lock<std::mutex> lock(m_updateBottleneck);
-                json j = m_apiDataCache.zonePlayerCounts[zoneId];
-                res.set_content(j.dump(), "application/json");
+                m_apiDataCache.read([&](const auto& apiDataCache)
+                {
+                    json j = apiDataCache.zonePlayerCounts[zoneId];
+                    res.set_content(j.dump(), "application/json");
+                });
             }
             else
             {
@@ -179,31 +192,41 @@ HTTPServer::~HTTPServer()
 
 void HTTPServer::LockingUpdate()
 {
-    std::unique_lock<std::mutex> lock(m_updateBottleneck);
-
     auto now = server_clock::now();
-    if (now > (m_lastUpdate.load() + 60s))
+    if (now < (m_lastUpdate.load() + 60s))
+    {
+        return;
+    }
+
+    m_apiDataCache.write([&](auto& apiDataCache)
     {
         ShowInfo("API data is stale. Updating...");
 
-        auto data = APIDataCache{};
-
         // Total active sessions
         {
-            auto rset = db::query("SELECT COUNT(*) AS `count` FROM accounts_sessions");
+            auto rset = db::preparedStmt("SELECT COUNT(*) AS `count` FROM accounts_sessions");
             if (rset && rset->next())
             {
-                data.activeSessionCount = rset->getUInt("count");
+                apiDataCache.activeSessionCount = rset->getUInt("count");
+            }
+        }
+
+        // Total active unique IPs
+        {
+            auto rset = db::preparedStmt("SELECT COUNT(DISTINCT client_addr) AS `count` FROM accounts_sessions");
+            if (rset && rset->next())
+            {
+                apiDataCache.activeUniqueIPCount = rset->getUInt("count");
             }
         }
 
         // Chars per zone
         {
-            auto rset = db::query("SELECT chars.pos_zone, COUNT(*) AS `count` "
-                                  "FROM chars "
-                                  "INNER JOIN accounts_sessions "
-                                  "ON chars.charid = accounts_sessions.charid "
-                                  "GROUP BY pos_zone");
+            auto rset = db::preparedStmt("SELECT chars.pos_zone, COUNT(*) AS `count` "
+                                "FROM chars "
+                                "INNER JOIN accounts_sessions "
+                                "ON chars.charid = accounts_sessions.charid "
+                                "GROUP BY pos_zone");
             if (rset && rset->rowsCount())
             {
                 while (rset->next())
@@ -211,12 +234,11 @@ void HTTPServer::LockingUpdate()
                     auto zoneId = rset->getUInt("pos_zone");
                     auto count  = rset->getUInt("count");
 
-                    data.zonePlayerCounts[zoneId] = count;
+                    apiDataCache.zonePlayerCounts[zoneId] = count;
                 }
             }
         }
 
-        m_apiDataCache = data;
         m_lastUpdate.store(now);
-    }
+    });
 }
