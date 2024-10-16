@@ -27,6 +27,7 @@ The NavMesh class will load and find paths given a start point and end point.
 
 #include <DetourNavMesh.h>
 #include <DetourNavMeshQuery.h>
+#include <DetourStatus.h>
 
 #include "common/logging.h"
 #include "common/mmo.h"
@@ -34,10 +35,9 @@ The NavMesh class will load and find paths given a start point and end point.
 #include <memory>
 #include <vector>
 
-#define MAX_NAV_POLYS 256
-
-static const int NAVMESHSET_MAGIC   = 'M' << 24 | 'S' << 16 | 'E' << 8 | 'T'; // 'MSET'
-static const int NAVMESHSET_VERSION = 1;
+constexpr unsigned int MAX_NAV_POLYS      = 512U;
+constexpr int          NAVMESHSET_MAGIC   = 'M' << 24 | 'S' << 16 | 'E' << 8 | 'T'; // 'MSET'
+constexpr int          NAVMESHSET_VERSION = 1;
 
 struct NavMeshSetHeader
 {
@@ -73,8 +73,15 @@ public:
     void reload();
     void unload();
 
-    std::vector<pathpoint_t>     findPath(const position_t& start, const position_t& end);
-    std::pair<int16, position_t> findRandomPosition(const position_t& start, float maxRadius);
+    enum PathResult
+    {
+        Complete,
+        Partial,
+        Invalid,
+    };
+
+    auto findPath(const position_t& start, const position_t& end) -> std::pair<PathResult, std::vector<pathpoint_t>>;
+    auto findRandomPosition(const position_t& start, float maxRadius) -> std::pair<int16, position_t>;
 
     // Returns true if the point is in water
     bool inWater(const position_t& point);
@@ -93,40 +100,59 @@ public:
     // Like validPosition(), but will also set the given position to the valid position that it finds.
     void snapToValidPosition(position_t& position);
 
-    static inline void outputError(uint32 status)
+    [[nodiscard]] static inline auto detourStatusString(uint32 status) -> std::string
     {
+        std::string outStr;
+
+        // High level status.
+        if (status & DT_FAILURE)
+        {
+            outStr += "DT_FAILURE: Operation failed. ";
+        }
+        if (status & DT_SUCCESS)
+        {
+            outStr += "DT_SUCCESS: Operation succeeded. ";
+        }
+        if (status & DT_IN_PROGRESS)
+        {
+            outStr += "DT_IN_PROGRESS: Operation still in progress. ";
+        }
+
+        // Detail information for status.
         if (status & DT_WRONG_MAGIC)
         {
-            ShowError("Detour: Input data is not recognized.");
+            outStr += "DT_WRONG_MAGIC: Input data is not recognized. ";
         }
-        else if (status & DT_WRONG_VERSION)
+        if (status & DT_WRONG_VERSION)
         {
-            ShowError("Detour: Input data is in wrong version.");
+            outStr += "DT_WRONG_VERSION: Input data is in wrong version. ";
         }
-        else if (status & DT_OUT_OF_MEMORY)
+        if (status & DT_OUT_OF_MEMORY)
         {
-            ShowError("Detour: Operation ran out of memory.");
+            outStr += "DT_OUT_OF_MEMORY: Operation ran out of memory. ";
         }
-        else if (status & DT_INVALID_PARAM)
+        if (status & DT_INVALID_PARAM)
         {
-            ShowError("Detour: An input parameter was invalid.");
+            outStr += "DT_INVALID_PARAM: An input parameter was invalid. ";
         }
-        else if (status & DT_BUFFER_TOO_SMALL)
+        if (status & DT_BUFFER_TOO_SMALL)
         {
-            ShowError("Detour: Result buffer for the query was too small to store all results.");
+            outStr += "DT_BUFFER_TOO_SMALL: Result buffer for the query was too small to store all results. ";
         }
-        else if (status & DT_OUT_OF_NODES)
+        if (status & DT_OUT_OF_NODES)
         {
-            ShowError("Detour: Query ran out of nodes during search.");
+            outStr += "DT_OUT_OF_NODES: Query ran out of nodes during search. ";
         }
-        else if (status & DT_PARTIAL_RESULT)
+        if (status & DT_PARTIAL_RESULT)
         {
-            ShowError("Detour: Query did not reach the end location, returning best guess.");
+            outStr += "DT_PARTIAL_RESULT: Query did not reach the end location, returning best guess. ";
         }
-        else if (status & DT_ALREADY_OCCUPIED)
+        if (status & DT_ALREADY_OCCUPIED)
         {
-            ShowError("Detour: A tile has already been assigned to the given x,y coordinate");
+            outStr += "DT_ALREADY_OCCUPIED: A tile has already been assigned to the given x, y coordinate. ";
         }
+
+        return outStr;
     }
 
 private:
@@ -138,6 +164,11 @@ private:
     dtPolyRef      m_hitPath[20]{};
     dtNavMesh*     m_navMesh;
     dtNavMeshQuery m_navMeshQuery;
+
+    std::array<dtPolyRef, MAX_NAV_POLYS>     m_navMeshQueryPolyData{};
+    std::array<float, MAX_NAV_POLYS * 3>     m_navMeshQueryStraightPathFloatData{};
+    std::array<unsigned char, MAX_NAV_POLYS> m_navMeshQueryStraightPathFlagData{};
+    std::array<dtPolyRef, MAX_NAV_POLYS>     m_navMeshQueryStraightPathPolyData{};
 };
 
 #endif

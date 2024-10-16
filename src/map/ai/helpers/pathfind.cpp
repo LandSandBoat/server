@@ -105,6 +105,9 @@ bool CPathFind::RoamAround(const position_t& point, float maxRadius, uint8 maxTu
 bool CPathFind::PathTo(const position_t& point, uint8 pathFlags, bool clear)
 {
     TracyZoneScoped;
+
+    DebugNavmesh("%s (%d) PathTo: %f %f %f", m_POwner->getName(), m_POwner->id, point.x, point.y, point.z);
+
     // don't follow a new path if the current path has script flag and new path doesn't
     if (IsFollowingPath() && (m_pathFlags & PATHFLAG_SCRIPT) && !(pathFlags & PATHFLAG_SCRIPT))
     {
@@ -116,26 +119,16 @@ bool CPathFind::PathTo(const position_t& point, uint8 pathFlags, bool clear)
         Clear();
     }
 
-    m_pathFlags = pathFlags;
+    m_destinationPoint = point;
+    m_pathFlags        = pathFlags;
 
     if (isNavMeshEnabled())
     {
-        bool result = false;
-
-        if (m_pathFlags & PATHFLAG_WALLHACK)
-        {
-            result = FindClosestPath(m_POwner->loc.p, point);
-        }
-        else
-        {
-            result = FindPath(m_POwner->loc.p, point);
-        }
-
+        bool result = FindPath(m_POwner->loc.p, point, m_pathFlags & PATHFLAG_WALLHACK);
         if (!result)
         {
             Clear();
         }
-
         return result;
     }
     else
@@ -444,7 +437,7 @@ void CPathFind::StepTo(const position_t& pos, bool run)
     m_POwner->updatemask |= UPDATE_POS;
 }
 
-bool CPathFind::FindPath(const position_t& start, const position_t& end)
+bool CPathFind::FindPath(const position_t& start, const position_t& end, bool wallhack)
 {
     TracyZoneScoped;
 
@@ -458,8 +451,15 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
         return false;
     }
 
-    m_points       = m_POwner->loc.zone->m_navMesh->findPath(start, end);
+    auto [result, points] = m_POwner->loc.zone->m_navMesh->findPath(start, end);
+
+    m_points       = std::move(points);
     m_currentPoint = 0;
+
+    if (result != CNavMesh::PathResult::Complete && wallhack)
+    {
+        m_points.emplace_back(pathpoint_t{ end, 0, false }); // this prevents exploits with navmesh / impassible terrain
+    }
 
     if (m_points.empty())
     {
@@ -512,40 +512,13 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
     }
     if (m_turnPoints.size() > 0)
     {
-        m_points       = m_POwner->loc.zone->m_navMesh->findPath(start, m_turnPoints[0]);
+        auto [result, points] = m_POwner->loc.zone->m_navMesh->findPath(start, m_turnPoints[0]);
+
+        m_points       = std::move(points);
         m_currentPoint = 0;
     }
 
     return !m_points.empty();
-}
-
-bool CPathFind::FindClosestPath(const position_t& start, const position_t& end)
-{
-    TracyZoneScoped;
-
-    if (arePositionsClose(start, end))
-    {
-        return false;
-    }
-
-    if (!isNavMeshEnabled())
-    {
-        return false;
-    }
-
-    m_points       = m_POwner->loc.zone->m_navMesh->findPath(start, end);
-    m_currentPoint = 0;
-    m_points.emplace_back(pathpoint_t{ end, 0, false }); // this prevents exploits with navmesh / impassible terrain
-
-    /* this check requirement is never met as intended since m_points are never empty when mob has a path
-    if (m_points.empty())
-    {
-        // this is a trick to make mobs go up / down impassible terrain
-        m_points.emplace_back(end);
-    }
-*/
-
-    return true;
 }
 
 void CPathFind::LookAt(const position_t& point)
@@ -697,6 +670,9 @@ void CPathFind::Clear()
 
     m_currentTurn = 0;
     m_turnPoints.clear();
+
+    // TODO: Clear m_destinationPoint, should this be optional<>?
+    // m_destinationPoint
 }
 
 void CPathFind::AddPoints(std::vector<pathpoint_t>&& points, bool reverse)
@@ -748,8 +724,16 @@ void CPathFind::FinishedPath()
         m_currentPoint = 0;
         m_currentTurn  = 0;
     }
-    else
+    else // TODO: Is this always right?
     {
-        Clear();
+        // If we're not there yet, keep pathing until we are
+        if (distance(m_POwner->loc.p, m_destinationPoint) > 10.0f)
+        {
+            PathTo(m_destinationPoint, m_pathFlags);
+        }
+        else
+        {
+            Clear();
+        }
     }
 }
