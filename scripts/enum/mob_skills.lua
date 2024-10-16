@@ -44,6 +44,8 @@ xi.mobSkill =
     RANGED_ATTACK_13  = 1213,
     RANGED_ATTACK_14  = 1214,
 
+    EXUVIATION_1      = 1955,
+
     FOOT_KICK_2       = 1567,
     DUST_CLOUD_2      = 1568,
     WHIRL_CLAWS_2     = 1569,
@@ -74,6 +76,11 @@ xi.mobSkill =
 
     ROAR_3            = 2406,
 
+    BOOMING_BOMB_1    = 2770,
+
+    NAT_MEDITATION_1  = 2945,
+    ORTHOPTERROR_1    = 2949,
+
     SHEEP_SONG_3      = 3433,
 
     LIGHT_BLADE       = 3471,
@@ -95,4 +102,5 @@ xi.mobSkill =
     SANDPIT_3         = 3883,
     VENOM_SPRAY_3     = 3884,
     MANDIBULAR_BITE_3 = 3885,
+
 }

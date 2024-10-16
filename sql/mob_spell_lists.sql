@@ -5075,12 +5075,51 @@ INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,201,1,255); -- waterg
 INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,274,1,255); -- sleepga_ii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,362,1,255); -- bindga (1~255)
 
--- Next Available: 508
+-- Supernal Chapuli (508)
+INSERT INTO `mob_spell_lists` VALUES ('Supernal_Chapuli',508,157,72,255); -- Aero IV (72-255)
+INSERT INTO `mob_spell_lists` VALUES ('Supernal_Chapuli',508,187,75,255); -- Aeroga IV (75-255)
+INSERT INTO `mob_spell_lists` VALUES ('Supernal_Chapuli',508,366,91,255); -- Graviga (91-255)
+INSERT INTO `mob_spell_lists` VALUES ('Supernal_Chapuli',508,359,75,255); -- Silencega (75~255)
+
+-- Supernal Chapuli HP under 50% (509)
+INSERT INTO `mob_spell_lists` VALUES ('Supernal_Chapuli_low_50',509,158,83,255); -- Aero V (83-255)
+INSERT INTO `mob_spell_lists` VALUES ('Supernal_Chapuli_low_50',509,188,9,255); -- Aeroga V (90-255)
+INSERT INTO `mob_spell_lists` VALUES ('Supernal_Chapuli_low_50',509,366,91,255); -- Graviga (91-255)
+INSERT INTO `mob_spell_lists` VALUES ('Supernal_Chapuli_low_50',509,359,75,255); -- Silencega (75~255)
+
+-- Unfettered_Twitherym (510)
+INSERT INTO `mob_spell_lists` VALUES ('Unfettered_Twitherym',510,187,75,255); -- Aeroga IV (75-255)
+INSERT INTO `mob_spell_lists` VALUES ('Unfettered_Twitherym',510,356,55,255); -- Paralyga (55~255)
+INSERT INTO `mob_spell_lists` VALUES ('Unfettered_Twitherym',510,357,60,255); -- Slowga (60~255)
+INSERT INTO `mob_spell_lists` VALUES ('Unfettered_Twitherym',510,359,75,255); -- Silencega (75~255)
+INSERT INTO `mob_spell_lists` VALUES ('Unfettered_Twitherym',510,360,75,255); -- Dispelga (75~255)
+INSERT INTO `mob_spell_lists` VALUES ('Unfettered_Twitherym',510,362,75,255); -- Bindga (75~255)
+INSERT INTO `mob_spell_lists` VALUES ('Unfettered_Twitherym',510,366,75,255); -- Graviga (75-255)
+
+-- Mastop (511)
+INSERT INTO `mob_spell_lists` VALUES ('Mastop',511,286,83,255); -- Addle (83-255)
+INSERT INTO `mob_spell_lists` VALUES ('Mastop',511,252,37,255); -- Stun (37-255)
+INSERT INTO `mob_spell_lists` VALUES ('Mastop',511,357,1,255); -- Slowga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Mastop',511,359,1,255); -- Silencega (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Mastop',511,273,1,255); -- Sleepga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Mastop',511,360,1,255); -- Dispelga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Mastop',511,365,1,255); -- Breakga (1~255)
+
+-- Tax'et (512)
+INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,146,83,255); -- Fire III (83-255)
+INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,147,37,255); -- Fire IV (37-255)
+INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,148,86,255); -- Fire V (86-255)
+INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,204,60,255); -- Flare (60~255)
+INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,176,69,255); -- Firaga_iii (69~255)
+INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,177,92,255); -- Firaga_iv (92~255)
+INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,178,99,255); -- Firaga V (99~255)
+INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,496,90,255); -- Firaja (90~255)
+
+-- Next Available: 513
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

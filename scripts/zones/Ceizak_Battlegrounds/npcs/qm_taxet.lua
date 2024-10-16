@@ -14,6 +14,7 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.popFromQM(player, npc, ID.mob.TAXET, { radius = 1 })
     then
         player:confirmTrade()
+        player:messageSpecial(ID.text.MONSTER_APPEAR)
     end
 end
 
