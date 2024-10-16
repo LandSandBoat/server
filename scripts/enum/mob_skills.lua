@@ -27,6 +27,15 @@ xi.mobSkill =
     PIT_AMBUSH_1      =  278,
     MANDIBULAR_BITE_1 =  279,
 
+    FROGKICK          =  308,
+    SPORE             =  309,
+    QUEASYSHROOM      =  310,
+    NUMBSHROOM        =  311,
+    SHAKESHROOM       =  312,
+
+    SILENT_GAS        =  314,
+    DARK_SPORE        =  315,
+
     RANGED_ATTACK_2   =  412,
 
     RANGED_ATTACK_3   = 1154,
