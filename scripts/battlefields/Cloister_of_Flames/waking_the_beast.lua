@@ -2,8 +2,6 @@
 -- Area: Cloister of Flames
 -- BCNM: Waking the Beast
 -----------------------------------
-local cloisterOfFlamesID = zones[xi.zone.CLOISTER_OF_FLAMES]
------------------------------------
 
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.CLOISTER_OF_FLAMES,
@@ -27,14 +25,7 @@ end
 content.groups =
 {
     {
-        -- avatar
-        mobIds =
-        {
-            { cloisterOfFlamesID.mob.IFRIT_PRIME_WTB      },
-            { cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 5  },
-            { cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 10 },
-        },
-
+        mobs = { 'Ifrit_Prime_WTB' },
         allDeath = function(battlefield, mob)
             -- when avatar defeated then all elementals should also die
             for i = 1, 4 do
@@ -49,30 +40,13 @@ content.groups =
     },
 
     {
-        -- elementals
-        mobIds =
+        mobs =
         {
-            {
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 1,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 2,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 3,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 4,
-            },
-
-            {
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 6,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 7,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 8,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 9,
-            },
-
-            {
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 11,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 12,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 13,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 14,
-            },
+            'Ifrit_Prime_WTB',
+            'Fire_Elemental',
         },
+        isParty   = true,
+        superlink = true,
     },
 }
 
