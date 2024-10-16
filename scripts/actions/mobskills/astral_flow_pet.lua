@@ -34,13 +34,13 @@ end
 local petAstralFlowAbility =
 {
     [839] = { 36, 381 }, -- Fenrir (Howling Moon)
-    [913] = { 38, 383 }, -- Ifrit (Inferno)
-    [914] = { 45, 388 }, -- Titan (Earthen Fury)
-    [915] = { 40, 384 }, -- Leviathan (Tidal Wave)
-    [916] = { 37, 382 }, -- Garuda (Aerial Blast)
-    [917] = { 44, 387 }, -- Shiva (Diamond Dust)
-    [918] = { 43, 386 }, -- Ramuh (Judgment Bolt)
-    [919] = { 34, 379 }, -- Carbuncle (Searing Light)
+    [848] = { 38, 383 }, -- Ifrit (Inferno)
+    [857] = { 45, 388 }, -- Titan (Earthen Fury)
+    [866] = { 40, 384 }, -- Leviathan (Tidal Wave)
+    [875] = { 37, 382 }, -- Garuda (Aerial Blast)
+    [884] = { 44, 387 }, -- Shiva (Diamond Dust)
+    [893] = { 43, 386 }, -- Ramuh (Judgment Bolt)
+    [912] = { 34, 379 }, -- Carbuncle (Searing Light)
 }
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
@@ -58,7 +58,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     -- Find proper pet skill
     local petFamily = pet:getFamily()
-    local skillId   = 919 -- Default to Searing Light if not found below
+    local skillId   = 912 -- Default to Searing Light if not found below
 
     for mobSkillId, petFamilyList in pairs(petAstralFlowAbility) do
         if utils.contains(petFamily, petFamilyList) then
