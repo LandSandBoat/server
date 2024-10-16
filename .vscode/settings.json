@@ -457,6 +457,12 @@
         "__config": "cpp",
         "__hash_table": "cpp",
         "__node_handle": "cpp",
-        "__verbose_abort": "cpp"
+        "__verbose_abort": "cpp",
+        "__bit_reference": "cpp",
+        "__locale": "cpp",
+        "__split_buffer": "cpp",
+        "__threading_support": "cpp",
+        "__tree": "cpp",
+        "print": "cpp"
     },
 }
