@@ -46,7 +46,7 @@ namespace dailytally
             ShowDebug("Distributed daily tally points");
         }
 
-        if (!db::query("DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed'"))
+        if (!db::preparedStmt("DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed'"))
         {
             ShowError("Failed to delete daily tally char_vars entries");
         }

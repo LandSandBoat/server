@@ -27,7 +27,6 @@
 #include "common/lua.h"
 #include "common/md52.h"
 #include "common/settings.h"
-#include "common/sql.h"
 #include "common/utils.h"
 #include "common/xirand.h"
 #include "map/packets/basic.h"

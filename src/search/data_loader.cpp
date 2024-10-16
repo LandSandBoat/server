@@ -68,11 +68,11 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack)
         {
             ahHistory* PAHHistory = new ahHistory;
 
-            PAHHistory->Price = rset->getUInt("sale");
-            PAHHistory->Data  = rset->getUInt("sell_date");
+            PAHHistory->Price = rset->get<uint32>("sale");
+            PAHHistory->Data  = rset->get<uint32>("sell_date");
 
-            PAHHistory->Name1 = rset->getString("seller_name");
-            PAHHistory->Name2 = rset->getString("buyer_name");
+            PAHHistory->Name1 = rset->get<std::string>("seller_name");
+            PAHHistory->Name2 = rset->get<std::string>("buyer_name");
 
             HistoryList.emplace_back(PAHHistory);
         }
@@ -119,13 +119,13 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, const
         {
             ahItem* PAHItem = new ahItem;
 
-            PAHItem->ItemID = rset->getInt("itemid");
+            PAHItem->ItemID = rset->get<uint16>("itemid");
 
-            PAHItem->SingleAmount = rset->getInt("COUNT(*)-SUM(stack)");
-            PAHItem->StackAmount  = rset->getInt("SUM(stack)");
+            PAHItem->SingleAmount = rset->get<uint32>("COUNT(*)-SUM(stack)");
+            PAHItem->StackAmount  = rset->get<uint32>("SUM(stack)");
             PAHItem->Category     = AHCategoryID;
 
-            if (rset->getInt("stackSize") == 1)
+            if (rset->get<uint32>("stackSize") == 1)
             {
                 PAHItem->StackAmount = -1;
             }
@@ -158,11 +158,11 @@ ahItem CDataLoader::GetAHItemFromItemID(uint16 ItemID)
     {
         while (rset->next())
         {
-            CAHItem.Category     = rset->getInt("aH");
-            CAHItem.SingleAmount = rset->getInt("COUNT(*)-SUM(stack)");
-            CAHItem.StackAmount  = rset->getInt("SUM(stack)");
+            CAHItem.Category     = rset->get<uint16>("aH");
+            CAHItem.SingleAmount = rset->get<uint32>("COUNT(*)-SUM(stack)");
+            CAHItem.StackAmount  = rset->get<uint32>("SUM(stack)");
 
-            if (rset->getInt("COUNT(*)-SUM(stack)") == 1)
+            if (rset->get<uint32>("COUNT(*)-SUM(stack)") == 1)
             {
                 CAHItem.StackAmount = 0;
             }
@@ -185,7 +185,7 @@ uint32 CDataLoader::GetPlayersCount(const search_req& sr)
         auto rset = db::query(fmt::sprintf("SELECT COUNT(*) FROM accounts_sessions LEFT JOIN char_stats USING (charid) WHERE mjob = %u", jobid));
         if (rset && rset->rowsCount() && rset->next())
         {
-            return rset->getUInt("COUNT(*)");
+            return rset->get<uint32>("COUNT(*)");
         }
     }
     else
@@ -193,7 +193,7 @@ uint32 CDataLoader::GetPlayersCount(const search_req& sr)
         auto rset = db::query("SELECT COUNT(*) FROM accounts_sessions");
         if (rset && rset->rowsCount() && rset->next())
         {
-            return rset->getUInt("COUNT(*)");
+            return rset->get<uint32>("COUNT(*)");
         }
     }
     return 0;
@@ -266,47 +266,47 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
         {
             SearchEntity* PPlayer = new SearchEntity();
 
-            PPlayer->name = rset->getString("charname");
+            PPlayer->name = rset->get<std::string>("charname");
 
-            PPlayer->id       = rset->getUInt("charid");
-            PPlayer->zone     = (uint16)rset->getInt("pos_zone");
-            PPlayer->prevzone = (uint16)rset->getInt("pos_prevzone");
-            PPlayer->nation   = (uint8)rset->getInt("nation");
-            PPlayer->mjob     = (uint8)rset->getInt("mjob");
-            PPlayer->sjob     = (uint8)rset->getInt("sjob");
-            PPlayer->mlvl     = (uint8)rset->getInt("mlvl");
-            PPlayer->slvl     = (uint8)rset->getInt("slvl");
-            PPlayer->race     = (uint8)rset->getInt("race");
+            PPlayer->id       = rset->get<uint32>("charid");
+            PPlayer->zone     = rset->get<uint16>("pos_zone");
+            PPlayer->prevzone = rset->get<uint16>("pos_prevzone");
+            PPlayer->nation   = rset->get<uint8>("nation");
+            PPlayer->mjob     = rset->get<uint8>("mjob");
+            PPlayer->sjob     = rset->get<uint8>("sjob");
+            PPlayer->mlvl     = rset->get<uint8>("mlvl");
+            PPlayer->slvl     = rset->get<uint8>("slvl");
+            PPlayer->race     = rset->get<uint8>("race");
 
             // TODO: Use a nation enum?
             switch (PPlayer->nation)
             {
                 case 0:
-                    PPlayer->rank = (uint8)rset->getInt("rank_sandoria");
+                    PPlayer->rank = rset->get<uint8>("rank_sandoria");
                     break;
                 case 1:
-                    PPlayer->rank = (uint8)rset->getInt("rank_bastok");
+                    PPlayer->rank = rset->get<uint8>("rank_bastok");
                     break;
                 case 2:
-                    PPlayer->rank = (uint8)rset->getInt("rank_windurst");
+                    PPlayer->rank = rset->get<uint8>("rank_windurst");
                     break;
                 default:
                     ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
-                    PPlayer->rank = (uint8)0;
+                    PPlayer->rank = static_cast<uint8>(0U);
                     break;
             }
 
-            uint32    settingsInt    = rset->getUInt("settings");
+            uint32    settingsInt    = rset->get<uint32>("settings");
             SAVE_CONF playerSettings = {};
             std::memcpy(&playerSettings, &settingsInt, sizeof(uint32));
 
             PPlayer->zone          = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
-            PPlayer->languages     = (uint8)rset->getUInt("languages");
+            PPlayer->languages     = rset->get<uint8>("languages");
             PPlayer->mentor        = playerSettings.MentorFlg;
-            PPlayer->seacom_type   = (uint8)rset->getUInt("seacom_type");
-            PPlayer->disconnecting = rset->getUInt("disconnecting");
-            PPlayer->gmHidden      = rset->getUInt("gmHiddenEnabled");
-            uint32 partyid         = rset->getUInt("partyid");
+            PPlayer->seacom_type   = rset->get<uint8>("seacom_type");
+            PPlayer->disconnecting = rset->get<bool>("disconnecting");
+            PPlayer->gmHidden      = rset->get<bool>("gmHiddenEnabled");
+            uint32 partyid         = rset->get<uint32>("partyid");
 
             if (PPlayer->mentor)
             {
@@ -501,42 +501,42 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
         {
             SearchEntity* PPlayer = new SearchEntity();
 
-            PPlayer->name   = rset->getString("charname");
-            PPlayer->id     = rset->getUInt("charid");
-            PPlayer->zone   = (uint16)rset->getInt("pos_zone");
-            PPlayer->nation = (uint8)rset->getInt("nation");
-            PPlayer->mjob   = (uint8)rset->getInt("mjob");
-            PPlayer->sjob   = (uint8)rset->getInt("sjob");
-            PPlayer->mlvl   = (uint8)rset->getInt("mlvl");
-            PPlayer->slvl   = (uint8)rset->getInt("slvl");
-            PPlayer->race   = (uint8)rset->getInt("race");
+            PPlayer->name   = rset->get<std::string>("charname");
+            PPlayer->id     = rset->get<uint32>("charid");
+            PPlayer->zone   = rset->get<uint16>("pos_zone");
+            PPlayer->nation = rset->get<uint8>("nation");
+            PPlayer->mjob   = rset->get<uint8>("mjob");
+            PPlayer->sjob   = rset->get<uint8>("sjob");
+            PPlayer->mlvl   = rset->get<uint8>("mlvl");
+            PPlayer->slvl   = rset->get<uint8>("slvl");
+            PPlayer->race   = rset->get<uint8>("race");
 
             // TODO: Use a nation enum?
             switch (PPlayer->nation)
             {
                 case 0:
-                    PPlayer->rank = (uint8)rset->getInt("rank_sandoria");
+                    PPlayer->rank = rset->get<uint8>("rank_sandoria");
                     break;
                 case 1:
-                    PPlayer->rank = (uint8)rset->getInt("rank_bastok");
+                    PPlayer->rank = rset->get<uint8>("rank_bastok");
                     break;
                 case 2:
-                    PPlayer->rank = (uint8)rset->getInt("rank_windurst");
+                    PPlayer->rank = rset->get<uint8>("rank_windurst");
                     break;
                 default:
                     ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
-                    PPlayer->rank = (uint8)0;
+                    PPlayer->rank = static_cast<uint8>(0U);
                     break;
             }
 
-            uint32    settingsInt    = rset->getUInt("settings");
+            uint32    settingsInt    = rset->get<uint32>("settings");
             SAVE_CONF playerSettings = {};
             std::memcpy(&playerSettings, &settingsInt, sizeof(uint32));
 
-            PPlayer->languages     = (uint8)rset->getUInt("languages");
+            PPlayer->languages     = rset->get<uint8>("languages");
             PPlayer->mentor        = playerSettings.MentorFlg;
-            PPlayer->seacom_type   = (uint8)rset->getUInt("seacom_type");
-            PPlayer->disconnecting = rset->getUInt("disconnecting");
+            PPlayer->seacom_type   = rset->get<uint8>("seacom_type");
+            PPlayer->disconnecting = rset->get<bool>("disconnecting");
 
             if (PPlayer->mentor)
             {
@@ -609,27 +609,27 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
         {
             SearchEntity* PPlayer = new SearchEntity();
 
-            PPlayer->name   = rset->getString("charname");
-            PPlayer->id     = rset->getUInt("charid");
-            PPlayer->zone   = (uint16)rset->getInt("pos_zone");
-            PPlayer->nation = (uint8)rset->getInt("nation");
-            PPlayer->mjob   = (uint8)rset->getInt("mjob");
-            PPlayer->sjob   = (uint8)rset->getInt("sjob");
-            PPlayer->mlvl   = (uint8)rset->getInt("mlvl");
-            PPlayer->slvl   = (uint8)rset->getInt("slvl");
-            PPlayer->race   = (uint8)rset->getInt("race");
+            PPlayer->name   = rset->get<std::string>("charname");
+            PPlayer->id     = rset->get<uint32>("charid");
+            PPlayer->zone   = rset->get<uint16>("pos_zone");
+            PPlayer->nation = rset->get<uint8>("nation");
+            PPlayer->mjob   = rset->get<uint8>("mjob");
+            PPlayer->sjob   = rset->get<uint8>("sjob");
+            PPlayer->mlvl   = rset->get<uint8>("mlvl");
+            PPlayer->slvl   = rset->get<uint8>("slvl");
+            PPlayer->race   = rset->get<uint8>("race");
 
             // TODO: Use a nation enum?
             switch (PPlayer->nation)
             {
                 case 0:
-                    PPlayer->rank = (uint8)rset->getInt("rank_sandoria");
+                    PPlayer->rank = rset->get<uint8>("rank_sandoria");
                     break;
                 case 1:
-                    PPlayer->rank = (uint8)rset->getInt("rank_bastok");
+                    PPlayer->rank = rset->get<uint8>("rank_bastok");
                     break;
                 case 2:
-                    PPlayer->rank = (uint8)rset->getInt("rank_windurst");
+                    PPlayer->rank = rset->get<uint8>("rank_windurst");
                     break;
                 default:
                     ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
@@ -637,14 +637,14 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
                     break;
             }
 
-            PPlayer->linkshellid1   = rset->getInt("linkshellid1");
-            PPlayer->linkshellid2   = rset->getInt("linkshellid2");
-            PPlayer->linkshellrank1 = rset->getInt("linkshellrank1");
-            PPlayer->linkshellrank2 = rset->getInt("linkshellrank2");
-            PPlayer->disconnecting  = rset->getInt("disconnecting");
-            uint32 partyid          = rset->getUInt("partyid");
+            PPlayer->linkshellid1   = rset->get<uint32>("linkshellid1");
+            PPlayer->linkshellid2   = rset->get<uint32>("linkshellid2");
+            PPlayer->linkshellrank1 = rset->get<uint8>("linkshellrank1");
+            PPlayer->linkshellrank2 = rset->get<uint8>("linkshellrank2");
+            PPlayer->disconnecting  = rset->get<bool>("disconnecting");
+            uint32 partyid          = rset->get<uint32>("partyid");
 
-            uint32    settingsInt    = rset->getUInt("settings");
+            uint32    settingsInt    = rset->get<uint32>("settings");
             SAVE_CONF playerSettings = {};
             std::memcpy(&playerSettings, &settingsInt, sizeof(uint32));
 
@@ -689,7 +689,7 @@ std::string CDataLoader::GetSearchComment(uint32 playerId)
     auto rset = db::preparedStmt("SELECT seacom_message FROM accounts_sessions WHERE charid = (?)", playerId);
     if (rset && rset->rowsCount() && rset->next())
     {
-        return rset->getString("seacom_message").c_str();
+        return rset->get<std::string>("seacom_message").c_str();
     }
     return std::string();
 }
@@ -708,26 +708,24 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
 {
     ShowInfo(fmt::format("Expiring auction house listings over {} days old", expireAgeInDays).c_str());
 
-    auto sql2 = std::make_unique<SqlConnection>();
-
     std::vector<ListingToExpire> listingsToExpire;
 
-    std::string qStr = "SELECT T0.id,T0.itemid,T1.stacksize, T0.stack, T0.seller FROM auction_house T0 INNER JOIN item_basic T1 ON \
+    std::string query0 = "SELECT T0.id,T0.itemid,T1.stacksize, T0.stack, T0.seller FROM auction_house T0 INNER JOIN item_basic T1 ON \
                             T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >= %u AND buyer_name IS NULL;";
 
-    int32 ret             = sql2->Query(qStr.c_str(), expireAgeInDays);
-    int64 expiredAuctions = sql2->NumRows();
+    const auto rset0 = db::query(fmt::sprintf(query0, expireAgeInDays));
+    const auto expiredAuctions = rset0->rowsCount();
 
-    if (ret != SQL_ERROR && expiredAuctions > 0)
+    if (rset0 && expiredAuctions > 0)
     {
-        while (sql2->NextRow() == SQL_SUCCESS)
+        while (rset0->next())
         {
             // Collect the items we're going to expire
-            uint32 saleID    = sql2->GetUIntData(0);
-            uint32 itemID    = sql2->GetUIntData(1);
-            uint8  itemStack = (uint8)sql2->GetUIntData(2);
-            uint8  ahStack   = (uint8)sql2->GetUIntData(3);
-            uint32 sellerID  = sql2->GetUIntData(4);
+            uint32 saleID    = rset0->get<uint32>("id");
+            uint32 itemID    = rset0->get<uint32>("itemid");
+            uint8  itemStack = rset0->get<uint8>("stacksize");
+            uint8  ahStack   = rset0->get<uint8>("stack");
+            uint32 sellerID  = rset0->get<uint32>("seller");
             // NOTE: seller name left out for now, we'll populate this later
 
             listingsToExpire.emplace_back(ListingToExpire{ saleID, itemID, itemStack, ahStack, sellerID, "?" });
@@ -736,23 +734,22 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
         for (auto listing : listingsToExpire)
         {
             // Populate name now
-            qStr = fmt::format("SELECT charname FROM chars WHERE charid={}", listing.sellerID);
-            ret  = sql2->Query(qStr.c_str());
-            if (ret != SQL_ERROR && sql2->NumRows() != 0 && sql2->NextRow() == SQL_SUCCESS)
+            const auto query1 = fmt::format("SELECT charname FROM chars WHERE charid={}", listing.sellerID);
+            const auto rset1  = db::query(query1);
+            if (rset1 && rset1->rowsCount() && rset1->next())
             {
-                listing.sellerName = sql2->GetStringData(0);
+                listing.sellerName = rset1->get<std::string>("charname");
             }
 
-            qStr = fmt::format("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
+            const auto query2 = fmt::format("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
                                "({}, '{}', 1, {}, 0, {}, 0, 'AH-Jeuno');",
                                listing.sellerID, listing.sellerName, listing.itemID, listing.ahStack == 1 ? listing.itemStack : 1);
 
-            ret = sql2->Query(qStr.c_str());
-
-            if (ret != SQL_ERROR && sql2->AffectedRows() > 0)
+            const auto [rset2, affectedRows] = db::preparedStmtWithAffectedRows(query2);
+            if (rset2 && affectedRows > 0)
             {
                 // delete the item from the auction house
-                sql2->Query("DELETE FROM auction_house WHERE id=%u", listing.saleID);
+                db::query(fmt::sprintf("DELETE FROM auction_house WHERE id=%u", listing.saleID));
             }
         }
     }

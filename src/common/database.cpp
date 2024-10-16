@@ -127,19 +127,20 @@ mutex_guarded<db::detail::State>& db::detail::getState()
     return state;
 }
 
-std::unique_ptr<sql::ResultSet> db::query(std::string const& rawQuery)
+auto db::query(std::string const& rawQuery) -> std::unique_ptr<db::detail::ResultSetWrapper>
 {
     TracyZoneScoped;
     TracyZoneString(rawQuery);
 
     // clang-format off
-    return detail::getState().write([&](detail::State& state) -> std::unique_ptr<sql::ResultSet>
+    return detail::getState().write([&](detail::State& state) -> std::unique_ptr<db::detail::ResultSetWrapper>
     {
         auto stmt = state.connection->createStatement();
         try
         {
             DebugSQL(fmt::format("query: {}", rawQuery));
-            return std::unique_ptr<sql::ResultSet>(stmt->executeQuery(rawQuery.data()));
+            auto rset = std::unique_ptr<sql::ResultSet>(stmt->executeQuery(rawQuery.data()));
+            return std::make_unique<db::detail::ResultSetWrapper>(std::move(rset));
         }
         catch (const std::exception& e)
         {
@@ -149,4 +150,31 @@ std::unique_ptr<sql::ResultSet> db::query(std::string const& rawQuery)
         }
     });
     // clang-format on
+}
+
+auto db::escapeString(std::string const& str) -> std::string
+{
+    std::string escapedStr = str;
+
+    // Replacement map similar to str_replace in PHP
+    static std::unordered_map<std::string, std::string> replacements = {
+        {"\\", "\\\\"},
+        {"\0", "\\0"},
+        {"\n", "\\n"},
+        {"\r", "\\r"},
+        {"'", "\\'"},
+        {"\"", "\\\""},
+        {"\x1a", "\\Z"}
+    };
+
+    // Replace each character based on the replacement map
+    for (const auto& [from, to] : replacements) {
+        std::string::size_type pos = 0;
+        while ((pos = escapedStr.find(from, pos)) != std::string::npos) {
+            escapedStr.replace(pos, from.length(), to);
+            pos += to.length();
+        }
+    }
+
+    return escapedStr;
 }
