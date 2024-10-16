@@ -85,9 +85,25 @@ uint8 ConquestData::getRegionOwner(REGION_TYPE region) const
 {
     uint8 regionNum = static_cast<uint8>(region);
 
-    if (regionNum < regionControls.size())
+    // Handle some conquest regions that don't have conquest info as non-error
+    // TODO: Do Sandoria/Bastok/Windurst count as "owned by" themselves, no one, or some other state where latents don't work?
+    switch (region)
     {
-        return regionControls[regionNum].current;
+        case REGION_TYPE::SANDORIA:
+        case REGION_TYPE::BASTOK:
+        case REGION_TYPE::WINDURST:
+        case REGION_TYPE::JEUNO:
+        case REGION_TYPE::DYNAMIS:
+        case REGION_TYPE::TAVNAZIAN_MARQ:
+        case REGION_TYPE::PROMYVION:
+        case REGION_TYPE::LUMORIA:
+        case REGION_TYPE::LIMBUS:
+            return NATION_TYPE::NATION_BEASTMEN;
+        default:
+            if (regionNum < regionControls.size())
+            {
+                return regionControls[regionNum].current;
+            }
     }
 
     ShowError(fmt::format("Invalid conquest region passed to function ({})", regionNum));

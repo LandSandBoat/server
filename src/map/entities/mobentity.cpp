@@ -998,6 +998,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         if (m_Element > 0)
         {
             REGION_TYPE regionID = PChar->loc.zone->GetRegionID();
+
             switch (regionID)
             {
                 // Sanction Regions
@@ -1007,6 +1008,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                 case REGION_TYPE::ARRAPAGO:
                     effect = 2;
                     break;
+
                 // Sigil Regions
                 case REGION_TYPE::RONFAURE_FRONT:
                 case REGION_TYPE::NORVALLEN_FRONT:
@@ -1018,12 +1020,20 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                 case REGION_TYPE::VALDEAUNIA_FRONT:
                     effect = 3;
                     break;
+
+                // Ionis Regions
+                case REGION_TYPE::ADOULIN_ISLANDS:
+                case REGION_TYPE::EAST_ULBUKA:
+                    effect = 4;
+                    break;
+
                 // Signet Regions
                 default:
-                    effect = (conquest::GetRegionOwner(PChar->loc.zone->GetRegionID()) <= 2) ? 1 : 0;
+                    effect = (regionID < REGION_TYPE::TAVNAZIA && conquest::GetRegionOwner(regionID) <= 2) ? 1 : 0;
                     break;
             }
         }
+
         uint8 crystalRolls = 0;
         // clang-format off
         PChar->ForParty([this, &crystalRolls, &effect](CBattleEntity* PMember)
@@ -1046,6 +1056,13 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                     break;
                 case 3:
                     if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) && PMember->getZone() == getZone() &&
+                        distance(PMember->loc.p, loc.p) < 100)
+                    {
+                        crystalRolls++;
+                    }
+                    break;
+                case 4:
+                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_IONIS) && PMember->getZone() == getZone() &&
                         distance(PMember->loc.p, loc.p) < 100)
                     {
                         crystalRolls++;
