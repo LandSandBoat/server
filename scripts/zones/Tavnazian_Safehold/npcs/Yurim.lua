@@ -6,52 +6,295 @@
 ---@type TNpcEntity
 local entity = {}
 
--- base items
-local earring = 13327
-local obi     = 13205
-local gorget  = 13080
-
--- chips
-local red     = 474
-local blue    = 475
-local yellow  = 476
-local green   = 477
-local clear   = 478
-local purple  = 479
-local white   = 480
-local black   = 481
-
--- organs
-local lumin   = 1783
-local phuabo  = 1784
-local xzomit  = 1785
-local aern    = 1786
-local hpemde  = 1787
-local yovra   = 1788
-local euvhi   = 1818
-
 local nosTrades =
 {
-    [14791] = { hint = 17, base = { earring, white }, organs = { { lumin,   5 }, { euvhi,  5 }                              } }, -- Sanative Earring
-    [14792] = { hint = 17, base = { earring, black }, organs = { { lumin,   5 }, { euvhi,  5 }                              } }, -- Relaxing Earring
+    [xi.item.KARIN_OBI] =
+    {
+        hint = 1,
+        base =
+        {
+            xi.item.SILVER_OBI,
+            xi.item.RED_CHIP,
+        },
+        organs =
+        {
+            { xi.item.PHUABO_ORGAN,              7 },
+            { xi.item.XZOMIT_ORGAN,              3 },
+            { xi.item.SAMPLE_OF_LUMINIAN_TISSUE, 3 },
+        },
+    },
 
-    [15435] = { hint =  1, base = { obi, red       }, organs = { { phuabo,  7 }, { xzomit, 3 }, { lumin,  3 }               } }, -- Karin Obi (Fire)
-    [15436] = { hint =  2, base = { obi, clear     }, organs = { { xzomit,  7 }, { phuabo, 3 }, { lumin,  3 }               } }, -- Hyorin Obi (Ice)
-    [15437] = { hint =  3, base = { obi, green     }, organs = { { aern,    7 }, { hpemde, 3 }, { lumin,  3 }               } }, -- Furin Obi (Wind)
-    [15438] = { hint =  4, base = { obi, yellow    }, organs = { { hpemde,  7 }, { aern,   3 }, { lumin,  3 }               } }, -- Dorin Obi (Earth)
-    [15439] = { hint =  5, base = { obi, purple    }, organs = { { phuabo,  7 }, { hpemde, 3 }, { lumin,  3 }               } }, -- Rairin Obi (Thunder)
-    [15440] = { hint =  6, base = { obi, blue      }, organs = { { hpemde,  7 }, { phuabo, 3 }, { lumin,  3 }               } }, -- Suirin Obi (Water)
-    [15441] = { hint =  7, base = { obi, white     }, organs = { { xzomit,  7 }, { aern,   3 }, { lumin,  3 }               } }, -- Korin Obi (Light)
-    [15442] = { hint =  8, base = { obi, black     }, organs = { { aern,    7 }, { xzomit, 3 }, { lumin,  3 }               } }, -- Anrin Obi (Dark)
+    [xi.item.HYORIN_OBI] =
+    {
+        hint = 2,
+        base =
+        {
+            xi.item.SILVER_OBI,
+            xi.item.CLEAR_CHIP,
+        },
+        organs =
+        {
+            { xi.item.XZOMIT_ORGAN,              7 },
+            { xi.item.PHUABO_ORGAN,              3 },
+            { xi.item.SAMPLE_OF_LUMINIAN_TISSUE, 3 },
+        },
+    },
 
-    [15495] = { hint =  9, base = { gorget, red    }, organs = { { phuabo, 10 }, { xzomit, 5 }, { yovra,  1 }               } }, -- Flame Gorget
-    [15496] = { hint = 10, base = { gorget, clear  }, organs = { { phuabo, 10 }, { aern,   5 }, { yovra,  1 }               } }, -- Snow Gorget
-    [15497] = { hint = 11, base = { gorget, green  }, organs = { { phuabo, 10 }, { hpemde, 5 }, { yovra,  1 }               } }, -- Breeze Gorget
-    [15498] = { hint = 12, base = { gorget, yellow }, organs = { { xzomit, 10 }, { aern,   5 }, { yovra,  1 }               } }, -- Soil Gorget
-    [15499] = { hint = 13, base = { gorget, purple }, organs = { { xzomit, 10 }, { hpemde, 5 }, { yovra,  1 }               } }, -- Thunder Gorget
-    [15500] = { hint = 14, base = { gorget, blue   }, organs = { { aern,   10 }, { hpemde, 5 }, { yovra,  1 }               } }, -- Aqua Gorget
-    [15501] = { hint = 15, base = { gorget, white  }, organs = { { aern,    7 }, { phuabo, 3 }, { hpemde, 3 }, { yovra, 2 } } }, -- Light Gorget
-    [15502] = { hint = 16, base = { gorget, black  }, organs = { { hpemde,  7 }, { phuabo, 3 }, { aern,   3 }, { yovra, 2 } } }, -- Shadow Gorget
+    [xi.item.FURIN_OBI] =
+    {
+        hint = 3,
+        base =
+        {
+            xi.item.SILVER_OBI,
+            xi.item.GREEN_CHIP,
+        },
+        organs =
+        {
+            { xi.item.AERN_ORGAN,                7 },
+            { xi.item.HPEMDE_ORGAN,              3 },
+            { xi.item.SAMPLE_OF_LUMINIAN_TISSUE, 3 },
+        },
+    },
+
+    [xi.item.DORIN_OBI] =
+    {
+        hint = 4,
+        base =
+        {
+            xi.item.SILVER_OBI,
+            xi.item.YELLOW_CHIP,
+        },
+        organs =
+        {
+            { xi.item.HPEMDE_ORGAN,              7 },
+            { xi.item.AERN_ORGAN,                3 },
+            { xi.item.SAMPLE_OF_LUMINIAN_TISSUE, 3 },
+        },
+    },
+
+    [xi.item.RAIRIN_OBI] =
+    {
+        hint = 5,
+        base =
+        {
+            xi.item.SILVER_OBI,
+            xi.item.PURPLE_CHIP,
+        },
+        organs =
+        {
+            { xi.item.PHUABO_ORGAN,              7 },
+            { xi.item.HPEMDE_ORGAN,              3 },
+            { xi.item.SAMPLE_OF_LUMINIAN_TISSUE, 3 },
+        },
+    },
+
+    [xi.item.SUIRIN_OBI] =
+    {
+        hint = 6,
+        base =
+        {
+            xi.item.SILVER_OBI,
+            xi.item.BLUE_CHIP,
+        },
+        organs =
+        {
+            { xi.item.HPEMDE_ORGAN,              7 },
+            { xi.item.PHUABO_ORGAN,              3 },
+            { xi.item.SAMPLE_OF_LUMINIAN_TISSUE, 3 },
+        },
+    },
+
+    [xi.item.KORIN_OBI] =
+    {
+        hint = 7,
+        base =
+        {
+            xi.item.SILVER_OBI,
+            xi.item.WHITE_CHIP,
+        },
+        organs =
+        {
+            { xi.item.XZOMIT_ORGAN,              7 },
+            { xi.item.AERN_ORGAN,                3 },
+            { xi.item.SAMPLE_OF_LUMINIAN_TISSUE, 3 },
+        },
+    },
+
+    [xi.item.ANRIN_OBI] =
+    {
+        hint = 8,
+        base =
+        {
+            xi.item.SILVER_OBI,
+            xi.item.BLACK_CHIP,
+        },
+        organs =
+        {
+            { xi.item.AERN_ORGAN,                7 },
+            { xi.item.XZOMIT_ORGAN,              3 },
+            { xi.item.SAMPLE_OF_LUMINIAN_TISSUE, 3 },
+        },
+    },
+
+    [xi.item.FLAME_GORGET] =
+    {
+        hint = 9,
+        base =
+        {
+            xi.item.GORGET,
+            xi.item.RED_CHIP,
+        },
+        organs =
+        {
+            { xi.item.PHUABO_ORGAN, 10 },
+            { xi.item.XZOMIT_ORGAN,  5 },
+            { xi.item.YOVRA_ORGAN,   1 },
+        },
+    },
+
+    [xi.item.SNOW_GORGET] =
+    {
+        hint = 10,
+        base =
+        {
+            xi.item.GORGET,
+            xi.item.CLEAR_CHIP,
+        },
+        organs =
+        {
+            { xi.item.PHUABO_ORGAN, 10 },
+            { xi.item.AERN_ORGAN,    5 },
+            { xi.item.YOVRA_ORGAN,   1 },
+        },
+    },
+
+    [xi.item.BREEZE_GORGET] =
+    {
+        hint = 11,
+        base =
+        {
+            xi.item.GORGET,
+            xi.item.GREEN_CHIP,
+        },
+        organs =
+        {
+            { xi.item.PHUABO_ORGAN, 10 },
+            { xi.item.HPEMDE_ORGAN,  5 },
+            { xi.item.YOVRA_ORGAN,   1 },
+        },
+    },
+
+    [xi.item.SOIL_GORGET] =
+    {
+        hint = 12,
+        base =
+        {
+            xi.item.GORGET,
+            xi.item.YELLOW_CHIP,
+        },
+        organs =
+        {
+            { xi.item.XZOMIT_ORGAN, 10 },
+            { xi.item.AERN_ORGAN,    5 },
+            { xi.item.YOVRA_ORGAN,   1 },
+        },
+    },
+
+    [xi.item.THUNDER_GORGET] =
+    {
+        hint = 13,
+        base =
+        {
+            xi.item.GORGET,
+            xi.item.PURPLE_CHIP,
+        },
+        organs =
+        {
+            { xi.item.XZOMIT_ORGAN, 10 },
+            { xi.item.HPEMDE_ORGAN,  5 },
+            { xi.item.YOVRA_ORGAN,   1 },
+        },
+    },
+
+    [xi.item.AQUA_GORGET]  =
+    {
+        hint = 14,
+        base =
+        {
+            xi.item.GORGET,
+            xi.item.BLUE_CHIP,
+        },
+        organs =
+        {
+            { xi.item.AERN_ORGAN,   10 },
+            { xi.item.HPEMDE_ORGAN,  5 },
+            { xi.item.YOVRA_ORGAN,   1 },
+        },
+    },
+
+    [xi.item.LIGHT_GORGET] =
+    {
+        hint = 15,
+        base =
+        {
+            xi.item.GORGET,
+            xi.item.WHITE_CHIP,
+        },
+        organs =
+        {
+            { xi.item.AERN_ORGAN,   7 },
+            { xi.item.PHUABO_ORGAN, 3 },
+            { xi.item.HPEMDE_ORGAN, 3 },
+            { xi.item.YOVRA_ORGAN,  2 },
+        },
+    },
+
+    [xi.item.SHADOW_GORGET] =
+    {
+        hint = 16,
+        base =
+        {
+            xi.item.GORGET,
+            xi.item.BLACK_CHIP,
+        },
+        organs =
+        {
+            { xi.item.HPEMDE_ORGAN, 7 },
+            { xi.item.PHUABO_ORGAN, 3 },
+            { xi.item.AERN_ORGAN,   3 },
+            { xi.item.YOVRA_ORGAN,  2 },
+        },
+    },
+
+    [xi.item.SANATIVE_EARRING] =
+    {
+        hint = 17,
+        base =
+        {
+            xi.item.SILVER_EARRING,
+            xi.item.WHITE_CHIP,
+        },
+        organs =
+        {
+            { xi.item.SAMPLE_OF_LUMINIAN_TISSUE, 5 },
+            { xi.item.EUVHI_ORGAN,               5 },
+        },
+    },
+
+    [xi.item.RELAXING_EARRING] =
+    {
+        hint = 17,
+        base =
+        {
+            xi.item.SILVER_EARRING,
+            xi.item.BLACK_CHIP,
+        },
+        organs =
+        {
+            { xi.item.SAMPLE_OF_LUMINIAN_TISSUE, 5 },
+            { xi.item.EUVHI_ORGAN,               5 },
+        },
+    },
 }
 
 entity.onTrade = function(player, npc, trade)
@@ -62,14 +305,14 @@ entity.onTrade = function(player, npc, trade)
         itemInProgress > 0 and
         npcUtil.tradeHas(trade, nosTrades[itemInProgress].organs)
     then
-        player:startEvent(529, gorget, earring, obi)
+        player:startEvent(529, xi.item.GORGET, xi.item.SILVER_EARRING, xi.item.SILVER_OBI)
     elseif
         (nameOfScience == xi.questStatus.QUEST_ACCEPTED or nameOfScience == xi.questStatus.QUEST_COMPLETED) and
         npcUtil.tradeHas(trade, xi.item.APPLE_PIE) and
         itemInProgress > 0
     then
         -- apple pie hint
-        player:startEvent(531, 4413, 0, nosTrades[itemInProgress].hint)
+        player:startEvent(531, xi.item.APPLE_PIE, 0, nosTrades[itemInProgress].hint)
     elseif
         (nameOfScience == xi.questStatus.QUEST_ACCEPTED or nameOfScience == xi.questStatus.QUEST_COMPLETED) and
         itemInProgress == 0
@@ -91,12 +334,12 @@ entity.onTrigger = function(player, npc)
         local itemInProgress = player:getCharVar('NAME_OF_SCIENCE_target')
 
         if nameOfScience == xi.questStatus.QUEST_AVAILABLE then
-            player:startEvent(524, obi, earring, gorget)
+            player:startEvent(524, xi.item.SILVER_OBI, xi.item.SILVER_EARRING, xi.item.GORGET)
         elseif
             (nameOfScience == xi.questStatus.QUEST_ACCEPTED or nameOfScience == xi.questStatus.QUEST_COMPLETED) and
             itemInProgress == 0
         then
-            player:startEvent(525, obi, earring, gorget)
+            player:startEvent(525, xi.item.SILVER_OBI, xi.item.SILVER_EARRING, xi.item.GORGET)
         elseif
             nameOfScience == xi.questStatus.QUEST_ACCEPTED or
             nameOfScience == xi.questStatus.QUEST_COMPLETED
