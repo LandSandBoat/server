@@ -237,6 +237,12 @@ if(bcrypt_ADDED) # bcrypt's cmake isn't suitable for us
     )
 endif()
 
+CPMAddPackage(
+    NAME alpaca
+    GITHUB_REPOSITORY p-ranav/alpaca
+    GIT_TAG 83a592f0c3807500f1aaf3b07fd48105a01e2780
+) # defines: alpaca
+
 set(EXTERNAL_LIBS
     fmt::fmt
     spdlog
@@ -257,6 +263,7 @@ set(EXTERNAL_LIBS
     pcg-cpp
     asio
     bcrypt
+    alpaca
 )
 
 if(WIN32)
