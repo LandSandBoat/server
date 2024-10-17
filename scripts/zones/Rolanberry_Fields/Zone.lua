@@ -11,6 +11,7 @@ zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.SIMURGH)
     GetMobByID(ID.mob.SIMURGH):setRespawnTime(math.random(900, 7200))
     xi.voidwalker.zoneOnInit(zone)
+    zone:registerTriggerArea(1, -382, 10, -790, 0, 0, 0) -- Front entrance to Crawlers Nest
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

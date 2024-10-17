@@ -12,6 +12,7 @@ zoneObject.onInitialize = function(zone)
     GetMobByID(ID.mob.ROC):setRespawnTime(math.random(900, 10800))
     GetNPCByID(ID.npc.QM2 + math.random(0, 5)):setLocalVar('Quest[2][70]Option', 1) -- Determine which QM is active today for THF AF2
     xi.voidwalker.zoneOnInit(zone)
+    zone:registerTriggerArea(1, -104, 10, -425, 0, 0, 0) -- Escort for Hire
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

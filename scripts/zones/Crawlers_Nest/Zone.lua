@@ -11,6 +11,10 @@ zoneObject.onInitialize = function(zone)
     GetMobByID(ID.mob.DYNAST_BEETLE):setRespawnTime(math.random(5400, 7200))
 
     xi.treasure.initZone(zone)
+
+    zone:registerTriggerArea(1, 380.617, 10, 4.581, 0, 0, 0)
+    -- Set escort for hire servervariable to 0
+    SetServerVariable('[Escort]Olavia', 0)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
