@@ -176,127 +176,163 @@ void view_session::read_func()
         case 0x22: // 34: Checking name and Gold World Pass
         {
             // block creation of character if in maintenance mode or generally disabled
-            auto maintMode               = settings::get<uint8>("login.MAINT_MODE");
-            auto enableCharacterCreation = settings::get<bool>("login.CHARACTER_CREATION");
+            const auto maintMode               = settings::get<uint8>("login.MAINT_MODE");
+            const auto enableCharacterCreation = settings::get<bool>("login.CHARACTER_CREATION");
             if (maintMode > 0 || !enableCharacterCreation)
             {
                 loginHelpers::generateErrorMessage(data_, loginErrors::errorCode::FAILED_TO_REGISTER_WITH_THE_NAME_SERVER);
                 do_write(0x24);
                 return;
             }
-            else
+
+            auto _sql = std::make_unique<SqlConnection>();
+
+            // clang-format off
+            const auto characterLimitReached = [&]() -> bool
             {
-                auto _sql = std::make_unique<SqlConnection>();
-
-                // creating new char
-                char CharName[PacketNameLength] = {};
-                std::memcpy(CharName, data_ + 32, PacketNameLength - 1);
-
-                // Sanitize name
-                char escapedCharName[16 * 2 + 1];
-                _sql->EscapeString(escapedCharName, CharName);
-
-                std::optional<std::string> invalidNameReason = std::nullopt;
-
-                // Check for invalid characters
-                std::string nameStr(&escapedCharName[0]);
-                for (auto letters : nameStr)
+                const auto characterLimit = settings::get<uint8>("login.ACCOUNT_CHARACTER_LIMIT");
+                if (characterLimit == 0) // 0: No limit
                 {
-                    if (!std::isalpha(letters))
+                    return false;
+                }
+
+                const auto res = _sql->Query("SELECT COUNT(*) FROM chars WHERE accid = %u", session.accountID);
+                if (res == SQL_ERROR)
+                {
+                    ShowError(fmt::format("Failed to query character count for account {}", session.accountID));
+                    return true;
+                }
+
+                if (_sql->NextRow() == SQL_SUCCESS)
+                {
+                    auto count = _sql->GetUIntData(0);
+                    if (count >= characterLimit)
                     {
-                        invalidNameReason = "Invalid characters present in name.";
-                        break;
+                        ShowWarning(fmt::format("Character limit reached for account {}", session.accountID));
+                        return true;
                     }
                 }
 
-                // Check for invalid length name
-                // NOTE: The client checks for this. This is to guard
-                // against packet injection
-                if (nameStr.size() < 3 || nameStr.size() > 15)
-                {
-                    invalidNameReason = "Invalid name length.";
-                }
+                return false;
+            }();
+            // clang-format on
 
-                // Check if the name is already in use by another character
-                if (_sql->Query("SELECT charname FROM chars WHERE charname LIKE '%s'", escapedCharName) == SQL_ERROR)
+            // Block creation of character if account character limit reached
+            if (characterLimitReached)
+            {
+                loginHelpers::generateErrorMessage(data_, loginErrors::errorCode::FAILED_TO_REGISTER_WITH_THE_NAME_SERVER);
+                do_write(0x24);
+                return;
+            }
+
+            // creating new char
+            char CharName[PacketNameLength] = {};
+            std::memcpy(CharName, data_ + 32, PacketNameLength - 1);
+
+            // Sanitize name
+            char escapedCharName[16 * 2 + 1];
+            _sql->EscapeString(escapedCharName, CharName);
+
+            std::optional<std::string> invalidNameReason = std::nullopt;
+
+            // Check for invalid characters
+            std::string nameStr(&escapedCharName[0]);
+            for (auto letters : nameStr)
+            {
+                if (!std::isalpha(letters))
                 {
-                    invalidNameReason = "Internal entity name query failed.";
+                    invalidNameReason = "Invalid characters present in name.";
+                    break;
+                }
+            }
+
+            // Check for invalid length name
+            // NOTE: The client checks for this. This is to guard
+            // against packet injection
+            if (nameStr.size() < 3 || nameStr.size() > 15)
+            {
+                invalidNameReason = "Invalid name length.";
+            }
+
+            // Check if the name is already in use by another character
+            if (_sql->Query("SELECT charname FROM chars WHERE charname LIKE '%s'", escapedCharName) == SQL_ERROR)
+            {
+                invalidNameReason = "Internal entity name query failed.";
+            }
+            else if (_sql->NumRows() != 0)
+            {
+                invalidNameReason = "Name already in use.";
+            }
+
+            // (optional) Check if the name is in use by NPC or Mob entities
+            if (settings::get<bool>("login.DISABLE_MOB_NPC_CHAR_NAMES"))
+            {
+                auto query =
+                    "WITH results AS "
+                    "( "
+                    "    SELECT polutils_name AS `name` FROM npc_list "
+                    "    UNION "
+                    "    SELECT packet_name AS `name` FROM mob_pools "
+                    ") "
+                    "SELECT * FROM results WHERE REPLACE(REPLACE(UPPER(`name`), '-', ''), '_', '') LIKE REPLACE(REPLACE(UPPER('%s'), '-', ''), '_', '')";
+
+                if (_sql->Query(query, nameStr) == SQL_ERROR)
+                {
+                    invalidNameReason = "Internal entity name query failed";
                 }
                 else if (_sql->NumRows() != 0)
                 {
                     invalidNameReason = "Name already in use.";
                 }
+            }
 
-                // (optional) Check if the name is in use by NPC or Mob entities
-                if (settings::get<bool>("login.DISABLE_MOB_NPC_CHAR_NAMES"))
+            // (optional) Check if the name contains any words on the bad word list
+            auto loginSettingsTable = lua["xi"]["settings"]["login"].get<sol::table>();
+            if (auto badWordsList = loginSettingsTable.get_or<sol::table>("BANNED_WORDS_LIST", sol::lua_nil); badWordsList.valid())
+            {
+                auto potentialName = to_upper(nameStr);
+                for (auto const& entry : badWordsList)
                 {
-                    auto query =
-                        "WITH results AS "
-                        "( "
-                        "    SELECT polutils_name AS `name` FROM npc_list "
-                        "    UNION "
-                        "    SELECT packet_name AS `name` FROM mob_pools "
-                        ") "
-                        "SELECT * FROM results WHERE REPLACE(REPLACE(UPPER(`name`), '-', ''), '_', '') LIKE REPLACE(REPLACE(UPPER('%s'), '-', ''), '_', '')";
-
-                    if (_sql->Query(query, nameStr) == SQL_ERROR)
+                    auto badWord = to_upper(entry.second.as<std::string>());
+                    if (potentialName.find(badWord) != std::string::npos)
                     {
-                        invalidNameReason = "Internal entity name query failed";
-                    }
-                    else if (_sql->NumRows() != 0)
-                    {
-                        invalidNameReason = "Name already in use.";
+                        invalidNameReason = fmt::format("Name matched with bad words list <{}>.", badWord);
                     }
                 }
+            }
 
-                // (optional) Check if the name contains any words on the bad word list
-                auto loginSettingsTable = lua["xi"]["settings"]["login"].get<sol::table>();
-                if (auto badWordsList = loginSettingsTable.get_or<sol::table>("BANNED_WORDS_LIST", sol::lua_nil); badWordsList.valid())
-                {
-                    auto potentialName = to_upper(nameStr);
-                    for (auto const& entry : badWordsList)
-                    {
-                        auto badWord = to_upper(entry.second.as<std::string>());
-                        if (potentialName.find(badWord) != std::string::npos)
-                        {
-                            invalidNameReason = fmt::format("Name matched with bad words list <{}>.", badWord);
-                        }
-                    }
-                }
+            if (invalidNameReason.has_value())
+            {
+                ShowWarning(fmt::format("new character name error <{}>: {}", str(CharName), *invalidNameReason));
 
-                if (invalidNameReason.has_value())
-                {
-                    ShowWarning(fmt::format("new character name error <{}>: {}", str(CharName), *invalidNameReason));
+                // Send error code:
+                // The character name you entered is unavailable. Please choose another name.
+                // TODO: This message is displayed in Japanese, needs fixing.
+                loginHelpers::generateErrorMessage(data_, loginErrors::errorCode::CHARACTER_NAME_UNAVAILABLE);
+                do_write(0x24);
+                return;
+            }
+            else
+            {
+                // copy charname
+                session.requestedNewCharacterName = CharName;
 
-                    // Send error code:
-                    // The character name you entered is unavailable. Please choose another name.
-                    // TODO: This message is displayed in Japanese, needs fixing.
-                    loginHelpers::generateErrorMessage(data_, loginErrors::errorCode::CHARACTER_NAME_UNAVAILABLE);
-                    do_write(0x24);
-                    return;
-                }
-                else
-                {
-                    // copy charname
-                    session.requestedNewCharacterName = CharName;
+                memset(data_, 0, 0x20);
+                data_[0] = 0x20; // size
 
-                    memset(data_, 0, 0x20);
-                    data_[0] = 0x20; // size
+                data_[4] = 0x49; // I
+                data_[5] = 0x58; // X
+                data_[6] = 0x46; // F
+                data_[7] = 0x46; // F
 
-                    data_[4] = 0x49; // I
-                    data_[5] = 0x58; // X
-                    data_[6] = 0x46; // F
-                    data_[7] = 0x46; // F
+                data_[8] = 0x03; // result
 
-                    data_[8] = 0x03; // result
+                unsigned char hash[16];
 
-                    unsigned char hash[16];
+                md5(reinterpret_cast<uint8*>(data_), hash, 0x20);
+                std::memcpy(data_ + 12, hash, 16);
 
-                    md5(reinterpret_cast<uint8*>(data_), hash, 0x20);
-                    std::memcpy(data_ + 12, hash, 16);
-
-                    do_write(0x20);
-                }
+                do_write(0x20);
             }
         }
         break;
