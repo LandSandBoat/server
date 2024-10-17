@@ -8,16 +8,17 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getSubType() == 15269 then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    if target:getStatusEffectBySource(xi.effect.ENCHANTMENT, xi.effectSourceType.EQUIPPED_ITEM, xi.item.ELDRITCH_HORN_HAIRPIN) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.ELDRITCH_HORN_HAIRPIN)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 15269)
+    if target:hasEquipped(xi.item.ELDRITCH_HORN_HAIRPIN) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.ELDRITCH_HORN_HAIRPIN)
+    end
 end
 
 itemObject.onEffectGain = function(target, effect)

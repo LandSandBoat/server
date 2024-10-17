@@ -693,6 +693,19 @@ bool CStatusEffectContainer::DelStatusEffect(EFFECT StatusID, uint16 SubID)
     return false;
 }
 
+bool CStatusEffectContainer::DelStatusEffectBySource(EFFECT StatusID, EffectSourceType sourceType, uint16 sourceTypeParam)
+{
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetSourceType() == sourceType && PStatusEffect->GetSourceTypeParam() == sourceTypeParam && !PStatusEffect->deleted)
+        {
+            RemoveStatusEffect(PStatusEffect);
+            return true;
+        }
+    }
+    return false;
+}
+
 bool CStatusEffectContainer::DelStatusEffectByTier(EFFECT StatusID, uint16 tier)
 {
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
@@ -1306,6 +1319,18 @@ CStatusEffect* CStatusEffectContainer::GetStatusEffect(EFFECT StatusID, uint32 S
     return nullptr;
 }
 
+CStatusEffect* CStatusEffectContainer::GetStatusEffectBySource(EFFECT StatusID, EffectSourceType SourceType, uint16 SourceTypeParam)
+{
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetSourceType() == SourceType && PStatusEffect->GetSourceTypeParam() == SourceTypeParam && !PStatusEffect->deleted)
+        {
+            return PStatusEffect;
+        }
+    }
+    return nullptr;
+}
+
 /************************************************************************
  *                                                                       *
  * Dispels one effect and returns it (used in mob abilities)             *
@@ -1513,17 +1538,45 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     std::string name;
     EFFECT      effect = StatusEffect->GetStatusID();
 
+    // check if status effect is special case from a usable equipped item that grants enchantment
+    bool effectFromItemEnchant = false;
+    if (StatusEffect->GetSourceType() != EffectSourceType::SOURCE_NONE && StatusEffect->GetSourceTypeParam() > 0)
+    {
+        if (StatusEffect->GetSourceType() == EffectSourceType::EQUIPPED_ITEM)
+        {
+            auto PItem = itemutils::GetItemPointer(StatusEffect->GetSourceTypeParam());
+            if (PItem != nullptr)
+            {
+                // get the item lua script and check if it has valid functions
+                auto itemName     = "globals/items/" + PItem->getName();
+                auto itemFullName = fmt::format("./scripts/{}.lua", itemName);
+                auto cacheEntry   = luautils::GetCacheEntryFromFilename(itemFullName);
+                auto onEffectGain = cacheEntry["onEffectGain"].get<sol::function>();
+                auto onEffectLose = cacheEntry["onEffectLose"].get<sol::function>();
+
+                effectFromItemEnchant = onEffectGain.valid() && onEffectLose.valid();
+
+                // if it does have valid functions then set the status effect name as the script (similar to actual status effects)
+                if (effectFromItemEnchant)
+                {
+                    name = itemName;
+                }
+            }
+        }
+    }
+
     // Determine if this is a BRD Song or COR Effect.
     if (subType == 0 ||
-        subType > 20000 ||
-        (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) ||
-        (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_NATURALISTS_ROLL) ||
-        effect == EFFECT_RUNEISTS_ROLL ||
-        effect == EFFECT_DRAIN_DAZE ||
-        effect == EFFECT_ASPIR_DAZE ||
-        effect == EFFECT_HASTE_DAZE ||
-        effect == EFFECT_ATMA ||
-        effect == EFFECT_BATTLEFIELD)
+        ((subType > 20000 ||
+          (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) ||
+          (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_NATURALISTS_ROLL) ||
+          effect == EFFECT_RUNEISTS_ROLL ||
+          effect == EFFECT_DRAIN_DAZE ||
+          effect == EFFECT_ASPIR_DAZE ||
+          effect == EFFECT_HASTE_DAZE ||
+          effect == EFFECT_ATMA ||
+          effect == EFFECT_BATTLEFIELD) &&
+         !effectFromItemEnchant))
     {
         name.insert(0, "effects/");
         name.insert(name.size(), effects::EffectsParams[effect].Name);

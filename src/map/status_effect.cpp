@@ -71,6 +71,16 @@ uint32 CStatusEffect::GetSubID() const
     return m_SubID;
 }
 
+EffectSourceType CStatusEffect::GetSourceType() const
+{
+    return m_SourceType;
+}
+
+uint16 CStatusEffect::GetSourceTypeParam() const
+{
+    return m_SourceTypeParam;
+}
+
 uint16 CStatusEffect::GetEffectType() const
 {
     return m_Type;
@@ -160,6 +170,12 @@ void CStatusEffect::SetIcon(uint16 Icon)
 
     m_Icon = Icon;
     m_POwner->StatusEffectContainer->UpdateStatusIcons();
+}
+
+void CStatusEffect::SetSource(EffectSourceType sourceType, uint16 sourceTypeParam)
+{
+    m_SourceType      = sourceType;
+    m_SourceTypeParam = sourceTypeParam;
 }
 
 void CStatusEffect::SetEffectType(uint16 Type)
