@@ -381,17 +381,21 @@ void CEnmityContainer::SetVE(CBattleEntity* PEntity, const int32 amount)
 void CEnmityContainer::UpdateEnmityFromDamage(CBattleEntity* PEntity, int32 Damage)
 {
     TracyZoneScoped;
-    Damage          = (Damage < 1 ? 1 : Damage);
-    int16 damageMod = battleutils::GetEnmityModDamage(m_EnmityHolder->GetMLevel());
 
-    int32 CE = (int32)(80.f / damageMod * Damage);
-    int32 VE = (int32)(240.f / damageMod * Damage);
-
-    UpdateEnmity(PEntity, CE, VE);
-
-    if (m_EnmityHolder && m_EnmityHolder->m_HiPCLvl < PEntity->GetMLevel())
+    if (m_EnmityHolder)
     {
-        m_EnmityHolder->m_HiPCLvl = PEntity->GetMLevel();
+        Damage          = (Damage < 1 ? 1 : Damage);
+        int16 damageMod = battleutils::GetEnmityModDamage(m_EnmityHolder->GetMLevel());
+
+        int32 CE = (int32)(80.f / damageMod * Damage);
+        int32 VE = (int32)(240.f / damageMod * Damage);
+
+        UpdateEnmity(PEntity, CE, VE);
+
+        if (m_EnmityHolder->m_HiPCLvl < PEntity->GetMLevel())
+        {
+            m_EnmityHolder->m_HiPCLvl = PEntity->GetMLevel();
+        }
     }
 }
 
