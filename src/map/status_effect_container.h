@@ -49,6 +49,7 @@ public:
     bool DelStatusEffect(EFFECT StatusID);
     bool DelStatusEffectSilent(EFFECT StatusID);
     bool DelStatusEffect(EFFECT StatusID, uint16 SubID);
+    bool DelStatusEffectBySource(EFFECT StatusID, EffectSourceType EffectSourceType, uint16 SourceTypeParam);
     void DelStatusEffectsByFlag(uint32 flag, bool silent = false); // Remove all the status effects with the specified type
     void DelStatusEffectsByIcon(uint16 IconID);                    // Remove all effects with the specified icon
     void DelStatusEffectsByType(uint16 Type);
@@ -70,6 +71,7 @@ public:
 
     CStatusEffect* GetStatusEffect(EFFECT StatusID);
     CStatusEffect* GetStatusEffect(EFFECT StatusID, uint32 SubID);
+    CStatusEffect* GetStatusEffectBySource(EFFECT StatusID, EffectSourceType Sourcetype, uint16 SourceTypeParam);
 
     std::vector<EFFECT> GetStatusEffectsInIDRange(EFFECT start, EFFECT end);
 

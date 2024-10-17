@@ -221,6 +221,7 @@ public:
     // Items
     uint16 getEquipID(SLOTTYPE slot);
     auto   getEquippedItem(uint8 slot) -> std::optional<CLuaItem>;
+    bool   hasEquipped(uint16 equipmentID); // Returns true if item is equipped in any slot
     bool   hasItem(uint16 itemID, sol::object const& location);
     uint32 getItemCount(uint16 itemID);
     bool   addItem(sol::variadic_args va);
@@ -642,7 +643,7 @@ public:
     // Status Effects
     bool  addStatusEffect(sol::variadic_args va);
     bool  addStatusEffectEx(sol::variadic_args va);
-    auto  getStatusEffect(uint16 StatusID, sol::object const& SubType) -> std::optional<CLuaStatusEffect>;
+    auto  getStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& SourceType, sol::object const& SourceTypeParam) -> std::optional<CLuaStatusEffect>;
     auto  getStatusEffects() -> sol::table;
     int16 getStatusEffectElement(uint16 statusId);
     bool  canGainStatusEffect(uint16 effect, sol::object const& powerObj);
@@ -651,7 +652,7 @@ public:
     uint8 countEffect(uint16 StatusID);     // Gets the number of effects of a specific type on the entity
     uint8 countEffectWithFlag(uint32 flag); // Gets the number of effects with a flag on the entity
 
-    bool   delStatusEffect(uint16 StatusID, sol::object const& SubType);
+    bool   delStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& SourceType, sol::object const& SourceTypeParam);
     void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);
     bool   delStatusEffectSilent(uint16 StatusID); // Removes Status Effect, suppresses message
     uint16 eraseStatusEffect();

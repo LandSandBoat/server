@@ -8,24 +8,17 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getSubType() == 18241 then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    if target:getStatusEffectBySource(xi.effect.REFRESH, xi.effectSourceType.EQUIPPED_ITEM, xi.item.VIAL_OF_REFRESH_MUSK) ~= nil then
+        target:delStatusEffect(xi.effect.REFRESH, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.VIAL_OF_REFRESH_MUSK)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffectEx(xi.effect.ENCHANTMENT, xi.effect.REFRESH, 0, 0, 30, 18241)
-end
-
-itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.REFRESH, 3)
-end
-
-itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.REFRESH, 3)
+    if target:hasEquipped(xi.item.VIAL_OF_REFRESH_MUSK) then
+        target:addStatusEffect(xi.effect.REFRESH, 3, 3, 30, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.VIAL_OF_REFRESH_MUSK)
+    end
 end
 
 return itemObject
