@@ -8,22 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if not player:getPet() then
-        -- TODO: Add check to verify this is an automaton
-        return xi.msg.basic.REQUIRES_A_PET, 0
-    end
-
-    return 0, 0
+    return xi.job_utils.puppetmaster.onAbilityCheckCooldown(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    local jpValue = player:getJobPointLevel(xi.jp.COOLDOWN_EFFECT)
-
-    player:reduceBurden(50, jpValue)
-
-    if player:hasStatusEffect(xi.effect.OVERLOAD) then
-        player:delStatusEffect(xi.effect.OVERLOAD)
-    end
+    return xi.job_utils.puppetmaster.onAbilityUseCooldown(player, target, ability)
 end
 
 return abilityObject
