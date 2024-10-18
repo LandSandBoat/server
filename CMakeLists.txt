@@ -57,6 +57,14 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 link_libraries(${CMAKE_THREAD_LIBS_INIT})
 
+# Find Python (defines ${Python_EXECUTABLE})
+find_package(Python REQUIRED)
+message(STATUS "Python_EXECUTABLE: ${Python_EXECUTABLE}")
+message(STATUS "Python_VERSION: ${Python_VERSION}")
+if(NOT ${Python_VERSION_MAJOR} EQUAL 3)
+    message(FATAL_ERROR "Python 3 is required")
+endif()
+
 # Find MariaDB
 find_package(MariaDB REQUIRED)
 find_package(MariaDBCPP REQUIRED)
@@ -107,5 +115,24 @@ include(Fuzzing)
 message(STATUS "Configuring src/common/version.cpp")
 configure_file(${CMAKE_SOURCE_DIR}/src/common/version.cpp.in
                ${CMAKE_SOURCE_DIR}/src/common/version.cpp)
+
+# Generate IPC stubs
+set_property(
+    DIRECTORY
+    APPEND
+    PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/tools/generate_ipc_stubs.py
+)
+message(STATUS "Generating IPC stubs")
+message(STATUS "Calling: ${Python_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tools/generate_ipc_stubs.py ${CMAKE_BINARY_DIR}")
+execute_process(
+    COMMAND ${Python_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tools/generate_ipc_stubs.py ${CMAKE_BINARY_DIR}
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    RESULT_VARIABLE IPC_EXIT_CODE
+)
+if (NOT IPC_EXIT_CODE EQUAL 0)
+    message(FATAL_ERROR "Failed to generate IPC stubs")
+endif()
+
+include_directories(${CMAKE_BINARY_DIR}/generated) # Globally include the build/generated directory
 
 add_subdirectory(src)

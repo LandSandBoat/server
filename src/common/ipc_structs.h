@@ -21,12 +21,15 @@
 
 #pragma once
 
-namespace debug
+#include <cstdint>
+#include <iostream>
+#include <string>
+#include <vector>
+
+namespace ipc
 {
-    void init();
-
-    // https://forum.juce.com/t/detecting-if-a-process-is-being-run-under-a-debugger/2098
-    bool isRunningUnderDebugger();
-
-    bool isUserRoot();
-} // namespace debug
+    struct SomeData // Example struct. Remove this once we have real structs.
+    {
+        std::vector<std::string> messages;
+    };
+} // namespace ipc
