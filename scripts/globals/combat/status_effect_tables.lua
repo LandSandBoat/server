@@ -33,8 +33,12 @@ xi.combat.statusEffect.getAssociatedImmunity = function(effectId, actionElement)
     local effectToCheck  = effectId or 0
     local elementToCheck = actionElement or 0
 
-    -- Fetch immunity from table.
-    local associatedImmunity = xi.combat.statusEffect.dataTable[effectToCheck][1] or 0
+    -- Fetch immunity from table if entry exists.
+    local associatedImmunity = 0
+
+    if xi.combat.statusEffect.dataTable[effectToCheck] then
+        associatedImmunity = xi.combat.statusEffect.dataTable[effectToCheck][1]
+    end
 
     -- Sleep exception.
     if
@@ -51,18 +55,26 @@ xi.combat.statusEffect.getAssociatedResistanceModifier = function(effectId)
     -- Sanitize fed value
     local effectToCheck = effectId or 0
 
-    -- Fetch resistance from table.
-    local associatedResistance = xi.combat.statusEffect.dataTable[effectToCheck][2] or 0
+    -- Fetch modifier ID from table if entry exists.
+    local associatedResistanceModifier = 0
 
-    return associatedResistance
+    if xi.combat.statusEffect.dataTable[effectToCheck] then
+        associatedResistanceModifier = xi.combat.statusEffect.dataTable[effectToCheck][2]
+    end
+
+    return associatedResistanceModifier
 end
 
 xi.combat.statusEffect.getAssociatedMagicEvasionModifier = function(effectId)
     -- Sanitize fed value
     local effectToCheck = effectId or 0
 
-    -- Fetch resistance from table.
-    local associatedMagicEvasionModifier = xi.combat.statusEffect.dataTable[effectToCheck][3] or 0
+    -- Fetch modifier ID from table if entry exists.
+    local associatedMagicEvasionModifier = 0
+
+    if xi.combat.statusEffect.dataTable[effectToCheck] then
+        associatedMagicEvasionModifier = xi.combat.statusEffect.dataTable[effectToCheck][3]
+    end
 
     return associatedMagicEvasionModifier
 end
@@ -71,8 +83,12 @@ xi.combat.statusEffect.getAssociatedImmunobreakModifier = function(effectId)
     -- Sanitize fed value
     local effectToCheck = effectId or 0
 
-    -- Fetch resistance from table.
-    local associatedImmunobreakModifier = xi.combat.statusEffect.dataTable[effectToCheck][4] or 0
+    -- Fetch modifier ID from table if entry exists.
+    local associatedImmunobreakModifier = 0
+
+    if xi.combat.statusEffect.dataTable[effectToCheck] then
+        associatedImmunobreakModifier = xi.combat.statusEffect.dataTable[effectToCheck][4]
+    end
 
     return associatedImmunobreakModifier
 end
