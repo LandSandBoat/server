@@ -106,6 +106,7 @@ def main():
     function_names.append("gmatch")
     function_names.append("find")
     function_names.append("sub")
+    function_names.append("getStatusEffectBySource")
 
     # root_dir needs a trailing slash (i.e. /root/dir/)
     for filename in glob.iglob("./scripts/" + "**/*.lua", recursive=True):
@@ -129,7 +130,7 @@ def main():
                     line = line.split("--", 1)[0]
 
                     # Don't look inside strings (replace with placeholder)
-                    line = re.sub(r'\"([^\"]*?)\"', "strVal", line)
+                    line = re.sub(r"\"([^\"]*?)\"", "strVal", line)
                     line = re.sub(r"\'([^\"]*?)\'", "strVal", line)
 
                     # Try and ignore function definitions
