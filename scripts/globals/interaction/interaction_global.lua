@@ -103,6 +103,10 @@ function InteractionGlobal.afterZoneIn(player, fallbackFn)
     return InteractionGlobal.lookup:afterZoneIn(player, fallbackFn)
 end
 
+function InteractionGlobal.onSteal(player, mob, ability, action, fallbackFn)
+    return InteractionGlobal.lookup:onSteal(player, mob, ability, action, fallbackFn)
+end
+
 function InteractionGlobal.onTrigger(player, npc, fallbackFn)
     return InteractionGlobal.lookup:onTrigger(player, npc, fallbackFn)
 end
