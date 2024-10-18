@@ -12,10 +12,10 @@ xi.mobSkill =
     SHEEP_BLEAT_1     =  263,
     SHEEP_SONG_1      =  264,
     RAGE_2            =  265,
-    RAM_CHARGE        =  266,
-    RUMBLE            =  267,
-    GREAT_BLEAT       =  268,
-    PETRIBREATH       =  269,
+    RAM_CHARGE        =  266, -- Unique entry.
+    RUMBLE            =  267, -- Unique entry.
+    GREAT_BLEAT       =  268, -- Unique entry.
+    PETRIBREATH       =  269, -- Unique entry.
     ROAR_1            =  270,
     RAZOR_FANG_1      =  271,
     RANGED_ATTACK_1   =  272,
@@ -27,16 +27,18 @@ xi.mobSkill =
     PIT_AMBUSH_1      =  278,
     MANDIBULAR_BITE_1 =  279,
 
-    FROGKICK          =  308,
-    SPORE             =  309,
-    QUEASYSHROOM      =  310,
-    NUMBSHROOM        =  311,
-    SHAKESHROOM       =  312,
+    FROGKICK_1        =  308,
+    SPORE_1           =  309,
+    QUEASYSHROOM_1    =  310,
+    NUMBSHROOM_1      =  311,
+    SHAKESHROOM_1     =  312,
 
-    SILENT_GAS        =  314,
-    DARK_SPORE        =  315,
+    SILENCE_GAS_1     =  314,
+    DARK_SPORE_1      =  315,
 
     RANGED_ATTACK_2   =  412,
+
+    LIGHT_BLADE_1     =  830,
 
     HOWLING_MOON_1    =  838, -- Unknown usage.
     HOWLING_MOON_2    =  839, -- Confirmed usage: "The Moonlit Path" bcnm (Fenrir).
@@ -90,6 +92,8 @@ xi.mobSkill =
     DUST_CLOUD_2      = 1568,
     WHIRL_CLAWS_2     = 1569,
 
+    FROGKICK_2        = 1621,
+
     SHEEP_BLEAT_2     = 1633,
     SHEEP_SONG_2      = 1634,
     SHEEP_CHARGE_3    = 1635,
@@ -98,9 +102,9 @@ xi.mobSkill =
     RAZOR_FANG_2      = 1678,
     CLAW_CYCLONE_2    = 1679,
 
-    HYPNIC_LAMP       = 1695,
+    HYPNIC_LAMP       = 1695, -- Unique entry.
 
-    XENOGLOSSIA       = 1823,
+    XENOGLOSSIA       = 1823, -- Unique entry.
 
     SANDBLAST_2       = 1841,
     SANDPIT_2         = 1842,
@@ -110,11 +114,13 @@ xi.mobSkill =
 
     RANGED_ATTACK_15  = 1949,
 
-    ECLOSION          = 1970,
+    ECLOSION          = 1970, -- Unique entry.
 
-    DEATHGNASH        = 1977,
+    DEATHGNASH        = 1977, -- Unique entry.
 
-    BOREAS_MANTLE     = 1980,
+    BOREAS_MANTLE     = 1980, -- Unique entry.
+
+    QUEASYSHROOM_2    = 2232,
 
     ROAR_3            = 2406,
 
@@ -124,6 +130,8 @@ xi.mobSkill =
     DIAMOND_DUST_4    = 2483, -- Unknown usage.
     JUDGMENT_BOLT_4   = 2484, -- Unknown usage.
     AERIAL_BLAST_4    = 2485, -- Unknown usage.
+
+    LIGHT_BLADE_2     = 3214,
 
     INFERNO_5         = 3325, -- Unknown usage.
 
@@ -141,7 +149,7 @@ xi.mobSkill =
 
     SHEEP_SONG_3      = 3433,
 
-    LIGHT_BLADE       = 3471,
+    LIGHT_BLADE_3     = 3471,
 
     FOOT_KICK_3       = 3840,
     DUST_CLOUD_3      = 3841,
@@ -155,6 +163,14 @@ xi.mobSkill =
     RAGE_3            = 3858,
     SHEEP_CHARGE_4    = 3859,
     SHEEP_SONG_4      = 3860,
+
+    FROGKICK_3        = 3868,
+    SPORE_2           = 3869,
+    QUEASYSHROOM_3    = 3870,
+    NUMBSHROOM_2      = 3871,
+    SHAKESHROOM_2     = 3872,
+    SILENCE_GAS_2     = 3873,
+    DARK_SPORE_2      = 3874,
 
     SANDBLAST_3       = 3882,
     SANDPIT_3         = 3883,
