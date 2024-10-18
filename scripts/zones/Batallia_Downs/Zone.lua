@@ -35,6 +35,8 @@ zoneObject.onInitialize = function(zone)
     registerRegionAroundNPC(zone, ID.npc.SYRILLIA, 9)
 
     xi.voidwalker.zoneOnInit(zone)
+
+    zone:registerTriggerArea(10, 134, 10, -374, 0, 0, 0) -- Front entrance to The Eldieme Necropolis
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
