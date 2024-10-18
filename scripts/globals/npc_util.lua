@@ -919,6 +919,12 @@ function npcUtil.tradeSetInList(trade, itemList)
     return false
 end
 
+function npcUtil.confirmTradedItems(trade)
+    for i = 0, 7 do
+        trade:confirmSlot(i)
+    end
+end
+
 -----------------------------------
 -- UpdateNPCSpawnPoint
 -----------------------------------
