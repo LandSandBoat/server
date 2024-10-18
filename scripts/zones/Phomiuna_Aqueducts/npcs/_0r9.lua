@@ -10,9 +10,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if npc:getAnimation() == 9 then
-        npc:openDoor()
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
