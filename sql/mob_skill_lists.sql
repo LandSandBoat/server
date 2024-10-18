@@ -3932,7 +3932,55 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_WTB',2013,847); -- Waking th
 
 -- Next available ID: 2014
 
--- ------------------------------------------------------------
+INSERT INTO `mob_skill_lists` VALUES ('Supernal_Chapuli',2015,2945); -- natures_meditation
+INSERT INTO `mob_skill_lists` VALUES ('Supernal_Chapuli',2015,2946); -- sensilla_blades
+INSERT INTO `mob_skill_lists` VALUES ('Supernal_Chapuli',2015,2947); -- tegmina_buffet
+INSERT INTO `mob_skill_lists` VALUES ('Supernal_Chapuli',2015,2948); -- sanguinary_slash
+
+INSERT INTO `mob_skill_lists` VALUES ('Supernal_Chapuli',2016,2949); -- orthopterror
+
+INSERT INTO `mob_skill_lists` VALUES ('Unfettered_Twitherym',2017,2950); -- tempestuous_upheaval
+INSERT INTO `mob_skill_lists` VALUES ('Unfettered_Twitherym',2017,2952); -- blackout
+
+INSERT INTO `mob_skill_lists` VALUES ('Unfettered_Twitherym_low_50',2018,2950); -- tempestuous_upheaval
+INSERT INTO `mob_skill_lists` VALUES ('Unfettered_Twitherym_low_50',2018,2952); -- blackout
+INSERT INTO `mob_skill_lists` VALUES ('Unfettered_Twitherym_low_50',2018,2953); -- smouldering_swarm (Below 50%)
+
+INSERT INTO `mob_skill_lists` VALUES ('Taxet',2019,1951); -- magma_fan
+INSERT INTO `mob_skill_lists` VALUES ('Taxet',2019,1952); -- erratic_flutter
+INSERT INTO `mob_skill_lists` VALUES ('Taxet',2019,1953); -- proboscis
+INSERT INTO `mob_skill_lists` VALUES ('Taxet',2019,1954); -- erosion_dust
+INSERT INTO `mob_skill_lists` VALUES ('Taxet',2019,1955); -- exuviation
+INSERT INTO `mob_skill_lists` VALUES ('Taxet',2019,1956); -- fire_break
+
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2020,1951); -- magma_fan (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2020,1952); -- erratic_flutter (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2020,1953); -- proboscis (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2020,1954); -- erosion_dust (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2020,1955); -- exuviation (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2020,1956); -- fire_break (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2020,3044); -- benumbing_blaze (Below 50%)
+
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion',2021,353); -- death_scissors
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion',2021,354); -- wild_rage
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion',2021,356); -- sharp_strike
+
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion_low_50',2022,353); -- death_scissors (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion_low_50',2022,354); -- wild_rage (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion_low_50',2022,356); -- sharp_strike (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion_low_50',2022,721); -- stasis (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion_low_50',2022,723); -- earthbreaker (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion_low_50',2022,2221); -- hell_scissors (Below 50%)
+
+INSERT INTO `mob_skill_lists` VALUES ('Mastop',2023,2158); -- insipid_nip
+INSERT INTO `mob_skill_lists` VALUES ('Mastop',2023,2160); -- bombilation
+INSERT INTO `mob_skill_lists` VALUES ('Mastop',2023,2161); -- cimicine_discharge
+INSERT INTO `mob_skill_lists` VALUES ('Mastop',2023,2162); -- emetic_discharge
+INSERT INTO `mob_skill_lists` VALUES ('Mastop',2023,2770); -- booming_bombination
+
+-- Next available ID: 2024
+
+--------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
 --       mob entries will result in the current update's names being shown.
