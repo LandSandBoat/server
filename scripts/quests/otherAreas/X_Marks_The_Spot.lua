@@ -4,6 +4,7 @@
 -- Log ID: 4, Quest ID: 65
 -----------------------------------
 -- CoP Mission 2-5 Ancient Vows Completed
+-- !addmission 6 258
 -----------------------------------
 -- Tavnazian Safehold       !zone 26
 -- Despachiaire             !pos 111.2090 -40.0148 -85.4810
@@ -25,7 +26,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-            player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.ANCIENT_VOWS
+            player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.ANCIENT_VOWS
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -95,8 +96,8 @@ quest.sections =
                 end,
 
                 [142] = function(player, csid, option, npc)
-                        player:confirmTrade()
-                        quest:setVar(player, 'Prog', 3)
+                    player:confirmTrade()
+                    quest:setVar(player, 'Prog', 3)
                 end,
 
                 [143] = function(player, csid, option, npc)
@@ -110,11 +111,7 @@ quest.sections =
             ['_0r9'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 3 then
-                        return quest:progressEvent(37)
-                    else
-                        return
-                    end
+                    return quest:progressEvent(37)
                 end,
             },
 
