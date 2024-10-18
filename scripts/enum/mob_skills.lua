@@ -38,7 +38,38 @@ xi.mobSkill =
 
     RANGED_ATTACK_2   =  412,
 
+    HOWLING_MOON_1    =  838, -- Unknown usage.
+    HOWLING_MOON_2    =  839, -- Confirmed usage: "The Moonlit Path" bcnm (Fenrir).
+
+    INFERNO_1         =  848, -- Confirmed usage: "Trial by Fire" bcnm. Regular avatar-type mobs (Ifrit).
+
+    EARTHEN_FURY_1    =  857, -- Confirmed usage: "Trial by Earth" bcnm. Regular avatar-type mobs (Titan).
+
+    TIDAL_WAVE_1      =  866, -- Confirmed usage: "Trial by Water" bcnm. Regular avatar-type mobs (Leviathan).
+
+    AERIAL_BLAST_1    =  875, -- Confirmed usage: "Trial by Wind" bcnm. Regular avatar-type mobs (Garuda).
+
+    DIAMOND_DUST_1    =  884, -- Confirmed usage: "Trial by Ice" bcnm. Regular avatar-type mobs (Shiva).
+
+    JUDGMENT_BOLT_1   =  893, -- Confirmed usage: "Trial by Lightning" bcnm. Regular avatar-type mobs (Ramuh).
+
+    SEARING_LIGHT_1   =  912, -- Confirmed usage: Regular avatar-type mobs (Carbuncle).
+    INFERNO_2         =  913, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin) (Ifrit model avatar)
+    EARTHEN_FURY_2    =  914, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin) (Titan model avatar)
+    TIDAL_WAVE_2      =  915, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin) (Leviathan model avatar)
+    AERIAL_BLAST_2    =  916, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin) (Garuda model avatar)
+    DIAMOND_DUST_2    =  917, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin) (Shiva model avatar)
+    JUDGMENT_BOLT_2   =  918, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin) (Ramuh model avatar)
+    SEARING_LIGHT_2   =  919, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin, Crimson-toothed Pawberry) (Carbuncle model avatar)
+
     RANGED_ATTACK_3   = 1154,
+
+    INFERNO_3         = 1162, -- Confirmed usage: "Trial-Size Trial by Fire" bcnm. (Ifrit)
+    EARTHEN_FURY_3    = 1163, -- Confirmed usage: "Trial-Size Trial by Earth" bcnm. (Titan)
+    TIDAL_WAVE_3      = 1164, -- Confirmed usage: "Trial-Size Trial by Water" bcnm. (Leviathan)
+    AERIAL_BLAST_3    = 1165, -- Confirmed usage: "Trial-Size Trial by Wind" bcnm. (Garuda)
+    DIAMOND_DUST_3    = 1166, -- Confirmed usage: "Trial-Size Trial by Ice" bcnm. (Shiva)
+    JUDGMENT_BOLT_3   = 1167, -- Confirmed usage: "Trial-Size Trial by Lightning" bcnm. (Ramuh)
 
     RANGED_ATTACK_4   = 1202,
     RANGED_ATTACK_5   = 1203,
@@ -52,6 +83,8 @@ xi.mobSkill =
     RANGED_ATTACK_12  = 1212,
     RANGED_ATTACK_13  = 1213,
     RANGED_ATTACK_14  = 1214,
+
+    HOWLING_MOON_3    = 1520, -- Unknown usage.
 
     FOOT_KICK_2       = 1567,
     DUST_CLOUD_2      = 1568,
@@ -78,10 +111,33 @@ xi.mobSkill =
     RANGED_ATTACK_15  = 1949,
 
     ECLOSION          = 1970,
+
     DEATHGNASH        = 1977,
+
     BOREAS_MANTLE     = 1980,
 
     ROAR_3            = 2406,
+
+    INFERNO_4         = 2480, -- Unknown usage.
+    TIDAL_WAVE_4      = 2481, -- Unknown usage.
+    EARTHEN_FURY_4    = 2482, -- Unknown usage.
+    DIAMOND_DUST_4    = 2483, -- Unknown usage.
+    JUDGMENT_BOLT_4   = 2484, -- Unknown usage.
+    AERIAL_BLAST_4    = 2485, -- Unknown usage.
+
+    INFERNO_5         = 3325, -- Unknown usage.
+
+    AERIAL_BLAST_5    = 3327, -- Unknown usage.
+
+    DIAMOND_DUST_5    = 3329, -- Unknown usage.
+
+    JUDGMENT_BOLT_5   = 3331, -- Unknown usage.
+
+    EARTHEN_FURY_5    = 3333, -- Unknown usage.
+
+    TIDAL_WAVE_5      = 3335, -- Unknown usage.
+
+    HOWLING_MOON_4    = 3336, -- Unknown usage.
 
     SHEEP_SONG_3      = 3433,
 
