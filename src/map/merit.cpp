@@ -340,7 +340,7 @@ void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
 {
     Merit_t* PMerit = GetMeritPointer(merit);
 
-    if (m_MeritPoints >= PMerit->next && PMerit->count < PMerit->upgrade && GetMeritCountInSameCategory(merit) < meritCatInfo[GetMeritCategory(merit)].MaxPoints)
+    if (PMerit && m_MeritPoints >= PMerit->next && PMerit->count < PMerit->upgrade && GetMeritCountInSameCategory(merit) < meritCatInfo[GetMeritCategory(merit)].MaxPoints)
     {
         m_MeritPoints -= PMerit->next;
 
@@ -372,30 +372,32 @@ void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
 void CMeritPoints::LowerMerit(MERIT_TYPE merit)
 {
     Merit_t* PMerit = GetMeritPointer(merit);
-
-    if (PMerit->count > 0)
+    if (PMerit)
     {
-        PMerit->next = upgrade[meritCatInfo[GetMeritCategory(merit)].UpgradeID][--PMerit->count];
-    }
-
-    if (PMerit->spellid != 0 && PMerit->count == 0)
-    {
-        if (charutils::delSpell(m_PChar, PMerit->spellid))
+        if (PMerit->count > 0)
         {
-            charutils::DeleteSpell(m_PChar, PMerit->spellid);
-            m_PChar->pushPacket(new CCharSpellsPacket(m_PChar));
-
-            // Reset traits
-            charutils::BuildingCharTraitsTable(m_PChar);
+            PMerit->next = upgrade[meritCatInfo[GetMeritCategory(merit)].UpgradeID][--PMerit->count];
         }
-    }
 
-    if (PMerit->wsunlockid != 0 && PMerit->count == 0 && charutils::hasLearnedWeaponskill(m_PChar, PMerit->wsunlockid))
-    {
-        charutils::delLearnedWeaponskill(m_PChar, PMerit->wsunlockid);
-        charutils::BuildingCharWeaponSkills(m_PChar);
-        charutils::SaveLearnedAbilities(m_PChar);
-        m_PChar->pushPacket(new CCharAbilitiesPacket(m_PChar));
+        if (PMerit->spellid != 0 && PMerit->count == 0)
+        {
+            if (charutils::delSpell(m_PChar, PMerit->spellid))
+            {
+                charutils::DeleteSpell(m_PChar, PMerit->spellid);
+                m_PChar->pushPacket(new CCharSpellsPacket(m_PChar));
+
+                // Reset traits
+                charutils::BuildingCharTraitsTable(m_PChar);
+            }
+        }
+
+        if (PMerit->wsunlockid != 0 && PMerit->count == 0 && charutils::hasLearnedWeaponskill(m_PChar, PMerit->wsunlockid))
+        {
+            charutils::delLearnedWeaponskill(m_PChar, PMerit->wsunlockid);
+            charutils::BuildingCharWeaponSkills(m_PChar);
+            charutils::SaveLearnedAbilities(m_PChar);
+            m_PChar->pushPacket(new CCharAbilitiesPacket(m_PChar));
+        }
     }
 }
 

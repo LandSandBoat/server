@@ -312,9 +312,12 @@ namespace puppetutils
 
             if (valid)
             {
-                for (int i = 0; i < 8; i++)
+                if (PAttachment)
                 {
-                    PChar->PAutomaton->addElementCapacity(i, (PAttachment->getElementSlots() >> (i * 4)) & 0xF);
+                    for (int i = 0; i < 8; i++)
+                    {
+                        PChar->PAutomaton->addElementCapacity(i, (PAttachment->getElementSlots() >> (i * 4)) & 0xF);
+                    }
                 }
                 luautils::OnAttachmentEquip(PChar->PAutomaton, PAttachment);
                 PChar->PAutomaton->setAttachment(slotId, attachment);
