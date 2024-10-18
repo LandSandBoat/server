@@ -9,21 +9,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.puppetmaster.onAbilityCheckDeactivate(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    -- Reset the Activate ability.
-    local pet = player:getPet()
-
-    if
-        pet and
-        pet:getHP() == pet:getMaxHP()
-    then
-        player:resetRecast(xi.recast.ABILITY, 205) -- activate
-    end
-
-    target:despawnPet()
+    return xi.job_utils.puppetmaster.onAbilityUseDeactivate(player, target, ability)
 end
 
 return abilityObject
