@@ -8,11 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.puppetmaster.onAbilityCheckTacticalSwitch(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    -- target:addStatusEffect(xi.effect.TACTICAL_SWITCH, 18, 1, 1) -- TODO: implement xi.effect.TACTICAL_SWITCH
+    return xi.job_utils.puppetmaster.onAbilityUseTacticalSwitch(player, target, ability)
 end
 
 return abilityObject
