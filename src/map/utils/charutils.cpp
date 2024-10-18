@@ -2022,9 +2022,19 @@ namespace charutils
                 case SLOT_SUB:
                 {
                     CItemWeapon* weapon = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_MAIN));
+                    // NULL weapon can be unarmed weapon that just got unequipped
                     if (!weapon)
                     {
-                        return false;
+                        if (PItem->IsShield())
+                        {
+                            PChar->look.sub = PItem->getModelId();
+                            UpdateWeaponStyle(PChar, equipSlotID, PItem);
+                            break;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
                     else
                     {
@@ -2044,12 +2054,14 @@ namespace charutils
                             case SKILL_KATANA:
                             case SKILL_CLUB:
                             {
-                                bool isWeapon = PItem->isType(ITEM_WEAPON);
-                                if (isWeapon && (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) || static_cast<CItemWeapon*>(PItem)->getSkillType() == SKILL_NONE))
+                                CItemWeapon* PNewItemWeapon = dynamic_cast<CItemWeapon*>(PItem);
+                                bool         isWeapon       = PItem->isType(ITEM_WEAPON);
+
+                                if (isWeapon && (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) || (PNewItemWeapon && PNewItemWeapon->getSkillType() == SKILL_NONE)))
                                 {
                                     return false;
                                 }
-                                PChar->m_Weapons[SLOT_SUB] = static_cast<CItemWeapon*>(PItem);
+                                PChar->m_Weapons[SLOT_SUB] = PItem;
                                 // only set m_dualWield if equipping a weapon (not for example a shield)
                                 if (isWeapon)
                                 {
@@ -2146,7 +2158,7 @@ namespace charutils
             PChar->equip[equipSlotID]    = slotID;
             PChar->equipLoc[equipSlotID] = containerID;
 
-            // Changed Visibile Equipment
+            // Changed visible equipment
             if (equipSlotID >= SLOT_HEAD && equipSlotID <= SLOT_FEET)
             {
                 UpdateRemovedSlotsLook(PChar);
