@@ -1241,6 +1241,8 @@ int32 makeBind_udp(uint32 ip, uint16 port)
     server_address.sin_addr.s_addr = htonl(ip);
     server_address.sin_port        = htons(port);
 
+    set_nonblocking(fd, true);
+
     result = sBind(fd, (struct sockaddr*)&server_address, sizeof(server_address));
     if (result == SOCKET_ERROR)
     {
@@ -1292,7 +1294,43 @@ int32 recvudp(int32 fd, void* buff, size_t nbytes, int32 flags, struct sockaddr*
 int32 sendudp(int32 fd, void* buff, size_t nbytes, int32 flags, const struct sockaddr* from, socklen_t addrlen)
 {
     TracyZoneScoped;
-    return sSendto(fd, (const char*)buff, (int)nbytes, flags, from, addrlen);
+    int retval = 0;
+
+    // Block while we can't send data to emulate old behavior...
+    while ((retval = sSendto(fd, (const char*)buff, (int)nbytes, flags, from, addrlen)) < 0)
+    {
+        if (retval < 0)
+        {
+            int err = 0;
+#ifdef WIN32_
+            err = WSAGetLastError();
+            if (err == WSAEWOULDBLOCK)
+            {
+                ShowError("Socket would block. This is bad!");
+            }
+#else
+            // Assign *nix errno to err
+            err = errno;
+            // Could also be EAGAIN? It's obsolete?
+            // https://stackoverflow.com/a/7003379
+#if EWOULDBLOCK != EAGAIN
+            if (err == EWOULDBLOCK || err == EAGAIN)
+#else
+            if (err == EWOULDBLOCK)
+#endif
+            {
+                ShowError("Socket would block. This is bad!");
+            }
+#endif
+            else
+            {
+                ShowError(fmt::format("sendudp failed with error code '{}'", err));
+                return retval;
+            }
+        }
+    }
+
+    return retval;
 }
 
 void socket_init()
