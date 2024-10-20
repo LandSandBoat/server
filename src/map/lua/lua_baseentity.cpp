@@ -6987,7 +6987,7 @@ uint16 CLuaBaseEntity::getFame(sol::object const& areaObj)
 /************************************************************************
  *  Function: addFame()
  *  Purpose : Adds a specified amount of fame to the player's balance
- *  Example : player:addFame(xi.quest.fame_area.WINDURST, 30)
+ *  Example : player:addFame(xi.fameArea.WINDURST, 30)
  *  Notes   :
  ************************************************************************/
 
@@ -7049,7 +7049,7 @@ void CLuaBaseEntity::addFame(sol::object const& areaObj, uint16 fame)
 /************************************************************************
  *  Function: setFame()
  *  Purpose : Sets the fame level for a player to a specified amount
- *  Example : player:setFame(xi.quest.fame_area.BASTOK, 1500)
+ *  Example : player:setFame(xi.fameArea.BASTOK, 1500)
  *  Notes   :
  ************************************************************************/
 
