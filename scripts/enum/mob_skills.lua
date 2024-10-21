@@ -53,6 +53,10 @@ xi.mobSkill =
     RANGED_ATTACK_13  = 1213,
     RANGED_ATTACK_14  = 1214,
 
+    MANTLE_PIERCE     = 1349,
+    AERIAL_COLLISION  = 1353,
+    SINUATE_RUSH      = 1367,
+
     FOOT_KICK_2       = 1567,
     DUST_CLOUD_2      = 1568,
     WHIRL_CLAWS_2     = 1569,
