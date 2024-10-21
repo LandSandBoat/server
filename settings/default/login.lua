@@ -40,6 +40,10 @@ xi.settings.login =
     -- Number of simultaneous game sessions per IP (0 for no limit)
     LOGIN_LIMIT = 0,
 
+    -- Maximum number of characters per account (0 for no limit)
+    -- This is enforced through xi_connect and xiloader, you can bypass this if you create characters through other means
+    ACCOUNT_CHARACTER_LIMIT = 0,
+
     -- Expansion display on the client's login screen. This does NOT effect in game content whatsoever!
     RISE_OF_ZILART          = true,
     CHAINS_OF_PROMATHIA     = true,
