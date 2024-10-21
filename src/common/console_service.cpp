@@ -82,9 +82,9 @@ bool getLine(std::string& line)
         return false;
     }
 
-    fmt::print("{:c}", keyCharacter); // echo character back to console, apparently using ReadConsoleInput & GetStdHandle prevents echo?
     if (std::isprint(keyCharacter))
     {
+        fmt::print("{:c}", keyCharacter); // echo character back to console, apparently using ReadConsoleInput & GetStdHandle prevents echo?
         line += keyCharacter;
     }
 
