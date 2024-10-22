@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 14989
 -- Aero Mufflers
---  Enchantment: "Enaero"
+-- Enchantment: "Enaero"
 -----------------------------------
 ---@type TItem
 local itemObject = {}

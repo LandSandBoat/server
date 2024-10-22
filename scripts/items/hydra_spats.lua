@@ -8,24 +8,17 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getSubType() == 15681 then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    if target:getStatusEffectBySource(xi.effect.ENCHANTMENT, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_SPATS) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_SPATS)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1200, 15681)
-end
-
-itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.EVA, 15)
-end
-
-itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.EVA, 15)
+    if target:hasEquipped(xi.item.HYDRA_SPATS) then
+        target:addStatusEffect(xi.effect.EVASION_BOOST, 15, 0, 1200, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_SPATS)
+    end
 end
 
 return itemObject

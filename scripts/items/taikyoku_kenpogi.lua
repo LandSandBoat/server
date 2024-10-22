@@ -8,24 +8,17 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getSubType() == 14541 then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    if target:getStatusEffectBySource(xi.effect.EVASION_BOOST, xi.effectSourceType.EQUIPPED_ITEM, xi.item.TAIKYOKU_KENPOGI) ~= nil then
+        target:delStatusEffect(xi.effect.EVASION_BOOST, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.TAIKYOKU_KENPOGI)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 14541)
-end
-
-itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.EVA, 3)
-end
-
-itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.EVA, 3)
+    if target:hasEquipped(xi.item.TAIKYOKU_KENPOGI) then
+        target:addStatusEffect(xi.effect.EVASION_BOOST, 3, 0, 1800, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.TAIKYOKU_KENPOGI)
+    end
 end
 
 return itemObject
