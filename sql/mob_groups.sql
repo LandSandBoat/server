@@ -8154,7 +8154,7 @@ INSERT INTO `mob_groups` VALUES (23,186,114,'Antican_Sagittarius',330,0,135,0,0,
 INSERT INTO `mob_groups` VALUES (24,189,114,'Antican_Speculator',330,0,138,0,0,44,49,0);
 INSERT INTO `mob_groups` VALUES (25,5891,114,'Sabotender_Corrido',7200,0,3090,9000,0,72,73,0);
 INSERT INTO `mob_groups` VALUES (26,1709,114,'Goblin_Robber',330,0,1145,0,0,45,49,0);
-INSERT INTO `mob_groups` VALUES (27,676,114,'Centurio_XII-I',0,128,444,0,0,56,56,0);
+INSERT INTO `mob_groups` VALUES (27,676,114,'Centurio_XII-I',0,128,444,5000,0,56,56,0);
 INSERT INTO `mob_groups` VALUES (28,1701,114,'Goblin_Poacher',330,0,1140,0,0,45,49,0);
 INSERT INTO `mob_groups` VALUES (29,1138,114,'Dune_Widow',0,32,720,0,0,45,47,0);
 INSERT INTO `mob_groups` VALUES (30,1705,114,'Goblin_Reaper',330,0,1142,0,0,45,49,0);
@@ -8164,7 +8164,7 @@ INSERT INTO `mob_groups` VALUES (33,2398,114,'Lesser_Manticore',330,0,1513,0,0,4
 INSERT INTO `mob_groups` VALUES (34,5855,114,'Nandi',0,128,3067,4500,0,48,49,0);
 INSERT INTO `mob_groups` VALUES (35,1084,114,'Doom_Scorpion',330,0,681,0,0,44,47,0);
 INSERT INTO `mob_groups` VALUES (36,6658,114,'Goblin_Digger',330,0,1042,0,0,45,49,0);
-INSERT INTO `mob_groups` VALUES (37,948,114,'Decurio_I-III',0,128,0,0,0,55,55,0);
+INSERT INTO `mob_groups` VALUES (37,948,114,'Decurio_I-III',0,128,0,5000,0,55,55,0);
 INSERT INTO `mob_groups` VALUES (38,4045,114,'Tsuchigumo',0,128,0,0,0,42,42,0);
 INSERT INTO `mob_groups` VALUES (39,1983,114,'Hobgoblin_Warrior',0,128,0,0,0,50,55,0);
 INSERT INTO `mob_groups` VALUES (40,1984,114,'Hobgoblin_White_Mage',0,128,0,0,0,50,55,0);
@@ -8194,6 +8194,9 @@ INSERT INTO `mob_groups` VALUES (61,677,114,'Centurio_XIII-V',0,128,3226,0,0,55,
 
 INSERT INTO `mob_groups` VALUES (62,3484,114,'Satyral',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (63,6838,114,'Cactrot_Veloz',0,128,0,0,0,0,0,0);
+
+INSERT INTO `mob_groups` VALUES (64,170,114,'Antican_Decurio',0,128,119,0,0,44,49,0);
+INSERT INTO `mob_groups` VALUES (65,189,114,'Antican_Speculator',0,128,138,0,0,44,49,0);
 
 -- ------------------------------------------------------------
 -- West_Sarutabaruta (Zone 115)
@@ -13053,9 +13056,9 @@ INSERT INTO `mob_groups` VALUES (5,5323,204,'Sluagh',7200,0,0,10000,0,77,80,0);
 INSERT INTO `mob_groups` VALUES (6,99,204,'Altedour_I_Tavnazia',0,128,54,0,0,65,65,0);
 INSERT INTO `mob_groups` VALUES (7,5324,204,'Jenglot',7200,0,0,0,0,73,73,0);
 INSERT INTO `mob_groups` VALUES (8,744,204,'Clockwork_Pod',960,0,486,0,0,41,43,0);
-INSERT INTO `mob_groups` VALUES (9,2678,204,'Miser_Murphy',0,128,1701,0,0,62,62,0);
+INSERT INTO `mob_groups` VALUES (9,2678,204,'Miser_Murphy',0,128,1701,7500,0,62,62,0);
 INSERT INTO `mob_groups` VALUES (10,3051,204,'Ore_Golem',960,0,1956,0,0,43,45,0);
-INSERT INTO `mob_groups` VALUES (11,5765,204,'Mind_Hoarder',0,32,3049,9000,0,61,61,0);
+INSERT INTO `mob_groups` VALUES (11,5765,204,'Mind_Hoarder',0,32,6600,9000,0,61,61,0);
 INSERT INTO `mob_groups` VALUES (12,3561,204,'Shadow_war',960,0,2211,0,0,44,46,0);
 INSERT INTO `mob_groups` VALUES (13,5319,204,'Shadow_rng',960,0,2211,0,0,44,46,0);
 INSERT INTO `mob_groups` VALUES (14,5317,204,'Shadow_blm',960,0,2211,0,0,44,46,0);
