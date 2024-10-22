@@ -81,6 +81,45 @@ xi.chocobo.initZone = function(zone)
     end
 end
 
+xi.chocobo.renterOnTrade = function(player, npc, trade, eventSucceed, eventFail)
+    local zoneId = player:getZoneID()
+    local info   = chocoboInfo[zoneId]
+
+    local validChocopassZones = {
+        [xi.zone.WINDURST_WOODS] = true,
+        [xi.zone.BASTOK_MINES] = true,
+        [xi.zone.SOUTHERN_SAN_DORIA] = true,
+    }
+
+    if
+        npcUtil.tradeHasExactly(trade, xi.item.FREE_CHOCOPASS) and
+        validChocopassZones[zoneId] -- Chocopass does nothing for Non-Starter Cities
+    then
+        local currency = player:getGil()
+        local price = 0
+        player:setLocalVar('Chocopass', 1)
+        player:setLocalVar('ChocopassDuration', 180)
+        player:startEvent(eventSucceed, price, currency)
+    elseif npcUtil.tradeHasExactly(trade, xi.item.CHOCOBO_TICKET) then
+        if not info.past then -- Does nothing in past zones
+            if
+                player:getMainLvl() >= 20 and
+                player:hasKeyItem(xi.ki.CHOCOBO_LICENSE)
+            then
+                local currency = player:getGil()
+                local price    = 0
+                local duration = 1800 + (player:getMod(xi.mod.CHOCOBO_RIDING_TIME) * 60)
+
+                player:setLocalVar('Chocopass', 1)
+                player:setLocalVar('ChocopassDuration', duration)
+                player:startEvent(eventSucceed, price, currency)
+            else
+                player:startEvent(eventFail) -- Fail Closed
+            end
+        end
+    end
+end
+
 xi.chocobo.renterOnTrigger = function(player, eventSucceed, eventFail)
     local mLvl   = player:getMainLvl()
     local zoneId = player:getZoneID()
@@ -115,11 +154,24 @@ end
 
 xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
     if csid == eventSucceed and option == 0 then
-        local mLvl   = player:getMainLvl()
-        local zoneId = player:getZoneID()
-        local info   = chocoboInfo[zoneId]
+        local mLvl     = player:getMainLvl()
+        local zoneId   = player:getZoneID()
+        local info     = chocoboInfo[zoneId]
+        local trade    = player:getLocalVar('Chocopass')
+        local duration = 900
 
-        if info then
+        if not info then
+            printf('[warning] player %s passed bad zoneId %i in xi.chocobo.renterOnEventFinish', player:getName(), zoneId)
+            return
+        end
+
+        if trade == 1 then -- If the player used a Chocopass/Chocobo Ticket
+            duration = player:getLocalVar('ChocopassDuration')
+            player:tradeComplete()
+
+            player:setLocalVar('Chocopass', 0)
+            player:setLocalVar('ChocopassDuration', 0)
+        else -- Regular rental
             local price = player:getLocalVar('[CHOCOBO]price')
             player:setLocalVar('[CHOCOBO]price', 0)
 
@@ -134,21 +186,18 @@ xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
 
                 updatePrice(zoneId, info, price)
 
-                local duration = 900
                 if mLvl >= 20 then
                     duration = 1800 + (player:getMod(xi.mod.CHOCOBO_RIDING_TIME) * 60)
-                end
-
-                player:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, 0, 0, duration, true)
-
-                if info.pos then
-                    player:setPos(unpack(info.pos))
                 end
             else
                 printf('[warning] player %s reached succeed without enough currency in xi.chocobo.renterOnEventFinish', player:getName())
             end
-        else
-            printf('[warning] player %s passed bad zoneId %i in xi.chocobo.renterOnEventFinish', player:getName(), zoneId)
+        end
+
+        player:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, 0, 0, duration, true)
+
+        if info.pos then
+            player:setPos(unpack(info.pos))
         end
     end
 end

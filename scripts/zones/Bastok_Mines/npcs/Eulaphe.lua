@@ -11,6 +11,7 @@ local eventSucceed = 62
 local eventFail    = 65
 
 entity.onTrade = function(player, npc, trade)
+    xi.chocobo.renterOnTrade(player, npc, trade, eventSucceed, eventFail)
 end
 
 entity.onTrigger = function(player, npc)
