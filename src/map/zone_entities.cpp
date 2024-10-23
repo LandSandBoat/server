@@ -1300,7 +1300,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
             case CHAR_INRANGE_SELF: // NOTE!!!: This falls through to CHAR_INRANGE so both self and the local area get the packet
             {
                 TracyZoneCString("CHAR_INRANGE_SELF");
-                if (PEntity->objtype == TYPE_PC)
+                if (PEntity && PEntity->objtype == TYPE_PC)
                 {
                     ((CCharEntity*)PEntity)->pushPacket(new CBasicPacket(*packet));
                 }
@@ -1316,7 +1316,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                 for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
                 {
                     CCharEntity* PCurrentChar = (CCharEntity*)it->second;
-                    if (PEntity != PCurrentChar)
+                    if (PEntity && PEntity != PCurrentChar)
                     {
                         if (distanceSquared(PEntity->loc.p, PCurrentChar->loc.p) < checkDistanceSq &&
                             ((PEntity->objtype != TYPE_PC) || (((CCharEntity*)PEntity)->m_moghouseID == PCurrentChar->m_moghouseID)))
@@ -1403,7 +1403,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                 for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
                 {
                     CCharEntity* PCurrentChar = (CCharEntity*)it->second;
-                    if (PEntity != PCurrentChar)
+                    if (PEntity && PEntity != PCurrentChar)
                     {
                         if (distance(PEntity->loc.p, PCurrentChar->loc.p) < 180 &&
                             ((PEntity->objtype != TYPE_PC) || (((CCharEntity*)PEntity)->m_moghouseID == PCurrentChar->m_moghouseID)))

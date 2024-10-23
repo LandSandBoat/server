@@ -4855,7 +4855,7 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         case 0: // party
         {
-            if (PChar->PParty != nullptr && PChar->PParty->GetLeader() == PChar)
+            if (PChar && PChar->PParty != nullptr && PChar->PParty->GetLeader() == PChar)
             {
                 char memberName[PacketNameLength] = {};
                 memcpy(&memberName, data[0x04], PacketNameLength - 1);
@@ -4867,7 +4867,7 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
         break;
         case 1: // linkshell
         {
-            if (PChar->PLinkshell1 != nullptr)
+            if (PChar && PChar->PLinkshell1 != nullptr)
             {
                 int8 packetData[29]{};
                 ref<uint32>(packetData, 0) = PChar->id;
@@ -4880,7 +4880,7 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
         break;
         case 2: // linkshell2
         {
-            if (PChar->PLinkshell2 != nullptr)
+            if (PChar && PChar->PLinkshell2 != nullptr)
             {
                 int8 packetData[29]{};
                 ref<uint32>(packetData, 0) = PChar->id;
@@ -4893,7 +4893,7 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
         break;
         case 5: // alliance
         {
-            if (PChar->PParty && PChar->PParty->m_PAlliance && PChar->PParty->GetLeader() == PChar &&
+            if (PChar && PChar->PParty && PChar->PParty->m_PAlliance && PChar->PParty->GetLeader() == PChar &&
                 PChar->PParty->m_PAlliance->getMainParty() == PChar->PParty)
             {
                 char memberName[PacketNameLength] = {};
