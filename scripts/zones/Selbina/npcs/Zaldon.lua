@@ -562,7 +562,6 @@ local function giveReward(player, csid)
     end
 end
 
-
 entity.onTrade = function(player, npc, trade)
     local insideTheBelly = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
 
