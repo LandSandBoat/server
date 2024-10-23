@@ -10,9 +10,9 @@ local entity = {}
 
 local checkIfShouldClone = function(hpp, skillId)
     if
-        (xi.mobSkill.QUEASYSHROOM == skillId or
-        xi.mobSkill.NUMBSHROOM == skillId or
-        xi.mobSkill.SHAKESHROOM == skillId) and
+        (skillId == xi.mobSkill.QUEASYSHROOM_1 or
+        skillId == xi.mobSkill.NUMBSHROOM_1 or
+        skillId == xi.mobSkill.SHAKESHROOM_1) and
         hpp < 50
     then
         return true
