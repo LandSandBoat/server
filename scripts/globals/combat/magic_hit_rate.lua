@@ -281,12 +281,15 @@ end
 
 -- Magic Accuracy from Food.
 local function magicAccuracyFromFoodMultiplier(actor)
-    local magicAcc = actor:getMod(xi.mod.FOOD_MACCP) / 100
-    local foodCap  = actor:getMod(xi.mod.FOOD_MACC_CAP) / 100
+    local magicAcc          = 1
+    local foodMagicAccBonus = actor:getMod(xi.mod.FOOD_MACCP) / 100
+    local foodMagicAccCap   = actor:getMod(xi.mod.FOOD_MACC_CAP) / 100
 
-    if foodCap > 0 then
-        magicAcc = 1 + utils.clamp(magicAcc, 0, foodCap)
+    if foodMagicAccCap > 0 then
+        foodMagicAccBonus = utils.clamp(foodMagicAccBonus, 0, foodMagicAccCap)
     end
+
+    magicAcc = magicAcc + foodMagicAccBonus
 
     return magicAcc
 end
