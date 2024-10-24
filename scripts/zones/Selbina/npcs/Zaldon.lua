@@ -563,23 +563,10 @@ local function giveReward(player, csid)
 end
 
 entity.onTrade = function(player, npc, trade)
-    local underTheSea    = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNDER_THE_SEA)
     local insideTheBelly = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
 
-    -- UNDER THE SEA
-    if
-        underTheSea == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.ETCHED_RING) and
-        npcUtil.tradeHas(trade, xi.item.FAT_GREEDIE)
-    then
-        if math.random(1, 100) <= 20 then
-            player:startEvent(35) -- Ring found !
-        else
-            player:startEvent(36) -- Ring not found
-        end
-
     -- A BOY'S DREAM
-    elseif
+    if
         player:getCharVar('aBoysDreamCS') == 5 and
         npcUtil.tradeHasExactly(trade, xi.item.ODONTOTYRANNUS)
     then
@@ -606,12 +593,8 @@ entity.onTrigger = function(player, npc)
     local insideTheBelly = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
     local mLvl           = player:getMainLvl()
 
-    -- UNDER THE SEA
-    if player:getCharVar('underTheSeaVar') == 3 then
-        player:startEvent(34, 4501) -- During quest 'Under the sea' - 3rd dialog
-
     -- INSIDE THE BELLY
-    elseif
+    if
         mLvl >= 30 and
         theRealGift == xi.questStatus.QUEST_COMPLETED and
         insideTheBelly == xi.questStatus.QUEST_AVAILABLE
@@ -640,10 +623,6 @@ entity.onTrigger = function(player, npc)
         (insideTheBelly == xi.questStatus.QUEST_ACCEPTED or insideTheBelly == xi.questStatus.QUEST_COMPLETED)
     then
         player:startEvent(165, 4451, 4477, 5803, 4307, 4478, 5467, 4304, 4474)
-
-    -- STANDARD DIALOG
-    else
-        player:startEvent(150)
     end
 end
 
@@ -651,17 +630,8 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    -- UNDER THE SEA
-    if csid == 34 then
-        player:setCharVar('underTheSeaVar', 4)
-    elseif csid == 35 then
-        npcUtil.giveKeyItem(player, xi.ki.ETCHED_RING)
-        player:confirmTrade()
-    elseif csid == 36 then
-        player:confirmTrade()
-
     -- A BOY'S DREAM
-    elseif csid == 85 then
+    if csid == 85 then
         npcUtil.giveKeyItem(player, xi.ki.KNIGHTS_BOOTS)
         player:setCharVar('aBoysDreamCS', 6)
         player:confirmTrade()
