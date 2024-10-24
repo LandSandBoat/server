@@ -45,18 +45,22 @@ zones[xi.zone.BALGAS_DAIS] =
         HUH_IS_THAT_ALL               = 7695, -- Huh? Is that all? I haven't even broken a sweataru...
         YIKEY_WIKEYS                  = 7696, -- Yikey-wikeys! Get that thing away from meee!
         WHATS_THE_MATTARU             = 7697, -- <Pant, wheeze>... What's the mattaru, <name>? Too much of a pansy-wansy to fight fair?
+        LOUD_THUD                     = 7702, -- You hear a loud thud, as if a large amount of spoils spontaneously appeared.
     },
     mob =
     {
         ATORI_TUTORI            = GetFirstID('Atori-Tutori_qm'),
         BLACK_DRAGON            = GetFirstID('Black_Dragon'),
         BUU_XOLO_THE_BLOODFACED = GetFirstID('Buu_Xolo_the_Bloodfaced'),
+        CHEST_O_PLENTY          = GetFirstID('Chest_OPlenty'),
+        COFFER_O_PLENTY         = GetFirstID('Coffer_OPlenty'),
         DVOROVOI                = GetFirstID('Dvorovoi'),
         MAAT                    = GetFirstID('Maat'),
         VOO_TOLU_THE_GHOSTFIST  = GetFirstID('Voo_Tolu_the_Ghostfist'),
     },
     npc =
     {
+        TERMINAL_COFFER = GetFirstID('Terminal_Coffer')
     },
 }
 

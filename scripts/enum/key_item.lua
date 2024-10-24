@@ -571,6 +571,7 @@ xi.keyItem =
     MOGLIFICATION_SYNERGY_SKILL_GAINS        = 564,
     MOGLIFICATION_SYNERGY_FURNACE_DURATION   = 565,
     MOGLIFICATION_RESIST_DEATH               = 566,
+    MOGLIFICATION_AMAN_TROVE                 = 567,
     BALLISTA_LICENSE                         = 576,
     BALLISTA_INSTAWARP                       = 577,
     BALLISTA_INSTAPORT                       = 578,
