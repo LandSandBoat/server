@@ -255,7 +255,7 @@ xi.treasure.treasureInfo =
                     {
                         test = function(player)
                             return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW) == xi.questStatus.QUEST_ACCEPTED and
-                                player:getCharVar('scatIntoShadowCS') == 1 and not player:hasItem(xi.item.BEAST_COLLAR)
+                                player:getCharVar('Quest[3][61]Prog') == 4 and not player:hasItem(xi.item.BEAST_COLLAR)
                         end,
 
                         code = function(player)
