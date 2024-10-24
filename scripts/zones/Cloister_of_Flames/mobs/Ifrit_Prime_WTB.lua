@@ -28,7 +28,6 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.FIRE_ABSORB, 100)
     -- do not need to set res rank for fire because WTB primes have own
     -- mob resistances row that sets it already
-    mob:addImmunity(xi.immunity.PARALYZE)
     mob:addImmunity(xi.immunity.GRAVITY)
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.SILENCE)
@@ -37,6 +36,8 @@ entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.TERROR)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    -- element specific immunities
+    mob:addImmunity(xi.immunity.PARALYZE)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
