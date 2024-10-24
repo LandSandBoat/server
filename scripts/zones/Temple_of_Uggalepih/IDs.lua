@@ -33,6 +33,7 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
         HATE_RESET                    = 7441,  -- The built-up hate has been cleansed...!
         DOOR_SHUT                     = 7443,  -- The door is firmly shut.
         NO_HATE                       = 7444,  -- You have no built-up hate to cleanse.
+        NOTHING_I_CANT_CUT            = 7448,  -- Nothing... Nothing... Nothing I can't cut... Nothing...
         BEGINS_TO_QUIVER              = 7458,  -- The <keyitem> begins to quiver!
         SOME_SORT_OF_CEREMONY         = 7460,  -- Some sort of ceremony was performed here...
         NM_OFFSET                     = 7510,  -- It looks like some sort of device. A thin thread leads down to the floor...
@@ -67,6 +68,7 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
         CRIMSON_TOOTHED_PAWBERRY = GetFirstID('Crimson-toothed_Pawberry'),
         SACRIFICIAL_GOBLET       = GetFirstID('Sacrificial_Goblet'),
         YALLERY_BROWN            = GetFirstID('Yallery_Brown'),
+        COOK_OFFSET              = GetFirstID('Cook_Solberry')
     },
     npc =
     {
@@ -75,6 +77,7 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
         TEMPLE_GUARDIAN_DOOR = GetFirstID('_mf1'),
         DOOR_TO_RANCOR       = GetFirstID('_mfb'),
         TREASURE_COFFER      = GetFirstID('Treasure_Coffer'),
+        CHEF_NONBERRY        = GetFirstID('Chef_Nonberry')
     },
 }
 
