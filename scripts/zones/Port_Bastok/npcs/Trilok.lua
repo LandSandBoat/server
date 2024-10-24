@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Trilok
+-- !pos -163 -7 5
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
