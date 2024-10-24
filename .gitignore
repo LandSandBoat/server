@@ -246,3 +246,12 @@ xi_search.dSYM
 # Keys and Certs
 **/*.key
 **/*.cert
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
