@@ -26,7 +26,7 @@ xi.shop =
     -- send general shop dialog to player
     -- stock cuts off after 16 items. if you add more, extras will not display
     -- stock is of form { itemId1, price1, itemId2, price2, ... }
-    -- log is a fame area from xi.quest.fame_area
+    -- log is a fame area from xi.fameArea
     general = function(player, stock, log)
         local priceMultiplier = 1
 
