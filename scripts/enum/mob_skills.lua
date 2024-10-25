@@ -38,6 +38,8 @@ xi.mobSkill =
 
     RANGED_ATTACK_2   =  412,
 
+    MIND_DRAIN        =  524,
+
     LIGHT_BLADE_1     =  830,
 
     HOWLING_MOON_1    =  838, -- Unknown usage.
