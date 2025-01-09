@@ -7,5 +7,6 @@ return {
     ['qm4']              = { messageSpecial = ID.text.MONSTERS_KILLED_ADVENTURERS },
     ['Signpost1']        = { messageSpecial = ID.text.SIGNPOST1 },
     ['Signpost2']        = { messageSpecial = ID.text.SIGNPOST2 },
+    ['Song_Runes']       = { messageSpecial = ID.text.SONG_RUNES_DEFAULT },
     ['Stone_Monument']   = { event = 900 },
 }

@@ -4,7 +4,6 @@
 -- Log ID: 3, Quest ID: 12
 -- Mertaire : !pos -17 0 -61 245
 -----------------------------------
-
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
 
 quest.reward =
@@ -19,7 +18,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-            player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT) == xi.questStatus.QUEST_COMPLETED
+            player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT)
         end,
 
         [xi.zone.LOWER_JEUNO] =
