@@ -10,7 +10,6 @@ local entity = {}
 
 local sewerSyrupPHTable =
 {
-    [ID.mob.SEWER_SYRUP - 2] = ID.mob.SEWER_SYRUP, -- -19.000 1.000 -173.000
     [ID.mob.SEWER_SYRUP - 1] = ID.mob.SEWER_SYRUP, -- -20.000 1.000 -148.000
 }
 
@@ -18,7 +17,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, sewerSyrupPHTable, 10, 7200) -- 2 hour minimum
+    xi.mob.phOnDespawn(mob, sewerSyrupPHTable, 33, 1200) -- 30 minute minimum, allegedly used to be 2 hours before the zone got changed. Fairly rate of spawning once the window is open
 end
 
 return entity
