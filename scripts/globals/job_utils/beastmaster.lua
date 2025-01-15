@@ -192,6 +192,10 @@ end
 
 -- On Ability Check Tame
 xi.job_utils.beastmaster.onAbilityCheckTame = function(player, target, ability)
+    if player:getPet() ~= nil then
+        return xi.msg.basic.ALREADY_HAS_A_PET, 0
+    end
+
     return 0, 0
 end
 
