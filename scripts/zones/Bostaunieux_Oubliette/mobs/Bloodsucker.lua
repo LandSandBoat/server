@@ -17,6 +17,14 @@ entity.onMobInitialize = function(mob)
     end
 end
 
+entity.onMobSpawn = function(mob)
+    if mob:getID() == ID.mob.BLOODSUCKER then
+        -- Drops exactly 6k gil before Gilfinder every time
+        mob:setMobMod(xi.mobMod.GIL_MIN, 6000)
+        mob:setMobMod(xi.mobMod.GIL_MAX, 6000)
+    end
+end
+
 entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN)
 end

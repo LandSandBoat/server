@@ -8,8 +8,9 @@ mixins = { require('scripts/mixins/rage') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.GIL_MIN, 15000)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 30000)
+    -- Drops exactly 20k gil before Gilfinder every time
+    mob:setMobMod(xi.mobMod.GIL_MIN, 20000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 20000)
 end
 
 entity.onMobFight = function(mob, target)

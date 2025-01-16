@@ -21,6 +21,11 @@ entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:setMod(xi.mod.EVA, 400)
+
+    -- Drops exactly 20k gil before Gilfinder every time
+    mob:setMobMod(xi.mobMod.GIL_MIN, 20000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 20000)
+
 end
 
 entity.onMobFight = function(mob, target)
