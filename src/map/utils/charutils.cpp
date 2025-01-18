@@ -3966,7 +3966,7 @@ namespace charutils
         {
             return EMobDifficulty::VeryTough;
         }
-        if (baseExp >= 100)
+        if (baseExp >= 101)
         {
             return EMobDifficulty::Tough;
         }
