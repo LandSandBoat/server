@@ -3962,30 +3962,30 @@ namespace charutils
         {
             return EMobDifficulty::IncrediblyTough;
         }
-        if (baseExp >= 350)
+        if (baseExp >= 200)
         {
             return EMobDifficulty::VeryTough;
         }
-        if (baseExp >= 220)
+        if (baseExp >= 100)
         {
             return EMobDifficulty::Tough;
         }
-        if (baseExp >= 200)
+        if (baseExp == 100)
         {
             return EMobDifficulty::EvenMatch;
         }
-        if (baseExp >= 160)
+        if (baseExp >= 80)
         {
             return EMobDifficulty::DecentChallenge;
         }
-        if (baseExp >= 60)
+        if (baseExp >= 1)
         {
             return EMobDifficulty::EasyPrey;
         }
-        if (baseExp >= 1 && moblvl > 55)
-        {
-            return EMobDifficulty::IncrediblyEasyPrey;
-        }
+        // if (baseExp >= 1 && moblvl > 55)
+        // {
+        //     return EMobDifficulty::IncrediblyEasyPrey;
+        // }
 
         return EMobDifficulty::TooWeak;
     }
