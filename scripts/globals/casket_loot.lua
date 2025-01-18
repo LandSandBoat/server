@@ -1052,7 +1052,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.QUICKSAND_CAVES] =
     {
-        regionalItems = { 10952 }, -- Tanner's Torque
+        -- regionalItems = { 10952 }, -- Tanner's Torque
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -1088,8 +1089,8 @@ xi.casket_loot.casketItems =
             {  525,   823 }, -- Gold Thread
             {  190,   844 }, -- Phoenix Feather
             {  780,  1443 }, -- Dried Mugwort
-            {  240,  3309 }, -- Barrage Turbine
-            { 1500,  3450 }, -- Voiddust
+            -- {  240,  3309 }, -- Barrage Turbine
+            -- { 1500,  3450 }, -- Voiddust
             { 5000,  4116 }, -- Hi-Potion
             { 4500,  4117 }, -- Hi-Potion +1
             { 2500,  4120 }, -- X-Potion
@@ -2095,7 +2096,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.THE_BOYAHDA_TREE] =
     {
-        regionalItems = { 11038, 10948 }, -- Dragonkin Earring | Carver's Torque
+        -- regionalItems = { 11038, 10948 }, -- Dragonkin Earring | Carver's Torque
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -2138,12 +2140,12 @@ xi.casket_loot.casketItems =
             { 3700,   919 }, -- Boyahda Moss
             { 4500,  1163 }, -- Manticore Hair
             { 1025,  1446 }, -- Lacquer Tree Log
-            {  450,  3313 }, -- Vivi-Valve
-            {  700,  3434 }, -- Cobalt Cell
-            { 1600,  3435 }, -- Rubicund Cell
-            { 2060,  3436 }, -- Xanthous Cell
-            { 2050,  3437 }, -- Jade Cell
-            { 1500,  3450 }, -- Voiddust
+            -- {  450,  3313 }, -- Vivi-Valve
+            -- {  700,  3434 }, -- Cobalt Cell
+            -- { 1600,  3435 }, -- Rubicund Cell
+            -- { 2060,  3436 }, -- Xanthous Cell
+            -- { 2050,  3437 }, -- Jade Cell
+            -- { 1500,  3450 }, -- Voiddust
             { 5000,  4119 }, -- Hi-Potion +3
             { 4200,  4120 }, -- X-Potion
             { 3500,  4121 }, -- X-Potion +1
@@ -2203,8 +2205,8 @@ xi.casket_loot.casketItems =
             {  760,   822 }, -- Silver Thread
             { 1350,   943 }, -- Poison Dust
             { 2700,  1212 }, -- Mtl. Bolt Heads x33
-            {  500,  3435 }, -- Rubicund Cell
-            {  510,  3436 }, -- Xanthous Cell
+            -- {  500,  3435 }, -- Rubicund Cell
+            -- {  510,  3436 }, -- Xanthous Cell
             { 4800,  4114 }, -- Potion +2
             { 3200,  4115 }, -- Potion +3
             { 5000,  4129 }, -- Ether +1
@@ -2223,7 +2225,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.UPPER_DELKFUTTS_TOWER] =
     {
-        regionalItems = { 19779 }, -- Potestas Bomblet
+        -- regionalItems = { 19779 }, -- Potestas Bomblet
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -2255,11 +2258,11 @@ xi.casket_loot.casketItems =
         -----------------------------------
             {  700,   702 }, -- Ebony Log
             {  100,   844 }, -- Phoenix Feather
-            {  320,  3308 }, -- Power Cooler
-            { 1650,  3434 }, -- Cobalt Cell
-            { 1600,  3436 }, -- Xanthous Cell
-            { 1500,  3437 }, -- Jade Cell
-            {  800,  3450 }, -- Voiddust
+            -- {  320,  3308 }, -- Power Cooler
+            -- { 1650,  3434 }, -- Cobalt Cell
+            -- { 1600,  3436 }, -- Xanthous Cell
+            -- { 1500,  3437 }, -- Jade Cell
+            -- {  800,  3450 }, -- Voiddust
             { 2000,  4117 }, -- Hi-Potion +1
             { 1900,  4133 }, -- Hi-Ether +1
             {  600,  4141 }, -- Pro-Ether +1
@@ -2268,7 +2271,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.TEMPLE_OF_UGGALEPIH] =
     {
-        regionalItems = { 10953 }, -- Boneworker's Torque
+        -- regionalItems = { 10953 }, -- Boneworker's Torque
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -2304,11 +2308,11 @@ xi.casket_loot.casketItems =
             {  450,   844 }, -- Phoenix Feather
             { 3500,  1122 }, -- Wyvern Skin
             { 2700,  1213 }, -- Dst. Bolt Heads x33
-            {  740,  3308 }, -- Power Cooler
-            { 3880,  3434 }, -- Cobalt Cell
-            {  440,  3435 }, -- Rubicund Cell
-            {  210,  3436 }, -- Xanthous Cell
-            { 1425,  3450 }, -- Voiddust
+            -- {  740,  3308 }, -- Power Cooler
+            -- { 3880,  3434 }, -- Cobalt Cell
+            -- {  440,  3435 }, -- Rubicund Cell
+            -- {  210,  3436 }, -- Xanthous Cell
+            -- { 1425,  3450 }, -- Voiddust
             { 5000,  4117 }, -- Hi-Potion +1
             { 4200,  4121 }, -- X-Potion +1
             { 4900,  4133 }, -- Hi-Ether +1
@@ -2323,7 +2327,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.DEN_OF_RANCOR] =
     {
-        regionalItems = { 10950, 10991 }, -- Goldsm. Torque | Rancorous Mantle
+        -- regionalItems = { 10950, 10991 }, -- Goldsm. Torque | Rancorous Mantle
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -2361,13 +2366,13 @@ xi.casket_loot.casketItems =
             { 3100,  1962 }, -- Plt. Arrowheads
             { 1050,  2459 }, -- Minium
             { 2100,  2532 }, -- Teak Log
-            {  510,  3312 }, -- Percolator
-            {  220,  3314 }, -- Disruptor
-            {  650,  3434 }, -- Cobalt Cell
-            {  980,  3435 }, -- Rubicund Cell
-            { 1465,  3436 }, -- Xanthous Cell
-            { 1050,  3437 }, -- Jade Cell
-            { 1940,  3450 }, -- Voiddust
+            -- {  510,  3312 }, -- Percolator
+            -- {  220,  3314 }, -- Disruptor
+            -- {  650,  3434 }, -- Cobalt Cell
+            -- {  980,  3435 }, -- Rubicund Cell
+            -- { 1465,  3436 }, -- Xanthous Cell
+            -- { 1050,  3437 }, -- Jade Cell
+            -- { 1940,  3450 }, -- Voiddust
             { 5000,  4119 }, -- Hi-Potion +3
             { 2500,  4123 }, -- X-Potion +3
             { 4900,  4133 }, -- Hi-Ether +1
@@ -2389,7 +2394,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.RANGUEMONT_PASS] =
     {
-        regionalItems = { 11575 }, -- Grapevine Cape
+        -- regionalItems = { 11575 }, -- Grapevine Cape
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -2417,8 +2423,8 @@ xi.casket_loot.casketItems =
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            { 2050,  3437 }, -- Jade Cell
-            { 1500,  3450 }, -- Voiddust
+            -- { 2050,  3437 }, -- Jade Cell
+            -- { 1500,  3450 }, -- Voiddust
             { 5000,  4119 }, -- Hi-Potion +3
             { 4200,  4120 }, -- X-Potion
             { 3500,  4121 }, -- X-Potion +1
@@ -2431,7 +2437,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.BOSTAUNIEUX_OUBLIETTE] =
     {
-        regionalItems = { 11920 }, -- Melaco Mittens
+        -- regionalItems = { 11920 }, -- Melaco Mittens
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -2477,14 +2484,14 @@ xi.casket_loot.casketItems =
             {  425,   844 }, -- Phoenix Feather
             {  720,  1213 }, -- Dst. Bolt Heads
             {  830,  2459 }, -- Minium
-            {  240,  3309 }, -- Barrage Turbine
-            {  310,  3313 }, -- Vivi-Valve
-            {  290,  3314 }, -- Disruptor
-            { 1400,  3434 }, -- Cobalt Cell
-            {  725,  3435 }, -- Rubicund Cell
-            { 1020,  3436 }, -- Xanthous Cell
-            {  600,  3437 }, -- Jade Cell
-            { 1750,  3450 }, -- Voiddust
+            -- {  240,  3309 }, -- Barrage Turbine
+            -- {  310,  3313 }, -- Vivi-Valve
+            -- {  290,  3314 }, -- Disruptor
+            -- { 1400,  3434 }, -- Cobalt Cell
+            -- {  725,  3435 }, -- Rubicund Cell
+            -- { 1020,  3436 }, -- Xanthous Cell
+            -- {  600,  3437 }, -- Jade Cell
+            -- { 1750,  3450 }, -- Voiddust
             { 5000,  4119 }, -- Hi-Potion +3
             { 4900,  4135 }, -- Hi-Ether +3
             { 1700,  4144 }, -- Hi-Elixir
@@ -2500,7 +2507,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.TORAIMARAI_CANAL] =
     {
-        regionalItems = { 11576 }, -- Bond Cape
+        -- regionalItems = { 11576 }, -- Bond Cape
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -2546,14 +2554,14 @@ xi.casket_loot.casketItems =
             {  425,   844 }, -- Phoenix Feather
             {  720,  1213 }, -- Dst. Bolt Heads
             {  830,  2459 }, -- Minium
-            {  240,  3309 }, -- Barrage Turbine
-            {  310,  3313 }, -- Vivi-Valve
-            {  290,  3314 }, -- Disruptor
-            { 1400,  3434 }, -- Cobalt Cell
-            {  725,  3435 }, -- Rubicund Cell
-            { 1020,  3436 }, -- Xanthous Cell
-            {  600,  3437 }, -- Jade Cell
-            { 1750,  3450 }, -- Voiddust
+            -- {  240,  3309 }, -- Barrage Turbine
+            -- {  310,  3313 }, -- Vivi-Valve
+            -- {  290,  3314 }, -- Disruptor
+            -- { 1400,  3434 }, -- Cobalt Cell
+            -- {  725,  3435 }, -- Rubicund Cell
+            -- { 1020,  3436 }, -- Xanthous Cell
+            -- {  600,  3437 }, -- Jade Cell
+            -- { 1750,  3450 }, -- Voiddust
             { 5000,  4119 }, -- Hi-Potion +3
             { 4900,  4135 }, -- Hi-Ether +3
             { 1700,  4144 }, -- Hi-Elixir
@@ -2569,7 +2577,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.ZERUHN_MINES] =
     {
-        regionalItems = { 11677 }, -- Prouesse Ring
+        -- regionalItems = { 11677 }, -- Prouesse Ring
+        regionalItems = { }
         tempsLow =
         {
         -----------------------------------
@@ -2667,18 +2676,18 @@ xi.casket_loot.casketItems =
             { 1060,  1225 }, -- Gold Nugget
             { 3610,  1845 }, -- Red Moko Grass
             { 1290,  1981 }, -- Skull Locust
-            {  230,  3307 }, -- Heat Capacitor
-            {  120,  3308 }, -- Power Cooler
-            {  150,  3309 }, -- Barrage Turbine
-            {  110,  3311 }, -- Galvanizer
-            {  205,  3312 }, -- Percolator
-            {  235,  3313 }, -- Vivi-Valve
-            {  155,  3314 }, -- Disruptor
-            { 1830,  3434 }, -- Cobalt Cell
-            { 1020,  3435 }, -- Rubicund Cell
-            {  840,  3436 }, -- Xanthous Cell
-            {  610,  3437 }, -- Jade Cell
-            { 1130,  3450 }, -- Voiddust
+            -- {  230,  3307 }, -- Heat Capacitor
+            -- {  120,  3308 }, -- Power Cooler
+            -- {  150,  3309 }, -- Barrage Turbine
+            -- {  110,  3311 }, -- Galvanizer
+            -- {  205,  3312 }, -- Percolator
+            -- {  235,  3313 }, -- Vivi-Valve
+            -- {  155,  3314 }, -- Disruptor
+            -- { 1830,  3434 }, -- Cobalt Cell
+            -- { 1020,  3435 }, -- Rubicund Cell
+            -- {  840,  3436 }, -- Xanthous Cell
+            -- {  610,  3437 }, -- Jade Cell
+            -- { 1130,  3450 }, -- Voiddust
             { 4830,  4117 }, -- Hi-Potion +1
             { 4690,  4118 }, -- Hi-Potion +2
             { 3650,  4119 }, -- Hi-Potion +3
@@ -2705,7 +2714,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.KORROLOKA_TUNNEL] =
     {
-        regionalItems = { 11039 }, -- Brachyura Earring
+        -- regionalItems = { 11039 }, -- Brachyura Earring
+        regionalItems = { }
         tempsLow =
         {
         -----------------------------------
@@ -2803,7 +2813,7 @@ xi.casket_loot.casketItems =
             { 1450,   925 }, -- Giant Stinger
             { 1060,  1225 }, -- Gold Nugget
             { 3610,  1845 }, -- Red Moko Grass
-            { 2950,  3437 }, -- Jade Cell
+            -- { 2950,  3437 }, -- Jade Cell
             { 5000,  4119 }, -- Hi-Potion +3
             { 4700,  4121 }, -- X-Potion +1
             {  600,  4123 }, -- X-Potion +3
@@ -2817,7 +2827,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.KUFTAL_TUNNEL] =
     {
-        regionalItems = { 18816 }, -- Wizzan Grip
+        -- regionalItems = { 18816 }, -- Wizzan Grip
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -2863,13 +2874,13 @@ xi.casket_loot.casketItems =
             { 4500,   852 }, -- Lizard Skin
             { 4990,   880 }, -- Bone Chip
             { 1490,  1446 }, -- Lacquer Tree Log
-            {  250,  3307 }, -- Heat Capacitor
-            {  320,  3308 }, -- Power Cooler
-            {  410,  3309 }, -- Barrage Turbine
-            { 1620,  3434 }, -- Cobalt Cell
-            { 2430,  3435 }, -- Rubicund Cell
-            { 1720,  3436 }, -- Xanthous Cell
-            { 1290,  3437 }, -- Jade Cell
+            -- {  250,  3307 }, -- Heat Capacitor
+            -- {  320,  3308 }, -- Power Cooler
+            -- {  410,  3309 }, -- Barrage Turbine
+            -- { 1620,  3434 }, -- Cobalt Cell
+            -- { 2430,  3435 }, -- Rubicund Cell
+            -- { 1720,  3436 }, -- Xanthous Cell
+            -- { 1290,  3437 }, -- Jade Cell
             { 5000,  4119 }, -- Hi-Potion +3
             { 3700,  4123 }, -- X-Potion +3
             { 4900,  4134 }, -- Hi-Ether +2
@@ -2886,7 +2897,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.SEA_SERPENT_GROTTO] =
     {
-        regionalItems = { 19780 }, -- Mana Ampulla
+        -- regionalItems = { 19780 }, -- Mana Ampulla
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -2924,11 +2936,11 @@ xi.casket_loot.casketItems =
             { 2500,  1155 }, -- Iron Sand
             { 1900,  1213 }, -- Dst. Bolt Heads
             { 2100,  1443 }, -- Dried Mugwort
-            {  210,  3314 }, -- Disruptor
-            { 1700,  3434 }, -- Cobalt Cell
-            {  650,  3435 }, -- Rubicund Cell
-            { 1230,  3437 }, -- Jade Cell
-            { 3100,  3450 }, -- Voiddust
+            -- {  210,  3314 }, -- Disruptor
+            -- { 1700,  3434 }, -- Cobalt Cell
+            -- {  650,  3435 }, -- Rubicund Cell
+            -- { 1230,  3437 }, -- Jade Cell
+            -- { 3100,  3450 }, -- Voiddust
             { 5000,  4117 }, -- Hi-Potion +1
             { 4400,  4120 }, -- X-Potion
             {  600,  4121 }, -- X-Potion +1
@@ -2946,7 +2958,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.VELUGANNON_PALACE] =
     {
-        regionalItems = { 13467, 10954 }, -- Dragon Ring | Alchemist's Torque
+        -- regionalItems = { 13467, 10954 }, -- Dragon Ring | Alchemist's Torque
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -2990,18 +3003,18 @@ xi.casket_loot.casketItems =
             { 1060,  1225 }, -- Gold Nugget
             { 3610,  1845 }, -- Red Moko Grass
             { 1290,  1981 }, -- Skull Locust
-            {  230,  3307 }, -- Heat Capacitor
-            {  120,  3308 }, -- Power Cooler
-            {  150,  3309 }, -- Barrage Turbine
-            {  110,  3311 }, -- Galvanizer
-            {  205,  3312 }, -- Percolator
-            {  235,  3313 }, -- Vivi-Valve
-            {  155,  3314 }, -- Disruptor
-            { 1830,  3434 }, -- Cobalt Cell
-            { 1020,  3435 }, -- Rubicund Cell
-            {  840,  3436 }, -- Xanthous Cell
-            {  610,  3437 }, -- Jade Cell
-            { 1130,  3450 }, -- Voiddust
+            -- {  230,  3307 }, -- Heat Capacitor
+            -- {  120,  3308 }, -- Power Cooler
+            -- {  150,  3309 }, -- Barrage Turbine
+            -- {  110,  3311 }, -- Galvanizer
+            -- {  205,  3312 }, -- Percolator
+            -- {  235,  3313 }, -- Vivi-Valve
+            -- {  155,  3314 }, -- Disruptor
+            -- { 1830,  3434 }, -- Cobalt Cell
+            -- { 1020,  3435 }, -- Rubicund Cell
+            -- {  840,  3436 }, -- Xanthous Cell
+            -- {  610,  3437 }, -- Jade Cell
+            -- { 1130,  3450 }, -- Voiddust
             { 4830,  4117 }, -- Hi-Potion +1
             { 4690,  4118 }, -- Hi-Potion +2
             { 3650,  4119 }, -- Hi-Potion +3
@@ -3026,7 +3039,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.THE_SHRINE_OF_RUAVITAU] =
     {
-        regionalItems = { 11040, 10951 }, -- Terminus Earring | Weaver's Torque
+        -- regionalItems = { 11040, 10951 }, -- Terminus Earring | Weaver's Torque
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -3070,12 +3084,12 @@ xi.casket_loot.casketItems =
             { 3700,   919 }, -- Boyahda Moss
             { 4500,  1163 }, -- Manticore Hair
             { 1025,  1446 }, -- Lacquer Tree Log
-            {  450,  3313 }, -- Vivi-Valve
-            {  700,  3434 }, -- Cobalt Cell
-            { 1600,  3435 }, -- Rubicund Cell
-            { 2060,  3436 }, -- Xanthous Cell
-            { 2050,  3437 }, -- Jade Cell
-            { 1500,  3450 }, -- Voiddust
+            -- {  450,  3313 }, -- Vivi-Valve
+            -- {  700,  3434 }, -- Cobalt Cell
+            -- { 1600,  3435 }, -- Rubicund Cell
+            -- { 2060,  3436 }, -- Xanthous Cell
+            -- { 2050,  3437 }, -- Jade Cell
+            -- { 1500,  3450 }, -- Voiddust
             { 5000,  4119 }, -- Hi-Potion +3
             { 4200,  4120 }, -- X-Potion
             { 3500,  4121 }, -- X-Potion +1
@@ -3134,8 +3148,8 @@ xi.casket_loot.casketItems =
             {  760,   822 }, -- Silver Thread
             { 1350,   943 }, -- Poison Dust
             { 2700,  1212 }, -- Mtl. Bolt Heads x33
-            {  500,  3435 }, -- Rubicund Cell
-            {  510,  3436 }, -- Xanthous Cell
+            -- {  500,  3435 }, -- Rubicund Cell
+            -- {  510,  3436 }, -- Xanthous Cell
             { 4800,  4114 }, -- Potion +2
             { 3200,  4115 }, -- Potion +3
             { 5000,  4129 }, -- Ether +1
@@ -3155,7 +3169,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.KING_RANPERRES_TOMB] =
     {
-        regionalItems = { 10924 }, -- Chocobo Torque
+        -- regionalItems = { 10924 }, -- Chocobo Torque
+        regionalItems = { }
         tempsLow =
         {
         -----------------------------------
@@ -3255,11 +3270,11 @@ xi.casket_loot.casketItems =
             { 1060,  1225 }, -- Gold Nugget
             { 3610,  1845 }, -- Red Moko Grass
             { 1290,  1981 }, -- Skull Locust
-            { 1830,  3434 }, -- Cobalt Cell
-            { 1020,  3435 }, -- Rubicund Cell
-            {  840,  3436 }, -- Xanthous Cell
-            {  610,  3437 }, -- Jade Cell
-            { 1130,  3450 }, -- Voiddust
+            -- { 1830,  3434 }, -- Cobalt Cell
+            -- { 1020,  3435 }, -- Rubicund Cell
+            -- {  840,  3436 }, -- Xanthous Cell
+            -- {  610,  3437 }, -- Jade Cell
+            -- { 1130,  3450 }, -- Voiddust
             { 4830,  4117 }, -- Hi-Potion +1
             { 4690,  4118 }, -- Hi-Potion +2
             { 3650,  4119 }, -- Hi-Potion +3
@@ -3283,7 +3298,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.DANGRUF_WADI] =
     {
-        regionalItems = { 11769 }, -- Field Rope
+        -- regionalItems = { 11769 }, -- Field Rope
+        regionalItems = { }
         tempsLow =
         {
         -----------------------------------
@@ -3374,12 +3390,12 @@ xi.casket_loot.casketItems =
             { 2160,   749 }, -- Mtl. Beastcoin
             { 1760,   940 }, -- Revival Root
             { 2300,   943 }, -- Poison Dust
-            { 1090,  3311 }, -- Galvanizer
-            {  650,  3434 }, -- Cobalt Cell
-            {  980,  3435 }, -- Rubicund Cell
-            { 1465,  3436 }, -- Xanthous Cell
-            { 1050,  3437 }, -- Jade Cell
-            { 1940,  3450 }, -- Voiddust
+            -- { 1090,  3311 }, -- Galvanizer
+            -- {  650,  3434 }, -- Cobalt Cell
+            -- {  980,  3435 }, -- Rubicund Cell
+            -- { 1465,  3436 }, -- Xanthous Cell
+            -- { 1050,  3437 }, -- Jade Cell
+            -- { 1940,  3450 }, -- Voiddust
             { 5000,  4119 }, -- Hi-Potion +3
             { 2500,  4123 }, -- X-Potion +3
             { 4900,  4133 }, -- Hi-Ether +1
@@ -3391,7 +3407,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.INNER_HORUTOTO_RUINS] =
     {
-        regionalItems = { 18624 }, -- Numen Staff
+        -- regionalItems = { 18624 }, -- Numen Staff
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -3444,11 +3461,11 @@ xi.casket_loot.casketItems =
             { 1060,  1225 }, -- Gold Nugget
             { 3610,  1845 }, -- Red Moko Grass
             { 1290,  1981 }, -- Skull Locust
-            { 1830,  3434 }, -- Cobalt Cell
-            { 1020,  3435 }, -- Rubicund Cell
-            {  840,  3436 }, -- Xanthous Cell
-            {  610,  3437 }, -- Jade Cell
-            { 1130,  3450 }, -- Voiddust
+            -- { 1830,  3434 }, -- Cobalt Cell
+            -- { 1020,  3435 }, -- Rubicund Cell
+            -- {  840,  3436 }, -- Xanthous Cell
+            -- {  610,  3437 }, -- Jade Cell
+            -- { 1130,  3450 }, -- Voiddust
             { 4830,  4117 }, -- Hi-Potion +1
             { 4690,  4118 }, -- Hi-Potion +2
             { 3650,  4119 }, -- Hi-Potion +3
@@ -3472,7 +3489,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.ORDELLES_CAVES] =
     {
-        regionalItems = { 11767 }, -- Chocobo Rope
+        -- regionalItems = { 11767 }, -- Chocobo Rope
+        regionalItems = { }
         tempsLow =
         {
         -----------------------------------
@@ -3573,12 +3591,12 @@ xi.casket_loot.casketItems =
             { 1060,  1225 }, -- Gold Nugget
             {  210,  1229 }, -- Adaman Nugget
             { 3610,  1845 }, -- Red Moko Grass
-            {  205,  3311 }, -- Galvanizer
-            {  725,  3313 }, -- Vivi-Valve
-            {  610,  3435 }, -- Rubicund Cell
-            {  930,  3436 }, -- Xanthous Cell
-            { 2950,  3437 }, -- Jade Cell
-            { 2105,  3450 }, -- Voiddust
+            -- {  205,  3311 }, -- Galvanizer
+            -- {  725,  3313 }, -- Vivi-Valve
+            -- {  610,  3435 }, -- Rubicund Cell
+            -- {  930,  3436 }, -- Xanthous Cell
+            -- { 2950,  3437 }, -- Jade Cell
+            -- { 2105,  3450 }, -- Voiddust
             { 5000,  4119 }, -- Hi-Potion +3
             { 4700,  4121 }, -- X-Potion +1
             {  600,  4123 }, -- X-Potion +3
@@ -3596,7 +3614,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.OUTER_HORUTOTO_RUINS] =
     {
-        regionalItems = { 10925 }, -- Fisher's Torque
+        -- regionalItems = { 10925 }, -- Fisher's Torque
+        regionalItems = { }
         tempsLow =
         {
         -----------------------------------
@@ -3694,18 +3713,18 @@ xi.casket_loot.casketItems =
             { 1060,  1225 }, -- Gold Nugget
             { 3610,  1845 }, -- Red Moko Grass
             { 1290,  1981 }, -- Skull Locust
-            {  230,  3307 }, -- Heat Capacitor
-            {  120,  3308 }, -- Power Cooler
-            {  150,  3309 }, -- Barrage Turbine
-            {  110,  3311 }, -- Galvanizer
-            {  205,  3312 }, -- Percolator
-            {  235,  3313 }, -- Vivi-Valve
-            {  155,  3314 }, -- Disruptor
-            { 1830,  3434 }, -- Cobalt Cell
-            { 1020,  3435 }, -- Rubicund Cell
-            {  840,  3436 }, -- Xanthous Cell
-            {  610,  3437 }, -- Jade Cell
-            { 1130,  3450 }, -- Voiddust
+            -- {  230,  3307 }, -- Heat Capacitor
+            -- {  120,  3308 }, -- Power Cooler
+            -- {  150,  3309 }, -- Barrage Turbine
+            -- {  110,  3311 }, -- Galvanizer
+            -- {  205,  3312 }, -- Percolator
+            -- {  235,  3313 }, -- Vivi-Valve
+            -- {  155,  3314 }, -- Disruptor
+            -- { 1830,  3434 }, -- Cobalt Cell
+            -- { 1020,  3435 }, -- Rubicund Cell
+            -- {  840,  3436 }, -- Xanthous Cell
+            -- {  610,  3437 }, -- Jade Cell
+            -- { 1130,  3450 }, -- Voiddust
             { 4830,  4117 }, -- Hi-Potion +1
             { 4690,  4118 }, -- Hi-Potion +2
             { 3650,  4119 }, -- Hi-Potion +3
@@ -3732,7 +3751,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.THE_ELDIEME_NECROPOLIS] =
     {
-        regionalItems = { 18812 }, -- Ossa Grip
+        -- regionalItems = { 18812 }, -- Ossa Grip
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -3778,11 +3798,11 @@ xi.casket_loot.casketItems =
             { 3200,   859 }, -- Ram Skin
             { 2570,   895 }, -- Ram Horn
             {  765,   943 }, -- Poison Dust
-            {  235,  3309 }, -- Barrage Turbine
-            {  490,  3434 }, -- Cobalt Cell
-            {  655,  3436 }, -- Xanthous Cell
-            { 1490,  3437 }, -- Jade Cell
-            { 1760,  3450 }, -- Voiddust
+            -- {  235,  3309 }, -- Barrage Turbine
+            -- {  490,  3434 }, -- Cobalt Cell
+            -- {  655,  3436 }, -- Xanthous Cell
+            -- { 1490,  3437 }, -- Jade Cell
+            -- { 1760,  3450 }, -- Voiddust
             { 5000,  4117 }, -- Hi-Potion +1
             { 2700,  4119 }, -- Hi-Potion +3
             { 1050,  4121 }, -- X-Potion +1
@@ -3799,7 +3819,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.GUSGEN_MINES] =
     {
-        regionalItems = { 10926 }, -- Field Torque
+        -- regionalItems = { 10926 }, -- Field Torque
+        regionalItems = { }
         tempsLow =
         {
         -----------------------------------
@@ -3900,12 +3921,12 @@ xi.casket_loot.casketItems =
             { 1060,  1225 }, -- Gold Nugget
             {  210,  1229 }, -- Adaman Nugget
             { 3610,  1845 }, -- Red Moko Grass
-            {  205,  3311 }, -- Galvanizer
-            {  725,  3313 }, -- Vivi-Valve
-            {  610,  3435 }, -- Rubicund Cell
-            {  930,  3436 }, -- Xanthous Cell
-            { 2950,  3437 }, -- Jade Cell
-            { 2105,  3450 }, -- Voiddust
+            -- {  205,  3311 }, -- Galvanizer
+            -- {  725,  3313 }, -- Vivi-Valve
+            -- {  610,  3435 }, -- Rubicund Cell
+            -- {  930,  3436 }, -- Xanthous Cell
+            -- { 2950,  3437 }, -- Jade Cell
+            -- { 2105,  3450 }, -- Voiddust
             { 5000,  4119 }, -- Hi-Potion +3
             { 4700,  4121 }, -- X-Potion +1
             {  600,  4123 }, -- X-Potion +3
@@ -3924,7 +3945,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.CRAWLERS_NEST] =
     {
-        regionalItems = { 11823 }, -- Cocoon Band
+        -- regionalItems = { 11823 }, -- Cocoon Band
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -3970,11 +3992,11 @@ xi.casket_loot.casketItems =
             { 3200,   859 }, -- Ram Skin
             { 2570,   895 }, -- Ram Horn
             {  765,   943 }, -- Poison Dust
-            {  235,  3309 }, -- Barrage Turbine
-            {  490,  3434 }, -- Cobalt Cell
-            {  655,  3436 }, -- Xanthous Cell
-            { 1490,  3437 }, -- Jade Cell
-            { 1760,  3450 }, -- Voiddust
+            -- {  235,  3309 }, -- Barrage Turbine
+            -- {  490,  3434 }, -- Cobalt Cell
+            -- {  655,  3436 }, -- Xanthous Cell
+            -- { 1490,  3437 }, -- Jade Cell
+            -- { 1760,  3450 }, -- Voiddust
             { 5000,  4117 }, -- Hi-Potion +1
             { 2700,  4119 }, -- Hi-Potion +3
             { 1050,  4121 }, -- X-Potion +1
@@ -3991,7 +4013,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.MAZE_OF_SHAKHRAMI] =
     {
-        regionalItems = { 11768 }, -- Fisher's Rope
+        -- regionalItems = { 11768 }, -- Fisher's Rope
+        regionalItems = { }
         tempsLow =
         {
         -----------------------------------
@@ -4092,12 +4115,12 @@ xi.casket_loot.casketItems =
             { 1060,  1225 }, -- Gold Nugget
             {  210,  1229 }, -- Adaman Nugget
             { 3610,  1845 }, -- Red Moko Grass
-            {  205,  3311 }, -- Galvanizer
-            {  725,  3313 }, -- Vivi-Valve
-            {  610,  3435 }, -- Rubicund Cell
-            {  930,  3436 }, -- Xanthous Cell
-            { 2950,  3437 }, -- Jade Cell
-            { 2105,  3450 }, -- Voiddust
+            -- {  205,  3311 }, -- Galvanizer
+            -- {  725,  3313 }, -- Vivi-Valve
+            -- {  610,  3435 }, -- Rubicund Cell
+            -- {  930,  3436 }, -- Xanthous Cell
+            -- { 2950,  3437 }, -- Jade Cell
+            -- { 2105,  3450 }, -- Voiddust
             { 5000,  4119 }, -- Hi-Potion +3
             { 4700,  4121 }, -- X-Potion +1
             {  600,  4123 }, -- X-Potion +3
@@ -4116,7 +4139,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.GARLAIGE_CITADEL] =
     {
-        regionalItems = { 18784 }, -- Metasoma Katars
+        -- regionalItems = { 18784 }, -- Metasoma Katars
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -4165,11 +4189,11 @@ xi.casket_loot.casketItems =
             { 3200,   859 }, -- Ram Skin
             { 2570,   895 }, -- Ram Horn
             {  765,   943 }, -- Poison Dust
-            {  325,  3312 }, -- Percolator
-            {  490,  3434 }, -- Cobalt Cell
-            {  655,  3436 }, -- Xanthous Cell
-            { 1490,  3437 }, -- Jade Cell
-            { 1760,  3450 }, -- Voiddust
+            -- {  325,  3312 }, -- Percolator
+            -- {  490,  3434 }, -- Cobalt Cell
+            -- {  655,  3436 }, -- Xanthous Cell
+            -- { 1490,  3437 }, -- Jade Cell
+            -- { 1760,  3450 }, -- Voiddust
             { 5000,  4117 }, -- Hi-Potion +1
             { 2700,  4119 }, -- Hi-Potion +3
             { 1050,  4121 }, -- X-Potion +1
@@ -4186,7 +4210,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.FEIYIN] =
     {
-        regionalItems = { 16202 }, -- Dagda's Shield
+        -- regionalItems = { 16202 }, -- Dagda's Shield
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -4237,12 +4262,12 @@ xi.casket_loot.casketItems =
             { 1460,  1962 }, -- Plt. Arrowheads
             {  430,  2459 }, -- Minium
             { 0000,  2761 }, -- Feyweald Log
-            {  360,  3312 }, -- Percolator
-            {  900,  3434 }, -- Cobalt Cell
-            { 1050,  3435 }, -- Rubicund Cell
-            { 1240,  3436 }, -- Xanthous Cell
-            { 1465,  3437 }, -- Jade Cell
-            { 2675,  3450 }, -- Voiddust
+            -- {  360,  3312 }, -- Percolator
+            -- {  900,  3434 }, -- Cobalt Cell
+            -- { 1050,  3435 }, -- Rubicund Cell
+            -- { 1240,  3436 }, -- Xanthous Cell
+            -- { 1465,  3437 }, -- Jade Cell
+            -- { 2675,  3450 }, -- Voiddust
             { 5000,  4119 }, -- Hi-Potion +3
             { 4750,  4123 }, -- X-Potion +3
             { 4900,  4135 }, -- Hi-Ether +3
@@ -4262,7 +4287,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.IFRITS_CAULDRON] =
     {
-        regionalItems = { 10949 }, -- Smithy's Torque
+        -- regionalItems = { 10949 }, -- Smithy's Torque
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -4311,12 +4337,12 @@ xi.casket_loot.casketItems =
             { 3100,  1962 }, -- Plt. Arrowheads
             { 1050,  2459 }, -- Minium
             { 2100,  2532 }, -- Teak Log
-            {  340,  3309 }, -- Barrage Turbine
-            { 1650,  3434 }, -- Cobalt Cell
-            { 1430,  3435 }, -- Rubicund Cell
-            { 1625,  3436 }, -- Xanthous Cell
-            { 1725,  3437 }, -- Jade Cell
-            { 2635,  3450 }, -- Voiddust
+            -- {  340,  3309 }, -- Barrage Turbine
+            -- { 1650,  3434 }, -- Cobalt Cell
+            -- { 1430,  3435 }, -- Rubicund Cell
+            -- { 1625,  3436 }, -- Xanthous Cell
+            -- { 1725,  3437 }, -- Jade Cell
+            -- { 2635,  3450 }, -- Voiddust
             { 5000,  4119 }, -- Hi-Potion +3
             { 2500,  4123 }, -- X-Potion +3
             { 4900,  4135 }, -- Hi-Ether +3
@@ -4334,7 +4360,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.GUSTAV_TUNNEL] =
     {
-        regionalItems = { 10955, 11041 }, -- Culinarian's Torque | Liminus Earring
+        -- regionalItems = { 10955, 11041 }, -- Culinarian's Torque | Liminus Earring
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -4377,14 +4404,14 @@ xi.casket_loot.casketItems =
             {  250,   887 }, -- Coral Fragment
             { 4500,  1163 }, -- Manticore Hair
             { 1025,  1446 }, -- Lacquer Tree Log
-            {  255,  3307 }, -- Heat Capacitor
-            {  245,  3312 }, -- Percolator
-            {  450,  3313 }, -- Vivi-Valve
-            {  700,  3434 }, -- Cobalt Cell
-            { 1600,  3435 }, -- Rubicund Cell
-            { 2060,  3436 }, -- Xanthous Cell
-            { 2050,  3437 }, -- Jade Cell
-            { 1500,  3450 }, -- Voiddust
+            -- {  255,  3307 }, -- Heat Capacitor
+            -- {  245,  3312 }, -- Percolator
+            -- {  450,  3313 }, -- Vivi-Valve
+            -- {  700,  3434 }, -- Cobalt Cell
+            -- { 1600,  3435 }, -- Rubicund Cell
+            -- { 2060,  3436 }, -- Xanthous Cell
+            -- { 2050,  3437 }, -- Jade Cell
+            -- { 1500,  3450 }, -- Voiddust
             { 5000,  4119 }, -- Hi-Potion +3
             { 4200,  4120 }, -- X-Potion
             { 3500,  4121 }, -- X-Potion +1
@@ -4406,7 +4433,8 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.LABYRINTH_OF_ONZOZO] =
     {
-        regionalItems = { 18817 }, -- Furtive Grip
+        -- regionalItems = { 18817 }, -- Furtive Grip
+        regionalItems = { }
         temps =
         {
         -----------------------------------
@@ -4448,12 +4476,12 @@ xi.casket_loot.casketItems =
             { 1020,  1443 }, -- Dried Mugwort
             {  430,  2459 }, -- Minium
             { 2200,  2761 }, -- Feyweald Log
-            {  360,  3312 }, -- Percolator
-            {  900,  3434 }, -- Cobalt Cell
-            { 1050,  3435 }, -- Rubicund Cell
-            { 1240,  3436 }, -- Xanthous Cell
-            { 1465,  3437 }, -- Jade Cell
-            { 2675,  3450 }, -- Voiddust
+            -- {  360,  3312 }, -- Percolator
+            -- {  900,  3434 }, -- Cobalt Cell
+            -- { 1050,  3435 }, -- Rubicund Cell
+            -- { 1240,  3436 }, -- Xanthous Cell
+            -- { 1465,  3437 }, -- Jade Cell
+            -- { 2675,  3450 }, -- Voiddust
             { 5000,  4119 }, -- Hi-Potion +3
             { 4750,  4123 }, -- X-Potion +3
             { 4900,  4135 }, -- Hi-Ether +3

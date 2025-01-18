@@ -62,66 +62,66 @@ local function getISPItem(i)
         [12289] = { id = xi.item.LAMBENT_WATER_CELL,         price =   100 },
         [16385] = { id = xi.item.LAMBENT_EARTH_CELL,         price =   100 },
         [20481] = { id = xi.item.LAMBENT_WIND_CELL,          price =   100 },
-        [24577] = { id = xi.item.KATANA_STRAP,               price = 20000 },
-        [28673] = { id = xi.item.AXE_GRIP,                   price = 20000 },
-        [32769] = { id = xi.item.STAFF_STRAP,                price = 20000 },
-        [36865] = { id = xi.item.HEAT_CAPACITOR,             price =  5000 },
-        [40961] = { id = xi.item.POWER_COOLER,               price =  5000 },
-        [45057] = { id = xi.item.BARRAGE_TURBINE,            price =  5000 },
-        [53249] = { id = xi.item.GALVANIZER,                 price =  5000 },
-        [57345] = { id = xi.item.EPHRAMADIAN_THRONE,         price = 50000 },
-        [69633] = { id = xi.item.CIPHER_OF_MIHLIS_ALTER_EGO, price =  5000 },
+        [24577] = { id = xi.item.KATANA_STRAP,               price =  5000 },
+        [28673] = { id = xi.item.AXE_GRIP,                   price =  5000 },
+        [32769] = { id = xi.item.STAFF_STRAP,                price =  5000 },
+        [36865] = { id = xi.item.HEAT_CAPACITOR,             price =  1250 },
+        [40961] = { id = xi.item.POWER_COOLER,               price =  1250 },
+        [45057] = { id = xi.item.BARRAGE_TURBINE,            price =  1250 },
+        [53249] = { id = xi.item.GALVANIZER,                 price =  1250 },
+        [57345] = { id = xi.item.EPHRAMADIAN_THRONE,         price = 12500 },
+        [69633] = { id = xi.item.CIPHER_OF_MIHLIS_ALTER_EGO, price =  1250 },
 
         -- Private Second Class
         -- Map Key Items (handled separately)
         -- Private First Class
-        [ 33] = { id = xi.item.VOLUNTEERS_DART, price = 2000 },
-        [289] = { id = xi.item.MERCENARYS_DART, price = 2000 },
-        [545] = { id = xi.item.IMPERIAL_DART,   price = 2000 },
+        [ 33] = { id = xi.item.VOLUNTEERS_DART, price =  500 },
+        [289] = { id = xi.item.MERCENARYS_DART, price =  500 },
+        [545] = { id = xi.item.IMPERIAL_DART,   price =  500 },
 
         -- Superior Private
-        [ 49] = { id = xi.item.MAMOOLBANE,  price = 4000 },
-        [305] = { id = xi.item.LAMIABANE,   price = 4000 },
-        [561] = { id = xi.item.TROLLBANE,   price = 4000 },
-        [817] = { id = xi.item.LUZAFS_RING, price = 4000 },
+        [ 49] = { id = xi.item.MAMOOLBANE,  price = 1000 },
+        [305] = { id = xi.item.LAMIABANE,   price = 1000 },
+        [561] = { id = xi.item.TROLLBANE,   price = 1000 },
+        [817] = { id = xi.item.LUZAFS_RING, price = 1000 },
 
         -- Lance Corporal
-        [ 65] = { id = xi.item.SNEAKING_BOOTS,  price = 8000 },
-        [321] = { id = xi.item.TROOPERS_RING,   price = 8000 },
-        [577] = { id = xi.item.SENTINEL_SHIELD, price = 8000 },
+        [ 65] = { id = xi.item.SNEAKING_BOOTS,  price = 2000 },
+        [321] = { id = xi.item.TROOPERS_RING,   price = 2000 },
+        [577] = { id = xi.item.SENTINEL_SHIELD, price = 2000 },
 
         -- Corporal
-        [ 81] = { id = xi.item.SHARK_GUN,    price = 16000 },
-        [337] = { id = xi.item.PUPPET_CLAWS, price = 16000 },
-        [593] = { id = xi.item.SINGH_KILIJ,  price = 16000 },
+        [ 81] = { id = xi.item.SHARK_GUN,    price = 4000 },
+        [337] = { id = xi.item.PUPPET_CLAWS, price = 4000 },
+        [593] = { id = xi.item.SINGH_KILIJ,  price = 4000 },
 
         -- Sergeant
-        [ 97] = { id = xi.item.MERCENARYS_TROUSERS, price = 24000 },
-        [353] = { id = xi.item.MULTIPLE_RING,       price = 24000 },
-        [609] = { id = xi.item.HATEN_EARRING,       price = 24000 },
+        [ 97] = { id = xi.item.MERCENARYS_TROUSERS, price = 6000 },
+        [353] = { id = xi.item.MULTIPLE_RING,       price = 6000 },
+        [609] = { id = xi.item.HATEN_EARRING,       price = 6000 },
 
         -- Sergeant Major
-        [113] = { id = xi.item.VOLUNTEERS_BRAIS, price = 32000 },
-        [369] = { id = xi.item.PRIESTS_EARRING,  price = 32000 },
-        [625] = { id = xi.item.CHAOTIC_EARRING,  price = 32000 },
+        [113] = { id = xi.item.VOLUNTEERS_BRAIS, price = 8000 },
+        [369] = { id = xi.item.PRIESTS_EARRING,  price = 8000 },
+        [625] = { id = xi.item.CHAOTIC_EARRING,  price = 8000 },
 
         -- Chief Sergeant
-        [129] = { id = xi.item.PERDU_HANGER, price = 40000 },
-        [385] = { id = xi.item.PERDU_SICKLE, price = 40000 },
-        [641] = { id = xi.item.PERDU_WAND,   price = 40000 },
-        [897] = { id = xi.item.PERDU_BOW,    price = 40000 },
+        [129] = { id = xi.item.PERDU_HANGER, price = 10000 },
+        [385] = { id = xi.item.PERDU_SICKLE, price = 10000 },
+        [641] = { id = xi.item.PERDU_WAND,   price = 10000 },
+        [897] = { id = xi.item.PERDU_BOW,    price = 10000 },
 
         -- Second Lieutenant
-        [ 145] = { id = xi.item.PERDU_SWORD,    price = 48000 },
-        [ 401] = { id = xi.item.PERDU_BLADE,    price = 48000 },
-        [ 657] = { id = xi.item.PERDU_VOULGE,   price = 48000 },
-        [ 913] = { id = xi.item.PERDU_STAFF,    price = 48000 },
-        [1169] = { id = xi.item.PERDU_CROSSBOW, price = 48000 },
+        [ 145] = { id = xi.item.PERDU_SWORD,    price = 12000 },
+        [ 401] = { id = xi.item.PERDU_BLADE,    price = 12000 },
+        [ 657] = { id = xi.item.PERDU_VOULGE,   price = 12000 },
+        [ 913] = { id = xi.item.PERDU_STAFF,    price = 12000 },
+        [1169] = { id = xi.item.PERDU_CROSSBOW, price = 12000 },
 
         -- First Lieutenant
-        [161] = { id = xi.item.LIEUTENANTS_GORGET, price = 56000 },
-        [417] = { id = xi.item.LIEUTENANTS_SASH,   price = 56000 },
-        [673] = { id = xi.item.LIEUTENANTS_CAPE,   price = 56000 },
+        [161] = { id = xi.item.LIEUTENANTS_GORGET, price = 14000 },
+        [417] = { id = xi.item.LIEUTENANTS_SASH,   price = 14000 },
+        [673] = { id = xi.item.LIEUTENANTS_CAPE,   price = 14000 },
     }
 
     local item = imperialStandingItems[i]
