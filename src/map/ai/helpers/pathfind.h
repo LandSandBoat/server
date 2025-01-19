@@ -97,9 +97,6 @@ public:
     bool IsFollowingScriptedPath();
     bool IsPatrolling();
 
-    // calculate speed of mob with mode, mod_speed, etc
-    float GetRealSpeed();
-
     // look at the given point
     void LookAt(const position_t& point);
 

@@ -108,7 +108,7 @@ void CPlayerCharmController::DoRoamTick(time_point tick)
             {
                 POwner->PAI->PathFind->FollowPath(m_Tick);
             }
-            else if (POwner->GetSpeed() > 0)
+            else if (POwner->Speed() > 0)
             {
                 POwner->PAI->PathFind->WarpTo(POwner->PMaster->loc.p, RoamDistance);
             }

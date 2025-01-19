@@ -361,17 +361,23 @@ void CPathFind::FollowPath(time_point tick)
 void CPathFind::StepTo(const position_t& pos, bool run)
 {
     TracyZoneScoped;
-    float speed = GetRealSpeed();
-
-    int8 mode = 2;
-
-    if (!run)
+    bool speedChange = false;
+    if (auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_POwner))
     {
-        mode = 1;
-        speed /= 2;
+        speedChange = PBattleEntity->speed != PBattleEntity->UpdateSpeed(run);
     }
 
-    float stepDistance = (speed / 10) / 2;
+    float speed = m_POwner->speed;
+
+    if (const auto* PMobEntity = dynamic_cast<CMobEntity*>(m_POwner))
+    {
+        if (PMobEntity->speed == 0 && (m_roamFlags & ROAMFLAG_WORM))
+        {
+            speed = 20;
+        }
+    }
+
+    float stepDistance = speed / (run ? 50 : 40);
     float distanceTo   = distance(m_POwner->loc.p, pos);
     float diff_y       = pos.y - m_POwner->loc.p.y;
 
@@ -434,12 +440,9 @@ void CPathFind::StepTo(const position_t& pos, bool run)
         }
     }
 
-    m_POwner->loc.p.moving += (uint16)((0x36 * ((float)m_POwner->speed / 0x28)) - (0x14 * (mode - 1)));
+    m_POwner->loc.p.moving += speedChange ? 0x28 : 0x35;
 
-    if (m_POwner->loc.p.moving > 0x2fff)
-    {
-        m_POwner->loc.p.moving = 0;
-    }
+    m_POwner->loc.p.moving %= 0x2000;
 
     m_POwner->updatemask |= UPDATE_POS;
 }
@@ -561,77 +564,6 @@ void CPathFind::LookAt(const position_t& point)
 bool CPathFind::OnPoint() const
 {
     return m_onPoint;
-}
-
-float CPathFind::GetRealSpeed()
-{
-    uint8 realSpeed = m_POwner->speed;
-
-    // 'GetSpeed()' factors in movement bonuses such as map confs and modifiers.
-    if (m_POwner->objtype != TYPE_NPC)
-    {
-        realSpeed = ((CBattleEntity*)m_POwner)->GetSpeed();
-    }
-
-    // Lets not check mob things on non mobs
-    if (m_POwner->objtype == TYPE_MOB)
-    {
-        if (realSpeed == 0 && (m_roamFlags & ROAMFLAG_WORM))
-        {
-            realSpeed = 20;
-        }
-
-        if (settings::get<bool>("map.USE_MOB_SPEED_BOOST_MULTIPLIER"))
-        {
-            if (auto* mobEntity = dynamic_cast<CMobEntity*>(m_POwner))
-            {
-                bool mobIsPlayerPet = mobEntity->PMaster && mobEntity->PMaster->objtype == TYPE_PC;
-
-                auto* battleTarget         = mobEntity->GetBattleTarget();
-                bool  targetWouldBeDrawnin = battleTarget && (distance(mobEntity->loc.p, battleTarget->loc.p) - battleTarget->m_ModelRadius) > mobEntity->GetMeleeRange();
-                bool  isEngaged            = mobEntity->animation == ANIMATION_ATTACK;
-
-                if (isEngaged && !mobIsPlayerPet && targetWouldBeDrawnin && realSpeed > 0)
-                {
-                    // use default multiplier for most mobs
-                    uint16 intMultiplier = settings::get<uint16>("map.DEFAULT_MOB_SPEED_BOOST_MULTIPLIER");
-
-                    // unless the mob has a custom multiplier
-                    if (mobEntity->getMobMod(MOBMOD_SPEED_BOOST_MULT) > 0)
-                    {
-                        intMultiplier = static_cast<uint16>(mobEntity->getMobMod(MOBMOD_SPEED_BOOST_MULT));
-                    }
-
-                    // add warning for when speed boost multipler is lower than 1x as likely misconfiguration
-                    if (intMultiplier < 100 || intMultiplier > 25500)
-                    {
-                        ShowWarning("%s speed boost multiplier is lower than 100 (1x) or higher than 25550 (255x) and thus is misconfigured.", mobEntity->getName());
-                    }
-
-                    // convert the integer based multiplier (based on 100) to float multiplier
-                    float floatMultiplier = intMultiplier / 100.0f;
-
-                    // if some weight penalty (like gravity) then cut the boost multiplier according to retail
-                    // (for mobs with default retail boost of 2.5 then boost becomes 1.20)
-                    if (mobEntity->getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY) > 0)
-                    {
-                        floatMultiplier *= 0.48f;
-                    }
-
-                    // Ensure the float multiplier is at least 1.0 so that multiplier never decreases speed
-                    // For example if the server default or mob mod is 207 then with gravity the
-                    // multiplier would be (207/100) * 0.48 = 0.99 without this check
-                    floatMultiplier = std::max<float>(floatMultiplier, 1.0f);
-
-                    // apply the multiplier and also clamp to make sure of a valid speed (in case multiplier is large)
-                    uint16 newSpeed = std::clamp<uint16>(realSpeed * floatMultiplier, 0, 255);
-                    realSpeed       = static_cast<uint8>(newSpeed);
-                }
-            }
-        }
-    }
-
-    return realSpeed;
 }
 
 bool CPathFind::IsFollowingPath()

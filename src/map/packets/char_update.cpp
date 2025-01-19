@@ -275,7 +275,7 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     // flags 1 starts at 0x2C
     charUpateFlags::flags1_t flags1 = {};
 
-    flags1.Speed        = PChar->GetSpeed();
+    flags1.Speed        = PChar->UpdateSpeed();
     flags1.Hackmove     = PChar->wallhackEnabled; // GM wallhack, walk through walls
     flags1.FreezeFlag   = 0;                      // Freeze client in place. Is this used?
     flags1.unknown_1_14 = 0;                      // Unknown.
