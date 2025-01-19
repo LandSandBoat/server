@@ -260,9 +260,9 @@ int32 CBattleEntity::GetMaxMP() const
  *                                                                       *
  ************************************************************************/
 
-uint8 CBattleEntity::GetSpeed()
+uint8 CBattleEntity::UpdateSpeed(bool run)
 {
-    uint8 baseSpeed   = speed;
+    uint8 baseSpeed   = speedsub;
     int16 outputSpeed = 0;
 
     // Mount speed. Independent from regular speed and unaffected by most things.
@@ -271,8 +271,9 @@ uint8 CBattleEntity::GetSpeed()
     {
         baseSpeed   = 40 + settings::get<int8>("map.MOUNT_SPEED_MOD");
         outputSpeed = baseSpeed * (100 + getMod(Mod::MOUNT_MOVE)) / 100;
+        speed       = std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
 
-        return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
+        return speed;
     }
 
     // Gear penalties.
@@ -329,7 +330,36 @@ uint8 CBattleEntity::GetSpeed()
         outputSpeed = getMod(Mod::MOVE_SPEED_OVERRIDE);
     }
 
-    return static_cast<uint8>(std::clamp<int16>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max()));
+    if (run && outputSpeed > 0 && getMod(Mod::MOVE_SPEED_OVERRIDE) == 0)
+    {
+        float multiplier = settings::get<float>("map.MOB_RUN_SPEED_MULTIPLIER");
+        if (multiplier > 1.0f)
+        {
+            if (auto* mobEntity = dynamic_cast<CMobEntity*>(this))
+            {
+                // mob has a custom multiplier
+                if (mobEntity->getMobMod(MOBMOD_RUN_SPEED_MULT) > 0)
+                {
+                    multiplier = mobEntity->getMobMod(MOBMOD_RUN_SPEED_MULT) / 100.0f;
+                }
+
+                // if some weight penalty (like gravity) then cut the multiplier
+                // (for mobs with default boost of 2.5 then boost becomes 1.20)
+                if (mobEntity->getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY) > 0)
+                {
+                    multiplier *= 0.48f;
+                }
+
+                // Ensure the multiplier is at least 1.0 so that multiplier never decreases speed
+                multiplier = std::max<float>(multiplier, 1.0f);
+
+                outputSpeed *= multiplier;
+            }
+        }
+    }
+
+    speed = static_cast<uint8>(std::clamp<int16>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max()));
+    return speed;
 }
 
 bool CBattleEntity::CanRest()
