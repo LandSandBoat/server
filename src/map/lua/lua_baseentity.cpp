@@ -5472,7 +5472,7 @@ void CLuaBaseEntity::setAnimationSub(uint8 animationsub, sol::object const& send
             auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
             if (sendPacket)
             {
-                PChar->pushPacket<CCharUpdatePacket>(PChar);
+                PChar->pushPacket(new CCharUpdatePacket(PChar));
             }
         }
         else if (sendPacket)
