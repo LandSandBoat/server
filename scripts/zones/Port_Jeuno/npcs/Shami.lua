@@ -24,21 +24,21 @@ local shamiSealItems =
 local shamiOrbItems =
 {
     -- Item ID                    CS, PO, SealID, Cost
-    [xi.item.CLOUDY_ORB     ] = {  5,  1,      0,   20 },
-    [xi.item.SKY_ORB        ] = {  9,  2,      0,   30 },
-    [xi.item.STAR_ORB       ] = {  9,  3,      0,   40 },
-    [xi.item.COMET_ORB      ] = {  9,  4,      0,   50 },
-    [xi.item.MOON_ORB       ] = {  9,  5,      0,   60 },
-    [xi.item.CLOTHO_ORB     ] = {  9,  6,      1,   30 },
-    [xi.item.LACHESIS_ORB   ] = {  9,  7,      1,   30 },
-    [xi.item.ATROPOS_ORB    ] = {  9,  8,      1,   30 },
-    [xi.item.THEMIS_ORB     ] = { 11,  9,      1,   99 },
-    [xi.item.PHOBOS_ORB     ] = { 11, 10,      2,   30 },
-    [xi.item.DEIMOS_ORB     ] = { 11, 11,      2,   50 },
-    [xi.item.ZELOS_ORB      ] = { 11, 12,      3,   30 },
-    [xi.item.BIA_ORB        ] = { 11, 13,      3,   50 },
+    [xi.item.CLOUDY_ORB     ] = {  5,  1,      0,   10 },
+    [xi.item.SKY_ORB        ] = {  9,  2,      0,   10 },
+    [xi.item.STAR_ORB       ] = {  9,  3,      0,   10 },
+    [xi.item.COMET_ORB      ] = {  9,  4,      0,   10 },
+    [xi.item.MOON_ORB       ] = {  9,  5,      0,   10 },
+    [xi.item.CLOTHO_ORB     ] = {  9,  6,      1,   10 },
+    [xi.item.LACHESIS_ORB   ] = {  9,  7,      1,   10 },
+    [xi.item.ATROPOS_ORB    ] = {  9,  8,      1,   10 },
+    [xi.item.THEMIS_ORB     ] = { 11,  9,      1,   19 },
+    [xi.item.PHOBOS_ORB     ] = { 11, 10,      2,   10 },
+    [xi.item.DEIMOS_ORB     ] = { 11, 11,      2,   10 },
+    [xi.item.ZELOS_ORB      ] = { 11, 12,      3,   10 },
+    [xi.item.BIA_ORB        ] = { 11, 13,      3,   10 },
     [xi.item.MICROCOSMIC_ORB] = { 11, 14,      4,   10 },
-    [xi.item.MACROCOSMIC_ORB] = { 11, 15,      4,   20 },
+    [xi.item.MACROCOSMIC_ORB] = { 11, 15,      4,   10 },
 }
 
 ---@nodiscard
