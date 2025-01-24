@@ -5,27 +5,21 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    local mobSkin = mob:getModelId()
-
-    if mobSkin == 281 then
-        return 0
-    else
-        return 1
-    end
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local targetcurrentHP = target:getHP()
-    local targetmaxHP = target:getMaxHP()
-    local hpset = targetmaxHP * 0.10
-    local dmg = 0
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 30)
+    local targetHP  = target:getHP()
+    local targetHPP = math.floor(target:getMaxHP() / 10)
+    local dmg       = 0
 
-    if targetcurrentHP > hpset then
-        dmg = targetcurrentHP - hpset
+    if targetHP >= targetHPP then
+        dmg = targetHP - targetHPP
     end
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE, { breakBind = false })
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 30)
+
     return dmg
 end
 
