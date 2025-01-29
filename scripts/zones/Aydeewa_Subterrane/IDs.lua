@@ -20,6 +20,7 @@ zones[xi.zone.AYDEEWA_SUBTERRANE] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7061, -- You can't fish here.
         MINING_IS_POSSIBLE_HERE       = 7332, -- Mining is possible here if you have <item>.
+        NO_MORE_SPROUTS               = 7711, -- However, you cannot carry any more sprouts.
         SENSE_OMINOUS_PRESENCE        = 8012, -- You sense an ominous presence...
         BLOOD_STAINS                  = 8018, -- The ground is smeared with bloodstains...
         DRAWS_NEAR                    = 8043, -- Something draws near!
@@ -29,12 +30,13 @@ zones[xi.zone.AYDEEWA_SUBTERRANE] =
     mob =
     {
         BLUESTREAK_GYUGYUROON = GetFirstID('Bluestreak_Gyugyuroon'),
+        CHIGRE                = GetFirstID('Chigre'),
         NOSFERATU             = GetFirstID('Nosferatu'),
         PANDEMONIUM_WARDEN    = GetFirstID('Pandemonium_Warden'), -- 2 Copies: +0, +1
-        CHIGRE                = GetFirstID('Chigre'),
     },
     npc =
     {
+        MUSHROOM_PATCH = GetFirstID('Mushroom_Patch')
     },
 }
 

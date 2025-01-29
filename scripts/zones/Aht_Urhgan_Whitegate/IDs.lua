@@ -77,6 +77,7 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         AUTOMATON_ATTACHMENT_UNLOCK   = 9668,  -- You can now equip your automaton with <item>.
         SANCTION                      = 9821,  -- You have received the Empire's Sanction.
         ZASSHAL_DIALOG                = 11024, -- 'ang about. Looks like the permit you got was the last one I 'ad, so it might take me a bit o' time to scrounge up some more. 'ere, don't gimme that look. I'll be restocked before you know it.
+        PROMOTION_CHIEF_SERGEANT      = 12354, -- <player> has been promoted to Chief Sergeant!
         RETRIEVE_DIALOG_ID            = 13543, -- You retrieve <item> from the porter moogle's care.
         COMMON_SENSE_SURVIVAL         = 14334, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
