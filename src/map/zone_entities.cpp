@@ -1172,7 +1172,7 @@ void CZoneEntities::SpawnConditionalNPCs(CCharEntity* PChar)
     TracyZoneScoped;
 
     // Player information
-    const bool inMogHouse       = PChar->m_moghouseID > 0;
+    const bool inMogHouse       = PChar->isInOwnMoghouse();
     const bool inMHinHomeNation = inMogHouse && [&]()
     {
         switch (zoneutils::GetCurrentRegion(PChar->getZone()))

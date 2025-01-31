@@ -5129,10 +5129,18 @@ void SmallPacket0x0CB(map_session_data_t* const PSession, CCharEntity* const PCh
 
         // NOTE: If you zone or move floors while in the MH and you have someone visiting, they will be booted.
         // NOTE: When you zone or move floors your "open MH" flag will be reset.
+
+        // TODO: Only allow this to be changed when you're in your own moghouse
+
+        PChar->setMoghouseOpen(true);
     }
     else if (operation == 2)
     {
         // close mog house
+
+        // TODO: Only allow this to be changed when you're in your own moghouse
+
+        PChar->setMoghouseOpen(false);
     }
     else if (operation == 5)
     {

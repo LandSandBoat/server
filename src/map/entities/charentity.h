@@ -539,6 +539,12 @@ public:
     uint32 m_moghouseID;
     uint16 m_moghancementID;
 
+    bool isInMoghouse() const;
+    bool isInOwnMoghouse() const;
+    bool isInOthersMoghouse() const;
+    bool isMoghouseOpen() const;
+    void setMoghouseOpen(bool open);
+
     CharHistory_t m_charHistory;
 
     int8  getShieldSize();

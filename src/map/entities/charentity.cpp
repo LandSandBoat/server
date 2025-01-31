@@ -766,6 +766,32 @@ CItemContainer* CCharEntity::getStorage(uint8 LocationID)
     return nullptr;
 }
 
+bool CCharEntity::isInMoghouse() const
+{
+    return m_moghouseID > 0;
+}
+
+bool CCharEntity::isInOwnMoghouse() const
+{
+    return isInMoghouse() && m_moghouseID == id;
+}
+
+bool CCharEntity::isInOthersMoghouse() const
+{
+    return isInMoghouse() && m_moghouseID != id;
+}
+
+bool CCharEntity::isMoghouseOpen() const
+{
+    return this->GetLocalVar("MoghouseOpen") == 1;
+}
+
+void CCharEntity::setMoghouseOpen(bool open)
+{
+    this->SetLocalVar("MoghouseOpen", open ? 1 : 0);
+    ReloadPartyInc();
+}
+
 int8 CCharEntity::getShieldSize()
 {
     CItemEquipment* PItem = getEquip(SLOT_SUB);

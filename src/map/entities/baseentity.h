@@ -288,10 +288,10 @@ public:
     CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) const;
     void         SendZoneUpdate();
 
-    void   ResetLocalVars();
-    uint32 GetLocalVar(const std::string& var);
-    void   SetLocalVar(const std::string& var, uint32 val);
-    auto   GetLocalVars() -> std::map<std::string, uint32>&;
+    void ResetLocalVars();
+    auto GetLocalVar(const std::string& var) const -> uint32;
+    void SetLocalVar(const std::string& var, uint32 val);
+    auto GetLocalVars() -> std::map<std::string, uint32>&;
 
     // pre-tick update
     virtual void Tick(time_point) = 0;
