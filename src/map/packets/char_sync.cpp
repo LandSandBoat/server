@@ -26,6 +26,7 @@
 #include "entities/charentity.h"
 #include "status_effect_container.h"
 
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0067
 CCharSyncPacket::CCharSyncPacket(CCharEntity* PChar)
 {
     this->setType(0x67);
@@ -54,6 +55,13 @@ CCharSyncPacket::CCharSyncPacket(CCharEntity* PChar)
     {
         ref<uint16>(0x13) = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetSubPower();
         ref<uint32>(0x18) = PChar->m_FieldChocobo;
+    }
+
+    // 0x20: UniqueNoMog?
+
+    if (PChar->isMoghouseOpen())
+    {
+        ref<uint8>(0x24) = 0x01; // MogHouseFlag
     }
 
     ref<uint8>(0x25) = PChar->jobs.job[PChar->GetMJob()];

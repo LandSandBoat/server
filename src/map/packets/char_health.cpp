@@ -28,6 +28,7 @@
 
 #include "monstrosity.h"
 
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x00DF
 CCharHealthPacket::CCharHealthPacket(CCharEntity* PChar)
 {
     this->setType(0xDF);
@@ -43,6 +44,13 @@ CCharHealthPacket::CCharHealthPacket(CCharEntity* PChar)
 
     ref<uint8>(0x16) = PChar->GetHPP();
     ref<uint8>(0x17) = PChar->GetMPP();
+
+    // 0x18: Kind
+
+    if (PChar->isMoghouseOpen())
+    {
+        ref<uint8>(0x19) = 0x01; // MoghouseFlg
+    }
 
     if (PChar->m_PMonstrosity != nullptr)
     {

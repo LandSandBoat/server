@@ -30,6 +30,7 @@
 #include "entities/trustentity.h"
 #include "party.h"
 
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x00DD
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 MemberNumber, uint16 memberflags, uint16 ZoneID)
 {
     this->setType(0xDD);
@@ -61,8 +62,14 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 Mem
         ref<uint16>(0x10) = PChar->health.tp;
         ref<uint16>(0x18) = PChar->targid;
         ref<uint8>(0x1A)  = MemberNumber;
-        ref<uint8>(0x1D)  = PChar->GetHPP();
-        ref<uint8>(0x1E)  = PChar->GetMPP();
+
+        if (PChar->isMoghouseOpen())
+        {
+            ref<uint8>(0x1B) = 0x01; // MoghouseFlg
+        }
+
+        ref<uint8>(0x1D) = PChar->GetHPP();
+        ref<uint8>(0x1E) = PChar->GetMPP();
 
         if (!PChar->isAnon())
         {
