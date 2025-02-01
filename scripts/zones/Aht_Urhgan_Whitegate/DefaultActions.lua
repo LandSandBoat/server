@@ -71,7 +71,6 @@ return {
     ['Wazyih']             = { event = 699 },
     ['Zaranf']             = { event = 668 },
     ['Zarfhid']            = { event = 220 },
-    ['Zhamwaa']            = { event = 500 },
     ['Zubyahn']            = { event = 674 },
     ['Zwinam']             = { event = 682 },
     ['Zyfhil']             = { event = 653 },

@@ -60,7 +60,6 @@ return {
     ['Tilian']           = { event = 100 },
     ['Trilok']           = { event = 44 },
     ['Varden']           = { event = 141 },
-    ['Wurteh']           = { event = 95 },
     ['Yazan']            = { event = 190 },
     ['Zeldaff']          = { event = 30 },
 }

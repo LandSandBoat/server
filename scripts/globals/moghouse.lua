@@ -168,6 +168,32 @@ xi.moghouse.trySetMusic = function(player)
     end
 end
 
+xi.moghouse.visitationNPCOnTrigger = function(player, npc, csid, ahtUrhganArg)
+    player:startEvent(csid, player:getNation(), ahtUrhganArg)
+end
+
+xi.moghouse.visitationNPCOnEventFinish = function(player, csid, option, visitationCSID)
+    if csid ~= visitationCSID then
+        return
+    end
+
+    if player:getPartySize() < 2 then
+        return
+    end
+
+    -- TODO: Does this support alliance?
+    if option < 1 or option > 6 then
+        return
+    end
+
+    for _, member in ipairs(player:getParty()) do
+        if member:getID() == option then
+            player:gotoPlayer(member:getName())
+            return
+        end
+    end
+end
+
 xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
     local cs = -1
 

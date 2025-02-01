@@ -24,7 +24,6 @@ return {
     ['Estiliphire']          = { event = 897 },
     ['Femitte']              = { event = 661 },
     ['Foletta']              = { event = 666 },
-    ['Fulchia']              = { event = 587 },
     ['Gizel']                = { event = 676 },
     ['Guilboire']            = { event = 657 },
     ['Hae_Jakhya']           = { event = 610 },
