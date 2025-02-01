@@ -232,8 +232,8 @@ namespace db
                 {
                     if (resultSet->isNull(key.c_str()))
                     {
-                        ShowError("ResultSetWrapper::get: key %s is null", key.c_str());
-                        ShowError("Query: %s", query.c_str());
+                        ShowErrorFmt("ResultSetWrapper::get: key {} is null", key.c_str());
+                        ShowErrorFmt("Query: {}", query.c_str());
                         return value;
                     }
                 }
@@ -484,8 +484,8 @@ namespace db
         }
         catch (const std::exception& e)
         {
-            ShowError("Query Failed: %s", e.what());
-            ShowError("Query Failed: %s", str(query.c_str()));
+            ShowErrorFmt("Query Failed: {}", query);
+            ShowErrorFmt("{}", e.what());
         }
 
         return nullptr;
@@ -511,8 +511,10 @@ namespace db
                 auto& lazyPreparedStatements = state.lazyPreparedStatements;
 
                 // If we don't have it, lazily make it
+                // cppcheck-suppress stlFindInsert
                 if (lazyPreparedStatements.find(rawQuery) == lazyPreparedStatements.end())
                 {
+                    // cppcheck-suppress stlFindInsert
                     lazyPreparedStatements[rawQuery] = std::unique_ptr<sql::PreparedStatement>(state.connection->prepareStatement(rawQuery.c_str()));
                 }
 
@@ -547,8 +549,8 @@ namespace db
                 {
                     if (!detail::isConnectionIssue(e))
                     {
-                        ShowError("Query Failed: %s", rawQuery.c_str());
-                        ShowError(e.what());
+                        ShowErrorFmt("Query Failed: {}", rawQuery.c_str());
+                        ShowErrorFmt("{}", e.what());
                         return nullptr;
                     }
                 }
@@ -583,23 +585,29 @@ namespace db
                 auto& lazyPreparedStatements = state.lazyPreparedStatements;
 
                 // If we don't have it, lazily make it
+                // cppcheck-suppress stlFindInsert
                 if (lazyPreparedStatements.find(rawQuery) == lazyPreparedStatements.end())
                 {
                     try
                     {
+                        // cppcheck-suppress stlFindInsert
                         lazyPreparedStatements[rawQuery] = std::unique_ptr<sql::PreparedStatement>(state.connection->prepareStatement(rawQuery.c_str()));
                     }
                     catch (const std::exception& e)
                     {
-                        ShowError("Failed to lazy prepare query: %s", str(rawQuery.c_str()));
-                        ShowError(e.what());
+                        ShowErrorFmt("Failed to lazy prepare query: {}", rawQuery, rawQuery.size());
+                        ShowErrorFmt("{}", e.what());
                         return { nullptr, 0 };
                     }
                 }
 
-                auto rowCountQuery = "SELECT ROW_COUNT() AS count";
+                const auto rowCountQuery = "SELECT ROW_COUNT() AS count";
+
+                // If we don't have it, lazily make it
+                // cppcheck-suppress stlFindInsert
                 if (lazyPreparedStatements.find(rowCountQuery) == lazyPreparedStatements.end())
                 {
+                    // cppcheck-suppress stlFindInsert
                     lazyPreparedStatements[rowCountQuery] = std::unique_ptr<sql::PreparedStatement>(state.connection->prepareStatement(rowCountQuery));
                 }
 
@@ -618,7 +626,7 @@ namespace db
                 auto rset2      = std::unique_ptr<sql::ResultSet>(countStmt->executeQuery());
                 if (!rset2 || !rset2->next())
                 {
-                    ShowError("Failed to get row count");
+                    ShowErrorFmt("Failed to get row count");
                     return { nullptr, 0 };
                 }
                 auto rowCount = rset2->getUInt("count");
@@ -641,8 +649,8 @@ namespace db
                 {
                     if (!detail::isConnectionIssue(e))
                     {
-                        ShowError("Query Failed: %s", rawQuery.c_str());
-                        ShowError(e.what());
+                        ShowErrorFmt("Query Failed: {}", rawQuery.c_str());
+                        ShowErrorFmt("{}", e.what());
                         return { nullptr, 0 };
                     }
                 }
@@ -705,6 +713,7 @@ namespace db
     auto getDriverVersion() -> std::string;
 
     void checkCharset();
+    void checkTriggers();
 
     bool setAutoCommit(bool value);
     bool getAutoCommit();
@@ -712,4 +721,6 @@ namespace db
     bool transactionStart();
     bool transactionCommit();
     bool transactionRollback();
+
+    void enableTimers();
 } // namespace db

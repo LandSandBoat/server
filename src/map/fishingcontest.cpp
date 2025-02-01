@@ -201,8 +201,8 @@ namespace fishingcontest
                 // Set the rank value
                 if (rankGroup > 0)
                 {
-                    const auto query = fmt::format("INSERT INTO char_fishing_contest_history (charid, contest_rank_{}) \
-                                        VALUES ({}, 1) ON DUPLICATE KEY UPDATE contest_rank_{} = contest_rank_{} + 1",
+                    const auto query = fmt::format("INSERT INTO char_fishing_contest_history (charid, contest_rank_{}) "
+                                                   "VALUES ({}, 1) ON DUPLICATE KEY UPDATE contest_rank_{} = contest_rank_{} + 1",
                                                    rankGroup, charID, rankGroup, rankGroup);
 
                     auto rset = db::query(query);
@@ -419,10 +419,10 @@ namespace fishingcontest
         }
 
         // Update the DB with the current contest entries
-        const auto query = fmt::format("REPLACE INTO `fishing_contest_entries` \
-                            (charid, mjob, sjob, mlevel, slevel, race, allegiance, fishRank, score, submitTime, contestRank, share) \
-                            SELECT charid, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} \
-                            FROM chars WHERE charname = '{}'",
+        const auto query = fmt::format("REPLACE INTO `fishing_contest_entries` "
+                                       "(charid, mjob, sjob, mlevel, slevel, race, allegiance, fishRank, score, submitTime, contestRank, share) "
+                                       "SELECT charid, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} "
+                                       "FROM chars WHERE charname = '{}'",
                                        entry->mjob,
                                        entry->sjob,
                                        entry->mlvl,

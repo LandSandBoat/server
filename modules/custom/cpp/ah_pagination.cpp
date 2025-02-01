@@ -35,9 +35,9 @@ class AHPaginationModule : public CPPModule
 
         ShowInfo("[AH PAGES] AH_LIST_LIMIT is set to %i. Enabling pagination of %i pages with %i items per page.", originalAHListLimit, TOTAL_PAGES, ITEMS_PER_PAGE);
 
-        auto originalHandler = PacketParser[0x04E];
+        const auto originalHandler = PacketParser[0x04E];
 
-        auto newHandler = [ITEMS_PER_PAGE, TOTAL_PAGES, originalHandler](map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
+        const auto newHandler = [ITEMS_PER_PAGE, TOTAL_PAGES, originalHandler](map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
         {
             TracyZoneScoped;
 
@@ -48,12 +48,13 @@ class AHPaginationModule : public CPPModule
             }
 
             // Only intercept for action 0x05: Open List Of Sales / Wait
-            auto action = data.ref<uint8>(0x04);
+            const auto action = data.ref<uint8>(0x04);
             if (action == 0x05)
             {
-                uint32 curTick = gettick();
+                const uint32 curTick = gettick();
                 if (curTick - PChar->m_AHHistoryTimestamp > 1500)
                 {
+                    // Not const, because we're going to increment it below
                     // This will get wiped on zoning
                     auto currentAHPage = PChar->GetLocalVar("AH_PAGE");
 
@@ -118,7 +119,7 @@ class AHPaginationModule : public CPPModule
                         }
                     }
 
-                    auto totalItemsOnAh = PChar->m_ah_history.size();
+                    const auto totalItemsOnAh = PChar->m_ah_history.size();
                     for (size_t slot = 0; slot < totalItemsOnAh; slot++)
                     {
                         PChar->pushPacket<CAuctionHousePacket>(0x0C, (uint8)slot, PChar);

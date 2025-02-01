@@ -5885,7 +5885,7 @@ namespace battleutils
                 {
                     if (auto PCharTarget = dynamic_cast<CCharEntity*>(PTarget))
                     {
-                        // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
+                        // Update target's recast state: caster's will be handled in CCharEntity::OnAbility.
                         PCharTarget->pushPacket<CCharRecastPacket>(PCharTarget);
                     }
                 }
@@ -5916,7 +5916,7 @@ namespace battleutils
             {
                 if (auto PCharTarget = dynamic_cast<CCharEntity*>(PTarget))
                 {
-                    // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
+                    // Update target's recast state: caster's will be handled in CCharEntity::OnAbility.
                     PCharTarget->pushPacket<CCharRecastPacket>(PCharTarget);
                 }
             }

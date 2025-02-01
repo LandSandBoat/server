@@ -155,18 +155,17 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 {
     TracyZoneScoped;
 
-    auto ipstr    = ip2str(ip);
-    auto fmtQuery = fmt::format("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '{}' LIMIT 1", ipstr);
+    const auto ipstr = ip2str(ip);
 
-    int32 ret = _sql->Query(fmtQuery.c_str());
+    const auto rset = db::preparedStmt("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = ? LIMIT 1", ipstr);
 
-    if (ret == SQL_ERROR)
+    if (rset == nullptr)
     {
         ShowError("SQL query failed in mapsession_createsession!");
         return nullptr;
     }
 
-    if (_sql->NumRows() == 0)
+    if (rset->rowsCount() == 0)
     {
         // This is noisy and not really necessary
         DebugSockets(fmt::format("recv_parse: Invalid login attempt from {}", ipstr));
@@ -242,10 +241,11 @@ int32 do_init(int32 argc, char** argv)
     ShowInfo("do_init: connecting to database");
     _sql = std::make_unique<SqlConnection>();
 
-    ShowInfo(_sql->GetDatabaseName().c_str());
-    ShowInfo(_sql->GetClientVersion().c_str());
-    ShowInfo(_sql->GetServerVersion().c_str());
-    _sql->CheckCharset();
+    ShowInfo(fmt::format("database name: {}", db::getDatabaseSchema()).c_str());
+    ShowInfo(fmt::format("database server version: {}", db::getDatabaseVersion()).c_str());
+    ShowInfo(fmt::format("database client version: {}", db::getDriverVersion()).c_str());
+    db::checkCharset();
+    db::checkTriggers();
 
     luautils::init(); // Also calls moduleutils::LoadLuaModules();
 
@@ -348,6 +348,8 @@ int32 do_init(int32 argc, char** argv)
     luautils::OnServerStart();
 
     moduleutils::ReportLuaModuleUsage();
+
+    db::enableTimers();
 
     ShowInfo("The map-server is ready to work!");
     ShowInfo("=======================================================================");

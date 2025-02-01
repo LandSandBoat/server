@@ -321,7 +321,9 @@ std::string ip2str(uint32 ip)
     uint32 reversed_ip = htonl(ip);
     char   address[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &reversed_ip, address, INET_ADDRSTRLEN);
-    return fmt::format("{}", str(address));
+
+    // This is internal, so we can trust it.
+    return fmt::format("{}", asStringFromUntrustedSource(address));
 }
 
 uint32 str2ip(const char* ip_str)
@@ -332,12 +334,6 @@ uint32 str2ip(const char* ip_str)
     return ntohl(ip);
 }
 
-// Reorders bytes from network to little endian (Windows).
-// Neccessary for sending port numbers to the RO client until Gravity notices that they forgot ntohs() calls.
-uint16 ntows(uint16 netshort)
-{
-    return ((netshort & 0xFF) << 8) | ((netshort & 0xFF00) >> 8);
-}
 /*****************************************************************************/
 /*
  *

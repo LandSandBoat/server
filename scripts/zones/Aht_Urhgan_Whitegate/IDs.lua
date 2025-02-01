@@ -69,6 +69,7 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         WAHRAGA_SHOP_DIALOG           = 9296,  -- Welcome to the Alchemists' Guild. We open ourselves to the hidden secrets of nature in order to create wonders. Are you looking to buy one of them?
         GATHWEEDA_SHOP_DIALOG         = 9297,  -- Only members of the Alchemists' Guild have the vision to create such fine products... Would you like to purchase something?
         ITEM_DELIVERY_DIALOG          = 9368,  -- You have something you want delivered?
+        FIRST_LIEUTENANT              = 9562, -- <player> has been promoted to First Lieutenant!
         AUTOMATON_VALOREDGE_UNLOCK    = 9609,  -- You obtain the Valoredge X-900 head and frame!
         AUTOMATON_SHARPSHOT_UNLOCK    = 9614,  -- You obtain the Sharpshot Z-500 head and frame!
         AUTOMATON_STORMWAKER_UNLOCK   = 9619,  -- You obtain the Stormwaker Y-700 head and frame!

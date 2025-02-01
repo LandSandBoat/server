@@ -277,7 +277,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::stri
                 break;
 
             default:
-                ShowError("cmdhandler::call: (%s) undefined type for param; symbol: %s", cmdname.c_str(), *parameter);
+                ShowError("cmdhandler::call: (%s) undefined type for param: symbol: %s", cmdname.c_str(), *parameter);
                 break;
         }
 

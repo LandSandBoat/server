@@ -188,10 +188,8 @@ void CParty::AssignPartyRole(const std::string& MemberName, uint8 role)
     }
 
     // Make sure that the the character is actually a part of this party
-    int ret = _sql->Query("SELECT chars.charid FROM chars \
-                          JOIN accounts_parties ON accounts_parties.charid = chars.charid WHERE charname = '%s' AND partyid = %u",
-                          MemberName, m_PartyID);
-    if (ret == SQL_ERROR || _sql->NumRows() == 0)
+    const auto rset = db::preparedStmt("SELECT chars.charid FROM chars JOIN accounts_parties ON accounts_parties.charid = chars.charid WHERE charname = ? AND partyid = ?", MemberName, m_PartyID);
+    if (!rset || rset->rowsCount() == 0)
     {
         return;
     }
@@ -214,6 +212,7 @@ void CParty::AssignPartyRole(const std::string& MemberName, uint8 role)
             SetSyncTarget("", MsgStd::LevelSyncRemoveLeftParty);
             break;
     }
+
     uint8 data[4]{};
     if (m_PAlliance)
     {
@@ -1030,8 +1029,7 @@ void CParty::SetLeader(const std::string& MemberName)
             return;
         }
 
-        _sql->Query("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", ALLIANCE_LEADER | PARTY_LEADER,
-                    m_PartyID, PARTY_LEADER);
+        _sql->Query("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", ALLIANCE_LEADER | PARTY_LEADER, m_PartyID, PARTY_LEADER);
         _sql->Query("UPDATE accounts_parties SET partyid = %u WHERE partyid = %u", newId, m_PartyID);
         _sql->Query("UPDATE accounts_parties SET allianceid = %u WHERE allianceid = %u", newId, m_PartyID);
 
@@ -1042,8 +1040,7 @@ void CParty::SetLeader(const std::string& MemberName)
         }
 
         m_PartyID = newId;
-        _sql->Query("UPDATE accounts_parties SET partyflag = partyflag | IF(allianceid = partyid, %d, %d) WHERE charid = %u",
-                    ALLIANCE_LEADER | PARTY_LEADER, PARTY_LEADER, newId);
+        _sql->Query("UPDATE accounts_parties SET partyflag = partyflag | IF(allianceid = partyid, %d, %d) WHERE charid = %u", ALLIANCE_LEADER | PARTY_LEADER, PARTY_LEADER, newId);
 
         // Passing leader dismisses trusts
         for (auto* PMemberEntity : members)

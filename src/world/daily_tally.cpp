@@ -33,11 +33,10 @@ namespace dailytally
         uint16 dailyTallyLimit  = settings::get<uint16>("main.DAILY_TALLY_LIMIT");
         uint16 dailyTallyAmount = settings::get<uint16>("main.DAILY_TALLY_AMOUNT");
 
-        const char* fmtQuery = "UPDATE char_points \
-            SET char_points.daily_tally = LEAST(%u, char_points.daily_tally + %u) \
-            WHERE char_points.daily_tally > -1";
-
-        if (!db::query(fmtQuery, dailyTallyLimit, dailyTallyAmount))
+        if (!db::preparedStmt("UPDATE char_points "
+                              "SET char_points.daily_tally = LEAST(?, char_points.daily_tally + ?) "
+                              "WHERE char_points.daily_tally > -1",
+                              dailyTallyLimit, dailyTallyAmount))
         {
             ShowError("Failed to update daily tally points");
         }

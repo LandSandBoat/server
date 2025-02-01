@@ -23,7 +23,7 @@ namespace gambits
     // Return a new unique identifier for a gambit
     auto CGambitsContainer::NewGambitIdentifier(Gambit_t const& gambit) const -> std::string
     {
-        return std::format("{}_{}_{}", gambits.size(), gambit.predicate_groups.size(), gambit.actions.size());
+        return fmt::format("{}_{}_{}", gambits.size(), gambit.predicate_groups.size(), gambit.actions.size());
     }
 
     // Validate gambit before it's inserted into the gambit list

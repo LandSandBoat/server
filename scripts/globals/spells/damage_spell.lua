@@ -258,8 +258,8 @@ local function cardinalChantBonus(actor, target, direction, spellId, skillType)
     local gearFactor = 1 + actor:getMod(xi.mod.CARDINAL_CHANT_BONUS) / 100
 
     -- Calculate angle %
-    local angle        = utils.getWorldRotation(actor:getPos(), target:getPos())
-    local angleFactor  = 0
+    local angle       = utils.getWorldRotation(actor:getPos(), target:getPos())
+    local angleFactor = 0
 
     switch (direction) : caseof
     {
@@ -944,7 +944,7 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spellId, 
     cappedBonus = utils.clamp(cappedBonus, 0, 0.4)
 
     -- BLM Job Point: Magic Burst Damage and GEO cardinal chant.
-    uncappedBonus = uncappedBonus + caster:getJobPointLevel(xi.jp.MAGIC_BURST_DMG_BONUS) / 100 + cardinalChantBonus(caster, target, xi.direction.WEST, spellId, skillType)
+    uncappedBonus = uncappedBonus + caster:getJobPointLevel(xi.jp.MAGIC_BURST_DMG_BONUS) / 100 + cardinalChantBonus(caster, target, xi.direction.WEST, spellId, skillType) / 100
 
     -- Get final multiplier
     magicBurstBonus = magicBurstBonus + cappedBonus + uncappedBonus

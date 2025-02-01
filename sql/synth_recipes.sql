@@ -52,8 +52,8 @@ CREATE TABLE `synth_recipes` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 DELIMITER $$
-DROP TRIGGER IF EXISTS ensure_ingredients_are_ordered;
-CREATE TRIGGER ensure_ingredients_are_ordered
+DROP TRIGGER IF EXISTS ensure_synth_ingredients_are_ordered;
+CREATE TRIGGER ensure_synth_ingredients_are_ordered
      BEFORE INSERT ON synth_recipes FOR EACH ROW BEGIN
           IF NEW.Ingredient2 > 0 AND NEW.Ingredient1 > NEW.Ingredient2
           THEN

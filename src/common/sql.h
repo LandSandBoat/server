@@ -133,16 +133,11 @@ public:
     int32 TryPing();
 
     /// Escapes a string.
-    /// The output buffer must be at least strlen(from)*2+1 in size.
-    ///
-    /// @return The size of the escaped string
-    size_t EscapeString(char* out_to, const char* from);
-    size_t EscapeStringLen(char* out_to, const char* from, size_t from_len);
-
-    /// Escapes a string.
-    ///
-    /// @return The escaped string
-    std::string EscapeString(std::string const& input);
+    auto EscapeStringLen(char* out_to, const char* from, size_t from_len) -> size_t;
+    auto EscapeStringLen(char* out_to, std::string_view from) -> size_t;
+    auto EscapeString(char* out_to, const char* from) -> size_t;
+    auto EscapeString(std::string_view from) -> std::string;
+    auto EscapeString(const std::string& from) -> std::string;
 
     /// Executes a query.
     /// Any previous result is freed.
@@ -265,4 +260,9 @@ private:
 
     std::thread::id m_ThreadId;
 };
+
+//
+// Outside of SQL class/namespace
+//
+
 #endif // _COMMON_SQL_H

@@ -59,8 +59,9 @@ void data_session::read_func()
             {
                 session.serverIP = ref<uint32>(data_, 5);
 
-                uint32     numContentIds = 0;
-                const auto rset0         = db::query("SELECT content_ids FROM accounts WHERE id = %u", session.accountID);
+                uint32 numContentIds = 0;
+
+                const auto rset0 = db::preparedStmt("SELECT content_ids FROM accounts WHERE id = ?", session.accountID);
                 if (rset0 && rset0->rowsCount() && rset0->next())
                 {
                     numContentIds = rset0->get<uint32>("content_ids");
@@ -74,20 +75,20 @@ void data_session::read_func()
                     return;
                 }
 
-                const char* pfmtQuery =
-                    "SELECT charid, charname, pos_zone, pos_prevzone, mjob,\
-                        race, face, head, body, hands, legs, feet, main, sub,\
-                        war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng,\
-                        sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run, \
-                        gmlevel, nation, size, sjob \
-                    FROM chars \
-                        INNER JOIN char_stats USING(charid) \
-                        INNER JOIN char_look  USING(charid) \
-                        INNER JOIN char_jobs  USING(charid) \
-                        WHERE accid = %i \
-                    LIMIT %u";
+                const auto rset1 = db::preparedStmt("SELECT charid, charname, pos_zone, pos_prevzone, mjob,"
+                                                    "race, face, head, body, hands, legs, feet, main, sub,"
+                                                    "war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng,"
+                                                    "sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run, "
+                                                    "gmlevel, nation, size, sjob "
+                                                    "FROM chars "
+                                                    "INNER JOIN char_stats USING(charid) "
+                                                    "INNER JOIN char_look  USING(charid) "
+                                                    "INNER JOIN char_jobs  USING(charid) "
+                                                    "WHERE accid = ? "
+                                                    "LIMIT ?",
+                                                    session.accountID,
+                                                    numContentIds);
 
-                const auto rset1 = db::query(pfmtQuery, session.accountID, numContentIds);
                 if (!rset1)
                 {
                     socket_.lowest_layer().close();
@@ -265,10 +266,10 @@ void data_session::read_func()
             uint16 PrevZone = 0;
             uint16 gmlevel  = 0;
 
-            const auto rset = db::query("SELECT zoneip, zoneport, zoneid, pos_prevzone, gmlevel, accid, charname \
-                                             FROM zone_settings, chars \
-                                             WHERE IF(pos_zone = 0, zoneid = pos_prevzone, zoneid = pos_zone) AND charid = %u AND accid = %u",
-                                        charid, session.accountID);
+            const auto rset = db::preparedStmt("SELECT zoneip, zoneport, zoneid, pos_prevzone, gmlevel, accid, charname "
+                                               "FROM zone_settings, chars "
+                                               "WHERE IF(pos_zone = 0, zoneid = pos_prevzone, zoneid = pos_zone) AND charid = ? AND accid = ?",
+                                               charid, session.accountID);
             if (rset && rset->rowsCount() && rset->next())
             {
                 ZoneID   = rset->get<uint16>("zoneid");
@@ -304,30 +305,31 @@ void data_session::read_func()
                 // Check the number of sessions
                 uint16 sessionCount = 0;
 
-                const auto rset0 = db::query("SELECT COUNT(client_addr) \
-                                FROM accounts_sessions \
-                                WHERE client_addr = %u",
-                                             accountIP);
+                const auto rset0 = db::preparedStmt("SELECT COUNT(client_addr) "
+                                                    "FROM accounts_sessions "
+                                                    "WHERE client_addr = ?",
+                                                    accountIP);
                 if (rset0 && rset0->rowsCount() != 0 && rset0->next())
                 {
                     sessionCount = rset0->get<uint16>("COUNT(client_addr)");
                 }
 
-                bool       hasActiveSession = false;
-                const auto rset1            = db::query("SELECT * \
-                                FROM accounts_sessions \
-                                WHERE accid = %u AND client_port != '0'",
-                                                        session.accountID);
+                bool hasActiveSession = false;
+
+                const auto rset1 = db::preparedStmt("SELECT * "
+                                                    "FROM accounts_sessions "
+                                                    "WHERE accid = ? AND client_port != '0'",
+                                                    session.accountID);
                 if (rset1 && rset1->rowsCount() != 0 && rset1->next())
                 {
                     hasActiveSession = true;
                 }
 
                 // If client was zoning out but was never seen at the destination, wait 30 seconds before allowing login again
-                const auto rset2 = db::query("SELECT * \
-                                FROM accounts_sessions \
-                                WHERE accid = %u AND client_port = '0' AND last_zoneout_time >= SUBTIME(NOW(), \"00:00:30\")",
-                                             session.accountID);
+                const auto rset2 = db::preparedStmt("SELECT * "
+                                                    "FROM accounts_sessions "
+                                                    "WHERE accid = ? AND client_port = '0' AND last_zoneout_time >= SUBTIME(NOW(), \"00:00:30\")",
+                                                    session.accountID);
                 if (rset2 && rset2->rowsCount() != 0 && rset2->next())
                 {
                     hasActiveSession = true;
@@ -335,10 +337,10 @@ void data_session::read_func()
 
                 uint64 exceptionTime = 0;
 
-                const auto rset3 = db::query("SELECT UNIX_TIMESTAMP(exception) \
-                                FROM ip_exceptions \
-                                WHERE accid = %u",
-                                             session.accountID);
+                const auto rset3 = db::preparedStmt("SELECT UNIX_TIMESTAMP(exception) "
+                                                    "FROM ip_exceptions "
+                                                    "WHERE accid = ?",
+                                                    session.accountID);
                 if (rset3 && rset3->rowsCount() != 0 && rset3->next())
                 {
                     exceptionTime = rset3->get<uint64>("UNIX_TIMESTAMP(exception)");
@@ -374,20 +376,21 @@ void data_session::read_func()
                 {
                     if (PrevZone == 0)
                     {
-                        db::query("UPDATE chars SET pos_prevzone = %d WHERE charid = %u", ZoneID, charid);
+                        db::preparedStmt("UPDATE chars SET pos_prevzone = ? WHERE charid = ?", ZoneID, charid);
                     }
                     auto searchPort                       = settings::get<uint16>("network.SEARCH_PORT");
                     characterSelectionResponse.cache_ip   = session.serverIP; // search-server ip
                     characterSelectionResponse.cache_port = searchPort;
 
                     // If the session was not processed by the game server, then it must be deleted.
-                    db::query("DELETE FROM accounts_sessions WHERE accid = %u AND client_port = 0", session.accountID);
+                    db::preparedStmt("DELETE FROM accounts_sessions WHERE accid = ? AND client_port = 0", session.accountID);
 
                     char session_key[sizeof(key3) * 2 + 1];
                     bin2hex(session_key, key3, sizeof(key3));
 
-                    if (!db::query("INSERT INTO accounts_sessions(accid,charid,session_key,server_addr,server_port,client_addr, version_mismatch) "
-                                   "VALUES(%u,%u,x'%s',%u,%u,%u,%u)",
+                    // TODO: Figure out how to encode session_key as a hex string using db::preparedStmt. Encode as a blob?
+                    if (!db::query("INSERT INTO accounts_sessions(accid, charid, session_key, server_addr, server_port, client_addr, version_mismatch) "
+                                   "VALUES(%u, %u, x'%s', %u, %u, %u, %u)",
                                    session.accountID, charid, session_key, ZoneIP, ZonePort, accountIP,
                                    session.versionMismatch ? 1 : 0))
                     {
@@ -400,8 +403,8 @@ void data_session::read_func()
                         }
                     }
 
-                    db::query("UPDATE char_flags SET disconnecting = 0 WHERE charid = %u", charid);
-                    db::query("UPDATE char_stats SET zoning = 2 WHERE charid = %u", charid);
+                    db::preparedStmt("UPDATE char_flags SET disconnecting = 0 WHERE charid = ?", charid);
+                    db::preparedStmt("UPDATE char_stats SET zoning = 2 WHERE charid = ?", charid);
                 }
                 else
                 {
@@ -452,9 +455,9 @@ void data_session::read_func()
                 char timeAndDate[128];
                 strftime(timeAndDate, sizeof(timeAndDate), "%Y:%m:%d %H:%M:%S", &convertedTime);
 
-                if (!db::query("INSERT INTO account_ip_record(login_time,accid,charid,client_ip) \
-                            VALUES ('%s', %u, %u, '%s')",
-                               timeAndDate, session.accountID, charid, loginHelpers::ip2str(accountIP)))
+                if (!db::preparedStmt("INSERT INTO account_ip_record(login_time,accid,charid,client_ip) "
+                                      "VALUES (?, ?, ?, ?)",
+                                      timeAndDate, session.accountID, charid, loginHelpers::ip2str(accountIP)))
                 {
                     ShowError("data_session: Could not write info to account_ip_record.");
                 }

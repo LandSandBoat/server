@@ -57,8 +57,8 @@ void view_session::read_func()
 
             uint32 accountID = 0;
 
-            const auto rset = db::query("SELECT accid FROM chars WHERE charid = %u AND charname = '%s' LIMIT 1",
-                                        requestedCharacterID, requestedCharacter);
+            const auto rset = db::preparedStmt("SELECT accid FROM chars WHERE charid = ? AND charname = ? LIMIT 1",
+                                               requestedCharacterID, requestedCharacter);
             if (rset && rset->rowsCount() != 0 && rset->next())
             {
                 accountID                    = rset->get<uint32>("accid");
@@ -119,7 +119,7 @@ void view_session::read_func()
 
             uint32 accountID = 0;
 
-            const auto rset = db::query("SELECT accid FROM chars WHERE charid = %u LIMIT 1", charID);
+            const auto rset = db::preparedStmt("SELECT accid FROM chars WHERE charid = ? LIMIT 1", charID);
             if (rset && rset->rowsCount() != 0 && rset->next())
             {
                 accountID = rset->get<uint32>("accid");
@@ -136,8 +136,8 @@ void view_session::read_func()
             // Instead of performing an actual character deletion, we simply set accid to 0, and original_accid to old accid.
             // This allows character recovery.
 
-            db::query("UPDATE chars SET accid = 0, original_accid = %i WHERE charid = %i AND accid = %i",
-                      session.accountID, charID, session.accountID);
+            db::preparedStmt("UPDATE chars SET accid = 0, original_accid = ? WHERE charid = ? AND accid = ?",
+                             session.accountID, charID, session.accountID);
         }
         break;
         case 0x21: // 33: Registering character name onto the lobby server
@@ -210,7 +210,7 @@ void view_session::read_func()
                 }
 
                 // Check if the name is already in use by another character
-                const auto rset0 = db::query("SELECT charname FROM chars WHERE charname LIKE '%s'", nameStr);
+                const auto rset0 = db::preparedStmt("SELECT charname FROM chars WHERE charname LIKE ?", nameStr);
                 if (!rset0)
                 {
                     invalidNameReason = "Internal entity name query failed.";
@@ -230,9 +230,9 @@ void view_session::read_func()
                         "    UNION "
                         "    SELECT packet_name AS `name` FROM mob_pools "
                         ") "
-                        "SELECT * FROM results WHERE REPLACE(REPLACE(UPPER(`name`), '-', ''), '_', '') LIKE REPLACE(REPLACE(UPPER('%s'), '-', ''), '_', '')";
+                        "SELECT * FROM results WHERE REPLACE(REPLACE(UPPER(`name`), '-', ''), '_', '') LIKE REPLACE(REPLACE(UPPER(?), '-', ''), '_', '')";
 
-                    const auto rset1 = db::query(query, nameStr);
+                    const auto rset1 = db::preparedStmt(query, nameStr);
                     if (!rset1)
                     {
                         invalidNameReason = "Internal entity name query failed";
@@ -261,7 +261,7 @@ void view_session::read_func()
 
                 if (invalidNameReason.has_value())
                 {
-                    ShowWarning(fmt::format("new character name error <{}>: {}", str(CharName), *invalidNameReason));
+                    ShowWarning(fmt::format("new character name error <{}>: {}", nameStr, *invalidNameReason));
 
                     // Send error code:
                     // The character name you entered is unavailable. Please choose another name.

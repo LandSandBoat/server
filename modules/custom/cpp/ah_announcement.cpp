@@ -51,14 +51,14 @@ class AHAnnouncementModule : public CPPModule
     {
         TracyZoneScoped;
 
-        auto originalHandler = PacketParser[0x04E];
+        const auto originalHandler = PacketParser[0x04E];
 
-        auto newHandler = [originalHandler](map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
+        const auto newHandler = [originalHandler](map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
         {
             TracyZoneScoped;
 
             // Only intercept for action 0x0E: Purchasing Items
-            auto action = data.ref<uint8>(0x04);
+            const auto action = data.ref<uint8>(0x04);
             if (action == 0x0E)
             {
                 // !!!
@@ -66,9 +66,9 @@ class AHAnnouncementModule : public CPPModule
                 //     : If the original code changes, this will have to change too!
                 // !!!
 
-                uint32 price    = data.ref<uint32>(0x08);
-                uint16 itemid   = data.ref<uint16>(0x0C);
-                uint8  quantity = data.ref<uint8>(0x10);
+                const uint32 price    = data.ref<uint32>(0x08);
+                const uint16 itemid   = data.ref<uint16>(0x0C);
+                const uint8  quantity = data.ref<uint8>(0x10);
 
                 if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
                 {

@@ -51,6 +51,8 @@ namespace
         "Connection refused",
         "Can't connect to server",
     };
+
+    bool timersEnabled = false;
 } // namespace
 
 auto db::getConnection() -> std::unique_ptr<sql::Connection>
@@ -127,7 +129,7 @@ auto db::detail::timer(std::string const& query) -> xi::final_action<std::functi
     {
         const auto end      = hires_clock::now();
         const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-        if (settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))
+        if (timersEnabled && settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))
         {
             if (duration > settings::get<uint32>("logging.SQL_SLOW_QUERY_ERROR_TIME"))
             {
@@ -287,6 +289,43 @@ void db::checkCharset()
     }
 }
 
+void db::checkTriggers()
+{
+    const auto triggerQuery = "SHOW TRIGGERS WHERE `Trigger` LIKE ?";
+
+    const auto triggers = {
+        "account_delete",
+        "session_delete",
+        "auction_house_list",
+        "auction_house_buy",
+        "char_insert",
+        "char_delete",
+        "delivery_box_insert",
+        "ensure_synth_ingredients_are_ordered",
+        "ensure_synergy_ingredients_are_ordered",
+    };
+
+    bool foundError = false;
+
+    for (const auto& trigger : triggers)
+    {
+        auto rset = preparedStmt(triggerQuery, trigger);
+        if (!rset || rset->rowsCount() == 0)
+        {
+            ShowWarning(fmt::format("Missing trigger: {}", trigger));
+            foundError = true;
+        }
+    }
+
+    if (foundError)
+    {
+        ShowCriticalFmt("Missing triggers can result in data corruption or loss of data!!!");
+        ShowCriticalFmt("Please ensure all triggers are present in the database (re-run dbtool.py).");
+        std::this_thread::sleep_for(1s);
+        std::terminate();
+    }
+}
+
 bool db::setAutoCommit(bool value)
 {
     TracyZoneScoped;
@@ -351,4 +390,9 @@ bool db::transactionRollback()
     }
 
     return true;
+}
+
+void db::enableTimers()
+{
+    timersEnabled = true;
 }

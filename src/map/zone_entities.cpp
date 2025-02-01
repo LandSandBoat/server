@@ -1913,7 +1913,7 @@ void CZoneEntities::ZoneServer(time_point tick)
 
     for (const auto* PMob : m_mobsToDelete)
     {
-        if (auto itr = m_mobList.find(PMob->id); itr != m_mobList.end())
+        if (auto itr = m_mobList.find(PMob->targid); itr != m_mobList.end())
         {
             m_mobList.erase(itr);
             m_dynamicTargIdsToDelete.emplace_back(PMob->targid, server_clock::now());
@@ -1923,7 +1923,7 @@ void CZoneEntities::ZoneServer(time_point tick)
 
     for (const auto* PNpc : m_npcsToDelete)
     {
-        if (auto itr = m_npcList.find(PNpc->id); itr != m_npcList.end())
+        if (auto itr = m_npcList.find(PNpc->targid); itr != m_npcList.end())
         {
             m_npcList.erase(itr);
             m_dynamicTargIdsToDelete.emplace_back(PNpc->targid, server_clock::now());
@@ -1933,7 +1933,7 @@ void CZoneEntities::ZoneServer(time_point tick)
 
     for (const auto* PPet : m_petsToDelete)
     {
-        if (auto itr = m_petList.find(PPet->id); itr != m_petList.end())
+        if (auto itr = m_petList.find(PPet->targid); itr != m_petList.end())
         {
             m_petList.erase(itr);
             m_dynamicTargIdsToDelete.emplace_back(PPet->targid, server_clock::now());
@@ -1943,7 +1943,7 @@ void CZoneEntities::ZoneServer(time_point tick)
 
     for (const auto* PTrust : m_trustsToDelete)
     {
-        if (auto itr = m_trustList.find(PTrust->id); itr != m_trustList.end())
+        if (auto itr = m_trustList.find(PTrust->targid); itr != m_trustList.end())
         {
             m_trustList.erase(itr);
             m_dynamicTargIdsToDelete.emplace_back(PTrust->targid, server_clock::now());

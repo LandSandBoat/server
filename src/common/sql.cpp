@@ -275,26 +275,48 @@ int32 SqlConnection::TryPing()
 size_t SqlConnection::EscapeStringLen(char* out_to, const char* from, size_t from_len)
 {
     TracyZoneScoped;
+
     if (self)
     {
-        return mysql_real_escape_string(&self->handle, out_to, from, (uint32)from_len);
+        return mysql_real_escape_string(&self->handle, out_to, from, static_cast<uint32>(from_len));
     }
-    return mysql_escape_string(out_to, from, (uint32)from_len);
+
+    return mysql_escape_string(out_to, from, static_cast<uint32>(from_len));
+}
+
+size_t SqlConnection::EscapeStringLen(char* out_to, std::string_view from)
+{
+    TracyZoneScoped;
+
+    return EscapeStringLen(out_to, from.data(), from.size());
 }
 
 size_t SqlConnection::EscapeString(char* out_to, const char* from)
 {
     TracyZoneScoped;
+
     return EscapeStringLen(out_to, from, strlen(from));
 }
 
-std::string SqlConnection::EscapeString(std::string const& input)
+std::string SqlConnection::EscapeString(std::string_view from)
 {
     TracyZoneScoped;
-    std::string escaped_full_string;
-    escaped_full_string.reserve(input.size() * 2 + 1);
-    EscapeString(escaped_full_string.data(), input.data());
-    return escaped_full_string;
+
+    if (from.empty())
+    {
+        return {};
+    }
+
+    auto buffer = std::vector<char>(from.size() * 2 + 1);
+    auto len    = EscapeStringLen(buffer.data(), from);
+    return std::string(buffer.data(), len);
+}
+
+std::string SqlConnection::EscapeString(const std::string& from)
+{
+    TracyZoneScoped;
+
+    return EscapeString(std::string_view(from));
 }
 
 int32 SqlConnection::QueryStr(const char* query)
