@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local theLostCardien = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
-    local cooksPride = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+    local cooksPride = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOKS_PRIDE)
 
     if
         cooksPride == xi.questStatus.QUEST_COMPLETED and

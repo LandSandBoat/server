@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
 
     elseif
         theWonderMagicSet == xi.questStatus.QUEST_COMPLETED and
-        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE) ~= xi.questStatus.QUEST_COMPLETED
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOKS_PRIDE) ~= xi.questStatus.QUEST_COMPLETED
     then
         player:startEvent(40) -- Standard dialog
 

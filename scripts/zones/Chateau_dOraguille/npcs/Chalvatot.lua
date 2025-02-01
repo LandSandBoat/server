@@ -12,7 +12,7 @@ local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local herMajestysGarden = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+    local herMajestysGarden = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.HER_MAJESTYS_GARDEN)
 
     -- HER MAJESTY'S GARDEN (derfland humus)
     if
@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
     local circleProgress = player:getCharVar('circleTime')
     local lureOfTheWildcat = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
     local wildcatSandy = player:getCharVar('WildcatSandy')
-    local herMajestysGarden = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+    local herMajestysGarden = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.HER_MAJESTYS_GARDEN)
 
     -- CIRCLE OF TIME (Bard AF3)
     if circleOfTime == xi.questStatus.QUEST_ACCEPTED then
@@ -90,13 +90,13 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     -- HER MAJESTY'S GARDEN
     elseif csid == 84 and option == 1 then
-        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.HER_MAJESTYS_GARDEN)
     elseif csid == 83 then
         player:tradeComplete()
         player:addKeyItem(xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
         player:addFame(xi.fameArea.SANDORIA, 30)
-        player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+        player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.HER_MAJESTYS_GARDEN)
     end
 end
 

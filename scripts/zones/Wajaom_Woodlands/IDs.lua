@@ -40,7 +40,7 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
             ['Marid'] = GetTableOfIDs('Chigoe', 5),
         },
         JADED_JODY             = GetFirstID('Jaded_Jody'),
-        ZORAAL_JA_S_PKUUCHA    = GetFirstID('Zoraal_Jas_Pkuucha'),
+        ZORAAL_JAS_PKUUCHA     = GetFirstID('Zoraal_Jas_Pkuucha'),
         PERCIPIENT_ZORAAL_JA   = GetFirstID('Percipient_Zoraal_Ja'),
         VULPANGUE              = GetFirstID('Vulpangue'),
         IRIZ_IMA               = GetFirstID('Iriz_Ima'),

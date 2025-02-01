@@ -28,7 +28,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('BorghertzCS', 2)
     elseif csid == 48 then
         local questJob = player:getCharVar('BorghertzAlreadyActiveWithJob')
-        local quest = xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + questJob - 1
+        local quest = xi.quest.id.jeuno.BORGHERTZS_WARRING_HANDS + questJob - 1
         local reward = 13960 + questJob
 
         if

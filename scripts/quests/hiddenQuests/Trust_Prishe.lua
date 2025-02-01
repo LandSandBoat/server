@@ -21,7 +21,7 @@ local trustMemory = function(player)
     -- Animals have hearts and souls, just like people do, and their hearts are much more pure than ours.
     -- Now if only I were as pure as a moogle, then maybe...
     -- Ah, screw it all! What's this weird heat coming from my cheeks?
-    if player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CHOCOBO_S_TALE) then
+    if player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CHOCOBOS_TALE) then
         memories = memories + 4
     end
 

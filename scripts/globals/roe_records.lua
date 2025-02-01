@@ -578,7 +578,7 @@ xi.roe.records =
     [637] =
     { -- WHM Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJES_DECISION } },
         flags = set { 'retro' },
         reward = { sparks = 100, exp = 300 },
     },
@@ -666,7 +666,7 @@ xi.roe.records =
     [648] =
     { -- PLD Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOYS_DREAM } },
         flags = set { 'retro' },
         reward = { sparks = 100, exp = 300 },
     },
@@ -830,7 +830,7 @@ xi.roe.records =
     [668] =
     { -- DRG Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMANS_WORK } },
         flags = set { 'retro' },
         reward = { sparks = 100, exp = 300 },
     },

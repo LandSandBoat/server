@@ -23,7 +23,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local craftsmansStatus = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
+    local craftsmansStatus = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMANS_WORK)
     local quotasStatus     = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
     local quotasProgress   = player:getCharVar('ChasingQuotas_Progress')
     local quotasNo         = player:getCharVar('ChasingQuotas_No')

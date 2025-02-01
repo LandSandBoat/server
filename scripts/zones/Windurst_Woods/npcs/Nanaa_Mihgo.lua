@@ -48,7 +48,7 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, { { 498, 4 } }) then -- Yagudo Necklace x4
-        local mihgosAmigo = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
+        local mihgosAmigo = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGOS_AMIGO)
 
         if mihgosAmigo == xi.questStatus.QUEST_ACCEPTED then
             player:startEvent(88, xi.settings.main.GIL_RATE * 200)
@@ -60,7 +60,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local wildcatWindurst = player:getCharVar('WildcatWindurst')
-    local mihgosAmigo = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
+    local mihgosAmigo = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGOS_AMIGO)
     local rockRacketeer = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
     local rockRacketeerCS = player:getCharVar('rockracketeer_sold')
 
@@ -137,10 +137,10 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     -- MIHGO'S AMIGO
     elseif csid == 80 or csid == 81 then
-        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGOS_AMIGO)
     elseif csid == 88 then
         player:confirmTrade()
-        player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
+        player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGOS_AMIGO)
         player:addTitle(xi.title.CAT_BURGLAR_GROUPIE)
         player:addGil(xi.settings.main.GIL_RATE * 200)
         player:addFame(xi.fameArea.NORG, 60)
