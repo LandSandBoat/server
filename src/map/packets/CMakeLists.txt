@@ -184,6 +184,8 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/party_invite.h
     ${CMAKE_CURRENT_SOURCE_DIR}/party_map.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/party_map.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/party_member_define.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/party_member_define.h
     ${CMAKE_CURRENT_SOURCE_DIR}/party_member_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/party_member_update.h
     ${CMAKE_CURRENT_SOURCE_DIR}/party_search.cpp
