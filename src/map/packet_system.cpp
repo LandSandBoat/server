@@ -5122,27 +5122,29 @@ void SmallPacket0x0CB(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
 
+    if (!PChar->isInOwnMoghouse())
+    {
+        ShowWarningFmt("Player {} ({}) is trying to perform a moghouse action while not in their own moghouse.", PChar->getName(), PChar->id);
+        return;
+    }
+
     auto operation = data.ref<uint8>(0x04);
-    if (operation == 1)
+    if (operation == 0x01)
     {
         // open mog house
 
         // NOTE: If you zone or move floors while in the MH and you have someone visiting, they will be booted.
         // NOTE: When you zone or move floors your "open MH" flag will be reset.
 
-        // TODO: Only allow this to be changed when you're in your own moghouse
-
         PChar->setMoghouseOpen(true);
     }
-    else if (operation == 2)
+    else if (operation == 0x02)
     {
         // close mog house
 
-        // TODO: Only allow this to be changed when you're in your own moghouse
-
         PChar->setMoghouseOpen(false);
     }
-    else if (operation == 5)
+    else if (operation == 0x05)
     {
         // remodel mog house
         auto type = data.ref<uint8>(0x06); // Sandy: 103, Bastok: 104, Windy: 105, Patio: 106
