@@ -2724,6 +2724,10 @@ bool CBattleEntity::hasEnmityEXPENSIVE() const
         // clang-format off
         loc.zone->ForEachMob([&](CMobEntity* PMob)
         {
+            if (!PMob->isAlive())
+            {
+                return;
+            }
             // Account for charmed mobs attacking normal mobs, etc
             if (PMob->GetBattleTargetID() == targid && PMob->allegiance != allegiance)
             {

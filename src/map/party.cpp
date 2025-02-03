@@ -116,6 +116,7 @@ void CParty::DisbandParty(bool playerInitiated)
     {
         m_PAlliance->removeParty(this);
     }
+
     m_PSyncTarget = nullptr;
     m_PLeader     = nullptr;
     m_PAlliance   = nullptr;
@@ -123,8 +124,8 @@ void CParty::DisbandParty(bool playerInitiated)
     if (m_PartyType == PARTY_PCS)
     {
         SetQuarterMaster("");
-        auto partyDefinePacket = std::make_unique<CPartyDefinePacket>(nullptr);
-        PushPacket(0, 0, std::move(partyDefinePacket));
+
+        this->PushPacket(0, 0, std::make_unique<CPartyDefinePacket>(nullptr));
 
         for (auto& member : members)
         {
@@ -537,20 +538,27 @@ bool CParty::RemovePartyLeader(CBattleEntity* PEntity)
 std::vector<CParty::partyInfo_t> CParty::GetPartyInfo() const
 {
     std::vector<CParty::partyInfo_t> memberinfo;
-    int                              ret = _sql->Query("SELECT chars.charid, partyid, allianceid, charname, partyflag, pos_zone, pos_prevzone FROM accounts_parties \
-                                    LEFT JOIN chars ON accounts_parties.charid = chars.charid WHERE \
-                                    (allianceid <> 0 AND allianceid = %d) OR partyid = %d ORDER BY partyflag & %u, timestamp",
-                          m_PAlliance ? m_PAlliance->m_AllianceID : 0, m_PartyID, PARTY_SECOND | PARTY_THIRD);
 
-    if (ret != SQL_ERROR && _sql->NumRows() != 0)
+    const auto rset = db::preparedStmt("SELECT chars.charid, partyid, allianceid, charname, partyflag, pos_zone, pos_prevzone FROM accounts_parties "
+                                       "LEFT JOIN chars ON accounts_parties.charid = chars.charid WHERE "
+                                       "(allianceid <> 0 AND allianceid = ?) OR partyid = ? ORDER BY partyflag & ?, timestamp",
+                                       m_PAlliance ? m_PAlliance->m_AllianceID : 0, m_PartyID, PARTY_SECOND | PARTY_THIRD);
+    if (rset && rset->rowsCount())
     {
-        while (_sql->NextRow() == SQL_SUCCESS)
+        while (rset->next())
         {
-            memberinfo.emplace_back(CParty::partyInfo_t{ _sql->GetUIntData(0), _sql->GetUIntData(1), _sql->GetUIntData(2),
-                                                         std::string((const char*)_sql->GetData(3)), static_cast<uint16>(_sql->GetUIntData(4)),
-                                                         static_cast<uint16>(_sql->GetUIntData(5)), static_cast<uint16>(_sql->GetUIntData(6)) });
+            memberinfo.emplace_back(CParty::partyInfo_t{
+                .id         = rset->get<uint32>("charid"),
+                .partyid    = rset->get<uint32>("partyid"),
+                .allianceid = rset->get<uint32>("allianceid"),
+                .name       = rset->get<std::string>("charname"),
+                .flags      = rset->get<uint16>("partyflag"),
+                .zone       = rset->get<uint16>("pos_zone"),
+                .prev_zone  = rset->get<uint16>("pos_prevzone"),
+            });
         }
     }
+
     return memberinfo;
 }
 

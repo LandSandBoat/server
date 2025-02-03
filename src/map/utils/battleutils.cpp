@@ -1654,106 +1654,40 @@ namespace battleutils
     // todo: need to penalise attacker's RangedAttack depending on distance from mob. (% decrease)
     float GetRangedDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, int16 bonusRangedAttack)
     {
-        // get ranged attack value
-        uint16 rAttack = 1;
+        float pDIF = 1.0;
 
-        if (PAttacker->objtype == TYPE_PC)
-        {
-            CCharEntity* PChar = (CCharEntity*)PAttacker;
-            CItemWeapon* PItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
-
-            if (PItem != nullptr && PItem->isType(ITEM_WEAPON))
-            {
-                rAttack = PChar->RATT(PItem->getSkillType(), PItem->getILvlSkill());
-            }
-            else
-            {
-                PItem = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
-
-                if (PItem == nullptr || !PItem->isType(ITEM_WEAPON) || (PItem->getSkillType() != SKILL_THROWING))
-                {
-                    ShowDebug("battleutils::GetRangedPDIF Cannot find a valid ranged weapon to calculate PDIF for. ");
-                }
-                else
-                {
-                    rAttack = PChar->RATT(PItem->getSkillType(), PItem->getILvlSkill());
-                }
-            }
-        }
-        else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
-        {
-            rAttack = PAttacker->RATT(SKILL_AUTOMATON_RANGED);
-        }
-        else
-        {
-            // assume mobs capped
-            rAttack = battleutils::GetMaxSkill(SKILL_ARCHERY, JOB_RNG, PAttacker->GetMLevel());
-        }
-
-        rAttack += bonusRangedAttack;
-
-        // get ratio (not capped for RAs)
-        float ratio = (float)rAttack / (float)PDefender->DEF();
-
-        // Ranged damage limit caluclations
-
-        // get weapon cap
         auto* targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_RANGED]);
-        float maxRatio    = 3.25f;
+        uint8 weaponType  = targ_weapon ? targ_weapon->getSkillType() : static_cast<uint8>(SKILL_MARKSMANSHIP); // TODO: does the no-weapon case actually hit?
 
-        // If null ignore the checks and fallback to 1H values
-        if (targ_weapon && targ_weapon->getSkillType() == SKILL_MARKSMANSHIP)
-        {
-            maxRatio = 3.5f;
-        }
+        auto levelCorrectionFunc = lua["xi"]["combat"]["levelCorrection"]["isLevelCorrectedZone"];
+        auto rangedPDIFFunc      = lua["xi"]["combat"]["physical"]["calculateRangedPDIF"];
+        auto luaAttackerEntity   = CLuaBaseEntity(PAttacker);
 
-        // level correct (0.025 not 0.05 like for melee)
-        if (PDefender->GetMLevel() > PAttacker->GetMLevel())
+        if (rangedPDIFFunc.valid() && levelCorrectionFunc.valid())
         {
-            ratio -= 0.025f * (PDefender->GetMLevel() - PAttacker->GetMLevel());
-        }
+            auto levelCorrectionResult = levelCorrectionFunc(luaAttackerEntity);
+            if (!levelCorrectionResult.valid())
+            {
+                sol::error err = levelCorrectionResult;
+                ShowError("battleutils::GetRangedDamageRatio(): %s", err.what());
+                return pDIF;
+            }
 
-        // calculate min/max PDIF
-        float minPdif = 0;
-        float maxPdif = 0;
-
-        if (ratio < 0.9)
-        {
-            minPdif = ratio;
-            maxPdif = (10.0f / 9.0f) * ratio;
-        }
-        else if (ratio <= 1.1)
-        {
-            minPdif = 1;
-            maxPdif = 1;
+            auto rangedPDIFFuncResult = rangedPDIFFunc(luaAttackerEntity, CLuaBaseEntity(PDefender), weaponType, 1.0, isCritical, levelCorrectionResult.get<bool>(0), false, 0.0, false, bonusRangedAttack);
+            if (!rangedPDIFFuncResult.valid())
+            {
+                sol::error err = rangedPDIFFuncResult;
+                ShowError("battleutils::GetRangedDamageRatio(): %s", err.what());
+                return pDIF;
+            }
+            pDIF = rangedPDIFFuncResult.get<float>(0);
         }
         else
         {
-            minPdif = (-3.0f / 19.0f) + ((20.0f / 19.0f) * ratio);
-            maxPdif = ratio;
+            ShowError("battleutils::GetRangedDamageRatio() failed to run lua calls");
         }
 
-        // Apply damage limit modifier
-        float damageLimitPlus = PAttacker->getMod(Mod::DAMAGE_LIMIT) / 100.0f;
-        float damageLimitPerc = (100.0f + PAttacker->getMod(Mod::DAMAGE_LIMITP)) / 100.0f;
-        maxRatio              = (maxRatio + damageLimitPlus) * damageLimitPerc;
-
-        minPdif = std::clamp<float>(minPdif, 0, maxRatio);
-        maxPdif = std::clamp<float>(maxPdif, 0, maxRatio);
-
-        // return random number between the two
-        float pdif = xirand::GetRandomNumber(minPdif, maxPdif);
-
-        if (isCritical)
-        {
-            pdif *= 1.25;
-            int16 criticaldamage =
-                PAttacker->getMod(Mod::CRIT_DMG_INCREASE) + PAttacker->getMod(Mod::RANGED_CRIT_DMG_INCREASE) - PDefender->getMod(Mod::CRIT_DEF_BONUS);
-            criticaldamage = std::clamp<int16>(criticaldamage, 0, 100);
-            pdif *= ((100 + criticaldamage) / 100.0f);
-        }
-
-        return pdif;
+        return pDIF;
     }
 
     int16 CalculateBaseTP(int32 delay)

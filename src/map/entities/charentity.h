@@ -462,6 +462,7 @@ public:
     //     : disambiguate between entities who have been rebuilt (players, dynamic entities) and have the same ID.
     xi::optional<EntityID_t> WideScanTarget;
 
+    // NOTE: These are all keyed by id
     SpawnIDList_t SpawnPCList;    // list of visible characters
     SpawnIDList_t SpawnMOBList;   // list of visible monsters
     SpawnIDList_t SpawnPETList;   // list of visible pets

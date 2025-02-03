@@ -98,10 +98,12 @@ public:
     auto GetNewCharTargID() -> uint16;
     void AssignDynamicTargIDandLongID(CBaseEntity* PEntity);
     void EraseStaleDynamicTargIDs();
+    auto GetUsedDynamicTargIDsCount() const -> std::size_t;
 
 private:
     CZone* m_zone;
 
+    // NOTE: These are all keyed by targid
     EntityList_t m_allyList;
     EntityList_t m_mobList;
     EntityList_t m_petList;

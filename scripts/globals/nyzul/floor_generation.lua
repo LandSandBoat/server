@@ -1062,63 +1062,63 @@ local layoutSpawnPoints = -- Spawnpoints by layout.
 local pTableEnemyLeaders =
 {
     -- [Floor_Section] = { first_mob_id, last_mob_id },
-    [  1] = { ID.mob[51].MOKKE,           ID.mob[51].LONG_HORNED_CHARIOT }, -- Regular enemy leaders. Can appear on all floors, except floor-20 multiples.
-    [ 40] = { ID.mob[51].ADAMANTOISE,     ID.mob[51].ADAMANTOISE + 2     }, -- Floors 1 to 40 bosses. Original Land Kings.
-    [100] = { ID.mob[51].ADAMANTOISE + 3, ID.mob[51].ADAMANTOISE + 5     }, -- Floors 60 to 100 bosses. ToAU Land Kings.
+    [  1] = { ID.mob.LEADER_OFFSET,   ID.mob.LEADER_OFFSET + 24 }, -- Regular enemy leaders. Can appear on all floors, except floor-20 multiples.
+    [ 40] = { ID.mob.BOSS_OFFSET,     ID.mob.BOSS_OFFSET + 2    }, -- Floors 1 to 40 bosses. Original Land Kings.
+    [100] = { ID.mob.BOSS_OFFSET + 3, ID.mob.BOSS_OFFSET + 5    }, -- Floors 60 to 100 bosses. ToAU Land Kings.
 }
 
 local pTableSpecifiedMobs =
 {
     -- [Mob family] = { first_mob_id, last_mob_id },
-    [1] = { ID.mob[51].OFFSET_SPECIFIED,      ID.mob[51].OFFSET_SPECIFIED +  4 }, -- Heraldic Imp x5
-    [2] = { ID.mob[51].OFFSET_SPECIFIED +  5, ID.mob[51].OFFSET_SPECIFIED +  9 }, -- Psycheflayer x5
-    [3] = { ID.mob[51].OFFSET_SPECIFIED + 10, ID.mob[51].OFFSET_SPECIFIED + 14 }, -- Poroggo Gent x5
-    [4] = { ID.mob[51].OFFSET_SPECIFIED + 15, ID.mob[51].OFFSET_SPECIFIED + 19 }, -- Ebony Pudding x5
-    [5] = { ID.mob[51].OFFSET_SPECIFIED + 20, ID.mob[51].OFFSET_SPECIFIED + 21 }, -- Qiqirn_Treasure_Hunter x2
-    [6] = { ID.mob[51].OFFSET_SPECIFIED + 22, ID.mob[51].OFFSET_SPECIFIED + 24 }, -- Qiqirn_Archaeologist x3
-    [7] = { ID.mob[51].OFFSET_SPECIFIED + 25, ID.mob[51].OFFSET_SPECIFIED + 29 }, -- Racing_Chariot x5
+    [1] = { ID.mob.SPECIFIED_OFFSET,      ID.mob.SPECIFIED_OFFSET +  4 }, -- Heraldic Imp x5
+    [2] = { ID.mob.SPECIFIED_OFFSET +  5, ID.mob.SPECIFIED_OFFSET +  9 }, -- Psycheflayer x5
+    [3] = { ID.mob.SPECIFIED_OFFSET + 10, ID.mob.SPECIFIED_OFFSET + 14 }, -- Poroggo Gent x5
+    [4] = { ID.mob.SPECIFIED_OFFSET + 15, ID.mob.SPECIFIED_OFFSET + 19 }, -- Ebony Pudding x5
+    [5] = { ID.mob.SPECIFIED_OFFSET + 20, ID.mob.SPECIFIED_OFFSET + 21 }, -- Qiqirn_Treasure_Hunter x2
+    [6] = { ID.mob.SPECIFIED_OFFSET + 22, ID.mob.SPECIFIED_OFFSET + 24 }, -- Qiqirn_Archaeologist x3
+    [7] = { ID.mob.SPECIFIED_OFFSET + 25, ID.mob.SPECIFIED_OFFSET + 29 }, -- Racing_Chariot x5
 }
 
 local pTableEvenFloorRandomNMs =
 {
     -- [Floor_Section] = { first_mob_id, last_mob_id },
-    [1] = { ID.mob[51].OFFSET_NM,      ID.mob[51].OFFSET_NM +  8 }, -- Floors 1 to 20.
-    [2] = { ID.mob[51].OFFSET_NM + 18, ID.mob[51].OFFSET_NM + 26 }, -- Floors 21 to 40.
-    [3] = { ID.mob[51].OFFSET_NM + 36, ID.mob[51].OFFSET_NM + 44 }, -- Floors 41 to 60.
-    [4] = { ID.mob[51].OFFSET_NM + 54, ID.mob[51].OFFSET_NM + 62 }, -- Floors 61 to 80.
-    [5] = { ID.mob[51].OFFSET_NM + 72, ID.mob[51].OFFSET_NM + 80 }, -- Floors 81 to 100.
+    [1] = { ID.mob.NM_OFFSET,      ID.mob.NM_OFFSET +  8 }, -- Floors 1 to 20.
+    [2] = { ID.mob.NM_OFFSET + 18, ID.mob.NM_OFFSET + 26 }, -- Floors 21 to 40.
+    [3] = { ID.mob.NM_OFFSET + 36, ID.mob.NM_OFFSET + 44 }, -- Floors 41 to 60.
+    [4] = { ID.mob.NM_OFFSET + 54, ID.mob.NM_OFFSET + 62 }, -- Floors 61 to 80.
+    [5] = { ID.mob.NM_OFFSET + 72, ID.mob.NM_OFFSET + 80 }, -- Floors 81 to 100.
 }
 
 local pTableOddFloorRandomNMs =
 {
     -- [Floor_Section] = { first_mob_id, last_mob_id },
-    [1] = { ID.mob[51].OFFSET_NM +  9, ID.mob[51].OFFSET_NM + 17 }, -- Floors 1 to 20.
-    [2] = { ID.mob[51].OFFSET_NM + 27, ID.mob[51].OFFSET_NM + 35 }, -- Floors 21 to 40.
-    [3] = { ID.mob[51].OFFSET_NM + 45, ID.mob[51].OFFSET_NM + 53 }, -- Floors 41 to 60.
-    [4] = { ID.mob[51].OFFSET_NM + 63, ID.mob[51].OFFSET_NM + 71 }, -- Floors 61 to 80.
-    [5] = { ID.mob[51].OFFSET_NM + 81, ID.mob[51].OFFSET_NM + 89 }, -- Floors 81 to 100.
+    [1] = { ID.mob.NM_OFFSET +  9, ID.mob.NM_OFFSET + 17 }, -- Floors 1 to 20.
+    [2] = { ID.mob.NM_OFFSET + 27, ID.mob.NM_OFFSET + 35 }, -- Floors 21 to 40.
+    [3] = { ID.mob.NM_OFFSET + 45, ID.mob.NM_OFFSET + 53 }, -- Floors 41 to 60.
+    [4] = { ID.mob.NM_OFFSET + 63, ID.mob.NM_OFFSET + 71 }, -- Floors 61 to 80.
+    [5] = { ID.mob.NM_OFFSET + 81, ID.mob.NM_OFFSET + 89 }, -- Floors 81 to 100.
 }
 
 local pTableFloorRandomEntities =
 {
     -- [Mob family] = { first_mob_id, last_mob_id },
-    [ 1] = { ID.mob[51].OFFSET_REGULAR,       ID.mob[51].OFFSET_REGULAR +  11 }, -- Aquans
-    [ 2] = { ID.mob[51].OFFSET_REGULAR +  12, ID.mob[51].OFFSET_REGULAR +  23 }, -- Amorphs
-    [ 3] = { ID.mob[51].OFFSET_REGULAR +  24, ID.mob[51].OFFSET_REGULAR +  35 }, -- Arcana
-    [ 4] = { ID.mob[51].OFFSET_REGULAR +  36, ID.mob[51].OFFSET_REGULAR +  47 }, -- Undead
-    [ 5] = { ID.mob[51].OFFSET_REGULAR +  48, ID.mob[51].OFFSET_REGULAR +  59 }, -- Vermin
-    [ 6] = { ID.mob[51].OFFSET_REGULAR +  60, ID.mob[51].OFFSET_REGULAR +  71 }, -- Demons
-    [ 7] = { ID.mob[51].OFFSET_REGULAR +  72, ID.mob[51].OFFSET_REGULAR +  83 }, -- Dragons
-    [ 8] = { ID.mob[51].OFFSET_REGULAR +  84, ID.mob[51].OFFSET_REGULAR +  95 }, -- Birds
-    [ 9] = { ID.mob[51].OFFSET_REGULAR +  96, ID.mob[51].OFFSET_REGULAR + 107 }, -- Beasts
-    [10] = { ID.mob[51].OFFSET_REGULAR + 108, ID.mob[51].OFFSET_REGULAR + 119 }, -- Plantoids
-    [11] = { ID.mob[51].OFFSET_REGULAR + 120, ID.mob[51].OFFSET_REGULAR + 131 }, -- Lizards
-    [12] = { ID.mob[51].OFFSET_REGULAR + 132, ID.mob[51].OFFSET_REGULAR + 143 }, -- Amorphs 2
-    [13] = { ID.mob[51].OFFSET_REGULAR + 144, ID.mob[51].OFFSET_REGULAR + 155 }, -- Mixed
-    [14] = { ID.mob[51].OFFSET_REGULAR + 156, ID.mob[51].OFFSET_REGULAR + 167 }, -- Mixed 2
-    [15] = { ID.mob[51].OFFSET_REGULAR + 168, ID.mob[51].OFFSET_REGULAR + 179 }, -- Amorphs 3
-    [16] = { ID.mob[51].OFFSET_REGULAR + 180, ID.mob[51].OFFSET_REGULAR + 191 }, -- Arcana 2
-    [17] = { ID.mob[51].OFFSET_GEARS,         ID.mob[51].OFFSET_GEARS   +   5 }, -- Gears
+    [ 1] = { ID.mob.MOB_OFFSET,       ID.mob.MOB_OFFSET +  11 }, -- Aquans
+    [ 2] = { ID.mob.MOB_OFFSET +  12, ID.mob.MOB_OFFSET +  23 }, -- Amorphs
+    [ 3] = { ID.mob.MOB_OFFSET +  24, ID.mob.MOB_OFFSET +  35 }, -- Arcana
+    [ 4] = { ID.mob.MOB_OFFSET +  36, ID.mob.MOB_OFFSET +  47 }, -- Undead
+    [ 5] = { ID.mob.MOB_OFFSET +  48, ID.mob.MOB_OFFSET +  59 }, -- Vermin
+    [ 6] = { ID.mob.MOB_OFFSET +  60, ID.mob.MOB_OFFSET +  71 }, -- Demons
+    [ 7] = { ID.mob.MOB_OFFSET +  72, ID.mob.MOB_OFFSET +  83 }, -- Dragons
+    [ 8] = { ID.mob.MOB_OFFSET +  84, ID.mob.MOB_OFFSET +  95 }, -- Birds
+    [ 9] = { ID.mob.MOB_OFFSET +  96, ID.mob.MOB_OFFSET + 107 }, -- Beasts
+    [10] = { ID.mob.MOB_OFFSET + 108, ID.mob.MOB_OFFSET + 119 }, -- Plantoids
+    [11] = { ID.mob.MOB_OFFSET + 120, ID.mob.MOB_OFFSET + 131 }, -- Lizards
+    [12] = { ID.mob.MOB_OFFSET + 132, ID.mob.MOB_OFFSET + 143 }, -- Amorphs 2
+    [13] = { ID.mob.MOB_OFFSET + 144, ID.mob.MOB_OFFSET + 155 }, -- Mixed
+    [14] = { ID.mob.MOB_OFFSET + 156, ID.mob.MOB_OFFSET + 167 }, -- Mixed 2
+    [15] = { ID.mob.MOB_OFFSET + 168, ID.mob.MOB_OFFSET + 179 }, -- Amorphs 3
+    [16] = { ID.mob.MOB_OFFSET + 180, ID.mob.MOB_OFFSET + 191 }, -- Arcana 2
+    [17] = { ID.mob.GEAR_OFFSET + 2,  ID.mob.GEAR_OFFSET + 7  }, -- Gears
 }
 
 -----------------------------------
@@ -1214,9 +1214,9 @@ xi.nyzul.prepareMobs = function(instance)
             floorBoss = math.random(pTableEnemyLeaders[100][1], pTableEnemyLeaders[100][2])
         end
 
-        GetMobByID(ID.mob[51].ARCHAIC_RAMPART1, instance):setSpawn(-36, 0, -362, 0)
+        GetMobByID(ID.mob.ARCHAIC_RAMPART_OFFSET, instance):setSpawn(-36, 0, -362, 0)
         GetMobByID(floorBoss, instance):setSpawn(-55.000, 1, -380.000, 250)
-        SpawnMob(ID.mob[51].ARCHAIC_RAMPART1, instance)
+        SpawnMob(ID.mob.ARCHAIC_RAMPART_OFFSET, instance)
         SpawnMob(floorBoss, instance)
 
     -- All other floors except free.
@@ -1240,8 +1240,8 @@ xi.nyzul.prepareMobs = function(instance)
                 spawnPointIndex = math.random(1, #dTableSpawnPoint)
                 spawnPoint      = dTableSpawnPoint[spawnPointIndex]
 
-                if floorBoss == ID.mob[51].MOKKE + 18 then
-                    floorBoss = ID.mob[51].MOKKE + 17 + (math.random(0, 1) * 2)
+                if floorBoss == ID.mob.LEADER_OFFSET + 18 then
+                    floorBoss = ID.mob.LEADER_OFFSET + 17 + math.random(0, 1) * 2
                 end
 
                 -- Spawn Mob.
@@ -1296,8 +1296,8 @@ xi.nyzul.prepareMobs = function(instance)
                     spawnPoint      = dTableSpawnPoint[spawnPointIndex]
 
                     -- Spawn Mob.
-                    GetMobByID(ID.mob[51].DAHAK, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
-                    SpawnMob(ID.mob[51].DAHAK, instance)
+                    GetMobByID(ID.mob.DAHAK, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
+                    SpawnMob(ID.mob.DAHAK, instance)
 
                     -- Remove table entry.
                     table.remove(dTableSpawnPoint, spawnPointIndex)
@@ -1320,8 +1320,8 @@ xi.nyzul.prepareMobs = function(instance)
             spawnPoint      = dTableSpawnPoint[spawnPointIndex]
 
             -- Spawn Mob.
-            GetMobByID(ID.mob[51].ARCHAIC_RAMPART1, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
-            SpawnMob(ID.mob[51].ARCHAIC_RAMPART1, instance)
+            GetMobByID(ID.mob.ARCHAIC_RAMPART_OFFSET, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
+            SpawnMob(ID.mob.ARCHAIC_RAMPART_OFFSET, instance)
 
             -- Remove table entry.
             table.remove(dTableSpawnPoint, spawnPointIndex)
@@ -1337,8 +1337,8 @@ xi.nyzul.prepareMobs = function(instance)
             spawnPoint      = dTableSpawnPoint[spawnPointIndex]
 
             -- Spawn Mob.
-            GetMobByID(ID.mob[51].ARCHAIC_RAMPART2, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
-            SpawnMob(ID.mob[51].ARCHAIC_RAMPART2, instance)
+            GetMobByID(ID.mob.ARCHAIC_RAMPART_OFFSET + 1, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
+            SpawnMob(ID.mob.ARCHAIC_RAMPART_OFFSET + 1, instance)
 
             -- Remove table entry.
             table.remove(dTableSpawnPoint, spawnPointIndex)

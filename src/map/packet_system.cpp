@@ -3386,7 +3386,8 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
                 else
                 {
-                    ShowDebug("(Alliance)Building invite packet to send to lobby server from %s to (%d)", PChar->getName(), charid);
+                    ShowDebug("(Alliance) Building invite packet to send to lobby server from %s to (%d)", PChar->getName(), charid);
+
                     // on another server (hopefully)
                     uint8 packetData[12]{};
                     ref<uint32>(packetData, 0)  = charid;
@@ -3395,7 +3396,7 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
                     ref<uint16>(packetData, 10) = PChar->targid;
                     message::send(MSG_PT_INVITE, packetData, sizeof(packetData), std::make_unique<CPartyInvitePacket>(charid, targid, PChar, INVITE_ALLIANCE));
 
-                    ShowDebug("(Alliance)Sent invite packet to lobby server from %s to (%d)", PChar->getName(), charid);
+                    ShowDebug("(Alliance) Sent invite packet to lobby server from %s to (%d)", PChar->getName(), charid);
                 }
             }
             break;
@@ -3703,6 +3704,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
     CCharEntity* PInviter = zoneutils::GetCharFromWorld(PChar->InvitePending.id, PChar->InvitePending.targid);
 
     uint8 InviteAnswer = data.ref<uint8>(0x04);
@@ -3798,7 +3800,7 @@ void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PCh
     }
     else
     {
-        ShowDebug("(Party)Building invite packet to send to lobby server for %s", PChar->getName());
+        ShowDebug("(Party) Building invite packet to send to lobby server for %s", PChar->getName());
 
         uint8 packetData[13]{};
         ref<uint32>(packetData, 0)  = PChar->InvitePending.id;
@@ -3811,7 +3813,7 @@ void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PCh
 
         message::send(MSG_PT_INV_RES, packetData, sizeof(packetData), nullptr);
 
-        ShowDebug("(Party)Sent invite packet to send to lobby server for %s", PChar->getName());
+        ShowDebug("(Party) Sent invite packet to send to lobby server for %s", PChar->getName());
     }
     PChar->InvitePending.clean();
 }
@@ -3825,6 +3827,7 @@ void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x076(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
     if (PChar->PParty)
     {
         PChar->PParty->ReloadPartyMembers(PChar);
@@ -3845,6 +3848,7 @@ void SmallPacket0x076(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
     switch (data.ref<uint8>(0x14))
     {
         case 0: // party
@@ -3854,7 +3858,7 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
                 const auto memberName = escapeString(asStringFromUntrustedSource(data[0x04], 15));
                 const auto permission = data.ref<uint8>(0x15);
 
-                ShowDebug(fmt::format("(Party)Altering permissions of {} to {}", memberName, permission));
+                ShowDebug(fmt::format("(Party) Altering permissions of {} to {}", memberName, permission));
                 PChar->PParty->AssignPartyRole(memberName, permission);
             }
         }
@@ -3898,8 +3902,8 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 const auto memberName = escapeString(asStringFromUntrustedSource(data[0x04], 15));
 
-                ShowDebug(fmt::format("(Alliance)Changing leader to {}", memberName));
-                PChar->PParty->m_PAlliance->assignAllianceLeader(memberName.c_str());
+                ShowDebug(fmt::format("(Alliance) Changing leader to {}", memberName));
+                PChar->PParty->m_PAlliance->assignAllianceLeader(memberName);
 
                 uint8 allianceData[4]{};
                 ref<uint32>(allianceData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;

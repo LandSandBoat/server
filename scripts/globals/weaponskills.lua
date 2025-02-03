@@ -321,7 +321,7 @@ local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcPara
     if calcParams.attackType == xi.attackType.PHYSICAL then
         calcParams.pdif = xi.combat.physical.calculateMeleePDIF(attacker, target, calcParams.attackInfo.weaponType, atkMultiplier, criticalHit, applyLevelCorrection, ignoresDefense, ignoreDefMultiplier, true, calcParams.attackInfo.slot)
     else
-        calcParams.pdif = xi.combat.physical.calculateRangedPDIF(attacker, target, calcParams.skillType, atkMultiplier, criticalHit, applyLevelCorrection, ignoresDefense, ignoreDefMultiplier, true)
+        calcParams.pdif = xi.combat.physical.calculateRangedPDIF(attacker, target, calcParams.skillType, atkMultiplier, criticalHit, applyLevelCorrection, ignoresDefense, ignoreDefMultiplier, true, 0)
     end
 
     hitDamage = (dmg + consumeManaBonus(attacker)) * ftp * calcParams.pdif

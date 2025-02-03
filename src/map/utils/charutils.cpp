@@ -6350,17 +6350,7 @@ namespace charutils
             }
 
             // once parties and alliances have been reassembled, reload the party/parties
-            if (PChar->PParty->m_PAlliance)
-            {
-                for (auto* party : PChar->PParty->m_PAlliance->partyList)
-                {
-                    party->ReloadParty();
-                }
-            }
-            else
-            {
-                PChar->PParty->ReloadParty();
-            }
+            PChar->PParty->ReloadParty();
         }
         else
         {

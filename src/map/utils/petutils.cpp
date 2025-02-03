@@ -1292,6 +1292,7 @@ namespace petutils
                 if ((state && state->GetAbility()->getID() == ABILITY_LEAVE) || PChar->loc.zoning || PChar->isDead())
                 {
                     PMob->PEnmityContainer->Clear();
+                    PMob->SetBattleTargetID(0);
                     PMob->m_OwnerID.clean();
                     PMob->updatemask |= UPDATE_STATUS;
                 }

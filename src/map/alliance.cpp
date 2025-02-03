@@ -85,9 +85,9 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
     }
     else
     {
-        _sql->Query("UPDATE accounts_parties JOIN accounts_sessions USING (charid) \
-                        SET allianceid = 0, partyflag = partyflag & ~%d \
-                        WHERE allianceid = %u AND IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u)",
+        _sql->Query("UPDATE accounts_parties JOIN accounts_sessions USING (charid) "
+                    "SET allianceid = 0, partyflag = partyflag & ~%d "
+                    "WHERE allianceid = %u AND IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u)",
                     ALLIANCE_LEADER | PARTY_SECOND | PARTY_THIRD, m_AllianceID, map_ip.s_addr, map_port, map_ip.s_addr, map_port);
 
         // Remove all parties. The `delParty` call removes a party from `partyList`.
@@ -151,9 +151,10 @@ void CAlliance::removeParty(CParty* party)
                               m_AllianceID, PARTY_LEADER, party->GetPartyID());
         if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            std::string newLeader((const char*)_sql->GetData(0));
-            assignAllianceLeader(newLeader.c_str());
+            const auto newLeader = _sql->GetStringData(0);
+            assignAllianceLeader(newLeader);
         }
+
         if (this->getMainParty() == party)
         {
             dissolveAlliance();
@@ -264,6 +265,7 @@ void CAlliance::addParty(CParty* party)
     }
     _sql->Query("UPDATE accounts_parties SET allianceid = %u, partyflag = partyflag | %d WHERE partyid = %u", m_AllianceID, newparty,
                 party->GetPartyID());
+
     party->SetPartyNumber(newparty);
 
     uint8 data[4]{};
@@ -290,7 +292,9 @@ void CAlliance::addParty(uint32 partyid) const
             }
         }
     }
+
     _sql->Query("UPDATE accounts_parties SET allianceid = %u, partyflag = partyflag | %d WHERE partyid = %u", m_AllianceID, newparty, partyid);
+
     uint8 data[4]{};
     ref<uint32>(data, 0) = m_AllianceID;
     message::send(MSG_ALLIANCE_RELOAD, data, sizeof(data), nullptr);
@@ -320,20 +324,19 @@ void CAlliance::setMainParty(CParty* aLeader)
     this->aLeader = aLeader;
 }
 
-void CAlliance::assignAllianceLeader(const char* name)
+void CAlliance::assignAllianceLeader(const std::string& name)
 {
-    int ret = _sql->Query(
-        "SELECT chars.charid from accounts_sessions JOIN chars USING (charid) JOIN accounts_parties USING (charid) "
-        "WHERE charname = '%s' AND allianceid = %d AND partyflag & %d",
-        name, m_AllianceID, PARTY_LEADER);
+    const auto rset = db::preparedStmt("SELECT chars.charid from accounts_sessions JOIN chars USING (charid) JOIN accounts_parties USING (charid) "
+                                       "WHERE charname = ? AND allianceid = ? AND partyflag & ?",
+                                       name, m_AllianceID, PARTY_LEADER);
 
-    if (ret != SQL_ERROR && _sql->NumRows() > 0 && _sql->NextRow() == SQL_SUCCESS)
+    if (rset && rset->rowsCount() && rset->next())
     {
-        int charid = _sql->GetUIntData(0);
+        const auto charid = rset->get<uint32>("charid");
 
-        _sql->Query("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE allianceid = %u AND partyflag & %d", ALLIANCE_LEADER, m_AllianceID,
-                    ALLIANCE_LEADER);
-        _sql->Query("UPDATE accounts_parties SET allianceid = %u WHERE allianceid = %u", charid, m_AllianceID);
+        db::preparedStmt("UPDATE accounts_parties SET partyflag = partyflag & ~? WHERE allianceid = ? AND partyflag & ?", ALLIANCE_LEADER, m_AllianceID, ALLIANCE_LEADER);
+        db::preparedStmt("UPDATE accounts_parties SET allianceid = ? WHERE allianceid = ?", charid, m_AllianceID);
+
         m_AllianceID = charid;
 
         // in case leader's on another server
@@ -348,6 +351,6 @@ void CAlliance::assignAllianceLeader(const char* name)
             }
         }
 
-        _sql->Query("UPDATE accounts_parties SET partyflag = partyflag | %d WHERE charid = %u", ALLIANCE_LEADER, charid);
+        db::preparedStmt("UPDATE accounts_parties SET partyflag = partyflag | ? WHERE charid = ?", ALLIANCE_LEADER, charid);
     }
 }
