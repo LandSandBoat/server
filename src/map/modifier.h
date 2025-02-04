@@ -527,7 +527,7 @@ enum class Mod
     // Ranger
     CAMOUFLAGE_DURATION     = 98,   // Camouflage duration in percents
     RECYCLE                 = 305,  // Percent chance to recycle
-    SNAP_SHOT               = 365,  // Percent reduction to range attack delay
+    SNAPSHOT                = 365,  // Percent reduction to range attack delay
     RAPID_SHOT              = 359,  // Percent chance to proc rapid shot
     WIDESCAN                = 340,  //
     BARRAGE_ACC             = 420,  // Barrage accuracy

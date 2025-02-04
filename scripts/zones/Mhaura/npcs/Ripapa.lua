@@ -86,11 +86,9 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         player:setCharVar('TrialByLightning_date', 0)
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_LIGHTNING)
+        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_LIGHTNING)
     elseif csid == 10024 then
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_LIGHTNING)
+        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_LIGHTNING)
     elseif csid == 10019 then
         local item = 0
         if option == 1 then

@@ -5,8 +5,6 @@
 -- Involved in Quests: Cook's Pride
 -- !pos -105 -2 69 238
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WATERS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -41,8 +39,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
     elseif csid == 10001 then
         player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
-        player:addKeyItem(xi.ki.SUPER_SOUP_POT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SUPER_SOUP_POT)
+        npcUtil.giveKeyItem(player, xi.ki.SUPER_SOUP_POT)
         player:addFame(xi.fameArea.WINDURST, 30)
         player:tradeComplete()
     end

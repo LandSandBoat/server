@@ -10,7 +10,6 @@
 -- '!'            : !pos 211 2 -104 149
 -- Papal Chambers : !pos 131 -11 122 231
 -----------------------------------
-local davoiID            = zones[xi.zone.DAVOI]
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
@@ -84,8 +83,7 @@ mission.sections =
                         xPos > 210 and xPos < 212
                     then
                         player:setMissionStatus(player:getNation(), 2)
-                        player:addKeyItem(xi.ki.LOST_DOCUMENT)
-                        return mission:messageSpecial(davoiID.text.KEYITEM_OBTAINED, xi.ki.LOST_DOCUMENT)
+                        return mission:keyItem(xi.ki.LOST_DOCUMENT)
                     end
                 end,
             },

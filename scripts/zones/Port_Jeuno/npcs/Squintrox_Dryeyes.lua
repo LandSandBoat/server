@@ -257,10 +257,9 @@ local function tradeForKeyItem(player, trade, ki)
         os.time() >= player:getCharVar(charVar)
     then
         player:tradeComplete()
-        player:addKeyItem(ki)
         player:setCharVar(charVar, getMidnight())
         player:messageSpecial(ID.text.DRYEYES_2)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
+        npcUtil.giveKeyItem(player, ki)
         return true
     else
         player:messageSpecial(ID.text.DRYEYES_3, ki)
@@ -315,10 +314,9 @@ local function takeReqKeyItems(player, ki)
         end
     end
 
-    player:addKeyItem(ki)
     player:setCharVar(entry.charVar, getMidnight())
     player:showText(player, ID.text.DRYEYES_2)
-    player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
+    npcUtil.giveKeyItem(player, ki)
 end
 
 entity.onTrade = function(player, npc, trade)

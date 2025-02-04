@@ -42,8 +42,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 14 then
-        player:addKeyItem(xi.ki.MOONDROP)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MOONDROP)
+        npcUtil.giveKeyItem(player, xi.ki.MOONDROP)
         player:setCharVar('Searching_AgasKilled', 0)
     end
 end

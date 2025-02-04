@@ -4,8 +4,6 @@
 --  Involved With Quest: 'A Thirst for the Ages'
 -- !pos -101 3 9 256
 -----------------------------------
-local ID = zones[xi.zone.WESTERN_ADOULIN]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -24,9 +22,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 5053 then
-        -- Progresses Quest: 'A Thirst for the Ages'
-        player:addKeyItem(xi.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)
+        npcUtil.giveKeyItem(player, xi.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)
     end
 end
 

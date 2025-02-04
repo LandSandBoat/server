@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Osker
--- Involved in Quest: Chocobo's Wounds
------------------------------------
-local ID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
@@ -46,8 +43,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar('ANewDawn_Event', 3)
         end
     elseif csid == 148 then
-        player:addKeyItem(xi.ki.TAMERS_WHISTLE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TAMERS_WHISTLE)
+        npcUtil.giveKeyItem(player, xi.ki.TAMERS_WHISTLE)
         player:setCharVar('ANewDawn_Event', 4)
     end
 end

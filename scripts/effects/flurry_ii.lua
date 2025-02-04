@@ -8,7 +8,7 @@ effectObject.onEffectGain = function(target, effect)
     -- Overwrites regular Haste Effect
     target:delStatusEffect(xi.effect.HASTE)
 
-    effect:addMod(xi.mod.SNAP_SHOT, effect:getPower())
+    effect:addMod(xi.mod.SNAPSHOT, effect:getPower())
 end
 
 effectObject.onEffectTick = function(target, effect)

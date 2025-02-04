@@ -328,7 +328,7 @@
     JUMP_ATT_BONUS               = 362, // ATT% bonus for jump + high jump
     HIGH_JUMP_ENMITY_REDUCTION   = 363, // for gear that reduces more enmity from high jump
     REWARD_HP_BONUS              = 364, // Percent to add to reward HP healed. (364)
-    SNAP_SHOT                    = 365, // Percent reduction to range attack delay
+    SNAPSHOT                     = 365, // Percent reduction to range attack delay
     MAIN_DMG_RATING              = 366, // adds damage rating to main hand weapon (maneater/blau dolch etc hidden effects)
     SUB_DMG_RATING               = 367, // adds damage rating to off hand weapon
     REGAIN                       = 368, // auto regain TP (from items) | this is multiplied by 10 e.g. 20 is 2% TP

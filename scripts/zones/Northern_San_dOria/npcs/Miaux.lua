@@ -4,8 +4,6 @@
 -- Type: Quest Giver
 -- !pos -169.127 2.999 158.677 231
 -----------------------------------
-local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -29,7 +27,7 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(69)
     elseif aCraftsmansWork == xi.questStatus.QUEST_ACCEPTED then
-            player:startEvent(70)
+        player:startEvent(70)
     elseif quotasStatus == 2 then
         player:startEvent(67) -- I found this earring.
     elseif quotasStatus == 3 or quotasStatus == 4 then
@@ -49,19 +47,14 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('has_seen_drgaf1_quest_already', 0)
         player:setCharVar('aCraftsmanWork', 1)
     elseif csid == 70 then -- This is only if player has Altepa Polishing Stone
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.PEREGRINE)-- Peregrine (DRG AF1)
-        else
+        if npcUtil.giveItem(player, xi.item.PEREGRINE) then
             player:setCharVar('aCraftsmanWork', 0)
             player:delKeyItem(xi.ki.ALTEPA_POLISHING_STONE)
-            player:addItem(xi.item.PEREGRINE)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.PEREGRINE) -- Peregrine (DRG AF1)
             player:addFame(xi.fameArea.SANDORIA, 20)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMANS_WORK)
         end
     elseif csid == 67 then
-        player:addKeyItem(xi.ki.SHINY_EARRING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SHINY_EARRING)
+        npcUtil.giveKeyItem(player, xi.ki.SHINY_EARRING)
         player:setCharVar('ChasingQuotas_Progress', 3)
     end
 end

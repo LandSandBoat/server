@@ -4,8 +4,6 @@
 -- Type: Assault
 -- !pos -208.720 -12.889 -779.713 52
 -----------------------------------
-local ID = zones[xi.zone.BHAFLAU_THICKETS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -35,8 +33,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- ASSAULT
     if csid == 512 and option == 1 then
         player:delCurrency('imperial_standing', 50)
-        player:addKeyItem(xi.ki.ASSAULT_ARMBAND)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ASSAULT_ARMBAND)
+        npcUtil.giveKeyItem(player, xi.ki.ASSAULT_ARMBAND)
     end
 end
 

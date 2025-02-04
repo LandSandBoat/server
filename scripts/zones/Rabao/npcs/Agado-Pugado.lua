@@ -89,11 +89,9 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
         player:setCharVar('TrialByWind_date', 0)
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_WIND)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WIND)
+        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_WIND)
     elseif csid == 107 then
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_WIND)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WIND)
+        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_WIND)
     elseif csid == 69 then
         local item = 0
         if option == 1 then

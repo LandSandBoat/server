@@ -4,20 +4,15 @@
 -- Involved in Quest: To Cure a Cough
 -- !pos -115.830 -0.427 -184.289 149
 -----------------------------------
-local ID = zones[xi.zone.DAVOI]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local toCureaCough = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
-
     if
-        toCureaCough == xi.questStatus.QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH) == xi.questStatus.QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.THYME_MOSS)
     then
-        player:addKeyItem(xi.ki.THYME_MOSS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.THYME_MOSS)
+        npcUtil.giveKeyItem(player, xi.ki.THYME_MOSS)
     end
 end
 

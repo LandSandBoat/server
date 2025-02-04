@@ -4,8 +4,6 @@
 -- Corsair AF2 and AF3 quests
 -- !pos -14.687 0.000 25.114 53
 -----------------------------------
-local ID = zones[xi.zone.NASHMAU]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -62,16 +60,13 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 282 then
         if option == 1 then
-            player:addKeyItem(xi.ki.LELEROONS_LETTER_GREEN)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LELEROONS_LETTER_GREEN)
+            npcUtil.giveKeyItem(player, xi.ki.LELEROONS_LETTER_GREEN)
             player:setCharVar('LeleroonsLetterGreen', 1)
         elseif option == 2 then
-            player:addKeyItem(xi.ki.LELEROONS_LETTER_BLUE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LELEROONS_LETTER_BLUE)
+            npcUtil.giveKeyItem(player, xi.ki.LELEROONS_LETTER_BLUE)
             player:setCharVar('LeleroonsLetterBlue', 1)
         elseif option == 3 then
-            player:addKeyItem(xi.ki.LELEROONS_LETTER_RED)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LELEROONS_LETTER_RED)
+            npcUtil.giveKeyItem(player, xi.ki.LELEROONS_LETTER_RED)
             player:setCharVar('LeleroonsLetterRed', 1)
         end
     end

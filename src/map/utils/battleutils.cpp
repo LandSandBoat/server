@@ -5884,13 +5884,13 @@ namespace battleutils
 
     /************************************************************************
      *                                                                       *
-     *  Get the Snapshot shot time reduction                                 *
+     *  Reduce input delay by Snapshot and Velocity shot                     *
      *                                                                       *
      ************************************************************************/
 
-    int16 GetSnapshotReduction(CBattleEntity* battleEntity, int16 delay)
+    int16 GetRangedDelayReduction(CBattleEntity* battleEntity, int16 delay)
     {
-        auto SnapShotReductionPercent{ battleEntity->getMod(Mod::SNAP_SHOT) };
+        auto SnapShotReductionPercent{ battleEntity->getMod(Mod::SNAPSHOT) };
 
         if (auto* PChar = dynamic_cast<CCharEntity*>(battleEntity))
         {
@@ -5900,13 +5900,16 @@ namespace battleutils
             }
         }
 
-        // Reduction from velocity shot mod
+        // https://www.bg-wiki.com/ffxi/Snapshot
+        SnapShotReductionPercent = std::min<int16>(SnapShotReductionPercent, 70); // Cap of 70%
+
+        auto VelocityShotReductionPercent = 0;
         if (battleEntity->StatusEffectContainer->HasStatusEffect(EFFECT_VELOCITY_SHOT))
         {
-            SnapShotReductionPercent += battleEntity->getMod(Mod::VELOCITY_SNAPSHOT_BONUS);
+            VelocityShotReductionPercent = 15 + battleEntity->getMod(Mod::VELOCITY_SNAPSHOT_BONUS);
         }
 
-        return (int16)(delay * (100 - SnapShotReductionPercent) / 100.f);
+        return (int16)(delay * ((100 - SnapShotReductionPercent) / 100.f) * ((100 - VelocityShotReductionPercent) / 100.f));
     }
 
     /************************************************************************

@@ -110,7 +110,7 @@ namespace battleutils
 
     uint8 getHitCount(uint8 hits);
 
-    int16 GetSnapshotReduction(CBattleEntity* battleEntity, int16 delay);
+    int16 GetRangedDelayReduction(CBattleEntity* battleEntity, int16 delay);
     int32 GetRangedAttackBonuses(CBattleEntity* battleEntity);
     int32 GetRangedAccuracyBonuses(CBattleEntity* battleEntity);
 

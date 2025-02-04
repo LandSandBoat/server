@@ -105,9 +105,8 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 28 then
         if option == 1 then -- Give 50pz clamming kit
             player:setCharVar('ClammingKitSize', 50)
-            player:addKeyItem(xi.ki.CLAMMING_KIT)
             player:delGil(500)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CLAMMING_KIT)
+            npcUtil.giveKeyItem(player, xi.ki.CLAMMING_KIT)
         end
     elseif csid == 29 then
         if option == 2 then -- Give player clammed items

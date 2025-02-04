@@ -20,8 +20,7 @@ entity.onTrigger = function(player, npc)
         loafersQuestProgress < 3 and
         not player:hasKeyItem(xi.ki.DROGAROGAN_BONEMEAL)
     then
-        player:addKeyItem(xi.ki.DROGAROGAN_BONEMEAL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DROGAROGAN_BONEMEAL)
+        npcUtil.giveKeyItem(player, xi.ki.DROGAROGAN_BONEMEAL)
         player:setCharVar('AF_SCH_BOOTS', loafersQuestProgress + 1)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

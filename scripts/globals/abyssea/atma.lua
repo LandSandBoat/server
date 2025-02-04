@@ -73,7 +73,7 @@ xi.atma.atmaMods =
     [xi.ki.ATMA_OF_THE_MERCILESS_MATRIARCH]    = { xi.mod.MACC, 50, xi.mod.FASTCAST, 20, xi.mod.ENMITY, -50 },
     [xi.ki.ATMA_OF_THE_BROTHER_WOLF]           = { xi.mod.MATT, 20, xi.mod.MDEF, 20, xi.mod.FIRE_MEVA, 100 },
     [xi.ki.ATMA_OF_THE_EARTH_WYRM]             = { xi.mod.EARTH_MEVA, 100, xi.mod.DMG, -2000, xi.mod.FORCE_EARTH_DWBONUS, 1 },
-    [xi.ki.ATMA_OF_THE_ASCENDING_ONE]          = { xi.mod.WIND_MEVA, 100, xi.mod.HASTE_GEAR, 500, xi.mod.SNAP_SHOT, 5 },
+    [xi.ki.ATMA_OF_THE_ASCENDING_ONE]          = { xi.mod.WIND_MEVA, 100, xi.mod.HASTE_GEAR, 500, xi.mod.SNAPSHOT, 5 },
     [xi.ki.ATMA_OF_THE_SCORPION_QUEEN]         = { xi.mod.STORETP, 20, xi.mod.CRITHITRATE, 30, xi.mod.BINDRES, 50 },
     [xi.ki.ATMA_OF_A_THOUSAND_NEEDLES]         = { xi.mod.HPP, 20, xi.mod.MPP, 20, xi.mod.DEX, 10 },
     [xi.ki.ATMA_OF_THE_BURNING_EFFIGY]         = { xi.mod.STR, 20, xi.mod.FORCE_FIRE_DWBONUS, 1 }, -- fire based ws + 0.2 fTP] = {},

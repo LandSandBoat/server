@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Aht_Urhgan_Whitegate (50)
 -----------------------------------
-local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
------------------------------------
 ---@type TZone
 local zoneObject = {}
 
@@ -110,8 +108,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
     elseif csid == 797 then
         player:setCharVar('AgainstAllOdds', 1) -- Set For Corsair BCNM
         player:addQuest(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet
-        player:addKeyItem(xi.ki.LIFE_FLOAT) -- BCNM KEY ITEM TO ENTER BCNM
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIFE_FLOAT)
+        npcUtil.giveKeyItem(player, xi.ki.LIFE_FLOAT)
         player:setCharVar('AgainstAllOddsTimer', getMidnight())
     end
 end

@@ -3,8 +3,6 @@
 --  NPC: Koh Lenbalalako
 -- !pos -64.412 -17 29.213 249
 -----------------------------------
-local ID = zones[xi.zone.MHAURA]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -45,8 +43,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 10009 then
         player:setCharVar('unbridledPassion', 2)
     elseif csid == 10011 then
-        player:addKeyItem(xi.ki.KOHS_LETTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.KOHS_LETTER)
+        npcUtil.giveKeyItem(player, xi.ki.KOHS_LETTER)
         player:tradeComplete()
         player:setCharVar('unbridledPassion', 3)
     end

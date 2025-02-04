@@ -4,8 +4,6 @@
 -- Involved In Quest: Recollections
 -- !pos -14 0 69 162
 -----------------------------------
-local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -31,8 +29,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 8 then
         player:tradeComplete()
         player:setCharVar('recollectionsQuest', 3)
-        player:addKeyItem(xi.ki.FOE_FINDER_MK_I)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FOE_FINDER_MK_I)
+        npcUtil.giveKeyItem(player, xi.ki.FOE_FINDER_MK_I)
     end
 end
 

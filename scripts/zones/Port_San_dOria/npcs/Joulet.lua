@@ -60,15 +60,10 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 307 then
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.LU_SHANGS_FISHING_ROD)
-        else
+        if npcUtil.giveItem(player, xi.item.LU_SHANGS_FISHING_ROD) then
             player:tradeComplete()
-            player:addItem(xi.item.LU_SHANGS_FISHING_ROD)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.LU_SHANGS_FISHING_ROD)
             player:addTitle(xi.title.CARP_DIEM)
-            player:addKeyItem(xi.ki.TESTIMONIAL)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TESTIMONIAL)
+            npcUtil.giveKeyItem(player, xi.ki.TESTIMONIAL)
             player:setCharVar('theCompetitionFishCountVar', 0)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_COMPETITION)
         end

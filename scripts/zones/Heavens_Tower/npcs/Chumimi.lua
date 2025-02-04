@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: The Three Magi, Recollections
 -- !pos 0.1 30 21 242
 -----------------------------------
-local ID = zones[xi.zone.HEAVENS_TOWER]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -96,9 +94,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI)
         player:setCharVar('theThreeMagiSupport', option)
     elseif csid == 269 then
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.CASTING_WAND) -- Casting Wand
-        else
+        if npcUtil.giveItem(player, xi.item.CASTING_WAND) then
             local choosetitle = player:getCharVar('theThreeMagiSupport')
 
             if choosetitle == 3 then
@@ -110,8 +106,6 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             player:tradeComplete()
-            player:addItem(xi.item.CASTING_WAND)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CASTING_WAND) -- Casting Wand
             player:needToZone(true)
             player:setCharVar('theThreeMagiSupport', 0)
             player:addFame(xi.fameArea.WINDURST, 20)
@@ -123,13 +117,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:tradeComplete()
         player:setCharVar('recollectionsQuest', 2)
     elseif csid == 275 then
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.WIZARDS_SABOTS) -- wizards sabots
-        else
+        if npcUtil.giveItem(player, xi.item.WIZARDS_SABOTS) then
             player:setCharVar('recollectionsQuest', 0)
             player:delKeyItem(xi.ki.FOE_FINDER_MK_I)
-            player:addItem(xi.item.WIZARDS_SABOTS)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.WIZARDS_SABOTS) -- wizards sabots
             player:addFame(xi.fameArea.WINDURST, 40)
             player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.RECOLLECTIONS)
         end
@@ -137,15 +127,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
         player:setCharVar('rootProblem', 1)
     elseif csid == 279 then
-        player:addKeyItem(xi.ki.SLUICE_SURVEYOR_MK_I)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SLUICE_SURVEYOR_MK_I)
+        npcUtil.giveKeyItem(player, xi.ki.SLUICE_SURVEYOR_MK_I)
     elseif csid == 281 then
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
-        else
+        if npcUtil.giveItem(player, xi.item.WIZARDS_PETASOS) then
             player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
-            player:addItem(xi.item.WIZARDS_PETASOS)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.WIZARDS_PETASOS)
             player:addTitle(xi.title.PARAGON_OF_BLACK_MAGE_EXCELLENCE)
             player:delKeyItem(xi.ki.SLUICE_SURVEYOR_MK_I)
         end
