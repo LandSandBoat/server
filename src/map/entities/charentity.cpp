@@ -3100,22 +3100,25 @@ bool CCharEntity::OnAttackError(CAttackState& state)
 
 bool CCharEntity::isInTriggerArea(uint32 triggerAreaID)
 {
-    return m_InsideTriggerAreaID & (1 << triggerAreaID);
+    if (auto found = charTriggerAreaIDs.find(triggerAreaID); found != charTriggerAreaIDs.end()) {
+        return true
+    }
+    return false;
 }
 
 void CCharEntity::onTriggerAreaEnter(uint32 triggerAreaID)
 {
-    m_InsideTriggerAreaID |= (1 << triggerAreaID);
+    charTriggerAreaIDs.insert(triggerAreaID)
 }
 
 void CCharEntity::onTriggerAreaExit(uint32 triggerAreaID)
 {
-    m_InsideTriggerAreaID &= ~(1 << triggerAreaID);
+    charTriggerAreaIDs.erase(triggerAreaID)
 }
 
 void CCharEntity::clearTriggerAreas()
 {
-    m_InsideTriggerAreaID = 0;
+    charTriggerAreaIDs.clear()
 }
 
 bool CCharEntity::isInEvent()

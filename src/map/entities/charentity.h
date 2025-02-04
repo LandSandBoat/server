@@ -479,7 +479,6 @@ public:
 
     std::unique_ptr<monstrosity::MonstrosityData_t> m_PMonstrosity;
 
-    uint32     m_InsideTriggerAreaID; // The ID of the trigger area the character is inside
     uint8      m_LevelRestriction;    // Character level limit
     uint16     m_Costume;
     uint16     m_Costume2;
@@ -664,6 +663,7 @@ private:
 
     std::unordered_map<std::string, std::pair<int32, uint32>> charVarCache;
     std::unordered_set<std::string>                           charVarChanges;
+    std::unordered_set<uint32>                                charTriggerAreaIDs; // Holds any TriggerArea IDs that the player is currently within the bounds of
 
     uint8      dataToPersist = 0;
     time_point nextDataPersistTime;
