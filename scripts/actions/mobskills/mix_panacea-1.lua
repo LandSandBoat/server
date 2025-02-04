@@ -10,7 +10,6 @@ end
 
 local statii =
 {
-    xi.effect.PARALYSIS,
     xi.effect.BIND,
     xi.effect.WEIGHT,
     xi.effect.ADDLE,
@@ -50,11 +49,12 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     for _, effect in pairs(statii) do
         if target:delStatusEffect(effect) then
             lastEffect = effect
+            skill:setMsg(xi.msg.basic.SKILL_ERASE)
+            return lastEffect
+        else
+            skill:setMsg(xi.msg.basic.NO_EFFECT)
         end
     end
-
-    skill:setMsg(xi.msg.basic.SKILL_ERASE)
-    return lastEffect
 end
 
 return mobskillObject

@@ -3,10 +3,56 @@
 --  NPC: Monberaux
 -- Starts and Finishes Quest: The Lost Cardian (finish), The kind cardian (start)
 -- Involved in Quests: Save the Clock Tower
+-- Involved in handling his how his alter ego reacts in combat.
 -- !pos -43 0 -1 244
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
+
+entity.onTrade = function(player, npc, trade)
+    local minimumGil = 10000
+    local elixirTotal = 2
+
+    local finalElixir = player:getCharVar('finalElixir')
+    local monbAoe = player:getCharVar('monbAoe')
+    local gilAmount = trade:getGil()
+
+    -- Check trade for elixir/hi-elixir
+    -- TODO: add logic to trade more than 1 at a time, or more than 1 type at a time.
+    if
+        trade:hasItemQty(xi.item.ELIXIR, 1) or
+        trade:hasItemQty(xi.item.HI_ELIXIR, 1)
+    then
+        if finalElixir < elixirTotal then
+            player:setCharVar('finalElixir', finalElixir + 1)
+            player:printToPlayer(string.format('Thank you for that medicine. You currently have %d vials remaining.', finalElixir + 1), 0, 'Monberaux')
+            player:tradeComplete()
+        elseif finalElixir == elixirTotal then
+            player:printToPlayer('I am already holding too many vials for you. Come back after I`ve treated you.', 0, 'Monberaux')
+        else
+            player:printToPlayer('What do I need this for?', 0, 'Monberaux')
+        end
+
+        return
+    end
+
+    -- Check for ailment potion AoE and for gil value
+    -- TODO: Possibly make required more based on how much gil the player has.
+    if monbAoe ~= 1 then
+        if gilAmount >= minimumGil then
+            player:setCharVar('monbAoe', 1, NextJstWeek())
+            player:printToPlayer('Thank you for that donation! My potions will now affect all patrons until the end of the week.', 0, 'Monberaux')
+            player:tradeComplete()
+        else
+            player:printToPlayer('My services are worth at minimum 10,000 gil.', 0, 'Monberaux')
+        end
+
+        return
+    else
+        player:printToPlayer('As much as I appreciate the coin, you`ve already donated this week.', 0, 'Monberaux')
+        return
+    end
+end
 
 entity.onTrigger = function(player, npc)
     local theLostCardien = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)

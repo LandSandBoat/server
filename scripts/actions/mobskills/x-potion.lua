@@ -1,6 +1,5 @@
 -----------------------------------
--- Mix: Final Elixir - Restores all HP/MP to party members.
--- Used once per elixir donation. He will need a refill to use it again.
+-- X-Potion - Restores 150 HP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,10 +9,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    target:addHP(target:getMaxHP())
-    target:addMP(target:getMaxMP())
-    skill:setMsg(xi.msg.basic.RECOVERS_HP_AND_MP)
-    return
+    skill:setMsg(xi.msg.basic.SELF_HEAL)
+    return xi.mobskills.mobHealMove(target, 150)
 end
 
 return mobskillObject

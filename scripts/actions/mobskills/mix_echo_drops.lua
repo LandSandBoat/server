@@ -1,6 +1,5 @@
 -----------------------------------
--- Mix: Antidote - Removes Poison Monberaux will not remove the effects
--- of Poison Potion or other consumables like it.
+-- Echo Drops - Removes Silence.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,12 +10,12 @@ end
 
 -- TODO: verify no effect messaging
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    if target:hasStatusEffect(xi.effect.POISON) then
+    if target:hasStatusEffect(xi.effect.SILENCE) then
         skill:setMsg(xi.msg.basic.SKILL_ERASE)
-        target:delStatusEffect(xi.effect.POISON)
-        return xi.effect.POISON
+        target:delStatusEffect(xi.effect.SILENCE)
+        return xi.effect.SILENCE
     else
-        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- NO_EFFECT also works.
+        skill:setMsg(xi.msg.basic.NO_EFFECT)
     end
 end
 

@@ -1,6 +1,5 @@
 -----------------------------------
--- Mix: Final Elixir - Restores all HP/MP to party members.
--- Used once per elixir donation. He will need a refill to use it again.
+-- Vaccine - Removes Plague.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,10 +9,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    target:addHP(target:getMaxHP())
-    target:addMP(target:getMaxMP())
-    skill:setMsg(xi.msg.basic.RECOVERS_HP_AND_MP)
-    return
+    if target:hasStatusEffect(xi.effect.PLAGUE) then
+        skill:setMsg(xi.msg.basic.SKILL_ERASE)
+        target:delStatusEffect(xi.effect.PLAGUE)
+        return xi.effect.PLAGUE
+    else
+        skill:setMsg(xi.msg.basic.NO_EFFECT)
+    end
 end
 
 return mobskillObject
