@@ -187,9 +187,12 @@ public:
     uint8  getContinentID();
     bool   isInMogHouse();
 
-    uint32 getPlayerTriggerAreaInZone();
-    void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
+    bool isPlayerInTriggerArea(uint32 triggerAreaId);
+    void onPlayerTriggerAreaEnter(uint32 triggerAreaId);
+    void onPlayerTriggerAreaExit(uint32 triggerAreaId);
+    void clearPlayerTriggerAreas();
 
+    void updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
     void sendEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate, uint8 entityUpdate, uint8 updateMask);
     void sendEmptyEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate);
 

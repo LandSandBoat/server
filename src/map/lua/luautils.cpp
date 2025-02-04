@@ -2050,6 +2050,8 @@ namespace luautils
             ShowError("luautils::onTriggerAreaEnter: %s", err.what());
             ReportErrorToPlayer(PChar, err.what());
         }
+        // Add the TriggerArea to the players cache of current TriggerAreas
+        PChar->onTriggerAreaEnter(PTriggerArea->GetTriggerAreaID());
     }
 
     void OnTriggerAreaLeave(CCharEntity* PChar, CTriggerArea* PTriggerArea)
@@ -2098,6 +2100,8 @@ namespace luautils
             ShowError("luautils::onTriggerAreaLeave: %s", err.what());
             ReportErrorToPlayer(PChar, err.what());
         }
+        // Remove the TriggerArea to the players cache of current TriggerAreas
+        PChar->onTriggerAreaExit(PTriggerArea->GetTriggerAreaID());
     }
 
     int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc)

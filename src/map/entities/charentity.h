@@ -586,6 +586,11 @@ public:
     int32 GetTimeCreated();
     uint8 getHighestJobLevel();
 
+    bool isInTriggerArea(uint32 triggerAreaId);
+    void onTriggerAreaEnter(uint32 tiggerAreaId);
+    void onTriggerAreaExit(uint32 triggerAreaId);
+    void clearTriggerAreas();
+
     bool isInEvent();
     bool isNpcLocked();
     void queueEvent(EventInfo* eventToQueue);

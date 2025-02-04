@@ -3098,6 +3098,26 @@ bool CCharEntity::OnAttackError(CAttackState& state)
     return false;
 }
 
+bool CCharEntity::isInTriggerArea(uint32 triggerAreaID)
+{
+    return m_InsideTriggerAreaID & (1 << triggerAreaID);
+}
+
+void CCharEntity::onTriggerAreaEnter(uint32 triggerAreaID)
+{
+    m_InsideTriggerAreaID |= (1 << triggerAreaID);
+}
+
+void CCharEntity::onTriggerAreaExit(uint32 triggerAreaID)
+{
+    m_InsideTriggerAreaID &= ~(1 << triggerAreaID);
+}
+
+void CCharEntity::clearTriggerAreas()
+{
+    m_InsideTriggerAreaID = 0;
+}
+
 bool CCharEntity::isInEvent()
 {
     return currentEvent->eventId != -1;

@@ -443,29 +443,21 @@ void CZoneInstance::CheckTriggerAreas()
             // TODO: When we start to use octrees or spatial hashing to split up zones,
             //     : use them here to make the search domain smaller.
 
-            uint32 triggerAreaID = 0;
             for (const auto& triggerArea : m_triggerAreaList)
             {
+                auto triggerAreaID = triggerArea->GetTriggerAreaID();
                 if (triggerArea->isPointInside(PChar->loc.p))
                 {
-                    triggerAreaID = triggerArea->GetTriggerAreaID();
-
-                    if (triggerArea->GetTriggerAreaID() != PChar->m_InsideTriggerAreaID)
+                    if (!PChar->isInTriggerArea(triggerAreaID))
                     {
                         luautils::OnTriggerAreaEnter(PChar, triggerArea);
                     }
-
-                    if (PChar->m_InsideTriggerAreaID == 0)
-                    {
-                        break;
-                    }
                 }
-                else if (triggerArea->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
+                else if (PChar->isInTriggerArea(triggerAreaID))
                 {
                     luautils::OnTriggerAreaLeave(PChar, triggerArea);
                 }
             }
-            PChar->m_InsideTriggerAreaID = triggerAreaID;
         });
         // clang-format on
     }
