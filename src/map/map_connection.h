@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,21 +19,19 @@
 ===========================================================================
 */
 
-#ifndef _KERNEL_H_
-#define _KERNEL_H_
+#pragma once
 
-#include "cbasetypes.h"
-#include "console_service.h"
-#include "settings.h"
+class MapConnection final
+{
+public:
+    // TODO: ASIO
 
-extern std::atomic<bool> gRunFlag;
+    int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*);                      // main function to parse recv packets
+    int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*);                           // main function parsing the packets
+    int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*, bool usePreviousKey); // main function is building big packet
 
-extern void  log_init(int, char**);
-extern int32 do_init(int32, char**);
-extern void  set_socket_type(void);
-extern void  do_abort(void);
-extern void  do_final(int);
+    // TODO: PacketHandlers, canonize packet_system
 
-extern std::unique_ptr<ConsoleService> gConsoleService;
+private:
 
-#endif // _KERNEL_H_
+};

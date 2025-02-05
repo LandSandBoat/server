@@ -2,6 +2,7 @@
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,99 +20,7 @@
 ===========================================================================
 */
 
-#include "map.h"
-
-#include "common/async.h"
-#include "common/blowfish.h"
-#include "common/console_service.h"
-#include "common/database.h"
-#include "common/debug.h"
-#include "common/logging.h"
-#include "common/timer.h"
-#include "common/utils.h"
-#include "common/vana_time.h"
-#include "common/version.h"
-#include "common/zlib.h"
-
-#include "ability.h"
-#include "daily_system.h"
-#include "job_points.h"
-#include "latent_effect_container.h"
-#include "linkshell.h"
-#include "message.h"
-#include "mob_spell_list.h"
-#include "monstrosity.h"
-#include "packet_guard.h"
-#include "packet_system.h"
-#include "roe.h"
-#include "spell.h"
-#include "status_effect_container.h"
-#include "time_server.h"
-#include "transport.h"
-#include "zone.h"
-#include "zone_entities.h"
-
-#include "ai/controllers/automaton_controller.h"
-
-#include "items/item_equipment.h"
-
-#include "packets/basic.h"
-#include "packets/chat_message.h"
-#include "packets/server_ip.h"
-
-#include "utils/battleutils.h"
-#include "utils/charutils.h"
-#include "utils/fishingutils.h"
-#include "utils/gardenutils.h"
-#include "utils/guildutils.h"
-#include "utils/instanceutils.h"
-#include "utils/itemutils.h"
-#include "utils/mobutils.h"
-#include "utils/moduleutils.h"
-#include "utils/petutils.h"
-#include "utils/serverutils.h"
-#include "utils/synergyutils.h"
-#include "utils/synthutils.h"
-#include "utils/trustutils.h"
-#include "utils/zoneutils.h"
-
-#include <cmath>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <thread>
-
-#include <nonstd/jthread.hpp>
-
-#ifdef WIN32
-#include <io.h>
-#endif
-
-const char* MAP_CONF_FILENAME = nullptr;
-
-int8* g_PBuff     = nullptr; // Global packet clipboard
-int8* g_PBuffCopy = nullptr; // Copy of above, used to decrypt a second time if necessary.
-int8* PTempBuff   = nullptr; // Temporary packet clipboard
-
-int32  map_fd          = 0; // main socket
-uint32 map_amntplayers = 0; // map amnt unique players
-
-in_addr map_ip   = {};
-uint16  map_port = 0;
-
-map_session_list_t map_session_list = {};
-
-nonstd::jthread messageThread;
-
-std::unique_ptr<SqlConnection> _sql;
-
-extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
-
-bool gLoadAllLua = false;
-
-std::unordered_map<uint32, std::unordered_map<uint16, std::vector<std::pair<uint16, uint8>>>> PacketMods;
-
-extern std::atomic<bool> gProcessLoaded;
+#include "map_state.h"
 
 namespace
 {
@@ -123,76 +32,6 @@ namespace
     uint32 TotalPacketsSentPerTick    = 0U;
     uint32 TotalPacketsDelayedPerTick = 0U;
 } // namespace
-
-/************************************************************************
- *                                                                       *
- *  mapsession_getbyipp                                                  *
- *                                                                       *
- ************************************************************************/
-
-map_session_data_t* mapsession_getbyipp(uint64 ipp)
-{
-    TracyZoneScoped;
-    map_session_list_t::iterator i = map_session_list.begin();
-    while (i != map_session_list.end())
-    {
-        if ((*i).first == ipp)
-        {
-            return (*i).second;
-        }
-        ++i;
-    }
-    return nullptr;
-}
-
-/************************************************************************
- *                                                                       *
- *  mapsession_createsession                                             *
- *                                                                       *
- ************************************************************************/
-
-map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
-{
-    TracyZoneScoped;
-
-    const auto ipstr = ip2str(ip);
-
-    const auto rset = db::preparedStmt("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = ? LIMIT 1", ipstr);
-
-    if (rset == nullptr)
-    {
-        ShowError("SQL query failed in mapsession_createsession!");
-        return nullptr;
-    }
-
-    if (rset->rowsCount() == 0)
-    {
-        // This is noisy and not really necessary
-        DebugSockets(fmt::format("recv_parse: Invalid login attempt from {}", ipstr));
-        return nullptr;
-    }
-
-    map_session_data_t* map_session_data = new map_session_data_t();
-
-    map_session_data->server_packet_data = new int8[MAX_BUFFER_SIZE + 20];
-
-    map_session_data->last_update = time(nullptr);
-    map_session_data->client_addr = ip;
-    map_session_data->client_port = port;
-
-    uint64 port64 = port;
-    uint64 ipp    = ip;
-    ipp |= port64 << 32;
-    map_session_list[ipp] = map_session_data;
-
-    return map_session_data;
-}
-
-/************************************************************************
- *                                                                       *
- *  do_init                                                              *
- *                                                                       *
- ************************************************************************/
 
 int32 do_init(int32 argc, char** argv)
 {
@@ -430,11 +269,6 @@ int32 do_init(int32 argc, char** argv)
     return 0;
 }
 
-/************************************************************************
- *                                                                       *
- *  do_final                                                             *
- *                                                                       *
- ************************************************************************/
 void do_final(int code)
 {
     TracyZoneScoped;
@@ -489,22 +323,10 @@ void do_final(int code)
     }
 }
 
-/************************************************************************
- *                                                                       *
- *  do_abort                                                             *
- *                                                                       *
- ************************************************************************/
-
 void do_abort()
 {
     do_final(EXIT_FAILURE);
 }
-
-/************************************************************************
- *                                                                       *
- *  set_socket_type                                                      *
- *                                                                       *
- ************************************************************************/
 
 void set_socket_type()
 {

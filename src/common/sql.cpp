@@ -34,12 +34,6 @@
 #include <string>
 #include <thread>
 
-// TODO: Since kernel.cpp isn't used by the processes which now use Application, we can't
-//     : store this global flag there. So we're storing it here until all processes are
-//     : refactored to use Application. Once that's done this should be moved out of static
-//     : storage in this unit to a member of Application.
-std::atomic<bool> gProcessLoaded = false;
-
 SqlConnection::SqlConnection()
 : SqlConnection(settings::get<std::string>("network.SQL_LOGIN").c_str(),
                 settings::get<std::string>("network.SQL_PASSWORD").c_str(),

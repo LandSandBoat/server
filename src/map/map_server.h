@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-  Copyright (c) 2023 LandSandBoat Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,26 +19,14 @@
 ===========================================================================
 */
 
-#include "connect_server.h"
+#pragma once
 
-// openssl applink.c prevents issues with debug vs release vs threaded/single threaded .dlls at runtime
-// apparently not an issue with linux
-#ifdef _WIN32
-#include <ms/applink.c>
-#endif
+#include "common/application.h"
 
-// TODO: Standardize our running arguments for shutdown and thread signals
-std::atomic<bool> gRunFlag = true;
-
-int main(int argc, char** argv)
+class MapServer final : public Application
 {
-    auto pConnectServer = std::make_unique<ConnectServer>(argc, argv);
+public:
 
-    // TODO: We don't need this
-    while (pConnectServer->IsRunning())
-    {
-        pConnectServer->Tick();
-    }
+private:
 
-    return 0;
-}
+};

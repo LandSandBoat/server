@@ -48,4 +48,7 @@ protected:
 
     std::unique_ptr<argparse::ArgumentParser> gArgParser;
     std::unique_ptr<ConsoleService>           gConsoleService;
+
+    // TODO: Scheduler/task manager
+    // TODO: Logging setup
 };

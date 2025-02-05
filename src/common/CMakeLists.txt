@@ -16,8 +16,6 @@ set(COMMON_SOURCES
     $<$<PLATFORM_ID:Windows>:${CMAKE_CURRENT_SOURCE_DIR}/debug_windows.cpp>
     ${CMAKE_CURRENT_SOURCE_DIR}/filewatcher.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/filewatcher.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/kernel.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/kernel.h
     ${CMAKE_CURRENT_SOURCE_DIR}/logging.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/logging.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua.cpp
@@ -27,8 +25,6 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/mmo.h
     ${CMAKE_CURRENT_SOURCE_DIR}/settings.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/settings.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/socket.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/socket.h
     ${CMAKE_CURRENT_SOURCE_DIR}/sql.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/sql.h
     ${CMAKE_CURRENT_SOURCE_DIR}/string.h
