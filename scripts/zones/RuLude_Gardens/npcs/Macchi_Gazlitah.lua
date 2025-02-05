@@ -17,7 +17,6 @@ entity.onTrigger = function(player, npc)
         5703,    100,    -- Uleguerand Milk
         5684,    250,    -- Chalaimbille
         17905,   100,    -- Wormy Broth
-        --[[
         5686,    800,    -- Cheese Sandwich
         5729,   3360,    -- Bavarois
         5718,   1300,    -- Cream Puff
@@ -30,7 +29,6 @@ entity.onTrigger = function(player, npc)
         4726,  25600,    -- Enthunder II
         4727,  33000,    -- Enwater II
         4850, 150000,    -- Refresh II
-        ]]--
     }
 
     player:showText(npc, ID.text.MACCHI_GAZLITAH_SHOP_DIALOG1)
