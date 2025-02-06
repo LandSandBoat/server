@@ -371,7 +371,7 @@ namespace gambits
                         auto spell_id = POwner->SpellContainer->StormDayAgainstTargetWeakness(target);
                         if (spell_id.has_value())
                         {
-                            controller->Cast(POwner->targid, spell_id.value());
+                            controller->Cast(target->targid, spell_id.value());
                         }
                     }
                     else if (action.select == G_SELECT::RANDOM)
