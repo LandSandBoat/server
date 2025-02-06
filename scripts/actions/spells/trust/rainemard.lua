@@ -17,8 +17,8 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.CURILLA] = xi.trust.messageOffset.TEAMWORK_1,
     })
 
-    -- TODO: Selection based on enemy weakness
-    mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.ENFIRE }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.ENFIRE })
+    -- Will now cast correct Enspell based on target weakness
+    mob:addGambit(ai.t.TARGET, { ai.c.ALWAYS, 0 }, { ai.r.MA, ai.s.EN_MOB_WEAKNESS, 0 })
 
     mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.EVASION_DOWN }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.DISTRACT }, 60)
 
