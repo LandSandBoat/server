@@ -349,15 +349,15 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
 
     // TODO: Figure this out properly:
     auto Weakness_Element = weakestIndex + 1;
-    auto Spell_Element = spell::GetSpell(spellId)->getElement();
+    auto Spell_Element    = spell::GetSpell(spellId)->getElement();
     if (Spell_Element == Weakness_Element)
 	{
-		return spellId;
-	}
-	else
-	{
-		return std::nullopt;
-	}
+        return spellId;
+    }
+    else
+    {
+        return std::nullopt;
+    }
 }
 
 std::optional<SpellID> CMobSpellContainer::EnSpellAgainstTargetWeakness(CBattleEntity* PTarget)
