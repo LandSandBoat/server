@@ -21,17 +21,4 @@
 
 #pragma once
 
-class MapConnection final
-{
-public:
-    // TODO: ASIO
-
-    int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*);                      // main function to parse recv packets
-    int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*);                           // main function parsing the packets
-    int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*, bool usePreviousKey); // main function is building big packet
-
-    // TODO: PacketHandlers, canonize packet_system
-
-private:
-
-};
+static constexpr std::size_t MAX_BUFFER_SIZE = 1024;

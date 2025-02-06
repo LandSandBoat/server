@@ -23,11 +23,14 @@
 
 int main(int argc, char** argv)
 {
-    auto pMapServer = std::make_unique<MapServer>(argc, argv);
-
-    while (pConnectServer->IsRunning())
+    try
     {
-        pConnectServer->Tick();
+        auto pMapServer = std::make_unique<MapServer>(argc, argv);
+        pMapServer->run();
+    }
+    catch (const std::exception& e)
+    {
+        ShowFatal(fmt::format("Fatal: {}", e.what()));
     }
 
     return 0;

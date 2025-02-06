@@ -26,7 +26,45 @@
 class MapServer final : public Application
 {
 public:
+    MapServer(int argc, char** argv)
+    : Application("map", argc, argv)
+    , scheduler(ioContext_)
+    , networkHandler(ioContext_, Application::getPort()) // Or something?
+    {
+    }
+
+    void run()
+    {
+        // Queue the first async network receive.
+        networkHandler_->queue_async_recv();
+
+        // TODO: Make atomic, hide in Application:: functions.
+        bool running = true;
+
+        while (running)
+        {
+            const auto now = std::chrono::steady_clock::now();
+
+            // Process scheduler tasks; run() returns a timeout duration.
+            const auto next = scheduler.run(now);
+
+            // Process network events for that duration.
+            networkHandler->run_for(next);
+
+            // If input is available (e.g., Enter pressed), exit.
+            if (std::cin.rdbuf()->in_avail() > 0)
+            {
+                running = false;
+            }
+        }
+    }
 
 private:
+    // TODO: This should be part of Application at this point.
+    asio::io_context ioContext_;
 
+    Scheduler      scheduler_;
+    NetworkHandler networkHandler_;
+    MapState       mapState_;
+    MapSessions    mapSessions_; // Should this be in networkHandler or mapState instead?
 };
