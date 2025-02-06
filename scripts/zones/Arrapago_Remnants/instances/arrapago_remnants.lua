@@ -56,8 +56,8 @@ instanceObject.onInstanceComplete = function(instance)
 end
 
 instanceObject.onTriggerAreaEnter = function(player, triggerArea, instance)
-    if triggerArea:GetTriggerAreaID() <= 11 then
-        player:startEvent(199 + triggerArea:GetTriggerAreaID())
+    if triggerArea:getTriggerAreaID() <= 11 then
+        player:startEvent(199 + triggerArea:getTriggerAreaID())
     end
 end
 

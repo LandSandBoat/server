@@ -20,6 +20,7 @@ local content = Limbus:new({
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     requiredItems    = { xi.item.SCARLET_CHIP },
     name             = 'CENTRAL_TEMENOS_2ND_FLOOR',
+    lootCrateId      = ID.npc.C2_LOOT_CRATE,
 })
 
 local function weakenCarbuncle(elementalMod, bonusMod, bonusAmount, battlefield, mob, count)
@@ -293,14 +294,14 @@ content.groups =
         end,
 
         death = function(battlefield, mob)
-            npcUtil.showCrate(GetNPCByID(ID.CENTRAL_TEMENOS_2ND_FLOOR.npc.LOOT_CRATE))
+            npcUtil.showCrate(GetNPCByID(ID.npc.C2_LOOT_CRATE))
         end
     }
 }
 
 content.loot =
 {
-    [ID.CENTRAL_TEMENOS_2ND_FLOOR.npc.LOOT_CRATE] =
+    [ID.npc.C2_LOOT_CRATE] =
     {
         {
             quantity = 6,

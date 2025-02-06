@@ -23,7 +23,7 @@
 
 #include <cstring>
 
-#include "packets/char_update.h"
+#include "packets/char_status.h"
 #include "packets/chat_message.h"
 #include "packets/inventory_assign.h"
 #include "packets/inventory_finish.h"
@@ -220,7 +220,7 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, uint8 toSack)
                 charutils::SaveCharEquip(PMember);
 
                 PMember->pushPacket<CInventoryFinishPacket>();
-                PMember->pushPacket<CCharUpdatePacket>(PMember);
+                PMember->pushPacket<CCharStatusPacket>(PMember);
                 return;
             }
         }
@@ -293,7 +293,7 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 kickerR
             charutils::SaveCharEquip(PMember);
 
             PMember->pushPacket<CInventoryFinishPacket>();
-            PMember->pushPacket<CCharUpdatePacket>(PMember);
+            PMember->pushPacket<CCharStatusPacket>(PMember);
             if (breakLinkshell)
             {
                 PMember->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellNoLongerExists);

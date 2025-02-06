@@ -327,7 +327,8 @@ namespace gambits
                     }
                     else if (action.select == G_SELECT::BEST_AGAINST_TARGET)
                     {
-                        auto spell_id = POwner->SpellContainer->GetBestAgainstTargetWeakness(target);
+                        auto spell_to_cast = static_cast<SpellID>(action.select_arg);
+                        auto spell_id      = POwner->SpellContainer->GetBestAgainstTargetWeakness(target, spell_to_cast);
                         if (spell_id.has_value())
                         {
                             controller->Cast(target->targid, spell_id.value());
@@ -344,6 +345,30 @@ namespace gambits
                     else if (action.select == G_SELECT::HELIX_DAY)
                     {
                         auto spell_id = POwner->SpellContainer->GetHelixDay();
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(target->targid, spell_id.value());
+                        }
+                    }
+                    else if (action.select == G_SELECT::EN_MOB_WEAKNESS)
+                    {
+                        auto spell_id = POwner->SpellContainer->EnSpellAgainstTargetWeakness(target);
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(POwner->targid, spell_id.value());
+                        }
+                    }
+                    else if (action.select == G_SELECT::STORM_MOB_WEAKNESS)
+                    {
+                        auto spell_id = POwner->SpellContainer->StormDayAgainstTargetWeakness(target);
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(POwner->targid, spell_id.value());
+                        }
+                    }
+                    else if (action.select == G_SELECT::HELIX_MOB_WEAKNESS)
+                    {
+                        auto spell_id = POwner->SpellContainer->StormDayAgainstTargetWeakness(target);
                         if (spell_id.has_value())
                         {
                             controller->Cast(target->targid, spell_id.value());

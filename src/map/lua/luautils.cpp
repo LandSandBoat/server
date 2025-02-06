@@ -79,7 +79,6 @@
 #include "monstrosity.h"
 #include "packets/action.h"
 #include "packets/char_emotion.h"
-#include "packets/char_update.h"
 #include "packets/chat_message.h"
 #include "packets/entity_update.h"
 #include "packets/entity_visual.h"
@@ -1998,15 +1997,9 @@ namespace luautils
         }
     }
 
-    void OnTriggerAreaEnter(CCharEntity* PChar, CTriggerArea* PTriggerArea)
+    void OnTriggerAreaEnter(CCharEntity* PChar, std::unique_ptr<ITriggerArea> const& PTriggerArea)
     {
         TracyZoneScoped;
-
-        // Do not enter trigger areas while loading in. Set in xi.player.onGameIn
-        if (PChar->GetLocalVar("ZoningIn") > 0)
-        {
-            return;
-        }
 
         std::string                 filename;
         std::optional<CLuaInstance> optInstance = std::nullopt;
@@ -2043,7 +2036,7 @@ namespace luautils
         }
 
         auto onTriggerAreaEnterFramework = lua["InteractionGlobal"]["onTriggerAreaEnter"];
-        auto result                      = onTriggerAreaEnterFramework(CLuaBaseEntity(PChar), CLuaTriggerArea(PTriggerArea), optInstance, onTriggerAreaEnter);
+        auto result                      = onTriggerAreaEnterFramework(CLuaBaseEntity(PChar), CLuaTriggerArea(PTriggerArea.get()), optInstance, onTriggerAreaEnter);
         if (!result.valid())
         {
             sol::error err = result;
@@ -2052,7 +2045,7 @@ namespace luautils
         }
     }
 
-    void OnTriggerAreaLeave(CCharEntity* PChar, CTriggerArea* PTriggerArea)
+    void OnTriggerAreaLeave(CCharEntity* PChar, std::unique_ptr<ITriggerArea> const& PTriggerArea)
     {
         TracyZoneScoped;
 
@@ -2091,7 +2084,7 @@ namespace luautils
         }
 
         auto onTriggerAreaLeaveFramework = lua["InteractionGlobal"]["onTriggerAreaLeave"];
-        auto result                      = onTriggerAreaLeaveFramework(CLuaBaseEntity(PChar), CLuaTriggerArea(PTriggerArea), optInstance, onTriggerAreaLeave);
+        auto result                      = onTriggerAreaLeaveFramework(CLuaBaseEntity(PChar), CLuaTriggerArea(PTriggerArea.get()), optInstance, onTriggerAreaLeave);
         if (!result.valid())
         {
             sol::error err = result;

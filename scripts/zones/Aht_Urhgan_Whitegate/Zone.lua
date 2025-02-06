@@ -5,16 +5,16 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1,   57, -1.0,  -70,   62,  1.0,  -65) -- Sets Mark for 'Got It All' Quest cutscene.
-    zone:registerTriggerArea(2,  -96, -7.0,  121,  -64, -5.0,  137) -- Sets Mark for 'Vanishing Act' Quest cutscene.
-    zone:registerTriggerArea(3,   20, -7.2,  -51,   39, -7.2,  -40) -- ToAU Mission 1, X region. Salaheem's Sentinels, second platform.
-    zone:registerTriggerArea(4,   68, -1.0,   30,   91,  1.0,   53) -- ToAU Mission 4 region. Walahra Temple.
-    zone:registerTriggerArea(5,   64, -7.0, -137,   95, -5.0, -123) -- ToAU Mission 4 region. Shaharat Teahouse.
-    zone:registerTriggerArea(6,   30, -6.6,  -60,   39, -6.6,  -50) -- ToAU Mission 11 region. Salaheem's Sentinels, first platform.
-    zone:registerTriggerArea(7,   69,  0.0,    7,   73,  0.0,   11) -- Sets Mark for 'Led Astry' Quest cutscene.
-    zone:registerTriggerArea(8,   10,  2.0,  -96,   14,  2.0,  -92) -- Sets Mark for 'Led Astry' Quest cutscene.
-    zone:registerTriggerArea(9, -103,  0.0,  -16, -100,  0.0,  -12) -- Sets Mark for 'Striking a Balance' Quest cutscene.
-    zone:registerTriggerArea(10, -89,  0.0,   -8,  -71,  0.0,    8) -- Balrahn Way
+    zone:registerCuboidTriggerArea(1,   57, -1.0,  -70,   62,  1.0,  -65) -- Sets Mark for 'Got It All' Quest cutscene.
+    zone:registerCuboidTriggerArea(2,  -96, -7.0,  121,  -64, -5.0,  137) -- Sets Mark for 'Vanishing Act' Quest cutscene.
+    zone:registerCuboidTriggerArea(3,   20, -7.2,  -51,   39, -7.2,  -40) -- ToAU Mission 1, X region. Salaheem's Sentinels, second platform.
+    zone:registerCuboidTriggerArea(4,   68, -1.0,   30,   91,  1.0,   53) -- ToAU Mission 4 region. Walahra Temple.
+    zone:registerCuboidTriggerArea(5,   64, -7.0, -137,   95, -5.0, -123) -- ToAU Mission 4 region. Shaharat Teahouse.
+    zone:registerCuboidTriggerArea(6,   30, -6.6,  -60,   39, -6.6,  -50) -- ToAU Mission 11 region. Salaheem's Sentinels, first platform.
+    zone:registerCuboidTriggerArea(7,   69,  0.0,    7,   73,  0.0,   11) -- Sets Mark for 'Led Astry' Quest cutscene.
+    zone:registerCuboidTriggerArea(8,   10,  2.0,  -96,   14,  2.0,  -92) -- Sets Mark for 'Led Astry' Quest cutscene.
+    zone:registerCuboidTriggerArea(9, -103,  0.0,  -16, -100,  0.0,  -12) -- Sets Mark for 'Striking a Balance' Quest cutscene.
+    zone:registerCuboidTriggerArea(10, -89,  0.0,   -8,  -71,  0.0,    8) -- Balrahn Way
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -49,7 +49,7 @@ zoneObject.afterZoneIn = function(player)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
+    switch (triggerArea:getTriggerAreaID()): caseof
     {
         [1] = function()  -- Cutscene for Got It All quest.
             if player:getCharVar('gotitallCS') == 5 then

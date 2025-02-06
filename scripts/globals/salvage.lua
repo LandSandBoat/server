@@ -6,6 +6,10 @@ xi.salvage = xi.salvage or {}
 -----------------------------------
 
 xi.salvage.onCellItemCheck = function(target, effect, value)
+    if target:getCurrentRegion() ~= xi.region.ALZADAAL then
+        return xi.msg.basic.CANT_BE_USED_IN_AREA
+    end
+
     local statusEffect = target:getStatusEffect(effect)
     if statusEffect then
         local power = statusEffect:getPower()
@@ -14,7 +18,7 @@ xi.salvage.onCellItemCheck = function(target, effect, value)
         end
     end
 
-    return 55
+    return xi.msg.basic.ITEM_UNABLE_TO_USE
 end
 
 xi.salvage.onCellItemUse = function(target, effect, value, offset)
@@ -22,6 +26,7 @@ xi.salvage.onCellItemUse = function(target, effect, value, offset)
     local power = statusEffect:getPower()
     local newpower = bit.band(power, bit.bnot(value))
     local pet = target:getPet()
+    local instance = target:getInstance()
 
     target:delStatusEffectSilent(effect)
     if newpower > 0 then
@@ -45,4 +50,5 @@ xi.salvage.onCellItemUse = function(target, effect, value, offset)
     end
 
     target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + offset)
+    instance:setLocalVar('cellsUsed', instance:getLocalVar('cellsUsed') + 1)
 end

@@ -47,7 +47,6 @@ public:
     CCharEntity* GetCharByID(uint32 id);
     CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // get a pointer to any entity in the zone
 
-    void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
     void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
 
     void SpawnPCs(CCharEntity* PChar);

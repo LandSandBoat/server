@@ -139,7 +139,7 @@ void CAttack::SetCritical(bool value)
         }
 
         // need to pass the weapon slot because damage ratio depends on ATT which varies by slot
-        m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus, skilltype, weaponSlot);
+        m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus, skilltype, weaponSlot, false);
     }
 }
 

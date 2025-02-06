@@ -44,21 +44,24 @@ public:
     void setLocalVar(const char* key, uint32 value);
     void resetLocalVars();
 
-    void               registerTriggerArea(uint32 triggerAreaID, float x1, float y1, float z1, float x2, float y2, float z2);
-    sol::object        levelRestriction();
-    auto               getPlayers() -> sol::table;
-    auto               getNPCs() -> sol::table;
-    auto               getMobs() -> sol::table;
-    ZONEID             getID();
-    const std::string& getName();
-    REGION_TYPE        getRegionID();
-    ZONE_TYPE          getTypeMask();
-    auto               getBattlefieldByInitiator(uint32 charID) -> std::optional<CLuaBattlefield>;
-    WEATHER            getWeather();
-    uint32             getUptime();
-    void               reloadNavmesh();
-    bool               isNavigablePoint(const sol::table& position);
-    auto               insertDynamicEntity(sol::table table) -> std::optional<CLuaBaseEntity>;
+    void registerCuboidTriggerArea(uint32 triggerAreaID, float xMin, float yMin, float zMin, float xMax, float yMax, float zMax);
+    void registerCylindricalTriggerArea(uint32 triggerAreaID, float xPos, float zPos, float radius);
+    void registerSphericalTriggerArea(uint32 triggerAreaID, float xPos, float yPos, float zPos, float radius);
+
+    auto        levelRestriction() -> sol::object;
+    auto        getPlayers() -> sol::table;
+    auto        getNPCs() -> sol::table;
+    auto        getMobs() -> sol::table;
+    ZONEID      getID();
+    auto        getName() -> const std::string&;
+    REGION_TYPE getRegionID();
+    ZONE_TYPE   getTypeMask();
+    auto        getBattlefieldByInitiator(uint32 charID) -> std::optional<CLuaBattlefield>;
+    WEATHER     getWeather();
+    uint32      getUptime();
+    void        reloadNavmesh();
+    bool        isNavigablePoint(const sol::table& position);
+    auto        insertDynamicEntity(sol::table table) -> std::optional<CLuaBaseEntity>;
 
     auto getSoloBattleMusic();
     auto getPartyBattleMusic();

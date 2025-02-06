@@ -42,7 +42,6 @@ When a status effect is gained twice on a player. It can do one or more of the f
 
 #include "packets/char_health.h"
 #include "packets/char_job_extra.h"
-#include "packets/char_update.h"
 #include "packets/message_basic.h"
 #include "packets/party_effects.h"
 #include "packets/status_effects.h"

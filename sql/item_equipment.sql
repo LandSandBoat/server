@@ -11343,6 +11343,7 @@ INSERT INTO `item_equipment` VALUES (23282,'horos_tights_+2',99,119,262144,304,0
 INSERT INTO `item_equipment` VALUES (23283,'peda._pants_+2',99,119,524288,215,0,0,128,0,0,0);
 INSERT INTO `item_equipment` VALUES (23284,'bagua_pants_+2',99,119,1048576,310,0,0,128,0,0,0);
 INSERT INTO `item_equipment` VALUES (23285,'futhark_trousers_+2',99,119,2097152,339,0,0,128,0,0,0);
+INSERT INTO `item_equipment` VALUES (23303,'kara._pantaloni_+2',99,119,131072,299,0,0,128,0,0,0);
 INSERT INTO `item_equipment` VALUES (23308,'pumm._calligae_+2',99,119,1,64,0,0,256,0,0,0);
 INSERT INTO `item_equipment` VALUES (23309,'anch._gaiters_+2',99,119,2,66,0,0,256,0,0,0);
 INSERT INTO `item_equipment` VALUES (23310,'theo._duckbills_+2',99,119,4,68,0,0,256,0,0,0);

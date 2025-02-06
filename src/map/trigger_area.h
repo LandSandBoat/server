@@ -19,42 +19,75 @@
 ===========================================================================
 */
 
-#ifndef _CTRIGGER_AREA_H
-#define _CTRIGGER_AREA_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
+#include <memory>
 
-class CTriggerArea
+class ITriggerArea
 {
 public:
-    CTriggerArea(uint32 triggerAreaID, bool isCircle);
+    ITriggerArea(uint32 triggerAreaID);
+    virtual ~ITriggerArea() = default;
 
-    uint32 GetTriggerAreaID() const;
+    uint32 getTriggerAreaID() const;
 
-    int16 GetCount() const;
-    int16 AddCount(int16 count);
-    int16 DelCount(int16 count);
+    int16 getCount() const;
+    int16 addCount(int16 count);
+    int16 delCount(int16 count);
 
-    void SetULCorner(float x, float y, float z); // The upper left corner
-    void SetLRCorner(float x, float y, float z); // The lower right corner
-
-    bool isPointInside(position_t pos) const;
+    virtual bool isPointInside(position_t pos) const            = 0;
+    virtual bool isPointInside(float x, float y, float z) const = 0;
 
 private:
-    uint32 m_TriggerAreaID;
-    int16  m_Count; // number of characters in the trigger area
-
-    float x1, y1, z1; // The upper left corner
-    float x2, y2, z2; // The lower right corner
-
-    bool circle;
+    uint32 m_triggerAreaID;
+    int16  m_count; // number of characters in the trigger area
 };
 
-#endif // _CTRIGGER_AREA_H
+class CCuboidTriggerArea final : public ITriggerArea
+{
+public:
+    CCuboidTriggerArea(uint32 triggerAreaID, float xMin, float yMin, float zMin, float xMax, float yMax, float zMax);
+
+    bool isPointInside(float x, float y, float z) const override;
+    bool isPointInside(position_t pos) const override;
+
+private:
+    float m_xMin;
+    float m_yMin;
+    float m_zMin;
+    float m_xMax;
+    float m_yMax;
+    float m_zMax;
+};
+
+class CCylindricalTriggerArea final : public ITriggerArea
+{
+public:
+    CCylindricalTriggerArea(uint32 triggerAreaID, float xPos, float zPos, float radius);
+
+    bool isPointInside(float x, float y, float z) const override;
+    bool isPointInside(position_t pos) const override;
+
+private:
+    float m_xPos;
+    float m_zPos;
+    float m_radius;
+};
+
+class CSphericalTriggerArea final : public ITriggerArea
+{
+public:
+    CSphericalTriggerArea(uint32 triggerAreaID, float xPos, float yPos, float zPos, float radius);
+
+    bool isPointInside(float x, float y, float z) const override;
+    bool isPointInside(position_t pos) const override;
+
+private:
+    float m_xPos;
+    float m_yPos;
+    float m_zPos;
+    float m_radius;
+};

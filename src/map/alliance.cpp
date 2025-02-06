@@ -35,7 +35,6 @@
 #include "utils/jailutils.h"
 
 #include "packets/char_sync.h"
-#include "packets/char_update.h"
 #include "packets/menu_config.h"
 #include "packets/party_define.h"
 #include "packets/party_member_update.h"

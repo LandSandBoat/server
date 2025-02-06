@@ -389,7 +389,8 @@ end
 ---@param tpFactor number
 ---@param isWeaponskill boolean
 ---@param weaponSlot xi.slot
-xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor, isWeaponskill, weaponSlot)
+---@param isCannonball boolean
+xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor, isWeaponskill, weaponSlot, isCannonball)
     local pDif = 0
 
     ----------------------------------------
@@ -419,6 +420,10 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
         local ignoreDefenseFactor = 1 - tpFactor
 
         targetDefense = math.floor(targetDefense * ignoreDefenseFactor)
+    end
+
+    if isCannonball then
+        actorAttack = actor:getStat(xi.mod.DEF)
     end
 
     -- Actor Attack / Target Defense ratio

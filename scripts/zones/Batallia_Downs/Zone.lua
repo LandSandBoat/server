@@ -19,14 +19,14 @@ local function registerRegionAroundNPC(zone, NPCID, zoneID)
     local z        = npc:getZPos()
     local distance = 7
 
-    zone:registerTriggerArea(zoneID,
+    zone:registerCuboidTriggerArea(zoneID,
         x - distance, y - distance, z - distance,
         x + distance, y + distance, z + distance)
 end
 
 zoneObject.onInitialize = function(zone)
     -- A Chocobo Riding Game finish line
-    zone:registerTriggerArea(1, 467.16, 20, -156.82, 0, 0, 0)
+    zone:registerCylindricalTriggerArea(1, 467.16, -156.82, 20)
 
     UpdateNMSpawnPoint(ID.mob.AHTU)
     GetMobByID(ID.mob.AHTU):setRespawnTime(math.random(900, 10800))
@@ -75,7 +75,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    local triggerAreaID = triggerArea:GetTriggerAreaID()
+    local triggerAreaID = triggerArea:getTriggerAreaID()
 
     if player:hasStatusEffect(xi.effect.FULL_SPEED_AHEAD) then
         xi.fsa.onTriggerAreaEnter(player, triggerAreaID)

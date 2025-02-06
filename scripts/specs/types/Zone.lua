@@ -4,8 +4,8 @@
 ---@field onZoneIn? fun(player: CBaseEntity, prevZone: xi.zone): integer|table<integer>?
 ---@field afterZoneIn? fun(player: CBaseEntity)
 ---@field onZoneOut? fun(player: CBaseEntity)
----@field onTriggerAreaEnter? fun(player: CBaseEntity, triggerArea: CTriggerArea, optInstance: CInstance?)
----@field onTriggerAreaLeave? fun(player: CBaseEntity, triggerArea: CTriggerArea, optInstance: CInstance?)
+---@field onTriggerAreaEnter? fun(player: CBaseEntity, triggerArea: ITriggerArea, optInstance: CInstance?)
+---@field onTriggerAreaLeave? fun(player: CBaseEntity, triggerArea: ITriggerArea, optInstance: CInstance?)
 ---@field onInitialize? fun(zone: CZone)
 ---@field onEventUpdate? fun(player: CBaseEntity, csid: integer, option: integer, npc: CBaseEntity)
 ---@field onEventFinish? fun(player: CBaseEntity, csid: integer, option: integer, npc: CBaseEntity)

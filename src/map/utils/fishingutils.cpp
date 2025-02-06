@@ -27,8 +27,8 @@
 #include "packets/caught_fish.h"
 #include "packets/caught_monster.h"
 #include "packets/char_skills.h"
+#include "packets/char_status.h"
 #include "packets/char_sync.h"
-#include "packets/char_update.h"
 #include "packets/chat_message.h"
 #include "packets/entity_animation.h"
 #include "packets/event.h"
@@ -2717,7 +2717,7 @@ namespace fishingutils
                 if (response == nullptr || fishingArea == nullptr || response->fishingToken != PChar->fishingToken)
                 {
                     CatchNothing(PChar, FISHINGFAILTYPE_NONE);
-                    PChar->pushPacket<CCharUpdatePacket>(PChar);
+                    PChar->pushPacket<CCharStatusPacket>(PChar);
                     PChar->pushPacket<CCharSyncPacket>(PChar);
                 }
                 else if (response->hooked && response->catchtype > 0 && response->catchid > 0)

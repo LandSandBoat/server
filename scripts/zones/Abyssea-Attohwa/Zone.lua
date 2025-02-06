@@ -5,7 +5,7 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -180, 15, -210, -120, 21, -156)
+    zone:registerCuboidTriggerArea(1, -180, 15, -210, -120, 21, -156)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -29,7 +29,7 @@ zoneObject.afterZoneIn = function(player)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
+    switch (triggerArea:getTriggerAreaID()): caseof
     {
         [1] = function()
             xi.abyssea.onWardTriggerAreaEnter(player)
@@ -38,7 +38,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
+    switch (triggerArea:getTriggerAreaID()): caseof
     {
         [1] = function()
             xi.abyssea.onWardTriggerAreaLeave(player)

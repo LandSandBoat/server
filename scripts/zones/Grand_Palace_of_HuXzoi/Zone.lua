@@ -7,16 +7,16 @@ local huxzoiGlobal = require('scripts/zones/Grand_Palace_of_HuXzoi/globals')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -507, -4, 697, -501, 4, 702)
-    zone:registerTriggerArea(2, -102, -4, 541,  -97, 4, 546)
-    zone:registerTriggerArea(3, -178, -4,  97, -173, 4, 103)
-    zone:registerTriggerArea(4, -497, -4,  97, -492, 4, 102)
-    zone:registerTriggerArea(5, -742, -4, 372, -736, 4, 379)
-    zone:registerTriggerArea(6,  332, -4, 696,  338, 4, 702)
-    zone:registerTriggerArea(7,  737, -4, 541,  742, 4, 546)
-    zone:registerTriggerArea(8,  661, -4,  87,  667, 4, 103)
-    zone:registerTriggerArea(9,  340, -4,  97,  347, 4, 102)
-    zone:registerTriggerArea(10,  97, -4, 372,  103, 4, 378)
+    zone:registerCuboidTriggerArea(1, -507, -4, 697, -501, 4, 702)
+    zone:registerCuboidTriggerArea(2, -102, -4, 541,  -97, 4, 546)
+    zone:registerCuboidTriggerArea(3, -178, -4,  97, -173, 4, 103)
+    zone:registerCuboidTriggerArea(4, -497, -4,  97, -492, 4, 102)
+    zone:registerCuboidTriggerArea(5, -742, -4, 372, -736, 4, 379)
+    zone:registerCuboidTriggerArea(6,  332, -4, 696,  338, 4, 702)
+    zone:registerCuboidTriggerArea(7,  737, -4, 541,  742, 4, 546)
+    zone:registerCuboidTriggerArea(8,  661, -4,  87,  667, 4, 103)
+    zone:registerCuboidTriggerArea(9,  340, -4,  97,  347, 4, 102)
+    zone:registerCuboidTriggerArea(10,  97, -4, 372,  103, 4, 378)
 
     huxzoiGlobal.pickTemperancePH()
 end
@@ -54,7 +54,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         player:getAnimation() == xi.anim.NONE
     then
         -- prevent 2cs at same time
-        player:startEvent(149 + triggerArea:GetTriggerAreaID())
+        player:startEvent(149 + triggerArea:getTriggerAreaID())
     end
 end
 

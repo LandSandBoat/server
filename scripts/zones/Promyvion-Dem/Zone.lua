@@ -8,22 +8,22 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- Define portal trigger areas.
-    zone:registerTriggerArea(1,   160, 3,  -80, 0, 0, 0) -- Floor 1: Exit Promyvion
-    zone:registerTriggerArea(2,  -280, 3,    0, 0, 0, 0) -- Floor 2: Return to floor 1
-    zone:registerTriggerArea(3,  -160, 3,  440, 0, 0, 0) -- Floor 3 (North): Return to floor 2
-    zone:registerTriggerArea(4,     0, 3, -320, 0, 0, 0) -- Floor 3 (South): Return to floor 2
-    zone:registerTriggerArea(5,   360, 3,  240, 0, 0, 0) -- Floor 4: Return to floor 3
-    zone:registerTriggerArea(6,   120, 3, -280, 0, 0, 0) -- Floor 1: Portal
-    zone:registerTriggerArea(7,   -80, 3,  -80, 0, 0, 0) -- Floor 2: Portal SE - Destination: North
-    zone:registerTriggerArea(8,   -80, 3,   80, 0, 0, 0) -- Floor 2: Portal NE - Destination: South
-    zone:registerTriggerArea(9,  -280, 3, -200, 0, 0, 0) -- Floor 2: Portal SW - Destination: South
-    zone:registerTriggerArea(10, -360, 3,   40, 0, 0, 0) -- Floor 2: Portal NW - Destination: North
-    zone:registerTriggerArea(11,   40, 3, -200, 0, 0, 0) -- Floor 3 (South): Portal NE
-    zone:registerTriggerArea(12, -120, 3, -240, 0, 0, 0) -- Floor 3 (South): Portal NW
-    zone:registerTriggerArea(13, -120, 3, -400, 0, 0, 0) -- Floor 3 (South): Portal SW
-    zone:registerTriggerArea(14, -320, 3,  160, 0, 0, 0) -- Floor 3 (North): Portal SW
-    zone:registerTriggerArea(15,  -40, 3,  320, 0, 0, 0) -- Floor 3 (North): Portal NE
-    zone:registerTriggerArea(16, -120, 3,  160, 0, 0, 0) -- Floor 3 (North): Portal SE
+    zone:registerCylindricalTriggerArea(1, 160, -80, 3) -- Floor 1: Exit Promyvion
+    zone:registerCylindricalTriggerArea(2, -280, 0, 3) -- Floor 2: Return to floor 1
+    zone:registerCylindricalTriggerArea(3, -160, 440, 3) -- Floor 3 (North): Return to floor 2
+    zone:registerCylindricalTriggerArea(4, 0, -320, 3) -- Floor 3 (South): Return to floor 2
+    zone:registerCylindricalTriggerArea(5, 360, 240, 3) -- Floor 4: Return to floor 3
+    zone:registerCylindricalTriggerArea(6, 120, -280, 3) -- Floor 1: Portal
+    zone:registerCylindricalTriggerArea(7, -80, -80, 3) -- Floor 2: Portal SE - Destination: North
+    zone:registerCylindricalTriggerArea(8, -80, 80, 3) -- Floor 2: Portal NE - Destination: South
+    zone:registerCylindricalTriggerArea(9, -280, -200, 3) -- Floor 2: Portal SW - Destination: South
+    zone:registerCylindricalTriggerArea(10, -360, 40, 3) -- Floor 2: Portal NW - Destination: North
+    zone:registerCylindricalTriggerArea(11, 40, -200, 3) -- Floor 3 (South): Portal NE
+    zone:registerCylindricalTriggerArea(12, -120, -240, 3) -- Floor 3 (South): Portal NW
+    zone:registerCylindricalTriggerArea(13, -120, -400, 3) -- Floor 3 (South): Portal SW
+    zone:registerCylindricalTriggerArea(14, -320, 160, 3) -- Floor 3 (North): Portal SW
+    zone:registerCylindricalTriggerArea(15, -40, 320, 3) -- Floor 3 (North): Portal NE
+    zone:registerCylindricalTriggerArea(16, -120, 160, 3) -- Floor 3 (North): Portal SE
 
     -- Select portals.
     xi.promyvion.setupInitialPortals(zone)
@@ -51,7 +51,7 @@ zoneObject.afterZoneIn = function(player)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    local triggerAreaID = triggerArea:GetTriggerAreaID()
+    local triggerAreaID = triggerArea:getTriggerAreaID()
 
     switch (triggerAreaID) : caseof {
         [1] = function() -- Floor 1: Exit Promyvion

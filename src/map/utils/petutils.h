@@ -207,7 +207,7 @@ namespace petutils
     void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet);
     void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet);
     void CalculateJugPetStats(CBattleEntity* PMaster, CPetEntity* PPet);
-    void CalculateAutomatonStats(CBattleEntity* PMaster, CPetEntity* PPet);
+    void CalculateAutomatonStats(CBattleEntity* PMaster, CBattleEntity* PPet);
     void CalculateLuopanStats(CBattleEntity* PMaster, CPetEntity* PPet);
     void FinalizePetStatistics(CBattleEntity* PMaster, CPetEntity* PPet);
 

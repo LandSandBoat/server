@@ -5,17 +5,17 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -36, -50, 83,  -30, -49,  89)    -- Fourth Floor G-6 porter to Lower Delkfutt's Tower
-    zone:registerTriggerArea(2, -49, -50, -50, -43, -49, -43)    -- Fourth Floor G-6 porter to Lower Delkfutt's Tower "1"
-    zone:registerTriggerArea(3, 103, -50, 10,  109, -49,  16)    -- Fourth Floor J-6 porter to Lower Delkfutt's Tower "2"
-    zone:registerTriggerArea(4, -49, -82, -48, -43, -81, -43)    -- Sixth Floor F-10 porter to Seventh Floor "G"
-    zone:registerTriggerArea(5, -489, -98, -48, -483, -97, -43)  -- Seventh Floor F-10 porter to Sixth Floor "G"
-    zone:registerTriggerArea(6,  83,  -82, -48, 89, -81, -43)    -- Sixth Floor J-10 porter to Seventh Floor "H"
-    zone:registerTriggerArea(7, -356, -98, -48, -351, -97, -43)  -- Seventh Floor J-10 porter to Sixth Floor "H"
-    zone:registerTriggerArea(8,  84,  -82, 83,  89, -81,  89)    -- Sixth Floor J-6 porter to Seventh Floor "I"
-    zone:registerTriggerArea(9, -356, -98, 84, -351, -97,  88)   -- Seventh Floor  J-6 porter to Sixth Floor "I"
-    zone:registerTriggerArea(10, -415, -98, 104, -411, -97, 108) -- Seventh Floor  H-6 porter to Sixth Floor "J"
-    zone:registerTriggerArea(11, -489, -130, 84, -484, -129, 88) -- Ninth Floor F-6 porter to Upper Delkfutt's Tower
+    zone:registerCuboidTriggerArea(1, -36, -50, 83,  -30, -49,  89)    -- Fourth Floor G-6 porter to Lower Delkfutt's Tower
+    zone:registerCuboidTriggerArea(2, -49, -50, -50, -43, -49, -43)    -- Fourth Floor G-6 porter to Lower Delkfutt's Tower "1"
+    zone:registerCuboidTriggerArea(3, 103, -50, 10,  109, -49,  16)    -- Fourth Floor J-6 porter to Lower Delkfutt's Tower "2"
+    zone:registerCuboidTriggerArea(4, -49, -82, -48, -43, -81, -43)    -- Sixth Floor F-10 porter to Seventh Floor "G"
+    zone:registerCuboidTriggerArea(5, -489, -98, -48, -483, -97, -43)  -- Seventh Floor F-10 porter to Sixth Floor "G"
+    zone:registerCuboidTriggerArea(6,  83,  -82, -48, 89, -81, -43)    -- Sixth Floor J-10 porter to Seventh Floor "H"
+    zone:registerCuboidTriggerArea(7, -356, -98, -48, -351, -97, -43)  -- Seventh Floor J-10 porter to Sixth Floor "H"
+    zone:registerCuboidTriggerArea(8,  84,  -82, 83,  89, -81,  89)    -- Sixth Floor J-6 porter to Seventh Floor "I"
+    zone:registerCuboidTriggerArea(9, -356, -98, 84, -351, -97,  88)   -- Seventh Floor  J-6 porter to Sixth Floor "I"
+    zone:registerCuboidTriggerArea(10, -415, -98, 104, -411, -97, 108) -- Seventh Floor  H-6 porter to Sixth Floor "J"
+    zone:registerCuboidTriggerArea(11, -489, -130, 84, -484, -129, 88) -- Ninth Floor F-6 porter to Upper Delkfutt's Tower
 
     xi.treasure.initZone(zone)
 end
@@ -39,7 +39,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    local triggerAreaID = triggerArea:GetTriggerAreaID()
+    local triggerAreaID = triggerArea:getTriggerAreaID()
     player:startEvent(triggerAreaID - 1)
 end
 

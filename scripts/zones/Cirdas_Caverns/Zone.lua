@@ -13,7 +13,7 @@ zoneObject.onInitialize = function(zone)
     local locusZ = 60.000
     local distance = 15
 
-    zone:registerTriggerArea(1,
+    zone:registerCuboidTriggerArea(1,
         locusX - distance, locusY - distance, locusZ - distance,
         locusX + distance, locusY + distance, locusZ + distance)
 end

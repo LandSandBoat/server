@@ -33,7 +33,7 @@
 #include "entities/battleentity.h"
 
 #include "packets/char_skills.h"
-#include "packets/char_update.h"
+#include "packets/char_status.h"
 #include "packets/inventory_assign.h"
 #include "packets/inventory_finish.h"
 #include "packets/inventory_item.h"
@@ -1123,7 +1123,7 @@ namespace synthutils
 
         PChar->animation = ANIMATION_SYNTH;
         PChar->updatemask |= UPDATE_HP;
-        PChar->pushPacket<CCharUpdatePacket>(PChar);
+        PChar->pushPacket<CCharStatusPacket>(PChar);
 
         if (PChar->loc.zone->GetID() != 255 && PChar->loc.zone->GetID() != 0)
         {
@@ -1292,7 +1292,7 @@ namespace synthutils
         PChar->CraftContainer->Clean();
         PChar->animation = ANIMATION_NONE;
         PChar->updatemask |= UPDATE_HP;
-        PChar->pushPacket<CCharUpdatePacket>(PChar);
+        PChar->pushPacket<CCharStatusPacket>(PChar);
         return 0;
     }
 

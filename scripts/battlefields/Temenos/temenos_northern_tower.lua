@@ -18,6 +18,7 @@ local content = Limbus:new({
     entryNpc         = 'Matter_Diffusion_Module',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     name             = 'TEMENOS_NORTHERN_TOWER',
+    lootCrateId      = ID.npc.N_LOOT_CRATE,
     timeExtension    = 15,
 })
 
@@ -294,7 +295,7 @@ content.groups =
 
         mobMods  = { [xi.mobMod.DETECTION] = xi.detects.HEARING },
         allDeath = function(battlefield, mob)
-            npcUtil.showCrate(GetNPCByID(ID.TEMENOS_NORTHERN_TOWER.npc.LOOT_CRATE))
+            npcUtil.showCrate(GetNPCByID(ID.npc.N_LOOT_CRATE))
         end
     },
 
@@ -446,7 +447,7 @@ content.loot =
         },
     },
 
-    [ID.TEMENOS_NORTHERN_TOWER.npc.LOOT_CRATE] =
+    [ID.npc.N_LOOT_CRATE] =
     {
         {
             quantity = 5,

@@ -16,7 +16,7 @@ quest.reward =
 }
 
 local handleAfflictorTriggerArea = function(player, triggerArea)
-    local triggerAreaId = triggerArea:GetTriggerAreaID()
+    local triggerAreaId = triggerArea:getTriggerAreaID()
     local yPos          = player:getYPos()
     local requiredYPos  = nil
 

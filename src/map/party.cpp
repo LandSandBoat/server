@@ -39,8 +39,8 @@
 #include <vector>
 
 #include "packets/char_abilities.h"
+#include "packets/char_status.h"
 #include "packets/char_sync.h"
-#include "packets/char_update.h"
 #include "packets/menu_config.h"
 #include "packets/message_basic.h"
 #include "packets/message_standard.h"
@@ -346,7 +346,7 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
 
                 PChar->pushPacket<CPartyDefinePacket>(nullptr);
                 PChar->pushPacket<CPartyMemberUpdatePacket>(PChar, 0, 0, PChar->getZone());
-                PChar->pushPacket<CCharUpdatePacket>(PChar);
+                PChar->pushPacket<CCharStatusPacket>(PChar);
 
                 _sql->Query("DELETE FROM accounts_parties WHERE charid = %u", PChar->id);
 
@@ -435,7 +435,7 @@ void CParty::DelMember(CBattleEntity* PEntity)
 
                 PChar->pushPacket<CPartyDefinePacket>(nullptr);
                 PChar->pushPacket<CPartyMemberUpdatePacket>(PChar, 0, 0, PChar->getZone());
-                PChar->pushPacket<CCharUpdatePacket>(PChar);
+                PChar->pushPacket<CCharStatusPacket>(PChar);
                 PChar->PParty = nullptr;
 
                 if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() != TREASUREPOOL_ZONE)
@@ -636,7 +636,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
             charutils::SavePlayerSettings(PChar);
 
             PChar->pushPacket<CMenuConfigPacket>(PChar);
-            PChar->pushPacket<CCharUpdatePacket>(PChar);
+            PChar->pushPacket<CCharStatusPacket>(PChar);
             PChar->pushPacket<CCharSyncPacket>(PChar);
         }
 
@@ -708,7 +708,7 @@ void CParty::AddMember(uint32 id)
 
             PChar->status = STATUS_UPDATE;
             PChar->pushPacket<CMenuConfigPacket>(PChar);
-            PChar->pushPacket<CCharUpdatePacket>(PChar);
+            PChar->pushPacket<CCharStatusPacket>(PChar);
             PChar->pushPacket<CCharSyncPacket>(PChar);
         }
         PChar->PTreasurePool->UpdatePool(PChar);*/

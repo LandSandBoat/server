@@ -5,7 +5,7 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -2, -17, 140, 2, -16, 142)
+    zone:registerCuboidTriggerArea(1, -2, -17, 140, 2, -16, 142)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -29,7 +29,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
+    switch (triggerArea:getTriggerAreaID()): caseof
     {
         [1] = function()  -- Heaven's Tower enter portal
             player:startEvent(86)

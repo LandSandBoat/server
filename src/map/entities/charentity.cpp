@@ -27,12 +27,13 @@
 
 #include "packets/action.h"
 #include "packets/basic.h"
-#include "packets/char.h"
 #include "packets/char_appearance.h"
 #include "packets/char_health.h"
 #include "packets/char_recast.h"
+#include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/char_update.h"
+#include "packets/entity_update.h"
 #include "packets/event.h"
 #include "packets/event_string.h"
 #include "packets/inventory_finish.h"
@@ -181,17 +182,16 @@ CCharEntity::CCharEntity()
 
     m_PMonstrosity = nullptr;
 
-    m_Costume             = 0;
-    m_Costume2            = 0;
-    m_hasTractor          = 0;
-    m_hasRaise            = 0;
-    m_weaknessLvl         = 0;
-    m_hasArise            = false;
-    m_InsideTriggerAreaID = 0;
-    m_LevelRestriction    = 0;
-    m_lastBcnmTimePrompt  = 0;
-    m_AHHistoryTimestamp  = 0;
-    m_DeathTimestamp      = 0;
+    m_Costume            = 0;
+    m_Costume2           = 0;
+    m_hasTractor         = 0;
+    m_hasRaise           = 0;
+    m_weaknessLvl        = 0;
+    m_hasArise           = false;
+    m_LevelRestriction   = 0;
+    m_lastBcnmTimePrompt = 0;
+    m_AHHistoryTimestamp = 0;
+    m_DeathTimestamp     = 0;
 
     m_EquipFlag         = 0;
     m_EquipBlock        = 0;
@@ -220,7 +220,6 @@ CCharEntity::CCharEntity()
     PUnityChat    = nullptr;
     PTreasurePool = nullptr;
 
-    PAutomaton             = nullptr;
     PClaimedMob            = nullptr;
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
@@ -268,6 +267,7 @@ CCharEntity::CCharEntity()
     wallhackEnabled       = false;
     isSettingBazaarPrices = false;
     isLinkDead            = false;
+    pendingPositionUpdate = false;
 }
 
 CCharEntity::~CCharEntity()
@@ -358,11 +358,6 @@ CCharEntity::~CCharEntity()
         PParty->PopMember(this);
     }
 
-    if (PAutomaton)
-    {
-        PAutomaton->PMaster = nullptr;
-    }
-
     charutils::WriteHistory(this);
 
     destroy(TradeContainer);
@@ -435,57 +430,48 @@ void CCharEntity::pushPacket(std::unique_ptr<CBasicPacket>&& packet)
 
     if (packet->getType() == 0x5B)
     {
-        if (PendingPositionPacket)
+        if (packet->ref<uint32>(0x10) == this->id)
         {
-            PendingPositionPacket = packet.get();
-        }
-        else
-        {
-            PendingPositionPacket = packet.get();
-            PacketList.emplace_back(std::move(packet));
+            pendingPositionUpdate = true;
         }
     }
-    else
-    {
-        PacketList.emplace_back(std::move(packet));
-    }
-}
 
-void CCharEntity::updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
-{
-    auto       itr              = PendingCharPackets.find(PChar->id);
-    const bool hasPendingPacket = itr != PendingCharPackets.end() && itr->second != nullptr;
-    if (hasPendingPacket)
-    {
-        // Found existing packet update for the given char, so we update it instead of pushing new
-        auto& packet = itr->second;
-        packet->updateWith(PChar, type, updatemask);
-    }
-    else
-    {
-        // No existing packet update for the given char, so we push new packet
-        auto packet                   = std::make_unique<CCharPacket>(PChar, type, updatemask);
-        PendingCharPackets[PChar->id] = packet.get();
-        PacketList.emplace_back(std::move(packet));
-    }
+    PacketList.emplace_back(std::move(packet));
 }
 
 void CCharEntity::updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask)
 {
-    auto       itr              = PendingEntityPackets.find(PEntity->id);
-    const bool hasPendingPacket = itr != PendingEntityPackets.end() && itr->second != nullptr;
+    auto       itr              = EntityUpdatePackets.find(PEntity->id);
+    const bool hasPendingPacket = itr != EntityUpdatePackets.end() && itr->second != nullptr;
+    auto*      PChar            = dynamic_cast<CCharEntity*>(PEntity);
     if (hasPendingPacket)
     {
         // Found existing packet update for the given entity, so we update it instead of pushing new
         auto& packet = itr->second;
-        packet->updateWith(PEntity, type, updatemask);
+        if (PChar)
+        {
+            static_cast<CCharUpdatePacket*>(packet)->updateWith(PChar, type, updatemask);
+        }
+        else
+        {
+            static_cast<CEntityUpdatePacket*>(packet)->updateWith(PEntity, type, updatemask);
+        }
     }
     else
     {
         // No existing packet update for the given entity, so we push new packet
-        auto packet                       = std::make_unique<CEntityUpdatePacket>(PEntity, type, updatemask);
-        PendingEntityPackets[PEntity->id] = packet.get();
-        PacketList.emplace_back(std::move(packet));
+        if (PChar)
+        {
+            auto packet                    = std::make_unique<CCharUpdatePacket>(PChar, type, updatemask);
+            EntityUpdatePackets[PChar->id] = packet.get();
+            PacketList.emplace_back(std::move(packet));
+        }
+        else
+        {
+            auto packet                      = std::make_unique<CEntityUpdatePacket>(PEntity, type, updatemask);
+            EntityUpdatePackets[PEntity->id] = packet.get();
+            PacketList.emplace_back(std::move(packet));
+        }
     }
 }
 
@@ -494,17 +480,19 @@ auto CCharEntity::popPacket() -> std::unique_ptr<CBasicPacket>
     auto PPacket = std::move(PacketList.front());
     PacketList.pop_front();
 
-    // Clean up pending maps
+    // Clean up pending
     switch (PPacket->getType())
     {
         case 0x0D: // Char update
-            PendingCharPackets.erase(PPacket->ref<uint32>(0x04));
-            break;
+            [[fallthrough]];
         case 0x0E: // Entity update
-            PendingEntityPackets.erase(PPacket->ref<uint32>(0x04));
+            EntityUpdatePackets.erase(PPacket->ref<uint32>(0x04));
             break;
         case 0x5B: // Position update
-            PendingPositionPacket = nullptr;
+            if (PPacket->ref<uint32>(0x10) == this->id)
+            {
+                pendingPositionUpdate = false;
+            }
             break;
         default:
             break;
@@ -643,6 +631,83 @@ bool CCharEntity::shouldPetPersistThroughZoning()
            petType == PET_TYPE::AVATAR ||
            petType == PET_TYPE::AUTOMATON ||
            (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
+}
+
+void CCharEntity::setAutomatonFrame(AUTOFRAMETYPE frame)
+{
+    automatonInfo.m_Equip.Frame = frame;
+}
+
+void CCharEntity::setAutomatonHead(AUTOHEADTYPE head)
+{
+    automatonInfo.m_Equip.Head = head;
+}
+
+void CCharEntity::setAutomatonAttachment(uint8 slotid, uint8 id)
+{
+    automatonInfo.m_Equip.Attachments[slotid] = id;
+}
+
+void CCharEntity::setAutomatonElementMax(uint8 element, uint8 max)
+{
+    automatonInfo.m_ElementMax[element] = max;
+}
+void CCharEntity::addAutomatonElementCapacity(uint8 element, int8 value)
+{
+    automatonInfo.m_ElementEquip[element] += value;
+}
+
+void CCharEntity::setAutomatonElementalCapacityBonus(uint8 bonus)
+{
+    if (bonus == automatonInfo.m_elementalCapacityBonus)
+    {
+        return;
+    }
+
+    int8 difference = static_cast<int8>(bonus) - automatonInfo.m_elementalCapacityBonus;
+    for (size_t i = 0; i < automatonInfo.m_ElementMax.size(); ++i)
+    {
+        automatonInfo.m_ElementMax[i] += difference;
+    }
+
+    automatonInfo.m_elementalCapacityBonus = bonus;
+}
+
+AUTOFRAMETYPE CCharEntity::getAutomatonFrame() const
+{
+    return static_cast<AUTOFRAMETYPE>(automatonInfo.m_Equip.Frame);
+}
+
+AUTOHEADTYPE CCharEntity::getAutomatonHead() const
+{
+    return static_cast<AUTOHEADTYPE>(automatonInfo.m_Equip.Head);
+}
+
+uint8 CCharEntity::getAutomatonAttachment(uint8 slotid)
+{
+    return automatonInfo.m_Equip.Attachments[slotid];
+}
+
+bool CCharEntity::hasAutomatonAttachment(uint8 attachment)
+{
+    for (auto&& attachmentid : automatonInfo.m_Equip.Attachments)
+    {
+        if (attachmentid == attachment)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+uint8 CCharEntity::getAutomatonElementMax(uint8 element)
+{
+    return automatonInfo.m_ElementMax[element];
+}
+
+uint8 CCharEntity::getAutomatonElementCapacity(uint8 element)
+{
+    return automatonInfo.m_ElementEquip[element];
 }
 
 /************************************************************************
@@ -1014,7 +1079,7 @@ void CCharEntity::PostTick()
 
     if (m_EffectsChanged)
     {
-        pushPacket<CCharUpdatePacket>(this);
+        pushPacket<CCharStatusPacket>(this);
         pushPacket<CCharSyncPacket>(this);
         pushPacket<CCharJobExtraPacket>(this, true);
         pushPacket<CCharJobExtraPacket>(this, false);
@@ -1034,12 +1099,12 @@ void CCharEntity::PostTick()
 
         if (loc.zone && !m_isGMHidden)
         {
-            loc.zone->UpdateCharPacket(this, ENTITY_UPDATE, updatemask);
+            loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);
         }
 
         if (isCharmed)
         {
-            updateCharPacket(this, ENTITY_UPDATE, updatemask);
+            updateEntityPacket(this, ENTITY_UPDATE, updatemask);
         }
 
         if (updatemask & UPDATE_HP)
@@ -1054,7 +1119,7 @@ void CCharEntity::PostTick()
         // Do not send an update packet when only the position has change
         if (updatemask ^ UPDATE_POS)
         {
-            pushPacket<CCharUpdatePacket>(this);
+            pushPacket<CCharStatusPacket>(this);
         }
         updatemask = 0;
     }
@@ -3096,6 +3161,26 @@ bool CCharEntity::OnAttackError(CAttackState& state)
         return true;
     }
     return false;
+}
+
+bool CCharEntity::isInTriggerArea(uint32 triggerAreaID)
+{
+    return charTriggerAreaIDs.find(triggerAreaID) != charTriggerAreaIDs.end();
+}
+
+void CCharEntity::onTriggerAreaEnter(uint32 triggerAreaID)
+{
+    charTriggerAreaIDs.insert(triggerAreaID);
+}
+
+void CCharEntity::onTriggerAreaLeave(uint32 triggerAreaID)
+{
+    charTriggerAreaIDs.erase(triggerAreaID);
+}
+
+void CCharEntity::clearTriggerAreas()
+{
+    charTriggerAreaIDs.clear();
 }
 
 bool CCharEntity::isInEvent()

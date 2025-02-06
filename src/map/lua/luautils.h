@@ -84,7 +84,7 @@ class CItem;
 class CInstance;
 class CMobSkill;
 class CPetSkill;
-class CTriggerArea;
+class ITriggerArea;
 class CStatusEffect;
 class CTradeContainer;
 class CItemPuppet;
@@ -216,8 +216,10 @@ namespace luautils
     void AfterZoneIn(CBaseEntity* PChar);
     void OnZoneInitialize(uint16 ZoneID);
     void OnZoneTick(CZone* PZone);
-    void OnTriggerAreaEnter(CCharEntity* PChar, CTriggerArea* PTriggerArea);
-    void OnTriggerAreaLeave(CCharEntity* PChar, CTriggerArea* PTriggerArea);
+
+    void OnTriggerAreaEnter(CCharEntity* PChar, std::unique_ptr<ITriggerArea> const& PTriggerArea); // when player enters a trigger area in a zone
+    void OnTriggerAreaLeave(CCharEntity* PChar, std::unique_ptr<ITriggerArea> const& PTriggerArea); // when player leaves a trigger area in a zone
+
     void OnTransportEvent(CCharEntity* PChar, uint32 TransportID);
     void OnTimeTrigger(CNpcEntity* PNpc, uint8 triggerID);
     void OnConquestUpdate(CZone* PZone, ConquestUpdate type, uint8 influence, uint8 owner, uint8 ranking, bool isConquestAlliance); // conquest update (hourly or tally)

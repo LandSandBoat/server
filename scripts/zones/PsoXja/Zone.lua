@@ -5,12 +5,12 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1,  -21.469, 27,  -24.255,  -18.723, 32,  -19.877) -- 40 cap (H-8 Tower)
-    zone:registerTriggerArea(2,  337.376, 27,  -19.836,  342.340, 32,  -16.055) -- 50 cap area (J-8 Tower)
-    zone:registerTriggerArea(3,   95.659, 42, -302.390,   99.973, 48, -297.744) -- 60 cap area (H-10 Tower)
-    zone:registerTriggerArea(4, -384.452, 26,  257.961, -379.945, 32,  262.558) -- Uncapped area 1 (F-7 Tower)
-    zone:registerTriggerArea(5, -302.493, 42, -179.995, -297.386, 48, -176.078) -- Uncapped area 2 (G-9 Tower)
-    zone:registerTriggerArea(6,  299.847, 42,  257.716,  303.824, 48,  262.391) -- Uncapped area 3 (I-7 Tower)
+    zone:registerCuboidTriggerArea(1,  -21.469, 27,  -24.255,  -18.723, 32,  -19.877) -- 40 cap (H-8 Tower)
+    zone:registerCuboidTriggerArea(2,  337.376, 27,  -19.836,  342.340, 32,  -16.055) -- 50 cap area (J-8 Tower)
+    zone:registerCuboidTriggerArea(3,   95.659, 42, -302.390,   99.973, 48, -297.744) -- 60 cap area (H-10 Tower)
+    zone:registerCuboidTriggerArea(4, -384.452, 26,  257.961, -379.945, 32,  262.558) -- Uncapped area 1 (F-7 Tower)
+    zone:registerCuboidTriggerArea(5, -302.493, 42, -179.995, -297.386, 48, -176.078) -- Uncapped area 2 (G-9 Tower)
+    zone:registerCuboidTriggerArea(6,  299.847, 42,  257.716,  303.824, 48,  262.391) -- Uncapped area 3 (I-7 Tower)
 
     xi.treasure.initZone(zone)
 end
@@ -63,7 +63,7 @@ zoneObject.afterZoneIn = function(player)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    player:startEvent(19 + triggerArea:GetTriggerAreaID())
+    player:startEvent(19 + triggerArea:getTriggerAreaID())
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)

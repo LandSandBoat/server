@@ -7,9 +7,9 @@ local ID = zones[xi.zone.DANGRUF_WADI]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -133.5, 2, 132.6, -132.7, 4,  133.8)  -- I-8 Geyser
-    zone:registerTriggerArea(2, -213.5, 2,  92.6, -212.7, 4,   94.0)  -- H-8 Geyser
-    zone:registerTriggerArea(3,  -67.3, 2, 532.8,  -66.3, 4,  534.0)  -- J-3 Geyser
+    zone:registerCuboidTriggerArea(1, -133.5, 2, 132.6, -132.7, 4,  133.8)  -- I-8 Geyser
+    zone:registerCuboidTriggerArea(2, -213.5, 2,  92.6, -212.7, 4,   94.0)  -- H-8 Geyser
+    zone:registerCuboidTriggerArea(3,  -67.3, 2, 532.8,  -66.3, 4,  534.0)  -- J-3 Geyser
 
     xi.treasure.initZone(zone)
 end
@@ -33,7 +33,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
+    switch (triggerArea:getTriggerAreaID()): caseof
     {
         [1] = function()
             player:startEvent(10)

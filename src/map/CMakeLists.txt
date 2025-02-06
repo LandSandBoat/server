@@ -153,12 +153,18 @@ set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${CMAKE_SOURCE_D
 
 # Search for module directories
 set(module_include_dirs "")
+set(cmakelist_include_paths "")
 file(STRINGS ${CMAKE_SOURCE_DIR}/modules/init.txt INIT_FILE_ENTRIES REGEX "^[^#\n].*")
 foreach(entry ${INIT_FILE_ENTRIES})
     if (${entry} STREQUAL "")
         continue()
     endif()
     if (IS_DIRECTORY "${CMAKE_SOURCE_DIR}/modules/${entry}")
+        if (EXISTS "${CMAKE_SOURCE_DIR}/modules/${entry}/CMakeLists.txt")
+            list(APPEND cmakelist_include_paths "${CMAKE_SOURCE_DIR}/modules/${entry}/CMakeLists.txt")
+            message(STATUS "Adding module CMakeLists.txt to build: ${CMAKE_SOURCE_DIR}/modules/${entry}/CMakeLists.txt")
+            continue()
+        endif()
         file(GLOB_RECURSE module_files
             "${CMAKE_SOURCE_DIR}/modules/${entry}/*.cpp"
             "${CMAKE_SOURCE_DIR}/modules/${entry}/*.h")
@@ -174,6 +180,13 @@ endforeach()
 add_executable(xi_map
     ${SOURCES}
     ${resource})
+
+foreach(entry ${cmakelist_include_paths})
+    if (${entry} STREQUAL "")
+        continue()
+    endif()
+    include("${entry}")
+endforeach()
 
 if(WIN32)
     set_target_properties(xi_map PROPERTIES OUTPUT_NAME xi_map)

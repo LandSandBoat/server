@@ -32,7 +32,6 @@
 #include "items/item_weapon.h"
 #include "mob_modifier.h"
 #include "mob_spell_container.h"
-#include "packets/char.h"
 #include "player_controller.h"
 #include "recast_container.h"
 #include "status_effect_container.h"

@@ -28,7 +28,6 @@
 #include "entities/charentity.h"
 #include "items/item_weapon.h"
 #include "latent_effect_container.h"
-#include "packets/char_update.h"
 #include "packets/lock_on.h"
 #include "recast_container.h"
 #include "roe.h"

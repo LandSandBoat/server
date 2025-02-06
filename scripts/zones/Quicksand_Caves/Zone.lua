@@ -7,27 +7,27 @@ local ID = zones[xi.zone.QUICKSAND_CAVES]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    -- Weight Door System (RegionID, X, Radius, Z)
-    zone:registerTriggerArea(1, -15, 5, -60, 0, 0, 0)
-    zone:registerTriggerArea(3, 15, 5, -180, 0, 0, 0)
-    zone:registerTriggerArea(5, -580, 5, -420, 0, 0, 0)
-    zone:registerTriggerArea(7, -700, 5, -420, 0, 0, 0)
-    zone:registerTriggerArea(9, -700, 5, -380, 0, 0, 0)
-    zone:registerTriggerArea(11, -780, 5, -460, 0, 0, 0)
-    zone:registerTriggerArea(13, -820, 5, -380, 0, 0, 0)
-    zone:registerTriggerArea(15, -260, 5, 740, 0, 0, 0)
-    zone:registerTriggerArea(17, -340, 5, 660, 0, 0, 0)
-    zone:registerTriggerArea(19, -340, 5, 820, 0, 0, 0)
-    zone:registerTriggerArea(21, -409, 5, 800, 0, 0, 0)
-    zone:registerTriggerArea(23, -420, 5, 740, 0, 0, 0)
-    zone:registerTriggerArea(25, -400, 5, 670, 0, 0, 0)
+    -- Weight Door System
+    zone:registerCylindricalTriggerArea(1, -15, -60, 5)
+    zone:registerCylindricalTriggerArea(3, 15, -180, 5)
+    zone:registerCylindricalTriggerArea(5, -580, -420, 5)
+    zone:registerCylindricalTriggerArea(7, -700, -420, 5)
+    zone:registerCylindricalTriggerArea(9, -700, -380, 5)
+    zone:registerCylindricalTriggerArea(11, -780, -460, 5)
+    zone:registerCylindricalTriggerArea(13, -820, -380, 5)
+    zone:registerCylindricalTriggerArea(15, -260, 740, 5)
+    zone:registerCylindricalTriggerArea(17, -340, 660, 5)
+    zone:registerCylindricalTriggerArea(19, -340, 820, 5)
+    zone:registerCylindricalTriggerArea(21, -409, 800, 5)
+    zone:registerCylindricalTriggerArea(23, -420, 740, 5)
+    zone:registerCylindricalTriggerArea(25, -400, 670, 5)
 
     -- Hole in the Sand
-    zone:registerTriggerArea(30, 495, -9, -817, 497, -7, -815) -- E-11 (Map 2)
-    zone:registerTriggerArea(31, 815, -9, -744, 817, -7, -742) -- M-9 (Map 2)
-    zone:registerTriggerArea(32, 215, 6, -17, 217, 8, -15)     -- K-6 (Map 3)
-    zone:registerTriggerArea(33, -297, 6, 415, -295, 8, 417)   -- E-7 (Map 6)
-    zone:registerTriggerArea(34, -137, 6, -177, -135, 8, -175) -- G-7 (Map 8)
+    zone:registerCuboidTriggerArea(30, 495, -9, -817, 497, -7, -815) -- E-11 (Map 2)
+    zone:registerCuboidTriggerArea(31, 815, -9, -744, 817, -7, -742) -- M-9 (Map 2)
+    zone:registerCuboidTriggerArea(32, 215, 6, -17, 217, 8, -15)     -- K-6 (Map 3)
+    zone:registerCuboidTriggerArea(33, -297, 6, 415, -295, 8, 417)   -- E-7 (Map 6)
+    zone:registerCuboidTriggerArea(34, -137, 6, -177, -135, 8, -175) -- G-7 (Map 8)
 
     xi.treasure.initZone(zone)
 
@@ -65,7 +65,7 @@ local function getWeight(player)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    local triggerAreaID = triggerArea:GetTriggerAreaID()
+    local triggerAreaID = triggerArea:getTriggerAreaID()
 
     -- holes in the sand
     if player and triggerAreaID >= 30 then
@@ -140,7 +140,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
-    local triggerAreaID = triggerArea:GetTriggerAreaID()
+    local triggerAreaID = triggerArea:getTriggerAreaID()
 
     if triggerAreaID < 30 then
         local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + triggerAreaID)

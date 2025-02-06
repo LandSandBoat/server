@@ -117,14 +117,14 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_Misc',37,871);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_Misc',37,872);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_Misc',37,873);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_Misc',37,874);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,840);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,841);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,842);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,843);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,844);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,845);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,846);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,847);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,840);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,841);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,842);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,843);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,844);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,845);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,846);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,847);
 INSERT INTO `mob_skill_lists` VALUES ('Ixion_Melee',39,2341); -- di hoof attack
 INSERT INTO `mob_skill_lists` VALUES ('Ixion_Melee',39,2342); -- di horn attack
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_Misc',40,858);
@@ -1442,10 +1442,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_TBE',321,853); -- Trial By E
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_TBE',321,854); -- Trial By Earth, stone_iv
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_TBE',321,855); -- Trial By Earth, mountain_buster
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_TBE',321,856); -- Trial By Earth, geocrush
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',322,844); -- Waking the Beast, crimson_howl
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',322,846); -- Waking the Beast, flaming_crush
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',322,847); -- Waking the Beast, meteor_strike
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',322,848); -- Waking the Beast, inferno
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_TBF',322,842); -- Trial By Fire, burning_strike
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_TBF',322,844); -- Trial By Fire, crimson_howl
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_TBF',322,845); -- Trial By Fire, fire_iv
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_TBF',322,846); -- Trial By Fire, flaming_crush
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_TBF',322,847); -- Trial By Fire, meteor_strike
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TBW',323,861); -- Trial By Water, spring_water
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TBW',323,862); -- Trial By Water, slowga
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TBW',323,863); -- Trial By Water, water_iv
@@ -1855,20 +1856,16 @@ INSERT INTO `mob_skill_lists` VALUES ('VrtraWyrm',391,1310);
 INSERT INTO `mob_skill_lists` VALUES ('VrtraWyrm',391,1311);
 INSERT INTO `mob_skill_lists` VALUES ('VrtraWyrm',391,1315);
 INSERT INTO `mob_skill_lists` VALUES ('VrtraWyrm',391,1316);
--- INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1031);
 INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1289);
 INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1290);
 INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1291);
-INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1292);
 INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1293);
 INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1294);
 INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1295);
 INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1296);
--- INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1277);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1279);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1280);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1281);
-INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1282);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1283);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1284);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1285);
