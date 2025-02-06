@@ -29,10 +29,10 @@ spellObject.onMobSpawn = function(mob)
     mob:addGambit(ai.t.TARGET, { ai.c.READYING_JA, 0 }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.STUN })
     mob:addGambit(ai.t.TARGET, { ai.c.CASTING_MA, 0 }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.STUN })
     
-    -- Will choose correct storm based on monster weakness
+    -- Will choose correct storm based on target weakness
     mob:addGambit(ai.t.TARGET, { ai.c.NO_STORM, 0 }, { ai.r.MA, ai.s.STORM_MOB_WEAKNESS, 0 }, 0)
 
-    -- Will cast Helix spell based on mosnter weakness
+    -- Will cast Helix spell based on target weakness
     mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.HELIX }, { ai.r.MA, ai.s.HELIX_MOB_WEAKNESS, 0 }, 0)
 
     mob:addGambit(ai.t.TANK, { ai.c.HPP_LT, 50 }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE })
