@@ -2001,12 +2001,6 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        // Do not enter trigger areas while loading in. Set in xi.player.onGameIn
-        if (PChar->GetLocalVar("ZoningIn") > 0)
-        {
-            return;
-        }
-
         std::string                 filename;
         std::optional<CLuaInstance> optInstance = std::nullopt;
         if (PChar->PInstance)

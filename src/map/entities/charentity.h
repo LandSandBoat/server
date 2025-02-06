@@ -39,6 +39,7 @@
 #include "battleentity.h"
 #include "petentity.h"
 
+#include "automatonentity.h"
 #include "utils/fishingutils.h"
 
 #define MAX_QUESTAREA    11
@@ -280,7 +281,6 @@ class CTradeContainer;
 class CItemContainer;
 class CUContainer;
 class CItemEquipment;
-class CAutomatonEntity;
 class CAbilityState;
 class CRangeState;
 class CItemState;
@@ -360,8 +360,40 @@ public:
     uint32 m_claimedDeeds[5]{};
     uint32 m_uniqueEvents[5]{};
 
+    struct
+    {
+        // Store a copy of calculated stats to use when automaton is deactivated for the job info packet (automaton menu)
+        skills_t automatonSkills{};
+        stats_t  automatonStats{};
+        health_t automatonHealth{};
+        look_t   automatonLook{};
+
+        automaton_equip_t    m_Equip{};
+        std::array<uint8, 8> m_ElementMax{};
+        std::array<uint8, 8> m_ElementEquip{};
+        uint8                m_elementalCapacityBonus = 0;
+        std::string          m_automatonName          = "Automaton";
+    } automatonInfo;
+
+    uint8 getAutomatonAttachment(uint8 slot);
+    bool  hasAutomatonAttachment(uint8 attachment);
+
+    uint8 getAutomatonElementMax(uint8 element);
+    uint8 getAutomatonElementCapacity(uint8 element);
+
+    AUTOFRAMETYPE getAutomatonFrame() const;
+    AUTOHEADTYPE  getAutomatonHead() const;
+
+    void setAutomatonFrame(AUTOFRAMETYPE frame);
+    void setAutomatonHead(AUTOHEADTYPE head);
+
+    void setAutomatonAttachment(uint8 slot, uint8 id);
+
+    void setAutomatonElementMax(uint8 element, uint8 max);
+    void addAutomatonElementCapacity(uint8 element, int8 value);
+    void setAutomatonElementalCapacityBonus(uint8 bonus);
+
     UnlockedAttachments_t m_unlockedAttachments{}; // Unlocked Automaton Attachments (1 bit per attachment)
-    CAutomatonEntity*     PAutomaton;              // Automaton statistics
 
     std::vector<CTrustEntity*> PTrusts; // Active trusts
 

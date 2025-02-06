@@ -399,33 +399,53 @@ namespace petutils
         PMob->stats.CHR = (uint16)((fCHR + mCHR) * 0.9f);
     }
 
-    void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats)
+    void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats, uint8 mlvl, JOBTYPE mjob, JOBTYPE sjob)
     {
-        PPet->WorkingSkills.automaton_melee  = std::min(puppetutils::getSkillCap(PMaster, SKILL_AUTOMATON_MELEE), PMaster->GetSkill(SKILL_AUTOMATON_MELEE));
-        PPet->WorkingSkills.automaton_ranged = std::min(puppetutils::getSkillCap(PMaster, SKILL_AUTOMATON_RANGED), PMaster->GetSkill(SKILL_AUTOMATON_RANGED));
-        PPet->WorkingSkills.automaton_magic  = std::min(puppetutils::getSkillCap(PMaster, SKILL_AUTOMATON_MAGIC), PMaster->GetSkill(SKILL_AUTOMATON_MAGIC));
+        skills_t& tempSkills = PMaster->automatonInfo.automatonSkills;
+        stats_t&  tempStats  = PMaster->automatonInfo.automatonStats;
+        health_t& tempHealth = PMaster->automatonInfo.automatonHealth;
+
+        tempSkills.automaton_melee  = std::min(puppetutils::getSkillCap(PMaster, SKILL_AUTOMATON_MELEE, mlvl), PMaster->GetSkill(SKILL_AUTOMATON_MELEE));
+        tempSkills.automaton_ranged = std::min(puppetutils::getSkillCap(PMaster, SKILL_AUTOMATON_RANGED, mlvl), PMaster->GetSkill(SKILL_AUTOMATON_RANGED));
+        tempSkills.automaton_magic  = std::min(puppetutils::getSkillCap(PMaster, SKILL_AUTOMATON_MAGIC, mlvl), PMaster->GetSkill(SKILL_AUTOMATON_MAGIC));
 
         // Set capped flags
         for (int i = 22; i <= 24; ++i)
         {
-            if (PPet->GetSkill(i) == (puppetutils::getSkillCap(PMaster, (SKILLTYPE)i)))
+            if ((tempSkills.skill[i] & 0x7FFF) == (puppetutils::getSkillCap(PMaster, (SKILLTYPE)i, mlvl)))
             {
-                PPet->WorkingSkills.skill[i] |= 0x8000;
+                tempSkills.skill[i] |= 0x8000;
             }
         }
 
-        // Add mods/merits
-        int32 meritbonus = PMaster->PMeritPoints->GetMeritValue(MERIT_AUTOMATON_SKILLS, PMaster);
-        PPet->WorkingSkills.automaton_melee += PMaster->getMod(Mod::AUTO_MELEE_SKILL) + meritbonus;
-        PPet->WorkingSkills.automaton_ranged += PMaster->getMod(Mod::AUTO_RANGED_SKILL) + meritbonus;
         // Share its magic skills to prevent needing separate spells or checks to see which skill to use
-        uint16 amaSkill                     = PPet->WorkingSkills.automaton_magic + PMaster->getMod(Mod::AUTO_MAGIC_SKILL) + meritbonus;
-        PPet->WorkingSkills.automaton_magic = amaSkill;
-        PPet->WorkingSkills.healing         = amaSkill;
-        PPet->WorkingSkills.enhancing       = amaSkill;
-        PPet->WorkingSkills.enfeebling      = amaSkill;
-        PPet->WorkingSkills.elemental       = amaSkill;
-        PPet->WorkingSkills.dark            = amaSkill;
+        uint16 amaSkill            = tempSkills.automaton_magic + PMaster->getMod(Mod::AUTO_MAGIC_SKILL);
+        tempSkills.automaton_magic = amaSkill;
+        tempSkills.healing         = amaSkill;
+        tempSkills.enhancing       = amaSkill;
+        tempSkills.enfeebling      = amaSkill;
+        tempSkills.elemental       = amaSkill;
+        tempSkills.dark            = amaSkill;
+
+        int32 meritbonus = PMaster->PMeritPoints->GetMeritValue(MERIT_AUTOMATON_SKILLS, PMaster);
+
+        // If skill rank is 0, merit bonus needs to be added to be displayed like retail does
+        if (puppetutils::getSkillCap(PMaster, SKILL_AUTOMATON_RANGED, mlvl) == 0)
+        {
+            tempSkills.automaton_ranged = meritbonus + PMaster->getMod(Mod::AUTO_RANGED_SKILL);
+        }
+
+        if (puppetutils::getSkillCap(PMaster, SKILL_AUTOMATON_MAGIC, mlvl) == 0)
+        {
+            auto modBonus = PMaster->getMod(Mod::AUTO_MAGIC_SKILL);
+
+            tempSkills.automaton_magic = meritbonus + modBonus;
+            tempSkills.healing         = meritbonus + modBonus;
+            tempSkills.enhancing       = meritbonus + modBonus;
+            tempSkills.enfeebling      = meritbonus + modBonus;
+            tempSkills.elemental       = meritbonus + modBonus;
+            tempSkills.dark            = meritbonus + modBonus;
+        }
 
         // Declaration of variables needed for calculation.
         float raceStat          = 0; // Final HP for level based on race.
@@ -442,9 +462,6 @@ namespace petutils
 
         uint8 grade = 0;
 
-        uint8   mlvl = PPet->GetMLevel();
-        JOBTYPE mjob = PPet->GetMJob();
-        JOBTYPE sjob = PPet->GetSJob();
         // Calculate HP gain from main job
         int32 mainLevelOver30     = std::clamp(mlvl - 30, 0, 30); // Calculate condition +1HP every lvl after level 30
         int32 mainLevelUpTo60     = (mlvl < 60 ? mlvl - 1 : 59);  // First calculation mode up to level 60 (Used the same for MP)
@@ -475,9 +492,9 @@ namespace petutils
                   (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
         // Calculate Bonus HP
-        bonusStat          = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
-        PPet->health.maxhp = (int32)((raceStat + jobStat + bonusStat + sJobStat) * petStats->HPscale);
-        PPet->health.hp    = PPet->health.maxhp;
+        bonusStat        = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
+        tempHealth.maxhp = (int32)((raceStat + jobStat + bonusStat + sJobStat) * petStats->HPscale);
+        tempHealth.hp    = tempHealth.maxhp;
 
         // Start MP calculation
         raceStat = 0;
@@ -510,88 +527,102 @@ namespace petutils
                        grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
         }
 
-        PPet->health.maxmp = (int32)((raceStat + jobStat + sJobStat) * petStats->MPscale);
-        PPet->health.mp    = PPet->health.maxmp;
+        tempHealth.maxmp = (int32)((raceStat + jobStat + sJobStat) * petStats->MPscale);
+        tempHealth.mp    = tempHealth.maxmp;
 
-        uint16 fSTR = GetBaseToRank(petStats->strRank, PPet->GetMLevel());
-        uint16 fDEX = GetBaseToRank(petStats->dexRank, PPet->GetMLevel());
-        uint16 fVIT = GetBaseToRank(petStats->vitRank, PPet->GetMLevel());
-        uint16 fAGI = GetBaseToRank(petStats->agiRank, PPet->GetMLevel());
-        uint16 fINT = GetBaseToRank(petStats->intRank, PPet->GetMLevel());
-        uint16 fMND = GetBaseToRank(petStats->mndRank, PPet->GetMLevel());
-        uint16 fCHR = GetBaseToRank(petStats->chrRank, PPet->GetMLevel());
+        uint16 slvl = std::floor<uint16>(mlvl / 2);
 
-        uint16 mSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 2), PPet->GetMLevel());
-        uint16 mDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 3), PPet->GetMLevel());
-        uint16 mVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 4), PPet->GetMLevel());
-        uint16 mAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 5), PPet->GetMLevel());
-        uint16 mINT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 6), PPet->GetMLevel());
-        uint16 mMND = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 7), PPet->GetMLevel());
-        uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 8), PPet->GetMLevel());
+        uint16 fSTR = GetBaseToRank(petStats->strRank, mlvl);
+        uint16 fDEX = GetBaseToRank(petStats->dexRank, mlvl);
+        uint16 fVIT = GetBaseToRank(petStats->vitRank, mlvl);
+        uint16 fAGI = GetBaseToRank(petStats->agiRank, mlvl);
+        uint16 fINT = GetBaseToRank(petStats->intRank, mlvl);
+        uint16 fMND = GetBaseToRank(petStats->mndRank, mlvl);
+        uint16 fCHR = GetBaseToRank(petStats->chrRank, mlvl);
 
-        uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 2), PPet->GetSLevel());
-        uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 3), PPet->GetSLevel());
-        uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 4), PPet->GetSLevel());
-        uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 5), PPet->GetSLevel());
-        uint16 sINT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 6), PPet->GetSLevel());
-        uint16 sMND = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 7), PPet->GetSLevel());
-        uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 8), PPet->GetSLevel());
+        uint16 mSTR = GetBaseToRank(grade::GetJobGrade(mjob, 2), mlvl);
+        uint16 mDEX = GetBaseToRank(grade::GetJobGrade(mjob, 3), mlvl);
+        uint16 mVIT = GetBaseToRank(grade::GetJobGrade(mjob, 4), mlvl);
+        uint16 mAGI = GetBaseToRank(grade::GetJobGrade(mjob, 5), mlvl);
+        uint16 mINT = GetBaseToRank(grade::GetJobGrade(mjob, 6), mlvl);
+        uint16 mMND = GetBaseToRank(grade::GetJobGrade(mjob, 7), mlvl);
+        uint16 mCHR = GetBaseToRank(grade::GetJobGrade(mjob, 8), mlvl);
 
-        PPet->stats.STR = fSTR + mSTR + sSTR;
-        PPet->stats.DEX = fDEX + mDEX + sDEX;
-        PPet->stats.VIT = fVIT + mVIT + sVIT;
-        PPet->stats.AGI = fAGI + mAGI + sAGI;
-        PPet->stats.INT = fINT + mINT + sINT;
-        PPet->stats.MND = fMND + mMND + sMND;
-        PPet->stats.CHR = fCHR + mCHR + sCHR;
+        uint16 sSTR = GetBaseToRank(grade::GetJobGrade(sjob, 2), slvl);
+        uint16 sDEX = GetBaseToRank(grade::GetJobGrade(sjob, 3), slvl);
+        uint16 sVIT = GetBaseToRank(grade::GetJobGrade(sjob, 4), slvl);
+        uint16 sAGI = GetBaseToRank(grade::GetJobGrade(sjob, 5), slvl);
+        uint16 sINT = GetBaseToRank(grade::GetJobGrade(sjob, 6), slvl);
+        uint16 sMND = GetBaseToRank(grade::GetJobGrade(sjob, 7), slvl);
+        uint16 sCHR = GetBaseToRank(grade::GetJobGrade(sjob, 8), slvl);
 
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setSkillType(SKILL_AUTOMATON_MELEE);
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (petStats->cmbDelay / 60.0f)))); // every pet should use this eventually
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (petStats->cmbDelay / 60.0f))));
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage((PPet->GetSkill(SKILL_AUTOMATON_MELEE) / 9) * 2 + 3);
+        tempStats.STR = fSTR + mSTR + sSTR;
+        tempStats.DEX = fDEX + mDEX + sDEX;
+        tempStats.VIT = fVIT + mVIT + sVIT;
+        tempStats.AGI = fAGI + mAGI + sAGI;
+        tempStats.INT = fINT + mINT + sINT;
+        tempStats.MND = fMND + mMND + sMND;
+        tempStats.CHR = fCHR + mCHR + sCHR;
 
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setSkillType(SKILL_AUTOMATON_RANGED);
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDamage((PPet->GetSkill(SKILL_AUTOMATON_RANGED) / 9) * 2 + 3);
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDmgType(DAMAGE_TYPE::PIERCING);
-
-        CAutomatonEntity* PAutomaton = static_cast<CAutomatonEntity*>(PPet);
-
-        // Automatons are hard to interrupt
-        PPet->addModifier(Mod::SPELLINTERRUPT, 85);
-
-        switch (PAutomaton->getFrame())
+        if (PPet)
         {
-            default: // case FRAME_HARLEQUIN:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(2, mlvl > 99 ? 99 : mlvl);
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl));
-                break;
-            case FRAME_VALOREDGE:
-                PPet->setModifier(Mod::SHIELDBLOCKRATE, 45);
-                PPet->setMobMod(MOBMOD_CAN_SHIELD_BLOCK, 1);
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl);
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl));
-                break;
-            case FRAME_SHARPSHOT:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(1, mlvl > 99 ? 99 : mlvl);
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(11, mlvl > 99 ? 99 : mlvl));
-                break;
-            case FRAME_STORMWAKER:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl);
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(12, mlvl > 99 ? 99 : mlvl));
-                break;
-        }
+            CAutomatonEntity* PAutomaton = static_cast<CAutomatonEntity*>(PPet);
 
-        // Add Job Point Stat Bonuses
-        if (PMaster->GetMJob() == JOB_PUP)
-        {
-            PPet->addModifier(Mod::ATT, PMaster->getMod(Mod::PET_ATK_DEF));
-            PPet->addModifier(Mod::DEF, PMaster->getMod(Mod::PET_ATK_DEF));
-            PPet->addModifier(Mod::ACC, PMaster->getMod(Mod::PET_ACC_EVA));
-            PPet->addModifier(Mod::EVA, PMaster->getMod(Mod::PET_ACC_EVA));
-            PPet->addModifier(Mod::MATT, PMaster->getMod(Mod::PET_MAB_MDB));
-            PPet->addModifier(Mod::MDEF, PMaster->getMod(Mod::PET_MAB_MDB));
-            PPet->addModifier(Mod::MACC, PMaster->getMod(Mod::PET_MACC_MEVA));
-            PPet->addModifier(Mod::MEVA, PMaster->getMod(Mod::PET_MACC_MEVA));
+            PPet->WorkingSkills = tempSkills;
+            PPet->stats         = tempStats;
+            PPet->health        = tempHealth;
+
+            PAutomaton->m_Equip = PMaster->automatonInfo.m_Equip;
+            PPet->look          = PMaster->automatonInfo.automatonLook;
+            PPet->name          = PMaster->automatonInfo.m_automatonName;
+            PPet->look.size     = MODEL_AUTOMATON;
+
+            static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setSkillType(SKILL_AUTOMATON_MELEE);
+            static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (petStats->cmbDelay / 60.0f)))); // every pet should use this eventually
+            static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (petStats->cmbDelay / 60.0f))));
+            static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage((PPet->GetSkill(SKILL_AUTOMATON_MELEE) / 9) * 2 + 3);
+
+            static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setSkillType(SKILL_AUTOMATON_RANGED);
+            static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDamage((PPet->GetSkill(SKILL_AUTOMATON_RANGED) / 9) * 2 + 3);
+            static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDmgType(DAMAGE_TYPE::PIERCING);
+
+            // Automatons are hard to interrupt
+            PPet->addModifier(Mod::SPELLINTERRUPT, 85);
+
+            switch (PAutomaton->getFrame())
+            {
+                default: // case FRAME_HARLEQUIN:
+                    tempSkills.evasion = battleutils::GetMaxSkill(2, mlvl > 99 ? 99 : mlvl);
+                    PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl));
+                    break;
+                case FRAME_VALOREDGE:
+                    PPet->setModifier(Mod::SHIELDBLOCKRATE, 45);
+                    PPet->setMobMod(MOBMOD_CAN_SHIELD_BLOCK, 1);
+                    tempSkills.evasion = battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl);
+                    PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl));
+                    break;
+                case FRAME_SHARPSHOT:
+                    tempSkills.evasion = battleutils::GetMaxSkill(1, mlvl > 99 ? 99 : mlvl);
+                    PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(11, mlvl > 99 ? 99 : mlvl));
+                    break;
+                case FRAME_STORMWAKER:
+                    tempSkills.evasion = battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl);
+                    PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(12, mlvl > 99 ? 99 : mlvl));
+                    break;
+            }
+
+            // Add Job Point Stat Bonuses
+            if (PMaster->GetMJob() == JOB_PUP)
+            {
+                PPet->addModifier(Mod::ATT, PMaster->getMod(Mod::PET_ATK_DEF));
+                PPet->addModifier(Mod::DEF, PMaster->getMod(Mod::PET_ATK_DEF));
+                PPet->addModifier(Mod::ACC, PMaster->getMod(Mod::PET_ACC_EVA));
+                PPet->addModifier(Mod::EVA, PMaster->getMod(Mod::PET_ACC_EVA));
+                PPet->addModifier(Mod::MATT, PMaster->getMod(Mod::PET_MAB_MDB));
+                PPet->addModifier(Mod::MDEF, PMaster->getMod(Mod::PET_MAB_MDB));
+                PPet->addModifier(Mod::MACC, PMaster->getMod(Mod::PET_MACC_MEVA));
+                PPet->addModifier(Mod::MEVA, PMaster->getMod(Mod::PET_MACC_MEVA));
+            }
         }
     }
 
@@ -974,49 +1005,84 @@ namespace petutils
         FinalizePetStatistics(PMaster, PPet);
     }
 
-    void CalculateAutomatonStats(CBattleEntity* PMaster, CPetEntity* PPet)
+    void CalculateAutomatonStats(CBattleEntity* PMaster, CBattleEntity* PPet)
     {
-        CAutomatonEntity* PAutomaton = static_cast<CAutomatonEntity*>(PPet);
-        switch (PAutomaton->getFrame())
+        CAutomatonEntity* PAutomaton = dynamic_cast<CAutomatonEntity*>(PPet);
+
+        // TODO: should CBattleEntity be able to load a real automaton?
+        if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(PMaster))
         {
-            default: // case FRAME_HARLEQUIN:
-                PPet->SetMJob(JOB_WAR);
-                PPet->SetSJob(JOB_RDM);
-                break;
-            case FRAME_VALOREDGE:
-                PPet->SetMJob(JOB_PLD);
-                PPet->SetSJob(JOB_WAR);
-                break;
-            case FRAME_SHARPSHOT:
-                PPet->SetMJob(JOB_RNG);
-                PPet->SetSJob(JOB_PUP);
-                break;
-            case FRAME_STORMWAKER:
-                PPet->SetMJob(JOB_RDM);
-                PPet->SetSJob(JOB_WHM);
-                break;
+            JOBTYPE mjob = JOBTYPE::JOB_NON;
+            JOBTYPE sjob = JOBTYPE::JOB_NON;
+
+            switch (PChar->getAutomatonFrame())
+            {
+                default: // case FRAME_HARLEQUIN:
+                    mjob = JOB_WAR;
+                    sjob = JOB_RDM;
+                    break;
+                case FRAME_VALOREDGE:
+                    mjob = JOB_PLD;
+                    sjob = JOB_WAR;
+                    break;
+                case FRAME_SHARPSHOT:
+                    mjob = JOB_RNG;
+                    sjob = JOB_PUP;
+                    break;
+                case FRAME_STORMWAKER:
+                    mjob = JOB_RDM;
+                    sjob = JOB_WHM;
+                    break;
+            }
+
+            uint8 mainLevel = PMaster->GetMJob() == JOB_PUP ? PMaster->GetMLevel() + PMaster->getMod(Mod::AUTOMATON_LVL_BONUS) : PMaster->GetSLevel();
+
+            uint32 petID = 0;
+            if (PAutomaton)
+            {
+                petID = PAutomaton->m_PetID;
+                // TEMP: should be MLevel when unsummoned, and PUP level when summoned
+                PPet->SetMLevel(mainLevel);
+                PPet->SetSLevel(mainLevel / 2); // Todo: SetSLevel() already reduces the level?
+            }
+            else
+            {
+                switch (PChar->getAutomatonFrame())
+                {
+                    case FRAME_VALOREDGE:
+                        petID = PETID_VALOREDGEFRAME;
+                        break;
+                    case FRAME_SHARPSHOT:
+                        petID = PETID_SHARPSHOTFRAME;
+                        break;
+                    case FRAME_STORMWAKER:
+                        petID = PETID_STORMWAKERFRAME;
+                        break;
+                    case FRAME_HARLEQUIN:
+                    default:
+                        petID = PETID_HARLEQUINFRAME;
+                        break;
+                }
+            }
+
+            LoadAutomatonStats(PChar, PAutomaton, g_PPetList.at(petID), mainLevel, mjob, sjob); // temp
+
+            if (PAutomaton)
+            {
+                if (PMaster->objtype == TYPE_PC)
+                {
+                    PPet->addModifier(Mod::ATTP, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
+                    PPet->addModifier(Mod::DEFP, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
+                    PPet->addModifier(Mod::MATT, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
+                    PPet->addModifier(Mod::ACC, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
+                    PPet->addModifier(Mod::RACC, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
+                    PPet->addModifier(Mod::EVA, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
+                    PPet->addModifier(Mod::MDEF, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
+                }
+
+                FinalizePetStatistics(PMaster, PAutomaton);
+            }
         }
-
-        // TEMP: should be MLevel when unsummoned, and PUP level when summoned
-        uint8 mainLevel = PMaster->GetMJob() == JOB_PUP ? PMaster->GetMLevel() + PMaster->getMod(Mod::AUTOMATON_LVL_BONUS) : PMaster->GetSLevel();
-        PPet->SetMLevel(mainLevel);
-        PPet->SetSLevel(mainLevel / 2); // Todo: SetSLevel() already reduces the level?
-
-        LoadAutomatonStats(static_cast<CCharEntity*>(PMaster), PPet, g_PPetList.at(PPet->m_PetID)); // temp
-
-        if (PMaster->objtype == TYPE_PC)
-        {
-            CCharEntity* PChar = static_cast<CCharEntity*>(PMaster);
-            PPet->addModifier(Mod::ATTP, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
-            PPet->addModifier(Mod::DEFP, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
-            PPet->addModifier(Mod::MATT, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
-            PPet->addModifier(Mod::ACC, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
-            PPet->addModifier(Mod::RACC, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
-            PPet->addModifier(Mod::EVA, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
-            PPet->addModifier(Mod::MDEF, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
-        }
-
-        FinalizePetStatistics(PMaster, PPet);
     }
 
     void CalculateLuopanStats(CBattleEntity* PMaster, CPetEntity* PPet)
@@ -1123,16 +1189,7 @@ namespace petutils
             return;
         }
 
-        if (PMaster->objtype == TYPE_PC &&
-            (PetID == PETID_HARLEQUINFRAME || PetID == PETID_VALOREDGEFRAME || PetID == PETID_SHARPSHOTFRAME || PetID == PETID_STORMWAKERFRAME))
-        {
-            puppetutils::LoadAutomaton(static_cast<CCharEntity*>(PMaster));
-            PMaster->PPet = static_cast<CCharEntity*>(PMaster)->PAutomaton;
-        }
-        else
-        {
-            LoadPet(PMaster, PetID, spawningFromZone);
-        }
+        LoadPet(PMaster, PetID, spawningFromZone);
 
         CPetEntity* PPet = dynamic_cast<CPetEntity*>(PMaster->PPet);
         if (PPet)
@@ -1350,14 +1407,7 @@ namespace petutils
             });
             // clang-format on
 
-            if (PPetEnt->getPetType() != PET_TYPE::AUTOMATON)
-            {
-                PPetEnt->PMaster = nullptr;
-            }
-            else
-            {
-                PPetEnt->PAI->SetController(nullptr);
-            }
+            PPetEnt->PMaster = nullptr;
             PChar->removePetModifiers(PPetEnt);
             charutils::BuildingCharPetAbilityTable(PChar, PPetEnt, 0); // blank the pet commands
         }
@@ -1756,8 +1806,7 @@ namespace petutils
         CPetEntity* PPet = nullptr;
         if (petType == PET_TYPE::AUTOMATON && PMaster->objtype == TYPE_PC)
         {
-            PPet = static_cast<CCharEntity*>(PMaster)->PAutomaton;
-            PPet->PAI->SetController(std::make_unique<CAutomatonController>(static_cast<CAutomatonEntity*>(PPet)));
+            PPet = new CAutomatonEntity();
         }
         else
         {
@@ -1785,10 +1834,7 @@ namespace petutils
             PPet->look = PPetData->look;
             PPet->name = PPetData->name;
         }
-        else
-        {
-            PPet->look.size = MODEL_AUTOMATON;
-        }
+
         PPet->m_name_prefix  = PPetData->name_prefix;
         PPet->m_Family       = PPetData->m_Family;
         PPet->m_MobSkillList = PPetData->m_MobSkillList;
@@ -1813,7 +1859,13 @@ namespace petutils
         }
         else if (PPet->getPetType() == PET_TYPE::AUTOMATON && PMaster->objtype == TYPE_PC)
         {
+            puppetutils::LoadAutomaton(static_cast<CCharEntity*>(PMaster));
+
             CalculateAutomatonStats(PMaster, PPet);
+
+            puppetutils::EquipAttachments(static_cast<CAutomatonEntity*>(PPet));
+
+            PPet->PAI->SetController(std::make_unique<CAutomatonController>(static_cast<CAutomatonEntity*>(PPet)));
         }
         else if (PPet->getPetType() == PET_TYPE::LUOPAN && PMaster->objtype == TYPE_PC)
         {

@@ -48,47 +48,9 @@ namespace puppetutils
         {
             db::extractFromBlob(rset, "unlocked_attachments", PChar->m_unlockedAttachments);
 
-            if (PChar->PAutomaton != nullptr)
-            {
-                // Make sure we don't delete a pet that is active
-                auto* PZone = zoneutils::GetZone(PChar->PAutomaton->getZone());
-                if (PZone == nullptr)
-                {
-                    destroy(PChar->PAutomaton);
-                }
-                else
-                {
-                    if (PChar->PAutomaton->PInstance)
-                    {
-                        if (PChar->PAutomaton->PInstance->GetEntity(PChar->PAutomaton->targid, TYPE_PET) == nullptr)
-                        {
-                            destroy(PChar->PAutomaton);
-                        }
-                        else
-                        {
-                            PChar->PAutomaton->PMaster = nullptr;
-                        }
-                    }
-                    else if (PZone->GetEntity(PChar->PAutomaton->targid, TYPE_PET) == nullptr)
-                    {
-                        destroy(PChar->PAutomaton);
-                    }
-                    else
-                    {
-                        PChar->PAutomaton->PMaster = nullptr;
-                    }
-                }
-
-                PChar->PPet       = nullptr;
-                PChar->PAutomaton = nullptr;
-            }
-
             if (PChar->GetMJob() == JOB_PUP || PChar->GetSJob() == JOB_PUP)
             {
-                PChar->PAutomaton = new CAutomatonEntity();
-                PChar->PAutomaton->saveModifiers();
-
-                PChar->PAutomaton->name = rset->get<std::string>("name");
+                PChar->automatonInfo.m_automatonName = rset->get<std::string>("name");
 
                 automaton_equip_t tempEquip;
                 db::extractFromBlob(rset, "equipped_attachments", tempEquip);
@@ -100,38 +62,39 @@ namespace puppetutils
                     tempEquip.Frame < FRAME_HARLEQUIN ||
                     tempEquip.Frame > FRAME_STORMWAKER)
                 {
-                    PChar->PAutomaton->name = "Automaton";
+                    PChar->PPet->name = "Automaton";
 
-                    PChar->PAutomaton->setHead(HEAD_HARLEQUIN);
+                    PChar->setAutomatonHead(HEAD_HARLEQUIN);
                     tempEquip.Head = HEAD_HARLEQUIN;
-                    PChar->PAutomaton->setFrame(FRAME_HARLEQUIN);
+                    PChar->setAutomatonFrame(FRAME_HARLEQUIN);
                     tempEquip.Frame = FRAME_HARLEQUIN;
-                    for (int i = 0; i < 12; i++)
 
+                    for (int i = 0; i < 12; i++)
                     {
                         tempEquip.Attachments[i] = 0;
                     }
 
                     for (int i = 0; i < 6; i++)
                     {
-                        PChar->PAutomaton->setElementMax(i, 5);
+                        PChar->setAutomatonElementMax(i, 5);
                     }
 
-                    PChar->PAutomaton->setElementMax(6, 3);
-                    PChar->PAutomaton->setElementMax(7, 3);
+                    PChar->setAutomatonElementMax(6, 3);
+                    PChar->setAutomatonElementMax(7, 3);
 
                     for (int i = 0; i < 8; i++)
                     {
-                        PChar->PAutomaton->m_ElementEquip[i] = 0;
+                        PChar->automatonInfo.m_ElementEquip[i] = 0;
                     }
                 }
 
                 // Add the elemental bonus before we set the head and frame
-                PChar->PAutomaton->setElementalCapacityBonus(PChar->getMod(Mod::AUTO_ELEM_CAPACITY));
+                PChar->setAutomatonElementalCapacityBonus(PChar->getMod(Mod::AUTO_ELEM_CAPACITY));
 
                 setHead(PChar, tempEquip.Head);
                 setFrame(PChar, tempEquip.Frame);
-                LoadAutomatonStats(PChar);
+
+                petutils::CalculateAutomatonStats(PChar, PChar->PPet);
 
                 // Always load Optic Fiber and Optic Fiber II first
                 for (int i = 0; i < 12; i++)
@@ -149,23 +112,13 @@ namespace puppetutils
                         setAttachment(PChar, i, tempEquip.Attachments[i]);
                     }
                 }
-
-                // After the Automaton has all attachments set, make sure we update for Optic Fiber
-                puppetutils::UpdateAttachments(PChar);
-
-                // Set burden based on JP
-                PChar->PAutomaton->setAllBurden(30 - PChar->PJobPoints->GetJobPointValue(JP_ACTIVATE_EFFECT));
-
-                PChar->PAutomaton->UpdateHealth();
-                PChar->PAutomaton->health.hp = PChar->PAutomaton->GetMaxHP();
-                PChar->PAutomaton->health.mp = PChar->PAutomaton->GetMaxMP();
             }
         }
     }
 
     void SaveAutomaton(CCharEntity* PChar)
     {
-        if (PChar->PAutomaton)
+        if (PChar->GetMJob() == JOBTYPE::JOB_PUP || PChar->GetSJob() == JOBTYPE::JOB_PUP)
         {
             const char* Query = "UPDATE char_pet SET "
                                 "unlocked_attachments = '%s', "
@@ -177,27 +130,13 @@ namespace puppetutils
             std::memcpy(unlockedAttachments, &PChar->m_unlockedAttachments, sizeof(unlockedAttachments));
             _sql->EscapeStringLen(unlockedAttachmentsEscaped, unlockedAttachments, sizeof(unlockedAttachments));
 
-            char equippedAttachmentsEscaped[sizeof(PChar->PAutomaton->m_Equip) * 2 + 1];
-            char equippedAttachments[sizeof(PChar->PAutomaton->m_Equip)];
-            std::memcpy(equippedAttachments, &PChar->PAutomaton->m_Equip, sizeof(equippedAttachments));
+            char equippedAttachmentsEscaped[sizeof(PChar->automatonInfo.m_Equip) * 2 + 1];
+            char equippedAttachments[sizeof(PChar->automatonInfo.m_Equip)];
+            std::memcpy(equippedAttachments, &PChar->automatonInfo.m_Equip, sizeof(equippedAttachments));
             _sql->EscapeStringLen(equippedAttachmentsEscaped, equippedAttachments, sizeof(equippedAttachments));
 
             _sql->Query(Query, unlockedAttachmentsEscaped, equippedAttachmentsEscaped, PChar->id);
         }
-        else
-        {
-            const char* Query = "UPDATE char_pet SET "
-                                "unlocked_attachments = '%s' "
-                                "WHERE charid = %u";
-
-            char unlockedAttachmentsEscaped[sizeof(PChar->m_unlockedAttachments) * 2 + 1];
-            char unlockedAttachments[sizeof(PChar->m_unlockedAttachments)];
-            std::memcpy(unlockedAttachments, &PChar->m_unlockedAttachments, sizeof(unlockedAttachments));
-            _sql->EscapeStringLen(unlockedAttachmentsEscaped, unlockedAttachments, sizeof(unlockedAttachments));
-
-            _sql->Query(Query, unlockedAttachmentsEscaped, PChar->id);
-        }
-        // TODO: PUP only: save equipped automaton items
     }
 
     bool UnlockAttachment(CCharEntity* PChar, CItem* PItem)
@@ -283,14 +222,14 @@ namespace puppetutils
 
             for (int i = 0; i < 12; i++)
             {
-                if (attachment == PChar->PAutomaton->getAttachment(i))
+                if (attachment == PChar->getAutomatonAttachment(i))
                 {
                     return;
                 }
             }
         }
 
-        uint8 oldAttachment = PChar->PAutomaton->getAttachment(slotId);
+        uint8 oldAttachment = PChar->getAutomatonAttachment(slotId);
         if (attachment != 0 && oldAttachment != 0)
         {
             setAttachment(PChar, slotId, 0);
@@ -303,9 +242,15 @@ namespace puppetutils
             if (PAttachment && PAttachment->getEquipSlot() == ITEM_PUPPET_ATTACHMENT)
             {
                 valid = true;
-                for (int i = 0; i < 8; i++)
+
+                // Iterate through the 8 elements and validate if the attachment actually fits the current automaton head/frame
+                for (int element = 0; element < 8; element++)
                 {
-                    if (PChar->PAutomaton->getElementCapacity(i) + ((PAttachment->getElementSlots() >> (i * 4)) & 0xF) > PChar->PAutomaton->getElementMax(i))
+                    auto currentElementCapacity = PChar->getAutomatonElementCapacity(element);
+                    auto elementMax             = PChar->getAutomatonElementMax(element);
+                    auto attachmentElementPower = ((PAttachment->getElementSlots() >> (element * 4)) & 0xF);
+
+                    if (currentElementCapacity + attachmentElementPower > elementMax)
                     {
                         valid = false;
                         break;
@@ -315,12 +260,12 @@ namespace puppetutils
 
             if (valid)
             {
-                for (int i = 0; i < 8; i++)
+                for (int element = 0; element < 8; element++)
                 {
-                    PChar->PAutomaton->addElementCapacity(i, (PAttachment->getElementSlots() >> (i * 4)) & 0xF);
+                    PChar->addAutomatonElementCapacity(element, (PAttachment->getElementSlots() >> (element * 4)) & 0xF);
                 }
-                luautils::OnAttachmentEquip(PChar->PAutomaton, PAttachment);
-                PChar->PAutomaton->setAttachment(slotId, attachment);
+
+                PChar->setAutomatonAttachment(slotId, attachment);
             }
             else
             {
@@ -329,7 +274,7 @@ namespace puppetutils
         }
         else
         {
-            attachment = PChar->PAutomaton->getAttachment(slotId);
+            attachment = PChar->getAutomatonAttachment(slotId);
 
             if (attachment != 0)
             {
@@ -337,12 +282,12 @@ namespace puppetutils
 
                 if (PAttachment && PAttachment->getEquipSlot() == ITEM_PUPPET_ATTACHMENT)
                 {
-                    for (int i = 0; i < 8; i++)
+                    for (int element = 0; element < 8; element++)
                     {
-                        PChar->PAutomaton->addElementCapacity(i, -(int8)((PAttachment->getElementSlots() >> (i * 4)) & 0xF));
+                        PChar->addAutomatonElementCapacity(element, -(int8)((PAttachment->getElementSlots() >> (element * 4)) & 0xF));
                     }
-                    luautils::OnAttachmentUnequip(PChar->PAutomaton, PAttachment);
-                    PChar->PAutomaton->setAttachment(slotId, 0);
+
+                    PChar->setAutomatonAttachment(slotId, 0);
                 }
             }
         }
@@ -352,73 +297,64 @@ namespace puppetutils
     {
         uint8 tempElementMax[8];
 
-        for (int i = 0; i < 8; i++)
+        for (int element = 0; element < 8; element++)
         {
-            tempElementMax[i] = PChar->PAutomaton->getElementMax(i);
+            tempElementMax[element] = PChar->getAutomatonElementMax(element);
         }
 
-        if (PChar->PAutomaton->getFrame() != 0)
+        if (PChar->getAutomatonFrame() != 0)
         {
-            CItemPuppet* POldFrame = (CItemPuppet*)itemutils::GetItemPointer(0x2000 + PChar->PAutomaton->getFrame());
+            CItemPuppet* POldFrame = (CItemPuppet*)itemutils::GetItemPointer(0x2000 + PChar->getAutomatonFrame());
             if (POldFrame == nullptr || POldFrame->getEquipSlot() != ITEM_PUPPET_FRAME)
             {
                 return;
             }
-            for (int i = 0; i < 8; i++)
+            for (int element = 0; element < 8; element++)
             {
-                tempElementMax[i] -= (POldFrame->getElementSlots() >> (i * 4)) & 0xF;
+                tempElementMax[element] -= (POldFrame->getElementSlots() >> (element * 4)) & 0xF;
             }
         }
+
+        // Check if they actually have the frame
         CItemPuppet* PFrame = (CItemPuppet*)itemutils::GetItemPointer(0x2000 + frame);
         if (PFrame == nullptr || PFrame->getEquipSlot() != ITEM_PUPPET_FRAME || (frame != FRAME_HARLEQUIN && !HasAttachment(PChar, PFrame)))
         {
             return;
         }
-        for (int i = 0; i < 8; i++)
+
+        for (int element = 0; element < 8; element++)
         {
-            tempElementMax[i] += (PFrame->getElementSlots() >> (i * 4)) & 0xF;
+            tempElementMax[element] += (PFrame->getElementSlots() >> (element * 4)) & 0xF;
         }
 
-        bool valid = true;
+        PChar->setAutomatonFrame((AUTOFRAMETYPE)frame);
+        uint8 head                              = PChar->getAutomatonHead();
+        PChar->automatonInfo.automatonLook.race = 0x07;
 
-        for (int i = 0; i < 8; i++)
+        if (head == 3)
         {
-            if (tempElementMax[i] < PChar->PAutomaton->getElementCapacity(i))
-            {
-                valid = false;
-                break;
-            }
+            PChar->automatonInfo.automatonLook.face = 0xBC + ((frame - 32) * 5);
+        }
+        else if (head == 4)
+        {
+            PChar->automatonInfo.automatonLook.face = 0xBB + ((frame - 32) * 5);
+        }
+        else if (head == 5)
+        {
+            PChar->automatonInfo.automatonLook.face = 0xD3 + ((frame - 32));
+        }
+        else if (head == 6)
+        {
+            PChar->automatonInfo.automatonLook.face = 0xD7 + ((frame - 32));
+        }
+        else
+        {
+            PChar->automatonInfo.automatonLook.face = 0xB9 + ((frame - 32) * 5) + (head - 1);
         }
 
-        if (valid)
+        for (int element = 0; element < 8; element++)
         {
-            PChar->PAutomaton->setFrame((AUTOFRAMETYPE)frame);
-            uint8 head                   = PChar->PAutomaton->getHead();
-            PChar->PAutomaton->look.race = 0x07;
-            if (head == 3)
-            {
-                PChar->PAutomaton->look.face = 0xBC + ((frame - 32) * 5);
-            }
-            else if (head == 4)
-            {
-                PChar->PAutomaton->look.face = 0xBB + ((frame - 32) * 5);
-            }
-            else if (head == 5)
-            {
-                PChar->PAutomaton->look.face = 0xD3 + ((frame - 32));
-            }
-            else if (head == 6)
-            {
-                PChar->PAutomaton->look.face = 0xD7 + ((frame - 32));
-            }
-            else
-            {
-                PChar->PAutomaton->look.face = 0xB9 + ((frame - 32) * 5) + (head - 1);
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                PChar->PAutomaton->setElementMax(i, tempElementMax[i]);
-            }
+            PChar->setAutomatonElementMax(element, tempElementMax[element]);
         }
     }
 
@@ -426,84 +362,80 @@ namespace puppetutils
     {
         uint8 tempElementMax[8];
 
-        for (int i = 0; i < 8; i++)
+        for (int element = 0; element < 8; element++)
         {
-            tempElementMax[i] = PChar->PAutomaton->getElementMax(i);
+            tempElementMax[element] = PChar->getAutomatonElementMax(element);
         }
 
-        if (PChar->PAutomaton->getHead() != 0)
+        if (PChar->getAutomatonHead() != 0)
         {
-            CItemPuppet* POldHead = (CItemPuppet*)itemutils::GetItemPointer(0x2000 + PChar->PAutomaton->getHead());
+            CItemPuppet* POldHead = (CItemPuppet*)itemutils::GetItemPointer(0x2000 + PChar->getAutomatonHead());
             if (POldHead == nullptr || POldHead->getEquipSlot() != ITEM_PUPPET_HEAD)
             {
                 return;
             }
-            for (int i = 0; i < 8; i++)
+            for (int element = 0; element < 8; element++)
             {
-                tempElementMax[i] -= (POldHead->getElementSlots() >> (i * 4)) & 0xF;
+                tempElementMax[element] -= (POldHead->getElementSlots() >> (element * 4)) & 0xF;
             }
         }
+
+        // Check if they actually have the head
         CItemPuppet* PHead = (CItemPuppet*)itemutils::GetItemPointer(0x2000 + head);
         if (PHead == nullptr || PHead->getEquipSlot() != ITEM_PUPPET_HEAD || (head != HEAD_HARLEQUIN && !HasAttachment(PChar, PHead)))
         {
             return;
         }
-        for (int i = 0; i < 8; i++)
+
+        for (int element = 0; element < 8; element++)
         {
-            tempElementMax[i] += (PHead->getElementSlots() >> (i * 4)) & 0xF;
+            tempElementMax[element] += (PHead->getElementSlots() >> (element * 4)) & 0xF;
         }
 
-        bool valid = true;
+        PChar->setAutomatonHead((AUTOHEADTYPE)head);
+        uint8 frame                             = PChar->getAutomatonFrame();
+        PChar->automatonInfo.automatonLook.race = 0x07;
 
-        for (int i = 0; i < 8; i++)
+        if (head == 3)
         {
-            if (tempElementMax[i] < PChar->PAutomaton->getElementCapacity(i))
-            {
-                valid = false;
-                break;
-            }
+            PChar->automatonInfo.automatonLook.face = 0xBC + ((frame - 32) * 5);
         }
-
-        if (valid)
+        else if (head == 4)
         {
-            PChar->PAutomaton->setHead((AUTOHEADTYPE)head);
-            uint8 frame                  = PChar->PAutomaton->getFrame();
-            PChar->PAutomaton->look.race = 0x07;
-            if (head == 3)
-            {
-                PChar->PAutomaton->look.face = 0xBC + ((frame - 32) * 5);
-            }
-            else if (head == 4)
-            {
-                PChar->PAutomaton->look.face = 0xBB + ((frame - 32) * 5);
-            }
-            else if (head == 5)
-            {
-                PChar->PAutomaton->look.face = 0xD3 + ((frame - 32));
-            }
-            else if (head == 6)
-            {
-                PChar->PAutomaton->look.face = 0xD7 + ((frame - 32));
-            }
-            else
-            {
-                PChar->PAutomaton->look.face = 0xB9 + ((frame - 32) * 5) + (head - 1);
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                PChar->PAutomaton->setElementMax(i, tempElementMax[i]);
-            }
+            PChar->automatonInfo.automatonLook.face = 0xBB + ((frame - 32) * 5);
+        }
+        else if (head == 5)
+        {
+            PChar->automatonInfo.automatonLook.face = 0xD3 + ((frame - 32));
+        }
+        else if (head == 6)
+        {
+            PChar->automatonInfo.automatonLook.face = 0xD7 + ((frame - 32));
+        }
+        else
+        {
+            PChar->automatonInfo.automatonLook.face = 0xB9 + ((frame - 32) * 5) + (head - 1);
+        }
+        for (int element = 0; element < 8; element++)
+        {
+            PChar->setAutomatonElementMax(element, tempElementMax[element]);
         }
     }
 
     uint16 getSkillCap(CCharEntity* PChar, SKILLTYPE skill, uint8 level)
     {
+        if (PChar == nullptr)
+        {
+            ShowWarning("puppetutils::getSkillCap() - Null PChar passed to function.");
+            return 0;
+        }
+
         int8 rank = 0;
         if (skill < SKILL_AUTOMATON_MELEE || skill > SKILL_AUTOMATON_MAGIC)
         {
             return 0;
         }
-        switch (PChar->PAutomaton->getFrame())
+        switch (PChar->getAutomatonFrame())
         {
             default: // case FRAME_HARLEQUIN:
                 rank = 5;
@@ -536,7 +468,7 @@ namespace puppetutils
                 break;
         }
 
-        switch (PChar->PAutomaton->getHead())
+        switch (PChar->getAutomatonHead())
         {
             case HEAD_VALOREDGE:
                 if (skill == SKILL_AUTOMATON_MELEE)
@@ -576,43 +508,6 @@ namespace puppetutils
         return battleutils::GetMaxSkill(rank, level > 99 ? 99 : level);
     }
 
-    uint16 getSkillCap(CCharEntity* PChar, SKILLTYPE skill)
-    {
-        if (PChar == nullptr)
-        {
-            ShowWarning("puppetutils::getSkillCap() - Null PChar passed to function.");
-            return 0;
-        }
-
-        return getSkillCap(PChar, skill, PChar->PAutomaton->GetMLevel());
-    }
-
-    void LoadAutomatonStats(CCharEntity* PChar)
-    {
-        // Save this since LoadPet() below changes it, but we don't want this changed
-        auto origPetID = PChar->petZoningInfo.petID;
-        switch (PChar->PAutomaton->getFrame())
-        {
-            default: // case FRAME_HARLEQUIN:
-                ShowWarning("puppetutils::LoadAutomatonStats Invalid frame detected for '%s', used Harlequin instead! (%u)",
-                            PChar->getName(), (uint16)PChar->PAutomaton->getFrame());
-            case FRAME_HARLEQUIN:
-                petutils::LoadPet(PChar, PETID_HARLEQUINFRAME, false);
-                break;
-            case FRAME_VALOREDGE:
-                petutils::LoadPet(PChar, PETID_VALOREDGEFRAME, false);
-                break;
-            case FRAME_SHARPSHOT:
-                petutils::LoadPet(PChar, PETID_SHARPSHOTFRAME, false);
-                break;
-            case FRAME_STORMWAKER:
-                petutils::LoadPet(PChar, PETID_STORMWAKERFRAME, false);
-                break;
-        }
-        PChar->PPet                = nullptr; // already saved as PAutomaton, don't need it twice unless it's summoned
-        PChar->petZoningInfo.petID = origPetID;
-    }
-
     void TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl)
     {
         if (!PAutomaton->PMaster || PAutomaton->PMaster->objtype != TYPE_PC)
@@ -622,7 +517,7 @@ namespace puppetutils
         }
 
         CCharEntity* PChar = (CCharEntity*)PAutomaton->PMaster;
-        if (getSkillCap(PChar, SkillID) != 0 && !(PAutomaton->WorkingSkills.skill[SkillID] & 0x8000))
+        if (getSkillCap(PChar, SkillID, PAutomaton->GetMLevel()) != 0 && !(PAutomaton->WorkingSkills.skill[SkillID] & 0x8000))
         {
             uint16 CurSkill = PChar->RealSkills.skill[SkillID];
             uint16 MaxSkill = getSkillCap(PChar, SkillID, std::min(PAutomaton->GetMLevel(), lvl));
@@ -724,7 +619,7 @@ namespace puppetutils
 
     void CheckAttachmentsForManeuver(CCharEntity* PChar, EFFECT maneuver, bool gain)
     {
-        CAutomatonEntity* PAutomaton = PChar->PAutomaton;
+        CAutomatonEntity* PAutomaton = dynamic_cast<CAutomatonEntity*>(PChar->PPet);
 
         if (PAutomaton)
         {
@@ -751,9 +646,28 @@ namespace puppetutils
         }
     }
 
+    void EquipAttachments(CAutomatonEntity* PAutomaton)
+    {
+        if (PAutomaton)
+        {
+            for (uint8 i = 0; i < 12; i++)
+            {
+                if (PAutomaton->getAttachment(i) != 0)
+                {
+                    CItemPuppet* PAttachment = (CItemPuppet*)itemutils::GetItemPointer(0x2100 + PAutomaton->getAttachment(i));
+
+                    if (PAttachment)
+                    {
+                        luautils::OnAttachmentEquip(PAutomaton, PAttachment);
+                    }
+                }
+            }
+        }
+    }
+
     void UpdateAttachments(CCharEntity* PChar)
     {
-        CAutomatonEntity* PAutomaton = PChar->PAutomaton;
+        CAutomatonEntity* PAutomaton = dynamic_cast<CAutomatonEntity*>(PChar->PPet);
 
         if (PAutomaton)
         {
@@ -783,7 +697,8 @@ namespace puppetutils
 
     void PreLevelRestriction(CCharEntity* PChar)
     {
-        CAutomatonEntity* PAutomaton = PChar->PAutomaton;
+        CAutomatonEntity* PAutomaton = dynamic_cast<CAutomatonEntity*>(PChar->PPet);
+
         if (PAutomaton)
         {
             for (int i = 0; i < 12; i++)
@@ -808,7 +723,7 @@ namespace puppetutils
 
     void PostLevelRestriction(CCharEntity* PChar)
     {
-        CAutomatonEntity* PAutomaton = PChar->PAutomaton;
+        CAutomatonEntity* PAutomaton = dynamic_cast<CAutomatonEntity*>(PChar->PPet);
 
         if (PAutomaton)
         {
@@ -831,5 +746,4 @@ namespace puppetutils
             UpdateAttachments(PChar);
         }
     }
-
 } // namespace puppetutils

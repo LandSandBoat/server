@@ -1224,6 +1224,12 @@ void CZone::CheckTriggerAreas()
         // TODO: When we start to use octrees or spatial hashing to split up zones,
         //     : use them here to make the search domain smaller.
 
+        // Do not enter trigger areas while loading in. Set in xi.player.onGameIn
+        if (PChar->GetLocalVar("ZoningIn") > 0)
+        {
+            return;
+        }
+
         for (const auto& triggerArea : m_triggerAreaList)
         {
             const auto triggerAreaID = triggerArea->getTriggerAreaID();

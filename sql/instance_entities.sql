@@ -2445,8 +2445,72 @@ INSERT INTO `instance_entities` VALUES (7704,17093333); -- Runic Lamp 2
 INSERT INTO `instance_entities` VALUES (7704,17093334); -- Runic Lamp 3
 INSERT INTO `instance_entities` VALUES (7704,17093335); -- Runic Lamp 4
 INSERT INTO `instance_entities` VALUES (7704,17093336); -- Runic Lamp 5
+-- Doors
 INSERT INTO `instance_entities` VALUES (7704,17093354);
 INSERT INTO `instance_entities` VALUES (7704,17093355);
+INSERT INTO `instance_entities` VALUES (7704,17093356);
+INSERT INTO `instance_entities` VALUES (7704,17093357);
+INSERT INTO `instance_entities` VALUES (7704,17093358);
+INSERT INTO `instance_entities` VALUES (7704,17093359);
+INSERT INTO `instance_entities` VALUES (7704,17093360);
+INSERT INTO `instance_entities` VALUES (7704,17093361);
+INSERT INTO `instance_entities` VALUES (7704,17093362);
+INSERT INTO `instance_entities` VALUES (7704,17093363);
+INSERT INTO `instance_entities` VALUES (7704,17093364);
+INSERT INTO `instance_entities` VALUES (7704,17093365);
+INSERT INTO `instance_entities` VALUES (7704,17093366);
+INSERT INTO `instance_entities` VALUES (7704,17093367);
+INSERT INTO `instance_entities` VALUES (7704,17093368);
+INSERT INTO `instance_entities` VALUES (7704,17093369);
+INSERT INTO `instance_entities` VALUES (7704,17093370);
+INSERT INTO `instance_entities` VALUES (7704,17093371);
+INSERT INTO `instance_entities` VALUES (7704,17093372);
+INSERT INTO `instance_entities` VALUES (7704,17093373);
+INSERT INTO `instance_entities` VALUES (7704,17093374);
+INSERT INTO `instance_entities` VALUES (7704,17093375);
+INSERT INTO `instance_entities` VALUES (7704,17093376);
+INSERT INTO `instance_entities` VALUES (7704,17093377);
+INSERT INTO `instance_entities` VALUES (7704,17093378);
+INSERT INTO `instance_entities` VALUES (7704,17093379);
+INSERT INTO `instance_entities` VALUES (7704,17093380);
+INSERT INTO `instance_entities` VALUES (7704,17093381);
+INSERT INTO `instance_entities` VALUES (7704,17093382);
+INSERT INTO `instance_entities` VALUES (7704,17093383);
+INSERT INTO `instance_entities` VALUES (7704,17093384);
+INSERT INTO `instance_entities` VALUES (7704,17093385);
+INSERT INTO `instance_entities` VALUES (7704,17093386);
+INSERT INTO `instance_entities` VALUES (7704,17093387);
+INSERT INTO `instance_entities` VALUES (7704,17093388);
+INSERT INTO `instance_entities` VALUES (7704,17093389);
+INSERT INTO `instance_entities` VALUES (7704,17093390);
+INSERT INTO `instance_entities` VALUES (7704,17093391);
+INSERT INTO `instance_entities` VALUES (7704,17093392);
+INSERT INTO `instance_entities` VALUES (7704,17093393);
+INSERT INTO `instance_entities` VALUES (7704,17093394);
+INSERT INTO `instance_entities` VALUES (7704,17093395);
+INSERT INTO `instance_entities` VALUES (7704,17093396);
+INSERT INTO `instance_entities` VALUES (7704,17093397);
+INSERT INTO `instance_entities` VALUES (7704,17093398);
+INSERT INTO `instance_entities` VALUES (7704,17093399);
+INSERT INTO `instance_entities` VALUES (7704,17093400);
+INSERT INTO `instance_entities` VALUES (7704,17093401);
+INSERT INTO `instance_entities` VALUES (7704,17093402);
+INSERT INTO `instance_entities` VALUES (7704,17093403);
+INSERT INTO `instance_entities` VALUES (7704,17093404);
+INSERT INTO `instance_entities` VALUES (7704,17093405);
+INSERT INTO `instance_entities` VALUES (7704,17093406);
+INSERT INTO `instance_entities` VALUES (7704,17093407);
+INSERT INTO `instance_entities` VALUES (7704,17093408);
+INSERT INTO `instance_entities` VALUES (7704,17093409);
+INSERT INTO `instance_entities` VALUES (7704,17093410);
+INSERT INTO `instance_entities` VALUES (7704,17093411);
+INSERT INTO `instance_entities` VALUES (7704,17093412);
+INSERT INTO `instance_entities` VALUES (7704,17093413);
+INSERT INTO `instance_entities` VALUES (7704,17093414);
+INSERT INTO `instance_entities` VALUES (7704,17093415);
+INSERT INTO `instance_entities` VALUES (7704,17093416);
+INSERT INTO `instance_entities` VALUES (7704,17093417);
+
 INSERT INTO `instance_entities` VALUES (7704,17093430); -- Rune of Transfer
 INSERT INTO `instance_entities` VALUES (7704,17093431); -- Vending box
 

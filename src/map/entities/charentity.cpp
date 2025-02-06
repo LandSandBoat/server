@@ -220,7 +220,6 @@ CCharEntity::CCharEntity()
     PUnityChat    = nullptr;
     PTreasurePool = nullptr;
 
-    PAutomaton             = nullptr;
     PClaimedMob            = nullptr;
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
@@ -357,11 +356,6 @@ CCharEntity::~CCharEntity()
     if (PParty)
     {
         PParty->PopMember(this);
-    }
-
-    if (PAutomaton)
-    {
-        PAutomaton->PMaster = nullptr;
     }
 
     charutils::WriteHistory(this);
@@ -637,6 +631,83 @@ bool CCharEntity::shouldPetPersistThroughZoning()
            petType == PET_TYPE::AVATAR ||
            petType == PET_TYPE::AUTOMATON ||
            (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
+}
+
+void CCharEntity::setAutomatonFrame(AUTOFRAMETYPE frame)
+{
+    automatonInfo.m_Equip.Frame = frame;
+}
+
+void CCharEntity::setAutomatonHead(AUTOHEADTYPE head)
+{
+    automatonInfo.m_Equip.Head = head;
+}
+
+void CCharEntity::setAutomatonAttachment(uint8 slotid, uint8 id)
+{
+    automatonInfo.m_Equip.Attachments[slotid] = id;
+}
+
+void CCharEntity::setAutomatonElementMax(uint8 element, uint8 max)
+{
+    automatonInfo.m_ElementMax[element] = max;
+}
+void CCharEntity::addAutomatonElementCapacity(uint8 element, int8 value)
+{
+    automatonInfo.m_ElementEquip[element] += value;
+}
+
+void CCharEntity::setAutomatonElementalCapacityBonus(uint8 bonus)
+{
+    if (bonus == automatonInfo.m_elementalCapacityBonus)
+    {
+        return;
+    }
+
+    int8 difference = static_cast<int8>(bonus) - automatonInfo.m_elementalCapacityBonus;
+    for (size_t i = 0; i < automatonInfo.m_ElementMax.size(); ++i)
+    {
+        automatonInfo.m_ElementMax[i] += difference;
+    }
+
+    automatonInfo.m_elementalCapacityBonus = bonus;
+}
+
+AUTOFRAMETYPE CCharEntity::getAutomatonFrame() const
+{
+    return static_cast<AUTOFRAMETYPE>(automatonInfo.m_Equip.Frame);
+}
+
+AUTOHEADTYPE CCharEntity::getAutomatonHead() const
+{
+    return static_cast<AUTOHEADTYPE>(automatonInfo.m_Equip.Head);
+}
+
+uint8 CCharEntity::getAutomatonAttachment(uint8 slotid)
+{
+    return automatonInfo.m_Equip.Attachments[slotid];
+}
+
+bool CCharEntity::hasAutomatonAttachment(uint8 attachment)
+{
+    for (auto&& attachmentid : automatonInfo.m_Equip.Attachments)
+    {
+        if (attachmentid == attachment)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+uint8 CCharEntity::getAutomatonElementMax(uint8 element)
+{
+    return automatonInfo.m_ElementMax[element];
+}
+
+uint8 CCharEntity::getAutomatonElementCapacity(uint8 element)
+{
+    return automatonInfo.m_ElementEquip[element];
 }
 
 /************************************************************************

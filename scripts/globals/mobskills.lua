@@ -95,23 +95,19 @@ local function fTP(tp, ftp1, ftp2, ftp3)
     return 1 -- no ftp mod
 end
 
-xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
+xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, ftp, tpeffect)
     -- TODO: Replace this with ranged attack code
-    return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.RANGED)
+    return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, ftp, xi.mobskills.physicalTpBonus.RANGED)
 end
 
 -- helper function to handle a single hit and check for parrying, guarding, and blocking
-local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, tpEffect, minRatio, maxRatio)
+local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, tpEffect)
     -- if a non-ranged physical mobskill then can parry or guard
     if
         tpEffect == xi.mobskills.physicalTpBonus.RANGED or
         (not xi.combat.physical.isParried(target, mob) and
         not xi.combat.physical.isGuarded(target, mob))
     then
-        local pdif = math.random((minRatio * 1000), (maxRatio * 1000)) --generate random PDIF
-        pdif = pdif / 1000 --multiplier set.
-        hitdamage = hitdamage * pdif
-
         -- also handle blocking
         local isBlockedWithShieldMastery = false
         if xi.combat.physical.isBlocked(target, mob) then
@@ -137,10 +133,10 @@ end
 -----------------------------------
 -- Mob Physical Abilities
 -- accMod   : linear multiplier for accuracy (1 default)
--- dmgMod   : linear multiplier for damage (1 default)
+-- ftp   : linear multiplier for damage (1 default)
 -- tpEffect : Defined in xi.mobskills.physicalTpBonus
 -----------------------------------
-xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmgMod, tpEffect, mtp000, mtp150, mtp300, offcratiomod)
+xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp, tpEffect, mtp000, mtp150, mtp300, isCannonball)
     local returninfo    = {}
 
     -- mobs use fSTR (but with special calculation in the called function)
@@ -159,18 +155,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmg
         targetEvasion = targetEvasion + target:getStatusEffect(xi.effect.YONIN):getPower()
     end
 
-    local base = math.max(1, mob:getWeaponDmg() + fSTR)
-
-    --work out and cap ratio
-    if not offcratiomod then -- default to attack. Pretty much every physical mobskill will use this, Cannonball being the exception.
-        offcratiomod = mob:getStat(xi.mod.ATT)
-    end
-
-    local ratio   = offcratiomod / target:getStat(xi.mod.DEF)
     local lvldiff = math.max(0, mob:getMainLvl() - target:getMainLvl())
-
-    ratio = ratio + lvldiff * 0.05
-    ratio = utils.clamp(ratio, 0, 4)
 
     --work out hit rate for mobs
     local hitrate = ((mob:getACC() * accMod) - targetEvasion) / 2 + (lvldiff * 2) + 75
@@ -178,40 +163,21 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmg
     hitrate = utils.clamp(hitrate, 20, 95)
 
     --work out the base damage for a single hit
-    local hitdamage = math.max(1, base + lvldiff) * dmgMod
+    local hitdamage = math.max(1, mob:getWeaponDmg() + fSTR) * ftp
 
-    --work out min and max cRatio
-    local maxRatio = ratio
-    local minRatio = ratio - 0.375
-
-    if ratio < 0.5 then
-        maxRatio = ratio + 0.5
-    elseif ratio <= 0.7 then
-        maxRatio = 1
-    elseif ratio <= 1.2 then
-        maxRatio = ratio + 0.3
-    elseif ratio <= 1.5 then
-        maxRatio = (ratio * 0.25) + ratio
-    elseif ratio <= 2.625 then
-        maxRatio = ratio + 0.375
-    elseif ratio <= 3.25 then
-        maxRatio = 3
-    end
-
-    if ratio < 0.38 then
-        minRatio = 0
-    elseif ratio <= 1.25 then
-        minRatio = ratio * (1176 / 1024) - (448 / 1024)
-    elseif ratio <= 1.51 then
-        minRatio = 1
-    elseif ratio <= 2.44 then
-        minRatio = ratio * (1176 / 1024) - (775 / 1024)
-    end
-
-    --apply ftp (assumes 1~3 scalar linear mod)
+    -- TODO: Remove this and use a scalable function for a single FTP value
     if tpEffect == xi.mobskills.physicalTpBonus.DMG_VARIES then
         hitdamage = hitdamage * fTP(skill:getTP(), mtp000, mtp150, mtp300)
     end
+
+    local applyLevelCorrection = xi.combat.levelCorrection.isLevelCorrectedZone(mob)
+    local weaponType           = xi.skill.NONE -- use NONE for mobs
+    local attMod               = 1             -- TODO: implement attack boosts for mobskills
+    local canCrit              = false         -- TODO: implement which skills can crit
+    local isCannonball         = isCannonball or false
+    local pDif                 = xi.combat.physical.calculateMeleePDIF(mob, target, weaponType, attMod, canCrit, applyLevelCorrection, false, 0, false, xi.slot.MAIN, isCannonball)
+
+    hitdamage = hitdamage * pDif
 
     -- start the hits
     local finaldmg   = 0
@@ -229,12 +195,12 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmg
 
     if (math.random(1, 100)) <= firstHitChance then
         -- use helper function check for parry guard and blocking and handle the hit
-        hitslanded, finaldmg = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, tpEffect, minRatio, maxRatio)
+        hitslanded, finaldmg = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, tpEffect)
     end
 
     while hitsdone < numHits do
         if (math.random(1, 100)) <= hitrate then --it hit
-            hitslanded, finaldmg = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, tpEffect, minRatio, maxRatio)
+            hitslanded, finaldmg = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, tpEffect)
         end
 
         hitsdone = hitsdone + 1

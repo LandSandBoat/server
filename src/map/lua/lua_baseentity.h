@@ -661,6 +661,7 @@ public:
     bool  addStatusEffect(sol::variadic_args va);
     bool  addStatusEffectEx(sol::variadic_args va);
     auto  getStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& SourceType, sol::object const& SourceTypeParam) -> std::optional<CLuaStatusEffect>;
+    auto  getStatusEffectBySource(uint16 StatusID, EffectSourceType SourceType, uint16 SourceTypeParam) -> std::optional<CLuaStatusEffect>;
     auto  getStatusEffects() -> sol::table;
     int16 getStatusEffectElement(uint16 statusId);
     bool  canGainStatusEffect(uint16 effect, sol::object const& powerObj);
