@@ -414,7 +414,7 @@ std::optional<SpellID> CMobSpellContainer::EnSpellAgainstTargetWeakness(CBattleE
             break;
         }
     }
-     return choice;
+    return choice;
 }
 
 std::optional<SpellID> CMobSpellContainer::StormDayAgainstTargetWeakness(CBattleEntity* PTarget)
@@ -440,7 +440,7 @@ std::optional<SpellID> CMobSpellContainer::StormDayAgainstTargetWeakness(CBattle
     std::optional<SpellID> choice = std::nullopt;
     switch (weakestIndex + 1) // Adjust to ignore ELEMENT_NONE
     {
-      case ELEMENT_FIRE:
+        case ELEMENT_FIRE:
         {
             choice = GetBestAvailable(SPELLFAMILY_FIRESTORM);
             break;
@@ -507,7 +507,7 @@ std::optional<SpellID> CMobSpellContainer::HelixAgainstTargetWeakness(CBattleEnt
     std::optional<SpellID> choice = std::nullopt;
     switch (weakestIndex + 1) // Adjust to ignore ELEMENT_NONE
     {
-      case ELEMENT_FIRE:
+        case ELEMENT_FIRE:
         {
             choice = GetBestAvailable(SPELLFAMILY_PYROHELIX);
             break;
