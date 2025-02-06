@@ -327,7 +327,7 @@ namespace gambits
                     }
                     else if (action.select == G_SELECT::BEST_AGAINST_TARGET)
                     {
-                    	auto spell_to_cast = static_cast<SpellID>(action.select_arg);
+                        auto spell_to_cast = static_cast<SpellID>(action.select_arg);
                         auto spell_id      = POwner->SpellContainer->GetBestAgainstTargetWeakness(target, spell_to_cast);
                         if (spell_id.has_value())
                         {
