@@ -3,6 +3,8 @@
 #define _SEARCH_COMMENT_PACKET_H_
 
 #include "common/cbasetypes.h"
+
+#include <array>
 #include <string>
 
 class SearchCommentPacket
@@ -10,11 +12,8 @@ class SearchCommentPacket
 public:
     SearchCommentPacket(uint32 playerId, std::string const& comment);
 
-    uint8* GetData();
-    uint16 GetSize();
-
 private:
-    uint8 data[204]{};
+    std::array<uint8, 204> buffer_{};
 };
 
 #endif

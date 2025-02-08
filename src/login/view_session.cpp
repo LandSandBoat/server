@@ -29,9 +29,11 @@
 
 void view_session::read_func()
 {
-    uint8 code = ref<uint8>(data_, 8);
+    auto lua = application_.lua();
 
-    std::string sessionHash = loginHelpers::getHashFromPacket(ipAddress, data_);
+    uint8 code = ref<uint8>(buffer_.data(), 8);
+
+    std::string sessionHash = loginHelpers::getHashFromPacket(ipAddress, buffer_.data());
 
     if (sessionHash == "")
     {
@@ -41,7 +43,7 @@ void view_session::read_func()
     session_t& session = loginHelpers::get_authenticated_session(ipAddress, sessionHash);
     if (!session.view_session)
     {
-        session.view_session = std::make_shared<view_session>(std::forward<asio::ssl::stream<asio::ip::tcp::socket>>(socket_));
+        session.view_session = std::make_shared<view_session>(application_, std::forward<asio::ssl::stream<asio::ip::tcp::socket>>(socket_));
     }
     session.view_session->sessionHash = sessionHash;
 
@@ -51,9 +53,9 @@ void view_session::read_func()
     {
         case 0x07: // 07: "Notifying lobby server of current selections."
         {
-            auto requestedCharacterID                 = ref<uint32>(data_, 28);
+            auto requestedCharacterID                 = ref<uint32>(buffer_.data(), 28);
             char requestedCharacter[PacketNameLength] = {};
-            std::memcpy(&requestedCharacter, data_ + 36, PacketNameLength - 1);
+            std::memcpy(&requestedCharacter, buffer_.data() + 36, PacketNameLength - 1);
 
             uint32 accountID = 0;
 
@@ -80,8 +82,8 @@ void view_session::read_func()
 
             if (auto data = session.data_session)
             {
-                std::memset(data->data_, 0, 0x05);
-                data->data_[0] = 0x02;
+                std::memset(data->buffer_.data(), 0, 0x05);
+                data->buffer_.data()[0] = 0x02;
                 data->do_write(0x05);
             }
         }
@@ -90,29 +92,29 @@ void view_session::read_func()
         {
             if (!settings::get<bool>("login.CHARACTER_DELETION"))
             {
-                loginHelpers::generateErrorMessage(data_, loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER);
+                loginHelpers::generateErrorMessage(buffer_.data(), loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER);
                 do_write(0x24);
                 return;
             }
 
-            memset(data_, 0, 0x20);
-            data_[0] = 0x20; // size
+            std::memset(buffer_.data(), 0, 0x20);
+            buffer_.data()[0] = 0x20; // size
 
-            data_[4] = 0x49; // I
-            data_[5] = 0x58; // X
-            data_[6] = 0x46; // F
-            data_[7] = 0x46; // F
+            buffer_.data()[4] = 0x49; // I
+            buffer_.data()[5] = 0x58; // X
+            buffer_.data()[6] = 0x46; // F
+            buffer_.data()[7] = 0x46; // F
 
-            data_[8] = 0x03; // result
+            buffer_.data()[8] = 0x03; // result
 
             unsigned char hash[16];
 
-            md5(reinterpret_cast<uint8*>(data_), hash, 0x20);
-            std::memcpy(data_ + 12, hash, 16);
+            md5(reinterpret_cast<uint8*>(buffer_.data()), hash, 0x20);
+            std::memcpy(buffer_.data() + 12, hash, 16);
 
             do_write(0x20);
 
-            uint32 charID = ref<uint32>(data_, 0x20);
+            uint32 charID = ref<uint32>(buffer_.data(), 0x20);
 
             ShowInfo(fmt::format("attempt to delete char:<{}> from ip:<{}>",
                                  charID, ipAddress));
@@ -143,7 +145,7 @@ void view_session::read_func()
         case 0x21: // 33: Registering character name onto the lobby server
         {
             // creating new char
-            if (loginHelpers::createCharacter(session, data_) == -1)
+            if (loginHelpers::createCharacter(session, buffer_.data()) == -1)
             {
                 socket_.lowest_layer().close();
                 return;
@@ -152,21 +154,21 @@ void view_session::read_func()
             session.justCreatedNewChar = true;
             ShowInfo(fmt::format("char <{}> was successfully created on account {}", session.requestedNewCharacterName, session.accountID));
 
-            memset(data_, 0, 0x20);
+            std::memset(buffer_.data(), 0, 0x20);
 
-            data_[0] = 0x20; // size
+            buffer_.data()[0] = 0x20; // size
 
-            data_[4] = 0x49; // I
-            data_[5] = 0x58; // X
-            data_[6] = 0x46; // F
-            data_[7] = 0x46; // F
+            buffer_.data()[4] = 0x49; // I
+            buffer_.data()[5] = 0x58; // X
+            buffer_.data()[6] = 0x46; // F
+            buffer_.data()[7] = 0x46; // F
 
-            data_[8] = 0x03; // result
+            buffer_.data()[8] = 0x03; // result
 
             unsigned char hash[16];
 
-            md5(reinterpret_cast<uint8*>(data_), hash, 0x20);
-            std::memcpy(data_ + 12, hash, 16);
+            md5(buffer_.data(), hash, 0x20);
+            std::memcpy(buffer_.data() + 12, hash, 16);
 
             do_write(0x20);
         }
@@ -174,11 +176,11 @@ void view_session::read_func()
         case 0x22: // 34: Checking name and Gold World Pass
         {
             // block creation of character if in maintenance mode or generally disabled
-            auto maintMode               = settings::get<uint8>("login.MAINT_MODE");
-            auto enableCharacterCreation = settings::get<bool>("login.CHARACTER_CREATION");
+            const auto maintMode               = settings::get<uint8>("login.MAINT_MODE");
+            const auto enableCharacterCreation = settings::get<bool>("login.CHARACTER_CREATION");
             if (maintMode > 0 || !enableCharacterCreation)
             {
-                loginHelpers::generateErrorMessage(data_, loginErrors::errorCode::FAILED_TO_REGISTER_WITH_THE_NAME_SERVER);
+                loginHelpers::generateErrorMessage(buffer_.data(), loginErrors::errorCode::FAILED_TO_REGISTER_WITH_THE_NAME_SERVER);
                 do_write(0x24);
                 return;
             }
@@ -186,7 +188,7 @@ void view_session::read_func()
             {
                 // creating new char
                 char CharName[PacketNameLength] = {};
-                std::memcpy(CharName, data_ + 32, PacketNameLength - 1);
+                std::memcpy(CharName, buffer_.data() + 32, PacketNameLength - 1);
 
                 std::optional<std::string> invalidNameReason = std::nullopt;
 
@@ -245,6 +247,7 @@ void view_session::read_func()
 
                 // TODO: Don't raw-access Lua like this outside of Lua helper code.
                 // (optional) Check if the name contains any words on the bad word list
+
                 auto loginSettingsTable = lua["xi"]["settings"]["login"].get<sol::table>();
                 if (auto badWordsList = loginSettingsTable.get_or<sol::table>("BANNED_WORDS_LIST", sol::lua_nil); badWordsList.valid())
                 {
@@ -266,7 +269,7 @@ void view_session::read_func()
                     // Send error code:
                     // The character name you entered is unavailable. Please choose another name.
                     // TODO: This message is displayed in Japanese, needs fixing.
-                    loginHelpers::generateErrorMessage(data_, loginErrors::errorCode::CHARACTER_NAME_UNAVAILABLE);
+                    loginHelpers::generateErrorMessage(buffer_.data(), loginErrors::errorCode::CHARACTER_NAME_UNAVAILABLE);
                     do_write(0x24);
                     return;
                 }
@@ -275,20 +278,20 @@ void view_session::read_func()
                     // copy charname
                     session.requestedNewCharacterName = CharName;
 
-                    memset(data_, 0, 0x20);
-                    data_[0] = 0x20; // size
+                    std::memset(buffer_.data(), 0, 0x20);
+                    buffer_.data()[0] = 0x20; // size
 
-                    data_[4] = 0x49; // I
-                    data_[5] = 0x58; // X
-                    data_[6] = 0x46; // F
-                    data_[7] = 0x46; // F
+                    buffer_.data()[4] = 0x49; // I
+                    buffer_.data()[5] = 0x58; // X
+                    buffer_.data()[6] = 0x46; // F
+                    buffer_.data()[7] = 0x46; // F
 
-                    data_[8] = 0x03; // result
+                    buffer_.data()[8] = 0x03; // result
 
                     unsigned char hash[16];
 
-                    md5(reinterpret_cast<uint8*>(data_), hash, 0x20);
-                    std::memcpy(data_ + 12, hash, 16);
+                    md5(buffer_.data(), hash, 0x20);
+                    std::memcpy(buffer_.data() + 12, hash, 16);
 
                     do_write(0x20);
                 }
@@ -297,7 +300,7 @@ void view_session::read_func()
         break;
         case 0x26: // 38: Version + Expansions, "Setting up connection."
         {
-            std::string client_ver_data((data_ + 0x74), 6); // Full length is 10 but we drop last 4. This contains "E" in the english client. Perhaps this can be used as a hint for language?
+            std::string client_ver_data(reinterpret_cast<const char*>(buffer_.data() + 0x74), 6); // Full length is 10 but we drop last 4. This contains "E" in the english client. Perhaps this can be used as a hint for language?
             client_ver_data = client_ver_data + "xx_x";     // And then we replace those last 4
             DebugSockets(fmt::format("Version: {} from {}", client_ver_data, ipAddress));
 
@@ -340,10 +343,10 @@ void view_session::read_func()
 
             if (fatalMismatch)
             {
-                if (auto data = session.view_session.get())
+                if (auto viewSession = session.view_session.get())
                 {
-                    loginHelpers::generateErrorMessage(data->data_, loginErrors::errorCode::GAMES_DATA_HAS_BEEN_UPDATED); // "The games data has been updated"
-                    data->do_write(0x24);
+                    loginHelpers::generateErrorMessage(viewSession->buffer_.data(), loginErrors::errorCode::GAMES_DATA_HAS_BEEN_UPDATED); // "The games data has been updated"
+                    viewSession->do_write(0x24);
                     return;
                 }
             }
@@ -368,34 +371,34 @@ void view_session::read_func()
             ref<uint16>(packet.data(), 32) = loginHelpers::generateExpansionBitmask();
             ref<uint16>(packet.data(), 36) = loginHelpers::generateFeatureBitmask();
 
-            std::memset(data_, 0, 0x28);
-            std::memcpy(data_, packet.data(), 0x28);
+            std::memset(buffer_.data(), 0, 0x28);
+            std::memcpy(buffer_.data(), packet.data(), 0x28);
 
             // Hash the packet data and then write the value of the hash into the packet.
             unsigned char hash[16];
-            md5(reinterpret_cast<uint8*>(data_), hash, 0x28);
-            std::memcpy(data_ + 12, hash, 16);
+            md5(buffer_.data(), hash, 0x28);
+            std::memcpy(buffer_.data() + 12, hash, 16);
 
             DebugSockets("view_session: Sending version and expansions info to account %d", session.accountID);
 
-            if (auto data = session.view_session.get())
+            if (auto dataSession = session.view_session.get())
             {
-                std::memcpy(data->data_, data_, 0x28);
-                data->do_write(0x28);
+                std::memcpy(dataSession->buffer_.data(), buffer_.data(), 0x28);
+                dataSession->do_write(0x28);
             }
         }
         break;
         case 0x1F: // 31: "Acquiring Player Data"
         {
-            if (auto data = session.data_session.get())
+            if (auto dataSession = session.data_session.get())
             {
-                std::memset(data->data_, 0, 5);
-                data->data_[0] = 0x01;
-                data->do_write(0x05);
+                std::memset(dataSession->buffer_.data(), 0, 5);
+                dataSession->buffer_.data()[0] = 0x01;
+                dataSession->do_write(0x05);
             }
             else
             {
-                loginHelpers::generateErrorMessage(data_, loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER); // "Could not connect to lobby server.\nPlease check this title's news for announcements."
+                loginHelpers::generateErrorMessage(buffer_.data(), loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER); // "Could not connect to lobby server.\nPlease check this title's news for announcements."
                 do_write(0x24);                                                                                       // This used to error, but this case is probably not valid after sessionHash. // TODO: is this this else block still needed?
                 return;
             }
@@ -403,7 +406,7 @@ void view_session::read_func()
         break;
         case 0x24: // 36: "Acquiring FINAL FANTASY XI server data"
         {
-            std::memset(data_, 0, 0x40);
+            std::memset(buffer_.data(), 0, 0x40);
             auto serverName = settings::get<std::string>("main.SERVER_NAME");
 
             lpkt_world_list worldList = {};
@@ -419,7 +422,7 @@ void view_session::read_func()
             worldList.world_name[0].no = 0x20;
             std::memcpy(worldList.world_name[0].name, serverName.c_str(), std::clamp<size_t>(serverName.length(), 0, 15));
 
-            if (auto data = session.view_session.get())
+            if (auto dataSession = session.view_session.get())
             {
                 worldList.packet_size = sizeof(packet_t) + sizeof(uint32_t) + sizeof(lpkt_world_name) * worldList.sumofworld;
 
@@ -427,8 +430,8 @@ void view_session::read_func()
                 md5(reinterpret_cast<uint8*>(&worldList), Hash, worldList.packet_size);
                 loginPackets::copyHashIntoPacket(worldList, Hash);
 
-                std::memcpy(data->data_, &worldList, worldList.packet_size);
-                data->do_write(worldList.packet_size);
+                std::memcpy(dataSession->buffer_.data(), &worldList, worldList.packet_size);
+                dataSession->do_write(worldList.packet_size);
             }
         }
         break;

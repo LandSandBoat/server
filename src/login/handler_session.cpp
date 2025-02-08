@@ -21,8 +21,9 @@
 
 #include "handler_session.h"
 
-handler_session::handler_session(asio::ssl::stream<asio::ip::tcp::socket> socket)
+handler_session::handler_session(Application& application, asio::ssl::stream<asio::ip::tcp::socket> socket)
 : socket_(std::move(socket))
+, application_(application)
 {
     asio::error_code ec = {};
     socket_.lowest_layer().set_option(asio::socket_base::reuse_address(true));
@@ -58,7 +59,7 @@ void handler_session::start()
 void handler_session::do_read()
 {
     // clang-format off
-    socket_.next_layer().async_read_some(asio::buffer(data_, max_length),
+    socket_.next_layer().async_read_some(asio::buffer(buffer_.data(), buffer_.size()),
     [this, self = shared_from_this()](std::error_code ec, std::size_t length)
     {
         if (!ec)
@@ -77,7 +78,7 @@ void handler_session::do_read()
 void handler_session::do_write(std::size_t length)
 {
     // clang-format off
-    asio::async_write(socket_.next_layer(), asio::buffer(data_, length),
+    asio::async_write(socket_.next_layer(), asio::buffer(buffer_.data(), buffer_.size()),
     [this, self = shared_from_this()](std::error_code ec, std::size_t /*length*/)
     {
         if (!ec)

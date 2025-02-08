@@ -43,16 +43,19 @@ public:
     Application& operator=(Application&&)      = delete;
 
     void run();
+    bool isRunning();
+
+    auto lua() -> sol::state_view;
+    auto ioContext() -> asio::io_context&;
 
 protected:
     std::string       serverName_;
     std::atomic<bool> requestExit_;
 
-    sol::lua_state lua_;
+    sol::state lua_;
 
     asio::io_context ioContext_;
 
     std::unique_ptr<argparse::ArgumentParser> argParser_;
     std::unique_ptr<ConsoleService>           consoleService_;
-
 };

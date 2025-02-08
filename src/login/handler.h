@@ -33,8 +33,9 @@ template <typename T>
 class handler
 {
 public:
-    handler(asio::io_context& io_context, unsigned int port)
-    : acceptor_(io_context, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
+    handler(Application& application, asio::io_context& io_context, unsigned int port)
+    : application_(application)
+    , acceptor_(io_context, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
     , sslContext_(asio::ssl::context::tls_server)
     {
         acceptor_.set_option(asio::socket_base::reuse_address(true));
@@ -52,23 +53,23 @@ private:
     {
         // clang-format off
         acceptor_.async_accept(
-        [this](std::error_code ec, asio::ip::tcp::socket socket)
+        [this, &application = application_](std::error_code ec, asio::ip::tcp::socket socket)
         {
             if (!ec)
             {
                 if constexpr (std::is_same_v<T, auth_session>)
                 {
-                    auto auth_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_));
+                    auto auth_handler = std::make_shared<T>(application, asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_));
                     auth_handler->start();
                 }
                 else if constexpr (std::is_same_v<T, view_session>)
                 {
-                    auto view_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_));
+                    auto view_handler = std::make_shared<T>(application, asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_));
                     view_handler->start();
                 }
                 else if constexpr (std::is_same_v<T, data_session>)
                 {
-                    auto data_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_));
+                    auto data_handler = std::make_shared<T>(application, asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_));
                     data_handler->start();
                 }
             }
@@ -82,6 +83,7 @@ private:
         // clang-format on
     }
 
+    Application&            application_;
     asio::ip::tcp::acceptor acceptor_;
     asio::ssl::context      sslContext_;
 };

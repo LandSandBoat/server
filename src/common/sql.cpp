@@ -360,7 +360,7 @@ int32 SqlConnection::QueryStr(const char* query)
     auto endTime = hires_clock::now();
     auto dTime   = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
 
-    if (gProcessLoaded && settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))
+    if (settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))
     {
         if (dTime > std::chrono::milliseconds(settings::get<uint32>("logging.SQL_SLOW_QUERY_ERROR_TIME")))
         {

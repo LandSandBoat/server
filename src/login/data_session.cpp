@@ -25,7 +25,7 @@
 
 void data_session::read_func()
 {
-    std::string sessionHash = loginHelpers::getHashFromPacket(ipAddress, data_);
+    std::string sessionHash = loginHelpers::getHashFromPacket(ipAddress, buffer_.data());
 
     if (sessionHash == "")
     {
@@ -41,11 +41,11 @@ void data_session::read_func()
     session_t& session = loginHelpers::get_authenticated_session(ipAddress, sessionHash);
     if (!session.data_session)
     {
-        session.data_session              = std::make_shared<data_session>(std::forward<asio::ssl::stream<asio::ip::tcp::socket>>(socket_));
+        session.data_session              = std::make_shared<data_session>(application_, std::forward<asio::ssl::stream<asio::ip::tcp::socket>>(socket_));
         session.data_session->sessionHash = sessionHash;
     }
 
-    uint8 code = ref<uint8>(data_, 0);
+    uint8 code = ref<uint8>(buffer_.data(), 0);
     DebugSockets(fmt::format("data code: {} from {}", code, ipAddress));
 
     switch (code)
@@ -53,11 +53,11 @@ void data_session::read_func()
         case 0xA1: // 161
         {
             auto   maintMode          = settings::get<uint8>("login.MAINT_MODE");
-            uint32 recievedAcccountID = ref<uint32>(data_, 1);
+            uint32 recievedAcccountID = ref<uint32>(buffer_.data(), 1);
 
             if (session.accountID == recievedAcccountID)
             {
-                session.serverIP = ref<uint32>(data_, 5);
+                session.serverIP = ref<uint32>(buffer_.data(), 5);
 
                 uint32 numContentIds = 0;
 
@@ -195,27 +195,27 @@ void data_session::read_func()
                 // from logging in or creating new characters
                 if (maintMode > 0 && i == 0)
                 {
-                    if (auto data = session.view_session.get())
+                    if (auto viewSession = session.view_session.get())
                     {
-                        loginHelpers::generateErrorMessage(data->data_, loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER);
-                        data->do_write(0x24);
+                        loginHelpers::generateErrorMessage(viewSession->buffer_.data(), loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER);
+                        viewSession->do_write(0x24);
                     }
                     ShowWarning(fmt::format("char:({}) attmpted login during maintenance mode (0xA2). Sending error to client.", session.accountID));
                     return;
                 }
 
-                if (auto data = session.data_session.get())
+                if (auto dataSession = session.data_session.get())
                 {
                     uList[0] = 0x03;                             // Send character list command in xiloader
                     uList[1] = characterInfoResponse.characters; // xiloader interprets this as the number of characters in the list
 
-                    std::memset(data->data_, 0, sizeof(data_));
-                    std::memcpy(data->data_, uList, 0x148);
+                    std::memset(dataSession->buffer_.data(), 0, sizeof(buffer_.data()));
+                    std::memcpy(dataSession->buffer_.data(), uList, 0x148);
 
-                    data->do_write(0x148);
+                    dataSession->do_write(0x148);
                 }
 
-                if (auto data = session.view_session.get())
+                if (auto viewSession = session.view_session.get())
                 {
                     // size of packet + 1 uint32 + the actually set number of characters
                     uint32_t size                     = sizeof(packet_t) + sizeof(uint32_t) + sizeof(lpkt_chr_info_sub2) * characterInfoResponse.characters;
@@ -226,9 +226,9 @@ void data_session::read_func()
 
                     loginPackets::copyHashIntoPacket(characterInfoResponse, hash);
 
-                    std::memset(data->data_, 0, sizeof(data_));
-                    std::memcpy(data->data_, &characterInfoResponse, size);
-                    data->do_write(size);
+                    std::memset(viewSession->buffer_.data(), 0, sizeof(buffer_.data()));
+                    std::memcpy(viewSession->buffer_.data(), &characterInfoResponse, size);
+                    viewSession->do_write(size);
                 }
             }
         }
@@ -237,7 +237,7 @@ void data_session::read_func()
         {
             // Some kind of magic regarding the blowfish keys
             uint8 key3[20] = {};
-            std::memcpy(key3, data_ + 1, sizeof(key3));
+            std::memcpy(key3, buffer_.data() + 1, sizeof(key3));
 
             // https://github.com/atom0s/XiPackets/blob/main/lobby/S2C_0x000B_ResponseNextLogin.md
             lpkt_next_login characterSelectionResponse = {};
@@ -251,7 +251,7 @@ void data_session::read_func()
             {
                 ShowWarning(fmt::format("data_session: login data corrupt (0xA2). Disconnecting client {}", ipAddress));
 
-                loginHelpers::generateErrorMessage(data_, loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER);
+                loginHelpers::generateErrorMessage(buffer_.data(), loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER);
                 do_write(0x24);
                 socket_.lowest_layer().close();
                 return;
@@ -362,11 +362,11 @@ void data_session::read_func()
                 if (hasActiveSession)
                 {
                     ShowWarning(fmt::format("data_session: account {} is already logged in.", session.accountID));
-                    if (auto data = session.view_session.get())
+                    if (auto viewSession = session.view_session.get())
                     {
                         // Send error message to the client.
-                        loginHelpers::generateErrorMessage(data->data_, loginErrors::errorCode::UNABLE_TO_CONNECT_TO_WORLD_SERVER); // "Unable to connect to world server. Specified operation failed"
-                        data->do_write(0x24);
+                        loginHelpers::generateErrorMessage(viewSession->buffer_.data(), loginErrors::errorCode::UNABLE_TO_CONNECT_TO_WORLD_SERVER); // "Unable to connect to world server. Specified operation failed"
+                        viewSession->do_write(0x24);
 
                         return;
                     }
@@ -394,11 +394,11 @@ void data_session::read_func()
                                    session.accountID, charid, session_key, ZoneIP, ZonePort, accountIP,
                                    session.versionMismatch ? 1 : 0))
                     {
-                        if (auto data = session.view_session.get())
+                        if (auto viewSession = session.view_session.get())
                         {
                             // Send error message to the client.
-                            loginHelpers::generateErrorMessage(data->data_, loginErrors::errorCode::UNABLE_TO_CONNECT_TO_WORLD_SERVER); // "Unable to connect to world server. Specified operation failed"
-                            data->do_write(0x24);
+                            loginHelpers::generateErrorMessage(viewSession->buffer_.data(), loginErrors::errorCode::UNABLE_TO_CONNECT_TO_WORLD_SERVER); // "Unable to connect to world server. Specified operation failed"
+                            viewSession->do_write(0x24);
                             return;
                         }
                     }
@@ -408,22 +408,22 @@ void data_session::read_func()
                 }
                 else
                 {
-                    if (auto data = session.view_session.get())
+                    if (auto viewSession = session.view_session.get())
                     {
                         // Send error message to the client.
-                        loginHelpers::generateErrorMessage(data->data_, loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER);
-                        data->do_write(0x24);
+                        loginHelpers::generateErrorMessage(viewSession->buffer_.data(), loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER);
+                        viewSession->do_write(0x24);
                         return;
                     }
                 }
             }
             else
             {
-                if (auto data = session.view_session.get())
+                if (auto viewSession = session.view_session.get())
                 {
                     // Send error message to the client.
-                    loginHelpers::generateErrorMessage(data->data_, loginErrors::errorCode::UNABLE_TO_CONNECT_TO_WORLD_SERVER); // "Unable to connect to world server. Specified operation failed"
-                    data->do_write(0x24);
+                    loginHelpers::generateErrorMessage(viewSession->buffer_.data(), loginErrors::errorCode::UNABLE_TO_CONNECT_TO_WORLD_SERVER); // "Unable to connect to world server. Specified operation failed"
+                    viewSession->do_write(0x24);
                     return;
                 }
             }
@@ -433,13 +433,13 @@ void data_session::read_func()
 
             loginPackets::copyHashIntoPacket(characterSelectionResponse, Hash);
 
-            if (auto data = session.view_session.get())
+            if (auto viewSession = session.view_session.get())
             {
-                std::memcpy(data->data_, &characterSelectionResponse, sizeof(characterSelectionResponse));
-                data->do_write(sizeof(characterSelectionResponse));
+                std::memcpy(viewSession->buffer_.data(), &characterSelectionResponse, sizeof(characterSelectionResponse));
+                viewSession->do_write(sizeof(characterSelectionResponse));
 
-                data->socket_.lowest_layer().shutdown(asio::socket_base::shutdown_both); // Client waits for us to close the socket
-                data->socket_.lowest_layer().close();
+                viewSession->socket_.lowest_layer().shutdown(asio::socket_base::shutdown_both); // Client waits for us to close the socket
+                viewSession->socket_.lowest_layer().close();
                 session.view_session = nullptr;
             }
 
@@ -469,9 +469,9 @@ void data_session::read_func()
         case 0xFE: // 254
         {
             // Reply with nothing to keep xiloader spinning, may not be needed.
-            if (auto data = session.data_session.get())
+            if (auto dataSession = session.data_session.get())
             {
-                data->do_write(0);
+                dataSession->do_write(0);
             }
         }
         break;

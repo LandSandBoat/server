@@ -45,9 +45,9 @@ SearchServer::SearchServer(int argc, char** argv)
     [&](std::vector<std::string>& inputs)
     {
         fmt::print("> Goodbye!");
-        m_RequestExit = true;
-        io_context.stop();
-        gConsoleService->stop();
+        requestExit_ = true;
+        ioContext_.stop();
+        consoleService_->stop();
     });
     // clang-format on
 
@@ -67,71 +67,38 @@ SearchServer::SearchServer(int argc, char** argv)
         }
     }
 #endif
-    xirand::seed();
 
-    try
+    ShowInfo("creating ports");
+
+    // clang-format off
+    const auto search_handler_handler = handler(io_context, settings::get<uint32>("network.SEARCH_PORT"), [&](asio::ip::tcp::socket socket) {
+        const auto handler = std::make_shared<search_handler>(std::move(socket), io_context, IPAddressesInUse_, IPAddressWhitelist_);
+        handler->start();
+    });
+    // clang-format on
+
+    // AH cleanup callback. May not be used if settings doesn't enable it.
+    asio::steady_timer cleanup_callback(io_context, std::chrono::seconds(settings::get<uint32>("search.EXPIRE_INTERVAL")));
+
+    if (settings::get<bool>("search.EXPIRE_AUCTIONS"))
     {
-        ShowInfo("creating ports");
+        ShowInfo("AH task to return items older than %u days is running", settings::get<uint16>("search.EXPIRE_DAYS"));
 
+        ahCleanup();
+
+        cleanup_callback.async_wait(std::bind(&SearchServer::periodicCleanup, this, std::placeholders::_1, &cleanup_callback));
+    }
+
+    sol::table accessWhitelist = lua["xi"]["settings"]["search"]["ACCESS_WHITELIST"].get_or_create<sol::table>();
+    for (auto const& [_, value] : accessWhitelist)
+    {
         // clang-format off
-        const auto search_handler_handler = handler(io_context, settings::get<uint32>("network.SEARCH_PORT"), [&](asio::ip::tcp::socket socket) {
-            const auto handler = std::make_shared<search_handler>(std::move(socket), io_context, IPAddressesInUse_, IPAddressWhitelist_);
-            handler->start();
+        auto str = value.as<std::string>();
+        IPAddressWhitelist_.write([str](auto& ipWhitelist)
+        {
+            ipWhitelist.insert(str);
         });
         // clang-format on
-
-        // AH cleanup callback. May not be used if settings doesn't enable it.
-        asio::steady_timer cleanup_callback(io_context, std::chrono::seconds(settings::get<uint32>("search.EXPIRE_INTERVAL")));
-
-        if (settings::get<bool>("search.EXPIRE_AUCTIONS"))
-        {
-            ShowInfo("AH task to return items older than %u days is running", settings::get<uint16>("search.EXPIRE_DAYS"));
-
-            ahCleanup();
-
-            cleanup_callback.async_wait(std::bind(&SearchServer::periodicCleanup, this, std::placeholders::_1, &cleanup_callback));
-        }
-
-        sol::table accessWhitelist = lua["xi"]["settings"]["search"]["ACCESS_WHITELIST"].get_or_create<sol::table>();
-        for (auto const& [_, value] : accessWhitelist)
-        {
-            // clang-format off
-            auto str = value.as<std::string>();
-            IPAddressWhitelist_.write([str](auto& ipWhitelist)
-            {
-                ipWhitelist.insert(str);
-            });
-            // clang-format on
-        }
-
-        // NOTE: io_context.run() takes over and blocks this thread. Anything after this point will only fire
-        // if io_context finishes!
-        ShowInfo("starting io_context");
-
-        // This busy loop looks nasty, however --
-        // https://think-async.com/Asio/asio-1.24.0/doc/asio/reference/io_service.html
-        /* If an exception is thrown from a handler, the exception is allowed to propagate through the throwing thread's invocation of
-            run(), run_one(), run_for(), run_until(), poll() or poll_one(). No other threads that are calling any of these functions are affected.
-            It is then the responsibility of the application to catch the exception.
-        */
-
-        while (Application::IsRunning())
-        {
-            try
-            {
-                io_context.run();
-                break;
-            }
-            catch (std::exception& e)
-            {
-                // TODO: make a list of "allowed exceptions", the rest can/should cause shutdown.
-                ShowError(fmt::format("Inner fatal: {}", e.what()));
-            }
-        }
-    }
-    catch (std::exception& e)
-    {
-        ShowError(fmt::format("Outer fatal: {}", e.what()));
     }
 }
 
@@ -147,7 +114,7 @@ void SearchServer::periodicCleanup(const asio::error_code& error, asio::steady_t
     {
         ahCleanup();
 
-        if (Application::IsRunning())
+        if (Application::isRunning())
         {
             // reset timer
             timer->expires_at(timer->expiry() + std::chrono::seconds(settings::get<uint32>("search.EXPIRE_INTERVAL")));

@@ -65,7 +65,7 @@ namespace loginHelpers
     }
 
     // https://github.com/atom0s/XiPackets/blob/main/lobby/S2C_0x0004_ResponseError.md
-    void generateErrorMessage(char* packet, uint16 errorCode)
+    void generateErrorMessage(uint8* packet, uint16 errorCode)
     {
         std::memset(packet, 0, 0x24);
 
@@ -220,7 +220,7 @@ namespace loginHelpers
         return 0;
     }
 
-    int32 createCharacter(session_t& session, char* buf)
+    int32 createCharacter(session_t& session, uint8* buf)
     {
         char_mini createchar;
 
@@ -290,9 +290,9 @@ namespace loginHelpers
         return 0;
     }
 
-    std::string getHashFromPacket(std::string const& ip_str, char* data)
+    std::string getHashFromPacket(std::string const& ip_str, uint8* data)
     {
-        std::string hash = std::string(data + 12, 16);
+        std::string hash = std::string((const char*)data + 12, 16);
 
         if (authenticatedSessions_[ip_str].find(hash) == authenticatedSessions_[ip_str].end())
         {

@@ -20,11 +20,13 @@
 */
 
 #include "application.h"
+
 #include "debug.h"
 #include "logging.h"
 #include "lua.h"
 #include "settings.h"
 #include "taskmgr.h"
+#include "xirand.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -41,24 +43,26 @@ Application::Application(std::string const& serverName, int argc, char** argv)
     SetConsoleTitleA(fmt::format("{}-server", serverName_).c_str());
 #endif
 
-    gArgParser->add_argument("--log")
+    argParser_->add_argument("--log")
         .default_value(fmt::format("log/{}-server.log", serverName_));
 
     try
     {
-        gArgParser->parse_args(argc, argv);
+        argParser_->parse_args(argc, argv);
     }
     catch (const std::runtime_error& err)
     {
         std::cerr << err.what() << "\n";
-        std::cerr << *gArgParser << "\n";
+        std::cerr << *argParser_ << "\n";
         std::exit(1);
     }
 
-    auto logName = gArgParser->get<std::string>("--log");
+    auto logName = argParser_->get<std::string>("--log");
     logging::InitializeLog(serverName_, logName, false);
 
-    settings::init();
+    settings::init(lua_);
+
+    xirand::seed();
 
     ShowInfo("Begin %s-server Init...", serverName);
 
@@ -72,20 +76,46 @@ Application::Application(std::string const& serverName, int argc, char** argv)
 
     ShowInfo("The %s-server is ready to work...", serverName);
     ShowInfo("=======================================================================");
+}
 
-    // clang-format off
-    gConsoleService = std::make_unique<ConsoleService>();
+void Application::run()
+{
+    ShowInfo("starting io_context");
 
-    gConsoleService->RegisterCommand("exit", "Terminate the program.",
-    [&](std::vector<std::string>& inputs)
+    // This busy loop looks nasty, however --
+    // https://think-async.com/Asio/asio-1.24.0/doc/asio/reference/io_service.html
+    //
+    //   If an exception is thrown from a handler, the exception is allowed to propagate through the throwing thread's invocation of
+    //   run(), run_one(), run_for(), run_until(), poll() or poll_one(). No other threads that are calling any of these functions are affected.
+    //   It is then the responsibility of the application to catch the exception.
+    while (Application::isRunning())
     {
-        fmt::print("> Goodbye!\n");
-        m_RequestExit = true;
-    });
-    // clang-format on
+        try
+        {
+            // NOTE: io_context.run() takes over and blocks this thread. Anything after this point will only fire
+            // if io_context finishes!
+            ioContext_.run();
+            break;
+        }
+        catch (std::exception& e)
+        {
+            // TODO: make a list of "allowed exceptions", the rest can/should cause shutdown.
+            ShowError(fmt::format("Inner fatal: {}", e.what()));
+        }
+    }
 }
 
 bool Application::isRunning()
 {
     return !requestExit_;
+}
+
+auto Application::lua() -> sol::state_view
+{
+    return lua_;
+}
+
+auto Application::ioContext() -> asio::io_context&
+{
+    return ioContext_;
 }

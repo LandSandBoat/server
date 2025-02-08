@@ -22,7 +22,6 @@
 #include "console_service.h"
 
 #include "database.h"
-#include "lua.h"
 
 #include <sstream>
 
@@ -131,18 +130,17 @@ ConsoleService::ConsoleService()
         }
     });
 
-    RegisterCommand("lua", "Provides a Lua REPL",
-    [](std::vector<std::string>& inputs)
-    {
-        if (inputs.size() >= 2)
-        {
-            // Remove "lua" from the front of the inputs
-            inputs = std::vector<std::string>(inputs.begin() + 1, inputs.end());
-
-            auto input = fmt::format("local var = {}; if type(var) ~= \"nil\" then print(var) end", fmt::join(inputs, " "));
-            lua.safe_script(input);
-        }
-    });
+    // RegisterCommand("lua", "Provides a Lua REPL",
+    // [](std::vector<std::string>& inputs)
+    // {
+    //     if (inputs.size() >= 2)
+    //     {
+    //         // Remove "lua" from the front of the inputs
+    //         inputs = std::vector<std::string>(inputs.begin() + 1, inputs.end());
+    //         auto input = fmt::format("local var = {}; if type(var) ~= \"nil\" then print(var) end", fmt::join(inputs, " "));
+    //         lua.safe_script(input);
+    //     }
+    // });
 
     RegisterCommand("crash", "Crash the process",
     [](std::vector<std::string>& inputs)

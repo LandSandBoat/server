@@ -30,9 +30,11 @@
 /**
  * @brief Load the bare minimum required to use Lua.
  */
-auto lua_init() -> sol::state lua
+auto lua_init() -> sol::state
 {
     TracyZoneScoped;
+
+    sol::state lua;
 
     lua.open_libraries();
 
@@ -64,6 +66,8 @@ auto lua_init() -> sol::state lua
         result.get<sol::table>()["start"];
         ShowInfo("Started script debugger");
     }
+
+    return lua;
 }
 
 /**
@@ -137,11 +141,11 @@ std::string lua_to_string_depth(sol::state_view lua, const sol::object& obj, std
             {
                 if (keyObj.get_type() == sol::type::string)
                 {
-                    stringVec.emplace_back(fmt::format("{}{}: {}", indent, lua_to_string_depth(keyObj, 0), lua_to_string_depth(valObj, depth + 1)));
+                    stringVec.emplace_back(fmt::format("{}{}: {}", indent, lua_to_string_depth(lua, keyObj, 0), lua_to_string_depth(lua, valObj, depth + 1)));
                 }
                 else
                 {
-                    stringVec.emplace_back(fmt::format("{}{}", indent, lua_to_string_depth(valObj, depth + 1)));
+                    stringVec.emplace_back(fmt::format("{}{}", indent, lua_to_string_depth(lua, valObj, depth + 1)));
                 }
             }
 
@@ -167,7 +171,7 @@ std::string lua_to_string_depth(sol::state_view lua, const sol::object& obj, std
 /**
  * @brief
  */
-std::string lua_to_string(sol::variadic_args va)
+std::string lua_to_string(sol::state_view lua, sol::variadic_args va)
 {
     TracyZoneScoped;
 
@@ -184,7 +188,7 @@ std::string lua_to_string(sol::variadic_args va)
         }
         else
         {
-            vec.emplace_back(lua_to_string_depth(va[i], 0));
+            vec.emplace_back(lua_to_string_depth(lua, va[i], 0));
         }
     }
 
@@ -194,14 +198,14 @@ std::string lua_to_string(sol::variadic_args va)
 /**
  * @brief
  */
-void lua_print(sol::variadic_args va)
+void lua_print(sol::state_view lua, sol::variadic_args va)
 {
     TracyZoneScoped;
 
-    ShowLua(lua_to_string(va).c_str());
+    ShowLua(lua_to_string(lua, va).c_str());
 }
 
-std::string lua_fmt(const std::string& fmtStr, sol::variadic_args va)
+std::string lua_fmt(sol::state_view lua, const std::string& fmtStr, sol::variadic_args va)
 {
     fmt::dynamic_format_arg_store<fmt::format_context> store;
     for (auto const& arg : va)
@@ -232,7 +236,7 @@ std::string lua_fmt(const std::string& fmtStr, sol::variadic_args va)
             }
             default:
             {
-                store.push_back(lua_to_string_depth(arg, 0));
+                store.push_back(lua_to_string_depth(lua, arg, 0));
                 break;
             }
         }

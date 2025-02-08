@@ -36,6 +36,11 @@ namespace settings
     namespace detail
     {
         std::unordered_map<std::string, SettingsVariant_t> settingsMap;
+
+        auto getSettingsMap() -> std::unordered_map<std::string, SettingsVariant_t>&
+        {
+            return settingsMap;
+        }
     }
 
     // We need this to figure out which environment variables are numbers

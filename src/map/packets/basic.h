@@ -23,7 +23,6 @@
 #define _BASICPACKET_H
 
 #include "common/cbasetypes.h"
-#include "common/socket.h"
 #include "common/tracy.h"
 
 #include <stdio.h>

@@ -83,7 +83,7 @@ namespace settings
 
             // arg = type held inside the variant
             std::visit(
-            overloaded{
+            detail::overloaded{
                 [&](bool const& arg)
                 {
                     if constexpr (std::is_same_v<T, bool>)

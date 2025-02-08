@@ -94,8 +94,8 @@ DECLARE_FORMAT_AS_UNDERLYING(ACCOUNT_PRIVILEGE_CODE);
 class auth_session : public handler_session
 {
 public:
-    auth_session(asio::ssl::stream<asio::ip::tcp::socket> socket)
-    : handler_session(std::move(socket))
+    auth_session(Application& application, asio::ssl::stream<asio::ip::tcp::socket> socket)
+    : handler_session(application, std::move(socket))
     {
         DebugSockets(fmt::format("auth_session from {}", ipAddress));
     }

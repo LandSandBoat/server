@@ -38,8 +38,8 @@
 class view_session : public handler_session
 {
 public:
-    view_session(asio::ssl::stream<asio::ip::tcp::socket> socket)
-    : handler_session(std::move(socket))
+    view_session(Application& application, asio::ssl::stream<asio::ip::tcp::socket> socket)
+    : handler_session(application, std::move(socket))
     {
         DebugSockets("view_session from IP %s", ipAddress);
     }

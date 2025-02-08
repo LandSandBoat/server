@@ -27,8 +27,8 @@
 
 auto lua_init() -> sol::state;
 auto lua_to_string_depth(sol::state_view lua, const sol::object& obj, std::size_t depth) -> std::string;
-auto lua_to_string(sol::variadic_args va) -> std::string;
-void lua_print(sol::variadic_args va);
-auto lua_fmt(const std::string& fmtStr, sol::variadic_args va) -> std::string;
+auto lua_to_string(sol::state_view lua, sol::variadic_args va) -> std::string;
+void lua_print(sol::state_view lua, sol::variadic_args va);
+auto lua_fmt(sol::state_view lua, const std::string& fmtStr, sol::variadic_args va) -> std::string;
 
 #endif // _LUA_H

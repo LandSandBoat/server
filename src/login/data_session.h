@@ -33,8 +33,8 @@
 class data_session : public handler_session
 {
 public:
-    data_session(asio::ssl::stream<asio::ip::tcp::socket> socket)
-    : handler_session(std::move(socket))
+    data_session(Application& application, asio::ssl::stream<asio::ip::tcp::socket> socket)
+    : handler_session(application, std::move(socket))
     {
         DebugSockets("data_session from IP %s", ipAddress);
     }

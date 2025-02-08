@@ -48,28 +48,22 @@ class search_handler
 {
 public:
     search_handler(asio::ip::tcp::socket socket, asio::io_context& io_context, shared_guarded<std::map<std::string, uint16_t>>& IPAddressesInUseList, shared_guarded<std::unordered_set<std::string>>& IPAddressWhitelist);
-
     ~search_handler();
 
     void start();
 
     void do_read();
+    void do_write();
 
     void handle_error(std::error_code ec, std::shared_ptr<search_handler> self);
 
-    void do_write();
-
     void read_func(uint16_t length);
 
+protected:
     std::string           ipAddress; // Store IP address in class -- once the file handle is invalid this can no longer be obtained from socket_
     asio::ip::tcp::socket socket_;
 
-    // TODO: Use std::array
-    enum
-    {
-        max_length = 4096
-    };
-    uint8_t data_[max_length] = {};
+    std::array<uint8, 4096> buffer_;
 
     // Blowfish key
     // clang-format off

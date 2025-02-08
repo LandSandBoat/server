@@ -21,26 +21,29 @@
 
 #pragma once
 
+#include "common/application.h"
+
 #include <asio/ssl.hpp>
 #include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
 #include <common/logging.h>
 
+#include <array>
+#include <memory>
+
 class handler_session
 : public std::enable_shared_from_this<handler_session>
 {
 public:
-    handler_session(asio::ssl::stream<asio::ip::tcp::socket> socket);
-
+    handler_session(Application& application, asio::ssl::stream<asio::ip::tcp::socket> socket);
     virtual ~handler_session() = default;
 
     void start();
 
     void do_read();
+    void do_write(std::size_t length);
 
     virtual void handle_error(std::error_code ec, std::shared_ptr<handler_session> self) = 0;
-
-    void do_write(std::size_t length);
 
     virtual void read_func()  = 0;
     virtual void write_func() = 0;
@@ -50,10 +53,7 @@ public:
 
     asio::ssl::stream<asio::ip::tcp::socket> socket_;
 
-    // TODO: Use std::array
-    enum
-    {
-        max_length = 4096
-    };
-    char data_[max_length] = {};
+    std::array<uint8, 4096> buffer_;
+
+    Application& application_;
 };
