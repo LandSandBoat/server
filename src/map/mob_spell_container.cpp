@@ -345,23 +345,23 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
     };
     // clang-format on
 
-    std::size_t weakestIndex = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
-    std::optional<SpellID> choice     = std::nullopt;
-    auto Weakness_Element = weakestIndex + 1;
+    std::size_t            weakestIndex     = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
+    std::optional<SpellID> choice           = std::nullopt;
+    auto                   Weakness_Element = weakestIndex + 1;
     if (spell::GetSpell(spellId) != 0)
     {
-    	auto Spell_Element    = spell::GetSpell(spellId)->getElement();
-    	if (Spell_Element == Weakness_Element)
-    	{
+        auto Spell_Element = spell::GetSpell(spellId)->getElement();
+        if (Spell_Element == Weakness_Element)
+        {
             return spellId;
-    	}
+        }
     }
     switch (Weakness_Element) // Adjust to ignore ELEMENT_NONE
     {
-    	case ELEMENT_FIRE:
-    	{
-    	    choice = GetBestAvailable(SPELLFAMILY_FIRE);
-    	    break;
+        case ELEMENT_FIRE:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_FIRE);
+            break;
         }
         case ELEMENT_ICE:
         {
@@ -375,8 +375,8 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
         }
         case ELEMENT_EARTH:
         {
-           choice = GetBestAvailable(SPELLFAMILY_STONE);
-           break;
+            choice = GetBestAvailable(SPELLFAMILY_STONE);
+            break;
         }
         case ELEMENT_THUNDER:
         {
