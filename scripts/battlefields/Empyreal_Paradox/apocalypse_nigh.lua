@@ -16,8 +16,8 @@ local content = BattlefieldQuest:new({
     exitNpc       = 'Transcendental_Radiance',
     questArea     = xi.questLog.JEUNO,
     quest         = xi.quest.id.jeuno.APOCALYPSE_NIGH,
-    requiredVar   = 'Quest[3][89]Prog',
-    requiredValue = 3,
+    -- requiredVar   = 'Quest[3][89]Prog',
+    -- requiredValue = 3,
 })
 
 function content:onEventFinishWin(player, csid, option, npc)

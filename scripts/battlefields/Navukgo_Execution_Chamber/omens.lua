@@ -16,8 +16,8 @@ local content = BattlefieldQuest:new({
 
     questArea     = xi.questLog.AHT_URHGAN,
     quest         = xi.quest.id.ahtUrhgan.OMENS,
-    requiredVar   = 'Quest[6][22]Prog',
-    requiredValue = 0,
+    -- requiredVar   = 'Quest[6][22]Prog',
+    -- requiredValue = 0,
 })
 
 function content:battlefieldEntry(player, battlefield)

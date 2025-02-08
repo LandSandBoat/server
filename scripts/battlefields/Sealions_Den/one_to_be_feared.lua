@@ -19,8 +19,8 @@ local content = BattlefieldMission:new({
     exitNpc       = 'Airship_Door',
     missionArea   = xi.mission.log_id.COP,
     mission       = xi.mission.id.cop.ONE_TO_BE_FEARED,
-    requiredVar   = 'Mission[6][638]Status',
-    requiredValue = 3,
+    -- requiredVar   = 'Mission[6][638]Status',
+    -- requiredValue = 3,
 
     grantXP = 1500,
     title   = xi.title.ULTIMA_UNDERTAKER,

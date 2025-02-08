@@ -21,8 +21,8 @@ local content = BattlefieldMission:new({
     requiredKeyItems = { xi.ki.DOMINAS_SCARLET_SEAL, keep = true },
     missionArea      = xi.mission.log_id.ASA,
     mission          = xi.mission.id.asa.SUGAR_COATED_DIRECTIVE,
-    requiredVar      = 'Mission[11][3]Ifrit',
-    requiredValue    = 1,
+    -- requiredVar      = 'Mission[11][3]Ifrit',
+    -- requiredValue    = 1,
 
     grantXP = 400,
 })

@@ -16,8 +16,8 @@ local content = BattlefieldQuest:new({
     entryNpc         = 'EP_Entrance',
     exitNpc          = 'Earth_Protocrystal',
     requiredItems    = { xi.item.EARTH_PENDULUM },
-    requiredVar      = 'Quest[2][81]Prog',
-    requiredValue    = 1,
+    -- requiredVar      = 'Quest[2][81]Prog',
+    -- requiredValue    = 1,
 
     questArea = xi.questLog.WINDURST,
     quest     = xi.quest.id.windurst.THE_PUPPET_MASTER,

@@ -18,8 +18,8 @@ local content = BattlefieldQuest:new({
 
     questArea     = xi.questLog.WINDURST,
     quest         = xi.quest.id.windurst.CLASS_REUNION,
-    requiredVar   = 'ClassReunionProgress',
-    requiredValue = 5,
+    -- requiredVar   = 'ClassReunionProgress',
+    -- requiredValue = 5,
 })
 
 function content:onEventFinishWin(player, csid, option, npc)

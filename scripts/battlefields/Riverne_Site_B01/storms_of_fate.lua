@@ -18,8 +18,8 @@ local content = BattlefieldQuest:new({
     exitNpc       = 'SD_BCNM_Exit',
     questArea     = xi.questLog.JEUNO,
     quest         = xi.quest.id.jeuno.STORMS_OF_FATE,
-    requiredVar   = 'Quest[3][86]Prog',
-    requiredValue = 2,
+    -- requiredVar   = 'Quest[3][86]Prog',
+    -- requiredValue = 2,
 
     title = xi.title.CONQUEROR_OF_FATE,
 })

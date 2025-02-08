@@ -18,8 +18,8 @@ local content = BattlefieldQuest:new({
 
     questArea     = xi.questLog.WINDURST,
     quest         = xi.quest.id.windurst.CARBUNCLE_DEBACLE,
-    requiredVar   = 'CarbuncleDebacleProgress',
-    requiredValue = 6,
+    -- requiredVar   = 'CarbuncleDebacleProgress',
+    -- requiredValue = 6,
 })
 
 function content:onEventFinishWin(player, csid, option, npc)

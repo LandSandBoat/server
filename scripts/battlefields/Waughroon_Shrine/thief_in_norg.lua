@@ -18,8 +18,8 @@ local content = BattlefieldQuest:new({
 
     questArea     = xi.questLog.OUTLANDS,
     quest         = xi.quest.id.outlands.A_THIEF_IN_NORG,
-    requiredVar   = 'Quest[5][142]Prog',
-    requiredValue = 6,
+    -- requiredVar   = 'Quest[5][142]Prog',
+    -- requiredValue = 6,
 })
 
 content.groups =

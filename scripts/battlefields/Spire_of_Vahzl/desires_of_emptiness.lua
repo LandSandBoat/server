@@ -19,8 +19,8 @@ local content = BattlefieldMission:new({
     exitNpcs              = { '_0n1', '_0n2', '_0n3' },
     missionArea           = xi.mission.log_id.COP,
     mission               = xi.mission.id.cop.DESIRES_OF_EMPTINESS,
-    requiredVar           = 'Mission[6][518]Status',
-    requiredValue         = 2,
+    -- requiredVar           = 'Mission[6][518]Status',
+    -- requiredValue         = 2,
 
     grantXP = 1500,
     title   = xi.title.FROZEN_DEAD_BODY,

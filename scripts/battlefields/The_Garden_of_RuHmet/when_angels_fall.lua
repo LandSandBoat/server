@@ -19,8 +19,8 @@ local content = BattlefieldMission:new({
     entryNpc      = '_0z0',
     missionArea   = xi.mission.log_id.COP,
     mission       = xi.mission.id.cop.WHEN_ANGELS_FALL,
-    requiredVar   = 'Mission[6][828]Status',
-    requiredValue = 4,
+    -- requiredVar   = 'Mission[6][828]Status',
+    -- requiredValue = 4,
 
     grantXP = 1000,
 })

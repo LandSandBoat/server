@@ -19,8 +19,8 @@ local content = BattlefieldMission:new({
     exitNpcs      = { 'SD_BCNM_Exit_1', 'SD_BCNM_Exit_2', 'SD_BCNM_Exit_3' },
     missionArea   = xi.mission.log_id.COP,
     mission       = xi.mission.id.cop.THE_SAVAGE,
-    requiredVar   = 'Mission[6][418]Status',
-    requiredValue = 1,
+    -- requiredVar   = 'Mission[6][418]Status',
+    -- requiredValue = 1,
 
     grantXP = 1500,
     title   = xi.title.MIST_MELTER,

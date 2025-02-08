@@ -19,8 +19,8 @@ local content = BattlefieldMission:new({
     exitNpc       = 'Memento_Circle',
     missionArea   = xi.mission.log_id.COP,
     mission       = xi.mission.id.cop.DARKNESS_NAMED,
-    requiredVar   = 'Mission[6][358]Status',
-    requiredValue = 4,
+    -- requiredVar   = 'Mission[6][358]Status',
+    -- requiredValue = 4,
 
     grantXP = 1000,
 })

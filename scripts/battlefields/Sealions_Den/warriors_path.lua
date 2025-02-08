@@ -19,8 +19,8 @@ local content = BattlefieldMission:new({
     exitNpc       = 'Airship_Door',
     missionArea   = xi.mission.log_id.COP,
     mission       = xi.mission.id.cop.THE_WARRIORS_PATH,
-    requiredVar   = 'Mission[6][748]Status',
-    requiredValue = 1,
+    -- requiredVar   = 'Mission[6][748]Status',
+    -- requiredValue = 1,
 
     title = xi.title.THE_CHEBUKKIS_WORST_NIGHTMARE,
 })

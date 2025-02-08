@@ -22,8 +22,8 @@ local content = BattlefieldMission:new({
     exitNpc       = 'Transcendental_Radiance',
     missionArea   = xi.mission.log_id.COP,
     mission       = xi.mission.id.cop.DAWN,
-    requiredVar   = 'Mission[6][840]Status',
-    requiredValue = 1,
+    -- requiredVar   = 'Mission[6][840]Status',
+    -- requiredValue = 1,
 
     grantXP = 2000,
     title   = xi.title.AVERTER_OF_THE_APOCALYPSE,
