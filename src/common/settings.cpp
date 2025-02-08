@@ -33,7 +33,10 @@
 
 namespace settings
 {
-    std::unordered_map<std::string, SettingsVariant_t> settingsMap;
+    namespace detail
+    {
+        std::unordered_map<std::string, SettingsVariant_t> settingsMap;
+    }
 
     // We need this to figure out which environment variables are numbers
     // so we can pass them to the lua settings properly typed.
@@ -55,7 +58,7 @@ namespace settings
      * Load the settings Lua files found in <root>/settings/. Default settings are loaded first from <root>/settings/default/,
      * and are then replaced by the settings found in <root>/settings/, if any.
      */
-    void init()
+    void init(sol::state_view lua)
     {
         // Load defaults
         for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./settings/default/"))
@@ -107,15 +110,15 @@ namespace settings
 
                 if (innerValObj.is<bool>())
                 {
-                    settingsMap[key] = innerValObj.as<bool>();
+                    detail::settingsMap[key] = innerValObj.as<bool>();
                 }
                 else if (innerValObj.is<double>())
                 {
-                    settingsMap[key] = innerValObj.as<double>();
+                    detail::settingsMap[key] = innerValObj.as<double>();
                 }
                 else if (innerValObj.is<std::string>())
                 {
-                    settingsMap[key] = innerValObj.as<std::string>();
+                    detail::settingsMap[key] = innerValObj.as<std::string>();
                 }
             }
         }
@@ -172,15 +175,15 @@ namespace settings
 
                 if (innerValObj.is<bool>())
                 {
-                    settingsMap[key] = innerValObj.as<bool>();
+                    detail::settingsMap[key] = innerValObj.as<bool>();
                 }
                 else if (innerValObj.is<double>())
                 {
-                    settingsMap[key] = innerValObj.as<double>();
+                    detail::settingsMap[key] = innerValObj.as<double>();
                 }
                 else if (innerValObj.is<std::string>())
                 {
-                    settingsMap[key] = innerValObj.as<std::string>();
+                    detail::settingsMap[key] = innerValObj.as<std::string>();
                 }
 
                 // Apply any environment variables over the default/user settings.
@@ -199,18 +202,18 @@ namespace settings
                     // Therefor we need to check if the value is a number.
                     if (isNumber(value))
                     {
-                        settingsMap[key] = std::stod(value);
+                        detail::settingsMap[key] = std::stod(value);
                     }
                     else
                     {
-                        settingsMap[key] = value;
+                        detail::settingsMap[key] = value;
                     }
                 }
             }
         }
 
         // Push the consolidated defaults + user settings back up into xi.settings
-        for (const auto& [key, value] : settingsMap)
+        for (const auto& [key, value] : detail::settingsMap)
         {
             auto parts                          = split(key, ".");
             auto outer                          = to_lower(parts[0]);
@@ -228,7 +231,7 @@ namespace settings
 
     void visit(const std::function<void(std::string, SettingsVariant_t)>& visitor)
     {
-        for (auto& [key, value] : settingsMap)
+        for (auto& [key, value] : detail::settingsMap)
         {
             visitor(key, value);
         }

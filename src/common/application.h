@@ -21,12 +21,15 @@
 
 #pragma once
 
-#include <memory>
-#include <string>
+#include "console_service.h"
+#include "lua.h"
 
 #include <argparse/argparse.hpp>
 
-#include "console_service.h"
+#include <asio/io_context.hpp>
+
+#include <memory>
+#include <string>
 
 class Application
 {
@@ -39,16 +42,17 @@ public:
     Application& operator=(const Application&) = delete;
     Application& operator=(Application&&)      = delete;
 
-    virtual bool IsRunning();
-    virtual void Tick();
+    void run();
 
 protected:
-    std::string       m_ServerName;
-    std::atomic<bool> m_RequestExit;
+    std::string       serverName_;
+    std::atomic<bool> requestExit_;
 
-    std::unique_ptr<argparse::ArgumentParser> gArgParser;
-    std::unique_ptr<ConsoleService>           gConsoleService;
+    sol::lua_state lua_;
 
-    // TODO: Scheduler/task manager
-    // TODO: Logging setup
+    asio::io_context ioContext_;
+
+    std::unique_ptr<argparse::ArgumentParser> argParser_;
+    std::unique_ptr<ConsoleService>           consoleService_;
+
 };

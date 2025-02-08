@@ -31,16 +31,18 @@
 #endif
 
 Application::Application(std::string const& serverName, int argc, char** argv)
-: m_ServerName(serverName)
-, m_RequestExit(false)
-, gArgParser(std::make_unique<argparse::ArgumentParser>(argv[0]))
+: serverName_(serverName)
+, requestExit_(false)
+, ioContext_()
+, argParser_(std::make_unique<argparse::ArgumentParser>(argv[0]))
+, lua_(lua_init())
 {
 #ifdef _WIN32
-    SetConsoleTitleA(fmt::format("{}-server", serverName).c_str());
+    SetConsoleTitleA(fmt::format("{}-server", serverName_).c_str());
 #endif
 
     gArgParser->add_argument("--log")
-        .default_value(fmt::format("log/{}-server.log", serverName));
+        .default_value(fmt::format("log/{}-server.log", serverName_));
 
     try
     {
@@ -54,9 +56,10 @@ Application::Application(std::string const& serverName, int argc, char** argv)
     }
 
     auto logName = gArgParser->get<std::string>("--log");
-    logging::InitializeLog(serverName, logName, false);
-    lua_init();
+    logging::InitializeLog(serverName_, logName, false);
+
     settings::init();
+
     ShowInfo("Begin %s-server Init...", serverName);
 
 #ifdef ENV64BIT
@@ -82,18 +85,7 @@ Application::Application(std::string const& serverName, int argc, char** argv)
     // clang-format on
 }
 
-bool Application::IsRunning()
+bool Application::isRunning()
 {
-    return !m_RequestExit;
-}
-
-void Application::Tick()
-{
-    // Main runtime cycle
-    duration next;
-    while (!m_RequestExit)
-    {
-        next = CTaskMgr::getInstance()->DoTimer(server_clock::now());
-        std::this_thread::sleep_for(next);
-    }
+    return !requestExit_;
 }

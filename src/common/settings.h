@@ -23,6 +23,7 @@
 #define _SETTINGS_H
 
 #include "logging.h"
+#include "lua.h"
 #include "utils.h"
 
 #include <string>
@@ -32,22 +33,26 @@
 
 namespace settings
 {
-    // https://en.cppreference.com/w/cpp/utility/variant/visit
-    // helper type for the visitor
-    template <class... Ts>
-    struct overloaded : Ts...
-    {
-        // cppcheck-suppress syntaxError
-        using Ts::operator()...;
-    };
-    // explicit deduction guide (not needed as of C++20)
-    template <class... Ts>
-    overloaded(Ts...) -> overloaded<Ts...>;
-
     using SettingsVariant_t = std::variant<bool, double, std::string>;
-    extern std::unordered_map<std::string, SettingsVariant_t> settingsMap;
 
-    void init();
+    namespace detail
+    {
+        // https://en.cppreference.com/w/cpp/utility/variant/visit
+        // helper type for the visitor
+        template <class... Ts>
+        struct overloaded : Ts...
+        {
+            // cppcheck-suppress syntaxError
+            using Ts::operator()...;
+        };
+        // explicit deduction guide (not needed as of C++20)
+        template <class... Ts>
+        overloaded(Ts...) -> overloaded<Ts...>;
+
+        auto getSettingsMap() -> std::unordered_map<std::string, SettingsVariant_t>&;
+    } // detail
+
+    void init(sol::state_view lua);
 
     /**
      * @brief
@@ -65,6 +70,8 @@ namespace settings
     template <typename T>
     T get(std::string name)
     {
+        auto& settingsMap = detail::getSettingsMap();
+
         // out = type being requested
         T out{};
 
@@ -165,6 +172,8 @@ namespace settings
     // TODO: Publish back up into Lua
     void set(const auto& name, const auto& value)
     {
+        auto& settingsMap = detail::getSettingsMap();
+
         const auto key   = to_upper(name);
         settingsMap[key] = SettingsVariant_t(value);
     }

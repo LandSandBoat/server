@@ -23,15 +23,7 @@
 
 int main(int argc, char** argv)
 {
-    try
-    {
-        auto pMapServer = std::make_unique<MapServer>(argc, argv);
-        pMapServer->run();
-    }
-    catch (const std::exception& e)
-    {
-        ShowFatal(fmt::format("Fatal: {}", e.what()));
-    }
-
+    auto pMapServer = std::make_unique<MapServer>(argc, argv);
+    pMapServer->run();
     return 0;
 }

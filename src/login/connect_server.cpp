@@ -24,8 +24,6 @@
 ConnectServer::ConnectServer(int argc, char** argv)
 : Application("connect", argc, argv)
 {
-    asio::io_context io_context;
-
     // clang-format off
     gConsoleService->RegisterCommand("stats", "Print server runtime statistics",
     [](std::vector<std::string>& inputs)

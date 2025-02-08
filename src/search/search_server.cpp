@@ -25,8 +25,6 @@
 SearchServer::SearchServer(int argc, char** argv)
 : Application("search", argc, argv)
 {
-    asio::io_context io_context;
-
     // clang-format off
     gConsoleService->RegisterCommand(
     "ah_cleanup", fmt::format("AH task to return items older than {} days.", settings::get<uint16>("search.EXPIRE_DAYS")),

@@ -27,12 +27,10 @@
 #include <numeric>
 #include <string>
 
-sol::state lua;
-
 /**
  * @brief Load the bare minimum required to use Lua.
  */
-void lua_init()
+auto lua_init() -> sol::state lua
 {
     TracyZoneScoped;
 
@@ -71,7 +69,7 @@ void lua_init()
 /**
  * @brief
  */
-std::string lua_to_string_depth(const sol::object& obj, std::size_t depth)
+std::string lua_to_string_depth(sol::state_view lua, const sol::object& obj, std::size_t depth)
 {
     switch (obj.get_type())
     {

@@ -638,7 +638,7 @@ namespace luautils
 
             ShowInfo("[FileWatcher] RELOADING ALL LUA SETTINGS FILES");
 
-            settings::init();
+            settings::init(lua_);
 
             return;
         }

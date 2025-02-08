@@ -241,7 +241,7 @@ int32 do_init(int32 argc, char** argv)
     [&](std::vector<std::string>& inputs)
     {
         fmt::print("Reloading settings files\n");
-        settings::init();
+        settings::init(lua_);
     });
 
     gConsoleService->RegisterCommand("reload_recipes", "Reload crafting recipes.",
@@ -256,7 +256,6 @@ int32 do_init(int32 argc, char** argv)
     {
         fmt::print("> Goodbye!\n");
         gConsoleService->stop();
-        gRunFlag = false;
     });
     // clang-format on
 
