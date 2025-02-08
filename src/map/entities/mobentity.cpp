@@ -689,6 +689,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     auto AddItemToPool = [this, PChar](uint16 ItemID)
     {
         PChar->PTreasurePool->AddItem(ItemID, this);
+        PAI->EventHandler.triggerListener("TREASUREPOOL", CLuaBaseEntity(this), CLuaBaseEntity(PChar), ItemID);
     };
 
     DropList_t* dropList = itemutils::GetDropList(m_DropID);

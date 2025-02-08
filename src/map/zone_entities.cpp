@@ -152,58 +152,60 @@ void CZoneEntities::TryAddToNearbySpawnLists(CBaseEntity* PEntity)
 
     FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PCurrentChar, m_charList)
     {
-        const auto isInHeightRange = isWithinVerticalDistance(PEntity, PCurrentChar);
-        const auto isInRange       = isWithinDistance(PEntity->loc.p, PCurrentChar->loc.p, ENTITY_RENDER_DISTANCE);
+        const auto isInRange = isWithinDistance(PEntity->loc.p, PCurrentChar->loc.p, ENTITY_RENDER_DISTANCE);
 
-        if (isInHeightRange && isInRange)
+        if (isInRange)
         {
-            switch (PEntity->objtype)
+            // Exclude NPCs from vertical rendering limits (elevators may go past the normal vertical range)
+            if (PEntity->objtype == TYPE_NPC)
             {
-                case TYPE_PC:
+                PCurrentChar->SpawnNPCList[PEntity->id] = PEntity;
+                PCurrentChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
+            }
+            else if (isWithinVerticalDistance(PEntity, PCurrentChar))
+            {
+                switch (PEntity->objtype)
                 {
-                    auto* PChar = static_cast<CCharEntity*>(PEntity);
-                    if (PChar->m_moghouseID != PCurrentChar->m_moghouseID)
+                    case TYPE_PC:
                     {
-                        continue;
-                    }
+                        auto* PChar = static_cast<CCharEntity*>(PEntity);
+                        if (PChar->m_moghouseID != PCurrentChar->m_moghouseID)
+                        {
+                            continue;
+                        }
 
-                    PCurrentChar->SpawnPCList[PEntity->id] = PEntity;
-                    PCurrentChar->updateEntityPacket(PChar, ENTITY_SPAWN, UPDATE_ALL_CHAR);
-                    break;
+                        PCurrentChar->SpawnPCList[PEntity->id] = PEntity;
+                        PCurrentChar->updateEntityPacket(PChar, ENTITY_SPAWN, UPDATE_ALL_CHAR);
+                        break;
+                    }
+                    case TYPE_MOB:
+                    {
+                        PCurrentChar->SpawnMOBList[PEntity->id] = PEntity;
+                        PCurrentChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
+                        break;
+                    }
+                    case TYPE_PET:
+                    {
+                        PCurrentChar->SpawnPETList[PEntity->id] = PEntity;
+                        PCurrentChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
+                        break;
+                    }
+                    case TYPE_TRUST:
+                    {
+                        PCurrentChar->SpawnTRUSTList[PEntity->id] = PEntity;
+                        PCurrentChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
+                        break;
+                    }
+                    // case TYPE_FELLOW:
+                    // {
+                    //     PCurrentChar->SpawnFellowList[PEntity->id] = PEntity;
+                    //     PCurrentChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
+                    //     break;
+                    // }
+                    default:
+                        return;
+                        break;
                 }
-                case TYPE_NPC:
-                {
-                    PCurrentChar->SpawnNPCList[PEntity->id] = PEntity;
-                    PCurrentChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
-                    break;
-                }
-                case TYPE_MOB:
-                {
-                    PCurrentChar->SpawnMOBList[PEntity->id] = PEntity;
-                    PCurrentChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
-                    break;
-                }
-                case TYPE_PET:
-                {
-                    PCurrentChar->SpawnPETList[PEntity->id] = PEntity;
-                    PCurrentChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
-                    break;
-                }
-                case TYPE_TRUST:
-                {
-                    PCurrentChar->SpawnTRUSTList[PEntity->id] = PEntity;
-                    PCurrentChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
-                    break;
-                }
-                // case TYPE_FELLOW:
-                // {
-                //     PCurrentChar->SpawnFellowList[PEntity->id] = PEntity;
-                //     PCurrentChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
-                //     break;
-                // }
-                default:
-                    return;
-                    break;
             }
         }
     }
@@ -886,7 +888,6 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
         const auto id              = PCurrentEntity->id;
         const auto itr             = spawnList.find(id);
         const auto isInSpawnList   = itr != spawnList.end();
-        const auto isInHeightRange = isWithinVerticalDistance(PChar, PCurrentEntity);
         const auto isInRange       = isWithinDistance(PChar->loc.p, PCurrentEntity->loc.p, ENTITY_RENDER_DISTANCE);
         const auto isVisibleStatus = PCurrentEntity->status == STATUS_TYPE::NORMAL || PCurrentEntity->status == STATUS_TYPE::UPDATE;
 
@@ -908,7 +909,7 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
             }
         };
 
-        if (isVisibleStatus && isInHeightRange && isInRange)
+        if (isVisibleStatus && isInRange)
         {
             tryAddToSpawnList();
         }
@@ -1025,8 +1026,8 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 
     FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PCurrentChar, PChar->SpawnPCList)
     {
-        // Despawn character if it's a hidden GM, is in a different mog house, or if player is in a conflict while other is not, or too far up/down
-        if (PCurrentChar->m_isGMHidden ||
+        // Despawn character if it's a hidden GM that isn't PChar, is in a different mog house, or if player is in a conflict while other is not, or too far up/down
+        if (((PChar != PCurrentChar) && PCurrentChar->m_isGMHidden) ||
             PChar->m_moghouseID != PCurrentChar->m_moghouseID ||
             !isWithinVerticalDistance(PChar, PCurrentChar))
         {

@@ -46,7 +46,8 @@ namespace
         uint8  petType;
     };
 
-    std::unordered_map<uint16, AugmentDataRow> sAugmentData;
+    using AugmentDataRows = std::vector<AugmentDataRow>;
+    std::unordered_map<uint16, AugmentDataRows> sAugmentData;
 } // namespace
 
 void CItemEquipment::LoadAugmentData()
@@ -58,7 +59,7 @@ void CItemEquipment::LoadAugmentData()
         {
             const auto augmentId = rset->get<uint16>("augmentId");
 
-            sAugmentData[augmentId] = AugmentDataRow{
+            AugmentDataRow augmentData = {
                 .augmentId  = augmentId,
                 .multiplier = rset->get<uint16>("multiplier"),
                 .modId      = rset->get<uint16>("modId"),
@@ -66,6 +67,8 @@ void CItemEquipment::LoadAugmentData()
                 .isPet      = rset->get<uint8>("isPet"),
                 .petType    = rset->get<uint8>("petType"),
             };
+
+            sAugmentData[augmentId].push_back(augmentData);
         }
     }
 }
@@ -426,28 +429,31 @@ void CItemEquipment::SetAugmentMod(uint16 type, uint8 value)
         ref<uint8>(m_extra, 0x01) |= 0x03;
     }
 
-    const auto& augmentData = sAugmentData[type];
+    const auto& augmentDataModifiers = sAugmentData[type];
 
-    uint8 multiplier = augmentData.multiplier;
-    Mod   modId      = static_cast<Mod>(augmentData.modId);
-    int16 modValue   = augmentData.value;
-
-    // type is 0 unless mod is for pets
-    uint8      isPet   = augmentData.isPet;
-    PetModType petType = static_cast<PetModType>(augmentData.petType);
-
-    // apply modifier to item. increase modifier power by 'value' (default magnitude 1 for most augments) if multiplier isn't specified
-    // otherwise increase modifier power using the multiplier
-    // check if we should be adding to or taking away from the mod power (handle scripted augments properly)
-    modValue = (modValue > 0 ? modValue + value : modValue - value) * (multiplier > 1 ? multiplier : 1);
-
-    if (!isPet)
+    for (const auto& augmentData : augmentDataModifiers)
     {
-        addModifier(CModifier(modId, modValue));
-    }
-    else
-    {
-        addPetModifier(CPetModifier(modId, petType, modValue));
+        uint8 multiplier = augmentData.multiplier;
+        Mod   modId      = static_cast<Mod>(augmentData.modId);
+        int16 modValue   = augmentData.value;
+
+        // type is 0 unless mod is for pets
+        uint8      isPet   = augmentData.isPet;
+        PetModType petType = static_cast<PetModType>(augmentData.petType);
+
+        // apply modifier to item. increase modifier power by 'value' (default magnitude 1 for most augments) if multiplier isn't specified
+        // otherwise increase modifier power using the multiplier
+        // check if we should be adding to or taking away from the mod power (handle scripted augments properly)
+        modValue = (modValue > 0 ? modValue + value : modValue - value) * (multiplier > 1 ? multiplier : 1);
+
+        if (!isPet)
+        {
+            addModifier(CModifier(modId, modValue));
+        }
+        else
+        {
+            addPetModifier(CPetModifier(modId, petType, modValue));
+        }
     }
 }
 

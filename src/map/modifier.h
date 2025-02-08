@@ -136,9 +136,9 @@ enum class Mod
     GKATANA           = 89,  // Great Katana Skill
     CLUB              = 90,  // Club Skill
     STAFF             = 91,  // Staff Skill
-    AUTO_MELEE_SKILL  = 101, // Automaton Melee Skill
-    AUTO_RANGED_SKILL = 102, // Automaton Range Skill
-    AUTO_MAGIC_SKILL  = 103, // Automaton Magic Skill
+    AUTO_MELEE_SKILL  = 101, // Automaton Melee Skill -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
+    AUTO_RANGED_SKILL = 102, // Automaton Range Skill -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
+    AUTO_MAGIC_SKILL  = 103, // Automaton Magic Skill -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
     ARCHERY           = 104, // Archery Skill
     MARKSMAN          = 105, // Marksman Skill
     THROW             = 106, // Throw Skill

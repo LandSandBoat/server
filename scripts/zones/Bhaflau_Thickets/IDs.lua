@@ -51,10 +51,12 @@ zones[xi.zone.BHAFLAU_THICKETS] =
         LIVIDROOT_AMOOSHAH = GetFirstID('Lividroot_Amooshah'),
         MAHISHASURA        = GetFirstID('Mahishasura'),
         NIS_PUK            = GetFirstID('Nis_Puk'),
+        PLAGUE_CHIGOE      = GetFirstID('Plague_Chigoe'),
     },
     npc =
     {
         HARVESTING = GetTableOfIDs('Harvesting_Point'),
+        HOOFPRINT  = GetFirstID('Warhorse_Hoofprint'),
     },
 }
 

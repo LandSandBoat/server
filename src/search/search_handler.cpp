@@ -400,7 +400,10 @@ void search_handler::HandleGroupListRequest()
         } while (currentResult < totalResults);
     }
 
-    do_write();
+    if (!searchPackets.empty())
+    {
+        do_write();
+    }
 }
 
 void search_handler::HandleSearchComment()
@@ -466,7 +469,10 @@ void search_handler::HandleSearchRequest()
 
     } while (currentResult < totalResults);
 
-    do_write();
+    if (!searchPackets.empty())
+    {
+        do_write();
+    }
 }
 
 void search_handler::HandleAuctionHouseRequest()
@@ -530,7 +536,10 @@ void search_handler::HandleAuctionHouseRequest()
         searchPackets.emplace_back(PAHPacket.GetData(), length);
     }
 
-    do_write();
+    if (!searchPackets.empty())
+    {
+        do_write();
+    }
 }
 
 void search_handler::HandleAuctionHouseHistory()

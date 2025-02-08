@@ -204,6 +204,20 @@ local guildItemTable =
     },
 }
 
+local function calculateKeyItemBitmask(player, rank, keyItemTable)
+    local keyItemBits = 0
+
+    for currentBit, keyItem in pairs(keyItemTable) do
+        if rank >= keyItem.rank then
+            if not player:hasKeyItem(keyItem.id) then
+                keyItemBits = bit.bor(keyItemBits, bit.lshift(1, currentBit))
+            end
+        end
+    end
+
+    return keyItemBits
+end
+
 -----------------------------------
 -- NPC Events
 -----------------------------------
@@ -234,46 +248,27 @@ xi.crafting.guildPointOnTrade = function(player, npc, trade, csid, guildId)
 end
 
 xi.crafting.guildPointOnTrigger = function(player, csid, guildId)
+    local currency                = xi.crafting.guildTable[guildId][2]
     local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
     local rank                    = player:getSkillRank(xi.crafting.guildTable[guildId][1])
     local skillCap                = (rank + 1) * 10
-    local keyItemBits             = 0
-    local currency                = xi.crafting.guildTable[guildId][2]
-    local keyItems                = guildKeyItemTable[guildId]
+    local keyItemBits             = calculateKeyItemBitmask(player, rank, guildKeyItemTable[guildId])
 
-    for currentBit, keyItem in pairs(keyItems) do
-        if rank >= keyItem.rank then
-            if not player:hasKeyItem(keyItem.id) then
-                keyItemBits = bit.bor(keyItemBits, bit.lshift(1, currentBit))
-            end
-        end
-    end
-
-    player:startEvent(csid, player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, gpItem, remainingPoints, skillCap, 0, keyItemBits)
+    player:startEvent(csid, player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, gpItem, remainingPoints, skillCap, 0, keyItemBits, 0)
 end
 
-xi.crafting.guildPointOnEventFinish = function(player, option, target, guildId)
-    local ID       = zones[player:getZoneID()]
-    local rank     = player:getSkillRank(xi.crafting.guildTable[guildId][1])
-    local category = bit.band(bit.rshift(option, 2), 3)
-    local currency = xi.crafting.guildTable[guildId][2]
-    local keyItems = guildKeyItemTable[guildId]
-    local items    = guildItemTable[guildId]
+xi.crafting.guildPointOnEventUpdate = function(player, option, target, guildId)
+    local category           = bit.band(bit.rshift(option, 2), 3)
 
-    -- Contract Dialog.
-    if bit.tobit(option) == -1 and rank >= 3 then
-        local oldGuild = player:getCharVar('[GUILD]currentGuild') - 1
-        player:setCharVar('[GUILD]currentGuild', guildId + 1)
-
-        if oldGuild == -1 then
-            player:messageSpecial(ID.text.GUILD_NEW_CONTRACT, guildId)
-        else
-            player:messageSpecial(ID.text.GUILD_TERMINATE_CONTRACT, guildId, oldGuild)
-            player:setCharVar('[GUILD]daily_points', 1)
-        end
+    local ID                 = zones[player:getZoneID()]
+    local _, remainingPoints = player:getCurrentGPItem(guildId)
+    local rank               = player:getSkillRank(xi.crafting.guildTable[guildId][1])
+    local skillCap           = (rank + 1) * 10
+    local currency           = xi.crafting.guildTable[guildId][2]
+    local keyItems           = guildKeyItemTable[guildId]
 
     -- GP Key Item Option.
-    elseif category == 3 then
+    if category == 3 then
         local keyItem = keyItems[bit.band(bit.rshift(option, 5), 15) - 1]
 
         if keyItem and rank >= keyItem.rank then
@@ -285,9 +280,12 @@ xi.crafting.guildPointOnEventFinish = function(player, option, target, guildId)
             end
         end
 
+        player:updateEvent(player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, keyItem.cost, remainingPoints, skillCap, 0, calculateKeyItemBitmask(player, rank, guildKeyItemTable[guildId]), 1)
+
     -- GP Item Option.
     elseif category == 2 or category == 1 then
         local index    = bit.band(option, 3)
+        local items    = guildItemTable[guildId]
         local item     = items[(category - 1) * 4 + index]
         local quantity = math.min(bit.rshift(option, 9), 12)
         local cost     = quantity * item.cost
@@ -312,6 +310,8 @@ xi.crafting.guildPointOnEventFinish = function(player, option, target, guildId)
             end
         end
 
+        player:updateEvent(player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, item.cost, remainingPoints, skillCap, 0, calculateKeyItemBitmask(player, rank, guildKeyItemTable[guildId]), 1)
+
     -- HQ crystal Option.
     elseif
         category == 0 and
@@ -330,6 +330,26 @@ xi.crafting.guildPointOnEventFinish = function(player, option, target, guildId)
             else
                 player:messageText(target, ID.text.NOT_HAVE_ENOUGH_GP, false, 6)
             end
+        end
+
+        player:updateEvent(player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, crystal.cost, remainingPoints, skillCap, 0, calculateKeyItemBitmask(player, rank, guildKeyItemTable[guildId]), 1)
+    end
+end
+
+xi.crafting.guildPointOnEventFinish = function(player, option, guildId)
+    local ID   = zones[player:getZoneID()]
+    local rank = player:getSkillRank(xi.crafting.guildTable[guildId][1])
+
+    -- Contract Dialog.
+    if bit.tobit(option) == -1 and rank >= 3 then
+        local oldGuild = player:getCharVar('[GUILD]currentGuild') - 1
+        player:setCharVar('[GUILD]currentGuild', guildId + 1)
+
+        if oldGuild == -1 then
+            player:messageSpecial(ID.text.GUILD_NEW_CONTRACT, guildId)
+        else
+            player:messageSpecial(ID.text.GUILD_TERMINATE_CONTRACT, guildId, oldGuild)
+            player:setCharVar('[GUILD]daily_points', 1)
         end
     end
 end

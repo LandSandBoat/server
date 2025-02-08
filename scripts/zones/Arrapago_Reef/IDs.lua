@@ -33,6 +33,7 @@ zones[xi.zone.ARRAPAGO_REEF] =
         THE_PARTY_WILL_BE_REMOVED     = 7903, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         YOU_NO_REQS                   = 7907, -- You do not meet the requirements to enter the battlefield with your party members. Access is denied.
         YOUR_IMPERIAL_STANDING        = 7923, -- Your Imperial Standing has increased!
+        SPINE_CHILL                   = 8391, -- You feel a chill run down your spine!
         HAND_OVER_TO_IMMORTAL         = 8449, -- You hand over the % to the Immortal.
         CANNOT_ENTER                  = 8468, -- You cannot enter at this time. Please wait a while before trying again.
         AREA_FULL                     = 8469, -- This area is fully occupied. You were unable to enter.
@@ -51,6 +52,7 @@ zones[xi.zone.ARRAPAGO_REEF] =
     {
         APKALLU_NPC           = GetFirstID('Arrapago_Apkallu'),
         BLOODY_BONES          = GetFirstID('Bloody_Bones'),
+        BUKKI                 = GetFirstID('Bukki'),
         MEDUSA                = GetFirstID('Medusa'),
         LIL_APKALLU           = GetFirstID('Lil_Apkallu'),
         VELIONIS              = GetFirstID('Velionis'),

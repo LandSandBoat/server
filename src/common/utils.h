@@ -139,6 +139,15 @@ std::set<std::filesystem::path> sorted_directory_iterator(std::string path_name)
 namespace utils
 {
     auto openFile(std::string const& path, std::string const& mode) -> std::unique_ptr<FILE>;
+
+    enum class ASCIIMode
+    {
+        IncludeSpace,
+        ExcludeSpace,
+    };
+
+    auto isPrintableASCII(unsigned char ch, ASCIIMode mode) -> bool;
+    auto isStringPrintable(const std::string& str, ASCIIMode mode) -> bool;
     auto toASCII(std::string const& target, unsigned char replacement = '\0') -> std::string;
 } // namespace utils
 

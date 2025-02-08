@@ -1368,8 +1368,6 @@ INSERT INTO `mob_droplist` VALUES (152,0,0,1000,16097,@UNCOMMON); -- Anus Tiara 
 -- ZoneID:   9 - Archaic Chest
 INSERT INTO `mob_droplist` VALUES (153,0,0,1000,1693,@VCOMMON); -- Cyan Chip (Very Common, 24%)
 
--- ZoneID:  73 - Archaic Rampart -- TODO: Salvage
--- ZoneID:  73 - Archaic Gear
 -- ZoneID:  76 - Archaic Rampart
 -- ZoneID:  76 - Archaic Gear
 -- ZoneID:  76 - Archaic Gears
@@ -3298,7 +3296,7 @@ INSERT INTO `mob_droplist` VALUES (383,0,0,1000,17296,@UNCOMMON); -- Pebble (Unc
 INSERT INTO `mob_droplist` VALUES (383,0,0,1000,5187,70);         -- Elshimo Coconut (7.0%)
 
 -- ZoneID:  73 - Bull Bugard
-INSERT INTO `mob_droplist` VALUES (384,0,0,1000,5373,@UNCOMMON); -- Duplicatus Cell (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (384,0,0,1000,5373,@ALWAYS); -- Duplicatus Cell
 
 -- ZoneID: 118 - Bull Dhalmel
 INSERT INTO `mob_droplist` VALUES (385,0,0,1000,4359,1080);     -- Slice Of Dhalmel Meat (108.0%)
@@ -5116,7 +5114,6 @@ INSERT INTO `mob_droplist` VALUES (606,0,0,1000,914,20);  -- Vial Of Mercury (2.
 INSERT INTO `mob_droplist` VALUES (607,0,0,1000,868,160); -- Handful Of Pugil Scales (16.0%)
 INSERT INTO `mob_droplist` VALUES (607,2,0,1000,864,0);   -- Handful Of Fish Scales (Steal)
 
--- ZoneID:  73 - Mamool Ja Spearman
 -- ZoneID:  74 - Demonic Rose
 INSERT INTO `mob_droplist` VALUES (608,0,0,1000,5367,@UNCOMMON); -- Cumulus Cell (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (608,0,0,1000,5369,@UNCOMMON); -- Stratus Cell (Uncommon, 10%)
@@ -5663,12 +5660,9 @@ INSERT INTO `mob_droplist` VALUES (694,2,0,1000,2531,0);  -- Shard Of Obsidian (
 INSERT INTO `mob_droplist` VALUES (695,0,0,1000,11559,@COMMON); -- Ultion Mantle (Common, 10%)
 
 -- ZoneID:  73 - Draco Lizard
--- ZoneID:  73 - Mamool Ja Savant
-INSERT INTO `mob_droplist` VALUES (696,0,0,1000,5367,@UNCOMMON); -- Cumulus Cell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (696,0,0,1000,5368,@UNCOMMON); -- Radiatus Cell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (696,0,0,1000,5370,@UNCOMMON); -- Cirrocumulus Cell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (696,0,0,1000,5371,@UNCOMMON); -- Undulatus Cell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (696,0,0,1000,5372,@UNCOMMON); -- Virga Cell (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (696,0,0,1000,5367,@VCOMMON); -- Cumulus Cell
+INSERT INTO `mob_droplist` VALUES (696,0,0,1000,5368,@ALWAYS); -- Radiatus Cell (100%)
+INSERT INTO `mob_droplist` VALUES (696,0,0,1000,5368,@ALWAYS); -- Radiatus Cell (100%)
 
 -- ZoneID: 197 - Dragonfly
 INSERT INTO `mob_droplist` VALUES (697,0,0,1000,846,130); -- Insect Wing (13.0%)
@@ -12582,8 +12576,8 @@ INSERT INTO `mob_droplist` VALUES (1588,0,0,1000,2225,170); -- Mamook Tanscale K
 INSERT INTO `mob_droplist` VALUES (1588,0,0,1000,2162,20);  -- Mamool Ja Helmet (2.0%)
 
 -- ZoneID:  73 - Mamool Ja Bounder
-INSERT INTO `mob_droplist` VALUES (1589,0,0,1000,5366,@UNCOMMON); -- Castellanus Cell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1589,0,0,1000,5367,@UNCOMMON); -- Cumulus Cell (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (1589,0,0,1000,5366,@ALWAYS); -- Castellanus Cell (100%)
+INSERT INTO `mob_droplist` VALUES (1589,0,0,1000,5367,@VCOMMON); -- Cumulus Cell (Very Common)
 
 -- ZoneID:  65 - Mamool Ja Frogman
 -- ZoneID:  65 - Mamool Ja Diver
@@ -15984,10 +15978,8 @@ INSERT INTO `mob_droplist` VALUES (2015,0,0,1000,19324,@ALWAYS); -- Dried Squid 
 INSERT INTO `mob_droplist` VALUES (2015,0,0,1000,11608,@VCOMMON); -- Barcarolle Medal (Very Common, 24%)
 
 -- ZoneID:  73 - Poroggo Gent
-INSERT INTO `mob_droplist` VALUES (2016,0,0,1000,5365,@UNCOMMON); -- Incus Cell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2016,0,0,1000,5373,@UNCOMMON); -- Duplicatus Cell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2016,0,0,1000,5374,@UNCOMMON); -- Opacus Cell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2016,0,0,1000,5375,@UNCOMMON); -- Praecipitatio Cell (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2016,0,0,1000,5375,@ALWAYS); -- Praecipitatio Cell (100%)
+INSERT INTO `mob_droplist` VALUES (2016,0,0,1000,5375,@ALWAYS); -- Praecipitatio Cell (100%)
 
 -- ZoneID: 132 - Poroggo Seducteur
 INSERT INTO `mob_droplist` VALUES (2017,0,0,1000,2900,@UNCOMMON); -- Bug-Eaten Hat (Uncommon, 10%)
@@ -16098,8 +16090,9 @@ INSERT INTO `mob_droplist` VALUES (2036,0,0,1000,5569,130);       -- Puk Egg (13
 INSERT INTO `mob_droplist` VALUES (2036,0,0,1000,2229,@UNCOMMON); -- Vial Of Chimera Blood (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2036,2,0,1000,2148,0);         -- Puk Wing (Steal)
 
--- ZoneID:  73 - Puk
-INSERT INTO `mob_droplist` VALUES (2037,0,0,1000,5365,@UNCOMMON); -- Incus Cell (Uncommon, 10%)
+-- ZoneID:  73
+INSERT INTO `mob_droplist` VALUES (2037,0,0,1000,5365,@ALWAYS); -- Incus Cell
+INSERT INTO `mob_droplist` VALUES (2037,0,0,1000,5373,@ALWAYS);
 
 -- ZoneID:  65 - Sea Puk
 -- ZoneID:  77 - Puk
@@ -19708,7 +19701,7 @@ INSERT INTO `mob_droplist` VALUES (2532,0,0,1000,3163,30);         -- Lancers Se
 INSERT INTO `mob_droplist` VALUES (2532,0,0,1000,3169,30);         -- Savants Seal Hands (3.0%)
 
 -- ZoneID:  73 - Vagrant Lindwurm
-INSERT INTO `mob_droplist` VALUES (2533,0,0,1000,5374,@UNCOMMON); -- Opacus Cell (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2533,0,0,1000,5374,@ALWAYS); -- Opacus Cell
 
 -- ZoneID:  90 - Vajra Quadav
 INSERT INTO `mob_droplist` VALUES (2534,0,0,1000,2531,@UNCOMMON); -- Shard Of Obsidian (Uncommon, 10%)
@@ -21735,9 +21728,9 @@ INSERT INTO `mob_droplist` VALUES (2677,0,0,1000,15138,@VRARE);  -- Valor Leggin
 INSERT INTO `mob_droplist` VALUES (2677,2,0,1000,1449,0);        -- Tukuku Whiteshell (Steal)
 
 -- ZoneID:  73 - Wyvern
-INSERT INTO `mob_droplist` VALUES (2678,0,0,1000,5366,@UNCOMMON); -- Castellanus Cell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2678,0,0,1000,5367,@UNCOMMON); -- Cumulus Cell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2678,0,0,1000,5369,@UNCOMMON); -- Stratus Cell (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2678,0,0,1000,5367,@VCOMMON); -- Cumulus Cell (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2678,0,0,1000,5369,@ALWAYS); -- Stratus Cell (100%)
+INSERT INTO `mob_droplist` VALUES (2678,0,0,1000,5369,@ALWAYS); -- Stratus Cell (100%)
 
 -- ZoneID: 213 - Wyvern
 INSERT INTO `mob_droplist` VALUES (2679,0,0,1000,1124,@RARE);     -- Wyvern Wing (Rare, 5%)
@@ -22864,8 +22857,9 @@ INSERT INTO `mob_droplist` VALUES (2805,0,0,1000,842,@UNCOMMON); -- Giant Bird F
 INSERT INTO `mob_droplist` VALUES (2805,0,0,1000,5581,80);       -- Slice Of Ziz Meat (8.0%)
 INSERT INTO `mob_droplist` VALUES (2805,2,0,1000,842,0);         -- Giant Bird Feather (Steal)
 
--- ZoneID:  73 - Ziz
-INSERT INTO `mob_droplist` VALUES (2806,0,0,1000,5375,@UNCOMMON); -- Praecipitatio Cell (Uncommon, 10%)
+-- ZoneID:  73
+INSERT INTO `mob_droplist` VALUES (7301,0,0,1000,5374,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (7301,0,0,1000,5375,@ALWAYS); -- Praecipitatio Cell
 
 -- ZoneID:  65 - Zizzy Zillah
 INSERT INTO `mob_droplist` VALUES (2807,0,0,1000,18437,429);      -- Namikirimaru (42.9%)
@@ -26189,7 +26183,7 @@ INSERT INTO `mob_droplist` VALUES (3227,0,0,1000,583,@RARE);      -- Smooth Ston
 INSERT INTO `mob_droplist` VALUES (3227,4,0,1000,4357,0);         -- Crawler Egg (Despoil)
 
 -- ZoneID: 153 - Old Goobbue
-INSERT INTO `mob_droplist` VALUES (3228,0,0,1000,919,@VCOMMON);   -- Boyahda Moss (Very Common, 24%) 
+INSERT INTO `mob_droplist` VALUES (3228,0,0,1000,919,@VCOMMON);   -- Boyahda Moss (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (3228,0,0,1000,1237,@COMMON);   -- Tree Cuttings (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (3228,0,0,1000,1181,@RARE);     -- Goobbue Humus (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3228,0,0,1000,1052,@UNCOMMON); -- Boyahda Coffer Key (Uncommon, 10%)
@@ -27330,6 +27324,201 @@ INSERT INTO `mob_droplist` VALUES (3372,4,0,1000,922,0);       -- Bat Wing (Desp
 INSERT INTO `mob_droplist` VALUES (3373,0,0,1000,922,@COMMON); -- Bat Wing (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (3373,0,0,1000,930,@VRARE);  -- Vial Of Beastman Blood (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3373,4,0,1000,922,0);       -- Bat Wing (Despoil)
+
+-- ZoneID:  73 - Puk
+INSERT INTO `mob_droplist` VALUES (3374,0,0,1000,5365,@ALWAYS);
+
+-- ZoneID:  73 - Ziz
+INSERT INTO `mob_droplist` VALUES (3375,0,0,1000,5375,@ALWAYS);
+
+-- ZoneID: 73 - Poroggo Gent
+INSERT INTO `mob_droplist` VALUES (3376,0,0,1000,5365,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3376,0,0,1000,5365,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3377,0,0,1000,5373,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3377,0,0,1000,5373,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3378,0,0,1000,5374,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3378,0,0,1000,5374,@ALWAYS);
+
+-- ZoneID: 73 - Poroggo Madame
+INSERT INTO `mob_droplist` VALUES (3379,1,1,@COMMON,14962,200);
+INSERT INTO `mob_droplist` VALUES (3379,1,1,@COMMON,14978,200);
+INSERT INTO `mob_droplist` VALUES (3379,1,1,@COMMON,15638,200);
+INSERT INTO `mob_droplist` VALUES (3379,1,1,@COMMON,15720,200);
+INSERT INTO `mob_droplist` VALUES (3379,1,1,@COMMON,16089,200);
+
+-- ZoneID:  73 - Draco Lizard
+INSERT INTO `mob_droplist` VALUES (3380,0,0,1000,5370,0);
+
+-- ZoneID:  73 - Wyvern
+INSERT INTO `mob_droplist` VALUES (3381,0,0,1000,5366,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3381,0,0,1000,5366,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3381,0,0,1000,5367,@VCOMMON); -- Cumulus Cell (Vert Common, 24%)
+
+-- ZoneID:  73 - Mamool Ja Zenist
+INSERT INTO `mob_droplist` VALUES (3382,0,0,1000,5366,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3382,0,0,1000,5370,@VCOMMON);
+
+-- ZoneID:  73 - Mamool Ja Spearman
+INSERT INTO `mob_droplist` VALUES (3383,0,0,1000,5369,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3383,0,0,1000,5367,@VCOMMON);
+
+-- ZoneID:  73 - Mamool Ja Zenist
+INSERT INTO `mob_droplist` VALUES (3384,0,0,1000,5377,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3384,0,0,1000,5377,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3384,0,0,1000,5377,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3384,0,0,1000,5383,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3384,0,0,1000,5384,@VCOMMON);
+
+-- ZoneID:  73 - Mamool Ja Savant
+INSERT INTO `mob_droplist` VALUES (3385,0,0,1000,5370,0);
+
+-- ZoneID:  73 - Mamool Ja Zenist
+INSERT INTO `mob_droplist` VALUES (3386,0,0,1000,5379,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3386,0,0,1000,5379,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3386,0,0,1000,5379,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3386,0,0,1000,5383,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3386,0,0,1000,5384,@VCOMMON);
+
+-- ZoneID:  73 - Mamool Ja Zenist
+-- ZoneID:  73 - Mamool Ja Spearman
+INSERT INTO `mob_droplist` VALUES (3387,0,0,1000,5380,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3387,0,0,1000,5380,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3387,0,0,1000,5380,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3387,0,0,1000,5383,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3387,0,0,1000,5384,@VCOMMON);
+
+-- ZoneID:  73 - Mamool Ja Spearman
+-- ZoneID:  73 - Mamool Ja Stapper
+INSERT INTO `mob_droplist` VALUES (3388,0,0,1000,5376,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3388,0,0,1000,5376,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3388,0,0,1000,5376,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3388,0,0,1000,5383,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3388,0,0,1000,5384,@VCOMMON);
+
+-- ZoneID:  73 - Mamool Ja Spearman
+INSERT INTO `mob_droplist` VALUES (3389,0,0,1000,5379,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3389,0,0,1000,5379,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3389,0,0,1000,5379,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3389,0,0,1000,5383,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3389,0,0,1000,5384,@VCOMMON);
+
+-- ZoneID:  73 - Mamool Ja Spearman
+INSERT INTO `mob_droplist` VALUES (3390,0,0,1000,5382,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3390,0,0,1000,5382,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3390,0,0,1000,5382,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3390,0,0,1000,5383,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3390,0,0,1000,5384,@VCOMMON);
+
+-- ZoneID:  73 - Mamool Ja Strapper, Mamool Ja Spearman
+INSERT INTO `mob_droplist` VALUES (3391,0,0,1000,5378,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3391,0,0,1000,5378,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3391,0,0,1000,5378,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3391,0,0,1000,5383,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3391,0,0,1000,5384,@VCOMMON);
+
+-- ZoneID:  73 - Mamool Ja Strapper, Mamool Ja Bounder
+INSERT INTO `mob_droplist` VALUES (3392,0,0,1000,5381,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3392,0,0,1000,5381,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3392,0,0,1000,5381,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3392,0,0,1000,5383,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3392,0,0,1000,5384,@VCOMMON);
+
+-- ZoneID:  73 - Archaic Gear, Archaic_Gears, Archaic Chariot
+INSERT INTO `mob_droplist` VALUES (3393,0,0,1000,2375,@COMMON);
+INSERT INTO `mob_droplist` VALUES (3393,0,0,1000,2488,@UNCOMMON);
+
+-- ZoneID:  73 - Mamool Ja
+INSERT INTO `mob_droplist` VALUES (3394,0,0,1000,5380,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3394,0,0,1000,5380,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3394,0,0,1000,5381,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3394,0,0,1000,5381,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3394,0,0,1000,5382,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3394,0,0,1000,5382,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3394,1,1,@ALWAYS,5383,500);
+INSERT INTO `mob_droplist` VALUES (3394,1,1,@ALWAYS,5384,500);
+INSERT INTO `mob_droplist` VALUES (3394,1,2,@ALWAYS,5383,500);
+INSERT INTO `mob_droplist` VALUES (3394,1,2,@ALWAYS,5384,500);
+
+-- ZoneID:  73 - Mamool Ja
+INSERT INTO `mob_droplist` VALUES (3395,0,0,1000,5376,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3395,0,0,1000,5376,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3395,0,0,1000,5378,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3395,0,0,1000,5378,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3395,0,0,1000,5379,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3395,0,0,1000,5379,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3395,1,1,@ALWAYS,5383,500);
+INSERT INTO `mob_droplist` VALUES (3395,1,1,@ALWAYS,5384,500);
+INSERT INTO `mob_droplist` VALUES (3395,1,2,@ALWAYS,5383,500);
+INSERT INTO `mob_droplist` VALUES (3395,1,2,@ALWAYS,5384,500);
+
+-- ZoneID:  73 - Mamool Ja
+INSERT INTO `mob_droplist` VALUES (3396,0,0,1000,5377,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3396,0,0,1000,5377,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3396,0,0,1000,5379,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3396,0,0,1000,5379,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3396,0,0,1000,5380,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3396,0,0,1000,5380,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3396,1,1,@ALWAYS,5383,500);
+INSERT INTO `mob_droplist` VALUES (3396,1,1,@ALWAYS,5384,500);
+INSERT INTO `mob_droplist` VALUES (3396,1,2,@ALWAYS,5383,500);
+INSERT INTO `mob_droplist` VALUES (3396,1,2,@ALWAYS,5384,500);
+
+-- ZoneID:  73 - Mamool Ja
+INSERT INTO `mob_droplist` VALUES (3397,0,0,1000,5376,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3397,0,0,1000,5376,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3397,0,0,1000,5381,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3397,0,0,1000,5381,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3397,0,0,1000,5382,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3397,0,0,1000,5382,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3397,1,1,@ALWAYS,5383,500);
+INSERT INTO `mob_droplist` VALUES (3397,1,1,@ALWAYS,5384,500);
+INSERT INTO `mob_droplist` VALUES (3397,1,2,@ALWAYS,5383,500);
+INSERT INTO `mob_droplist` VALUES (3397,1,2,@ALWAYS,5384,500);
+
+-- ZoneID:  73 - Mamool Ja Savant
+INSERT INTO `mob_droplist` VALUES (3398,0,0,1000,5376,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3398,0,0,1000,5383,@ALWAYS);
+
+-- ZoneID:  73 - Mamool Ja Savant
+INSERT INTO `mob_droplist` VALUES (3399,0,0,1000,5378,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3399,0,0,1000,5379,@ALWAYS);
+
+-- ZoneID:  73 - Mamool Ja Sophist
+INSERT INTO `mob_droplist` VALUES (3400,0,0,1000,5380,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3400,0,0,1000,5382,@ALWAYS);
+
+-- ZoneID:  73 - Mamool Ja Sophist, Mamool Ja Mimiker
+INSERT INTO `mob_droplist` VALUES (3401,0,0,1000,5377,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3401,0,0,1000,5381,@ALWAYS);
+
+-- ZoneID:  73 - Poroggo Gent
+INSERT INTO `mob_droplist` VALUES (3402,0,0,1000,5371,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3402,0,0,1000,5384,@VCOMMON);
+
+-- ZoneID:  73 - Poroggo Madame
+INSERT INTO `mob_droplist` VALUES (3403,0,0,1000,15638,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3403,0,0,1000,15720,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3403,0,0,1000,16089,@ALWAYS);
+INSERT INTO `mob_droplist` VALUES (3403,0,0,1000,5735,@ALWAYS);
+
+-- ZoneID:  73 - Poroggo Madame
+INSERT INTO `mob_droplist` VALUES (3404,0,0,1000,14561,@UNCOMMON);
+INSERT INTO `mob_droplist` VALUES (3404,0,0,1000,14972,@UNCOMMON);
+INSERT INTO `mob_droplist` VALUES (3404,0,0,1000,15632,@UNCOMMON);
+INSERT INTO `mob_droplist` VALUES (3404,0,0,1000,5735,@ALWAYS);
+
+-- ZoneID:  73 - Poroggo Madame
+INSERT INTO `mob_droplist` VALUES (3405,0,0,1000,15714,@UNCOMMON);
+INSERT INTO `mob_droplist` VALUES (3405,0,0,1000,15730,@UNCOMMON);
+INSERT INTO `mob_droplist` VALUES (3405,0,0,1000,16099,@UNCOMMON);
+
+-- ZoneID:  73 - Poroggo Gent
+INSERT INTO `mob_droplist` VALUES (3406,0,0,1000,5367,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3406,0,0,1000,5372,@VCOMMON);
+
+-- ZoneID:  73 - Poroggo Gent
+INSERT INTO `mob_droplist` VALUES (3407,0,0,1000,5366,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3407,0,0,1000,5370,@VCOMMON);
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

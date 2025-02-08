@@ -926,14 +926,32 @@ std::unique_ptr<FILE> utils::openFile(std::string const& path, std::string const
     return std::unique_ptr<FILE>(fopen(path.c_str(), mode.c_str()));
 }
 
+auto utils::isPrintableASCII(unsigned char ch, ASCIIMode mode) -> bool
+{
+    if (mode == ASCIIMode::IncludeSpace)
+    {
+        return ch >= 0x20 && ch < 0x7F;
+    }
+    else // ASCIIMode::ExcludeSpace
+    {
+        return ch > 0x20 && ch < 0x7F;
+    }
+}
+
+auto utils::isStringPrintable(const std::string& str, ASCIIMode mode) -> bool
+{
+    // clang-format off
+    return std::all_of(str.begin(), str.end(), [mode](unsigned char ch) { return isPrintableASCII(ch, mode); });
+    // clang-format on
+}
+
 std::string utils::toASCII(std::string const& target, unsigned char replacement)
 {
     std::string out;
     out.reserve(target.size());
     for (unsigned char ch : target)
     {
-        bool isLetter = ch >= 0x20 && ch < 0x7F;
-        out += isLetter ? ch : replacement;
+        out += isPrintableASCII(ch, ASCIIMode::IncludeSpace) ? ch : replacement;
     }
     return out;
 }

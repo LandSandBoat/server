@@ -52,6 +52,11 @@ namespace puppetutils
             {
                 PChar->automatonInfo.m_automatonName = rset->get<std::string>("name");
 
+                if (PChar->automatonInfo.m_automatonName.empty())
+                {
+                    PChar->automatonInfo.m_automatonName = "Automaton";
+                }
+
                 automaton_equip_t tempEquip;
                 db::extractFromBlob(rset, "equipped_attachments", tempEquip);
 
@@ -62,8 +67,6 @@ namespace puppetutils
                     tempEquip.Frame < FRAME_HARLEQUIN ||
                     tempEquip.Frame > FRAME_STORMWAKER)
                 {
-                    PChar->PPet->name = "Automaton";
-
                     PChar->setAutomatonHead(HEAD_HARLEQUIN);
                     tempEquip.Head = HEAD_HARLEQUIN;
                     PChar->setAutomatonFrame(FRAME_HARLEQUIN);

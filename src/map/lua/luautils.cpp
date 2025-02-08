@@ -828,53 +828,48 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        std::string filename;
-        if (PEntity->objtype == TYPE_NPC)
+        switch (PEntity->objtype)
         {
-            // clang-format off
-            auto isNamePrintable = [](const std::string& name)
+            case TYPE_NPC:
             {
-                // Match non-printable ASCII
-                for (const char& c : name)
+                // Don't bother even trying to load the script if the NPC name is non printable,
+                // and therefore impossible for a filesystem to load.
+                // TODO: Change name to "0x%X" instead so non-printables could get a script?
+                if (!utils::isStringPrintable(PEntity->getName(), utils::ASCIIMode::ExcludeSpace))
                 {
-                    if ((c >= 0 && c <= 0x20) || c >= 0x7F)
-                    {
-                        return false;
-                    }
+                    return;
                 }
-                return true;
-            };
-            // clang-format on
 
-            // Don't bother even trying to load the script if the NPC name is non printable,
-            // and therefore impossible for a filesystem to load.
-            // TODO: Change name to "0x%X" instead so non-printables could get a script?
-            if (!isNamePrintable(PEntity->getName()))
-            {
-                return;
+                const auto zoneName = PEntity->loc.zone->getName();
+                const auto name     = PEntity->getName();
+                CacheLuaObjectFromFile(fmt::format("./scripts/zones/{}/npcs/{}.lua", zoneName, name));
             }
-            std::string zone_name = PEntity->loc.zone->getName();
-            std::string npc_name  = PEntity->getName();
-            filename              = fmt::format("./scripts/zones/{}/npcs/{}.lua", zone_name, npc_name);
+            break;
+            case TYPE_MOB:
+            {
+                const auto zoneName = PEntity->loc.zone->getName();
+                const auto name     = PEntity->getName();
+                CacheLuaObjectFromFile(fmt::format("./scripts/zones/{}/mobs/{}.lua", zoneName, name));
+            }
+            break;
+            case TYPE_PET:
+            {
+                const auto name = static_cast<CPetEntity*>(PEntity)->GetScriptName();
+                CacheLuaObjectFromFile(fmt::format("./scripts/globals/pets/{}.lua", name));
+            }
+            break;
+            case TYPE_TRUST:
+            {
+                const auto name = PEntity->getName();
+                CacheLuaObjectFromFile(fmt::format("./scripts/actions/spells/trust/{}.lua", name));
+            }
+            break;
+            default:
+            {
+                ShowError("luautils::OnEntityLoad: Unknown entity type for %s", PEntity->getName());
+            }
+            break;
         }
-        else if (PEntity->objtype == TYPE_MOB)
-        {
-            std::string zone_name = PEntity->loc.zone->getName();
-            std::string mob_name  = PEntity->getName();
-            filename              = fmt::format("./scripts/zones/{}/mobs/{}.lua", zone_name, mob_name);
-        }
-        else if (PEntity->objtype == TYPE_PET)
-        {
-            std::string mob_name = static_cast<CPetEntity*>(PEntity)->GetScriptName();
-            filename             = fmt::format("./scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PEntity)->GetScriptName());
-        }
-        else if (PEntity->objtype == TYPE_TRUST)
-        {
-            std::string mob_name = PEntity->getName();
-            filename             = fmt::format("./scripts/actions/spells/trust/{}.lua", PEntity->getName());
-        }
-
-        CacheLuaObjectFromFile(filename);
     }
 
     void PopulateIDLookups(uint16 zoneId, std::string const& zoneName)
@@ -894,31 +889,31 @@ namespace luautils
 
         // Mobs
         {
-            auto query = fmt::sprintf("SELECT mobname, mobid FROM mob_spawn_points "
-                                      "WHERE ((mobid >> 12) & 0xFFF) = %i ORDER BY mobid ASC",
-                                      zoneId);
-            auto ret   = _sql->Query(query.c_str());
-            while (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+            const auto rset = db::preparedStmt("SELECT mobname, mobid FROM mob_spawn_points WHERE ((mobid >> 12) & 0xFFF) = ? ORDER BY mobid ASC", zoneId);
+            if (rset && rset->rowsCount())
             {
-                auto name = _sql->GetStringData(0);
-                auto id   = _sql->GetUIntData(1);
+                while (rset->next())
+                {
+                    const auto name = rset->get<std::string>("mobname");
+                    const auto id   = rset->get<uint32>("mobid");
 
-                lookup[name].emplace_back(id);
+                    lookup[name].emplace_back(id);
+                }
             }
         }
 
         // NPCs
         {
-            auto query = fmt::sprintf("SELECT name, npcid FROM npc_list "
-                                      "WHERE ((npcid >> 12) & 0xFFF) = %i ORDER BY npcid ASC",
-                                      zoneId);
-            auto ret   = _sql->Query(query.c_str());
-            while (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+            const auto rset = db::preparedStmt("SELECT name, npcid FROM npc_list WHERE ((npcid >> 12) & 0xFFF) = ? ORDER BY npcid ASC", zoneId);
+            if (rset && rset->rowsCount())
             {
-                auto name = _sql->GetStringData(0);
-                auto id   = _sql->GetUIntData(1);
+                while (rset->next())
+                {
+                    const auto name = rset->get<std::string>("name");
+                    const auto id   = rset->get<uint32>("npcid");
 
-                lookup[name].emplace_back(id);
+                    lookup[name].emplace_back(id);
+                }
             }
         }
 
@@ -1017,17 +1012,21 @@ namespace luautils
         TracyZoneScoped;
 
         // clang-format off
-        auto handleZone = [&](std::string const& zoneName)
+        const auto handleZone = [&](std::string const& zoneName)
         {
-            uint16 zoneId = 0;
+            uint16 zoneId = [&]() -> uint16
             {
-                auto query = fmt::sprintf("SELECT zoneid FROM zone_settings WHERE name = '%s'", zoneName.c_str());
-                auto ret = _sql->Query(query.c_str());
-                if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+                const auto rset = db::preparedStmt("SELECT zoneid FROM zone_settings WHERE name = ? LIMIT 1", zoneName);
+                if (rset && rset->rowsCount())
                 {
-                    zoneId = _sql->GetUIntData(0);
+                    if (rset->next())
+                    {
+                        return rset->get<uint16>("zoneid");
+                    }
                 }
-            }
+
+                return 0;
+            }();
 
             PopulateIDLookups(zoneId, zoneName);
         };
@@ -1035,15 +1034,15 @@ namespace luautils
         if (!maybeFilename)
         {
             // Pre-load all zone/IDs files so we can pre-populate their GetFirstID lookups
-            for (auto const& zoneDirEntry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/zones"))
+            for (const auto& zoneDirEntry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/zones"))
             {
-                for (auto const& fileEntry : sorted_directory_iterator<std::filesystem::directory_iterator>(zoneDirEntry.relative_path().generic_string()))
+                for (const auto& fileEntry : sorted_directory_iterator<std::filesystem::directory_iterator>(zoneDirEntry.relative_path().generic_string()))
                 {
                     if (fileEntry.stem() == "IDs")
                     {
                         // Prepare which zone we're in using the file path
-                        auto relative_path_string = fileEntry.relative_path().generic_string();
-                        auto zoneName = fileEntry.parent_path().stem().generic_string();
+                        const auto relative_path_string = fileEntry.relative_path().generic_string();
+                        const auto zoneName = fileEntry.parent_path().stem().generic_string();
 
                         handleZone(zoneName);
                     }
@@ -1062,10 +1061,10 @@ namespace luautils
         TracyZoneScoped;
 
         // clang-format off
-        auto handleZone = [&](CZone* PZone)
+        const auto handleZone = [&](CZone* PZone)
         {
-            auto zoneId   = PZone->GetID();
-            auto zoneName = PZone->getName();
+            const auto zoneId   = PZone->GetID();
+            const auto zoneName = PZone->getName();
             PopulateIDLookups(zoneId, zoneName);
         };
 
@@ -1090,6 +1089,7 @@ namespace luautils
     void SendEntityVisualPacket(uint32 npcid, const char* command)
     {
         TracyZoneScoped;
+
         if (CBaseEntity* PNpc = zoneutils::GetEntity(npcid, TYPE_NPC))
         {
             PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, std::make_unique<CEntityVisualPacket>(PNpc, command));
@@ -1723,17 +1723,13 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        bool hasSession = false;
-
-        const char* getPlayerSession = "SELECT 1 FROM accounts_sessions WHERE charid = %d LIMIT 1";
-        int32       queryRet         = _sql->Query(getPlayerSession, playerId);
-
-        if (queryRet != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        const auto rset = db::preparedStmt("SELECT 1 FROM accounts_sessions WHERE charid = ? LIMIT 1", playerId);
+        if (rset && rset->rowsCount())
         {
-            hasSession = true;
+            return true;
         }
 
-        return hasSession;
+        return false;
     }
 
     /************************************************************************
@@ -1746,16 +1742,15 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        const char* getPlayerIDQuery = "SELECT charid FROM chars WHERE charname = '%s'";
-        int32       queryRet         = _sql->Query(getPlayerIDQuery, playerName);
-        uint32      playerID         = 0;
-
-        if (queryRet != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        const auto rset = db::preparedStmt("SELECT charid FROM chars WHERE charname = ? LIMIT 1", playerName);
+        if (rset && rset->next())
         {
-            playerID = _sql->GetUIntData(0);
+            return rset->get<uint32>("charid");
         }
 
-        return playerID;
+        ShowWarning("GetPlayerIDByName: Player %s not found", playerName.c_str());
+
+        return 0;
     }
 
     /************************************************************************

@@ -5518,7 +5518,7 @@ INSERT INTO `item_equipment` VALUES (15761,'chariot_band',1,0,4194303,0,0,0,2457
 INSERT INTO `item_equipment` VALUES (15762,'empress_band',1,0,4194303,0,0,0,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15763,'emperor_band',1,0,4194303,0,0,0,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15769,'olduum_ring',60,0,4194303,0,0,0,24576,0,0,0);
-INSERT INTO `item_equipment` VALUES (15770,'random_ring',60,0,4194303,0,0,0,24576,0,0,0);
+INSERT INTO `item_equipment` VALUES (15770,'random_ring',60,0,4194303,0,0,5,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15771,'shining_ring',71,0,4194303,0,0,0,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15772,'scintillant_ring',71,0,4194303,0,0,0,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15773,'imperial_ring',50,0,4194303,0,0,0,24576,0,0,0);

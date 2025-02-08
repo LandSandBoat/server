@@ -13172,7 +13172,7 @@ INSERT INTO `item_basic` VALUES (15761,0,'chariot_band','chariot_band',1,64576,@
 INSERT INTO `item_basic` VALUES (15762,0,'empress_band','empress_band',1,64576,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (15763,0,'emperor_band','emperor_band',1,64576,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (15769,0,'olduum_ring','olduum_ring',1,64584,@NONE,1,0);
-INSERT INTO `item_basic` VALUES (15770,0,'random_ring','random_ring',1,64596,@NONE,1,0);
+INSERT INTO `item_basic` VALUES (15770,0,'random_ring','random_ring',1,65108,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (15771,0,'shining_ring','shining_ring',1,2084,@RINGS,0,4366);
 INSERT INTO `item_basic` VALUES (15772,0,'scintillant_ring','scintillant_ring',1,2080,@RINGS,0,4366);
 INSERT INTO `item_basic` VALUES (15773,0,'imperial_ring','imperial_ring',1,63572,@NONE,1,0);

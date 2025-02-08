@@ -345,19 +345,62 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
     };
     // clang-format on
 
-    std::size_t weakestIndex = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
-
-    // TODO: Figure this out properly:
-    auto Weakness_Element = weakestIndex + 1;
-    auto Spell_Element    = spell::GetSpell(spellId)->getElement();
-    if (Spell_Element == Weakness_Element)
+    std::size_t            weakestIndex     = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
+    std::optional<SpellID> choice           = std::nullopt;
+    auto                   Weakness_Element = weakestIndex + 1;
+    if (spell::GetSpell(spellId) != 0)
     {
-        return spellId;
+        auto Spell_Element = spell::GetSpell(spellId)->getElement();
+        if (Spell_Element == Weakness_Element)
+        {
+            return spellId;
+        }
     }
-    else
+    switch (Weakness_Element) // Adjust to ignore ELEMENT_NONE
     {
-        return std::nullopt;
+        case ELEMENT_FIRE:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_FIRE);
+            break;
+        }
+        case ELEMENT_ICE:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_BLIZZARD);
+            break;
+        }
+        case ELEMENT_WIND:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_AERO);
+            break;
+        }
+        case ELEMENT_EARTH:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_STONE);
+            break;
+        }
+        case ELEMENT_THUNDER:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_THUNDER);
+            break;
+        }
+        case ELEMENT_WATER:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_WATER);
+            break;
+        }
+        case ELEMENT_LIGHT:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_BANISH);
+            break;
+        }
+        case ELEMENT_DARK:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_DRAIN);
+            break;
+        }
     }
+    // If all else fails, just cast the best you have!
+    return !choice ? GetBestAvailable(SPELLFAMILY_NONE) : choice;
 }
 
 std::optional<SpellID> CMobSpellContainer::EnSpellAgainstTargetWeakness(CBattleEntity* PTarget)
