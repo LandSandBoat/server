@@ -12,7 +12,7 @@ end
 
 entity.onTrigger = function(player, npc)
     xi.tutorial.onAuctionTrigger(player)
-    player:sendMenu(3)
+    player:sendMenu(xi.menuType.AUCTION)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

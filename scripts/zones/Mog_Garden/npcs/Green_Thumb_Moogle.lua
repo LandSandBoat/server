@@ -31,7 +31,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
 
         -- Show the mog house menu
-        player:sendMenu(1)
+        player:sendMenu(xi.menuType.MOOGLE)
 
     elseif csid == 1016 and option == 0xFFE00FF then -- Buy/Sell Things
         local stock =

@@ -49,7 +49,7 @@ commandObj.onTrigger = function(player)
 
     for _, allowedZone in ipairs(allowedZones) do
         if currentZone == allowedZone then
-            player:sendMenu(1)
+            player:sendMenu(xi.menuType.MOOGLE)
         end
     end
 end
