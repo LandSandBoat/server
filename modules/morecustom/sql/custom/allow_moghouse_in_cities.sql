@@ -1,0 +1,23 @@
+-- allow use of Mog House anywhere in cities
+UPDATE zone_settings SET misc = misc + 0x0020 WHERE misc & 0x0020 = 0 and
+name in ('Southern_San_dOria',
+'Northern_San_dOria',
+'Port_San_dOria',
+'Port_Bastok',
+'Bastok_Mines',
+'Bastok_Markets',
+'Metalworks',
+'Port_Windurst',
+'Windurst_Woods',
+'Windurst_Walls',
+'Windurst_Waters',
+'Southern_San_dOria_[S]',
+'Bastok_Markets_[S]',
+'Windurst_Waters_[S]',
+'Aht_Urhgan_Whitegate',
+'Al_Zahbi',
+'Port_Jeuno',
+'Lower_Jeuno',
+'Upper_Jeuno',
+'RuLude_Gardens',
+'Celennia_Memorial_Library')
