@@ -43,3 +43,4 @@ custom/lua/test_npcs_in_gm_home.lua
 #      General SQL
 #-----------------------
 era/sql/
+morecustom/lua/additive_overrides
