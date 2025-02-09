@@ -42,6 +42,8 @@ commandObj.onTrigger = function(player)
     for _, allowedZone in ipairs(allowedZones) do
         if currentZone == allowedZone then
             player:printToPlayer("Enjoy signet!")
+            local pNation  = player:getNation()
+            local pRank    = player:getRank(pNation)
             local duration = (pRank + GetNationRank(pNation) + 3) * 3600
             player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
             player:addStatusEffect(xi.effect.SIGNET, 0, 0, duration)
