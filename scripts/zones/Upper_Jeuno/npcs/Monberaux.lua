@@ -22,24 +22,24 @@ entity.onTrade = function(player, npc, trade)
     if
         (trade:hasItemQty(xi.item.ELIXIR, 1) or
             trade:hasItemQty(xi.item.HI_ELIXIR, 1)) and
-        player:getCharVar('finalElixir') < elixirTotal
+        finalElixir < elixirTotal
     then
         player:startEvent(10243, elixirType, 1, 2, 0, 59615134, 7271819, 4095, 128)
     elseif
         (trade:hasItemQty(xi.item.ELIXIR, 1) or
         trade:hasItemQty(xi.item.HI_ELIXIR, 1)) and
-        player:getCharVar('finalElixir') >= elixirTotal
+        finalElixir >= elixirTotal
     then
         player:startEvent(10246, elixirType)
     end
 
     if
-        trade:getGil() >= minimumGil and
+        gilAmount >= minimumGil and
         monbAoe == 0
     then
         player:startEvent(10238)
     elseif
-        trade:getGil() >= minimumGil and
+        gilAmount >= minimumGil and
         monbAoe == 1
     then
         player:startEvent(10240)
@@ -90,6 +90,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
+    local finalElixir = player:getCharVar('finalElixir')
     if
         (csid == 33 and option == 0) or
         (csid == 34 and option == 0)
