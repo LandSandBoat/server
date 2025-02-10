@@ -44,5 +44,6 @@ custom/lua/test_npcs_in_gm_home.lua
 #-----------------------
 era/sql/
 morecustom/sql
+morecustom/cpp
 morecustom/lua/enum
 morecustom/lua/additive_overrides
