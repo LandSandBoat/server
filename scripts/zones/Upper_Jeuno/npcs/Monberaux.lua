@@ -10,53 +10,46 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local minimumGil = 10000
+    local minimumGil = 100000
     local elixirTotal = 2
 
     local finalElixir = player:getCharVar('finalElixir')
     local monbAoe = player:getCharVar('monbAoe')
     local gilAmount = trade:getGil()
-
+    local elixirType = trade:getItemId(0)
     -- Check trade for elixir/hi-elixir
     -- TODO: add logic to trade more than 1 at a time, or more than 1 type at a time.
     if
-        trade:hasItemQty(xi.item.ELIXIR, 1) or
-        trade:hasItemQty(xi.item.HI_ELIXIR, 1)
+        (trade:hasItemQty(xi.item.ELIXIR, 1) or
+            trade:hasItemQty(xi.item.HI_ELIXIR, 1)) and
+        player:getCharVar('finalElixir') < elixirTotal
     then
-        if finalElixir < elixirTotal then
-            player:setCharVar('finalElixir', finalElixir + 1)
-            player:printToPlayer(string.format('Thank you for that medicine. You currently have %d vials remaining.', finalElixir + 1), 0, 'Monberaux')
-            player:tradeComplete()
-        elseif finalElixir == elixirTotal then
-            player:printToPlayer('I am already holding too many vials for you. Come back after I`ve treated you.', 0, 'Monberaux')
-        else
-            player:printToPlayer('What do I need this for?', 0, 'Monberaux')
-        end
-
-        return
+        player:startEvent(10243, elixirType, 1, 2, 0, 59615134, 7271819, 4095, 128)
+    elseif
+        (trade:hasItemQty(xi.item.ELIXIR, 1) or
+        trade:hasItemQty(xi.item.HI_ELIXIR, 1)) and
+        player:getCharVar('finalElixir') >= elixirTotal
+    then
+        player:startEvent(10246, elixirType)
     end
 
-    -- Check for ailment potion AoE and for gil value
-    -- TODO: Possibly make required more based on how much gil the player has.
-    if monbAoe ~= 1 then
-        if gilAmount >= minimumGil then
-            player:setCharVar('monbAoe', 1, NextJstWeek())
-            player:printToPlayer('Thank you for that donation! My potions will now affect all patrons until the end of the week.', 0, 'Monberaux')
-            player:tradeComplete()
-        else
-            player:printToPlayer('My services are worth at minimum 10,000 gil.', 0, 'Monberaux')
-        end
-
-        return
-    else
-        player:printToPlayer('As much as I appreciate the coin, you`ve already donated this week.', 0, 'Monberaux')
-        return
+    if
+        trade:getGil() >= minimumGil and
+        monbAoe == 0
+    then
+        player:startEvent(10238)
+    elseif
+        trade:getGil() >= minimumGil and
+        monbAoe == 1
+    then
+        player:startEvent(10240)
     end
 end
 
 entity.onTrigger = function(player, npc)
     local theLostCardien = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
     local cooksPride = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOKS_PRIDE)
+    local elixirTotal = 2
 
     if
         cooksPride == xi.questStatus.QUEST_COMPLETED and
@@ -78,6 +71,22 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(32)
     end
+
+    if
+        player:getCharVar('monbAoe') == 0
+    then
+        player:startEvent(10237, 100000, 1, 2964, 3300, 58195966, 3881063, 4480, 128)
+    else
+        player:startEvent(10239)
+    end
+
+    if
+        player:getCharVar('finalElixir') <= elixirTotal
+    then
+        player:startEvent(10241)
+    else
+        player:startEvent(10244)
+    end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
@@ -94,6 +103,20 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) -- Start next quest "THE_KING_CARDIAN"
     elseif csid == 33 and option == 1 then
         player:setCharVar('theLostCardianVar', 3)
+    end
+
+    if
+        csid == 10238
+    then
+        player:setCharVar('monbAoe', 1, NextJstWeek())
+        player:tradeComplete()
+    end
+
+    if
+        csid == 10243
+    then
+        player:setCharVar('finalElixir', finalElixir + 1)
+        player:tradeComplete()
     end
 end
 
