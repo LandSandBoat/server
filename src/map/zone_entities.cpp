@@ -168,8 +168,8 @@ void CZoneEntities::TryAddToNearbySpawnLists(CBaseEntity* PEntity)
                 {
                     case TYPE_PC:
                     {
-                        auto* PChar = static_cast<CCharEntity*>(PEntity);
-                        if (PChar->m_moghouseID != PCurrentChar->m_moghouseID)
+                        auto* PChar = dynamic_cast<CCharEntity*>(PEntity);
+                        if (PChar && PChar->m_moghouseID != PCurrentChar->m_moghouseID)
                         {
                             continue;
                         }
@@ -1488,10 +1488,10 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
     // Do not send packets that are updates of a hidden GM..
     if (packet->getType() == 0x00D && PEntity != nullptr && PEntity->objtype == TYPE_PC)
     {
-        auto* PChar = static_cast<CCharEntity*>(PEntity);
+        auto* PChar = dynamic_cast<CCharEntity*>(PEntity);
 
         // Ensure this packet is not despawning us..
-        if (PChar->m_isGMHidden && packet->ref<uint8>(0x0A) != 0x20)
+        if (PChar && PChar->m_isGMHidden && packet->ref<uint8>(0x0A) != 0x20)
         {
             return;
         }
