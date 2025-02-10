@@ -152,7 +152,13 @@ end
 -----------------------------------
 xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmgMod, tpEffect, mtp000, mtp150, mtp300, offcratiomod)
     local returninfo    = {}
-    local dSTR          = utils.clamp(mob:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10)
+    
+    -- mobs use fSTR (but with special calculation in the called function)
+    local fSTR = xi.combat.physical.calculateMeleeStatFactor(mob, target)
+    if tpEffect == xi.mobskills.magicalTpBonus.RANGED then
+        fSTR = xi.combat.physical.calculateRangedStatFactor(mob, target)
+    end
+
     local targetEvasion = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
 
     if
@@ -164,7 +170,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmg
     end
 
     -- Apply WSC (TODO: Change to include WSC)
-    local base = math.max(1, mob:getWeaponDmg() + dSTR)
+    local base = math.max(1, mob:getWeaponDmg() + fSTR)
 
     --work out and cap ratio
     if not offcratiomod then -- default to attack. Pretty much every physical mobskill will use this, Cannonball being the exception.
