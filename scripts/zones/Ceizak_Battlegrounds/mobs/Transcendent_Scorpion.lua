@@ -38,6 +38,7 @@ if mob:getHPP() <= 50 then
 else
     mob:setMobMod(xi.mobMod.SKILL_LIST, 2020)
 end
+
 end
 
 entity.onMobSpawn = function(mob)
@@ -53,6 +54,7 @@ mob:addListener('WEAPONSKILL_USE', 'ALL_MOBSKILL_CHECK', function(mobArg, target
         end
     end
 end)
+
 end
 
 entity.onMobDeath = function(mob)
