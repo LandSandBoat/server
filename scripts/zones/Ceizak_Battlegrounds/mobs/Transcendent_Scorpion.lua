@@ -38,7 +38,6 @@ entity.onMobFight = function(mob, target)
     else
         mob:setMobMod(xi.mobMod.SKILL_LIST, 2020)
     end
-
 end
 
 entity.onMobSpawn = function(mob)
