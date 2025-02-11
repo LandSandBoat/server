@@ -19,7 +19,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     -- Ensuring Hell Scissors is stronger than Death Scissors
-    dmg = dmg * 1.5 
+    dmg = dmg * 1.5
 
     -- Enmity reset effect
     mob:resetEnmity(target)
