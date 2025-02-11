@@ -33,28 +33,27 @@ return numEffectsRemoved
 end
 
 entity.onMobFight = function(mob, target)
-if mob:getHPP() <= 50 then
-    mob:setMobMod(xi.mobMod.SKILL_LIST, 2021)
-else
-    mob:setMobMod(xi.mobMod.SKILL_LIST, 2020)
-end
+    if mob:getHPP() <= 50 then
+        mob:setMobMod(xi.mobMod.SKILL_LIST, 2021)
+    else
+        mob:setMobMod(xi.mobMod.SKILL_LIST, 2020)
+    end
 
 end
 
 entity.onMobSpawn = function(mob)
 mob:addListener('WEAPONSKILL_USE', 'ALL_MOBSKILL_CHECK', function(mobArg, target, skillID, tp, action)
-    local effectsRemoved = removeSpecificDebuffs(mob)
-    if effectsRemoved > 0 then
-        local hateList = mob:getEnmityList()
-        for _, hateEntity in ipairs(hateList) do
-            local player = hateEntity.entity
-            if player and player:isPC() then
-                player:messageSpecial(zones[xi.zone.CEIZAK_BATTLEGROUNDS].text.SPRING_STEP)
+        local effectsRemoved = removeSpecificDebuffs(mob)
+        if effectsRemoved > 0 then
+            local hateList = mob:getEnmityList()
+            for _, hateEntity in ipairs(hateList) do
+                local player = hateEntity.entity
+                if player and player:isPC() then
+                    player:messageSpecial(zones[xi.zone.CEIZAK_BATTLEGROUNDS].text.SPRING_STEP)
+                end
             end
         end
-    end
-end)
-
+    end)
 end
 
 entity.onMobDeath = function(mob)
