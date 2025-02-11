@@ -131,7 +131,7 @@ xi.mobSkill =
 
     BOREAS_MANTLE     = 1980, -- Unique entry.
 
-    HELL_SCISSORS     = 2221, -- 
+    HELL_SCISSORS     = 2221,
 
     QUEASYSHROOM_2    = 2232,
 
