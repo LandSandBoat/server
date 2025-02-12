@@ -22,7 +22,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.15, 1.25, xi.element.FIRE, 1596)
+    local breathCap = 1596
+
+    if mob:getPool() == 2840 then -- Nidhogg
+        breathCap = 2000
+    end
+
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.15, 1.25, xi.element.FIRE, breathCap)
     dmgmod = utils.conalDamageAdjustment(mob, target, skill, dmgmod, 0.2)
 
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)

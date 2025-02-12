@@ -33,7 +33,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     -- Damage calculation
-    local damage = mob:getWeaponDmg() * 10
+    local damage = mob:getMainLvl() * 10 -- TODO: dINT multiplier of 1.5x
 
     damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
     damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
