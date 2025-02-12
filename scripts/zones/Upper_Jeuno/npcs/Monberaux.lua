@@ -23,6 +23,7 @@ entity.onTrade = function(player, npc, trade)
     elseif minimumGil < 10000 then
         minimumGil = 10000
     end
+    
     -- Check trade for elixir/hi-elixir
     -- TODO: add logic to trade more than 1 at a time, or more than 1 type at a time.
     if
