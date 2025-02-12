@@ -19,10 +19,10 @@ entity.onTrade = function(player, npc, trade)
     local elixirType = trade:getItemId(0)
 
     if minimumGil > 100000 then
-		minimumGil = 100000
-	elseif minimumGil < 10000 then
-		minimumGil = 10000
-	end
+        minimumGil = 100000
+    elseif minimumGil < 10000 then
+        minimumGil = 10000
+    end
     -- Check trade for elixir/hi-elixir
     -- TODO: add logic to trade more than 1 at a time, or more than 1 type at a time.
     if
@@ -59,10 +59,10 @@ entity.onTrigger = function(player, npc)
     local minimumGil = player:getGil() * 0.1
 
     if minimumGil > 100000 then
-		minimumGil = 100000
-	elseif minimumGil < 10000 then
-		minimumGil = 10000
-	end
+        minimumGil = 100000
+    elseif minimumGil < 10000 then
+        minimumGil = 10000
+    end
 
     if
         cooksPride == xi.questStatus.QUEST_COMPLETED and
