@@ -9,3 +9,4 @@ regex
 argparse
 requests
 bcrypt
+clang-format

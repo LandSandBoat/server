@@ -3,13 +3,13 @@ name: "build"
 on:
   pull_request:
     types:
-      - opened
-      - synchronize
-      - reopened
+    - opened
+    - synchronize
+    - reopened
   push:
     branches:
-      - base
-      - everything
+    - base
+    - everything
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
@@ -97,28 +97,28 @@ jobs:
           exit 1
         fi
         exit 0
-    - name: Run CPP Formatting Checks (clang-format-18)
+    - name: Run CPP Formatting Checks (clang-format-19)
       if: always()
       run: |
-        clang-format-18 -version
+        clang-format -version
         touch cpp_formatting_checks.txt
         for changed_file in $CHANGED_FILES; do
           if [[ -f $changed_file ]]; then
             if [[ $changed_file == *.cpp || $changed_file == *.h ]]; then
-              clang-format-18 -style=file -i ${changed_file}
+              python3 tools/run_clang_format.py ${changed_file}
             fi
           fi
         done
         git diff >> cpp_formatting_checks.txt
         git diff --color >> cpp_formatting_checks_color.txt
-    - name: Upload CPP Formatting Diff (clang-format-18)
+    - name: Upload CPP Formatting Diff (clang-format-19)
       if: hashFiles('cpp_formatting_checks.txt') != ''
       uses: actions/upload-artifact@v4
       with:
         name: clang_format_diff
         path: |
           cpp_formatting_checks.txt
-    - name: Report CPP Formatting Checks (clang-format-18)
+    - name: Report CPP Formatting Checks (clang-format-19)
       if: always()
       run: |
         if [ -s cpp_formatting_checks_color.txt ]
@@ -126,7 +126,7 @@ jobs:
           echo ""
           echo "You have errors in your C++ code formatting."
           echo "Please see below in red for the incorrect formatting, and in green for the correct formatting."
-          echo "You can either fix the formatting by hand or use clang-format."
+          echo "You can either fix the formatting by hand, use clang-format manually, using the diff file above, or the tools/run_clang_format.py script."
           echo "(You can safely ignore warnings about \$TERM and tput)"
           echo ""
           cat cpp_formatting_checks_color.txt | diff-so-fancy || true
@@ -332,32 +332,32 @@ jobs:
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - name: Cache 'build' folder
-        uses: actions/cache@v4
-        with:
-          path: build
-          key: ${{ runner.os }}-msvc64d
-      - name: Configure CMake
-        shell: cmd
-        run: |
-          mkdir -p build
-          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Debug
-      - name: Build
-        shell: cmd
-        run: |
-          cmake --build build -j4
-      - name: Archive Executables
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows_executables
-          path: |
-            xi_connect.exe
-            xi_map.exe
-            xi_search.exe
-            xi_world.exe
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+    - name: Cache 'build' folder
+      uses: actions/cache@v4
+      with:
+        path: build
+        key: ${{ runner.os }}-msvc64d
+    - name: Configure CMake
+      shell: cmd
+      run: |
+        mkdir -p build
+        cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Debug
+    - name: Build
+      shell: cmd
+      run: |
+        cmake --build build -j4
+    - name: Archive Executables
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows_executables
+        path: |
+          xi_connect.exe
+          xi_map.exe
+          xi_search.exe
+          xi_world.exe
 
   Windows_64bit_Release_Tracy_Modules:
     needs: Sanity_Checks
@@ -365,61 +365,61 @@ jobs:
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - name: Cache 'build' folder
-        uses: actions/cache@v4
-        with:
-          path: build
-          key: ${{ runner.os }}-msvc64-t
-      - name: Enable Modules
-        shell: bash
-        run: |
-          python3 << EOF
-          with open("modules/init.txt", "w") as f:
-              f.write("custom\n")
-              f.write("era\n")
-              f.write("example\n")
-              f.write("renamer\n")
-          EOF
-      - name: Configure CMake
-        shell: cmd
-        run: |
-          mkdir -p build
-          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DENABLE_TRACY=ON
-      - name: Build
-        shell: cmd
-        run: |
-          cmake --build build --config Release -j4
-      - name: Archive Executables
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows_modules_executables
-          path: |
-            xi_connect.exe
-            xi_map_tracy.exe
-            xi_search.exe
-            xi_world.exe
-          
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+    - name: Cache 'build' folder
+      uses: actions/cache@v4
+      with:
+        path: build
+        key: ${{ runner.os }}-msvc64-t
+    - name: Enable Modules
+      shell: bash
+      run: |
+        python3 << EOF
+        with open("modules/init.txt", "w") as f:
+            f.write("custom\n")
+            f.write("era\n")
+            f.write("example\n")
+            f.write("renamer\n")
+        EOF
+    - name: Configure CMake
+      shell: cmd
+      run: |
+        mkdir -p build
+        cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DENABLE_TRACY=ON
+    - name: Build
+      shell: cmd
+      run: |
+        cmake --build build --config Release -j4
+    - name: Archive Executables
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows_modules_executables
+        path: |
+          xi_connect.exe
+          xi_map_tracy.exe
+          xi_search.exe
+          xi_world.exe
+
   MacOS_64bit:
     needs: Sanity_Checks
     # https://github.com/actions/runner-images/blob/main/images/macos/macos-15-Readme.md
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - name: Install Dependencies (Brew)
-        run: |
-          brew install mariadb zeromq zmq luajit
-      - name: Configure CMake
-        run: |
-          mkdir -p build
-          cmake -S . -B build
-      - name: Build
-        run: |
-          cmake --build build -j4
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+    - name: Install Dependencies (Brew)
+      run: |
+        brew install mariadb zeromq zmq luajit
+    - name: Configure CMake
+      run: |
+        mkdir -p build
+        cmake -S . -B build
+    - name: Build
+      run: |
+        cmake --build build -j4
 
   Full_Startup_Checks_Linux:
     runs-on: ubuntu-24.04
@@ -431,7 +431,7 @@ jobs:
           MYSQL_DATABASE: xidb
           MYSQL_ROOT_PASSWORD: root
         ports:
-          - 3306:3306
+        - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
     - uses: actions/checkout@v4
@@ -601,7 +601,7 @@ jobs:
           MYSQL_DATABASE: xidb
           MYSQL_ROOT_PASSWORD: root
         ports:
-          - 3306:3306
+        - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
     - uses: actions/checkout@v4
