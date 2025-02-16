@@ -472,7 +472,7 @@ void CTrustEntity::OnDespawn(CDespawnState& /*unused*/)
         luautils::OnMobDespawn(this);
     }
     FadeOut();
-    PAI->EventHandler.triggerListener("DESPAWN", CLuaBaseEntity(this));
+    PAI->EventHandler.triggerListener("DESPAWN", this);
 }
 
 void CTrustEntity::OnCastFinished(CMagicState& state, action_t& action)

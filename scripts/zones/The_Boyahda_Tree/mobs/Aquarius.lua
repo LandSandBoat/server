@@ -7,8 +7,8 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMobMod(xi.mobMod.GIL_MIN, 5000)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 15000)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 18000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 18000)
 end
 
 entity.onMobSpawn = function(mob)

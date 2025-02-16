@@ -5,7 +5,7 @@
 ---@type TMobEntity
 local entity = {}
 
-local mobRegen = function(mob)
+local function mobRegen(mob)
     local hour = VanadielHour()
 
     if hour >= 6 and hour <= 20 then
@@ -24,15 +24,15 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobRoam = function(mob)
-    mobRegen(mob)
-
     local weather = mob:getWeather()
     if
-        not (weather == xi.weather.DUST_STORM or
-        weather == xi.weather.SAND_STORM)
+        weather ~= xi.weather.DUST_STORM and
+        weather ~= xi.weather.SAND_STORM
     then
         DespawnMob(mob:getID())
     end
+
+    mobRegen(mob)
 end
 
 entity.onMobFight = function(mob, target)

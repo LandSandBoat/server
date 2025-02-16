@@ -285,7 +285,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::stri
     }
 
     // Call the function
-    auto result = onTrigger(CLuaBaseEntity(PChar), sol::as_args(args));
+    auto result = onTrigger(PChar, sol::as_args(args));
     if (!result.valid())
     {
         sol::error err = result;

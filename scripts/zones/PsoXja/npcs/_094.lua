@@ -9,28 +9,20 @@ local psoXjaGlobal = require('scripts/zones/PsoXja/globals')
 ---@type TNpcEntity
 local entity = {}
 
+local correctSideOfDoor = function(player)
+    return player:getZPos() >= -101
+end
+
 entity.onTrade = function(player, npc, trade)
-    if
-        player:getMainJob() == xi.job.THF and
-        trade:getItemCount() == 1 and
-        (
-            trade:hasItemQty(xi.item.SKELETON_KEY, 1) or
-            trade:hasItemQty(xi.item.LIVING_KEY, 1) or
-            trade:hasItemQty(xi.item.SET_OF_THIEFS_TOOLS, 1)
-        )
-    then
-        psoXjaGlobal.attemptPickLock(player, npc, player:getZPos() >= -101)
-    end
+    psoXjaGlobal.attemptPickLock(player, npc, trade, correctSideOfDoor(player))
 end
 
 entity.onTrigger = function(player, npc)
-    psoXjaGlobal.attemptOpenDoor(player, npc, player:getZPos() >= -101)
+    psoXjaGlobal.attemptOpenDoor(player, npc, correctSideOfDoor(player))
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 26 and option == 1 then
-        player:setPos(260, -0.25, -20, 254, 111)
-    end
+    psoXjaGlobal.cs26EventFinish(player, csid, option)
 end
 
 return entity

@@ -34,6 +34,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     mob:setHP(0)
 
+    if mob:isDead() then
+        mob:setAnimationSub(1) -- Don't die twice
+    end
+
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)

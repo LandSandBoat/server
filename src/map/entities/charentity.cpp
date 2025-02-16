@@ -3358,3 +3358,12 @@ void CCharEntity::clearCharVarsWithPrefix(std::string const& prefix)
 
     _sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname LIKE '%s%%'", this->id, prefix.c_str());
 }
+
+bool CCharEntity::startSynth(SKILLTYPE synthSkill)
+{
+    if (PAI)
+    {
+        return PAI->Internal_Synth(synthSkill);
+    }
+    return false;
+}

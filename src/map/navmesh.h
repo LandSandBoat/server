@@ -34,35 +34,15 @@ The NavMesh class will load and find paths given a start point and end point.
 #include <memory>
 #include <vector>
 
-#define MAX_NAV_POLYS 256
-
-static const int NAVMESHSET_MAGIC   = 'M' << 24 | 'S' << 16 | 'E' << 8 | 'T'; // 'MSET'
-static const int NAVMESHSET_VERSION = 1;
-
-struct NavMeshSetHeader
-{
-    int             magic;
-    int             version;
-    int             numTiles;
-    dtNavMeshParams params;
-};
-
-struct NavMeshTileHeader
-{
-    dtTileRef tileRef;
-    int       dataSize;
-};
-
 class CNavMesh
 {
 public:
-    static const int8 ERROR_NEARESTPOLY = -2;
-    static void       ToFFXIPos(const position_t* pos, float* out);
-    static void       ToFFXIPos(float* out);
-    static void       ToFFXIPos(position_t* out);
-    static void       ToDetourPos(const position_t* pos, float* out);
-    static void       ToDetourPos(float* out);
-    static void       ToDetourPos(position_t* out);
+    static void ToFFXIPos(const position_t* pos, float* out);
+    static void ToFFXIPos(float* out);
+    static void ToFFXIPos(position_t* out);
+    static void ToDetourPos(const position_t* pos, float* out);
+    static void ToDetourPos(float* out);
+    static void ToDetourPos(position_t* out);
 
 public:
     CNavMesh(CNavMesh* other);
@@ -73,10 +53,10 @@ public:
     void reload();
     void unload();
 
-    std::vector<pathpoint_t>     findPath(const position_t& start, const position_t& end);
-    std::pair<int16, position_t> findRandomPosition(const position_t& start, float maxRadius);
+    auto findPath(const position_t& start, const position_t& end) -> std::vector<pathpoint_t>;
+    auto findRandomPosition(const position_t& start, float maxRadius) -> std::pair<int16, position_t>;
 
-    // Returns true if the point is in water
+    // Returns true if the point is in water (not implemented)
     bool inWater(const position_t& point);
 
     // Returns true if no wall was hit
@@ -132,12 +112,12 @@ public:
 private:
     bool onSameFloor(const position_t& start, float* spos, const position_t& end, float* epos, dtQueryFilter& filter);
 
-    std::string    m_filename;
-    uint16         m_zoneID;
-    dtRaycastHit   m_hit{};
-    dtPolyRef      m_hitPath[20]{};
-    dtNavMesh*     m_navMesh;
-    dtNavMeshQuery m_navMeshQuery;
+    std::string            m_filename;
+    uint16                 m_zoneID;
+    dtNavMesh*             m_navMesh;
+    dtNavMeshQuery         m_navMeshQuery;
+    dtRaycastHit           m_hit;
+    std::vector<dtPolyRef> m_hitPath;
 };
 
 #endif

@@ -211,7 +211,7 @@ void CTrustController::DoCombatTick(time_point tick)
 
         m_GambitsContainer->Tick(tick);
 
-        POwner->PAI->EventHandler.triggerListener("COMBAT_TICK", CLuaBaseEntity(POwner), CLuaBaseEntity(POwner->PMaster), CLuaBaseEntity(PTarget));
+        POwner->PAI->EventHandler.triggerListener("COMBAT_TICK", POwner, POwner->PMaster, PTarget);
     }
 }
 

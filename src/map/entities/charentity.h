@@ -568,6 +568,7 @@ public:
     std::vector<AuctionHistory_t> m_ah_history;  // AH history list (in the future consider using UContainer)
 
     std::unordered_map<uint16, uint32> m_PacketRecievedTimestamps;
+    uint16                             m_LastPacketType{};
 
     void   SetPlayTime(uint32 playTime);        // Set playtime
     uint32 GetPlayTime(bool needUpdate = true); // Get playtime
@@ -660,6 +661,9 @@ public:
     void clearCharVarsWithPrefix(std::string const& prefix);
 
     bool m_Locked; // Is the player locked in a cutscene
+
+    // Starts a synth with skillType X
+    bool startSynth(SKILLTYPE synthSkill);
 
     CCharEntity();
     ~CCharEntity();

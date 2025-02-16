@@ -47,6 +47,7 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         YOU_CAN_BECOME_PUP            = 5850,  -- You can now become a puppetmaster!
         PROMOTION_SERGEANT_MAJOR      = 6174, -- <name> has been promoted to Sergeant Major!
         NYZUL_FAIL                    = 6191,  -- Your mission was not successful. I regret to inform you that the Imperial Army does not officially recognize your efforts within this Assault area.
+        LANCE_CORPORAL                = 6681,  -- ≺Player≻ has been promoted to Lance Corporal!
         BESIEGED_OFFSET               = 6832,  -- Your Imperial Standing has increased!
         PROMOTION_SERGEANT            = 7740,  -- <player> has been promoted to Sergeant!
         PAY_DIVINATION                = 8784,  -- ou pay 1000 gil for the divination.
@@ -78,6 +79,7 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         AUTOMATON_ATTACHMENT_UNLOCK   = 9668,  -- You can now equip your automaton with <item>.
         SANCTION                      = 9821,  -- You have received the Empire's Sanction.
         ZASSHAL_DIALOG                = 11024, -- 'ang about. Looks like the permit you got was the last one I 'ad, so it might take me a bit o' time to scrounge up some more. 'ere, don't gimme that look. I'll be restocked before you know it.
+        SECOND_LIEUTENANT             = 12050, -- <player> has been promoted to Second Lieutenant!
         RETRIEVE_DIALOG_ID            = 13543, -- You retrieve <item> from the porter moogle's care.
         COMMON_SENSE_SURVIVAL         = 14334, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },

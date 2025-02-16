@@ -27,6 +27,7 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
         ENIGMATIC_LIGHT               = 7355, -- The <item> is giving off an enigmatic light.
         LEYPOINT                      = 7410, -- An eerie red glow emanates from this stone platform. The surrounding air feels alive with energy...
         HARVESTING_IS_POSSIBLE_HERE   = 7418, -- Harvesting is possible here if you have <item>.
+        WELLSPRING                    = 7456, -- The water in the spring is an unusual color...
         GIWAHB_WATCHTOWER_LOCKED      = 7993, -- The door is locked...
         INCREASED_STANDING            = 7994, -- Your Imperial Standing has increased!
         HEADY_FRAGRANCE               = 8498, -- The heady fragrance of wine pervades the air...
@@ -54,6 +55,7 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
     {
         HARVESTING = GetTableOfIDs('Harvesting_Point'),
         HOOFPRINT  = GetFirstID('Warhorse_Hoofprint'),
+        WELLSPRING = GetFirstID('Mythralline_Wellspring')
     },
 }
 

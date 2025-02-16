@@ -1,6 +1,7 @@
 -----------------------------------
 -- Magian Trial Global
 -----------------------------------
+require('scripts/globals/combat/element_tables')
 require('scripts/globals/magian_data')
 require('scripts/globals/npc_util')
 -----------------------------------
@@ -777,19 +778,6 @@ xi.magian.deliveryCrateOnEventFinish = function(player, csid, option, npc)
     end
 end
 
--- [elementId] = { validDay, { weatherEffect1, weatherEffect2 } },
-local dayWeatherElement =
-{
-    [xi.element.FIRE   ] = { xi.day.FIRESDAY,     { xi.weather.HOT_SPELL,  xi.weather.HEAT_WAVE     } },
-    [xi.element.ICE    ] = { xi.day.ICEDAY,       { xi.weather.SNOW,       xi.weather.BLIZZARDS     } },
-    [xi.element.WIND   ] = { xi.day.WINDSDAY,     { xi.weather.WIND,       xi.weather.GALES         } },
-    [xi.element.EARTH  ] = { xi.day.EARTHSDAY,    { xi.weather.DUST_STORM, xi.weather.SAND_STORM    } },
-    [xi.element.THUNDER] = { xi.day.LIGHTNINGDAY, { xi.weather.THUNDER,    xi.weather.THUNDERSTORMS } },
-    [xi.element.WATER  ] = { xi.day.WATERSDAY,    { xi.weather.RAIN,       xi.weather.SQUALL        } },
-    [xi.element.LIGHT  ] = { xi.day.LIGHTSDAY,    { xi.weather.AURORAS,    xi.weather.STELLAR_GLARE } },
-    [xi.element.DARK   ] = { xi.day.DARKSDAY,     { xi.weather.GLOOM,      xi.weather.DARKNESS      } },
-}
-
 local elementData =
 {
     [xi.magianElement.FIRE     ] = { xi.element.FIRE    },
@@ -838,18 +826,19 @@ local trialConditions =
         if trialData.dayWeather then
             local dayWeatherResult = 0
             local dayWeatherTable  = elementData[trialData.dayWeather]
+            local currentDay       = VanadielDayOfTheWeek()
+            local currentWeather   = player:getWeather(true)
 
-            local currentWeather = player:getWeather(true)
+            -- For each element in that table (may not be all elements)
             for _, elementId in ipairs(dayWeatherTable) do
-                if dayWeatherElement[elementId][1] == VanadielDayOfTheWeek() then
+                -- Check current day element against element checked.
+                if xi.combat.element.getDayElement(currentDay) == elementId then
                     dayWeatherResult = dayWeatherResult + 1
                 end
 
-                for _, weatherType in ipairs(dayWeatherElement[elementId][2]) do
-                    if weatherType == currentWeather then
-                        dayWeatherResult = dayWeatherResult and dayWeatherResult + 5
-                        break
-                    end
+                -- Check current weather element against element checked.
+                if xi.combat.element.getWeatherElement(currentWeather) == elementId then
+                    dayWeatherResult = dayWeatherResult + 5
                 end
             end
 

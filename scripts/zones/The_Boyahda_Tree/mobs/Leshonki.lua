@@ -8,11 +8,10 @@ local entity = {}
 
 local mobRegen = function(mob)
     local hour = VanadielHour()
-
-    if hour >= 6 and hour <= 18 then
-        mob:setMod(xi.mod.REGEN, 0)
-    else
+    if hour >= 6 and hour < 18 then
         mob:setMod(xi.mod.REGEN, 160)
+    else
+        mob:setMod(xi.mod.REGEN, 0)
     end
 end
 

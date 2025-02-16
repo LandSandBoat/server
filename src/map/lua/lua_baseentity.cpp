@@ -1182,6 +1182,8 @@ void CLuaBaseEntity::updateEventString(sol::variadic_args va)
         return;
     }
 
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
     std::string string0 = va.get_type(0) == sol::type::string ? va.get<std::string>(0) : "";
     std::string string1 = va.get_type(1) == sol::type::string ? va.get<std::string>(1) : "";
     std::string string2 = va.get_type(2) == sol::type::string ? va.get<std::string>(2) : "";
@@ -1197,8 +1199,7 @@ void CLuaBaseEntity::updateEventString(sol::variadic_args va)
     uint32 param7 = va.get_type(11) == sol::type::number ? va.get<uint32>(11) : 0;
     uint32 param8 = va.get_type(12) == sol::type::number ? va.get<uint32>(12) : 0;
 
-    ((CCharEntity*)m_PBaseEntity)
-        ->pushPacket<CEventUpdateStringPacket>(string0, string1, string2, string3, param0, param1, param2, param3, param4, param5, param6, param7, param8);
+    PChar->pushPacket<CEventUpdateStringPacket>(string0, string1, string2, string3, param0, param1, param2, param3, param4, param5, param6, param7, param8);
 }
 
 /************************************************************************
@@ -1208,22 +1209,22 @@ void CLuaBaseEntity::updateEventString(sol::variadic_args va)
  *  Notes   : Used to relocate Siren's Tear, as an example
  ************************************************************************/
 
-std::optional<CLuaBaseEntity> CLuaBaseEntity::getEventTarget()
+CBaseEntity* CLuaBaseEntity::getEventTarget()
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return std::nullopt;
+        return nullptr;
     }
 
     auto* PChar = (CCharEntity*)m_PBaseEntity;
     if (PChar->currentEvent->targetEntity == nullptr)
     {
         ShowWarning("EventTarget for event %d is empty: %s", PChar->currentEvent->eventId, m_PBaseEntity->getName());
-        return std::nullopt;
+        return nullptr;
     }
 
-    return std::optional<CLuaBaseEntity>(PChar->currentEvent->targetEntity);
+    return PChar->currentEvent->targetEntity;
 }
 
 /************************************************************************
@@ -1423,17 +1424,17 @@ uint16 CLuaBaseEntity::getTargID()
  *  Notes   :
  ************************************************************************/
 
-std::optional<CLuaBaseEntity> CLuaBaseEntity::getCursorTarget()
+auto CLuaBaseEntity::getCursorTarget() -> CBaseEntity*
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
         if (auto* PTarget = PChar->GetEntity(PChar->m_TargID))
         {
-            return std::optional<CLuaBaseEntity>(PTarget);
+            return PTarget;
         }
     }
 
-    return std::nullopt;
+    return nullptr;
 }
 
 /************************************************************************
@@ -2679,18 +2680,18 @@ bool CLuaBaseEntity::isBeside(CLuaBaseEntity const* target, sol::object const& a
  *  they are in the process of zoning (for use in onZoneIn)
  ************************************************************************/
 
-std::optional<CLuaZone> CLuaBaseEntity::getZone(sol::object const& arg0)
+auto CLuaBaseEntity::getZone(sol::object const& arg0) -> CZone*
 {
     if (m_PBaseEntity->loc.zone)
     {
-        return std::optional<CLuaZone>(m_PBaseEntity->loc.zone);
+        return m_PBaseEntity->loc.zone;
     }
     else if (m_PBaseEntity->loc.destination && (arg0 != sol::lua_nil) && arg0.is<bool>() && arg0.as<bool>() != false)
     {
-        return std::optional<CLuaZone>(zoneutils::GetZone(m_PBaseEntity->loc.destination));
+        return zoneutils::GetZone(m_PBaseEntity->loc.destination);
     }
 
-    return std::nullopt;
+    return nullptr;
 }
 
 /************************************************************************
@@ -3823,14 +3824,14 @@ uint16 CLuaBaseEntity::getEquipID(SLOTTYPE slot)
  *  Notes   :
  ************************************************************************/
 
-std::optional<CLuaItem> CLuaBaseEntity::getEquippedItem(uint8 slot)
+auto CLuaBaseEntity::getEquippedItem(uint8 slot) -> CItem*
 {
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
         if (slot > 15)
         {
             ShowWarning("Invalid slot passed to function.");
-            return std::nullopt;
+            return nullptr;
         }
 
         auto* PChar    = static_cast<CCharEntity*>(m_PBaseEntity);
@@ -3838,11 +3839,11 @@ std::optional<CLuaItem> CLuaBaseEntity::getEquippedItem(uint8 slot)
 
         if (slotItem)
         {
-            return std::optional<CLuaItem>(slotItem);
+            return slotItem;
         }
     }
 
-    return std::nullopt;
+    return nullptr;
 }
 
 /************************************************************************
@@ -4364,11 +4365,11 @@ bool CLuaBaseEntity::addTempItem(uint16 itemID, sol::object const& arg1)
  *  Example : local item = player:findItem(426) -- Orchestrion
  *  Notes   :
  ************************************************************************/
-std::optional<CLuaItem> CLuaBaseEntity::findItem(uint16 itemID, sol::object const& location)
+auto CLuaBaseEntity::findItem(uint16 itemID, sol::object const& location) -> CItem*
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
-        return std::nullopt;
+        return nullptr;
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
@@ -4383,8 +4384,7 @@ std::optional<CLuaItem> CLuaBaseEntity::findItem(uint16 itemID, sol::object cons
 
         if (auto slot = PChar->getStorage(locationID)->SearchItem(itemID); slot != ERROR_SLOTID)
         {
-            auto* item = PChar->getStorage(locationID)->GetItem(slot);
-            return item ? std::optional<CLuaItem>(item) : std::nullopt;
+            return PChar->getStorage(locationID)->GetItem(slot);
         }
     }
     else // Look in all containers
@@ -4396,14 +4396,14 @@ std::optional<CLuaItem> CLuaBaseEntity::findItem(uint16 itemID, sol::object cons
                 auto* item = PChar->getStorage(i)->GetItem(slot);
                 if (item && item->getID() == itemID)
                 {
-                    return std::optional<CLuaItem>(item);
+                    return item;
                 }
             }
         }
     }
 
     // Didn't find any matches
-    return std::nullopt;
+    return nullptr;
 }
 
 /************************************************************************
@@ -4585,12 +4585,12 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
     return false;
 }
 
-auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>
+auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp) -> CItem*
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return std::nullopt;
+        return nullptr;
     }
 
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
@@ -4606,7 +4606,7 @@ auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uin
         if (PItem == nullptr)
         {
             ShowError("PItem was null for soulplate");
-            return std::nullopt;
+            return nullptr;
         }
 
         PItem->setQuantity(1);
@@ -4614,12 +4614,12 @@ auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uin
         auto SlotID = charutils::AddItem(PChar, LOC_INVENTORY, PItem, true);
         if (SlotID == ERROR_SLOTID)
         {
-            return std::nullopt;
+            return nullptr;
         }
 
-        return std::optional<CLuaItem>(PItem);
+        return PItem;
     }
-    return std::nullopt;
+    return nullptr;
 }
 
 /************************************************************************
@@ -4762,16 +4762,16 @@ void CLuaBaseEntity::tradeComplete()
     PChar->pushPacket<CInventoryFinishPacket>();
 }
 
-std::optional<CLuaTradeContainer> CLuaBaseEntity::getTrade()
+auto CLuaBaseEntity::getTrade() -> CTradeContainer*
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return std::nullopt;
+        return nullptr;
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    return std::optional<CLuaTradeContainer>(PChar->TradeContainer);
+    return PChar->TradeContainer;
 }
 
 /************************************************************************
@@ -5071,12 +5071,12 @@ void CLuaBaseEntity::clearGearSetMods()
  *  Notes   :
  ************************************************************************/
 
-std::optional<CLuaItem> CLuaBaseEntity::getStorageItem(uint8 container, uint8 slotID, uint8 equipID)
+auto CLuaBaseEntity::getStorageItem(uint8 container, uint8 slotID, uint8 equipID) -> CItem*
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("%s is trying to access their inventory, but is not TYPE_PC, so doesn't have one!", m_PBaseEntity->getName());
-        return std::nullopt;
+        return nullptr;
     }
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
@@ -5092,12 +5092,7 @@ std::optional<CLuaItem> CLuaBaseEntity::getStorageItem(uint8 container, uint8 sl
         PItem = PChar->getEquip((SLOTTYPE)equipID);
     }
 
-    if (PItem != nullptr)
-    {
-        return std::optional<CLuaItem>(PItem);
-    }
-
-    return std::nullopt;
+    return PItem;
 }
 
 /************************************************************************
@@ -10913,12 +10908,12 @@ bool CLuaBaseEntity::hasPartyJob(uint8 job)
  *  Notes   : Passed value is position in party? What is this used for?
  ************************************************************************/
 
-std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uint8 allianceparty)
+auto CLuaBaseEntity::getPartyMember(uint8 member, uint8 allianceparty) -> CBaseEntity*
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
         ShowWarning("CLuaBaseEntity::getPartyMember() - NPC calling function.");
-        return std::nullopt;
+        return nullptr;
     }
 
     CBattleEntity* PBattle     = static_cast<CBattleEntity*>(m_PBaseEntity);
@@ -10943,11 +10938,11 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uint8
 
     if (PTargetChar != nullptr)
     {
-        return std::optional<CLuaBaseEntity>(PTargetChar);
+        return PTargetChar;
     }
 
     ShowError("Lua::getPartyMember :: Member or Alliance Number is not valid.");
-    return std::nullopt;
+    return nullptr;
 }
 
 /************************************************************************
@@ -10957,12 +10952,12 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uint8
  *  Notes   : Todo: also add ability for find Alliance Leader via lua?
  ************************************************************************/
 
-std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyLeader()
+auto CLuaBaseEntity::getPartyLeader() -> CBaseEntity*
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("CLuaBaseEntity::getPartyLeader() - Non-PC called function.");
-        return std::nullopt;
+        return nullptr;
     }
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
@@ -10971,11 +10966,11 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyLeader()
         CBattleEntity* PLeader = PChar->PParty->GetLeader();
         if (PLeader != nullptr)
         {
-            return std::optional<CLuaBaseEntity>(PLeader);
+            return PLeader;
         }
     }
 
-    return std::nullopt;
+    return nullptr;
 }
 
 /************************************************************************
@@ -11397,14 +11392,9 @@ uint8 CLuaBaseEntity::checkDifficulty(CLuaBaseEntity* PLuaBaseEntity)
  *  Notes   :
  ************************************************************************/
 
-std::optional<CLuaInstance> CLuaBaseEntity::getInstance()
+auto CLuaBaseEntity::getInstance() -> CInstance*
 {
-    if (m_PBaseEntity->PInstance)
-    {
-        return std::optional<CLuaInstance>(m_PBaseEntity->PInstance);
-    }
-
-    return std::nullopt;
+    return m_PBaseEntity->PInstance;
 }
 
 /************************************************************************
@@ -11528,16 +11518,9 @@ uint16 CLuaBaseEntity::copyConfrontationEffect(uint16 targetID)
  *  Notes   : Used to check if entity is inside a battlefield
  ************************************************************************/
 
-std::optional<CLuaBattlefield> CLuaBaseEntity::getBattlefield()
+auto CLuaBaseEntity::getBattlefield() -> CBattlefield*
 {
-    auto* PBattlefield = m_PBaseEntity->PBattlefield;
-
-    if (PBattlefield)
-    {
-        return std::optional<CLuaBattlefield>(PBattlefield);
-    }
-
-    return std::nullopt;
+    return m_PBaseEntity->PBattlefield;
 }
 
 /************************************************************************
@@ -12342,15 +12325,9 @@ bool CLuaBaseEntity::hasListener(std::string const& eventName)
  *  Notes   : Currently used in Assault Missions and some Mobs
  ************************************************************************/
 
-std::optional<CLuaBaseEntity> CLuaBaseEntity::getEntity(uint16 targetID)
+auto CLuaBaseEntity::getEntity(uint16 targetID) -> CBaseEntity*
 {
-    auto* PEntity{ m_PBaseEntity->GetEntity(targetID) };
-    if (PEntity)
-    {
-        return std::optional<CLuaBaseEntity>(PEntity);
-    }
-
-    return std::nullopt;
+    return m_PBaseEntity->GetEntity(targetID);
 }
 
 /************************************************************************
@@ -13236,23 +13213,24 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
  *  Notes   : Can specify Power of the Effect as an option or the Source (will use power if both specified)
  ************************************************************************/
 
-std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& SourceType, sol::object const& SourceTypeParam)
+auto CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& SourceType, sol::object const& SourceTypeParam) -> CStatusEffect*
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
         ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
-        return std::nullopt;
+        return nullptr;
     }
+
     if (SubType != sol::lua_nil && SourceType != sol::lua_nil)
     {
         ShowWarning("Cannot specify both SubType and SourceType.");
-        return std::nullopt;
+        return nullptr;
     }
 
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
     {
-        return std::nullopt;
+        return nullptr;
     }
 
     CStatusEffect* PStatusEffect   = nullptr;
@@ -13274,12 +13252,7 @@ std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID,
         PStatusEffect = PBattleEntity->StatusEffectContainer->GetStatusEffect(effect_StatusID);
     }
 
-    if (PStatusEffect)
-    {
-        return std::optional<CLuaStatusEffect>(PStatusEffect);
-    }
-
-    return std::nullopt;
+    return PStatusEffect;
 }
 
 /************************************************************************
@@ -13289,31 +13262,21 @@ std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID,
  *  Notes   :
  ************************************************************************/
 
-std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffectBySource(uint16 StatusID, EffectSourceType SourceType, uint16 SourceTypeParam)
+auto CLuaBaseEntity::getStatusEffectBySource(uint16 StatusID, EffectSourceType SourceType, uint16 SourceTypeParam) -> CStatusEffect*
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
         ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
-        return std::nullopt;
+        return nullptr;
     }
 
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
     {
-        return std::nullopt;
+        return nullptr;
     }
 
-    CStatusEffect* PStatusEffect   = nullptr;
-    auto           effect_StatusID = static_cast<EFFECT>(StatusID);
-
-    PStatusEffect = PBattleEntity->StatusEffectContainer->GetStatusEffectBySource(effect_StatusID, SourceType, SourceTypeParam);
-
-    if (PStatusEffect)
-    {
-        return std::optional<CLuaStatusEffect>(PStatusEffect);
-    }
-
-    return std::nullopt;
+    return PBattleEntity->StatusEffectContainer->GetStatusEffectBySource(static_cast<EFFECT>(StatusID), SourceType, SourceTypeParam);
 }
 
 /************************************************************************
@@ -15198,15 +15161,15 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
  *  Example : caster:spawnTrust(spell:getID())
  ************************************************************************/
 
-std::optional<CLuaBaseEntity> CLuaBaseEntity::spawnTrust(uint16 trustId)
+auto CLuaBaseEntity::spawnTrust(uint16 trustId) -> CBaseEntity*
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return std::nullopt;
+        return nullptr;
     }
 
-    return CLuaBaseEntity(trustutils::SpawnTrust(static_cast<CCharEntity*>(m_PBaseEntity), trustId));
+    return trustutils::SpawnTrust(static_cast<CCharEntity*>(m_PBaseEntity), trustId);
 }
 
 /************************************************************************
@@ -15575,21 +15538,16 @@ bool CLuaBaseEntity::hasJugPet()
  *  Notes   :
  ************************************************************************/
 
-std::optional<CLuaBaseEntity> CLuaBaseEntity::getPet()
+auto CLuaBaseEntity::getPet() -> CBaseEntity*
 {
     auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattle)
     {
         ShowWarning("Invalid Entity (%s) calling function.", m_PBaseEntity->getName());
-        return std::nullopt;
+        return nullptr;
     }
 
-    if (PBattle->PPet != nullptr)
-    {
-        return std::optional<CLuaBaseEntity>(PBattle->PPet);
-    }
-
-    return std::nullopt;
+    return PBattle->PPet;
 }
 
 /************************************************************************
@@ -15739,12 +15697,12 @@ uint8 CLuaBaseEntity::getMinimumPetLevel()
  *  Notes   :
  ************************************************************************/
 
-std::optional<CLuaBaseEntity> CLuaBaseEntity::getMaster()
+auto CLuaBaseEntity::getMaster() -> CBaseEntity*
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
         ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
-        return std::nullopt;
+        return nullptr;
     }
 
     auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
@@ -15752,10 +15710,10 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getMaster()
     if (PBattle->PMaster != nullptr)
     {
         CBaseEntity* PMaster = PBattle->PMaster;
-        return std::optional<CLuaBaseEntity>(PMaster);
+        return PMaster;
     }
 
-    return std::nullopt;
+    return nullptr;
 }
 
 /************************************************************************
@@ -16188,23 +16146,23 @@ void CLuaBaseEntity::removeAllManeuvers()
  *  Example : pet:getAttachment(1)
  ************************************************************************/
 
-std::optional<CLuaItem> CLuaBaseEntity::getAttachment(uint8 slotId)
+auto CLuaBaseEntity::getAttachment(uint8 slotId) -> CItem*
 {
     auto* PAutomaton = dynamic_cast<CAutomatonEntity*>(m_PBaseEntity);
 
     if (PAutomaton == nullptr)
     {
         ShowWarning("Invalid Entity accessing function.");
-        return std::nullopt;
+        return nullptr;
     }
 
     uint8 slotItem = PAutomaton->getAttachment(slotId);
     if (slotItem != 0)
     {
-        return CLuaItem(itemutils::GetItemPointer(0x2100 + slotItem)); // TODO: Stop storing by offset
+        return itemutils::GetItemPointer(0x2100 + slotItem); // TODO: Stop storing by offset
     }
 
-    return std::nullopt;
+    return nullptr;
 }
 
 /************************************************************************
@@ -17546,22 +17504,22 @@ void CLuaBaseEntity::setRoamFlags(uint16 newRoamFlags)
  *  Notes   :
  ************************************************************************/
 
-std::optional<CLuaBaseEntity> CLuaBaseEntity::getTarget()
+auto CLuaBaseEntity::getTarget() -> CBaseEntity*
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
         ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
-        return std::nullopt;
+        return nullptr;
     }
 
     auto* PBattleTarget{ m_PBaseEntity->GetEntity(static_cast<CBattleEntity*>(m_PBaseEntity)->GetBattleTargetID()) };
 
     if (PBattleTarget)
     {
-        return std::optional<CLuaBaseEntity>(PBattleTarget);
+        return PBattleTarget;
     }
 
-    return std::nullopt;
+    return nullptr;
 }
 
 /************************************************************************
@@ -17637,18 +17595,18 @@ sol::table CLuaBaseEntity::getEnmityList()
  *  Notes   : For some reason, only used in Jump/High-Jump?
  ************************************************************************/
 
-std::optional<CLuaBaseEntity> CLuaBaseEntity::getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity)
+auto CLuaBaseEntity::getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity) -> CBaseEntity*
 {
     if (CBattleEntity* PMob = dynamic_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity()))
     {
         CBattleEntity* taTarget = battleutils::getAvailableTrickAttackChar((CBattleEntity*)m_PBaseEntity, PMob);
         if (taTarget)
         {
-            return std::optional<CLuaBaseEntity>(taTarget);
+            return taTarget;
         }
     }
 
-    return std::nullopt;
+    return nullptr;
 }
 
 /************************************************************************

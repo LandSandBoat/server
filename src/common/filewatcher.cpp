@@ -78,7 +78,7 @@ void Filewatcher::handleFileAction(efsw::WatchID watchid, std::string const& dir
     }
 }
 
-auto Filewatcher::getChangedLuaFiles() -> std::vector<std::pair<std::filesystem::path, Action>>
+auto Filewatcher::popChangedLuaFilesList() -> std::vector<std::pair<std::filesystem::path, Action>>
 {
     std::set<std::pair<std::filesystem::path, Action>> actions; // For de-duping
 

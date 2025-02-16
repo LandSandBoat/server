@@ -184,9 +184,6 @@ INSERT INTO `mob_pool_mods` VALUES (1792,368,70,0); -- REGAIN: 70
 -- Greater Manticore
 INSERT INTO `mob_pool_mods` VALUES (1806,28,10,1); -- EXP_BONUS: 10
 
--- Guivre
-INSERT INTO `mob_pool_mods` VALUES (1841,28,10,1); -- EXP_BONUS: 10
-
 -- Hydras Hound
 INSERT INTO `mob_pool_mods` VALUES (2032,34,20,1);  -- MAGIC_COOL: 20
 INSERT INTO `mob_pool_mods` VALUES (2032,35,0,1);   -- STANDBACK_COOL: 0
@@ -291,9 +288,6 @@ INSERT INTO `mob_pool_mods` VALUES (3051,4,4,1); -- SIGHT_RANGE: 4
 
 -- Parata
 INSERT INTO `mob_pool_mods` VALUES (3099,23,23,1); -- IMMUNITY: 23
-
--- Phantom Worm
-INSERT INTO `mob_pool_mods` VALUES (3129,370,50,0); -- REGEN: 50
 
 -- Polar Hare
 INSERT INTO `mob_pool_mods` VALUES (3168,28,10,1); -- EXP_BONUS: 10

@@ -79,14 +79,14 @@ xi.mod =
     WATERATT                        = 37,
     LIGHTATT                        = 38,
     DARKATT                         = 39,
-    FIREACC                         = 40,
-    ICEACC                          = 41,
-    WINDACC                         = 42,
-    EARTHACC                        = 43,
-    THUNDERACC                      = 44,
-    WATERACC                        = 45,
-    LIGHTACC                        = 46,
-    DARKACC                         = 47,
+    FIRE_MACC                       = 40,
+    ICE_MACC                        = 41,
+    WIND_MACC                       = 42,
+    EARTH_MACC                      = 43,
+    THUNDER_MACC                    = 44,
+    WATER_MACC                      = 45,
+    LIGHT_MACC                      = 46,
+    DARK_MACC                       = 47,
     WSACC                           = 48,
     ATTP                            = 62,
     DEFP                            = 63,
@@ -1022,6 +1022,8 @@ xi.mod =
 
     MAGIC_BURST_BONUS_CAPPED   = 487, -- Magic Burst Bonus I from gear, Ancient Magic Merits, Atmas. Cap at 40% bonus (1.4 multiplier)
     MAGIC_BURST_BONUS_UNCAPPED = 274, -- Magic Burst Bonus II from gear, JP Gifts, BLM JPs and Job traits. No known cap.
+
+    DESPAWN_TIME_REDUCTION = 1134, -- Reduction in seconds. 1 = 1 second less to despawn.
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 

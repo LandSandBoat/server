@@ -857,6 +857,8 @@ INSERT INTO `instance_entities` VALUES (7300,17076575);
 INSERT INTO `instance_entities` VALUES (7300,17076576);
 INSERT INTO `instance_entities` VALUES (7300,17076577);
 INSERT INTO `instance_entities` VALUES (7300,17076578);
+
+-- npc
 INSERT INTO `instance_entities` VALUES (7300,17076579);
 INSERT INTO `instance_entities` VALUES (7300,17076580);
 INSERT INTO `instance_entities` VALUES (7300,17076581);
@@ -867,10 +869,9 @@ INSERT INTO `instance_entities` VALUES (7300,17076585);
 INSERT INTO `instance_entities` VALUES (7300,17076586);
 INSERT INTO `instance_entities` VALUES (7300,17076587);
 INSERT INTO `instance_entities` VALUES (7300,17076588);
--- npc
+INSERT INTO `instance_entities` VALUES (7300,17076589);
 INSERT INTO `instance_entities` VALUES (7300,17076916);
 INSERT INTO `instance_entities` VALUES (7300,17076917);
-INSERT INTO `instance_entities` VALUES (7300,17076949);
 INSERT INTO `instance_entities` VALUES (7300,17076950);
 INSERT INTO `instance_entities` VALUES (7300,17076951);
 INSERT INTO `instance_entities` VALUES (7300,17076952);
@@ -890,6 +891,7 @@ INSERT INTO `instance_entities` VALUES (7300,17076965);
 INSERT INTO `instance_entities` VALUES (7300,17076966);
 INSERT INTO `instance_entities` VALUES (7300,17076967);
 INSERT INTO `instance_entities` VALUES (7300,17076968);
+INSERT INTO `instance_entities` VALUES (7300,17076969);
 
 -- ------------------------------------------------------------
 -- Arrapago Remnants (Zone 74)

@@ -683,12 +683,12 @@ xi.quest.id =
         -- JP ENTRIES OR INVALID
         PROMOTION_PRIVATE_FIRST_CLASS    = 90, -- + Converted
         PROMOTION_SUPERIOR_PRIVATE       = 91, -- + Converted
-        PROMOTION_LANCE_CORPORAL         = 92,
+        PROMOTION_LANCE_CORPORAL         = 92, -- + Converted
         PROMOTION_CORPORAL               = 93, -- + Converted
         PROMOTION_SERGEANT               = 94, -- + Converted
         PROMOTION_SERGEANT_MAJOR         = 95, -- + Converted
         PROMOTION_CHIEF_SERGEANT         = 96,
-        PROMOTION_SECOND_LIEUTENANT      = 97,
+        PROMOTION_SECOND_LIEUTENANT      = 97, -- + Converted
         PROMOTION_FIRST_LIEUTENANT       = 98, -- + Converted
         PROMOTION_CAPTAIN                = 99,
         -- JP ENTRIES OR INVALID

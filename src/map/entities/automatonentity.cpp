@@ -211,7 +211,7 @@ void CAutomatonEntity::Spawn()
     status = allegiance == ALLEGIANCE_TYPE::MOB ? STATUS_TYPE::UPDATE : STATUS_TYPE::NORMAL;
     updatemask |= UPDATE_HP;
     PAI->Reset();
-    PAI->EventHandler.triggerListener("SPAWN", CLuaBaseEntity(this));
+    PAI->EventHandler.triggerListener("SPAWN", this);
     animation = ANIMATION_NONE;
     m_OwnerID.clean();
     HideName(false);

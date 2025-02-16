@@ -3,6 +3,7 @@
 -- http://ffxiclopedia.wikia.com/wiki/Chocobo_Digging
 -- https://www.bg-wiki.com/bg/Category:Chocobo_Digging
 -----------------------------------
+require('scripts/globals/combat/element_tables')
 require('scripts/globals/roe')
 require('scripts/globals/utils')
 require('scripts/missions/amk/helpers')
@@ -2220,9 +2221,8 @@ local function  handleDiggingLayer(player, zoneId, currentLayer)
         -- Geodes / Colored Rocks.
         randomRoll = utils.clamp(math.floor(math.random(1, 1000) * rollMultiplier), 1, 1000)
         if
-            diggingDayTable[currentDay] and
             playerRank >= xi.craftRank.NOVICE and
-            randomRoll <= 100
+            randomRoll <= 50
         then
             table.insert(dTableItemIds, #dTableItemIds + 1, diggingDayTable[currentDay][1]) -- Insert item ID to table.
         end
@@ -2230,11 +2230,10 @@ local function  handleDiggingLayer(player, zoneId, currentLayer)
         -- Elemenal Ores.
         randomRoll = utils.clamp(math.floor(math.random(1, 1000) * rollMultiplier), 1, 1000)
         if
-            diggingDayTable[currentDay] and
-            playerRank >= xi.craftRank.CRAFTSMAN and
-            isElementalOreZone and
-            weather ~= xi.weather.NONE and
-            moon >= 7 and moon <= 21 and
+            isElementalOreZone and                                              -- Zone can drop ore.
+            playerRank >= xi.craftRank.CRAFTSMAN and                            -- Digging level must be 60+
+            xi.combat.element.getWeatherElement(weather) ~= xi.element.NONE and -- Weather must be elemental.
+            moon >= 7 and moon <= 21 and                                        -- Moon must be between those values.
             randomRoll <= 100
         then
             table.insert(dTableItemIds, #dTableItemIds + 1, diggingDayTable[currentDay][2]) -- Insert item ID to table.

@@ -1111,8 +1111,8 @@ namespace petutils
 
     void FinalizePetStatistics(CBattleEntity* PMaster, CPetEntity* PPet)
     {
-        // set C magic evasion
-        PPet->setModifier(Mod::MEVA, battleutils::GetMaxSkill(SKILL_ELEMENTAL_MAGIC, JOB_RDM, PPet->GetMLevel() > 99 ? 99 : PPet->GetMLevel()));
+        // set C magic evasion, add MEVA that may have come from other sources (Automaton, Wyvern, Avatar bonus meva in their respective CalculateXStats function)
+        PPet->setModifier(Mod::MEVA, battleutils::GetMaxSkill(7, std::min<uint8>(99, PPet->GetMLevel())) + PPet->getMod(Mod::MEVA));
         PPet->health.tp = 0;
         PMaster->applyPetModifiers(PPet);
         PPet->UpdateHealth();

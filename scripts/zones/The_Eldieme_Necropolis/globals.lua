@@ -4,57 +4,61 @@
 -----------------------------------
 local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
+local spawnSkulls = function()
+    -- Spawn all 7 Skulls
+    for skull = 1, 7 do
+        SpawnMob(ID.mob.LICH_C_MAGNUS + skull) -- IDs based off Lich C Magnus
+    end
 
--- Handle 7 Sins Skeleton NMs Spawns
-local skullTrade = function(player, npc)
-    local candleCount =
-    {
-        ID.text.SKULL_FIVE_REMAIN,
-        ID.text.SKULL_FOUR_REMAIN,
-        ID.text.SKULL_THREE_REMAIN,
-        ID.text.SKULL_TWO_REMAIN,
-        ID.text.SKULL_ONE_REMAIN,
-        ID.text.SKULL_SPAWN,
-    }
+    -- Used to stop Skulls from being spawned until an hour from being spawned
+    SetServerVariable('[ELDIEME]TimeToRespawnSkulls', os.time() + 3600)
+end
 
-    local tradeCount = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar('SkullTradeCount')  -- Track how many candles have been lit
-    local tradeWindow = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar('SkullTradeTimer') -- Track how much time before candles reset
-    local active = npc:getLocalVar('candleActive')                                      -- Track if current candle has already been lit
+local brazierMessages =
+{
+    ID.text.SKULL_SPAWN,
+    ID.text.SKULL_ONE_REMAIN,
+    ID.text.SKULL_TWO_REMAIN,
+    ID.text.SKULL_THREE_REMAIN,
+    ID.text.SKULL_FOUR_REMAIN,
+    ID.text.SKULL_FIVE_REMAIN,
+    ID.text.SKULL_SIX_REMAIN,
+}
 
-    for i = 1, 5 do
-        if tradeCount == 6 and os.time() < tradeWindow and os.time() > active then         -- Final candle, spawn Skulls
-            GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar('SkullTradeCount', 0)
-            GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar('SkullRespawn', os.time() + 3600) -- 1 hour cooldown to respawn skulls
-            player:messageSpecial(ID.text.SKULL_SPAWN)
-            player:confirmTrade()
+local countUnlitBraziers = function()
+    local numberNotLit = 7
 
-            -- Spawn all 7 Skulls
-            for skull = 1, 7 do
-                SpawnMob(ID.mob.LICH_C_MAGNUS + skull) -- IDs based off Lich C Magnus
-            end
-
-            break
-        elseif tradeCount == i and os.time() < tradeWindow and os.time() > active then -- Candle trades 2 through 6
-            GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar('SkullTradeCount', i + 1)
-            npc:setLocalVar('candleActive', os.time() + 10)
-            player:messageSpecial(ID.text.THE_BRAZIER_IS_LIT)
-            player:messageSpecial(candleCount[i])
-            player:confirmTrade()
-            break
-        elseif os.time() > tradeWindow and os.time() > active then -- First candle trade to start timer
-            GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar('SkullTradeCount', 1)
-            GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar('SkullTradeTimer', os.time() + 40)
-            npc:setLocalVar('candleActive', os.time() + 10)
-            player:messageSpecial(ID.text.THE_BRAZIER_IS_LIT)
-            player:messageSpecial(ID.text.SKULL_SIX_REMAIN)
-            player:confirmTrade()
-            break
+    for i = 0, 6 do
+        local brazier = GetNPCByID(ID.npc.CANDLE_OFFSET + i)
+        if brazier and brazier:getAnimation() == xi.anim.OPEN_DOOR then
+            numberNotLit = numberNotLit - 1
         end
+    end
+
+    return numberNotLit
+end
+
+local lightBrazier = function(player, npc)
+    npc:setAnimation(xi.anim.OPEN_DOOR)
+
+    --unlight brazier after five minutes
+    npc:timer(300000, function()
+        npc:setAnimation(xi.anim.CLOSE_DOOR)
+    end)
+
+    player:messageSpecial(ID.text.THE_BRAZIER_IS_LIT)
+
+    local numberNotLit = countUnlitBraziers()
+    local messageAfterLightingBrazier = brazierMessages[numberNotLit + 1]
+
+    player:messageSpecial(messageAfterLightingBrazier)
+
+    if numberNotLit == 0 then
+        spawnSkulls()
     end
 end
 
-local eldiemeGlobal =
-{
+local eldiemeGlobal = {
     -- Click on any of the intersection gates
     gateOnTrigger = function(player, npc)
         if npc:getAnimation() == xi.anim.CLOSE_DOOR then
@@ -87,30 +91,25 @@ local eldiemeGlobal =
     end,
 
     handleCandleTrade = function(player, npc, trade)
-        local timer = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar('SkullRespawn') -- 1 hour cooldown to respawn skulls
-
         if
-            npcUtil.tradeHasExactly(trade, xi.item.FLINT_STONE) and
-            os.time() > timer
+            os.time() > GetServerVariable('[ELDIEME]TimeToRespawnSkulls') and
+            npcUtil.tradeHasExactly(trade, xi.item.FLINT_STONE)
         then
-            skullTrade(player, npc)
-        elseif os.time() < timer then
-            player:messageSpecial(ID.text.BRAZIER_COOLDOWN)
+            lightBrazier(player, npc)
+        else
+            player:messageSpecial(ID.text.NOTHING_HAPPENED)
         end
     end,
 
     handleCandleTrigger = function(player, npc)
-        local timer = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar('SkullRespawn') -- 1 hour cooldown to respawn skulls
-        local active = npc:getLocalVar('candlesActive')
-
-        if os.time() < active then
+        if npc:getAnimation() == xi.anim.OPEN_DOOR then
             player:messageSpecial(ID.text.BRAZIER_ACTIVE)
-        elseif os.time() > timer and os.time() > active then
+        elseif os.time() > GetServerVariable('[ELDIEME]TimeToRespawnSkulls') then
             player:messageSpecial(ID.text.BRAZIER_OUT, 0, xi.item.FLINT_STONE)
         else
             player:messageSpecial(ID.text.BRAZIER_COOLDOWN)
         end
-    end
+    end,
 }
 
 return eldiemeGlobal

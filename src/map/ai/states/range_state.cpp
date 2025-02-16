@@ -115,7 +115,7 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
     actionTarget_t& actionTarget = actionList.getNewActionTarget();
     actionTarget.animation       = ANIMATION_RANGED;
 
-    m_PEntity->PAI->EventHandler.triggerListener("RANGE_START", CLuaBaseEntity(m_PEntity), CLuaAction(&action));
+    m_PEntity->PAI->EventHandler.triggerListener("RANGE_START", m_PEntity, &action);
 
     m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
 }
@@ -161,7 +161,7 @@ bool CRangeState::Update(time_point tick)
             // reset aim time so interrupted players only have to wait the correct 2.7s until next shot
             m_aimTime = std::chrono::seconds(0);
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
-            m_PEntity->PAI->EventHandler.triggerListener("RANGE_STATE_EXIT", CLuaBaseEntity(m_PEntity), nullptr, CLuaAction(&action));
+            m_PEntity->PAI->EventHandler.triggerListener("RANGE_STATE_EXIT", m_PEntity, nullptr, &action);
         }
         else
         {
@@ -169,7 +169,7 @@ bool CRangeState::Update(time_point tick)
 
             m_PEntity->OnRangedAttack(*this, action);
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
-            m_PEntity->PAI->EventHandler.triggerListener("RANGE_STATE_EXIT", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), CLuaAction(&action));
+            m_PEntity->PAI->EventHandler.triggerListener("RANGE_STATE_EXIT", m_PEntity, PTarget, &action);
         }
 
         Complete();

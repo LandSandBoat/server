@@ -86,22 +86,22 @@ enum class Mod
     MEVA = 31, // Magic Evasion
 
     // Magic Accuracy and Elemental Attacks
-    FIREATT    = 32, // Fire Damage
-    ICEATT     = 33, // Ice Damage
-    WINDATT    = 34, // Wind Damage
-    EARTHATT   = 35, // Earth Damage
-    THUNDERATT = 36, // Thunder Damage
-    WATERATT   = 37, // Water Damage
-    LIGHTATT   = 38, // Light Damage
-    DARKATT    = 39, // Dark Damage
-    FIREACC    = 40, // Fire Accuracy
-    ICEACC     = 41, // Ice Accuracy
-    WINDACC    = 42, // Wind Accuracy
-    EARTHACC   = 43, // Earth Accuracy
-    THUNDERACC = 44, // Thunder Accuracy
-    WATERACC   = 45, // Water Accuracy
-    LIGHTACC   = 46, // Light Accuracy
-    DARKACC    = 47, // Dark Accuracy
+    FIREATT      = 32, // Fire Damage
+    ICEATT       = 33, // Ice Damage
+    WINDATT      = 34, // Wind Damage
+    EARTHATT     = 35, // Earth Damage
+    THUNDERATT   = 36, // Thunder Damage
+    WATERATT     = 37, // Water Damage
+    LIGHTATT     = 38, // Light Damage
+    DARKATT      = 39, // Dark Damage
+    FIRE_MACC    = 40, // Fire Accuracy
+    ICE_MACC     = 41, // Ice Accuracy
+    WIND_MACC    = 42, // Wind Accuracy
+    EARTH_MACC   = 43, // Earth Accuracy
+    THUNDER_MACC = 44, // Thunder Accuracy
+    WATER_MACC   = 45, // Water Accuracy
+    LIGHT_MACC   = 46, // Light Accuracy
+    DARK_MACC    = 47, // Dark Accuracy
 
     WSACC = 48, // Weaponskill Accuracy
 
@@ -1070,12 +1070,14 @@ enum class Mod
     MAGIC_BURST_BONUS_CAPPED   = 487, // Magic Burst Bonus I from gear, Ancient Magic Merits, Innin merits and Atmas. Cap at 40% bonus (1.4 multiplier)
     MAGIC_BURST_BONUS_UNCAPPED = 274, // Magic Burst Bonus II from gear, JP Gifts, BLM JPs and Job traits. No known cap.
 
+    DESPAWN_TIME_REDUCTION = 1134, // Reduction in seconds. 1 = 1 second less to despawn.
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1134 and onward
+    // SPARE IDs: 1135 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
