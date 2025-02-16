@@ -13,13 +13,13 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod  = 1
-    local dmgmod  = 2.3
+    local ftp     = 2.3
 
     if mob:isMobType(xi.mobType.NOTORIOUS) then
-        dmgmod = dmgmod + math.random()
+        ftp = ftp + math.random()
     end
 
-    local info           = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES)
+    local info           = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
     local shadowsRemoved = math.random(1, 2)
     local dmg            = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, shadowsRemoved)
 

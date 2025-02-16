@@ -298,7 +298,8 @@ void search_handler::read_func(uint16_t length)
 void search_handler::handle_error(std::error_code ec, std::shared_ptr<search_handler> self)
 {
     std::ignore = ec;
-    std::ignore = self;
+
+    self = nullptr;
 }
 
 // Mostly copy-pasted DSP era code. It works, so why change it?
@@ -399,7 +400,10 @@ void search_handler::HandleGroupListRequest()
         } while (currentResult < totalResults);
     }
 
-    do_write();
+    if (!searchPackets.empty())
+    {
+        do_write();
+    }
 }
 
 void search_handler::HandleSearchComment()
@@ -465,12 +469,15 @@ void search_handler::HandleSearchRequest()
 
     } while (currentResult < totalResults);
 
-    do_write();
+    if (!searchPackets.empty())
+    {
+        do_write();
+    }
 }
 
 void search_handler::HandleAuctionHouseRequest()
 {
-    uint8  AHCatID = ref<uint8>(data_, 0x16);
+    uint8 AHCatID = ref<uint8>(data_, 0x16);
 
     // 2 - level
     // 3 - race
@@ -529,7 +536,10 @@ void search_handler::HandleAuctionHouseRequest()
         searchPackets.emplace_back(PAHPacket.GetData(), length);
     }
 
-    do_write();
+    if (!searchPackets.empty())
+    {
+        do_write();
+    }
 }
 
 void search_handler::HandleAuctionHouseHistory()
@@ -584,7 +594,7 @@ search_req search_handler::_HandleSearchRequest()
 
     uint32 flags = 0;
 
-    uint8  size = ref<uint8>(data_, 0x10);
+    uint8 size = ref<uint8>(data_, 0x10);
 
     uint16 workloadBits = size * 8;
 

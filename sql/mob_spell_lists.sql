@@ -1116,7 +1116,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Lumber_Jack',56,192,1,255); -- stonega_iv
 INSERT INTO `mob_spell_lists` VALUES ('Lumber_Jack',56,255,1,255); -- break (1~255)
 
 -- Vrtra (57)
-INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,233,1,255); -- bio_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,232,1,255); -- bio_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,274,1,255); -- sleepga_ii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,360,1,255); -- dispelga (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,361,1,255); -- blindga (1~255)

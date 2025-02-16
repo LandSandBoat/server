@@ -41,6 +41,7 @@
 #include "states/raise_state.h"
 #include "states/range_state.h"
 #include "states/respawn_state.h"
+#include "states/synth_state.h"
 #include "states/trigger_state.h"
 #include "states/weaponskill_state.h"
 #include "status_effect_container.h"
@@ -150,7 +151,7 @@ bool CAIContainer::Trigger(CCharEntity* player)
 {
     // TODO: ensure idempotency of all onTrigger lua calls (i.e. chests can only be opened once)
     bool isDoor = luautils::OnTrigger(player, PEntity) == -1;
-    PEntity->PAI->EventHandler.triggerListener("ON_TRIGGER", CLuaBaseEntity(player), CLuaBaseEntity(PEntity));
+    PEntity->PAI->EventHandler.triggerListener("ON_TRIGGER", player, PEntity);
     if (CanChangeState())
     {
         auto ret = ChangeState<CTriggerState>(PEntity, player->targid, isDoor);
@@ -418,7 +419,7 @@ void CAIContainer::Tick(time_point _tick)
     m_Tick     = _tick;
 
     // TODO: timestamp in the event?
-    EventHandler.triggerListener("TICK", CLuaBaseEntity(PEntity));
+    EventHandler.triggerListener("TICK", PEntity);
     PEntity->Tick(_tick);
 
     // TODO: check this in the controller instead maybe? (might not want to check every tick)
@@ -431,7 +432,7 @@ void CAIContainer::Tick(time_point _tick)
         PathFind->FollowPath(_tick);
         if (PathFind->OnPoint())
         {
-            EventHandler.triggerListener("PATH", CLuaBaseEntity(PEntity));
+            EventHandler.triggerListener("PATH", PEntity);
             luautils::OnPath(PEntity);
         }
     }
@@ -558,6 +559,16 @@ bool CAIContainer::Internal_Respawn(duration _duration)
     if (!IsCurrentState<CRespawnState>())
     {
         return ForceChangeState<CRespawnState>(PEntity, _duration);
+    }
+    return false;
+}
+
+bool CAIContainer::Internal_Synth(SKILLTYPE synthSkill)
+{
+    auto PChar = dynamic_cast<CCharEntity*>(PEntity);
+    if (PChar && !IsCurrentState<CSynthState>())
+    {
+        return ForceChangeState<CSynthState>(PChar, synthSkill);
     }
     return false;
 }

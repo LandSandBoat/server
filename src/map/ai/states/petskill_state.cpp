@@ -80,7 +80,7 @@ CPetSkillState::CPetSkillState(CPetEntity* PEntity, uint16 targid, uint16 wsid)
         actionTarget.messageID  = 326; // Seems hardcoded? TODO: Verify on more pet actions. Tested on Wyvern and SMN BPs.
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, std::make_unique<CActionPacket>(action));
     }
-    m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
+    m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", m_PEntity, m_PSkill->getID());
     SpendCost();
 }
 
@@ -116,7 +116,7 @@ bool CPetSkillState::Update(time_point tick)
         {
             static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0);
         }
-        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
+        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
 
         if (m_PEntity->objtype == TYPE_PET && m_PEntity->PMaster && m_PEntity->PMaster->objtype == TYPE_PC && (m_PSkill->isBloodPactRage() || m_PSkill->isBloodPactWard()))
         {

@@ -4,8 +4,6 @@
 -- Type: Assault
 -- !pos 673.882 -23.995 367.604 61
 -----------------------------------
-local ID = zones[xi.zone.MOUNT_ZHAYOLM]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -22,7 +20,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(209, 50, IPpoint)
         else
             player:startEvent(6)
-            -- player:delKeyItem(xi.ki.ASSAULT_ARMBAND)
         end
 
     -- DEFAULT DIALOG
@@ -35,8 +32,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- ASSAULT
     if csid == 209 and option == 1 then
         player:delCurrency('imperial_standing', 50)
-        player:addKeyItem(xi.ki.ASSAULT_ARMBAND)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ASSAULT_ARMBAND)
+        npcUtil.giveKeyItem(player, xi.ki.ASSAULT_ARMBAND)
     end
 end
 

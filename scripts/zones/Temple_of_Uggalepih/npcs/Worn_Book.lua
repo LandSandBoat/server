@@ -46,8 +46,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     if player:getCharVar('paintbrushOfSouls_book') == 7 then
         player:messageSpecial(ID.text.FALLS_FROM_THE_BOOK, xi.ki.OLD_RUSTY_KEY)
-        player:addKeyItem(xi.ki.OLD_RUSTY_KEY)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_RUSTY_KEY)
+        npcUtil.giveKeyItem(player, xi.ki.OLD_RUSTY_KEY)
         player:setCharVar('paintbrushOfSouls_book', 0)
     end
 end

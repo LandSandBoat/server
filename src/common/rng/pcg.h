@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _PCG_H_
-#define _PCG_H_
+#pragma once
 
 // https://github.com/imneme/pcg-cpp
 #include "pcg_random.hpp"
@@ -28,7 +27,10 @@
 #include <array>
 #include <random>
 
+//
 // Forward declare sysrandom which is built in the xirand.h/cpp compilation unit
+//
+
 extern size_t sysrandom(void* dst, size_t dstlen);
 
 class xirand
@@ -59,9 +61,10 @@ public:
         rng().seed(seq);
     }
 
-    /*
-        declarations for RNG methods implemented in xirand.h.
-    */
+    //
+    // Declarations for RNG methods implemented in xirand.h.
+    //
+
     template <typename T>
     static inline typename std::enable_if<std::is_integral<T>::value, T>::type GetRandomNumber(T min, T max);
 
@@ -80,5 +83,3 @@ public:
     template <typename T>
     static inline T GetRandomElement(std::initializer_list<T> list);
 };
-
-#endif // _PCG_H_

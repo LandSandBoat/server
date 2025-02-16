@@ -214,6 +214,7 @@ xi.autows.doAutoPhysicalWeaponskill = function(attacker, target, wsID, tp, prima
     calcParams.bonusAcc = 0 + attacker:getMod(xi.mod.WSACC)
     calcParams.hitRate = getAutoHitRate(attacker, target, false, calcParams.bonusAcc, calcParams.melee)
     calcParams.skillType = attack.weaponType
+    calcParams.tpUsed = tp
 
     -- Send our wsParams off to calculate our raw WS damage, hits landed, and shadows absorbed
     calcParams = xi.weaponskills.calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
@@ -295,7 +296,8 @@ xi.autows.doAutoRangedWeaponskill = function(attacker, target, wsID, wsParams, t
         bonusWSmods = math.max(attacker:getMainLvl() - target:getMainLvl(), 0),
         bonusTP = wsParams.bonusTP or 0,
         bonusfTP = flameHolderFTP or 0,
-        bonusAcc = 0 + attacker:getMod(xi.mod.WSACC)
+        bonusAcc = 0 + attacker:getMod(xi.mod.WSACC),
+        tpUsed = tp,
     }
     calcParams.hitRate = getAutoHitRate(attacker, target, false, calcParams.bonusAcc, calcParams.melee)
     calcParams.skillType = attack.weaponType

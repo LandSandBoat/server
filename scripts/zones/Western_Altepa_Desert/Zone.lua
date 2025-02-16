@@ -12,11 +12,11 @@ zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.KING_VINEGARROON)
     GetMobByID(ID.mob.KING_VINEGARROON):setRespawnTime(math.random(900, 10800))
 
-    xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
+    xi.beastmenTreasure.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 end
 
 zoneObject.onGameDay = function()
-    xi.bmt.updatePeddlestox(xi.zone.WESTERN_ALTEPA_DESERT, ID.npc.PEDDLESTOX)
+    xi.beastmenTreasure.updatePeddlestox(xi.zone.WESTERN_ALTEPA_DESERT, ID.npc.PEDDLESTOX)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -63,50 +63,51 @@ zoneObject.onZoneWeatherChange = function(weather)
     local kvMob = GetMobByID(ID.mob.KING_VINEGARROON)
 
     if kvMob then
-        local kvRespawn = kvMob:getRespawnTime()
-
         if weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM then
-            DisallowRespawn(kvMob:getID(), false)
+            DisallowRespawn(ID.mob.KING_VINEGARROON, false) -- Allow respawn.
 
-            -- Low percent chance spawn on single earth weather
+            -- Check for respawn.
             if
-                weather == xi.weather.DUST_STORM and
-                kvRespawn == 0 and
-                math.random(0, 100) <= 10
+                not kvMob:isSpawned() and
+                kvMob:getRespawnTime() == 0
             then
-                SpawnMob(kvMob:getID())
-            -- Guaranteed spawn during double earth
-            elseif
-                weather == xi.weather.SAND_STORM and
-                kvRespawn == 0
-            then
-                SpawnMob(kvMob:getID())
+                if
+                    (weather == xi.weather.DUST_STORM and math.random(1, 100) <= 10) or
+                    weather == xi.weather.SAND_STORM
+                then
+                    SpawnMob(ID.mob.KING_VINEGARROON)
+                end
             end
+
         else
-            DisallowRespawn(kvMob:getID(), true)
+            DisallowRespawn(ID.mob.KING_VINEGARROON, true) -- Disallow respawn.
         end
     end
 
     -- NM Dahu only spawns during fire or earth weather
     local dahu = GetMobByID(ID.mob.DAHU)
-    local validWeather =
-    {
-        xi.weather.DUST_STORM,
-        xi.weather.SAND_STORM,
-        xi.weather.HOT_SPELL,
-        xi.weather.HEAT_WAVE,
-    }
 
     if dahu then
-        if utils.contains(weather, validWeather) then
-            DisallowRespawn(dahu:getID(), false)
+        local dahuValidWeather =
+        {
+            xi.weather.DUST_STORM,
+            xi.weather.SAND_STORM,
+            xi.weather.HOT_SPELL,
+            xi.weather.HEAT_WAVE,
+        }
+
+        if utils.contains(weather, dahuValidWeather) then
+            DisallowRespawn(ID.mob.DAHU, false) -- Allow respawn.
 
             -- Spawn if respawn is up
-            if dahu:getRespawnTime() == 0 then
-                SpawnMob(dahu:getID())
+            if
+                not dahu:isSpawned() and
+                dahu:getRespawnTime() == 0
+            then
+                SpawnMob(ID.mob.DAHU)
             end
         else
-            DisallowRespawn(dahu:getID(), true)
+            DisallowRespawn(ID.mob.DAHU, true) -- Disallow respawn.
         end
     end
 end

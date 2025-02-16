@@ -27,38 +27,20 @@ extern uint8 PacketSize[512];
 
 extern std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
 
-struct TransactionWrapper
-{
-    TransactionWrapper(std::function<void()> commitFn)
-    {
-        db::transactionStart();
-        try
-        {
-            commitFn();
-            db::transactionCommit();
-        }
-        catch (std::exception& e)
-        {
-            db::transactionRollback();
-            ShowError("Transaction failed: %s", e.what());
-        }
-    }
-};
-
 class AHAnnouncementModule : public CPPModule
 {
     void OnInit() override
     {
         TracyZoneScoped;
 
-        auto originalHandler = PacketParser[0x04E];
+        const auto originalHandler = PacketParser[0x04E];
 
-        auto newHandler = [originalHandler](map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
+        const auto newHandler = [originalHandler](map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
         {
             TracyZoneScoped;
 
             // Only intercept for action 0x0E: Purchasing Items
-            auto action = data.ref<uint8>(0x04);
+            const auto action = data.ref<uint8>(0x04);
             if (action == 0x0E)
             {
                 // !!!
@@ -66,9 +48,9 @@ class AHAnnouncementModule : public CPPModule
                 //     : If the original code changes, this will have to change too!
                 // !!!
 
-                uint32 price    = data.ref<uint32>(0x08);
-                uint16 itemid   = data.ref<uint16>(0x0C);
-                uint8  quantity = data.ref<uint8>(0x10);
+                const uint32 price    = data.ref<uint32>(0x08);
+                const uint16 itemid   = data.ref<uint16>(0x0C);
+                const uint8  quantity = data.ref<uint8>(0x10);
 
                 if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
                 {
@@ -95,9 +77,8 @@ class AHAnnouncementModule : public CPPModule
 
                         if (gil != nullptr && gil->isType(ITEM_CURRENCY) && gil->getQuantity() >= price && gil->getReserve() == 0)
                         {
-                            bool itemPurchasedSuccessfully = false;
                             // clang-format off
-                            TransactionWrapper wrapper([&]() -> void
+                            const auto success = db::transaction([&]()
                             {
                                 // Get the row id of the item we're buying
                                 const auto rowId = [&]() -> uint32
@@ -114,10 +95,11 @@ class AHAnnouncementModule : public CPPModule
                                         )",
                                         itemid, quantity == 0, price);
 
-                                    if (rset && rset->rowsCount() && rset->next())
+                                    FOR_DB_SINGLE_RESULT(rset)
                                     {
                                         return rset->get<uint32>("id");
                                     }
+
                                     return 0;
                                 }();
 
@@ -158,7 +140,7 @@ class AHAnnouncementModule : public CPPModule
                                                 )",
                                                 rowId);
 
-                                            if (rset && rset->rowsCount() && rset->next())
+                                            FOR_DB_SINGLE_RESULT(rset)
                                             {
                                                 sellerId = rset->get<uint32>("seller");
                                             }
@@ -183,17 +165,14 @@ class AHAnnouncementModule : public CPPModule
                                             message::send(sellerId, std::make_unique<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3,
                                                 fmt::format("Your '{}' has sold to {} for {} gil!", name, PChar->name, price).c_str(), ""));
                                         }
-
-                                        itemPurchasedSuccessfully = true;
                                     }
                                 }
-                            }); // TransactionWrapper
-                            // clang-format on
-
-                            if (itemPurchasedSuccessfully)
+                            });
+                            if (success)
                             {
                                 return;
                             }
+                            // clang-format on
                         }
                     }
 

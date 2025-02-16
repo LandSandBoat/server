@@ -56,7 +56,6 @@
 #include "lua/luautils.h"
 
 #include "packets/action.h"
-#include "packets/char.h"
 #include "packets/char_sync.h"
 #include "packets/char_update.h"
 #include "packets/entity_update.h"
@@ -129,11 +128,6 @@ CZone::~CZone()
         destroy(lineOfSight);
     }
 
-    // Manually delete and clear m_triggerAreaList
-    for (auto triggerArea : m_triggerAreaList)
-    {
-        destroy(triggerArea);
-    }
     m_triggerAreaList.clear();
 
     for (auto zoneLine : m_zoneLineList)
@@ -530,11 +524,11 @@ void CZone::InsertTRUST(CBaseEntity* PTrust)
  *                                                                       *
  ************************************************************************/
 
-void CZone::InsertTriggerArea(CTriggerArea* triggerArea)
+void CZone::InsertTriggerArea(std::unique_ptr<ITriggerArea>&& triggerArea)
 {
     if (triggerArea != nullptr)
     {
-        m_triggerAreaList.emplace_back(triggerArea);
+        m_triggerAreaList.emplace_back(std::move(triggerArea));
     }
 }
 
@@ -878,12 +872,6 @@ void CZone::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, c
     m_zoneEntities->PushPacket(PEntity, message_type, packet);
 }
 
-void CZone::UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
-{
-    TracyZoneScoped;
-    m_zoneEntities->UpdateCharPacket(PChar, type, updatemask);
-}
-
 void CZone::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude)
 {
     TracyZoneScoped;
@@ -1040,10 +1028,10 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
-    PChar->loc.zone              = this;
-    PChar->loc.zoning            = false;
-    PChar->loc.destination       = 0;
-    PChar->m_InsideTriggerAreaID = 0;
+    PChar->loc.zone        = this;
+    PChar->loc.zoning      = false;
+    PChar->loc.destination = 0;
+    PChar->clearTriggerAreas();
 
     if (PChar->isMounted() && !CanUseMisc(MISC_MOUNT))
     {
@@ -1147,9 +1135,10 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 void CZone::CharZoneOut(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
     for (const auto& triggerArea : m_triggerAreaList)
     {
-        if (triggerArea->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
+        if (PChar->isInTriggerArea(triggerArea->getTriggerAreaID()))
         {
             luautils::OnTriggerAreaLeave(PChar, triggerArea);
             break;
@@ -1235,29 +1224,31 @@ void CZone::CheckTriggerAreas()
         // TODO: When we start to use octrees or spatial hashing to split up zones,
         //     : use them here to make the search domain smaller.
 
-        uint32 triggerAreaID = 0;
+        // Do not enter trigger areas while loading in. Set in xi.player.onGameIn
+        if (PChar->GetLocalVar("ZoningIn") > 0)
+        {
+            return;
+        }
+
         for (const auto& triggerArea : m_triggerAreaList)
         {
+            const auto triggerAreaID = triggerArea->getTriggerAreaID();
             if (triggerArea->isPointInside(PChar->loc.p))
             {
-                triggerAreaID = triggerArea->GetTriggerAreaID();
-
-                if (triggerArea->GetTriggerAreaID() != PChar->m_InsideTriggerAreaID)
+                if (!PChar->isInTriggerArea(triggerAreaID))
                 {
+                    // Add the TriggerArea to the players cache of current TriggerAreas
+                    PChar->onTriggerAreaEnter(triggerAreaID);
                     luautils::OnTriggerAreaEnter(PChar, triggerArea);
                 }
-
-                if (PChar->m_InsideTriggerAreaID == 0)
-                {
-                    break;
-                }
             }
-            else if (triggerArea->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
+            else if (PChar->isInTriggerArea(triggerAreaID))
             {
+                // Remove the TriggerArea from the players cache of current TriggerAreas
+                PChar->onTriggerAreaLeave(triggerAreaID);
                 luautils::OnTriggerAreaLeave(PChar, triggerArea);
             }
         }
-        PChar->m_InsideTriggerAreaID = triggerAreaID;
     });
     // clang-format on
 }

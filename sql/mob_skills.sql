@@ -2234,7 +2234,7 @@ INSERT INTO `mob_skills` VALUES (2217,1598,'berserk',0,0.0,7.0,2000,1000,1,0,0,0
 INSERT INTO `mob_skills` VALUES (2218,1599,'penumbral_impact',0,0.0,7.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2219,1600,'dark_wave',1,0.0,10.0,2000,1000,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2220,1964,'tartarean_storm',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2221,1965,'hell_scissors',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2221,1965,'hell_scissors',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2222,1602,'hurricane_breath',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2223,1557,'ore_toss',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2224,1558,'head_butt',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);

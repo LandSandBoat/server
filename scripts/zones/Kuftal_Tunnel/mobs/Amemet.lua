@@ -140,7 +140,7 @@ local pathFind =
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 6000)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 9100)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 6000)
 end
 
 entity.onMobSpawn = function(mob)

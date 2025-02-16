@@ -76,6 +76,13 @@
     for (const auto& [_key, _value] : _collection)          \
         if (auto _var = static_cast<_type>(_value); true)
 
+#define FOR_DB_SINGLE_RESULT(_rset) \
+    if (_rset && _rset->rowsCount() && _rset->next())
+
+#define FOR_DB_MULTIPLE_RESULTS(_rset) \
+    if (_rset && _rset->rowsCount())   \
+        while (_rset->next())
+
 // string case comparison for *nix portability
 #if !defined(_MSC_VER)
 #define strcmpi strcasecmp

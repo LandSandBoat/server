@@ -18,6 +18,7 @@ local content = Limbus:new({
     entryNpc         = '_127',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.RED_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     name             = 'SW_APOLLYON',
+    lootCrateId      = ID.npc.SW_LOOT_CRATE,
     timeExtension    = 10,
 })
 
@@ -79,151 +80,151 @@ local checkElementalCrate = function(mobElement, battlefield, mob)
     local weatherElement = battlefield:getLocalVar('weather')
 
     if weatherElement == mobElement then
-        npcUtil.showCrate(GetNPCByID(ID.SW_APOLLYON.npc.LOOT_CRATE))
+        npcUtil.showCrate(GetNPCByID(ID.npc.SW_LOOT_CRATE))
     end
 end
 
 content.paths =
 {
-    [ID.SW_APOLLYON.mob.AIR_ELEMENTAL[1]] =
+    [ID.mob.SW_AIR_ELEMENTAL_OFFSET] =
     {
         { x = -613.0, y =  0.0, z = -373.0, wait = 7500 },
         { x = -602.0, y =  0.0, z = -369.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.AIR_ELEMENTAL[2]] =
+    [ID.mob.SW_AIR_ELEMENTAL_OFFSET + 8] =
     {
         { x = -591.0, y =  0.0, z = -374.0, wait = 7500 },
         { x = -602.0, y =  0.0, z = -369.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.AIR_ELEMENTAL[3]] =
+    [ID.mob.SW_AIR_ELEMENTAL_OFFSET + 16] =
     {
         { x = -602.0, y =  0.0, z = -369.0, wait = 7500 },
         { x = -599.0, y =  0.0, z = -368.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.DARK_ELEMENTAL[1]] =
+    [ID.mob.SW_DARK_ELEMENTAL_OFFSET] =
     {
         { x = -611.0, y =  0.0, z = -376.0, wait = 7500 },
         { x = -585.0, y = -0.5, z = -365.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.DARK_ELEMENTAL[2]] =
+    [ID.mob.SW_DARK_ELEMENTAL_OFFSET + 8] =
     {
         { x = -574.0, y =  0.0, z = -363.0, wait = 7500 },
         { x = -585.0, y =  0.0, z = -365.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.DARK_ELEMENTAL[3]] =
+    [ID.mob.SW_DARK_ELEMENTAL_OFFSET + 16] =
     {
         { x = -585.0, y =  0.0, z = -365.0, wait = 7500 },
         { x = -615.0, y =  0.0, z = -371.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.EARTH_ELEMENTAL[1]] =
+    [ID.mob.SW_EARTH_ELEMENTAL_OFFSET] =
     {
         { x = -571.0, y =  0.0, z = -328.0, wait = 7500 },
         { x = -561.0, y =  0.0, z = -323.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.EARTH_ELEMENTAL[2]] =
+    [ID.mob.SW_EARTH_ELEMENTAL_OFFSET + 8] =
     {
         { x = -581.0, y =  0.0, z = -340.0, wait = 7500 },
         { x = -571.0, y =  0.0, z = -328.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.EARTH_ELEMENTAL[3]] =
+    [ID.mob.SW_EARTH_ELEMENTAL_OFFSET + 16] =
     {
         { x = -571.0, y =  0.0, z = -328.0, wait = 7500 },
         { x = -556.0, y =  0.0, z = -330.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.FIRE_ELEMENTAL[1]] =
+    [ID.mob.SW_FIRE_ELEMENTAL_OFFSET] =
     {
         { x = -557.0, y =  0.0, z = -359.0, wait = 7500 },
         { x = -531.0, y =  0.0, z = -343.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.FIRE_ELEMENTAL[2]] =
+    [ID.mob.SW_FIRE_ELEMENTAL_OFFSET + 8] =
     {
         { x = -531.0, y =  0.0, z = -343.0, wait = 7500 },
         { x = -530.0, y =  0.0, z = -325.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.FIRE_ELEMENTAL[3]] =
+    [ID.mob.SW_FIRE_ELEMENTAL_OFFSET + 16] =
     {
         { x = -537.0, y =  0.0, z = -358.0, wait = 7500 },
         { x = -531.0, y =  0.0, z = -343.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.ICE_ELEMENTAL[1]] =
+    [ID.mob.SW_ICE_ELEMENTAL_OFFSET] =
     {
         { x = -595.0, y =  0.0, z = -388.0, wait = 7500 },
         { x = -590.0, y =  0.0, z = -372.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.ICE_ELEMENTAL[2]] =
+    [ID.mob.SW_ICE_ELEMENTAL_OFFSET + 8] =
     {
         { x = -607.0, y =  0.0, z = -397.0, wait = 7500 },
         { x = -595.0, y =  0.0, z = -388.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.ICE_ELEMENTAL[3]] =
+    [ID.mob.SW_ICE_ELEMENTAL_OFFSET + 16] =
     {
         { x = -595.0, y =  0.0, z = -388.0, wait = 7500 },
         { x = -593.0, y =  0.0, z = -367.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.LIGHT_ELEMENTAL[1]] =
+    [ID.mob.SW_LIGHT_ELEMENTAL_OFFSET] =
     {
         { x = -547.0, y =  0.0, z = -366.0, wait = 7500 },
         { x = -560.0, y =  0.0, z = -362.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.LIGHT_ELEMENTAL[2]] =
+    [ID.mob.SW_LIGHT_ELEMENTAL_OFFSET + 8] =
     {
         { x = -565.0, y =  0.0, z = -351.0, wait = 7500 },
         { x = -547.0, y =  0.0, z = -366.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.LIGHT_ELEMENTAL[3]] =
+    [ID.mob.SW_LIGHT_ELEMENTAL_OFFSET + 16] =
     {
         { x = -583.0, y =  0.0, z = -370.0,  wait = 7500 },
         { x = -551.0, y =  0.0, z = -366.44, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.WATER_ELEMENTAL[1]] =
+    [ID.mob.SW_WATER_ELEMENTAL_OFFSET] =
     {
         { x = -574.0, y =  0.0, z = -377.0, wait = 7500 },
         { x = -570.0, y =  0.0, z = -346.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.WATER_ELEMENTAL[2]] =
+    [ID.mob.SW_WATER_ELEMENTAL_OFFSET + 8] =
     {
         { x = -576.0, y =  0.0, z = -377.0, wait = 7500 },
         { x = -570.0, y =  0.0, z = -346.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.WATER_ELEMENTAL[3]] =
+    [ID.mob.SW_WATER_ELEMENTAL_OFFSET + 16] =
     {
         { x = -570.0, y =  0.0, z = -346.0, wait = 7500 },
         { x = -574.0, y =  0.0, z = -379.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.THUNDER_ELEMENTAL[1]] =
+    [ID.mob.SW_THUNDER_ELEMENTAL_OFFSET] =
     {
         { x = -569.0, y =  0.0, z = -346.0, wait = 7500 },
         { x = -605.0, y =  0.0, z = -343.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.THUNDER_ELEMENTAL[2]] =
+    [ID.mob.SW_THUNDER_ELEMENTAL_OFFSET + 8] =
     {
         { x = -569.0, y =  0.0, z = -346.0, wait = 7500 },
         { x = -594.0, y =  0.0, z = -344.0, wait = 7500 },
     },
 
-    [ID.SW_APOLLYON.mob.THUNDER_ELEMENTAL[3]] =
+    [ID.mob.SW_THUNDER_ELEMENTAL_OFFSET + 16] =
     {
         { x = -569.0, y =  0.0, z = -346.0, wait = 7500 },
         { x = -617.0, y =  0.0, z = -344.0, wait = 7500 },
@@ -301,7 +302,7 @@ content.groups =
             end
 
             local position = positions[#positions]
-            local mob      = GetMobByID(ID.SW_APOLLYON.mob.JIDRA_BOSS)
+            local mob      = GetMobByID(ID.mob.SW_BOSS_JIDRA)
             if mob then
                 mob:setPos(position.x, position.y, position.z, position.rot)
             end
@@ -572,7 +573,7 @@ content.loot =
         },
     },
 
-    [ID.SW_APOLLYON.npc.LOOT_CRATE] =
+    [ID.npc.SW_LOOT_CRATE] =
     {
         {
             quantity = 5,

@@ -4,8 +4,6 @@
 -- Involved in Quest: A Crisis in the Making
 -- !pos -137 17 177 145
 -----------------------------------
-local ID = zones[xi.zone.GIDDEUS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -20,8 +18,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 53 and option == 1 then
-        player:addKeyItem(xi.ki.OFF_OFFERING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OFF_OFFERING)
+        npcUtil.giveKeyItem(player, xi.ki.OFF_OFFERING)
         player:setCharVar('QuestCrisisMaking_var', 2)
     end
 end

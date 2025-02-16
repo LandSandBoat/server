@@ -119,5 +119,5 @@ xi.combat.skillLevel.getSkillCap = function(actorLevel, skillRank)
     local rankToCheck  = skillRank or xi.skillRank.G -- Assume rank G
 
     -- Going to assume levels over 99 give 1 skill level, just like master levels.
-    return xi.combat.skillLevel.dataTable[levelToCheck][rankToCheck] + utils.clamp(levelToCheck - 99, 0, 156)
+    return xi.combat.skillLevel.dataTable[utils.clamp(levelToCheck, 0, 99)][rankToCheck] + utils.clamp(levelToCheck - 99, 0, 156)
 end

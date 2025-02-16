@@ -278,7 +278,9 @@ namespace charutils
 
     bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity);
 
-    uint32 getCharIdFromName(std::string const& name);
+    auto getCharIdFromName(const std::string& name) -> uint32;
+    auto getAccountIdFromName(const std::string& name) -> uint32;
+    auto getCharIdAndAccountIdFromName(const std::string& name) -> std::pair<uint32, uint32>;
 
     void forceSynthCritFail(const std::string& sourceFunction, CCharEntity* PChar);
 

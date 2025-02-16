@@ -51,6 +51,7 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
     params = params or {}
     --[[
         params.immediate   = true    pop NM without waiting for next PH pop time
+        params.dayOnly     = true    spawn NM only at day time
         params.nightOnly   = true    spawn NM only at night time
         params.noPosUpdate = true    do not run UpdateNMSpawnPoint()
         params.spawnPoints = {x = , y = , z = } table of spawn points to choose from
@@ -58,6 +59,10 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
 
     if type(params.immediate) ~= 'boolean' then
         params.immediate = false
+    end
+
+    if type(params.dayOnly) ~= 'boolean' then
+        params.dayOnly = false
     end
 
     if type(params.nightOnly) ~= 'boolean' then
@@ -97,8 +102,15 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
                 -- The enum bakes in a multiplication of 2.4, gotta reverse that to get accurate hour
                 local nextRepopDate = (nextRepopTime / 60 * 25) + 886 * (xi.vanaTime.YEAR / 2.4)
                 local nextRepopHour = (nextRepopDate % (xi.vanaTime.DAY / 2.4)) / (xi.vanaTime.HOUR / 2.4)
-                -- If the NM is night only and spawn would happen during the day, bail out
+                -- If the NM is day only and spawn would happen during the night, bail out
                 if
+                    params.dayOnly and
+                    nextRepopHour < 4 and
+                    nextRepopHour >= 20
+                then
+                    return false
+                -- If the NM is night only and spawn would happen during the day, bail out
+                elseif
                     params.nightOnly and
                     nextRepopHour >= 4 and
                     nextRepopHour < 20

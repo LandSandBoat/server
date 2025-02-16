@@ -7,8 +7,6 @@
 --                        'Wayward Waypoints'
 -- !pos 84 0 -60 256
 -----------------------------------
-local ID = zones[xi.zone.WESTERN_ADOULIN]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -43,10 +41,9 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 2543 then
         -- Progresses Quest: 'The Old Man and the Harpoon'
         player:delKeyItem(xi.ki.BROKEN_HARPOON)
-        player:addKeyItem(xi.ki.EXTRAVAGANT_HARPOON)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.EXTRAVAGANT_HARPOON)
+        npcUtil.giveKeyItem(player, xi.ki.EXTRAVAGANT_HARPOON)
     elseif csid == 2850 then
-        -- Progresses Quest: 'Fertile Ground'
+        -- Progresses Quest: 'Fertile Ground' TODO: Should this also give the player a message?
         player:addKeyItem(xi.ki.BOTTLE_OF_FERTILIZER_X)
     elseif csid == 79 then
         player:addKeyItem(xi.ki.WAYPOINT_RECALIBRATION_KIT)

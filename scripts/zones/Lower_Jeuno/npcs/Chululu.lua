@@ -134,8 +134,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     elseif csid == 198 and option == 0 then
         player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
-        player:addKeyItem(xi.ki.MAGIC_TRASH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAGIC_TRASH)
+        npcUtil.giveKeyItem(player, xi.ki.MAGIC_TRASH)
         player:setCharVar('RubbishDay_prog', 0)
         player:setCharVar('RubbishDay_day', VanadielDayOfTheYear())
 

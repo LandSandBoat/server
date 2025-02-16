@@ -19,6 +19,7 @@ local content = Limbus:new({
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.BLACK_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     lossEventParams  = { [5] = 1 },
     name             = 'NE_APOLLYON',
+    lootCrateId      = ID.npc.NE_LOOT_CRATE,
     exitLocation     = 1,
     timeExtension    = 5,
 })
@@ -37,13 +38,13 @@ end
 
 content.paths =
 {
-    [ID.NE_APOLLYON.mob.GOOBBUE_HARVESTER] =
+    [ID.mob.NE_GOOBBUE_HARVESTER] =
     {
         { x = 425.0, y = 0.0, z = 22.0, wait = 1000 },
         { x = 475.0, y = 0.0, z = 22.0, wait = 1000 },
     },
 
-    [ID.NE_APOLLYON.mob.TROGLODYTE_DHALMEL[1]] =
+    [ID.mob.NE_TROGLODYTE_DHALMEL_OFFSET] =
     {
         { x = 525.0, y = -0.5, z = 315.0 },
         { x = 550.0, y = -0.5, z = 310.0 },
@@ -53,7 +54,7 @@ content.paths =
         { x = 550.0, y = -0.5, z = 310.0 },
     },
 
-    [ID.NE_APOLLYON.mob.TROGLODYTE_DHALMEL[2]] =
+    [ID.mob.NE_TROGLODYTE_DHALMEL_OFFSET + 1] =
     {
         { x = 550.0, y = -0.5, z = 310.0 },
         { x = 580.0, y = -0.5, z = 300.0 },
@@ -63,7 +64,7 @@ content.paths =
         { x = 580.0, y = -0.5, z = 300.0 },
     },
 
-    [ID.NE_APOLLYON.mob.TROGLODYTE_DHALMEL[3]] =
+    [ID.mob.NE_TROGLODYTE_DHALMEL_OFFSET + 2] =
     {
         { x = 580.0, y = -0.5, z = 300.0 },
         { x = 588.0, y = -0.5, z = 285.0 },
@@ -73,7 +74,7 @@ content.paths =
         { x = 588.0, y = -0.5, z = 285.0 },
     },
 
-    [ID.NE_APOLLYON.mob.TROGLODYTE_DHALMEL[4]] =
+    [ID.mob.NE_TROGLODYTE_DHALMEL_OFFSET + 3] =
     {
         { x = 588.0, y = -0.5, z = 285.0 },
         { x = 585.0, y = -0.5, z = 265.0 },
@@ -83,7 +84,7 @@ content.paths =
         { x = 585.0, y = -0.5, z = 265.0 },
     },
 
-    [ID.NE_APOLLYON.mob.TROGLODYTE_DHALMEL[5]] =
+    [ID.mob.NE_TROGLODYTE_DHALMEL_OFFSET + 4] =
     {
         { x = 585.0, y = -0.5, z = 265.0 },
         { x = 565.0, y = -0.5, z = 250.0 },
@@ -93,7 +94,7 @@ content.paths =
         { x = 565.0, y = -0.5, z = 250.0 },
     },
 
-    [ID.NE_APOLLYON.mob.TROGLODYTE_DHALMEL[6]] =
+    [ID.mob.NE_TROGLODYTE_DHALMEL_OFFSET + 5] =
     {
         { x = 565.0, y = -0.5, z = 250.0 },
         { x = 540.0, y = -0.5, z = 260.0 },
@@ -103,7 +104,7 @@ content.paths =
         { x = 540.0, y = -0.5, z = 260.0 },
     },
 
-    [ID.NE_APOLLYON.mob.TROGLODYTE_DHALMEL[7]] =
+    [ID.mob.NE_TROGLODYTE_DHALMEL_OFFSET + 6] =
     {
         { x = 540.0, y = -0.5, z = 260.0 },
         { x = 530.0, y = -0.5, z = 280.0 },
@@ -113,7 +114,7 @@ content.paths =
         { x = 530.0, y = -0.5, z = 280.0 },
     },
 
-    [ID.NE_APOLLYON.mob.TROGLODYTE_DHALMEL[8]] =
+    [ID.mob.NE_TROGLODYTE_DHALMEL_OFFSET + 7] =
     {
         { x = 530.0, y = -0.5, z = 280.0 },
         { x = 525.0, y = -0.5, z = 315.0 },
@@ -199,27 +200,27 @@ content.groups =
             }
 
             -- Every 6 players we add another group of mobs (1 Sweeper and 4 Cleaners)
-            table.insert(sweepers.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[1])
-            table.insert(cleanersLarge.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[1] + 1)
-            table.insert(cleanersSmall.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[1] + 2)
-            table.insert(cleanersSmall.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[1] + 3)
-            table.insert(cleanersSmall.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[1] + 4)
+            table.insert(sweepers.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET)
+            table.insert(cleanersLarge.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET + 1)
+            table.insert(cleanersSmall.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET + 2)
+            table.insert(cleanersSmall.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET + 3)
+            table.insert(cleanersSmall.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET + 4)
 
             local playerCount = #battlefield:getPlayers()
 
             if playerCount > 6 then
-                table.insert(sweepers.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[2])
-                table.insert(cleanersLarge.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[2] + 1)
-                table.insert(cleanersSmall.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[2] + 2)
-                table.insert(cleanersSmall.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[2] + 3)
-                table.insert(cleanersSmall.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[2] + 4)
+                table.insert(sweepers.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET + 5)
+                table.insert(cleanersLarge.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET + 6)
+                table.insert(cleanersSmall.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET + 7)
+                table.insert(cleanersSmall.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET + 8)
+                table.insert(cleanersSmall.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET + 9)
 
                 if playerCount > 12 then
-                    table.insert(sweepers.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[3])
-                    table.insert(cleanersLarge.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[3] + 1)
-                    table.insert(cleanersSmall.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[3] + 2)
-                    table.insert(cleanersSmall.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[3] + 3)
-                    table.insert(cleanersSmall.mobIds, ID.NE_APOLLYON.mob.APOLLYON_SWEEPER[3] + 4)
+                    table.insert(sweepers.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET + 10)
+                    table.insert(cleanersLarge.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET + 11)
+                    table.insert(cleanersSmall.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET + 12)
+                    table.insert(cleanersSmall.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET + 13)
+                    table.insert(cleanersSmall.mobIds, ID.mob.NE_APOLLYON_SWEEPER_OFFSET + 14)
                 end
             end
 
@@ -271,7 +272,7 @@ content.groups =
     {
         mobs     = { 'Troglodyte_Dhalmel' },
         allDeath = function(battlefield, mob)
-            npcUtil.showCrate(GetNPCByID(ID.NE_APOLLYON.npc.LOOT_CRATE))
+            npcUtil.showCrate(GetNPCByID(ID.npc.NE_LOOT_CRATE))
         end,
     },
 
@@ -424,7 +425,7 @@ content.loot =
         },
     },
 
-    [ID.NE_APOLLYON.npc.LOOT_CRATE] =
+    [ID.npc.NE_LOOT_CRATE] =
     {
         {
             quantity = 6,

@@ -12,6 +12,7 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
+        ITEM_RETURNED                 = 6402, -- A <item ID> is returned to you.
         FELLOW_MESSAGE_OFFSET         = 6419, -- I'm ready. I suppose.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
@@ -20,10 +21,12 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
         FISHING_MESSAGE_OFFSET        = 7061, -- You can't fish here.
         DIG_THROW_AWAY                = 7074, -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7076, -- You dig and you dig, but find nothing.
+        FOUND_ITEM_WITH_EASE          = 7151,  -- It appears your chocobo found this item with ease.
         PLACE_HYDROGAUGE              = 7354, -- You set the <item> in the glowing trench.
         ENIGMATIC_LIGHT               = 7355, -- The <item> is giving off an enigmatic light.
         LEYPOINT                      = 7410, -- An eerie red glow emanates from this stone platform. The surrounding air feels alive with energy...
         HARVESTING_IS_POSSIBLE_HERE   = 7418, -- Harvesting is possible here if you have <item>.
+        WELLSPRING                    = 7456, -- The water in the spring is an unusual color...
         GIWAHB_WATCHTOWER_LOCKED      = 7993, -- The door is locked...
         INCREASED_STANDING            = 7994, -- Your Imperial Standing has increased!
         HEADY_FRAGRANCE               = 8498, -- The heady fragrance of wine pervades the air...
@@ -35,12 +38,12 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
     },
     mob =
     {
-        CHIGOES                =
+        CHIGOES =
         {
             ['Marid'] = GetTableOfIDs('Chigoe', 5),
         },
         JADED_JODY             = GetFirstID('Jaded_Jody'),
-        ZORAAL_JA_S_PKUUCHA    = GetFirstID('Zoraal_Jas_Pkuucha'),
+        ZORAAL_JAS_PKUUCHA     = GetFirstID('Zoraal_Jas_Pkuucha'),
         PERCIPIENT_ZORAAL_JA   = GetFirstID('Percipient_Zoraal_Ja'),
         VULPANGUE              = GetFirstID('Vulpangue'),
         IRIZ_IMA               = GetFirstID('Iriz_Ima'),
@@ -50,6 +53,8 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
     npc =
     {
         HARVESTING = GetTableOfIDs('Harvesting_Point'),
+        HOOFPRINT  = GetFirstID('Warhorse_Hoofprint'),
+        WELLSPRING = GetFirstID('Mythralline_Wellspring')
     },
 }
 

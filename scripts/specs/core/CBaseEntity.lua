@@ -725,9 +725,27 @@ end
 function CBaseEntity:isInMogHouse()
 end
 
----@nodiscard
----@return integer
-function CBaseEntity:getPlayerTriggerAreaInZone()
+---@param triggerAreaId integer
+---@return boolean
+function CBaseEntity:isPlayerInTriggerArea(triggerAreaId)
+end
+
+---@return nil
+function CBaseEntity:isPlayerInAnyTriggerArea()
+end
+
+---@param triggerAreaId integer
+---@return nil
+function CBaseEntity:onPlayerTriggerAreaEnter(triggerAreaId)
+end
+
+---@param triggerAreaId integer
+---@return nil
+function CBaseEntity:onPlayerTriggerAreaLeave(triggerAreaId)
+end
+
+---@return nil
+function CBaseEntity:clearPlayerTriggerAreas()
 end
 
 ---@param statusID integer
@@ -820,6 +838,12 @@ end
 ---@param setval integer?
 ---@return nil
 function CBaseEntity:addTeleport(teleType, bitval, setval)
+end
+
+---@param pos table
+---@param mode integer
+---@return nil
+function CBaseEntity:positionSpecial(pos, mode)
 end
 
 ---@nodiscard

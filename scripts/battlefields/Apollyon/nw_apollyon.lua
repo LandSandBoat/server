@@ -18,6 +18,7 @@ local content = Limbus:new({
     entryNpc         = '_127',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.RED_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     name             = 'NW_APOLLYON',
+    lootCrateId      = ID.npc.NW_LOOT_CRATE,
     timeExtension   = 5,
 })
 
@@ -49,169 +50,171 @@ end
 
 content.paths =
 {
-    [ID.NW_APOLLYON.mob.PLUTO] =
+    [ID.mob.NW_PLUTO] =
     {
         { x = -458.0, y = 0.0, z =  46.0, wait = 5000 },
         { x = -458.0, y = 0.0, z = -14.0, wait = 5000 },
     },
 
-    [ID.NW_APOLLYON.mob.BARDHA[1]] =
+    [ID.mob.NW_BARDHA_OFFSET] =
     {
         { x = -418.0, y = 0.0, z = 36.0, wait = 2500 },
         { x = -390.0, y = 0.0, z = 62.0, wait = 2500 },
     },
 
-    [ID.NW_APOLLYON.mob.BARDHA[2]] =
+    [ID.mob.NW_BARDHA_OFFSET + 1] =
     {
         { x = -410.0, y = 0.0, z = 68.0, wait = 2500 },
         { x = -396.0, y = 0.0, z = 34.0, wait = 2500 },
     },
 
-    [ID.NW_APOLLYON.mob.BARDHA[3]] =
+    [ID.mob.NW_BARDHA_OFFSET + 2] =
     {
         { x = -456.0, y = 0.0, z = 24.0, wait = 2500 },
         { x = -432.0, y = 0.0, z = 19.0, wait = 2500 },
     },
 
-    [ID.NW_APOLLYON.mob.BARDHA[4]] =
+    [ID.mob.NW_BARDHA_OFFSET + 3] =
     {
         { x = -502.0, y = 0.0, z = 30.0, wait = 2500 },
         { x = -476.0, y = 0.0, z = 23.0, wait = 2500 },
     },
 
-    [ID.NW_APOLLYON.mob.BARDHA[5]] =
+    [ID.mob.NW_BARDHA_OFFSET + 4] =
     {
         { x = -448.0, y = 0.0, z = 22.0, wait = 2500 },
         { x = -425.0, y = 0.0, z = 23.0, wait = 2500 },
     },
 
-    [ID.NW_APOLLYON.mob.BARDHA[6]] =
+    [ID.mob.NW_BARDHA_OFFSET + 5] =
     {
         { x = -429.0, y = 0.0, z = -28.0, wait = 2500 },
         { x = -450.0, y = 0.0, z = -24.0, wait = 2500 },
     },
 
-    [ID.NW_APOLLYON.mob.BARDHA[7]] =
+    [ID.mob.NW_BARDHA_OFFSET + 6] =
     {
         { x = -460.0, y = 0.0, z = 55.0, wait = 2500 },
         { x = -414.0, y = 0.0, z = 31.0, wait = 2500 },
     },
 
-    [ID.NW_APOLLYON.mob.ZLATOROG] =
+    [ID.mob.NW_ZLATOROG] =
     {
         { x = -384.0, y = 0.0,  z = 268.0, wait = 5000 },
         { x = -336.0, y = -0.5, z = 320.0, wait = 5000 },
     },
 
-    [ID.NW_APOLLYON.mob.MOUNTAIN_BUFFALO[1]] =
+    [ID.mob.NW_MOUNTAIN_BUFFALO_OFFSET] =
     {
         { x = -306.0, y = 0.0, z = 317.0, wait = 5000 },
         { x = -295.0, y = 0.0, z = 354.0, wait = 5000 },
     },
 
-    [ID.NW_APOLLYON.mob.MOUNTAIN_BUFFALO[2]] =
+    [ID.mob.NW_MOUNTAIN_BUFFALO_OFFSET + 1] =
     {
         { x = -329.0, y = 0.0, z = 283.0, wait = 5000 },
         { x = -345.0, y = 0.0, z = 281.0, wait = 5000 },
     },
 
-    [ID.NW_APOLLYON.mob.MOUNTAIN_BUFFALO[3]] =
+    [ID.mob.NW_MOUNTAIN_BUFFALO_OFFSET + 2] =
     {
         { x = -334.0, y = 0.0, z = 222.0, wait = 5000 },
         { x = -373.0, y = 0.0, z = 252.0, wait = 5000 },
     },
 
-    [ID.NW_APOLLYON.mob.MOUNTAIN_BUFFALO[4]] =
+    [ID.mob.NW_MOUNTAIN_BUFFALO_OFFSET + 3] =
     {
         { x = -334.0, y = 0.0,  z = 233.0, wait = 5000 },
         { x = -345.0, y = -1.0, z = 246.0, wait = 5000 },
     },
 
-    [ID.NW_APOLLYON.mob.MOUNTAIN_BUFFALO[5]] =
+    [ID.mob.NW_MOUNTAIN_BUFFALO_OFFSET + 4] =
     {
         { x = -315.0, y = 0.0, z = 233.0, wait = 5000 },
         { x = -317.0, y = 0.0, z = 263.0, wait = 5000 },
     },
 
-    [ID.NW_APOLLYON.mob.MOUNTAIN_BUFFALO[6]] =
+    [ID.mob.NW_MOUNTAIN_BUFFALO_OFFSET + 5] =
     {
         { x = -366.0, y = 0.0, z = 235.0, wait = 5000 },
         { x = -350.0, y = 0.0, z = 280.0, wait = 5000 },
     },
 
-    [ID.NW_APOLLYON.mob.MOUNTAIN_BUFFALO[7]] =
+    [ID.mob.NW_MOUNTAIN_BUFFALO_OFFSET + 6] =
     {
         { x = -307.0, y = 0.0, z = 287.0, wait = 5000 },
         { x = -317.0, y = 0.0, z = 316.0, wait = 5000 },
     },
 
-    [ID.NW_APOLLYON.mob.APOLLYON_SCAVENGER[1]] =
+    [ID.mob.NW_APOLLYON_SCAVENGER_OFFSET] =
     {
         { x = -252.0, y = 0.0, z = 530.0, wait = 5000 },
         { x = -218.0, y = 0.0, z = 540.0, wait = 5000 },
     },
 
-    [ID.NW_APOLLYON.mob.APOLLYON_SCAVENGER[2]] =
+    [ID.mob.NW_APOLLYON_SCAVENGER_OFFSET + 1] =
     {
         { x = -310.0, y = 0.0, z = 485.0, wait = 10000 },
         { x = -293.0, y = 0.0, z = 505.0, wait = 10000 },
     },
 
-    [ID.NW_APOLLYON.mob.APOLLYON_SCAVENGER[4]] =
+    -- What happened with the one here? (ID: 16932966 as of Feb 4 2025)
+
+    [ID.mob.NW_APOLLYON_SCAVENGER_OFFSET + 3] =
     {
         { x = -332.0, y = 0.0, z = 553.0, wait = 5000 },
         { x = -295.0, y = 0.0, z = 573.0, wait = 5000 },
     },
 
-    [ID.NW_APOLLYON.mob.APOLLYON_SCAVENGER[5]] =
+    [ID.mob.NW_APOLLYON_SCAVENGER_OFFSET + 4] =
     {
         { x = -324.0, y = 0.0, z = 590.0, wait = 5000 },
         { x = -290.0, y = 0.0, z = 557.0, wait = 5000 },
     },
 
-    [ID.NW_APOLLYON.mob.APOLLYON_SCAVENGER[6]] =
+    [ID.mob.NW_APOLLYON_SCAVENGER_OFFSET + 5] =
     {
         { x = -323.0, y = 0.0, z = 514.0, wait = 5000 },
         { x = -340.0, y = 0.0, z = 547.0, wait = 5000 },
     },
 
-    [ID.NW_APOLLYON.mob.APOLLYON_SCAVENGER[7]] =
+    [ID.mob.NW_APOLLYON_SCAVENGER_OFFSET + 6] =
     {
         { x = -308.0, y = 0.0, z = 494.0, wait = 10000 },
         { x = -337.0, y = 0.0, z = 522.0, wait = 10000 },
     },
 
-    [ID.NW_APOLLYON.mob.GORYNICH[1]] =
+    [ID.mob.NW_GORYNICH_OFFSET] =
     {
         { x = -567.0, y = 0.0, z = 603.0, wait = 10000 },
         { x = -537.0, y = 0.0, z = 637.0, wait = 10000 },
     },
 
-    [ID.NW_APOLLYON.mob.GORYNICH[2]] =
+    [ID.mob.NW_GORYNICH_OFFSET + 1] =
     {
         { x = -548.0, y = 0.0, z = 581.0, wait = 10000 },
         { x = -600.0, y = 0.0, z = 570.0, wait = 10000 },
     },
 
-    [ID.NW_APOLLYON.mob.GORYNICH[3]] =
+    [ID.mob.NW_GORYNICH_OFFSET + 2] =
     {
         { x = -615.0, y = 0.0, z = 531.0, wait = 10000 },
         { x = -583.0, y = 0.0, z = 571.0, wait = 10000 },
     },
 
-    [ID.NW_APOLLYON.mob.GORYNICH[4]] =
+    [ID.mob.NW_GORYNICH_OFFSET + 3] =
     {
         { x = -600.0, y = 0.0, z = 523.0, wait = 10000 },
         { x = -554.0, y = 0.0, z = 537.0, wait = 10000 },
     },
 
-    [ID.NW_APOLLYON.mob.GORYNICH[5]] =
+    [ID.mob.NW_GORYNICH_OFFSET + 4] =
     {
         { x = -555.0, y = 0.0, z = 614.0, wait = 10000 },
         { x = -529.0, y = 0.0, z = 630.0, wait = 10000 },
     },
 
-    [ID.NW_APOLLYON.mob.KAISER_BEHEMOTH] =
+    [ID.mob.NW_KAISER_BEHEMOTH] =
     {
         { x = -533.384, y = 0.000, z = 317.332 },
         { x = -572.622, y = 0.000, z = 321.561 },
@@ -258,7 +261,7 @@ content.groups =
         },
 
         allDeath = function(battlefield, mob)
-            depowerBoss(ID.NW_APOLLYON.mob.PLUTO)
+            depowerBoss(ID.mob.NW_PLUTO)
         end,
 
         randomDeath = function(battlefield, mob)
@@ -292,7 +295,7 @@ content.groups =
         },
 
         allDeath = function(battlefield, mob)
-            depowerBoss(ID.NW_APOLLYON.mob.ZLATOROG)
+            depowerBoss(ID.mob.NW_ZLATOROG)
         end,
 
         randomDeath = function(battlefield, mob)
@@ -321,7 +324,7 @@ content.groups =
 
         stationary = true,
         allDeath   = function(battlefield, mob)
-            depowerBoss(ID.NW_APOLLYON.mob.MILLENARY_MOSSBACK)
+            depowerBoss(ID.mob.NW_MILLENARY_MOSSBACK)
         end,
 
         randomDeath = function(battlefield, mob)
@@ -354,7 +357,7 @@ content.groups =
         },
 
         allDeath = function(battlefield, mob)
-            depowerBoss(ID.NW_APOLLYON.mob.CYNOPROSOPI)
+            depowerBoss(ID.mob.NW_CYNOPROSOPI)
         end,
 
         randomDeath = function(battlefield, mob)
@@ -374,7 +377,7 @@ content.groups =
 
         setup = empowerBoss,
         death = function(battlefield, mob, count)
-            npcUtil.showCrate(GetNPCByID(ID.NW_APOLLYON.npc.LOOT_CRATE))
+            npcUtil.showCrate(GetNPCByID(ID.npc.NW_LOOT_CRATE))
         end,
     },
 
@@ -390,7 +393,7 @@ content.groups =
         mobMods    = { [xi.mobMod.ALLI_HATE] = 50 },
         stationary = false,
         allDeath   = function(battlefield, mob)
-            depowerBoss(ID.NW_APOLLYON.mob.KAISER_BEHEMOTH)
+            depowerBoss(ID.mob.NW_KAISER_BEHEMOTH)
         end,
     },
 }
@@ -523,7 +526,7 @@ content.loot =
         },
     },
 
-    [ID.NW_APOLLYON.npc.LOOT_CRATE] =
+    [ID.npc.NW_LOOT_CRATE] =
     {
         {
             quantity = 6,

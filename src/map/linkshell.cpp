@@ -23,7 +23,7 @@
 
 #include <cstring>
 
-#include "packets/char_update.h"
+#include "packets/char_status.h"
 #include "packets/chat_message.h"
 #include "packets/inventory_assign.h"
 #include "packets/inventory_finish.h"
@@ -220,7 +220,7 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, uint8 toSack)
                 charutils::SaveCharEquip(PMember);
 
                 PMember->pushPacket<CInventoryFinishPacket>();
-                PMember->pushPacket<CCharUpdatePacket>(PMember);
+                PMember->pushPacket<CCharStatusPacket>(PMember);
                 return;
             }
         }
@@ -293,7 +293,7 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 kickerR
             charutils::SaveCharEquip(PMember);
 
             PMember->pushPacket<CInventoryFinishPacket>();
-            PMember->pushPacket<CCharUpdatePacket>(PMember);
+            PMember->pushPacket<CCharStatusPacket>(PMember);
             if (breakLinkshell)
             {
                 PMember->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellNoLongerExists);
@@ -460,16 +460,16 @@ namespace linkshell
 
     bool IsValidLinkshellName(const std::string& name)
     {
-        auto ret = _sql->Query("SELECT linkshellid FROM linkshells WHERE name = '%s' AND broken != 1", name);
-        return ret == SQL_ERROR || _sql->NumRows() == 0;
+        const auto rset = db::preparedStmt("SELECT linkshellid FROM linkshells WHERE name = ? AND broken != 1", name);
+        return !rset || rset->rowsCount() == 0;
     }
 
     uint32 RegisterNewLinkshell(const std::string& name, uint16 color)
     {
         if (IsValidLinkshellName(name))
         {
-            if (_sql->Query("INSERT INTO linkshells (name, color, postrights) VALUES ('%s', %u, %u)", name, color,
-                            static_cast<uint8>(LSTYPE_PEARLSACK)) != SQL_ERROR)
+            if (_sql->Query("INSERT INTO linkshells (name, color, postrights) VALUES ('%s', %u, %u)",
+                            name, color, static_cast<uint8>(LSTYPE_PEARLSACK)) != SQL_ERROR)
             {
                 return LoadLinkshell((uint32)_sql->LastInsertId())->getID();
             }

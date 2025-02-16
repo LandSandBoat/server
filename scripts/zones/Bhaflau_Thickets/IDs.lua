@@ -20,6 +20,7 @@ zones[xi.zone.BHAFLAU_THICKETS] =
         FISHING_MESSAGE_OFFSET        = 7061, -- You can't fish here.
         DIG_THROW_AWAY                = 7074, -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7076, -- You dig and you dig, but find nothing.
+        FOUND_ITEM_WITH_EASE          = 7151, -- It appears your chocobo found this item with ease.
         STAGING_GATE_CLOSER           = 7321, -- You must move closer.
         STAGING_GATE_INTERACT         = 7322, -- This gate guards an area under Imperial control.
         STAGING_GATE_MAMOOL           = 7324, -- Mamool Ja Staging Point.
@@ -33,6 +34,7 @@ zones[xi.zone.BHAFLAU_THICKETS] =
         AREA_FULL                     = 7597, -- This area is fully occupied. You were unable to enter.
         MEMBER_NO_REQS                = 7601, -- Not all of your party members meet the requirements for this objective. Unable to enter area.
         MEMBER_TOO_FAR                = 7605, -- One or more party members are too far away from the entrance. Unable to enter area.
+        WELLSPRING                    = 7658, -- The water in the spring is an unusual color...
         SHED_LEAVES                   = 7667, -- The ground is strewn with shed leaves...
         BLOOD_STAINS                  = 7669, -- The ground is smeared with bloodstains...
         DRAWS_NEAR                    = 7694, -- Something draws near!
@@ -51,10 +53,12 @@ zones[xi.zone.BHAFLAU_THICKETS] =
         LIVIDROOT_AMOOSHAH = GetFirstID('Lividroot_Amooshah'),
         MAHISHASURA        = GetFirstID('Mahishasura'),
         NIS_PUK            = GetFirstID('Nis_Puk'),
+        PLAGUE_CHIGOE      = GetFirstID('Plague_Chigoe'),
     },
     npc =
     {
         HARVESTING = GetTableOfIDs('Harvesting_Point'),
+        HOOFPRINT  = GetFirstID('Warhorse_Hoofprint'),
     },
 }
 

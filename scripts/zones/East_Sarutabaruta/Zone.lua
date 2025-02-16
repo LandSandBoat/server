@@ -9,7 +9,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- A Chocobo Riding Game finish line
-    zone:registerTriggerArea(1, -119.92, 10, -520.08, 0, 0, 0)
+    zone:registerCylindricalTriggerArea(1, -119.92, -520.08, 10)
 
     UpdateNMSpawnPoint(ID.mob.DUKE_DECAPOD)
     GetMobByID(ID.mob.DUKE_DECAPOD):setRespawnTime(math.random(3600, 4200))
@@ -48,7 +48,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    local triggerAreaID = triggerArea:GetTriggerAreaID()
+    local triggerAreaID = triggerArea:getTriggerAreaID()
 
     if triggerAreaID == 1 and player:hasStatusEffect(xi.effect.MOUNTED) then
         xi.chocoboGame.onTriggerAreaEnter(player)

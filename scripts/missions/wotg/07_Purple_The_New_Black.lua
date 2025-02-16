@@ -39,7 +39,7 @@ mission.sections =
     -- 1: Enter the BCNM vs Galarhigg
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 1
+            return currentMission == mission.missionId and missionStatus >= 1
         end,
 
         [xi.zone.LA_VAULE_S] =

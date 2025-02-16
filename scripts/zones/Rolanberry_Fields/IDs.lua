@@ -23,6 +23,7 @@ zones[xi.zone.ROLANBERRY_FIELDS] =
         FISHING_MESSAGE_OFFSET        = 7246,  -- You can't fish here.
         DIG_THROW_AWAY                = 7259,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7261,  -- You dig and you dig, but find nothing.
+        FOUND_ITEM_WITH_EASE          = 7336,  -- It appears your chocobo found this item with ease.
         SIGN                          = 7416,  -- North: Grand Duchy of Jeuno, Sauromugue Champaign South: Pashhow Marshlands
         TIME_ELAPSED                  = 7473,  -- Time Elapsed: / [hour/hours] (Vanadiel Time) / [minute/minutes] and [second/seconds] (Earth time)
         PLAYER_OBTAINS_ITEM           = 7597,  -- <name> obtains <item>!

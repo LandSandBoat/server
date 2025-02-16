@@ -26,6 +26,7 @@ zones[xi.zone.EASTERN_ALTEPA_DESERT] =
         DIG_THROW_AWAY                = 7579,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7581,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7647,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
+        FOUND_ITEM_WITH_EASE          = 7656,  -- It appears your chocobo found this item with ease.
         ALREADY_OBTAINED_TELE         = 7675,  -- You already possess the gate crystal for this telepoint.
         GARRISON_BASE                 = 7702,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         PLAYER_OBTAINS_ITEM           = 7775,  -- <name> obtains <item>!

@@ -131,78 +131,55 @@ zones[xi.zone.NYZUL_ISLE] =
 
     mob =
     {
-        [51] = -- Nyzul Isle Investigation
-        {
-            ARCHAIC_RAMPART1    = 17092629,
-            ARCHAIC_RAMPART2    = 17092630,
-            OFFSET_REGULAR      = 17092631, -- Greatclaw
-            DAHAK               = 17092823,
-            OFFSET_NM           = 17092824, -- Bat Eye
-            TAISAIJIN           = 17092913,
-            OFFSET_GEARS        = 17092916, -- Gear
-            MOKKE               = 17092944,
-            LONG_HORNED_CHARIOT = 17092968,
-            OFFSET_SPECIFIED    = 17092969, -- Heraldic Imp
-            ADAMANTOISE         = 17092999,
-        },
+        -- Instance ID: 51 - Nyzul Isle Investigation
+        ARCHAIC_RAMPART_OFFSET = GetFirstID('Archaic_Rampart'),
+        BOSS_OFFSET            = GetFirstID('Adamantoise'),
+        DAHAK                  = GetFirstID('Dahak'),
+        GEAR_OFFSET            = GetFirstID('Archaic_Gear'),
+        LEADER_OFFSET          = GetFirstID('Mokke'),
+        MOB_OFFSET             = GetFirstID('Greatclaw'),
+        NM_OFFSET              = GetFirstID('Bat_Eye'),
+        SPECIFIED_OFFSET       = GetFirstID('Heraldic_Imp'),
+        TAISAIJIN              = GetFirstID('Taisaijin'),
 
-        -- Path of Darkness
-        [58] =
-        {
-            AMNAF_BLU          = 17093132,
-            AMNAF_PSYCHEFLAYER = 17093133,
-            IMPERIAL_GEAR1     = 17093134,
-            IMPERIAL_GEAR2     = 17093135,
-            IMPERIAL_GEAR3     = 17093136,
-            IMPERIAL_GEAR4     = 17093137,
-            NAJA               = 17093142,
-        },
+        -- Instance ID: 58 - Path of Darkness
+        AMNAF_BLU            = GetFirstID('Amnaf_BLU'),
+        AMNAF_PSYCHEFLAYER   = GetFirstID('Amnaf_Psycheflayer'),
+        IMPERIAL_GEAR_OFFSET = GetFirstID('Imperial_Gear'),
+        NAJA_SALAHEEM        = GetFirstID('Naja_Salaheem'),
 
-        [59] =
-        {
-            RAZFAHD   = 17093143,
-            ALEXANDER = 17093144,
-            RAUBAHN   = 17093145,
-        },
+        -- Instance ID: 59 - Nashmeiras Plea
+        ALEXANDER = GetFirstID('Alexander'),
+        RAUBAHN   = GetFirstID('Raubahn'),
+        RAZFAHD   = GetFirstID('Razfahd'),
     },
 
     npc =
     {
-        TREASURE_COFFER =
-        {
-            17092611, 17092612, 17092614
-        },
-
-        TREASURE_CASKET =
-        {
-            17092609, 17092610, 17092613, 17092620
-        },
-
-        RUNE_OF_TRANSFER =
-        {
-            17093330, 17093331
-        },
-
         -- Nyzul Isle Investigation
-        RUNIC_LAMP_OFFSET   = GetFirstID('Runic_Lamp'),
-        _257                = GetFirstID('_257'),
-        _259                = GetFirstID('_259'),
-        RUNE_TRANSFER_START = GetFirstID('Rune_of_Transfer_Start'),
-        VENDING_BOX         = GetFirstID('Vending_Box'),
+        DOOR_OFFSET               = GetFirstID('_253'),
+        RUNE_OF_TRANSFER_OFFSET   = GetFirstID('Rune_of_Transfer'),
+        RUNE_OF_TRANSFER_ENTRANCE = GetFirstID('Rune_of_Transfer_Start'),
+        RUNIC_LAMP_OFFSET         = GetFirstID('Runic_Lamp'),
+        TREASURE_CASKET_OFFSET    = GetFirstID('Armoury_Crate_Casket'),
+        TREASURE_COFFER_OFFSET    = GetFirstID('Armoury_Crate_Coffer'),
+        VENDING_BOX               = GetFirstID('Vending_Box'),
 
         -- Other instances
-        WEATHER             = 17093424,
-        QM1                 = 17093473,
-        BLANK1              = 17093474,
-        BLANK2              = 17093475,
-        BLANK3              = 17093476,
-        NASHMEIRA1          = 17093477,
-        NASHMEIRA2          = 17093478,
-        RAZFAHD             = 17093479,
-        CSNPC1              = 17093480,
-        GHATSAD             = 17093481,
-        ALEXANDER           = 17093482,
-        CSNPC2              = 17093483,
+        WEATHER    = GetFirstID('_k5y'), -- Unused?
+
+        -- This NPCs aren't even enabled in the sql (pos 0, 0, 0). Leaving them here for now.
+        -- QM1        = GetFirstID('17093473'),
+        -- BLANK1     = GetFirstID('17093474'),
+        -- BLANK2     = GetFirstID('17093475'),
+        -- BLANK3     = GetFirstID('17093476'),
+        -- NASHMEIRA1 = GetFirstID('17093477'),
+        -- NASHMEIRA2 = GetFirstID('17093478'),
+        -- RAZFAHD    = GetFirstID('17093479'),
+        -- CSNPC1     = GetFirstID('17093480'),
+        -- GHATSAD    = GetFirstID('17093481'),
+        -- ALEXANDER  = GetFirstID('17093482'),
+        -- CSNPC2     = GetFirstID('17093483'),
     }
 }
 

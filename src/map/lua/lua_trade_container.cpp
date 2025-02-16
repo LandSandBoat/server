@@ -45,7 +45,7 @@ uint32 CLuaTradeContainer::getGil()
     return itemID == 0xFFFF ? m_pMyTradeContainer->getQuantity(0) : 0;
 }
 
-std::optional<CLuaItem> CLuaTradeContainer::getItem(sol::object const& SlotIDObj)
+auto CLuaTradeContainer::getItem(sol::object const& SlotIDObj) -> CItem*
 {
     uint8 SlotID = 0;
     if (SlotIDObj.is<uint8>())
@@ -53,12 +53,7 @@ std::optional<CLuaItem> CLuaTradeContainer::getItem(sol::object const& SlotIDObj
         SlotID = SlotIDObj.as<uint8>();
     }
 
-    if (auto PItem = m_pMyTradeContainer->getItem(SlotID))
-    {
-        return std::optional<CLuaItem>(PItem);
-    }
-
-    return std::nullopt;
+    return m_pMyTradeContainer->getItem(SlotID);
 }
 
 //======================================================//

@@ -25,6 +25,7 @@ zones[xi.zone.BUBURIMU_PENINSULA] =
         DIG_THROW_AWAY                 = 7278,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                   = 7280,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET             = 7346,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
+        FOUND_ITEM_WITH_EASE           = 7355,  -- It appears your chocobo found this item with ease.
         SONG_RUNES_DEFAULT             = 7385,  -- An old momument. A melancholy song of two separated lovers is written upon it.
         SONG_RUNES_REQUIRE             = 7399,  -- If only you had <item>, you could jot down the lyrics.
         SONG_RUNES_WRITING             = 7400,  -- You write down the lyrics on the <item>.

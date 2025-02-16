@@ -205,6 +205,7 @@ end
 xi.promyvion.receptacleOnMobInitialize = function(mob)
     mob:setAutoAttackEnabled(false) -- Receptacles only use TP moves.
     mob:addMod(xi.mod.DEF, 55)
+    -- mob:setMod(xi.mod.DESPAWN_TIME_REDUCTION, 10) -- TODO: Properly time in retail and then adjust timers for portal opening, decorations, etc...
 end
 
 xi.promyvion.receptacleOnMobSpawn = function(mob)

@@ -22,12 +22,39 @@
 #include "common/socket.h"
 
 #include "entities/baseentity.h"
+#include "entities/charentity.h"
 #include "position.h"
 
-CPositionPacket::CPositionPacket(CBaseEntity* PEntity)
+CPositionPacket::CPositionPacket(CBaseEntity* PEntity, position_t position, POSMODE mode)
 {
     this->setType(0x5B);
     this->setSize(0x1C);
+
+    // Doing this here prevents conflicts when the client receives the packet.
+    auto* PChar = dynamic_cast<CCharEntity*>(PEntity);
+    if (mode == POSMODE::NORMAL ||
+        mode == POSMODE::EVENT ||
+        mode == POSMODE::POP ||
+        mode == POSMODE::RESET ||
+        mode == POSMODE::MATERIALIZE)
+    {
+        PEntity->loc.p.x        = position.x;
+        PEntity->loc.p.y        = position.y;
+        PEntity->loc.p.z        = position.z;
+        PEntity->loc.p.rotation = position.rotation;
+        if (PChar && mode == POSMODE::RESET)
+        {
+            PChar->setLocked(false);
+        }
+    }
+    else if (mode == POSMODE::ROTATE)
+    {
+        PEntity->loc.p.rotation = position.rotation;
+    }
+    else if (PChar && (mode == POSMODE::LOCK || mode == POSMODE::UNLOCK))
+    {
+        PChar->setLocked(mode == POSMODE::LOCK);
+    }
 
     ref<float>(0x04) = PEntity->loc.p.x;
     ref<float>(0x08) = PEntity->loc.p.y;
@@ -36,4 +63,6 @@ CPositionPacket::CPositionPacket(CBaseEntity* PEntity)
 
     ref<uint32>(0x10) = PEntity->id;
     ref<uint16>(0x14) = PEntity->targid;
+
+    ref<uint8>(0x16) = static_cast<uint8>(mode);
 }

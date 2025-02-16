@@ -20,6 +20,7 @@ zones[xi.zone.EAST_SARUTABARUTA] =
         FISHING_MESSAGE_OFFSET        = 7224, -- You can't fish here.
         DIG_THROW_AWAY                = 7237, -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7239, -- You dig and you dig, but find nothing.
+        FOUND_ITEM_WITH_EASE          = 7314, -- It appears your chocobo found this item with ease.
         SIGNPOST_OFFSET               = 7394, -- Southeast: South Tower, Horutoto Ruins Southwest: Windurst Woods
         TABY_CANATAHEY_DIALOG         = 7404, -- This is the entrrrance to Windurst. Please maintain orderrrly conduct while you'rrre in town.
         HEIH_PORHIAAP_DIALOG          = 7405, -- These grrrasslands make up East Sarutabaruta. Lately the number of monsters has drrramatically increased, causing us all sorts of trrrouble.

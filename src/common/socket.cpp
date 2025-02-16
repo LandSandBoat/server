@@ -182,9 +182,9 @@ time_t stall_time = 60;
 int32 makeConnection(uint32 ip, uint16 port, int32 type)
 {
     TracyZoneScoped;
-    struct sockaddr_in remote_address
-    {
-    };
+
+    sockaddr_in remote_address{};
+
     int32 fd     = 0;
     int32 result = 0;
 
@@ -209,9 +209,7 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
         return -1;
     }
 
-    struct linger opt
-    {
-    };
+    linger opt{};
     opt.l_onoff  = 0; // SO_DONTLINGER
     opt.l_linger = 0; // Do not care
     if (sSetsockopt(fd, SOL_SOCKET, SO_LINGER, (char*)&opt, sizeof(opt)))
@@ -281,7 +279,7 @@ bool _vsocket_init()
     // NOTE: getrlimit and setrlimit have bogus behavior in cygwin.
     //       "Number of fds is virtually unlimited in cygwin" (sys/param.h)
     { // set socket limit to MAX_FD
-        struct rlimit rlp;
+        rlimit rlp;
         if (0 == getrlimit(RLIMIT_NOFILE, &rlp))
         {
             rlp.rlim_cur = MAX_FD;
@@ -321,7 +319,9 @@ std::string ip2str(uint32 ip)
     uint32 reversed_ip = htonl(ip);
     char   address[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &reversed_ip, address, INET_ADDRSTRLEN);
-    return fmt::format("{}", str(address));
+
+    // This is internal, so we can trust it.
+    return fmt::format("{}", asStringFromUntrustedSource(address));
 }
 
 uint32 str2ip(const char* ip_str)
@@ -332,12 +332,6 @@ uint32 str2ip(const char* ip_str)
     return ntohl(ip);
 }
 
-// Reorders bytes from network to little endian (Windows).
-// Neccessary for sending port numbers to the RO client until Gravity notices that they forgot ntohs() calls.
-uint16 ntows(uint16 netshort)
-{
-    return ((netshort & 0xFF) << 8) | ((netshort & 0xFF00) >> 8);
-}
 /*****************************************************************************/
 /*
  *
@@ -809,11 +803,9 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
 int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
 {
     TracyZoneScoped;
-    struct sockaddr_in server_address
-    {
-    };
-    int fd     = 0;
-    int result = 0;
+    sockaddr_in server_address{};
+    int         fd     = 0;
+    int         result = 0;
 
     fd = sSocket(AF_INET, SOCK_STREAM, 0);
 
@@ -1210,11 +1202,9 @@ void set_nonblocking(int fd, unsigned long yes)
 int32 makeBind_udp(uint32 ip, uint16 port)
 {
     TracyZoneScoped;
-    struct sockaddr_in server_address
-    {
-    };
-    int fd     = 0;
-    int result = 0;
+    sockaddr_in server_address{};
+    int         fd     = 0;
+    int         result = 0;
 
     fd = sSocket(AF_INET, SOCK_DGRAM, 0);
 

@@ -15,7 +15,7 @@ local prerequisites =
     [xi.job.BLM] = { log = xi.questLog.WINDURST, quest = xi.quest.id.windurst.RECOLLECTIONS              },
     [xi.job.RDM] = { log = xi.questLog.SANDORIA, quest = xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS      },
     [xi.job.THF] = { log = xi.questLog.WINDURST, quest = xi.quest.id.windurst.AS_THICK_AS_THIEVES        },
-    [xi.job.PLD] = { log = xi.questLog.SANDORIA, quest = xi.quest.id.sandoria.A_BOY_S_DREAM              },
+    [xi.job.PLD] = { log = xi.questLog.SANDORIA, quest = xi.quest.id.sandoria.A_BOYS_DREAM               },
     [xi.job.DRK] = { log = xi.questLog.BASTOK,   quest = xi.quest.id.bastok.DARK_PUPPET                  },
     [xi.job.BST] = { log = xi.questLog.JEUNO,    quest = xi.quest.id.jeuno.SCATTERED_INTO_SHADOW         },
     [xi.job.BRD] = { log = xi.questLog.JEUNO,    quest = xi.quest.id.jeuno.THE_REQUIEM                   },
@@ -28,7 +28,7 @@ local prerequisites =
 
 local function isFirstHandsQuest(player)
     for i = 0, 14 do
-        if player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + i) == xi.questStatus.QUEST_COMPLETED then
+        if player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.BORGHERTZS_WARRING_HANDS + i) == xi.questStatus.QUEST_COMPLETED then
             return false
         end
     end
@@ -46,7 +46,7 @@ entity.onTrigger = function(player, npc)
         player:getMainLvl() >= 50 and
         player:getCharVar('BorghertzAlreadyActiveWithJob') == 0 and
         player:getQuestStatus(prereq.log, prereq.quest) ~= xi.questStatus.QUEST_AVAILABLE and
-        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + mJob - 1) == xi.questStatus.QUEST_AVAILABLE
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.BORGHERTZS_WARRING_HANDS + mJob - 1) == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(155)
     elseif
@@ -77,7 +77,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 155 then
         local mJob = player:getMainJob()
 
-        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + mJob - 1)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.BORGHERTZS_WARRING_HANDS + mJob - 1)
         player:setCharVar('BorghertzAlreadyActiveWithJob', mJob)
     end
 end

@@ -23,8 +23,7 @@ entity.onTrigger = function(player, npc)
         SpawnMob(ID.mob.TSUCHIGUMO_OFFSET):updateClaim(player)
         SpawnMob(ID.mob.TSUCHIGUMO_OFFSET + 1):updateClaim(player)
     elseif twentyInPirateYearsCS == 3 and tsuchigumoKilled >= 2 then
-        player:addKeyItem(xi.ki.TRICK_BOX)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TRICK_BOX)
+        npcUtil.giveKeyItem(player, xi.ki.TRICK_BOX)
         player:setCharVar('twentyInPirateYearsCS', 4)
         player:setCharVar('TsuchigumoKilled', 0)
     end

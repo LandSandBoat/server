@@ -5518,7 +5518,7 @@ INSERT INTO `item_equipment` VALUES (15761,'chariot_band',1,0,4194303,0,0,0,2457
 INSERT INTO `item_equipment` VALUES (15762,'empress_band',1,0,4194303,0,0,0,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15763,'emperor_band',1,0,4194303,0,0,0,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15769,'olduum_ring',60,0,4194303,0,0,0,24576,0,0,0);
-INSERT INTO `item_equipment` VALUES (15770,'random_ring',60,0,4194303,0,0,0,24576,0,0,0);
+INSERT INTO `item_equipment` VALUES (15770,'random_ring',60,0,4194303,0,0,5,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15771,'shining_ring',71,0,4194303,0,0,0,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15772,'scintillant_ring',71,0,4194303,0,0,0,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15773,'imperial_ring',50,0,4194303,0,0,0,24576,0,0,0);
@@ -11343,6 +11343,7 @@ INSERT INTO `item_equipment` VALUES (23282,'horos_tights_+2',99,119,262144,304,0
 INSERT INTO `item_equipment` VALUES (23283,'peda._pants_+2',99,119,524288,215,0,0,128,0,0,0);
 INSERT INTO `item_equipment` VALUES (23284,'bagua_pants_+2',99,119,1048576,310,0,0,128,0,0,0);
 INSERT INTO `item_equipment` VALUES (23285,'futhark_trousers_+2',99,119,2097152,339,0,0,128,0,0,0);
+INSERT INTO `item_equipment` VALUES (23303,'kara._pantaloni_+2',99,119,131072,299,0,0,128,0,0,0);
 INSERT INTO `item_equipment` VALUES (23308,'pumm._calligae_+2',99,119,1,64,0,0,256,0,0,0);
 INSERT INTO `item_equipment` VALUES (23309,'anch._gaiters_+2',99,119,2,66,0,0,256,0,0,0);
 INSERT INTO `item_equipment` VALUES (23310,'theo._duckbills_+2',99,119,4,68,0,0,256,0,0,0);

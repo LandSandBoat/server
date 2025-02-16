@@ -34,6 +34,19 @@ zones[xi.zone.TEMENOS] =
         CANNOT_OPEN_CHEST             = 7572, -- You cannot open the treasure chest now.
         GATE_OPEN                     = 7573, -- he gate opens...
     },
+    mob =
+    {
+    },
+    npc =
+    {
+        C1_LOOT_CRATE = GetFirstID('C1_Loot_Crate'),
+        C2_LOOT_CRATE = GetFirstID('C2_Loot_Crate'),
+        C3_LOOT_CRATE = GetFirstID('C3_Loot_Crate'),
+        C4_LOOT_CRATE = GetFirstID('C4_Loot_Crate'),
+        CB_LOOT_CRATE = GetFirstID('CB_Loot_Crate'),
+        N_LOOT_CRATE  = GetFirstID('N_Loot_Crate'),
+        W_LOOT_CRATE  = GetFirstID('W_Loot_Crate'),
+    },
 
     TEMENOS_NORTHERN_TOWER =
     {
@@ -90,8 +103,6 @@ zones[xi.zone.TEMENOS] =
                 16928806,
                 16928813,
             },
-
-            LOOT_CRATE = 16928830,
         },
 
         LINKED_CRATES =
@@ -149,7 +160,6 @@ zones[xi.zone.TEMENOS] =
                 16928940,
                 16928949,
             },
-            LOOT_CRATE = 16928958,
         },
     },
 
@@ -186,35 +196,10 @@ zones[xi.zone.TEMENOS] =
         },
     },
 
-    CENTRAL_TEMENOS_1ST_FLOOR =
-    {
-        npc =
-        {
-            LOOT_CRATE = 16929045,
-        }
-    },
-
-    CENTRAL_TEMENOS_2ND_FLOOR =
-    {
-        npc =
-        {
-            LOOT_CRATE = 16929029,
-        }
-    },
-
-    CENTRAL_TEMENOS_3RD_FLOOR =
-    {
-        npc =
-        {
-            LOOT_CRATE = 16929004,
-        }
-    },
-
     CENTRAL_TEMENOS_4TH_FLOOR =
     {
         npc =
         {
-            LOOT_CRATE = 16928965,
             GROUPS =
             {
                 { offset = 16928967, count = 4 },
@@ -231,14 +216,6 @@ zones[xi.zone.TEMENOS] =
                 { offset = 16928997, count = 7 },
             },
         },
-    },
-
-    CENTRAL_TEMENOS_BASEMENT =
-    {
-        npc =
-        {
-            LOOT_CRATE = 16929052,
-        }
     },
 }
 

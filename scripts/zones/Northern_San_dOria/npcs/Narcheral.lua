@@ -26,7 +26,7 @@ entity.onTrade = function(player, npc, trade)
             -- Trade Yagudo Holy Water & Moccasins
             player:startEvent(691) -- Finish quest "Prelude of Black and White"
         end
-    elseif player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION) == xi.questStatus.QUEST_ACCEPTED then
+    elseif player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJES_DECISION) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.TAVNAZIAN_MASK, 1) and
             trade:getItemCount() == 1
@@ -87,7 +87,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.HEALERS_BLIAUT) -- Healer's Bliaut
             player:tradeComplete()
             player:addFame(xi.fameArea.SANDORIA, 60)
-            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION)
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJES_DECISION)
         end
     end
 end

@@ -142,8 +142,8 @@ bool CWeaponSkillState::Update(time_point tick)
                 uint32 weaponskillVar    = PTarget->GetLocalVar("weaponskillHit");
                 uint32 weaponskillDamage = weaponskillVar & 0xFFFFFF;
 
-                m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), m_PSkill->getID(), m_spent, CLuaAction(&action), weaponskillDamage);
-                PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(m_PEntity), m_PSkill->getID(), m_spent, CLuaAction(&action));
+                m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", m_PEntity, PTarget, m_PSkill->getID(), m_spent, &action, weaponskillDamage);
+                PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", PTarget, m_PEntity, m_PSkill->getID(), m_spent, &action);
 
                 if (m_PEntity->objtype == TYPE_PC)
                 {
@@ -190,7 +190,7 @@ bool CWeaponSkillState::Update(time_point tick)
             CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
             PChar->m_charHistory.wsUsed++;
         }
-        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
+        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
         return true;
     }
     return false;

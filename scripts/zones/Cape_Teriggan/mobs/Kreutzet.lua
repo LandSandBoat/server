@@ -6,9 +6,10 @@
 local entity = {}
 
 entity.onMobRoam = function(mob)
+    local weather = mob:getWeather()
     if
-        mob:getWeather() ~= xi.weather.WIND and
-        mob:getWeather() ~= xi.weather.GALES
+        weather ~= xi.weather.WIND and
+        weather ~= xi.weather.GALES
     then
         DespawnMob(mob:getID())
     end
@@ -28,18 +29,6 @@ entity.onMobWeaponSkill = function(target, mob, skill)
             mob:useMobAbility(926)
         end
     end
-end
-
-entity.onMobDisengage = function(mob)
-    if
-        mob:getWeather() ~= xi.weather.WIND and
-        mob:getWeather() ~= xi.weather.GALES
-    then
-        DespawnMob(mob:getID())
-    end
-end
-
-entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

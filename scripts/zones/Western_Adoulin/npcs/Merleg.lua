@@ -4,8 +4,6 @@
 -- Starts, Involved with, and Finishes Quest: 'A Pioneers Best (Imaginary) Friend'
 -- !pos 34 0 -131 256
 -----------------------------------
-local ID = zones[xi.zone.WESTERN_ADOULIN]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -36,10 +34,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         -- Finishing Quest: 'A Pioneers Best (Imaginary) Friend'
         player:completeQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
         player:addExp(500 * xi.settings.main.EXP_RATE)
-        player:addCurrency('bayld', 200 * xi.settings.main.BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 200 * xi.settings.main.BAYLD_RATE)
-        player:addKeyItem(xi.ki.FAIL_BADGE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FAIL_BADGE)
+        npcUtil.giveCurrency(player, 'bayld', 200)
+        npcUtil.giveKeyItem(player, xi.ki.FAIL_BADGE)
 
         -- TODO: Verify fame value added
         player:addFame(xi.fameArea.ADOULIN, 30)

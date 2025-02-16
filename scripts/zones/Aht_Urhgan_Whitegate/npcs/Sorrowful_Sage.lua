@@ -4,8 +4,6 @@
 -- Type: Assault Mission Giver
 -- !pos 134.096 0.161 -30.401 50
 -----------------------------------
-local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -52,8 +50,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             -- taken assault mission
             player:addAssault(bit.rshift(option, 4))
             player:delKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)
-            player:addKeyItem(xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
+            npcUtil.giveKeyItem(player, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
         end
     end
 end

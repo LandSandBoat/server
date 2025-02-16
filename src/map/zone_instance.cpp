@@ -352,26 +352,6 @@ void CZoneInstance::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
     }
 }
 
-void CZoneInstance::UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
-{
-    TracyZoneScoped;
-
-    if (PChar)
-    {
-        if (PChar->PInstance)
-        {
-            PChar->PInstance->UpdateCharPacket(PChar, type, updatemask);
-        }
-    }
-    else
-    {
-        for (const auto& PInstance : m_InstanceList)
-        {
-            PInstance->UpdateCharPacket(PChar, type, updatemask);
-        }
-    }
-}
-
 void CZoneInstance::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude)
 {
     TracyZoneScoped;
@@ -443,29 +423,31 @@ void CZoneInstance::CheckTriggerAreas()
             // TODO: When we start to use octrees or spatial hashing to split up zones,
             //     : use them here to make the search domain smaller.
 
-            uint32 triggerAreaID = 0;
+            // Do not enter trigger areas while loading in. Set in xi.player.onGameIn
+            if (PChar->GetLocalVar("ZoningIn") > 0)
+            {
+                return;
+            }
+
             for (const auto& triggerArea : m_triggerAreaList)
             {
+                const auto triggerAreaID = triggerArea->getTriggerAreaID();
                 if (triggerArea->isPointInside(PChar->loc.p))
                 {
-                    triggerAreaID = triggerArea->GetTriggerAreaID();
-
-                    if (triggerArea->GetTriggerAreaID() != PChar->m_InsideTriggerAreaID)
+                    if (!PChar->isInTriggerArea(triggerAreaID))
                     {
+                        // Add the TriggerArea to the players cache of current TriggerAreas
+                        PChar->onTriggerAreaEnter(triggerAreaID);
                         luautils::OnTriggerAreaEnter(PChar, triggerArea);
                     }
-
-                    if (PChar->m_InsideTriggerAreaID == 0)
-                    {
-                        break;
-                    }
                 }
-                else if (triggerArea->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
+                else if (PChar->isInTriggerArea(triggerAreaID))
                 {
+                    // Remove the TriggerArea from the players cache of current TriggerAreas
+                    PChar->onTriggerAreaLeave(triggerAreaID);
                     luautils::OnTriggerAreaLeave(PChar, triggerArea);
                 }
             }
-            PChar->m_InsideTriggerAreaID = triggerAreaID;
         });
         // clang-format on
     }

@@ -136,22 +136,22 @@ xi.instance.lookup =
 
     [xi.zone.ZHAYOLM_REMNANTS] =
     {
-        -- Salvage
+        { 7300, { 407, 0, -6, 0, 0, 7 }, { 407, 4 }, { 411, 7 } }, -- Salvage I, Zhayolm Remnants
     },
 
     [xi.zone.ARRAPAGO_REMNANTS] =
     {
-        -- Salvage
+        { 7400, { 408, 0, -6, 0, 0, 8 }, { 408, 4 }, { 411, 8 } }, -- Salvage I, Arrapago Remnants
     },
 
     [xi.zone.BHAFLAU_REMNANTS] =
     {
-        -- Salvage
+        { 7500, { 409, 0, -6, 0, 0, 9 }, { 409, 4 }, { 411, 9 } }, -- Salvage I, Bhaflau Remnants
     },
 
     [xi.zone.SILVER_SEA_REMNANTS] =
     {
-        -- Salvage
+        { 7600, { 410, 0, -6, 0, 0, 10 }, { 410, 4 }, { 411, 10 } }, -- Salvage I, Silver Sea Remnants
     },
 
     [xi.zone.NYZUL_ISLE] =

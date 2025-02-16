@@ -28,6 +28,7 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
         DIG_THROW_AWAY                = 7579,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7581,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7647,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
+        FOUND_ITEM_WITH_EASE          = 7656,  -- It appears your chocobo found this item with ease.
         AIR_HAS_SUDDENLY_CHANGED      = 7748,  -- The air around you has suddenly changed!
         SOMETHING_BETTER              = 7749,  -- Don't you have something better to do right now?
         CANNOT_REMOVE_FRAG            = 7752,  -- It is an oddly shaped stone monument. A shining stone is embedded in it, but cannot be removed...

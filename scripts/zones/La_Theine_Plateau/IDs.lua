@@ -22,6 +22,7 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
         FISHING_MESSAGE_OFFSET        = 7228,  -- You can't fish here.
         DIG_THROW_AWAY                = 7241,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7243,  -- You dig and you dig, but find nothing.
+        FOUND_ITEM_WITH_EASE          = 7318,  -- It appears your chocobo found this item with ease.
         RESCUE_DRILL                  = 7400,  -- Rescue drills in progress. Try to stay out of the way.
         FAURBELLANT_1                 = 7440,  -- Greetings. traveler. Sorry, I've little time to chat. I must focus on my prayer.
         FAURBELLANT_2                 = 7441,  -- Ah, the <item>! Thank you for making such a long journey to bring this! May the Gates of Paradise open to all.

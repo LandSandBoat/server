@@ -111,7 +111,8 @@ std::unique_ptr<ConsoleService> gConsoleService;
 #else
 sigfunc* compat_signal(int signo, sigfunc* func)
 {
-    struct sigaction sact, oact;
+    sigaction sact;
+    sigaction oact;
 
     sact.sa_handler = func;
     sigemptyset(&sact.sa_mask);

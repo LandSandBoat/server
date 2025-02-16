@@ -15,8 +15,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- TODO: verify exact number of hits from this ability
     local numhits = 2
     local accmod = 1
-    local dmgmod = 0.3
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, mob:getWeaponDmg() * dmgmod, xi.mobskills.physicalTpBonus.NO_EFFECT)
+    local ftp    = 0.3
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, mob:getWeaponDmg() * ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BURN, 1, 0, 20)

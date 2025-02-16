@@ -7,7 +7,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local twinstoneBonding = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING)
-    local mihgosAmigo = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
+    local mihgosAmigo = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGOS_AMIGO)
 
     if twinstoneBonding == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(492, 0, 13360)

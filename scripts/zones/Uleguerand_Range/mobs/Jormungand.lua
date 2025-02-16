@@ -59,29 +59,73 @@ local spawnPoints =
     { x = -204.299, y = -176.740, z = 133.447 },
 }
 
-local function setupFlightMode(mob, battleTime)
+local function enterFlight(mob)
     mob:setAnimationSub(1)
     mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
     mob:setMobSkillAttack(732)
-    mob:setLocalVar('changeTime', battleTime)
+    mob:setLocalVar('flightTime', os.time() + 30)
+    mob:setLocalVar('changeHP', mob:getHP() - 6000)
 end
 
 entity.onMobInitialize = function(mob)
     mob:setCarefulPathing(true)
 
     xi.mob.updateNMSpawnPoint(mob, spawnPoints)
-    mob:setRespawnTime(math.random(86400, 259200)) -- When server restarts, reset timer
+    mob:setRespawnTime(math.random(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
 end
 
 entity.onMobSpawn = function(mob)
-    -- Reset animation so it starts grounded.
-    mob:setMobSkillAttack(0)
+    -- Ensure Jorm spawns with correct ground status
     mob:setAnimationSub(0)
+    mob:setMobSkillAttack(0)
+    mob:delStatusEffect(xi.effect.ALL_MISS)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+
+    mob:setMod(xi.mod.ATT, 348)
+    mob:setMod(xi.mod.ACC, 442)
+    mob:setMod(xi.mod.CURSE_MEVA, 1000) -- TODO: Needs curse immunity verification
+    mob:setMod(xi.mod.DEF, 460)
+    mob:setMod(xi.mod.EVA, 410)
+    mob:setMod(xi.mod.MATT, 30)
+    mob:setMod(xi.mod.REFRESH, 200)
+    mob:setMod(xi.mod.REGEN, 22)
+    mob:setMod(xi.mod.UFASTCAST, 90)
+    mob:setMod(xi.mod.UDMGMAGIC, -5000)
+    mob:setMod(xi.mod.UDMGRANGE, -5000)
+    mob:setMod(xi.mod.UDMGBREATH, -5000)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
+    mob:setMobMod(xi.mobMod.ROAM_COOL, 55)
+    mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 5)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 158) -- 255 total weapon damage
+    mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.PARALYZE)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.PLAGUE)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.TERROR)
 end
 
 entity.onMobRoam = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+end
+
+entity.onMobEngage = function(mob, target)
+    local flightTime = mob:getLocalVar('flightTime')
+
+    -- Set flight time to two min if fresh spawn
+    if flightTime == 0 then
+        mob:setLocalVar('flightTime', os.time() + 30)
+    -- Otherwise, set how many seconds left to fly from last pull
+    else
+        mob:setLocalVar('flightTime', os.time() + flightTime)
+    end
+
+    mob:setLocalVar('twohourTime', os.time() + 210)
+    mob:setLocalVar('changeHP', mob:getHP() - 6000)
 end
 
 entity.onMobFight = function(mob, target)
@@ -90,44 +134,40 @@ entity.onMobFight = function(mob, target)
         not mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and
         mob:actionQueueEmpty()
     then
-        local changeTime  = mob:getLocalVar('changeTime')
+        local flightTime  = mob:getLocalVar('flightTime')
         local twohourTime = mob:getLocalVar('twohourTime')
-        local battleTime  = mob:getBattleTime()
+        local changeHP    = mob:getLocalVar('changeHP')
         local animation   = mob:getAnimationSub()
-
-        if twohourTime == 0 then
-            twohourTime = math.random(8, 14)
-            mob:setLocalVar('twohourTime', twohourTime)
-        end
 
         -- Initial grounded mode.
         if
             animation == 0 and
-            battleTime - changeTime > 60
+            (os.time() > flightTime and mob:getHP() < changeHP)
         then
-            setupFlightMode(mob, battleTime)
+            enterFlight(mob)
 
         -- Flight mode.
-        -- TODO: Verify if sleep is broken on phase change.  Previous confirmation of
-        -- being able to sleep while mid-air.
-
         elseif
             animation == 1 and
-            battleTime - changeTime > 30 and
+            (os.time() > flightTime and mob:getHP() < changeHP) and
             mob:checkDistance(target) <= 6 -- This 2 checks are a hack until we can handle skills targeting a position and not an entity.
         then
-            mob:useMobAbility(1292) -- This ability also handles animation change to 2.
-
-            mob:setLocalVar('changeTime', battleTime)
+            mob:useMobAbility(1292) -- Touchdown: This ability also handles animation change to 2.
+            mob:setLocalVar('flightTime', os.time() + 60)
+            mob:setLocalVar('changeHP', mob:getHP() - 6000)
 
         -- Subsequent grounded mode.
         elseif animation == 2 then
-            if battleTime / 15 > twohourTime then -- 2-Hour logic.
-                mob:useMobAbility(695)
-                mob:setLocalVar('twohourTime', battleTime / 15 + 20)
+             -- 2-Hour logic.
+            if os.time() > twohourTime then
+                mob:useMobAbility(695) -- Blood Weapon
+                mob:setLocalVar('twohourTime', os.time() + 300)
 
-            elseif battleTime - changeTime > 60 then -- Change mode.
-                setupFlightMode(mob, battleTime)
+            elseif
+                os.time() > flightTime or
+                mob:getHP() < changeHP
+            then
+                enterFlight(mob)
             end
         end
     end
@@ -153,20 +193,69 @@ entity.onMobFight = function(mob, target)
             mob:setMobMod(xi.mobMod.NO_MOVE, 0)
         end
     end
+
+    -- Do not use mobskills or magic during 2hr
+    if mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) then
+        mob:setMobAbilityEnabled(false)
+        mob:setMagicCastingEnabled(false)
+    else
+        mob:setMobAbilityEnabled(true)
+        mob:setMagicCastingEnabled(true)
+    end
+end
+
+entity.onMobWeaponSkillPrepare = function(mob, target)
+    if mob:getAnimationSub() == 1 then
+        mob:setLocalVar('skill_tp', mob:getTP())
+    end
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    if skill:getID() == 1296 and mob:getHPP() <= 30 then
-        local roarCounter = mob:getLocalVar('roarCounter')
+    -- Don't lose TP from autos during flight
+    if skill:getID() == 1288 then
+        mob:addTP(64) -- Needs to gain TP from flight auto attacks
+        mob:setLocalVar('skill_tp', 0)
+    elseif skill:getID() == 1292 then -- Don't lose TP from Touchdown
+        mob:addTP(mob:getLocalVar('skill_tp'))
+        mob:setLocalVar('skill_tp', 0)
+    end
 
-        roarCounter = roarCounter + 1
-        mob:setLocalVar('roarCounter', roarCounter)
+    -- Below 25% Jorm can Horrid Roar 3x
+    local roarCount = mob:getLocalVar('roarCount')
 
-        if roarCounter > 2 then
-            mob:setLocalVar('roarCounter', 0)
+    if
+        mob:getHPP() <= 25 and
+        skill:getID() == 1296 and -- Check for Horrid Roar
+        (mob:getAnimationSub() == 0 or mob:getAnimationSub() == 2) -- If it flies during horrid roar cancel the remainders
+    then
+        if roarCount < 2 then
+            if not target:isBehind(mob, 96) then
+                mob:useMobAbility(1286) -- Use Horrid Roar 3
+            else
+                mob:useMobAbility(1290) -- Use Spike Flail
+            end
+
+            mob:setLocalVar('roarCount', roarCount + 1)
         else
-            mob:useMobAbility(1296)
+            mob:setLocalVar('roarCount', 0) -- Need to reset once 3x roars are done
         end
+    end
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENBLIZZARD, { chance = 20, power = 100 })
+end
+
+entity.onMobDisengage = function(mob)
+    -- Reset Jorm back to the ground on wipe
+    if mob:getAnimationSub() == 1 then
+        local flightTime = mob:getLocalVar('flightTime')
+        mob:setLocalVar('flightTime', flightTime - os.time()) -- Get seconds left to fly for next pull
+        mob:setAnimationSub(0)
+        mob:delStatusEffect(xi.effect.ALL_MISS)
+        mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
+        mob:setMobSkillAttack(0)
+        mob:setLocalVar('changeHP', 0)
     end
 end
 
@@ -176,7 +265,7 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob, spawnPoints)
-    mob:setRespawnTime(math.random(259200, 432000)) -- 3 to 5 days
+    mob:setRespawnTime(math.random(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
 end
 
 return entity

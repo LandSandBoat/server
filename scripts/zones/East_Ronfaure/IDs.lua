@@ -22,6 +22,7 @@ zones[xi.zone.EAST_RONFAURE] =
         FISHING_MESSAGE_OFFSET        = 7246,  -- You can't fish here.
         DIG_THROW_AWAY                = 7259,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7261,  -- You dig and you dig, but find nothing.
+        FOUND_ITEM_WITH_EASE          = 7336,  -- It appears your chocobo found this item with ease.
         RAYOCHINDOT_DIALOG            = 7426,  -- If you are outmatched, run to the city as quickly as you can.
         CROTEILLARD_DIALOG            = 7427,  -- Sorry, no chatting while I'm on duty.
         ANDELAIN_DIALOG               = 7428,  -- My name is Andelain. As part of my devotions, I come here each day to pray.

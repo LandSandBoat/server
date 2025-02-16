@@ -24,6 +24,7 @@ zones[xi.zone.BATALLIA_DOWNS] =
         FISHING_MESSAGE_OFFSET        = 7246,  -- You can't fish here.
         DIG_THROW_AWAY                = 7259,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7261,  -- You dig and you dig, but find nothing.
+        FOUND_ITEM_WITH_EASE          = 7336,  -- It appears your chocobo found this item with ease.
         SPARKLING_LIGHT               = 7355,  -- The ground is sparkling with a strange light.
         SENSE_SOMETHING_LURKING       = 7445,  -- You sense something lurking close by!
         NO_GRASS_GROWING_HERE         = 7494,  -- There is no grass growing here...

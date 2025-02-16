@@ -21,6 +21,7 @@ zones[xi.zone.WEST_RONFAURE] =
         FISHING_MESSAGE_OFFSET        = 7246,  -- You can't fish here.
         DIG_THROW_AWAY                = 7259,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7261,  -- You dig and you dig, but find nothing.
+        FOUND_ITEM_WITH_EASE          = 7336,  -- It appears your chocobo found this item with ease.
         RAMAUFONT_DIALOG              = 7346,  -- Nothing to report.
         GACHEMAGE_DIALOG              = 7347,  -- Orcish scouts lurk in the shadows. Consider yourself warned!
         ADALEFONT_DIALOG              = 7348,  -- If you sense danger, just flee into the city. I'll not endanger myself on your account!

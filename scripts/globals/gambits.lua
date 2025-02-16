@@ -113,6 +113,9 @@ ai.select =
     BEST_INDI           = 10,
     STORM_DAY           = 11,
     HELIX_DAY           = 12,
+    EN_MOB_WEAKNESS     = 13,
+    STORM_MOB_WEAKNESS  = 14,
+    HELIX_MOB_WEAKNESS  = 15,
 }
 ai.s = ai.select
 

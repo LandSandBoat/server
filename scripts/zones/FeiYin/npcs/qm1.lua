@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION) == xi.questStatus.QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJES_DECISION) == xi.questStatus.QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, xi.item.TAVNAZIA_BELL) and
         not player:hasItem(xi.item.TAVNAZIAN_MASK) and
         not GetMobByID(ID.mob.ALTEDOUR_I_TAVNAZIA):isSpawned()

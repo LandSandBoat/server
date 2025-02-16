@@ -237,7 +237,7 @@ bool CAutomatonController::TryAction()
     if (m_Tick > m_LastActionTime + (m_actionCooldown - std::chrono::milliseconds(PAutomaton->getMod(Mod::AUTO_DECISION_DELAY) * 10)))
     {
         m_LastActionTime = m_Tick;
-        PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_AI_TICK", CLuaBaseEntity(PAutomaton), CLuaBaseEntity(PTarget));
+        PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_AI_TICK", PAutomaton, PTarget);
 
         return true;
     }
@@ -1594,7 +1594,7 @@ bool CAutomatonController::TryAttachment()
         return false;
     }
 
-    PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_ATTACHMENT_CHECK", CLuaBaseEntity(PAutomaton), CLuaBaseEntity(PTarget));
+    PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_ATTACHMENT_CHECK", PAutomaton, PTarget);
 
     return false;
 }

@@ -14,6 +14,9 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.PARALYZE)
 end
 
 entity.onMobRoam = function(mob)

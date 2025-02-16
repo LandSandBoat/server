@@ -186,9 +186,9 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
         return false;
     }
 
-    std::string query = "SELECT sandoria_influence, bastok_influence, windurst_influence, beastmen_influence FROM conquest_system WHERE region_id = %d";
+    std::string query = "SELECT sandoria_influence, bastok_influence, windurst_influence, beastmen_influence FROM conquest_system WHERE region_id = ?";
 
-    auto rset = db::query(query.c_str(), static_cast<uint8>(region));
+    auto rset = db::preparedStmt(query.c_str(), static_cast<uint8>(region));
     if (!rset || rset->rowsCount() == 0 || !rset->next())
     {
         return false;
@@ -221,9 +221,9 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
 
     influences[nation] += lost;
 
-    auto rset2 = db::query("UPDATE conquest_system SET sandoria_influence = %d, bastok_influence = %d, "
-                           "windurst_influence = %d, beastmen_influence = %d WHERE region_id = %u",
-                           influences[0], influences[1], influences[2], influences[3], static_cast<uint8>(region));
+    auto rset2 = db::preparedStmt("UPDATE conquest_system SET sandoria_influence = ?, bastok_influence = ?, "
+                                  "windurst_influence = ?, beastmen_influence = ? WHERE region_id = ?",
+                                  influences[0], influences[1], influences[2], influences[3], static_cast<uint8>(region));
 
     return !rset2;
 }
@@ -236,13 +236,13 @@ void ConquestSystem::updateWeekConquest()
     sendTallyStartMsg();
 
     // 2- Do the actual db update
-    auto query = "UPDATE conquest_system SET region_control = \
-                            IF(sandoria_influence > bastok_influence AND sandoria_influence > windurst_influence AND \
-                            sandoria_influence > beastmen_influence, 0, \
-                            IF(bastok_influence > sandoria_influence AND bastok_influence > windurst_influence AND \
-                            bastok_influence > beastmen_influence, 1, \
-                            IF(windurst_influence > bastok_influence AND windurst_influence > sandoria_influence AND \
-                            windurst_influence > beastmen_influence, 2, 3)))";
+    auto query = "UPDATE conquest_system SET region_control = "
+                 "IF(sandoria_influence > bastok_influence AND sandoria_influence > windurst_influence AND "
+                 "sandoria_influence > beastmen_influence, 0, "
+                 "IF(bastok_influence > sandoria_influence AND bastok_influence > windurst_influence AND "
+                 "bastok_influence > beastmen_influence, 1, "
+                 "IF(windurst_influence > bastok_influence AND windurst_influence > sandoria_influence AND "
+                 "windurst_influence > beastmen_influence, 2, 3)))";
 
     auto rset = db::preparedStmt(query);
     if (!rset)

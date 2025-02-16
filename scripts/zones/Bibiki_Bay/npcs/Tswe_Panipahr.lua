@@ -29,12 +29,10 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 35 then
         if option == 1 then
             player:delGil(80)
-            player:addKeyItem(xi.ki.MANACLIPPER_TICKET)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MANACLIPPER_TICKET)
+            npcUtil.giveKeyItem(player, xi.ki.MANACLIPPER_TICKET)
         elseif option == 2 then
             player:delGil(500)
-            player:addKeyItem(xi.ki.MANACLIPPER_MULTI_TICKET)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MANACLIPPER_MULTI_TICKET)
+            npcUtil.giveKeyItem(player, xi.ki.MANACLIPPER_MULTI_TICKET)
             player:setCharVar('Manaclipper_Ticket', 10)
         end
     end

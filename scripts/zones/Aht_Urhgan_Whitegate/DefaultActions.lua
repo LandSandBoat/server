@@ -9,6 +9,7 @@ return {
     ['Burnished_Bones']    = { event = 228 },
     ['Cacaroon']           = { event = 248 },
     ['Dhima_Polevhia']     = { event = 788 },
+    ['Ekhu_Pesshyadha']    = { event = 532 },
     ['Esoteric_Hound']     = { event = 229 },
     ['Fari-Wari']          = { event = 831 },
     ['Furious_Boulder']    = { event = 230 },

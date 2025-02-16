@@ -37,7 +37,6 @@
 
 namespace xi
 {
-
     // A wrapper around std::optional to allow usage of object.apply([](auto& obj) { ... });
     // https://en.cppreference.com/w/cpp/utility/optional
     template <typename T>
@@ -45,10 +44,22 @@ namespace xi
     {
     public:
         constexpr optional() = default;
-        constexpr explicit optional(std::nullopt_t) noexcept
+
+        constexpr optional(std::nullopt_t) noexcept
         : m_value(std::nullopt)
         {
         }
+
+        constexpr optional(T&& value)
+        : m_value(std::forward<T>(value))
+        {
+        }
+
+        constexpr optional(const T& value)
+        : m_value(value)
+        {
+        }
+
         constexpr optional(const optional& other)                = default;
         constexpr optional(optional&& other) noexcept            = default;
         constexpr optional& operator=(const optional& other)     = default;
@@ -68,21 +79,23 @@ namespace xi
         }
 
         template <typename F>
-        constexpr void apply(F&& f) &
+        constexpr bool apply(F&& f) &
         {
             if (m_value)
             {
                 f(*m_value);
             }
+            return m_value.has_value();
         }
 
         template <typename F>
-        constexpr void apply(F&& f) const&
+        constexpr bool apply(F&& f) const&
         {
             if (m_value)
             {
                 f(*m_value);
             }
+            return m_value.has_value();
         }
 
         constexpr explicit operator bool() const noexcept
@@ -132,7 +145,7 @@ namespace xi
         }
 
     private:
-        std::optional<T> m_value;
+        std::optional<T> m_value = std::nullopt;
     };
 
     // TODO: A wrapper around std::variant to allow usage of:

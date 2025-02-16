@@ -23,6 +23,7 @@ zones[xi.zone.TAHRONGI_CANYON] =
         DIG_THROW_AWAY                = 7259,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7261,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7327,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
+        FOUND_ITEM_WITH_EASE          = 7336,  -- It appears your chocobo found this item with ease.
         ALREADY_OBTAINED_TELE         = 7346,  -- You already possess the gate crystal for this telepoint.
         TELEPOINT_DISAPPEARED         = 7347,  -- The telepoint has disappeared...
         SIGN_1                        = 7421,  -- North: Meriphataud Mountains Northeast: Crag of Mea South: East Sarutabaruta

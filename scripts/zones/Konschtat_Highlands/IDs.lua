@@ -23,6 +23,7 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
         DIG_THROW_AWAY                = 7241,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7243,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7309,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
+        FOUND_ITEM_WITH_EASE          = 7318,  -- It appears your chocobo found this item with ease.
         SIGNPOST3                     = 7399,  -- North: Valkurm Dunes South: North Gustaberg East: Gusgen Mines, Pashhow Marshlands
         SIGNPOST2                     = 7400,  -- North: Pashhow Marshlands West: Valkurm Dunes, North Gustaberg Southeast: Gusgen Mines
         SIGNPOST_DIALOG_1             = 7401,  -- North: Valkurm Dunes South: To Gustaberg

@@ -63,11 +63,9 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
         player:setCharVar('TrialByWater_date', 0)
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_WATER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WATER)
+        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_WATER)
     elseif csid == 190 then
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_WATER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WATER)
+        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_WATER)
     elseif csid == 112 then
         local item = 0
         if option == 1 then

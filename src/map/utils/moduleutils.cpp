@@ -286,34 +286,30 @@ namespace moduleutils
         {
             if (!override.applied)
             {
-                auto firstElem = override.nameParts.front();
-                auto lastTable = override.nameParts.size() < 2 ? firstElem : *(override.nameParts.end() - 2);
-                auto lastElem  = override.nameParts.back();
-
                 sol::table table = lua["_G"];
                 for (auto& part : override.nameParts)
                 {
-                    table = table[part].get_or<sol::table>(sol::lua_nil);
-                    if (table == sol::lua_nil)
-                    {
-                        break;
-                    }
-
-                    if (part == lastTable)
+                    if (part == override.nameParts.back())
                     {
                         DebugModules(fmt::format("Applying override: {}", override.overrideName));
 
-                        if (table[lastElem] == sol::lua_nil)
+                        if (table[override.nameParts.back()] == sol::lua_nil)
                         {
                             DebugModules("Inserting empty function to override for: %s (%s)", override.overrideName, override.filename);
-                            table[lastElem] = []() {};
+                            table[override.nameParts.back()] = []() {};
                         }
 
                         // Function defined in LoadLuaModules()
-                        lua["applyOverride"](table, lastElem, override.func, override.overrideName, override.filename);
+                        lua["applyOverride"](table, override.nameParts.back(), override.func, override.overrideName, override.filename);
 
                         override.applied = true;
 
+                        break;
+                    }
+
+                    table = table[part].get_or<sol::table>(sol::lua_nil);
+                    if (table == sol::lua_nil)
+                    {
                         break;
                     }
                 }

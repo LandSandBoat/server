@@ -15,6 +15,12 @@ local sacredKindredCrest = 4
 -- 1:Convert at 2: 1 (campaignAdditional Seal Battlefield Spoils Campaign)
 local isTradeNum2 = 0
 
+entity.onTrade = function(player, npc, trade)
+    local eventParams = { 353, 0, 0, 0, 0, 0 }
+
+    xi.seals.onTrade(player, npc, trade, eventParams)
+end
+
 entity.onTrigger = function(player, npc)
     local csid        = 352
     local sealShift   = {}
@@ -36,7 +42,8 @@ entity.onTrigger = function(player, npc)
         end
     end
 
-    player:startEvent(csid, sealBit1, sealBit2, sealBit3, isTradeNum2)
+    local shemoTradesCount = player:getCharVar('ShemoTrades') -- Skips first menu if player has traded before
+    player:startEvent(csid, sealBit1, sealBit2, sealBit3, isTradeNum2, 0, 0, 0, math.min(shemoTradesCount, 1))
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
@@ -53,6 +60,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if inSeal >= 0 and outSeal >= 0 then
             player:delSeals(dellseals, outSeal)
             player:addSeals(addnum, inSeal)
+            player:incrementCharVar('ShemoTrades', 1)
         end
     end
 end

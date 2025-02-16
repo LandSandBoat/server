@@ -25,6 +25,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
         DIG_THROW_AWAY                = 7259,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7261,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7327,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
+        FOUND_ITEM_WITH_EASE          = 7336,  -- It appears your chocobo found this item with ease.
         CONQUEST                      = 7935,  -- You've earned conquest points!
         GARRISON_BASE                 = 8303,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         GATE_IS_LOCKED                = 8385,  -- The gate is locked.

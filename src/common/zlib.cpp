@@ -40,7 +40,7 @@
 #endif
 
 // Resolve the next address in jump table (0 == no jump, 1 == next address)
-#define JMPBIT(table, i) (((table)[(i) / 8] >> ((i)&7)) & 1)
+#define JMPBIT(table, i) (((table)[(i) / 8] >> ((i) & 7)) & 1)
 
 struct zlib_jump
 {
@@ -53,7 +53,7 @@ struct zlib
     std::vector<struct zlib_jump> jump;
 };
 
-static struct zlib zlib;
+static zlib zlib;
 
 static void swap32_if_be(const uint32* v, const size_t memb)
 {

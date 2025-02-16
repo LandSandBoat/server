@@ -34,6 +34,7 @@ zones[xi.zone.BIBIKI_BAY] =
         FISHING_MESSAGE_OFFSET        = 7280, -- You can't fish here.
         DIG_THROW_AWAY                = 7293, -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7295, -- You dig and you dig, but find nothing.
+        FOUND_ITEM_WITH_EASE          = 7370, -- It appears your chocobo found this item with ease.
         CLUNK_CLUNK_WHIRL_WHIZZ       = 7385, -- <Clunk-clunk>... <Whirl-whizz>...!
         YOU_ARE_NOT_ALONE             = 7455, -- You are not alone!
         NO_BILLET                     = 7497, -- You were refused passage for failing to present <item>!

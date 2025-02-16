@@ -415,17 +415,18 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
             bonus     = 50 - target:getMod(xi.mod.STUNRES) + player:getMod(xi.mod.VFLOURISH_MACC) + player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT),
         }
 
-        -- Apply WSC
         local weaponDamage = player:getWeaponDmg()
+        local weaponType   = player:getWeaponSkillType(xi.slot.MAIN)
         if player:getWeaponSkillType(xi.slot.MAIN) == xi.skill.HAND_TO_HAND then
             local h2hSkill = player:getSkillLevel(xi.skill.HAND_TO_HAND) * 0.11 + 3
 
             weaponDamage = weaponDamage - 3 + h2hSkill
         end
 
-        local baseDmg   = weaponDamage + xi.weaponskills.fSTR(player:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), player:getWeaponDmgRank())
-        local cRatio, _ = xi.weaponskills.cMeleeRatio(player, target, params, 0, 1000)
-        local dmg       = baseDmg * xi.weaponskills.generatePdif(cRatio[1], cRatio[2], true)
+        local applyLevelCorrection = xi.combat.levelCorrection.isLevelCorrectedZone(player)
+        local baseDmg              = weaponDamage + xi.weaponskills.fSTR(player:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), player:getWeaponDmgRank())
+        local pdif                 = xi.combat.physical.calculateMeleePDIF(player, target, weaponType, 1.0, false, applyLevelCorrection, false, 0.0, false, xi.slot.MAIN, false)
+        local dmg                  = baseDmg * pdif
 
         if applyResistanceEffect(player, target, spell, params) > 0.25 then
             target:addStatusEffect(xi.effect.STUN, 1, 0, 2)

@@ -155,9 +155,9 @@ int sSocket(int af, int type, int protocol);
 
 #endif
 
-#define TOB(n) ((uint8)((n)&std::numeric_limits<uint8>::max()))
-#define TOW(n) ((uint16)((n)&std::numeric_limits<uint16>::max()))
-#define TOL(n) ((uint32)((n)&std::numeric_limits<uint32>::max()))
+#define TOB(n) ((uint8)((n) & std::numeric_limits<uint8>::max()))
+#define TOW(n) ((uint16)((n) & std::numeric_limits<uint16>::max()))
+#define TOL(n) ((uint32)((n) & std::numeric_limits<uint32>::max()))
 
 enum class socket_type
 {
@@ -186,8 +186,6 @@ void socket_final();
 std::string ip2str(uint32 ip);
 
 uint32 str2ip(const char* ip_str);
-
-uint16 ntows(uint16 netshort);
 
 /************************************************/
 /*

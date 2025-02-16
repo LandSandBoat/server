@@ -22,6 +22,7 @@
 #include "database.h"
 
 #include "logging.h"
+#include "macros.h"
 #include "settings.h"
 #include "taskmgr.h"
 
@@ -51,6 +52,8 @@ namespace
         "Connection refused",
         "Can't connect to server",
     };
+
+    bool timersEnabled = false;
 } // namespace
 
 auto db::getConnection() -> std::unique_ptr<sql::Connection>
@@ -127,7 +130,7 @@ auto db::detail::timer(std::string const& query) -> xi::final_action<std::functi
     {
         const auto end      = hires_clock::now();
         const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-        if (settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))
+        if (timersEnabled && settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))
         {
             if (duration > settings::get<uint32>("logging.SQL_SLOW_QUERY_ERROR_TIME"))
             {
@@ -287,13 +290,50 @@ void db::checkCharset()
     }
 }
 
+void db::checkTriggers()
+{
+    const auto triggerQuery = "SHOW TRIGGERS WHERE `Trigger` LIKE ?";
+
+    const auto triggers = {
+        "account_delete",
+        "session_delete",
+        "auction_house_list",
+        "auction_house_buy",
+        "char_insert",
+        "char_delete",
+        "delivery_box_insert",
+        "ensure_synth_ingredients_are_ordered",
+        "ensure_synergy_ingredients_are_ordered",
+    };
+
+    bool foundError = false;
+
+    for (const auto& trigger : triggers)
+    {
+        auto rset = preparedStmt(triggerQuery, trigger);
+        if (!rset || rset->rowsCount() == 0)
+        {
+            ShowWarning(fmt::format("Missing trigger: {}", trigger));
+            foundError = true;
+        }
+    }
+
+    if (foundError)
+    {
+        ShowCriticalFmt("Missing triggers can result in data corruption or loss of data!!!");
+        ShowCriticalFmt("Please ensure all triggers are present in the database (re-run dbtool.py).");
+        std::this_thread::sleep_for(1s);
+        std::terminate();
+    }
+}
+
 bool db::setAutoCommit(bool value)
 {
     TracyZoneScoped;
 
-    if (!query("SET @@autocommit = %u", (value) ? 1 : 0))
+    if (!db::preparedStmt("SET @@autocommit = ?", value ? 1 : 0))
     {
-        // TODO: Logging
+        ShowError("Failed to set autocommit value");
         return false;
     }
 
@@ -304,13 +344,14 @@ bool db::getAutoCommit()
 {
     TracyZoneScoped;
 
-    auto rset = query("SELECT @@autocommit");
-    if (rset && rset->rowsCount() && rset->next())
+    const auto rset = db::preparedStmt("SELECT @@autocommit");
+    FOR_DB_SINGLE_RESULT(rset)
     {
         return rset->get<uint32>(0) == 1;
     }
 
-    // TODO: Logging
+    ShowError("Failed to get autocommit status");
+
     return false;
 }
 
@@ -318,9 +359,9 @@ bool db::transactionStart()
 {
     TracyZoneScoped;
 
-    if (!query("START TRANSACTION"))
+    if (!db::preparedStmt("START TRANSACTION"))
     {
-        // TODO: Logging
+        ShowError("Failed to start transaction");
         return false;
     }
 
@@ -331,9 +372,9 @@ bool db::transactionCommit()
 {
     TracyZoneScoped;
 
-    if (!query("COMMIT"))
+    if (!db::preparedStmt("COMMIT"))
     {
-        // TODO: Logging
+        ShowError("Failed to commit transaction");
         return false;
     }
 
@@ -344,11 +385,49 @@ bool db::transactionRollback()
 {
     TracyZoneScoped;
 
-    if (!query("ROLLBACK"))
+    if (!db::preparedStmt("ROLLBACK"))
     {
-        // TODO: Logging
+        ShowError("Failed to rollback transaction");
         return false;
     }
 
+    return true;
+}
+
+void db::enableTimers()
+{
+    timersEnabled = true;
+}
+
+bool db::transaction(const std::function<void()>& transactionFn)
+{
+    TracyZoneScoped;
+
+    const bool wasAutoCommitOn = db::getAutoCommit();
+
+    if (db::setAutoCommit(false) && db::transactionStart())
+    {
+        try
+        {
+            transactionFn();
+            db::transactionCommit();
+        }
+        catch (const std::exception& e)
+        {
+            ShowCritical("Transaction failed: Rolling back!");
+            ShowCritical("Transaction failed: %s", e.what());
+
+            db::transactionRollback();
+            db::setAutoCommit(wasAutoCommitOn);
+            return false;
+        }
+    }
+    else
+    {
+        db::setAutoCommit(wasAutoCommitOn);
+        return false;
+    }
+
+    db::setAutoCommit(wasAutoCommitOn);
     return true;
 }

@@ -26,6 +26,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
         FISHING_MESSAGE_OFFSET        = 7254,  -- You can't fish here.
         DIG_THROW_AWAY                = 7267,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7269,  -- You dig and you dig, but find nothing.
+        FOUND_ITEM_WITH_EASE          = 7344,  -- It appears your chocobo found this item with ease.
         THF_AF_MOB                    = 7431,  -- Something has come down from the tower!
         THF_AF_WALL_OFFSET            = 7450,  -- It is impossible to climb this wall with your bare hands.
         PLAYER_OBTAINS_ITEM           = 7513,  -- <name> obtains <item>!

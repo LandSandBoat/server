@@ -464,6 +464,15 @@
         "__split_buffer": "cpp",
         "__threading_support": "cpp",
         "__tree": "cpp",
-        "print": "cpp"
+        "print": "cpp",
+        "__bits": "cpp",
+        "__debug": "cpp",
+        "__errc": "cpp",
+        "__functional_base": "cpp",
+        "__mutex_base": "cpp",
+        "__nullptr": "cpp",
+        "__std_stream": "cpp",
+        "__string": "cpp",
+        "__tuple": "cpp"
     },
 }

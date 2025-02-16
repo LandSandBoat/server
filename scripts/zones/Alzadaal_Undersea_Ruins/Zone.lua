@@ -5,31 +5,31 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -329, -2, 483, -323, 0, 489)    -- map 1 SE porter
-    zone:registerTriggerArea(2, -477, -2, 631, -471, 0, 636)    -- map 1 NW porter
-    zone:registerTriggerArea(3,  110, -2, -556, 116, 0, -551)   -- map 2 west porter (white)
-    zone:registerTriggerArea(4,   30, -2, 750,  36, 0, 757)     -- map 3 west porter (blue)
-    zone:registerTriggerArea(5,   83, -2, 750,  90, 0, 757)     -- map 3 east porter (white)
-    zone:registerTriggerArea(6, -329, -2, 150, -323, 0, 156)    -- map 4 porter (white)
-    zone:registerTriggerArea(7, -208, -2, -556, -202, 0, -551)  -- map 5 porter (white)
-    zone:registerTriggerArea(8,  323, -2, 591, 329, 0, 598)     -- map 6 east porter (white)
-    zone:registerTriggerArea(9,  270, -2, 591, 276, 0, 598)     -- map 6 west porter (blue)
-    zone:registerTriggerArea(11, -63, -10,  56, -57, -8,  62)   -- map 8 NW/Arrapago porter
-    zone:registerTriggerArea(12,  17, -6,  56,  23, -4,  62)    -- map 8 NE/Silver Sea/Khim porter
-    zone:registerTriggerArea(13, -63, -10, -23, -57, -8, -16)   -- map 8 SW/Zhayolm/bird camp porter
-    zone:registerTriggerArea(14,  17, -6, -23,  23, -4, -16)    -- map 8 SE/Bhaflau Porter
-    zone:registerTriggerArea(15, -556, -2, -77, -550, 0, -71)   -- map 9 east porter (white)
-    zone:registerTriggerArea(16, -609, -2, -77, -603, 0, -71)   -- map 9 west porter (blue)
-    zone:registerTriggerArea(17, 643, -2, -289, 649, 0, -283)   -- map 10 east porter (blue)
-    zone:registerTriggerArea(18, 590, -2, -289, 597, 0, -283)   -- map 10 west porter (white)
-    zone:registerTriggerArea(19, 603, -2, 522, 610, 0, 529)     -- map 11 east porter (blue)
-    zone:registerTriggerArea(20, 550, -2, 522, 557, 0, 529)     -- map 11 west porter (white)
-    zone:registerTriggerArea(21, -556, -2, -489, -550, 0, -483) -- map 12 east porter (white)
-    zone:registerTriggerArea(22, -610, -2, -489, -603, 0, -483) -- map 12 west porter (blue)
-    zone:registerTriggerArea(23, 394, -1, -619, 487, 1, -540)   -- map 7, Whole zone right before the door (as per BG-Wiki). https://www.bg-wiki.com/ffxi/Aht_Urhgan_Mission_9. ToAU mission 9.
-    zone:registerTriggerArea(24,  52, -1, 774, 67, 1, 778)      -- transformations (quest)
-    zone:registerTriggerArea(25, 134, -1, -584, 146, 1, -577)   -- transformations (quest)
-    zone:registerTriggerArea(26, 442, -2, -557, 450, 0, -550)   -- map 7 porter (white) (moved after region 23 to avoid spamming events)
+    zone:registerCuboidTriggerArea(1, -329, -2, 483, -323, 0, 489)    -- map 1 SE porter
+    zone:registerCuboidTriggerArea(2, -477, -2, 631, -471, 0, 636)    -- map 1 NW porter
+    zone:registerCuboidTriggerArea(3,  110, -2, -556, 116, 0, -551)   -- map 2 west porter (white)
+    zone:registerCuboidTriggerArea(4,   30, -2, 750,  36, 0, 757)     -- map 3 west porter (blue)
+    zone:registerCuboidTriggerArea(5,   83, -2, 750,  90, 0, 757)     -- map 3 east porter (white)
+    zone:registerCuboidTriggerArea(6, -329, -2, 150, -323, 0, 156)    -- map 4 porter (white)
+    zone:registerCuboidTriggerArea(7, -208, -2, -556, -202, 0, -551)  -- map 5 porter (white)
+    zone:registerCuboidTriggerArea(8,  323, -2, 591, 329, 0, 598)     -- map 6 east porter (white)
+    zone:registerCuboidTriggerArea(9,  270, -2, 591, 276, 0, 598)     -- map 6 west porter (blue)
+    zone:registerCuboidTriggerArea(11, -63, -10,  56, -57, -8,  62)   -- map 8 NW/Arrapago porter
+    zone:registerCuboidTriggerArea(12,  17, -6,  56,  23, -4,  62)    -- map 8 NE/Silver Sea/Khim porter
+    zone:registerCuboidTriggerArea(13, -63, -10, -23, -57, -8, -16)   -- map 8 SW/Zhayolm/bird camp porter
+    zone:registerCuboidTriggerArea(14,  17, -6, -23,  23, -4, -16)    -- map 8 SE/Bhaflau Porter
+    zone:registerCuboidTriggerArea(15, -556, -2, -77, -550, 0, -71)   -- map 9 east porter (white)
+    zone:registerCuboidTriggerArea(16, -609, -2, -77, -603, 0, -71)   -- map 9 west porter (blue)
+    zone:registerCuboidTriggerArea(17, 643, -2, -289, 649, 0, -283)   -- map 10 east porter (blue)
+    zone:registerCuboidTriggerArea(18, 590, -2, -289, 597, 0, -283)   -- map 10 west porter (white)
+    zone:registerCuboidTriggerArea(19, 603, -2, 522, 610, 0, 529)     -- map 11 east porter (blue)
+    zone:registerCuboidTriggerArea(20, 550, -2, 522, 557, 0, 529)     -- map 11 west porter (white)
+    zone:registerCuboidTriggerArea(21, -556, -2, -489, -550, 0, -483) -- map 12 east porter (white)
+    zone:registerCuboidTriggerArea(22, -610, -2, -489, -603, 0, -483) -- map 12 west porter (blue)
+    zone:registerCuboidTriggerArea(23, 394, -1, -619, 487, 1, -540)   -- map 7, Whole zone right before the door (as per BG-Wiki). https://www.bg-wiki.com/ffxi/Aht_Urhgan_Mission_9. ToAU mission 9.
+    zone:registerCuboidTriggerArea(24,  52, -1, 774, 67, 1, 778)      -- transformations (quest)
+    zone:registerCuboidTriggerArea(25, 134, -1, -584, 146, 1, -577)   -- transformations (quest)
+    zone:registerCuboidTriggerArea(26, 442, -2, -557, 450, 0, -550)   -- map 7 porter (white) (moved after region 23 to avoid spamming events)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -58,7 +58,7 @@ end
 -- TODO: Table teleporter events keyed by triggerArea and perform a direct
 -- lookup.
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
+    switch (triggerArea:getTriggerAreaID()): caseof
     {
         [1] = function(x)
             player:startEvent(204)

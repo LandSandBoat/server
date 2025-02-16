@@ -472,7 +472,7 @@ void CTrustEntity::OnDespawn(CDespawnState& /*unused*/)
         luautils::OnMobDespawn(this);
     }
     FadeOut();
-    PAI->EventHandler.triggerListener("DESPAWN", CLuaBaseEntity(this));
+    PAI->EventHandler.triggerListener("DESPAWN", this);
 }
 
 void CTrustEntity::OnCastFinished(CMagicState& state, action_t& action)
@@ -573,25 +573,28 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
 
             if (primary)
             {
-                if (PBattleTarget->health.hp > 0 && PWeaponSkill->getPrimarySkillchain() != 0)
+                if ((actionTarget.reaction & REACTION::MISS) == REACTION::NONE)
                 {
-                    // NOTE: GetSkillChainEffect is INSIDE this if statement because it
-                    //  ALTERS the state of the resonance, which misses and non-elemental skills should NOT do.
-                    SUBEFFECT effect = battleutils::GetSkillChainEffect(PBattleTarget, PWeaponSkill->getPrimarySkillchain(),
-                                                                        PWeaponSkill->getSecondarySkillchain(), PWeaponSkill->getTertiarySkillchain());
-                    if (effect != SUBEFFECT_NONE)
+                    if (PBattleTarget->health.hp > 0 && PWeaponSkill->getPrimarySkillchain() != 0)
                     {
-                        actionTarget.addEffectParam = battleutils::TakeSkillchainDamage(this, PBattleTarget, damage, taChar);
-                        if (actionTarget.addEffectParam < 0)
+                        // NOTE: GetSkillChainEffect is INSIDE this if statement because it
+                        //  ALTERS the state of the resonance, which misses and non-elemental skills should NOT do.
+                        SUBEFFECT effect = battleutils::GetSkillChainEffect(PBattleTarget, PWeaponSkill->getPrimarySkillchain(),
+                                                                            PWeaponSkill->getSecondarySkillchain(), PWeaponSkill->getTertiarySkillchain());
+                        if (effect != SUBEFFECT_NONE)
                         {
-                            actionTarget.addEffectParam   = -actionTarget.addEffectParam;
-                            actionTarget.addEffectMessage = 384 + effect;
+                            actionTarget.addEffectParam = battleutils::TakeSkillchainDamage(this, PBattleTarget, damage, taChar);
+                            if (actionTarget.addEffectParam < 0)
+                            {
+                                actionTarget.addEffectParam   = -actionTarget.addEffectParam;
+                                actionTarget.addEffectMessage = 384 + effect;
+                            }
+                            else
+                            {
+                                actionTarget.addEffectMessage = 287 + effect;
+                            }
+                            actionTarget.additionalEffect = effect;
                         }
-                        else
-                        {
-                            actionTarget.addEffectMessage = 287 + effect;
-                        }
-                        actionTarget.additionalEffect = effect;
                     }
                 }
             }

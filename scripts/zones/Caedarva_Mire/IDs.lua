@@ -66,6 +66,7 @@ zones[xi.zone.CAEDARVA_MIRE] =
     },
     npc =
     {
+        HOOFPRINT           = GetFirstID('Warhorse_Hoofprint'),
         LOGGING             = GetTableOfIDs('Logging_Point'),
         RUNIC_PORTAL_AZOUPH = GetFirstID('Runic_Portal_Azouph'),
         RUNIC_PORTAL_DVUCCA = GetFirstID('Runic_Portal_Dvucca'),

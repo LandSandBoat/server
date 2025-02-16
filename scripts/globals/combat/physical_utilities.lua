@@ -379,35 +379,52 @@ end
 
 -- WARNING: This function is used in src/utils/battleutils.cpp "GetDamageRatio" function.
 -- If you update this parameters, update them there aswell.
-xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor, isWeaponskill, weaponSlot)
+---@param actor CBaseEntity
+---@param target CBaseEntity
+---@param weaponType xi.skill
+---@param wsAttackMod number
+---@param isCritical boolean
+---@param applyLevelCorrection boolean
+---@param tpIgnoresDefense boolean
+---@param tpFactor number
+---@param isWeaponskill boolean
+---@param weaponSlot xi.slot
+---@param isCannonball boolean
+xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor, isWeaponskill, weaponSlot, isCannonball)
     local pDif = 0
 
     ----------------------------------------
     -- Step 1: Attack / Defense Ratio
     ----------------------------------------
     local baseRatio     = 0
-    local actorAttack   = math.max(1, math.floor(actor:getStat(xi.mod.ATT, weaponSlot) * wsAttackMod))
+    local actorAttack   = 0
     local targetDefense = math.max(1, target:getStat(xi.mod.DEF))
+    local flourishBonus = 1.0
 
     -- Actor Weaponskill Specific Attack modifiers.
     if isWeaponskill then
-        if actor:hasStatusEffect(xi.effect.BUILDING_FLOURISH) then
-            local flourishEffect = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+        local flourishEffect = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
-            if flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
-                actorAttack = math.floor(actorAttack * (125 + flourishEffect:getSubPower()) / 100)
-            end
+        if flourishEffect and flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
+            local meritCount = flourishEffect:getSubPower()
+
+            flourishBonus = 1.25 + 0.01 * meritCount -- +1% attack bonus per merit -- TODO: do the merits apply even when FMs are < 2?
         end
     end
 
-    -- Target Defense Modifiers.
-    local ignoreDefenseFactor = 1
+    -- TODO: it is unknown if ws attack mod and flourish bonus are additive or multiplicative
+    actorAttack = math.max(1, math.floor(actor:getStat(xi.mod.ATT, weaponSlot) * wsAttackMod * flourishBonus))
 
+    -- Target Defense Modifiers.
     if tpIgnoresDefense then
-        ignoreDefenseFactor = 1 - tpFactor
+        local ignoreDefenseFactor = 1 - tpFactor
+
+        targetDefense = math.floor(targetDefense * ignoreDefenseFactor)
     end
 
-    targetDefense = math.floor(targetDefense * ignoreDefenseFactor)
+    if isCannonball then
+        actorAttack = actor:getStat(xi.mod.DEF)
+    end
 
     -- Actor Attack / Target Defense ratio
     baseRatio = actorAttack / targetDefense
@@ -421,7 +438,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     local levelDifFactor = 0
 
     if applyLevelCorrection then
-        levelDifFactor = (target:getMainLvl() - actor:getMainLvl()) * 0.05
+        levelDifFactor = (actor:getMainLvl() - target:getMainLvl()) * 0.05
     end
 
     -- Only players suffer from negative level difference.
@@ -432,7 +449,15 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
         levelDifFactor = 0
     end
 
-    local cRatio = utils.clamp(baseRatio - levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
+    -- Players do not get positive level correction, only monsters
+    if
+        actor:isPC() and
+        levelDifFactor > 0
+    then
+        levelDifFactor = 0
+    end
+
+    local cRatio = utils.clamp(baseRatio + levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
 
     ----------------------------------------
     -- Step 3: wRatio and pDif Caps (Melee)
@@ -486,35 +511,48 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
 
     -- Crit damage bonus is a final modifier
     if isCritical then
-        local critDamageBonus = utils.clamp(actor:getMod(xi.mod.CRIT_DMG_INCREASE) - target:getMod(xi.mod.CRIT_DEF_BONUS), 0, 100)
+        local critDamageBonus = utils.clamp(actor:getMod(xi.mod.CRIT_DMG_INCREASE) + actor:getMod(xi.mod.RANGED_CRIT_DMG_INCREASE) - target:getMod(xi.mod.CRIT_DEF_BONUS), 0, 100)
         pDif                  = pDif * (100 + critDamageBonus) / 100
     end
 
     return pDif
 end
 
-xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor, isWeaponskill)
+---@param actor CBaseEntity
+---@param target CBaseEntity
+---@param weaponType xi.skill
+---@param wsAttackMod number
+---@param isCritical boolean
+---@param applyLevelCorrection boolean
+---@param tpIgnoresDefense boolean
+---@param tpFactor number
+---@param isWeaponskill boolean
+---@param bonusRangedAttack integer
+xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor, isWeaponskill, bonusRangedAttack)
     local pDif = 0
 
     ----------------------------------------
     -- Step 1: Attack / Defense Ratio
     ----------------------------------------
     local baseRatio     = 0
-    local actorAttack   = math.max(1, math.floor(actor:getStat(xi.mod.RATT) * wsAttackMod))
+    local actorAttack   = 0
     local targetDefense = math.max(1, target:getStat(xi.mod.DEF))
+    local flourishBonus = 1.0
 
-    -- Actor Weaponskill Specific Ranged Attack modifiers.
+    -- Actor Weaponskill Specific Attack modifiers.
+    -- TODO: verify this actually works on ranged WS
     if isWeaponskill then
-        -- TODO: verify this actually works on ranged WS.
-        -- This is a real concern now that RNG/DNC and COR/DNC can actually get level 50 subs through master levels.
-        if actor:hasStatusEffect(xi.effect.BUILDING_FLOURISH) then
-            local flourishEffect = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+        local flourishEffect = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
-            if flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
-                actorAttack = math.floor(actorAttack * (125 + flourishEffect:getSubPower()) / 100)
-            end
+        if flourishEffect and flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
+            local meritCount = flourishEffect:getSubPower()
+
+            flourishBonus = 1.25 + 0.01 * meritCount -- +1% attack bonus per merit -- TODO: do the merits apply even when FMs are < 2?
         end
     end
+
+    -- TODO: it is unknown if ws attack mod and flourish bonus are additive or multiplicative
+    actorAttack = math.max(1, math.floor((actor:getStat(xi.mod.RATT) + bonusRangedAttack) * wsAttackMod * flourishBonus))
 
     -- Target Defense Modifiers.
     local ignoreDefenseFactor = 1
@@ -536,7 +574,7 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     local levelDifFactor = 0
 
     if applyLevelCorrection then
-        levelDifFactor = (target:getMainLvl() - actor:getMainLvl()) * 0.05
+        levelDifFactor = (actor:getMainLvl() - target:getMainLvl()) * 0.05
     end
 
     -- Only players suffer from negative level difference.
@@ -547,7 +585,15 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
         levelDifFactor = 0
     end
 
-    local cRatio = utils.clamp(baseRatio - levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
+    -- Players do not get positive level correction, only monsters
+    if
+        actor:isPC() and
+        levelDifFactor > 0
+    then
+        levelDifFactor = 0
+    end
+
+    local cRatio = utils.clamp(baseRatio + levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
 
     -- TODO: Presumably, pets get a Cap here if the target checks as 'Too Weak'. More info needed.
 

@@ -7,18 +7,6 @@
 ---@type TNpcEntity
 local entity = {}
 
----@class shamiSealItems
----@field [xi.item] { [integer]: integer, [integer]: integer }
-local shamiSealItems =
-{
-    -- Trade Item ID              Seal ID, Retrieve Option
-    [xi.item.BEASTMENS_SEAL       ] = { 0, 2 },
-    [xi.item.KINDREDS_SEAL        ] = { 1, 1 },
-    [xi.item.KINDREDS_CREST       ] = { 2, 3 },
-    [xi.item.HIGH_KINDREDS_CREST  ] = { 3, 4 },
-    [xi.item.SACRED_KINDREDS_CREST] = { 4, 5 },
-}
-
 ---@class shamiOrbItems
 ---@field [xi.item] { [integer]: integer, [integer]: integer, [integer]: integer, [integer]: integer } }
 local shamiOrbItems =
@@ -42,23 +30,10 @@ local shamiOrbItems =
 }
 
 ---@nodiscard
----@param trade CTradeContainer
----@return integer?
-local function getSealTradeOption(trade)
-    for itemID, sealData in pairs(shamiSealItems) do
-        if npcUtil.tradeHasOnly(trade, itemID) then
-            return sealData[1]
-        end
-    end
-
-    return nil
-end
-
----@nodiscard
 ---@param option integer
 ---@return xi.item?, integer?, integer?
 local function convertSealRetrieveOption(option)
-    for itemID, sealData in pairs(shamiSealItems) do
+    for itemID, sealData in pairs(xi.seals.sealItems) do
         if (option + sealData[2]) % 256 == 0 then
             local sealCount = (option + sealData[2]) / 256 - 1
 
@@ -103,19 +78,9 @@ local function getOrbDataFromOption(option)
 end
 
 entity.onTrade = function(player, npc, trade)
-    -- Trading Seals/Crests
-    local sealOption = getSealTradeOption(trade)
+    local eventParams = { 321, 0, 0, 0, 0, 0 }
 
-    if sealOption ~= nil then
-        local eventParams = { 321, 0, 0, 0, 0, 0 }
-        local storedSeals = player:getSeals(sealOption)
-        local itemCount   = trade:getItemCount()
-
-        eventParams[sealOption + 2] = bit.lshift(storedSeals + itemCount, 16)
-        player:startEvent(unpack(eventParams))
-        player:addSeals(itemCount, sealOption)
-        player:confirmTrade()
-
+    if xi.seals.onTrade(player, npc, trade, eventParams) then
         return
     end
 
@@ -137,7 +102,8 @@ entity.onTrigger = function(player, npc)
     if beastmensSeal + kindredsSeal + kindredsCrest + highKindredsCrest + sacredKindredsCrest == 0 then
         player:startEvent(23) -- Standard dialog ?
     else
-        player:startEvent(322, (kindredsSeal * 65536) + beastmensSeal, (highKindredsCrest * 65536) + kindredsCrest, sacredKindredsCrest, 0, 1, 0, 0) -- Standard dialog with menu
+        local purchasedOrbs = player:getCharVar('ShamiPurchasedOrbs') -- Skips the first longer dialog if the player has already purchased orbs
+        player:startEvent(322, (kindredsSeal * 65536) + beastmensSeal, (highKindredsCrest * 65536) + kindredsCrest, sacredKindredsCrest, 0, 1, 0, 0, math.min(purchasedOrbs, 1)) -- Standard dialog with menu
     end
 end
 
@@ -184,6 +150,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                 npcUtil.giveItem(player, itemID)
             then
                 player:delSeals(sealCost, sealType)
+                player:incrementCharVar('ShamiPurchasedOrbs', 1)
             end
         end
     end

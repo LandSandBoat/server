@@ -4,7 +4,7 @@
 -- Log ID: 4, Quest ID: 19
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORERS_FOOTSTEPS)
 
 local monumentTable =
 {
@@ -67,7 +67,7 @@ local function abelardCorrectTrade(player, csid, option)
 
     -- Abort quest. Delete from log BUT remember tablets already given.
     elseif option == 110 then
-        player:delQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
+        player:delQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORERS_FOOTSTEPS)
     end
 end
 

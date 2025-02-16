@@ -37,108 +37,108 @@ local jobQuestsTable =
 
     [xi.job.WAR] =
     {
-        [1] = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_DOORMAN              },
-        [2] = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH    },
-        [3] = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT     },
-        [4] = { xi.questLog.JEUNO,  xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS },
+        [1] = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_DOORMAN             },
+        [2] = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH   },
+        [3] = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT    },
+        [4] = { xi.questLog.JEUNO,  xi.quest.id.jeuno.BORGHERTZS_WARRING_HANDS },
     },
     [xi.job.MNK] =
     {
-        [1] = { xi.questLog.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST        },
-        [2] = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING         },
-        [3] = { xi.questLog.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH             },
-        [4] = { xi.questLog.JEUNO,  xi.quest.id.jeuno.BORGHERTZ_S_STRIKING_HANDS },
+        [1] = { xi.questLog.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST       },
+        [2] = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING        },
+        [3] = { xi.questLog.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH            },
+        [4] = { xi.questLog.JEUNO,  xi.quest.id.jeuno.BORGHERTZS_STRIKING_HANDS },
     },
     [xi.job.WHM] =
     {
         [1] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND      },
         [2] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE },
-        [3] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION          },
-        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZ_S_HEALING_HANDS     },
+        [3] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJES_DECISION           },
+        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZS_HEALING_HANDS      },
     },
     [xi.job.BLM] =
     {
-        [1] = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI           },
-        [2] = { xi.questLog.WINDURST, xi.quest.id.windurst.RECOLLECTIONS            },
-        [3] = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM  },
-        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZ_S_SORCEROUS_HANDS },
+        [1] = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI          },
+        [2] = { xi.questLog.WINDURST, xi.quest.id.windurst.RECOLLECTIONS           },
+        [3] = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM },
+        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZS_SORCEROUS_HANDS },
     },
     [xi.job.RDM] =
     {
-        [1] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL         },
-        [2] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS     },
-        [3] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT      },
-        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZ_S_VERMILLION_HANDS },
+        [1] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL        },
+        [2] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS    },
+        [3] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT     },
+        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZS_VERMILLION_HANDS },
     },
     [xi.job.THF] =
     {
         [1] = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN  },
         [2] = { xi.questLog.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES    },
         [3] = { xi.questLog.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE },
-        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZ_S_SNEAKY_HANDS  },
+        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZS_SNEAKY_HANDS   },
     },
     [xi.job.PLD] =
     {
-        [1] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD    },
-        [2] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM           },
-        [3] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH              },
-        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZ_S_STALWART_HANDS },
+        [1] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD   },
+        [2] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOYS_DREAM           },
+        [3] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH             },
+        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZS_STALWART_HANDS },
     },
     [xi.job.DRK] =
     {
-        [1] = { xi.questLog.BASTOK, xi.quest.id.bastok.DARK_LEGACY              },
-        [2] = { xi.questLog.BASTOK, xi.quest.id.bastok.DARK_PUPPET              },
-        [3] = { xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL            },
-        [4] = { xi.questLog.JEUNO,  xi.quest.id.jeuno.BORGHERTZ_S_SHADOWY_HANDS },
+        [1] = { xi.questLog.BASTOK, xi.quest.id.bastok.DARK_LEGACY             },
+        [2] = { xi.questLog.BASTOK, xi.quest.id.bastok.DARK_PUPPET             },
+        [3] = { xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL           },
+        [4] = { xi.questLog.JEUNO,  xi.quest.id.jeuno.BORGHERTZS_SHADOWY_HANDS },
     },
     [xi.job.BST] =
     {
-        [1] = { xi.questLog.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD          },
-        [2] = { xi.questLog.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW  },
-        [3] = { xi.questLog.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN             },
-        [4] = { xi.questLog.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WILD_HANDS },
+        [1] = { xi.questLog.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD         },
+        [2] = { xi.questLog.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW },
+        [3] = { xi.questLog.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN            },
+        [4] = { xi.questLog.JEUNO, xi.quest.id.jeuno.BORGHERTZS_WILD_HANDS },
     },
     [xi.job.BRD] =
     {
-        [1] = { xi.questLog.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY               },
-        [2] = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_REQUIEM                  },
-        [3] = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME           },
-        [4] = { xi.questLog.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_HARMONIOUS_HANDS },
+        [1] = { xi.questLog.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY              },
+        [2] = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_REQUIEM                 },
+        [3] = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME          },
+        [4] = { xi.questLog.JEUNO, xi.quest.id.jeuno.BORGHERTZS_HARMONIOUS_HANDS },
     },
     [xi.job.RNG] =
     {
-        [1] = { xi.questLog.WINDURST, xi.quest.id.windurst.SIN_HUNTING            },
-        [2] = { xi.questLog.WINDURST, xi.quest.id.windurst.FIRE_AND_BRIMSTONE     },
-        [3] = { xi.questLog.WINDURST, xi.quest.id.windurst.UNBRIDLED_PASSION      },
-        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZ_S_CHASING_HANDS },
+        [1] = { xi.questLog.WINDURST, xi.quest.id.windurst.SIN_HUNTING           },
+        [2] = { xi.questLog.WINDURST, xi.quest.id.windurst.FIRE_AND_BRIMSTONE    },
+        [3] = { xi.questLog.WINDURST, xi.quest.id.windurst.UNBRIDLED_PASSION     },
+        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZS_CHASING_HANDS },
     },
     [xi.job.SAM] =
     {
-        [1] = { xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA    },
-        [2] = { xi.questLog.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI           },
-        [3] = { xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG      },
-        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZ_S_LOYAL_HANDS },
+        [1] = { xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA   },
+        [2] = { xi.questLog.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI          },
+        [3] = { xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG     },
+        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZS_LOYAL_HANDS },
     },
     [xi.job.NIN] =
     {
         [1] = { xi.questLog.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS },
         [2] = { xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX  },
         [3] = { xi.questLog.OUTLANDS, xi.quest.id.outlands.TRUE_WILL              },
-        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZ_S_LURKING_HANDS },
+        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZS_LURKING_HANDS  },
     },
     [xi.job.DRG] =
     {
-        [1] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK    },
-        [2] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS        },
-        [3] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER        },
-        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZ_S_DRAGON_HANDS },
+        [1] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMANS_WORK    },
+        [2] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS       },
+        [3] = { xi.questLog.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER       },
+        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZS_DRAGON_HANDS },
     },
     [xi.job.SMN] =
     {
-        [1] = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER      },
-        [2] = { xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION          },
-        [3] = { xi.questLog.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE      },
-        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZ_S_CALLING_HANDS },
+        [1] = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER     },
+        [2] = { xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION         },
+        [3] = { xi.questLog.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE     },
+        [4] = { xi.questLog.JEUNO,    xi.quest.id.jeuno.BORGHERTZS_CALLING_HANDS },
     },
     [xi.job.BLU] =
     {

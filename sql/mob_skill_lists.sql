@@ -117,14 +117,14 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_Misc',37,871);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_Misc',37,872);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_Misc',37,873);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_Misc',37,874);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,840);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,841);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,842);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,843);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,844);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,845);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,846);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,847);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,840);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,841);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,842);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,843);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,844);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,845);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,846);
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_Misc',38,847);
 INSERT INTO `mob_skill_lists` VALUES ('Ixion_Melee',39,2341); -- di hoof attack
 INSERT INTO `mob_skill_lists` VALUES ('Ixion_Melee',39,2342); -- di horn attack
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_Misc',40,858);
@@ -1442,10 +1442,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_TBE',321,853); -- Trial By E
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_TBE',321,854); -- Trial By Earth, stone_iv
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_TBE',321,855); -- Trial By Earth, mountain_buster
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_TBE',321,856); -- Trial By Earth, geocrush
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',322,844); -- Waking the Beast, crimson_howl
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',322,846); -- Waking the Beast, flaming_crush
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',322,847); -- Waking the Beast, meteor_strike
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',322,848); -- Waking the Beast, inferno
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_TBF',322,842); -- Trial By Fire, burning_strike
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_TBF',322,844); -- Trial By Fire, crimson_howl
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_TBF',322,845); -- Trial By Fire, fire_iv
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_TBF',322,846); -- Trial By Fire, flaming_crush
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_TBF',322,847); -- Trial By Fire, meteor_strike
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TBW',323,861); -- Trial By Water, spring_water
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TBW',323,862); -- Trial By Water, slowga
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TBW',323,863); -- Trial By Water, water_iv
@@ -1855,20 +1856,16 @@ INSERT INTO `mob_skill_lists` VALUES ('VrtraWyrm',391,1310);
 INSERT INTO `mob_skill_lists` VALUES ('VrtraWyrm',391,1311);
 INSERT INTO `mob_skill_lists` VALUES ('VrtraWyrm',391,1315);
 INSERT INTO `mob_skill_lists` VALUES ('VrtraWyrm',391,1316);
--- INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1031);
 INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1289);
 INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1290);
 INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1291);
-INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1292);
 INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1293);
 INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1294);
 INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1295);
 INSERT INTO `mob_skill_lists` VALUES ('JormungandWyrm',392,1296);
--- INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1277);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1279);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1280);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1281);
-INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1282);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1283);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1284);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1285);
@@ -1948,7 +1945,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Two-faced_Flan',416,1825);
 INSERT INTO `mob_skill_lists` VALUES ('Barbaric_Weapon',417,514); -- Whirl of Rage
 INSERT INTO `mob_skill_lists` VALUES ('Picolaton',418,403); -- Stormwind
 INSERT INTO `mob_skill_lists` VALUES ('Dahu',419,802); -- Great Sandstorm
--- 420 to 435: free
+INSERT INTO `mob_skill_lists` VALUES ('Huwasi',420,678); -- Crystal Rain
+-- 421 to 435: free
 INSERT INTO `mob_skill_lists` VALUES ('Bloodlapper',436,2162);
 INSERT INTO `mob_skill_lists` VALUES ('Ghillie_Dhu',437,685);
 INSERT INTO `mob_skill_lists` VALUES ('Highlander_Lizard',438,371);
@@ -2682,7 +2680,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,578); -- nihlity song
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,1330); -- hoof volley
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,2828); -- jettatura
 -- 787: free
--- 788: free
+INSERT INTO `mob_skill_lists` VALUES ('Bakka_LowHP',788,1711); -- frentic rip
 INSERT INTO `mob_skill_lists` VALUES ('Bakka',789,1711); -- frentic rip
 INSERT INTO `mob_skill_lists` VALUES ('Bakka',789,2003); -- grating tantra
 INSERT INTO `mob_skill_lists` VALUES ('Bakka',789,2004); -- stifling tantra
@@ -3956,7 +3954,44 @@ INSERT INTO `mob_skill_lists` VALUES ('Unfettered_Twitherym',2017,2952); -- blac
 
 INSERT INTO `mob_skill_lists` VALUES ('Unfettered_Twitherym_low_50',2018,2953); -- smouldering_swarm
 
--- Next available ID: 2019
+/*INSERT INTO `mob_skill_lists` VALUES ('Supernal_Chapuli',2019,2945); -- natures_meditation
+INSERT INTO `mob_skill_lists` VALUES ('Supernal_Chapuli',2019,2946); -- sensilla_blades
+INSERT INTO `mob_skill_lists` VALUES ('Supernal_Chapuli',2019,2947); -- tegmina_buffet
+INSERT INTO `mob_skill_lists` VALUES ('Supernal_Chapuli',2019,2948); -- sanguinary_slash*/
+
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion',2020,353); -- death_scissors
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion',2020,354); -- wild_rage
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion',2020,356); -- sharp_strike
+
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion_low_50',2021,353); -- death_scissors (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion_low_50',2021,354); -- wild_rage (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion_low_50',2021,356); -- sharp_strike (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion_low_50',2021,721); -- stasis (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion_low_50',2021,723); -- earthbreaker (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Transcendent_Scorpion_low_50',2021,2221); -- hell_scissors (Below 50%)
+
+/*INSERT INTO `mob_skill_lists` VALUES ('Mastop',2022,2158); -- insipid_nip
+INSERT INTO `mob_skill_lists` VALUES ('Mastop',2022,2160); -- bombilation
+INSERT INTO `mob_skill_lists` VALUES ('Mastop',2022,2161); -- cimicine_discharge
+INSERT INTO `mob_skill_lists` VALUES ('Mastop',2022,2162); -- emetic_discharge
+INSERT INTO `mob_skill_lists` VALUES ('Mastop',2022,2770); -- booming_bombination*/
+
+/*INSERT INTO `mob_skill_lists` VALUES ('Taxet',2023,1951); -- magma_fan
+INSERT INTO `mob_skill_lists` VALUES ('Taxet',2023,1952); -- erratic_flutter
+INSERT INTO `mob_skill_lists` VALUES ('Taxet',2023,1953); -- proboscis
+INSERT INTO `mob_skill_lists` VALUES ('Taxet',2023,1954); -- erosion_dust
+INSERT INTO `mob_skill_lists` VALUES ('Taxet',2023,1955); -- exuviation
+INSERT INTO `mob_skill_lists` VALUES ('Taxet',2023,1956); -- fire_break
+
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,1951); -- magma_fan (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,1952); -- erratic_flutter (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,1953); -- proboscis (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,1954); -- erosion_dust (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,1955); -- exuviation (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,1956); -- fire_break (Below 50%)
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,3044); -- benumbing_blaze (Below 50%)*/
+
+-- Next ID : 2025
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

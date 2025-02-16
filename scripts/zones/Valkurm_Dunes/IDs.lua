@@ -26,6 +26,7 @@ zones[xi.zone.VALKURM_DUNES] =
         DIG_THROW_AWAY                 = 7259,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                   = 7261,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET             = 7327,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
+        FOUND_ITEM_WITH_EASE           = 7336,  -- It appears your chocobo found this item with ease.
         SONG_RUNES_DEFAULT             = 7346,  -- Lyrics on the old monument sing the story of lovers torn apart.
         UNLOCK_BARD                    = 7367,  -- You can now become a bard!
         JUST_A_PILE_OF_SAND            = 7368,  -- Just a pile of sand.

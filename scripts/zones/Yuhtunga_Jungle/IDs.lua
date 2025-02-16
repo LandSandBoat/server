@@ -28,6 +28,7 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         DIG_THROW_AWAY                = 7579,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7581,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7647,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
+        FOUND_ITEM_WITH_EASE          = 7656,  -- It appears your chocobo found this item with ease.
         FLOWER_BLOOMING               = 7672,  -- A large flower is blooming.
         FOUND_NOTHING_IN_FLOWER       = 7675,  -- You find nothing inside the flower.
         FEEL_DIZZY                    = 7676,  -- You feel slightly dizzy. You must have breathed in too much of the pollen.

@@ -5,14 +5,12 @@
 -- Involved in Quests: Save the Clock Tower
 -- !pos -43 0 -1 244
 -----------------------------------
-local ID = zones[xi.zone.UPPER_JEUNO]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local theLostCardien = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
-    local cooksPride = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+    local cooksPride = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOKS_PRIDE)
 
     if
         cooksPride == xi.questStatus.QUEST_COMPLETED and
@@ -44,8 +42,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addTitle(xi.title.TWOS_COMPANY)
         player:setCharVar('theLostCardianVar', 0)
         npcUtil.giveCurrency(player, 'gil', 2100)
-        player:addKeyItem(xi.ki.TWO_OF_SWORDS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TWO_OF_SWORDS) -- Two of Swords (Key Item)
+        npcUtil.giveKeyItem(player, xi.ki.TWO_OF_SWORDS)
         player:addFame(xi.fameArea.JEUNO, 30)
         player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
         player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) -- Start next quest "THE_KING_CARDIAN"
