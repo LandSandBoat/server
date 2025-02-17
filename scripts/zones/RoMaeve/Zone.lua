@@ -72,7 +72,7 @@ zoneObject.onGameHour = function(zone)
         vanadielHour == 12 or
         vanadielHour == 18
     then
-        npcUtil.queueMove(qm2, newPosition, 100)
+        npcUtil.queueMove(qm2, newPosition)
     end
 end
 
