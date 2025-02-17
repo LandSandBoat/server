@@ -36,7 +36,8 @@ zoneObject.onGameHour = function(zone)
     local vanadielHour = VanadielHour()
     local moongate1 = GetNPCByID(ID.npc.MOONGATE_OFFSET)
     local moongate2 = GetNPCByID(ID.npc.MOONGATE_OFFSET + 1)
-
+    local qm2 = GetNPCByID(ID.npc.BASTOK_7_1_QM)
+    local newPosition = npcUtil.pickNewPosition(ID.npc.BASTOK_7_1_QM, ID.npc.BASTOK_7_1_QM_POS, false)
     -- Make Ro'Maeve come to life between 6pm and 6am during a full moon
     if moongate1 and moongate2 then
         if IsMoonFull() and (vanadielHour >= 18 or vanadielHour < 6) then
@@ -63,6 +64,15 @@ zoneObject.onGameHour = function(zone)
                 moongate1:setLocalVar('romaeveActive', 0) -- Make loop available again
             end
         end
+    end
+
+    if
+        vanadielHour == 0 or
+        vanadielHour == 6 or
+        vanadielHour == 12 or
+        vanadielHour == 18
+    then
+        npcUtil.queueMove(qm2, newPosition, 100)
     end
 end
 
