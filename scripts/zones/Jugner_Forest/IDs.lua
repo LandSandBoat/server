@@ -26,6 +26,7 @@ zones[xi.zone.JUGNER_FOREST] =
         FIND_NOTHING                  = 7737,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7803,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         FOUND_ITEM_WITH_EASE          = 7812,  -- It appears your chocobo found this item with ease.
+        SIGNPOST_NEW                  = 7892, -- The signpost looks as good as new!
         LOGGING_IS_POSSIBLE_HERE      = 7915,  -- Logging is possible here if you have <item>.
         VOIDWALKER_OBTAIN_KI          = 7922,  -- Obtained key item: <keyitem>!
         CONQUEST                      = 8066,  -- You've earned conquest points!
@@ -99,6 +100,7 @@ zones[xi.zone.JUGNER_FOREST] =
     {
         OVERSEER_BASE = GetFirstID('Chaplion_RK'),
         LOGGING       = GetTableOfIDs('Logging_Point'),
+        SIGNPOST      = GetTableOfIDs('Signpost'),
     },
 }
 
