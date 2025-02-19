@@ -19,6 +19,7 @@ end
 commandObj.onTrigger = function(player, minutes)
     local battlefield     = player:getBattlefield()
     if not battlefield then
+        error(player, 'This command can only be used while inside a battlefield.')
         return
     end
 
