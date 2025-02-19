@@ -8,8 +8,9 @@ mixins = { require('scripts/mixins/rage') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.GIL_MIN, 19000)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 33000)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 20000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 20000)
+    mob:addImmunity(xi.immunity.POISON)
 end
 
 entity.onMobSpawn = function(mob)

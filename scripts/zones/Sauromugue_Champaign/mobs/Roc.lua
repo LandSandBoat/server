@@ -2,14 +2,24 @@
 -- Area: Sauromugue Champaign (120)
 --  HNM: Roc
 -----------------------------------
-mixins = { require('scripts/mixins/rage') }
+mixins =
+{
+    require('scripts/mixins/rage'),
+    require('scripts/mixins/job_special')
+}
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.GIL_MIN, 15000)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 30000)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 20000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 20000)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.EVA, 400)
 end
 
 entity.onMobFight = function(mob, target)
@@ -33,7 +43,7 @@ end
 
 entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
+    mob:setRespawnTime(math.random(3600, 7200)) -- 1 to 2 hours
 end
 
 return entity
