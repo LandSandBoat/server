@@ -204,9 +204,12 @@ void CBattlefield::SetTimeLimit(duration time)
     m_TimeLimit      = time;
     m_LastPromptTime = time;
 
-    for (auto player : m_EnteredPlayers)
+    if (m_showTimer)
     {
-        charutils::SendTimerPacket(GetZone()->GetCharByID(player), GetRemainingTime());
+        for (auto player : m_EnteredPlayers)
+        {
+            charutils::SendTimerPacket(GetZone()->GetCharByID(player), GetRemainingTime());
+        }
     }
 }
 
