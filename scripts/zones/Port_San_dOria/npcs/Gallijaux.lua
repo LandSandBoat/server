@@ -23,7 +23,7 @@ entity.onTrade = function(player, npc, trade)
     if moatCarp + forestCarp > 0 and moatCarp + forestCarp == count then
         if
             player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_RIVALRY) == xi.questStatus.QUEST_ACCEPTED and
-            totalFish >= 10000
+            totalFish >= 2500
         then
             -- ultimate reward
             player:tradeComplete()
