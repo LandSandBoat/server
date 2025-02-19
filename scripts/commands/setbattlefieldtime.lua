@@ -8,7 +8,7 @@ local commandObj = {}
 commandObj.cmdprops =
 {
     permission = 4,
-    parameters = 'si'
+    parameters = 'i'
 }
 
 local function error(player, msg)
