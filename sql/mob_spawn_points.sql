@@ -14810,7 +14810,7 @@ INSERT INTO `mob_spawn_points` VALUES (17043867,'Mamool_Ja_Conservator','Mamool 
 INSERT INTO `mob_spawn_points` VALUES (17043868,'Mamool_Ja_Treasurer','Mamool Ja Treasurer',49,-254.567,14.432,-73.429,177);
 INSERT INTO `mob_spawn_points` VALUES (17043869,'Mamool_Ja_Conservator','Mamool Ja Conservator',48,-256.132,14.414,-78.581,243);
 INSERT INTO `mob_spawn_points` VALUES (17043870,'Mamool_Ja_Treasurer','Mamool Ja Treasurer',49,-178.913,4.160,-25.367,208);
-INSERT INTO `mob_spawn_points` VALUES (17043871,'Mamool_Ja','Mamool Ja',50,-256.286,4.458,-137.356,85);
+INSERT INTO `mob_spawn_points` VALUES (17043871,'Mamool_Ja','Mamool Ja',50,-260.382,5.07,-142.875,62);
 
 -- Mamook Incursion
 INSERT INTO `mob_spawn_points` VALUES (17043872,'Sagelord_Molaal_Ja','Sagelord Molaal Ja',51,83.000,48.194,157.000,32);
