@@ -1879,11 +1879,6 @@ void CZoneEntities::ZoneServer(time_point tick)
             }
 
             PChar->PAI->Tick(tick);
-
-            if (PChar->PTreasurePool)
-            {
-                PChar->PTreasurePool->CheckItems(tick);
-            }
         }
 
         // Else-if chain so only one end-result can be processed.

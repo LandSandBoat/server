@@ -18125,25 +18125,39 @@ void CLuaBaseEntity::addTreasure(uint16 itemID, sol::object const& arg1, sol::ob
         return;
     }
 
-    if (PChar->PTreasurePool != nullptr)
+    if ((arg1 != sol::lua_nil) && arg1.is<CLuaBaseEntity*>())
     {
-        if ((arg1 != sol::lua_nil) && arg1.is<CLuaBaseEntity*>())
-        {
-            uint16 droprate = (arg2 != sol::lua_nil) ? arg2.as<uint16>() : 1000;
+        uint16 droprate = (arg2 != sol::lua_nil) ? arg2.as<uint16>() : 1000;
 
-            // The specified PEntity can be a Mob or NPC
-            CLuaBaseEntity* PLuaBaseEntity = arg1.as<CLuaBaseEntity*>();
-            CBaseEntity*    PEntity        = PLuaBaseEntity->GetBaseEntity();
+        // The specified PEntity can be a Mob or NPC
+        CLuaBaseEntity* PLuaBaseEntity = arg1.as<CLuaBaseEntity*>();
+        CBaseEntity*    PEntity        = PLuaBaseEntity->GetBaseEntity();
 
-            charutils::DistributeItem(PChar, PEntity, itemID, droprate);
-        }
-        else // Entity can be nullptr - this is intentional
-        {
-            uint16 droprate = (arg1 != sol::lua_nil) ? arg1.as<uint16>() : 1000;
-
-            charutils::DistributeItem(PChar, nullptr, itemID, droprate);
-        }
+        charutils::DistributeItem(PChar, PEntity, itemID, droprate);
     }
+    else // Entity can be nullptr - this is intentional
+    {
+        uint16 droprate = (arg1 != sol::lua_nil) ? arg1.as<uint16>() : 1000;
+
+        charutils::DistributeItem(PChar, nullptr, itemID, droprate);
+    }
+}
+
+/************************************************************************
+ *  Function: getTreasurePool()
+ *  Purpose : Returns PC treasure pool
+ *  Example : player:getTreasurePool()
+ *  Notes   :
+ ************************************************************************/
+
+auto CLuaBaseEntity::getTreasurePool() -> CTreasurePool*
+{
+    if (const auto PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        return &PChar->GetTreasurePool();
+    }
+
+    return nullptr;
 }
 
 /************************************************************************
@@ -19674,6 +19688,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getDropID", CLuaBaseEntity::getDropID);
     SOL_REGISTER("setDropID", CLuaBaseEntity::setDropID);
     SOL_REGISTER("addTreasure", CLuaBaseEntity::addTreasure);
+    SOL_REGISTER("getTreasurePool", CLuaBaseEntity::getTreasurePool);
     SOL_REGISTER("getStealItem", CLuaBaseEntity::getStealItem);
     SOL_REGISTER("getDespoilItem", CLuaBaseEntity::getDespoilItem);
     SOL_REGISTER("getDespoilDebuff", CLuaBaseEntity::getDespoilDebuff);

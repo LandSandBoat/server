@@ -1,0 +1,87 @@
+-----------------------------------
+-- func: getpool
+-- desc: prints the treasure pool of the current target.
+-----------------------------------
+---@type TCommand
+local commandObj = {}
+
+commandObj.cmdprops =
+{
+    permission = 3,
+    parameters = ''
+}
+
+local function getItemNameById(id)
+    for name, value in pairs(xi.item) do
+        if value == id then
+            return name
+        end
+    end
+
+    return id
+end
+
+local function getPoolTypeById(id)
+    for name, value in pairs(xi.treasurePool) do
+        if value == id then
+            return name
+        end
+    end
+
+    return id
+end
+
+local function printPool(player, target, treasurePool)
+    local itemsInPool = treasurePool:getItems()
+    local members = treasurePool:getMembers()
+    player:printToPlayer(
+            string.format('%s\'s Treasure Pool (%s)', target:getName(), getPoolTypeById(treasurePool:getType())), xi.msg.channel.SYSTEM_3)
+    player:printToPlayer(
+            string.format('%d/%d member(s)', #members, treasurePool:getType()), xi.msg.channel.SYSTEM_3)
+    for _, member in pairs(members) do
+        player:printToPlayer(
+                string.format('  %s (%d)', member:getName(), member:getID()), xi.msg.channel.SYSTEM_3)
+    end
+
+    for _, item in pairs(itemsInPool) do
+        if item.ID ~= 0 then
+            local lotters = item.Lotters
+            player:printToPlayer(
+                    string.format('Slot_%d = %s', item.SlotID, getItemNameById(item.ID), #lotters), xi.msg.channel.SYSTEM_3)
+            if #lotters == 0 then
+                player:printToPlayer(
+                        '  No lots', xi.msg.channel.SYSTEM_3)
+            else
+                for _, lotter in pairs(lotters) do
+                    player:printToPlayer(
+                            string.format('  %s -> %d', lotter.member:getName(), lotter.lot), xi.msg.channel.SYSTEM_3)
+                end
+            end
+        end
+    end
+end
+
+local function error(player, msg)
+    player:printToPlayer(msg)
+    player:printToPlayer('!getpool')
+end
+
+commandObj.onTrigger = function(player)
+    local target = player:getCursorTarget()
+    if target == nil then
+        local zone = player:getZone()
+        local treasurePools = zone:getTreasurePools()
+        for charId, pool in pairs(treasurePools) do
+            local char = GetPlayerByID(charId) or charId
+            printPool(player, char, pool)
+        end
+    elseif target:isNPC() then
+        error(player, 'Current target is an NPC.')
+        return
+    else
+        local treasurePool = target:getTreasurePool()
+        printPool(player, target, treasurePool)
+    end
+end
+
+return commandObj

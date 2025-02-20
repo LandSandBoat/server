@@ -94,6 +94,7 @@
 #include "utils/gardenutils.h"
 #include "utils/moduleutils.h"
 #include "utils/petutils.h"
+#include "utils/zoneutils.h"
 #include "weapon_skill.h"
 
 CCharEntity::CCharEntity()
@@ -215,10 +216,9 @@ CCharEntity::CCharEntity()
     TradePending.clean();
     InvitePending.clean();
 
-    PLinkshell1   = nullptr;
-    PLinkshell2   = nullptr;
-    PUnityChat    = nullptr;
-    PTreasurePool = nullptr;
+    PLinkshell1 = nullptr;
+    PLinkshell2 = nullptr;
+    PUnityChat  = nullptr;
 
     PClaimedMob            = nullptr;
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
@@ -275,10 +275,9 @@ CCharEntity::~CCharEntity()
     TracyZoneScoped;
     clearPacketList();
 
-    if (PTreasurePool != nullptr)
+    if (auto& PTreasurePool = GetTreasurePool(); PTreasurePool.IsManaged())
     {
-        // remove myself
-        PTreasurePool->DelMember(this);
+        PTreasurePool.DelMember(this);
     }
 
     ClearTrusts(); // trusts don't survive zone lines
@@ -708,6 +707,11 @@ uint8 CCharEntity::getAutomatonElementMax(uint8 element)
 uint8 CCharEntity::getAutomatonElementCapacity(uint8 element)
 {
     return automatonInfo.m_ElementEquip[element];
+}
+
+CTreasurePool& CCharEntity::GetTreasurePool()
+{
+    return zoneutils::GetZone(this->getZone())->GetTreasurePool(this);
 }
 
 /************************************************************************

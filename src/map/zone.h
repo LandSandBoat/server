@@ -36,6 +36,7 @@
 #include "los/zone_los.h"
 #include "navmesh.h"
 #include "packets/weather.h"
+#include "treasure_pool_container.h"
 #include "trigger_area.h"
 
 enum ZONEID : uint16
@@ -525,6 +526,7 @@ class CPetEntity;
 class CBattleEntity;
 class CTrustEntity;
 class CTreasurePool;
+class CTreasurePoolContainer;
 class CZoneEntities;
 
 typedef std::list<std::unique_ptr<ITriggerArea>> triggerAreaList_t;
@@ -572,6 +574,12 @@ public:
     uint32 GetLocalVar(const char* var);
     void   SetLocalVar(const char* var, uint32 val);
     void   ResetLocalVars();
+
+    auto CreateTreasurePool(uint32 poolOwnerId, TREASUREPOOLTYPE poolType) const -> CTreasurePool&;
+    auto GetTreasurePool(CCharEntity* PChar) const -> CTreasurePool&;
+    auto GetTreasurePools() const -> std::unordered_map<uint32, CTreasurePool>&;
+    void ReleaseTreasurePool(CTreasurePool& PTreasurePool) const;
+    auto ReassignTreasurePool(CCharEntity* PPrev, CCharEntity* PNew) -> bool;
 
     virtual CCharEntity* GetCharByName(std::string const& name);
     virtual CCharEntity* GetCharByID(uint32 id);
@@ -678,7 +686,7 @@ private:
     void LoadZoneLines();
     void LoadZoneWeather();
 
-    CTreasurePool* m_TreasurePool;
+    std::unique_ptr<CTreasurePoolContainer> m_TreasurePoolContainer;
 
     time_point m_timeZoneEmpty; // The time point when the last player left the zone
 

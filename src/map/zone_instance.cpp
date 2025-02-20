@@ -178,12 +178,6 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
         return;
     }
 
-    if (PChar->PTreasurePool != nullptr)
-    {
-        ShowWarning("PTreasurePool was not empty for %s.", PChar->getName());
-        return;
-    }
-
     // return char to instance (d/c or logout)
     if (!PChar->PInstance)
     {

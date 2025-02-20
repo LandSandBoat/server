@@ -4176,7 +4176,7 @@ namespace charutils
 
         if (thDropRate > 0 && xirand::GetRandomNumber(1, 10000) <= thDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
         {
-            PChar->PTreasurePool->AddItem(itemid, PEntity);
+            PChar->GetTreasurePool().AddItem(itemid, PEntity);
         }
     }
 

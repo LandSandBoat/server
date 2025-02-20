@@ -124,6 +124,8 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/transport.h
     ${CMAKE_CURRENT_SOURCE_DIR}/treasure_pool.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/treasure_pool.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/treasure_pool_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/treasure_pool_container.h
     ${CMAKE_CURRENT_SOURCE_DIR}/trigger_area.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/trigger_area.h
     ${CMAKE_CURRENT_SOURCE_DIR}/unitychat.cpp

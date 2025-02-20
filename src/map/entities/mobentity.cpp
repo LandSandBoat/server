@@ -43,6 +43,7 @@
 #include "packets/action.h"
 #include "packets/entity_update.h"
 #include "packets/pet_sync.h"
+#include "recast_container.h"
 #include "roe.h"
 #include "status_effect_container.h"
 #include "treasure_pool.h"
@@ -688,8 +689,50 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     // Adds an item to the treasure pool. Treasure pool will automatically kick out items if the pool is full (prioritizing non rare non ex items)
     auto AddItemToPool = [this, PChar](uint16 ItemID)
     {
-        PChar->PTreasurePool->AddItem(ItemID, this);
+        PChar->GetTreasurePool().AddItem(ItemID, this);
         PAI->EventHandler.triggerListener("TREASUREPOOL", CLuaBaseEntity(this), CLuaBaseEntity(PChar), ItemID);
+    };
+
+    auto CanAddSeal = [this, PChar]()
+    {
+        const auto PParty = PChar->PParty;
+
+        if (!PParty)
+        {
+            return !PChar->PRecastContainer->Has(RECAST_LOOT, 1);
+        }
+
+        for (const auto& member : PChar->GetTreasurePool().GetMembers())
+        {
+            if (member->PParty == PParty)
+            {
+                if (member->PRecastContainer->Has(RECAST_LOOT, 1))
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    };
+
+    auto AddSealRecast = [this, PChar]()
+    {
+        const auto PParty = PChar->PParty;
+
+        if (!PParty)
+        {
+            PChar->PRecastContainer->Add(RECAST_LOOT, 1, 300);
+            return;
+        }
+
+        for (const auto& member : PChar->GetTreasurePool().GetMembers())
+        {
+            if (member->PParty == PParty)
+            {
+                member->PRecastContainer->Add(RECAST_LOOT, 1, 300);
+            }
+        }
     };
 
     DropList_t* dropList = itemutils::GetDropList(m_DropID);
@@ -769,7 +812,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         >= 75 = Kindred Crests ID=2955
         >= 90 = High Kindred Crests ID=2956
         */
-        if (xirand::GetRandomNumber(100) < 20 && PChar->PTreasurePool->CanAddSeal())
+
+        if (xirand::GetRandomNumber(100) < 20 && CanAddSeal())
         {
             // RULES: Only 1 kind may drop per mob
             if (GetMLevel() >= 75 && luautils::IsContentEnabled("ABYSSEA")) // all 4 types
@@ -821,6 +865,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                 // b.seal only
                 AddItemToPool(1126);
             }
+
+            AddSealRecast();
         }
 
         /* check for Avatarite/Geode Drops.

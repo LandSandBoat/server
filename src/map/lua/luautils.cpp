@@ -45,6 +45,7 @@
 #include "lua_spell.h"
 #include "lua_statuseffect.h"
 #include "lua_trade_container.h"
+#include "lua_treasure_pool.h"
 #include "lua_trigger_area.h"
 #include "lua_zone.h"
 
@@ -92,6 +93,7 @@
 #include "timetriggers.h"
 #include "trade_container.h"
 #include "transport.h"
+#include "treasure_pool.h"
 #include "weapon_skill.h"
 #include "zone.h"
 #include "zone_entities.h"
@@ -356,6 +358,7 @@ namespace luautils
         CLuaSpell::Register();
         CLuaStatusEffect::Register();
         CLuaTradeContainer::Register();
+        CLuaTreasurePool::Register();
         CLuaZone::Register();
         CLuaItem::Register();
 

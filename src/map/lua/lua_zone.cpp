@@ -176,6 +176,42 @@ WEATHER CLuaZone::getWeather()
     return m_pLuaZone->GetWeather();
 }
 
+/************************************************************************
+ *  Function: getTreasurePools()
+ *  Purpose : Return all treasure pools in the zone
+ *  Example : zone:getTreasurePools()
+ *  Notes   : Mainly used for testing purposes. See !getpool
+ ************************************************************************/
+
+auto CLuaZone::getTreasurePools() const -> sol::table
+{
+    auto table = lua.create_table();
+
+    for (auto& [id, pool] : m_pLuaZone->GetTreasurePools())
+    {
+        table[id] = &pool;
+    }
+
+    return table;
+}
+
+/************************************************************************
+ *  Function: createTreasurePool()
+ *  Purpose : Create a new treasure pool.
+ *  Example : zone:createTreasurePool(player, xi.treasurePool.SHARED)
+ *  Notes   : Treasure pools created in this fashion are unmanaged. See CLuaTreasurePool::addMember
+ ************************************************************************/
+
+auto CLuaZone::createTreasurePool(const CLuaBaseEntity* PEntity, const TREASUREPOOLTYPE poolType) const -> CTreasurePool*
+{
+    if (const auto* PChar = dynamic_cast<CCharEntity*>(PEntity->GetBaseEntity()))
+    {
+        return &m_pLuaZone->CreateTreasurePool(PChar->id, poolType);
+    }
+
+    return nullptr;
+}
+
 uint32 CLuaZone::getUptime()
 {
     time_point currentTime   = std::chrono::system_clock::now(); // Gets the current time
@@ -324,6 +360,8 @@ void CLuaZone::Register()
     SOL_REGISTER("getTypeMask", CLuaZone::getTypeMask);
     SOL_REGISTER("getBattlefieldByInitiator", CLuaZone::getBattlefieldByInitiator);
     SOL_REGISTER("getWeather", CLuaZone::getWeather);
+    SOL_REGISTER("getTreasurePools", CLuaZone::getTreasurePools);
+    SOL_REGISTER("createTreasurePool", CLuaZone::createTreasurePool);
     SOL_REGISTER("getUptime", CLuaZone::getUptime);
     SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
     SOL_REGISTER("isNavigablePoint", CLuaZone::isNavigablePoint);

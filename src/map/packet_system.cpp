@@ -444,11 +444,8 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket<CJobPointDetailsPacket>(PChar);
     }
 
-    // TODO: While in mog house; treasure pool is not created.
-    if (PChar->PTreasurePool != nullptr)
-    {
-        PChar->PTreasurePool->UpdatePool(PChar);
-    }
+    PChar->GetTreasurePool().UpdatePool(PChar);
+
     PChar->loc.zone->SpawnTransport(PChar);
 
     // respawn any pets from last zone
@@ -2249,12 +2246,9 @@ void SmallPacket0x041(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    if (PChar->PTreasurePool != nullptr)
+    if (auto& PTreasurePool = PChar->GetTreasurePool(); !PTreasurePool.HasLottedItem(PChar, SlotID))
     {
-        if (!PChar->PTreasurePool->HasLottedItem(PChar, SlotID))
-        {
-            PChar->PTreasurePool->LotItem(PChar, SlotID, xirand::GetRandomNumber(1, 1000)); // 1 ~ 998+1
-        }
+        PTreasurePool.LotItem(PChar, SlotID, xirand::GetRandomNumber(1, 1000)); // 1 ~ 998+1
     }
 }
 
@@ -2276,12 +2270,9 @@ void SmallPacket0x042(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    if (PChar->PTreasurePool != nullptr)
+    if (auto& PTreasurePool = PChar->GetTreasurePool(); !PTreasurePool.HasPassedItem(PChar, SlotID))
     {
-        if (!PChar->PTreasurePool->HasPassedItem(PChar, SlotID))
-        {
-            PChar->PTreasurePool->PassItem(PChar, SlotID);
-        }
+        PTreasurePool.PassItem(PChar, SlotID);
     }
 }
 

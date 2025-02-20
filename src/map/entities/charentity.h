@@ -285,6 +285,7 @@ class CAbilityState;
 class CRangeState;
 class CItemState;
 class CItemUsable;
+class CTreasurePool;
 
 typedef std::map<uint32, CBaseEntity*> SpawnIDList_t;
 typedef std::vector<EntityID_t>        BazaarList_t;
@@ -468,13 +469,14 @@ public:
 
     virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
 
-    CLinkshell*    PLinkshell1;
-    CLinkshell*    PLinkshell2;
-    CUnityChat*    PUnityChat;
-    CTreasurePool* PTreasurePool;
-    CMeritPoints*  PMeritPoints;
-    CJobPoints*    PJobPoints;
-    bool           MeritMode;
+    CLinkshell*   PLinkshell1;
+    CLinkshell*   PLinkshell2;
+    CUnityChat*   PUnityChat;
+    CMeritPoints* PMeritPoints;
+    CJobPoints*   PJobPoints;
+    bool          MeritMode;
+
+    CTreasurePool& GetTreasurePool();
 
     CLatentEffectContainer* PLatentEffectContainer;
     bool                    retriggerLatents; // used to retrigger all latent effects if some event requires them to be retriggered

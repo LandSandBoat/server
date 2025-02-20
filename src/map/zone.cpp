@@ -46,6 +46,7 @@
 #include "spell.h"
 #include "status_effect_container.h"
 #include "treasure_pool.h"
+#include "treasure_pool_container.h"
 #include "unitychat.h"
 #include "zone_entities.h"
 
@@ -91,7 +92,6 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
     ZoneTimer             = nullptr;
     ZoneTimerTriggerAreas = nullptr;
 
-    m_TreasurePool       = nullptr;
     m_BattlefieldHandler = nullptr;
     m_Weather            = WEATHER_NONE;
     m_navMesh            = nullptr;
@@ -100,6 +100,8 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
 
     // settings should load first
     LoadZoneSettings();
+
+    m_TreasurePoolContainer = std::make_unique<CTreasurePoolContainer>(m_miscMask & MISC_TREASURE);
 
     LoadZoneLines();
     LoadZoneWeather();
@@ -111,7 +113,6 @@ CZone::~CZone()
 {
     TracyZoneScoped;
 
-    destroy(m_TreasurePool);
     destroy(m_zoneEntities);
     destroy(m_BattlefieldHandler);
 
@@ -387,6 +388,33 @@ void CZone::LoadZoneWeather()
     }
 }
 
+auto CZone::ReassignTreasurePool(CCharEntity* PPrev, CCharEntity* PNew) -> bool
+{
+    ShowDebugFmt("[{}] Reassigning Treasure Pool from {} to {}", m_zoneName, PPrev->id, PNew->id);
+    return m_TreasurePoolContainer->ReassignTreasurePool(PPrev, PNew);
+}
+
+// Create a new UNMANAGED treasure pool in the zone
+auto CZone::CreateTreasurePool(const uint32 poolOwnerId, const TREASUREPOOLTYPE poolType) const -> CTreasurePool&
+{
+    return m_TreasurePoolContainer->CreateTreasurePool(poolOwnerId, poolType, TREASUREPOOL_UNMANAGED);
+}
+
+auto CZone::GetTreasurePool(CCharEntity* PChar) const -> CTreasurePool&
+{
+    return m_TreasurePoolContainer->GetTreasurePool(PChar);
+}
+
+auto CZone::GetTreasurePools() const -> std::unordered_map<uint32, CTreasurePool>&
+{
+    return m_TreasurePoolContainer->GetTreasurePools();
+}
+
+void CZone::ReleaseTreasurePool(CTreasurePool& PTreasurePool) const
+{
+    m_TreasurePoolContainer->ReleaseTreasurePool(PTreasurePool);
+}
+
 void CZone::LoadZoneSettings()
 {
     TracyZoneScoped;
@@ -427,10 +455,6 @@ void CZone::LoadZoneSettings()
         if (_sql->GetData(10) != nullptr) // bcnmid cannot be used now, because they start from scratch
         {
             m_BattlefieldHandler = new CBattlefieldHandler(this);
-        }
-        if (m_miscMask & MISC_TREASURE)
-        {
-            m_TreasurePool = new CTreasurePool(TREASUREPOOL_ZONE);
         }
         if (m_CampaignHandler && m_CampaignHandler->m_PZone == nullptr)
         {
@@ -705,9 +729,9 @@ void CZone::IncreaseZoneCounter(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
-    if (PChar == nullptr || PChar->loc.zone != nullptr || PChar->PTreasurePool != nullptr)
+    if (PChar == nullptr || PChar->loc.zone != nullptr)
     {
-        ShowWarning("CZone::IncreaseZoneCounter() - PChar is null, or Player zone or Treasure Pools is not null.");
+        ShowWarning("CZone::IncreaseZoneCounter() - PChar is null, or Player zone is not null.");
         return;
     }
 
@@ -841,6 +865,8 @@ void CZone::ZoneServer(time_point tick)
     {
         m_BattlefieldHandler->HandleBattlefields(tick);
     }
+
+    m_TreasurePoolContainer->OnZoneTick(tick);
 
     if (ZoneTimer && m_zoneEntities->CharListEmpty() && m_timeZoneEmpty + 5s < server_clock::now())
     {
@@ -991,25 +1017,6 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 
     PChar->ReloadPartyInc();
 
-    // Zone-wide treasure pool takes precendence over all others
-    if (m_TreasurePool && m_TreasurePool->GetPoolType() == TREASUREPOOL_ZONE)
-    {
-        PChar->PTreasurePool = m_TreasurePool;
-        PChar->PTreasurePool->AddMember(PChar);
-    }
-    else
-    {
-        if (PChar->PParty)
-        {
-            PChar->PParty->ReloadTreasurePool(PChar);
-        }
-        else
-        {
-            PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
-            PChar->PTreasurePool->AddMember(PChar);
-        }
-    }
-
     if (!(m_zoneType & ZONE_TYPE::INSTANCED))
     {
         charutils::ClearTempItems(PChar);
@@ -1085,6 +1092,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         }
     }
 
+    m_TreasurePoolContainer->OnZoneOut(PChar);
     moduleutils::OnCharZoneOut(PChar);
     luautils::OnZoneOut(PChar);
 
@@ -1114,19 +1122,6 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         }
         PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
         PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_RESTRICTION);
-    }
-
-    if (PChar->PTreasurePool != nullptr) // TODO: Condition for eliminating problems with MobHouse, we need to solve it once and for all!
-    {
-        PChar->PTreasurePool->DelMember(PChar);
-    }
-
-    // If zone-wide treasure pool but no players in zone then destroy current pool and create new pool
-    // this prevents loot from staying in zone pool after the last player leaves the zone
-    if (m_TreasurePool && m_TreasurePool->GetPoolType() == TREASUREPOOL_ZONE && m_zoneEntities->CharListEmpty())
-    {
-        destroy(m_TreasurePool);
-        m_TreasurePool = new CTreasurePool(TREASUREPOOL_ZONE);
     }
 
     PChar->loc.zone = nullptr;

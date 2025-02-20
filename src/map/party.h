@@ -73,11 +73,11 @@ public:
     CBattleEntity* GetSyncTarget();
     CBattleEntity* GetQuaterMaster();
     CBattleEntity* GetMemberByName(const std::string& memberName); // Returns entity pointer for member name string
+    auto           GetMembers(uint16 ZoneID) const -> std::vector<CBattleEntity*>;
 
     void DisbandParty(bool playerInitiated = true);
     void ReloadParty();
     void ReloadPartyMembers(CCharEntity* PChar);
-    void ReloadTreasurePool(CCharEntity* PChar);
 
     void   AddMember(CBattleEntity* PEntity);
     void   AddMember(uint32 id);                 // Add party member from outside this server's scope

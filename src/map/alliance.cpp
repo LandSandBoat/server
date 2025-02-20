@@ -38,6 +38,7 @@
 #include "packets/menu_config.h"
 #include "packets/party_define.h"
 #include "packets/party_member_update.h"
+#include "utils/zoneutils.h"
 
 CAlliance::CAlliance(CBattleEntity* PEntity)
 {
@@ -53,8 +54,8 @@ CAlliance::CAlliance(CBattleEntity* PEntity)
     // m_PSyncTarget
     // m_PQuarterMaster
 
-    addParty(PEntity->PParty);
     this->aLeader = PEntity->PParty;
+    addParty(PEntity->PParty);
     _sql->Query("UPDATE accounts_parties SET partyflag = partyflag | %d WHERE partyid = %u AND partyflag & %d", ALLIANCE_LEADER, m_AllianceID,
                 PARTY_LEADER);
 }
@@ -186,11 +187,36 @@ void CAlliance::delParty(CParty* party)
         return;
     }
 
+    bool releaseTreasurePool = false;
+    if (this->getMainParty() == party)
+    {
+        releaseTreasurePool = true;
+    }
+
     // Delete the party from the alliance list
     auto partyToDelete = std::find(party->m_PAlliance->partyList.begin(), party->m_PAlliance->partyList.end(), party);
 
     if (partyToDelete != party->m_PAlliance->partyList.end())
     {
+        std::vector<std::pair<CZone*, CTreasurePool&>> PTreasurePools;
+
+        for (const auto& PMember : party->members)
+        {
+            const auto PChar = static_cast<CCharEntity*>(PMember);
+            if (auto& PTreasurePool = PChar->GetTreasurePool(); PTreasurePool.IsManaged())
+            {
+                PTreasurePools.emplace_back(zoneutils::GetZone(PChar->getZone()), PTreasurePool);
+                PTreasurePool.DelMember(PChar);
+            }
+        }
+
+        // Force release of treasure pools, otherwise the leader would get reattached to the same pool
+        for (const auto& poolToBeReleased : PTreasurePools)
+        {
+            auto [PZone, PTreasurePool] = poolToBeReleased;
+            PZone->ReleaseTreasurePool(PTreasurePool);
+        }
+
         party->m_PAlliance->partyList.erase(partyToDelete);
     }
 
@@ -200,27 +226,18 @@ void CAlliance::delParty(CParty* party)
     }
 
     party->m_PAlliance = nullptr;
+
+    // Reattach party members to a new pool
+    for (const auto& PMember : party->members)
+    {
+        const auto PChar = static_cast<CCharEntity*>(PMember);
+        if (auto& PTreasurePool = PChar->GetTreasurePool(); PTreasurePool.IsManaged())
+        {
+            PTreasurePool.AddMember(PChar);
+        }
+    }
+
     party->SetPartyNumber(0);
-
-    // Remove party members from the alliance treasure pool, but not the zonewide pool.
-    for (auto* entry : party->members)
-    {
-        auto* member = dynamic_cast<CCharEntity*>(entry);
-        if (member != nullptr && member->PTreasurePool != nullptr && member->PTreasurePool->GetPoolType() != TREASUREPOOL_ZONE)
-        {
-            member->PTreasurePool->DelMember(member);
-        }
-    }
-
-    // Reload pools, assign new ones as appropriate.
-    for (auto& member : party->members)
-    {
-        auto* PMember = dynamic_cast<CCharEntity*>(member);
-        if (PMember && PMember->PParty)
-        {
-            PMember->PParty->ReloadTreasurePool(PMember);
-        }
-    }
 }
 
 void CAlliance::addParty(CParty* party)
@@ -235,6 +252,14 @@ void CAlliance::addParty(CParty* party)
     {
         ShowWarning("CAlliance::addParty - Alliance party list was full when trying to add a party.");
         return;
+    }
+
+    for (auto* PChar : party->members)
+    {
+        if (auto& PTreasurePool = static_cast<CCharEntity*>(PChar)->GetTreasurePool(); PTreasurePool.IsManaged())
+        {
+            PTreasurePool.DelMember(static_cast<CCharEntity*>(PChar));
+        }
     }
 
     party->m_PAlliance = this;
@@ -259,8 +284,11 @@ void CAlliance::addParty(CParty* party)
 
     for (std::size_t i = 0; i < party->members.size(); ++i)
     {
-        CCharEntity* PChar = static_cast<CCharEntity*>(party->members.at(i));
-        party->ReloadTreasurePool(PChar);
+        auto* PChar = static_cast<CCharEntity*>(party->members.at(i));
+        if (auto& PTreasurePool = PChar->GetTreasurePool(); PTreasurePool.IsManaged())
+        {
+            PTreasurePool.AddMember(PChar);
+        }
         charutils::SaveCharStats(PChar);
         PChar->m_charHistory.joinedAlliances++;
     }
@@ -309,7 +337,6 @@ void CAlliance::pushParty(CParty* PParty, uint8 number)
 
     for (std::size_t i = 0; i < PParty->members.size(); ++i)
     {
-        PParty->ReloadTreasurePool((CCharEntity*)PParty->members.at(i));
         charutils::SaveCharStats((CCharEntity*)PParty->members.at(i));
     }
 }
