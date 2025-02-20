@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Tomasa
--- Standard Merchant NPC
 -----------------------------------
 local ID = zones[xi.zone.METALWORKS]
 -----------------------------------
@@ -18,9 +17,6 @@ entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(xi.path.first(pathNodes))
     npc:pathThrough(pathNodes, xi.path.flag.PATROL)
-end
-
-entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
@@ -41,12 +37,6 @@ entity.onTrigger = function(player, npc)
 
     player:showText(npc, ID.text.TOMASA_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.BASTOK)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

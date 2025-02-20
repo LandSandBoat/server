@@ -26,7 +26,7 @@ xi.shop =
     -- send general shop dialog to player
     -- stock cuts off after 16 items. if you add more, extras will not display
     -- stock is of form { itemId1, price1, itemId2, price2, ... }
-    -- log is a fame area from xi.quest.fame_area
+    -- log is a fame area from xi.fameArea
     general = function(player, stock, log)
         local priceMultiplier = 1
 
@@ -42,7 +42,7 @@ xi.shop =
             player:addShopItem(stock[i], stock[i + 1] * priceMultiplier)
         end
 
-        player:sendMenu(2)
+        player:sendMenu(xi.menuType.SHOP)
     end,
 
     -- send general guild shop dialog to player (Added on June 2014 QoL)
@@ -57,7 +57,7 @@ xi.shop =
             player:addShopItem(stock[i], stock[i + 1], guildSkillId, stock[i + 2])
         end
 
-        player:sendMenu(2)
+        player:sendMenu(xi.menuType.SHOP)
     end,
 
     -- send curio vendor moogle shop shop dialog to player
@@ -74,7 +74,7 @@ xi.shop =
             end
         end
 
-        player:sendMenu(2)
+        player:sendMenu(xi.menuType.SHOP)
     end,
 
     -- send nation shop dialog to player

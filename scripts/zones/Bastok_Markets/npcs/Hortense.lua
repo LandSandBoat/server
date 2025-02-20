@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Hortense
--- Standard Merchant NPC
 -- !pos -82.503 -4.849 -132.376 235
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MARKETS]

@@ -41,18 +41,18 @@ void ConquestData::load()
     auto rset = db::query(Query);
     while (rset && rset->next())
     {
-        const auto regionId = rset->getInt("region_id");
+        const auto regionId = rset->get<uint32>("region_id");
 
         region_control_t regionControl{};
-        regionControl.current    = rset->getInt("region_control");
-        regionControl.prev       = rset->getInt("region_control_prev");
+        regionControl.current    = rset->get<uint8>("region_control");
+        regionControl.prev       = rset->get<uint8>("region_control_prev");
         regionControls[regionId] = regionControl;
 
         influence_t influence{};
-        influence.sandoria_influence = rset->getInt("sandoria_influence");
-        influence.bastok_influence   = rset->getInt("bastok_influence");
-        influence.windurst_influence = rset->getInt("windurst_influence");
-        influence.beastmen_influence = rset->getInt("beastmen_influence");
+        influence.sandoria_influence = rset->get<uint16>("sandoria_influence");
+        influence.bastok_influence   = rset->get<uint16>("bastok_influence");
+        influence.windurst_influence = rset->get<uint16>("windurst_influence");
+        influence.beastmen_influence = rset->get<uint16>("beastmen_influence");
         influences[regionId]         = influence;
     }
 }

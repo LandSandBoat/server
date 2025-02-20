@@ -6,6 +6,9 @@ require('scripts/globals/pathfind')
 xi = xi or {}
 xi.transport = xi.transport or {}
 
+-----------------------------------
+-- Enums
+-----------------------------------
 xi.transport.message =
 {
     NEARING = 0,
@@ -64,7 +67,7 @@ xi.transport.offset =
     selbina =
     {
         FERRY_ARRIVING_FROM_MHAURA = 399,
-        FERRY_DEPARTING_TO_MHAURA = 479
+        FERRY_DEPARTING_TO_MHAURA  = 479
     }
 }
 
@@ -94,14 +97,15 @@ xi.transport.pos =
     }
 }
 
-xi.transport.actions =
+local direction =
 {
     ARRIVE = 0,
     DEPART = 1,
 }
 
-xi.transport.destinations =
+local destination =
 {
+    MHAURA   = 0,
     SELBINA  = 0,
     AL_ZAHBI = 1,
 }
@@ -114,49 +118,65 @@ xi.transport.routes =
     SELBINA_MHAURA_OPEN_SEA = 3,
 }
 
-xi.transport.schedules =
+-----------------------------------
+-- Tables
+-----------------------------------
+local dockTable =
+{
+    -- ['npc_name'] = { eventId, route },
+    ['Baya_Hiramayuh' ] = { 232, xi.transport.routes.OPEN_SEA                }, -- Aht Urhgan Whitegate to Mhaura
+    ['Dieh_Yamilsiah' ] = { 231, xi.transport.routes.SELBINA_MHAURA_OPEN_SEA }, -- Mhaura to Aht Urhgan Whitegate or Selbina
+    ['Laughing_Bison' ] = { 333, xi.transport.routes.SELBINA_MHAURA_OPEN_SEA }, -- Mhaura to Aht Urhgan Whitegate or Selbina
+    ['Humilitie'      ] = { 231, xi.transport.routes.SELBINA_MHAURA          }, -- Selbina to Mhaura
+    ['Kuhn_Tsahnpri'  ] = { 236, xi.transport.routes.SILVER_SEA              }, -- Aht Urhgan Whitegate to Nashmau
+    ['Yohj_Dukonlhy'  ] = { 231, xi.transport.routes.SILVER_SEA              }, -- Nashmau to Aht Urhgan Whitegate
+}
+
+local scheduleTable =
 {
     [xi.transport.routes.SELBINA_MHAURA] = -- Ship bound for [Mhaura/Selbina]
     {
-        { time =    0, action = xi.transport.actions.DEPART }, -- 00:00
-        { time =  400, action = xi.transport.actions.ARRIVE }, -- 06:40
-        { time =  480, action = xi.transport.actions.DEPART }, -- 08:00
-        { time =  880, action = xi.transport.actions.ARRIVE }, -- 14:40
-        { time =  960, action = xi.transport.actions.DEPART }, -- 16:00
-        { time = 1360, action = xi.transport.actions.ARRIVE }, -- 22:40
+        [1] = { startTime =    0, endTime =  400, action = direction.ARRIVE, target = 0 },
+        [2] = { startTime =  400, endTime =  480, action = direction.DEPART, target = 0 },
+        [3] = { startTime =  480, endTime =  880, action = direction.ARRIVE, target = 0 },
+        [4] = { startTime =  880, endTime =  960, action = direction.DEPART, target = 0 },
+        [5] = { startTime =  960, endTime = 1360, action = direction.ARRIVE, target = 0 },
+        [6] = { startTime = 1360, endTime = 1440, action = direction.DEPART, target = 0 },
     },
+
     [xi.transport.routes.OPEN_SEA] = -- Open sea route to [Al Zahbi/Mhaura]
     {
-        { time =  160, action = xi.transport.actions.ARRIVE }, -- 02:40
-        { time =  240, action = xi.transport.actions.DEPART }, -- 04:00
-        { time =  640, action = xi.transport.actions.ARRIVE }, -- 10:40
-        { time =  720, action = xi.transport.actions.DEPART }, -- 12:00
-        { time = 1120, action = xi.transport.actions.ARRIVE }, -- 18:40
-        { time = 1200, action = xi.transport.actions.DEPART }, -- 20:00
+        [1] = { startTime =    0, endTime =  160, action = direction.ARRIVE, target = 0 },
+        [2] = { startTime =  160, endTime =  240, action = direction.DEPART, target = 0 },
+        [3] = { startTime =  240, endTime =  640, action = direction.ARRIVE, target = 0 },
+        [4] = { startTime =  640, endTime =  720, action = direction.DEPART, target = 0 },
+        [5] = { startTime =  720, endTime = 1120, action = direction.ARRIVE, target = 0 },
+        [6] = { startTime = 1120, endTime = 1200, action = direction.DEPART, target = 0 },
+        [7] = { startTime = 1200, endTime = 1600, action = direction.ARRIVE, target = 0 },
     },
     [xi.transport.routes.SILVER_SEA] = -- Silver Sea route to [Al Zahbi/Nashmau]
     {
-        { time =    0, action = xi.transport.actions.DEPART }, -- 00:00
-        { time =  300, action = xi.transport.actions.ARRIVE }, -- 05:00
-        { time =  480, action = xi.transport.actions.DEPART }, -- 08:00
-        { time =  780, action = xi.transport.actions.ARRIVE }, -- 13:00
-        { time =  960, action = xi.transport.actions.DEPART }, -- 16:00
-        { time = 1260, action = xi.transport.actions.ARRIVE }, -- 21:00
+        [1] = { startTime =    0, endTime =  300, action = direction.ARRIVE, target = 0 },
+        [2] = { startTime =  300, endTime =  480, action = direction.DEPART, target = 0 },
+        [3] = { startTime =  480, endTime =  780, action = direction.ARRIVE, target = 0 },
+        [4] = { startTime =  780, endTime =  960, action = direction.DEPART, target = 0 },
+        [5] = { startTime =  960, endTime = 1260, action = direction.ARRIVE, target = 0 },
+        [6] = { startTime = 1260, endTime = 1440, action = direction.DEPART, target = 0 },
     },
     [xi.transport.routes.SELBINA_MHAURA_OPEN_SEA] = -- Combination of Ship bound for [Mhaura/Selbina] and Open sea route to [Al Zahbi/Mhaura] used by Dieh Yamilsiah
     {
-        { time =    0, action = xi.transport.actions.DEPART, destination = xi.transport.destinations.SELBINA },  -- 00:00
-        { time =  160, action = xi.transport.actions.ARRIVE, destination = xi.transport.destinations.AL_ZAHBI }, -- 02:40
-        { time =  240, action = xi.transport.actions.DEPART, destination = xi.transport.destinations.AL_ZAHBI }, -- 04:00
-        { time =  400, action = xi.transport.actions.ARRIVE, destination = xi.transport.destinations.SELBINA },  -- 06:40
-        { time =  480, action = xi.transport.actions.DEPART, destination = xi.transport.destinations.SELBINA },  -- 08:00
-        { time =  640, action = xi.transport.actions.ARRIVE, destination = xi.transport.destinations.AL_ZAHBI }, -- 10:40
-        { time =  720, action = xi.transport.actions.DEPART, destination = xi.transport.destinations.AL_ZAHBI }, -- 12:00
-        { time =  880, action = xi.transport.actions.ARRIVE, destination = xi.transport.destinations.SELBINA },  -- 14:40
-        { time =  960, action = xi.transport.actions.DEPART, destination = xi.transport.destinations.SELBINA },  -- 16:00
-        { time = 1120, action = xi.transport.actions.ARRIVE, destination = xi.transport.destinations.AL_ZAHBI }, -- 18:40
-        { time = 1200, action = xi.transport.actions.DEPART, destination = xi.transport.destinations.AL_ZAHBI }, -- 20:00
-        { time = 1360, action = xi.transport.actions.ARRIVE, destination = xi.transport.destinations.SELBINA },  -- 22:40
+        [ 1] = { startTime =    0, endTime =  160, action = direction.ARRIVE, target = destination.AL_ZAHBI },
+        [ 2] = { startTime =  160, endTime =  240, action = direction.DEPART, target = destination.AL_ZAHBI },
+        [ 3] = { startTime =  240, endTime =  400, action = direction.ARRIVE, target = destination.SELBINA  },
+        [ 4] = { startTime =  400, endTime =  480, action = direction.DEPART, target = destination.SELBINA  },
+        [ 5] = { startTime =  480, endTime =  640, action = direction.ARRIVE, target = destination.AL_ZAHBI },
+        [ 6] = { startTime =  640, endTime =  720, action = direction.DEPART, target = destination.AL_ZAHBI },
+        [ 7] = { startTime =  720, endTime =  880, action = direction.ARRIVE, target = destination.SELBINA  },
+        [ 8] = { startTime =  880, endTime =  960, action = direction.DEPART, target = destination.SELBINA  },
+        [ 9] = { startTime =  960, endTime = 1120, action = direction.ARRIVE, target = destination.AL_ZAHBI },
+        [10] = { startTime = 1120, endTime = 1200, action = direction.DEPART, target = destination.AL_ZAHBI },
+        [11] = { startTime = 1200, endTime = 1360, action = direction.ARRIVE, target = destination.SELBINA  },
+        [12] = { startTime = 1360, endTime = 1440, action = direction.DEPART, target = destination.SELBINA  },
     }
 }
 
@@ -180,59 +200,53 @@ xi.transport.dockMessage = function(npc, triggerID, messages, dock)
     end
 end
 
+-----------------------------------
+-- NPC functions
+-----------------------------------
 xi.transport.onBoatTimekeeperTrigger = function(player, route, travelMessage, arrivingMessage)
-    local schedule = xi.transport.schedules[route]
-
-    if schedule then
-        local nextEvent = xi.transport.getNextEvent(schedule, route)
-
-        local message = travelMessage
-        if nextEvent.gameMins < 30 then
-            message = arrivingMessage
-        end
-
-        player:messageSpecial(message, nextEvent.earthMins, nextEvent.gameHours)
-    else
-        printf('[warning] bad location %i in xi.transport.onBoatTimekeeperTrigger', route)
-    end
-end
-
-xi.transport.onDockTimekeeperTrigger = function(player, route, event)
-    local schedule = xi.transport.schedules[route]
-
-    if schedule then
-        local nextEvent = xi.transport.getNextEvent(schedule, route)
-
-        if route == xi.transport.routes.SELBINA_MHAURA_OPEN_SEA then
-            player:startEvent(event, nextEvent.earthSecs, nextEvent.action, 0, nextEvent.destination)
-        else
-            player:startEvent(event, nextEvent.earthSecs, nextEvent.action)
-        end
-    else
-        printf('[warning] bad location %i in xi.transport.onDockTimekeeperTrigger', route)
-    end
-end
-
-xi.transport.getNextEvent = function(schedule, route)
     local currentTime = VanadielHour() * 60 + VanadielMinute()
-    local nextEvent = nil
+    local timeDiff    = 0
 
-    for i = 1, #xi.transport.schedules[route] do
-        if schedule[i].time > currentTime then
-            nextEvent = schedule[i]
+    for i = 1, #scheduleTable[route] do
+        if
+            currentTime >= scheduleTable[route][i].startTime and
+            currentTime < scheduleTable[route][i].endTime
+        then
+            timeDiff = scheduleTable[route][i].endTime - currentTime
+
             break
         end
     end
 
-    if nextEvent == nil then
-        nextEvent = schedule[1]
-        nextEvent.time = nextEvent.time + 1440 -- next day
+    local message   = timeDiff < 30 and arrivingMessage or travelMessage
+    local earthMins = math.ceil(timeDiff / 25)
+    local gameHours = math.floor(timeDiff / 60)
+
+    player:messageSpecial(message, earthMins, gameHours)
+end
+
+xi.transport.onDockTimekeeperTrigger = function(player, npc)
+    -- Fetch NPC data.
+    local npcName = npc:getName()
+    local eventId = dockTable[npcName][1]
+    local route   = dockTable[npcName][2]
+
+    -- Fetch Schedule
+    local currentTime  = VanadielHour() * 60 + VanadielMinute()
+    local scheduleStep = 0
+
+    for i = 1, #scheduleTable[route] do
+        if
+            currentTime >= scheduleTable[route][i].startTime and
+            currentTime < scheduleTable[route][i].endTime
+        then
+            scheduleStep = i
+
+            break
+        end
     end
 
-    nextEvent.gameMins = nextEvent.time - currentTime
-    nextEvent.earthSecs = nextEvent.gameMins * 60 / 25 -- one earth second is 25 game seconds
-    nextEvent.earthMins = math.ceil(nextEvent.earthSecs / 60)
-    nextEvent.gameHours = math.floor(nextEvent.gameMins / 60)
+    local timeLeft = math.floor((scheduleTable[route][scheduleStep].endTime - currentTime) * 60 / 25)
 
-    return nextEvent
+    player:startEvent(eventId, timeLeft, scheduleTable[route][scheduleStep].action, 0, scheduleTable[route][scheduleStep].target)
 end

@@ -5,7 +5,7 @@
 ---@type TNpcEntity
 local entity = {}
 
--- Leaving this loot here until their respective battlefields are implemented
+-- TODO: Leaving this loot here until their respective battlefields are implemented, move out of Lua to documentation
 -- local loot =
 -- {
 --     -- ENM: Follow the White Rabbit
@@ -78,17 +78,5 @@ local entity = {}
 --         },
 --     },
 -- }
-
-entity.onTrade = function(player, npc, trade)
-end
-
-entity.onTrigger = function(player, npc)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
-end
 
 return entity

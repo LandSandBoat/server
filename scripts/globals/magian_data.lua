@@ -4025,7 +4025,7 @@ xi.magian.trials =
             },
         },
 
-        textOffset     = 358,
+        textOffset     = 660,
         defeatMob      = true,
         mobEcosystem   = xi.ecosystem.BEAST,
         useWeaponskill = xi.weaponskill.FINAL_HEAVEN,
@@ -10390,12 +10390,12 @@ xi.magian.trials =
         },
     },
 
-    [4676] = -- Cleric's Briault -> Cleric's Briault +2 - 50 Forgotten Hope
+    [4676] = -- Cleric's Bliaut -> Cleric's Bliaut +2 - 50 Forgotten Hope
     {
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.CLERICS_BRIAULT,
+            itemId = xi.item.CLERICS_BLIAUT,
         },
 
         textOffset  = 1304,
@@ -10404,16 +10404,16 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId = xi.item.CLERICS_BRIAULT_P2,
+            itemId = xi.item.CLERICS_BLIAUT_P2,
         },
     },
 
-    [4677] = -- Cleric's Briault +1 -> Cleric's Briault +2 - 30 Forgotten Hope
+    [4677] = -- Cleric's Bliaut +1 -> Cleric's Bliaut +2 - 30 Forgotten Hope
     {
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.CLERICS_BRIAULT_P1,
+            itemId = xi.item.CLERICS_BLIAUT_P1,
         },
 
         textOffset  = 1305,
@@ -10422,7 +10422,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId = xi.item.CLERICS_BRIAULT_P2,
+            itemId = xi.item.CLERICS_BLIAUT_P2,
         },
     },
 

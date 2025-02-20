@@ -80,7 +80,7 @@ entity.onMobFight = function(mob, target)
                 -- depending on if they are damaged
                 local spellTarget = nil
                 if elementalDamaged and avatarDamaged then
-                    if math.random(1, 2) == 1 then
+                    if math.random(1, 100) <= 50 then
                         spellTarget = mob
                     else
                         spellTarget = elemental

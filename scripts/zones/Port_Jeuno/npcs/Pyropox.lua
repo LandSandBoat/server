@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Pyropox
--- Standard Merchant NPC
 -- !pos -17.580 4.000 24.600 246
 -----------------------------------
 local ID = zones[xi.zone.PORT_JEUNO]
@@ -27,9 +26,6 @@ local stock =
     5725,  300,    -- Goshikitenge
 }
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if player:getCharVar('spokePyropox') == 1 then
         player:startEvent(349)
@@ -37,9 +33,6 @@ entity.onTrigger = function(player, npc)
         player:showText(npc, ID.text.PYROPOX_SHOP_DIALOG)
         xi.shop.general(player, stock)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

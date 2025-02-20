@@ -161,6 +161,7 @@ xi.msg.basic =
     STATUS_BOOST_2         = 365, -- All of <target>'s status parameters are boosted.
     JA_MAGIC_BURST         = 379, -- <user> uses <ability>. Magic Burst! the <target> takes <amount> damage.
     JA_ENMITY_DECREASE     = 743, -- <user> uses <ability>. <target>'s enmity decreases.
+    JA_TH_EFFECTIVENESS    = 608, -- <user> uses <ability>. Treasure Hunter effectiveness against <target> increases to <amount>.
 
     -- "Fortified against" messages
     FORTIFIED_DEMONS       = 149, -- <target> is fortified against demons.
@@ -194,6 +195,7 @@ xi.msg.basic =
     CANNOT_ON_THAT_TARG    = 155, -- You cannot perform that action on the specified target.
     REQUIRES_SHIELD        = 199, -- That action requires a shield.
     DISAPPEAR_NUM          = 231, -- <num> of <target>'s effects disappear!
+    DRAWN_IN               = 232, -- <target> is drawn in.
     MUG_FAIL               = 244, -- <user> fails to mug <target>.
     IS_EFFECT              = 277, -- "is <status>" - that's the entire message.
     EVADES                 = 282, -- <target> evades.
@@ -307,6 +309,8 @@ xi.msg.basic =
     TIME_DYNAMIS_EXTENDED  = 448, -- Time allowed in Dynamis has been extended by <param> minutes
     TIME_DYNAMIS_REMAINING = 449, -- ----== WARNING ==----Time remaining in Dynamis: <param> minutes.
     -- Charm
+    CHARM_SUCCESS          = 136, -- <actor> uses charm. <target> is now under the <actor>'s control.
+    CHARM_FAIL             = 137, -- <actor> uses charm. <actor> fails to charm <target>.
     CANNOT_CHARM           = 210, -- <actor> cannot charm <target>!
     VERY_DIFFICULT_CHARM   = 211, -- It would be very difficult for <actor> to charm <target>.
     DIFFICULT_TO_CHARM     = 212, -- It would be difficult for <actor> to charm <target>.

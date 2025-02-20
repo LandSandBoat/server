@@ -9,11 +9,11 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_O
 
 quest.reward =
 {
-    xp = 2000,
-    fame = 120,
+    keyItem  = xi.ki.MAP_OF_FEIYIN,
     fameArea = xi.fameArea.WINDURST,
-    gil = 5000,
-    keyItem = xi.ki.MAP_OF_FEIYIN,
+    fame     = 120,
+    gil      = 5000,
+    exp      = 2000,
 }
 
 quest.sections =

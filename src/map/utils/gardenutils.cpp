@@ -122,7 +122,7 @@ namespace gardenutils
 
                         if (sendPacket)
                         {
-                            PChar->pushPacket(new CInventoryItemPacket(PPotItem, containerID, slotID));
+                            PChar->pushPacket<CInventoryItemPacket>(PPotItem, containerID, slotID);
                         }
                     }
                 }

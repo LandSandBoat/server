@@ -22,7 +22,7 @@ mission.reward =
 local ringItems =
 {
     xi.item.RAJAS_RING,
-    xi.item.SAATVA_RING,
+    xi.item.SATTVA_RING,
     xi.item.TAMAS_RING,
 }
 

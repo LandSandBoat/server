@@ -47,5 +47,5 @@ CMessageNamePacket::CMessageNamePacket(CBaseEntity* PActor, uint16 messageID, CB
     ref<int32>(0x1C) = param3;
 
     CBaseEntity* PNameEntity = PNameActor ? PNameActor : PActor;
-    memcpy(data + 0x20, PNameEntity->getName().c_str(), PNameEntity->getName().size());
+    std::memcpy(buffer_.data() + 0x20, PNameEntity->getName().c_str(), PNameEntity->getName().size());
 }

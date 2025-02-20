@@ -8,6 +8,9 @@ local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
 ---@type TNpcEntity
 local entity = {}
 
+-- TODO: Temporary workaround
+---@diagnostic disable: param-type-mismatch
+
 local requiredItems = 1
 local currencyType = 2
 local currencyAmount = 3
@@ -399,3 +402,6 @@ entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity
+
+-- TODO: Temporary workaround
+---@diagnostic enable: param-type-mismatch

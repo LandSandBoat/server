@@ -64,9 +64,6 @@ function(set_project_warnings project_name)
       -Wno-missing-field-initializers
       -Wno-sign-compare
 
-      # TODO: This is good, but it's Clang only
-      # -Wunused-private-field # warn on unused private fields
-
       # TODO: -pedantic          # warn if non-standard C++ is used
       # TODO: -pedantic-errors   # Error on language extensions
       # TODO: -Wconversion       # warn on type conversions that may lose data
@@ -80,7 +77,11 @@ function(set_project_warnings project_name)
   )
 
   if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 18)
-      list(APPEND CLANG_WARNINGS -Wno-nan-infinity-disabled) # TODO: fmt triggers this, a combination of the fast-math flag and `isfinite`
+      list(APPEND
+        CLANG_WARNINGS
+        -Wno-nan-infinity-disabled # TODO: fmt triggers this, a combination of the fast-math flag and `isfinite`
+        -Wunused-private-field # warn on unused private fields
+      )
   endif()
 
   set(GCC_WARNINGS
@@ -99,10 +100,13 @@ function(set_project_warnings project_name)
   )
 
   if(MSVC)
+    message(STATUS "Setting MSVC compiler warnings")
     set(PROJECT_WARNINGS ${MSVC_WARNINGS})
   elseif(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+    message(STATUS "Setting Clang compiler warnings")
     set(PROJECT_WARNINGS ${CLANG_WARNINGS})
   elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    message(STATUS "Setting GCC compiler warnings")
     set(PROJECT_WARNINGS ${GCC_WARNINGS})
   else()
     message(AUTHOR_WARNING "No compiler warnings set for '${CMAKE_CXX_COMPILER_ID}' compiler.")
@@ -117,5 +121,7 @@ function(set_project_warnings project_name)
     endif()
   endif()
 
+  message(STATUS "Setting warnings as errors flag: ${ERRORS}")
+  message(STATUS "Setting project warning flags: ${PROJECT_WARNINGS}")
   target_compile_options(${project_name} INTERFACE ${ERRORS} ${PROJECT_WARNINGS})
 endfunction() #set_project_warnings

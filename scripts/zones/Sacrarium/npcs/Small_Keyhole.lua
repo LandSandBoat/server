@@ -27,9 +27,6 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 100 then
         GetNPCByID(ID.npc.SMALL_KEYHOLE):setLocalVar('canTradeSecondKey', 0)

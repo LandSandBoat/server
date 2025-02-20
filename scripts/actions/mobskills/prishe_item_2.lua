@@ -18,7 +18,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         mob:hasStatusEffect(xi.effect.MUTE)
     then
         return 0
-    elseif math.random() < 0.25 then
+    elseif math.random(1, 100) <= 25 then
         return 1
     end
 
@@ -37,7 +37,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         mob:delStatusEffect(xi.effect.PLAGUE)
         mob:delStatusEffect(xi.effect.CURSE_I)
         mob:delStatusEffect(xi.effect.MUTE)
-    elseif math.random() < 0.5 then
+    elseif math.random(1, 100) <= 50 then
         -- Carnal Incense!
         mob:messageText(mob, ID.text.PRISHE_TEXT + 10, false)
         mob:addStatusEffect(xi.effect.PHYSICAL_SHIELD, 1, 0, 30)

@@ -16,27 +16,26 @@
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    local params = {}
+    local params   = {}
     params.numHits = 3
-    params.ftpMod = { 1.125, 1.125, 1.125 }
-    -- wscs are in % so 0.2=20%
+    params.ftpMod  = { 1.125, 1.125, 1.125 }
     params.str_wsc = 0.3
     params.mnd_wsc = 0.5
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 4.0, 4.0, 4.0 }
+        params.ftpMod = { 4, 4, 4 }
     end
 
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
-    if damage > 0 then
-        local duration = tp / 1000 * 20 - 5
-        if not target:hasStatusEffect(xi.effect.MAGIC_EVASION_DOWN) then
-            target:addStatusEffect(xi.effect.MAGIC_EVASION_DOWN, 10, 0, duration)
-        end
-    end
+
+    -- Handle status effect
+    local effectId = xi.effect.MAGIC_EVASION_DOWN
+    local power    = 10
+    local duration = math.floor(tp / 50 - 5)
+    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, 0, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage
 end

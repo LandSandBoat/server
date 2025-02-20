@@ -14,8 +14,8 @@ local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_
 
 quest.reward =
 {
-    xp    = 500,
     bayld = 300,
+    exp   = 500,
     title = xi.title.POTATION_PATHFINDER,
 }
 

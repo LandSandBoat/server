@@ -77,7 +77,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:progressEvent(61)
+                        return mission:progressEvent(52)
                     end
                 end,
             },

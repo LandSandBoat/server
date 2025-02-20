@@ -4,13 +4,8 @@
 -- Involved in Quest: A purchase of Arms & Sin Hunting
 -- !pos 105 1 382 104
 -----------------------------------
-local ID = zones[xi.zone.JUGNER_FOREST]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
-
-entity.onTrade = function(player, npc, trade)
-end
 
 entity.onTrigger = function(player, npc)
     if player:hasKeyItem(xi.ki.WEAPONS_ORDER) then
@@ -20,14 +15,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 5 then
         player:delKeyItem(xi.ki.WEAPONS_ORDER)
-        player:addKeyItem(xi.ki.WEAPONS_RECEIPT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WEAPONS_RECEIPT)
+        npcUtil.giveKeyItem(player, xi.ki.WEAPONS_RECEIPT)
     elseif csid == 10 then
         player:setCharVar('sinHunting', 4)
     end

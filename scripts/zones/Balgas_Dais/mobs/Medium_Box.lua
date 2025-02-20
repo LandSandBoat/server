@@ -3,6 +3,8 @@
 --   NM: Medium Box
 -- BCNM: Treasures and Tribulations
 -----------------------------------
+mixins = { require('scripts/mixins/families/mimic') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -16,7 +18,6 @@ entity.onMobEngage = function(mob, target)
     then
         small:setLocalVar('engaged', 1)
 
-        mob:setMobMod(xi.mobMod.DRAW_IN, 1)
         DespawnMob(mobId - 1)
         DespawnMob(mobId + 1)
 

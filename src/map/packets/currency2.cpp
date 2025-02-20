@@ -18,17 +18,16 @@
 
 ===========================================================================
 */
-
-#include "common/socket.h"
-
 #include "currency2.h"
 
+#include "common/cbasetypes.h"
+#include "common/database.h"
 #include "entities/charentity.h"
 
 CCurrencyPacket2::CCurrencyPacket2(CCharEntity* PChar)
 {
     this->setType(0x118);
-    this->setSize(132);
+    this->setSize(150);
 
     const char* query = "SELECT bayld, kinetic_unit, imprimaturs, mystical_canteen, obsidian_fragment, lebondopt_wing, \
                          pulchridopt_wing, mweya_plasm, ghastly_stone, ghastly_stone_1, ghastly_stone_2, verdigris_stone, \
@@ -46,109 +45,115 @@ CCurrencyPacket2::CCurrencyPacket2(CCharEntity* PChar)
                          detonation_spheres_set, scission_spheres_set, impaction_spheres_set, reverberation_spheres_set, \
                          transfixion_spheres_set, compression_spheres_set, fusion_spheres_set, distortion_spheres_set, \
                          fragmentation_spheres_set, gravitation_spheres_set, light_spheres_set, darkness_spheres_set, \
-                         silver_aman_voucher \
-                         FROM char_points WHERE charid = % d ";
+                         silver_aman_voucher, domain_points, domain_points_daily, mog_segments, gallimaufry, is_accolades \
+                         FROM char_points WHERE charid = ?";
 
-    int ret = _sql->Query(query, PChar->id);
-    if (ret != SQL_ERROR && _sql->NextRow() == SQL_SUCCESS)
+    const auto rset = db::preparedStmt(query, PChar->id);
+    if (rset && rset->rowsCount() && rset->next())
     {
-        ref<uint32>(0x04) = _sql->GetUIntData(0); // bayld
-        ref<uint16>(0x08) = _sql->GetUIntData(1); // kinetic_unit
-        ref<uint8>(0x0A)  = _sql->GetUIntData(2); // imprimaturs
-        ref<uint8>(0x0B)  = _sql->GetUIntData(3); // mystical_canteen
-        ref<uint32>(0x0C) = _sql->GetUIntData(4); // obsidian_fragment
-        ref<uint16>(0x10) = _sql->GetUIntData(5); // lebondopt_wing
-        ref<uint16>(0x12) = _sql->GetUIntData(6); // pulchridopt_wing
-        ref<uint32>(0x14) = _sql->GetUIntData(7); // mewya_plasm
+        ref<uint32>(0x04) = rset->get<uint32>("bayld");
+        ref<uint16>(0x08) = rset->get<uint16>("kinetic_unit");
+        ref<uint8>(0x0A)  = rset->get<uint8>("imprimaturs");
+        ref<uint8>(0x0B)  = rset->get<uint8>("mystical_canteen");
+        ref<uint32>(0x0C) = rset->get<uint32>("obsidian_fragment");
+        ref<uint16>(0x10) = rset->get<uint16>("lebondopt_wing");
+        ref<uint16>(0x12) = rset->get<uint16>("pulchridopt_wing");
+        ref<uint32>(0x14) = rset->get<uint32>("mweya_plasm");
 
-        ref<uint8>(0x18) = _sql->GetUIntData(8);  // ghastly_stone
-        ref<uint8>(0x19) = _sql->GetUIntData(9);  // ghastly_stone_1
-        ref<uint8>(0x1A) = _sql->GetUIntData(10); // ghastly_stone_2
-        ref<uint8>(0x1B) = _sql->GetUIntData(11); // verdigris_stone
-        ref<uint8>(0x1C) = _sql->GetUIntData(12); // verdigris_stone_1
-        ref<uint8>(0x1D) = _sql->GetUIntData(13); // verdigris_stone_2
-        ref<uint8>(0x1E) = _sql->GetUIntData(14); // wailing_stone
-        ref<uint8>(0x1F) = _sql->GetUIntData(15); // wailing_stone_1
-        ref<uint8>(0x20) = _sql->GetUIntData(16); // wailing_stone_2
+        ref<uint8>(0x18) = rset->get<uint8>("ghastly_stone");
+        ref<uint8>(0x19) = rset->get<uint8>("ghastly_stone_1");
+        ref<uint8>(0x1A) = rset->get<uint8>("ghastly_stone_2");
+        ref<uint8>(0x1B) = rset->get<uint8>("verdigris_stone");
+        ref<uint8>(0x1C) = rset->get<uint8>("verdigris_stone_1");
+        ref<uint8>(0x1D) = rset->get<uint8>("verdigris_stone_2");
+        ref<uint8>(0x1E) = rset->get<uint8>("wailing_stone");
+        ref<uint8>(0x1F) = rset->get<uint8>("wailing_stone_1");
+        ref<uint8>(0x20) = rset->get<uint8>("wailing_stone_2");
 
-        ref<uint8>(0x21) = _sql->GetUIntData(17); // snowslit_stone
-        ref<uint8>(0x22) = _sql->GetUIntData(18); // snowslit_stone_1
-        ref<uint8>(0x23) = _sql->GetUIntData(19); // snowslit_stone_2
-        ref<uint8>(0x24) = _sql->GetUIntData(20); // snowtip_stone
-        ref<uint8>(0x25) = _sql->GetUIntData(21); // snowtip_stone_1
-        ref<uint8>(0x26) = _sql->GetUIntData(22); // snowtip_stone_2
-        ref<uint8>(0x27) = _sql->GetUIntData(23); // snowdim_stone
-        ref<uint8>(0x28) = _sql->GetUIntData(24); // snowdim_stone_1
-        ref<uint8>(0x29) = _sql->GetUIntData(25); // snowdim_stone_2
-        ref<uint8>(0x2A) = _sql->GetUIntData(26); // snoworb_stone
-        ref<uint8>(0x2B) = _sql->GetUIntData(27); // snoworb_stone_1
-        ref<uint8>(0x2C) = _sql->GetUIntData(28); // snoworb_stone_2
-        ref<uint8>(0x2D) = _sql->GetUIntData(29); // leafslit_stone
-        ref<uint8>(0x2E) = _sql->GetUIntData(30); // leafslit_stone_1
-        ref<uint8>(0x2F) = _sql->GetUIntData(31); // leafslit_stone_2
-        ref<uint8>(0x30) = _sql->GetUIntData(32); // leaftip_stone
-        ref<uint8>(0x31) = _sql->GetUIntData(33); // leaftip_stone_1
-        ref<uint8>(0x32) = _sql->GetUIntData(34); // leaftip_stone_2
-        ref<uint8>(0x33) = _sql->GetUIntData(35); // leafdim_stone
-        ref<uint8>(0x34) = _sql->GetUIntData(36); // leafdim_stone_1
-        ref<uint8>(0x35) = _sql->GetUIntData(37); // leafdim_stone_2
-        ref<uint8>(0x36) = _sql->GetUIntData(38); // leaforb_stone
-        ref<uint8>(0x37) = _sql->GetUIntData(39); // leaforb_stone_1
-        ref<uint8>(0x38) = _sql->GetUIntData(40); // leaforb_stone_2
-        ref<uint8>(0x39) = _sql->GetUIntData(41); // duskslit_stone
-        ref<uint8>(0x3A) = _sql->GetUIntData(42); // duskslit_stone_1
-        ref<uint8>(0x3B) = _sql->GetUIntData(43); // duskslit_stone_2
-        ref<uint8>(0x3C) = _sql->GetUIntData(44); // dusktip_stone
-        ref<uint8>(0x3D) = _sql->GetUIntData(45); // dusktip_stone_1
-        ref<uint8>(0x3E) = _sql->GetUIntData(46); // dusktip_stone_2
-        ref<uint8>(0x3F) = _sql->GetUIntData(47); // duskdim_stone
-        ref<uint8>(0x40) = _sql->GetUIntData(48); // duskdim_stone_1
-        ref<uint8>(0x41) = _sql->GetUIntData(49); // duskdim_stone_2
-        ref<uint8>(0x42) = _sql->GetUIntData(50); // duskorb_stone
-        ref<uint8>(0x43) = _sql->GetUIntData(51); // duskorb_stone_1
-        ref<uint8>(0x44) = _sql->GetUIntData(52); // duskorb_stone_2
+        ref<uint8>(0x21) = rset->get<uint8>("snowslit_stone");
+        ref<uint8>(0x22) = rset->get<uint8>("snowslit_stone_1");
+        ref<uint8>(0x23) = rset->get<uint8>("snowslit_stone_2");
+        ref<uint8>(0x24) = rset->get<uint8>("snowtip_stone");
+        ref<uint8>(0x25) = rset->get<uint8>("snowtip_stone_1");
+        ref<uint8>(0x26) = rset->get<uint8>("snowtip_stone_2");
+        ref<uint8>(0x27) = rset->get<uint8>("snowdim_stone");
+        ref<uint8>(0x28) = rset->get<uint8>("snowdim_stone_1");
+        ref<uint8>(0x29) = rset->get<uint8>("snowdim_stone_2");
+        ref<uint8>(0x2A) = rset->get<uint8>("snoworb_stone");
+        ref<uint8>(0x2B) = rset->get<uint8>("snoworb_stone_1");
+        ref<uint8>(0x2C) = rset->get<uint8>("snoworb_stone_2");
+        ref<uint8>(0x2D) = rset->get<uint8>("leafslit_stone");
+        ref<uint8>(0x2E) = rset->get<uint8>("leafslit_stone_1");
+        ref<uint8>(0x2F) = rset->get<uint8>("leafslit_stone_2");
+        ref<uint8>(0x30) = rset->get<uint8>("leaftip_stone");
+        ref<uint8>(0x31) = rset->get<uint8>("leaftip_stone_1");
+        ref<uint8>(0x32) = rset->get<uint8>("leaftip_stone_2");
+        ref<uint8>(0x33) = rset->get<uint8>("leafdim_stone");
+        ref<uint8>(0x34) = rset->get<uint8>("leafdim_stone_1");
+        ref<uint8>(0x35) = rset->get<uint8>("leafdim_stone_2");
+        ref<uint8>(0x36) = rset->get<uint8>("leaforb_stone");
+        ref<uint8>(0x37) = rset->get<uint8>("leaforb_stone_1");
+        ref<uint8>(0x38) = rset->get<uint8>("leaforb_stone_2");
+        ref<uint8>(0x39) = rset->get<uint8>("duskslit_stone");
+        ref<uint8>(0x3A) = rset->get<uint8>("duskslit_stone_1");
+        ref<uint8>(0x3B) = rset->get<uint8>("duskslit_stone_2");
+        ref<uint8>(0x3C) = rset->get<uint8>("dusktip_stone");
+        ref<uint8>(0x3D) = rset->get<uint8>("dusktip_stone_1");
+        ref<uint8>(0x3E) = rset->get<uint8>("dusktip_stone_2");
+        ref<uint8>(0x3F) = rset->get<uint8>("duskdim_stone");
+        ref<uint8>(0x40) = rset->get<uint8>("duskdim_stone_1");
+        ref<uint8>(0x41) = rset->get<uint8>("duskdim_stone_2");
+        ref<uint8>(0x42) = rset->get<uint8>("duskorb_stone");
+        ref<uint8>(0x43) = rset->get<uint8>("duskorb_stone_1");
+        ref<uint8>(0x44) = rset->get<uint8>("duskorb_stone_2");
 
-        ref<uint8>(0x45) = _sql->GetUIntData(53); // pellucid_stone
-        ref<uint8>(0x46) = _sql->GetUIntData(54); // fern_stone
-        ref<uint8>(0x47) = _sql->GetUIntData(55); // taupe_stone
+        ref<uint8>(0x45) = rset->get<uint8>("pellucid_stone");
+        ref<uint8>(0x46) = rset->get<uint8>("fern_stone");
+        ref<uint8>(0x47) = rset->get<uint8>("taupe_stone");
 
-        ref<uint16>(0x4A) = _sql->GetUIntData(56); // escha_beads
-        ref<uint32>(0x4C) = _sql->GetUIntData(57); // escha_silt
+        ref<uint16>(0x4A) = rset->get<uint16>("escha_beads");
+        ref<uint32>(0x4C) = rset->get<uint32>("escha_silt");
 
-        ref<uint32>(0x50) = _sql->GetUIntData(58); // potpourri
+        ref<uint32>(0x50) = rset->get<uint32>("potpourri");
 
-        ref<uint32>(0x54) = _sql->GetUIntData(59); // current_hallmarks
-        ref<uint32>(0x58) = _sql->GetUIntData(60); // total_hallmarks
-        ref<uint32>(0x5C) = _sql->GetUIntData(61); // gallantry
+        ref<uint32>(0x54) = rset->get<uint32>("current_hallmarks");
+        ref<uint32>(0x58) = rset->get<uint32>("total_hallmarks");
+        ref<uint32>(0x5C) = rset->get<uint32>("gallantry");
 
-        ref<uint32>(0x60) = _sql->GetUIntData(62); // crafter_points
+        ref<uint32>(0x60) = rset->get<uint32>("crafter_points");
 
-        ref<uint8>(0x64) = _sql->GetUIntData(63); // fire_crystal_set
-        ref<uint8>(0x65) = _sql->GetUIntData(64); // ice_crystal_set
-        ref<uint8>(0x66) = _sql->GetUIntData(65); // wind_crystal_set
-        ref<uint8>(0x67) = _sql->GetUIntData(66); // earth_crystal_set
-        ref<uint8>(0x68) = _sql->GetUIntData(67); // lightning_crystal_set
-        ref<uint8>(0x69) = _sql->GetUIntData(68); // water_crystal_set
-        ref<uint8>(0x6A) = _sql->GetUIntData(69); // light_crystal_set
-        ref<uint8>(0x6B) = _sql->GetUIntData(70); // dark_crystal_set
-        ref<uint8>(0x6C) = _sql->GetUIntData(71); // mc_s_sr01_set
-        ref<uint8>(0x6D) = _sql->GetUIntData(72); // mc_s_sr02_set
-        ref<uint8>(0x6E) = _sql->GetUIntData(73); // mc_s_sr03_set
-        ref<uint8>(0x6F) = _sql->GetUIntData(74); // liquefaction_spheres_set
-        ref<uint8>(0x70) = _sql->GetUIntData(75); // induration_spheres_set
-        ref<uint8>(0x71) = _sql->GetUIntData(76); // detonation_spheres_set
-        ref<uint8>(0x72) = _sql->GetUIntData(77); // scission_spheres_set
-        ref<uint8>(0x73) = _sql->GetUIntData(78); // impaction_spheres_set
-        ref<uint8>(0x74) = _sql->GetUIntData(79); // reverberation_spheres_set
-        ref<uint8>(0x75) = _sql->GetUIntData(80); // transfixion_spheres_set
-        ref<uint8>(0x76) = _sql->GetUIntData(81); // compression_spheres_set
-        ref<uint8>(0x77) = _sql->GetUIntData(82); // fusion_spheres_set
-        ref<uint8>(0x78) = _sql->GetUIntData(83); // distortion_spheres_set
-        ref<uint8>(0x79) = _sql->GetUIntData(84); // fragmentation_spheres_set
-        ref<uint8>(0x7A) = _sql->GetUIntData(85); // gravitation_spheres_set
-        ref<uint8>(0x7B) = _sql->GetUIntData(86); // light_spheres_set
-        ref<uint8>(0x7C) = _sql->GetUIntData(87); // darkness_spheres_set
+        ref<uint8>(0x64) = rset->get<uint8>("fire_crystal_set");
+        ref<uint8>(0x65) = rset->get<uint8>("ice_crystal_set");
+        ref<uint8>(0x66) = rset->get<uint8>("wind_crystal_set");
+        ref<uint8>(0x67) = rset->get<uint8>("earth_crystal_set");
+        ref<uint8>(0x68) = rset->get<uint8>("lightning_crystal_set");
+        ref<uint8>(0x69) = rset->get<uint8>("water_crystal_set");
+        ref<uint8>(0x6A) = rset->get<uint8>("light_crystal_set");
+        ref<uint8>(0x6B) = rset->get<uint8>("dark_crystal_set");
+        ref<uint8>(0x6C) = rset->get<uint8>("mc_s_sr01_set");
+        ref<uint8>(0x6D) = rset->get<uint8>("mc_s_sr02_set");
+        ref<uint8>(0x6E) = rset->get<uint8>("mc_s_sr03_set");
+        ref<uint8>(0x6F) = rset->get<uint8>("liquefaction_spheres_set");
+        ref<uint8>(0x70) = rset->get<uint8>("induration_spheres_set");
+        ref<uint8>(0x71) = rset->get<uint8>("detonation_spheres_set");
+        ref<uint8>(0x72) = rset->get<uint8>("scission_spheres_set");
+        ref<uint8>(0x73) = rset->get<uint8>("impaction_spheres_set");
+        ref<uint8>(0x74) = rset->get<uint8>("reverberation_spheres_set");
+        ref<uint8>(0x75) = rset->get<uint8>("transfixion_spheres_set");
+        ref<uint8>(0x76) = rset->get<uint8>("compression_spheres_set");
+        ref<uint8>(0x77) = rset->get<uint8>("fusion_spheres_set");
+        ref<uint8>(0x78) = rset->get<uint8>("distortion_spheres_set");
+        ref<uint8>(0x79) = rset->get<uint8>("fragmentation_spheres_set");
+        ref<uint8>(0x7A) = rset->get<uint8>("gravitation_spheres_set");
+        ref<uint8>(0x7B) = rset->get<uint8>("light_spheres_set");
+        ref<uint8>(0x7C) = rset->get<uint8>("darkness_spheres_set");
 
-        ref<uint32>(0x80) = _sql->GetUIntData(88); // silver_aman_voucher
+        ref<uint32>(0x80) = rset->get<uint32>("silver_aman_voucher");
+
+        ref<uint32>(0x84) = rset->get<uint32>("domain_points");
+        ref<uint32>(0x88) = rset->get<uint32>("domain_points_daily");
+        ref<uint32>(0x8C) = rset->get<uint32>("mog_segments");
+        ref<uint32>(0x90) = rset->get<uint32>("gallimaufry");
+        ref<uint16>(0x94) = rset->get<uint16>("is_accolades");
     }
 }

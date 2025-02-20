@@ -45,7 +45,7 @@ entity.onMobFight = function(mob, target)
         end
 
         if #activeMoblins > 0 then
-            local randMoblin = GetMobByID(activeMoblins[math.random(#activeMoblins)]) -- choose random moblin from activeMoblins
+            local randMoblin = GetMobByID(activeMoblins[math.random(1, #activeMoblins)]) -- choose random moblin from activeMoblins
             mob:disengage()
             mob:resetEnmity(target)
 

@@ -20,6 +20,12 @@
 
 namespace gambits
 {
+    // Return a new unique identifier for a gambit
+    auto CGambitsContainer::NewGambitIdentifier(Gambit_t const& gambit) const -> std::string
+    {
+        return fmt::format("{}_{}_{}", gambits.size(), gambit.predicate_groups.size(), gambit.actions.size());
+    }
+
     // Validate gambit before it's inserted into the gambit list
     // Check levels, etc.
     std::string CGambitsContainer::AddGambit(Gambit_t const& gambit)
@@ -91,160 +97,6 @@ namespace gambits
             return;
         }
 
-        auto runPredicate = [&](Predicate_t& predicate) -> bool
-        {
-            auto isValidMember = [&](CBattleEntity* PPartyTarget) -> bool
-            {
-                return PPartyTarget->isAlive() && POwner->loc.zone == PPartyTarget->loc.zone && distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
-            };
-
-            if (predicate.target == G_TARGET::SELF)
-            {
-                return CheckTrigger(POwner, predicate);
-            }
-            else if (predicate.target == G_TARGET::TARGET)
-            {
-                return CheckTrigger(POwner->GetBattleTarget(), predicate);
-            }
-            else if (predicate.target == G_TARGET::PARTY)
-            {
-                auto result = false;
-                // clang-format off
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                {
-                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
-                    {
-                        result = true;
-                    }
-                });
-                // clang-format on
-                return result;
-            }
-            else if (predicate.target == G_TARGET::MASTER)
-            {
-                return CheckTrigger(POwner->PMaster, predicate);
-            }
-            else if (predicate.target == G_TARGET::PARTY_DEAD)
-            {
-                auto result = false;
-                // clang-format off
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                {
-                    if (PMember->isDead())
-                    {
-                        result = true;
-                    }
-                });
-                // clang-format on
-                return result;
-            }
-            else if (predicate.target == G_TARGET::TANK)
-            {
-                auto result = false;
-                // clang-format off
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                {
-                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && (PMember->GetMJob() == JOB_PLD || PMember->GetMJob() == JOB_RUN))
-                    {
-                        result = true;
-                    }
-                });
-                // clang-format on
-                return result;
-            }
-            else if (predicate.target == G_TARGET::MELEE)
-            {
-                auto result = false;
-                // clang-format off
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                {
-                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && melee_jobs.find(PMember->GetMJob()) != melee_jobs.end())
-                    {
-                        result = true;
-                    }
-                });
-                // clang-format on
-                return result;
-            }
-            else if (predicate.target == G_TARGET::RANGED)
-            {
-                auto result = false;
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                                                                               {
-                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && (PMember->GetMJob() == JOB_RNG || PMember->GetMJob() == JOB_COR))
-                    {
-                        result = true;
-                    } });
-                return result;
-            }
-            else if (predicate.target == G_TARGET::CASTER)
-            {
-                auto result = false;
-                // clang-format off
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                {
-                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && caster_jobs.find(PMember->GetMJob()) != caster_jobs.end())
-                    {
-                        result = true;
-                    }
-                });
-                // clang-format on
-                return result;
-            }
-            else if (predicate.target == G_TARGET::TOP_ENMITY)
-            {
-                auto result = false;
-                if (auto* PMob = dynamic_cast<CMobEntity*>(POwner->GetBattleTarget()))
-                {
-                    // clang-format off
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                    {
-                        if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && PMob->PEnmityContainer->GetHighestEnmity() == PMember)
-                        {
-                            result = true;
-                        }
-                    });
-                    // clang-format on
-                }
-                return result;
-            }
-            else if (predicate.target == G_TARGET::CURILLA)
-            {
-                auto result = false;
-                // clang-format off
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                {
-                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
-                    {
-                        auto name = PMember->getName();
-                        if (strcmpi(name.c_str(), "curilla") == 0)
-                        {
-                            result = true;
-                        }
-                    }
-                });
-                // clang-format on
-                return result;
-            }
-            else if (predicate.target == G_TARGET::PARTY_MULTI)
-            {
-                uint8 count = 0;
-                // clang-format off
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                {
-                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
-                    {
-                        ++count;
-                    }
-                });
-                // clang-format on
-                return count > 1;
-            }
-
-            // Fallthrough
-            return false;
-        };
-
         // Didn't WS/MS, go for other Gambits
         for (auto& gambit : gambits)
         {
@@ -253,161 +105,176 @@ namespace gambits
                 continue;
             }
 
+            auto isValidMember = [this](CBattleEntity* PSettableTarget, CBattleEntity* PPartyTarget)
+            {
+                return !PSettableTarget && PPartyTarget->isAlive() && POwner->loc.zone == PPartyTarget->loc.zone &&
+                       distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
+            };
+
+            G_TARGET targetType = gambit.target_selector;
+
+            CBattleEntity* target = nullptr;
+
+            // Capture all potential targets
+            std::vector<CBattleEntity*> potentialTargets;
+
+            if (targetType == G_TARGET::SELF)
+            {
+                potentialTargets.push_back(POwner);
+            }
+            else if (targetType == G_TARGET::TARGET)
+            {
+                auto* mob = POwner->GetBattleTarget();
+                potentialTargets.push_back(mob);
+            }
+            else if (targetType == G_TARGET::PARTY)
+            {
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
+                    if (isValidMember(target, PMember))
+                    {
+                        potentialTargets.push_back(PMember);
+                    }
+                });
+                // clang-format on
+            }
+            else if (targetType == G_TARGET::MASTER)
+            {
+                potentialTargets.push_back(POwner->PMaster);
+            }
+            else if (targetType == G_TARGET::PARTY_DEAD)
+            {
+                auto* mob = POwner->GetBattleTarget();
+                if (mob != nullptr)
+                {
+                    // clang-format off
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForParty([&](CBattleEntity* PMember) {
+                        if (PMember->isDead())
+                        {
+                            potentialTargets.push_back(PMember);
+                        }
+                    });
+                    // clang-format on
+                }
+            }
+            else if (targetType == G_TARGET::TANK)
+            {
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
+                    if (isValidMember(target, PMember) &&
+                        (PMember->GetMJob() == JOB_PLD || PMember->GetMJob() == JOB_RUN))
+                    {
+                        potentialTargets.push_back(PMember);
+                    }
+                });
+                // clang-format on
+            }
+            else if (targetType == G_TARGET::MELEE)
+            {
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
+                    if (isValidMember(target, PMember) &&
+                        melee_jobs.find(PMember->GetMJob()) != melee_jobs.end())
+                    {
+                        potentialTargets.push_back(PMember);
+                    }
+                });
+                // clang-format on
+            }
+            else if (targetType == G_TARGET::RANGED)
+            {
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
+                    if (isValidMember(target, PMember) &&
+                        (PMember->GetMJob() == JOB_RNG || PMember->GetMJob() == JOB_COR))
+                    {
+                        potentialTargets.push_back(PMember);
+                    }
+                });
+                // clang-format on
+            }
+            else if (targetType == G_TARGET::CASTER)
+            {
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
+                    if (isValidMember(target, PMember) &&
+                        caster_jobs.find(PMember->GetMJob()) != caster_jobs.end())
+                    {
+                        potentialTargets.push_back(PMember);
+                    }
+                });
+                // clang-format on
+            }
+            else if (targetType == G_TARGET::TOP_ENMITY)
+            {
+                if (auto* PMob = dynamic_cast<CMobEntity*>(POwner->GetBattleTarget()))
+                {
+                    // clang-format off
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                    {
+                        if (isValidMember(target, PMember) &&
+                            PMob->PEnmityContainer->GetHighestEnmity() == PMember)
+                        {
+                            potentialTargets.push_back(PMember);
+                        }
+                    });
+                    // clang-format on
+                }
+            }
+            else if (targetType == G_TARGET::CURILLA)
+            {
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
+                    if (isValidMember(target, PMember))
+                    {
+                        auto name = PMember->getName();
+                        if (strcmpi(name.c_str(), "curilla") == 0)
+                        {
+                            potentialTargets.push_back(PMember);
+                        }
+                    }
+                });
+                // clang-format on
+            }
+
+            // For each potential target, check if the predicates resolves
+            for (auto& potentialTarget : potentialTargets)
+            {
+                // All predicate groups must resolve successfully for the target to be considered
+                bool targetMatchAllPredicates = true;
+                for (auto& predicateGroup : gambit.predicate_groups)
+                {
+                    if (!CheckTrigger(potentialTarget, predicateGroup))
+                    {
+                        targetMatchAllPredicates = false;
+                    }
+                }
+
+                if (targetMatchAllPredicates)
+                {
+                    target = potentialTarget;
+                    break;
+                }
+            }
+
+            // No target matched, continue to next gambit
+            if (!target)
+            {
+                continue;
+            }
+
+            // Execute all actions defined on the Gambit
+            // TODO: When multiple actions are defined:
+            // - Recast of all actions should be considered before executing
+            // - Casting 2 spells in a row does not yet work
             for (auto& action : gambit.actions)
             {
-                // Make sure that the predicates remain true for each action in a gambit
-                bool all_predicates_true = true;
-                for (auto& predicate : gambit.predicates)
-                {
-                    if (!runPredicate(predicate))
-                    {
-                        all_predicates_true = false;
-                    }
-                }
-                if (!all_predicates_true)
-                {
-                    break;
-                }
-
-                auto isValidMember = [this](CBattleEntity* PSettableTarget, CBattleEntity* PPartyTarget)
-                {
-                    return !PSettableTarget && PPartyTarget->isAlive() && POwner->loc.zone == PPartyTarget->loc.zone &&
-                           distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
-                };
-
-                // TODO: This whole section is messy and bonkers
-                // Try and extract target out the first predicate
-                CBattleEntity* target = nullptr;
-                if (gambit.predicates[0].target == G_TARGET::SELF)
-                {
-                    target = CheckTrigger(POwner, gambit.predicates[0]) ? POwner : nullptr;
-                }
-                else if (gambit.predicates[0].target == G_TARGET::TARGET)
-                {
-                    auto* mob = POwner->GetBattleTarget();
-                    target    = CheckTrigger(mob, gambit.predicates[0]) ? mob : nullptr;
-                }
-                else if (gambit.predicates[0].target == G_TARGET::PARTY)
-                {
-                    // clang-format off
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                    {
-                        if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]))
-                        {
-                            target = PMember;
-                        }
-                    });
-                    // clang-format on
-                }
-                else if (gambit.predicates[0].target == G_TARGET::MASTER)
-                {
-                    target = POwner->PMaster;
-                }
-                else if (gambit.predicates[0].target == G_TARGET::PARTY_DEAD)
-                {
-                    auto* mob = POwner->GetBattleTarget();
-                    if (mob != nullptr)
-                    {
-                        // clang-format off
-                        static_cast<CCharEntity*>(POwner->PMaster)->ForParty([&](CBattleEntity* PMember) {
-                            if (PMember->isDead())
-                            {
-                                target = PMember;
-                            }
-                        });
-                        // clang-format on
-                    }
-                }
-                else if (gambit.predicates[0].target == G_TARGET::TANK)
-                {
-                    // clang-format off
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                    {
-                        if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]) &&
-                            (PMember->GetMJob() == JOB_PLD || PMember->GetMJob() == JOB_RUN))
-                        {
-                            target = PMember;
-                        }
-                    });
-                    // clang-format on
-                }
-                else if (gambit.predicates[0].target == G_TARGET::MELEE)
-                {
-                    // clang-format off
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                    {
-                        if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]) &&
-                            melee_jobs.find(PMember->GetMJob()) != melee_jobs.end())
-                        {
-                            target = PMember;
-                        }
-                    });
-                    // clang-format on
-                }
-                else if (gambit.predicates[0].target == G_TARGET::RANGED)
-                {
-                    // clang-format off
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                    {
-                        if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]) &&
-                            (PMember->GetMJob() == JOB_RNG || PMember->GetMJob() == JOB_COR))
-                        {
-                            target = PMember;
-                        }
-                    });
-                    // clang-format on
-                }
-                else if (gambit.predicates[0].target == G_TARGET::CASTER)
-                {
-                    // clang-format off
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                    {
-                        if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]) &&
-                            caster_jobs.find(PMember->GetMJob()) != caster_jobs.end())
-                        {
-                            target = PMember;
-                        }
-                    });
-                    // clang-format on
-                }
-                else if (gambit.predicates[0].target == G_TARGET::TOP_ENMITY)
-                {
-                    if (auto* PMob = dynamic_cast<CMobEntity*>(POwner->GetBattleTarget()))
-                    {
-                        // clang-format off
-                        static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                        {
-                            if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]) &&
-                                PMob->PEnmityContainer->GetHighestEnmity() == PMember)
-                            {
-                                target = PMember;
-                            }
-                        });
-                        // clang-format on
-                    }
-                }
-                else if (gambit.predicates[0].target == G_TARGET::CURILLA)
-                {
-                    // clang-format off
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                    {
-                        if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]))
-                        {
-                            auto name = PMember->getName();
-                            if (strcmpi(name.c_str(), "curilla") == 0)
-                            {
-                                target = PMember;
-                            }
-                        }
-                    });
-                    // clang-format on
-                }
-
-                if (!target)
-                {
-                    break;
-                }
-
                 if (action.reaction == G_REACTION::RATTACK)
                 {
                     controller->RangedAttack(target->targid);
@@ -460,7 +327,8 @@ namespace gambits
                     }
                     else if (action.select == G_SELECT::BEST_AGAINST_TARGET)
                     {
-                        auto spell_id = POwner->SpellContainer->GetBestAgainstTargetWeakness(target);
+                        auto spell_to_cast = static_cast<SpellID>(action.select_arg);
+                        auto spell_id      = POwner->SpellContainer->GetBestAgainstTargetWeakness(target, spell_to_cast);
                         if (spell_id.has_value())
                         {
                             controller->Cast(target->targid, spell_id.value());
@@ -477,6 +345,30 @@ namespace gambits
                     else if (action.select == G_SELECT::HELIX_DAY)
                     {
                         auto spell_id = POwner->SpellContainer->GetHelixDay();
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(target->targid, spell_id.value());
+                        }
+                    }
+                    else if (action.select == G_SELECT::EN_MOB_WEAKNESS)
+                    {
+                        auto spell_id = POwner->SpellContainer->EnSpellAgainstTargetWeakness(target);
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(POwner->targid, spell_id.value());
+                        }
+                    }
+                    else if (action.select == G_SELECT::STORM_MOB_WEAKNESS)
+                    {
+                        auto spell_id = POwner->SpellContainer->StormDayAgainstTargetWeakness(target);
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(POwner->targid, spell_id.value());
+                        }
+                    }
+                    else if (action.select == G_SELECT::HELIX_MOB_WEAKNESS)
+                    {
+                        auto spell_id = POwner->SpellContainer->StormDayAgainstTargetWeakness(target);
                         if (spell_id.has_value())
                         {
                             controller->Cast(target->targid, spell_id.value());
@@ -663,187 +555,209 @@ namespace gambits
                         controller->MobSkill(target->targid, action.select_arg);
                     }
                 }
+            }
 
-                // Assume success
-                if (gambit.retry_delay != 0)
-                {
-                    gambit.last_used = tick;
-                }
+            // Assume success
+            if (gambit.retry_delay != 0)
+            {
+                gambit.last_used = tick;
             }
         }
     }
 
-    bool CGambitsContainer::CheckTrigger(CBattleEntity* trigger_target, Predicate_t& predicate)
+    bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, PredicateGroup_t& predicateGroup)
     {
         TracyZoneScoped;
 
-        auto* controller = static_cast<CTrustController*>(POwner->PAI->GetController());
-        switch (predicate.condition)
+        auto*             controller = static_cast<CTrustController*>(POwner->PAI->GetController());
+        std::vector<bool> predicateResults;
+
+        // Iterate and collect results from all predicates in the group
+        for (auto& predicate : predicateGroup.predicates)
         {
-            case G_CONDITION::ALWAYS:
+            switch (predicate.condition)
             {
-                return true;
-                break;
-            }
-            case G_CONDITION::HPP_LT:
-            {
-                return trigger_target->GetHPP() < predicate.condition_arg;
-                break;
-            }
-            case G_CONDITION::HPP_GTE:
-            {
-                return trigger_target->GetHPP() >= predicate.condition_arg;
-                break;
-            }
-            case G_CONDITION::MPP_LT:
-            {
-                return trigger_target->GetMPP() < predicate.condition_arg;
-                break;
-            }
-            case G_CONDITION::TP_LT:
-            {
-                return trigger_target->health.tp < (int16)predicate.condition_arg;
-                break;
-            }
-            case G_CONDITION::TP_GTE:
-            {
-                return trigger_target->health.tp >= (int16)predicate.condition_arg;
-                break;
-            }
-            case G_CONDITION::STATUS:
-            {
-                return trigger_target->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg));
-                break;
-            }
-            case G_CONDITION::NOT_STATUS:
-            {
-                return !trigger_target->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg));
-                break;
-            }
-            case G_CONDITION::NO_SAMBA:
-            {
-                bool noSamba = true;
-                if (trigger_target->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) ||
-                    trigger_target->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_SAMBA))
+                case G_CONDITION::ALWAYS:
                 {
-                    noSamba = false;
+                    predicateResults.push_back(true);
+                    continue;
                 }
-                return noSamba;
-                break;
-            }
-            case G_CONDITION::NO_STORM:
-            {
-                bool noStorm = true;
-                // clang-format off
-                if (trigger_target->StatusEffectContainer->HasStatusEffect(
+                case G_CONDITION::HPP_LT:
                 {
-                    EFFECT_FIRESTORM,
-                    EFFECT_HAILSTORM,
-                    EFFECT_WINDSTORM,
-                    EFFECT_SANDSTORM,
-                    EFFECT_THUNDERSTORM,
-                    EFFECT_RAINSTORM,
-                    EFFECT_AURORASTORM,
-                    EFFECT_VOIDSTORM,
-                    EFFECT_FIRESTORM_II,
-                    EFFECT_HAILSTORM_II,
-                    EFFECT_WINDSTORM_II,
-                    EFFECT_SANDSTORM_II,
-                    EFFECT_THUNDERSTORM_II,
-                    EFFECT_RAINSTORM_II,
-                    EFFECT_AURORASTORM_II,
-                    EFFECT_VOIDSTORM_II,
-                }))
-                {
-                    noStorm = false;
+                    predicateResults.push_back(triggerTarget->GetHPP() < predicate.condition_arg);
+                    continue;
                 }
-                // clang-format on
-                return noStorm;
-                break;
+                case G_CONDITION::HPP_GTE:
+                {
+                    predicateResults.push_back(triggerTarget->GetHPP() >= predicate.condition_arg);
+                    continue;
+                }
+                case G_CONDITION::MPP_LT:
+                {
+                    predicateResults.push_back(triggerTarget->GetMPP() < predicate.condition_arg);
+                    continue;
+                }
+                case G_CONDITION::TP_LT:
+                {
+                    predicateResults.push_back(triggerTarget->health.tp < (int16)predicate.condition_arg);
+                    continue;
+                }
+                case G_CONDITION::TP_GTE:
+                {
+                    predicateResults.push_back(triggerTarget->health.tp >= (int16)predicate.condition_arg);
+                    continue;
+                }
+                case G_CONDITION::STATUS:
+                {
+                    predicateResults.push_back(triggerTarget->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg)));
+                    continue;
+                }
+                case G_CONDITION::NOT_STATUS:
+                {
+                    predicateResults.push_back(!triggerTarget->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg)));
+                    continue;
+                }
+                case G_CONDITION::NO_SAMBA:
+                {
+                    bool noSamba = true;
+                    if (triggerTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) ||
+                        triggerTarget->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_SAMBA))
+                    {
+                        noSamba = false;
+                    }
+                    predicateResults.push_back(noSamba);
+                    continue;
+                }
+                case G_CONDITION::NO_STORM:
+                {
+                    bool noStorm = true;
+                    // clang-format off
+                    if (triggerTarget->StatusEffectContainer->HasStatusEffect(
+                    {
+                        EFFECT_FIRESTORM,
+                        EFFECT_HAILSTORM,
+                        EFFECT_WINDSTORM,
+                        EFFECT_SANDSTORM,
+                        EFFECT_THUNDERSTORM,
+                        EFFECT_RAINSTORM,
+                        EFFECT_AURORASTORM,
+                        EFFECT_VOIDSTORM,
+                        EFFECT_FIRESTORM_II,
+                        EFFECT_HAILSTORM_II,
+                        EFFECT_WINDSTORM_II,
+                        EFFECT_SANDSTORM_II,
+                        EFFECT_THUNDERSTORM_II,
+                        EFFECT_RAINSTORM_II,
+                        EFFECT_AURORASTORM_II,
+                        EFFECT_VOIDSTORM_II,
+                    }))
+                    {
+                        noStorm = false;
+                    }
+                    // clang-format on
+                    predicateResults.push_back(noStorm);
+                    continue;
+                }
+                case G_CONDITION::PT_HAS_TANK:
+                {
+                    predicateResults.push_back(PartyHasTank());
+                    continue;
+                }
+                case G_CONDITION::NOT_PT_HAS_TANK:
+                {
+                    predicateResults.push_back(!PartyHasTank());
+                    continue;
+                }
+                case G_CONDITION::STATUS_FLAG:
+                {
+                    predicateResults.push_back(triggerTarget->StatusEffectContainer->HasStatusEffectByFlag(static_cast<EFFECTFLAG>(predicate.condition_arg)));
+                    continue;
+                }
+                case G_CONDITION::HAS_TOP_ENMITY:
+                {
+                    predicateResults.push_back((controller->GetTopEnmity()) ? controller->GetTopEnmity()->targid == POwner->targid : false);
+                    continue;
+                }
+                case G_CONDITION::NOT_HAS_TOP_ENMITY:
+                {
+                    predicateResults.push_back((controller->GetTopEnmity()) ? controller->GetTopEnmity()->targid != POwner->targid : false);
+                    continue;
+                }
+                case G_CONDITION::SC_AVAILABLE:
+                {
+                    auto* PSCEffect = triggerTarget->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+                    predicateResults.push_back(PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() == 0);
+                    continue;
+                }
+                case G_CONDITION::NOT_SC_AVAILABLE:
+                {
+                    auto* PSCEffect = triggerTarget->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+                    predicateResults.push_back(PSCEffect == nullptr);
+                    continue;
+                }
+                case G_CONDITION::MB_AVAILABLE:
+                {
+                    auto* PSCEffect = triggerTarget->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+                    predicateResults.push_back(PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() > 0);
+                    continue;
+                }
+                case G_CONDITION::READYING_WS:
+                {
+                    predicateResults.push_back(triggerTarget->PAI->IsCurrentState<CWeaponSkillState>());
+                    continue;
+                }
+                case G_CONDITION::READYING_MS:
+                {
+                    predicateResults.push_back(triggerTarget->PAI->IsCurrentState<CMobSkillState>());
+                    continue;
+                }
+                case G_CONDITION::READYING_JA:
+                {
+                    predicateResults.push_back(triggerTarget->PAI->IsCurrentState<CAbilityState>());
+                    continue;
+                }
+                case G_CONDITION::CASTING_MA:
+                {
+                    predicateResults.push_back(triggerTarget->PAI->IsCurrentState<CMagicState>());
+                    continue;
+                }
+                case G_CONDITION::IS_ECOSYSTEM:
+                {
+                    predicateResults.push_back(triggerTarget->m_EcoSystem == ECOSYSTEM(predicate.condition_arg));
+                    continue;
+                }
+                case G_CONDITION::RANDOM:
+                {
+                    predicateResults.push_back(xirand::GetRandomNumber<uint16>(100) < (int16)predicate.condition_arg);
+                    continue;
+                }
+                case G_CONDITION::HP_MISSING:
+                {
+                    predicateResults.push_back((triggerTarget->health.maxhp - triggerTarget->health.hp) >= (int16)predicate.condition_arg);
+                    continue;
+                }
+                default:
+                {
+                    predicateResults.push_back(false);
+                }
             }
-            case G_CONDITION::PT_HAS_TANK:
+        }
+
+        // Evaluate the group of predicates
+        switch (predicateGroup.logic)
+        {
+            case G_LOGIC::AND:
             {
-                return PartyHasTank();
-                break;
+                return std::ranges::all_of(predicateResults, [](const bool result)
+                                           { return result; });
             }
-            case G_CONDITION::NOT_PT_HAS_TANK:
+            case G_LOGIC::OR:
             {
-                return !PartyHasTank();
-                break;
-            }
-            case G_CONDITION::STATUS_FLAG:
-            {
-                return trigger_target->StatusEffectContainer->HasStatusEffectByFlag(static_cast<EFFECTFLAG>(predicate.condition_arg));
-                break;
-            }
-            case G_CONDITION::HAS_TOP_ENMITY:
-            {
-                return (controller->GetTopEnmity()) ? controller->GetTopEnmity()->targid == POwner->targid : false;
-                break;
-            }
-            case G_CONDITION::NOT_HAS_TOP_ENMITY:
-            {
-                return (controller->GetTopEnmity()) ? controller->GetTopEnmity()->targid != POwner->targid : false;
-                break;
-            }
-            case G_CONDITION::SC_AVAILABLE:
-            {
-                auto* PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
-                return PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() == 0;
-                break;
-            }
-            case G_CONDITION::NOT_SC_AVAILABLE:
-            {
-                auto* PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
-                return PSCEffect == nullptr;
-                break;
-            }
-            case G_CONDITION::MB_AVAILABLE:
-            {
-                auto* PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
-                return PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() > 0;
-                break;
-            }
-            case G_CONDITION::READYING_WS:
-            {
-                return trigger_target->PAI->IsCurrentState<CWeaponSkillState>();
-                break;
-            }
-            case G_CONDITION::READYING_MS:
-            {
-                return trigger_target->PAI->IsCurrentState<CMobSkillState>();
-                break;
-            }
-            case G_CONDITION::READYING_JA:
-            {
-                return trigger_target->PAI->IsCurrentState<CAbilityState>();
-                break;
-            }
-            case G_CONDITION::CASTING_MA:
-            {
-                return trigger_target->PAI->IsCurrentState<CMagicState>();
-                break;
-            }
-            case G_CONDITION::IS_ECOSYSTEM:
-            {
-                return trigger_target->m_EcoSystem == ECOSYSTEM(predicate.condition_arg);
-                break;
-            }
-            case G_CONDITION::RANDOM:
-            {
-                return xirand::GetRandomNumber<uint16>(100) < (int16)predicate.condition_arg;
-                break;
-            }
-            case G_CONDITION::HP_MISSING:
-            {
-                return (trigger_target->health.maxhp - trigger_target->health.hp) >= (int16)predicate.condition_arg;
-                break;
+                return std::ranges::any_of(predicateResults, [](const bool result)
+                                           { return result; });
             }
             default:
-            {
                 return false;
-                break;
-            }
         }
     }
 

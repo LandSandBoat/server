@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -54,7 +54,7 @@ struct GP_SERV_POS_HEAD
 };
 
 // PS2: SAVE_LOGIN_STATE
-enum class SAVE_LOGIN_STATE : uint32_t
+enum class SAVE_LOGIN_STATE : uint8 // Originally uint32_t, but changed to uint8 to appease Clang
 {
     SAVE_LOGIN_STATE_NONE           = 0,
     SAVE_LOGIN_STATE_MYROOM         = 1,
@@ -85,6 +85,7 @@ struct GP_MYROOM_DANCER_PKT
 };
 
 // PS2: SAVE_CONF
+// Seems to be a truncated version of SAVE_CONF missing PvpFlg and AreaCode?
 struct SAVE_CONF_PKT
 {
     uint32_t unknown00[3]; // PS2: (Multiple fields; bits.)
@@ -162,11 +163,11 @@ uint16 GetMogHouseModelID(CCharEntity* PChar)
         case REGION_TYPE::SARUTA_FRONT:
             return 219;
         case REGION_TYPE::SANDORIA:
-            return PChar->profile.nation == 0 ? 0x0121 : 0x0101;
+            return PChar->profile.nation == NATION_SANDORIA ? 0x0121 : 0x0101;
         case REGION_TYPE::BASTOK:
-            return PChar->profile.nation == 1 ? 0x0122 : 0x0102;
+            return PChar->profile.nation == NATION_BASTOK ? 0x0122 : 0x0102;
         case REGION_TYPE::WINDURST:
-            return PChar->profile.nation == 2 ? 0x0123 : 0x0120;
+            return PChar->profile.nation == NATION_WINDURST ? 0x0123 : 0x0120;
         case REGION_TYPE::JEUNO:
             return 0x0100;
         case REGION_TYPE::ADOULIN_ISLANDS:
@@ -228,7 +229,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     // unsigned char packet [] = {
     // 0x0D, 0x3A, 0x0C, 0x00, 0x11, 0x00, 0x19, 0x00, 0x02, 0xE4, 0x93, 0x10, 0x91, 0xE5, 0x93, 0x10}; // 0x2a = 0x10
     // 0x89, 0x39, 0x0C, 0x00, 0x19, 0x00, 0x07, 0x00, 0x5C, 0xE1, 0x93, 0x10, 0x81, 0xE3, 0x93, 0x10}; // 0x2a = 0x08
-    // memcpy(data + 0x70, &packet, 16);
+    // std::memcpy(buffer_.data() + 0x70, &packet, 16);
 
     // data[0x2A] = 0x08;//data[0x2A] = 0x80;  // in zone 3 controls the routes of transport 0x10 and 0x08
 
@@ -246,8 +247,8 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
 
     // 0x1A = Target Index
 
-    ref<uint8>(0x1C) = PChar->GetSpeed();
-    ref<uint8>(0x1D) = PChar->speedsub;
+    ref<uint8>(0x1C) = PChar->UpdateSpeed();
+    ref<uint8>(0x1D) = PChar->animationSpeed;
     ref<uint8>(0x1E) = PChar->GetHPP();
     ref<uint8>(0x1F) = PChar->animation;
 
@@ -330,7 +331,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     }
 
     auto const& nameStr = PChar->getName();
-    std::memcpy(data + 0x84, nameStr.data(), nameStr.size());
+    std::memcpy(buffer_.data() + 0x84, nameStr.data(), nameStr.size());
 
     ref<uint32>(0xA0) = PChar->GetPlayTime(); // time spent by the character in the game from the moment of creation
 
@@ -346,13 +347,13 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     ref<uint8>(0xB4) = PChar->GetMJob();
     ref<uint8>(0xB7) = PChar->GetSJob();
 
-    memcpy(data + (0xCC), &PChar->stats, 14);
+    std::memcpy(buffer_.data() + 0xCC, &PChar->stats, 14);
 
     ref<uint32>(0xE8) = PChar->GetMaxHP();
     ref<uint32>(0xEC) = PChar->GetMaxMP();
     // ref<uint8>(0xEF) = TODO: implement flag of 1 = high for "has unlocked sub and can change jobs"
 
-    std::memcpy(&data[offsetof(GP_SERV_LOGIN, ConfData)], &PChar->playerConfig, sizeof(SAVE_CONF));
+    std::memcpy(&buffer_[offsetof(GP_SERV_LOGIN, ConfData)], &PChar->playerConfig, sizeof(SAVE_CONF_PKT));
 
     ref<uint8>(0x100) = 0x01; // observed: RoZ = 3, CoP = 5, ToAU = 9, WoTG = 11, SoA/original areas = 1
 

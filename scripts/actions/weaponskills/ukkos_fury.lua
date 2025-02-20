@@ -20,11 +20,11 @@
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    local params = {}
-    params.numHits = 2
-    params.ftpMod = { 2.0, 2.0, 2.0 }
-    params.str_wsc = 0.6
-    params.critVaries = { 0.20, 0.35, 0.55 }
+    local params      = {}
+    params.numHits    = 2
+    params.ftpMod     = { 2, 2, 2 }
+    params.str_wsc    = 0.6
+    params.critVaries = { 0.2, 0.35, 0.55 }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.8
@@ -35,12 +35,12 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.EMPYREAN)
 
-    if damage > 0 then
-        if not target:hasStatusEffect(xi.effect.SLOW) then
-            local duration = 60 * applyResistanceAddEffect(player, target, xi.element.EARTH, 0)
-            target:addStatusEffect(xi.effect.SLOW, 1500, 0, duration)
-        end
-    end
+    -- Handle status effect
+    local effectId      = xi.effect.SLOW
+    local actionElement = xi.element.EARTH
+    local power         = 1500
+    local duration      = math.floor(60 * applyResistanceAddEffect(player, target, actionElement, 0))
+    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage
 end

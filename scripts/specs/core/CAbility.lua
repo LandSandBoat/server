@@ -83,3 +83,8 @@ end
 ---@return nil
 function CAbility:setRange(range)
 end
+
+---@param effectToCleanup integer|CStatusEffect
+---@return nil
+function CAbility:setPostActionCleanupEffect(effectToCleanup)
+end

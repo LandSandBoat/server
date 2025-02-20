@@ -118,8 +118,8 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         ref<float>(0x14)  = PEntity->loc.p.z;
         ref<uint16>(0x18) = PEntity->loc.p.moving;
         ref<uint16>(0x1A) = PEntity->m_TargID << 1;
-        ref<uint8>(0x1C)  = PEntity->speed;
-        ref<uint8>(0x1D)  = PEntity->speedsub;
+        ref<uint8>(0x1C)  = PEntity->GetSpeed();
+        ref<uint8>(0x1D)  = PEntity->animationSpeed;
     }
 
     if (PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER && PEntity->status == STATUS_TYPE::UPDATE)
@@ -167,7 +167,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
 
                 // depending on size of name, this can be 0x20, 0x22, or 0x24
                 this->setSize(0x48);
-                std::memcpy(data + 0x34, name.c_str(), std::min<size_t>(name.size(), PacketNameLength));
+                std::memcpy(buffer_.data() + 0x34, name.c_str(), std::min<size_t>(name.size(), PacketNameLength));
             }
         }
         break;
@@ -225,11 +225,11 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 this->setSize(0x48);
                 if (PMob->packetName.empty())
                 {
-                    std::memcpy(data + 0x34, PEntity->getName().c_str(), std::min<size_t>(PEntity->getName().size(), PacketNameLength));
+                    std::memcpy(buffer_.data() + 0x34, PEntity->getName().c_str(), std::min<size_t>(PEntity->getName().size(), PacketNameLength));
                 }
                 else
                 {
-                    std::memcpy(data + 0x34, PMob->packetName.c_str(), std::min<size_t>(PMob->packetName.size(), PacketNameLength));
+                    std::memcpy(buffer_.data() + 0x34, PMob->packetName.c_str(), std::min<size_t>(PMob->packetName.size(), PacketNameLength));
                 }
             }
         }
@@ -261,14 +261,14 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         case MODEL_CHOCOBO:
         {
             this->setSize(0x48);
-            std::memcpy(data + 0x30, &PEntity->look, sizeof(look_t));
+            std::memcpy(buffer_.data() + 0x30, &PEntity->look, sizeof(look_t));
         }
         break;
         case MODEL_DOOR:
         {
             this->setSize(0x48);
             ref<uint16>(0x30) = PEntity->look.size;
-            std::memcpy(data + 0x34, PEntity->getName().c_str(), (PEntity->getName().size() > 12 ? 12 : PEntity->getName().size()));
+            std::memcpy(buffer_.data() + 0x34, PEntity->getName().c_str(), (PEntity->getName().size() > 12 ? 12 : PEntity->getName().size()));
         }
         break;
         case MODEL_SHIP:
@@ -277,7 +277,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
             this->setSize(0x48);
             ref<uint16>(0x30) = PEntity->look.size;
             auto name         = getTransportNPCName(PEntity);
-            std::memcpy(data + 0x34, name.data(), name.size());
+            std::memcpy(buffer_.data() + 0x34, name.data(), name.size());
         }
         break;
     }
@@ -291,14 +291,14 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         ref<uint8>(0x0A) = 0x57; // Carefully chosen bits to make FUNC_Packet_Incoming_0x000E behave (Same type as first 0x00E Fellow packet)
         ref<uint8>(0x18) = 0x01; // Copy longer name in FUNC_Packet_Incoming_0x000E
 
-        std::memcpy(data + 0x30, &PEntity->look, sizeof(look_t));
+        std::memcpy(buffer_.data() + 0x30, &PEntity->look, sizeof(look_t));
 
         auto name       = PEntity->packetName;
         auto nameOffset = 0x44;
         auto maxLength  = std::min<size_t>(name.size(), PacketNameLength);
 
         // Make sure to zero-out the existing name area of the packet
-        auto start = data + nameOffset;
+        auto start = buffer_.data() + nameOffset;
         auto size  = this->getSize();
         std::memset(start, 0U, size);
 
@@ -326,7 +326,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         }
 
         // Make sure to zero-out the existing name area of the packet
-        auto start = data + nameOffset;
+        auto start = buffer_.data() + nameOffset;
         auto size  = this->getSize();
         std::memset(start, 0U, size);
 

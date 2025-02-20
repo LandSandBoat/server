@@ -1,6 +1,7 @@
 -----------------------------------
 -- The Tenshodo Showdown
 -----------------------------------
+-- Log ID: 2, Quest ID: 69
 -- !addquest 2 69
 -- Nanaa Mihgo : !pos 62 -4 240 241
 -- Harnek      : !pos 44 0 -19 245
@@ -127,6 +128,45 @@ quest.sections =
                 end,
             },
         },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == xi.questStatus.QUEST_ACCEPTED and
+                not player:hasItem(xi.item.BOWL_OF_QUADAV_STEW)
+        end,
+
+        [xi.zone.BEADEAUX] =
+        {
+            ['Bronze_Quadav'] =
+            {
+                onSteal = function(player, target, ability, action)
+                    return xi.item.BOWL_OF_QUADAV_STEW
+                end
+            },
+
+            ['Garnet_Quadav'] =
+            {
+                onSteal = function(player, target, ability, action)
+                    return xi.item.BOWL_OF_QUADAV_STEW
+                end
+            },
+
+            ['Silver_Quadav'] =
+            {
+                onSteal = function(player, target, ability, action)
+                    return xi.item.BOWL_OF_QUADAV_STEW
+                end
+            },
+
+            ['Zircon_Quadav'] =
+            {
+                onSteal = function(player, target, ability, action)
+                    return xi.item.BOWL_OF_QUADAV_STEW
+                end
+            }
+        },
+
     },
 
     {

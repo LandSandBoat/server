@@ -57,11 +57,9 @@ void handler_session::start()
 
 void handler_session::do_read()
 {
-    auto self(shared_from_this());
-
     // clang-format off
     socket_.next_layer().async_read_some(asio::buffer(data_, max_length),
-    [this, self](std::error_code ec, std::size_t length)
+    [this, self = shared_from_this()](std::error_code ec, std::size_t length)
     {
         if (!ec)
         {
@@ -69,7 +67,7 @@ void handler_session::do_read()
         }
         else
         {
-            DebugSockets("async_read_some error in from IP {}:\n{}", ipAddress, ec.message());
+            DebugSockets(fmt::format("async_read_some error in handler_session from IP {} ({}: {})", ipAddress, ec.value(), ec.message()));
             handle_error(ec, self);
         }
     });
@@ -78,10 +76,9 @@ void handler_session::do_read()
 
 void handler_session::do_write(std::size_t length)
 {
-    auto self(shared_from_this());
     // clang-format off
     asio::async_write(socket_.next_layer(), asio::buffer(data_, length),
-    [this, self](std::error_code ec, std::size_t /*length*/)
+    [this, self = shared_from_this()](std::error_code ec, std::size_t /*length*/)
     {
         if (!ec)
         {

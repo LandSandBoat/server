@@ -140,24 +140,22 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
         }
     }
 
+    // Some notable time-event has occurred. -- CVanaTime::SyncTime() has hit a time of day where latents trigger
     if (VanadielTOTD != TIME_NONE)
     {
         TracyZoneScoped;
         zoneutils::TOTDChange(VanadielTOTD);
 
-        if ((VanadielTOTD == TIME_DAY) || (VanadielTOTD == TIME_DUSK) || (VanadielTOTD == TIME_NIGHT))
+        // clang-format off
+        zoneutils::ForEachZone([](CZone* PZone)
         {
-            // clang-format off
-            zoneutils::ForEachZone([](CZone* PZone)
+            PZone->ForEachChar([](CCharEntity* PChar)
             {
-                PZone->ForEachChar([](CCharEntity* PChar)
-                {
-                    PChar->PLatentEffectContainer->CheckLatentsDay();
-                    PChar->PLatentEffectContainer->CheckLatentsJobLevel();
-                });
+                PChar->PLatentEffectContainer->CheckLatentsDay();
+                PChar->PLatentEffectContainer->CheckLatentsJobLevel(); // Eerie CLoak +1 latent is nighttime + level multiple of 13
             });
-            // clang-format on
-        }
+        });
+        // clang-format on
 
         fishingutils::RestockFishingAreas();
     }
@@ -169,7 +167,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
 
     luautils::OnTimeServerTick();
 
-    luautils::ReloadFilewatchList();
+    luautils::TryReloadFilewatchList();
 
     moduleutils::OnTimeServerTick();
 

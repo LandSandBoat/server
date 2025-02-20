@@ -50,6 +50,10 @@ public:
     void CreateKickAttacks();                                                                         // Creates kick attacks for the round.
     void CreateDakenAttack();                                                                         // Adds daken attacks
 
+    bool IsAttackTypeEligibleForFollowUp(Mod followUpType, PHYSICAL_ATTACK_TYPE attackType); // Is attack type eligible for follow-up?
+    void ProcFollowUpAttacks();                                                              // Attempt to proc follow-up attacks.
+    bool AddFollowUpAttack(PHYSICAL_ATTACK_DIRECTION direction);                             // Attempt to store a follow-up swing. Return true if swing is stored.
+
     uint8          GetAttackSwingCount();       // Returns the attack list count.
     bool           IsH2H();                     // Flag: Is the attacker using H2H?
     CAttack&       GetAttack(uint8);            // Returns an attack object.
@@ -67,6 +71,8 @@ private:
     std::vector<CAttack> m_attackSwings;           // The list of attacks for this round.
     bool                 m_sataOccured;            // Flag: Did SATA occur during the round?
     bool                 m_kickAttackOccured;      // Flag: Did a kick attack occur during the round?
+
+    std::vector<PHYSICAL_ATTACK_DIRECTION> m_followUpSwings; // The list of follow-up attacks for this round.
 };
 
 #endif

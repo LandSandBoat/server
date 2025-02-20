@@ -37,25 +37,6 @@
 #include <intrin.h>
 #endif
 
-//--------------------------------------------------
-// Return numerical value of a switch configuration
-// on/off, english, fran<E7>ais, deutsch, espa<F1>ol
-//--------------------------------------------------
-int config_switch(const char* str)
-{
-    if (strcmpi(str, "true") == 0 || strcmpi(str, "on") == 0 || strcmpi(str, "yes") == 0 || strcmpi(str, "oui") == 0 || strcmpi(str, "ja") == 0 ||
-        strcmpi(str, "si") == 0)
-    {
-        return 1;
-    }
-    if (strcmpi(str, "false") == 0 || strcmpi(str, "off") == 0 || strcmpi(str, "no") == 0 || strcmpi(str, "non") == 0 || strcmpi(str, "nein") == 0)
-    {
-        return 0;
-    }
-
-    return (int)strtol(str, nullptr, 0);
-}
-
 int32 checksum(unsigned char* buf, uint32 buflen, char checkhash[16])
 {
     unsigned char hash[16];
@@ -89,24 +70,6 @@ bool bin2hex(char* output, unsigned char* input, size_t count)
     }
     *output = '\0';
     return true;
-}
-
-float distance(const position_t& A, const position_t& B, bool ignoreVertical)
-{
-    return sqrt(distanceSquared(A, B, ignoreVertical));
-}
-
-float distanceSquared(const position_t& A, const position_t& B, bool ignoreVertical)
-{
-    float diff_x = A.x - B.x;
-    float diff_y = ignoreVertical ? 0 : A.y - B.y;
-    float diff_z = A.z - B.z;
-    return diff_x * diff_x + diff_y * diff_y + diff_z * diff_z;
-}
-
-bool distanceWithin(const position_t& A, const position_t& B, float within, bool ignoreVertical)
-{
-    return distanceSquared(A, B, ignoreVertical) <= square(within);
 }
 
 int32 intpow32(int32 base, int32 exponent)
@@ -165,7 +128,7 @@ uint8 worldAngle(const position_t& A, const position_t& B)
 {
     uint8 angle = (uint8)(atanf((B.z - A.z) / (B.x - A.x)) * -(128.0f / M_PI));
 
-    return distanceWithin(A, B, 0.1f, true) ? A.rotation : (A.x > B.x ? angle + 128 : angle);
+    return isWithinDistance(A, B, 0.1f, true) ? A.rotation : (A.x > B.x ? angle + 128 : angle);
 }
 
 uint8 relativeAngle(uint8 world, int16 diff)
@@ -246,7 +209,7 @@ position_t nearPosition(const position_t& A, float offset, float radian)
 
 /************************************************************************
  *                                                                       *
- *  Methods for working with bit arrays.                                                *
+ *  Methods for working with bit arrays.                                 *
  *                                                                       *
  ************************************************************************/
 
@@ -944,14 +907,32 @@ std::unique_ptr<FILE> utils::openFile(std::string const& path, std::string const
     return std::unique_ptr<FILE>(fopen(path.c_str(), mode.c_str()));
 }
 
+auto utils::isPrintableASCII(unsigned char ch, ASCIIMode mode) -> bool
+{
+    if (mode == ASCIIMode::IncludeSpace)
+    {
+        return ch >= 0x20 && ch < 0x7F;
+    }
+    else // ASCIIMode::ExcludeSpace
+    {
+        return ch > 0x20 && ch < 0x7F;
+    }
+}
+
+auto utils::isStringPrintable(const std::string& str, ASCIIMode mode) -> bool
+{
+    // clang-format off
+    return std::all_of(str.begin(), str.end(), [mode](unsigned char ch) { return isPrintableASCII(ch, mode); });
+    // clang-format on
+}
+
 std::string utils::toASCII(std::string const& target, unsigned char replacement)
 {
     std::string out;
     out.reserve(target.size());
     for (unsigned char ch : target)
     {
-        bool isLetter = ch >= 0x20 && ch < 0x7F;
-        out += isLetter ? ch : replacement;
+        out += isPrintableASCII(ch, ASCIIMode::IncludeSpace) ? ch : replacement;
     }
     return out;
 }

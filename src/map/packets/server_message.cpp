@@ -52,6 +52,6 @@ CServerMessagePacket::CServerMessagePacket(const std::string& message, int8 lang
         this->setSize(((((0x14 + textSize) + 4) >> 1) & 0xFE) * 2);
 
         // TODO: can
-        std::memcpy(data + 0x18, message.c_str() + message_offset, std::min(sndLength, message.length() - message_offset));
+        std::memcpy(buffer_.data() + 0x18, message.c_str() + message_offset, std::min(sndLength, message.length() - message_offset));
     }
 }

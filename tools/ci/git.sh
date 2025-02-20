@@ -6,6 +6,15 @@ python << EOF
 import re
 import subprocess
 
+disallowed_words = [
+    "oops",
+    "whoops",
+    "lol",
+    "lulz",
+    "kek",
+    "kekw"
+]
+
 def get_commit_hashes():
     commit_hashes = []
 
@@ -82,7 +91,7 @@ for hash, lines in get_commit_messages().items():
             print_error(hash, lines, line, "Detected automatic commit message (Example: \"Update filename.ext\").\nPlease "
                 "provide a more detailed summary of your changes.")
 
-        if 'oops' in line.lower() or 'lol' in line.lower():
-            print_error(hash, lines, line, "Detected unhelpful language in commit message.\nPlease "
-                "describe what you have changed with this commit.\nUnhelpful language:\nOops\nWhoops\nlol")
+        for invalid_word in disallowed_words:
+            if re.match(r'\b({0})\b'.format(invalid_word), line.lower()):
+                print_error(hash, lines, line, f"Detected unhelpful language in commit message.\nPlease describe what you have changed with this commit.\nUnhelpful language: {invalid_word}")
 EOF

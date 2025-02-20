@@ -5,13 +5,15 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    xi.reives.setupZone(zone)
+
     -- Area around Ergon Locus (17883912)
     local locusX = -140.000
     local locusY = 10.000
     local locusZ = 60.000
     local distance = 15
 
-    zone:registerTriggerArea(1,
+    zone:registerCuboidTriggerArea(1,
         locusX - distance, locusY - distance, locusZ - distance,
         locusX + distance, locusY + distance, locusZ + distance)
 end

@@ -12,7 +12,7 @@ local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.ENEMY_OF_TH
 
 mission.reward =
 {
-    ki = xi.ki.BLACK_BOOK,
+    keyItem = xi.ki.BLACK_BOOK,
     nextMission = { xi.mission.log_id.ASA, xi.mission.id.asa.ENEMY_OF_THE_EMPIRE_II },
 }
 

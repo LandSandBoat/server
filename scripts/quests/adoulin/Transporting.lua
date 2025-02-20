@@ -14,8 +14,8 @@ local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.TRANSPORTING)
 quest.reward =
 {
     fameArea = xi.fameArea.ADOULIN,
-    xp       = 1000,
     bayld    = 300,
+    exp      = 1000,
 }
 
 quest.sections =

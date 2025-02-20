@@ -9,9 +9,6 @@ local ID = zones[xi.zone.VUNKERL_INLET_S]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local pantsQuestProgress = player:getCharVar('AF_SCH_PANTS')
 
@@ -23,20 +20,13 @@ entity.onTrigger = function(player, npc)
         pantsQuestProgress < 3 and
         not player:hasKeyItem(xi.ki.DJINN_EMBER)
     then
-        player:addKeyItem(xi.ki.DJINN_EMBER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DJINN_EMBER)
+        npcUtil.giveKeyItem(player, xi.ki.DJINN_EMBER)
         player:setCharVar('AF_SCH_PANTS', pantsQuestProgress + 1)
         npc:hideNPC(60)
 
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

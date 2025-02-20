@@ -37,5 +37,5 @@ CPartyInvitePacket::CPartyInvitePacket(uint32 id, uint16 targid, CCharEntity* PI
 
     ref<uint8>(0x0B) = InviteType;
 
-    memcpy(data + (0x0C), PInviter->getName().c_str(), PInviter->getName().size());
+    std::memcpy(buffer_.data() + 0x0C, PInviter->getName().c_str(), PInviter->getName().size());
 }

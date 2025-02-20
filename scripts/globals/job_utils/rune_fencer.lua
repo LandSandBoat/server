@@ -517,7 +517,7 @@ local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc
     multipliers.eleStaffBonus       = xi.spells.damage.calculateElementalStaffBonus(player, element)
     multipliers.magianAffinity      = xi.spells.damage.calculateMagianAffinity() -- Presumed but untested.
     multipliers.SDT                 = xi.spells.damage.calculateSDT(target, element)
-    multipliers.resist              = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, element, 0, 0, bonusMacc)
+    multipliers.resist              = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, 0, element, 0, 0, bonusMacc)
     multipliers.dayAndWeather       = xi.spells.damage.calculateDayAndWeather(player, 0, element)
     multipliers.magicBonusDiff      = xi.spells.damage.calculateMagicBonusDiff(player, target, 0, 0, element)
     multipliers.TMDA                = xi.spells.damage.calculateTMDA(target, element)

@@ -23,12 +23,12 @@
 #define _CHARENTITY_H
 
 #include "event_info.h"
+#include "item_container.h"
 #include "monstrosity.h"
-#include "packets/char.h"
-#include "packets/entity_update.h"
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "common/xi.h"
 
 #include <bitset>
 #include <deque>
@@ -39,6 +39,7 @@
 #include "battleentity.h"
 #include "petentity.h"
 
+#include "automatonentity.h"
 #include "utils/fishingutils.h"
 
 #define MAX_QUESTAREA    11
@@ -280,13 +281,11 @@ class CTradeContainer;
 class CItemContainer;
 class CUContainer;
 class CItemEquipment;
-class CAutomatonEntity;
 class CAbilityState;
 class CRangeState;
 class CItemState;
 class CItemUsable;
 
-typedef std::deque<CBasicPacket*>      PacketList_t;
 typedef std::map<uint32, CBaseEntity*> SpawnIDList_t;
 typedef std::vector<EntityID_t>        BazaarList_t;
 
@@ -311,7 +310,7 @@ public:
     bool  isSettingBazaarPrices; // Is setting bazaar prices (temporarily hide bazaar)
     bool  isLinkDead;            // Player is d/cing
 
-    SAVE_CONF playerConfig; // Various settings such as chat filter, display head flag, new adventurer, autotarget, etc.
+    SAVE_CONF playerConfig{}; // Various settings such as chat filter, display head flag, new adventurer, autotarget, etc.
 
     uint32 lastOnline{ 0 };              // UTC Unix Timestamp of the last time char zoned or logged out
     bool   isNewPlayer() const;          // Checks if new player bit is unset.
@@ -355,13 +354,46 @@ public:
     void resetPetZoningInfo();            // Reset pet zoning info (when changing job ect)
     bool shouldPetPersistThroughZoning(); // If true, zoning should not cause a currently active pet to despawn
 
-    uint8  m_SetBlueSpells[20]{}; // The 0x200 offsetted blue magic spell IDs which the user has set. (1 byte per spell)
+    std::array<uint8, 20> m_SetBlueSpells{}; // The 0x200 offsetted blue magic spell IDs which the user has set. (1 byte per spell)
+
     uint32 m_FieldChocobo{};
     uint32 m_claimedDeeds[5]{};
     uint32 m_uniqueEvents[5]{};
 
+    struct
+    {
+        // Store a copy of calculated stats to use when automaton is deactivated for the job info packet (automaton menu)
+        skills_t automatonSkills{};
+        stats_t  automatonStats{};
+        health_t automatonHealth{};
+        look_t   automatonLook{};
+
+        automaton_equip_t    m_Equip{};
+        std::array<uint8, 8> m_ElementMax{};
+        std::array<uint8, 8> m_ElementEquip{};
+        uint8                m_elementalCapacityBonus = 0;
+        std::string          m_automatonName          = "Automaton";
+    } automatonInfo;
+
+    uint8 getAutomatonAttachment(uint8 slot);
+    bool  hasAutomatonAttachment(uint8 attachment);
+
+    uint8 getAutomatonElementMax(uint8 element);
+    uint8 getAutomatonElementCapacity(uint8 element);
+
+    AUTOFRAMETYPE getAutomatonFrame() const;
+    AUTOHEADTYPE  getAutomatonHead() const;
+
+    void setAutomatonFrame(AUTOFRAMETYPE frame);
+    void setAutomatonHead(AUTOHEADTYPE head);
+
+    void setAutomatonAttachment(uint8 slot, uint8 id);
+
+    void setAutomatonElementMax(uint8 element, uint8 max);
+    void addAutomatonElementCapacity(uint8 element, int8 value);
+    void setAutomatonElementalCapacityBonus(uint8 bonus);
+
     UnlockedAttachments_t m_unlockedAttachments{}; // Unlocked Automaton Attachments (1 bit per attachment)
-    CAutomatonEntity*     PAutomaton;              // Automaton statistics
 
     std::vector<CTrustEntity*> PTrusts; // Active trusts
 
@@ -413,17 +445,28 @@ public:
 
     uint8 GetGender();
 
-    void          clearPacketList();
-    void          pushPacket(CBasicPacket*);                                                     // Adding a copy of a package to the PacketList
-    void          pushPacket(std::unique_ptr<CBasicPacket>);                                     // Push packet to packet list
-    void          updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);     // Push or update a char packet
-    void          updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask); // Push or update an entity update packet
-    bool          isPacketListEmpty();
-    CBasicPacket* popPacket();     // Get first packet from PacketList
-    PacketList_t  getPacketList(); // Return a COPY of packet list
-    size_t        getPacketCount();
-    void          erasePackets(uint8 num); // Erase num elements from front of packet list
-    virtual void  HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
+    auto getPacketList() const -> const std::deque<std::unique_ptr<CBasicPacket>>&;
+    auto getPacketListCopy() -> std::deque<std::unique_ptr<CBasicPacket>>; // Return a COPY of packet list
+    void clearPacketList();
+
+    template <typename T, typename... Args>
+    void pushPacket(Args&&... args)
+    {
+        // TODO: This could hook into pooling of packet objects, etc.
+        pushPacket(std::make_unique<T>(std::forward<Args>(args)...));
+    }
+
+    void   pushPacket(std::unique_ptr<CBasicPacket>&&);                                   // Push packet to packet list
+    void   updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask); // Push or update an entity update packet
+    bool   isPacketListEmpty();
+    auto   popPacket() -> std::unique_ptr<CBasicPacket>; // Get first packet from PacketList
+    size_t getPacketCount();
+    void   erasePackets(uint8 num); // Erase num elements from front of packet list
+    bool   isPacketFiltered(std::unique_ptr<CBasicPacket>& packet);
+
+    bool pendingPositionUpdate;
+
+    virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
 
     CLinkshell*    PLinkshell1;
     CLinkshell*    PLinkshell2;
@@ -444,8 +487,13 @@ public:
     CUContainer*     UContainer;     // Container used for universal actions -- used for trading at least despite the dedicated trading container above
     CTradeContainer* CraftContainer; // Container used for crafting actions.
 
-    CBaseEntity* PWideScanTarget;
+    // TODO: All member instances of EntityID_t should be std::optional<EntityID_t> to allow for them not to be set,
+    //     : instead of checking for entityId.id != 0, etc.
+    // TODO: We don't want to replace this with just an ID, because in the future EntityID_t will be able to
+    //     : disambiguate between entities who have been rebuilt (players, dynamic entities) and have the same ID.
+    xi::optional<EntityID_t> WideScanTarget;
 
+    // NOTE: These are all keyed by id
     SpawnIDList_t SpawnPCList;    // list of visible characters
     SpawnIDList_t SpawnMOBList;   // list of visible monsters
     SpawnIDList_t SpawnPETList;   // list of visible pets
@@ -462,8 +510,7 @@ public:
 
     std::unique_ptr<monstrosity::MonstrosityData_t> m_PMonstrosity;
 
-    uint32     m_InsideTriggerAreaID; // The ID of the trigger area the character is inside
-    uint8      m_LevelRestriction;    // Character level limit
+    uint8      m_LevelRestriction; // Character level limit
     uint16     m_Costume;
     uint16     m_Costume2;
     uint32     m_AHHistoryTimestamp;
@@ -481,8 +528,6 @@ public:
 
     uint32 m_PlayTime;
     uint32 m_SaveTime;
-
-    uint32 m_LastYell;
 
     time_point m_LeaderCreatedPartyTime; // Time that a party member joined and this player was leader.
 
@@ -505,6 +550,9 @@ public:
     bool getBlockingAid() const;
     void setBlockingAid(bool isBlockingAid);
 
+    // Send updates about dirty containers in post tick
+    std::map<CONTAINER_ID, bool> dirtyInventoryContainers;
+
     bool       m_EquipSwap; // true if equipment was recently changed
     bool       m_EffectsChanged;
     time_point m_LastSynthTime;
@@ -520,13 +568,12 @@ public:
     std::vector<AuctionHistory_t> m_ah_history;  // AH history list (in the future consider using UContainer)
 
     std::unordered_map<uint16, uint32> m_PacketRecievedTimestamps;
+    uint16                             m_LastPacketType{};
 
     void   SetPlayTime(uint32 playTime);        // Set playtime
     uint32 GetPlayTime(bool needUpdate = true); // Get playtime
 
     CItemEquipment* getEquip(SLOTTYPE slot);
-
-    CBasicPacket* PendingPositionPacket = nullptr;
 
     bool requestedInfoSync = false;
 
@@ -570,6 +617,11 @@ public:
     int32 GetTimeCreated();
     uint8 getHighestJobLevel();
 
+    bool isInTriggerArea(uint32 triggerAreaId);
+    void onTriggerAreaEnter(uint32 tiggerAreaId);
+    void onTriggerAreaLeave(uint32 triggerAreaId);
+    void clearTriggerAreas();
+
     bool isInEvent();
     bool isNpcLocked();
     void queueEvent(EventInfo* eventToQueue);
@@ -610,6 +662,9 @@ public:
 
     bool m_Locked; // Is the player locked in a cutscene
 
+    // Starts a synth with skillType X
+    bool startSynth(SKILLTYPE synthSkill);
+
     CCharEntity();
     ~CCharEntity();
 
@@ -643,13 +698,14 @@ private:
 
     std::unordered_map<std::string, std::pair<int32, uint32>> charVarCache;
     std::unordered_set<std::string>                           charVarChanges;
+    std::unordered_set<uint32>                                charTriggerAreaIDs; // Holds any TriggerArea IDs that the player is currently within the bounds of
 
     uint8      dataToPersist = 0;
     time_point nextDataPersistTime;
 
-    PacketList_t                                     PacketList;           // The list of packets to be sent to the character during the next network cycle
-    std::unordered_map<uint32, CCharPacket*>         PendingCharPackets;   // Keep track of which char packets are queued up for this char, such that they can be updated
-    std::unordered_map<uint32, CEntityUpdatePacket*> PendingEntityPackets; // Keep track of which entity update packets are queued up for this char, such that they can be updated
+    // TODO: Don't use raw ptrs for this, but don't duplicate whole packets with unique_ptr either.
+    std::deque<std::unique_ptr<CBasicPacket>> PacketList;          // The list of packets to be sent to the character during the next network cycle
+    std::unordered_map<uint32, CBasicPacket*> EntityUpdatePackets; // Keep track of entity update packets by ID, such that they can be updated
 };
 
 #endif

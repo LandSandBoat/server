@@ -14,7 +14,7 @@
 ---@alias onZoneHandler fun(player: CBaseEntity): TAction?
 
 ---@class onTriggerAreaHandler
----@field [integer] fun(player: CBaseEntity, triggerArea: CTriggerArea, optInstance: CInstance?): TAction?
+---@field [integer] fun(player: CBaseEntity, triggerArea: ITriggerArea, optInstance: CInstance?): TAction?
 
 ---@class EntitySection
 ---@field onTrade? TAction|fun(player: CBaseEntity, npc: CBaseEntity, trade: CTradeContainer): TAction?

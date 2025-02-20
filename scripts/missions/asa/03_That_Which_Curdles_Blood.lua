@@ -13,7 +13,7 @@ local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_
 
 mission.reward =
 {
-    ki          =
+    keyItem          =
     {
         xi.ki.DOMINAS_SCARLET_SEAL,
         xi.ki.DOMINAS_CERULEAN_SEAL,

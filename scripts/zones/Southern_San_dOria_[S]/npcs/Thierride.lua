@@ -45,9 +45,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 334 then
         player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)

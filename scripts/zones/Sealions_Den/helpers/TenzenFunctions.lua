@@ -89,7 +89,7 @@ tenzenFunctions.formSwap = function(mob)
             battleTime - changeTime > 60
         then
             mob:setAnimationSub(5) -- 5 lowered bow mode (1033 animation) 6 is raised bow mode (1034 animation)
-            mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
+            mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.STANDBACK))
             mob:setMobSkillAttack(1171)
             mob:setLocalVar('changeTime', mob:getBattleTime())
 
@@ -104,7 +104,7 @@ tenzenFunctions.formSwap = function(mob)
             battleTime - changeTime > 30
         then
             mob:setAnimationSub(0)
-            mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.STANDBACK)))
+            mob:setBehavior(bit.band(mob:getBehavior(), bit.bnot(xi.behavior.STANDBACK)))
             mob:setMobSkillAttack(0)
             mob:setMod(xi.mod.DELAY, 0) -- attack slower back to great katana
             mob:setLocalVar('changeTime', mob:getBattleTime())

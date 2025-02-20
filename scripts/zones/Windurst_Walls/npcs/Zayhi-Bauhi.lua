@@ -28,7 +28,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local toBee = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
-    local postmanKOsTwice = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+    local postmanKOsTwice = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KOS_TWICE)
     local toBeeOrNotStatus = player:getCharVar('ToBeeOrNot_var')
 
     if
@@ -63,8 +63,6 @@ end
 --      player:startEvent(74) -- After Honey#4: Feels like its getting a lot better but there is still iritaion
 --      player:startEvent(75) -- After Honey#5: ToBee quest Finish (tooth hurts from all the Honey)
 --      player:startEvent(78) -- ToBee After Quest Finish but before zone (tooth still hurts)
-entity.onEventUpdate = function(player, csid, option, npc)
-end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 64 then

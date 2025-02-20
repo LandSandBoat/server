@@ -2,6 +2,8 @@
 -- Area: Arrapago Remnants
 --  Mob: Archaic Gear
 -----------------------------------
+mixins = { require('scripts/mixins/families/gear') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

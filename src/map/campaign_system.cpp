@@ -190,7 +190,7 @@ namespace campaign
 
     void SendUpdate(CCharEntity* PChar)
     {
-        PChar->pushPacket(new CCampaignPacket(PChar, CState, 0));
-        PChar->pushPacket(new CCampaignPacket(PChar, CState, 1));
+        PChar->pushPacket<CCampaignPacket>(PChar, CState, 0);
+        PChar->pushPacket<CCampaignPacket>(PChar, CState, 1);
     }
 }; // namespace campaign

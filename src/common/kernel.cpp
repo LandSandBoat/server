@@ -111,7 +111,8 @@ std::unique_ptr<ConsoleService> gConsoleService;
 #else
 sigfunc* compat_signal(int signo, sigfunc* func)
 {
-    struct sigaction sact, oact;
+    sigaction sact;
+    sigaction oact;
 
     sact.sa_handler = func;
     sigemptyset(&sact.sa_mask);
@@ -238,6 +239,9 @@ int main(int argc, char** argv)
 
     lua_init();
     settings::init();
+    ShowInfo(fmt::format("Last Branch: {}", version::GetGitBranch()));
+    ShowInfo(fmt::format("SHA: {} ({})", version::GetGitSha(), version::GetGitDate()));
+
     usercheck();
 
     socket_init();

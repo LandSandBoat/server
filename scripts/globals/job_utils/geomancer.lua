@@ -180,6 +180,22 @@ xi.job_utils.geomancer.geoOnLifeCycleAbilityCheck = function(player, target, abi
     return 0, 0
 end
 
+xi.job_utils.geomancer.geoOnEclipticAttritionCheck = function(player, target, ability)
+    local luopan = getLuopan(player)
+
+    -- TODO: this never fires if you dont have a bubble up and says "Unable to attack that target." Core issue?
+    if not luopan then
+        return xi.msg.basic.REQUIRE_LUOPAN, 0
+    end
+
+    if luopan:getLocalVar('eclipticAttrition') ~= 0 then
+        -- This message is guessed
+        return xi.msg.basic.UNABLE_TO_USE_JA, 0
+    end
+
+    return 0, 0
+end
+
 -----------------------------------
 -- GEO/INDI Potency Function
 -----------------------------------
@@ -276,7 +292,13 @@ xi.job_utils.geomancer.lastingEmanation = function(player, target, ability)
     target:setMod(xi.mod.REGEN_DOWN, hpDrain - math.floor(target:getMainLvl() / 14))
 end
 
+-- TODO: allegedly Blaze of Glory is additive to this, but we aren't keeping track of that potency, so BoG + Ecliptic Attrition is stronger than it should be.
+--       That is probably fixable with some localvars on the bubble...?
 xi.job_utils.geomancer.eclipticAttrition = function(player, target, ability)
+    if target:getLocalVar('eclipticAttrition') ~= 0 then
+        return
+    end
+
     local hpDrain = target:getMod(xi.mod.REGEN_DOWN)
     target:setMod(xi.mod.REGEN_DOWN, hpDrain + math.floor(target:getMainLvl() / 16))
 
@@ -284,21 +306,26 @@ xi.job_utils.geomancer.eclipticAttrition = function(player, target, ability)
         return
     end
 
-    local potency = target:getStatusEffect(xi.effect.COLURE_ACTIVE):getSubPower()
-    local bonusPotency = 0.25 * potency
-    local finalPotency = potency + bonusPotency
-    target:getStatusEffect(xi.effect.COLURE_ACTIVE):setSubPower(finalPotency)
+    local effect = target:getStatusEffect(xi.effect.COLURE_ACTIVE)
+    if effect then
+        local finalPotency = math.floor(1.25 * effect:getSubPower())
+
+        -- This floors https://www.bg-wiki.com/ffxi/Ecliptic_Attrition
+        effect:setSubPower(finalPotency)
+        target:setLocalVar('eclipticAttrition', 1)
+    end
 end
 
-xi.job_utils.geomancer.collimatedFervor = function(player, target, ability) -- TODO: cardinal direction stuff
+xi.job_utils.geomancer.collimatedFervor = function(player, target, ability)
+    target:addStatusEffect(xi.effect.COLLIMATED_FERVOR, 0, 0, 60)
 end
 
 xi.job_utils.geomancer.lifeCycle = function(player, target, ability)
-    local hpAmount    = math.floor(0.25 * player:getHP())
+    local hpAmount   = math.floor(0.25 * player:getHP())
     local hpTransfer = hpAmount
 
     if player:getMod(xi.mod.LIFE_CYCLE_EFFECT) > 0 then
-        hpTransfer = hpAmount * (player:getMod(xi.mod.LIFE_CYCLE_EFFECT) / 10)
+        hpTransfer = hpAmount * player:getMod(xi.mod.LIFE_CYCLE_EFFECT) / 10
     end
 
     target:restoreHP(hpTransfer)
@@ -315,7 +342,7 @@ xi.job_utils.geomancer.dematerialize = function(player, target, ability)
     return xi.effect.DEMATERIALIZE
 end
 
-xi.job_utils.geomancer.theugicFocus = function(player, target, ability) -- TODO: cardinal direction stuff
+xi.job_utils.geomancer.theurgicFocus = function(player, target, ability)
 end
 
 xi.job_utils.geomancer.widenedCompass = function(player, target, ability)

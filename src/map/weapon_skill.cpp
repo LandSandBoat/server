@@ -26,7 +26,7 @@ CWeaponSkill::CWeaponSkill(uint16 id)
 : m_ID(id)
 , m_TypeID(0)
 {
-    memset(m_Job, 0, sizeof(m_Job));
+    std::memset(m_Job, 0, sizeof(m_Job));
     m_Skilllevel          = 0;
     m_AnimationId         = 0;
     m_Element             = 0;
@@ -71,7 +71,7 @@ void CWeaponSkill::setUnlockId(uint8 id)
 
 void CWeaponSkill::setJob(int8* jobs)
 {
-    memcpy(&m_Job[1], jobs, 22);
+    std::memcpy(&m_Job[1], jobs, 22);
 }
 
 void CWeaponSkill::setSkillLevel(uint16 level)

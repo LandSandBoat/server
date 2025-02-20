@@ -55,10 +55,10 @@ CTradeUpdatePacket::CTradeUpdatePacket(CItem* PItem, uint8 SlotID)
         ref<uint16>(0x14) = ((CItemLinkshell*)PItem)->GetLSRawColor();
         ref<uint8>(0x16)  = ((CItemLinkshell*)PItem)->GetLSType();
 
-        memcpy(data + (0x17), PItem->getSignature().c_str(), std::min<size_t>(PItem->getSignature().size(), 15));
+        std::memcpy(buffer_.data() + 0x17, PItem->getSignature().c_str(), std::min<size_t>(PItem->getSignature().size(), 15));
     }
     else
     {
-        memcpy(data + (0x1A), PItem->getSignature().c_str(), std::min<size_t>(PItem->getSignature().size(), 12));
+        std::memcpy(buffer_.data() + 0x1A, PItem->getSignature().c_str(), std::min<size_t>(PItem->getSignature().size(), 12));
     }
 }

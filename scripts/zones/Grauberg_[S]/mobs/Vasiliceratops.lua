@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.PETRIFY)
 
     mob:setMod(xi.mod.DOUBLE_ATTACK, 100)
-    mob:setSpeed(100)
+    mob:setBaseSpeed(100)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)

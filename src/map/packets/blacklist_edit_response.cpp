@@ -35,7 +35,7 @@ CBlacklistEditResponsePacket::CBlacklistEditResponsePacket(uint32 accid, const s
         case 0x01: // Removed successfully..
             ref<uint32>(0x04) = accid;
             ref<uint8>(0x18)  = action;
-            memcpy(data + 0x08, targetName.c_str(), targetName.size());
+            std::memcpy(buffer_.data() + 0x08, targetName.c_str(), targetName.size());
             break;
 
         case 0x02: // Command error..

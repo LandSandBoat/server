@@ -11,6 +11,9 @@ zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.SIMURGH)
     GetMobByID(ID.mob.SIMURGH):setRespawnTime(math.random(900, 7200))
     xi.voidwalker.zoneOnInit(zone)
+
+    -- A Chocobo Riding Game finish line
+    zone:registerCylindricalTriggerArea(1, 218.533, 484.50, 20)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -31,11 +34,20 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
+zoneObject.afterZoneIn = function(player)
+    xi.chocoboGame.handleMessage(player)
+end
+
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    local triggerAreaID = triggerArea:getTriggerAreaID()
+
+    if triggerAreaID == 1 and player:hasStatusEffect(xi.effect.MOUNTED) then
+        xi.chocoboGame.onTriggerAreaEnter(player)
+    end
 end
 
 zoneObject.onGameHour = function(zone)
@@ -57,6 +69,7 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
+    xi.chocoboGame.onEventFinish(player, csid)
 end
 
 return zoneObject

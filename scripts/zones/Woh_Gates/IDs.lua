@@ -18,9 +18,11 @@ zones[xi.zone.WOH_GATES] =
     },
     mob =
     {
+        REIVE_MOB_OFFSET = GetFirstID('Knotted_Root'),
     },
     npc =
     {
+        REIVE_COLLISION_OFFSET = GetFirstID('_7l0'),
     },
 }
 

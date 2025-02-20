@@ -145,6 +145,21 @@
           "cwd": "${workspaceFolder}",
           "MIMode": "lldb",
           "targetArchitecture": "x64"
+        },
+        {
+            "name": "(gdb) Attach to xi_map",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "${workspaceFolder}/xi_map",
+            "processId": "${command:pickProcess}",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
         }
     ],
 }

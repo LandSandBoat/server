@@ -1,16 +1,11 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Quesse
--- Standard Merchant NPC
--- Confirmed shop stock, August 2013
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
-
-entity.onTrade = function(player, npc, trade)
-end
 
 entity.onTrigger = function(player, npc)
     local stock =
@@ -30,12 +25,6 @@ entity.onTrigger = function(player, npc)
 
     player:showText(npc, ID.text.QUESSE_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.WINDURST)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

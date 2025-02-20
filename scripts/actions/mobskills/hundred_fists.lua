@@ -9,7 +9,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    xi.mobskills.mobBuffMove(mob, xi.effect.HUNDRED_FISTS, 1, 0, 30)
+    -- note that captures show that mobskill hundred fists is still 45 seconds on retail
+    xi.mobskills.mobBuffMove(mob, xi.effect.HUNDRED_FISTS, 1, 0, 45)
 
     skill:setMsg(xi.msg.basic.USES)
 

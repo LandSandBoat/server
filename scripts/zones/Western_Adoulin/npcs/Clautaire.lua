@@ -9,9 +9,6 @@ local ID = zones[xi.zone.WESTERN_ADOULIN]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local finao = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
     if finao == xi.questStatus.QUEST_ACCEPTED then
@@ -30,9 +27,6 @@ entity.onTrigger = function(player, npc)
         -- Starting Quest: 'F.A.I.L.ure Is Not an Option'
         player:startEvent(78)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

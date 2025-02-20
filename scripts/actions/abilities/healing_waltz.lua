@@ -36,6 +36,9 @@ abilityObject.onAbilityCheck = function(player, target, ability)
             end
         end
 
+        -- Inform core we want to cleanup Contradance if it's active after the ability is done
+        ability:setPostActionCleanupEffect(xi.effect.CONTRADANCE)
+
         return 0, 0
     end
 end

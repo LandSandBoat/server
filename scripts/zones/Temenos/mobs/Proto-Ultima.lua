@@ -47,7 +47,6 @@ executeCitadelBusterState = function(mob)
         mob:setMagicCastingEnabled(true)
         mob:setAutoAttackEnabled(true)
         mob:setMobAbilityEnabled(true)
-        mob:setMobMod(xi.mobMod.DRAW_IN, 0)
         -- Use Citadel Buster at a regular interval
         mob:setLocalVar('citadelBusterTime', os.time() + math.random(90, 100))
         return
@@ -64,11 +63,32 @@ entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(false)
     mob:setAutoAttackEnabled(true)
     mob:setMobAbilityEnabled(true)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 0)
     mob:setMobMod(xi.mobMod.SKILL_LIST, 729)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+end
+
+entity.onMobRoam = function(mob)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 
 entity.onMobFight = function(mob, target)
+    local spawnPos = mob:getSpawnPos()
+    local drawInTable =
+    {
+        conditions =
+        {
+            target:checkDistance(spawnPos.x, spawnPos.y, spawnPos.z) > 25,
+        },
+        position = mob:getPos(),
+        wait = 3,
+    }
+    if drawInTable.conditions[1] then
+        mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+        utils.drawIn(target, drawInTable)
+    else
+        mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+    end
+
     if not mob:actionQueueEmpty() then
         return
     end
@@ -99,7 +119,15 @@ entity.onMobFight = function(mob, target)
         mob:setMobAbilityEnabled(false)
         mob:setMagicCastingEnabled(false)
         mob:setAutoAttackEnabled(false)
-        mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+        local citadelBusterDrawInTable =
+        {
+            conditions =
+            {
+                mob:checkDistance(target) >= 15,
+            },
+            position = mob:getPos(),
+        }
+        utils.drawIn(target, citadelBusterDrawInTable)
         executeCitadelBusterState(mob)
     end
 end

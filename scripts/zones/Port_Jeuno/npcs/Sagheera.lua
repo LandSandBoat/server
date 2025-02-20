@@ -25,7 +25,7 @@ local afArmorPlusOne =
     [  9] = { trade = { 14215, 1932, 1933, 1117 }, abc = 25, reward = 15562 }, -- temple_hose_+1
     [ 10] = { trade = { 14090, 1932, 1933,  855 }, abc = 20, reward = 15353 }, -- temple_gaiters_+1
     [ 11] = { trade = { 13855, 1934, 1935, 1994 }, abc = 30, reward = 15227 }, -- healers_cap_+1
-    [ 12] = { trade = { 12640, 1934, 1935, 1992 }, abc = 40, reward = 14475 }, -- healers_briault_+1
+    [ 12] = { trade = { 12640, 1934, 1935, 1992 }, abc = 40, reward = 14475 }, -- healers_bliaut_+1
     [ 13] = { trade = { 13963, 1934, 1935, 1993 }, abc = 20, reward = 14892 }, -- healers_mitts_+1
     [ 14] = { trade = { 14216, 1934, 1935, 1996 }, abc = 25, reward = 15563 }, -- healers_pantaloons_+1
     [ 15] = { trade = { 14091, 1934, 1935, 1995 }, abc = 20, reward = 15354 }, -- healers_duckbills_+1
@@ -138,7 +138,7 @@ local relicArmorPlusOne =
     [109] = { trade = { 15118, 2041, 2122, { 1455, 26 } }, reward = 15581 }, -- melee_hose_+1
     [110] = { trade = { 15133, 2042, 2122, { 1455, 26 } }, reward = 15666 }, -- melee_gaiters_+1
     [111] = { trade = { 15074, 2043, 1994, { 1452, 28 } }, reward = 15247 }, -- clerics_cap_+1
-    [112] = { trade = { 15089, 2044, 1992, { 1452, 28 } }, reward = 14502 }, -- clerics_briault_+1
+    [112] = { trade = { 15089, 2044, 1992, { 1452, 28 } }, reward = 14502 }, -- clerics_bliaut_+1
     [113] = { trade = { 15104, 2045, 1993, { 1452, 28 } }, reward = 14911 }, -- clerics_mitts_+1
     [114] = { trade = { 15119, 2046, 1996, { 1452, 26 } }, reward = 15582 }, -- clerics_pantaloons_+1
     [115] = { trade = { 15134, 2047, 1995, { 1452, 28 } }, reward = 15667 }, -- clerics_duckbills_+1
@@ -255,17 +255,17 @@ local tier1Chips =
     xi.item.IVORY_CHIP,
     xi.item.SCARLET_CHIP,
     xi.item.EMERALD_CHIP,
-    xi.item.SILVER_CHIP,
-    xi.item.CERULEAN_CHIP,
     xi.item.SMALT_CHIP,
     xi.item.SMOKY_CHIP,
+    xi.item.CHARCOAL_CHIP,
+    xi.item.MAGENTA_CHIP,
 }
 
 local tier2Chips =
 {
     xi.item.ORCHID_CHIP,
-    xi.item.CHARCOAL_CHIP,
-    xi.item.MAGENTA_CHIP,
+    xi.item.CERULEAN_CHIP,
+    xi.item.SILVER_CHIP,
 }
 
 local tier1ChipValue = 5

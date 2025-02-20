@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Harmodios
--- Standard Merchant NPC
 -- !pos -79.928 -4.824 -135.114 235
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MARKETS]
@@ -30,12 +29,6 @@ entity.onTrigger = function(player, npc)
 
     player:showText(npc, ID.text.HARMODIOS_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.BASTOK)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

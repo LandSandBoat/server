@@ -543,13 +543,13 @@ xi.synergy.synergyFurnaceOnEventFinish = function(player, csid, option, npc)
         end
 
         local recipeId = furnaceNpc:getLocalVar(vars.SYNERGY_FURNACE_CURRENT_RECIPE)
-        local recipe = GetSynergyRecipeByID(recipeId)
+        local recipe   = GetSynergyRecipeByID(recipeId)
         if recipe == nil then
             print('Recipe not found:', recipeId)
             return
         end
 
-        player:messageSpecial(synergyMessages.SMOOTH_SYNERGIZING, recipeId)
+        player:messageSpecial(synergyMessages.SMOOTH_SYNERGIZING, recipe['result'])
         player:messageSpecial(synergyMessages.OBTAIN_PONZES, 1, 1)
 
         setFurnaceOpen(furnaceNpc)

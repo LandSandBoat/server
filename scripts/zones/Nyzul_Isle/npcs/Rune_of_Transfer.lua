@@ -147,7 +147,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             -- left/right Menu
-            if option > 2 and math.random(100) >= 50 then
+            if option > 2 and math.random(1, 100) >= 50 then
                 instance:setLocalVar('randomPathos', math.random(18, 29))
             end
 

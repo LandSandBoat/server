@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -179,8 +179,8 @@ void CMobController::TryLink()
         return;
     }
 
-    // handle pet behaviour on the targets behalf (faster than in ai_pet_dummy)
-    // Avatars defend masters by attacking mobs if the avatar isn't attacking anything currently (bodyguard behaviour)
+    // handle pet behavior on the targets behalf (faster than in ai_pet_dummy)
+    // Avatars defend masters by attacking mobs if the avatar isn't attacking anything currently (bodyguard behavior)
     if (PTarget->PPet != nullptr && PTarget->PPet->GetBattleTargetID() == 0)
     {
         if (PTarget->PPet->objtype == TYPE_PET && ((CPetEntity*)PTarget->PPet)->getPetType() == PET_TYPE::AVATAR)
@@ -263,6 +263,18 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
         hasSneak     = PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK);
     }
 
+    // Illusion effect seems to ignore true detection (true sound Porrogos don't aggro with Illusion up)
+    // Additionally, mobs that would normally aggro you via sound that also ignore illusion must also ignore you with illusion if you have sneak up,
+    // Fish in Mamook will see you through Illusion but not if you have sneak up
+    if (PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_ILLUSION))
+    {
+        if (!PMob->getMobMod(MOBMOD_SEES_THROUGH_ILLUSION))
+        {
+            hasInvisible = true;
+            hasSneak     = true;
+        }
+    }
+
     bool isTargetAndInRange = PMob->GetBattleTargetID() == PTarget->targid && currentDistance <= PMob->GetMeleeRange();
 
     if (detectSight && !hasInvisible && currentDistance < PMob->getMobMod(MOBMOD_SIGHT_RANGE) && facing(PMob->loc.p, PTarget->loc.p, 64))
@@ -270,7 +282,7 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
         return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
-    if ((PMob->m_Behaviour & BEHAVIOUR_AGGRO_AMBUSH) && currentDistance < 3 && !hasSneak)
+    if ((PMob->m_Behavior & BEHAVIOR_AGGRO_AMBUSH) && currentDistance < 3 && !hasSneak)
     {
         return true;
     }
@@ -574,7 +586,7 @@ void CMobController::DoCombatTick(time_point tick)
 
     TryLink();
 
-    PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", CLuaBaseEntity(PMob));
+    PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", PMob);
     luautils::OnMobFight(PMob, PTarget);
 
     if (PMob->PAI->IsCurrentState<CInactiveState>() || !PMob->PAI->CanChangeState())
@@ -592,7 +604,7 @@ void CMobController::DoCombatTick(time_point tick)
         }
         else
         {
-            PMob->PAI->EventHandler.triggerListener("RUN_AWAY", CLuaBaseEntity(PMob), CLuaBaseEntity(PFollowTarget));
+            PMob->PAI->EventHandler.triggerListener("RUN_AWAY", PMob, PFollowTarget);
             ClearFollowTarget();
         }
         return;
@@ -629,10 +641,11 @@ void CMobController::FaceTarget(uint16 targid)
     {
         targ = PMob->GetEntity(targid);
     }
-    if (!(PMob->m_Behaviour & BEHAVIOUR_NO_TURN) && targ)
+    if (!(PMob->m_Behavior & BEHAVIOR_NO_TURN) && targ)
     {
         PMob->PAI->PathFind->LookAt(targ->loc.p);
     }
+    PMob->UpdateSpeed();
 }
 
 void CMobController::Move()
@@ -707,17 +720,7 @@ void CMobController::Move()
 
         if (((currentDistance > closeDistance) || move) && PMob->PAI->CanFollowPath())
         {
-            // TODO: can this be moved to scripts entirely?
-            if (PMob->getMobMod(MOBMOD_DRAW_IN) > 0)
-            {
-                if (currentDistance >= PMob->GetMeleeRange() * 2 && battleutils::DrawIn(PTarget, PMob, PMob->GetMeleeRange() - 0.2f))
-                {
-                    FaceTarget();
-                    return;
-                }
-            }
-
-            if (PMob->speed != 0 && PMob->getMobMod(MOBMOD_NO_MOVE) == 0 && m_Tick >= m_LastSpecialTime)
+            if (PMob->GetSpeed() != 0 && PMob->getMobMod(MOBMOD_NO_MOVE) == 0 && m_Tick >= m_LastSpecialTime)
             {
                 // attempt to teleport to target (if in range)
                 if (PMob->getMobMod(MOBMOD_TELEPORT_TYPE) == 2)
@@ -742,7 +745,7 @@ void CMobController::Move()
                             PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                         }
                     }
-                    else if (distanceSquared(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p) > 10)
+                    else if (!isWithinDistance(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p, 2.5f))
                     {
                         // try to find path towards target
                         PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
@@ -1021,7 +1024,7 @@ void CMobController::DoRoamTick(time_point tick)
                 else if (PMob->m_roamFlags & ROAMFLAG_SCRIPTED)
                 {
                     // allow custom event action
-                    PMob->PAI->EventHandler.triggerListener("ROAM_ACTION", CLuaBaseEntity(PMob));
+                    PMob->PAI->EventHandler.triggerListener("ROAM_ACTION", PMob);
                     luautils::OnMobRoamAction(PMob);
                     m_LastActionTime = m_Tick;
                 }
@@ -1060,7 +1063,7 @@ void CMobController::DoRoamTick(time_point tick)
     }
     if (m_Tick >= m_LastRoamScript + 3s)
     {
-        PMob->PAI->EventHandler.triggerListener("ROAM_TICK", CLuaBaseEntity(PMob));
+        PMob->PAI->EventHandler.triggerListener("ROAM_TICK", PMob);
         luautils::OnMobRoam(PMob);
         m_LastRoamScript = m_Tick;
     }
@@ -1118,7 +1121,7 @@ void CMobController::FollowRoamPath()
 
         if (PMob->PAI->PathFind->OnPoint())
         {
-            PMob->PAI->EventHandler.triggerListener("PATH", CLuaBaseEntity(PMob));
+            PMob->PAI->EventHandler.triggerListener("PATH", PMob);
             luautils::OnPath(PMob);
         }
     }
@@ -1323,6 +1326,16 @@ void CMobController::SetFollowTarget(CBaseEntity* PTarget, FollowType followType
     m_followType  = followType;
 }
 
+bool CMobController::HasFollowTarget()
+{
+    if (PFollowTarget && m_followType != FollowType::None)
+    {
+        return true;
+    }
+
+    return false;
+}
+
 void CMobController::ClearFollowTarget()
 {
     PFollowTarget = nullptr;
@@ -1346,7 +1359,7 @@ bool CMobController::CanMoveForward(float currentDistance)
         standbackRange = PMob->getMobMod(MOBMOD_STANDBACK_RANGE);
     }
 
-    if (PMob->m_Behaviour & BEHAVIOUR_STANDBACK && currentDistance < standbackRange && PMob->CanSeeTarget(PTarget))
+    if (PMob->m_Behavior & BEHAVIOR_STANDBACK && currentDistance < standbackRange && PMob->CanSeeTarget(PTarget))
     {
         return false;
     }

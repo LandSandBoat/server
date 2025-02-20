@@ -19,14 +19,14 @@ local function registerRegionAroundNPC(zone, NPCID, zoneID)
     local z        = npc:getZPos()
     local distance = 7
 
-    zone:registerTriggerArea(zoneID,
+    zone:registerCuboidTriggerArea(zoneID,
         x - distance, y - distance, z - distance,
         x + distance, y + distance, z + distance)
 end
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.AHTU)
-    GetMobByID(ID.mob.AHTU):setRespawnTime(math.random(900, 10800))
+    -- A Chocobo Riding Game finish line
+    zone:registerCylindricalTriggerArea(1, 467.16, -156.82, 20)
 
     for i = 0, 7 do
         registerRegionAroundNPC(zone, ID.npc.RAPTOR_FOOD_BASE + i, i + 1)
@@ -63,13 +63,21 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
+zoneObject.afterZoneIn = function(player)
+    xi.chocoboGame.handleMessage(player)
+end
+
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    local triggerAreaID = triggerArea:getTriggerAreaID()
+
     if player:hasStatusEffect(xi.effect.FULL_SPEED_AHEAD) then
-        xi.fsa.onTriggerAreaEnter(player, triggerArea:GetTriggerAreaID())
+        xi.fsa.onTriggerAreaEnter(player, triggerAreaID)
+    elseif triggerAreaID == 1 and player:hasStatusEffect(xi.effect.MOUNTED) then
+        xi.chocoboGame.onTriggerAreaEnter(player)
     end
 end
 
@@ -95,6 +103,8 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('[QUEST]FullSpeedAhead', 2)
         player:setPos(475, 8.8, -159, 128, 105)
     end
+
+    xi.chocoboGame.onEventFinish(player, csid)
 end
 
 return zoneObject

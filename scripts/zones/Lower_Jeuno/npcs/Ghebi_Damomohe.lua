@@ -1,22 +1,12 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Ghebi Damomohe
--- Type: Standard Merchant
 -- Starts and Finishes Quest: Tenshodo Membership
 -- !pos 16 0 -5 245
 -- TODO Enum shop items
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
-
-entity.onTrade = function(player, npc, trade)
-end
-
-entity.onTrigger = function(player, npc)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 106 and option == 0 then

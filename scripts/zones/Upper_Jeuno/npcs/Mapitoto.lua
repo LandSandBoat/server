@@ -57,9 +57,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if (csid == 10223 or csid == 10224) and option == 1 then
         player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.FULL_SPEED_AHEAD)

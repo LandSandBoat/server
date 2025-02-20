@@ -5,6 +5,10 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('hpTrigger', math.random(10, 75))
 end

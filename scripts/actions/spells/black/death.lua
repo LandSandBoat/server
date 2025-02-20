@@ -25,7 +25,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             not target:isNM() and
             not target:hasStatusEffect(xi.effect.MAGIC_SHIELD)
         then
-            local resistRate = xi.combat.magicHitRate.calculateResistRate(caster, target, xi.magic.spellGroup.BLACK, xi.skill.DARK_MAGIC, xi.element.DARK, 0, 0, 0)
+            local resistRate = xi.combat.magicHitRate.calculateResistRate(caster, target, xi.magic.spellGroup.BLACK, xi.skill.DARK_MAGIC, 0, xi.element.DARK, 0, 0, 0)
 
             if resistRate == 1 then
                 instaDeath = true

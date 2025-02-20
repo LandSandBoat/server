@@ -9,26 +9,26 @@ local entity = {}
 -- [tradedItemId] = rewardItemId
 local trades =
 {
-    [1783] =  5410, -- Luminion Tissue      -> Virtue Stone Pouch
-    [1784] =  5410, -- Phuabo Organ         -> Virtue Stone Pouch
-    [1785] =  5410, -- Xzomit Organ         -> Virtue Stone Pouch
-    [1786] =  5410, -- Aern Organ           -> Virtue Stone Pouch
-    [1787] =  5410, -- Hpemde Organ         -> Virtue Stone Pouch
-    [1788] =  5410, -- Yovra Organ          -> Virtue Stone Pouch
-    [1818] =  5410, -- Euvhi Organ          -> Virtue Stone Pouch
-    [1819] =  5410, -- Luminion Chip        -> Virtue Stone Pouch
-    [1901] = 15471, -- Vice of Antipathy    -> Merciful Cape
-    [1902] = 15472, -- Vice of Avarice      -> Altruistic Cape
-    [1903] = 15473, -- Vice of Aspersion    -> Astute Cape
-    [1911] = 14808, -- Aura of Adulation    -> Novio Earring
-    [1912] = 14809, -- Aura of Voracity     -> Novia Earring
-    [1913] = 15458, -- Sin of Indignation   -> Ninurta's Sash
-    [1914] = 18245, -- Sin of Indolence     -> Aureole
-    [1915] = 17810, -- Sin of Indulgence    -> Futsuno Mitama
-    [1916] = 18398, -- Sin of Invidiousness -> Raphael Rod
-    [1917] = 15548, -- Sin of Insolence     -> Mars Ring
-    [1918] = 15549, -- Sin of Infatuation   -> Bellona Ring
-    [1919] = 15550, -- Sin of Intemperance  -> Minerva Ring
+    [xi.item.SAMPLE_OF_LUMINIAN_TISSUE] = xi.item.VIRTUE_STONE_POUCH,
+    [xi.item.PHUABO_ORGAN]              = xi.item.VIRTUE_STONE_POUCH,
+    [xi.item.XZOMIT_ORGAN]              = xi.item.VIRTUE_STONE_POUCH,
+    [xi.item.AERN_ORGAN]                = xi.item.VIRTUE_STONE_POUCH,
+    [xi.item.HPEMDE_ORGAN]              = xi.item.VIRTUE_STONE_POUCH,
+    [xi.item.YOVRA_ORGAN]               = xi.item.VIRTUE_STONE_POUCH,
+    [xi.item.EUVHI_ORGAN]               = xi.item.VIRTUE_STONE_POUCH,
+    [xi.item.LUMINION_CHIP]             = xi.item.VIRTUE_STONE_POUCH,
+    [xi.item.VICE_OF_ANTIPATHY]         = xi.item.MERCIFUL_CAPE,
+    [xi.item.VICE_OF_AVARICE]           = xi.item.ALTRUISTIC_CAPE,
+    [xi.item.VICE_OF_ASPERSION]         = xi.item.ASTUTE_CAPE,
+    [xi.item.AURA_OF_ADULATION]         = xi.item.NOVIO_EARRING,
+    [xi.item.AURA_OF_VORACITY]          = xi.item.NOVIA_EARRING,
+    [xi.item.SIN_OF_INDIGNATION]        = xi.item.NINURTAS_SASH,
+    [xi.item.SIN_OF_INDOLENCE]          = xi.item.AUREOLE,
+    [xi.item.SIN_OF_INDULGENCE]         = xi.item.FUTSUNO_MITAMA,
+    [xi.item.SIN_OF_INVIDIOUSNESS]      = xi.item.RAPHAELS_ROD,
+    [xi.item.SIN_OF_INSOLENCE]          = xi.item.MARSS_RING,
+    [xi.item.SIN_OF_INFATUATION]        = xi.item.BELLONAS_RING,
+    [xi.item.SIN_OF_INTEMPERANCE]       = xi.item.MINERVAS_RING,
 }
 
 entity.onTrade = function(player, npc, trade)
@@ -46,7 +46,7 @@ end
 entity.onTrigger = function(player, npc)
     if player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIORS_PATH then
         if player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE) == xi.questStatus.QUEST_COMPLETED then
-            if math.random() < 0.5 then
+            if math.random(1, 100) <= 50 then
                 player:startEvent(582)
             else
                 player:startEvent(583)
@@ -55,9 +55,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(585)
         end
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

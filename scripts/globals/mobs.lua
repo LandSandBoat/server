@@ -31,17 +31,38 @@ local function lotteryPrimed(phList)
     return false
 end
 
+xi.mob.updateNMSpawnPoint = function(mob, spawnPoints)
+    -- This function is used to replace UpdateNMSpawnPoints() inside the Zone.lua files and the NM despawn scripts
+    -- Once UpdateNMSpawnPoints() is no longer used, this note can be removed
+    -- Spawnpoints is a table of {x = , y = , z = }
+    if spawnPoints ~= nil and #spawnPoints > 0 then
+        local chosenSpawn    = utils.randomEntry(spawnPoints)
+        local randomRotation = math.random(0, 255) -- rotation does not matter
+
+        -- Updates the mob's spawn point
+        mob:setSpawn(chosenSpawn.x, chosenSpawn.y, chosenSpawn.z, randomRotation)
+    else
+        printf('No spawn points defined for mob %s (%u) in spawnPoints.', mob:getName(), mob:getID())
+    end
+end
+
 -- potential lottery placeholder was killed
 xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
     params = params or {}
     --[[
         params.immediate   = true    pop NM without waiting for next PH pop time
+        params.dayOnly     = true    spawn NM only at day time
         params.nightOnly   = true    spawn NM only at night time
         params.noPosUpdate = true    do not run UpdateNMSpawnPoint()
+        params.spawnPoints = {x = , y = , z = } table of spawn points to choose from
     ]]
 
     if type(params.immediate) ~= 'boolean' then
         params.immediate = false
+    end
+
+    if type(params.dayOnly) ~= 'boolean' then
+        params.dayOnly = false
     end
 
     if type(params.nightOnly) ~= 'boolean' then
@@ -81,8 +102,15 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
                 -- The enum bakes in a multiplication of 2.4, gotta reverse that to get accurate hour
                 local nextRepopDate = (nextRepopTime / 60 * 25) + 886 * (xi.vanaTime.YEAR / 2.4)
                 local nextRepopHour = (nextRepopDate % (xi.vanaTime.DAY / 2.4)) / (xi.vanaTime.HOUR / 2.4)
-                -- If the NM is night only and spawn would happen during the day, bail out
+                -- If the NM is day only and spawn would happen during the night, bail out
                 if
+                    params.dayOnly and
+                    nextRepopHour < 4 and
+                    nextRepopHour >= 20
+                then
+                    return false
+                -- If the NM is night only and spawn would happen during the day, bail out
+                elseif
                     params.nightOnly and
                     nextRepopHour >= 4 and
                     nextRepopHour < 20
@@ -94,8 +122,14 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
                 DisallowRespawn(phId, true)
                 DisallowRespawn(nmId, false)
 
+                -- This is a temporary solution until all NMs have been updated to use params.spawnPoints and moved out of sql
+                if params.spawnPoints then
+                    xi.mob.updateNMSpawnPoint(nm, params.spawnPoints)
+                    params.noPosUpdate = true -- If we have a table of spawn points, we don't need to run UpdateNMSpawnPoint()
+                end
+
                 if not params.noPosUpdate then
-                    UpdateNMSpawnPoint(nmId)
+                    UpdateNMSpawnPoint(nmId) -- This needs to stay here until all NMs have been updated to use params.spawnPoints and moved out of sql
                 end
 
                 -- if params.immediate is true, spawn the nm params.immediately (1ms) else use placeholder's timer
@@ -538,6 +572,12 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
                         dMod = 20 + (dMod - 20) / 2
                     end
 
+                    -- This is a bad assumption, but it prevents some negative damage (healing) when there otherwise shouldn't be
+                    -- TODO: better understand damage add effects from mobs
+                    if dMod < 0 then
+                        dMod = 0
+                    end
+
                     power = dMod + target:getMainLvl() - mob:getMainLvl() + damage / 2
                 end
 
@@ -557,6 +597,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
                 if power < 0 then
                     if ae.negMsg then
                         message = ae.negMsg
+                        power   = power * -1 -- outgoing action packets only support unsigned integers. The "negative message" will also handle healing automagically deep inside core somewhere.
                     else
                         power = 0
                     end

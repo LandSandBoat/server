@@ -55,7 +55,7 @@ namespace mobSpellList
     // Load list of spells
     void LoadMobSpellList()
     {
-        memset(PMobSpellList, 0, sizeof(PMobSpellList));
+        std::memset(PMobSpellList, 0, sizeof(PMobSpellList));
         PMobSpellList[0] = new CMobSpellList();
 
         const char* Query = "SELECT mob_spell_lists.spell_list_id, \

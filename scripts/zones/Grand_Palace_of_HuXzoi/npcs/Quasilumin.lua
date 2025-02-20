@@ -8,9 +8,6 @@ local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local index = npc:getID() - ID.npc.QUASILUMIN_OFFSET
 
@@ -29,12 +26,6 @@ entity.onTrigger = function(player, npc)
     end
 
     player:showText(npc, ID.text.QUASILUMIN_MAP_QUEST_OFFSET + index)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

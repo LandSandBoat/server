@@ -217,57 +217,6 @@ local function getMultiAttacks(attacker, target, wsParams, firstHit, offHand)
     return numHits
 end
 
-local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
-    local atkMultiplier   = xi.weaponskills.fTP(tp, params.atkVaries)
-    local cratio          = attacker:getRATT() / (defender:getStat(xi.mod.DEF) - ignoredDef)
-    local levelCorrection = 0
-
-    if attacker:getMainLvl() < defender:getMainLvl() then
-        levelCorrection = (defender:getMainLvl() - attacker:getMainLvl()) / 40
-    end
-
-    cratio = (cratio - levelCorrection) * atkMultiplier
-
-    -- adding cap check base on weapon https://www.bg-wiki.com/ffxi/PDIF info
-    local damageLimitPlus = attacker:getMod(xi.mod.DAMAGE_LIMIT) / 100
-    local damageLimitPercent = (100 + attacker:getMod(xi.mod.DAMAGE_LIMITP)) / 100
-    local weaponType = attacker:getWeaponSkillType(xi.slot.RANGED)
-    local cRatioCap  = 3.25 -- Archery
-
-    if weaponType == xi.skill.MARKSMANSHIP then
-        cRatioCap = 3.5
-    end
-
-    cRatioCap = (cRatioCap + damageLimitPlus) * damageLimitPercent -- Damage Limit calc
-
-    cratio = utils.clamp(cratio, 0, cRatioCap)
-
-    -- max
-    local pdifmax = cratio
-
-    if cratio < 0.9 then
-        pdifmax = cratio * 10 / 9
-    elseif cratio < 1.1 then
-        pdifmax = 1
-    end
-
-    -- min
-    local pdifmin = 0
-
-    if cratio < 0.9 then
-        pdifmin = cratio
-    elseif cratio < 1.1 then
-        pdifmin = 1
-    else
-        pdifmin = cratio * 20 / 19 - 3 / 19
-    end
-
-    local pdif     = { pdifmin, pdifmax }
-    local pdifcrit = { pdifmin * 1.25, pdifmax * 1.25 }
-
-    return pdif, pdifcrit
-end
-
 local function getRangedHitRate(attacker, target, bonus)
     local acc = attacker:getRACC()
     local eva = target:getEVA()
@@ -307,8 +256,13 @@ end
 
 -- Function to calculate if a hit in a WS misses, criticals, and the respective damage done
 local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcParams)
-    local criticalHit = false
-    local finaldmg    = 0
+    local criticalHit          = false
+    local hitDamage            = 0
+    local atkMultiplier        = xi.weaponskills.fTP(calcParams.tpUsed, wsParams.atkVaries)
+    local ignoreDefMultiplier  = xi.weaponskills.fTP(calcParams.tpUsed, wsParams.ignoredDefense)
+    local applyLevelCorrection = xi.combat.levelCorrection.isLevelCorrectedZone(attacker)
+    local ignoresDefense       = (wsParams.ignoredDefense ~= nil) -- if the table exists, it ignores defense
+
     -- local pdif = 0 Reminder for Future Implementation!
 
     -- priority order of checks
@@ -322,7 +276,7 @@ local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcPara
         calcParams.mustMiss
     then
         -- miss logic
-        return finaldmg, calcParams
+        return hitDamage, calcParams
     end
 
     -- check parry
@@ -332,7 +286,7 @@ local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcPara
         xi.combat.physical.isParried(target, attacker)
     then
         -- parried logic
-        return finaldmg, calcParams
+        return hitDamage, calcParams
     end
 
     -- check shadows
@@ -342,7 +296,7 @@ local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcPara
     then
         -- shadow absorb logic
         calcParams.shadowsAbsorbed = calcParams.shadowsAbsorbed + 1
-        return finaldmg, calcParams
+        return hitDamage, calcParams
     end
 
     -- check guard
@@ -352,7 +306,7 @@ local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcPara
         xi.combat.physical.isGuarded(target, attacker)
     then
         -- guarded logic
-        return finaldmg, calcParams
+        return hitDamage, calcParams
     end
 
     local critChance = math.random() -- See if we land a critical hit
@@ -362,41 +316,24 @@ local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcPara
 
     if criticalHit then
         calcParams.criticalHit = true
-        calcParams.pdif = xi.weaponskills.generatePdif(calcParams.ccritratio[1], calcParams.ccritratio[2], true)
-    else
-        calcParams.pdif = xi.weaponskills.generatePdif(calcParams.cratio[1], calcParams.cratio[2], true)
     end
 
-    finaldmg = (dmg + consumeManaBonus(attacker)) * ftp * calcParams.pdif
+    if calcParams.attackType == xi.attackType.PHYSICAL then
+        calcParams.pdif = xi.combat.physical.calculateMeleePDIF(attacker, target, calcParams.attackInfo.weaponType, atkMultiplier, criticalHit, applyLevelCorrection, ignoresDefense, ignoreDefMultiplier, true, calcParams.attackInfo.slot, false)
+    else
+        calcParams.pdif = xi.combat.physical.calculateRangedPDIF(attacker, target, calcParams.skillType, atkMultiplier, criticalHit, applyLevelCorrection, ignoresDefense, ignoreDefMultiplier, true, 0)
+    end
 
-    -- handle blocking
-    finaldmg = xi.combat.physical.handleBlock(target, attacker, finaldmg)
+    hitDamage = (dmg + consumeManaBonus(attacker)) * ftp * calcParams.pdif
 
-    -- Duplicate the first hit with an added magical component for hybrid WSes
-    if calcParams.hybridHit then
-        -- Calculate magical bonuses and reductions
-        local magicdmg = addBonusesAbility(attacker, wsParams.ele, target, finaldmg, wsParams)
-
-        magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, calcParams.bonusAcc)
-        magicdmg = target:magicDmgTaken(magicdmg, wsParams.ele)
-
-        if magicdmg > 0 then
-            magicdmg = magicdmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, wsParams.ele) -- this may absorb or nullify
-        end
-
-        if magicdmg > 0 then -- handle nonzero damage if previous function does not absorb or nullify
-            magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
-            magicdmg = utils.clamp(magicdmg, 0, 99999)
-            magicdmg = utils.oneforall(target, magicdmg)
-            magicdmg = utils.stoneskin(target, magicdmg)
-        end
-
-        finaldmg = finaldmg + magicdmg
+    -- handle blocking and reduce the hit damage if needed
+    if xi.combat.physical.isBlocked(target, attacker) then
+        hitDamage = hitDamage - xi.combat.physical.getDamageReductionForBlock(target, attacker, hitDamage)
     end
 
     calcParams.hitsLanded = calcParams.hitsLanded + 1
 
-    return finaldmg, calcParams
+    return hitDamage, calcParams
 end
 
 local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDamage)
@@ -461,6 +398,39 @@ local function calculateWsMods(attacker, calcParams, wsParams)
     return wsMods * calcParams.alpha + calcParams.fSTR
 end
 
+-- Compute magic damage component of hybrid weaponskill
+-- https://wiki.ffo.jp/html/1261.html
+-- https://www.ffxiah.com/forum/topic/33470/the-sealed-dagger-a-ninja-guide/151/#3420836
+-- https://www.ffxiah.com/forum/topic/49614/blade-chi-damage-formula/2/#3171538
+local function calculateHybridMagicDamage(tp, physicaldmg, attacker, target, wsParams, calcParams, wsID)
+    local ftp      = xi.weaponskills.fTP(tp, wsParams.ftpMod)
+    local magicdmg = physicaldmg * ftp + attacker:getMod(xi.mod.MAGIC_DAMAGE)
+    local wsd      = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS)
+
+    if attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then
+        wsd = wsd + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
+    end
+
+    magicdmg = magicdmg * (100 + wsd) / 100
+    magicdmg = addBonusesAbility(attacker, wsParams.ele, target, magicdmg, wsParams)
+    magicdmg = magicdmg + calcParams.bonusfTP * physicaldmg
+    magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, calcParams.bonusAcc)
+    magicdmg = target:magicDmgTaken(magicdmg, wsParams.ele)
+
+    if magicdmg > 0 then
+        magicdmg = magicdmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, wsParams.ele)
+    end
+
+    if magicdmg > 0 then                                           -- handle nonzero damage if previous function does not absorb or nullify
+        magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
+        magicdmg = utils.clamp(magicdmg, 0, 99999)
+        magicdmg = utils.oneforall(target, magicdmg)
+        magicdmg = utils.stoneskin(target, magicdmg)
+    end
+
+    return math.floor(magicdmg)
+end
+
 -- Calculates the raw damage for a weaponskill, used by both xi.weaponskills.doPhysicalWeaponskill and xi.weaponskills.doRangedWeaponskill.
 -- Behavior of damage calculations can vary based on the passed in calcParams, which are determined by the calling function
 -- depending on the type of weaponskill being done, and any special cases for that weaponskill
@@ -499,6 +469,9 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     -- Calculate fTP multiplier
     local ftp = xi.weaponskills.fTP(tp, wsParams.ftpMod) + calcParams.bonusfTP
+    if calcParams.hybridHit then
+        ftp = 1 + calcParams.bonusfTP
+    end
 
     -- Calculate critrates
     -- TODO: calc per-hit with weapon crit+% on each hand (if dual wielding)
@@ -511,8 +484,8 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local hitsDone                = 1
     local hitdmg                  = 0
     local finaldmg                = 0
-    local mainhandTPGain          = xi.combat.tp.getSingleWeaponTPReturn(attacker, xi.slot.MAIN)
-    local subTPGain               = xi.combat.tp.getSingleWeaponTPReturn(attacker, xi.slot.SUB)
+    local mainhandTPGain          = xi.combat.tp.getSingleWeaponTPReturn(attacker, xi.slot.MAIN) -- TODO: are these calculated wrong? ((delay1+delay2)/2 * 1 - DW%) = tp return for both hands?
+    local subTPGain               = xi.combat.tp.getSingleWeaponTPReturn(attacker, xi.slot.SUB)  --
     local isJump                  = wsParams.isJump or false
     local attackerTPMult          = wsParams.attackerTPMult or 1
     calcParams.hitsLanded         = 0
@@ -573,9 +546,8 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         end
     end
 
-    -- We've now accounted for any crit from SA/TA, or damage bonus for a Hybrid WS, so nullify them
+    -- We've now accounted for any crit from SA/TA, so nullify them
     calcParams.forcedFirstCrit = false
-    calcParams.hybridHit       = false
 
     -- For items that apply bonus damage to the first hit of a weaponskill (but not later hits),
     -- store bonus damage for first hit, for use after other calculations are done
@@ -591,34 +563,6 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     if calcParams.skillType == xi.skill.HAND_TO_HAND then
         offhandSkill = xi.skill.HAND_TO_HAND
         subTPGain    = mainhandTPGain
-    end
-
-    -- Do the extra hit for our offhand if applicable
-    if calcParams.extraOffhandHit and finaldmg < targetHp then
-        calcParams.hitsLanded = 0
-        local offhandDmg      = calcParams.weaponDamage[2] + wsMods
-        hitdmg, calcParams    = getSingleHitDamage(attacker, target, offhandDmg, ftp, wsParams, calcParams)
-
-        if calcParams.melee then
-            hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
-        end
-
-        if hitdmg > 0 then
-            attacker:trySkillUp(offhandSkill, targetLvl)
-
-            if isJump then
-                attacker:addTP(subTPGain * attackerTPMult)
-            end
-        end
-
-        finaldmg = finaldmg + hitdmg
-        hitsDone = hitsDone + 1
-
-        calcParams.tpHitsLanded      = calcParams.tpHitsLanded + calcParams.hitsLanded
-        calcParams.offhandHitsLanded = calcParams.hitsLanded
-
-        numOffhandMultis = getMultiAttacks(attacker, target, wsParams, false, true)
-        numMultiProcs    = numOffhandMultis > 0 and numMultiProcs + 1 or numMultiProcs
     end
 
     calcParams.guaranteedHit = false -- Accuracy bonus from SA/TA applies only to first main and offhand hit
@@ -646,10 +590,19 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
             end
         end
 
+        -- When dual wielding, the mainhand appears to count the second hit as a TP hit unless it's a 1 hit WS where the offhand will gain TP
+        -- Needs better verification
+        if calcParams.extraOffhandHit and hitsDone == 1 then
+            calcParams.tpHitsLanded = calcParams.tpHitsLanded + calcParams.hitsLanded
+        elseif wsParams.isBarrage then
+            calcParams.tpHitsLanded = calcParams.tpHitsLanded + calcParams.hitsLanded
+        else -- Otherwise, add a hit to the "extra" hits which is 10 tp each
+            calcParams.mainHitsLanded = calcParams.mainHitsLanded + calcParams.hitsLanded
+        end
+
         finaldmg                  = finaldmg + hitdmg
         hitsDone                  = hitsDone + 1
         mainhandHitsDone          = mainhandHitsDone + 1
-        calcParams.mainHitsLanded = calcParams.mainHitsLanded + calcParams.hitsLanded
 
         -- Check each hit for multis, but stop after we get 2 multi procs
         if numMultiProcs < 2 then
@@ -678,14 +631,67 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
             end
         end
 
+        -- When dual wielding, the mainhand appears to count the second hit as a TP hit unless it's a 1 hit WS where the offhand will gain TP
+        -- Needs better verification, in this case (1 hit ws with multis)  a DA/TA/QA may not count as TP hit and we'd move this into the offhand hit proc.
+        -- Either way, this won't "cheat" players out of TP in the current implementation.
+        if calcParams.extraOffhandHit and hitsDone == 1 then
+            calcParams.tpHitsLanded = calcParams.tpHitsLanded + calcParams.hitsLanded
+        else -- Otherwise, add a hit to the "extra" hits which is 10 tp each
+            calcParams.mainHitsLanded = calcParams.mainHitsLanded + calcParams.hitsLanded
+        end
+
         finaldmg                  = finaldmg + hitdmg
         hitsDone                  = hitsDone + 1
         mainhandMultiHitsDone     = mainhandMultiHitsDone + 1
-        calcParams.mainHitsLanded = calcParams.mainHitsLanded + calcParams.hitsLanded
+    end
+
+    local originalSlot = calcParams.attackInfo.slot
+
+    -- Update params for accuracy cap/pdif purposes
+    if calcParams.extraOffhandHit then
+        if offhandSkill ~= xi.skill.HAND_TO_HAND then
+            calcParams.attackInfo.slot = xi.slot.SUB
+        end
+
+        calcParams.attackInfo.weaponType = offhandSkill
+    end
+
+    -- Do the extra hit for our offhand if applicable
+    if calcParams.extraOffhandHit and hitsDone < 8 and finaldmg < targetHp then
+        calcParams.hitsLanded = 0
+        local offhandDmg      = calcParams.weaponDamage[2] + wsMods
+        hitdmg, calcParams    = getSingleHitDamage(attacker, target, offhandDmg, ftp, wsParams, calcParams)
+
+        if calcParams.melee then
+            hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
+        end
+
+        if hitdmg > 0 then
+            attacker:trySkillUp(offhandSkill, targetLvl)
+
+            if isJump then
+                attacker:addTP(subTPGain * attackerTPMult)
+            end
+        end
+
+        -- If this is the second swing of the WS (1 hit ws) the offhand appears to count for TP gain
+        -- Needs better verification
+        if calcParams.extraOffhandHit and hitsDone == 1 then
+            calcParams.tpHitsLanded = calcParams.tpHitsLanded + calcParams.hitsLanded
+        else -- Otherwise, add a hit to the "extra" hits which is 10 tp each
+            calcParams.offhandHitsLanded = calcParams.hitsLanded
+        end
+
+        finaldmg = finaldmg + hitdmg
+        hitsDone = hitsDone + 1
+
+        numOffhandMultis = getMultiAttacks(attacker, target, wsParams, false, true)
+        numMultiProcs    = numOffhandMultis > 0 and numMultiProcs + 1 or numMultiProcs
     end
 
     -- Proc any offhand multi attacks.
     local offhandMultiHitsDone = 0
+
     while hitsDone < 8 and offhandMultiHitsDone < numOffhandMultis and finaldmg < targetHp do
         local offhandDmg      = calcParams.weaponDamage[2] + wsMods
         calcParams.hitsLanded = 0
@@ -711,10 +717,8 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     calcParams.extraHitsLanded = calcParams.mainHitsLanded + calcParams.offhandHitsLanded
 
-    -- Remove the TP hit landed from the count if it did -- otherwise we would gain extra TP
-    if calcParams.tpHitsLanded > 1 then
-        calcParams.extraHitsLanded = calcParams.extraHitsLanded - 1
-    end
+    -- Reset slot info (A listener eventually uses this, and the change to SLOT_SUB on DW will be unexpected)
+    calcParams.attackInfo.slot = originalSlot
 
     -- Factor in "all hits" bonus damage mods
     -- TODO: does this apply to every hit of a multi hit WS as it's coming in to account for potentially excess damage here?
@@ -744,10 +748,6 @@ end
 -- Sets up the necessary calcParams for a melee WS before passing it to calculateRawWSDmg. When the raw
 -- damage is returned, handles reductions based on target resistances and passes off to xi.weaponskills.takeWeaponskillDamage.
 xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParams, tp, action, primaryMsg, taChar)
-    -- Determine cratio and ccritratio
-    local ignoredDef         = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignoredDefense)
-    local cratio, ccritratio = xi.weaponskills.cMeleeRatio(attacker, target, wsParams, ignoredDef, tp)
-
     -- Set up conditions and wsParams used for calculating weaponskill damage
     local gorgetBeltFTP, gorgetBeltAcc = xi.weaponskills.handleWSGorgetBelt(attacker)
     local attack =
@@ -763,8 +763,6 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
     calcParams.attackInfo              = attack
     calcParams.weaponDamage            = xi.weaponskills.getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
     calcParams.fSTR                    = xi.weaponskills.fSTR(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getWeaponDmgRank())
-    calcParams.cratio                  = cratio
-    calcParams.ccritratio              = ccritratio
     calcParams.accStat                 = attacker:getACC()
     calcParams.melee                   = true
     calcParams.mustMiss                = target:hasStatusEffect(xi.effect.PERFECT_DODGE) or (target:hasStatusEffect(xi.effect.ALL_MISS) and not wsParams.hitsHigh)
@@ -779,6 +777,7 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
     calcParams.hybridHit               = wsParams.hybridWS
     calcParams.flourishEffect          = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
     calcParams.bonusTP                 = wsParams.bonusTP or 0
+    calcParams.tpUsed                  = tp
     calcParams.attackType              = xi.attackType.PHYSICAL
 
     local isJump = wsParams.isJump or false
@@ -804,7 +803,13 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
 
     -- Send our wsParams off to calculate our raw WS damage, hits landed, and shadows absorbed
     calcParams     = xi.weaponskills.calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
-    local finaldmg = calcParams.finalDmg
+    local finaldmg = math.floor(calcParams.finalDmg)
+
+    -- Add in magic damage for hybrid weaponskills
+    -- Only procs if the mob still has HP remaining
+    if wsParams.hybridWS and target:getHP() > finaldmg then
+        finaldmg = finaldmg + calculateHybridMagicDamage(tp, finaldmg, attacker, target, wsParams, calcParams, wsID)
+    end
 
     -- Delete statuses that may have been spent by the WS
     attacker:delStatusEffectsByFlag(xi.effectFlag.DETECTABLE)
@@ -821,10 +826,6 @@ end
 -- Sets up the necessary calcParams for a ranged WS before passing it to calculateRawWSDmg. When the raw
 -- damage is returned, handles reductions based on target resistances and passes off to xi.weaponskills.takeWeaponskillDamage.
 xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams, tp, action, primaryMsg)
-    -- Determine cratio and ccritratio
-    local ignoredDef         = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignoredDefense)
-    local cratio, ccritratio = cRangedRatio(attacker, target, wsParams, ignoredDef, tp)
-
     -- Set up conditions and params used for calculating weaponskill damage
     local gorgetBeltFTP, gorgetBeltAcc = xi.weaponskills.handleWSGorgetBelt(attacker)
     local attack =
@@ -838,11 +839,10 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
     local calcParams =
     {
         wsID                    = wsID,
+        attackInfo              = attack,
         weaponDamage            = { attacker:getRangedDmg() },
         skillType               = attacker:getWeaponSkillType(xi.slot.RANGED),
         fSTR                    = xi.weaponskills.fSTR2(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getRangedDmgRank()),
-        cratio                  = cratio,
-        ccritratio              = ccritratio,
         accStat                 = attacker:getRACC(),
         melee                   = false,
         mustMiss                = false,
@@ -853,6 +853,7 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
         forcedFirstCrit         = false,
         extraOffhandHit         = false,
         flourishEffect          = false,
+        tpUsed                  = tp,
         bonusTP                 = wsParams.bonusTP or 0,
         bonusfTP                = gorgetBeltFTP or 0,
         bonusAcc                = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC),
@@ -863,6 +864,11 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
         -- applied to all hits (This is a penalty!)
         local accLost       = calcParams.accStat * (1 - xi.weaponskills.fTP(tp, wsParams.accVaries))
         calcParams.bonusAcc = calcParams.bonusAcc - accLost
+    end
+
+    -- Split Shot/Piercing Arrow and Empyreal Arrow/Detonator are confirmed for this. Theoretically Last Stand could have a bonus too, and if so it would likely be first hit only.
+    if wsParams.rangedAccuracyBonus then
+        calcParams.firstHitRate = getRangedHitRate(attacker, target, calcParams.bonusAcc + wsParams.rangedAccuracyBonus)
     end
 
     calcParams.hitRate = getRangedHitRate(attacker, target, calcParams.bonusAcc)
@@ -877,6 +883,13 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
     -- Calculate reductions
     finaldmg = target:rangedDmgTaken(finaldmg)
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
+    finaldmg = math.floor(finaldmg)
+
+    -- Add in magic damage for hybrid weaponskills
+    -- Only procs if the mob still has HP remaining
+    if wsParams.hybridWS and target:getHP() > finaldmg then
+        finaldmg = finaldmg + calculateHybridMagicDamage(tp, finaldmg, attacker, target, wsParams, calcParams, wsID)
+    end
 
     finaldmg            = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
@@ -1067,6 +1080,29 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
         defender:updateEnmityFromDamage(enmityEntity, finaldmg * enmityMult)
     end
 
+    -- TODO: does this effect not apply if you do 0 damage (or absorb)?
+    -- Skillchains will still "proc" if you do 0 damage, so assume it does for now
+    if
+        (wsResults.tpHitsLanded +
+        wsResults.extraHitsLanded > 0) and
+        attacker:hasStatusEffect(xi.effect.SENGIKORI)
+    then
+        local sengikoriBonus = attacker:getMod(xi.mod.SENGIKORI_BONUS) -- Additive % bonus: https://www.ffxiah.com/forum/topic/23457/july-11-sam-update/4/#1421344
+        local power = 25 + sengikoriBonus                              -- base 25% bonus for SC or MB
+
+        -- If no SC effect, apply SC damage debuff
+        -- If there is one, apply MB damage debuff
+        -- This "effect" lasts until the it's used or the SC goes away
+        -- see https://wiki.ffo.jp/html/20051.html
+        if defender:hasStatusEffect(xi.effect.SKILLCHAIN) then
+            defender:setMod(xi.mod.SENGIKORI_MB_DMG_DEBUFF, power)
+        else
+            defender:setMod(xi.mod.SENGIKORI_SC_DMG_DEBUFF, power)
+        end
+
+        attacker:delStatusEffect(xi.effect.SENGIKORI)
+    end
+
     if finaldmg > 0 then
         -- Pack the weaponskill ID in the top 8 bits of this variable which is utilized
         -- in OnMobDeath in luautils.  Max WSID is 255.
@@ -1178,76 +1214,6 @@ xi.weaponskills.calculatedIgnoredDef = function(tp, def, ignoredDefenseTable)
     return 0
 end
 
-local function getMeleePDifRange(correctedRatio)
-    -- pDifMax
-    local pDifMax = 3
-    if correctedRatio < 0.5 then
-        pDifMax = correctedRatio + 0.5
-    elseif correctedRatio < 0.7 then
-        pDifMax = 1
-    elseif correctedRatio < 1.2 then
-        pDifMax = correctedRatio + 0.3
-    elseif correctedRatio < 1.5 then
-        pDifMax = correctedRatio * 0.25 + correctedRatio
-    elseif correctedRatio < 2.625 then
-        pDifMax = correctedRatio + 0.375
-    end
-
-    -- pDifMin
-    local pDifMin = correctedRatio - 0.375
-    if correctedRatio < 0.38 then
-        pDifMin = 0
-    elseif correctedRatio < 1.25 then
-        pDifMin = correctedRatio * 1176 / 1024 - 448 / 1024
-    elseif correctedRatio < 1.51 then
-        pDifMin = 1
-    elseif correctedRatio < 2.44 then
-        pDifMin = correctedRatio * 1176 / 1024 - 775 / 1024
-    end
-
-    return { pDifMin, pDifMax }
-end
-
--- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
-xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, tp)
-    local weaponType = attacker:getWeaponSkillType(xi.slot.MAIN)
-    local flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
-
-    if flourishEffect ~= nil and flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
-        attacker:addMod(xi.mod.ATTP, 25 + flourishEffect:getSubPower())
-    end
-
-    local atkMultiplier = xi.weaponskills.fTP(tp, params.atkVaries)
-    local cratio        = attacker:getStat(xi.mod.ATT) * atkMultiplier / (defender:getStat(xi.mod.DEF) - ignoredDef)
-
-    -- cratio = utils.clamp(cratio, 0, 2.25)
-    if flourishEffect ~= nil and flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
-        attacker:delMod(xi.mod.ATTP, 25 + flourishEffect:getSubPower())
-    end
-
-    local levelCorrection = 0
-    if attacker:getMainLvl() < defender:getMainLvl() then
-        levelCorrection = 0.05 * (defender:getMainLvl() - attacker:getMainLvl())
-    end
-
-    cratio     = math.max(0, cratio - levelCorrection)
-    local damageLimitPlus = attacker:getMod(xi.mod.DAMAGE_LIMIT) / 100
-    local damageLimitPercent = (100 + attacker:getMod(xi.mod.DAMAGE_LIMITP)) / 100
-    local cratioCap = (xi.combat.physical.pDifWeaponCapTable[weaponType][1] + damageLimitPlus) * damageLimitPercent -- Added damage limit bonuses
-
-    cratio = utils.clamp(cratio, 0, cratioCap)
-    local pdif = getMeleePDifRange(cratio)
-
-    cratio                   = cratio + 1
-    cratio                   = utils.clamp(cratio, 0, cratioCap)
-    local unadjustedPDifCrit = getMeleePDifRange(cratio)
-
-    local critbonus = utils.clamp(attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS), 0, 100)
-    local pdifcrit  = { unadjustedPDifCrit[1] * (100 + critbonus) / 100, unadjustedPDifCrit[2] * (100 + critbonus) / 100 }
-
-    return pdif, pdifcrit
-end
-
 -- Given the attacker's str and the mob's vit, fSTR is calculated (for melee WS)
 xi.weaponskills.fSTR = function(atkStr, defVit, weaponRank)
     local dSTR = atkStr - defVit
@@ -1259,16 +1225,6 @@ xi.weaponskills.fSTR = function(atkStr, defVit, weaponRank)
     fSTR = utils.clamp(fSTR, lowerCap, weaponRank + 8)
 
     return fSTR
-end
-
-xi.weaponskills.generatePdif = function(cratiomin, cratiomax, melee)
-    local pdif = math.random(cratiomin * 1000, cratiomax * 1000) / 1000
-
-    if melee then
-        pdif = pdif * (math.random(100, 105) / 100)
-    end
-
-    return pdif
 end
 
 xi.weaponskills.handleWSGorgetBelt = function(attacker)
@@ -1356,4 +1312,16 @@ xi.weaponskills.handleWSGorgetBelt = function(attacker)
     end
 
     return ftpBonus, accBonus
+end
+
+xi.weaponskills.handleWeaponskillEffect = function(actor, target, effectId, actionElement, damage, power, duration)
+    if
+        damage > 0 and
+        not target:hasStatusEffect(effectId) and
+        not xi.combat.statusEffect.isTargetImmune(target, effectId, actionElement) and
+        not xi.combat.statusEffect.isTargetResistant(actor, target, effectId) and
+        not xi.combat.statusEffect.isEffectNullified(target, effectId)
+    then
+        target:addStatusEffect(effectId, power, 0, duration)
+    end
 end

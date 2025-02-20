@@ -60,9 +60,8 @@ mission.sections =
                 {
                     [2] = function(player, csid, option, npc)
                         player:delKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)
-                        player:addKeyItem(xi.ki.SCARLET_COUNTERSEAL)
                         player:messageSpecial(flamesID.text.ATTACH_SEAL, xi.ki.DOMINAS_SCARLET_SEAL)
-                        player:messageSpecial(flamesID.text.KEYITEM_OBTAINED, xi.ki.SCARLET_COUNTERSEAL)
+                        npcUtil.giveKeyItem(player, xi.ki.SCARLET_COUNTERSEAL)
                     end,
                 }
             },
@@ -91,9 +90,8 @@ mission.sections =
                 {
                     [2] = function(player, csid, option, npc)
                         player:delKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
-                        player:addKeyItem(xi.ki.AZURE_COUNTERSEAL)
                         player:messageSpecial(frostID.text.ATTACH_SEAL, xi.ki.DOMINAS_AZURE_SEAL)
-                        player:messageSpecial(frostID.text.KEYITEM_OBTAINED, xi.ki.AZURE_COUNTERSEAL)
+                        npcUtil.giveKeyItem(player, xi.ki.AZURE_COUNTERSEAL)
                     end,
                 }
             },
@@ -122,9 +120,8 @@ mission.sections =
                 {
                     [2] = function(player, csid, option, npc)
                         player:delKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
-                        player:addKeyItem(xi.ki.EMERALD_COUNTERSEAL)
                         player:messageSpecial(galesID.text.ATTACH_SEAL, xi.ki.DOMINAS_EMERALD_SEAL)
-                        player:messageSpecial(galesID.text.KEYITEM_OBTAINED, xi.ki.EMERALD_COUNTERSEAL)
+                        npcUtil.giveKeyItem(player, xi.ki.EMERALD_COUNTERSEAL)
                     end,
                 }
             },
@@ -153,9 +150,8 @@ mission.sections =
                 {
                     [2] = function(player, csid, option, npc)
                         player:delKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
-                        player:addKeyItem(xi.ki.VIOLET_COUNTERSEAL)
                         player:messageSpecial(stormsID.text.ATTACH_SEAL, xi.ki.DOMINAS_VIOLET_SEAL)
-                        player:messageSpecial(stormsID.text.KEYITEM_OBTAINED, xi.ki.VIOLET_COUNTERSEAL)
+                        npcUtil.giveKeyItem(player, xi.ki.VIOLET_COUNTERSEAL)
                     end,
                 }
             },
@@ -184,9 +180,8 @@ mission.sections =
                 {
                     [2] = function(player, csid, option, npc)
                         player:delKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)
-                        player:addKeyItem(xi.ki.CERULEAN_COUNTERSEAL)
                         player:messageSpecial(tidesID.text.ATTACH_SEAL, xi.ki.DOMINAS_CERULEAN_SEAL)
-                        player:messageSpecial(tidesID.text.KEYITEM_OBTAINED, xi.ki.CERULEAN_COUNTERSEAL)
+                        npcUtil.giveKeyItem(player, xi.ki.CERULEAN_COUNTERSEAL)
                     end,
                 }
             },
@@ -215,9 +210,8 @@ mission.sections =
                 {
                     [2] = function(player, csid, option, npc)
                         player:delKeyItem(xi.ki.DOMINAS_AMBER_SEAL)
-                        player:addKeyItem(xi.ki.AMBER_COUNTERSEAL)
                         player:messageSpecial(tremorsID.text.ATTACH_SEAL, xi.ki.DOMINAS_AMBER_SEAL)
-                        player:messageSpecial(tremorsID.text.KEYITEM_OBTAINED, xi.ki.AMBER_COUNTERSEAL)
+                        npcUtil.giveKeyItem(player, xi.ki.AMBER_COUNTERSEAL)
                     end,
                 }
             },
@@ -322,9 +316,8 @@ mission.sections =
                 {
                     [2] = function(player, csid, option, npc)
                         player:delKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)
-                        player:addKeyItem(xi.ki.SCARLET_COUNTERSEAL)
                         player:messageSpecial(flamesID.text.ATTACH_SEAL, xi.ki.DOMINAS_SCARLET_SEAL)
-                        player:messageSpecial(flamesID.text.KEYITEM_OBTAINED, xi.ki.SCARLET_COUNTERSEAL)
+                        npcUtil.giveKeyItem(player, xi.ki.SCARLET_COUNTERSEAL)
                     end,
                 }
             },
@@ -353,9 +346,8 @@ mission.sections =
                 {
                     [2] = function(player, csid, option, npc)
                         player:delKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
-                        player:addKeyItem(xi.ki.AZURE_COUNTERSEAL)
                         player:messageSpecial(frostID.text.ATTACH_SEAL, xi.ki.DOMINAS_AZURE_SEAL)
-                        player:messageSpecial(frostID.text.KEYITEM_OBTAINED, xi.ki.AZURE_COUNTERSEAL)
+                        npcUtil.giveKeyItem(player, xi.ki.AZURE_COUNTERSEAL)
                     end,
                 }
             },
@@ -384,9 +376,8 @@ mission.sections =
                 {
                     [2] = function(player, csid, option, npc)
                         player:delKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
-                        player:addKeyItem(xi.ki.EMERALD_COUNTERSEAL)
                         player:messageSpecial(galesID.text.ATTACH_SEAL, xi.ki.DOMINAS_EMERALD_SEAL)
-                        player:messageSpecial(galesID.text.KEYITEM_OBTAINED, xi.ki.EMERALD_COUNTERSEAL)
+                        npcUtil.giveKeyItem(player, xi.ki.EMERALD_COUNTERSEAL)
                     end,
                 }
             },
@@ -415,9 +406,8 @@ mission.sections =
                 {
                     [2] = function(player, csid, option, npc)
                         player:delKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
-                        player:addKeyItem(xi.ki.VIOLET_COUNTERSEAL)
                         player:messageSpecial(stormsID.text.ATTACH_SEAL, xi.ki.DOMINAS_VIOLET_SEAL)
-                        player:messageSpecial(stormsID.text.KEYITEM_OBTAINED, xi.ki.VIOLET_COUNTERSEAL)
+                        npcUtil.giveKeyItem(player, xi.ki.VIOLET_COUNTERSEAL)
                     end,
                 }
             },
@@ -446,9 +436,8 @@ mission.sections =
                 {
                     [2] = function(player, csid, option, npc)
                         player:delKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)
-                        player:addKeyItem(xi.ki.CERULEAN_COUNTERSEAL)
                         player:messageSpecial(tidesID.text.ATTACH_SEAL, xi.ki.DOMINAS_CERULEAN_SEAL)
-                        player:messageSpecial(tidesID.text.KEYITEM_OBTAINED, xi.ki.CERULEAN_COUNTERSEAL)
+                        npcUtil.giveKeyItem(player, xi.ki.CERULEAN_COUNTERSEAL)
                     end,
                 }
             },
@@ -477,9 +466,8 @@ mission.sections =
                 {
                     [2] = function(player, csid, option, npc)
                         player:delKeyItem(xi.ki.DOMINAS_AMBER_SEAL)
-                        player:addKeyItem(xi.ki.AMBER_COUNTERSEAL)
                         player:messageSpecial(tremorsID.text.ATTACH_SEAL, xi.ki.DOMINAS_AMBER_SEAL)
-                        player:messageSpecial(tremorsID.text.KEYITEM_OBTAINED, xi.ki.AMBER_COUNTERSEAL)
+                        npcUtil.giveKeyItem(player, xi.ki.AMBER_COUNTERSEAL)
                     end,
                 }
             },

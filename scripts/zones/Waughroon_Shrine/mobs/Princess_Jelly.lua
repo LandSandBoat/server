@@ -22,9 +22,9 @@ local elementalSpells =
 
 local centers =
 {
-    { -177.5, 60, -142 },
-    {   22.5,  0,  18 },
-    {  222.5, -60, 138 },
+    { -177.5,  60, -142 },
+    {   22.5,   0,   18 },
+    {  222.5, -60,  138 },
 }
 
 local mevaList =
@@ -44,7 +44,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setSpeed((50 + xi.settings.map.SPEED_MOD) * 0.05) -- ~5% of normal movementspeed
+    mob:setBaseSpeed(xi.settings.map.BASE_SPEED * 0.05) -- ~5% of normal movementspeed
     mob:setMod(xi.mod.REGEN, 3)
     mob:setLocalVar('mobElement', math.random(1, 8))
     mob:addMod(mevaList[mob:getLocalVar('mobElement')][1], -250)
@@ -124,11 +124,11 @@ end
 
 entity.onMobMagicPrepare = function(mob, target, spellId)
     local element = mob:getLocalVar('mobElement')
-    local spell = math.random()
+    local spell   = math.random(1, 100)
 
-    if spell > 0.6 then
+    if spell > 60 then
         return elementalSpells[element][1] -- element's DoT
-    elseif spell > 0.2 then
+    elseif spell > 20 then
         return elementalSpells[element][2] -- element's nuke
     else
         return 258

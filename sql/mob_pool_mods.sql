@@ -41,9 +41,6 @@ INSERT INTO `mob_pool_mods` VALUES (44,368,150,0); -- REGAIN: 150
 -- Agas
 INSERT INTO `mob_pool_mods` VALUES (60,370,20,0); -- REGEN: 20
 
--- Airi
-INSERT INTO `mob_pool_mods` VALUES (70,48,434,1); -- SHARE_TARGET: 434
-
 -- Animated Shield
 INSERT INTO `mob_pool_mods` VALUES (154,163,-70,0); -- DMGMAGIC: -70
 
@@ -69,9 +66,6 @@ INSERT INTO `mob_pool_mods` VALUES (242,47,22,1);  -- SPAWN_LEASH: 22
 INSERT INTO `mob_pool_mods` VALUES (268,368,150,0); -- REGAIN: 150
 INSERT INTO `mob_pool_mods` VALUES (268,370,50,0);  -- REGEN: 50
 
--- Athamas
-INSERT INTO `mob_pool_mods` VALUES (276,12,1,1); -- DRAW_IN: 1
-
 -- Aura Statue
 INSERT INTO `mob_pool_mods` VALUES (289,4,4,1); -- SIGHT_RANGE: 4
 
@@ -89,12 +83,6 @@ INSERT INTO `mob_pool_mods` VALUES (459,23,50,0);  -- ATT: 50
 INSERT INTO `mob_pool_mods` VALUES (459,73,25,0);  -- STORETP: 25
 INSERT INTO `mob_pool_mods` VALUES (459,430,20,0); -- QUAD_ATTACK: 20
 
--- Bowho Warmonger
-INSERT INTO `mob_pool_mods` VALUES (519,160,-50,0); -- DMG: -50
-
--- Bright-Handed Kunberry
-INSERT INTO `mob_pool_mods` VALUES (532,160,-50,0); -- DMG: -50
-
 -- Bugbby
 INSERT INTO `mob_pool_mods` VALUES (559,62,-50,0);   -- ATTP: -50
 -- Byakko
@@ -104,9 +92,6 @@ INSERT INTO `mob_pool_mods` VALUES (592,302,45,0); -- TRIPLE_ATTACK: 45
 
 -- Cargo Crab Colin
 INSERT INTO `mob_pool_mods` VALUES (639,63,25,0); -- DEFP: 25
-
--- Centurio Xii-I
-INSERT INTO `mob_pool_mods` VALUES (676,160,-50,0); -- DMG: -50
 
 -- Cerberus
 INSERT INTO `mob_pool_mods` VALUES (680,1,322,0);   -- DEF: 322
@@ -131,9 +116,6 @@ INSERT INTO `mob_pool_mods` VALUES (820,368,10,0); -- REGAIN: 10
 -- Darksteel Golem
 INSERT INTO `mob_pool_mods` VALUES (906,4,4,1); -- SIGHT_RANGE: 4
 
--- Dark Dragon
-INSERT INTO `mob_pool_mods` VALUES (912,12,25,1); -- DRAW_IN: 25
-
 -- Dea
 INSERT INTO `mob_pool_mods` VALUES (930,370,15,0); -- REGEN: 15
 
@@ -152,9 +134,6 @@ INSERT INTO `mob_pool_mods` VALUES (979,9,60,1); -- HP_HEAL_CHANCE: 60
 
 -- Detector
 INSERT INTO `mob_pool_mods` VALUES (1013,28,-100,1); -- EXP_BONUS: -100
-
--- Diabolos
-INSERT INTO `mob_pool_mods` VALUES (1027,12,1,1); -- DRAW_IN: 1
 
 -- Effigy Prototype
 INSERT INTO `mob_pool_mods` VALUES (1178,163,-100,0); -- DMGMAGIC: -100
@@ -205,9 +184,6 @@ INSERT INTO `mob_pool_mods` VALUES (1792,368,70,0); -- REGAIN: 70
 -- Greater Manticore
 INSERT INTO `mob_pool_mods` VALUES (1806,28,10,1); -- EXP_BONUS: 10
 
--- Guivre
-INSERT INTO `mob_pool_mods` VALUES (1841,28,10,1); -- EXP_BONUS: 10
-
 -- Hydras Hound
 INSERT INTO `mob_pool_mods` VALUES (2032,34,20,1);  -- MAGIC_COOL: 20
 INSERT INTO `mob_pool_mods` VALUES (2032,35,0,1);   -- STANDBACK_COOL: 0
@@ -219,17 +195,11 @@ INSERT INTO `mob_pool_mods` VALUES (2047,163,-100,0); -- DMGMAGIC: -100
 -- Intulo
 INSERT INTO `mob_pool_mods` VALUES (2083,29,25,0); -- MDEF: 25
 
--- Iruci
-INSERT INTO `mob_pool_mods` VALUES (2105,48,434,1); -- SHARE_TARGET: 434
-
 -- Ixzdei Blm
 INSERT INTO `mob_pool_mods` VALUES (2114,4,15,1);  -- SIGHT_RANGE: 15
 INSERT INTO `mob_pool_mods` VALUES (2114,5,15,1);  -- SOUND_RANGE: 15
 INSERT INTO `mob_pool_mods` VALUES (2114,11,30,1); -- LINK_RADIUS: 30
 INSERT INTO `mob_pool_mods` VALUES (2114,34,60,1); -- MAGIC_COOL: 60
-
--- Jormungand
-INSERT INTO `mob_pool_mods` VALUES (2156,370,25,0); -- REGEN: 25
 
 -- Kaiser Behemoth S
 INSERT INTO `mob_pool_mods` VALUES (2180,3,100,1); -- MP_BASE: 100
@@ -275,15 +245,6 @@ INSERT INTO `mob_pool_mods` VALUES (2499,240,90,0); -- SLEEPRES: 90
 -- Mammet-22 Zeta
 INSERT INTO `mob_pool_mods` VALUES (2500,240,90,0); -- SLEEPRES: 90
 
--- Meteormauler Zhagtegg
-INSERT INTO `mob_pool_mods` VALUES (2643,160,-50,0); -- DMG: -50
-
--- Meww The Turtlerider
-INSERT INTO `mob_pool_mods` VALUES (2647,160,-50,0); -- DMG: -50
-
--- Mimic
-INSERT INTO `mob_pool_mods` VALUES (2664,12,1,1); -- DRAW_IN: 1
-
 -- Minotaur
 INSERT INTO `mob_pool_mods` VALUES (2675,4,25,1); -- SIGHT_RANGE: 25
 
@@ -327,12 +288,6 @@ INSERT INTO `mob_pool_mods` VALUES (3051,4,4,1); -- SIGHT_RANGE: 4
 
 -- Parata
 INSERT INTO `mob_pool_mods` VALUES (3099,23,23,1); -- IMMUNITY: 23
-
--- Pey
-INSERT INTO `mob_pool_mods` VALUES (3124,48,434,1); -- SHARE_TARGET: 434
-
--- Phantom Worm
-INSERT INTO `mob_pool_mods` VALUES (3129,370,50,0); -- REGEN: 50
 
 -- Polar Hare
 INSERT INTO `mob_pool_mods` VALUES (3168,28,10,1); -- EXP_BONUS: 10
@@ -418,11 +373,6 @@ INSERT INTO `mob_pool_mods` VALUES (3824,29,2,1); -- ASSIST: 2
 
 -- Tavnazian Ram
 INSERT INTO `mob_pool_mods` VALUES (3853,28,23,1); -- EXP_BONUS: 23
-
--- Tiamat
-INSERT INTO `mob_pool_mods` VALUES (3916,29,50,0);   -- MDEF: 50
-INSERT INTO `mob_pool_mods` VALUES (3916,164,-50,0); -- DMGRANGE: -50
-INSERT INTO `mob_pool_mods` VALUES (3916,370,25,0);  -- REGEN: 25
 
 -- Tombstone Prototype
 INSERT INTO `mob_pool_mods` VALUES (3941,163,-100,0); -- DMGMAGIC: -100
@@ -586,10 +536,6 @@ INSERT INTO `mob_pool_mods` VALUES (4222,4,4,1); -- SIGHT_RANGE: 4
 -- Virulent Peiste
 INSERT INTO `mob_pool_mods` VALUES (4238,28,5,1); -- EXP_BONUS: 5
 
--- Vrtra
-INSERT INTO `mob_pool_mods` VALUES (4261,29,50,0);  -- MDEF: 50
-INSERT INTO `mob_pool_mods` VALUES (4261,370,10,0); -- REGEN: 10
-
 -- Woodland Sage
 INSERT INTO `mob_pool_mods` VALUES (4361,5,16,1);   -- SOUND_RANGE: 16
 INSERT INTO `mob_pool_mods` VALUES (4361,288,55,0); -- DOUBLE_ATTACK: 55
@@ -647,9 +593,20 @@ INSERT INTO `mob_pool_mods` VALUES (5922,6,150,0);      -- MPP: 150
 -- Trust: Fablinix
 INSERT INTO `mob_pool_mods` VALUES (5932,6,250,0);    -- MPP: 250
 
+-- Trust: Karaha-Baruha
+INSERT INTO `mob_pool_mods` VALUES (5936,3,-10,0); -- HPP: -10
+INSERT INTO `mob_pool_mods` VALUES (5936,6,20,0); -- MPP: 20
+
+-- Trust: Areuhat
+INSERT INTO `mob_pool_mods` VALUES (5939,1046,30,0); -- ENHANCES_BLOOD_RAGE: 30
+INSERT INTO `mob_pool_mods` VALUES (5939,234,8,0);  -- DEMON_KILLER: 8
+
 -- Trust: Ferreous Coffin
 INSERT INTO `mob_pool_mods` VALUES (5944,3,-10,0);      -- HPP: -10
 INSERT INTO `mob_pool_mods` VALUES (5944,6,35,0);       -- MPP: 35
+
+-- Trust: Rahal
+INSERT INTO `mob_pool_mods` VALUES (5951,233,8,0); -- DRAGON_KILLER: 8
 
 -- Trust: Prishe II
 INSERT INTO `mob_pool_mods` VALUES (6011,165,25,0);     -- CRITHITRATE: 25

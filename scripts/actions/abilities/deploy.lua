@@ -9,11 +9,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.puppetmaster.onAbilityCheckDeploy(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:petAttack(target)
+    return xi.job_utils.puppetmaster.onAbilityUseDeploy(player, target, ability)
 end
 
 return abilityObject

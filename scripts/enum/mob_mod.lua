@@ -20,7 +20,7 @@ xi.mobMod =
     HP_HEAL_CHANCE         = 9,  -- can cast cures below this HP %
     SUBLINK                = 10, -- sub link group
     LINK_RADIUS            = 11, -- link radius
-    DRAW_IN                = 12, -- 1 - player draw in, 2 - alliance draw in -- only add as a spawn mod!
+    SEES_THROUGH_ILLUSION  = 12, -- Mob can see through the Illusion effect that grants effects similar to Sneak & Invisible without this mod and allows aggro (see Viscious Liquid in mamook)
     SEVERE_SPELL_CHANCE    = 13, -- % chance to use a severe spell like death or impact
     SKILL_LIST             = 14, -- uses given mob skill list
     MUG_GIL                = 15, -- amount gil carried for mugging
@@ -34,7 +34,7 @@ xi.mobMod =
     IMMUNITY               = 23, -- immune to set status effects. This only works from the db, not scripts
     GRADUAL_RAGE           = 24, -- (!) TODO: NOT YET IMPLEMENTED -- gradually rages
     BUILD_RESIST           = 25, -- (!) TODO: NOT YET IMPLEMENTED -- builds resistance to given effects
-    SUPERLINK              = 26, -- super link group. Only use this in mob_spawn_mods / scripts!
+    SUPERLINK              = 26, -- super link group. Only use this in scripts!
     SPELL_LIST             = 27, -- set spell list
     EXP_BONUS              = 28, -- bonus exp (bonus / 100) negative values reduce exp.
     ASSIST                 = 29, -- mobs will assist me
@@ -90,5 +90,5 @@ xi.mobMod =
     CANNOT_GUARD           = 79, -- Check if the mob does not guard (despite being a MNK or PUP mob)
     SKIP_ALLEGIANCE_CHECK  = 80, -- Skip the allegiance check for valid target (allows for example a mob to cast a TARGET_ENEMY spell on itself)
     ABILITY_RESPONSE       = 81, -- Mob can respond to player ability use with onPlayerAbilityUse()
-    SPEED_BOOST_MULT       = 82, -- Multiplier for the base speed of a mob when the mob's target is out of range (range between 100 and 500, 250 means 2.5x, mechanism is from retail)
+    RUN_SPEED_MULT         = 82, -- Multiplier for the speed of a mob while running (generally when the target is out of range) 100 = 1.00x
 }

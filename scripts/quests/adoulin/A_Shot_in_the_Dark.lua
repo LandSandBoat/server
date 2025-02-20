@@ -18,8 +18,8 @@ quest.reward =
 {
     fame     = 6,
     fameArea = xi.fameArea.ADOULIN,
-    xp       = 500,
     bayld    = 200,
+    exp      = 500,
 }
 
 quest.sections =

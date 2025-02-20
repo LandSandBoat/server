@@ -28,11 +28,13 @@ DEATH - Entity, Killer?
 DEFEATED_MOB - Mob, Attacker, optParams (Note: optParams is the same table in onMobDeath)
 EXPERIENCE_POINTS - Entity, exp
 ITEM_DROPS - Entity, Loot
+TREASUREPOOL - Entity, Target, ItemID
 DESPAWN - Entity
 
 TAKE_DAMAGE - Entity, amount, optionalAttacker, attackType, damageType
 
 MELEE_SWING_HIT - Entity, Target, attack
+MELEE_SWING_MISS - Entity, Target, attack
 CRITICAL_TAKE - Target, Attacker
 ATTACK - Attacker, defender, action
 ATTACKED - Defender, attacker, action

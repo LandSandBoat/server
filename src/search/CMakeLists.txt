@@ -5,10 +5,21 @@ set(SOURCES
     ${PACKET_SOURCES}
     data_loader.cpp
     data_loader.h
-    search.cpp
-    search.h
-    tcp_request.cpp
-    tcp_request.h)
+    handler.h
+    main.cpp
+    search_handler.h
+    search_handler.cpp
+    search_server.h
+    search_server.cpp
+)
+
+# Temporarily remove clashing old code
+# TODO: Remove this block
+list(REMOVE_ITEM SOURCES
+    ${CMAKE_SOURCE_DIR}/src/common/kernel.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/kernel.h
+    ${CMAKE_SOURCE_DIR}/src/common/socket.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/socket.h)
 
 if(UNIX)
     set(resource "")

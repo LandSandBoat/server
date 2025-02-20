@@ -12,7 +12,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getHPP() > 50 then
+    if mob:getHPP() >= 50 then
         return 1
     else
         return 0

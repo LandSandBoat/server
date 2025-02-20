@@ -76,7 +76,7 @@ xi.amk.helpers.cardianOrbDrop = function(mob, player, orb)
 
         -- Chance ranges from 4% to 25.8% (based on max mob lvl of 44)
         local dropChance = (3 * mob:getMainLvl()) + (30 * utils.clamp(partySize, 1, 6)) - 10
-        local roll = math.random(1000)
+        local roll = math.random(1, 1000)
 
         if roll < dropChance then
             mob:setLocalVar('Mission[10][5]cardianOrbDrop', 1)
@@ -526,7 +526,7 @@ local xarc = zones[xi.zone.XARCABARD]
 
 -- returns -1 or 1 to offset the wrong answer randomly
 local randomSign = function()
-    return math.random(1, 2) == 1 and 1 or -1
+    return math.random(1, 100) <= 50 and 1 or -1
 end
 
 -- Structured list of the trivia questions

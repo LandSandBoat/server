@@ -14,7 +14,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.MobBuffMove(mob, xi.effect.ICE_SPIKES, math.random(15, 30), 0, 60))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.ICE_SPIKES, math.random(15, 30), 0, 60))
 
     local effect1 = mob:getStatusEffect(xi.effect.ICE_SPIKES)
     if effect1 then

@@ -27,6 +27,7 @@
 #include "packets/action.h"
 
 #include "entities/battleentity.h"
+#include "status_effect.h"
 
 enum ADDTYPE
 {
@@ -719,6 +720,7 @@ public:
     uint16     getVE() const;
     uint16     getMeritModID() const;
     ACTIONTYPE getActionType();
+    EFFECT     getPostActionEffectCleanup();
 
     void setID(uint16 id);
     void setMobSkillID(uint16 id);
@@ -738,6 +740,7 @@ public:
     void setVE(uint16 VE);
     void setMeritModID(uint16 value);
     void setActionType(ACTIONTYPE type);
+    void setPostActionEffectCleanup(EFFECT effectToCleanup);
 
     const std::string& getName();
     void               setName(const std::string& name);
@@ -762,6 +765,7 @@ private:
     std::string m_name;
     uint16      m_mobskillId;
     ACTIONTYPE  m_actionType{};
+    EFFECT      m_cleanupEffect{};
 };
 
 /************************************************************************

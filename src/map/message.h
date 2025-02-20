@@ -74,10 +74,10 @@ namespace message
     void init();
     void init(const char* chatIp, uint16 chatPort);
     void handle_incoming();
-    void send(MSGSERVTYPE type, void* data, size_t datalen, CBasicPacket* packet = nullptr);
+    void send(MSGSERVTYPE type, void* data, size_t datalen, const std::unique_ptr<CBasicPacket>& packet = nullptr);
     void send(uint16 zone, std::string const& luaFunc);
-    void send(uint32 playerId, CBasicPacket* packet);
-    void send(std::string const& playerName, CBasicPacket* packet);
+    void send(uint32 playerId, const std::unique_ptr<CBasicPacket>& packet);
+    void send(std::string const& playerName, const std::unique_ptr<CBasicPacket>& packet);
     void send_charvar_update(uint32 charId, std::string const& varName, uint32 value, uint32 expiry);
     void rpc_send(uint16 sendZone, uint16 recvZone, std::string const& sendStr, sol::function recvFunc);
 

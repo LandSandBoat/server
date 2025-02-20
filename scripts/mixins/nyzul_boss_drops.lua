@@ -12,16 +12,18 @@ g_mixins.nyzul_boss_drop = function(nyzulMob)
         local instance = mob:getInstance()
         local result   = instance:getLocalVar('Nyzul_Current_Floor')
 
+        -- TODO: Nyzul Cleanup.
+        -- Apparently, in each boss floor, certain RARE/EX items are guaranteed to drop UNLESS participants already possess said items.
         if result == 20 then
-            mob:setDropID(7350)
+            mob:setDropID(0)
         elseif result == 40 then
-            mob:setDropID(7351)
+            mob:setDropID(0)
         elseif result == 60 then
-            mob:setDropID(7352)
+            mob:setDropID(0)
         elseif result == 80 then
-            mob:setDropID(7353)
+            mob:setDropID(0)
         elseif result == 100 then
-            mob:setDropID(7354)
+            mob:setDropID(0)
         end
     end)
 end

@@ -149,6 +149,7 @@ enum class MsgStd
     LevelSyncRemoveLowLevel      = 554, // Level sync will be deactivated in 30 seconds. The Level Sync designee has fallen below level 10.
     LevelSyncRemoveJobChange     = 555, // Level sync will be deactivated in 30 seconds. A party member has undergone a job change.
     LevelSyncRemoveIneligibleExp = 556, // Level sync will be deactivated in 30 seconds. The Level Sync designee is incapable of receiving experience points.
+    TreasureHunterProc           = 603, // Additional effect: Treasure Hunter effectiveness against <Target> increases to <number>
 };
 
 class CCharEntity;

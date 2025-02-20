@@ -32,10 +32,10 @@ CBazaarMessagePacket::CBazaarMessagePacket(CCharEntity* PChar)
     this->setType(0xCA);
     this->setSize(0x94);
 
-    memcpy(data + 0x04, PChar->bazaar.message.c_str(), (PChar->bazaar.message.size() > 120) ? 120 : PChar->bazaar.message.size());
+    std::memcpy(buffer_.data() + 0x04, PChar->bazaar.message.c_str(), (PChar->bazaar.message.size() > 120) ? 120 : PChar->bazaar.message.size());
 
     ref<uint8>(0x7F)  = 0x07; // 0x06
     ref<uint16>(0x90) = PChar->profile.title;
 
-    memcpy(data + (0x80), PChar->getName().c_str(), PChar->getName().size());
+    std::memcpy(buffer_.data() + 0x80, PChar->getName().c_str(), PChar->getName().size());
 }

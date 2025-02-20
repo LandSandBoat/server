@@ -70,7 +70,7 @@ uint8 CSpell::getJob(JOBTYPE JobID)
 
 void CSpell::setJob(int8* jobs)
 {
-    memcpy(&m_job[1], jobs, 22);
+    std::memcpy(&m_job[1], jobs, 22);
 }
 
 uint32 CSpell::getCastTime() const
@@ -684,8 +684,8 @@ namespace spell
             return false;
         }
 
-        bool  usable = false;
-        uint8 requirements;
+        bool  usable       = false;
+        uint8 requirements = 0;
 
         switch (PCaster->objtype)
         {

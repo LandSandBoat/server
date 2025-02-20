@@ -5,8 +5,8 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    effect:setPower(target:getSpeed())
-    target:setSpeed(0)
+    effect:setPower(target:getBaseSpeed())
+    target:setBaseSpeed(0)
 
     -- Immunobreak reset.
     target:setMod(xi.mod.BIND_IMMUNOBREAK, 0)
@@ -16,7 +16,7 @@ effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    target:setSpeed(effect:getPower())
+    target:setBaseSpeed(effect:getPower())
 end
 
 return effectObject

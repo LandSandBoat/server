@@ -53,5 +53,5 @@ CWideScanPacket::CWideScanPacket(CCharEntity* PChar, CBaseEntity* PEntity)
     ref<uint16>(0x08) = (int16)(PEntity->loc.p.x - PChar->loc.p.x); // Difference in x-value between character and object coordinates
     ref<uint16>(0x0A) = (int16)(PEntity->loc.p.z - PChar->loc.p.z); // Difference in z-value between character and object coordinates
 
-    // memcpy(data+(0x0C), PEntity->GetName(), (PEntity->name.size() > 14 ? 14 : PEntity->name.size()));
+    // std::memcpy(buffer_.data()+(0x0C), PEntity->GetName(), (PEntity->name.size() > 14 ? 14 : PEntity->name.size()));
 }

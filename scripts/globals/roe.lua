@@ -203,8 +203,8 @@ local function completeRecord(player, record)
         end
     end
 
-    if rewards['xp'] ~= nil and type(rewards['xp']) == 'number' then
-        player:addExp(rewards['xp'] * xi.settings.main.ROE_EXP_RATE)
+    if rewards['exp'] ~= nil and type(rewards['exp']) == 'number' then
+        player:addExp(rewards['exp'] * xi.settings.main.ROE_EXP_RATE)
     end
 
     if rewards['capacity'] ~= nil and type(rewards['capacity']) == 'number' then

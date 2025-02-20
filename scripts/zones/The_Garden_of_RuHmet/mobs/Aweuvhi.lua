@@ -29,30 +29,20 @@ entity.onMobFight = function(mob)
         -- According to http://wiki.ffxiclopedia.org/wiki/Category:Euvhi
         -- When in an open state, damage taken by the Euvhi is doubled. Inflicting a large amount of damage to an Euvhi in an open state will cause it to close.
         -- Make everything do double
+        local powerMod = 1000
+        local powerSDT = 10000
         if mob:getAnimationSub() == 2 then
-            mob:setMod(xi.mod.HTH_SDT, 2000)
-            mob:setMod(xi.mod.SLASH_SDT, 2000)
-            mob:setMod(xi.mod.PIERCE_SDT, 2000)
-            mob:setMod(xi.mod.IMPACT_SDT, 2000)
-            for n = 1, #xi.magic.resistMod, 1 do
-                mob:setMod(xi.magic.resistMod[n], 2000)
-            end
+            powerMod = 2000
+            powerSDT = -10000
+        end
 
-            for n = 1, #xi.magic.specificDmgTakenMod, 1 do
-                mob:setMod(xi.magic.specificDmgTakenMod[n], -10000)
-            end
-        else -- Reset all damage types
-            mob:setMod(xi.mod.HTH_SDT, 1000)
-            mob:setMod(xi.mod.SLASH_SDT, 1000)
-            mob:setMod(xi.mod.PIERCE_SDT, 1000)
-            mob:setMod(xi.mod.IMPACT_SDT, 1000)
-            for n = 1, #xi.magic.resistMod, 1 do
-                mob:setMod(xi.magic.resistMod[n], 1000)
-            end
-
-            for n = 1, #xi.magic.specificDmgTakenMod, 1 do
-                mob:setMod(xi.magic.specificDmgTakenMod[n], 10000)
-            end
+        mob:setMod(xi.mod.HTH_SDT, powerMod)
+        mob:setMod(xi.mod.SLASH_SDT, powerMod)
+        mob:setMod(xi.mod.PIERCE_SDT, powerMod)
+        mob:setMod(xi.mod.IMPACT_SDT, powerMod)
+        for element = xi.element.FIRE, xi.element.DARK do
+            mob:setMod(xi.combat.element.getElementalMEVAModifier(element), powerMod)
+            mob:setMod(xi.combat.element.getElementalSDTModifier(element), powerSDT)
         end
     end
 end

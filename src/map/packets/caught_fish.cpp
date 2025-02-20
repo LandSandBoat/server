@@ -36,5 +36,5 @@ CCaughtFishPacket::CCaughtFishPacket(CCharEntity* PChar, uint16 param0, uint16 m
     ref<uint8>(0x14)  = count;
     ref<uint32>(0x1C) = 0x00;
 
-    memcpy(data + (0x20), PChar->getName().c_str(), PChar->getName().size());
+    std::memcpy(buffer_.data() + 0x20, PChar->getName().c_str(), PChar->getName().size());
 }

@@ -44,7 +44,7 @@ local maxAreas =
     },
 }
 
-function onBattlefieldHandlerInitialise(zone)
+function onBattlefieldHandlerInitialize(zone)
     local id      = zone:getID()
     local default = 3
 
@@ -944,11 +944,11 @@ function Battlefield:onEventFinishBattlefield(player, csid, option, npc)
 end
 
 -- Override this function if necessary to perform additional steps in battlefield
--- initialise.
+-- Initialize.
 function Battlefield:setupBattlefield(battlefield)
 end
 
-function Battlefield:onBattlefieldInitialise(battlefield)
+function Battlefield:onBattlefieldInitialize(battlefield)
     local hasMultipleAreas = not self.area
     battlefield:addGroups(self.groups, hasMultipleAreas)
 
@@ -1201,6 +1201,7 @@ function Battlefield:addEssentialMobs(mobNames)
     table.insert(self.groups, {
         mobs      = mobNames,
         superlink = true,
+        isParty   = true,
         allDeath  = utils.bind(self.handleAllMonstersDefeated, self),
     })
 end

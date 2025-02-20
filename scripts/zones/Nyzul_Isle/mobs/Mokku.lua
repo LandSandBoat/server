@@ -8,7 +8,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:addListener('CRITICAL_TAKE', 'IMP_CRITICAL_TAKE', function(impMob)
-        if math.random(100) <= 20 and mob:getAnimationSub() == 4 then
+        if math.random(1, 100) <= 20 and mob:getAnimationSub() == 4 then
             impMob:setAnimationSub(5)
             -- Reacquire horn after 5 to 60 seconds
             impMob:timer(math.random(5000, 60000), function(hornLessMob)

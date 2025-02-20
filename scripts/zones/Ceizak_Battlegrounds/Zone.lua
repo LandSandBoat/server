@@ -8,9 +8,10 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- Ergon Locus area at K-10
-    zone:registerTriggerArea(1, 357.819, 11, -250.201, 0, 0, 0)
+    zone:registerCylindricalTriggerArea(1, 357.819, -250.201, 11)
+
     -- Ergon Locus area at I-8
-    zone:registerTriggerArea(2, 87.2, 8, 72.9, 0, 0, 0)
+    zone:registerCylindricalTriggerArea(2, 87.2, 72.9, 8)
 
     xi.reives.setupZone(zone)
 end
@@ -42,7 +43,7 @@ local function triggerUncannySensationMessage(player)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
+    switch (triggerArea:getTriggerAreaID()): caseof
     {
         [1] = function(x)
             triggerUncannySensationMessage(player)

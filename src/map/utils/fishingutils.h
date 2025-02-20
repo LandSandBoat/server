@@ -928,7 +928,7 @@ namespace fishingutils
     void   ReduceFishPool(uint16 zoneId, uint8 areaId, uint16 fishId);
     void   RestockFishingAreas();
     void   CreateFishingPools();
-    uint32 HandleFishingAction(CCharEntity* PChar, CBasicPacket data);
+    uint32 HandleFishingAction(CCharEntity* PChar, CBasicPacket& data);
 
     // Calculations
     uint32              GetSundayMidnightTimestamp();

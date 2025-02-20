@@ -19,17 +19,19 @@ zones[xi.zone.OUTER_RAKAZNAR] =
         FAINT_ENERGY_WAFTS            = 7013, -- A faint energy wafts up from the ground.
         YOU_HAVE_LEARNED              = 7015, -- You have learned <keyitem>!
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        THIS_BAFFLING_GADGET          = 7745, -- This baffling gadget seems to serve as transport to the [lower/higher] floors.
-        HAVE_FOUND_SCALES             = 7911, -- You have found <number> scale[/s].
-        SOOTHING_SIGH_FALLS           = 7912, -- A soothing sigh falls upon your ears. Could you have found the final scale?
-        DOOR_TIGHTLY_SEALED           = 7913, -- The door is tightly sealed.
-        EERIE_GLOW_PENETRATES         = 7914, -- An eerie glow penetrates the darkness.
+        THIS_BAFFLING_GADGET          = 7748, -- This baffling gadget seems to serve as transport to the [lower/higher] floors.
+        HAVE_FOUND_SCALES             = 7914, -- You have found <number> scale[/s].
+        SOOTHING_SIGH_FALLS           = 7915, -- A soothing sigh falls upon your ears. Could you have found the final scale?
+        DOOR_TIGHTLY_SEALED           = 7916, -- The door is tightly sealed.
+        EERIE_GLOW_PENETRATES         = 7917, -- An eerie glow penetrates the darkness.
     },
     mob =
     {
+        REIVE_MOB_OFFSET = GetFirstID('Amaranth_Barrier'),
     },
     npc =
     {
+        REIVE_COLLISION_OFFSET = GetFirstID('_7m0'),
     },
 }
 

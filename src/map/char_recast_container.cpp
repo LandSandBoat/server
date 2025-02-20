@@ -171,8 +171,8 @@ void CCharRecastContainer::Check()
                     uint8  containerID = id & 0xFF;
                     CItem* PItem       = m_PChar->getStorage(containerID)->GetItem(slotID);
 
-                    m_PChar->pushPacket(new CInventoryItemPacket(PItem, containerID, slotID));
-                    m_PChar->pushPacket(new CInventoryFinishPacket());
+                    m_PChar->pushPacket<CInventoryItemPacket>(PItem, containerID, slotID);
+                    m_PChar->pushPacket<CInventoryFinishPacket>();
                 }
                 if (type == RECAST_ITEM || type == RECAST_MAGIC || type == RECAST_LOOT)
                 {

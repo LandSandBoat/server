@@ -105,7 +105,8 @@ WheatyExceptionReport::pRtlGetVersion WheatyExceptionReport::RtlGetVersion;
 time_point gStartUpTime = server_clock::now();
 std::string gUptimeString;
 std::string gCrashDateString;
-std::string gMemoryUsageString;
+std::string gProcessMemoryUsageString;
+std::string gSystemMemoryUsageString;
 std::string gCommandLineArgString;
 bool gLogToConsole = true;
 
@@ -164,15 +165,33 @@ const char* GetUptimeString()
     return gUptimeString.c_str();
 }
 
-const char* GetMemoryUsageString()
+const char* GetProcessMemoryUsageString()
 {
+    gProcessMemoryUsageString = "Unable to retrieve memory usage";
+
     PROCESS_MEMORY_COUNTERS PMC;
     ULONGLONG               TotalMemoryInKilobytes;
     if (GetProcessMemoryInfo(GetCurrentProcess(), &PMC, sizeof(PMC)) && GetPhysicallyInstalledSystemMemory(&TotalMemoryInKilobytes))
     {
-        gMemoryUsageString = fmt::format("{}MiB / {}MiB", PMC.WorkingSetSize / 1024 / 1024, TotalMemoryInKilobytes / 1024);
+        gProcessMemoryUsageString = fmt::format("{}MiB / {}MiB", PMC.WorkingSetSize / 1024 / 1024, TotalMemoryInKilobytes / 1024);
     }
-    return gMemoryUsageString.c_str();
+    return gProcessMemoryUsageString.c_str();
+}
+
+const char* GetSystemMemoryUsageString()
+{
+    gSystemMemoryUsageString = "Unable to retrieve memory usage";
+
+    MEMORYSTATUSEX memInfo;
+    memInfo.dwLength = sizeof(MEMORYSTATUSEX);
+    if (GlobalMemoryStatusEx(&memInfo))
+    {
+        DWORDLONG totalPhysMem = memInfo.ullTotalPhys;
+        DWORDLONG physMemUsed = memInfo.ullTotalPhys - memInfo.ullAvailPhys;
+
+        gSystemMemoryUsageString = fmt::format("{}MiB / {}MiB", physMemUsed / 1024 / 1024, totalPhysMem / 1024 / 1024);
+    }
+    return gSystemMemoryUsageString.c_str();
 }
 
 const char* GetCommandLineArgsString()
@@ -356,7 +375,8 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
         Log(_T(fmt::format("Time of crash: {:%Y/%m/%d %H:%M:%S}", fmt::localtime(t)).c_str()));
         Log(_T("Process Uptime: %s"), GetUptimeString());
         PrintSystemInfo();
-        Log(_T("Process Memory Usage: %s"), GetMemoryUsageString());
+        Log(_T("Process Memory Usage: %s"), GetProcessMemoryUsageString());
+        Log(_T("System Memory Usage: %s"), GetSystemMemoryUsageString());
         Log(_T("Git Branch: %s"), version::GetGitBranch());
         Log(_T("Git Commit Subject: %s"), version::GetGitCommitSubject());
         Log(_T("Git SHA: %s"), version::GetGitSha());
@@ -621,7 +641,7 @@ void WheatyExceptionReport::PrintSystemInfo()
     ::GetSystemInfo(&SystemInfo);
 
     MEMORYSTATUS MemoryStatus;
-    MemoryStatus.dwLength = sizeof (MEMORYSTATUS);
+    MemoryStatus.dwLength = sizeof(MEMORYSTATUS);
     ::GlobalMemoryStatus(&MemoryStatus);
     TCHAR sString[1024];
     if (_GetProcessorName(sString, static_cast<DWORD>(std::size(sString))))

@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: Blackmail (R)
 -- !zone 231
 -----------------------------------
-local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -62,14 +60,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 643 then
         player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
-        player:addKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SUSPICIOUS_ENVELOPE)
+        npcUtil.giveKeyItem(player, xi.ki.SUSPICIOUS_ENVELOPE)
     elseif csid == 646 and option == 1 then
         player:setCharVar('BlackMailQuest', 2)
     elseif csid == 648 then

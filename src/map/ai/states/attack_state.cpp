@@ -35,11 +35,20 @@ CAttackState::CAttackState(CBattleEntity* PEntity, uint16 targid)
     PEntity->SetBattleTargetID(targid);
     PEntity->SetBattleStartTime(server_clock::now());
     CAttackState::UpdateTarget();
+
     if (!GetTarget() || m_errorMsg)
     {
         PEntity->SetBattleTargetID(0);
-        throw CStateInitException(std::move(m_errorMsg));
+        if (this->HasErrorMsg())
+        {
+            throw CStateInitException(m_errorMsg->copy());
+        }
+        else
+        {
+            throw CStateInitException(std::make_unique<CBasicPacket>());
+        }
     }
+
     if (PEntity->PAI->PathFind)
     {
         PEntity->PAI->PathFind->Clear();
@@ -68,7 +77,7 @@ bool CAttackState::Update(time_point tick)
                 // CMobEntity::OnAttack(...) can generate it's own action with a mobmod, and that leaves this action.actionType = 0, which is never valid. Skip sending the packet.
                 if (action.actiontype != ACTION_NONE)
                 {
-                    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+                    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
                 }
             }
         }
@@ -132,7 +141,7 @@ void CAttackState::UpdateTarget(uint16 targid)
                         if (PChar->IsValidTarget(PPotentialTarget.second->targid, TARGET_ENEMY, errMsg))
                         {
                             newTargid = PPotentialTarget.second->targid;
-                            PChar->pushPacket(new CLockOnPacket(PChar, static_cast<CBattleEntity*>(PPotentialTarget.second)));
+                            PChar->pushPacket<CLockOnPacket>(PChar, static_cast<CBattleEntity*>(PPotentialTarget.second));
                             break;
                         }
                     }

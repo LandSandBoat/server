@@ -5,6 +5,15 @@ xi = xi or {}
 xi.spells = xi.spells or {}
 xi.spells.enhancing = xi.spells.enhancing or {}
 -----------------------------------
+
+local column =
+{
+    EFFECT_TIER           = 1,
+    EFFECT_ID             = 2,
+    EFFECT_POWER          = 3,
+    EFFECT_DURATION       = 4,
+    EFFECT_WILL_OVERWRITE = 5,
+}
 -- Table variables.
 local pTable =
 {
@@ -24,7 +33,7 @@ local pTable =
 
 -- Ninjutsu Potency function.
 xi.spells.enhancing.calculateNinjutsuPower = function(caster, target, spell, spellId, tier, spellEffect)
-    local power    = pTable[spellId][3]
+    local power    = pTable[spellId][column.EFFECT_POWER]
     local subPower = 0
 
     -- Migawari
@@ -56,11 +65,12 @@ end
 -- Main function for Enhancing Spells.
 xi.spells.enhancing.useEnhancingNinjutsu = function(caster, target, spell)
     local spellId = spell:getID()
+
     -- Get Variables from Parameters Table.
-    local tier            = pTable[spellId][1]
-    local spellEffect     = pTable[spellId][2]
-    local duration        = pTable[spellId][4]
-    local alwaysOverwrite = pTable[spellId][5]
+    local tier            = pTable[spellId][column.EFFECT_TIER]
+    local spellEffect     = pTable[spellId][column.EFFECT_ID]
+    local duration        = pTable[spellId][column.EFFECT_DURATION]
+    local alwaysOverwrite = pTable[spellId][column.EFFECT_WILL_OVERWRITE]
 
     -- Other
     local paramThree = 0
@@ -101,7 +111,7 @@ xi.spells.enhancing.useEnhancingNinjutsu = function(caster, target, spell)
             target:delStatusEffect(xi.effect.THIRD_EYE)
         end
 
-        paramThree = pTable[spellId][3] - 2
+        paramThree = pTable[spellId][column.EFFECT_POWER] - 2
 
         if targetEffect == nil or targetEffect:getPower() <= paramThree then
             target:addStatusEffectEx(xi.effect.COPY_IMAGE, subPower, paramThree, duration, 900, 0, power) -- Not a mistake.

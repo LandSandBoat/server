@@ -18,12 +18,12 @@ zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.CENTURIO_XII_I)
     GetMobByID(ID.mob.CENTURIO_XII_I):setRespawnTime(math.random(900, 10800))
 
-    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
     xi.chocobo.initZone(zone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

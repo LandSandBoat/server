@@ -104,28 +104,28 @@ namespace message
                     // TODO: disconnect the client, but leave the character in the disconnecting state
                     // PChar->status = STATUS_SHUTDOWN;
                     // won't save their position (since this is the wrong thread) but not a huge deal
-                    // PChar->pushPacket(new CServerIPPacket(PChar, 1, 0));
+                    // PChar->pushPacket<CServerIPPacket>(PChar, 1, 0);
                 }
                 break;
             }
             case MSG_CHAT_TELL:
             {
                 char characterName[PacketNameLength] = {};
-                memcpy(&characterName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
+                std::memcpy(&characterName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
 
                 CCharEntity* PChar = zoneutils::GetCharByName(characterName);
                 if (PChar && PChar->status != STATUS_TYPE::DISAPPEAR && !jailutils::InPrison(PChar))
                 {
                     std::unique_ptr<CBasicPacket> newPacket = std::make_unique<CBasicPacket>();
-                    memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+                    std::memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
                     auto gm_sent = newPacket->ref<uint8>(0x05);
                     if (settings::get<bool>("map.BLOCK_TELL_TO_HIDDEN_GM") && PChar->m_isGMHidden && !gm_sent)
                     {
-                        send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedOffline));
+                        send(MSG_DIRECT, extra.data(), sizeof(uint32), std::make_unique<CMessageStandardPacket>(PChar, 0, 0, MsgStd::TellNotReceivedOffline));
                     }
                     else if (PChar->isAway() && !gm_sent)
                     {
-                        send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedAway));
+                        send(MSG_DIRECT, extra.data(), sizeof(uint32), std::make_unique<CMessageStandardPacket>(PChar, 0, 0, MsgStd::TellNotReceivedAway));
                     }
                     else
                     {
@@ -134,7 +134,7 @@ namespace message
                 }
                 else
                 {
-                    send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedOffline));
+                    send(MSG_DIRECT, extra.data(), sizeof(uint32), std::make_unique<CMessageStandardPacket>(PChar, 0, 0, MsgStd::TellNotReceivedOffline));
                 }
                 break;
             }
@@ -166,8 +166,8 @@ namespace message
 
                 if (PParty)
                 {
-                    CBasicPacket* newPacket = new CBasicPacket();
-                    memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+                    auto newPacket = std::make_unique<CBasicPacket>();
+                    std::memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
                     PParty->PushPacket(senderid, 0, newPacket);
                 }
                 break;
@@ -202,8 +202,8 @@ namespace message
                 {
                     for (auto& currentParty : PAlliance->partyList)
                     {
-                        CBasicPacket* newPacket = new CBasicPacket();
-                        memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+                        auto newPacket = std::make_unique<CBasicPacket>();
+                        std::memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
                         currentParty->PushPacket(senderid, 0, newPacket);
                     }
                 }
@@ -215,8 +215,8 @@ namespace message
                 CLinkshell* PLinkshell  = linkshell::GetLinkshell(linkshellID);
                 if (PLinkshell)
                 {
-                    CBasicPacket* newPacket = new CBasicPacket();
-                    memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+                    auto newPacket = std::make_unique<CBasicPacket>();
+                    std::memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
                     PLinkshell->PushPacket(ref<uint32>((uint8*)extra.data(), 4), newPacket);
                 }
                 break;
@@ -227,8 +227,8 @@ namespace message
                 CUnityChat* PUnityChat = unitychat::GetUnityChat(leader);
                 if (PUnityChat)
                 {
-                    CBasicPacket* newPacket = new CBasicPacket();
-                    memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+                    auto newPacket = std::make_unique<CBasicPacket>();
+                    std::memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
                     PUnityChat->PushPacket(ref<uint32>((uint8*)extra.data(), 4), newPacket);
                 }
                 break;
@@ -245,10 +245,9 @@ namespace message
                             // don't push to sender
                             if (PChar->id != ref<uint32>((uint8*)extra.data(), 0))
                             {
-                                CBasicPacket* newPacket = new CBasicPacket();
-                                memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
-
-                                PChar->pushPacket(newPacket);
+                                auto newPacket = std::make_unique<CBasicPacket>();
+                                std::memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+                                PChar->pushPacket(std::move(newPacket));
                             }
                         });
                     }
@@ -263,9 +262,9 @@ namespace message
                 {
                     PZone->ForEachChar([&packet](CCharEntity* PChar)
                     {
-                        CBasicPacket* newPacket = new CBasicPacket();
-                        memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
-                        PChar->pushPacket(newPacket);
+                        auto newPacket = std::make_unique<CBasicPacket>();
+                        std::memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+                        PChar->pushPacket(std::move(newPacket));
                     });
                 });
                 // clang-format on
@@ -286,7 +285,7 @@ namespace message
                         (inviteType == INVITE_ALLIANCE && (!PInvitee->PParty || PInvitee->PParty->GetLeader() != PInvitee || (PInvitee->PParty && PInvitee->PParty->m_PAlliance))))
                     {
                         ref<uint32>((uint8*)extra.data(), 0) = ref<uint32>((uint8*)extra.data(), 6);
-                        send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PInvitee, 0, 0, MsgStd::CannotInvite));
+                        send(MSG_DIRECT, extra.data(), sizeof(uint32), std::make_unique<CMessageStandardPacket>(PInvitee, 0, 0, MsgStd::CannotInvite));
                         return;
                     }
                     // check /blockaid
@@ -294,25 +293,26 @@ namespace message
                     {
                         ref<uint32>((uint8*)extra.data(), 0) = ref<uint32>((uint8*)extra.data(), 6);
                         // Target is blocking assistance
-                        send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageSystemPacket(0, 0, MsgStd::TargetIsCurrentlyBlocking));
+                        send(MSG_DIRECT, extra.data(), sizeof(uint32), std::make_unique<CMessageSystemPacket>(0, 0, MsgStd::TargetIsCurrentlyBlocking));
                         // Interaction was blocked
-                        PInvitee->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::BlockedByBlockaid));
+                        PInvitee->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::BlockedByBlockaid);
                         // You cannot invite that person at this time.
-                        send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PInvitee, 0, 0, MsgStd::CannotInvite));
+                        send(MSG_DIRECT, extra.data(), sizeof(uint32), std::make_unique<CMessageStandardPacket>(PInvitee, 0, 0, MsgStd::CannotInvite));
                         break;
                     }
                     if (PInvitee->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))
                     {
                         ref<uint32>((uint8*)extra.data(), 0) = ref<uint32>((uint8*)extra.data(), 6);
-                        send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PInvitee, 0, 0, MsgStd::CannotInviteLevelSync));
+                        send(MSG_DIRECT, extra.data(), sizeof(uint32), std::make_unique<CMessageStandardPacket>(PInvitee, 0, 0, MsgStd::CannotInviteLevelSync));
                         return;
                     }
 
                     PInvitee->InvitePending.id     = ref<uint32>((uint8*)extra.data(), 6);
                     PInvitee->InvitePending.targid = ref<uint16>((uint8*)extra.data(), 10);
-                    CBasicPacket* newPacket        = new CBasicPacket();
-                    memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
-                    PInvitee->pushPacket(newPacket);
+
+                    auto newPacket = std::make_unique<CBasicPacket>();
+                    std::memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+                    PInvitee->pushPacket(std::move(newPacket));
                 }
                 break;
             }
@@ -329,7 +329,7 @@ namespace message
                 {
                     if (inviteAnswer == 0)
                     {
-                        PInviter->pushPacket(new CMessageStandardPacket(PInviter, 0, 0, MsgStd::InvitationDeclined));
+                        PInviter->pushPacket<CMessageStandardPacket>(PInviter, 0, 0, MsgStd::InvitationDeclined);
                     }
                     else
                     {
@@ -354,7 +354,7 @@ namespace message
                                     else
                                     {
                                         send(MSG_DIRECT, (uint8*)extra.data() + 6, sizeof(uint32),
-                                             new CMessageStandardPacket(PInviter, 0, 0, MsgStd::CannotBeProcessed));
+                                             std::make_unique<CMessageStandardPacket>(PInviter, 0, 0, MsgStd::CannotBeProcessed));
                                     }
                                 }
                                 else if (PInviter->PParty)
@@ -367,7 +367,7 @@ namespace message
                             else // Somehow, the inviter didn't have a party despite the database thinking they did.
                             {
                                 send(MSG_DIRECT, (uint8*)extra.data() + 6, sizeof(uint32),
-                                     new CMessageStandardPacket(PInviter, 0, 0, MsgStd::CannotBeProcessed));
+                                     std::make_unique<CMessageStandardPacket>(PInviter, 0, 0, MsgStd::CannotBeProcessed));
                             }
                         }
                         else
@@ -508,9 +508,9 @@ namespace message
                 CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra.data(), 0));
                 if (PChar)
                 {
-                    CBasicPacket* newPacket = new CBasicPacket();
-                    memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
-                    PChar->pushPacket(newPacket);
+                    auto newPacket = std::make_unique<CBasicPacket>();
+                    std::memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+                    PChar->pushPacket(std::move(newPacket));
                 }
                 break;
             }
@@ -521,7 +521,7 @@ namespace message
                 if (PLinkshell)
                 {
                     char memberName[PacketNameLength] = {};
-                    memcpy(&memberName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
+                    std::memcpy(&memberName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
                     PLinkshell->ChangeMemberRank(memberName, ref<uint8>((uint8*)extra.data(), 28));
                 }
                 break;
@@ -529,7 +529,7 @@ namespace message
             case MSG_LINKSHELL_REMOVE:
             {
                 char memberName[PacketNameLength] = {};
-                memcpy(&memberName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
+                std::memcpy(&memberName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
                 CCharEntity* PChar = zoneutils::GetCharByName(memberName);
 
                 if (PChar && PChar->PLinkshell1 && PChar->PLinkshell1->getID() == ref<uint32>((uint8*)extra.data(), 24))
@@ -564,7 +564,7 @@ namespace message
                     if (requester != 0)
                     {
                         char buf[30];
-                        memset(&buf[0], 0, sizeof(buf));
+                        std::memset(&buf[0], 0, sizeof(buf));
 
                         ref<uint32>(&buf, 0)  = requester;
                         ref<uint16>(&buf, 8)  = PChar->getZone();
@@ -617,7 +617,7 @@ namespace message
                     if (Entity && Entity->loc.zone)
                     {
                         char buf[22];
-                        memset(&buf[0], 0, sizeof(buf));
+                        std::memset(&buf[0], 0, sizeof(buf));
 
                         uint16 targetZone = ref<uint16>((uint8*)extra.data(), 2);
                         uint16 playerZone = ref<uint16>((uint8*)extra.data(), 4);
@@ -856,13 +856,13 @@ namespace message
     {
         const uint32 size      = sizeof(uint32) + sizeof(uint32) + sizeof(uint32) + sizeof(uint8) + 256;
         char         buf[size] = {};
-        memset(&buf[0], 0, size);
+        std::memset(&buf[0], 0, size);
 
         ref<uint32>(buf, 0) = charId;
         ref<int32>(buf, 4)  = value;
         ref<uint32>(buf, 8) = expiry;
         ref<uint8>(buf, 12) = static_cast<uint8>(std::min<size_t>(varName.size(), 255));
-        memcpy(buf + 13, varName.c_str(), varName.size());
+        std::memcpy(buf + 13, varName.c_str(), varName.size());
 
         message::send(MSG_CHARVAR_UPDATE, buf, size, nullptr);
     }
@@ -984,7 +984,7 @@ namespace message
         zContext.close();
     }
 
-    void send(MSGSERVTYPE type, void* data, size_t datalen, CBasicPacket* packet)
+    void send(MSGSERVTYPE type, void* data, size_t datalen, const std::unique_ptr<CBasicPacket>& packet)
     {
         TracyZoneScoped;
 
@@ -996,19 +996,13 @@ namespace message
         msg.data = zmq::message_t(datalen);
         if (datalen > 0)
         {
-            memcpy(msg.data.data(), data, datalen);
+            std::memcpy(msg.data.data(), data, datalen);
         }
 
         if (packet)
         {
             // clang-format off
-            msg.packet = zmq::message_t(*packet, packet->getSize(),
-            [](void* data, void* hint)
-            {
-                auto* intdata = (uint8*)data;
-                destroy_arr(intdata);
-            });
-            // clang-format on
+            msg.packet = zmq::message_t(*packet, packet->getSize());
         }
         else
         {
@@ -1032,7 +1026,7 @@ namespace message
         message::send(MSG_LUA_FUNCTION, packetData.data(), packetData.size());
     }
 
-    void send(uint32 playerId, CBasicPacket* packet)
+    void send(uint32 playerId, const std::unique_ptr<CBasicPacket>& packet)
     {
         TracyZoneScoped;
 
@@ -1041,7 +1035,7 @@ namespace message
         message::send(MSG_DIRECT, packetData.data(), packetData.size(), packet);
     }
 
-    void send(std::string const& playerName, CBasicPacket* packet)
+    void send(std::string const& playerName, const std::unique_ptr<CBasicPacket>& packet)
     {
         TracyZoneScoped;
 

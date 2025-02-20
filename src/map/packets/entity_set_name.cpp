@@ -46,8 +46,8 @@ CEntitySetNamePacket::CEntitySetNamePacket(CBaseEntity* PEntity)
         ref<uint16>(0x0C) = PTrust->PMaster->targid;
     }
 
-    packBitsBE(data + 0x04, 0x18 + PEntity->packetName.size(), 0, 6, 10); // Message Size
-    std::memcpy(data + 0x18, PEntity->packetName.c_str(), PEntity->packetName.size());
+    packBitsBE(buffer_.data() + 0x04, 0x18 + PEntity->packetName.size(), 0, 6, 10); // Message Size
+    std::memcpy(buffer_.data() + 0x18, PEntity->packetName.c_str(), PEntity->packetName.size());
 
     // Unknown, maybe entity flags?
     ref<uint8>(0x10) = 0x04;

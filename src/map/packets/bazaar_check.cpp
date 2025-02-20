@@ -36,5 +36,5 @@ CBazaarCheckPacket::CBazaarCheckPacket(CCharEntity* PChar, BAZAARCHECK type)
     ref<uint8>(0x08)  = type;
     ref<uint16>(0x0E) = PChar->targid;
 
-    memcpy(data + (0x10), PChar->getName().c_str(), PChar->getName().size());
+    std::memcpy(buffer_.data() + 0x10, PChar->getName().c_str(), PChar->getName().size());
 }

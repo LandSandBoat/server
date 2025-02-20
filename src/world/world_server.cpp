@@ -83,10 +83,10 @@ WorldServer::WorldServer(int argc, char** argv)
 , colonizationSystem(std::make_unique<ColonizationSystem>())
 {
     // Tasks
-    CTaskMgr::getInstance()->AddTask("time_server", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, time_server, 2400ms);
+    CTaskMgr::getInstance()->AddTask("time_server", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, 2400ms, time_server);
 
     // TODO: Make this more reactive than a polling job
-    CTaskMgr::getInstance()->AddTask("forward_queued_messages_to_handlers", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, forward_queued_messages_to_handlers, 250ms);
+    CTaskMgr::getInstance()->AddTask("forward_queued_messages_to_handlers", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, 250ms, forward_queued_messages_to_handlers);
 }
 
 WorldServer::~WorldServer() = default;

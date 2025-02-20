@@ -73,7 +73,7 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 Mem
         }
     }
 
-    memcpy(data + (0x28), PChar->getName().c_str(), PChar->getName().size());
+    std::memcpy(buffer_.data() + 0x28, PChar->getName().c_str(), PChar->getName().size());
 }
 
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 MemberNumber)
@@ -103,7 +103,7 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 M
     ref<uint8>(0x24) = PTrust->GetSJob();
     ref<uint8>(0x25) = PTrust->GetSLevel();
 
-    memcpy(data + (0x28), PTrust->packetName.c_str(), PTrust->packetName.size());
+    std::memcpy(buffer_.data() + 0x28, PTrust->packetName.c_str(), PTrust->packetName.size());
 }
 
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(uint32 id, const std::string& name, uint16 memberFlags, uint8 MemberNumber, uint16 ZoneID)
@@ -116,5 +116,5 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(uint32 id, const std::string&
     ref<uint16>(0x14) = memberFlags;
     ref<uint16>(0x20) = ZoneID;
 
-    memcpy(data + (0x28), name.c_str(), name.size());
+    std::memcpy(buffer_.data() + 0x28, name.c_str(), name.size());
 }

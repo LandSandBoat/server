@@ -11,9 +11,6 @@ local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     xi.abyssea.qmOnTrigger(player, npc, ID.mob.BLOODEYE_VILEBERRY_OFFSET, { xi.ki.TWISTED_TONBERRY_CROWN })
 end

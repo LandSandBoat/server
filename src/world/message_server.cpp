@@ -113,7 +113,8 @@ std::string ipp_to_string(uint64 ipp)
     char target_address[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &target, target_address, INET_ADDRSTRLEN);
 
-    return fmt::format("{}:{}", str(target_address), port);
+    // This is internal, so we can trust it.
+    return fmt::format("{}:{}", asStringFromUntrustedSource(target_address), port);
 }
 
 void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet, zmq::message_t* from)
@@ -129,7 +130,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         inet_ntop(AF_INET, &from_ip, from_address, INET_ADDRSTRLEN);
     }
 
-    auto forward_message = [&](auto&& rset)
+    auto forward_message = [&](std::unique_ptr<db::detail::ResultSetWrapper>&& rset)
     {
         // This is only used for cases where SQL is used to get the IPs (not cached).
         // E.g: When we get ips for a specific account_session.
@@ -139,13 +140,14 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             return;
         }
 
+        // This is internal, so we can trust it.
         ShowDebug(fmt::format("Message: Received message {} ({}) from {}:{}",
-                              msgTypeToStr(type), static_cast<uint8>(type), str(from_address), from_port));
+                              msgTypeToStr(type), static_cast<uint8>(type), asStringFromUntrustedSource(from_address), from_port));
 
         while (rset->next())
         {
-            uint64      ip       = rset->getUInt("server_addr");
-            uint64      port     = rset->getUInt("server_port");
+            uint64      ip       = rset->get<uint64>("server_addr");
+            uint64      port     = rset->get<uint64>("server_port");
             uint64      ipp      = ip | (port << 32);
             std::string ipString = ipp_to_string(ipp);
 
@@ -162,16 +164,20 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         case MSG_CHARVAR_UPDATE:
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions LEFT JOIN chars ON "
-                                "accounts_sessions.charid = chars.charid WHERE charname = '%s' LIMIT 1";
-            auto        rset  = db::query(fmt::sprintf(query, str((int8*)extra->data() + 4)));
+                                "accounts_sessions.charid = chars.charid WHERE charname = ? LIMIT 1";
+
+            // This is going straight into a prepared statement, so we can trust it.
+            auto rset = db::preparedStmt(query, asStringFromUntrustedSource((uint8*)extra->data() + 4));
             if (rset)
             {
                 forward_message(std::move(rset));
             }
             else
             {
-                query = "SELECT server_addr, server_port FROM accounts_sessions WHERE charid = %d LIMIT 1";
-                forward_message(db::query(fmt::sprintf(query, ref<uint32>((uint8*)extra->data(), 0))));
+                query = "SELECT server_addr, server_port FROM accounts_sessions WHERE charid = ? LIMIT 1";
+
+                uint32 charId = ref<uint32>((uint8*)extra->data(), 0);
+                forward_message(db::preparedStmt(query, charId));
             }
             break;
         }
@@ -181,11 +187,11 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         {
             // TODO: simplify query now that there's alliance versions?
             const char* query = "SELECT server_addr, server_port, MIN(charid) FROM accounts_sessions JOIN accounts_parties USING (charid) "
-                                "WHERE IF (allianceid <> 0, allianceid = (SELECT MAX(allianceid) FROM accounts_parties WHERE partyid = %d), "
-                                "partyid = %d) GROUP BY server_addr, server_port";
+                                "WHERE IF (allianceid <> 0, allianceid = (SELECT MAX(allianceid) FROM accounts_parties WHERE partyid = ?), "
+                                "partyid = ?) GROUP BY server_addr, server_port";
 
             uint32 partyid = ref<uint32>((uint8*)extra->data(), 0);
-            forward_message(db::query(fmt::sprintf(query, partyid, partyid)));
+            forward_message(db::preparedStmt(query, partyid, partyid));
             break;
         }
         case MSG_CHAT_ALLIANCE:
@@ -193,25 +199,29 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         case MSG_ALLIANCE_DISSOLVE:
         {
             const char* query = "SELECT server_addr, server_port, MIN(charid) FROM accounts_sessions JOIN accounts_parties USING (charid) "
-                                "WHERE allianceid = %d "
+                                "WHERE allianceid = ? "
                                 "GROUP BY server_addr, server_port";
 
             uint32 allianceid = ref<uint32>((uint8*)extra->data(), 0);
-            forward_message(db::query(fmt::sprintf(query, allianceid)));
+            forward_message(db::preparedStmt(query, allianceid));
             break;
         }
         case MSG_CHAT_LINKSHELL:
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions "
-                                "WHERE linkshellid1 = %d OR linkshellid2 = %d GROUP BY server_addr, server_port";
-            forward_message(db::query(fmt::sprintf(query, ref<uint32>((uint8*)extra->data(), 0), ref<uint32>((uint8*)extra->data(), 0))));
+                                "WHERE linkshellid1 = ? OR linkshellid2 = ? GROUP BY server_addr, server_port";
+
+            uint32 linkshellId = ref<uint32>((uint8*)extra->data(), 0);
+            forward_message(db::preparedStmt(query, linkshellId, linkshellId));
             break;
         }
         case MSG_CHAT_UNITY:
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions "
-                                "WHERE unitychat = %d GROUP BY server_addr, server_port";
-            forward_message(db::query(fmt::sprintf(query, ref<uint32>((uint8*)extra->data(), 0), ref<uint32>((uint8*)extra->data(), 0))));
+                                "WHERE unitychat = ? GROUP BY server_addr, server_port";
+
+            uint32 unityId = ref<uint32>((uint8*)extra->data(), 0);
+            forward_message(db::preparedStmt(query, unityId));
             break;
         }
         case MSG_CHAT_YELL:
@@ -238,8 +248,10 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         case MSG_DIRECT:
         case MSG_SEND_TO_ZONE:
         {
-            const char* query = "SELECT server_addr, server_port FROM accounts_sessions WHERE charid = %d";
-            forward_message(db::query(fmt::sprintf(query, ref<uint32>((uint8*)extra->data(), 0))));
+            const char* query = "SELECT server_addr, server_port FROM accounts_sessions WHERE charid = ?";
+
+            uint32 charId = ref<uint32>((uint8*)extra->data(), 0);
+            forward_message(db::preparedStmt(query, charId));
             break;
         }
         case MSG_SEND_TO_ENTITY:
@@ -269,14 +281,14 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         case MSG_KILL_SESSION:
         {
             uint32      charid = ref<uint32>((uint8*)extra->data(), 0);
-            const char* query  = "SELECT pos_prevzone, pos_zone from chars where charid = '%d' LIMIT 1;";
-            auto        rset   = db::query(fmt::sprintf(query, charid));
+            const char* query  = "SELECT pos_prevzone, pos_zone from chars where charid = ? LIMIT 1";
+            auto        rset   = db::preparedStmt(query, charid);
 
             // Get zone ID from query and try to send to _just_ the previous zone
             if (rset && rset->rowsCount() && rset->next())
             {
-                uint32 prevZoneID = rset->getUInt("pos_prevzone");
-                uint32 nextZoneID = rset->getUInt("pos_zone");
+                uint32 prevZoneID = rset->get<uint32>("pos_prevzone");
+                uint32 nextZoneID = rset->get<uint32>("pos_zone");
 
                 if (prevZoneID != nextZoneID)
                 {
@@ -309,7 +321,8 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         }
         default:
         {
-            ShowDebug(fmt::format("Message: unknown type received: {} from {}:{}", static_cast<uint8>(type), str(from_address), from_port));
+            // This is internal, so we can trust it.
+            ShowDebug(fmt::format("Message: unknown type received: {} from {}:{}", static_cast<uint8>(type), asStringFromUntrustedSource(from_address), from_port));
             break;
         }
     }
@@ -351,15 +364,12 @@ void message_server_listen(bool const& requestExit)
         // 2: zmq::message_t extra
         // 3: zmq::message_t packet
         message_server_parse((MSGSERVTYPE)ref<uint8>((uint8*)msgs[1].data(), 0), &msgs[2], &msgs[3], &msgs[0]);
-
-        // TODO: Is this still needed?
-        // sql_->TryPing();
     }
 }
 
 void cache_zone_settings()
 {
-    auto rset = db::query("SELECT zoneid, zoneip, zoneport, misc FROM zone_settings");
+    auto rset = db::preparedStmt("SELECT zoneid, zoneip, zoneport, misc FROM zone_settings");
     if (!rset)
     {
         ShowCritical("Error loading zone settings from DB");
@@ -373,13 +383,13 @@ void cache_zone_settings()
     while (rset->next())
     {
         uint64 ip = 0;
-        inet_pton(AF_INET, rset->getString("zoneip").c_str(), &ip);
-        uint64 port = rset->getUInt64("zoneport");
+        inet_pton(AF_INET, rset->get<std::string>("zoneip").c_str(), &ip);
+        uint64 port = rset->get<uint64>("zoneport");
 
         zone_settings_t zone_settings{};
-        zone_settings.zoneid = rset->getUInt("zoneid");
+        zone_settings.zoneid = rset->get<uint16>("zoneid");
         zone_settings.ipp    = ip | (port << 32);
-        zone_settings.misc   = rset->getUInt("misc");
+        zone_settings.misc   = rset->get<uint32>("misc");
 
         mapEndpointSet.insert(zone_settings.ipp);
 

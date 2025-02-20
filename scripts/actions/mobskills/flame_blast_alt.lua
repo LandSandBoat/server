@@ -3,7 +3,7 @@
 --
 --  Description: Deals single target fire damage to target.
 --  Type: Magical
---  Utsusemi/Blink absorb: N/A
+--  Utsusemi/Blink absorb: Ignores shadows
 --  Range: 18'
 --  Notes: Used only by KS99 Wyrm in while flying as regular attack. Only use in a dedicated flying attack skill set.
 -----------------------------------
@@ -18,7 +18,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local damage = mob:getWeaponDmg() * 3
 
     damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     skill:setMsg(xi.msg.basic.HIT_DMG)

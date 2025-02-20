@@ -51,7 +51,7 @@ CWorldPassPacket::CWorldPassPacket(uint32 WorldPass)
             return;
         }
 
-        memset(data + 0x10, 0, 10);
-        memcpy(data + 0x10, strbuff.c_str(), strbuff.length());
+        std::memset(buffer_.data() + 0x10, 0, 10);
+        std::memcpy(buffer_.data() + 0x10, strbuff.c_str(), strbuff.length());
     }
 }

@@ -6,19 +6,10 @@
 add_subdirectory(concurrentqueue)
 add_subdirectory(sol)
 
-option(TRACY_ENABLE "Enable Tracy profiling." OFF)
-
-# Also handle close flags:
-if(ENABLE_TRACY OR TRACY_ENABLED OR TRACY)
-    set(TRACY_ENABLE ON)
-endif()
-
-message(STATUS "TRACY_ENABLE: ${TRACY_ENABLE}")
-
 # CPM Modules
 if(TRACY_ENABLE)
     # Tracy version tag, without the leading 'v'
-    set(TRACY_VERSION 0.11.0)
+    set(TRACY_VERSION 0.11.1)
 
     # Download client library
     CPMAddPackage(
@@ -74,7 +65,7 @@ CPMAddPackage(
 CPMAddPackage(
     NAME spdlog
     GITHUB_REPOSITORY gabime/spdlog
-    GIT_TAG v1.12.0
+    GIT_TAG v1.15.0
     OPTIONS
         "SPDLOG_ENABLE_PCH ON"
         "SPDLOG_FMT_EXTERNAL ON"
@@ -83,7 +74,7 @@ CPMAddPackage(
 CPMAddPackage(
     NAME recastnavigation
     GITHUB_REPOSITORY recastnavigation/recastnavigation
-    GIT_TAG cd898904b72a300011fbb24d578620bafa08ef2c
+    GIT_TAG 77f7e54bc8cf5a816f9f087a3e0ac391d2043be3
     OPTIONS
         "RECASTNAVIGATION_DEMO OFF"
         "RECASTNAVIGATION_TESTS OFF"
@@ -93,13 +84,13 @@ CPMAddPackage(
 CPMAddPackage(
     NAME fast_obj
     GITHUB_REPOSITORY thisistherk/fast_obj
-    GIT_TAG 85778da5fc320b7e52885f8e869edc079695cc79
+    GIT_TAG 8145eb0a942784e5491a2e6b50008ce0fe3aa203
 ) # defines: fast_obj
 
 CPMAddPackage(
     NAME argparse
     GITHUB_REPOSITORY p-ranav/argparse
-    GIT_TAG f901d9edb47d45a287ca44d5bab48540c1fcdcce
+    GIT_TAG cbd9fd8ed675ed6a2ac1bd7142d318c6ad5d3462
 ) # defines: argparse
 
 CPMAddPackage(
@@ -116,7 +107,7 @@ endif()
 CPMAddPackage(
     NAME efsw
     GITHUB_REPOSITORY SpartanJ/efsw
-    GIT_TAG a064eb20e1312634813c724acc3c8229cc04e0a2
+    GIT_TAG 62f785c56b7a34f035193d4cb831921347b586b8 # 1.4.1
     OPTIONS
         "VERBOSE OFF"
         "NO_ATOMICS OFF"
@@ -129,26 +120,29 @@ CPMAddPackage(
 CPMAddPackage(
     NAME jthread-lite
     GITHUB_REPOSITORY martinmoene/jthread-lite
-    GIT_TAG 5332bbd46dcba5f028a844795cc0931e9f2ffdf4
+    GIT_TAG fffbe32e4d95cd7a444f8aa74f01e0c975568649
 ) # defines: jthread-lite
 
 # TODO: std::expected lands in C++23. Remove this once all compilers for all platforms implement.
 CPMAddPackage(
     NAME expected-lite
     GITHUB_REPOSITORY martinmoene/expected-lite
-    GIT_TAG 45a54fac224e5aae5f8e70bb1c2423181ae554da
+    GIT_TAG 48e5e2294689eac07fc5ae6784355941e9add475
 ) # defines: expected-lite
 
 CPMAddPackage(
     NAME cpp-httplib
     GITHUB_REPOSITORY yhirose/cpp-httplib
-    GIT_TAG v0.15.3
+    GIT_TAG v0.18.3
+    OPTIONS
+        "HTTPLIB_REQUIRE_ZLIB OFF"
+        "HTTPLIB_USE_ZLIB_IF_AVAILABLE OFF"
 ) # defines: httplib::httplib
 
 CPMAddPackage(
     NAME json
     GITHUB_REPOSITORY nlohmann/json
-    GIT_TAG 254395e5f7731b5595e7c11ac4b929c923582114
+    GIT_TAG 9f60e855576bb1e95f39ab23b3821982cccb0bab
 ) # defines: nlohmann_json::nlohmann_json
 
 CPMAddPackage(
@@ -163,9 +157,9 @@ endif()
 
 CPMAddPackage(
     NAME asio
-    VERSION 1.28.0
+    VERSION 1.32.0
     GITHUB_REPOSITORY chriskohlhoff/asio
-    GIT_TAG asio-1-28-0 # asio uses non-standard version tag, we must specify GIT_TAG
+    GIT_TAG asio-1-32-0 # asio uses non-standard version tag, we must specify GIT_TAG
 ) #defines asio
 
 # ASIO doesn't use CMake, we have to configure it manually. Extra notes for using on Windows:
@@ -237,6 +231,18 @@ if(bcrypt_ADDED) # bcrypt's cmake isn't suitable for us
     )
 endif()
 
+CPMAddPackage(
+    NAME alpaca
+    GITHUB_REPOSITORY p-ranav/alpaca
+    GIT_TAG 83a592f0c3807500f1aaf3b07fd48105a01e2780
+) # defines: alpaca
+
+CPMAddPackage(
+    NAME magic_enum
+    GITHUB_REPOSITORY Neargye/magic_enum
+    GIT_TAG 1a1824df7ac798177a521eed952720681b0bf482
+) # defines: magic_enum
+
 set(EXTERNAL_LIBS
     fmt::fmt
     spdlog
@@ -257,6 +263,8 @@ set(EXTERNAL_LIBS
     pcg-cpp
     asio
     bcrypt
+    alpaca
+    magic_enum
 )
 
 if(WIN32)

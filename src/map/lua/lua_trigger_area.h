@@ -25,26 +25,26 @@
 #include "common/cbasetypes.h"
 #include "luautils.h"
 
-class CTriggerArea;
+class ITriggerArea;
 
 class CLuaTriggerArea
 {
-    CTriggerArea* m_PLuaTriggerArea;
+    ITriggerArea* m_PLuaTriggerArea;
 
 public:
-    CLuaTriggerArea(CTriggerArea*);
+    CLuaTriggerArea(ITriggerArea*);
 
-    CTriggerArea* GetTriggerArea() const
+    ITriggerArea* getTriggerArea() const
     {
         return m_PLuaTriggerArea;
     }
 
     friend std::ostream& operator<<(std::ostream& out, const CLuaTriggerArea& triggerArea);
 
-    uint32 GetTriggerAreaID();
-    int16  GetCount();
-    int16  AddCount(int16 count);
-    int16  DelCount(int16 count);
+    uint32 getTriggerAreaID();
+    int16  getCount();
+    int16  addCount(int16 count);
+    int16  delCount(int16 count);
 
     bool operator==(const CLuaTriggerArea& other) const
     {

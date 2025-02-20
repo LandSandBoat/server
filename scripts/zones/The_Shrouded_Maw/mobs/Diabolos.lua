@@ -18,6 +18,16 @@ local entity = {}
 -- Note: Diabolos Prime fight drops all tiles at once.
 
 entity.onMobFight = function(mob, target)
+    local drawInTable =
+    {
+        conditions =
+        {
+            mob:checkDistance(target) >= 25,
+        },
+        position = mob:getPos(),
+    }
+    utils.drawIn(target, drawInTable)
+
     local mobOffset = mob:getID() - ID.mob.DIABOLOS
     if mobOffset >= 0 and mobOffset <= 14 then
         local inst = math.floor(mobOffset / 7)

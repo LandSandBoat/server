@@ -19,8 +19,8 @@ local allowedBodyArmors = set{
     13780, -- Demon's Cloak Lv. 68 BLM
     13754, -- Black Cotehardie Lv. 59 MNK / WHM / BLM / RDM / THF / BST / BRD / RNG / NIN / SMN / BLU / PUP / DNC / SCH
     13755, -- Flora Cotehardie Lv. 59 MNK / WHM / BLM / RDM / THF / BST / BRD / RNG / NIN / SMN / BLU / PUP / DNC / SCH
-    14436, -- Blessed Briault Lv. 70 WHM
-    14438, -- Blessed Briault +1 Lv. 70 WHM
+    14436, -- Blessed Bliaut Lv. 70 WHM
+    14438, -- Blessed Bliaut +1 Lv. 70 WHM
     13775, -- Blue Cotehardie Lv. 69 RDM / THF / RNG / NIN / COR / DNC
     13776, -- Blue Cotehardie +1 Lv. 69 RDM / THF / RNG / NIN / COR / DNC
     13740, -- Byrnie Lv. 60 WAR / PLD / DRK / BST / SAM / NIN

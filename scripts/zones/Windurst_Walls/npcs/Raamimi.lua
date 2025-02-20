@@ -9,9 +9,6 @@ local ID = zones[xi.zone.WINDURST_WALLS]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local toBee = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
     local toBeeOrNotStatus = player:getCharVar('ToBeeOrNot_var')
@@ -39,9 +36,6 @@ end
 -- player:startEvent(68) -- After honey is given to player...... before given to Zayhi????
 --  player:startEvent(80) -- Quest Finish - Gives Mulsum
 --  player:startEvent(79) -- After Quest but before zoning: "it's certainly gotten quiet around here..."
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 67 then

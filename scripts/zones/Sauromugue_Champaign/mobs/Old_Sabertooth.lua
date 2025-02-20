@@ -23,8 +23,8 @@ local pathNodes =
 }
 
 entity.onMobSpawn = function(mob)
-    mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
-    mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+    mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.STANDBACK))
+    mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
     mob:setMobAbilityEnabled(false)
     mob:setAutoAttackEnabled(false)
     mob:setRoamFlags(bit.bor(xi.roamFlag.IGNORE, xi.roamFlag.SCRIPTED))
@@ -35,7 +35,7 @@ entity.onMobSpawn = function(mob)
             tiger:setLocalVar('tookDamage', 1)
             tiger:setMobAbilityEnabled(true)
             tiger:setAutoAttackEnabled(true)
-            tiger:setBehaviour(0)
+            tiger:setBehavior(0)
         end
     end)
 end

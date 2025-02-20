@@ -45,7 +45,7 @@ CMessageSpecialPacket::CMessageSpecialPacket(CBaseEntity* PEntity, uint16 messag
     if (ShowName)
     {
         this->setSize(0x30);
-        memcpy(data + (0x1E), PEntity->getName().c_str(), std::min<size_t>(PEntity->getName().size(), PacketNameLength));
+        std::memcpy(buffer_.data() + 0x1E, PEntity->getName().c_str(), std::min<size_t>(PEntity->getName().size(), PacketNameLength));
     }
     else if (PEntity->objtype == TYPE_PC)
     {

@@ -42,7 +42,7 @@ CInventoryItemPacket::CInventoryItemPacket(CItem* PItem, uint8 LocationID, uint8
         ref<uint32>(0x04) = PItem->getQuantity();
         ref<uint32>(0x08) = PItem->getCharPrice();
         ref<uint16>(0x0C) = PItem->getID();
-        memcpy(data + 0x11, PItem->m_extra, sizeof(PItem->m_extra));
+        std::memcpy(buffer_.data() + 0x11, PItem->m_extra, sizeof(PItem->m_extra));
 
         if (PItem->isSubType(ITEM_CHARGED))
         {

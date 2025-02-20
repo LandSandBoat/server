@@ -78,7 +78,7 @@ namespace loginHelpers
         UNUSED_FEATURE_9 = 0x8000,
     };
 
-    bool check_string(std::string const& str, std::size_t max_length);
+    bool isStringMalformed(std::string const& str, std::size_t max_length);
 
     session_t& get_authenticated_session(std::string const& ipAddr, std::string const& sessionHash);
 

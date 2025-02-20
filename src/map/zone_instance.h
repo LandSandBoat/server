@@ -25,14 +25,12 @@
 #include "instance.h"
 #include "zone.h"
 
-typedef std::vector<std::unique_ptr<CInstance>> instanceList_t;
-
 class CZoneInstance : public CZone
 {
 public:
     DISALLOW_COPY_AND_MOVE(CZoneInstance);
 
-    virtual CCharEntity* GetCharByName(std::string const& name) override; // finds the player if exists in zone
+    virtual CCharEntity* GetCharByName(const std::string& name) override; // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id) override;
     virtual CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) override; // get a pointer to any entity in the zone
 
@@ -41,8 +39,8 @@ public:
     virtual void SpawnPETs(CCharEntity* PChar) override;
     virtual void SpawnTRUSTs(CCharEntity* PChar) override;
     virtual void SpawnNPCs(CCharEntity* PChar) override;
-    virtual void SpawnMoogle(CCharEntity* PChar) override;    // display Moogle in MogHouse in zone
-    virtual void SpawnTransport(CCharEntity* PChar) override; // display ship/boat in zone
+    virtual void SpawnConditionalNPCs(CCharEntity* PChar) override; // display Moogle in MogHouse in zone
+    virtual void SpawnTransport(CCharEntity* PChar) override;       // display ship/boat in zone
 
     virtual void WideScan(CCharEntity* PChar, uint16 radius) override;
 
@@ -53,24 +51,30 @@ public:
     virtual void InsertMOB(CBaseEntity* PMob) override;
     virtual void InsertPET(CBaseEntity* PPet) override;
     virtual void InsertTRUST(CBaseEntity* PTrust) override;
-    virtual void DeleteTRUST(CBaseEntity* PTrust) override;
-    virtual void DeletePET(CBaseEntity* PPet) override;
 
     virtual void FindPartyForMob(CBaseEntity* PEntity) override;         // looking for a party for the monster
     virtual void TransportDepart(uint16 boundary, uint16 zone) override; // ship/boat is leaving, passengers need to be collected
 
-    virtual void TOTDChange(TIMETYPE TOTD) override;                                    // process the world's reactions to changing time of day
-    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*) override; // send a global package within the zone
+    virtual void TOTDChange(TIMETYPE TOTD) override;                                                           // process the world's reactions to changing time of day
+    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, const std::unique_ptr<CBasicPacket>&) override; // send a global package within the zone
 
-    virtual void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask) override;
     virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false) override;
 
     virtual void ZoneServer(time_point tick) override;
     virtual void CheckTriggerAreas() override;
 
-    virtual void ForEachChar(std::function<void(CCharEntity*)> const& func) override;
-    virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> const& func) override;
-    virtual void ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func) override;
+    void ForEachChar(std::function<void(CCharEntity*)> const& func) override;
+    void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> const& func) override;
+    void ForEachMob(std::function<void(CMobEntity*)> const& func) override;
+    void ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func) override;
+    void ForEachNpc(std::function<void(CNpcEntity*)> const& func) override;
+    void ForEachNpcInstance(CBaseEntity* PEntity, std::function<void(CNpcEntity*)> const& func) override;
+    void ForEachTrust(std::function<void(CTrustEntity*)> const& func) override;
+    void ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> const& func) override;
+    void ForEachPet(std::function<void(CPetEntity*)> const& func) override;
+    void ForEachPetInstance(CBaseEntity* PEntity, std::function<void(CPetEntity*)> const& func) override;
+    void ForEachAlly(std::function<void(CMobEntity*)> const& func) override;
+    void ForEachAllyInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func) override;
 
     CInstance* CreateInstance(uint16 instanceid);
 
@@ -78,7 +82,9 @@ public:
     ~CZoneInstance() override;
 
 private:
-    instanceList_t instanceList;
+    typedef std::vector<std::unique_ptr<CInstance>> instanceList_t;
+
+    instanceList_t m_InstanceList;
 };
 
 #endif // _CZONEINSTANCE_H

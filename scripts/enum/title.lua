@@ -1071,6 +1071,7 @@ xi.title =
     PARADISE_REGAINED                         = 1074,
     FOUNDERS_PRIDE                            = 1075,
     MASTER_OF_ALL                             = 1076,
+    ETERNAL_MASTER                            = 1077,
     RAPTOR_WRANGLER                           = 1116,
     GARDENER_FOR_THE_AGES                     = 1117,
     LAGOON_EXPLORER                           = 1118,

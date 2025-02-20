@@ -20,6 +20,10 @@ local minionGroup =
     [7] = 25, -- Qnhpemde
 }
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
+
 entity.onMobEngage = function(mob, target)
     mob:hideName(false)
     mob:setUntargetable(false)

@@ -16,10 +16,10 @@ end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
     local fission = 755
-    local random = math.random()
+    local random = math.random(1, 100)
 
     if mob:getHPP() <= 50 then
-        if random < 0.6 then
+        if random <= 60 then
             return fission
         else
             return 0

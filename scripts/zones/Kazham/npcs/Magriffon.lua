@@ -84,9 +84,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 144 and option == 1 then                     -- Gullible's Travels: First CS
         player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.GULLIBLES_TRAVELS)
@@ -105,8 +102,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delGil(35000)
         player:setCharVar('EVEN_MORE_GULLIBLES_PROGRESS', 1)
         player:setTitle(xi.title.EVEN_MORE_GULLIBLES_TRAVELS)
-        player:addKeyItem(xi.ki.TREASURE_MAP)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TREASURE_MAP)
+        npcUtil.giveKeyItem(player, xi.ki.TREASURE_MAP)
     elseif csid == 152 then
         player:setCharVar('EVEN_MORE_GULLIBLES_PROGRESS', 0)
         player:addFame(xi.fameArea.WINDURST, 30)

@@ -70,7 +70,7 @@ global_objects=(
     Limbus
     SeasonalEvent
 
-    onBattlefieldHandlerInitialise
+    onBattlefieldHandlerInitialize
     applyResistanceAddEffect
 
     addBonuses
@@ -96,6 +96,8 @@ global_objects=(
     BuildString
 
     GetFirstID
+
+    ReloadSynthRecipes
 )
 
 ignores=(

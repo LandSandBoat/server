@@ -51,26 +51,35 @@ CAttackRound::CAttackRound(CBattleEntity* attacker, CBattleEntity* defender)
         m_coverAbilityUserEntity = nullptr;
     }
 
-    // Build main weapon attacks.
-    CreateAttacks(dynamic_cast<CItemWeapon*>(attacker->m_Weapons[SLOT_MAIN]), RIGHTATTACK);
+    auto* PMain = dynamic_cast<CItemWeapon*>(attacker->m_Weapons[SLOT_MAIN]);
+    auto* PSub  = dynamic_cast<CItemWeapon*>(attacker->m_Weapons[SLOT_SUB]);
 
-    // Build dual wield off hand weapon attacks.
-    if (IsH2H())
+    if (PMain)
     {
-        // Build left hand H2H attacks.
-        CreateAttacks(dynamic_cast<CItemWeapon*>(attacker->m_Weapons[SLOT_MAIN]), LEFTATTACK);
-
-        // Build kick attacks.
-        CreateKickAttacks();
+        if (IsH2H()) // Build H2H attacks.
+        {
+            CreateAttacks(PMain, LEFTATTACK);
+            CreateAttacks(PMain, LEFTATTACK);
+        }
+        else // Build main weapon attacks.
+        {
+            CreateAttacks(PMain, RIGHTATTACK);
+        }
     }
 
-    else if (attacker->m_dualWield)
+    if (PSub && attacker->m_dualWield)
     {
-        CreateAttacks(dynamic_cast<CItemWeapon*>(attacker->m_Weapons[SLOT_SUB]), LEFTATTACK);
+        CreateAttacks(PSub, LEFTATTACK);
     }
+
+    // Build kick attacks.
+    CreateKickAttacks();
 
     // Build Daken throw
     CreateDakenAttack();
+
+    // Append follow-up attacks
+    ProcFollowUpAttacks();
 
     // Set the first attack flag
     m_attackSwings[0].SetAsFirstSwing();
@@ -182,10 +191,17 @@ void CAttackRound::AddAttackSwing(PHYSICAL_ATTACK_TYPE type, PHYSICAL_ATTACK_DIR
 {
     if (m_attackSwings.size() < MAX_ATTACKS)
     {
-        for (uint8 i = 0; i < count; ++i)
+        for (size_t i = 0; i < count; ++i)
         {
-            CAttack attack(m_attacker, m_defender, type, direction, this);
-            m_attackSwings.emplace_back(attack);
+            // Flip direction of second H2H swing
+            if (IsH2H() && m_attackSwings.size() == 1)
+            {
+                m_attackSwings.emplace_back(m_attacker, m_defender, type, RIGHTATTACK, this);
+            }
+            else
+            {
+                m_attackSwings.emplace_back(m_attacker, m_defender, type, direction, this);
+            }
 
             if (m_attackSwings.size() == MAX_ATTACKS)
             {
@@ -250,6 +266,7 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     int16 doubleAttack     = m_attacker->getMod(Mod::DOUBLE_ATTACK);
     int16 quadAttack       = m_attacker->getMod(Mod::QUAD_ATTACK);
     bool  multiHitOccurred = false;
+    bool  isMainHand       = (IsH2H() && !m_attackSwings.empty()) || direction == RIGHTATTACK;
 
     // Checking for Mythic Weapon Aftermath
     int16 occAttThriceRate = std::clamp<int16>(m_attacker->getMod(Mod::MYTHIC_OCC_ATT_THRICE), 0, 100);
@@ -278,13 +295,21 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
             doubleAttack += PChar->PMeritPoints->GetMeritValue(MERIT_DOUBLE_ATTACK_RATE, PChar);
         }
         // TODO: Quadruple attack merits when SE release them.
+
+        // Iga Garb +2 Set augment: possibility to add another swing while using Dual Wield
+        // TODO: Double check correct priority for Empyrian armor modifiers? Outsource? Lua function?
+        if (!isMainHand)
+        {
+            doubleAttack += m_attacker->getMod(Mod::EXTRA_DUAL_WIELD_ATTACK);
+        }
     }
+
     quadAttack   = std::clamp<int16>(quadAttack, 0, 100);
     doubleAttack = std::clamp<int16>(doubleAttack, 0, 100);
     tripleAttack = std::clamp<int16>(tripleAttack, 0, 100);
 
     // Preference matters! The following are additional hits to the default hit that don't stack up
-    // Mikage > Quad > Triple > Double > Mythic Aftermath > Occasionally Attacks > Dynamis [D] Follow-Up > Hasso + Zanshin
+    // Mikage > Quad > Triple > Double > Mythic Aftermath > Occasionally Attacks > Hasso + Zanshin
     // Daken is handled separately in CreateDakenAttack() and Zanshin in src/map/entities/battleentity.cpp#L1768
 
     // Checking Mikage Effect - Hits Vary With Num of Utsusemi Shadows for Main Weapon
@@ -310,19 +335,13 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
         multiHitOccurred = true;
     }
     // Mythic Weapons Aftermath, only main hand
-    else if (direction == PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK && xirand::GetRandomNumber(100) < occAttThriceRate)
+    else if (isMainHand && xirand::GetRandomNumber(100) < occAttThriceRate)
     {
         AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 2);
     }
-    else if (direction == PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK && xirand::GetRandomNumber(100) < occAttTwiceRate)
+    else if (isMainHand && xirand::GetRandomNumber(100) < occAttTwiceRate)
     {
         AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 1);
-    }
-    // Iga Garb +2 Set augment: possibility to add another swing while using Dual Wield
-    // TODO: Double check correct priority for Empyrian armor modifiers? Outsource? Lua function?
-    else if (direction == LEFTATTACK && xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::EXTRA_DUAL_WIELD_ATTACK))
-    {
-        AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, RIGHTATTACK, 1);
     }
     // "Occasionally attacks X times" and regular multiple hits
     else if (num > 1)
@@ -330,61 +349,11 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
         // Deduct the final default hit!
         AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, (num - 1));
     }
-    // TODO: Dynamis [D] weapons Follow-Up attack chance
 
     // Additional swing modifier (stacks!), mostly for Amood weapons
     if (isPC && xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::ADDITIONAL_SWING_CHANCE))
     {
         AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 1);
-    }
-
-    // Ammunition provoked additional swing (stacks!), mostly for Virtue Stone weapons
-    if (isPC && m_attacker->getMod(Mod::AMMO_SWING) > 0)
-    {
-        // Check for ammo
-        CCharEntity*    PChar     = (CCharEntity*)m_attacker;
-        CItemEquipment* PAmmo     = PChar->getEquip(SLOT_AMMO);
-        CItemEquipment* PMain     = PChar->getEquip(SLOT_MAIN);
-        CItemEquipment* PSub      = PChar->getEquip(SLOT_SUB);
-        uint8           slot      = PChar->equip[SLOT_AMMO];
-        uint8           loc       = PChar->equipLoc[SLOT_AMMO];
-        uint8           ammoCount = 0;
-
-        // Two handed and Hand-to-Hand
-        if (battleutils::GetScaledItemModifier(PChar, PMain, Mod::AMMO_SWING_TYPE) == 2 &&
-            xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
-        {
-            AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 1);
-            ammoCount += 1;
-        }
-        // One handed
-        else
-        {
-            if (direction == RIGHTATTACK && battleutils::GetScaledItemModifier(PChar, PMain, Mod::AMMO_SWING_TYPE) == 1 &&
-                xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
-            {
-                AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, RIGHTATTACK, 1);
-                ammoCount += 1;
-            }
-            if (direction == LEFTATTACK && PSub != nullptr && battleutils::GetScaledItemModifier(PChar, PSub, Mod::AMMO_SWING_TYPE) == 1 &&
-                xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
-            {
-                AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, LEFTATTACK, 1);
-                ammoCount += 1;
-            }
-        }
-
-        // Deduct ammo
-        if (PAmmo != nullptr)
-        {
-            if (PAmmo->getQuantity() == ammoCount)
-            {
-                charutils::UnequipItem(PChar, SLOT_AMMO);
-                PChar->RequestPersist(CHAR_PERSIST::EQUIP);
-            }
-            charutils::UpdateItem(PChar, loc, slot, -ammoCount);
-            PChar->pushPacket(new CInventoryFinishPacket());
-        }
     }
 
     // Default hit, necessary to check for multi hits as the hits are assigned as PHYSICAL_ATTACK_TYPE
@@ -396,13 +365,130 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
 }
 
 /************************************************************************
+ *  IsAttackTypeEligibleForFollowUp()
+ *  Return true if the attackType attack swing eligible to proc followUpType
+ *  Virtue Stone, TODO Raetic, TODO Dynamis [D]
+ ************************************************************************/
+bool CAttackRound::IsAttackTypeEligibleForFollowUp(Mod followUpType, PHYSICAL_ATTACK_TYPE attackType)
+{
+    switch (followUpType)
+    {
+        case Mod::AMMO_SWING:
+        {
+            switch (attackType)
+            {
+                case PHYSICAL_ATTACK_TYPE::NORMAL:
+                case PHYSICAL_ATTACK_TYPE::DOUBLE:
+                case PHYSICAL_ATTACK_TYPE::TRIPLE:
+                case PHYSICAL_ATTACK_TYPE::SAMBA:
+                case PHYSICAL_ATTACK_TYPE::QUAD:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        default:
+            return false;
+    }
+}
+
+/************************************************************************
+ *  ProcFollowUpAttacks() - Players only
+ *  Attempt to proc follow-up attacks and append them to the attack round
+ *  Virtue Stone, TODO Raetic, TODO Dynamis [D]
+ ************************************************************************/
+void CAttackRound::ProcFollowUpAttacks()
+{
+    if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_attacker))
+    {
+        if (PChar->getMod(Mod::AMMO_SWING))
+        {
+            // iterate through attackSwings and attempt to proc and store a follow-up swing
+            for (auto& attack : m_attackSwings)
+            {
+                PHYSICAL_ATTACK_DIRECTION direction = attack.GetAttackDirection();
+                PHYSICAL_ATTACK_TYPE      type      = attack.GetAttackType();
+                CItemEquipment*           PWeapon   = nullptr;
+
+                if (IsAttackTypeEligibleForFollowUp(Mod::AMMO_SWING, type))
+                {
+                    if (IsH2H() || direction == RIGHTATTACK)
+                    {
+                        PWeapon = PChar->getEquip(SLOT_MAIN);
+                    }
+                    else if (direction == LEFTATTACK)
+                    {
+                        PWeapon = PChar->getEquip(SLOT_SUB);
+                    }
+
+                    if (PWeapon && xirand::GetRandomNumber(100) < battleutils::GetScaledItemModifier(PChar, PWeapon, Mod::AMMO_SWING))
+                    {
+                        CItemEquipment*     PAmmo       = PChar->getEquip(SLOT_AMMO);
+                        static const uint16 virtueStone = 18244;
+
+                        if (PAmmo && PAmmo->getID() == virtueStone && PAmmo->getQuantity() > 0)
+                        {
+                            uint8 loc  = PChar->equipLoc[SLOT_AMMO];
+                            uint8 slot = PChar->equip[SLOT_AMMO];
+
+                            if (AddFollowUpAttack(direction))
+                            {
+                                if (PAmmo->getQuantity() == 1)
+                                {
+                                    charutils::UnequipItem(PChar, SLOT_AMMO);
+                                    PChar->RequestPersist(CHAR_PERSIST::EQUIP);
+                                }
+
+                                charutils::UpdateItem(PChar, loc, slot, -1);
+                                PChar->pushPacket<CInventoryFinishPacket>();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // TODO: else if (Raetic) {};
+        // TODO: else if (Dynamis [D]) {};
+
+        // Append any swings stored in m_followUpSwings to the attack round
+        if (!m_followUpSwings.empty())
+        {
+            for (size_t i = 0; i < m_followUpSwings.size(); i++)
+            {
+                AddAttackSwing(PHYSICAL_ATTACK_TYPE::FOLLOWUP, m_followUpSwings[i], 1);
+            }
+        }
+    }
+}
+
+/************************************************************************
+ *  AddFollowUpAttack() - (Virtue Stone, Raetic, Dynamis [D])
+ *  Attempt to store a follow-up swing. Return true if swing is stored.
+ *  Ensure that one follow-up per hand is stored, in order
+ ************************************************************************/
+bool CAttackRound::AddFollowUpAttack(PHYSICAL_ATTACK_DIRECTION direction)
+{
+    if (m_followUpSwings.size() < 2)
+    {
+        if (m_followUpSwings.empty() || m_followUpSwings.back() != direction)
+        {
+            m_followUpSwings.push_back(direction);
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/************************************************************************
  *                                                                       *
  *  Creates kick attacks.                                                *
  *                                                                       *
  ************************************************************************/
 void CAttackRound::CreateKickAttacks()
 {
-    if (m_attacker->objtype == TYPE_PC)
+    if (m_attacker->objtype == TYPE_PC && IsH2H())
     {
         // kick attack mod (All jobs)
         uint16 kickAttack = m_attacker->getMod(Mod::KICK_ATTACK_RATE);

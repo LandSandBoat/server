@@ -7,9 +7,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local redeemingRocks = player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS)
     local rocksProg = player:getCharVar('RedeemingRocksProg')
@@ -28,9 +25,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(140) -- Standard text
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

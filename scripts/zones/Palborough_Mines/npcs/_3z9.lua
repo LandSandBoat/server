@@ -9,9 +9,6 @@ local ID = zones[xi.zone.PALBOROUGH_MINES]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local refinerOutput = player:getCharVar('refiner_output')
 
@@ -25,12 +22,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.THE_MACHINE_SEEMS_TO_BE_WORKING)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -98,7 +98,7 @@ namespace moduleutils
         }
     }
 
-    void OnPushPacket(CCharEntity* PChar, CBasicPacket* packet)
+    void OnPushPacket(CCharEntity* PChar, const std::unique_ptr<CBasicPacket>& packet)
     {
         TracyZoneScoped;
         for (auto* module : cppModules())
@@ -170,6 +170,15 @@ namespace moduleutils
             }
         }
 
+        // Load zone_settings information
+        std::unordered_map<std::string, uint16> zoneSettingsPorts;
+
+        auto rset = db::preparedStmt("SELECT name, zoneport FROM zone_settings");
+        while (rset && rset->next())
+        {
+            zoneSettingsPorts[rset->get<std::string>("name")] = rset->get<uint16>("zoneport");
+        }
+
         // Load each module file that isn't the helpers.lua file or a directory
         for (auto const& entry : expandedList)
         {
@@ -232,15 +241,12 @@ namespace moduleutils
                         // we need to sanity check them here by checking the name and port against the database.
                         if (parts.size() >= 3 && parts[0] == "xi" && parts[1] == "zones")
                         {
-                            auto zoneName    = parts[2];
-                            auto currentPort = map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port;
+                            const auto zoneName    = parts[2];
+                            const auto currentPort = map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port;
 
-                            auto ret = _sql->Query(fmt::format("SELECT `name`, zoneport FROM zone_settings WHERE `name` = '{}' AND zoneport = {}",
-                                                               zoneName, currentPort)
-                                                       .c_str());
-                            if (ret != SQL_ERROR && _sql->NumRows() == 0)
+                            if (zoneSettingsPorts.find(zoneName) != zoneSettingsPorts.end() && zoneSettingsPorts[zoneName] != currentPort)
                             {
-                                DebugModules(fmt::format("{} does not appear to exist on this process.", zoneName));
+                                DebugModules(fmt::format("{} exists on a different port ({}), skipping", zoneName, zoneSettingsPorts[zoneName]));
                                 skipOverrideCheck = true;
                                 continue;
                             }
@@ -280,34 +286,30 @@ namespace moduleutils
         {
             if (!override.applied)
             {
-                auto firstElem = override.nameParts.front();
-                auto lastTable = override.nameParts.size() < 2 ? firstElem : *(override.nameParts.end() - 2);
-                auto lastElem  = override.nameParts.back();
-
                 sol::table table = lua["_G"];
                 for (auto& part : override.nameParts)
                 {
-                    table = table[part].get_or<sol::table>(sol::lua_nil);
-                    if (table == sol::lua_nil)
-                    {
-                        break;
-                    }
-
-                    if (part == lastTable)
+                    if (part == override.nameParts.back())
                     {
                         DebugModules(fmt::format("Applying override: {}", override.overrideName));
 
-                        if (table[lastElem] == sol::lua_nil)
+                        if (table[override.nameParts.back()] == sol::lua_nil)
                         {
                             DebugModules("Inserting empty function to override for: %s (%s)", override.overrideName, override.filename);
-                            table[lastElem] = []() {};
+                            table[override.nameParts.back()] = []() {};
                         }
 
                         // Function defined in LoadLuaModules()
-                        lua["applyOverride"](table, lastElem, override.func, override.overrideName, override.filename);
+                        lua["applyOverride"](table, override.nameParts.back(), override.func, override.overrideName, override.filename);
 
                         override.applied = true;
 
+                        break;
+                    }
+
+                    table = table[part].get_or<sol::table>(sol::lua_nil);
+                    if (table == sol::lua_nil)
+                    {
                         break;
                     }
                 }

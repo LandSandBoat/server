@@ -40,4 +40,38 @@ struct search_req
     uint8       commentType;
 };
 
+class searchPacket
+{
+public:
+    // max size of search packet is 1024 in packets
+    static constexpr uint16_t max_size = 1024;
+
+    searchPacket(uint8_t* buffer, uint16_t length)
+    {
+        if (length > max_size)
+        {
+            size = 0;
+            ShowError(fmt::format("Error: search packet with size above {} requested!", max_size));
+            return;
+        }
+
+        std::memcpy(buff_.data(), buffer, length);
+        size = length;
+    }
+
+    uint16_t getSize()
+    {
+        return size;
+    }
+
+    uint8_t* getData()
+    {
+        return buff_.data();
+    }
+private:
+
+    std::array<uint8_t, max_size> buff_;
+    uint16_t                      size;
+};
+
 #endif

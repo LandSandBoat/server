@@ -290,7 +290,7 @@ g_mixins.job_special = function(jobSpecialMob)
     end)
 
     jobSpecialMob:addListener('ENGAGE', 'JOB_SPECIAL_ENGAGE', function(mob)
-        if math.random(100) <= mob:getLocalVar('[jobSpecial]chance') then
+        if math.random(1, 100) <= mob:getLocalVar('[jobSpecial]chance') then
             mob:setLocalVar('[jobSpecial]readyInitial', os.time() + mob:getLocalVar('[jobSpecial]delayInitial'))
         end
     end)

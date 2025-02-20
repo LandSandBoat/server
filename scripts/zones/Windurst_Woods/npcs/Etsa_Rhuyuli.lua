@@ -20,9 +20,6 @@ entity.onSpawn = function(npc)
     npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local wildcatWindurst = player:getCharVar('WildcatWindurst')
 
@@ -34,9 +31,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(422)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

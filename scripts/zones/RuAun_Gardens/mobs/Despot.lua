@@ -5,6 +5,13 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 18000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 29250)
+    mob:setMobMod(xi.mobMod.MUG_GIL, 3250)
+end
+
 entity.onMobSpawn = function(mob)
     local ph = GetMobByID(mob:getLocalVar('ph'))
     if ph then

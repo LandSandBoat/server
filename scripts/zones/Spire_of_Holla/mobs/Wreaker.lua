@@ -13,9 +13,9 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
-    local roll = math.random()
+    local roll = math.random(1, 100)
     if mob:getHPP() <= 25 then
-        if roll <= 0.25 then
+        if roll <= 25 then
             return 1252 -- Shadow_spread
         else
             return 1248 -- Trinary_absorption

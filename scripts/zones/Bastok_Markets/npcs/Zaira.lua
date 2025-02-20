@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Batok Markets
 --  NPC: Zaira
--- Standard Merchant NPC
 -- !pos -217.316 -2.824 49.235 235
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MARKETS]

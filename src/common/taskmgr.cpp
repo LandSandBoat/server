@@ -38,15 +38,10 @@ CTaskMgr::~CTaskMgr()
     }
 }
 
-CTaskMgr::CTask* CTaskMgr::AddTask(std::string const& InitName, time_point InitTick, std::any InitData, TASKTYPE InitType, TaskFunc_t InitFunc, duration InitInterval)
-{
-    TracyZoneScoped;
-    return AddTask(new CTask(InitName, InitTick, std::move(InitData), InitType, InitFunc, InitInterval));
-}
-
 CTaskMgr::CTask* CTaskMgr::AddTask(CTask* PTask)
 {
     TracyZoneScoped;
+
     m_TaskList.push(PTask);
     return PTask;
 }
@@ -54,6 +49,7 @@ CTaskMgr::CTask* CTaskMgr::AddTask(CTask* PTask)
 void CTaskMgr::RemoveTask(std::string const& TaskName)
 {
     TracyZoneScoped;
+
     // m_TaskList is a priority_queue, so we can't directly pull members out of it.
     //
     // Tasks are compared using their m_tick values, so we can safely remove all the tasks
@@ -91,6 +87,7 @@ void CTaskMgr::RemoveTask(std::string const& TaskName)
 duration CTaskMgr::DoTimer(time_point tick)
 {
     TracyZoneScoped;
+
     duration diff = 1s;
 
     while (!m_TaskList.empty())

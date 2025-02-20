@@ -56,6 +56,6 @@ CBazaarItemPacket::CBazaarItemPacket(CItem* PItem, uint8 SlotID, uint16 Tax)
             ref<uint32>(0x19) = ((CItemUsable*)PItem)->getUseDelay() + currentTime;
         }
         // 12? characters? seems a bit short. TODO: research this.
-        memcpy(data + (0x1D), PItem->getSignature().c_str(), std::min<size_t>(PItem->getSignature().size(), 12));
+        std::memcpy(buffer_.data() + 0x1D, PItem->getSignature().c_str(), std::min<size_t>(PItem->getSignature().size(), 12));
     }
 }

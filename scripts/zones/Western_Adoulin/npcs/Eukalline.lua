@@ -9,9 +9,6 @@ local ID = zones[xi.zone.WESTERN_ADOULIN]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     -- Standard shop
     player:showText(npc, ID.text.EUKALLINE_SHOP_TEXT)
@@ -33,12 +30,6 @@ entity.onTrigger = function(player, npc)
         6131, 709716, -- Scroll of Indi-Haste
     }
     xi.shop.general(player, stock)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

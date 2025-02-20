@@ -43,7 +43,7 @@ CAutomatonController::CAutomatonController(CAutomatonEntity* PPet)
     setCooldowns();
     if (shouldStandBack())
     {
-        PAutomaton->m_Behaviour |= BEHAVIOUR_STANDBACK;
+        PAutomaton->m_Behavior |= BEHAVIOR_STANDBACK;
     }
 }
 
@@ -223,11 +223,10 @@ void CAutomatonController::DoCombatTick(time_point tick)
 
 void CAutomatonController::Move()
 {
-    float currentDistance = distanceSquared(PAutomaton->loc.p, PTarget->loc.p);
-
-    if ((shouldStandBack() && (currentDistance > 225)) || (PAutomaton->health.mp < 8 && PAutomaton->health.maxmp > 8))
+    if ((shouldStandBack() && !isWithinDistance(PAutomaton->loc.p, PTarget->loc.p, 15.0f)) ||
+        (PAutomaton->health.mp < 8 && PAutomaton->health.maxmp > 8))
     {
-        PAutomaton->m_Behaviour &= ~BEHAVIOUR_STANDBACK;
+        PAutomaton->m_Behavior &= ~BEHAVIOR_STANDBACK;
     }
 
     CPetController::Move();
@@ -238,7 +237,7 @@ bool CAutomatonController::TryAction()
     if (m_Tick > m_LastActionTime + (m_actionCooldown - std::chrono::milliseconds(PAutomaton->getMod(Mod::AUTO_DECISION_DELAY) * 10)))
     {
         m_LastActionTime = m_Tick;
-        PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_AI_TICK", CLuaBaseEntity(PAutomaton), CLuaBaseEntity(PTarget));
+        PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_AI_TICK", PAutomaton, PTarget);
 
         return true;
     }
@@ -402,8 +401,8 @@ bool CAutomatonController::TrySpellcast(const CurrentManeuvers& maneuvers)
                 m_LastEnhanceTime = m_Tick;
                 return true;
             }
-            else if ((maneuvers.dark || PAutomaton->GetHPP() <= 75 || PAutomaton->GetMPP() <= 75) &&
-                     TryEnfeeble(maneuvers)) // Dark or self HPP/MPP <= 75 -> Enfeeble
+            else if ((maneuvers.dark || PAutomaton->GetHPP() < 75 || PAutomaton->GetMPP() < 75) &&
+                     TryEnfeeble(maneuvers)) // Dark or self HPP/MPP < 75 -> Enfeeble
             {
                 m_LastEnfeebleTime = m_Tick;
                 return true;
@@ -844,13 +843,13 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
         }
         case HEAD_SPIRITREAVER:
         {
-            if (PAutomaton->GetMPP() <= 75 && PTarget->health.mp > 0) // MPP <= 75 -> Aspir
+            if (PAutomaton->GetMPP() < 75 && PTarget->health.mp > 0) // MPP < 75 -> Aspir
             {
                 castPriority.emplace_back(SpellID::Aspir_II);
                 castPriority.emplace_back(SpellID::Aspir);
             }
 
-            if (PAutomaton->GetHPP() <= 75 && PTarget->m_EcoSystem != ECOSYSTEM::UNDEAD)
+            if (PAutomaton->GetHPP() < 75 && PTarget->m_EcoSystem != ECOSYSTEM::UNDEAD)
             { // HPP <= 75 -> Drain
                 castPriority.emplace_back(SpellID::Drain);
             }
@@ -1595,7 +1594,7 @@ bool CAutomatonController::TryAttachment()
         return false;
     }
 
-    PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_ATTACHMENT_CHECK", CLuaBaseEntity(PAutomaton), CLuaBaseEntity(PTarget));
+    PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_ATTACHMENT_CHECK", PAutomaton, PTarget);
 
     return false;
 }
@@ -1636,7 +1635,7 @@ bool CAutomatonController::Disengage()
     PTarget = nullptr;
     if (shouldStandBack())
     {
-        PAutomaton->m_Behaviour |= BEHAVIOUR_STANDBACK;
+        PAutomaton->m_Behavior |= BEHAVIOR_STANDBACK;
     }
     return CMobController::Disengage();
 }

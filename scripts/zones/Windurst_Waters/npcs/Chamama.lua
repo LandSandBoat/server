@@ -69,9 +69,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 654 and option == 1 then -- IN A PICKLE + RARAB TAIL: Quest Begin
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)

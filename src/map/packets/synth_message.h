@@ -28,14 +28,16 @@
 
 enum SYNTH_MESSAGE
 {
-    SYNTH_SUCCESS,
-    SYNTH_FAIL,
-    SYNTH_INTERRUPT,
-    SYNTH_BADRECIPE,
-    SYNTH_CANCEL,
-    SYNTH_FAILCRYSTAL,
-    SYNTH_NOSKILL,
-    SYNTH_CANCELRARE
+    SYNTH_SUCCESS         = 0,
+    SYNTH_FAIL            = 1,
+    SYNTH_INTERRUPT       = 2,
+    SYNTH_BADRECIPE       = 3,
+    SYNTH_CANCEL          = 4,
+    SYNTH_FAILCRYSTAL     = 5,
+    SYNTH_NOSKILL         = 6,
+    SYNTH_CANCELRARE      = 7,
+    SYNTH_SUCCESS_DESYNTH = 12,
+    SYNTH_FAIL_CRITICAL   = 14, // 0x0E
 };
 
 class CCharEntity;

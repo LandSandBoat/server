@@ -8,9 +8,6 @@ local ID = zones[xi.zone.DEN_OF_RANCOR]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if player:getZPos() > 35 then
         GetNPCByID(ID.npc.DROP_GATE):openDoor() -- drop gate to Sacrificial Chamber

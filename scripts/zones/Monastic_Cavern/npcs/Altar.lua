@@ -9,9 +9,6 @@ local ID = zones[xi.zone.MONASTIC_CAVERN]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local circleOfTime = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
 
@@ -33,9 +30,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.ALTAR)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

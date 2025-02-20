@@ -6,8 +6,6 @@
 -- !pos -116 -3 52  238
 -- (outside the shop he is in)
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WATERS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -85,9 +83,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     -- A Crisis in the Making
     if csid == 258 and option == 1 then  -- A Crisis in the Making + ITEM: Quest Offer - ACCEPTED
@@ -121,8 +116,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 556 then
         player:tradeComplete()
         player:setCharVar('IASvar', 4)
-        player:addKeyItem(xi.ki.RANPI_MONPIS_SPECIAL_STEW)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RANPI_MONPIS_SPECIAL_STEW)
+        npcUtil.giveKeyItem(player, xi.ki.RANPI_MONPIS_SPECIAL_STEW)
     end
 end
 

@@ -2,7 +2,11 @@
 -- Area: La Theine Plateau
 --   NM: Bloodtear Baldurf
 -----------------------------------
-mixins = { require('scripts/mixins/job_special') }
+mixins =
+{
+    require('scripts/mixins/job_special'),
+    require('scripts/mixins/draw_in'),
+}
 require('scripts/quests/tutorial')
 -----------------------------------
 ---@type TMobEntity
@@ -10,7 +14,6 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 end
 
 entity.onMobSpawn = function(mob)

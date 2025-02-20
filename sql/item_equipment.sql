@@ -452,7 +452,7 @@ INSERT INTO `item_equipment` VALUES (10668,'etoile_tiara_+2',90,0,262144,304,0,0
 INSERT INTO `item_equipment` VALUES (10669,'argute_m.board_+2',90,0,524288,215,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (10670,'war._lorica_+2',90,0,1,65,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (10671,'mel._cyclas_+2',90,0,2,67,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (10672,'clr._briault_+2',90,0,4,69,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (10672,'clr._bliaut_+2',90,0,4,69,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (10673,'src._coat_+2',90,0,8,71,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (10674,'dls._tabard_+2',90,0,16,73,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (10675,'asn._vest_+2',90,0,32,75,0,0,32,0,0,0);
@@ -2396,7 +2396,7 @@ INSERT INTO `item_equipment` VALUES (12636,'mithran_separates',1,0,4194303,8,0,0
 INSERT INTO `item_equipment` VALUES (12637,'galkan_surcoat',1,0,4194303,8,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (12638,'fighters_lorica',60,0,1,64,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (12639,'temple_cyclas',58,0,2,66,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (12640,'healers_briault',58,0,4,68,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (12640,'healers_bliaut',58,0,4,68,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (12641,'wizards_coat',58,0,8,70,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (12642,'warlocks_tabard',58,0,16,72,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (12643,'rogues_vest',58,0,32,74,0,0,32,0,0,0);
@@ -4228,7 +4228,7 @@ INSERT INTO `item_equipment` VALUES (14471,'tarutaru_top',1,0,4194303,158,0,0,32
 INSERT INTO `item_equipment` VALUES (14472,'tarutaru_top_+1',1,0,4194303,158,0,0,32,64,0,0);
 INSERT INTO `item_equipment` VALUES (14473,'ftr._lorica_+1',74,0,1,64,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (14474,'tpl._cyclas_+1',74,0,2,66,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (14475,'hlr._briault_+1',74,0,4,68,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (14475,'hlr._bliaut_+1',74,0,4,68,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (14476,'wzd._coat_+1',74,0,8,70,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (14477,'wlk._tabard_+1',74,0,16,72,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (14478,'rog._vest_+1',74,0,32,74,0,0,32,0,0,0);
@@ -4255,7 +4255,7 @@ INSERT INTO `item_equipment` VALUES (14498,'crow_jupon',50,0,3662710,162,0,0,32,
 INSERT INTO `item_equipment` VALUES (14499,'raven_jupon',50,0,3662710,162,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (14500,'war._lorica_+1',75,0,1,65,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (14501,'mel._cyclas_+1',75,0,2,67,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (14502,'clr._briault_+1',75,0,4,69,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (14502,'clr._bliaut_+1',75,0,4,69,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (14503,'src._coat_+1',75,0,8,71,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (14504,'dls._tabard_+1',75,0,16,73,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (14505,'asn._vest_+1',75,0,32,75,0,0,32,0,0,0);
@@ -4842,7 +4842,7 @@ INSERT INTO `item_equipment` VALUES (15085,'wyrm_armet',75,0,8192,91,0,0,16,0,0,
 INSERT INTO `item_equipment` VALUES (15086,'summoners_horn',75,0,16384,93,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (15087,'warriors_lorica',75,0,1,65,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (15088,'melee_cyclas',74,0,2,67,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (15089,'clerics_briault',74,0,4,69,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (15089,'clerics_bliaut',74,0,4,69,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (15090,'sorcerers_coat',74,0,8,71,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (15091,'duelists_tabard',74,0,16,73,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (15092,'assassins_vest',72,0,32,75,0,0,32,0,0,0);
@@ -5518,7 +5518,7 @@ INSERT INTO `item_equipment` VALUES (15761,'chariot_band',1,0,4194303,0,0,0,2457
 INSERT INTO `item_equipment` VALUES (15762,'empress_band',1,0,4194303,0,0,0,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15763,'emperor_band',1,0,4194303,0,0,0,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15769,'olduum_ring',60,0,4194303,0,0,0,24576,0,0,0);
-INSERT INTO `item_equipment` VALUES (15770,'random_ring',60,0,4194303,0,0,0,24576,0,0,0);
+INSERT INTO `item_equipment` VALUES (15770,'random_ring',60,0,4194303,0,0,5,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15771,'shining_ring',71,0,4194303,0,0,0,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15772,'scintillant_ring',71,0,4194303,0,0,0,24576,0,0,0);
 INSERT INTO `item_equipment` VALUES (15773,'imperial_ring',50,0,4194303,0,0,0,24576,0,0,0);
@@ -11210,7 +11210,7 @@ INSERT INTO `item_equipment` VALUES (23084,'fu._bandeau_+2',99,119,2097152,339,0
 INSERT INTO `item_equipment` VALUES (23087,'ebers_cap_+2',99,119,4,284,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (23107,'pumm._lorica_+2',99,119,1,64,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23108,'anch._cyclas_+2',99,119,2,66,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (23109,'theo._briault_+2',99,119,4,68,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23109,'theo._bliaut_+2',99,119,4,68,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23110,'spaekonas_coat_+2',99,119,8,70,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23111,'atrophy_tabard_+2',99,119,16,72,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23112,'pillagers_vest_+2',99,119,32,74,0,0,32,0,0,0);
@@ -11233,7 +11233,7 @@ INSERT INTO `item_equipment` VALUES (23128,'geomancy_tunic_+2',99,119,1048576,30
 INSERT INTO `item_equipment` VALUES (23129,'runeist_coat_+2',99,119,2097152,338,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23130,'agoge_lorica_+2',99,119,1,65,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23131,'hes._cyclas_+2',99,119,2,67,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (23132,'piety_briault_+2',99,119,4,69,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23132,'piety_bliaut_+2',99,119,4,69,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23133,'arch._coat_+2',99,119,8,71,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23134,'viti._tabard_+2',99,119,16,73,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23135,'plunderers_vest_+2',99,119,32,75,0,0,32,0,0,0);
@@ -11343,6 +11343,7 @@ INSERT INTO `item_equipment` VALUES (23282,'horos_tights_+2',99,119,262144,304,0
 INSERT INTO `item_equipment` VALUES (23283,'peda._pants_+2',99,119,524288,215,0,0,128,0,0,0);
 INSERT INTO `item_equipment` VALUES (23284,'bagua_pants_+2',99,119,1048576,310,0,0,128,0,0,0);
 INSERT INTO `item_equipment` VALUES (23285,'futhark_trousers_+2',99,119,2097152,339,0,0,128,0,0,0);
+INSERT INTO `item_equipment` VALUES (23303,'kara._pantaloni_+2',99,119,131072,299,0,0,128,0,0,0);
 INSERT INTO `item_equipment` VALUES (23308,'pumm._calligae_+2',99,119,1,64,0,0,256,0,0,0);
 INSERT INTO `item_equipment` VALUES (23309,'anch._gaiters_+2',99,119,2,66,0,0,256,0,0,0);
 INSERT INTO `item_equipment` VALUES (23310,'theo._duckbills_+2',99,119,4,68,0,0,256,0,0,0);
@@ -11388,6 +11389,7 @@ INSERT INTO `item_equipment` VALUES (23349,'horos_t._shoes_+2',99,119,262144,304
 INSERT INTO `item_equipment` VALUES (23350,'peda._loafers_+2',99,119,524288,215,0,0,256,0,0,0);
 INSERT INTO `item_equipment` VALUES (23351,'bagua_sandals_+2',99,119,1048576,310,0,0,256,0,0,0);
 INSERT INTO `item_equipment` VALUES (23352,'futhark_boots_+2',99,119,2097152,339,0,0,256,0,0,0);
+INSERT INTO `item_equipment` VALUES (23364,'kas._sune-ate_+2',99,119,2048,293,0,0,256,0,0,0);
 INSERT INTO `item_equipment` VALUES (23375,'pummelers_mask_+3',99,119,1,64,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (23376,'anch._crown_+3',99,119,2,66,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (23377,'theophany_cap_+3',99,119,4,68,0,0,16,0,0,0);
@@ -11435,7 +11437,7 @@ INSERT INTO `item_equipment` VALUES (23418,'bagua_galero_+3',99,119,1048576,310,
 INSERT INTO `item_equipment` VALUES (23419,'fu._bandeau_+3',99,119,2097152,339,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (23442,'pumm._lorica_+3',99,119,1,64,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23443,'anch._cyclas_+3',99,119,2,66,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (23444,'theo._briault_+3',99,119,4,68,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23444,'theo._bliaut_+3',99,119,4,68,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23445,'spaekonas_coat_+3',99,119,8,70,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23446,'atrophy_tabard_+3',99,119,16,72,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23447,'pillagers_vest_+3',99,119,32,74,0,0,32,0,0,0);
@@ -11458,7 +11460,7 @@ INSERT INTO `item_equipment` VALUES (23463,'geomancy_tunic_+3',99,119,1048576,30
 INSERT INTO `item_equipment` VALUES (23464,'runeist_coat_+3',99,119,2097152,338,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23465,'agoge_lorica_+3',99,119,1,65,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23466,'hes._cyclas_+3',99,119,2,67,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (23467,'piety_briault_+3',99,119,4,69,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23467,'piety_bliaut_+3',99,119,4,69,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23468,'arch._coat_+3',99,119,8,71,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23469,'viti._tabard_+3',99,119,16,73,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23470,'plunderers_vest_+3',99,119,32,75,0,0,32,0,0,0);
@@ -12767,8 +12769,8 @@ INSERT INTO `item_equipment` VALUES (26800,'agoge_lorica',99,109,1,65,0,0,32,0,0
 INSERT INTO `item_equipment` VALUES (26801,'agoge_lorica_+1',99,119,1,65,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (26802,'hes._cyclas',99,109,2,67,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (26803,'hes._cyclas_+1',99,119,2,67,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (26804,'piety_briault',99,109,4,69,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (26805,'piety_briault_+1',99,119,4,69,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (26804,'piety_bliaut',99,109,4,69,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (26805,'piety_bliaut_+1',99,119,4,69,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (26806,'arch._coat',99,109,8,71,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (26807,'arch._coat_+1',99,119,8,71,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (26808,'vitiation_tabard',99,109,16,73,0,0,32,0,0,0);
@@ -13755,7 +13757,7 @@ INSERT INTO `item_equipment` VALUES (27805,'rustic_maillot_+1',1,0,4194303,358,0
 INSERT INTO `item_equipment` VALUES (27806,'shoal_maillot_+1',1,0,4194303,359,0,0,32,64,0,0);
 INSERT INTO `item_equipment` VALUES (27807,'pummelers_lorica',99,109,1,64,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (27808,'anchorites_cyclas',99,109,2,66,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (27809,'theo._briault',99,109,4,68,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (27809,'theo._bliaut',99,109,4,68,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (27810,'spaekonas_coat',99,109,8,70,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (27811,'atrophy_tabard',99,109,16,72,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (27812,'pillagers_vest',99,109,32,74,0,0,32,0,0,0);
@@ -13776,7 +13778,7 @@ INSERT INTO `item_equipment` VALUES (27826,'maxixi_casaque',99,109,262144,211,0,
 INSERT INTO `item_equipment` VALUES (27827,'academics_gown',99,109,524288,214,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (27828,'pumm._lorica_+1',99,119,1,64,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (27829,'anch._cyclas_+1',99,119,2,66,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (27830,'theo._briault_+1',99,119,4,68,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (27830,'theo._bliaut_+1',99,119,4,68,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (27831,'spae._coat_+1',99,119,8,70,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (27832,'atrophy_tabard_+1',99,119,16,72,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (27833,'pillagers_vest_+1',99,119,32,74,0,0,32,0,0,0);

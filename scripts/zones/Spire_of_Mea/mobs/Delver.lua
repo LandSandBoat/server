@@ -13,9 +13,9 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
-    local roll = math.random()
+    local roll = math.random(1, 100)
     if mob:getHPP() <= 35 then
-        if roll <= 0.7 then
+        if roll <= 70 then
             return 1234 -- Carousel
         else
             return 1274 -- Impalement

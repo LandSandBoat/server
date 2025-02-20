@@ -10,10 +10,10 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
 
 quest.reward =
 {
-    xp = 2000,
-    fame = 120,
+    keyItem  = xi.ki.MAP_OF_THE_HORUTOTO_RUINS,
     fameArea = xi.fameArea.WINDURST,
-    keyItem = xi.ki.MAP_OF_THE_HORUTOTO_RUINS,
+    fame     = 120,
+    exp      = 2000,
 }
 
 quest.sections =

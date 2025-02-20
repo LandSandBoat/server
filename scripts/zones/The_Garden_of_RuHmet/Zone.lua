@@ -8,44 +8,44 @@ local gardenGlobal = require('scripts/zones/The_Garden_of_RuHmet/globals')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -421, -2, 377,  -417, 0, 381) -- RDC
-    zone:registerTriggerArea(2, -422, -2, -422,  -418, 0, -418) -- +1
-    zone:registerTriggerArea(3, 418, -2, 378,  422, 0, 382) -- +2
+    zone:registerCuboidTriggerArea(1,  -421, -2,  377, -417, 0,  381) -- RDC
+    zone:registerCuboidTriggerArea(2,  -422, -2, -422, -418, 0, -418) -- +1
+    zone:registerCuboidTriggerArea(3,   418, -2,  378,  422, 0,  382) -- +2
 
-    zone:registerTriggerArea(4,  -506, -4, 697,  -500, 4, 703)--hume niv 0  150   vers niv 1
-    zone:registerTriggerArea(5,  -507, -4, -103,  -501, 4, -97)--hume niv 1  158   vers niv 0
-    zone:registerTriggerArea(6,  -339, -4, -103,  -332, 4, -97)--hume niv 1  159   vers niv 2
-    zone:registerTriggerArea(7,  501, -4, 697,  507, 4, 702)--hume niv 2  169   vers niv 1
-    zone:registerTriggerArea(8,  332, -4, 696,  339, 4, 702)--hume niv 2  168   vers niv 3
-    zone:registerTriggerArea(9,  332, -4, -102,  338, 4, -97)--hume niv 3  178   vers niv 2
+    zone:registerCuboidTriggerArea(4,  -506, -4,  697, -500, 4,  703) -- Hume niv 0  150   vers niv 1
+    zone:registerCuboidTriggerArea(5,  -507, -4, -103, -501, 4,  -97) -- Hume niv 1  158   vers niv 0
+    zone:registerCuboidTriggerArea(6,  -339, -4, -103, -332, 4,  -97) -- Hume niv 1  159   vers niv 2
+    zone:registerCuboidTriggerArea(7,   501, -4,  697,  507, 4,  702) -- Hume niv 2  169   vers niv 1
+    zone:registerCuboidTriggerArea(8,   332, -4,  696,  339, 4,  702) -- Hume niv 2  168   vers niv 3
+    zone:registerCuboidTriggerArea(9,   332, -4, -102,  338, 4,  -97) -- Hume niv 3  178   vers niv 2
 
-    zone:registerTriggerArea(10,  -102, -4, 541,  -96, 4, 546)--elvaan niv 0 151 vers niv 1
-    zone:registerTriggerArea(11,  -103, -4, -259,  -96, 4, -252)--elvaan niv 1 160 vers niv 0
-    zone:registerTriggerArea(12,  -103, -4, -427,  -67, 4, -420)--elvaan niv 1 161 vers niv 2
-    zone:registerTriggerArea(13,  736, -4, 372,  742, 4, 379)--elvaan niv 2 171 vers niv 1
-    zone:registerTriggerArea(14,  736, -4, 540,  743, 4, 546)--elvaan niv 2 170 vers niv 3
-    zone:registerTriggerArea(15,  737, -4, -259,  743, 4, -252)--elvaan niv 3 179 vers niv 2
+    zone:registerCuboidTriggerArea(10, -102, -4,  541,  -96, 4,  546) -- Elvaan: niv 0 151 vers niv 1
+    zone:registerCuboidTriggerArea(11, -103, -4, -259,  -96, 4, -252) -- Elvaan: niv 1 160 vers niv 0
+    zone:registerCuboidTriggerArea(12, -103, -4, -427,  -67, 4, -420) -- Elvaan: niv 1 161 vers niv 2
+    zone:registerCuboidTriggerArea(13,  736, -4,  372,  742, 4,  379) -- Elvaan: niv 2 171 vers niv 1
+    zone:registerCuboidTriggerArea(14,  736, -4,  540,  743, 4,  546) -- Elvaan: niv 2 170 vers niv 3
+    zone:registerCuboidTriggerArea(15,  737, -4, -259,  743, 4, -252) -- Elvaan: niv 3 179 vers niv 2
 
-    zone:registerTriggerArea(16,  -178, -4, 97,  -173, 4, 103)--galka niv 0 152 vers niv 1
-    zone:registerTriggerArea(17,  -178, -4, -703,  -173, 4, -697)--galka niv 1 162 vers niv 0
-    zone:registerTriggerArea(18,  -347, -4, -703,  -340, 4, -696)--galka niv 1 163 vers niv 2
-    zone:registerTriggerArea(19,  492, -4, 96,  499, 4, 103)--galka niv 2 173 vers niv 1
-    zone:registerTriggerArea(20,  660, -4, 96,  667, 4, 102)--galka niv 2 172 vers niv 3
-    zone:registerTriggerArea(21,  660, -4, -702,  667, 4, -697)--galka niv 3 180 vers niv 2
+    zone:registerCuboidTriggerArea(16, -178, -4,   97, -173, 4,  103) -- Galka:  niv 0 152 vers niv 1
+    zone:registerCuboidTriggerArea(17, -178, -4, -703, -173, 4, -697) -- Galka:  niv 1 162 vers niv 0
+    zone:registerCuboidTriggerArea(18, -347, -4, -703, -340, 4, -696) -- Galka:  niv 1 163 vers niv 2
+    zone:registerCuboidTriggerArea(19,  492, -4,   96,  499, 4,  103) -- Galka:  niv 2 173 vers niv 1
+    zone:registerCuboidTriggerArea(20,  660, -4,   96,  667, 4,  102) -- Galka:  niv 2 172 vers niv 3
+    zone:registerCuboidTriggerArea(21,  660, -4, -702,  667, 4, -697) -- Galka:  niv 3 180 vers niv 2
 
-    zone:registerTriggerArea(22,  -498, -4, 97,  -492, 4, 102)--taru niv 0 153 vers niv 1
-    zone:registerTriggerArea(23,  -499, -4, -703,  -492, 4, -697)--taru niv 1 164 vers niv 0
-    zone:registerTriggerArea(24,  -667, -4, -703,  -661, 4, -696)--taru niv 1 165 vers niv 2
-    zone:registerTriggerArea(25,  172, -4, 96,  178, 4, 102)--taru niv 2 175 vers niv 1
-    zone:registerTriggerArea(26,  340, -4, 97,  347, 4, 102)--taru niv 2 174 vers niv 3
-    zone:registerTriggerArea(27,  340, -4, -703,  347, 4, -697)--taru niv 3 181 vers niv 2
+    zone:registerCuboidTriggerArea(22, -498, -4,   97, -492, 4,  102) -- Taru:   niv 0 153 vers niv 1
+    zone:registerCuboidTriggerArea(23, -499, -4, -703, -492, 4, -697) -- Taru:   niv 1 164 vers niv 0
+    zone:registerCuboidTriggerArea(24, -667, -4, -703, -661, 4, -696) -- Taru:   niv 1 165 vers niv 2
+    zone:registerCuboidTriggerArea(25,  172, -4,   96,  178, 4,  102) -- Taru:   niv 2 175 vers niv 1
+    zone:registerCuboidTriggerArea(26,  340, -4,   97,  347, 4,  102) -- Taru:   niv 2 174 vers niv 3
+    zone:registerCuboidTriggerArea(27,  340, -4, -703,  347, 4, -697) -- Taru:   niv 3 181 vers niv 2
 
-    zone:registerTriggerArea(28,  -742, -4, 373,  -736, 4, 379)--mithra niv 0 154 vers niv 1
-    zone:registerTriggerArea(29,  -743, -4, -427,  -736, 4, -421)--mithra niv 1 166 vers niv 0
-    zone:registerTriggerArea(30,  -742, -4, -259,  -737, 4, -252)--mithra niv 1 167 vers niv 2
-    zone:registerTriggerArea(31,  97, -4, 541,  102, 4, 547)--mithra niv 2 177 vers niv 1
-    zone:registerTriggerArea(32,  97, -4, 372,  102, 4, 379)--mithra niv 2 176 vers niv 3
-    zone:registerTriggerArea(33,  97, -4, -427, 102, 4, -421)--mithra niv 3 182 vers niv 2
+    zone:registerCuboidTriggerArea(28, -742, -4,  373, -736, 4,  379) -- Mithra: niv 0 154 vers niv 1
+    zone:registerCuboidTriggerArea(29, -743, -4, -427, -736, 4, -421) -- Mithra: niv 1 166 vers niv 0
+    zone:registerCuboidTriggerArea(30, -742, -4, -259, -737, 4, -252) -- Mithra: niv 1 167 vers niv 2
+    zone:registerCuboidTriggerArea(31,   97, -4,  541,  102, 4,  547) -- Mithra: niv 2 177 vers niv 1
+    zone:registerCuboidTriggerArea(32,   97, -4,  372,  102, 4,  379) -- Mithra: niv 2 176 vers niv 3
+    zone:registerCuboidTriggerArea(33,   97, -4, -427,  102, 4, -421) -- Mithra: niv 3 182 vers niv 2
 
     -- Give the Fortitude ??? a random spawn
     local qmFort = GetNPCByID(ID.npc.QM_JAILER_OF_FORTITUDE)
@@ -54,7 +54,7 @@ zoneObject.onInitialize = function(zone)
     end
 
     -- Give the Ix'Aern DRK ??? a random spawn
-    local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK)
+    local qmDrk    = GetNPCByID(ID.npc.QM_IXAERN_DRK)
     local qmDrkPos = math.random(1, 4)
 
     if qmDrk then
@@ -65,7 +65,6 @@ zoneObject.onInitialize = function(zone)
 
     -- Give the Faith ??? a random spawn
     local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH)
-
     if qmFaith then
         qmFaith:setPos(unpack(gardenGlobal.qmPosFaithTable[math.random(1, 5)]))
     end
@@ -93,13 +92,12 @@ end
 zoneObject.onGameHour = function(zone)
     local vanadielHour = VanadielHour()
     local qmDrk        = GetNPCByID(ID.npc.QM_IXAERN_DRK) -- Ix'aern drk
-    local s            = math.random(6, 12) -- wait time till change to next spawn pos, random 15~30 mins.
 
     -- Jailer of Faith spawn randomiser
     local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH) -- Jailer of Faith
     if
         qmFaith and
-        vanadielHour % s == 0
+        vanadielHour % math.random(6, 12) == 0
     then
         qmFaith:hideNPC(60) -- Hide it for 60 seconds
         qmFaith:setPos(unpack(gardenGlobal.qmPosFaithTable[math.random(1, 5)])) -- Set the new position
@@ -112,15 +110,16 @@ zoneObject.onGameHour = function(zone)
         qmDrk:getStatus() ~= xi.status.DISAPPEAR
     then
         -- Change ??? position every 12 hours Vana'diel time (30 mins)
-        qmDrk:hideNPC(30)
         local qmDrkPos = math.random(1, 4)
+
+        qmDrk:hideNPC(30)
         qmDrk:setLocalVar('position', qmDrkPos)
         qmDrk:setPos(unpack(gardenGlobal.qmPosDRKTable[qmDrkPos]))
     end
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -134,7 +133,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-351.136, -2.25, -380, 253)
     end
 
-    player:setCharVar('Ru-Hmet-TP', 0)
     return cs
 end
 
@@ -174,8 +172,8 @@ local teleportEventsByArea =
 }
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    if player:getCharVar('Ru-Hmet-TP') == 0 and player:getAnimation() == 0 then
-        local areaId = triggerArea:GetTriggerAreaID()
+    if player:getLocalVar('TeleportAntiTrigger') == 0 and player:getAnimation() == 0 then
+        local areaId = triggerArea:getTriggerAreaID()
 
         if areaId == 1 then
             if
@@ -198,7 +196,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
                 player:startEvent(183)
             end
         elseif teleportEventsByArea[areaId] then
-            player:startEvent(teleportEventsByArea[areaId])
+            player:startOptionalCutscene(teleportEventsByArea[areaId])
         end
     end
 end
@@ -208,22 +206,21 @@ end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
     if
-        (csid > 149 and csid < 184) or
+        csid == 101 or
         csid == 102 or
         csid == 103 or
-        csid == 101
+        (csid > 149 and csid < 184)
     then
-        player:setCharVar('Ru-Hmet-TP', 1)
+        player:setLocalVar('TeleportAntiTrigger', 1)
     end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 101 and option == 1 then
         player:setPos(540, -1, -499.900, 62, 36)
-        player:setCharVar('Ru-Hmet-TP', 0)
-    elseif (csid > 149 and csid < 184) or csid == 102 or csid == 103 or csid == 101 then
-        player:setCharVar('Ru-Hmet-TP', 0)
     end
+
+    player:setLocalVar('TeleportAntiTrigger', 0)
 end
 
 return zoneObject

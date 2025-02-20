@@ -29,17 +29,8 @@ entity.onTimeTrigger = function(npc, triggerID)
     xi.transport.dockMessage(npc, triggerID, messages, 'selbina')
 end
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
-    xi.transport.onDockTimekeeperTrigger(player, xi.transport.routes.SELBINA_MHAURA, 231)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
+    xi.transport.onDockTimekeeperTrigger(player, npc)
 end
 
 return entity

@@ -31,5 +31,7 @@ set(LUA_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_zone.h
     ${CMAKE_CURRENT_SOURCE_DIR}/luautils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/luautils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/sol_bindings.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/sol_bindings.h
     PARENT_SCOPE
 )

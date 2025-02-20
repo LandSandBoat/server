@@ -35,7 +35,7 @@ public:
     void AddMember(CCharEntity* PChar);
     bool DelMember(CCharEntity* PChar);
 
-    void PushPacket(uint32 senderID, CBasicPacket* packet);
+    void PushPacket(uint32 senderID, const std::unique_ptr<CBasicPacket>& packet);
 
     std::vector<CCharEntity*> members;
 

@@ -58,6 +58,7 @@ public:
     void         TapDeclaimTime();
     virtual bool Cast(uint16 targid, SpellID spellid) override;
     void         SetFollowTarget(CBaseEntity* PTarget, FollowType followType);
+    bool         HasFollowTarget();
     void         ClearFollowTarget();
 
     void OnCastStopped(CMagicState& state, action_t& action);
@@ -104,7 +105,7 @@ private:
     time_point m_NeutralTime;
     time_point m_WaitTime;
     time_point m_mobHealTime;
-    FollowType m_followType;
+    FollowType m_followType = FollowType::None;
 
     bool       m_firstSpell{ true };
     time_point m_LastRoamScript{ time_point::min() };

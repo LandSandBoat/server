@@ -26,9 +26,6 @@ local trustMemory = function(player)
     return memories
 end
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local trustSandoria = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
     local trustBastok   = player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
@@ -77,9 +74,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     --TRUST
     if csid == 435 then
@@ -90,7 +84,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delKeyItem(xi.ki.GREEN_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.GREEN_INSTITUTE_CARD)
         npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.TRUST_WINDURST, {
-            ki = xi.ki.WINDURST_TRUST_PERMIT,
+            keyItem = xi.ki.WINDURST_TRUST_PERMIT,
             title = xi.title.THE_TRUSTWORTHY,
             var = 'WindurstFirstTrust' })
         player:messageSpecial(ID.text.CALL_MULTIPLE_ALTER_EGO)
@@ -100,7 +94,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delKeyItem(xi.ki.GREEN_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.GREEN_INSTITUTE_CARD)
         npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.TRUST_WINDURST, {
-            ki = xi.ki.WINDURST_TRUST_PERMIT })
+            keyItem = xi.ki.WINDURST_TRUST_PERMIT })
     end
 end
 

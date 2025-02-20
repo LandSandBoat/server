@@ -340,6 +340,14 @@ end
 function Terminate()
 end
 
+---@param target CBaseEntity
+---@param table table
+---@param offset number
+---@param degrees number
+---@return nil
+function DrawIn(target, table, offset, degrees)
+end
+
 ---@nodiscard
 ---@param mobid integer
 ---@return integer

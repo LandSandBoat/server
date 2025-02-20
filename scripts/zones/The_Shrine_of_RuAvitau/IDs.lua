@@ -16,17 +16,17 @@ zones[xi.zone.THE_SHRINE_OF_RUAVITAU] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023,  -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET        = 7064,  -- You can't fish here.
-        CONQUEST_BASE                 = 7164,  -- Tallying conquest results...
-        SMALL_HOLE_HERE               = 7351,  -- There is a small hole here. It appears to be damp inside...
-        KIRIN_OFFSET                  = 7362,  -- I am Kirin, master of the Shijin. The one who stands above all. You, who have risen above your mortal status to contend with the gods... It is time to reap your reward.
-        REGIME_REGISTERED             = 10354, -- New training regime registered!
-        PLAYER_OBTAINS_ITEM           = 11406, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 11407, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 11408, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 11409, -- You already possess that temporary item.
-        NO_COMBINATION                = 11414, -- You were unable to enter a combination.
-        HOMEPOINT_SET                 = 11440, -- Home point set!
+        FISHING_MESSAGE_OFFSET        = 7067,  -- You can't fish here.
+        CONQUEST_BASE                 = 7167,  -- Tallying conquest results...
+        SMALL_HOLE_HERE               = 7354,  -- There is a small hole here. It appears to be damp inside...
+        KIRIN_OFFSET                  = 7365,  -- I am Kirin, master of the Shijin. The one who stands above all. You, who have risen above your mortal status to contend with the gods... It is time to reap your reward.
+        REGIME_REGISTERED             = 10357, -- New training regime registered!
+        PLAYER_OBTAINS_ITEM           = 11409, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 11410, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 11411, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 11412, -- You already possess that temporary item.
+        NO_COMBINATION                = 11417, -- You were unable to enter a combination.
+        HOMEPOINT_SET                 = 11443, -- Home point set!
     },
     mob =
     {
@@ -38,6 +38,7 @@ zones[xi.zone.THE_SHRINE_OF_RUAVITAU] =
     npc =
     {
         OLLAS_QM        = GetFirstID('qm1'),
+        KIRIN_QM        = GetFirstID('qm2'),
         DOOR_OFFSET     = GetFirstID('_4y0'),
         MONOLITH_OFFSET = GetFirstID('Monolith'),
     },

@@ -37,11 +37,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     if
         mob:getFamily() == 313 and
-        bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) == 0 and
+        bit.band(mob:getBehavior(), xi.behavior.NO_TURN) == 0 and
         mob:getAnimationSub() == 1
     then
         -- re-enable no turn if third head is dead (Tinnin), else it's re-enabled after the upcoming Pyric Blast
-        mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+        mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
     end
 
     return dmg

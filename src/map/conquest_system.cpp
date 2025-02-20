@@ -475,7 +475,7 @@ namespace conquest
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_End, influence, owner, ranking, isConquestAlliance);
                 PZone->ForEachChar([](CCharEntity* PChar)
                 {
-                    PChar->pushPacket(new CConquestPacket(PChar));
+                    PChar->pushPacket<CConquestPacket>(PChar);
                     PChar->PLatentEffectContainer->CheckLatentsZone();
                 });
             }

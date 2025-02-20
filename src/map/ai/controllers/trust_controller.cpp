@@ -32,7 +32,6 @@
 #include "items/item_weapon.h"
 #include "mob_modifier.h"
 #include "mob_spell_container.h"
-#include "packets/char.h"
 #include "player_controller.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
@@ -40,7 +39,7 @@
 
 namespace
 {
-    enum TRUST_MOVEMENT_TYPE
+    enum TRUST_MOVEMENT_TYPE : int8
     {
         // NOTE: If you need to add special movement types, add descending into the minus values.
         //     : All of the positive values are taken for the ranged movement range.
@@ -140,7 +139,7 @@ void CTrustController::DoCombatTick(time_point tick)
 
     if (PTarget)
     {
-        if (POwner->PAI->CanFollowPath() && POwner->speed > 0)
+        if (POwner->PAI->CanFollowPath() && POwner->GetSpeed() > 0)
         {
             float currentDistanceToTarget = distance(POwner->loc.p, PTarget->loc.p);
             float currentDistanceToMaster = distance(POwner->loc.p, PMaster->loc.p);
@@ -171,7 +170,7 @@ void CTrustController::DoCombatTick(time_point tick)
                 case TRUST_MOVEMENT_TYPE::MELEE:
                 {
                     std::unique_ptr<CBasicPacket> err;
-                    if (!POwner->CanAttack(PTarget, err) && POwner->speed > 0)
+                    if (!POwner->CanAttack(PTarget, err) && POwner->GetSpeed() > 0)
                     {
                         if (currentDistanceToTarget > RoamDistance)
                         {
@@ -212,7 +211,7 @@ void CTrustController::DoCombatTick(time_point tick)
 
         m_GambitsContainer->Tick(tick);
 
-        POwner->PAI->EventHandler.triggerListener("COMBAT_TICK", CLuaBaseEntity(POwner), CLuaBaseEntity(POwner->PMaster), CLuaBaseEntity(PTarget));
+        POwner->PAI->EventHandler.triggerListener("COMBAT_TICK", POwner, POwner->PMaster, PTarget);
     }
 }
 
@@ -237,7 +236,7 @@ void CTrustController::DoRoamTick(time_point tick)
             [[fallthrough]];
         default: // Something invalid set
         {
-            // Default retail behaviour: Master engages a monster and executes a melee swing
+            // Default retail behavior: Master engages a monster and executes a melee swing
             trustEngageCondition = PMaster->GetBattleTarget() && masterMeleeSwing;
             break;
         }

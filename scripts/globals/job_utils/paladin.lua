@@ -202,7 +202,7 @@ xi.job_utils.paladin.useShieldBash = function(player, target, ability)
     -- Calculate stun proc chance
     chance = chance + (player:getMainLvl() - target:getMainLvl()) * 5
 
-    if math.random() * 100 < chance then
+    if math.random(1, 100) <= chance then
         target:addStatusEffect(xi.effect.STUN, 1, 0, 6)
     end
 

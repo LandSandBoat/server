@@ -80,43 +80,43 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
     ref<uint8>(0x9C)  = 0x01;
 
     // Overview Map Data [0xA0 - 0xA3]
-    packBitsBE(data + 0xA0, besieged::GetAstralCandescence(), 0, 2);
-    packBitsBE(data + 0xA0, besieged::GetAlZahbiOrders(), 2, 2);
+    packBitsBE(buffer_.data() + 0xA0, besieged::GetAstralCandescence(), 0, 2);
+    packBitsBE(buffer_.data() + 0xA0, besieged::GetAlZahbiOrders(), 2, 2);
 
-    packBitsBE(data + 0xA0, besieged::GetMamookLevel(), 4, 4);
-    packBitsBE(data + 0xA1, besieged::GetHalvungLevel(), 0, 4);
-    packBitsBE(data + 0xA1, besieged::GetArrapagoLevel(), 4, 4);
+    packBitsBE(buffer_.data() + 0xA0, besieged::GetMamookLevel(), 4, 4);
+    packBitsBE(buffer_.data() + 0xA1, besieged::GetHalvungLevel(), 0, 4);
+    packBitsBE(buffer_.data() + 0xA1, besieged::GetArrapagoLevel(), 4, 4);
 
-    packBitsBE(data + 0xA2, besieged::GetMamookOrders(), 0, 3);
-    packBitsBE(data + 0xA2, besieged::GetHalvungOrders(), 3, 3);
-    packBitsBE(data + 0xA2, besieged::GetArrapagoOrders(), 6, 3);
-    packBitsBE(data + 0xA2, 1, 9, 1); // TODO: Unknown constant
+    packBitsBE(buffer_.data() + 0xA2, besieged::GetMamookOrders(), 0, 3);
+    packBitsBE(buffer_.data() + 0xA2, besieged::GetHalvungOrders(), 3, 3);
+    packBitsBE(buffer_.data() + 0xA2, besieged::GetArrapagoOrders(), 6, 3);
+    packBitsBE(buffer_.data() + 0xA2, 1, 9, 1); // TODO: Unknown constant
 
     // Mamook Stronghold - Mamool Ja Data
-    packBitsBE(data + 0xA4, besieged::GetMamookOrders(), 0, 3);
-    packBitsBE(data + 0xA4, besieged::GetMamookForces(), 3, 8);
-    packBitsBE(data + 0xA4, besieged::GetMamookLevel(), 11, 4);
-    packBitsBE(data + 0xA4, besieged::GetMamookMirrorDestroyed(), 15, 1);
-    packBitsBE(data + 0xA6, (besieged::GetMamookMirrors() / 2), 0, 4);
-    packBitsBE(data + 0xA6, besieged::GetMamookPrisoners(), 4, 4);
+    packBitsBE(buffer_.data() + 0xA4, besieged::GetMamookOrders(), 0, 3);
+    packBitsBE(buffer_.data() + 0xA4, besieged::GetMamookForces(), 3, 8);
+    packBitsBE(buffer_.data() + 0xA4, besieged::GetMamookLevel(), 11, 4);
+    packBitsBE(buffer_.data() + 0xA4, besieged::GetMamookMirrorDestroyed(), 15, 1);
+    packBitsBE(buffer_.data() + 0xA6, (besieged::GetMamookMirrors() / 2), 0, 4);
+    packBitsBE(buffer_.data() + 0xA6, besieged::GetMamookPrisoners(), 4, 4);
     ref<uint8>(0xA7) = 0x00; // Mamook
 
     // Halvung Stronghold - Trolls Data
-    packBitsBE(data + 0xA8, besieged::GetHalvungOrders(), 0, 3);
-    packBitsBE(data + 0xA8, besieged::GetHalvungForces(), 3, 8);
-    packBitsBE(data + 0xA8, besieged::GetHalvungLevel(), 11, 4);
-    packBitsBE(data + 0xA8, besieged::GetHalvungMirrorDestroyed(), 15, 1);
-    packBitsBE(data + 0xAA, (besieged::GetHalvungMirrors() / 2), 0, 4);
-    packBitsBE(data + 0xAA, besieged::GetHalvungPrisoners(), 4, 4);
+    packBitsBE(buffer_.data() + 0xA8, besieged::GetHalvungOrders(), 0, 3);
+    packBitsBE(buffer_.data() + 0xA8, besieged::GetHalvungForces(), 3, 8);
+    packBitsBE(buffer_.data() + 0xA8, besieged::GetHalvungLevel(), 11, 4);
+    packBitsBE(buffer_.data() + 0xA8, besieged::GetHalvungMirrorDestroyed(), 15, 1);
+    packBitsBE(buffer_.data() + 0xAA, (besieged::GetHalvungMirrors() / 2), 0, 4);
+    packBitsBE(buffer_.data() + 0xAA, besieged::GetHalvungPrisoners(), 4, 4);
     ref<uint8>(0xAB) = 0x00; // Halvung
 
     // Arrapago Stronghold - Undead Data
-    packBitsBE(data + 0xAC, besieged::GetArrapagoOrders(), 0, 3);
-    packBitsBE(data + 0xAC, besieged::GetArrapagoForces(), 3, 8);
-    packBitsBE(data + 0xAC, besieged::GetArrapagoLevel(), 11, 4);
-    packBitsBE(data + 0xAC, besieged::GetArrapagoMirrorDestroyed(), 15, 1);
-    packBitsBE(data + 0xAE, (besieged::GetArrapagoMirrors() / 2), 0, 4);
-    packBitsBE(data + 0xAE, besieged::GetArrapagoPrisoners(), 4, 4);
+    packBitsBE(buffer_.data() + 0xAC, besieged::GetArrapagoOrders(), 0, 3);
+    packBitsBE(buffer_.data() + 0xAC, besieged::GetArrapagoForces(), 3, 8);
+    packBitsBE(buffer_.data() + 0xAC, besieged::GetArrapagoLevel(), 11, 4);
+    packBitsBE(buffer_.data() + 0xAC, besieged::GetArrapagoMirrorDestroyed(), 15, 1);
+    packBitsBE(buffer_.data() + 0xAE, (besieged::GetArrapagoMirrors() / 2), 0, 4);
+    packBitsBE(buffer_.data() + 0xAE, besieged::GetArrapagoPrisoners(), 4, 4);
     ref<uint8>(0xAF) = 0x00; // Arrapago
 
     ref<uint32>(0xB0) = charutils::GetPoints(PChar, "imperial_standing");

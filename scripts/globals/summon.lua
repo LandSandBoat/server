@@ -242,7 +242,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         end
 
         -- apply ftp bonus
-        if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
+        if tpeffect == xi.mobskills.physicalTpBonus.DMG_VARIES then
             finaldmg = finaldmg * avatarFTP(avatar:getTP(), mtp100, mtp200, mtp300)
         end
     end
@@ -286,7 +286,7 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
         skill:setMsg(xi.msg.basic.DAMAGE)
     end
 
-    -- Handle shadows depending on shadow behaviour / skilltype
+    -- Handle shadows depending on shadow behavior / skilltype
     dmg = utils.takeShadows(target, dmg, shadowbehav)
 
     -- handle Third Eye using shadowbehav as a guide

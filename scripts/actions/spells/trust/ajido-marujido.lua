@@ -21,17 +21,13 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.SEMIH_LAFIHNA] = xi.trust.messageOffset.TEAMWORK_5,
     })
 
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.MB_AVAILABLE, 0,
-                        ai.r.MA, ai.s.MB_ELEMENT, xi.magic.spellFamily.NONE)
+    mob:addGambit(ai.t.TARGET, { ai.c.MB_AVAILABLE, 0 }, { ai.r.MA, ai.s.MB_ELEMENT, xi.magic.spellFamily.NONE })
 
-    mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 25,
-                        ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE)
+    mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 25 }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE })
 
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, xi.effect.SLOW,
-                        ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.SLOW, 60)
+    mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.SLOW }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.SLOW }, 60)
 
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0,
-                        ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.NONE, 60)
+    mob:addGambit(ai.t.TARGET, { ai.c.NOT_SC_AVAILABLE, 0 }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.NONE }, 60)
 
     mob:setMobMod(xi.mobMod.TRUST_DISTANCE, xi.trust.movementType.NO_MOVE)
 end

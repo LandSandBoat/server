@@ -41,6 +41,6 @@ void CPartyEffectsPacket::AddMemberEffects(CBattleEntity* PMember)
     ref<uint32>(members * 0x30 + 0x04) = PMember->id;
     ref<uint16>(members * 0x30 + 0x08) = PMember->targid;
     ref<uint64>(members * 0x30 + 0x0C) = PMember->StatusEffectContainer->m_Flags;
-    memcpy(data + (members * 0x30 + 0x14), PMember->StatusEffectContainer->m_StatusIcons, 32);
+    std::memcpy(buffer_.data() + (members * 0x30 + 0x14), PMember->StatusEffectContainer->m_StatusIcons, 32);
     ++members;
 }

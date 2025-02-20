@@ -7,6 +7,7 @@ local ID = zones[xi.zone.BIBIKI_BAY]
 ---@type TNpcEntity
 local entity = {}
 
+-- TODO: Use xi.item enum for data, subtables for each row
 -- clammingItems = item id, weight, drop rate, improved drop rate
 local clammingItems =
 {
@@ -62,17 +63,14 @@ end
 
 local function giveReducedIncidents(player)
     if player:getMod(xi.mod.CLAMMING_REDUCED_INCIDENTS) > 0 then
-        return 0.05
+        return 5
     end
 
-    return 0.1
-end
-
-entity.onTrade = function(player, npc, trade)
+    return 10
 end
 
 entity.onTrigger = function(player, npc)
-    -- be noisy to try to get server admins to notice...
+    -- be noisy to try to get server admins to notice
     if npc:getLocalVar('firstClammingPoint') == 0 then
         print('ERROR: Clamming_Point not found!')
         return
@@ -109,7 +107,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 
         if
             player:getCharVar('ClammingKitSize') == 200 and
-            math.random() <= giveReducedIncidents(player)
+            math.random(1, 100) <= giveReducedIncidents(player)
         then
             player:setLocalVar('SomethingJumpedInBucket', 1)
             -- SE seems to add 10000 to the previous weight if Alraune had stolen your stuff.
@@ -120,7 +118,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 
             player:incrementCharVar('ClammingKitWeight', 10000)
         else
-            local dropRate = math.random()
+            local dropRate = math.random() -- TODO: Adjust all values to use 0..100 scale as opposed to 0..1
             local improvedResults = giveImprovedResults(player)
 
             player:updateEvent(player:getCharVar('ClammingKitWeight'), player:getCharVar('ClammingKitSize'))

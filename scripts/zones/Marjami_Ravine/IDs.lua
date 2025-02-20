@@ -18,24 +18,26 @@ zones[xi.zone.MARJAMI_RAVINE] =
         BAYLD_OBTAINED                = 7007, -- You have obtained <number> bayld!
         YOU_HAVE_LEARNED              = 7015, -- You have learned <keyitem>!
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        WAYPOINT_ATTUNED              = 7701, -- Your <keyitem> has been attuned to a geomagnetic fount[/ at the frontier station/ at Frontier Bivouac #1/ at Frontier Bivouac #2/ at Frontier Bivouac #3/ at Frontier Bivouac #4]!
-        EXPENDED_KINETIC_UNITS        = 7712, -- You have expended <number> kinetic unit[/s] and will be transported to another locale.
-        INSUFFICIENT_UNITS            = 7713, -- Your stock of kinetic units is insufficient.
-        REACHED_KINETIC_UNIT_LIMIT    = 7714, -- You have reached your limit of kinetic units and cannot charge your artifact any further.
-        CANNOT_RECEIVE_KINETIC        = 7715, -- There is no response. You apparently cannot receive kinetic units from this item.
-        ARTIFACT_HAS_BEEN_CHARGED     = 7716, -- Your artifact has been charged with <number> kinetic unit[/s]. Your current stock of kinetic units totals <number>.
-        ARTIFACT_TERMINAL_VOLUME      = 7717, -- Your artifact has been charged to its terminal volume of kinetic units.
-        SURPLUS_LOST_TO_AETHER        = 7718, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
-        LEATHER_SCRAPS_STREWN         = 7740, -- Leather scraps are strewn about the ground.
-        HOMEPOINT_SET                 = 7883, -- Home point set!
-        LEARNS_SPELL                  = 8184, -- <name> learns <spell>!
-        UNCANNY_SENSATION             = 8186, -- You are assaulted by an uncanny sensation.
+        WAYPOINT_ATTUNED              = 7704, -- Your <keyitem> has been attuned to a geomagnetic fount[/ at the frontier station/ at Frontier Bivouac #1/ at Frontier Bivouac #2/ at Frontier Bivouac #3/ at Frontier Bivouac #4]!
+        EXPENDED_KINETIC_UNITS        = 7715, -- You have expended <number> kinetic unit[/s] and will be transported to another locale.
+        INSUFFICIENT_UNITS            = 7716, -- Your stock of kinetic units is insufficient.
+        REACHED_KINETIC_UNIT_LIMIT    = 7717, -- You have reached your limit of kinetic units and cannot charge your artifact any further.
+        CANNOT_RECEIVE_KINETIC        = 7718, -- There is no response. You apparently cannot receive kinetic units from this item.
+        ARTIFACT_HAS_BEEN_CHARGED     = 7719, -- Your artifact has been charged with <number> kinetic unit[/s]. Your current stock of kinetic units totals <number>.
+        ARTIFACT_TERMINAL_VOLUME      = 7720, -- Your artifact has been charged to its terminal volume of kinetic units.
+        SURPLUS_LOST_TO_AETHER        = 7721, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
+        LEATHER_SCRAPS_STREWN         = 7743, -- Leather scraps are strewn about the ground.
+        HOMEPOINT_SET                 = 7886, -- Home point set!
+        LEARNS_SPELL                  = 8187, -- <name> learns <spell>!
+        UNCANNY_SENSATION             = 8189, -- You are assaulted by an uncanny sensation.
     },
     mob =
     {
+        REIVE_MOB_OFFSET = GetFirstID('Monolithic_Boulder'),
     },
     npc =
     {
+        REIVE_COLLISION_OFFSET = GetFirstID('_7e0'),
     },
 }
 

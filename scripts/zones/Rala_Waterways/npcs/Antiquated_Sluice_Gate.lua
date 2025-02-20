@@ -6,9 +6,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     -- player:startEvent(5511, 0, 8)
     if not xi.instance.onTrigger(player, npc, xi.zone.RALA_WATERWAYS_U) then

@@ -2,11 +2,12 @@
 -- Area: Meriphataud Mountains (119)
 --   NM: Waraxe Beak
 -----------------------------------
+mixins = { require('scripts/mixins/draw_in') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
 end
 

@@ -24,11 +24,11 @@
 #include "common/socket.h"
 #include "common/vana_time.h"
 
-#include "utils/fishingcontest.h"
+#include "fishingcontest.h"
 
 #include <cstring>
 
-CFishRankingPacket::CFishRankingPacket(std::vector<FishingContestEntry> entries, int8 language, int32 timestamp, int32 msgOffset, uint32 totalEntries, uint8 msgChunk)
+CFishRankingPacket::CFishRankingPacket(const std::vector<FishingContestEntry>& entries, int8 language, int32 timestamp, int32 msgOffset, uint32 totalEntries, uint8 msgChunk)
 {
     this->setType(0x4D);
     this->setSize(0x28);
@@ -64,7 +64,7 @@ CFishRankingPacket::CFishRankingPacket(std::vector<FishingContestEntry> entries,
         {
             if (offset + blockSize <= 0xFF)
             {
-                std::memcpy(data + offset, entry.name, static_cast<uint8>(sizeof(entry.name)));
+                std::memcpy(buffer_.data() + offset, entry.name, static_cast<uint8>(sizeof(entry.name)));
                 ref<uint8>(offset + 0x10)  = entry.mjob;
                 ref<uint8>(offset + 0x11)  = entry.sjob;
                 ref<uint8>(offset + 0x12)  = entry.mlvl;

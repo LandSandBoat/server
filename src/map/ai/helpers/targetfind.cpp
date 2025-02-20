@@ -46,6 +46,7 @@ CTargetFind::CTargetFind(CBattleEntity* PBattleEntity)
 , m_zone(0)
 , m_findType{}
 , m_findFlags(0)
+, m_targetFlags(0)
 , m_conal(false)
 , m_scalar(0.0f)
 , m_APoint(nullptr)
@@ -234,9 +235,8 @@ void CTargetFind::addAllInMobList(CBattleEntity* PTarget, bool withPet)
     CCharEntity* PChar = dynamic_cast<CCharEntity*>(findMaster(m_PBattleEntity));
     if (PChar)
     {
-        for (SpawnIDList_t::const_iterator it = PChar->SpawnMOBList.begin(); it != PChar->SpawnMOBList.end(); ++it)
+        FOR_EACH_PAIR_CAST_SECOND(CMobEntity*, PBattleTarget, PChar->SpawnMOBList)
         {
-            CBattleEntity* PBattleTarget = dynamic_cast<CBattleEntity*>(it->second);
             if (PBattleTarget && isMobOwner(PBattleTarget))
             {
                 addEntity(PBattleTarget, withPet);
@@ -310,12 +310,10 @@ void CTargetFind::addAllInEnmityList()
 {
     if (m_PBattleEntity->objtype == TYPE_MOB)
     {
-        CMobEntity*   mob        = (CMobEntity*)m_PBattleEntity;
-        EnmityList_t* enmityList = mob->PEnmityContainer->GetEnmityList();
+        CMobEntity* PMob = static_cast<CMobEntity*>(m_PBattleEntity);
 
-        for (auto& it : *enmityList)
+        for (const auto& [_, PEnmityObject] : *PMob->PEnmityContainer->GetEnmityList())
         {
-            EnmityObject_t& PEnmityObject = it.second;
             if (PEnmityObject.PEnmityOwner)
             {
                 addEntity(PEnmityObject.PEnmityOwner, false);
@@ -334,11 +332,10 @@ void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, ALLEGIANCE
         if (PTarget->objtype == TYPE_PC)
         {
             CCharEntity* PChar = static_cast<CCharEntity*>(PTarget);
-            for (const auto& list : { PChar->SpawnPCList, PChar->SpawnPETList })
+            for (auto& spawnList : { PChar->SpawnPCList, PChar->SpawnPETList })
             {
-                for (const auto& pair : list)
+                FOR_EACH_PAIR_CAST_SECOND(CBattleEntity*, PBattleEntity, spawnList)
                 {
-                    CBattleEntity* PBattleEntity = static_cast<CBattleEntity*>(pair.second);
                     if (PBattleEntity && isWithinArea(&(PBattleEntity->loc.p)) && !PBattleEntity->isDead() &&
                         PBattleEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
                     {

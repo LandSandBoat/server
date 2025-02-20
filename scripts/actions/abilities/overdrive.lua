@@ -9,21 +9,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    local pet = player:getPet()
-    if not pet then
-        return xi.msg.basic.REQUIRES_A_PET, 0
-    elseif not pet:isAutomaton() then
-        return xi.msg.basic.NO_EFFECT_ON_PET, 0
-    else
-        ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
-        return 0, 0
-    end
+    return xi.job_utils.puppetmaster.onAbilityCheckOverdrive(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.OVERDRIVE, 0, 0, 60)
-
-    return xi.effect.OVERDRIVE
+    return xi.job_utils.puppetmaster.onAbilityUseOverdrive(player, target, ability)
 end
 
 return abilityObject

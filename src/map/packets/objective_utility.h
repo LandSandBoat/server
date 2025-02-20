@@ -19,6 +19,7 @@ class CObjectiveUtilityPacket : public CBasicPacket
 {
 public:
     CObjectiveUtilityPacket();
+    CObjectiveUtilityPacket(uint32 duration, uint32 warning = 0);
 
     void addCountdown(uint32 duration, uint32 warning = 0);
     void addBars(std::vector<std::pair<std::string, uint32>>&& bars);
@@ -27,4 +28,4 @@ public:
     void addHelpText(uint16 title, uint16 description);
 };
 
-#endif
+#endif // _COBJECTIVEUTILITYPACKET_H

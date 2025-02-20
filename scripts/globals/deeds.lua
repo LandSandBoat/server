@@ -38,57 +38,57 @@ local validatorRewards =
 
     [  5] = { itemId    = xi.item.COPPER_AMAN_VOUCHER,            qty = 14 },
     [  6] = { itemId    = xi.item.MOOGLES_LARGESSE,               qty =  1 },
-    [  7] = { keyItemId = xi.ki.DEED_VOUCHER                                },
+    [  7] = { keyItemId = xi.ki.DEED_VOUCHER                               },
     [  8] = { itemId    = xi.item.PHOBOS_ORB,                     qty =  1 },
 
     [  9] = { itemId    = xi.item.MOGRATUITY,                     qty =  1 },
     [ 10] = { itemId    = xi.item.SPECIAL_GOBBIEDIAL_KEY,         qty =  5 },
-    [ 11] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_1_FEET                    },
+    [ 11] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_1_FEET                   },
     [ 12] = { itemId    = xi.item.DEIMOS_ORB,                     qty =  1 },
 
     [ 13] = { itemId    = xi.item.POUCH_OF_MOOGLE_MOOLAH,         qty =  1 },
     [ 14] = { itemId    = xi.item.SPECIAL_GOBBIEDIAL_KEY,         qty =  5 },
-    [ 15] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_1_HANDS                   },
+    [ 15] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_1_HANDS                  },
     [ 16] = { itemId    = xi.item.ZELOS_ORB,                      qty =  1 },
 
     [ 17] = { itemId    = xi.item.MOG_KUPON_W_PULSE,              qty =  1 },
     [ 18] = { itemId    = xi.item.SPECIAL_GOBBIEDIAL_KEY,         qty =  5 },
-    [ 19] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_1_HEAD                    },
+    [ 19] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_1_HEAD                   },
     [ 20] = { itemId    = xi.item.BIA_ORB,                        qty =  1 },
 
     [ 21] = { itemId    = xi.item.MOGGIE_GOODIE_BAG,              qty =  1 },
     [ 22] = { itemId    = xi.item.SPECIAL_GOBBIEDIAL_KEY,         qty =  5 },
-    [ 23] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_1_LEGS                    },
+    [ 23] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_1_LEGS                   },
     [ 24] = { itemId    = xi.item.MICROCOSMIC_ORB,                qty =  1 },
 
     [ 25] = { itemId    = xi.item.GOBBIE_GOODIE_BAG,              qty =  1 },
     [ 26] = { itemId    = xi.item.DIAL_KEY_ANV,                   qty =  5 },
-    [ 27] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_1_CHEST                   },
+    [ 27] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_1_CHEST                  },
     [ 28] = { itemId    = xi.item.MACROCOSMIC_ORB,                qty =  1 },
 
     [ 29] = { itemId    = xi.item.AMBUSCADE_VOUCHER_WEAPON,       qty =  1 },
     [ 30] = { itemId    = xi.item.DIAL_KEY_ANV,                   qty =  5 },
-    [ 31] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_2_FEET                    },
+    [ 31] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_2_FEET                   },
     [ 32] = { itemId    = xi.item.MARS_ORB,                       qty =  1 },
 
     [ 33] = { itemId    = xi.item.WYRMKING_MASQUE,                qty =  1 },
     [ 34] = { itemId    = xi.item.DIAL_KEY_ANV,                   qty =  5 },
-    [ 35] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_2_HANDS                   },
+    [ 35] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_2_HANDS                  },
     [ 36] = { itemId    = xi.item.MARS_ORB,                       qty =  1 },
 
     [ 37] = { itemId    = xi.item.WYRMKING_SUIT,                  qty =  1 },
     [ 38] = { itemId    = xi.item.DIAL_KEY_ANV,                   qty =  5 },
-    [ 39] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_2_HEAD                    },
+    [ 39] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_2_HEAD                   },
     [ 40] = { itemId    = xi.item.MARS_ORB,                       qty =  1 },
 
     [ 41] = { itemId    = xi.item.AKITU_SHIRT,                    qty =  1 },
     [ 42] = { itemId    = xi.item.DIAL_KEY_ANV,                   qty =  5 },
-    [ 43] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_2_LEGS                    },
+    [ 43] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_2_LEGS                   },
     [ 44] = { itemId    = xi.item.VENUS_ORB,                      qty =  1 },
 
     [ 45] = { itemId    = xi.item.CRUSTACEAN_SHIRT,               qty =  1 },
     [ 46] = { itemId    = xi.item.DIAL_KEY_ANV,                   qty =  5 },
-    [ 47] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_2_CHEST                   },
+    [ 47] = { keyItemId = xi.ki.DEED_VOUCHER_PLUS_2_CHEST                  },
     [ 48] = { itemId    = xi.item.CIPHER_OF_MONBERAUXS_ALTER_EGO, qty =  1 },
 
     [ 49] = { itemId    = xi.item.COPPER_AMAN_VOUCHER,            qty = 10 },
@@ -98,58 +98,58 @@ local validatorRewards =
 
     [ 53] = { itemId    = xi.item.ABDHALJS_SEAL,                  qty =  5 },
     [ 54] = { itemId    = xi.item.SPECIAL_GOBBIEDIAL_KEY,         qty =  5 },
-    [ 55] = { keyItemId = xi.ki.DEED_TOKEN                                  },
+    [ 55] = { keyItemId = xi.ki.DEED_TOKEN                                 },
     [ 56] = { itemId    = xi.item.PHOBOS_ORB,                     qty =  1 },
 
     [ 57] = { itemId    = xi.item.DECANTER_INGRID,                qty =  1 },
     [ 58] = { itemId    = xi.item.SPECIAL_GOBBIEDIAL_KEY,         qty =  5 },
-    [ 59] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_1_FEET                      },
+    [ 59] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_1_FEET                     },
     [ 60] = { itemId    = xi.item.DEIMOS_ORB,                     qty =  1 },
 
     [ 61] = { itemId    = xi.item.DECANTER_DARRCUILN,             qty =  1 },
     [ 62] = { itemId    = xi.item.SPECIAL_GOBBIEDIAL_KEY,         qty =  5 },
-    [ 63] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_1_HANDS                     },
+    [ 63] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_1_HANDS                    },
     [ 64] = { itemId    = xi.item.ZELOS_ORB,                      qty =  1 },
 
     [ 65] = { itemId    = xi.item.DECANTER_ARCIELA,               qty =  1 },
     [ 66] = { itemId    = xi.item.SPECIAL_GOBBIEDIAL_KEY,         qty =  5 },
-    [ 67] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_1_HEAD                      },
+    [ 67] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_1_HEAD                     },
     [ 68] = { itemId    = xi.item.BIA_ORB,                        qty =  1 },
 
     [ 69] = { itemId    = xi.item.DIAL_KEY_AB,                    qty =  5 },
     [ 70] = { itemId    = xi.item.MICROCOSMIC_ORB,                qty =  1 },
-    [ 71] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_1_LEGS                      },
-    [ 72] = { keyItemId = xi.ki.PRIMER_ON_MARTIAL_TECHNIQUES                },
+    [ 71] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_1_LEGS                     },
+    [ 72] = { keyItemId = xi.ki.PRIMER_ON_MARTIAL_TECHNIQUES               },
 
     [ 73] = { itemId    = xi.item.DECANTER_MORIMAR,               qty =  1 },
     [ 74] = { itemId    = xi.item.DIAL_KEY_ANV,                   qty =  5 },
-    [ 75] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_1_CHEST                     },
+    [ 75] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_1_CHEST                    },
     [ 76] = { itemId    = xi.item.MACROCOSMIC_ORB,                qty =  1 },
 
     [ 77] = { itemId    = xi.item.DECANTER_ROSULATIA,             qty =  1 },
     [ 78] = { itemId    = xi.item.DIAL_KEY_ANV,                   qty =  5 },
-    [ 79] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_2_FEET                      },
+    [ 79] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_2_FEET                     },
     [ 80] = { itemId    = xi.item.MARS_ORB,                       qty =  1 },
 
     [ 81] = { itemId    = xi.item.DECANTER_TEODOR,                qty =  1 },
     [ 82] = { itemId    = xi.item.DIAL_KEY_ANV,                   qty =  5 },
-    [ 83] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_2_HANDS                     },
+    [ 83] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_2_HANDS                    },
     [ 84] = { itemId    = xi.item.MARS_ORB,                       qty =  1 },
 
     [ 85] = { itemId    = xi.item.DECANTER_SAJJAKA,               qty =  1 },
     [ 86] = { itemId    = xi.item.DIAL_KEY_ANV,                   qty =  5 },
-    [ 87] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_2_HEAD                      },
+    [ 87] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_2_HEAD                     },
     [ 88] = { itemId    = xi.item.MARS_ORB,                       qty =  1 },
 
     [ 89] = { itemId    = xi.item.DECANTER_ARCIELA_II,            qty =  1 },
     [ 90] = { itemId    = xi.item.DIAL_KEY_ANV,                   qty =  5 },
-    [ 91] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_2_LEGS                      },
+    [ 91] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_2_LEGS                     },
     [ 92] = { itemId    = xi.item.VENUS_ORB,                      qty =  1 },
 
     [ 93] = { itemId    = xi.item.DECANTER_AUGUST,                qty =  1 },
     [ 94] = { itemId    = xi.item.DIAL_KEY_ANV,                   qty =  5 },
-    [ 95] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_2_CHEST                     },
-    [ 96] = { keyItemId = xi.ki.TREATISE_ON_MARTIAL_TECHNIQUES              },
+    [ 95] = { keyItemId = xi.ki.DEED_TOKEN_PLUS_2_CHEST                    },
+    [ 96] = { keyItemId = xi.ki.TREATISE_ON_MARTIAL_TECHNIQUES             },
 
     [ 97] = { itemId    = xi.item.COPPER_AMAN_VOUCHER,            qty =  3 },
     [ 98] = { itemId    = xi.item.ABDHALJS_SEAL,                  qty =  1 },
@@ -270,7 +270,7 @@ local voucherData =
         [2] =
         {
             xi.item.THEOPHANY_CAP,
-            xi.item.THEOPHANY_BRIAULT,
+            xi.item.THEOPHANY_BLIAUT,
             xi.item.THEOPHANY_MITTS,
             xi.item.THEOPHANY_PANTALOONS,
             xi.item.THEOPHANY_DUCKBILLS,
@@ -499,7 +499,7 @@ local voucherData =
     {
         [ 0] = { xi.item.PUMMELERS_LORICA_P1    },
         [ 1] = { xi.item.ANCHORITES_CYCLAS_P1   },
-        [ 2] = { xi.item.THEOPHANY_BRIAULT_P1   },
+        [ 2] = { xi.item.THEOPHANY_BLIAUT_P1    },
         [ 3] = { xi.item.SPAEKONAS_COAT_P1      },
         [ 4] = { xi.item.ATROPHY_TABARD_P1      },
         [ 5] = { xi.item.PILLAGERS_VEST_P1      },
@@ -664,7 +664,7 @@ local voucherData =
     {
         [ 0] = { xi.item.PUMMELERS_LORICA_P2    },
         [ 1] = { xi.item.ANCHORITES_CYCLAS_P2   },
-        [ 2] = { xi.item.THEOPHANY_BRIAULT_P2   },
+        [ 2] = { xi.item.THEOPHANY_BLIAUT_P2    },
         [ 3] = { xi.item.SPAEKONAS_COAT_P2      },
         [ 4] = { xi.item.ATROPHY_TABARD_P2      },
         [ 5] = { xi.item.PILLAGERS_VEST_P2      },
@@ -815,7 +815,7 @@ local voucherData =
         [2] =
         {
             xi.item.PIETY_CAP,
-            xi.item.PIETY_BRIAULT,
+            xi.item.PIETY_BLIAUT,
             xi.item.PIETY_MITTS,
             xi.item.PIETY_PANTALOONS,
             xi.item.PIETY_DUCKBILLS,
@@ -1023,7 +1023,7 @@ local voucherData =
     {
         [ 0] = { xi.item.AGOGE_LORICA_P1        },
         [ 1] = { xi.item.HESYCHASTS_CYCLAS_P1   },
-        [ 2] = { xi.item.PIETY_BRIAULT_P1       },
+        [ 2] = { xi.item.PIETY_BLIAUT_P1        },
         [ 3] = { xi.item.ARCHMAGES_COAT_P1      },
         [ 4] = { xi.item.VITIATION_TABARD_P1    },
         [ 5] = { xi.item.PLUNDERERS_VEST_P1     },
@@ -1153,7 +1153,7 @@ local voucherData =
     {
         [ 0] = { xi.item.AGOGE_LORICA_P2        },
         [ 1] = { xi.item.HESYCHASTS_CYCLAS_P2   },
-        [ 2] = { xi.item.PIETY_BRIAULT_P2       },
+        [ 2] = { xi.item.PIETY_BLIAUT_P2        },
         [ 3] = { xi.item.ARCHMAGES_COAT_P2      },
         [ 4] = { xi.item.VITIATION_TABARD_P2    },
         [ 5] = { xi.item.PLUNDERERS_VEST_P2     },

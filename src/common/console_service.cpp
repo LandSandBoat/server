@@ -21,6 +21,7 @@
 
 #include "console_service.h"
 
+#include "database.h"
 #include "lua.h"
 
 #include <sstream>
@@ -44,7 +45,7 @@ bool stdinHasData()
     // this works by harnessing Windows' black magic:
     return _kbhit();
 #else
-    struct pollfd pollFileDescriptor = { STDIN_FILENO, POLLIN, 0 };
+    pollfd pollFileDescriptor = { STDIN_FILENO, POLLIN, 0 };
 
     // poll the stdin file descriptor until it tells us it's ready
     // poll returns a 0 if STDIN isn't ready, or a 1 if it is.
@@ -82,9 +83,9 @@ bool getLine(std::string& line)
         return false;
     }
 
-    fmt::print("{:c}", keyCharacter); // echo character back to console, apparently using ReadConsoleInput & GetStdHandle prevents echo?
     if (std::isprint(keyCharacter))
     {
+        fmt::print("{:c}", keyCharacter); // echo character back to console, apparently using ReadConsoleInput & GetStdHandle prevents echo?
         line += keyCharacter;
     }
 
@@ -147,6 +148,64 @@ ConsoleService::ConsoleService()
     [](std::vector<std::string>& inputs)
     {
         crash();
+    });
+
+    RegisterCommand("db", "Run both a query and a prepared statement to test the database connection",
+    [](std::vector<std::string>& inputs)
+    {
+        auto query = "SELECT 1";
+        auto rset = db::queryStr(query);
+        if (rset && rset->rowsCount())
+        {
+            fmt::print("> Query successful: {}\n", query);
+        }
+
+        auto preparedQuery = "SELECT 1";
+        auto preparedRset = db::preparedStmt(preparedQuery);
+        if (preparedRset && preparedRset->rowsCount())
+        {
+            fmt::print("> Prepared statement successful: {}\n", preparedQuery);
+        }
+    });
+
+    RegisterCommand("db_perf_test", "",
+    [](std::vector<std::string>& inputs)
+    {
+        {
+            const auto start = hires_clock::now();
+            for (int i = 0; i < 100; i++) // number of queries
+            {
+                for (int j = 0; j < 10; j++) // charids
+                {
+                    auto rset = db::query("SELECT * FROM chars WHERE charid = %u", j);
+                    if (rset && rset->rowsCount() && rset->next())
+                    {
+                        std::ignore = rset->get<uint32>(0);
+                    }
+                }
+            }
+            const auto end = hires_clock::now();
+            const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+            fmt::print("> db_perf_test queries took {}ms\n", duration);
+        }
+
+        {
+            const auto start = hires_clock::now();
+            for (int i = 0; i < 100; i++) // number of queries
+            {
+                for (int j = 0; j < 10; j++) // charids
+                {
+                    auto rset = db::preparedStmt("SELECT * FROM chars WHERE charid = ?", j);
+                    if (rset && rset->rowsCount() && rset->next())
+                    {
+                        std::ignore = rset->get<uint32>(0);
+                    }
+                }
+            }
+            const auto end = hires_clock::now();
+            const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+            fmt::print("> db_perf_test prepared statements took {}ms\n", duration);
+        }
     });
 
     bool attached = isatty(0);

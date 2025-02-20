@@ -7,15 +7,12 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local theKindCardian = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(34) -- Base Standard CS & dialog
-    elseif player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE) ~= xi.questStatus.QUEST_COMPLETED then
+    elseif player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOKS_PRIDE) ~= xi.questStatus.QUEST_COMPLETED then
         local rand = math.random(1, 2)
         if rand == 1 then
             player:startEvent(75) -- During Panta and Naruru Quests
@@ -33,9 +30,6 @@ entity.onTrigger = function(player, npc)
     elseif theKindCardian == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(67) -- New standard dialog after "The kind cardian"
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

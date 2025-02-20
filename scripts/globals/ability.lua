@@ -4,7 +4,7 @@
 xi = xi or {}
 xi.ability = xi.ability or {}
 
-xi.ability.adjustDamage = function(dmg, mob, skill, target, skilltype, skillparam, shadowbehav) -- seems to only be used for Wyvern breaths and chi blast
+xi.ability.adjustDamage = function(dmg, attacker, skill, target, skilltype, skillparam, shadowbehav) -- seems to only be used for Wyvern breaths and chi blast
     -- physical attack missed, skip rest
     local msg = skill:getMsg()
     if
@@ -30,7 +30,7 @@ xi.ability.adjustDamage = function(dmg, mob, skill, target, skilltype, skillpara
     -- this is for AoE because its only set once
     skill:setMsg(xi.msg.basic.USES_JA_TAKE_DAMAGE)
 
-    -- Handle shadows depending on shadow behaviour / skilltype
+    -- Handle shadows depending on shadow behavior / skilltype
     if
         shadowbehav ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and
         shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS
@@ -89,7 +89,7 @@ xi.ability.adjustDamage = function(dmg, mob, skill, target, skilltype, skillpara
 
     if dmg > 0 then
         target:wakeUp()
-        target:updateEnmityFromDamage(mob, dmg)
+        target:updateEnmityFromDamage(attacker, dmg)
     end
 
     return dmg

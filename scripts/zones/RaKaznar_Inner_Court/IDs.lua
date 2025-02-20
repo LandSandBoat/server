@@ -15,13 +15,15 @@ zones[xi.zone.RAKAZNAR_INNER_COURT] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        HOMEPOINT_SET                 = 7697, -- Home point set!
+        HOMEPOINT_SET                 = 7700, -- Home point set!
     },
     mob =
     {
+        REIVE_MOB_OFFSET = GetFirstID('Heliotrope_Barrier'),
     },
     npc =
     {
+        REIVE_COLLISION_OFFSET = GetFirstID('_7o0'),
     },
 }
 

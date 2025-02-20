@@ -6,7 +6,8 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 15)
 end
 
 return entity

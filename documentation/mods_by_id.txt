@@ -328,7 +328,7 @@
     JUMP_ATT_BONUS               = 362, // ATT% bonus for jump + high jump
     HIGH_JUMP_ENMITY_REDUCTION   = 363, // for gear that reduces more enmity from high jump
     REWARD_HP_BONUS              = 364, // Percent to add to reward HP healed. (364)
-    SNAP_SHOT                    = 365, // Percent reduction to range attack delay
+    SNAPSHOT                     = 365, // Percent reduction to range attack delay
     MAIN_DMG_RATING              = 366, // adds damage rating to main hand weapon (maneater/blau dolch etc hidden effects)
     SUB_DMG_RATING               = 367, // adds damage rating to off hand weapon
     REGAIN                       = 368, // auto regain TP (from items) | this is multiplied by 10 e.g. 20 is 2% TP
@@ -486,7 +486,7 @@
     TRICK_ATK_AGI                = 520, // % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
     AUGMENTS_ABSORB              = 521, // Direct Absorb spell increase while Liberator is equipped (percentage based)
     NIN_NUKE_BONUS               = 522, // magic attack bonus for NIN nukes
-    AMMO_SWING                   = 523, // Extra swing rate w/ ammo (ie. Jailer weapons). Use gearsets, and does nothing for non-players.
+    AMMO_SWING                   = 523, // Follow-up swing rate w/ virtue stone ammo (Jailer weapons). Does nothing for non-players.
     AOE_NA                       = 524, // Set to 1 to make -na spells/erase always AoE w/ Divine Veil
     AUGMENTS_CONVERT             = 525, // Convert HP to MP Ratio Multiplier. Value = MP multiplier rate.
     AUGMENTS_SA                  = 526, // Adds Critical Attack Bonus to Sneak Attack, percentage based.
@@ -536,8 +536,8 @@
     WEAPONSKILL_DAMAGE_BASE      = 570,
 
     // IDs from 571 to 825 are not listed but are used. More info below.
-
-    AMMO_SWING_TYPE              = 826, // For the handedness of the weapon - 1h (1) vs. 2h/h2h (2). h2h can safely use the same function as 2h.
+    // SPARE ID 826
+    
     BARSPELL_MDEF_BONUS          = 827, // Extra magic defense bonus granted to the bar- spell effect
     FORCE_JUMP_CRIT              = 828, // Critical hit rate bonus for jump and high jump
     WYVERN_EFFECTIVE_BREATH      = 829, // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness

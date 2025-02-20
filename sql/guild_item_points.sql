@@ -298,8 +298,8 @@ INSERT INTO `guild_item_points` VALUES (2,16646,0,86,4560,7); -- Bronze Axe +1 (
 -- Blacksmithing / Recruit
 INSERT INTO `guild_item_points` VALUES (2,12816,1,358,8640,0); -- Scale Cuisses (358 / 8640)
 INSERT INTO `guild_item_points` VALUES (2,12863,1,410,8640,0); -- Solid Cuisses (410 / 8640)
-INSERT INTO `guild_item_points` VALUES (2,12816,1,217,7200,1); -- Scale Greaves (217 / 7200)
-INSERT INTO `guild_item_points` VALUES (2,12863,1,269,7200,1); -- Solid Greaves (269 / 7200)
+INSERT INTO `guild_item_points` VALUES (2,12944,1,217,7200,1); -- Scale Greaves (217 / 7200)
+INSERT INTO `guild_item_points` VALUES (2,13024,1,269,7200,1); -- Solid Greaves (269 / 7200)
 INSERT INTO `guild_item_points` VALUES (2,12299,1,189,6960,2); -- Aspis (189 / 6960)
 INSERT INTO `guild_item_points` VALUES (2,12325,1,233,6960,2); -- Aspis +1 (233 / 6960)
 INSERT INTO `guild_item_points` VALUES (2,17042,1,85,5520,3); -- Bronze Hammer (85 / 5520)

@@ -23,79 +23,61 @@ local garlaigeID = zones[xi.zone.GARLAIGE_CITADEL]
 
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE)
 
--- Key Item removals
-local function cleanKIMold(player)
-    player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB1)
-    player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB2)
-    player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB3)
-end
+local keyItemTable =
+{
+    [xi.zone.CRAWLERS_NEST         ] = { xi.item.CLUMP_OF_EXORAY_MOLD,     crawlersID.text.COMBINE_INTO_A_CLUMP,     crawlersID.text.ITEM_CANNOT_BE_OBTAINED, xi.ki.EXORAY_MOLD_CRUMB1,     xi.ki.EXORAY_MOLD_CRUMB2,     xi.ki.EXORAY_MOLD_CRUMB3     },
+    [xi.zone.GARLAIGE_CITADEL      ] = { xi.item.CHUNK_OF_BOMB_COAL,       garlaigeID.text.COMBINE_INTO_A_CHUNK,     garlaigeID.text.ITEM_CANNOT_BE_OBTAINED, xi.ki.BOMB_COAL_FRAGMENT1,    xi.ki.BOMB_COAL_FRAGMENT2,    xi.ki.BOMB_COAL_FRAGMENT3    },
+    [xi.zone.THE_ELDIEME_NECROPOLIS] = { xi.item.PIECE_OF_ANCIENT_PAPYRUS, eldiemeID.text.PUT_TOGUETHER_TO_COMPLETE, eldiemeID.text.ITEM_CANNOT_BE_OBTAINED,  xi.ki.ANCIENT_PAPYRUS_SHRED1, xi.ki.ANCIENT_PAPYRUS_SHRED2, xi.ki.ANCIENT_PAPYRUS_SHRED3 },
+}
 
-local function cleanKICoal(player)
-    player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT1)
-    player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT2)
-    player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT3)
-end
-
-local function cleanKIPapyrus(player)
-    player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1)
-    player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2)
-    player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
+-- Key Item removals. Needs to be called separately by the quest cleanup.
+local function cleanKeyItemSet(player, zoneId)
+    player:delKeyItem(keyItemTable[zoneId][4])
+    player:delKeyItem(keyItemTable[zoneId][5])
+    player:delKeyItem(keyItemTable[zoneId][6])
 end
 
 -- NOTE: This is handled in such an unconventional manner just so the text appears in the same order as in retail.
-local function handleExorayMold(player)
-    if
-        player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB1) and
-        player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB2) and
-        player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB3)
-    then
-        if player:getFreeSlotsCount() > 0 then
-            cleanKIMold(player)
-            player:messageSpecial(crawlersID.text.COMBINE_INTO_A_CLUMP, xi.ki.EXORAY_MOLD_CRUMB1)
-            npcUtil.giveItem(player, xi.item.CLUMP_OF_EXORAY_MOLD)
-        else
-            player:messageSpecial(crawlersID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.CLUMP_OF_EXORAY_MOLD)
-        end
+local function handleQMTrigger(player, zoneId, rewardKI)
+    -- Era setting.
+    if xi.settings.main.OLDSCHOOL_G1 then
+        return
     end
-end
 
-local function handleBombCoal(player)
+    local itemId = keyItemTable[zoneId][1]
+
+    -- Give KI.
     if
-        player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT1) and
-        player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT2) and
-        player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT3)
+        not player:hasItem(itemId) and  -- KI wont be given if we already possess the regular item.
+        not player:hasKeyItem(rewardKI) -- KI wont be given if we already possess the key item.
     then
-        if player:getFreeSlotsCount() > 0 then
-            cleanKICoal(player)
-            player:messageSpecial(garlaigeID.text.COMBINE_INTO_A_CHUNK, xi.ki.BOMB_COAL_FRAGMENT1)
-            npcUtil.giveItem(player, xi.item.CHUNK_OF_BOMB_COAL)
-        else
-            player:messageSpecial(garlaigeID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.CHUNK_OF_BOMB_COAL)
-        end
+        npcUtil.giveKeyItem(player, rewardKI)
     end
-end
 
-local function handleAncientPapyrus(player)
+    -- Handle KI set fusion.
     if
-        player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1) and
-        player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2) and
-        player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
+        player:hasKeyItem(keyItemTable[zoneId][4]) and
+        player:hasKeyItem(keyItemTable[zoneId][5]) and
+        player:hasKeyItem(keyItemTable[zoneId][6])
     then
-        if player:getFreeSlotsCount() > 0 then
-            cleanKIPapyrus(player)
-            player:messageSpecial(eldiemeID.text.PUT_TOGUETHER_TO_COMPLETE, xi.ki.ANCIENT_PAPYRUS_SHRED1)
-            npcUtil.giveItem(player, xi.item.PIECE_OF_ANCIENT_PAPYRUS)
+        if
+            not player:hasItem(itemId) and
+            player:getFreeSlotsCount() > 0
+        then
+            cleanKeyItemSet(player, zoneId)
+            player:messageSpecial(keyItemTable[zoneId][2], rewardKI)
+            npcUtil.giveItem(player, itemId)
         else
-            player:messageSpecial(eldiemeID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.PIECE_OF_ANCIENT_PAPYRUS)
+            player:messageSpecial(keyItemTable[zoneId][3], itemId)
         end
     end
 end
 
 quest.reward =
 {
-    fame = 30,
+    fame     = 30,
     fameArea = xi.fameArea.JEUNO,
-    title = xi.title.HORIZON_BREAKER,
+    title    = xi.title.HORIZON_BREAKER,
 }
 
 quest.sections =
@@ -154,13 +136,13 @@ quest.sections =
             {
                 [81] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        cleanKIMold(player)
-                        cleanKICoal(player)
-                        cleanKIPapyrus(player)
+                        -- Remove all remaining/lingering KIs
+                        cleanKeyItemSet(player, xi.zone.CRAWLERS_NEST)
+                        cleanKeyItemSet(player, xi.zone.GARLAIGE_CITADEL)
+                        cleanKeyItemSet(player, xi.zone.THE_ELDIEME_NECROPOLIS)
+                        -- Finish
                         player:confirmTrade()
                         player:setLevelCap(55)
-                        -- Leaving this here for historic purposes. Unneeded. The event now returns this message on its own.
-                        -- player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_55)
                     end
                 end,
             },
@@ -171,42 +153,21 @@ quest.sections =
             ['qm10'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        not player:hasItem(xi.item.CLUMP_OF_EXORAY_MOLD) and
-                        not player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB1) and
-                        not xi.settings.main.OLDSCHOOL_G1
-                    then
-                        npcUtil.giveKeyItem(player, xi.ki.EXORAY_MOLD_CRUMB1)
-                        handleExorayMold(player)
-                    end
+                    handleQMTrigger(player, xi.zone.CRAWLERS_NEST, xi.ki.EXORAY_MOLD_CRUMB1)
                 end,
             },
 
             ['qm11'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        not player:hasItem(xi.item.CLUMP_OF_EXORAY_MOLD) and
-                        not player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB2) and
-                        not xi.settings.main.OLDSCHOOL_G1
-                    then
-                        npcUtil.giveKeyItem(player, xi.ki.EXORAY_MOLD_CRUMB2)
-                        handleExorayMold(player)
-                    end
+                    handleQMTrigger(player, xi.zone.CRAWLERS_NEST, xi.ki.EXORAY_MOLD_CRUMB2)
                 end,
             },
 
             ['qm12'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        not player:hasItem(xi.item.CLUMP_OF_EXORAY_MOLD) and
-                        not player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB3) and
-                        not xi.settings.main.OLDSCHOOL_G1
-                    then
-                        npcUtil.giveKeyItem(player, xi.ki.EXORAY_MOLD_CRUMB3)
-                        handleExorayMold(player)
-                    end
+                    handleQMTrigger(player, xi.zone.CRAWLERS_NEST, xi.ki.EXORAY_MOLD_CRUMB3)
                 end,
             },
         },
@@ -216,42 +177,21 @@ quest.sections =
             ['qm18'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        not player:hasItem(xi.item.CHUNK_OF_BOMB_COAL) and
-                        not player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT1) and
-                        not xi.settings.main.OLDSCHOOL_G1
-                    then
-                        npcUtil.giveKeyItem(player, xi.ki.BOMB_COAL_FRAGMENT1)
-                        handleBombCoal(player)
-                    end
+                    handleQMTrigger(player, xi.zone.GARLAIGE_CITADEL, xi.ki.BOMB_COAL_FRAGMENT1)
                 end,
             },
 
             ['qm19'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        not player:hasItem(xi.item.CHUNK_OF_BOMB_COAL) and
-                        not player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT2) and
-                        not xi.settings.main.OLDSCHOOL_G1
-                    then
-                        npcUtil.giveKeyItem(player, xi.ki.BOMB_COAL_FRAGMENT2)
-                        handleBombCoal(player)
-                    end
+                    handleQMTrigger(player, xi.zone.GARLAIGE_CITADEL, xi.ki.BOMB_COAL_FRAGMENT2)
                 end,
             },
 
             ['qm20'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        not player:hasItem(xi.item.CHUNK_OF_BOMB_COAL) and
-                        not player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT3) and
-                        not xi.settings.main.OLDSCHOOL_G1
-                    then
-                        npcUtil.giveKeyItem(player, xi.ki.BOMB_COAL_FRAGMENT3)
-                        handleBombCoal(player)
-                    end
+                    handleQMTrigger(player, xi.zone.GARLAIGE_CITADEL, xi.ki.BOMB_COAL_FRAGMENT3)
                 end,
             },
         },
@@ -261,42 +201,21 @@ quest.sections =
             ['qm7'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        not player:hasItem(xi.item.PIECE_OF_ANCIENT_PAPYRUS) and
-                        not player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1) and
-                        not xi.settings.main.OLDSCHOOL_G1
-                    then
-                        npcUtil.giveKeyItem(player, xi.ki.ANCIENT_PAPYRUS_SHRED1)
-                        handleAncientPapyrus(player)
-                    end
+                    handleQMTrigger(player, xi.zone.THE_ELDIEME_NECROPOLIS, xi.ki.ANCIENT_PAPYRUS_SHRED1)
                 end,
             },
 
             ['qm8'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        not player:hasItem(xi.item.PIECE_OF_ANCIENT_PAPYRUS) and
-                        not player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2) and
-                        not xi.settings.main.OLDSCHOOL_G1
-                    then
-                        npcUtil.giveKeyItem(player, xi.ki.ANCIENT_PAPYRUS_SHRED2)
-                        handleAncientPapyrus(player)
-                    end
+                    handleQMTrigger(player, xi.zone.THE_ELDIEME_NECROPOLIS, xi.ki.ANCIENT_PAPYRUS_SHRED2)
                 end,
             },
 
             ['qm9'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        not player:hasItem(xi.item.PIECE_OF_ANCIENT_PAPYRUS) and
-                        not player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3) and
-                        not xi.settings.main.OLDSCHOOL_G1
-                    then
-                        npcUtil.giveKeyItem(player, xi.ki.ANCIENT_PAPYRUS_SHRED3)
-                        handleAncientPapyrus(player)
-                    end
+                    handleQMTrigger(player, xi.zone.THE_ELDIEME_NECROPOLIS, xi.ki.ANCIENT_PAPYRUS_SHRED3)
                 end,
             },
         },

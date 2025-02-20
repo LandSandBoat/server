@@ -19,14 +19,15 @@
 ===========================================================================
 */
 
-#ifndef _UTILS_H_
-#define _UTILS_H_
+#pragma once
+
 #define _USE_MATH_DEFINES
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 #include "common/mutex_guarded.h"
 #include "common/stdext.h"
+#include "common/xirand.h"
 
 #include <filesystem>
 #include <iostream>
@@ -40,15 +41,29 @@ constexpr size_t SignatureStringLength = 16; // encoded signature string size //
 constexpr size_t LinkshellStringLength = 20; // encoded linkshell string size // 19 characters + null terminator
 
 int32 checksum(uint8* buf, uint32 buflen, char checkhash[16]);
-int   config_switch(const char* str);
 bool  bin2hex(char* output, unsigned char* input, size_t count);
 
-float           distance(const position_t& A, const position_t& B, bool ignoreVertical = false);                     // distance between positions. Use only horizontal plane (x and z) if ignoreVertical is set.
-float           distanceSquared(const position_t& A, const position_t& B, bool ignoreVertical = false);              // squared distance between positions (use squared unless otherwise needed)
-bool            distanceWithin(const position_t& A, const position_t& B, float within, bool ignoreVertical = false); // returns true if the distance between the points is <= within.
-constexpr float square(float distance)                                                                               // constexpr square (used with distanceSquared)
+constexpr float square(auto distance) // constexpr square (used with distanceSquared)
 {
     return distance * distance;
+}
+
+inline float distanceSquared(const position_t& A, const position_t& B, bool ignoreVertical = false)
+{
+    float dX = A.x - B.x;
+    float dY = ignoreVertical ? 0 : A.y - B.y;
+    float dZ = A.z - B.z;
+    return dX * dX + dY * dY + dZ * dZ;
+}
+
+inline float distance(const position_t& A, const position_t& B, bool ignoreVertical = false)
+{
+    return std::sqrt(distanceSquared(A, B, ignoreVertical));
+}
+
+inline bool isWithinDistance(const position_t& A, const position_t& B, float within, bool ignoreVertical = false)
+{
+    return distanceSquared(A, B, ignoreVertical) <= square(within);
 }
 
 int32      intpow32(int32 base, int32 exponent); // Exponential power of integers
@@ -124,15 +139,35 @@ std::set<std::filesystem::path> sorted_directory_iterator(std::string path_name)
 namespace utils
 {
     auto openFile(std::string const& path, std::string const& mode) -> std::unique_ptr<FILE>;
+
+    enum class ASCIIMode
+    {
+        IncludeSpace,
+        ExcludeSpace,
+    };
+
+    auto isPrintableASCII(unsigned char ch, ASCIIMode mode) -> bool;
+    auto isStringPrintable(const std::string& str, ASCIIMode mode) -> bool;
     auto toASCII(std::string const& target, unsigned char replacement = '\0') -> std::string;
+
+    template <typename T>
+    auto getRandomSampleString(T min, T max) -> std::string
+    {
+        std::vector<T> randomNumbers;
+        for (int i = 0; i < 10; i++)
+        {
+            randomNumbers.push_back(xirand::GetRandomNumber(min, max));
+        }
+        return fmt::format("{}", fmt::join(randomNumbers, " "));
+    }
 } // namespace utils
 
 // clang-format off
 static mutex_guarded<std::unordered_map<std::string, time_point>> lastExecutionTimes;
 #define RATE_LIMIT(duration, code)                                                    \
 {                                                                                     \
-    auto        currentTime = server_clock::now();                                    \
-    std::string key         = std::string(__FILE__) + ":" + std::to_string(__LINE__); \
+    const auto currentTime = server_clock::now();                                     \
+    const auto key         = std::string(__FILE__) + ":" + std::to_string(__LINE__);  \
     lastExecutionTimes.write([&](auto& lastExecutionTimes)                            \
     {                                                                                 \
         if (lastExecutionTimes.find(key) == lastExecutionTimes.end() ||               \
@@ -140,11 +175,9 @@ static mutex_guarded<std::unordered_map<std::string, time_point>> lastExecutionT
         {                                                                             \
             lastExecutionTimes[key] = currentTime;                                    \
             {                                                                         \
-                code;                                                                  \
+                code;                                                                 \
             }                                                                         \
         }                                                                             \
     });                                                                               \
 }
 // clang-format on
-
-#endif

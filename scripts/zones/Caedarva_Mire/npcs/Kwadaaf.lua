@@ -4,6 +4,8 @@
 -- Type: Entry to Alzadaal Undersea Ruins
 -- !pos -639.000 12.323 -260.000 79
 -----------------------------------
+local ID = zones[xi.zone.CAEDARVA_MIRE]
+-----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -19,13 +21,15 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:getXPos() < -639 then
-        player:startEvent(222)
+        if player:hasKeyItem(xi.ki.CAPTAIN_WILDCAT_BADGE) then
+            player:messageSpecial(ID.text.YOU_HAVE_A_BADGE, xi.ki.CAPTAIN_WILDCAT_BADGE)
+            player:startEvent(223)
+        else
+            player:startEvent(222)
+        end
     else
         player:startEvent(224)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

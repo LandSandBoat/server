@@ -58,6 +58,7 @@ public:
     uint16 getVE();
     void   setVE(uint16 ve);
     void   setRange(float range);
+    void   setPostActionCleanupEffect(EFFECT effectToCleanup);
 
     bool operator==(const CLuaAbility& other) const
     {

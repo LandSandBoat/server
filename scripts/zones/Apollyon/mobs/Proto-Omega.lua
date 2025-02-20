@@ -51,10 +51,10 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.COUNTER, 10)
     mob:setMod(xi.mod.REGAIN, 50)
     mob:setMod(xi.mod.REGEN, 25)
-    mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+    mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
     -- base speed of 60 is based on retail capture and applies to all forms
     -- also has standard boost (2.5x) up to 150 when target is out of range
-    mob:setSpeed(60)
+    mob:setBaseSpeed(60)
     quadrupedForm(mob)
 end
 

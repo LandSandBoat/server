@@ -7,14 +7,11 @@ local ID = zones[xi.zone.KUFTAL_TUNNEL]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.GUIVRE)
-    GetMobByID(ID.mob.GUIVRE):setRespawnTime(math.random(900, 10800))
-
     xi.treasure.initZone(zone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

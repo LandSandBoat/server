@@ -137,7 +137,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == xi.questStaus.QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =

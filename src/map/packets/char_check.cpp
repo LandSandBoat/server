@@ -75,7 +75,7 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
                 ref<uint16>(size * 2 + 0x0C) = ((CItemEquipment*)PItem)->getAugment(3);
             }
             // 12 characters? seems a bit short. // TODO: research.
-            memcpy(data + (size * 2 + 0x10), PItem->getSignature().c_str(), std::clamp<size_t>(PItem->getSignature().size(), 0, 12));
+            std::memcpy(buffer_.data() + (size * 2 + 0x10), PItem->getSignature().c_str(), std::clamp<size_t>(PItem->getSignature().size(), 0, 12));
 
             this->setSize(size * 2 + 0x1C);
             count++;
@@ -84,10 +84,10 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
             {
                 ref<uint8>(0x0B) = count;
 
-                PChar->pushPacket(new CBasicPacket(*this));
+                PChar->pushPacket(this->copy());
 
                 this->setSize(0x0C);
-                memset(data + (0x0B), 0, PACKET_SIZE - 11);
+                std::memset(buffer_.data() + 0x0B, 0, PACKET_SIZE - 11);
             }
         }
     }
@@ -95,16 +95,16 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
     if (count == 0)
     {
         this->setSize(0x28);
-        PChar->pushPacket(new CBasicPacket(*this));
+        PChar->pushPacket(this->copy());
     }
     else if (count != 8)
     {
         ref<uint8>(0x0B) = (count > 8 ? count - 8 : count);
-        PChar->pushPacket(new CBasicPacket(*this));
+        PChar->pushPacket(this->copy());
     }
 
     this->setSize(0x54);
-    memset(data + (0x0B), 0, PACKET_SIZE - 11);
+    std::memset(buffer_.data() + 0x0B, 0, PACKET_SIZE - 11);
 
     ref<uint8>(0x0A) = 0x01;
 
@@ -114,7 +114,7 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
     {
         ref<uint16>(0x0E) = PLinkshell->getID();
         // 15 characters? seems a bit short // TODO: research.
-        memcpy(data + (0x10), PLinkshell->getSignature().c_str(), std::clamp<size_t>(PLinkshell->getSignature().size(), 0, 15));
+        std::memcpy(buffer_.data() + 0x10, PLinkshell->getSignature().c_str(), std::clamp<size_t>(PLinkshell->getSignature().size(), 0, 15));
         // ref<uint16>(0x0C) = PLinkshell->GetLSID();
         ref<uint16>(0x20) = PLinkshell->GetLSRawColor();
     }

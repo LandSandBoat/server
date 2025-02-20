@@ -27,8 +27,7 @@ entity.onTrigger = function(player, npc)
         not hasAncientFragment and
         player:getTitle() ~= xi.title.ACQUIRER_OF_ANCIENT_ARCANUM
     then
-        player:addKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ANCIENT_TABLET_FRAGMENT)
+        npcUtil.giveKeyItem(player, xi.ki.ANCIENT_TABLET_FRAGMENT)
 
         -- move the ??? to a random location
         local i = math.random(0, 100)
@@ -48,12 +47,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -19,14 +19,16 @@
 ===========================================================================
 */
 
-#ifndef _PCG64_H_
-#define _PCG64_H_
+#pragma once
 
 // https://github.com/imneme/pcg-cpp
 #include "pcg_random.hpp"
 
 #include <array>
 #include <random>
+
+// Forward declare sysrandom which is built in the xirand.h/cpp compilation unit
+extern size_t sysrandom(void* dst, size_t dstlen);
 
 class xirand
 {
@@ -41,32 +43,25 @@ public:
     {
         ShowInfo("Seeding PCG64 RNG");
 
-        std::array<uint32_t, sizeof(pcg64::state_type) / 4> seed_data; // get enough data to seed an N byte state with sets of 32 bit ints
+        std::array<pcg64::state_type, 2> seed_data;
 
-        // Certain systems were noted to have bad seeding via only std::random_device,
-        // the following indicated how we could mix in std::random_device with other seed sources
-        // https://stackoverflow.com/a/68382489
+        pcg64::state_type seed;
+
         for (auto it = seed_data.begin(); it != seed_data.end(); ++it)
         {
-            // start with a C++ equivalent of time(nullptr) - UNIX time in seconds
-            *it = std::chrono::duration_cast<std::chrono::seconds>(
-                      std::chrono::system_clock::now().time_since_epoch())
-                      .count();
+            sysrandom(&seed, sizeof(seed));
 
-            // mix with a high precision time in microseconds
-            *it ^= std::chrono::duration_cast<std::chrono::microseconds>(
-                       std::chrono::high_resolution_clock::now().time_since_epoch())
-                       .count();
-
-            // *it ^= more_external_random_stuff;
+            *it = seed;
         }
+
         std::seed_seq seq(seed_data.cbegin(), seed_data.cend());
         rng().seed(seq);
     }
 
-    /*
-        declarations for RNG methods implemented in xirand.h.
-    */
+    //
+    // Declarations for RNG methods implemented in xirand.h.
+    //
+
     template <typename T>
     static inline typename std::enable_if<std::is_integral<T>::value, T>::type GetRandomNumber(T min, T max);
 
@@ -85,5 +80,3 @@ public:
     template <typename T>
     static inline T GetRandomElement(std::initializer_list<T> list);
 };
-
-#endif // _PCG_H_

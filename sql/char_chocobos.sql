@@ -15,7 +15,7 @@ CREATE TABLE `char_chocobos` (
   `last_update_age` tinyint unsigned NOT NULL,
   `stage` tinyint unsigned NOT NULL,
   `location` tinyint unsigned NOT NULL,
-  `colour` tinyint unsigned NOT NULL,
+  `color` tinyint unsigned NOT NULL,
   `dominant_gene` tinyint unsigned NOT NULL,
   `recessive_gene` tinyint unsigned NOT NULL,
   `strength` tinyint unsigned NOT NULL,

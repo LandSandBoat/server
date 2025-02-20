@@ -26,7 +26,7 @@
 #include "entities/baseentity.h"
 #include "wide_scan_track.h"
 
-CWideScanTrackPacket::CWideScanTrackPacket(CBaseEntity* PEntity)
+CWideScanTrackPacket::CWideScanTrackPacket(const CBaseEntity* PEntity)
 {
     this->setType(0xF5);
     this->setSize(0x18);

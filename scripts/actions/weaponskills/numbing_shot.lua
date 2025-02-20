@@ -14,9 +14,9 @@
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    local params = {}
+    local params   = {}
     params.numHits = 1
-    params.ftpMod = { 3.0, 3.0, 3.0 }
+    params.ftpMod  = { 3, 3, 3 }
     params.agi_wsc = 0.6
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
@@ -25,10 +25,12 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
 
-    if damage > 0 and not target:hasStatusEffect(xi.effect.PARALYSIS) then
-        local duration = (tp / 1000 * 60) * applyResistanceAddEffect(player, target, xi.element.ICE, 0)
-        target:addStatusEffect(xi.effect.PARALYSIS, 30, 0, duration)
-    end
+    -- Handle status effect
+    local effectId      = xi.effect.PARALYSIS
+    local actionElement = xi.element.ICE
+    local power         = 30
+    local duration      = math.floor(6 * tp / 100 * applyResistanceAddEffect(player, target, actionElement, 0))
+    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage
 end

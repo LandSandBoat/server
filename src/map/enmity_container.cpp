@@ -167,9 +167,20 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
     }
 
     // Apply TH only if this was a direct action
-    if (directAction && PEntity->getMod(Mod::TREASURE_HUNTER) > m_EnmityHolder->m_THLvl)
+    if (directAction)
     {
-        m_EnmityHolder->m_THLvl = PEntity->getMod(Mod::TREASURE_HUNTER);
+        int16 THlevel = std::min<int16>(8, PEntity->getMod(Mod::TREASURE_HUNTER));
+
+        // Enforce TH8 as max for THF main and TH4 as non-THF main
+        if (PEntity->GetMJob() != JOB_THF)
+        {
+            THlevel = std::min<int16>(4, PEntity->getMod(Mod::TREASURE_HUNTER));
+        }
+
+        if (m_EnmityHolder->m_THLvl < THlevel)
+        {
+            m_EnmityHolder->m_THLvl = THlevel;
+        }
     }
 
     auto enmity_obj = m_EnmityList.find(PEntity->id);
@@ -381,17 +392,27 @@ void CEnmityContainer::SetVE(CBattleEntity* PEntity, const int32 amount)
 void CEnmityContainer::UpdateEnmityFromDamage(CBattleEntity* PEntity, int32 Damage)
 {
     TracyZoneScoped;
-    Damage          = (Damage < 1 ? 1 : Damage);
-    int16 damageMod = battleutils::GetEnmityModDamage(m_EnmityHolder->GetMLevel());
 
-    int32 CE = (int32)(80.f / damageMod * Damage);
-    int32 VE = (int32)(240.f / damageMod * Damage);
-
-    UpdateEnmity(PEntity, CE, VE);
-
-    if (m_EnmityHolder && m_EnmityHolder->m_HiPCLvl < PEntity->GetMLevel())
+    if (PEntity && m_EnmityHolder)
     {
-        m_EnmityHolder->m_HiPCLvl = PEntity->GetMLevel();
+        // Don't add enmity to yourself
+        if (m_EnmityHolder->id == PEntity->id)
+        {
+            return;
+        }
+
+        Damage          = (Damage < 1 ? 1 : Damage);
+        int16 damageMod = battleutils::GetEnmityModDamage(m_EnmityHolder->GetMLevel());
+
+        int32 CE = (int32)(80.f / damageMod * Damage);
+        int32 VE = (int32)(240.f / damageMod * Damage);
+
+        UpdateEnmity(PEntity, CE, VE);
+
+        if (m_EnmityHolder->m_HiPCLvl < PEntity->GetMLevel())
+        {
+            m_EnmityHolder->m_HiPCLvl = PEntity->GetMLevel();
+        }
     }
 }
 
@@ -489,8 +510,8 @@ bool CEnmityContainer::IsWithinEnmityRange(CBattleEntity* PEntity) const
     {
         return false;
     }
-    float maxRange = square(m_EnmityHolder->m_Type == MOBTYPE_NOTORIOUS ? 28.f : 25.f);
-    return distanceSquared(m_EnmityHolder->loc.p, PEntity->loc.p) <= maxRange;
+    float maxRange = m_EnmityHolder->m_Type == MOBTYPE_NOTORIOUS ? 28.0f : 25.0f;
+    return isWithinDistance(m_EnmityHolder->loc.p, PEntity->loc.p, maxRange);
 }
 
 EnmityList_t* CEnmityContainer::GetEnmityList()

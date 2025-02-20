@@ -9,7 +9,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    return handleThrenody(caster, target, spell, 160, 90, xi.mod.FIRE_MEVA)
+    return xi.spells.enfeebling.useEnfeeblingSong(caster, target, spell)
 end
 
 return spellObject

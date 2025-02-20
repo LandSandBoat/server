@@ -273,8 +273,8 @@ struct SAVE_CONF
     uint8_t RecruitFlg : 1;
     uint8_t unused : 2;
 
-    filters1_t MassageFilter;
-    filters2_t MassageFilter2;
+    filters1_t MessageFilter;
+    filters2_t MessageFilter2;
     uint16_t   PvpFlg;
     uint8_t    AreaCode;
 };

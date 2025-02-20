@@ -42,7 +42,7 @@ struct GPItem_t
     GPItem_t(CItem* _item, uint16 _maxpoints, uint16 _points)
     : item(_item)
     , maxpoints(_maxpoints)
-    , points(_points){};
+    , points(_points) {};
 };
 
 class CGuild

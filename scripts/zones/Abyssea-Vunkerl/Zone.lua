@@ -7,7 +7,7 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     -- NOTE: Player can make it all the way to the west ledge due to the shape of the
     -- area.  Might need to add some additional logic in the future.
-    zone:registerTriggerArea(1, -385, -55, 644, -305, -38.85, 710)
+    zone:registerCuboidTriggerArea(1, -385, -55, 644, -305, -38.85, 710)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -31,7 +31,7 @@ zoneObject.afterZoneIn = function(player)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
+    switch (triggerArea:getTriggerAreaID()): caseof
     {
         [1] = function()
             xi.abyssea.onWardTriggerAreaEnter(player)
@@ -40,7 +40,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
+    switch (triggerArea:getTriggerAreaID()): caseof
     {
         [1] = function()
             xi.abyssea.onWardTriggerAreaLeave(player)

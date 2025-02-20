@@ -25,6 +25,7 @@
 #include "common/cbasetypes.h"
 #include "luautils.h"
 #include "packets/message_standard.h"
+#include "packets/position.h"
 
 class CBaseEntity;
 class CCharEntity;
@@ -75,6 +76,7 @@ public:
     auto   getLocalVars() -> sol::table;
     uint32 getLocalVar(std::string const& var);
     void   setLocalVar(std::string const& var, uint32 val);
+    void   clearLocalVarsWithPrefix(std::string const& prefix);
     void   resetLocalVars();
     void   clearVarsWithPrefix(std::string const& prefix);
     uint32 getLastOnline(); // Returns the unix timestamp of last time the player logged out or zoned
@@ -95,7 +97,7 @@ public:
 
     void updateEvent(sol::variadic_args va);
     void updateEventString(sol::variadic_args va); // (string, string, string, string, uint32, ...)
-    auto getEventTarget() -> std::optional<CLuaBaseEntity>;
+    auto getEventTarget() -> CBaseEntity*;
     bool isInEvent();       // Returns true if the player is in an event
     void release();         // Stops event
     bool startSequence();   // Flags the player as being in a sequence
@@ -109,15 +111,17 @@ public:
     // Object Identification
     uint32 getID();
     uint16 getTargID();
-    auto   getCursorTarget() -> std::optional<CLuaBaseEntity>;
+    auto   getCursorTarget() -> CBaseEntity*;
 
-    uint8 getObjType();
-    bool  isPC();
-    bool  isNPC();
-    bool  isMob();
-    bool  isPet();
-    bool  isTrust();
-    bool  isAlly();
+    uint8 getObjType() const;
+
+    bool isPC() const;
+    bool isNPC() const;
+    bool isMob() const;
+    bool isPet() const;
+    bool isTrust() const;
+    bool isFellow() const;
+    bool isAlly() const;
 
     // AI and Control
     void  initNpcAi();
@@ -140,6 +144,7 @@ public:
     float checkDistance(sol::variadic_args va);                                    // Check Distance and returns distance number
     void  wait(sol::object const& milliseconds);                                   // make the npc wait a number of ms and then back into roam
     void  follow(CLuaBaseEntity* target, uint8 followType);                        // makes an npc follow or runaway from another target
+    bool  hasFollowTarget();                                                       // checks if the mob has a target that it is currently following (via follow function)
     void  unfollow();                                                              // makes an npc stop following
     // int32 WarpTo(lua_Stat* L);           // warp to the given point -- These don't exist, breaking them just in case someone uncomments
     // int32 RoamAround(lua_Stat* L);       // pick a random point to walk to
@@ -174,7 +179,7 @@ public:
     bool  isBehind(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you're behind the input target
     bool  isBeside(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you're to the side of the input target
 
-    auto   getZone(sol::object const& arg0) -> std::optional<CLuaZone>;
+    auto   getZone(sol::object const& arg0) -> CZone*;
     uint16 getZoneID();
     auto   getZoneName() -> std::string;
     bool   hasVisitedZone(uint16 zone);
@@ -183,9 +188,12 @@ public:
     uint8  getContinentID();
     bool   isInMogHouse();
 
-    uint32 getPlayerTriggerAreaInZone();
-    void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
+    bool isPlayerInTriggerArea(uint32 triggerAreaId);
+    void onPlayerTriggerAreaEnter(uint32 triggerAreaId);
+    void onPlayerTriggerAreaLeave(uint32 triggerAreaId);
+    void clearPlayerTriggerAreas();
 
+    void updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
     void sendEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate, uint8 entityUpdate, uint8 updateMask);
     void sendEmptyEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate);
 
@@ -200,6 +208,7 @@ public:
     uint8 getRotPos();
     void  setRotation(uint8 rotation);
 
+    void positionSpecial(std::map<std::string, float> pos, POSMODE mode);
     void setPos(sol::variadic_args va);
     void warp();
     void teleport(std::map<std::string, float> pos, sol::object const& arg1); // Set Entity position (without entity despawn/spawn packets)
@@ -220,7 +229,8 @@ public:
 
     // Items
     uint16 getEquipID(SLOTTYPE slot);
-    auto   getEquippedItem(uint8 slot) -> std::optional<CLuaItem>;
+    auto   getEquippedItem(uint8 slot) -> CItem*;
+    bool   hasEquipped(uint16 equipmentID); // Returns true if item is equipped in any slot
     bool   hasItem(uint16 itemID, sol::object const& location);
     uint32 getItemCount(uint16 itemID);
     bool   addItem(sol::variadic_args va);
@@ -228,9 +238,9 @@ public:
     bool   delContainerItems(sol::object const& containerID);
     bool   addUsedItem(uint16 itemID);
     bool   addTempItem(uint16 itemID, sol::object const& arg1);
-    uint8  getWornUses(uint16 itemID);                                                      // Check if the item is already worn
-    uint8  incrementItemWear(uint16 itemID);                                                // Increment the item's worn value and returns it
-    auto   findItem(uint16 itemID, sol::object const& location) -> std::optional<CLuaItem>; // Like hasItem, but returns the item object (nil if not found)
+    uint8  getWornUses(uint16 itemID);                                     // Check if the item is already worn
+    uint8  incrementItemWear(uint16 itemID);                               // Increment the item's worn value and returns it
+    auto   findItem(uint16 itemID, sol::object const& location) -> CItem*; // Like hasItem, but returns the item object (nil if not found)
 
     void createShop(uint8 size, sol::object const& arg1);
     void addShopItem(uint16 itemID, double rawPrice, sol::object const& arg2, sol::object const& arg3);
@@ -238,7 +248,7 @@ public:
     bool breakLinkshell(std::string const& lsname);
     bool addLinkpearl(std::string const& lsname, bool equip);
 
-    auto addSoulPlate(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>;
+    auto addSoulPlate(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp) -> CItem*;
 
     // Trading
     uint8 getContainerSize(uint8 locationID);
@@ -246,7 +256,7 @@ public:
     uint8 getFreeSlotsCount(sol::object const& locID);         // Gets value of free slots in Entity inventory
     void  confirmTrade();                                      // Complete trade with an npc, only removing confirmed items
     void  tradeComplete();                                     // Complete trade with an npc
-    auto  getTrade() -> std::optional<CLuaTradeContainer>;
+    auto  getTrade() -> CTradeContainer*;
 
     // Equipping
     bool canEquipItem(uint16 itemID, sol::object const& chkLevel);
@@ -265,13 +275,14 @@ public:
     void clearGearSetMods();
 
     // Storing
-    auto  getStorageItem(uint8 container, uint8 slotID, uint8 equipID) -> std::optional<CLuaItem>;
+    auto  getStorageItem(uint8 container, uint8 slotID, uint8 equipID) -> CItem*;
     uint8 storeWithPorterMoogle(uint16 slipId, sol::table const& extraTable, sol::table const& storableItemIdsTable);
     auto  getRetrievableItemsForSlip(uint16 slipId) -> sol::table;
     void  retrieveItemFromSlip(uint16 slipId, uint16 itemId, uint16 extraId, uint8 extraData);
 
     // Player Appearance
     uint8  getRace();
+    uint8  getFace();
     uint8  getGender();
     auto   getName() -> std::string;
     auto   getPacketName() -> std::string;
@@ -286,7 +297,7 @@ public:
     uint8  getAnimation();
     void   setAnimation(uint8 animation);
     uint8  getAnimationSub();
-    void   setAnimationSub(uint8 animationsub);
+    void   setAnimationSub(uint8 animationsub, sol::object const& sendUpdate);
     bool   getCallForHelpFlag() const;
     void   setCallForHelpFlag(bool cfh);
     bool   getCallForHelpBlocked() const;
@@ -322,7 +333,9 @@ public:
     bool canUseMisc(uint16 misc); // Check misc flags of current zone.
 
     uint8 getSpeed();
-    void  setSpeed(uint8 speedVal);
+    uint8 getBaseSpeed();
+    void  setBaseSpeed(uint8 speedVal);
+    void  setAnimationSpeed(uint8 speedVal);
 
     uint32 getPlaytime(sol::object const& shouldUpdate);
     int32  getTimeCreated();
@@ -429,6 +442,9 @@ public:
     uint16 getSpentJobPoints();
     uint8  getJobPointLevel(uint16 jpType);
     void   setJobPoints(uint16 amount);
+    void   addJobPoints(uint8 jobID, uint16 amount);
+    void   delJobPoints(uint8 jobID, uint16 amount);
+    uint16 getJobPoints(JOBTYPE jobID);
     void   setCapacityPoints(uint16 amount);
     void   masterJob();
 
@@ -479,6 +495,7 @@ public:
     int32 getBaseMP();             // Returns Entity base Mana Points (before modifiers)
     int32 addMP(int32 amount);     // Increase mp of Entity
     void  setMP(int32 value);      // Set mp of Entity to value
+    void  setMaxMP(int32 value);   // Set max mp of Entity to value
     int32 restoreMP(int32 amount); // Modify mp of Entity, but check if alive first
     int32 delMP(int32 amount);     // Decrease mp of Entity
 
@@ -528,8 +545,8 @@ public:
     auto   getPartyWithTrusts() -> sol::table;
     uint8  getPartySize(sol::object const& arg0);
     bool   hasPartyJob(uint8 job);
-    auto   getPartyMember(uint8 member, uint8 allianceparty) -> std::optional<CLuaBaseEntity>;
-    auto   getPartyLeader() -> std::optional<CLuaBaseEntity>;
+    auto   getPartyMember(uint8 member, uint8 allianceparty) -> CBaseEntity*;
+    auto   getPartyLeader() -> CBaseEntity*;
     uint32 getLeaderID();
     uint32 getPartyLastMemberJoinedTime();
     void   forMembersInRange(float range, sol::function function);
@@ -552,7 +569,7 @@ public:
     uint8 checkDifficulty(CLuaBaseEntity* PLuaBaseEntity);
 
     // Instances
-    auto getInstance() -> std::optional<CLuaInstance>;
+    auto getInstance() -> CInstance*;
     void setInstance(CLuaInstance* PLuaInstance);
     void createInstance(uint16 instanceID);
     void instanceEntry(CLuaBaseEntity* PLuaBaseEntity, uint32 response);
@@ -562,7 +579,7 @@ public:
     uint16 copyConfrontationEffect(uint16 targetID); // copy confrontation effect, param = targetEntity:getTargID()
 
     // Battlefields
-    auto  getBattlefield() -> std::optional<CLuaBattlefield>;                                                                      // returns CBattlefield* or nullptr if not available
+    auto  getBattlefield() -> CBattlefield*;                                                                                       // returns CBattlefield* or nullptr if not available
     int32 getBattlefieldID();                                                                                                      // returns entity->PBattlefield->GetID() or -1 if not available
     uint8 registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3); // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
     bool  battlefieldAtCapacity(int battlefieldID);                                                                                // returns 1 if this battlefield is full
@@ -600,8 +617,9 @@ public:
     void addListener(std::string const& eventName, std::string const& identifier, sol::function const& func);
     void removeListener(std::string const& identifier);
     void triggerListener(std::string const& eventName, sol::variadic_args args);
+    bool hasListener(std::string const& eventName);
 
-    auto getEntity(uint16 targetID) -> std::optional<CLuaBaseEntity>;
+    auto getEntity(uint16 targetID) -> CBaseEntity*;
     bool canChangeState();
 
     void wakeUp();
@@ -642,7 +660,8 @@ public:
     // Status Effects
     bool  addStatusEffect(sol::variadic_args va);
     bool  addStatusEffectEx(sol::variadic_args va);
-    auto  getStatusEffect(uint16 StatusID, sol::object const& SubType) -> std::optional<CLuaStatusEffect>;
+    auto  getStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& SourceType, sol::object const& SourceTypeParam) -> CStatusEffect*;
+    auto  getStatusEffectBySource(uint16 StatusID, EffectSourceType SourceType, uint16 SourceTypeParam) -> CStatusEffect*;
     auto  getStatusEffects() -> sol::table;
     int16 getStatusEffectElement(uint16 statusId);
     bool  canGainStatusEffect(uint16 effect, sol::object const& powerObj);
@@ -651,7 +670,7 @@ public:
     uint8 countEffect(uint16 StatusID);     // Gets the number of effects of a specific type on the entity
     uint8 countEffectWithFlag(uint32 flag); // Gets the number of effects with a flag on the entity
 
-    bool   delStatusEffect(uint16 StatusID, sol::object const& SubType);
+    bool   delStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& SourceType, sol::object const& SourceTypeParam);
     void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);
     bool   delStatusEffectSilent(uint16 StatusID); // Removes Status Effect, suppresses message
     uint16 eraseStatusEffect();
@@ -664,6 +683,7 @@ public:
     int16 getMod(uint16 modID);
     void  setMod(uint16 modID, int16 value);
     void  delMod(uint16 modID, int16 value);
+    void  printAllMods();
     int16 getMaxGearMod(Mod modId);
 
     void addLatent(uint16 condID, uint16 conditionValue, uint16 mID, int16 modValue);
@@ -735,24 +755,24 @@ public:
     void spawnPet(sol::object const& arg0);
     void despawnPet();
 
-    auto   spawnTrust(uint16 trustId) -> std::optional<CLuaBaseEntity>;
+    auto   spawnTrust(uint16 trustId) -> CBaseEntity*;
     void   clearTrusts();
     uint32 getTrustID();
     void   trustPartyMessage(uint32 message_id);
-    auto   addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry) -> std::string;
-    void   removeSimpleGambit(std::string const& id);
-    void   removeAllSimpleGambits();
+    auto   addGambit(uint16 targ, sol::table const& predicates, sol::table const& reactions, sol::object const& retry) -> std::string;
+    void   removeGambit(std::string const& id);
+    void   removeAllGambits();
     void   setTrustTPSkillSettings(uint16 trigger, uint16 select, sol::object const& value);
 
     bool hasValidJugPetItem();
 
     bool   hasPet();
     bool   hasJugPet();
-    auto   getPet() -> std::optional<CLuaBaseEntity>;
+    auto   getPet() -> CBaseEntity*;
     uint32 getPetID();
     bool   isAutomaton();
     bool   isAvatar();
-    auto   getMaster() -> std::optional<CLuaBaseEntity>;
+    auto   getMaster() -> CBaseEntity*;
     uint8  getPetElement();
     void   setPet(sol::object const& petObj);
     uint8  getMinimumPetLevel(); // Returns the minimum level of the pet, such as level 23 for Courier Carrie or 0 if non applicable.
@@ -773,13 +793,16 @@ public:
     bool  hasAttachment(uint16 itemID);
     auto  getAutomatonName() -> std::string;
     uint8 getAutomatonFrame();
+    void  setAutomatonFrame(uint8 frameItemID);
     uint8 getAutomatonHead();
+    void  setAutomatonHead(uint8 headItemID);
     bool  unlockAttachment(uint16 itemID);
     uint8 getActiveManeuverCount();
     void  removeOldestManeuver();
     void  removeAllManeuvers();
-    auto  getAttachment(uint8 slotId) -> std::optional<CLuaItem>;
+    auto  getAttachment(uint8 slotId) -> CItem*;
     auto  getAttachments() -> sol::table;
+    void  setAttachment(uint8 attachmentItemID, uint8 slotID);
     void  updateAttachments();
     void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
     bool  isExceedingElementalCapacity();
@@ -802,6 +825,7 @@ public:
     bool   isNM();
 
     uint8  getModelSize();
+    float  getMeleeRange();
     void   setMeleeRange(float range);
     void   setMobFlags(uint32 flags, sol::object const& mobId); // Used to manipulate the mob's flags, such as changing size.
     uint32 getMobFlags();
@@ -810,7 +834,7 @@ public:
 
     void   spawn(sol::object const& despawnSec, sol::object const& respawnSec);
     bool   isSpawned();
-    auto   getSpawnPos() -> std::map<std::string, float>;
+    auto   getSpawnPos() -> sol::table;
     void   setSpawn(float x, float y, float z, sol::object const& rot);
     uint32 getRespawnTime();
     void   setRespawnTime(uint32 seconds);
@@ -846,17 +870,17 @@ public:
 
     uint32 getBattleTime();
 
-    uint16 getBehaviour();
-    void   setBehaviour(uint16 behavior);
+    uint16 getBehavior();
+    void   setBehavior(uint16 behavior);
     uint8  getLink();
     void   setLink(uint8 link);
     uint16 getRoamFlags();
     void   setRoamFlags(uint16 newRoamFlags);
 
-    auto getTarget() -> std::optional<CLuaBaseEntity>;
+    auto getTarget() -> CBaseEntity*;
     void updateTarget(); // Force mob to update target from enmity container (ie after updateEnmity)
     auto getEnmityList() -> sol::table;
-    auto getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity) -> std::optional<CLuaBaseEntity>; // true if TA target is available
+    auto getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity) -> CBaseEntity*; // true if TA target is available
 
     bool actionQueueEmpty();
 
@@ -872,6 +896,7 @@ public:
     bool hasPreventActionEffect();
     void stun(uint32 milliseconds);
     void untargetableAndUnactionable(uint32 milliseconds);
+    void tryHitInterrupt(CLuaBaseEntity* attacker);
 
     uint32 getPool(); // Returns a mobs pool ID. If entity is not a mob, returns nil.
     uint32 getDropID();
@@ -882,6 +907,7 @@ public:
     uint16 getDespoilDebuff(uint16 itemID); // gets the status effect id to apply to the mob on successful despoil
     bool   itemStolen();                    // sets mob's ItemStolen var = true
     int16  getTHlevel();                    // Returns the Monster's current Treasure Hunter Tier
+    void   setTHlevel(int16 newLevel);      // Sets the Monster's current Treasure Hunter Tier
 
     uint32 getAvailableTraverserStones();
     time_t getTraverserEpoch();

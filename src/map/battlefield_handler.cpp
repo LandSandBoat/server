@@ -50,7 +50,7 @@
 
 CBattlefieldHandler::CBattlefieldHandler(CZone* PZone)
 : m_PZone(PZone)
-, m_MaxBattlefields(luautils::OnBattlefieldHandlerInitialise(PZone))
+, m_MaxBattlefields(luautils::OnBattlefieldHandlerInitialize(PZone))
 {
 }
 
@@ -163,7 +163,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
     }
 
     luautils::OnBattlefieldRegister(PChar, PBattlefield);
-    luautils::OnBattlefieldInitialise(PBattlefield);
+    luautils::OnBattlefieldInitialize(PBattlefield);
     PBattlefield->InsertEntity(PChar, true);
 
     return BATTLEFIELD_RETURN_CODE_CUTSCENE;

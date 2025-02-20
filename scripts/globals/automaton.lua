@@ -29,6 +29,7 @@ xi.automaton.abilities =
     STRING_SHREDDER = 2743,
     ARMOR_SHATTERER = 2744,
     HEAT_CAPACITOR  = 2745,
+    BARRAGE_TURBINE = 2746,
     DISRUPTOR       = 2747,
 }
 
@@ -158,6 +159,8 @@ local attachmentModifiers =
     ['turbo_charger_ii']    = { { xi.mod.HASTE_MAGIC,                 {   700,  1700,  2800,  4375 }, true  }, },
     ['vivi-valve']          = { { xi.mod.CURE_POTENCY,                {     5,    15,    30,    45 }, true  }, },
     ['vivi-valve_ii']       = { { xi.mod.CURE_POTENCY,                {    10,    20,    35,    50 }, true  }, },
+    ['volt_gun']            = { { xi.mod.ENSPELL,                     {     5,     5,     5,     5 }, false },
+                                { xi.mod.ENSPELL_CHANCE,              {     20,   35,    50,    65 }, false }, },
 }
 
 -- Auto Repair Kits and Mana Tanks use a formula based on Max HP/MP in the form of
@@ -226,8 +229,14 @@ xi.automaton.onAttachmentUnequip = function(pet, attachment)
     local modTable = attachmentModifiers[attachment:getName()]
 
     for k, modList in ipairs(modTable) do
-        pet:delMod(modList[1], modList[2][1])
+        if modList[2][1] then
+            pet:delMod(modList[1], modList[2][1])
+        else
+            pet:setMod(modList[1], 0)
+        end
     end
+
+    pet:clearLocalVarsWithPrefix(attachment:getName())
 end
 
 xi.automaton.onManeuverGain = function(pet, attachment, maneuvers)
@@ -269,6 +278,8 @@ xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
 
         if modValue ~= previousMod then
             if previousMod ~= 0 then
+                -- If the automaton was reset to a blank state (LEVEL_RESTRICTION)
+                -- and the local variables were not cleared, this will under/overflow
                 pet:delMod(modList[1], previousMod)
             end
 

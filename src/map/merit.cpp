@@ -135,8 +135,8 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
     { 4, 10, 7 }, // MCATEGORY_RUN_2       catNumber 53
 };
 
-#define GetMeritCategory(merit) (((merit) >> 6) - 1)  // get category from merit
-#define GetMeritID(merit)       (((merit)&0x3F) >> 1) // get the offset in the category from merit
+#define GetMeritCategory(merit) (((merit) >> 6) - 1)    // get category from merit
+#define GetMeritID(merit)       (((merit) & 0x3F) >> 1) // get the offset in the category from merit
 
 CMeritPoints::CMeritPoints(CCharEntity* PChar)
 {
@@ -146,7 +146,7 @@ CMeritPoints::CMeritPoints(CCharEntity* PChar)
         return;
     }
 
-    memcpy(merits, meritNameSpace::GMeritsTemplate, sizeof(merits));
+    std::memcpy(merits, meritNameSpace::GMeritsTemplate, sizeof(merits));
 
     m_PChar = PChar;
     LoadMeritPoints(PChar->id);
@@ -350,7 +350,7 @@ void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
             if (charutils::addSpell(m_PChar, PMerit->spellid))
             {
                 charutils::SaveSpell(m_PChar, PMerit->spellid);
-                m_PChar->pushPacket(new CCharSpellsPacket(m_PChar));
+                m_PChar->pushPacket<CCharSpellsPacket>(m_PChar);
             }
         }
 
@@ -359,7 +359,7 @@ void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
             charutils::addLearnedWeaponskill(m_PChar, PMerit->wsunlockid);
             charutils::BuildingCharWeaponSkills(m_PChar);
             charutils::SaveLearnedAbilities(m_PChar);
-            m_PChar->pushPacket(new CCharAbilitiesPacket(m_PChar));
+            m_PChar->pushPacket<CCharAbilitiesPacket>(m_PChar);
         }
 
         PMerit->count++;
@@ -383,7 +383,7 @@ void CMeritPoints::LowerMerit(MERIT_TYPE merit)
         if (charutils::delSpell(m_PChar, PMerit->spellid))
         {
             charutils::DeleteSpell(m_PChar, PMerit->spellid);
-            m_PChar->pushPacket(new CCharSpellsPacket(m_PChar));
+            m_PChar->pushPacket<CCharSpellsPacket>(m_PChar);
 
             // Reset traits
             charutils::BuildingCharTraitsTable(m_PChar);
@@ -395,7 +395,7 @@ void CMeritPoints::LowerMerit(MERIT_TYPE merit)
         charutils::delLearnedWeaponskill(m_PChar, PMerit->wsunlockid);
         charutils::BuildingCharWeaponSkills(m_PChar);
         charutils::SaveLearnedAbilities(m_PChar);
-        m_PChar->pushPacket(new CCharAbilitiesPacket(m_PChar));
+        m_PChar->pushPacket<CCharAbilitiesPacket>(m_PChar);
     }
 }
 

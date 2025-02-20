@@ -28,8 +28,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:setMobAbilityEnabled(true) -- enable the spells/other mobskills again
     mob:setMagicCastingEnabled(true)
 
-    if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) == 0 then -- re-enable noturn
-        mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+    if bit.band(mob:getBehavior(), xi.behavior.NO_TURN) == 0 then -- re-enable noturn
+        mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
     end
 
     local damage = mob:getWeaponDmg() * 15

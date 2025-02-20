@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/logging.h"
+#include "common/mutex_guarded.h"
 
 #include "map/zone.h"
 
@@ -40,7 +41,6 @@ public:
 
 private:
     httplib::Server         m_httpServer;
-    std::mutex              m_updateBottleneck;
     std::atomic<time_point> m_lastUpdate;
 
     std::unique_ptr<ts::task_system> ts;
@@ -48,6 +48,9 @@ private:
     struct APIDataCache
     {
         uint32                                 activeSessionCount;
+        uint32                                 activeUniqueIPCount;
         std::array<uint32, ZONEID::MAX_ZONEID> zonePlayerCounts;
-    } m_apiDataCache{};
+    };
+
+    shared_guarded<APIDataCache> m_apiDataCache;
 };

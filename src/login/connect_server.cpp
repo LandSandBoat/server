@@ -50,9 +50,7 @@ ConnectServer::ConnectServer(int argc, char** argv)
     // clang-format on
 
 #ifndef _WIN32
-    struct rlimit limits
-    {
-    };
+    rlimit limits{};
 
     uint32 newRLimit = 10240;
 

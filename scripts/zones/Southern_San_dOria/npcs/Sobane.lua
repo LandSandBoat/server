@@ -9,17 +9,11 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     -- SHARPENING THE SWORD
     if player:getCharVar('sharpeningTheSwordCS') >= 2 then
         player:startEvent(52)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

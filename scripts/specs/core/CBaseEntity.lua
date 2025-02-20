@@ -522,6 +522,10 @@ end
 function CBaseEntity:follow(target, followType)
 end
 
+---@return boolean
+function CBaseEntity:hasFollowTarget()
+end
+
 ---@return nil
 function CBaseEntity:unfollow()
 end
@@ -601,7 +605,7 @@ end
 function CBaseEntity:changeMusic(blockID, musicTrackID)
 end
 
----@param menu integer
+---@param menu xi.menuType
 ---@return nil
 function CBaseEntity:sendMenu(menu)
 end
@@ -721,9 +725,27 @@ end
 function CBaseEntity:isInMogHouse()
 end
 
----@nodiscard
----@return integer
-function CBaseEntity:getPlayerTriggerAreaInZone()
+---@param triggerAreaId integer
+---@return boolean
+function CBaseEntity:isPlayerInTriggerArea(triggerAreaId)
+end
+
+---@return nil
+function CBaseEntity:isPlayerInAnyTriggerArea()
+end
+
+---@param triggerAreaId integer
+---@return nil
+function CBaseEntity:onPlayerTriggerAreaEnter(triggerAreaId)
+end
+
+---@param triggerAreaId integer
+---@return nil
+function CBaseEntity:onPlayerTriggerAreaLeave(triggerAreaId)
+end
+
+---@return nil
+function CBaseEntity:clearPlayerTriggerAreas()
 end
 
 ---@param statusID integer
@@ -818,6 +840,12 @@ end
 function CBaseEntity:addTeleport(teleType, bitval, setval)
 end
 
+---@param pos table
+---@param mode integer
+---@return nil
+function CBaseEntity:positionSpecial(pos, mode)
+end
+
 ---@nodiscard
 ---@param type integer
 ---@param abysseaRegionObj integer?
@@ -885,6 +913,12 @@ end
 ---@param slot integer
 ---@return CItem?
 function CBaseEntity:getEquippedItem(slot)
+end
+
+---@nodiscard
+---@param equipmentID integer
+---@return boolean
+function CBaseEntity:hasEquipped(equipmentID)
 end
 
 ---@nodiscard
@@ -1192,8 +1226,9 @@ function CBaseEntity:getAnimationSub()
 end
 
 ---@param animationsub integer
+---@param sendUpdate boolean?
 ---@return nil
-function CBaseEntity:setAnimationSub(animationsub)
+function CBaseEntity:setAnimationSub(animationsub, sendUpdate)
 end
 
 ---@nodiscard
@@ -1331,9 +1366,19 @@ end
 function CBaseEntity:getSpeed()
 end
 
+---@nodiscard
+---@return integer
+function CBaseEntity:getBaseSpeed()
+end
+
 ---@param speedVal integer
 ---@return nil
-function CBaseEntity:setSpeed(speedVal)
+function CBaseEntity:setBaseSpeed(speedVal)
+end
+
+---@param speedVal integer
+---@return nil
+function CBaseEntity:setAnimationSpeed(speedVal)
 end
 
 ---@nodiscard
@@ -1808,6 +1853,23 @@ end
 function CBaseEntity:getJobPointLevel(jpType)
 end
 
+---@param jobID integer
+---@param amount integer
+---@return nil
+function CBaseEntity:addJobPoints(jobID, amount)
+end
+
+---@param jobID integer
+---@param amount integer
+---@return nil
+function CBaseEntity:delJobPoints(jobID, amount)
+end
+
+---@param jobID integer
+---@return integer
+function CBaseEntity:getJobPoints(jobID)
+end
+
 ---@param amount integer
 ---@return nil
 function CBaseEntity:setJobPoints(amount)
@@ -2026,6 +2088,11 @@ end
 ---@param value integer
 ---@return nil
 function CBaseEntity:setMP(value)
+end
+
+---@param value integer
+---@return nil
+function CBaseEntity:setMaxMP(value)
 end
 
 ---@param amount integer
@@ -2539,6 +2606,11 @@ end
 function CBaseEntity:triggerListener(eventName, ...)
 end
 
+---@param eventName string
+---@return boolean
+function CBaseEntity:hasListener(eventName)
+end
+
 ---@nodiscard
 ---@param targetID integer
 ---@return CBaseEntity?
@@ -2710,8 +2782,10 @@ end
 ---@param subType integer?
 ---@param subPower integer?
 ---@param tier integer?
+---@param SourceType integer?
+---@param SourceTypeParam integer?
 ---@return boolean
-function CBaseEntity:addStatusEffect(effectID, power, tick, duration, subType, subPower, tier)
+function CBaseEntity:addStatusEffect(effectID, power, tick, duration, subType, subPower, tier, SourceType, SourceTypeParam)
 end
 
 ---@param effect CStatusEffect
@@ -2765,6 +2839,14 @@ function CBaseEntity:getStatusEffect(StatusID, SubType)
 end
 
 ---@nodiscard
+---@param StatusID integer
+---@param SourceType integer
+---@param SourceTypeParam integer
+---@return CStatusEffect?
+function CBaseEntity:getStatusEffectBySource(StatusID, SourceType, SourceTypeParam)
+end
+
+---@nodiscard
 ---@return table
 function CBaseEntity:getStatusEffects()
 end
@@ -2808,8 +2890,10 @@ end
 
 ---@param StatusID integer
 ---@param SubType integer?
+---@param SourceType integer?
+---@param SourceTypeParam integer?
 ---@return boolean
-function CBaseEntity:delStatusEffect(StatusID, SubType)
+function CBaseEntity:delStatusEffect(StatusID, SubType, SourceType, SourceTypeParam)
 end
 
 ---@param flag integer
@@ -2869,6 +2953,10 @@ end
 ---@param value integer
 ---@return nil
 function CBaseEntity:delMod(modID, value)
+end
+
+---@return nil
+function CBaseEntity:printAllMods(modID, value)
 end
 
 ---@nodiscard
@@ -3216,23 +3304,20 @@ function CBaseEntity:trustPartyMessage(messageId)
 end
 
 ---@param targ integer
----@param cond integer
----@param condition_arg integer
----@param react integer
----@param select integer
----@param selectorArg integer
+---@param conditions table
+---@param reactions table
 ---@param retry integer?
 ---@return string
-function CBaseEntity:addSimpleGambit(targ, cond, condition_arg, react, select, selectorArg, retry)
+function CBaseEntity:addGambit(targ, conditions, reactions, retry)
 end
 
 ---@param id string
 ---@return nil
-function CBaseEntity:removeSimpleGambit(id)
+function CBaseEntity:removeGambit(id)
 end
 
 ---@return nil
-function CBaseEntity:removeAllSimpleGambits()
+function CBaseEntity:removeAllGambits()
 end
 
 ---@param trigger integer
@@ -3379,8 +3464,20 @@ function CBaseEntity:getAutomatonFrame()
 end
 
 ---@nodiscard
+---@param itemId integer
+---@return nil
+function CBaseEntity:setAutomatonFrame(itemId)
+end
+
+---@nodiscard
 ---@return integer
 function CBaseEntity:getAutomatonHead()
+end
+
+---@nodiscard
+---@param itemId integer
+---@return nil
+function CBaseEntity:setAutomatonHead(itemId)
 end
 
 ---@param itemID integer
@@ -3405,6 +3502,13 @@ end
 ---@param slotId integer
 ---@return CItem?
 function CBaseEntity:getAttachment(slotId)
+end
+
+---@nodiscard
+---@param itemId integer
+---@param slotId integer
+---@return nil
+function CBaseEntity:setAttachment(itemId, slotId)
 end
 
 ---@nodiscard
@@ -3498,6 +3602,11 @@ end
 ---@nodiscard
 ---@return integer
 function CBaseEntity:getModelSize()
+end
+
+---@nodiscard
+---@return number
+function CBaseEntity:getMeleeRange()
 end
 
 ---@param range number
@@ -3688,12 +3797,12 @@ end
 
 ---@nodiscard
 ---@return integer
-function CBaseEntity:getBehaviour()
+function CBaseEntity:getBehavior()
 end
 
 ---@param behavior integer
 ---@return nil
-function CBaseEntity:setBehaviour(behavior)
+function CBaseEntity:setBehavior(behavior)
 end
 
 ---@nodiscard
@@ -3765,8 +3874,10 @@ function CBaseEntity:hasTPMoves()
 end
 
 ---@param PLuaBaseEntity CBaseEntity
+---@param offset integer
+---@param degrees integer
 ---@return nil
-function CBaseEntity:drawIn(PLuaBaseEntity)
+function CBaseEntity:drawIn(PLuaBaseEntity, offset, degrees)
 end
 
 ---@return nil
@@ -3797,6 +3908,11 @@ end
 ---@param milliseconds integer
 ---@return nil
 function CBaseEntity:untargetableAndUnactionable(milliseconds)
+end
+
+---@param attacker CBaseEntity
+---@return nil
+function CBaseEntity:tryHitInterrupt(attacker)
 end
 
 ---@nodiscard
@@ -3845,6 +3961,12 @@ end
 ---@nodiscard
 ---@return integer
 function CBaseEntity:getTHlevel()
+end
+
+---@nodiscard
+---@param newLevel integer
+---@return nil
+function CBaseEntity:setTHlevel(newLevel)
 end
 
 ---@nodiscard

@@ -19,12 +19,9 @@ entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill)
-    if math.random() < 0.5 then
+    if math.random(1, 100) <= 50 then
         return 370 -- favor baleful gaze
     end
-end
-
-entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

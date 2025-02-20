@@ -119,7 +119,7 @@ namespace instanceutils
 
     void LoadInstance(uint16 instanceid, CCharEntity* PRequester)
     {
-        LoadQueue.push({ PRequester->id, instanceid });
+        LoadQueue.emplace(PRequester->id, instanceid);
     }
 
     InstanceData_t GetInstanceData(uint16 instanceid)

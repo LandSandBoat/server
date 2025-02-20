@@ -25,20 +25,20 @@
   22    Unused ID                   Unused ID
   23    Unused ID                   Unused ID
   24    Unused ID                   Unused ID
-  25    Unused ID                   Unused ID
-  26    Unused ID                   Unused ID
-  27    Unused ID                   Unused ID
-  28    Unused ID                   Unused ID
-  29    Unused ID                   Unused ID
-  30    Unused ID                   Unused ID
-  31    Unused ID                   Unused ID
-  32    Unused ID                   Unused ID
-  33    Unused ID                   Unused ID
-  34    Unused ID                   Unused ID
-  35    Unused ID                   Unused ID
-  36    Unused ID                   Unused ID
-  37    Unused ID                   Unused ID
-  38    Unused ID                   Unused ID
+  25    ???
+  26    ???
+  27    ???
+  28    The Destiny Destroyers      TVR
+  29    ???
+  30    ???
+  31    ???
+  32    ???
+  33    ???
+  34    ??? (New title screen?)
+  35    ???
+  36    ???
+  37    ???
+  38    ???
   39    Unused ID                   Unused ID
   40    Cloister of Time and Souls  CS
   41    Royal Wanderlust            Cait Sith Theme
@@ -168,7 +168,7 @@
  165    Galka                       Character Creation - Galka
  166    Mithra                      Character Creation - Mithra
  167    Tarutaru Male               Character Creation - Taru Male
- 168    Tarutaru Female             Character Creation - Hume Female
+ 168    Hume Female                 Character Creation - Hume Female
  169    Regeneracy                  CS
  170    Buccaneers                  Pirate Attacks
  171    Altepa Desert               Eastern/Western Altepa Desert

@@ -57,6 +57,7 @@ def main():
     function_names.append("afterZoneIn")
     function_names.append("onTrigger")
     function_names.append("onTrade")
+    function_names.append("onSteal")
     function_names.append("onMobDeath")
     function_names.append("onZoneIn")
     function_names.append("noAction")
@@ -106,6 +107,7 @@ def main():
     function_names.append("gmatch")
     function_names.append("find")
     function_names.append("sub")
+    function_names.append("getStatusEffectBySource")
 
     # root_dir needs a trailing slash (i.e. /root/dir/)
     for filename in glob.iglob("./scripts/" + "**/*.lua", recursive=True):

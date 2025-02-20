@@ -31,7 +31,7 @@ CStatusEffectPacket::CStatusEffectPacket(CCharEntity* PChar)
 
     int i = 0;
 
-    std::fill(reinterpret_cast<uint16*>(data + 0x08), reinterpret_cast<uint16*>(data + 0x08) + 32, 0x00FF);
+    std::fill(reinterpret_cast<uint16*>(buffer_.data() + 0x08), reinterpret_cast<uint16*>(buffer_.data() + 0x08) + 32, 0x00FF);
 
     ref<uint8>(0x04) = 0x09;
     ref<uint8>(0x06) = 0xC4;

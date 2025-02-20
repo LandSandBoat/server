@@ -4,8 +4,6 @@
 -- Involved in Quests
 -- !pos 206 -32 316
 -----------------------------------
-local ID = zones[xi.zone.VUNKERL_INLET_S]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -34,17 +32,13 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 101 then
         player:setCharVar('BetterPartOfValProg', 3)
     elseif csid == 103 then
         player:tradeComplete()
         player:setCharVar('BetterPartOfValProg', 4)
-        player:addKeyItem(xi.ki.XHIFHUT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.XHIFHUT)
+        npcUtil.giveKeyItem(player, xi.ki.XHIFHUT)
     end
 end
 

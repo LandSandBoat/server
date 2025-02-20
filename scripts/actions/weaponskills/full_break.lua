@@ -19,32 +19,29 @@
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    local params = {}
+    local params   = {}
     params.numHits = 1
-    params.ftpMod = { 1.0, 1.0, 1.0 }
-    params.str_wsc = 0.5 params.vit_wsc = 0.5
+    params.ftpMod  = { 1, 1, 1 }
+    params.str_wsc = 0.5
+    params.vit_wsc = 0.5
+
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if damage > 0 then
-        local duration = (tp / 1000 * 30) + 60
+    -- Handle status effects.
+    local effects =
+    {
+        [1] = { xi.effect.ATTACK_DOWN,   xi.element.WATER, 12.5 },
+        [2] = { xi.effect.DEFENSE_DOWN,  xi.element.WIND,  12.5 },
+        [3] = { xi.effect.ACCURACY_DOWN, xi.element.EARTH, 20   },
+        [4] = { xi.effect.EVASION_DOWN,  xi.element.ICE,   20   },
+    }
 
-        -- TODO: Table effects, value, and element and loop
-
-        if not target:hasStatusEffect(xi.effect.DEFENSE_DOWN) then
-            target:addStatusEffect(xi.effect.DEFENSE_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.element.WIND, 0))
-        end
-
-        if not target:hasStatusEffect(xi.effect.ATTACK_DOWN) then
-            target:addStatusEffect(xi.effect.ATTACK_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.element.WATER, 0))
-        end
-
-        if not target:hasStatusEffect(xi.effect.EVASION_DOWN) then
-            target:addStatusEffect(xi.effect.EVASION_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.element.ICE, 0))
-        end
-
-        if not target:hasStatusEffect(xi.effect.ACCURACY_DOWN) then
-            target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.element.EARTH, 0))
-        end
+    for index = 1, #effects do
+        local effectId      = effects[index][1]
+        local actionElement = effects[index][2]
+        local power         = effects[index][3]
+        local duration      = math.floor(60 + 3 * tp / 100 * applyResistanceAddEffect(player, target, actionElement, 0))
+        xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
     end
 
     return tpHits, extraHits, criticalHit, damage

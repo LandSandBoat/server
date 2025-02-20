@@ -413,6 +413,7 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
     -- except those that should only perform one action at a time, like onTrigger and onTrade
     if
         fallbackHandler and
+        thirdLevelKey ~= 'onSteal' and
         thirdLevelKey ~= 'onTrigger' and
         thirdLevelKey ~= 'onTrade'
     then
@@ -460,6 +461,10 @@ function InteractionLookup:afterZoneIn(player, fallbackFn)
     return onHandler(self.data, 'afterZoneIn', 1, { player }, fallbackFn)
 end
 
+function InteractionLookup:onSteal(player, mob, ability, action, fallbackFn)
+    return onHandler(self.data, mob:getName(), 'onSteal', { player, mob, ability, action }, fallbackFn)
+end
+
 function InteractionLookup:onTrigger(player, npc, fallbackFn)
     return onHandler(self.data, npc:getName(), 'onTrigger', { player, npc }, fallbackFn, -1, npc:getID())
 end
@@ -473,11 +478,11 @@ function InteractionLookup:onMobDeath(mob, player, optParams, fallbackFn)
 end
 
 function InteractionLookup:onTriggerAreaEnter(player, triggerArea, instance, fallbackFn)
-    return onHandler(self.data, 'onTriggerAreaEnter', triggerArea:GetTriggerAreaID(), { player, triggerArea, instance }, fallbackFn)
+    return onHandler(self.data, 'onTriggerAreaEnter', triggerArea:getTriggerAreaID(), { player, triggerArea, instance }, fallbackFn)
 end
 
 function InteractionLookup:onTriggerAreaLeave(player, triggerArea, instance, fallbackFn)
-    return onHandler(self.data, 'onTriggerAreaLeave', triggerArea:GetTriggerAreaID(), { player, triggerArea, instance }, fallbackFn)
+    return onHandler(self.data, 'onTriggerAreaLeave', triggerArea:getTriggerAreaID(), { player, triggerArea, instance }, fallbackFn)
 end
 
 function InteractionLookup:onZoneIn(player, prevZone, fallbackFn)

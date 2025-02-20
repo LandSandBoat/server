@@ -9,9 +9,6 @@ local ID = zones[xi.zone.ROLANBERRY_FIELDS]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if
         not GetMobByID(ID.mob.CHUGLIX_BERRYPAWS):isSpawned() and
@@ -23,12 +20,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.NOTHING_HAPPENS)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

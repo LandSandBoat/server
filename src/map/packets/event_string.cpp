@@ -66,7 +66,7 @@ CEventStringPacket::CEventStringPacket(CCharEntity* PChar, EventInfo* eventInfo)
 
     for (auto const& stringPair : eventInfo->strings)
     {
-        memcpy(data + 0x10 + 0x10 * stringPair.first, stringPair.second.c_str(), stringPair.second.size());
+        std::memcpy(buffer_.data() + 0x10 + 0x10 * stringPair.first, stringPair.second.c_str(), stringPair.second.size());
     }
 
     for (auto paramPair : eventInfo->params)

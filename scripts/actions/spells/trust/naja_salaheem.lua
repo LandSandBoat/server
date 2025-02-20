@@ -28,14 +28,11 @@ spellObject.onMobSpawn = function(mob)
         end
     end)
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.ALWAYS, 0,
-        ai.r.JA, ai.s.SPECIFIC, xi.ja.FOCUS)
+    mob:addGambit(ai.t.SELF, { ai.c.ALWAYS, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.FOCUS })
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.ALWAYS, 0,
-        ai.r.JA, ai.s.SPECIFIC, xi.ja.DODGE)
+    mob:addGambit(ai.t.SELF, { ai.c.ALWAYS, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.DODGE })
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.HAS_TOP_ENMITY, 0,
-        ai.r.JA, ai.s.SPECIFIC, xi.ja.COUNTERSTANCE)
+    mob:addGambit(ai.t.SELF, { ai.c.HAS_TOP_ENMITY, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.COUNTERSTANCE })
 end
 
 spellObject.onMobDespawn = function(mob)

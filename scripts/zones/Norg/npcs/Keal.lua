@@ -68,9 +68,6 @@ entity.onSpawn = function(npc)
     npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local vault = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
     local mLvl = player:getMainLvl()
@@ -90,9 +87,6 @@ entity.onTrigger = function(player, npc)
     elseif vault == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(39) -- New Standard Dialogue for everyone who has completed the quest
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

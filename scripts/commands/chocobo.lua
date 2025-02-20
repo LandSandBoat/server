@@ -1,5 +1,5 @@
 -----------------------------------
--- func: chocobo <colour> <head> <tail> <feet>
+-- func: chocobo <color> <head> <tail> <feet>
 -- desc: Register and use a chocobo with a specific look
 --
 -- examples:

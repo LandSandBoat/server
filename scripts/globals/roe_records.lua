@@ -1,12 +1,24 @@
 -----------------------------------
 -- Records of Eminence
 -----------------------------------
-require('scripts/globals/expansion_areas')
 require('scripts/globals/missions')
 require('scripts/globals/quests')
 -----------------------------------
 xi = xi or {}
 xi.roe = xi.roe or {}
+
+local abysseaZones = set{
+    xi.zone.ABYSSEA_KONSCHTAT,
+    xi.zone.ABYSSEA_TAHRONGI,
+    xi.zone.ABYSSEA_LA_THEINE,
+    xi.zone.ABYSSEA_ATTOHWA,
+    xi.zone.ABYSSEA_MISAREAUX,
+    xi.zone.ABYSSEA_VUNKERL,
+    xi.zone.ABYSSEA_ALTEPA,
+    xi.zone.ABYSSEA_ULEGUERAND,
+    xi.zone.ABYSSEA_GRAUBERG,
+    xi.zone.ABYSSEA_EMPYREAL_PARADOX,
+}
 
 -- NOTE: This file calls the roe global init function at the end to populate default
 -- values that may be missing.  This same behavior happens in the roe global as well
@@ -20,80 +32,80 @@ xi.roe.records =
 
     [1] =
     { -- First Step Forward +
-        reward = { item = { { xi.item.STRIP_OF_MEAT_JERKY, 6 } }, keyItem = xi.ki.MEMORANDOLL, sparks = 100, xp = 300 }
+        reward = { item = { { xi.item.STRIP_OF_MEAT_JERKY, 6 } }, keyItem = xi.ki.MEMORANDOLL, sparks = 100, exp = 300 }
     },
 
     [2] =
     { -- Vanquish 1 Enemy +
         trigger = xi.roeTrigger.DEFEAT_MOB,
-        reward = { sparks = 100, xp = 500 }
+        reward = { sparks = 100, exp = 500 }
     },
 
     [3] =
     { -- Undertake a FoV Training Regime
-        reward = { sparks = 100, xp = 500 }
+        reward = { sparks = 100, exp = 500 }
     },
 
     [4] =
     { -- Heal without magic
-        reward = { sparks = 100, xp = 500 }
+        reward = { sparks = 100, exp = 500 }
     },
 
     [5] =
     { -- All for One
-        reward = { sparks = 100, xp = 300, accolades = 1000, keyItem = xi.ki.CONCORDOLL }
+        reward = { sparks = 100, exp = 300, accolades = 1000, keyItem = xi.ki.CONCORDOLL }
     },
 
     [11] =
     { -- Undertake a GoV Training Regime
-        reward = { sparks = 100, xp = 500 }
+        reward = { sparks = 100, exp = 500 }
     },
 
     [499] =
     { -- Stepping into an Ambuscade
-        reward = { sparks = 100, xp = 300, keyItem = xi.ki.AMBUSCADE_PRIMER_VOLUME_TWO }
+        reward = { sparks = 100, exp = 300, keyItem = xi.ki.AMBUSCADE_PRIMER_VOLUME_TWO }
     },
 
     [932] =
     { -- Call Forth an Alter Ego (gives Cipher: Valaineral)
-        reward = { sparks = 100, xp = 300, item = { xi.item.CIPHER_OF_VALAINERALS_ALTER_EGO } }
+        reward = { sparks = 100, exp = 300, item = { xi.item.CIPHER_OF_VALAINERALS_ALTER_EGO } }
     },
 
     [933] =
     { -- Alter Ego: Valaineral (gives Cipher: Mihli)
-        reward = { sparks = 100, xp = 300, item = { xi.item.CIPHER_OF_MIHLIS_ALTER_EGO } }
+        reward = { sparks = 100, exp = 300, item = { xi.item.CIPHER_OF_MIHLIS_ALTER_EGO } }
     },
 
     [934] =
     { -- Alter Ego: Mihli Aliapoh (gives Cipher: Tenzen)
-        reward = { sparks = 100, xp = 300, item = { xi.item.CIPHER_OF_TENZENS_ALTER_EGO } }
+        reward = { sparks = 100, exp = 300, item = { xi.item.CIPHER_OF_TENZENS_ALTER_EGO } }
     },
 
     [935] =
     { -- Alter Ego: Tenzen (gives Cipher: Adelheid)
-        reward = { sparks = 100, xp = 300, item = { xi.item.CIPHER_OF_ADELHEIDS_ALTER_EGO } }
+        reward = { sparks = 100, exp = 300, item = { xi.item.CIPHER_OF_ADELHEIDS_ALTER_EGO } }
     },
 
     [936] =
     { -- Alter Ego: Adelheid (gives Cipher: Joachim)
-        reward = { sparks = 100, xp = 300, item = { xi.item.CIPHER_OF_JOACHIMS_ALTER_EGO } }
+        reward = { sparks = 100, exp = 300, item = { xi.item.CIPHER_OF_JOACHIMS_ALTER_EGO } }
     },
 
     [937] =
     { -- Alter Ego: Joachim
-        reward = { sparks = 100, xp = 500 }
+        reward = { sparks = 100, exp = 500 }
     },
 
     --[[ TODO
     [1447] =
     { -- Exploring the Trove
-        reward =  { sparks = 100, xp = 500 }
+        reward =  { sparks = 100, exp = 500 }
     },
     ]]
 
     [1448] =
     { -- Assist Channel
-        reward = { sparks = 100, xp = 300 }
+        reward = { sparks = 100, exp = 300 }
     },
 
     -----------------------------------
@@ -110,7 +122,7 @@ xi.roe.records =
         reward =
         {
             sparks = 200,
-            xp = 300,
+            exp = 300,
             item = { { xi.item.MOG_KUPON_A_PK109, 5 } },
         }
     },
@@ -126,7 +138,7 @@ xi.roe.records =
         reward =
         {
             sparks = 200,
-            xp = 200,
+            exp = 200,
             item = { xi.item.MOG_KUPON_W_EMI }
         }
     },
@@ -142,7 +154,7 @@ xi.roe.records =
         reward =
         {
             sparks = 200,
-            xp = 200,
+            exp = 200,
             item = { xi.item.MOG_KUPON_A_EMI }
         }
     },
@@ -158,7 +170,7 @@ xi.roe.records =
         reward =
         {
             sparks = 200,
-            xp = 200,
+            exp = 200,
             item = { xi.item.MOG_KUPON_A_EMI }
         }
     },
@@ -174,7 +186,7 @@ xi.roe.records =
         reward =
         {
             sparks = 200,
-            xp = 300,
+            exp = 300,
             item = { xi.item.CIPHER_OF_KORU_MORUS_ALTER_EGO }
         }
     },
@@ -185,98 +197,98 @@ xi.roe.records =
 
     [100] =
     { -- Speak to Carpenters' Guild Master
-        reward = { sparks = 100, xp = 500 }
+        reward = { sparks = 100, exp = 500 }
     },
 
     [101] =
     { -- Speak to Blacksmiths' Guild Master
-        reward = { sparks = 100, xp = 500 }
+        reward = { sparks = 100, exp = 500 }
     },
 
     [102] =
     { -- Speak to Goldsmiths' Guild Master
-        reward = { sparks = 100, xp = 500 }
+        reward = { sparks = 100, exp = 500 }
     },
 
     [103] =
     { -- Speak to Weavers' Guild Master
-        reward = { sparks = 100, xp = 500 }
+        reward = { sparks = 100, exp = 500 }
     },
 
     [104] =
     { -- Speak to Tanners' Guild Master
-        reward = { sparks = 100, xp = 500 }
+        reward = { sparks = 100, exp = 500 }
     },
 
     [105] =
     { -- Speak to Boneworkers' Guild Master
-        reward = { sparks = 100, xp = 500 }
+        reward = { sparks = 100, exp = 500 }
     },
 
     [106] =
     { -- Speak to Alchemists' Guild Master
-        reward = { sparks = 100, xp = 500 }
+        reward = { sparks = 100, exp = 500 }
     },
 
     [107] =
     { -- Speak to Culinarians' Guild Master
-        reward = { sparks = 100, xp = 500 }
+        reward = { sparks = 100, exp = 500 }
     },
 
     [108] =
     { -- Woodworking: Padded Box
         trigger = xi.roeTrigger.SUCCESSFUL_SYNTHESIS,
         reqs = { itemID = set { xi.item.PADDED_BOX } },
-        reward = { sparks = 100, xp = 500 },
+        reward = { sparks = 100, exp = 500 },
     },
 
     [109] =
     { -- Smithing: Bronze Knife
         trigger = xi.roeTrigger.SUCCESSFUL_SYNTHESIS,
         reqs = { itemID = set { xi.item.BRONZE_KNIFE, xi.item.BRONZE_KNIFE_P1 } },
-        reward = { sparks = 100, xp = 500 },
+        reward = { sparks = 100, exp = 500 },
     },
 
     [110] =
     { -- Goldsmithing: Copper Ring
         trigger = xi.roeTrigger.SUCCESSFUL_SYNTHESIS,
         reqs = { itemID = set { xi.item.COPPER_RING, xi.item.COPPER_RING_P1 } },
-        reward = { sparks = 100, xp = 500 },
+        reward = { sparks = 100, exp = 500 },
     },
 
     [111] =
     { -- Weaving: Headgear
         trigger = xi.roeTrigger.SUCCESSFUL_SYNTHESIS,
         reqs = { itemID = set { xi.item.HEADGEAR, xi.item.HEADGEAR_P1 } },
-        reward = { sparks = 100, xp = 500 },
+        reward = { sparks = 100, exp = 500 },
     },
 
     [112] =
     { -- Tanning: Leather Bandana
         trigger = xi.roeTrigger.SUCCESSFUL_SYNTHESIS,
         reqs = { itemID = set { xi.item.LEATHER_BANDANA, xi.item.LEATHER_BANDANA_P1 } },
-        reward = { sparks = 100, xp = 500 },
+        reward = { sparks = 100, exp = 500 },
     },
 
     [113] =
     { -- Boneworking: Shell Powder
         trigger = xi.roeTrigger.SUCCESSFUL_SYNTHESIS,
         reqs = { itemID = set { xi.item.PONZE_OF_SHELL_POWDER } },
-        reward = { sparks = 100, xp = 500 },
+        reward = { sparks = 100, exp = 500 },
     },
 
     [114] =
     { -- Alchemy: Black Ink
         trigger = xi.roeTrigger.SUCCESSFUL_SYNTHESIS,
         reqs = { itemID = set { xi.item.JAR_OF_BLACK_INK } },
-        reward = { sparks = 100, xp = 500 },
+        reward = { sparks = 100, exp = 500 },
     },
 
     [115] =
     { -- Cooking: Pebble Soup
         trigger = xi.roeTrigger.SUCCESSFUL_SYNTHESIS,
         reqs = { itemID = set { xi.item.BOWL_OF_PEBBLE_SOUP, xi.item.BOWL_OF_WISDOM_SOUP } },
-        reward = { sparks = 100, xp = 500 },
+        reward = { sparks = 100, exp = 500 },
     },
 
     -----------------------------------
@@ -288,7 +300,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [501] =
@@ -296,7 +308,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.A_LADYS_HEART } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [502] =
@@ -304,7 +316,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.FLOWER_CHILD } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [503] =
@@ -312,7 +324,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [504] =
@@ -320,7 +332,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.KEEPING_NOTES } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [505] =
@@ -332,7 +344,7 @@ xi.roe.records =
                 player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) == xi.questStatus.QUEST_COMPLETED
         end,
 
-        reward = { sparks = 100, xp = 500 },
+        reward = { sparks = 100, exp = 500 },
     },
 
     [506] =
@@ -340,7 +352,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500 },
+        reward = { sparks = 100, exp = 500 },
     },
 
     [507] =
@@ -348,7 +360,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.TRUST_BASTOK } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500 },
+        reward = { sparks = 100, exp = 500 },
     },
 
     [508] =
@@ -356,7 +368,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.TRUST_WINDURST } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500 },
+        reward = { sparks = 100, exp = 500 },
     },
 
     [509] =
@@ -364,7 +376,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 600 },
+        reward = { sparks = 100, exp = 600 },
     },
 
     [510] =
@@ -372,7 +384,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_KNIGHTS_TEST } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [511] =
@@ -380,7 +392,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [512] =
@@ -388,7 +400,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [513] =
@@ -396,7 +408,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [514] =
@@ -404,7 +416,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [515] =
@@ -412,7 +424,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [516] =
@@ -420,7 +432,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [517] =
@@ -428,7 +440,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [518] =
@@ -436,7 +448,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [519] =
@@ -444,7 +456,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [520] =
@@ -452,7 +464,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [521] =
@@ -460,7 +472,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [522] =
@@ -468,7 +480,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [523] =
@@ -476,7 +488,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [524] =
@@ -484,7 +496,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [525] =
@@ -492,7 +504,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     -----------------------------------
@@ -504,7 +516,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_DOORMAN } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [630] =
@@ -512,7 +524,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [631] =
@@ -520,7 +532,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [632] =
@@ -528,7 +540,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [633] =
@@ -536,7 +548,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [634] =
@@ -544,7 +556,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [635] =
@@ -552,7 +564,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [636] =
@@ -560,15 +572,15 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [637] =
     { -- WHM Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJES_DECISION } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [638] =
@@ -576,7 +588,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [639] =
@@ -584,7 +596,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.RECOLLECTIONS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [640] =
@@ -592,7 +604,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [641] =
@@ -600,7 +612,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [642] =
@@ -608,7 +620,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [643] =
@@ -616,7 +628,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [644] =
@@ -624,7 +636,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [645] =
@@ -632,7 +644,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [646] =
@@ -640,7 +652,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [647] =
@@ -648,15 +660,15 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [648] =
     { -- PLD Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOYS_DREAM } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [649] =
@@ -664,7 +676,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [650] =
@@ -672,7 +684,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.DARK_LEGACY } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [651] =
@@ -680,7 +692,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.DARK_PUPPET } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [652] =
@@ -688,7 +700,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [653] =
@@ -696,7 +708,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [654] =
@@ -704,7 +716,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [655] =
@@ -712,7 +724,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     -----------------------------------
@@ -724,7 +736,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [657] =
@@ -732,7 +744,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_REQUIEM } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [658] =
@@ -740,7 +752,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [659] =
@@ -748,7 +760,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.SIN_HUNTING } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [660] =
@@ -756,7 +768,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.FIRE_AND_BRIMSTONE } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [661] =
@@ -764,7 +776,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.UNBRIDLED_PASSION } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [662] =
@@ -772,7 +784,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [663] =
@@ -780,7 +792,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [664] =
@@ -788,7 +800,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [665] =
@@ -796,7 +808,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [666] =
@@ -804,7 +816,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [667] =
@@ -812,15 +824,15 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.TRUE_WILL } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [668] =
     { -- DRG Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMANS_WORK } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [669] =
@@ -828,7 +840,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [670] =
@@ -836,7 +848,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [671] =
@@ -844,7 +856,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [672] =
@@ -852,7 +864,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [673] =
@@ -860,7 +872,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [674] =
@@ -868,7 +880,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [675] =
@@ -876,7 +888,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [676] =
@@ -884,7 +896,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [677] =
@@ -892,7 +904,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [678] =
@@ -900,7 +912,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [679] =
@@ -908,7 +920,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [680] =
@@ -916,7 +928,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [681] =
@@ -924,7 +936,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [682] =
@@ -932,7 +944,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     -----------------------------------
@@ -944,7 +956,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [684] =
@@ -952,7 +964,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [685] =
@@ -960,7 +972,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [686] =
@@ -968,7 +980,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [687] =
@@ -976,7 +988,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [688] =
@@ -984,7 +996,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_BLOOD_RED } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [689] =
@@ -992,7 +1004,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.FOR_WHOM_THE_BELL_TOLLS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [690] =
@@ -1000,7 +1012,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_BLOODLINE_OF_ZACARIAH } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [691] =
@@ -1008,7 +1020,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_COMMUNION } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [692] =
@@ -1016,7 +1028,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.FORGING_NEW_BONDS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [693] =
@@ -1024,7 +1036,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.LEGACIES_LOST_AND_FOUND } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [694] =
@@ -1032,7 +1044,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.DESTINYS_DEVICE } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     -----------------------------------
@@ -1044,7 +1056,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [706] =
@@ -1052,7 +1064,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [707] =
@@ -1060,7 +1072,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [708] =
@@ -1068,7 +1080,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [709] =
@@ -1076,7 +1088,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [710] =
@@ -1084,7 +1096,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [711] =
@@ -1092,7 +1104,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [712] =
@@ -1100,7 +1112,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [713] =
@@ -1108,7 +1120,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [714] =
@@ -1116,7 +1128,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     -----------------------------------
@@ -1128,7 +1140,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_I } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [716] =
@@ -1136,7 +1148,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_II } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [717] =
@@ -1144,7 +1156,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_III } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [718] =
@@ -1152,7 +1164,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_IV } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [719] =
@@ -1160,7 +1172,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_V } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [720] =
@@ -1168,7 +1180,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VI } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [721] =
@@ -1176,7 +1188,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VII } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [722] =
@@ -1184,7 +1196,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VIII } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [723] =
@@ -1192,7 +1204,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_IX } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [724] =
@@ -1200,7 +1212,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_X } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [939] =
@@ -1208,7 +1220,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [940] =
@@ -1216,7 +1228,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [941] =
@@ -1224,7 +1236,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.MOOGLES_IN_THE_WILD } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     -----------------------------------
@@ -1236,7 +1248,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [840] =
@@ -1244,7 +1256,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [841] =
@@ -1252,7 +1264,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [842] =
@@ -1260,7 +1272,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.INHERITANCE } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [843] =
@@ -1268,7 +1280,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [844] =
@@ -1276,7 +1288,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [845] =
@@ -1284,7 +1296,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [846] =
@@ -1292,7 +1304,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [847] =
@@ -1300,7 +1312,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [848] =
@@ -1308,7 +1320,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_POTENTIAL_WITHIN } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [849] =
@@ -1316,7 +1328,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.ORASTERY_WOES } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [850] =
@@ -1324,7 +1336,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.BLOOD_AND_GLORY } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [851] =
@@ -1332,7 +1344,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     [852] =
@@ -1340,7 +1352,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 300 },
+        reward = { sparks = 100, exp = 300 },
     },
 
     -----------------------------------
@@ -1352,7 +1364,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1314] =
@@ -1360,7 +1372,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BAT_HUNT } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1315] =
@@ -1368,7 +1380,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1316] =
@@ -1376,7 +1388,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_RESCUE_DRILL } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1317] =
@@ -1384,7 +1396,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_DAVOI_REPORT } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1318] =
@@ -1392,7 +1404,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1319] =
@@ -1400,7 +1412,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.INFILTRATE_DAVOI } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1320] =
@@ -1408,7 +1420,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_CRYSTAL_SPRING } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1321] =
@@ -1416,7 +1428,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.FIRE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.FIRE_CRYSTAL, 8 } }, sparks = 300, exp = 500 },
     },
 
     [1322] =
@@ -1424,7 +1436,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.MAGICITE } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.ICE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.ICE_CRYSTAL, 8 } }, sparks = 300, exp = 500 },
     },
 
     [1323] =
@@ -1432,7 +1444,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.FIRE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.FIRE_CRYSTAL, 8 } }, sparks = 300, exp = 500 },
     },
 
     [1324] =
@@ -1440,7 +1452,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SHADOW_LORD } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.ICE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.ICE_CRYSTAL, 8 } }, sparks = 300, exp = 500 },
     },
 
     [1325] =
@@ -1448,7 +1460,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTES_LAST_WISHES } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.FIRE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.FIRE_CRYSTAL, 10 } }, sparks = 300, exp = 500 },
     },
 
     [1326] =
@@ -1456,7 +1468,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.RANPERRES_FINAL_REST } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.ICE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.ICE_CRYSTAL, 10 } }, sparks = 300, exp = 500 },
     },
 
     [1327] =
@@ -1464,7 +1476,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.FIRE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.FIRE_CRYSTAL, 10 } }, sparks = 300, exp = 500 },
     },
 
     [1328] =
@@ -1472,7 +1484,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SECRET_WEAPON } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.ICE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.ICE_CRYSTAL, 10 } }, sparks = 300, exp = 500 },
     },
 
     [1329] =
@@ -1480,7 +1492,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.COMING_OF_AGE } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.FIRE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.FIRE_CRYSTAL, 12 } }, sparks = 300, exp = 500 },
     },
 
     [1330] =
@@ -1488,7 +1500,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LIGHTBRINGER } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.ICE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.ICE_CRYSTAL, 12 } }, sparks = 300, exp = 500 },
     },
 
     [1331] =
@@ -1496,7 +1508,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BREAKING_BARRIERS } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.FIRE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.FIRE_CRYSTAL, 12 } }, sparks = 300, exp = 500 },
     },
 
     [1332] =
@@ -1504,7 +1516,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.ICE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.ICE_CRYSTAL, 12 } }, sparks = 300, exp = 500 },
     },
 
     -----------------------------------
@@ -1516,7 +1528,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_ZERUHN_REPORT } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1334] =
@@ -1524,7 +1536,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.GEOLOGICAL_SURVEY } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1335] =
@@ -1532,7 +1544,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.FETICHISM } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1336] =
@@ -1540,7 +1552,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_CRYSTAL_LINE } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1337] =
@@ -1548,7 +1560,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.WADING_BEASTS } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1338] =
@@ -1556,7 +1568,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1339] =
@@ -1564,7 +1576,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_FOUR_MUSKETEERS } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1340] =
@@ -1572,7 +1584,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.TO_THE_FORSAKEN_MINES } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1341] =
@@ -1580,7 +1592,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.JEUNO } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 8 } }, sparks = 300, exp = 500 },
     },
 
     [1342] =
@@ -1588,7 +1600,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.MAGICITE } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WATER_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WATER_CRYSTAL, 8 } }, sparks = 300, exp = 500 },
     },
 
     [1343] =
@@ -1596,7 +1608,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.DARKNESS_RISING } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 8 } }, sparks = 300, exp = 500 },
     },
 
     [1344] =
@@ -1604,7 +1616,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WATER_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WATER_CRYSTAL, 8 } }, sparks = 300, exp = 500 },
     },
 
     [1345] =
@@ -1612,7 +1624,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 10 } }, sparks = 300, exp = 500 },
     },
 
     [1346] =
@@ -1620,7 +1632,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_PIRATES_COVE } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WATER_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WATER_CRYSTAL, 10 } }, sparks = 300, exp = 500 },
     },
 
     [1347] =
@@ -1628,7 +1640,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_FINAL_IMAGE } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 10 } }, sparks = 300, exp = 500 },
     },
 
     [1348] =
@@ -1636,7 +1648,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.ON_MY_WAY } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WATER_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WATER_CRYSTAL, 10 } }, sparks = 300, exp = 500 },
     },
 
     [1349] =
@@ -1644,7 +1656,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 12 } }, sparks = 300, exp = 500 },
     },
 
     [1350] =
@@ -1652,7 +1664,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.ENTER_THE_TALEKEEPER } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WATER_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WATER_CRYSTAL, 12 } }, sparks = 300, exp = 500 },
     },
 
     [1351] =
@@ -1660,7 +1672,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_SALT_OF_THE_EARTH } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 12 } }, sparks = 300, exp = 500 },
     },
 
     [1352] =
@@ -1668,7 +1680,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WATER_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WATER_CRYSTAL, 12 } }, sparks = 300, exp = 500 },
     },
 
     -----------------------------------
@@ -1680,7 +1692,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1354] =
@@ -1688,7 +1700,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HEART_OF_THE_MATTER } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1355] =
@@ -1696,7 +1708,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_PRICE_OF_PEACE } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1356] =
@@ -1704,7 +1716,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.LOST_FOR_WORDS } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1357] =
@@ -1712,7 +1724,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1358] =
@@ -1722,7 +1734,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1359] =
@@ -1730,7 +1742,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1360] =
@@ -1738,7 +1750,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, exp = 500 },
     },
 
     [1361] =
@@ -1746,7 +1758,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_NEW_JOURNEY } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WIND_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WIND_CRYSTAL, 8 } }, sparks = 300, exp = 500 },
     },
 
     [1362] =
@@ -1754,7 +1766,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.MAGICITE } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.EARTH_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.EARTH_CRYSTAL, 8 } }, sparks = 300, exp = 500 },
     },
 
     [1363] =
@@ -1762,7 +1774,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_FINAL_SEAL } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WIND_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WIND_CRYSTAL, 8 } }, sparks = 300, exp = 500 },
     },
 
     [1364] =
@@ -1770,7 +1782,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SHADOW_AWAITS } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.EARTH_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.EARTH_CRYSTAL, 8 } }, sparks = 300, exp = 500 },
     },
 
     [1365] =
@@ -1778,7 +1790,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.FULL_MOON_FOUNTAIN } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WIND_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WIND_CRYSTAL, 10 } }, sparks = 300, exp = 500 },
     },
 
     [1366] =
@@ -1786,7 +1798,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.SAINTLY_INVITATION } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.EARTH_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.EARTH_CRYSTAL, 10 } }, sparks = 300, exp = 500 },
     },
 
     [1367] =
@@ -1794,7 +1806,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SIXTH_MINISTRY } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WIND_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WIND_CRYSTAL, 10 } }, sparks = 300, exp = 500 },
     },
 
     [1368] =
@@ -1802,7 +1814,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.AWAKENING_OF_THE_GODS } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.EARTH_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.EARTH_CRYSTAL, 10 } }, sparks = 300, exp = 500 },
     },
 
     [1369] =
@@ -1810,7 +1822,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.VAIN } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WIND_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WIND_CRYSTAL, 12 } }, sparks = 300, exp = 500 },
     },
 
     [1370] =
@@ -1818,7 +1830,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.EARTH_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.EARTH_CRYSTAL, 12 } }, sparks = 300, exp = 500 },
     },
 
     [1371] =
@@ -1826,7 +1838,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.DOLL_OF_THE_DEAD } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.WIND_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.WIND_CRYSTAL, 12 } }, sparks = 300, exp = 500 },
     },
 
     [1372] =
@@ -1834,7 +1846,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.EARTH_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.EARTH_CRYSTAL, 12 } }, sparks = 300, exp = 500 },
     },
 
     -----------------------------------
@@ -1846,7 +1858,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.FLAMES_OF_PRAYER } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, exp = 500 },
     },
 
     [1374] =
@@ -1854,7 +1866,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.A_LAND_AFTER_TIME } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, exp = 500 },
     },
 
     [1375] =
@@ -1862,7 +1874,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.SET_FREE } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, exp = 500 },
     },
 
     [1416] =
@@ -1870,7 +1882,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.CRASHING_WAVES } },
         flags = set { 'retro' },
-        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
+        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, exp = 500 },
     },
 
     -----------------------------------
@@ -1882,7 +1894,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1378] =
@@ -1890,7 +1902,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.WELCOME_TNORG } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1379] =
@@ -1898,7 +1910,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.KAZHAMS_CHIEFTAINESS } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1380] =
@@ -1906,7 +1918,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1381] =
@@ -1914,7 +1926,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.HEADSTONE_PILGRIMAGE } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1382] =
@@ -1922,7 +1934,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1383] =
@@ -1930,7 +1942,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CHAMBER_OF_ORACLES } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1384] =
@@ -1938,7 +1950,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1385] =
@@ -1946,7 +1958,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.ROMAEVE } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1386] =
@@ -1954,7 +1966,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_DESOLATION } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1387] =
@@ -1962,7 +1974,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_HALL_OF_THE_GODS } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1388] =
@@ -1970,7 +1982,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1389] =
@@ -1978,7 +1990,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_GATE_OF_THE_GODS } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1390] =
@@ -1986,7 +1998,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1391] =
@@ -1994,7 +2006,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_SEALED_SHRINE } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1392] =
@@ -2002,7 +2014,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     -----------------------------------
@@ -2014,7 +2026,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1394] =
@@ -2022,7 +2034,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1395] =
@@ -2030,7 +2042,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1396] =
@@ -2038,7 +2050,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.SLANDEROUS_UTTERINGS } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1397] =
@@ -2046,7 +2058,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1398] =
@@ -2054,7 +2066,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.ONE_TO_BE_FEARED } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1399] =
@@ -2062,7 +2074,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1400] =
@@ -2070,7 +2082,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.DAWN } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     -----------------------------------
@@ -2085,7 +2097,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.A_MERCENARY_LIFE } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1411] =
@@ -2093,7 +2105,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.PASSING_GLORY } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1412] =
@@ -2101,7 +2113,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.PLAYING_THE_PART } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1413] =
@@ -2109,7 +2121,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.SENTINELS_HONOR } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1414] =
@@ -2117,7 +2129,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.STIRRINGS_OF_WAR } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1415] =
@@ -2125,7 +2137,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.THE_EMPRESS_CROWNED } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     -----------------------------------
@@ -2137,7 +2149,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1403] =
@@ -2145,7 +2157,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1404] =
@@ -2153,7 +2165,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.IN_THE_NAME_OF_THE_FATHER } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1405] =
@@ -2161,7 +2173,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.CROSSROADS_OF_TIME } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1406] =
@@ -2169,7 +2181,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.FATE_IN_HAZE } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1407] =
@@ -2177,7 +2189,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.ADIEU_LILISETTE } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1408] =
@@ -2185,7 +2197,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.GLIMMER_OF_LIFE } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1409] =
@@ -2193,7 +2205,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.A_TOKEN_OF_TROTH } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     -----------------------------------
@@ -2205,7 +2217,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.ARCIELA_APPEARS_AGAIN } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1427] =
@@ -2213,7 +2225,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.YGGDRASIL } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1428] =
@@ -2221,7 +2233,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.GLIMMER_OF_PORTENT } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1429] =
@@ -2229,7 +2241,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.ROYAL_BLESSINGS } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     [1430] =
@@ -2237,7 +2249,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_MISSION,
         reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.UNDYING_LIGHT } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500 },
+        reward = { sparks = 300, exp = 500 },
     },
 
     -----------------------------------
@@ -2250,7 +2262,7 @@ xi.roe.records =
         goal = 200,
         reqs = { mobXP = true },
         flags = set { 'repeat' },
-        reward = { sparks = 1000, xp = 5000, accolades = 100 },
+        reward = { sparks = 1000, exp = 5000, accolades = 100 },
     },
 
     [13] =
@@ -2258,7 +2270,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 500,
         reqs = { mobXP = true },
-        reward = { sparks = 2000, xp = 6000, item = { xi.item.PLUTON_CASE } },
+        reward = { sparks = 2000, exp = 6000, item = { xi.item.PLUTON_CASE } },
     },
 
     [14] =
@@ -2266,7 +2278,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 750,
         reqs = { mobXP = true },
-        reward = { sparks = 5000, xp = 10000, item = { xi.item.PLUTON_BOX } },
+        reward = { sparks = 5000, exp = 10000, item = { xi.item.PLUTON_BOX } },
     },
 
     [15] =
@@ -2274,7 +2286,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 200,
         reqs = { mobXP = true, levelSync = true },
-        reward = { sparks = 2000, xp = 6000, accolades = 200 },
+        reward = { sparks = 2000, exp = 6000, accolades = 200 },
     },
 
     [117] =
@@ -2283,7 +2295,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, levelSync = true },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 600, accolades = 20 },
+        reward = { sparks = 200, exp = 600, accolades = 20 },
     },
 
     [16] =
@@ -2292,7 +2304,7 @@ xi.roe.records =
         goal = 200,
         reqs = { dmgMin = 500 },
         flags = set { 'repeat' },
-        reward = { sparks = 1000, xp = 5000, accolades = 100 },
+        reward = { sparks = 1000, exp = 5000, accolades = 100 },
     },
 
     [17] =
@@ -2300,7 +2312,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEAL_DAMAGE,
         goal = 150,
         reqs = { dmgMin = 1000 },
-        reward = { sparks = 1000, xp = 5000 },
+        reward = { sparks = 1000, exp = 5000 },
     },
 
     [18] =
@@ -2308,7 +2320,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEAL_DAMAGE,
         goal = 100,
         reqs = { dmgMin = 1500 },
-        reward = { sparks = 1000, xp = 5000 },
+        reward = { sparks = 1000, exp = 5000 },
     },
 
     [698] =
@@ -2316,7 +2328,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEAL_DAMAGE,
         goal = 100,
         reqs = { dmgMin = 2000 },
-        reward = { sparks = 2000, xp = 5000, item = { { xi.item.COPPER_AMAN_VOUCHER, 6 } } },
+        reward = { sparks = 2000, exp = 5000, item = { { xi.item.COPPER_AMAN_VOUCHER, 6 } } },
     },
 
     [19] =
@@ -2324,7 +2336,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEAL_DAMAGE,
         goal = 10,
         reqs = { dmgMin = 10, dmgMax = 20 },
-        reward = { sparks = 300, xp = 2500 },
+        reward = { sparks = 300, exp = 2500 },
     },
 
     [20] =
@@ -2332,7 +2344,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEAL_DAMAGE,
         goal = 10,
         reqs = { dmgMin = 110, dmgMax = 120 },
-        reward = { sparks = 300, xp = 1500 },
+        reward = { sparks = 300, exp = 1500 },
     },
 
     [21] =
@@ -2340,7 +2352,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEAL_DAMAGE,
         goal = 10,
         reqs = { dmgMin = 310, dmgMax = 320 },
-        reward = { sparks = 300, xp = 1500 },
+        reward = { sparks = 300, exp = 1500 },
     },
 
     [22] =
@@ -2348,7 +2360,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEAL_DAMAGE,
         goal = 10,
         reqs = { dmgMin = 510, dmgMax = 520 },
-        reward = { sparks = 300, xp = 1500 },
+        reward = { sparks = 300, exp = 1500 },
     },
 
     [23] =
@@ -2356,7 +2368,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEAL_DAMAGE,
         goal = 10,
         reqs = { dmgMin = 1110, dmgMax = 1120 },
-        reward = { sparks = 300, xp = 1500, item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } } },
+        reward = { sparks = 300, exp = 1500, item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } } },
     },
 
     [29] =
@@ -2365,7 +2377,7 @@ xi.roe.records =
         goal = 100000,
         increment = 0,
         notify = 5000,
-        reward = { sparks = 1000, xp = 5000, item = { xi.item.BEITETSU_PARCEL } },
+        reward = { sparks = 1000, exp = 5000, item = { xi.item.BEITETSU_PARCEL } },
         check = function(self, player, params)
             if params.dmg and params.dmg > 0 then
                 params.progress = params.progress + params.dmg
@@ -2382,7 +2394,7 @@ xi.roe.records =
         goal = 200000,
         increment = 0,
         notify = 10000,
-        reward = { sparks = 3000, xp = 7000, item = { xi.item.BEITETSU_BOX } },
+        reward = { sparks = 3000, exp = 7000, item = { xi.item.BEITETSU_BOX } },
         check = function(self, player, params)
             if params.dmg and params.dmg > 0 then
                 params.progress = params.progress + params.dmg
@@ -2399,7 +2411,7 @@ xi.roe.records =
         goal = 300000,
         increment = 0,
         notify = 10000,
-        reward = { sparks = 3000, xp = 7000, item = { xi.item.BEITETSU_BOX } },
+        reward = { sparks = 3000, exp = 7000, item = { xi.item.BEITETSU_BOX } },
         check = function(self, player, params)
             if params.dmg and params.dmg > 0 then
                 params.progress = params.progress + params.dmg
@@ -2416,7 +2428,7 @@ xi.roe.records =
         goal = 10000,
         increment = 0,
         notify = 500,
-        reward = { sparks = 1000, xp = 2500, item = { xi.item.BOULDER_CASE } },
+        reward = { sparks = 1000, exp = 2500, item = { xi.item.BOULDER_CASE } },
         check = function(self, player, params)
             if params.heal and params.heal > 0 then
                 params.progress = params.progress + params.heal
@@ -2433,7 +2445,7 @@ xi.roe.records =
         goal = 20000,
         increment = 0,
         notify = 1000,
-        reward = { sparks = 3000, xp = 7000, item = { xi.item.BOULDER_BOX } },
+        reward = { sparks = 3000, exp = 7000, item = { xi.item.BOULDER_BOX } },
         check = function(self, player, params)
             if params.heal and params.heal > 0 then
                 params.progress = params.progress + params.heal
@@ -2450,7 +2462,7 @@ xi.roe.records =
         goal = 30000,
         increment = 0,
         notify = 1000,
-        reward = { sparks = 3000, xp = 7000, item = { xi.item.BOULDER_BOX } },
+        reward = { sparks = 3000, exp = 7000, item = { xi.item.BOULDER_BOX } },
         check = function(self, player, params)
             if params.heal and params.heal > 0 then
                 params.progress = params.progress + params.heal
@@ -2467,7 +2479,7 @@ xi.roe.records =
         goal = 10000,
         increment = 0,
         notify = 500,
-        reward = { sparks = 1000, xp = 1000, item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } } },
+        reward = { sparks = 1000, exp = 1000, item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } } },
         check = function(self, player, params)
             if params.dmg and params.dmg > 0 then
                 params.progress = params.progress + params.dmg
@@ -2484,7 +2496,7 @@ xi.roe.records =
         goal = 20000,
         increment = 0,
         notify = 1000,
-        reward = { sparks = 3000, xp = 5000, item = { { xi.item.COPPER_AMAN_VOUCHER, 4 } } },
+        reward = { sparks = 3000, exp = 5000, item = { { xi.item.COPPER_AMAN_VOUCHER, 4 } } },
         check = function(self, player, params)
             if params.dmg and params.dmg > 0 then
                 params.progress = params.progress + params.dmg
@@ -2501,7 +2513,7 @@ xi.roe.records =
         goal = 30000,
         increment = 0,
         notify = 1000,
-        reward = { sparks = 3000, xp = 5000, item = { { xi.item.COPPER_AMAN_VOUCHER, 6 } } },
+        reward = { sparks = 3000, exp = 5000, item = { { xi.item.COPPER_AMAN_VOUCHER, 6 } } },
         check = function(self, player, params)
             if params.dmg and params.dmg > 0 then
                 params.progress = params.progress + params.dmg
@@ -2516,7 +2528,7 @@ xi.roe.records =
     { -- Weapon Skills 1
         trigger = xi.roeTrigger.USE_WEAPONSKILL,
         goal = 100,
-        reward = { sparks = 500, xp = 2500 },
+        reward = { sparks = 500, exp = 2500 },
     },
 
     [488] =
@@ -2524,7 +2536,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.HEAL_ALLY,
         goal = 100,
         reqs = { healMin = 500 },
-        reward = { sparks = 2000, xp = 6000 },
+        reward = { sparks = 2000, exp = 6000 },
     },
 
     [700] =
@@ -2532,7 +2544,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.HEAL_ALLY,
         goal = 100,
         reqs = { healMin = 750 },
-        reward = { sparks = 3000, xp = 7000, item = { xi.item.PLUTON_BOX } },
+        reward = { sparks = 3000, exp = 7000, item = { xi.item.PLUTON_BOX } },
     },
 
     -----------------------------------
@@ -2544,7 +2556,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.SUCCESSFUL_SYNTHESIS,
         goal = 30,
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10 },
+        reward = { sparks = 100, exp = 500, accolades = 10 },
     },
 
     -----------------------------------
@@ -2557,7 +2569,7 @@ xi.roe.records =
         goal = 10,
         reqs = { itemID = set { xi.item.FIRE_CRYSTAL } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [72] =
@@ -2566,7 +2578,7 @@ xi.roe.records =
         goal = 10,
         reqs = { itemID = set { xi.item.ICE_CRYSTAL } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [73] =
@@ -2575,7 +2587,7 @@ xi.roe.records =
         goal = 10,
         reqs = { itemID = set { xi.item.WIND_CRYSTAL } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [74] =
@@ -2584,7 +2596,7 @@ xi.roe.records =
         goal = 10,
         reqs = { itemID = set { xi.item.EARTH_CRYSTAL } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [75] =
@@ -2593,7 +2605,7 @@ xi.roe.records =
         goal = 10,
         reqs = { itemID = set { xi.item.LIGHTNING_CRYSTAL } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [76] =
@@ -2602,7 +2614,7 @@ xi.roe.records =
         goal = 10,
         reqs = { itemID = set { xi.item.WATER_CRYSTAL } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [77] =
@@ -2611,7 +2623,7 @@ xi.roe.records =
         goal = 10,
         reqs = { itemID = set { xi.item.LIGHT_CRYSTAL } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [78] =
@@ -2620,7 +2632,7 @@ xi.roe.records =
         goal = 10,
         reqs = { itemID = set { xi.item.DARK_CRYSTAL } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [84] =
@@ -2629,7 +2641,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.FLAME_GEODE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [85] =
@@ -2638,7 +2650,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.SNOW_GEODE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [86] =
@@ -2647,7 +2659,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.BREEZE_GEODE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [87] =
@@ -2656,7 +2668,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.SOIL_GEODE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [88] =
@@ -2665,7 +2677,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.THUNDER_GEODE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [89] =
@@ -2674,7 +2686,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.AQUA_GEODE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [90] =
@@ -2683,7 +2695,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.LIGHT_GEODE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [91] =
@@ -2692,7 +2704,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.SHADOW_GEODE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [92] =
@@ -2701,7 +2713,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.IFRITITE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [93] =
@@ -2710,7 +2722,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.SHIVITE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [94] =
@@ -2719,7 +2731,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.GARUDITE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [95] =
@@ -2728,7 +2740,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.TITANITE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [96] =
@@ -2737,7 +2749,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.RAMUITE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [97] =
@@ -2746,7 +2758,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.LEVIATITE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [98] =
@@ -2755,7 +2767,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.CARBITE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     [99] =
@@ -2764,7 +2776,7 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.FENRITE } },
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     },
 
     -----------------------------------
@@ -2777,7 +2789,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.BAT_WING } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [121] =
@@ -2786,7 +2798,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.BLACK_TIGER_FANG } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [122] =
@@ -2795,7 +2807,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.FLINT_STONE } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [123] =
@@ -2804,7 +2816,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.RABBIT_HIDE } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [124] =
@@ -2813,7 +2825,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.POT_OF_HONEY } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [125] =
@@ -2822,7 +2834,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.SHEEPSKIN } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [126] =
@@ -2831,7 +2843,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.LIZARD_SKIN } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [127] =
@@ -2840,7 +2852,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.BEETLE_SHELL } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [128] =
@@ -2849,7 +2861,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.PINCH_OF_ZERUHN_SOOT } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [129] =
@@ -2858,7 +2870,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.SILVER_NAME_TAG } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [130] =
@@ -2867,7 +2879,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.QUADAV_HELM } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [132] =
@@ -2876,7 +2888,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.TREANT_BULB } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [133] =
@@ -2885,7 +2897,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.WILD_ONION } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [134] =
@@ -2894,7 +2906,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.SLEEPSHROOM } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [135] =
@@ -2903,7 +2915,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.SAND_BAT_FANG } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [136] =
@@ -2912,7 +2924,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.CHUNK_OF_ZINC_ORE } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [137] =
@@ -2921,7 +2933,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.GIANT_BIRD_FEATHER } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [138] =
@@ -2930,7 +2942,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.THREE_LEAF_MANDRAGORA_BUD } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [139] =
@@ -2939,7 +2951,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.FOUR_LEAF_MANDRAGORA_BUD } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [140] =
@@ -2948,7 +2960,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.CORNETTE } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [141] =
@@ -2957,7 +2969,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.PINCH_OF_YUHTUNGA_SULFUR } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [142] =
@@ -2966,7 +2978,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.SNOBBY_LETTER } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [143] =
@@ -2975,7 +2987,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.YAGUDO_BEAD_NECKLACE } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [144] =
@@ -2984,7 +2996,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.WOOZYSHROOM } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [145] =
@@ -2993,7 +3005,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.BEEHIVE_CHIP } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [146] =
@@ -3002,7 +3014,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.REMI_SHELL } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     [147] =
@@ -3011,7 +3023,7 @@ xi.roe.records =
         goal = 2,
         reqs = { itemID = set { xi.item.TWINSTONE_EARRING } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 300, accolades = 10 },
+        reward = { sparks = 100, exp = 300, accolades = 10 },
     },
 
     -----------------------------------
@@ -3024,14 +3036,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 100 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.BOWL_OF_NAVARIN } },
+        reward = { sparks = 10, exp = 500, accolades = 5, item = { xi.item.BOWL_OF_NAVARIN } },
     },
 
     [216] =
     { -- Subjugation: Jaggedy-Eared Jack
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17187111 } },
-        reward = { sparks = 250, xp = 500 },
+        reward = { sparks = 250, exp = 500 },
     },
 
     [217] =
@@ -3040,14 +3052,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 101 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.BRASS_HARNESS } },
+        reward = { sparks = 10, exp = 500, accolades = 5, item = { xi.item.BRASS_HARNESS } },
     },
 
     [218] =
     { -- Subjugation: Swamfisk
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17191189, 17191291 } },
-        reward = { sparks = 250, xp = 500 },
+        reward = { sparks = 250, exp = 500 },
     },
 
     [219] =
@@ -3056,14 +3068,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 140 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.SARDONYX_EARRING } },
+        reward = { sparks = 10, exp = 500, accolades = 5, item = { xi.item.SARDONYX_EARRING } },
     },
 
     [220] =
     { -- Subjugation: Thousandarm Deshglesh
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17350826 } },
-        reward = { sparks = 250, xp = 550 },
+        reward = { sparks = 250, exp = 550 },
     },
 
     [221] =
@@ -3072,14 +3084,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 141 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.AMETHYST_EARRING } },
+        reward = { sparks = 10, exp = 500, accolades = 5, item = { xi.item.AMETHYST_EARRING } },
     },
 
     [222] =
     { -- Subjugation: Hundredscar Hajwaj
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17354828 } },
-        reward = { sparks = 500, xp = 1000 },
+        reward = { sparks = 500, exp = 1000 },
     },
 
     [223] =
@@ -3088,14 +3100,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 142 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.ONYX_EARRING } },
+        reward = { sparks = 10, exp = 500, accolades = 5, item = { xi.item.ONYX_EARRING } },
     },
 
     [224] =
     { -- Subjugation: Ashmaker Gotblut
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17358932 } },
-        reward = { sparks = 250, xp = 500 },
+        reward = { sparks = 250, exp = 500 },
     },
 
     [225] =
@@ -3104,14 +3116,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 190 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.item.OPAL_RING } },
+        reward = { sparks = 10, exp = 100, accolades = 5, item = { xi.item.OPAL_RING } },
     },
 
     [226] =
     { -- Subjugation: Barbastelle
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17555721 } },
-        reward = { sparks = 250, xp = 500 },
+        reward = { sparks = 250, exp = 500 },
     },
 
     [227] =
@@ -3120,14 +3132,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 167 } },
         flags = set { 'repeat' },
-        reward = { sparks = 15, xp = 100, accolades = 5, item = { xi.item.ACCURA_CAPE } },
+        reward = { sparks = 15, exp = 100, accolades = 5, item = { xi.item.ACCURA_CAPE } },
     },
 
     [228] =
     { -- Subjugation: Bloodsucker
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17461478 } },
-        reward = { sparks = 500, xp = 1000 },
+        reward = { sparks = 500, exp = 1000 },
     },
 
     [229] =
@@ -3136,14 +3148,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 103 } },
         flags = set { 'repeat' },
-        reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.SILVER_RING } },
+        reward = { sparks = 11, exp = 550, accolades = 5, item = { xi.item.SILVER_RING } },
     },
 
     [230] =
     { -- Subjugation: Valkurm Emperor
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17199438 } },
-        reward = { sparks = 250, xp = 550 },
+        reward = { sparks = 250, exp = 550 },
     },
 
     [231] =
@@ -3152,14 +3164,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 108 } },
         flags = set { 'repeat' },
-        reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.LAPIS_LAZULI_RING } },
+        reward = { sparks = 11, exp = 550, accolades = 5, item = { xi.item.LAPIS_LAZULI_RING } },
     },
 
     [232] =
     { -- Subjugation: Bendigeit Vran
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17220001 } },
-        reward = { sparks = 250, xp = 600 },
+        reward = { sparks = 250, exp = 600 },
     },
 
     [233] =
@@ -3168,14 +3180,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 196 } },
         flags = set { 'repeat' },
-        reward = { sparks = 11, xp = 100, accolades = 5, item = { xi.item.AMETHYST_RING } },
+        reward = { sparks = 11, exp = 100, accolades = 5, item = { xi.item.AMETHYST_RING } },
     },
 
     [234] =
     { -- Subjugation: Juggler Hecatomb
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17580248 } },
-        reward = { sparks = 250, xp = 600 },
+        reward = { sparks = 250, exp = 600 },
     },
 
     [235] =
@@ -3184,14 +3196,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 102 } },
         flags = set { 'repeat' },
-        reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.SARDONYX_RING } },
+        reward = { sparks = 11, exp = 550, accolades = 5, item = { xi.item.SARDONYX_RING } },
     },
 
     [236] =
     { -- Subjugation: Bloodtear Baldurf
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17195318 } },
-        reward = { sparks = 500, xp = 1000 },
+        reward = { sparks = 500, exp = 1000 },
     },
 
     [237] =
@@ -3200,14 +3212,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 193 } },
         flags = set { 'repeat' },
-        reward = { sparks = 12, xp = 100, accolades = 5, item = { xi.item.CLEAR_RING } },
+        reward = { sparks = 12, exp = 100, accolades = 5, item = { xi.item.CLEAR_RING } },
     },
 
     [238] =
     { -- Subjugation: Morbolger
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17568127 } },
-        reward = { sparks = 500, xp = 1000 },
+        reward = { sparks = 500, exp = 1000 },
     },
 
     -----------------------------------
@@ -3220,14 +3232,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 104 } },
         flags = set { 'repeat' },
-        reward = { sparks = 12, xp = 600, accolades = 5, item = { { xi.item.MEAT_MITHKABOB, 12 } } },
+        reward = { sparks = 12, exp = 600, accolades = 5, item = { { xi.item.MEAT_MITHKABOB, 12 } } },
     },
 
     [240] =
     { -- Subjugation: King Arthro
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17203216 } },
-        reward = { sparks = 500, xp = 1000 },
+        reward = { sparks = 500, exp = 1000 },
     },
 
     [241] =
@@ -3236,14 +3248,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 105 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.INVISIBLE_MANTLE } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.INVISIBLE_MANTLE } },
     },
 
     [242] =
     { -- Subjugation: Lumber Jack
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17207308 } },
-        reward = { sparks = 500, xp = 1000 },
+        reward = { sparks = 500, exp = 1000 },
     },
 
     [243] =
@@ -3252,14 +3264,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 195 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.item.SWORDBELT } },
+        reward = { sparks = 14, exp = 100, accolades = 5, item = { xi.item.SWORDBELT } },
     },
 
     [244] =
     { -- Subjugation: Cwn Cyrff
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17576054 } },
-        reward = { sparks = 250, xp = 800 },
+        reward = { sparks = 250, exp = 800 },
     },
 
     [245] =
@@ -3268,14 +3280,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 149 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.BANDED_MAIL } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.BANDED_MAIL } },
     },
 
     [246] =
     { -- Subjugation: Hawkeyed Dnatbat
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17387567 } },
-        reward = { sparks = 250, xp = 600 },
+        reward = { sparks = 250, exp = 600 },
     },
 
     [247] =
@@ -3284,14 +3296,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 106 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.JACK_O_LANTERN } },
+        reward = { sparks = 10, exp = 500, accolades = 5, item = { xi.item.JACK_O_LANTERN } },
     },
 
     [248] =
     { -- Subjugation: Maighdean Uaine
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17211702, 17211714 } },
-        reward = { sparks = 250, xp = 500 },
+        reward = { sparks = 250, exp = 500 },
     },
 
     [249] =
@@ -3300,14 +3312,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 107 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.DOUBLET } },
+        reward = { sparks = 10, exp = 500, accolades = 5, item = { xi.item.DOUBLET } },
     },
 
     [250] =
     { -- Subjugation: Carnero
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17215613, 17215626 } },
-        reward = { sparks = 250, xp = 500 },
+        reward = { sparks = 250, exp = 500 },
     },
 
     [251] =
@@ -3316,7 +3328,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 172 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.item.AMBER_EARRING } },
+        reward = { sparks = 10, exp = 100, accolades = 5, item = { xi.item.AMBER_EARRING } },
     },
 
     [252] =
@@ -3325,14 +3337,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 143 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.TOURMALINE_EARRING } },
+        reward = { sparks = 10, exp = 500, accolades = 5, item = { xi.item.TOURMALINE_EARRING } },
     },
 
     [253] =
     { -- Subjugation: Zi-Ghi Bone-eater
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17363208 } },
-        reward = { sparks = 250, xp = 500 },
+        reward = { sparks = 250, exp = 500 },
     },
 
     [254] =
@@ -3341,14 +3353,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 191 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.item.AMBER_RING } },
+        reward = { sparks = 10, exp = 100, accolades = 5, item = { xi.item.AMBER_RING } },
     },
 
     [255] =
     { -- Subjugation: Teporingo
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17559584 } },
-        reward = { sparks = 250, xp = 500 },
+        reward = { sparks = 250, exp = 500 },
     },
 
     [256] =
@@ -3357,14 +3369,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 109 } },
         flags = set { 'repeat' },
-        reward = { sparks = 12, xp = 600, accolades = 5, item = { { xi.item.PLATE_OF_CRAB_SUSHI, 12 } } },
+        reward = { sparks = 12, exp = 600, accolades = 5, item = { { xi.item.PLATE_OF_CRAB_SUSHI, 12 } } },
     },
 
     [257] =
     { -- Subjugation: Ni'Zho Bladebender
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17223797 } },
-        reward = { sparks = 250, xp = 700 },
+        reward = { sparks = 250, exp = 700 },
     },
 
     [258] =
@@ -3373,14 +3385,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 110 } },
         flags = set { 'repeat' },
-        reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.HIGH_BREATH_MANTLE } },
+        reward = { sparks = 12, exp = 600, accolades = 5, item = { xi.item.HIGH_BREATH_MANTLE } },
     },
 
     [259] =
     { -- Subjugation: Simurgh
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17228242 } },
-        reward = { sparks = 250, xp = 1000 },
+        reward = { sparks = 250, exp = 1000 },
     },
 
     [260] =
@@ -3389,14 +3401,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 197 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.item.CORSETTE } },
+        reward = { sparks = 14, exp = 100, accolades = 5, item = { xi.item.CORSETTE } },
     },
 
     [261] =
     { -- Subjugation: Demonic Tiphia
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17584398 } },
-        reward = { sparks = 250, xp = 800 },
+        reward = { sparks = 250, exp = 800 },
     },
 
     [262] =
@@ -3405,14 +3417,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 147 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.BRIGANDINE_ARMOR } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.BRIGANDINE_ARMOR } },
     },
 
     [263] =
     { -- Subjugation: Zo'Khu Blackcloud
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17379564 } },
-        reward = { sparks = 250, xp = 700 },
+        reward = { sparks = 250, exp = 700 },
     },
 
     -----------------------------------
@@ -3425,14 +3437,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 115 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.CUP_OF_CHOCOMILK } },
+        reward = { sparks = 10, exp = 500, accolades = 5, item = { xi.item.CUP_OF_CHOCOMILK } },
     },
 
     [265] =
     { -- Subjugation: Nunyenunc
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17248517 } },
-        reward = { sparks = 250, xp = 500 },
+        reward = { sparks = 250, exp = 500 },
     },
 
     [266] =
@@ -3441,14 +3453,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 116 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.LINEN_ROBE } },
+        reward = { sparks = 10, exp = 500, accolades = 5, item = { xi.item.LINEN_ROBE } },
     },
 
     [267] =
     { -- Subjugation: Spiny Spipi
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17252657 } },
-        reward = { sparks = 250, xp = 500 },
+        reward = { sparks = 250, exp = 500 },
     },
 
     [268] =
@@ -3457,14 +3469,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 145 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.OPAL_EARRING } },
+        reward = { sparks = 10, exp = 500, accolades = 5, item = { xi.item.OPAL_EARRING } },
     },
 
     [269] =
     { -- Subjugation: Hoo Mjuu the Torrent
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17371515 } },
-        reward = { sparks = 250, xp = 500 },
+        reward = { sparks = 250, exp = 500 },
     },
 
     [270] =
@@ -3473,14 +3485,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 169 } },
         flags = set { 'repeat' },
-        reward = { sparks = 15, xp = 100, accolades = 5, item = { xi.item.RED_CAPE } },
+        reward = { sparks = 15, exp = 100, accolades = 5, item = { xi.item.RED_CAPE } },
     },
 
     [271] =
     { -- Subjugation: Oni Carcass
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17469587 } },
-        reward = { sparks = 250, xp = 800 },
+        reward = { sparks = 250, exp = 800 },
     },
 
     [272] =
@@ -3489,14 +3501,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 192 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.item.CLEAR_EARRING } },
+        reward = { sparks = 10, exp = 100, accolades = 5, item = { xi.item.CLEAR_EARRING } },
     },
 
     [273] =
     { -- Subjugation: Maltha
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17563749 } },
-        reward = { sparks = 250, xp = 500 },
+        reward = { sparks = 250, exp = 500 },
     },
 
     [274] =
@@ -3505,14 +3517,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 194 } },
         flags = set { 'repeat' },
-        reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.item.LAPIS_LAZULI_EARRING } },
+        reward = { sparks = 10, exp = 100, accolades = 5, item = { xi.item.LAPIS_LAZULI_EARRING } },
     },
 
     [275] =
     { -- Subjugation: Bomb King
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17572094, 17572142, 17572146 } },
-        reward = { sparks = 250, xp = 500 },
+        reward = { sparks = 250, exp = 500 },
     },
 
     [276] =
@@ -3521,14 +3533,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 118 } },
         flags = set { 'repeat' },
-        reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.ONYX_RING } },
+        reward = { sparks = 12, exp = 600, accolades = 5, item = { xi.item.ONYX_RING } },
     },
 
     [277] =
     { -- Subjugation: Helldiver
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17260907 } },
-        reward = { sparks = 250, xp = 600 },
+        reward = { sparks = 250, exp = 600 },
     },
 
     [278] =
@@ -3537,14 +3549,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 117 } },
         flags = set { 'repeat' },
-        reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.TOURMALINE_RING } },
+        reward = { sparks = 11, exp = 550, accolades = 5, item = { xi.item.TOURMALINE_RING } },
     },
 
     [279] =
     { -- Subjugation: Serpopard Ishtar
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17256563, 17256690 } },
-        reward = { sparks = 250, xp = 600 },
+        reward = { sparks = 250, exp = 600 },
     },
 
     [280] =
@@ -3553,14 +3565,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 198 } },
         flags = set { 'repeat' },
-        reward = { sparks = 12, xp = 100, accolades = 5, item = { xi.item.BONE_EARRING } },
+        reward = { sparks = 12, exp = 100, accolades = 5, item = { xi.item.BONE_EARRING } },
     },
 
     [281] =
     { -- Subjugation: Argus
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17588674 } },
-        reward = { sparks = 500, xp = 1000 },
+        reward = { sparks = 500, exp = 1000 },
     },
 
     [282] =
@@ -3569,14 +3581,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 119 } },
         flags = set { 'repeat' },
-        reward = { sparks = 12, xp = 600, accolades = 5, item = { { xi.item.APPLE_PIE, 12 } } },
+        reward = { sparks = 12, exp = 600, accolades = 5, item = { { xi.item.APPLE_PIE, 12 } } },
     },
 
     [283] =
     { -- Subjugation: Daggerclaw Dracos
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17264818 } },
-        reward = { sparks = 250, xp = 600 },
+        reward = { sparks = 250, exp = 600 },
     },
 
     [284] =
@@ -3585,14 +3597,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 120 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.BLACK_CAPE } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.BLACK_CAPE } },
     },
 
     [285] =
     { -- Subjugation: Roc
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17269106 } },
-        reward = { sparks = 500, xp = 1000 },
+        reward = { sparks = 500, exp = 1000 },
     },
 
     [286] =
@@ -3601,14 +3613,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 200 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.item.QIQIRN_SASH } },
+        reward = { sparks = 14, exp = 100, accolades = 5, item = { xi.item.QIQIRN_SASH } },
     },
 
     [287] =
     { -- Subjugation: Serket
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17596720 } },
-        reward = { sparks = 500, xp = 1000 },
+        reward = { sparks = 500, exp = 1000 },
     },
 
     [288] =
@@ -3617,14 +3629,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 151 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.PYRO_ROBE } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.PYRO_ROBE } },
     },
 
     [289] =
     { -- Subjugation: Lii Jixa the Somnolist
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17395896 } },
-        reward = { sparks = 250, xp = 800 },
+        reward = { sparks = 250, exp = 800 },
     },
 
     -----------------------------------
@@ -3637,14 +3649,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 111 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.MOHBWA_SCARF } },
+        reward = { sparks = 14, exp = 700, accolades = 5, item = { xi.item.MOHBWA_SCARF } },
     },
 
     [291] =
     { -- Subjugation: Nue
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17231971 } },
-        reward = { sparks = 250, xp = 700 },
+        reward = { sparks = 250, exp = 700 },
     },
 
     [292] =
@@ -3653,14 +3665,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 166 } },
         flags = set { 'repeat' },
-        reward = { sparks = 11, xp = 100, accolades = 5, item = { xi.item.BEETLE_EARRING } },
+        reward = { sparks = 11, exp = 100, accolades = 5, item = { xi.item.BEETLE_EARRING } },
     },
 
     [293] =
     { -- Subjugation: Gloom Eye
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17457204 } },
-        reward = { sparks = 250, xp = 700 },
+        reward = { sparks = 250, exp = 700 },
     },
 
     [294] =
@@ -3669,14 +3681,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 204 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.item.TORTOISE_EARRING } },
+        reward = { sparks = 14, exp = 100, accolades = 5, item = { xi.item.TORTOISE_EARRING } },
     },
 
     [295] =
     { -- Subjugation: Goliath
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17613046, 17613048, 17613052, 17613054 } },
-        reward = { sparks = 250, xp = 800 },
+        reward = { sparks = 250, exp = 800 },
     },
 
     [296] =
@@ -3685,14 +3697,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 112 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.GOLD_EARRING } },
+        reward = { sparks = 14, exp = 700, accolades = 5, item = { xi.item.GOLD_EARRING } },
     },
 
     [297] =
     { -- Subjugation: Biast
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17235988 } },
-        reward = { sparks = 500, xp = 1000 },
+        reward = { sparks = 500, exp = 1000 },
     },
 
     [298] =
@@ -3701,14 +3713,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 161 } },
         flags = set { 'repeat' },
-        reward = { sparks = 15, xp = 750, accolades = 5, item = { xi.item.HI_POTION_TANK } },
+        reward = { sparks = 15, exp = 750, accolades = 5, item = { xi.item.HI_POTION_TANK } },
     },
 
     [299] =
     { -- Subjugation: Duke Haborym
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17436923 } },
-        reward = { sparks = 500, xp = 1000 },
+        reward = { sparks = 500, exp = 1000 },
     },
 
     [300] =
@@ -3717,14 +3729,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 162 } },
         flags = set { 'repeat' },
-        reward = { sparks = 15, xp = 750, accolades = 5, item = { xi.item.HI_ETHER_TANK } },
+        reward = { sparks = 15, exp = 750, accolades = 5, item = { xi.item.HI_ETHER_TANK } },
     },
 
     [301] =
     { -- Subjugation: Baron Vapula
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17440963 } },
-        reward = { sparks = 250, xp = 800 },
+        reward = { sparks = 250, exp = 800 },
     },
 
     [302] =
@@ -3733,14 +3745,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 126 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.FOCUS_COLLAR } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.FOCUS_COLLAR } },
     },
 
     [303] =
     { -- Subjugation: Dosetsu Tree
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17293640 } },
-        reward = { sparks = 500, xp = 1000 },
+        reward = { sparks = 500, exp = 1000 },
     },
 
     [304] =
@@ -3749,14 +3761,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 184 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 100, accolades = 5, item = { { xi.item.CONE_OF_SNOLL_GELATO, 12 } } },
+        reward = { sparks = 13, exp = 100, accolades = 5, item = { { xi.item.CONE_OF_SNOLL_GELATO, 12 } } },
     },
 
     [305] =
     { -- Subjugation: Epialtes
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17530881 } },
-        reward = { sparks = 250, xp = 700 },
+        reward = { sparks = 250, exp = 700 },
     },
 
     [306] =
@@ -3765,14 +3777,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 157 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 100, accolades = 5, item = { { xi.item.PLATE_OF_SOLE_SUSHI, 12 } } },
+        reward = { sparks = 13, exp = 100, accolades = 5, item = { { xi.item.PLATE_OF_SOLE_SUSHI, 12 } } },
     },
 
     [307] =
     { -- Subjugation: Ogygos
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17420592 } },
-        reward = { sparks = 250, xp = 700 },
+        reward = { sparks = 250, exp = 700 },
     },
 
     [308] =
@@ -3781,14 +3793,14 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 158 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 100, accolades = 5, item = { { xi.item.YELLOW_CURRY_BUN, 12 } } },
+        reward = { sparks = 14, exp = 100, accolades = 5, item = { { xi.item.YELLOW_CURRY_BUN, 12 } } },
     },
 
     [309] =
     { -- Subjugation: Enkelados
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17424385, 17424423 } },
-        reward = { sparks = 250, xp = 800 },
+        reward = { sparks = 250, exp = 800 },
     },
 
     [380] =
@@ -3797,7 +3809,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 127 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 100, accolades = 5, item = { { xi.item.FISH_MITHKABOB, 12 } } },
+        reward = { sparks = 14, exp = 100, accolades = 5, item = { { xi.item.FISH_MITHKABOB, 12 } } },
     },
 
     -----------------------------------
@@ -3810,7 +3822,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Spoutdrenched_Toad' }, zone = set { 258 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        reward = { sparks = 100, exp = 500, capacity = 100, accolades = 10 },
     },
 
     [311] =
@@ -3819,7 +3831,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Stillwater_Funguar' }, zone = set { 258 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        reward = { sparks = 100, exp = 500, capacity = 100, accolades = 10 },
     },
 
     [312] =
@@ -3828,7 +3840,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Pewter_Diremite' }, zone = set { 258 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        reward = { sparks = 100, exp = 500, capacity = 100, accolades = 10 },
     },
 
     [313] =
@@ -3837,7 +3849,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Blanched_Mandragora' }, zone = set { 261 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        reward = { sparks = 100, exp = 500, capacity = 100, accolades = 10 },
     },
 
     [314] =
@@ -3846,7 +3858,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Careening_Twitherym' }, zone = set { 261 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        reward = { sparks = 100, exp = 500, capacity = 100, accolades = 10 },
     },
 
     [315] =
@@ -3855,7 +3867,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Resplendent_Luckybug' }, zone = set { 261 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        reward = { sparks = 100, exp = 500, capacity = 100, accolades = 10 },
     },
 
     [316] =
@@ -3864,7 +3876,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Calfcleaving_Chapuli' }, zone = set { 260 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        reward = { sparks = 100, exp = 500, capacity = 100, accolades = 10 },
     },
 
     [317] =
@@ -3873,7 +3885,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Twitherym_Infestation' }, zone = set { 260 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        reward = { sparks = 100, exp = 500, capacity = 100, accolades = 10 },
     },
 
     [318] =
@@ -3882,7 +3894,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Nettled_Wasp' }, zone = set { 260 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        reward = { sparks = 100, exp = 500, capacity = 100, accolades = 10 },
     },
 
     [319] =
@@ -3891,7 +3903,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Perfidious_Crab' }, zone = set { 262 } },
         flags = set { 'repeat' },
-        reward = { sparks = 110, xp = 500, capacity = 100, accolades = 11 },
+        reward = { sparks = 110, exp = 500, capacity = 100, accolades = 11 },
     },
 
     [320] =
@@ -3900,7 +3912,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Scummy_Slug' }, zone = set { 262 } },
         flags = set { 'repeat' },
-        reward = { sparks = 110, xp = 500, capacity = 100, accolades = 11 },
+        reward = { sparks = 110, exp = 500, capacity = 100, accolades = 11 },
     },
 
     [321] =
@@ -3909,7 +3921,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Vorst_Gnat' }, zone = set { 262 } },
         flags = set { 'repeat' },
-        reward = { sparks = 110, xp = 500, capacity = 100, accolades = 11 },
+        reward = { sparks = 110, exp = 500, capacity = 100, accolades = 11 },
     },
 
     [322] =
@@ -3918,7 +3930,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Sinewy_Matamata' }, zone = set { 265 } },
         flags = set { 'repeat' },
-        reward = { sparks = 110, xp = 500, capacity = 100, accolades = 11 },
+        reward = { sparks = 110, exp = 500, capacity = 100, accolades = 11 },
     },
 
     [323] =
@@ -3927,7 +3939,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Tephra_Lizard' }, zone = set { 265 } },
         flags = set { 'repeat' },
-        reward = { sparks = 110, xp = 500, capacity = 100, accolades = 11 },
+        reward = { sparks = 110, exp = 500, capacity = 100, accolades = 11 },
     },
 
     [324] =
@@ -3936,7 +3948,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Maca_Maca' }, zone = set { 265 } },
         flags = set { 'repeat' },
-        reward = { sparks = 110, xp = 500, capacity = 100, accolades = 11 },
+        reward = { sparks = 110, exp = 500, capacity = 100, accolades = 11 },
     },
 
     [325] =
@@ -3945,7 +3957,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Snapweed' }, zone = set { 263 } },
         flags = set { 'repeat' },
-        reward = { sparks = 120, xp = 500, capacity = 100, accolades = 12 },
+        reward = { sparks = 120, exp = 500, capacity = 100, accolades = 12 },
     },
 
     [326] =
@@ -3954,7 +3966,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Cheeky_Opo-opo' }, zone = set { 263 } },
         flags = set { 'repeat' },
-        reward = { sparks = 120, xp = 500, capacity = 100, accolades = 12 },
+        reward = { sparks = 120, exp = 500, capacity = 100, accolades = 12 },
     },
 
     [327] =
@@ -3963,7 +3975,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Bronzecap' }, zone = set { 263 } },
         flags = set { 'repeat' },
-        reward = { sparks = 120, xp = 500, capacity = 100, accolades = 12 },
+        reward = { sparks = 120, exp = 500, capacity = 100, accolades = 12 },
     },
 
     [328] =
@@ -3972,7 +3984,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Vinelash_Vulture' }, zone = set { 266 } },
         flags = set { 'repeat' },
-        reward = { sparks = 120, xp = 500, capacity = 100, accolades = 12 },
+        reward = { sparks = 120, exp = 500, capacity = 100, accolades = 12 },
     },
 
     [329] =
@@ -3981,7 +3993,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Stryx' }, zone = set { 266 } },
         flags = set { 'repeat' },
-        reward = { sparks = 120, xp = 500, capacity = 100, accolades = 12 },
+        reward = { sparks = 120, exp = 500, capacity = 100, accolades = 12 },
     },
 
     [330] =
@@ -3990,7 +4002,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Lapinion' }, zone = set { 266 } },
         flags = set { 'repeat' },
-        reward = { sparks = 120, xp = 500, capacity = 100, accolades = 12 },
+        reward = { sparks = 120, exp = 500, capacity = 100, accolades = 12 },
     },
 
     -----------------------------------
@@ -4003,7 +4015,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Snowpelt_Rabbit' }, zone = set { 267 } },
         flags = set { 'repeat' },
-        reward = { sparks = 130, xp = 500, capacity = 100, accolades = 13 },
+        reward = { sparks = 130, exp = 500, capacity = 100, accolades = 13 },
     },
 
     [332] =
@@ -4012,7 +4024,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Cicatricose_Raaz' }, zone = set { 267 } },
         flags = set { 'repeat' },
-        reward = { sparks = 130, xp = 500, capacity = 100, accolades = 13 },
+        reward = { sparks = 130, exp = 500, capacity = 100, accolades = 13 },
     },
 
     [333] =
@@ -4021,7 +4033,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Shaggy_Ovim' }, zone = set { 267 } },
         flags = set { 'repeat' },
-        reward = { sparks = 130, xp = 500, capacity = 100, accolades = 13 },
+        reward = { sparks = 130, exp = 500, capacity = 100, accolades = 13 },
     },
 
     [334] =
@@ -4030,7 +4042,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Bonaria' }, zone = set { 268 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [335] =
@@ -4039,7 +4051,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Loathsome_Obdella' }, zone = set { 268 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [336] =
@@ -4048,7 +4060,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Ferocious_Funguar' }, zone = set { 268 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [337] =
@@ -4057,7 +4069,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Conflagrant_Eruca' }, zone = set { 269 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [338] =
@@ -4066,7 +4078,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Erythemic_Eft' }, zone = set { 269 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [339] =
@@ -4075,7 +4087,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Ferocious_Funguar' }, zone = set { 269 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [340] =
@@ -4084,7 +4096,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Subterrane_Spider' }, zone = set { 270 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [341] =
@@ -4093,7 +4105,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Livid_Umbril' }, zone = set { 270 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [342] =
@@ -4102,7 +4114,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Flatus_Acuex' }, zone = set { 270 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [343] =
@@ -4111,7 +4123,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Velkk_Magus' }, zone = set { 272 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [344] =
@@ -4120,7 +4132,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Ripsaw_Jagil' }, zone = set { 272 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [345] =
@@ -4129,7 +4141,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Unyielding_Tarichuk' }, zone = set { 272 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [346] =
@@ -4138,7 +4150,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Metalcruncher_Worm' }, zone = set { 273 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [347] =
@@ -4147,7 +4159,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Drusy_Twitherym' }, zone = set { 273 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [348] =
@@ -4156,7 +4168,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Wheezing_Acuex' }, zone = set { 273 } },
         flags = set { 'repeat' },
-        reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        reward = { sparks = 160, exp = 500, capacity = 100, accolades = 16 },
     },
 
     [494] =
@@ -4165,7 +4177,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Restless_Twitherym' }, zone = set { 274 } },
         flags = set { 'repeat' },
-        reward = { sparks = 170, xp = 500, capacity = 100, accolades = 17 },
+        reward = { sparks = 170, exp = 500, capacity = 100, accolades = 17 },
     },
 
     [495] =
@@ -4174,7 +4186,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Bristlehair_Bat' }, zone = set { 274 } },
         flags = set { 'repeat' },
-        reward = { sparks = 170, xp = 500, capacity = 100, accolades = 17 },
+        reward = { sparks = 170, exp = 500, capacity = 100, accolades = 17 },
     },
 
     [496] =
@@ -4183,7 +4195,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Astringent_Acuex' }, zone = set { 274 } },
         flags = set { 'repeat' },
-        reward = { sparks = 170, xp = 500, capacity = 100, accolades = 17 },
+        reward = { sparks = 170, exp = 500, capacity = 100, accolades = 17 },
     },
 
     [762] =
@@ -4192,7 +4204,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Bilespouting_Acuex' }, zone = set { 276 } },
         flags = set { 'repeat' },
-        reward = { sparks = 180, xp = 600, capacity = 100, accolades = 18 },
+        reward = { sparks = 180, exp = 600, capacity = 100, accolades = 18 },
     },
 
     [763] =
@@ -4201,7 +4213,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Scowling_Vodoriga' }, zone = set { 276 } },
         flags = set { 'repeat' },
-        reward = { sparks = 180, xp = 600, capacity = 100, accolades = 18 },
+        reward = { sparks = 180, exp = 600, capacity = 100, accolades = 18 },
     },
 
     [764] =
@@ -4210,7 +4222,7 @@ xi.roe.records =
         goal = 5,
         reqs = { mobName = set { 'Unrepentant_Byrgen' }, zone = set { 276 } },
         flags = set { 'repeat' },
-        reward = { sparks = 180, xp = 600, capacity = 100, accolades = 18 },
+        reward = { sparks = 180, exp = 600, capacity = 100, accolades = 18 },
     },
 
     -----------------------------------
@@ -4223,7 +4235,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 121 } },
         flags = set { 'repeat' },
-        reward = { sparks = 12, xp = 600, accolades = 5, item = { { xi.item.FLASK_OF_ECHO_DROPS, 12 } } },
+        reward = { sparks = 12, exp = 600, accolades = 5, item = { { xi.item.FLASK_OF_ECHO_DROPS, 12 } } },
     },
 
     [392] =
@@ -4232,7 +4244,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 122 } },
         flags = set { 'repeat' },
-        reward = { sparks = 16, xp = 800, accolades = 5, item = { { xi.item.BOTTLE_OF_MULSUM, 12 } } },
+        reward = { sparks = 16, exp = 800, accolades = 5, item = { { xi.item.BOTTLE_OF_MULSUM, 12 } } },
     },
 
     [394] =
@@ -4241,7 +4253,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 153 } },
         flags = set { 'repeat' },
-        reward = { sparks = 16, xp = 100, accolades = 5, item = { { xi.item.FLASK_OF_DEODORIZER, 12 } } },
+        reward = { sparks = 16, exp = 100, accolades = 5, item = { { xi.item.FLASK_OF_DEODORIZER, 12 } } },
     },
 
     [396] =
@@ -4250,7 +4262,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 154 } },
         flags = set { 'repeat' },
-        reward = { sparks = 17, xp = 850, accolades = 5, item = { xi.item.SUPER_ETHER } },
+        reward = { sparks = 17, exp = 850, accolades = 5, item = { xi.item.SUPER_ETHER } },
     },
 
     [398] =
@@ -4259,7 +4271,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 114 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { { xi.item.PINCH_OF_PRISM_POWDER, 12 } } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { { xi.item.PINCH_OF_PRISM_POWDER, 12 } } },
     },
 
     [400] =
@@ -4268,7 +4280,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 125 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 700, accolades = 5, item = { { xi.item.POT_OF_SILENT_OIL, 12 } } },
+        reward = { sparks = 14, exp = 700, accolades = 5, item = { { xi.item.POT_OF_SILENT_OIL, 12 } } },
     },
 
     [402] =
@@ -4277,7 +4289,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 208 } },
         flags = set { 'repeat' },
-        reward = { sparks = 15, xp = 100, accolades = 5, item = { xi.item.GAIA_MANTLE } },
+        reward = { sparks = 15, exp = 100, accolades = 5, item = { xi.item.GAIA_MANTLE } },
     },
 
     [404] =
@@ -4286,7 +4298,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 212 } },
         flags = set { 'repeat' },
-        reward = { sparks = 16, xp = 100, accolades = 5, item = { xi.item.JESTERS_CAPE } },
+        reward = { sparks = 16, exp = 100, accolades = 5, item = { xi.item.JESTERS_CAPE } },
     },
 
     [406] =
@@ -4295,7 +4307,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 174 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.item.PEISTE_MANTLE } },
+        reward = { sparks = 14, exp = 100, accolades = 5, item = { xi.item.PEISTE_MANTLE } },
     },
 
     [408] =
@@ -4304,7 +4316,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 113 } },
         flags = set { 'repeat' },
-        reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.BEAK_NECKLACE } },
+        reward = { sparks = 16, exp = 800, accolades = 5, item = { xi.item.BEAK_NECKLACE } },
     },
 
     [410] =
@@ -4313,7 +4325,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 128 } },
         flags = set { 'repeat' },
-        reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.CORAL_GORGET } },
+        reward = { sparks = 16, exp = 800, accolades = 5, item = { xi.item.CORAL_GORGET } },
     },
 
     [412] =
@@ -4322,7 +4334,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 123 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.TORQUE } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.TORQUE } },
     },
 
     -----------------------------------
@@ -4335,7 +4347,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 176 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 100, accolades = 5, item = { xi.item.BROCADE_OBI } },
+        reward = { sparks = 13, exp = 100, accolades = 5, item = { xi.item.BROCADE_OBI } },
     },
 
     [416] =
@@ -4344,7 +4356,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 124 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.TWINTHREAD_OBI } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.TWINTHREAD_OBI } },
     },
 
     [418] =
@@ -4353,7 +4365,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 159 } },
         flags = set { 'repeat' },
-        reward = { sparks = 15, xp = 100, accolades = 5, item = { xi.item.PEISTE_BELT } },
+        reward = { sparks = 15, exp = 100, accolades = 5, item = { xi.item.PEISTE_BELT } },
     },
 
     [420] =
@@ -4362,7 +4374,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 160 } },
         flags = set { 'repeat' },
-        reward = { sparks = 16, xp = 100, accolades = 5, item = { xi.item.RAINBOW_OBI } },
+        reward = { sparks = 16, exp = 100, accolades = 5, item = { xi.item.RAINBOW_OBI } },
     },
 
     [422] =
@@ -4371,7 +4383,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 205 } },
         flags = set { 'repeat' },
-        reward = { sparks = 16, xp = 100, accolades = 5, item = { xi.item.SUN_EARRING } },
+        reward = { sparks = 16, exp = 100, accolades = 5, item = { xi.item.SUN_EARRING } },
     },
 
     [424] =
@@ -4380,7 +4392,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 130 } },
         flags = set { 'repeat' },
-        reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.PURPLE_EARRING } },
+        reward = { sparks = 70, exp = 850, accolades = 7, item = { xi.item.PURPLE_EARRING } },
     },
 
     [426] =
@@ -4389,7 +4401,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 177 } },
         flags = set { 'repeat' },
-        reward = { sparks = 70, xp = 100, accolades = 7, item = { xi.item.YELLOW_EARRING } },
+        reward = { sparks = 70, exp = 100, accolades = 7, item = { xi.item.YELLOW_EARRING } },
     },
 
     [428] =
@@ -4398,7 +4410,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 178 } },
         flags = set { 'repeat' },
-        reward = { sparks = 70, xp = 100, accolades = 7, item = { xi.item.GREEN_EARRING } },
+        reward = { sparks = 70, exp = 100, accolades = 7, item = { xi.item.GREEN_EARRING } },
     },
 
     [430] =
@@ -4407,7 +4419,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 213 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.ZIRCON_EARRING } },
+        reward = { sparks = 14, exp = 700, accolades = 5, item = { xi.item.ZIRCON_EARRING } },
     },
 
     [432] =
@@ -4416,7 +4428,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 173 } },
         flags = set { 'repeat' },
-        reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.AQUAMARINE_EARRING } },
+        reward = { sparks = 12, exp = 600, accolades = 5, item = { xi.item.AQUAMARINE_EARRING } },
     },
 
     -----------------------------------
@@ -4429,7 +4441,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 11 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.MOON_EARRING } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.MOON_EARRING } },
     },
 
     [436] =
@@ -4438,7 +4450,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 12 } },
         flags = set { 'repeat' },
-        reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.NIGHT_EARRING } },
+        reward = { sparks = 16, exp = 800, accolades = 5, item = { xi.item.NIGHT_EARRING } },
     },
 
     [438] =
@@ -4447,7 +4459,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 24 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.MELODY_EARRING } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.MELODY_EARRING } },
     },
 
     [440] =
@@ -4456,7 +4468,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 25 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.ERIS_EARRING } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.ERIS_EARRING } },
     },
 
     [442] =
@@ -4465,7 +4477,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 27 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.FANG_EARRING } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.FANG_EARRING } },
     },
 
     [444] =
@@ -4474,7 +4486,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 30 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.CARAPACE_RING } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.CARAPACE_RING } },
     },
 
     [446] =
@@ -4483,7 +4495,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 29 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.TRUMPET_RING } },
+        reward = { sparks = 14, exp = 700, accolades = 5, item = { xi.item.TRUMPET_RING } },
     },
 
     [448] =
@@ -4492,7 +4504,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 28 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.SUN_RING } },
+        reward = { sparks = 14, exp = 700, accolades = 5, item = { xi.item.SUN_RING } },
     },
 
     [450] =
@@ -4501,7 +4513,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 16 } },
         flags = set { 'repeat' },
-        reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.FLUORITE_RING } },
+        reward = { sparks = 12, exp = 600, accolades = 5, item = { xi.item.FLUORITE_RING } },
     },
 
     [452] =
@@ -4510,7 +4522,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 18 } },
         flags = set { 'repeat' },
-        reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.CHRYSOBERYL_RING } },
+        reward = { sparks = 12, exp = 600, accolades = 5, item = { xi.item.CHRYSOBERYL_RING } },
     },
 
     [454] =
@@ -4519,7 +4531,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 20 } },
         flags = set { 'repeat' },
-        reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.JADEITE_RING } },
+        reward = { sparks = 12, exp = 600, accolades = 5, item = { xi.item.JADEITE_RING } },
     },
 
     [456] =
@@ -4528,7 +4540,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 22 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.ZIRCON_RING } },
+        reward = { sparks = 14, exp = 700, accolades = 5, item = { xi.item.ZIRCON_RING } },
     },
 
     -----------------------------------
@@ -4541,7 +4553,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 33 } },
         flags = set { 'repeat' },
-        reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.AQUAMARINE_RING } },
+        reward = { sparks = 70, exp = 850, accolades = 7, item = { xi.item.AQUAMARINE_RING } },
     },
 
     [460] =
@@ -4550,7 +4562,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 34 } },
         flags = set { 'repeat' },
-        reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.MOON_RING } },
+        reward = { sparks = 70, exp = 850, accolades = 7, item = { xi.item.MOON_RING } },
     },
 
     [462] =
@@ -4559,7 +4571,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 35 } },
         flags = set { 'repeat' },
-        reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.MOONRING_BLADE } },
+        reward = { sparks = 80, exp = 900, accolades = 8, item = { xi.item.MOONRING_BLADE } },
     },
 
     [464] =
@@ -4568,7 +4580,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 2 } },
         flags = set { 'repeat' },
-        reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.PAINITE_RING } },
+        reward = { sparks = 11, exp = 550, accolades = 5, item = { xi.item.PAINITE_RING } },
     },
 
     [468] =
@@ -4577,7 +4589,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 4 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.HARD_LEATHER_RING } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.HARD_LEATHER_RING } },
     },
 
     [472] =
@@ -4586,7 +4598,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 7 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.DEMONS_RING } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.DEMONS_RING } },
     },
 
     [474] =
@@ -4595,7 +4607,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 9 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.GOLD_RING } },
+        reward = { sparks = 14, exp = 700, accolades = 5, item = { xi.item.GOLD_RING } },
     },
 
     [476] =
@@ -4604,7 +4616,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 5 } },
         flags = set { 'repeat' },
-        reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.BEHEMOTH_MANTLE } },
+        reward = { sparks = 16, exp = 800, accolades = 5, item = { xi.item.BEHEMOTH_MANTLE } },
     },
 
     -----------------------------------
@@ -4617,7 +4629,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 52 } },
         flags = set { 'repeat' },
-        reward = { sparks = 60, xp = 800, accolades = 6, item = { xi.item.TOWER_SHIELD } },
+        reward = { sparks = 60, exp = 800, accolades = 6, item = { xi.item.TOWER_SHIELD } },
     },
 
     [535] =
@@ -4626,7 +4638,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 65 } },
         flags = set { 'repeat' },
-        reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.RITTER_SHIELD } },
+        reward = { sparks = 70, exp = 850, accolades = 7, item = { xi.item.RITTER_SHIELD } },
     },
 
     [537] =
@@ -4635,7 +4647,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 51 } },
         flags = set { 'repeat' },
-        reward = { sparks = 60, xp = 800, accolades = 6, item = { xi.item.ARACHNE_OBI } },
+        reward = { sparks = 60, exp = 800, accolades = 6, item = { xi.item.ARACHNE_OBI } },
     },
 
     [539] =
@@ -4644,7 +4656,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 68 } },
         flags = set { 'repeat' },
-        reward = { sparks = 60, xp = 800, accolades = 6, item = { xi.item.KOENIGS_BELT } },
+        reward = { sparks = 60, exp = 800, accolades = 6, item = { xi.item.KOENIGS_BELT } },
     },
 
     [541] =
@@ -4653,7 +4665,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 62 } },
         flags = set { 'repeat' },
-        reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.MARID_BELT } },
+        reward = { sparks = 70, exp = 850, accolades = 7, item = { xi.item.MARID_BELT } },
     },
 
     [543] =
@@ -4662,7 +4674,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 61 } },
         flags = set { 'repeat' },
-        reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.PEACE_CAPE } },
+        reward = { sparks = 70, exp = 850, accolades = 7, item = { xi.item.PEACE_CAPE } },
     },
 
     [545] =
@@ -4671,7 +4683,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 79 } },
         flags = set { 'repeat' },
-        reward = { sparks = 60, xp = 800, accolades = 6, item = { xi.item.TARUTARU_SASH } },
+        reward = { sparks = 60, exp = 800, accolades = 6, item = { xi.item.TARUTARU_SASH } },
     },
 
     [547] =
@@ -4680,7 +4692,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 54 } },
         flags = set { 'repeat' },
-        reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.LYNX_MANTLE } },
+        reward = { sparks = 70, exp = 850, accolades = 7, item = { xi.item.LYNX_MANTLE } },
     },
 
     [549] =
@@ -4689,7 +4701,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 72 } },
         flags = set { 'repeat' },
-        reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.RAINBOW_CAPE } },
+        reward = { sparks = 70, exp = 850, accolades = 7, item = { xi.item.RAINBOW_CAPE } },
     },
 
     -----------------------------------
@@ -4702,7 +4714,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 81 } },
         flags = set { 'repeat' },
-        reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.COEURL_GORGET } },
+        reward = { sparks = 11, exp = 550, accolades = 5, item = { xi.item.COEURL_GORGET } },
     },
 
     [555] =
@@ -4711,7 +4723,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 82 } },
         flags = set { 'repeat' },
-        reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.HOPLON } },
+        reward = { sparks = 14, exp = 700, accolades = 5, item = { xi.item.HOPLON } },
     },
 
     [557] =
@@ -4720,7 +4732,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 84 } },
         flags = set { 'repeat' },
-        reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.JEWELED_COLLAR } },
+        reward = { sparks = 12, exp = 600, accolades = 5, item = { xi.item.JEWELED_COLLAR } },
     },
 
     [559] =
@@ -4729,7 +4741,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 85 } },
         flags = set { 'repeat' },
-        reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.ORICHALCUM_EARRING } },
+        reward = { sparks = 70, exp = 850, accolades = 7, item = { xi.item.ORICHALCUM_EARRING } },
     },
 
     [561] =
@@ -4738,7 +4750,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 175 } },
         flags = set { 'repeat' },
-        reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.SMILODON_MANTLE } },
+        reward = { sparks = 16, exp = 800, accolades = 5, item = { xi.item.SMILODON_MANTLE } },
     },
 
     [563] =
@@ -4747,7 +4759,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 88 } },
         flags = set { 'repeat' },
-        reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.DARKSTEEL_NODOWA } },
+        reward = { sparks = 11, exp = 550, accolades = 5, item = { xi.item.DARKSTEEL_NODOWA } },
     },
 
     [565] =
@@ -4756,7 +4768,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 89 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.PLATINUM_EARRING } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.PLATINUM_EARRING } },
     },
 
     [567] =
@@ -4765,7 +4777,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 83 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.PHANTOM_EARRING } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.PHANTOM_EARRING } },
     },
 
     [569] =
@@ -4774,7 +4786,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 90 } },
         flags = set { 'repeat' },
-        reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.CORAL_EARRING } },
+        reward = { sparks = 16, exp = 800, accolades = 5, item = { xi.item.CORAL_EARRING } },
     },
 
     [571] =
@@ -4783,7 +4795,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 91 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.DARKSTEEL_SHIELD } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.DARKSTEEL_SHIELD } },
     },
 
     [573] =
@@ -4792,7 +4804,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 92 } },
         flags = set { 'repeat' },
-        reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.STAR_EARRING } },
+        reward = { sparks = 70, exp = 850, accolades = 7, item = { xi.item.STAR_EARRING } },
     },
 
     [575] =
@@ -4801,7 +4813,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 171 } },
         flags = set { 'repeat' },
-        reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.CRIMSON_EARRING } },
+        reward = { sparks = 16, exp = 800, accolades = 5, item = { xi.item.CRIMSON_EARRING } },
     },
 
     -----------------------------------
@@ -4814,7 +4826,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 95 } },
         flags = set { 'repeat' },
-        reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.DARKSTEEL_GORGET } },
+        reward = { sparks = 11, exp = 550, accolades = 5, item = { xi.item.DARKSTEEL_GORGET } },
     },
 
     [579] =
@@ -4823,7 +4835,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 96 } },
         flags = set { 'repeat' },
-        reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.WIVRE_GORGET } },
+        reward = { sparks = 12, exp = 600, accolades = 5, item = { xi.item.WIVRE_GORGET } },
     },
 
     [581] =
@@ -4832,7 +4844,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 97 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.DARKSTEEL_BUCKLER } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.DARKSTEEL_BUCKLER } },
     },
 
     [583] =
@@ -4841,7 +4853,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 98 } },
         flags = set { 'repeat' },
-        reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.WIVRE_SHIELD } },
+        reward = { sparks = 13, exp = 650, accolades = 5, item = { xi.item.WIVRE_SHIELD } },
     },
 
     [585] =
@@ -4850,7 +4862,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 99 } },
         flags = set { 'repeat' },
-        reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.CRIMSON_RING } },
+        reward = { sparks = 70, exp = 850, accolades = 7, item = { xi.item.CRIMSON_RING } },
     },
 
     [587] =
@@ -4859,7 +4871,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 164 } },
         flags = set { 'repeat' },
-        reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.ORICHALCUM_RING } },
+        reward = { sparks = 16, exp = 800, accolades = 5, item = { xi.item.ORICHALCUM_RING } },
     },
 
     [589] =
@@ -4868,7 +4880,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 136 } },
         flags = set { 'repeat' },
-        reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.STAR_RING } },
+        reward = { sparks = 70, exp = 850, accolades = 7, item = { xi.item.STAR_RING } },
     },
 
     [591] =
@@ -4877,7 +4889,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 137 } },
         flags = set { 'repeat' },
-        reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.ACHERON_SHIELD } },
+        reward = { sparks = 80, exp = 900, accolades = 8, item = { xi.item.ACHERON_SHIELD } },
     },
 
     [593] =
@@ -4886,7 +4898,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 138 } },
         flags = set { 'repeat' },
-        reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.OROCHI_NODOWA } },
+        reward = { sparks = 80, exp = 900, accolades = 8, item = { xi.item.OROCHI_NODOWA } },
     },
 
     [595] =
@@ -4895,7 +4907,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 155 } },
         flags = set { 'repeat' },
-        reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.CERBERUS_RING } },
+        reward = { sparks = 80, exp = 900, accolades = 8, item = { xi.item.CERBERUS_RING } },
     },
 
     -----------------------------------
@@ -4908,7 +4920,7 @@ xi.roe.records =
         goal = 30,
         reqs = { zone = set { 132 } },
         flags = set { 'repeat' },
-        reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.MUZZLING_COLLAR } },
+        reward = { sparks = 80, exp = 900, accolades = 8, item = { xi.item.MUZZLING_COLLAR } },
     },
 
     [614] =
@@ -4917,7 +4929,7 @@ xi.roe.records =
         goal = 30,
         reqs = { zone = set { 15 } },
         flags = set { 'repeat' },
-        reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.AL_ZAHBI_SASH } },
+        reward = { sparks = 80, exp = 900, accolades = 8, item = { xi.item.AL_ZAHBI_SASH } },
     },
 
     [615] =
@@ -4926,7 +4938,7 @@ xi.roe.records =
         goal = 30,
         reqs = { zone = set { 45 } },
         flags = set { 'repeat' },
-        reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.SANCTUARY_OBI } },
+        reward = { sparks = 80, exp = 900, accolades = 8, item = { xi.item.SANCTUARY_OBI } },
     },
 
     [616] =
@@ -4935,7 +4947,7 @@ xi.roe.records =
         goal = 30,
         reqs = { zone = set { 215 } },
         flags = set { 'repeat' },
-        reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.BEIR_BELT } },
+        reward = { sparks = 80, exp = 900, accolades = 8, item = { xi.item.BEIR_BELT } },
     },
 
     [617] =
@@ -4944,7 +4956,7 @@ xi.roe.records =
         goal = 30,
         reqs = { zone = set { 216 } },
         flags = set { 'repeat' },
-        reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.AISANCE_MANTLE } },
+        reward = { sparks = 80, exp = 900, accolades = 8, item = { xi.item.AISANCE_MANTLE } },
     },
 
     [618] =
@@ -4953,7 +4965,7 @@ xi.roe.records =
         goal = 30,
         reqs = { zone = set { 217 } },
         flags = set { 'repeat' },
-        reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.ELOQUENCE_CAPE } },
+        reward = { sparks = 80, exp = 900, accolades = 8, item = { xi.item.ELOQUENCE_CAPE } },
     },
 
     [619] =
@@ -4962,7 +4974,7 @@ xi.roe.records =
         goal = 30,
         reqs = { zone = set { 218 } },
         flags = set { 'repeat' },
-        reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.VIGILANCE_MANTLE } },
+        reward = { sparks = 80, exp = 900, accolades = 8, item = { xi.item.VIGILANCE_MANTLE } },
     },
 
     [620] =
@@ -4971,7 +4983,7 @@ xi.roe.records =
         goal = 30,
         reqs = { zone = set { 253 } },
         flags = set { 'repeat' },
-        reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.AREWE_RING } },
+        reward = { sparks = 80, exp = 900, accolades = 8, item = { xi.item.AREWE_RING } },
     },
 
     [621] =
@@ -4980,7 +4992,7 @@ xi.roe.records =
         goal = 30,
         reqs = { zone = set { 254 } },
         flags = set { 'repeat' },
-        reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.AREWE_RING } },
+        reward = { sparks = 80, exp = 900, accolades = 8, item = { xi.item.AREWE_RING } },
     },
 
     -----------------------------------
@@ -4992,7 +5004,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Yztarg' }, zone = set { 288 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     [886] =
@@ -5001,7 +5013,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Bugard' }, zone = set { 288 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     [887] =
@@ -5010,7 +5022,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Tarichuk' }, zone = set { 288 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     [888] =
@@ -5019,7 +5031,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Shadow_Dragon' }, zone = set { 288 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     [889] =
@@ -5028,7 +5040,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Mosquito' }, zone = set { 288 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
     },
 
     [901] =
@@ -5037,7 +5049,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Puk' }, zone = set { 288 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
     },
 
     [902] =
@@ -5046,7 +5058,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Opo-opo' }, zone = set { 288 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
     },
 
     [903] =
@@ -5055,7 +5067,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Ilaern' }, zone = set { 289 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     [904] =
@@ -5064,7 +5076,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Phuabo' }, zone = set { 289 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
     },
 
     [905] =
@@ -5073,7 +5085,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Euvhi' }, zone = set { 289 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     [906] =
@@ -5082,7 +5094,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Clionid' }, zone = set { 289 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
     },
 
     [907] =
@@ -5091,7 +5103,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Hpemde' }, zone = set { 289 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     [908] =
@@ -5100,7 +5112,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Amoeban' }, zone = set { 289 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
     },
 
     [909] =
@@ -5109,7 +5121,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Xzomit' }, zone = set { 289 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     [910] =
@@ -5118,7 +5130,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Murex' }, zone = set { 289 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
     },
 
     [911] =
@@ -5127,7 +5139,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Ghrah' }, zone = set { 289 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     [912] =
@@ -5136,7 +5148,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Eschan_Limule' }, zone = set { 289 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
     },
 
     -----------------------------------
@@ -5148,7 +5160,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Obstreperous_Panopt' }, zone = set { 291 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
     },
 
     [944] =
@@ -5157,7 +5169,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Snaggletoothed_Tiger' }, zone = set { 291 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     [945] =
@@ -5166,7 +5178,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Agitated_Chapuli' }, zone = set { 291 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
     },
 
     [946] =
@@ -5175,7 +5187,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Indomitable_Faaz' }, zone = set { 291 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     [947] =
@@ -5184,7 +5196,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Territorial_Mantis' }, zone = set { 291 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
     },
 
     [948] =
@@ -5193,7 +5205,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Devouring_Mosquito' }, zone = set { 291 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     [949] =
@@ -5202,7 +5214,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Lentic_Toad' }, zone = set { 291 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
     },
 
     [950] =
@@ -5211,7 +5223,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Quarrelsome_Hippogryph' }, zone = set { 291 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     [951] =
@@ -5220,7 +5232,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Rampaging_Beetle' }, zone = set { 291 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
     },
 
     [952] =
@@ -5229,7 +5241,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Glowering_Ladybug' }, zone = set { 291 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     [953] =
@@ -5238,7 +5250,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobName = set { 'Lucani' }, zone = set { 291 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
+        reward = { sparks = 300, exp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
     },
 
     -----------------------------------
@@ -5251,7 +5263,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 101 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
     },
 
     [181] =
@@ -5260,7 +5272,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 140 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
     },
 
     [182] =
@@ -5269,7 +5281,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 196 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
     },
 
     [183] =
@@ -5278,7 +5290,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 104 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
     },
 
     [184] =
@@ -5287,7 +5299,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 172 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
     },
 
     [185] =
@@ -5296,7 +5308,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 143 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
     },
 
     [186] =
@@ -5305,7 +5317,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 115 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
     },
 
     [187] =
@@ -5314,7 +5326,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 145 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
     },
 
     [188] =
@@ -5323,7 +5335,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 118 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
     },
 
     [189] =
@@ -5332,7 +5344,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 117 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
     },
 
     [190] =
@@ -5341,7 +5353,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 198 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
     },
 
     [389] =
@@ -5350,7 +5362,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 142 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
     },
 
     -----------------------------------
@@ -5367,7 +5379,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 123 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
     },
 
     [479] =
@@ -5376,7 +5388,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 124 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
     },
 
     [480] =
@@ -5385,7 +5397,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 205 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
     },
 
     [485] =
@@ -5394,7 +5406,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 173 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
     },
 
     -----------------------------------
@@ -5407,7 +5419,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 11 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
     },
 
     [482] =
@@ -5416,7 +5428,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 12 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
     },
 
     [483] =
@@ -5425,7 +5437,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 24 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
     },
 
     [484] =
@@ -5434,7 +5446,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 25 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
     },
 
     [486] =
@@ -5443,7 +5455,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 2 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
     },
 
     [487] =
@@ -5452,7 +5464,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 7 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
     },
 
     -----------------------------------
@@ -5465,7 +5477,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 52 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
     },
 
     [600] =
@@ -5474,7 +5486,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 65 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
     },
 
     [601] =
@@ -5483,7 +5495,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 51 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
     },
 
     [602] =
@@ -5492,7 +5504,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 62 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
     },
 
     [603] =
@@ -5501,7 +5513,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 61 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
     },
 
     [604] =
@@ -5510,7 +5522,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 79 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
     },
 
     -----------------------------------
@@ -5523,7 +5535,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 81 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
     },
 
     [607] =
@@ -5532,7 +5544,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 82 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
     },
 
     [608] =
@@ -5541,7 +5553,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 88 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
     },
 
     [609] =
@@ -5550,7 +5562,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 89 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
     },
 
     [610] =
@@ -5559,7 +5571,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 95 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
     },
 
     [611] =
@@ -5568,7 +5580,7 @@ xi.roe.records =
         goal = 5,
         reqs = { zone = set { 96 } },
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
+        reward = { sparks = 100, exp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
     },
 
     -----------------------------------
@@ -5580,7 +5592,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.CHOCOBO_DIG_SUCCESS,
         goal = 30,
         flags = set { 'repeat' },
-        reward = { sparks = 100, xp = 500, accolades = 10 },
+        reward = { sparks = 100, exp = 500, accolades = 10 },
     },
 
     --[[ currently not implemented
@@ -5589,21 +5601,21 @@ xi.roe.records =
         trigger = ,
         goal = 100,
         flags = set { 'repeat' },
-        reward = { sparks = 1000, xp = 5000, accolades = 100 },
+        reward = { sparks = 1000, exp = 5000, accolades = 100 },
     }, ]]
 
     --[[ currently not implemented
     [490] =
     { -- Unlock Treasure Chests and Coffers
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     }, ]]
 
     --[[ currently not implemented
     [726] =
     { -- Reaching the Crest
         flags = set { 'repeat' },
-        reward = { sparks = 200, xp = 1000, accolades = 20 },
+        reward = { sparks = 200, exp = 1000, accolades = 20 },
     }, ]]
 
     [727] =
@@ -5611,7 +5623,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17506670 } },
         flags = set { 'repeat' },
-        reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 1000, exp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [728] =
@@ -5619,7 +5631,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17309980 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [729] =
@@ -5627,7 +5639,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17309983 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [730] =
@@ -5635,7 +5647,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17309981 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [731] =
@@ -5643,7 +5655,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17309982 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [768] =
@@ -5651,7 +5663,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16912839 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [769] =
@@ -5659,14 +5671,14 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16912838 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [770] =
     { -- Subjugation: Jailer of Prudence is handled in mob script
         goal = 1,
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [771] =
@@ -5674,7 +5686,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16912848 } },
         flags = set { 'repeat' },
-        reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 1000, exp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [812] =
@@ -5682,7 +5694,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17076578 } },
         flags = set { 'repeat' },
-        reward = { sparks = 500, xp = 2500, accolades = 50 },
+        reward = { sparks = 500, exp = 2500, accolades = 50 },
     },
 
     [813] =
@@ -5690,7 +5702,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17080585 } },
         flags = set { 'repeat' },
-        reward = { sparks = 500, xp = 2500, accolades = 50 },
+        reward = { sparks = 500, exp = 2500, accolades = 50 },
     },
 
     [814] =
@@ -5698,7 +5710,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17084687 } },
         flags = set { 'repeat' },
-        reward = { sparks = 500, xp = 2500, accolades = 50 },
+        reward = { sparks = 500, exp = 2500, accolades = 50 },
     },
 
     [815] =
@@ -5706,7 +5718,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17088786 } },
         flags = set { 'repeat' },
-        reward = { sparks = 500, xp = 2500, accolades = 50 },
+        reward = { sparks = 500, exp = 2500, accolades = 50 },
     },
 
     -----------------------------------
@@ -5718,7 +5730,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17534977 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [733] =
@@ -5726,7 +5738,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17535207 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [734] =
@@ -5734,7 +5746,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17535208 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [735] =
@@ -5742,7 +5754,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17535210 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [736] =
@@ -5750,7 +5762,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17535211 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [737] =
@@ -5758,7 +5770,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17539073 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [738] =
@@ -5766,7 +5778,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17539307 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [739] =
@@ -5774,7 +5786,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17539308 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [740] =
@@ -5782,7 +5794,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17539310 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [741] =
@@ -5790,7 +5802,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17539311 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [742] =
@@ -5798,7 +5810,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17543169 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [743] =
@@ -5806,7 +5818,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17543464 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [744] =
@@ -5814,7 +5826,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17543466 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [745] =
@@ -5822,7 +5834,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17543467 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [746] =
@@ -5830,7 +5842,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17543468 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [747] =
@@ -5838,7 +5850,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17547265 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [748] =
@@ -5846,7 +5858,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17547493 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [749] =
@@ -5854,7 +5866,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17547494 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [750] =
@@ -5862,7 +5874,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17547496 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [751] =
@@ -5870,7 +5882,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17547498 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     -----------------------------------
@@ -5882,7 +5894,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17326081 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [753] =
@@ -5890,7 +5902,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17326093 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [754] =
@@ -5898,7 +5910,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17326095 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [755] =
@@ -5906,7 +5918,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17326096 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [756] =
@@ -5914,7 +5926,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17326097 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [757] =
@@ -5922,7 +5934,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17330177 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [758] =
@@ -5930,7 +5942,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17330185 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [759] =
@@ -5938,7 +5950,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17330186 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [760] =
@@ -5946,7 +5958,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17330188 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [761] =
@@ -5954,7 +5966,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17330189 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     -----------------------------------
@@ -5967,7 +5979,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.IVORY_CHIP } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [773] =
@@ -5976,7 +5988,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.SCARLET_CHIP } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [774] =
@@ -5985,7 +5997,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.EMERALD_CHIP } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [775] =
@@ -5994,7 +6006,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.ORCHID_CHIP } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [776] =
@@ -6003,7 +6015,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.CERULEAN_CHIP } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [777] =
@@ -6012,7 +6024,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.SILVER_CHIP } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [778] =
@@ -6021,7 +6033,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.SMOKY_CHIP } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [779] =
@@ -6030,7 +6042,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.MAGENTA_CHIP } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [780] =
@@ -6039,7 +6051,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.CHARCOAL_CHIP } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [781] =
@@ -6048,7 +6060,7 @@ xi.roe.records =
         goal = 1,
         reqs = { itemID = set { xi.item.SMALT_CHIP } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [782] =
@@ -6056,7 +6068,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16928966 } },
         flags = set { 'repeat' },
-        reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 1000, exp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [783] =
@@ -6064,7 +6076,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16933124 } },
         flags = set { 'repeat' },
-        reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 1000, exp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     -----------------------------------
@@ -6076,7 +6088,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16986428 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [786] =
@@ -6084,7 +6096,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17043887 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [787] =
@@ -6092,7 +6104,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17072172 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [788] =
@@ -6100,7 +6112,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17027471 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [789] =
@@ -6108,7 +6120,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17027472 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [790] =
@@ -6116,7 +6128,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17072171 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [791] =
@@ -6124,7 +6136,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16998872 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [792] =
@@ -6132,7 +6144,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16998871 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [793] =
@@ -6140,7 +6152,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17056186 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [794] =
@@ -6148,7 +6160,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16986429 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [795] =
@@ -6156,7 +6168,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16990506 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [796] =
@@ -6164,7 +6176,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17043888 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [797] =
@@ -6172,7 +6184,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17027473 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [798] =
@@ -6180,7 +6192,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17031599 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [799] =
@@ -6188,7 +6200,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17031598 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [800] =
@@ -6196,7 +6208,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17072179 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [801] =
@@ -6204,7 +6216,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16998873 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [802] =
@@ -6212,7 +6224,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17101202 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [803] =
@@ -6220,7 +6232,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17072178 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [804] =
@@ -6228,7 +6240,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16986430 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [805] =
@@ -6236,7 +6248,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16990507 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [806] =
@@ -6244,7 +6256,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17056157 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [807] =
@@ -6252,7 +6264,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17027474 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [808] =
@@ -6260,7 +6272,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17031600 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [809] =
@@ -6268,7 +6280,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17101204 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [810] =
@@ -6276,7 +6288,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17101205 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     [811] =
@@ -6284,7 +6296,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16998874 } },
         flags = set { 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 30 },
+        reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
 
     -----------------------------------
@@ -6296,7 +6308,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.WAR, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_DEATH_FOR_DIMWITS, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_DEATH_FOR_DIMWITS, 12 } } },
     },
 
     [1201] =
@@ -6304,7 +6316,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.WAR, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_STRIKING_BULLS_DIARY, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_STRIKING_BULLS_DIARY, 12 } } },
     },
 
     [1202] =
@@ -6312,7 +6324,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.WAR, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.RAVAGERS_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.RAVAGERS_SEAL_FEET, 4 } } },
     },
 
     [1203] =
@@ -6320,7 +6332,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.WAR, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
     },
 
     [1204] =
@@ -6328,7 +6340,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.MNK, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_MIKHES_MEMO, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_MIKHES_MEMO, 12 } } },
     },
 
     [1205] =
@@ -6336,7 +6348,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.MNK, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
     },
 
     [1206] =
@@ -6344,7 +6356,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.MNK, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.TANTRA_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.TANTRA_SEAL_FEET, 4 } } },
     },
 
     [1207] =
@@ -6352,7 +6364,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.MNK, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
     },
 
     [1208] =
@@ -6360,7 +6372,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.WHM, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_COVEFFE_BARROWS_MUSINGS, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_COVEFFE_BARROWS_MUSINGS, 12 } } },
     },
 
     [1209] =
@@ -6368,7 +6380,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.WHM, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_ALTANAS_HYMN, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_ALTANAS_HYMN, 12 } } },
     },
 
     [1210] =
@@ -6376,7 +6388,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.WHM, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.ORISON_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.ORISON_SEAL_FEET, 4 } } },
     },
 
     [1211] =
@@ -6384,7 +6396,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.WHM, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
     },
 
     [1212] =
@@ -6392,7 +6404,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BLM, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.BOUNTY_LIST, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.BOUNTY_LIST, 12 } } },
     },
 
     [1213] =
@@ -6400,7 +6412,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BLM, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_DARK_DEEDS, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_DARK_DEEDS, 12 } } },
     },
 
     [1214] =
@@ -6408,7 +6420,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BLM, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.GOETIA_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.GOETIA_SEAL_FEET, 4 } } },
     },
 
     [1215] =
@@ -6416,7 +6428,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BLM, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
     },
 
     [1216] =
@@ -6424,7 +6436,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.RDM, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.INVESTIGATIVE_REPORT, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.INVESTIGATIVE_REPORT, 12 } } },
     },
 
     [1217] =
@@ -6432,7 +6444,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.RDM, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_AID_FOR_ALL, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_AID_FOR_ALL, 12 } } },
     },
 
     [1218] =
@@ -6440,7 +6452,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.RDM, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.ESTOQUEURS_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.ESTOQUEURS_SEAL_FEET, 4 } } },
     },
 
     [1219] =
@@ -6448,7 +6460,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.RDM, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
     },
 
     [1220] =
@@ -6456,7 +6468,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.THF, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
     },
 
     [1221] =
@@ -6464,7 +6476,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.THF, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
     },
 
     [1222] =
@@ -6472,7 +6484,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.THF, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.RAIDERS_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.RAIDERS_SEAL_FEET, 4 } } },
     },
 
     [1223] =
@@ -6480,7 +6492,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.THF, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_6, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_6, 2 } } },
     },
 
     -----------------------------------
@@ -6492,7 +6504,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.PLD, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
     },
 
     [1225] =
@@ -6500,7 +6512,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.PLD, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_THE_SUCCESSOR, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_THE_SUCCESSOR, 12 } } },
     },
 
     [1226] =
@@ -6508,7 +6520,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.PLD, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.CREED_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.CREED_SEAL_FEET, 4 } } },
     },
 
     [1227] =
@@ -6516,7 +6528,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.PLD, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
     },
 
     [1228] =
@@ -6524,7 +6536,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.DRK, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_LUDWIGS_REPORT, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_LUDWIGS_REPORT, 12 } } },
     },
 
     [1229] =
@@ -6532,7 +6544,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.DRK, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_MIEUSELOIRS_DIARY, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_MIEUSELOIRS_DIARY, 12 } } },
     },
 
     [1230] =
@@ -6540,7 +6552,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.DRK, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.BALE_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.BALE_SEAL_FEET, 4 } } },
     },
 
     [1231] =
@@ -6548,7 +6560,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.DRK, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
     },
 
     [1232] =
@@ -6556,7 +6568,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BST, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_STRIKING_BULLS_DIARY, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_STRIKING_BULLS_DIARY, 12 } } },
     },
 
     [1233] =
@@ -6564,7 +6576,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BST, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_LUDWIGS_REPORT, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_LUDWIGS_REPORT, 12 } } },
     },
 
     [1234] =
@@ -6572,7 +6584,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BST, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.FERINE_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.FERINE_SEAL_FEET, 4 } } },
     },
 
     [1235] =
@@ -6580,7 +6592,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BST, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
     },
 
     [1236] =
@@ -6588,7 +6600,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BRD, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_BREEZY_LIBRETTO, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_BREEZY_LIBRETTO, 12 } } },
     },
 
     [1237] =
@@ -6596,7 +6608,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BRD, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.CAVERNOUS_SCORE, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.CAVERNOUS_SCORE, 12 } } },
     },
 
     [1238] =
@@ -6604,7 +6616,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BRD, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.AOIDOS_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.AOIDOS_SEAL_FEET, 4 } } },
     },
 
     [1239] =
@@ -6612,7 +6624,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BRD, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
     },
 
     [1240] =
@@ -6620,7 +6632,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.RNG, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_PERIHS_PRIMER, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_PERIHS_PRIMER, 12 } } },
     },
 
     [1241] =
@@ -6628,7 +6640,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.RNG, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_BARRELS_OF_FUN, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_BARRELS_OF_FUN, 12 } } },
     },
 
     [1242] =
@@ -6636,7 +6648,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.RNG, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.SYLVAN_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.SYLVAN_SEAL_FEET, 4 } } },
     },
 
     [1243] =
@@ -6644,7 +6656,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.RNG, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
     },
 
     [1244] =
@@ -6652,7 +6664,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.SAM, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_NOILLURIES_LOG, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_NOILLURIES_LOG, 12 } } },
     },
 
     [1245] =
@@ -6660,7 +6672,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.SAM, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_CLASH_OF_TITANS, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_CLASH_OF_TITANS, 12 } } },
     },
 
     [1246] =
@@ -6668,7 +6680,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.SAM, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.UNKAI_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.UNKAI_SEAL_FEET, 4 } } },
     },
 
     [1247] =
@@ -6676,7 +6688,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.SAM, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
     },
 
     -----------------------------------
@@ -6688,7 +6700,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.NIN, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_KAGETORAS_DIARY, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_KAGETORAS_DIARY, 12 } } },
     },
 
     [1249] =
@@ -6696,7 +6708,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.NIN, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_YOMIS_DIAGRAM, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_YOMIS_DIAGRAM, 12 } } },
     },
 
     [1250] =
@@ -6704,7 +6716,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.NIN, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.IGA_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.IGA_SEAL_FEET, 4 } } },
     },
 
     [1251] =
@@ -6712,7 +6724,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.NIN, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
     },
 
     [1252] =
@@ -6720,7 +6732,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.DRG, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_CLASH_OF_TITANS, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_CLASH_OF_TITANS, 12 } } },
     },
 
     [1253] =
@@ -6728,7 +6740,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.DRG, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
     },
 
     [1254] =
@@ -6736,7 +6748,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.DRG, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.LANCERS_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.LANCERS_SEAL_FEET, 4 } } },
     },
 
     [1255] =
@@ -6744,7 +6756,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.DRG, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
     },
 
     [1256] =
@@ -6752,7 +6764,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.SMN, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_ASTRAL_HOMELAND, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_ASTRAL_HOMELAND, 12 } } },
     },
 
     [1257] =
@@ -6760,7 +6772,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.SMN, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
     },
 
     [1258] =
@@ -6768,7 +6780,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.SMN, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.CALLERS_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.CALLERS_SEAL_FEET, 4 } } },
     },
 
     [1259] =
@@ -6776,7 +6788,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.SMN, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
     },
 
     [1260] =
@@ -6784,7 +6796,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BLU, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
     },
 
     [1261] =
@@ -6792,7 +6804,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BLU, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_LIFE_FORM_STUDY, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_LIFE_FORM_STUDY, 12 } } },
     },
 
     [1262] =
@@ -6800,7 +6812,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BLU, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.MAVI_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.MAVI_SEAL_FEET, 4 } } },
     },
 
     [1263] =
@@ -6808,7 +6820,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.BLU, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
     },
 
     [1264] =
@@ -6816,7 +6828,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.COR, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
     },
 
     [1265] =
@@ -6824,7 +6836,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.COR, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_BARRELS_OF_FUN, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_BARRELS_OF_FUN, 12 } } },
     },
 
     [1266] =
@@ -6832,7 +6844,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.COR, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.NAVARCHS_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.NAVARCHS_SEAL_FEET, 4 } } },
     },
 
     [1267] =
@@ -6840,7 +6852,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.COR, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
     },
 
     [1268] =
@@ -6848,7 +6860,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.PUP, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_MIKHES_MEMO, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_MIKHES_MEMO, 12 } } },
     },
 
     [1269] =
@@ -6856,7 +6868,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.PUP, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
     },
 
     [1270] =
@@ -6864,7 +6876,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.PUP, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.CIRQUE_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.CIRQUE_SEAL_FEET, 4 } } },
     },
 
     [1271] =
@@ -6872,7 +6884,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.PUP, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
     },
 
     -----------------------------------
@@ -6884,7 +6896,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.DNC, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
     },
 
     [1273] =
@@ -6892,7 +6904,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.DNC, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_MIKHES_MEMO, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_MIKHES_MEMO, 12 } } },
     },
 
     [1274] =
@@ -6900,7 +6912,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.DNC, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.CHARIS_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.CHARIS_SEAL_FEET, 4 } } },
     },
 
     [1275] =
@@ -6908,7 +6920,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.DNC, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
     },
 
     [1276] =
@@ -6916,7 +6928,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.SCH, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
     },
 
     [1277] =
@@ -6924,7 +6936,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.SCH, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_FERREOUSS_DIARY, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_FERREOUSS_DIARY, 12 } } },
     },
 
     [1278] =
@@ -6932,7 +6944,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.SCH, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.SAVANTS_SEAL_FEET, 4 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.SAVANTS_SEAL_FEET, 4 } } },
     },
 
     [1279] =
@@ -6940,7 +6952,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.SCH, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
     },
 
     [1280] =
@@ -6948,7 +6960,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.GEO, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_HROHJS_RECORD, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_HROHJS_RECORD, 12 } } },
     },
 
     [1281] =
@@ -6956,7 +6968,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.GEO, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_THE_BELL_TOLLS, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_THE_BELL_TOLLS, 12 } } },
     },
 
     [1282] =
@@ -6964,7 +6976,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.GEO, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.PLATE_OF_INDI_FRAILTY, 1 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.PLATE_OF_INDI_FRAILTY, 1 } } },
     },
 
     [1283] =
@@ -6972,7 +6984,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.GEO, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_6, 1 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_6, 1 } } },
     },
 
     [1284] =
@@ -6980,7 +6992,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.RUN, 30 } },
         flags = set { 'retro' },
-        reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_MIEUSELOIRS_DIARY, 12 } } },
+        reward = { sparks = 100, exp = 500, item = { { xi.item.COPY_OF_MIEUSELOIRS_DIARY, 12 } } },
     },
 
     [1285] =
@@ -6988,7 +7000,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.RUN, 50 } },
         flags = set { 'retro' },
-        reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
+        reward = { sparks = 200, exp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
     },
 
     [1286] =
@@ -6996,7 +7008,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.RUN, 75 } },
         flags = set { 'retro' },
-        reward = { sparks = 300, xp = 500, item = { { xi.item.SCROLL_OF_CRUSADE, 1 } } },
+        reward = { sparks = 300, exp = 500, item = { { xi.item.SCROLL_OF_CRUSADE, 1 } } },
     },
 
     [1287] =
@@ -7004,7 +7016,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.ACHIEVE_LEVEL,
         reqs = { jobLvl = { xi.job.RUN, 99 } },
         flags = set { 'retro' },
-        reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_7, 1 } } },
+        reward = { sparks = 400, exp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_7, 1 } } },
     },
 
     -----------------------------------
@@ -7015,7 +7027,7 @@ xi.roe.records =
     { -- Unity Communique A (UC)
         trigger = xi.roeTrigger.UNITY_CHAT,
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 100 },
+        reward = { sparks = 100, exp = 500, accolades = 100 },
     },
 
     [3002] =
@@ -7024,7 +7036,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3003] =
@@ -7033,7 +7045,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set { xi.eco.AQUAN } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3004] =
@@ -7042,7 +7054,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set { xi.eco.AMORPH } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 400 },
+        reward = { sparks = 100, exp = 500, accolades = 400 },
     },
 
     [3005] =
@@ -7051,7 +7063,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set { xi.eco.BEAST } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3006] =
@@ -7060,7 +7072,7 @@ xi.roe.records =
         goal = 10,
         reqs = { skillType = xi.skill.WOODWORKING },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3007] =
@@ -7069,7 +7081,7 @@ xi.roe.records =
         goal = 10,
         reqs = { skillType = xi.skill.LEATHERCRAFT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3008] =
@@ -7078,7 +7090,7 @@ xi.roe.records =
         goal = 10,
         reqs = { skillType = 4 },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     -----------------------------------
@@ -7089,7 +7101,7 @@ xi.roe.records =
     { -- Unity Communique B (UC)
         trigger = xi.roeTrigger.UNITY_CHAT,
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 100 },
+        reward = { sparks = 100, exp = 500, accolades = 100 },
     },
 
     [3010] =
@@ -7097,7 +7109,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.CHOCOBO_DIG_SUCCESS,
         goal = 10,
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 100 },
+        reward = { sparks = 100, exp = 500, accolades = 100 },
     },
 
     [3011] =
@@ -7106,7 +7118,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3012] =
@@ -7115,7 +7127,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set { xi.eco.ARCANA } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3013] =
@@ -7124,7 +7136,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set { xi.eco.UNDEAD } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 400 },
+        reward = { sparks = 100, exp = 500, accolades = 400 },
     },
 
     [3014] =
@@ -7133,7 +7145,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set { xi.eco.PLANTOID } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3015] =
@@ -7142,7 +7154,7 @@ xi.roe.records =
         goal = 10,
         reqs = { skillType = xi.skill.SMITHING },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3017] =
@@ -7151,7 +7163,7 @@ xi.roe.records =
         goal = 10,
         reqs = { skillType = 3 },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     -----------------------------------
@@ -7162,7 +7174,7 @@ xi.roe.records =
     { -- Unity Communique C (UC)
         trigger = xi.roeTrigger.UNITY_CHAT,
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 100 },
+        reward = { sparks = 100, exp = 500, accolades = 100 },
     },
 
     [3020] =
@@ -7171,7 +7183,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3021] =
@@ -7180,7 +7192,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set { xi.eco.VERMIN } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3022] =
@@ -7189,7 +7201,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set { xi.eco.BIRD } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 400 },
+        reward = { sparks = 100, exp = 500, accolades = 400 },
     },
 
     [3023] =
@@ -7198,7 +7210,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set { xi.eco.LIZARD } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3024] =
@@ -7207,7 +7219,7 @@ xi.roe.records =
         goal = 10,
         reqs = { skillType = xi.skill.GOLDSMITHING },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3026] =
@@ -7216,7 +7228,7 @@ xi.roe.records =
         goal = 10,
         reqs = { skillType = 1 },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     -----------------------------------
@@ -7227,7 +7239,7 @@ xi.roe.records =
     { -- Unity Communique D (UC)
         trigger = xi.roeTrigger.UNITY_CHAT,
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 100 },
+        reward = { sparks = 100, exp = 500, accolades = 100 },
     },
 
     [3029] =
@@ -7236,7 +7248,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3030] =
@@ -7245,7 +7257,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set { xi.eco.BEAST } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3031] =
@@ -7254,7 +7266,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set { xi.eco.AQUAN } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 400 },
+        reward = { sparks = 100, exp = 500, accolades = 400 },
     },
 
     [3032] =
@@ -7263,7 +7275,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set { xi.eco.AMORPH } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3033] =
@@ -7272,7 +7284,7 @@ xi.roe.records =
         goal = 10,
         reqs = { skillType = xi.skill.CLOTHCRAFT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3034] =
@@ -7281,7 +7293,7 @@ xi.roe.records =
         goal = 10,
         reqs = { skillType = xi.skill.BONECRAFT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3035] =
@@ -7290,7 +7302,7 @@ xi.roe.records =
         goal = 10,
         reqs = { skillType = 4 },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     -----------------------------------
@@ -7301,7 +7313,7 @@ xi.roe.records =
     { -- Unity Communique E (UC)
         trigger = xi.roeTrigger.UNITY_CHAT,
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 100 },
+        reward = { sparks = 100, exp = 500, accolades = 100 },
     },
 
     [3038] =
@@ -7310,7 +7322,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3039] =
@@ -7319,7 +7331,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set { xi.eco.PLANTOID } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3040] =
@@ -7328,7 +7340,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set { xi.eco.ARCANA } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 400 },
+        reward = { sparks = 100, exp = 500, accolades = 400 },
     },
 
     [3041] =
@@ -7337,7 +7349,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set { xi.eco.UNDEAD } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3042] =
@@ -7346,7 +7358,7 @@ xi.roe.records =
         goal = 10,
         reqs = { skillType = xi.skill.COOKING },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3044] =
@@ -7355,7 +7367,7 @@ xi.roe.records =
         goal = 10,
         reqs = { skillType = 3 },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     -----------------------------------
@@ -7366,7 +7378,7 @@ xi.roe.records =
     { -- Unity Communique F (UC)
         trigger = xi.roeTrigger.UNITY_CHAT,
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 100 },
+        reward = { sparks = 100, exp = 500, accolades = 100 },
     },
 
     [3046] =
@@ -7375,7 +7387,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, levelSync = true },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 100 },
+        reward = { sparks = 100, exp = 500, accolades = 100 },
     },
 
     [3047] =
@@ -7384,7 +7396,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3048] =
@@ -7393,7 +7405,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set { xi.eco.LIZARD } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3049] =
@@ -7402,7 +7414,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set { xi.eco.VERMIN } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 400 },
+        reward = { sparks = 100, exp = 500, accolades = 400 },
     },
 
     [3050] =
@@ -7411,7 +7423,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set { xi.eco.BIRD } },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3051] =
@@ -7420,7 +7432,7 @@ xi.roe.records =
         goal = 10,
         reqs = { skillType = xi.skill.ALCHEMY },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3053] =
@@ -7429,7 +7441,7 @@ xi.roe.records =
         goal = 10,
         reqs = { skillType = 1 },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     -----------------------------------
@@ -7442,7 +7454,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.CLUB, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3489] =
@@ -7451,7 +7463,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 258 }, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3490] =
@@ -7460,7 +7472,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 206 }, mobXP = true, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3491] =
@@ -7468,7 +7480,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17191044 }, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3492] =
@@ -7477,7 +7489,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -7490,7 +7502,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.BAT_FANG }, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3494] =
@@ -7499,7 +7511,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 102 }, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3495] =
@@ -7508,7 +7520,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 46, 47 }, mobXP = true, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3496] =
@@ -7516,7 +7528,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17195259 }, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     -----------------------------------
@@ -7529,7 +7541,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.STAFF, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3499] =
@@ -7538,7 +7550,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 195 }, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3500] =
@@ -7547,7 +7559,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 245 }, mobXP = true, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3501] =
@@ -7555,7 +7567,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17252725 }, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3502] =
@@ -7564,7 +7576,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -7577,7 +7589,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.PINCH_OF_BOMB_ASH }, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3504] =
@@ -7586,7 +7598,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 149 }, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3505] =
@@ -7595,7 +7607,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 56 }, mobXP = true, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3506] =
@@ -7603,7 +7615,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17387644 }, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3507] =
@@ -7612,7 +7624,7 @@ xi.roe.records =
         goal = 10,
         reqs = { unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -7625,7 +7637,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.GREAT_KATANA, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3509] =
@@ -7634,7 +7646,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 106 }, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3510] =
@@ -7643,7 +7655,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 258 }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3511] =
@@ -7651,7 +7663,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17211537, 17211561 }, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3512] =
@@ -7660,7 +7672,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -7673,7 +7685,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.SLICE_OF_COCKATRICE_MEAT }, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3514] =
@@ -7682,7 +7694,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 260 }, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3515] =
@@ -7691,7 +7703,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 70 }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3516] =
@@ -7699,7 +7711,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17215778 }, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     -----------------------------------
@@ -7712,7 +7724,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.ARCHERY, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3519] =
@@ -7721,7 +7733,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 197 }, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3520] =
@@ -7730,7 +7742,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 174 }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3521] =
@@ -7738,7 +7750,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17584416 }, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3522] =
@@ -7747,7 +7759,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -7760,7 +7772,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.SLICE_OF_LAND_CRAB_MEAT }, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3524] =
@@ -7769,7 +7781,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 147 }, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3525] =
@@ -7778,7 +7790,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 75, 76, 77, 372 }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3526] =
@@ -7786,7 +7798,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17379450 }, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3527] =
@@ -7795,7 +7807,7 @@ xi.roe.records =
         goal = 5,
         reqs = { unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -7808,7 +7820,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.AXE, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3529] =
@@ -7817,7 +7829,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 107 }, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3530] =
@@ -7826,7 +7838,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 218, 219 }, mobXP = true, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3531] =
@@ -7834,7 +7846,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17215868, 17215888 }, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3532] =
@@ -7843,7 +7855,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -7856,7 +7868,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.SLEEPSHROOM }, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3534] =
@@ -7865,7 +7877,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 109 }, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3535] =
@@ -7874,7 +7886,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 116 }, mobXP = true, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3536] =
@@ -7882,7 +7894,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17224019 }, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     -----------------------------------
@@ -7895,7 +7907,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.GREAT_AXE, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3539] =
@@ -7904,7 +7916,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 261 }, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3540] =
@@ -7913,7 +7925,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 113, 374 }, mobXP = true, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3541] =
@@ -7921,7 +7933,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17363258 }, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3542] =
@@ -7930,7 +7942,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -7943,7 +7955,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.RAPTOR_SKIN }, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3544] =
@@ -7952,7 +7964,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 111 }, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3545] =
@@ -7961,7 +7973,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 210, 376, 377 }, mobXP = true, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3546] =
@@ -7969,7 +7981,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17232079 }, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3547] =
@@ -7978,7 +7990,7 @@ xi.roe.records =
         goal = 5,
         reqs = { unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -7991,7 +8003,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.CLUB, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3549] =
@@ -8000,7 +8012,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 115 }, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3550] =
@@ -8009,7 +8021,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 48 }, mobXP = true, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3551] =
@@ -8017,7 +8029,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17248468, 17248486 }, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3552] =
@@ -8026,7 +8038,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8039,7 +8051,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.SPOOL_OF_SILK_THREAD }, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3554] =
@@ -8048,7 +8060,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 118 }, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3555] =
@@ -8057,7 +8069,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 79 }, mobXP = true, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3556] =
@@ -8065,7 +8077,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17261003 }, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     -----------------------------------
@@ -8078,7 +8090,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.STAFF, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3559] =
@@ -8087,7 +8099,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 151 }, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3560] =
@@ -8096,7 +8108,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 121 }, mobXP = true, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3561] =
@@ -8104,7 +8116,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17395800 }, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3562] =
@@ -8113,7 +8125,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8126,7 +8138,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.BALL_OF_SARUTA_COTTON }, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3564] =
@@ -8135,7 +8147,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 262 }, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3565] =
@@ -8144,7 +8156,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 178 }, mobXP = true, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3566] =
@@ -8152,7 +8164,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17371300 }, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3567] =
@@ -8161,7 +8173,7 @@ xi.roe.records =
         goal = 10,
         reqs = { unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8174,7 +8186,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.HAND_TO_HAND, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3569] =
@@ -8183,7 +8195,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 263 }, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3570] =
@@ -8192,7 +8204,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 172, 369 }, mobXP = true, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3571] =
@@ -8200,7 +8212,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17469578 }, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3572] =
@@ -8209,7 +8221,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8222,7 +8234,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.SPIDER_WEB }, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3574] =
@@ -8231,7 +8243,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 110 }, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3575] =
@@ -8240,7 +8252,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 235 }, mobXP = true, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3576] =
@@ -8248,7 +8260,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17228150 }, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     -----------------------------------
@@ -8261,7 +8273,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.GREAT_SWORD, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3579] =
@@ -8270,7 +8282,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 119 }, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3580] =
@@ -8279,7 +8291,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 266, 268 }, mobXP = true, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3581] =
@@ -8287,7 +8299,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17264972 }, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3582] =
@@ -8296,7 +8308,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8309,7 +8321,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.HECTEYES_EYE }, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3584] =
@@ -8318,7 +8330,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 120 }, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3585] =
@@ -8327,7 +8339,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 139 }, mobXP = true, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3586] =
@@ -8335,7 +8347,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17268788 }, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3587] =
@@ -8344,7 +8356,7 @@ xi.roe.records =
         goal = 10,
         reqs = { unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8357,7 +8369,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.DAGGER, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3589] =
@@ -8366,7 +8378,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 121 }, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3590] =
@@ -8375,7 +8387,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 142, 143 }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3591] =
@@ -8383,7 +8395,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17273190 }, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3592] =
@@ -8392,7 +8404,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8405,7 +8417,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.DOLL_SHARD }, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3594] =
@@ -8414,7 +8426,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 265 }, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3595] =
@@ -8423,7 +8435,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 83, 84, 85, 498 }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3596] =
@@ -8431,7 +8443,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17563801 }, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     -----------------------------------
@@ -8444,7 +8456,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.MARKSMANSHIP, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3599] =
@@ -8453,7 +8465,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 153 }, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3600] =
@@ -8462,7 +8474,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 228, 229, 230 }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3601] =
@@ -8470,7 +8482,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17404000 }, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3602] =
@@ -8479,7 +8491,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8492,7 +8504,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.BIRD_EGG }, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3604] =
@@ -8501,7 +8513,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 125 }, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3605] =
@@ -8510,7 +8522,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 55 }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3606] =
@@ -8518,7 +8530,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17289560 }, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3607] =
@@ -8527,7 +8539,7 @@ xi.roe.records =
         goal = 10,
         reqs = { unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8540,7 +8552,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.DAGGER, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3609] =
@@ -8549,7 +8561,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 123 }, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3610] =
@@ -8558,7 +8570,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 226 }, mobXP = true, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3611] =
@@ -8566,7 +8578,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17281149 }, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3612] =
@@ -8575,7 +8587,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8588,7 +8600,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.SCORPION_CLAW }, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3614] =
@@ -8597,7 +8609,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 116 }, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3615] =
@@ -8606,7 +8618,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 217 }, mobXP = true, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3616] =
@@ -8614,7 +8626,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17252489, 17252508 }, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     -----------------------------------
@@ -8627,7 +8639,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.ARCHERY, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3619] =
@@ -8636,7 +8648,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 266 }, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3620] =
@@ -8645,7 +8657,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 188 }, mobXP = true, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3621] =
@@ -8653,7 +8665,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17571903 }, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3622] =
@@ -8662,7 +8674,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8675,7 +8687,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.BLACK_TIGER_FANG }, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3624] =
@@ -8684,7 +8696,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 176 }, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3625] =
@@ -8693,7 +8705,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 242 }, mobXP = true, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3626] =
@@ -8701,7 +8713,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17498269 }, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3627] =
@@ -8710,7 +8722,7 @@ xi.roe.records =
         goal = 10,
         reqs = { unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8723,7 +8735,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.CLUB, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3629] =
@@ -8732,7 +8744,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 52 }, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3630] =
@@ -8741,7 +8753,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 110 }, mobXP = true, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3631] =
@@ -8749,7 +8761,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16990376 }, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3632] =
@@ -8758,7 +8770,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8771,7 +8783,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.PUK_WING }, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3634] =
@@ -8780,7 +8792,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 100 }, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3635] =
@@ -8789,7 +8801,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 198 }, mobXP = true, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3636] =
@@ -8797,7 +8809,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17187047 }, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     -----------------------------------
@@ -8810,7 +8822,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.STAFF, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3639] =
@@ -8819,7 +8831,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 51 }, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3640] =
@@ -8829,7 +8841,7 @@ xi.roe.records =
         reqs = { mobFamily = set { 99, 100, 101, 102, 103, 104, 105, 106 }, mobXP = true,
             unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3641] =
@@ -8837,7 +8849,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16986378 }, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3642] =
@@ -8846,7 +8858,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8859,7 +8871,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.SLICE_OF_DHALMEL_MEAT }, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3644] =
@@ -8868,7 +8880,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 267 }, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3645] =
@@ -8877,7 +8889,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 80 }, mobXP = true, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3646] =
@@ -8885,7 +8897,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17588278 }, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3647] =
@@ -8894,7 +8906,7 @@ xi.roe.records =
         goal = 5,
         reqs = { unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8907,7 +8919,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.POLEARM, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3649] =
@@ -8916,7 +8928,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 270 }, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3650] =
@@ -8925,7 +8937,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 197 }, mobXP = true, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3651] =
@@ -8933,7 +8945,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17596628 }, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3652] =
@@ -8942,7 +8954,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -8955,7 +8967,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.BEETLE_SHELL }, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3654] =
@@ -8964,7 +8976,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 101 }, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3655] =
@@ -8973,7 +8985,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 49 }, mobXP = true, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3656] =
@@ -8981,7 +8993,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17191196 }, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     -----------------------------------
@@ -8994,7 +9006,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.SWORD, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3659] =
@@ -9003,7 +9015,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 112 }, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3660] =
@@ -9012,7 +9024,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 136 }, mobXP = true, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3661] =
@@ -9020,7 +9032,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17236027 }, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3662] =
@@ -9029,7 +9041,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -9042,7 +9054,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.BONE_CHIP }, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3664] =
@@ -9051,7 +9063,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 273 }, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3665] =
@@ -9060,7 +9072,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 227 }, mobXP = true, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3666] =
@@ -9068,7 +9080,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17457236 }, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3667] =
@@ -9077,7 +9089,7 @@ xi.roe.records =
         goal = 10,
         reqs = { unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -9090,7 +9102,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.CLUB, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3669] =
@@ -9099,7 +9111,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 145 }, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3670] =
@@ -9108,7 +9120,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 98 }, mobXP = true, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3671] =
@@ -9116,7 +9128,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17256836 }, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3672] =
@@ -9125,7 +9137,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -9138,7 +9150,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.PIECE_OF_ROTTEN_MEAT }, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3674] =
@@ -9147,7 +9159,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 269 }, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3675] =
@@ -9156,7 +9168,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 25 }, mobXP = true, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3676] =
@@ -9164,7 +9176,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17629281 }, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     -----------------------------------
@@ -9177,7 +9189,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.STAFF, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3679] =
@@ -9186,7 +9198,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 169 }, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3680] =
@@ -9195,7 +9207,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 71 }, mobXP = true, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3681] =
@@ -9203,7 +9215,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17649822 }, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3682] =
@@ -9212,7 +9224,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -9225,7 +9237,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.SUIT_OF_DULLAHAN_ARMOR }, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3684] =
@@ -9234,7 +9246,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 274 }, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3685] =
@@ -9243,7 +9255,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 447 }, mobXP = true, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3686] =
@@ -9251,7 +9263,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17613130 }, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3687] =
@@ -9260,7 +9272,7 @@ xi.roe.records =
         goal = 10,
         reqs = { unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -9273,7 +9285,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.CLUB, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3689] =
@@ -9282,7 +9294,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 268 }, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     --[[
@@ -9292,7 +9304,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set{ ??? }, mobXP = true, unityLeader = xi.unityLeader.SYLVIE },
         flags = set{ 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 --]]
 
@@ -9301,7 +9313,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 16793742 }, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3692] =
@@ -9310,7 +9322,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -9323,7 +9335,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.DEMON_HORN }, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3694] =
@@ -9332,7 +9344,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 108 }, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3695] =
@@ -9341,7 +9353,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobSystem = set { xi.eco.DEMON }, mobXP = true, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3696] =
@@ -9349,7 +9361,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17436876 }, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     -----------------------------------
@@ -9362,7 +9374,7 @@ xi.roe.records =
         goal = 30,
         reqs = { skillType = xi.skill.STAFF, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3699] =
@@ -9371,7 +9383,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 272 }, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3700] =
@@ -9380,7 +9392,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 342 }, mobXP = true, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3701] =
@@ -9388,7 +9400,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17244396 }, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3702] =
@@ -9397,7 +9409,7 @@ xi.roe.records =
         goal = 30,
         reqs = { unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -9410,7 +9422,7 @@ xi.roe.records =
         goal = 5,
         reqs = { itemID = set { xi.item.TWITHERYM_WING }, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3704] =
@@ -9419,7 +9431,7 @@ xi.roe.records =
         goal = 10,
         reqs = { zone = set { 126 }, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 300 },
+        reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
     [3705] =
@@ -9428,7 +9440,7 @@ xi.roe.records =
         goal = 10,
         reqs = { mobFamily = set { 338 }, mobXP = true, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     [3706] =
@@ -9436,7 +9448,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.DEFEAT_MOB,
         reqs = { mobID = set { 17293485 }, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 1000 },
+        reward = { sparks = 100, exp = 500, accolades = 1000 },
     },
 
     [3707] =
@@ -9445,7 +9457,7 @@ xi.roe.records =
         goal = 10,
         reqs = { unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
-        reward = { sparks = 100, xp = 500, accolades = 500 },
+        reward = { sparks = 100, exp = 500, accolades = 500 },
     },
 
     -----------------------------------
@@ -9455,7 +9467,7 @@ xi.roe.records =
     [3367] =
     { -- Signet, brb (W)
         flags = set { 'weekly' },
-        reward = { sparks = 50, xp = 1115 },
+        reward = { sparks = 50, exp = 1115 },
     },
 
     -----------------------------------
@@ -9468,7 +9480,7 @@ xi.roe.records =
         goal = 30,
         reqs = { mobXP = true },
         flags = set { 'daily' },
-        reward = { sparks = 100, xp = 500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 100, exp = 500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [4083] =
@@ -9476,7 +9488,7 @@ xi.roe.records =
         trigger = xi.roeTrigger.BUFF_ALLY,
         goal = 20,
         flags = set { 'daily' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [4084] =
@@ -9485,7 +9497,7 @@ xi.roe.records =
         goal = 30,
         reqs = { healMin = 500 },
         flags = set { 'daily' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     -----------------------------------
@@ -9496,45 +9508,45 @@ xi.roe.records =
     { -- Vanquish Aquans
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 20,
-        reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.AQUAN } },
+        reqs = { mobXP = true, zoneNot = abysseaZones, mobSystem = set { xi.eco.AQUAN } },
         flags = set { 'timed', 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [4009] =
     { -- Vanquish Beasts
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 20,
-        reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.BEAST } },
+        reqs = { mobXP = true, zoneNot = abysseaZones, mobSystem = set { xi.eco.BEAST } },
         flags = set { 'timed', 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [4010] =
     { -- Vanquish Plantoids
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 20,
-        reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.PLANTOID } },
+        reqs = { mobXP = true, zoneNot = abysseaZones, mobSystem = set { xi.eco.PLANTOID } },
         flags = set { 'timed', 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [4011] =
     { -- Vanquish Lizards
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 20,
-        reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.LIZARD } },
+        reqs = { mobXP = true, zoneNot = abysseaZones, mobSystem = set { xi.eco.LIZARD } },
         flags = set { 'timed', 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [4012] =
     { -- Vanquish Vermin
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 20,
-        reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.VERMIN } },
+        reqs = { mobXP = true, zoneNot = abysseaZones, mobSystem = set { xi.eco.VERMIN } },
         flags = set { 'timed', 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [4013] =
@@ -9543,7 +9555,7 @@ xi.roe.records =
         goal = 5000,
         increment = 0,
         flags = set { 'timed', 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         check = function(self, player, params)
             if params.exp and params.exp > 0 then
                 params.progress = params.progress + params.exp
@@ -9560,50 +9572,50 @@ xi.roe.records =
         goal = 3,
         reqs = { itemID = set { xi.item.BEASTMENS_SEAL, xi.item.KINDREDS_SEAL, xi.item.KINDREDS_CREST, xi.item.HIGH_KINDREDS_CREST, xi.item.SACRED_KINDREDS_CREST } },
         flags = set { 'timed', 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [4015] =
     { -- Vanquish Birds
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 20,
-        reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.BIRD } },
+        reqs = { mobXP = true, zoneNot = abysseaZones, mobSystem = set { xi.eco.BIRD } },
         flags = set { 'timed', 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [4016] =
     { -- Vanquish Amorphs
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 20,
-        reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.AMORPH } },
+        reqs = { mobXP = true, zoneNot = abysseaZones, mobSystem = set { xi.eco.AMORPH } },
         flags = set { 'timed', 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [4017] =
     { -- Vanquish Undead
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 20,
-        reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.UNDEAD } },
+        reqs = { mobXP = true, zoneNot = abysseaZones, mobSystem = set { xi.eco.UNDEAD } },
         flags = set { 'timed', 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [4018] =
     { -- Vanquish Arcana
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 20,
-        reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.ARCANA } },
+        reqs = { mobXP = true, zoneNot = abysseaZones, mobSystem = set { xi.eco.ARCANA } },
         flags = set { 'timed', 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [4019] =
     { -- Crack Treasure Caskets (Triggered from caskets.lua)
         goal = 10,
         flags = set { 'timed', 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [4020] =
@@ -9612,7 +9624,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL },
         flags = set { 'timed', 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     [4021] =
@@ -9621,7 +9633,7 @@ xi.roe.records =
         goal = 20,
         reqs = { mobXP = true, atkType = xi.attackType.MAGICAL },
         flags = set { 'timed', 'repeat' },
-        reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
+        reward = { sparks = 300, exp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
     },
 
     -----------------------------------

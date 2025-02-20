@@ -75,6 +75,42 @@ quest.sections =
             return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
+        [xi.zone.YUHTUNGA_JUNGLE] =
+        {
+            ['Logging_Point'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if
+                        not player:hasItem(xi.item.FALLEN_STAR) and
+                        npcUtil.tradeHas(trade, xi.item.HATCHET)
+                    then
+                        if npcUtil.giveItem(player, xi.item.FALLEN_STAR, { silent = true, fromTrade = true }) then
+                            player:confirmTrade()
+                            return quest:progressEvent(205, xi.item.FALLEN_STAR)
+                        end
+                    end
+                end
+            },
+        },
+
+        [xi.zone.YHOATOR_JUNGLE] =
+        {
+            ['Logging_Point'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if
+                        not player:hasItem(xi.item.FALLEN_STAR) and
+                        npcUtil.tradeHas(trade, xi.item.HATCHET)
+                    then
+                        if npcUtil.giveItem(player, xi.item.FALLEN_STAR, { silent = true, fromTrade = true }) then
+                            player:confirmTrade()
+                            return quest:progressEvent(10, xi.item.FALLEN_STAR)
+                        end
+                    end
+                end
+            },
+        },
+
         [xi.zone.BASTOK_MARKETS] =
         {
             ['Enu'] =

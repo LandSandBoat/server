@@ -24,19 +24,29 @@
 
 #include "zone.h"
 
+#include "entities/baseentity.h"
+#include "entities/charentity.h"
+#include "entities/mobentity.h"
+#include "entities/npcentity.h"
+#include "entities/petentity.h"
+#include "entities/trustentity.h"
+
 #include <set>
 #include <vector>
 
 class CZoneEntities
 {
 public:
+    CZoneEntities(CZone*);
+    ~CZoneEntities();
+
     void HealAllMobs();
+    void TryAddToNearbySpawnLists(CBaseEntity* PEntity);
 
     CCharEntity* GetCharByName(const std::string& name); // finds the player if exists in zone
     CCharEntity* GetCharByID(uint32 id);
     CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // get a pointer to any entity in the zone
 
-    void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
     void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
 
     void SpawnPCs(CCharEntity* PChar);
@@ -44,8 +54,8 @@ public:
     void SpawnPETs(CCharEntity* PChar);
     void SpawnNPCs(CCharEntity* PChar);
     void SpawnTRUSTs(CCharEntity* PChar);
-    void SpawnMoogle(CCharEntity* PChar);    // display Moogle in MogHouse in zone
-    void SpawnTransport(CCharEntity* PChar); // display ship/boat in zone
+    void SpawnConditionalNPCs(CCharEntity* PChar); // display Moogle in MogHouse in zone
+    void SpawnTransport(CCharEntity* PChar);       // display ship/boat in zone
     void DespawnPC(CCharEntity* PChar);
     void SavePlayTime();
 
@@ -59,8 +69,6 @@ public:
     void InsertMOB(CBaseEntity* PMob);
     void InsertPET(CBaseEntity* PPet);
     void InsertTRUST(CBaseEntity* PTrust);
-    void DeletePET(CBaseEntity* PPet);
-    void DeleteTRUST(CBaseEntity* PTrust);
 
     void FindPartyForMob(CBaseEntity* PEntity);         // looking for a party for the monster
     void TransportDepart(uint16 boundary, uint16 zone); // ship/boat is leaving, passengers need to be collected
@@ -69,7 +77,7 @@ public:
     void WeatherChange(WEATHER weather);
     void MusicChange(uint16 BlockID, uint16 MusicTrackID);
 
-    void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // send a global package within the zone
+    void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, const std::unique_ptr<CBasicPacket>&); // send a global package within the zone
 
     void ZoneServer(time_point tick);
 
@@ -79,9 +87,22 @@ public:
     EntityList_t GetMobList() const;
     bool         CharListEmpty() const;
 
-    uint16 GetNewCharTargID();
-    void   AssignDynamicTargIDandLongID(CBaseEntity* PEntity);
+    void ForEachChar(std::function<void(CCharEntity*)> const& func);
+    void ForEachMob(std::function<void(CMobEntity*)> const& func);
+    void ForEachNpc(std::function<void(CNpcEntity*)> const& func);
+    void ForEachTrust(std::function<void(CTrustEntity*)> const& func);
+    void ForEachPet(std::function<void(CPetEntity*)> const& func);
+    void ForEachAlly(std::function<void(CMobEntity*)> const& func);
 
+    auto GetNewCharTargID() -> uint16;
+    void AssignDynamicTargIDandLongID(CBaseEntity* PEntity);
+    void EraseStaleDynamicTargIDs();
+    auto GetUsedDynamicTargIDsCount() const -> std::size_t;
+
+private:
+    CZone* m_zone;
+
+    // NOTE: These are all keyed by targid
     EntityList_t m_allyList;
     EntityList_t m_mobList;
     EntityList_t m_petList;
@@ -90,24 +111,32 @@ public:
     EntityList_t m_TransportList;
     EntityList_t m_charList;
 
-    uint16           nextDynamicTargID; // The next dynamic targ ID to chosen -- SE rotates them forwards and skips entries that already exist.
-    std::set<uint16> charTargIds;       // sorted set of targids for characters
-    std::set<uint16> dynamicTargIds;    // sorted set of targids for dynamic entities
+    uint16           m_nextDynamicTargID; // The next dynamic targ ID to chosen -- SE rotates them forwards and skips entries that already exist.
+    std::set<uint16> m_charTargIds;       // sorted set of targids for characters
+    std::set<uint16> m_dynamicTargIds;    // sorted set of targids for dynamic entities
 
-    std::vector<std::pair<uint16, time_point>> dynamicTargIdsToDelete; // list of targids pending deletion at a later date
+    std::vector<std::pair<uint16, time_point>> m_dynamicTargIdsToDelete; // list of targids pending deletion at a later date
 
-    CZoneEntities(CZone*);
-    ~CZoneEntities();
-
-private:
-    CZone*     m_zone;
     time_point m_EffectCheckTime{ server_clock::now() };
 
-    time_point computeTime{ server_clock::now() };
-    uint16     lastCharComputeTargId;
+    time_point m_computeTime{ server_clock::now() };
+    uint16     m_lastCharComputeTargId{ 0 };
 
-    time_point charPersistTime{ server_clock::now() };
-    uint16     lastCharPersistTargId;
+    time_point m_charPersistTime{ server_clock::now() };
+    uint16     m_lastCharPersistTargId{ 0 };
+
+    //
+    // Intermediate collections for use inside ZoneServer
+    //
+
+    std::vector<CMobEntity*>   m_mobsToDelete;
+    std::vector<CNpcEntity*>   m_npcsToDelete;
+    std::vector<CPetEntity*>   m_petsToDelete;
+    std::vector<CTrustEntity*> m_trustsToDelete;
+    std::vector<CMobEntity*>   m_aggroableMobs;
+    std::vector<CCharEntity*>  m_charsToLogout;
+    std::vector<CCharEntity*>  m_charsToWarp;
+    std::vector<CCharEntity*>  m_charsToChangeZone;
 };
 
 #endif

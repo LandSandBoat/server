@@ -56,10 +56,10 @@ void CJobPoints::LoadJobPoints()
                     JobPointType_t currentType = {};
                     currentType.id             = currentJob.jobCategory + j;
                     currentType.value          = _sql->GetUIntData(JOBPOINTS_SQL_COLUMN_OFFSET + j);
-                    memcpy(&currentJob.job_point_types[j], &currentType, sizeof(JobPointType_t));
+                    std::memcpy(&currentJob.job_point_types[j], &currentType, sizeof(JobPointType_t));
                 }
 
-                memcpy(&m_jobPoints[jobId], &currentJob, sizeof(JobPoints_t));
+                std::memcpy(&m_jobPoints[jobId], &currentJob, sizeof(JobPoints_t));
             }
         }
     }
@@ -122,6 +122,19 @@ uint16 CJobPoints::GetJobPoints()
     return m_jobPoints[m_PChar->GetMJob()].currentJp;
 }
 
+uint16 CJobPoints::GetJobPointsByJob(uint8 jobID)
+{
+    const char* Query = "SELECT job_points FROM char_job_points WHERE charid='%u' AND jobid='%u'";
+    int         ret   = _sql->Query(Query, m_PChar->id, jobID);
+
+    if (ret != SQL_ERROR && _sql->NextRow() == SQL_SUCCESS)
+    {
+        return _sql->GetUIntData(0);
+    }
+
+    return 0;
+}
+
 void CJobPoints::SetJobPoints(int16 amount)
 {
     uint8 currentJob = static_cast<uint8>(m_PChar->GetMJob());
@@ -129,6 +142,36 @@ void CJobPoints::SetJobPoints(int16 amount)
 
     _sql->Query("INSERT INTO char_job_points SET charid='%u', jobid='%u', job_points='%u' ON DUPLICATE KEY UPDATE job_points='%u'",
                 m_PChar->id, currentJob, amount, amount);
+
+    LoadJobPoints();
+}
+
+void CJobPoints::AddJobPoints(uint8 jobID, uint16 amount)
+{
+    if (jobID == 0 || jobID > 22)
+    {
+        ShowDebug("Attempt to adjust job points for an invalid job for (%s).", m_PChar->getName());
+        return;
+    }
+    amount = std::clamp<int16>(amount, 0, 500);
+    _sql->Query("INSERT INTO char_job_points SET charid='%u', jobid='%u', job_points='%d' ON DUPLICATE KEY UPDATE job_points=job_points +'%d'",
+                m_PChar->id, jobID, amount, amount);
+
+    LoadJobPoints();
+}
+
+void CJobPoints::DelJobPoints(uint8 jobID, int16 amount)
+{
+    int16 currentAmount = GetJobPointsByJob(jobID);
+    amount              = std::clamp<int16>(amount, -500, 500);
+    if (currentAmount < amount)
+    {
+        ShowDebug("Attempt to reduce job points below 0 for (%s).", m_PChar->getName());
+        return;
+    }
+
+    _sql->Query("UPDATE char_job_points SET job_points='%u' WHERE charid='%u' AND jobid='%u'",
+                currentAmount - amount, m_PChar->id, jobID);
 
     LoadJobPoints();
 }
@@ -241,7 +284,7 @@ namespace jobpointutils
                 break;
             }
 
-            currentGifts->emplace_back(CModifier(static_cast<Mod>(gift.modId), gift.value));
+            currentGifts->emplace_back(static_cast<Mod>(gift.modId), gift.value);
         }
 
         PChar->addModifiers(currentGifts);
@@ -468,7 +511,7 @@ namespace jobpointutils
 
         if (sendUpdate)
         {
-            PChar->pushPacket(new CCharSpellsPacket(PChar));
+            PChar->pushPacket<CCharSpellsPacket>(PChar);
         }
     }
 } // namespace jobpointutils

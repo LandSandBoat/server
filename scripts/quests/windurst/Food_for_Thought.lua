@@ -138,7 +138,7 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, xi.item.HARD_BOILED_EGG) then
                         -- Traded item without receiving order
                         if kenapaProg < 3 then
-                            if math.random(1, 2) == 1 then
+                            if math.random(1, 100) <= 50 then
                                 return quest:progressEvent(331)
                             else
                                 return quest:progressEvent(330, 120)
@@ -213,7 +213,7 @@ quest.sections =
 
                         -- Traded all 3 items & Didn't ask for order
                         if ohbiruProgress < 2 then
-                            if math.random(1, 2) == 1 then
+                            if math.random(1, 100) <= 50 then
                                 return quest:progressEvent(325, 440)
                             else
                                 return quest:progressEvent(326)

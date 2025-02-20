@@ -343,7 +343,11 @@ end
 
 xi.waypoint.onEventFinish = function(player, csid, option, npc)
     if option > 0 and option <= 303 then
-        player:setPos(unpack(waypointInfo[option][4]))
+        if player:getCurrentMission(xi.mission.log_id.SOA) == xi.mission.id.soa.ONWARD_TO_ADOULIN then
+            player:setPos(169.638, 0.491, -27.128, 207, xi.zone.CEIZAK_BATTLEGROUNDS)
+        else
+            player:setPos(unpack(waypointInfo[option][4]))
+        end
     elseif option == 1000 then
         -- Decline Confirmation (Default Off)
         player:setTeleportMenu(xi.teleport.type.WAYPOINT, true)

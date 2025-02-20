@@ -195,6 +195,7 @@ quest.sections =
 
                 [383] = function(player, csid, option, npc)
                     if npcUtil.giveItem(player, optionToItems[quest:getVar(player, 'Option')][1]) then
+                        player:confirmTrade()
                         quest:complete(player)
                     end
                 end,

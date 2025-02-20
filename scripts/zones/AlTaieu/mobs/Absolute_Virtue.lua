@@ -49,34 +49,30 @@ xi.av = xi.av or {}
 -- While this flag is in place, AV's won't drop any loot. Sorry!
 xi.av.experimental = true
 
--- Set to true to get local debug prints about AV's behaviour
+-- Set to true to get local debug prints about AV's behavior
 local debugAV = false
 local avdebug = utils.getDebugPlayerPrinter(debugAV)
 
 local combos =
 {
-    [xi.jsa.CHAINSPELL] = { xi.jsa.CHAINSPELL, xi.jsa.MANAFONT, { xi.jsa.CHAINSPELL, xi.jsa.SOUL_VOICE } },
-    [xi.jsa.MIGHTY_STRIKES] = { xi.jsa.MIGHTY_STRIKES, xi.jsa.HUNDRED_FISTS },
-    [xi.jsa.MEIKYO_SHISUI] = { xi.jsa.MEIKYO_SHISUI, xi.jsa.EES_AERN, xi.jsa.EES_AERN, xi.jsa.EES_AERN },
-    [xi.jsa.INVINCIBLE] = { xi.jsa.INVINCIBLE, xi.jsa.BENEDICTION, xi.jsa.MIJIN_GAKURE },
-    [xi.jsa.CALL_WYVERN] = { xi.jsa.CALL_WYVERN, xi.jsa.FAMILIAR, xi.jsa.ASTRAL_FLOW },
-}
-
-local vars =
-{
-    DAMAGE_THRESHOLD = 'dmgThreshold',
+    [xi.jsa.CHAINSPELL    ] = { xi.jsa.CHAINSPELL,     xi.jsa.MANAFONT,     { xi.jsa.CHAINSPELL, xi.jsa.SOUL_VOICE } },
+    [xi.jsa.MIGHTY_STRIKES] = { xi.jsa.MIGHTY_STRIKES, xi.jsa.HUNDRED_FISTS                                          },
+    [xi.jsa.MEIKYO_SHISUI ] = { xi.jsa.MEIKYO_SHISUI,  xi.jsa.EES_AERN,     xi.jsa.EES_AERN,     xi.jsa.EES_AERN     },
+    [xi.jsa.INVINCIBLE    ] = { xi.jsa.INVINCIBLE,     xi.jsa.BENEDICTION,  xi.jsa.MIJIN_GAKURE                      },
+    [xi.jsa.CALL_WYVERN   ] = { xi.jsa.CALL_WYVERN,    xi.jsa.FAMILIAR,     xi.jsa.ASTRAL_FLOW                       },
 }
 
 local handleDamageResists = function(mob)
-    local next = mob:getLocalVar(vars.DAMAGE_THRESHOLD)
-    local current = mob:getHPP()
-    if current <= next then
-        mob:setLocalVar(vars.DAMAGE_THRESHOLD, next - 10)
-        local dmg = (100 - current) * -1
+    local nextThreehold = mob:getLocalVar('dmgThreshold')
+    local currentHPP    = mob:getHPP()
+
+    if currentHPP <= nextThreehold then
+        local dmg = (100 - currentHPP) * -100 -- This modifiers are base 10000
         mob:setMod(xi.mod.UDMGPHYS, dmg)
         mob:setMod(xi.mod.UDMGRANGE, dmg)
-        mob:setMod(xi.mod.UDMGMAGIC, dmg * 10)
+        mob:setMod(xi.mod.UDMGMAGIC, dmg)
         mob:setMod(xi.mod.UDMGBREATH, dmg)
+        mob:setLocalVar('dmgThreshold', nextThreehold - 10)
     end
 end
 
@@ -258,7 +254,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.UDMGRANGE, 0)
     mob:setMod(xi.mod.UDMGMAGIC, 0)
     mob:setMod(xi.mod.UDMGBREATH, 0)
-    mob:setLocalVar(vars.DAMAGE_THRESHOLD, 90)
+    mob:setLocalVar('dmgThreshold', 90)
     ]]--
 end
 

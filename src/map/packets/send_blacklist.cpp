@@ -70,5 +70,5 @@ CSendBlacklist::CSendBlacklist(CCharEntity* PChar, std::vector<std::pair<uint32,
         std::memcpy(&packet.List[i].Name, blacklist[i].second.c_str(), std::min<size_t>(blacklist[i].second.length(), 16));
     }
 
-    std::memcpy(data, &packet, packet.size * 4);
+    std::memcpy(buffer_.data(), &packet, packet.size * 4);
 }

@@ -12,9 +12,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local xPos = player:getXPos()
     local zPos = player:getZPos()
@@ -32,9 +29,6 @@ entity.onTrigger = function(player, npc)
     elseif xPos > -344 and xPos < -337 and zPos > 153 and zPos < 159 then    -- F-7
         player:startEvent(205)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

@@ -8,13 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
-
-    return 0, 0
+    return xi.job_utils.puppetmaster.onAbilityCheckHeadyArtiface(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    -- target:addStatusEffect(xi.effect.HEADY_ARTIFICE, 18, 1, 1) -- TODO: implement xi.effect.HEADY_ARTIFICE
+    return xi.job_utils.puppetmaster.onAbilityUseHeadyArtiface(player, target, ability)
 end
 
 return abilityObject

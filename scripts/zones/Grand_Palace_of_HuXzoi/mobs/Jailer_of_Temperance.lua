@@ -8,6 +8,10 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
+
 entity.onMobSpawn = function(mob)
     -- Set AnimationSub to 0, put it in pot form
     -- Change it's damage resists. Pot for take
@@ -19,13 +23,11 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.SLASH_SDT, 0)
     mob:setMod(xi.mod.PIERCE_SDT, 0)
     mob:setMod(xi.mod.IMPACT_SDT, 1000)
-    -- Set the magic resists. It always takes no damage from direct magic
-    for n = 1, #xi.magic.resistMod, 1 do
-        mob:setMod(xi.magic.resistMod[n], 0)
-    end
 
-    for n = 1, #xi.magic.specificDmgTakenMod, 1 do
-        mob:setMod(xi.magic.specificDmgTakenMod[n], 10000)
+    -- Set the magic resists. It always takes no damage from direct magic
+    for element = xi.element.FIRE, xi.element.DARK do
+        mob:setMod(xi.combat.element.getElementalMEVAModifier(element), 0)
+        mob:setMod(xi.combat.element.getElementalSDTModifier(element), 10000)
     end
 end
 

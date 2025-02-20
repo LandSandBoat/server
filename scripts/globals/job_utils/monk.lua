@@ -42,6 +42,7 @@ xi.job_utils.monk.useBoost = function(player, target, ability)
     end
 end
 
+-- TODO: add Melee Gloves +2 aug
 xi.job_utils.monk.useChakra = function(player, target, ability)
     local chakraRemoval = player:getMod(xi.mod.CHAKRA_REMOVAL)
 
@@ -51,9 +52,13 @@ xi.job_utils.monk.useChakra = function(player, target, ability)
         end
     end
 
+    -- see https://www.bg-wiki.com/ffxi/Chakra
+    local monkLevel         = utils.getActiveJobLevel(player, xi.job.MNK)
     local jpModifier        = target:getJobPointLevel(xi.jp.CHAKRA_EFFECT) -- NOTE: Level is the modified value, so 10 per point spent
-    local maxRecoveryAmount = (player:getStat(xi.mod.VIT) * (2 + player:getMod(xi.mod.CHAKRA_MULT) / 10)) + jpModifier
-    local recoveryAmount    = math.min(player:getMaxHP() - player:getHP(), maxRecoveryAmount) -- TODO: Figure out "function of level" addition (August 2017 update)
+    local hpModifier        = ((monkLevel + 1) * 0.2 / 100) * player:getMaxHP()
+    local chakraMultiplier  = 1 + player:getMod(xi.mod.CHAKRA_MULT) / 100
+    local maxRecoveryAmount = (player:getStat(xi.mod.VIT) * 2 + hpModifier) * chakraMultiplier + jpModifier
+    local recoveryAmount    = math.min(player:getMaxHP() - player:getHP(), maxRecoveryAmount)
 
     player:setHP(player:getHP() + recoveryAmount)
 
@@ -78,7 +83,7 @@ xi.job_utils.monk.useChiBlast = function(player, target, ability)
 
     local dmg = math.floor(player:getStat(xi.mod.MND) * (0.5 + (math.random() / 2))) * multiplier
 
-    dmg = xi.ability.adjustDamage(dmg, target, ability, target, xi.attackType.BREATH, nil, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    dmg = xi.ability.adjustDamage(dmg, player, ability, target, xi.attackType.BREATH, nil, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, player, xi.attackType.BREATH, xi.damageType.ELEMENTAL)
     target:updateClaim(player)
     player:delStatusEffect(xi.effect.BOOST)
@@ -94,15 +99,11 @@ xi.job_utils.monk.useCounterstance = function(player, target, ability)
 end
 
 xi.job_utils.monk.useDodge = function(player, target, ability)
-    local power = 20 + player:getMod(xi.mod.DODGE_EFFECT)
-
-    player:addStatusEffect(xi.effect.DODGE, power, 0, 120)
+    player:addStatusEffect(xi.effect.DODGE, 0, 0, 30)
 end
 
 xi.job_utils.monk.useFocus = function(player, target, ability)
-    local power = 20 + player:getMod(xi.mod.FOCUS_EFFECT)
-
-    player:addStatusEffect(xi.effect.FOCUS, power, 0, 120)
+    player:addStatusEffect(xi.effect.FOCUS, 0, 0, 30)
 end
 
 xi.job_utils.monk.useFootwork = function(player, target, ability)
@@ -120,8 +121,58 @@ xi.job_utils.monk.useHundredFists = function(player, target, ability)
     player:addStatusEffect(xi.effect.HUNDRED_FISTS, 1, 0, 45)
 end
 
+-- TODO: Support Tantra Cyclas + 1 (does not give critical hit damage)
+-- Probably will be exceptionally jank, very low priority
+xi.job_utils.monk.impetusMissListener = function(attacker, victim, attack)
+    local effect = attacker:getStatusEffect(xi.effect.IMPETUS)
+
+    if effect then
+        local mainPower = effect:getPower()    -- Stores Attack & Critical Hit Rate bonuses
+        local subPower  = effect:getSubPower() -- Stores Critical Hit Damage & Accuracy bonuses
+
+        if mainPower > 0 then
+            attacker:delMod(xi.mod.ATT, mainPower * 2)
+            attacker:delMod(xi.mod.CRITHITRATE, mainPower)
+
+            effect:setPower(0)
+        end
+
+        if subPower > 0 then
+            attacker:delMod(xi.mod.ACC, subPower * 2)
+            attacker:delMod(xi.mod.CRIT_DMG_INCREASE, subPower)
+
+            effect:setSubPower(0)
+        end
+    end
+end
+
+-- TODO: Support Tantra Cyclas + 1 (does not give critical hit damage)
+-- Probably will be exceptionally jank, very low priority
+xi.job_utils.monk.impetusHitListener = function(attacker, victim, attack)
+    local effect = attacker:getStatusEffect(xi.effect.IMPETUS)
+
+    if effect then
+        local mainPower = effect:getPower()    -- Stores Attack & Critical Hit Rate bonuses
+        local subPower  = effect:getSubPower() -- Stores Critical Hit Damage & Accuracy bonuses
+
+        if mainPower < 50 then
+            attacker:addMod(xi.mod.ATT, 2)
+            attacker:addMod(xi.mod.CRITHITRATE, 1)
+
+            effect:setPower(mainPower + 1)
+        end
+
+        if attacker:getMod(xi.mod.AUGMENTS_IMPETUS) > 0 and subPower < 50 then
+            attacker:addMod(xi.mod.ACC, 2)
+            attacker:addMod(xi.mod.CRIT_DMG_INCREASE, 1)
+
+            effect:setSubPower(subPower + 1)
+        end
+    end
+end
+
 xi.job_utils.monk.useImpetus = function(player, target, ability)
-    player:addStatusEffect(xi.effect.IMPETUS, 2, 0, 180)
+    player:addStatusEffect(xi.effect.IMPETUS, 0, 0, 180)
 end
 
 xi.job_utils.monk.useInnerStrength = function(player, target, ability)

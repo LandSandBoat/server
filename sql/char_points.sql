@@ -196,6 +196,11 @@ CREATE TABLE `char_points` (
   `ritualistic_plans` smallint(5) unsigned NOT NULL DEFAULT 0,
   `tutelary_plans` smallint(5) unsigned NOT NULL DEFAULT 0,
   `primacy_plans` smallint(5) unsigned NOT NULL DEFAULT 0,
+  `domain_points` int(10) unsigned NOT NULL DEFAULT 0,
+  `domain_points_daily` int(10) unsigned NOT NULL DEFAULT 0,
+  `mog_segments` int(10) unsigned NOT NULL DEFAULT 0,
+  `gallimaufry` int(10) unsigned NOT NULL DEFAULT 0,
+  `is_accolades` smallint(5) unsigned NOT NULL DEFAULT 0,
 
   PRIMARY KEY (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

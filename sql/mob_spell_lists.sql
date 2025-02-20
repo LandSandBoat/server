@@ -1116,7 +1116,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Lumber_Jack',56,192,1,255); -- stonega_iv
 INSERT INTO `mob_spell_lists` VALUES ('Lumber_Jack',56,255,1,255); -- break (1~255)
 
 -- Vrtra (57)
-INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,233,1,255); -- bio_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,232,1,255); -- bio_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,274,1,255); -- sleepga_ii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,360,1,255); -- dispelga (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,361,1,255); -- blindga (1~255)
@@ -3550,11 +3550,21 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,68,13,255);  -- 
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,69,5,255);   -- barstonra (5~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,70,25,255);  -- barthundra (25~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,71,9,255);   -- barwatera (9~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,43,7,255); -- protect (7~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,44,27,255); -- protect_ii (27~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,45,47,255); -- protect_iii (47~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,46,63,255); -- protect_iv (63~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,47,75,255); -- protect_v (75~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,125,7,255);  -- protectra (7~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,126,27,255); -- protectra_ii (27~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,127,47,255); -- protectra_iii (47~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,128,63,255); -- protectra_iv (63~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,129,75,255); -- protectra_v (75~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,48,17,255); -- shell (17~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,49,37,255); -- shell_ii (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,50,57,255); -- shell_iii (57~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,51,68,255); -- shell_iv (68~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,52,75,255); -- shell_v (75~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,130,17,255); -- shellra (17~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,131,37,255); -- shellra_ii (37~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Karaha-Baruha',348,132,57,255); -- shellra_iii (57~255)
@@ -5028,7 +5038,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Toxic_Tamlyn',500,231,1,255);  -- bio_ii 
 INSERT INTO `mob_spell_lists` VALUES ('Zirnitra',501,359,75,255);  -- silencega (75~255)
 
 -- Pyuu the Spatemaker (502)
-INSERT INTO `mob_spell_lists` VALUES ('Pyuu_the_Spatemaker',502,171,1,255); -- water_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Pyuu_the_Spatemaker',502,172,1,255); -- water_iv (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Pyuu_the_Spatemaker',502,201,1,255); -- waterga_iii (1~255)
 
 -- Erle (503)
@@ -5075,7 +5085,16 @@ INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,201,1,255); -- waterg
 INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,274,1,255); -- sleepga_ii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Two-faced_Flan',507,362,1,255); -- bindga (1~255)
 
--- Next Available: 508
+-- Unfettered Twitherym (508)
+INSERT INTO `mob_spell_lists` VALUES ('Unfettered_Twitherym',508,366,1,255); -- Graviga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Unfettered_Twitherym',508,356,1,255); -- Paralyga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Unfettered_Twitherym',508,362,1,255); -- Bindga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Unfettered_Twitherym',508,357,1,255); -- Slowga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Unfettered_Twitherym',508,359,1,255); -- silencega (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Unfettered_Twitherym',508,360,1,255); -- dispelga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Unfettered_Twitherym',508,187,1,255); -- aeroga_iv (1~255)
+
+-- Next Available: 509
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

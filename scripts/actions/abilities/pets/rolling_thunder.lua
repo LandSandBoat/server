@@ -10,15 +10,15 @@ end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
-    local duration = 120 + bonusTime
+    local duration  = 120 + bonusTime
 
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    local magicskill = utils.getSkillLvl(1, target:getMainLvl())
+    local magicskill = xi.combat.skillLevel.getSkillCap(target:getMainLvl(), xi.skillRank.A_PLUS)
+    local potency    = 3 + 6 * magicskill / 100
 
-    local potency = 3 + ((6 * magicskill) / 100)
     if magicskill > 200 then
-        potency = 5 + ((5 * magicskill) / 100)
+        potency = 5 + 5 * magicskill / 100
     end
 
     xi.mobskills.mobBuffMove(target, xi.effect.ENTHUNDER, potency, 0, duration)

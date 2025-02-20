@@ -20,7 +20,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         end
     end
 
-    if mob:getHPP() <= 25 then
+    if mob:getHPP() < 25 then
         return 0
     end
 

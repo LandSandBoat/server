@@ -39,7 +39,8 @@ enum class PHYSICAL_ATTACK_TYPE
     RAPID_SHOT = 6,
     SAMBA      = 7,
     QUAD       = 8,
-    DAKEN      = 9
+    DAKEN      = 9,
+    FOLLOWUP   = 10,
 };
 
 enum PHYSICAL_ATTACK_DIRECTION
@@ -91,6 +92,8 @@ public:
     bool                      IsAnticipated() const;
     bool                      IsDeflected() const;
     bool                      CheckAnticipated();
+    bool                      CheckHadSneakAttack() const;
+    bool                      CheckHadTrickAttack() const;
     bool                      IsCountered() const;
     bool                      CheckCounter();
     bool                      IsCovered() const; // Returns the covered flag.
@@ -114,6 +117,8 @@ private:
     bool                      m_isCountered{ false };
     bool                      m_isCovered{ false }; // Flag: Is someone covering the victim?
     bool                      m_anticipated{ false };
+    bool                      m_isSA{ false };                // Attack had a valid SA proc
+    bool                      m_isTA{ false };                // Attack had a valid TA proc
     bool                      m_isFirstSwing{ false };        // Flag: Is this attack the first swing?
     float                     m_damageRatio{ false };         // The damage ratio.
     int32                     m_damage{ 0 };                  // The damage for this attack.

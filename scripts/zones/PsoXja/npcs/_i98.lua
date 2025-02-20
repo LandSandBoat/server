@@ -7,9 +7,6 @@ local ID = zones[xi.zone.PSOXJA]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if
         player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR) or
@@ -23,12 +20,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.DOOR_LOCKED)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

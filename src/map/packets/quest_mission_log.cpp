@@ -127,11 +127,11 @@ void CQuestMissionLogPacket::generateQuestPacket(CCharEntity* PChar, uint8 logID
 {
     if (status == LOG_QUEST_CURRENT)
     {
-        memcpy(data + 4, PChar->m_questLog[logID].current, 32);
+        std::memcpy(buffer_.data() + 4, PChar->m_questLog[logID].current, 32);
     }
     else if (status == LOG_QUEST_COMPLETE)
     {
-        memcpy(data + 4, PChar->m_questLog[logID].complete, 32);
+        std::memcpy(buffer_.data() + 4, PChar->m_questLog[logID].complete, 32);
     }
 }
 
@@ -168,7 +168,7 @@ void CQuestMissionLogPacket::generateCompleteMissionPacket(CCharEntity* PChar)
     {
         for (uint8 questMissionID = 0; questMissionID < 64; questMissionID++)
         {
-            data[(questMissionID / 8) + (logID * 0x08) + 4] ^= ((PChar->m_missionLog[logID].complete[questMissionID]) << (questMissionID % 8));
+            buffer_[(questMissionID / 8) + (logID * 0x08) + 4] ^= ((PChar->m_missionLog[logID].complete[questMissionID]) << (questMissionID % 8));
         }
     }
 }
@@ -189,13 +189,13 @@ void CQuestMissionLogPacket::generateCompleteExpMissionPacket(CCharEntity* PChar
     uint8 logID = MISSION_TOAU;
     for (uint8 questMissionID = 0; questMissionID < 64; questMissionID++)
     {
-        data[(questMissionID / 8) + 4] ^= ((PChar->m_missionLog[logID].complete[questMissionID]) << (questMissionID % 8));
+        buffer_[(questMissionID / 8) + 4] ^= ((PChar->m_missionLog[logID].complete[questMissionID]) << (questMissionID % 8));
     }
 
     logID = MISSION_WOTG;
     for (uint8 questMissionID = 0; questMissionID < 64; questMissionID++)
     {
-        data[(questMissionID / 8) + 0x08 + 4] ^= ((PChar->m_missionLog[logID].complete[questMissionID]) << (questMissionID % 8));
+        buffer_[(questMissionID / 8) + 0x08 + 4] ^= ((PChar->m_missionLog[logID].complete[questMissionID]) << (questMissionID % 8));
     }
 }
 
@@ -203,7 +203,7 @@ void CQuestMissionLogPacket::generateCampaignMissionPacket(CCharEntity* PChar, u
 {
     for (uint16 questMissionID = startQMID; questMissionID < (startQMID + 256); questMissionID++)
     {
-        data[(questMissionID / 8) + 4] ^= ((PChar->m_campaignLog.complete[questMissionID]) << (questMissionID % 8));
+        buffer_[(questMissionID / 8) + 4] ^= ((PChar->m_campaignLog.complete[questMissionID]) << (questMissionID % 8));
     }
 }
 
@@ -211,6 +211,6 @@ void CQuestMissionLogPacket::generateAssaultMissionPacket(CCharEntity* PChar)
 {
     for (uint16 questMissionID = 0; questMissionID < 128; questMissionID++)
     {
-        data[(questMissionID / 8) + 0x10 + 4] ^= ((PChar->m_assaultLog.complete[questMissionID]) << (questMissionID % 8));
+        buffer_[(questMissionID / 8) + 0x10 + 4] ^= ((PChar->m_assaultLog.complete[questMissionID]) << (questMissionID % 8));
     }
 }

@@ -3,7 +3,11 @@
 --   NM: Zirnitra
 -----------------------------------
 local ID = zones[xi.zone.XARCABARD_S]
-mixins = { require('scripts/mixins/families/amphiptere') }
+mixins =
+{
+    require('scripts/mixins/families/amphiptere'),
+    require('scripts/mixins/draw_in'),
+}
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -14,7 +18,6 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGEN, 50)
     mob:setMod(xi.mod.REGAIN, 100)
     mob:setMod(xi.mod.WIND_ABSORB, 100)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 end
 
 entity.onMobEngage = function(mob)

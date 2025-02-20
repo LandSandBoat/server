@@ -4,6 +4,8 @@
 -- KSNM: Early Bird Catches the Wyrm
 -- For future reference: Trusts are not allowed in this fight
 -----------------------------------
+mixins = { require('scripts/mixins/draw_in') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -11,7 +13,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1) -- has a bug during flight, like Tiamat
     mob:setTP(3000) -- opens fight with a skill
 end
 
@@ -49,7 +50,7 @@ entity.onMobFight = function(mob, target)
         mob:addStatusEffect(xi.effect.DEFENSE_BOOST, 75, 0, 0)
         mob:addStatusEffect(xi.effect.MAGIC_DEF_BOOST, 75, 0, 0)
         mob:setMobMod(xi.mobMod.SKILL_LIST, 262) -- restore standard ground skill set
-        mob:setBehaviour(1024) -- reset behavior to not face target
+        mob:setBehavior(1024) -- reset behavior to not face target
 
     -- Go airborne at 66% HP, gets only called once
     -- TODO: Should move physically to center/origin before taking off; maybe with pathTo()?
@@ -63,7 +64,7 @@ entity.onMobFight = function(mob, target)
         mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0) -- melee attacks miss now
         mob:setMobSkillAttack(1146) -- change default attack to ranged fire magic damage
         mob:setMobMod(xi.mobMod.SKILL_LIST, 1147) -- change skill set to flying moves
-        mob:setBehaviour(0) -- face target while flying
+        mob:setBehavior(0) -- face target while flying
     end
 end
 

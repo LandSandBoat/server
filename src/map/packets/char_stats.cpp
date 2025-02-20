@@ -48,7 +48,7 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
     ref<uint16>(0x10) = PChar->jobs.exp[PChar->GetMJob()];
     ref<uint16>(0x12) = charutils::GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]);
 
-    memcpy(data + (0x14), &PChar->stats, 14); // TODO: it won't work with merits
+    std::memcpy(buffer_.data() + 0x14, &PChar->stats, 14); // TODO: it won't work with merits
 
     // Hasso gives STR only if main weapon is two handed
     if (auto* weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_MAIN]); weapon && weapon->isTwoHanded())

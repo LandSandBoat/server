@@ -8,22 +8,22 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- Banishing Gate #1
-    zone:registerTriggerArea(1, -208, -1, 224, -206, 1, 227)
-    zone:registerTriggerArea(2, -208, -1, 212, -206, 1, 215)
-    zone:registerTriggerArea(3, -213, -1, 224, -211, 1, 227)
-    zone:registerTriggerArea(4, -213, -1, 212, -211, 1, 215)
+    zone:registerCuboidTriggerArea(1, -208.5, -1, 224.5, -206, 1, 227)
+    zone:registerCuboidTriggerArea(2, -208.5, -1, 213, -206, 1, 215.5)
+    zone:registerCuboidTriggerArea(3, -214, -1, 224.5, -211.5, 1, 227)
+    zone:registerCuboidTriggerArea(4, -214, -1, 212, -211.5, 1, 215.5)
 
     -- Banishing Gate #2
-    zone:registerTriggerArea(10,  -51, -1,  82,  -49, 1,  84)
-    zone:registerTriggerArea(11, -151, -1,  82, -149, 1,  84)
-    zone:registerTriggerArea(12,  -51, -1, 115,  -49, 1, 117)
-    zone:registerTriggerArea(13, -151, -1, 115, -149, 1, 117)
+    zone:registerCuboidTriggerArea(10,  -51.5, -1,  82,  -48.5, 1,  84.5)
+    zone:registerCuboidTriggerArea(11, -151, -1,  82, -148.5, 1,  84.5)
+    zone:registerCuboidTriggerArea(12,  -51.5, -1, 115.5,  -49.5, 1, 118)
+    zone:registerCuboidTriggerArea(13, -151, -1, 115.5, -148.5, 1, 118)
 
     -- Banishing Gate #3
-    zone:registerTriggerArea(19, -190, -1, 355, -188, 1, 357)
-    zone:registerTriggerArea(20, -130, -1, 355, -128, 1, 357)
-    zone:registerTriggerArea(21, -190, -1, 322, -188, 1, 324)
-    zone:registerTriggerArea(22, -130, -1, 322, -128, 1, 324)
+    zone:registerCuboidTriggerArea(19, -191.5, -1, 355.5, -188.5, 1, 358.5)
+    zone:registerCuboidTriggerArea(20, -131.5, -1, 355.5, -129, 1, 358.5)
+    zone:registerCuboidTriggerArea(21, -191.5, -1, 322, -188.5, 1, 324.5)
+    zone:registerCuboidTriggerArea(22, -131.5, -1, 322, -129, 1, 324.5)
 
     UpdateNMSpawnPoint(ID.mob.OLD_TWO_WINGS)
     GetMobByID(ID.mob.OLD_TWO_WINGS):setRespawnTime(math.random(900, 10800))
@@ -52,28 +52,48 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    local triggerAreaID = triggerArea:GetTriggerAreaID()
-    local leverSet = math.floor(triggerAreaID / 9)                      -- The set of levers player is standing on (0, 1, 2)
+    local triggerAreaID = triggerArea:getTriggerAreaID()
+    local leverSet = math.floor(triggerAreaID / 9) -- The set of levers player is standing on (0, 1, 2)
     local gateId   = ID.npc.BANISHING_GATE_OFFSET + (9 * leverSet) -- The ID of the related gate
+    local gate = GetNPCByID(gateId)
 
     -- Logic when standing on the lever.
     GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + triggerAreaID):setAnimation(xi.anim.OPEN_DOOR)
 
-    -- If all 4 levers of a set are down, open related gate for 30 seconds.
+    -- If all 4 levers of a set are down, open related gate for varying times
     if
-        GetNPCByID(gateId):getAnimation() == xi.anim.CLOSE_DOOR and -- Avoid spamming.
-
+        gate and
+        GetNPCByID(gateId):getAnimation() == xi.anim.CLOSE_DOOR and -- Avoid spamming if already open
         GetNPCByID(gateId + 1):getAnimation() == xi.anim.OPEN_DOOR and
         GetNPCByID(gateId + 2):getAnimation() == xi.anim.OPEN_DOOR and
         GetNPCByID(gateId + 3):getAnimation() == xi.anim.OPEN_DOOR and
         GetNPCByID(gateId + 4):getAnimation() == xi.anim.OPEN_DOOR
     then
-        player:messageSpecial(ID.text.BANISHING_GATES + leverSet)
-        GetNPCByID(gateId):openDoor(30)
+        -- Default open time is 30 seconds for gate 1
+        local time = 30
+        -- Open time is 45 seconds for gate 2
+        if gateId == ID.npc.BANISHING_GATE_OFFSET + 9 then
+            time = 45
+        -- Open time is 60 seconds for gate 3
+        elseif gateId == ID.npc.BANISHING_GATE_OFFSET + 18 then
+            time = 60
+        end
+
+        gate:openDoor(time)
+
+        for _, playerInZone in pairs(gate:getZone():getPlayers()) do
+            playerInZone:messageText(playerInZone, ID.text.BANISHING_GATES + leverSet, 5)
+        end
+
+        gate:timer(1000 * time, function(gateArg)
+            for _, playerInZone in pairs(gateArg:getZone():getPlayers()) do
+                playerInZone:messageText(playerInZone, ID.text.BANISHING_GATES_CLOSING + leverSet, 5)
+            end
+        end)
     end
 end
 
@@ -82,7 +102,7 @@ end
 -- However, if a lever is activated while it's related door is open, the lever will remain activated until the door closes.
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
-    GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + triggerArea:GetTriggerAreaID()):setAnimation(xi.anim.CLOSE_DOOR)
+    GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + triggerArea:getTriggerAreaID()):setAnimation(xi.anim.CLOSE_DOOR)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

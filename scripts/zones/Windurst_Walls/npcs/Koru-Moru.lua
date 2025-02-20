@@ -115,9 +115,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 412 then
         player:delKeyItem(xi.ki.CARBUNCLES_TEAR)
@@ -142,8 +139,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('CarbuncleDebacleProgress', 2)
     elseif csid == 417 then
         player:setCharVar('CarbuncleDebacleProgress', 5)
-        player:addKeyItem(xi.ki.DAZE_BREAKER_CHARM)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DAZE_BREAKER_CHARM)
+        npcUtil.giveKeyItem(player, xi.ki.DAZE_BREAKER_CHARM)
     elseif csid == 419 then
         if player:getFreeSlotsCount() ~= 0 then
             player:addItem(xi.item.EVOKERS_HORN) -- Evoker's Horn

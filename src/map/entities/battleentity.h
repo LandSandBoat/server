@@ -457,24 +457,25 @@ DECLARE_FORMAT_AS_UNDERLYING(SKILLCHAIN_ELEMENT);
 
 enum IMMUNITY : uint32
 {
-    IMMUNITY_NONE        = 0x00000000,
-    IMMUNITY_ADDLE       = 0x00000001,
-    IMMUNITY_GRAVITY     = 0x00000002,
-    IMMUNITY_BIND        = 0x00000004,
-    IMMUNITY_STUN        = 0x00000008,
-    IMMUNITY_SILENCE     = 0x00000010, // 16
-    IMMUNITY_PARALYZE    = 0x00000020, // 32
-    IMMUNITY_BLIND       = 0x00000040, // 64
-    IMMUNITY_SLOW        = 0x00000080, // 128
-    IMMUNITY_POISON      = 0x00000100, // 256
-    IMMUNITY_ELEGY       = 0x00000200, // 512
-    IMMUNITY_REQUIEM     = 0x00000400, // 1024
-    IMMUNITY_LIGHT_SLEEP = 0x00000800, // 2048
-    IMMUNITY_DARK_SLEEP  = 0x00001000, // 4096
-    IMMUNITY_ASPIR       = 0x00002000, // 8192
-    IMMUNITY_TERROR      = 0x00004000, // 16384
-    IMMUNITY_DISPEL      = 0x00008000, // 32768
-    IMMUNITY_PETRIFY     = 0x00010000, // 65536
+    IMMUNITY_NONE        = 0x00000000, //      0
+    IMMUNITY_ADDLE       = 0x00000001, //      1
+    IMMUNITY_GRAVITY     = 0x00000002, //      2
+    IMMUNITY_BIND        = 0x00000004, //      4
+    IMMUNITY_STUN        = 0x00000008, //      8
+    IMMUNITY_SILENCE     = 0x00000010, //     16
+    IMMUNITY_PARALYZE    = 0x00000020, //     32
+    IMMUNITY_BLIND       = 0x00000040, //     64
+    IMMUNITY_SLOW        = 0x00000080, //    128
+    IMMUNITY_POISON      = 0x00000100, //    256
+    IMMUNITY_ELEGY       = 0x00000200, //    512
+    IMMUNITY_REQUIEM     = 0x00000400, //   1024
+    IMMUNITY_LIGHT_SLEEP = 0x00000800, //   2048
+    IMMUNITY_DARK_SLEEP  = 0x00001000, //   4096
+    IMMUNITY_ASPIR       = 0x00002000, //   8192
+    IMMUNITY_TERROR      = 0x00004000, //  16384
+    IMMUNITY_DISPEL      = 0x00008000, //  32768
+    IMMUNITY_PETRIFY     = 0x00010000, //  65536
+    IMMUNITY_PLAGUE      = 0x00020000, // 131064
 };
 DECLARE_FORMAT_AS_UNDERLYING(IMMUNITY);
 
@@ -558,12 +559,10 @@ public:
     uint16 CHR();
     uint16 DEF();
     uint16 ATT(SLOTTYPE slot);
-    uint16 ACC(uint8 attackNumber, uint8 offsetAccuracy);
+    uint16 ACC(uint8 attackNumber, uint16 offsetAccuracy);
     uint16 EVA();
     uint16 RATT(uint8 skill, uint16 bonusSkill = 0);
     uint16 RACC(uint8 skill, uint16 bonusSkill = 0);
-
-    uint8 GetSpeed();
 
     bool isDead();
     bool isAlive();
@@ -594,6 +593,7 @@ public:
     uint8 GetMPP() const;
     int32 GetMaxMP() const;
     void  UpdateHealth(); // recalculation of the maximum amount of hp and mp, as well as adjusting their current values
+    uint8 UpdateSpeed(bool run = false) override;
 
     int16  GetWeaponDelay(bool tp);              // returns delay of combined weapons
     float  GetMeleeRange() const;                // returns the distance considered to be within melee range of the entity
@@ -701,6 +701,8 @@ public:
         m_battleTarget = id;
     }
     CBattleEntity* GetBattleTarget();
+
+    bool hasEnmityEXPENSIVE() const; // Returns true if own notoriety container is not empty or mob in zone has entity listed as battle target
 
     /* State callbacks */
     /* Auto attack */

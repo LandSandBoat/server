@@ -22,16 +22,21 @@
 enum class Mod
 {
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
-
-    NONE = 0,       // Essential, but does nothing :)
-                    //  NAME                  = ID, // Comment
-    DEF        = 1, // Target's Defense
-    HP         = 2, // Target's HP
-    HPP        = 3, // HP Percentage
-    CONVMPTOHP = 4, // MP -> HP (Cassie Earring)
-    MP         = 5, // MP +/-
-    MPP        = 6, // MP Percentage
-    CONVHPTOMP = 7, // HP -> MP
+    NONE = 0,            // Essential, but does nothing :)
+                         //  NAME                  = ID, // Comment
+    DEF          = 1,    // Target's Defense
+    HP           = 2,    // Target's HP
+    HPP          = 3,    // HP Percentage
+    CONVMPTOHP   = 4,    // MP -> HP (Cassie Earring)
+    MP           = 5,    // MP +/-
+    MPP          = 6,    // MP Percentage
+    CONVHPTOMP   = 7,    // HP -> MP
+    WEAKNESS_PCT = 1093, // Weakness HP/MP reduction term, -1 = - 1% HP/MP
+    CURSE_PCT    = 1094, // Curse HP/MP reduction term, -1 = - 1% HP/MP
+    BASE_HP      = 1095, // Base HP bonus (like merits)
+    BASE_MP      = 1096, // Base MP bonus (like merits)
+    FOOD_HP      = 1130, // Food HP (this is added after curse)
+    FOOD_MP      = 1131, // Food MP (this is added after curse)
 
     STR = 8,  // Strength
     DEX = 9,  // Dexterity
@@ -81,22 +86,22 @@ enum class Mod
     MEVA = 31, // Magic Evasion
 
     // Magic Accuracy and Elemental Attacks
-    FIREATT    = 32, // Fire Damage
-    ICEATT     = 33, // Ice Damage
-    WINDATT    = 34, // Wind Damage
-    EARTHATT   = 35, // Earth Damage
-    THUNDERATT = 36, // Thunder Damage
-    WATERATT   = 37, // Water Damage
-    LIGHTATT   = 38, // Light Damage
-    DARKATT    = 39, // Dark Damage
-    FIREACC    = 40, // Fire Accuracy
-    ICEACC     = 41, // Ice Accuracy
-    WINDACC    = 42, // Wind Accuracy
-    EARTHACC   = 43, // Earth Accuracy
-    THUNDERACC = 44, // Thunder Accuracy
-    WATERACC   = 45, // Water Accuracy
-    LIGHTACC   = 46, // Light Accuracy
-    DARKACC    = 47, // Dark Accuracy
+    FIREATT      = 32, // Fire Damage
+    ICEATT       = 33, // Ice Damage
+    WINDATT      = 34, // Wind Damage
+    EARTHATT     = 35, // Earth Damage
+    THUNDERATT   = 36, // Thunder Damage
+    WATERATT     = 37, // Water Damage
+    LIGHTATT     = 38, // Light Damage
+    DARKATT      = 39, // Dark Damage
+    FIRE_MACC    = 40, // Fire Accuracy
+    ICE_MACC     = 41, // Ice Accuracy
+    WIND_MACC    = 42, // Wind Accuracy
+    EARTH_MACC   = 43, // Earth Accuracy
+    THUNDER_MACC = 44, // Thunder Accuracy
+    WATER_MACC   = 45, // Water Accuracy
+    LIGHT_MACC   = 46, // Light Accuracy
+    DARK_MACC    = 47, // Dark Accuracy
 
     WSACC = 48, // Weaponskill Accuracy
 
@@ -131,9 +136,9 @@ enum class Mod
     GKATANA           = 89,  // Great Katana Skill
     CLUB              = 90,  // Club Skill
     STAFF             = 91,  // Staff Skill
-    AUTO_MELEE_SKILL  = 101, // Automaton Melee Skill
-    AUTO_RANGED_SKILL = 102, // Automaton Range Skill
-    AUTO_MAGIC_SKILL  = 103, // Automaton Magic Skill
+    AUTO_MELEE_SKILL  = 101, // Automaton Melee Skill -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
+    AUTO_RANGED_SKILL = 102, // Automaton Range Skill -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
+    AUTO_MAGIC_SKILL  = 103, // Automaton Magic Skill -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
     ARCHERY           = 104, // Archery Skill
     MARKSMAN          = 105, // Marksman Skill
     THROW             = 106, // Throw Skill
@@ -170,16 +175,6 @@ enum class Mod
     COOK      = 135, // Cooking Skill
     SYNERGY   = 136, // Synergy Skill
     RIDING    = 137, // Riding Skill
-
-    // Chance you will not make an hq synth (Impossibility of HQ synth)
-    ANTIHQ_WOOD      = 144, // Woodworking Success Rate %
-    ANTIHQ_SMITH     = 145, // Smithing Success Rate %
-    ANTIHQ_GOLDSMITH = 146, // Goldsmithing Success Rate %
-    ANTIHQ_CLOTH     = 147, // Clothcraft Success Rate %
-    ANTIHQ_LEATHER   = 148, // Leathercraft Success Rate %
-    ANTIHQ_BONE      = 149, // Bonecraft Success Rate %
-    ANTIHQ_ALCHEMY   = 150, // Alchemy Success Rate %
-    ANTIHQ_COOK      = 151, // Cooking Success Rate %
 
     // Fishing gear modifiers
     PENGUIN_RING_EFFECT   = 152, // +2 on fishing arrow delay / fish movement for mini - game
@@ -413,6 +408,8 @@ enum class Mod
     COUNTERSTANCE_EFFECT = 543,  // Counterstance effect in percents
     DODGE_EFFECT         = 552,  // Dodge effect in percents
     FOCUS_EFFECT         = 561,  // Focus effect in percents
+    ADDITIVE_GUARD       = 1092, // Additive % bonus to final Guard rate (adds after clamp)
+    AUGMENTS_IMPETUS     = 1097, // see https://www.bg-wiki.com/ffxi/Impetus, adds Crit Hit Damage & Accuracy for Impetus
 
     // White Mage
     AFFLATUS_SOLACE  = 293, // Pool of HP accumulated during Afflatus Solace
@@ -443,8 +440,8 @@ enum class Mod
     TRIPLE_ATTACK        = 302,  // Percent chance
     TRIPLE_ATTACK_DMG    = 1039, // Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
     TREASURE_HUNTER      = 303,  // Percent chance
-    TREASURE_HUNTER_PROC = 1048, // TODO: Increases Treasure Hunter proc rate (percent)
-    TREASURE_HUNTER_CAP  = 1049, // TODO: Increases the Treasure Hunter Cap (e.g. THF JP Gift)
+    TREASURE_HUNTER_PROC = 1048, // Increases Treasure Hunter proc rate (percent)
+    TREASURE_HUNTER_CAP  = 1049, // Increases the Treasure Hunter Cap (e.g. THF JP Gift)
     SNEAK_ATK_DEX        = 830,  // % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
     TRICK_ATK_AGI        = 520,  // % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
     MUG_EFFECT           = 835,  // Mug effect as multiplier
@@ -530,7 +527,7 @@ enum class Mod
     // Ranger
     CAMOUFLAGE_DURATION     = 98,   // Camouflage duration in percents
     RECYCLE                 = 305,  // Percent chance to recycle
-    SNAP_SHOT               = 365,  // Percent reduction to range attack delay
+    SNAPSHOT                = 365,  // Percent reduction to range attack delay
     RAPID_SHOT              = 359,  // Percent chance to proc rapid shot
     WIDESCAN                = 340,  //
     BARRAGE_ACC             = 420,  // Barrage accuracy
@@ -543,6 +540,7 @@ enum class Mod
     SHARPSHOT               = 314,  //
     TRUE_SHOT_EFFECT        = 1053, // TODO: True Shot Ranged Damage increase (percent)
     DEAD_AIM_EFFECT         = 1054, // TODO: Dead Aim Critical Damage increase (percent)
+    BOUNTY_SHOT_TH_BONUS    = 826,  // Boosts base TH level of bounty shot
 
     // Samurai
     WARDING_CIRCLE_DURATION   = 95,   // Warding Circle extended duration in seconds
@@ -551,6 +549,9 @@ enum class Mod
     THIRD_EYE_COUNTER_RATE    = 508,  // Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%
     THIRD_EYE_ANTICIPATE_RATE = 839,  // Adds anticipate rate in percents
     THIRD_EYE_BONUS           = 1055, // TODO: Bonus Third Eye Evasion (count)
+    SENGIKORI_SC_DMG_DEBUFF   = 1088, // % Increase to closing skillchain damage. Applied to defender.
+    SENGIKORI_MB_DMG_DEBUFF   = 1089, // % Increase to magic burst damage. Applied to defender.
+    SENGIKORI_BONUS           = 1090, // additive % increase to Sengikori
 
     // Ninja
     UTSUSEMI             = 307, // Everyone's favorite --tracks shadows.
@@ -560,6 +561,7 @@ enum class Mod
     NIN_NUKE_BONUS_GEAR  = 522, // Ninjutsu damage multiplier from gear.
     DAKEN                = 911, // chance to throw a shuriken without consuming it
     NINJUTSU_DURATION    = 1000,
+    ENHANCES_SANGE       = 1091, // 1 = +1 attack for Daken during Sange per Sange merit (i.e. 20 with 5 merits = +100 attack during Sange)
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION    = 859,  // Ancient Circle extended duration in seconds
@@ -714,6 +716,7 @@ enum class Mod
 
     // Geo
     CARDINAL_CHANT       = 959,
+    CARDINAL_CHANT_BONUS = 1132, // Geomancy galero
     INDI_DURATION        = 960,
     GEOMANCY_BONUS       = 961, // Used to increase potency of "Geomancy +" items (only the highest value is counted)
     WIDENED_COMPASS      = 962,
@@ -905,8 +908,7 @@ enum class Mod
     DIA_DOT                   = 313, // Increases the DoT damage of Dia
     ENH_DRAIN_ASPIR           = 315, // % damage boost to Drain and Aspir
     AUGMENTS_ABSORB           = 521, // Direct Absorb spell increase while Liberator is equipped (percentage based)
-    AMMO_SWING                = 523, // Extra swing rate w/ ammo (ie. Jailer weapons). Use gearsets, and does nothing for non-players.
-    AMMO_SWING_TYPE           = 826, // For the handedness of the weapon - 1h (1) vs. 2h/h2h (2). h2h can safely use the same function as 2h.
+    AMMO_SWING                = 523, // Follow-up swing rate w/ virtue stone ammo (Jailer weapons). Does nothing for non-players.
     AUGMENTS_CONVERT          = 525, // Convert HP to MP Ratio Multiplier. Value = MP multiplier rate.
     AUGMENTS_SA               = 526, // Adds Critical Attack Bonus to Sneak Attack, percentage based.
     AUGMENTS_TA               = 527, // Adds Critical Attack Bonus to Trick Attack, percentage based.
@@ -944,27 +946,73 @@ enum class Mod
     QUICK_MAGIC = 909, // Percent chance spells cast instantly (also reduces recast to 0, similar to Chainspell)
 
     // Crafting food effects
-    SYNTH_SUCCESS             = 851, // Rate of synthesis success
-    SYNTH_SKILL_GAIN          = 852, // Synthesis skill gain rate
-    SYNTH_FAIL_RATE           = 861, // Synthesis failure rate (percent)
-    SYNTH_HQ_RATE             = 862, // High-quality success rate (not a percent)
-    DESYNTH_SUCCESS           = 916, // Rate of desynthesis success
-    SYNTH_FAIL_RATE_FIRE      = 917, // Amount synthesis failure rate is reduced when using a fire crystal
-    SYNTH_FAIL_RATE_ICE       = 918, // Amount synthesis failure rate is reduced when using a ice crystal
-    SYNTH_FAIL_RATE_WIND      = 919, // Amount synthesis failure rate is reduced when using a wind crystal
-    SYNTH_FAIL_RATE_EARTH     = 920, // Amount synthesis failure rate is reduced when using a earth crystal
-    SYNTH_FAIL_RATE_LIGHTNING = 921, // Amount synthesis failure rate is reduced when using a lightning crystal
-    SYNTH_FAIL_RATE_WATER     = 922, // Amount synthesis failure rate is reduced when using a water crystal
-    SYNTH_FAIL_RATE_LIGHT     = 923, // Amount synthesis failure rate is reduced when using a light crystal
-    SYNTH_FAIL_RATE_DARK      = 924, // Amount synthesis failure rate is reduced when using a dark crystal
-    SYNTH_FAIL_RATE_WOOD      = 925, // Amount synthesis failure rate is reduced when doing woodworking
-    SYNTH_FAIL_RATE_SMITH     = 926, // Amount synthesis failure rate is reduced when doing smithing
-    SYNTH_FAIL_RATE_GOLDSMITH = 927, // Amount synthesis failure rate is reduced when doing goldsmithing
-    SYNTH_FAIL_RATE_CLOTH     = 928, // Amount synthesis failure rate is reduced when doing clothcraft
-    SYNTH_FAIL_RATE_LEATHER   = 929, // Amount synthesis failure rate is reduced when doing leathercraft
-    SYNTH_FAIL_RATE_BONE      = 930, // Amount synthesis failure rate is reduced when doing bonecraft
-    SYNTH_FAIL_RATE_ALCHEMY   = 931, // Amount synthesis failure rate is reduced when doing alchemy
-    SYNTH_FAIL_RATE_COOK      = 932, // Amount synthesis failure rate is reduced when doing cooking
+    SYNTH_SUCCESS_RATE              = 851,  // Success rate bonus (percent) for all synths except desynths.
+    SYNTH_SUCCESS_RATE_DESYNTHESIS  = 916,  // Success rate bonus (percent) for desynths, specifically.
+    SYNTH_SUCCESS_RATE_WOODWORKING  = 1098, // Success rate bonus (percent) for Woodworking, specifically.
+    SYNTH_SUCCESS_RATE_SMITHING     = 1099, // Success rate bonus (percent) for Smithing, specifically.
+    SYNTH_SUCCESS_RATE_GOLDSMITHING = 1100, // Success rate bonus (percent) for Goldsmithing, specifically.
+    SYNTH_SUCCESS_RATE_CLOTHCRAFT   = 1101, // Success rate bonus (percent) for Clothcraft, specifically.
+    SYNTH_SUCCESS_RATE_LEATHERCRAFT = 1102, // Success rate bonus (percent) for Leahercraft, specifically.
+    SYNTH_SUCCESS_RATE_BONECRAFT    = 1103, // Success rate bonus (percent) for Bonecraft, specifically.
+    SYNTH_SUCCESS_RATE_ALCHEMY      = 1104, // Success rate bonus (percent) for Alchemy, specifically.
+    SYNTH_SUCCESS_RATE_COOKING      = 1105, // Success rate bonus (percent) for Cooking, specifically.
+
+    SYNTH_SKILL_GAIN = 852, // Synthesis skill gain rate
+
+    SYNTH_SPEED_WOODWORKING  = 1106, // Escutcheon (Phase 3 & 4). Bonus to synth speed (Makes process faster. Assuming miliseconds)
+    SYNTH_SPEED_SMITHING     = 1107, // Escutcheon (Phase 3 & 4). Bonus to synth speed (Makes process faster. Assuming miliseconds)
+    SYNTH_SPEED_GOLDSMITHING = 1108, // Escutcheon (Phase 3 & 4). Bonus to synth speed (Makes process faster. Assuming miliseconds)
+    SYNTH_SPEED_CLOTHCRAFT   = 1109, // Escutcheon (Phase 3 & 4). Bonus to synth speed (Makes process faster. Assuming miliseconds)
+    SYNTH_SPEED_LEATHERCRAFT = 1110, // Escutcheon (Phase 3 & 4). Bonus to synth speed (Makes process faster. Assuming miliseconds)
+    SYNTH_SPEED_BONECRAFT    = 1111, // Escutcheon (Phase 3 & 4). Bonus to synth speed (Makes process faster. Assuming miliseconds)
+    SYNTH_SPEED_ALCHEMY      = 1112, // Escutcheon (Phase 3 & 4). Bonus to synth speed (Makes process faster. Assuming miliseconds)
+    SYNTH_SPEED_COOKING      = 1113, // Escutcheon (Phase 3 & 4). Bonus to synth speed (Makes process faster. Assuming miliseconds)
+
+    SYNTH_ANTI_NQ_WOODWORKING  = 1114, // Escutcheon (Phase 4) "Artisanal Knowledge" Enchantment. Prevents NQ results, making them fails.
+    SYNTH_ANTI_NQ_SMITHING     = 1115, // Escutcheon (Phase 4) "Artisanal Knowledge" Enchantment. Prevents NQ results, making them fails.
+    SYNTH_ANTI_NQ_GOLDSMITHING = 1116, // Escutcheon (Phase 4) "Artisanal Knowledge" Enchantment. Prevents NQ results, making them fails.
+    SYNTH_ANTI_NQ_CLOTHCRAFT   = 1117, // Escutcheon (Phase 4) "Artisanal Knowledge" Enchantment. Prevents NQ results, making them fails.
+    SYNTH_ANTI_NQ_LEATHERCRAFT = 1118, // Escutcheon (Phase 4) "Artisanal Knowledge" Enchantment. Prevents NQ results, making them fails.
+    SYNTH_ANTI_NQ_BONECRAFT    = 1119, // Escutcheon (Phase 4) "Artisanal Knowledge" Enchantment. Prevents NQ results, making them fails.
+    SYNTH_ANTI_NQ_ALCHEMY      = 1120, // Escutcheon (Phase 4) "Artisanal Knowledge" Enchantment. Prevents NQ results, making them fails.
+    SYNTH_ANTI_NQ_COOKING      = 1121, // Escutcheon (Phase 4) "Artisanal Knowledge" Enchantment. Prevents NQ results, making them fails.
+
+    SYNTH_ANTI_HQ_WOODWORKING  = 144, // Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+    SYNTH_ANTI_HQ_SMITHING     = 145, // Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+    SYNTH_ANTI_HQ_GOLDSMITHING = 146, // Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+    SYNTH_ANTI_HQ_CLOTHCRAFT   = 147, // Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+    SYNTH_ANTI_HQ_LEATHERCRAFT = 148, // Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+    SYNTH_ANTI_HQ_BONECRAFT    = 149, // Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+    SYNTH_ANTI_HQ_ALCHEMY      = 150, // Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+    SYNTH_ANTI_HQ_COOKING      = 151, // Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+
+    SYNTH_HQ_RATE              = 862,  // High-quality success rate (not a percent)
+    SYNTH_HQ_RATE_WOODWORKING  = 1122, // High-quality success rate (not a percent) for specific skill. Used by Escutcheon's enchantment.
+    SYNTH_HQ_RATE_SMITHING     = 1123, // High-quality success rate (not a percent) for specific skill. Used by Escutcheon's enchantment.
+    SYNTH_HQ_RATE_GOLDSMITHING = 1124, // High-quality success rate (not a percent) for specific skill. Used by Escutcheon's enchantment.
+    SYNTH_HQ_RATE_CLOTHCRAFT   = 1125, // High-quality success rate (not a percent) for specific skill. Used by Escutcheon's enchantment.
+    SYNTH_HQ_RATE_LEATHERCRAFT = 1126, // High-quality success rate (not a percent) for specific skill. Used by Escutcheon's enchantment.
+    SYNTH_HQ_RATE_BONECRAFT    = 1127, // High-quality success rate (not a percent) for specific skill. Used by Escutcheon's enchantment.
+    SYNTH_HQ_RATE_ALCHEMY      = 1128, // High-quality success rate (not a percent) for specific skill. Used by Escutcheon's enchantment.
+    SYNTH_HQ_RATE_COOKING      = 1129, // High-quality success rate (not a percent) for specific skill. Used by Escutcheon's enchantment.
+
+    SYNTH_MATERIAL_LOSS              = 861, // Material loss rate (percent) for all synths.
+    SYNTH_MATERIAL_LOSS_WOODWORKING  = 925, // Material loss rate (percent) when doing woodworking
+    SYNTH_MATERIAL_LOSS_SMITHING     = 926, // Material loss rate (percent) when doing smithing
+    SYNTH_MATERIAL_LOSS_GOLDSMITHING = 927, // Material loss rate (percent) when doing goldsmithing
+    SYNTH_MATERIAL_LOSS_CLOTHCRAFT   = 928, // Material loss rate (percent) when doing clothcraft
+    SYNTH_MATERIAL_LOSS_LEATHERCRAFT = 929, // Material loss rate (percent) when doing leathercraft
+    SYNTH_MATERIAL_LOSS_BONECRAFT    = 930, // Material loss rate (percent) when doing bonecraft
+    SYNTH_MATERIAL_LOSS_ALCHEMY      = 931, // Material loss rate (percent) when doing alchemy
+    SYNTH_MATERIAL_LOSS_COOKING      = 932, // Material loss rate (percent) when doing cooking
+    SYNTH_MATERIAL_LOSS_FIRE         = 917, // Material loss rate (percent) when using a fire crystal (or HQ version)
+    SYNTH_MATERIAL_LOSS_ICE          = 918, // Material loss rate (percent) when using a ice crystal (or HQ version)
+    SYNTH_MATERIAL_LOSS_WIND         = 919, // Material loss rate (percent) when using a wind crystal (or HQ version)
+    SYNTH_MATERIAL_LOSS_EARTH        = 920, // Material loss rate (percent) when using a earth crystal (or HQ version)
+    SYNTH_MATERIAL_LOSS_THUNDER      = 921, // Material loss rate (percent) when using a lightning crystal (or HQ version)
+    SYNTH_MATERIAL_LOSS_WATER        = 922, // Material loss rate (percent) when using a water crystal (or HQ version)
+    SYNTH_MATERIAL_LOSS_LIGHT        = 923, // Material loss rate (percent) when using a light crystal (or HQ version)
+    SYNTH_MATERIAL_LOSS_DARK         = 924, // Material loss rate (percent) when using a dark crystal (or HQ version)
 
     // Weaponskill %damage modifiers
     // The following modifier should not ever be set, but %damage modifiers to weaponskills use the next 255 IDs (this modifier + the WSID)
@@ -1013,6 +1061,7 @@ enum class Mod
     GEOMANCY_MP_NO_DEPLETE = 1037, // Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
     DIG_BYPASS_FATIGUE = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
+    DIG_RARE_ABILITY   = 1133, // Chocobo digging modifier found in "Black Chocobo Suit" and "Denim Pants +1".
     BREATH_DMG_DEALT   = 1075, // Breath damage dealt
 
     DAMAGE_LIMIT  = 1080, // Damage Limit increase, found on some traits. It's a flat value added to max pDIF (maxpDIF + DL/100) https://www.bg-wiki.com/ffxi/Damage_Limit%2B
@@ -1021,12 +1070,14 @@ enum class Mod
     MAGIC_BURST_BONUS_CAPPED   = 487, // Magic Burst Bonus I from gear, Ancient Magic Merits, Innin merits and Atmas. Cap at 40% bonus (1.4 multiplier)
     MAGIC_BURST_BONUS_UNCAPPED = 274, // Magic Burst Bonus II from gear, JP Gifts, BLM JPs and Job traits. No known cap.
 
+    DESPAWN_TIME_REDUCTION = 1134, // Reduction in seconds. 1 = 1 second less to despawn.
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1088 and onward
+    // SPARE IDs: 1135 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

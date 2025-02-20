@@ -25,7 +25,7 @@ spellObject.onMobSpawn = function(mob)
     })
 
     mob:addListener('WEAPONSKILL_USE', 'MILDAURION_WEAPONSKILL_USE', function(mobArg, target, wsid, tp, action)
-        if wsid == xi.mobSkill.LIGHT_BLADE then
+        if wsid == xi.mobSkill.LIGHT_BLADE_3 then
             --  For Vana'diel!
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
         end

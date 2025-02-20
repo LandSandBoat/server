@@ -50,7 +50,7 @@ CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint16 MessageID)
 
     ref<uint16>(0x0A) = MessageID;
 
-    snprintf((char*)data + (0x0D), 16, "Para0 %u ", param0);
+    snprintf((char*)buffer_.data() + 0x0D, 16, "Para0 %u ", param0);
 }
 
 CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uint16 MessageID)
@@ -60,7 +60,7 @@ CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uin
 
     ref<uint16>(0x0A) = MessageID;
 
-    snprintf((char*)data + (0x0D), 24, "Para0 %u Para1 %u", param0, param1);
+    snprintf((char*)buffer_.data() + 0x0D, 24, "Para0 %u Para1 %u", param0, param1);
 }
 
 CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0, uint32 param1, MsgStd MessageID)
@@ -81,7 +81,7 @@ CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0
 
             ref<uint8>(0x0C) = 0x10;
 
-            snprintf((char*)data + (0x0D), 24, "string2 %s", PChar->getName().c_str());
+            snprintf((char*)buffer_.data() + 0x0D, 24, "string2 %s", PChar->getName().c_str());
         }
         else if (MessageID == MsgStd::MonstrosityCheckIn || MessageID == MsgStd::MonstrosityCheckOut)
         {
@@ -89,12 +89,12 @@ CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0
 
             ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 
-            snprintf((char*)data + (0x0D), 24, "string2 %s", PChar->getName().c_str());
+            snprintf((char*)buffer_.data() + 0x0D, 24, "string2 %s", PChar->getName().c_str());
         }
     }
     else
     {
-        snprintf((char*)data + (0x0D), 24, "Para0 %u Para1 %u", param0, param1);
+        snprintf((char*)buffer_.data() + 0x0D, 24, "Para0 %u Para1 %u", param0, param1);
     }
 }
 
@@ -105,9 +105,9 @@ CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uin
 
     ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 
-    snprintf((char*)data + (0x0D), 100, "Para0 %u Para1 %u Para2 %u Para3 %u", param0, param1, param2, param3);
+    snprintf((char*)buffer_.data() + 0x0D, 100, "Para0 %u Para1 %u Para2 %u Para3 %u", param0, param1, param2, param3);
 
-    this->setSize((this->getSize() + (strlen((char*)data + (0x0D)) >> 1)) & 0xFE);
+    this->setSize((this->getSize() + (strlen((char*)buffer_.data() + 0x0D) >> 1)) & 0xFE);
 }
 
 // Only used with MsgStd::DiceRoll (/random)
@@ -118,7 +118,7 @@ CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0
 
     ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 
-    snprintf((char*)data + (0x0D), 40, "string2 %s string3 %u", PChar->getName().c_str(), param0);
+    snprintf((char*)buffer_.data() + 0x0D, 40, "string2 %s string3 %u", PChar->getName().c_str(), param0);
 
     // ref<uint8>(data,(0x2F)) = 0x02;
 }

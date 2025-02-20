@@ -6,9 +6,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if
         player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH) == xi.questStatus.QUEST_ACCEPTED and
@@ -33,9 +30,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(1)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

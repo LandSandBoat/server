@@ -17,8 +17,7 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.NAJI] = xi.trust.messageOffset.TEAMWORK_1,
     })
 
-    mob:addSimpleGambit(ai.t.MASTER, ai.c.HPP_LT, 50,
-                        ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE)
+    mob:addGambit(ai.t.MASTER, { ai.c.HPP_LT, 50 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE })
 end
 
 spellObject.onMobDespawn = function(mob)

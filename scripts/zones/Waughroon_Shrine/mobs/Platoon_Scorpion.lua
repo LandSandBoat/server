@@ -10,8 +10,8 @@ local entity = {}
 
 local mimicDistance = 15
 -- 25% should cover: 'sometimes after ... ' - https://ffxiclopedia.fandom.com/wiki/Operation_Desert_Swarm
-local selfBindChance = 0.25  -- 25%
-local selfStunChance = 0.25  -- 25%
+local selfBindChance = 25  -- 25%
+local selfStunChance = 25  -- 25%
 
 -- Mobs sync/mimic TP moves.
 
@@ -50,12 +50,12 @@ entity.onMobInitialize = function(scorpion)
         -- Sometimes Wild Rage self stuns and sometimes Earth Pounder self binds
         -- https://ffxiclopedia.fandom.com/wiki/Operation_Desert_Swarm
         --
-        if skillID == 354 and math.random() < selfStunChance then
+        if skillID == 354 and math.random(1, 100) <= selfStunChance then
             -- Wild Rage
             mob:showText(mob, ID.text.SCORPION_IS_STUNNED)
             mob:addStatusEffect(xi.effect.STUN, 0, 0, 10)
             -- Earth Pounder
-        elseif skillID == 355 and math.random() < selfBindChance then
+        elseif skillID == 355 and math.random(1, 100) <= selfBindChance then
             mob:showText(mob, ID.text.SCORPION_IS_BOUND)
             mob:addStatusEffect(xi.effect.BIND, 0, 0, 10)
         end

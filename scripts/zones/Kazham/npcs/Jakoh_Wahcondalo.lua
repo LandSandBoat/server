@@ -9,9 +9,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local tuningOutProgress = player:getCharVar('TuningOut_Progress')
 

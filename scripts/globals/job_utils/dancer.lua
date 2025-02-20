@@ -202,6 +202,9 @@ xi.job_utils.dancer.checkWaltzAbility = function(player, target, ability)
     elseif player:hasStatusEffect(xi.effect.TRANCE) then
         ability:setRecast(math.min(ability:getRecast(), 6))
 
+        -- Inform core we want to cleanup Contradance if it's active after the ability is done
+        ability:setPostActionCleanupEffect(xi.effect.CONTRADANCE)
+
         return 0, 0
     elseif player:getTP() < waltzCost then
         return xi.msg.basic.NOT_ENOUGH_TP, 0
@@ -227,6 +230,9 @@ xi.job_utils.dancer.checkWaltzAbility = function(player, target, ability)
         end
 
         ability:setRecast(utils.clamp(newRecast, 0, newRecast))
+
+        -- Inform core we want to cleanup Contradance if it's active after the ability is done
+        ability:setPostActionCleanupEffect(xi.effect.CONTRADANCE)
 
         return 0, 0
     end
@@ -409,17 +415,18 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
             bonus     = 50 - target:getMod(xi.mod.STUNRES) + player:getMod(xi.mod.VFLOURISH_MACC) + player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT),
         }
 
-        -- Apply WSC
         local weaponDamage = player:getWeaponDmg()
+        local weaponType   = player:getWeaponSkillType(xi.slot.MAIN)
         if player:getWeaponSkillType(xi.slot.MAIN) == xi.skill.HAND_TO_HAND then
             local h2hSkill = player:getSkillLevel(xi.skill.HAND_TO_HAND) * 0.11 + 3
 
             weaponDamage = weaponDamage - 3 + h2hSkill
         end
 
-        local baseDmg   = weaponDamage + xi.weaponskills.fSTR(player:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), player:getWeaponDmgRank())
-        local cRatio, _ = xi.weaponskills.cMeleeRatio(player, target, params, 0, 1000)
-        local dmg       = baseDmg * xi.weaponskills.generatePdif(cRatio[1], cRatio[2], true)
+        local applyLevelCorrection = xi.combat.levelCorrection.isLevelCorrectedZone(player)
+        local baseDmg              = weaponDamage + xi.weaponskills.fSTR(player:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), player:getWeaponDmgRank())
+        local pdif                 = xi.combat.physical.calculateMeleePDIF(player, target, weaponType, 1.0, false, applyLevelCorrection, false, 0.0, false, xi.slot.MAIN, false)
+        local dmg                  = baseDmg * pdif
 
         if applyResistanceEffect(player, target, spell, params) > 0.25 then
             target:addStatusEffect(xi.effect.STUN, 1, 0, 2)
@@ -470,9 +477,8 @@ xi.job_utils.dancer.useWildFlourishAbility = function(player, target, ability, a
     return 0
 end
 
--- TODO: Implement Contradance status effect.
 xi.job_utils.dancer.useContradanceAbility = function(player, target, ability)
-    -- player:addStatusEffect(xi.effect.CONTRADANCE, 19, 1, 60)
+    player:addStatusEffect(xi.effect.CONTRADANCE, 0, 0, 60)
 end
 
 xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
@@ -503,6 +509,11 @@ xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
     amtCured = (target:getStat(xi.mod.VIT) + player:getStat(xi.mod.CHR)) * statMultiplier + waltzInfo[3]
     amtCured = math.floor(amtCured * (1.0 + (math.min(50, player:getMod(xi.mod.WALTZ_POTENCY)) / 100)))
     -- TODO: Account for Waltz Potency Received
+
+    -- Contradance is a 2x multiplier after all other terms
+    if player:hasStatusEffect(xi.effect.CONTRADANCE) then
+        amtCured = amtCured * 2
+    end
 
     amtCured = amtCured * xi.settings.main.CURE_POWER
     amtCured = math.min(amtCured, target:getMaxHP() - target:getHP())

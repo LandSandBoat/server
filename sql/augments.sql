@@ -1689,7 +1689,7 @@ INSERT INTO `augments` VALUES (1397,0,0,0,0,0); -- Enhances "Ikishoten" effect
 INSERT INTO `augments` VALUES (1398,0,0,0,0,0); -- 1398 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1399,0,0,0,0,0); -- 1399 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1400,0,0,0,0,0); -- Increases elem. ninjutsu III damage
-INSERT INTO `augments` VALUES (1401,0,0,0,0,0); -- Enhances "Sange" effect
+INSERT INTO `augments` VALUES (1401,1,1091,1,0,0); -- Enhances "Sange" effect
 INSERT INTO `augments` VALUES (1402,0,0,0,0,0); -- Enh. Ninja Tool Expertise effect
 INSERT INTO `augments` VALUES (1403,0,0,0,0,0); -- Reduces elem. ninjutsu III cast time
 INSERT INTO `augments` VALUES (1404,0,0,0,0,0); -- 1404 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.

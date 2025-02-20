@@ -17,15 +17,15 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7064, -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET        = 7583, -- You can't fish here.
-        MINING_IS_POSSIBLE_HERE       = 7714, -- Mining is possible here if you have <item>.
-        RAKOROK_DIALOGUE              = 7738, -- Nsy pipul. Gattohre! I bisynw!
-        ALTANA_DIE                    = 7740, -- Aaaltaaanaaa... Diiieee!!!
-        WAS_TAKEN_FROM_YOU            = 7752, -- The <keyitem> was taken from you...
-        MONSTER_APPEARED              = 7753, -- A monster has appeared!
-        CHEST_UNLOCKED                = 7762, -- You unlock the chest!
-        COMMON_SENSE_SURVIVAL         = 8120, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CONQUEST_BASE                 = 7067, -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET        = 7586, -- You can't fish here.
+        MINING_IS_POSSIBLE_HERE       = 7717, -- Mining is possible here if you have <item>.
+        RAKOROK_DIALOGUE              = 7741, -- Nsy pipul. Gattohre! I bisynw!
+        ALTANA_DIE                    = 7743, -- Aaaltaaanaaa... Diiieee!!!
+        WAS_TAKEN_FROM_YOU            = 7755, -- The <keyitem> was taken from you...
+        MONSTER_APPEARED              = 7756, -- A monster has appeared!
+        CHEST_UNLOCKED                = 7765, -- You unlock the chest!
+        COMMON_SENSE_SURVIVAL         = 8123, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

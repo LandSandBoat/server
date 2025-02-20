@@ -12,6 +12,12 @@ CObjectiveUtilityPacket::CObjectiveUtilityPacket()
     // ref<uint8>(0x26) = ; // Unknown. Flags value with multiple usages.
 }
 
+CObjectiveUtilityPacket::CObjectiveUtilityPacket(uint32 duration, uint32 warning /* = 0 */)
+: CObjectiveUtilityPacket()
+{
+    this->addCountdown(duration, warning);
+}
+
 void CObjectiveUtilityPacket::addCountdown(uint32 duration, uint32 warning /* = 0 */)
 {
     ref<uint32>(0x04) = ref<uint32>(0x04) == 0 ? 0x01 : ref<uint32>(0x04);

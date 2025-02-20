@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: The Garden of Ru'Hmet
---  MOB: Aw'Zdei
+--  Mob: Qn'Zdei
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 mixins = { require('scripts/mixins/families/zdei') }
@@ -8,13 +8,41 @@ mixins = { require('scripts/mixins/families/zdei') }
 ---@type TMobEntity
 local entity = {}
 
+local subLinkTable =
+{
+    [ID.mob.QNZDEI_OFFSET]      = 1000,
+    [ID.mob.QNZDEI_OFFSET + 1]  = 1000,
+    [ID.mob.QNZDEI_OFFSET + 2]  = 1000,
+    [ID.mob.QNZDEI_OFFSET + 3]  = 1000,
+    [ID.mob.QNZDEI_OFFSET + 4]  = 1001,
+    [ID.mob.QNZDEI_OFFSET + 5]  = 1001,
+    [ID.mob.QNZDEI_OFFSET + 6]  = 1001,
+    [ID.mob.QNZDEI_OFFSET + 7]  = 1001,
+    [ID.mob.QNZDEI_OFFSET + 8]  = 1002,
+    [ID.mob.QNZDEI_OFFSET + 9]  = 1002,
+    [ID.mob.QNZDEI_OFFSET + 10] = 1002,
+    [ID.mob.QNZDEI_OFFSET + 11] = 1002,
+    [ID.mob.QNZDEI_OFFSET + 12] = 1003,
+    [ID.mob.QNZDEI_OFFSET + 13] = 1003,
+    [ID.mob.QNZDEI_OFFSET + 14] = 1003,
+    [ID.mob.QNZDEI_OFFSET + 15] = 1003,
+}
+
+entity.onMobInitialize = function(mob)
+    local subLinkValue = subLinkTable[mob:getID()]
+
+    if subLinkValue then
+        mob:setMobMod(xi.mobMod.SUBLINK, subLinkValue)
+    end
+end
+
 local changeState = function(mob, idle)
     if mob:getLocalVar('idle') ~= idle then
         mob:setLocalVar('idle', idle)
 
         -- Calculate door id based off of mob id and door offset
-        local doorID = ID.npc.QNZDEI_DOOR_OFFSET + (mob:getID() - ID.mob.QNZDEI_OFFSET) / 4
-        local door = GetNPCByID(doorID)
+        local doorID = math.floor(ID.npc.QNZDEI_DOOR_OFFSET + (mob:getID() - ID.mob.QNZDEI_OFFSET) / 4)
+        local door   = GetNPCByID(doorID)
 
         if door then
             local doorIdle = door:getLocalVar('idle')
@@ -37,9 +65,6 @@ local changeState = function(mob, idle)
     end
 end
 
-entity.onMobInitialize = function(mob)
-end
-
 local spinSpeeds = { 4, 8, 16, 64 }
 
 entity.onMobSpawn = function(mob)
@@ -47,7 +72,7 @@ entity.onMobSpawn = function(mob)
 
     -- Qn'Zdei randomly spin at speeds 4, 8, 16, 64 and can be reversed (negative)
     mob:setLocalVar('spinSpeed', utils.randomEntry(spinSpeeds))
-    if math.random(1, 2) == 1 then
+    if math.random(1, 100) <= 50 then
         mob:setLocalVar('reversed', 1)
     end
 end

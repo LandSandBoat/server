@@ -8,6 +8,14 @@ xi.spells = xi.spells or {}
 xi.spells.enhancing = xi.spells.enhancing or {}
 -----------------------------------
 -- Table variables.
+local column =
+{
+    TELEPORT_ID       = 1,
+    TELEPORT_KEY_ITEM = 2,
+    TELEPORT_DURATION = 3,
+    TELEPORT_CAMPAIGN = 4,
+}
+
 local pTable =
 {
 -- Structure:       [spellId] = { Teleport, Key_Item, duration, campaign },
@@ -38,10 +46,10 @@ end
 -- Main function for Teleport / Warp / etc. Spells.
 xi.spells.enhancing.useTeleportSpell = function(caster, target, spell)
     local spellId    = spell:getID()
-    local teleportId = pTable[spellId][1]
-    local keyItem    = pTable[spellId][2]
-    local duration   = pTable[spellId][3]
-    local campaign   = pTable[spellId][4]
+    local teleportId = pTable[spellId][column.TELEPORT_ID]
+    local keyItem    = pTable[spellId][column.TELEPORT_KEY_ITEM]
+    local duration   = pTable[spellId][column.TELEPORT_DURATION]
+    local campaign   = pTable[spellId][column.TELEPORT_CAMPAIGN]
 
     if
         target:getObjType() == xi.objType.PC and

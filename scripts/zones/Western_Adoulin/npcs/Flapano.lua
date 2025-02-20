@@ -80,9 +80,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     -- ALL THE WAY TO THE BANK
     if csid == 5071 then
@@ -96,7 +93,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 2860 and option == 1 then
         player:addQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.EXOTIC_DELICACIES)
     elseif csid == 2861 then
-        if npcUtil.completeQuest(player, xi.questLog.ADOULIN, xi.quest.id.adoulin.EXOTIC_DELICACIES, { bayld = 500, item = xi.item.PLATE_OF_FLAPANOS_PAELLA, xp = 1000 }) then
+        if npcUtil.completeQuest(player, xi.questLog.ADOULIN, xi.quest.id.adoulin.EXOTIC_DELICACIES, { bayld = 500, item = xi.item.PLATE_OF_FLAPANOS_PAELLA, exp = 1000 }) then
             player:confirmTrade()
             player:setCharVar('Flapano_Odd_Even', 0)
         end

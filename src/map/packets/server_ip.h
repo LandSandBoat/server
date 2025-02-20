@@ -31,10 +31,10 @@ class CCharEntity;
 class CServerIPPacket : public CBasicPacket
 {
 public:
-    CServerIPPacket(CCharEntity* PChar, uint8 type, uint64 ipp);
+    CServerIPPacket(CCharEntity* PChar, uint8 zone_type, uint64 zone_ipp);
 
-    uint8  type;
-    uint64 ipp;
+    uint8  zoneType();
+    uint64 zoneIPP();
 };
 
 #endif

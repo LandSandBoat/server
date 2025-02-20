@@ -11,7 +11,6 @@ effectObject.onEffectGain = function(target, effect)
     effect:addMod(xi.mod.ATTP, -15)
     effect:addMod(xi.mod.HASTE_ABILITY, -1500)
     effect:addMod(xi.mod.RATTP, 15)
-    effect:addMod(xi.mod.RANGED_DELAYP, -15)
 end
 
 effectObject.onEffectTick = function(target, effect)

@@ -25,7 +25,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.skill = xi.skill.GREAT_KATANA
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 0.5, 0.75, 1.0 }
+        params.ftpMod = { 0.5, 1.5, 2.5 }
         params.str_wsc = 0.3
     end
 

@@ -81,7 +81,7 @@ void CTrustEntity::PostTick()
             // clang-format off
             PMaster->ForParty([this](auto PMember)
             {
-                static_cast<CCharEntity*>(PMember)->pushPacket(new CCharHealthPacket(this));
+                static_cast<CCharEntity*>(PMember)->pushPacket<CCharHealthPacket>(this);
             });
             // clang-format on
         }
@@ -117,7 +117,7 @@ void CTrustEntity::Spawn()
     // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
     CBattleEntity::Spawn();
     luautils::OnMobSpawn(this);
-    ((CCharEntity*)PMaster)->pushPacket(new CEntitySetNamePacket(this));
+    ((CCharEntity*)PMaster)->pushPacket<CEntitySetNamePacket>(this);
 }
 
 void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
@@ -275,7 +275,6 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     uint8 realHits     = 0; // to store the real number of hit for tp multipler
     // auto  ammoConsumed = 0;
     bool hitOccured = false; // track if player hit mob at all
-    bool isSange    = false;
     bool isBarrage  = StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0);
 
     /*
@@ -284,17 +283,13 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     {
         hitCount += battleutils::getBarrageShotCount(this);
     }
-    else if (ammoThrowing && this->StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
-    {
-        isSange = true;
-        hitCount += getMod(Mod::UTSUSEMI);
-    }
     */
 
     // loop for barrage hits, if a miss occurs, the loop will end
+    // TODO: do trusts need barrage racc & ratt bonus mods?
     for (uint8 i = 1; i <= hitCount; ++i)
     {
-        if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
+        if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage, 0)) // hit!
         {
             // absorbed by shadow
             if (battleutils::IsAbsorbByShadow(PTarget, this))
@@ -304,7 +299,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
             else
             {
                 bool  isCritical = xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, true);
-                float pdif       = battleutils::GetRangedDamageRatio(this, PTarget, isCritical);
+                float pdif       = battleutils::GetRangedDamageRatio(this, PTarget, isCritical, 0);
 
                 if (isCritical)
                 {
@@ -315,12 +310,6 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
                 // at least 1 hit occured
                 hitOccured = true;
                 realHits++;
-
-                if (isSange)
-                {
-                    // change message to sange
-                    actionTarget.messageID = 77;
-                }
 
                 damage = (int32)((this->GetRangedWeaponDmg() + battleutils::GetFSTR(this, PTarget, slot)) * pdif);
                 /*
@@ -385,8 +374,8 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     // if a hit did occur (even without barrage)
     if (hitOccured)
     {
-        // any misses with barrage cause remaing shots to miss, meaning we must check Action.reaction
-        if ((actionTarget.reaction & REACTION::MISS) != REACTION::NONE && (this->StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE) || isSange))
+        // any misses with barrage cause remaining shots to miss, meaning we must check Action.reaction
+        if ((actionTarget.reaction & REACTION::MISS) != REACTION::NONE && StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE))
         {
             actionTarget.messageID  = 352;
             actionTarget.reaction   = REACTION::HIT;
@@ -425,7 +414,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
         // shadows took damage
         actionTarget.messageID = 0;
         actionTarget.reaction  = REACTION::EVADE;
-        PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, new CMessageBasicPacket(PTarget, PTarget, 0, shadowsTaken, MSGBASIC_SHADOW_ABSORB));
+        PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<CMessageBasicPacket>(PTarget, PTarget, 0, shadowsTaken, MSGBASIC_SHADOW_ABSORB));
     }
 
     if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)
@@ -438,18 +427,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     {
         StatusEffectContainer->DelStatusEffect(EFFECT_BARRAGE, 0);
     }
-    else if (isSange)
-    {
-        uint16 power = StatusEffectContainer->GetStatusEffect(EFFECT_SANGE)->GetPower();
 
-        // remove shadows
-        while (realHits-- && xirand::GetRandomNumber(100) <= power && battleutils::IsAbsorbByShadow(this, this))
-        {
-            ;
-        }
-
-        StatusEffectContainer->DelStatusEffect(EFFECT_SANGE);
-    }
     battleutils::ClaimMob(PTarget, this);
     // battleutils::RemoveAmmo(this, ammoConsumed);
     // only remove detectables
@@ -494,7 +472,7 @@ void CTrustEntity::OnDespawn(CDespawnState& /*unused*/)
         luautils::OnMobDespawn(this);
     }
     FadeOut();
-    PAI->EventHandler.triggerListener("DESPAWN", CLuaBaseEntity(this));
+    PAI->EventHandler.triggerListener("DESPAWN", this);
 }
 
 void CTrustEntity::OnCastFinished(CMagicState& state, action_t& action)
@@ -595,25 +573,28 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
 
             if (primary)
             {
-                if (PWeaponSkill->getPrimarySkillchain() != 0)
+                if ((actionTarget.reaction & REACTION::MISS) == REACTION::NONE)
                 {
-                    // NOTE: GetSkillChainEffect is INSIDE this if statement because it
-                    //  ALTERS the state of the resonance, which misses and non-elemental skills should NOT do.
-                    SUBEFFECT effect = battleutils::GetSkillChainEffect(PBattleTarget, PWeaponSkill->getPrimarySkillchain(),
-                                                                        PWeaponSkill->getSecondarySkillchain(), PWeaponSkill->getTertiarySkillchain());
-                    if (effect != SUBEFFECT_NONE)
+                    if (PBattleTarget->health.hp > 0 && PWeaponSkill->getPrimarySkillchain() != 0)
                     {
-                        actionTarget.addEffectParam = battleutils::TakeSkillchainDamage(this, PBattleTarget, damage, taChar);
-                        if (actionTarget.addEffectParam < 0)
+                        // NOTE: GetSkillChainEffect is INSIDE this if statement because it
+                        //  ALTERS the state of the resonance, which misses and non-elemental skills should NOT do.
+                        SUBEFFECT effect = battleutils::GetSkillChainEffect(PBattleTarget, PWeaponSkill->getPrimarySkillchain(),
+                                                                            PWeaponSkill->getSecondarySkillchain(), PWeaponSkill->getTertiarySkillchain());
+                        if (effect != SUBEFFECT_NONE)
                         {
-                            actionTarget.addEffectParam   = -actionTarget.addEffectParam;
-                            actionTarget.addEffectMessage = 384 + effect;
+                            actionTarget.addEffectParam = battleutils::TakeSkillchainDamage(this, PBattleTarget, damage, taChar);
+                            if (actionTarget.addEffectParam < 0)
+                            {
+                                actionTarget.addEffectParam   = -actionTarget.addEffectParam;
+                                actionTarget.addEffectMessage = 384 + effect;
+                            }
+                            else
+                            {
+                                actionTarget.addEffectMessage = 287 + effect;
+                            }
+                            actionTarget.additionalEffect = effect;
                         }
-                        else
-                        {
-                            actionTarget.addEffectMessage = 287 + effect;
-                        }
-                        actionTarget.additionalEffect = effect;
                     }
                 }
             }

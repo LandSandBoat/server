@@ -19,22 +19,23 @@
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    local params = {}
+    local params   = {}
     params.numHits = 1
-    params.ftpMod = { 2.75, 2.75, 2.75 }
-    params.str_wsc = 0.4 params.mnd_wsc = 0.4
+    params.ftpMod  = { 2.75, 2.75, 2.75 }
+    params.str_wsc = 0.4
+    params.mnd_wsc = 0.4
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.RELIC)
 
-    if damage > 0 then
-        if not target:hasStatusEffect(xi.effect.EVASION_DOWN) then
-            local duration = 120 * applyResistanceAddEffect(player, target, xi.element.ICE, 0)
-            target:addStatusEffect(xi.effect.EVASION_DOWN, 32, 0, duration)
-        end
-    end
+    -- Handle status effect
+    local effectId      = xi.effect.EVASION_DOWN
+    local actionElement = xi.element.ICE
+    local power         = 32
+    local duration      = math.floor(120 * applyResistanceAddEffect(player, target, actionElement, 0))
+    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage
 end

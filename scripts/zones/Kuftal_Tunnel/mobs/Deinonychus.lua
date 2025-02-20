@@ -2,25 +2,71 @@
 -- Area: Kuftal Tunnel
 --  Mob: Deinonychus
 -- Note: Place Holder for Yowie
+-- TODO: Yowie PHs should be in a spawn group
 -----------------------------------
 local ID = zones[xi.zone.KUFTAL_TUNNEL]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
+local yowieSpawnPoints =
+{
+    { x = 27.000, y = 19.000, z = 132.000 },
+    { x = 20.000, y = 20.000, z = 118.000 },
+    { x = 19.000, y = 18.000, z = 100.000 },
+    { x = 18.000, y = 21.000, z =  82.000 },
+    { x = 23.000, y = 20.000, z =  75.000 },
+    { x = 19.000, y = 19.000, z =  55.000 },
+    { x = 34.000, y = 21.000, z =  59.000 },
+    { x = 59.000, y = 21.000, z =  65.000 },
+    { x = 58.000, y = 21.000, z =  57.000 },
+    { x = 72.000, y = 21.000, z =  63.000 },
+    { x = 87.000, y = 21.000, z =  59.000 },
+    { x = 56.202, y = 20.727, z =  71.598 },
+    { x = 46.565, y = 21.087, z =  63.906 },
+    { x = 22.951, y = 20.579, z =  62.653 },
+    { x = 61.492, y = 21.284, z =  78.387 },
+    { x = 28.935, y = 21.056, z =  62.895 },
+    { x = 22.588, y = 20.785, z =  64.372 },
+    { x = 59.452, y = 21.575, z =  74.608 },
+    { x = 37.206, y = 21.300, z =  58.642 },
+    { x = 16.788, y = 21.168, z =  81.714 },
+    { x = 17.210, y = 20.253, z =  84.747 },
+    { x = 26.222, y = 20.518, z =  73.965 },
+    { x = 59.095, y = 21.279, z =  76.978 },
+    { x = 15.149, y = 20.677, z =  77.697 },
+    { x = 38.413, y = 20.843, z =  63.700 },
+    { x = 69.660, y = 20.579, z =  56.354 },
+    { x = 30.929, y = 20.895, z =  63.870 },
+    { x = 26.313, y = 21.012, z =  65.985 },
+    { x = 19.220, y = 20.485, z =  66.643 },
+    { x = 59.645, y = 21.511, z =  62.751 },
+    { x = 58.964, y = 20.875, z =  55.890 },
+    { x = 65.296, y = 20.730, z =  55.042 },
+    { x = 25.229, y = 20.640, z =  78.599 },
+    { x = 20.231, y = 20.764, z =  67.090 },
+    { x = 21.105, y = 20.381, z =  62.397 },
+    { x = 41.133, y = 21.250, z =  60.373 },
+    { x = 24.413, y = 21.083, z =  67.894 },
+    { x = 43.754, y = 21.575, z =  60.875 },
+    { x = 64.029, y = 20.118, z =  67.752 },
+    { x = 20.194, y = 19.672, z =  92.688 },
+    { x = 71.286, y = 21.484, z =  58.724 },
+    { x = 19.499, y = 20.340, z =  88.651 },
+    { x = 72.908, y = 21.543, z =  59.719 },
+    { x = 22.250, y = 20.651, z =  87.039 },
+    { x = 59.115, y = 21.225, z =  56.666 },
+    { x = 27.335, y = 20.837, z =  62.283 },
+    { x = 31.645, y = 20.853, z =  64.069 },
+    { x = 23.079, y = 20.823, z =  64.477 },
+    { x = 23.231, y = 21.130, z =  74.936 },
+    { x = 37.101, y = 21.305, z =  60.684 },
+}
+
 local yowiePHTable =
 {
-    [ID.mob.YOWIE - 63] = ID.mob.YOWIE, -- 27.000 19.000 132.000
-    [ID.mob.YOWIE - 60] = ID.mob.YOWIE, -- 20.000 20.000 118.000
-    [ID.mob.YOWIE - 58] = ID.mob.YOWIE, -- 19.000 18.000 100.000
-    [ID.mob.YOWIE - 56] = ID.mob.YOWIE, -- 18.000 21.000 82.000
-    [ID.mob.YOWIE - 44] = ID.mob.YOWIE, -- 23.000 20.000 75.000
-    [ID.mob.YOWIE - 43] = ID.mob.YOWIE, -- 19.000 19.000 55.000
-    [ID.mob.YOWIE - 37] = ID.mob.YOWIE, -- 34.000 21.000 59.000
-    [ID.mob.YOWIE - 36] = ID.mob.YOWIE, -- 59.000 21.000 65.000
-    [ID.mob.YOWIE - 30] = ID.mob.YOWIE, -- 58.000 21.000 57.000
-    [ID.mob.YOWIE - 29] = ID.mob.YOWIE, -- 72.000 21.000 63.000
-    [ID.mob.YOWIE - 28] = ID.mob.YOWIE, -- 87.000 21.000 59.000
+    [ID.mob.YOWIE - 1] = ID.mob.YOWIE,
+    [ID.mob.YOWIE - 3] = ID.mob.YOWIE,
 }
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -28,7 +74,9 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, yowiePHTable, 5, math.random(7200, 28800)) -- 2 to 8 hours
+    local params = {}
+    params.spawnPoints = yowieSpawnPoints
+    xi.mob.phOnDespawn(mob, yowiePHTable, 5, 7200, params) -- 2 hours
 end
 
 return entity

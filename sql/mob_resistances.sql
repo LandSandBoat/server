@@ -419,7 +419,7 @@ INSERT INTO `mob_resistances` VALUES (395,'Doll-Calcabrina',1.0,1.0,1.0,1.0,0,0,
 INSERT INTO `mob_resistances` VALUES (396,'Worm-Bedrock_Barry',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,-2,-2,-3,2,-2,-2,-3,0);
 INSERT INTO `mob_resistances` VALUES (397,'Quadav-Qu_Vho_Deathhurler',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,0,-2,-2,-2,-3,0,-2,-2);
 INSERT INTO `mob_resistances` VALUES (398,'Sheep-Slumbering_Samwell',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,-2,0,-2,-2,-3,-3,-2,-2);
-INSERT INTO `mob_resistances` VALUES (399,'Demon - Duke_Focalor',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,3,11,3,3,3,3,11,3);
+-- 399 Free
 INSERT INTO `mob_resistances` VALUES (400,'Crab-Tegmine',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,-2,-3,-2,-2,-3,2,-2,-2);
 INSERT INTO `mob_resistances` VALUES (401,'Doll-Martinet',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,2,2,2,2,-3,2,2,2);
 INSERT INTO `mob_resistances` VALUES (402,'Scorpion -Aqrabuamelu',1.0,1.0,1.0,1.0,0,0,0,0,0,0,0,0,0,0,-3,0,0,-2,-2,-3,0);

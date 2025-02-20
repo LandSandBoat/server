@@ -5,11 +5,11 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, 538, -2, -501,  542, 0, -497) -- to The Garden of Ru'hmet
+    zone:registerCuboidTriggerArea(1, 538, -2, -501,  542, 0, -497) -- to The Garden of Ru'hmet
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -28,7 +28,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    if triggerArea:GetTriggerAreaID() == 1 then
+    if triggerArea:getTriggerAreaID() == 1 then
         player:startEvent(100)
     end
 end

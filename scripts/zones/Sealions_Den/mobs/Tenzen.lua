@@ -12,7 +12,7 @@ entity.onMobSpawn = function(mob)
     -- Tenzen in Warriors Path is a completely scripted encounter once you trigger certain states
     -- Leaving mods here as visuals
     mob:setMod(xi.mod.DEF, 350)
-    mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.STANDBACK)))
+    mob:setBehavior(bit.band(mob:getBehavior(), bit.bnot(xi.behavior.STANDBACK)))
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 10)
     mob:setAnimationSub(0)

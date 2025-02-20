@@ -64,8 +64,8 @@ CMonipulatorPacket1::CMonipulatorPacket1(CCharEntity* PChar)
     ref<uint8>(0x14) = 0x2C;
 
     // Bitpacked 2-bit values. 0 = no instincts from that species, 1 == first instinct, 2 == first and second instinct, 3 == first, second, and third instinct.
-    std::memcpy(data + 0x1C, PChar->m_PMonstrosity->instincts.data(), 64); // Instinct Bitfield 1
+    std::memcpy(buffer_.data() + 0x1C, PChar->m_PMonstrosity->instincts.data(), 64); // Instinct Bitfield 1
 
     // Mapped onto the item ID for these creatures. (00 doesn't exist, 01 is rabbit, 02 is behemoth, etc.)
-    std::memcpy(data + 0x5C, PChar->m_PMonstrosity->levels.data(), 128); // Monster Level Bitfield
+    std::memcpy(buffer_.data() + 0x5C, PChar->m_PMonstrosity->levels.data(), 128); // Monster Level Bitfield
 }

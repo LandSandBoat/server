@@ -92,6 +92,11 @@ void CAbility::setActionType(ACTIONTYPE type)
     m_actionType = type;
 }
 
+void CAbility::setPostActionEffectCleanup(EFFECT effectToCleanup)
+{
+    m_cleanupEffect = effectToCleanup;
+}
+
 JOBTYPE CAbility::getJob()
 {
     return m_Job;
@@ -175,6 +180,11 @@ uint16 CAbility::getMeritModID() const
 ACTIONTYPE CAbility::getActionType()
 {
     return m_actionType;
+}
+
+EFFECT CAbility::getPostActionEffectCleanup()
+{
+    return m_cleanupEffect;
 }
 
 void CAbility::setValidTarget(uint16 validTarget)
@@ -335,7 +345,7 @@ namespace ability
     {
         // TODO: Add message field to table
 
-        memset(PAbilityList, 0, sizeof(PAbilityList));
+        std::memset(PAbilityList, 0, sizeof(PAbilityList));
 
         const char* Query = "SELECT "
                             "abilityId,"

@@ -240,3 +240,9 @@ x ==   y -- FAIL
 x  ~= y -- FAIL
 
 x = { x  + y } -- PASS
+
+-- math.random boundaries
+math.random(1, 100) -- PASS
+math.random(1) -- FAIL
+math.random() -- FAIL
+math.random(1, 2, 3) -- FAIL

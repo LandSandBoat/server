@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Charging Chocobo
--- Standard Merchant NPC
 -- !pos -301.531 -10.319 -157.237 235
 -----------------------------------
 local ID = zones[xi.zone.BASTOK_MARKETS]

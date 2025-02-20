@@ -37,15 +37,15 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
     else
         -- Can cast Blindga, Death, Graviga, Silencega, and Sleepga II.
         -- Casts Graviga every time before he teleports.
-        local rnd = math.random()
+        local rnd = math.random(1, 100)
 
-        if rnd < 0.2 then
+        if rnd <= 20 then
             return 361 -- Blindga
-        elseif rnd < 0.4 then
+        elseif rnd <= 40 then
             return 244 -- Death
-        elseif rnd < 0.6 then
+        elseif rnd <= 60 then
             return 366 -- Graviga
-        elseif rnd < 0.8 then
+        elseif rnd <= 80 then
             return 274 -- Sleepga II
         else
             return 359 -- Silencega

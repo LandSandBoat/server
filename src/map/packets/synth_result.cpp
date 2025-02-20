@@ -56,5 +56,5 @@ CSynthResultMessagePacket::CSynthResultMessagePacket(CCharEntity* PChar, SYNTH_M
         }
     }
 
-    memcpy(data + (0x1E), PChar->getName().c_str(), PChar->getName().size());
+    std::memcpy(buffer_.data() + 0x1E, PChar->getName().c_str(), PChar->getName().size());
 }

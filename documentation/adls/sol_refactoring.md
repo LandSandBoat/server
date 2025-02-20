@@ -7,7 +7,7 @@ Multiple problems, explained in detail [here](https://github.com/LandSandBoat/se
 In short:
 - Our use of Lua relied on constantly reading files from this disk, which was very slow.
 - Lua binding library was hard to use.
-- Errors on the boundary between C++ and Lua would cause undefined behaviour or crashes.
+- Errors on the boundary between C++ and Lua would cause undefined behavior or crashes.
 
 ### What were/are the options?
 Only Sol was considered.

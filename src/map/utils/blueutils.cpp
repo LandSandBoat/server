@@ -150,10 +150,9 @@ namespace blueutils
                     {
                         if (charutils::addSpell(PBlueMage, static_cast<uint16>(PSpell->getID())))
                         {
-                            PBlueMage->pushPacket(
-                                new CMessageBasicPacket(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, MSGBASIC_LEARNS_SPELL));
+                            PBlueMage->pushPacket<CMessageBasicPacket>(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, MSGBASIC_LEARNS_SPELL);
                             charutils::SaveSpell(PBlueMage, static_cast<uint16>(PSpell->getID()));
-                            PBlueMage->pushPacket(new CCharSpellsPacket(PBlueMage));
+                            PBlueMage->pushPacket<CCharSpellsPacket>(PBlueMage);
                         }
                     }
                     break; // only one attempt at learning a spell, regardless of learn or not.
@@ -192,9 +191,9 @@ namespace blueutils
             }
         }
         charutils::BuildingCharTraitsTable(PChar);
-        PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
-        PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
-        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
+        PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
+        PChar->pushPacket<CCharStatsPacket>(PChar);
         charutils::CalculateStats(PChar);
         PChar->UpdateHealth();
         SaveSetSpells(PChar);
@@ -322,10 +321,11 @@ namespace blueutils
     {
         if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
         {
-            auto set_blue_spells = db::encodeToBlob(PChar->m_SetBlueSpells);
-            auto query           = fmt::format("UPDATE chars SET set_blue_spells = '{}' WHERE charid = {} LIMIT 1",
-                                               set_blue_spells, PChar->id);
-            db::query(query);
+            if (!db::preparedStmt("UPDATE chars SET set_blue_spells = ? WHERE charid = ? LIMIT 1",
+                                  PChar->m_SetBlueSpells, PChar->id))
+            {
+                ShowError("Failed to save set blue spells for %s", PChar->getName());
+            }
         }
     }
 
@@ -338,7 +338,7 @@ namespace blueutils
             auto rset = db::preparedStmt("SELECT set_blue_spells FROM chars WHERE charid = ? LIMIT 1", PChar->id);
             if (rset && rset->rowsCount() && rset->next())
             {
-                db::extractFromBlob(rset, "set_blue_spells", PChar->m_SetBlueSpells);
+                PChar->m_SetBlueSpells = rset->get<std::array<uint8, 20>>("set_blue_spells");
             }
 
             for (unsigned char& m_SetBlueSpell : PChar->m_SetBlueSpells)
@@ -470,7 +470,7 @@ namespace blueutils
                         if (add)
                         {
                             // Check all the eligible Blue Traits for conflicts
-                            std::size_t j;
+                            std::size_t j = 0;
                             for (j = 0; j < traitsToAdd.size(); ++j)
                             {
                                 auto iter = traitsToAdd.at(j);
@@ -483,6 +483,14 @@ namespace blueutils
                                         add = false;
                                         break;
                                     }
+                                }
+                                else if ((PTrait->getMod() == Mod::DOUBLE_ATTACK && iter->getMod() == Mod::TRIPLE_ATTACK) ||
+                                         (PTrait->getMod() == Mod::GILFINDER && iter->getMod() == Mod::TREASURE_HUNTER))
+                                {
+                                    // Triple Attack (16 pts) overwrites Double Attack (8 pts)
+                                    // Treasure Hunter (18 pts) overwrites Gilfinder (12 pts)
+                                    add = false;
+                                    break;
                                 }
                             }
 

@@ -17,7 +17,7 @@ entity.onMobRoamAction = function(mob)
     local prog = instance:getProgress()
 
     if not mob:isFollowingPath() then
-        mob:setSpeed(40)
+        mob:setBaseSpeed(40)
         mob:pathThrough(ID.points[stage][prog].route, 9)
     end
 end

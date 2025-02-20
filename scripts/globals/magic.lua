@@ -7,33 +7,6 @@ require('scripts/globals/utils')
 xi = xi or {}
 xi.magic = xi.magic or {}
 
------------------------------------
--- Day to Element Mapping
------------------------------------
-
-xi.magic.dayElement =
-{
-    [xi.day.FIRESDAY    ] = xi.element.FIRE,
-    [xi.day.ICEDAY      ] = xi.element.ICE,
-    [xi.day.WINDSDAY    ] = xi.element.WIND,
-    [xi.day.EARTHSDAY   ] = xi.element.EARTH,
-    [xi.day.LIGHTNINGDAY] = xi.element.THUNDER,
-    [xi.day.WATERSDAY   ] = xi.element.WATER,
-    [xi.day.LIGHTSDAY   ] = xi.element.LIGHT,
-    [xi.day.DARKSDAY    ] = xi.element.DARK,
-}
-
------------------------------------
--- Tables by element
------------------------------------
-
-local strongAffinityAcc      = { xi.mod.FIRE_AFFINITY_ACC,     xi.mod.ICE_AFFINITY_ACC,     xi.mod.WIND_AFFINITY_ACC,      xi.mod.EARTH_AFFINITY_ACC,     xi.mod.THUNDER_AFFINITY_ACC,       xi.mod.WATER_AFFINITY_ACC,      xi.mod.LIGHT_AFFINITY_ACC,  xi.mod.DARK_AFFINITY_ACC }
-xi.magic.resistMod           = { xi.mod.FIRE_MEVA,             xi.mod.ICE_MEVA,             xi.mod.WIND_MEVA,              xi.mod.EARTH_MEVA,             xi.mod.THUNDER_MEVA,               xi.mod.WATER_MEVA,              xi.mod.LIGHT_MEVA,          xi.mod.DARK_MEVA }
-xi.magic.specificDmgTakenMod = { xi.mod.FIRE_SDT,              xi.mod.ICE_SDT,              xi.mod.WIND_SDT,               xi.mod.EARTH_SDT,              xi.mod.THUNDER_SDT,                xi.mod.WATER_SDT,               xi.mod.LIGHT_SDT,           xi.mod.DARK_SDT }
-xi.magic.absorbMod           = { xi.mod.FIRE_ABSORB,           xi.mod.ICE_ABSORB,           xi.mod.WIND_ABSORB,            xi.mod.EARTH_ABSORB,           xi.mod.LTNG_ABSORB,                xi.mod.WATER_ABSORB,            xi.mod.LIGHT_ABSORB,        xi.mod.DARK_ABSORB }
-local blmMerit               = { xi.merit.FIRE_MAGIC_POTENCY,  xi.merit.ICE_MAGIC_POTENCY,  xi.merit.WIND_MAGIC_POTENCY,   xi.merit.EARTH_MAGIC_POTENCY,  xi.merit.LIGHTNING_MAGIC_POTENCY,  xi.merit.WATER_MAGIC_POTENCY }
-xi.magic.barSpell            = { xi.effect.BARFIRE,            xi.effect.BARBLIZZARD,       xi.effect.BARAERO,             xi.effect.BARSTONE,            xi.effect.BARTHUNDER,              xi.effect.BARWATER }
-
 -- USED FOR DAMAGING MAGICAL SPELLS (Stages 1 and 2 in Calculating Magic Damage on wiki)
 local softCap = 60 --guesstimated
 local hardCap = 120 --guesstimated
@@ -239,17 +212,17 @@ function applyResistanceEffect(actor, target, spell, params)
         end
     end
 
-    return xi.combat.magicHitRate.calculateResistRate(actor, target, spellFamily, skillType, element, statUsed, effectId, bonusMacc)
+    return xi.combat.magicHitRate.calculateResistRate(actor, target, spellFamily, skillType, 0, element, statUsed, effectId, bonusMacc)
 end
 
 -- Applies resistance for things that may not be spells - ie. Quick Draw
 function applyResistanceAbility(actor, target, element, skillType, bonusMacc)
-    return xi.combat.magicHitRate.calculateResistRate(actor, target, 0, skillType, element, 0, 0, bonusMacc)
+    return xi.combat.magicHitRate.calculateResistRate(actor, target, 0, skillType, 0, element, 0, 0, bonusMacc)
 end
 
 -- Applies resistance for additional effects
 function applyResistanceAddEffect(actor, target, element, bonusMacc)
-    return xi.combat.magicHitRate.calculateResistRate(actor, target, 0, xi.skill.NONE, element, 0, 0, bonusMacc)
+    return xi.combat.magicHitRate.calculateResistRate(actor, target, 0, xi.skill.NONE, 0, element, 0, 0, bonusMacc)
 end
 
 function finalMagicAdjustments(caster, target, spell, dmg)
@@ -402,9 +375,9 @@ function addBonuses(caster, spell, target, dmg, params)
 
         local mdefBarBonus = 0
         if ele >= xi.element.FIRE and ele <= xi.element.WATER then
-            mab = mab + caster:getMerit(blmMerit[ele])
-            if target:hasStatusEffect(xi.magic.barSpell[ele]) then -- bar- spell magic defense bonus
-                mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()
+            mab = mab + caster:getMerit(xi.combat.element.getElementalPotencyMerit(ele))
+            if target:hasStatusEffect(xi.combat.element.getAssociatedBarspellEffect(ele)) then -- bar- spell magic defense bonus
+                mdefBarBonus = target:getStatusEffect(xi.combat.element.getAssociatedBarspellEffect(ele)):getSubPower()
             end
         end
 
@@ -445,9 +418,9 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     if
         ele >= xi.element.FIRE and
         ele <= xi.element.WATER and
-        target:hasStatusEffect(xi.magic.barSpell[ele])
+        target:hasStatusEffect(xi.combat.element.getAssociatedBarspellEffect(ele))
     then -- bar- spell magic defense bonus
-        mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()
+        mdefBarBonus = target:getStatusEffect(xi.combat.element.getAssociatedBarspellEffect(ele)):getSubPower()
     end
 
     if params ~= nil and params.bonusmab ~= nil and params.includemab then
@@ -463,45 +436,6 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     dmg = math.floor(dmg * mab)
 
     return dmg
-end
-
-function handleThrenody(caster, target, spell, basePower, baseDuration, modifier)
-    -- Process resitances
-    local staff  = caster:getMod(strongAffinityAcc[spell:getElement()]) * 10
-    local params = {}
-
-    params.attribute = xi.mod.CHR
-    params.skillType = xi.skill.SINGING
-    params.bonus = staff
-
-    local resm = applyResistanceEffect(caster, target, spell, params)
-
-    if resm < 0.5 then
-        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
-        return xi.effect.THRENODY
-    end
-
-    -- Remove previous Threnody
-    target:delStatusEffect(xi.effect.THRENODY)
-
-    local iBoost = caster:getMod(xi.mod.THRENODY_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
-    local power = basePower + iBoost * 5
-    local duration = baseDuration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS) / 100) + 1)
-
-    if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
-        power = power * 2
-    elseif caster:hasStatusEffect(xi.effect.MARCATO) then
-        power = power * 1.5
-    end
-
-    if caster:hasStatusEffect(xi.effect.TROUBADOUR) then
-        duration = duration * 2
-    end
-
-    -- Set spell message and apply status effect
-    target:addStatusEffect(xi.effect.THRENODY, -power, 0, duration, 0, modifier, 0)
-
-    return xi.effect.THRENODY
 end
 
 function calculateDuration(duration, magicSkill, spellGroup, caster, target, useComposure)

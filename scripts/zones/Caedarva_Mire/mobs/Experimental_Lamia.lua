@@ -26,6 +26,10 @@ local function spawnMinions(mob, target)
     end
 end
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+end
+
 entity.onMobFight = function(mob, target)
     if mob:getHPP() < 75 and mob:getLocalVar('spawnedMinions') == 0 then
         spawnMinions(mob, target)

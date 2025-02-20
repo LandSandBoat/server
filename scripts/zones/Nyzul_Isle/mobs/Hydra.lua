@@ -23,7 +23,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 10)
-    mob:setMod(xi.mod.UDMGMAGIC, -90)
+    mob:setMod(xi.mod.UDMGMAGIC, -9000)
     mob:setMod(xi.mod.POISON_MEVA, 100)
     mob:setMod(xi.mod.BLIND_MEVA, 100)
     mob:setMod(xi.mod.SILENCE_MEVA, 100)

@@ -30,6 +30,9 @@ xi.settings.network =
 
     SEARCH_PORT = 54002,
 
+    -- DB queries will attempt each query once, and reconnect and retry up to `SQL_QUERY_RETRY_COUNT` times.
+    SQL_QUERY_RETRY_COUNT = 1,
+
     ENABLE_HTTP = false,
     HTTP_HOST   = "localhost",
     HTTP_PORT   = 8088,

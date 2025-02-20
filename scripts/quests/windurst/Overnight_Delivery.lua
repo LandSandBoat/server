@@ -222,7 +222,7 @@ quest.sections =
             ['Kenapa-Keppa'] =
             {
                 onTrigger = function(player, npc)
-                    if math.random(1, 2) == 1 then
+                    if math.random(1, 100) <= 50 then
                         return quest:event(349):replaceDefault()
                     else
                         return quest:event(350):replaceDefault()

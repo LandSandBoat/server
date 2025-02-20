@@ -22,7 +22,6 @@ local content = Battlefield:new({
     },
 })
 
--- TODO: MobSkills Slipstream and Turbulence need to be implemented/applied.
 content:addEssentialMobs({ 'Colo-colo', 'Furies' })
 
 content.loot =

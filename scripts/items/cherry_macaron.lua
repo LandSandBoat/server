@@ -18,12 +18,12 @@ itemObject.onItemUse = function(target)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.SYNTH_SUCCESS, 3)
+    target:addMod(xi.mod.SYNTH_SUCCESS_RATE, 3)
     target:addMod(xi.mod.SYNTH_SKILL_GAIN, 3)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.SYNTH_SUCCESS, 3)
+    target:delMod(xi.mod.SYNTH_SUCCESS_RATE, 3)
     target:delMod(xi.mod.SYNTH_SKILL_GAIN, 3)
 end
 

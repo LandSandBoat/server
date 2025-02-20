@@ -358,6 +358,20 @@ local modByMobName =
     ['Tammuz'] = function(mob)
         mob:addStatusEffect(xi.effect.MIGHTY_STRIKES, 1, 0, 0)
     end,
+
+    ['Erebus'] = function(mob)
+        mob:addImmunity(xi.immunity.GRAVITY)
+        mob:addImmunity(xi.immunity.BIND)
+    end,
+
+    ['Raker_Bee'] = function(mob)
+        mob:addImmunity(xi.immunity.GRAVITY)
+        mob:addImmunity(xi.immunity.BIND)
+    end,
+
+    ['Gjenganger'] = function(mob)
+        mob:addImmunity(xi.immunity.STUN)
+    end,
 }
 
 local mixinByMobName =

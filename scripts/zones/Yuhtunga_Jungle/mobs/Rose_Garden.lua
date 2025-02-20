@@ -11,6 +11,7 @@ local roseGardenPH = ID.mob.ROSE_GARDEN - 1
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('timeToGrow', os.time() + math.random(36000, 37800)) -- 10:00:00 to 10:30:00
+    mob:setMod(xi.mod.REGEN, 25)
 end
 
 entity.onMobDisengage = function(mob)

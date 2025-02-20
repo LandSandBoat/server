@@ -13,9 +13,6 @@ entity.onTrigger = function(player, npc)
     xi.moghouse.moogleTrigger(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     xi.moghouse.moogleEventFinish(player, csid, option, npc)
 end

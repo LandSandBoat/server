@@ -79,7 +79,7 @@ entity.onSpellPrecast = function(mob, spell)
 end
 
 entity.onMagicCastingCheck = function(mob, target, spell)
-    if math.random() > 0.75 then
+    if math.random(1, 100) <= 25 then
         return 219
     else
         return 218

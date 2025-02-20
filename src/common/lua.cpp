@@ -71,7 +71,7 @@ void lua_init()
 /**
  * @brief
  */
-std::string lua_to_string_depth(sol::object const& obj, std::size_t depth)
+std::string lua_to_string_depth(const sol::object& obj, std::size_t depth)
 {
     switch (obj.get_type())
     {
@@ -203,7 +203,7 @@ void lua_print(sol::variadic_args va)
     ShowLua(lua_to_string(va).c_str());
 }
 
-std::string lua_fmt(std::string fmtStr, sol::variadic_args va)
+std::string lua_fmt(const std::string& fmtStr, sol::variadic_args va)
 {
     fmt::dynamic_format_arg_store<fmt::format_context> store;
     for (auto const& arg : va)

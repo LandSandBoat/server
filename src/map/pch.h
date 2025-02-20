@@ -60,6 +60,7 @@
 #include <numeric>
 #include <optional>
 #include <queue>
+#include <ranges>
 #include <regex>
 #include <set>
 #include <sstream>
@@ -83,6 +84,7 @@
 #include "common/database.h"
 #include "common/kernel.h"
 #include "common/logging.h"
+#include "common/macros.h"
 #include "common/md52.h"
 #include "common/mmo.h"
 #include "common/socket.h"
@@ -92,6 +94,7 @@
 #include "common/tracy.h"
 #include "common/utils.h"
 #include "common/version.h"
+#include "common/xi.h"
 #include "common/xirand.h"
 
 #include <concurrentqueue.h>

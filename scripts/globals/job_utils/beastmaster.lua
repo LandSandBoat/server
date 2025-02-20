@@ -638,14 +638,14 @@ xi.job_utils.beastmaster.attemptCharm = function(charmer, target)
     local chance = xi.job_utils.beastmaster.getCharmChance(charmer, target, true)
 
     -- If successful then calculate duration and charm
-    if chance > math.random(100) then
+    if chance > math.random(1, 100) then
         local duration = getCharmDuration(charmer, target)
 
         if duration > 0 then
             charmer:charm(target, duration)
-            return xi.msg.basic.NONE
+            return xi.msg.basic.CHARM_SUCCESS
         end
     end
 
-    return xi.msg.basic.JA_MISS
+    return xi.msg.basic.CHARM_FAIL
 end

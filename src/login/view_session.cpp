@@ -55,14 +55,13 @@ void view_session::read_func()
             char requestedCharacter[PacketNameLength] = {};
             std::memcpy(&requestedCharacter, data_ + 36, PacketNameLength - 1);
 
-            auto _sql = std::make_unique<SqlConnection>();
-
             uint32 accountID = 0;
-            int32  ret       = _sql->Query("SELECT accid FROM chars WHERE charid = %u AND charname = '%s' LIMIT 1",
-                                           requestedCharacterID, requestedCharacter);
-            if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+
+            const auto rset = db::preparedStmt("SELECT accid FROM chars WHERE charid = ? AND charname = ? LIMIT 1",
+                                               requestedCharacterID, requestedCharacter);
+            if (rset && rset->rowsCount() != 0 && rset->next())
             {
-                accountID                    = _sql->GetUIntData(0);
+                accountID                    = rset->get<uint32>("accid");
                 session.requestedCharacterID = requestedCharacterID;
             }
             else
@@ -89,7 +88,6 @@ void view_session::read_func()
         break;
         case 0x14: // 20: "Deleting from lobby server"
         {
-            auto _sql = std::make_unique<SqlConnection>();
             if (!settings::get<bool>("login.CHARACTER_DELETION"))
             {
                 loginHelpers::generateErrorMessage(data_, loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER);
@@ -114,17 +112,17 @@ void view_session::read_func()
 
             do_write(0x20);
 
-            uint32 CharID = ref<uint32>(data_, 0x20);
+            uint32 charID = ref<uint32>(data_, 0x20);
 
             ShowInfo(fmt::format("attempt to delete char:<{}> from ip:<{}>",
-                                 CharID, ipAddress));
+                                 charID, ipAddress));
 
             uint32 accountID = 0;
-            int32  ret       = _sql->Query("SELECT accid FROM chars WHERE charid = %u LIMIT 1", CharID);
 
-            if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+            const auto rset = db::preparedStmt("SELECT accid FROM chars WHERE charid = ? LIMIT 1", charID);
+            if (rset && rset->rowsCount() != 0 && rset->next())
             {
-                accountID = _sql->GetUIntData(0);
+                accountID = rset->get<uint32>("accid");
             }
 
             if (accountID != session.accountID)
@@ -138,8 +136,8 @@ void view_session::read_func()
             // Instead of performing an actual character deletion, we simply set accid to 0, and original_accid to old accid.
             // This allows character recovery.
 
-            _sql->Query("UPDATE chars SET accid = 0, original_accid = %i WHERE charid = %i AND accid = %i",
-                        session.accountID, CharID, session.accountID);
+            db::preparedStmt("UPDATE chars SET accid = 0, original_accid = ? WHERE charid = ? AND accid = ?",
+                             session.accountID, charID, session.accountID);
         }
         break;
         case 0x21: // 33: Registering character name onto the lobby server
@@ -186,21 +184,15 @@ void view_session::read_func()
             }
             else
             {
-                auto _sql = std::make_unique<SqlConnection>();
-
                 // creating new char
                 char CharName[PacketNameLength] = {};
                 std::memcpy(CharName, data_ + 32, PacketNameLength - 1);
 
-                // Sanitize name
-                char escapedCharName[16 * 2 + 1];
-                _sql->EscapeString(escapedCharName, CharName);
-
                 std::optional<std::string> invalidNameReason = std::nullopt;
 
-                // Check for invalid characters
-                std::string nameStr(&escapedCharName[0]);
-                for (auto letters : nameStr)
+                // Sanitize name & check for invalid characters
+                std::string nameStr = db::escapeString(CharName);
+                for (const auto& letters : nameStr)
                 {
                     if (!std::isalpha(letters))
                     {
@@ -218,11 +210,12 @@ void view_session::read_func()
                 }
 
                 // Check if the name is already in use by another character
-                if (_sql->Query("SELECT charname FROM chars WHERE charname LIKE '%s'", escapedCharName) == SQL_ERROR)
+                const auto rset0 = db::preparedStmt("SELECT charname FROM chars WHERE charname LIKE ?", nameStr);
+                if (!rset0)
                 {
                     invalidNameReason = "Internal entity name query failed.";
                 }
-                else if (_sql->NumRows() != 0)
+                else if (rset0 && rset0->rowsCount() != 0)
                 {
                     invalidNameReason = "Name already in use.";
                 }
@@ -237,18 +230,20 @@ void view_session::read_func()
                         "    UNION "
                         "    SELECT packet_name AS `name` FROM mob_pools "
                         ") "
-                        "SELECT * FROM results WHERE REPLACE(REPLACE(UPPER(`name`), '-', ''), '_', '') LIKE REPLACE(REPLACE(UPPER('%s'), '-', ''), '_', '')";
+                        "SELECT * FROM results WHERE REPLACE(REPLACE(UPPER(`name`), '-', ''), '_', '') LIKE REPLACE(REPLACE(UPPER(?), '-', ''), '_', '')";
 
-                    if (_sql->Query(query, nameStr) == SQL_ERROR)
+                    const auto rset1 = db::preparedStmt(query, nameStr);
+                    if (!rset1)
                     {
                         invalidNameReason = "Internal entity name query failed";
                     }
-                    else if (_sql->NumRows() != 0)
+                    else if (rset1 && rset1->rowsCount() != 0)
                     {
                         invalidNameReason = "Name already in use.";
                     }
                 }
 
+                // TODO: Don't raw-access Lua like this outside of Lua helper code.
                 // (optional) Check if the name contains any words on the bad word list
                 auto loginSettingsTable = lua["xi"]["settings"]["login"].get<sol::table>();
                 if (auto badWordsList = loginSettingsTable.get_or<sol::table>("BANNED_WORDS_LIST", sol::lua_nil); badWordsList.valid())
@@ -266,7 +261,7 @@ void view_session::read_func()
 
                 if (invalidNameReason.has_value())
                 {
-                    ShowWarning(fmt::format("new character name error <{}>: {}", str(CharName), *invalidNameReason));
+                    ShowWarning(fmt::format("new character name error <{}>: {}", nameStr, *invalidNameReason));
 
                     // Send error code:
                     // The character name you entered is unavailable. Please choose another name.

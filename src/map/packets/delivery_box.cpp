@@ -32,7 +32,7 @@ CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, uint8 count, u
     this->setType(0x4B);
     this->setSize(0x14);
 
-    memset(data + 4, 0xFF, 12);
+    std::memset(buffer_.data() + 4, 0xFF, 12);
 
     ref<uint8>(0x04) = action;
     ref<uint8>(0x05) = boxid;
@@ -60,7 +60,7 @@ CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, CItem* PItem, 
     this->setType(0x4B);
     this->setSize(0x58);
 
-    memset(data + 4, 0xFF, 12);
+    std::memset(buffer_.data() + 4, 0xFF, 12);
 
     ref<uint8>(0x04) = action;
     ref<uint8>(0x05) = boxid;
@@ -75,14 +75,14 @@ CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, CItem* PItem, 
             if (boxid == 1)
             {
                 ref<uint8>(0x10) = 0x07;
-                memcpy(data + 0x14, PItem->getSender().c_str(),
-                       PItem->getSender().size()); // Sender's name.  Client disables "Return" if it starts with "AH"
+                std::memcpy(buffer_.data() + 0x14, PItem->getSender().c_str(),
+                            PItem->getSender().size()); // Sender's name.  Client disables "Return" if it starts with "AH"
             }
             else
             {
                 ref<uint8>(0x10) = PItem->isSent() ? 0x03 : 0x05; // 0x05 in send: canceled. other values are unknown
-                memcpy(data + 0x14, PItem->getReceiver().c_str(),
-                       PItem->getReceiver().size()); // Receiver's name.  Client disables "Return" if it starts with "AH"
+                std::memcpy(buffer_.data() + 0x14, PItem->getReceiver().c_str(),
+                            PItem->getReceiver().size()); // Receiver's name.  Client disables "Return" if it starts with "AH"
             }
         }
         if (action == 0x02)
@@ -109,6 +109,6 @@ CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, CItem* PItem, 
         ref<uint16>(0x2C) = PItem->getSubID(); // Only used to display which item was sold on the AH
         ref<uint16>(0x30) = PItem->getID();
         ref<uint32>(0x38) = PItem->getQuantity();
-        memcpy(data + 0x3C, PItem->m_extra, sizeof(PItem->m_extra));
+        std::memcpy(buffer_.data() + 0x3C, PItem->m_extra, sizeof(PItem->m_extra));
     }
 }

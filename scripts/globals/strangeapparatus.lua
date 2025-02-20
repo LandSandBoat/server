@@ -296,7 +296,7 @@ xi.strangeApparatus =
                         end
                     end
 
-                    if not hasDoctorStatus(player) and math.random() < 0.5 then
+                    if not hasDoctorStatus(player) and math.random(1, 100) <= 50 then
                         item = data.cluster -- give clusters instead of reward
                         qty  = 2
                     end

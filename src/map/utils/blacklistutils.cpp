@@ -66,7 +66,7 @@ namespace blacklistutils
         const char* query = "SELECT c.charid, c.charname FROM char_blacklist AS b INNER JOIN chars AS c ON b.charid_target = c.charid WHERE charid_owner = %u";
         if (_sql->Query(query, PChar->id) == SQL_ERROR || _sql->NumRows() == 0)
         {
-            PChar->pushPacket(new CSendBlacklist(PChar, blacklist, true, true));
+            PChar->pushPacket<CSendBlacklist>(PChar, blacklist, true, true);
             return;
         }
 
@@ -88,7 +88,7 @@ namespace blacklistutils
             {
                 // reset the client blist if it's the first 12 (or less)
                 // this is the last blist packet if total count equals row count
-                PChar->pushPacket(new CSendBlacklist(PChar, blacklist, totalCount <= 12, totalCount == rowCount));
+                PChar->pushPacket<CSendBlacklist>(PChar, blacklist, totalCount <= 12, totalCount == rowCount);
                 blacklist.clear();
                 currentCount = 0;
             }
@@ -97,7 +97,7 @@ namespace blacklistutils
         // Push remaining entries..
         if (!blacklist.empty())
         {
-            PChar->pushPacket(new CSendBlacklist(PChar, blacklist, false, true));
+            PChar->pushPacket<CSendBlacklist>(PChar, blacklist, false, true);
         }
     }
 

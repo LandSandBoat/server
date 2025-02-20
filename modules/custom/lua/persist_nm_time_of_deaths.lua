@@ -1,6 +1,6 @@
 -----------------------------------
 -- Persists NM time of deaths to the database. They must be added to the list here
--- to get this extra behaviour.
+-- to get this extra behavior.
 -- This is useful if you don't want players rushing to NM spawns after a server
 -- restart or a crash (or trying to force crashes/restarts to get NM pops)
 -----------------------------------

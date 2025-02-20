@@ -14,13 +14,13 @@
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    local params = {}
+    local params   = {}
     params.numHits = 1
-    params.ftpMod = { 3.25, 4.25, 5.25 }
+    params.ftpMod  = { 3.25, 4.25, 5.25 }
     params.dex_wsc = 0.6
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 5.0, 10.19, 13.0 }
+        params.ftpMod = { 5, 10.19, 13 }
         params.dex_wsc = 0.8
     end
 
@@ -29,12 +29,12 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    -- xi.effect.WEIGHT power value is equal to lead breath as per bg-wiki: http://www.bg-wiki.com/bg/Rudra%27s_Storm
-    if damage > 0 then
-        if not target:hasStatusEffect(xi.effect.WEIGHT) then
-            target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60)
-        end
-    end
+    -- Handle status effect
+    local effectId      = xi.effect.WEIGHT
+    local actionElement = xi.element.WIND
+    local power         = 25
+    local duration      = 60
+    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage
 end

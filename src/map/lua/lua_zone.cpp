@@ -22,6 +22,7 @@
 #include "lua_zone.h"
 
 #include "common/logging.h"
+#include "common/timer.h"
 
 #include "entities/charentity.h"
 #include "entities/npcentity.h"
@@ -76,23 +77,22 @@ void CLuaZone::resetLocalVars()
  *                                                                       *
  ************************************************************************/
 
-void CLuaZone::registerTriggerArea(uint32 triggerAreaID, float x1, float y1, float z1, float x2, float y2, float z2)
+void CLuaZone::registerCuboidTriggerArea(uint32 triggerAreaID, float xMin, float yMin, float zMin, float xMax, float yMax, float zMax)
 {
-    bool circleRegion = false;
-    if (approximatelyEqual(x2, 0.0f) &&
-        approximatelyEqual(y2, 0.0f) &&
-        approximatelyEqual(z2, 0.0f))
-    {
-        circleRegion = true; // Parameters were 0, we must be a circle.
-    }
+    auto tArea = std::make_unique<CCuboidTriggerArea>(triggerAreaID, xMin, yMin, zMin, xMax, yMax, zMax);
+    m_pLuaZone->InsertTriggerArea(std::move(tArea));
+}
 
-    CTriggerArea* region = new CTriggerArea(triggerAreaID, circleRegion);
+void CLuaZone::registerCylindricalTriggerArea(uint32 triggerAreaID, float xPos, float zPos, float radius)
+{
+    auto tArea = std::make_unique<CCylindricalTriggerArea>(triggerAreaID, xPos, zPos, radius);
+    m_pLuaZone->InsertTriggerArea(std::move(tArea));
+}
 
-    // If this is a circle, parameter 3 (which would otherwise be vertical coordinate) will be the radius.
-    region->SetULCorner(x1, y1, z1);
-    region->SetLRCorner(x2, y2, z2);
-
-    m_pLuaZone->InsertTriggerArea(region);
+void CLuaZone::registerSphericalTriggerArea(uint32 triggerAreaID, float xPos, float yPos, float zPos, float radius)
+{
+    auto tArea = std::make_unique<CSphericalTriggerArea>(triggerAreaID, xPos, yPos, zPos, radius);
+    m_pLuaZone->InsertTriggerArea(std::move(tArea));
 }
 
 /************************************************************************
@@ -112,7 +112,7 @@ sol::table CLuaZone::getPlayers()
     // clang-format off
     m_pLuaZone->ForEachChar([&table](CCharEntity* PChar)
     {
-        table.add(CLuaBaseEntity(PChar));
+        table.add(PChar);
     });
     // clang-format on
     return table;
@@ -162,13 +162,13 @@ ZONE_TYPE CLuaZone::getTypeMask()
     return m_pLuaZone->GetTypeMask();
 }
 
-std::optional<CLuaBattlefield> CLuaZone::getBattlefieldByInitiator(uint32 charID)
+auto CLuaZone::getBattlefieldByInitiator(uint32 charID) -> CBattlefield*
 {
     if (m_pLuaZone->m_BattlefieldHandler)
     {
-        return std::optional<CLuaBattlefield>(m_pLuaZone->m_BattlefieldHandler->GetBattlefieldByInitiator(charID));
+        return m_pLuaZone->m_BattlefieldHandler->GetBattlefieldByInitiator(charID);
     }
-    return std::nullopt;
+    return nullptr;
 }
 
 WEATHER CLuaZone::getWeather()
@@ -217,7 +217,7 @@ bool CLuaZone::isNavigablePoint(const sol::table& point)
     }
 }
 
-std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
+auto CLuaZone::insertDynamicEntity(sol::table table) -> CBaseEntity*
 {
     return luautils::GenerateDynamicEntity(m_pLuaZone, nullptr, std::move(table));
 }
@@ -310,7 +310,10 @@ void CLuaZone::Register()
     SOL_REGISTER("setLocalVar", CLuaZone::setLocalVar);
     SOL_REGISTER("resetLocalVars", CLuaZone::resetLocalVars);
 
-    SOL_REGISTER("registerTriggerArea", CLuaZone::registerTriggerArea);
+    SOL_REGISTER("registerCuboidTriggerArea", CLuaZone::registerCuboidTriggerArea);
+    SOL_REGISTER("registerCylindricalTriggerArea", CLuaZone::registerCylindricalTriggerArea);
+    SOL_REGISTER("registerSphericalTriggerArea", CLuaZone::registerSphericalTriggerArea);
+
     SOL_REGISTER("levelRestriction", CLuaZone::levelRestriction);
     SOL_REGISTER("getPlayers", CLuaZone::getPlayers);
     SOL_REGISTER("getNPCs", CLuaZone::getNPCs);

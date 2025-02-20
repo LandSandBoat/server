@@ -613,137 +613,6 @@ function utils.getActiveJobLevel(actor, job)
     return jobLevel
 end
 
------------------------------------
---     SKILL LEVEL CALCULATOR
---     Returns a skill level based on level and rating.
---
---    See: https://wiki.ffo.jp/html/2570.html
---
---    The arguments are skill rank (numerical), and level.  1 is A+, 2 is A-, and so on.
------------------------------------
-
--- skillLevelTable contains matched pairs based on rank; First value is multiplier, second is additive value.  Index is the subtracted
--- baseInRange value (see below)
--- Original formula: ((level - <baseInRange>) * <multiplier>) + <additive>; where level is a range defined in utils.getSkillLvl
-local skillLevelTable =
-{
-    --         A+             A-             B+             B              B-             C+             C              C-             D              E              F             G
-    [  0] = { { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 }, { 0.00,   0 } }, -- No level/Fallback
-    [  1] = { { 3.00,   6 }, { 3.00,   6 }, { 2.90,   5 }, { 2.90,   5 }, { 2.90,   5 }, { 2.80,   5 }, { 2.80,   5 }, { 2.80,   5 }, { 2.70,   4 }, { 2.50,   4 }, { 2.30,   4 }, { 2.00,   3 } }, -- Level <= 50
-    [ 50] = { { 5.00, 153 }, { 5.00, 153 }, { 4.90, 147 }, { 4.90, 147 }, { 4.90, 147 }, { 4.80, 142 }, { 4.80, 142 }, { 4.80, 142 }, { 4.70, 136 }, { 4.50, 126 }, { 4.30, 116 }, { 4.00, 101 } }, -- Level > 50 and Level <= 60
-    [ 60] = { { 4.85, 203 }, { 4.10, 203 }, { 3.70, 196 }, { 3.23, 196 }, { 2.70, 196 }, { 2.50, 190 }, { 2.25, 190 }, { 2.00, 190 }, { 1.85, 183 }, { 1.95, 171 }, { 2.05, 159 }, { 2.00, 141 } }, -- Level > 60 and Level <= 70
-    [ 70] = { { 5.00, 251 }, { 5.00, 244 }, { 4.60, 233 }, { 4.40, 228 }, { 3.40, 223 }, { 3.00, 215 }, { 2.60, 212 }, { 2.00, 210 }, { 1.85, 201 }, { 2.00, 190 }, { 2.00, 179 }, { 2.00, 161 } }, -- Level > 70 and Level <= 75
-    [ 75] = { { 5.00, 251 }, { 5.00, 244 }, { 5.00, 256 }, { 5.00, 250 }, { 5.00, 240 }, { 5.00, 230 }, { 5.00, 225 }, { 5.00, 220 }, { 4.00, 210 }, { 3.00, 200 }, { 2.00, 189 }, { 2.00, 171 } }, -- Level > 75 and Level <= 80
-    [ 80] = { { 6.00, 301 }, { 6.00, 294 }, { 6.00, 281 }, { 6.00, 275 }, { 6.00, 265 }, { 6.00, 255 }, { 6.00, 250 }, { 6.00, 245 }, { 5.00, 230 }, { 4.00, 215 }, { 3.00, 199 }, { 2.00, 181 } }, -- Level > 80 and Level <= 90
-    [ 90] = { { 7.00, 361 }, { 7.00, 354 }, { 7.00, 341 }, { 7.00, 335 }, { 7.00, 325 }, { 7.00, 315 }, { 7.00, 310 }, { 7.00, 305 }, { 6.00, 280 }, { 5.00, 255 }, { 4.00, 229 }, { 2.00, 201 } }, -- Level > 90
-    [100] = { { 1.00, 424 }, { 1.00, 417 }, { 1.00, 404 }, { 1.00, 398 }, { 1.00, 388 }, { 1.00, 378 }, { 1.00, 373 }, { 1.00, 368 }, { 1.00, 334 }, { 1.00, 300 }, { 1.00, 265 }, { 1.00, 219 } }, -- Level > 99
-}
-
--- Get the corresponding table entry to use in skillLevelTable based on level range
--- TODO: Minval for ranges 2 and 3 in the conditional is probably not necessary
----@nodiscard
----@param level integer
----@param rank integer
----@return integer
-local function getSkillLevelIndex(level, rank)
-    local rangeId = 100
-
-    if level <= 50 then
-        rangeId = 1
-    elseif level <= 60 then
-        rangeId = 50
-    elseif level <= 70 then
-        rangeId = 60
-    elseif level <= 75 and rank > 2 then -- If this is Rank A+ or A- then skip
-        rangeId = 75
-    elseif level <= 80 then -- If B+ or below do this
-        rangeId = 70
-    elseif level <= 90 then
-        rangeId = 80
-    elseif level <= 99 then
-        rangeId = 90
-    end
-
-    return rangeId
-end
-
----@nodiscard
----@param rank integer
----@param level integer
----@return integer
-function utils.getSkillLvl(rank, level)
-    local levelTableIndex = getSkillLevelIndex(level, rank)
-    local skillLevel      = (level - levelTableIndex) * skillLevelTable[levelTableIndex][rank][1] + skillLevelTable[levelTableIndex][rank][2]
-
-    return skillLevel
-end
-
----@nodiscard
----@param rank integer
----@param level integer
----@return integer
-function utils.getMobSkillLvl(rank, level)
-    if level > 50 then
-        if rank == 1 then
-            return 153 + (level - 50) * 5
-        end
-
-        if rank == 2 then
-            return 147 + (level - 50) * 4.9
-        end
-
-        if rank == 3 then
-            return 136 + (level - 50) * 4.8
-        end
-
-        if rank == 4 then
-            return 126 + (level - 50) * 4.7
-        end
-
-        if rank == 5 then
-            return 116 + (level - 50) * 4.5
-        end
-
-        if rank == 6 then
-            return 106 + (level - 50) * 4.4
-        end
-
-        if rank == 7 then
-            return 96 + (level - 50) * 4.3
-        end
-    end
-
-    if rank == 1 then
-        return 6 + (level - 1) * 3
-    end
-
-    if rank == 2 then
-        return 5 + (level - 1) * 2.9
-    end
-
-    if rank == 3 then
-        return 5 + (level - 1) * 2.8
-    end
-
-    if rank == 4 then
-        return 4 + (level - 1) * 2.7
-    end
-
-    if rank == 5 then
-        return 4 + (level - 1) * 2.5
-    end
-
-    if rank == 6 then
-        return 3 + (level - 1) * 2.4
-    end
-
-    if rank == 7 then
-        return 3 + (level - 1) * 2.3
-    end
-
-    return 0
-end
-
 -- System Strength Bonus table.  This is used by xi.mobskills.mobBreathMove, but determines weakness of
 -- a defending system, vs the attacking system.  This table is indexed by the attacker.
 -- This table can scale beyond two values, but at this time, no data has been recorded.
@@ -853,6 +722,25 @@ utils.mask =
         local fullMask = (2 ^ len) - 1
 
         return bit.band(mask, fullMask) == fullMask
+    end,
+
+    splitBits = function(bits, size)
+        local result = {}
+        local mask = bit.lshift(1, size) - 1
+
+        while bits > 0 do
+            result[#result + 1] = bit.band(bits, mask)
+            bits = bit.rshift(bits, size)
+        end
+
+        return result
+    end,
+
+    varSplit = function(option, splitBit)
+        splitBit = splitBit or 16
+        local mask = bit.lshift(1, splitBit) - 1
+
+        return bit.band(option, mask), bit.rshift(option, splitBit)
     end,
 }
 
@@ -1025,6 +913,9 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
         return
     end
 
+    -- TODO: Temporary workaround
+    ---@diagnostic disable: param-type-mismatch
+
     mob:entityAnimationPacket(disAnim)
     mob:hideName(true)
     mob:setUntargetable(true)
@@ -1032,7 +923,10 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     mob:setMagicCastingEnabled(false)
     mob:setMobAbilityEnabled(false)
     mob:setPos(pos, 0)
-    mob:setSpeed(0)
+    mob:setBaseSpeed(0)
+
+    -- TODO: Temporary workaround
+    ---@diagnostic enable: param-type-mismatch
 
     mob:timer(hideDuration, function(mobArg)
         mobArg:setPos(pos, 0)
@@ -1041,7 +935,7 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
         mobArg:setAutoAttackEnabled(true)
         mobArg:setMagicCastingEnabled(true)
         mobArg:setMobAbilityEnabled(true)
-        mobArg:setSpeed(mobSpeed)
+        mobArg:setBaseSpeed(mobSpeed)
         mobArg:entityAnimationPacket(reapAnim)
 
         if mobArg:isDead() then
@@ -1206,6 +1100,31 @@ function utils.angleToRotation(radians)
     return radians * ffxiAngleToRotationFactor
 end
 
+-- Function to calculate the cross product
+local function crossProduct(x1, y1, x2, y2)
+    return x1 * y2 - y1 * x2
+end
+
+-- Function to check if two points are on the same side of a line
+---@nodiscard
+---@param line table
+---@param pos1 table
+---@param pos2 table
+---@return boolean
+function utils.sameSideOfLine(line, pos1, pos2)
+    -- Calculate vectors
+    local v1x, v1y = pos1.x - line[1][1], pos1.z - line[1][2]
+    local v2x, v2y = pos2.x - line[1][1], pos2.z - line[1][2]
+    local lx, ly = line[2][1] - line[1][1], line[2][2] - line[1][2]
+
+    -- Calculate cross products
+    local cross1 = crossProduct(lx, ly, v1x, v1y)
+    local cross2 = crossProduct(lx, ly, v2x, v2y)
+
+    -- Check if cross products have the same sign
+    return cross1 * cross2 >= 0
+end
+
 -- Returns 24h Clock Time (example: 04:30 = 430, 21:30 = 2130)
 ---@nodiscard
 ---@return number?
@@ -1254,4 +1173,75 @@ function utils.toWords(value)
     local word0 = bit.rshift(bit.band(value, 0x0000FFFF), 0)
     local word1 = bit.rshift(bit.band(value, 0xFFFF0000), 16)
     return word0, word1
+end
+
+-- Draws in target to position if any conditions are met.
+-- Conditions must be met for "wait" seconds.
+-- Can set offset from and degrees around position to place target.
+--[[
+table =
+{
+    conditions = { boolean, ... },
+    position =
+    {
+        x = number,
+        y = number,
+        z = number,
+        rot = integer,
+    },
+    offset = number,
+    degrees = number,
+    wait = integer,
+}
+--]]
+---@param target CBaseEntity
+---@param table table
+---@return boolean
+function utils.drawIn(target, table)
+    if table.position then
+        local nextDrawIn = target:getLocalVar('[Draw-In]WaitTime')
+        local conditions = table.conditions and table.conditions or { true }
+        for _, condition in ipairs(conditions) do
+            if condition then
+                if nextDrawIn > 0 then
+                    if os.time() > nextDrawIn then
+                        local position = {}
+                        if table.position then
+                            position.x   = table.position.x and table.position.x or table.position[1]
+                            position.y   = table.position.y and table.position.y or table.position[2]
+                            position.z   = table.position.z and table.position.z or table.position[3]
+                            position.rot = table.position.rot and table.position.rot or table.position[4]
+                        end
+
+                        local offset  = table.offset and table.offset or 0
+                        local degrees = table.degrees and table.degrees or 0
+
+                        DrawIn(target, position, offset, degrees)
+                        target:setLocalVar('[Draw-In]WaitTime', 0)
+                        return true
+                    end
+
+                    return false
+                else
+                    local wait = table.wait and table.wait or 1
+                    target:setLocalVar('[Draw-In]WaitTime', os.time() + wait)
+                    return false
+                end
+            end
+        end
+    end
+
+    target:setLocalVar('[Draw-In]WaitTime', 0)
+    return false
+end
+
+function utils.defaultIfNil(inputValue, defaultValue)
+    if inputValue == nil then
+        local info = debug.getinfo(2, 'Sl')
+        print(string.format('nil value encounted at %s:%i, defaulting to %i', info.source, info.currentline, defaultValue))
+
+        return defaultValue
+    end
+
+    return inputValue
 end

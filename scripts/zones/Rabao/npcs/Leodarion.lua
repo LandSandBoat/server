@@ -4,8 +4,6 @@
 -- Involved in Quest: 20 in Pirate Years, I'll Take the Big Box, True Will
 -- !pos -50 8 40 247
 -----------------------------------
-local ID = zones[xi.zone.RABAO]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -53,9 +51,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 90 then
         player:setCharVar('illTakeTheBigBoxCS', 2)
@@ -66,8 +61,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 94 then
         player:setCharVar('illTakeTheBigBox_Timer', 0)
         player:setCharVar('illTakeTheBigBoxCS', 4)
-        player:addKeyItem(xi.ki.SEANCE_STAFF)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEANCE_STAFF)
+        npcUtil.giveKeyItem(player, xi.ki.SEANCE_STAFF)
     elseif csid == 97 then
         player:delKeyItem(xi.ki.OLD_TRICK_BOX)
         player:setCharVar('trueWillCS', 2)

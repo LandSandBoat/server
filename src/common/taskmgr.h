@@ -43,7 +43,7 @@ class CTaskMgr : public Singleton<CTaskMgr>
 {
 public:
     class CTask;
-    ~CTaskMgr();
+
     enum TASKTYPE
     {
         TASK_INTERVAL,
@@ -51,8 +51,33 @@ public:
         TASK_REMOVE,
         TASK_INVALID
     };
-    typedef int32 (*TaskFunc_t)(time_point tick, CTask*); // TODO: Get rid of C-style function pointers and add storage for lambdas
+
+    using TaskFunc_t = std::function<int32(time_point, CTask*)>;
     typedef std::priority_queue<CTask*, std::deque<CTask*>, greater_equal<CTask*>> TaskList_t;
+
+    class CTask
+    {
+    public:
+        template <typename F>
+        CTask(std::string const& name, time_point tick, std::any data, TASKTYPE type, duration interval, F&& func)
+        : m_name(name)
+        , m_type(type)
+        , m_tick(tick)
+        , m_interval(interval)
+        , m_data(data)
+        , m_func(std::forward<F>(func))
+        {
+        }
+
+        std::string m_name;
+        TASKTYPE    m_type;
+        time_point  m_tick;
+        duration    m_interval;
+        std::any    m_data;
+        TaskFunc_t  m_func;
+    };
+
+    ~CTaskMgr();
 
     TaskList_t& getTaskList()
     {
@@ -60,7 +85,12 @@ public:
     };
 
     CTask* AddTask(CTask*);
-    CTask* AddTask(std::string const& InitName, time_point InitTick, std::any InitData, TASKTYPE InitType, TaskFunc_t InitFunc, duration InitInterval = 1s);
+
+    template <typename F>
+    CTask* AddTask(std::string const& InitName, time_point InitTick, std::any InitData, TASKTYPE InitType, duration InitInterval, F&& InitFunc)
+    {
+        return AddTask(new CTask(InitName, InitTick, InitData, InitType, InitInterval, std::forward<F>(InitFunc)));
+    }
 
     duration DoTimer(time_point tick);
     void     RemoveTask(std::string const& TaskName);
@@ -70,25 +100,6 @@ protected:
 
 private:
     TaskList_t m_TaskList;
-};
-
-class CTaskMgr::CTask
-{
-public:
-    CTask(std::string const& InitName, time_point InitTick, std::any InitData, TASKTYPE InitType, TaskFunc_t InitFunc, duration InitInterval = 1s)
-    : m_name(InitName)
-    , m_type(InitType)
-    , m_tick(InitTick)
-    , m_interval(InitInterval)
-    , m_data(InitData)
-    , m_func(InitFunc){};
-
-    std::string m_name;
-    TASKTYPE    m_type;
-    time_point  m_tick;
-    duration    m_interval;
-    std::any    m_data;
-    TaskFunc_t  m_func;
 };
 
 inline bool operator<(const CTaskMgr::CTask& a, const CTaskMgr::CTask& b)

@@ -13,7 +13,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local currentHP = target:getHP()
     local damage    = currentHP
 
-    -- if have more hp then 30%, then reduce to 5%
+    -- if we have more than 30% hp, reduce to 5%
     if target:getHPP() > 30 then
         damage = currentHP * .95
     end

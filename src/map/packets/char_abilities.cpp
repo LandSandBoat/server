@@ -32,8 +32,8 @@ CCharAbilitiesPacket::CCharAbilitiesPacket(CCharEntity* PChar)
     this->setType(0xAC);
     this->setSize(0xE4);
 
-    memcpy(data + (0x04), PChar->m_WeaponSkills, 32);
-    memcpy(data + (0x44), PChar->m_Abilities, 64);
-    memcpy(data + (0x84), PChar->m_PetCommands, 64);
-    memcpy(data + (0xC4), PChar->m_TraitList, 18);
+    std::memcpy(buffer_.data() + 0x04, PChar->m_WeaponSkills, 32);
+    std::memcpy(buffer_.data() + 0x44, PChar->m_Abilities, 64);
+    std::memcpy(buffer_.data() + 0x84, PChar->m_PetCommands, 64);
+    std::memcpy(buffer_.data() + 0xC4, PChar->m_TraitList, 18);
 }

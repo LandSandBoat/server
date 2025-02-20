@@ -19,12 +19,12 @@ end
 
 itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.SYNTH_HQ_RATE, 3)
-    target:addMod(xi.mod.SYNTH_FAIL_RATE, -6)
+    target:addMod(xi.mod.SYNTH_MATERIAL_LOSS, 6)
 end
 
 itemObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.SYNTH_HQ_RATE, 3)
-    target:delMod(xi.mod.SYNTH_FAIL_RATE, -6)
+    target:delMod(xi.mod.SYNTH_MATERIAL_LOSS, 6)
 end
 
 return itemObject

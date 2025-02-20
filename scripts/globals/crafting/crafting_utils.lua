@@ -39,6 +39,19 @@ xi.crafting.guildTable =
     [xi.guild.COOKING     ] = { xi.skill.COOKING,      'guild_cooking'      },
 }
 
+xi.crafting.craftMod =
+{
+    [xi.skill.FISHING     ] = xi.mod.FISH,
+    [xi.skill.WOODWORKING ] = xi.mod.WOOD,
+    [xi.skill.SMITHING    ] = xi.mod.SMITH,
+    [xi.skill.GOLDSMITHING] = xi.mod.GOLDSMITH,
+    [xi.skill.CLOTHCRAFT  ] = xi.mod.CLOTH,
+    [xi.skill.LEATHERCRAFT] = xi.mod.LEATHER,
+    [xi.skill.BONECRAFT   ] = xi.mod.BONE,
+    [xi.skill.ALCHEMY     ] = xi.mod.ALCHEMY,
+    [xi.skill.COOKING     ] = xi.mod.COOK,
+}
+
 xi.crafting.hasJoinedGuild = function(player, guildId)
     local joinedGuildMask = player:getCharVar('Guild_Member')
 
@@ -53,4 +66,11 @@ end
 
 xi.crafting.getRealSkill = function(player, skillId)
     return math.floor(player:getCharSkillLevel(skillId) / 10)
+end
+
+xi.crafting.getTotalSkill = function(player, skillId)
+    local skill = xi.crafting.getRealSkill(player, skillId)
+    local mod   = player:getMod(xi.crafting.craftMod[skillId])
+
+    return skill + mod
 end

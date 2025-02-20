@@ -37,10 +37,10 @@ CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar)
     ref<uint8>(0x08) = PChar->GetMJob(); // Highlight the main job in Yellow
     ref<uint8>(0x0B) = PChar->GetSJob(); // Highlight the sub job in Blue
 
-    memcpy(data + (0x0C), &PChar->jobs, 22);
+    std::memcpy(buffer_.data() + 0x0C, &PChar->jobs, 22);
 
-    memcpy(data + (0x20), &PChar->stats, 14);
-    memcpy(data + (0x44), &PChar->jobs, 27);
+    std::memcpy(buffer_.data() + 0x20, &PChar->stats, 14);
+    std::memcpy(buffer_.data() + 0x44, &PChar->jobs, 27);
 
     ref<uint32>(0x3C) = PChar->health.maxhp;
     ref<uint32>(0x40) = PChar->health.maxmp;

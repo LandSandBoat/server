@@ -7,12 +7,12 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     -- NOTE: On Retail, Trigger Area 1 appears to be a cylindrical area (no Z-axis) that is quite large.  Managed to trigger
     -- it on the top floor while moving up the ramp from homepoint.
-    zone:registerTriggerArea(1, -5, -24, 18, 5, -20, 27)
-    zone:registerTriggerArea(2, 104, -42, -88, 113, -38, -77)
+    zone:registerCuboidTriggerArea(1, -5, -24, 18, 5, -20, 27)
+    zone:registerCuboidTriggerArea(2, 104, -42, -88, 113, -38, -77)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

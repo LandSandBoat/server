@@ -18,10 +18,10 @@ zones[xi.zone.CASTLE_ZVAHL_KEEP] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7161, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7162, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7182, -- Your party is unable to participate because certain members' levels are restricted.
-        CHEST_UNLOCKED                = 7238, -- You unlock the chest!
-        ITEMS_ITEMS_LA_LA             = 7247, -- You can hear a strange voice... Items, items, la la la la la
-        GOBLIN_SLIPPED_AWAY           = 7253, -- The Goblin slipped away when you were not looking...
-        HOMEPOINT_SET                 = 7296, -- Home point set!
+        CHEST_UNLOCKED                = 7241, -- You unlock the chest!
+        ITEMS_ITEMS_LA_LA             = 7250, -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY           = 7256, -- The Goblin slipped away when you were not looking...
+        HOMEPOINT_SET                 = 7299, -- Home point set!
     },
     mob =
     {
@@ -34,6 +34,14 @@ zones[xi.zone.CASTLE_ZVAHL_KEEP] =
     {
         TREASURE_CHEST = GetFirstID('Treasure_Chest'),
         CRAGGY_PILLAR  = GetTableOfIDs('Craggy_Pillar'),
+        TELE_CENTER    = GetFirstID('_4iy'),
+        TELE_NW        = GetFirstID('_4iu'),
+        TELE_SW        = GetFirstID('_4iv'),
+        TELE_NE        = GetFirstID('_4iw'),
+        TELE_SE        = GetFirstID('_4ix'),
+        TELE_N         = GetFirstID('_4is'),
+        TELE_S         = GetFirstID('_4ir'),
+        TELE_HIDDEN    = GetFirstID('_4it'),
     },
 }
 

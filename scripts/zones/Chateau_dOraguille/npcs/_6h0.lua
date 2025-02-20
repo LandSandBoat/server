@@ -39,12 +39,9 @@ local function TrustMemory(player)
     return memories
 end
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
-    local aBoysDream = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
+    local aBoysDream = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOYS_DREAM)
     local underOath = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
 
     -- "Under Oath" (PLD AF Body)
@@ -77,9 +74,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 88 then
         if player:getFreeSlotsCount() == 0 then
@@ -94,7 +88,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GALLANT_LEGGINGS) -- Gallant Leggings
             player:setCharVar('aBoysDreamCS', 0)
             player:addFame(xi.fameArea.SANDORIA, 40)
-            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOYS_DREAM)
         end
     elseif csid == 90 and option == 1 then
         player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)

@@ -635,7 +635,7 @@ namespace itemutils
 
     /************************************************************************
      *                                                                       *
-     *  Initialization of the  game objects             bbbb                 *
+     *  Initialization of the  game objects                                  *
      *                                                                       *
      ************************************************************************/
 

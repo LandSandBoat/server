@@ -13,7 +13,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.167, 1.875, xi.element.EARTH, 500)
+    local dmgCap = 500
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.10, 1.875, xi.element.EARTH, 500) + 100
+
+    if dmgmod > dmgCap then
+        dmgmod = dmgCap
+    end
 
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.EARTH, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.EARTH)

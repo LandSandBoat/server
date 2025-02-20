@@ -100,7 +100,7 @@ local itemList =
     {
         xi.item.WARRIORS_CUISSES,
         xi.item.MELEE_CYCLAS,
-        xi.item.CLERICS_BRIAULT,
+        xi.item.CLERICS_BLIAUT,
         xi.item.SORCERERS_COAT,
         xi.item.DUELISTS_TABARD,
         xi.item.ASSASSINS_CULOTTES,
@@ -3348,15 +3348,15 @@ local getItemSelection = function(player, list, idx, idxAlt1, idxAlt2)
         if debug.ENABLED and not debug.SHOWITEM then
             item = 0
         else
-            --- TODO: Refactor function to always return table, and find better way to determine behavior based on list type.
+            --- TODO: Find better way to determine behavior based on list type.
             ---@diagnostic disable-next-line: cast-local-type
             item = itemList[list][idxAlt1][idxAlt2]
         end
 
         if list == 12 then  -- Item, Quantity
-            --- TODO: Refactor function to always return table, and find better way to determine behavior based on list type.
+            --- TODO: Find better way to determine behavior based on list type.
             ---@diagnostic disable-next-line: cast-local-type
-            item = { item } -- Tabling here to save 100 pairs of { }
+            item = item
         end
     elseif
         list == 44 -- AW-Cos (Index Defaults to Female itemID, CS will automatically swap items based on gender)
@@ -3367,15 +3367,15 @@ local getItemSelection = function(player, list, idx, idxAlt1, idxAlt2)
 
         item = itemID - (gender * modifier) -- Generate the actual itemID by subtracting the shift value from the base itemID
     else
-        --- TODO: Refactor function to always return table, and find better way to determine behavior based on list type.
+        --- TODO: Find better way to determine behavior based on list type.
         ---@diagnostic disable-next-line: cast-local-type
         item = itemList[list][idx]
     end
 
-    return item
+    return { item }
 end
 
-local debugInfo = function(player, item, list, option, altIDs, idx)
+local debugInfo = function(player, items, list, option, altIDs, idx)
     local ID        = zones[player:getZoneID()]
     local idxAlt1   = altIDs[1]
     local idxAlt2   = altIDs[2]
@@ -3383,9 +3383,9 @@ local debugInfo = function(player, item, list, option, altIDs, idx)
 
     if debug.SHOWITEM then
         if keyitem == 0 then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, item)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, items[1])
         else
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, item)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, items[1])
         end
     end
 
@@ -3480,25 +3480,28 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option, npc)
         if list > 0 and idx == 0 then
             player:addKeyItem(listToKeyItem(list))
         elseif list > 0 and idx > 0 then
-            local item = getItemSelection(player, list, idx, idxAlt1, idxAlt2)
+            local items = getItemSelection(player, list, idx, idxAlt1, idxAlt2)
 
-            if debug.ENABLED then
-                debugInfo(player, item, list, option, altIDs, idx)
+            if
+                debug.ENABLED and
+                #items > 0
+            then
+                debugInfo(player, items, list, option, altIDs, idx)
             else
                 if keyItems == 0 then
-                    if npcUtil.giveItem(player, item) then
+                    if npcUtil.giveItem(player, items) then
                         player:delKeyItem(listToKeyItem(list))
                     else
                         -- TODO: CS Messaging that getting the item has failed
                     end
                 else
-                    if not player:hasKeyItem(item) then
+                    if not player:hasKeyItem(items) then
                         -- TODO: Refactor this so that we can more clearly define KI vs Item
                         ---@diagnostic disable-next-line: param-type-mismatch
-                        npcUtil.giveKeyItem(player, item)
+                        npcUtil.giveKeyItem(player, items)
                         player:delKeyItem(listToKeyItem(list))
-                    else
-                        player:messageBasic(xi.msg.basic.ALREADY_HAVE_KEY_ITEM, 0, item)
+                    elseif #items > 0 then
+                        player:messageBasic(xi.msg.basic.ALREADY_HAVE_KEY_ITEM, 0, items[1])
                         -- TODO: CS Messaging that getting the item has failed
                     end
                 end

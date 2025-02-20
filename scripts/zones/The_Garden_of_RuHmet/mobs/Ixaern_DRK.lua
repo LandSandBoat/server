@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: The Garden of Ru'Hmet
---   NM: Ix'aern DRK
+-- NM: Ix'aern DRK
 -- !pos -240 5.00 440 35
 -- !pos -280 5.00 240 35
 -- !pos -560 5.00 239 35
@@ -11,7 +11,11 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
+-- TODO: Resistances need verifying: Light_Sleep, Poison, Requiem, Terror, Dispel, Petrify
+
 entity.onMobInitialize = function(IxAernDrkMob)
+    IxAernDrkMob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+
     IxAernDrkMob:addListener('DEATH', 'AERN_DEATH', function(mob, killer)
         local timesReraised = mob:getLocalVar('AERN_RERAISES')
         if math.random (1, 10) < 10 then
@@ -27,6 +31,7 @@ entity.onMobInitialize = function(IxAernDrkMob)
             mob:setMobMod(xi.mobMod.NO_DROPS, 1)
             mob:timer(9000, function(mobArg)
                 mobArg:setHP(mob:getMaxHP())
+                mobArg:setMP(mob:getMaxMP())
                 mobArg:setAnimationSub(3)
                 mobArg:resetAI()
                 mobArg:stun(3000)
@@ -76,6 +81,18 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setAnimationSub(1)
+
+    -- Not immune to: Drain, Aspir
+    -- Resistances Confirmed
+    mob:addImmunity(xi.immunity.ELEGY)
+    mob:addImmunity(xi.immunity.STUN)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.SLOW)
+    mob:addImmunity(xi.immunity.PARALYZE)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.BLIND)
 
     xi.mix.jobSpecial.config(mob, {
         specials =

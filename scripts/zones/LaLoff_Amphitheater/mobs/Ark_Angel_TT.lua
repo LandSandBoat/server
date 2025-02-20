@@ -42,9 +42,9 @@ end
 entity.onMobFight = function(mob, target)
     if
         mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and
-        bit.band(mob:getBehaviour(), xi.behavior.STANDBACK) > 0
+        bit.band(mob:getBehavior(), xi.behavior.STANDBACK) > 0
     then
-        mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.STANDBACK)))
+        mob:setBehavior(bit.band(mob:getBehavior(), bit.bnot(xi.behavior.STANDBACK)))
         mob:setMobMod(xi.mobMod.TELEPORT_TYPE, 0)
         mob:setMobMod(xi.mobMod.SPAWN_LEASH, 0)
         mob:setSpellList(0)
@@ -52,9 +52,9 @@ entity.onMobFight = function(mob, target)
 
     if
         not mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and
-        bit.band(mob:getBehaviour(), xi.behavior.STANDBACK) == 0
+        bit.band(mob:getBehavior(), xi.behavior.STANDBACK) == 0
     then
-        mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
+        mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.STANDBACK))
         mob:setMobMod(xi.mobMod.TELEPORT_TYPE, 1)
         mob:setMobMod(xi.mobMod.SPAWN_LEASH, 22)
         mob:setSpellList(39)

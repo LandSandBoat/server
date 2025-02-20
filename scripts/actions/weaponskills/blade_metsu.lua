@@ -18,13 +18,13 @@
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    local params = {}
+    local params   = {}
     params.numHits = 1
-    params.ftpMod = { 3.0, 3.0, 3.0 }
+    params.ftpMod  = { 3, 3, 3 }
     params.dex_wsc = 0.6
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 5.0, 5.0, 5.0 }
+        params.ftpMod  = { 5, 5, 5 }
         params.dex_wsc = 0.8
     end
 
@@ -32,12 +32,13 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.RELIC)
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
-    if damage > 0 then
-        if not target:hasStatusEffect(xi.effect.PARALYSIS) then
-            local duration = 60 * applyResistanceAddEffect(player, target, xi.element.ICE, 0)
-            target:addStatusEffect(xi.effect.PARALYSIS, 10, 0, duration)
-        end
-    end
+
+    -- Handle status effect
+    local effectId      = xi.effect.PARALYSIS
+    local actionElement = xi.element.ICE
+    local power         = 10
+    local duration      = math.floor(60 * applyResistanceAddEffect(player, target, actionElement, 0))
+    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage
 end

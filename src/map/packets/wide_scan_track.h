@@ -31,7 +31,7 @@ class CBaseEntity;
 class CWideScanTrackPacket : public CBasicPacket
 {
 public:
-    CWideScanTrackPacket(CBaseEntity* PEntity);
+    CWideScanTrackPacket(const CBaseEntity* PEntity);
 };
 
 #endif

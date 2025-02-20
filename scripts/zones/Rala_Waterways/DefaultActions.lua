@@ -9,6 +9,7 @@ return {
     ['Royal_Sepulcher']      = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Saldinor']             = { event = 329 },
     ['Sluice_Gate_6']        = { messageSpecial = ID.text.NOTHING_HAPPENS },
+    ['Sluice_Gate_7']        = { event = 362 },
     ['Yeggha_Dolashi']       = { event = 319 },
     -- TODO: ['Storage_Container'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
 }

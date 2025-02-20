@@ -519,14 +519,17 @@ struct zoneLine_t
 class CBasicPacket;
 class CBaseEntity;
 class CCharEntity;
+class CMobEntity;
 class CNpcEntity;
+class CPetEntity;
 class CBattleEntity;
 class CTrustEntity;
 class CTreasurePool;
 class CZoneEntities;
 
-typedef std::list<CTriggerArea*> triggerAreaList_t;
-typedef std::list<zoneLine_t*>   zoneLineList_t;
+typedef std::list<std::unique_ptr<ITriggerArea>> triggerAreaList_t;
+
+typedef std::list<zoneLine_t*> zoneLineList_t;
 
 typedef std::map<uint16, zoneWeather_t> weatherVector_t;
 
@@ -586,8 +589,8 @@ public:
     virtual void SpawnPETs(CCharEntity* PChar);
     virtual void SpawnNPCs(CCharEntity* PChar);
     virtual void SpawnTRUSTs(CCharEntity* PChar);
-    virtual void SpawnMoogle(CCharEntity* PChar);    // Spawn Moogle in Moghouse in zone (if applicable)
-    virtual void SpawnTransport(CCharEntity* PChar); // Spawn ships/boats in the zone
+    virtual void SpawnConditionalNPCs(CCharEntity* PChar); // Spawn Moogle in Moghouse in zone (if applicable)
+    virtual void SpawnTransport(CCharEntity* PChar);       // Spawn ships/boats in the zone
     void         SavePlayTime();
 
     virtual void WideScan(CCharEntity* PChar, uint16 radius);
@@ -600,19 +603,15 @@ public:
     virtual void InsertPET(CBaseEntity* PPet);
     virtual void InsertTRUST(CBaseEntity* PTrust);
 
-    virtual void DeletePET(CBaseEntity* PPet);
-    virtual void DeleteTRUST(CBaseEntity* PTrust);
-
     virtual void FindPartyForMob(CBaseEntity* PEntity);
     virtual void TransportDepart(uint16 boundary, uint16 zone);  // Collect passengers if ship/boat is departing
     virtual void updateCharLevelRestriction(CCharEntity* PChar); // Removes the character's level restriction. If the zone has a level restriction, it is applied after it is removed.
 
-    void InsertTriggerArea(CTriggerArea* triggerArea);
+    void InsertTriggerArea(std::unique_ptr<ITriggerArea>&& triggerArea); // Add an active area to the zone
 
     virtual void TOTDChange(TIMETYPE TOTD);
-    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*);
+    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, const std::unique_ptr<CBasicPacket>&);
 
-    virtual void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
     virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
 
     bool           IsZoneActive() const;
@@ -627,9 +626,14 @@ public:
     virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> const& func);
     virtual void ForEachMob(std::function<void(CMobEntity*)> const& func);
     virtual void ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func);
+    virtual void ForEachNpc(std::function<void(CNpcEntity*)> const& func);
+    virtual void ForEachNpcInstance(CBaseEntity* PEntity, std::function<void(CNpcEntity*)> const& func);
     virtual void ForEachTrust(std::function<void(CTrustEntity*)> const& func);
     virtual void ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> const& func);
-    virtual void ForEachNpc(std::function<void(CNpcEntity*)> const& func);
+    virtual void ForEachPet(std::function<void(CPetEntity*)> const& func);
+    virtual void ForEachPetInstance(CBaseEntity* PEntity, std::function<void(CPetEntity*)> const& func);
+    virtual void ForEachAlly(std::function<void(CMobEntity*)> const& func);
+    virtual void ForEachAllyInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func);
 
     CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
     virtual ~CZone();

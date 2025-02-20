@@ -7,6 +7,10 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     if player:getCharVar('TheRequiemCS') == 3 then
         player:setCharVar('TheRequiemYumKilled', 1)

@@ -149,9 +149,6 @@ INSERT INTO `item_mods_pet` VALUES (11497,384,500,0); -- All Pets - HASTE_GEAR: 
 -- Fidelity Mantle
 INSERT INTO `item_mods_pet` VALUES (11531,73,3,0); -- All Pets - STORETP: 3
 
--- Wayang Kulit Mantle
-INSERT INTO `item_mods_pet` VALUES (11536,101,2,3); -- Automaton - AUTO_MELEE_SKILL: 2
-
 -- Ferine Mantle
 INSERT INTO `item_mods_pet` VALUES (11555,25,10,0); -- All Pets - ACC: 10
 

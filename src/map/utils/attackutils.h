@@ -38,6 +38,6 @@ namespace attackutils
     bool IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender); // Is the attack parried.
     bool IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender); // Is the attack guarded.
     bool IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender); // Is the attack blocked.
-};                                                                      // namespace attackutils
+}; // namespace attackutils
 
 #endif

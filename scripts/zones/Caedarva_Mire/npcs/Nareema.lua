@@ -4,13 +4,8 @@
 -- Type: Assault
 -- !pos 518.387 -24.707 -467.297 79
 -----------------------------------
-local ID = zones[xi.zone.CAEDARVA_MIRE]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
-
-entity.onTrade = function(player, npc, trade)
-end
 
 entity.onTrigger = function(player, npc)
     local toauMission = player:getCurrentMission(xi.mission.log_id.TOAU)
@@ -34,15 +29,11 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     -- ASSAULT
     if csid == 149 and option == 1 then
         player:delCurrency('imperial_standing', 50)
-        player:addKeyItem(xi.ki.ASSAULT_ARMBAND)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ASSAULT_ARMBAND)
+        npcUtil.giveKeyItem(player, xi.ki.ASSAULT_ARMBAND)
     end
 end
 

@@ -7,9 +7,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local anUndyingPledge = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
 
@@ -38,9 +35,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(231) -- Standard Conversation
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

@@ -27,4 +27,4 @@ assignees:
 
 ## Expected behavior
 
-<!-- Add expected behaviour here -->
+<!-- Add expected behavior here -->

@@ -66,7 +66,7 @@ CActionPacket::CActionPacket(action_t& action)
         break;
         case ACTION_WEAPONSKILL_FINISH:
         {
-            packBitsBE(data, action.actionid, 86, 16);
+            packBitsBE(buffer_.data(), action.actionid, 86, 16);
         }
         break;
         case ACTION_JOBABILITY_START:
@@ -82,7 +82,7 @@ CActionPacket::CActionPacket(action_t& action)
             ActionType = ACTION_WEAPONSKILL_START;
 
             // Magic numbers?
-            packBitsBE(data, 28787, 86, 16);
+            packBitsBE(buffer_.data(), 28787, 86, 16);
             ref<uint8>(0x0D) = 0x5D;
             ref<uint8>(0x0E) = 0x19;
         }
@@ -90,13 +90,13 @@ CActionPacket::CActionPacket(action_t& action)
         case ACTION_DANCE:
         case ACTION_JOBABILITY_FINISH:
         {
-            packBitsBE(data, action.actionid, 86, 10);
-            packBitsBE(data, action.recast, 118, 10);
+            packBitsBE(buffer_.data(), action.actionid, 86, 10);
+            packBitsBE(buffer_.data(), action.recast, 118, 10);
         }
         break;
         case ACTION_RUN_WARD_EFFUSION:
         {
-            packBitsBE(data, action.actionid, 86, 10);
+            packBitsBE(buffer_.data(), action.actionid, 86, 10);
         }
         break;
         case ACTION_WEAPONSKILL_START:
@@ -128,7 +128,7 @@ CActionPacket::CActionPacket(action_t& action)
             uint16 id = action.actionid;
 
             // higher number of bits than anything else that we know of. CAP OF 8191 (2300ish is abyssea tp moves)!
-            packBitsBE(data, id, 86, 13);
+            packBitsBE(buffer_.data(), id, 86, 13);
         }
         break;
         case ACTION_ITEM_START:
@@ -153,7 +153,7 @@ CActionPacket::CActionPacket(action_t& action)
         break;
         case ACTION_ITEM_FINISH:
         {
-            packBitsBE(data, action.actionid, 86, 16);
+            packBitsBE(buffer_.data(), action.actionid, 86, 16);
         }
         break;
         case ACTION_RANGED_START:
@@ -195,48 +195,48 @@ CActionPacket::CActionPacket(action_t& action)
         case ACTION_MAGIC_START:
         {
             // FourCC command "ca" - cast
-            packBitsBE(data, 0x6163, 86, 16);
+            packBitsBE(buffer_.data(), 0x6163, 86, 16);
 
             switch (action.spellgroup)
             {
                 case SPELLGROUP_WHITE:
                 {
-                    packBitsBE(data, 0x6877, 102, 16); // "wh" - white magic
+                    packBitsBE(buffer_.data(), 0x6877, 102, 16); // "wh" - white magic
                 }
                 break;
                 case SPELLGROUP_BLACK:
                 {
-                    packBitsBE(data, 0x6B62, 102, 16); // "bk" - black magic
+                    packBitsBE(buffer_.data(), 0x6B62, 102, 16); // "bk" - black magic
                 }
                 break;
                 case SPELLGROUP_BLUE:
                 {
-                    packBitsBE(data, 0x6C62, 102, 16); // "bl" - blue magic
+                    packBitsBE(buffer_.data(), 0x6C62, 102, 16); // "bl" - blue magic
                 }
                 break;
                 case SPELLGROUP_SONG:
                 {
-                    packBitsBE(data, 0x6F73, 102, 16); // "so" - song
+                    packBitsBE(buffer_.data(), 0x6F73, 102, 16); // "so" - song
                 }
                 break;
                 case SPELLGROUP_NINJUTSU:
                 {
-                    packBitsBE(data, 0x6A6E, 102, 16); // "nj" - ninjutsu
+                    packBitsBE(buffer_.data(), 0x6A6E, 102, 16); // "nj" - ninjutsu
                 }
                 break;
                 case SPELLGROUP_SUMMONING:
                 {
-                    packBitsBE(data, 0x6D73, 102, 16); // "sm" - summoning magic
+                    packBitsBE(buffer_.data(), 0x6D73, 102, 16); // "sm" - summoning magic
                 }
                 break;
                 case SPELLGROUP_GEOMANCY:
                 {
-                    packBitsBE(data, 0x6567, 102, 16); // "ge" - geomancy
+                    packBitsBE(buffer_.data(), 0x6567, 102, 16); // "ge" - geomancy
                 }
                 break;
                 case SPELLGROUP_TRUST:
                 {
-                    packBitsBE(data, 0x6166, 102, 16); // "fa" - faith aka trust
+                    packBitsBE(buffer_.data(), 0x6166, 102, 16); // "fa" - faith aka trust
                 }
                 break;
                 default:
@@ -248,58 +248,58 @@ CActionPacket::CActionPacket(action_t& action)
         break;
         case ACTION_MAGIC_FINISH:
         {
-            packBitsBE(data, action.actionid, 86, 10);
+            packBitsBE(buffer_.data(), action.actionid, 86, 10);
             // either this way or enumerate all recast timers and compare the spell id.
-            packBitsBE(data, action.recast, 118, 10);
+            packBitsBE(buffer_.data(), action.recast, 118, 10);
         }
         break;
         case ACTION_MAGIC_INTERRUPT:
         {
-            packBitsBE(data, action.recast, 118, 16);
+            packBitsBE(buffer_.data(), action.recast, 118, 16);
 
             // FourCC command "sp" - interrupt
-            packBitsBE(data, 0x7073, 86, 16);
+            packBitsBE(buffer_.data(), 0x7073, 86, 16);
 
             switch (action.spellgroup)
             {
                 case SPELLGROUP_WHITE:
                 {
-                    packBitsBE(data, 0x6877, 102, 16); // "wh" - white magic
+                    packBitsBE(buffer_.data(), 0x6877, 102, 16); // "wh" - white magic
                 }
                 break;
                 case SPELLGROUP_BLACK:
                 {
-                    packBitsBE(data, 0x6B62, 102, 16); // "bk" - black magic
+                    packBitsBE(buffer_.data(), 0x6B62, 102, 16); // "bk" - black magic
                 }
                 break;
                 case SPELLGROUP_BLUE:
                 {
-                    packBitsBE(data, 0x6C62, 102, 16); // "bl" - blue magic
+                    packBitsBE(buffer_.data(), 0x6C62, 102, 16); // "bl" - blue magic
                 }
                 break;
                 case SPELLGROUP_SONG:
                 {
-                    packBitsBE(data, 0x6F73, 102, 16); // "so" - song
+                    packBitsBE(buffer_.data(), 0x6F73, 102, 16); // "so" - song
                 }
                 break;
                 case SPELLGROUP_NINJUTSU:
                 {
-                    packBitsBE(data, 0x6A6E, 102, 16); // "nj" - ninjutsu
+                    packBitsBE(buffer_.data(), 0x6A6E, 102, 16); // "nj" - ninjutsu
                 }
                 break;
                 case SPELLGROUP_SUMMONING:
                 {
-                    packBitsBE(data, 0x6D73, 102, 16); // "sm" - summoning magic
+                    packBitsBE(buffer_.data(), 0x6D73, 102, 16); // "sm" - summoning magic
                 }
                 break;
                 case SPELLGROUP_GEOMANCY:
                 {
-                    packBitsBE(data, 0x6567, 102, 16); // "ge" - geomancy
+                    packBitsBE(buffer_.data(), 0x6567, 102, 16); // "ge" - geomancy
                 }
                 break;
                 case SPELLGROUP_TRUST:
                 {
-                    packBitsBE(data, 0x6166, 102, 16); // "fa" - faith aka trust
+                    packBitsBE(buffer_.data(), 0x6166, 102, 16); // "fa" - faith aka trust
                 }
                 break;
                 default:
@@ -316,7 +316,7 @@ CActionPacket::CActionPacket(action_t& action)
         }
     }
 
-    uint32 bitOffset = packBitsBE(data, ActionType, 82, 4);
+    uint32 bitOffset = packBitsBE(buffer_.data(), ActionType, 82, 4);
     auto   targets   = 0;
     auto   actions   = 0;
 
@@ -328,26 +328,26 @@ CActionPacket::CActionPacket(action_t& action)
         {
             break;
         }
-        bitOffset = packBitsBE(data, list.ActionTargetID, bitOffset, 32);
-        bitOffset = packBitsBE(data, list.actionTargets.size(), bitOffset, 4);
+        bitOffset = packBitsBE(buffer_.data(), list.ActionTargetID, bitOffset, 32);
+        bitOffset = packBitsBE(buffer_.data(), list.actionTargets.size(), bitOffset, 4);
 
         for (auto&& target : list.actionTargets)
         {
-            bitOffset = packBitsBE(data, static_cast<uint64>(target.reaction), bitOffset, 5);   // Physical reaction to damage
-            bitOffset = packBitsBE(data, target.animation, bitOffset, 12);                      // animation ID
-            bitOffset = packBitsBE(data, static_cast<uint64>(target.speceffect), bitOffset, 7); // specialEffect
-            bitOffset = packBitsBE(data, target.knockback, bitOffset, 3);                       // knockback amount (mobskill only)
-            bitOffset = packBitsBE(data, target.param, bitOffset, 17);                          // message parameter (damage/healing)
-            bitOffset = packBitsBE(data, target.messageID, bitOffset, 10);                      // message
-            bitOffset = packBitsBE(data, static_cast<uint64>(target.modifier), bitOffset, 31);  // "Resist!", Immunobreak, MB for Swipe/Lunge, Cover message modifiers.
-                                                                                                // 4 bits are currently used, with the other bits unknown
+            bitOffset = packBitsBE(buffer_.data(), static_cast<uint64>(target.reaction), bitOffset, 5);   // Physical reaction to damage
+            bitOffset = packBitsBE(buffer_.data(), target.animation, bitOffset, 12);                      // animation ID
+            bitOffset = packBitsBE(buffer_.data(), static_cast<uint64>(target.speceffect), bitOffset, 7); // specialEffect
+            bitOffset = packBitsBE(buffer_.data(), target.knockback, bitOffset, 3);                       // knockback amount (mobskill only)
+            bitOffset = packBitsBE(buffer_.data(), target.param, bitOffset, 17);                          // message parameter (damage/healing)
+            bitOffset = packBitsBE(buffer_.data(), target.messageID, bitOffset, 10);                      // message
+            bitOffset = packBitsBE(buffer_.data(), static_cast<uint64>(target.modifier), bitOffset, 31);  // "Resist!", Immunobreak, MB for Swipe/Lunge, Cover message modifiers.
+                                                                                                          // 4 bits are currently used, with the other bits unknown
 
             if (target.additionalEffect != SUBEFFECT_NONE)
             {
-                bitOffset = packBitsBE(data, 1, bitOffset, 1);
-                bitOffset = packBitsBE(data, target.additionalEffect, bitOffset, 10);
-                bitOffset = packBitsBE(data, target.addEffectParam, bitOffset, 17);
-                bitOffset = packBitsBE(data, target.addEffectMessage, bitOffset, 10);
+                bitOffset = packBitsBE(buffer_.data(), 1, bitOffset, 1);
+                bitOffset = packBitsBE(buffer_.data(), target.additionalEffect, bitOffset, 10);
+                bitOffset = packBitsBE(buffer_.data(), target.addEffectParam, bitOffset, 17);
+                bitOffset = packBitsBE(buffer_.data(), target.addEffectMessage, bitOffset, 10);
             }
             else
             {
@@ -355,10 +355,10 @@ CActionPacket::CActionPacket(action_t& action)
             }
             if (target.spikesEffect != SUBEFFECT_NONE)
             {
-                bitOffset = packBitsBE(data, 1, bitOffset, 1);
-                bitOffset = packBitsBE(data, target.spikesEffect, bitOffset, 10);
-                bitOffset = packBitsBE(data, target.spikesParam, bitOffset, 14);
-                bitOffset = packBitsBE(data, target.spikesMessage, bitOffset, 10);
+                bitOffset = packBitsBE(buffer_.data(), 1, bitOffset, 1);
+                bitOffset = packBitsBE(buffer_.data(), target.spikesEffect, bitOffset, 10);
+                bitOffset = packBitsBE(buffer_.data(), target.spikesParam, bitOffset, 14);
+                bitOffset = packBitsBE(buffer_.data(), target.spikesMessage, bitOffset, 10);
             }
             else
             {

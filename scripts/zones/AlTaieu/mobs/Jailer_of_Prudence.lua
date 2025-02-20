@@ -11,6 +11,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
 
     mob:addListener('WEAPONSKILL_BEFORE_USE', 'JOP_WS_MIRROR', function(mobArg, skillid)
         if mobArg:getLocalVar('mirrored_ws') == 1 then

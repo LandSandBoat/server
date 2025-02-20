@@ -15,9 +15,6 @@ entity.onTrigger = function(player, npc)
     player:startEvent(1016)
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 1016 and option == 0xFFF00FF then -- Show the Mog House menu
         -- Print the expire time for mog locker if exists
@@ -31,7 +28,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
 
         -- Show the mog house menu
-        player:sendMenu(1)
+        player:sendMenu(xi.menuType.MOOGLE)
 
     elseif csid == 1016 and option == 0xFFE00FF then -- Buy/Sell Things
         local stock =

@@ -242,6 +242,9 @@ end
         "Try trading again after sorting your inventory"
         instead of
         "Come back again after sorting your inventory"
+    multiple (boolean default false)
+        if set, force message type as multiples version
+        eg. You obtain 1 chunk of rock salt!
 --]]
 
 ---@class itemQuantityEntry : { [xi.item]: xi.item, [integer]: integer }
@@ -251,7 +254,7 @@ end
 
 ---@param player CBaseEntity
 ---@param items xi.item|itemQuantityEntry|multipleItemList
----@param params { silent: boolean?, fromTrade: boolean? }?
+---@param params { silent: boolean?, fromTrade: boolean?, multiple: boolean? }?
 ---@return boolean
 function npcUtil.giveItem(player, items, params)
     params = params or {}
@@ -294,7 +297,10 @@ function npcUtil.giveItem(player, items, params)
     for _, v in pairs(givenItems) do
         if player:addItem(v[1], v[2], true) then
             if not params.silent and not messagedItems[v[1]] then
-                if v[2] > 1 then
+                if
+                    v[2] > 1 or
+                    params.multiple
+                then
                     player:messageSpecial(ID.text.ITEM_OBTAINED + 9, v[1], v[2])
                 else
                     player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
@@ -489,12 +495,12 @@ end
             itemParams = {              -- see npcUtil.giveItem for formats
                 fromTrade = true,
             },
-            ki = xi.ki.ZERUHN_REPORT,           -- see npcUtil.giveKeyItem for formats
+            keyItem = xi.ki.ZERUHN_REPORT,           -- see npcUtil.giveKeyItem for formats
             fameArea = xi.fameArea.NORG, -- Required for Fame to be applied
             fame = 120,                         -- fame defaults to 30 if not set
             bayld = 500,
             gil = 200,
-            xp = 1000,
+            exp = 1000,
             title = xi.title.ENTRANCE_DENIED,
             var = { 'foo1', 'foo2' }      -- variable(s) to set to 0. string or table
         })
@@ -502,7 +508,7 @@ end
 
 ---@class rewardParam
 ---@field item xi.item|itemQuantityEntry|multipleItemList?
----@field itemParams { silent: boolean?, fromTrade: boolean? }?
+---@field itemParams { silent: boolean?, fromTrade: boolean?, multiple: boolean? }?
 ---@field keyItem xi.keyItem|{ [integer]: xi.keyItem }?
 ---@field ki xi.keyItem|{ [integer]: xi.keyItem }?
 ---@field fame integer?
@@ -511,7 +517,7 @@ end
 ---@field gil integer?
 ---@field title xi.title?
 ---@field var string|string[]?
----@field xp integer?
+---@field exp integer?
 
 ---@param player CBaseEntity
 ---@param params rewardParam
@@ -530,9 +536,7 @@ function npcUtil.giveReward(player, params)
     end
 
     -- key item(s), fame, gil, bayld, xp, and title
-    if params['ki'] ~= nil then
-        npcUtil.giveKeyItem(player, params['ki'])
-    elseif params['keyItem'] ~= nil then
+    if params['keyItem'] ~= nil then
         npcUtil.giveKeyItem(player, params['keyItem'])
     end
 
@@ -558,8 +562,8 @@ function npcUtil.giveReward(player, params)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, params['bayld'] * xi.settings.main.BAYLD_RATE)
     end
 
-    if params['xp'] ~= nil and type(params['xp']) == 'number' then
-        player:addExp(params['xp'] * xi.settings.main.EXP_RATE)
+    if params['exp'] ~= nil and type(params['exp']) == 'number' then
+        player:addExp(params['exp'] * xi.settings.main.EXP_RATE)
     end
 
     if params['title'] ~= nil then
@@ -594,12 +598,12 @@ end
             itemParams = {              -- see npcUtil.giveItem for formats
                 fromTrade = true,
             },
-            ki = xi.ki.ZERUHN_REPORT,           -- see npcUtil.giveKeyItem for formats
+            keyItem = xi.ki.ZERUHN_REPORT,           -- see npcUtil.giveKeyItem for formats
             fameArea = xi.fameArea.NORG, -- Required for Fame to be applied
             fame = 120,                         -- fame defaults to 30 if not set
             bayld = 500,
             gil = 200,
-            xp = 1000,
+            exp = 1000,
             title = xi.title.ENTRANCE_DENIED,
             var = { 'foo1', 'foo2' }      -- variable(s) to set to 0. string or table
         })
@@ -624,9 +628,7 @@ function npcUtil.completeQuest(player, area, quest, params)
     end
 
     -- key item(s), fame, gil, bayld, xp, and title
-    if params['ki'] ~= nil then
-        npcUtil.giveKeyItem(player, params['ki'])
-    elseif params['keyItem'] ~= nil then
+    if params['keyItem'] ~= nil then
         npcUtil.giveKeyItem(player, params['keyItem'])
     end
 
@@ -650,12 +652,8 @@ function npcUtil.completeQuest(player, area, quest, params)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, params['bayld'] * xi.settings.main.BAYLD_RATE)
     end
 
-    -- TODO: Find a more elegant way to handle this, but allow for xp vs exp keys.  This should
-    -- be one or the other, not both.
     if params['exp'] ~= nil and type(params['exp']) == 'number' then
         player:addExp(params['exp'] * xi.settings.main.EXP_RATE)
-    elseif params['xp'] ~= nil and type(params['xp']) == 'number' then
-        player:addExp(params['xp'] * xi.settings.main.EXP_RATE)
     end
 
     if params['title'] ~= nil then
@@ -704,10 +702,10 @@ end
             itemParams = {              -- see npcUtil.giveItem for formats
                 fromTrade = true,
             },
-            ki = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
+            keyItem = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
             bayld = 500,
-            gil = 200,
-            xp = 1000,
+            gil   = 200,
+            exp   = 1000,
             title = xi.title.ENTRANCE_DENIED,
         })
 --]]
@@ -725,9 +723,7 @@ function npcUtil.completeMission(player, logId, missionId, params)
     end
 
     -- key item(s), fame, gil, bayld, xp, and title
-    if params['ki'] ~= nil then
-        npcUtil.giveKeyItem(player, params['ki'])
-    elseif params['keyItem'] ~= nil then
+    if params['keyItem'] ~= nil then
         npcUtil.giveKeyItem(player, params['keyItem'])
     end
 
@@ -741,12 +737,8 @@ function npcUtil.completeMission(player, logId, missionId, params)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, params['bayld'] * xi.settings.main.BAYLD_RATE)
     end
 
-    -- TODO: Find a more elegant way to handle this, but allow for xp vs exp keys.  This should
-    -- be one or the other, not both.
     if params['exp'] ~= nil and type(params['exp']) == 'number' then
         player:addExp(params['exp'] * xi.settings.main.EXP_RATE)
-    elseif params['xp'] ~= nil and type(params['xp']) == 'number' then
-        player:addExp(params['xp'] * xi.settings.main.EXP_RATE)
     end
 
     if params['title'] ~= nil then

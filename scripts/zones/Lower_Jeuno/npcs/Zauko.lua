@@ -10,9 +10,6 @@ local ID = zones[xi.zone.LOWER_JEUNO]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local hour              = VanadielHour()
     local playerOnQuestId   = GetServerVariable('[JEUNO]CommService')
@@ -96,7 +93,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             -- repeat victory. offer membership card.
             params.fame = 15
             if option == 1 then
-                params.ki = xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD
+                params.keyItem = xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD
             end
         end
 

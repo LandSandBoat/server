@@ -50,5 +50,5 @@ CMenuConfigPacket::CMenuConfigPacket(CCharEntity* PChar)
 
     std::memcpy(&packet.PartyLanguages, &PChar->search.language, sizeof(packet.PartyLanguages));
 
-    std::memcpy(data, &packet, sizeof(GP_SERV_CONFIG));
+    std::memcpy(buffer_.data(), &packet, sizeof(GP_SERV_CONFIG));
 }

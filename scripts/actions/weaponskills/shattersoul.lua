@@ -20,20 +20,23 @@
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    local params = {}
+    local params   = {}
     params.numHits = 3
-    params.ftpMod = { 1.375, 1.375, 1.375 }
+    params.ftpMod  = { 1.375, 1.375, 1.375 }
     params.int_wsc = player:getMerit(xi.merit.SHATTERSOUL) * 0.17
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.int_wsc = 0.7 + (player:getMerit(xi.merit.SHATTERSOUL) * 0.03)
+        params.int_wsc = 0.7 + player:getMerit(xi.merit.SHATTERSOUL) * 0.03
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if damage > 0 and not target:hasStatusEffect(xi.effect.MAGIC_DEF_DOWN) then
-        target:addStatusEffect(xi.effect.MAGIC_DEF_DOWN, 10, 0, 120)
-    end
+    -- Handle status effect
+    local effectId      = xi.effect.MAGIC_DEF_DOWN
+    local actionElement = xi.element.THUNDER
+    local power         = 10
+    local duration      = math.floor(120 * applyResistanceAddEffect(player, target, actionElement, 0))
+    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage
 end

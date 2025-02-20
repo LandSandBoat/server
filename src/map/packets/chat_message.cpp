@@ -51,6 +51,6 @@ CChatMessagePacket::CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE Mes
 
     ref<uint16>(0x06) = PChar->getZone();
 
-    memcpy(data + (0x08), &name[0], std::min(name.size(), (size_t)0xF));
-    memcpy(data + (0x17), &message[0], buffSize);
+    std::memcpy(buffer_.data() + 0x08, &name[0], std::min(name.size(), (size_t)0xF));
+    std::memcpy(buffer_.data() + 0x17, &message[0], buffSize);
 }

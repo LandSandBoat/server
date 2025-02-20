@@ -23,10 +23,4 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.SKY_GOD_OFFSET + 1)
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
-end
-
 return entity

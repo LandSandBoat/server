@@ -1,15 +1,11 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Dohdjuma
--- Standard Merchant NPC
 -----------------------------------
 local ID = zones[xi.zone.SELBINA]
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
-
-entity.onTrade = function(player, npc, trade)
-end
 
 entity.onTrigger = function(player, npc)
     local stock =
@@ -29,12 +25,6 @@ entity.onTrigger = function(player, npc)
 
     player:showText(npc, ID.text.DOHDJUMA_SHOP_DIALOG)
     xi.shop.general(player, stock)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

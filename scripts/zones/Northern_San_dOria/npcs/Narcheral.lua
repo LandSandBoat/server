@@ -26,7 +26,7 @@ entity.onTrade = function(player, npc, trade)
             -- Trade Yagudo Holy Water & Moccasins
             player:startEvent(691) -- Finish quest "Prelude of Black and White"
         end
-    elseif player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION) == xi.questStatus.QUEST_ACCEPTED then
+    elseif player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJES_DECISION) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.TAVNAZIAN_MASK, 1) and
             trade:getItemCount() == 1
@@ -54,9 +54,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 689 then
         player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND)
@@ -82,15 +79,15 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
     elseif csid == 692 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.HEALERS_BRIAULT) -- Healer's Briault
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.HEALERS_BLIAUT) -- Healer's Bliaut
         else
             player:addTitle(xi.title.PARAGON_OF_WHITE_MAGE_EXCELLENCE)
             player:setCharVar('pieujesDecisionCS', 0)
-            player:addItem(xi.item.HEALERS_BRIAULT)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.HEALERS_BRIAULT) -- Healer's Briault
+            player:addItem(xi.item.HEALERS_BLIAUT)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.HEALERS_BLIAUT) -- Healer's Bliaut
             player:tradeComplete()
             player:addFame(xi.fameArea.SANDORIA, 60)
-            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION)
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJES_DECISION)
         end
     end
 end

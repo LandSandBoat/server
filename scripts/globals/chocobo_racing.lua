@@ -163,7 +163,7 @@ local startRaceImpl = function(player)
             -- 0x7: Mithra
             local races = { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7 }
 
-            -- Colours:
+            -- Colors:
             -- 0x0: Yellow
             -- 0x1: Yellow
             -- 0x2: Black
@@ -173,11 +173,11 @@ local startRaceImpl = function(player)
             -- 0x6: Red
             -- 0x7: Red
             -- 0x8: Green
-            local colours = { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8 }
+            local colors = { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8 }
 
             for _, offset in ipairs({ 0x0C, 0x18, 0x24, 0x30, 0x3C, 0x48, 0x54, 0x60 }) do
                 local race   = utils.randomEntry(races)
-                local colour = utils.randomEntry(colours)
+                local color = utils.randomEntry(colors)
 
                 -- Remember Lua is 1-offset!
                 packet[offset + 0 + 1] = 0x0E
@@ -187,7 +187,7 @@ local startRaceImpl = function(player)
                 packet[offset + 4 + 1] = 0x00
                 packet[offset + 5 + 1] = 0x00
                 packet[offset + 6 + 1] = 0x08
-                packet[offset + 7 + 1] = bit.lshift(race, 4) + colour
+                packet[offset + 7 + 1] = bit.lshift(race, 4) + color
                 packet[offset + 8 + 1] = 0x41
                 packet[offset + 9 + 1] = 0x00
                 packet[offset + 10 + 1] = 0x00

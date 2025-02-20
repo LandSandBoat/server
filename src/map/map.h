@@ -26,6 +26,7 @@
 
 #include "common/blowfish.h"
 #include "common/kernel.h"
+#include "common/md52.h"
 #include "common/mmo.h"
 #include "common/socket.h"
 #include "common/sql.h"
@@ -83,7 +84,7 @@ struct map_session_data_t
         {
             if (blowfish.hash[i] == 0)
             {
-                memset(blowfish.hash + i, 0, 16 - i);
+                std::memset(blowfish.hash + i, 0, 16 - i);
                 break;
             }
         }
@@ -110,6 +111,7 @@ extern in_addr map_ip;
 extern uint16  map_port;
 
 extern inline map_session_data_t* mapsession_getbyipp(uint64 ipp);
+extern inline map_session_data_t* mapsession_getbychar(CCharEntity* PChar);
 extern inline map_session_data_t* mapsession_createsession(uint32 ip, uint16 port);
 
 extern std::unique_ptr<SqlConnection> _sql;

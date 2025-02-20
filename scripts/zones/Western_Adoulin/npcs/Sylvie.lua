@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin (256)
 --  NPC: Sylvie
--- Type: NPC
 -- Starts Dances with Luopans
 -- !pos 78.094 32.000 135.725
 -----------------------------------

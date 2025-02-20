@@ -7,8 +7,7 @@ local effectObject = {}
 effectObject.onEffectGain = function(target, effect)
     --reduce HP and MP by the power amount. Add 100% slow
     --NOTE: The power amount dictates the amount to REDUCE MAX VALUES BY. E.g. Power=75 means 'reduce max hp/mp by 75%'
-    target:addMod(xi.mod.HPP, -75)
-    target:addMod(xi.mod.MPP, -75)
+    target:addMod(xi.mod.WEAKNESS_PCT, -75)
 
     -- 100% Slow -- FIXME: Weakness should probably be its own source of slow
     target:addMod(xi.mod.HASTE_MAGIC, -10000)
@@ -25,8 +24,7 @@ end
 
 effectObject.onEffectLose = function(target, effect)
     --restore HP and MP to its former state. Remove 100% slow
-    target:delMod(xi.mod.HPP, -75)
-    target:delMod(xi.mod.MPP, -75)
+    target:delMod(xi.mod.WEAKNESS_PCT, -75)
     target:delMod(xi.mod.HASTE_MAGIC, -10000)
 
     if effect:getPower() > 1 then

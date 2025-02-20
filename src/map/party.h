@@ -99,7 +99,7 @@ public:
 
     std::size_t GetMemberCountAcrossAllProcesses();
 
-    void PushPacket(uint32 senderID, uint16 ZoneID, CBasicPacket* packet); // Send a packet to all group members, with the exception of PPartyMember
+    void PushPacket(uint32 senderID, uint16 ZoneID, const std::unique_ptr<CBasicPacket>& packet); // Send a packet to all group members, with the exception of PPartyMember
     void PushEffectsPacket();
     void EffectsChanged();
 

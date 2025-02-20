@@ -87,6 +87,7 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
     // these members will be set up in SetupKeepalive(), they need to be init'd here to appease clang-tidy
     m_PingInterval = 0;
     m_LastPing     = 0;
+
     SetupKeepalive();
 }
 
@@ -274,26 +275,48 @@ int32 SqlConnection::TryPing()
 size_t SqlConnection::EscapeStringLen(char* out_to, const char* from, size_t from_len)
 {
     TracyZoneScoped;
+
     if (self)
     {
-        return mysql_real_escape_string(&self->handle, out_to, from, (uint32)from_len);
+        return mysql_real_escape_string(&self->handle, out_to, from, static_cast<uint32>(from_len));
     }
-    return mysql_escape_string(out_to, from, (uint32)from_len);
+
+    return mysql_escape_string(out_to, from, static_cast<uint32>(from_len));
+}
+
+size_t SqlConnection::EscapeStringLen(char* out_to, std::string_view from)
+{
+    TracyZoneScoped;
+
+    return EscapeStringLen(out_to, from.data(), from.size());
 }
 
 size_t SqlConnection::EscapeString(char* out_to, const char* from)
 {
     TracyZoneScoped;
+
     return EscapeStringLen(out_to, from, strlen(from));
 }
 
-std::string SqlConnection::EscapeString(std::string const& input)
+std::string SqlConnection::EscapeString(std::string_view from)
 {
     TracyZoneScoped;
-    std::string escaped_full_string;
-    escaped_full_string.reserve(input.size() * 2 + 1);
-    EscapeString(escaped_full_string.data(), input.data());
-    return escaped_full_string;
+
+    if (from.empty())
+    {
+        return {};
+    }
+
+    auto buffer = std::vector<char>(from.size() * 2 + 1);
+    auto len    = EscapeStringLen(buffer.data(), from);
+    return std::string(buffer.data(), len);
+}
+
+std::string SqlConnection::EscapeString(const std::string& from)
+{
+    TracyZoneScoped;
+
+    return EscapeString(std::string_view(from));
 }
 
 int32 SqlConnection::QueryStr(const char* query)
@@ -541,127 +564,4 @@ void SqlConnection::FreeResult()
         self->row     = nullptr;
         self->lengths = nullptr;
     }
-}
-
-bool SqlConnection::SetAutoCommit(bool value)
-{
-    TracyZoneScoped;
-    uint8 val = (value) ? 1 : 0;
-
-    // if( self && mysql_autocommit(&self->handle, val) == 0)
-    if (self && Query("SET @@autocommit = %u", val) != SQL_ERROR)
-    {
-        return true;
-    }
-
-    ShowCritical("Query: %s", self->buf);
-    ShowCritical("SetAutoCommit: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
-    return false;
-}
-
-bool SqlConnection::GetAutoCommit()
-{
-    TracyZoneScoped;
-    if (self)
-    {
-        int32 ret = Query("SELECT @@autocommit");
-
-        if (ret != SQL_ERROR && NumRows() > 0 && NextRow() == SQL_SUCCESS)
-        {
-            return (GetUIntData(0) == 1);
-        }
-    }
-
-    ShowCritical("Query: %s", self->buf);
-    ShowCritical("GetAutoCommit: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
-    return false;
-}
-
-bool SqlConnection::TransactionStart()
-{
-    TracyZoneScoped;
-    if (self && Query("START TRANSACTION") != SQL_ERROR)
-    {
-        return true;
-    }
-
-    ShowCritical("Query: %s", self->buf);
-    ShowCritical("TransactionStart: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
-    return false;
-}
-
-bool SqlConnection::TransactionCommit()
-{
-    TracyZoneScoped;
-    if (self && mysql_commit(&self->handle) == 0)
-    {
-        return true;
-    }
-
-    ShowCritical("Query: %s", self->buf);
-    ShowCritical("TransactionCommit: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
-    return false;
-}
-
-bool SqlConnection::TransactionRollback()
-{
-    TracyZoneScoped;
-    if (self && Query("ROLLBACK") != SQL_ERROR)
-    {
-        return true;
-    }
-
-    ShowCritical("Query: %s", self->buf);
-    ShowCritical("TransactionRollback: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
-    return false;
-}
-
-// Prepares to profile a single query.
-// If you try to query multiple queries inside a start/end block,
-// only the most recent will print results.
-void SqlConnection::StartProfiling()
-{
-    TracyZoneScoped;
-    if (self && QueryStr("SET profiling = 1") != SQL_ERROR)
-    {
-        return;
-    }
-
-    ShowCritical("Query: %s", self->buf);
-    ShowCritical("StartProfiling: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
-}
-
-// Finished profiling a single query.
-// Will print out a table corresponding to the results shown by `SHOW PROFILE;`
-// If you try to query multiple queries inside a start/end block,
-// only the most recent will print results.
-void SqlConnection::FinishProfiling()
-{
-    TracyZoneScoped;
-    if (!self)
-    {
-        return;
-    }
-
-    auto lastQuery = self->buf;
-    if (QueryStr("SHOW PROFILE") != SQL_ERROR && NumRows() > 0)
-    {
-        std::string outStr = "SQL SHOW PROFILE:\n";
-        outStr += fmt::format("Query: {}\n", lastQuery);
-        outStr += fmt::format("| {:<31}| {:<8} |\n", "Status", "Duration");
-        outStr += fmt::format("|{:=<32}|{:=<10}|\n", "", "");
-
-        while (NextRow() == SQL_SUCCESS)
-        {
-            auto category    = GetStringData(0);
-            auto measurement = GetStringData(1);
-            outStr += fmt::format("| {:<31}| {:<8} |\n", category, measurement);
-        }
-        QueryStr("SET profiling = 0");
-        ShowInfo(outStr);
-        return;
-    }
-
-    ShowCritical("Query: %s", self->buf);
-    ShowCritical("FinishProfiling: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
 }

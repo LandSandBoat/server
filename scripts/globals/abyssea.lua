@@ -829,7 +829,7 @@ xi.abyssea.getNewYellowWeakness = function(mob)
         chosenDay = xi.day.FIRESDAY
     end
 
-    local element = xi.magic.dayElement[chosenDay]
+    local element = xi.combat.element.getDayElement(chosenDay)
 
     return yellowWeakness[element][math.random(1, #yellowWeakness[element])] -- Choose an specific spell the mob is weak to.
 end
@@ -1206,11 +1206,11 @@ xi.abyssea.searingWardTimer = function(player)
     local tetherTimer = player:getLocalVar('tetherTimer')
 
     if tetherTimer > 1 then
-        if tetherTimer == 11 or tetherTimer <= 6 then
+        player:setLocalVar('tetherTimer', tetherTimer - 1)
+        if tetherTimer <= 6 then
             player:messageSpecial(ID.text.RETURNING_TO_SEARING_IN, tetherTimer - 1)
         end
 
-        player:setLocalVar('tetherTimer', tetherTimer - 1)
         player:timer(1500, function()
             xi.abyssea.searingWardTimer(player)
         end)

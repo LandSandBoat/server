@@ -22,7 +22,7 @@
 #pragma once
 
 #include "singleton.h"
-#include "sql.h"
+
 #include <task_system.hpp>
 
 #include <functional>
@@ -31,8 +31,6 @@
 class Async : public Singleton<Async>, private ts::task_system
 {
 public:
-    void query(std::string const& query);
-    void query(std::function<void(SqlConnection*)> const& func);
     void submit(std::function<void()> const& func);
 
 protected:

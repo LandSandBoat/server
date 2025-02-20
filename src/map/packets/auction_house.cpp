@@ -129,7 +129,7 @@ CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, CCharEntit
         ref<uint8>(0x14) = 0x03;
         ref<uint8>(0x16) = 0x01; // Value is changed, the purpose is unknown UNKNOWN
 
-        memcpy(data + (0x18), PChar->getName().c_str(), PChar->getName().size());
+        std::memcpy(buffer_.data() + 0x18, PChar->getName().c_str(), PChar->getName().size());
 
         ref<uint16>(0x28) = PChar->m_ah_history.at(slot).itemid;    // Id sell items item id
         ref<uint8>(0x2A)  = 1 - PChar->m_ah_history.at(slot).stack; // Number of items stack size

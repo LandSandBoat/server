@@ -3,6 +3,7 @@ local ID = zones[xi.zone.WEST_RONFAURE]
 return {
     ['Aaveleon']    = { event = 101 }, -- "Ow! Ouch! Gah... If only I'd remembered that ointment!"
     ['Adalefont']   = { text = ID.text.ADALEFONT_DIALOG },
+    ['Cerite']      = { event = 50 },
     ['Chatarre']    = { text = ID.text.CHATARRE_DIALOG },
     ['Colmaie']     = { text = ID.text.COLMAIE_DIALOG },
     ['Diadonour']   = { text = ID.text.DIADONOUR_DIALOG },
@@ -15,5 +16,7 @@ return {
     ['qm2']         = { messageSpecial = ID.text.DISMAYED_CUSTOMER },
     ['qm3']         = { messageSpecial = ID.text.DISMAYED_CUSTOMER },
     ['Ramaufont']   = { text = ID.text.RAMAUFONT_DIALOG },
+    ['Saradorial']  = { event = 139 },
+    ['Vilatroire']  = { event = 136 },
     ['Zovriace']    = { text = ID.text.ZOVRIACE_DIALOG },
 }

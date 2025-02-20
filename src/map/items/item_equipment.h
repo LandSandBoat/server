@@ -121,6 +121,10 @@ public:
     std::vector<CPetModifier> petModList;
     std::vector<itemLatent>   latentList;
 
+    // static
+    // TODO: Move this to itemutils
+    static void LoadAugmentData();
+
 private:
     uint8  m_reqLvl;
     uint8  m_iLvl;

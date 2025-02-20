@@ -5,7 +5,9 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, 529.946, 17.69, 157.579, 0, 0, 0) -- Ergon Locus, Circular Trigger Area, 17.69 Radius
+    xi.reives.setupZone(zone)
+
+    zone:registerCylindricalTriggerArea(1, 529.946, 157.579, 17.69) -- Ergon Locus, Circular Trigger Area, 17.69 Radius
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

@@ -31,18 +31,12 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.tradeHas(trade, xi.item.DAHLIA)
     then
         player:startEvent(17)
-    elseif
-        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_RUMOR) == xi.questStatus.QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, xi.item.VIAL_OF_BEASTMAN_BLOOD)
-    then
-        player:startEvent(12)
     end
 end
 
 entity.onTrigger = function(player, npc)
     local troubleAtTheSluiceStat = player:getCharVar('troubleAtTheSluiceVar')
     local theHolyCrestStat = player:getCharVar('TheHolyCrest_Event')
-    local theRumor = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_RUMOR)
 
     -- THE HOLY CREST
     if theHolyCrestStat == 1 then
@@ -58,20 +52,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(15)
     elseif troubleAtTheSluiceStat == 2 then
         player:startEvent(16)
-
-    -- THE RUMOR
-    elseif
-        theRumor == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.fameArea.SANDORIA) >= 3 and
-        player:getMainLvl() >= 10
-    then
-        player:startEvent(13)
-    elseif theRumor == xi.questStatus.QUEST_ACCEPTED then
-        player:startEvent(11)
-    elseif theRumor == xi.questStatus.QUEST_COMPLETED then
-        player:startEvent(14) -- Standard dialog after "The Rumor"
-    else
-        player:startEvent(10) -- Standard dialog
     end
 end
 
@@ -80,13 +60,6 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('TheHolyCrest_Event', 2)
     elseif csid == 7 then
         player:setCharVar('theHolyCrestCheck', 1)
-    elseif
-        csid == 12 and
-        npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_RUMOR, { item = xi.item.SCROLL_OF_DRAIN })
-    then
-        player:confirmTrade()
-    elseif csid == 13 and option == 1 then
-        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_RUMOR)
     elseif csid == 14 then
         player:setCharVar('theHolyCrestCheck', 0)
     elseif csid == 15 then

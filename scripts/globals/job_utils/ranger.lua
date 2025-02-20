@@ -88,7 +88,20 @@ xi.job_utils.ranger.checkDoubleShot = function(player, target, ability)
 end
 
 xi.job_utils.ranger.checkBountyShot = function(player, target, ability)
-    return 0, 0
+    if target:getObjType() ~= xi.objType.MOB then
+        return xi.msg.basic.CANNOT_ATTACK_TARGET, 0
+    end
+
+    if
+        (player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP and
+        player:getWeaponSkillType(xi.slot.AMMO) == xi.skill.MARKSMANSHIP) or
+        (player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.ARCHERY and
+        player:getWeaponSkillType(xi.slot.AMMO) == xi.skill.ARCHERY)
+    then
+        return 0, 0
+    end
+
+    return xi.msg.basic.NO_RANGED_WEAPON, 0
 end
 
 xi.job_utils.ranger.checkDecoyShot = function(player, target, ability)
@@ -261,7 +274,66 @@ xi.job_utils.ranger.useDoubleShot = function(player, target, ability, action)
 end
 
 xi.job_utils.ranger.useBountyShot = function(player, target, ability, action)
-    return 0, 0 -- Not implemented yet
+    local mobTHLevel        = target:getTHlevel()
+    local bountyShotTHLevel = 2 + player:getMod(xi.mod.BOUNTY_SHOT_TH_BONUS)
+    local playerTHLevel     = player:getMod(xi.mod.TREASURE_HUNTER)
+    local newTHLevel        = 0
+
+    player:removeAmmo()
+    action:speceffect(target:getID(), 0x01) -- functional, animation not correct without this
+    ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
+
+    target:updateClaim(player)
+
+    -- pre-apply up to max value of TH4
+    if mobTHLevel < 4 and playerTHLevel > mobTHLevel then
+        newTHLevel = math.min(4, playerTHLevel)
+
+        target:setTHlevel(newTHLevel)
+
+        mobTHLevel = newTHLevel
+    end
+
+    -- 100% success rate if bounty shot level is higher than their TH level
+    if bountyShotTHLevel > mobTHLevel then
+        ability:setMsg(xi.msg.basic.JA_TH_EFFECTIVENESS)
+        target:setTHlevel(bountyShotTHLevel)
+
+        return bountyShotTHLevel
+    end
+
+    -- https://www.bg-wiki.com/ffxi/Bounty_Shot
+    -- https://wiki.ffo.jp/html/22203.html
+    if mobTHLevel < 12 + player:getMod(xi.mod.TREASURE_HUNTER_CAP) then
+        local treausureHunterLevelDiff = mobTHLevel - bountyShotTHLevel
+
+        -- TODO: this rate is the same as THF treasure hunter procs. It is unclear if this has the same rate or better than THF auto attacks.
+        -- This also assumes proc rate bonus works on Bounty Shot, but without mountains of data I wouldn't be able to tell.
+        -- JP wiki implies these rates and functionality is the same as THF, but there's no data.
+        -- BG wiki claims proc rates are similar to SA + TA procs, which seems likely given the 1 min timer on bounty shot.
+        local procRate      = 0.10 / math.pow(2, treausureHunterLevelDiff)
+        local procRateBonus = 1.0 + (target:getMod(xi.mod.TREASURE_HUNTER_PROC) + player:getMod(xi.mod.TREASURE_HUNTER_PROC)) / 100
+
+        if math.random() < procRate * procRateBonus then
+            newTHLevel = mobTHLevel + 1
+
+            ability:setMsg(xi.msg.basic.JA_TH_EFFECTIVENESS)
+
+            target:setTHlevel(newTHLevel)
+
+            return newTHLevel
+        end
+    end
+
+    -- If we got here, TH was upgraded to 3 or 4 from gear
+    -- JP wiki indicates this doesn't happen, but printing incorrectly that the action didn't boost TH level seems weird
+    if newTHLevel > 0 then
+        ability:setMsg(xi.msg.basic.JA_TH_EFFECTIVENESS)
+
+        return newTHLevel
+    end
+
+    return 0
 end
 
 xi.job_utils.ranger.useDecoyShot = function(player, target, ability, action)

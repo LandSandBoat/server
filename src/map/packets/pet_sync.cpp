@@ -37,15 +37,15 @@ CPetSyncPacket::CPetSyncPacket(CCharEntity* PChar)
     this->setType(0x68);
     this->setSize(0x1C);
 
-    ref<uint8>(0x04) |= 0x04;                    // Message Type
-    packBitsBE(data + (0x04), (0x18), 0, 6, 10); // Message Size (0 for Despawn)
+    ref<uint8>(0x04) |= 0x04;                            // Message Type
+    packBitsBE(buffer_.data() + 0x04, (0x18), 0, 6, 10); // Message Size (0 for Despawn)
     ref<uint16>(0x06) = PChar->targid;
     ref<uint32>(0x08) = PChar->id;
 
     if (PChar->PPet != nullptr)
     {
         this->setSize(0x2C);
-        packBitsBE(data + 0x04, 0x18 + PChar->PPet->getName().size(), 0, 6, 10); // Message Size
+        packBitsBE(buffer_.data() + 0x04, 0x18 + PChar->PPet->getName().size(), 0, 6, 10); // Message Size
         ref<uint16>(0x0C) = PChar->PPet->targid;
         ref<uint8>(0x0E)  = PChar->PPet->GetHPP();
         ref<uint8>(0x0F)  = PChar->PPet->GetMPP();
@@ -55,6 +55,6 @@ CPetSyncPacket::CPetSyncPacket(CCharEntity* PChar)
             ref<uint32>(0x14) = PChar->PPet->GetBattleTarget()->id;
         }
 
-        memcpy(data + (0x18), PChar->PPet->getName().c_str(), PChar->PPet->getName().size());
+        std::memcpy(buffer_.data() + 0x18, PChar->PPet->getName().c_str(), PChar->PPet->getName().size());
     }
 }

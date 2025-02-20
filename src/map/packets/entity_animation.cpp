@@ -35,7 +35,7 @@ CEntityAnimationPacket::CEntityAnimationPacket(CBaseEntity* PEntity, CBaseEntity
     ref<uint32>(0x04) = PEntity->id;
     ref<uint32>(0x08) = PTarget->id;
 
-    memcpy(data + ((0x0C)), type, 4);
+    std::memcpy(buffer_.data() + 0x0C, type, 4);
 
     ref<uint16>(0x10) = PEntity->targid;
     ref<uint16>(0x12) = PTarget->targid;

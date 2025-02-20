@@ -9,9 +9,6 @@ local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local troubleAtTheSluice = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
     local hasNeutralizerKI = player:hasKeyItem(xi.ki.NEUTRALIZER)
@@ -31,9 +28,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(585)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

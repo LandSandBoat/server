@@ -17,14 +17,15 @@ A [quick start guide](https://github.com/LandSandBoat/server/wiki/Quick-Start-Gu
 
 ## Interacting with LandSandBoat
 
-### Crashes, bugs, obvious gameplay issues etc
+### Crashes, warnings, errors, bugs, gameplay issues, visual issues, etc.
 
-Please search the [issues tab](https://github.com/LandSandBoat/server/issues) and see if your issue is already logged, or create a new one.
+Please create a new issue in the [issues tab](https://github.com/LandSandBoat/server/issues) after searching to see if your issue is already logged.
 
-### Balance discussion, technical discussion, meta discussions etc
+### Balance discussion, technical discussion, meta discussions, etc.
 
-For topics with less direction than issues, a discussion is probably a better fit.
-Please search the [discussions tab](https://github.com/LandSandBoat/server/discussions) and see if your topic has already been discussed, or create a new one.
+Discussions are similar to forum posts. Please open a new discussion post in the [discussions tab](https://github.com/LandSandBoat/server/discussions) for less directed and more open-ended conversation than issues.
+
+*If you are encountering an issue, please open an issue and not a discussion!* It's much easier for us to track and you're more likely to get resolution through an issue.
 
 ## LICENSE
 

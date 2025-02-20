@@ -22,9 +22,12 @@ target=${1:-src}
 # https://quick-bench.com/q/13EX97WSfj9-rY_98opaAwgDOQc
 
 cppcheck -v -j 4 --force --quiet --inconclusive --std=c++17 \
---enable=information,performance,portability --inline-suppr \
 --suppress=passedByValue:src/map/packet_system.cpp \
 --suppress=unmatchedSuppression \
+--suppress=missingIncludeSystem \
+--suppress=missingInclude \
+--suppress=checkersReport \
+--enable=information,performance,portability --inline-suppr \
 --inconclusive \
 -DSA_INTERRUPT -DZMQ_DEPRECATED -DZMQ_EVENT_MONITOR_STOPPED -DTRACY_ENABLE \
 ${target}

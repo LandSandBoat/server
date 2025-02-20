@@ -21,48 +21,11 @@
 
 #include "async.h"
 
-#include "sql.h"
-#include <task_system.hpp>
+#include "tracy.h"
 
 Async::Async()
 : ts::task_system(1)
 {
-}
-
-void Async::query(std::string const& query)
-{
-    // clang-format off
-    this->schedule([query]()
-    {
-        TracySetThreadName("Async Worker Thread");
-        static thread_local std::unique_ptr<SqlConnection> _sql;
-        if (!_sql)
-        {
-            _sql = std::make_unique<SqlConnection>();
-        }
-        _sql->Query(query.c_str());
-    });
-    // clang-format on
-}
-
-// NOTE: Be _very_ careful when defining your sql argument in the passed-in function.
-//     : If you define your arg as _sql, but then call sql, it will use the global
-//     : SQLConnection, which is on the main thread.
-//     : Remember that SQLConnection is NOT THREAD-SAFE!
-void Async::query(std::function<void(SqlConnection*)> const& func)
-{
-    // clang-format off
-    this->schedule([func]()
-    {
-        TracySetThreadName("Async Worker Thread");
-        static thread_local std::unique_ptr<SqlConnection> _sql;
-        if (!_sql)
-        {
-            _sql = std::make_unique<SqlConnection>();
-        }
-        func(_sql.get());
-    });
-    // clang-format on
 }
 
 void Async::submit(std::function<void()> const& func)
@@ -70,6 +33,7 @@ void Async::submit(std::function<void()> const& func)
     // clang-format off
     this->schedule([func]()
     {
+        TracyZoneScoped;
         TracySetThreadName("Async Worker Thread");
         func();
     });

@@ -95,6 +95,7 @@ commandObj.onTrigger = function(player, handlerName)
         return handlers
     end
 
+    local onSteals = gatherHandlers('onSteal')
     local onTriggers = gatherHandlers('onTrigger')
     local onTrades = gatherHandlers('onTrade')
 
@@ -113,6 +114,7 @@ commandObj.onTrigger = function(player, handlerName)
     end
 
     cmdPrint('Handlers for "%s":', handlerName)
+    printHandlers('Steal', onSteals)
     printHandlers('Trigger', onTriggers)
     printHandlers('Trade', onTrades)
 end

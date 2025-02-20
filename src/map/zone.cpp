@@ -56,7 +56,6 @@
 #include "lua/luautils.h"
 
 #include "packets/action.h"
-#include "packets/char.h"
 #include "packets/char_sync.h"
 #include "packets/char_update.h"
 #include "packets/entity_update.h"
@@ -75,32 +74,6 @@
 #include "utils/moduleutils.h"
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
-
-int32 zone_server(time_point tick, CTaskMgr::CTask* PTask)
-{
-    CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
-    PZone->ZoneServer(tick);
-    return 0;
-}
-
-int32 zone_trigger_area(time_point tick, CTaskMgr::CTask* PTask)
-{
-    CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
-    PZone->CheckTriggerAreas();
-    return 0;
-}
-
-int32 zone_update_weather(time_point tick, CTaskMgr::CTask* PTask)
-{
-    CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
-
-    if (!PZone->IsWeatherStatic())
-    {
-        PZone->UpdateWeather();
-    }
-
-    return 0;
-}
 
 CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : m_zoneID(ZoneID)
@@ -155,11 +128,6 @@ CZone::~CZone()
         destroy(lineOfSight);
     }
 
-    // Manually delete and clear m_triggerAreaList
-    for (auto triggerArea : m_triggerAreaList)
-    {
-        destroy(triggerArea);
-    }
     m_triggerAreaList.clear();
 
     for (auto zoneLine : m_zoneLineList)
@@ -339,11 +307,11 @@ bool CZone::IsWeatherStatic() const
 
 zoneLine_t* CZone::GetZoneLine(uint32 zoneLineID)
 {
-    for (zoneLineList_t::const_iterator i = m_zoneLineList.begin(); i != m_zoneLineList.end(); ++i)
+    for (const auto& zoneLine : m_zoneLineList)
     {
-        if ((*i)->m_zoneLineID == zoneLineID)
+        if (zoneLine->m_zoneLineID == zoneLineID)
         {
-            return (*i);
+            return zoneLine;
         }
     }
     return nullptr;
@@ -479,7 +447,7 @@ void CZone::LoadNavMesh()
     }
 
     char file[255];
-    memset(file, 0, sizeof(file));
+    std::memset(file, 0, sizeof(file));
     snprintf(file, sizeof(file), "navmeshes/%s.nav", getName().c_str());
 
     if (!m_navMesh->load(file))
@@ -528,11 +496,6 @@ void CZone::InsertNPC(CBaseEntity* PNpc)
     m_zoneEntities->InsertNPC(PNpc);
 }
 
-void CZone::DeletePET(CBaseEntity* PPet)
-{
-    m_zoneEntities->DeletePET(PPet);
-}
-
 /************************************************************************
  *                                                                       *
  *  Add a PET to the zone (free targid 0x700-0x7FF)                      *
@@ -555,22 +518,17 @@ void CZone::InsertTRUST(CBaseEntity* PTrust)
     m_zoneEntities->InsertTRUST(PTrust);
 }
 
-void CZone::DeleteTRUST(CBaseEntity* PTrust)
-{
-    m_zoneEntities->DeleteTRUST(PTrust);
-}
-
 /************************************************************************
  *                                                                       *
  *  Add a trigger area to the zone                                       *
  *                                                                       *
  ************************************************************************/
 
-void CZone::InsertTriggerArea(CTriggerArea* triggerArea)
+void CZone::InsertTriggerArea(std::unique_ptr<ITriggerArea>&& triggerArea)
 {
     if (triggerArea != nullptr)
     {
-        m_triggerAreaList.emplace_back(triggerArea);
+        m_triggerAreaList.emplace_back(std::move(triggerArea));
     }
 }
 
@@ -646,7 +604,7 @@ void CZone::SetWeather(WEATHER weather)
     m_Weather           = weather;
     m_WeatherChangeTime = CVanaTime::getInstance()->getVanaTime();
 
-    m_zoneEntities->PushPacket(nullptr, CHAR_INZONE, new CWeatherPacket(m_WeatherChangeTime, m_Weather, xirand::GetRandomNumber(4, 28)));
+    m_zoneEntities->PushPacket(nullptr, CHAR_INZONE, std::make_unique<CWeatherPacket>(m_WeatherChangeTime, m_Weather, xirand::GetRandomNumber(4, 28)));
 }
 
 void CZone::UpdateWeather()
@@ -720,8 +678,18 @@ void CZone::UpdateWeather()
     SetWeather((WEATHER)Weather);
     luautils::OnZoneWeatherChange(GetID(), Weather);
 
-    CTaskMgr::getInstance()->AddTask(new CTaskMgr::CTask("zone_update_weather", server_clock::now() + std::chrono::seconds(WeatherNextUpdate), this,
-                                                         CTaskMgr::TASK_ONCE, zone_update_weather));
+    // clang-format off
+    CTaskMgr::getInstance()->AddTask("zone_update_weather", server_clock::now() + std::chrono::seconds(WeatherNextUpdate), this, CTaskMgr::TASK_ONCE, 1s,
+    [](time_point tick, CTaskMgr::CTask* PTask)
+    {
+        CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
+        if (!PZone->IsWeatherStatic())
+        {
+            PZone->UpdateWeather();
+        }
+        return 0;
+    });
+    // clang-format on
 }
 
 /************************************************************************
@@ -844,13 +812,13 @@ void CZone::SpawnPCs(CCharEntity* PChar)
 
 /************************************************************************
  *                                                                       *
- *  Displaying Moogle in MogHouse                                        *
+ *  Displaying Moogle in MogHouse, etc.                                  *
  *                                                                       *
  ************************************************************************/
 
-void CZone::SpawnMoogle(CCharEntity* PChar)
+void CZone::SpawnConditionalNPCs(CCharEntity* PChar)
 {
-    m_zoneEntities->SpawnMoogle(PChar);
+    m_zoneEntities->SpawnConditionalNPCs(PChar);
 }
 
 /************************************************************************
@@ -898,16 +866,10 @@ CCharEntity* CZone::GetCharByID(uint32 id)
     return m_zoneEntities->GetCharByID(id);
 }
 
-void CZone::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, CBasicPacket* packet)
+void CZone::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, const std::unique_ptr<CBasicPacket>& packet)
 {
     TracyZoneScoped;
     m_zoneEntities->PushPacket(PEntity, message_type, packet);
-}
-
-void CZone::UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
-{
-    TracyZoneScoped;
-    m_zoneEntities->UpdateCharPacket(PChar, type, updatemask);
 }
 
 void CZone::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude)
@@ -932,6 +894,7 @@ void CZone::WideScan(CCharEntity* PChar, uint16 radius)
 void CZone::ZoneServer(time_point tick)
 {
     TracyZoneScoped;
+
     m_zoneEntities->ZoneServer(tick);
 
     if (m_BattlefieldHandler != nullptr)
@@ -954,86 +917,121 @@ void CZone::ZoneServer(time_point tick)
 void CZone::ForEachChar(std::function<void(CCharEntity*)> const& func)
 {
     TracyZoneScoped;
-    for (auto PChar : m_zoneEntities->GetCharList())
-    {
-        func((CCharEntity*)PChar.second);
-    }
+
+    m_zoneEntities->ForEachChar(func);
 }
 
 void CZone::ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> const& func)
 {
     TracyZoneScoped;
-    for (auto PChar : m_zoneEntities->GetCharList())
-    {
-        func((CCharEntity*)PChar.second);
-    }
+
+    ForEachChar(func);
 }
 
 void CZone::ForEachMob(std::function<void(CMobEntity*)> const& func)
 {
     TracyZoneScoped;
-    for (auto PMob : m_zoneEntities->m_mobList)
-    {
-        func((CMobEntity*)PMob.second);
-    }
+
+    m_zoneEntities->ForEachMob(func);
 }
 
 void CZone::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func)
 {
     TracyZoneScoped;
-    for (auto PMob : m_zoneEntities->m_mobList)
-    {
-        func((CMobEntity*)PMob.second);
-    }
-}
 
-void CZone::ForEachTrust(std::function<void(CTrustEntity*)> const& func)
-{
-    TracyZoneScoped;
-    for (auto PTrust : m_zoneEntities->m_trustList)
-    {
-        func((CTrustEntity*)PTrust.second);
-    }
-}
-
-void CZone::ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> const& func)
-{
-    TracyZoneScoped;
-    for (auto PTrust : m_zoneEntities->m_trustList)
-    {
-        func((CTrustEntity*)PTrust.second);
-    }
+    ForEachMob(func);
 }
 
 void CZone::ForEachNpc(std::function<void(CNpcEntity*)> const& func)
 {
     TracyZoneScoped;
-    for (auto PNpc : m_zoneEntities->m_npcList)
-    {
-        func((CNpcEntity*)PNpc.second);
-    }
+
+    m_zoneEntities->ForEachNpc(func);
+}
+
+void CZone::ForEachNpcInstance(CBaseEntity* PEntity, std::function<void(CNpcEntity*)> const& func)
+{
+    TracyZoneScoped;
+
+    ForEachNpc(func);
+}
+
+void CZone::ForEachTrust(std::function<void(CTrustEntity*)> const& func)
+{
+    TracyZoneScoped;
+
+    m_zoneEntities->ForEachTrust(func);
+}
+
+void CZone::ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> const& func)
+{
+    TracyZoneScoped;
+
+    ForEachTrust(func);
+}
+
+void CZone::ForEachPet(std::function<void(CPetEntity*)> const& func)
+{
+    TracyZoneScoped;
+
+    m_zoneEntities->ForEachPet(func);
+}
+
+void CZone::ForEachPetInstance(CBaseEntity* PEntity, std::function<void(CPetEntity*)> const& func)
+{
+    TracyZoneScoped;
+
+    ForEachPet(func);
+}
+
+void CZone::ForEachAlly(std::function<void(CMobEntity*)> const& func)
+{
+    TracyZoneScoped;
+
+    m_zoneEntities->ForEachAlly(func);
+}
+
+void CZone::ForEachAllyInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func)
+{
+    TracyZoneScoped;
+
+    ForEachAlly(func);
 }
 
 void CZone::createZoneTimers()
 {
     TracyZoneScoped;
-    ZoneTimer =
-        CTaskMgr::getInstance()->AddTask(m_zoneName, server_clock::now(), this, CTaskMgr::TASK_INTERVAL, zone_server,
-                                         std::chrono::milliseconds(static_cast<uint32>(server_tick_interval)));
 
-    ZoneTimerTriggerAreas =
-        CTaskMgr::getInstance()->AddTask(m_zoneName + "TriggerAreas", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, zone_trigger_area,
-                                         std::chrono::milliseconds(static_cast<uint32>(server_trigger_area_interval)));
+    const auto tickInterval        = std::chrono::milliseconds(static_cast<uint32>(server_tick_interval));
+    const auto triggerAreaInterval = std::chrono::milliseconds(static_cast<uint32>(server_trigger_area_interval));
+
+    // clang-format off
+    ZoneTimer = CTaskMgr::getInstance()->AddTask(m_zoneName, server_clock::now(), this, CTaskMgr::TASK_INTERVAL, tickInterval,
+    [](time_point tick, CTaskMgr::CTask* PTask)
+    {
+        CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
+        PZone->ZoneServer(tick);
+        return 0;
+    });
+
+    ZoneTimerTriggerAreas = CTaskMgr::getInstance()->AddTask(m_zoneName + "TriggerAreas", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, triggerAreaInterval,
+    [](time_point tick, CTaskMgr::CTask* PTask)
+    {
+        CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
+        PZone->CheckTriggerAreas();
+        return 0;
+    });
+    // clang-format on
 }
 
 void CZone::CharZoneIn(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
-    PChar->loc.zone              = this;
-    PChar->loc.zoning            = false;
-    PChar->loc.destination       = 0;
-    PChar->m_InsideTriggerAreaID = 0;
+    PChar->loc.zone        = this;
+    PChar->loc.zoning      = false;
+    PChar->loc.destination = 0;
+    PChar->clearTriggerAreas();
 
     if (PChar->isMounted() && !CanUseMisc(MISC_MOUNT))
     {
@@ -1044,6 +1042,11 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_COSTUME))
     {
         PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_COSTUME);
+    }
+
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_ILLUSION))
+    {
+        PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_ILLUSION);
     }
 
     PChar->ReloadPartyInc();
@@ -1132,11 +1135,12 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 void CZone::CharZoneOut(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    for (triggerAreaList_t::const_iterator triggerAreaItr = m_triggerAreaList.begin(); triggerAreaItr != m_triggerAreaList.end(); ++triggerAreaItr)
+
+    for (const auto& triggerArea : m_triggerAreaList)
     {
-        if ((*triggerAreaItr)->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
+        if (PChar->isInTriggerArea(triggerArea->getTriggerAreaID()))
         {
-            luautils::OnTriggerAreaLeave(PChar, *triggerAreaItr);
+            luautils::OnTriggerAreaLeave(PChar, triggerArea);
             break;
         }
     }
@@ -1214,35 +1218,37 @@ void CZone::CheckTriggerAreas()
 {
     TracyZoneScoped;
 
-    for (auto const& [targid, PEntity] : m_zoneEntities->m_charList)
+    // clang-format off
+    ForEachChar([&](CCharEntity* PChar)
     {
-        auto* PChar = static_cast<CCharEntity*>(PEntity);
-
         // TODO: When we start to use octrees or spatial hashing to split up zones,
         //     : use them here to make the search domain smaller.
 
-        uint32 triggerAreaID = 0;
-        for (triggerAreaList_t::const_iterator triggerAreaItr = m_triggerAreaList.begin(); triggerAreaItr != m_triggerAreaList.end(); ++triggerAreaItr)
+        // Do not enter trigger areas while loading in. Set in xi.player.onGameIn
+        if (PChar->GetLocalVar("ZoningIn") > 0)
         {
-            if ((*triggerAreaItr)->isPointInside(PChar->loc.p))
+            return;
+        }
+
+        for (const auto& triggerArea : m_triggerAreaList)
+        {
+            const auto triggerAreaID = triggerArea->getTriggerAreaID();
+            if (triggerArea->isPointInside(PChar->loc.p))
             {
-                triggerAreaID = (*triggerAreaItr)->GetTriggerAreaID();
-
-                if ((*triggerAreaItr)->GetTriggerAreaID() != PChar->m_InsideTriggerAreaID)
+                if (!PChar->isInTriggerArea(triggerAreaID))
                 {
-                    luautils::OnTriggerAreaEnter(PChar, *triggerAreaItr);
-                }
-
-                if (PChar->m_InsideTriggerAreaID == 0)
-                {
-                    break;
+                    // Add the TriggerArea to the players cache of current TriggerAreas
+                    PChar->onTriggerAreaEnter(triggerAreaID);
+                    luautils::OnTriggerAreaEnter(PChar, triggerArea);
                 }
             }
-            else if ((*triggerAreaItr)->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
+            else if (PChar->isInTriggerArea(triggerAreaID))
             {
-                luautils::OnTriggerAreaLeave(PChar, *triggerAreaItr);
+                // Remove the TriggerArea from the players cache of current TriggerAreas
+                PChar->onTriggerAreaLeave(triggerAreaID);
+                luautils::OnTriggerAreaLeave(PChar, triggerArea);
             }
         }
-        PChar->m_InsideTriggerAreaID = triggerAreaID;
-    }
+    });
+    // clang-format on
 }

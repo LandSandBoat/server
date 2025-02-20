@@ -7,9 +7,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local DELM = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.DONT_EVER_LEAF_ME)
 
@@ -20,9 +17,6 @@ entity.onTrigger = function(player, npc)
         -- Reminds player of hint for Quest: 'Dont Ever Leaf Me'
         player:startEvent(5014)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
