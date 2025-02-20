@@ -7,12 +7,13 @@ return {
     ['Aivedoir']          = { text = ID.text.AIVEDOIR_DIALOG },
     ['Anieuvansand']      = { event = 665 },
     ['Arienh']            = { text = ID.text.ARIENH_DIALOG },
-    ['Arnau']             = { event = 20 }, -- TODO: CS 520 default while RoV M1-3 active?
+    ['Arnau']             = { event =  20 }, -- TODO: CS 520 default while RoV M1-3 active?
+    ['Belgidiveau']       = { event = 585 },
     ['Calovour']          = { event = 633 },
     ['Capiria']           = { text = ID.text.CAPIRIA_DIALOG },
     ['Charlaimagnat']     = { event = 702 },
     ['Charmealaut']       = { event = 768 },
-    ['Chasalvige']        = { event = 6 },
+    ['Chasalvige']        = { event =   6 },
     ['Coullene']          = { text = ID.text.COULLENE_DIALOG },
     ['Danngogg']          = { event = 540 },
     ['Dapraugeant']       = { event = 532 },
