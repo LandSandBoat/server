@@ -17,11 +17,16 @@ mission.sections = {}
 mission.sections[1] = -- REMEMBER: Lua is 1-indexed!
 {
     check = function(player, currentMission, missionStatus, vars)
+        custom_check = true
+        if xi.settings.map.MISSION_PROGRESS_CUSTOM then
+            custom_check = player:hasCompletedMission(xi.mission.log_id.ACP, xi.mission.id.acp.A_CRYSTALLINE_PROPHECY_FIN)
+        end
+
         return currentMission == mission.missionId and
             xi.settings.main.ENABLE_AMK == 1 and
             xi.moghouse.isInMogHouseInHomeNation(player) and
             player:getMainLvl() >= 10 and
-            player:getCharVar('HQuest[moghouseExpo]notSeen') == 0
+            player:getCharVar('HQuest[moghouseExpo]notSeen') == 0 and custom_check
     end,
 }
 

@@ -16,9 +16,14 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
+            custom_check = true
+            if xi.settings.map.MISSION_PROGRESS_CUSTOM then
+                custom_check = player:hasCompletedMission(xi.mission.log_id.AMK, xi.mission.id.amk.A_MOOGLE_KUPO_DETAT_FIN)
+            end
+
             return currentMission == mission.missionId and
                 xi.settings.main.ENABLE_ASA == 1 and
-                player:getMainLvl() >= 10
+                player:getMainLvl() >= 10 and custom_check
         end,
 
         [xi.zone.WINDURST_WALLS] =

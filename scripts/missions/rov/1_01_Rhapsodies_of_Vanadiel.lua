@@ -31,10 +31,15 @@ mission.sections    = {}
 mission.sections[1] =
 {
     check = function(player, currentMission, missionStatus, vars)
+        custom_check = true
+        if xi.settings.map.MISSION_PROGRESS_CUSTOM then
+            custom_check = player:hasCompletedMission(xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHT_WITHIN)
+        end
+
         return currentMission == mission.missionId and
             xi.settings.main.ENABLE_ROV == 1 and
             player:getMainLvl() >= 3 and
-            not player:isInMogHouse()
+            not player:isInMogHouse() and custom_check
     end,
 }
 
