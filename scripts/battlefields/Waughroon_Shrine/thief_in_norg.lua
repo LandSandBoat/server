@@ -22,6 +22,15 @@ local content = BattlefieldQuest:new({
     -- requiredValue = 6,
 })
 
+function content:entryRequirement(player, npc, isRegistrant, trade)
+    -- Non-registrants have no requirements
+    if not isRegistrant then
+        return true
+    end
+
+    return xi.quest.getVar(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG, 'Prog') == 6
+end
+
 content.groups =
 {
     {
