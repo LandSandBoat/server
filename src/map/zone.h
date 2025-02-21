@@ -583,6 +583,8 @@ public:
     bool CanUseMisc(uint16 misc) const;
     void SetWeather(WEATHER weatherCondition);
     void UpdateWeather();
+    void SetKeepAlive();
+    void SleepZone();
 
     virtual void SpawnPCs(CCharEntity* PChar);
     virtual void SpawnMOBs(CCharEntity* PChar);
@@ -679,8 +681,6 @@ private:
     void LoadZoneWeather();
 
     CTreasurePool* m_TreasurePool;
-
-    time_point m_timeZoneEmpty; // The time point when the last player left the zone
 
     std::unordered_map<std::string, QueryByNameResult_t> m_queryByNameResults;
 

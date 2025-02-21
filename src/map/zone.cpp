@@ -692,6 +692,22 @@ void CZone::UpdateWeather()
     // clang-format on
 }
 
+void CZone::SetKeepAlive()
+{
+    // create timer to keep zone alive for 15 minutes
+    CTaskMgr::getInstance()->AddTask("zone_empty_timer", server_clock::now(), this, CTaskMgr::TASK_ONCE, 15min,
+    [](time_point tick, CTaskMgr::CTask* PTask)
+    {
+        // if the timer runs out, sleep the zone
+        CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
+        if (PZone)
+        {
+            PZone->SleepZone();
+        }
+        return 0;
+    });
+}
+
 /************************************************************************
  *                                                                       *
  *  Remove a character from the zone. If ZoneServer and character are    *
@@ -706,7 +722,7 @@ void CZone::DecreaseZoneCounter(CCharEntity* PChar)
 
     if (m_zoneEntities->CharListEmpty())
     {
-        m_timeZoneEmpty = server_clock::now();
+        SetKeepAlive();
     }
     else
     {
@@ -747,6 +763,9 @@ void CZone::IncreaseZoneCounter(CCharEntity* PChar)
     if (!ZoneTimer && !m_zoneEntities->CharListEmpty())
     {
         createZoneTimers();
+
+        // the zone is active again, remove the timer, if its still going
+        CTaskMgr::getInstance()->RemoveTask("zone_empty_timer");
     }
 
     PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ON_ZONE_PATHOS, true);
@@ -901,8 +920,10 @@ void CZone::ZoneServer(time_point tick)
     {
         m_BattlefieldHandler->HandleBattlefields(tick);
     }
-
-    if (ZoneTimer && m_zoneEntities->CharListEmpty() && m_timeZoneEmpty + 5s < server_clock::now())
+}
+void CZone::SleepZone()
+{
+    if (ZoneTimer && m_zoneEntities->CharListEmpty())
     {
         ZoneTimer->m_type = CTaskMgr::TASK_REMOVE;
         ZoneTimer         = nullptr;
