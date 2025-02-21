@@ -25,7 +25,8 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.agi_wsc = 1.0
-        params.ftpMod = { 6.0, 8.5, 11.0 }
+        -- params.ftpMod = { 6.0, 8.5, 11.0 }
+        params.ftpMod = { 4.0, 7.5, 10.0 }
     end
 
     local damage = xi.autows.doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)

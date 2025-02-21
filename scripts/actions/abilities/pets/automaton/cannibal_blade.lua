@@ -27,7 +27,8 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.weaponDamage = nil
-        params.ftpMod = { 16.0, 23.5, 31.5 }
+        -- params.ftpMod = { 16.0, 23.5, 31.5 }
+        params.ftpMod = { 0.8, 1.75, 3.0 }
         params.mnd_wsc = 1.0
     end
 
