@@ -1476,6 +1476,11 @@ function BattlefieldQuest:checkRequirements(player, npc, isRegistrant, trade)
         return false
     end
 
+    -- Allow non-registrants to enter without restrictions
+    if not isRegistrant then
+        return true
+    end
+
     if self.requiredVar ~= nil then
         -- COP Missions use a charVar to track since missionStatus is used to define menu settings.
         -- When converting these, allow for the same structure of status, but with defined requiredVar (str)

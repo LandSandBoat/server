@@ -199,7 +199,7 @@ quest.sections =
                 end,
 
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar('battlefieldWin') == xi.battlefield.id.THIEF_IN_NORG then
+                    if player:getLocalVar('battlefieldWin') == xi.battlefield.id.THIEF_IN_NORG  and quest:getVar(player, 'Prog') == 6 then
                         npcUtil.giveKeyItem(player, xi.ki.CHARRED_HELM)
                         quest:setVar(player, 'Prog', 7)
                     end
