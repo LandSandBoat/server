@@ -62,7 +62,14 @@ public:
     explicit CBasicPacket(const CBasicPacket& other)
     {
         TracyZoneScoped;
-        std::memcpy(buffer_.data(), other.buffer_.data(), PACKET_SIZE);
+        if (&other != nullptr && other.buffer_.data() != nullptr && other.buffer_.size() == PACKET_SIZE)
+        {
+            std::memcpy(buffer_.data(), other.buffer_.data(), PACKET_SIZE);
+        }
+        else
+        {
+            // Handle the error or initialize buffer_ appropriately
+        }
     }
 
     explicit CBasicPacket(const std::unique_ptr<CBasicPacket>& other)
