@@ -14,7 +14,7 @@ local content = BattlefieldQuest:new({
     index            = 4,
     entryNpc         = 'BC_Entrance',
     exitNpc          = 'Burning_Circle',
-    requiredItems    = { xi.item.BANISHING_CHARM },
+    -- requiredItems    = { xi.item.BANISHING_CHARM },
 
     questArea     = xi.questLog.OUTLANDS,
     quest         = xi.quest.id.outlands.A_THIEF_IN_NORG,
@@ -28,7 +28,10 @@ function content:entryRequirement(player, npc, isRegistrant, trade)
         return true
     end
 
-    return xi.quest.getVar(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG, 'Prog') == 6
+    local hasQuestProgress = xi.quest.getVar(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG, 'Prog') == 6
+    local hasRequiredItem = player:hasItem(xi.item.BANISHING_CHARM)
+    
+    return hasQuestProgress and hasRequiredItem
 end
 
 content.groups =
