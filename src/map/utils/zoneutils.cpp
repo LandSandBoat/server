@@ -500,10 +500,10 @@ namespace zoneutils
                             PMob->attRank = rset->get<uint8>("ATT");
                             PMob->accRank = rset->get<uint8>("ACC");
 
-                            PMob->setModifier(Mod::SLASH_SDT, rset->get<uint16>("slash_sdt") * 1000);
-                            PMob->setModifier(Mod::PIERCE_SDT, rset->get<uint16>("pierce_sdt") * 1000);
-                            PMob->setModifier(Mod::HTH_SDT, rset->get<uint16>("h2h_sdt") * 1000);
-                            PMob->setModifier(Mod::IMPACT_SDT, rset->get<uint16>("impact_sdt") * 1000);
+                            PMob->setModifier(Mod::SLASH_SDT, rset->get<uint16>("slash_sdt"));
+                            PMob->setModifier(Mod::PIERCE_SDT, rset->get<uint16>("pierce_sdt"));
+                            PMob->setModifier(Mod::HTH_SDT, rset->get<uint16>("h2h_sdt"));
+                            PMob->setModifier(Mod::IMPACT_SDT, rset->get<uint16>("impact_sdt"));
 
                             PMob->setModifier(Mod::UDMGMAGIC, rset->get<int16>("magical_sdt") * 1000);
 
