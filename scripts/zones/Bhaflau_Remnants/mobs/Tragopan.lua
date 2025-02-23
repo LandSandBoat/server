@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Bhaflau Remnants
---  MOB: Colibri
------------------------------------
-mixins = { require('scripts/mixins/families/colibri_mimic') }
+--  MOB: Tragopan
 -----------------------------------
 
 ---@type TMobEntity
@@ -13,9 +11,10 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.UDMGMAGIC, 1000)
     mob:setMod(xi.mod.UDMGPHYS, 100)
     mob:setMod(xi.mod.UDMGRANGE, 100)
+    mob:setMobMod(xi.mobMod.SPAWN_ROAMED, 0)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity
