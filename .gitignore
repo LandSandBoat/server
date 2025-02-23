@@ -256,3 +256,5 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+/settings/upd_db.sql
+/settings/custom_db.sql
