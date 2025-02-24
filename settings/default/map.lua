@@ -300,4 +300,7 @@ xi.settings.map =
 
     -- 怨みの炎を使っても消えたランタンにならないようにする
     NOT_DISAPPEAR_LANTERN = false,
+
+    -- 魔封門の札を受け取れるタイミングをそれぞれの正義クリア時に変更する
+    AMULETTE_DE_PORTAIL_MISSION_TO_EACH_HIS_OWN_RIGHT = true,
 }
