@@ -29,7 +29,7 @@ quest.sections =
                         not player:hasKeyItem(xi.ki.PORTAL_CHARM)
                     then
                         missionId = xi.mission.id.windurst.WRITTEN_IN_THE_STARS
-                        if AMULETTE_DE_PORTAIL_MISSION_TO_EACH_HIS_OWN_RIGHT then
+                        if xi.settings.map.AMULETTE_DE_PORTAIL_MISSION_TO_EACH_HIS_OWN_RIGHT then
                             missionId = xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT
                         end
                         if player:hasCompletedMission(xi.mission.log_id.WINDURST, missionId) then
@@ -41,11 +41,11 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc, trade)
+                    missionId = xi.mission.id.windurst.WRITTEN_IN_THE_STARS
+                    if xi.settings.map.AMULETTE_DE_PORTAIL_MISSION_TO_EACH_HIS_OWN_RIGHT then
+                        missionId = xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT
+                    end
                     if
-                        missionId = xi.mission.id.windurst.WRITTEN_IN_THE_STARS
-                        if AMULETTE_DE_PORTAIL_MISSION_TO_EACH_HIS_OWN_RIGHT then
-                            missionId = xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT
-                        end
                         player:hasCompletedMission(xi.mission.log_id.WINDURST, missionId) and
                         quest:getVar(player, 'Prog') == 1
                     then
