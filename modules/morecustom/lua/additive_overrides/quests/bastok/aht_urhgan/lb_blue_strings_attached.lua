@@ -7,7 +7,7 @@
 -- Azula     !pos 11.8379 0.0000 0.1778 250
 -- Unlocks: Lv71-75 (PUP LB5, BLU LB5)
 -------------------------------------------------------
--- !setvar [LB]BLUE_STRINGS_ATTACHED 1
+-- !setvar [LB]BLUE_STRINGS_ATTACHED 2
 
 require("modules/module_utils")
 require('scripts/globals/utils')
@@ -24,8 +24,7 @@ local info =
     var    = "[LB]BLUE_STRINGS_ATTACHED",
     required =
     {
-        blu_testimony = { { 2331, 1 } },
-        pup_testimony = { { 2333, 1 } }
+        item = { { 2331, 1 }, { 2333, 1 } }, -- blue mage and puppetmaster testimony
     },
     reward =
     {
@@ -69,6 +68,7 @@ local entity =
             DEFAULT   = { "I am a 400-foot tall purple platypus bear with pink horns and silver wings." },
             START     =
             {
+                { entity = "Azula", face  = "player" },
                 "Ah, an adventurer approaches...", 
                 { delay = 1000 },
                 "Strings that dance, magic that flows... Do you understand the harmony between control and chaos?",
@@ -79,20 +79,21 @@ local entity =
                 { delay = 2000 },
                 "Many have dared, only to find themselves tangled in their own strings, burned by the very magic they sought to create. Rise above, or be reduced to nothing but a cautionary tale.",
             },
-            REMINDER = { "You need both testimonies to prove your understanding of balance. Do not return empty-handed." },
-            ACCEPTED =
-            {
-                "So, you understand the test I have given you... Good.",
-                { delay = 2000 },
-                "Now go forth and return only when you have proven your resolve."
-            },
-            FINISH   = 
+            REMINDER   = { "You need both testimonies to prove your understanding of balance. Do not return empty-handed." },
+            ACCEPTED   = 
             {
                 "So, you have grasped both the strings of control and the ebb of magic...", 
                 { delay = 2000 },
                 "Very well. You have earned my recognition. But remember, a true master never ceases to refine their craft."
             },
-            AFTER    = { "The puppet dances, the magic flows... and you have found your place among them." },
+            DECLINED    = { 
+                { entity = "Azula", emote = xi.emote.NO },
+                "Nice try, but you cannot fool me. I will tolerate your presence for a little longer, but do not test my patience." 
+            }
+            AFTER    = { 
+                { entity = "Azula", face  = "player" },
+                "The puppet dances, the magic flows... and you have found your place among them."
+            },
         },
     },
 }
@@ -101,13 +102,13 @@ local step =
 {
     {
         check      = cq.checks({ level = 66, job = { xi.job.PUP } }),
-        [AZULA]    = cq.talkStep("START", info.name, "ACCEPTED"),
+        [AZULA]    = cq.talkStep("START", info.name),
     },
     {
         [AZULA] =
         {
             onTrigger = cq.talkOnly("REMINDER"),
-            onTrade   = cq.tradeStep("FINISH", "REMINDER", info.required.items),
+            onTrade   = cq.tradeStep("ACCEPTED", "DECLINED", info.required.item, info.reward, info.name, cexi.music.WHITEGATE),
         }
     },
     {
