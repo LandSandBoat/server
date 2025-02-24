@@ -47,8 +47,8 @@ local prizes =
         ['items'] =
         {
             xi.item.BOTTLE_OF_YAGUDO_DRINK, -- 1
-            xi.item.SUPER_ETHER_P3,         -- 2
-            xi.item.X_POTION_P3,            -- 3
+            xi.item.HI_ETHER_P3,         -- 2
+            xi.item.HI_POTION_P3,            -- 3
             xi.item.DAEDALUS_WING,          -- 4
             -- xi.item.MOG_KUPON_I_S1,  -- Mog Kupon I-S1
             -- xi.item.EUDAEMON_BLADE,  -- Eudaemon Blade
