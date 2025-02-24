@@ -226,21 +226,21 @@ m.tradeWeekly = function(rewards, questVar, success, decline)
         local week = rewards[VanadielRSERace()]
 
         if npcUtil.tradeHasExactly(trade, week.required) then
-            local delay  = cexi.util.dialogDelay(entity.dialog[success])
+            local delay  = cbxi.util.dialogDelay(entity.dialog[success])
             local result = week.rewards[math.random(1, #week.rewards)]
 
             -- Delay rewards until after success dialog
             npc:timer(delay, function(npgArg)
                 if m.giveAugmentRoll(player, result.item, result.augs) then
-                    player:setCharVar(questVar, cexi.util.nextVanaWeek())
+                    player:setCharVar(questVar, cbxi.util.nextVanaWeek())
                     player:tradeComplete()
                 end
             end)
 
-            cexi.util.dialog(player, entity.dialog[success], entity.name, { npc = npc })
+            cbxi.util.dialog(player, entity.dialog[success], entity.name, { npc = npc })
         else
             player:tradeRelease()
-            cexi.util.dialog(player, entity.dialog[decline], entity.name, { [1] = week.name, npc = npc })
+            cbxi.util.dialog(player, entity.dialog[decline], entity.name, { [1] = week.name, npc = npc })
         end
     end
 end
@@ -248,7 +248,7 @@ end
 m.talkWeekly = function(rewards, text)
     return function(player, npc, entity)
         local week = rewards[VanadielRSERace()]
-        cexi.util.dialog(player, entity.dialog[text], entity.name, { [1] = week.name, npc = npc })
+        cbxi.util.dialog(player, entity.dialog[text], entity.name, { [1] = week.name, npc = npc })
     end
 end
 
@@ -368,13 +368,13 @@ m.task = function(obj)
                 msg = obj.wrapper(msg)
             end
 
-            cexi.util.dialog(player, msg, obj.name, { npc = npc })
+            cbxi.util.dialog(player, msg, obj.name, { npc = npc })
         else
             if player:getLocalVar("[CU]BLOCKING") == 1 then
                 return
             end
 
-            cexi.util.dialog(player, obj.accepted, obj.name, { npc = npc })
+            cbxi.util.dialog(player, obj.accepted, obj.name, { npc = npc })
 
             if
                 obj.step == nil or
@@ -382,7 +382,7 @@ m.task = function(obj)
             then
                 player:setLocalVar("[CU]BLOCKING", 1)
 
-                local delay = cexi.util.dialogDelay(obj.accepted)
+                local delay = cbxi.util.dialogDelay(obj.accepted)
 
                 player:timer(delay, function(playerArg)
                     if obj.reward == nil then
@@ -402,9 +402,9 @@ end
 
 m.talkStep = function(text, questName, isMission)
     return function(player, npc, tbl, var, step)
-        cexi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
+        cbxi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
 
-        local delay = cexi.util.dialogDelay(tbl.dialog[text])
+        local delay = cbxi.util.dialogDelay(tbl.dialog[text])
         player:timer(delay, function(playerArg)
             player:setCharVar(var, step)
 
@@ -432,9 +432,9 @@ m.markStep = function(locs, text, func)
             anim = text
         end
 
-        cexi.util.dialog(player, anim, dialogFrom(tbl), { npc = npc })
+        cbxi.util.dialog(player, anim, dialogFrom(tbl), { npc = npc })
 
-        local delay = cexi.util.dialogDelay(anim)
+        local delay = cbxi.util.dialogDelay(anim)
 
         player:timer(delay, function(playerArg)
             npc:setStatus(xi.status.INVISIBLE)
@@ -465,7 +465,7 @@ m.dialog = function(obj)
             obj.check ~= nil and
             not m.checks(obj.check)
         then
-            cexi.util.dialog(player, tbl.dialog.DEFAULT, obj.name, { npc = npc })
+            cbxi.util.dialog(player, tbl.dialog.DEFAULT, obj.name, { npc = npc })
             return
         end
 
@@ -475,13 +475,13 @@ m.dialog = function(obj)
             event = conditional[obj.conditionalDialog](player, obj.event)
         end
 
-        cexi.util.dialog(player, event, obj.name, { npc = npc })
+        cbxi.util.dialog(player, event, obj.name, { npc = npc })
 
         if
             obj.step == nil or
             obj.step
         then
-            local delay = cexi.util.dialogDelay(event)
+            local delay = cbxi.util.dialogDelay(event)
             player:setLocalVar("[CU]REWARD", 1)
 
             player:timer(delay, function(playerArg)
@@ -619,7 +619,7 @@ m.shop = function(obj)
         end
 
         if obj.dialog ~= nil then
-            cexi.util.dialog(player, obj.dialog, "", { npc = npc })
+            cbxi.util.dialog(player, obj.dialog, "", { npc = npc })
         end
 
         local list = {}
@@ -634,7 +634,7 @@ m.shop = function(obj)
             end
         end
 
-        cexi.util.simpleShop(player, npc, list, purchase, fmt(obj.title, balance))
+        cbxi.util.simpleShop(player, npc, list, purchase, fmt(obj.title, balance))
     end
 end
 
@@ -701,9 +701,9 @@ end
 m.checkStep = function(text, alternative, name, check)
     return function(player, npc, tbl, var, step)
         if (m.checks(check))(player) then
-            cexi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
+            cbxi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
 
-            local delay = cexi.util.dialogDelay(tbl.dialog[text])
+            local delay = cbxi.util.dialogDelay(tbl.dialog[text])
             player:timer(delay, function(playerArg)
                 player:setCharVar(var, step)
 
@@ -712,7 +712,7 @@ m.checkStep = function(text, alternative, name, check)
                 end
             end)
         else
-            cexi.util.dialog(player, tbl.dialog[alternative], dialogFrom(tbl), { npc = npc })
+            cbxi.util.dialog(player, tbl.dialog[alternative], dialogFrom(tbl), { npc = npc })
         end
     end
 end
@@ -746,9 +746,9 @@ end
 
 m.talkFinish = function(text, questName, music, isMission)
     return function(player, npc, tbl, var, step)
-        cexi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
+        cbxi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
 
-        local delay = cexi.util.dialogDelay(tbl.dialog[text])
+        local delay = cbxi.util.dialogDelay(tbl.dialog[text])
         player:timer(delay, function(playerArg)
             player:setCharVar(var, step)
 
@@ -761,19 +761,19 @@ end
 
 m.talkOnly = function(text)
     return function(player, npc, tbl)
-        cexi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
+        cbxi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
     end
 end
 
 m.talkString = function(text)
     return function(player, npc, tbl)
-        cexi.util.dialog(player, { text }, nil)
+        cbxi.util.dialog(player, { text }, nil)
     end
 end
 
 m.talkTally = function(text, varName)
     return function(player, npc, tbl)
-        cexi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { [1] = player:getCharVar(varName) + 1, npc = npc })
+        cbxi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { [1] = player:getCharVar(varName) + 1, npc = npc })
     end
 end
 
@@ -1488,11 +1488,11 @@ m.menuSpawn = function(entityTable, title, opt, select, hideSpawner, params)
 
                         -- Perform dialog for all party members
                         if opt[i][2] ~= nil then
-                            delay = cexi.util.dialogDelay(tbl.dialog[opt[i][2]])
+                            delay = cbxi.util.dialogDelay(tbl.dialog[opt[i][2]])
                             local alliance = player:getAlliance()
 
                             for j = 1, #alliance do
-                                cexi.util.dialog(alliance[j], tbl.dialog[opt[i][2]], dialogFrom(tbl), { npc = npc })
+                                cbxi.util.dialog(alliance[j], tbl.dialog[opt[i][2]], dialogFrom(tbl), { npc = npc })
                             end
                         end
 
@@ -1526,8 +1526,8 @@ m.menuSpawn = function(entityTable, title, opt, select, hideSpawner, params)
         local delay = 0
 
         if type(title) == "table" then
-            delay = cexi.util.dialogDelay(tbl.dialog[title[1]])
-            cexi.util.dialog(player, tbl.dialog[title[1]], dialogFrom(tbl), { npc = npc })
+            delay = cbxi.util.dialogDelay(tbl.dialog[title[1]])
+            cbxi.util.dialog(player, tbl.dialog[title[1]], dialogFrom(tbl), { npc = npc })
 
             player:timer(delay, function(playerArg)
                 playerArg:customMenu({
@@ -1562,8 +1562,8 @@ m.menuReward = function(obj)
                 table.insert(options, {
                     obj.options[i][1],
                     function()
-                        local delay = cexi.util.dialogDelay(tbl.dialog[obj.message[2]])
-                        cexi.util.dialog(player, tbl.dialog[obj.message[2]], dialogFrom(tbl), { npc = npc })
+                        local delay = cbxi.util.dialogDelay(tbl.dialog[obj.message[2]])
+                        cbxi.util.dialog(player, tbl.dialog[obj.message[2]], dialogFrom(tbl), { npc = npc })
                         player:setLocalVar("[CU]REWARD", 1)
 
                         npc:timer(delay, function(playerArg)
@@ -1620,9 +1620,9 @@ m.menu = function(obj)
                 obj.default ~= nil and
                 player:getCharVar(obj.default.condition[1]) == obj.default.condition[2]
             then
-                cexi.util.dialog(player, obj.default.dialog, obj.name, { npc = npc })
+                cbxi.util.dialog(player, obj.default.dialog, obj.name, { npc = npc })
             else
-                cexi.util.dialog(player, tbl.dialog.DEFAULT, obj.name, { npc = npc })
+                cbxi.util.dialog(player, tbl.dialog.DEFAULT, obj.name, { npc = npc })
             end
 
             return
@@ -1710,8 +1710,8 @@ m.menu = function(obj)
                             return
                         end
 
-                        local delay = cexi.util.dialogDelay(obj.options[i][2])
-                        cexi.util.dialog(player, obj.options[i][2], obj.name, { npc = npc })
+                        local delay = cbxi.util.dialogDelay(obj.options[i][2])
+                        cbxi.util.dialog(player, obj.options[i][2], obj.name, { npc = npc })
 
                         if obj.options[3] ~= nil then
                             if player:getLocalVar("[CU]REWARD") == 1 then
@@ -1779,8 +1779,8 @@ m.menuStep = function(title, opt, select, questName, finish, music, isMission)
                     opt[i][1],
                     function()
                         if opt[i][2] ~= nil then
-                            local delay = cexi.util.dialogDelay(tbl.dialog[opt[i][2]])
-                            cexi.util.dialog(player, tbl.dialog[opt[i][2]], dialogFrom(tbl), { npc = npc })
+                            local delay = cbxi.util.dialogDelay(tbl.dialog[opt[i][2]])
+                            cbxi.util.dialog(player, tbl.dialog[opt[i][2]], dialogFrom(tbl), { npc = npc })
 
                             if opt[i][3] ~= nil then
                                 if player:getLocalVar("[CU]REWARD") == 1 then
@@ -1822,7 +1822,7 @@ m.menuStep = function(title, opt, select, questName, finish, music, isMission)
                     opt[i][1],
                     function()
                         if opt[i][2] ~= nil then
-                            cexi.util.dialog(player, tbl.dialog[opt[i][2]], dialogFrom(tbl), { npc = npc })
+                            cbxi.util.dialog(player, tbl.dialog[opt[i][2]], dialogFrom(tbl), { npc = npc })
                         end
                     end,
                 })
@@ -1914,9 +1914,9 @@ m.restoreJob = function(text, name, music)
                             player:setCharVar(var, step)
                             player:setUnbreakable(false)
 
-                            cexi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
+                            cbxi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
 
-                            local delay = cexi.util.dialogDelay(tbl.dialog[text])
+                            local delay = cbxi.util.dialogDelay(tbl.dialog[text])
 
                             playerArg:timer(delay, function()
                                 m.questCompleted(player, name, music)
@@ -1931,9 +1931,9 @@ m.restoreJob = function(text, name, music)
                 player:setCharVar(var, step)
                 player:setUnbreakable(false)
 
-                cexi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
+                cbxi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
 
-                local delay = cexi.util.dialogDelay(tbl.dialog[text])
+                local delay = cbxi.util.dialogDelay(tbl.dialog[text])
 
                 player:timer(delay, function(playerArg)
                     m.questCompleted(playerArg, name, music)
@@ -1950,9 +1950,9 @@ m.restoreJob = function(text, name, music)
             player:setCharVar(var, step)
             player:setUnbreakable(false)
 
-            cexi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
+            cbxi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
 
-            local delay = cexi.util.dialogDelay(tbl.dialog[text])
+            local delay = cbxi.util.dialogDelay(tbl.dialog[text])
 
             playerArg:timer(delay, function()
                 m.questCompleted(player, name, music)
@@ -1968,8 +1968,8 @@ m.giveStart = function(text, reward, name)
         end
 
         player:setLocalVar("[CU]REWARD", 1)
-        local delay = cexi.util.dialogDelay(tbl.dialog[text])
-        cexi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
+        local delay = cbxi.util.dialogDelay(tbl.dialog[text])
+        cbxi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
 
         player:timer(delay, function(playerArg)
             if giveReward(player, reward) then
@@ -1993,8 +1993,8 @@ m.giveStep = function(text, reward, name, music, isMission)
         end
 
         player:setLocalVar("[CU]REWARD", 1)
-        local delay = cexi.util.dialogDelay(tbl.dialog[text])
-        cexi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
+        local delay = cbxi.util.dialogDelay(tbl.dialog[text])
+        cbxi.util.dialog(player, tbl.dialog[text], dialogFrom(tbl), { npc = npc })
 
         player:timer(delay, function(playerArg)
             if giveReward(player, reward) then
@@ -2021,8 +2021,8 @@ m.giveConditional = function(condition, text, reward)
 
         if condition == "job" then
             local job   = player:getMainJob()
-            local delay = cexi.util.dialogDelay(tbl.dialog[text][job])
-            cexi.util.dialog(player, tbl.dialog[text][job], dialogFrom(tbl), { npc = npc })
+            local delay = cbxi.util.dialogDelay(tbl.dialog[text][job])
+            cbxi.util.dialog(player, tbl.dialog[text][job], dialogFrom(tbl), { npc = npc })
 
             player:timer(delay, function(playerArg)
                 if npcUtil.giveItem(player, reward[job]) then
@@ -2141,8 +2141,8 @@ m.spawnMob = function(entityID, text, hideSpawner, params)
         end
 
         if text then
-            delay = cexi.util.dialogDelay(entity.dialog[text])
-            cexi.util.dialog(player, entity.dialog[text], dialogFrom(entity), { npc = npc })
+            delay = cbxi.util.dialogDelay(entity.dialog[text])
+            cbxi.util.dialog(player, entity.dialog[text], dialogFrom(entity), { npc = npc })
         end
 
         npc:timer(delay, function(npcArg)
@@ -2220,7 +2220,7 @@ local getSteps = function(var, entity, steps, entities)
                 not steps[step].check(player)
             )
         then
-            cexi.util.dialog(player, entity.dialog.DEFAULT, dialogFrom(entity))
+            cbxi.util.dialog(player, entity.dialog.DEFAULT, dialogFrom(entity))
         else
             if type(func[step]) == "table" then
                 if func[step]["onTrigger"] ~= nil then
@@ -2228,13 +2228,13 @@ local getSteps = function(var, entity, steps, entities)
                         func[step].check and
                         not func[step].check(player)
                     then
-                        cexi.util.dialog(player, entity.dialog.DEFAULT, dialogFrom(entity))
+                        cbxi.util.dialog(player, entity.dialog.DEFAULT, dialogFrom(entity))
                         return
                     end
 
                     func[step]["onTrigger"](player, npc, entity, var, step, entities)
                 else
-                    cexi.util.dialog(player, entity.dialog.DEFAULT, dialogFrom(entity))
+                    cbxi.util.dialog(player, entity.dialog.DEFAULT, dialogFrom(entity))
                 end
             else
                 func[step](player, npc, entity, var, step, entities)
@@ -2486,8 +2486,8 @@ m.tradeStep = function(success, decline, items, reward, questName, music, isMiss
 
         if npcUtil.tradeHasExactly(trade, items) then
             player:setLocalVar("[CU]REWARD", 1)
-            local delay = cexi.util.dialogDelay(entity.dialog[success])
-            cexi.util.dialog(player, entity.dialog[success], dialogFrom(entity), { npc = npc })
+            local delay = cbxi.util.dialogDelay(entity.dialog[success])
+            cbxi.util.dialog(player, entity.dialog[success], dialogFrom(entity), { npc = npc })
 
             player:timer(delay, function(playerArg)
                 if
@@ -2508,7 +2508,7 @@ m.tradeStep = function(success, decline, items, reward, questName, music, isMiss
                 end
             end)
         else
-            cexi.util.dialog(player, entity.dialog[decline], dialogFrom(entity), { npc = npc })
+            cbxi.util.dialog(player, entity.dialog[decline], dialogFrom(entity), { npc = npc })
         end
     end
 end
@@ -2516,7 +2516,7 @@ end
 local function performTrade(obj, player, var, count, increment, items, multiple)
     if
         (obj.reward == nil and items == nil) or
-        cexi.util.giveItem(player, items or obj.reward, { multiple = multiple })
+        cbxi.util.giveItem(player, items or obj.reward, { multiple = multiple })
     then
         player:tradeComplete()
 
@@ -2557,8 +2557,8 @@ m.trade = function(obj)
             for _, tradeInfo in pairs(obj.list) do
                 if npcUtil.tradeHasExactly(trade, tradeInfo.required) then
                     player:setLocalVar("[CU]REWARD", 1)
-                    local delay = cexi.util.dialogDelay(tradeInfo.accepted)
-                    cexi.util.dialog(player, tradeInfo.accepted, obj.name, { npc = npc })
+                    local delay = cbxi.util.dialogDelay(tradeInfo.accepted)
+                    cbxi.util.dialog(player, tradeInfo.accepted, obj.name, { npc = npc })
 
                     player:timer(delay, function(playerArg)
                         performTrade(obj, player, var, nil, tradeInfo.increment)
@@ -2578,7 +2578,7 @@ m.trade = function(obj)
                     obj.sellrate == nil) or
                     (obj.exclude ~= nil and obj.exclude[itemID])
                 then
-                    cexi.util.dialog(player, obj.declined, obj.name, { npc = npc })
+                    cbxi.util.dialog(player, obj.declined, obj.name, { npc = npc })
                     return
                 end
 
@@ -2594,8 +2594,8 @@ m.trade = function(obj)
 
             player:setLocalVar("[CU]REWARD", 1)
 
-            local delay = cexi.util.dialogDelay(obj.accepted)
-            cexi.util.dialog(player, obj.accepted, obj.name, { npc = npc })
+            local delay = cbxi.util.dialogDelay(obj.accepted)
+            cbxi.util.dialog(player, obj.accepted, obj.name, { npc = npc })
 
             player:timer(delay, function(playerArg)
                 local givenGil = 0
@@ -2639,7 +2639,7 @@ m.trade = function(obj)
                                 exchangeList = obj.conditional(player, obj.exchange[slotID])
                             end
 
-                            local result  = cexi.util.pickItem(exchangeList)
+                            local result  = cbxi.util.pickItem(exchangeList)
                             local givenID = result[2]
 
                             if type(givenID) == "table" then
@@ -2718,8 +2718,8 @@ m.trade = function(obj)
                 npcUtil.tradeHasExactly(trade, obj.required)
             then
                 player:setLocalVar("[CU]REWARD", 1)
-                local delay = cexi.util.dialogDelay(obj.accepted)
-                cexi.util.dialog(player, obj.accepted, obj.name, { [1] = count, [2] = total, npc = npc })
+                local delay = cbxi.util.dialogDelay(obj.accepted)
+                cbxi.util.dialog(player, obj.accepted, obj.name, { [1] = count, [2] = total, npc = npc })
 
                 player:timer(delay, function(playerArg)
                     performTrade(obj, player, var, count)
@@ -2729,7 +2729,7 @@ m.trade = function(obj)
             end
         end
 
-        cexi.util.dialog(player, obj.declined, obj.name, { npc = npc })
+        cbxi.util.dialog(player, obj.declined, obj.name, { npc = npc })
     end
 end
 
@@ -2741,14 +2741,14 @@ m.tallyStep = function(success, decline, items, reward, tallyvar, tallyadd, ques
 
         if npcUtil.tradeHasExactly(trade, items) then
             player:setLocalVar("[CU]REWARD", 1)
-            local delay = cexi.util.dialogDelay(entity.dialog[success])
+            local delay = cbxi.util.dialogDelay(entity.dialog[success])
 
             if tallyvar ~= nil then
                 local amount = player:getCharVar(tallyvar) + tallyadd
                 player:setCharVar(tallyvar, amount)
-                cexi.util.dialog(player, entity.dialog[success], dialogFrom(entity), { [1] = amount, npc = npc })
+                cbxi.util.dialog(player, entity.dialog[success], dialogFrom(entity), { [1] = amount, npc = npc })
             else
-                cexi.util.dialog(player, entity.dialog[success], dialogFrom(entity), { npc = npc })
+                cbxi.util.dialog(player, entity.dialog[success], dialogFrom(entity), { npc = npc })
             end
 
             player:timer(delay, function(playerArg)
@@ -2770,7 +2770,7 @@ m.tallyStep = function(success, decline, items, reward, tallyvar, tallyadd, ques
                 end
             end)
         else
-            cexi.util.dialog(player, entity.dialog[decline], dialogFrom(entity), { npc = npc })
+            cbxi.util.dialog(player, entity.dialog[decline], dialogFrom(entity), { npc = npc })
         end
     end
 end
@@ -2783,14 +2783,14 @@ m.tradeOnly = function(success, decline, items, reward, tallyvar, tallyadd, ques
 
         if npcUtil.tradeHasExactly(trade, items) then
             player:setLocalVar("[CU]REWARD", 1)
-            local delay = cexi.util.dialogDelay(entity.dialog[success])
+            local delay = cbxi.util.dialogDelay(entity.dialog[success])
 
             if tallyvar ~= nil then
                 local amount = player:getCharVar(tallyvar) + tallyadd
                 player:setCharVar(tallyvar, amount)
-                cexi.util.dialog(player, entity.dialog[success], dialogFrom(entity), { [1] = amount, npc = npc })
+                cbxi.util.dialog(player, entity.dialog[success], dialogFrom(entity), { [1] = amount, npc = npc })
             else
-                cexi.util.dialog(player, entity.dialog[success], dialogFrom(entity), { npc = npc })
+                cbxi.util.dialog(player, entity.dialog[success], dialogFrom(entity), { npc = npc })
             end
 
             player:timer(delay, function(playerArg)
@@ -2811,7 +2811,7 @@ m.tradeOnly = function(success, decline, items, reward, tallyvar, tallyadd, ques
                 end
             end)
         else
-            cexi.util.dialog(player, entity.dialog[decline], dialogFrom(entity), { npc = npc })
+            cbxi.util.dialog(player, entity.dialog[decline], dialogFrom(entity), { npc = npc })
         end
     end
 end
@@ -2823,8 +2823,8 @@ m.tradeCount = function(tbl)
             player:setCharVar(tbl.var, amount)
 
             if amount >= tbl.require then
-                local delay = cexi.util.dialogDelay(entity.dialog[tbl.after[1]])
-                cexi.util.dialog(player, entity.dialog[tbl.after[1]], dialogFrom(entity), { [1] = amount, npc = npc })
+                local delay = cbxi.util.dialogDelay(entity.dialog[tbl.after[1]])
+                cbxi.util.dialog(player, entity.dialog[tbl.after[1]], dialogFrom(entity), { [1] = amount, npc = npc })
 
                 player:timer(delay, function(playerArg)
                     if
@@ -2843,8 +2843,8 @@ m.tradeCount = function(tbl)
                     end
                 end)
             else
-                local delay = cexi.util.dialogDelay(entity.dialog[tbl.before[1]])
-                cexi.util.dialog(player, entity.dialog[tbl.before[1]], dialogFrom(entity), { [1] = amount, npc = npc })
+                local delay = cbxi.util.dialogDelay(entity.dialog[tbl.before[1]])
+                cbxi.util.dialog(player, entity.dialog[tbl.before[1]], dialogFrom(entity), { [1] = amount, npc = npc })
 
                 player:timer(delay, function(playerArg)
                     if
@@ -2863,7 +2863,7 @@ m.tradeCount = function(tbl)
                 end)
             end
         else
-            cexi.util.dialog(player, entity.dialog[tbl.decline], dialogFrom(entity), { npc = npc })
+            cbxi.util.dialog(player, entity.dialog[tbl.decline], dialogFrom(entity), { npc = npc })
         end
     end
 end
@@ -2940,14 +2940,14 @@ local getMobSteps = function(event, var, entity, steps, entities)
                 for _, pool in pairs(entity.pool) do
                     if pool.quantity ~= nil then
                         for _ = 1, pool.quantity do
-                            local result = cexi.util.pickItem(pool)
+                            local result = cbxi.util.pickItem(pool)
 
                             if result[2] ~= 0 then
                                 player:addTreasure(result[2], mob)
                             end
                         end
                     else
-                        local result = cexi.util.pickItem(pool)
+                        local result = cbxi.util.pickItem(pool)
 
                         if result[2] ~= 0 then
                             player:addTreasure(result[2], mob)
@@ -2991,7 +2991,7 @@ local getMobSteps = function(event, var, entity, steps, entities)
         end
 
         if entity.casket ~= nil then
-            cexi.aether.rollCasket(mob, player)
+            cbxi.aether.rollCasket(mob, player)
         end
 
         if entity.delCap ~= nil then
@@ -3199,7 +3199,7 @@ m.add = function(source, tbl)
                 if dynamicEntity ~= nil then
                     entitySetup(dynamicEntity, tbl, entity)
 
-                    local zone = GetZone(cexi.zone[k])
+                    local zone = GetZone(cbxi.zone[k])
 
                     if zone ~= nil then
                         entityRefresh(dynamicEntity, zone, tbl, entity)
