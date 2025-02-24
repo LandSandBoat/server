@@ -692,20 +692,39 @@ void CZone::UpdateWeather()
     // clang-format on
 }
 
-void CZone::SetKeepAlive()
+void CZone::CheckMobsPathedBack()
 {
-    // create timer to keep zone alive for 15 minutes
-    CTaskMgr::getInstance()->AddTask("zone_empty_timer", server_clock::now(), this, CTaskMgr::TASK_ONCE, 15min,
+    // clang-format off
+    CTaskMgr::getInstance()->AddTask("zone_empty_timer", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, 5s,
     [](time_point tick, CTaskMgr::CTask* PTask)
     {
-        // if the timer runs out, sleep the zone
+        bool allMobsHome = true;
+        // if the timer runs out, check if all the mobs have pathed home
         CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
-        if (PZone)
+        if (PZone && PZone->GetZoneEntities())
+        {
+            EntityList_t mobListMap = PZone->GetZoneEntities()->GetMobList();
+            for (const auto& pair : mobListMap)
+            {
+                CMobEntity* mob = dynamic_cast<CMobEntity*>(pair.second);
+                if (mob && mob->IsFarFromHome())
+                {
+                    // at least one mob is away from home
+                    allMobsHome = false;
+                    break;
+                }
+            }
+        }
+
+        // if all mobs home, sleep the zone, @todo and stop timer?
+        if (allMobsHome)
         {
             PZone->SleepZone();
         }
+
         return 0;
     });
+    // clang-format on
 }
 
 /************************************************************************
@@ -722,7 +741,7 @@ void CZone::DecreaseZoneCounter(CCharEntity* PChar)
 
     if (m_zoneEntities->CharListEmpty())
     {
-        SetKeepAlive();
+        CheckMobsPathedBack();
     }
     else
     {
