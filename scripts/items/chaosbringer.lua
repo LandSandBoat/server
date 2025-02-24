@@ -19,6 +19,13 @@ itemObject.onItemEquip = function(target, item)
             not optParams.isWeaponSkillKill
         then
             player:incrementCharVar('ChaosbringerKills', 1)
+            if xi.settings.map.CHAOSBRINGER_MESSAGE_FLAG then
+                if player:getCharVar('ChaosbringerKills') >= xi.settings.map.CHAOSBRINGER_KILLS then
+                    player:printToPlayer(xi.settings.map.CHAOSBRINGER_COMPLETE_MESSAGE)
+                else
+                    player:printToPlayer(string.format(xi.settings.map.CHAOSBRINGER_PROGRESS_MESSAGE, player:getCharVar('ChaosbringerKills'), xi.settings.map.CHAOSBRINGER_KILLS))
+                end
+            end
         end
     end)
 end

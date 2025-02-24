@@ -74,7 +74,7 @@ quest.sections =
             onZoneIn = function(player, prevZone)
                 if
                     prevZone == xi.zone.PASHHOW_MARSHLANDS and
-                    player:getCharVar('ChaosbringerKills') >= 100
+                    player:getCharVar('ChaosbringerKills') >= xi.settings.map.CHAOSBRINGER_KILLS
                 then
                     return 121
                 end

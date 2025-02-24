@@ -6728,6 +6728,23 @@ namespace charutils
 
             const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u LIMIT 1";
             _sql->Query(Query, extra, PChar->id, PWeapon->getLocationID(), PWeapon->getSlotID());
+
+            if (settings::get<bool>("map.ENABLE_TRIAL_WS_POINT_MESSAGE"))
+            {
+                int final_ws_points = settings::get<int>("map.TRIAL_WS_POINTS");
+                int trial_ws_points = PWeapon->getCurrentUnlockPoints();
+                if (trial_ws_points >= final_ws_points)
+                {
+                    const std::string msg = settings::get<std::string>("map.TRIAL_FINISH_MESSAGE");
+                    PChar->pushPacket<CChatMessagePacket>(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, msg.c_str(), "");
+                }
+                else
+                {
+                    const std::string msg_fmt = settings::get<std::string>("map.TRIAL_WS_POINT_MESSAGE");
+                    const std::string msg     = fmt::sprintf(msg_fmt, trial_ws_points, final_ws_points);
+                    PChar->pushPacket<CChatMessagePacket>(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, msg.c_str(), "");
+                }
+            }
             return true;
         }
         return false;

@@ -18,7 +18,12 @@ quest.sections =
     -- and is flagged if Abyssea is enabled in onGameIn.
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_ACCEPTED and player:getMainLvl() >= 30
+            custom_check = true
+            if xi.settings.map.MISSION_PROGRESS_CUSTOM then
+                custom_check = player:hasCompletedMission(xi.mission.log_id.ASA, xi.mission.id.asa.A_SHANTOTTO_ASCENSION_FIN)
+            end
+
+            return status == xi.questStatus.QUEST_ACCEPTED and player:getMainLvl() >= 30 and custom_check
         end,
 
         [xi.zone.PORT_JEUNO] =

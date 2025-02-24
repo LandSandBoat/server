@@ -28,7 +28,12 @@ mission.sections =
                 return false
             end
 
-            return currentMission == mission.missionId and xi.settings.main.ENABLE_SOA == 1
+            custom_check = true
+            if xi.settings.map.MISSION_PROGRESS_CUSTOM then
+                custom_check = player:hasCompletedQuest(xi.questLog.ABYSSEA, xi.quest.id.abyssea.HEROES_OF_ABYSSEA)
+            end
+
+            return currentMission == mission.missionId and xi.settings.main.ENABLE_SOA == 1 and custom_check
         end,
 
         [xi.zone.LOWER_JEUNO] =
