@@ -698,7 +698,7 @@ void CZone::CheckMobsPathedBack()
     CTaskMgr::getInstance()->AddTask("zone_empty_timer", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, 5s,
     [](time_point tick, CTaskMgr::CTask* PTask)
     {
-        bool allMobsHome = true;
+        bool allMobsHomeAndHealed = true;
         // if the timer runs out, check if all the mobs have pathed home
         CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
         if (PZone && PZone->GetZoneEntities())
@@ -707,17 +707,19 @@ void CZone::CheckMobsPathedBack()
             for (const auto& pair : mobListMap)
             {
                 CMobEntity* mob = dynamic_cast<CMobEntity*>(pair.second);
-                if (mob && mob->IsFarFromHome())
+
+                // if the mob is not fully healed OR ((the mob can rome home AND is far from home) OR the mob can't rome home)
+                if (mob && !mob->isFullyHealed() || ((mob->CanRoamHome() && mob->IsFarFromHome()) || !mob->CanRoamHome()))
                 {
-                    // at least one mob is away from home
-                    allMobsHome = false;
+                    // at least one mob is away from home or not fully healed
+                    allMobsHomeAndHealed = false;
                     break;
                 }
             }
         }
 
-        // if all mobs home, sleep the zone, @todo and stop timer?
-        if (allMobsHome)
+        // if all mobs home and healed up, sleep the zone @todo and stop timer?
+        if (allMobsHomeAndHealed)
         {
             PZone->SleepZone();
         }
@@ -949,8 +951,6 @@ void CZone::SleepZone()
 
         ZoneTimerTriggerAreas->m_type = CTaskMgr::TASK_REMOVE;
         ZoneTimerTriggerAreas         = nullptr;
-
-        m_zoneEntities->HealAllMobs();
     }
 }
 

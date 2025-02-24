@@ -110,6 +110,11 @@ bool CBattleEntity::isAlive()
     return !isDead();
 }
 
+bool CBattleEntity::isFullyHealed()
+{
+    return (isAlive() && health.hp >= health.maxhp && health.mp >= health.maxmp);
+}
+
 bool CBattleEntity::isInDynamis()
 {
     auto* PZone = loc.zone == nullptr ? zoneutils::GetZone(loc.destination) : loc.zone;
