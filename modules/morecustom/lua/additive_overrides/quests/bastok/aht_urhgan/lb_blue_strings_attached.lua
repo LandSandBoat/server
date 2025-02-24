@@ -108,7 +108,7 @@ local step =
         [AZULA] =
         {
             onTrigger = cq.talkOnly("REMINDER"),
-            onTrade   = cq.tradeStep("ACCEPTED", "DECLINED", info.required.item, info.reward, info.name, cexi.music.WHITEGATE),
+            onTrade   = cq.tradeStep("ACCEPTED", "DECLINED", info.required.item, info.reward, info.name, cbxi.music.WHITEGATE),
         }
     },
     {
