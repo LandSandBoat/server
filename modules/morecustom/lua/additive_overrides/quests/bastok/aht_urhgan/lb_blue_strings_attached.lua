@@ -62,7 +62,7 @@ local entity =
         type   = xi.objType.NPC,
         look   = "0x0000170300000000000000000000000000000000",
         area   = "Aht_Urhgan_Whitegate",
-        pos    = { 8.52, 11.04, 0, 90 }, -- !pos 11.8379 11.04 0 90
+        pos    = { 11.8379, 0.0000, 0.1778, 250 }, -- !pos 11.8379 0.0000 0.1778 250
         dialog =
         {
             NAME      = true,
@@ -100,7 +100,7 @@ local entity =
 local step =
 {
     {
-        check      = cq.checks({ level = 66, job = { xi.job.PUP, xi.job.BLU } }),
+        check      = cq.checks({ level = 66, job = { xi.job.PUP } }),
         [AZULA]    = cq.talkStep("START", info.name, "ACCEPTED"),
     },
     {
@@ -111,12 +111,9 @@ local step =
         }
     },
     {
-        check      = cq.checks({ job = { xi.job.PUP, xi.job.BLU } }),
+        check      = cq.checks({ job = { xi.job.PUP } }),
         [AZULA]    = cq.talkOnly("AFTER"),
     },
-    {
-        [AZULA] = cq.talkOnly("DEFAULT"),
-    }
 }
 
 cq.add(m, {
