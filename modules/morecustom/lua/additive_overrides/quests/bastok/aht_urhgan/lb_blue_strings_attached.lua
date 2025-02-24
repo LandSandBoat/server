@@ -86,11 +86,11 @@ local entity =
                 { delay = 2000 },
                 "Very well. You have earned my recognition. But remember, a true master never ceases to refine their craft."
             },
-            DECLINED    = { 
+            DECLINED     = { 
                 { entity = "Azula", emote = xi.emote.NO },
                 "Nice try, but you cannot fool me. I will tolerate your presence for a little longer, but do not test my patience." 
-            }
-            AFTER    = { 
+            },
+            AFTER        = { 
                 { entity = "Azula", face  = "player" },
                 "The puppet dances, the magic flows... and you have found your place among them."
             },
