@@ -16,9 +16,14 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
+            custom_check = true
+            if xi.settings.map.MISSION_PROGRESS_CUSTOM then
+                custom_check = player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.LEST_WE_FORGET)
+            end
+
             return currentMission == mission.missionId and
                 xi.settings.main.ENABLE_ACP == 1 and
-                player:getMainLvl() >= 10
+                player:getMainLvl() >= 10 and custom_check
         end,
 
         [xi.zone.LOWER_JEUNO] =

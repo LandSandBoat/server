@@ -72,7 +72,7 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, xi.item.TACHI_OF_TRIALS) then
                         local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
-                        if wsPoints < 300 then
+                        if wsPoints < xi.settings.map.TRIAL_WS_POINTS then
                             return quest:event(180) -- unfinished weapon
                         else
                             return quest:progressEvent(181) -- finished weapon

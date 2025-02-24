@@ -471,7 +471,16 @@ namespace itemutils
                         ((CItemWeapon*)PItem)->setDamage(_sql->GetUIntData(31));
                         ((CItemWeapon*)PItem)->setDmgType(static_cast<DAMAGE_TYPE>(_sql->GetUIntData(32)));
                         ((CItemWeapon*)PItem)->setMaxHit(_sql->GetUIntData(33));
-                        ((CItemWeapon*)PItem)->setTotalUnlockPointsNeeded(_sql->GetUIntData(34));
+                        // EVWSのトライアルの場合はmain.luaの設定値に置き換える
+                        int unclock_point = _sql->GetUIntData(34);
+                        if (unclock_point == 300)
+                        {
+                            ((CItemWeapon*)PItem)->setTotalUnlockPointsNeeded(settings::get<int>("map.TRIAL_WS_POINTS"));
+                        }
+                        else
+                        {
+                            ((CItemWeapon*)PItem)->setTotalUnlockPointsNeeded(unclock_point);
+                        }
 
                         int  dmg   = _sql->GetUIntData(31);
                         int  delay = _sql->GetIntData(30);

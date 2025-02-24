@@ -73,7 +73,7 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, xi.item.KNUCKLES_OF_TRIALS) then
                         local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
-                        if wsPoints < 300 then
+                        if wsPoints < xi.settings.map.TRIAL_WS_POINTS then
                             return quest:event(288)
                         else
                             return quest:progressEvent(289)

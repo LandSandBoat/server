@@ -22,7 +22,12 @@ mission.sections =
     -- 1. To start this mission, enter Lower Delkfutt's Tower for a cutscene after installing the Chains of Promathia expansion pack.
     {
         check = function(player, currentMission, missionStatus, vars)
-            return xi.settings.main.ENABLE_COP == 1 and currentMission < xi.mission.id.cop.THE_RITES_OF_LIFE
+            custom_check = true
+            if xi.settings.map.MISSION_PROGRESS_CUSTOM then
+                custom_check = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_LAST_VERSE)
+            end
+
+            return xi.settings.main.ENABLE_COP == 1 and currentMission < xi.mission.id.cop.THE_RITES_OF_LIFE and custom_check
         end,
 
         [xi.zone.LOWER_DELKFUTTS_TOWER] =

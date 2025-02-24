@@ -239,7 +239,7 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
     --     kupowersBonus = 0.2
     -- end
 
-    if typeChance < 0.2 + kupowersBonus then
+    if typeChance < xi.settings.main.CASKET_BROWN_CHANCE + kupowersBonus then
         chestStyle = 966 -- Brown locked
     else
         chestStyle = 965 -- Blue
@@ -260,7 +260,11 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
             npc:setLocalVar('[caskets]ATTEMPTS', attempts)
             npc:setLocalVar('[caskets]CORRECT_NUM', correctNum)
             npc:setLocalVar('[caskets]FAILED_ATEMPTS', 0)
-            npc:setLocalVar('[caskets]LOCKED', 1)
+            if xi.settings.main.CASKET_NO_PASSWORD then
+                npc:setLocalVar('[caskets]LOCKED', 0)
+            else
+                npc:setLocalVar('[caskets]LOCKED', 1)
+            end
             npc:setLocalVar('[caskets]LOOT_TYPE', 2)
             npc:setLocalVar('[caskets]HINTS_TABLE', 1234567)
         else
