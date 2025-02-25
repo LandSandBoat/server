@@ -84,7 +84,7 @@ local entity =
                 { delay = 2000 },
                 "Bring me a Blue Mage and a Puppetmaster Testimony. Only then will I acknowledge your worth.",
                 { delay = 2000 },
-                "Many have dared, only to find themselves tangled in their own strings, burned by the very magic they sought to create."
+                "Many have dared, only to find themselves tangled in their own strings, burned by the very magic they sought to create.",
                 { delay = 2000 },
                 "Rise above, or be reduced to nothing but a cautionary tale.",
             },
