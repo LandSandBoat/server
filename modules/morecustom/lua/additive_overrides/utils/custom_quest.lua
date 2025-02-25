@@ -2046,7 +2046,16 @@ local checkList =
     end,
 
     job  = function(player, val)
-        return player:getMainJob() == val
+        if type(val) == "table" then
+            for _, job in ipairs(val) do
+                if player:getMainJob() == job then
+                    return true
+                end
+            end
+            return false
+        else
+            return player:getMainJob() == val
+        end
     end,
 
     jobvar = function(player, var)

@@ -65,7 +65,10 @@ local entity =
         dialog =
         {
             NAME      = true,
-            DEFAULT   = { "I am a 400-foot tall purple platypus bear with pink horns and silver wings." },
+            DEFAULT   = { 
+                { entity = "Azula", face  = "player" },
+                "I am a 400-foot tall purple platypus bear with pink horns and silver wings." 
+            },
             START     =
             {
                 { entity = "Azula", face  = "player" },
@@ -79,7 +82,7 @@ local entity =
                 { delay = 2000 },
                 "Many have dared, only to find themselves tangled in their own strings, burned by the very magic they sought to create. Rise above, or be reduced to nothing but a cautionary tale.",
             },
-            REMINDER   = { "You need both testimonies to prove your understanding of balance. Do not return empty-handed." },
+            REMINDER   = { "Bring me both testimonies to prove your understanding of balance. Do not return empty-handed." },
             ACCEPTED   = 
             {
                 "So, you have grasped both the strings of control and the ebb of magic...", 
@@ -88,7 +91,7 @@ local entity =
             },
             DECLINED     = { 
                 { entity = "Azula", emote = xi.emote.NO },
-                "Nice try, but you cannot fool me. I will tolerate your presence for a little longer, but do not test my patience." 
+                "Nice try, but you cannot fool me. I will tolerate your presence for a little longer, but DO NOT test my patience." 
             },
             AFTER        = { 
                 { entity = "Azula", face  = "player" },
@@ -101,7 +104,7 @@ local entity =
 local step =
 {
     {
-        check      = cq.checks({ level = 66, job = { xi.job.PUP } }),
+        check      = cq.checks({ level = 66, job = { xi.job.BLU, xi.job.PUP } }),
         [AZULA]    = cq.talkStep("START", info.name),
     },
     {
@@ -112,7 +115,7 @@ local step =
         }
     },
     {
-        check      = cq.checks({ job = { xi.job.PUP } }),
+        check      = cq.checks({ job = { xi.job.BLU, xi.job.PUP } }),
         [AZULA]    = cq.talkOnly("AFTER"),
     },
 }
