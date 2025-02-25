@@ -4,7 +4,7 @@
 -- Steps
 -------------------------------------------------------
 -- !setvar [LB]BLUE_STRINGS_ATTACHED 0
--- Azula     !pos 11.8379 0.0000 0.1778 270
+-- Azula     !pos 11.8379 0.0000 0.1778 260
 -- Unlocks: Lv71-75 (PUP LB5, BLU LB5)
 -------------------------------------------------------
 -- !setvar [LB]BLUE_STRINGS_ATTACHED 2
@@ -61,7 +61,7 @@ local entity =
         type   = xi.objType.NPC,
         look   = "0x0000170300000000000000000000000000000000",
         area   = "Aht_Urhgan_Whitegate",
-        pos    = { 11.8379, 0.0000, 0.1778, 270 }, -- !pos 11.8379 0.0000 0.1778 270
+        pos    = { 11.8379, 0.0000, 0.1778, 260 }, -- !pos 11.8379 0.0000 0.1778 260
         dialog =
         {
             NAME      = true,
