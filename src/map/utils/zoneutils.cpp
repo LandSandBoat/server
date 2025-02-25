@@ -485,7 +485,7 @@ namespace zoneutils
                             PMob->m_ModelRadius = rset->get<float>("mobradius");
 
                             PMob->baseSpeed      = rset->get<uint8>("speed");
-                            PMob->animationSpeed = rset->get<uint8>("animationsub");
+                            PMob->animationSpeed = rset->get<uint8>("speed");
                             PMob->UpdateSpeed();
 
                             PMob->strRank = rset->get<uint8>("STR");

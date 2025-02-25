@@ -51,14 +51,19 @@ zones[xi.zone.VALKURM_DUNES] =
         REGIME_REGISTERED              = 10278, -- New training regime registered!
         COMMON_SENSE_SURVIVAL          = 12332, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
-        VALKURM_EMPEROR = GetFirstID('Valkurm_Emperor'),
-        GOLDEN_BAT      = GetFirstID('Golden_Bat'),
-        MARCHELUTE      = GetFirstID('Marchelute'),
-        DOMAN           = GetFirstID('Doman'),
-        ONRYO           = GetFirstID('Onryo'),
+        BEACH_MONK          = GetFirstID('Beach_Monk'),
+        DOMAN               = GetFirstID('Doman'),
+        GOLDEN_BAT          = GetFirstID('Golden_Bat'),
+        HEIKE_CRAB          = GetFirstID('Heike_Crab'),
+        HOUU_THE_SHOALWADER = GetFirstID('Houu_the_Shoalwader'),
+        MARCHELUTE          = GetFirstID('Marchelute'),
+        ONRYO               = GetFirstID('Onryo'),
+        VALKURM_EMPEROR     = GetFirstID('Valkurm_Emperor'),
     },
+
     npc =
     {
         SUNSAND_QM    = GetFirstID('qm1'),

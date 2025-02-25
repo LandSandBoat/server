@@ -28,6 +28,7 @@ return {
     ['Gizel']                = { event = 676 },
     ['Guilboire']            = { event = 657 },
     ['Hae_Jakhya']           = { event = 610 },
+    ['Helbort']              = { event = 593 },
     ['Katharina']            = { event = 887 },
     ['Lotte']                = { event = 564 },
     ['Luthiaque']            = { event = 658 },

@@ -64,11 +64,14 @@ local beginCardianFight = function(player, npc)
         table.insert(cardianIds, cardianId)
     end
 
+    local params = {}
+    params.winFunc = function(wPlayer)
+        npcUtil.giveKeyItem(wPlayer, xi.keyItem.RIPE_STARFRUIT)
+        npcUtil.giveKeyItem(wPlayer, xi.keyItem.PEACH_CORAL_KEY)
+    end
+
     -- Spawn mobs and start battle
-    xi.confrontation.start(player, npc, cardianIds, function(playerArg)
-        npcUtil.giveKeyItem(playerArg, xi.keyItem.RIPE_STARFRUIT)
-        npcUtil.giveKeyItem(playerArg, xi.keyItem.PEACH_CORAL_KEY)
-    end)
+    xi.confrontation.start(player, npc, cardianIds, params)
 
     -- Apply mods
     for _, mobId in pairs(cardianIds) do

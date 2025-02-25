@@ -61,6 +61,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         TAUMILA_DIALOG                 = 7996,  -- I am Taumila, the owner of this establishment. Talk to the lady behind the counter if you wish to make a purchase.
         LUSIANE_SHOP_DIALOG            = 7997,  -- Hello! Let Taumila's handle all your sundry needs!
         OSTALIE_SHOP_DIALOG            = 7998,  -- Welcome, customer. Please have a look.
+        HELBORT_ORDERS                 = 8012,  -- It's an urgent order, so go as soon as you can. Remember, give the order to the free trader Alexius in Jugner Forest.
         ASH_THADI_ENE_SHOP_DIALOG      = 8019,  -- Welcome to Helbort's Blades!
         NOTHING_TO_REPORT              = 8037,  -- Nothing to report!
         TRIAL_IS_DIFFICULT             = 8039,  -- The trial is difficult, but those who pass may become true knights. Good luck to you.

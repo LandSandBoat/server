@@ -62,7 +62,8 @@ return {
     ['Sochiene']          = { text = ID.text.SOCHIENE_DIALOG },
     ['Suspicious_Elvaan'] = { event = 881 },
     ['Synergy_Engineer']  = { event = 11002 },
-    ['Taurette']          = { event = 664 },
-    ['Vavegallet']        = { event = 673 },
-    ['Villion']           = { event = 632 },
+    ['Taurette']          = { event =   664 },
+    ['Vamorcote']         = { event =   651 },
+    ['Vavegallet']        = { event =   673 },
+    ['Villion']           = { event =   632 },
 }

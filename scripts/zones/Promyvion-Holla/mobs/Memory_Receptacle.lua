@@ -29,10 +29,6 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     xi.promyvion.receptacleOnMobWeaponSkill(mob)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    xi.promyvion.receptacleOnMobDeath(mob, optParams)
-end
-
 entity.onMobDespawn = function(mob)
     xi.promyvion.receptacleOnMobDespawn(mob)
 end

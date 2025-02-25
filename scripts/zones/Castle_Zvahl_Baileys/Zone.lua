@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Castle_Zvahl_Baileys (161)
 -----------------------------------
-local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
------------------------------------
 ---@type TZone
 local zoneObject = {}
 
@@ -12,21 +10,6 @@ zoneObject.onInitialize = function(zone)
     zone:registerCuboidTriggerArea(2, -90, 17, -10, -85, 18, -5)  -- map 4 SW porter
     zone:registerCuboidTriggerArea(3, -34, 17, -10, -30, 18, -5)  -- map 4 SE porter
     zone:registerCuboidTriggerArea(4, -34, 17, 45, -30, 18, 51)  -- map 4 NE porter
-
-    UpdateNMSpawnPoint(ID.mob.LIKHO)
-    GetMobByID(ID.mob.LIKHO):setRespawnTime(math.random(3600, 4200))
-
-    UpdateNMSpawnPoint(ID.mob.MARQUIS_ALLOCEN)
-    GetMobByID(ID.mob.MARQUIS_ALLOCEN):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.MARQUIS_AMON)
-    GetMobByID(ID.mob.MARQUIS_AMON):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.DUKE_HABORYM)
-    GetMobByID(ID.mob.DUKE_HABORYM):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.GRAND_DUKE_BATYM)
-    GetMobByID(ID.mob.GRAND_DUKE_BATYM):setRespawnTime(math.random(900, 10800))
 
     xi.treasure.initZone(zone)
 end
