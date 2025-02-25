@@ -73,25 +73,32 @@ local entity =
             {
                 { entity = "Azula", face  = "player" },
                 "Ah, an adventurer approaches...", 
-                { delay = 1000 },
+                { delay = 2000 },
                 "Strings that dance, magic that flows... Do you understand the harmony between control and chaos?",
                 { delay = 2000 },
-                "A puppet may move with grace, yet it is only as strong as the hand that guides it. Magic may be unleashed with power, yet without wisdom, it is but a fleeting spark.",
+                "A puppet may move with grace, yet it is only as strong as the hand that guides it.",
                 { delay = 2000 },
-                "If you seek mastery, show me proof that you have walked both paths. Bring me a Blue Mage and Puppetmaster Testimony. Only then will I acknowledge your worth.",
+                "Magic may be unleashed with power, yet without wisdom, it is but a fleeting spark.",
                 { delay = 2000 },
-                "Many have dared, only to find themselves tangled in their own strings, burned by the very magic they sought to create. Rise above, or be reduced to nothing but a cautionary tale.",
+                "If you seek mastery, show me proof that you have walked both paths.",
+                { delay = 2000 },
+                "Bring me a Blue Mage and a Puppetmaster Testimony. Only then will I acknowledge your worth.",
+                { delay = 2000 },
+                "Many have dared, only to find themselves tangled in their own strings, burned by the very magic they sought to create."
+                { delay = 2000 },
+                "Rise above, or be reduced to nothing but a cautionary tale.",
             },
-            REMINDER   = { "Bring me both testimonies to prove your understanding of balance. Do not return empty-handed." },
+            REMINDER   = { "Bring me a Blue Mage and a Puppetmaster Testimony. Only then will I acknowledge your worth." },
             ACCEPTED   = 
             {
+                { entity = "Azula", face  = "player" },
                 "So, you have grasped both the strings of control and the ebb of magic...", 
-                { delay = 2000 },
+                { delay = 3000 },
                 "Very well. You have earned my recognition. But remember, a true master never ceases to refine their craft."
             },
             DECLINED     = { 
-                { entity = "Azula", emote = xi.emote.NO },
-                "Nice try, but you cannot fool me. I will tolerate your presence for a little longer, but DO NOT test my patience." 
+                { entity = "Azula", face  = "player" },
+                "Nice try, but you cannot fool me. I will tolerate your presence for a little longer, but do not test my patience." 
             },
             AFTER        = { 
                 { entity = "Azula", face  = "player" },
