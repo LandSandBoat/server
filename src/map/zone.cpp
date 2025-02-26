@@ -695,21 +695,20 @@ void CZone::UpdateWeather()
 void CZone::CheckMobsPathedBack()
 {
     // clang-format off
-    CTaskMgr::getInstance()->AddTask("zone_empty_timer", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, 5s,
+    CTaskMgr::getInstance()->AddTask(m_zoneName + "_empty_timer", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, 5s,
     [](time_point tick, CTaskMgr::CTask* PTask)
     {
         bool allMobsHomeAndHealed = true;
-        // if the timer runs out, check if all the mobs have pathed home
         CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
-        if (PZone && PZone->GetZoneEntities())
+        // if the timer runs out, check if all the mobs have pathed home
+        if (PZone && PZone->GetZoneEntities() && PZone->GetZoneEntities()->GetMobList().size() > 0)
         {
             EntityList_t mobListMap = PZone->GetZoneEntities()->GetMobList();
             for (const auto& pair : mobListMap)
             {
                 CMobEntity* mob = dynamic_cast<CMobEntity*>(pair.second);
-
-                // if the mob is not fully healed OR ((the mob can rome home AND is far from home) OR the mob can't rome home)
-                if (mob && !mob->isFullyHealed() || ((mob->CanRoamHome() && mob->IsFarFromHome()) || !mob->CanRoamHome()))
+                // if the mob is (not dead/despawned AND it is not fully healed) OR it is pathing home
+                if (mob && ((!mob->isDead() && !mob->isFullyHealed()) || mob->m_IsPathingHome))
                 {
                     // at least one mob is away from home or not fully healed
                     allMobsHomeAndHealed = false;
@@ -718,7 +717,7 @@ void CZone::CheckMobsPathedBack()
             }
         }
 
-        // if all mobs home and healed up, sleep the zone @todo and stop timer?
+        // if all mobs home and healed up, sleep the zone
         if (allMobsHomeAndHealed)
         {
             PZone->SleepZone();
@@ -784,9 +783,6 @@ void CZone::IncreaseZoneCounter(CCharEntity* PChar)
     if (!ZoneTimer && !m_zoneEntities->CharListEmpty())
     {
         createZoneTimers();
-
-        // the zone is active again, remove the timer, if its still going
-        CTaskMgr::getInstance()->RemoveTask("zone_empty_timer");
     }
 
     PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ON_ZONE_PATHOS, true);

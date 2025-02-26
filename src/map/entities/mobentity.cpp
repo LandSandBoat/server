@@ -112,6 +112,7 @@ CMobEntity::CMobEntity()
 , m_unk2(0)
 , m_CallForHelpBlocked(false)
 , m_IsClaimable(true)
+, m_IsPathingHome(false)
 {
     TracyZoneScoped;
     objtype     = ENTITYTYPE::TYPE_MOB;

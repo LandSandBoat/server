@@ -112,7 +112,14 @@ bool CBattleEntity::isAlive()
 
 bool CBattleEntity::isFullyHealed()
 {
-    return (isAlive() && health.hp >= health.maxhp && health.mp >= health.maxmp);
+    if (isAlive())
+    {
+        if (health.hp >= health.maxhp && health.mp >= health.maxmp)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 bool CBattleEntity::isInDynamis()

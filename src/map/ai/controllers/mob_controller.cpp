@@ -970,10 +970,12 @@ void CMobController::DoRoamTick(time_point tick)
             }
 
             // if I just disengaged check if I should despawn
+            PMob->m_IsPathingHome = false;
             if (!PMob->getMobMod(MOBMOD_DONT_ROAM_HOME) && PMob->IsFarFromHome())
             {
                 if (PMob->CanRoamHome())
                 {
+                    PMob->m_IsPathingHome = true;
                     // walk back to spawn if too far away
                     if (!PMob->PAI->PathFind->IsFollowingPath() && !PMob->PAI->PathFind->PathTo(PMob->m_SpawnPoint))
                     {
