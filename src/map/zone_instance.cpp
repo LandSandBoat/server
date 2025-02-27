@@ -132,12 +132,12 @@ void CZoneInstance::FindPartyForMob(CBaseEntity* PEntity)
     }
 }
 
-void CZoneInstance::TransportDepart(uint16 boundary, uint16 zone)
+void CZoneInstance::TransportDepart(uint16 boundary, uint16 zone, bool voyageZone)
 {
     TracyZoneScoped;
     for (const auto& PInstance : m_InstanceList)
     {
-        PInstance->TransportDepart(boundary, zone);
+        PInstance->TransportDepart(boundary, zone, voyageZone);
     }
 }
 

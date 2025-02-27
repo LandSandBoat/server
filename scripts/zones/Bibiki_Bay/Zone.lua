@@ -40,7 +40,9 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    xi.manaclipper.onTransportEvent(player, transport)
+    if player:getObjType() == xi.objType.PC then
+        xi.manaclipper.onTransportEvent(player, transport)
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

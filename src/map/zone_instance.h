@@ -52,8 +52,8 @@ public:
     virtual void InsertPET(CBaseEntity* PPet) override;
     virtual void InsertTRUST(CBaseEntity* PTrust) override;
 
-    virtual void FindPartyForMob(CBaseEntity* PEntity) override;         // looking for a party for the monster
-    virtual void TransportDepart(uint16 boundary, uint16 zone) override; // ship/boat is leaving, passengers need to be collected
+    virtual void FindPartyForMob(CBaseEntity* PEntity) override;                          // looking for a party for the monster
+    virtual void TransportDepart(uint16 boundary, uint16 zone, bool voyageZone) override; // ship/boat is leaving, passengers need to be collected
 
     virtual void TOTDChange(TIMETYPE TOTD) override;                                                           // process the world's reactions to changing time of day
     virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, const std::unique_ptr<CBasicPacket>&) override; // send a global package within the zone

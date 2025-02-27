@@ -35,7 +35,9 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    player:startEvent(10002)
+    if player:getObjType() == xi.objType.PC then
+        player:startEvent(10002)
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

@@ -16,8 +16,12 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onTransportEvent = function(player, transport)
-    player:startEvent(1025)
+zoneObject.onTransportEvent = function(entity, transport)
+    if entity:getObjType() == xi.objType.PC then
+        entity:startEvent(1025)
+--    elseif entity:getObjType() == xi.objType.NPC then
+--    elseif entity:getObjType() == xi.objType.MOB then
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

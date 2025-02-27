@@ -32,8 +32,12 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onTransportEvent = function(player, transport)
-    player:startEvent(255)
+zoneObject.onTransportEvent = function(entity, transport)
+    if entity:getObjType() == xi.objType.PC then
+        entity:startEvent(255)
+--    elseif entity:getObjType() == xi.objType.NPC then
+--    elseif entity:getObjType() == xi.objType.MOB then
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

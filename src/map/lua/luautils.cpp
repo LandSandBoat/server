@@ -4571,11 +4571,11 @@ namespace luautils
         charutils::ClearCharVarFromAll(varName);
     }
 
-    void OnTransportEvent(CCharEntity* PChar, uint32 TransportID)
+    void OnTransportEvent(CBaseEntity* PEntity, uint32 TransportID)
     {
         TracyZoneScoped;
 
-        auto name = PChar->loc.zone->getName();
+        auto name = PEntity->loc.zone->getName();
 
         auto onTransportEvent = lua["xi"]["zones"][name]["Zone"]["onTransportEvent"];
         if (!onTransportEvent.valid())
@@ -4583,7 +4583,7 @@ namespace luautils
             return;
         }
 
-        auto result = onTransportEvent(PChar, TransportID);
+        auto result = onTransportEvent(PEntity, TransportID);
         if (!result.valid())
         {
             sol::error err = result;

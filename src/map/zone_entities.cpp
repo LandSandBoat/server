@@ -366,7 +366,7 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
     }
 }
 
-void CZoneEntities::TransportDepart(uint16 boundary, uint16 zone)
+void CZoneEntities::TransportDepart(uint16 boundary, uint16 zone, bool voyageZone)
 {
     TracyZoneScoped;
 
@@ -392,6 +392,26 @@ void CZoneEntities::TransportDepart(uint16 boundary, uint16 zone)
             }
 
             luautils::OnTransportEvent(PCurrentChar, zone);
+        }
+    }
+
+    if (voyageZone)
+    {
+        for (EntityList_t::const_iterator it = m_mobList.begin(); it != m_mobList.end(); ++it)
+        {
+            CMobEntity* PCurrentMob = (CMobEntity*)it->second;
+
+            if (PCurrentMob->isAlive())
+            {
+                luautils::OnTransportEvent(PCurrentMob, zone);
+            }
+        }
+
+        for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)
+        {
+            CNpcEntity* PCurrentNpc = (CNpcEntity*)it->second;
+
+            luautils::OnTransportEvent(PCurrentNpc, zone);
         }
     }
 }

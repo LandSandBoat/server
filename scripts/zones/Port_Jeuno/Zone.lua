@@ -53,14 +53,16 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    if transport == 223 then
-        player:startEvent(10010)
-    elseif transport == 224 then
-        player:startEvent(10012)
-    elseif transport == 225 then
-        player:startEvent(10011)
-    elseif transport == 226 then
-        player:startEvent(10013)
+    if player:getObjType() == xi.objType.PC then
+        if transport == 223 then
+            player:startEvent(10010)
+        elseif transport == 224 then
+            player:startEvent(10012)
+        elseif transport == 225 then
+            player:startEvent(10011)
+        elseif transport == 226 then
+            player:startEvent(10013)
+        end
     end
 end
 

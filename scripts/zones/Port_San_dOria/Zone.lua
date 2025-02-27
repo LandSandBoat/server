@@ -41,7 +41,9 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    player:startEvent(700)
+    if player:getObjType() == xi.objType.PC then
+        player:startEvent(700)
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

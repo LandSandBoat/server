@@ -551,9 +551,9 @@ void CZone::FindPartyForMob(CBaseEntity* PEntity)
  *                                                                       *
  ************************************************************************/
 
-void CZone::TransportDepart(uint16 boundary, uint16 zone)
+void CZone::TransportDepart(uint16 boundary, uint16 zone, bool voyageZone)
 {
-    m_zoneEntities->TransportDepart(boundary, zone);
+    m_zoneEntities->TransportDepart(boundary, zone, voyageZone);
 }
 
 void CZone::updateCharLevelRestriction(CCharEntity* PChar)

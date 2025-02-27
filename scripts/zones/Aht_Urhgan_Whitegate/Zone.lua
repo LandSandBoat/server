@@ -82,10 +82,12 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    if transport == 46 or transport == 47 then
-        player:startEvent(200)
-    elseif transport == 58 or transport == 59 then
-        player:startEvent(203)
+    if player:getObjType() == xi.objType.PC then
+        if transport == 46 or transport == 47 then
+            player:startEvent(200)
+        elseif transport == 58 or transport == 59 then
+            player:startEvent(203)
+        end
     end
 end
 

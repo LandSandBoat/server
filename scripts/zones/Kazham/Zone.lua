@@ -32,7 +32,9 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    player:startEvent(10000)
+    if player:getObjType() == xi.objType.PC then
+        player:startEvent(10000)
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

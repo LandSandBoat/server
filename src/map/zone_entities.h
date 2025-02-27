@@ -70,8 +70,8 @@ public:
     void InsertPET(CBaseEntity* PPet);
     void InsertTRUST(CBaseEntity* PTrust);
 
-    void FindPartyForMob(CBaseEntity* PEntity);         // looking for a party for the monster
-    void TransportDepart(uint16 boundary, uint16 zone); // ship/boat is leaving, passengers need to be collected
+    void FindPartyForMob(CBaseEntity* PEntity);                          // looking for a party for the monster
+    void TransportDepart(uint16 boundary, uint16 zone, bool voyageZone); // ship/boat is leaving, passengers need to be collected
 
     void TOTDChange(TIMETYPE TOTD); // process the world's reactions to changing time of day
     void WeatherChange(WEATHER weather);

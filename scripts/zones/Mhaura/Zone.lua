@@ -52,18 +52,20 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    if transport == 47 or transport == 46 then
-        if
-            not player:hasKeyItem(xi.ki.BOARDING_PERMIT) or
-            xi.settings.main.ENABLE_TOAU == 0
-        then
-            player:setPos(8.200, -1.363, 3.445, 192)
-            player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.ki.BOARDING_PERMIT)
+    if player:getObjType() == xi.objType.PC then
+        if transport == 47 or transport == 46 then
+            if
+                not player:hasKeyItem(xi.ki.BOARDING_PERMIT) or
+                xi.settings.main.ENABLE_TOAU == 0
+            then
+                player:setPos(8.200, -1.363, 3.445, 192)
+                player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.ki.BOARDING_PERMIT)
+            else
+                player:startEvent(200)
+            end
         else
             player:startEvent(200)
         end
-    else
-        player:startEvent(200)
     end
 end
 

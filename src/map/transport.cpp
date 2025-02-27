@@ -89,7 +89,7 @@ void TransportZone_Town::closeDoor(bool sendPacket) const
 
 void TransportZone_Town::depart() const
 {
-    this->ship.dock.zone->TransportDepart(this->ship.npc->loc.boundary, this->ship.npc->loc.prevzone);
+    this->ship.dock.zone->TransportDepart(this->ship.npc->loc.boundary, this->ship.npc->loc.prevzone, false);
 }
 
 void Elevator_t::openDoor(CNpcEntity* npc) const
@@ -331,7 +331,7 @@ void CTransportHandler::TransportTimer()
         }
         else if (zoneIterator->state == STATE_TRANSPORTZONE_EVICT)
         {
-            zoneIterator->voyageZone->TransportDepart(0, zoneIterator->voyageZone->GetID());
+            zoneIterator->voyageZone->TransportDepart(0, zoneIterator->voyageZone->GetID(), true);
             zoneIterator->state = STATE_TRANSPORTZONE_WAIT;
         }
         else if (zoneIterator->state == STATE_TRANSPORTZONE_WAIT)
