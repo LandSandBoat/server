@@ -199,12 +199,10 @@ enum class Mod
     RECEIVED_DAMAGE_VARIANT = 222, // The variance that you want the damage cap to changed by. Ex: If you want the damage to be from 90-100 instead of a flat 100 you can set this to 10. It will random the value between 90-100 if the damage is above 100.
 
     // Specific Damage Taken vs physical damage type
-    // Value is stored as a percentage of damage reduction (to within 1000)
-    // Example: 1000 = 100%, 875= 87.5%
-    SLASH_SDT  = 49, // Slash Damage Taken
-    PIERCE_SDT = 50, // Piercing Damage Taken
-    IMPACT_SDT = 51, // Impact Damage Taken
-    HTH_SDT    = 52, // Hand-To-Hand Damage Taken
+    SLASH_SDT  = 49, // Slash Damage Taken. Base 10000. 100% = 0
+    PIERCE_SDT = 50, // Piercing Damage Taken. Base 10000. 100% = 0
+    IMPACT_SDT = 51, // Impact Damage Taken. Base 10000. 100% = 0
+    HTH_SDT    = 52, // Hand-To-Hand Damage Taken. Base 10000. 100% = 0
 
     // Elemental SDT. BASE 10000. This has been repeatedly mixed up with RESISTANCE - be careful!
     FIRE_SDT    = 54, // Fire Damage Taken

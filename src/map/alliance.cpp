@@ -27,8 +27,8 @@
 
 #include "conquest_system.h"
 #include "entities/battleentity.h"
+#include "ipc_client.h"
 #include "map.h"
-#include "message.h"
 #include "party.h"
 #include "treasure_pool.h"
 #include "utils/charutils.h"
@@ -78,9 +78,10 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
     {
         // sql->Query("UPDATE accounts_parties SET allianceid = 0, partyflag = partyflag & ~%d WHERE allianceid = %u", ALLIANCE_LEADER | PARTY_SECOND
         // | PARTY_THIRD, m_AllianceID);
-        uint8 data[4]{};
-        ref<uint32>(data, 0) = m_AllianceID;
-        message::send(MSG_ALLIANCE_DISSOLVE, data, sizeof(data), nullptr);
+
+        message::send(ipc::AllianceDissolve{
+            .allianceId = m_AllianceID,
+        });
     }
     else
     {
@@ -167,13 +168,14 @@ void CAlliance::removeParty(CParty* party)
                 ALLIANCE_LEADER | PARTY_SECOND | PARTY_THIRD, party->GetPartyID());
 
     // notify alliance
-    uint8 data[4]{};
-    ref<uint32>(data, 0) = m_AllianceID;
-    message::send(MSG_ALLIANCE_RELOAD, data, sizeof(data), nullptr);
+    message::send(ipc::AllianceReload{
+        .allianceId = m_AllianceID,
+    });
 
     // notify leaving party
-    ref<uint32>(data, 0) = party->GetPartyID();
-    message::send(MSG_PT_RELOAD, data, sizeof(data), nullptr);
+    message::send(ipc::PartyReload{
+        .partyId = party->GetPartyID(),
+    });
 }
 
 void CAlliance::delParty(CParty* party)
@@ -267,9 +269,9 @@ void CAlliance::addParty(CParty* party)
 
     party->SetPartyNumber(newparty);
 
-    uint8 data[4]{};
-    ref<uint32>(data, 0) = m_AllianceID;
-    message::send(MSG_ALLIANCE_RELOAD, data, sizeof(data), nullptr);
+    message::send(ipc::AllianceReload{
+        .allianceId = m_AllianceID,
+    });
 }
 
 void CAlliance::addParty(uint32 partyid) const
@@ -294,9 +296,9 @@ void CAlliance::addParty(uint32 partyid) const
 
     _sql->Query("UPDATE accounts_parties SET allianceid = %u, partyflag = partyflag | %d WHERE partyid = %u", m_AllianceID, newparty, partyid);
 
-    uint8 data[4]{};
-    ref<uint32>(data, 0) = m_AllianceID;
-    message::send(MSG_ALLIANCE_RELOAD, data, sizeof(data), nullptr);
+    message::send(ipc::AllianceReload{
+        .allianceId = m_AllianceID,
+    });
 }
 
 void CAlliance::pushParty(CParty* PParty, uint8 number)

@@ -33,21 +33,22 @@ class CBattleEntity;
 class CCharEntity;
 class CAlliance;
 
-enum PARTYTYPE
+enum PARTYTYPE : uint8
 {
     PARTY_PCS,
     PARTY_MOBS,
 };
 DECLARE_FORMAT_AS_UNDERLYING(PARTYTYPE);
 
-enum PARTYFLAG
+enum PARTYFLAG : uint16
+
 {
     PARTY_SECOND    = 0x0001,
     PARTY_THIRD     = 0x0002,
     PARTY_LEADER    = 0x0004,
     ALLIANCE_LEADER = 0x0008,
     PARTY_QM        = 0x0010,
-    PARTY_SYNC      = 0x0100
+    PARTY_SYNC      = 0x0100,
 };
 DECLARE_FORMAT_AS_UNDERLYING(PARTYFLAG);
 

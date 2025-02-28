@@ -263,7 +263,7 @@ end
 xi.promyvion.receptacleOnMobInitialize = function(mob)
     mob:setAutoAttackEnabled(false) -- Receptacles only use TP moves.
     mob:addMod(xi.mod.DEF, 55)
-    -- mob:setMod(xi.mod.DESPAWN_TIME_REDUCTION, 10) -- TODO: Properly time in retail and then adjust timers for portal opening, decorations, etc...
+    mob:setMod(xi.mod.DESPAWN_TIME_REDUCTION, 15)
 end
 
 xi.promyvion.receptacleOnMobSpawn = function(mob)
@@ -351,39 +351,15 @@ xi.promyvion.receptacleOnMobWeaponSkill = function(mob)
     mob:setMod(xi.mod.REGAIN, 50 * math.random(1, 3))
 end
 
-xi.promyvion.receptacleOnMobDeath = function(mob, optParams)
-    if
-        optParams.isKiller or
-        optParams.noKiller
-    then
-        mob:timer(2000, function(mobArg)
-            local zoneId = mobArg:getZone():getID()
-            local mobId  = mobArg:getID()
-
-            -- Handle receptacle: Fast despawn.
-            mobArg:setStatus(xi.status.CUTSCENE_ONLY)
-
-            -- Handle portal: Open if it's the chosen portal.
-            local portal = GetNPCByID(receptacleInfoTable[zoneId][mobId][3]) -- Fetch mob's associated portal.
-
-            if portal and portal:getLocalVar('[Portal]Chosen') == 1 then
-                portal:openDoor(180) -- Open portal for 3 minutes.
-            end
-
-            -- Handle decoration: Fade-out.
-            GetNPCByID(mobId - 1):entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
-        end)
-    end
-end
-
 xi.promyvion.receptacleOnMobDespawn = function(mob)
     local zoneId = mob:getZone():getID()
     local mobId  = mob:getID()
 
-    -- Handle portal: Choose new portal.
+    -- Handle portal: Open and choose new portal.
     local portal = GetNPCByID(receptacleInfoTable[zoneId][mobId][3]) -- Fetch mob's associated portal.
 
     if portal and portal:getLocalVar('[Portal]Chosen') == 1 then
+        portal:openDoor(180)                    -- Open portal for 3 minutes.
         portal:setLocalVar('[Portal]Chosen', 0) -- Reset.
 
         -- Choose new portal.
@@ -404,7 +380,10 @@ xi.promyvion.receptacleOnMobDespawn = function(mob)
     -- Handle decoration: Reset.
     local decoration = GetNPCByID(mobId - 1)
     if decoration then
-        decoration:updateToEntireZone(xi.status.CUTSCENE_ONLY, xi.anim.DESPAWN)
-        decoration:entityAnimationPacket(xi.animationString.STATUS_VISIBLE)
+        decoration:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
+        decoration:timer(2500, function(decorationArg)
+            decorationArg:updateToEntireZone(xi.status.CUTSCENE_ONLY, xi.anim.DESPAWN)
+            decorationArg:entityAnimationPacket(xi.animationString.STATUS_VISIBLE)
+        end)
     end
 end

@@ -20,7 +20,7 @@
 */
 
 // TODO:
-// It is necessary to divide the Czone class into basic and heirs. Already painted: Standard, Rezident, Instance and Dinamis
+// It is necessary to divide the CZone class into basic and heirs. Already painted: Standard, Resident, Instance and Dynamis
 // Each of these zones has special behavior
 
 #include "zone.h"
@@ -36,10 +36,10 @@
 #include "battlefield.h"
 #include "common/vana_time.h"
 #include "enmity_container.h"
+#include "ipc_client.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
 #include "map.h"
-#include "message.h"
 #include "monstrosity.h"
 #include "notoriety_container.h"
 #include "party.h"
@@ -109,6 +109,8 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
 
 CZone::~CZone()
 {
+    TracyZoneScoped;
+
     destroy(m_TreasurePool);
     destroy(m_zoneEntities);
     destroy(m_BattlefieldHandler);
@@ -320,6 +322,7 @@ zoneLine_t* CZone::GetZoneLine(uint32 zoneLineID)
 void CZone::LoadZoneLines()
 {
     TracyZoneScoped;
+
     static const char fmtQuery[] = "SELECT zoneline, tozone, tox, toy, toz, rotation FROM zonelines WHERE fromzone = %u";
 
     int32 ret = _sql->Query(fmtQuery, m_zoneID);
@@ -359,6 +362,7 @@ void CZone::LoadZoneLines()
 void CZone::LoadZoneWeather()
 {
     TracyZoneScoped;
+
     static const char* Query = "SELECT weather FROM zone_weather WHERE zone = %u";
 
     int32 ret = _sql->Query(Query, m_zoneID);
@@ -386,6 +390,7 @@ void CZone::LoadZoneWeather()
 void CZone::LoadZoneSettings()
 {
     TracyZoneScoped;
+
     static const char* Query = "SELECT "
                                "zone.name,"
                                "zone.zoneip,"
@@ -441,6 +446,7 @@ void CZone::LoadZoneSettings()
 void CZone::LoadNavMesh()
 {
     TracyZoneScoped;
+
     if (m_navMesh == nullptr)
     {
         m_navMesh = new CNavMesh((uint16)GetID());
@@ -459,6 +465,8 @@ void CZone::LoadNavMesh()
 
 void CZone::LoadZoneLos()
 {
+    TracyZoneScoped;
+
     if (GetTypeMask() & ZONE_TYPE::CITY || (m_miscMask & MISC_LOS_OFF))
     {
         // Skip cities and zones with line of sight turned off
@@ -474,55 +482,25 @@ void CZone::LoadZoneLos()
     lineOfSight = ZoneLos::Load((uint16)GetID(), fmt::sprintf("losmeshes/%s.obj", getName()));
 }
 
-/************************************************************************
- *                                                                       *
- *  Add a MOB to the zone                                                *
- *                                                                       *
- ************************************************************************/
-
 void CZone::InsertMOB(CBaseEntity* PMob)
 {
     m_zoneEntities->InsertMOB(PMob);
 }
-
-/************************************************************************
- *                                                                       *
- *  Add an NPC to the zone                                               *
- *                                                                       *
- ************************************************************************/
 
 void CZone::InsertNPC(CBaseEntity* PNpc)
 {
     m_zoneEntities->InsertNPC(PNpc);
 }
 
-/************************************************************************
- *                                                                       *
- *  Add a PET to the zone (free targid 0x700-0x7FF)                      *
- *                                                                       *
- ************************************************************************/
-
 void CZone::InsertPET(CBaseEntity* PPet)
 {
     m_zoneEntities->InsertPET(PPet);
 }
 
-/************************************************************************
- *                                                                       *
- *  Add a trust to the zone                                              *
- *                                                                       *
- ************************************************************************/
-
 void CZone::InsertTRUST(CBaseEntity* PTrust)
 {
     m_zoneEntities->InsertTRUST(PTrust);
 }
-
-/************************************************************************
- *                                                                       *
- *  Add a trigger area to the zone                                       *
- *                                                                       *
- ************************************************************************/
 
 void CZone::InsertTriggerArea(std::unique_ptr<ITriggerArea>&& triggerArea)
 {
@@ -542,14 +520,9 @@ void CZone::InsertTriggerArea(std::unique_ptr<ITriggerArea>&& triggerArea)
 void CZone::FindPartyForMob(CBaseEntity* PEntity)
 {
     TracyZoneScoped;
+
     m_zoneEntities->FindPartyForMob(PEntity);
 }
-
-/************************************************************************
- *                                                                       *
- *  The ship/boat is leaving, necessary to collect passengers            *
- *                                                                       *
- ************************************************************************/
 
 void CZone::TransportDepart(uint16 boundary, uint16 zone)
 {
@@ -558,6 +531,8 @@ void CZone::TransportDepart(uint16 boundary, uint16 zone)
 
 void CZone::updateCharLevelRestriction(CCharEntity* PChar)
 {
+    TracyZoneScoped;
+
     if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_RESTRICTION))
     {
         // If the level restriction is already the same then no need to change it
@@ -588,6 +563,7 @@ void CZone::updateCharLevelRestriction(CCharEntity* PChar)
 void CZone::SetWeather(WEATHER weather)
 {
     TracyZoneScoped;
+
     if (weather >= MAX_WEATHER_ID)
     {
         ShowWarning("Weather value (%d) exceeds MAX_WEATHER_ID.", weather);
@@ -702,6 +678,7 @@ void CZone::UpdateWeather()
 void CZone::DecreaseZoneCounter(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
     m_zoneEntities->DecreaseZoneCounter(PChar);
 
     if (m_zoneEntities->CharListEmpty())
@@ -754,26 +731,10 @@ void CZone::IncreaseZoneCounter(CCharEntity* PChar)
     CharZoneIn(PChar);
 }
 
-/************************************************************************
- *                                                                       *
- *  Check the visibility of monsters by a character. It is better to     *
- *  keep the distance in global variable (server settings). It is in     *
- *  this function that the aggression of monsters is checked so that     *
- *  distance is not calculated several times (e.g. in ZoneServer)        *
- *                                                                       *
- ************************************************************************/
-
 void CZone::SpawnMOBs(CCharEntity* PChar)
 {
     m_zoneEntities->SpawnMOBs(PChar);
 }
-
-/************************************************************************
- *                                                                       *
- *  Check the visibility of pets by a character. For the adding of pets  *
- *  use UPDATE instead of SPAWN. SPAWN is only used when calling.        *
- *                                                                       *
- ************************************************************************/
 
 void CZone::SpawnPETs(CCharEntity* PChar)
 {
@@ -785,47 +746,20 @@ void CZone::SpawnTRUSTs(CCharEntity* PChar)
     m_zoneEntities->SpawnTRUSTs(PChar);
 }
 
-/************************************************************************
- *                                                                       *
- *  Check the visibility of NPCs by a character.                         *
- *                                                                       *
- ************************************************************************/
-
 void CZone::SpawnNPCs(CCharEntity* PChar)
 {
     m_zoneEntities->SpawnNPCs(PChar);
 }
-
-/************************************************************************
- *                                                                       *
- *  Check the visibility of other characters by a character. The point   *
- *  of this action is that the characters update themselves and are      *
- *  added to the lists of other characters. Originally, the list size    *
- *  was limited to/changed to within 25-50 visible characters.           *
- *                                                                       *
- ************************************************************************/
 
 void CZone::SpawnPCs(CCharEntity* PChar)
 {
     m_zoneEntities->SpawnPCs(PChar);
 }
 
-/************************************************************************
- *                                                                       *
- *  Displaying Moogle in MogHouse, etc.                                  *
- *                                                                       *
- ************************************************************************/
-
 void CZone::SpawnConditionalNPCs(CCharEntity* PChar)
 {
     m_zoneEntities->SpawnConditionalNPCs(PChar);
 }
-
-/************************************************************************
- *                                                                       *
- *  Displaying ships/boats in the zone (not stored in the main list).    *
- *                                                                       *
- ************************************************************************/
 
 void CZone::SpawnTransport(CCharEntity* PChar)
 {
@@ -846,6 +780,7 @@ CBaseEntity* CZone::GetEntity(uint16 targid, uint8 filter)
 void CZone::TOTDChange(TIMETYPE TOTD)
 {
     TracyZoneScoped;
+
     m_zoneEntities->TOTDChange(TOTD);
 
     luautils::OnTOTDChange(m_zoneID, TOTD);
@@ -853,6 +788,8 @@ void CZone::TOTDChange(TIMETYPE TOTD)
 
 void CZone::SavePlayTime()
 {
+    TracyZoneScoped;
+
     m_zoneEntities->SavePlayTime();
 }
 
@@ -869,18 +806,21 @@ CCharEntity* CZone::GetCharByID(uint32 id)
 void CZone::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, const std::unique_ptr<CBasicPacket>& packet)
 {
     TracyZoneScoped;
+
     m_zoneEntities->PushPacket(PEntity, message_type, packet);
 }
 
 void CZone::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude)
 {
     TracyZoneScoped;
+
     m_zoneEntities->UpdateEntityPacket(PEntity, type, updatemask, alwaysInclude);
 }
 
 void CZone::WideScan(CCharEntity* PChar, uint16 radius)
 {
     TracyZoneScoped;
+
     m_zoneEntities->WideScan(PChar, radius);
 }
 
@@ -1210,7 +1150,6 @@ bool CZone::IsZoneActive() const
 
 CZoneEntities* CZone::GetZoneEntities()
 {
-    TracyZoneScoped;
     return m_zoneEntities;
 }
 

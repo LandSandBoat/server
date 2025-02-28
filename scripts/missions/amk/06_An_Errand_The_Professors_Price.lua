@@ -24,10 +24,10 @@ mission.reward =
 local orbKeyItems =
 {
     -- keyItem, mod, immune value, vulnerable value
-    { xi.ki.ORB_OF_SWORDS, xi.mod.SLASH_SDT,       0, 1000 },
-    { xi.ki.ORB_OF_CUPS,   xi.mod.IMPACT_SDT,      0, 1000 },
-    { xi.ki.ORB_OF_BATONS, xi.mod.PIERCE_SDT,      0, 1000 },
-    { xi.ki.ORB_OF_COINS,  xi.mod.UDMGMAGIC,  -10000,    0 },
+    { xi.ki.ORB_OF_SWORDS, xi.mod.SLASH_SDT  },
+    { xi.ki.ORB_OF_CUPS,   xi.mod.IMPACT_SDT },
+    { xi.ki.ORB_OF_BATONS, xi.mod.PIERCE_SDT },
+    { xi.ki.ORB_OF_COINS,  xi.mod.UDMGMAGIC  },
 }
 
 local beginCardianFight = function(player, npc)
@@ -38,18 +38,16 @@ local beginCardianFight = function(player, npc)
     -- Count KI's so we know how many Cardians to spawn
     local removedKIs = 0
     for _, entry in ipairs(orbKeyItems) do
-        local keyItemId   = entry[1]
-        local immunity    = entry[2]
-        local immuneValue = entry[3]
-        local vulnValue   = entry[4]
+        local keyItemId = entry[1]
+        local immunity  = entry[2]
 
         if player:hasKeyItem(keyItemId) then
-            table.insert(modsToAdd, { immunity, vulnValue })
+            table.insert(modsToAdd, { immunity, 0 })
 
             player:delKeyItem(keyItemId)
             removedKIs = removedKIs + 1
         else
-            table.insert(modsToAdd, { immunity, immuneValue })
+            table.insert(modsToAdd, { immunity, -10000 })
         end
     end
 
@@ -64,11 +62,14 @@ local beginCardianFight = function(player, npc)
         table.insert(cardianIds, cardianId)
     end
 
+    local params = {}
+    params.winFunc = function(wPlayer)
+        npcUtil.giveKeyItem(wPlayer, xi.keyItem.RIPE_STARFRUIT)
+        npcUtil.giveKeyItem(wPlayer, xi.keyItem.PEACH_CORAL_KEY)
+    end
+
     -- Spawn mobs and start battle
-    xi.confrontation.start(player, npc, cardianIds, function(playerArg)
-        npcUtil.giveKeyItem(playerArg, xi.keyItem.RIPE_STARFRUIT)
-        npcUtil.giveKeyItem(playerArg, xi.keyItem.PEACH_CORAL_KEY)
-    end)
+    xi.confrontation.start(player, npc, cardianIds, params)
 
     -- Apply mods
     for _, mobId in pairs(cardianIds) do

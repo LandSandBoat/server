@@ -890,7 +890,7 @@ end
 ---@param targetID integer
 ---@param option boolean?
 ---@return nil
-function CBaseEntity:goToEntity(targetID, option)
+function CBaseEntity:gotoEntity(targetID, option)
 end
 
 ---@param playerName string

@@ -25,8 +25,8 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
-#include "common/mutex_guarded.h"
 #include "common/stdext.h"
+#include "common/synchronized.h"
 #include "common/xirand.h"
 
 #include <filesystem>
@@ -163,7 +163,7 @@ namespace utils
 } // namespace utils
 
 // clang-format off
-static mutex_guarded<std::unordered_map<std::string, time_point>> lastExecutionTimes;
+static Synchronized<std::unordered_map<std::string, time_point>> lastExecutionTimes;
 #define RATE_LIMIT(duration, code)                                                    \
 {                                                                                     \
     const auto currentTime = server_clock::now();                                     \

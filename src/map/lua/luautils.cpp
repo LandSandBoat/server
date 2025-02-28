@@ -22,6 +22,7 @@
 #include "luautils.h"
 
 #include "common/filewatcher.h"
+#include "common/ipc.h"
 #include "common/logging.h"
 #include "common/utils.h"
 #include "common/vana_time.h"
@@ -72,9 +73,9 @@
 #include "entities/mobentity.h"
 #include "fishingcontest.h"
 #include "instance.h"
+#include "ipc_client.h"
 #include "items/item_puppet.h"
 #include "map.h"
-#include "message.h"
 #include "mobskill.h"
 #include "monstrosity.h"
 #include "packets/action.h"
@@ -1386,9 +1387,13 @@ namespace luautils
         callGlobal<void>("xi.conquest.setRegionalConquestOverseers", regionID);
     }
 
-    void SendLuaFuncStringToZone(uint16 zoneId, std::string const& str)
+    void SendLuaFuncStringToZone(uint16 requestingZoneId, uint16 executorZoneId, std::string const& str)
     {
-        message::send(zoneId, str);
+        message::send(ipc::LuaFunction{
+            .requesterZoneId = requestingZoneId,
+            .executorZoneId  = executorZoneId,
+            .funcString      = str,
+        });
     }
 
     uint32 VanadielTime()
@@ -5536,7 +5541,7 @@ namespace luautils
     {
         // IMPORTANT: This should only be called on the Zone Init in Selbina
         // Do not run this from multiple server instances
-        if (zoneutils::IsZoneOnThisProcess(ZONEID::ZONE_SELBINA))
+        if (zoneutils::IsZoneAssignedToThisProcess(ZONEID::ZONE_SELBINA))
         {
             fishingcontest::InitializeFishingContestSystem();
         }

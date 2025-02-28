@@ -1,7 +1,7 @@
 /*
 ===========================================================================
 
-  Copyright (c) 2023 LandSandBoat Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -21,22 +21,23 @@
 
 #pragma once
 
-#include "common/mmo.h"
-#include "common/socket.h"
+#include <optional>
 
-struct HandleableMessage
-{
-    std::vector<uint8> payload;
-    in_addr            from_addr;
-    uint16             from_port;
-};
-
-class IMessageHandler
+template <typename T>
+class Lazy
 {
 public:
-    virtual ~IMessageHandler()
+    Lazy() = default;
+
+    auto operator()() -> T&
     {
+        if (!value_)
+        {
+            value_ = T();
+        }
+        return *value_;
     }
 
-    virtual bool handleMessage(HandleableMessage&& message) = 0;
+private:
+    std::optional<T> value_;
 };

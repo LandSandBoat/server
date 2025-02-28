@@ -63,6 +63,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         LUSIANE_SHOP_DIALOG            = 7997,  -- Hello! Let Taumila's handle all your sundry needs!
         OSTALIE_SHOP_DIALOG            = 7998,  -- Welcome, customer. Please have a look.
         HELBORT_DIALOG                 = 8000,  -- Welcome, welcome! Either of my attendants will be happy to help you!
+        HELBORT_ORDERS                 = 8012,  -- It's an urgent order, so go as soon as you can. Remember, give the order to the free trader Alexius in Jugner Forest.
         ASH_THADI_ENE_SHOP_DIALOG      = 8019,  -- Welcome to Helbort's Blades!
         EXOROCHE_DIALOG_OFFSET         = 8021,  -- Oh, the gleam! Such brilliance! Blades wrought by the master here are indeed a cut above. I must have one...
         NOTHING_TO_REPORT              = 8037,  -- Nothing to report!

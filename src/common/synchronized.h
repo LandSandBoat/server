@@ -12,17 +12,17 @@ template <
     class M                            = std::mutex,
     template <typename...> typename WL = std::unique_lock,
     template <typename...> typename RL = std::unique_lock>
-struct mutex_guarded
+struct Synchronized
 {
-    mutex_guarded()  = default;
-    ~mutex_guarded() = default;
+    Synchronized()  = default;
+    ~Synchronized() = default;
 
-    explicit mutex_guarded(T in)
+    explicit Synchronized(T in)
     : target(std::move(in))
     {
     }
 
-    DISALLOW_COPY_AND_MOVE(mutex_guarded);
+    DISALLOW_COPY_AND_MOVE(Synchronized);
 
     auto read(auto f) const
     {
@@ -55,4 +55,4 @@ private:
 };
 
 template <class T>
-using shared_guarded = mutex_guarded<T, std::shared_mutex, std::shared_lock>;
+using SynchronizedShared = Synchronized<T, std::shared_mutex, std::shared_lock>;

@@ -1974,7 +1974,7 @@ void CZoneEntities::ZoneServer(time_point tick)
             continue;
         }
 
-        charutils::SendToZone(PChar, 2, ipp);
+        charutils::SendToZone(PChar, ZoningType::Zoning, ipp);
     }
 
     if (tick > m_EffectCheckTime)

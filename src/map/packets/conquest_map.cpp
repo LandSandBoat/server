@@ -37,21 +37,23 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
     this->setType(0x5E);
     this->setSize(0xB4);
 
-    auto  conquestData     = conquest::GetConquestData();
-    uint8 sandoria_regions = conquestData->getRegionControlCount(NATION_SANDORIA);
-    uint8 bastok_regions   = conquestData->getRegionControlCount(NATION_BASTOK);
-    uint8 windurst_regions = conquestData->getRegionControlCount(NATION_WINDURST);
-    uint8 sandoria_prev    = conquestData->getPrevRegionControlCount(NATION_SANDORIA);
-    uint8 bastok_prev      = conquestData->getPrevRegionControlCount(NATION_BASTOK);
-    uint8 windurst_prev    = conquestData->getPrevRegionControlCount(NATION_WINDURST);
+    const auto& conquestData = conquest::GetConquestData();
+
+    uint8 sandoria_regions = conquestData.getRegionControlCount(NATION_SANDORIA);
+    uint8 bastok_regions   = conquestData.getRegionControlCount(NATION_BASTOK);
+    uint8 windurst_regions = conquestData.getRegionControlCount(NATION_WINDURST);
+    uint8 sandoria_prev    = conquestData.getPrevRegionControlCount(NATION_SANDORIA);
+    uint8 bastok_prev      = conquestData.getPrevRegionControlCount(NATION_BASTOK);
+    uint8 windurst_prev    = conquestData.getPrevRegionControlCount(NATION_WINDURST);
 
     for (uint8 regionId = (uint8)REGION_TYPE::RONFAURE; regionId <= (uint8)REGION_TYPE::TAVNAZIA; regionId++)
     {
-        uint8 region_owner              = conquestData->getRegionOwner((REGION_TYPE)regionId);
-        int32 san_inf                   = conquestData->getInfluence((REGION_TYPE)regionId, NATION_SANDORIA);
-        int32 bas_inf                   = conquestData->getInfluence((REGION_TYPE)regionId, NATION_BASTOK);
-        int32 win_inf                   = conquestData->getInfluence((REGION_TYPE)regionId, NATION_WINDURST);
-        int32 bst_inf                   = conquestData->getInfluence((REGION_TYPE)regionId, NATION_BEASTMEN);
+        uint8 region_owner = conquestData.getRegionOwner((REGION_TYPE)regionId);
+        int32 san_inf      = conquestData.getInfluence((REGION_TYPE)regionId, NATION_SANDORIA);
+        int32 bas_inf      = conquestData.getInfluence((REGION_TYPE)regionId, NATION_BASTOK);
+        int32 win_inf      = conquestData.getInfluence((REGION_TYPE)regionId, NATION_WINDURST);
+        int32 bst_inf      = conquestData.getInfluence((REGION_TYPE)regionId, NATION_BEASTMEN);
+
         ref<uint8>(0x1A + regionId * 4) = conquest::GetInfluenceRanking(san_inf, bas_inf, win_inf, bst_inf);
         ref<uint8>(0x1B + regionId * 4) = conquest::GetInfluenceRanking(san_inf, bas_inf, win_inf);
         ref<uint8>(0x1C + regionId * 4) = conquest::GetInfluenceGraphics(san_inf, bas_inf, win_inf, bst_inf);

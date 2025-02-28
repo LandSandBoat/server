@@ -137,43 +137,62 @@ xi.mogTablet.onZoneTick = function(zone)
     -- end
 end
 
+xi.mogTablet.hideAllTabletsImpl = function(zoneId)
+    local zone = GetZone(zoneId)
+    if not zone then
+        return
+    end
+
+    local results = zone:queryEntitiesByName('Mog-Tablet')
+    for _, entity in pairs(results) do
+        entity:setStatus(xi.status.DISAPPEAR)
+    end
+end
+
 xi.mogTablet.hideAllTablets = function()
     for _, zoneId in pairs(xi.mogTablet.zones) do
-        SendLuaFuncStringToZone(zoneId, string.format([[
-            local zoneId = %i
-            local zone = GetZone(zoneId)
-            local results = zone:queryEntitiesByName('Mog-Tablet')
-            for _, entity in pairs(results) do
-                entity:setStatus(xi.status.DISAPPEAR)
-            end
+        SendLuaFuncStringToZone(xi.zone.RULUDE_GARDENS, zoneId, fmt([[
+            xi.mogTablet.hideAllTabletsImpl({})
         ]], zoneId))
+    end
+end
+
+xi.mogTablet.messageAllPlayersImpl = function(zoneId)
+    local zone = GetZone(zoneId)
+    if not zone then
+        return
+    end
+
+    for _, player in pairs(zone:getPlayers()) do
+        -- TODO: Hook up messages
     end
 end
 
 xi.mogTablet.messageAllPlayers = function()
     for _, zoneId in pairs(xi.mogTablet.zones) do
-        SendLuaFuncStringToZone(zoneId, string.format([[
-            local zoneId = %i
-            local ID = zones[zoneId]
-            local zone = GetZone(zoneId)
-            for _, player in pairs(zone:getPlayers()) do
-                -- TODO: Hook up messages
-            end
+        SendLuaFuncStringToZone(xi.zone.RULUDE_GARDENS, zoneId, fmt([[
+            xi.mogTablet.messageAllPlayersImpl({})
         ]], zoneId))
+    end
+end
+
+xi.mogTablet.tabletFoundAnnouncementImpl = function(zoneId)
+    local zone = GetZone(zoneId)
+    if not zone then
+        return
+    end
+
+    for _, player in pairs(zone:getPlayers()) do
+        -- player:messageSpecial(ID.text.MOG_TABLET_BASE, xi.mogTablet.locations[zoneId][1])
     end
 end
 
 xi.mogTablet.tabletFoundAnnouncement = function(player)
     local foundInZoneId = player:getZoneID()
     for _, zoneId in pairs(xi.mogTablet.zones) do
-        SendLuaFuncStringToZone(zoneId, string.format([[
-            local zoneId = %i
-            local ID = zones[zoneId]
-            local zone = GetZone(zoneId)
-            for _, player in pairs(zone:getPlayers()) do
-                -- player:messageSpecial(ID.text.MOG_TABLET_BASE, xi.mogTablet.locations[zoneId][1])
-            end
-        ]], foundInZoneId))
+        SendLuaFuncStringToZone(foundInZoneId, zoneId, fmt([[
+            xi.mogTablet.tabletFoundAnnouncementImpl({})
+        ]], zoneId))
     end
 end
 

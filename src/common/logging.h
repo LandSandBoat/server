@@ -156,6 +156,7 @@ inline auto format_as(type v) \
 
 // Debug Loggers
 #define DebugSockets(...)     LOGGER_ENABLE("logging.DEBUG_SOCKETS", ShowDebug(__VA_ARGS__))
+#define DebugIPC(...)         LOGGER_ENABLE("logging.DEBUG_IPC", ShowDebug(__VA_ARGS__))
 #define DebugNavmesh(...)     LOGGER_ENABLE("logging.DEBUG_NAVMESH", ShowDebug(__VA_ARGS__))
 #define DebugPackets(...)     LOGGER_ENABLE("logging.DEBUG_PACKETS", ShowDebug(__VA_ARGS__))
 #define DebugActions(...)     LOGGER_ENABLE("logging.DEBUG_ACTIONS", ShowDebug(__VA_ARGS__))
@@ -168,6 +169,7 @@ inline auto format_as(type v) \
 
 // Debug Loggers fmt variants
 #define DebugSocketsFmt(...)     LOGGER_ENABLE("logging.DEBUG_SOCKETS", ShowDebugFmt(__VA_ARGS__))
+#define DebugIPCFmt(...)         LOGGER_ENABLE("logging.DEBUG_IPC", ShowDebugFmt(__VA_ARGS__))
 #define DebugNavmeshFmt(...)     LOGGER_ENABLE("logging.DEBUG_NAVMESH", ShowDebugFmt(__VA_ARGS__))
 #define DebugPacketsFmt(...)     LOGGER_ENABLE("logging.DEBUG_PACKETS", ShowDebugFmt(__VA_ARGS__))
 #define DebugActionsFmt(...)     LOGGER_ENABLE("logging.DEBUG_ACTIONS", ShowDebugFmt(__VA_ARGS__))

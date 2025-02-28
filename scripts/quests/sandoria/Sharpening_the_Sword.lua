@@ -129,7 +129,7 @@ quest.sections =
     {
         check = function(player, status)
             return status == xi.questStatus.QUEST_COMPLETED and
-                player:getQuestStatus(xi.quest.Sandoria.A_BOY_S_DREAM) == xi.quest.status.AVAILABLE
+                player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM) == xi.quest.status.AVAILABLE
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =

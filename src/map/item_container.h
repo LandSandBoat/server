@@ -24,7 +24,7 @@
 
 #include "common/cbasetypes.h"
 
-enum CONTAINER_ID
+enum CONTAINER_ID : uint8
 {
     LOC_INVENTORY    = 0,
     LOC_MOGSAFE      = 1,

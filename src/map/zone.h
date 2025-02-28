@@ -433,7 +433,7 @@ enum ZONE_TYPE : uint16
 };
 DECLARE_FORMAT_AS_UNDERLYING(ZONE_TYPE);
 
-enum GLOBAL_MESSAGE_TYPE
+enum GLOBAL_MESSAGE_TYPE : uint8
 {
     CHAR_INRANGE,
     CHAR_INRANGE_SELF,
@@ -460,7 +460,7 @@ enum class TELEPORT_TYPE : uint8
 };
 DECLARE_FORMAT_AS_UNDERLYING(TELEPORT_TYPE);
 
-enum ZONEMISC
+enum ZONEMISC : uint16
 {
     MISC_NONE             = 0x0000, // Able to be used in any area
     MISC_ESCAPE           = 0x0001, // Ability to use Escape Spell

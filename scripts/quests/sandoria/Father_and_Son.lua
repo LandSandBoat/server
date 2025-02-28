@@ -27,7 +27,7 @@ quest.sections =
             return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
-          [xi.zone.SOUTHERN_SAN_DORIA] =
+        [xi.zone.SOUTHERN_SAN_DORIA] =
         {
             ['Exoroche'] =
             {

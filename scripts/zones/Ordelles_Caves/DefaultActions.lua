@@ -6,5 +6,5 @@ return {
     ['qm4']        = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm5']        = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm6']        = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
-    ['Stalagmite'] = { messageSpecial = ID.text.DRY_WIND},
+    ['Stalagmite'] = { messageSpecial = ID.text.DRY_WIND },
 }

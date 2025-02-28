@@ -66,6 +66,7 @@
 #include "char_recast_container.h"
 #include "charentity.h"
 #include "conquest_system.h"
+#include "ipc_client.h"
 #include "item_container.h"
 #include "items/item_furnishing.h"
 #include "items/item_usable.h"
@@ -73,7 +74,6 @@
 #include "job_points.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
-#include "message.h"
 #include "mob_modifier.h"
 #include "mobskill.h"
 #include "modifier.h"
@@ -333,17 +333,17 @@ CCharEntity::~CCharEntity()
 
     if (PParty && loc.destination != 0 && m_moghouseID == 0)
     {
-        uint8 data[4]{};
-
         if (PParty->m_PAlliance)
         {
-            ref<uint32>(data, 0) = PParty->m_PAlliance->m_AllianceID;
-            message::send(MSG_ALLIANCE_RELOAD, data, sizeof(data), nullptr);
+            message::send(ipc::AllianceReload{
+                .allianceId = PParty->m_PAlliance->m_AllianceID,
+            });
         }
         else
         {
-            ref<uint32>(data, 0) = PParty->GetPartyID();
-            message::send(MSG_PT_RELOAD, data, sizeof(data), nullptr);
+            message::send(ipc::PartyReload{
+                .partyId = PParty->GetPartyID(),
+            });
         }
     }
 

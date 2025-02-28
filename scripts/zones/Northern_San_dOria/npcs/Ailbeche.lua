@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: Father and Son, Sharpening the Sword, A Boy's Dream (start)
 -- !pos 4 -1 24 231
 -----------------------------------
-local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 

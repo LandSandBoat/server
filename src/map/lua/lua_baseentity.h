@@ -223,7 +223,7 @@ public:
 
     void resetPlayer(const char* charName);
 
-    void goToEntity(uint32 targetID, sol::object const& option);
+    void gotoEntity(uint32 targetID, sol::object const& option);
     bool gotoPlayer(std::string const& playerName);
     bool bringPlayer(std::string const& playerName);
 

@@ -22,7 +22,7 @@
 #pragma once
 
 #include "common/logging.h"
-#include "common/mutex_guarded.h"
+#include "common/synchronized.h"
 
 #include "map/zone.h"
 
@@ -49,5 +49,5 @@ private:
         std::array<uint32, ZONEID::MAX_ZONEID> zonePlayerCounts;
     };
 
-    shared_guarded<APIDataCache> m_apiDataCache;
+    SynchronizedShared<APIDataCache> m_apiDataCache;
 };
