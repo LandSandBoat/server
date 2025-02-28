@@ -28,6 +28,7 @@ zones[xi.zone.ORDELLES_CAVES] =
         PLACE_HANDS_IN_POOL           = 7374,  -- You place your hands into the pool.
         DEW_SLIPS_THROUGH_FINGERS     = 7377,  -- The dew from the stalactite slips through your fingers.
         ALREADY_OBTAINED_DEW          = 7378,  -- You have already obtained the dew.
+        DRY_WIND                      = 7388,  -- It is dry here, probably because of the wind.
         CHEST_UNLOCKED                = 7410,  -- You unlock the chest!
         GERWITZS_AXE_DIALOG           = 7432,  -- Mine axe shall rend thy throat!
         GERWITZS_SWORD_DIALOG         = 7433,  -- Mine sword shall pierce thy tongue!

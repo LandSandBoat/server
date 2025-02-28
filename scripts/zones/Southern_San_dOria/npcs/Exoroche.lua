@@ -30,8 +30,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(51)
     elseif player:getCharVar('UnderOathCS') == 8 then
         player:startEvent(19)
-    else
-        player:startEvent(76)
     end
 end
 

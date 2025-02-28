@@ -19,8 +19,6 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(xi.ki.WEAPONS_RECEIPT)
     then
         player:startEvent(607) -- Finish A Purchase of Arms quest
-    else
-        player:startEvent(593)  -- Standard Dialog
     end
 end
 
