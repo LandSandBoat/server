@@ -359,7 +359,7 @@ INSERT INTO `status_effects` VALUES (326,'corsairs_roll',131368,0,0,0,0,0,0,0,20
 INSERT INTO `status_effects` VALUES (327,'puppet_roll',131368,0,0,0,0,0,0,0,2000);
 INSERT INTO `status_effects` VALUES (328,'dancers_roll',131368,0,0,0,0,0,0,0,2000);
 INSERT INTO `status_effects` VALUES (329,'scholars_roll',131368,0,0,0,0,0,0,0,2000);
-INSERT INTO `status_effects` VALUES (330,'bolters_roll',131368,0,0,0,0,0,0,0,2000);
+INSERT INTO `status_effects` VALUES (330,'bolters_roll',5905013,0,0,0,0,0,0,0,2000);
 INSERT INTO `status_effects` VALUES (331,'casters_roll',131368,0,0,0,0,0,0,0,2000);
 INSERT INTO `status_effects` VALUES (332,'coursers_roll',131368,0,0,0,0,0,0,0,2000);
 INSERT INTO `status_effects` VALUES (333,'blitzers_roll',131368,0,0,0,0,0,0,0,2000);
