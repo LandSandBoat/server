@@ -325,4 +325,9 @@ xi.settings.map =
     -- ミッションの進行を直列にするカスタム
     -- ジラート終了後にプロマシアが受託できる。それ移行もミッションクリア後に次のミッションが発生する
     MISSION_PROGRESS_CUSTOM = false,
+
+    -- カスタムインベントリを有効にする
+    CUSTOM_INVENTORY = false,
+    -- カスタムインベントリのメッセージ：を合成倉庫に入れた
+    CUSTOM_INVENTORY_MESSAGE = '\x82\xf0\x8d\x87\x90\xac\x91\x71\x8c\xc9\x82\xc9\x93\xfc\x82\xea\x82\xbd',
 }
