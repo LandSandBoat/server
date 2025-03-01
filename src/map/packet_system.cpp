@@ -3083,7 +3083,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                     if (ret != SQL_ERROR && _sql->AffectedRows() != 0)
                     {
-                        if (charutils::AddItem(PChar, LOC_INVENTORY, itemutils::GetItem(PItem), true) != ERROR_SLOTID)
+                        if (charutils::AddItemInventory(PChar, LOC_INVENTORY, itemutils::GetItem(PItem), true) != ERROR_SLOTID)
                         {
                             commit = true;
                         }
