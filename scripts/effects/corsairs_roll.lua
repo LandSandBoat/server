@@ -17,6 +17,7 @@ effectObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.EXP_BONUS, effect:getPower())
     target:delMod(xi.mod.CAPACITY_BONUS, effect:getPower())
     -- TODO: Exemplar Points (Not Implemented)
+    xi.job_utils.corsair.onRollEffectLose(target, effect)
 end
 
 return effectObject
