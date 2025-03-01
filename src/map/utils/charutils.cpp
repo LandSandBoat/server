@@ -1284,6 +1284,16 @@ namespace charutils
 
     uint8 AddItem(CCharEntity* PChar, uint8 LocationID, CItem* PItem, bool silence)
     {
+        if (LocationID == LOC_INVENTORY && settings::get<bool>("map.CUSTOM_INVENTORY"))
+        {
+            return AddItemCustom(PChar, LocationID, PItem, silence);
+        }
+
+        return AddItemInventory(PChar, LocationID, PItem, silence);
+    }
+
+    uint8 AddItemInventory(CCharEntity* PChar, uint8 LocationID, CItem* PItem, bool silence)
+    {
         if (PItem->isType(ITEM_CURRENCY))
         {
             UpdateItem(PChar, LocationID, 0, PItem->getQuantity());
@@ -1347,6 +1357,57 @@ namespace charutils
             destroy(PItem);
         }
         return SlotID;
+    }
+
+    /// <summary>
+    /// カスタム倉庫
+    /// </summary>
+    /// <param name="PChar"></param>
+    /// <param name="LocationID"></param>
+    /// <param name="PItem"></param>
+    /// <param name="silence"></param>
+    /// <returns></returns>
+    uint8 AddItemCustom(CCharEntity* PChar, uint8 LocationID, CItem* PItem, bool silence)
+    {
+        {
+            auto select_ret = db::query(fmt::format("SELECT Result FROM synth_recipes WHERE Ingredient1 = {} OR Ingredient2 = {} OR Ingredient3 = {} OR Ingredient4 = {} OR Ingredient5 = {} OR Ingredient6 = {} OR Ingredient7 = {} OR Ingredient8 = {};", PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID()));
+            int Ingredient_item = 0;
+            if (select_ret && select_ret->rowsCount() && select_ret->next())
+            {
+                Ingredient_item = select_ret->get<uint8>("Result");
+            }
+
+            if (Ingredient_item == 0)
+            {
+                // 素材ではないため通常処理へ
+                return AddItemInventory(PChar, LocationID, PItem, silence);
+            }
+
+            const char* Query = "INSERT INTO custom_inventory("
+                                "charid,"
+                                "location,"
+                                "slot,"
+                                "itemId,"
+                                "quantity,"
+                                "signature,"
+                                "extra) "
+                                "VALUES(%u,%u,%u,%u,%u,'%s','%s') "
+                                "ON DUPLICATE KEY UPDATE "
+                                "quantity = quantity + VALUES(quantity)";
+
+            char signature[DecodeStringLength];
+            DecodeStringSignature(PItem->getSignature().c_str(), signature);
+
+            char extra[sizeof(PItem->m_extra) * 2 + 1];
+            _sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
+
+            if (_sql->Query(Query, PChar->id, LocationID, 0, PItem->getID(), PItem->getQuantity(), signature, extra) == SQL_ERROR)
+                {
+                ShowError("charplugin::AddItem: Cannot insert item to database");
+                return ERROR_SLOTID;
+            }
+        }
+        return 0;
     }
 
     /************************************************************************
