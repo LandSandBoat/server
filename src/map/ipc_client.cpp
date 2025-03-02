@@ -678,7 +678,7 @@ void IPCClient::handleMessage_KillSession(const IPP& ipp, const ipc::KillSession
 
     map_session_data_t* sessionToDelete = nullptr;
 
-    for (const auto [_, session] : map_session_list)
+    for (const auto &[_, session] : map_session_list)
     {
         if (session->charID == message.victimId)
         {
