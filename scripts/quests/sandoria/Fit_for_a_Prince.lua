@@ -39,6 +39,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
+            xi.settings.main.TESTING_SERVER and
             player:getFameLevel(xi.fameArea.SANDORIA) >= 3 and
             vars.Wait < VanadielUniqueDay()
         end,
