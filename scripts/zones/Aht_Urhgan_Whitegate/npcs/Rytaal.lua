@@ -54,7 +54,7 @@ entity.onTrigger = function(player, npc)
     then
         local currentTime = os.time()
         local refreshTime = player:getCharVar('nextTagTime')
-        local idTagPeriod = 86400
+        local idTagPeriod = 3600
 
         if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
             idTagPeriod = 600
