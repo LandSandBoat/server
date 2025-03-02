@@ -98,7 +98,7 @@ namespace ipc
             return std::nullopt;
         }
 
-        return std::move(object);
+        return object;
     }
 
     template <typename T>
@@ -124,6 +124,6 @@ namespace ipc
             return std::nullopt;
         }
 
-        return std::move(object);
+        return object;
     }
 } // namespace ipc
