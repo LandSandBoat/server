@@ -17,8 +17,8 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 2
     local accmod = 1
-    local dmgmod = 1.4
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.NO_EFFECT)
+    local ftp    = 1.4
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
     local power = math.max(1, mob:getMainLvl() / 10)
 

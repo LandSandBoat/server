@@ -4,8 +4,6 @@
 -- Involved in Quest: The Medicine Woman, To Cure a Cough
 -- !pos -85 -6 89 230
 -----------------------------------
-local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -32,8 +30,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
     elseif csid == 646 then
         player:delKeyItem(xi.ki.THYME_MOSS)
-        player:addKeyItem(xi.ki.COUGH_MEDICINE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.COUGH_MEDICINE)
+        npcUtil.giveKeyItem(player, xi.ki.COUGH_MEDICINE)
     end
 end
 

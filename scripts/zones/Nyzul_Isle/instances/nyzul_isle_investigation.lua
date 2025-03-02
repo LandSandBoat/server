@@ -23,7 +23,7 @@ local function pickSetPoint(instance)
         instance:setStage(xi.nyzul.objective.FREE_FLOOR)
         instance:setLocalVar('freeFloor', 1)
 
-        GetNPCByID(ID.npc.RUNE_TRANSFER_START, instance):timer(9000,
+        GetNPCByID(ID.npc.RUNE_OF_TRANSFER_ENTRANCE, instance):timer(9000,
         function(m)
             local currentInstance = m:getInstance()
             currentInstance:setProgress(15)
@@ -54,7 +54,7 @@ local function pickSetPoint(instance)
     local posX        = layoutPoint[1] local posY = layoutPoint[2] local posZ = layoutPoint[3]
 
     -- Set Rune of Transfer to Point
-    for _, npcID in pairs(ID.npc.RUNE_OF_TRANSFER) do
+    for npcID = ID.npc.RUNE_OF_TRANSFER_OFFSET, ID.npc.RUNE_OF_TRANSFER_OFFSET + 1 do
         local runeOfTransfer = GetNPCByID(npcID, instance)
 
         if

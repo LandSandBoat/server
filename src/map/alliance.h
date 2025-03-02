@@ -49,7 +49,7 @@ public:
     void    removeParty(CParty* party);
     void    delParty(CParty* party);
     void    dissolveAlliance(bool playerInitiated = true);
-    void    assignAllianceLeader(const char* name);
+    void    assignAllianceLeader(const std::string& name);
     bool    hasOnlyOneParty() const;
     bool    isFull() const;
 

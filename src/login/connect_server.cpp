@@ -21,8 +21,32 @@
 
 #include "connect_server.h"
 
+namespace
+{
+    auto getZMQEndpointString() -> std::string
+    {
+        return fmt::format("tcp://{}:{}", settings::get<std::string>("network.ZMQ_IP"), settings::get<uint16>("network.ZMQ_PORT"));
+    }
+
+    auto getZMQRoutingId() -> uint64
+    {
+        // We will only ever have a single login server, so we can use different logic for the routing id
+
+        const auto   ip   = settings::get<std::string>("network.LOGIN_AUTH_IP");
+        const uint64 port = settings::get<uint16>("network.LOGIN_AUTH_PORT");
+
+        uint64 ipp{};
+        inet_pton(AF_INET, ip.c_str(), &ipp);
+
+        ipp |= (port << 32);
+
+        return ipp;
+    }
+} // namespace
+
 ConnectServer::ConnectServer(int argc, char** argv)
 : Application("connect", argc, argv)
+, zmqDealerWrapper_(getZMQEndpointString(), getZMQRoutingId())
 {
     asio::io_context io_context;
 
@@ -50,9 +74,7 @@ ConnectServer::ConnectServer(int argc, char** argv)
     // clang-format on
 
 #ifndef _WIN32
-    struct rlimit limits
-    {
-    };
+    rlimit limits{};
 
     uint32 newRLimit = 10240;
 
@@ -77,9 +99,9 @@ ConnectServer::ConnectServer(int argc, char** argv)
         ShowInfo("creating ports");
 
         // Handler creates session of type T for specific port on connection.
-        handler<auth_session> auth(io_context, settings::get<uint32>("network.LOGIN_AUTH_PORT"));
-        handler<view_session> view(io_context, settings::get<uint32>("network.LOGIN_VIEW_PORT"));
-        handler<data_session> data(io_context, settings::get<uint32>("network.LOGIN_DATA_PORT"));
+        handler<auth_session> auth(io_context, settings::get<uint32>("network.LOGIN_AUTH_PORT"), zmqDealerWrapper_);
+        handler<view_session> view(io_context, settings::get<uint32>("network.LOGIN_VIEW_PORT"), zmqDealerWrapper_);
+        handler<data_session> data(io_context, settings::get<uint32>("network.LOGIN_DATA_PORT"), zmqDealerWrapper_);
         asio::steady_timer    cleanup_callback(io_context, std::chrono::minutes(15));
 
         cleanup_callback.async_wait(std::bind(&ConnectServer::periodicCleanup, this, std::placeholders::_1, &cleanup_callback));

@@ -3,6 +3,7 @@
 -- http://ffxiclopedia.wikia.com/wiki/Chocobo_Digging
 -- https://www.bg-wiki.com/bg/Category:Chocobo_Digging
 -----------------------------------
+require('scripts/globals/combat/element_tables')
 require('scripts/globals/roe')
 require('scripts/globals/utils')
 require('scripts/missions/amk/helpers')
@@ -133,7 +134,7 @@ local diggingLayer =
     BORE     = 4, -- Special "Raised chocobo only" layer. Requires the mounted chocobo to have a concrete skill. It's an independent AND additional item dig.
 }
 
-local digInfo =
+xi.chocoboDig.digInfo =
 {
     [xi.zone.CARPENTERS_LANDING] = -- 2
     {
@@ -2156,7 +2157,7 @@ local function calculateSkillUp(player)
 end
 
 local function  handleDiggingLayer(player, zoneId, currentLayer)
-    local digTable = digInfo[zoneId][currentLayer]
+    local digTable = xi.chocoboDig.digInfo[zoneId][currentLayer]
 
     -- Early return.
     if
@@ -2168,27 +2169,35 @@ local function  handleDiggingLayer(player, zoneId, currentLayer)
 
     local dTableItemIds  = {}
     local rewardItem     = 0
-    local rollMultiplier = 1 -- Determined by moon and certain gear. Higher = WORSE
 
     -- Determine moon multiplier.
-    local moon = VanadielMoonPhase()
-
-    if moon >= 40 and moon <= 60 then
-        rollMultiplier = rollMultiplier * 2
-    end
-
-    -- TODO: Implement pants that lower common item chance and raise rare item chance.
+    local moon           = VanadielMoonPhase()
+    local rollMultiplier = 1.5 - math.abs(moon - 50) / 50 -- The lower the multiplier, the better for the player.
+    -- Moon phase 0 and 100 -> multiplier = 0.5
+    -- Moon phase 50        -> multiplier = 1.5
+    -- Moon phase 25 and 75 -> multiplier = 1
 
     -- Add valid items to dynamic table
     local playerRank = player:getSkillRank(xi.skill.DIG)
     local randomRoll = 1000
+    local digRate    = 0
 
     for i = 1, #digTable do
         randomRoll = utils.clamp(math.floor(math.random(1, 1000) * rollMultiplier), 1, 1000)
+        digRate    = digTable[i][2]
+
+        -- Denim Pants +1 and Black Chocobo Suit
+        if player:getMod(xi.mod.DIG_RARE_ABILITY) > 0 then
+            if digRate >= 100 then
+                digRate = math.floor(digRate / 2)
+            else
+                digRate = digRate * 2
+            end
+        end
 
         if
-            randomRoll <= digTable[i][2] and -- Roll check
-            playerRank >= digTable[i][3]     -- Rank check
+            randomRoll <= digRate and    -- Roll check
+            playerRank >= digTable[i][3] -- Rank check
         then
             table.insert(dTableItemIds, #dTableItemIds + 1, digTable[i][1]) -- Insert item ID to table.
         end
@@ -2201,7 +2210,7 @@ local function  handleDiggingLayer(player, zoneId, currentLayer)
         local isElementalOreZone = elementalOreZoneTable[player:getZoneID()] or false
 
         -- Crystals and Clusters.
-        randomRoll = math.random(1, 1000) * rollMultiplier
+        randomRoll = utils.clamp(math.floor(math.random(1, 1000) * rollMultiplier), 1, 1000)
         if
             diggingWeatherTable[weather] and
             randomRoll <= 100
@@ -2210,23 +2219,21 @@ local function  handleDiggingLayer(player, zoneId, currentLayer)
         end
 
         -- Geodes / Colored Rocks.
-        randomRoll = math.random(1, 1000) * rollMultiplier
+        randomRoll = utils.clamp(math.floor(math.random(1, 1000) * rollMultiplier), 1, 1000)
         if
-            diggingDayTable[currentDay] and
             playerRank >= xi.craftRank.NOVICE and
-            randomRoll <= 100
+            randomRoll <= 50
         then
             table.insert(dTableItemIds, #dTableItemIds + 1, diggingDayTable[currentDay][1]) -- Insert item ID to table.
         end
 
         -- Elemenal Ores.
-        randomRoll = math.random(1, 1000) * rollMultiplier
+        randomRoll = utils.clamp(math.floor(math.random(1, 1000) * rollMultiplier), 1, 1000)
         if
-            diggingDayTable[currentDay] and
-            playerRank >= xi.craftRank.CRAFTSMAN and
-            isElementalOreZone and
-            weather ~= xi.weather.NONE and
-            moon >= 7 and moon <= 21 and
+            isElementalOreZone and                                              -- Zone can drop ore.
+            playerRank >= xi.craftRank.CRAFTSMAN and                            -- Digging level must be 60+
+            xi.combat.element.getWeatherElement(weather) ~= xi.element.NONE and -- Weather must be elemental.
+            moon >= 7 and moon <= 21 and                                        -- Moon must be between those values.
             randomRoll <= 100
         then
             table.insert(dTableItemIds, #dTableItemIds + 1, diggingDayTable[currentDay][2]) -- Insert item ID to table.
@@ -2251,6 +2258,14 @@ local function handleItemObtained(player, text, itemId)
         else
             player:messageSpecial(text.DIG_THROW_AWAY, itemId)
         end
+    end
+end
+
+local function handleFatigue(player, text, todayDigCount)
+    if math.random(1, 100) <= player:getMod(xi.mod.DIG_BYPASS_FATIGUE) then
+        player:messageSpecial(text.FOUND_ITEM_WITH_EASE)
+    else
+        player:setVar('[DIG]DigCount', todayDigCount + 1, NextJstDay())
     end
 end
 
@@ -2327,13 +2342,13 @@ xi.chocoboDig.start = function(player)
     player:setLocalVar('[DIG]LastXPosSign', currentXSign)
     player:setLocalVar('[DIG]LastZPosSign', currentZSign)
     player:setLocalVar('[DIG]LastDigTime', os.time())
-    player:setVar('[DIG]DigCount', todayDigCount + 1, NextJstDay())
 
     -- Handle trasure layer. Incompatible with the other 3 layers. "Early" return.
     local trasureItemId = handleDiggingLayer(player, zoneId, diggingLayer.TREASURE)
 
     if trasureItemId > 0 then
         handleItemObtained(player, text, trasureItemId)
+        handleFatigue(player, text, todayDigCount)
         calculateSkillUp(player)
         player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
 
@@ -2377,6 +2392,7 @@ xi.chocoboDig.start = function(player)
     then
         player:messageText(player, text.FIND_NOTHING)
     else
+        handleFatigue(player, text, todayDigCount)
         player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
     end
 

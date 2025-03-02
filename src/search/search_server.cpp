@@ -55,10 +55,7 @@ SearchServer::SearchServer(int argc, char** argv)
 
     // Is this necessary for search?
 #ifndef _WIN32
-    struct rlimit limits
-    {
-    };
-
+    rlimit limits{};
     uint32 newRLimit = 10240;
 
     // Get old limits
@@ -78,10 +75,12 @@ SearchServer::SearchServer(int argc, char** argv)
     {
         ShowInfo("creating ports");
 
+        // clang-format off
         const auto search_handler_handler = handler(io_context, settings::get<uint32>("network.SEARCH_PORT"), [&](asio::ip::tcp::socket socket) {
             const auto handler = std::make_shared<search_handler>(std::move(socket), io_context, IPAddressesInUse_, IPAddressWhitelist_);
             handler->start();
         });
+        // clang-format on
 
         // AH cleanup callback. May not be used if settings doesn't enable it.
         asio::steady_timer cleanup_callback(io_context, std::chrono::seconds(settings::get<uint32>("search.EXPIRE_INTERVAL")));

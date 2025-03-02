@@ -17,8 +17,8 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 4
     local accmod = 1
-    local dmgmod = 1.2
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.NO_EFFECT)
+    local ftp    = 1.2
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, (skill:getTP() * 30 / 1000) + 30)

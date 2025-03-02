@@ -4,8 +4,6 @@
 -- Involved in Quests: Missionary Man
 -- !pos -175 0 181 231
 -----------------------------------
-local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -36,8 +34,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 700 then
         player:setCharVar('MissionaryManVar', 4)
         player:setCharVar('MissionaryMan_date', 0)
-        player:addKeyItem(xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
+        npcUtil.giveKeyItem(player, xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
     end
 end
 

@@ -9,8 +9,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    -- skill:setMsg(xi.msg.basic.READIES_WS) -- not needed?
-    return 666
+    local darkpot = 666
+    local dmg     = xi.mobskills.mobFinalAdjustments(darkpot, mob, skill, target, xi.attackType.NONE, xi.damageType.NONE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+
+    target:takeDamage(dmg, mob, xi.attackType.NONE, xi.damageType.NONE)
+
+    return dmg
 end
 
 return mobskillObject

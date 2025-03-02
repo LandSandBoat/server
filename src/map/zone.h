@@ -433,7 +433,7 @@ enum ZONE_TYPE : uint16
 };
 DECLARE_FORMAT_AS_UNDERLYING(ZONE_TYPE);
 
-enum GLOBAL_MESSAGE_TYPE
+enum GLOBAL_MESSAGE_TYPE : uint8
 {
     CHAR_INRANGE,
     CHAR_INRANGE_SELF,
@@ -460,7 +460,7 @@ enum class TELEPORT_TYPE : uint8
 };
 DECLARE_FORMAT_AS_UNDERLYING(TELEPORT_TYPE);
 
-enum ZONEMISC
+enum ZONEMISC : uint16
 {
     MISC_NONE             = 0x0000, // Able to be used in any area
     MISC_ESCAPE           = 0x0001, // Ability to use Escape Spell
@@ -527,8 +527,9 @@ class CTrustEntity;
 class CTreasurePool;
 class CZoneEntities;
 
-typedef std::list<CTriggerArea*> triggerAreaList_t;
-typedef std::list<zoneLine_t*>   zoneLineList_t;
+typedef std::list<std::unique_ptr<ITriggerArea>> triggerAreaList_t;
+
+typedef std::list<zoneLine_t*> zoneLineList_t;
 
 typedef std::map<uint16, zoneWeather_t> weatherVector_t;
 
@@ -606,12 +607,11 @@ public:
     virtual void TransportDepart(uint16 boundary, uint16 zone);  // Collect passengers if ship/boat is departing
     virtual void updateCharLevelRestriction(CCharEntity* PChar); // Removes the character's level restriction. If the zone has a level restriction, it is applied after it is removed.
 
-    void InsertTriggerArea(CTriggerArea* triggerArea);
+    void InsertTriggerArea(std::unique_ptr<ITriggerArea>&& triggerArea); // Add an active area to the zone
 
     virtual void TOTDChange(TIMETYPE TOTD);
     virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, const std::unique_ptr<CBasicPacket>&);
 
-    virtual void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
     virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
 
     bool           IsZoneActive() const;

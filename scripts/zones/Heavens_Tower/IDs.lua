@@ -22,10 +22,10 @@ zones[xi.zone.HEAVENS_TOWER] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7192, -- Your party is unable to participate because certain members' levels are restricted.
         YOU_LEARNED_TRUST             = 7194, -- You learned Trust: <name>!
         CALL_MULTIPLE_ALTER_EGO       = 7195, -- You are now able to call multiple alter egos.
-        FISHING_MESSAGE_OFFSET        = 7382, -- You can't fish here.
-        CELEBRATORY_GOODS             = 9115, -- An assortment of celebratory goods is available for purchase.
-        OBTAINED_NUM_KEYITEMS         = 9193, -- Obtained key item: <number> <keyitem>!
-        NOT_ACQUAINTED                = 9195, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
+        FISHING_MESSAGE_OFFSET        = 7384, -- You can't fish here.
+        CELEBRATORY_GOODS             = 9117, -- An assortment of celebratory goods is available for purchase.
+        OBTAINED_NUM_KEYITEMS         = 9195, -- Obtained key item: <number> <keyitem>!
+        NOT_ACQUAINTED                = 9197, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
     },
     mob =
     {

@@ -79,14 +79,14 @@ xi.mod =
     WATERATT                        = 37,
     LIGHTATT                        = 38,
     DARKATT                         = 39,
-    FIREACC                         = 40,
-    ICEACC                          = 41,
-    WINDACC                         = 42,
-    EARTHACC                        = 43,
-    THUNDERACC                      = 44,
-    WATERACC                        = 45,
-    LIGHTACC                        = 46,
-    DARKACC                         = 47,
+    FIRE_MACC                       = 40,
+    ICE_MACC                        = 41,
+    WIND_MACC                       = 42,
+    EARTH_MACC                      = 43,
+    THUNDER_MACC                    = 44,
+    WATER_MACC                      = 45,
+    LIGHT_MACC                      = 46,
+    DARK_MACC                       = 47,
     WSACC                           = 48,
     ATTP                            = 62,
     DEFP                            = 63,
@@ -122,9 +122,9 @@ xi.mod =
     CAMOUFLAGE_DURATION             = 98,  -- Camouflage duration in percents
 
     -- These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
-    AUTO_MELEE_SKILL                = 101,
-    AUTO_RANGED_SKILL               = 102,
-    AUTO_MAGIC_SKILL                = 103,
+    AUTO_MELEE_SKILL                = 101, -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
+    AUTO_RANGED_SKILL               = 102, -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
+    AUTO_MAGIC_SKILL                = 103, -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
     ARCHERY                         = 104,
     MARKSMAN                        = 105,
     THROW                           = 106,
@@ -180,10 +180,10 @@ xi.mod =
     DMG_AOE                         = 158, -- Mob only. Damage Taken % when not main target of an AoE action. (Ex: Locus Mobs). Uncaped.
     RECEIVED_DAMAGE_CAP             = 221, -- Caps the damage taken recieved by the attacker
     RECEIVED_DAMAGE_VARIANT         = 222, -- The variance that you want the damage cap to changed by. Ex: If you want the damage to be from 90-100 instead of a flat 100 you can set this to 10. It will random the value between 90-100 if the damage is above 100.
-    SLASH_SDT                       =  49, -- Overrides mob_resistances.sql. NOT base 10000. TODO: Change to work as all the others.
-    PIERCE_SDT                      =  50, -- Overrides mob_resistances.sql. NOT base 10000. TODO: Change to work as all the others.
-    IMPACT_SDT                      =  51, -- Overrides mob_resistances.sql. NOT base 10000. TODO: Change to work as all the others.
-    HTH_SDT                         =  52, -- Overrides mob_resistances.sql. NOT base 10000. TODO: Change to work as all the others.
+    SLASH_SDT                       =  49, -- Overrides mob_resistances.sql.
+    PIERCE_SDT                      =  50, -- Overrides mob_resistances.sql.
+    IMPACT_SDT                      =  51, -- Overrides mob_resistances.sql.
+    HTH_SDT                         =  52, -- Overrides mob_resistances.sql.
     FIRE_SDT                        =  54, -- Overrides mob_resistances.sql.
     ICE_SDT                         =  55, -- Overrides mob_resistances.sql.
     WIND_SDT                        =  56, -- Overrides mob_resistances.sql.
@@ -565,7 +565,7 @@ xi.mod =
     ENHANCES_STRAFE                 = 282, -- Strafe merit augment, +50 TP gained per merit level on breath use.
     ENHANCES_SPIRIT_LINK            = 281, -- Adds erase/-na to Spirit Link
     REWARD_HP_BONUS                 = 364,
-    SNAP_SHOT                       = 365,
+    SNAPSHOT                        = 365,
 
     DMG_RATING                      = 287, -- adds damage rating to weapon (+DMG augments, maneater/blau dolch etc hidden effects)
     MAIN_DMG_RATING                 = 366, -- adds damage rating to mainhand weapon
@@ -1012,6 +1012,7 @@ xi.mod =
     QUICK_DRAW_RECAST       = 1060, -- Quick Draw Charge Reduction (seconds)
 
     DIG_BYPASS_FATIGUE      = 1074, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
+    DIG_RARE_ABILITY        = 1133, -- Chocobo digging modifier found in "Black Chocobo Suit" and "Denim Pants +1".
     BREATH_DMG_DEALT        = 1075, -- Breath damage dealt
 
     STEP_TP_CONSUMED        = 1077, -- Modifies the amount of TP consumed by dancer steps
@@ -1021,6 +1022,10 @@ xi.mod =
 
     MAGIC_BURST_BONUS_CAPPED   = 487, -- Magic Burst Bonus I from gear, Ancient Magic Merits, Atmas. Cap at 40% bonus (1.4 multiplier)
     MAGIC_BURST_BONUS_UNCAPPED = 274, -- Magic Burst Bonus II from gear, JP Gifts, BLM JPs and Job traits. No known cap.
+
+    DESPAWN_TIME_REDUCTION = 1134, -- Reduction in seconds. 1 = 1 second less to despawn.
+
+    PARRY_HP_RECOVERY = 1135, -- Recover <Mod Value> HP on successful parry.
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 

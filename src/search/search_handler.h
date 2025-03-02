@@ -28,7 +28,7 @@
 #include <unordered_set>
 
 #include "common/blowfish.h"
-#include "common/mutex_guarded.h"
+#include "common/synchronized.h"
 #include "search.h"
 
 enum TCPREQUESTTYPE
@@ -47,7 +47,7 @@ class search_handler
 : public std::enable_shared_from_this<search_handler>
 {
 public:
-    search_handler(asio::ip::tcp::socket socket, asio::io_context& io_context, shared_guarded<std::map<std::string, uint16_t>>& IPAddressesInUseList, shared_guarded<std::unordered_set<std::string>>& IPAddressWhitelist);
+    search_handler(asio::ip::tcp::socket socket, asio::io_context& io_context, SynchronizedShared<std::map<std::string, uint16_t>>& IPAddressesInUseList, SynchronizedShared<std::unordered_set<std::string>>& IPAddressWhitelist);
 
     ~search_handler();
 
@@ -83,10 +83,10 @@ private:
     // A single IP should only have one request in flight at a time, so we are going to
     // be tracking the IP addresses of incoming requests and if we haven't cleared the
     // record for it - we block until it's done
-    shared_guarded<std::map<std::string, uint16_t>>& IPAddressesInUse_;
+    SynchronizedShared<std::map<std::string, uint16_t>>& IPAddressesInUse_;
 
     // NOTE: We're only using the read-lock for this
-    shared_guarded<std::unordered_set<std::string>>& IPAddressWhitelist_;
+    SynchronizedShared<std::unordered_set<std::string>>& IPAddressWhitelist_;
 
     // Deadline timer to drop a read
     asio::steady_timer deadline_;

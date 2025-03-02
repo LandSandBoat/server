@@ -65,8 +65,8 @@ SET @RANK_GRANDMASTER = 14;
 SET @RANK_LEGEND      = 15;
 
 DELIMITER $$
-DROP TRIGGER IF EXISTS ensure_ingredients_are_ordered;
-CREATE TRIGGER ensure_ingredients_are_ordered
+DROP TRIGGER IF EXISTS ensure_synergy_ingredients_are_ordered;
+CREATE TRIGGER ensure_synergy_ingredients_are_ordered
      BEFORE INSERT ON synergy_recipes FOR EACH ROW BEGIN
           IF NEW.ingredient2 > 0 AND NEW.ingredient1 > NEW.ingredient2
           THEN

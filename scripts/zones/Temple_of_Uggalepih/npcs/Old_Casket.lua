@@ -22,8 +22,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 64 and option == 1 then
         player:delKeyItem(xi.ki.OLD_RUSTY_KEY)
-        player:addKeyItem(xi.ki.PAINTBRUSH_OF_SOULS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PAINTBRUSH_OF_SOULS)
+        npcUtil.giveKeyItem(player, xi.ki.PAINTBRUSH_OF_SOULS)
     end
 end
 

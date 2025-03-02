@@ -54,13 +54,12 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack)
 {
     std::vector<ahHistory*> HistoryList;
 
-    const char* fmtQuery = "SELECT sale, sell_date, seller_name, buyer_name "
-                           "FROM auction_house "
-                           "WHERE itemid = %u AND stack = %u AND buyer_name IS NOT NULL "
-                           "ORDER BY sell_date DESC "
-                           "LIMIT 10";
-
-    auto rset = db::query(fmtQuery, ItemID, stack);
+    auto rset = db::preparedStmt("SELECT sale, sell_date, seller_name, buyer_name "
+                                 "FROM auction_house "
+                                 "WHERE itemid = ? AND stack = ? AND buyer_name IS NOT NULL "
+                                 "ORDER BY sell_date DESC "
+                                 "LIMIT 10",
+                                 ItemID, stack);
 
     if (rset && rset->rowsCount())
     {
@@ -87,32 +86,36 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack)
  *                                                                       *
  ************************************************************************/
 
-std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, const char* OrderByString)
+std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::string& orderByString)
 {
-    ShowDebug("try find category %u", AHCategoryID);
+    ShowDebug("Try find category: %u", ahCategoryID);
 
     std::vector<ahItem*> ItemList;
-    const char*          selectFrom = "item_basic";
-    if (settings::get<bool>("search.OMIT_NO_HISTORY"))
+
+    const auto rset = [&]()
     {
-        // Get items that have been listed before
-        selectFrom = "(SELECT item_basic.* "
-                     "FROM item_basic "
-                     "INNER JOIN auction_house_items ON item_basic.itemid = auction_house_items.itemid"
-                     ") AS item_basic";
-    }
+        const auto subQuery = "(SELECT item_basic.* "
+                              "FROM item_basic "
+                              "INNER JOIN auction_house_items ON item_basic.itemid = auction_house_items.itemid"
+                              ") AS item_basic ";
 
-    auto fmtQuery = fmt::sprintf("SELECT item_basic.itemid, item_basic.stackSize, COUNT(*)-SUM(stack), SUM(stack) "
-                                 "FROM %s "
-                                 "LEFT JOIN auction_house ON item_basic.itemId = auction_house.itemid AND auction_house.buyer_name IS NULL "
-                                 "LEFT JOIN item_equipment ON item_basic.itemid = item_equipment.itemid "
-                                 "LEFT JOIN item_weapon ON item_basic.itemid = item_weapon.itemid "
-                                 "WHERE aH = %u "
-                                 "GROUP BY item_basic.itemid "
-                                 "%s",
-                                 selectFrom, AHCategoryID, OrderByString);
+        const auto fromTable = settings::get<bool>("search.OMIT_NO_HISTORY") ? subQuery : "item_basic";
 
-    auto rset = db::query(fmtQuery);
+        // Build the query string with optional subquery and order-by statements before passing it to the prepared statement.
+        const auto queryStr = fmt::format("SELECT item_basic.itemid, item_basic.stackSize, COUNT(*)-SUM(stack), SUM(stack) "
+                                          "FROM {} "
+                                          "LEFT JOIN auction_house ON item_basic.itemId = auction_house.itemid AND auction_house.buyer_name IS NULL "
+                                          "LEFT JOIN item_equipment ON item_basic.itemid = item_equipment.itemid "
+                                          "LEFT JOIN item_weapon ON item_basic.itemid = item_weapon.itemid "
+                                          "WHERE aH = ? "
+                                          "GROUP BY item_basic.itemid "
+                                          "{}",
+                                          fromTable, orderByString);
+
+        // We will now populate the ? in the prepared statement.
+        return db::preparedStmt(queryStr, ahCategoryID);
+    }();
+
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -123,7 +126,7 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, const
 
             PAHItem->SingleAmount = rset->getOrDefault<uint32>("COUNT(*)-SUM(stack)", 0);
             PAHItem->StackAmount  = rset->getOrDefault<uint32>("SUM(stack)", 0);
-            PAHItem->Category     = AHCategoryID;
+            PAHItem->Category     = ahCategoryID;
 
             if (rset->get<uint32>("stackSize") == 1)
             {
@@ -146,14 +149,13 @@ ahItem CDataLoader::GetAHItemFromItemID(uint16 ItemID)
     CAHItem.SingleAmount = 0;
     CAHItem.StackAmount  = 0;
 
-    const char* fmtQuery = "SELECT aH, COUNT(*)-SUM(stack), SUM(stack) "
-                           "FROM item_basic "
-                           "LEFT JOIN auction_house ON item_basic.itemId = auction_house.itemid AND auction_house.buyer_name IS NULL "
-                           "LEFT JOIN item_equipment ON item_basic.itemid = item_equipment.itemid "
-                           "LEFT JOIN item_weapon ON item_basic.itemid = item_weapon.itemid "
-                           "WHERE item_basic.itemid = %u";
-
-    auto rset = db::query(fmtQuery, ItemID);
+    auto rset = db::preparedStmt("SELECT aH, COUNT(*)-SUM(stack), SUM(stack) "
+                                 "FROM item_basic "
+                                 "LEFT JOIN auction_house ON item_basic.itemId = auction_house.itemid AND auction_house.buyer_name IS NULL "
+                                 "LEFT JOIN item_equipment ON item_basic.itemid = item_equipment.itemid "
+                                 "LEFT JOIN item_weapon ON item_basic.itemid = item_weapon.itemid "
+                                 "WHERE item_basic.itemid = ?",
+                                 ItemID);
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -182,7 +184,7 @@ uint32 CDataLoader::GetPlayersCount(const search_req& sr)
     uint8 jobid = sr.jobid;
     if (jobid > 0 && jobid < 21)
     {
-        auto rset = db::query("SELECT COUNT(*) FROM accounts_sessions LEFT JOIN char_stats USING (charid) WHERE mjob = %u", jobid);
+        auto rset = db::preparedStmt("SELECT COUNT(*) FROM accounts_sessions LEFT JOIN char_stats USING (charid) WHERE mjob = ?", jobid);
         if (rset && rset->rowsCount() && rset->next())
         {
             return rset->get<uint32>("COUNT(*)");
@@ -190,7 +192,7 @@ uint32 CDataLoader::GetPlayersCount(const search_req& sr)
     }
     else
     {
-        auto rset = db::query("SELECT COUNT(*) FROM accounts_sessions");
+        auto rset = db::preparedStmt("SELECT COUNT(*) FROM accounts_sessions");
         if (rset && rset->rowsCount() && rset->next())
         {
             return rset->get<uint32>("COUNT(*)");
@@ -239,7 +241,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
 
     if (sr.commentType != 0)
     {
-        filterQry.append(fmt::sprintf(" AND (seacom_type & 0xF0) = %u", sr.commentType, sr.commentType));
+        filterQry.append(fmt::sprintf(" AND (seacom_type & 0xF0) = %u", sr.commentType));
     }
 
     std::string fmtQuery =
@@ -257,7 +259,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
     fmtQuery.append(filterQry);
     fmtQuery.append(" ORDER BY charname ASC");
 
-    auto rset = db::query(fmtQuery);
+    auto rset = db::preparedStmt(fmtQuery);
     if (rset && rset->rowsCount())
     {
         int totalResults   = 0; // gives ALL matching criteria (total)
@@ -482,20 +484,18 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
 {
     std::list<SearchEntity*> PartyList;
 
-    const char* query =
-        "SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, settings, mjob, sjob, mlvl, slvl, languages, seacom_type, disconnecting "
-        "FROM accounts_sessions "
-        "LEFT JOIN accounts_parties USING(charid) "
-        "LEFT JOIN chars USING(charid) "
-        "LEFT JOIN char_look USING(charid) "
-        "LEFT JOIN char_stats USING(charid) "
-        "LEFT JOIN char_profile USING(charid) "
-        "LEFT JOIN char_flags USING(charid) "
-        "WHERE IF (allianceid <> 0, allianceid IN (SELECT allianceid FROM accounts_parties WHERE charid = %u) , partyid = %u) "
-        "ORDER BY charname ASC "
-        "LIMIT 64";
-
-    auto rset = db::query(query, (!AllianceID ? PartyID : AllianceID), (!PartyID ? AllianceID : PartyID));
+    auto rset = db::preparedStmt("SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, settings, mjob, sjob, mlvl, slvl, languages, seacom_type, disconnecting "
+                                 "FROM accounts_sessions "
+                                 "LEFT JOIN accounts_parties USING(charid) "
+                                 "LEFT JOIN chars USING(charid) "
+                                 "LEFT JOIN char_look USING(charid) "
+                                 "LEFT JOIN char_stats USING(charid) "
+                                 "LEFT JOIN char_profile USING(charid) "
+                                 "LEFT JOIN char_flags USING(charid) "
+                                 "WHERE IF (allianceid <> 0, allianceid IN (SELECT allianceid FROM accounts_parties WHERE charid = ?) , partyid = ?) "
+                                 "ORDER BY charname ASC "
+                                 "LIMIT 64",
+                                 (!AllianceID ? PartyID : AllianceID), (!PartyID ? AllianceID : PartyID));
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -589,21 +589,21 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
 std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
 {
     std::list<SearchEntity*> LinkshellList;
-    const char*              fmtQuery = "SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, settings, mjob, sjob, "
-                                        "mlvl, slvl, linkshellid1, linkshellid2, "
-                                        "linkshellrank1, linkshellrank2, disconnecting "
-                                        "FROM accounts_sessions "
-                                        "LEFT JOIN accounts_parties USING (charid) "
-                                        "LEFT JOIN chars USING (charid) "
-                                        "LEFT JOIN char_look USING (charid) "
-                                        "LEFT JOIN char_stats USING (charid) "
-                                        "LEFT JOIN char_profile USING(charid) "
-                                        "LEFT JOIN char_flags USING(charid) "
-                                        "WHERE linkshellid1 = %u OR linkshellid2 = %u "
-                                        "ORDER BY charname ASC "
-                                        "LIMIT 18";
 
-    auto rset = db::query(fmtQuery, LinkshellID, LinkshellID);
+    auto rset = db::preparedStmt("SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, settings, mjob, sjob, "
+                                 "mlvl, slvl, linkshellid1, linkshellid2, "
+                                 "linkshellrank1, linkshellrank2, disconnecting "
+                                 "FROM accounts_sessions "
+                                 "LEFT JOIN accounts_parties USING (charid) "
+                                 "LEFT JOIN chars USING (charid) "
+                                 "LEFT JOIN char_look USING (charid) "
+                                 "LEFT JOIN char_stats USING (charid) "
+                                 "LEFT JOIN char_profile USING(charid) "
+                                 "LEFT JOIN char_flags USING(charid) "
+                                 "WHERE linkshellid1 = ? OR linkshellid2 = ? "
+                                 "ORDER BY charname ASC "
+                                 "LIMIT 18",
+                                 LinkshellID, LinkshellID);
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -712,10 +712,10 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
 
     std::vector<ListingToExpire> listingsToExpire;
 
-    std::string query0 = "SELECT T0.id,T0.itemid,T1.stacksize, T0.stack, T0.seller FROM auction_house T0 INNER JOIN item_basic T1 ON \
-                            T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >= %u AND buyer_name IS NULL";
+    const auto rset0 = db::preparedStmt("SELECT T0.id,T0.itemid,T1.stacksize, T0.stack, T0.seller FROM auction_house T0 INNER JOIN item_basic T1 ON "
+                                        "T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >= ? AND buyer_name IS NULL",
+                                        expireAgeInDays);
 
-    const auto rset0           = db::query(query0, expireAgeInDays);
     const auto expiredAuctions = rset0->rowsCount();
 
     if (rset0 && expiredAuctions > 0)
@@ -736,22 +736,19 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
         for (auto listing : listingsToExpire)
         {
             // Populate name now
-            const auto query1 = fmt::format("SELECT charname FROM chars WHERE charid={}", listing.sellerID);
-            const auto rset1  = db::query(query1);
+            const auto rset1 = db::preparedStmt("SELECT charname FROM chars WHERE charid = ?", listing.sellerID);
             if (rset1 && rset1->rowsCount() && rset1->next())
             {
                 listing.sellerName = rset1->get<std::string>("charname");
             }
 
-            const auto query2 = fmt::format("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
-                                            "({}, '{}', 1, {}, 0, {}, 0, 'AH-Jeuno')",
-                                            listing.sellerID, listing.sellerName, listing.itemID, listing.ahStack == 1 ? listing.itemStack : 1);
-
-            const auto [rset2, affectedRows] = db::preparedStmtWithAffectedRows(query2);
+            const auto [rset2, affectedRows] = db::preparedStmtWithAffectedRows("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
+                                                                                "(?, ?, 1, ?, 0, ?, 0, 'AH-Jeuno')",
+                                                                                listing.sellerID, listing.sellerName, listing.itemID, listing.ahStack == 1 ? listing.itemStack : 1);
             if (rset2 && affectedRows > 0)
             {
                 // delete the item from the auction house
-                db::query("DELETE FROM auction_house WHERE id=%u", listing.saleID);
+                db::preparedStmt("DELETE FROM auction_house WHERE id = ?", listing.saleID);
             }
         }
     }

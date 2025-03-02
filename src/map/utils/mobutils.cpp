@@ -106,8 +106,16 @@ namespace mobutils
 
     uint16 GetMagicEvasion(CMobEntity* PMob)
     {
-        uint8 mEvaRank = PMob->evaRank;
-        return GetBaseSkill(PMob, mEvaRank);
+        uint8 mlvl = std::min<uint8>(PMob->GetMLevel(), 99);
+
+        // Assume trusts have G rank meva like players
+        if (PMob->objtype == TYPE_TRUST)
+        {
+            return battleutils::GetMaxSkill(12, mlvl);
+        }
+
+        // Mobs have rank C magic evasion
+        return battleutils::GetMaxSkill(7, mlvl);
     }
 
     /************************************************************************
@@ -788,6 +796,11 @@ namespace mobutils
             SetupNMMob(PMob);
         }
 
+        if (zoneType & ZONE_TYPE::INSTANCED)
+        {
+            SetupDungeonInstanceMob(PMob);
+        }
+
         if (PMob->m_Type & MOBTYPE_EVENT)
         {
             SetupEventMob(PMob);
@@ -1151,6 +1164,26 @@ namespace mobutils
             {
                 // whm nms have stronger regen effect
                 PMob->addModifier(Mod::REGEN, mLvl / 4);
+            }
+        }
+    }
+
+    void SetupDungeonInstanceMob(CMobEntity* PMob)
+    {
+        PMob->setMobMod(MOBMOD_GIL_MAX, 0);
+        PMob->setMobMod(MOBMOD_MUG_GIL, 0);
+        PMob->loc.p = PMob->m_SpawnPoint;
+        // never despawn
+        PMob->SetDespawnTime(0s);
+        PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
+        // Salvage and Nyzul
+        if (PMob->getZone() >= ZONE_ZHAYOLM_REMNANTS && PMob->getZone() <= ZONE_NYZUL_ISLE)
+        {
+            // Salvage and Nyzul mobs can not be charmed
+            PMob->setMobMod(MOBMOD_CHARMABLE, 0);
+            if (PMob->getZone() != ZONE_NYZUL_ISLE)
+            {
+                PMob->setMobMod(MOBMOD_CHECK_AS_NM, 1);
             }
         }
     }
@@ -1591,10 +1624,10 @@ namespace mobutils
                 PMob->attRank = (uint8)_sql->GetIntData(32);
                 PMob->accRank = (uint8)_sql->GetIntData(33);
 
-                PMob->setModifier(Mod::SLASH_SDT, (uint16)(_sql->GetFloatData(34) * 1000));
-                PMob->setModifier(Mod::PIERCE_SDT, (uint16)(_sql->GetFloatData(35) * 1000));
-                PMob->setModifier(Mod::HTH_SDT, (uint16)(_sql->GetFloatData(36) * 1000));
-                PMob->setModifier(Mod::IMPACT_SDT, (uint16)(_sql->GetFloatData(37) * 1000));
+                PMob->setModifier(Mod::SLASH_SDT, (int16)_sql->GetIntData(34));
+                PMob->setModifier(Mod::PIERCE_SDT, (int16)_sql->GetIntData(35));
+                PMob->setModifier(Mod::HTH_SDT, (int16)_sql->GetIntData(36));
+                PMob->setModifier(Mod::IMPACT_SDT, (int16)_sql->GetIntData(37));
 
                 PMob->setModifier(Mod::UDMGMAGIC, (int16)_sql->GetIntData(38)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 
@@ -1749,10 +1782,10 @@ namespace mobutils
                 PMob->attRank = (uint8)_sql->GetIntData(32);
                 PMob->accRank = (uint8)_sql->GetIntData(33);
 
-                PMob->setModifier(Mod::SLASH_SDT, (uint16)(_sql->GetFloatData(34) * 1000));
-                PMob->setModifier(Mod::PIERCE_SDT, (uint16)(_sql->GetFloatData(35) * 1000));
-                PMob->setModifier(Mod::HTH_SDT, (uint16)(_sql->GetFloatData(36) * 1000));
-                PMob->setModifier(Mod::IMPACT_SDT, (uint16)(_sql->GetFloatData(37) * 1000));
+                PMob->setModifier(Mod::SLASH_SDT, (int16)_sql->GetIntData(34));
+                PMob->setModifier(Mod::PIERCE_SDT, (int16)_sql->GetIntData(35));
+                PMob->setModifier(Mod::HTH_SDT, (int16)_sql->GetIntData(36));
+                PMob->setModifier(Mod::IMPACT_SDT, (int16)_sql->GetIntData(37));
 
                 PMob->setModifier(Mod::UDMGMAGIC, (int16)_sql->GetIntData(38)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 

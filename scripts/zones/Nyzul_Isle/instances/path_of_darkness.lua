@@ -20,8 +20,8 @@ end
 
 -- Called on the instance once it is created and ready
 instanceObject.onInstanceCreated = function(instance)
-    SpawnMob(ID.mob[58].AMNAF_BLU, instance)
-    SpawnMob(ID.mob[58].NAJA, instance)
+    SpawnMob(ID.mob.AMNAF_BLU, instance)
+    SpawnMob(ID.mob.NAJA_SALAHEEM, instance)
 end
 
 -- Once the instance is ready inform the requester that it's ready
@@ -70,22 +70,22 @@ end
 -- When something in the instance calls: instance:setProgress(...)
 instanceObject.onInstanceProgressUpdate = function(instance, progress)
     if progress >= 10 and progress < 20 then
-        DespawnMob(ID.mob[58].AMNAF_BLU, instance)
+        DespawnMob(ID.mob.AMNAF_BLU, instance)
     elseif progress == 24 then
-        local v = GetMobByID(ID.mob[58].NAJA, instance)
+        local v = GetMobByID(ID.mob.NAJA_SALAHEEM, instance)
 
         if v then
             v:setLocalVar('ready', 0)
             v:setLocalVar('Stage', 2)
         end
 
-        SpawnMob(ID.mob[58].AMNAF_BLU, instance)
+        SpawnMob(ID.mob.AMNAF_BLU, instance)
     elseif progress >= 30 and progress < 40 then
-        DespawnMob(ID.mob[58].AMNAF_BLU, instance)
+        DespawnMob(ID.mob.AMNAF_BLU, instance)
     elseif progress == 48 then
-        SpawnMob(ID.mob[58].AMNAF_PSYCHEFLAYER, instance)
+        SpawnMob(ID.mob.AMNAF_PSYCHEFLAYER, instance)
 
-        local v = GetMobByID(ID.mob[58].NAJA, instance)
+        local v = GetMobByID(ID.mob.NAJA_SALAHEEM, instance)
 
         if v then
             v:setLocalVar('ready', 0)
@@ -94,8 +94,9 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
 
         local npcs = instance:getNpcs()
 
+       -- Now we know we are closing a door. Why are we looping through all npcs just to close a single door? And why arent we stoping once we do?
         for i, value in pairs(npcs) do
-            if value:getID() == ID.npc._259 then
+            if value:getID() == ID.npc.DOOR_OFFSET + 6 then
                 value:setAnimation(8)
             end
         end

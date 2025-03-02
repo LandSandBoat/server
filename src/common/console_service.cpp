@@ -45,7 +45,7 @@ bool stdinHasData()
     // this works by harnessing Windows' black magic:
     return _kbhit();
 #else
-    struct pollfd pollFileDescriptor = { STDIN_FILENO, POLLIN, 0 };
+    pollfd pollFileDescriptor = { STDIN_FILENO, POLLIN, 0 };
 
     // poll the stdin file descriptor until it tells us it's ready
     // poll returns a 0 if STDIN isn't ready, or a 1 if it is.

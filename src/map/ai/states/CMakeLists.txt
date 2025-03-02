@@ -25,6 +25,8 @@ set(AI_STATE_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/respawn_state.h
     ${CMAKE_CURRENT_SOURCE_DIR}/state.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/synth_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/synth_state.h
     ${CMAKE_CURRENT_SOURCE_DIR}/trigger_state.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/trigger_state.h
     ${CMAKE_CURRENT_SOURCE_DIR}/weaponskill_state.cpp

@@ -5,7 +5,7 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -462, -4, -420, -455, -1, -392) -- approach the Cutter
+    zone:registerCuboidTriggerArea(1, -462, -4, -420, -455, -1, -392) -- approach the Cutter
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

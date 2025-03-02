@@ -586,7 +586,7 @@ void CMobController::DoCombatTick(time_point tick)
 
     TryLink();
 
-    PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", CLuaBaseEntity(PMob));
+    PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", PMob);
     luautils::OnMobFight(PMob, PTarget);
 
     if (PMob->PAI->IsCurrentState<CInactiveState>() || !PMob->PAI->CanChangeState())
@@ -604,7 +604,7 @@ void CMobController::DoCombatTick(time_point tick)
         }
         else
         {
-            PMob->PAI->EventHandler.triggerListener("RUN_AWAY", CLuaBaseEntity(PMob), CLuaBaseEntity(PFollowTarget));
+            PMob->PAI->EventHandler.triggerListener("RUN_AWAY", PMob, PFollowTarget);
             ClearFollowTarget();
         }
         return;
@@ -1024,7 +1024,7 @@ void CMobController::DoRoamTick(time_point tick)
                 else if (PMob->m_roamFlags & ROAMFLAG_SCRIPTED)
                 {
                     // allow custom event action
-                    PMob->PAI->EventHandler.triggerListener("ROAM_ACTION", CLuaBaseEntity(PMob));
+                    PMob->PAI->EventHandler.triggerListener("ROAM_ACTION", PMob);
                     luautils::OnMobRoamAction(PMob);
                     m_LastActionTime = m_Tick;
                 }
@@ -1063,7 +1063,7 @@ void CMobController::DoRoamTick(time_point tick)
     }
     if (m_Tick >= m_LastRoamScript + 3s)
     {
-        PMob->PAI->EventHandler.triggerListener("ROAM_TICK", CLuaBaseEntity(PMob));
+        PMob->PAI->EventHandler.triggerListener("ROAM_TICK", PMob);
         luautils::OnMobRoam(PMob);
         m_LastRoamScript = m_Tick;
     }
@@ -1121,7 +1121,7 @@ void CMobController::FollowRoamPath()
 
         if (PMob->PAI->PathFind->OnPoint())
         {
-            PMob->PAI->EventHandler.triggerListener("PATH", CLuaBaseEntity(PMob));
+            PMob->PAI->EventHandler.triggerListener("PATH", PMob);
             luautils::OnPath(PMob);
         }
     }

@@ -19,14 +19,14 @@ local teleportTable =
 }
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -300, 3, -20, 0, 0, 0) -- central porter on map 3
-    zone:registerTriggerArea(2, -273, 3,   5, 0, 0, 0) -- NE porter on map 3
-    zone:registerTriggerArea(3, -273, 3, -45, 0, 0, 0) -- SE porter on map 3
-    zone:registerTriggerArea(4, -327, 3,   5, 0, 0, 0) -- NW porter on map 3
-    zone:registerTriggerArea(5, -327, 3, -45, 0, 0, 0) -- SW porter on map 3
-    zone:registerTriggerArea(6, -527, 3,  87, 0, 0, 0) -- N porter on map 4
-    zone:registerTriggerArea(7, -527, 3,  33, 0, 0, 0) -- S porter on map 4
-    zone:registerTriggerArea(8, -460, 3,  60, 0, 0, 0) -- Hidden room porter on map 4
+    zone:registerCylindricalTriggerArea(1, -300, -20, 3) -- central porter on map 3
+    zone:registerCylindricalTriggerArea(2, -273, 5, 3) -- NE porter on map 3
+    zone:registerCylindricalTriggerArea(3, -273, -45, 3) -- SE porter on map 3
+    zone:registerCylindricalTriggerArea(4, -327, 5, 3) -- NW porter on map 3
+    zone:registerCylindricalTriggerArea(5, -327, -45, 3) -- SW porter on map 3
+    zone:registerCylindricalTriggerArea(6, -527, 87, 3) -- N porter on map 4
+    zone:registerCylindricalTriggerArea(7, -527, 33, 3) -- S porter on map 4
+    zone:registerCylindricalTriggerArea(8, -460, 60, 3) -- Hidden room porter on map 4
 
     xi.treasure.initZone(zone)
 end
@@ -69,7 +69,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    local table      = teleportTable[triggerArea:GetTriggerAreaID()]
+    local table      = teleportTable[triggerArea:getTriggerAreaID()]
     local teleporter = GetNPCByID(table.npc)
 
     player:setLocalVar(string.format('Zvhal_teleporter_%s', table.npc), 1)
@@ -80,7 +80,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
-    local table = teleportTable[triggerArea:GetTriggerAreaID()]
+    local table = teleportTable[triggerArea:getTriggerAreaID()]
 
     player:setLocalVar(string.format('Zvhal_teleporter_%s', table.npc), 0)
 end

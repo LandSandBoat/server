@@ -50,7 +50,7 @@ public:
         Moved    = 4,
     };
 
-    auto getChangedLuaFiles() -> std::vector<std::pair<std::filesystem::path, Action>>;
+    auto popChangedLuaFilesList() -> std::vector<std::pair<std::filesystem::path, Action>>;
 
 private:
     std::unique_ptr<efsw::FileWatcher> fileWatcherImpl;

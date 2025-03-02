@@ -21,12 +21,26 @@ local aquariusPHTable =
     [ID.mob.AQUARIUS + 4] = ID.mob.AQUARIUS, -- 149.59 9.765 -61.490
 }
 
+local aquariusSpawnPoints =
+{
+    { x = 165.930, y = 9.344, z = -56.348 },
+    { x = 162.448, y = 9.620, z = -55.495 },
+    { x = 164.711, y = 9.541, z = -66.727 },
+    { x = 178.612, y = 9.296, z = -73.433 },
+    { x = 193.725, y = 9.425, z = -70.498 },
+    { x = 193.785, y = 9.346, z = -54.751 },
+    { x = 187.045, y = 9.514, z = -46.248 },
+    { x = 177.735, y = 9.537, z = -44.149 },
+}
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 720, 2, xi.regime.type.GROUNDS)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, aquariusPHTable, 5, 1) -- can repop instantly
+    local params = {}
+    params.spawnPoints = aquariusSpawnPoints
+    xi.mob.phOnDespawn(mob, aquariusPHTable, 5, 1, params) -- can repop instantly
 end
 
 return entity

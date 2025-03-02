@@ -33,7 +33,7 @@
 #include "entities/battleentity.h"
 
 #include "packets/char_skills.h"
-#include "packets/char_update.h"
+#include "packets/char_status.h"
 #include "packets/inventory_assign.h"
 #include "packets/inventory_finish.h"
 #include "packets/inventory_item.h"
@@ -42,7 +42,6 @@
 #include "packets/synth_message.h"
 #include "packets/synth_result.h"
 
-#include "anticheat.h"
 #include "item_container.h"
 #include "map.h"
 #include "roe.h"
@@ -976,7 +975,7 @@ namespace synthutils
      *                                                                         *
      **************************************************************************/
 
-    void doSynthFail(CCharEntity* PChar, bool isCriticalFail)
+    void doSynthFail(CCharEntity* PChar)
     {
         // Break material calculations.
         if (PChar->CraftContainer->getCraftType() != CRAFT_SYNTHESIS_NO_LOSS) // If it's a synth where no materials can be lost, skip break calculations.
@@ -987,17 +986,87 @@ namespace synthutils
         // Push "Synthesis failed" messages.
         uint16 currentZone = PChar->loc.zone->GetID();
 
-        const auto message = isCriticalFail ? SYNTH_FAIL_CRITICAL : SYNTH_FAIL;
+        if (currentZone &&
+            currentZone != ZONE_MONORAIL_PRE_RELEASE &&
+            currentZone != ZONE_49 &&
+            currentZone < MAX_ZONEID)
+        {
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CSynthResultMessagePacket>(PChar, SYNTH_FAIL));
+        }
+
+        PChar->pushPacket<CSynthMessagePacket>(PChar, SYNTH_FAIL, 29695);
+    }
+
+    /**************************************************************************
+     *                                                                         *
+     *  Synthesis critically failed.                                           *
+     *  Triggered by zoning or disconnect mid craft.                           *
+     *                                                                         *
+     **************************************************************************/
+
+    void doSynthCriticalFail(CCharEntity* PChar)
+    {
+        // Loop variables
+        uint8 invSlotID  = PChar->CraftContainer->getInvSlotID(1);
+        uint8 nextSlotID = 0;
+        uint8 lostCount  = 0;
+        uint8 totalCount = 0;
+
+        // Loop through craft container items.
+        for (uint8 slotID = 1; slotID <= 8; ++slotID)
+        {
+            if (slotID != 8)
+            {
+                nextSlotID = PChar->CraftContainer->getInvSlotID(slotID + 1);
+            }
+
+            PChar->CraftContainer->setQuantity(slotID, 0);
+            lostCount++;
+            totalCount++;
+
+            if (invSlotID != nextSlotID)
+            {
+                CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
+
+                if (PItem != nullptr)
+                {
+                    PItem->setSubType(ITEM_UNLOCKED);
+                    PItem->setReserve(PItem->getReserve() - totalCount);
+                    totalCount = 0;
+
+                    if (lostCount > 0)
+                    {
+                        charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -(int32)lostCount);
+                        lostCount = 0;
+                    }
+                    else
+                    {
+                        PChar->pushPacket<CInventoryAssignPacket>(PItem, INV_NORMAL);
+                    }
+                }
+                invSlotID = nextSlotID;
+            }
+
+            nextSlotID = 0;
+
+            if (invSlotID == 0xFF)
+            {
+                break;
+            }
+        }
+
+        // Push "Synthesis failed" messages.
+        uint16 currentZone = PChar->loc.zone->GetID();
 
         if (currentZone &&
             currentZone != ZONE_MONORAIL_PRE_RELEASE &&
             currentZone != ZONE_49 &&
             currentZone < MAX_ZONEID)
         {
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CSynthResultMessagePacket>(PChar, message));
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CSynthResultMessagePacket>(PChar, SYNTH_FAIL_CRITICAL));
         }
 
-        PChar->pushPacket<CSynthMessagePacket>(PChar, message, 29695);
+        PChar->pushPacket<CSynthMessagePacket>(PChar, SYNTH_FAIL_CRITICAL, 29695);
     }
 
     /*********************************************************************
@@ -1121,9 +1190,23 @@ namespace synthutils
             }
         }
 
+        // Calculate what craft this recipe "belongs" to based on highest skill required
+        uint32 skillType    = 0;
+        uint32 highestSkill = 0;
+        for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
+        {
+            uint8 skillRequired = PChar->CraftContainer->getQuantity(skillID - 40);
+            if (skillRequired > highestSkill)
+            {
+                skillType    = skillID;
+                highestSkill = skillRequired;
+            }
+        }
+
         PChar->animation = ANIMATION_SYNTH;
         PChar->updatemask |= UPDATE_HP;
-        PChar->pushPacket<CCharUpdatePacket>(PChar);
+        PChar->pushPacket<CCharStatusPacket>(PChar);
+        PChar->startSynth(static_cast<SKILLTYPE>(skillType));
 
         if (PChar->loc.zone->GetID() != 255 && PChar->loc.zone->GetID() != 0)
         {
@@ -1146,39 +1229,10 @@ namespace synthutils
     int32 doSynthResult(CCharEntity* PChar)
     {
         uint8 m_synthResult = PChar->CraftContainer->getQuantity(0);
-        if (settings::get<bool>("map.ANTICHEAT_ENABLED"))
-        {
-            std::chrono::duration animationDuration = server_clock::now() - PChar->m_LastSynthTime;
-            if (animationDuration < 5s)
-            {
-                // Attempted cheating - Did not spend enough time doing the synth animation.
-                // Check whether the cheat type action requires us to actively block the cheating attempt
-                // Note: Due to technical reasons jail action also forces us to break the synth
-                // (player cannot be zoned while synth in progress).
-                bool shouldblock = anticheat::GetCheatPunitiveAction(anticheat::CheatID::CHEAT_ID_FASTSYNTH, nullptr, 0) &
-                                   (anticheat::CHEAT_ACTION_BLOCK | anticheat::CHEAT_ACTION_JAIL);
-                if (shouldblock)
-                {
-                    // Block the cheat by forcing the synth to fail
-                    PChar->CraftContainer->setQuantity(0, synthutils::SYNTHESIS_FAIL);
-                    m_synthResult = SYNTHESIS_FAIL;
-                    doSynthFail(PChar, false);
-                }
-                // And report the incident (will possibly jail the player)
-                anticheat::ReportCheatIncident(PChar, anticheat::CheatID::CHEAT_ID_FASTSYNTH,
-                                               (uint32)std::chrono::duration_cast<std::chrono::milliseconds>(animationDuration).count(),
-                                               "Player attempted to bypass synth animation by injecting synth done packet.");
-                if (shouldblock)
-                {
-                    // Blocking the cheat also means that the offender should not get any skillups
-                    return 0;
-                }
-            }
-        }
 
         if (m_synthResult == SYNTHESIS_FAIL)
         {
-            doSynthFail(PChar, false);
+            doSynthFail(PChar);
         }
         else
         {
@@ -1292,7 +1346,7 @@ namespace synthutils
         PChar->CraftContainer->Clean();
         PChar->animation = ANIMATION_NONE;
         PChar->updatemask |= UPDATE_HP;
-        PChar->pushPacket<CCharUpdatePacket>(PChar);
+        PChar->pushPacket<CCharStatusPacket>(PChar);
         return 0;
     }
 

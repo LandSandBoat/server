@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -27,8 +27,8 @@
 #include "packets/caught_fish.h"
 #include "packets/caught_monster.h"
 #include "packets/char_skills.h"
+#include "packets/char_status.h"
 #include "packets/char_sync.h"
-#include "packets/char_update.h"
 #include "packets/chat_message.h"
 #include "packets/entity_animation.h"
 #include "packets/event.h"
@@ -222,7 +222,7 @@ namespace fishingutils
             waitTime -= 1;
         }
 
-        if (gear.waist == FISHERMANS_BELT)
+        if (gear.waist == FISHERS_ROPE)
         {
             waitTime -= 1;
         }
@@ -952,6 +952,8 @@ namespace fishingutils
 
     uint16 CalculateCriticalBite(uint8 fishingSkill, uint8 fishSkill, rod_t* rod)
     {
+        // TODO: Does gear discerment really help with this?
+        // https://wiki.ffo.jp/html/24002.html
         uint16 chance     = 0;
         uint8  ebisuBonus = 0;
 
@@ -972,7 +974,8 @@ namespace fishingutils
 
         // Moon mod (max + 20)
         float moonModifier = 2 * MOONPATTERN_3(GetMoonPhase());
-        chance += (uint16)(10 * (2 - (moonModifier)));
+        chance += (uint16)(10 * (2 - moonModifier));
+
         return std::clamp<uint16>(chance, 0, 70);
     }
 
@@ -2717,7 +2720,7 @@ namespace fishingutils
                 if (response == nullptr || fishingArea == nullptr || response->fishingToken != PChar->fishingToken)
                 {
                     CatchNothing(PChar, FISHINGFAILTYPE_NONE);
-                    PChar->pushPacket<CCharUpdatePacket>(PChar);
+                    PChar->pushPacket<CCharStatusPacket>(PChar);
                     PChar->pushPacket<CCharSyncPacket>(PChar);
                 }
                 else if (response->hooked && response->catchtype > 0 && response->catchid > 0)

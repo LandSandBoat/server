@@ -15,16 +15,16 @@ zones[xi.zone.MONARCH_LINN] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        TIME_IN_THE_BATTLEFIELD_IS_UP = 7111, -- Your time in the battlefield is up! Now exiting...
-        PARTY_MEMBERS_ARE_ENGAGED     = 7126, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
-        GLOWING_MIST                  = 7142, -- A glowing mist of ever-changing proportions floats before you...
-        MEMBERS_OF_YOUR_PARTY         = 7417, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
-        MEMBERS_OF_YOUR_ALLIANCE      = 7418, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
-        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7420, -- The time limit for this battle is <number> minutes.
-        PARTY_MEMBERS_HAVE_FALLEN     = 7456, -- All party members have fallen in battle. Now leaving the battlefield.
-        THE_PARTY_WILL_BE_REMOVED     = 7463, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        CONQUEST_BASE                 = 7480, -- Tallying conquest results...
-        ENTERING_THE_BATTLEFIELD_FOR  = 7643, -- Entering the battlefield for [Ancient Vows/The Savage/Fire in the Sky/Bad Seed/Bugard in the Clouds/Beloved of the Atlantes/Uninvited Guests/Nest of Nightmares/The Savage]!
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 7113, -- Your time in the battlefield is up! Now exiting...
+        PARTY_MEMBERS_ARE_ENGAGED     = 7128, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
+        GLOWING_MIST                  = 7144, -- A glowing mist of ever-changing proportions floats before you...
+        MEMBERS_OF_YOUR_PARTY         = 7419, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE      = 7420, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7422, -- The time limit for this battle is <number> minutes.
+        PARTY_MEMBERS_HAVE_FALLEN     = 7458, -- All party members have fallen in battle. Now leaving the battlefield.
+        THE_PARTY_WILL_BE_REMOVED     = 7465, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        CONQUEST_BASE                 = 7482, -- Tallying conquest results...
+        ENTERING_THE_BATTLEFIELD_FOR  = 7645, -- Entering the battlefield for [Ancient Vows/The Savage/Fire in the Sky/Bad Seed/Bugard in the Clouds/Beloved of the Atlantes/Uninvited Guests/Nest of Nightmares/The Savage]!
     },
     mob =
     {

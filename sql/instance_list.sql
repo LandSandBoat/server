@@ -119,7 +119,7 @@ INSERT INTO `instance_list` VALUES (6901,'orichalcum_survey',69,79,30,-432.000,-
 -- INSERT INTO `instance_list` VALUES (6909,'bloody_rondo',69,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 
 -- ZHAYOLM_REMNANTS (zoneID: 73, starting id: 7300)
--- INSERT INTO `instance_list` VALUES (7300,'zhayolm_remnants',73,72,100,0.000,0.000,0.000,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (7300,'zhayolm_remnants',73,72,100,340.000,0.000,-592.000,192,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (7301,'zhayolm_remnants_ii',73,72,100,0.000,0.000,0.000,0,-1,-1,-1,-1);
 
 -- ARRAPAGO_REMNANTS (zoneID: 74, starting id: 7400)

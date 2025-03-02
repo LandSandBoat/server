@@ -214,6 +214,51 @@ void CVanaTime::setCustomEpoch(int32 epoch)
 {
     m_customEpoch = epoch;
     m_TimeType    = SyncTime();
+
+    if (m_TimeType == TIME_NONE) // SyncTime wasn't on an exact hour, calculate current m_TimeType
+    {
+        switch (m_vHour)
+        {
+            case 23:
+            case 22:
+            case 21:
+            case 20:
+                m_TimeType = TIME_NIGHT;
+                break;
+            case 19:
+            case 18:
+                m_TimeType = TIME_EVENING;
+                break;
+            case 17:
+                m_TimeType = TIME_DUSK;
+                break;
+            case 16:
+            case 15:
+            case 14:
+            case 13:
+            case 12:
+            case 11:
+            case 10:
+            case 9:
+            case 8:
+            case 7:
+                m_TimeType = TIME_DAY;
+                break;
+            case 6:
+                m_TimeType = TIME_DAWN;
+                break;
+            case 5:
+            case 4:
+                m_TimeType = TIME_NEWDAY;
+                break;
+            case 3:
+            case 2:
+            case 1:
+            case 0:
+                m_TimeType = TIME_MIDNIGHT;
+                break;
+        }
+    }
 }
 
 TIMETYPE CVanaTime::GetCurrentTOTD()

@@ -24,6 +24,7 @@
 #include "battleutils.h"
 #include "common/utils.h"
 #include "items/item_weapon.h"
+#include "lua/luautils.h"
 #include "status_effect_container.h"
 
 namespace attackutils
@@ -232,10 +233,26 @@ namespace attackutils
 
     bool IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     {
-        if (facing(PDefender->loc.p, PAttacker->loc.p, 64))
+        auto isParriedFunc = lua["xi"]["combat"]["physical"]["isParried"];
+
+        if (isParriedFunc.valid())
         {
-            return (xirand::GetRandomNumber(100) < battleutils::GetParryRate(PAttacker, PDefender));
+            try
+            {
+                bool result = isParriedFunc(PDefender, PAttacker);
+                return result;
+            }
+            catch (const sol::error& err)
+            {
+                ShowError("attackutils::IsParried(): %s", err.what());
+                return false;
+            }
         }
+        else
+        {
+            ShowError("attackutils::IsParried() failed to run Lua function");
+        }
+
         return false;
     }
 

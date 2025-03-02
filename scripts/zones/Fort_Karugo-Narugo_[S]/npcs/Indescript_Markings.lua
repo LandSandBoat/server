@@ -20,9 +20,7 @@ entity.onTrigger = function(player, npc)
         loafersQuestProgress < 3 and
         not player:hasKeyItem(xi.ki.RAFFLESIA_DREAMSPIT)
     then
-
-        player:addKeyItem(xi.ki.RAFFLESIA_DREAMSPIT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RAFFLESIA_DREAMSPIT)
+        npcUtil.giveKeyItem(player, xi.ki.RAFFLESIA_DREAMSPIT)
         player:setCharVar('AF_SCH_BOOTS', loafersQuestProgress + 1)
 
         -- Move the markings around

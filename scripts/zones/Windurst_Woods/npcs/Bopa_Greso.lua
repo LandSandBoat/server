@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO) == xi.questStatus.QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGOS_AMIGO) == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(84)
     end
 end

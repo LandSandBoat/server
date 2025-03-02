@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -35,10 +35,10 @@
 
 #include "ability.h"
 #include "daily_system.h"
+#include "ipc_client.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
-#include "message.h"
 #include "mob_spell_list.h"
 #include "monstrosity.h"
 #include "packet_guard.h"
@@ -124,12 +124,6 @@ namespace
     uint32 TotalPacketsDelayedPerTick = 0U;
 } // namespace
 
-/************************************************************************
- *                                                                       *
- *  mapsession_getbyipp                                                  *
- *                                                                       *
- ************************************************************************/
-
 map_session_data_t* mapsession_getbyipp(uint64 ipp)
 {
     TracyZoneScoped;
@@ -145,28 +139,36 @@ map_session_data_t* mapsession_getbyipp(uint64 ipp)
     return nullptr;
 }
 
-/************************************************************************
- *                                                                       *
- *  mapsession_createsession                                             *
- *                                                                       *
- ************************************************************************/
+map_session_data_t* mapsession_getbychar(CCharEntity* PChar)
+{
+    TracyZoneScoped;
+
+    for (const auto& [_, session] : map_session_list)
+    {
+        if (PChar && session->PChar->id == PChar->id)
+        {
+            return session;
+        }
+    }
+
+    return nullptr;
+}
 
 map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 {
     TracyZoneScoped;
 
-    auto ipstr    = ip2str(ip);
-    auto fmtQuery = fmt::format("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '{}' LIMIT 1", ipstr);
+    const auto ipstr = ip2str(ip);
 
-    int32 ret = _sql->Query(fmtQuery.c_str());
+    const auto rset = db::preparedStmt("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = ? LIMIT 1", ipstr);
 
-    if (ret == SQL_ERROR)
+    if (rset == nullptr)
     {
         ShowError("SQL query failed in mapsession_createsession!");
         return nullptr;
     }
 
-    if (_sql->NumRows() == 0)
+    if (rset->rowsCount() == 0)
     {
         // This is noisy and not really necessary
         DebugSockets(fmt::format("recv_parse: Invalid login attempt from {}", ipstr));
@@ -216,6 +218,7 @@ int32 do_init(int32 argc, char** argv)
     map_ip.s_addr = 0;
     map_port      = 0;
 
+    // TODO: Replace with argparse::ArgumentParser
     for (int i = 1; i < argc; i++)
     {
         if (strcmp(argv[i], "--ip") == 0)
@@ -234,18 +237,23 @@ int32 do_init(int32 argc, char** argv)
         }
     }
 
-    ShowInfo(fmt::format("map_port: {}", map_port));
+    ShowInfoFmt("map_port: {}", map_port);
+    ShowInfoFmt("Zones assigned to this process: {}", zoneutils::GetZonesAssignedToThisProcess().size());
 
     srand((uint32)time(nullptr));
     xirand::seed();
+    ShowInfo(fmt::format("Random samples (integer): {}", utils::getRandomSampleString(0, 255)));
+    ShowInfo(fmt::format("Random samples (float): {}", utils::getRandomSampleString(0.0f, 1.0f)));
 
+    // TODO: Get rid of legacy _sql and SqlConnection
     ShowInfo("do_init: connecting to database");
     _sql = std::make_unique<SqlConnection>();
 
-    ShowInfo(_sql->GetDatabaseName().c_str());
-    ShowInfo(_sql->GetClientVersion().c_str());
-    ShowInfo(_sql->GetServerVersion().c_str());
-    _sql->CheckCharset();
+    ShowInfo(fmt::format("database name: {}", db::getDatabaseSchema()).c_str());
+    ShowInfo(fmt::format("database server version: {}", db::getDatabaseVersion()).c_str());
+    ShowInfo(fmt::format("database client version: {}", db::getDriverVersion()).c_str());
+    db::checkCharset();
+    db::checkTriggers();
 
     luautils::init(); // Also calls moduleutils::LoadLuaModules();
 
@@ -259,7 +267,6 @@ int32 do_init(int32 argc, char** argv)
 
     ShowInfo("do_init: starting ZMQ thread");
     message::init();
-    messageThread = nonstd::jthread(message::listen);
 
     ShowInfo("do_init: loading items");
     itemutils::Initialize();
@@ -329,6 +336,8 @@ int32 do_init(int32 argc, char** argv)
     CTaskMgr::getInstance()->AddTask("garbage_collect", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, 15min, map_garbage_collect);
     CTaskMgr::getInstance()->AddTask("persist_server_vars", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, 1min, serverutils::PersistVolatileServerVars);
 
+    zoneutils::TOTDChange(CVanaTime::getInstance()->GetCurrentTOTD()); // This tells the zones to spawn stuff based on time of day conditions (such as undead at night)
+
     ShowInfo("do_init: Removing expired database variables");
     uint32 currentTimestamp = CVanaTime::getInstance()->getSysTime();
     _sql->Query("DELETE FROM char_vars WHERE expiry > 0 AND expiry <= %d", currentTimestamp);
@@ -348,6 +357,8 @@ int32 do_init(int32 argc, char** argv)
     luautils::OnServerStart();
 
     moduleutils::ReportLuaModuleUsage();
+
+    db::enableTimers();
 
     ShowInfo("The map-server is ready to work!");
     ShowInfo("=======================================================================");
@@ -392,8 +403,7 @@ int32 do_init(int32 argc, char** argv)
         }
 
         fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
-        PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3,
-            fmt::format("You have been set to GM level {}.", level), "");
+        PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("You have been set to GM level {}.", level));
     });
 
     gConsoleService->RegisterCommand("reload_settings", "Reload settings files.",
@@ -455,7 +465,6 @@ void do_final(int code)
     trustutils::FreeTrustList();
     zoneutils::FreeZoneList();
 
-    message::close();
     messageThread.join();
 
     CTaskMgr::delInstance();
@@ -513,9 +522,11 @@ void ReportTracyStats()
 {
     TracyReportLuaMemory(lua.lua_state());
 
-    std::size_t activeZoneCount = 0;
-    std::size_t playerCount     = 0;
-    std::size_t mobCount        = 0;
+    std::size_t activeZoneCount       = 0;
+    std::size_t playerCount           = 0;
+    std::size_t mobCount              = 0;
+    std::size_t dynamicTargIdCount    = 0;
+    std::size_t dynamicTargIdCapacity = 0;
 
     for (auto& [id, PZone] : g_PZoneList)
     {
@@ -524,6 +535,8 @@ void ReportTracyStats()
             activeZoneCount += 1;
             playerCount += PZone->GetZoneEntities()->GetCharList().size();
             mobCount += PZone->GetZoneEntities()->GetMobList().size();
+            dynamicTargIdCount += PZone->GetZoneEntities()->GetUsedDynamicTargIDsCount();
+            dynamicTargIdCapacity += 511;
         }
     }
 
@@ -531,6 +544,8 @@ void ReportTracyStats()
     TracyReportGraphNumber("Connected Players (Process)", static_cast<std::int64_t>(playerCount));
     TracyReportGraphNumber("Active Mobs (Process)", static_cast<std::int64_t>(mobCount));
     TracyReportGraphNumber("Task Manager Tasks", static_cast<std::int64_t>(CTaskMgr::getInstance()->getTaskList().size()));
+
+    TracyReportGraphPercent("Dynamic Entity TargID Capacity Usage Percent", static_cast<double>(dynamicTargIdCount) / static_cast<double>(dynamicTargIdCapacity));
 
     TracyReportGraphNumber("Total Packets To Send Per Tick", static_cast<std::int64_t>(TotalPacketsToSendPerTick));
     TracyReportGraphNumber("Total Packets Sent Per Tick", static_cast<std::int64_t>(TotalPacketsSentPerTick));
@@ -551,10 +566,8 @@ int32 do_sockets(fd_set* rfd, duration next)
 {
     message::handle_incoming();
 
-    struct timeval timeout
-    {
-    };
-    int32 ret = 0;
+    timeval timeout{};
+    int32   ret = 0;
     std::memcpy(rfd, &readfds, sizeof(*rfd));
 
     timeout.tv_sec  = std::chrono::duration_cast<std::chrono::seconds>(next).count();
@@ -575,10 +588,8 @@ int32 do_sockets(fd_set* rfd, duration next)
 
     if (sFD_ISSET(map_fd, rfd))
     {
-        struct sockaddr_in from
-        {
-        };
-        socklen_t fromlen = sizeof(from);
+        sockaddr_in from{};
+        socklen_t   fromlen = sizeof(from);
 
         ret = recvudp(map_fd, g_PBuff, MAX_BUFFER_SIZE, 0, (struct sockaddr*)&from, &fromlen);
         if (ret != -1)
@@ -776,22 +787,22 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
         if (map_session_data->PChar == nullptr)
         {
-            uint32 CharID = ref<uint32>(buff, FFXI_HEADER_SIZE + 0x0C);
-            uint16 LangID = ref<uint16>(buff, FFXI_HEADER_SIZE + 0x58);
+            uint32 charID = ref<uint32>(buff, FFXI_HEADER_SIZE + 0x0C);
+            uint16 langID = ref<uint16>(buff, FFXI_HEADER_SIZE + 0x58);
 
-            std::ignore = LangID;
+            std::ignore = langID;
 
-            auto rset = db::preparedStmt("SELECT charid FROM chars WHERE charid = (?) LIMIT 1", CharID);
+            auto rset = db::preparedStmt("SELECT charid FROM chars WHERE charid = ? LIMIT 1", charID);
             if (!rset || rset->rowsCount() == 0 || !rset->next())
             {
-                ShowError("recv_parse: Cannot load charid %u", CharID);
+                ShowError("recv_parse: Cannot load charid %u", charID);
                 return -1;
             }
 
-            rset = db::preparedStmt("SELECT session_key FROM accounts_sessions WHERE charid = (?) LIMIT 1", CharID);
+            rset = db::preparedStmt("SELECT session_key FROM accounts_sessions WHERE charid = ? LIMIT 1", charID);
             if (!rset || rset->rowsCount() == 0 || !rset->next())
             {
-                ShowError("recv_parse: Cannot load session_key for charid %u", CharID);
+                ShowError("recv_parse: Cannot load session_key for charid %u", charID);
             }
             else
             {
@@ -800,16 +811,15 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                 map_session_data->initBlowfish();
             }
 
-            map_session_data->PChar  = charutils::LoadChar(CharID);
-            map_session_data->charID = CharID;
+            map_session_data->PChar  = charutils::LoadChar(charID);
+            map_session_data->charID = charID;
 
             // If we're a new char on a new instance and prevzone != zone
             if (map_session_data->blowfish.status == BLOWFISH_WAITING && map_session_data->PChar->loc.destination != map_session_data->PChar->loc.prevzone)
             {
-                uint8 data[4]{};
-                ref<uint32>(data, 0) = CharID;
-
-                message::send(MSG_KILL_SESSION, data, sizeof(data), nullptr);
+                message::send(ipc::KillSession{
+                    .victimId = charID,
+                });
             }
         }
 
@@ -933,6 +943,13 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
             {
                 ShowWarning("[PacketGuard] Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX",
                             PChar->getName(), SmallPD_Type);
+                // TODO: Plug in optional jailutils usage
+                continue; // skip this packet
+            }
+
+            if (settings::get<bool>("map.PACKETGUARD_ENABLED") && !PacketGuard::PacketsArrivingInCorrectOrder(PChar, SmallPD_Type))
+            {
+                ShowWarning("[PacketGuard] Caught out-of-order packet: Player: %s - Packet: %03hX", PChar->getName(), SmallPD_Type);
                 // TODO: Plug in optional jailutils usage
                 continue; // skip this packet
             }

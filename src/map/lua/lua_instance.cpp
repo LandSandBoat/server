@@ -159,7 +159,7 @@ uint32 CLuaInstance::getWipeTime()
     return static_cast<uint32>(time_ms);
 }
 
-std::optional<CLuaBaseEntity> CLuaInstance::getEntity(uint16 targid, sol::object const& filterObj)
+auto CLuaInstance::getEntity(uint16 targid, sol::object const& filterObj) -> CBaseEntity*
 {
     uint8 filter = -1;
     if (filterObj.is<uint8>())
@@ -167,14 +167,7 @@ std::optional<CLuaBaseEntity> CLuaInstance::getEntity(uint16 targid, sol::object
         filter = filterObj.as<uint8>();
     }
 
-    CBaseEntity* PEntity = m_PLuaInstance->GetEntity(targid, filter);
-
-    if (PEntity)
-    {
-        return std::optional<CLuaBaseEntity>(PEntity);
-    }
-
-    return std::nullopt;
+    return m_PLuaInstance->GetEntity(targid, filter);
 }
 
 uint32 CLuaInstance::getStage()
@@ -242,20 +235,20 @@ bool CLuaInstance::completed()
     return m_PLuaInstance->Completed();
 }
 
-std::optional<CLuaBaseEntity> CLuaInstance::insertAlly(uint32 groupid)
+auto CLuaInstance::insertAlly(uint32 groupid) -> CBaseEntity*
 {
     CMobEntity* PAlly = mobutils::InstantiateAlly(groupid, m_PLuaInstance->GetZone()->GetID(), m_PLuaInstance);
 
     if (PAlly)
     {
-        return std::optional<CLuaBaseEntity>(PAlly);
+        return PAlly;
     }
 
     ShowError("CLuaBattlefield::insertAlly - group ID %u not found!", groupid);
-    return std::nullopt;
+    return PAlly;
 }
 
-auto CLuaInstance::insertDynamicEntity(sol::table table) -> std::optional<CLuaBaseEntity>
+auto CLuaInstance::insertDynamicEntity(sol::table table) -> CBaseEntity*
 {
     return luautils::GenerateDynamicEntity(m_PLuaInstance->GetZone(), m_PLuaInstance, std::move(table));
 }

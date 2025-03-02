@@ -29,11 +29,11 @@ zones[xi.zone.GHELSBA_OUTPOST] =
         LOGIN_CAMPAIGN_UNDERWAY          = 7534, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                     = 7535, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED    = 7555, -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET           = 7597, -- You can't fish here.
-        NO_BATTLEFIELD_ENTRY             = 7731, -- This looks like an Orcish dwelling. The door is firmly shut.
-        ENTERING_THE_BATTLEFIELD_FOR     = 7756, -- Entering the battlefield for [Save the Children/The Holy Crest/Wings of Fury/Petrifying Pair/Toadal Recall/Mirror, Mirror]!
-        LOGGING_IS_POSSIBLE_HERE         = 7758, -- Logging is possible here if you have <item>.
-        YOU_CAN_NOW_BECOME_A_DRAGOON     = 7798, -- You can now become a dragoon!
+        FISHING_MESSAGE_OFFSET           = 7599, -- You can't fish here.
+        NO_BATTLEFIELD_ENTRY             = 7733, -- This looks like an Orcish dwelling. The door is firmly shut.
+        ENTERING_THE_BATTLEFIELD_FOR     = 7758, -- Entering the battlefield for [Save the Children/The Holy Crest/Wings of Fury/Petrifying Pair/Toadal Recall/Mirror, Mirror]!
+        LOGGING_IS_POSSIBLE_HERE         = 7760, -- Logging is possible here if you have <item>.
+        YOU_CAN_NOW_BECOME_A_DRAGOON     = 7800, -- You can now become a dragoon!
     },
     mob =
     {

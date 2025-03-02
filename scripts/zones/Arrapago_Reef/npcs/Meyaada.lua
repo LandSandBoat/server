@@ -4,8 +4,6 @@
 -- Type: Assault
 -- !pos 22.446 -7.920 573.390 54
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REEF]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -35,8 +33,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- ASSAULT
     if csid == 223 and option == 1 then
         player:delCurrency('imperial_standing', 50)
-        player:addKeyItem(xi.ki.ASSAULT_ARMBAND)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ASSAULT_ARMBAND)
+        npcUtil.giveKeyItem(player, xi.ki.ASSAULT_ARMBAND)
     end
 end
 

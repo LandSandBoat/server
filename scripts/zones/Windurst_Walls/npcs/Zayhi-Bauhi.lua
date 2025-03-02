@@ -28,7 +28,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local toBee = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
-    local postmanKOsTwice = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+    local postmanKOsTwice = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KOS_TWICE)
     local toBeeOrNotStatus = player:getCharVar('ToBeeOrNot_var')
 
     if

@@ -94,17 +94,6 @@ CPMAddPackage(
 ) # defines: argparse
 
 CPMAddPackage(
-    NAME task_system
-    GITHUB_REPOSITORY p-ranav/task_system
-    GIT_TAG 241acb039152b646589fcbbcfb4d8d8e5bddc815
-) # defines: task_system
-
-if(task_system_ADDED)
-    add_library(task_system INTERFACE)
-    target_include_directories(task_system SYSTEM INTERFACE ${task_system_SOURCE_DIR}/include/task_system/)
-endif()
-
-CPMAddPackage(
     NAME efsw
     GITHUB_REPOSITORY SpartanJ/efsw
     GIT_TAG 62f785c56b7a34f035193d4cb831921347b586b8 # 1.4.1
@@ -254,7 +243,6 @@ set(EXTERNAL_LIBS
     fast_obj
     sol2_single
     argparse
-    task_system
     efsw
     jthread-lite
     expected-lite

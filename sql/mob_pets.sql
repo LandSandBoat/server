@@ -1620,12 +1620,6 @@ INSERT INTO `mob_pets` VALUES (17547494,1,9,'Feralox_Honeylips','Feraloxs_Slime'
 INSERT INTO `mob_pets` VALUES (17547496,1,14,'Scourquix_Scaleskin','Scourquixs_Wyvern');
 
 -- ------------------------------------------------------------
--- King_Ranperres_Tomb (Zone 190)
--- ------------------------------------------------------------
-
-INSERT INTO `mob_pets` VALUES (17555890,1,9,'Vrtra','Pey');
-
--- ------------------------------------------------------------
 -- Ordelles_Caves (Zone 193)
 -- ------------------------------------------------------------
 

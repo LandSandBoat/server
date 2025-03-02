@@ -63,11 +63,9 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
         player:setCharVar('TrialByFire_date', 0)
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_FIRE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_FIRE)
+        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_FIRE)
     elseif csid == 285 then
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_FIRE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_FIRE)
+        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_FIRE)
     elseif csid == 273 then
         local item = 0
         if option == 1 then

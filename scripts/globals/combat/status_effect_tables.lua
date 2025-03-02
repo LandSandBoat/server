@@ -11,6 +11,8 @@
 -- Example: Siren's elegy is wind while spell elegies are earth. Same effect, diferent elements.
 -- Unlike sleep, elegy effect doesnt have an associated "effect resistance rank" and uses "element resistance rank" instead.
 -----------------------------------
+require('scripts/globals/utils')
+-----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.statusEffect = xi.combat.statusEffect or {}
@@ -61,7 +63,7 @@ xi.combat.statusEffect.dataTable =
 -----------------------------------
 xi.combat.statusEffect.getNullificatingEffect = function(effectId)
     -- Sanitize fed value
-    local effectToCheck = effectId or 0
+    local effectToCheck = utils.defaultIfNil(effectId, 0)
 
     -- Fetch effect ID from table if entry exists.
     if xi.combat.statusEffect.dataTable[effectToCheck] then
@@ -73,7 +75,7 @@ end
 
 xi.combat.statusEffect.getEffectToRemove = function(effectId)
     -- Sanitize fed value
-    local effectToCheck = effectId or 0
+    local effectToCheck = utils.defaultIfNil(effectId, 0)
 
     -- Fetch effect ID from table if entry exists.
     if xi.combat.statusEffect.dataTable[effectToCheck] then
@@ -85,8 +87,8 @@ end
 
 xi.combat.statusEffect.getAssociatedElement = function(effectId, actionElement)
     -- Sanitize fed values
-    local effectToCheck  = effectId or 0
-    local elementToCheck = actionElement or 0
+    local effectToCheck  = utils.defaultIfNil(effectId, 0)
+    local elementToCheck = utils.defaultIfNil(actionElement, 0)
 
     -- Sleep exception.
     if effectToCheck == xi.effect.SLEEP_I then
@@ -104,8 +106,8 @@ end
 
 xi.combat.statusEffect.getAssociatedImmunity = function(effectId, actionElement)
     -- Sanitize fed values
-    local effectToCheck  = effectId or 0
-    local elementToCheck = actionElement or 0
+    local effectToCheck  = utils.defaultIfNil(effectId, 0)
+    local elementToCheck = utils.defaultIfNil(actionElement, 0)
 
     -- Sleep exception.
     if
@@ -125,7 +127,7 @@ end
 
 xi.combat.statusEffect.getAssociatedResistTraitModifier = function(effectId)
     -- Sanitize fed value
-    local effectToCheck = effectId or 0
+    local effectToCheck  = utils.defaultIfNil(effectId, 0)
 
     -- Fetch modifier ID from table if entry exists.
     if xi.combat.statusEffect.dataTable[effectToCheck] then
@@ -137,7 +139,7 @@ end
 
 xi.combat.statusEffect.getAssociatedResistanceRankModifier = function(effectId)
     -- Sanitize fed value
-    local effectToCheck = effectId or 0
+    local effectToCheck  = utils.defaultIfNil(effectId, 0)
 
     -- Fetch modifier ID from table if entry exists.
     if xi.combat.statusEffect.dataTable[effectToCheck] then
@@ -149,7 +151,7 @@ end
 
 xi.combat.statusEffect.getAssociatedMagicEvasionModifier = function(effectId)
     -- Sanitize fed value
-    local effectToCheck = effectId or 0
+    local effectToCheck  = utils.defaultIfNil(effectId, 0)
 
     -- Fetch modifier ID from table if entry exists.
     if xi.combat.statusEffect.dataTable[effectToCheck] then
@@ -161,7 +163,7 @@ end
 
 xi.combat.statusEffect.getAssociatedImmunobreakModifier = function(effectId)
     -- Sanitize fed value
-    local effectToCheck = effectId or 0
+    local effectToCheck  = utils.defaultIfNil(effectId, 0)
 
     -- Fetch modifier ID from table if entry exists.
     if xi.combat.statusEffect.dataTable[effectToCheck] then

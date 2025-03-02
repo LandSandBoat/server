@@ -277,12 +277,6 @@ xi.settings.map =
     -- Seconds between healing ticks. Default is 10
     HEALING_TICK_DELAY = 10,
 
-    -- Set to 1 to enable server side anti-cheating measurements
-    ANTICHEAT_ENABLED = true,
-
-    -- Set to 1 to completely disable auto-jailing offenders
-    ANTICHEAT_JAIL_DISABLE = false,
-
     -- Enable/disable keeping jug pets through zoning
     KEEP_JUGPET_THROUGH_ZONING = false,
 

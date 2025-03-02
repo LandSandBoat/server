@@ -2,8 +2,6 @@
 -- Area: Rolanberry Fields
 --  Mob: Goblin Mugger
 -----------------------------------
-local ID = zones[xi.zone.ROLANBERRY_FIELDS]
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -17,8 +15,7 @@ entity.onMobDeath = function(mob, player, optParams)
     then
         -- Guesstimating 15% chance
         if math.random(1, 100) <= 15 then
-            player:addKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.JUG_OF_GREASY_GOBLIN_JUICE)
+            npcUtil.giveKeyItem(player, xi.ki.JUG_OF_GREASY_GOBLIN_JUICE)
         end
     end
 end

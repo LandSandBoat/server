@@ -42,7 +42,6 @@ When a status effect is gained twice on a player. It can do one or more of the f
 
 #include "packets/char_health.h"
 #include "packets/char_job_extra.h"
-#include "packets/char_update.h"
 #include "packets/message_basic.h"
 #include "packets/party_effects.h"
 #include "packets/status_effects.h"
@@ -517,7 +516,7 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool 
         ApplyStateAlteringEffects(PStatusEffect);
 
         luautils::OnEffectGain(m_POwner, PStatusEffect);
-        m_POwner->PAI->EventHandler.triggerListener("EFFECT_GAIN", CLuaBaseEntity(m_POwner), CLuaStatusEffect(PStatusEffect));
+        m_POwner->PAI->EventHandler.triggerListener("EFFECT_GAIN", m_POwner, PStatusEffect);
 
         m_POwner->addModifiers(&PStatusEffect->modList);
 
@@ -618,7 +617,7 @@ void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, bo
     {
         PStatusEffect->deleted = true;
         luautils::OnEffectLose(m_POwner, PStatusEffect);
-        m_POwner->PAI->EventHandler.triggerListener("EFFECT_LOSE", CLuaBaseEntity(m_POwner), CLuaStatusEffect(PStatusEffect));
+        m_POwner->PAI->EventHandler.triggerListener("EFFECT_LOSE", m_POwner, PStatusEffect);
 
         m_POwner->delModifiers(&PStatusEffect->modList);
         if (m_POwner->objtype == TYPE_PC)
@@ -2029,7 +2028,7 @@ void CStatusEffectContainer::TickEffects(time_point tick)
         }
     }
     DeleteStatusEffects();
-    m_POwner->PAI->EventHandler.triggerListener("EFFECTS_TICK", CLuaBaseEntity(m_POwner));
+    m_POwner->PAI->EventHandler.triggerListener("EFFECTS_TICK", m_POwner);
 }
 
 /************************************************************************

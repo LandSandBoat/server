@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
   Copyright (c) 2010-2015 Darkstar Dev Teams
   This program is free software: you can redistribute it and/or modify
@@ -86,22 +86,22 @@ enum class Mod
     MEVA = 31, // Magic Evasion
 
     // Magic Accuracy and Elemental Attacks
-    FIREATT    = 32, // Fire Damage
-    ICEATT     = 33, // Ice Damage
-    WINDATT    = 34, // Wind Damage
-    EARTHATT   = 35, // Earth Damage
-    THUNDERATT = 36, // Thunder Damage
-    WATERATT   = 37, // Water Damage
-    LIGHTATT   = 38, // Light Damage
-    DARKATT    = 39, // Dark Damage
-    FIREACC    = 40, // Fire Accuracy
-    ICEACC     = 41, // Ice Accuracy
-    WINDACC    = 42, // Wind Accuracy
-    EARTHACC   = 43, // Earth Accuracy
-    THUNDERACC = 44, // Thunder Accuracy
-    WATERACC   = 45, // Water Accuracy
-    LIGHTACC   = 46, // Light Accuracy
-    DARKACC    = 47, // Dark Accuracy
+    FIREATT      = 32, // Fire Damage
+    ICEATT       = 33, // Ice Damage
+    WINDATT      = 34, // Wind Damage
+    EARTHATT     = 35, // Earth Damage
+    THUNDERATT   = 36, // Thunder Damage
+    WATERATT     = 37, // Water Damage
+    LIGHTATT     = 38, // Light Damage
+    DARKATT      = 39, // Dark Damage
+    FIRE_MACC    = 40, // Fire Accuracy
+    ICE_MACC     = 41, // Ice Accuracy
+    WIND_MACC    = 42, // Wind Accuracy
+    EARTH_MACC   = 43, // Earth Accuracy
+    THUNDER_MACC = 44, // Thunder Accuracy
+    WATER_MACC   = 45, // Water Accuracy
+    LIGHT_MACC   = 46, // Light Accuracy
+    DARK_MACC    = 47, // Dark Accuracy
 
     WSACC = 48, // Weaponskill Accuracy
 
@@ -136,9 +136,9 @@ enum class Mod
     GKATANA           = 89,  // Great Katana Skill
     CLUB              = 90,  // Club Skill
     STAFF             = 91,  // Staff Skill
-    AUTO_MELEE_SKILL  = 101, // Automaton Melee Skill
-    AUTO_RANGED_SKILL = 102, // Automaton Range Skill
-    AUTO_MAGIC_SKILL  = 103, // Automaton Magic Skill
+    AUTO_MELEE_SKILL  = 101, // Automaton Melee Skill -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
+    AUTO_RANGED_SKILL = 102, // Automaton Range Skill -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
+    AUTO_MAGIC_SKILL  = 103, // Automaton Magic Skill -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
     ARCHERY           = 104, // Archery Skill
     MARKSMAN          = 105, // Marksman Skill
     THROW             = 106, // Throw Skill
@@ -199,12 +199,10 @@ enum class Mod
     RECEIVED_DAMAGE_VARIANT = 222, // The variance that you want the damage cap to changed by. Ex: If you want the damage to be from 90-100 instead of a flat 100 you can set this to 10. It will random the value between 90-100 if the damage is above 100.
 
     // Specific Damage Taken vs physical damage type
-    // Value is stored as a percentage of damage reduction (to within 1000)
-    // Example: 1000 = 100%, 875= 87.5%
-    SLASH_SDT  = 49, // Slash Damage Taken
-    PIERCE_SDT = 50, // Piercing Damage Taken
-    IMPACT_SDT = 51, // Impact Damage Taken
-    HTH_SDT    = 52, // Hand-To-Hand Damage Taken
+    SLASH_SDT  = 49, // Slash Damage Taken. Base 10000. 100% = 0
+    PIERCE_SDT = 50, // Piercing Damage Taken. Base 10000. 100% = 0
+    IMPACT_SDT = 51, // Impact Damage Taken. Base 10000. 100% = 0
+    HTH_SDT    = 52, // Hand-To-Hand Damage Taken. Base 10000. 100% = 0
 
     // Elemental SDT. BASE 10000. This has been repeatedly mixed up with RESISTANCE - be careful!
     FIRE_SDT    = 54, // Fire Damage Taken
@@ -527,7 +525,7 @@ enum class Mod
     // Ranger
     CAMOUFLAGE_DURATION     = 98,   // Camouflage duration in percents
     RECYCLE                 = 305,  // Percent chance to recycle
-    SNAP_SHOT               = 365,  // Percent reduction to range attack delay
+    SNAPSHOT                = 365,  // Percent reduction to range attack delay
     RAPID_SHOT              = 359,  // Percent chance to proc rapid shot
     WIDESCAN                = 340,  //
     BARRAGE_ACC             = 420,  // Barrage accuracy
@@ -1061,6 +1059,7 @@ enum class Mod
     GEOMANCY_MP_NO_DEPLETE = 1037, // Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
     DIG_BYPASS_FATIGUE = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
+    DIG_RARE_ABILITY   = 1133, // Chocobo digging modifier found in "Black Chocobo Suit" and "Denim Pants +1".
     BREATH_DMG_DEALT   = 1075, // Breath damage dealt
 
     DAMAGE_LIMIT  = 1080, // Damage Limit increase, found on some traits. It's a flat value added to max pDIF (maxpDIF + DL/100) https://www.bg-wiki.com/ffxi/Damage_Limit%2B
@@ -1069,12 +1068,16 @@ enum class Mod
     MAGIC_BURST_BONUS_CAPPED   = 487, // Magic Burst Bonus I from gear, Ancient Magic Merits, Innin merits and Atmas. Cap at 40% bonus (1.4 multiplier)
     MAGIC_BURST_BONUS_UNCAPPED = 274, // Magic Burst Bonus II from gear, JP Gifts, BLM JPs and Job traits. No known cap.
 
+    DESPAWN_TIME_REDUCTION = 1134, // Reduction in seconds. 1 = 1 second less to despawn.
+
+    PARRY_HP_RECOVERY = 1135, // Recover <Mod Value> HP on successful parry.
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1133 and onward
+    // SPARE IDs: 1136 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

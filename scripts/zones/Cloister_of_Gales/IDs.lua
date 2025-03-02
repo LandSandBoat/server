@@ -15,14 +15,14 @@ zones[xi.zone.CLOISTER_OF_GALES] =
         LOGIN_CAMPAIGN_UNDERWAY          = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                     = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED    = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                    = 7065, -- Tallying conquest results...
-        YOU_CANNOT_ENTER_THE_BATTLEFIELD = 7226, -- You cannot enter the battlefield at present. Please wait a little longer.
-        PROTOCRYSTAL                     = 7250, -- It is a giant crystal.
-        PARTY_MEMBERS_HAVE_FALLEN        = 7574, -- All party members have fallen in battle. Now leaving the battlefield.
-        THE_PARTY_WILL_BE_REMOVED        = 7581, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        GARUDA_UNLOCKED                  = 7584, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
-        ATTACH_SEAL                      = 7768, -- <player> attaches <item> to the protocrystal.
-        POWER_STYMIES                    = 7769, -- An unseen power stymies your efforts to attach <item> to the protocrystal.
+        CONQUEST_BASE                    = 7067, -- Tallying conquest results...
+        YOU_CANNOT_ENTER_THE_BATTLEFIELD = 7228, -- You cannot enter the battlefield at present. Please wait a little longer.
+        PROTOCRYSTAL                     = 7252, -- It is a giant crystal.
+        PARTY_MEMBERS_HAVE_FALLEN        = 7576, -- All party members have fallen in battle. Now leaving the battlefield.
+        THE_PARTY_WILL_BE_REMOVED        = 7583, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        GARUDA_UNLOCKED                  = 7586, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
+        ATTACH_SEAL                      = 7770, -- <player> attaches <item> to the protocrystal.
+        POWER_STYMIES                    = 7771, -- An unseen power stymies your efforts to attach <item> to the protocrystal.
     },
     mob =
     {

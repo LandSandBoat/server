@@ -139,7 +139,7 @@ void CAttack::SetCritical(bool value)
         }
 
         // need to pass the weapon slot because damage ratio depends on ATT which varies by slot
-        m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus, skilltype, weaponSlot);
+        m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus, skilltype, weaponSlot, false);
     }
 }
 
@@ -528,7 +528,7 @@ bool CAttack::CheckCounter()
             }
             else
             {
-                m_attacker->PAI->EventHandler.triggerListener("MELEE_SWING_MISS", CLuaBaseEntity(m_attacker), CLuaBaseEntity(m_victim), CLuaAttack(this));
+                m_attacker->PAI->EventHandler.triggerListener("MELEE_SWING_MISS", m_attacker, m_victim, this);
             }
         }
         else if (m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_COUNTER))

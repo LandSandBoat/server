@@ -116,7 +116,7 @@ quest.sections =
                         quest:getVar(player, 'Prog') == 1 and
                         npcUtil.tradeHasExactly(trade, xi.item.PARCEL_FOR_THE_AUCTION_HOUSE)
                     then
-                        return quest:progressEvent(535)
+                        return quest:progressEvent(540)
                     end
                 end,
             },

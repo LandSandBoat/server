@@ -36,10 +36,9 @@ namespace puppetutils
     void   setFrame(CCharEntity* PChar, uint8 frame);
     void   setHead(CCharEntity* PChar, uint8 head);
     uint16 getSkillCap(CCharEntity* PChar, SKILLTYPE skill, uint8 level);
-    uint16 getSkillCap(CCharEntity* PChar, SKILLTYPE skill);
     void   TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl);
-    void   LoadAutomatonStats(CCharEntity* PChar);
     void   CheckAttachmentsForManeuver(CCharEntity* PChar, EFFECT maneuver, bool gain);
+    void   EquipAttachments(CAutomatonEntity* PAutomaton);
     void   UpdateAttachments(CCharEntity* PChar);
     void   PreLevelRestriction(CCharEntity* PChar);
     void   PostLevelRestriction(CCharEntity* PChar);

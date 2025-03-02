@@ -74,7 +74,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
         }
         else if (auto PMob = std::get_if<CMobEntity*>(&datagram.data))
         {
-            params[datagram.luaKey] = CLuaBaseEntity(*PMob);
+            params[datagram.luaKey] = *PMob;
         }
         else if (auto text = std::get_if<std::string>(&datagram.data))
         {
@@ -87,7 +87,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
     }
 
     // Call
-    auto result = onRecordTrigger(CLuaBaseEntity(PChar), recordID, params);
+    auto result = onRecordTrigger(PChar, recordID, params);
     if (!result.valid())
     {
         sol::error err = result;

@@ -11,6 +11,9 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addMod(xi.mod.REGEN, 35)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

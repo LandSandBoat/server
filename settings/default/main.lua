@@ -308,7 +308,7 @@ xi.settings.main =
     REGIME_REWARD_THRESHOLD      = 15,    -- If the player is more than N levels below the minimum suggested range, do not award experience.
 
     -- SYSTEM
-    TESTING_SERVER              = true,  -- true/false. Set to false will disable any code deemed not ready for a live server, WIP code blocking. Remove block once completed.
+    TESTING_SERVER              = true,  -- true/false. Set to false will disable any code deemed not ready for a live server, WIP code blocking.
     DISABLE_INACTIVITY_WATCHDOG = false, -- true/false. If this is enabled, the watchdog which detects if the main loop isn't being ticked will no longer be able to kill the process.
     INACTIVITY_WATCHDOG_PERIOD  = 2000,  -- Time in milliseconds which the inactivity watchdog will wait between ticks of the main loop before potentially killing the target process.
 }

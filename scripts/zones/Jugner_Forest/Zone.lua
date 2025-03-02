@@ -9,22 +9,19 @@ require('scripts/missions/amk/helpers')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -484, 10, 292, 0, 0, 0) -- Sets Mark for "Under Oath" Quest cutscene.
-
-    UpdateNMSpawnPoint(ID.mob.FRAELISSA)
-    GetMobByID(ID.mob.FRAELISSA):setRespawnTime(math.random(900, 10800))
+    zone:registerCylindricalTriggerArea(1, -484, 292, 10) -- Sets Mark for "Under Oath" Quest cutscene.
 
     UpdateNMSpawnPoint(ID.mob.METEORMAULER)
     GetMobByID(ID.mob.METEORMAULER):setRespawnTime(math.random(900, 10800))
-
-    xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
-
-    xi.helm.initZone(zone, xi.helmType.LOGGING)
 
     local respawnTime = 900 + math.random(0, 6) * 1800 -- 0:15 to 3:15 spawn timer in 30 minute intervals
     for offset = 1, 10 do
         GetMobByID(ID.mob.KING_ARTHRO - offset):setRespawnTime(respawnTime)
     end
+
+    xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
+
+    xi.helm.initZone(zone, xi.helmType.LOGGING)
 
     xi.voidwalker.zoneOnInit(zone)
 end
@@ -62,7 +59,7 @@ end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if
-        triggerArea:GetTriggerAreaID() == 1 and
+        triggerArea:getTriggerAreaID() == 1 and
         player:getCharVar('UnderOathCS') == 7
     then
         -- Quest: Under Oath - PLD AF3

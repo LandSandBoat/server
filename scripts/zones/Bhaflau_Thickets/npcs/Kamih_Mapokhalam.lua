@@ -47,8 +47,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setPos(325.137, -3.999, -619.968, 0, 72) -- To Alzadaal Undersea Ruins G-8 (R)
     elseif csid == 146 then
         player:tradeComplete()
-        player:addKeyItem(xi.ki.MAP_OF_ALZADAAL_RUINS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_ALZADAAL_RUINS)
+        npcUtil.giveKeyItem(player, xi.ki.MAP_OF_ALZADAAL_RUINS)
     end
 end
 

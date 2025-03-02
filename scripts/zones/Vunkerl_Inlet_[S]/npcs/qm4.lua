@@ -14,8 +14,7 @@ entity.onTrigger = function(player, npc)
         player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS) and
         player:getCharVar('RedeemingRocksProg') == 3
     then
-        player:addKeyItem(xi.ki.PIECE_OF_KIONITE) -- 4th stop for quest "Redeeming Rocks"
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PIECE_OF_KIONITE)
+        npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_KIONITE)
         player:setCharVar('RedeemingRocksProg', 4)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

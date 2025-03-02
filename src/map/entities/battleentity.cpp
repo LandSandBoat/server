@@ -81,10 +81,10 @@ CBattleEntity::CBattleEntity()
     PRecastContainer      = std::make_unique<CRecastContainer>(this);
     PNotorietyContainer   = std::make_unique<CNotorietyContainer>(this);
 
-    m_modStat[Mod::SLASH_SDT]  = 1000;
-    m_modStat[Mod::PIERCE_SDT] = 1000;
-    m_modStat[Mod::HTH_SDT]    = 1000;
-    m_modStat[Mod::IMPACT_SDT] = 1000;
+    m_modStat[Mod::SLASH_SDT]  = 0;
+    m_modStat[Mod::PIERCE_SDT] = 0;
+    m_modStat[Mod::HTH_SDT]    = 0;
+    m_modStat[Mod::IMPACT_SDT] = 0;
 
     m_Immunity   = 0;
     isCharmed    = false;
@@ -763,10 +763,10 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
                                 DAMAGE_TYPE damageType /* = DAMAGE_NONE*/, bool isSkillchainDamage /* = false */)
 {
     TracyZoneScoped;
-    PLastAttacker                             = attacker;
-    this->BattleHistory.lastHitTaken_atkType  = attackType;
-    std::optional<CLuaBaseEntity> optAttacker = attacker ? std::optional<CLuaBaseEntity>(CLuaBaseEntity(attacker)) : std::nullopt;
-    PAI->EventHandler.triggerListener("TAKE_DAMAGE", CLuaBaseEntity(this), amount, optAttacker, (uint16)attackType, (uint16)damageType);
+    PLastAttacker                            = attacker;
+    this->BattleHistory.lastHitTaken_atkType = attackType;
+
+    PAI->EventHandler.triggerListener("TAKE_DAMAGE", this, amount, attacker, (uint16)attackType, (uint16)damageType);
 
     // RoE Damage Taken Trigger
     if (this->objtype == TYPE_PC)
@@ -913,7 +913,7 @@ uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
     uint16 baseSkill = skill == SKILL_FISHING ? 0 : GetSkill(skill);
     int32  RATT      = 8 + baseSkill + bonusSkill + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + STR();
     // use max to prevent any underflow
-    return std::max(0, RATT + (RATT * m_modStat[Mod::RATTP] / 100) + std::min<int16>((RATT * m_modStat[Mod::FOOD_RATTP] / 100), m_modStat[Mod::FOOD_RATT_CAP]));
+    return std::max(1, RATT + (RATT * m_modStat[Mod::RATTP] / 100) + std::min<int16>((RATT * m_modStat[Mod::FOOD_RATTP] / 100), m_modStat[Mod::FOOD_RATT_CAP]));
 }
 
 uint16 CBattleEntity::RACC(uint8 skill, uint16 bonusSkill)
@@ -1692,11 +1692,11 @@ void CBattleEntity::Die()
             }
         });
         // clang-format on
-        PAI->EventHandler.triggerListener("DEATH", CLuaBaseEntity(this), CLuaBaseEntity(PKiller));
+        PAI->EventHandler.triggerListener("DEATH", this, PKiller);
     }
     else
     {
-        PAI->EventHandler.triggerListener("DEATH", CLuaBaseEntity(this));
+        PAI->EventHandler.triggerListener("DEATH", this);
     }
     SetBattleTargetID(0);
 }
@@ -2121,8 +2121,8 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         else
         {
             damage = luautils::OnMobWeaponSkill(PTargetFound, this, PSkill, &action);
-            this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(this), CLuaBaseEntity(PTargetFound), PSkill->getID(), state.GetSpentTP(), CLuaAction(&action), damage);
-            PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTargetFound), CLuaBaseEntity(this), PSkill->getID(), state.GetSpentTP(), CLuaAction(&action));
+            this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", this, PTargetFound, PSkill->getID(), state.GetSpentTP(), &action, damage);
+            PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", PTargetFound, this, PSkill->getID(), state.GetSpentTP(), &action);
         }
 
         if (msg == 0)
@@ -2241,7 +2241,7 @@ void CBattleEntity::OnDisengage(CAttackState& s)
         animation = ANIMATION_NONE;
     }
     updatemask |= UPDATE_HP;
-    PAI->EventHandler.triggerListener("DISENGAGE", CLuaBaseEntity(this));
+    PAI->EventHandler.triggerListener("DISENGAGE", this);
 }
 
 void CBattleEntity::OnChangeTarget(CBattleEntity* PTarget)
@@ -2417,7 +2417,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                             attBonus += ((static_cast<float>(targetDex) / 100) * csJpModifier);
                         }
 
-                        float DamageRatio = battleutils::GetDamageRatio(PTarget, this, attack.IsCritical(), attBonus, skilltype, SLOT_MAIN);
+                        float DamageRatio = battleutils::GetDamageRatio(PTarget, this, attack.IsCritical(), attBonus, skilltype, SLOT_MAIN, false);
                         auto  damage      = (int32)((PTarget->GetMainWeaponDmg() + naturalh2hDMG + battleutils::GetFSTR(PTarget, this, SLOT_MAIN)) * DamageRatio);
 
                         actionTarget.spikesParam =
@@ -2435,7 +2435,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     }
                 }
 
-                this->PAI->EventHandler.triggerListener("MELEE_SWING_MISS", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), CLuaAttack(&attack));
+                this->PAI->EventHandler.triggerListener("MELEE_SWING_MISS", this, PTarget, &attack);
             }
             else
             {
@@ -2443,7 +2443,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 // Set this attack's critical flag.
                 attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing(), weaponSlot));
 
-                this->PAI->EventHandler.triggerListener("MELEE_SWING_HIT", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), CLuaAttack(&attack));
+                this->PAI->EventHandler.triggerListener("MELEE_SWING_HIT", this, PTarget, &attack);
 
                 actionTarget.reaction = REACTION::HIT;
 
@@ -2456,7 +2456,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     if (PTarget->objtype == TYPE_MOB)
                     {
                         // Listener (hook)
-                        PTarget->PAI->EventHandler.triggerListener("CRITICAL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(this));
+                        PTarget->PAI->EventHandler.triggerListener("CRITICAL_TAKE", PTarget, this);
 
                         // Binding
                         luautils::OnCriticalHit(PTarget, this);
@@ -2527,13 +2527,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     }
                 }
 
-                if (attack.IsParried() || !settings::get<bool>("map.PARRY_OLD_SKILLUP_STYLE"))
-                {
-                    if (battleutils::GetParryRate(this, PTarget) > 0)
-                    {
-                        charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_PARRY, GetMLevel());
-                    }
-                }
                 if (!attack.IsCountered() && !attack.IsParried())
                 {
                     charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_EVASION, GetMLevel());
@@ -2557,7 +2550,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 charutils::TrySkillUP(PChar, SKILL_EVASION, GetMLevel());
             }
 
-            this->PAI->EventHandler.triggerListener("MELEE_SWING_MISS", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), CLuaAttack(&attack));
+            this->PAI->EventHandler.triggerListener("MELEE_SWING_MISS", this, PTarget, &attack);
         }
 
         // If we didn't hit at all, set param to 0 if we didn't blink any shadows.
@@ -2625,8 +2618,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         }
     }
 
-    PAI->EventHandler.triggerListener("ATTACK", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), CLuaAction(&action));
-    PTarget->PAI->EventHandler.triggerListener("ATTACKED", CLuaBaseEntity(PTarget), CLuaBaseEntity(this), CLuaAction(&action));
+    PAI->EventHandler.triggerListener("ATTACK", this, PTarget, &action);
+    PTarget->PAI->EventHandler.triggerListener("ATTACKED", PTarget, this, &action);
     /////////////////////////////////////////////////////////////////////////////////////////////
     // End of attack loop
     /////////////////////////////////////////////////////////////////////////////////////////////
@@ -2648,7 +2641,7 @@ void CBattleEntity::OnEngage(CAttackState& state)
     TracyZoneScoped;
     animation = ANIMATION_ATTACK;
     updatemask |= UPDATE_HP;
-    PAI->EventHandler.triggerListener("ENGAGE", CLuaBaseEntity(this), CLuaBaseEntity(state.GetTarget()));
+    PAI->EventHandler.triggerListener("ENGAGE", this, state.GetTarget());
 }
 
 void CBattleEntity::TryHitInterrupt(CBattleEntity* PAttacker)
@@ -2664,7 +2657,7 @@ void CBattleEntity::OnDespawn(CDespawnState& /*unused*/)
     TracyZoneScoped;
     FadeOut();
     // #event despawn
-    PAI->EventHandler.triggerListener("DESPAWN", CLuaBaseEntity(this));
+    PAI->EventHandler.triggerListener("DESPAWN", this);
     PAI->Internal_Respawn(0s);
 }
 
@@ -2724,6 +2717,10 @@ bool CBattleEntity::hasEnmityEXPENSIVE() const
         // clang-format off
         loc.zone->ForEachMob([&](CMobEntity* PMob)
         {
+            if (!PMob->isAlive())
+            {
+                return;
+            }
             // Account for charmed mobs attacking normal mobs, etc
             if (PMob->GetBattleTargetID() == targid && PMob->allegiance != allegiance)
             {

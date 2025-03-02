@@ -117,8 +117,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:getLocalVar('killed_wsnm') == 1 then
                         player:setLocalVar('killed_wsnm', 0)
-                        player:addKeyItem(xi.ki.ANNALS_OF_TRUTH)
-                        return quest:messageSpecial(westernAltepaID.text.KEYITEM_OBTAINED, xi.ki.ANNALS_OF_TRUTH)
+                        return quest:keyItem(xi.ki.ANNALS_OF_TRUTH)
                     elseif
                         player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and
                         not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and

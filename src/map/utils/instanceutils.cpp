@@ -65,7 +65,7 @@ namespace instanceutils
                 InstanceData_t data;
 
                 // Main data
-                data.id            = static_cast<uint16>(_sql->GetIntData(0));
+                data.id            = static_cast<uint32>(_sql->GetIntData(0));
                 data.instance_name = reinterpret_cast<const char*>(_sql->GetData(1));
                 data.instance_zone = static_cast<uint16>(_sql->GetIntData(2));
                 data.entrance_zone = static_cast<uint16>(_sql->GetIntData(3));
@@ -117,17 +117,17 @@ namespace instanceutils
         }
     }
 
-    void LoadInstance(uint16 instanceid, CCharEntity* PRequester)
+    void LoadInstance(uint32 instanceid, CCharEntity* PRequester)
     {
         LoadQueue.emplace(PRequester->id, instanceid);
     }
 
-    InstanceData_t GetInstanceData(uint16 instanceid)
+    InstanceData_t GetInstanceData(uint32 instanceid)
     {
         return InstanceData[instanceid];
     }
 
-    bool IsValidInstanceID(uint16 instanceid)
+    bool IsValidInstanceID(uint32 instanceid)
     {
         return InstanceData.find(instanceid) != InstanceData.end();
     }

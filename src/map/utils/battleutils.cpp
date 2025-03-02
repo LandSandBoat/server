@@ -28,10 +28,8 @@
 #include <cstring>
 #include <unordered_map>
 
-#include "packets/char.h"
 #include "packets/char_health.h"
-#include "packets/char_update.h"
-#include "packets/entity_update.h"
+#include "packets/char_status.h"
 #include "packets/inventory_finish.h"
 #include "packets/message_basic.h"
 
@@ -817,7 +815,7 @@ namespace battleutils
                 bool crit = battleutils::GetCritHitRate(PDefender, PAttacker, true) > xirand::GetRandomNumber(100);
 
                 // Dmg math.
-                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 1.f, skilltype, SLOT_MAIN);
+                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 1.f, skilltype, SLOT_MAIN, false);
                 uint16 dmg         = (uint32)((PDefender->GetMainWeaponDmg() + battleutils::GetFSTR(PDefender, PAttacker, SLOT_MAIN)) * DamageRatio);
                 dmg                = attackutils::CheckForDamageMultiplier(((CCharEntity*)PDefender), dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]), dmg,
                                                                            PHYSICAL_ATTACK_TYPE::NORMAL, SLOT_MAIN);
@@ -1654,106 +1652,39 @@ namespace battleutils
     // todo: need to penalise attacker's RangedAttack depending on distance from mob. (% decrease)
     float GetRangedDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, int16 bonusRangedAttack)
     {
-        // get ranged attack value
-        uint16 rAttack = 1;
+        float pDIF = 1.0;
 
-        if (PAttacker->objtype == TYPE_PC)
-        {
-            CCharEntity* PChar = (CCharEntity*)PAttacker;
-            CItemWeapon* PItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
-
-            if (PItem != nullptr && PItem->isType(ITEM_WEAPON))
-            {
-                rAttack = PChar->RATT(PItem->getSkillType(), PItem->getILvlSkill());
-            }
-            else
-            {
-                PItem = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
-
-                if (PItem == nullptr || !PItem->isType(ITEM_WEAPON) || (PItem->getSkillType() != SKILL_THROWING))
-                {
-                    ShowDebug("battleutils::GetRangedPDIF Cannot find a valid ranged weapon to calculate PDIF for. ");
-                }
-                else
-                {
-                    rAttack = PChar->RATT(PItem->getSkillType(), PItem->getILvlSkill());
-                }
-            }
-        }
-        else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
-        {
-            rAttack = PAttacker->RATT(SKILL_AUTOMATON_RANGED);
-        }
-        else
-        {
-            // assume mobs capped
-            rAttack = battleutils::GetMaxSkill(SKILL_ARCHERY, JOB_RNG, PAttacker->GetMLevel());
-        }
-
-        rAttack += bonusRangedAttack;
-
-        // get ratio (not capped for RAs)
-        float ratio = (float)rAttack / (float)PDefender->DEF();
-
-        // Ranged damage limit caluclations
-
-        // get weapon cap
         auto* targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_RANGED]);
-        float maxRatio    = 3.25f;
+        uint8 weaponType  = targ_weapon ? targ_weapon->getSkillType() : static_cast<uint8>(SKILL_MARKSMANSHIP); // TODO: does the no-weapon case actually hit?
 
-        // If null ignore the checks and fallback to 1H values
-        if (targ_weapon && targ_weapon->getSkillType() == SKILL_MARKSMANSHIP)
-        {
-            maxRatio = 3.5f;
-        }
+        auto levelCorrectionFunc = lua["xi"]["combat"]["levelCorrection"]["isLevelCorrectedZone"];
+        auto rangedPDIFFunc      = lua["xi"]["combat"]["physical"]["calculateRangedPDIF"];
 
-        // level correct (0.025 not 0.05 like for melee)
-        if (PDefender->GetMLevel() > PAttacker->GetMLevel())
+        if (rangedPDIFFunc.valid() && levelCorrectionFunc.valid())
         {
-            ratio -= 0.025f * (PDefender->GetMLevel() - PAttacker->GetMLevel());
-        }
+            auto levelCorrectionResult = levelCorrectionFunc(PAttacker);
+            if (!levelCorrectionResult.valid())
+            {
+                sol::error err = levelCorrectionResult;
+                ShowError("battleutils::GetRangedDamageRatio(): %s", err.what());
+                return pDIF;
+            }
 
-        // calculate min/max PDIF
-        float minPdif = 0;
-        float maxPdif = 0;
-
-        if (ratio < 0.9)
-        {
-            minPdif = ratio;
-            maxPdif = (10.0f / 9.0f) * ratio;
-        }
-        else if (ratio <= 1.1)
-        {
-            minPdif = 1;
-            maxPdif = 1;
+            auto rangedPDIFFuncResult = rangedPDIFFunc(PAttacker, PDefender, weaponType, 1.0, isCritical, levelCorrectionResult.get<bool>(0), false, 0.0, false, bonusRangedAttack);
+            if (!rangedPDIFFuncResult.valid())
+            {
+                sol::error err = rangedPDIFFuncResult;
+                ShowError("battleutils::GetRangedDamageRatio(): %s", err.what());
+                return pDIF;
+            }
+            pDIF = rangedPDIFFuncResult.get<float>(0);
         }
         else
         {
-            minPdif = (-3.0f / 19.0f) + ((20.0f / 19.0f) * ratio);
-            maxPdif = ratio;
+            ShowError("battleutils::GetRangedDamageRatio() failed to run lua calls");
         }
 
-        // Apply damage limit modifier
-        float damageLimitPlus = PAttacker->getMod(Mod::DAMAGE_LIMIT) / 100.0f;
-        float damageLimitPerc = (100.0f + PAttacker->getMod(Mod::DAMAGE_LIMITP)) / 100.0f;
-        maxRatio              = (maxRatio + damageLimitPlus) * damageLimitPerc;
-
-        minPdif = std::clamp<float>(minPdif, 0, maxRatio);
-        maxPdif = std::clamp<float>(maxPdif, 0, maxRatio);
-
-        // return random number between the two
-        float pdif = xirand::GetRandomNumber(minPdif, maxPdif);
-
-        if (isCritical)
-        {
-            pdif *= 1.25;
-            int16 criticaldamage =
-                PAttacker->getMod(Mod::CRIT_DMG_INCREASE) + PAttacker->getMod(Mod::RANGED_CRIT_DMG_INCREASE) - PDefender->getMod(Mod::CRIT_DEF_BONUS);
-            criticaldamage = std::clamp<int16>(criticaldamage, 0, 100);
-            pdif *= ((100 + criticaldamage) / 100.0f);
-        }
-
-        return pdif;
+        return pDIF;
     }
 
     int16 CalculateBaseTP(int32 delay)
@@ -2190,16 +2121,16 @@ namespace battleutils
                 switch (damageType)
                 {
                     case DAMAGE_TYPE::PIERCING:
-                        damage = (damage * (PDefender->getMod(Mod::PIERCE_SDT))) / 1000;
+                        damage = damage * (1 + PDefender->getMod(Mod::PIERCE_SDT) / 10000);
                         break;
                     case DAMAGE_TYPE::SLASHING:
-                        damage = (damage * (PDefender->getMod(Mod::SLASH_SDT))) / 1000;
+                        damage = damage * (1 + PDefender->getMod(Mod::SLASH_SDT) / 10000);
                         break;
                     case DAMAGE_TYPE::IMPACT:
-                        damage = (damage * (PDefender->getMod(Mod::IMPACT_SDT))) / 1000;
+                        damage = damage * (1 + PDefender->getMod(Mod::IMPACT_SDT) / 10000);
                         break;
                     case DAMAGE_TYPE::HTH:
-                        damage = (damage * (PDefender->getMod(Mod::HTH_SDT))) / 1000;
+                        damage = damage * (1 + PDefender->getMod(Mod::HTH_SDT) / 10000);
                         break;
                     default:
                         break;
@@ -2207,7 +2138,7 @@ namespace battleutils
             }
             else
             {
-                damage = (damage * (PDefender->getMod(Mod::HTH_SDT))) / 1000;
+                damage = damage * (1 + PDefender->getMod(Mod::HTH_SDT) / 10000);
             }
 
             if (isBlocked)
@@ -2669,7 +2600,7 @@ namespace battleutils
             auto tpGainFunc = lua["xi"]["combat"]["tp"]["calculateTPGainOnMagicalDamage"];
             if (tpGainFunc.valid())
             {
-                PDefender->addTP(tpGainFunc(damage, CLuaBaseEntity(PAttacker), CLuaBaseEntity(PDefender)));
+                PDefender->addTP(tpGainFunc(damage, PAttacker, PDefender));
             }
         }
 
@@ -3027,17 +2958,16 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, SKILLTYPE weaponType, SLOTTYPE weaponSlot)
+    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, SKILLTYPE weaponType, SLOTTYPE weaponSlot, bool isCannonball)
     {
         float pDIF = 1.0f;
 
         auto levelCorrectionFunc = lua["xi"]["combat"]["levelCorrection"]["isLevelCorrectedZone"];
         auto meleePDIFFunc       = lua["xi"]["combat"]["physical"]["calculateMeleePDIF"];
-        auto luaAttackerEntity   = CLuaBaseEntity(PAttacker);
 
         if (meleePDIFFunc.valid() && levelCorrectionFunc.valid())
         {
-            auto levelCorrectionResult = levelCorrectionFunc(luaAttackerEntity);
+            auto levelCorrectionResult = levelCorrectionFunc(PAttacker);
             if (!levelCorrectionResult.valid())
             {
                 sol::error err = levelCorrectionResult;
@@ -3045,7 +2975,7 @@ namespace battleutils
                 return pDIF;
             }
 
-            auto meleePDIFFuncResult = meleePDIFFunc(luaAttackerEntity, CLuaBaseEntity(PDefender), weaponType, bonusAttPercent, isCritical, levelCorrectionResult.get<bool>(0), false, 0.0, false, weaponSlot);
+            auto meleePDIFFuncResult = meleePDIFFunc(PAttacker, PDefender, weaponType, bonusAttPercent, isCritical, levelCorrectionResult.get<bool>(0), false, 0.0, false, weaponSlot, false);
             if (!meleePDIFFuncResult.valid())
             {
                 sol::error err = meleePDIFFuncResult;
@@ -4706,7 +4636,7 @@ namespace battleutils
                 charutils::BuildingCharAbilityTable(PChar);
                 std::memset(&PChar->m_PetCommands, 0, sizeof(PChar->m_PetCommands));
                 PChar->pushPacket<CCharAbilitiesPacket>(PChar);
-                PChar->pushPacket<CCharUpdatePacket>(PChar);
+                PChar->pushPacket<CCharStatusPacket>(PChar);
                 PChar->pushPacket<CPetSyncPacket>(PChar);
             }
             // clang-format off
@@ -5702,21 +5632,8 @@ namespace battleutils
             else
             {
                 // draw in!
-                PTarget->loc.p.x = nearEntity.x;
-                PTarget->loc.p.y = nearEntity.y;
-                PTarget->loc.p.z = nearEntity.z;
-
-                if (PTarget->objtype == TYPE_PC)
-                {
-                    CCharEntity* PChar = static_cast<CCharEntity*>(PTarget);
-                    PChar->pushPacket<CPositionPacket>(PChar);
-                }
-                else
-                {
-                    PTarget->loc.zone->UpdateEntityPacket(PTarget, ENTITY_UPDATE, UPDATE_POS);
-                }
-
-                PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE, std::make_unique<CMessageBasicPacket>(PTarget, PTarget, 0, 0, 232));
+                PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<CPositionPacket>(PTarget, nearEntity));
+                PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<CMessageBasicPacket>(PTarget, PTarget, 0, 0, 232));
             }
         }
 
@@ -5885,7 +5802,7 @@ namespace battleutils
                 {
                     if (auto PCharTarget = dynamic_cast<CCharEntity*>(PTarget))
                     {
-                        // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
+                        // Update target's recast state: caster's will be handled in CCharEntity::OnAbility.
                         PCharTarget->pushPacket<CCharRecastPacket>(PCharTarget);
                     }
                 }
@@ -5916,7 +5833,7 @@ namespace battleutils
             {
                 if (auto PCharTarget = dynamic_cast<CCharEntity*>(PTarget))
                 {
-                    // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
+                    // Update target's recast state: caster's will be handled in CCharEntity::OnAbility.
                     PCharTarget->pushPacket<CCharRecastPacket>(PCharTarget);
                 }
             }
@@ -5950,13 +5867,13 @@ namespace battleutils
 
     /************************************************************************
      *                                                                       *
-     *  Get the Snapshot shot time reduction                                 *
+     *  Reduce input delay by Snapshot and Velocity shot                     *
      *                                                                       *
      ************************************************************************/
 
-    int16 GetSnapshotReduction(CBattleEntity* battleEntity, int16 delay)
+    int16 GetRangedDelayReduction(CBattleEntity* battleEntity, int16 delay)
     {
-        auto SnapShotReductionPercent{ battleEntity->getMod(Mod::SNAP_SHOT) };
+        auto SnapShotReductionPercent{ battleEntity->getMod(Mod::SNAPSHOT) };
 
         if (auto* PChar = dynamic_cast<CCharEntity*>(battleEntity))
         {
@@ -5966,13 +5883,16 @@ namespace battleutils
             }
         }
 
-        // Reduction from velocity shot mod
+        // https://www.bg-wiki.com/ffxi/Snapshot
+        SnapShotReductionPercent = std::min<int16>(SnapShotReductionPercent, 70); // Cap of 70%
+
+        auto VelocityShotReductionPercent = 0;
         if (battleEntity->StatusEffectContainer->HasStatusEffect(EFFECT_VELOCITY_SHOT))
         {
-            SnapShotReductionPercent += battleEntity->getMod(Mod::VELOCITY_SNAPSHOT_BONUS);
+            VelocityShotReductionPercent = 15 + battleEntity->getMod(Mod::VELOCITY_SNAPSHOT_BONUS);
         }
 
-        return (int16)(delay * (100 - SnapShotReductionPercent) / 100.f);
+        return (int16)(delay * ((100 - SnapShotReductionPercent) / 100.f) * ((100 - VelocityShotReductionPercent) / 100.f));
     }
 
     /************************************************************************

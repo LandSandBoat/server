@@ -208,6 +208,9 @@ INSERT INTO `mob_family_mods` VALUES (61,389,-25,0); -- UDMGMAGIC: -25
 -- Cerberus
 INSERT INTO `mob_family_mods` VALUES (62,36,50,1); -- ROAM_COOL: 50
 
+-- Chariot
+INSERT INTO `mob_family_mods` VALUES (63,10,15,1); -- SUBLINK: 15
+
 -- Cluster
 INSERT INTO `mob_family_mods` VALUES (68,36,40,1); -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (68,51,2,1);  -- ROAM_TURNS: 2
@@ -379,6 +382,10 @@ INSERT INTO `mob_family_mods` VALUES (115,54,100,1);  -- GIL_BONUS: 100
 INSERT INTO `mob_family_mods` VALUES (116,31,15,1); -- ROAM_DISTANCE: 15
 INSERT INTO `mob_family_mods` VALUES (116,36,60,1); -- ROAM_COOL: 60
 INSERT INTO `mob_family_mods` VALUES (116,52,30,1); -- ROAM_RATE: 30
+
+-- Gear
+INSERT INTO `mob_family_mods` VALUES (119,10,15,1); -- SUBLINK: 15
+INSERT INTO `mob_family_mods` VALUES (120,10,15,1); -- SUBLINK: 15
 
 -- Ghost
 INSERT INTO `mob_family_mods` VALUES (121,36,50,1);   -- ROAM_COOL: 50
@@ -635,6 +642,9 @@ INSERT INTO `mob_family_mods` VALUES (208,52,30,1);  -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (208,62,10,0);  -- ATTP: 10
 INSERT INTO `mob_family_mods` VALUES (208,63,20,0);  -- DEFP: 20
 
+-- Rampart
+INSERT INTO `mob_family_mods` VALUES (209,10,15,1); -- SUBLINK: 15
+
 -- Raptor
 INSERT INTO `mob_family_mods` VALUES (210,31,30,1);  -- ROAM_DISTANCE: 30
 INSERT INTO `mob_family_mods` VALUES (210,36,40,1);  -- ROAM_COOL: 40
@@ -647,7 +657,7 @@ INSERT INTO `mob_family_mods` VALUES (212,52,20,1); -- ROAM_RATE: 20
 
 -- Sahagin
 INSERT INTO `mob_family_mods` VALUES (213,10,8,1);   -- SUBLINK: 8
-INSERT INTO `mob_family_mods` VALUES (213,20,128,0); -- WATER_RES: 128
+INSERT INTO `mob_family_mods` VALUES (213,20,128,0); -- WATER_MEVA: 128
 
 -- Sapling
 INSERT INTO `mob_family_mods` VALUES (216,10,4,1);  -- SUBLINK: 4
@@ -805,9 +815,6 @@ INSERT INTO `mob_family_mods` VALUES (271,3,50,1); -- MP_BASE: 50
 INSERT INTO `mob_family_mods` VALUES (272,4,10,1);    -- SIGHT_RANGE: 10
 INSERT INTO `mob_family_mods` VALUES (272,102,60,1);  -- MOBMOD_SIGHT_ANGLE
 
--- Scorpion-Serket
-INSERT INTO `mob_family_mods` VALUES (273,23,256,1); -- IMMUNITY: 256
-
 -- Scorpion-Kingv
 INSERT INTO `mob_family_mods` VALUES (274,23,256,1); -- IMMUNITY: 256
 
@@ -898,18 +905,6 @@ INSERT INTO `mob_family_mods` VALUES (376,51,3,1);  -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (377,31,30,1); -- ROAM_DISTANCE: 30
 INSERT INTO `mob_family_mods` VALUES (377,36,40,1); -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (377,51,3,1);  -- ROAM_TURNS: 3
-
--- Wyrm-Vrtra
-INSERT INTO `mob_family_mods` VALUES (391,31,5,1);  -- ROAM_DISTANCE: 5
-INSERT INTO `mob_family_mods` VALUES (391,36,55,1); -- ROAM_COOL: 55
-
--- Wyrm-Jormungand
-INSERT INTO `mob_family_mods` VALUES (392,31,5,1);  -- ROAM_DISTANCE: 5
-INSERT INTO `mob_family_mods` VALUES (392,36,55,1); -- ROAM_COOL: 55
-
--- Wyrm-Tiamat
-INSERT INTO `mob_family_mods` VALUES (393,31,5,1);  -- ROAM_DISTANCE: 5
-INSERT INTO `mob_family_mods` VALUES (393,36,55,1); -- ROAM_COOL: 55
 
 -- Humanoid-Hume
 INSERT INTO `mob_family_mods` VALUES (394,4,30,1);   -- SIGHT_RANGE: 30

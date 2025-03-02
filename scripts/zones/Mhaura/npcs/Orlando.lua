@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local questStatus = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+    local questStatus = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDOS_ANTIQUES)
     local itemID = trade:getItemId()
     local itemList =
     {
@@ -44,7 +44,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local questStatus = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+    local questStatus = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDOS_ANTIQUES)
 
     if player:getFameLevel(xi.fameArea.WINDURST) >= 2 then
         if player:hasKeyItem(xi.ki.CHOCOBO_LICENSE) then
@@ -62,16 +62,16 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local questStatus = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+    local questStatus = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDOS_ANTIQUES)
     local payout = player:getCharVar('ANTIQUE_PAYOUT')
 
     if csid == 101 then
-        player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+        player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDOS_ANTIQUES)
     elseif csid == 102 then
         player:tradeComplete()
         player:addFame(xi.fameArea.WINDURST, 10)
         npcUtil.giveCurrency(player, 'gil', payout)
-        player:completeQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+        player:completeQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDOS_ANTIQUES)
         player:setCharVar('ANTIQUE_PAYOUT', 0)
         player:setLocalVar('OrlandoRepeat', 0)
     elseif csid == 103 then

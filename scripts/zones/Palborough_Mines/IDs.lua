@@ -19,14 +19,14 @@ zones[xi.zone.PALBOROUGH_MINES] =
         LOGIN_NUMBER                       = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         GEOMAGNETRON_ATTUNED               = 7012, -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
         MEMBERS_LEVELS_ARE_RESTRICTED      = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                      = 7065, -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET             = 7224, -- You can't fish here.
-        THE_MACHINE_SEEMS_TO_BE_WORKING    = 7384, -- The machine seems to be working, but you cannot discern its purpose.
-        SOMETHING_FALLS_OUT_OF_THE_MACHINE = 7387, -- Something falls out of the machine!
-        YOU_CANT_CARRY_ANY_MORE_ITEMS      = 7390, -- There seems to be more left in the machine, but you can't carry any more items.
-        MINING_IS_POSSIBLE_HERE            = 7411, -- Mining is possible here if you have <item>.
-        CHEST_UNLOCKED                     = 7426, -- You unlock the chest!
-        HOMEPOINT_SET                      = 7473, -- Home point set!
+        CONQUEST_BASE                      = 7067, -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET             = 7226, -- You can't fish here.
+        THE_MACHINE_SEEMS_TO_BE_WORKING    = 7386, -- The machine seems to be working, but you cannot discern its purpose.
+        SOMETHING_FALLS_OUT_OF_THE_MACHINE = 7389, -- Something falls out of the machine!
+        YOU_CANT_CARRY_ANY_MORE_ITEMS      = 7392, -- There seems to be more left in the machine, but you can't carry any more items.
+        MINING_IS_POSSIBLE_HERE            = 7413, -- Mining is possible here if you have <item>.
+        CHEST_UNLOCKED                     = 7428, -- You unlock the chest!
+        HOMEPOINT_SET                      = 7475, -- Home point set!
     },
     mob =
     {

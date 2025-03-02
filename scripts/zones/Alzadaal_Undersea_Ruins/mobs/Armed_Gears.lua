@@ -8,7 +8,7 @@
 mixins =
 {
     require('scripts/mixins/job_special'),
-    require('scripts/mixins/families/gears')
+    require('scripts/mixins/families/gear')
 }
 -----------------------------------
 ---@type TMobEntity

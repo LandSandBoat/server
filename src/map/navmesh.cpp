@@ -35,11 +35,58 @@
 #include <set>
 #include <vector>
 
-constexpr int8  CNavMesh::ERROR_NEARESTPOLY;
-constexpr float smallPolyPickExt[3]  = { 0.5f, 1.0f, 0.5f };
-constexpr float polyPickExt[3]       = { 5.0f, 10.0f, 5.0f };
-constexpr float skinnyPolyPickExt[3] = { 0.01f, 10.0f, 0.01f };
-constexpr float verticalLimit        = 5.0f;
+namespace
+{
+    static const int8 ERROR_NEARESTPOLY  = -2;
+    static const int  NAVMESHSET_MAGIC   = 'M' << 24 | 'S' << 16 | 'E' << 8 | 'T'; // 'MSET'
+    static const int  NAVMESHSET_VERSION = 1;
+
+    // Flags are defined in a "Sample.h" file in the RecastDemo project of recastnavigation.
+    enum SamplePolyFlags
+    {
+        SAMPLE_POLYFLAGS_WALK     = 0x01,   // Ability to walk (ground, grass, road)
+        SAMPLE_POLYFLAGS_SWIM     = 0x02,   // Ability to swim (water).
+        SAMPLE_POLYFLAGS_DOOR     = 0x04,   // Ability to move through doors.
+        SAMPLE_POLYFLAGS_JUMP     = 0x08,   // Ability to jump.
+        SAMPLE_POLYFLAGS_DISABLED = 0x10,   // Disabled polygon
+        SAMPLE_POLYFLAGS_ALL      = 0xFFFF, // All abilities.
+    };
+
+    // If a flag is defined in both, then exclude will take priority, and it will be excluded.
+    // Therefore we can just include all and exclude the ones we don't want.
+    constexpr unsigned short INCLUDE_FLAGS = SamplePolyFlags::SAMPLE_POLYFLAGS_ALL;
+    constexpr unsigned short EXCLUDE_FLAGS = SamplePolyFlags::SAMPLE_POLYFLAGS_DISABLED;
+
+    // These constants define how large the result buffers for detour are.
+    // Larger buffers will allow for longer and higher quality paths to be
+    // found, but will take longer to calculate. Since we use detour in a
+    // blocking manner, we want to keep these values as low as possible
+    // while balancing the need for quality paths.
+    static const size_t MAX_NAV_QUERY_NODES = 2048;
+    static const size_t MAX_NAV_POLYS       = 256;
+    static const size_t MAX_HIT_PATH_SIZE   = 20;
+    static const size_t MAX_QUERY_POLYS     = 16;
+
+    constexpr float smallPolyPickExt[3]  = { 0.5f, 1.0f, 0.5f };
+    constexpr float polyPickExt[3]       = { 5.0f, 10.0f, 5.0f };
+    constexpr float skinnyPolyPickExt[3] = { 0.01f, 10.0f, 0.01f };
+    constexpr float largePolyPickExt[3]  = { 30.0f, 60.0f, 30.0f };
+    constexpr float verticalLimit        = 5.0f;
+
+    struct NavMeshSetHeader
+    {
+        int             magic;
+        int             version;
+        int             numTiles;
+        dtNavMeshParams params;
+    };
+
+    struct NavMeshTileHeader
+    {
+        dtTileRef tileRef;
+        int       dataSize;
+    };
+} // namespace
 
 void CNavMesh::ToFFXIPos(const position_t* pos, float* out)
 {
@@ -101,20 +148,18 @@ CNavMesh::CNavMesh(CNavMesh* other)
 : m_zoneID(other->m_zoneID)
 , m_navMesh(other->m_navMesh)
 {
-    std::memset(&m_hitPath, 0, sizeof(m_hitPath));
-
-    m_hit.path    = m_hitPath;
-    m_hit.maxPath = 20;
+    m_hitPath.resize(MAX_HIT_PATH_SIZE);
+    m_hit.path    = m_hitPath.data();
+    m_hit.maxPath = MAX_HIT_PATH_SIZE;
 }
 
 CNavMesh::CNavMesh(uint16 zoneID)
 : m_zoneID(zoneID)
 , m_navMesh(nullptr)
 {
-    std::memset(&m_hitPath, 0, sizeof(m_hitPath));
-
-    m_hit.path    = m_hitPath;
-    m_hit.maxPath = 20;
+    m_hitPath.resize(MAX_HIT_PATH_SIZE);
+    m_hit.path    = m_hitPath.data();
+    m_hit.maxPath = MAX_HIT_PATH_SIZE;
 }
 
 CNavMesh::~CNavMesh()
@@ -184,7 +229,7 @@ bool CNavMesh::load(std::string const& filename)
     }
 
     // init detour nav mesh path finder
-    status = m_navMeshQuery.init(m_navMesh, MAX_NAV_POLYS);
+    status = m_navMeshQuery.init(m_navMesh, MAX_NAV_QUERY_NODES);
 
     if (dtStatusFailed(status))
     {
@@ -227,8 +272,8 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
     CNavMesh::ToDetourPos(&end, epos);
 
     dtQueryFilter filter;
-    filter.setIncludeFlags(0xffff);
-    filter.setExcludeFlags(0);
+    filter.setIncludeFlags(INCLUDE_FLAGS);
+    filter.setExcludeFlags(EXCLUDE_FLAGS);
 
     dtPolyRef startRef = 0;
     dtPolyRef endRef   = 0;
@@ -327,8 +372,8 @@ std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& star
     float snearest[3];
 
     dtQueryFilter filter;
-    filter.setIncludeFlags(0xffff);
-    filter.setExcludeFlags(0);
+    filter.setIncludeFlags(INCLUDE_FLAGS);
+    filter.setExcludeFlags(EXCLUDE_FLAGS);
 
     dtPolyRef startRef  = 0;
     dtPolyRef randomRef = 0;
@@ -337,14 +382,14 @@ std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& star
 
     if (dtStatusFailed(status))
     {
-        ShowError("CNavMesh::findRandomPath start point invalid (%f, %f, %f) (%u)", spos[0], spos[1], spos[2], m_zoneID);
+        ShowError("CNavMesh::findRandomPosition start point invalid (%f, %f, %f) (%u)", spos[0], spos[1], spos[2], m_zoneID);
         outputError(status);
         return std::make_pair(ERROR_NEARESTPOLY, position_t{});
     }
 
     if (!m_navMesh->isValidPolyRef(startRef))
     {
-        DebugNavmesh("CNavMesh::findRandomPath startRef is invalid (%f, %f, %f) (%u)", start.x, start.y, start.z, m_zoneID);
+        DebugNavmesh("CNavMesh::findRandomPosition startRef is invalid (%f, %f, %f) (%u)", start.x, start.y, start.z, m_zoneID);
         return std::make_pair(ERROR_NEARESTPOLY, position_t{});
     }
 
@@ -353,14 +398,14 @@ std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& star
         startRef, spos, maxRadius, &filter,
         []() -> float
         {
-            return xirand::GetRandomNumber(1.f);
+            return xirand::GetRandomNumber(1.0f);
         },
         &randomRef, randomPt);
     // clang-format on
 
     if (dtStatusFailed(status))
     {
-        ShowError("CNavMesh::findRandomPath Error (%u)", m_zoneID);
+        ShowError("CNavMesh::findRandomPosition Error (%u)", m_zoneID);
         outputError(status);
         return std::make_pair(ERROR_NEARESTPOLY, position_t{});
     }
@@ -396,8 +441,8 @@ bool CNavMesh::validPosition(const position_t& position)
     float snearest[3];
 
     dtQueryFilter filter;
-    filter.setIncludeFlags(0xffff);
-    filter.setExcludeFlags(0);
+    filter.setIncludeFlags(INCLUDE_FLAGS);
+    filter.setExcludeFlags(EXCLUDE_FLAGS);
 
     dtPolyRef startRef = 0;
 
@@ -423,18 +468,13 @@ bool CNavMesh::findClosestValidPoint(const position_t& position, float* validPoi
     float spos[3];
     CNavMesh::ToDetourPos(&position, spos);
 
-    float closestPolyPickExt[3];
-    closestPolyPickExt[0] = 30;
-    closestPolyPickExt[1] = 60;
-    closestPolyPickExt[2] = 30;
-
     dtQueryFilter filter;
-    filter.setIncludeFlags(0xffff);
-    filter.setExcludeFlags(0);
+    filter.setIncludeFlags(INCLUDE_FLAGS);
+    filter.setExcludeFlags(EXCLUDE_FLAGS);
 
     dtPolyRef startRef = 0;
 
-    dtStatus status = m_navMeshQuery.findNearestPoly(spos, closestPolyPickExt, &filter, &startRef, validPoint);
+    dtStatus status = m_navMeshQuery.findNearestPoly(spos, largePolyPickExt, &filter, &startRef, validPoint);
 
     if (dtStatusFailed(status))
     {
@@ -457,31 +497,26 @@ bool CNavMesh::findFurthestValidPoint(const position_t& startPosition, const pos
     float spos[3];
     CNavMesh::ToDetourPos(&startPosition, spos);
 
-    float furthestPolyPickExt[3];
-    furthestPolyPickExt[0] = 30;
-    furthestPolyPickExt[1] = 60;
-    furthestPolyPickExt[2] = 30;
-
     dtQueryFilter filter;
-    filter.setIncludeFlags(0xffff);
-    filter.setExcludeFlags(0);
+    filter.setIncludeFlags(INCLUDE_FLAGS);
+    filter.setExcludeFlags(EXCLUDE_FLAGS);
 
     dtPolyRef startRef = 0;
     float     validStartPoint[3];
 
-    dtStatus status = m_navMeshQuery.findNearestPoly(spos, furthestPolyPickExt, &filter, &startRef, validStartPoint);
+    dtStatus status = m_navMeshQuery.findNearestPoly(spos, largePolyPickExt, &filter, &startRef, validStartPoint);
     if (dtStatusFailed(status))
     {
         return false;
     }
 
-    dtPolyRef visited[16];
+    dtPolyRef visited[MAX_QUERY_POLYS];
     int       visitedCount = 0;
 
     float targetPoint[3];
     CNavMesh::ToDetourPos(&endPosition, targetPoint);
 
-    status = m_navMeshQuery.moveAlongSurface(startRef, validStartPoint, targetPoint, &filter, validEndPoint, visited, &visitedCount, 16);
+    status = m_navMeshQuery.moveAlongSurface(startRef, validStartPoint, targetPoint, &filter, validEndPoint, visited, &visitedCount, MAX_QUERY_POLYS);
 
     if (dtStatusFailed(status))
     {
@@ -507,8 +542,8 @@ void CNavMesh::snapToValidPosition(position_t& position)
     float snearest[3];
 
     dtQueryFilter filter;
-    filter.setIncludeFlags(0xffff);
-    filter.setExcludeFlags(0);
+    filter.setIncludeFlags(INCLUDE_FLAGS);
+    filter.setExcludeFlags(EXCLUDE_FLAGS);
 
     dtPolyRef startRef = 0;
 
@@ -549,9 +584,9 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
     {
         // Far away, but not too far away.
         // We're going to try and disambiguate any vertical floors.
-        dtPolyRef polys[16];
+        dtPolyRef polys[MAX_QUERY_POLYS];
         int       polyCount = -1;
-        dtStatus  status    = m_navMeshQuery.queryPolygons(epos, skinnyPolyPickExt, &filter, polys, &polyCount, 16);
+        dtStatus  status    = m_navMeshQuery.queryPolygons(epos, skinnyPolyPickExt, &filter, polys, &polyCount, MAX_QUERY_POLYS);
 
         if (dtStatusFailed(status) || polyCount <= 0)
         {
@@ -616,8 +651,8 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end)
     CNavMesh::ToDetourPos(&end, epos);
 
     dtQueryFilter filter;
-    filter.setIncludeFlags(0xffff);
-    filter.setExcludeFlags(0);
+    filter.setIncludeFlags(INCLUDE_FLAGS);
+    filter.setExcludeFlags(EXCLUDE_FLAGS);
 
     // Since detour's raycasting ignores the y component of your search, it is possible to
     // incorrectly raycast between multiple floors. This leads to mobs being able to aggro

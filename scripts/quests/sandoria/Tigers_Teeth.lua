@@ -5,7 +5,7 @@
 -- Taukila : !pos -140 -6 -8 230
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.TIGERS_TEETH)
 
 quest.reward =
 {

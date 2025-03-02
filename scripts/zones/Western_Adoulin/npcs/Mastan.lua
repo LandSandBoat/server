@@ -5,8 +5,6 @@
 --                        'The Curious Case of Melvien'
 -- !pos -9 0 67 256
 -----------------------------------
-local ID = zones[xi.zone.WESTERN_ADOULIN]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -27,12 +25,9 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 70 then
-        -- Progresses Quest: 'Order Up'
         player:setCharVar('Order_Up_NPCs', utils.mask.setBit(player:getCharVar('Order_Up_NPCs'), 11, true))
     elseif csid == 184 and option == 1 then
-        -- Progresses Quest: 'The Curious Case of Melvien'
-        player:addKeyItem(xi.ki.MELVIENS_DEATH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MELVIENS_DEATH)
+        npcUtil.giveKeyItem(player, xi.ki.MELVIENS_DEATH)
     end
 end
 

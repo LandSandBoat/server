@@ -62,13 +62,6 @@ public:
     std::array<uint8, 8> m_ElementMax{};
     std::array<uint8, 8> m_ElementEquip{};
 
-    void setFrame(AUTOFRAMETYPE frame);
-    void setHead(AUTOHEADTYPE head);
-    void setAttachment(uint8 slot, uint8 id);
-
-    void setElementMax(uint8 element, uint8 max);
-    void addElementCapacity(uint8 element, int8 value);
-
     AUTOFRAMETYPE getFrame() const;
     AUTOHEADTYPE  getHead() const;
     uint8         getAttachment(uint8 slot);
@@ -76,9 +69,6 @@ public:
 
     uint8 getElementMax(uint8 element);
     uint8 getElementCapacity(uint8 element);
-
-    uint8 getElementalCapacityBonus();
-    void  setElementalCapacityBonus(uint8 bonus);
 
     void  burdenTick();
     auto  getBurden() -> std::array<uint8, 8>;
@@ -99,7 +89,6 @@ public:
 
 private:
     std::array<uint8, 8> m_Burden{};
-    uint8                m_elementalCapacityBonus = 0;
 };
 
 #endif

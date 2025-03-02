@@ -19,87 +19,131 @@
 ===========================================================================
 */
 
-#include "common/logging.h"
-
 #include "trigger_area.h"
+
+#include "common/logging.h"
 
 #include <cmath>
 
 // Initialize the trigger area to a unique number within the zone.
 // When trying to set 0, issue a warning.
-CTriggerArea::CTriggerArea(uint32 triggerAreaID, bool isCircle)
-: m_TriggerAreaID(triggerAreaID)
-, m_Count(0)
-, circle(isCircle)
+ITriggerArea::ITriggerArea(uint32 triggerAreaID)
+: m_triggerAreaID(triggerAreaID)
+, m_count(0)
 {
-    x1 = 0.f;
-    x2 = 0.f;
-    y1 = 0.f;
-    y2 = 0.f;
-    z1 = 0.f;
-    z2 = 0.f;
-
-    if (m_TriggerAreaID == 0)
+    if (m_triggerAreaID == 0)
     {
         ShowWarning("TriggerArea ID cannot be zero");
     }
 }
 
-uint32 CTriggerArea::GetTriggerAreaID() const
+uint32 ITriggerArea::getTriggerAreaID() const
 {
-    return m_TriggerAreaID;
+    return m_triggerAreaID;
 }
 
-int16 CTriggerArea::GetCount() const
+int16 ITriggerArea::getCount() const
 {
-    return m_Count;
+    return m_count;
 }
 
-int16 CTriggerArea::AddCount(int16 count)
+int16 ITriggerArea::addCount(int16 count)
 {
-    m_Count += count;
-    return m_Count;
+    m_count += count;
+    return m_count;
 }
 
-int16 CTriggerArea::DelCount(int16 count)
+int16 ITriggerArea::delCount(int16 count)
 {
-    m_Count -= count;
-    return m_Count;
+    m_count -= count;
+    return m_count;
 }
 
-// set upper left corner of area
-void CTriggerArea::SetULCorner(float x, float y, float z)
+//
+// CCuboidTriggerArea
+//
+
+CCuboidTriggerArea::CCuboidTriggerArea(uint32 triggerAreaID, float xMin, float yMin, float zMin, float xMax, float yMax, float zMax)
+: ITriggerArea(triggerAreaID)
+, m_xMin(xMin)
+, m_yMin(yMin)
+, m_zMin(zMin)
+, m_xMax(xMax)
+, m_yMax(yMax)
+, m_zMax(zMax)
 {
-    x1 = x;
-    y1 = y;
-    z1 = z;
 }
 
-// set lower right corner of area
-void CTriggerArea::SetLRCorner(float x, float y, float z)
+bool CCuboidTriggerArea::isPointInside(float x, float y, float z) const
 {
-    x2 = x;
-    y2 = y;
-    z2 = z;
+    return m_xMin <= x && m_yMin <= y && m_zMin <= z && m_xMax >= x && m_yMax >= y && m_zMax >= z;
 }
 
-// check whether the position is inside the area
-bool CTriggerArea::isPointInside(position_t pos) const
+bool CCuboidTriggerArea::isPointInside(position_t pos) const
 {
-    if (circle)
-    {
-        // Get the distance between their X coordinate and ours.
-        float dX = pos.x - x1;
+    return isPointInside(pos.x, pos.y, pos.z);
+}
 
-        // Get the distance between their Z coordinate and ours.
-        float dZ = pos.z - z1;
+//
+// CCylindricalTriggerArea
+//
 
-        float distance = std::sqrt((dX * dX) + (dZ * dZ));
+CCylindricalTriggerArea::CCylindricalTriggerArea(uint32 triggerAreaID, float xPos, float zPos, float radius)
+: ITriggerArea(triggerAreaID)
+, m_xPos(xPos)
+, m_zPos(zPos)
+, m_radius(radius)
+{
+}
 
-        // Check if were within range of the target.
-        // In this case of a circle, 'y' is the radius.
-        return distance <= y1;
-    }
+bool CCylindricalTriggerArea::isPointInside(float x, float y, float z) const
+{
+    // The y component is "infinite" for cylindrical checks, so we don't
+    // need to do anything with it.
+    std::ignore = y;
 
-    return (x1 <= pos.x && y1 <= pos.y && z1 <= pos.z && x2 >= pos.x && y2 >= pos.y && z2 >= pos.z);
+    // Get the distance between their X coordinate and ours.
+    const float dX = x - m_xPos;
+
+    // Get the distance between their Z coordinate and ours.
+    const float dZ = z - m_zPos;
+
+    const float distanceSquared = (dX * dX) + (dZ * dZ);
+
+    // Check if were within range of the target.
+    return distanceSquared <= square(m_radius);
+}
+
+bool CCylindricalTriggerArea::isPointInside(position_t pos) const
+{
+    return isPointInside(pos.x, pos.y, pos.z);
+}
+
+//
+// CSphericalTriggerArea
+//
+
+CSphericalTriggerArea::CSphericalTriggerArea(uint32 triggerAreaID, float xPos, float yPos, float zPos, float radius)
+: ITriggerArea(triggerAreaID)
+, m_xPos(xPos)
+, m_yPos(yPos)
+, m_zPos(zPos)
+, m_radius(radius)
+{
+}
+
+bool CSphericalTriggerArea::isPointInside(float x, float y, float z) const
+{
+    const float dX = x - m_xPos;
+    const float dY = y - m_yPos;
+    const float dZ = z - m_zPos;
+
+    const float distanceSquared = (dX * dX) + (dY * dY) + (dZ * dZ);
+
+    return distanceSquared <= square(m_radius);
+}
+
+bool CSphericalTriggerArea::isPointInside(position_t pos) const
+{
+    return isPointInside(pos.x, pos.y, pos.z);
 }

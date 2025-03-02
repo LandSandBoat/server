@@ -65,8 +65,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 139 and option == 1 then
-        player:addKeyItem(xi.ki.BATTLE_RATIONS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BATTLE_RATIONS)
+        npcUtil.giveKeyItem(player, xi.ki.BATTLE_RATIONS)
         player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
         player:setCharVar('BLUE_R_LETTER_USED', 1)
         player:delKeyItem(xi.ki.BLUE_RECOMMENDATION_LETTER)
@@ -82,10 +81,9 @@ entity.onEventFinish = function(player, csid, option, npc)
                 player:setCampaignAllegiance(2)
                 player:setCharVar('BLUE_R_LETTER_USED', 0)
                 player:addTitle(xi.title.FOURTH_DIVISION_SOLDIER)
-                player:addKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE)
                 player:addItem(xi.item.SPRINTERS_SHOES)
                 player:completeQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRONZE_RIBBON_OF_SERVICE)
+                npcUtil.giveKeyItem(player, xi.ki.BRONZE_RIBBON_OF_SERVICE)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SPRINTERS_SHOES)
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SPRINTERS_SHOES)

@@ -23,7 +23,7 @@
 
 #include <cstring>
 
-#include "packets/char_update.h"
+#include "packets/char_status.h"
 #include "packets/chat_message.h"
 #include "packets/inventory_assign.h"
 #include "packets/inventory_finish.h"
@@ -33,11 +33,11 @@
 #include "packets/message_system.h"
 
 #include "conquest_system.h"
+#include "ipc_client.h"
 #include "item_container.h"
 #include "items/item_linkshell.h"
 #include "linkshell.h"
 #include "map.h"
-#include "message.h"
 #include "packets/linkshell_message.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -84,20 +84,24 @@ void CLinkshell::setName(const std::string& name)
 
 void CLinkshell::setMessage(const std::string& message, const std::string& poster)
 {
+    const auto postTime = static_cast<uint32>(time(nullptr));
+
     const auto query = "UPDATE linkshells SET poster = ?, message = ?, messagetime = ? WHERE linkshellid = ?";
-    if (!db::preparedStmt(query, poster, message, static_cast<uint32>(time(nullptr)), m_id))
+    if (!db::preparedStmt(query, poster, message, postTime, m_id))
     {
         ShowError("Failed to update linkshell message for linkshell %u", m_id);
         return;
     }
 
-    int8 packetData[8]{};
-    ref<uint32>(packetData, 0) = m_id;
-    ref<uint32>(packetData, 4) = 0;
     if (message.size() != 0)
     {
-        message::send(MSG_CHAT_LINKSHELL, packetData, sizeof(packetData),
-                      std::make_unique<CLinkshellMessagePacket>(poster, message, m_name, std::numeric_limits<uint32>::min(), true));
+        message::send(ipc::LinkshellSetMessage{
+            .linkshellId   = m_id,
+            .linkshellName = m_name,
+            .poster        = poster,
+            .message       = message,
+            .postTime      = 0, // Indicator to look up the LS message
+        });
     }
 }
 
@@ -220,7 +224,7 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, uint8 toSack)
                 charutils::SaveCharEquip(PMember);
 
                 PMember->pushPacket<CInventoryFinishPacket>();
-                PMember->pushPacket<CCharUpdatePacket>(PMember);
+                PMember->pushPacket<CCharStatusPacket>(PMember);
                 return;
             }
         }
@@ -293,7 +297,7 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 kickerR
             charutils::SaveCharEquip(PMember);
 
             PMember->pushPacket<CInventoryFinishPacket>();
-            PMember->pushPacket<CCharUpdatePacket>(PMember);
+            PMember->pushPacket<CCharStatusPacket>(PMember);
             if (breakLinkshell)
             {
                 PMember->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellNoLongerExists);
@@ -346,7 +350,7 @@ void CLinkshell::PushPacket(uint32 senderID, const std::unique_ptr<CBasicPacket>
     }
 }
 
-void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, bool ls1)
+void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, LinkshellSlot slot)
 {
     const auto rset = db::preparedStmt("SELECT poster, message, messagetime FROM linkshells WHERE linkshellid = ?", m_id);
     if (rset && rset->rowsCount() && rset->next())
@@ -356,7 +360,7 @@ void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, bool ls1)
         const auto messageTime = rset->getOrDefault<uint32>("messagetime", 0);
         if (!message.empty())
         {
-            PChar->pushPacket<CLinkshellMessagePacket>(poster, message, m_name, messageTime, ls1);
+            PChar->pushPacket<CLinkshellMessagePacket>(poster, message, m_name, messageTime, slot);
         }
     }
 }
@@ -460,16 +464,16 @@ namespace linkshell
 
     bool IsValidLinkshellName(const std::string& name)
     {
-        auto ret = _sql->Query("SELECT linkshellid FROM linkshells WHERE name = '%s' AND broken != 1", name);
-        return ret == SQL_ERROR || _sql->NumRows() == 0;
+        const auto rset = db::preparedStmt("SELECT linkshellid FROM linkshells WHERE name = ? AND broken != 1", name);
+        return !rset || rset->rowsCount() == 0;
     }
 
     uint32 RegisterNewLinkshell(const std::string& name, uint16 color)
     {
         if (IsValidLinkshellName(name))
         {
-            if (_sql->Query("INSERT INTO linkshells (name, color, postrights) VALUES ('%s', %u, %u)", name, color,
-                            static_cast<uint8>(LSTYPE_PEARLSACK)) != SQL_ERROR)
+            if (_sql->Query("INSERT INTO linkshells (name, color, postrights) VALUES ('%s', %u, %u)",
+                            name, color, static_cast<uint8>(LSTYPE_PEARLSACK)) != SQL_ERROR)
             {
                 return LoadLinkshell((uint32)_sql->LastInsertId())->getID();
             }

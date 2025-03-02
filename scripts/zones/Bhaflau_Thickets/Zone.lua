@@ -1,16 +1,12 @@
 -----------------------------------
 -- Zone: Bhaflau_Thickets (52)
 -----------------------------------
-local ID = zones[xi.zone.BHAFLAU_THICKETS]
------------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.HARVESTMAN)
-    GetMobByID(ID.mob.HARVESTMAN):setRespawnTime(math.random(900, 10800))
-
     xi.helm.initZone(zone, xi.helmType.HARVESTING)
+    xi.darkRider.addHoofprints(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -36,7 +32,12 @@ zoneObject.afterZoneIn = function(player)
     player:entityVisualPacket('2pb1')
 end
 
-zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+zoneObject.onGameHour = function(zone)
+    xi.darkRider.onGameHour(zone)
+
+    if VanadielHour() == 0 then
+        xi.darkRider.addHoofprints(zone)
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

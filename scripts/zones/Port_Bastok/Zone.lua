@@ -5,8 +5,8 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -112, -3, -17, -96, 3, -3)     -- event COP
-    zone:registerTriggerArea(2, 53.5, 5, -165.3, 66.5, 6, -72) -- drawbridge area
+    zone:registerCuboidTriggerArea(1, -112, -3, -17, -96, 3, -3)     -- event COP
+    zone:registerCuboidTriggerArea(2, 53.5, 5, -165.3, 66.5, 6, -72) -- drawbridge area
     xi.conquest.toggleRegionalNPCs(zone)
 end
 

@@ -62,6 +62,7 @@ namespace mobutils
     void SetupDungeonMob(CMobEntity* PMob);
     void SetupEventMob(CMobEntity* PMob);
     void SetupNMMob(CMobEntity* PMob);
+    void SetupDungeonInstanceMob(CMobEntity* PMob);
     void SetupPetSkills(CMobEntity* PMob);
 
     uint8 JobSkillRankToBaseEvaRank(JOBTYPE job);

@@ -4,8 +4,6 @@
 -- Type: ENM
 -- !pos -144.711 6.246 -250.309 7
 -----------------------------------
-local ID = zones[xi.zone.ATTOHWA_CHASM]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -44,17 +42,10 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 12 then
-        player:addKeyItem(xi.ki.MIASMA_FILTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MIASMA_FILTER)
+        npcUtil.giveKeyItem(player, xi.ki.MIASMA_FILTER)
         player:setCharVar('[ENM]MiasmaFilter', os.time() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     elseif csid == 13 then
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.FLAXEN_POUCH)
-            return
-        else
-            player:addItem(xi.item.FLAXEN_POUCH)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.FLAXEN_POUCH)
-        end
+        npcUtil.giveItem(player, xi.item.FLAXEN_POUCH)
     end
 end
 

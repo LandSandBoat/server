@@ -35,7 +35,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         cs = 29
     elseif
         prevZone == xi.zone.BEAUCEDINE_GLACIER and
-        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION) == xi.questStatus.QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJES_DECISION) == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('pieujesDecisionCS') == 0
     then
         cs = 19 -- WHM AF

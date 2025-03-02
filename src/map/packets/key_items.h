@@ -28,7 +28,7 @@
 
 // There is no relationship between table numbers and key item types
 
-enum KEYS_TABLE
+enum KEYS_TABLE : uint8
 {
     KEYS_TABLE_0,
     KEYS_TABLE_1,
@@ -36,7 +36,7 @@ enum KEYS_TABLE
     KEYS_TABLE_3,
     KEYS_TABLE_4,
     KEYS_TABLE_5,
-    KEYS_TABLE_6
+    KEYS_TABLE_6,
 };
 #define MAX_KEYS_TABLE 7
 DECLARE_FORMAT_AS_UNDERLYING(KEYS_TABLE);

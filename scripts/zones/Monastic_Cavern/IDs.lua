@@ -17,14 +17,14 @@ zones[xi.zone.MONASTIC_CAVERN] =
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         GEOMAGNETRON_ATTUNED          = 7012, -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7065, -- Tallying conquest results...
-        ALTAR                         = 7280, -- This appears to be an altar.
-        THE_MAGICITE_GLOWS_OMINOUSLY  = 7283, -- The magicite glows ominously.
-        CHEST_UNLOCKED                = 7302, -- You unlock the chest!
-        ORCISH_OVERLORD_ENGAGE        = 7314, -- Intruders? Get outs here! We gots us some adventurers!
-        ORCISH_OVERLORD_DEATH         = 7315, -- Gahahahaha... You fell for our trick. I'm not the big boss. He don't need to be troubled by runty little rarabs like you.
-        ORC_KING_ENGAGE               = 7316, -- Ungh? Who are you?  So, you've come to kill big boss Bakgodek? I'll crush your scrawny bones myself!
-        ORC_KING_DEATH                = 7317, -- Unghh... Foolish children of Altana. Defeating me won't change anything. There will be others from the north...
+        CONQUEST_BASE                 = 7067, -- Tallying conquest results...
+        ALTAR                         = 7282, -- This appears to be an altar.
+        THE_MAGICITE_GLOWS_OMINOUSLY  = 7285, -- The magicite glows ominously.
+        CHEST_UNLOCKED                = 7304, -- You unlock the chest!
+        ORCISH_OVERLORD_ENGAGE        = 7316, -- Intruders? Get outs here! We gots us some adventurers!
+        ORCISH_OVERLORD_DEATH         = 7317, -- Gahahahaha... You fell for our trick. I'm not the big boss. He don't need to be troubled by runty little rarabs like you.
+        ORC_KING_ENGAGE               = 7318, -- Ungh? Who are you?  So, you've come to kill big boss Bakgodek? I'll crush your scrawny bones myself!
+        ORC_KING_DEATH                = 7319, -- Unghh... Foolish children of Altana. Defeating me won't change anything. There will be others from the north...
     },
     mob =
     {

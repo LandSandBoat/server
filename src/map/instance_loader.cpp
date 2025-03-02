@@ -42,7 +42,7 @@
 #include "utils/mobutils.h"
 #include "utils/zoneutils.h"
 
-CInstanceLoader::CInstanceLoader(uint16 instanceid, CCharEntity* PRequester)
+CInstanceLoader::CInstanceLoader(uint32 instanceid, CCharEntity* PRequester)
 {
     TracyZoneScoped;
 
@@ -68,6 +68,7 @@ CInstanceLoader::~CInstanceLoader()
 CInstance* CInstanceLoader::LoadInstance()
 {
     TracyZoneScoped;
+
     const char* Query = "SELECT mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
             respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
             modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
@@ -151,10 +152,10 @@ CInstance* CInstanceLoader::LoadInstance()
             PMob->attRank = (uint8)_sql->GetIntData(35);
             PMob->accRank = (uint8)_sql->GetIntData(36);
 
-            PMob->setModifier(Mod::SLASH_SDT, (uint16)(_sql->GetFloatData(37) * 1000));
-            PMob->setModifier(Mod::PIERCE_SDT, (uint16)(_sql->GetFloatData(38) * 1000));
-            PMob->setModifier(Mod::HTH_SDT, (uint16)(_sql->GetFloatData(39) * 1000));
-            PMob->setModifier(Mod::IMPACT_SDT, (uint16)(_sql->GetFloatData(40) * 1000));
+            PMob->setModifier(Mod::SLASH_SDT, (int16)_sql->GetIntData(37));
+            PMob->setModifier(Mod::PIERCE_SDT, (int16)_sql->GetIntData(38));
+            PMob->setModifier(Mod::HTH_SDT, (int16)_sql->GetIntData(39));
+            PMob->setModifier(Mod::IMPACT_SDT, (int16)_sql->GetIntData(40));
 
             PMob->setModifier(Mod::UDMGMAGIC, (int16)_sql->GetIntData(41)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 

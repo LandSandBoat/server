@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: To Cure a Cough
 -- !pos -114 -6 102 230
 -----------------------------------
-local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -33,8 +31,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addTitle(xi.title.A_MOSS_KIND_PERSON)
         player:setCharVar('toCureaCough', 0)
         player:delKeyItem(xi.ki.COUGH_MEDICINE)
-        player:addKeyItem(xi.ki.SCROLL_OF_TREASURE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCROLL_OF_TREASURE)
+        npcUtil.giveKeyItem(player, xi.ki.SCROLL_OF_TREASURE)
         player:addFame(xi.fameArea.SANDORIA, 30)
         player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
     end

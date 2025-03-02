@@ -29,7 +29,7 @@
 enum INVITETYPE
 {
     INVITE_PARTY    = 0,
-    INVITE_ALLIANCE = 5
+    INVITE_ALLIANCE = 5,
 };
 
 class CCharEntity;
@@ -37,7 +37,7 @@ class CCharEntity;
 class CPartyInvitePacket : public CBasicPacket
 {
 public:
-    CPartyInvitePacket(uint32 id, uint16 targid, CCharEntity* PInviter, INVITETYPE InviteType);
+    CPartyInvitePacket(uint32 id, uint16 targid, const std::string& inviterName, INVITETYPE InviteType);
 };
 
 #endif

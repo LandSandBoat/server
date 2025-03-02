@@ -195,6 +195,7 @@ xi.msg.basic =
     CANNOT_ON_THAT_TARG    = 155, -- You cannot perform that action on the specified target.
     REQUIRES_SHIELD        = 199, -- That action requires a shield.
     DISAPPEAR_NUM          = 231, -- <num> of <target>'s effects disappear!
+    DRAWN_IN               = 232, -- <target> is drawn in.
     MUG_FAIL               = 244, -- <user> fails to mug <target>.
     IS_EFFECT              = 277, -- "is <status>" - that's the entire message.
     EVADES                 = 282, -- <target> evades.

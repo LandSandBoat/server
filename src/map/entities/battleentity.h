@@ -66,11 +66,11 @@ enum class ECOSYSTEM : uint8
     UNCLASSIFIED   = 18,
     UNDEAD         = 19,
     VERMIN         = 20,
-    VORAGEAN       = 21
+    VORAGEAN       = 21,
 };
 DECLARE_FORMAT_AS_UNDERLYING(ECOSYSTEM);
 
-enum JOBTYPE
+enum JOBTYPE : uint8
 {
     JOB_NON = 0,
     JOB_WAR = 1,
@@ -100,7 +100,7 @@ enum JOBTYPE
 #define MAX_JOBTYPE 24
 DECLARE_FORMAT_AS_UNDERLYING(JOBTYPE);
 
-enum SKILLTYPE
+enum SKILLTYPE : uint8
 {
     SKILL_NONE         = 0,
     SKILL_HAND_TO_HAND = 1,
@@ -152,12 +152,12 @@ enum SKILLTYPE
     SKILL_COOKING      = 56,
     SKILL_SYNERGY      = 57,
     SKILL_RID          = 58,
-    SKILL_DIG          = 59
+    SKILL_DIG          = 59,
 };
 #define MAX_SKILLTYPE 64
 DECLARE_FORMAT_AS_UNDERLYING(SKILLTYPE);
 
-enum SUBSKILLTYPE
+enum SUBSKILLTYPE : uint8
 {
     SUBSKILL_XBO      = 0,
     SUBSKILL_GUN      = 1,
@@ -213,11 +213,11 @@ enum SUBSKILLTYPE
     SUBSKILL_RAPHIE     = 65,
     SUBSKILL_MAC        = 66,
     SUBSKILL_SILAS      = 67,
-    SUBSKILL_TOLOI      = 68
+    SUBSKILL_TOLOI      = 68,
 };
 DECLARE_FORMAT_AS_UNDERLYING(SUBSKILLTYPE);
 
-enum SLOTTYPE
+enum SLOTTYPE : uint8
 {
     SLOT_MAIN   = 0x00,
     SLOT_SUB    = 0x01,
@@ -241,14 +241,14 @@ enum SLOTTYPE
 #define MAX_SLOTTYPE 18
 DECLARE_FORMAT_AS_UNDERLYING(SLOTTYPE);
 
-enum class ATTACK_TYPE
+enum class ATTACK_TYPE : uint8
 {
     NONE     = 0,
     PHYSICAL = 1,
     MAGICAL  = 2,
     RANGED   = 3,
     SPECIAL  = 4,
-    BREATH   = 5
+    BREATH   = 5,
 };
 DECLARE_FORMAT_AS_UNDERLYING(ATTACK_TYPE);
 
@@ -267,7 +267,7 @@ enum class DAMAGE_TYPE : uint16
     LIGHTNING = 10,
     WATER     = 11,
     LIGHT     = 12,
-    DARK      = 13
+    DARK      = 13,
 };
 DECLARE_FORMAT_AS_UNDERLYING(DAMAGE_TYPE);
 
@@ -312,18 +312,18 @@ inline REACTION operator|=(REACTION& a, REACTION b)
     return a;
 }
 
-enum class SPECEFFECT
+enum class SPECEFFECT : uint8
 {
     NONE         = 0x00,
     BLOOD        = 0x02,
     HIT          = 0x10,
     RAISE        = 0x11,
     RECOIL       = 0x20,
-    CRITICAL_HIT = 0x22
+    CRITICAL_HIT = 0x22,
 };
 DECLARE_FORMAT_AS_UNDERLYING(SPECEFFECT);
 
-enum class MODIFIER
+enum class MODIFIER : uint8
 {
     NONE        = 0x00,
     COVER       = 0x01,
@@ -333,7 +333,7 @@ enum class MODIFIER
 };
 DECLARE_FORMAT_AS_UNDERLYING(MODIFIER);
 
-enum SUBEFFECT
+enum SUBEFFECT : uint8
 {
     // ATTACK
     SUBEFFECT_FIRE_DAMAGE      = 1,  // 110000     3
@@ -411,24 +411,24 @@ enum SUBEFFECT
 };
 DECLARE_FORMAT_AS_UNDERLYING(SUBEFFECT);
 
-enum TARGETTYPE
+enum TARGETTYPE : uint16
 {
-    TARGET_NONE                    = 0x00,
-    TARGET_SELF                    = 0x01,
-    TARGET_PLAYER_PARTY            = 0x02,
-    TARGET_ENEMY                   = 0x04,
-    TARGET_PLAYER_ALLIANCE         = 0x08,
-    TARGET_PLAYER                  = 0x10,
-    TARGET_PLAYER_DEAD             = 0x20,
-    TARGET_NPC                     = 0x40, // an npc is a mob that looks like an npc and fights on the side of the character
-    TARGET_PLAYER_PARTY_PIANISSIMO = 0x80,
-    TARGET_PET                     = 0x100,
-    TARGET_PLAYER_PARTY_ENTRUST    = 0x200,
-    TARGET_IGNORE_BATTLEID         = 0x400, // Can hit targets that do not have the same battle ID
+    TARGET_NONE                    = 0x0000,
+    TARGET_SELF                    = 0x0001,
+    TARGET_PLAYER_PARTY            = 0x0002,
+    TARGET_ENEMY                   = 0x0004,
+    TARGET_PLAYER_ALLIANCE         = 0x0008,
+    TARGET_PLAYER                  = 0x0010,
+    TARGET_PLAYER_DEAD             = 0x0020,
+    TARGET_NPC                     = 0x0040, // an npc is a mob that looks like an npc and fights on the side of the character
+    TARGET_PLAYER_PARTY_PIANISSIMO = 0x0080,
+    TARGET_PET                     = 0x0100,
+    TARGET_PLAYER_PARTY_ENTRUST    = 0x0200,
+    TARGET_IGNORE_BATTLEID         = 0x0400, // Can hit targets that do not have the same battle ID
 };
 DECLARE_FORMAT_AS_UNDERLYING(TARGETTYPE);
 
-enum SKILLCHAIN_ELEMENT
+enum SKILLCHAIN_ELEMENT : uint8
 {
     SC_NONE = 0, // Lv0 None
 

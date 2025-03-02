@@ -170,20 +170,23 @@ mission.sections =
 
     {
         check = function(player, currentMission, missionStatus, vars)
-            return player:hasCompletedMission(mission.areaId, mission.missionId)
+            return currentMission ~= mission.missionId
         end,
 
-        ['_0s8'] =
+        [xi.zone.SACRARIUM] =
         {
-            onTrigger = function(player, npc)
-                if player:getXPos() > 45 then
-                    if player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY) then
-                        player:startEvent(110)
+            ['_0s8'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getXPos() > 45 then
+                        if player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY) then
+                            player:startEvent(110)
+                        end
+                    else
+                        return mission:messageSpecial(sacrariumID.text.CANNOT_OPEN_SIDE)
                     end
-                else
-                    return mission:messageSpecial(sacrariumID.text.CANNOT_OPEN_SIDE)
-                end
-            end,
+                end,
+            },
         },
     },
 }

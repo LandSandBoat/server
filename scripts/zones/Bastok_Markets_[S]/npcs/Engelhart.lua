@@ -3,8 +3,6 @@
 --  NPC: Engelhart
 -- pos -79 -4 -125
 -----------------------------------
-local ID = zones[xi.zone.BASTOK_MARKETS_S]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -50,8 +48,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 118 then
         player:delKeyItem(xi.ki.XHIFHUT)
         player:completeQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR)
-        player:addKeyItem(xi.ki.WARNING_LETTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WARNING_LETTER)
+        npcUtil.giveKeyItem(player, xi.ki.WARNING_LETTER)
         npcUtil.giveCurrency(player, 'gil', 10000)
         player:setCharVar('BetterPartOfValProg', 0)
         player:needToZone(true)

@@ -167,8 +167,6 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
             player:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 8)
             player:setPos(unpack(xi.abyssea.exitPositions[zoneID]))
         end
-
-        player:setLocalVar('gameLogin', 0)
     end
 
     -- Abyssea starting quest should be flagged when expansion is active
@@ -237,6 +235,10 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
         -- Login Campaign rewards points once daily
         xi.events.loginCampaign.onGameIn(playerArg)
     end)
+
+    -- Enforce that gameLogin is always set to 0 once this method exits
+    -- This assists with ensuring Abyssea visitant status is handled properly on logins
+    player:setLocalVar('gameLogin', 0)
 end
 
 xi.player.onPlayerDeath = function(player)

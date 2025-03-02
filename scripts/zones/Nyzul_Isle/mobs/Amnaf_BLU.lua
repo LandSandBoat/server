@@ -54,10 +54,10 @@ entity.onMobEngage = function(mob, target)
     -- 4 gears spawn on Stage 1 of the Fight
     if form1Gears == 0 then
         mob:showText(mob, ID.text.FORMATION_GELINCIK)
-        SpawnMob(ID.mob[58].IMPERIAL_GEAR1, instance):updateEnmity(target)
-        SpawnMob(ID.mob[58].IMPERIAL_GEAR2, instance):updateEnmity(target)
-        SpawnMob(ID.mob[58].IMPERIAL_GEAR3, instance):updateEnmity(target)
-        SpawnMob(ID.mob[58].IMPERIAL_GEAR4, instance):updateEnmity(target)
+        SpawnMob(ID.mob.IMPERIAL_GEAR_OFFSET, instance):updateEnmity(target)
+        SpawnMob(ID.mob.IMPERIAL_GEAR_OFFSET + 1, instance):updateEnmity(target)
+        SpawnMob(ID.mob.IMPERIAL_GEAR_OFFSET + 2, instance):updateEnmity(target)
+        SpawnMob(ID.mob.IMPERIAL_GEAR_OFFSET + 3, instance):updateEnmity(target)
         mob:setLocalVar('Form1Gears', 1)
     end
 
@@ -70,10 +70,10 @@ entity.onMobEngage = function(mob, target)
 
         local gearList =
         {
-            ID.mob[58].IMPERIAL_GEAR1,
-            ID.mob[58].IMPERIAL_GEAR2,
-            ID.mob[58].IMPERIAL_GEAR3,
-            ID.mob[58].IMPERIAL_GEAR4,
+            ID.mob.IMPERIAL_GEAR_OFFSET,
+            ID.mob.IMPERIAL_GEAR_OFFSET + 1,
+            ID.mob.IMPERIAL_GEAR_OFFSET + 2,
+            ID.mob.IMPERIAL_GEAR_OFFSET + 3,
         }
 
         for _, gearId in ipairs(gearList) do

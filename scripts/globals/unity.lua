@@ -148,7 +148,7 @@ function xi.unity.onEventUpdate(player, csid, option, npc)
     local zoneId               = player:getZoneID()
     local ID                   = zones[zoneId]
     local accolades            = player:getCurrency('unity_accolades')
-    local weeklyAccoladesSpent = player:getCharVar('weekly_sparks_spent')
+    local weeklyAccoladesSpent = player:getCharVar('weekly_accolades_spent')
     local remainingLimit       = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - player:getCharVar('weekly_accolades_spent')
     local category             = bit.band(option, 0xF)
     local selection            = bit.band(bit.rshift(option, 5), 0xFF)

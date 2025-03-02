@@ -82,11 +82,9 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
         player:setCharVar('TrialByIce_date', 0)
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_ICE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_ICE)
+        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_ICE)
     elseif csid == 718 then
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_ICE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_ICE)
+        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_ICE)
     elseif csid == 709 then
         local item = 0
 

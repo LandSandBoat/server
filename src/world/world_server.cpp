@@ -23,70 +23,40 @@
 
 #include "common/application.h"
 #include "common/logging.h"
+
+#include "besieged_system.h"
+#include "campaign_system.h"
+#include "colonization_system.h"
+#include "conquest_system.h"
+#include "http_server.h"
+#include "ipc_server.h"
+#include "party_system.h"
 #include "time_server.h"
 
-int32 forward_queued_messages_to_handlers(time_point tick, CTaskMgr::CTask* PTask)
+int32 pump_queues(time_point tick, CTaskMgr::CTask* PTask)
 {
     TracyZoneScoped;
-    WorldServer* worldServer = std::any_cast<WorldServer*>(PTask->m_data);
 
-    while (std::optional<HandleableMessage> maybeMessage = pop_external_processing_message())
-    {
-        HandleableMessage message = *maybeMessage;
-        auto              subType = static_cast<REGIONALMSGTYPE>(ref<uint8>(message.payload.data(), 0));
-        IMessageHandler*  handler = nullptr;
-        switch (subType)
-        {
-            case REGIONAL_EVT_MSG_CONQUEST:
-            {
-                handler = worldServer->conquestSystem.get();
-            }
-            break;
-            case REGIONAL_EVT_MSG_BESIEGED:
-            {
-                handler = worldServer->besiegedSystem.get();
-            }
-            break;
-            case REGIONAL_EVT_MSG_CAMPAIGN:
-            {
-                handler = worldServer->campaignSystem.get();
-            }
-            break;
-            case REGIONAL_EVT_MSG_COLONIZATION:
-            {
-                handler = worldServer->colonizationSystem.get();
-            }
-            break;
-            default:
-            {
-                ShowError(fmt::format("Unknown IMessageHandler type requested: {}", subType));
-            }
-            break;
-        }
-
-        if (handler)
-        {
-            handler->handleMessage(std::move(message));
-        }
-    }
+    std::any_cast<WorldServer*>(PTask->m_data)->ipcServer_->handleIncomingMessages();
 
     return 0;
 }
 
 WorldServer::WorldServer(int argc, char** argv)
 : Application("world", argc, argv)
-, httpServer(std::make_unique<HTTPServer>())
-, messageServer(std::make_unique<message_server_wrapper_t>(std::ref(m_RequestExit)))
-, conquestSystem(std::make_unique<ConquestSystem>())
-, besiegedSystem(std::make_unique<BesiegedSystem>())
-, campaignSystem(std::make_unique<CampaignSystem>())
-, colonizationSystem(std::make_unique<ColonizationSystem>())
+, ipcServer_(std::make_unique<IPCServer>(*this))
+, partySystem_(std::make_unique<PartySystem>(*this))
+, conquestSystem_(std::make_unique<ConquestSystem>(*this))
+, besiegedSystem_(std::make_unique<BesiegedSystem>(*this))
+, campaignSystem_(std::make_unique<CampaignSystem>(*this))
+, colonizationSystem_(std::make_unique<ColonizationSystem>(*this))
+, httpServer_(std::make_unique<HTTPServer>())
 {
     // Tasks
     CTaskMgr::getInstance()->AddTask("time_server", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, 2400ms, time_server);
 
     // TODO: Make this more reactive than a polling job
-    CTaskMgr::getInstance()->AddTask("forward_queued_messages_to_handlers", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, 250ms, forward_queued_messages_to_handlers);
+    CTaskMgr::getInstance()->AddTask("pump_queues", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, 250ms, pump_queues);
 }
 
 WorldServer::~WorldServer() = default;

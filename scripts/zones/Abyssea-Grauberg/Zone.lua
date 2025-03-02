@@ -5,7 +5,7 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -570, 20, -810, -487.3, 35, -740)
+    zone:registerCuboidTriggerArea(1, -570, 20, -810, -487.3, 35, -740)
     xi.helm.initZone(zone, xi.helmType.HARVESTING)
 end
 
@@ -30,7 +30,7 @@ zoneObject.afterZoneIn = function(player)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
+    switch (triggerArea:getTriggerAreaID()): caseof
     {
         [1] = function()
             xi.abyssea.onWardTriggerAreaEnter(player)
@@ -39,7 +39,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
+    switch (triggerArea:getTriggerAreaID()): caseof
     {
         [1] = function()
             xi.abyssea.onWardTriggerAreaLeave(player)

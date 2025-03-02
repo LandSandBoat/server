@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: Missionary Man
 -- !pos -42 -10 -89 250
 -----------------------------------
-local ID = zones[xi.zone.KAZHAM]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -50,17 +48,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('MissionaryManVar', 1)
     elseif csid == 139 then
         player:setCharVar('MissionaryManVar', 2)
-        player:addKeyItem(xi.ki.RAUTEINOTS_PARCEL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RAUTEINOTS_PARCEL)
+        npcUtil.giveKeyItem(player, xi.ki.RAUTEINOTS_PARCEL)
         player:tradeComplete()
     elseif csid == 141 then
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SCROLL_OF_TELEPORT_YHOAT)
-        else
+        if npcUtil.giveItem(player, xi.item.SCROLL_OF_TELEPORT_YHOAT) then
             player:setCharVar('MissionaryManVar', 0)
             player:delKeyItem(xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
-            player:addItem(xi.item.SCROLL_OF_TELEPORT_YHOAT)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_YHOAT)
             player:addFame(xi.fameArea.WINDURST, 30)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
         end
