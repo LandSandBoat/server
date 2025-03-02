@@ -30,7 +30,7 @@
 
 #include "common/timer.h"
 
-CInstance::CInstance(CZone* zone, uint16 instanceid)
+CInstance::CInstance(CZone* zone, uint32 instanceid)
 : CZoneEntities(zone)
 , m_instanceid(instanceid)
 , m_zone(zone)
@@ -71,6 +71,7 @@ uint32 CInstance::GetStage() const
 void CInstance::LoadInstance()
 {
     TracyZoneScoped;
+
     static const char* Query = "SELECT "
                                "instance_name, "
                                "time_limit, "
