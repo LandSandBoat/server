@@ -30,7 +30,6 @@
 #include <list>
 #include <map>
 #include <unordered_map>
-#include <queue>
 
 #include "battlefield_handler.h"
 #include "campaign_handler.h"
@@ -584,7 +583,7 @@ public:
     bool CanUseMisc(uint16 misc) const;
     void SetWeather(WEATHER weatherCondition);
     void UpdateWeather();
-    void CheckMobsPathedBack();
+    bool CheckMobsPathedBack();
     void SleepZone();
 
     virtual void SpawnPCs(CCharEntity* PChar);
@@ -652,8 +651,6 @@ public:
     void LoadNavMesh();
     void LoadZoneLos();
 
-    std::queue<std::string> zoneTimersAsleepAndRunning;
-
 private:
     ZONEID         m_zoneID;
     ZONE_TYPE      m_zoneType;
@@ -684,6 +681,8 @@ private:
     void LoadZoneWeather();
 
     CTreasurePool* m_TreasurePool;
+
+    time_point m_timeZoneEmpty; // The time point when the last player left the zone
 
     std::unordered_map<std::string, QueryByNameResult_t> m_queryByNameResults;
 

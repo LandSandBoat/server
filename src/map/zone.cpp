@@ -692,40 +692,26 @@ void CZone::UpdateWeather()
     // clang-format on
 }
 
-void CZone::CheckMobsPathedBack()
+bool CZone::CheckMobsPathedBack()
 {
-    // clang-format off
-    CTaskMgr::getInstance()->AddTask(m_zoneName + "_empty_timer", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, 5s,
-    [](time_point tick, CTaskMgr::CTask* PTask)
+    bool allMobsHomeAndHealed = true;
+    if (m_zoneEntities && m_zoneEntities->GetMobList().size() > 0)
     {
-        bool allMobsHomeAndHealed = true;
-        CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
-        // if the timer runs out, check if all the mobs have pathed home
-        if (PZone && PZone->GetZoneEntities() && PZone->GetZoneEntities()->GetMobList().size() > 0)
+        EntityList_t mobListMap = m_zoneEntities->GetMobList();
+        for (const auto& pair : mobListMap)
         {
-            EntityList_t mobListMap = PZone->GetZoneEntities()->GetMobList();
-            for (const auto& pair : mobListMap)
+            CMobEntity* mob = dynamic_cast<CMobEntity*>(pair.second);
+            // if the mob is (not dead/despawned AND it is not fully healed) OR it is pathing home
+            if (mob && ((!mob->isDead() && !mob->isFullyHealed()) || mob->m_IsPathingHome))
             {
-                CMobEntity* mob = dynamic_cast<CMobEntity*>(pair.second);
-                // if the mob is (not dead/despawned AND it is not fully healed) OR it is pathing home
-                if (mob && ((!mob->isDead() && !mob->isFullyHealed()) || mob->m_IsPathingHome))
-                {
-                    // at least one mob is away from home or not fully healed
-                    allMobsHomeAndHealed = false;
-                    break;
-                }
+                // at least one mob is away from home or not fully healed
+                allMobsHomeAndHealed = false;
+                break;
             }
         }
+    }
 
-        // if all mobs home and healed up, sleep the zone
-        if (allMobsHomeAndHealed)
-        {
-            PZone->SleepZone();
-        }
-
-        return 0;
-    });
-    // clang-format on
+    return allMobsHomeAndHealed;
 }
 
 /************************************************************************
@@ -742,7 +728,7 @@ void CZone::DecreaseZoneCounter(CCharEntity* PChar)
 
     if (m_zoneEntities->CharListEmpty())
     {
-        CheckMobsPathedBack();
+        m_timeZoneEmpty = server_clock::now();
     }
     else
     {
@@ -938,25 +924,13 @@ void CZone::ZoneServer(time_point tick)
         m_BattlefieldHandler->HandleBattlefields(tick);
     }
 
-    while (!zoneTimersAsleepAndRunning.empty())
-    {
-        std::string zoneName = zoneTimersAsleepAndRunning.front();
-        zoneTimersAsleepAndRunning.pop();
-
-        CTaskMgr::getInstance()->RemoveTask(zoneName + "_empty_timer");
-    }
-}
-void CZone::SleepZone()
-{
-    if (ZoneTimer && m_zoneEntities->CharListEmpty())
+    if (ZoneTimer && m_zoneEntities->CharListEmpty() && m_timeZoneEmpty + 5s < server_clock::now() && CheckMobsPathedBack())
     {
         ZoneTimer->m_type = CTaskMgr::TASK_REMOVE;
         ZoneTimer         = nullptr;
 
         ZoneTimerTriggerAreas->m_type = CTaskMgr::TASK_REMOVE;
         ZoneTimerTriggerAreas         = nullptr;
-
-        zoneTimersAsleepAndRunning.push(m_zoneName);
     }
 }
 
