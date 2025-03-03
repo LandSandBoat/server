@@ -26,27 +26,27 @@
 
 #include <vector>
 
-enum TREASUREPOOLMANAGEMENT
+enum class TreasurePoolManagement : uint8
 {
     // Membership updated by party/alliance
-    TREASUREPOOL_MANAGED = 0,
+    Managed = 0,
 
     // Membership updated by lua bindings or zone
-    TREASUREPOOL_UNMANAGED
+    Unmanaged
 };
 
 // Update xi.treasurePool accordingly when making changes
-enum TREASUREPOOLTYPE
+enum class TreasurePoolType : uint8
 {
     // Managed pool types
-    TREASUREPOOL_SOLO     = 1,
-    TREASUREPOOL_PARTY    = 6,
-    TREASUREPOOL_ALLIANCE = 18,
+    Solo     = 1,
+    Party    = 6,
+    Alliance = 18,
 
     // Unmanaged pool types
     // Einherjar 36 members limit, may need to be increased for other content
-    TREASUREPOOL_SHARED = 36,
-    TREASUREPOOL_ZONE   = 128
+    Shared = 36,
+    Zone   = 128
 };
 
 #define TREASUREPOOL_SIZE 10
@@ -86,42 +86,42 @@ struct TreasurePoolItem
 class CTreasurePool
 {
 public:
-    CTreasurePool(TREASUREPOOLTYPE PoolType, TREASUREPOOLMANAGEMENT ManagementType);
+    CTreasurePool(TreasurePoolType PoolType, TreasurePoolManagement ManagementType);
 
-    auto GetPoolType() const -> TREASUREPOOLTYPE;
-    bool IsManaged() const;
+    auto getPoolType() const -> TreasurePoolType;
+    bool isManaged() const;
 
-    auto AddItem(uint16 ItemID, CBaseEntity*) -> uint8;
-    void LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot);
-    void PassItem(CCharEntity* PChar, uint8 SlotID);
-    bool HasLottedItem(CCharEntity* PChar, uint8 SlotID);
-    bool HasPassedItem(CCharEntity* PChar, uint8 SlotID);
-    auto GetItems() const -> const std::array<TreasurePoolItem, TREASUREPOOL_SIZE>&;
-    auto ItemCount() const -> uint8;
+    auto addItem(uint16 ItemID, CBaseEntity*) -> uint8;
+    void lotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot);
+    void passItem(CCharEntity* PChar, uint8 SlotID);
+    bool hasLottedItem(CCharEntity* PChar, uint8 SlotID);
+    bool hasPassedItem(CCharEntity* PChar, uint8 SlotID);
+    auto getItems() const -> const std::array<TreasurePoolItem, TREASUREPOOL_SIZE>&;
+    auto itemCount() const -> uint8;
 
-    void AddMember(CCharEntity* PChar);
-    void DelMember(CCharEntity* PChar);
-    auto GetMembers() const -> const std::vector<CCharEntity*>&;
-    bool IsMember(const CCharEntity* PChar);
-    auto MemberCount() const -> size_t;
+    void addMember(CCharEntity* PChar);
+    void delMember(CCharEntity* PChar);
+    auto getMembers() const -> const std::vector<CCharEntity*>&;
+    bool isMember(const CCharEntity* PChar);
+    auto memberCount() const -> size_t;
 
-    void UpdatePool(CCharEntity* PChar);
-    void Flush();
+    void updatePool(CCharEntity* PChar);
+    void flush();
 
-    void CheckItems(time_point);
+    void checkItems(time_point);
 
-    void TreasureWon(CCharEntity* winner, uint8 SlotID);
-    void TreasureError(CCharEntity* winner, uint8 SlotID);
-    void TreasureLost(uint8 SlotID);
+    void treasureWon(CCharEntity* winner, uint8 SlotID);
+    void treasureError(CCharEntity* winner, uint8 SlotID);
+    void treasureLost(uint8 SlotID);
 
 private:
     time_point m_Tick;
     uint8      m_count;
 
-    TREASUREPOOLTYPE       m_TreasurePoolType;
-    TREASUREPOOLMANAGEMENT m_ManagementType;
+    TreasurePoolType       m_TreasurePoolType;
+    TreasurePoolManagement m_ManagementType;
 
-    void CheckTreasureItem(time_point tick, uint8 SlotID);
+    void checkTreasureItem(time_point tick, uint8 SlotID);
 
     std::array<TreasurePoolItem, TREASUREPOOL_SIZE> m_PoolItems;
     std::vector<CCharEntity*>                       m_Members;

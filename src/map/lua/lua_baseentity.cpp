@@ -18154,7 +18154,7 @@ auto CLuaBaseEntity::getTreasurePool() -> CTreasurePool*
 {
     if (const auto PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        return &PChar->GetTreasurePool();
+        return &PChar->getTreasurePool();
     }
 
     return nullptr;

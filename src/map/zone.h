@@ -575,11 +575,11 @@ public:
     void   SetLocalVar(const char* var, uint32 val);
     void   ResetLocalVars();
 
-    auto CreateTreasurePool(uint32 poolOwnerId, TREASUREPOOLTYPE poolType) const -> CTreasurePool&;
-    auto GetTreasurePool(CCharEntity* PChar) const -> CTreasurePool&;
-    auto GetTreasurePools() const -> std::unordered_map<uint32, CTreasurePool>&;
-    void ReleaseTreasurePool(CTreasurePool& PTreasurePool) const;
-    auto ReassignTreasurePool(CCharEntity* PPrev, CCharEntity* PNew) -> bool;
+    auto createTreasurePool(uint32 poolOwnerId, TreasurePoolType poolType) const -> CTreasurePool&;
+    auto getTreasurePool(CCharEntity* PChar) const -> CTreasurePool&;
+    auto getTreasurePools() const -> std::unordered_map<uint32, CTreasurePool>&;
+    void releaseTreasurePool(CTreasurePool& PTreasurePool) const;
+    auto reassignTreasurePool(CCharEntity* PPrev, CCharEntity* PNew) -> bool;
 
     virtual CCharEntity* GetCharByName(std::string const& name);
     virtual CCharEntity* GetCharByID(uint32 id);

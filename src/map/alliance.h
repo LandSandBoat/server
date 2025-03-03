@@ -50,6 +50,7 @@ public:
     void    delParty(CParty* party);
     void    dissolveAlliance(bool playerInitiated = true);
     void    assignAllianceLeader(const std::string& name);
+    void    onLeaderChange(CBattleEntity* PPrevLeaderEntity, CBattleEntity* PNewLeaderEntity) const;
     bool    hasOnlyOneParty() const;
     bool    isFull() const;
 

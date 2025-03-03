@@ -35,10 +35,10 @@
 static constexpr duration treasure_checktime = 3s;
 static constexpr duration treasure_livetime  = 5min;
 
-CTreasurePool::CTreasurePool(TREASUREPOOLTYPE PoolType, TREASUREPOOLMANAGEMENT Management)
+CTreasurePool::CTreasurePool(const TreasurePoolType PoolType, const TreasurePoolManagement ManagementType)
 : m_count(0)
 , m_TreasurePoolType(PoolType)
-, m_ManagementType(Management)
+, m_ManagementType(ManagementType)
 {
     for (uint8 i = 0; i < TREASUREPOOL_SIZE; ++i)
     {
@@ -46,45 +46,45 @@ CTreasurePool::CTreasurePool(TREASUREPOOLTYPE PoolType, TREASUREPOOLMANAGEMENT M
         m_PoolItems[i].SlotID = i;
     }
 
-    m_Members.reserve(PoolType);
+    m_Members.reserve(static_cast<std::size_t>(PoolType));
 }
 
-auto CTreasurePool::GetPoolType() const -> TREASUREPOOLTYPE
+auto CTreasurePool::getPoolType() const -> TreasurePoolType
 {
     return m_TreasurePoolType;
 }
 
-bool CTreasurePool::IsManaged() const
+bool CTreasurePool::isManaged() const
 {
-    return m_ManagementType == TREASUREPOOL_MANAGED;
+    return m_ManagementType == TreasurePoolManagement::Managed;
 }
 
-auto CTreasurePool::GetItems() const -> const std::array<TreasurePoolItem, TREASUREPOOL_SIZE>&
+auto CTreasurePool::getItems() const -> const std::array<TreasurePoolItem, TREASUREPOOL_SIZE>&
 {
     return m_PoolItems;
 }
 
-auto CTreasurePool::ItemCount() const -> uint8
+auto CTreasurePool::itemCount() const -> uint8
 {
     return m_count;
 }
 
-auto CTreasurePool::GetMembers() const -> const std::vector<CCharEntity*>&
+auto CTreasurePool::getMembers() const -> const std::vector<CCharEntity*>&
 {
     return m_Members;
 }
 
-auto CTreasurePool::MemberCount() const -> size_t
+auto CTreasurePool::memberCount() const -> size_t
 {
     return m_Members.size();
 }
 
-bool CTreasurePool::IsMember(const CCharEntity* PChar)
+bool CTreasurePool::isMember(const CCharEntity* PChar)
 {
     return std::find(m_Members.begin(), m_Members.end(), PChar) != m_Members.end();
 }
 
-void CTreasurePool::AddMember(CCharEntity* PChar)
+void CTreasurePool::addMember(CCharEntity* PChar)
 {
     if (!PChar)
     {
@@ -100,19 +100,19 @@ void CTreasurePool::AddMember(CCharEntity* PChar)
 
     m_Members.emplace_back(PChar);
 
-    if (m_TreasurePoolType == TREASUREPOOL_SOLO && PChar->PParty)
+    if (m_TreasurePoolType == TreasurePoolType::Solo && PChar->PParty)
     {
-        m_TreasurePoolType = TREASUREPOOL_PARTY;
+        m_TreasurePoolType = TreasurePoolType::Party;
     }
-    else if (m_TreasurePoolType == TREASUREPOOL_PARTY && PChar->PParty && PChar->PParty->m_PAlliance)
+    else if (m_TreasurePoolType == TreasurePoolType::Party && PChar->PParty && PChar->PParty->m_PAlliance)
     {
-        m_TreasurePoolType = TREASUREPOOL_ALLIANCE;
+        m_TreasurePoolType = TreasurePoolType::Alliance;
     }
 
-    UpdatePool(PChar);
+    updatePool(PChar);
 }
 
-void CTreasurePool::DelMember(CCharEntity* PChar)
+void CTreasurePool::delMember(CCharEntity* PChar)
 {
     if (!PChar)
     {
@@ -147,9 +147,9 @@ void CTreasurePool::DelMember(CCharEntity* PChar)
         m_Members.erase(memberToDelete);
     }
 
-    if ((m_TreasurePoolType == TREASUREPOOL_PARTY || m_TreasurePoolType == TREASUREPOOL_ALLIANCE) && MemberCount() == 1)
+    if ((m_TreasurePoolType == TreasurePoolType::Party || m_TreasurePoolType == TreasurePoolType::Alliance) && memberCount() == 1)
     {
-        m_TreasurePoolType = TREASUREPOOL_SOLO;
+        m_TreasurePoolType = TreasurePoolType::Solo;
     }
 }
 
@@ -159,7 +159,7 @@ void CTreasurePool::DelMember(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
+uint8 CTreasurePool::addItem(uint16 ItemID, CBaseEntity* PEntity)
 {
     uint8      SlotID     = 0;
     uint8      FreeSlotID = -1;
@@ -251,7 +251,7 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
     if (SlotID == 10)
     {
         m_PoolItems[FreeSlotID].TimeStamp = get_server_start_time();
-        CheckTreasureItem(server_clock::now(), FreeSlotID);
+        checkTreasureItem(server_clock::now(), FreeSlotID);
     }
 
     m_count++;
@@ -263,15 +263,15 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
         member->pushPacket<CTreasureFindItemPacket>(&m_PoolItems[FreeSlotID], PEntity, false);
     }
 
-    if (MemberCount() == 1)
+    if (memberCount() == 1)
     {
-        CheckTreasureItem(server_clock::now(), FreeSlotID);
+        checkTreasureItem(server_clock::now(), FreeSlotID);
     }
 
     return m_count;
 }
 
-void CTreasurePool::UpdatePool(CCharEntity* PChar)
+void CTreasurePool::updatePool(CCharEntity* PChar)
 {
     if (!PChar)
     {
@@ -288,7 +288,7 @@ void CTreasurePool::UpdatePool(CCharEntity* PChar)
     }
 }
 
-void CTreasurePool::Flush()
+void CTreasurePool::flush()
 {
     if (m_count != 0)
     {
@@ -296,7 +296,7 @@ void CTreasurePool::Flush()
 
         for (uint8 i = 0; i < TREASUREPOOL_SIZE; ++i)
         {
-            CheckTreasureItem(tick, i);
+            checkTreasureItem(tick, i);
         }
     }
 }
@@ -307,7 +307,7 @@ void CTreasurePool::Flush()
  *                                                                       *
  ************************************************************************/
 
-void CTreasurePool::LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
+void CTreasurePool::lotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
 {
     if (!PChar)
     {
@@ -366,13 +366,13 @@ void CTreasurePool::LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
     }
 
     // if all lotters have lotted, evaluate immediately.
-    if (m_PoolItems[SlotID].Lotters.size() == MemberCount())
+    if (m_PoolItems[SlotID].Lotters.size() == memberCount())
     {
-        CheckTreasureItem(m_Tick, SlotID);
+        checkTreasureItem(m_Tick, SlotID);
     }
 }
 
-void CTreasurePool::PassItem(CCharEntity* PChar, uint8 SlotID)
+void CTreasurePool::passItem(CCharEntity* PChar, uint8 SlotID)
 {
     if (!PChar)
     {
@@ -426,13 +426,13 @@ void CTreasurePool::PassItem(CCharEntity* PChar, uint8 SlotID)
     }
 
     // if all lotters have lotted, evaluate immediately.
-    if (m_PoolItems[SlotID].Lotters.size() == MemberCount())
+    if (m_PoolItems[SlotID].Lotters.size() == memberCount())
     {
-        CheckTreasureItem(m_Tick, SlotID);
+        checkTreasureItem(m_Tick, SlotID);
     }
 }
 
-bool CTreasurePool::HasLottedItem(CCharEntity* PChar, uint8 SlotID)
+bool CTreasurePool::hasLottedItem(CCharEntity* PChar, uint8 SlotID)
 {
     if (SlotID >= TREASUREPOOL_SIZE)
     {
@@ -450,7 +450,7 @@ bool CTreasurePool::HasLottedItem(CCharEntity* PChar, uint8 SlotID)
     return false;
 }
 
-bool CTreasurePool::HasPassedItem(CCharEntity* PChar, uint8 SlotID)
+bool CTreasurePool::hasPassedItem(CCharEntity* PChar, uint8 SlotID)
 {
     if (SlotID >= TREASUREPOOL_SIZE)
     {
@@ -468,7 +468,7 @@ bool CTreasurePool::HasPassedItem(CCharEntity* PChar, uint8 SlotID)
     return false;
 }
 
-void CTreasurePool::CheckItems(time_point tick)
+void CTreasurePool::checkItems(time_point tick)
 {
     if (m_count != 0)
     {
@@ -476,14 +476,14 @@ void CTreasurePool::CheckItems(time_point tick)
         {
             for (uint8 i = 0; i < TREASUREPOOL_SIZE; ++i)
             {
-                CheckTreasureItem(tick, i);
+                checkTreasureItem(tick, i);
             }
             m_Tick = tick;
         }
     }
 }
 
-void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
+void CTreasurePool::checkTreasureItem(time_point tick, uint8 SlotID)
 {
     if (m_PoolItems[SlotID].ID == 0)
     {
@@ -491,8 +491,8 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
     }
 
     if ((tick - m_PoolItems[SlotID].TimeStamp) > treasure_livetime ||
-        (MemberCount() == 1 && m_Members[0]->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0) ||
-        m_PoolItems[SlotID].Lotters.size() == MemberCount())
+        (memberCount() == 1 && m_Members[0]->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0) ||
+        m_PoolItems[SlotID].Lotters.size() == memberCount())
     {
         // Find item's highest lotter
         LotInfo highestInfo;
@@ -513,17 +513,17 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
                 // add item as they have room!
                 if (charutils::AddItem(highestInfo.member, LOC_INVENTORY, m_PoolItems[SlotID].ID, 1, true) != ERROR_SLOTID)
                 {
-                    TreasureWon(highestInfo.member, SlotID);
+                    treasureWon(highestInfo.member, SlotID);
                 }
                 else
                 {
-                    TreasureError(highestInfo.member, SlotID);
+                    treasureError(highestInfo.member, SlotID);
                 }
             }
             else
             {
                 // drop the item
-                TreasureLost(SlotID);
+                treasureLost(SlotID);
             }
         }
         else
@@ -537,7 +537,7 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
                     continue;
                 }
 
-                if (member->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0 && !HasPassedItem(member, SlotID))
+                if (member->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0 && !hasPassedItem(member, SlotID))
                 {
                     candidates.emplace_back(member);
                 }
@@ -545,7 +545,7 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
 
             if (candidates.empty())
             {
-                TreasureLost(SlotID);
+                treasureLost(SlotID);
             }
             else
             {
@@ -553,18 +553,18 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
                 CCharEntity* PChar = candidates.at(xirand::GetRandomNumber(candidates.size()));
                 if (charutils::AddItem(PChar, LOC_INVENTORY, m_PoolItems[SlotID].ID, 1, true) != ERROR_SLOTID)
                 {
-                    TreasureWon(PChar, SlotID);
+                    treasureWon(PChar, SlotID);
                 }
                 else
                 {
-                    TreasureError(PChar, SlotID);
+                    treasureError(PChar, SlotID);
                 }
             }
         }
     }
 }
 
-void CTreasurePool::TreasureWon(CCharEntity* winner, uint8 SlotID)
+void CTreasurePool::treasureWon(CCharEntity* winner, uint8 SlotID)
 {
     if (winner == nullptr || m_PoolItems[SlotID].ID == 0)
     {
@@ -586,7 +586,7 @@ void CTreasurePool::TreasureWon(CCharEntity* winner, uint8 SlotID)
     m_PoolItems[SlotID].Lotters.clear();
 }
 
-void CTreasurePool::TreasureError(CCharEntity* winner, uint8 SlotID)
+void CTreasurePool::treasureError(CCharEntity* winner, uint8 SlotID)
 {
     if (winner == nullptr || m_PoolItems[SlotID].ID == 0)
     {
@@ -606,7 +606,7 @@ void CTreasurePool::TreasureError(CCharEntity* winner, uint8 SlotID)
     m_PoolItems[SlotID].Lotters.clear();
 }
 
-void CTreasurePool::TreasureLost(uint8 SlotID)
+void CTreasurePool::treasureLost(uint8 SlotID)
 {
     if (m_PoolItems[SlotID].ID == 0)
     {

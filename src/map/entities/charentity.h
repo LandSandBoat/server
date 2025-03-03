@@ -476,7 +476,7 @@ public:
     CJobPoints*   PJobPoints;
     bool          MeritMode;
 
-    CTreasurePool& GetTreasurePool();
+    CTreasurePool& getTreasurePool();
 
     CLatentEffectContainer* PLatentEffectContainer;
     bool                    retriggerLatents; // used to retrigger all latent effects if some event requires them to be retriggered

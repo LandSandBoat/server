@@ -444,7 +444,7 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket<CJobPointDetailsPacket>(PChar);
     }
 
-    PChar->GetTreasurePool().UpdatePool(PChar);
+    PChar->getTreasurePool().updatePool(PChar);
 
     PChar->loc.zone->SpawnTransport(PChar);
 
@@ -2246,9 +2246,9 @@ void SmallPacket0x041(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    if (auto& PTreasurePool = PChar->GetTreasurePool(); !PTreasurePool.HasLottedItem(PChar, SlotID))
+    if (auto& PTreasurePool = PChar->getTreasurePool(); !PTreasurePool.hasLottedItem(PChar, SlotID))
     {
-        PTreasurePool.LotItem(PChar, SlotID, xirand::GetRandomNumber(1, 1000)); // 1 ~ 998+1
+        PTreasurePool.lotItem(PChar, SlotID, xirand::GetRandomNumber(1, 1000)); // 1 ~ 998+1
     }
 }
 
@@ -2270,9 +2270,9 @@ void SmallPacket0x042(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    if (auto& PTreasurePool = PChar->GetTreasurePool(); !PTreasurePool.HasPassedItem(PChar, SlotID))
+    if (auto& PTreasurePool = PChar->getTreasurePool(); !PTreasurePool.hasPassedItem(PChar, SlotID))
     {
-        PTreasurePool.PassItem(PChar, SlotID);
+        PTreasurePool.passItem(PChar, SlotID);
     }
 }
 

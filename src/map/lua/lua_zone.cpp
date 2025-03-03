@@ -187,7 +187,7 @@ auto CLuaZone::getTreasurePools() const -> sol::table
 {
     auto table = lua.create_table();
 
-    for (auto& [id, pool] : m_pLuaZone->GetTreasurePools())
+    for (auto& [id, pool] : m_pLuaZone->getTreasurePools())
     {
         table[id] = &pool;
     }
@@ -202,11 +202,11 @@ auto CLuaZone::getTreasurePools() const -> sol::table
  *  Notes   : Treasure pools created in this fashion are unmanaged. See CLuaTreasurePool::addMember
  ************************************************************************/
 
-auto CLuaZone::createTreasurePool(const CLuaBaseEntity* PEntity, const TREASUREPOOLTYPE poolType) const -> CTreasurePool*
+auto CLuaZone::createTreasurePool(const CLuaBaseEntity* PEntity, const TreasurePoolType poolType) const -> CTreasurePool*
 {
     if (const auto* PChar = dynamic_cast<CCharEntity*>(PEntity->GetBaseEntity()))
     {
-        return &m_pLuaZone->CreateTreasurePool(PChar->id, poolType);
+        return &m_pLuaZone->createTreasurePool(PChar->id, poolType);
     }
 
     return nullptr;

@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _LUATREASUREPOOL_H
-#define _LUATREASUREPOOL_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "luautils.h"
@@ -33,7 +32,7 @@ class CLuaTreasurePool
 public:
     CLuaTreasurePool(CTreasurePool* PTreasurePool);
 
-    auto getType() const -> TREASUREPOOLTYPE;
+    auto getType() const -> TreasurePoolType;
     void flush() const;
     void addMember(CBaseEntity* PEntity) const;
     void delMember(CBaseEntity* PEntity) const;
@@ -45,5 +44,3 @@ public:
 
     static void Register();
 };
-
-#endif

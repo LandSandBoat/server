@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CTREASUREPOOLCONTAINER_H
-#define _CTREASUREPOOLCONTAINER_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "treasure_pool.h"
@@ -32,14 +31,14 @@ class CTreasurePoolContainer
 public:
     CTreasurePoolContainer(bool withGlobalPool);
 
-    auto CreateTreasurePool(uint32 poolOwnerId, TREASUREPOOLTYPE PoolType, TREASUREPOOLMANAGEMENT Management) -> CTreasurePool&;
-    auto GetTreasurePool(CCharEntity* PChar) -> CTreasurePool&;
-    auto GetTreasurePools() -> std::unordered_map<uint32, CTreasurePool>&;
-    auto ReassignTreasurePool(const CCharEntity* PPrev, const CCharEntity* PNew) -> bool;
-    void ReleaseTreasurePool(CTreasurePool& PTreasurePool);
+    auto createTreasurePool(uint32 poolOwnerId, TreasurePoolType PoolType, TreasurePoolManagement Management) -> CTreasurePool&;
+    auto getTreasurePool(CCharEntity* PChar) -> CTreasurePool&;
+    auto getTreasurePools() -> std::unordered_map<uint32, CTreasurePool>&;
+    auto reassignTreasurePool(const CCharEntity* PPrev, const CCharEntity* PNew) -> bool;
+    void releaseTreasurePool(CTreasurePool& PTreasurePool);
 
-    void OnZoneTick(time_point tick);
-    void OnZoneOut(CCharEntity* PChar);
+    void onZoneTick(time_point tick);
+    void onZoneOut(CCharEntity* PChar);
 
 private:
     // Zone pools are either global zone pools or shared pools where membership is driven exclusively by lua bindings
@@ -52,5 +51,3 @@ private:
     // - Membership in these pools is driven by CParty/CAlliance
     std::unordered_map<uint32, CTreasurePool> m_Pools;
 };
-
-#endif

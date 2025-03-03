@@ -122,7 +122,8 @@ private:
 
     bool m_EffectsChanged;
 
-    void                     SetLeader(const std::string& MemberName);        // set party leader
+    void                     SetLeader(const std::string& MemberName); // set party leader
+    void                     onLeaderChange(CBattleEntity* PPrevLeaderEntity, CBattleEntity* PNewLeaderEntity) const;
     void                     SetQuarterMaster(const std::string& MemberName); // set Quartermaster
     bool                     RemovePartyLeader(CBattleEntity* PEntity);       // attempt to remove the leader of the party. Returns false if party is disbanded or otherwise invalid.
     std::vector<partyInfo_t> GetPartyInfo() const;

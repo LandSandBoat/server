@@ -81,9 +81,9 @@ CParty::CParty(CBattleEntity* PEntity)
 
         if (PChar)
         {
-            if (auto& PTreasurePool = PChar->GetTreasurePool(); PTreasurePool.IsManaged())
+            if (auto& PTreasurePool = PChar->getTreasurePool(); PTreasurePool.isManaged())
             {
-                PTreasurePool.DelMember(PChar);
+                PTreasurePool.delMember(PChar);
             }
         }
 
@@ -135,17 +135,16 @@ void CParty::DisbandParty(bool playerInitiated)
         {
             if (auto* PChar = dynamic_cast<CCharEntity*>(member))
             {
-                auto& PTreasurePool = PChar->GetTreasurePool();
+                auto& PTreasurePool = PChar->getTreasurePool();
                 PTreasurePools.emplace_back(zoneutils::GetZone(PChar->getZone()), PTreasurePool);
-                PTreasurePool.DelMember(PChar);
+                PTreasurePool.delMember(PChar);
             }
         }
 
         // Force release of treasure pools, otherwise the leader would get reattached to the same pool
-        for (const auto& poolToBeReleased : PTreasurePools)
+        for (auto [PZone, PTreasurePool] : PTreasurePools)
         {
-            auto [PZone, PTreasurePool] = poolToBeReleased;
-            PZone->ReleaseTreasurePool(PTreasurePool);
+            PZone->releaseTreasurePool(PTreasurePool);
         }
     }
 
@@ -166,7 +165,7 @@ void CParty::DisbandParty(bool playerInitiated)
 
             PChar->PParty = nullptr;
             // Force attachment to a new treasure pool and clear pool content
-            PChar->GetTreasurePool().UpdatePool(PChar);
+            PChar->getTreasurePool().updatePool(PChar);
             PChar->PLatentEffectContainer->CheckLatentsPartyJobs();
             PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size(), 0);
             PChar->PLatentEffectContainer->CheckLatentsPartyAvatar();
@@ -332,9 +331,9 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
             {
                 auto PChar = static_cast<CCharEntity*>(PEntity);
 
-                if (auto& PTreasurePool = PChar->GetTreasurePool(); PTreasurePool.IsManaged())
+                if (auto& PTreasurePool = PChar->getTreasurePool(); PTreasurePool.isManaged())
                 {
-                    PTreasurePool.DelMember(PChar);
+                    PTreasurePool.delMember(PChar);
                 }
 
                 if (m_PQuarterMaster == PChar)
@@ -401,7 +400,7 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
             // Attach PChar to new treasure pool
             if (const auto PChar = dynamic_cast<CCharEntity*>(PEntity))
             {
-                PChar->GetTreasurePool().UpdatePool(PChar);
+                PChar->getTreasurePool().updatePool(PChar);
             }
         }
     }
@@ -418,9 +417,9 @@ void CParty::DelMember(CBattleEntity* PEntity)
     if (m_PLeader == PEntity)
     {
         auto* PChar = static_cast<CCharEntity*>(PEntity);
-        if (auto& PTreasurePool = PChar->GetTreasurePool(); PTreasurePool.IsManaged())
+        if (auto& PTreasurePool = PChar->getTreasurePool(); PTreasurePool.isManaged())
         {
-            PTreasurePool.DelMember(PChar);
+            PTreasurePool.delMember(PChar);
         }
 
         if (RemovePartyLeader(PEntity)) // Only reload party if party has not disbanded
@@ -438,7 +437,7 @@ void CParty::DelMember(CBattleEntity* PEntity)
             {
                 CCharEntity* PChar = static_cast<CCharEntity*>(PEntity);
 
-                PChar->GetTreasurePool().DelMember(PChar);
+                PChar->getTreasurePool().delMember(PChar);
 
                 if (m_PQuarterMaster == PChar)
                 {
@@ -614,9 +613,9 @@ void CParty::AddMember(CBattleEntity* PEntity)
 
     if (const auto PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        if (auto& PPrevTreasurePool = PChar->GetTreasurePool(); PPrevTreasurePool.IsManaged())
+        if (auto& PPrevTreasurePool = PChar->getTreasurePool(); PPrevTreasurePool.isManaged())
         {
-            PPrevTreasurePool.DelMember(PChar);
+            PPrevTreasurePool.delMember(PChar);
         }
     }
 
@@ -690,9 +689,9 @@ void CParty::AddMember(CBattleEntity* PEntity)
         // You lose all your summoned trusts upon joining a party
         PChar->ClearTrusts();
 
-        if (auto& PTreasurePool = PChar->GetTreasurePool(); PTreasurePool.IsManaged())
+        if (auto& PTreasurePool = PChar->getTreasurePool(); PTreasurePool.isManaged())
         {
-            PTreasurePool.AddMember(PChar);
+            PTreasurePool.addMember(PChar);
         }
 
         PChar->m_charHistory.joinedParties++;
@@ -1013,9 +1012,8 @@ void CParty::SetLeader(const std::string& MemberName)
         _sql->Query("UPDATE accounts_parties SET partyid = %u WHERE partyid = %u", newId, m_PartyID);
         _sql->Query("UPDATE accounts_parties SET allianceid = %u WHERE allianceid = %u", newId, m_PartyID);
 
-        const auto PPrevLeader = dynamic_cast<CCharEntity*>(GetLeader());
-        m_PLeader              = GetMemberByName(MemberName);
-        const auto PNewLeader  = dynamic_cast<CCharEntity*>(m_PLeader);
+        const auto PPrevLeaderEntity = GetLeader();
+        m_PLeader                    = GetMemberByName(MemberName);
 
         if (this->m_PAlliance && this->m_PAlliance->m_AllianceID == m_PartyID)
         {
@@ -1025,23 +1023,49 @@ void CParty::SetLeader(const std::string& MemberName)
         m_PartyID = newId;
         _sql->Query("UPDATE accounts_parties SET partyflag = partyflag | IF(allianceid = partyid, %d, %d) WHERE charid = %u", ALLIANCE_LEADER | PARTY_LEADER, PARTY_LEADER, newId);
 
+        if (this->m_PAlliance)
+        {
+            this->m_PAlliance->onLeaderChange(PPrevLeaderEntity, m_PLeader);
+        }
+        else
+        {
+            this->onLeaderChange(PPrevLeaderEntity, m_PLeader);
+        }
+
         // Passing leader dismisses trusts
         for (auto* PMemberEntity : members)
         {
             if (auto* PMember = dynamic_cast<CCharEntity*>(PMemberEntity))
             {
                 PMember->ClearTrusts();
-                // In every zone where party members are, reassign the pool to the new leader
-                if (PPrevLeader && PNewLeader)
-                {
-                    zoneutils::GetZone(PMember->getZone())->ReassignTreasurePool(PPrevLeader, PNewLeader);
-                }
             }
         }
     }
     else
     {
         m_PLeader = members.at(0);
+    }
+}
+
+void CParty::onLeaderChange(CBattleEntity* PPrevLeaderEntity, CBattleEntity* PNewLeaderEntity) const
+{
+    if (!PPrevLeaderEntity || !PNewLeaderEntity)
+    {
+        return;
+    }
+
+    for (auto* PMemberEntity : this->members)
+    {
+        if (const auto* PMember = dynamic_cast<CCharEntity*>(PMemberEntity))
+        {
+            if (const auto PPrevLeader = dynamic_cast<CCharEntity*>(PPrevLeaderEntity))
+            {
+                if (const auto PNewLeader = dynamic_cast<CCharEntity*>(PNewLeaderEntity))
+                {
+                    zoneutils::GetZone(PMember->getZone())->reassignTreasurePool(PPrevLeader, PNewLeader);
+                }
+            }
+        }
     }
 }
 

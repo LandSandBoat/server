@@ -689,7 +689,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     // Adds an item to the treasure pool. Treasure pool will automatically kick out items if the pool is full (prioritizing non rare non ex items)
     auto AddItemToPool = [this, PChar](uint16 ItemID)
     {
-        PChar->GetTreasurePool().AddItem(ItemID, this);
+        PChar->getTreasurePool().addItem(ItemID, this);
         PAI->EventHandler.triggerListener("TREASUREPOOL", CLuaBaseEntity(this), CLuaBaseEntity(PChar), ItemID);
     };
 
@@ -702,7 +702,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             return !PChar->PRecastContainer->Has(RECAST_LOOT, 1);
         }
 
-        for (const auto& member : PChar->GetTreasurePool().GetMembers())
+        for (const auto& member : PChar->getTreasurePool().getMembers())
         {
             if (member->PParty == PParty)
             {
@@ -716,6 +716,11 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         return true;
     };
 
+    // Seals are limited to one every 5 minutes per party.
+    // Cooldown is applied to members (in zone) of the party that delivered the killing blow.
+    // Note that the following has been verified to be retail accurate:
+    // - Other alliance parties are NOT included in that cooldown.
+    // - The cooldown does reset when zoning.
     auto AddSealRecast = [this, PChar]()
     {
         const auto PParty = PChar->PParty;
@@ -726,7 +731,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             return;
         }
 
-        for (const auto& member : PChar->GetTreasurePool().GetMembers())
+        for (const auto& member : PChar->getTreasurePool().getMembers())
         {
             if (member->PParty == PParty)
             {

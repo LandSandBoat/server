@@ -44,10 +44,10 @@ local function printPool(player, target, treasurePool)
     end
 
     for _, item in pairs(itemsInPool) do
-        if item.ID ~= 0 then
-            local lotters = item.Lotters
+        if item.id ~= 0 then
+            local lotters = item.lotters
             player:printToPlayer(
-                    string.format('Slot_%d = %s', item.SlotID, getItemNameById(item.ID), #lotters), xi.msg.channel.SYSTEM_3)
+                    string.format('Slot_%d = %s', item.slotId, getItemNameById(item.id), #lotters), xi.msg.channel.SYSTEM_3)
             if #lotters == 0 then
                 player:printToPlayer(
                         '  No lots', xi.msg.channel.SYSTEM_3)

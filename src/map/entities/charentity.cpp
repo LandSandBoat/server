@@ -275,9 +275,9 @@ CCharEntity::~CCharEntity()
     TracyZoneScoped;
     clearPacketList();
 
-    if (auto& PTreasurePool = GetTreasurePool(); PTreasurePool.IsManaged())
+    if (auto& PTreasurePool = getTreasurePool(); PTreasurePool.isManaged())
     {
-        PTreasurePool.DelMember(this);
+        PTreasurePool.delMember(this);
     }
 
     ClearTrusts(); // trusts don't survive zone lines
@@ -709,9 +709,9 @@ uint8 CCharEntity::getAutomatonElementCapacity(uint8 element)
     return automatonInfo.m_ElementEquip[element];
 }
 
-CTreasurePool& CCharEntity::GetTreasurePool()
+CTreasurePool& CCharEntity::getTreasurePool()
 {
-    return zoneutils::GetZone(this->getZone())->GetTreasurePool(this);
+    return zoneutils::GetZone(this->getZone())->getTreasurePool(this);
 }
 
 /************************************************************************

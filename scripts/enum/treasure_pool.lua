@@ -7,7 +7,6 @@ xi = xi or {}
 xi.treasurePool =
 {
     -- Keep synced with TREASUREPOOLTYPE
-
     SOLO                     =   1,
     PARTY                    =   6,
     ALLIANCE                 =  18,

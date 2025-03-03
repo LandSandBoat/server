@@ -388,31 +388,31 @@ void CZone::LoadZoneWeather()
     }
 }
 
-auto CZone::ReassignTreasurePool(CCharEntity* PPrev, CCharEntity* PNew) -> bool
+auto CZone::reassignTreasurePool(CCharEntity* PPrev, CCharEntity* PNew) -> bool
 {
     ShowDebugFmt("[{}] Reassigning Treasure Pool from {} to {}", m_zoneName, PPrev->id, PNew->id);
-    return m_TreasurePoolContainer->ReassignTreasurePool(PPrev, PNew);
+    return m_TreasurePoolContainer->reassignTreasurePool(PPrev, PNew);
 }
 
 // Create a new UNMANAGED treasure pool in the zone
-auto CZone::CreateTreasurePool(const uint32 poolOwnerId, const TREASUREPOOLTYPE poolType) const -> CTreasurePool&
+auto CZone::createTreasurePool(const uint32 poolOwnerId, const TreasurePoolType poolType) const -> CTreasurePool&
 {
-    return m_TreasurePoolContainer->CreateTreasurePool(poolOwnerId, poolType, TREASUREPOOL_UNMANAGED);
+    return m_TreasurePoolContainer->createTreasurePool(poolOwnerId, poolType, TreasurePoolManagement::Unmanaged);
 }
 
-auto CZone::GetTreasurePool(CCharEntity* PChar) const -> CTreasurePool&
+auto CZone::getTreasurePool(CCharEntity* PChar) const -> CTreasurePool&
 {
-    return m_TreasurePoolContainer->GetTreasurePool(PChar);
+    return m_TreasurePoolContainer->getTreasurePool(PChar);
 }
 
-auto CZone::GetTreasurePools() const -> std::unordered_map<uint32, CTreasurePool>&
+auto CZone::getTreasurePools() const -> std::unordered_map<uint32, CTreasurePool>&
 {
-    return m_TreasurePoolContainer->GetTreasurePools();
+    return m_TreasurePoolContainer->getTreasurePools();
 }
 
-void CZone::ReleaseTreasurePool(CTreasurePool& PTreasurePool) const
+void CZone::releaseTreasurePool(CTreasurePool& PTreasurePool) const
 {
-    m_TreasurePoolContainer->ReleaseTreasurePool(PTreasurePool);
+    m_TreasurePoolContainer->releaseTreasurePool(PTreasurePool);
 }
 
 void CZone::LoadZoneSettings()
@@ -866,7 +866,7 @@ void CZone::ZoneServer(time_point tick)
         m_BattlefieldHandler->HandleBattlefields(tick);
     }
 
-    m_TreasurePoolContainer->OnZoneTick(tick);
+    m_TreasurePoolContainer->onZoneTick(tick);
 
     if (ZoneTimer && m_zoneEntities->CharListEmpty() && m_timeZoneEmpty + 5s < server_clock::now())
     {
@@ -1092,7 +1092,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         }
     }
 
-    m_TreasurePoolContainer->OnZoneOut(PChar);
+    m_TreasurePoolContainer->onZoneOut(PChar);
     moduleutils::OnCharZoneOut(PChar);
     luautils::OnZoneOut(PChar);
 

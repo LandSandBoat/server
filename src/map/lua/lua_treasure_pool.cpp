@@ -34,9 +34,9 @@ CLuaTreasurePool::CLuaTreasurePool(CTreasurePool* PTreasurePool)
  *  Example : pool:getType()
  *  Notes   : See xi.treasurePool enum
  ************************************************************************/
-auto CLuaTreasurePool::getType() const -> TREASUREPOOLTYPE
+auto CLuaTreasurePool::getType() const -> TreasurePoolType
 {
-    return m_PLuaTreasurePool->GetPoolType();
+    return m_PLuaTreasurePool->getPoolType();
 }
 
 /************************************************************************
@@ -47,7 +47,7 @@ auto CLuaTreasurePool::getType() const -> TREASUREPOOLTYPE
  ************************************************************************/
 void CLuaTreasurePool::flush() const
 {
-    m_PLuaTreasurePool->Flush();
+    m_PLuaTreasurePool->flush();
 }
 
 /************************************************************************
@@ -60,7 +60,7 @@ void CLuaTreasurePool::addMember(CBaseEntity* PEntity) const
 {
     if (const auto PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        m_PLuaTreasurePool->AddMember(PChar);
+        m_PLuaTreasurePool->addMember(PChar);
     }
 }
 
@@ -74,7 +74,7 @@ void CLuaTreasurePool::delMember(CBaseEntity* PEntity) const
 {
     if (const auto PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        m_PLuaTreasurePool->DelMember(PChar);
+        m_PLuaTreasurePool->delMember(PChar);
     }
 }
 
@@ -88,7 +88,7 @@ void CLuaTreasurePool::update(CBaseEntity* PEntity) const
 {
     if (const auto PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        m_PLuaTreasurePool->UpdatePool(PChar);
+        m_PLuaTreasurePool->updatePool(PChar);
     }
 }
 
@@ -100,7 +100,7 @@ void CLuaTreasurePool::update(CBaseEntity* PEntity) const
  ************************************************************************/
 auto CLuaTreasurePool::addItem(const uint16 ItemID, CBaseEntity* PEntity) const -> uint8
 {
-    return m_PLuaTreasurePool->AddItem(ItemID, PEntity);
+    return m_PLuaTreasurePool->addItem(ItemID, PEntity);
 }
 
 /************************************************************************
@@ -111,7 +111,7 @@ auto CLuaTreasurePool::addItem(const uint16 ItemID, CBaseEntity* PEntity) const 
  ************************************************************************/
 auto CLuaTreasurePool::memberCount() const -> size_t
 {
-    return m_PLuaTreasurePool->MemberCount();
+    return m_PLuaTreasurePool->memberCount();
 }
 
 /************************************************************************
@@ -123,9 +123,9 @@ auto CLuaTreasurePool::memberCount() const -> size_t
 auto CLuaTreasurePool::getMembers() const -> sol::table
 {
     sol::table result = lua.create_table();
-    int        index  = 1;
+    uint8      index  = 1;
 
-    for (const auto& member : m_PLuaTreasurePool->GetMembers())
+    for (const auto& member : m_PLuaTreasurePool->getMembers())
     {
         result[index++] = member;
     }
@@ -146,14 +146,14 @@ auto CLuaTreasurePool::getMembers() const -> sol::table
 auto CLuaTreasurePool::getItems() const -> sol::table
 {
     sol::table result = lua.create_table();
-    int        index  = 1;
+    uint8      index  = 1;
 
-    for (const auto& item : m_PLuaTreasurePool->GetItems())
+    for (const auto& item : m_PLuaTreasurePool->getItems())
     {
         sol::table itemRow   = lua.create_table();
-        itemRow["ID"]        = item.ID;
-        itemRow["SlotID"]    = item.SlotID;
-        itemRow["TimeStamp"] = item.TimeStamp.time_since_epoch().count();
+        itemRow["id"]        = item.ID;
+        itemRow["slotId"]    = item.SlotID;
+        itemRow["timestamp"] = item.TimeStamp.time_since_epoch().count();
 
         sol::table lotters     = lua.create_table();
         int        lotterIndex = 1;
@@ -166,7 +166,7 @@ auto CLuaTreasurePool::getItems() const -> sol::table
             lotters[lotterIndex++] = lotterRow;
         }
 
-        itemRow["Lotters"] = lotters;
+        itemRow["lotters"] = lotters;
         result[index++]    = itemRow;
     }
 

@@ -49,7 +49,7 @@ public:
     void registerSphericalTriggerArea(uint32 triggerAreaID, float xPos, float yPos, float zPos, float radius);
 
     auto getTreasurePools() const -> sol::table;
-    auto createTreasurePool(const CLuaBaseEntity* PEntity, TREASUREPOOLTYPE poolType) const -> CTreasurePool*;
+    auto createTreasurePool(const CLuaBaseEntity* PEntity, TreasurePoolType poolType) const -> CTreasurePool*;
 
     auto        levelRestriction() -> sol::object;
     auto        getPlayers() -> sol::table;
