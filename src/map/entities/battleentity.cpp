@@ -321,15 +321,6 @@ uint8 CBattleEntity::UpdateSpeed(bool run)
         outputSpeed = std::clamp<int16>(outputSpeed, 0, 80 + settings::get<int8>("map.SPEED_MOD"));
     }
 
-    // Speed cap can be bypassed. Ex. Feast of swords. GM speed.
-    // TODO: Find exceptions. Add them here.
-
-    // GM speed bypass.
-    if (getMod(Mod::MOVE_SPEED_OVERRIDE) > 0)
-    {
-        outputSpeed = getMod(Mod::MOVE_SPEED_OVERRIDE);
-    }
-
     if (run && outputSpeed > 0 && getMod(Mod::MOVE_SPEED_OVERRIDE) == 0)
     {
         float multiplier = settings::get<float>("map.MOB_RUN_SPEED_MULTIPLIER");
@@ -358,7 +349,22 @@ uint8 CBattleEntity::UpdateSpeed(bool run)
         }
     }
 
+    // Speed cap can be bypassed. Ex. Feast of swords. GM speed.
+    // TODO: Find exceptions. Add them here.
+
+    // GM speed bypass.
+
+    if (getMod(Mod::MOVE_SPEED_OVERRIDE) > 255)
+    {
+        outputSpeed = 0;
+    }
+    else if (getMod(Mod::MOVE_SPEED_OVERRIDE) > 0)
+    {
+        outputSpeed = getMod(Mod::MOVE_SPEED_OVERRIDE);
+    }
+
     speed = static_cast<uint8>(std::clamp<int16>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max()));
+
     return speed;
 }
 
