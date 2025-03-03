@@ -937,6 +937,14 @@ void CZone::ZoneServer(time_point tick)
     {
         m_BattlefieldHandler->HandleBattlefields(tick);
     }
+
+    while (!zoneTimersAsleepAndRunning.empty())
+    {
+        std::string zoneName = zoneTimersAsleepAndRunning.front();
+        zoneTimersAsleepAndRunning.pop();
+
+        CTaskMgr::getInstance()->RemoveTask(zoneName + "_empty_timer");
+    }
 }
 void CZone::SleepZone()
 {
@@ -947,6 +955,8 @@ void CZone::SleepZone()
 
         ZoneTimerTriggerAreas->m_type = CTaskMgr::TASK_REMOVE;
         ZoneTimerTriggerAreas         = nullptr;
+
+        zoneTimersAsleepAndRunning.push(m_zoneName);
     }
 }
 

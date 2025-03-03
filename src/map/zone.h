@@ -30,6 +30,7 @@
 #include <list>
 #include <map>
 #include <unordered_map>
+#include <queue>
 
 #include "battlefield_handler.h"
 #include "campaign_handler.h"
@@ -650,6 +651,8 @@ public:
 
     void LoadNavMesh();
     void LoadZoneLos();
+
+    std::queue<std::string> zoneTimersAsleepAndRunning;
 
 private:
     ZONEID         m_zoneID;
