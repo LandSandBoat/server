@@ -584,7 +584,6 @@ public:
     void SetWeather(WEATHER weatherCondition);
     void UpdateWeather();
     bool CheckMobsPathedBack();
-    void SleepZone();
 
     virtual void SpawnPCs(CCharEntity* PChar);
     virtual void SpawnMOBs(CCharEntity* PChar);
