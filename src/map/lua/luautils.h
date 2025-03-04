@@ -389,7 +389,7 @@ namespace luautils
 
     bool OnCanUseSpell(CBattleEntity* PChar, CSpell* Spell); // triggers when CanUseSpell is invoked on spell.cpp for PCs only
 
-    auto GetCachedInstanceScript(uint16 instanceId) -> sol::table;
+    auto GetCachedInstanceScript(uint32 instanceId) -> sol::table;
 
     void  OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance);
     void  AfterInstanceRegister(CBaseEntity* PChar);                             // triggers after a character is registered and zoned into an instance (the first time)

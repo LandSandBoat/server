@@ -76,15 +76,14 @@ public:
     void ForEachAlly(std::function<void(CMobEntity*)> const& func) override;
     void ForEachAllyInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func) override;
 
-    CInstance* CreateInstance(uint32 instanceid);
+    CInstance* CreateInstance(uint32 instanceId);
+    CInstance* GetInstance(uint32 registerdCharId);
 
     CZoneInstance(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
     ~CZoneInstance() override;
 
 private:
-    typedef std::vector<std::unique_ptr<CInstance>> instanceList_t;
-
-    instanceList_t m_InstanceList;
+    std::vector<std::unique_ptr<CInstance>> m_InstanceList;
 };
 
 #endif // _CZONEINSTANCE_H

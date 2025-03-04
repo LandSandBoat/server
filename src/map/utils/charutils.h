@@ -50,12 +50,6 @@ enum class EMobDifficulty : uint8
     MAX
 };
 
-enum class ZoningType
-{
-    Logout = 1,
-    Zoning = 2,
-};
-
 // Capacity Bonuses applied based on RoE Completion
 // TODO: Add RoV Completion and Reive bonuses once implemented
 const std::vector<std::pair<uint16, uint8>> roeCapacityBonusRecords = {
@@ -243,7 +237,7 @@ namespace charutils
     int32 GetPoints(CCharEntity* PChar, const char* type);
     void  SetUnityLeader(CCharEntity* PChar, uint8 leaderID);
     auto  GetConquestPointsName(CCharEntity* PChar) -> std::string;
-    void  SendToZone(CCharEntity* PChar, ZoningType type, uint64 ipp);
+    void  SendToZone(CCharEntity* PChar, uint16 zoneId);
     void  ForceLogout(CCharEntity* PChar);
     void  ForceRezone(CCharEntity* PChar);
     void  HomePoint(CCharEntity* PChar, bool resetHPMP);
@@ -292,6 +286,7 @@ namespace charutils
     void removeCharFromZone(CCharEntity* PChar);
 
     bool isOrchestrionPlaced(CCharEntity* PChar);
+    void updateMannequin(CCharEntity* PChar);
 }; // namespace charutils
 
 #endif // _CHARUTILS_H

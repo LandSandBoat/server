@@ -27,7 +27,7 @@ commandObj.onTrigger = function(player, instance_id)
         currentInstance:fail()
     else
         player:printToPlayer('Creating instance: ' .. instance_id)
-        player:createInstance(instance_id)
+        player:requestInstance(instance_id)
     end
 end
 

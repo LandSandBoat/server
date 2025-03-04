@@ -2407,7 +2407,7 @@ end
 
 ---@param instanceID integer
 ---@return nil
-function CBaseEntity:createInstance(instanceID)
+function CBaseEntity:requestInstance(instanceID)
 end
 
 ---@param PLuaBaseEntity CBaseEntity

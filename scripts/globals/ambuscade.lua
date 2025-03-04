@@ -138,7 +138,7 @@ end
 
 xi.ambuscade.onEventFinishTome = function(player, csid, option, npc)
     if csid == 374 and option == 5 then
-        player:createInstance(30000)
+        player:requestInstance(30000)
     elseif csid == 378 then
         -- TODO
     end

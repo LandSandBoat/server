@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -42,6 +42,7 @@ CZoneInstance::~CZoneInstance()
 CCharEntity* CZoneInstance::GetCharByName(const std::string& name)
 {
     TracyZoneScoped;
+
     CCharEntity* PEntity = nullptr;
     for (const auto& PInstance : m_InstanceList)
     {
@@ -51,12 +52,14 @@ CCharEntity* CZoneInstance::GetCharByName(const std::string& name)
             break;
         }
     }
+
     return PEntity;
 }
 
 CCharEntity* CZoneInstance::GetCharByID(uint32 id)
 {
     TracyZoneScoped;
+
     CCharEntity* PEntity = nullptr;
     for (const auto& PInstance : m_InstanceList)
     {
@@ -66,12 +69,14 @@ CCharEntity* CZoneInstance::GetCharByID(uint32 id)
             break;
         }
     }
+
     return PEntity;
 }
 
 CBaseEntity* CZoneInstance::GetEntity(uint16 targid, uint8 filter)
 {
     TracyZoneScoped;
+
     CBaseEntity* PEntity = nullptr;
     if (filter & TYPE_PC)
     {
@@ -84,12 +89,14 @@ CBaseEntity* CZoneInstance::GetEntity(uint16 targid, uint8 filter)
             }
         }
     }
+
     return PEntity;
 }
 
 void CZoneInstance::InsertMOB(CBaseEntity* PMob)
 {
     TracyZoneScoped;
+
     if (PMob->PInstance)
     {
         PMob->PInstance->InsertMOB(PMob);
@@ -99,6 +106,7 @@ void CZoneInstance::InsertMOB(CBaseEntity* PMob)
 void CZoneInstance::InsertNPC(CBaseEntity* PNpc)
 {
     TracyZoneScoped;
+
     if (PNpc->PInstance)
     {
         PNpc->PInstance->InsertNPC(PNpc);
@@ -108,6 +116,7 @@ void CZoneInstance::InsertNPC(CBaseEntity* PNpc)
 void CZoneInstance::InsertPET(CBaseEntity* PPet)
 {
     TracyZoneScoped;
+
     if (PPet->PInstance)
     {
         PPet->PInstance->InsertPET(PPet);
@@ -117,6 +126,7 @@ void CZoneInstance::InsertPET(CBaseEntity* PPet)
 void CZoneInstance::InsertTRUST(CBaseEntity* PTrust)
 {
     TracyZoneScoped;
+
     if (PTrust->PInstance)
     {
         PTrust->PInstance->InsertTRUST(PTrust);
@@ -126,6 +136,7 @@ void CZoneInstance::InsertTRUST(CBaseEntity* PTrust)
 void CZoneInstance::FindPartyForMob(CBaseEntity* PEntity)
 {
     TracyZoneScoped;
+
     if (PEntity->PInstance)
     {
         PEntity->PInstance->FindPartyForMob(PEntity);
@@ -135,6 +146,7 @@ void CZoneInstance::FindPartyForMob(CBaseEntity* PEntity)
 void CZoneInstance::TransportDepart(uint16 boundary, uint16 zone)
 {
     TracyZoneScoped;
+
     for (const auto& PInstance : m_InstanceList)
     {
         PInstance->TransportDepart(boundary, zone);
@@ -144,6 +156,7 @@ void CZoneInstance::TransportDepart(uint16 boundary, uint16 zone)
 void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
     CInstance* PInstance = PChar->PInstance;
     if (PInstance)
     {
@@ -166,6 +179,7 @@ void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
 void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
     if (PChar == nullptr)
     {
         ShowWarning("PChar is null.");
@@ -189,7 +203,7 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
     {
         for (const auto& PInstance : m_InstanceList)
         {
-            if (PInstance->CharRegistered(PChar))
+            if (PInstance->CharRegistered(PChar->id))
             {
                 PChar->PInstance = PInstance.get();
             }
@@ -263,6 +277,7 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 void CZoneInstance::SpawnMOBs(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnMOBs(PChar);
@@ -272,6 +287,7 @@ void CZoneInstance::SpawnMOBs(CCharEntity* PChar)
 void CZoneInstance::SpawnPETs(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnPETs(PChar);
@@ -281,6 +297,7 @@ void CZoneInstance::SpawnPETs(CCharEntity* PChar)
 void CZoneInstance::SpawnTRUSTs(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnTRUSTs(PChar);
@@ -290,6 +307,7 @@ void CZoneInstance::SpawnTRUSTs(CCharEntity* PChar)
 void CZoneInstance::SpawnNPCs(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnNPCs(PChar);
@@ -299,6 +317,7 @@ void CZoneInstance::SpawnNPCs(CCharEntity* PChar)
 void CZoneInstance::SpawnPCs(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnPCs(PChar);
@@ -308,6 +327,7 @@ void CZoneInstance::SpawnPCs(CCharEntity* PChar)
 void CZoneInstance::SpawnConditionalNPCs(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnConditionalNPCs(PChar);
@@ -317,6 +337,7 @@ void CZoneInstance::SpawnConditionalNPCs(CCharEntity* PChar)
 void CZoneInstance::SpawnTransport(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnTransport(PChar);
@@ -326,6 +347,7 @@ void CZoneInstance::SpawnTransport(CCharEntity* PChar)
 void CZoneInstance::TOTDChange(TIMETYPE TOTD)
 {
     TracyZoneScoped;
+
     for (const auto& PInstance : m_InstanceList)
     {
         PInstance->TOTDChange(TOTD);
@@ -386,7 +408,12 @@ void CZoneInstance::ZoneServer(time_point tick)
 {
     TracyZoneScoped;
 
+    //
+    // Instance logic
+    //
+
     std::vector<CInstance*> instancesToRemove;
+
     for (const auto& PInstance : m_InstanceList)
     {
         PInstance->ZoneServer(tick);
@@ -409,6 +436,14 @@ void CZoneInstance::ZoneServer(time_point tick)
         }));
         // clang-format on
     }
+
+    //
+    // "Holding area" logic
+    //
+
+    // TODO: We still have access to the underlying CZone::m_zoneEntities
+    //     : so we can use this as a "holding area" for players trying to
+    //     : log in without a valid instance - if they've DC'd, etc.
 }
 
 void CZoneInstance::CheckTriggerAreas()
@@ -573,10 +608,26 @@ void CZoneInstance::ForEachAllyInstance(CBaseEntity* PEntity, const std::functio
     }
 }
 
-CInstance* CZoneInstance::CreateInstance(uint32 instanceid)
+CInstance* CZoneInstance::CreateInstance(uint32 instanceId)
 {
     TracyZoneScoped;
 
-    m_InstanceList.emplace_back(std::make_unique<CInstance>(this, instanceid));
+    m_InstanceList.emplace_back(std::make_unique<CInstance>(this, instanceId));
+
     return m_InstanceList.back().get();
+}
+
+CInstance* CZoneInstance::GetInstance(uint32 registerdCharId)
+{
+    TracyZoneScoped;
+
+    for (const auto& PInstance : m_InstanceList)
+    {
+        if (PInstance->CharRegistered(registerdCharId))
+        {
+            return PInstance.get();
+        }
+    }
+
+    return nullptr;
 }

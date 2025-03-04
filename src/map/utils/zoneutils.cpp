@@ -72,6 +72,7 @@ namespace zoneutils
     void InitializeWeather()
     {
         TracyZoneScoped;
+
         for (auto PZone : g_PZoneList)
         {
             if (!PZone.second->IsWeatherStatic())
@@ -90,6 +91,7 @@ namespace zoneutils
                 }
             }
         }
+
         ShowDebug("InitializeWeather Finished");
     }
 
@@ -99,6 +101,7 @@ namespace zoneutils
         {
             PZone.second->SavePlayTime();
         }
+
         ShowDebug("Player playtime saving finished");
     }
 
@@ -108,8 +111,23 @@ namespace zoneutils
         {
             return PZone->second;
         }
-        ShowWarning(fmt::format("Invalid zone requested: {}", ZoneID));
+
+        ShowDebug(fmt::format("Invalid zone requested: {}", ZoneID));
+
         return nullptr;
+    }
+
+    auto GetZoneName(uint16 ZoneID) -> std::string
+    {
+        // TODO: Cache this
+
+        const auto rset = db::preparedStmt("SELECT name FROM zone_settings WHERE zoneid = ?", ZoneID);
+        if (rset && rset->rowsCount() && rset->next())
+        {
+            return rset->get<std::string>("name");
+        }
+
+        return "";
     }
 
     CNpcEntity* GetTrigger(uint16 TargID, uint16 ZoneID)
@@ -145,6 +163,7 @@ namespace zoneutils
                 return PChar;
             }
         }
+
         return nullptr;
     }
 
@@ -157,12 +176,15 @@ namespace zoneutils
             {
                 continue;
             }
+
             CBaseEntity* PEntity = PZone.second->GetEntity(targid, TYPE_PC);
+
             if (PEntity != nullptr && PEntity->id == charid)
             {
                 return (CCharEntity*)PEntity;
             }
         }
+
         return nullptr;
     }
 
@@ -176,6 +198,7 @@ namespace zoneutils
                 return (CCharEntity*)PEntity;
             }
         }
+
         return nullptr;
     }
 

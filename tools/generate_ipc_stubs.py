@@ -58,6 +58,9 @@ IPC_STRUCT_NAMES = [
     "EntityInformationResponse",
 
     "SendPlayerToLocation",
+
+    "InstanceLoadRequest",
+    "InstanceLoadResponse",
 ]
 
 

@@ -19,57 +19,46 @@
 ===========================================================================
 */
 
-#ifndef _INSTANCEUTILS_H
-#define _INSTANCEUTILS_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
-class CInstanceLoader;
+#include "ipc_client.h"
+
 class CCharEntity;
 
-struct InstanceData_t
+struct InstanceData
 {
-    uint16      id;
-    std::string instance_name;
-    uint16      instance_zone;
-    std::string instance_zone_name;
-    uint16      entrance_zone;
-    std::string entrance_zone_name;
-    uint16      time_limit;
-    float       start_x;
-    float       start_y;
-    float       start_z;
-    uint16      start_rot;
-    uint16      music_day;
-    uint16      music_night;
-    uint16      battlesolo;
-    uint16      battlemulti;
-    std::string filename;
-
-    InstanceData_t()
-    : id(0)
-    , instance_zone(0)
-    , entrance_zone(0)
-    , time_limit(0)
-    , start_x(0.f)
-    , start_y(0.f)
-    , start_z(0.f)
-    , start_rot(0)
-    , music_day(0)
-    , music_night(0)
-    , battlesolo(0)
-    , battlemulti(0)
-    {
-    }
+    uint32      instanceId{};
+    std::string instanceName{};
+    uint16      instanceZoneId{};
+    std::string instanceZoneName{};
+    uint16      entranceZoneId{};
+    std::string entranceZoneName{};
+    uint16      timeLimit{};
+    float       startX{};
+    float       startY{};
+    float       startZ{};
+    uint8       startRot{};
+    int16       musicDay{};
+    int16       musicNight{};
+    int16       battleSolo{};
+    int16       battleMulti{};
+    std::string filename{};
 };
 
 namespace instanceutils
 {
     void LoadInstanceList();
-    void CheckInstance(); // Called at the end of every tick by time_server
-    void LoadInstance(uint32 instanceid, CCharEntity* PRequester);
-    auto GetInstanceData(uint32 instanceid) -> InstanceData_t;
-    bool IsValidInstanceID(uint32 instanceid);
-}; // namespace instanceutils
 
-#endif
+    // Called at the end of every tick by time_server
+    void CheckInstanceLoading();
+
+    void RequestInstance(CCharEntity* PRequester, uint32 instanceId);
+    void TryLoadInstance(const ipc::InstanceLoadRequest& message);
+    void TrySendToInstance(const ipc::InstanceLoadResponse& message);
+
+    auto GetInstanceData(uint32 instanceId) -> InstanceData;
+    auto GetEntraceZoneForInstanceZone(uint16 instanceZoneId) -> uint16;
+    bool IsValidInstanceID(uint32 instanceId);
+}; // namespace instanceutils

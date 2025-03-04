@@ -113,6 +113,8 @@ public:
     void handleMessage_EntityInformationRequest(const IPP& ipp, const ipc::EntityInformationRequest& message);
     void handleMessage_EntityInformationResponse(const IPP& ipp, const ipc::EntityInformationResponse& message);
     void handleMessage_SendPlayerToLocation(const IPP& ipp, const ipc::SendPlayerToLocation& message);
+    void handleMessage_InstanceLoadRequest(const IPP& ipp, const ipc::InstanceLoadRequest& message);
+    void handleMessage_InstanceLoadResponse(const IPP& ipp, const ipc::InstanceLoadResponse& message);
 
     void handleUnknownMessage(const IPP& ipp, const std::span<uint8_t> message);
 

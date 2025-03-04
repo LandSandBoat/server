@@ -58,6 +58,7 @@
 #include "unitychat.h"
 #include "universal_container.h"
 #include "zone.h"
+#include "zone_instance.h"
 
 #include "ai/ai_container.h"
 #include "ai/states/death_state.h"
@@ -172,6 +173,7 @@
 #include "utils/dboxutils.h"
 #include "utils/fishingutils.h"
 #include "utils/gardenutils.h"
+#include "utils/instanceutils.h"
 #include "utils/itemutils.h"
 #include "utils/jailutils.h"
 #include "utils/petutils.h"
@@ -224,24 +226,13 @@ namespace
 
 /************************************************************************
  *                                                                       *
- *  Unknown Packet                                                       *
+ *  Unknown/ Non-implemented Packet                                      *
  *                                                                       *
  ************************************************************************/
 
-void SmallPacket0x000(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
+void SmallPacket0x000_NOT_IMPLEMENTED(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     ShowWarning("parse: Unhandled game packet %03hX from user: %s", (data.ref<uint16>(0) & 0x1FF), PChar->getName());
-}
-
-/************************************************************************
- *                                                                       *
- *  Non-Implemented Packet                                               *
- *                                                                       *
- ************************************************************************/
-
-void SmallPacket0xFFF_NOT_IMPLEMENTED(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
-{
-    ShowWarning("parse: SmallPacket is not implemented Type<%03hX>", (data.ref<uint16>(0) & 0x1FF));
 }
 
 /************************************************************************
@@ -255,6 +246,7 @@ void SmallPacket0xFFF_NOT_IMPLEMENTED(map_session_data_t* const PSession, CCharE
 void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
     data.ref<uint32>(0x5C) = 0;
 
     if (PSession->blowfish.status == BLOWFISH_ACCEPTED && PChar->status == STATUS_TYPE::NORMAL) // Do nothing if character is zoned in
@@ -311,19 +303,19 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
 
         PChar->m_ZonesList[PChar->getZone() >> 3] |= (1 << (PChar->getZone() % 8));
 
-        const char* fmtQuery = "UPDATE accounts_sessions SET targid = %u, server_addr = %u, client_port = %u, last_zoneout_time = 0 WHERE charid = %u";
-
         // Current zone could either be current zone or destination
         CZone* currentZone = zoneutils::GetZone(PChar->getZone());
-
         if (currentZone == nullptr)
         {
             ShowWarning("currentZone was null for Zone ID %d.", PChar->getZone());
             return;
         }
 
+        // TODO: Extract into charutils function
+        const char* fmtQuery = "UPDATE accounts_sessions SET targid = %u, server_addr = %u, client_port = %u, last_zoneout_time = 0 WHERE charid = %u";
         _sql->Query(fmtQuery, PChar->targid, currentZone->GetIP(), PSession->client_port, PChar->id);
 
+        // TODO: Extract into charutils function
         fmtQuery  = "SELECT death FROM char_stats WHERE charid = %u";
         int32 ret = _sql->Query(fmtQuery, PChar->id);
         if (_sql->NextRow() == SQL_SUCCESS)
@@ -337,6 +329,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
             }
         }
 
+        // TODO: Extract into charutils function
         fmtQuery = "SELECT pos_prevzone FROM chars WHERE charid = %u";
         ret      = _sql->Query(fmtQuery, PChar->id);
         if (ret != SQL_ERROR && _sql->NextRow() == SQL_SUCCESS)
@@ -365,56 +358,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         if (PChar->m_moghouseID != 0)
         {
-            // Update any mannequins that might be placed on zonein
-            // Build Mannequin model id list
-            auto getModelIdFromStorageSlot = [](CCharEntity* PChar, uint8 slot) -> uint16
-            {
-                uint16 modelId = 0x0000;
-
-                if (slot == 0)
-                {
-                    return modelId;
-                }
-
-                auto* PItem = PChar->getStorage(LOC_STORAGE)->GetItem(slot);
-                if (PItem == nullptr)
-                {
-                    return modelId;
-                }
-
-                if (auto* PItemEquipment = dynamic_cast<CItemEquipment*>(PItem))
-                {
-                    modelId = PItemEquipment->getModelId();
-                }
-
-                return modelId;
-            };
-
-            for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
-            {
-                CItemContainer* PContainer = PChar->getStorage(safeContainerId);
-                for (int slotIndex = 1; slotIndex <= PContainer->GetSize(); ++slotIndex)
-                {
-                    CItem* PContainerItem = PContainer->GetItem(slotIndex);
-                    if (PContainerItem != nullptr && PContainerItem->isType(ITEM_FURNISHING))
-                    {
-                        auto* PFurnishing = static_cast<CItemFurnishing*>(PContainerItem);
-                        if (PFurnishing->isInstalled() && PFurnishing->isMannequin())
-                        {
-                            auto*  PMannequin = PFurnishing;
-                            uint16 mainId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 0]);
-                            uint16 subId      = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 1]);
-                            uint16 rangeId    = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 2]);
-                            uint16 headId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 3]);
-                            uint16 bodyId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 4]);
-                            uint16 handsId    = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 5]);
-                            uint16 legId      = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 6]);
-                            uint16 feetId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 7]);
-                            PChar->pushPacket<CInventoryCountPacket>(safeContainerId, slotIndex, headId, bodyId, handsId, legId, feetId, mainId, subId, rangeId);
-                        }
-                    }
-                }
-            }
+            charutils::updateMannequin(PChar);
         }
 
         PChar->pushPacket<CDownloadingDataPacket>();
@@ -1076,7 +1020,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->status          = STATUS_TYPE::DISAPPEAR;
                 PChar->loc.boundary    = 0;
                 PChar->clearPacketList();
-                charutils::SendToZone(PChar, ZoningType::Zoning, zoneutils::GetZoneIPP(PChar->loc.destination));
+                charutils::SendToZone(PChar, PChar->loc.destination);
             }
 
             PChar->m_hasTractor = 0;
@@ -3104,7 +3048,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    charutils::SendToZone(PChar, ZoningType::Zoning, ipp);
+    charutils::SendToZone(PChar, PChar->loc.destination);
 }
 
 /************************************************************************
@@ -5262,14 +5206,7 @@ void SmallPacket0x0CB(map_session_data_t* const PSession, CCharEntity* const PCh
         // If the model changes AND you're on MH2F; force a rezone so the model change can take effect.
         if (type != oldType && PChar->profile.mhflag & 0x0040)
         {
-            auto zoneid = PChar->getZone();
-            auto ipp    = zoneutils::GetZoneIPP(zoneid);
-
-            PChar->loc.destination = zoneid;
-            PChar->status          = STATUS_TYPE::DISAPPEAR;
-
-            PChar->clearPacketList();
-            charutils::SendToZone(PChar, ZoningType::Zoning, ipp);
+            charutils::SendToZone(PChar, PChar->getZone());
         }
     }
     else
@@ -7561,11 +7498,13 @@ void SmallPacket0x11D(map_session_data_t* const PSession, CCharEntity* const PCh
 void PacketParserInitialize()
 {
     TracyZoneScoped;
+
     for (uint16 i = 0; i < 512; ++i)
     {
         PacketSize[i]   = 0;
-        PacketParser[i] = &SmallPacket0x000;
+        PacketParser[i] = &SmallPacket0x000_NOT_IMPLEMENTED;
     }
+
     // clang-format off
     PacketSize[0x00A] = 0x2E; PacketParser[0x00A] = &SmallPacket0x00A;
     PacketSize[0x00C] = 0x00; PacketParser[0x00C] = &SmallPacket0x00C;
@@ -7624,8 +7563,8 @@ void PacketParserInitialize()
     PacketSize[0x085] = 0x04; PacketParser[0x085] = &SmallPacket0x085;
     PacketSize[0x096] = 0x12; PacketParser[0x096] = &SmallPacket0x096;
     PacketSize[0x09B] = 0x00; PacketParser[0x09B] = &SmallPacket0x09B;
-    PacketSize[0x0A0] = 0x00; PacketParser[0x0A0] = &SmallPacket0xFFF_NOT_IMPLEMENTED;
-    PacketSize[0x0A1] = 0x00; PacketParser[0x0A1] = &SmallPacket0xFFF_NOT_IMPLEMENTED;
+    PacketSize[0x0A0] = 0x00; PacketParser[0x0A0] = &SmallPacket0x000_NOT_IMPLEMENTED;
+    PacketSize[0x0A1] = 0x00; PacketParser[0x0A1] = &SmallPacket0x000_NOT_IMPLEMENTED;
     PacketSize[0x0A2] = 0x00; PacketParser[0x0A2] = &SmallPacket0x0A2;
     PacketSize[0x0AA] = 0x00; PacketParser[0x0AA] = &SmallPacket0x0AA;
     PacketSize[0x0AB] = 0x00; PacketParser[0x0AB] = &SmallPacket0x0AB;
@@ -7641,7 +7580,7 @@ void PacketParserInitialize()
     PacketSize[0x0CB] = 0x04; PacketParser[0x0CB] = &SmallPacket0x0CB;
     PacketSize[0x0D2] = 0x00; PacketParser[0x0D2] = &SmallPacket0x0D2;
     PacketSize[0x0D3] = 0x00; PacketParser[0x0D3] = &SmallPacket0x0D3;
-    PacketSize[0x0D4] = 0x00; PacketParser[0x0D4] = &SmallPacket0xFFF_NOT_IMPLEMENTED;
+    PacketSize[0x0D4] = 0x00; PacketParser[0x0D4] = &SmallPacket0x000_NOT_IMPLEMENTED;
     PacketSize[0x0DB] = 0x00; PacketParser[0x0DB] = &SmallPacket0x0DB;
     PacketSize[0x0DC] = 0x0A; PacketParser[0x0DC] = &SmallPacket0x0DC;
     PacketSize[0x0DD] = 0x08; PacketParser[0x0DD] = &SmallPacket0x0DD;

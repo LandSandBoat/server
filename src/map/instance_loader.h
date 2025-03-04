@@ -25,6 +25,8 @@
 #include "common/cbasetypes.h"
 #include "common/socket.h"
 
+#include "common/ipc.h"
+
 class CCharEntity;
 class CInstance;
 class CZone;
@@ -32,15 +34,31 @@ class CZone;
 class CInstanceLoader
 {
 public:
-    CInstanceLoader(uint32 instanceid, CCharEntity* PRequester);
+    CInstanceLoader(const ipc::InstanceLoadRequest& message);
     ~CInstanceLoader();
 
-    CInstance* LoadInstance();
+    void loadInstanceMobSQL();
+    void loadInstanceMobLua();
+    void loadInstanceNPCSQL();
+    void loadInstanceNPCLua();
+
+    void update();
+    bool ready();
+
+    auto getInstance() -> CInstance*;
 
 private:
-    CInstance*   m_PInstance;
-    CZone*       m_PZone;
-    CCharEntity* m_PRequester;
+    CInstance* m_PInstance;
+    CZone*     m_PZone;
+
+    enum class LoadPhase
+    {
+        SQLPending,
+        Lua,
+        Done,
+    };
+
+    std::atomic<LoadPhase> m_LoadPhase{ LoadPhase::SQLPending };
 };
 
 #endif

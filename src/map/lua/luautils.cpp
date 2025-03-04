@@ -4256,11 +4256,11 @@ namespace luautils
         std::exit(1);
     }
 
-    auto GetCachedInstanceScript(uint16 instanceId) -> sol::table
+    auto GetCachedInstanceScript(uint32 instanceId) -> sol::table
     {
         TracyZoneScoped;
 
-        auto instanceData = instanceutils::GetInstanceData(instanceId);
+        const auto instanceData = instanceutils::GetInstanceData(instanceId);
 
         auto cachedInstanceScript = GetCacheEntryFromFilename(instanceData.filename);
         if (!cachedInstanceScript.valid())
@@ -4348,7 +4348,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
+        const auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
 
         auto onInstanceTimeUpdate = GetCacheEntryFromFilename(instanceData.filename)["onInstanceTimeUpdate"];
         if (!onInstanceTimeUpdate.valid())
@@ -4368,7 +4368,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
+        const auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
 
         auto onInstanceFailure = GetCacheEntryFromFilename(instanceData.filename)["onInstanceFailure"];
         if (!onInstanceFailure.valid())
@@ -4384,17 +4384,11 @@ namespace luautils
         }
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  When instance is created, let player know it's finished              *
-     *                                                                       *
-     ************************************************************************/
-
     void OnInstanceCreatedCallback(CCharEntity* PChar, CInstance* PInstance)
     {
         TracyZoneScoped;
 
-        auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
+        const auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
 
         auto onInstanceCreatedCallback = GetCacheEntryFromFilename(instanceData.filename)["onInstanceCreatedCallback"];
         if (!onInstanceCreatedCallback.valid())

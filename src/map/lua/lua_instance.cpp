@@ -55,7 +55,7 @@ CLuaZone CLuaInstance::getZone()
 
 uint32 CLuaInstance::getEntranceZoneID()
 {
-    return instanceutils::GetInstanceData(m_PLuaInstance->GetID()).entrance_zone;
+    return instanceutils::GetInstanceData(m_PLuaInstance->GetID()).entranceZoneId;
 }
 
 sol::table CLuaInstance::getAllies()

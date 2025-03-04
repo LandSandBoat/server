@@ -55,6 +55,7 @@
 #include "packets/conquest_map.h"
 #include "packets/delivery_box.h"
 #include "packets/inventory_assign.h"
+#include "packets/inventory_count.h"
 #include "packets/inventory_finish.h"
 #include "packets/inventory_item.h"
 #include "packets/inventory_modify.h"
@@ -6518,47 +6519,51 @@ namespace charutils
         }
     }
 
-    void SendToZone(CCharEntity* PChar, ZoningType type, uint64 ipp)
+    void SendToZone(CCharEntity* PChar, uint16 zoneId)
     {
         TracyZoneScoped;
 
-        if (type == ZoningType::Zoning)
-        {
-            auto ip   = (uint32)ipp;
-            auto port = (uint32)(ipp >> 32);
-            _sql->Query("UPDATE accounts_sessions SET server_addr = %u, server_port = %u WHERE charid = %u",
-                        ip, port, PChar->id);
+        PChar->loc.destination     = zoneId;
+        PChar->status              = STATUS_TYPE::DISAPPEAR;
+        PChar->loc.boundary        = 0;
+        PChar->requestedZoneChange = true;
 
-            const char* Query = "UPDATE chars "
-                                "SET "
-                                "pos_zone = %u,"
-                                "pos_prevzone = %u,"
-                                "pos_rot = %u,"
-                                "pos_x = %.3f,"
-                                "pos_y = %.3f,"
-                                "pos_z = %.3f,"
-                                "moghouse = %u,"
-                                "boundary = %u "
-                                "WHERE charid = %u";
+        const auto ipp = zoneutils::GetZoneIPP(zoneId);
 
-            _sql->Query(Query, PChar->loc.destination,
-                        (PChar->m_moghouseID || PChar->loc.destination == PChar->getZone()) ? PChar->loc.prevzone : PChar->getZone(), PChar->loc.p.rotation,
-                        PChar->loc.p.x, PChar->loc.p.y, PChar->loc.p.z, PChar->m_moghouseID, PChar->loc.boundary, PChar->id);
+        auto ip   = (uint32)ipp;
+        auto port = (uint32)(ipp >> 32);
 
-            message::send(ipc::CharZone{
-                .charId            = PChar->id,
-                .destinationZoneId = PChar->loc.destination,
-            });
-        }
-        else // ZoningType::Logout
-        {
-            SaveCharPosition(PChar);
+        _sql->Query("UPDATE accounts_sessions SET server_addr = %u, server_port = %u WHERE charid = %u",
+                    ip, port, PChar->id);
 
-            message::send(ipc::CharZone{
-                .charId            = PChar->id,
-                .destinationZoneId = 0xFFFF, // Clear cache
-            });
-        }
+        const char* Query = "UPDATE chars "
+                            "SET "
+                            "pos_zone = %u,"
+                            "pos_prevzone = %u,"
+                            "pos_rot = %u,"
+                            "pos_x = %.3f,"
+                            "pos_y = %.3f,"
+                            "pos_z = %.3f,"
+                            "moghouse = %u,"
+                            "boundary = %u "
+                            "WHERE charid = %u";
+
+        _sql->Query(Query,
+                    PChar->loc.destination,
+                    (PChar->m_moghouseID || PChar->loc.destination == PChar->getZone()) ? PChar->loc.prevzone : PChar->getZone(),
+                    PChar->loc.p.rotation,
+                    PChar->loc.p.x,
+                    PChar->loc.p.y,
+                    PChar->loc.p.z,
+                    PChar->m_moghouseID,
+                    PChar->loc.boundary,
+                    PChar->id);
+
+        // Update character cache
+        message::send(ipc::CharZone{
+            .charId            = PChar->id,
+            .destinationZoneId = PChar->loc.destination,
+        });
 
         if (PChar->shouldPetPersistThroughZoning())
         {
@@ -6575,7 +6580,9 @@ namespace charutils
             charutils::forceSynthCritFail("SendToZone", PChar);
         }
 
-        PChar->pushPacket<CServerIPPacket>(PChar, static_cast<uint8>(type), ipp);
+        PChar->clearPacketList();
+
+        PChar->pushPacket<CServerIPPacket>(PChar, 2, ipp);
 
         removeCharFromZone(PChar);
     }
@@ -6583,7 +6590,16 @@ namespace charutils
     void ForceLogout(CCharEntity* PChar)
     {
         PChar->status = STATUS_TYPE::SHUTDOWN;
-        charutils::SendToZone(PChar, ZoningType::Logout, 0);
+
+        SaveCharPosition(PChar);
+
+        PChar->pushPacket<CServerIPPacket>(PChar, 1, 0);
+
+        // Update character cache
+        message::send(ipc::CharZone{
+            .charId            = PChar->id,
+            .destinationZoneId = 0xFFFF, // Clear cache
+        });
     }
 
     void ForceRezone(CCharEntity* PChar)
@@ -6594,7 +6610,7 @@ namespace charutils
 
         PChar->clearPacketList();
 
-        SendToZone(PChar, ZoningType::Zoning, zoneutils::GetZoneIPP(PChar->loc.destination));
+        SendToZone(PChar, PChar->loc.destination);
     }
 
     void HomePoint(CCharEntity* PChar, bool resetHPMP)
@@ -6623,7 +6639,7 @@ namespace charutils
         PChar->updatemask |= UPDATE_HP;
 
         PChar->clearPacketList();
-        SendToZone(PChar, ZoningType::Zoning, zoneutils::GetZoneIPP(PChar->loc.destination));
+        SendToZone(PChar, PChar->loc.destination);
     }
 
     bool AddWeaponSkillPoints(CCharEntity* PChar, SLOTTYPE slotid, int wspoints)
@@ -7347,5 +7363,58 @@ namespace charutils
         }
 
         return false;
+    }
+
+    void updateMannequin(CCharEntity* PChar)
+    {
+        // Build Mannequin model id list
+        auto getModelIdFromStorageSlot = [](CCharEntity* PChar, uint8 slot) -> uint16
+        {
+            uint16 modelId = 0x0000;
+
+            if (slot == 0)
+            {
+                return modelId;
+            }
+
+            auto* PItem = PChar->getStorage(LOC_STORAGE)->GetItem(slot);
+            if (PItem == nullptr)
+            {
+                return modelId;
+            }
+
+            if (auto* PItemEquipment = dynamic_cast<CItemEquipment*>(PItem))
+            {
+                modelId = PItemEquipment->getModelId();
+            }
+
+            return modelId;
+        };
+
+        for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
+        {
+            CItemContainer* PContainer = PChar->getStorage(safeContainerId);
+            for (int slotIndex = 1; slotIndex <= PContainer->GetSize(); ++slotIndex)
+            {
+                CItem* PContainerItem = PContainer->GetItem(slotIndex);
+                if (PContainerItem != nullptr && PContainerItem->isType(ITEM_FURNISHING))
+                {
+                    auto* PFurnishing = static_cast<CItemFurnishing*>(PContainerItem);
+                    if (PFurnishing->isInstalled() && PFurnishing->isMannequin())
+                    {
+                        auto*  PMannequin = PFurnishing;
+                        uint16 mainId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 0]);
+                        uint16 subId      = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 1]);
+                        uint16 rangeId    = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 2]);
+                        uint16 headId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 3]);
+                        uint16 bodyId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 4]);
+                        uint16 handsId    = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 5]);
+                        uint16 legId      = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 6]);
+                        uint16 feetId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 7]);
+                        PChar->pushPacket<CInventoryCountPacket>(safeContainerId, slotIndex, headId, bodyId, handsId, legId, feetId, mainId, subId, rangeId);
+                    }
+                }
+            }
+        }
     }
 }; // namespace charutils

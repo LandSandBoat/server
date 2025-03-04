@@ -65,20 +65,21 @@ namespace ipc
     {
         auto bytes = std::vector<uint8>();
         alpaca::serialize(object, bytes);
+
         return bytes;
     }
 
     template <typename T>
     auto toBytesWithHeader(const T& object) -> std::vector<uint8>
     {
-        auto       bytes         = std::vector<uint8>();
-        const auto bytes_written = alpaca::serialize(object, bytes);
+        auto       bytes        = std::vector<uint8>();
+        const auto bytesWritten = alpaca::serialize(object, bytes);
 
         const auto type = static_cast<uint8>(EnumTypeV<T>);
 
-        std::vector<uint8> message(1 + bytes_written);
+        std::vector<uint8> message(1 + bytesWritten);
         message[0] = type;
-        std::memcpy(message.data() + 1, bytes.data(), bytes_written);
+        std::memcpy(message.data() + 1, bytes.data(), bytesWritten);
 
         return message;
     }

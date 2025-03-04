@@ -26,17 +26,41 @@
 #include "ai/ai_container.h"
 #include "entities/charentity.h"
 #include "lua/luautils.h"
+#include "utils/instanceutils.h"
 #include "zone.h"
 
 #include "common/timer.h"
 
-CInstance::CInstance(CZone* zone, uint32 instanceid)
+CInstance::CInstance(CZone* zone)
 : CZoneEntities(zone)
-, m_instanceid(instanceid)
 , m_zone(zone)
 {
     TracyZoneScoped;
-    LoadInstance();
+}
+
+CInstance::CInstance(CZone* zone, uint32 instanceId)
+: CZoneEntities(zone)
+, m_instanceId(instanceId)
+, m_zone(zone)
+{
+    TracyZoneScoped;
+
+    const auto data = instanceutils::GetInstanceData(instanceId);
+
+    m_instanceName = data.instanceName;
+
+    m_timeLimit = std::chrono::minutes(data.timeLimit);
+    m_entrance  = data.entranceZoneId;
+
+    m_entryloc.x        = data.startX;
+    m_entryloc.y        = data.startY;
+    m_entryloc.z        = data.startZ;
+    m_entryloc.rotation = data.startRot;
+
+    m_zone_music_override.m_songDay   = data.musicDay;
+    m_zone_music_override.m_songNight = data.musicNight;
+    m_zone_music_override.m_bSongS    = data.battleSolo;
+    m_zone_music_override.m_bSongM    = data.battleMulti;
 
     m_startTime = server_clock::now();
     m_wipeTimer = m_startTime;
@@ -47,9 +71,9 @@ CInstance::~CInstance()
     TracyZoneScoped;
 }
 
-uint16 CInstance::GetID() const
+uint32 CInstance::GetID() const
 {
-    return m_instanceid;
+    return m_instanceId;
 }
 
 uint32 CInstance::GetProgress() const
@@ -62,74 +86,16 @@ uint32 CInstance::GetStage() const
     return m_stage;
 }
 
-/************************************************************************
- *                                                                       *
- *  Loads instances settings from instance_list                          *
- *                                                                       *
- ************************************************************************/
-
-void CInstance::LoadInstance()
+void CInstance::RegisterCommander(uint32 charId)
 {
-    TracyZoneScoped;
+    m_commander = charId;
 
-    static const char* Query = "SELECT "
-                               "instance_name, "
-                               "time_limit, "
-                               "entrance_zone, "
-                               "start_x, "
-                               "start_y, "
-                               "start_z, "
-                               "start_rot, "
-                               "music_day, "
-                               "music_night, "
-                               "battlesolo, "
-                               "battlemulti "
-                               "FROM instance_list "
-                               "WHERE instanceid = %u "
-                               "LIMIT 1";
-
-    if (_sql->Query(Query, m_instanceid) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
-    {
-        m_instanceName.insert(0, (const char*)_sql->GetData(0));
-
-        m_timeLimit                       = std::chrono::minutes(_sql->GetUIntData(1));
-        m_entrance                        = _sql->GetUIntData(2);
-        m_entryloc.x                      = _sql->GetFloatData(3);
-        m_entryloc.y                      = _sql->GetFloatData(4);
-        m_entryloc.z                      = _sql->GetFloatData(5);
-        m_entryloc.rotation               = _sql->GetUIntData(6);
-        m_zone_music_override.m_songDay   = _sql->GetUIntData(7);
-        m_zone_music_override.m_songNight = _sql->GetUIntData(8);
-        m_zone_music_override.m_bSongS    = _sql->GetUIntData(9);
-        m_zone_music_override.m_bSongM    = _sql->GetUIntData(10);
-
-        // Add to Lua cache
-        // TODO: This will happen more often than needed, but not so often that it's a performance concern
-        auto zone     = m_zone->getName();
-        auto name     = m_instanceName;
-        auto filename = fmt::format("./scripts/zones/{}/instances/{}.lua", zone, name);
-        luautils::CacheLuaObjectFromFile(filename);
-    }
-    else
-    {
-        ShowCritical("CZone::LoadInstance: Cannot load instance %u", m_instanceid);
-        Fail();
-    }
+    RegisterChar(charId);
 }
 
-/************************************************************************
- *                                                                       *
- *  Registers a char to the char list (and sets first one as leader)     *
- *                                                                       *
- ************************************************************************/
-
-void CInstance::RegisterChar(CCharEntity* PChar)
+void CInstance::RegisterChar(uint32 charId)
 {
-    if (m_registeredChars.empty())
-    {
-        m_commander = PChar->id;
-    }
-    m_registeredChars.emplace_back(PChar->id);
+    m_registeredChars.insert(charId);
 }
 
 uint8 CInstance::GetLevelCap() const
@@ -183,12 +149,12 @@ void CInstance::SetLevelCap(uint8 cap)
     m_levelcap = cap;
 }
 
-void CInstance::SetEntryLoc(float x, float y, float z, float rot)
+void CInstance::SetEntryLoc(float x, float y, float z, uint8 rot)
 {
     m_entryloc.x        = x;
     m_entryloc.y        = y;
     m_entryloc.z        = z;
-    m_entryloc.rotation = (uint8)rot;
+    m_entryloc.rotation = rot;
 }
 
 void CInstance::SetLastTimeUpdate(duration lastTime)
@@ -217,12 +183,6 @@ void CInstance::SetLocalVar(std::string const& name, uint64_t value)
     m_LocalVars[name] = value;
 }
 
-/************************************************************************
- *                                                                       *
- *  Checks if the instance has expired.  If not, runs instance timer     *
- *                                                                       *
- ************************************************************************/
-
 void CInstance::CheckTime(time_point tick)
 {
     if (m_lastTimeCheck + 1s <= tick && !Failed())
@@ -232,11 +192,11 @@ void CInstance::CheckTime(time_point tick)
     }
 }
 
-bool CInstance::CharRegistered(CCharEntity* PChar)
+bool CInstance::CharRegistered(uint32 charId)
 {
     for (auto id : m_registeredChars)
     {
-        if (PChar->id == id)
+        if (charId == id)
         {
             return true;
         }

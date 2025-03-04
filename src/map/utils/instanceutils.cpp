@@ -20,115 +20,220 @@
 */
 
 #include "instance_loader.h"
+
+#include "common/async.h"
+#include "common/database.h"
+#include "common/logging.h"
+#include "common/synchronized.h"
+
 #include "lua/luautils.h"
+
+#include "ipc_client.h"
+#include "zone_instance.h"
 
 #include "instanceutils.h"
 #include "zoneutils.h"
 
 #include <queue>
 
-namespace instanceutils
+namespace
 {
-    std::unordered_map<uint16, InstanceData_t> InstanceData;
-    std::queue<std::pair<uint32, uint16>>      LoadQueue; // player id, instance id
+    // Instance data loaded on startup
+    std::unordered_map<uint32, InstanceData> instanceData_;
 
-    void LoadInstanceList()
+    struct LoadRequest
     {
-        const char query[] =
-            "SELECT "
-            "instanceid,"                // 0
-            "instance_name,"             // 1
-            "instance_zone,"             // 2
-            "entrance_zone,"             // 3
-            "time_limit,"                // 4
-            "start_x,"                   // 5
-            "start_y,"                   // 6
-            "start_z,"                   // 7
-            "start_rot,"                 // 8
-            "instance_list.music_day,"   // 9
-            "instance_list.music_night," // 10
-            "instance_list.battlesolo,"  // 11
-            "instance_list.battlemulti," // 12
-            "zone_settings.name "        // 13
-            "FROM instance_list INNER JOIN zone_settings "
-            "ON instance_zone = zone_settings.zoneid "
-            "WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
+        ipc::InstanceLoadRequest         message;
+        std::unique_ptr<CInstanceLoader> loader;
+    };
 
-        char address[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-        int32 ret = _sql->Query(query, map_ip.s_addr, address, map_port);
+    std::deque<LoadRequest> loadRequestQueue_;
+} // namespace
 
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+void instanceutils::LoadInstanceList()
+{
+    // We need to make sure all of the instance data is available on all processes,
+    // since we can try and enter an instance from any process - or we might get
+    // ejected from an instance onto any other process.
+
+    const auto query =
+        "SELECT "
+        "instanceid,"
+        "instance_name,"
+        "instance_zone,"
+        "entrance_zone,"
+        "time_limit,"
+        "start_x,"
+        "start_y,"
+        "start_z,"
+        "start_rot,"
+        "instance_list.music_day,"
+        "instance_list.music_night,"
+        "instance_list.battlesolo,"
+        "instance_list.battlemulti "
+        "FROM instance_list";
+
+    const auto rset = db::preparedStmt(query);
+
+    FOR_DB_MULTIPLE_RESULTS(rset)
+    {
+        InstanceData data;
+
+        // Main data
+        data.instanceId     = rset->get<uint32>("instanceid");
+        data.instanceName   = rset->get<std::string>("instance_name");
+        data.instanceZoneId = rset->get<uint16>("instance_zone");
+        data.entranceZoneId = rset->get<uint16>("entrance_zone");
+        data.timeLimit      = rset->get<uint16>("time_limit");
+        data.startX         = rset->get<float>("start_x");
+        data.startY         = rset->get<float>("start_y");
+        data.startZ         = rset->get<float>("start_z");
+        data.startRot       = rset->get<uint8>("start_rot");
+        data.musicDay       = rset->get<int16>("music_day");
+        data.musicNight     = rset->get<int16>("music_night");
+        data.battleSolo     = rset->get<int16>("battlesolo");
+        data.battleMulti    = rset->get<int16>("battlemulti");
+
+        // Metadata
+        data.instanceZoneName = zoneutils::GetZoneName(data.instanceZoneId);
+        data.entranceZoneName = zoneutils::GetZoneName(data.entranceZoneId);
+        data.filename         = fmt::format("./scripts/zones/{}/instances/{}.lua", data.instanceZoneName, data.instanceName);
+
+        // Add to data cache
+        instanceData_[data.instanceId] = data;
+
+        // Add to Lua cache
+        luautils::CacheLuaObjectFromFile(data.filename);
+    }
+}
+
+void instanceutils::CheckInstanceLoading()
+{
+    if (loadRequestQueue_.empty())
+    {
+        return;
+    }
+
+    LoadRequest& request = loadRequestQueue_.front();
+
+    request.loader->update();
+
+    if (request.loader->ready())
+    {
+        message::send(ipc::InstanceLoadResponse{
+            .instanceId      = request.message.instanceId,
+            .instanceZoneId  = request.message.instanceZoneId,
+            .requesterId     = request.message.requesterId,
+            .requesterZoneId = request.message.requesterZoneId,
+            .status          = 0,
+        });
+
+        loadRequestQueue_.pop_front();
+    }
+}
+
+void instanceutils::RequestInstance(CCharEntity* PRequester, uint32 instanceId)
+{
+    if (!IsValidInstanceID(instanceId))
+    {
+        ShowError("Instance ID %d is not valid", instanceId);
+        return;
+    }
+
+    const auto data = GetInstanceData(instanceId);
+
+    // Ensure the entrance zone and instance zone are both on the same process
+    // TODO: Get rid of this requirement
+    const auto zonesOnThisProcess        = zoneutils::GetZonesAssignedToThisProcess();
+    const auto entranceZoneOnThisProcess = std::find(zonesOnThisProcess.begin(), zonesOnThisProcess.end(), data.entranceZoneId) != zonesOnThisProcess.end();
+    const auto instanceZoneOnThisProcess = std::find(zonesOnThisProcess.begin(), zonesOnThisProcess.end(), data.instanceZoneId) != zonesOnThisProcess.end();
+    if (!(entranceZoneOnThisProcess && instanceZoneOnThisProcess))
+    {
+        ShowError("Entrance zone and instance zone for instance ID %d are not on the same process. Aborting.", instanceId);
+        return;
+    }
+
+    std::vector<uint32> memberIds;
+
+    // clang-format off
+    PRequester->ForParty([&](CBattleEntity* PChar)
+    {
+        memberIds.push_back(PChar->id);
+    });
+    // clang-format on
+
+    message::send(ipc::InstanceLoadRequest{
+        .instanceId      = data.instanceId,
+        .instanceZoneId  = data.instanceZoneId,
+        .requesterId     = PRequester->id,
+        .requesterZoneId = PRequester->loc.zone->GetID(),
+        .memberIds       = memberIds,
+    });
+}
+
+void instanceutils::TryLoadInstance(const ipc::InstanceLoadRequest& message)
+{
+    loadRequestQueue_.push_back(LoadRequest{
+        .message = message,
+        .loader  = std::make_unique<CInstanceLoader>(message),
+    });
+}
+
+void instanceutils::TrySendToInstance(const ipc::InstanceLoadResponse& message)
+{
+    // TODO: Check status
+
+    auto PZone = zoneutils::GetZone(message.requesterZoneId);
+    if (!PZone)
+    {
+        ShowError("Could not find zone for requester ID %d", message.requesterId);
+        return;
+    }
+
+    auto PChar = PZone->GetCharByID(message.requesterId);
+    if (!PChar)
+    {
+        ShowError("Could not find char for requester ID %d", message.requesterId);
+        return;
+    }
+
+    // At this point, we know the requesting zone and instance zone are on the same process
+    auto PZoneInstance = dynamic_cast<CZoneInstance*>(zoneutils::GetZone(message.instanceZoneId));
+    if (!PZoneInstance)
+    {
+        ShowError("Could not find instance zone for instance ID %d", message.instanceId);
+        return;
+    }
+
+    auto PInstance = PZoneInstance->GetInstance(message.requesterId);
+    if (!PInstance)
+    {
+        ShowError("Could not find instance for requester ID %d", message.requesterId);
+        return;
+    }
+
+    luautils::OnInstanceCreatedCallback(PChar, PInstance);
+}
+
+auto instanceutils::GetInstanceData(uint32 instanceId) -> InstanceData
+{
+    return instanceData_.at(instanceId);
+}
+
+auto instanceutils::GetEntraceZoneForInstanceZone(uint16 instanceZoneId) -> uint16
+{
+    for (const auto& [_, data] : instanceData_)
+    {
+        if (data.instanceZoneId == instanceZoneId)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                InstanceData_t data;
-
-                // Main data
-                data.id            = static_cast<uint32>(_sql->GetIntData(0));
-                data.instance_name = reinterpret_cast<const char*>(_sql->GetData(1));
-                data.instance_zone = static_cast<uint16>(_sql->GetIntData(2));
-                data.entrance_zone = static_cast<uint16>(_sql->GetIntData(3));
-                data.time_limit    = static_cast<uint16>(_sql->GetIntData(4));
-                data.start_x       = _sql->GetFloatData(5);
-                data.start_y       = _sql->GetFloatData(6);
-                data.start_z       = _sql->GetFloatData(7);
-                data.start_rot     = static_cast<uint16>(_sql->GetIntData(8));
-                data.music_day     = static_cast<uint16>(_sql->GetIntData(9));
-                data.music_night   = static_cast<uint16>(_sql->GetIntData(10));
-                data.battlesolo    = static_cast<uint16>(_sql->GetIntData(11));
-                data.battlemulti   = static_cast<uint16>(_sql->GetIntData(12));
-
-                // Meta data
-                data.instance_zone_name = zoneutils::GetZone(data.instance_zone)->getName();
-                data.entrance_zone_name = _sql->GetStringData(13);
-                data.filename           = fmt::format("./scripts/zones/{}/instances/{}.lua", data.instance_zone_name, data.instance_name);
-
-                // Add to data cache
-                InstanceData[data.id] = data;
-
-                // Add to Lua cache
-                luautils::CacheLuaObjectFromFile(data.filename);
-            }
+            return data.entranceZoneId;
         }
     }
 
-    // NOTE: This used to be multithreaded, but was starting to cause problems with repeated loading
-    //       and loading in quick succession, so we've swapped it out for a queue which services a
-    //       single request at the end of every tick.
-    // TODO: Make this multithreaded and not blocking the main tick loop
-    void CheckInstance()
-    {
-        if (!LoadQueue.empty())
-        {
-            auto requestPair = LoadQueue.front();
-            LoadQueue.pop();
+    return 0;
+}
 
-            auto* PRequester = zoneutils::GetChar(requestPair.first);
-            if (!PRequester)
-            {
-                ShowError("Encountered invalid requester id when loading instance!");
-                return;
-            }
-            auto instanceId = requestPair.second;
-
-            auto loader = std::make_unique<CInstanceLoader>(instanceId, PRequester);
-            loader->LoadInstance();
-        }
-    }
-
-    void LoadInstance(uint32 instanceid, CCharEntity* PRequester)
-    {
-        LoadQueue.emplace(PRequester->id, instanceid);
-    }
-
-    InstanceData_t GetInstanceData(uint32 instanceid)
-    {
-        return InstanceData[instanceid];
-    }
-
-    bool IsValidInstanceID(uint32 instanceid)
-    {
-        return InstanceData.find(instanceid) != InstanceData.end();
-    }
-}; // namespace instanceutils
+bool instanceutils::IsValidInstanceID(uint32 instanceId)
+{
+    return instanceData_.find(instanceId) != instanceData_.end();
+}

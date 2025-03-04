@@ -30,7 +30,7 @@ class CMobSpellContainer;
 class CMobSpellList;
 class CEnmityContainer;
 
-enum SPAWNTYPE
+enum SPAWNTYPE : uint8
 {
     SPAWNTYPE_NORMAL    = 0x00, // 00:00-24:00
     SPAWNTYPE_ATNIGHT   = 0x01, // 20:00-04:00
@@ -40,13 +40,13 @@ enum SPAWNTYPE
     SPAWNTYPE_MOONPHASE = 0x10,
     SPAWNTYPE_LOTTERY   = 0x20,
     SPAWNTYPE_WINDOWED  = 0x40,
-    SPAWNTYPE_SCRIPTED  = 0x80 // scripted spawn
+    SPAWNTYPE_SCRIPTED  = 0x80, // scripted spawn
 };
 
-enum SPECIALFLAG
+enum SPECIALFLAG : uint8
 {
     SPECIALFLAG_NONE   = 0x0,
-    SPECIALFLAG_HIDDEN = 0x1 // only use special when hidden
+    SPECIALFLAG_HIDDEN = 0x1, // only use special when hidden
 };
 
 enum ROAMFLAG : uint16
@@ -66,7 +66,7 @@ enum ROAMFLAG : uint16
     ROAMFLAG_FOLLOW   = 0x800, // follows a player when sighted for a little while
 };
 
-enum MOBTYPE
+enum MOBTYPE : uint8
 {
     MOBTYPE_NORMAL      = 0x00,
     MOBTYPE_0X01        = 0x01, // available for use
@@ -74,7 +74,7 @@ enum MOBTYPE
     MOBTYPE_FISHED      = 0x04,
     MOBTYPE_CALLED      = 0x08,
     MOBTYPE_BATTLEFIELD = 0x10,
-    MOBTYPE_EVENT       = 0x20
+    MOBTYPE_EVENT       = 0x20,
 };
 
 enum DETECT : uint16
@@ -88,7 +88,7 @@ enum DETECT : uint16
     DETECT_MAGIC       = 0x20,
     DETECT_WEAPONSKILL = 0x40,
     DETECT_JOBABILITY  = 0x80,
-    DETECT_SCENT       = 0x100
+    DETECT_SCENT       = 0x100,
 };
 
 enum BEHAVIOR : uint16
@@ -99,7 +99,7 @@ enum BEHAVIOR : uint16
     BEHAVIOR_RAISABLE     = 0x004, // mob can be raised via Raise spells
     BEHAVIOR_NOHELP       = 0x008, // mob can not be targeted by helpful magic from players (cure, protect, etc)
     BEHAVIOR_AGGRO_AMBUSH = 0x200, // mob aggroes by ambush
-    BEHAVIOR_NO_TURN      = 0x400  // mob does not turn to face target
+    BEHAVIOR_NO_TURN      = 0x400, // mob does not turn to face target
 };
 
 class CMobSkillState;

@@ -98,7 +98,7 @@ public:
 
     void updateEvent(sol::variadic_args va);
     void updateEventString(sol::variadic_args va); // (string, string, string, string, uint32, ...)
-    auto getEventTarget() -> CBaseEntity*;
+    auto getEventTarget(bool silent = false) -> CBaseEntity*;
     bool isInEvent();       // Returns true if the player is in an event
     void release();         // Stops event
     bool startSequence();   // Flags the player as being in a sequence
@@ -572,7 +572,7 @@ public:
     // Instances
     auto getInstance() -> CInstance*;
     void setInstance(CLuaInstance* PLuaInstance);
-    void createInstance(uint16 instanceID);
+    void requestInstance(uint32 instanceID);
     void instanceEntry(CLuaBaseEntity* PLuaBaseEntity, uint32 response);
     // int32 isInAssault(lua_Stat*); // If player is in a Instanced Assault Dungeon returns true --- Not Implemented
 

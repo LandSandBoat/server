@@ -44,6 +44,7 @@ namespace zoneutils
     int GetWeatherElement(WEATHER weather);
 
     CZone*       GetZone(uint16 ZoneID);
+    auto         GetZoneName(uint16 ZoneID) -> std::string;
     CNpcEntity*  GetTrigger(uint16 TargID, uint16 ZoneID);
     CBaseEntity* GetEntity(uint32 ID, uint8 filter = -1);
     CCharEntity* GetCharByName(std::string const& name);

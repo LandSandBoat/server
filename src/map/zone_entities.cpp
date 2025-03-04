@@ -1946,7 +1946,7 @@ void CZoneEntities::ZoneServer(time_point tick)
         }
     }
 
-    // forceLogout eventually removes the char from m_charList -- so we must remove them here
+    // ForceLogout eventually removes the char from m_charList -- so we must remove them here
     for (auto* PChar : m_charsToLogout)
     {
         PChar->clearPacketList();
@@ -1974,7 +1974,7 @@ void CZoneEntities::ZoneServer(time_point tick)
             continue;
         }
 
-        charutils::SendToZone(PChar, ZoningType::Zoning, ipp);
+        charutils::SendToZone(PChar, PChar->loc.destination);
     }
 
     if (tick > m_EffectCheckTime)

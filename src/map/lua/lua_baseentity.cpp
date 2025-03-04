@@ -1260,7 +1260,7 @@ void CLuaBaseEntity::updateEventString(sol::variadic_args va)
  *  Notes   : Used to relocate Siren's Tear, as an example
  ************************************************************************/
 
-CBaseEntity* CLuaBaseEntity::getEventTarget()
+CBaseEntity* CLuaBaseEntity::getEventTarget(bool silent)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -1269,9 +1269,24 @@ CBaseEntity* CLuaBaseEntity::getEventTarget()
     }
 
     auto* PChar = (CCharEntity*)m_PBaseEntity;
+
+    if (PChar->currentEvent == nullptr)
+    {
+        if (!silent)
+        {
+            ShowWarning("No event is currently active for %s", PChar->getName());
+        }
+
+        return nullptr;
+    }
+
     if (PChar->currentEvent->targetEntity == nullptr)
     {
-        ShowWarning("EventTarget for event %d is empty: %s", PChar->currentEvent->eventId, m_PBaseEntity->getName());
+        if (!silent)
+        {
+            ShowWarning("EventTarget for event %d is empty: %s", PChar->currentEvent->eventId, m_PBaseEntity->getName());
+        }
+
         return nullptr;
     }
 
@@ -11444,24 +11459,25 @@ void CLuaBaseEntity::setInstance(CLuaInstance* PLuaInstance)
         return;
     }
 
-    CInstance*   PInstance   = PLuaInstance->GetInstance();
-    CCharEntity* PChar       = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    m_PBaseEntity->PInstance = PInstance;
+    CInstance*   PInstance = PLuaInstance->GetInstance();
+    CCharEntity* PChar     = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    PChar->PInstance = PInstance;
 
     if (PInstance && PChar)
     {
-        PInstance->RegisterChar(PChar);
+        PInstance->RegisterChar(PChar->id);
     }
 }
 
 /************************************************************************
- *  Function: createInstance()
+ *  Function: requestInstance()
  *  Purpose : Creates a new instance for a PC
- *  Example : player:createInstance(player:getCurrentAssault())
+ *  Example : player:requestInstance(player:getCurrentAssault())
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::createInstance(uint16 instanceID)
+void CLuaBaseEntity::requestInstance(uint32 instanceID)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -11471,11 +11487,11 @@ void CLuaBaseEntity::createInstance(uint16 instanceID)
 
     if (!instanceutils::IsValidInstanceID(instanceID))
     {
-        ShowError("CLuaBaseEntity::createInstance: Invalid instanceID: %d", instanceID);
+        ShowError("CLuaBaseEntity::requestInstance: Invalid instanceID: %d", instanceID);
         return;
     }
 
-    instanceutils::LoadInstance(instanceID, static_cast<CCharEntity*>(m_PBaseEntity));
+    instanceutils::RequestInstance(static_cast<CCharEntity*>(m_PBaseEntity), instanceID);
 }
 
 /************************************************************************
@@ -19367,7 +19383,7 @@ void CLuaBaseEntity::Register()
     // Instances
     SOL_REGISTER("getInstance", CLuaBaseEntity::getInstance);
     SOL_REGISTER("setInstance", CLuaBaseEntity::setInstance);
-    SOL_REGISTER("createInstance", CLuaBaseEntity::createInstance);
+    SOL_REGISTER("requestInstance", CLuaBaseEntity::requestInstance);
     SOL_REGISTER("instanceEntry", CLuaBaseEntity::instanceEntry);
 
     SOL_REGISTER("getConfrontationEffect", CLuaBaseEntity::getConfrontationEffect);

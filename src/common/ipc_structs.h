@@ -291,4 +291,25 @@ namespace ipc
         uint8  rot{};
         uint32 moghouseId{};
     };
+
+    struct InstanceLoadRequest
+    {
+        uint32 instanceId{};
+        uint16 instanceZoneId{};
+        uint32 requesterId{};
+        uint16 requesterZoneId{};
+
+        std::vector<uint32> memberIds{};
+    };
+
+    struct InstanceLoadResponse
+    {
+        uint32 instanceId{};
+        uint16 instanceZoneId{};
+        uint32 requesterId{};
+        uint16 requesterZoneId{};
+
+        std::vector<uint32> memberIds{};
+        uint8               status{};
+    };
 } // namespace ipc

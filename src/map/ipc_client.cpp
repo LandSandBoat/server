@@ -47,6 +47,7 @@
 #include "items/item_linkshell.h"
 
 #include "utils/charutils.h"
+#include "utils/instanceutils.h"
 #include "utils/jailutils.h"
 #include "utils/serverutils.h"
 #include "utils/zoneutils.h"
@@ -809,7 +810,7 @@ void IPCClient::handleMessage_EntityInformationResponse(const IPP& ipp, const ip
 
             PChar->clearPacketList();
 
-            charutils::SendToZone(PChar, ZoningType::Zoning, zoneutils::GetZoneIPP(PChar->loc.destination));
+            charutils::SendToZone(PChar, PChar->loc.destination);
         }
     }
 }
@@ -836,8 +837,22 @@ void IPCClient::handleMessage_SendPlayerToLocation(const IPP& ipp, const ipc::Se
 
         PChar->clearPacketList();
 
-        charutils::SendToZone(PChar, ZoningType::Zoning, zoneutils::GetZoneIPP(PChar->loc.destination));
+        charutils::SendToZone(PChar, PChar->loc.destination);
     }
+}
+
+void IPCClient::handleMessage_InstanceLoadRequest(const IPP& ipp, const ipc::InstanceLoadRequest& message)
+{
+    TracyZoneScoped;
+
+    instanceutils::TryLoadInstance(message);
+}
+
+void IPCClient::handleMessage_InstanceLoadResponse(const IPP& ipp, const ipc::InstanceLoadResponse& message)
+{
+    TracyZoneScoped;
+
+    instanceutils::TrySendToInstance(message);
 }
 
 void IPCClient::handleUnknownMessage(const IPP& ipp, const std::span<uint8_t> message)

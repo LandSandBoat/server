@@ -668,6 +668,20 @@ void IPCServer::handleMessage_SendPlayerToLocation(const IPP& ipp, const ipc::Se
     rerouteMessageToCharId(message.targetId, message);
 }
 
+void IPCServer::handleMessage_InstanceLoadRequest(const IPP& ipp, const ipc::InstanceLoadRequest& message)
+{
+    TracyZoneScoped;
+
+    rerouteMessageToZoneId(message.instanceZoneId, message);
+}
+
+void IPCServer::handleMessage_InstanceLoadResponse(const IPP& ipp, const ipc::InstanceLoadResponse& message)
+{
+    TracyZoneScoped;
+
+    rerouteMessageToZoneId(message.requesterZoneId, message);
+}
+
 void IPCServer::handleUnknownMessage(const IPP& ipp, const std::span<uint8_t> message)
 {
     TracyZoneScoped;
