@@ -46,4 +46,6 @@ era/sql/
 morecustom/sql
 morecustom/cpp
 morecustom/lua/enum
+morecustom/lua/complete_overrides
+# Additive overrides must come AFTER complete overrides
 morecustom/lua/additive_overrides
