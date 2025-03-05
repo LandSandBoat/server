@@ -712,7 +712,7 @@ namespace charutils
             }
         }
         const auto [_, accid] = charutils::getCharIdAndAccountIdFromName(PChar->getName());
-        PChar->accid = accid;
+        PChar->accid          = accid;
 
         db::query(fmt::format("UPDATE char_stats SET zoning = 0 WHERE charid = {}", PChar->id));
 
