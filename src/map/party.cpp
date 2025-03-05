@@ -48,19 +48,6 @@
 #include "packets/party_effects.h"
 #include "packets/party_member_update.h"
 
-// should have brace-or-equal initializers when MSVC supports it
-struct CParty::partyInfo_t
-{
-    uint32      id         = {};
-    uint32      partyid    = {};
-    uint32      allianceid = {};
-    std::string name       = {};
-    uint16      flags      = {};
-    uint16      zone       = {};
-    uint16      prev_zone  = {};
-};
-
-// Constructor
 CParty::CParty(CBattleEntity* PEntity)
 : m_PartyID(0)
 , m_PartyType(PARTY_MOBS)

@@ -52,15 +52,20 @@ enum PARTYFLAG : uint16
 };
 DECLARE_FORMAT_AS_UNDERLYING(PARTYFLAG);
 
-/************************************************************************
- *                                                                      *
- *  Character group class                                               *
- *                                                                      *
- ************************************************************************/
-
 class CParty
 {
 public:
+    struct partyInfo_t
+    {
+        uint32      id{};
+        uint32      partyid{};
+        uint32      allianceid{};
+        std::string name{};
+        uint16      flags{};
+        uint16      zone{};
+        uint16      prev_zone{};
+    };
+
     CParty(CBattleEntity* PEntity);
     CParty(uint32 id);
     ~CParty();
