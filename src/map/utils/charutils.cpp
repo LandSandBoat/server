@@ -365,6 +365,7 @@ namespace charutils
                                "pos_z, "
                                "moghouse, "
                                "boundary, "
+                               "accid, "
                                "home_zone, "
                                "home_rot, "
                                "home_x, "
@@ -409,6 +410,7 @@ namespace charutils
             PChar->loc.p.z         = rset->get<float>("pos_z");
             PChar->m_moghouseID    = rset->get<uint32>("moghouse");
             PChar->loc.boundary    = rset->get<uint16>("boundary");
+            PChar->accid           = rset->get<uint32>("accid");
 
             PChar->profile.home_point.destination = rset->get<uint16>("home_zone");
             PChar->profile.home_point.p.rotation  = rset->get<uint8>("home_rot");
@@ -711,8 +713,6 @@ namespace charutils
                 PChar->clearCharVarsWithPrefix("jugpet-");
             }
         }
-        const auto [_, accid] = charutils::getCharIdAndAccountIdFromName(PChar->getName());
-        PChar->accid          = accid;
 
         db::query(fmt::format("UPDATE char_stats SET zoning = 0 WHERE charid = {}", PChar->id));
 
