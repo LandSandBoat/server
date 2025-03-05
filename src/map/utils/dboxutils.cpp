@@ -282,8 +282,9 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, uint8 action, uint8 boxtype
                     return;
                 }
 
+                const auto [_, senderAccid] = charutils::getCharIdAndAccountIdFromName(PChar->getName());
                 // Different accounts
-                if (PChar->accid != recvAccid)
+                if (senderAccid != recvAccid)
                 {
                     return;
                 }
