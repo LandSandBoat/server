@@ -52799,15 +52799,15 @@ INSERT INTO `mob_spawn_points` VALUES (17375267,'Maat','Maat',11,182.059,-64.000
 INSERT INTO `mob_spawn_points` VALUES (17375268,'Maats_Avatar','Maat\'s Avatar',12,321.059,-119.000,400.999,189);
 
 -- Charming Trio
-INSERT INTO `mob_spawn_points` VALUES (17375269,'Prune','Prune',13,-132.000,56.000,-224.000,65);
-INSERT INTO `mob_spawn_points` VALUES (17375270,'Pepper','Pepper',14,-138.000,56.000,-224.000,65);
-INSERT INTO `mob_spawn_points` VALUES (17375271,'Phoedme','Phoedme',15,-144.000,56.000,-224.000,65);
-INSERT INTO `mob_spawn_points` VALUES (17375273,'Prune','Prune',13,28.231,-4.000,-24.076,65);
-INSERT INTO `mob_spawn_points` VALUES (17375274,'Pepper','Pepper',14,22.231,-4.000,-24.076,65);
-INSERT INTO `mob_spawn_points` VALUES (17375275,'Phoedme','Phoedme',15,16.231,-4.000,-24.076,65);
-INSERT INTO `mob_spawn_points` VALUES (17375277,'Prune','Prune',13,188.059,-64.000,175.999,65);
-INSERT INTO `mob_spawn_points` VALUES (17375278,'Pepper','Pepper',14,182.059,-64.000,175.999,65);
-INSERT INTO `mob_spawn_points` VALUES (17375279,'Phoedme','Phoedme',15,176.059,-64.000,175.999,65);
+INSERT INTO `mob_spawn_points` VALUES (17375269,'Prune','Prune',13,-136.000,56.24,-224.199,192);
+INSERT INTO `mob_spawn_points` VALUES (17375270,'Pepper','Pepper',14,-139.000,56.043,-224.199,192);
+INSERT INTO `mob_spawn_points` VALUES (17375271,'Phoedme','Phoedme',15,-142,56.24,-224.199,192);
+INSERT INTO `mob_spawn_points` VALUES (17375273,'Prune','Prune',13,24.045,-3.759,-24.259,192);
+INSERT INTO `mob_spawn_points` VALUES (17375274,'Pepper','Pepper',14,21.045,-3.956,-24.259,192);
+INSERT INTO `mob_spawn_points` VALUES (17375275,'Phoedme','Phoedme',15,18.045,-3.759,-24.259,192);
+INSERT INTO `mob_spawn_points` VALUES (17375277,'Prune','Prune',13,184.09,-63.758,175.681,192);
+INSERT INTO `mob_spawn_points` VALUES (17375278,'Pepper','Pepper',14,181.09,-63.955,175.681,192);
+INSERT INTO `mob_spawn_points` VALUES (17375279,'Phoedme','Phoedme',15,178.09,-63.758,175.681,192);
 
 -- Creeping Doom
 INSERT INTO `mob_spawn_points` VALUES (17375281,'Bitoso','Bitoso',16,-139.000,56.043,-224.199,192);
