@@ -21,6 +21,7 @@
 
 #include "http_server.h"
 
+#include "common/async.h"
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/settings.h"
@@ -39,8 +40,6 @@ HTTPServer::HTTPServer()
         return;
     }
 
-    ts = std::make_unique<ts::task_system>(1);
-
     // NOTE: Everything registered in here happens off the main thread, so lock any global resources
     //     : you might be using.
 
@@ -50,7 +49,7 @@ HTTPServer::HTTPServer()
     auto port = settings::get<uint16>("network.HTTP_PORT");
 
     // clang-format off
-    ts->schedule([this, host, port]()
+    Async::getInstance()->submit([this, host, port]()
     {
         m_httpServer.Get("/api", [&](httplib::Request const& req, httplib::Response& res)
         {

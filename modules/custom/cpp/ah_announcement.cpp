@@ -11,8 +11,8 @@
 #include "common/database.h"
 #include "common/timer.h"
 
+#include "map/ipc_client.h"
 #include "map/item_container.h"
-#include "map/message.h"
 #include "map/packets/auction_house.h"
 #include "map/packets/chat_message.h"
 #include "map/packets/inventory_finish.h"
@@ -162,8 +162,12 @@ class AHAnnouncementModule : public CPPModule
                                             name[0] = std::toupper(name[0]);
 
                                             // Send message to seller!
-                                            message::send(sellerId, std::make_unique<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3,
-                                                fmt::format("Your '{}' has sold to {} for {} gil!", name, PChar->name, price).c_str(), ""));
+                                            message::send(ipc::ChatMessageCustom{
+                                                .recipientId = sellerId,
+                                                .senderName  = "",
+                                                .message     = fmt::format("Your '{}' has sold to {} for {} gil!", name, PChar->getName(), price),
+                                                .messageType = MESSAGE_SYSTEM_3,
+                                            });
                                         }
                                     }
                                 }

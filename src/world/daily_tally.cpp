@@ -30,8 +30,8 @@ namespace dailytally
 {
     void UpdateDailyTallyPoints()
     {
-        uint16 dailyTallyLimit  = settings::get<uint16>("main.DAILY_TALLY_LIMIT");
-        uint16 dailyTallyAmount = settings::get<uint16>("main.DAILY_TALLY_AMOUNT");
+        int32 dailyTallyLimit  = std::clamp<int32>(settings::get<int32>("main.DAILY_TALLY_LIMIT"), std::numeric_limits<uint16>::min(), std::numeric_limits<uint16>::max());
+        int32 dailyTallyAmount = std::clamp<int32>(settings::get<int32>("main.DAILY_TALLY_AMOUNT"), std::numeric_limits<uint16>::min(), std::numeric_limits<uint16>::max());
 
         if (!db::preparedStmt("UPDATE char_points "
                               "SET char_points.daily_tally = LEAST(?, char_points.daily_tally + ?) "

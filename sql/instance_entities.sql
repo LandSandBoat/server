@@ -1519,7 +1519,6 @@ INSERT INTO `instance_entities` VALUES (7500,17084426);
 INSERT INTO `instance_entities` VALUES (7500,17084722);
 INSERT INTO `instance_entities` VALUES (7500,17084856);
 INSERT INTO `instance_entities` VALUES (7500,17084857);
-INSERT INTO `instance_entities` VALUES (7500,17084889);
 INSERT INTO `instance_entities` VALUES (7500,17084890);
 INSERT INTO `instance_entities` VALUES (7500,17084891);
 INSERT INTO `instance_entities` VALUES (7500,17084892);

@@ -2,6 +2,8 @@
 -- Tables defining diferent elemental caracteristics.
 -- Ordered by element ID.
 -----------------------------------
+require('scripts/globals/utils')
+-----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.element = xi.combat.element or {}
@@ -41,7 +43,7 @@ xi.combat.element.dataTable =
 
 xi.combat.element.getOppositeElement = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return 0
@@ -55,7 +57,7 @@ end
 -----------------------------------
 xi.combat.element.getAssociatedDay = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return -1
@@ -66,7 +68,7 @@ end
 
 xi.combat.element.getOppositeDay = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return -1
@@ -80,7 +82,7 @@ end
 
 xi.combat.element.getDayElement = function(day)
     -- Validate fed value.
-    local dayToCheck = day or -1
+    local dayToCheck = utils.defaultIfNil(day, -1)
 
     for elementToCheck = xi.element.FIRE, xi.element.DARK do
         if dayToCheck == xi.combat.element.dataTable[elementToCheck][column.DAY_ASSOCIATED] then
@@ -96,7 +98,7 @@ end
 -----------------------------------
 xi.combat.element.getAssociatedSingleWeather = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return -1
@@ -107,7 +109,7 @@ end
 
 xi.combat.element.getOppositeSingleWeather = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return -1
@@ -121,7 +123,7 @@ end
 
 xi.combat.element.getAssociatedDoubleWeather = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return -1
@@ -132,7 +134,7 @@ end
 
 xi.combat.element.getOppositeDoubleWeather = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return -1
@@ -146,7 +148,7 @@ end
 
 xi.combat.element.getWeatherElement = function(weather)
     -- Validate fed value.
-    local weatherToCheck = weather or 0
+    local weatherToCheck = utils.defaultIfNil(weather, 0)
 
     for elementChecked = xi.element.FIRE, xi.element.DARK do
         local elementalSingle = xi.combat.element.dataTable[elementChecked][column.WEATHER_SINGLE]
@@ -165,7 +167,7 @@ end
 -----------------------------------
 xi.combat.element.getElementalSDTModifier = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return 0
@@ -176,7 +178,7 @@ end
 
 xi.combat.element.getElementalResistanceRankModifier = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return 0
@@ -187,7 +189,7 @@ end
 
 xi.combat.element.getElementalNullificationModifier = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return 0
@@ -198,7 +200,7 @@ end
 
 xi.combat.element.getElementalAbsorptionModifier = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return 0
@@ -209,7 +211,7 @@ end
 
 xi.combat.element.getElementalMACCModifier = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return 0
@@ -220,7 +222,7 @@ end
 
 xi.combat.element.getElementalMEVAModifier = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return 0
@@ -231,7 +233,7 @@ end
 
 xi.combat.element.getElementalAffinityDMGModifier = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return 0
@@ -242,7 +244,7 @@ end
 
 xi.combat.element.getElementalAffinityMACCModifier = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return 0
@@ -253,7 +255,7 @@ end
 
 xi.combat.element.getForcedDayOrWeatherBonusModifier = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
         return 0
@@ -267,7 +269,7 @@ end
 -----------------------------------
 xi.combat.element.getAssociatedBarspellEffect = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.WATER then
         return 0
@@ -281,7 +283,7 @@ end
 -----------------------------------
 xi.combat.element.getElementalPotencyMerit = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.WATER then
         return 0
@@ -292,7 +294,7 @@ end
 
 xi.combat.element.getElementalAccuracyMerit = function(element)
     -- Validate fed value.
-    local elementToCheck = element or 0
+    local elementToCheck = utils.defaultIfNil(element, 0)
 
     if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.WATER then
         return 0

@@ -17,5 +17,6 @@ return {
     ['qm3']         = { messageSpecial = ID.text.DISMAYED_CUSTOMER },
     ['Ramaufont']   = { text = ID.text.RAMAUFONT_DIALOG },
     ['Saradorial']  = { event = 139 },
+    ['Vilatroire']  = { event = 136 },
     ['Zovriace']    = { text = ID.text.ZOVRIACE_DIALOG },
 }

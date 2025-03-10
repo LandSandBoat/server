@@ -19,8 +19,6 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/ability.h
     ${CMAKE_CURRENT_SOURCE_DIR}/alliance.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/alliance.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/anticheat.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/anticheat.h
     ${CMAKE_CURRENT_SOURCE_DIR}/attack.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/attack.h
     ${CMAKE_CURRENT_SOURCE_DIR}/attackround.cpp
@@ -64,6 +62,8 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/instance_loader.h
     ${CMAKE_CURRENT_SOURCE_DIR}/instance.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/instance.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ipc_client.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/ipc_client.h
     ${CMAKE_CURRENT_SOURCE_DIR}/item_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/item_container.h
     ${CMAKE_CURRENT_SOURCE_DIR}/items.h
@@ -79,8 +79,6 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/map.h
     ${CMAKE_CURRENT_SOURCE_DIR}/merit.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/merit.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/message.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mob_modifier.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mob_spell_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/mob_spell_container.h

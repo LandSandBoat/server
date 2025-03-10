@@ -111,6 +111,11 @@ end
 function CBaseEntity:getVar(varName)
 end
 
+---@param prefix string
+---@return table
+function CBaseEntity:getCharVarsWithPrefix(prefix)
+end
+
 ---@param varName string
 ---@param value integer
 ---@param expiry integer?
@@ -890,7 +895,7 @@ end
 ---@param targetID integer
 ---@param option boolean?
 ---@return nil
-function CBaseEntity:goToEntity(targetID, option)
+function CBaseEntity:gotoEntity(targetID, option)
 end
 
 ---@param playerName string
@@ -946,6 +951,14 @@ end
 function CBaseEntity:delItem(itemID, quantity, containerID)
 end
 
+---@param itemId integer
+---@param quantity integer
+---@param containerId integer
+---@param slotId integer
+---@return boolean
+function CBaseEntity:delItemAt(itemId, quantity, containerId, slotId)
+end
+
 ---@param containerID integer?
 ---@return boolean
 function CBaseEntity:delContainerItems(containerID)
@@ -979,6 +992,13 @@ end
 ---@param location integer?
 ---@return CItem?
 function CBaseEntity:findItem(itemID, location)
+end
+
+---@nodiscard
+---@param itemID integer
+---@param location integer?
+---@return table
+function CBaseEntity:findItems(itemID, location)
 end
 
 ---@param size integer
@@ -3935,6 +3955,11 @@ end
 ---@param arg2 integer?
 ---@return nil
 function CBaseEntity:addTreasure(itemID, arg1, arg2)
+end
+
+---@nodiscard
+---@return CTreasurePool?
+function CBaseEntity:getTreasurePool()
 end
 
 ---@nodiscard

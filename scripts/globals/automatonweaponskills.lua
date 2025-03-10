@@ -224,19 +224,19 @@ xi.autows.doAutoPhysicalWeaponskill = function(attacker, target, wsID, tp, prima
     if not wsParams.formless then
         --finaldmg = target:physicalDmgTaken(finaldmg, attack.damageType)
         if attack.weaponType == xi.skill.HAND_TO_HAND then
-            finaldmg = finaldmg * target:getMod(xi.mod.HTH_SDT) / 1000
+            finaldmg = finaldmg * (1 + target:getMod(xi.mod.HTH_SDT) / 10000)
         elseif
             attack.weaponType == xi.skill.DAGGER or
             attack.weaponType == xi.skill.POLEARM
         then
-            finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
+            finaldmg = finaldmg * (1 + target:getMod(xi.mod.PIERCE_SDT) / 10000)
         elseif
             attack.weaponType == xi.skill.CLUB or
             attack.weaponType == xi.skill.STAFF
         then
-            finaldmg = finaldmg * target:getMod(xi.mod.IMPACT_SDT) / 1000
+            finaldmg = finaldmg * (1 + target:getMod(xi.mod.IMPACT_SDT) / 10000)
         else
-            finaldmg = finaldmg * target:getMod(xi.mod.SLASH_SDT) / 1000
+            finaldmg = finaldmg * (1 + target:getMod(xi.mod.SLASH_SDT) / 10000)
         end
     end
 
@@ -308,7 +308,7 @@ xi.autows.doAutoRangedWeaponskill = function(attacker, target, wsID, wsParams, t
 
     -- Calculate reductions
     finaldmg = target:rangedDmgTaken(finaldmg)
-    finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
+    finaldmg = finaldmg * (1 + target:getMod(xi.mod.PIERCE_SDT) / 10000)
 
     finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg

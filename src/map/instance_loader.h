@@ -32,7 +32,7 @@ class CZone;
 class CInstanceLoader
 {
 public:
-    CInstanceLoader(uint16 instanceid, CCharEntity* PRequester);
+    CInstanceLoader(uint32 instanceid, CCharEntity* PRequester);
     ~CInstanceLoader();
 
     CInstance* LoadInstance();

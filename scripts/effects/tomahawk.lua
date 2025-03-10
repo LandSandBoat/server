@@ -8,18 +8,19 @@ effectObject.onEffectGain = function(target, effect)
     local physSDT = { xi.mod.SLASH_SDT, xi.mod.PIERCE_SDT, xi.mod.IMPACT_SDT, xi.mod.HTH_SDT }
 
     for i = 1, #physSDT do
-        local sdtModPhys    = target:getMod(physSDT[i])
-        local reductionPhys = (1000 - sdtModPhys) * 0.25
+        local physicalSDTModifier   = physSDT[i]
+        local physicalSDTValue      = target:getMod(physicalSDTModifier)
+        local physicalSDTAdjustment = math.floor(physicalSDTValue * 0.25)
 
-        effect:addMod(physSDT[i], reductionPhys)
+        effect:addMod(physicalSDTModifier, -physicalSDTAdjustment)
     end
 
     for element = xi.element.FIRE, xi.element.DARK do
-        local elementSDTMod  = xi.combat.element.getElementalSDTModifier(element)
-        local sdtModMagic    = target:getMod(elementSDTMod)
-        local reductionMagic = sdtModMagic * 0.25
+        local elementSDTModifier   = xi.combat.element.getElementalSDTModifier(element)
+        local elementSDTValue      = target:getMod(elementSDTModifier)
+        local elementSDTAdjustment = math.floor(elementSDTValue * 0.25)
 
-        effect:addMod(elementSDTMod, -reductionMagic)
+        effect:addMod(elementSDTModifier, -elementSDTAdjustment)
     end
 end
 

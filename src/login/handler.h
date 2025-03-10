@@ -29,13 +29,16 @@
 #include "data_session.h"
 #include "view_session.h"
 
+#include "common/zmq_dealer_wrapper.h"
+
 template <typename T>
 class handler
 {
 public:
-    handler(asio::io_context& io_context, unsigned int port)
+    handler(asio::io_context& io_context, unsigned int port, ZMQDealerWrapper& zmqDealerWrapper)
     : acceptor_(io_context, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
     , sslContext_(asio::ssl::context::tls_server)
+    , zmqDealerWrapper_(zmqDealerWrapper)
     {
         acceptor_.set_option(asio::socket_base::reuse_address(true));
 
@@ -58,7 +61,7 @@ private:
             {
                 if constexpr (std::is_same_v<T, auth_session>)
                 {
-                    auto auth_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_));
+                    auto auth_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_), zmqDealerWrapper_);
                     auth_handler->start();
                 }
                 else if constexpr (std::is_same_v<T, view_session>)
@@ -84,4 +87,6 @@ private:
 
     asio::ip::tcp::acceptor acceptor_;
     asio::ssl::context      sslContext_;
+
+    ZMQDealerWrapper& zmqDealerWrapper_;
 };

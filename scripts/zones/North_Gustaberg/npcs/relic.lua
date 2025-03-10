@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.tradeHas(trade, { xi.item.RIMILALA_STRIPESHELL, xi.item.TENEBROUS_FRAGMENT, xi.item.SHARD_OF_NECROPSYCHE, xi.item.BEC_DE_FAUCON })
     then
         -- currency, shard, necropsyche, stage 4
-        player:startEvent(254, xi.item.APOCALYPSE)
+        player:startEvent(254, xi.item.APOCALYPSE_75)
     end
 end
 
@@ -25,7 +25,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 254 and
-        npcUtil.giveItem(player, { xi.item.APOCALYPSE, { xi.item.LUNGO_NANGO_JADESHELL, 30 } })
+        npcUtil.giveItem(player, { xi.item.APOCALYPSE_75, { xi.item.LUNGO_NANGO_JADESHELL, 30 } })
     then
         player:confirmTrade()
         player:setCharVar('RELIC_IN_PROGRESS', 0)

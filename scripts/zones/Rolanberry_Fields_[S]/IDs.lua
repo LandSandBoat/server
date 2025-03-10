@@ -18,6 +18,7 @@ zones[xi.zone.ROLANBERRY_FIELDS_S] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         UNABLE_TO_PROGRESS            = 7047, -- ou are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
         FISHING_MESSAGE_OFFSET        = 7087, -- You can't fish here.
+        I_CANNOT_HELP_YOU_NOW         = 7235, -- I cannot help you now. I have other orders to carry out.
         CAMPAIGN_RESULTS_TALLIED      = 7624, -- Campaign results tallied.
         VOIDWALKER_DESPAWN            = 7999, -- The monster fades before your eyes, a look of disappointment on its face.
         VOIDWALKER_NO_MOB             = 8054, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.

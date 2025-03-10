@@ -573,9 +573,10 @@ void CZoneInstance::ForEachAllyInstance(CBaseEntity* PEntity, const std::functio
     }
 }
 
-CInstance* CZoneInstance::CreateInstance(uint16 instanceid)
+CInstance* CZoneInstance::CreateInstance(uint32 instanceid)
 {
     TracyZoneScoped;
+
     m_InstanceList.emplace_back(std::make_unique<CInstance>(this, instanceid));
     return m_InstanceList.back().get();
 }

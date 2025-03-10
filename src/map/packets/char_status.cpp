@@ -204,20 +204,16 @@ struct GP_SERV_SERVERSTATUS
 
 CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
 {
-    this->setType(0x37);
-    this->setSize(0x60);
+    auto packet = this->as<GP_SERV_SERVERSTATUS>();
 
-    GP_SERV_SERVERSTATUS packet = {};
-    std::memset(&packet, 0, sizeof(packet));
+    packet->id   = 0x037;
+    packet->size = roundUpToNearestFour(sizeof(GP_SERV_SERVERSTATUS)) / 4;
 
-    packet.id   = 0x037;
-    packet.size = roundUpToNearestFour(sizeof(GP_SERV_SERVERSTATUS)) / 4;
+    std::memcpy(packet->BufStatus, PChar->StatusEffectContainer->m_StatusIcons, 32);
+    std::memcpy(&packet->BufStatusBits, &PChar->StatusEffectContainer->m_Flags, sizeof(status_bits_t));
 
-    std::memcpy(packet.BufStatus, PChar->StatusEffectContainer->m_StatusIcons, 32);
-    std::memcpy(&packet.BufStatusBits, &PChar->StatusEffectContainer->m_Flags, sizeof(status_bits_t));
-
-    packet.UniqueNo      = PChar->id;
-    packet.server_status = PChar->isInEvent() ? static_cast<uint8>(ANIMATION_EVENT) : PChar->animation;
+    packet->UniqueNo      = PChar->id;
+    packet->server_status = PChar->isInEvent() ? static_cast<uint8>(ANIMATION_EVENT) : PChar->animation;
 
     CItemLinkshell* linkshell = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
 
@@ -226,20 +222,20 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
         lscolor_t LSColor = linkshell->GetLSColor();
 
         // This seems wrong, but displays correctly?
-        packet.r = (LSColor.R << 4) + 15;
-        packet.g = (LSColor.G << 4) + 15;
-        packet.b = (LSColor.B << 4) + 15;
+        packet->r = (LSColor.R << 4) + 15;
+        packet->g = (LSColor.G << 4) + 15;
+        packet->b = (LSColor.B << 4) + 15;
     }
 
-    packet.dead_counter1     = PChar->GetTimeRemainingUntilDeathHomepoint();
-    packet.dead_counter2     = CVanaTime::getInstance()->getVanaTime() + packet.dead_counter1 / 60;
-    packet.costume_id        = PChar->m_Costume;
-    packet.model_hitbox_size = 4; // TODO: verify this
-    packet.mount_id          = 0;
+    packet->dead_counter1     = PChar->GetTimeRemainingUntilDeathHomepoint();
+    packet->dead_counter2     = CVanaTime::getInstance()->getVanaTime() + packet->dead_counter1 / 60;
+    packet->costume_id        = PChar->m_Costume;
+    packet->model_hitbox_size = 4; // TODO: verify this
+    packet->mount_id          = 0;
 
     if (PChar->animation == ANIMATION_FISHING_START)
     {
-        packet.fishing_timer = PChar->hookDelay;
+        packet->fishing_timer = PChar->hookDelay;
     }
 
     // flags 0 starts at 0x28
@@ -268,7 +264,7 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
 
     if (auto* effect = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED))
     {
-        packet.mount_id      = effect->GetPower();
+        packet->mount_id     = effect->GetPower();
         flags0.Chocobo_Index = effect->GetSubPower();
     }
 
@@ -348,26 +344,24 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
     {
         // NOTE: Changing this 0x8000 to 0xC000 will hide the species name.
         //     : This looks to be a quirk of the client and not intended.
-        packet.monstrosity_info     = 0x8000 | PChar->m_PMonstrosity->Species;
-        packet.monstrosity_name_id1 = PChar->m_PMonstrosity->NamePrefix1;
-        packet.monstrosity_name_id2 = PChar->m_PMonstrosity->NamePrefix2;
+        packet->monstrosity_info     = 0x8000 | PChar->m_PMonstrosity->Species;
+        packet->monstrosity_name_id1 = PChar->m_PMonstrosity->NamePrefix1;
+        packet->monstrosity_name_id2 = PChar->m_PMonstrosity->NamePrefix2;
 
         // Sword & Shield icon only shows outside of the Feretory
         if (PChar->m_PMonstrosity->Belligerency && PChar->loc.zone->GetID() != ZONE_FERETORY)
         {
-            packet.Flags2.BallistaFlg |= 0x08; // 0x18?
+            packet->Flags2.BallistaFlg |= 0x08; // 0x18?
         }
     }
 
-    packet.Flags0 = flags0;
-    packet.Flags1 = flags1;
-    packet.Flags2 = flags2;
-    packet.Flags3 = flags3;
-    packet.Flags4 = flags4;
-    packet.Flags5 = flags5;
-    packet.Flags6 = flags6;
-
-    std::memcpy(&buffer_.data()[0], &packet, sizeof(packet));
+    packet->Flags0 = flags0;
+    packet->Flags1 = flags1;
+    packet->Flags2 = flags2;
+    packet->Flags3 = flags3;
+    packet->Flags4 = flags4;
+    packet->Flags5 = flags5;
+    packet->Flags6 = flags6;
 
     // Mog wardrobe enabled bits (apparently used by windower in get_bag_info(N).enabled):
     // 0x01 = Wardrobe 3

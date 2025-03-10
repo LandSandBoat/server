@@ -18,9 +18,13 @@ zones[xi.zone.CLOISTER_OF_GALES] =
         CONQUEST_BASE                    = 7067, -- Tallying conquest results...
         YOU_CANNOT_ENTER_THE_BATTLEFIELD = 7228, -- You cannot enter the battlefield at present. Please wait a little longer.
         PROTOCRYSTAL                     = 7252, -- It is a giant crystal.
+        MEMBERS_OF_YOUR_PARTY            = 7537, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE         = 7538, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS    = 7540, -- The time limit for this battle is <number> minutes.
         PARTY_MEMBERS_HAVE_FALLEN        = 7576, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED        = 7583, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         GARUDA_UNLOCKED                  = 7586, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
+        ENTERING_THE_BATTLEFIELD_FOR     = 7674, -- Entering the battlefield for [Trial by Wind/Carbuncle Debacle/Trial-Size Trial by Wind/Waking the Beast/Sugar-coated Directive/Trial by Wind]!
         ATTACH_SEAL                      = 7770, -- <player> attaches <item> to the protocrystal.
         POWER_STYMIES                    = 7771, -- An unseen power stymies your efforts to attach <item> to the protocrystal.
     },

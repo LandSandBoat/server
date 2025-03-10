@@ -9,6 +9,7 @@ import shutil
 import importlib
 import pathlib
 
+import platform
 
 # Pre-flight sanity checks
 def preflight_exit():
@@ -1007,15 +1008,50 @@ def present_menu(title, contents):
 # fmt: on
 
 
-def configure_and_launch_multi_process_by_modulus(mod):
-    # Build query string based on mod
-    query = ""
-    for idx in range(0, mod):
-        query += f"UPDATE xidb.zone_settings SET zoneport = 54230 + {idx} WHERE zoneid % {mod} = {idx};\n"
-
+def configure_single_process():
+    query = f"UPDATE xidb.zone_settings SET zoneport = 54230;"
     print(query)
     db_query(query)
 
+
+def configure_multi_process_by_modulus(mod):
+    for idx in range(0, mod):
+        query = f"UPDATE xidb.zone_settings SET zoneport = 54230 + {idx} WHERE zoneid % {mod} = {idx};"
+        print(query)
+        db_query(query)
+
+
+def configure_multi_process_by_modulus_3():
+    configure_multi_process_by_modulus(3)
+
+
+def configure_multi_process_by_modulus_7():
+    configure_multi_process_by_modulus(7)
+
+def launch_process_in_background(process_params):
+    # fmt: off
+
+    if platform.system() == "Windows":
+        subprocess.Popen(
+            process_params,
+            shell=True,
+            creationflags=subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP,
+            cwd=server_dir_path,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    else:
+        subprocess.Popen(
+            process_params,
+            start_new_session=True, # POSIX specific flag, can't use the same flags as windows
+            cwd=server_dir_path,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+
+    # fmt: on
+
+def launch_using_zone_settings():
     result = db_query("SELECT DISTINCT zoneip FROM xidb.zone_settings;")
 
     zoneip = result.stdout.split("\n")[1]
@@ -1028,31 +1064,27 @@ def configure_and_launch_multi_process_by_modulus(mod):
 
     ports = result.stdout.split("\n")[1:-1]
 
-    executable = from_server_path(f"xi_map{exe}")
-
     print(f"ZoneIP: {zoneip}, Ports: {ports}\n")
 
-    # fmt: off
+    xi_connect_executable = from_server_path(f"xi_connect{exe}")
+    xi_map_executable = from_server_path(f"xi_map{exe}")
+    xi_search_executable = from_server_path(f"xi_search{exe}")
+    xi_world_executable = from_server_path(f"xi_world{exe}")
+
+    print(f"Launching {xi_connect_executable} --log log/connect-server.log")
+    launch_process_in_background([xi_connect_executable, "--log", "log/connect-server.log"])
+
+    print(f"Launching {xi_search_executable} --log log/search-server.log")
+    launch_process_in_background([xi_search_executable, "--log", f"log/search-server.log"])
+
+    print(f"Launching {xi_world_executable} --log log/world-server.log")
+    launch_process_in_background([xi_world_executable, "--log", f"log/world-server.log"])
+
+    time.sleep(1)
+
     for port in ports:
-        print(f"Launching {executable} --log log/map-server-{port}.log --ip {zoneip} --port {port}")
-        subprocess.Popen(
-            [executable, "--log", f"log/map-server-{port}.log", "--ip", zoneip, "--port", port],
-            shell=True,
-            creationflags=subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP,
-            cwd=server_dir_path,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
-    # fmt: on
-
-
-def configure_and_launch_multi_process_by_modulus_3():
-    configure_and_launch_multi_process_by_modulus(3)
-
-
-def configure_and_launch_multi_process_by_modulus_7():
-    configure_and_launch_multi_process_by_modulus(7)
-
+        print(f"Launching {xi_map_executable} --log log/map-server-{port}.log --ip {zoneip} --port {port}")
+        launch_process_in_background([xi_map_executable, "--log", f"log/map-server-{port}.log", "--ip", zoneip, "--port", port])
 
 def update_submodules():
     # fmt: off
@@ -1212,13 +1244,17 @@ def tasks_menu():
             #     "Offload historical auction data to auction_house_history",
             #     offload_to_auction_house_history,
             # ],
+            "l": [
+                "Configure single-process server",
+                configure_single_process,
+            ],
             "b": [
-                "Configure and launch multi-process server (3 processes)",
-                configure_and_launch_multi_process_by_modulus_3,
+                "Configure multi-process server (3 processes)",
+                configure_multi_process_by_modulus_3,
             ],
             "c": [
-                "Configure and launch multi-process server (7 processes)",
-                configure_and_launch_multi_process_by_modulus_7,
+                "Configure multi-process server (7 processes)",
+                configure_multi_process_by_modulus_7,
             ],
             "d": ["Dump Table", dump_table],
             "a": ["Dump All Tables", dump_all_tables],
@@ -1315,6 +1351,7 @@ def main():
                 "4": ["Restore/Import", restore_backup],
                 "r": ["Reset DB", reset_db],
                 "t": ["Maintenance Tasks", tasks_menu],
+                "l": ["Launch Server", launch_using_zone_settings],
                 "s": ["Settings", settings_menu],
                 "q": ["Quit", close],
             }

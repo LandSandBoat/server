@@ -24,10 +24,10 @@
 
 #include "alliance.h"
 #include "entities/battleentity.h"
+#include "ipc_client.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
 #include "map.h"
-#include "message.h"
 #include "party.h"
 #include "status_effect_container.h"
 #include "treasure_pool.h"
@@ -140,12 +140,12 @@ void CParty::DisbandParty(bool playerInitiated)
 
             // TODO: TreasurePool should stay with the last character, but now it is not critical
 
-            if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() != TREASUREPOOL_ZONE)
+            if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->getPoolType() != TreasurePoolType::Zone)
             {
-                PChar->PTreasurePool->DelMember(PChar);
-                PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
-                PChar->PTreasurePool->AddMember(PChar);
-                PChar->PTreasurePool->UpdatePool(PChar);
+                PChar->PTreasurePool->delMember(PChar);
+                PChar->PTreasurePool = new CTreasurePool(TreasurePoolType::Solo);
+                PChar->PTreasurePool->addMember(PChar);
+                PChar->PTreasurePool->updatePool(PChar);
             }
             CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
             if (sync && sync->GetDuration() == 0)
@@ -157,12 +157,12 @@ void CParty::DisbandParty(bool playerInitiated)
             _sql->Query("DELETE FROM accounts_parties WHERE charid = %u", PChar->id);
         }
 
-        // make sure chat server isn't notified of a disband if this came from the chat server already
+        // make sure message server isn't notified of a disband if this came from the message server already
         if (playerInitiated)
         {
-            uint8 data[4]{};
-            ref<uint32>(data, 0) = m_PartyID;
-            message::send(MSG_PT_DISBAND, data, sizeof(data), nullptr);
+            message::send(ipc::PartyDisband{
+                .partyId = m_PartyID,
+            });
         }
     }
     else if (m_PartyType == PARTY_MOBS)
@@ -214,16 +214,17 @@ void CParty::AssignPartyRole(const std::string& MemberName, uint8 role)
             break;
     }
 
-    uint8 data[4]{};
     if (m_PAlliance)
     {
-        ref<uint32>(data, 0) = m_PAlliance->m_AllianceID;
-        message::send(MSG_ALLIANCE_RELOAD, data, sizeof(data), nullptr);
+        message::send(ipc::AllianceReload{
+            .allianceId = m_PAlliance->m_AllianceID,
+        });
     }
     else
     {
-        ref<uint32>(data, 0) = m_PartyID;
-        message::send(MSG_PT_RELOAD, data, sizeof(data), nullptr);
+        message::send(ipc::PartyReload{
+            .partyId = m_PartyID,
+        });
     }
 }
 
@@ -350,24 +351,25 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
 
                 _sql->Query("DELETE FROM accounts_parties WHERE charid = %u", PChar->id);
 
-                uint8 data[4]{};
                 if (m_PAlliance)
                 {
-                    ref<uint32>(data, 0) = m_PAlliance->m_AllianceID;
-                    message::send(MSG_ALLIANCE_RELOAD, data, sizeof(data), nullptr);
+                    message::send(ipc::AllianceReload{
+                        .allianceId = m_PAlliance->m_AllianceID,
+                    });
                 }
                 else
                 {
-                    ref<uint32>(data, 0) = m_PartyID;
-                    message::send(MSG_PT_RELOAD, data, sizeof(data), nullptr);
+                    message::send(ipc::PartyReload{
+                        .partyId = m_PartyID,
+                    });
                 }
 
-                if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() != TREASUREPOOL_ZONE)
+                if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->getPoolType() != TreasurePoolType::Zone)
                 {
-                    PChar->PTreasurePool->DelMember(PChar);
-                    PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
-                    PChar->PTreasurePool->AddMember(PChar);
-                    PChar->PTreasurePool->UpdatePool(PChar);
+                    PChar->PTreasurePool->delMember(PChar);
+                    PChar->PTreasurePool = new CTreasurePool(TreasurePoolType::Solo);
+                    PChar->PTreasurePool->addMember(PChar);
+                    PChar->PTreasurePool->updatePool(PChar);
                 }
             }
 
@@ -438,12 +440,12 @@ void CParty::DelMember(CBattleEntity* PEntity)
                 PChar->pushPacket<CCharStatusPacket>(PChar);
                 PChar->PParty = nullptr;
 
-                if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() != TREASUREPOOL_ZONE)
+                if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->getPoolType() != TreasurePoolType::Zone)
                 {
-                    PChar->PTreasurePool->DelMember(PChar);
-                    PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
-                    PChar->PTreasurePool->AddMember(PChar);
-                    PChar->PTreasurePool->UpdatePool(PChar);
+                    PChar->PTreasurePool->delMember(PChar);
+                    PChar->PTreasurePool = new CTreasurePool(TreasurePoolType::Solo);
+                    PChar->PTreasurePool->addMember(PChar);
+                    PChar->PTreasurePool->updatePool(PChar);
                 }
             }
             else
@@ -613,16 +615,18 @@ void CParty::AddMember(CBattleEntity* PEntity)
 
         _sql->Query("INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u)", PChar->id, m_PartyID, allianceid,
                     GetMemberFlags(PChar));
-        uint8 data[4]{};
+
         if (m_PAlliance)
         {
-            ref<uint32>(data, 0) = m_PAlliance->m_AllianceID;
-            message::send(MSG_ALLIANCE_RELOAD, data, sizeof(data), nullptr);
+            message::send(ipc::AllianceReload{
+                .allianceId = m_PAlliance->m_AllianceID,
+            });
         }
         else
         {
-            ref<uint32>(data, 0) = m_PartyID;
-            message::send(MSG_PT_RELOAD, data, sizeof(data), nullptr);
+            message::send(ipc::PartyReload{
+                .partyId = m_PartyID,
+            });
         }
 
         ReloadTreasurePool(PChar);
@@ -640,7 +644,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
             PChar->pushPacket<CCharSyncPacket>(PChar);
         }
 
-        PChar->PTreasurePool->UpdatePool(PChar);
+        PChar->PTreasurePool->updatePool(PChar);
 
         // Apply level sync if the party is level synced
         if (m_PSyncTarget != nullptr)
@@ -687,16 +691,18 @@ void CParty::AddMember(uint32 id)
         }
         _sql->Query("INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u)", id, m_PartyID, allianceid,
                     Flags);
-        uint8 data[4]{};
+
         if (m_PAlliance)
         {
-            ref<uint32>(data, 0) = m_PAlliance->m_AllianceID;
-            message::send(MSG_ALLIANCE_RELOAD, data, sizeof(data), nullptr);
+            message::send(ipc::AllianceReload{
+                .allianceId = m_PAlliance->m_AllianceID,
+            });
         }
         else
         {
-            ref<uint32>(data, 0) = m_PartyID;
-            message::send(MSG_PT_RELOAD, data, sizeof(data), nullptr);
+            message::send(ipc::PartyReload{
+                .partyId = m_PartyID,
+            });
         }
 
         /*if (PChar->nameflags.flags & FLAG_INVITE)
@@ -963,7 +969,7 @@ void CParty::ReloadTreasurePool(CCharEntity* PChar)
         return;
     }
 
-    if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() == TREASUREPOOL_ZONE)
+    if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->getPoolType() == TreasurePoolType::Zone)
     {
         return;
     }
@@ -983,10 +989,10 @@ void CParty::ReloadTreasurePool(CCharEntity* PChar)
                     {
                         if (PChar->PTreasurePool != nullptr)
                         {
-                            PChar->PTreasurePool->DelMember(PChar);
+                            PChar->PTreasurePool->delMember(PChar);
                         }
                         PChar->PTreasurePool = PPartyMember->PTreasurePool;
-                        PChar->PTreasurePool->AddMember(PChar);
+                        PChar->PTreasurePool->addMember(PChar);
                         return;
                     }
                 }
@@ -1003,10 +1009,10 @@ void CParty::ReloadTreasurePool(CCharEntity* PChar)
                 {
                     if (PChar->PTreasurePool != nullptr)
                     {
-                        PChar->PTreasurePool->DelMember(PChar);
+                        PChar->PTreasurePool->delMember(PChar);
                     }
                     PChar->PTreasurePool = PPartyMember->PTreasurePool;
-                    PChar->PTreasurePool->AddMember(PChar);
+                    PChar->PTreasurePool->addMember(PChar);
                     return;
                 }
             }
@@ -1015,8 +1021,8 @@ void CParty::ReloadTreasurePool(CCharEntity* PChar)
 
     if (PChar->PTreasurePool == nullptr)
     {
-        PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
-        PChar->PTreasurePool->AddMember(PChar);
+        PChar->PTreasurePool = new CTreasurePool(TreasurePoolType::Solo);
+        PChar->PTreasurePool->addMember(PChar);
     }
 }
 

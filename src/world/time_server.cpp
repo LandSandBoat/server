@@ -25,12 +25,15 @@
 #include "common/taskmgr.h"
 #include "common/tracy.h"
 #include "common/vana_time.h"
+
+#include "conquest_system.h"
 #include "daily_tally.h"
 #include "world_server.h"
 
 int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
 {
     TracyZoneScoped;
+
     TIMETYPE     VanadielTOTD = CVanaTime::getInstance()->SyncTime();
     WorldServer* worldServer  = std::any_cast<WorldServer*>(PTask->m_data);
 
@@ -41,7 +44,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastConquestTally + 1h))
         {
-            worldServer->conquestSystem->updateWeekConquest();
+            worldServer->conquestSystem_->updateWeekConquest();
             lastConquestTally = tick;
         }
     }
@@ -50,7 +53,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastConquestUpdate + 1h))
         {
-            worldServer->conquestSystem->updateHourlyConquest();
+            worldServer->conquestSystem_->updateHourlyConquest();
             lastConquestUpdate = tick;
         }
     }
@@ -61,7 +64,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastVHourlyUpdate + 4800ms))
         {
-            worldServer->conquestSystem->updateVanaHourlyConquest();
+            worldServer->conquestSystem_->updateVanaHourlyConquest();
             lastVHourlyUpdate = tick;
         }
     }

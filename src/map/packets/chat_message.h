@@ -27,7 +27,7 @@
 #include "basic.h"
 
 // Extracted from client.
-enum CHAT_MESSAGE_TYPE
+enum CHAT_MESSAGE_TYPE : uint8
 {
     MESSAGE_SAY       = 0,
     MESSAGE_SHOUT     = 1,
@@ -84,6 +84,7 @@ class CChatMessagePacket : public CBasicPacket
 public:
     static const uint16 id{ 0x17 };
     CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE MessageType, std::string const& message, std::string const& sender = std::string());
+    CChatMessagePacket(const std::string& name, uint16 zone, CHAT_MESSAGE_TYPE MessageType, const std::string& message, uint8 gmLevel = 0);
 };
 
 #endif

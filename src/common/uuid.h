@@ -46,8 +46,8 @@ namespace uuid
                 res += "-";
             }
 
-            res += v[xirand::GetRandomNumber(0, 15)];
-            res += v[xirand::GetRandomNumber(0, 15)];
+            res += v[xirand::GetRandomNumber(16)];
+            res += v[xirand::GetRandomNumber(16)];
         }
 
         return res;

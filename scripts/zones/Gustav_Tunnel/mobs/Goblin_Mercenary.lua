@@ -8,12 +8,63 @@ local ID = zones[xi.zone.GUSTAV_TUNNEL]
 ---@type TMobEntity
 local entity = {}
 
+local wyvernpoacherSpawnPoints =
+{
+    { x = -100.000, y = 1.000,  z = -44.000 },
+    { x = -101.000, y = 1.000,  z = -29.000 },
+    { x = -165.598, y = 0.218,  z = -21.966 },
+    { x = -150.673, y = -0.067, z = -20.914 },
+    { x = -60.268,  y = -0.334, z = -64.716 },
+    { x = -88.494,  y = 0.673,  z = -54.253 },
+    { x = -82.632,  y = 1.304,  z = -59.011 },
+    { x = -54.387,  y = 0.920,  z = -24.851 },
+    { x = -94.739,  y = 0.648,  z = -57.259 },
+    { x = -57.682,  y = 0.159,  z = -55.083 },
+    { x = -97.874,  y = 1.156,  z = -50.585 },
+    { x = -67.781,  y = 0.996,  z = -62.164 },
+    { x = -61.109,  y = 0.976,  z = -29.577 },
+    { x = -63.224,  y = 1.029,  z = -62.217 },
+    { x = -92.149,  y = 0.311,  z = -61.748 },
+    { x = -52.723,  y = 0.719,  z = -23.620 },
+    { x = -82.954,  y = 0.749,  z = -64.968 },
+    { x = -104.443, y = 0.789,  z = -41.956 },
+    { x = -81.848,  y = 1.292,  z = -57.943 },
+    { x = -64.014,  y = 0.683,  z = -41.461 },
+    { x = -69.635,  y = 0.194,  z = -55.893 },
+    { x = -100.652, y = 1.000,  z = -32.396 },
+    { x = -74.769,  y = 0.842,  z = -56.437 },
+    { x = -94.192,  y = 0.667,  z = -50.261 },
+    { x = -76.131,  y = 1.208,  z = -62.358 },
+    { x = -100.531, y = 0.997,  z = -31.463 },
+    { x = -70.054,  y = 0.436,  z = -57.309 },
+    { x = -58.119,  y = 1.250,  z = -40.123 },
+    { x = -84.631,  y = 1.290,  z = -60.254 },
+    { x = -101.441, y = 0.822,  z = -47.323 },
+    { x = -61.443,  y = 1.193,  z = -54.800 },
+    { x = -76.984,  y = 1.219,  z = -62.349 },
+    { x = -99.096,  y = 1.097,  z = -31.984 },
+    { x = -51.791,  y = 1.001,  z = -19.711 },
+    { x = -102.250, y = 0.170,  z = -53.024 },
+    { x = -96.746,  y = 0.574,  z = -55.500 },
+    { x = -87.954,  y = 1.072,  z = -60.527 },
+    { x = -58.881,  y = 1.045,  z = -50.526 },
+    { x = -102.244, y = 0.873,  z = -45.926 },
+    { x = -60.761,  y = 1.250,  z = -39.113 },
+    { x = -62.644,  y = 1.066,  z = -34.854 },
+    { x = -58.009,  y = 0.254,  z = -36.033 },
+    { x = -80.509,  y = 1.250,  z = -56.971 },
+    { x = -85.264,  y = 0.916,  z = -55.985 },
+    { x = -56.595,  y = -0.555, z = -59.678 },
+    { x = -64.324,  y = 1.153,  z = -54.199 },
+    { x = -61.458,  y = 1.189,  z = -50.674 },
+    { x = -96.728,  y = 0.213,  z = -28.642 },
+    { x = -98.947,  y = 0.753,  z = -54.660 },
+    { x = -59.137,  y = 1.250,  z = -39.071 },
+}
+
 local wyvernpoacherPHTable =
 {
     [ID.mob.WYVERNPOACHER_DRACHLOX - 7] = ID.mob.WYVERNPOACHER_DRACHLOX, -- -100.000 1.000 -44.000
-    [ID.mob.WYVERNPOACHER_DRACHLOX - 6] = ID.mob.WYVERNPOACHER_DRACHLOX, -- -101.000 1.000 -29.000
-    [ID.mob.WYVERNPOACHER_DRACHLOX + 4] = ID.mob.WYVERNPOACHER_DRACHLOX, -- -165.598 0.218 -21.966
-    [ID.mob.WYVERNPOACHER_DRACHLOX + 3] = ID.mob.WYVERNPOACHER_DRACHLOX, -- -150.673 -0.067 -20.914
 }
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -22,7 +73,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, wyvernpoacherPHTable, 5, math.random(7200, 28800)) -- 2 to 8 hours
+    xi.mob.phOnDespawn(mob, wyvernpoacherPHTable, 10, 7200, { spawnPoints = wyvernpoacherSpawnPoints }) -- 2 hours
 end
 
 return entity

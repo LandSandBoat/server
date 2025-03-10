@@ -19,15 +19,14 @@
 ===========================================================================
 */
 
-#ifndef _BASICPACKET_H
-#define _BASICPACKET_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/socket.h"
 #include "common/tracy.h"
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 
 // Max packet size
 constexpr size_t PACKET_SIZE = 0x1FF;
@@ -89,62 +88,60 @@ public:
         return std::make_unique<std::remove_pointer_t<decltype(this)>>(*this);
     }
 
-    uint16 getType()
+    auto getType() -> uint16
     {
         return ref<uint16>(0) & 0x1FF;
     }
 
-    std::size_t getSize()
+    auto getSize() -> std::size_t
     {
         return std::min<std::size_t>(2U * (ref<uint8>(1) & ~1), PACKET_SIZE);
     }
 
-    unsigned short getSequence()
+    auto getSequence() -> uint16
     {
         return ref<uint16>(2);
     }
 
     // Set the first 9 bits to the ID. The highest bit overflows into the second byte.
-    void setType(unsigned int new_id)
+    void setType(uint16 id)
     {
         ref<uint16>(0) &= ~0x1FF;
-        ref<uint16>(0) |= new_id & 0x1FF;
+        ref<uint16>(0) |= id & 0x1FF;
     }
 
     // The length "byte" is actually just the highest 7 bits.
     // Need to preserve the lowest bit for the ID.
-    void setSize(std::size_t new_size)
+    void setSize(std::size_t size)
     {
         ref<uint8>(1) &= 1;
-        ref<uint8>(1) |= ((new_size + 3) & ~3) / 2;
+        ref<uint8>(1) |= ((size + 3) & ~3) / 2;
     }
 
-    void setSequence(unsigned short new_sequence)
+    void setSequence(uint16 sequence)
     {
-        ref<uint16>(2) = new_sequence;
+        ref<uint16>(2) = sequence;
     }
 
     // Indexer for the buffer's data
     template <typename T>
-    T& ref(std::size_t index)
+    auto ref(std::size_t index) -> T&
     {
         return ::ref<T>(buffer_.data(), index);
     }
 
     // Reinterpret and use the underlying buffer as a different type
     template <typename T>
-    auto as() -> std::remove_pointer_t<T>*
+    auto as() -> T*
     {
-        static_assert(std::is_standard_layout_v<T>, "Type must be standard layout (No virtual functions, inheritance, etc.)");
-        return reinterpret_cast<std::remove_pointer_t<T>*>(buffer_.data());
+        return ::as<T>(*buffer_.data());
     }
 
     // Reinterpret the underlying buffer as a different type and apply a function to it
     template <typename T>
     void as(const auto& fn)
     {
-        static_assert(std::is_standard_layout_v<T>, "Type must be standard layout (No virtual functions, inheritance, etc.)");
-        fn(reinterpret_cast<std::remove_pointer_t<T>*>(buffer_.data()));
+        fn(::as<T>(*buffer_.data()));
     }
 
     operator uint8*()
@@ -156,18 +153,4 @@ public:
     {
         return reinterpret_cast<uint8*>(buffer_.data()) + index;
     }
-
-    // Used for setting "proper" packet sizes rounded to the nearest four away from zero
-    uint32 roundUpToNearestFour(uint32 input)
-    {
-        int remainder = input % 4;
-        if (remainder == 0)
-        {
-            return input;
-        }
-
-        return input + 4 - remainder;
-    }
 };
-
-#endif // _BASICPACKET_H

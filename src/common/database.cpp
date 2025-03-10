@@ -33,7 +33,7 @@ namespace
 {
     // TODO: Manual checkout and pooling of state
     // Each thread gets its own connection, so we don't need to worry about thread safety.
-    thread_local mutex_guarded<db::detail::State> state;
+    thread_local Synchronized<db::detail::State> state;
 
     // Replacement map similar to str_replace in PHP
     const std::unordered_map<char, std::string> replacements = {
@@ -94,7 +94,7 @@ auto db::detail::isConnectionIssue(const std::exception& e) -> bool
     return false;
 }
 
-mutex_guarded<db::detail::State>& db::detail::getState()
+Synchronized<db::detail::State>& db::detail::getState()
 {
     TracyZoneScoped;
 
