@@ -33,11 +33,11 @@
 #include "packets/message_system.h"
 
 #include "conquest_system.h"
+#include "ipc_client.h"
 #include "item_container.h"
 #include "items/item_linkshell.h"
 #include "linkshell.h"
 #include "map.h"
-#include "message.h"
 #include "packets/linkshell_message.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -84,20 +84,24 @@ void CLinkshell::setName(const std::string& name)
 
 void CLinkshell::setMessage(const std::string& message, const std::string& poster)
 {
+    const auto postTime = static_cast<uint32>(time(nullptr));
+
     const auto query = "UPDATE linkshells SET poster = ?, message = ?, messagetime = ? WHERE linkshellid = ?";
-    if (!db::preparedStmt(query, poster, message, static_cast<uint32>(time(nullptr)), m_id))
+    if (!db::preparedStmt(query, poster, message, postTime, m_id))
     {
         ShowError("Failed to update linkshell message for linkshell %u", m_id);
         return;
     }
 
-    int8 packetData[8]{};
-    ref<uint32>(packetData, 0) = m_id;
-    ref<uint32>(packetData, 4) = 0;
     if (message.size() != 0)
     {
-        message::send(MSG_CHAT_LINKSHELL, packetData, sizeof(packetData),
-                      std::make_unique<CLinkshellMessagePacket>(poster, message, m_name, std::numeric_limits<uint32>::min(), true));
+        message::send(ipc::LinkshellSetMessage{
+            .linkshellId   = m_id,
+            .linkshellName = m_name,
+            .poster        = poster,
+            .message       = message,
+            .postTime      = 0, // Indicator to look up the LS message
+        });
     }
 }
 
@@ -346,7 +350,7 @@ void CLinkshell::PushPacket(uint32 senderID, const std::unique_ptr<CBasicPacket>
     }
 }
 
-void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, bool ls1)
+void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, LinkshellSlot slot)
 {
     const auto rset = db::preparedStmt("SELECT poster, message, messagetime FROM linkshells WHERE linkshellid = ?", m_id);
     if (rset && rset->rowsCount() && rset->next())
@@ -356,7 +360,7 @@ void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, bool ls1)
         const auto messageTime = rset->getOrDefault<uint32>("messagetime", 0);
         if (!message.empty())
         {
-            PChar->pushPacket<CLinkshellMessagePacket>(poster, message, m_name, messageTime, ls1);
+            PChar->pushPacket<CLinkshellMessagePacket>(poster, message, m_name, messageTime, slot);
         }
     }
 }

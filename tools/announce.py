@@ -10,18 +10,25 @@
 #
 #############################
 
+import socket
 import sys
 import zmq
 import struct
 
-# ENUM: Send to every character, in every zone, on every map process
-MSG_CHAT_SERVMES = 6
-
-# Message offset (This changed to 0x17 from 0x18 in Nov 2021, adjust accordingly!)
-MESSAGE_OFFSET = 0x17
-
 context = zmq.Context()
 sock = context.socket(zmq.DEALER)
+
+ip_str = "127.0.0.1"
+port = 54003
+
+ip_bytes = socket.inet_aton(ip_str)
+(ip_int,) = struct.unpack("!I", ip_bytes)
+ipp = ip_int | (port << 32)
+ipp_bytes = struct.pack("!Q", ipp)
+
+print(f"Connecting to endpoint: {ip_str}:{port}")
+
+sock.setsockopt(zmq.ROUTING_ID, ipp_bytes)
 sock.connect("tcp://127.0.0.1:54003")
 
 
@@ -31,37 +38,69 @@ def print_help():
     print('python3 .\\announce.py "Here is a message from python!"')
 
 
-def build_chat_packet(msg_type, gm_flag, zone, sender, msg):
-    buff_size = min(236, MESSAGE_OFFSET + len(msg))
+def build_chat_packet(gm_flag, zone, sender, msg):
+    buff_size = min(236, len(sender) + len(msg) + 10)
     buffer = bytearray(buff_size)
 
     if sender is None:
         sender = ""
 
-    buffer[0] = 0x17
-    buffer[1] = 0x82
+    # alpaca encoding for:
+    #
+    # ChatMessageServerMessage = 11;
+    #
+    # struct ChatMessageServerMessage
+    # {
+    #     uint32      senderId{};
+    #     std::string senderName{};
+    #     std::string message{};
+    #     uint16      zoneId{};
+    #     uint8       gmLevel{};
+    # };
 
-    buffer[4] = msg_type
+    idx = 0
 
-    if gm_flag == True or gm_flag == 1:
-        buffer[5] = 0x01
+    # ChatMessageServerMessage
+    buffer[idx] = 11
+    idx += 1
 
-    buffer[6] = zone
+    # senderId
+    buffer[idx] = 0
+    idx += 1
 
-    struct.pack_into("{}s".format(len(sender)), buffer, 0x08, bytes(sender, "utf-8"))
-    struct.pack_into(
-        "{}s".format(len(msg)), buffer, MESSAGE_OFFSET, bytes(msg, "utf-8")
-    )
+    # len(senderName)
+    buffer[idx] = len(sender)
+    idx += 1
+
+    # senderName
+    for i, c in enumerate(sender):
+        buffer[idx] = ord(c)
+        idx += 1
+
+    # len(message)
+    buffer[idx] = len(msg)
+    idx += 1
+
+    # message
+    for i, c in enumerate(msg):
+        buffer[idx] = ord(c)
+        idx += 1
+
+    # zoneId
+    buffer[idx] = zone
+    idx += 1
+
+    # gmLevel
+    buffer[idx] = gm_flag
+    idx += 1
 
     return buffer
 
 
 def send_server_message(msg):
     print(f"Sending '{msg}'")
-    buffer = build_chat_packet(MSG_CHAT_SERVMES, 1, 0, "", msg)
-    sock.send_multipart(
-        [struct.pack("!B", MSG_CHAT_SERVMES), b"\0", buffer], zmq.NOBLOCK
-    )
+    buffer = build_chat_packet(1, 0, "", msg)
+    sock.send(buffer)
 
 
 def main():

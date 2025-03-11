@@ -221,20 +221,19 @@ namespace zoneutils
         return PTertiary;
     }
 
-    auto GetZonesOnThisProcess() -> std::vector<uint16>
+    auto GetZonesAssignedToThisProcess() -> std::vector<uint16>
     {
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
 
-        const auto zonesQuery = R"(
-            SELECT zoneid
-            FROM zone_settings
-            WHERE IF(? <> 0, ? = zoneip AND ? = zoneport, TRUE);
-        )";
+        const auto zonesQuery = fmt::format("SELECT zoneid "
+                                            "FROM zone_settings "
+                                            "WHERE IF({} <> 0, '{}' = zoneip AND {} = zoneport, TRUE)",
+                                            (uint32)map_ip.s_addr, address, map_port);
 
         std::vector<uint16> zonesOnThisProcess;
 
-        const auto rset = db::preparedStmt(zonesQuery, (uint32)map_ip.s_addr, address, map_port);
+        const auto rset = db::preparedStmt(zonesQuery);
         if (rset && rset->rowsCount())
         {
             while (rset->next())
@@ -246,9 +245,9 @@ namespace zoneutils
         return zonesOnThisProcess;
     }
 
-    bool IsZoneOnThisProcess(ZONEID zoneId)
+    bool IsZoneAssignedToThisProcess(ZONEID zoneId)
     {
-        std::vector processZones = GetZonesOnThisProcess();
+        std::vector processZones = GetZonesAssignedToThisProcess();
         for (auto& zone : processZones)
         {
             if (zone == zoneId)
@@ -271,7 +270,7 @@ namespace zoneutils
         TracyZoneScoped;
         ShowInfo("Loading NPCs");
 
-        const auto zonesOnThisProcess = GetZonesOnThisProcess();
+        const auto zonesOnThisProcess = GetZonesAssignedToThisProcess();
 
         // clang-format off
         for (const auto zoneId : zonesOnThisProcess)
@@ -395,7 +394,7 @@ namespace zoneutils
         TracyZoneScoped;
         ShowInfo("Loading Mobs");
 
-        const auto zonesOnThisProcess = GetZonesOnThisProcess();
+        const auto zonesOnThisProcess = GetZonesAssignedToThisProcess();
 
         const auto normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
         const auto normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
@@ -485,7 +484,7 @@ namespace zoneutils
                             PMob->m_ModelRadius = rset->get<float>("mobradius");
 
                             PMob->baseSpeed      = rset->get<uint8>("speed");
-                            PMob->animationSpeed = rset->get<uint8>("animationsub");
+                            PMob->animationSpeed = rset->get<uint8>("speed");
                             PMob->UpdateSpeed();
 
                             PMob->strRank = rset->get<uint8>("STR");
@@ -500,12 +499,12 @@ namespace zoneutils
                             PMob->attRank = rset->get<uint8>("ATT");
                             PMob->accRank = rset->get<uint8>("ACC");
 
-                            PMob->setModifier(Mod::SLASH_SDT, rset->get<uint16>("slash_sdt") * 1000);
-                            PMob->setModifier(Mod::PIERCE_SDT, rset->get<uint16>("pierce_sdt") * 1000);
-                            PMob->setModifier(Mod::HTH_SDT, rset->get<uint16>("h2h_sdt") * 1000);
-                            PMob->setModifier(Mod::IMPACT_SDT, rset->get<uint16>("impact_sdt") * 1000);
+                            PMob->setModifier(Mod::SLASH_SDT, rset->get<int16>("slash_sdt"));
+                            PMob->setModifier(Mod::PIERCE_SDT, rset->get<int16>("pierce_sdt"));
+                            PMob->setModifier(Mod::HTH_SDT, rset->get<int16>("h2h_sdt"));
+                            PMob->setModifier(Mod::IMPACT_SDT, rset->get<int16>("impact_sdt"));
 
-                            PMob->setModifier(Mod::UDMGMAGIC, rset->get<int16>("magical_sdt") * 1000);
+                            PMob->setModifier(Mod::UDMGMAGIC, rset->get<int16>("magical_sdt"));
 
                             PMob->setModifier(Mod::FIRE_SDT, rset->get<int16>("fire_sdt"));
                             PMob->setModifier(Mod::ICE_SDT, rset->get<int16>("ice_sdt"));
@@ -703,7 +702,7 @@ namespace zoneutils
         const auto rset = db::preparedStmt(query, ZoneID);
         if (rset && rset->rowsCount() && rset->next())
         {
-            const auto zoneType    = static_cast<ZONE_TYPE>(rset->get<uint8>("zonetype"));
+            const auto zoneType    = static_cast<ZONE_TYPE>(rset->get<uint16>("zonetype"));
             const auto restriction = rset->get<uint8>("restriction");
 
             if (zoneType & ZONE_TYPE::INSTANCED)
@@ -736,22 +735,8 @@ namespace zoneutils
 
         g_PTrigger = new CNpcEntity(); // you need to set the default model in the CNpcEntity constructor
 
-        std::vector<uint16> zones;
-
-        const auto query = "SELECT zoneid FROM zone_settings WHERE IF(? <> 0, ? = zoneip AND ? = zoneport, TRUE)";
-
-        char address[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-
-        const auto rset = db::preparedStmt(query, (uint32)map_ip.s_addr, address, map_port);
-        if (rset && rset->rowsCount())
-        {
-            while (rset->next())
-            {
-                zones.emplace_back(rset->get<uint16>("zoneid"));
-            }
-        }
-        else
+        std::vector<uint16> zones = GetZonesAssignedToThisProcess();
+        if (zones.empty())
         {
             ShowCritical("Unable to load any zones! Check IP and port params");
             do_final(EXIT_FAILURE);

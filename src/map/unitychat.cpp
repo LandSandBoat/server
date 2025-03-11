@@ -19,8 +19,8 @@
 #include <cstring>
 
 #include "entities/charentity.h"
+#include "ipc_client.h"
 #include "map.h"
-#include "message.h"
 #include "unitychat.h"
 #include "utils/jailutils.h"
 

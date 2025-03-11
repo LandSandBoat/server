@@ -10,55 +10,16 @@ local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND) == xi.questStatus.QUEST_ACCEPTED then
-        if
-            trade:hasItemQty(xi.item.TAVNAZIA_PASS, 1) and
-            trade:getItemCount() == 1
-        then
-            player:startEvent(690) -- Finish quest "Messenger from Beyond"
-        end
-    elseif player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJES_DECISION) == xi.questStatus.QUEST_ACCEPTED then
-        if
-            trade:hasItemQty(xi.item.TAVNAZIAN_MASK, 1) and
-            trade:getItemCount() == 1
-        then
-            player:startEvent(692) -- Finish quest "Pieuje's Decision"
-        end
-    end
-end
-
-entity.onTrigger = function(player, npc)
-    local messengerFromBeyond = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND)
-
-    -- Checking levels and jobs for af quest
-    local mLvl = player:getMainLvl()
-    local mJob = player:getMainJob()
-
     if
-        messengerFromBeyond == xi.questStatus.QUEST_AVAILABLE and
-        mJob == xi.job.WHM and
-        mLvl >= xi.settings.main.AF1_QUEST_LEVEL
+        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJES_DECISION) == xi.questStatus.QUEST_ACCEPTED and
+        npcUtil.tradeHasExactly(trade, xi.item.TAVNAZIAN_MASK)
     then
-        player:startEvent(689) -- Start quest "Messenger from Beyond"
-    else
-        player:startEvent(688) -- Standard dialog
+        player:startEvent(692)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 689 then
-        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND)
-    elseif csid == 690 then
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.BLESSED_HAMMER)
-        else
-            player:addItem(xi.item.BLESSED_HAMMER)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.BLESSED_HAMMER) -- Blessed Hammer
-            player:tradeComplete()
-            player:addFame(xi.fameArea.SANDORIA, 20)
-            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND)
-        end
-    elseif csid == 692 then
+    if csid == 692 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.HEALERS_BLIAUT) -- Healer's Bliaut
         else

@@ -104,11 +104,29 @@ namespace blueutils
         // populate PBlueMages
         if (PChar->PParty != nullptr)
         {
-            for (auto& member : PChar->PParty->members)
+            std::vector<CParty*> parties;
+
+            if (PChar->PParty->m_PAlliance)
             {
-                if (member->GetMJob() == JOB_BLU && member->objtype == TYPE_PC)
+                parties = PChar->PParty->m_PAlliance->partyList;
+            }
+            else
+            {
+                parties.emplace_back(PChar->PParty);
+            }
+
+            for (const auto* party : parties)
+            {
+                for (auto& member : party->members)
                 {
-                    PBlueMages.emplace_back((CCharEntity*)member);
+                    auto* PMember = dynamic_cast<CCharEntity*>(member);
+
+                    if (PMember &&
+                        PMember->GetMJob() == JOB_BLU &&
+                        PMember->getZone() == PMob->getZone())
+                    {
+                        PBlueMages.emplace_back(PMember);
+                    }
                 }
             }
         }

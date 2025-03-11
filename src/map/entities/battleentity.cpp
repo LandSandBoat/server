@@ -81,10 +81,10 @@ CBattleEntity::CBattleEntity()
     PRecastContainer      = std::make_unique<CRecastContainer>(this);
     PNotorietyContainer   = std::make_unique<CNotorietyContainer>(this);
 
-    m_modStat[Mod::SLASH_SDT]  = 1000;
-    m_modStat[Mod::PIERCE_SDT] = 1000;
-    m_modStat[Mod::HTH_SDT]    = 1000;
-    m_modStat[Mod::IMPACT_SDT] = 1000;
+    m_modStat[Mod::SLASH_SDT]  = 0;
+    m_modStat[Mod::PIERCE_SDT] = 0;
+    m_modStat[Mod::HTH_SDT]    = 0;
+    m_modStat[Mod::IMPACT_SDT] = 0;
 
     m_Immunity   = 0;
     isCharmed    = false;
@@ -108,6 +108,18 @@ bool CBattleEntity::isDead()
 bool CBattleEntity::isAlive()
 {
     return !isDead();
+}
+
+bool CBattleEntity::isFullyHealed()
+{
+    if (isAlive())
+    {
+        if (health.hp >= health.maxhp && health.mp >= health.maxmp)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 bool CBattleEntity::isInDynamis()
@@ -2279,6 +2291,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
     {
         // TODO: Should not be removed by AoE effects that don't target the player.
         PTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+        PTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ON_ATTACK);
     }
 
     battleutils::ClaimMob(PTarget, this); // Mobs get claimed whether or not your attack actually is intimidated/paralyzed
@@ -2527,13 +2540,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     }
                 }
 
-                if (attack.IsParried() || !settings::get<bool>("map.PARRY_OLD_SKILLUP_STYLE"))
-                {
-                    if (battleutils::GetParryRate(this, PTarget) > 0)
-                    {
-                        charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_PARRY, GetMLevel());
-                    }
-                }
                 if (!attack.IsCountered() && !attack.IsParried())
                 {
                     charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_EVASION, GetMLevel());

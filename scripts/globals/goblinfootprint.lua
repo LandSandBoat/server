@@ -144,7 +144,7 @@ local csReq = -- add checks to this table
         [3] = function(player)
             -- RELIC: Apocalypse
             -- TODO: Table items and iterate over table for this check
-            return player:hasItem(xi.item.APOCALYPSE) or
+            return player:hasItem(xi.item.APOCALYPSE_75) or
                 player:hasItem(xi.item.APOCALYPSE_80) or
                 player:hasItem(xi.item.APOCALYPSE_85) or
                 player:hasItem(xi.item.APOCALYPSE_90) or

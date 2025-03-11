@@ -35,6 +35,7 @@ zones[xi.zone.MAMOOK] =
         CHAMROSH             = GetFirstID('Chamrosh'),
         IRIRI_SAMARIRI       = GetFirstID('Iriri_Samariri'),
         POROGGO_CASANOVA     = GetFirstID('Poroggo_Casanova'),
+        MAMOOL_JA            = GetFirstID('Mamool_Ja'),
         MIKILULU             = GetFirstID('Mikilulu'),
         MIKIRURU             = GetFirstID('Mikiruru'),
         NIKILULU             = GetFirstID('Nikilulu'),
@@ -43,7 +44,8 @@ zones[xi.zone.MAMOOK] =
     },
     npc =
     {
-        LOGGING = GetTableOfIDs('Logging_Point'),
+        LOGGING      = GetTableOfIDs('Logging_Point'),
+        QUEST_LIQUID = GetTableOfIDs('Viscous_Liquid')[6], -- Used in quest Two Horn the Savage
     },
 }
 

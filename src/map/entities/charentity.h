@@ -653,6 +653,7 @@ public:
     virtual void OnItemFinish(CItemState&, action_t&);
 
     int32 getCharVar(std::string const& varName);
+    auto  getCharVarsWithPrefix(std::string const& prefix) -> std::vector<std::pair<std::string, int32>>;
     void  setCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
     void  setVolatileCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
     void  updateCharVarCache(std::string const& varName, int32 value, uint32 expiry = 0);

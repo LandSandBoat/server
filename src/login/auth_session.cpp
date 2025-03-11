@@ -21,6 +21,7 @@
 
 #include "auth_session.h"
 
+#include "common/ipc.h"
 #include "common/socket.h" // for ref<T>
 #include "common/utils.h"
 
@@ -224,23 +225,25 @@ void auth_session::read_func()
                     {
                         while (rset->next())
                         {
-                            /*
-                            uint32 charid = rset->get<uint32>("charid");
-                            uint64 ip     = rset->get<uint64>("ip");
-                            uint64 port   = rset->get<uint64>("port");
-
-                            ip |= (port << 32);
-
-                            zmq::message_t chardata(sizeof(charid));
-                            ref<uint32>((uint8*)chardata.data(), 0) = charid;
-                            zmq::message_t empty(0);
+                            // NOTE: This only fires if there is already a session, so `CharLogin`
+                            //     : could be named better. Could this be used to eject existing sessions?
 
                             // TODO: MSG_LOGIN is a no-op in message_server.cpp,
                             //     : so sending this does nothing?
                             //     : But in the client (message.cpp), it _could_
                             //     : be used to clear out lingering PChar data.
-                            queue_message(ipp, MSG_LOGIN, &chardata, &empty);
-                            */
+
+                            const auto charId = rset->get<uint32>("charid");
+
+                            // TODO: Make a thin wrapper around ZMQDealerWrapper to make it easier
+                            //     : to send messages to the world server from connect and search.
+
+                            const auto payload = ipc::toBytesWithHeader(ipc::CharLogin{
+                                .accountId = accountID,
+                                .charId    = charId,
+                            });
+
+                            zmqDealerWrapper_.outgoingQueue_.enqueue(zmq::message_t(payload.data(), payload.size()));
                         }
                     }
 
@@ -248,7 +251,6 @@ void auth_session::read_func()
                     // Not a real problem because the account is locked out when a character is logged in.
 
                     /*
-
                     const auto rset = db::preparedStmt("SELECT charid \
                             FROM accounts_sessions \
                             WHERE accid = ? LIMIT 1";, accountID);
@@ -268,7 +270,8 @@ void auth_session::read_func()
                         ref<uint8>(data_, 0) = LOGIN_ERROR_ALREADY_LOGGED_IN;
                         do_write(1);
                         return;
-                    }*/
+                    }
+                    */
 
                     // Success
                     std::memset(data_, 0, 49);

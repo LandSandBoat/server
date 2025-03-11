@@ -36,10 +36,10 @@ local getValidEntities = function(entities)
 end
 
 -----------------------------------
--- func: goToEntity
+-- func: gotoEntity
 -- desc: teleports the player to the given NPC
 -----------------------------------
-local goToEntity = function(player, entity)
+local gotoEntity = function(player, entity)
     -- determine whether we need zoneId parameter
     local gotoZone = nil
     if entity:getZoneID() ~= player:getZoneID() then
@@ -75,7 +75,7 @@ commandObj.onTrigger = function(player, pattern, index)
     local entities = getValidEntities(unfilteredEntities)
 
     if index ~= nil and index > 0 and index <= #entities then
-        goToEntity(player, entities[index])
+        gotoEntity(player, entities[index])
         return
     end
 
@@ -95,11 +95,11 @@ commandObj.onTrigger = function(player, pattern, index)
     end
 
     if #entities == 1 then
-        goToEntity(player, entities[1])
+        gotoEntity(player, entities[1])
         return
     end
 
-    player:printToPlayer('Multiple entities found. Use !gotoname <mob or npc name> <index> to choose:', xi.msg.channel.SYSTEM_3)
+    player:printToPlayer('Multiple entities found. Use !goto name <mob or npc name> <index> to choose:', xi.msg.channel.SYSTEM_3)
     for i, entity in pairs(entities) do
         player:printToPlayer(string.format('[%d] %s %s (%s)', i, entity:getName(), entity:getZoneName(), entity:getID()), xi.msg.channel.SYSTEM_3)
     end

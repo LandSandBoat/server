@@ -2685,7 +2685,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.MANDAU,
+            itemId = xi.item.MANDAU_75,
         },
 
         textOffset     = 349,
@@ -2696,7 +2696,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.MANDAU,
+            itemId       = xi.item.MANDAU_75,
             itemAugments =
             {
                 [1] = { 740, 0 }, -- DMG:+1
@@ -2709,7 +2709,7 @@ xi.magian.trials =
         previousTrial = 991,
         requiredItem  =
         {
-            itemId       = xi.item.MANDAU,
+            itemId       = xi.item.MANDAU_75,
             itemAugments =
             {
                 [1] = { 740, 0 }, -- DMG:+1
@@ -2724,10 +2724,166 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.MANDAU,
+            itemId       = xi.item.MANDAU_75,
             itemAugments =
             {
                 [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+    },
+
+    [994] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.VAJRA_75,
+        },
+
+        textOffset     = 351,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.VERMIN,
+        useWeaponskill = xi.weaponskill.MANDALIC_STAB,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.VAJRA_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+    },
+
+    [995] =
+    {
+        previousTrial = 994,
+        requiredItem  =
+        {
+            itemId = xi.item.VAJRA_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+
+        textOffset     = 352,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.UNDEAD,
+        useWeaponskill = xi.weaponskill.MANDALIC_STAB,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.VAJRA_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+    },
+
+    [997] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.CARNWENHAN_75,
+        },
+
+        textOffset     = 353,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.AMORPH,
+        useWeaponskill = xi.weaponskill.MORDANT_RIME,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.CARNWENHAN_75,
+            itemAugments =
+            {
+                [1] = { 740, 0 }, -- DMG:+1
+            },
+        },
+    },
+
+    [998] =
+    {
+        previousTrial = 997,
+        requiredItem  =
+        {
+            itemId = xi.item.CARNWENHAN_75,
+            itemAugments =
+            {
+                [1] = { 740, 0 }, -- DMG:+1
+            },
+        },
+
+        textOffset     = 354,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BIRD,
+        useWeaponskill = xi.weaponskill.MORDANT_RIME,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.CARNWENHAN_75,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+    },
+
+    [1000] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.TERPSICHORE_75,
+        },
+
+        textOffset     = 355,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.UNDEAD,
+        useWeaponskill = xi.weaponskill.PYRRHIC_KLEOS,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.TERPSICHORE_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+    },
+
+    [1001] =
+    {
+        previousTrial = 1000,
+        requiredItem  =
+        {
+            itemId = xi.item.TERPSICHORE_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+
+        textOffset     = 356,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AQUAN,
+        useWeaponskill = xi.weaponskill.PYRRHIC_KLEOS,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.TERPSICHORE_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
             },
         },
     },
@@ -2737,7 +2893,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.SPHARAI,
+            itemId = xi.item.SPHARAI_75,
         },
 
         textOffset     = 357,
@@ -2748,7 +2904,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.SPHARAI,
+            itemId       = xi.item.SPHARAI_75,
             itemAugments =
             {
                 [1] = { 740, 1 }, -- DMG:+2
@@ -2761,7 +2917,7 @@ xi.magian.trials =
         previousTrial = 1003,
         requiredItem  =
         {
-            itemId       = xi.item.SPHARAI,
+            itemId       = xi.item.SPHARAI_75,
             itemAugments =
             {
                 [1] = { 740, 1 }, -- DMG:+2
@@ -2776,10 +2932,114 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.SPHARAI,
+            itemId       = xi.item.SPHARAI_75,
             itemAugments =
             {
                 [1] = { 740, 5 }, -- DMG:+6
+            },
+        },
+    },
+
+    [1006] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.GLANZFAUST_75,
+        },
+
+        textOffset     = 359,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.BIRD,
+        useWeaponskill = xi.weaponskill.ASCETICS_FURY,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.GLANZFAUST_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+    },
+
+    [1007] =
+    {
+        previousTrial = 1006,
+        requiredItem  =
+        {
+            itemId       = xi.item.GLANZFAUST_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+
+        textOffset     = 360,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AMORPH,
+        useWeaponskill = xi.weaponskill.ASCETICS_FURY,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.GLANZFAUST_75,
+            itemAugments =
+            {
+                [1] = { 740, 5 }, -- DMG:+6
+            },
+        },
+    },
+
+    [1009] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.KENKONKEN_75,
+        },
+
+        textOffset     = 361,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.BEAST,
+        useWeaponskill = xi.weaponskill.STRINGING_PUMMEL,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.KENKONKEN_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+    },
+
+    [1010] =
+    {
+        previousTrial = 1009,
+        requiredItem  =
+        {
+            itemId = xi.item.KENKONKEN_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+
+        textOffset     = 362,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.ARCANA,
+        useWeaponskill = xi.weaponskill.STRINGING_PUMMEL,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.KENKONKEN_75,
+            itemAugments =
+            {
+                [1] = { 740, 4 }, -- DMG:+5
             },
         },
     },
@@ -2789,7 +3049,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.EXCALIBUR,
+            itemId = xi.item.EXCALIBUR_75,
         },
 
         textOffset     = 363,
@@ -2800,7 +3060,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.EXCALIBUR,
+            itemId       = xi.item.EXCALIBUR_75,
             itemAugments =
             {
                 [1] = { 740, 0 }, -- DMG:+1
@@ -2813,7 +3073,7 @@ xi.magian.trials =
         previousTrial = 1012,
         requiredItem  =
         {
-            itemId       = xi.item.EXCALIBUR,
+            itemId       = xi.item.EXCALIBUR_75,
             itemAugments =
             {
                 [1] = { 740, 0 }, -- DMG:+1
@@ -2828,10 +3088,166 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.EXCALIBUR,
+            itemId       = xi.item.EXCALIBUR_75,
             itemAugments =
             {
                 [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+    },
+
+    [1015] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.MURGLEIS_75,
+        },
+
+        textOffset     = 365,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.AMORPH,
+        useWeaponskill = xi.weaponskill.DEATH_BLOSSOM,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.MURGLEIS_75,
+            itemAugments =
+            {
+                [1] = { 740, 0 }, -- DMG:+1
+            },
+        },
+    },
+
+    [1016] =
+    {
+        previousTrial = 1015,
+        requiredItem  =
+        {
+            itemId = xi.item.MURGLEIS_75,
+            itemAugments =
+            {
+                [1] = { 740, 0 }, -- DMG:+1
+            },
+        },
+
+        textOffset     = 366,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.PLANTOID,
+        useWeaponskill = xi.weaponskill.DEATH_BLOSSOM,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.MURGLEIS_75,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+    },
+
+    [1018] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.BURTGANG_75,
+        },
+
+        textOffset     = 367,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.LIZARD,
+        useWeaponskill = xi.weaponskill.ATONEMENT,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.BURTGANG_75,
+            itemAugments =
+            {
+                [1] = { 740, 0 }, -- DMG:+1
+            },
+        },
+    },
+
+    [1019] =
+    {
+        previousTrial = 1018,
+        requiredItem  =
+        {
+            itemId = xi.item.BURTGANG_75,
+            itemAugments =
+            {
+                [1] = { 740, 0 }, -- DMG:+1
+            },
+        },
+
+        textOffset     = 368,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.DRAGON,
+        useWeaponskill = xi.weaponskill.ATONEMENT,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.BURTGANG_75,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+    },
+
+    [1021] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.TIZONA_75,
+        },
+
+        textOffset     = 369,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.VERMIN,
+        useWeaponskill = xi.weaponskill.EXPIACION,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.TIZONA_75,
+            itemAugments =
+            {
+                [1] = { 740, 0 }, -- DMG:+1
+            },
+        },
+    },
+
+    [1022] =
+    {
+        previousTrial = 1021,
+        requiredItem  =
+        {
+            itemId = xi.item.TIZONA_75,
+            itemAugments =
+            {
+                [1] = { 740, 0 }, -- DMG:+1
+            },
+        },
+
+        textOffset     = 370,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AQUAN,
+        useWeaponskill = xi.weaponskill.EXPIACION,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.TIZONA_75,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
             },
         },
     },
@@ -2841,7 +3257,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.RAGNAROK,
+            itemId = xi.item.RAGNAROK_75,
         },
 
         textOffset     = 371,
@@ -2852,7 +3268,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.RAGNAROK,
+            itemId       = xi.item.RAGNAROK_75,
             itemAugments =
             {
                 [1] = { 740, 2 }, -- DMG:+3
@@ -2865,7 +3281,7 @@ xi.magian.trials =
         previousTrial = 1024,
         requiredItem  =
         {
-            itemId       = xi.item.RAGNAROK,
+            itemId       = xi.item.RAGNAROK_75,
             itemAugments =
             {
                 [1] = { 740, 2 }, -- DMG:+3
@@ -2880,7 +3296,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.RAGNAROK,
+            itemId       = xi.item.RAGNAROK_75,
             itemAugments =
             {
                 [1] = { 740, 8 }, -- DMG:+9
@@ -2893,7 +3309,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.GUTTLER,
+            itemId = xi.item.GUTTLER_75,
         },
 
         textOffset     = 373,
@@ -2904,7 +3320,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.GUTTLER,
+            itemId       = xi.item.GUTTLER_75,
             itemAugments =
             {
                 [1] = { 740, 1 }, -- DMG:+2
@@ -2917,7 +3333,7 @@ xi.magian.trials =
         previousTrial = 1027,
         requiredItem  =
         {
-            itemId       = xi.item.GUTTLER,
+            itemId       = xi.item.GUTTLER_75,
             itemAugments =
             {
                 [1] = { 740, 1 }, -- DMG:+2
@@ -2932,10 +3348,62 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.GUTTLER,
+            itemId       = xi.item.GUTTLER_75,
             itemAugments =
             {
                 [1] = { 740, 5 }, -- DMG:+6
+            },
+        },
+    },
+
+    [1030] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.AYMUR_75,
+        },
+
+        textOffset     = 375,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.LIZARD,
+        useWeaponskill = xi.weaponskill.PRIMAL_REND,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.AYMUR_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+    },
+
+    [1031] =
+    {
+        previousTrial = 1030,
+        requiredItem  =
+        {
+            itemId = xi.item.AYMUR_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+
+        textOffset     = 376,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BIRD,
+        useWeaponskill = xi.weaponskill.PRIMAL_REND,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.AYMUR_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
             },
         },
     },
@@ -2945,7 +3413,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.BRAVURA,
+            itemId = xi.item.BRAVURA_75,
         },
 
         textOffset     = 377,
@@ -2956,7 +3424,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.BRAVURA,
+            itemId       = xi.item.BRAVURA_75,
             itemAugments =
             {
                 [1] = { 740, 2 }, -- DMG:+3
@@ -2969,7 +3437,7 @@ xi.magian.trials =
         previousTrial = 1033,
         requiredItem  =
         {
-            itemId       = xi.item.BRAVURA,
+            itemId       = xi.item.BRAVURA_75,
             itemAugments =
             {
                 [1] = { 740, 2 }, -- DMG:+3
@@ -2984,10 +3452,62 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.BRAVURA,
+            itemId       = xi.item.BRAVURA_75,
             itemAugments =
             {
                 [1] = { 740, 6 }, -- DMG:+7
+            },
+        },
+    },
+
+    [1036] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.CONQUEROR_75,
+        },
+
+        textOffset     = 379,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.AQUAN,
+        useWeaponskill = xi.weaponskill.KINGS_JUSTICE,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.CONQUEROR_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+    },
+
+    [1037] =
+    {
+        previousTrial = 1036,
+        requiredItem  =
+        {
+            itemId = xi.item.CONQUEROR_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+
+        textOffset     = 380,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.DRAGON,
+        useWeaponskill = xi.weaponskill.KINGS_JUSTICE,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.CONQUEROR_75,
+            itemAugments =
+            {
+                [1] = { 740, 7 }, -- DMG:+8
             },
         },
     },
@@ -2997,7 +3517,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.GUNGNIR,
+            itemId = xi.item.GUNGNIR_75,
         },
 
         textOffset     = 381,
@@ -3008,7 +3528,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.GUNGNIR,
+            itemId       = xi.item.GUNGNIR_75,
             itemAugments =
             {
                 [1] = { 740, 2 }, -- DMG:+3
@@ -3021,7 +3541,7 @@ xi.magian.trials =
         previousTrial = 1039,
         requiredItem  =
         {
-            itemId       = xi.item.GUNGNIR,
+            itemId       = xi.item.GUNGNIR_75,
             itemAugments =
             {
                 [1] = { 740, 2 }, -- DMG:+3
@@ -3036,7 +3556,59 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.GUNGNIR,
+            itemId       = xi.item.GUNGNIR_75,
+            itemAugments =
+            {
+                [1] = { 740, 6 }, -- DMG:+7
+            },
+        },
+    },
+
+    [1042] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.RYUNOHIGE_75,
+        },
+
+        textOffset     = 383,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.UNDEAD,
+        useWeaponskill = xi.weaponskill.DRAKESBANE,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.RYUNOHIGE_75,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+    },
+
+    [1043] =
+    {
+        previousTrial = 1042,
+        requiredItem  =
+        {
+            itemId       = xi.item.RYUNOHIGE_75,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+
+        textOffset     = 384,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.PLANTOID,
+        useWeaponskill = xi.weaponskill.DRAKESBANE,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.RYUNOHIGE_75,
             itemAugments =
             {
                 [1] = { 740, 6 }, -- DMG:+7
@@ -3049,7 +3621,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.APOCALYPSE,
+            itemId = xi.item.APOCALYPSE_75,
         },
 
         textOffset     = 385,
@@ -3060,7 +3632,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.APOCALYPSE,
+            itemId       = xi.item.APOCALYPSE_75,
             itemAugments =
             {
                 [1] = { 740, 2 }, -- DMG:+3
@@ -3073,7 +3645,7 @@ xi.magian.trials =
         previousTrial = 1045,
         requiredItem  =
         {
-            itemId       = xi.item.APOCALYPSE,
+            itemId       = xi.item.APOCALYPSE_75,
             itemAugments =
             {
                 [1] = { 740, 2 }, -- DMG:+3
@@ -3088,10 +3660,62 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.APOCALYPSE,
+            itemId       = xi.item.APOCALYPSE_75,
             itemAugments =
             {
                 [1] = { 740, 6 }, -- DMG:+7
+            },
+        },
+    },
+
+    [1048] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.LIBERATOR_75,
+        },
+
+        textOffset     = 387,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.VERMIN,
+        useWeaponskill = xi.weaponskill.INSURGENCY,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.LIBERATOR_75,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+    },
+
+    [1049] =
+    {
+        previousTrial = 1048,
+        requiredItem  =
+        {
+            itemId = xi.item.LIBERATOR_75,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+
+        textOffset     = 388,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AMORPH,
+        useWeaponskill = xi.weaponskill.INSURGENCY,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.LIBERATOR_75,
+            itemAugments =
+            {
+                [1] = { 740, 7 }, -- DMG:+8
             },
         },
     },
@@ -3101,7 +3725,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.KIKOKU,
+            itemId = xi.item.KIKOKU_75,
         },
 
         textOffset     = 389,
@@ -3112,7 +3736,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.KIKOKU,
+            itemId       = xi.item.KIKOKU_75,
             itemAugments =
             {
                 [1] = { 740, 0 }, -- DMG:+1
@@ -3125,7 +3749,7 @@ xi.magian.trials =
         previousTrial = 1051,
         requiredItem  =
         {
-            itemId       = xi.item.KIKOKU,
+            itemId       = xi.item.KIKOKU_75,
             itemAugments =
             {
                 [1] = { 740, 0 }, -- DMG:+1
@@ -3140,10 +3764,62 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.KIKOKU,
+            itemId       = xi.item.KIKOKU_75,
             itemAugments =
             {
                 [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+    },
+
+    [1054] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.NAGI_75,
+        },
+
+        textOffset     = 391,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.AQUAN,
+        useWeaponskill = xi.weaponskill.BLADE_KAMU,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.NAGI_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+    },
+
+    [1055] =
+    {
+        previousTrial = 1054,
+        requiredItem  =
+        {
+            itemId       = xi.item.NAGI_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+
+        textOffset     = 392,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.LIZARD,
+        useWeaponskill = xi.weaponskill.BLADE_KAMU,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.NAGI_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
             },
         },
     },
@@ -3153,7 +3829,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.AMANOMURAKUMO,
+            itemId = xi.item.AMANOMURAKUMO_75,
         },
 
         textOffset     = 393,
@@ -3164,7 +3840,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.AMANOMURAKUMO,
+            itemId       = xi.item.AMANOMURAKUMO_75,
             itemAugments =
             {
                 [1] = { 740, 1 }, -- DMG:+2
@@ -3177,7 +3853,7 @@ xi.magian.trials =
         previousTrial = 1057,
         requiredItem  =
         {
-            itemId       = xi.item.AMANOMURAKUMO,
+            itemId       = xi.item.AMANOMURAKUMO_75,
             itemAugments =
             {
                 [1] = { 740, 1 }, -- DMG:+2
@@ -3192,7 +3868,59 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.AMANOMURAKUMO,
+            itemId       = xi.item.AMANOMURAKUMO_75,
+            itemAugments =
+            {
+                [1] = { 740, 4 }, -- DMG:+5
+            },
+        },
+    },
+
+    [1060] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.KOGARASUMARU_75,
+        },
+
+        textOffset     = 395,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.UNDEAD,
+        useWeaponskill = xi.weaponskill.TACHI_RANA,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.KOGARASUMARU_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+    },
+
+    [1061] =
+    {
+        previousTrial = 1060,
+        requiredItem  =
+        {
+            itemId       = xi.item.KOGARASUMARU_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+
+        textOffset     = 396,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BIRD,
+        useWeaponskill = xi.weaponskill.TACHI_RANA,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.KOGARASUMARU_75,
             itemAugments =
             {
                 [1] = { 740, 4 }, -- DMG:+5
@@ -3205,7 +3933,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.MJOLLNIR,
+            itemId = xi.item.MJOLLNIR_75,
         },
 
         textOffset     = 397,
@@ -3216,7 +3944,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.MJOLLNIR,
+            itemId       = xi.item.MJOLLNIR_75,
             itemAugments =
             {
                 [1] = { 740, 1 }, -- DMG:+2
@@ -3229,7 +3957,7 @@ xi.magian.trials =
         previousTrial = 1063,
         requiredItem  =
         {
-            itemId       = xi.item.MJOLLNIR,
+            itemId       = xi.item.MJOLLNIR_75,
             itemAugments =
             {
                 [1] = { 740, 1 }, -- DMG:+2
@@ -3244,10 +3972,62 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.MJOLLNIR,
+            itemId       = xi.item.MJOLLNIR_75,
             itemAugments =
             {
                 [1] = { 740, 7 }, -- DMG:+8
+            },
+        },
+    },
+
+    [1066] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.YAGRUSH_75,
+        },
+
+        textOffset     = 399,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.BIRD,
+        useWeaponskill = xi.weaponskill.MYSTIC_BOON,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.YAGRUSH_75,
+            itemAugments =
+            {
+                [1] = { 740, 0 }, -- DMG:+1
+            },
+        },
+    },
+
+    [1067] =
+    {
+        previousTrial = 1066,
+        requiredItem  =
+        {
+            itemId       = xi.item.YAGRUSH_75,
+            itemAugments =
+            {
+                [1] = { 740, 0 }, -- DMG:+1
+            },
+        },
+
+        textOffset     = 400,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.DRAGON,
+        useWeaponskill = xi.weaponskill.MYSTIC_BOON,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.YAGRUSH_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
             },
         },
     },
@@ -3257,7 +4037,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.CLAUSTRUM,
+            itemId = xi.item.CLAUSTRUM_75,
         },
 
         textOffset     = 401,
@@ -3268,7 +4048,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.CLAUSTRUM,
+            itemId       = xi.item.CLAUSTRUM_75,
             itemAugments =
             {
                 [1] = { 740, 3 }, -- DMG:+4
@@ -3281,7 +4061,7 @@ xi.magian.trials =
         previousTrial = 1069,
         requiredItem  =
         {
-            itemId       = xi.item.CLAUSTRUM,
+            itemId       = xi.item.CLAUSTRUM_75,
             itemAugments =
             {
                 [1] = { 740, 3 }, -- DMG:+4
@@ -3296,10 +4076,166 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.CLAUSTRUM,
+            itemId       = xi.item.CLAUSTRUM_75,
             itemAugments =
             {
                 [1] = { 740, 9 }, -- DMG:+10
+            },
+        },
+    },
+
+    [1072] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.LAEVATEINN_75,
+        },
+
+        textOffset     = 403,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.VERMIN,
+        useWeaponskill = xi.weaponskill.VIDOHUNIR,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.LAEVATEINN_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+    },
+
+    [1073] =
+    {
+        previousTrial = 1072,
+        requiredItem  =
+        {
+            itemId       = xi.item.LAEVATEINN_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+
+        textOffset     = 404,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.UNDEAD,
+        useWeaponskill = xi.weaponskill.VIDOHUNIR,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.LAEVATEINN_75,
+            itemAugments =
+            {
+                [1] = { 740, 10 }, -- DMG:+11
+            },
+        },
+    },
+
+    [1075] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.NIRVANA_75,
+        },
+
+        textOffset     = 405,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.BEAST,
+        useWeaponskill = xi.weaponskill.GARLAND_OF_BLISS,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.NIRVANA_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+    },
+
+    [1076] =
+    {
+        previousTrial = 1075,
+        requiredItem  =
+        {
+            itemId       = xi.item.NIRVANA_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+
+        textOffset     = 406,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.ARCANA,
+        useWeaponskill = xi.weaponskill.GARLAND_OF_BLISS,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.NIRVANA_75,
+            itemAugments =
+            {
+                [1] = { 740, 10 }, -- DMG:+11
+            },
+        },
+    },
+
+    [1078] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.TUPSIMATI_75,
+        },
+
+        textOffset     = 407,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.LIZARD,
+        useWeaponskill = xi.weaponskill.OMNISCIENCE,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.TUPSIMATI_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+    },
+
+    [1079] =
+    {
+        previousTrial = 1078,
+        requiredItem  =
+        {
+            itemId       = xi.item.TUPSIMATI_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+
+        textOffset     = 408,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.VERMIN,
+        useWeaponskill = xi.weaponskill.OMNISCIENCE,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.TUPSIMATI_75,
+            itemAugments =
+            {
+                [1] = { 740, 10 }, -- DMG:+11
             },
         },
     },
@@ -3309,7 +4245,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.ANNIHILATOR,
+            itemId = xi.item.ANNIHILATOR_75,
         },
 
         textOffset     = 409,
@@ -3320,7 +4256,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.ANNIHILATOR,
+            itemId       = xi.item.ANNIHILATOR_75,
             itemAugments =
             {
                 [1] = { 746, 1 }, -- DMG:+2 (Ranged)
@@ -3333,7 +4269,7 @@ xi.magian.trials =
         previousTrial = 1081,
         requiredItem  =
         {
-            itemId       = xi.item.ANNIHILATOR,
+            itemId       = xi.item.ANNIHILATOR_75,
             itemAugments =
             {
                 [1] = { 746, 1 }, -- DMG:+2 (Ranged)
@@ -3348,10 +4284,114 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.ANNIHILATOR,
+            itemId       = xi.item.ANNIHILATOR_75,
             itemAugments =
             {
                 [1] = { 746, 5 }, -- DMG:+6 (Ranged)
+            },
+        },
+    },
+
+    [1084] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.GASTRAPHETES_75,
+        },
+
+        textOffset     = 411,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.BIRD,
+        useWeaponskill = xi.weaponskill.TRUEFLIGHT,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.GASTRAPHETES_75,
+            itemAugments =
+            {
+                [1] = { 740, 0 }, -- DMG:+1
+            },
+        },
+    },
+
+    [1085] =
+    {
+        previousTrial = 1084,
+        requiredItem  =
+        {
+            itemId       = xi.item.GASTRAPHETES_75,
+            itemAugments =
+            {
+                [1] = { 740, 0 }, -- DMG:+1
+            },
+        },
+
+        textOffset     = 412,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AMORPH,
+        useWeaponskill = xi.weaponskill.TRUEFLIGHT,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.GASTRAPHETES_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+    },
+
+    [1087] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.DEATH_PENALTY_75,
+        },
+
+        textOffset     = 413,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.AQUAN,
+        useWeaponskill = xi.weaponskill.LEADEN_SALUTE,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.DEATH_PENALTY_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+    },
+
+    [1088] =
+    {
+        previousTrial = 1087,
+        requiredItem  =
+        {
+            itemId       = xi.item.DEATH_PENALTY_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+
+        textOffset     = 414,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.DRAGON,
+        useWeaponskill = xi.weaponskill.LEADEN_SALUTE,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.DEATH_PENALTY_75,
+            itemAugments =
+            {
+                [1] = { 740, 4 }, -- DMG:+5
             },
         },
     },
@@ -3361,7 +4401,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.YOICHINOYUMI,
+            itemId = xi.item.YOICHINOYUMI_75,
         },
 
         textOffset     = 415,
@@ -3372,7 +4412,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.YOICHINOYUMI,
+            itemId       = xi.item.YOICHINOYUMI_75,
             itemAugments =
             {
                 [1] = { 746, 1 }, -- DMG:+2 (Ranged)
@@ -3385,7 +4425,7 @@ xi.magian.trials =
         previousTrial = 1090,
         requiredItem  =
         {
-            itemId       = xi.item.YOICHINOYUMI,
+            itemId       = xi.item.YOICHINOYUMI_75,
             itemAugments =
             {
                 [1] = { 746, 1 }, -- DMG:+2 (Ranged)
@@ -3400,7 +4440,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.YOICHINOYUMI,
+            itemId       = xi.item.YOICHINOYUMI_75,
             itemAugments =
             {
                 [1] = { 746, 4 }, -- DMG:+5 (Ranged)
@@ -3966,7 +5006,7 @@ xi.magian.trials =
         previousTrial = 992,
         requiredItem  =
         {
-            itemId       = xi.item.MANDAU,
+            itemId       = xi.item.MANDAU_75,
             itemAugments =
             {
                 [1] = { 740, 1 }, -- DMG:+2
@@ -3981,7 +5021,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.MANDAU,
+            itemId       = xi.item.MANDAU_75,
             itemAugments =
             {
                 [1] = { 740, 2 }, -- DMG:+3
@@ -3994,7 +5034,7 @@ xi.magian.trials =
         previousTrial = 1818,
         requiredItem  =
         {
-            itemId       = xi.item.MANDAU,
+            itemId       = xi.item.MANDAU_75,
             itemAugments =
             {
                 [1] = { 740, 2 }, -- DMG:+3
@@ -4013,12 +5053,96 @@ xi.magian.trials =
         },
     },
 
+    [1820] =
+    {
+        previousTrial = 995,
+        requiredItem  =
+        {
+            itemId = xi.item.VAJRA_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+
+        textOffset     = 654,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AQUAN,
+        useWeaponskill = xi.weaponskill.MANDALIC_STAB,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.VAJRA_75,
+            itemAugments =
+            {
+                [1] = { 740, 5 }, -- DMG:+6
+            },
+        },
+    },
+
+    [1822] =
+    {
+        previousTrial = 998,
+        requiredItem  =
+        {
+            itemId = xi.item.CARNWENHAN_75,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+
+        textOffset     = 656,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BEAST,
+        useWeaponskill = xi.weaponskill.MORDANT_RIME,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.CARNWENHAN_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+    },
+
+    [1824] =
+    {
+        previousTrial = 1001,
+        requiredItem  =
+        {
+            itemId = xi.item.TERPSICHORE_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+
+        textOffset     = 658,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BIRD,
+        useWeaponskill = xi.weaponskill.PYRRHIC_KLEOS,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.TERPSICHORE_75,
+            itemAugments =
+            {
+                [1] = { 740, 5 }, -- DMG:+6
+            },
+        },
+    },
+
     [1826] =
     {
         previousTrial = 1004,
         requiredItem  =
         {
-            itemId       = xi.item.SPHARAI,
+            itemId       = xi.item.SPHARAI_75,
             itemAugments =
             {
                 [1] = { 740, 5 }, -- DMG:+6
@@ -4033,7 +5157,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.SPHARAI,
+            itemId       = xi.item.SPHARAI_75,
             itemAugments =
             {
                 [1] = { 740, 7 }, -- DMG:+8
@@ -4046,7 +5170,7 @@ xi.magian.trials =
         previousTrial = 1826,
         requiredItem  =
         {
-            itemId       = xi.item.SPHARAI,
+            itemId       = xi.item.SPHARAI_75,
             itemAugments =
             {
                 [1] = { 740, 7 },
@@ -4065,12 +5189,68 @@ xi.magian.trials =
         },
     },
 
+    [1828] =
+    {
+        previousTrial = 1007,
+        requiredItem  =
+        {
+            itemId       = xi.item.GLANZFAUST_75,
+            itemAugments =
+            {
+                [1] = { 740, 5 }, -- DMG:+6
+            },
+        },
+
+        textOffset     = 662,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.LIZARD,
+        useWeaponskill = xi.weaponskill.ASCETICS_FURY,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.GLANZFAUST_75,
+            itemAugments =
+            {
+                [1] = { 740, 7 }, -- DMG:+8
+            },
+        },
+    },
+
+    [1830] =
+    {
+        previousTrial = 1010,
+        requiredItem  =
+        {
+            itemId = xi.item.KENKONKEN_75,
+            itemAugments =
+            {
+                [1] = { 740, 4 }, -- DMG:+5
+            },
+        },
+
+        textOffset     = 664,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.PLANTOID,
+        useWeaponskill = xi.weaponskill.STRINGING_PUMMEL,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.KENKONKEN_75,
+            itemAugments =
+            {
+                [1] = { 740, 5 }, -- DMG:+6
+            },
+        },
+    },
+
     [1832] =
     {
         previousTrial = 1013,
         requiredItem  =
         {
-            itemId       = xi.item.EXCALIBUR,
+            itemId       = xi.item.EXCALIBUR_75,
             itemAugments =
             {
                 [1] = { 740, 1 }, -- DMG:+2
@@ -4085,7 +5265,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.EXCALIBUR,
+            itemId       = xi.item.EXCALIBUR_75,
             itemAugments =
             {
                 [1] = { 740, 2 }, -- DMG:+3
@@ -4098,7 +5278,7 @@ xi.magian.trials =
         previousTrial = 1832,
         requiredItem  =
         {
-            itemId       = xi.item.EXCALIBUR,
+            itemId       = xi.item.EXCALIBUR_75,
             itemAugments =
             {
                 [1] = { 740, 2 }, -- DMG:+3
@@ -4117,12 +5297,96 @@ xi.magian.trials =
         },
     },
 
+    [1834] =
+    {
+        previousTrial = 1016,
+        requiredItem  =
+        {
+            itemId = xi.item.MURGLEIS_75,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+
+        textOffset     = 668,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BEAST,
+        useWeaponskill = xi.weaponskill.DEATH_BLOSSOM,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.MURGLEIS_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+    },
+
+    [1836] =
+    {
+        previousTrial = 1019,
+        requiredItem  =
+        {
+            itemId = xi.item.BURTGANG_75,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+
+        textOffset     = 670,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.VERMIN,
+        useWeaponskill = xi.weaponskill.ATONEMENT,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.BURTGANG_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+    },
+
+    [1838] =
+    {
+        previousTrial = 1022,
+        requiredItem  =
+        {
+            itemId = xi.item.TIZONA_75,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+
+        textOffset     = 672,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.ARCANA,
+        useWeaponskill = xi.weaponskill.EXPIACION,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.TIZONA_75,
+            itemAugments =
+            {
+                [1] = { 740, 4 }, -- DMG:+5
+            },
+        },
+    },
+
     [1840] =
     {
         previousTrial = 1025,
         requiredItem  =
         {
-            itemId       = xi.item.RAGNAROK,
+            itemId       = xi.item.RAGNAROK_75,
             itemAugments =
             {
                 [1] = { 740, 8 }, -- DMG:+9
@@ -4137,7 +5401,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.RAGNAROK,
+            itemId       = xi.item.RAGNAROK_75,
             itemAugments =
             {
                 [1] = { 740, 9 }, -- DMG:+10
@@ -4150,7 +5414,7 @@ xi.magian.trials =
         previousTrial = 1840,
         requiredItem  =
         {
-            itemId       = xi.item.RAGNAROK,
+            itemId       = xi.item.RAGNAROK_75,
             itemAugments =
             {
                 [1] = { 740, 9 }, -- DMG:+10
@@ -4174,7 +5438,7 @@ xi.magian.trials =
         previousTrial = 1028,
         requiredItem  =
         {
-            itemId       = xi.item.GUTTLER,
+            itemId       = xi.item.GUTTLER_75,
             itemAugments =
             {
                 [1] = { 740, 5 }, -- DMG:+6
@@ -4189,7 +5453,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.GUTTLER,
+            itemId       = xi.item.GUTTLER_75,
             itemAugments =
             {
                 [1] = { 740, 6 }, -- DMG:+7
@@ -4202,7 +5466,7 @@ xi.magian.trials =
         previousTrial = 1842,
         requiredItem  =
         {
-            itemId       = xi.item.GUTTLER,
+            itemId       = xi.item.GUTTLER_75,
             itemAugments =
             {
                 [1] = { 740, 6 }, -- DMG:+7
@@ -4221,12 +5485,40 @@ xi.magian.trials =
         },
     },
 
+    [1844] =
+    {
+        previousTrial = 1031,
+        requiredItem  =
+        {
+            itemId = xi.item.AYMUR_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+
+        textOffset     = 678,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.DRAGON,
+        useWeaponskill = xi.weaponskill.PRIMAL_REND,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.AYMUR_75,
+            itemAugments =
+            {
+                [1] = { 740, 4 }, -- DMG:+5
+            },
+        },
+    },
+
     [1846] =
     {
         previousTrial = 1034,
         requiredItem  =
         {
-            itemId       = xi.item.BRAVURA,
+            itemId       = xi.item.BRAVURA_75,
             itemAugments =
             {
                 [1] = { 740, 6 }, -- DMG:+7
@@ -4241,7 +5533,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.BRAVURA,
+            itemId       = xi.item.BRAVURA_75,
             itemAugments =
             {
                 [1] = { 740, 8 }, -- DMG:+9
@@ -4254,7 +5546,7 @@ xi.magian.trials =
         previousTrial = 1846,
         requiredItem  =
         {
-            itemId       = xi.item.BRAVURA,
+            itemId       = xi.item.BRAVURA_75,
             itemAugments =
             {
                 [1] = { 740, 8 }, -- DMG:+9
@@ -4273,12 +5565,40 @@ xi.magian.trials =
         },
     },
 
+    [1848] =
+    {
+        previousTrial = 1037,
+        requiredItem  =
+        {
+            itemId = xi.item.CONQUEROR_75,
+            itemAugments =
+            {
+                [1] = { 740, 7 }, -- DMG:+8
+            },
+        },
+
+        textOffset     = 682,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BEAST,
+        useWeaponskill = xi.weaponskill.KINGS_JUSTICE,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.CONQUEROR_75,
+            itemAugments =
+            {
+                [1] = { 740, 9 }, -- DMG:+10
+            },
+        },
+    },
+
     [1850] =
     {
         previousTrial = 1040,
         requiredItem  =
         {
-            itemId       = xi.item.GUNGNIR,
+            itemId       = xi.item.GUNGNIR_75,
             itemAugments =
             {
                 [1] = { 740, 6 }, -- DMG:+7
@@ -4293,7 +5613,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.GUNGNIR,
+            itemId       = xi.item.GUNGNIR_75,
             itemAugments =
             {
                 [1] = { 740, 8 }, -- DMG:+9
@@ -4306,7 +5626,7 @@ xi.magian.trials =
         previousTrial = 1850,
         requiredItem  =
         {
-            itemId       = xi.item.GUNGNIR,
+            itemId       = xi.item.GUNGNIR_75,
             itemAugments =
             {
                 [1] = { 740, 8 }, -- DMG:+9
@@ -4325,12 +5645,40 @@ xi.magian.trials =
         },
     },
 
+    [1852] =
+    {
+        previousTrial = 1043,
+        requiredItem  =
+        {
+            itemId       = xi.item.RYUNOHIGE_75,
+            itemAugments =
+            {
+                [1] = { 740, 6 }, -- DMG:+7
+            },
+        },
+
+        textOffset     = 686,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AQUAN,
+        useWeaponskill = xi.weaponskill.DRAKESBANE,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.RYUNOHIGE_75,
+            itemAugments =
+            {
+                [1] = { 740, 8 }, -- DMG:+9
+            },
+        },
+    },
+
     [1854] =
     {
         previousTrial = 1046,
         requiredItem  =
         {
-            itemId       = xi.item.APOCALYPSE,
+            itemId       = xi.item.APOCALYPSE_75,
             itemAugments =
             {
                 [1] = { 740, 6 }, -- DMG:+7
@@ -4345,7 +5693,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.APOCALYPSE,
+            itemId       = xi.item.APOCALYPSE_75,
             itemAugments =
             {
                 [1] = { 740, 8 }, -- DMG:+9
@@ -4358,7 +5706,7 @@ xi.magian.trials =
         previousTrial = 1854,
         requiredItem  =
         {
-            itemId       = xi.item.APOCALYPSE,
+            itemId       = xi.item.APOCALYPSE_75,
             itemAugments =
             {
                 [1] = { 740, 8 }, -- DMG:+9
@@ -4377,12 +5725,40 @@ xi.magian.trials =
         },
     },
 
+    [1856] =
+    {
+        previousTrial = 1049,
+        requiredItem  =
+        {
+            itemId = xi.item.LIBERATOR_75,
+            itemAugments =
+            {
+                [1] = { 740, 7 }, -- DMG:+8
+            },
+        },
+
+        textOffset     = 690,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.UNDEAD,
+        useWeaponskill = xi.weaponskill.INSURGENCY,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.LIBERATOR_75,
+            itemAugments =
+            {
+                [1] = { 740, 9 }, -- DMG:+10
+            },
+        },
+    },
+
     [1858] =
     {
         previousTrial = 1052,
         requiredItem  =
         {
-            itemId       = xi.item.KIKOKU,
+            itemId       = xi.item.KIKOKU_75,
             itemAugments =
             {
                 [1] = { 740, 2 }, -- DMG:+3
@@ -4397,7 +5773,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.KIKOKU,
+            itemId       = xi.item.KIKOKU_75,
             itemAugments =
             {
                 [1] = { 740, 3 }, -- DMG:+4
@@ -4410,7 +5786,7 @@ xi.magian.trials =
         previousTrial = 1858,
         requiredItem  =
         {
-            itemId       = xi.item.KIKOKU,
+            itemId       = xi.item.KIKOKU_75,
             itemAugments =
             {
                 [1] = { 740, 3 }, -- DMG:+4
@@ -4429,12 +5805,40 @@ xi.magian.trials =
         },
     },
 
+    [1860] =
+    {
+        previousTrial = 1055,
+        requiredItem  =
+        {
+            itemId       = xi.item.NAGI_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+
+        textOffset     = 694,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.PLANTOID,
+        useWeaponskill = xi.weaponskill.BLADE_KAMU,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.NAGI_75,
+            itemAugments =
+            {
+                [1] = { 740, 4 }, -- DMG:+5
+            },
+        },
+    },
+
     [1862] =
     {
         previousTrial = 1058,
         requiredItem  =
         {
-            itemId       = xi.item.AMANOMURAKUMO,
+            itemId       = xi.item.AMANOMURAKUMO_75,
             itemAugments =
             {
                 [1] = { 740, 4 }, -- DMG:+5
@@ -4449,7 +5853,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.AMANOMURAKUMO,
+            itemId       = xi.item.AMANOMURAKUMO_75,
             itemAugments =
             {
                 [1] = { 740, 5 }, -- DMG:+6
@@ -4462,7 +5866,7 @@ xi.magian.trials =
         previousTrial = 1862,
         requiredItem  =
         {
-            itemId       = xi.item.AMANOMURAKUMO,
+            itemId       = xi.item.AMANOMURAKUMO_75,
             itemAugments =
             {
                 [1] = { 740, 5 }, -- DMG:+6
@@ -4481,12 +5885,40 @@ xi.magian.trials =
         },
     },
 
+    [1864] =
+    {
+        previousTrial = 1061,
+        requiredItem  =
+        {
+            itemId       = xi.item.KOGARASUMARU_75,
+            itemAugments =
+            {
+                [1] = { 740, 4 }, -- DMG:+5
+            },
+        },
+
+        textOffset     = 698,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.DRAGON,
+        useWeaponskill = xi.weaponskill.TACHI_RANA,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.KOGARASUMARU_75,
+            itemAugments =
+            {
+                [1] = { 740, 6 }, -- DMG:+7
+            },
+        },
+    },
+
     [1866] =
     {
         previousTrial = 1064,
         requiredItem  =
         {
-            itemId       = xi.item.MJOLLNIR,
+            itemId       = xi.item.MJOLLNIR_75,
             itemAugments =
             {
                 [1] = { 740, 7 }, -- DMG:+8
@@ -4501,7 +5933,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.MJOLLNIR,
+            itemId       = xi.item.MJOLLNIR_75,
             itemAugments =
             {
                 [1] = { 740, 8 }, -- DMG:+9
@@ -4514,7 +5946,7 @@ xi.magian.trials =
         previousTrial = 1866,
         requiredItem  =
         {
-            itemId       = xi.item.MJOLLNIR,
+            itemId       = xi.item.MJOLLNIR_75,
             itemAugments =
             {
                 [1] = { 740, 8 }, -- DMG:+9
@@ -4533,12 +5965,40 @@ xi.magian.trials =
         },
     },
 
+    [1868] =
+    {
+        previousTrial = 1067,
+        requiredItem  =
+        {
+            itemId       = xi.item.YAGRUSH_75,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+
+        textOffset     = 702,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.ARCANA,
+        useWeaponskill = xi.weaponskill.MYSTIC_BOON,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.YAGRUSH_75,
+            itemAugments =
+            {
+                [1] = { 740, 5 }, -- DMG:+6
+            },
+        },
+    },
+
     [1870] =
     {
         previousTrial = 1070,
         requiredItem  =
         {
-            itemId       = xi.item.CLAUSTRUM,
+            itemId       = xi.item.CLAUSTRUM_75,
             itemAugments =
             {
                 [1] = { 740, 9 }, -- DMG:+10
@@ -4553,7 +6013,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.CLAUSTRUM,
+            itemId       = xi.item.CLAUSTRUM_75,
             itemAugments =
             {
                 [1] = { 740, 11 }, -- DMG:+12
@@ -4566,7 +6026,7 @@ xi.magian.trials =
         previousTrial = 1870,
         requiredItem  =
         {
-            itemId       = xi.item.CLAUSTRUM,
+            itemId       = xi.item.CLAUSTRUM_75,
             itemAugments =
             {
                 [1] = { 740, 11 }, -- DMG:+12
@@ -4585,12 +6045,96 @@ xi.magian.trials =
         },
     },
 
+    [1872] =
+    {
+        previousTrial = 1073,
+        requiredItem  =
+        {
+            itemId       = xi.item.LAEVATEINN_75,
+            itemAugments =
+            {
+                [1] = { 740, 10 }, -- DMG:+11
+            },
+        },
+
+        textOffset     = 706,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.LIZARD,
+        useWeaponskill = xi.weaponskill.VIDOHUNIR,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.LAEVATEINN_75,
+            itemAugments =
+            {
+                [1] = { 740, 12 }, -- DMG:+13
+            },
+        },
+    },
+
+    [1875] =
+    {
+        previousTrial = 1076,
+        requiredItem  =
+        {
+            itemId       = xi.item.NIRVANA_75,
+            itemAugments =
+            {
+                [1] = { 740, 10 }, -- DMG:+11
+            },
+        },
+
+        textOffset     = 708,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.PLANTOID,
+        useWeaponskill = xi.weaponskill.GARLAND_OF_BLISS,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.NIRVANA_75,
+            itemAugments =
+            {
+                [1] = { 740, 12 }, -- DMG:+13
+            },
+        },
+    },
+
+    [1876] =
+    {
+        previousTrial = 1079,
+        requiredItem  =
+        {
+            itemId       = xi.item.TUPSIMATI_75,
+            itemAugments =
+            {
+                [1] = { 740, 10 }, -- DMG:+11
+            },
+        },
+
+        textOffset     = 710,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.UNDEAD,
+        useWeaponskill = xi.weaponskill.OMNISCIENCE,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.TUPSIMATI_75,
+            itemAugments =
+            {
+                [1] = { 740, 12 }, -- DMG:+13
+            },
+        },
+    },
+
     [1878] =
     {
         previousTrial = 1082,
         requiredItem  =
         {
-            itemId       = xi.item.ANNIHILATOR,
+            itemId       = xi.item.ANNIHILATOR_75,
             itemAugments =
             {
                 [1] = { 746, 5 }, -- DMG:+6 (Ranged)
@@ -4605,7 +6149,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.ANNIHILATOR,
+            itemId       = xi.item.ANNIHILATOR_75,
             itemAugments =
             {
                 [1] = { 746, 7 }, -- DMG:+8 (Ranged)
@@ -4618,7 +6162,7 @@ xi.magian.trials =
         previousTrial = 1878,
         requiredItem  =
         {
-            itemId       = xi.item.ANNIHILATOR,
+            itemId       = xi.item.ANNIHILATOR_75,
             itemAugments =
             {
                 [1] = { 746, 7 }, -- DMG:+8 (Ranged)
@@ -4637,12 +6181,68 @@ xi.magian.trials =
         },
     },
 
+    [1880] =
+    {
+        previousTrial = 1085,
+        requiredItem  =
+        {
+            itemId       = xi.item.GASTRAPHETES_75,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+
+        textOffset     = 714,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.DRAGON,
+        useWeaponskill = xi.weaponskill.TRUEFLIGHT,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.GASTRAPHETES_75,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+    },
+
+    [1882] =
+    {
+        previousTrial = 1088,
+        requiredItem  =
+        {
+            itemId       = xi.item.DEATH_PENALTY_75,
+            itemAugments =
+            {
+                [1] = { 740, 4 }, -- DMG:+5
+            },
+        },
+
+        textOffset     = 716,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.UNDEAD,
+        useWeaponskill = xi.weaponskill.LEADEN_SALUTE,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.DEATH_PENALTY_75,
+            itemAugments =
+            {
+                [1] = { 740, 6 }, -- DMG:+7
+            },
+        },
+    },
+
     [1884] =
     {
         previousTrial = 1091,
         requiredItem  =
         {
-            itemId       = xi.item.YOICHINOYUMI,
+            itemId       = xi.item.YOICHINOYUMI_75,
             itemAugments =
             {
                 [1] = { 746, 4 }, -- DMG:+5 (Ranged)
@@ -4657,7 +6257,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.YOICHINOYUMI,
+            itemId       = xi.item.YOICHINOYUMI_75,
             itemAugments =
             {
                 [1] = { 746, 7 }, -- DMG:+8 (Ranged)
@@ -4670,7 +6270,7 @@ xi.magian.trials =
         previousTrial = 1884,
         requiredItem  =
         {
-            itemId       = xi.item.YOICHINOYUMI,
+            itemId       = xi.item.YOICHINOYUMI_75,
             itemAugments =
             {
                 [1] = { 746, 7 }, -- DMG:+8 (Ranged)
@@ -5413,7 +7013,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.GJALLARHORN,
+            itemId = xi.item.GJALLARHORN_75,
         },
 
         textOffset  = 1131,
@@ -9913,7 +11513,7 @@ xi.magian.trials =
         previousTrial = 0,
         requiredItem  =
         {
-            itemId = xi.item.AEGIS,
+            itemId = xi.item.AEGIS_75,
         },
 
         textOffset  = 1132,

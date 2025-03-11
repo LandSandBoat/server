@@ -6278,7 +6278,7 @@ xi.roe.records =
     [809] =
     { -- Subjugation: Mahjlaef the Paintorn
         trigger = xi.roeTrigger.DEFEAT_MOB,
-        reqs = { mobID = set { 17101204 } },
+        reqs = { mobID = set { 17101200 } },
         flags = set { 'repeat' },
         reward = { sparks = 300, exp = 1500, accolades = 30 },
     },

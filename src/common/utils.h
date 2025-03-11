@@ -25,8 +25,8 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
-#include "common/mutex_guarded.h"
 #include "common/stdext.h"
+#include "common/synchronized.h"
 #include "common/xirand.h"
 
 #include <filesystem>
@@ -64,6 +64,18 @@ inline float distance(const position_t& A, const position_t& B, bool ignoreVerti
 inline bool isWithinDistance(const position_t& A, const position_t& B, float within, bool ignoreVertical = false)
 {
     return distanceSquared(A, B, ignoreVertical) <= square(within);
+}
+
+// Used for setting "proper" packet sizes rounded to the nearest four away from zero
+constexpr auto roundUpToNearestFour(uint32 input) -> uint32
+{
+    const auto remainder = input % 4U;
+    if (remainder == 0)
+    {
+        return input;
+    }
+
+    return input + 4U - remainder;
 }
 
 int32      intpow32(int32 base, int32 exponent); // Exponential power of integers
@@ -163,7 +175,7 @@ namespace utils
 } // namespace utils
 
 // clang-format off
-static mutex_guarded<std::unordered_map<std::string, time_point>> lastExecutionTimes;
+static Synchronized<std::unordered_map<std::string, time_point>> lastExecutionTimes;
 #define RATE_LIMIT(duration, code)                                                    \
 {                                                                                     \
     const auto currentTime = server_clock::now();                                     \

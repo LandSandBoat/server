@@ -35,10 +35,10 @@
 
 #include "ability.h"
 #include "daily_system.h"
+#include "ipc_client.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
-#include "message.h"
 #include "mob_spell_list.h"
 #include "monstrosity.h"
 #include "packet_guard.h"
@@ -237,7 +237,8 @@ int32 do_init(int32 argc, char** argv)
         }
     }
 
-    ShowInfo(fmt::format("map_port: {}", map_port));
+    ShowInfoFmt("map_port: {}", map_port);
+    ShowInfoFmt("Zones assigned to this process: {}", zoneutils::GetZonesAssignedToThisProcess().size());
 
     srand((uint32)time(nullptr));
     xirand::seed();
@@ -266,7 +267,6 @@ int32 do_init(int32 argc, char** argv)
 
     ShowInfo("do_init: starting ZMQ thread");
     message::init();
-    messageThread = nonstd::jthread(message::listen);
 
     ShowInfo("do_init: loading items");
     itemutils::Initialize();
@@ -403,8 +403,7 @@ int32 do_init(int32 argc, char** argv)
         }
 
         fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
-        PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3,
-            fmt::format("You have been set to GM level {}.", level), "");
+        PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("You have been set to GM level {}.", level));
     });
 
     gConsoleService->RegisterCommand("reload_settings", "Reload settings files.",
@@ -466,7 +465,6 @@ void do_final(int code)
     trustutils::FreeTrustList();
     zoneutils::FreeZoneList();
 
-    message::close();
     messageThread.join();
 
     CTaskMgr::delInstance();
@@ -789,22 +787,22 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
         if (map_session_data->PChar == nullptr)
         {
-            uint32 CharID = ref<uint32>(buff, FFXI_HEADER_SIZE + 0x0C);
-            uint16 LangID = ref<uint16>(buff, FFXI_HEADER_SIZE + 0x58);
+            uint32 charID = ref<uint32>(buff, FFXI_HEADER_SIZE + 0x0C);
+            uint16 langID = ref<uint16>(buff, FFXI_HEADER_SIZE + 0x58);
 
-            std::ignore = LangID;
+            std::ignore = langID;
 
-            auto rset = db::preparedStmt("SELECT charid FROM chars WHERE charid = (?) LIMIT 1", CharID);
+            auto rset = db::preparedStmt("SELECT charid FROM chars WHERE charid = ? LIMIT 1", charID);
             if (!rset || rset->rowsCount() == 0 || !rset->next())
             {
-                ShowError("recv_parse: Cannot load charid %u", CharID);
+                ShowError("recv_parse: Cannot load charid %u", charID);
                 return -1;
             }
 
-            rset = db::preparedStmt("SELECT session_key FROM accounts_sessions WHERE charid = (?) LIMIT 1", CharID);
+            rset = db::preparedStmt("SELECT session_key FROM accounts_sessions WHERE charid = ? LIMIT 1", charID);
             if (!rset || rset->rowsCount() == 0 || !rset->next())
             {
-                ShowError("recv_parse: Cannot load session_key for charid %u", CharID);
+                ShowError("recv_parse: Cannot load session_key for charid %u", charID);
             }
             else
             {
@@ -813,16 +811,15 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                 map_session_data->initBlowfish();
             }
 
-            map_session_data->PChar  = charutils::LoadChar(CharID);
-            map_session_data->charID = CharID;
+            map_session_data->PChar  = charutils::LoadChar(charID);
+            map_session_data->charID = charID;
 
             // If we're a new char on a new instance and prevzone != zone
             if (map_session_data->blowfish.status == BLOWFISH_WAITING && map_session_data->PChar->loc.destination != map_session_data->PChar->loc.prevzone)
             {
-                uint8 data[4]{};
-                ref<uint32>(data, 0) = CharID;
-
-                message::send(MSG_KILL_SESSION, data, sizeof(data), nullptr);
+                message::send(ipc::KillSession{
+                    .victimId = charID,
+                });
             }
         }
 

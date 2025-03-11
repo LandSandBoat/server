@@ -29,11 +29,8 @@
 // Valid MessageIDs for both standard and SYSTEM type messages
 // Found in ROM/27/76.dat or 1-27-76.xml if using mass extractor
 // Todo: move msg enums to common location out of packet headers
-enum class MsgStd
+enum class MsgStd : uint16
 {
-    // Used as a sentinel value. This should not be used as part of a packet.
-    Unknown = -1,
-
     // Keep message IDs in order OR ELSE UNSPECIFIED CONSQUENSES SHALL ENSUE
 
     CouldNotEnter                = 2,   // You could not enter the next area. [0,1,3,4, all same message]
