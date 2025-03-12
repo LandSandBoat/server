@@ -84256,6 +84256,94 @@ INSERT INTO `item_mods` VALUES (28671,8,7);      -- STR: 7
 INSERT INTO `item_mods` VALUES (28671,10,7);     -- VIT: 7
 INSERT INTO `item_mods` VALUES (28671,13,7);     -- MND: 7
 INSERT INTO `item_mods` VALUES (28671,161,-400); -- DMGPHYS: -400
+
+-- Kendatsuba Sune-Ate +1
+INSERT INTO `item_mods` VALUES (25959, 1, 81);    -- DEF: 81
+INSERT INTO `item_mods` VALUES (25959, 2, 70);    -- HP: 70
+INSERT INTO `item_mods` VALUES (25959, 8, 20);    -- STR: 20
+INSERT INTO `item_mods` VALUES (25959, 9, 44);    -- DEX: 44
+INSERT INTO `item_mods` VALUES (25959, 10, 21);   -- VIT: 21
+INSERT INTO `item_mods` VALUES (25959, 11, 44);   -- AGI: 44
+INSERT INTO `item_mods` VALUES (25959, 13, 14);   -- MND: 14
+INSERT INTO `item_mods` VALUES (25959, 14, 26);   -- CHR: 26
+INSERT INTO `item_mods` VALUES (25959, 25, 48);   -- ACC: 48
+INSERT INTO `item_mods` VALUES (25959, 26, 43);   -- RACC: 43
+INSERT INTO `item_mods` VALUES (25959, 29, 6);    -- MDEF: 6
+INSERT INTO `item_mods` VALUES (25959, 31, 139);  -- MEVA: 139
+INSERT INTO `item_mods` VALUES (25959, 68, 80);   -- EVA: 80
+INSERT INTO `item_mods` VALUES (25959, 165, 5);   -- CRITHITRATE: 5%
+INSERT INTO `item_mods` VALUES (25959, 289, 8);   -- SUBTLE_BLOW: 8
+INSERT INTO `item_mods` VALUES (25959, 302, 4);   -- TRIPLE_ATTACK: 4%
+INSERT INTO `item_mods` VALUES (25959, 384, 300); -- HASTE_GEAR: 3%
+
+-- Gleti's Mask
+INSERT INTO `item_mods` VALUES (23756, 1, 152);    -- DEF: 152
+INSERT INTO `item_mods` VALUES (23756, 2, 68);     -- HP: 68
+INSERT INTO `item_mods` VALUES (23756, 8, 33);     -- STR: 33
+INSERT INTO `item_mods` VALUES (23756, 9, 28);     -- DEX: 28
+INSERT INTO `item_mods` VALUES (23756, 10, 30);    -- VIT: 30
+INSERT INTO `item_mods` VALUES (23756, 11, 23);    -- AGI: 23
+INSERT INTO `item_mods` VALUES (23756, 12, 19);    -- INT: 19
+INSERT INTO `item_mods` VALUES (23756, 13, 19);    -- MND: 19
+INSERT INTO `item_mods` VALUES (23756, 14, 19);    -- CHR: 19
+INSERT INTO `item_mods` VALUES (23756, 23, 40);    -- ATT: 40
+INSERT INTO `item_mods` VALUES (23756, 25, 40);    -- ACC: 40
+INSERT INTO `item_mods` VALUES (23756, 27, -8);    -- ENMITY: -8
+INSERT INTO `item_mods` VALUES (23756, 29, 13);    -- MDEF: 13
+INSERT INTO `item_mods` VALUES (23756, 30, 40);    -- MACC: 40
+INSERT INTO `item_mods` VALUES (23756, 31, 86);    -- MEVA: 86
+INSERT INTO `item_mods` VALUES (23756, 68, 83);    -- EVA: 83
+INSERT INTO `item_mods` VALUES (23756, 161, -600); -- DMGPHYS: -6%
+INSERT INTO `item_mods` VALUES (23756, 165, 5);    -- CRITHITRATE: 5
+INSERT INTO `item_mods` VALUES (23756, 368, 2);    -- REGAIN: 2
+INSERT INTO `item_mods` VALUES (23756, 384, 600);  -- HASTE_GEAR: 6%
+INSERT INTO `item_mods` VALUES (23756, 1081, 6);   -- DAMAGE_LIMITP: 6
+
+-- Gleti's Cuirass
+INSERT INTO `item_mods` VALUES (23763, 1, 184);    -- DEF: 184
+INSERT INTO `item_mods` VALUES (23763, 2, 91);     -- HP: 91
+INSERT INTO `item_mods` VALUES (23763, 8, 30);     -- STR: 30
+INSERT INTO `item_mods` VALUES (23763, 9, 34);     -- DEX: 34
+INSERT INTO `item_mods` VALUES (23763, 10, 39);    -- VIT: 39
+INSERT INTO `item_mods` VALUES (23763, 11, 26);    -- AGI: 26
+INSERT INTO `item_mods` VALUES (23763, 12, 26);    -- INT: 26
+INSERT INTO `item_mods` VALUES (23763, 13, 26);    -- MND: 26
+INSERT INTO `item_mods` VALUES (23763, 14, 26);    -- CHR: 26
+INSERT INTO `item_mods` VALUES (23763, 23, 40);    -- ATT: 40
+INSERT INTO `item_mods` VALUES (23763, 25, 40);    -- ACC: 40
+INSERT INTO `item_mods` VALUES (23763, 29, 15);    -- MDEF: 15
+INSERT INTO `item_mods` VALUES (23763, 30, 40);    -- MACC: 40
+INSERT INTO `item_mods` VALUES (23763, 31, 102);   -- MEVA: 102
+INSERT INTO `item_mods` VALUES (23763, 68, 94);    -- EVA: 94
+INSERT INTO `item_mods` VALUES (23763, 161, -900); -- DMGPHYS: -9%
+INSERT INTO `item_mods` VALUES (23763, 165, 8);    -- CRITHITRATE: 8
+INSERT INTO `item_mods` VALUES (23763, 368, 3);    -- REGAIN: 3
+INSERT INTO `item_mods` VALUES (23763, 384, 300);  -- HASTE_GEAR: 3%
+INSERT INTO `item_mods` VALUES (23763, 491, 10);   -- WALTZ_POTENCY: 10
+INSERT INTO `item_mods` VALUES (23763, 1081, 9);   -- DAMAGE_LIMITP: 9
+
+-- Gleti's Gauntlets
+INSERT INTO `item_mods` VALUES (23770, 1, 138);    -- DEF: 138
+INSERT INTO `item_mods` VALUES (23770, 2, 68);     -- HP: 68
+INSERT INTO `item_mods` VALUES (23770, 8, 20);     -- STR: 20
+INSERT INTO `item_mods` VALUES (23770, 9, 42);     -- DEX: 42
+INSERT INTO `item_mods` VALUES (23770, 10, 43);    -- VIT: 43
+INSERT INTO `item_mods` VALUES (23770, 11, 15);    -- AGI: 15
+INSERT INTO `item_mods` VALUES (23770, 12, 14);    -- INT: 14
+INSERT INTO `item_mods` VALUES (23770, 13, 30);    -- MND: 30
+INSERT INTO `item_mods` VALUES (23770, 14, 24);    -- CHR: 24
+INSERT INTO `item_mods` VALUES (23770, 23, 40);    -- ATT: 40
+INSERT INTO `item_mods` VALUES (23770, 25, 40);    -- ACC: 40
+INSERT INTO `item_mods` VALUES (23770, 29, 12);    -- MDEF: 12
+INSERT INTO `item_mods` VALUES (23770, 30, 40);    -- MACC: 40
+INSERT INTO `item_mods` VALUES (23770, 31, 75);    -- MEVA: 75
+INSERT INTO `item_mods` VALUES (23770, 68, 72);    -- EVA: 72
+INSERT INTO `item_mods` VALUES (23770, 161, -700); -- DMGPHYS: -7%
+INSERT INTO `item_mods` VALUES (23770, 165, 6);    -- CRITHITRATE: 6
+INSERT INTO `item_mods` VALUES (23770, 368, 2);    -- REGAIN: 2
+INSERT INTO `item_mods` VALUES (23770, 384, 300);  -- HASTE_GEAR: 3%
+INSERT INTO `item_mods` VALUES (23770, 1081, 7);   -- DAMAGE_LIMITP: 7
+
 /*!40000 ALTER TABLE `item_mods` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

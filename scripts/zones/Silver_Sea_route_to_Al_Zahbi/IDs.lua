@@ -7,20 +7,20 @@ zones[xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED       = 6384, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
-        GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
-        KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
-        CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
-        LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET        = 7063, -- You can't fish here.
-        ON_WAY_TO_AL_ZAHBI            = 7322, -- We are on our way to Al Zahbi. We should arrive in [less than an hour/about 1 hour/about 2 hours/about 3 hours/about 4 hours/about 5 hours/about 6 hours/about 7 hours] (# [minute/minutes] in Earth time).
-        DOCKING_IN_AL_ZAHBI           = 7323, -- We are now docking in Al Zahbi.
-        NEARING_AL_ZAHBI              = 7324, -- We are nearing Al Zahbi.
-        YAHLIQ_SHOP_DIALOG            = 7326, -- You've picked the best place to shop for your items, guaranteed!
-        ARRIVING_SOON_AL_ZAHBI        = 7327, -- We are on our way to Al Zahbi. We will be arriving soon.
+        ITEM_CANNOT_BE_OBTAINED       = 6385, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED                 = 6391, -- Obtained: <item>.
+        GIL_OBTAINED                  = 6392, -- Obtained <number> gil.
+        KEYITEM_OBTAINED              = 6394, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS           = 7002, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
+        FISHING_MESSAGE_OFFSET        = 7064, -- You can't fish here.
+        ON_WAY_TO_AL_ZAHBI            = 7323, -- We are on our way to Al Zahbi. We should arrive in [less than an hour/about 1 hour/about 2 hours/about 3 hours/about 4 hours/about 5 hours/about 6 hours/about 7 hours] (# [minute/minutes] in Earth time).
+        DOCKING_IN_AL_ZAHBI           = 7324, -- We are now docking in Al Zahbi.
+        NEARING_AL_ZAHBI              = 7325, -- We are nearing Al Zahbi.
+        YAHLIQ_SHOP_DIALOG            = 7327, -- You've picked the best place to shop for your items, guaranteed!
+        ARRIVING_SOON_AL_ZAHBI        = 7328, -- We are on our way to Al Zahbi. We will be arriving soon.
     },
     mob =
     {

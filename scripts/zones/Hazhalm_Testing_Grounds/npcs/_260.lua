@@ -1,0 +1,92 @@
+-----------------------------------
+-- Area: Hazhalm_Testing_Grounds
+-- NPC: Entry Gate (_260)
+-----------------------------------
+local ID = zones[xi.zone.HAZHALM_TESTING_GROUNDS]
+-----------------------------------
+---@type TNpcEntity
+local entity = {}
+
+entity.onTrade = function(player, npc, trade)
+    if not xi.einherjar.settings.EINHERJAR_ENABLED then
+        return
+    end
+
+    if npcUtil.tradeHasExactly(trade, { xi.item.SMOLDERING_LAMP }) then
+        -- TODO: Check requirements
+        player:startEvent(2,
+                0,
+                xi.besieged.getMercenaryRank(player),
+                xi.einherjar.settings.EINHERJAR_KO_EXPEL_TIME,
+                xi.einherjar.settings.EINHERJAR_REENTRY_TIME,
+                0, -- Unknown
+                xi.einherjar.getChambersMenu(player),
+                xi.item.SMOLDERING_LAMP,
+                xi.item.GLOWING_LAMP
+        )
+        -- Continued in onEventFinish 2, 1
+    end
+
+    if npcUtil.tradeHasExactly(trade, { xi.item.GLOWING_LAMP }) then
+        -- TODO: Player requests entry into chamber
+        -- Continued in onEventFinish 3, 1
+    end
+end
+
+entity.onTrigger = function(player, npc)
+    -- TODO: Entry point for The Rider Cometh
+    -- If The Rider Cometh is flagged, no lockout message will show
+    -- but the battlefield selection menu will show up
+    local lockout = xi.einherjar.isLockedOut(player)
+    if lockout ~= 0 then
+        player:messageSpecial(ID.text.ENTRY_PROHIBITED, lockout)
+        return
+    end
+
+    player:messageSpecial(ID.text.GATE_FIRMLY_CLOSED)
+end
+
+entity.onEventUpdate = function(player, csid, option, npc)
+    if csid == 2 and (option >= 1 and option <= 10) then
+        local mask = xi.einherjar.getChambersMenu(player)
+        local chamberEntry = xi.einherjar.chambers[option]
+
+        if chamberEntry and bit.band(mask, chamberEntry.menu) ~= 0 then
+            -- Player attempted to reserve a chamber they don't have access to
+            player:instanceEntry(npc, 3)
+            return
+        end
+
+        player:updateEvent(0,
+                10,
+                xi.settings.main.EINHERJAR_KO_EXPEL_TIME,
+                xi.settings.main.EINHERJAR_REENTRY_TIME,
+                0,
+                xi.einherjar.getChambersMenu(player),
+                xi.item.SMOLDERING_LAMP,
+                xi.item.GLOWING_LAMP)
+        if player:getFreeSlotsCount() ~= 0 then
+            -- TODO: Reserve chamber, generate waves
+            xi.einherjar.makeLamp(player, option, os.time(), os.time() + (xi.einherjar.settings.EINHERJAR_TIME_LIMIT * 60))
+            player:instanceEntry(npc, 4)
+        else
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.GLOWING_LAMP)
+            player:instanceEntry(npc, 3)
+        end
+    end
+end
+
+entity.onEventFinish = function(player, csid, option)
+    -- Player has registered their lamp
+    if csid == 2 and option >= 65 and option <= 74 then -- > Rossweisse's Chamber < to < Odin's Chamber
+        player:messageSpecial(ID.text.GLOWING_LAMP_OBTAINED, xi.item.GLOWING_LAMP)
+        player:messageSpecial(ID.text.CLAIM_RELINQUISH, xi.item.GLOWING_LAMP, xi.einherjar.settings.EINHERJAR_RESERVATION_TIMEOUT)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GLOWING_LAMP)
+        player:confirmTrade()
+    elseif csid == 3 and option == 1 then -- player requested entry into chamber
+        local _ = player:getTrade():getItem()
+        -- TODO: Read lamp and warp player in
+    end
+end
+
+return entity

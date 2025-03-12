@@ -176,6 +176,10 @@ function npcUtil.queueMove(npc, point, delay)
     end
 
     local x, y, z, rot = unpack(point)
+
+    -- TODO: Current LLS version is treating all table entries as nil-able, where only rot is.  Ignore
+    -- until resolved.
+    ---@diagnostic disable-next-line: param-type-mismatch
     npc:queue(delay, doMove(x, y, z, rot))
 end
 

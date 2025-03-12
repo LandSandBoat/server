@@ -26,13 +26,13 @@ local pTable =
 {
     -- [Spell ID                         ] = { Effect,             Base,  Cap, Dur, Modifier               },
     -- Requiem: https://www.bg-wiki.com/ffxi/Category:Requiem
-    [xi.magic.spell.FOE_REQUIEM          ] = { xi.effect.REQUIEM,     1,  300,  60, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_II       ] = { xi.effect.REQUIEM,     2,  300,  60, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_III      ] = { xi.effect.REQUIEM,     3,  300,  90, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_IV       ] = { xi.effect.REQUIEM,     4,  300,  90, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_V        ] = { xi.effect.REQUIEM,     5,  300,  90, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_VI       ] = { xi.effect.REQUIEM,     6,  300, 120, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_VII      ] = { xi.effect.REQUIEM,     8,  300, 120, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM          ] = { xi.effect.REQUIEM,     1,  300,  64, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM_II       ] = { xi.effect.REQUIEM,     2,  300,  80, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM_III      ] = { xi.effect.REQUIEM,     3,  300,  96, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM_IV       ] = { xi.effect.REQUIEM,     4,  300, 112, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM_V        ] = { xi.effect.REQUIEM,     5,  300, 128, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM_VI       ] = { xi.effect.REQUIEM,     6,  300, 144, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM_VII      ] = { xi.effect.REQUIEM,     8,  300, 160, xi.mod.REQUIEM_EFFECT  },
     -- Lullaby: https://www.bg-wiki.com/ffxi/Category:Lullaby
     [xi.magic.spell.FOE_LULLABY          ] = { xi.effect.SLEEP_I,     1,    1,  30, xi.mod.LULLABY_EFFECT  },
     [xi.magic.spell.FOE_LULLABY_II       ] = { xi.effect.SLEEP_I,     1,    1,  60, xi.mod.LULLABY_EFFECT  },
@@ -109,16 +109,21 @@ xi.spells.enfeebling.calculateSongDuration = function(caster, spellEffect, baseD
     -- Duration boost of 10% per level of Song+ and All_Song+ gear plus song duration gear.
     local duration = baseDuration
 
-    -- Lullaby gets a duration boost from job points of 1 second per level.
-    if spellEffect == xi.effect.SLEEP_I then
-        duration = duration + gearBoost * baseDuration / 10 + caster:getJobPointLevel(xi.jp.LULLABY_DURATION)
+    -- Virelai is not affected by song duration bonuses other than skill, BRD gifts or Troubadour
+    -- https://www.bg-wiki.com/ffxi/Category:Virelai
+    if spellEffect ~= xi.effect.CHARM_I then
+        duration = math.floor(duration * (1 + gearBoost / 10 + caster:getMod(xi.mod.SONG_DURATION_BONUS) / 100))
+    else
+        duration = math.floor(duration * (1 + gearBoost / 10))
+
+        return duration
     end
 
-    -- Virelai is not affected by song duration bonus or BRD gifts.
-    if spellEffect ~= xi.effect.CHARM_I then
-        duration = math.floor(duration * (1 + caster:getMod(xi.mod.SONG_DURATION_BONUS) / 100))
-    else
-        duration = duration + gearBoost * 3
+    -- Lullaby gets a duration boost from job points of 1 second per level.
+    -- This is applied after skill+ duration bonuses
+    -- https://www.bg-wiki.com/ffxi/Category:Lullaby
+    if spellEffect == xi.effect.SLEEP_I then
+        duration = duration + caster:getJobPointLevel(xi.jp.LULLABY_DURATION)
     end
 
     -- Duration from status effects.
@@ -130,10 +135,8 @@ xi.spells.enfeebling.calculateSongDuration = function(caster, spellEffect, baseD
         duration = duration + caster:getJobPointLevel(xi.jp.TENUTO_EFFECT) * 2
     end
 
-    if
-        caster:hasStatusEffect(xi.effect.TROUBADOUR) and
-        spellEffect ~= xi.effect.CHARM_I
-    then
+    -- Unclear if Troubadour effects lullaby before or after JP
+    if caster:hasStatusEffect(xi.effect.TROUBADOUR) then
         duration = math.floor(duration * 2)
     end
 

@@ -14810,7 +14810,7 @@ INSERT INTO `mob_spawn_points` VALUES (17043867,'Mamool_Ja_Conservator','Mamool 
 INSERT INTO `mob_spawn_points` VALUES (17043868,'Mamool_Ja_Treasurer','Mamool Ja Treasurer',49,-254.567,14.432,-73.429,177);
 INSERT INTO `mob_spawn_points` VALUES (17043869,'Mamool_Ja_Conservator','Mamool Ja Conservator',48,-256.132,14.414,-78.581,243);
 INSERT INTO `mob_spawn_points` VALUES (17043870,'Mamool_Ja_Treasurer','Mamool Ja Treasurer',49,-178.913,4.160,-25.367,208);
-INSERT INTO `mob_spawn_points` VALUES (17043871,'Mamool_Ja','Mamool Ja',50,-256.286,4.458,-137.356,85);
+INSERT INTO `mob_spawn_points` VALUES (17043871,'Mamool_Ja','Mamool Ja',50,-260.382,5.07,-142.875,62);
 
 -- Mamook Incursion
 INSERT INTO `mob_spawn_points` VALUES (17043872,'Sagelord_Molaal_Ja','Sagelord Molaal Ja',51,83.000,48.194,157.000,32);
@@ -69175,21 +69175,21 @@ INSERT INTO `mob_spawn_points` VALUES (17600520,'Garuda_Prime_TSTBW','Garuda Pri
 INSERT INTO `mob_spawn_points` VALUES (17600521,'Garuda_Prime_TSTBW','Garuda Prime',3,-376.940,-78.992,512.872,105);
 
 -- Waking the Beast
-INSERT INTO `mob_spawn_points` VALUES (17600522,'Garuda_Prime_WTB','Garuda Prime',4,502.000,41.362,-370.000,96);
-INSERT INTO `mob_spawn_points` VALUES (17600523,'Air_Elemental','Air Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17600524,'Air_Elemental','Air Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17600525,'Air_Elemental','Air Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17600526,'Air_Elemental','Air Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17600527,'Garuda_Prime_WTB','Garuda Prime',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17600528,'Air_Elemental','Air Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17600529,'Air_Elemental','Air Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17600530,'Air_Elemental','Air Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17600531,'Air_Elemental','Air Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17600532,'Garuda_Prime_WTB','Garuda Prime',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17600533,'Air_Elemental','Air Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17600534,'Air_Elemental','Air Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17600535,'Air_Elemental','Air Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17600536,'Air_Elemental','Air Elemental',5,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17600522,'Garuda_Prime_WTB','Garuda Prime',4,502,41,-367,105);
+INSERT INTO `mob_spawn_points` VALUES (17600523,'Air_Elemental','Air Elemental',5,504,41,-367,0);
+INSERT INTO `mob_spawn_points` VALUES (17600524,'Air_Elemental','Air Elemental',5,498,41,-367,0);
+INSERT INTO `mob_spawn_points` VALUES (17600525,'Air_Elemental','Air Elemental',5,502,41,-371,0);
+INSERT INTO `mob_spawn_points` VALUES (17600526,'Air_Elemental','Air Elemental',5,502,41,-363,0);
+INSERT INTO `mob_spawn_points` VALUES (17600527,'Garuda_Prime_WTB','Garuda Prime',4,23,-19,33,105);
+INSERT INTO `mob_spawn_points` VALUES (17600528,'Air_Elemental','Air Elemental',5,27,-19,33,0);
+INSERT INTO `mob_spawn_points` VALUES (17600529,'Air_Elemental','Air Elemental',5,19,-19,33,0);
+INSERT INTO `mob_spawn_points` VALUES (17600530,'Air_Elemental','Air Elemental',5,23,-19,29,0);
+INSERT INTO `mob_spawn_points` VALUES (17600531,'Air_Elemental','Air Elemental',5,23,-19,37,0);
+INSERT INTO `mob_spawn_points` VALUES (17600532,'Garuda_Prime_WTB','Garuda Prime',4,-377,-79,513,105);
+INSERT INTO `mob_spawn_points` VALUES (17600533,'Air_Elemental','Air Elemental',5,-373,-79,513,0);
+INSERT INTO `mob_spawn_points` VALUES (17600534,'Air_Elemental','Air Elemental',5,-381,-79,513,0);
+INSERT INTO `mob_spawn_points` VALUES (17600535,'Air_Elemental','Air Elemental',5,-377,-79,509,0);
+INSERT INTO `mob_spawn_points` VALUES (17600536,'Air_Elemental','Air Elemental',5,-377,-79,517,0);
 
 -- Sugar-coated Directive (ASA4)
 INSERT INTO `mob_spawn_points` VALUES (17600537,'Garuda_Prime_ASA','Garuda Prime',6,503.000,41.000,-367.000,105);
@@ -69236,21 +69236,21 @@ INSERT INTO `mob_spawn_points` VALUES (17604619,'Ramuh_Prime_TSTBL','Ramuh Prime
 INSERT INTO `mob_spawn_points` VALUES (17604620,'Ramuh_Prime_TSTBL','Ramuh Prime',4,-377.066,-79.002,513.045,105);
 
 -- Waking the Beast
-INSERT INTO `mob_spawn_points` VALUES (17604621,'Ramuh_Prime_WTB','Ramuh Prime',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17604622,'Thunder_Elemental','Thunder Elemental',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17604623,'Thunder_Elemental','Thunder Elemental',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17604624,'Thunder_Elemental','Thunder Elemental',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17604625,'Thunder_Elemental','Thunder Elemental',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17604626,'Ramuh_Prime_WTB','Ramuh Prime',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17604627,'Thunder_Elemental','Thunder Elemental',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17604628,'Thunder_Elemental','Thunder Elemental',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17604629,'Thunder_Elemental','Thunder Elemental',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17604630,'Thunder_Elemental','Thunder Elemental',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17604631,'Ramuh_Prime_WTB','Ramuh Prime',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17604632,'Thunder_Elemental','Thunder Elemental',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17604633,'Thunder_Elemental','Thunder Elemental',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17604634,'Thunder_Elemental','Thunder Elemental',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17604635,'Thunder_Elemental','Thunder Elemental',6,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17604621,'Ramuh_Prime_WTB','Ramuh Prime',5,503,41,-367,105);
+INSERT INTO `mob_spawn_points` VALUES (17604622,'Thunder_Elemental','Thunder Elemental',6,507,41,-367,105);
+INSERT INTO `mob_spawn_points` VALUES (17604623,'Thunder_Elemental','Thunder Elemental',6,499,41,-367,105);
+INSERT INTO `mob_spawn_points` VALUES (17604624,'Thunder_Elemental','Thunder Elemental',6,503,41,-371,105);
+INSERT INTO `mob_spawn_points` VALUES (17604625,'Thunder_Elemental','Thunder Elemental',6,503,41,-363,105);
+INSERT INTO `mob_spawn_points` VALUES (17604626,'Ramuh_Prime_WTB','Ramuh Prime',5,23.048,-19.001,33.005,105);
+INSERT INTO `mob_spawn_points` VALUES (17604627,'Thunder_Elemental','Thunder Elemental',6,19.048,-19.001,33.005,105);
+INSERT INTO `mob_spawn_points` VALUES (17604628,'Thunder_Elemental','Thunder Elemental',6,26.048,-19.001,33.005,105);
+INSERT INTO `mob_spawn_points` VALUES (17604629,'Thunder_Elemental','Thunder Elemental',6,23.048,-19.001,37.005,105);
+INSERT INTO `mob_spawn_points` VALUES (17604630,'Thunder_Elemental','Thunder Elemental',6,23.048,-19.001,29.005,105);
+INSERT INTO `mob_spawn_points` VALUES (17604631,'Ramuh_Prime_WTB','Ramuh Prime',5,-377.066,-79.002,513.045,105);
+INSERT INTO `mob_spawn_points` VALUES (17604632,'Thunder_Elemental','Thunder Elemental',6,-381.066,-79.002,513.045,105);
+INSERT INTO `mob_spawn_points` VALUES (17604633,'Thunder_Elemental','Thunder Elemental',6,-373.066,-79.002,513.045,105);
+INSERT INTO `mob_spawn_points` VALUES (17604634,'Thunder_Elemental','Thunder Elemental',6,-377.066,-79.002,517.045,105);
+INSERT INTO `mob_spawn_points` VALUES (17604635,'Thunder_Elemental','Thunder Elemental',6,-377.066,-79.002,509.045,105);
 
 -- Sugar-coated Directive (ASA4)
 INSERT INTO `mob_spawn_points` VALUES (17604636,'Ramuh_Prime_ASA','Ramuh Prime',7,503.000,41.000,-367.000,105);
@@ -69309,21 +69309,21 @@ INSERT INTO `mob_spawn_points` VALUES (17608727,'Shiva_Prime_TSTBI','Shiva Prime
 INSERT INTO `mob_spawn_points` VALUES (17608728,'Shiva_Prime_TSTBI','Shiva Prime',3,-377.091,-78.999,512.996,105);
 
 -- Waking the Beast
-INSERT INTO `mob_spawn_points` VALUES (17608729,'Shiva_Prime_WTB','Shiva Prime',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17608730,'Ice_Elemental','Ice Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17608731,'Ice_Elemental','Ice Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17608732,'Ice_Elemental','Ice Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17608733,'Ice_Elemental','Ice Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17608734,'Shiva_Prime_WTB','Shiva Prime',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17608735,'Ice_Elemental','Ice Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17608736,'Ice_Elemental','Ice Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17608737,'Ice_Elemental','Ice Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17608738,'Ice_Elemental','Ice Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17608739,'Shiva_Prime_WTB','Shiva Prime',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17608740,'Ice_Elemental','Ice Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17608741,'Ice_Elemental','Ice Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17608742,'Ice_Elemental','Ice Elemental',5,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17608743,'Ice_Elemental','Ice Elemental',5,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17608729,'Shiva_Prime_WTB','Shiva Prime',4,503,41,-367,105);
+INSERT INTO `mob_spawn_points` VALUES (17608730,'Ice_Elemental','Ice Elemental',5,507,41,-367,105);
+INSERT INTO `mob_spawn_points` VALUES (17608731,'Ice_Elemental','Ice Elemental',5,499,41,-367,105);
+INSERT INTO `mob_spawn_points` VALUES (17608732,'Ice_Elemental','Ice Elemental',5,503,41,-371,105);
+INSERT INTO `mob_spawn_points` VALUES (17608733,'Ice_Elemental','Ice Elemental',5,503,41,-363,105);
+INSERT INTO `mob_spawn_points` VALUES (17608734,'Shiva_Prime_WTB','Shiva Prime',4,23.048,-19.001,33.005,105);
+INSERT INTO `mob_spawn_points` VALUES (17608735,'Ice_Elemental','Ice Elemental',5,19.048,-19.001,33.005,105);
+INSERT INTO `mob_spawn_points` VALUES (17608736,'Ice_Elemental','Ice Elemental',5,26.048,-19.001,33.005,105);
+INSERT INTO `mob_spawn_points` VALUES (17608737,'Ice_Elemental','Ice Elemental',5,23.048,-19.001,37.005,105);
+INSERT INTO `mob_spawn_points` VALUES (17608738,'Ice_Elemental','Ice Elemental',5,23.048,-19.001,29.005,105);
+INSERT INTO `mob_spawn_points` VALUES (17608739,'Shiva_Prime_WTB','Shiva Prime',4,-377.066,-79.002,513.045,105);
+INSERT INTO `mob_spawn_points` VALUES (17608740,'Ice_Elemental','Ice Elemental',5,-381.066,-79.002,513.045,105);
+INSERT INTO `mob_spawn_points` VALUES (17608741,'Ice_Elemental','Ice Elemental',5,-373.066,-79.002,513.045,105);
+INSERT INTO `mob_spawn_points` VALUES (17608742,'Ice_Elemental','Ice Elemental',5,-377.066,-79.002,517.045,105);
+INSERT INTO `mob_spawn_points` VALUES (17608743,'Ice_Elemental','Ice Elemental',5,-377.066,-79.002,509.045,105);
 
 -- Sugar-coated Directive (ASA4)
 INSERT INTO `mob_spawn_points` VALUES (17608744,'Shiva_Prime_ASA','Shiva Prime',6,503.000,41.000,-367.000,105);
@@ -71081,21 +71081,21 @@ INSERT INTO `mob_spawn_points` VALUES (17633288,'Titan_Prime_TSTBE','Titan Prime
 INSERT INTO `mob_spawn_points` VALUES (17633289,'Titan_Prime_TSTBE','Titan Prime',3,-376.962,-79.004,513.055,105);
 
 -- Waking the Beast
-INSERT INTO `mob_spawn_points` VALUES (17633290,'Titan_Prime_WTB','Titan Prime',4,499.475,40.069,-373.074,38);
-INSERT INTO `mob_spawn_points` VALUES (17633291,'Earth_Elemental','Earth Elemental',5,499.773,41.138,-370.267,87);
-INSERT INTO `mob_spawn_points` VALUES (17633292,'Earth_Elemental','Earth Elemental',5,498.942,41.051,-370.159,75);
-INSERT INTO `mob_spawn_points` VALUES (17633293,'Earth_Elemental','Earth Elemental',5,500.164,41.265,-371.081,100);
-INSERT INTO `mob_spawn_points` VALUES (17633294,'Earth_Elemental','Earth Elemental',5,500.684,41.354,-371.758,114);
-INSERT INTO `mob_spawn_points` VALUES (17633295,'Titan_Prime_WTB','Titan Prime',4,19.382,-19.936,27.011,38);
-INSERT INTO `mob_spawn_points` VALUES (17633296,'Earth_Elemental','Earth Elemental',5,19.680,-18.867,29.818,87);
-INSERT INTO `mob_spawn_points` VALUES (17633297,'Earth_Elemental','Earth Elemental',5,18.849,-18.954,29.926,75);
-INSERT INTO `mob_spawn_points` VALUES (17633298,'Earth_Elemental','Earth Elemental',5,20.071,-18.740,29.004,100);
-INSERT INTO `mob_spawn_points` VALUES (17633299,'Earth_Elemental','Earth Elemental',5,20.591,-18.651,28.327,114);
-INSERT INTO `mob_spawn_points` VALUES (17633300,'Titan_Prime_WTB','Titan Prime',4,-380.487,-79.935,506.981,38);
-INSERT INTO `mob_spawn_points` VALUES (17633301,'Earth_Elemental','Earth Elemental',5,-380.189,-78.866,509.788,87);
-INSERT INTO `mob_spawn_points` VALUES (17633302,'Earth_Elemental','Earth Elemental',5,-381.020,-78.953,509.896,75);
-INSERT INTO `mob_spawn_points` VALUES (17633303,'Earth_Elemental','Earth Elemental',5,-379.798,-78.739,508.974,100);
-INSERT INTO `mob_spawn_points` VALUES (17633304,'Earth_Elemental','Earth Elemental',5,-379.278,-78.650,508.297,114);
+INSERT INTO `mob_spawn_points` VALUES (17633290,'Titan_Prime_WTB','Titan Prime',4,503,41,-367,105);
+INSERT INTO `mob_spawn_points` VALUES (17633291,'Earth_Elemental','Earth Elemental',5,507,41,-367,105);
+INSERT INTO `mob_spawn_points` VALUES (17633292,'Earth_Elemental','Earth Elemental',5,499,41,-367,105);
+INSERT INTO `mob_spawn_points` VALUES (17633293,'Earth_Elemental','Earth Elemental',5,503,41,-371,105);
+INSERT INTO `mob_spawn_points` VALUES (17633294,'Earth_Elemental','Earth Elemental',5,503,41,-363,105);
+INSERT INTO `mob_spawn_points` VALUES (17633295,'Titan_Prime_WTB','Titan Prime',4,22.907,-19.005,33.085,105);
+INSERT INTO `mob_spawn_points` VALUES (17633296,'Earth_Elemental','Earth Elemental',5,26.907,-19.005,33.085,105);
+INSERT INTO `mob_spawn_points` VALUES (17633297,'Earth_Elemental','Earth Elemental',5,18.907,-19.005,33.085,105);
+INSERT INTO `mob_spawn_points` VALUES (17633298,'Earth_Elemental','Earth Elemental',5,22.907,-19.005,37.085,105);
+INSERT INTO `mob_spawn_points` VALUES (17633299,'Earth_Elemental','Earth Elemental',5,22.907,-19.005,29.085,105);
+INSERT INTO `mob_spawn_points` VALUES (17633300,'Titan_Prime_WTB','Titan Prime',4,-376.962,-79.004,513.055,105);
+INSERT INTO `mob_spawn_points` VALUES (17633301,'Earth_Elemental','Earth Elemental',5,-380.962,-79.004,513.055,105);
+INSERT INTO `mob_spawn_points` VALUES (17633302,'Earth_Elemental','Earth Elemental',5,-372.962,-79.004,513.055,105);
+INSERT INTO `mob_spawn_points` VALUES (17633303,'Earth_Elemental','Earth Elemental',5,-376.962,-79.004,517.055,105);
+INSERT INTO `mob_spawn_points` VALUES (17633304,'Earth_Elemental','Earth Elemental',5,-376.962,-79.004,509.055,105);
 
 -- Sugar-coated Directive (ASA4)
 INSERT INTO `mob_spawn_points` VALUES (17633305,'Titan_Prime_ASA','Titan Prime',6,503.000,41.000,-367.000,105);
@@ -71134,21 +71134,21 @@ INSERT INTO `mob_spawn_points` VALUES (17641477,'Leviathan_Prime_TSTBW','Leviath
 INSERT INTO `mob_spawn_points` VALUES (17641478,'Leviathan_Prime_TSTBW','Leviathan Prime',2,-377.046,-78.994,512.925,105);
 
 -- Waking the Beast
-INSERT INTO `mob_spawn_points` VALUES (17641479,'Leviathan_Prime_WTB','Leviathan Prime',3,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17641480,'Water_Elemental','Water Elemental',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17641481,'Water_Elemental','Water Elemental',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17641482,'Water_Elemental','Water Elemental',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17641483,'Water_Elemental','Water Elemental',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17641484,'Leviathan_Prime_WTB','Leviathan Prime',3,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17641485,'Water_Elemental','Water Elemental',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17641486,'Water_Elemental','Water Elemental',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17641487,'Water_Elemental','Water Elemental',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17641488,'Water_Elemental','Water Elemental',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17641489,'Leviathan_Prime_WTB','Leviathan Prime',3,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17641490,'Water_Elemental','Water Elemental',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17641491,'Water_Elemental','Water Elemental',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17641492,'Water_Elemental','Water Elemental',4,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17641493,'Water_Elemental','Water Elemental',4,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17641479,'Leviathan_Prime_WTB','Leviathan Prime',3,503,41,-367,105);
+INSERT INTO `mob_spawn_points` VALUES (17641480,'Water_Elemental','Water Elemental',4,507,41,-367,105);
+INSERT INTO `mob_spawn_points` VALUES (17641481,'Water_Elemental','Water Elemental',4,499,41,-367,105);
+INSERT INTO `mob_spawn_points` VALUES (17641482,'Water_Elemental','Water Elemental',4,503,41,-371,105);
+INSERT INTO `mob_spawn_points` VALUES (17641483,'Water_Elemental','Water Elemental',4,503,41,-363,105);
+INSERT INTO `mob_spawn_points` VALUES (17641484,'Leviathan_Prime_WTB','Leviathan Prime',3,22.94,-18.991,32.879,105);
+INSERT INTO `mob_spawn_points` VALUES (17641485,'Water_Elemental','Water Elemental',4,26.94,-18.991,32.879,105);
+INSERT INTO `mob_spawn_points` VALUES (17641486,'Water_Elemental','Water Elemental',4,18.94,-18.991,32.879,105);
+INSERT INTO `mob_spawn_points` VALUES (17641487,'Water_Elemental','Water Elemental',4,22.94,-18.991,36.879,105);
+INSERT INTO `mob_spawn_points` VALUES (17641488,'Water_Elemental','Water Elemental',4,22.94,-18.991,28.879,105);
+INSERT INTO `mob_spawn_points` VALUES (17641489,'Leviathan_Prime_WTB','Leviathan Prime',3,-377.046,-78.994,512.925,105);
+INSERT INTO `mob_spawn_points` VALUES (17641490,'Water_Elemental','Water Elemental',4,-381.046,-78.994,512.925,105);
+INSERT INTO `mob_spawn_points` VALUES (17641491,'Water_Elemental','Water Elemental',4,-373.046,-78.994,512.925,105);
+INSERT INTO `mob_spawn_points` VALUES (17641492,'Water_Elemental','Water Elemental',4,-377.046,-78.994,516.925,105);
+INSERT INTO `mob_spawn_points` VALUES (17641493,'Water_Elemental','Water Elemental',4,-377.046,-78.994,508.925,105);
 
 -- Sugar-coated Directive (ASA4)
 INSERT INTO `mob_spawn_points` VALUES (17641494,'Leviathan_Prime_ASA','Leviathan Prime',5,503.000,41.000,-367.000,105);

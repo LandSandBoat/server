@@ -4260,42 +4260,32 @@ namespace battleutils
 
         if (taUser->PParty != nullptr)
         {
-            std::vector<CParty*> taPartyList;
-            if (taUser->PParty->m_PAlliance != nullptr)
-            {
-                taPartyList = taUser->PParty->m_PAlliance->partyList;
-            }
-            else
-            {
-                taPartyList.emplace_back(taUser->PParty);
-            }
-
             // Collect all potential TA targets who are closer to the mob than the TA user
-            for (auto&& party : taPartyList)
-            {
-                for (auto&& PMember : party->members)
-                {
-                    float distTAtarget = distance(PMember->loc.p, PMob->loc.p);
-                    // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
-                    if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
-                    {
-                        taTargetList.emplace_back(distTAtarget, PMember);
-                    }
 
-                    if (auto* PChar = dynamic_cast<CCharEntity*>(PMember))
+            // clang-format off
+            taUser->ForAlliance([&PMob, distTAmob, &taTargetList](CBattleEntity* PMember)
+            {
+                float distTAtarget = distance(PMember->loc.p, PMob->loc.p);
+                // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
+                if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
+                {
+                    taTargetList.emplace_back(distTAtarget, PMember);
+                }
+
+                if (auto* PChar = dynamic_cast<CCharEntity*>(PMember))
+                {
+                    for (auto* PTrust : PChar->PTrusts)
                     {
-                        for (auto* PTrust : PChar->PTrusts)
+                        distTAtarget = distance(PTrust->loc.p, PMob->loc.p);
+                        // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
+                        if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
                         {
-                            float distTAtarget = distance(PTrust->loc.p, PMob->loc.p);
-                            // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
-                            if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
-                            {
-                                taTargetList.emplace_back(distTAtarget, PTrust);
-                            }
+                            taTargetList.emplace_back(distTAtarget, PTrust);
                         }
                     }
                 }
-            }
+            });
+            // clang-format on
         }
 
         // Check TA user's fellow

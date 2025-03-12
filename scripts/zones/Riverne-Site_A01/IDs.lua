@@ -7,25 +7,25 @@ zones[xi.zone.RIVERNE_SITE_A01] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED       = 6384, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
-        GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
-        KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
-        NOTHING_OUT_OF_ORDINARY       = 6404, -- There is nothing out of the ordinary here.
-        CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
-        LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7067, -- Tallying conquest results...
-        A_GLOWING_MIST                = 7262, -- A glowing mist of ever-changing proportions floats before you...
-        PARTY_MEMBERS_HAVE_FALLEN     = 7576, -- All party members have fallen in battle. Now leaving the battlefield.
-        THE_PARTY_WILL_BE_REMOVED     = 7583, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        SD_VERY_SMALL                 = 7607, -- The spatial displacement is very small. If you only had some item that could make it bigger...
-        SD_HAS_GROWN                  = 7608, -- The spatial displacement has grown.
-        SPACE_SEEMS_DISTORTED         = 7609, -- The space around you seems oddly distorted and disrupted.
-        MONUMENT                      = 7616, -- Something has been engraved on this stone, but the message is too difficult to make out.
-        HOMEPOINT_SET                 = 7744, -- Home point set!
-        UNITY_WANTED_BATTLE_INTERACT  = 7802, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        ITEM_CANNOT_BE_OBTAINED       = 6385, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED                 = 6391, -- Obtained: <item>.
+        GIL_OBTAINED                  = 6392, -- Obtained <number> gil.
+        KEYITEM_OBTAINED              = 6394, -- Obtained key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY       = 6405, -- There is nothing out of the ordinary here.
+        CARRIED_OVER_POINTS           = 7002, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
+        CONQUEST_BASE                 = 7068, -- Tallying conquest results...
+        A_GLOWING_MIST                = 7263, -- A glowing mist of ever-changing proportions floats before you...
+        PARTY_MEMBERS_HAVE_FALLEN     = 7577, -- All party members have fallen in battle. Now leaving the battlefield.
+        THE_PARTY_WILL_BE_REMOVED     = 7584, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        SD_VERY_SMALL                 = 7608, -- The spatial displacement is very small. If you only had some item that could make it bigger...
+        SD_HAS_GROWN                  = 7609, -- The spatial displacement has grown.
+        SPACE_SEEMS_DISTORTED         = 7610, -- The space around you seems oddly distorted and disrupted.
+        MONUMENT                      = 7617, -- Something has been engraved on this stone, but the message is too difficult to make out.
+        HOMEPOINT_SET                 = 7745, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 7803, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

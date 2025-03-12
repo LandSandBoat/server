@@ -64,15 +64,15 @@ INSERT INTO `mob_resistances` VALUES (33,'Avatar-Alexander_ToAU',0,0,0,0,0,0,0,0
 INSERT INTO `mob_resistances` VALUES (34,'Avatar-Carbuncle_Prime',0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,6,6,6,6,11,0);
 INSERT INTO `mob_resistances` VALUES (35,'Avatar-Diabolos_CoP',0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,4);
 INSERT INTO `mob_resistances` VALUES (36,'Avatar-Fenrir_Prime',0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,-2,11);
-INSERT INTO `mob_resistances` VALUES (37,'Avatar-Garuda_Prime',0,0,0,0,0,0,0,0,0,0,0,0,0,11,-3,11,11,11,11,11,11);
+INSERT INTO `mob_resistances` VALUES (37,'Avatar-Garuda_Prime_WTB',0,0,0,0,0,0,0,0,0,0,0,0,0,4,-3,-3,11,4,4,4,4);
 INSERT INTO `mob_resistances` VALUES (38,'Avatar-Ifrit_Prime_WTB',0,0,0,0,0,0,0,0,0,0,0,0,0,-3,11,4,4,4,-3,4,4);
 INSERT INTO `mob_resistances` VALUES (39,'Monoceros',0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,-2,6,2,0,4); -- Ixion, not Alicorn.
-INSERT INTO `mob_resistances` VALUES (40,'Avatar-Leviathan_Prime',0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,11,11,-3,11,11,11);
+INSERT INTO `mob_resistances` VALUES (40,'Avatar-Leviathan_Prime_WTB',0,0,0,0,0,0,0,0,0,0,0,0,0,11,4,4,4,-3,-3,4,4);
 INSERT INTO `mob_resistances` VALUES (41,'Avatar-Odin_Image',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-3,11);
 INSERT INTO `mob_resistances` VALUES (42,'Avatar-Odin_Prime',0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,5,7,5,7,4,11);
-INSERT INTO `mob_resistances` VALUES (43,'Avatar-Ramuh_Prime',0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,11,-3,11,11,11,11);
-INSERT INTO `mob_resistances` VALUES (44,'Avatar-Shiva_Prime',0,0,0,0,0,0,0,0,0,0,0,0,0,-3,11,11,11,11,11,11,11);
-INSERT INTO `mob_resistances` VALUES (45,'Avatar-Titan_Prime',0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,-3,11,11,11,11,11);
+INSERT INTO `mob_resistances` VALUES (43,'Avatar-Ramuh_Prime_WTB',0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,-3,-3,11,4,4);
+INSERT INTO `mob_resistances` VALUES (44,'Avatar-Shiva_Prime_WTB',0,0,0,0,0,0,0,0,0,0,0,0,0,-3,-3,11,4,4,4,4,4);
+INSERT INTO `mob_resistances` VALUES (45,'Avatar-Titan_Prime_WTB',0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,-3,-3,11,4,4,4);
 INSERT INTO `mob_resistances` VALUES (46,'Bat',0,2500,0,0,0,0,0,0,0,0,0,0,0,-2,-1,-3,-2,-2,-2,-3,6);
 INSERT INTO `mob_resistances` VALUES (47,'Bat_Trio',0,2500,0,0,0,0,0,0,0,0,0,0,0,-2,-1,-3,-2,-2,-2,-3,6);
 INSERT INTO `mob_resistances` VALUES (48,'Bee',0,2500,0,0,0,0,0,0,0,0,0,0,0,-2,-3,2,-2,-2,-2,-2,-2);

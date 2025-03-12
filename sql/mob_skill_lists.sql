@@ -3918,9 +3918,10 @@ INSERT INTO `mob_skill_lists` VALUE ('Nantina',2011,1617); -- blow
 
 INSERT INTO `mob_skill_lists` VALUE ('Stcemqestcint',2012,1612); -- gouging_branch
 
-INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_WTB',2013,843); -- Waking the Beast, double punch
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_WTB',2013,843); -- Waking the Beast, double_punch
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_WTB',2013,844); -- Waking the Beast, crimson_howl
-INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_WTB',2013,845); -- Waking the Beast, fire iv
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_WTB',2013,845); -- Waking the Beast, fire_iv
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_WTB',2013,846); -- Waking the Beast, flaming_crush
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ifrit_WTB',2013,847); -- Waking the Beast, meteor_strike
 
 INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',2014,392); -- ultrasonics
@@ -3977,7 +3978,41 @@ INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,1955); -- exuviation (
 INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,1956); -- fire_break (Below 50%)
 INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,3044); -- benumbing_blaze (Below 50%)*/
 
--- Next ID : 2025
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Shiva_WTB',2025,879); -- Waking the Beast, sleepga
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Shiva_WTB',2025,878); -- Waking the Beast, frost_armor
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Shiva_WTB',2025,881); -- Waking the Beast, blizzard iv
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Shiva_WTB',2025,882); -- Waking the Beast, rush
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Shiva_WTB',2025,883); -- Waking the Beast, heavenly_strike
+
+-- Note garuda prime did not use predator_claws in over 100+ mobskills in retail captures
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_WTB',2026,869); -- Waking the Beast, whispering_wind
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_WTB',2026,870); -- Waking the Beast, hastega
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_WTB',2026,871); -- Waking the Beast, aerial_armor
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_WTB',2026,872); -- Waking the Beast, aero_iv
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_WTB',2026,874); -- Waking the Beast, wind_blade
+
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ramuh_WTB',2027,888); -- Waking the Beast, thunderspark
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ramuh_WTB',2027,889); -- Waking the Beast, lightning_armor
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ramuh_WTB',2027,890); -- Waking the Beast, thunder_iv
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ramuh_WTB',2027,891); -- Waking the Beast, chaotic_strike
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Ramuh_WTB',2027,892); -- Waking the Beast, thunderstorm
+
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_WTB',2028,861); -- Waking the Beast, spring_water
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_WTB',2028,862); -- Waking the Beast, slowga
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_WTB',2028,863); -- Waking the Beast, water_iv
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_WTB',2028,864); -- Waking the Beast, spinning_dive
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_WTB',2028,865); -- Waking the Beast, grand_fall
+
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_WTB',2029,852); -- Waking the Beast, megalith_throw
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_WTB',2029,853); -- Waking the Beast, earthen_ward
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_WTB',2029,854); -- Waking the Beast, stone_iv
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_WTB',2029,855); -- Waking the Beast, mountain_buster
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_WTB',2029,856); -- Waking the Beast, geocrush
+
+INSERT INTO `mob_skill_lists` VALUES ('MamoolJa_NM',2030,1736); -- Axe Throw 
+INSERT INTO `mob_skill_lists` VALUES ('MamoolJa_NM',2030,1839); -- Rajing Rush
+
+-- Next ID : 2031
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

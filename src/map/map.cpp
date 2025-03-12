@@ -465,7 +465,10 @@ void do_final(int code)
     trustutils::FreeTrustList();
     zoneutils::FreeZoneList();
 
-    messageThread.join();
+    if (messageThread.joinable())
+    {
+        messageThread.join();
+    }
 
     CTaskMgr::delInstance();
     CVanaTime::delInstance();
