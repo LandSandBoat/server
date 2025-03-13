@@ -118,6 +118,13 @@ float CLuaMobSkill::getTP()
     return static_cast<float>(m_PLuaMobSkill->getTP());
 }
 
+// Retrieves the Monsters HP as it was at the start of mobskill
+int32 CLuaMobSkill::getMobHP()
+
+{
+    return m_PLuaMobSkill->getHP();
+}
+
 // Retrieves the Monsters HP% as it was at the start of mobskill
 uint8 CLuaMobSkill::getMobHPP()
 {
@@ -141,6 +148,7 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("getTotalTargets", CLuaMobSkill::getTotalTargets);
     SOL_REGISTER("getPrimaryTargetID", CLuaMobSkill::getPrimaryTargetID);
     SOL_REGISTER("getTP", CLuaMobSkill::getTP);
+    SOL_REGISTER("getMobHP", CLuaMobSkill::getMobHP);
     SOL_REGISTER("getMobHPP", CLuaMobSkill::getMobHPP);
 }
 

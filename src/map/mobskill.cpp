@@ -158,6 +158,14 @@ void CMobSkill::setTP(int16 tp)
     m_TP = tp;
 }
 
+// Stores the Monsters HP as it was at the start of mobskill
+
+void CMobSkill::setHP(int32 hp)
+
+{
+    m_HP = hp;
+}
+
 // Stores the Monsters HP% as it was at the start of mobskill
 void CMobSkill::setHPP(uint8 hpp)
 {
@@ -192,6 +200,12 @@ uint16 CMobSkill::getAnimationID() const
 int16 CMobSkill::getTP() const
 {
     return m_TP;
+}
+
+// Retrieves the Monsters HP as it was at the start of mobskill
+int32 CMobSkill::getHP() const
+{
+    return m_HP;
 }
 
 // Retrieves the Monsters HP% as it was at the start of mobskill

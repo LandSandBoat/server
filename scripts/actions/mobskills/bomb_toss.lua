@@ -10,9 +10,15 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 3
+    local params = {}
 
-    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.FIRE, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
+    params.baseDamage   = mob:getWeaponDmg()
+    params.fTP          = 3
+    params.element      = xi.element.FIRE
+    params.damageVaries = { 1.0, 1.0, 1.0 }
+    params.ignoreResist = false
+
+    local damage = xi.mobskills.mobMagicalMove(mob, target, skill, params)
     damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)

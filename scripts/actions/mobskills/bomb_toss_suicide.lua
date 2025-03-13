@@ -6,7 +6,8 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    -- notorious monsters shouldn't explode, nor dynamis
+    -- Notorious monsters and goblins in Dynamis do not explode.
+    -- TODO: Adjust weighting between regular Bomb Toss and Bomb Toss Suicide.
     if mob:isMobType(xi.mobType.NOTORIOUS) or mob:isInDynamis() then
         return 1
     end
@@ -15,9 +16,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = math.floor(mob:getWeaponDmg() * math.random(12, 18) * skill:getMobHPP() / 100)
+    local params = {}
 
-    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.FIRE, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
+    params.baseDamage   = skill:getMobHP() / 3
+    params.fTP          = 1
+    params.element      = xi.element.FIRE
+
+    local damage = xi.mobskills.mobMagicalMove(mob, target, skill, params)
     damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)

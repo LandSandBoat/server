@@ -42,6 +42,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const CLuaMobSkill& mobskill);
 
     float  getTP();
+    int32  getMobHP();
     uint8  getMobHPP();
     uint16 getID();
     int16  getParam();
