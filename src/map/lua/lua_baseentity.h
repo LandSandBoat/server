@@ -656,8 +656,6 @@ public:
     void  updateClaim(sol::object const& entity);
     bool  hasEnmity();
     auto  getNotorietyList() -> sol::table;
-    void  setClaimable(bool claimable);
-    bool  getClaimable();
     void  clearEnmityForEntity(CLuaBaseEntity* PEntity);
 
     // Status Effects

@@ -2389,6 +2389,14 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
         return true;
     }
 
+    if (auto* PMob = dynamic_cast<CMobEntity*>(PBattleTarget))
+    {
+        if (PMob->getMobMod(MOBMOD_CLAIM_TYPE) == static_cast<int16>(ClaimType::NonExclusive))
+        {
+            return true;
+        }
+    }
+
     bool found = false;
 
     // clang-format off

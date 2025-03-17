@@ -91,4 +91,5 @@ xi.mobMod =
     SKIP_ALLEGIANCE_CHECK  = 80, -- Skip the allegiance check for valid target (allows for example a mob to cast a TARGET_ENEMY spell on itself)
     ABILITY_RESPONSE       = 81, -- Mob can respond to player ability use with onPlayerAbilityUse()
     RUN_SPEED_MULT         = 82, -- Multiplier for the speed of a mob while running (generally when the target is out of range) 100 = 1.00x
+    CLAIM_TYPE             = 83, -- Changes the claim behavior of the mob. See xi.claimType enum.
 }

@@ -4712,7 +4712,7 @@ namespace battleutils
                 mob->PEnmityContainer->UpdateEnmity(original, 0, 0, true, true);
             }
 
-            if (!mob->m_IsClaimable)
+            if (mob->getMobMod(MOBMOD_CLAIM_TYPE) == static_cast<int16>(ClaimType::Unclaimable))
             {
                 return;
             }

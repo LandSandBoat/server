@@ -30,6 +30,7 @@
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
 #include "entities/trustentity.h"
+#include "mob_modifier.h"
 #include "packets/action.h"
 #include "status_effect_container.h"
 #include "utils/zoneutils.h"
@@ -393,6 +394,14 @@ bool CTargetFind::isMobOwner(CBattleEntity* PTarget)
     if (PTarget->m_OwnerID.id == 0 || PTarget->m_OwnerID.id == m_PBattleEntity->id)
     {
         return true;
+    }
+
+    if (auto* PMob = dynamic_cast<CMobEntity*>(PTarget))
+    {
+        if (PMob->getMobMod(MOBMOD_CLAIM_TYPE) == static_cast<int16>(ClaimType::NonExclusive))
+        {
+            return true;
+        }
     }
 
     bool found = false;

@@ -2780,16 +2780,6 @@ end
 function CBaseEntity:getNotorietyList()
 end
 
----@param claimable boolean
----@return nil
-function CBaseEntity:setClaimable(claimable)
-end
-
----@nodiscard
----@return boolean
-function CBaseEntity:getClaimable()
-end
-
 ---@param PEntity CBaseEntity
 ---@return nil
 function CBaseEntity:clearEnmityForEntity(PEntity)

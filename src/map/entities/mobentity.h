@@ -102,6 +102,13 @@ enum BEHAVIOR : uint16
     BEHAVIOR_NO_TURN      = 0x400  // mob does not turn to face target
 };
 
+enum class ClaimType : uint8
+{
+    Exclusive    = 0, // Regular exclusive claim behavior. Only one entity and related group can attack.
+    NonExclusive = 1, // Regular claim behavior but multiple unrelated entities can attack and compete for claim. Rewards distributed to last claiming entity.
+    Unclaimable  = 2, // Mob cannot be claimed. Multiple unrelated entities can attack. Rewards will not be distributed.
+};
+
 class CMobSkillState;
 
 class CMobEntity : public CBattleEntity
@@ -254,7 +261,6 @@ public:
 
     CMobSpellContainer* SpellContainer;
 
-    bool m_IsClaimable;
     bool m_IsPathingHome;
 
     static constexpr float sound_range{ 8.f };

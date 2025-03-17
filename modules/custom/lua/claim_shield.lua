@@ -100,7 +100,7 @@ local timerFunc = function(mob)
 
     local numEntries = #entries
 
-    mob:setClaimable(true)
+    mob:setMobMod(xi.mobMod.CLAIM_TYPE, xi.claimType.EXCLUSIVE)
     mob:setUnkillable(false)
     mob:setCallForHelpBlocked(false)
 
@@ -145,10 +145,10 @@ local timerFunc = function(mob)
 end
 
 -- Called on entity onMobSpawn, sets up timerFunc
-local listenerFunc = function(mob)
+local spawnFunc = function(mob)
     print(string.format('Applying Claimshield to %s for %ims', mob:getPacketName(), claimshieldTime))
 
-    mob:setClaimable(false)
+    mob:setMobMod(xi.mobMod.CLAIM_TYPE, xi.claimType.UNCLAIMABLE)
     mob:setUnkillable(true)
     mob:setCallForHelpBlocked(true)
     mob:stun(claimshieldTime)
@@ -158,16 +158,16 @@ end
 
 -- Main entrypoint of each override
 local overrideFunc = function(mob)
-    mob:addListener('SPAWN', mob:getPacketName() .. '_CS_SPAWN', listenerFunc)
+    spawnFunc(mob)
 
-    -- Call original onMobInitialize
+    -- Call original onMobSpawn
     super(mob)
 end
 
 -- NOTE: At the time we iterate over these entries, the Lua zone and mob objects won't be ready,
 --     : so we deal with everything as strings for now.
 for _, entry in pairs(nmsToShield) do
-    m:addOverride(string.format('xi.zones.%s.mobs.%s.onMobInitialize', entry[1], entry[2]), overrideFunc)
+    m:addOverride(string.format('xi.zones.%s.mobs.%s.onMobSpawn', entry[1], entry[2]), overrideFunc)
 end
 
 return m

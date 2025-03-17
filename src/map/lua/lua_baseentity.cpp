@@ -13160,40 +13160,6 @@ sol::table CLuaBaseEntity::getNotorietyList()
 }
 
 /************************************************************************
- *  Function: setClaimable(...)
- *  Purpose : sets m_IsClaimable for a mob
- *  Example : mob:setClaimable(false)
- *  Notes   :
- ************************************************************************/
-
-void CLuaBaseEntity::setClaimable(bool claimable)
-{
-    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
-    {
-        PMob->m_IsClaimable = claimable;
-        return;
-    }
-    ShowError("lua::setClaimable called on invalid entity");
-}
-
-/************************************************************************
- *  Function: getClaimable(...)
- *  Purpose : Returns whether or not a mob is claimable
- *  Example : local claimable = mob:getClaimable()
- *  Notes   : Defaults to true, as in the CMobEntity constructor
- ************************************************************************/
-
-bool CLuaBaseEntity::getClaimable()
-{
-    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
-    {
-        return PMob->m_IsClaimable;
-    }
-    ShowError("lua::getClaimable called on invalid entity");
-    return true;
-}
-
-/************************************************************************
  *  Function: clearEnmityForEntity(...)
  *  Purpose :
  *  Example : mob:clearEnmityForEntity(player)
@@ -19554,8 +19520,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("updateClaim", CLuaBaseEntity::updateClaim);
     SOL_REGISTER("hasEnmity", CLuaBaseEntity::hasEnmity);
     SOL_REGISTER("getNotorietyList", CLuaBaseEntity::getNotorietyList);
-    SOL_REGISTER("setClaimable", CLuaBaseEntity::setClaimable);
-    SOL_REGISTER("getClaimable", CLuaBaseEntity::getClaimable);
     SOL_REGISTER("clearEnmityForEntity", CLuaBaseEntity::clearEnmityForEntity);
 
     // Status Effects
