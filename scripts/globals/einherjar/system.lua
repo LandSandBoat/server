@@ -284,6 +284,7 @@ xi.einherjar.new = function(chamberId, leaderId)
             [xi.mobMod.CHECK_AS_NM]    = 1,
             [xi.mobMod.CHARMABLE]      = 0,
             [xi.mobMod.DONT_ROAM_HOME] = 1,
+            [xi.mobMod.CLAIM_TYPE]     = xi.claimType.NON_EXCLUSIVE,
         },
         mods        = {},
         waveIndex   = 0,
@@ -418,7 +419,6 @@ end
 
 xi.einherjar.spawnMob = function(mob, newMobType, chamberData)
     mob:setCallForHelpBlocked(true)
-    mob:setClaimable(false) -- TODO: On retail, mobs show as red but still allow everyone to attack
 
     if newMobType == mobType.SPECIAL then
         mob:addListener('DEATH', 'EINHERJAR_DEATH', utils.bind(onSpecialMobDeath, chamberData))
