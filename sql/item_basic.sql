@@ -5179,7 +5179,7 @@ INSERT INTO `item_basic` VALUES (5409,0,'dark_card_case','dark_card_case',12,154
 INSERT INTO `item_basic` VALUES (5410,0,'virtue_stone_pouch','vrt._stn._pouch',99,30300,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (5411,0,'bottle_of_dawn_mulsum','dawn_mulsum',1,1540,@MEDICINES,0,321);
 INSERT INTO `item_basic` VALUES (5412,0,'scapegoat','scapegoat',1,1540,@BONECRAFT,0,1918);
-INSERT INTO `item_basic` VALUES (5413,0,'smouldering_lamp','smouldering_lamp',1,32832,@NONE,0,25);
+INSERT INTO `item_basic` VALUES (5413,0,'smoldering_lamp','smoldering_lamp',1,32832,@NONE,0,25);
 INSERT INTO `item_basic` VALUES (5414,0,'glowing_lamp','glowing_lamp',1,13376,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (5415,0,'page_from_balrahns_reflections','heros_reflections',1,63044,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (5416,0,'steel_bullet_pouch','stl._bull._pouch',12,1540,@AMMUNITION,0,900);

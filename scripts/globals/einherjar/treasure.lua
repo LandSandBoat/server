@@ -193,8 +193,9 @@ end
 
 -- Einherjar Armoury Crate rewards generation
 -- Note: Only for Wing 1-3, no crate in Odin's Chamber
-xi.einherjar.getArmouryCrateRewards = function(bossId, chamberTier)
+xi.einherjar.getArmouryCrateRewards = function(bossId, chamberId)
     local rewards = {}
+    local tier = math.ceil(chamberId / 3)
 
     -- 1. Boss specific drops (1-3 guaranteed items, some bosses also have non-guaranteed drops)
     for _, lootEntry in ipairs(bossDrops[bossId]) do
@@ -214,11 +215,22 @@ xi.einherjar.getArmouryCrateRewards = function(bossId, chamberTier)
 
     -- 3. Wing specific abjuration (5% chance)
     if math.random(1, 100) <= 5 then
-        table.insert(rewards, abjurations[chamberTier][math.random(1, #abjurations[chamberTier])])
+        table.insert(rewards, abjurations[tier][math.random(1, #abjurations[tier])])
     end
 
-    -- 4. (Optional) 4. Heithrun special rewards (not guaranteed)
-    -- TODO: Implement Heithrun
+    -- 4. (Optional) Heithrun special rewards (not guaranteed)
+    -- TODO: Not enough data to implement
 
     return rewards
+end
+
+xi.einherjar.getAmpoulesReward = function(chamberId, defeatedCount, totalCount)
+    local completionRate = defeatedCount / totalCount
+    local baseReward = xi.einherjar.chambers[chamberId].ichor * xi.einherjar.settings.EINHERJAR_ICHOR_RATE
+    return math.floor(baseReward * completionRate)
+end
+
+xi.einherjar.hideCrate = function(crateNpc)
+    crateNpc:setStatus(xi.status.INVISIBLE)
+    crateNpc:setUntargetable(true)
 end

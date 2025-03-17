@@ -26,6 +26,7 @@ zones[xi.zone.HAZHALM_TESTING_GROUNDS] =
         MIN_LEVEL_ENTRY               = 8056, -- Adventurers who have yet to reach level <number> will not be permitted entry to the training grounds.
         RESERVATION_LOCKOUT           = 8057, -- Chamber reservation is prohibited for # more Vana'dielian [day/days].
         MIN_LEVEL_RESERVATION         = 8058, -- Adventurers who have yet to reach level <number> will not be permitted to make reservations within the training grounds.
+        COULD_NOT_GATHER_DATA         = 8060, -- Could not gather the sufficient data.
         CHAMBER_OCCUPIED              = 8062, -- Currently, another expedition is occupying [/Rossweisse's Chamber/Grimgerde's Chamber/Siegrune's Chamber/Helmwige's Chamber/Schwertleite's Chamber/Waltraute's Chamber/Ortlinde's Chamber/Gerhilde's Chamber/Brunhilde's Chamber/Odin's Chamber/Odin's Chamber].
         GLOWING_LAMP_OBTAINED         = 8063, -- Time and destination have been recorded on your <item>.
         MISSING_FEATHERS              = 8064, -- You do not possess the items required for entry.
@@ -45,20 +46,21 @@ zones[xi.zone.HAZHALM_TESTING_GROUNDS] =
     mob =
     {
         -- Einherjar: Wing 1: Mobs
-        BUGARD_X         = GetTableOfIDs('Bugard-X'),
-        CHIGOE           = GetTableOfIDs('Chigoe'),
-        CRAVEN_EINHERJAR = GetTableOfIDs('Craven_Einherjar'),
-        DARK_ELEMENTAL   = GetTableOfIDs('Dark_Elemental'),
-        DJIGGA           = GetTableOfIDs('Djigga'), -- Chigoes for Hildesvini; can also appear in Wing 3
-        EINHERJAR_EATER  = GetTableOfIDs('Einherjar_Eater'),
-        HAZHALM_BAT      = GetTableOfIDs('Hazhalm_Bat'),
-        HAZHALM_BATS     = GetTableOfIDs('Hazhalm_Bats'),
-        HYNDLA           = GetTableOfIDs('Hyndla'),
-        INFECTED_WAMOURA = GetTableOfIDs('Infected_Wamoura'),
-        LOGI             = GetTableOfIDs('Logi'),
-        NICKUR           = GetTableOfIDs('Nickur'),
-        ROTTING_HUSKARL  = GetTableOfIDs('Rotting_Huskarl'), -- TODO: This is 3 sets of mob, BLM x12, WAR x12, DRK x12
-        SJOKRAKJEN       = GetTableOfIDs('Sjokrakjen'),
+        BUGARD_X            = GetTableOfIDs('Bugard-X'),
+        CHIGOE              = GetTableOfIDs('Chigoe'),
+        CRAVEN_EINHERJAR    = GetTableOfIDs('Craven_Einherjar'),
+        DARK_ELEMENTAL      = GetTableOfIDs('Dark_Elemental'),
+        EINHERJAR_EATER     = GetTableOfIDs('Einherjar_Eater'),
+        HAZHALM_BAT         = GetTableOfIDs('Hazhalm_Bat'),
+        HAZHALM_BATS        = GetTableOfIDs('Hazhalm_Bats'),
+        HYNDLA              = GetTableOfIDs('Hyndla'),
+        INFECTED_WAMOURA    = GetTableOfIDs('Infected_Wamoura'),
+        LOGI                = GetTableOfIDs('Logi'),
+        NICKUR              = GetTableOfIDs('Nickur'),
+        ROTTING_HUSKARL_WAR = GetTableOfIDs('Rotting_Huskarl_war'),
+        ROTTING_HUSKARL_BLM = GetTableOfIDs('Rotting_Huskarl_blm'),
+        SJOKRAKJEN          = GetTableOfIDs('Sjokrakjen'),
+        DJIGGA_HILDESVINI   = GetTableOfIDs('Djigga_Hildesvini'), -- Adds for Hildesvini
 
         -- Einherjar: Wing 1: Bosses
         HAKENMANN      = GetFirstID('Hakenmann'),
@@ -69,30 +71,35 @@ zones[xi.zone.HAZHALM_TESTING_GROUNDS] =
         NIHHUS         = GetFirstID('Nihhus'),
 
         -- Einherjar: Wing 2: Mobs
-        BATTLEMITE           = GetTableOfIDs('Battlemite'),
-        CORRUPT_EINHERJAR    = GetTableOfIDs('Corrupt_Einherjar'),
-        EINHERJAR_BREI       = GetTableOfIDs('Einherjar_Brei'),
-        FLAMES_OF_MUSPELHEIM = GetTableOfIDs('Flames_of_Muspelheim'),
-        GARDSVOR             = GetTableOfIDs('Gardsvor'),
-        HAZHALM_LEECH        = GetTableOfIDs('Hazhalm_Leech'),
-        ODINS_FOOL           = GetTableOfIDs('Odins_Fool'),
-        UTGARTH_BAT          = GetTableOfIDs('Utgarth_Bat'),
-        UTGARTH_BATS         = GetTableOfIDs('Utgarth_Bats'),
-        UTGARTH_LEECH        = GetTableOfIDs('Utgarth_Leech'),
-        WALDGEIST            = GetTableOfIDs('Waldgeist'),
-        WINEBIBBER           = GetTableOfIDs('Winebibber'),
+        BATTLEMITE             = GetTableOfIDs('Battlemite'),
+        CORRUPT_EINHERJAR      = GetTableOfIDs('Corrupt_Einherjar'),
+        CRAVEN_EINHERJAR_BHOOT = GetTableOfIDs('Craven_Einherjar_bhoot'),
+        EINHERJAR_BREI         = GetTableOfIDs('Einherjar_Brei'),
+        FLAMES_OF_MUSPELHEIM   = GetTableOfIDs('Flames_of_Muspelheim'),
+        GARDSVOR               = GetTableOfIDs('Gardsvor'),
+        HAZHALM_LEECH          = GetTableOfIDs('Hazhalm_Leech'),
+        ODINS_FOOL             = GetTableOfIDs('Odins_Fool'),
+        ROTTING_HUSKARL_DRK    = GetTableOfIDs('Rotting_Huskarl_drk'), -- Intertwined with THF
+        ROTTING_HUSKARL_THF    = GetTableOfIDs('Rotting_Huskarl_thf'), -- Intertwined with DRK
+        UTGARTH_BAT            = GetTableOfIDs('Utgarth_Bat'),
+        UTGARTH_BATS           = GetTableOfIDs('Utgarth_Bats'),
+        UTGARTH_LEECH          = GetTableOfIDs('Utgarth_Leech'),
+        WALDGEIST              = GetTableOfIDs('Waldgeist'),
+        WINEBIBBER             = GetTableOfIDs('Winebibber'),
 
         -- Einherjar: Wing 2: Bosses
         ANDHRIMNIR      = GetFirstID('Andhrimnir'),
         ARIRI_SAMARIRI  = GetFirstID('Ariri_Samariri'),
         BALRAHN         = GetFirstID('Balrahn'),
         HRUNGNIR        = GetFirstID('Hrungnir'),
+        HRUNGNIR_CLONE  = GetFirstID('Hrungnir_clone'),
         MOKKURALFI      = GetFirstID('Mokkuralfi'),
         TANNGRISNIR     = GetFirstID('Tanngrisnir'),
 
         -- Einherjar: Wing 3: Mobs
         AUDHUMBLA            = GetTableOfIDs('Audhumbla'),
         BERSERKR             = GetTableOfIDs('Berserkr'),
+        DJIGGA               = GetTableOfIDs('Djigga'),
         EXPERIMENTAL_POROGGO = GetTableOfIDs('Experimental_Poroggo'),
         HAFGYGR              = GetTableOfIDs('Hafgygr'),
         IDUN                 = GetTableOfIDs('Idun'),

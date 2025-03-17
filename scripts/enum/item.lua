@@ -2657,6 +2657,7 @@ xi.item =
     VIRTUE_STONE_POUCH                  = 5410,
     SMOLDERING_LAMP                     = 5413,
     GLOWING_LAMP                        = 5414,
+    HEROS_REFLECTIONS                   = 5415,
     SCROLL_OF_INSTANT_RETRACE           = 5428,
     DUSTY_POTION                        = 5431,
     DUSTY_ETHER                         = 5432,

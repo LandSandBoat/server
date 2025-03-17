@@ -27,14 +27,15 @@ local mobPool = {
         ID.mob.INFECTED_WAMOURA,
         ID.mob.LOGI,
         ID.mob.NICKUR,
-        ID.mob.ROTTING_HUSKARL, -- TODO: BLM/WAR ones, not DRK
+        ID.mob.ROTTING_HUSKARL_WAR,
+        ID.mob.ROTTING_HUSKARL_BLM,
         ID.mob.SJOKRAKJEN,
     },
     [xi.einherjar.wing.WING_2] = {
         ID.mob.BATTLEMITE,
         ID.mob.CHIGOE,
         ID.mob.CORRUPT_EINHERJAR,
-        ID.mob.CRAVEN_EINHERJAR,
+        ID.mob.CRAVEN_EINHERJAR_BHOOT,
         ID.mob.EINHERJAR_BREI,
         ID.mob.EINHERJAR_EATER,
         ID.mob.FLAMES_OF_MUSPELHEIM,
@@ -43,7 +44,8 @@ local mobPool = {
         ID.mob.HAZHALM_BATS,
         ID.mob.HAZHALM_LEECH,
         ID.mob.ODINS_FOOL,
-        ID.mob.ROTTING_HUSKARL, -- TODO: DRK ones, not BLM/WAR
+        ID.mob.ROTTING_HUSKARL_DRK,
+        ID.mob.ROTTING_HUSKARL_THF,
         ID.mob.SJOKRAKJEN,
         ID.mob.UTGARTH_BAT,
         ID.mob.UTGARTH_BATS,
@@ -130,7 +132,7 @@ local bossPool = {
 }
 
 -- Returns a random boss for given chamber tier
--- Boss is locked until explicitedly unlocked by chamber
+-- Boss is locked until explicitly unlocked by chamber
 local function getRandomBoss(chamberTier)
     local availableBosses = {}
 
@@ -145,27 +147,13 @@ local function getRandomBoss(chamberTier)
         return nil
     end
 
-    while #availableBosses > 0 do
-        -- Select a random boss
-        local index = math.random(#availableBosses)
-        local selectedBoss = availableBosses[index]
+    -- Select a random boss
+    local index = math.random(#availableBosses)
+    local selectedBoss = availableBosses[index]
 
-        -- Special case: HILDESVINI requires DJIGGA[1] to be available
-        if selectedBoss == ID.mob.HILDESVINI and lockedMobs[ID.mob.DJIGGA[1]] then
-            -- Remove from the pool and try again
-            table.remove(availableBosses, index)
-        else
-            if selectedBoss == ID.mob.HILDESVINI then
-                lockedMobs[ID.mob.DJIGGA[1]] = true
-            end
-
-            -- Lock the selected boss and return it
-            lockedMobs[selectedBoss] = true
-            return selectedBoss
-        end
-    end
-
-    return nil
+    -- Lock the selected boss and return it
+    lockedMobs[selectedBoss] = true
+    return selectedBoss
 end
 
 local specialPool = {
@@ -198,12 +186,27 @@ local function generateDistribution(familyCount, waveCount)
         distribution[i] = 1
     end
 
-    -- Distribute remaining families randomly across waves
+    -- Distribute remaining families with a max limit of 2 per wave
     local remainingFamilies = familyCount - waveCount
-    while remainingFamilies > 0 do
-        local waveIndex = math.random(1, waveCount)
+    local validWaves = {}
+
+    for i = 1, waveCount do
+        table.insert(validWaves, i)
+    end
+
+    while remainingFamilies > 0 and #validWaves > 0 do
+        local waveIndex = validWaves[math.random(1, #validWaves)]
         distribution[waveIndex] = distribution[waveIndex] + 1
         remainingFamilies = remainingFamilies - 1
+
+        if distribution[waveIndex] == 2 then
+            for i, v in ipairs(validWaves) do
+                if v == waveIndex then
+                    table.remove(validWaves, i)
+                    break
+                end
+            end
+        end
     end
 
     return distribution
@@ -229,7 +232,8 @@ end
 
 -- Generates a chamber plan based on the chamber ID and tier
 -- All selected mobs are locked until released by the chamber
-xi.einherjar.makeChamberPlan = function(chamberId, chamberTier)
+xi.einherjar.makeChamberPlan = function(chamberId)
+    local chamberTier = math.ceil(chamberId / 3)
     local chamberConfig = {
         boss = getRandomBoss(chamberTier),
         special = getRandomSpecial(chamberId),
@@ -285,6 +289,15 @@ xi.einherjar.makeChamberPlan = function(chamberId, chamberTier)
 
         if not randomFamily then
             print('ERROR: Einherjar unable to plan chamber: no mob family available for tier ', chamberTier)
+
+            -- Unlock everything we previously locked while generating this plan
+            xi.einherjar.unlockMob(chamberConfig.boss)
+            for _, family in ipairs(families) do
+                for _, mob in ipairs(family) do
+                    xi.einherjar.unlockMob(mob)
+                end
+            end
+
             return nil
         end
 
@@ -313,4 +326,51 @@ xi.einherjar.makeChamberPlan = function(chamberId, chamberTier)
     end
 
     return chamberConfig
+end
+
+-- Subdivides a list of mob IDs into random-sized subgroups
+xi.einherjar.subDivideMobs = function(mobIds)
+    local subdividedGroups = {}
+    local shuffled = utils.shuffle(mobIds)
+
+    -- Divide into random-sized subgroups (between 2 and 5)
+    local index = 1
+    while index <= #shuffled do
+        local remaining = #shuffled - index + 1
+        -- Random group size between 2 and 5, but not exceeding remaining mobs
+        local groupSize = math.min(math.random(2, 5), remaining)
+        local subGroup = {}
+
+        for i = 0, groupSize - 1 do
+            table.insert(subGroup, shuffled[index + i])
+        end
+
+        table.insert(subdividedGroups, subGroup)
+        index = index + groupSize
+    end
+
+    return subdividedGroups
+end
+
+xi.einherjar.getRandomPosForMobGroup = function(chamberId, min, max)
+    local function getGroupCenterOffset()
+        return math.random(min, max)
+    end
+
+    local groupOffsetX = getGroupCenterOffset()
+    local groupOffsetZ = getGroupCenterOffset()
+
+    if math.random() > 0.5 then
+        groupOffsetX = -groupOffsetX
+    end
+
+    if math.random() > 0.5 then
+        groupOffsetZ = -groupOffsetZ
+    end
+
+    return {
+        xi.einherjar.chambers[chamberId].center[1] + groupOffsetX,
+        xi.einherjar.chambers[chamberId].center[2],
+        xi.einherjar.chambers[chamberId].center[3] + groupOffsetZ
+    }
 end

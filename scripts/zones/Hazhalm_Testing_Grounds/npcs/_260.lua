@@ -13,7 +13,10 @@ entity.onTrade = function(player, npc, trade)
     end
 
     if npcUtil.tradeHasExactly(trade, { xi.item.SMOLDERING_LAMP }) then
-        -- TODO: Check requirements
+        if not xi.einherjar.meetsRequirementsForReservation(player) then
+            return
+        end
+
         player:startEvent(2,
                 0,
                 xi.besieged.getMercenaryRank(player),
@@ -24,12 +27,28 @@ entity.onTrade = function(player, npc, trade)
                 xi.item.SMOLDERING_LAMP,
                 xi.item.GLOWING_LAMP
         )
-        -- Continued in onEventFinish 2, 1
+        -- Continued in onEventUpdate 2
     end
 
     if npcUtil.tradeHasExactly(trade, { xi.item.GLOWING_LAMP }) then
-        -- TODO: Player requests entry into chamber
-        -- Continued in onEventFinish 3, 1
+        local lampObj = trade:getItem()
+        local lampData = xi.einherjar.decypherLamp(lampObj)
+
+        if not xi.einherjar.meetsRequirementsForEntry(player, lampData.chamber) then
+            return
+        end
+
+        player:startEvent(3,
+                0x1D + lampData.chamber,
+                xi.besieged.getMercenaryRank(player),
+                xi.einherjar.settings.EINHERJAR_KO_EXPEL_TIME,
+                xi.einherjar.settings.EINHERJAR_REENTRY_TIME,
+                0, -- Unknown
+                xi.einherjar.getChambersMenu(player),
+                xi.item.SMOLDERING_LAMP,
+                xi.item.GLOWING_LAMP
+        )
+        -- Continued in onEventFinish 3,1
     end
 end
 
@@ -51,8 +70,9 @@ entity.onEventUpdate = function(player, csid, option, npc)
         local mask = xi.einherjar.getChambersMenu(player)
         local chamberEntry = xi.einherjar.chambers[option]
 
-        if chamberEntry and bit.band(mask, chamberEntry.menu) ~= 0 then
-            -- Player attempted to reserve a chamber they don't have access to
+        if not chamberEntry or bit.band(mask, chamberEntry.menu) ~= 0 then
+            print(string.format("Einherjar: %s attempted to reserve a chamber they don't have access to.", player:getName()))
+            player:messageSpecial(ID.text.COULD_NOT_GATHER_DATA)
             player:instanceEntry(npc, 3)
             return
         end
@@ -66,9 +86,23 @@ entity.onEventUpdate = function(player, csid, option, npc)
                 xi.item.SMOLDERING_LAMP,
                 xi.item.GLOWING_LAMP)
         if player:getFreeSlotsCount() ~= 0 then
-            -- TODO: Reserve chamber, generate waves
-            xi.einherjar.makeLamp(player, option, os.time(), os.time() + (xi.einherjar.settings.EINHERJAR_TIME_LIMIT * 60))
+            local chamberData = xi.einherjar.getChamber(option)
+            if chamberData then
+                player:instanceEntry(npc, 3) -- 3 == chamber reservation failed
+                player:messageSpecial(ID.text.CHAMBER_OCCUPIED, option)
+                return
+            else
+                chamberData = xi.einherjar.createNewChamber(option, player:getID())
+                if not chamberData then
+                    player:messageSpecial(ID.text.COULD_NOT_GATHER_DATA)
+                    player:instanceEntry(npc, 3)
+                    return
+                end
+            end
+
+            xi.einherjar.makeLamp(player, chamberData.id, chamberData.startTime, chamberData.endTime)
             player:instanceEntry(npc, 4)
+            -- Continued in onEventFinish 2
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.GLOWING_LAMP)
             player:instanceEntry(npc, 3)
@@ -84,8 +118,18 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GLOWING_LAMP)
         player:confirmTrade()
     elseif csid == 3 and option == 1 then -- player requested entry into chamber
-        local _ = player:getTrade():getItem()
-        -- TODO: Read lamp and warp player in
+        local tradeContainer = player:getTrade()
+        if tradeContainer then
+            local lampObj = tradeContainer:getItem()
+            local lampData = xi.einherjar.decypherLamp(lampObj)
+            tradeContainer:clean() -- release the lamp
+            if lampData then
+                local chamberData = xi.einherjar.getChamber(lampData.chamber)
+                if chamberData and chamberData.startTime == lampData.startTime then
+                    xi.einherjar.onChamberEnter(chamberData, player)
+                end
+            end
+        end
     end
 end
 
