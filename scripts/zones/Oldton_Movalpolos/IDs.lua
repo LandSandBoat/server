@@ -19,6 +19,7 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7068, -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET        = 7587, -- You can't fish here.
+        NOTHING_OUT_OF_ORDINARY       = 7697, -- There is nothing out of the ordinary here.
         MINING_IS_POSSIBLE_HERE       = 7718, -- Mining is possible here if you have <item>.
         RAKOROK_DIALOGUE              = 7742, -- Nsy pipul. Gattohre! I bisynw!
         ALTANA_DIE                    = 7744, -- Aaaltaaanaaa... Diiieee!!!
@@ -29,14 +30,16 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
     },
     mob =
     {
-        BUGALLUG          = GetFirstID('Bugallug'),
-        BUGBEAR_STRONGMAN = GetTableOfIDs('Bugbear_Strongman'),
-        GOBLIN_WOLFMAN    = GetFirstID('Goblin_Wolfman'),
+        BUGALLUG                = GetFirstID('Bugallug'),
+        BUGBEAR_STRONGMAN       = GetTableOfIDs('Bugbear_Strongman'),
+        GOBLIN_WOLFMAN          = GetFirstID('Goblin_Wolfman'),
+        GENEROUS_GENERAL_OFFSET = GetFirstID('Goblin_Preceptor'),
     },
     npc =
     {
         SCRAWLED_WRITING = GetFirstID('Scrawled_Writing'),
         OVERSEER_BASE    = GetFirstID('Conquest_Banner'),
+        IRON_BOX         = GetFirstID('Iron_Box'),
         TREASURE_CHEST   = GetFirstID('Treasure_Chest'),
         MINING           = GetTableOfIDs('Mining_Point'),
     },
