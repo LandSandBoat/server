@@ -1370,11 +1370,16 @@ namespace charutils
     uint8 AddItemCustom(CCharEntity* PChar, uint8 LocationID, CItem* PItem, bool silence)
     {
         {
-            auto select_ret = db::query(fmt::format("SELECT Result FROM synth_recipes WHERE Ingredient1 = {} OR Ingredient2 = {} OR Ingredient3 = {} OR Ingredient4 = {} OR Ingredient5 = {} OR Ingredient6 = {} OR Ingredient7 = {} OR Ingredient8 = {};", PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID()));
-            int Ingredient_item = 0;
+            auto select_ret      = db::query(fmt::format("SELECT Result FROM synth_recipes WHERE Ingredient1 = {} OR Ingredient2 = {} OR Ingredient3 = {} OR Ingredient4 = {} OR Ingredient5 = {} OR Ingredient6 = {} OR Ingredient7 = {} OR Ingredient8 = {};", PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID(), PItem->getID()));
+            int  Ingredient_item = 0;
             if (select_ret && select_ret->rowsCount() && select_ret->next())
             {
                 Ingredient_item = select_ret->get<uint8>("Result");
+            }
+            // Crystalの場合も含める(塊は除外するためItemID直で判定している)
+            if (PItem->getID() >= 4096 && PItem->getID() <= 4103)
+            {
+                Ingredient_item = PItem->getID();
             }
 
             if (Ingredient_item == 0)
