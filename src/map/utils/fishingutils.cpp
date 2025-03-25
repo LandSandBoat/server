@@ -21,8 +21,8 @@
 
 #include "fishingutils.h"
 
-#include <cmath>
-#include <cstring>
+#include "common/utils.h"
+#include "common/vana_time.h"
 
 #include "packets/caught_fish.h"
 #include "packets/caught_monster.h"
@@ -47,17 +47,15 @@
 
 #include "ai/ai_container.h"
 
+#include "battleutils.h"
+#include "charutils.h"
 #include "enmity_container.h"
 #include "item_container.h"
+#include "itemutils.h"
 #include "mob_modifier.h"
 #include "status_effect_container.h"
 #include "trade_container.h"
 #include "universal_container.h"
-
-#include "battleutils.h"
-#include "charutils.h"
-#include "common/vana_time.h"
-#include "itemutils.h"
 #include "zoneutils.h"
 
 namespace fishingutils

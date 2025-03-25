@@ -121,7 +121,7 @@ bool CMagicState::Update(time_point tick)
     auto isTargetValid = [&]()
     {
         // m_PEntity->IsValidTarget checks if the target is dead and returns nullptr if so, so we don't need to duplicate it here.
-        if (!PTarget || m_errorMsg || !CanCastSpell(PTarget, true) ||
+        if (!PTarget || m_errorMsg ||
             (HasMoved() && (m_PEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PEntity)->getPetType() != PET_TYPE::AUTOMATON)))
         {
             return false;
@@ -157,7 +157,8 @@ bool CMagicState::Update(time_point tick)
 
     if (tick > GetEntryTime() + m_castTime && !IsCompleted())
     {
-        if (!isTargetValid())
+        // CanCastSpell also does a range check which we don't want to check during midcast - mobs don't cancel spells during casting for being out of range
+        if (!isTargetValid() || !CanCastSpell(PTarget, true))
         {
             m_PEntity->OnCastInterrupted(*this, action, msg, false);
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));

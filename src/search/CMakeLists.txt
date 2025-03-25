@@ -13,14 +13,6 @@ set(SOURCES
     search_server.cpp
 )
 
-# Temporarily remove clashing old code
-# TODO: Remove this block
-list(REMOVE_ITEM SOURCES
-    ${CMAKE_SOURCE_DIR}/src/common/kernel.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/kernel.h
-    ${CMAKE_SOURCE_DIR}/src/common/socket.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/socket.h)
-
 if(UNIX)
     set(resource "")
 else()
@@ -49,7 +41,8 @@ target_compile_definitions(xi_search PUBLIC DEFINE_OWN_MAIN)
 
 target_link_libraries(xi_search
     PUBLIC
-        ${EXTERNAL_LIBS}
+        ${SHARED_EXTERNAL_LIBS}
+        ${SEARCH_ONLY_EXTERNAL_LIBS}
         project_options
     PRIVATE
         project_warnings

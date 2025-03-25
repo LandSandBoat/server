@@ -33,14 +33,14 @@
 
 // TODO: mariadb-connector-cpp triggers this. Remove once they fix it.
 // 4263 'function': member function does not override any base class member functions
-#ifdef WIN32
+#ifdef _WIN32
 #pragma warning(push)
 #pragma warning(disable : 4263)
 #endif
 
 #include <conncpp.hpp>
 
-#ifdef WIN32
+#ifdef _WIN32
 #pragma warning(pop)
 #endif
 
@@ -362,6 +362,8 @@ namespace db
         template <typename T>
         void bindValue(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter, std::vector<std::shared_ptr<BlobWrapper>>& blobs, T&& value)
         {
+            TracyZoneScoped;
+
             using UnderlyingT = std::decay_t<T>;
 
             if constexpr (!is_blob_v<UnderlyingT>)
@@ -483,6 +485,8 @@ namespace db
     auto query(std::string const& query, Args&&... args) -> std::unique_ptr<db::detail::ResultSetWrapper>
     {
         TracyZoneScoped;
+        // TODO: Collect up bound args and report to tracy here
+
         try
         {
             const auto formattedQuery = fmt::sprintf(query, std::forward<Args>(args)...);
@@ -508,6 +512,7 @@ namespace db
     {
         TracyZoneScoped;
         TracyZoneString(rawQuery);
+        // TODO: Collect up bound args and report to tracy here
 
         // clang-format off
         return detail::getState().write([&](detail::State& state) -> std::unique_ptr<db::detail::ResultSetWrapper>
@@ -582,6 +587,7 @@ namespace db
     {
         TracyZoneScoped;
         TracyZoneString(rawQuery);
+        // TODO: Collect up bound args and report to tracy here
 
         // clang-format off
         return detail::getState().write([&](detail::State& state) -> std::pair<std::unique_ptr<db::detail::ResultSetWrapper>, std::size_t>
@@ -676,9 +682,9 @@ namespace db
     template <typename WrapperPtrT, typename T>
     void extractFromBlob(WrapperPtrT const& rset, std::string const& blobKey, T& destination)
     {
-        static_assert(std::is_trivially_copyable_v<T>, "T must be trivially copyable");
-
         TracyZoneScoped;
+
+        static_assert(std::is_trivially_copyable_v<T>, "T must be trivially copyable");
 
         // If we use getString on a null blob we will get back garbage data.
         // This will introduce difficult to track down crashes.

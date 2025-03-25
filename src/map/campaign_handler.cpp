@@ -22,7 +22,8 @@
 #include <tuple>
 
 #include "campaign_handler.h"
-#include "map.h"
+#include "map_server.h"
+#include "zone.h"
 
 CCampaignHandler::CCampaignHandler(CZone* PZone)
 {

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
   Copyright (c) 2010-2015 Darkstar Dev Teams
   This program is free software: you can redistribute it and/or modify
@@ -1070,12 +1070,14 @@ enum class Mod
 
     DESPAWN_TIME_REDUCTION = 1134, // Reduction in seconds. 1 = 1 second less to despawn.
 
+    PARRY_HP_RECOVERY = 1135, // Recover <Mod Value> HP on successful parry.
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1135 and onward
+    // SPARE IDs: 1136 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

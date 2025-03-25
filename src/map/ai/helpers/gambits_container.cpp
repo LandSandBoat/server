@@ -428,8 +428,13 @@ namespace gambits
                 }
                 else if (action.reaction == G_REACTION::JA)
                 {
-                    CAbility* PAbility = ability::GetAbility(action.select_arg);
-                    auto      mLevel   = POwner->GetMLevel();
+                    auto* PAbility = ability::GetAbility(action.select_arg);
+                    if (PAbility == nullptr)
+                    {
+                        return;
+                    }
+
+                    auto mLevel = POwner->GetMLevel();
 
                     if (action.select == G_SELECT::HIGHEST_WALTZ)
                     {
@@ -446,14 +451,20 @@ namespace gambits
                         };
                         // clang-format on
 
-                        for (ABILITY const& waltz : wlist)
+                        for (const auto& waltzId : wlist)
                         {
-                            auto   waltzLevel = ability::GetAbility(waltz)->getLevel();
+                            auto* PWaltzAbility = ability::GetAbility(waltzId);
+                            if (PWaltzAbility == nullptr)
+                            {
+                                continue;
+                            }
+
+                            auto   waltzLevel = PWaltzAbility->getLevel();
                             uint16 tpCost     = 0;
 
                             if (mLevel >= waltzLevel)
                             {
-                                switch (ability::GetAbility(waltz)->getID())
+                                switch (PWaltzAbility->getID())
                                 {
                                     case ABILITY_CURING_WALTZ_V:
                                         tpCost = 800;
@@ -476,7 +487,7 @@ namespace gambits
 
                                 if (tpCost != 0 && currentTP >= tpCost)
                                 {
-                                    PAbility = ability::GetAbility(waltz);
+                                    PAbility = PWaltzAbility;
                                     controller->Ability(target->targid, PAbility->getID());
                                 }
                             }
@@ -508,37 +519,55 @@ namespace gambits
                             {
                                 if (PartyHasHealer())
                                 {
-                                    PAbility = ability::GetAbility(ABILITY_HASTE_SAMBA);
-                                    tpCost   = 350;
+                                    if (auto* PSambaAbility = ability::GetAbility(ABILITY_HASTE_SAMBA))
+                                    {
+                                        PAbility = PSambaAbility;
+                                        tpCost   = 350;
+                                    }
                                 }
                                 else
                                 {
-                                    PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_III);
-                                    tpCost   = 400;
+                                    if (auto* PSambaAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_III))
+                                    {
+                                        PAbility = PSambaAbility;
+                                        tpCost   = 400;
+                                    }
                                 }
                             }
                             else if (mLevel < 65 && mLevel > 45)
                             {
                                 if (PartyHasHealer())
                                 {
-                                    PAbility = ability::GetAbility(ABILITY_HASTE_SAMBA);
-                                    tpCost   = 350;
+                                    if (auto* PSambaAbility = ability::GetAbility(ABILITY_HASTE_SAMBA))
+                                    {
+                                        PAbility = PSambaAbility;
+                                        tpCost   = 350;
+                                    }
                                 }
                                 else
                                 {
-                                    PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_II);
-                                    tpCost   = 250;
+                                    if (auto* PSambaAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_II))
+                                    {
+                                        PAbility = PSambaAbility;
+                                        tpCost   = 250;
+                                    }
                                 }
                             }
                             else if (mLevel < 45 && mLevel > 35)
                             {
-                                PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_II);
-                                tpCost   = 250;
+                                if (auto* PSambaAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_II))
+                                {
+                                    PAbility = PSambaAbility;
+                                    tpCost   = 250;
+                                }
                             }
                             else
                             {
-                                PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA);
-                                tpCost   = 100;
+                                if (auto* PSambaAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA))
+                                {
+                                    PAbility = PSambaAbility;
+                                    tpCost   = 100;
+                                }
                             }
                         }
 
@@ -930,7 +959,6 @@ namespace gambits
             if (chosen_skill->skill_type == G_REACTION::WS)
             {
                 CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(chosen_skill->skill_id);
-
                 if (PWeaponSkill == nullptr)
                 {
                     ShowError("G_REACTION::WS: PWeaponSkill was null.");
@@ -981,6 +1009,7 @@ namespace gambits
         // clang-format on
         return hasHealer;
     }
+
     // used to check for tanks in party (Volker, AA Hume)
     bool CGambitsContainer::PartyHasTank()
     {

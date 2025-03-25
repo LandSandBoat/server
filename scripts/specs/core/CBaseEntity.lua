@@ -111,6 +111,11 @@ end
 function CBaseEntity:getVar(varName)
 end
 
+---@param prefix string
+---@return table
+function CBaseEntity:getCharVarsWithPrefix(prefix)
+end
+
 ---@param varName string
 ---@param value integer
 ---@param expiry integer?
@@ -946,6 +951,14 @@ end
 function CBaseEntity:delItem(itemID, quantity, containerID)
 end
 
+---@param itemId integer
+---@param quantity integer
+---@param containerId integer
+---@param slotId integer
+---@return boolean
+function CBaseEntity:delItemAt(itemId, quantity, containerId, slotId)
+end
+
 ---@param containerID integer?
 ---@return boolean
 function CBaseEntity:delContainerItems(containerID)
@@ -979,6 +992,13 @@ end
 ---@param location integer?
 ---@return CItem?
 function CBaseEntity:findItem(itemID, location)
+end
+
+---@nodiscard
+---@param itemID integer
+---@param location integer?
+---@return table
+function CBaseEntity:findItems(itemID, location)
 end
 
 ---@param size integer
@@ -1229,6 +1249,11 @@ end
 ---@param sendUpdate boolean?
 ---@return nil
 function CBaseEntity:setAnimationSub(animationsub, sendUpdate)
+end
+
+---@param spawnAnimation integer
+---@return nil
+function CBaseEntity:setSpawnAnimation(spawnAnimation)
 end
 
 ---@nodiscard
@@ -2760,16 +2785,6 @@ end
 function CBaseEntity:getNotorietyList()
 end
 
----@param claimable boolean
----@return nil
-function CBaseEntity:setClaimable(claimable)
-end
-
----@nodiscard
----@return boolean
-function CBaseEntity:getClaimable()
-end
-
 ---@param PEntity CBaseEntity
 ---@return nil
 function CBaseEntity:clearEnmityForEntity(PEntity)
@@ -3935,6 +3950,11 @@ end
 ---@param arg2 integer?
 ---@return nil
 function CBaseEntity:addTreasure(itemID, arg1, arg2)
+end
+
+---@nodiscard
+---@return CTreasurePool?
+function CBaseEntity:getTreasurePool()
 end
 
 ---@nodiscard

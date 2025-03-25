@@ -22,8 +22,6 @@
 #include "common/timer.h"
 #include "common/utils.h"
 
-#include <cmath>
-#include <cstring>
 #include <vector>
 
 #include "ability.h"
@@ -36,7 +34,7 @@
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
-#include "map.h"
+#include "map_server.h"
 #include "mob_spell_list.h"
 #include "notoriety_container.h"
 #include "petutils.h"

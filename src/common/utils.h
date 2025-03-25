@@ -21,18 +21,47 @@
 
 #pragma once
 
-#define _USE_MATH_DEFINES
-
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 #include "common/stdext.h"
 #include "common/synchronized.h"
 #include "common/xirand.h"
 
+// Ahead of <math.h> (not <cmath>)
+#ifndef _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES
+#endif // _USE_MATH_DEFINES
+#include <math.h>
+
 #include <filesystem>
 #include <iostream>
-#include <math.h>
 #include <set>
+
+template <typename T, typename U>
+auto ref(U* buf, std::size_t index) -> T&
+{
+    return *reinterpret_cast<T*>(reinterpret_cast<uint8*>(buf) + index);
+}
+
+template <typename T, typename U>
+auto ref(const U* buf, std::size_t index) -> const T&
+{
+    return *reinterpret_cast<const T*>(reinterpret_cast<const uint8*>(buf) + index);
+}
+
+template <typename T, typename U>
+auto as(U& object) -> T*
+{
+    static_assert(std::is_standard_layout_v<T>, "Type must be standard layout (No virtual functions, inheritance, etc.)");
+    return reinterpret_cast<T*>(&object);
+}
+
+template <typename T, typename U>
+auto as(const U& object) -> const T*
+{
+    static_assert(std::is_standard_layout_v<T>, "Type must be standard layout (No virtual functions, inheritance, etc.)");
+    return reinterpret_cast<const T*>(&object);
+}
 
 constexpr size_t PacketNameLength = 16; // 15 + null terminator
 
@@ -64,6 +93,18 @@ inline float distance(const position_t& A, const position_t& B, bool ignoreVerti
 inline bool isWithinDistance(const position_t& A, const position_t& B, float within, bool ignoreVertical = false)
 {
     return distanceSquared(A, B, ignoreVertical) <= square(within);
+}
+
+// Used for setting "proper" packet sizes rounded to the nearest four away from zero
+constexpr auto roundUpToNearestFour(uint32 input) -> uint32
+{
+    const auto remainder = input % 4U;
+    if (remainder == 0)
+    {
+        return input;
+    }
+
+    return input + 4U - remainder;
 }
 
 int32      intpow32(int32 base, int32 exponent); // Exponential power of integers
@@ -154,7 +195,7 @@ namespace utils
     auto getRandomSampleString(T min, T max) -> std::string
     {
         std::vector<T> randomNumbers;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 3; i++)
         {
             randomNumbers.push_back(xirand::GetRandomNumber(min, max));
         }

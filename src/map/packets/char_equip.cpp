@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "char_equip.h"
 
 CEquipPacket::CEquipPacket(uint8 EquipSlot, uint8 SlotID, uint8 containerID)

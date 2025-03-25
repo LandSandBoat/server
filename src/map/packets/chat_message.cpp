@@ -20,7 +20,7 @@
 */
 
 #include "chat_message.h"
-#include "common/socket.h"
+
 #include "entities/charentity.h"
 #include <cstring>
 

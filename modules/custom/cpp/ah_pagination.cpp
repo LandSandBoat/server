@@ -9,12 +9,20 @@
 #include "map/utils/moduleutils.h"
 
 #include "common/timer.h"
+
+#include "map/packet_system.h"
 #include "map/packets/auction_house.h"
+#include "map/packets/basic.h"
 #include "map/packets/chat_message.h"
+
+#include "map/map_session.h"
 #include "map/zone.h"
 
-extern uint8                                                                             PacketSize[512];
-extern std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
+#include <functional>
+#include <numeric>
+
+extern uint8                                                                     PacketSize[512];
+extern std::function<void(MapSession* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
 
 class AHPaginationModule : public CPPModule
 {
@@ -37,7 +45,7 @@ class AHPaginationModule : public CPPModule
 
         const auto originalHandler = PacketParser[0x04E];
 
-        const auto newHandler = [ITEMS_PER_PAGE, TOTAL_PAGES, originalHandler](map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
+        const auto newHandler = [ITEMS_PER_PAGE, TOTAL_PAGES, originalHandler](MapSession* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
         {
             TracyZoneScoped;
 

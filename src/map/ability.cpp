@@ -20,7 +20,10 @@
 */
 
 #include "ability.h"
+
 #include "lua/luautils.h"
+
+#include <map>
 
 CAbility::CAbility(uint16 id)
 : m_ID(id)
@@ -331,9 +334,9 @@ uint16 CAbility::getAoEMsg() const
 
 namespace ability
 {
-    CAbility*              PAbilityList[MAX_ABILITY_ID]; // Complete Abilities List
-    std::vector<CAbility*> PAbilitiesList[MAX_JOBTYPE];  // Abilities List By Job Type
-    std::vector<Charge_t*> PChargesList;                 // Abilities with charges
+    std::map<uint16, CAbility*>               PAbilityList;    // Complete Abilities List
+    std::map<JOBTYPE, std::vector<CAbility*>> PAbilitiesByJob; // Abilities by Job
+    std::vector<Charge_t*>                    PChargesList;    // Abilities with charges
 
     /************************************************************************
      *                                                                       *
@@ -344,8 +347,6 @@ namespace ability
     void LoadAbilitiesList()
     {
         // TODO: Add message field to table
-
-        std::memset(PAbilityList, 0, sizeof(PAbilityList));
 
         const char* Query = "SELECT "
                             "abilityId,"
@@ -412,7 +413,7 @@ namespace ability
                 PAbility->setAddType(_sql->GetUIntData(19));
 
                 PAbilityList[PAbility->getID()] = PAbility;
-                PAbilitiesList[PAbility->getJob()].emplace_back(PAbility);
+                PAbilitiesByJob[PAbility->getJob()].emplace_back(PAbility);
 
                 auto filename = fmt::format("./scripts/actions/abilities/{}.lua", PAbility->getName());
                 if (PAbility->isPetAbility())
@@ -462,7 +463,7 @@ namespace ability
         }
 
         // Clear every vector that now has invalid pointers
-        for (auto vec : PAbilitiesList)
+        for (auto& [_, vec] : PAbilitiesByJob)
         {
             vec.clear();
         }
@@ -477,11 +478,11 @@ namespace ability
 
     CAbility* GetAbility(uint16 AbilityID)
     {
-        if (AbilityID < MAX_ABILITY_ID)
+        if (auto itr = PAbilityList.find(AbilityID); itr != PAbilityList.end())
         {
-            return PAbilityList[AbilityID];
+            return itr->second;
         }
-        ShowCritical("AbilityID <%u> is out of range", AbilityID);
+        ShowDebug("Unable to look up ability %d", AbilityID);
         return nullptr;
     }
 
@@ -498,70 +499,70 @@ namespace ability
             switch (JobID)
             {
                 case JOB_WAR:
-                    return PAbilityList[ABILITY_MIGHTY_STRIKES];
+                    return GetAbility(ABILITY_MIGHTY_STRIKES);
                     break;
                 case JOB_MNK:
-                    return PAbilityList[ABILITY_HUNDRED_FISTS];
+                    return GetAbility(ABILITY_HUNDRED_FISTS);
                     break;
                 case JOB_WHM:
-                    return PAbilityList[ABILITY_BENEDICTION];
+                    return GetAbility(ABILITY_BENEDICTION);
                     break;
                 case JOB_BLM:
-                    return PAbilityList[ABILITY_MANAFONT];
+                    return GetAbility(ABILITY_MANAFONT);
                     break;
                 case JOB_RDM:
-                    return PAbilityList[ABILITY_CHAINSPELL];
+                    return GetAbility(ABILITY_CHAINSPELL);
                     break;
                 case JOB_THF:
-                    return PAbilityList[ABILITY_PERFECT_DODGE];
+                    return GetAbility(ABILITY_PERFECT_DODGE);
                     break;
                 case JOB_PLD:
-                    return PAbilityList[ABILITY_INVINCIBLE];
+                    return GetAbility(ABILITY_INVINCIBLE);
                     break;
                 case JOB_DRK:
-                    return PAbilityList[ABILITY_BLOOD_WEAPON];
+                    return GetAbility(ABILITY_BLOOD_WEAPON);
                     break;
                 case JOB_BST:
-                    return PAbilityList[ABILITY_FAMILIAR];
+                    return GetAbility(ABILITY_FAMILIAR);
                     break;
                 case JOB_BRD:
-                    return PAbilityList[ABILITY_SOUL_VOICE];
+                    return GetAbility(ABILITY_SOUL_VOICE);
                     break;
                 case JOB_RNG:
-                    return PAbilityList[ABILITY_EAGLE_EYE_SHOT];
+                    return GetAbility(ABILITY_EAGLE_EYE_SHOT);
                     break;
                 case JOB_SAM:
-                    return PAbilityList[ABILITY_MEIKYO_SHISUI];
+                    return GetAbility(ABILITY_MEIKYO_SHISUI);
                     break;
                 case JOB_NIN:
-                    return PAbilityList[ABILITY_MIJIN_GAKURE];
+                    return GetAbility(ABILITY_MIJIN_GAKURE);
                     break;
                 case JOB_DRG:
-                    return PAbilityList[ABILITY_SPIRIT_SURGE];
+                    return GetAbility(ABILITY_SPIRIT_SURGE);
                     break;
                 case JOB_SMN:
-                    return PAbilityList[ABILITY_ASTRAL_FLOW];
+                    return GetAbility(ABILITY_ASTRAL_FLOW);
                     break;
                 case JOB_BLU:
-                    return PAbilityList[ABILITY_AZURE_LORE];
+                    return GetAbility(ABILITY_AZURE_LORE);
                     break;
                 case JOB_COR:
-                    return PAbilityList[ABILITY_WILD_CARD];
+                    return GetAbility(ABILITY_WILD_CARD);
                     break;
                 case JOB_PUP:
-                    return PAbilityList[ABILITY_OVERDRIVE];
+                    return GetAbility(ABILITY_OVERDRIVE);
                     break;
                 case JOB_DNC:
-                    return PAbilityList[ABILITY_TRANCE];
+                    return GetAbility(ABILITY_TRANCE);
                     break;
                 case JOB_SCH:
-                    return PAbilityList[ABILITY_TABULA_RASA];
+                    return GetAbility(ABILITY_TABULA_RASA);
                     break;
                 case JOB_GEO:
-                    return PAbilityList[ABILITY_BOLSTER];
+                    return GetAbility(ABILITY_BOLSTER);
                     break;
                 case JOB_RUN:
-                    return PAbilityList[ABILITY_ELEMENTAL_SFORZO];
+                    return GetAbility(ABILITY_ELEMENTAL_SFORZO);
                     break;
                 default:
                     break;
@@ -574,10 +575,11 @@ namespace ability
 
     bool CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID)
     {
-        if (GetAbility(AbilityID) != nullptr)
+        auto* PAbility = GetAbility(AbilityID);
+        if (PAbility)
         {
-            uint8 Job    = PAbilityList[AbilityID]->getJob();
-            uint8 JobLvl = PAbilityList[AbilityID]->getLevel();
+            uint8 Job    = PAbility->getJob();
+            uint8 JobLvl = PAbility->getLevel();
 
             return ((PUser->GetMJob() == Job && PUser->GetMLevel() >= JobLvl) || (PUser->GetSJob() == Job && PUser->GetSLevel() >= JobLvl));
         }
@@ -592,7 +594,7 @@ namespace ability
 
     std::vector<CAbility*> GetAbilities(JOBTYPE JobID)
     {
-        return PAbilitiesList[JobID];
+        return PAbilitiesByJob[JobID];
     }
 
     Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID)

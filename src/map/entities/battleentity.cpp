@@ -110,6 +110,18 @@ bool CBattleEntity::isAlive()
     return !isDead();
 }
 
+bool CBattleEntity::isFullyHealed()
+{
+    if (isAlive())
+    {
+        if (health.hp >= health.maxhp && health.mp >= health.maxmp)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool CBattleEntity::isInDynamis()
 {
     auto* PZone = loc.zone == nullptr ? zoneutils::GetZone(loc.destination) : loc.zone;
@@ -991,16 +1003,17 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
             }
             skill = SKILL_HAND_TO_HAND;
         }
-        int32 ACC = GetSkill(skill) + iLvlSkill;
-        ACC       = (ACC > 200 ? (int16)(((ACC - 200) * 0.9) + 200) : ACC);
+        int32 ACC           = GetSkill(skill) + iLvlSkill;
+        ACC                 = (ACC > 200 ? (int16)(((ACC - 200) * 0.9) + 200) : ACC);
+        float dexMultiplier = settings::get<bool>("main.USE_PRE_2013_DEX_MULTIPLIER") ? 0.50f : 0.75f;
         if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]); weapon && weapon->isTwoHanded())
         {
-            ACC += (int16)(DEX() * 0.75);
+            ACC += (int16)(DEX() * dexMultiplier);
             ACC += m_modStat[Mod::TWOHAND_ACC];
         }
         else
         {
-            ACC += (int16)(DEX() * 0.75);
+            ACC += (int16)(DEX() * dexMultiplier);
         }
         ACC = (ACC + m_modStat[Mod::ACC] + offsetAccuracy);
 
@@ -2279,6 +2292,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
     {
         // TODO: Should not be removed by AoE effects that don't target the player.
         PTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+        PTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ON_ATTACK);
     }
 
     battleutils::ClaimMob(PTarget, this); // Mobs get claimed whether or not your attack actually is intimidated/paralyzed
@@ -2527,13 +2541,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     }
                 }
 
-                if (attack.IsParried() || !settings::get<bool>("map.PARRY_OLD_SKILLUP_STYLE"))
-                {
-                    if (battleutils::GetParryRate(this, PTarget) > 0)
-                    {
-                        charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_PARRY, GetMLevel());
-                    }
-                }
                 if (!attack.IsCountered() && !attack.IsParried())
                 {
                     charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_EVASION, GetMLevel());

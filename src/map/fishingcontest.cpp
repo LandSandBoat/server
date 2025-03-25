@@ -22,7 +22,6 @@
 #include "fishingcontest.h"
 
 #include <algorithm>
-#include <cmath>
 #include <cstring>
 #include <time.h>
 
@@ -663,7 +662,7 @@ namespace fishingcontest
         {
             // No contests found in the database, so we need to create one
             InitNewContest();
-            ShowWarning("No Active Fishing Contest found in database. Initializing new one.");
+            ShowInfo("No Active Fishing Contest found in database. Initializing new one.");
         }
     }
 

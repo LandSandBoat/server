@@ -125,7 +125,7 @@ public:
 
     void SetupKeepalive();
 
-    void CheckCharset();
+    void EnableTimers();
 
     /// Pings the connection.
     ///
@@ -249,6 +249,8 @@ private:
     uint32 m_LastPing;
 
     std::thread::id m_ThreadId;
+
+    bool m_TimersEnabled;
 };
 
 //

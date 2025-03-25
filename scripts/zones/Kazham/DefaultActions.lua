@@ -1,6 +1,7 @@
 -- local ID = zones[xi.zone.KAZHAM]
 
 return {
+    ['_6y9']              = { event = 126 },
     ['Balih_Chavizaai']   = { event = 40 },
     ['Beyzen']            = { event = 278 },
     ['Bhi_Telifahgo']     = { event = 93 },

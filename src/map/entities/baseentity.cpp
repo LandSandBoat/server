@@ -24,9 +24,12 @@
 #include "common/tracy.h"
 
 #include "ai/ai_container.h"
+
 #include "battlefield.h"
 #include "instance.h"
-#include "map.h"
+#include "los/zone_los.h"
+#include "map_server.h"
+#include "navmesh.h"
 #include "zone.h"
 
 #include <cstring>

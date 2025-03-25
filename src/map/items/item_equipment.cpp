@@ -21,7 +21,7 @@
 
 #include "item_equipment.h"
 
-#include "map.h"
+#include "map_server.h"
 #include <cstring>
 
 namespace

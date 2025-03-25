@@ -68,8 +68,8 @@ public:
     {
         return buff_.data();
     }
-private:
 
+private:
     std::array<uint8_t, max_size> buff_;
     uint16_t                      size;
 };

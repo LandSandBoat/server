@@ -21,8 +21,6 @@
 
 #include "common/utils.h"
 
-#include <cmath>
-
 #include "battlefield.h"
 #include "battleutils.h"
 #include "grades.h"

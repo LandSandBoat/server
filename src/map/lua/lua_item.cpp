@@ -26,7 +26,7 @@
 #include "items/item_equipment.h"
 #include "items/item_general.h"
 #include "items/item_weapon.h"
-#include "map.h"
+#include "map_server.h"
 #include "utils/itemutils.h"
 
 CLuaItem::CLuaItem(CItem* PItem)

@@ -25,6 +25,8 @@
 #include "common/cbasetypes.h"
 #include "common/utils.h"
 #include "lua/luautils.h"
+#include "map_networking.h"
+#include "map_server.h"
 
 #include <filesystem>
 #include <fstream>
@@ -32,8 +34,6 @@
 #include <regex>
 #include <string>
 #include <vector>
-
-extern uint16 map_port;
 
 namespace
 {
@@ -123,7 +123,7 @@ namespace moduleutils
 
     std::vector<Override> overrides;
 
-    void LoadLuaModules()
+    void LoadLuaModules(IPP mapIPP)
     {
         // Load the helper file
         lua.safe_script_file("./modules/module_utils.lua");
@@ -242,7 +242,7 @@ namespace moduleutils
                         if (parts.size() >= 3 && parts[0] == "xi" && parts[1] == "zones")
                         {
                             const auto zoneName    = parts[2];
-                            const auto currentPort = map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port;
+                            const auto currentPort = mapIPP.getPort() == 0 ? settings::get<uint16>("network.MAP_PORT") : mapIPP.getPort();
 
                             if (zoneSettingsPorts.find(zoneName) != zoneSettingsPorts.end() && zoneSettingsPorts[zoneName] != currentPort)
                             {

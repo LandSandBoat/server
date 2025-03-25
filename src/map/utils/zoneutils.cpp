@@ -32,7 +32,8 @@
 #include "entities/npcentity.h"
 #include "items/item_weapon.h"
 #include "lua/luautils.h"
-#include "map.h"
+#include "map_networking.h"
+#include "map_server.h"
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
 #include "mobutils.h"
@@ -221,15 +222,16 @@ namespace zoneutils
         return PTertiary;
     }
 
-    auto GetZonesAssignedToThisProcess() -> std::vector<uint16>
+    auto GetZonesAssignedToThisProcess(IPP mapIPP) -> std::vector<uint16>
     {
-        char address[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
+        const auto ip    = mapIPP.getIP();
+        const auto ipStr = mapIPP.getIPString();
+        const auto port  = mapIPP.getPort();
 
         const auto zonesQuery = fmt::format("SELECT zoneid "
                                             "FROM zone_settings "
                                             "WHERE IF({} <> 0, '{}' = zoneip AND {} = zoneport, TRUE)",
-                                            (uint32)map_ip.s_addr, address, map_port);
+                                            ip, ipStr, port);
 
         std::vector<uint16> zonesOnThisProcess;
 
@@ -245,9 +247,9 @@ namespace zoneutils
         return zonesOnThisProcess;
     }
 
-    bool IsZoneAssignedToThisProcess(ZONEID zoneId)
+    bool IsZoneAssignedToThisProcess(IPP mapIPP, ZONEID zoneId)
     {
-        std::vector processZones = GetZonesAssignedToThisProcess();
+        std::vector processZones = GetZonesAssignedToThisProcess(mapIPP);
         for (auto& zone : processZones)
         {
             if (zone == zoneId)
@@ -265,12 +267,12 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    void LoadNPCList()
+    void LoadNPCList(IPP mapIPP)
     {
         TracyZoneScoped;
         ShowInfo("Loading NPCs");
 
-        const auto zonesOnThisProcess = GetZonesAssignedToThisProcess();
+        const auto zonesOnThisProcess = GetZonesAssignedToThisProcess(mapIPP);
 
         // clang-format off
         for (const auto zoneId : zonesOnThisProcess)
@@ -389,12 +391,12 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    void LoadMOBList()
+    void LoadMOBList(IPP mapIPP)
     {
         TracyZoneScoped;
         ShowInfo("Loading Mobs");
 
-        const auto zonesOnThisProcess = GetZonesAssignedToThisProcess();
+        const auto zonesOnThisProcess = GetZonesAssignedToThisProcess(mapIPP);
 
         const auto normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
         const auto normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
@@ -476,7 +478,7 @@ namespace zoneutils
                             mainWeapon->setDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
                             mainWeapon->setBaseDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
 
-                            PMob->m_Behavior    = static_cast<BEHAVIOR>(rset->get<uint8>("behavior"));
+                            PMob->m_Behavior    = rset->get<uint16>("behavior");
                             PMob->m_Link        = rset->get<uint32>("links");
                             PMob->m_Type        = static_cast<MOBTYPE>(rset->get<uint32>("mobType"));
                             PMob->m_Immunity    = rset->get<uint32>("immunity");
@@ -702,7 +704,7 @@ namespace zoneutils
         const auto rset = db::preparedStmt(query, ZoneID);
         if (rset && rset->rowsCount() && rset->next())
         {
-            const auto zoneType    = static_cast<ZONE_TYPE>(rset->get<uint8>("zonetype"));
+            const auto zoneType    = static_cast<ZONE_TYPE>(rset->get<uint16>("zonetype"));
             const auto restriction = rset->get<uint8>("restriction");
 
             if (zoneType & ZONE_TYPE::INSTANCED)
@@ -727,7 +729,7 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    void LoadZoneList()
+    void LoadZoneList(IPP mapIPP)
     {
         TracyZoneScoped;
 
@@ -735,11 +737,11 @@ namespace zoneutils
 
         g_PTrigger = new CNpcEntity(); // you need to set the default model in the CNpcEntity constructor
 
-        std::vector<uint16> zones = GetZonesAssignedToThisProcess();
+        std::vector<uint16> zones = GetZonesAssignedToThisProcess(mapIPP);
         if (zones.empty())
         {
             ShowCritical("Unable to load any zones! Check IP and port params");
-            do_final(EXIT_FAILURE);
+            std::exit(1);
         }
 
         ShowInfo(fmt::format("Loading {} zones", zones.size()));
@@ -786,8 +788,8 @@ namespace zoneutils
         // IDs attached to xi.zone[name] need to be populated before NPCs and Mobs are loaded
         luautils::PopulateIDLookupsByZone();
 
-        LoadNPCList();
-        LoadMOBList();
+        LoadNPCList(mapIPP);
+        LoadMOBList(mapIPP);
 
         campaign::LoadState();
         campaign::LoadNations();
@@ -1182,12 +1184,10 @@ namespace zoneutils
         const auto rset = db::preparedStmt(query, zoneID);
         if (rset && rset->rowsCount() && rset->next())
         {
-            const auto zoneip = rset->get<std::string>("zoneip");
+            const auto zoneip = str2ip(rset->get<std::string>("zoneip"));
             const auto port   = rset->get<uint16>("zoneport");
 
-            inet_pton(AF_INET, zoneip.c_str(), &ipp);
-
-            ipp |= (static_cast<uint64>(port) << 32);
+            ipp = IPP(zoneip, port).getRawIPP();
         }
         else
         {

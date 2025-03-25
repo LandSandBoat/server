@@ -23,8 +23,6 @@
 
 #include "common/logging.h"
 
-#include <cmath>
-
 // Initialize the trigger area to a unique number within the zone.
 // When trying to set 0, issue a warning.
 ITriggerArea::ITriggerArea(uint32 triggerAreaID)

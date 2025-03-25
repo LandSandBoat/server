@@ -19,13 +19,15 @@
 ===========================================================================
 */
 
-#include "common/taskmgr.h"
+#include "npcentity.h"
 
 #include "ai/ai_container.h"
-#include "npcentity.h"
-#include "utils/zoneutils.h"
+
+#include "common/task_manager.h"
 
 #include "packets/entity_update.h"
+
+#include "utils/zoneutils.h"
 
 /************************************************************************
  *                                                                       *

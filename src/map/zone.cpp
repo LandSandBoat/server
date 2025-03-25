@@ -26,7 +26,7 @@
 #include "zone.h"
 
 #include "common/logging.h"
-#include "common/socket.h"
+
 #include "common/timer.h"
 #include "common/utils.h"
 #include "common/vana_time.h"
@@ -39,8 +39,10 @@
 #include "ipc_client.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
-#include "map.h"
+#include "los/zone_los.h"
+#include "map_server.h"
 #include "monstrosity.h"
+#include "navmesh.h"
 #include "notoriety_container.h"
 #include "party.h"
 #include "spell.h"
@@ -412,8 +414,8 @@ void CZone::LoadZoneSettings()
     if (_sql->Query(Query, m_zoneID) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
     {
         m_zoneName.insert(0, (const char*)_sql->GetData(0));
+        m_zoneIP = str2ip((const char*)_sql->GetData(1));
 
-        inet_pton(AF_INET, (const char*)_sql->GetData(1), &m_zoneIP);
         m_zonePort              = (uint16)_sql->GetUIntData(2);
         m_zoneMusic.m_songDay   = (uint8)_sql->GetUIntData(3);           // background music (day)
         m_zoneMusic.m_songNight = (uint8)_sql->GetUIntData(4);           // background music (night)
@@ -430,7 +432,7 @@ void CZone::LoadZoneSettings()
         }
         if (m_miscMask & MISC_TREASURE)
         {
-            m_TreasurePool = new CTreasurePool(TREASUREPOOL_ZONE);
+            m_TreasurePool = new CTreasurePool(TreasurePoolType::Zone);
         }
         if (m_CampaignHandler && m_CampaignHandler->m_PZone == nullptr)
         {
@@ -655,8 +657,8 @@ void CZone::UpdateWeather()
     luautils::OnZoneWeatherChange(GetID(), Weather);
 
     // clang-format off
-    CTaskMgr::getInstance()->AddTask("zone_update_weather", server_clock::now() + std::chrono::seconds(WeatherNextUpdate), this, CTaskMgr::TASK_ONCE, 1s,
-    [](time_point tick, CTaskMgr::CTask* PTask)
+    CTaskManager::getInstance()->AddTask("zone_update_weather", server_clock::now() + std::chrono::seconds(WeatherNextUpdate), this, CTaskManager::TASK_ONCE, 1s,
+    [](time_point tick, CTaskManager::CTask* PTask)
     {
         CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
         if (!PZone->IsWeatherStatic())
@@ -666,6 +668,28 @@ void CZone::UpdateWeather()
         return 0;
     });
     // clang-format on
+}
+
+bool CZone::CheckMobsPathedBack()
+{
+    bool allMobsHomeAndHealed = true;
+    if (m_zoneEntities && m_zoneEntities->GetMobList().size() > 0)
+    {
+        EntityList_t mobListMap = m_zoneEntities->GetMobList();
+        for (const auto& pair : mobListMap)
+        {
+            CMobEntity* mob = dynamic_cast<CMobEntity*>(pair.second);
+            // if the mob is (not dead/despawned AND it is not fully healed) OR it is pathing home
+            if (mob && ((!mob->isDead() && !mob->isFullyHealed()) || mob->m_IsPathingHome))
+            {
+                // at least one mob is away from home or not fully healed
+                allMobsHomeAndHealed = false;
+                break;
+            }
+        }
+    }
+
+    return allMobsHomeAndHealed;
 }
 
 /************************************************************************
@@ -842,15 +866,13 @@ void CZone::ZoneServer(time_point tick)
         m_BattlefieldHandler->HandleBattlefields(tick);
     }
 
-    if (ZoneTimer && m_zoneEntities->CharListEmpty() && m_timeZoneEmpty + 5s < server_clock::now())
+    if (ZoneTimer && m_zoneEntities->CharListEmpty() && m_timeZoneEmpty + 5s < server_clock::now() && CheckMobsPathedBack())
     {
-        ZoneTimer->m_type = CTaskMgr::TASK_REMOVE;
+        ZoneTimer->m_type = CTaskManager::TASK_REMOVE;
         ZoneTimer         = nullptr;
 
-        ZoneTimerTriggerAreas->m_type = CTaskMgr::TASK_REMOVE;
+        ZoneTimerTriggerAreas->m_type = CTaskManager::TASK_REMOVE;
         ZoneTimerTriggerAreas         = nullptr;
-
-        m_zoneEntities->HealAllMobs();
     }
 }
 
@@ -942,20 +964,17 @@ void CZone::createZoneTimers()
 {
     TracyZoneScoped;
 
-    const auto tickInterval        = std::chrono::milliseconds(static_cast<uint32>(server_tick_interval));
-    const auto triggerAreaInterval = std::chrono::milliseconds(static_cast<uint32>(server_trigger_area_interval));
-
     // clang-format off
-    ZoneTimer = CTaskMgr::getInstance()->AddTask(m_zoneName, server_clock::now(), this, CTaskMgr::TASK_INTERVAL, tickInterval,
-    [](time_point tick, CTaskMgr::CTask* PTask)
+    ZoneTimer = CTaskManager::getInstance()->AddTask(m_zoneName, server_clock::now(), this, CTaskManager::TASK_INTERVAL, kLogicUpdateInterval,
+    [](time_point tick, CTaskManager::CTask* PTask)
     {
         CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
         PZone->ZoneServer(tick);
         return 0;
     });
 
-    ZoneTimerTriggerAreas = CTaskMgr::getInstance()->AddTask(m_zoneName + "TriggerAreas", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, triggerAreaInterval,
-    [](time_point tick, CTaskMgr::CTask* PTask)
+    ZoneTimerTriggerAreas = CTaskManager::getInstance()->AddTask(m_zoneName + "TriggerAreas", server_clock::now(), this, CTaskManager::TASK_INTERVAL, kTriggerAreaInterval,
+    [](time_point tick, CTaskManager::CTask* PTask)
     {
         CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
         PZone->CheckTriggerAreas();
@@ -992,10 +1011,10 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     PChar->ReloadPartyInc();
 
     // Zone-wide treasure pool takes precendence over all others
-    if (m_TreasurePool && m_TreasurePool->GetPoolType() == TREASUREPOOL_ZONE)
+    if (m_TreasurePool && m_TreasurePool->getPoolType() == TreasurePoolType::Zone)
     {
         PChar->PTreasurePool = m_TreasurePool;
-        PChar->PTreasurePool->AddMember(PChar);
+        PChar->PTreasurePool->addMember(PChar);
     }
     else
     {
@@ -1005,8 +1024,8 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         }
         else
         {
-            PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
-            PChar->PTreasurePool->AddMember(PChar);
+            PChar->PTreasurePool = new CTreasurePool(TreasurePoolType::Solo);
+            PChar->PTreasurePool->addMember(PChar);
         }
     }
 
@@ -1118,15 +1137,15 @@ void CZone::CharZoneOut(CCharEntity* PChar)
 
     if (PChar->PTreasurePool != nullptr) // TODO: Condition for eliminating problems with MobHouse, we need to solve it once and for all!
     {
-        PChar->PTreasurePool->DelMember(PChar);
+        PChar->PTreasurePool->delMember(PChar);
     }
 
     // If zone-wide treasure pool but no players in zone then destroy current pool and create new pool
     // this prevents loot from staying in zone pool after the last player leaves the zone
-    if (m_TreasurePool && m_TreasurePool->GetPoolType() == TREASUREPOOL_ZONE && m_zoneEntities->CharListEmpty())
+    if (m_TreasurePool && m_TreasurePool->getPoolType() == TreasurePoolType::Zone && m_zoneEntities->CharListEmpty())
     {
         destroy(m_TreasurePool);
-        m_TreasurePool = new CTreasurePool(TREASUREPOOL_ZONE);
+        m_TreasurePool = new CTreasurePool(TreasurePoolType::Zone);
     }
 
     PChar->loc.zone = nullptr;

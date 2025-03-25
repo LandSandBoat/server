@@ -22,7 +22,6 @@
 #include "auth_session.h"
 
 #include "common/ipc.h"
-#include "common/socket.h" // for ref<T>
 #include "common/utils.h"
 
 #include <bcrypt/BCrypt.hpp>

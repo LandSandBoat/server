@@ -22,15 +22,18 @@
 #include "pathfind.h"
 
 #include "ai/ai_container.h"
+
 #include "common/utils.h"
+
 #include "entities/baseentity.h"
 #include "entities/mobentity.h"
+
 #include "lua/luautils.h"
+
 #include "mob_modifier.h"
+#include "navmesh.h"
 #include "status_effect_container.h"
 #include "zone.h"
-
-#include <cfloat>
 
 namespace
 {

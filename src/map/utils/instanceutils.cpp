@@ -23,6 +23,8 @@
 #include "lua/luautils.h"
 
 #include "instanceutils.h"
+#include "map_networking.h"
+#include "map_server.h"
 #include "zoneutils.h"
 
 #include <queue>
@@ -32,7 +34,7 @@ namespace instanceutils
     std::unordered_map<uint16, InstanceData_t> InstanceData;
     std::queue<std::pair<uint32, uint16>>      LoadQueue; // player id, instance id
 
-    void LoadInstanceList()
+    void LoadInstanceList(IPP mapIPP)
     {
         const char query[] =
             "SELECT "
@@ -54,9 +56,7 @@ namespace instanceutils
             "ON instance_zone = zone_settings.zoneid "
             "WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
 
-        char address[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-        int32 ret = _sql->Query(query, map_ip.s_addr, address, map_port);
+        int32 ret = _sql->Query(query, mapIPP.getIP(), mapIPP.getIPString(), mapIPP.getPort());
 
         if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
@@ -65,7 +65,7 @@ namespace instanceutils
                 InstanceData_t data;
 
                 // Main data
-                data.id            = static_cast<uint16>(_sql->GetIntData(0));
+                data.id            = static_cast<uint32>(_sql->GetIntData(0));
                 data.instance_name = reinterpret_cast<const char*>(_sql->GetData(1));
                 data.instance_zone = static_cast<uint16>(_sql->GetIntData(2));
                 data.entrance_zone = static_cast<uint16>(_sql->GetIntData(3));
@@ -117,17 +117,17 @@ namespace instanceutils
         }
     }
 
-    void LoadInstance(uint16 instanceid, CCharEntity* PRequester)
+    void LoadInstance(uint32 instanceid, CCharEntity* PRequester)
     {
         LoadQueue.emplace(PRequester->id, instanceid);
     }
 
-    InstanceData_t GetInstanceData(uint16 instanceid)
+    InstanceData_t GetInstanceData(uint32 instanceid)
     {
         return InstanceData[instanceid];
     }
 
-    bool IsValidInstanceID(uint16 instanceid)
+    bool IsValidInstanceID(uint32 instanceid)
     {
         return InstanceData.find(instanceid) != InstanceData.end();
     }

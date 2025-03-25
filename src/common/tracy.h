@@ -18,8 +18,8 @@
 
 ===========================================================================
 */
-#ifndef _TRACY_H
-#define _TRACY_H
+
+#pragma once
 
 // clang-format off
 #ifdef TRACY_ENABLE
@@ -98,5 +98,3 @@ inline std::string Hex16ToString(std::uint16_t hex)
 #define LockMark(m)                        std::ignore = m
 #endif
 // clang-format on
-
-#endif // _TRACY_H

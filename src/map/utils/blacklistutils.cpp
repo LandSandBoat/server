@@ -22,7 +22,7 @@
 #include "blacklistutils.h"
 #include "common/utils.h"
 #include "entities/charentity.h"
-#include "map.h"
+#include "map_server.h"
 
 #include "packets/send_blacklist.h"
 

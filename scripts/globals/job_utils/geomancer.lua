@@ -353,7 +353,10 @@ end
 -- Magic Casting Checks
 -----------------------------------
 xi.job_utils.geomancer.indiOnMagicCastingCheck = function(caster, target, spell)
-    -- No checks known as of yet
+    if caster ~= target and not caster:hasStatusEffect(xi.effect.ENTRUST) then
+        return xi.msg.basic.MAGIC_CANNOT_BE_CAST
+    end
+
     return 0
 end
 

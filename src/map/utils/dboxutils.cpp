@@ -40,8 +40,6 @@
 #include "trade_container.h"
 #include "universal_container.h"
 
-extern std::unique_ptr<SqlConnection> _sql;
-
 namespace
 {
     auto escapeString(const std::string_view str) -> std::string

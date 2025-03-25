@@ -36,6 +36,7 @@
 #include <asio/ssl.hpp>
 #include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
+
 #include <chrono>
 #include <cstdlib>
 #include <fstream>
@@ -69,19 +70,11 @@ class ConnectServer final : public Application
 {
 public:
     ConnectServer(int argc, char** argv);
+    ~ConnectServer() override;
 
-    ~ConnectServer() override
-    {
-        // Everything should be handled with RAII
-    }
+    void loadConsoleCommands() override;
 
-    // TODO: Currently never called. Need io_context asio::steady_timer callback with taskmgr to control timing?
-    void Tick() override
-    {
-        Application::Tick();
-
-        // Connect Server specific things
-    }
+    void run() override;
 
     // This cleanup function is to periodically poll for auth sessions that were successful but xiloader failed to actually launch FFXI
     // When this happens, the data/view socket are never opened and will never be cleaned up normally.

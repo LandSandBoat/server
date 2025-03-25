@@ -124,7 +124,12 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
 
                 -- This is a temporary solution until all NMs have been updated to use params.spawnPoints and moved out of sql
                 if params.spawnPoints then
-                    xi.mob.updateNMSpawnPoint(nm, params.spawnPoints)
+                    if params.spawnPoints[nmId] then -- Special check for NMs with multiple IDs
+                        xi.mob.updateNMSpawnPoint(nm, params.spawnPoints[nmId])
+                    else
+                        xi.mob.updateNMSpawnPoint(nm, params.spawnPoints)
+                    end
+
                     params.noPosUpdate = true -- If we have a table of spawn points, we don't need to run UpdateNMSpawnPoint()
                 end
 

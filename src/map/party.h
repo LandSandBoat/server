@@ -23,7 +23,7 @@
 #define _CPARTY_H
 
 #include "common/cbasetypes.h"
-#include "map.h"
+#include "map_server.h"
 #include "packets/message_standard.h"
 
 #include <vector>

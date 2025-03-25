@@ -72,22 +72,24 @@ namespace ipc
 
     struct ChatMessageParty
     {
-        uint32      partyId{};
-        uint32      senderId{};
-        std::string senderName{};
-        std::string message{};
-        uint16      zoneId{};
-        uint8       gmLevel{};
+        uint32            partyId{};
+        uint32            senderId{};
+        std::string       senderName{};
+        std::string       message{};
+        uint16            zoneId{};
+        uint8             gmLevel{};
+        CHAT_MESSAGE_TYPE messageType{ MESSAGE_PARTY };
     };
 
     struct ChatMessageAlliance
     {
-        uint32      allianceId{};
-        uint32      senderId{};
-        std::string senderName{};
-        std::string message{};
-        uint16      zoneId{};
-        uint8       gmLevel{};
+        uint32            allianceId{};
+        uint32            senderId{};
+        std::string       senderName{};
+        std::string       message{};
+        uint16            zoneId{};
+        uint8             gmLevel{};
+        CHAT_MESSAGE_TYPE messageType{ MESSAGE_PARTY };
     };
 
     struct ChatMessageLinkshell
@@ -102,30 +104,33 @@ namespace ipc
 
     struct ChatMessageUnity
     {
-        uint32      unityLeaderId{};
-        uint32      senderId{};
-        std::string senderName{};
-        std::string message{};
-        uint16      zoneId{};
-        uint8       gmLevel{};
+        uint32            unityLeaderId{};
+        uint32            senderId{};
+        std::string       senderName{};
+        std::string       message{};
+        uint16            zoneId{};
+        uint8             gmLevel{};
+        CHAT_MESSAGE_TYPE messageType{ MESSAGE_UNITY };
     };
 
     struct ChatMessageYell
     {
-        uint32      senderId{};
-        std::string senderName{};
-        std::string message{};
-        uint16      zoneId{};
-        uint8       gmLevel{};
+        uint32            senderId{};
+        std::string       senderName{};
+        std::string       message{};
+        uint16            zoneId{};
+        uint8             gmLevel{};
+        CHAT_MESSAGE_TYPE messageType{ MESSAGE_YELL };
     };
 
     struct ChatMessageServerMessage
     {
-        uint32      senderId{};
-        std::string senderName{};
-        std::string message{};
-        uint16      zoneId{};
-        uint8       gmLevel{};
+        uint32            senderId{};
+        std::string       senderName{};
+        std::string       message{};
+        uint16            zoneId{};
+        uint8             gmLevel{};
+        CHAT_MESSAGE_TYPE messageType{ MESSAGE_SYSTEM_1 };
     };
 
     struct ChatMessageCustom

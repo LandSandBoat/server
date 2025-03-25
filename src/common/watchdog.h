@@ -29,7 +29,7 @@
 
 #include <nonstd/jthread.hpp>
 
-class Watchdog
+class Watchdog final
 {
 public:
     Watchdog(duration timeout, std::function<void()> callback);

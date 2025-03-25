@@ -2782,7 +2782,7 @@ INSERT INTO `mob_skills` VALUES (2756,1930,'dead_prophet',4,0.0,10.0,2000,1000,4
 -- INSERT INTO `mob_skills` VALUES (2767,2511,'crepuscule_blade',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2768,2512,'deathly_glare',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2769,1943,'blighted_bouquet',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2770,1944,'booming_bombination',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2770,1944,'booming_bombination',1,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2771,2515,'gush_o_goo',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2772,2516,'.',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2773,2517,'.',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);

@@ -20,7 +20,6 @@
 */
 
 #include "common/logging.h"
-#include "common/socket.h"
 #include "common/utils.h"
 
 #include "data_loader.h"

@@ -48,6 +48,8 @@ HTTPServer::HTTPServer()
     auto host = settings::get<std::string>("network.HTTP_HOST");
     auto port = settings::get<uint16>("network.HTTP_PORT");
 
+    ShowInfo(fmt::format("Starting HTTP Server on http://{}:{}/api", host, port));
+
     // clang-format off
     Async::getInstance()->submit([this, host, port]()
     {
@@ -178,7 +180,6 @@ HTTPServer::HTTPServer()
             }
         });
 
-        ShowInfo(fmt::format("Starting HTTP Server on http://{}:{}/api", host, port));
         m_httpServer.listen(host, port);
     });
     // clang-format on

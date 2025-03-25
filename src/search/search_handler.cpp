@@ -21,8 +21,7 @@
 
 #include "search_handler.h"
 #include "common/md52.h"
-#include "common/socket.h" // for ref<T>
-#include "common/utils.h"  // for unpack/pack bits
+#include "common/utils.h"
 #include "data_loader.h"
 #include <map>
 #include <unordered_set>

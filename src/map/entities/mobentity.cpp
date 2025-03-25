@@ -43,6 +43,7 @@
 #include "packets/action.h"
 #include "packets/entity_update.h"
 #include "packets/pet_sync.h"
+#include "recast_container.h"
 #include "roe.h"
 #include "status_effect_container.h"
 #include "treasure_pool.h"
@@ -111,7 +112,7 @@ CMobEntity::CMobEntity()
 , m_unk1(8)
 , m_unk2(0)
 , m_CallForHelpBlocked(false)
-, m_IsClaimable(true)
+, m_IsPathingHome(false)
 {
     TracyZoneScoped;
     objtype     = ENTITYTYPE::TYPE_MOB;
@@ -688,8 +689,55 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     // Adds an item to the treasure pool. Treasure pool will automatically kick out items if the pool is full (prioritizing non rare non ex items)
     auto AddItemToPool = [this, PChar](uint16 ItemID)
     {
-        PChar->PTreasurePool->AddItem(ItemID, this);
+        PChar->PTreasurePool->addItem(ItemID, this);
         PAI->EventHandler.triggerListener("TREASUREPOOL", CLuaBaseEntity(this), CLuaBaseEntity(PChar), ItemID);
+    };
+
+    auto CanAddSeal = [PChar]()
+    {
+        const auto PParty = PChar->PParty;
+
+        if (!PParty || !PChar->PTreasurePool)
+        {
+            return !PChar->PRecastContainer->Has(RECAST_LOOT, 1);
+        }
+
+        for (const auto& member : PChar->PTreasurePool->getMembers())
+        {
+            if (member->PParty == PParty)
+            {
+                if (member->PRecastContainer->Has(RECAST_LOOT, 1))
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    };
+
+    // Seals are limited to one every 5 minutes per party.
+    // Cooldown is applied to members (in zone) of the party that delivered the killing blow.
+    // Note that the following has been verified to be retail accurate:
+    // - Other alliance parties are NOT included in that cooldown.
+    // - The cooldown does reset when zoning.
+    auto AddSealRecast = [PChar]()
+    {
+        const auto PParty = PChar->PParty;
+
+        if (!PParty || !PChar->PTreasurePool)
+        {
+            PChar->PRecastContainer->Add(RECAST_LOOT, 1, 300);
+            return;
+        }
+
+        for (const auto& member : PChar->PTreasurePool->getMembers())
+        {
+            if (member->PParty == PParty)
+            {
+                member->PRecastContainer->Add(RECAST_LOOT, 1, 300);
+            }
+        }
     };
 
     DropList_t* dropList = itemutils::GetDropList(m_DropID);
@@ -720,7 +768,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             }
 
             // Determine if this group should drop an item.
-            if (groupDropRate > 0 && xirand::GetRandomNumber(1, 10000) <= groupDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
+            if (groupDropRate > 0 && (1 + xirand::GetRandomNumber(10000)) <= groupDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
             {
                 // Each item in the group is given its own weight range which is the previous value to the previous value + item.DropRate
                 // Such as 2 items with drop rates of 200 and 800 would be 0-199 and 200-999 respectively
@@ -749,7 +797,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                 itemDropRate = thDropRateFunction(m_THLvl, itemDropRate);
             }
 
-            if (itemDropRate > 0 && xirand::GetRandomNumber(1, 10000) <= itemDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
+            if (itemDropRate > 0 && (1 + xirand::GetRandomNumber(10000)) <= itemDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
             {
                 AddItemToPool(item.ItemID);
             }
@@ -769,7 +817,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         >= 75 = Kindred Crests ID=2955
         >= 90 = High Kindred Crests ID=2956
         */
-        if (xirand::GetRandomNumber(100) < 20 && PChar->PTreasurePool->CanAddSeal())
+        if (xirand::GetRandomNumber(100) < 20 && CanAddSeal())
         {
             // RULES: Only 1 kind may drop per mob
             if (GetMLevel() >= 75 && luautils::IsContentEnabled("ABYSSEA")) // all 4 types
@@ -789,6 +837,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                         AddItemToPool(2956);
                         break;
                 }
+
+                AddSealRecast();
             }
             else if (GetMLevel() >= 70 && luautils::IsContentEnabled("ABYSSEA")) // b.seal & k.seal & k.crest
             {

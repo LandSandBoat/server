@@ -1025,6 +1025,8 @@ xi.mod =
 
     DESPAWN_TIME_REDUCTION = 1134, -- Reduction in seconds. 1 = 1 second less to despawn.
 
+    PARRY_HP_RECOVERY = 1135, -- Recover <Mod Value> HP on successful parry.
+
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.

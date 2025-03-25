@@ -22,7 +22,7 @@
 #include "time_server.h"
 
 #include "common/cbasetypes.h"
-#include "common/taskmgr.h"
+#include "common/task_manager.h"
 #include "common/tracy.h"
 #include "common/vana_time.h"
 
@@ -30,7 +30,7 @@
 #include "daily_tally.h"
 #include "world_server.h"
 
-int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
+int32 time_server(time_point tick, CTaskManager::CTask* PTask)
 {
     TracyZoneScoped;
 

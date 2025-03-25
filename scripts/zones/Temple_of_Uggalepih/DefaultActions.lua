@@ -2,7 +2,7 @@ local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 
 return {
     ['_4fx']          = { messageSpecial = ID.text.DOOR_LOCKED },
-    ['Chef_Nonberry'] = { event = 27 },
+    ['Chef_Nonberry'] = { text = ID.text.NOTHING_I_CANT_CUT },
     ['qm9']           = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm11']          = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm12']          = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

@@ -26,7 +26,9 @@
 
 #include "entities/charentity.h"
 #include "entities/npcentity.h"
+#include "los/zone_los.h"
 #include "lua_baseentity.h"
+#include "navmesh.h"
 #include "trigger_area.h"
 #include "utils/mobutils.h"
 #include "zone.h"

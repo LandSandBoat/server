@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "linkshell_equip.h"
 
 #include "entities/charentity.h"

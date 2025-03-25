@@ -18,13 +18,13 @@
 
 ===========================================================================
 */
+
 #include "trustutils.h"
 
 #include "common/timer.h"
 #include "common/utils.h"
 
 #include <algorithm>
-#include <cmath>
 #include <cstring>
 #include <vector>
 
@@ -34,7 +34,7 @@
 #include "zoneutils.h"
 
 #include "grades.h"
-#include "map.h"
+#include "map_server.h"
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
 

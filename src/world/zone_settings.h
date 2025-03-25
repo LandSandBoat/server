@@ -56,8 +56,7 @@ public:
 
         while (rset->next())
         {
-            uint64 ip = 0;
-            inet_pton(AF_INET, rset->get<std::string>("zoneip").c_str(), &ip);
+            uint64 ip   = str2ip(rset->get<std::string>("zoneip"));
             uint64 port = rset->get<uint64>("zoneport");
 
             ZoneSettingsEntry zone_settings{};

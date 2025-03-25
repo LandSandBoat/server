@@ -20,7 +20,7 @@
 
 #include "entities/charentity.h"
 #include "ipc_client.h"
-#include "map.h"
+#include "map_server.h"
 #include "unitychat.h"
 #include "utils/jailutils.h"
 

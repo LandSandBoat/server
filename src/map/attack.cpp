@@ -28,8 +28,6 @@
 #include "status_effect_container.h"
 #include "utils/puppetutils.h"
 
-#include <cmath>
-
 /************************************************************************
  *                                                                      *
  *  Constructor.                                                            *

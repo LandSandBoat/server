@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "cs_position.h"
 
 #include "entities/charentity.h"

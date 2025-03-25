@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "shop_buy.h"
 
 CShopBuyPacket::CShopBuyPacket(uint8 slotID, uint32 quantity)

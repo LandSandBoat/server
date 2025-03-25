@@ -21,6 +21,7 @@
 
 #include "battlefield.h"
 
+#include "common/settings.h"
 #include "common/timer.h"
 
 #include "ai/ai_container.h"

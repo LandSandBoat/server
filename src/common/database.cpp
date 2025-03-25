@@ -21,10 +21,11 @@
 
 #include "database.h"
 
+#include "application.h"
 #include "logging.h"
 #include "macros.h"
 #include "settings.h"
-#include "taskmgr.h"
+#include "task_manager.h"
 
 #include <chrono>
 using namespace std::chrono_literals;
@@ -149,6 +150,7 @@ auto db::queryStr(std::string const& rawQuery) -> std::unique_ptr<db::detail::Re
 {
     TracyZoneScoped;
     TracyZoneString(rawQuery);
+    // TODO: Collect up bound args and report to tracy here
 
     // clang-format off
     return detail::getState().write([&](detail::State& state) -> std::unique_ptr<db::detail::ResultSetWrapper>

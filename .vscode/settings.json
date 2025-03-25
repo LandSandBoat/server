@@ -13,6 +13,7 @@
     "Lua.diagnostics.globals": [
         "bit",
         "fmt",
+        "sleep",
 
         "xi",
         "ai",

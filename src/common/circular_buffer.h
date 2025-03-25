@@ -6,7 +6,7 @@
 #include <mutex>
 
 template <class T>
-class CircularBuffer
+class CircularBuffer final
 {
 private:
     std::unique_ptr<T[]> buffer;

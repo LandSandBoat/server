@@ -278,7 +278,7 @@ CCharEntity::~CCharEntity()
     if (PTreasurePool != nullptr)
     {
         // remove myself
-        PTreasurePool->DelMember(this);
+        PTreasurePool->delMember(this);
     }
 
     ClearTrusts(); // trusts don't survive zone lines
@@ -2389,6 +2389,14 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
         return true;
     }
 
+    if (auto* PMob = dynamic_cast<CMobEntity*>(PBattleTarget))
+    {
+        if (PMob->getMobMod(MOBMOD_CLAIM_TYPE) == static_cast<int16>(ClaimType::NonExclusive))
+        {
+            return true;
+        }
+    }
+
     bool found = false;
 
     // clang-format off
@@ -3314,6 +3322,34 @@ int32 CCharEntity::getCharVar(std::string const& charVarName)
 
     charVarCache[charVarName] = value;
     return value.first;
+}
+
+auto CCharEntity::getCharVarsWithPrefix(std::string const& prefix) -> std::vector<std::pair<std::string, int32>>
+{
+    const uint32 currentTimestamp = CVanaTime::getInstance()->getSysTime();
+
+    std::vector<std::pair<std::string, int32>> charVars;
+
+    const auto rset = db::preparedStmt("SELECT varname, value, expiry FROM char_vars WHERE charid = ? AND varname LIKE CONCAT(?, '%')",
+                                       this->id, prefix);
+    if (rset && rset->rowsCount())
+    {
+        while (rset->next())
+        {
+            const auto varname = rset->get<std::string>("varname");
+            const auto value   = rset->get<int32>("value");
+            const auto expiry  = rset->get<uint32>("expiry");
+
+            if (expiry == 0 || expiry > currentTimestamp)
+            {
+                charVarCache[varname] = { value, expiry };
+
+                charVars.emplace_back(varname, value);
+            }
+        }
+    }
+
+    return charVars;
 }
 
 void CCharEntity::setCharVar(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)

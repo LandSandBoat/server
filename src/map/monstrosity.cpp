@@ -624,7 +624,7 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, uint8 type)
 
         // Restart this zone with Gestation effect
         PChar->loc.destination = PChar->loc.zone->GetID();
-        charutils::SendToZone(PChar, ZoningType::Zoning, zoneutils::GetZoneIPP(PChar->loc.destination));
+        charutils::SendToZone(PChar, PChar->loc.destination);
     }
 }
 

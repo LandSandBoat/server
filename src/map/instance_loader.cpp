@@ -42,7 +42,7 @@
 #include "utils/mobutils.h"
 #include "utils/zoneutils.h"
 
-CInstanceLoader::CInstanceLoader(uint16 instanceid, CCharEntity* PRequester)
+CInstanceLoader::CInstanceLoader(uint32 instanceid, CCharEntity* PRequester)
 {
     TracyZoneScoped;
 
@@ -68,6 +68,7 @@ CInstanceLoader::~CInstanceLoader()
 CInstance* CInstanceLoader::LoadInstance()
 {
     TracyZoneScoped;
+
     const char* Query = "SELECT mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
             respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
             modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \

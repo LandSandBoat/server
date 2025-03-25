@@ -126,7 +126,7 @@ public:
 
     Elevator_t* getElevator(uint8 elevatorID);
 
-    void InitializeTransport();
+    void InitializeTransport(IPP mapIPP);
 
 protected:
     CTransportHandler() = default;

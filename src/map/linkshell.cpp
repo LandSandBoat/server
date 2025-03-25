@@ -37,7 +37,7 @@
 #include "item_container.h"
 #include "items/item_linkshell.h"
 #include "linkshell.h"
-#include "map.h"
+#include "map_server.h"
 #include "packets/linkshell_message.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"

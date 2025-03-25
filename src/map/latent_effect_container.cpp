@@ -853,9 +853,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             {
                 for (auto* member : m_POwner->PParty->members)
                 {
-                    if (member->PPet != nullptr)
+                    if (member->PPet != nullptr && member->PPet->objtype == TYPE_PET)
                     {
-                        auto* PPet = (CPetEntity*)member->PPet;
+                        auto* PPet = static_cast<CPetEntity*>(member->PPet);
                         if (
                                 !PPet->isDead() && PPet->m_PetID < 21 && // is a live avatar
                                 (PPet->m_PetID == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21)

@@ -1554,13 +1554,6 @@ INSERT INTO `nm_spawn_points` VALUES (17269106,47,304.025,0.638,-326.122);
 INSERT INTO `nm_spawn_points` VALUES (17269106,48,248.637,-0.510,-355.112);
 INSERT INTO `nm_spawn_points` VALUES (17269106,49,321.210,0.000,-282.105);
 INSERT INTO `nm_spawn_points` VALUES (17273278,0,-391.184,-0.269,-159.086);
-INSERT INTO `nm_spawn_points` VALUES (17276982,0,-108.575,-5.699,-5.432); -- Nightmare Vase (west)
-INSERT INTO `nm_spawn_points` VALUES (17276992,0,69.000,-5.000,21.000); -- Nightmare Vase (east)
-INSERT INTO `nm_spawn_points` VALUES (17277079,0,219.800,-3.200,-41.220); -- Rogue Receptacle
-INSERT INTO `nm_spawn_points` VALUES (17281061,0,-307.000,2.000,216.000);
-INSERT INTO `nm_spawn_points` VALUES (17281061,1,-299.000,0.000,192.000);
-INSERT INTO `nm_spawn_points` VALUES (17281061,2,-334.000,3.000,182.000);
-INSERT INTO `nm_spawn_points` VALUES (17281061,3,-301.000,0.000,166.000);
 INSERT INTO `nm_spawn_points` VALUES (17281149,0,-279.575,3.317,16.011); -- Mischievous Micholas
 INSERT INTO `nm_spawn_points` VALUES (17281281,0,-404.454,17.021,-378.4268); -- Meww the Turtlerider
 INSERT INTO `nm_spawn_points` VALUES (17281281,1,-426.268,17.000,-398.5605);

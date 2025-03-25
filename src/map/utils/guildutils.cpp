@@ -31,7 +31,7 @@
 #include "guild.h"
 #include "item_container.h"
 #include "itemutils.h"
-#include "map.h"
+#include "map_server.h"
 #include "serverutils.h"
 
 // TODO: During the closure of the guild, all viewing products of the goods are sent 0x86 with information about the closure of the guild

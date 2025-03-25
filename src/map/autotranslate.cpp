@@ -2793,27 +2793,27 @@ std::string doLookup(std::string const& str, std::vector<uint16>& data)
 
     auto value = values.at(key);
 
-    ShowInfo(fmt::format("autotranslate: {}: {}", key, value));
+    ShowDebug(fmt::format("autotranslate: {}: {}", key, value));
     switch (type)
     {
         case 0x02:
         {
-            ShowInfo(fmt::format("autotranslate: type: string, lang: {}, cat: {}, index: {}", language, category, index));
+            ShowDebug(fmt::format("autotranslate: type: string, lang: {}, cat: {}, index: {}", language, category, index));
         }
         break;
         case 0x07:
         {
-            ShowInfo(fmt::format("autotranslate: type: item, lang: {}, cat: {}, index: {}", language, category, index));
+            ShowDebug(fmt::format("autotranslate: type: item, lang: {}, cat: {}, index: {}", language, category, index));
         }
         break;
         case 0x13:
         {
-            ShowInfo(fmt::format("autotranslate: type: keyitem, lang: {}, cat: {}, index: {}", language, category, index));
+            ShowDebug(fmt::format("autotranslate: type: keyitem, lang: {}, cat: {}, index: {}", language, category, index));
         }
         break;
         default:
         {
-            ShowInfo(fmt::format("autotranslate: type: unknown ({}), lang: {}, cat: {}, index: {}", type, language, category, index));
+            ShowDebug(fmt::format("autotranslate: type: unknown ({}), lang: {}, cat: {}, index: {}", type, language, category, index));
         }
         break;
     }

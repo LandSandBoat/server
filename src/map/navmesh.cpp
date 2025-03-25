@@ -262,6 +262,8 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
         return {};
     }
 
+    DebugNavmesh("CNavMesh::findPath (%f, %f, %f) -> (%f, %f, %f) (%u)", start.x, start.y, start.z, end.x, end.y, end.z, m_zoneID);
+
     std::vector<pathpoint_t> ret{};
     dtStatus                 status = 0;
 
@@ -363,6 +365,8 @@ std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& star
         return {};
     }
 
+    DebugNavmesh("CNavMesh::findRandomPosition (%f, %f, %f) (%u)", start.x, start.y, start.z, m_zoneID);
+
     dtStatus status = 0;
 
     float spos[3];
@@ -435,6 +439,8 @@ bool CNavMesh::validPosition(const position_t& position)
         return true;
     }
 
+    DebugNavmesh("CNavMesh::validPosition (%f, %f, %f) (%u)", position.x, position.y, position.z, m_zoneID);
+
     float spos[3];
     CNavMesh::ToDetourPos(&position, spos);
 
@@ -465,6 +471,8 @@ bool CNavMesh::findClosestValidPoint(const position_t& position, float* validPoi
         return true;
     }
 
+    DebugNavmesh("CNavMesh::findClosestValidPoint (%f, %f, %f) (%u)", position.x, position.y, position.z, m_zoneID);
+
     float spos[3];
     CNavMesh::ToDetourPos(&position, spos);
 
@@ -493,6 +501,8 @@ bool CNavMesh::findFurthestValidPoint(const position_t& startPosition, const pos
     {
         return true;
     }
+
+    DebugNavmesh("CNavMesh::findFurthestValidPoint (%f, %f, %f) -> (%f, %f, %f) (%u)", startPosition.x, startPosition.y, startPosition.z, endPosition.x, endPosition.y, endPosition.z, m_zoneID);
 
     float spos[3];
     CNavMesh::ToDetourPos(&startPosition, spos);
@@ -536,6 +546,8 @@ void CNavMesh::snapToValidPosition(position_t& position)
         return;
     }
 
+    DebugNavmesh("CNavMesh::snapToValidPosition (%f, %f, %f) (%u)", position.x, position.y, position.z, m_zoneID);
+
     float spos[3];
     CNavMesh::ToDetourPos(&position, spos);
 
@@ -573,6 +585,8 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
     {
         return true;
     }
+
+    DebugNavmesh("CNavMesh::onSameFloor (%f, %f, %f) -> (%f, %f, %f) (%u)", start.x, start.y, start.z, end.x, end.y, end.z, m_zoneID);
 
     float verticalDistance = abs(start.y - end.y);
     if (verticalDistance > 2 * verticalLimit)
@@ -641,6 +655,8 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end)
     {
         return true;
     }
+
+    DebugNavmesh("CNavMesh::raycast (%f, %f, %f) -> (%f, %f, %f) (%u)", start.x, start.y, start.z, end.x, end.y, end.z, m_zoneID);
 
     dtStatus status = 0;
 

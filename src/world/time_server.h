@@ -22,6 +22,6 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "common/taskmgr.h"
+#include "common/task_manager.h"
 
-int32 time_server(time_point tick, CTaskMgr::CTask* PTask);
+int32 time_server(time_point tick, CTaskManager::CTask* PTask);

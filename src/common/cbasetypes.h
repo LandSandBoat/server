@@ -1,5 +1,4 @@
-#ifndef _CBASETYPES_H_
-#define _CBASETYPES_H_
+#pragma once
 
 #include <algorithm>
 #include <cctype>
@@ -80,5 +79,3 @@ template <class T>
 using MinHeapPtr = std::priority_queue<T, std::vector<T>, PtrGreater<T>>;
 
 #include "tracy.h"
-
-#endif /* _CBASETYPES_H_ */

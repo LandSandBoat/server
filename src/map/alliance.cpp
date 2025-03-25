@@ -20,6 +20,8 @@
 */
 
 #include "alliance.h"
+
+#include "common/ipp.h"
 #include "common/logging.h"
 
 #include <algorithm>
@@ -28,7 +30,8 @@
 #include "conquest_system.h"
 #include "entities/battleentity.h"
 #include "ipc_client.h"
-#include "map.h"
+#include "map_networking.h"
+#include "map_server.h"
 #include "party.h"
 #include "treasure_pool.h"
 #include "utils/charutils.h"
@@ -85,10 +88,28 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
     }
     else
     {
+        // Try and extract the map IPP from someone in the alliance
+        IPP mapIPP;
+        for (auto* PParty : partyList)
+        {
+            for (auto* PMember : PParty->members)
+            {
+                auto* PCharMember = dynamic_cast<CCharEntity*>(PMember);
+                if (PCharMember && PCharMember->PSession)
+                {
+                    mapIPP = PCharMember->PSession->zone_ipp;
+                    break;
+                }
+            }
+        }
+
+        const auto ip   = mapIPP.getIP();
+        const auto port = mapIPP.getPort();
+
         _sql->Query("UPDATE accounts_parties JOIN accounts_sessions USING (charid) "
                     "SET allianceid = 0, partyflag = partyflag & ~%d "
                     "WHERE allianceid = %u AND IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u)",
-                    ALLIANCE_LEADER | PARTY_SECOND | PARTY_THIRD, m_AllianceID, map_ip.s_addr, map_port, map_ip.s_addr, map_port);
+                    ALLIANCE_LEADER | PARTY_SECOND | PARTY_THIRD, m_AllianceID, ip, port, ip, port);
 
         // Remove all parties. The `delParty` call removes a party from `partyList`.
         while (partyList.size() > 0)
@@ -142,6 +163,12 @@ uint32 CAlliance::loadPartyCount() const
 
 void CAlliance::removeParty(CParty* party)
 {
+    if (party == nullptr)
+    {
+        ShowWarning("CAlliance::removeParty - party is null!");
+        return;
+    }
+
     // if main party then pass alliance lead to the next (d/c fix)
     if (this->getMainParty() == party)
     {
@@ -180,6 +207,12 @@ void CAlliance::removeParty(CParty* party)
 
 void CAlliance::delParty(CParty* party)
 {
+    if (party == nullptr)
+    {
+        ShowWarning("CAlliance::delParty - party is null!");
+        return;
+    }
+
     // Don't delete parties when there's no party in the alliance
     if (!party->m_PAlliance || party->m_PAlliance->partyList.size() == 0)
     {
@@ -206,9 +239,9 @@ void CAlliance::delParty(CParty* party)
     for (auto* entry : party->members)
     {
         auto* member = dynamic_cast<CCharEntity*>(entry);
-        if (member != nullptr && member->PTreasurePool != nullptr && member->PTreasurePool->GetPoolType() != TREASUREPOOL_ZONE)
+        if (member != nullptr && member->PTreasurePool != nullptr && member->PTreasurePool->getPoolType() != TreasurePoolType::Zone)
         {
-            member->PTreasurePool->DelMember(member);
+            member->PTreasurePool->delMember(member);
         }
     }
 
@@ -225,6 +258,12 @@ void CAlliance::delParty(CParty* party)
 
 void CAlliance::addParty(CParty* party)
 {
+    if (party == nullptr)
+    {
+        ShowWarning("CAlliance::addParty - party is null!");
+        return;
+    }
+
     if (std::find(partyList.begin(), partyList.end(), party) != partyList.end())
     {
         ShowWarning("CAlliance::addParty - party is already in the alliance list!");
@@ -303,6 +342,12 @@ void CAlliance::addParty(uint32 partyid) const
 
 void CAlliance::pushParty(CParty* PParty, uint8 number)
 {
+    if (PParty == nullptr)
+    {
+        ShowWarning("CAlliance::pushParty - PParty is null!");
+        return;
+    }
+
     PParty->m_PAlliance = this;
     partyList.emplace_back(PParty);
     PParty->SetPartyNumber(number);

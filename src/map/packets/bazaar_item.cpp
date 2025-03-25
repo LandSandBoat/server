@@ -21,7 +21,6 @@
 
 #include "bazaar_item.h"
 
-#include "common/socket.h"
 #include "common/utils.h"
 #include "common/vana_time.h"
 
@@ -55,7 +54,9 @@ CBazaarItemPacket::CBazaarItemPacket(CItem* PItem, uint8 SlotID, uint16 Tax)
             ref<uint32>(0x15) = nextUseTime;
             ref<uint32>(0x19) = ((CItemUsable*)PItem)->getUseDelay() + currentTime;
         }
-        // 12? characters? seems a bit short. TODO: research this.
-        std::memcpy(buffer_.data() + 0x1D, PItem->getSignature().c_str(), std::min<size_t>(PItem->getSignature().size(), 12));
+        else
+        {
+            std::memcpy(buffer_.data() + 0x11, PItem->m_extra, std::min<size_t>(CItem::extra_size, 24));
+        }
     }
 }

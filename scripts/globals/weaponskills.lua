@@ -217,7 +217,7 @@ local function getMultiAttacks(attacker, target, wsParams, firstHit, offHand)
     return numHits
 end
 
-local function getRangedHitRate(attacker, target, bonus)
+xi.weaponskills.getRangedHitRate = function(attacker, target, bonus)
     local acc = attacker:getRACC()
     local eva = target:getEVA()
 
@@ -868,10 +868,10 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
 
     -- Split Shot/Piercing Arrow and Empyreal Arrow/Detonator are confirmed for this. Theoretically Last Stand could have a bonus too, and if so it would likely be first hit only.
     if wsParams.rangedAccuracyBonus then
-        calcParams.firstHitRate = getRangedHitRate(attacker, target, calcParams.bonusAcc + wsParams.rangedAccuracyBonus)
+        calcParams.firstHitRate = xi.weaponskills.getRangedHitRate(attacker, target, calcParams.bonusAcc + wsParams.rangedAccuracyBonus)
     end
 
-    calcParams.hitRate = getRangedHitRate(attacker, target, calcParams.bonusAcc)
+    calcParams.hitRate = xi.weaponskills.getRangedHitRate(attacker, target, calcParams.bonusAcc)
 
     -- Send our params off to calculate our raw WS damage, hits landed, and shadows absorbed
     calcParams = xi.weaponskills.calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
