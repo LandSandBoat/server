@@ -14201,7 +14201,7 @@ INSERT INTO `mob_groups` VALUES (38,4862,261,'Unfettered_Twitherym',0,128,0,6000
 INSERT INTO `mob_groups` VALUES (39,4863,261,'Supernal_Chapuli',0,128,0,0,0,107,109,0);
 INSERT INTO `mob_groups` VALUES (40,6911,261,'Transcendent_Scorpion',0,128,0,96500,0,110,110,0);
 INSERT INTO `mob_groups` VALUES (41,6912,261,'Mastop',0,128,0,63000,9999,110,110,0);
-INSERT INTO `mob_groups` VALUES (42,4864,261,'Taxet',0,128,0,0,0,107,109,0);
+INSERT INTO `mob_groups` VALUES (42,4864,261,'Taxet',0,128,0,76500,9999,113,113,0);
 
 -- ------------------------------------------------------------
 -- Foret_de_Hennetiel (Zone 262)
