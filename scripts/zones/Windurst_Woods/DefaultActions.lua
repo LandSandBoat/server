@@ -63,5 +63,6 @@ return {
     ['Three_of_Spades']    = { event = 270 },
     ['Two_of_Spades']      = { event = 271 },
     ['Uuroro']             = { event = 272 },
+    ['Varun']              = { event = 432 },
     ['Zahsa_Syalmhaia']    = { event = 797 },
 }
