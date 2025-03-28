@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/regional_event.h"
 
 #include "conquest_data.h"
 #include "zone.h"
@@ -30,7 +31,7 @@ enum ConquestUpdate : uint8
 {
     Conquest_Tally_Start = 0,
     Conquest_Tally_End   = 1,
-    Conquest_Update      = 2
+    Conquest_Update      = 2,
 };
 
 class CCharEntity;
@@ -42,9 +43,9 @@ class CCharEntity;
  */
 namespace conquest
 {
-    std::shared_ptr<ConquestData> GetConquestData(); // Cached data with influences / region controls
+    ConquestData& GetConquestData(); // Cached data with influences / region controls
 
-    void HandleZMQMessage(uint8* data);
+    void HandleMessage(ConquestMessage type, const std::span<const uint8> data);
 
     void UpdateConquestGM(ConquestUpdate type);                  // Update conquest system by GM (modify in the DB and use @updateconquest)
     void GainInfluencePoints(CCharEntity* PChar, uint32 points); // Gain influence for player's nation (+1)

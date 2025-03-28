@@ -11,7 +11,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() == 0 then
+    if mob:getAnimationSub() ~= 1 then
         return 0
     end
 

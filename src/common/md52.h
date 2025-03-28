@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _MD52_H
-#define _MD52_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -35,5 +34,3 @@ void md5(uint8* text, uint8* hash, int32 size);
 void md5_starts(md5_context* ctx);
 void md5_update(md5_context* ctx, uint8* input, uint32 length);
 void md5_finish(md5_context* ctx, uint8 digest[16]);
-
-#endif // _MD52_H

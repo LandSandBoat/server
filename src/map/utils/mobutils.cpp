@@ -19,9 +19,12 @@
 ===========================================================================
 */
 
-#include "common/utils.h"
+#include "mobutils.h"
 
-#include <cmath>
+#include "common/database.h"
+#include "common/logging.h"
+#include "common/sql.h"
+#include "common/utils.h"
 
 #include "battlefield.h"
 #include "battleutils.h"
@@ -31,7 +34,6 @@
 #include "mob_modifier.h"
 #include "mob_spell_container.h"
 #include "mob_spell_list.h"
-#include "mobutils.h"
 #include "packets/action.h"
 #include "petutils.h"
 #include "spell.h"
@@ -1624,10 +1626,10 @@ namespace mobutils
                 PMob->attRank = (uint8)_sql->GetIntData(32);
                 PMob->accRank = (uint8)_sql->GetIntData(33);
 
-                PMob->setModifier(Mod::SLASH_SDT, (uint16)(_sql->GetFloatData(34) * 1000));
-                PMob->setModifier(Mod::PIERCE_SDT, (uint16)(_sql->GetFloatData(35) * 1000));
-                PMob->setModifier(Mod::HTH_SDT, (uint16)(_sql->GetFloatData(36) * 1000));
-                PMob->setModifier(Mod::IMPACT_SDT, (uint16)(_sql->GetFloatData(37) * 1000));
+                PMob->setModifier(Mod::SLASH_SDT, (int16)_sql->GetIntData(34));
+                PMob->setModifier(Mod::PIERCE_SDT, (int16)_sql->GetIntData(35));
+                PMob->setModifier(Mod::HTH_SDT, (int16)_sql->GetIntData(36));
+                PMob->setModifier(Mod::IMPACT_SDT, (int16)_sql->GetIntData(37));
 
                 PMob->setModifier(Mod::UDMGMAGIC, (int16)_sql->GetIntData(38)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 
@@ -1782,10 +1784,10 @@ namespace mobutils
                 PMob->attRank = (uint8)_sql->GetIntData(32);
                 PMob->accRank = (uint8)_sql->GetIntData(33);
 
-                PMob->setModifier(Mod::SLASH_SDT, (uint16)(_sql->GetFloatData(34) * 1000));
-                PMob->setModifier(Mod::PIERCE_SDT, (uint16)(_sql->GetFloatData(35) * 1000));
-                PMob->setModifier(Mod::HTH_SDT, (uint16)(_sql->GetFloatData(36) * 1000));
-                PMob->setModifier(Mod::IMPACT_SDT, (uint16)(_sql->GetFloatData(37) * 1000));
+                PMob->setModifier(Mod::SLASH_SDT, (int16)_sql->GetIntData(34));
+                PMob->setModifier(Mod::PIERCE_SDT, (int16)_sql->GetIntData(35));
+                PMob->setModifier(Mod::HTH_SDT, (int16)_sql->GetIntData(36));
+                PMob->setModifier(Mod::IMPACT_SDT, (int16)_sql->GetIntData(37));
 
                 PMob->setModifier(Mod::UDMGMAGIC, (int16)_sql->GetIntData(38)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 

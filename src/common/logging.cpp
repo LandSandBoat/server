@@ -21,6 +21,7 @@
 
 #include "logging.h"
 
+#include "application.h"
 #include "settings.h"
 #include "tracy.h"
 #include "utils.h"
@@ -40,6 +41,8 @@ namespace
     std::string ServerName;
 
     CircularBuffer<std::string> BacktraceBuffer(16);
+
+    bool gSeenWarningOrError = false;
 } // namespace
 
 class star_formatter_flag : public spdlog::custom_flag_formatter
@@ -115,86 +118,88 @@ public:
     }
 };
 
-namespace logging
+const std::vector<std::string> logNames = {
+    "critical",
+    "error",
+    "lua",
+    "warn",
+    "info",
+    "debug",
+    "trace",
+};
+
+void logging::InitializeLog(std::string const& serverName, std::string const& logFile, bool appendDate)
 {
-    const std::vector<std::string> logNames = {
-        "critical",
-        "error",
-        "lua",
-        "warn",
-        "info",
-        "debug",
-        "trace",
-    };
+    ServerName = serverName;
 
-    void InitializeLog(std::string const& serverName, std::string const& logFile, bool appendDate)
+    // If you create more than one worker thread, messages may be delivered out of order
+    spdlog::init_thread_pool(8192, 1);
+    spdlog::flush_on(spdlog::level::warn);
+    spdlog::flush_every(std::chrono::seconds(5));
+
+    // Sink to console
+    std::vector<spdlog::sink_ptr> sinks;
+    sinks.emplace_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
+
+    // Daily Sink, creating new files at midnight
+    if (appendDate)
     {
-        ServerName = serverName;
-
-        // If you create more than one worker thread, messages may be delivered out of order
-        spdlog::init_thread_pool(8192, 1);
-        spdlog::flush_on(spdlog::level::warn);
-        spdlog::flush_every(std::chrono::seconds(5));
-
-        // Sink to console
-        std::vector<spdlog::sink_ptr> sinks;
-        sinks.emplace_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
-
-        // Daily Sink, creating new files at midnight
-        if (appendDate)
-        {
-            sinks.emplace_back(std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFile, 0, 0, false, 0));
-        }
-        // Basic sink, sink to file with name specified in main routine
-        else
-        {
-            sinks.emplace_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(logFile));
-        }
-
-        for (auto& name : logNames)
-        {
-            auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool());
-            spdlog::register_logger(logger);
-        }
-
-        spdlog::set_level(spdlog::level::debug);
-
-        spdlog::enable_backtrace(16);
+        sinks.emplace_back(std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFile, 0, 0, false, 0));
+    }
+    // Basic sink, sink to file with name specified in main routine
+    else
+    {
+        sinks.emplace_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(logFile));
     }
 
-    void ShutDown()
+    for (auto& name : logNames)
     {
-        spdlog::drop_all();
-        spdlog::shutdown();
+        auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool());
+        spdlog::register_logger(logger);
     }
 
-    void SetPattern(std::string const& str)
+    spdlog::set_level(spdlog::level::debug);
+
+    spdlog::enable_backtrace(16);
+}
+
+void logging::ShutDown()
+{
+    spdlog::drop_all();
+    spdlog::shutdown();
+}
+
+void logging::SetPattern(std::string const& str)
+{
+    // https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
+    auto formatter = std::make_unique<spdlog::pattern_formatter>();
+    formatter->add_flag<star_formatter_flag>('*');
+    formatter->add_flag<ampersand_formatter_flag>('&');
+    formatter->add_flag<underscore_formatter_flag>('_');
+    formatter->add_flag<q_formatter_flag>('q');
+    formatter->set_pattern(str);
+    spdlog::set_formatter(std::move(formatter));
+}
+
+void logging::AddBacktrace(std::string const& str)
+{
+    BacktraceBuffer.enqueue(str);
+}
+
+auto logging::GetBacktrace() -> std::vector<std::string>
+{
+    std::vector<std::string> backtrace;
+
+    // Emptying in this manner will mean the oldest is returned first, and the most recent is returned last
+    while (!BacktraceBuffer.is_empty())
     {
-        // https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
-        auto formatter = std::make_unique<spdlog::pattern_formatter>();
-        formatter->add_flag<star_formatter_flag>('*');
-        formatter->add_flag<ampersand_formatter_flag>('&');
-        formatter->add_flag<underscore_formatter_flag>('_');
-        formatter->add_flag<q_formatter_flag>('q');
-        formatter->set_pattern(str);
-        spdlog::set_formatter(std::move(formatter));
+        backtrace.push_back(BacktraceBuffer.dequeue());
     }
 
-    void AddBacktrace(std::string const& str)
-    {
-        BacktraceBuffer.enqueue(str);
-    }
+    return backtrace;
+}
 
-    auto GetBacktrace() -> std::vector<std::string>
-    {
-        std::vector<std::string> backtrace;
-
-        // Emptying in this manner will mean the oldest is returned first, and the most recent is returned last
-        while (!BacktraceBuffer.is_empty())
-        {
-            backtrace.push_back(BacktraceBuffer.dequeue());
-        }
-
-        return backtrace;
-    }
-} // namespace logging
+void logging::tapWarningOrError()
+{
+    gSeenWarningOrError = true;
+}

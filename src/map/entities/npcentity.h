@@ -23,7 +23,7 @@
 #define _NPCENTITY_H
 
 #include "common/cbasetypes.h"
-#include "common/taskmgr.h"
+#include "common/task_manager.h"
 
 #include "baseentity.h"
 

@@ -19,10 +19,8 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
-#include "entities/charentity.h"
 #include "event_update.h"
+#include "entities/charentity.h"
 
 CEventUpdatePacket::CEventUpdatePacket(std::vector<std::pair<uint8, uint32>> const& params)
 {

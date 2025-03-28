@@ -19,9 +19,11 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "party_define.h"
+
+#include "common/database.h"
+#include "common/logging.h"
+#include "common/sql.h"
 
 #include "entities/charentity.h"
 #include "entities/trustentity.h"

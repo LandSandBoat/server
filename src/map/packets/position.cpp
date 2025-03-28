@@ -19,11 +19,9 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
+#include "position.h"
 #include "entities/baseentity.h"
 #include "entities/charentity.h"
-#include "position.h"
 
 CPositionPacket::CPositionPacket(CBaseEntity* PEntity, position_t position, POSMODE mode)
 {

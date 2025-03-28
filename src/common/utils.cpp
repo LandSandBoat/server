@@ -20,6 +20,7 @@
 */
 
 #include "common/utils.h"
+
 #include "common/logging.h"
 #include "common/md52.h"
 #include "common/stdext.h"
@@ -897,6 +898,10 @@ bool definitelyLessThan(float a, float b)
 
 void crash()
 {
+#ifndef _DEBUG
+    ShowInfo("crash command is likely optimized out in release mode.");
+#endif
+
     int* volatile ptr = nullptr;
     // cppcheck-suppress nullPointer
     *ptr = 0xDEAD;

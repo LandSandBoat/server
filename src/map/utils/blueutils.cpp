@@ -19,12 +19,15 @@
 ===========================================================================
 */
 
+#include "blueutils.h"
+
+#include "common/database.h"
+#include "common/logging.h"
+#include "common/sql.h"
 #include "common/utils.h"
 
 #include "packets/char_job_extra.h"
 #include "packets/char_spells.h"
-
-#include <cmath>
 
 #include "packets/char_health.h"
 #include "packets/char_stats.h"
@@ -33,7 +36,6 @@
 #include "battleutils.h"
 #include "blue_spell.h"
 #include "blue_trait.h"
-#include "blueutils.h"
 #include "charutils.h"
 #include "grades.h"
 #include "job_points.h"
@@ -104,11 +106,29 @@ namespace blueutils
         // populate PBlueMages
         if (PChar->PParty != nullptr)
         {
-            for (auto& member : PChar->PParty->members)
+            std::vector<CParty*> parties;
+
+            if (PChar->PParty->m_PAlliance)
             {
-                if (member->GetMJob() == JOB_BLU && member->objtype == TYPE_PC)
+                parties = PChar->PParty->m_PAlliance->partyList;
+            }
+            else
+            {
+                parties.emplace_back(PChar->PParty);
+            }
+
+            for (const auto* party : parties)
+            {
+                for (auto& member : party->members)
                 {
-                    PBlueMages.emplace_back((CCharEntity*)member);
+                    auto* PMember = dynamic_cast<CCharEntity*>(member);
+
+                    if (PMember &&
+                        PMember->GetMJob() == JOB_BLU &&
+                        PMember->getZone() == PMob->getZone())
+                    {
+                        PBlueMages.emplace_back(PMember);
+                    }
                 }
             }
         }
@@ -483,6 +503,14 @@ namespace blueutils
                                         add = false;
                                         break;
                                     }
+                                }
+                                else if ((PTrait->getMod() == Mod::DOUBLE_ATTACK && iter->getMod() == Mod::TRIPLE_ATTACK) ||
+                                         (PTrait->getMod() == Mod::GILFINDER && iter->getMod() == Mod::TREASURE_HUNTER))
+                                {
+                                    // Triple Attack (16 pts) overwrites Double Attack (8 pts)
+                                    // Treasure Hunter (18 pts) overwrites Gilfinder (12 pts)
+                                    add = false;
+                                    break;
                                 }
                             }
 

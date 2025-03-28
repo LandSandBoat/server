@@ -28,7 +28,7 @@
 #include <cstring>
 #include <ctime>
 
-#ifdef WIN32
+#ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h> // GetTickCount()
 #else
@@ -167,3 +167,8 @@ uint32 getCurrentTimeMs()
 {
     return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() % 1000;
 }
+
+auto getMilliseconds(const duration& d) -> int64
+{
+    return std::chrono::duration_cast<std::chrono::milliseconds>(d).count();
+};

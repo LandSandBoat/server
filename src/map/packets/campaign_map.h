@@ -35,8 +35,8 @@ public:
     CCampaignPacket(CCharEntity* PChar, CampaignState const& state, uint8 number);
 
 private:
-    void SetRegions(std::vector<CampaignRegion> areas, int start = 0);
-    void SetNations(std::vector<CampaignNation> nations);
+    void SetRegions(const std::vector<CampaignRegion>& areas, int start = 0);
+    void SetNations(const std::vector<CampaignNation>& nations);
 };
 
 #endif

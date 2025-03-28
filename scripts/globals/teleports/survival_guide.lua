@@ -115,7 +115,7 @@ xi.survivalGuide.onEventUpdate = function(player, csid, option, npc)
             elseif choice == optionMap.REPLACE_FAVORITE then
                 favorites[bit.rshift(option, 24) + 1] = index
             elseif choice == optionMap.SET_MENU_LAYOUT then
-                favorites[10] = (bit.rshift(option, 16) and 1) or 0
+                favorites[10] = (bit.rshift(option, 16))
             end
 
             player:setTeleportMenu(xi.teleport.type.SURVIVAL, favorites)

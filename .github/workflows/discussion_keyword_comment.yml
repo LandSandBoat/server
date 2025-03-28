@@ -1,0 +1,44 @@
+name: "discussion_keyword_comment"
+
+on:
+  discussion:
+    types: [ created ]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check Discussion Keywords and Comment
+      uses: actions/github-script@v6
+      with:
+        script: |
+          // Define the keywords to check (all lower-case for case-insensitive matching)
+          const keywords = [
+            'bug', 'error', 'help', 'crash', 'wrong', 'problem', 'nothing happens', 'unable', 'having trouble'
+          ];
+
+          // Retrieve the discussion data from the event payload
+          const discussion = context.payload.discussion;
+          const title = discussion.title.toLowerCase();
+          const body = (discussion.body || "").toLowerCase();
+
+          // Check if any keyword appears in the title or body
+          const found = keywords.some(keyword => title.includes(keyword) || body.includes(keyword));
+
+          if (found) {
+            const commentBody = `✨ Hello and thanks for the discussion! ✨\n\n🤖 : This is a friendly automated response to let you know we've detected some keywords that indicate you **might** have opened a discussion when it would have been more relevant to raise an issue.\n\nIt's much easier for us to search and track issues, and you're more likely to get resolution if you raise one.`;
+            
+            // Post the comment on the discussion using a generic API request, including the required preview Accept header
+            await github.request('POST /repos/{owner}/{repo}/discussions/{discussion_number}/comments', {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              discussion_number: discussion.number,
+              body: commentBody,
+              headers: {
+                Accept: 'application/vnd.github.echo-preview+json'
+              }
+            });
+            console.log("Keyword found. Comment posted.");
+          } else {
+            console.log("No relevant keywords found in discussion.");
+          }

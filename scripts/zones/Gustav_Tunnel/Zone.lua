@@ -1,14 +1,10 @@
 -----------------------------------
 -- Zone: Gustav Tunnel (212)
 -----------------------------------
-local ID = zones[xi.zone.GUSTAV_TUNNEL]
------------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.BUNE)
-    GetMobByID(ID.mob.BUNE):setRespawnTime(math.random(900, 10800))
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

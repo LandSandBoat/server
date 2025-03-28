@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "utils/itemutils.h"
 
 #include "trade_item.h"

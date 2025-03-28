@@ -5,4 +5,5 @@ return {
     ['Duchille']  = { event = 17 },
     ['Loutille']  = { event = 16 },
     ['Nelinnie']  = { event = 23 },
+    ['_qm2']      = { event = 5 },
 }

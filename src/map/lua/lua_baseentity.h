@@ -69,6 +69,7 @@ public:
 
     // Variables
     int32  getCharVar(std::string const& varName);
+    auto   getCharVarsWithPrefix(std::string const& prefix) -> sol::table;
     void   setCharVar(std::string const& varname, int32 value, sol::object const& expiry);
     void   setCharVarExpiration(std::string const& varName, uint32 expiry); // Sets character variable expiration timestamp
     void   incrementCharVar(std::string const& varname, int32 value);       // Increments/decrements/sets a character variable
@@ -223,7 +224,7 @@ public:
 
     void resetPlayer(const char* charName);
 
-    void goToEntity(uint32 targetID, sol::object const& option);
+    void gotoEntity(uint32 targetID, sol::object const& option);
     bool gotoPlayer(std::string const& playerName);
     bool bringPlayer(std::string const& playerName);
 
@@ -235,12 +236,14 @@ public:
     uint32 getItemCount(uint16 itemID);
     bool   addItem(sol::variadic_args va);
     bool   delItem(uint16 itemID, int32 quantity, sol::object const& containerID);
+    bool   delItemAt(uint16 itemID, int32 quantity, uint8 containerId, uint8 slotId);
     bool   delContainerItems(sol::object const& containerID);
     bool   addUsedItem(uint16 itemID);
     bool   addTempItem(uint16 itemID, sol::object const& arg1);
     uint8  getWornUses(uint16 itemID);                                     // Check if the item is already worn
     uint8  incrementItemWear(uint16 itemID);                               // Increment the item's worn value and returns it
     auto   findItem(uint16 itemID, sol::object const& location) -> CItem*; // Like hasItem, but returns the item object (nil if not found)
+    auto   findItems(uint16 itemID, sol::object const& location) -> sol::table;
 
     void createShop(uint8 size, sol::object const& arg1);
     void addShopItem(uint16 itemID, double rawPrice, sol::object const& arg2, sol::object const& arg3);
@@ -298,6 +301,7 @@ public:
     void   setAnimation(uint8 animation);
     uint8  getAnimationSub();
     void   setAnimationSub(uint8 animationsub, sol::object const& sendUpdate);
+    void   setSpawnAnimation(uint8 spawnAnimation);
     bool   getCallForHelpFlag() const;
     void   setCallForHelpFlag(bool cfh);
     bool   getCallForHelpBlocked() const;
@@ -653,8 +657,6 @@ public:
     void  updateClaim(sol::object const& entity);
     bool  hasEnmity();
     auto  getNotorietyList() -> sol::table;
-    void  setClaimable(bool claimable);
-    bool  getClaimable();
     void  clearEnmityForEntity(CLuaBaseEntity* PEntity);
 
     // Status Effects
@@ -902,6 +904,7 @@ public:
     uint32 getDropID();
     void   setDropID(uint32 dropID);
     void   addTreasure(uint16 itemID, sol::object const& arg1, sol::object const& arg2);
+    auto   getTreasurePool() -> CTreasurePool*;
     uint16 getStealItem();
     uint16 getDespoilItem();                // gets ItemID of droplist despoil item from mob (steal item if no despoil item)
     uint16 getDespoilDebuff(uint16 itemID); // gets the status effect id to apply to the mob on successful despoil

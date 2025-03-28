@@ -18,7 +18,9 @@ entity.onMobFight = function(mob, target)
     }
     if drawInTable.conditions[1] then
         for _, member in ipairs(target:getAlliance()) do
-            utils.drawIn(member, drawInTable)
+            if member:getZone() == mob:getZone() then
+                utils.drawIn(member, drawInTable)
+            end
         end
     end
 end

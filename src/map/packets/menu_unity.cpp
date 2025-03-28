@@ -19,9 +19,11 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "menu_unity.h"
+
+#include "common/database.h"
+#include "common/logging.h"
+#include "common/sql.h"
 
 #include "entities/charentity.h"
 #include "utils/charutils.h"

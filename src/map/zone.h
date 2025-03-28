@@ -24,7 +24,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
-#include "common/taskmgr.h"
+#include "common/task_manager.h"
 #include "common/vana_time.h"
 
 #include <list>
@@ -33,10 +33,15 @@
 
 #include "battlefield_handler.h"
 #include "campaign_handler.h"
-#include "los/zone_los.h"
-#include "navmesh.h"
 #include "packets/weather.h"
 #include "trigger_area.h"
+
+//
+// Forward Declarations
+//
+
+class CNavMesh;
+class ZoneLos;
 
 enum ZONEID : uint16
 {
@@ -433,7 +438,7 @@ enum ZONE_TYPE : uint16
 };
 DECLARE_FORMAT_AS_UNDERLYING(ZONE_TYPE);
 
-enum GLOBAL_MESSAGE_TYPE
+enum GLOBAL_MESSAGE_TYPE : uint8
 {
     CHAR_INRANGE,
     CHAR_INRANGE_SELF,
@@ -460,7 +465,7 @@ enum class TELEPORT_TYPE : uint8
 };
 DECLARE_FORMAT_AS_UNDERLYING(TELEPORT_TYPE);
 
-enum ZONEMISC
+enum ZONEMISC : uint16
 {
     MISC_NONE             = 0x0000, // Able to be used in any area
     MISC_ESCAPE           = 0x0001, // Ability to use Escape Spell
@@ -537,7 +542,7 @@ typedef std::map<uint16, CBaseEntity*> EntityList_t;
 
 using QueryByNameResult_t = std::vector<CBaseEntity*>;
 
-int32 zone_update_weather(uint32 tick, CTaskMgr::CTask* PTask);
+int32 zone_update_weather(uint32 tick, CTaskManager::CTask* PTask);
 
 class CZone
 {
@@ -583,6 +588,7 @@ public:
     bool CanUseMisc(uint16 misc) const;
     void SetWeather(WEATHER weatherCondition);
     void UpdateWeather();
+    bool CheckMobsPathedBack();
 
     virtual void SpawnPCs(CCharEntity* PChar);
     virtual void SpawnMOBs(CCharEntity* PChar);
@@ -685,8 +691,8 @@ private:
     std::unordered_map<std::string, QueryByNameResult_t> m_queryByNameResults;
 
 protected:
-    CTaskMgr::CTask* ZoneTimer; // The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
-    CTaskMgr::CTask* ZoneTimerTriggerAreas;
+    CTaskManager::CTask* ZoneTimer; // The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
+    CTaskManager::CTask* ZoneTimerTriggerAreas;
 
     triggerAreaList_t m_triggerAreaList;
 

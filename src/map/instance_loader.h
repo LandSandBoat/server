@@ -23,7 +23,6 @@
 #define _CINSTANCELOADER_H
 
 #include "common/cbasetypes.h"
-#include "common/socket.h"
 
 class CCharEntity;
 class CInstance;
@@ -32,7 +31,7 @@ class CZone;
 class CInstanceLoader
 {
 public:
-    CInstanceLoader(uint16 instanceid, CCharEntity* PRequester);
+    CInstanceLoader(uint32 instanceid, CCharEntity* PRequester);
     ~CInstanceLoader();
 
     CInstance* LoadInstance();

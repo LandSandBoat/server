@@ -21,6 +21,7 @@
 
 #include "battlefield.h"
 
+#include "common/settings.h"
 #include "common/timer.h"
 
 #include "ai/ai_container.h"
@@ -203,6 +204,14 @@ void CBattlefield::SetTimeLimit(duration time)
 {
     m_TimeLimit      = time;
     m_LastPromptTime = time;
+
+    if (m_showTimer)
+    {
+        for (auto player : m_EnteredPlayers)
+        {
+            charutils::SendTimerPacket(GetZone()->GetCharByID(player), GetRemainingTime());
+        }
+    }
 }
 
 void CBattlefield::SetWipeTime(time_point time)

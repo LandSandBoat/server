@@ -16,16 +16,18 @@ mission.reward =
 local keyItemOnMobDeath =
 {
     onMobDeath = function(mob, player, optParams)
-        -- TODO: Mobs that grant this KI and the rate in which it drops needs to be measured further.  This
-        -- is currently set to a lower value than observed in capture.
-
-        if math.random(1, 100) <= 20 then
-            local playerZoneID = player:getZoneID()
+        -- TODO: Mobs that grant this KI and the rate in which it drops needs to be measured further.
+        if
+            player and                                     -- We need it to fetch the party.
+            (optParams.isKiller or optParams.noKiller) and -- Only run once, not once per party member
+            math.random(1, 100) <= 20                      -- This is currently set to a lower value than observed in capture.
+        then
+            local zoneID = mob:getZoneID() -- Fetch the zoneId of the mob to ensure correct zone in case of no killer.
 
             for _, partyMember in ipairs(player:getParty()) do
                 if
-                    partyMember:getZoneID() == playerZoneID and
-                    partyMember:getCurrentMission(xi.mission.log_id.SOA) == xi.mission.id.soa.THE_CHARLATAN
+                    partyMember:getZoneID() == zoneID and
+                    partyMember:getCurrentMission(xi.mission.log_id.SOA) == xi.mission.id.soa.BALAMORS_RUSE
                 then
                     npcUtil.giveKeyItem(partyMember, xi.ki.CONSUMMATE_SIMULACRUM)
                 end

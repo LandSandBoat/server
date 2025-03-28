@@ -23,6 +23,10 @@
 #define _INSTANCEUTILS_H
 
 #include "common/cbasetypes.h"
+#include "common/database.h"
+#include "common/ipp.h"
+#include "common/logging.h"
+#include "common/sql.h"
 
 class CInstanceLoader;
 class CCharEntity;
@@ -65,11 +69,11 @@ struct InstanceData_t
 
 namespace instanceutils
 {
-    void LoadInstanceList();
+    void LoadInstanceList(IPP mapIPP);
     void CheckInstance(); // Called at the end of every tick by time_server
-    void LoadInstance(uint16 instanceid, CCharEntity* PRequester);
-    auto GetInstanceData(uint16 instanceid) -> InstanceData_t;
-    bool IsValidInstanceID(uint16 instanceid);
+    void LoadInstance(uint32 instanceid, CCharEntity* PRequester);
+    auto GetInstanceData(uint32 instanceid) -> InstanceData_t;
+    bool IsValidInstanceID(uint32 instanceid);
 }; // namespace instanceutils
 
 #endif

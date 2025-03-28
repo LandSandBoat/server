@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "inventory_finish.h"
 
 CInventoryFinishPacket::CInventoryFinishPacket()

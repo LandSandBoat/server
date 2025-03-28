@@ -23,12 +23,8 @@
 
 #include "common/database.h"
 #include "common/logging.h"
-#include "common/socket.h"
 #include "common/utils.h"
 #include "common/vana_time.h"
-
-#include <cmath>
-#include <cstring>
 
 #include "entities/battleentity.h"
 
@@ -42,9 +38,8 @@
 #include "packets/synth_message.h"
 #include "packets/synth_result.h"
 
-#include "anticheat.h"
 #include "item_container.h"
-#include "map.h"
+#include "map_server.h"
 #include "roe.h"
 #include "trade_container.h"
 
@@ -480,7 +475,7 @@ namespace synthutils
 
             // Skill is involved.
             successRate     = 95;                                 // Assume sucess rate is maxed.
-            randomRoll      = xirand::GetRandomNumber(1, 100);    // Random call must be called for each involved skill.
+            randomRoll      = 1 + xirand::GetRandomNumber(100);   // Random call must be called for each involved skill. 1 to 100 both included.
             currentHQTier   = 0;                                  // This is reset at the start of every loop. "finalHQTier" is not.
             synthDifficulty = getSynthDifficulty(PChar, skillID); // Get synth difficulty for current skill.
 
@@ -601,17 +596,17 @@ namespace synthutils
                 chanceHQ = maxChanceHQ;
             }
 
-            randomRoll = xirand::GetRandomNumber(1, 100);
+            randomRoll = 1 + xirand::GetRandomNumber(100);
 
             if (randomRoll <= chanceHQ) // We HQ. Proceed to selct HQ Tier
             {
                 synthResult = SYNTHESIS_HQ;
-                randomRoll  = xirand::GetRandomNumber(1, 100);
+                randomRoll  = 1 + xirand::GetRandomNumber(100);
 
                 if (randomRoll <= 25) // 25% Chance after HQ to upgrade to HQ2
                 {
                     synthResult = SYNTHESIS_HQ2;
-                    randomRoll  = xirand::GetRandomNumber(1, 100);
+                    randomRoll  = 1 + xirand::GetRandomNumber(100);
 
                     if (randomRoll <= 25) // 25% Chance after HQ2 to upgrade to HQ3
                     {
@@ -928,7 +923,7 @@ namespace synthutils
                 nextSlotID = PChar->CraftContainer->getInvSlotID(slotID + 1);
             }
 
-            random = xirand::GetRandomNumber(1, 100);
+            random = 1 + xirand::GetRandomNumber(100);
 
             if (random <= breakChance)
             {

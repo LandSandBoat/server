@@ -23,8 +23,11 @@
 #define _CTRANSPORT_H
 
 #include "common/cbasetypes.h"
+#include "common/ipp.h"
 #include "common/singleton.h"
+
 #include "entities/npcentity.h"
+
 #include <vector>
 
 enum TRANSPORTSTATE
@@ -126,7 +129,7 @@ public:
 
     Elevator_t* getElevator(uint8 elevatorID);
 
-    void InitializeTransport();
+    void InitializeTransport(IPP mapIPP);
 
 protected:
     CTransportHandler() = default;

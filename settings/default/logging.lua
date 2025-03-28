@@ -44,8 +44,8 @@ xi.settings.logging =
     LOG_LUA     = true, -- Prints from Lua using `print()`
 
     -- Specific Debug loggers
-    -- NOTE: None of these will print unless you also have the above LOG_DEBUG setting set to true!
     DEBUG_SOCKETS        = false, -- Calls in C++: DebugSockets(...)
+    DEBUG_IPC            = false, -- Calls in C++: DebugIPC(...)
     DEBUG_NAVMESH        = false, -- Calls in C++: DebugNavmesh(...)
     DEBUG_PACKETS        = false, -- Calls in C++: DebugPackets(...)
     DEBUG_ACTIONS        = false, -- Calls in C++: DebugActions(...)
@@ -56,6 +56,7 @@ xi.settings.logging =
     DEBUG_AUCTIONS       = false, -- Special logic in auctionutils.cpp
     DEBUG_DELIVERY_BOX   = false, -- Special logic in dboxutils.cpp
     DEBUG_BAZAARS        = false, -- Additional debug logs for bazaar interactions in packet_system.cpp
+    DEBUG_PERFORMANCE    = false, -- Calls in C++: DebugPerformance(...)
 
     SQL_SLOW_QUERY_LOG_ENABLE   = true, -- true/false. If true, slow SQL queries will generate warning or error logs if they exceed the durations listed below.
     SQL_SLOW_QUERY_WARNING_TIME = 100,  -- uint (milliseconds).

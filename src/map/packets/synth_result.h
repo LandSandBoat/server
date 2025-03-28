@@ -23,10 +23,14 @@
 #define _CSYNTHRESULTMESSAGEPACKET_H
 
 #include "common/cbasetypes.h"
+#include "common/utils.h"
+
+#include "packets/synth_message.h"
 
 #include "basic.h"
 
 class CBaseEntity;
+class CCharEntity;
 
 class CSynthResultMessagePacket : public CBasicPacket
 {

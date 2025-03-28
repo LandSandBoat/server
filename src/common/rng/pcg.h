@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include "common/logging.h"
+
 // https://github.com/imneme/pcg-cpp
 #include "pcg_random.hpp"
 

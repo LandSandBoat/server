@@ -18,13 +18,13 @@
 
 ===========================================================================
 */
+
 #include "trustutils.h"
 
 #include "common/timer.h"
 #include "common/utils.h"
 
 #include <algorithm>
-#include <cmath>
 #include <cstring>
 #include <vector>
 
@@ -34,7 +34,7 @@
 #include "zoneutils.h"
 
 #include "grades.h"
-#include "map.h"
+#include "map_server.h"
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
 
@@ -320,10 +320,10 @@ namespace trustutils
                 trust->evaRank = (uint8)_sql->GetIntData(30);
 
                 // resistances
-                trust->slash_sdt  = (uint16)(_sql->GetFloatData(31) * 1000);
-                trust->pierce_sdt = (uint16)(_sql->GetFloatData(32) * 1000);
-                trust->hth_sdt    = (uint16)(_sql->GetFloatData(33) * 1000);
-                trust->impact_sdt = (uint16)(_sql->GetFloatData(34) * 1000);
+                trust->slash_sdt  = (int16)_sql->GetIntData(31);
+                trust->pierce_sdt = (int16)_sql->GetIntData(32);
+                trust->hth_sdt    = (int16)_sql->GetIntData(33);
+                trust->impact_sdt = (int16)_sql->GetIntData(34);
 
                 trust->magical_sdt = (int16)_sql->GetIntData(35); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 

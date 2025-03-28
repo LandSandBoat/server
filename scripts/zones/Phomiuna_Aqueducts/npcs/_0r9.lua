@@ -7,17 +7,9 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar('X_MARKS_THE_SPOT') == 4 then
-        player:startEvent(37)
-    elseif npc:getAnimation() == 9 then
-        npc:openDoor()
-    end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 37 then
-        player:setCharVar('X_MARKS_THE_SPOT', 5)
-    end
 end
 
 return entity

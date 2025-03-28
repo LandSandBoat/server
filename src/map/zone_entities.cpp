@@ -1882,7 +1882,7 @@ void CZoneEntities::ZoneServer(time_point tick)
 
             if (PChar->PTreasurePool)
             {
-                PChar->PTreasurePool->CheckItems(tick);
+                PChar->PTreasurePool->checkItems(tick);
             }
         }
 
@@ -1974,7 +1974,7 @@ void CZoneEntities::ZoneServer(time_point tick)
             continue;
         }
 
-        charutils::SendToZone(PChar, 2, ipp);
+        charutils::SendToZone(PChar, PChar->loc.destination);
     }
 
     if (tick > m_EffectCheckTime)

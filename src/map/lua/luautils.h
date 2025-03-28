@@ -25,7 +25,7 @@
 #include <optional>
 
 #include "common/cbasetypes.h"
-#include "common/taskmgr.h"
+#include "common/task_manager.h"
 
 #include "common/lua.h"
 extern sol::state lua;
@@ -127,7 +127,7 @@ namespace luautils
         auto findGlobalLuaFunction(const std::string& funcName) -> sol::function;
     } // namespace detail
 
-    void init();
+    void init(IPP mapIPP, bool isRunningInCI);
     void garbageCollectStep();
     void garbageCollectFull();
     void cleanup();
@@ -225,7 +225,7 @@ namespace luautils
     uint8 GetConquestBalance();
     bool  IsConquestAlliance();
     void  SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
-    void  SendLuaFuncStringToZone(uint16 zoneId, std::string const& str);
+    void  SendLuaFuncStringToZone(uint16 requestingZoneId, uint16 executorZoneId, std::string const& str);
 
     auto GetReadOnlyItem(uint32 id) -> CItem*; // Returns a read only lookup item object of the specified ID
     auto GetAbility(uint16 id) -> CAbility*;

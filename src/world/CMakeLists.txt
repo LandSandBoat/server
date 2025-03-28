@@ -4,6 +4,8 @@ set(SOURCES
     besieged_system.h
     campaign_system.cpp
     campaign_system.h
+    character_cache.cpp
+    character_cache.h
     colonization_system.cpp
     colonization_system.h
     conquest_system.cpp
@@ -12,23 +14,17 @@ set(SOURCES
     daily_tally.cpp
     http_server.cpp
     http_server.h
+    ipc_server.cpp
+    ipc_server.h
     main.cpp
-    message_handler.h
-    message_server.cpp
-    message_server.h
+    party_system.cpp
+    party_system.h
     time_server.h
     time_server.cpp
     world_server.cpp
     world_server.h
+    zone_settings.h
 )
-
-# Temporarily remove clashing old code
-# TODO: Remove this block
-list(REMOVE_ITEM SOURCES
-    ${CMAKE_SOURCE_DIR}/src/common/kernel.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/kernel.h
-    ${CMAKE_SOURCE_DIR}/src/common/socket.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/socket.h)
 
 if(UNIX)
     set(resource "")
@@ -42,7 +38,8 @@ add_executable(xi_world
 
 target_link_libraries(xi_world
     PUBLIC
-        ${EXTERNAL_LIBS}
+        ${SHARED_EXTERNAL_LIBS}
+        ${WORLD_ONLY_EXTERNAL_LIBS}
         project_options
     PRIVATE
         project_warnings

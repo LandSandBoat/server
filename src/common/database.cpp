@@ -21,10 +21,11 @@
 
 #include "database.h"
 
+#include "application.h"
 #include "logging.h"
 #include "macros.h"
 #include "settings.h"
-#include "taskmgr.h"
+#include "task_manager.h"
 
 #include <chrono>
 using namespace std::chrono_literals;
@@ -33,7 +34,7 @@ namespace
 {
     // TODO: Manual checkout and pooling of state
     // Each thread gets its own connection, so we don't need to worry about thread safety.
-    thread_local mutex_guarded<db::detail::State> state;
+    thread_local Synchronized<db::detail::State> state;
 
     // Replacement map similar to str_replace in PHP
     const std::unordered_map<char, std::string> replacements = {
@@ -94,7 +95,7 @@ auto db::detail::isConnectionIssue(const std::exception& e) -> bool
     return false;
 }
 
-mutex_guarded<db::detail::State>& db::detail::getState()
+Synchronized<db::detail::State>& db::detail::getState()
 {
     TracyZoneScoped;
 
@@ -125,10 +126,10 @@ mutex_guarded<db::detail::State>& db::detail::getState()
 auto db::detail::timer(std::string const& query) -> xi::final_action<std::function<void()>>
 {
     // clang-format off
-    const auto start = hires_clock::now();
+    const auto start = server_clock::now();
     return xi::finally<std::function<void()>>([query, start]() -> void
     {
-        const auto end      = hires_clock::now();
+        const auto end      = server_clock::now();
         const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
         if (timersEnabled && settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))
         {
@@ -149,6 +150,7 @@ auto db::queryStr(std::string const& rawQuery) -> std::unique_ptr<db::detail::Re
 {
     TracyZoneScoped;
     TracyZoneString(rawQuery);
+    // TODO: Collect up bound args and report to tracy here
 
     // clang-format off
     return detail::getState().write([&](detail::State& state) -> std::unique_ptr<db::detail::ResultSetWrapper>

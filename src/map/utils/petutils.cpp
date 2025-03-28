@@ -22,8 +22,6 @@
 #include "common/timer.h"
 #include "common/utils.h"
 
-#include <cmath>
-#include <cstring>
 #include <vector>
 
 #include "ability.h"
@@ -36,7 +34,7 @@
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
-#include "map.h"
+#include "map_server.h"
 #include "mob_spell_list.h"
 #include "notoriety_container.h"
 #include "petutils.h"
@@ -148,10 +146,10 @@ namespace petutils
                 Pet->spellList = (uint8)_sql->GetIntData(27);
 
                 // Specific Dmage Taken, as a %
-                Pet->slash_sdt  = (uint16)(_sql->GetFloatData(28) * 1000);
-                Pet->pierce_sdt = (uint16)(_sql->GetFloatData(29) * 1000);
-                Pet->hth_sdt    = (uint16)(_sql->GetFloatData(30) * 1000);
-                Pet->impact_sdt = (uint16)(_sql->GetFloatData(31) * 1000);
+                Pet->slash_sdt  = (int16)_sql->GetIntData(28);
+                Pet->pierce_sdt = (int16)_sql->GetIntData(29);
+                Pet->hth_sdt    = (int16)_sql->GetIntData(30);
+                Pet->impact_sdt = (int16)_sql->GetIntData(31);
 
                 Pet->magical_sdt = (int16)_sql->GetIntData(32); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 

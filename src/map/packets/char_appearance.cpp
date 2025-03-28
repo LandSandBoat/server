@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "char_appearance.h"
 #include "entities/charentity.h"
 

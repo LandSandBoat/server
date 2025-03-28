@@ -21,7 +21,6 @@
 
 #include "fish_ranking.h"
 
-#include "common/socket.h"
 #include "common/vana_time.h"
 
 #include "fishingcontest.h"

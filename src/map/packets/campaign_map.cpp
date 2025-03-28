@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "campaign_map.h"
 #include "campaign_system.h"
 
@@ -109,7 +107,7 @@ CCampaignPacket::CCampaignPacket(CCharEntity* PChar, CampaignState const& state,
     }
 }
 
-void CCampaignPacket::SetRegions(std::vector<CampaignRegion> regions, int start)
+void CCampaignPacket::SetRegions(const std::vector<CampaignRegion>& regions, int start)
 {
     for (int i = start; i < start + 13; i++)
     {
@@ -125,7 +123,7 @@ void CCampaignPacket::SetRegions(std::vector<CampaignRegion> regions, int start)
     }
 }
 
-void CCampaignPacket::SetNations(std::vector<CampaignNation> nations)
+void CCampaignPacket::SetNations(const std::vector<CampaignNation>& nations)
 {
     for (int i = 0; i < 7; i++)
     {

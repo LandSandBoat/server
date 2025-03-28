@@ -18,7 +18,7 @@
 
 ===========================================================================
 */
-#include "common/socket.h"
+
 #include "common/utils.h"
 
 #include "entity_set_name.h"

@@ -30,24 +30,24 @@ namespace dailytally
 {
     void UpdateDailyTallyPoints()
     {
-        uint16 dailyTallyLimit  = settings::get<uint16>("main.DAILY_TALLY_LIMIT");
-        uint16 dailyTallyAmount = settings::get<uint16>("main.DAILY_TALLY_AMOUNT");
+        int32 dailyTallyLimit  = std::clamp<int32>(settings::get<int32>("main.DAILY_TALLY_LIMIT"), std::numeric_limits<uint16>::min(), std::numeric_limits<uint16>::max());
+        int32 dailyTallyAmount = std::clamp<int32>(settings::get<int32>("main.DAILY_TALLY_AMOUNT"), std::numeric_limits<uint16>::min(), std::numeric_limits<uint16>::max());
 
         if (!db::preparedStmt("UPDATE char_points "
                               "SET char_points.daily_tally = LEAST(?, char_points.daily_tally + ?) "
                               "WHERE char_points.daily_tally > -1",
                               dailyTallyLimit, dailyTallyAmount))
         {
-            ShowError("Failed to update daily tally points");
+            ShowErrorFmt("Failed to update daily tally points");
         }
         else
         {
-            ShowDebug("Distributed daily tally points");
+            ShowDebugFmt("Distributed daily tally points");
         }
 
         if (!db::preparedStmt("DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed'"))
         {
-            ShowError("Failed to delete daily tally char_vars entries");
+            ShowErrorFmt("Failed to delete daily tally char_vars entries");
         }
     }
 } // namespace dailytally

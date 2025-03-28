@@ -119,7 +119,7 @@ INSERT INTO `zone_settings` VALUES (74,256,'127.0.0.1',54230,'Arrapago_Remnants'
 INSERT INTO `zone_settings` VALUES (75,256,'127.0.0.1',54230,'Bhaflau_Remnants',148,148,115,139,0,0.00,6297);
 INSERT INTO `zone_settings` VALUES (76,256,'127.0.0.1',54230,'Silver_Sea_Remnants',148,148,115,139,0,0.00,6297);
 INSERT INTO `zone_settings` VALUES (77,256,'127.0.0.1',54230,'Nyzul_Isle',148,148,144,144,0,0.00,6297);
-INSERT INTO `zone_settings` VALUES (78,0,'127.0.0.1',54230,'Hazhalm_Testing_Grounds',0,0,0,0,0,0.00,6296);
+INSERT INTO `zone_settings` VALUES (78,0,'127.0.0.1',54230,'Hazhalm_Testing_Grounds',0,0,0,0,0,0.00,4265);
 INSERT INTO `zone_settings` VALUES (79,2,'127.0.0.1',54230,'Caedarva_Mire',173,173,101,138,0,0.00,2206);
 INSERT INTO `zone_settings` VALUES (80,1,'127.0.0.1',54230,'Southern_San_dOria_[S]',254,254,254,254,0,0.00,4200);
 INSERT INTO `zone_settings` VALUES (81,2,'127.0.0.1',54230,'East_Ronfaure_[S]',251,251,101,215,0,0.00,2206);

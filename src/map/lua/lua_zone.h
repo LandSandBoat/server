@@ -24,6 +24,7 @@
 
 #include "common/cbasetypes.h"
 #include "luautils.h"
+#include "zone.h"
 
 class CZone;
 class CLuaZone

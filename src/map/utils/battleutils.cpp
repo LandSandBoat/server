@@ -19,12 +19,16 @@
 ===========================================================================
 */
 
+#include "battleutils.h"
+
+#include "common/database.h"
+#include "common/logging.h"
+#include "common/sql.h"
 #include "common/timer.h"
 #include "common/utils.h"
 
 #include <algorithm>
 #include <array>
-#include <cmath>
 #include <cstring>
 #include <unordered_map>
 
@@ -44,7 +48,6 @@
 #include "alliance.h"
 #include "attack.h"
 #include "attackutils.h"
-#include "battleutils.h"
 #include "charutils.h"
 #include "enmity_container.h"
 #include "entities/battleentity.h"
@@ -55,10 +58,12 @@
 #include "items.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
-#include "map.h"
+#include "los/zone_los.h"
+#include "map_server.h"
 #include "mob_modifier.h"
 #include "mobskill.h"
 #include "modifier.h"
+#include "navmesh.h"
 #include "notoriety_container.h"
 #include "packets/char_abilities.h"
 #include "packets/char_recast.h"
@@ -512,6 +517,7 @@ namespace battleutils
         return g_PMobSkillLists[ListID];
     }
 
+    // TODO: Apply fire in generous quantities. Replace with existing lua functions.
     int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 Tier, uint8 element)
     {
         int32 damage = 0;
@@ -530,10 +536,10 @@ namespace battleutils
         {
             // Tier 2 enspells calculate the damage on each hit and increment the potency in Mod::ENSPELL_DMG per hit
             uint16 skill = PAttacker->GetSkill(SKILL_ENHANCING_MAGIC);
-            uint16 cap   = 3 + ((6 * skill) / 100);
+            uint16 cap   = 3 + 6 * skill / 100;
             if (skill > 200)
             {
-                cap = 5 + ((5 * skill) / 100);
+                cap = 5 + 5 * skill / 100;
             }
             cap *= 2;
 
@@ -633,10 +639,8 @@ namespace battleutils
             {
                 // see https://bugs.llvm.org/show_bug.cgi?id=18767#c1 ; essentially, [min, max] range on this RNG call excludes the max
                 // so we must add +1 to our max to achieve the range we want
-                max = max + 1;
-
                 // TODO: verify gaussian vs linear distribution for RNG from retail
-                damage = (int32)xirand::GetRandomNumber<double>(min, max);
+                damage = (int32)xirand::GetRandomNumber<double>(min, max + 1);
             }
         }
 
@@ -2121,16 +2125,16 @@ namespace battleutils
                 switch (damageType)
                 {
                     case DAMAGE_TYPE::PIERCING:
-                        damage = (damage * (PDefender->getMod(Mod::PIERCE_SDT))) / 1000;
+                        damage = damage * (1 + PDefender->getMod(Mod::PIERCE_SDT) / 10000);
                         break;
                     case DAMAGE_TYPE::SLASHING:
-                        damage = (damage * (PDefender->getMod(Mod::SLASH_SDT))) / 1000;
+                        damage = damage * (1 + PDefender->getMod(Mod::SLASH_SDT) / 10000);
                         break;
                     case DAMAGE_TYPE::IMPACT:
-                        damage = (damage * (PDefender->getMod(Mod::IMPACT_SDT))) / 1000;
+                        damage = damage * (1 + PDefender->getMod(Mod::IMPACT_SDT) / 10000);
                         break;
                     case DAMAGE_TYPE::HTH:
-                        damage = (damage * (PDefender->getMod(Mod::HTH_SDT))) / 1000;
+                        damage = damage * (1 + PDefender->getMod(Mod::HTH_SDT) / 10000);
                         break;
                     default:
                         break;
@@ -2138,7 +2142,7 @@ namespace battleutils
             }
             else
             {
-                damage = (damage * (PDefender->getMod(Mod::HTH_SDT))) / 1000;
+                damage = damage * (1 + PDefender->getMod(Mod::HTH_SDT) / 10000);
             }
 
             if (isBlocked)
@@ -2418,6 +2422,16 @@ namespace battleutils
             PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_DEFENSE_BOOST) &&
             PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DEFENSE_BOOST)->GetSubPower() != 0 &&
             infront(PAttacker->loc.p, PDefender->loc.p, PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DEFENSE_BOOST)->GetSubPower()))
+        {
+            damage = 0;
+        }
+
+        // Handle damage nullification.
+        if (attackType == ATTACK_TYPE::RANGED && xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_RANGED_DAMAGE))
+        {
+            damage = 0;
+        }
+        else if (attackType == ATTACK_TYPE::PHYSICAL && xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_PHYSICAL_DAMAGE))
         {
             damage = 0;
         }
@@ -3991,8 +4005,14 @@ namespace battleutils
         //            TODO:     × (1 + Day/Weather bonuses)
         //            TODO:     × (1 + Staff Affinity)
 
-        auto damage = (int32)floor((double)(abs(lastSkillDamage)) * g_SkillChainDamageModifiers[chainLevel][chainCount] / 1000 *
-                                   (100 + PAttacker->getMod(Mod::SKILLCHAINBONUS)) / 100 * (10000 + PAttacker->getMod(Mod::SKILLCHAINDMG)) / 10000);
+        const auto closingDamage      = (double)(abs(lastSkillDamage));
+        const auto skillchainLevel    = g_SkillChainDamageModifiers[chainLevel][chainCount] / 1000.0f;
+        const auto skillchainBonus    = (100 + PAttacker->getMod(Mod::SKILLCHAINBONUS)) / 100.0f;
+        const auto skillchainDmgBonus = (10000 + PAttacker->getMod(Mod::SKILLCHAINDMG)) / 10000.0f;
+        const auto dayWeatherBonus    = 1.0f; // TODO: Implement day/weather bonuses
+        const auto staffAffinity      = 1.0f; // TODO: Implement staff affinity
+
+        auto damage = (int32)floor(closingDamage * skillchainLevel * skillchainBonus * skillchainDmgBonus * dayWeatherBonus * staffAffinity);
 
         auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
         if (PChar && PChar->StatusEffectContainer->HasStatusEffect(EFFECT_INNIN) && behind(PChar->loc.p, PDefender->loc.p, 64))
@@ -4261,42 +4281,32 @@ namespace battleutils
 
         if (taUser->PParty != nullptr)
         {
-            std::vector<CParty*> taPartyList;
-            if (taUser->PParty->m_PAlliance != nullptr)
-            {
-                taPartyList = taUser->PParty->m_PAlliance->partyList;
-            }
-            else
-            {
-                taPartyList.emplace_back(taUser->PParty);
-            }
-
             // Collect all potential TA targets who are closer to the mob than the TA user
-            for (auto&& party : taPartyList)
-            {
-                for (auto&& PMember : party->members)
-                {
-                    float distTAtarget = distance(PMember->loc.p, PMob->loc.p);
-                    // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
-                    if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
-                    {
-                        taTargetList.emplace_back(distTAtarget, PMember);
-                    }
 
-                    if (auto* PChar = dynamic_cast<CCharEntity*>(PMember))
+            // clang-format off
+            taUser->ForAlliance([&PMob, distTAmob, &taTargetList](CBattleEntity* PMember)
+            {
+                float distTAtarget = distance(PMember->loc.p, PMob->loc.p);
+                // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
+                if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
+                {
+                    taTargetList.emplace_back(distTAtarget, PMember);
+                }
+
+                if (auto* PChar = dynamic_cast<CCharEntity*>(PMember))
+                {
+                    for (auto* PTrust : PChar->PTrusts)
                     {
-                        for (auto* PTrust : PChar->PTrusts)
+                        distTAtarget = distance(PTrust->loc.p, PMob->loc.p);
+                        // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
+                        if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
                         {
-                            float distTAtarget = distance(PTrust->loc.p, PMob->loc.p);
-                            // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
-                            if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
-                            {
-                                taTargetList.emplace_back(distTAtarget, PTrust);
-                            }
+                            taTargetList.emplace_back(distTAtarget, PTrust);
                         }
                     }
                 }
-            }
+            });
+            // clang-format on
         }
 
         // Check TA user's fellow
@@ -4723,7 +4733,7 @@ namespace battleutils
                 mob->PEnmityContainer->UpdateEnmity(original, 0, 0, true, true);
             }
 
-            if (!mob->m_IsClaimable)
+            if (mob->getMobMod(MOBMOD_CLAIM_TYPE) == static_cast<int16>(ClaimType::Unclaimable))
             {
                 return;
             }

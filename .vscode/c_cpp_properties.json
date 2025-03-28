@@ -5,6 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/ext/**",
                 "${workspaceFolder}/src/**",
+                "${workspaceFolder}/build/_deps/**",
                 "${workspaceFolder}/build/generated/**"
             ],
             "defines": [],
@@ -16,7 +17,9 @@
             "name": "OSX",
             "includePath": [
                 "${workspaceFolder}/ext/**",
-                "${workspaceFolder}/src/**"
+                "${workspaceFolder}/src/**",
+                "${workspaceFolder}/build/_deps/**",
+                "${workspaceFolder}/build/generated/**"
             ],
             "defines": [],
             "cStandard":"c23",
@@ -28,7 +31,9 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/ext/**",
-                "${workspaceFolder}/src/**"
+                "${workspaceFolder}/src/**",
+                "${workspaceFolder}/build/_deps/**",
+                "${workspaceFolder}/build/generated/**"
             ],
             "defines": [],
             "cStandard":"c23",

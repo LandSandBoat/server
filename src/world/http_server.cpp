@@ -21,6 +21,7 @@
 
 #include "http_server.h"
 
+#include "common/async.h"
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/settings.h"
@@ -39,8 +40,6 @@ HTTPServer::HTTPServer()
         return;
     }
 
-    ts = std::make_unique<ts::task_system>(1);
-
     // NOTE: Everything registered in here happens off the main thread, so lock any global resources
     //     : you might be using.
 
@@ -49,8 +48,10 @@ HTTPServer::HTTPServer()
     auto host = settings::get<std::string>("network.HTTP_HOST");
     auto port = settings::get<uint16>("network.HTTP_PORT");
 
+    ShowInfoFmt("Starting HTTP Server on http://{}:{}/api", host, port);
+
     // clang-format off
-    ts->schedule([this, host, port]()
+    Async::getInstance()->submit([this, host, port]()
     {
         m_httpServer.Get("/api", [&](httplib::Request const& req, httplib::Response& res)
         {
@@ -169,17 +170,16 @@ HTTPServer::HTTPServer()
             // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
             if (res.status >= 500)
             {
-                ShowError(fmt::format("Server Error: {} ({})", res.status, httplib::status_message(res.status)));
+                ShowErrorFmt("Server Error: {} ({})", res.status, httplib::status_message(res.status));
                 return;
             }
             else if (res.status >= 400)
             {
-                ShowError(fmt::format("Client Error: {} ({})", res.status, httplib::status_message(res.status)));
+                ShowErrorFmt("Client Error: {} ({})", res.status, httplib::status_message(res.status));
                 return;
             }
         });
 
-        ShowInfo(fmt::format("Starting HTTP Server on http://{}:{}/api", host, port));
         m_httpServer.listen(host, port);
     });
     // clang-format on
@@ -201,7 +201,7 @@ void HTTPServer::LockingUpdate()
     // clang-format off
     m_apiDataCache.write([&](auto& apiDataCache)
     {
-        ShowInfo("API data is stale. Updating...");
+        ShowInfoFmt("API data is stale. Updating...");
 
         // Total active sessions
         {

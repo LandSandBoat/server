@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:addStatusEffect(xi.effect.BLINK, 3, 0, 180)
-    mob:setMod(xi.mod.DMG, 20000)
+    mob:setMod(xi.mod.DMG, 10000)
     mob:setMod(xi.mod.HP, 0)
 end
 

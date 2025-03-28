@@ -19,12 +19,9 @@
 ===========================================================================
 */
 
-#ifndef _TIMER_H
-#define _TIMER_H
+#pragma once
 
 #include "common/cbasetypes.h"
-
-#define DIFF_TICK(a, b) ((uint32)((a) - (b)))
 
 uint32 gettick(void);
 uint32 gettick_nocache(void);
@@ -36,4 +33,4 @@ void timer_final(void);
 
 uint32 getCurrentTimeMs();
 
-#endif
+auto getMilliseconds(const duration& d) -> int64;

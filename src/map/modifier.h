@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
   Copyright (c) 2010-2015 Darkstar Dev Teams
   This program is free software: you can redistribute it and/or modify
@@ -199,12 +199,10 @@ enum class Mod
     RECEIVED_DAMAGE_VARIANT = 222, // The variance that you want the damage cap to changed by. Ex: If you want the damage to be from 90-100 instead of a flat 100 you can set this to 10. It will random the value between 90-100 if the damage is above 100.
 
     // Specific Damage Taken vs physical damage type
-    // Value is stored as a percentage of damage reduction (to within 1000)
-    // Example: 1000 = 100%, 875= 87.5%
-    SLASH_SDT  = 49, // Slash Damage Taken
-    PIERCE_SDT = 50, // Piercing Damage Taken
-    IMPACT_SDT = 51, // Impact Damage Taken
-    HTH_SDT    = 52, // Hand-To-Hand Damage Taken
+    SLASH_SDT  = 49, // Slash Damage Taken. Base 10000. 100% = 0
+    PIERCE_SDT = 50, // Piercing Damage Taken. Base 10000. 100% = 0
+    IMPACT_SDT = 51, // Impact Damage Taken. Base 10000. 100% = 0
+    HTH_SDT    = 52, // Hand-To-Hand Damage Taken. Base 10000. 100% = 0
 
     // Elemental SDT. BASE 10000. This has been repeatedly mixed up with RESISTANCE - be careful!
     FIRE_SDT    = 54, // Fire Damage Taken
@@ -1072,12 +1070,14 @@ enum class Mod
 
     DESPAWN_TIME_REDUCTION = 1134, // Reduction in seconds. 1 = 1 second less to despawn.
 
+    PARRY_HP_RECOVERY = 1135, // Recover <Mod Value> HP on successful parry.
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1135 and onward
+    // SPARE IDs: 1136 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

@@ -12,6 +12,7 @@ effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
+    xi.job_utils.corsair.onRollEffectLose(target, effect)
 end
 
 return effectObject

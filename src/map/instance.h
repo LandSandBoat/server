@@ -37,7 +37,7 @@ enum INSTANCE_STATUS
 class CInstance : public CZoneEntities
 {
 public:
-    CInstance(CZone*, uint16 instanceid);
+    CInstance(CZone*, uint32 instanceid);
     ~CInstance();
 
     void RegisterChar(CCharEntity*);
@@ -81,7 +81,7 @@ public:
 private:
     void LoadInstance();
 
-    uint16              m_instanceid{ 0 };
+    uint32              m_instanceid{ 0 };
     uint16              m_entrance{ 0 };
     std::string         m_instanceName;
     CZone*              m_zone;

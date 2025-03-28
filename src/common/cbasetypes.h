@@ -1,14 +1,35 @@
-#ifndef _CBASETYPES_H_
-#define _CBASETYPES_H_
+/*
+===========================================================================
+
+  Copyright (c) 2010-2015 Darkstar Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#pragma once
 
 #include <algorithm>
 #include <cctype>
 #include <climits>
 #include <cstddef>
 #include <cstdint>
+#include <span>
 #include <utility>
+#include <vector>
 
-#include "logging.h"
 #include "macros.h"
 
 // typedef/using
@@ -56,9 +77,10 @@ using server_clock = std::chrono::system_clock;
 using time_point   = server_clock::time_point;
 using duration     = server_clock::duration;
 
-using hires_clock      = std::chrono::high_resolution_clock;
-using hires_time_point = server_clock::time_point;
-using hires_duration   = server_clock::duration;
+// Not used so as not to accidentally mix with server_clock
+// using hires_clock      = std::chrono::high_resolution_clock;
+// using hires_time_point = hires_clock::time_point;
+// using hires_duration   = hires_clock::duration;
 
 #include <queue>
 
@@ -78,5 +100,3 @@ template <class T>
 using MinHeapPtr = std::priority_queue<T, std::vector<T>, PtrGreater<T>>;
 
 #include "tracy.h"
-
-#endif /* _CBASETYPES_H_ */

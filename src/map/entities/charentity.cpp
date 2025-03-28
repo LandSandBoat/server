@@ -66,6 +66,7 @@
 #include "char_recast_container.h"
 #include "charentity.h"
 #include "conquest_system.h"
+#include "ipc_client.h"
 #include "item_container.h"
 #include "items/item_furnishing.h"
 #include "items/item_usable.h"
@@ -73,7 +74,6 @@
 #include "job_points.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
-#include "message.h"
 #include "mob_modifier.h"
 #include "mobskill.h"
 #include "modifier.h"
@@ -278,7 +278,7 @@ CCharEntity::~CCharEntity()
     if (PTreasurePool != nullptr)
     {
         // remove myself
-        PTreasurePool->DelMember(this);
+        PTreasurePool->delMember(this);
     }
 
     ClearTrusts(); // trusts don't survive zone lines
@@ -333,17 +333,17 @@ CCharEntity::~CCharEntity()
 
     if (PParty && loc.destination != 0 && m_moghouseID == 0)
     {
-        uint8 data[4]{};
-
         if (PParty->m_PAlliance)
         {
-            ref<uint32>(data, 0) = PParty->m_PAlliance->m_AllianceID;
-            message::send(MSG_ALLIANCE_RELOAD, data, sizeof(data), nullptr);
+            message::send(ipc::AllianceReload{
+                .allianceId = PParty->m_PAlliance->m_AllianceID,
+            });
         }
         else
         {
-            ref<uint32>(data, 0) = PParty->GetPartyID();
-            message::send(MSG_PT_RELOAD, data, sizeof(data), nullptr);
+            message::send(ipc::PartyReload{
+                .partyId = PParty->GetPartyID(),
+            });
         }
     }
 
@@ -2389,6 +2389,14 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
         return true;
     }
 
+    if (auto* PMob = dynamic_cast<CMobEntity*>(PBattleTarget))
+    {
+        if (PMob->getMobMod(MOBMOD_CLAIM_TYPE) == static_cast<int16>(ClaimType::NonExclusive))
+        {
+            return true;
+        }
+    }
+
     bool found = false;
 
     // clang-format off
@@ -3314,6 +3322,34 @@ int32 CCharEntity::getCharVar(std::string const& charVarName)
 
     charVarCache[charVarName] = value;
     return value.first;
+}
+
+auto CCharEntity::getCharVarsWithPrefix(std::string const& prefix) -> std::vector<std::pair<std::string, int32>>
+{
+    const uint32 currentTimestamp = CVanaTime::getInstance()->getSysTime();
+
+    std::vector<std::pair<std::string, int32>> charVars;
+
+    const auto rset = db::preparedStmt("SELECT varname, value, expiry FROM char_vars WHERE charid = ? AND varname LIKE CONCAT(?, '%')",
+                                       this->id, prefix);
+    if (rset && rset->rowsCount())
+    {
+        while (rset->next())
+        {
+            const auto varname = rset->get<std::string>("varname");
+            const auto value   = rset->get<int32>("value");
+            const auto expiry  = rset->get<uint32>("expiry");
+
+            if (expiry == 0 || expiry > currentTimestamp)
+            {
+                charVarCache[varname] = { value, expiry };
+
+                charVars.emplace_back(varname, value);
+            }
+        }
+    }
+
+    return charVars;
 }
 
 void CCharEntity::setCharVar(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)

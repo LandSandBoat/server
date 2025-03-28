@@ -11,13 +11,17 @@
 #include "common/database.h"
 #include "common/timer.h"
 
-#include "map/item_container.h"
-#include "map/message.h"
+#include "map/packet_system.h"
 #include "map/packets/auction_house.h"
+#include "map/packets/basic.h"
 #include "map/packets/chat_message.h"
 #include "map/packets/inventory_finish.h"
 #include "map/utils/charutils.h"
 #include "map/utils/itemutils.h"
+
+#include "map/ipc_client.h"
+#include "map/item_container.h"
+#include "map/map_session.h"
 #include "map/zone.h"
 
 #include <functional>
@@ -25,7 +29,7 @@
 
 extern uint8 PacketSize[512];
 
-extern std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
+extern std::function<void(MapSession* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
 
 class AHAnnouncementModule : public CPPModule
 {
@@ -35,7 +39,7 @@ class AHAnnouncementModule : public CPPModule
 
         const auto originalHandler = PacketParser[0x04E];
 
-        const auto newHandler = [originalHandler](map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
+        const auto newHandler = [originalHandler](MapSession* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
         {
             TracyZoneScoped;
 
@@ -77,6 +81,8 @@ class AHAnnouncementModule : public CPPModule
 
                         if (gil != nullptr && gil->isType(ITEM_CURRENCY) && gil->getQuantity() >= price && gil->getReserve() == 0)
                         {
+                            bool itemPurchasedSuccessfully = false;
+
                             // clang-format off
                             const auto success = db::transaction([&]()
                             {
@@ -162,13 +168,19 @@ class AHAnnouncementModule : public CPPModule
                                             name[0] = std::toupper(name[0]);
 
                                             // Send message to seller!
-                                            message::send(sellerId, std::make_unique<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3,
-                                                fmt::format("Your '{}' has sold to {} for {} gil!", name, PChar->name, price).c_str(), ""));
+                                            message::send(ipc::ChatMessageCustom{
+                                                .recipientId = sellerId,
+                                                .senderName  = "",
+                                                .message     = fmt::format("Your '{}' has sold to {} for {} gil!", name, PChar->getName(), price),
+                                                .messageType = MESSAGE_SYSTEM_3,
+                                            });
                                         }
+
+                                        itemPurchasedSuccessfully = true;
                                     }
                                 }
                             });
-                            if (success)
+                            if (itemPurchasedSuccessfully && success)
                             {
                                 return;
                             }

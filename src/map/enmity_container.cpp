@@ -392,17 +392,27 @@ void CEnmityContainer::SetVE(CBattleEntity* PEntity, const int32 amount)
 void CEnmityContainer::UpdateEnmityFromDamage(CBattleEntity* PEntity, int32 Damage)
 {
     TracyZoneScoped;
-    Damage          = (Damage < 1 ? 1 : Damage);
-    int16 damageMod = battleutils::GetEnmityModDamage(m_EnmityHolder->GetMLevel());
 
-    int32 CE = (int32)(80.f / damageMod * Damage);
-    int32 VE = (int32)(240.f / damageMod * Damage);
-
-    UpdateEnmity(PEntity, CE, VE);
-
-    if (m_EnmityHolder && m_EnmityHolder->m_HiPCLvl < PEntity->GetMLevel())
+    if (PEntity && m_EnmityHolder)
     {
-        m_EnmityHolder->m_HiPCLvl = PEntity->GetMLevel();
+        // Don't add enmity to yourself
+        if (m_EnmityHolder->id == PEntity->id)
+        {
+            return;
+        }
+
+        Damage          = (Damage < 1 ? 1 : Damage);
+        int16 damageMod = battleutils::GetEnmityModDamage(m_EnmityHolder->GetMLevel());
+
+        int32 CE = (int32)(80.f / damageMod * Damage);
+        int32 VE = (int32)(240.f / damageMod * Damage);
+
+        UpdateEnmity(PEntity, CE, VE);
+
+        if (m_EnmityHolder->m_HiPCLvl < PEntity->GetMLevel())
+        {
+            m_EnmityHolder->m_HiPCLvl = PEntity->GetMLevel();
+        }
     }
 }
 
@@ -488,7 +498,7 @@ void CEnmityContainer::DecayEnmity()
     for (auto& it : m_EnmityList)
     {
         EnmityObject_t& PEnmityObject = it.second;
-        constexpr int   decay_amount  = (int)(60 / server_tick_rate);
+        constexpr int   decay_amount  = (int)(60 / kLogicUpdateRate); // TODO: This should decay relative to the delta tick time?
 
         PEnmityObject.VE -= PEnmityObject.VE > decay_amount ? decay_amount : PEnmityObject.VE;
     }

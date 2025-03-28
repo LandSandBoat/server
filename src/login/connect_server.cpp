@@ -21,83 +21,68 @@
 
 #include "connect_server.h"
 
+namespace
+{
+    auto getZMQEndpointString() -> std::string
+    {
+        return fmt::format("tcp://{}:{}", settings::get<std::string>("network.ZMQ_IP"), settings::get<uint16>("network.ZMQ_PORT"));
+    }
+
+    auto getZMQRoutingId() -> uint64
+    {
+        // We will only ever have a single login server, so we can use different logic for the routing id
+
+        const auto ip   = str2ip(settings::get<std::string>("network.LOGIN_AUTH_IP"));
+        const auto port = settings::get<uint16>("network.LOGIN_AUTH_PORT");
+
+        return IPP(ip, port).getRawIPP();
+    }
+} // namespace
+
 ConnectServer::ConnectServer(int argc, char** argv)
 : Application("connect", argc, argv)
+, zmqDealerWrapper_(getZMQEndpointString(), getZMQRoutingId())
 {
-    asio::io_context io_context;
+}
 
-    // clang-format off
-    gConsoleService->RegisterCommand("stats", "Print server runtime statistics",
-    [](std::vector<std::string>& inputs)
-    {
-        size_t uniqueIPs      = loginHelpers::getAuthenticatedSessions().size();
-        size_t uniqueAccounts = 0;
+ConnectServer::~ConnectServer() = default;
 
-        for (auto& ipAddrMap: loginHelpers::getAuthenticatedSessions())
-        {
-            uniqueAccounts += loginHelpers::getAuthenticatedSessions()[ipAddrMap.first].size();
-        }
-        ShowInfo("Serving %u IP addresses with %u accounts\n", uniqueIPs, uniqueAccounts);
-    });
+void ConnectServer::run()
+{
+    // Generate a self signed cert if one doesn't exist.
+    certificateHelpers::generateSelfSignedCert();
 
-    gConsoleService->RegisterCommand("exit", "Safely close the login server",
-    [&](std::vector<std::string>& inputs)
-    {
-        m_RequestExit = true;
-        io_context.stop();
-        gConsoleService->stop();
-    });
-    // clang-format on
+    ShowInfo("creating ports");
 
-#ifndef _WIN32
-    rlimit limits{};
+    // TODO: Why can't the ASIO setup be done in the constructor?
 
-    uint32 newRLimit = 10240;
+    // Handler creates session of type T for specific port on connection.
+    handler<auth_session> auth(io_context_, settings::get<uint32>("network.LOGIN_AUTH_PORT"), zmqDealerWrapper_);
+    handler<view_session> view(io_context_, settings::get<uint32>("network.LOGIN_VIEW_PORT"), zmqDealerWrapper_);
+    handler<data_session> data(io_context_, settings::get<uint32>("network.LOGIN_DATA_PORT"), zmqDealerWrapper_);
+    asio::steady_timer    cleanup_callback(io_context_, std::chrono::minutes(15));
 
-    // Get old limits
-    if (getrlimit(RLIMIT_NOFILE, &limits) == 0)
-    {
-        // Increase open file limit, which includes sockets, to newRLimit. This only effects the current process and child processes
-        limits.rlim_cur = newRLimit;
-        if (setrlimit(RLIMIT_NOFILE, &limits) == -1)
-        {
-            ShowError("Failed to increase rlim_cur to %d", newRLimit);
-        }
-    }
-#endif
-    xirand::seed();
+    cleanup_callback.async_wait(std::bind(&ConnectServer::periodicCleanup, this, std::placeholders::_1, &cleanup_callback));
+
+    Application::markLoaded();
 
     try
     {
-        // Generate a self signed cert if one doesn't exist.
-        certificateHelpers::generateSelfSignedCert();
-
-        ShowInfo("creating ports");
-
-        // Handler creates session of type T for specific port on connection.
-        handler<auth_session> auth(io_context, settings::get<uint32>("network.LOGIN_AUTH_PORT"));
-        handler<view_session> view(io_context, settings::get<uint32>("network.LOGIN_VIEW_PORT"));
-        handler<data_session> data(io_context, settings::get<uint32>("network.LOGIN_DATA_PORT"));
-        asio::steady_timer    cleanup_callback(io_context, std::chrono::minutes(15));
-
-        cleanup_callback.async_wait(std::bind(&ConnectServer::periodicCleanup, this, std::placeholders::_1, &cleanup_callback));
-
         // NOTE: io_context.run() takes over and blocks this thread. Anything after this point will only fire
         // if io_context finishes!
-        ShowInfo("starting io_context");
-
+        //
         // This busy loop looks nasty, however --
         // https://think-async.com/Asio/asio-1.24.0/doc/asio/reference/io_service.html
-        /* If an exception is thrown from a handler, the exception is allowed to propagate through the throwing thread's invocation of
-            run(), run_one(), run_for(), run_until(), poll() or poll_one(). No other threads that are calling any of these functions are affected.
-            It is then the responsibility of the application to catch the exception.
-        */
+        //
+        // If an exception is thrown from a handler, the exception is allowed to propagate through the throwing thread's invocation of
+        // run(), run_one(), run_for(), run_until(), poll() or poll_one(). No other threads that are calling any of these functions are affected.
+        // It is then the responsibility of the application to catch the exception.
 
-        while (Application::IsRunning())
+        while (Application::isRunning())
         {
             try
             {
-                io_context.run();
+                io_context_.run();
                 break;
             }
             catch (std::exception& e)
@@ -111,6 +96,25 @@ ConnectServer::ConnectServer(int argc, char** argv)
     {
         ShowError(fmt::format("Outer fatal: {}", e.what()));
     }
+}
+
+void ConnectServer::loadConsoleCommands()
+{
+    // clang-format off
+    consoleService_->registerCommand("stats", "Print server runtime statistics",
+    [](std::vector<std::string>& inputs)
+    {
+        size_t uniqueIPs      = loginHelpers::getAuthenticatedSessions().size();
+        size_t uniqueAccounts = 0;
+
+        for (auto& ipAddrMap: loginHelpers::getAuthenticatedSessions())
+        {
+            uniqueAccounts += loginHelpers::getAuthenticatedSessions()[ipAddrMap.first].size();
+        }
+
+        ShowInfo("Serving %u IP addresses with %u accounts\n", uniqueIPs, uniqueAccounts);
+    });
+    // clang-format on
 }
 
 void ConnectServer::periodicCleanup(const asio::error_code& error, asio::steady_timer* timer)
@@ -150,7 +154,7 @@ void ConnectServer::periodicCleanup(const asio::error_code& error, asio::steady_
             }
         }
 
-        if (Application::IsRunning())
+        if (Application::isRunning())
         {
             // reset timer
             timer->expires_at(timer->expiry() + std::chrono::minutes(15));
