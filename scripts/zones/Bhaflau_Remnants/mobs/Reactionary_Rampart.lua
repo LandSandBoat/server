@@ -136,11 +136,11 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.UDMGMAGIC, 1600)
     mob:setMod(xi.mod.UDMGPHYS, 160)
     mob:setMod(xi.mod.UDMGRANGE, 160)
-    
+
     -- TODO:
     -- mob:addStatusEffect(xi.effect.NO_REST, 1, 0, 0)
     mob:setMobMod(xi.mobMod.DETECTION, xi.detects.SCENT)
-    
+
     -- 70/30 split to be able to spawn a NM or not into rotation
     local canSpawnNM = 700
     if math.random(1000) > canSpawnNM then
@@ -207,7 +207,7 @@ entity.onMobFight = function(mob, target)
                 if not pet then
                     return
                 end
-                
+
                 local targ = mobArg:getTarget()
                 if targ then
                     pet:updateEnmity(targ)
