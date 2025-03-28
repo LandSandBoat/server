@@ -37,7 +37,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-	if optParams.isKiller or optParams.noKiller then
+    if optParams.isKiller or optParams.noKiller then
         local instance = mob:getInstance()
 
         if instance and mob:getLocalVar('timeUp') == 0 then

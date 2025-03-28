@@ -28,7 +28,6 @@ entity.onMobSpawn = function(mob)
             mob:setMod(xi.mod.DMGBREATH, -50)
         end
 
-
         mob:addListener('ITEM_DROPS', 'PUDDING_ITEM_DROPS', function(mobArg, loot)
             local cell1, cell2, cell3 = xi.zoneUtil.pickList(mobArg)
             local id = mobArg:getID()
@@ -62,7 +61,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-	if optParams.isKiller or optParams.noKiller then
+    if optParams.isKiller or optParams.noKiller then
         xi.salvage.spawnTempChest(mob)
     end
 end

@@ -110,7 +110,6 @@ local pos =
     },
 }
 
-
 ---@type TNpcEntity
 local entity = {}
 

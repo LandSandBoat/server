@@ -31,7 +31,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-	if optParams.isKiller or optParams.noKiller then
+    if optParams.isKiller or optParams.noKiller then
         xi.salvage.spawnTempChest(mob)
     end
 end

@@ -21,9 +21,12 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-	if optParams.isKiller or optParams.noKiller then
-	    xi.salvage.handleSocketCells(mob, player)
-	end
+    if
+        optParams.isKiller or
+        optParams.noKiller
+    then
+        xi.salvage.handleSocketCells(mob, player)
+    end
 end
 
 return entity

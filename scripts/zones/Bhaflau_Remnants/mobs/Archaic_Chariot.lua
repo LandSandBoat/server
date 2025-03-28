@@ -13,7 +13,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-	if optParams.isKiller or optParams.noKiller then
+    if optParams.isKiller or optParams.noKiller then
         local instance = mob:getInstance()
         if instance then
             instance:setLocalVar('bossModifier', instance:getProgress())

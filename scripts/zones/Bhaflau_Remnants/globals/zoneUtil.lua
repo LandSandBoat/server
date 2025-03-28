@@ -36,7 +36,10 @@ local specialCells =
     xi.item.SPISSATUS_CELL,
 }
 
-xi.xi.zoneUtil.pickList = function(mob)
+-- TODO: Reduce complexity
+-- Disable cyclomatic complexity check for this function:
+-- luacheck: ignore 561
+xi.zoneUtil.pickList = function(mob)
     local instance = mob:getInstance()
 
     if instance then
