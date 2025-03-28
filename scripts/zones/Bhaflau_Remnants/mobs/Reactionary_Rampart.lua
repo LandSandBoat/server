@@ -136,8 +136,11 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.UDMGMAGIC, 1600)
     mob:setMod(xi.mod.UDMGPHYS, 160)
     mob:setMod(xi.mod.UDMGRANGE, 160)
---    mob:addStatusEffect(xi.effect.NO_REST, 1, 0, 0)
+    
+    -- TODO:
+    -- mob:addStatusEffect(xi.effect.NO_REST, 1, 0, 0)
     mob:setMobMod(xi.mobMod.DETECTION, xi.detects.SCENT)
+    
     -- 70/30 split to be able to spawn a NM or not into rotation
     local canSpawnNM = 700
     if math.random(1000) > canSpawnNM then
@@ -145,7 +148,7 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setAnimationSub(1)
     mob:setLocalVar('next', GetSystemTime())
 end
@@ -158,7 +161,13 @@ entity.onMobFight = function(mob, target)
     if instance and now > next then
         local offset = mob:getID()
         for petid = offset + 1, offset + 5 do
-            if not GetMobByID(petid, instance):isSpawned() then
+            -- TODO: Does this lookup work?
+            local pet = GetMobByID(petid, instance)
+            if not pet then
+                return
+            end
+
+            if not pet:isSpawned() then
                 mob:setLocalVar('spawn', petid)
                 mob:useMobAbility(2034)
                 break
@@ -173,7 +182,6 @@ entity.onMobFight = function(mob, target)
         local petid = mob:getLocalVar('spawn')
         if petid > 0 then
             mob:setLocalVar('spawn', 0)
-            local nm = GetMobByID(offset + 6, instance)
             mob:timer(2500, function(mobArg)
                 if not mobArg or mobArg:isDead() then
                     return
@@ -181,13 +189,25 @@ entity.onMobFight = function(mob, target)
 
                 -- NM logic to insert into spawn next
                 if mobArg:getLocalVar('noSpawnNM') == 0 then
+                    -- TODO: Does this lookup work?
+                    local nm = GetMobByID(offset + 6, instance)
+                    if not nm then
+                        return
+                    end
+
                     if math.random(100) > 97 and not nm:isSpawned() then
                         petid = offset + 6
                     end
                 end
 
                 SpawnMob(petid, instance)
+
+                -- TODO: Does this lookup work?
                 local pet = GetMobByID(petid, instance)
+                if not pet then
+                    return
+                end
+                
                 local targ = mobArg:getTarget()
                 if targ then
                     pet:updateEnmity(targ)

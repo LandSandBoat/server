@@ -14,7 +14,7 @@ entity.onMobSpawn = function(mob)
     mob:setAnimationSub(0)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('shifttime', 15)
 end
 
@@ -24,7 +24,8 @@ entity.onMobFight = function(mob, target)
 
     if mob:getBattleTime() > shifttime then
         if size == 3 then
-            mob:addImmunity(xi.immunity.SLEEP)
+            mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+            mob:addImmunity(xi.immunity.DARK_SLEEP)
             mob:addImmunity(xi.immunity.STUN)
             mob:addImmunity(xi.immunity.TERROR)
             mob:useMobAbility(597)
