@@ -237,19 +237,19 @@ entity.onMobDeath = function(mob, player, optParams)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    if csid == 5 then
-        local instance = player:getInstance()
-
-        if instance then
-            local stage = instance:getStage()
-            local section = instance:getLocalVar('dormantArea')
-            local sendTo = pos[stage][section].exit
-            if sendTo then
-                player:setPos(unpack(sendTo))
-            end
-        end
-    end
-end
+-- TODO: Is this needed in a mob?
+-- entity.onEventUpdate = function(player, csid, option)
+--     if csid == 5 then
+--         local instance = player:getInstance()
+--         if instance then
+--             local stage = instance:getStage()
+--             local section = instance:getLocalVar('dormantArea')
+--             local sendTo = pos[stage][section].exit
+--             if sendTo then
+--                 player:setPos(unpack(sendTo))
+--             end
+--         end
+--     end
+-- end
 
 return entity
