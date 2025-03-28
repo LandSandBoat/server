@@ -27,6 +27,7 @@
 #include "entities/charentity.h"
 #include "items/item_equipment.h"
 #include "trait.h"
+#include "zone.h"
 
 class CPetEntity;
 class CMobEntity;
@@ -48,12 +49,6 @@ enum class EMobDifficulty : uint8
     VeryTough,
     IncrediblyTough,
     MAX
-};
-
-enum class ZoningType
-{
-    Logout = 1,
-    Zoning = 2,
 };
 
 // Capacity Bonuses applied based on RoE Completion
@@ -243,7 +238,8 @@ namespace charutils
     int32 GetPoints(CCharEntity* PChar, const char* type);
     void  SetUnityLeader(CCharEntity* PChar, uint8 leaderID);
     auto  GetConquestPointsName(CCharEntity* PChar) -> std::string;
-    void  SendToZone(CCharEntity* PChar, ZoningType type, uint64 ipp);
+    void  SendToZone(CCharEntity* PChar, uint16 zoneId);
+    void  SendDisconnect(CCharEntity* PChar);
     void  ForceLogout(CCharEntity* PChar);
     void  ForceRezone(CCharEntity* PChar);
     void  HomePoint(CCharEntity* PChar, bool resetHPMP);
@@ -253,7 +249,6 @@ namespace charutils
     void  SetCharVar(uint32 charId, std::string const& var, int32 value, uint32 expiry = 0);
     void  SetCharVar(CCharEntity* PChar, std::string const& var, int32 value, uint32 expiry = 0);
     int32 ClearCharVarsWithPrefix(CCharEntity* PChar, std::string const& prefix);
-    int32 RemoveCharVarsWithTag(CCharEntity* PChar, std::string const& varsTag);
     void  ClearCharVarFromAll(std::string const& varName, bool localOnly = false);
     void  IncrementCharVar(CCharEntity* PChar, std::string const& var, int32 value);
 

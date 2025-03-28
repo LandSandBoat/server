@@ -24,7 +24,9 @@
 
 #include "event_info.h"
 #include "item_container.h"
+#include "map_session.h"
 #include "monstrosity.h"
+#include "treasure_pool.h"
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
@@ -36,10 +38,10 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "automatonentity.h"
 #include "battleentity.h"
 #include "petentity.h"
 
-#include "automatonentity.h"
 #include "utils/fishingutils.h"
 
 #define MAX_QUESTAREA    11
@@ -293,6 +295,8 @@ class CCharEntity : public CBattleEntity
 {
 public:
     uint32 accid; // Account ID associated with the character.
+
+    MapSession* PSession;
 
     jobs_t     jobs; // Available Character jobs
     keyitems_t keys; // Table key objects
@@ -653,6 +657,7 @@ public:
     virtual void OnItemFinish(CItemState&, action_t&);
 
     int32 getCharVar(std::string const& varName);
+    auto  getCharVarsWithPrefix(std::string const& prefix) -> std::vector<std::pair<std::string, int32>>;
     void  setCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
     void  setVolatileCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
     void  updateCharVarCache(std::string const& varName, int32 value, uint32 expiry = 0);

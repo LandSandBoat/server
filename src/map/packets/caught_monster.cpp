@@ -20,7 +20,7 @@
 */
 
 #include "caught_monster.h"
-#include "common/socket.h"
+
 #include "entities/charentity.h"
 #include <string.h>
 

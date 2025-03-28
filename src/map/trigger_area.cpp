@@ -22,8 +22,7 @@
 #include "trigger_area.h"
 
 #include "common/logging.h"
-
-#include <cmath>
+#include "common/utils.h"
 
 // Initialize the trigger area to a unique number within the zone.
 // When trying to set 0, issue a warning.

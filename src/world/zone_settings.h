@@ -46,7 +46,7 @@ public:
         const auto rset = db::preparedStmt("SELECT zoneid, zoneip, zoneport, misc FROM zone_settings");
         if (!rset)
         {
-            ShowCritical("Error loading zone settings from DB");
+            ShowCriticalFmt("Error loading zone settings from DB");
             throw std::runtime_error("Message Server: Failed to load zone settings from database");
         }
 
@@ -56,8 +56,7 @@ public:
 
         while (rset->next())
         {
-            uint64 ip = 0;
-            inet_pton(AF_INET, rset->get<std::string>("zoneip").c_str(), &ip);
+            uint64 ip   = str2ip(rset->get<std::string>("zoneip"));
             uint64 port = rset->get<uint64>("zoneport");
 
             ZoneSettingsEntry zone_settings{};

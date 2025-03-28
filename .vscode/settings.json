@@ -9,10 +9,14 @@
     "editor.renderWhitespace": "all",
     "editor.renderControlCharacters": true,
     "editor.trimAutoWhitespace": true,
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
 
     "Lua.diagnostics.globals": [
         "bit",
         "fmt",
+        "sleep",
 
         "xi",
         "ai",
@@ -473,6 +477,7 @@
         "__nullptr": "cpp",
         "__std_stream": "cpp",
         "__string": "cpp",
-        "__tuple": "cpp"
+        "__tuple": "cpp",
+        "climits": "cpp"
     },
 }

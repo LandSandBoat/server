@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _COMMON_SQL_H
-#define _COMMON_SQL_H
+#pragma once
 
 #include "cbasetypes.h"
 
@@ -33,8 +32,6 @@
 #ifdef WIN32
 #include <winsock2.h>
 #endif
-
-#include "logging.h"
 
 // NOTE: This is just a shim to allow easy adoption of database.h
 #include "database.h"
@@ -125,7 +122,7 @@ public:
 
     void SetupKeepalive();
 
-    void CheckCharset();
+    void EnableTimers();
 
     /// Pings the connection.
     ///
@@ -249,10 +246,6 @@ private:
     uint32 m_LastPing;
 
     std::thread::id m_ThreadId;
+
+    bool m_TimersEnabled;
 };
-
-//
-// Outside of SQL class/namespace
-//
-
-#endif // _COMMON_SQL_H

@@ -28,6 +28,7 @@
 #include <tchar.h>
 #include <psapi.h>
 #include <shlwapi.h>
+#include <shellapi.h>
 
 #define CrashFolder _T("dmp")
 

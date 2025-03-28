@@ -24,8 +24,7 @@
 #include "logging.h"
 #include "tracy.h"
 
-#include <asio/post.hpp>
-#include <asio/thread_pool.hpp>
+#include <asio.hpp>
 
 Async::Async()
 : threadPool_(std::make_unique<asio::thread_pool>(threadPoolSize_))

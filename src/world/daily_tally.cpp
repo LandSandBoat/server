@@ -38,16 +38,16 @@ namespace dailytally
                               "WHERE char_points.daily_tally > -1",
                               dailyTallyLimit, dailyTallyAmount))
         {
-            ShowError("Failed to update daily tally points");
+            ShowErrorFmt("Failed to update daily tally points");
         }
         else
         {
-            ShowDebug("Distributed daily tally points");
+            ShowDebugFmt("Distributed daily tally points");
         }
 
         if (!db::preparedStmt("DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed'"))
         {
-            ShowError("Failed to delete daily tally char_vars entries");
+            ShowErrorFmt("Failed to delete daily tally char_vars entries");
         }
     }
 } // namespace dailytally

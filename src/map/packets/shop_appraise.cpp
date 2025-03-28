@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "shop_appraise.h"
 
 CShopAppraisePacket::CShopAppraisePacket(uint8 slotID, uint32 sellPrice)

@@ -25,7 +25,7 @@
 #include <optional>
 
 #include "common/cbasetypes.h"
-#include "common/taskmgr.h"
+#include "common/task_manager.h"
 
 #include "common/lua.h"
 extern sol::state lua;
@@ -127,7 +127,7 @@ namespace luautils
         auto findGlobalLuaFunction(const std::string& funcName) -> sol::function;
     } // namespace detail
 
-    void init();
+    void init(IPP mapIPP, bool isRunningInCI);
     void garbageCollectStep();
     void garbageCollectFull();
     void cleanup();

@@ -21,7 +21,6 @@
 
 #include "item_linkshell.h"
 
-#include "common/socket.h"
 #include "common/utils.h"
 
 #include <cstring>

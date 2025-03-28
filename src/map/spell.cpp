@@ -26,7 +26,7 @@
 
 #include "blue_spell.h"
 #include "items/item_weapon.h"
-#include "map.h"
+#include "map_server.h"
 #include "mob_spell_list.h"
 #include "spell.h"
 #include "status_effect_container.h"

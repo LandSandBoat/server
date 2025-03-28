@@ -19,12 +19,11 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
+#include "wide_scan.h"
 
 #include <cstring>
 
 #include "entities/charentity.h"
-#include "wide_scan.h"
 
 CWideScanPacket::CWideScanPacket(WIDESCAN_STATUS status)
 {

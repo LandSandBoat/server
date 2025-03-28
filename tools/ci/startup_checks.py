@@ -11,13 +11,16 @@ TEN_MINUTES_IN_SECONDS = 600
 CHECK_INTERVAL_SECONDS = 2.5
 
 
+processes = []
+
+
 def kill(process):
     """Send SIGTERM to a running process."""
     if process.poll() is None:  # still running
         process.send_signal(signal.SIGTERM)
 
 
-def kill_all(processes):
+def kill_all():
     """Send SIGTERM to all running processes."""
     for proc in processes:
         kill(proc)
@@ -43,7 +46,6 @@ def main():
     print("Running exe startup checks...({})".format(platform.system()))
 
     # Start the processes
-    # Use text=True (or universal_newlines=True) so we get strings instead of bytes.
     processes = [
         subprocess.Popen(
             ["xi_connect", "--log", "connect-server.log"],
@@ -58,7 +60,7 @@ def main():
             text=True,
         ),
         subprocess.Popen(
-            ["xi_map", "--log", "game-server.log", "--load_all"],
+            ["xi_map", "--ci", "--log", "map-server.log"],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,
@@ -73,6 +75,9 @@ def main():
 
     # Keep track of which processes have reported "ready to work"
     ready_status = {proc: False for proc in processes}
+
+    # Sleep for a moment to give the processes time to start up
+    time.sleep(1)
 
     # Create a queue to receive stdout lines from all processes
     output_queue = Queue()
@@ -91,12 +96,13 @@ def main():
     )
 
     start_time = time.time()
+    error_strs = ["error", "warning", "crash", "critical"]
 
     while True:
         # If we've hit the timeout (10 minutes), fail
         if time.time() - start_time > TEN_MINUTES_IN_SECONDS:
             print("Timed out waiting for all processes to become ready.")
-            kill_all(processes)
+            kill_all()
             exit(-1)
 
         # Poll the queue for new lines
@@ -111,10 +117,12 @@ def main():
             if line is None:
                 # If the process ended but wasn't marked ready => error
                 if not ready_status[proc]:
+                    pid = proc.pid
+                    return_code = proc.returncode
                     print(
-                        f"ERROR: {proc.args[0]} exited before it was 'ready to work'."
+                        f"ERROR: {proc.args[0]} (PID: {pid}) exited before it was 'ready to work' with code {return_code}."
                     )
-                    kill_all(processes)
+                    kill_all()
                     exit(-1)
             else:
                 # We have an actual line of output
@@ -123,9 +131,9 @@ def main():
 
                 # Check for error or warning text
                 lower_line = line_str.lower()
-                if any(x in lower_line for x in ["error", "warning", "crash"]):
+                if any(x in lower_line for x in error_strs):
                     print("^^^ Found error or warning in output.")
-                    kill_all(processes)
+                    kill_all()
                     print("Killing all processes and exiting with error.")
                     exit(-1)
 
@@ -138,11 +146,12 @@ def main():
         # Check if all processes are marked ready
         if all(ready_status.values()):
             print("All processes reached 'ready to work'! Exiting successfully.")
-            kill_all(processes)
+            kill_all()
             exit(0)
 
         # Sleep until next poll
         time.sleep(CHECK_INTERVAL_SECONDS)
+
 
 if __name__ == "__main__":
     main()

@@ -9,7 +9,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() == 0 and mob:getMainJob() == xi.job.RNG then
+    if mob:getAnimationSub() ~= 1 and mob:getMainJob() == xi.job.RNG then
         return 0
     else
         return 1

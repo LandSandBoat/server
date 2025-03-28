@@ -29,7 +29,6 @@
 #include "lua/lua_baseentity.h"
 #include "lua/luautils.h"
 
-#include <cmath>
 #include <iostream>
 #include <sstream>
 #include <string>

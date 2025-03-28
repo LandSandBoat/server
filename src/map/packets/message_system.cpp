@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "message_system.h"
 
 CMessageSystemPacket::CMessageSystemPacket(uint32 param0, uint32 param1, MsgStd messageID)

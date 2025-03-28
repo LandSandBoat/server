@@ -1,4 +1,27 @@
-﻿#include "autotranslate.h"
+﻿/*
+===========================================================================
+
+  Copyright (c) 2025 LandSandBoat Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#include "autotranslate.h"
+
+#include "common/logging.h"
 
 // Generated with this python script:
 /*
@@ -2793,27 +2816,27 @@ std::string doLookup(std::string const& str, std::vector<uint16>& data)
 
     auto value = values.at(key);
 
-    ShowInfo(fmt::format("autotranslate: {}: {}", key, value));
+    ShowDebug(fmt::format("autotranslate: {}: {}", key, value));
     switch (type)
     {
         case 0x02:
         {
-            ShowInfo(fmt::format("autotranslate: type: string, lang: {}, cat: {}, index: {}", language, category, index));
+            ShowDebug(fmt::format("autotranslate: type: string, lang: {}, cat: {}, index: {}", language, category, index));
         }
         break;
         case 0x07:
         {
-            ShowInfo(fmt::format("autotranslate: type: item, lang: {}, cat: {}, index: {}", language, category, index));
+            ShowDebug(fmt::format("autotranslate: type: item, lang: {}, cat: {}, index: {}", language, category, index));
         }
         break;
         case 0x13:
         {
-            ShowInfo(fmt::format("autotranslate: type: keyitem, lang: {}, cat: {}, index: {}", language, category, index));
+            ShowDebug(fmt::format("autotranslate: type: keyitem, lang: {}, cat: {}, index: {}", language, category, index));
         }
         break;
         default:
         {
-            ShowInfo(fmt::format("autotranslate: type: unknown ({}), lang: {}, cat: {}, index: {}", type, language, category, index));
+            ShowDebug(fmt::format("autotranslate: type: unknown ({}), lang: {}, cat: {}, index: {}", type, language, category, index));
         }
         break;
     }

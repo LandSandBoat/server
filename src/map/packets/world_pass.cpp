@@ -19,9 +19,8 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "world_pass.h"
+
 #include <cinttypes>
 
 CWorldPassPacket::CWorldPassPacket(uint32 WorldPass)

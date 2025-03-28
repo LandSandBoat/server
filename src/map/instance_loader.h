@@ -23,7 +23,6 @@
 #define _CINSTANCELOADER_H
 
 #include "common/cbasetypes.h"
-#include "common/socket.h"
 
 class CCharEntity;
 class CInstance;

@@ -19,12 +19,11 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
+#include "zone_visited.h"
 
 #include <cstring>
 
 #include "entities/charentity.h"
-#include "zone_visited.h"
 
 CZoneVisitedPacket::CZoneVisitedPacket(CCharEntity* PChar)
 {

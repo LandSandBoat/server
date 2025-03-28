@@ -22,7 +22,6 @@
 #include "auth_session.h"
 
 #include "common/ipc.h"
-#include "common/socket.h" // for ref<T>
 #include "common/utils.h"
 
 #include <bcrypt/BCrypt.hpp>
@@ -180,26 +179,23 @@ void auth_session::read_func()
             {
                 // It's not a BCrypt hash, so we need to use Maria's PASSWORD() to check if the password is actually correct,
                 // and then update the password to a BCrypt hash.
-                const auto passColumn = fmt::sprintf("PASSWORD('%s')", password);
-                const auto rset       = db::preparedStmt("SELECT ?", passColumn);
+                const auto rset = db::preparedStmt("SELECT PASSWORD(?)", password);
                 if (rset && rset->rowsCount() != 0 && rset->next())
                 {
-                    if (rset->get<std::string>(passColumn) != passHash)
+                    if (rset->get<std::string>(0) != passHash)
                     {
                         ref<uint8>(data_, 0) = LOGIN_ERROR;
                         do_write(1);
                         return;
                     }
-                    else
+
+                    passHash = BCrypt::generateHash(password);
+                    db::preparedStmt("UPDATE accounts SET accounts.password = ? WHERE accounts.login = ?", passHash, username);
+                    if (!BCrypt::validatePassword(password, passHash))
                     {
-                        passHash = BCrypt::generateHash(password);
-                        db::preparedStmt("UPDATE accounts SET accounts.password = ? WHERE accounts.login = ?", passHash, username);
-                        if (!BCrypt::validatePassword(password, passHash))
-                        {
-                            ref<uint8>(data_, 0) = LOGIN_ERROR;
-                            do_write(1);
-                            return;
-                        }
+                        ref<uint8>(data_, 0) = LOGIN_ERROR;
+                        do_write(1);
+                        return;
                     }
                 }
             }

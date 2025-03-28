@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "entity_animation.h"
 
 #include "entities/baseentity.h"

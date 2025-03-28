@@ -45,23 +45,14 @@ class SearchServer final : public Application
 {
 public:
     SearchServer(int argc, char** argv);
+    ~SearchServer() override;
 
-    ~SearchServer() override
-    {
-        // Everything should be handled with RAII
-    }
+    void loadConsoleCommands() override;
+
+    void run() override;
 
     void periodicCleanup(const asio::error_code& error, asio::steady_timer* timer);
-
     void ahCleanup();
-
-    // TODO: Currently never called. Need io_context asio::steady_timer callback with taskmgr to control timing?
-    void Tick() override
-    {
-        Application::Tick();
-
-        // Search Server specific things
-    }
 
 private:
     // A single IP should only have one request in flight at a time, so we are going to

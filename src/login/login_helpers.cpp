@@ -46,24 +46,6 @@ namespace loginHelpers
         return authenticatedSessions_[ipAddr][sessionHash]; // NOTE: Will construct if doesn't exist
     }
 
-    // hostname/ip conversion functions
-    std::string ip2str(uint32 ip)
-    {
-        uint32 reversed_ip = htonl(ip);
-        char   address[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &reversed_ip, address, INET_ADDRSTRLEN);
-
-        // This is internal, so we can trust it.
-        return fmt::format("{}", asStringFromUntrustedSource(address));
-    }
-
-    uint32 str2ip(const char* ip_str)
-    {
-        uint32 ip = 0;
-        inet_pton(AF_INET, ip_str, &ip);
-        return ntohl(ip);
-    }
-
     // https://github.com/atom0s/XiPackets/blob/main/lobby/S2C_0x0004_ResponseError.md
     void generateErrorMessage(char* packet, uint16 errorCode)
     {

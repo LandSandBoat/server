@@ -19,16 +19,16 @@
 ===========================================================================
 */
 
-#ifndef _MMO_H
-#define _MMO_H
+#pragma once
 
 #include "cbasetypes.h"
 
 #include <array>
 #include <bitset>
-#include <stdlib.h>
+#include <cstdlib>
+#include <cstring>
+#include <ctime>
 #include <string>
-#include <time.h>
 
 #define FIFOSIZE_SERVERLINK 256 * 1024
 
@@ -546,5 +546,3 @@ struct GP_CLI_LOGIN
     uint16_t uCliLang;         // PS2: uCliLang
     uint16_t dammyArea;        // PS2: dammyArea
 };
-
-#endif // _MMO_H

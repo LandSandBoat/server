@@ -23,6 +23,7 @@
 #include <csignal>
 #include <sys/ptrace.h>
 #include <sys/resource.h>
+#include <sys/sysctl.h>
 #include <sys/types.h>
 
 #ifndef PTRACE_TRACEME
@@ -34,7 +35,7 @@
 #endif // PTRACE_DETACH
 
 #include "debug.h"
-#include "kernel.h"
+#include "logging.h"
 
 #define BACKWARD_HAS_BFD 1
 #include "ext/backward/backward.hpp"
@@ -92,22 +93,30 @@ void debug::init()
 bool debug::isRunningUnderDebugger()
 {
     static bool isCheckedAlready = false;
-
-    bool underDebugger = false;
+    static bool underDebugger    = false;
 
     if (!isCheckedAlready)
     {
-        if (ptrace(PTRACE_TRACEME, 0, nullptr, 0) < 0)
+        int mib[4] = {
+            CTL_KERN,
+            KERN_PROC,
+            KERN_PROC_PID,
+            getpid(),
+        };
+
+        kinfo_proc info;
+        info.kp_proc.p_flag = 0;
+
+        size_t size = sizeof(info);
+
+        if (sysctl(mib, 4, &info, &size, nullptr, 0) == 0)
         {
-            underDebugger = true;
-        }
-        else
-        {
-            ptrace(PTRACE_DETACH, 0, nullptr, 0);
+            underDebugger = (info.kp_proc.p_flag & P_TRACED) != 0;
         }
 
         isCheckedAlready = true;
     }
+
     return underDebugger;
 }
 

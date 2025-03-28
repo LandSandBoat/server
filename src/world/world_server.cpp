@@ -33,7 +33,30 @@
 #include "party_system.h"
 #include "time_server.h"
 
-int32 pump_queues(time_point tick, CTaskMgr::CTask* PTask)
+namespace
+{
+    static constexpr auto kTimeServerTickTime = 2400ms;
+    static constexpr auto kPumpQueuesTime     = 250ms;
+    static constexpr auto kMainTickTime       = 200ms;
+} // namespace
+
+/*
+void pump_queues(WorldServer* worldServer, asio::steady_timer* timer)
+{
+    TracyZoneScoped;
+
+    worldServer->ipcServer_->handleIncomingMessages();
+
+    if (worldServer->isRunning())
+    {
+        // reset timer
+        timer->expires_at(timer->expiry() + kPumpQueuesTime);
+        timer->async_wait(std::bind(&pump_queues, worldServer, timer));
+    }
+}
+*/
+
+int32 pump_queues(time_point tick, CTaskManager::CTask* PTask)
 {
     TracyZoneScoped;
 
@@ -53,15 +76,30 @@ WorldServer::WorldServer(int argc, char** argv)
 , httpServer_(std::make_unique<HTTPServer>())
 {
     // Tasks
-    CTaskMgr::getInstance()->AddTask("time_server", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, 2400ms, time_server);
+    CTaskManager::getInstance()->AddTask("time_server", server_clock::now(), this, CTaskManager::TASK_INTERVAL, kTimeServerTickTime, time_server);
 
     // TODO: Make this more reactive than a polling job
-    CTaskMgr::getInstance()->AddTask("pump_queues", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, 250ms, pump_queues);
+    CTaskManager::getInstance()->AddTask("pump_queues", server_clock::now(), this, CTaskManager::TASK_INTERVAL, kPumpQueuesTime, pump_queues);
+
+    // asio::steady_timer timeServerTimer(io_context_, kPumpQueuesTime);
+    // timeServerTimer.async_wait(std::bind(&pump_queues, this, &timeServerTimer));
 }
 
 WorldServer::~WorldServer() = default;
 
-void WorldServer::Tick()
+void WorldServer::loadConsoleCommands()
 {
-    Application::Tick();
+}
+
+void WorldServer::run()
+{
+    Application::markLoaded();
+
+    while (Application::isRunning())
+    {
+        const auto tickStart     = server_clock::now();
+        const auto tasksDuration = CTaskManager::getInstance()->doExpiredTasks(tickStart);
+        const auto sleepFor      = kMainTickTime - tasksDuration;
+        std::this_thread::sleep_for(sleepFor);
+    }
 }

@@ -73,6 +73,7 @@ enum EFFECTFLAG : uint32
     EFFECTFLAG_HIDE_TIMER      = 0x08000000, // Sends "Always" in the packet, even though timer is tracked
     EFFECTFLAG_ON_ZONE_PATHOS  = 0x10000000, // removes the effect zoning into a non instanced zone
     EFFECTFLAG_ALWAYS_EXPIRING = 0x20000000, // Timer is always 4 seconds from now to have an illusion permanent "expiring", used for Auras
+    EFFECTFLAG_ON_ATTACK       = 0x40000000, // Removes effect upon receiving an attack, regardless of hit/dmg
 };
 DECLARE_FORMAT_AS_UNDERLYING(EFFECTFLAG);
 

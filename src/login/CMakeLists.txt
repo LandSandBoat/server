@@ -19,14 +19,6 @@ set(SOURCES
     view_session.cpp
 )
 
-# Temporarily remove clashing old code
-# TODO: Remove this block
-list(REMOVE_ITEM SOURCES
-    ${CMAKE_SOURCE_DIR}/src/common/kernel.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/kernel.h
-    ${CMAKE_SOURCE_DIR}/src/common/socket.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/socket.h)
-
 if(UNIX)
     set(resource "")
 else()
@@ -45,7 +37,8 @@ endif()
 
 target_link_libraries(xi_connect
     PUBLIC
-        ${EXTERNAL_LIBS}
+        ${SHARED_EXTERNAL_LIBS}
+        ${CONNECT_ONLY_EXTERNAL_LIBS}
         project_options
     PRIVATE
         project_warnings

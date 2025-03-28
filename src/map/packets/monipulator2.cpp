@@ -21,7 +21,6 @@
 
 #include "monipulator2.h"
 
-#include "common/socket.h"
 #include "entities/charentity.h"
 #include "monstrosity.h"
 

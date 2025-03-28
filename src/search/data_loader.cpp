@@ -88,7 +88,7 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack)
 
 std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::string& orderByString)
 {
-    ShowDebug("Try find category: %u", ahCategoryID);
+    ShowDebugFmt("Try find category: {}", ahCategoryID);
 
     std::vector<ahItem*> ItemList;
 
@@ -241,7 +241,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
 
     if (sr.commentType != 0)
     {
-        filterQry.append(fmt::sprintf(" AND (seacom_type & 0xF0) = %u", sr.commentType));
+        filterQry.append(fmt::format(" AND (seacom_type & 0xF0) = {}", sr.commentType));
     }
 
     std::string fmtQuery =
@@ -293,7 +293,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
                     PPlayer->rank = rset->get<uint8>("rank_windurst");
                     break;
                 default:
-                    ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
+                    ShowWarningFmt("Inconsistent player nation allegiance : {}", PPlayer->nation);
                     PPlayer->rank = static_cast<uint8>(0U);
                     break;
             }
@@ -468,7 +468,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
         {
             *count = totalResults;
         }
-        ShowInfo("Found %i results, displaying %i", totalResults, visibleResults);
+        ShowInfoFmt("Found {} results, displaying {}", totalResults, visibleResults);
     }
 
     return PlayersList;
@@ -525,7 +525,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
                     PPlayer->rank = rset->get<uint8>("rank_windurst");
                     break;
                 default:
-                    ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
+                    ShowWarningFmt("Inconsistent player nation allegiance : {}", PPlayer->nation);
                     PPlayer->rank = static_cast<uint8>(0U);
                     break;
             }
@@ -633,7 +633,7 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
                     PPlayer->rank = rset->get<uint8>("rank_windurst");
                     break;
                 default:
-                    ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
+                    ShowWarningFmt("Inconsistent player nation allegiance : {}", PPlayer->nation);
                     PPlayer->rank = (uint8)0;
                     break;
             }
@@ -691,7 +691,7 @@ std::string CDataLoader::GetSearchComment(uint32 playerId)
     auto rset = db::preparedStmt("SELECT seacom_message FROM accounts_sessions WHERE charid = (?)", playerId);
     if (rset && rset->rowsCount() && rset->next())
     {
-        return rset->get<std::string>("seacom_message").c_str();
+        return rset->get<std::string>("seacom_message");
     }
     return std::string();
 }
@@ -708,7 +708,7 @@ struct ListingToExpire
 
 void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
 {
-    ShowInfo(fmt::format("Expiring auction house listings over {} days old", expireAgeInDays).c_str());
+    ShowInfoFmt("Expiring auction house listings over {} days old", expireAgeInDays);
 
     std::vector<ListingToExpire> listingsToExpire;
 
@@ -752,5 +752,5 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
             }
         }
     }
-    ShowInfo("Sent %u expired auction house listings back to sellers", expiredAuctions);
+    ShowInfoFmt("Sent {} expired auction house listings back to sellers", expiredAuctions);
 }

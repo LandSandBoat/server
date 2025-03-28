@@ -56,19 +56,20 @@ function npcUtil.popFromQM(player, qm, mobId, params)
     end
 
     -- get list of mobs to pop
-    local mobs = {}
+    local mobIds = {}
     if type(mobId) == 'number' then
-        table.insert(mobs, mobId)
+        table.insert(mobIds, mobId)
     elseif type(mobId) == 'table' then
         for _, v in pairs(mobId) do
             if type(v) == 'number' then
-                table.insert(mobs, v)
+                table.insert(mobIds, v)
             end
         end
     end
 
-    -- make sure none are spawned
-    for k, v in pairs(mobs) do
+    -- make sure none are spawned, translate table from integers to CLuaBaseEntities
+    local mobs = {}
+    for k, v in pairs(mobIds) do
         local mob = GetMobByID(v)
         if mob == nil or mob:isSpawned() then
             return false
@@ -99,6 +100,16 @@ function npcUtil.popFromQM(player, qm, mobId, params)
         -- claim
         if params.claim then
             mob:updateClaim(player)
+        end
+
+        -- Distribute enmity
+        if type(params.enmityPlayerList) == 'table' then
+            -- Add 1 CE to ensure mobs go after spawner first in case params.claim == false
+            mob:addEnmity(player, 1, 0)
+
+            for _, member in ipairs(params.enmityPlayerList) do
+                mob:addEnmity(member, 1, 0)
+            end
         end
 
         -- look
@@ -176,6 +187,10 @@ function npcUtil.queueMove(npc, point, delay)
     end
 
     local x, y, z, rot = unpack(point)
+
+    -- TODO: Current LLS version is treating all table entries as nil-able, where only rot is.  Ignore
+    -- until resolved.
+    ---@diagnostic disable-next-line: param-type-mismatch
     npc:queue(delay, doMove(x, y, z, rot))
 end
 

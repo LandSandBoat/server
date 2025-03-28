@@ -7,25 +7,25 @@ zones[xi.zone.GIDDEUS] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED       = 6384, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
-        GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
-        KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
-        NOTHING_OUT_OF_ORDINARY       = 6404, -- There is nothing out of the ordinary here.
-        SENSE_OF_FOREBODING           = 6405, -- You are suddenly overcome with a sense of foreboding...
-        FELLOW_MESSAGE_OFFSET         = 6419, -- I'm ready. I suppose.
-        CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
-        LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7067, -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET        = 7226, -- You can't fish here.
-        OFFERED_UP_KEY_ITEM           = 7351, -- Offered up key item: <keyitem>!
-        SPRING_FILL_UP                = 7372, -- You fill your flask with water.
-        SPRING_DEFAULT                = 7373, -- Sparkling clear water bubbles up from the ground. If you have a container, you can fill it here.
-        CHEST_UNLOCKED                = 7423, -- You unlock the chest!
-        HARVESTING_IS_POSSIBLE_HERE   = 7431, -- Harvesting is possible here if you have <item>.
-        HOMEPOINT_SET                 = 7459, -- Home point set!
+        ITEM_CANNOT_BE_OBTAINED       = 6385, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED                 = 6391, -- Obtained: <item>.
+        GIL_OBTAINED                  = 6392, -- Obtained <number> gil.
+        KEYITEM_OBTAINED              = 6394, -- Obtained key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY       = 6405, -- There is nothing out of the ordinary here.
+        SENSE_OF_FOREBODING           = 6406, -- You are suddenly overcome with a sense of foreboding...
+        FELLOW_MESSAGE_OFFSET         = 6420, -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS           = 7002, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
+        CONQUEST_BASE                 = 7068, -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET        = 7227, -- You can't fish here.
+        OFFERED_UP_KEY_ITEM           = 7352, -- Offered up key item: <keyitem>!
+        SPRING_FILL_UP                = 7373, -- You fill your flask with water.
+        SPRING_DEFAULT                = 7374, -- Sparkling clear water bubbles up from the ground. If you have a container, you can fill it here.
+        CHEST_UNLOCKED                = 7424, -- You unlock the chest!
+        HARVESTING_IS_POSSIBLE_HERE   = 7432, -- Harvesting is possible here if you have <item>.
+        HOMEPOINT_SET                 = 7460, -- Home point set!
     },
     mob =
     {

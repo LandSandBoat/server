@@ -1,6 +1,8 @@
 -----------------------------------
 -- Area: RoMaeve
 --   NM: Shikigami Weapon
+-- TODO: Needs additional spawn points added along with pathfind being adjusted
+--       to path to the nearest pos in pathNodes on spawn and disengage
 -----------------------------------
 ---@type TMobEntity
 local entity = {}

@@ -22,6 +22,7 @@
 #pragma once
 
 #include "cbasetypes.h"
+#include "logging.h"
 #include "synchronized.h"
 #include "tracy.h"
 #include "xi.h"
@@ -33,14 +34,14 @@
 
 // TODO: mariadb-connector-cpp triggers this. Remove once they fix it.
 // 4263 'function': member function does not override any base class member functions
-#ifdef WIN32
+#ifdef _WIN32
 #pragma warning(push)
 #pragma warning(disable : 4263)
 #endif
 
 #include <conncpp.hpp>
 
-#ifdef WIN32
+#ifdef _WIN32
 #pragma warning(pop)
 #endif
 
@@ -362,6 +363,8 @@ namespace db
         template <typename T>
         void bindValue(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter, std::vector<std::shared_ptr<BlobWrapper>>& blobs, T&& value)
         {
+            TracyZoneScoped;
+
             using UnderlyingT = std::decay_t<T>;
 
             if constexpr (!is_blob_v<UnderlyingT>)
@@ -388,7 +391,7 @@ namespace db
             }
             else if constexpr (std::is_same_v<UnderlyingT, uint16>)
             {
-                stmt->setShort(counter, value);
+                stmt->setUInt(counter, value);
             }
             else if constexpr (std::is_same_v<UnderlyingT, int8>)
             {
@@ -483,6 +486,8 @@ namespace db
     auto query(std::string const& query, Args&&... args) -> std::unique_ptr<db::detail::ResultSetWrapper>
     {
         TracyZoneScoped;
+        // TODO: Collect up bound args and report to tracy here
+
         try
         {
             const auto formattedQuery = fmt::sprintf(query, std::forward<Args>(args)...);
@@ -508,6 +513,7 @@ namespace db
     {
         TracyZoneScoped;
         TracyZoneString(rawQuery);
+        // TODO: Collect up bound args and report to tracy here
 
         // clang-format off
         return detail::getState().write([&](detail::State& state) -> std::unique_ptr<db::detail::ResultSetWrapper>
@@ -582,6 +588,7 @@ namespace db
     {
         TracyZoneScoped;
         TracyZoneString(rawQuery);
+        // TODO: Collect up bound args and report to tracy here
 
         // clang-format off
         return detail::getState().write([&](detail::State& state) -> std::pair<std::unique_ptr<db::detail::ResultSetWrapper>, std::size_t>
@@ -676,9 +683,10 @@ namespace db
     template <typename WrapperPtrT, typename T>
     void extractFromBlob(WrapperPtrT const& rset, std::string const& blobKey, T& destination)
     {
-        static_assert(std::is_trivially_copyable_v<T>, "T must be trivially copyable");
-
         TracyZoneScoped;
+
+        // TODO: static_assert(std::is_trivial_v<T>, "T must be trivial");
+        static_assert(std::is_trivially_copyable_v<T>, "T must be trivially copyable");
 
         // If we use getString on a null blob we will get back garbage data.
         // This will introduce difficult to track down crashes.
@@ -693,7 +701,23 @@ namespace db
             // Login server creates new chars with null blobs. Map server then initializes.
             // We don't want to overwrite the initialized map data with null blobs / 0 values.
             // See: login_helpers.cpp saveCharacter() and charutils::LoadChar
-            std::memset(&destination, 0x00, sizeof(T));
+
+            // Zero-initialize the destination object
+            if constexpr (std::is_array_v<T>)
+            {
+                using Element = std::remove_extent_t<T>;
+                std::fill(std::begin(destination), std::end(destination), Element{});
+            }
+            else if constexpr (std::is_assignable_v<T&, T>)
+            {
+                destination = T{};
+            }
+            else
+            {
+                std::fill_n(reinterpret_cast<uint8_t*>(&destination), sizeof(T), 0);
+            }
+
+            // Copy the blob into the destination object
             std::memcpy(&destination, blobStr.c_str(), std::min(sizeof(T), blobStr.length()));
         }
     }

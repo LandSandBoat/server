@@ -19,12 +19,11 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
+#include "wide_scan_track.h"
 
 #include <cstring>
 
 #include "entities/baseentity.h"
-#include "wide_scan_track.h"
 
 CWideScanTrackPacket::CWideScanTrackPacket(const CBaseEntity* PEntity)
 {

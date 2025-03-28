@@ -37,7 +37,7 @@
 #include "utils/moduleutils.h"
 #include "utils/zoneutils.h"
 
-int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
+int32 time_server(time_point tick, CTaskManager::CTask* PTask)
 {
     TracyZoneScoped;
     TIMETYPE VanadielTOTD = CVanaTime::getInstance()->SyncTime();

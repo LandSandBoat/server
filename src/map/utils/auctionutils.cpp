@@ -24,6 +24,7 @@
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/settings.h"
+#include "common/timer.h"
 #include "common/tracy.h"
 
 #include "entities/charentity.h"

@@ -75,8 +75,19 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/latent_effect.h
     ${CMAKE_CURRENT_SOURCE_DIR}/linkshell.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/linkshell.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/map.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/map.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_networking.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_networking.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_server.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_server.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_session_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_session_container.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_session.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_session.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_socket.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_socket.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_statistics.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_statistics.h
     ${CMAKE_CURRENT_SOURCE_DIR}/merit.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/merit.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mob_modifier.h
@@ -190,16 +201,10 @@ if(WIN32)
     set_target_properties(xi_map PROPERTIES OUTPUT_NAME xi_map)
 endif()
 
-target_compile_definitions(
-    xi_map
-    PUBLIC
-    -DdsUDPSERV
-    -DDEBUGLOGMAP
-)
-
 target_link_libraries(xi_map
     PUBLIC
-        ${EXTERNAL_LIBS}
+        ${SHARED_EXTERNAL_LIBS}
+        ${MAP_ONLY_EXTERNAL_LIBS}
         project_options
     PRIVATE
         project_warnings

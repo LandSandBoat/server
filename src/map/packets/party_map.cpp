@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "party_map.h"
 
 #include "entities/charentity.h"

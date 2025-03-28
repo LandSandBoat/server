@@ -36,7 +36,3 @@ LandSandBoat is licensed under [GNU GPL v3](https://github.com/LandSandBoat/serv
 Thanks to all contributors past and present, we wouldn't be here without you!
 
 Thanks to GitHub for hosting us, and for all the CI minutes we use!
-
-Thanks to JetBrains for providing our core contributors with "All Products Pack" licenses for our continued open source work. It's much appreciated, we love ReSharper C++ and CLion!
-
-<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" alt="JetBrains Logo (Main) logo." width="200">

@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -26,18 +26,20 @@
 
 #include <vector>
 
-enum TREASUREPOOLTYPE
+// Update xi.treasurePool accordingly when making changes
+enum class TreasurePoolType : uint8
 {
-    TREASUREPOOL_SOLO     = 1,
-    TREASUREPOOL_PARTY    = 6,
-    TREASUREPOOL_ALLIANCE = 18,
-    TREASUREPOOL_ZONE     = 128
+    Solo     = 1,
+    Party    = 6,
+    Alliance = 18,
+    Zone     = 128
 };
 
 #define TREASUREPOOL_SIZE 10
 
 // characters get a new TreasurePool when moving between zones
 class CCharEntity;
+class CBaseEntity;
 class CMobEntity;
 
 struct LotInfo
@@ -70,40 +72,43 @@ struct TreasurePoolItem
 class CTreasurePool
 {
 public:
-    CTreasurePool(TREASUREPOOLTYPE PoolType);
+    CTreasurePool(TreasurePoolType PoolType);
 
-    TREASUREPOOLTYPE GetPoolType();
+    auto getPoolType() const -> TreasurePoolType;
 
-    uint8 AddItem(uint16 ItemID, CBaseEntity*);
+    auto addItem(uint16 ItemID, CBaseEntity*) -> uint8;
+    void lotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot);
+    void passItem(CCharEntity* PChar, uint8 SlotID);
+    bool hasLottedItem(CCharEntity* PChar, uint8 SlotID);
+    bool hasPassedItem(CCharEntity* PChar, uint8 SlotID);
+    auto getItems() const -> const std::array<TreasurePoolItem, TREASUREPOOL_SIZE>&;
+    auto itemCount() const -> uint8;
 
-    void LotItem(uint8 SlotID, uint16 Lot);
-    void LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot);
-    void PassItem(CCharEntity* PChar, uint8 SlotID);
-    bool HasLottedItem(CCharEntity* PChar, uint8 SlotID);
-    bool HasPassedItem(CCharEntity* PChar, uint8 SlotID);
-    void AddMember(CCharEntity* PChar);
-    void DelMember(CCharEntity* PChar);
-    void UpdatePool(CCharEntity* PChar);
+    void addMember(CCharEntity* PChar);
+    void delMember(CCharEntity* PChar);
+    auto getMembers() const -> const std::vector<CCharEntity*>&;
+    bool isMember(const CCharEntity* PChar);
+    auto memberCount() const -> size_t;
 
-    void CheckItems(time_point);
+    void updatePool(CCharEntity* PChar);
+    void flush();
 
-    void TreasureWon(CCharEntity* winner, uint8 SlotID);
-    void TreasureError(CCharEntity* winner, uint8 SlotID);
-    void TreasureLost(uint8 SlotID);
+    void checkItems(time_point);
 
-    bool CanAddSeal();
+    void treasureWon(CCharEntity* winner, uint8 SlotID);
+    void treasureError(CCharEntity* winner, uint8 SlotID);
+    void treasureLost(uint8 SlotID);
 
 private:
     time_point m_Tick;
     uint8      m_count;
 
-    TREASUREPOOLTYPE m_TreasurePoolType;
+    TreasurePoolType m_TreasurePoolType;
 
-    void CheckTreasureItem(time_point tick, uint8 SlotID);
+    void checkTreasureItem(time_point tick, uint8 SlotID);
 
-    TreasurePoolItem m_PoolItems[TREASUREPOOL_SIZE];
-
-    std::vector<CCharEntity*> members;
+    std::array<TreasurePoolItem, TREASUREPOOL_SIZE> m_PoolItems;
+    std::vector<CCharEntity*>                       m_Members;
 };
 
 #endif

@@ -25,6 +25,7 @@
 #include "common/logging.h"
 #include "common/macros.h"
 #include "common/settings.h"
+#include "common/sql.h"
 #include "common/tracy.h"
 
 #include "entities/charentity.h"
@@ -39,8 +40,6 @@
 
 #include "trade_container.h"
 #include "universal_container.h"
-
-extern std::unique_ptr<SqlConnection> _sql;
 
 namespace
 {

@@ -22,70 +22,71 @@
 #pragma once
 
 #include "cbasetypes.h"
-#include "logging.h"
-#include "socket.h"
 
 #include <zmq.hpp>
 #include <zmq_addon.hpp>
 
+#ifdef _WIN32
+#include <io.h>
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#else
+#include <arpa/inet.h>
+#include <cerrno>
+#include <errno.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <sys/ioctl.h>
+#include <sys/socket.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
+#endif
+
+#include <array>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <ctime>
+#include <memory>
+#include <string>
+
+auto ip2str(uint32 ip) -> std::string;
+auto str2ip(const std::string& ip_str) -> uint32;
+auto sockaddr2netip(const sockaddr_in& addr) -> uint32;
+auto sockaddr2hostport(const sockaddr_in& addr) -> uint16;
+
+//
+// An IP-Port Pair
+//
 class IPP final
 {
 public:
-    IPP()
-    {
-    }
+    IPP();
+    explicit IPP(const uint32 ip, const uint16 port);
+    explicit IPP(const uint64& ipp);
+    explicit IPP(const zmq::message_t& message);
 
-    explicit IPP(const uint32 ip, const uint16 port)
-    : ip_(ip)
-    , port_(port)
-    {
-    }
+    auto getRawIPP() const -> uint64;
+    auto getIP() const -> uint32;
+    auto getIPString() const -> std::string;
+    auto getPort() const -> uint16;
 
-    explicit IPP(const uint64& ipp)
-    : IPP(static_cast<uint32>(ipp), static_cast<uint16>(ipp >> 32))
-    {
-    }
-
-    explicit IPP(const zmq::message_t& message)
-    : IPP(*reinterpret_cast<const uint64*>(message.data()))
-    {
-    }
-
-    auto toString() const -> std::string
-    {
-        in_addr inaddr{};
-        inaddr.s_addr = ip_;
-
-        char address[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &inaddr, address, INET_ADDRSTRLEN);
-
-        // TODO: Add a designator for if this address is connect, map, search, or world, etc.
-
-        // This is internal, so we can trust it.
-        return fmt::format("{}:{}", asStringFromUntrustedSource(address), port_);
-    }
-
-    auto getIPP() const -> uint64
-    {
-        return static_cast<uint64>(ip_) | (static_cast<uint64>(port_) << 32);
-    }
-
-    auto toZMQMessage() const -> zmq::message_t
-    {
-        const auto ipp = getIPP();
-        return zmq::message_t(&ipp, sizeof(ipp));
-    }
+    auto toString() const -> std::string;
+    auto toZMQMessage() const -> zmq::message_t;
 
     //
     // Operators for use with STL containers
     //
 
-    auto operator<(const IPP& other) const -> bool
-    {
-        return ip_ < other.ip_ || (ip_ == other.ip_ && port_ < other.port_);
-    }
+    auto operator<(const IPP& other) const -> bool;
 
 private:
+    // IP is always stored and used in network byte order.
     uint32 ip_{};
+
+    // Port is always stored and used in host byte order (human-readable).
     uint16 port_{};
 };

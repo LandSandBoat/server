@@ -23,7 +23,7 @@
 
 #include "lua/luautils.h"
 
-#include "map.h"
+#include "map_server.h"
 #include "mob_spell_list.h"
 
 CMobSpellList::CMobSpellList() = default;

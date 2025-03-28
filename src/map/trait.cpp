@@ -25,7 +25,7 @@
 
 #include "blue_trait.h"
 #include "entities/battleentity.h"
-#include "map.h"
+#include "map_server.h"
 #include "trait.h"
 
 /************************************************************************

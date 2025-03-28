@@ -26,7 +26,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
-#include "common/taskmgr.h"
+#include "common/task_manager.h"
 
 namespace serverutils
 {
@@ -37,7 +37,7 @@ namespace serverutils
     int32 GetVolatileServerVar(std::string const& var);
     void  SetVolatileServerVar(std::string const& var, int32 value, uint32 expiry = 0);
 
-    int32 PersistVolatileServerVars(time_point tick, CTaskMgr::CTask* PTask);
+    int32 PersistVolatileServerVars(time_point tick, CTaskManager::CTask* PTask);
 } // namespace serverutils
 
 #endif // _SERVERUTILS_H

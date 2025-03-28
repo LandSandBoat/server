@@ -21,7 +21,10 @@
 
 #ifndef _DAILYSYSTEM_H
 #define _DAILYSYSTEM_H
-#include "map.h"
+
+#include "map_server.h"
+
+#include "entities/charentity.h"
 
 namespace daily
 {

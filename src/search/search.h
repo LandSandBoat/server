@@ -51,7 +51,7 @@ public:
         if (length > max_size)
         {
             size = 0;
-            ShowError(fmt::format("Error: search packet with size above {} requested!", max_size));
+            ShowErrorFmt("Error: search packet with size above {} requested!", max_size);
             return;
         }
 
@@ -68,8 +68,8 @@ public:
     {
         return buff_.data();
     }
-private:
 
+private:
     std::array<uint8_t, max_size> buff_;
     uint16_t                      size;
 };

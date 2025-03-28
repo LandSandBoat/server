@@ -19,11 +19,9 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
+#include "synth_result.h"
 #include "entities/charentity.h"
 #include "synth_message.h"
-#include "synth_result.h"
 #include "trade_container.h"
 
 CSynthResultMessagePacket::CSynthResultMessagePacket(CCharEntity* PChar, SYNTH_MESSAGE messageID, uint16 itemID, uint8 quantity)

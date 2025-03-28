@@ -20,8 +20,7 @@
 ===========================================================================
 */
 
-#ifndef _XIRAND_H_
-#define _XIRAND_H_
+#pragma once
 
 //
 // You can choose an RNG by commenting/uncommenting one of the lines below.
@@ -147,5 +146,3 @@ inline T xirand::GetRandomElement(std::initializer_list<T> list)
 
 // Get secure random numbers
 size_t sysrandom(void* dst, size_t dstlen);
-
-#endif // _XIRAND_H_

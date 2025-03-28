@@ -22,7 +22,7 @@
 #pragma once
 
 #include "common/application.h"
-#include "common/taskmgr.h"
+#include "common/task_manager.h"
 #include "common/zmq_router_wrapper.h"
 
 #include "http_server.h"
@@ -44,7 +44,9 @@ public:
     WorldServer(int argc, char** argv);
     ~WorldServer() override;
 
-    void Tick() override;
+    void loadConsoleCommands() override;
+
+    void run() override;
 
     std::unique_ptr<IPCServer> ipcServer_;
 

@@ -8,169 +8,8 @@ require('scripts/globals/magic')
 xi = xi or {}
 xi.autows = xi.autows or {}
 
-local function getAutoHitRate(attacker, defender, capHitRate, bonus, melee)
-    local acc = (melee and attacker:getACC() or attacker:getRACC()) + (bonus or 0)
-    local eva = defender:getEVA()
-
-    local levelbonus = 0
-    if attacker:getMainLvl() > defender:getMainLvl() then
-        levelbonus = 2 * (attacker:getMainLvl() - defender:getMainLvl())
-    end
-
-    local hitrate = acc - eva + levelbonus + 75
-    hitrate = hitrate / 100
-
-    -- Applying hitrate caps
-    if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
-        hitrate = utils.clamp(hitrate, 0.2, 0.95)
-    end
-
-    return hitrate
-end
-
--- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
-local function getRangedCRatio(attacker, defender, params, ignoredDef)
-    local cratio = attacker:getRATT() * params.atkmulti / (defender:getStat(xi.mod.DEF) - ignoredDef)
-
-    local levelbonus = 0
-    if attacker:getMainLvl() > defender:getMainLvl() then
-        levelbonus = 0.05 * (attacker:getMainLvl() - defender:getMainLvl())
-    end
-
-    cratio = cratio + levelbonus
-    cratio = utils.clamp(cratio, 0, 3.0)
-
-    local pdif = {}
-    local pdifcrit = {}
-
-    -- max
-    local pdifmax = 0
-    if cratio < 0.9 then
-        pdifmax = cratio * 10 / 9
-    elseif cratio < 1.1 then
-        pdifmax = 1
-    else
-        pdifmax = cratio
-    end
-
-    -- min
-    local pdifmin = 0
-    if cratio < 0.9 then
-        pdifmin = cratio
-    elseif cratio < 1.1 then
-        pdifmin = 1
-    else
-        pdifmin = cratio * 20 / 19 - 3 / 19
-    end
-
-    pdif[1] = pdifmin
-    pdif[2] = pdifmax
-
-    pdifmin = pdifmin * 1.25
-    pdifmax = pdifmax * 1.25
-
-    local critbonus = attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS)
-    critbonus = utils.clamp(critbonus, 0, 100)
-    pdifcrit[1] = pdifmin * (100 + critbonus) / 100
-    pdifcrit[2] = pdifmax * (100 + critbonus) / 100
-
-    return pdif, pdifcrit
-end
-
--- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
-local function getMeleeCRatio(attacker, defender, params, ignoredDef)
-    local cratio = attacker:getStat(xi.mod.ATT) * params.atkmulti / (defender:getStat(xi.mod.DEF) - ignoredDef)
-
-    local levelbonus = 0
-    if attacker:getMainLvl() > defender:getMainLvl() then
-        levelbonus = 0.05 * (attacker:getMainLvl() - defender:getMainLvl())
-    end
-
-    cratio = cratio + levelbonus
-    cratio = utils.clamp(cratio, 0, 4.0)
-
-    local pdif = {}
-    local pdifcrit = {}
-
-    local pdifmin = 0
-    local pdifmax = 1
-
-    if cratio < 0.5 then
-        pdifmax = cratio + 0.5
-    elseif cratio <= 0.7 then
-        pdifmax = 1
-    elseif cratio <= 1.2 then
-        pdifmax = cratio + 0.3
-    elseif cratio <= 1.5 then
-        pdifmax = (cratio * 0.25) + cratio
-    elseif cratio <= 2.625 then
-        pdifmax = cratio + 0.375
-    elseif cratio <= 3.25 then
-        pdifmax = 3
-    else
-        pdifmax = cratio
-    end
-
-    if cratio < 0.38 then
-        pdifmin =  0
-    elseif cratio <= 1.25 then
-        pdifmin = cratio * 1176 / 1024 - 448 / 1024
-    elseif cratio <= 1.51 then
-        pdifmin = 1
-    elseif cratio <= 2.44 then
-        pdifmin = cratio * 1176 / 1024 - 775 / 1024
-    else
-        pdifmin = cratio - 0.375
-    end
-
-    pdif[1] = pdifmin
-    pdif[2] = pdifmax
-
-    cratio = cratio + 1
-    cratio = utils.clamp(cratio, 0, 4.0)
-
-    if cratio < 0.5 then
-        pdifmax = cratio + 0.5
-    elseif cratio <= 0.7 then
-        pdifmax = 1
-    elseif cratio <= 1.2 then
-        pdifmax = cratio + 0.3
-    elseif cratio <= 1.5 then
-        pdifmax = cratio * 0.25 + cratio
-    elseif cratio <= 2.625 then
-        pdifmax = cratio + 0.375
-    elseif cratio <= 3.25 then
-        pdifmax = 3
-    else
-        pdifmax = cratio
-    end
-
-    if cratio < 0.38 then
-        pdifmin =  0
-    elseif cratio <= 1.25 then
-        pdifmin = cratio * 1176 / 1024 - 448 / 1024
-    elseif cratio <= 1.51 then
-        pdifmin = 1
-    elseif cratio <= 2.44 then
-        pdifmin = cratio * 1176 / 1024 - 775 / 1024
-    else
-        pdifmin = cratio - 0.375
-    end
-
-    local critbonus = attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS)
-    critbonus = utils.clamp(critbonus, 0, 100)
-    pdifcrit[1] = pdifmin * (100 + critbonus) / 100
-    pdifcrit[2] = pdifmax * (100 + critbonus) / 100
-
-    return pdif, pdifcrit
-end
-
 -- params contains: ftpMod, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, critVaries, accVaries, ignoredDefense, atkmulti, kick, accBonus, weaponType, weaponDamage
 xi.autows.doAutoPhysicalWeaponskill = function(attacker, target, wsID, tp, primaryMsg, action, taChar, wsParams, skill)
-    -- Determine cratio and ccritratio
-    local ignoredDef         = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignoredDefense)
-    local cratio, ccritratio = getMeleeCRatio(attacker, target, wsParams, ignoredDef)
-
     -- Set up conditions and wsParams used for calculating weaponskill damage
 
     -- Handle Flame Holder attachment.
@@ -190,8 +29,6 @@ xi.autows.doAutoPhysicalWeaponskill = function(attacker, target, wsID, tp, prima
     calcParams.weaponDamage = xi.weaponskills.getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
     calcParams.attackInfo = attack
     calcParams.fSTR = utils.clamp(attacker:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10)
-    calcParams.cratio = cratio
-    calcParams.ccritratio = ccritratio
     calcParams.accStat = attacker:getACC()
     calcParams.melee = true
     calcParams.mustMiss = target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
@@ -212,7 +49,8 @@ xi.autows.doAutoPhysicalWeaponskill = function(attacker, target, wsID, tp, prima
     calcParams.bonusTP = wsParams.bonusTP or 0
     calcParams.bonusfTP = flameHolderFTP or 0
     calcParams.bonusAcc = 0 + attacker:getMod(xi.mod.WSACC)
-    calcParams.hitRate = getAutoHitRate(attacker, target, false, calcParams.bonusAcc, calcParams.melee)
+    calcParams.firstHitRate = xi.weaponskills.getHitRate(attacker, target, calcParams.bonusAcc + 100) -- TODO: do automatons get first hit acc bonus?
+    calcParams.hitRate      = xi.weaponskills.getHitRate(attacker, target, calcParams.bonusAcc)
     calcParams.skillType = attack.weaponType
     calcParams.tpUsed = tp
 
@@ -254,10 +92,6 @@ end
 
 -- params contains: ftpMod, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, critVaries, accVaries, ignoredDefense, atkmulti, accBonus, weaponDamage
 xi.autows.doAutoRangedWeaponskill = function(attacker, target, wsID, wsParams, tp, primaryMsg, skill, action)
-    -- Determine cratio and ccritratio
-    local ignoredDef         = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignoredDefense)
-    local cratio, ccritratio = getRangedCRatio(attacker, target, wsParams, ignoredDef)
-
     -- Set up conditions and wsParams used for calculating weaponskill damage
 
     -- Handle Flame Holder attachment.
@@ -280,8 +114,6 @@ xi.autows.doAutoRangedWeaponskill = function(attacker, target, wsID, wsParams, t
         weaponDamage = { wsParams.weaponDamage or rangedDamage },
         attackInfo = attack,
         fSTR = utils.clamp(attacker:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10),
-        cratio = cratio,
-        ccritratio = ccritratio,
         accStat = attacker:getRACC(),
         melee = false,
         mustMiss = false,
@@ -299,7 +131,7 @@ xi.autows.doAutoRangedWeaponskill = function(attacker, target, wsID, wsParams, t
         bonusAcc = 0 + attacker:getMod(xi.mod.WSACC),
         tpUsed = tp,
     }
-    calcParams.hitRate = getAutoHitRate(attacker, target, false, calcParams.bonusAcc, calcParams.melee)
+    calcParams.hitRate = xi.weaponskills.getRangedHitRate(attacker, target, calcParams.bonusAcc)
     calcParams.skillType = attack.weaponType
 
     -- Send our params off to calculate our raw WS damage, hits landed, and shadows absorbed

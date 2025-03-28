@@ -25,6 +25,7 @@
 #include "blue_spell.h"
 #include "common/cbasetypes.h"
 #include "merit.h"
+#include "packets/weather.h"
 #include "status_effect.h"
 
 #include <list>

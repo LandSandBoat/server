@@ -69,8 +69,8 @@ auto IPCServer::getIPPForCharId(uint32 charId) -> std::optional<IPP>
     const auto rset = db::preparedStmt("SELECT server_addr, server_port FROM accounts_sessions WHERE charid = ? LIMIT 1", charId);
     if (rset && rset->rowsCount() && rset->next())
     {
-        const auto ip   = rset->get<uint64>("server_addr");
-        const auto port = rset->get<uint64>("server_port");
+        const auto ip   = rset->get<uint32>("server_addr");
+        const auto port = rset->get<uint16>("server_port");
         const auto ipp  = IPP(ip, port);
 
         // characterCache_.updateCharacter(charId, ipp);
@@ -92,8 +92,8 @@ auto IPCServer::getIPPForCharName(const std::string& charName) -> std::optional<
                                        charName);
     if (rset && rset->rowsCount() && rset->next())
     {
-        const auto ip   = rset->get<uint64>("server_addr");
-        const auto port = rset->get<uint64>("server_port");
+        const auto ip   = rset->get<uint32>("server_addr");
+        const auto port = rset->get<uint16>("server_port");
         return IPP(ip, port);
     }
 
@@ -358,7 +358,7 @@ void IPCServer::handleIncomingMessages()
 
         DebugIPCFmt("Incoming {} message from {}", msgType, message.ipp.toString());
 
-        ipc::IIPCMessageHandler::handleMessage(message.ipp, { message.payload.data(), message.payload.size() });
+        handleMessage(message.ipp, { message.payload.data(), message.payload.size() });
     }
 }
 
@@ -588,7 +588,7 @@ void IPCServer::handleMessage_KillSession(const IPP& ipp, const ipc::KillSession
         {
             const auto zoneSettings = zoneSettings_.zoneSettingsMap_.at(prevZoneID);
 
-            DebugIPCFmt(fmt::format("Message: -> rerouting to {}", zoneSettings.ipp.toString()));
+            DebugIPCFmt("Message: -> rerouting to {}", zoneSettings.ipp.toString());
 
             sendMessage(zoneSettings.ipp, message);
         }
@@ -597,7 +597,7 @@ void IPCServer::handleMessage_KillSession(const IPP& ipp, const ipc::KillSession
     {
         for (const auto& ipp : zoneSettings_.mapEndpoints_)
         {
-            DebugIPCFmt(fmt::format("Message: -> rerouting to {}", ipp.toString()));
+            DebugIPCFmt("Message: -> rerouting to {}", ipp.toString());
 
             sendMessage(ipp, message);
         }

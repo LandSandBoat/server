@@ -20,10 +20,13 @@
 */
 
 #include "automaton_controller.h"
+
 #include "ai/ai_container.h"
 #include "ai/states/ability_state.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/weaponskill_state.h"
+#include "common/database.h"
+#include "common/sql.h"
 #include "common/utils.h"
 #include "enmity_container.h"
 #include "entities/trustentity.h"

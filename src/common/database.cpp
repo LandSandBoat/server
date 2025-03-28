@@ -21,10 +21,11 @@
 
 #include "database.h"
 
+#include "application.h"
 #include "logging.h"
 #include "macros.h"
 #include "settings.h"
-#include "taskmgr.h"
+#include "task_manager.h"
 
 #include <chrono>
 using namespace std::chrono_literals;
@@ -125,10 +126,10 @@ Synchronized<db::detail::State>& db::detail::getState()
 auto db::detail::timer(std::string const& query) -> xi::final_action<std::function<void()>>
 {
     // clang-format off
-    const auto start = hires_clock::now();
+    const auto start = server_clock::now();
     return xi::finally<std::function<void()>>([query, start]() -> void
     {
-        const auto end      = hires_clock::now();
+        const auto end      = server_clock::now();
         const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
         if (timersEnabled && settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))
         {
@@ -149,6 +150,7 @@ auto db::queryStr(std::string const& rawQuery) -> std::unique_ptr<db::detail::Re
 {
     TracyZoneScoped;
     TracyZoneString(rawQuery);
+    // TODO: Collect up bound args and report to tracy here
 
     // clang-format off
     return detail::getState().write([&](detail::State& state) -> std::unique_ptr<db::detail::ResultSetWrapper>

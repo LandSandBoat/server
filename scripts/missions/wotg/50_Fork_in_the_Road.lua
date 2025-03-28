@@ -43,7 +43,7 @@ end
 local dawndropOnEventFinish = function(player, csid, option, npc)
     local numDawndrops = 0
 
-    for _, zoneInfoTable in zoneEventInfo do
+    for _, zoneInfoTable in pairs(zoneEventInfo) do
         if player:hasKeyItem(zoneInfoTable[1]) then
             numDawndrops = numDawndrops + 1
         end
@@ -57,7 +57,7 @@ local dawndropOnEventFinish = function(player, csid, option, npc)
         player:messageSpecial(ID.text.GATHERED_DAWNDROPS_LIGHT, xi.ki.PRIMAL_GLOW)
         player:messageName(ID.text.RETRACED_ALL_JUNCTIONS, nil)
 
-        for _, zoneInfoTable in zoneEventInfo do
+        for _, zoneInfoTable in pairs(zoneEventInfo) do
             if player:hasKeyItem(zoneInfoTable[1]) then
                 player:delKeyItem(zoneInfoTable[1])
             end

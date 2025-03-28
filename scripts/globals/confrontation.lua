@@ -159,15 +159,13 @@ xi.confrontation.start = function(player, npc, mobIds, params)
     mobIds = mobs
 
     -- Tag alliance members with the confrontation effect
-    local registeredPlayerIds = {}
-    local registeredPlayers = {}
     local alliance = player:getAlliance()
+    local registeredPlayerIds = {}
 
     for _, member in ipairs(alliance) do
         -- Using the pop npc's ID as the 'key'
         member:addStatusEffect(xi.effect.CONFRONTATION, lookupKey, 0, 0)
         table.insert(registeredPlayerIds, member:getID())
-        table.insert(registeredPlayers, member)
     end
 
     -- Tag mobs with the confrontation effect
@@ -200,8 +198,7 @@ xi.confrontation.start = function(player, npc, mobIds, params)
 
     -- Pop!
     if params.allRegPlayerEnmity then
-        -- TODO: Add enmityPlayerList functionality to npcUtil.popFromQM
-        npcUtil.popFromQM(player, npc, mobIds, { look = true, claim = true, hide = 1, enmityPlayerList = registeredPlayers })
+        npcUtil.popFromQM(player, npc, mobIds, { look = true, claim = true, hide = 1, enmityPlayerList = alliance })
     else
         npcUtil.popFromQM(player, npc, mobIds, { look = true, claim = true, hide = 1 })
     end

@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/ipp.h"
+#include "common/logging.h"
 
 #include <atomic>
 #include <memory>

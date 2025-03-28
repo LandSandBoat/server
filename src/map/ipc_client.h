@@ -25,7 +25,7 @@
 #include "common/ipc.h"
 #include "common/lua.h"
 #include "common/mmo.h"
-#include "common/socket.h"
+
 #include "common/sql.h"
 #include "common/zmq_dealer_wrapper.h"
 
@@ -33,10 +33,15 @@
 #include <zmq.hpp>
 #include <zmq_addon.hpp>
 
-class IPCClient final : public ipc::IIPCMessageHandler
+class MapNetworking;
+
+class IPCClient final : public ipc::IPCMessageHandlerBase<IPCClient>
 {
 public:
-    IPCClient();
+    IPCClient(MapNetworking& networking);
+
+    auto getZMQEndpointString() -> std::string;
+    auto getZMQRoutingId() -> uint64;
 
     void handleIncomingMessages();
 
@@ -44,46 +49,47 @@ public:
     void sendMessage(const T& message);
 
     //
-    // ipc::IIPCMessageHandler
+    // ipc::IPCMessageHandlerBase
     //
 
-    void handleMessage_EmptyStruct(const IPP& ipp, const ipc::EmptyStruct& message) override;
-    void handleMessage_CharLogin(const IPP& ipp, const ipc::CharLogin& message) override;
-    void handleMessage_CharZone(const IPP& ipp, const ipc::CharZone& message) override;
-    void handleMessage_CharVarUpdate(const IPP& ipp, const ipc::CharVarUpdate& message) override;
-    void handleMessage_ChatMessageTell(const IPP& ipp, const ipc::ChatMessageTell& message) override;
-    void handleMessage_ChatMessageParty(const IPP& ipp, const ipc::ChatMessageParty& message) override;
-    void handleMessage_ChatMessageAlliance(const IPP& ipp, const ipc::ChatMessageAlliance& message) override;
-    void handleMessage_ChatMessageLinkshell(const IPP& ipp, const ipc::ChatMessageLinkshell& message) override;
-    void handleMessage_ChatMessageUnity(const IPP& ipp, const ipc::ChatMessageUnity& message) override;
-    void handleMessage_ChatMessageYell(const IPP& ipp, const ipc::ChatMessageYell& message) override;
-    void handleMessage_ChatMessageServerMessage(const IPP& ipp, const ipc::ChatMessageServerMessage& message) override;
-    void handleMessage_ChatMessageCustom(const IPP& ipp, const ipc::ChatMessageCustom& message) override;
-    void handleMessage_PartyInvite(const IPP& ipp, const ipc::PartyInvite& message) override;
-    void handleMessage_PartyInviteResponse(const IPP& ipp, const ipc::PartyInviteResponse& message) override;
-    void handleMessage_PartyReload(const IPP& ipp, const ipc::PartyReload& message) override;
-    void handleMessage_PartyDisband(const IPP& ipp, const ipc::PartyDisband& message) override;
-    void handleMessage_AllianceReload(const IPP& ipp, const ipc::AllianceReload& message) override;
-    void handleMessage_AllianceDissolve(const IPP& ipp, const ipc::AllianceDissolve& message) override;
-    void handleMessage_PlayerKick(const IPP& ipp, const ipc::PlayerKick& message) override;
-    void handleMessage_MessageStandard(const IPP& ipp, const ipc::MessageStandard& message) override;
-    void handleMessage_MessageSystem(const IPP& ipp, const ipc::MessageSystem& message) override;
-    void handleMessage_LinkshellRankChange(const IPP& ipp, const ipc::LinkshellRankChange& message) override;
-    void handleMessage_LinkshellRemove(const IPP& ipp, const ipc::LinkshellRemove& message) override;
-    void handleMessage_LinkshellSetMessage(const IPP& ipp, const ipc::LinkshellSetMessage& message) override;
-    void handleMessage_LuaFunction(const IPP& ipp, const ipc::LuaFunction& message) override;
-    void handleMessage_KillSession(const IPP& ipp, const ipc::KillSession& message) override;
-    void handleMessage_ConquestEvent(const IPP& ipp, const ipc::ConquestEvent& message) override;
-    void handleMessage_BesiegedEvent(const IPP& ipp, const ipc::BesiegedEvent& message) override;
-    void handleMessage_CampaignEvent(const IPP& ipp, const ipc::CampaignEvent& message) override;
-    void handleMessage_ColonizationEvent(const IPP& ipp, const ipc::ColonizationEvent& message) override;
-    void handleMessage_EntityInformationRequest(const IPP& ipp, const ipc::EntityInformationRequest& message) override;
-    void handleMessage_EntityInformationResponse(const IPP& ipp, const ipc::EntityInformationResponse& message) override;
-    void handleMessage_SendPlayerToLocation(const IPP& ipp, const ipc::SendPlayerToLocation& message) override;
+    void handleMessage_EmptyStruct(const IPP& ipp, const ipc::EmptyStruct& message);
+    void handleMessage_CharLogin(const IPP& ipp, const ipc::CharLogin& message);
+    void handleMessage_CharZone(const IPP& ipp, const ipc::CharZone& message);
+    void handleMessage_CharVarUpdate(const IPP& ipp, const ipc::CharVarUpdate& message);
+    void handleMessage_ChatMessageTell(const IPP& ipp, const ipc::ChatMessageTell& message);
+    void handleMessage_ChatMessageParty(const IPP& ipp, const ipc::ChatMessageParty& message);
+    void handleMessage_ChatMessageAlliance(const IPP& ipp, const ipc::ChatMessageAlliance& message);
+    void handleMessage_ChatMessageLinkshell(const IPP& ipp, const ipc::ChatMessageLinkshell& message);
+    void handleMessage_ChatMessageUnity(const IPP& ipp, const ipc::ChatMessageUnity& message);
+    void handleMessage_ChatMessageYell(const IPP& ipp, const ipc::ChatMessageYell& message);
+    void handleMessage_ChatMessageServerMessage(const IPP& ipp, const ipc::ChatMessageServerMessage& message);
+    void handleMessage_ChatMessageCustom(const IPP& ipp, const ipc::ChatMessageCustom& message);
+    void handleMessage_PartyInvite(const IPP& ipp, const ipc::PartyInvite& message);
+    void handleMessage_PartyInviteResponse(const IPP& ipp, const ipc::PartyInviteResponse& message);
+    void handleMessage_PartyReload(const IPP& ipp, const ipc::PartyReload& message);
+    void handleMessage_PartyDisband(const IPP& ipp, const ipc::PartyDisband& message);
+    void handleMessage_AllianceReload(const IPP& ipp, const ipc::AllianceReload& message);
+    void handleMessage_AllianceDissolve(const IPP& ipp, const ipc::AllianceDissolve& message);
+    void handleMessage_PlayerKick(const IPP& ipp, const ipc::PlayerKick& message);
+    void handleMessage_MessageStandard(const IPP& ipp, const ipc::MessageStandard& message);
+    void handleMessage_MessageSystem(const IPP& ipp, const ipc::MessageSystem& message);
+    void handleMessage_LinkshellRankChange(const IPP& ipp, const ipc::LinkshellRankChange& message);
+    void handleMessage_LinkshellRemove(const IPP& ipp, const ipc::LinkshellRemove& message);
+    void handleMessage_LinkshellSetMessage(const IPP& ipp, const ipc::LinkshellSetMessage& message);
+    void handleMessage_LuaFunction(const IPP& ipp, const ipc::LuaFunction& message);
+    void handleMessage_KillSession(const IPP& ipp, const ipc::KillSession& message);
+    void handleMessage_ConquestEvent(const IPP& ipp, const ipc::ConquestEvent& message);
+    void handleMessage_BesiegedEvent(const IPP& ipp, const ipc::BesiegedEvent& message);
+    void handleMessage_CampaignEvent(const IPP& ipp, const ipc::CampaignEvent& message);
+    void handleMessage_ColonizationEvent(const IPP& ipp, const ipc::ColonizationEvent& message);
+    void handleMessage_EntityInformationRequest(const IPP& ipp, const ipc::EntityInformationRequest& message);
+    void handleMessage_EntityInformationResponse(const IPP& ipp, const ipc::EntityInformationResponse& message);
+    void handleMessage_SendPlayerToLocation(const IPP& ipp, const ipc::SendPlayerToLocation& message);
 
-    void handleUnknownMessage(const IPP& ipp, const std::span<uint8_t> message) override;
+    void handleUnknownMessage(const IPP& ipp, const std::span<uint8_t> message);
 
 private:
+    MapNetworking&   networking_;
     ZMQDealerWrapper zmqDealerWrapper_;
 };
 
@@ -95,9 +101,10 @@ template <typename T>
 void IPCClient::sendMessage(const T& message)
 {
     TracyZoneScoped;
+    TracyZoneCString(ipc::toStringV<T>);
 
     // TODO: IPP for World Server
-    DebugIPCFmt("Sending message: {}", ipc::toString(ipc::getEnumType<T>()));
+    DebugIPCFmt("Sending message: {}", ipc::toStringV<T>);
 
     const auto bytes = ipc::toBytesWithHeader<T>(message);
     zmqDealerWrapper_.outgoingQueue_.enqueue(zmq::message_t(bytes));
@@ -112,7 +119,7 @@ extern std::unique_ptr<IPCClient> ipcClient_;
 
 namespace message
 {
-    void init();
+    void init(MapNetworking& networking);
 
     template <typename T>
     void send(const T& message)

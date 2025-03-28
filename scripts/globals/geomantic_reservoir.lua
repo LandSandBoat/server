@@ -42,11 +42,56 @@ local geoSpellTable =
     [xi.magic.spell.GEO_FADE      ] = { xi.item.GEO_FADE       },
 }
 
+-- need to check if you have the indi spell before learning the geo spell
+-- https://www.bg-wiki.com/ffxi/Geomantic_Reservoir
+local indiSpellMap =
+{
+    [xi.magic.spell.GEO_POISON    ] = xi.magic.spell.INDI_POISON,
+    [xi.magic.spell.GEO_VOIDANCE  ] = xi.magic.spell.INDI_VOIDANCE,
+    [xi.magic.spell.GEO_PRECISION ] = xi.magic.spell.INDI_PRECISION,
+    [xi.magic.spell.GEO_REGEN     ] = xi.magic.spell.INDI_REGEN,
+    [xi.magic.spell.GEO_ATTUNEMENT] = xi.magic.spell.INDI_ATTUNEMENT,
+    [xi.magic.spell.GEO_FOCUS     ] = xi.magic.spell.INDI_FOCUS,
+    [xi.magic.spell.GEO_BARRIER   ] = xi.magic.spell.INDI_BARRIER,
+    [xi.magic.spell.GEO_REFRESH   ] = xi.magic.spell.INDI_REFRESH,
+    [xi.magic.spell.GEO_CHR       ] = xi.magic.spell.INDI_CHR,
+    [xi.magic.spell.GEO_MND       ] = xi.magic.spell.INDI_MND,
+    [xi.magic.spell.GEO_FURY      ] = xi.magic.spell.INDI_FURY,
+    [xi.magic.spell.GEO_INT       ] = xi.magic.spell.INDI_INT,
+    [xi.magic.spell.GEO_AGI       ] = xi.magic.spell.INDI_AGI,
+    [xi.magic.spell.GEO_POISON    ] = xi.magic.spell.INDI_POISON,
+    [xi.magic.spell.GEO_FEND      ] = xi.magic.spell.INDI_FEND,
+    [xi.magic.spell.GEO_VIT       ] = xi.magic.spell.INDI_VIT,
+    [xi.magic.spell.GEO_DEX       ] = xi.magic.spell.INDI_DEX,
+    [xi.magic.spell.GEO_ACUMEN    ] = xi.magic.spell.INDI_ACUMEN,
+    [xi.magic.spell.GEO_STR       ] = xi.magic.spell.INDI_STR,
+    [xi.magic.spell.GEO_SLOW      ] = xi.magic.spell.INDI_SLOW,
+    [xi.magic.spell.GEO_TORPOR    ] = xi.magic.spell.INDI_TORPOR,
+    [xi.magic.spell.GEO_SLIP      ] = xi.magic.spell.INDI_SLIP,
+    [xi.magic.spell.GEO_LANGUOR   ] = xi.magic.spell.INDI_LANGUOR,
+    [xi.magic.spell.GEO_PARALYSIS ] = xi.magic.spell.INDI_PARALYSIS,
+    [xi.magic.spell.GEO_VEX       ] = xi.magic.spell.INDI_VEX,
+    [xi.magic.spell.GEO_FRAILTY   ] = xi.magic.spell.INDI_FRAILTY,
+    [xi.magic.spell.GEO_WILT      ] = xi.magic.spell.INDI_WILT,
+    [xi.magic.spell.GEO_MALAISE   ] = xi.magic.spell.INDI_MALAISE,
+    [xi.magic.spell.GEO_GRAVITY   ] = xi.magic.spell.INDI_GRAVITY,
+    [xi.magic.spell.GEO_HASTE     ] = xi.magic.spell.INDI_HASTE,
+    [xi.magic.spell.GEO_FADE      ] = xi.magic.spell.INDI_FADE,
+}
+
 xi.geomanticReservoir.onTrigger = function(player, npc, geoSpell)
     -- TODO: According to BG-Wiki there is a sequence here that a player can proc '!!' and achieve a Geomancy skill-up.
+    -- TODO: is there different messaging if you don't know the indi spell vs already having the geo spell?
     -- https://www.bg-wiki.com/ffxi/Geomantic_Reservoir
     local procEffectTime = math.random(230, 300)
-    if player:getMainJob() == xi.job.GEO and not player:hasSpell(geoSpell) then
+    local indiSpell = indiSpellMap[geoSpell]
+
+    if
+        player:getMainJob() == xi.job.GEO and
+        not player:hasSpell(geoSpell) and
+        indiSpell and
+        player:hasSpell(indiSpell)
+    then
         player:startEvent(15000,  procEffectTime)
         -- TODO add skillup logic if player clicks at the time the proc happens
     else

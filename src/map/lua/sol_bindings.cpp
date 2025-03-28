@@ -121,4 +121,8 @@ SOL_BIND_DEF(CLuaTriggerArea, ITriggerArea);
 #include "zone.h"
 #include "lua_zone.h"
 SOL_BIND_DEF(CLuaZone, CZone);
+
+#include "treasure_pool.h"
+#include "lua_treasure_pool.h"
+SOL_BIND_DEF(CLuaTreasurePool, CTreasurePool);
 // clang-format on

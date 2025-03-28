@@ -19,11 +19,11 @@
 ===========================================================================
 */
 
-#include <math.h>
-
-#include "common/socket.h"
-
 #include "roe_sparkupdate.h"
+
+#include "common/database.h"
+#include "common/logging.h"
+#include "common/sql.h"
 
 #include "entities/charentity.h"
 

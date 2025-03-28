@@ -18,13 +18,11 @@
 
 ===========================================================================
 */
-#include "search_server.h"
 
-// TODO: Standardize our running arguments for shutdown and thread signals
-std::atomic<bool> gRunFlag = true;
+#include "search_server.h"
 
 int main(int argc, char** argv)
 {
-    auto pSearchServer = std::make_unique<SearchServer>(argc, argv);
+    std::make_unique<SearchServer>(argc, argv)->run();
     return 0;
 }

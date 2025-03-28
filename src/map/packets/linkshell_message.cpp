@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "linkshell_message.h"
 
 #include <cstring>

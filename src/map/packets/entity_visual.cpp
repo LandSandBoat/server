@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "entities/baseentity.h"
 
 #include "entity_visual.h"

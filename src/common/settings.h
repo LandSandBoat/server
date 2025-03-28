@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _SETTINGS_H
-#define _SETTINGS_H
+#pragma once
 
 #include "logging.h"
 #include "utils.h"
@@ -171,5 +170,3 @@ namespace settings
 
     void visit(const std::function<void(std::string, SettingsVariant_t)>& visitor);
 } // namespace settings
-
-#endif // _SETTINGS_H
