@@ -7723,6 +7723,36 @@ void CLuaBaseEntity::completeMission(uint8 missionLogID, uint16 missionID)
 }
 
 /************************************************************************
+ *  Function: getMissionStatusLower()
+ *  Purpose : statusLowerを返す
+ *  Example : player:getMissionStatusLower(xi.mission.log_id.TOAU)
+ *  Notes   : Specify the area to pass a Lua table object
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getMissionStatusLower(uint8 missionLogID)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return false;
+    }
+
+    uint16 statusLower = 0;
+
+    if (missionLogID < MAX_MISSIONAREA)
+    {
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        statusLower = PChar->m_missionLog[missionLogID].statusLower;
+    }
+    else
+    {
+        ShowError("Lua::getMissionStatusLower: missionLogID %i is invalid", missionLogID);
+    }
+
+    return statusLower;
+}
+
+/************************************************************************
  *  Function: setMissionStatus()
  *  Purpose : Sets mission progress data.
  *  Example : player:setMissionStatus(player:getNation(), 14)
@@ -18773,6 +18803,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getCurrentMission", CLuaBaseEntity::getCurrentMission);
     SOL_REGISTER("hasCompletedMission", CLuaBaseEntity::hasCompletedMission);
     SOL_REGISTER("completeMission", CLuaBaseEntity::completeMission);
+    SOL_REGISTER("getMissionStatusLower", CLuaBaseEntity::getMissionStatusLower);
     SOL_REGISTER("setMissionStatus", CLuaBaseEntity::setMissionStatus);
     SOL_REGISTER("getMissionStatus", CLuaBaseEntity::getMissionStatus);
     SOL_REGISTER("getEminenceCompleted", CLuaBaseEntity::getEminenceCompleted);

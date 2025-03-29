@@ -387,6 +387,7 @@ public:
     uint16 getCurrentMission(sol::object const& missionLogObj);
     bool   hasCompletedMission(uint8 missionLogID, uint16 missionID);
     void   completeMission(uint8 missionLogID, uint16 missionID);
+    uint16 getMissionStatusLower(uint8 missionLogID);
 
     void   setMissionStatus(uint8 missionLogID, sol::object const& arg2Obj, sol::object const& arg3Obj);
     uint32 getMissionStatus(uint8 missionLogID, sol::object const& missionStatusPosObj);
