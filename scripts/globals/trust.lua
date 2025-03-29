@@ -320,8 +320,10 @@ xi.trust.canCast = function(caster, spell, notAllowedTrustIds)
 
     -- Trusts cannot be summoned if you have hate
     if caster:hasEnmity() then
-        caster:messageSystem(xi.msg.system.TRUST_NO_ENMITY)
-        return -1
+        if xi.settings.map.DISABLE_TRUST_WHEN_ENMITY then
+            caster:messageSystem(xi.msg.system.TRUST_NO_ENMITY)
+            return -1
+        end
     end
 
     -- Check party for trusts
