@@ -330,4 +330,7 @@ xi.settings.map =
     CUSTOM_INVENTORY = false,
     -- カスタムインベントリのメッセージ：を合成倉庫に入れた
     CUSTOM_INVENTORY_MESSAGE = '\x82\xf0\x8d\x87\x90\xac\x91\x71\x8c\xc9\x82\xc9\x93\xfc\x82\xea\x82\xbd',
+
+    -- ヘイトがある状態でフェイスを呼び出せない
+    DISABLE_TRUST_WHEN_ENMITY = true,
 }
