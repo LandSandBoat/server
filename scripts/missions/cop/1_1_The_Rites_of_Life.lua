@@ -24,7 +24,7 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             custom_check = true
             if xi.settings.map.MISSION_PROGRESS_CUSTOM then
-                custom_check = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_LAST_VERSE)
+                custom_check = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.AWAKENING)
             end
 
             return xi.settings.main.ENABLE_COP == 1 and currentMission < xi.mission.id.cop.THE_RITES_OF_LIFE and custom_check
