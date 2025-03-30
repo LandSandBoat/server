@@ -18,7 +18,6 @@ return {
     ['Gaweesh']       = { event = 258 },
     ['Hadibal']       = { event = 245 },
     ['Iphaaf']        = { event = 254 },
-    ['Krujaal']       = { event = 0 },
     ['Mihli_Aliapoh'] = { event = 267 },
     ['Najaaj']        = { event = 241 },
     ['Najelith']      = { event = 269 },

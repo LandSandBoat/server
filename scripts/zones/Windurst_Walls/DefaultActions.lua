@@ -49,7 +49,6 @@ return {
     ['Purere']               = { event = 311 },
     ['Quentin']              = { event = 334 },
     ['Shantotto']            = { event = 164 },
-    ['Shinchai-Tocchai']     = { event = 505 },
     ['Six_of_Diamonds']      = { event = 265 },
     ['Suhie-Kaihie']         = { event = 291 },
     ['Takoda']               = { event = 332 },

@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,29 +19,26 @@
 ===========================================================================
 */
 
-#include <cstring>
+#include "party_member_define.h"
 
-#include "party_member_update.h"
+#include "common/socket.h"
+
+#include <cstring>
 
 #include "alliance.h"
 #include "entities/charentity.h"
 #include "entities/trustentity.h"
 #include "party.h"
 
-// https://github.com/atom0s/XiPackets/tree/main/world/server/0x00DD
-CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 MemberNumber, uint16 memberflags, uint16 ZoneID)
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x00E2
+CPartyMemberDefinePacket::CPartyMemberDefinePacket(CCharEntity* PChar, uint8 MemberNumber, uint16 memberflags, uint16 ZoneID)
 {
-    this->setType(0xDD);
-
-    // This packet size may have changed in the Nov 2021 Update with the introduction of master levels, but it broke things for us in the following ways:
-    // 1. Trusts would not appear in the party list
-    // 2. Players in a party would always appear as out of zone
-    // Modify with caution for the below functions!
+    this->setType(0xE2);
     this->setSize(0x40);
 
     if (PChar == nullptr)
     {
-        ShowError("CPartyMemberUpdatePacket::CPartyMemberUpdatePacket() - PChar was null.");
+        ShowError("CPartyMemberDefinePacket::CPartyMemberDefinePacket() - PChar was null.");
         return;
     }
 
@@ -81,14 +78,14 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 Mem
     std::memcpy(buffer_.data() + 0x28, PChar->getName().c_str(), PChar->getName().size());
 }
 
-CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 MemberNumber)
+CPartyMemberDefinePacket::CPartyMemberDefinePacket(CTrustEntity* PTrust, uint8 MemberNumber)
 {
-    this->setType(0xDD);
+    this->setType(0xE2);
     this->setSize(0x40);
 
     if (PTrust == nullptr)
     {
-        ShowError("CPartyMemberUpdatePacket::CPartyMemberUpdatePacket() - PTrust was null.");
+        ShowError("CPartyMemberDefinePacket::CPartyMemberDefinePacket() - PTrust was null.");
         return;
     }
 
@@ -111,9 +108,9 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 M
     std::memcpy(buffer_.data() + 0x28, PTrust->packetName.c_str(), PTrust->packetName.size());
 }
 
-CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(uint32 id, const std::string& name, uint16 memberFlags, uint8 MemberNumber, uint16 ZoneID)
+CPartyMemberDefinePacket::CPartyMemberDefinePacket(uint32 id, const std::string& name, uint16 memberFlags, uint8 MemberNumber, uint16 ZoneID)
 {
-    this->setType(0xDD);
+    this->setType(0xE2);
     this->setSize(0x40);
 
     ref<uint32>(0x04) = id;

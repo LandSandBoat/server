@@ -168,6 +168,39 @@ xi.moghouse.trySetMusic = function(player)
     end
 end
 
+xi.moghouse.visitationNPCOnTrigger = function(player, npc, csid, ahtUrhganArg)
+    if player:getPartySize() > 1 then
+        for _, member in ipairs(player:getParty()) do
+            if member:getID() == 1 and member:isInMogHouse() then
+                player:printToPlayer(string.format('Client limitation: Players with ID 1 (%s) seemingly cannot be visited in their Mog House', member:getName()), xi.msg.channel.SYSTEM_3, '')
+            end
+        end
+    end
+
+    player:startEvent(csid, player:getNation(), ahtUrhganArg)
+end
+
+xi.moghouse.visitationNPCOnEventFinish = function(player, csid, option, visitationCSID)
+    if option == 0 or option == utils.EVENT_CANCELLED_OPTION then
+        return
+    end
+
+    if csid ~= visitationCSID then
+        return
+    end
+
+    if player:getPartySize() < 2 then
+        return
+    end
+
+    for _, member in ipairs(player:getParty()) do
+        if member:getID() == option then
+            player:gotoPlayer(member:getName())
+            return
+        end
+    end
+end
+
 xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
     local cs = -1
 

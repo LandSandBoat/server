@@ -1,7 +1,6 @@
 -- local ID = zones[xi.zone.WINDURST_WOODS]
 
 return {
-    ['Abby_Jalunshi']      = { event = 798 },
     ['Aja-Panja']          = { event = 247 },
     ['An_Polaali']         = { event = 44 },
     ['An_Shanaa']          = { event = 45 },

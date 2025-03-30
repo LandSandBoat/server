@@ -5,7 +5,6 @@ return {
     ['Ada']                 = { event = 44 },
     ['Aigneis']             = { event = 192 },
     ['Baladanzo']           = { event = 354 },
-    ['Boronene']            = { event = 638 },
     ['Breanainn']           = { event = 182 },
     ['Calixte']             = { event = 46 },
     ['Chakwaina']           = { event = 350 },
