@@ -24,6 +24,13 @@ spellObject.onMobSpawn = function(mob)
     mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.FLASH }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH })
 
     mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 75 }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE })
+
+    mob:addListener('WEAPONSKILL_USE', 'TRION_WEAPONSKILL_USE', function(mobArg, target, wsid, tp, action)
+        if wsid == 3194 then -- Royal Savior
+            --  O Great kings of the noble line of d'Oraguille, shield me from harm!
+            xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
+        end
+    end)
 end
 
 spellObject.onMobDespawn = function(mob)
