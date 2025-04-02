@@ -10,6 +10,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    xi.trust.message(mob,xi.trust.messageOffset.SPECIAL_MOVE_1)
+
     -- Unsure if this is the correct value for enmity gain. The Wikis say it is stronger than Sentinel.
     -- Sentinel is 900, Provoke is 1800
     local power = 1300
@@ -21,7 +23,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:addStatusEffect(xi.effect.STONESKIN, amount, 0, 300)
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
 
-    return xi.effect.SENTINEL
+    return xi.effect.DEFENSE_BOOST
 end
 
 return mobskillObject
