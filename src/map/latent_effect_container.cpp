@@ -659,15 +659,18 @@ void CLatentEffectContainer::CheckLatentsWeather()
 void CLatentEffectContainer::CheckLatentsWeather(uint16 weather)
 {
     ProcessLatentEffects([this, weather](CLatentEffect& latent) {
-        if (latent.GetConditionsID() == LATENT::WEATHER_ELEMENT)
+        if (auto owner = dynamic_cast<CBattleEntity*>(m_POwner))
         {
-            auto element = zoneutils::GetWeatherElement(battleutils::GetWeather((CBattleEntity*)m_POwner, false, weather));
-            return ApplyLatentEffect(latent, latent.GetConditionsValue() == element);
-        }
-        else if (latent.GetConditionsID() == LATENT::WEATHER_CONDITION)
-        {
-            auto element = battleutils::GetWeather((CBattleEntity*)m_POwner, false, weather);
-            return ApplyLatentEffect(latent, latent.GetConditionsValue() == element);
+            if (latent.GetConditionsID() == LATENT::WEATHER_ELEMENT)
+            {
+                const auto element = zoneutils::GetWeatherElement(battleutils::GetWeather(owner, false, weather));
+                return ApplyLatentEffect(latent, latent.GetConditionsValue() == element);
+            }
+            else if (latent.GetConditionsID() == LATENT::WEATHER_CONDITION)
+            {
+                const auto element = battleutils::GetWeather(owner, false, weather);
+                return ApplyLatentEffect(latent, latent.GetConditionsValue() == element);
+            }
         }
         return false;
     });
