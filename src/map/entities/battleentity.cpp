@@ -863,31 +863,31 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
 {
     TracyZoneScoped;
     // TODO: consider which weapon!
-    int32 ATT    = 8 + m_modStat[Mod::ATT];
-    auto  ATTP   = m_modStat[Mod::ATTP];
-    auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[slot]);
+    int32 ATT           = 8 + m_modStat[Mod::ATT];
+    auto  ATTP          = m_modStat[Mod::ATTP];
+    auto* weapon        = dynamic_cast<CItemWeapon*>(m_Weapons[slot]);
+    float strMultiplier = 0.5;
 
     // https://www.bg-wiki.com/ffxi/Strength
     if (weapon && weapon->isTwoHanded()) // 2-handed weapon
     {
-        ATT += STR();
+        strMultiplier = 1.0;
     }
     else if (weapon && weapon->isHandToHand()) // H2H Weapon
     {
-        ATT += STR() * 3 / 4;
+        strMultiplier = 0.75;
     }
-    else if (slot == SLOT_RANGED || slot == SLOT_AMMO) // Ranged/ammo weapon.
+    else if (slot == SLOT_MAIN || slot == SLOT_RANGED || slot == SLOT_AMMO) // 1-handed weapon in main slot, Ranged or ammo weapon.
     {
-        ATT += STR();
+        strMultiplier = 1.0;
     }
-    else if (slot == SLOT_MAIN) // 1-handed weapon in main slot.
+
+    if (settings::get<bool>("main.USE_PRE_2013_STR_MULTIPLIER"))
     {
-        ATT += STR();
+        strMultiplier = 0.5;
     }
-    else // 1-handed weapon in sub slot.
-    {
-        ATT += STR() / 2;
-    }
+
+    ATT += STR() * strMultiplier;
 
     if (this->StatusEffectContainer->HasStatusEffect(EFFECT_ENDARK))
     {

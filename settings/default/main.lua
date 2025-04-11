@@ -137,7 +137,7 @@ xi.settings.main =
     DISABLE_PARTY_EXP_PENALTY        = false, -- true/false.
     ENABLE_IMMUNOBREAK               = true,  -- true/false. Allow/Disallow immunobreaks to happen.
     USE_PRE_2013_DEX_MULTIPLIER      = false, -- true/false. False uses 75% of DEX for accuracy calculation. Prior to 2013 50% of DEX was used.
-
+    USE_PRE_2013_STR_MULTIPLIER      = false, -- true/false. False uses STR multiplier of 1.0 for two handed, one handed main, and ranged attacks, 0.75 for H2H, and 0.5 for one handed in sub slot. True uses 0.5 of STR across the board and is how the game was from release to mid 2013.
 
     -- TRUSTS
     ENABLE_TRUST_CASTING           = 1,
