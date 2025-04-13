@@ -68,9 +68,23 @@ namespace charutils
 {
     void LoadExpTable();
     auto LoadChar(uint32 charId) -> CCharEntity*;
-    void LoadSpells(CCharEntity* PChar);
-    void LoadInventory(CCharEntity* PChar);
-    void LoadEquip(CCharEntity* PChar);
+
+    void LoadFromCharsSQL(CCharEntity* PChar);
+    void LoadFromCharSpellsSQL(CCharEntity* PChar);
+    void LoadFromCharProfileSQL(CCharEntity* PChar);
+    void LoadFromCharStorageSQL(CCharEntity* PChar);
+    void LoadFromCharLookSQL(CCharEntity* PChar);
+    void LoadFromCharStyleSQL(CCharEntity* PChar);
+    void LoadFromCharJobsSQL(CCharEntity* PChar);
+    void LoadFromCharExpSQL(CCharEntity* PChar);
+    void LoadFromCharStatsSQL(CCharEntity* PChar, int32& HP, int32& MP, uint8& zoning);
+    void LoadFromCharRecastSQL(CCharEntity* PChar);
+    void LoadFromCharSkillsSQL(CCharEntity* PChar);
+    void LoadFromCharUnlocksSQL(CCharEntity* PChar);
+    void LoadFromCharPetSql(CCharEntity* PChar);
+    void LoadCharFlagsSQL(CCharEntity* PChar);
+    void LoadCharInventorySQL(CCharEntity* PChar);
+    void LoadCharEquipSQL(CCharEntity* PChar);
 
     void SendQuestMissionLog(CCharEntity* PChar);
     void SendKeyItems(CCharEntity* PChar);
@@ -174,21 +188,21 @@ namespace charutils
     int32 delWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to delete weapon skill
     bool  canUseWeaponSkill(CCharEntity* PChar, uint16 wsid);
 
-    void SaveCharJob(CCharEntity* PChar, JOBTYPE job); // save the level for the selected character's jobs
-    void SaveCharExp(CCharEntity* PChar, JOBTYPE job); // save experience for the selected character’s chosen job
-    void SaveCharEquip(CCharEntity* PChar);            // preserve the character’s equipment and appearance
-    void SaveCharLook(CCharEntity* PChar);             // saves a character's appearance based on style locking
-    void SaveCharPosition(CCharEntity* PChar);         // save the character's position (x/y/z)
-    // void SaveCharLinkshells(CCharEntity* PChar);     // TODO: save the character's linkshells
-    void SaveMissionsList(CCharEntity* PChar);          // save the missions list
-    void SaveEminenceData(CCharEntity* PChar);          // save Eminence Record (RoE) data
-    void SaveQuestsList(CCharEntity* PChar);            // save the list of quests
-    void SaveFame(CCharEntity* PChar);                  // save area fame / reputation
-    void SaveZonesVisited(CCharEntity* PChar);          // save visited areas
-    void SaveKeyItems(CCharEntity* PChar);              // save key items
-    void SaveCharInventoryCapacity(CCharEntity* PChar); // save Character inventory capacity
-    void SaveSpell(CCharEntity* PChar, uint16 spellID); // save learned spells
-    void DeleteSpell(CCharEntity* PChar, uint16 spellID);
+    void SaveCharJob(CCharEntity* PChar, JOBTYPE job);         // save the level for the selected character's jobs
+    void SaveCharExp(CCharEntity* PChar, JOBTYPE job);         // save experience for the selected character’s chosen job
+    void SaveCharEquip(CCharEntity* PChar);                    // preserve the character’s equipment and appearance
+    void SaveCharLook(CCharEntity* PChar);                     // saves a character's appearance based on style locking
+    void SaveCharPosition(CCharEntity* PChar);                 // save the character's position (x/y/z)
+    void SaveCharLinkshells(CCharEntity* PChar);               // save the character's linkshells
+    void SaveMissionsList(CCharEntity* PChar);                 // save the missions list
+    void SaveEminenceData(CCharEntity* PChar);                 // save Eminence Record (RoE) data
+    void SaveQuestsList(CCharEntity* PChar);                   // save the list of quests
+    void SaveFame(CCharEntity* PChar);                         // save area fame / reputation
+    void SaveZonesVisited(CCharEntity* PChar);                 // save visited areas
+    void SaveKeyItems(CCharEntity* PChar);                     // save key items
+    void SaveCharInventoryCapacity(CCharEntity* PChar);        // save Character inventory capacity
+    void SaveSpell(CCharEntity* PChar, uint16 spellID);        // save learned spells
+    void DeleteSpell(CCharEntity* PChar, uint16 spellID);      //
     void SaveLearnedAbilities(CCharEntity* PChar);             // save learned abilities (e.g., corsair rolls)
     void SaveTitles(CCharEntity* PChar);                       // save character's titles
     void SaveCharStats(CCharEntity* PChar);                    // save flags, current values of character stats (jobs/HP/MP/etc.)

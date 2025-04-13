@@ -36,7 +36,7 @@ enum class EFFECTOVERWRITE : uint8
     NEVER            = 2, // never overwrite
     ALWAYS           = 3, // always overwrite no matter
     IGNORE_DUPLICATE = 4, // ignore dupes
-    TIER_HIGHER      = 5  // only overwrite if tier is higher (regardless of power)
+    TIER_HIGHER      = 5, // only overwrite if tier is higher (regardless of power)
 };
 DECLARE_FORMAT_AS_UNDERLYING(EFFECTOVERWRITE);
 

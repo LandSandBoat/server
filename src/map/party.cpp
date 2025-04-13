@@ -504,7 +504,7 @@ bool CParty::RemovePartyLeader(CBattleEntity* PEntity)
 {
     if (members.empty())
     {
-        ShowWarning("CParty::RemovePartyLeader - called when \"member\" list was empty");
+        ShowWarning("CParty::RemovePartyLeader - called when 'member' list was empty");
         return false;
     }
 

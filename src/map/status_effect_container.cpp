@@ -116,29 +116,29 @@ namespace effects
             EffectsParams[i].Flag = 0;
         }
 
-        int32 ret = _sql->Query(
-            "SELECT id, name, flags, type, negative_id, overwrite, block_id, remove_id, element, min_duration, sort_key FROM status_effects WHERE id < %u",
+        const auto rset = db::preparedStmt(
+            "SELECT id, name, flags, type, negative_id, overwrite, block_id, remove_id, element, min_duration, sort_key FROM status_effects WHERE id < ?",
             MAX_EFFECTID);
 
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        if (rset && rset->rowsCount())
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                uint16 EffectID = (uint16)_sql->GetIntData(0);
+                uint16 EffectID = rset->get<uint16>(0);
 
-                EffectsParams[EffectID].Name       = (const char*)_sql->GetData(1);
-                EffectsParams[EffectID].Flag       = _sql->GetIntData(2);
-                EffectsParams[EffectID].Type       = _sql->GetIntData(3);
-                EffectsParams[EffectID].NegativeId = (EFFECT)_sql->GetIntData(4);
-                EffectsParams[EffectID].Overwrite  = (EFFECTOVERWRITE)_sql->GetIntData(5);
-                EffectsParams[EffectID].BlockId    = (EFFECT)_sql->GetIntData(6);
-                EffectsParams[EffectID].RemoveId   = (EFFECT)_sql->GetIntData(7);
+                EffectsParams[EffectID].Name       = rset->get<std::string>(1);
+                EffectsParams[EffectID].Flag       = rset->get<uint32>(2);
+                EffectsParams[EffectID].Type       = rset->get<uint16>(3);
+                EffectsParams[EffectID].NegativeId = static_cast<EFFECT>(rset->get<uint16>(4));
+                EffectsParams[EffectID].Overwrite  = static_cast<EFFECTOVERWRITE>(rset->get<uint8>(5));
+                EffectsParams[EffectID].BlockId    = static_cast<EFFECT>(rset->get<uint16>(6));
+                EffectsParams[EffectID].RemoveId   = static_cast<EFFECT>(rset->get<uint16>(7));
 
-                EffectsParams[EffectID].Element = _sql->GetIntData(8);
+                EffectsParams[EffectID].Element = rset->get<uint8>(8);
                 // convert from second to millisecond
-                EffectsParams[EffectID].MinDuration = _sql->GetIntData(9) * 1000;
+                EffectsParams[EffectID].MinDuration = rset->get<uint32>(9) * 1000;
 
-                uint16 sortKey                  = _sql->GetIntData(10);
+                uint16 sortKey                  = rset->get<uint16>(10);
                 EffectsParams[EffectID].SortKey = sortKey == 0 ? 10000 : sortKey; // default to high number to such that effects without a sort key aren't first
 
                 auto filename = fmt::format("./scripts/effects/{}.lua", EffectsParams[EffectID].Name);
@@ -1707,7 +1707,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
         return;
     }
 
-    _sql->Query("DELETE FROM char_effects WHERE charid = %u", m_POwner->id);
+    db::preparedStmt("DELETE FROM char_effects WHERE charid = ?", m_POwner->id);
 
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
@@ -1727,7 +1727,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
         if (realduration > 0s || PStatusEffect->GetDuration() == 0)
         {
             const char* Query = "INSERT INTO char_effects (charid, effectid, icon, power, tick, duration, subid, subpower, tier, flags, timestamp) "
-                                "VALUES(%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u)";
+                                "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
             // save power of utsusemi and blink
             if (PStatusEffect->GetStatusID() == EFFECT_COPY_IMAGE)
@@ -1766,9 +1766,9 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
                     }
                 }
             }
-            _sql->Query(Query, m_POwner->id, PStatusEffect->GetStatusID(), PStatusEffect->GetIcon(), PStatusEffect->GetPower(), tick, duration,
-                        PStatusEffect->GetSubID(), PStatusEffect->GetSubPower(), PStatusEffect->GetTier(), PStatusEffect->GetEffectFlags(),
-                        std::chrono::duration_cast<std::chrono::seconds>(PStatusEffect->GetStartTime().time_since_epoch()).count());
+            db::preparedStmt(Query, m_POwner->id, PStatusEffect->GetStatusID(), PStatusEffect->GetIcon(), PStatusEffect->GetPower(), tick, duration,
+                             PStatusEffect->GetSubID(), PStatusEffect->GetSubPower(), PStatusEffect->GetTier(), PStatusEffect->GetEffectFlags(),
+                             std::chrono::duration_cast<std::chrono::seconds>(PStatusEffect->GetStartTime().time_since_epoch()).count());
         }
     }
     DeleteStatusEffects();

@@ -180,14 +180,16 @@ void CMeritPoints::LoadMeritPoints(uint32 charid)
         merits[i].next  = upgrade[merits[i].upgradeid][merits[i].count];
     }
 
-    if (_sql->Query("SELECT meritid, upgrades FROM char_merit WHERE charid = %u", charid) != SQL_ERROR)
+    const auto rset = db::preparedStmt("SELECT meritid, upgrades FROM char_merit WHERE charid = ?", charid);
+    if (rset)
     {
-        for (uint64 j = 0; j < _sql->NumRows(); j++)
+        for (uint64 j = 0; j < rset->rowsCount(); j++)
         {
-            if (_sql->NextRow() == SQL_SUCCESS)
+            if (rset->next())
             {
-                uint32 meritID  = _sql->GetUIntData(0);
-                uint32 upgrades = _sql->GetUIntData(1);
+                uint32 meritID  = rset->get<uint32>(0);
+                uint32 upgrades = rset->get<uint32>(1);
+
                 for (auto& merit : merits)
                 {
                     if (merit.id == meritID)
@@ -207,12 +209,12 @@ void CMeritPoints::SaveMeritPoints(uint32 charid)
     {
         if (merit.count > 0)
         {
-            _sql->Query("INSERT INTO char_merit (charid, meritid, upgrades) VALUES(%u, %u, %u) ON DUPLICATE KEY UPDATE upgrades = %u", charid,
-                        merit.id, merit.count, merit.count);
+            db::preparedStmt("INSERT INTO char_merit (charid, meritid, upgrades) VALUES(?, ?, ?) ON DUPLICATE KEY UPDATE upgrades = ?",
+                             charid, merit.id, merit.count, merit.count);
         }
         else
         {
-            _sql->Query("DELETE FROM char_merit WHERE charid = %u AND meritid = %u", charid, merit.id);
+            db::preparedStmt("DELETE FROM char_merit WHERE charid = ? AND meritid = ?", charid, merit.id);
         }
     }
 }
@@ -429,11 +431,11 @@ namespace meritNameSpace
 
     void LoadMeritsList()
     {
-        int32 ret = _sql->Query("SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid, ws.unlock_id FROM merits m LEFT JOIN \
-            spell_list sl ON m.name = sl.name LEFT JOIN weapon_skills ws ON m.name = ws.name ORDER BY m.meritid ASC LIMIT %u",
-                                MERITS_COUNT);
+        const auto rset = db::preparedStmt("SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid, ws.unlock_id FROM merits m LEFT JOIN "
+                                           "spell_list sl ON m.name = sl.name LEFT JOIN weapon_skills ws ON m.name = ws.name ORDER BY m.meritid ASC LIMIT ?",
+                                           MERITS_COUNT);
 
-        if (ret != SQL_ERROR && _sql->NumRows() != MERITS_COUNT)
+        if (rset && rset->rowsCount() != MERITS_COUNT)
         {
             // issue with unknown catagories causing massive confusion
 
@@ -442,19 +444,19 @@ namespace meritNameSpace
             int8   previousCatIndex = 0; // will be set on every loop, used for detecting a category change
             int8   catMeritIndex    = 0; // counts number of merits in a category
 
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
                 Merit_t Merit = {}; // creat a new merit template.
 
-                Merit.id         = _sql->GetUIntData(0); // set data from db.
-                Merit.value      = _sql->GetUIntData(1);
-                Merit.jobs       = _sql->GetUIntData(2);
-                Merit.upgrade    = _sql->GetUIntData(3);
-                Merit.upgradeid  = _sql->GetUIntData(4);
-                Merit.catid      = _sql->GetUIntData(5);
+                Merit.id         = rset->get<uint16>(0); // set data from db.
+                Merit.value      = rset->get<uint32>(1);
+                Merit.jobs       = rset->get<uint32>(2);
+                Merit.upgrade    = rset->get<uint8>(3);
+                Merit.upgradeid  = rset->get<uint8>(4);
+                Merit.catid      = rset->get<uint8>(5);
                 Merit.next       = upgrade[Merit.upgradeid][0];
-                Merit.spellid    = _sql->GetUIntData(6);
-                Merit.wsunlockid = _sql->GetUIntData(7);
+                Merit.spellid    = rset->get<uint16>(6);
+                Merit.wsunlockid = rset->get<uint16>(7);
 
                 GMeritsTemplate[index] = Merit; // add the merit to the array
 

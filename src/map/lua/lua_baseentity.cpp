@@ -4686,7 +4686,7 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
                     PChar->pushPacket<CLinkshellEquipPacket>(PChar, PItemLinkPearl->GetLSID());
                     PChar->pushPacket<CInventoryItemPacket>(PItemLinkPearl, LOC_INVENTORY, PItemLinkPearl->getSlotID());
                     PChar->pushPacket<CInventoryFinishPacket>();
-                    charutils::LoadInventory(PChar);
+                    charutils::LoadCharInventorySQL(PChar);
                 }
                 return true;
             }

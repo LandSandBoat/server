@@ -23,7 +23,6 @@
 
 #include "common/database.h"
 #include "common/logging.h"
-#include "common/sql.h"
 #include "common/vana_time.h"
 
 #include <vector>
@@ -39,69 +38,67 @@
 
 // TODO: During the closure of the guild, all viewing products of the goods are sent 0x86 with information about the closure of the guild
 
-std::vector<CGuild*>         g_PGuildList;
-std::vector<CItemContainer*> g_PGuildShopList;
-
-/************************************************************************
- *                                                                      *
- *                                                                      *
- *                                                                      *
- ************************************************************************/
+std::vector<std::unique_ptr<CGuild>>         g_PGuildList;
+std::vector<std::unique_ptr<CItemContainer>> g_PGuildShopList;
 
 namespace guildutils
 {
     void Initialize()
     {
-        const char* fmtQuery = "SELECT DISTINCT id, points_name FROM guilds ORDER BY id ASC";
-        if (_sql->Query(fmtQuery) != SQL_ERROR && _sql->NumRows() != 0)
         {
-            g_PGuildList.reserve((unsigned int)_sql->NumRows());
-
-            while (_sql->NextRow() == SQL_SUCCESS)
+            const auto rset = db::preparedStmt("SELECT DISTINCT id, points_name FROM guilds ORDER BY id ASC");
+            if (rset && rset->rowsCount())
             {
-                g_PGuildList.emplace_back(new CGuild(_sql->GetIntData(0), _sql->GetStringData(1)));
-            }
-        }
-
-        if (g_PGuildShopList.size() != 0)
-        {
-            ShowWarning("g_PGuildShopList contains information prior to initialization.");
-            return;
-        }
-
-        fmtQuery = "SELECT DISTINCT guildid FROM guild_shops ORDER BY guildid ASC LIMIT 256";
-
-        if (_sql->Query(fmtQuery) != SQL_ERROR && _sql->NumRows() != 0)
-        {
-            g_PGuildShopList.reserve((unsigned int)_sql->NumRows());
-
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                g_PGuildShopList.emplace_back(new CItemContainer(_sql->GetIntData(0)));
-            }
-        }
-        for (auto* PGuildShop : g_PGuildShopList)
-        {
-            fmtQuery = "SELECT itemid, min_price, max_price, max_quantity, daily_increase, initial_quantity \
-                    FROM guild_shops \
-                    WHERE guildid = %u \
-                    LIMIT %u";
-
-            int32 ret = _sql->Query(fmtQuery, PGuildShop->GetID(), MAX_CONTAINER_SIZE);
-
-            if (ret != SQL_ERROR && _sql->NumRows() != 0)
-            {
-                PGuildShop->SetSize((uint8)_sql->NumRows());
-
-                while (_sql->NextRow() == SQL_SUCCESS)
+                g_PGuildList.reserve(rset->rowsCount());
+                while (rset->next())
                 {
-                    CItemShop* PItem = new CItemShop(_sql->GetIntData(0));
+                    const auto id         = rset->get<uint8>("id");
+                    const auto pointsName = rset->get<std::string>("points_name");
+                    g_PGuildList.emplace_back(std::make_unique<CGuild>(id, pointsName));
+                }
+            }
 
-                    PItem->setMinPrice(_sql->GetIntData(1));
-                    PItem->setMaxPrice(_sql->GetIntData(2));
-                    PItem->setStackSize(_sql->GetIntData(3));
-                    PItem->setDailyIncrease(_sql->GetIntData(4));
-                    PItem->setInitialQuantity(_sql->GetIntData(5));
+            if (g_PGuildShopList.size() != 0)
+            {
+                ShowWarning("g_PGuildShopList contains information prior to initialization.");
+                return;
+            }
+        }
+
+        {
+            const auto rset = db::preparedStmt("SELECT DISTINCT guildid FROM guild_shops ORDER BY guildid ASC LIMIT 256");
+            if (rset && rset->rowsCount())
+            {
+                g_PGuildShopList.reserve(rset->rowsCount());
+                while (rset->next())
+                {
+                    const auto guildid = rset->get<uint16>("guildid");
+                    g_PGuildShopList.emplace_back(std::make_unique<CItemContainer>(guildid));
+                }
+            }
+        }
+
+        for (auto& PGuildShop : g_PGuildShopList)
+        {
+            const auto fmtQuery = "SELECT itemid, min_price, max_price, max_quantity, daily_increase, initial_quantity "
+                                  "FROM guild_shops "
+                                  "WHERE guildid = ? "
+                                  "LIMIT ?";
+
+            const auto rset = db::preparedStmt(fmtQuery, PGuildShop->GetID(), MAX_CONTAINER_SIZE);
+            if (rset && rset->rowsCount())
+            {
+                PGuildShop->SetSize(rset->rowsCount());
+
+                while (rset->next())
+                {
+                    CItemShop* PItem = new CItemShop(rset->get<uint16>(0));
+
+                    PItem->setMinPrice(rset->get<uint32>(1));
+                    PItem->setMaxPrice(rset->get<uint32>(2));
+                    PItem->setStackSize(rset->get<uint32>(3));
+                    PItem->setDailyIncrease(rset->get<uint16>(4));
+                    PItem->setInitialQuantity(rset->get<uint16>(5));
 
                     PItem->setQuantity(PItem->IsDailyIncrease() ? PItem->getInitialQuantity() : 0);
                     PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *
@@ -115,25 +112,9 @@ namespace guildutils
         UpdateGuildPointsPattern();
     }
 
-    void Cleanup()
-    {
-        // Delete pointers and cleanup vectors manually
-        for (auto guild : g_PGuildList)
-        {
-            destroy(guild);
-        }
-        g_PGuildList.clear();
-
-        for (auto itemContainer : g_PGuildShopList)
-        {
-            destroy(itemContainer);
-        }
-        g_PGuildList.clear();
-    }
-
     void UpdateGuildsStock()
     {
-        for (auto* PGuildShop : g_PGuildShopList)
+        for (auto& PGuildShop : g_PGuildShopList)
         {
             for (uint8 slotid = 1; slotid <= PGuildShop->GetSize(); ++slotid)
             {
@@ -175,7 +156,7 @@ namespace guildutils
             charutils::ClearCharVarFromAll("[GUILD]daily_points", true);
         }
 
-        for (auto PGuild : g_PGuildList)
+        for (auto& PGuild : g_PGuildList)
         {
             PGuild->updateGuildPointsPattern(pattern);
         }
@@ -185,11 +166,11 @@ namespace guildutils
 
     CItemContainer* GetGuildShop(uint16 GuildShopID)
     {
-        for (auto* PGuildShop : g_PGuildShopList)
+        for (auto& PGuildShop : g_PGuildShopList)
         {
             if (PGuildShop->GetID() == GuildShopID)
             {
-                return PGuildShop;
+                return PGuildShop.get();
             }
         }
         ShowDebug("GuildShop with id <%u> is not found on server", GuildShopID);
@@ -200,7 +181,7 @@ namespace guildutils
     {
         if (GuildID < g_PGuildList.size())
         {
-            return g_PGuildList.at(GuildID);
+            return g_PGuildList.at(GuildID).get();
         }
         ShowDebug("Guild with id <%u> is not found on server", GuildID);
         return nullptr;

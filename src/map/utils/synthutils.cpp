@@ -192,39 +192,39 @@ namespace synthutils
 
         // TODO: If we limit by ID ranges, we could use multiple threads to load the recipes
 
-        const auto rset = db::preparedStmt("SELECT \
-            ID, \
-            Desynth, \
-            KeyItem, \
-            Wood, \
-            Smith, \
-            Gold, \
-            Cloth, \
-            Leather, \
-            Bone, \
-            Alchemy, \
-            Cook, \
-            Crystal, \
-            HQCrystal, \
-            Ingredient1, \
-            Ingredient2, \
-            Ingredient3, \
-            Ingredient4, \
-            Ingredient5, \
-            Ingredient6, \
-            Ingredient7, \
-            Ingredient8, \
-            Result, \
-            ResultHQ1, \
-            ResultHQ2, \
-            ResultHQ3, \
-            ResultQty, \
-            ResultHQ1Qty, \
-            ResultHQ2Qty, \
-            ResultHQ3Qty, \
-            ResultName, \
-            content_tag \
-            FROM synth_recipes");
+        const auto rset = db::preparedStmt("SELECT "
+                                           "ID, "
+                                           "Desynth, "
+                                           "KeyItem, "
+                                           "Wood, "
+                                           "Smith, "
+                                           "Gold, "
+                                           "Cloth, "
+                                           "Leather, "
+                                           "Bone, "
+                                           "Alchemy, "
+                                           "Cook, "
+                                           "Crystal, "
+                                           "HQCrystal, "
+                                           "Ingredient1, "
+                                           "Ingredient2, "
+                                           "Ingredient3, "
+                                           "Ingredient4, "
+                                           "Ingredient5, "
+                                           "Ingredient6, "
+                                           "Ingredient7, "
+                                           "Ingredient8, "
+                                           "Result, "
+                                           "ResultHQ1, "
+                                           "ResultHQ2, "
+                                           "ResultHQ3, "
+                                           "ResultQty, "
+                                           "ResultHQ1Qty, "
+                                           "ResultHQ2Qty, "
+                                           "ResultHQ3Qty, "
+                                           "ResultName, "
+                                           "content_tag "
+                                           "FROM synth_recipes");
 
         if (!rset || !rset->rowsCount())
         {
@@ -316,7 +316,7 @@ namespace synthutils
                 PChar->CraftContainer->setItem(10 + 2, recipe.ResultHQ1, recipe.ResultHQ1Qty, 0); // RESULT_HQ
                 PChar->CraftContainer->setItem(10 + 3, recipe.ResultHQ2, recipe.ResultHQ2Qty, 0); // RESULT_HQ2
                 PChar->CraftContainer->setItem(10 + 4, recipe.ResultHQ3, recipe.ResultHQ3Qty, 0); // RESULT_HQ3
-                PChar->CraftContainer->setCraftType(recipe.Desynth);                              // Store synth type (regular, desynth or "no material loss")
+                PChar->CraftContainer->setCraftType(static_cast<CraftType>(recipe.Desynth));      // Store synth type (regular, desynth or "no material loss")
 
                 for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID) // range for all 8 synth skills
                 {
@@ -455,7 +455,7 @@ namespace synthutils
         uint8 maxChanceHQ     = 50;
         uint8 randomRoll      = 0; // 1 to 100.
 
-        if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS)
+        if (PChar->CraftContainer->getCraftType() == CraftType::Desynthesis)
         {
             maxChanceHQ = 80;
         }
@@ -515,13 +515,13 @@ namespace synthutils
                 successRate     = successRate - synthDifficulty * 10;
             }
 
-            if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // If it's a desynth, halve base success rate.
+            if (PChar->CraftContainer->getCraftType() == CraftType::Desynthesis) // If it's a desynth, halve base success rate.
             {
                 successRate = successRate / 2;
             }
 
             // Apply synthesis success rate modifier, based on synth type.
-            if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS)
+            if (PChar->CraftContainer->getCraftType() == CraftType::Desynthesis)
             {
                 successRate = successRate + PChar->getMod(Mod::SYNTH_SUCCESS_RATE_DESYNTHESIS);
             }
@@ -580,7 +580,7 @@ namespace synthutils
                     break;
             }
 
-            if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // if it's a desynth raise HQ chance
+            if (PChar->CraftContainer->getCraftType() == CraftType::Desynthesis) // if it's a desynth raise HQ chance
             {
                 chanceHQ = chanceHQ * 1.5f;
             }
@@ -714,7 +714,7 @@ namespace synthutils
             // Chance penalties.
             uint8 penalty = 1;
 
-            if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // If it's a desynth, lower skill up rate
+            if (PChar->CraftContainer->getCraftType() == CraftType::Desynthesis) // If it's a desynth, lower skill up rate
             {
                 penalty += 1;
             }
@@ -974,7 +974,7 @@ namespace synthutils
     void doSynthFail(CCharEntity* PChar)
     {
         // Break material calculations.
-        if (PChar->CraftContainer->getCraftType() != CRAFT_SYNTHESIS_NO_LOSS) // If it's a synth where no materials can be lost, skip break calculations.
+        if (PChar->CraftContainer->getCraftType() != CraftType::SynthesisNoLoss) // If it's a synth where no materials can be lost, skip break calculations.
         {
             handleMaterialLoss(PChar);
         }
@@ -1288,7 +1288,7 @@ namespace synthutils
             PChar->pushPacket<CInventoryFinishPacket>();
 
             // Use appropiate message (Regular or desynthesis)
-            const auto message = PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS ? SYNTH_SUCCESS_DESYNTH : SYNTH_SUCCESS;
+            const auto message = PChar->CraftContainer->getCraftType() == CraftType::Desynthesis ? SYNTH_SUCCESS_DESYNTH : SYNTH_SUCCESS;
 
             if (PChar->loc.zone->GetID() != 255 && PChar->loc.zone->GetID() != 0)
             {

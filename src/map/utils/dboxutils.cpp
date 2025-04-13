@@ -27,7 +27,6 @@
 #include "common/logging.h"
 #include "common/macros.h"
 #include "common/settings.h"
-#include "common/sql.h"
 #include "common/tracy.h"
 
 #include "entities/charentity.h"

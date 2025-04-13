@@ -58,26 +58,26 @@ namespace mobSpellList
         std::memset(PMobSpellList, 0, sizeof(PMobSpellList));
         PMobSpellList[0] = new CMobSpellList();
 
-        const char* Query = "SELECT mob_spell_lists.spell_list_id, \
-                            mob_spell_lists.spell_id, \
-                            mob_spell_lists.min_level, \
-                            mob_spell_lists.max_level, \
-                            spell_list.content_tag \
-                            FROM mob_spell_lists JOIN spell_list ON spell_list.spellid = mob_spell_lists.spell_id \
-                            WHERE spell_list_id < %u \
-                            ORDER BY min_level ASC";
+        const char* Query = "SELECT mob_spell_lists.spell_list_id, "
+                            "mob_spell_lists.spell_id, "
+                            "mob_spell_lists.min_level, "
+                            "mob_spell_lists.max_level, "
+                            "spell_list.content_tag "
+                            "FROM mob_spell_lists JOIN spell_list ON spell_list.spellid = mob_spell_lists.spell_id "
+                            "WHERE spell_list_id < ? "
+                            "ORDER BY min_level ASC";
 
-        int32 ret = _sql->Query(Query, MAX_MOBSPELLLIST_ID);
+        const auto rset = db::preparedStmt(Query, MAX_MOBSPELLLIST_ID);
 
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        if (rset && rset->rowsCount())
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                SpellID spellId = (SpellID)_sql->GetIntData(1);
-                uint16  minLvl  = (uint16)_sql->GetIntData(2);
-                uint16  maxLvl  = (uint16)_sql->GetIntData(3);
+                uint16  pos     = rset->get<uint16>(0);
+                SpellID spellId = static_cast<SpellID>(rset->get<uint16>(1));
+                uint16  minLvl  = rset->get<uint16>(2);
+                uint16  maxLvl  = rset->get<uint16>(3);
 
-                uint16 pos = _sql->GetIntData(0);
                 if (!PMobSpellList[pos])
                 {
                     PMobSpellList[pos] = new CMobSpellList();

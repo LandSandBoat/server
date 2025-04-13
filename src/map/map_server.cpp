@@ -405,7 +405,6 @@ void MapServer::do_final()
     battleutils::FreeMobSkillList();
     battleutils::FreePetSkillList();
     fishingutils::CleanupFishing();
-    guildutils::Cleanup();
     mobutils::Cleanup();
     traits::ClearTraitsList();
 

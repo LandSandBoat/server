@@ -85,10 +85,10 @@ namespace traits
             }
         }
 
-        Query = "SELECT trait_category, trait_points_needed, traitid, modifier, value \
-                             FROM blue_traits \
-                             WHERE traitid < %u \
-                             ORDER BY trait_category ASC, trait_points_needed DESC";
+        Query = "SELECT trait_category, trait_points_needed, traitid, modifier, value "
+                "FROM blue_traits "
+                "WHERE traitid < %u "
+                "ORDER BY trait_category ASC, trait_points_needed DESC";
 
         ret = _sql->Query(Query, MAX_TRAIT_ID);
 

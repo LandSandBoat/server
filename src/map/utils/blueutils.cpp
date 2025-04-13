@@ -23,7 +23,6 @@
 
 #include "common/database.h"
 #include "common/logging.h"
-#include "common/sql.h"
 #include "common/utils.h"
 
 #include "packets/char_job_extra.h"

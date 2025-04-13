@@ -245,12 +245,12 @@ void CTradeContainer::setType(uint8 type)
     m_type = type;
 }
 
-uint8 CTradeContainer::getCraftType() const
+auto CTradeContainer::getCraftType() const -> CraftType
 {
     return m_craftType;
 }
 
-void CTradeContainer::setCraftType(uint8 craftType)
+void CTradeContainer::setCraftType(CraftType craftType)
 {
     m_craftType = craftType;
 }
@@ -287,7 +287,7 @@ void CTradeContainer::Clean()
         }
     }
     m_type       = 0;
-    m_craftType  = 0;
+    m_craftType  = {};
     m_ItemsCount = 0;
     m_exSize     = 0;
 

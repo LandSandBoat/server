@@ -1004,12 +1004,10 @@ bool CCharEntity::PersistData()
         StatusEffectContainer->SaveStatusEffects(true);
     }
 
-    /* TODO
     if (dataToPersist & CHAR_PERSIST::LINKSHELL)
     {
         charutils::SaveCharLinkshells(this);
     }
-    */
 
     dataToPersist = 0;
     return didPersist;

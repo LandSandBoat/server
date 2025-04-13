@@ -26,7 +26,7 @@
 
 #include "basic.h"
 
-enum SYNTH_MESSAGE
+enum SYNTH_MESSAGE : uint8
 {
     SYNTH_SUCCESS         = 0,
     SYNTH_FAIL            = 1,

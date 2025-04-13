@@ -160,7 +160,7 @@ void auctionutils::OpenListOfSales(CCharEntity* PChar, uint8 action, uint16 item
         PChar->m_AHHistoryTimestamp = curTick;
         PChar->pushPacket<CAuctionHousePacket>(action);
 
-        // A single SQL query for the player's AH history which is stored in a Char Entity struct + vector.
+        // A single query for the player's AH history which is stored in a Char Entity struct + vector.
         const auto rset = db::preparedStmt("SELECT itemid, price, stack FROM auction_house WHERE seller = ? AND sale=0 ORDER BY id ASC LIMIT 7", PChar->id);
         if (rset && rset->rowsCount())
         {

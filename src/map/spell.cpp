@@ -451,9 +451,9 @@ namespace spell
     // Load a list of spells
     void LoadSpellList()
     {
-        const char* Query = "SELECT spellid, name, jobs, `group`, family, validTargets, skill, castTime, recastTime, animation, animationTime, mpCost, \
-                             AOE, base, element, zonemisc, multiplier, message, magicBurstMessage, CE, VE, requirements, content_tag, spell_range \
-                             FROM spell_list";
+        const char* Query = "SELECT spellid, name, jobs, `group`, family, validTargets, skill, castTime, recastTime, animation, animationTime, mpCost, "
+                            "AOE, base, element, zonemisc, multiplier, message, magicBurstMessage, CE, VE, requirements, content_tag, spell_range "
+                            "FROM spell_list";
 
         int32 ret = _sql->Query(Query);
 

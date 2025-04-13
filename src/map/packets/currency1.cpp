@@ -45,25 +45,25 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
     this->setType(0x113);
     this->setSize(252);
 
-    const char* query = "SELECT sandoria_cp, bastok_cp, windurst_cp, beastman_seal, kindred_seal, kindred_crest, \
-                        high_kindred_crest, sacred_kindred_crest, ancient_beastcoin, valor_point, scyld, \
-                        guild_fishing, guild_woodworking, guild_smithing, guild_goldsmithing, guild_weaving, \
-                        guild_leathercraft, guild_bonecraft, guild_alchemy, guild_cooking, cinder, fire_fewell, \
-                        ice_fewell, wind_fewell, earth_fewell, lightning_fewell, water_fewell, light_fewell, \
-                        dark_fewell, ballista_point, fellow_point, chocobuck_sandoria, chocobuck_bastok, \
-                        chocobuck_windurst, daily_tally, research_mark, tunnel_worm, morion_worm, phantom_worm, \
-                        moblin_marble, infamy, prestige, legion_point, spark_of_eminence, shining_star, \
-                        imperial_standing, leujaoam_assault_point, mamool_assault_point, lebros_assault_point, \
-                        periqia_assault_point, ilrusi_assault_point, nyzul_isle_assault_point, zeni_point, jetton, \
-                        therion_ichor, allied_notes, aman_vouchers, login_points, cruor, resistance_credit, \
-                        dominion_note, fifth_echelon_trophy, fourth_echelon_trophy, third_echelon_trophy, \
-                        second_echelon_trophy, first_echelon_trophy, cave_points, id_tags, op_credits, \
-                        voidstones, kupofried_corundums, pheromone_sacks, rems_ch1, rems_ch2, \
-                        rems_ch3, rems_ch4, rems_ch5, rems_ch6, rems_ch7, rems_ch8, rems_ch9, rems_ch10, \
-                        bloodshed_plans, umbrage_plans, ritualistic_plans, tutelary_plans, primacy_plans, \
-                        reclamation_marks, unity_accolades, fire_crystals, ice_crystals, wind_crystals, \
-                        earth_crystals, lightning_crystals, water_crystals, light_crystals, dark_crystals, deeds \
-                        FROM char_points WHERE charid = ?";
+    const char* query = "SELECT sandoria_cp, bastok_cp, windurst_cp, beastman_seal, kindred_seal, kindred_crest, "
+                        "high_kindred_crest, sacred_kindred_crest, ancient_beastcoin, valor_point, scyld, "
+                        "guild_fishing, guild_woodworking, guild_smithing, guild_goldsmithing, guild_weaving, "
+                        "guild_leathercraft, guild_bonecraft, guild_alchemy, guild_cooking, cinder, fire_fewell, "
+                        "ice_fewell, wind_fewell, earth_fewell, lightning_fewell, water_fewell, light_fewell, "
+                        "dark_fewell, ballista_point, fellow_point, chocobuck_sandoria, chocobuck_bastok, "
+                        "chocobuck_windurst, daily_tally, research_mark, tunnel_worm, morion_worm, phantom_worm, "
+                        "moblin_marble, infamy, prestige, legion_point, spark_of_eminence, shining_star, "
+                        "imperial_standing, leujaoam_assault_point, mamool_assault_point, lebros_assault_point, "
+                        "periqia_assault_point, ilrusi_assault_point, nyzul_isle_assault_point, zeni_point, jetton, "
+                        "therion_ichor, allied_notes, aman_vouchers, login_points, cruor, resistance_credit, "
+                        "dominion_note, fifth_echelon_trophy, fourth_echelon_trophy, third_echelon_trophy, "
+                        "second_echelon_trophy, first_echelon_trophy, cave_points, id_tags, op_credits, "
+                        "voidstones, kupofried_corundums, pheromone_sacks, rems_ch1, rems_ch2, "
+                        "rems_ch3, rems_ch4, rems_ch5, rems_ch6, rems_ch7, rems_ch8, rems_ch9, rems_ch10, "
+                        "bloodshed_plans, umbrage_plans, ritualistic_plans, tutelary_plans, primacy_plans, "
+                        "reclamation_marks, unity_accolades, fire_crystals, ice_crystals, wind_crystals, "
+                        "earth_crystals, lightning_crystals, water_crystals, light_crystals, dark_crystals, deeds "
+                        "FROM char_points WHERE charid = ?";
 
     auto rset = db::preparedStmt(query, PChar->id);
     if (rset && rset->rowsCount() && rset->next())

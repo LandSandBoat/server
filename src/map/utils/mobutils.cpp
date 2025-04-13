@@ -1550,21 +1550,21 @@ namespace mobutils
 
     CMobEntity* InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance)
     {
-        const char* Query = "SELECT zoneid, mob_groups.name, packet_name, \
-        respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
-        modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
-        ecosystemID, mobradius, speed, \
-        STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
-        slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
-        magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
-        fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
-        Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
-        (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
-        allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects \
-        FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
-        INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id \
-        INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
-        WHERE mob_groups.groupid = %u AND mob_groups.zoneid = %u";
+        const char* Query = "SELECT zoneid, mob_groups.name, packet_name, "
+                            "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, "
+                            "modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, "
+                            "ecosystemID, mobradius, speed, "
+                            "STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, "
+                            "slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, "
+                            "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
+                            "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
+                            "Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, "
+                            "(mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, "
+                            "allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects "
+                            "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
+                            "INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id "
+                            "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
+                            "WHERE mob_groups.groupid = %u AND mob_groups.zoneid = %u";
 
         int32 ret = _sql->Query(Query, groupid, zoneID);
 
@@ -1713,21 +1713,21 @@ namespace mobutils
     {
         CMobEntity* PMob = new CMobEntity();
 
-        const char* Query = "SELECT zoneid, mob_groups.name, packet_name, \
-        respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
-        modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
-        ecosystemID, mobradius, speed, \
-        STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
-        slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
-        magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
-        fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
-        Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
-        (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
-        allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects \
-        FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
-        INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id \
-        INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
-        WHERE mob_groups.groupid = %u AND mob_groups.zoneid = %u";
+        const char* Query = "SELECT zoneid, mob_groups.name, packet_name, "
+                            "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, "
+                            "modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, "
+                            "ecosystemID, mobradius, speed, "
+                            "STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, "
+                            "slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, "
+                            "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
+                            "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
+                            "Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, "
+                            "(mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, "
+                            "allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects "
+                            "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
+                            "INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id "
+                            "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
+                            "WHERE mob_groups.groupid = %u AND mob_groups.zoneid = %u";
 
         int32 ret = _sql->Query(Query, groupid, groupZoneId);
 

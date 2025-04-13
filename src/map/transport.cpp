@@ -119,11 +119,11 @@ void CTransportHandler::InitializeTransport(IPP mapIPP)
         return;
     }
 
-    const char* fmtQuery = "SELECT id, transport, door, dock_x, dock_y, dock_z, dock_rot, \
-                            boundary, zone, anim_arrive, anim_depart, time_offset, time_interval, \
-                            time_waiting, time_anim_arrive, time_anim_depart FROM transport LEFT JOIN \
-                            zone_settings ON ((transport >> 12) & 0xFFF) = zoneid WHERE \
-                            IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
+    const char* fmtQuery = "SELECT id, transport, door, dock_x, dock_y, dock_z, dock_rot, "
+                           "boundary, zone, anim_arrive, anim_depart, time_offset, time_interval, "
+                           "time_waiting, time_anim_arrive, time_anim_depart FROM transport LEFT JOIN "
+                           "zone_settings ON ((transport >> 12) & 0xFFF) = zoneid WHERE "
+                           "IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
 
     int32 ret = _sql->Query(fmtQuery, mapIPP.getIP(), mapIPP.getIPString(), mapIPP.getPort());
     if (ret != SQL_ERROR && _sql->NumRows() != 0)
@@ -182,10 +182,10 @@ void CTransportHandler::InitializeTransport(IPP mapIPP)
         }
     }
 
-    fmtQuery = "SELECT zone, time_offset, time_interval, time_waiting, time_anim_arrive, time_anim_depart \
-                FROM transport LEFT JOIN \
-                zone_settings ON zone = zoneid WHERE \
-                IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
+    fmtQuery = "SELECT zone, time_offset, time_interval, time_waiting, time_anim_arrive, time_anim_depart "
+               "FROM transport LEFT JOIN "
+               "zone_settings ON zone = zoneid WHERE "
+               "IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
 
     ret = _sql->Query(fmtQuery, mapIPP.getIP(), mapIPP.getIPString(), mapIPP.getPort());
     if (ret != SQL_ERROR && _sql->NumRows() != 0)
