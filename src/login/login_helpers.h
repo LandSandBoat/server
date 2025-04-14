@@ -25,7 +25,6 @@
 
 #include <common/md52.h>
 #include <common/mmo.h>
-#include <common/sql.h>
 #include <common/utils.h>
 #include <common/xirand.h>
 

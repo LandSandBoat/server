@@ -23,7 +23,6 @@
 
 #include "common/database.h"
 #include "common/logging.h"
-#include "common/sql.h"
 #include "common/utils.h"
 
 #include "battlefield.h"
@@ -1319,18 +1318,18 @@ namespace mobutils
         // load family mods
         const char QueryFamilyMods[] = "SELECT familyid, modid, value, is_mob_mod FROM mob_family_mods";
 
-        int32 ret = _sql->Query(QueryFamilyMods);
+        auto rset = db::preparedStmt(QueryFamilyMods);
 
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        if (rset && rset->rowsCount() != 0)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                ModsList_t* familyMods = GetMobFamilyMods(_sql->GetUIntData(0), true);
+                ModsList_t* familyMods = GetMobFamilyMods(rset->get<uint32>(0), true);
 
-                CModifier* mod = new CModifier(static_cast<Mod>(_sql->GetUIntData(1)));
-                mod->setModAmount(_sql->GetIntData(2));
+                CModifier* mod = new CModifier(static_cast<Mod>(rset->get<uint32>(1)));
+                mod->setModAmount(rset->get<int32>(2));
 
-                int8 isMobMod = _sql->GetIntData(3);
+                int8 isMobMod = rset->get<int32>(3);
                 if (isMobMod == 1)
                 {
                     familyMods->mobMods.emplace_back(mod);
@@ -1345,21 +1344,21 @@ namespace mobutils
         // load pool mods
         const char QueryPoolMods[] = "SELECT poolid, modid, value, is_mob_mod FROM mob_pool_mods";
 
-        ret = _sql->Query(QueryPoolMods);
+        rset = db::preparedStmt(QueryPoolMods);
 
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        if (rset && rset->rowsCount() != 0)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                uint16      pool     = _sql->GetUIntData(0);
+                uint16      pool     = rset->get<uint32>(0);
                 ModsList_t* poolMods = GetMobPoolMods(pool, true);
 
-                Mod id = static_cast<Mod>(_sql->GetUIntData(1));
+                Mod id = static_cast<Mod>(rset->get<uint32>(1));
 
                 CModifier* mod = new CModifier(id);
-                mod->setModAmount(_sql->GetUIntData(2));
+                mod->setModAmount(rset->get<uint32>(2));
 
-                int8 isMobMod = _sql->GetIntData(3);
+                int8 isMobMod = rset->get<int32>(3);
                 if (isMobMod == 1)
                 {
                     poolMods->mobMods.emplace_back(mod);
@@ -1564,121 +1563,119 @@ namespace mobutils
                             "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                             "INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id "
                             "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
-                            "WHERE mob_groups.groupid = %u AND mob_groups.zoneid = %u";
+                            "WHERE mob_groups.groupid = ? AND mob_groups.zoneid = ?";
 
-        int32 ret = _sql->Query(Query, groupid, zoneID);
+        const auto rset = db::preparedStmt(Query, groupid, zoneID);
 
         CMobEntity* PMob = nullptr;
 
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        if (rset && rset->rowsCount() != 0)
         {
-            if (_sql->NextRow() == SQL_SUCCESS)
+            if (rset->next())
             {
                 PMob            = new CMobEntity();
                 PMob->PInstance = instance;
 
-                PMob->name.insert(0, (const char*)_sql->GetData(1));
-                PMob->packetName.insert(0, (const char*)_sql->GetData(2));
+                PMob->name.insert(0, rset->get<std::string>(1));
+                PMob->packetName.insert(0, rset->get<std::string>(2));
 
-                PMob->m_RespawnTime = _sql->GetUIntData(3) * 1000;
-                PMob->m_SpawnType   = (SPAWNTYPE)_sql->GetUIntData(4);
-                PMob->m_DropID      = _sql->GetUIntData(5);
+                PMob->m_RespawnTime = rset->get<uint32>(3) * 1000;
+                PMob->m_SpawnType   = (SPAWNTYPE)rset->get<uint32>(4);
+                PMob->m_DropID      = rset->get<uint32>(5);
 
-                PMob->HPmodifier = (uint32)_sql->GetIntData(6);
-                PMob->MPmodifier = (uint32)_sql->GetIntData(7);
+                PMob->HPmodifier = (uint32)rset->get<int32>(6);
+                PMob->MPmodifier = (uint32)rset->get<int32>(7);
 
-                PMob->m_minLevel = (uint8)_sql->GetIntData(8);
-                PMob->m_maxLevel = (uint8)_sql->GetIntData(9);
+                PMob->m_minLevel = (uint8)rset->get<int32>(8);
+                PMob->m_maxLevel = (uint8)rset->get<int32>(9);
 
-                uint16 sqlModelID[10];
-                std::memcpy(&sqlModelID, _sql->GetData(10), 20);
-                PMob->look = look_t(sqlModelID);
+                db::extractFromBlob(rset, "modelid", PMob->look);
 
-                PMob->SetMJob(_sql->GetIntData(11));
-                PMob->SetSJob(_sql->GetIntData(12));
+                PMob->SetMJob(rset->get<int32>(11));
+                PMob->SetSJob(rset->get<int32>(12));
 
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
-                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(_sql->GetIntData(13));
-                PMob->m_dmgMult = _sql->GetUIntData(14);
-                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((_sql->GetIntData(15) * 1000) / 60);
-                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((_sql->GetIntData(15) * 1000) / 60);
+                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(rset->get<int32>(13));
+                PMob->m_dmgMult = rset->get<uint32>(14);
+                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((rset->get<int32>(15) * 1000) / 60);
+                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((rset->get<int32>(15) * 1000) / 60);
 
-                PMob->m_Behavior    = (uint16)_sql->GetIntData(16);
-                PMob->m_Link        = (uint8)_sql->GetIntData(17);
-                PMob->m_Type        = (uint8)_sql->GetIntData(18);
-                PMob->m_Immunity    = (IMMUNITY)_sql->GetIntData(19);
-                PMob->m_EcoSystem   = (ECOSYSTEM)_sql->GetIntData(20);
-                PMob->m_ModelRadius = (float)_sql->GetIntData(21);
+                PMob->m_Behavior    = (uint16)rset->get<int32>(16);
+                PMob->m_Link        = (uint8)rset->get<int32>(17);
+                PMob->m_Type        = (uint8)rset->get<int32>(18);
+                PMob->m_Immunity    = (IMMUNITY)rset->get<int32>(19);
+                PMob->m_EcoSystem   = (ECOSYSTEM)rset->get<int32>(20);
+                PMob->m_ModelRadius = (float)rset->get<int32>(21);
 
-                PMob->baseSpeed      = (uint8)_sql->GetIntData(22); // Overwrites baseentity.cpp's defined baseSpeed
-                PMob->animationSpeed = (uint8)_sql->GetIntData(22); // Overwrites baseentity.cpp's defined animationSpeed
+                PMob->baseSpeed      = (uint8)rset->get<int32>(22); // Overwrites baseentity.cpp's defined baseSpeed
+                PMob->animationSpeed = (uint8)rset->get<int32>(22); // Overwrites baseentity.cpp's defined animationSpeed
                 PMob->UpdateSpeed();
 
-                PMob->strRank = (uint8)_sql->GetIntData(23);
-                PMob->dexRank = (uint8)_sql->GetIntData(24);
-                PMob->vitRank = (uint8)_sql->GetIntData(25);
-                PMob->agiRank = (uint8)_sql->GetIntData(26);
-                PMob->intRank = (uint8)_sql->GetIntData(27);
-                PMob->mndRank = (uint8)_sql->GetIntData(28);
-                PMob->chrRank = (uint8)_sql->GetIntData(29);
-                PMob->evaRank = (uint8)_sql->GetIntData(30);
-                PMob->defRank = (uint8)_sql->GetIntData(31);
-                PMob->attRank = (uint8)_sql->GetIntData(32);
-                PMob->accRank = (uint8)_sql->GetIntData(33);
+                PMob->strRank = (uint8)rset->get<int32>(23);
+                PMob->dexRank = (uint8)rset->get<int32>(24);
+                PMob->vitRank = (uint8)rset->get<int32>(25);
+                PMob->agiRank = (uint8)rset->get<int32>(26);
+                PMob->intRank = (uint8)rset->get<int32>(27);
+                PMob->mndRank = (uint8)rset->get<int32>(28);
+                PMob->chrRank = (uint8)rset->get<int32>(29);
+                PMob->evaRank = (uint8)rset->get<int32>(30);
+                PMob->defRank = (uint8)rset->get<int32>(31);
+                PMob->attRank = (uint8)rset->get<int32>(32);
+                PMob->accRank = (uint8)rset->get<int32>(33);
 
-                PMob->setModifier(Mod::SLASH_SDT, (int16)_sql->GetIntData(34));
-                PMob->setModifier(Mod::PIERCE_SDT, (int16)_sql->GetIntData(35));
-                PMob->setModifier(Mod::HTH_SDT, (int16)_sql->GetIntData(36));
-                PMob->setModifier(Mod::IMPACT_SDT, (int16)_sql->GetIntData(37));
+                PMob->setModifier(Mod::SLASH_SDT, (int16)rset->get<int32>(34));
+                PMob->setModifier(Mod::PIERCE_SDT, (int16)rset->get<int32>(35));
+                PMob->setModifier(Mod::HTH_SDT, (int16)rset->get<int32>(36));
+                PMob->setModifier(Mod::IMPACT_SDT, (int16)rset->get<int32>(37));
 
-                PMob->setModifier(Mod::UDMGMAGIC, (int16)_sql->GetIntData(38)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::UDMGMAGIC, (int16)rset->get<int32>(38)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 
-                PMob->setModifier(Mod::FIRE_SDT, (int16)_sql->GetIntData(39));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::ICE_SDT, (int16)_sql->GetIntData(40));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::WIND_SDT, (int16)_sql->GetIntData(41));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::EARTH_SDT, (int16)_sql->GetIntData(42));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::THUNDER_SDT, (int16)_sql->GetIntData(43)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::WATER_SDT, (int16)_sql->GetIntData(44));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::LIGHT_SDT, (int16)_sql->GetIntData(45));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::DARK_SDT, (int16)_sql->GetIntData(46));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::FIRE_SDT, (int16)rset->get<int32>(39));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::ICE_SDT, (int16)rset->get<int32>(40));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::WIND_SDT, (int16)rset->get<int32>(41));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::EARTH_SDT, (int16)rset->get<int32>(42));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::THUNDER_SDT, (int16)rset->get<int32>(43)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::WATER_SDT, (int16)rset->get<int32>(44));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::LIGHT_SDT, (int16)rset->get<int32>(45));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::DARK_SDT, (int16)rset->get<int32>(46));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(_sql->GetIntData(47)));
-                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(_sql->GetIntData(48)));
-                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(_sql->GetIntData(49)));
-                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(_sql->GetIntData(50)));
-                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(_sql->GetIntData(51)));
-                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(_sql->GetIntData(52)));
-                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(_sql->GetIntData(53)));
-                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(_sql->GetIntData(54)));
+                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(rset->get<int32>(47)));
+                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(rset->get<int32>(48)));
+                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(rset->get<int32>(49)));
+                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(rset->get<int32>(50)));
+                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(rset->get<int32>(51)));
+                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(rset->get<int32>(52)));
+                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(rset->get<int32>(53)));
+                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(rset->get<int32>(54)));
 
-                PMob->m_Element     = (uint8)_sql->GetIntData(55);
-                PMob->m_Family      = (uint16)_sql->GetIntData(56);
-                PMob->m_name_prefix = (uint8)_sql->GetIntData(57);
-                PMob->m_flags       = (uint32)_sql->GetIntData(58);
+                PMob->m_Element     = (uint8)rset->get<int32>(55);
+                PMob->m_Family      = (uint16)rset->get<int32>(56);
+                PMob->m_name_prefix = (uint8)rset->get<int32>(57);
+                PMob->m_flags       = (uint32)rset->get<int32>(58);
 
                 // Special sub animation for Mob (yovra, jailer of love, phuabo)
                 // yovra 1: On top/in the sky, 2: , 3: On top/in the sky
                 // phuabo 1: Underwater, 2: Out of the water, 3: Goes back underwater
-                PMob->animationsub = (uint32)_sql->GetIntData(59);
+                PMob->animationsub = (uint32)rset->get<int32>(59);
 
                 // Setup HP / MP Stat Percentage Boost
-                PMob->HPscale = _sql->GetFloatData(60);
-                PMob->MPscale = _sql->GetFloatData(61);
+                PMob->HPscale = rset->get<float>(60);
+                PMob->MPscale = rset->get<float>(61);
 
                 // TODO: Remove me
                 // Check if we should be looking up scripts for this mob
                 // PMob->m_HasSpellScript = (uint8)sql->GetIntData(62);
 
-                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(_sql->GetIntData(63));
+                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(rset->get<int32>(63));
 
-                PMob->m_Pool = _sql->GetUIntData(64);
+                PMob->m_Pool = rset->get<uint32>(64);
 
-                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(_sql->GetUIntData(65));
-                PMob->namevis         = _sql->GetUIntData(66);
-                PMob->m_Aggro         = _sql->GetUIntData(67);
-                PMob->m_MobSkillList  = _sql->GetUIntData(68);
-                PMob->m_TrueDetection = _sql->GetUIntData(69);
-                PMob->setMobMod(MOBMOD_DETECTION, _sql->GetUIntData(70));
+                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(rset->get<uint32>(65));
+                PMob->namevis         = rset->get<uint32>(66);
+                PMob->m_Aggro         = rset->get<uint32>(67);
+                PMob->m_MobSkillList  = rset->get<uint32>(68);
+                PMob->m_TrueDetection = rset->get<uint32>(69);
+                PMob->setMobMod(MOBMOD_DETECTION, rset->get<uint32>(70));
 
                 if (CZone* PZone = zoneutils::GetZone(zoneID))
                 {
@@ -1727,112 +1724,109 @@ namespace mobutils
                             "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                             "INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id "
                             "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
-                            "WHERE mob_groups.groupid = %u AND mob_groups.zoneid = %u";
+                            "WHERE mob_groups.groupid = ? AND mob_groups.zoneid = ?";
 
-        int32 ret = _sql->Query(Query, groupid, groupZoneId);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        const auto rset = db::preparedStmt(Query, groupid, groupZoneId);
+        if (rset && rset->rowsCount() != 0)
         {
-            if (_sql->NextRow() == SQL_SUCCESS)
+            if (rset->next())
             {
-                PMob->name.insert(0, (const char*)_sql->GetData(1));
-                PMob->packetName.insert(0, (const char*)_sql->GetData(2));
+                PMob->name.insert(0, rset->get<std::string>(1));
+                PMob->packetName.insert(0, rset->get<std::string>(2));
 
-                PMob->m_RespawnTime = _sql->GetUIntData(3) * 1000;
-                PMob->m_SpawnType   = (SPAWNTYPE)_sql->GetUIntData(4);
-                PMob->m_DropID      = _sql->GetUIntData(5);
+                PMob->m_RespawnTime = rset->get<uint32>(3) * 1000;
+                PMob->m_SpawnType   = (SPAWNTYPE)rset->get<uint32>(4);
+                PMob->m_DropID      = rset->get<uint32>(5);
 
-                PMob->HPmodifier = (uint32)_sql->GetIntData(6);
-                PMob->MPmodifier = (uint32)_sql->GetIntData(7);
+                PMob->HPmodifier = (uint32)rset->get<int32>(6);
+                PMob->MPmodifier = (uint32)rset->get<int32>(7);
 
-                PMob->m_minLevel = (uint8)_sql->GetIntData(8);
-                PMob->m_maxLevel = (uint8)_sql->GetIntData(9);
+                PMob->m_minLevel = (uint8)rset->get<int32>(8);
+                PMob->m_maxLevel = (uint8)rset->get<int32>(9);
 
-                uint16 sqlModelID[10];
-                std::memcpy(&sqlModelID, _sql->GetData(10), 20);
-                PMob->look = look_t(sqlModelID);
+                db::extractFromBlob(rset, "modelid", PMob->look);
 
-                PMob->SetMJob(_sql->GetIntData(11));
-                PMob->SetSJob(_sql->GetIntData(12));
+                PMob->SetMJob(rset->get<int32>(11));
+                PMob->SetSJob(rset->get<int32>(12));
 
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
-                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(_sql->GetIntData(13));
-                PMob->m_dmgMult = _sql->GetUIntData(14);
-                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((_sql->GetIntData(15) * 1000) / 60);
-                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((_sql->GetIntData(15) * 1000) / 60);
+                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(rset->get<int32>(13));
+                PMob->m_dmgMult = rset->get<uint32>(14);
+                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((rset->get<int32>(15) * 1000) / 60);
+                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((rset->get<int32>(15) * 1000) / 60);
 
-                PMob->m_Behavior    = (uint16)_sql->GetIntData(16);
-                PMob->m_Link        = (uint8)_sql->GetIntData(17);
-                PMob->m_Type        = (uint8)_sql->GetIntData(18);
-                PMob->m_Immunity    = (IMMUNITY)_sql->GetIntData(19);
-                PMob->m_EcoSystem   = (ECOSYSTEM)_sql->GetIntData(20);
-                PMob->m_ModelRadius = (float)_sql->GetIntData(21);
+                PMob->m_Behavior    = (uint16)rset->get<int32>(16);
+                PMob->m_Link        = (uint8)rset->get<int32>(17);
+                PMob->m_Type        = (uint8)rset->get<int32>(18);
+                PMob->m_Immunity    = (IMMUNITY)rset->get<int32>(19);
+                PMob->m_EcoSystem   = (ECOSYSTEM)rset->get<int32>(20);
+                PMob->m_ModelRadius = (float)rset->get<int32>(21);
 
-                PMob->baseSpeed      = (uint8)_sql->GetIntData(22); // Overwrites baseentity.cpp's defined baseSpeed
-                PMob->animationSpeed = (uint8)_sql->GetIntData(22); // Overwrites baseentity.cpp's defined animationSpeed
+                PMob->baseSpeed      = (uint8)rset->get<int32>(22); // Overwrites baseentity.cpp's defined baseSpeed
+                PMob->animationSpeed = (uint8)rset->get<int32>(22); // Overwrites baseentity.cpp's defined animationSpeed
                 PMob->UpdateSpeed();
 
-                PMob->strRank = (uint8)_sql->GetIntData(23);
-                PMob->dexRank = (uint8)_sql->GetIntData(24);
-                PMob->vitRank = (uint8)_sql->GetIntData(25);
-                PMob->agiRank = (uint8)_sql->GetIntData(26);
-                PMob->intRank = (uint8)_sql->GetIntData(27);
-                PMob->mndRank = (uint8)_sql->GetIntData(28);
-                PMob->chrRank = (uint8)_sql->GetIntData(29);
-                PMob->evaRank = (uint8)_sql->GetIntData(30);
-                PMob->defRank = (uint8)_sql->GetIntData(31);
-                PMob->attRank = (uint8)_sql->GetIntData(32);
-                PMob->accRank = (uint8)_sql->GetIntData(33);
+                PMob->strRank = (uint8)rset->get<int32>(23);
+                PMob->dexRank = (uint8)rset->get<int32>(24);
+                PMob->vitRank = (uint8)rset->get<int32>(25);
+                PMob->agiRank = (uint8)rset->get<int32>(26);
+                PMob->intRank = (uint8)rset->get<int32>(27);
+                PMob->mndRank = (uint8)rset->get<int32>(28);
+                PMob->chrRank = (uint8)rset->get<int32>(29);
+                PMob->evaRank = (uint8)rset->get<int32>(30);
+                PMob->defRank = (uint8)rset->get<int32>(31);
+                PMob->attRank = (uint8)rset->get<int32>(32);
+                PMob->accRank = (uint8)rset->get<int32>(33);
 
-                PMob->setModifier(Mod::SLASH_SDT, (int16)_sql->GetIntData(34));
-                PMob->setModifier(Mod::PIERCE_SDT, (int16)_sql->GetIntData(35));
-                PMob->setModifier(Mod::HTH_SDT, (int16)_sql->GetIntData(36));
-                PMob->setModifier(Mod::IMPACT_SDT, (int16)_sql->GetIntData(37));
+                PMob->setModifier(Mod::SLASH_SDT, (int16)rset->get<int32>(34));
+                PMob->setModifier(Mod::PIERCE_SDT, (int16)rset->get<int32>(35));
+                PMob->setModifier(Mod::HTH_SDT, (int16)rset->get<int32>(36));
+                PMob->setModifier(Mod::IMPACT_SDT, (int16)rset->get<int32>(37));
 
-                PMob->setModifier(Mod::UDMGMAGIC, (int16)_sql->GetIntData(38)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::UDMGMAGIC, (int16)rset->get<int32>(38)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 
-                PMob->setModifier(Mod::FIRE_SDT, (int16)_sql->GetIntData(39));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::ICE_SDT, (int16)_sql->GetIntData(40));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::WIND_SDT, (int16)_sql->GetIntData(41));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::EARTH_SDT, (int16)_sql->GetIntData(42));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::THUNDER_SDT, (int16)_sql->GetIntData(43)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::WATER_SDT, (int16)_sql->GetIntData(44));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::LIGHT_SDT, (int16)_sql->GetIntData(45));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::DARK_SDT, (int16)_sql->GetIntData(46));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::FIRE_SDT, (int16)rset->get<int32>(39));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::ICE_SDT, (int16)rset->get<int32>(40));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::WIND_SDT, (int16)rset->get<int32>(41));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::EARTH_SDT, (int16)rset->get<int32>(42));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::THUNDER_SDT, (int16)rset->get<int32>(43)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::WATER_SDT, (int16)rset->get<int32>(44));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::LIGHT_SDT, (int16)rset->get<int32>(45));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::DARK_SDT, (int16)rset->get<int32>(46));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(_sql->GetIntData(47)));
-                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(_sql->GetIntData(48)));
-                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(_sql->GetIntData(49)));
-                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(_sql->GetIntData(50)));
-                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(_sql->GetIntData(51)));
-                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(_sql->GetIntData(52)));
-                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(_sql->GetIntData(53)));
-                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(_sql->GetIntData(54)));
+                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(rset->get<int32>(47)));
+                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(rset->get<int32>(48)));
+                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(rset->get<int32>(49)));
+                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(rset->get<int32>(50)));
+                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(rset->get<int32>(51)));
+                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(rset->get<int32>(52)));
+                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(rset->get<int32>(53)));
+                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(rset->get<int32>(54)));
 
-                PMob->m_Element     = (uint8)_sql->GetIntData(55);
-                PMob->m_Family      = (uint16)_sql->GetIntData(56);
-                PMob->m_name_prefix = (uint8)_sql->GetIntData(57);
-                PMob->m_flags       = (uint32)_sql->GetIntData(58);
+                PMob->m_Element     = (uint8)rset->get<int32>(55);
+                PMob->m_Family      = (uint16)rset->get<int32>(56);
+                PMob->m_name_prefix = (uint8)rset->get<int32>(57);
+                PMob->m_flags       = (uint32)rset->get<int32>(58);
 
-                PMob->animationsub = (uint32)_sql->GetIntData(59);
+                PMob->animationsub = (uint32)rset->get<int32>(59);
 
                 // Setup HP / MP Stat Percentage Boost
-                PMob->HPscale = _sql->GetFloatData(60);
-                PMob->MPscale = _sql->GetFloatData(61);
+                PMob->HPscale = rset->get<float>(60);
+                PMob->MPscale = rset->get<float>(61);
 
                 // TODO: Remove me
                 // PMob->m_HasSpellScript = (uint8)sql->GetIntData(62);
 
-                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(_sql->GetIntData(63));
+                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(rset->get<int32>(63));
 
-                PMob->m_Pool = _sql->GetUIntData(64);
+                PMob->m_Pool = rset->get<uint32>(64);
 
-                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(_sql->GetUIntData(65));
-                PMob->namevis         = _sql->GetUIntData(66);
-                PMob->m_Aggro         = _sql->GetUIntData(67);
-                PMob->m_MobSkillList  = _sql->GetUIntData(68);
-                PMob->m_TrueDetection = _sql->GetUIntData(69);
-                PMob->setMobMod(MOBMOD_DETECTION, _sql->GetUIntData(70));
+                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(rset->get<uint32>(65));
+                PMob->namevis         = rset->get<uint32>(66);
+                PMob->m_Aggro         = rset->get<uint32>(67);
+                PMob->m_MobSkillList  = rset->get<uint32>(68);
+                PMob->m_TrueDetection = rset->get<uint32>(69);
+                PMob->setMobMod(MOBMOD_DETECTION, rset->get<uint32>(70));
 
                 mobutils::InitializeMob(PMob);
                 mobutils::AddSqlModifiers(PMob);

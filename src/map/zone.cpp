@@ -314,22 +314,21 @@ void CZone::LoadZoneLines()
 {
     TracyZoneScoped;
 
-    static const char fmtQuery[] = "SELECT zoneline, tozone, tox, toy, toz, rotation FROM zonelines WHERE fromzone = %u";
+    const auto fmtQuery = "SELECT zoneline, tozone, tox, toy, toz, rotation FROM zonelines WHERE fromzone = ?";
+    const auto rset = db::preparedStmt(fmtQuery, m_zoneID);
 
-    int32 ret = _sql->Query(fmtQuery, m_zoneID);
-
-    if (ret != SQL_ERROR && _sql->NumRows() != 0)
+    if (rset && rset->rowsCount())
     {
-        while (_sql->NextRow() == SQL_SUCCESS)
+        while (rset->next())
         {
             zoneLine_t* zl = new zoneLine_t;
 
-            zl->m_zoneLineID     = (uint32)_sql->GetIntData(0);
-            zl->m_toZone         = (uint16)_sql->GetIntData(1);
-            zl->m_toPos.x        = _sql->GetFloatData(2);
-            zl->m_toPos.y        = _sql->GetFloatData(3);
-            zl->m_toPos.z        = _sql->GetFloatData(4);
-            zl->m_toPos.rotation = (uint8)_sql->GetIntData(5);
+            zl->m_zoneLineID     = (uint32)rset->get<int32>(0);
+            zl->m_toZone         = (uint16)rset->get<int32>(1);
+            zl->m_toPos.x        = rset->get<float>(2);
+            zl->m_toPos.y        = rset->get<float>(3);
+            zl->m_toPos.z        = rset->get<float>(4);
+            zl->m_toPos.rotation = (uint8)rset->get<int32>(5);
 
             m_zoneLineList.emplace_back(zl);
         }
@@ -354,13 +353,13 @@ void CZone::LoadZoneWeather()
 {
     TracyZoneScoped;
 
-    static const char* Query = "SELECT weather FROM zone_weather WHERE zone = %u";
+    const char* Query = "SELECT weather FROM zone_weather WHERE zone = ?";
 
-    int32 ret = _sql->Query(Query, m_zoneID);
-    if (ret != SQL_ERROR && _sql->NumRows() != 0)
+    const auto rset = db::preparedStmt(Query, m_zoneID);
+    if (rset && rset->rowsCount() && rset->next())
     {
-        _sql->NextRow();
-        auto* weatherBlob = reinterpret_cast<uint16*>(_sql->GetData(0));
+        std::array<uint16, WEATHER_CYCLE> weatherBlob;
+        db::extractFromBlob(rset, "weather", *weatherBlob.data());
         for (uint16 i = 0; i < WEATHER_CYCLE; i++)
         {
             if (weatherBlob[i])
@@ -397,32 +396,36 @@ void CZone::LoadZoneSettings()
                                "FROM zone_settings AS zone "
                                "LEFT JOIN bcnm_records AS bcnm "
                                "USING (zoneid) "
-                               "WHERE zoneid = %u "
+                               "WHERE zoneid = ? "
                                "LIMIT 1";
 
-    if (_sql->Query(Query, m_zoneID) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+    const auto rset = db::preparedStmt(Query, m_zoneID);
+    if (rset && rset->rowsCount() && rset->next())
     {
-        m_zoneName.insert(0, (const char*)_sql->GetData(0));
-        m_zoneIP = str2ip((const char*)_sql->GetData(1));
+        m_zoneName.insert(0, rset->get<std::string>(0));
+        m_zoneIP = str2ip(rset->get<std::string>(1));
 
-        m_zonePort              = (uint16)_sql->GetUIntData(2);
-        m_zoneMusic.m_songDay   = (uint8)_sql->GetUIntData(3);           // background music (day)
-        m_zoneMusic.m_songNight = (uint8)_sql->GetUIntData(4);           // background music (night)
-        m_zoneMusic.m_bSongS    = (uint8)_sql->GetUIntData(5);           // solo battle music
-        m_zoneMusic.m_bSongM    = (uint8)_sql->GetUIntData(6);           // party battle music
-        m_tax                   = (uint16)(_sql->GetFloatData(7) * 100); // tax for bazaar
-        m_miscMask              = (uint16)_sql->GetUIntData(8);
+        m_zonePort              = (uint16)rset->get<uint32>(2);
+        m_zoneMusic.m_songDay   = (uint8)rset->get<uint32>(3);           // background music (day)
+        m_zoneMusic.m_songNight = (uint8)rset->get<uint32>(4);           // background music (night)
+        m_zoneMusic.m_bSongS    = (uint8)rset->get<uint32>(5);           // solo battle music
+        m_zoneMusic.m_bSongM    = (uint8)rset->get<uint32>(6);           // party battle music
+        m_tax                   = (uint16)(rset->get<float>(7) * 100); // tax for bazaar
+        m_miscMask              = (uint16)rset->get<uint32>(8);
 
-        m_zoneType = static_cast<ZONE_TYPE>(_sql->GetUIntData(9));
+        m_zoneType = static_cast<ZONE_TYPE>(rset->get<uint32>(9));
 
-        if (_sql->GetData(10) != nullptr) // bcnmid cannot be used now, because they start from scratch
-        {
-            m_BattlefieldHandler = new CBattlefieldHandler(this);
-        }
+        // TODO:
+        // if (_sql->GetData(10) != nullptr) // bcnmid cannot be used now, because they start from scratch
+        // {
+        //     m_BattlefieldHandler = new CBattlefieldHandler(this);
+        // }
+
         if (m_miscMask & MISC_TREASURE)
         {
             m_TreasurePool = new CTreasurePool(TreasurePoolType::Zone);
         }
+
         if (m_CampaignHandler && m_CampaignHandler->m_PZone == nullptr)
         {
             destroy(m_CampaignHandler);

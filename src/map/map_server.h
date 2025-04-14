@@ -42,7 +42,6 @@ class CZone;
 // Exposed globals
 //
 
-extern std::unique_ptr<SqlConnection> _sql;
 extern std::map<uint16, CZone*>       g_PZoneList; // Global array of pointers for zones
 
 class MapServer final : public Application

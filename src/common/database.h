@@ -194,20 +194,23 @@ namespace db
         template <typename T>
         inline constexpr bool is_blob_v = is_blob<T>;
 
-        template <typename T, bool = std::is_enum_v<T>>
-        struct enum_decay_impl
+        template <typename T, bool IsEnum = std::is_enum_v<T>>
+        struct underlying_decay_impl;
+
+        template <typename T>
+        struct underlying_decay_impl<T, true>
+        {
+            using type = std::decay_t<std::underlying_type_t<T>>;
+        };
+
+        template <typename T>
+        struct underlying_decay_impl<T, false>
         {
             using type = std::decay_t<T>;
         };
 
         template <typename T>
-        struct enum_decay_impl<T, true>
-        {
-            using type = std::underlying_type_t<T>;
-        };
-
-        template <typename T>
-        using enum_decay_t = typename enum_decay_impl<T>::type;
+        using underlying_decay_impl_t = typename underlying_decay_impl<T>::type;
 
         struct State final
         {
@@ -303,8 +306,7 @@ namespace db
                     return T{};
                 }
 
-                // TODO: First-class support for enum types
-                using UnderlyingT = enum_decay_t<T>;
+                using UnderlyingT = underlying_decay_impl_t<T>;
 
                 UnderlyingT value{};
 
@@ -414,7 +416,14 @@ namespace db
                     return T{};
                 }
 
-                return value;
+                if constexpr (std::is_enum_v<T>)
+                {
+                    return static_cast<T>(value);
+                }
+                else
+                {
+                    return value;
+                }
             }
 
             // Get the value of the 0-indexed column. Behind the scenes this is automatically converted to be 1-indexed for
@@ -506,18 +515,25 @@ namespace db
         {
             TracyZoneScoped;
 
-            // TODO: First-class support for enum types
-            using UnderlyingT = enum_decay_t<T>;
+            using UnderlyingT = underlying_decay_impl_t<T>;
 
             if constexpr (!is_blob_v<UnderlyingT>)
             {
                 DebugSQLFmt("binding {}: {}", counter, value);
             }
 
-            if constexpr (std::is_enum_v<UnderlyingT>)
+            if constexpr (std::is_enum_v<T>)
             {
                 // Break enums down into their further-underlying types
-                bindValue(stmt, counter, blobs, static_cast<std::underlying_type_t<UnderlyingT>>(value));
+                bindValue(stmt, counter, blobs, static_cast<UnderlyingT>(value));
+            }
+            else if constexpr (std::is_same_v<UnderlyingT, int64>)
+            {
+                stmt->setInt64(counter, value);
+            }
+            else if constexpr (std::is_same_v<UnderlyingT, uint64>)
+            {
+                stmt->setUInt64(counter, value);
             }
             else if constexpr (std::is_same_v<UnderlyingT, int32>)
             {
@@ -616,37 +632,6 @@ namespace db
 
         auto isConnectionIssue(const std::exception& e) -> bool;
     } // namespace detail
-
-    // @brief Execute a query with the given query string.
-    // @param query The query string to execute.
-    // @return A unique pointer to the result set of the query.
-    // @note Everything in database-land is 1-indexed, not 0-indexed.
-    auto queryStr(std::string const& rawQuery) -> std::unique_ptr<db::detail::ResultSetWrapper>;
-
-    // @brief Execute a query with the given query string and sprintf-style arguments.
-    // @param query The query string to execute.
-    // @param args The arguments to bind to the query string.
-    // @return A unique pointer to the result set of the query.
-    // @note Everything in database-land is 1-indexed, not 0-indexed.
-    template <typename... Args>
-    auto query(std::string const& query, Args&&... args) -> std::unique_ptr<db::detail::ResultSetWrapper>
-    {
-        TracyZoneScoped;
-        // TODO: Collect up bound args and report to tracy here
-
-        try
-        {
-            const auto formattedQuery = fmt::sprintf(query, std::forward<Args>(args)...);
-            return queryStr(formattedQuery);
-        }
-        catch (const std::exception& e)
-        {
-            ShowErrorFmt("Query Failed: {}", query);
-            ShowErrorFmt("{}", e.what());
-        }
-
-        return nullptr;
-    }
 
     // @brief Execute a prepared statement with the given query string and arguments.
     // @param query The query string to execute.

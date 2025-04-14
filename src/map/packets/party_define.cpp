@@ -23,15 +23,10 @@
 
 #include "common/database.h"
 #include "common/logging.h"
-#include "common/sql.h"
 
 #include "entities/charentity.h"
 #include "entities/trustentity.h"
 #include "utils/zoneutils.h"
-
-const char* partyQuery = "SELECT chars.charid, partyflag, pos_zone, pos_prevzone FROM accounts_parties "
-                         "LEFT JOIN chars ON accounts_parties.charid = chars.charid WHERE "
-                         "IF (allianceid <> 0, allianceid = %d, partyid = %d) ORDER BY partyflag & %u, timestamp";
 
 CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
 {
@@ -48,22 +43,26 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
 
         uint8 i = 0;
 
-        int ret = _sql->Query(partyQuery, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
+        const char* partyQuery = "SELECT chars.charid, partyflag, pos_zone, pos_prevzone FROM accounts_parties "
+                                 "LEFT JOIN chars ON accounts_parties.charid = chars.charid WHERE "
+                                 "IF (allianceid <> 0, allianceid = ?, partyid = ?) ORDER BY partyflag & ?, timestamp";
 
-        if (ret != SQL_ERROR && _sql->NumRows() > 0)
+        const auto rset = db::preparedStmt(partyQuery, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
+
+        if (rset && rset->rowsCount() > 0)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
                 uint16       targid = 0;
-                CCharEntity* PChar  = zoneutils::GetChar(_sql->GetUIntData(0));
+                CCharEntity* PChar  = zoneutils::GetChar(rset->get<uint32>(0));
                 if (PChar)
                 {
                     targid = PChar->targid;
                 }
-                ref<uint32>(12 * i + 0x08) = _sql->GetUIntData(0);
+                ref<uint32>(12 * i + 0x08) = rset->get<uint32>(0);
                 ref<uint16>(12 * i + 0x0C) = targid;
-                ref<uint16>(12 * i + 0x0E) = _sql->GetUIntData(1);
-                ref<uint16>(12 * i + 0x10) = _sql->GetUIntData(2) ? _sql->GetUIntData(2) : _sql->GetUIntData(3);
+                ref<uint16>(12 * i + 0x0E) = rset->get<uint32>(1);
+                ref<uint16>(12 * i + 0x10) = rset->get<uint32>(2) ? rset->get<uint32>(2) : rset->get<uint32>(3);
                 i++;
             }
         }

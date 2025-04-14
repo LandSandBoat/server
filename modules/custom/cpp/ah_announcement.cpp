@@ -89,16 +89,15 @@ class AHAnnouncementModule : public CPPModule
                                 // Get the row id of the item we're buying
                                 const auto rowId = [&]() -> uint32
                                 {
-                                    const auto rset = db::preparedStmt(R"(
-                                        SELECT id
-                                        FROM auction_house
-                                        WHERE itemid = ?
-                                        AND buyer_name IS NULL
-                                        AND stack = ?
-                                        AND price <= ?
-                                        ORDER BY price
-                                        LIMIT 1;
-                                        )",
+                                    const auto rset = db::preparedStmt(
+                                        "SELECT id "
+                                        "FROM auction_house "
+                                        "WHERE itemid = ? "
+                                        "AND buyer_name IS NULL "
+                                        "AND stack = ? "
+                                        "AND price <= ? "
+                                        "ORDER BY price "
+                                        "LIMIT 1",
                                         itemid, quantity == 0, price);
 
                                     FOR_DB_SINGLE_RESULT(rset)
@@ -112,7 +111,8 @@ class AHAnnouncementModule : public CPPModule
                                 // Now that we have the row id, we can use it to update the purchase information
                                 const auto successfulUpdate = [&]() -> bool
                                 {
-                                    const auto rset = db::preparedStmt("UPDATE auction_house "
+                                    const auto rset = db::preparedStmt(
+                                        "UPDATE auction_house "
                                         "SET buyer_name = ?, sale = ?, sell_date = ? "
                                         "WHERE id = ? "
                                         "LIMIT 1 ",
@@ -137,12 +137,7 @@ class AHAnnouncementModule : public CPPModule
                                         {
                                             uint32 sellerId = 0;
 
-                                            const auto rset = db::preparedStmt(R"(
-                                                SELECT seller
-                                                FROM auction_house
-                                                WHERE id = ?;
-                                                )",
-                                                rowId);
+                                            const auto rset = db::preparedStmt("SELECT seller FROM auction_house WHERE id = ?", rowId);
 
                                             FOR_DB_SINGLE_RESULT(rset)
                                             {

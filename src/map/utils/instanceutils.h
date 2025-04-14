@@ -26,7 +26,6 @@
 #include "common/database.h"
 #include "common/ipp.h"
 #include "common/logging.h"
-#include "common/sql.h"
 
 class CInstanceLoader;
 class CCharEntity;

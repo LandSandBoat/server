@@ -23,7 +23,6 @@
 
 #include "common/database.h"
 #include "common/logging.h"
-#include "common/sql.h"
 
 #include "lua/luautils.h"
 
@@ -61,32 +60,32 @@ namespace instanceutils
             "ON instance_zone = zone_settings.zoneid "
             "WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
 
-        int32 ret = _sql->Query(query, mapIPP.getIP(), mapIPP.getIPString(), mapIPP.getPort());
+        const auto rset = db::preparedStmt(query, mapIPP.getIP(), mapIPP.getIPString(), mapIPP.getPort());
 
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        if (rset && rset->rowsCount() != 0)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
                 InstanceData_t data;
 
                 // Main data
-                data.id            = static_cast<uint32>(_sql->GetIntData(0));
-                data.instance_name = reinterpret_cast<const char*>(_sql->GetData(1));
-                data.instance_zone = static_cast<uint16>(_sql->GetIntData(2));
-                data.entrance_zone = static_cast<uint16>(_sql->GetIntData(3));
-                data.time_limit    = static_cast<uint16>(_sql->GetIntData(4));
-                data.start_x       = _sql->GetFloatData(5);
-                data.start_y       = _sql->GetFloatData(6);
-                data.start_z       = _sql->GetFloatData(7);
-                data.start_rot     = static_cast<uint16>(_sql->GetIntData(8));
-                data.music_day     = static_cast<uint16>(_sql->GetIntData(9));
-                data.music_night   = static_cast<uint16>(_sql->GetIntData(10));
-                data.battlesolo    = static_cast<uint16>(_sql->GetIntData(11));
-                data.battlemulti   = static_cast<uint16>(_sql->GetIntData(12));
+                data.id            = static_cast<uint32>(rset->get<int32>(0));
+                data.instance_name = rset->get<std::string>(1);
+                data.instance_zone = static_cast<uint16>(rset->get<int32>(2));
+                data.entrance_zone = static_cast<uint16>(rset->get<int32>(3));
+                data.time_limit    = static_cast<uint16>(rset->get<int32>(4));
+                data.start_x       = rset->get<float>(5);
+                data.start_y       = rset->get<float>(6);
+                data.start_z       = rset->get<float>(7);
+                data.start_rot     = static_cast<uint16>(rset->get<int32>(8));
+                data.music_day     = static_cast<uint16>(rset->get<int32>(9));
+                data.music_night   = static_cast<uint16>(rset->get<int32>(10));
+                data.battlesolo    = static_cast<uint16>(rset->get<int32>(11));
+                data.battlemulti   = static_cast<uint16>(rset->get<int32>(12));
 
                 // Meta data
                 data.instance_zone_name = zoneutils::GetZone(data.instance_zone)->getName();
-                data.entrance_zone_name = _sql->GetStringData(13);
+                data.entrance_zone_name = rset->get<std::string>(13);
                 data.filename           = fmt::format("./scripts/zones/{}/instances/{}.lua", data.instance_zone_name, data.instance_name);
 
                 // Add to data cache

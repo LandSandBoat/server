@@ -101,81 +101,80 @@ namespace petutils
                             "FROM pet_list, mob_pools, mob_resistances, mob_family_system "
                             "WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id AND mob_pools.familyid = mob_family_system.familyID";
 
-        if (_sql->Query(Query) != SQL_ERROR && _sql->NumRows() != 0)
+        const auto rset = db::preparedStmt(Query);
+        if (rset && rset->rowsCount() != 0)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
                 Pet_t* Pet = new Pet_t();
 
-                Pet->PetID = (uint16)_sql->GetIntData(0);
-                Pet->name.insert(0, (const char*)_sql->GetData(1));
+                Pet->PetID = (uint16)rset->get<int32>(0);
+                Pet->name.insert(0, rset->get<std::string>(1));
 
-                uint16 sqlModelID[10];
-                std::memcpy(&sqlModelID, _sql->GetData(2), 20);
-                Pet->look = look_t(sqlModelID);
+                db::extractFromBlob(rset, "modelid", Pet->look);
 
-                Pet->minLevel  = (uint8)_sql->GetIntData(3);
-                Pet->maxLevel  = (uint8)_sql->GetIntData(4);
-                Pet->time      = _sql->GetUIntData(5);
-                Pet->radius    = _sql->GetUIntData(6);
-                Pet->EcoSystem = (ECOSYSTEM)_sql->GetIntData(7);
-                Pet->m_Family  = (uint16)_sql->GetIntData(8);
-                Pet->mJob      = (uint8)_sql->GetIntData(9);
-                Pet->sJob      = (uint8)_sql->GetIntData(10);
-                Pet->m_Element = (uint8)_sql->GetIntData(11);
+                Pet->minLevel  = (uint8)rset->get<int32>(3);
+                Pet->maxLevel  = (uint8)rset->get<int32>(4);
+                Pet->time      = rset->get<uint32>(5);
+                Pet->radius    = rset->get<uint32>(6);
+                Pet->EcoSystem = (ECOSYSTEM)rset->get<int32>(7);
+                Pet->m_Family  = (uint16)rset->get<int32>(8);
+                Pet->mJob      = (uint8)rset->get<int32>(9);
+                Pet->sJob      = (uint8)rset->get<int32>(10);
+                Pet->m_Element = (uint8)rset->get<int32>(11);
 
-                Pet->HPscale = _sql->GetFloatData(12);
-                Pet->MPscale = _sql->GetFloatData(13);
+                Pet->HPscale = rset->get<float>(12);
+                Pet->MPscale = rset->get<float>(13);
 
-                Pet->speed = (uint8)_sql->GetIntData(14);
+                Pet->speed = (uint8)rset->get<int32>(14);
 
-                Pet->strRank = (uint8)_sql->GetIntData(15);
-                Pet->dexRank = (uint8)_sql->GetIntData(16);
-                Pet->vitRank = (uint8)_sql->GetIntData(17);
-                Pet->agiRank = (uint8)_sql->GetIntData(18);
-                Pet->intRank = (uint8)_sql->GetIntData(19);
-                Pet->mndRank = (uint8)_sql->GetIntData(20);
-                Pet->chrRank = (uint8)_sql->GetIntData(21);
-                Pet->defRank = (uint8)_sql->GetIntData(22);
-                Pet->attRank = (uint8)_sql->GetIntData(23);
-                Pet->accRank = (uint8)_sql->GetIntData(24);
-                Pet->evaRank = (uint8)_sql->GetIntData(25);
+                Pet->strRank = (uint8)rset->get<int32>(15);
+                Pet->dexRank = (uint8)rset->get<int32>(16);
+                Pet->vitRank = (uint8)rset->get<int32>(17);
+                Pet->agiRank = (uint8)rset->get<int32>(18);
+                Pet->intRank = (uint8)rset->get<int32>(19);
+                Pet->mndRank = (uint8)rset->get<int32>(20);
+                Pet->chrRank = (uint8)rset->get<int32>(21);
+                Pet->defRank = (uint8)rset->get<int32>(22);
+                Pet->attRank = (uint8)rset->get<int32>(23);
+                Pet->accRank = (uint8)rset->get<int32>(24);
+                Pet->evaRank = (uint8)rset->get<int32>(25);
 
-                Pet->hasSpellScript = (bool)_sql->GetIntData(26);
+                Pet->hasSpellScript = (bool)rset->get<int32>(26);
 
-                Pet->spellList = (uint8)_sql->GetIntData(27);
+                Pet->spellList = (uint8)rset->get<int32>(27);
 
                 // Specific Dmage Taken, as a %
-                Pet->slash_sdt  = (int16)_sql->GetIntData(28);
-                Pet->pierce_sdt = (int16)_sql->GetIntData(29);
-                Pet->hth_sdt    = (int16)_sql->GetIntData(30);
-                Pet->impact_sdt = (int16)_sql->GetIntData(31);
+                Pet->slash_sdt  = (int16)rset->get<int32>(28);
+                Pet->pierce_sdt = (int16)rset->get<int32>(29);
+                Pet->hth_sdt    = (int16)rset->get<int32>(30);
+                Pet->impact_sdt = (int16)rset->get<int32>(31);
 
-                Pet->magical_sdt = (int16)_sql->GetIntData(32); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->magical_sdt = (int16)rset->get<int32>(32); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 
-                Pet->fire_sdt    = (int16)_sql->GetIntData(33); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->ice_sdt     = (int16)_sql->GetIntData(34); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->wind_sdt    = (int16)_sql->GetIntData(35); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->earth_sdt   = (int16)_sql->GetIntData(36); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->thunder_sdt = (int16)_sql->GetIntData(37); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->water_sdt   = (int16)_sql->GetIntData(38); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->light_sdt   = (int16)_sql->GetIntData(39); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->dark_sdt    = (int16)_sql->GetIntData(40); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->fire_sdt    = (int16)rset->get<int32>(33); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->ice_sdt     = (int16)rset->get<int32>(34); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->wind_sdt    = (int16)rset->get<int32>(35); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->earth_sdt   = (int16)rset->get<int32>(36); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->thunder_sdt = (int16)rset->get<int32>(37); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->water_sdt   = (int16)rset->get<int32>(38); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->light_sdt   = (int16)rset->get<int32>(39); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->dark_sdt    = (int16)rset->get<int32>(40); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
                 // resistances
-                Pet->fire_res_rank    = (int8)_sql->GetIntData(41);
-                Pet->ice_res_rank     = (int8)_sql->GetIntData(42);
-                Pet->wind_res_rank    = (int8)_sql->GetIntData(43);
-                Pet->earth_res_rank   = (int8)_sql->GetIntData(44);
-                Pet->thunder_res_rank = (int8)_sql->GetIntData(45);
-                Pet->water_res_rank   = (int8)_sql->GetIntData(46);
-                Pet->light_res_rank   = (int8)_sql->GetIntData(47);
-                Pet->dark_res_rank    = (int8)_sql->GetIntData(48);
+                Pet->fire_res_rank    = (int8)rset->get<int32>(41);
+                Pet->ice_res_rank     = (int8)rset->get<int32>(42);
+                Pet->wind_res_rank    = (int8)rset->get<int32>(43);
+                Pet->earth_res_rank   = (int8)rset->get<int32>(44);
+                Pet->thunder_res_rank = (int8)rset->get<int32>(45);
+                Pet->water_res_rank   = (int8)rset->get<int32>(46);
+                Pet->light_res_rank   = (int8)rset->get<int32>(47);
+                Pet->dark_res_rank    = (int8)rset->get<int32>(48);
 
-                Pet->cmbDelay       = (uint16)_sql->GetIntData(49);
-                Pet->name_prefix    = (uint8)_sql->GetUIntData(50);
-                Pet->m_MobSkillList = (uint16)_sql->GetUIntData(51);
-                Pet->m_dmgType      = (DAMAGE_TYPE)_sql->GetUIntData(52);
+                Pet->cmbDelay       = (uint16)rset->get<int32>(49);
+                Pet->name_prefix    = (uint8)rset->get<uint32>(50);
+                Pet->m_MobSkillList = (uint16)rset->get<uint32>(51);
+                Pet->m_dmgType      = (DAMAGE_TYPE)rset->get<uint32>(52);
 
                 g_PPetList.emplace_back(Pet);
             }
@@ -1722,18 +1721,17 @@ namespace petutils
                                 "char_pet.wyvernid "
                                 "FROM pet_name, char_pet "
                                 "WHERE pet_name.id = char_pet.wyvernid AND "
-                                "char_pet.charid = %u";
+                                "char_pet.charid = ?";
 
-            if (_sql->Query(Query, PMaster->id) != SQL_ERROR && _sql->NumRows() != 0)
+            const auto rset = db::preparedStmt(Query, PMaster->id);
+            if (rset && rset->rowsCount() != 0)
             {
-                while (_sql->NextRow() == SQL_SUCCESS)
+                while (rset->next())
                 {
-                    uint16 wyvernid = (uint16)_sql->GetIntData(1);
-
+                    uint16 wyvernid = (uint16)rset->get<int32>(1);
                     if (wyvernid != 0)
                     {
-                        PPetData->name.clear();
-                        PPetData->name.insert(0, (const char*)_sql->GetData(0));
+                        PPetData->name = rset->get<std::string>(0);
                     }
                 }
             }
@@ -1742,16 +1740,17 @@ namespace petutils
         {
             petType = PET_TYPE::CHOCOBO;
 
-            const char* Query = "SELECT\
-                char_pet.chocoboid\
-                FROM char_pet\
-                char_pet.charid = %u";
+            const char* Query = "SELECT "
+                                "char_pet.chocoboid "
+                                "FROM char_pet "
+                                "char_pet.charid = ?";
 
-            if (_sql->Query(Query, PMaster->id) != SQL_ERROR && _sql->NumRows() != 0)
+            const auto rset = db::preparedStmt(Query, PMaster->id);
+            if (rset && rset->rowsCount() != 0)
             {
-                while (_sql->NextRow() == SQL_SUCCESS)
+                while (rset->next())
                 {
-                    uint32 chocoboid = (uint32)_sql->GetIntData(0);
+                    uint32 chocoboid = (uint32)rset->get<int32>(0);
 
                     if (chocoboid != 0)
                     {
@@ -1760,18 +1759,19 @@ namespace petutils
 
                         PPetData->name.clear();
 
-                        Query = "SELECT\
-                            pet_name.name\
-                            FROM pet_name\
-                            WHERE pet_name.id = %u OR pet_name.id = %u";
+                        const auto Query = "SELECT "
+                                           "pet_name.name "
+                                           "FROM pet_name "
+                                           "WHERE pet_name.id = ? OR pet_name.id = ?";
 
-                        if (_sql->Query(Query, chocoboname1, chocoboname2) != SQL_ERROR && _sql->NumRows() != 0)
+                        const auto rset = db::preparedStmt(Query, chocoboname1, chocoboname2);
+                        if (rset && rset->rowsCount() != 0)
                         {
-                            while (_sql->NextRow() == SQL_SUCCESS)
+                            while (rset->next())
                             {
                                 if (chocoboname1 != 0 && chocoboname2 != 0)
                                 {
-                                    PPetData->name.insert(0, (const char*)_sql->GetData(0));
+                                    PPetData->name = rset->get<std::string>(0);
                                 }
                             }
                         }
