@@ -49,7 +49,7 @@ INSERT INTO `mob_skills` VALUES (14,29,'victory_smite',0,0.0,5.0,2000,0,4,0,0,0,
 -- INSERT INTO `mob_skills` VALUES (17,??,'viper_bite'
 INSERT INTO `mob_skills` VALUES (18,33,'shadowstitch',0,0.0,7.0,2000,0,4,0,0,0,5,0,0);
 INSERT INTO `mob_skills` VALUES (19,34,'gust_slash',0,0.0,7.0,2000,0,4,0,0,0,9,0,0);
--- INSERT INTO `mob_skills` VALUES (20,??,'cyclone'
+INSERT INTO `mob_skills` VALUES (20,35,'cyclone',2,0.0,5.0,2000,500,4,0,0,0,6,8,0);
 -- INSERT INTO `mob_skills` VALUES (21,??,'energy_steal'
 -- INSERT INTO `mob_skills` VALUES (22,??,'energy_drain'
 INSERT INTO `mob_skills` VALUES (23,38,'dancing_edge',0,0.0,7.0,2000,0,4,0,0,0,4,6,0);
@@ -228,7 +228,7 @@ INSERT INTO `mob_skills` VALUES (170,86,'randgrith',0,0.0,7.0,2000,0,4,0,0,0,13,
 -- INSERT INTO `mob_skills` VALUES (204,??,'sarv'
 -- INSERT INTO `mob_skills` VALUES (208,??,'hot_shot'
 -- INSERT INTO `mob_skills` VALUES (209,??,'split_shot'
--- INSERT INTO `mob_skills` VALUES (210,??,'sniper_shot'
+INSERT INTO `mob_skills` VALUES (210,198,'sniper_shot',0,0.0,25.0,2000,0,4,0,0,0,3,1,0);
 -- INSERT INTO `mob_skills` VALUES (212,??,'slug_shot'
 -- INSERT INTO `mob_skills` VALUES (213,??,'blast_shot'
 -- INSERT INTO `mob_skills` VALUES (214,??,'heavy_shot'
@@ -725,10 +725,10 @@ INSERT INTO `mob_skills` VALUES (707,451,'sentinel',0,0.0,7.0,2000,1500,4,0,0,0,
 -- INSERT INTO `mob_skills` VALUES (708,452,'last_resort',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (709,439,'souleater',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (710,438,'charm',0,0.0,18.0,2000,0,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (711,455,'eagle_eye_shot',0,0.0,7.0,2000,1500,4,2,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (711,0,'eagle_eye_shot',0,0.0,25.0,2000,0,4,2,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (712,456,'eagle_eye_shot',0,0.0,7.0,2000,1500,4,2,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (713,457,'sharpshot',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (714,458,'camouflage',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (714,10,'camouflage',0,0.0,0,2000,0,1,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (715,459,'barrage',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (716,460,'shadowbind',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (717,92,'venom_breath',4,0.0,20.0,2000,1500,4,0,0,0,0,0,0); -- hnm only

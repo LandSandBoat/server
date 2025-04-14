@@ -224,6 +224,18 @@ quest.sections =
                 end,
             },
 
+            ['Washu'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:hasKeyItem(xi.ki.FLASK_OF_CLAM_WATER) and
+                        not player:hasKeyItem(xi.ki.STOREROOM_KEY)
+                    then
+                        return quest:event(223)
+                    end
+                end,
+            },
+
             ['Gimb'] =
             {
                 onTrigger = function(player, npc)

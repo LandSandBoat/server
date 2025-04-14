@@ -24,6 +24,10 @@ zones[xi.zone.RIVERNE_SITE_A01] =
         SD_HAS_GROWN                  = 7609, -- The spatial displacement has grown.
         SPACE_SEEMS_DISTORTED         = 7610, -- The space around you seems oddly distorted and disrupted.
         MONUMENT                      = 7617, -- Something has been engraved on this stone, but the message is too difficult to make out.
+        TRUNK_EXAMINE                 = 7675, -- Closely examining the trunk reveals a tiny keyhole. You would need a tiny key to open it...
+        TRUNK_INVESTIGATION_COMPLETE  = 7686, -- There is no reason to investigate further.
+        TRUNK_DEFAULT                 = 7687, -- There is a chest here, but you can't seem to find the keyhole...
+        TRUNK_QUEST_INVESTIGATED      = 7688, -- After checking the contents of the chest, Sanctia and her moogle friend apparently left for Bastok.
         HOMEPOINT_SET                 = 7745, -- Home point set!
         UNITY_WANTED_BATTLE_INTERACT  = 7803, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
@@ -36,6 +40,7 @@ zones[xi.zone.RIVERNE_SITE_A01] =
     npc =
     {
         DISPLACEMENT_OFFSET = GetFirstID('Spatial_Displacement'),
+        GOLDMANE_DISPLACEMENT = GetFirstID('Spatial_Displacement') + 22,
     },
 }
 

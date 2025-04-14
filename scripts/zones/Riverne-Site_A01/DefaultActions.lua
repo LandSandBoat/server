@@ -4,4 +4,5 @@ return {
     ['qm_rivernewort']        = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Stone_Monument']        = { messageSpecial = ID.text.MONUMENT },
     ['Unstable_Displacement'] = { messageSpecial = ID.text.A_GLOWING_MIST },
+    ['Trunk']                 = { messageSpecial = ID.text.TRUNK_DEFAULT },
 }

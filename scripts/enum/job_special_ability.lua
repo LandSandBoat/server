@@ -63,7 +63,7 @@ xi.jobSpecialAbility =
     -- ASTRAL_FLOW          = 2256,
     -- Eagle Eye Shot has a TON of duplicates because mob models animate differently
     -- EES_?                = 413,
-    -- EES_?                = 711,
+    EES_ELVAAN           = 711, --Rohemolipaud in The Search for Goldmane. Currently disabled due to incompatible animation category.
     -- EES_?                = 712,
     EES_GOBLIN           = 735,
     EES_ANTICA           = 736,

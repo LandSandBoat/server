@@ -4,4 +4,5 @@ return {
     ['qm_dalham']     = { messageSpecial = ID.text.NOTHING_LEFT_INTEREST },
     ['Rhalo_Davigoh'] = { event = 38 },
     ['Warmachine']    = { text = ID.text.CLUNK_CLUNK_WHIRL_WHIZZ },
+    ['Weathered_Boat'] = { messageSpecial = ID.text.BOAT_WASHED_UP },
 }

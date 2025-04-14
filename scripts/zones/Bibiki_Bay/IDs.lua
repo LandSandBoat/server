@@ -41,6 +41,9 @@ zones[xi.zone.BIBIKI_BAY] =
         HAVE_BILLET                   = 7505, -- You cannot buy morrre than one <item>. Use the one you have now to ride the next ship.
         LEFT_BILLET                   = 7510, -- You use your <item>. (<number> trip[/s] remaining)
         END_BILLET                    = 7511, -- You use up your <item>.
+        BOAT_WASHED_UP                = 7518, -- There is a boat washed up on the shore...
+        FIGHT_FOR_YOUR_LIFE           = 7519, -- You suddenly find yourself fighting for your life!
+        ROHEMOLIPAUD_SURRENDER        = 7590, -- This time I let you walk away with your miserable life...
         NOTHING_LEFT_INTEREST         = 7628, -- There is nothing left of interest here.
         SHEN_QM                       = 7629, -- Innumerable shrimp shells are floating in the water here.
         SHEN_SPAWN                    = 7630, -- The <item> begins skimming quietly across the surface of the water. ...What's this!? An enormous creature is chasing after it from below!!!
@@ -50,9 +53,11 @@ zones[xi.zone.BIBIKI_BAY] =
     },
     mob =
     {
+        ROHEMOLIPAUD_OFFSET           = GetFirstID('Rohemolipaud'),
     },
     npc =
     {
+        WEATHERED_BOAT_OFFSET         = GetFirstID('Weathered_Boat'),
     },
 }
 

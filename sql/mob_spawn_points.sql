@@ -721,7 +721,7 @@ INSERT INTO `mob_spawn_points` VALUES (16793923,'Locus_Ghost_Crab','Locus Ghost 
 INSERT INTO `mob_spawn_points` VALUES (16793924,'Locus_Ghost_Crab','Locus Ghost Crab',56,261.881,-1.029,176.625,51);
 -- INSERT INTO `mob_spawn_points` VALUES (16793925,'Locus_Fiddler_Crab','Locus Fiddler Crab',57,267.235,-1.405,173.523,37); -- Needs further research
 -- INSERT INTO `mob_spawn_points` VALUES (16793926,'Locus_Fiddler_Crab','Locus Fiddler Crab',57,274.459,-2.717,169.846,129); -- Needs further research
-INSERT INTO `mob_spawn_points` VALUES (16793927,'Rohemolipaud','Rohemolipaud',46,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (16793927,'Rohemolipaud','Rohemolipaud',46,-620.443,-001.253,-685.108,67);
 INSERT INTO `mob_spawn_points` VALUES (16793928,'Dalham','Dalham',47,95.041,-45.015,936.651,243);
 INSERT INTO `mob_spawn_points` VALUES (16793929,'Shen','Shen',48,-111.000,0.001,-729.000,159);
 INSERT INTO `mob_spawn_points` VALUES (16793930,'Shens_Filtrate','Shen\'s Filtrate',49,-111.300,0.001,-729.000,159);

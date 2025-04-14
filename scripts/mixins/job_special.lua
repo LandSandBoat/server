@@ -153,6 +153,7 @@ local familyEES =
     [359] = xi.jsa.EES_SHADE,   -- Fomor
     [360] = xi.jsa.EES_YAGUDO,  -- YagudoNM
     [373] = xi.jsa.EES_GOBLIN,  -- Goblin_Armored
+    [711] = xi.jsa.EES_ELVAAN,  -- Rohemolipaud in The Search for Goldmane. Currently disabled due to incompatible animation category.
 }
 
 local effectByAbility =
