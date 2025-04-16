@@ -1,8 +1,9 @@
 -----------------------------------
---  Erosion Dust
---  Description: Spreads eroding dust particles on targets in an area of effect, dealing Light damage and inflicting Dia.
---  Type: Magical
---  Utsusemi/Blink absorb: Wipes shadows
+-- Erosion Dust
+-- Description: Dealing damage and inflicting Dia.
+-- Type: Magical (Light)
+-- Range: AoE
+-- Utsusemi/Blink absorb: Wipe Shadows
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}

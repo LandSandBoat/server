@@ -10,26 +10,33 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    if
-        target:hasStatusEffect(xi.effect.DEX_DOWN) or
-        caster:hasStatusEffect(xi.effect.DEX_BOOST)
-    then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
+    if target:hasStatusEffect(xi.effect.DEX_DOWN) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     else
-        -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+        -- Always overwrite the caster's DEX_BOOST
+        caster:delStatusEffectSilent(xi.effect.DEX_BOOST)
+
         local params = {}
         params.diff = nil
         params.attribute = xi.mod.INT
         params.skillType = xi.skill.DARK_MAGIC
         params.bonus = 0
         params.effect = nil
+
         local resist = applyResistanceEffect(caster, target, spell, params)
         if resist <= 0.125 then
             spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
             spell:setMsg(xi.msg.basic.MAGIC_ABSORB_DEX)
-            caster:addStatusEffect(xi.effect.DEX_BOOST, xi.settings.main.ABSORB_SPELL_AMOUNT * resist * ((100 + (caster:getMod(xi.mod.AUGMENTS_ABSORB))) / 100), xi.settings.main.ABSORB_SPELL_TICK, xi.settings.main.ABSORB_SPELL_AMOUNT * xi.settings.main.ABSORB_SPELL_TICK) -- caster gains DEX
-            target:addStatusEffect(xi.effect.DEX_DOWN, xi.settings.main.ABSORB_SPELL_AMOUNT * resist * ((100 + (caster:getMod(xi.mod.AUGMENTS_ABSORB))) / 100), xi.settings.main.ABSORB_SPELL_TICK, xi.settings.main.ABSORB_SPELL_AMOUNT * xi.settings.main.ABSORB_SPELL_TICK)    -- target loses DEX
+
+            local base = xi.settings.main.ABSORB_SPELL_AMOUNT
+            local tick = xi.settings.main.ABSORB_SPELL_TICK
+            local duration = base * tick
+            local mod = ((100 + caster:getMod(xi.mod.AUGMENTS_ABSORB)) / 100)
+            local finalPower = base * resist * mod
+
+            caster:addStatusEffect(xi.effect.DEX_BOOST, finalPower, tick, duration)
+            target:addStatusEffectEx(xi.effect.DEX_DOWN, xi.effect.DEX_DOWN, -finalPower, tick, duration)
         end
     end
 

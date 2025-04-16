@@ -133,6 +133,8 @@ xi.mobSkill =
 
     RANGED_ATTACK_15         = 1949,
 
+    EXUVIATION               = 1955, -- Unique entry.
+
     ECLOSION                 = 1970, -- Unique entry.
 
     DEATHGNASH               = 1977, -- Unique entry.

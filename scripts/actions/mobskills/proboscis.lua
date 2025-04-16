@@ -1,8 +1,9 @@
 -----------------------------------
 -- Proboscis
--- Steals MP and dispels one beneficial status effect from targets in front.
--- Type: Magical
--- Utsusemi/Blink absorb: ignore shadow
+-- Description: Drains MP and steals 1 Buff
+-- Type: Magical (Dark)
+-- Range: Conal
+-- Utsusemi/Blink absorb: 1 shadow
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}

@@ -5115,7 +5115,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Supernal_Chapuli_low_50',511,188,9,255); 
 INSERT INTO `mob_spell_lists` VALUES ('Supernal_Chapuli_low_50',511,366,91,255); -- Graviga (91-255)
 INSERT INTO `mob_spell_lists` VALUES ('Supernal_Chapuli_low_50',511,359,75,255); -- Silencega (75~255)*/
 
-/*-- Tax'et (512)
+-- Tax'et (512)
 INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,146,83,255); -- Fire III (83-255)
 INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,147,37,255); -- Fire IV (37-255)
 INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,148,86,255); -- Fire V (86-255)
@@ -5123,7 +5123,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,204,60,255); -- Flare (60~255)
 INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,176,69,255); -- Firaga_iii (69~255)
 INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,177,92,255); -- Firaga_iv (92~255)
 INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,178,99,255); -- Firaga V (99~255)
-INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,496,90,255); -- Firaja (90~255)*/
+INSERT INTO `mob_spell_lists` VALUES ('Taxet',512,496,90,255); -- Firaja (90~255)
 
 -- Jailer of Love (Fire) (513)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Fire',513,147,1,255); -- Fire IV (1~255)

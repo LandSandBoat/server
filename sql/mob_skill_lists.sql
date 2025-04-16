@@ -3988,20 +3988,20 @@ INSERT INTO `mob_skill_lists` VALUES ('Mastop',2022,2161); -- cimicine_discharge
 INSERT INTO `mob_skill_lists` VALUES ('Mastop',2022,2162); -- emetic_discharge
 INSERT INTO `mob_skill_lists` VALUES ('Mastop',2022,2770); -- booming_bombination
 
-/*INSERT INTO `mob_skill_lists` VALUES ('Taxet',2023,1951); -- magma_fan
+INSERT INTO `mob_skill_lists` VALUES ('Taxet',2023,1951); -- magma_fan
 INSERT INTO `mob_skill_lists` VALUES ('Taxet',2023,1952); -- erratic_flutter
 INSERT INTO `mob_skill_lists` VALUES ('Taxet',2023,1953); -- proboscis
-INSERT INTO `mob_skill_lists` VALUES ('Taxet',2023,1954); -- erosion_dust
-INSERT INTO `mob_skill_lists` VALUES ('Taxet',2023,1955); -- exuviation
+INSERT INTO `mob_skill_lists` VALUES ('Taxet',2023,1954); -- erosion_dus
 INSERT INTO `mob_skill_lists` VALUES ('Taxet',2023,1956); -- fire_break
 
 INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,1951); -- magma_fan (Below 50%)
 INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,1952); -- erratic_flutter (Below 50%)
 INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,1953); -- proboscis (Below 50%)
 INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,1954); -- erosion_dust (Below 50%)
-INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,1955); -- exuviation (Below 50%)
 INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,1956); -- fire_break (Below 50%)
-INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,3044); -- benumbing_blaze (Below 50%)*/
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_low_50',2024,3044); -- benumbing_blaze (Below 50%)
+
+INSERT INTO `mob_skill_lists` VALUES ('Taxet_exu_only',2025,1955); -- exuviation 
 
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Shiva_WTB',2025,879); -- Waking the Beast, sleepga
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Shiva_WTB',2025,878); -- Waking the Beast, frost_armor
