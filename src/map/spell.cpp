@@ -135,7 +135,7 @@ void CSpell::setSkillType(uint8 SkillType)
 
 bool CSpell::isBuff() const
 {
-    return (getValidTarget() & TARGET_SELF) && !(getValidTarget() & TARGET_ENEMY);
+    return (getValidTarget() & static_cast<uint16>(TargetType::Self)) && !(getValidTarget() & static_cast<uint16>(TargetType::Enemy));
 }
 
 bool CSpell::tookEffect() const
@@ -150,7 +150,7 @@ bool CSpell::hasMPCost()
 
 bool CSpell::isHeal()
 {
-    return ((getValidTarget() & TARGET_SELF) && getSkillType() == SKILL_HEALING_MAGIC) || m_ID == SpellID::Pollen || m_ID == SpellID::Wild_Carrot ||
+    return ((getValidTarget() & static_cast<uint16>(TargetType::Self)) && getSkillType() == SKILL_HEALING_MAGIC) || m_ID == SpellID::Pollen || m_ID == SpellID::Wild_Carrot ||
            m_ID == SpellID::Healing_Breeze || m_ID == SpellID::Magic_Fruit;
 }
 
@@ -162,7 +162,7 @@ bool CSpell::isCure()
 
 bool CSpell::isDebuff()
 {
-    return ((getValidTarget() & TARGET_ENEMY) && getSkillType() == SKILL_ENFEEBLING_MAGIC) || m_spellFamily == SPELLFAMILY_ELE_DOT ||
+    return ((getValidTarget() & static_cast<uint16>(TargetType::Enemy)) && getSkillType() == SKILL_ENFEEBLING_MAGIC) || m_spellFamily == SPELLFAMILY_ELE_DOT ||
            m_spellFamily == SPELLFAMILY_BIO || m_ID == SpellID::Stun || m_ID == SpellID::Curse;
 }
 
@@ -239,7 +239,7 @@ void CSpell::setMPCost(uint16 MP)
 
 bool CSpell::canTargetEnemy() const
 {
-    return (getValidTarget() & TARGET_ENEMY) && !(getValidTarget() & TARGET_SELF);
+    return (getValidTarget() & static_cast<uint16>(TargetType::Enemy)) && !(getValidTarget() & static_cast<uint16>(TargetType::Self));
 }
 
 uint8 CSpell::getAOE() const
@@ -856,7 +856,7 @@ namespace spell
         float total = spell->getRadius();
 
         // brd gets bonus radius from string skill
-        if (spell->getSpellGroup() == SPELLGROUP_SONG && (spell->getValidTarget() & TARGET_SELF))
+        if (spell->getSpellGroup() == SPELLGROUP_SONG && (spell->getValidTarget() & static_cast<uint16>(TargetType::Self)))
         {
             if (entity->objtype == TYPE_MOB || (entity->GetMJob() == JOB_BRD && entity->objtype == TYPE_PC && ((CCharEntity*)entity)->getEquip(SLOT_RANGED) &&
                                                 ((CItemWeapon*)((CCharEntity*)entity)->getEquip(SLOT_RANGED))->getSkillType() == SKILL_STRING_INSTRUMENT))

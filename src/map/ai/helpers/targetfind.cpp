@@ -466,7 +466,7 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
 
     // If offensive, don't target other entities with same allegiance
     // Cures can be AoE with Accession and Majesty, ideally we would use SPELLGROUP or some other mechanism, but TargetFind wasn't designed with that in mind
-    if ((m_targetFlags & TARGET_ENEMY) && !(m_targetFlags & TARGET_PLAYER_PARTY) &&
+    if ((m_targetFlags & static_cast<uint16>(TargetType::Enemy)) && !(m_targetFlags & static_cast<uint16>(TargetType::Party)) &&
         m_PBattleEntity->allegiance == PTarget->allegiance)
     {
         return false;
@@ -584,12 +584,12 @@ CBattleEntity* CTargetFind::getValidTarget(uint16 actionTargetID, uint16 validTa
         return nullptr;
     }
 
-    if (validTargetFlags & TARGET_PET)
+    if (validTargetFlags & static_cast<uint16>(TargetType::Pet))
     {
         return m_PBattleEntity->PPet;
     }
 
-    bool ignoreBattleId  = (validTargetFlags & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID;
+    bool ignoreBattleId  = (validTargetFlags & static_cast<uint16>(TargetType::IgnoreBattleID)) == static_cast<uint16>(TargetType::IgnoreBattleID);
     bool hasSameBattleId = m_PBattleEntity->getBattleID() == PTarget->getBattleID();
     if ((ignoreBattleId || hasSameBattleId) && PTarget->ValidTarget(m_PBattleEntity, validTargetFlags))
     {

@@ -440,22 +440,22 @@ bool CTrustEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return true;
     }
 
-    if ((targetFlags & TARGET_PLAYER_PARTY_PIANISSIMO) && PInitiator->allegiance == allegiance && PMaster && PInitiator != this)
+    if ((targetFlags & static_cast<uint16>(TargetType::PartyPianissimo)) && PInitiator->allegiance == allegiance && PMaster && PInitiator != this)
     {
         return true;
     }
 
-    if ((targetFlags & TARGET_PLAYER_PARTY_ENTRUST) && PInitiator->allegiance == allegiance && PMaster && PInitiator != this)
+    if ((targetFlags & static_cast<uint16>(TargetType::PartyEntrust)) && PInitiator->allegiance == allegiance && PMaster && PInitiator != this)
     {
         return true;
     }
 
-    if (targetFlags & TARGET_PLAYER_PARTY && PInitiator->objtype == TYPE_PET && PInitiator->allegiance == allegiance)
+    if (targetFlags & static_cast<uint16>(TargetType::Party) && PInitiator->objtype == TYPE_PET && PInitiator->allegiance == allegiance)
     {
         return true;
     }
 
-    if (targetFlags & TARGET_PLAYER_PARTY && PInitiator->allegiance == allegiance && PMaster)
+    if (targetFlags & static_cast<uint16>(TargetType::Party) && PInitiator->allegiance == allegiance && PMaster)
     {
         return PInitiator->PParty == PMaster->PParty;
     }
@@ -511,11 +511,11 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
         PAI->TargetFind->reset();
         if (PWeaponSkill->isAoE())
         {
-            PAI->TargetFind->findWithinArea(PBattleTarget, AOE_RADIUS::TARGET, 10, FINDFLAGS_NONE, TARGET_NONE);
+            PAI->TargetFind->findWithinArea(PBattleTarget, AOE_RADIUS::TARGET, 10, FINDFLAGS_NONE, static_cast<uint16>(TargetType::None));
         }
         else
         {
-            PAI->TargetFind->findSingleTarget(PBattleTarget, FINDFLAGS_NONE, TARGET_NONE);
+            PAI->TargetFind->findSingleTarget(PBattleTarget, FINDFLAGS_NONE, static_cast<uint16>(TargetType::None));
         }
 
         // Assumed, it's very difficult to produce this due to WS being nearly instant

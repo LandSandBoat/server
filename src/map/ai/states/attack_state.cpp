@@ -125,7 +125,7 @@ void CAttackState::UpdateTarget(uint16 targid)
     CBattleEntity* PNewTarget{ nullptr };
     if (newTargid != 0)
     {
-        PNewTarget = m_PEntity->IsValidTarget(newTargid, TARGET_ENEMY, m_errorMsg);
+        PNewTarget = m_PEntity->IsValidTarget(newTargid, static_cast<uint16>(TargetType::Enemy), m_errorMsg);
         if (!PNewTarget)
         {
             newTargid          = 0;
@@ -138,7 +138,7 @@ void CAttackState::UpdateTarget(uint16 targid)
                         distance(PChar->loc.p, PPotentialTarget.second->loc.p) <= 10)
                     {
                         std::unique_ptr<CBasicPacket> errMsg;
-                        if (PChar->IsValidTarget(PPotentialTarget.second->targid, TARGET_ENEMY, errMsg))
+                        if (PChar->IsValidTarget(PPotentialTarget.second->targid, static_cast<uint16>(TargetType::Enemy), errMsg))
                         {
                             newTargid = PPotentialTarget.second->targid;
                             PChar->pushPacket<CLockOnPacket>(PChar, static_cast<CBattleEntity*>(PPotentialTarget.second));

@@ -170,7 +170,7 @@ void CAutomatonEntity::Die()
 
 bool CAutomatonEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 {
-    if (targetFlags & TARGET_PLAYER && this == PInitiator)
+    if (targetFlags & static_cast<uint16>(TargetType::Player) && this == PInitiator)
     {
         return true;
     }

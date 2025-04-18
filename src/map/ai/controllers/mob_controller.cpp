@@ -357,11 +357,11 @@ bool CMobController::MobSkill(int wsList)
                 continue;
             }
 
-            if (PMobSkill->getValidTargets() == TARGET_ENEMY) // enemy
+            if (PMobSkill->getValidTargets() == static_cast<uint16>(TargetType::Enemy)) // enemy
             {
                 PActionTarget = PTarget;
             }
-            else if (PMobSkill->getValidTargets() == TARGET_SELF) // self
+            else if (PMobSkill->getValidTargets() == static_cast<uint16>(TargetType::Self)) // self
             {
                 PActionTarget = PMob;
             }
@@ -411,7 +411,7 @@ bool CMobController::TrySpecialSkill()
         return false;
     }
 
-    if (PSpecialSkill->getValidTargets() & TARGET_SELF)
+    if (PSpecialSkill->getValidTargets() & static_cast<uint16>(TargetType::Self))
     {
         PAbilityTarget = PMob;
     }
@@ -518,12 +518,12 @@ void CMobController::CastSpell(SpellID spellid)
     {
         CBattleEntity* PCastTarget = nullptr;
         // check valid targets
-        if (PSpell->getValidTarget() & TARGET_SELF)
+        if (PSpell->getValidTarget() & static_cast<uint16>(TargetType::Self))
         {
             PCastTarget = PMob;
 
             // only buff other targets if i'm roaming
-            if ((PSpell->getValidTarget() & TARGET_PLAYER_PARTY))
+            if ((PSpell->getValidTarget() & static_cast<uint16>(TargetType::Party)))
             {
                 // chance to target my master
                 if (PMob->PMaster != nullptr && xirand::GetRandomNumber(2) == 0)
@@ -535,7 +535,7 @@ void CMobController::CastSpell(SpellID spellid)
                 {
                     // chance to target party
                     PMob->PAI->TargetFind->reset();
-                    PMob->PAI->TargetFind->findWithinArea(PMob, AOE_RADIUS::ATTACKER, PSpell->getRange(), FINDFLAGS_NONE, TARGET_NONE);
+                    PMob->PAI->TargetFind->findWithinArea(PMob, AOE_RADIUS::ATTACKER, PSpell->getRange(), FINDFLAGS_NONE, static_cast<uint16>(TargetType::None));
 
                     if (!PMob->PAI->TargetFind->m_targets.empty())
                     {

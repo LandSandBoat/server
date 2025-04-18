@@ -412,22 +412,22 @@ enum SUBEFFECT : uint8
 };
 DECLARE_FORMAT_AS_UNDERLYING(SUBEFFECT);
 
-enum TARGETTYPE : uint16
+enum class TargetType : uint16
 {
-    TARGET_NONE                    = 0x0000,
-    TARGET_SELF                    = 0x0001,
-    TARGET_PLAYER_PARTY            = 0x0002,
-    TARGET_ENEMY                   = 0x0004,
-    TARGET_PLAYER_ALLIANCE         = 0x0008,
-    TARGET_PLAYER                  = 0x0010,
-    TARGET_PLAYER_DEAD             = 0x0020,
-    TARGET_NPC                     = 0x0040, // an npc is a mob that looks like an npc and fights on the side of the character
-    TARGET_PLAYER_PARTY_PIANISSIMO = 0x0080,
-    TARGET_PET                     = 0x0100,
-    TARGET_PLAYER_PARTY_ENTRUST    = 0x0200,
-    TARGET_IGNORE_BATTLEID         = 0x0400, // Can hit targets that do not have the same battle ID
+    None            = 0x0000,
+    Self            = 0x0001,
+    Party           = 0x0002,
+    Enemy           = 0x0004,
+    Alliance        = 0x0008,
+    Player          = 0x0010,
+    PlayerDead      = 0x0020,
+    NPC             = 0x0040, // an npc is a mob that looks like an npc and fights on the side of the character
+    PartyPianissimo = 0x0080,
+    Pet             = 0x0100,
+    PartyEntrust    = 0x0200,
+    IgnoreBattleID  = 0x0400, // Can hit targets that do not have the same battle ID
 };
-DECLARE_FORMAT_AS_UNDERLYING(TARGETTYPE);
+DECLARE_FORMAT_AS_UNDERLYING(TargetType);
 
 enum SKILLCHAIN_ELEMENT : uint8
 {

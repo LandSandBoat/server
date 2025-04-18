@@ -515,7 +515,7 @@ namespace gambits
                         }
                     }
 
-                    if (PAbility->getValidTarget() == TARGET_SELF)
+                    if (PAbility->getValidTarget() == static_cast<uint16>(TargetType::Self))
                     {
                         target = POwner;
                     }
@@ -986,7 +986,7 @@ namespace gambits
                     return false;
                 }
 
-                if (chosen_skill->valid_targets & TARGET_SELF)
+                if (static_cast<uint16>(chosen_skill->valid_targets) & static_cast<uint16>(TargetType::Self))
                 {
                     target = POwner;
                 }
@@ -998,7 +998,7 @@ namespace gambits
             }
             else // Mobskill
             {
-                if (chosen_skill->valid_targets & TARGET_SELF || chosen_skill->valid_targets & TARGET_PLAYER_PARTY)
+                if (static_cast<uint16>(chosen_skill->valid_targets) & static_cast<uint16>(TargetType::Self) || static_cast<uint16>(chosen_skill->valid_targets) & static_cast<uint16>(TargetType::Party))
                 {
                     target = POwner;
                 }

@@ -241,7 +241,7 @@ namespace gambits
         uint8      primary;
         uint8      secondary;
         uint8      tertiary;
-        TARGETTYPE valid_targets;
+        TargetType valid_targets;
 
         TrustSkill_t()
         : skill_id(0)
@@ -251,7 +251,7 @@ namespace gambits
         {
         }
 
-        TrustSkill_t(G_REACTION _skill_type, uint32 _skill_id, uint8 _primary, uint8 _secondary, uint8 _tertiary, TARGETTYPE _valid_targets)
+        TrustSkill_t(G_REACTION _skill_type, uint32 _skill_id, uint8 _primary, uint8 _secondary, uint8 _tertiary, TargetType _valid_targets)
         : skill_type(_skill_type)
         , skill_id(_skill_id)
         , primary(_primary)

@@ -10831,12 +10831,12 @@ auto CLuaBaseEntity::getEntitiesInRange(CLuaBaseEntity* PLuaEntityTarget, sol::v
     auto validTargets = va[4].is<uint16>() ? va[4].as<uint16>() : 0;
 
     // Mob buff abilities also hit monster's pets
-    if (validTargets & TARGET_SELF)
+    if (validTargets & static_cast<uint16>(TargetType::Self))
     {
         findFlags |= FINDFLAGS_PET;
     }
 
-    if ((validTargets & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID)
+    if ((validTargets & static_cast<uint16>(TargetType::IgnoreBattleID)) == static_cast<uint16>(TargetType::IgnoreBattleID))
     {
         findFlags |= FINDFLAGS_IGNORE_BATTLEID;
     }
@@ -10846,11 +10846,11 @@ auto CLuaBaseEntity::getEntitiesInRange(CLuaBaseEntity* PLuaEntityTarget, sol::v
     // Targetfind always adds the primary target, ensure that is valid
     if (radiusOrigin == AOE_RADIUS::TARGET || baseEntity->PAI->TargetFind->isWithinRange(&PTarget->loc.p, distance))
     {
-        if (aoeType == AOE_TYPE::ROUND)
+        if (aoeType == static_cast<uint8>(SkillRange::AreaOfEffect))
         {
             baseEntity->PAI->TargetFind->findWithinArea(PTarget, radiusOrigin, distance, findFlags, validTargets);
         }
-        else if (aoeType == AOE_TYPE::ROUND || aoeType == AOE_TYPE::CONE)
+        else if (aoeType == static_cast<uint8>(SkillRange::Cone))
         {
             float angle = 45.0f;
             baseEntity->PAI->TargetFind->findWithinCone(PTarget, distance, angle, findFlags, validTargets, aoeType);
@@ -17894,7 +17894,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
         // does not have a specified target so default to current battle target
         else if (mobObj)
         {
-            if (PMobSkill->getValidTargets() & TARGET_ENEMY)
+            if (PMobSkill->getValidTargets() & static_cast<uint16>(TargetType::Enemy))
             {
                 auto defaultTarget = mobObj->GetBattleTarget();
                 if (defaultTarget)
@@ -17907,7 +17907,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
                     }
                 }
             }
-            else if (PMobSkill->getValidTargets() & TARGET_SELF)
+            else if (PMobSkill->getValidTargets() & static_cast<uint16>(TargetType::Self))
             {
                 PEntity->PAI->MobSkill(PEntity->targid, skillid);
             }

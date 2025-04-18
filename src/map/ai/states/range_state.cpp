@@ -34,7 +34,7 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
 : CState(PEntity, targid)
 , m_PEntity(PEntity)
 {
-    auto* PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
+    auto* PTarget = m_PEntity->IsValidTarget(m_targid, static_cast<uint16>(TargetType::Enemy), m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())
     {
@@ -133,7 +133,7 @@ bool CRangeState::Update(time_point tick)
 {
     if (m_PEntity && m_PEntity->isAlive() && (tick > GetEntryTime() + m_aimTime && !IsCompleted()))
     {
-        auto* PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
+        auto* PTarget = m_PEntity->IsValidTarget(m_targid, static_cast<uint16>(TargetType::Enemy), m_errorMsg);
 
         CanUseRangedAttack(PTarget, true);
         if (HasMoved())

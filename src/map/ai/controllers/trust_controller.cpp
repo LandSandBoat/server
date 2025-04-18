@@ -454,7 +454,7 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
     }
 
     auto* PSpell = spell::GetSpell(spellid);
-    if (PSpell->getValidTarget() == TARGET_SELF)
+    if (PSpell->getValidTarget() == static_cast<uint16>(TargetType::Self))
     {
         targid = POwner->targid;
     }

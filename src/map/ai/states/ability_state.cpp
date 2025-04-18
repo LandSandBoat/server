@@ -94,7 +94,7 @@ void CAbilityState::ApplyEnmity()
     auto* PTarget = GetTarget();
     if (PTarget)
     {
-        if (m_PAbility->getValidTarget() & TARGET_ENEMY && PTarget->allegiance != m_PEntity->allegiance)
+        if (m_PAbility->getValidTarget() & static_cast<uint16>(TargetType::Enemy) && PTarget->allegiance != m_PEntity->allegiance)
         {
             if (PTarget->objtype == TYPE_MOB && !(m_PAbility->getCE() == 0 && m_PAbility->getVE() == 0))
             {

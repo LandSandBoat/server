@@ -1632,7 +1632,7 @@ bool CBattleEntity::hasTrait(uint16 traitID)
 bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 {
     TracyZoneScoped;
-    if (targetFlags & TARGET_ENEMY)
+    if (targetFlags & static_cast<uint16>(TargetType::Enemy))
     {
         if (!isDead())
         {
@@ -1671,7 +1671,7 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         }
     }
 
-    return (targetFlags & TARGET_SELF) &&
+    return (targetFlags & static_cast<uint16>(TargetType::Self)) &&
            (this == PInitiator ||
             (PInitiator->objtype == TYPE_PET && static_cast<CPetEntity*>(PInitiator)->getPetType() == PET_TYPE::AUTOMATON && this == PInitiator->PMaster));
 }
@@ -1750,7 +1750,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     // can this spell target the dead?
 
     uint8 flags = FINDFLAGS_NONE;
-    if (PSpell->getValidTarget() & TARGET_PLAYER_DEAD)
+    if (PSpell->getValidTarget() & static_cast<uint16>(TargetType::PlayerDead))
     {
         flags |= FINDFLAGS_DEAD;
     }
@@ -2005,18 +2005,18 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
     float distance  = PSkill->getDistance();
     uint8 findFlags = 0;
-    if (PSkill->getFlag() & SKILLFLAG_HIT_ALL)
+    if (PSkill->getFlag() & static_cast<uint8>(SkillFlag::HitAll))
     {
         findFlags |= FINDFLAGS_HIT_ALL;
     }
 
     // Mob buff abilities also hit monster's pets
-    if (PSkill->getValidTargets() == TARGET_SELF)
+    if (PSkill->getValidTargets() == static_cast<uint16>(TargetType::Self))
     {
         findFlags |= FINDFLAGS_PET;
     }
 
-    if ((PSkill->getValidTargets() & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID)
+    if ((PSkill->getValidTargets() & static_cast<uint16>(TargetType::IgnoreBattleID)) == static_cast<uint16>(TargetType::IgnoreBattleID))
     {
         findFlags |= FINDFLAGS_IGNORE_BATTLEID;
     }
@@ -2213,7 +2213,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             }
         }
 
-        if (PSkill->getValidTargets() & TARGET_ENEMY)
+        if (PSkill->getValidTargets() & static_cast<uint16>(TargetType::Enemy))
         {
             PTargetFound->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
         }

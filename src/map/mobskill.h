@@ -29,24 +29,23 @@
 
 class CBattleEntity;
 
-enum SKILLFLAG
+enum class SkillFlag : uint8
 {
-    SKILLFLAG_NONE        = 0x000,
-    SKILLFLAG_ASTRAL_FLOW = 0x002, // Player's Avatar Astral Flow blood pacts. TODO: give player pet skills their own separate enum, move avatar stuff there.
-    SKILLFLAG_NO_TP_COST  = 0x004, // Don't auto deduct TP
-    SKILLFLAG_HIT_ALL     = 0x008, // Strike players even if not in party/alliance
-    // unused                = 0x010,
-    // unused                = 0x020,
-    SKILLFLAG_BLOODPACT_RAGE = 0x040,
-    SKILLFLAG_BLOODPACT_WARD = 0x080,
+    None          = 0x000,
+    AstralFlow    = 0x002, // Player's Avatar Astral Flow blood pacts. TODO: give player pet skills their own separate enum, move avatar stuff there.
+    NoTPCost      = 0x004, // Don't auto deduct TP
+    HitAll        = 0x008, // Strike players even if not in party/alliance
+    BloodPactRage = 0x040,
+    BloodPactWard = 0x080,
 };
 
-enum AOE_TYPE
+enum class SkillRange : uint8
 {
-    NONE      = 0,
-    ROUND     = 1, // Normal AoE type
-    CONE      = 4, // Forward conal AoE
-    REAR_CONE = 8, // conal AoE behind the source
+    Single             = 0, // Single target
+    AreaOfEffect       = 1, // Normal AoE type, centered on user
+    AreaOfEffectTarget = 2, // AoE, centered on target
+    Cone               = 4, // Forward conal AoE
+    RearCone           = 8, // Conal AoE behind the user
 };
 
 #define MAX_MOBSKILL_ID 4262

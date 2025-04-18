@@ -39,7 +39,7 @@ CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint
         throw CStateInitException(std::make_unique<CMessageBasicPacket>(PEntity, PEntity, 0, 0, MSGBASIC_CANNOT_USE_WS));
     }
 
-    auto  target_flags = battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY;
+    auto  target_flags = battleutils::isValidSelfTargetWeaponskill(wsid) ? static_cast<uint16>(TargetType::Self) : static_cast<uint16>(TargetType::Enemy);
     auto* PTarget      = m_PEntity->IsValidTarget(m_targid, target_flags, m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())

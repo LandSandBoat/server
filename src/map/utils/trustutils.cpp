@@ -686,7 +686,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
                 PWeaponSkill->getPrimarySkillchain(),
                 PWeaponSkill->getSecondarySkillchain(),
                 PWeaponSkill->getTertiarySkillchain(),
-                battleutils::isValidSelfTargetWeaponskill(skill_id) ? TARGET_SELF : TARGET_ENEMY,
+                battleutils::isValidSelfTargetWeaponskill(skill_id) ? TargetType::Self : TargetType::Enemy,
             };
         }
         else // MobSkills
@@ -703,7 +703,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
                 PMobSkill->getPrimarySkillchain(),
                 PMobSkill->getSecondarySkillchain(),
                 PMobSkill->getTertiarySkillchain(),
-                static_cast<TARGETTYPE>(PMobSkill->getValidTargets()),
+                static_cast<TargetType>(PMobSkill->getValidTargets()),
             };
 
             controller->m_GambitsContainer->tp_skills.emplace_back(skill);

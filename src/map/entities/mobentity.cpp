@@ -568,17 +568,17 @@ bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return true;
     }
 
-    if (targetFlags & TARGET_PLAYER_DEAD && (m_Behavior & BEHAVIOR_RAISABLE) && isDead())
+    if (targetFlags & static_cast<uint16>(TargetType::PlayerDead) && (m_Behavior & BEHAVIOR_RAISABLE) && isDead())
     {
         return true;
     }
 
-    if ((targetFlags & TARGET_PLAYER) && allegiance == PInitiator->allegiance && !isCharmed)
+    if ((targetFlags & static_cast<uint16>(TargetType::Player)) && allegiance == PInitiator->allegiance && !isCharmed)
     {
         return true;
     }
 
-    if (targetFlags & TARGET_NPC)
+    if (targetFlags & static_cast<uint16>(TargetType::NPC))
     {
         if (allegiance == PInitiator->allegiance && !(m_Behavior & BEHAVIOR_NOHELP) && !isCharmed)
         {

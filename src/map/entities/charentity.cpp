@@ -1148,10 +1148,10 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 
     if (isDead())
     {
-        return (targetFlags & TARGET_PLAYER_DEAD) != 0;
+        return (targetFlags & static_cast<uint16>(TargetType::PlayerDead)) != 0;
     }
 
-    if ((targetFlags & TARGET_PLAYER) && allegiance == PInitiator->allegiance)
+    if ((targetFlags & static_cast<uint16>(TargetType::Player)) && allegiance == PInitiator->allegiance)
     {
         return true;
     }
@@ -1165,10 +1165,10 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     bool isSameAlliance   = PParty && PParty->m_PAlliance && PInitiator->PParty && PInitiator->PParty->m_PAlliance && PParty->m_PAlliance == PInitiator->PParty->m_PAlliance;
     bool isPartyPetMaster = PInitiator->PMaster && PInitiator->PMaster->PParty && PInitiator->PMaster->PParty == PParty;
     bool isSoloPetMaster  = PParty == nullptr && PInitiator->PMaster == this;
-    bool targetsParty     = targetFlags & TARGET_PLAYER_PARTY;
-    bool targetsAlliance  = targetFlags & TARGET_PLAYER_ALLIANCE;
-    bool hasPianissimo    = (targetFlags & TARGET_PLAYER_PARTY_PIANISSIMO) && PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO);
-    bool hasEntrust       = (targetFlags & TARGET_PLAYER_PARTY_ENTRUST) && PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST);
+    bool targetsParty     = targetFlags & static_cast<uint16>(TargetType::Party);
+    bool targetsAlliance  = targetFlags & static_cast<uint16>(TargetType::Alliance);
+    bool hasPianissimo    = (targetFlags & static_cast<uint16>(TargetType::PartyPianissimo)) && PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO);
+    bool hasEntrust       = (targetFlags & static_cast<uint16>(TargetType::PartyEntrust)) && PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST);
     bool isDifferentChar  = PInitiator != this;
     bool isTrust          = PInitiator->objtype == TYPE_TRUST;
 
@@ -1497,11 +1497,11 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
         // TODO: revise parameters
         if (PWeaponSkill->isAoE())
         {
-            PAI->TargetFind->findWithinArea(PBattleTarget, AOE_RADIUS::TARGET, 10, FINDFLAGS_NONE, TARGET_NONE);
+            PAI->TargetFind->findWithinArea(PBattleTarget, AOE_RADIUS::TARGET, 10, FINDFLAGS_NONE, static_cast<uint16>(TargetType::None));
         }
         else
         {
-            PAI->TargetFind->findSingleTarget(PBattleTarget, FINDFLAGS_NONE, TARGET_NONE);
+            PAI->TargetFind->findSingleTarget(PBattleTarget, FINDFLAGS_NONE, static_cast<uint16>(TargetType::None));
         }
 
         // Assumed, it's very difficult to produce this due to WS being nearly instant
@@ -1673,7 +1673,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
     uint8 findFlags = 0;
 
-    if ((PAbility->getValidTarget() & TARGET_PLAYER_DEAD) == TARGET_PLAYER_DEAD)
+    if ((PAbility->getValidTarget() & static_cast<uint16>(TargetType::PlayerDead)) == static_cast<uint16>(TargetType::PlayerDead))
     {
         findFlags |= FINDFLAGS_DEAD;
     }
@@ -1771,7 +1771,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         // remove invisible if aggressive
         if (PAbility->getID() != ABILITY_TAME && PAbility->getID() != ABILITY_FIGHT && PAbility->getID() != ABILITY_DEPLOY && PAbility->getID() != ABILITY_GAUGE)
         {
-            if (PAbility->getValidTarget() & TARGET_ENEMY)
+            if (PAbility->getValidTarget() & static_cast<uint16>(TargetType::Enemy))
             {
                 if (PAbility->getID() == ABILITY_ASSAULT)
                 {
@@ -1898,7 +1898,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                         action.recast = this->GetLocalVar("bpRecastTime");
                     }
 
-                    if (PAbility->getValidTarget() == TARGET_SELF)
+                    if (PAbility->getValidTarget() == static_cast<uint16>(TargetType::Self))
                     {
                         PPetTarget = PPet->targid;
                     }
@@ -1909,7 +1909,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                     PAbility->setID(PAbility->getAnimationID());
                     action.actionid = PAbility->getAnimationID();
 
-                    if (PAbility->getValidTarget() == TARGET_SELF)
+                    if (PAbility->getValidTarget() == static_cast<uint16>(TargetType::Self))
                     {
                         PPetTarget = PPet->targid;
                     }
@@ -1919,7 +1919,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                     auto* PMobSkill = battleutils::GetMobSkill(PAbility->getMobSkillID());
                     if (PMobSkill)
                     {
-                        if (PMobSkill->getValidTargets() & TARGET_ENEMY)
+                        if (PMobSkill->getValidTargets() & static_cast<uint16>(TargetType::Enemy))
                         {
                             PPetTarget = PPet->GetBattleTargetID();
                         }
@@ -2615,7 +2615,7 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
         }
         else if (IsMobOwner(PTarget))
         {
-            if (PTarget->isAlive() || (validTargetFlags & TARGET_PLAYER_DEAD) != 0)
+            if (PTarget->isAlive() || (validTargetFlags & static_cast<uint16>(TargetType::PlayerDead)) != 0)
             {
                 return PTarget;
             }

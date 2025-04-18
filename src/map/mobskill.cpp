@@ -52,45 +52,40 @@ bool CMobSkill::hasMissMsg() const
 
 bool CMobSkill::isAoE() const
 {
-    // 0 -> single target
-    // 1 -> AOE around mob
-    // 2 -> AOE around target
-    return m_Aoe > 0 && m_Aoe < 4;
+    return m_Aoe == static_cast<uint8>(SkillRange::AreaOfEffect) || m_Aoe == static_cast<uint8>(SkillRange::AreaOfEffectTarget);
 }
 
 bool CMobSkill::isConal() const
 {
-    // 4 -> Conal
-    // 8 -> Conal from mob centered on target
-    return m_Aoe == 4 || m_Aoe == 8;
+    return m_Aoe == static_cast<uint8>(SkillRange::Cone) || m_Aoe == static_cast<uint8>(SkillRange::RearCone);
 }
 
 bool CMobSkill::isSingle() const
 {
-    return m_Aoe == 0;
+    return m_Aoe == static_cast<uint8>(SkillRange::Single);
 }
 
 bool CMobSkill::isTpFreeSkill() const
 {
     // Do not remove users TP when using the skill
-    return m_Flag & SKILLFLAG_NO_TP_COST;
+    return m_Flag & static_cast<uint8>(SkillFlag::NoTPCost);
 }
 
 bool CMobSkill::isAstralFlow() const
 {
-    return m_Flag & SKILLFLAG_ASTRAL_FLOW;
+    return m_Flag & static_cast<uint8>(SkillFlag::AstralFlow);
 }
 
 bool CMobSkill::isBloodPactRage() const
 {
     // means it is a BP Rage
-    return m_Flag & SKILLFLAG_BLOODPACT_RAGE;
+    return m_Flag & static_cast<uint8>(SkillFlag::BloodPactRage);
 }
 
 bool CMobSkill::isBloodPactWard() const
 {
     // means it is a BP Ward
-    return m_Flag & SKILLFLAG_BLOODPACT_WARD;
+    return m_Flag & static_cast<uint8>(SkillFlag::BloodPactWard);
 }
 
 void CMobSkill::setID(uint16 id)
@@ -288,7 +283,7 @@ float CMobSkill::getRadius() const
     // Lets check if the radius is 0 to default the values if the skill is AOE and the radius is still set to 0
     if (m_AoeRadius <= 0)
     {
-        if (m_Aoe == 2) // If its a targeted AOE skill
+        if (m_Aoe == static_cast<uint8>(SkillRange::AreaOfEffectTarget)) // If its a targeted AOE skill
         {
             return 8; // Keep the original 8 radius as defaulted
         }

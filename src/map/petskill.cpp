@@ -52,40 +52,40 @@ bool CPetSkill::hasMissMsg() const
 
 bool CPetSkill::isAoE() const
 {
-    return m_Aoe > 0 && m_Aoe < 4;
+    return m_Aoe == static_cast<uint8>(SkillRange::AreaOfEffect) || m_Aoe == static_cast<uint8>(SkillRange::AreaOfEffectTarget);
 }
 
 bool CPetSkill::isConal() const
 {
-    return m_Aoe == 4;
+    return m_Aoe == static_cast<uint8>(SkillRange::Cone) || m_Aoe == static_cast<uint8>(SkillRange::RearCone);
 }
 
 bool CPetSkill::isSingle() const
 {
-    return m_Aoe == 0;
+    return m_Aoe == static_cast<uint8>(SkillRange::Single);
 }
 
 bool CPetSkill::isTpFreeSkill() const
 {
     // Do not remove users TP when using the skill
-    return m_Flag & SKILLFLAG_NO_TP_COST;
+    return m_Flag & static_cast<uint8>(SkillFlag::NoTPCost);
 }
 
 bool CPetSkill::isAstralFlow() const
 {
-    return m_Flag & SKILLFLAG_ASTRAL_FLOW;
+    return m_Flag & static_cast<uint8>(SkillFlag::AstralFlow);
 }
 
 bool CPetSkill::isBloodPactRage() const
 {
     // means it is a BP Rage
-    return m_Flag & SKILLFLAG_BLOODPACT_RAGE;
+    return m_Flag & static_cast<uint8>(SkillFlag::BloodPactRage);
 }
 
 bool CPetSkill::isBloodPactWard() const
 {
     // means it is a BP Ward
-    return m_Flag & SKILLFLAG_BLOODPACT_WARD;
+    return m_Flag & static_cast<uint8>(SkillFlag::BloodPactWard);
 }
 
 void CPetSkill::setID(uint16 id)
@@ -275,7 +275,7 @@ float CPetSkill::getDistance() const
 
 float CPetSkill::getRadius() const
 {
-    if (m_Aoe == 2)
+    if (m_Aoe == static_cast<uint8>(SkillRange::AreaOfEffectTarget))
     {
         // centered around target, usually 8' // TODO: AoE range setter?
         return 8.0f;

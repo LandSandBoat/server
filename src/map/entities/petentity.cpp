@@ -359,7 +359,7 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
 
 bool CPetEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 {
-    if (targetFlags & TARGET_PLAYER && PInitiator->allegiance == allegiance)
+    if (targetFlags & static_cast<uint16>(TargetType::Player) && PInitiator->allegiance == allegiance)
     {
         return false;
     }
@@ -408,17 +408,17 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
     */
 
     // Mob buff abilities also hit monster's pets
-    if (PSkill->getValidTargets() == TARGET_SELF)
+    if (PSkill->getValidTargets() == static_cast<uint16>(TargetType::Self))
     {
         findFlags |= FINDFLAGS_PET;
     }
 
-    if ((PSkill->getValidTargets() & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID)
+    if ((PSkill->getValidTargets() & static_cast<uint16>(TargetType::IgnoreBattleID)) == static_cast<uint16>(TargetType::IgnoreBattleID))
     {
         findFlags |= FINDFLAGS_IGNORE_BATTLEID;
     }
 
-    if ((PSkill->getValidTargets() & TARGET_PLAYER_DEAD) == TARGET_PLAYER_DEAD)
+    if ((PSkill->getValidTargets() & static_cast<uint16>(TargetType::PlayerDead)) == static_cast<uint16>(TargetType::PlayerDead))
     {
         findFlags |= FINDFLAGS_DEAD;
     }
@@ -593,7 +593,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
             }
         }
 
-        if (PSkill->getValidTargets() & TARGET_ENEMY)
+        if (PSkill->getValidTargets() & static_cast<uint16>(TargetType::Enemy))
         {
             PTargetFound->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
         }
