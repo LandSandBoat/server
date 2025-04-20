@@ -30,7 +30,7 @@
 
 /************************************************************************
  *                                                                      *
- *  Constructor.                                                            *
+ *  Constructor.                                                        *
  *                                                                      *
  ************************************************************************/
 CAttack::CAttack(CBattleEntity* attacker, CBattleEntity* defender, PHYSICAL_ATTACK_TYPE type, PHYSICAL_ATTACK_DIRECTION direction, CAttackRound* attackRound)
@@ -47,17 +47,17 @@ CAttack::CAttack(CBattleEntity* attacker, CBattleEntity* defender, PHYSICAL_ATTA
  *  Returns the attack direction.                                       *
  *                                                                      *
  ************************************************************************/
-PHYSICAL_ATTACK_DIRECTION CAttack::GetAttackDirection()
+PHYSICAL_ATTACK_DIRECTION CAttack::GetAttackDirection() const
 {
     return m_attackDirection;
 }
 
 /************************************************************************
  *                                                                      *
- *  Returns the attack type.                                                *
+ *  Returns the attack type.                                            *
  *                                                                      *
  ************************************************************************/
-PHYSICAL_ATTACK_TYPE CAttack::GetAttackType()
+PHYSICAL_ATTACK_TYPE CAttack::GetAttackType() const
 {
     return m_attackType;
 }
@@ -74,7 +74,7 @@ void CAttack::SetAttackType(PHYSICAL_ATTACK_TYPE type)
 
 /************************************************************************
  *                                                                      *
- *  Returns the isCritical flag.                                            *
+ *  Returns the isCritical flag.                                        *
  *                                                                      *
  ************************************************************************/
 bool CAttack::IsCritical() const
@@ -459,12 +459,12 @@ bool CAttack::CheckAnticipated()
     }
 }
 
-bool CAttack::CheckHadSneakAttack() const
+bool CAttack::IsSA() const
 {
     return m_isSA;
 }
 
-bool CAttack::CheckHadTrickAttack() const
+bool CAttack::IsTA() const
 {
     return m_isTA;
 }
@@ -566,11 +566,71 @@ bool CAttack::CheckCover()
 
 /************************************************************************
  *                                                                      *
- *  Processes the damage for this swing.                                    *
+ *  Processes the damage for this swing.                                *
  *                                                                      *
  ************************************************************************/
 void CAttack::ProcessDamage()
 {
+    if (settings::get<bool>("map.ENABLE_AUTO_ATTACK_LUA"))
+    {
+        // Sneak attack.
+        if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
+            (behind(m_attacker->loc.p, m_victim->loc.p, 64) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) ||
+            m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBT)))
+        {
+            m_isSA = true;
+        }
+
+        // Trick attack.
+        if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attackRound->GetTAEntity() != nullptr)
+        {
+            m_isTA = true;
+        }
+
+        auto calculateAttackDamage = lua["xi"]["combat"]["physical"]["calculateAttackDamage"];
+        auto result = calculateAttackDamage(m_attacker, m_victim, GetWeaponSlot(), m_attackType, m_attackRound->IsH2H(), m_isFirstSwing, m_isSA, m_isTA, m_damageRatio, m_attacker->GetMainWeaponDmg());
+        if (result.valid())
+        {
+            m_damage = result.get<int32>(0);
+
+            // Set attack type to Samba if the attack type is normal.  Don't overwrite other types.  Used for Samba double damage.
+            if (m_attackType == PHYSICAL_ATTACK_TYPE::NORMAL && (m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) ||
+                                                                m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_SAMBA) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_SAMBA)))
+            {
+                SetAttackType(PHYSICAL_ATTACK_TYPE::SAMBA);
+            }
+
+            // Try skill up.
+            if (m_damage > 0)
+            {
+                if (m_attacker->objtype == TYPE_PC)
+                {
+                    if (m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
+                    {
+                        charutils::TrySkillUP((CCharEntity*)m_attacker, SKILLTYPE::SKILL_THROWING, m_victim->GetMLevel());
+                    }
+                    else if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[(SLOTTYPE)GetWeaponSlot()]))
+                    {
+                        charutils::TrySkillUP((CCharEntity*)m_attacker, (SKILLTYPE)weapon->getSkillType(), m_victim->GetMLevel());
+                    }
+                }
+                else if (m_attacker->objtype == TYPE_PET && m_attacker->PMaster && m_attacker->PMaster->objtype == TYPE_PC &&
+                        static_cast<CPetEntity*>(m_attacker)->getPetType() == PET_TYPE::AUTOMATON)
+                {
+                    puppetutils::TrySkillUP((CAutomatonEntity*)m_attacker, SKILL_AUTOMATON_MELEE, m_victim->GetMLevel());
+                }
+            }
+            m_isBlocked = attackutils::IsBlocked(m_attacker, m_victim);
+        }
+        else
+        {
+            sol::error err = result;
+            ShowError("attack.cpp::ProcessDamage(): %s", err.what());
+        }
+
+        return;
+    }
+
     // Sneak attack.
     if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
         (behind(m_attacker->loc.p, m_victim->loc.p, 64) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) ||
@@ -650,13 +710,13 @@ void CAttack::ProcessDamage()
         attackutils::CheckForDamageMultiplier((CCharEntity*)m_attacker, dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]), m_damage, m_attackType, slot, m_isFirstSwing);
 
     // Apply Sneak Attack Augment Mod
-    if (m_attacker->getMod(Mod::AUGMENTS_SA) > 0 && CheckHadSneakAttack() && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK))
+    if (m_attacker->getMod(Mod::AUGMENTS_SA) > 0 && IsSA() && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK))
     {
         m_damage += (int32)(m_damage * ((100 + (m_attacker->getMod(Mod::AUGMENTS_SA))) / 100.0f));
     }
 
     // Apply Trick Attack Augment Mod
-    if (m_attacker->getMod(Mod::AUGMENTS_TA) > 0 && CheckHadTrickAttack() && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
+    if (m_attacker->getMod(Mod::AUGMENTS_TA) > 0 && IsTA() && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
     {
         m_damage += (int32)(m_damage * ((100 + (m_attacker->getMod(Mod::AUGMENTS_TA))) / 100.0f));
     }

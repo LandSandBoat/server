@@ -2415,30 +2415,47 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                             }
                         }
 
-                        if (skilltype == SKILLTYPE::SKILL_HAND_TO_HAND || (PTarget->objtype == TYPE_MOB && PTarget->GetMJob() == JOB_MNK))
+                        int32 damage = 0;
+                        if (settings::get<bool>("map.ENABLE_AUTO_ATTACK_LUA"))
                         {
-                            naturalh2hDMG = (int16)((PTarget->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3);
+                            auto calculateCounterDamage = lua["xi"]["combat"]["physical"]["calculateCounterDamage"];
+                            auto result = calculateCounterDamage(this, PTarget, skilltype, attack.IsCritical());
+                            if (result.valid())
+                            {
+                                damage = result.get<int32>(0);
+                            }
+                            else
+                            {
+                                sol::error err = result;
+                                ShowError("battleentity.cpp::OnAttack(): %s", err.what());
+                            }
                         }
-
-                        // Calculate attack bonus for Counterstance Effect Job Points
-                        // Needs verification, as there appears to be conflicting information regarding an attack bonus based on DEX
-                        // vs a base damage increase.
-                        float attBonus = 1.0f;
-                        if (PTarget->objtype == TYPE_PC && PTarget->GetMJob() == JOB_MNK && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_COUNTERSTANCE))
+                        else
                         {
-                            auto*  PChar        = static_cast<CCharEntity*>(PTarget);
-                            uint8  csJpModifier = PChar->PJobPoints->GetJobPointValue(JP_COUNTERSTANCE_EFFECT) * 2;
-                            uint16 targetDex    = PTarget->DEX();
+                            if (skilltype == SKILLTYPE::SKILL_HAND_TO_HAND || (PTarget->objtype == TYPE_MOB && PTarget->GetMJob() == JOB_MNK))
+                            {
+                                naturalh2hDMG = (int16)((PTarget->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3);
+                            }
 
-                            attBonus += ((static_cast<float>(targetDex) / 100) * csJpModifier);
+                            // Calculate attack bonus for Counterstance Effect Job Points
+                            // Needs verification, as there appears to be conflicting information regarding an attack bonus based on DEX
+                            // vs a base damage increase.
+                            float attBonus = 1.0f;
+                            if (PTarget->objtype == TYPE_PC && PTarget->GetMJob() == JOB_MNK && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_COUNTERSTANCE))
+                            {
+                                auto*  PChar        = static_cast<CCharEntity*>(PTarget);
+                                uint8  csJpModifier = PChar->PJobPoints->GetJobPointValue(JP_COUNTERSTANCE_EFFECT) * 2;
+                                uint16 targetDex    = PTarget->DEX();
+
+                                attBonus += ((static_cast<float>(targetDex) / 100) * csJpModifier);
+                            }
+
+                            float DamageRatio = battleutils::GetDamageRatio(PTarget, this, attack.IsCritical(), attBonus, skilltype, SLOT_MAIN, false);
+                            damage            = (int32)((PTarget->GetMainWeaponDmg() + naturalh2hDMG + battleutils::GetFSTR(PTarget, this, SLOT_MAIN)) * DamageRatio);
                         }
-
-                        float DamageRatio = battleutils::GetDamageRatio(PTarget, this, attack.IsCritical(), attBonus, skilltype, SLOT_MAIN, false);
-                        auto  damage      = (int32)((PTarget->GetMainWeaponDmg() + naturalh2hDMG + battleutils::GetFSTR(PTarget, this, SLOT_MAIN)) * DamageRatio);
-
-                        actionTarget.spikesParam =
-                            battleutils::TakePhysicalDamage(PTarget, this, attack.GetAttackType(), damage, false, SLOT_MAIN, 1, nullptr, true, false, true);
+                        actionTarget.spikesParam = battleutils::TakePhysicalDamage(PTarget, this, attack.GetAttackType(), damage, false, SLOT_MAIN, 1, nullptr, true, false, true);
                         actionTarget.spikesMessage = 33;
+
                         if (PTarget->objtype == TYPE_PC)
                         {
                             charutils::TrySkillUP((CCharEntity*)PTarget, skilltype, GetMLevel());

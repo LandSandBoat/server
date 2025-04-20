@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2023 LandSandBoat Dev Teams
@@ -23,13 +23,13 @@
 
 #include "common/cbasetypes.h"
 #include "luautils.h"
+#include "utils/attackutils.h"
 
 class CAttack;
 
 class CLuaAttack
 {
     CAttack* m_PLuaAttack;
-
 public:
     CLuaAttack(CAttack*);
 
@@ -38,7 +38,7 @@ public:
         return m_PLuaAttack;
     }
 
-    bool getCritical() const;
+    bool isCritical() const;
     void setCritical(bool critical);
 
     friend std::ostream& operator<<(std::ostream& out, const CLuaAttack& action);

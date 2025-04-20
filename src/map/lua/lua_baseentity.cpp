@@ -14613,8 +14613,9 @@ int32 CLuaBaseEntity::physicalDmgTaken(double damage, sol::variadic_args va)
     }
 
     DAMAGE_TYPE damageType = va[0].is<uint32>() ? va[0].as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
+    bool isCovered = va[1].as<bool>();
 
-    return battleutils::PhysicalDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType);
+    return battleutils::PhysicalDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType, isCovered);
 }
 
 /************************************************************************
@@ -14653,8 +14654,9 @@ int32 CLuaBaseEntity::rangedDmgTaken(double damage, sol::variadic_args va)
     }
 
     DAMAGE_TYPE damageType = va[0].is<uint32>() ? va[0].as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
+    bool isCovered = va[1].as<bool>();
 
-    return battleutils::RangedDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType);
+    return battleutils::RangedDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType, isCovered);
 }
 
 /************************************************************************

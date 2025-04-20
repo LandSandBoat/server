@@ -6,10 +6,10 @@ xi.combat.tp = xi.combat.tp or {}
 -----------------------------------
 
 -- returns a single melee hit's TP return
-xi.combat.tp.getSingleMeleeHitTPReturn = function(actor, target, isZanshin)
+xi.combat.tp.getSingleMeleeHitTPReturn = function(actor, target, isZanshin, delay)
     isZanshin = isZanshin or false -- optional input, defaults to false.
 
-    local delay        = actor:getBaseDelay()
+    local delay        = delay or actor:getBaseDelay()
     local attackOutput = xi.combat.tp.getModifiedDelayAndCanZanshin(actor, delay)
     local tpReturn     = xi.combat.tp.calculateTPReturn(actor, attackOutput.modifiedDelay)
 
@@ -20,6 +20,19 @@ xi.combat.tp.getSingleMeleeHitTPReturn = function(actor, target, isZanshin)
     local storeTPModifier = (100 + actor:getMod(xi.mod.STORETP)) / 100
 
     return math.floor(tpReturn * storeTPModifier)
+end
+
+-- returns a single ranged hit's TP return
+xi.combat.tp.getSingleRangedHitTPReturn = function(actor, target, delay)
+    local delay = delay or actor:getBaseRangedDelay() -- there do not appear to be any delay modifiers for ranged attacks, snapshot does not seem to effect this
+
+    if delay > 0 then
+        local storeTPModifier = (100 + actor:getMod(xi.mod.STORETP)) / 100
+
+        return math.floor(xi.combat.tp.calculateTPReturn(actor, delay) * storeTPModifier)
+    end
+
+    return 0
 end
 
 -- returns a PC weapon slot's TP return for a single hit
@@ -68,19 +81,6 @@ xi.combat.tp.getModifiedDelayAndCanZanshin = function(actor, delay)
     modifiedDelay = modifiedDelay * math.max((100 + actor:getMod(xi.mod.DELAYP)) / 100, 0.85) -- minimum cap of -15% https://www.bg-wiki.com/ffxi/Attack_Speed. Undocumented if 15% + Claymore Grip goes above 15%.
 
     return ({ canZanshin = canZanshin , modifiedDelay = math.floor(modifiedDelay) })
-end
-
--- returns a single melee hit's TP return
-xi.combat.tp.getSingleRangedHitTPReturn = function(actor, target)
-    local delay = actor:getBaseRangedDelay() -- there do not appear to be any delay modifiers for ranged attacks, snapshot does not seem to effect this
-
-    if delay > 0 then
-        local storeTPModifier = (100 + actor:getMod(xi.mod.STORETP)) / 100
-
-        return math.floor(xi.combat.tp.calculateTPReturn(actor, delay) * storeTPModifier)
-    end
-
-    return 0
 end
 
 -- https://www.bg-wiki.com/ffxi/Tactical_Points

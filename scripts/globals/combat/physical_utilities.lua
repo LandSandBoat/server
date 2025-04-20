@@ -104,6 +104,300 @@ local elementalBelt = -- Ordered by element.
     xi.item.SHADOW_BELT
 }
 
+-- WARNING: This function is used in src/map/entities/battleentity.cpp "OnAttack" function.
+-- If you update these parameters, update them there as well.
+---@param player CBaseEntity
+---@param target CBaseEntity
+---@param attack CAttack
+---@param skilltype xi.skill
+xi.combat.physical.calculateCounterDamage = function(player, target, skilltype, isCritical)
+    local naturalH2hDamage = 0
+    if skilltype == xi.skill.HAND_TO_HAND or (target:isMob() and target:getMainJob() == xi.job.MNK) then
+        naturalH2hDamage = math.floor(target:getSkillLevel(xi.skill.HAND_TO_HAND) * 0.11) + 3
+    end
+
+    local attackBonus = 1
+    if target:isPC() and target:getMainJob() == xi.job.MNK and target:hasStatusEffect(xi.effect.COUNTERSTANCE) then
+        attackBonus = math.floor(attackBonus + (target:getMod(xi.mod.DEX) / 100) * target:getJobPointLevel(xi.jp.COUNTERSTANCE_EFFECT))
+    end
+
+    local damageRatio = xi.combat.physical.calculateMeleePDIF(target, player, skilltype, attackBonus, isCritical, xi.combat.levelCorrection.isLevelCorrectedZone(target), false, 0, false, xi.slot.Main, false)
+    local damage = math.floor((target:getWeaponDmg() + naturalH2hDamage + xi.combat.physical.calculateMeleeStatFactor(target, player)) * damageRatio)
+
+    return damage
+end
+
+-- WARNING: This function is used in src/map/attack.cpp "ProcessDamage" function.
+-- If you update these parameters, update them there as well.
+---@param attack CAttack
+xi.combat.physical.calculateAttackDamage = function(attacker, victim, slot, physicalAttackType, isH2H, isFirstSwing, isSA, isTA, damageRatio, baseDamage)
+    local bonusBasePhysicalDamage = 0
+    local damage = 0
+    
+    -- Sneak Attack
+    if isSA then
+        bonusBasePhysicalDamage = bonusBasePhysicalDamage + math.floor((attacker.getStat(xi.mod.DEX) * (1 + attacker.getMod(xi.mod.SNEAK_ATK_DEX) / 100)))
+    end
+
+    -- Trick Attack
+    if isTA then
+        bonusBasePhysicalDamage = bonusBasePhysicalDamage + math.floor((attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI) / 100)))
+    end
+
+    -- Consume Mana
+    if attacker:isPC() then
+        bonusBasePhysicalDamage = bonusBasePhysicalDamage + xi.combat.effect.handleConsumeMana(attacker)
+    end
+
+    if isH2H then
+        local naturalH2hDamage = math.floor(attacker:getSkillLevel(xi.skill.HAND_TO_HAND) * 0.11) + 3
+        damage = math.floor(damageRatio * (baseDamage + naturalH2hDamage + bonusBasePhysicalDamage + xi.combat.physical.calculateMeleeStatFactor(attacker, victim)))
+    elseif slot == xi.slot.MAIN then
+        damage = math.floor(damageRatio * (baseDamage + bonusBasePhysicalDamage + xi.combat.physical.calculateMeleeStatFactor(attacker, victim)))
+    elseif slot == xi.slot.AMMO then
+        damage = math.floor(damageRatio * (baseDamage + xi.combat.physical.calculateMeleeStatFactor(attacker, victim)))
+    end
+
+    -- Scarlet Delirium
+    -- SCARLET_DELIRIUM_1 is only active after damage has been dealt to the DRK and SCARLET_DELIRIUM has been removed.
+    if attacker:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
+        local effectPower = 1 + (attacker:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1):getPower() / 100)
+        damage = math.floor(damage * effectPower)
+    end
+
+    -- Double Attack and Triple Attack
+    if physicalAttackType == xi.physicalAttackType.DOUBLE and attacker:isPC() then
+        damage = math.floor(damage * ((100 + attacker:getMod(xi.mod.DOUBLE_ATTACK_DMG)) / 100))
+    elseif physicalAttackType == xi.physicalAttackType.TRIPLE and attacker:isPC() then
+        damage = math.floor(damage * ((100 + attacker:getMod(xi.mod.TRIPLE_ATTACK_DMG)) / 100))
+    end
+
+    -- Soul Eater
+    if attacker:isPC() then
+        damage = xi.combat.effect.handleSoulEater(attacker, damage)
+    end
+
+    -- Damage multipliers
+    damage = xi.combat.physical.calculateDamageMultiplier(attacker, slot, damage, physicalAttackType, isFirstSwing)
+
+    -- Sneak Attack Augment
+    if attacker:getMod(xi.mod.AUGMENTS_SA) > 0 and isSA and attacker:hasStatusEffect(xi.effect.SNEAK_ATTACK) then
+        damage = damage + math.floor(damage * ((100 + attacker:getMod(xi.mod.AUGMENTS_SA)) / 100))
+    end
+
+    -- Trick Attack Augment
+    if attacker:getMod(xi.mod.AUGMENTS_TA) > 0 and isTA and attacker:hasStatusEffect(xi.effect.TRICK_ATTACK) then
+        damage = damage + math.floor(damage * ((100 + attacker:getMod(xi.mod.AUGMENTS_TA)) / 100))
+    end
+
+    --- Low level mobs can get negative fSTR so low they crater their (base weapon damage + fstr) to below 0.
+    --- TODO: Find out proper fSTR calc for low level mobs when your VIT is ridiculously high. It's likely that this is slightly wrong (possibly you'd get more hits for 0 than you should)
+    --- However, there are legitimate strategies on retail with 1 dmg weapons and negative fSTR ranks that result in all auto attacks hitting for 0 but using enspells for damage so no TP is fed.
+    --- Absorption isn't possible at this point in the calculation, so zero it.
+    if damage < 0 then
+        damage = 0
+    end
+
+    -- Apply Restraint Weaponskill Damage
+    if isFirstSwing and attacker:hasStatusEffect(xi.effect.RESTRAINT) then
+        local effect = attacker:getStatusEffect(xi.effect.RESTRAINT)
+        local power = effect:getPower()
+
+        if effect:getPower() < 30 then
+            local jpBonus = 0
+
+            if attacker:isPC() then
+                jpBonus = attacker:getJobPointLevel(xi.jp.RESTRAINT) * 2
+            end
+
+            -- Convert weapon delay and divide
+            -- Pull remainder of previous hit's value from Effect Sub Power
+            local boostPerRound = ((attacker:getBaseDelay() / 1000) * 60) / 385
+            local remainder = effect:getSubPower() / 100
+
+            -- Calculate bonuses from Enhances Restraint, Job Point upgrades, and remainder from previous hit
+            boostPerRound = (boostPerRound * (1 + attacker:getMod(xi.Mod.ENHANCES_RESTRAINT) / 100) * (1 + jpBonus / 100)) + remainder
+
+            -- Calculate new remainder and multiply by 100 so significant digits aren't lost
+            remainder = math.floor((1 - (math.ceil(boostPerRound) - boostPerRound)) * 100)
+            boostPerRound = math.floor(boostPerRound)
+
+            -- Cap total power to +30% WSD
+            if power + boostPerRound > 30 then
+                boostPerRound = 30 - power
+            end
+
+            effect:setPower(power + boostPerRound)
+            effect:setSubPower(remainder)
+            attacker:setMod(xi.mod.ALL_WSDMG_FIRST_HIT, boostPerRound)
+        end
+    end
+    
+    return damage
+end
+
+-- WARNING: This function is used in src/utils/battleutils.cpp "TakePhysicalDamage" function.
+-- If you update these parameters, update them there as well.
+---@param attacker CBaseEntity
+---@param defender CBaseEntity
+---@param physicalAttackType PHYSICAL_ATTACK_TYPE
+---@param damage integer
+---@param isBlocked boolean
+---@param slot xi.slot
+---@param tpMultiplier integer
+---@param taChar CBaseEntity
+---@param giveTPtoVictim boolean
+---@param giveTPtoAttacker boolean
+---@param isCounter boolean
+---@param isCovered boolean
+---@param originalTarget CBaseEntity
+xi.combat.physical.takePhysicalDamage = function(attacker, defender, physicalAttackType, damage, isBlocked,
+                                                slot, tpMultiplier, taChar, giveTPtoVictim, giveTPtoAttacker, 
+                                                isCounter, isCovered, originalTarget)
+
+    local giveTPtoAttacker = giveTPtoAttacker and not attacker:hasStatusEffect(xi.effect.MEIKYO_SHISUI)
+    local giveTPtoVictim = giveTPtoVictim and physicalAttackType ~= xi.physicalAttackType.DAKEN
+    local isRanged = slot == xi.slot.AMMO or slot == xi.slot.RANGED
+    local baseDamage = damage
+    local attackType = xi.attackType.PHYSICAL
+    local damageType = xi.damageType.NONE
+
+    if attacker:hasStatusEffect(xi.effect.FORMLESS_STRIKES) and not isCounter then
+        attackType = xi.attackType.SPECIAL
+        local formlessMod = 55
+
+        -- https://www.bg-wiki.com/ffxi/Formless_Strikes
+        -- Merit value of 1 is +5%, so 60% normal power
+        if attacker:isPC() then
+            formlessMod = formlessMod + attacker:getMerit(xi.merit.FORMLESS_STRIKES)
+        end
+
+        damage = math.floor(damage * formlessMod / 100)
+        damage = target:breathDmgTaken(damage)
+    else
+        damageType = attacker:getWeaponDamageType(slot)
+
+        if isRanged then
+            attackType = xi.attackType.RANGED
+            damage = defender:rangedDmgTaken(damage, damageType, isCovered)
+        else
+            damage = defender:physicalDmgTaken(damage, damageType, isCovered)
+        end
+
+        -- absorb mods are handled in the above functions, but they do not affect counters
+        -- this is a little hacky, but will work for now
+        if damage < 0 and isCounter then
+            damage = -damage
+        end
+
+        -- counters are always considered blunt (assuming h2h) damage, except retaliation (which is the only counter
+        -- that gives TP to the attacker)
+        if not isCounter or giveTPtoAttacker then
+            if damageType == xi.damageType.PIERCING then
+                damage = math.floor(damage * (1 + defender:getMod(xi.mod.PIERCE_SDT) / 10000))
+            elseif damageType == xi.damageType.SLASHING then
+                damage = math.floor(damage * (1 + defender:getMod(xi.mod.SLASH_SDT) / 10000))
+            elseif damageType == xi.damageType.IMPACT then
+                damage = math.floor(damage * (1 + defender:getMod(xi.mod.IMPACT_SDT) / 10000))
+            elseif damageType == xi.damageType.HTH then
+                damage = math.floor(damage * (1 + defender:getMod(xi.mod.HTH_SDT) / 10000))
+            end
+        else
+            damage = math.floor(damage * (1 + defender:getMod(xi.mod.HTH_SDT) / 10000))
+        end
+
+        if isBlocked then
+            local absorb = 100
+            
+            -- shield def bonus is a flat raw damage reduction that occurs before absorb
+            -- however do not reduce below 0 or if damage is negative
+            if damage > 0 then
+                damage = math.max(0, damage - defender:getMod(xi.mod.SHIELD_DEF_BONUS))
+            end
+            
+            if defender:isPC() then
+                local slotSub = defender:getEquippedItem(xi.slot.SUB)
+                if slotSub:isShield() then
+                    absorb = utils.clamp(100 - slotSub:getShieldAbsorptionRate(), 0, 100)
+
+                    -- Shield Mastery
+                    if math.max(damage - defender:getMod(xi.mod.PHALANX) + defender:getMod(xi.mod.STONESKIN), 0) > 0 and defender:getMod(xi.mod.SHIELD_MASTERY_TP) then
+                        -- If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
+                        -- unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
+                        defender:addTP(defender:getMod(xi.mod.SHIELD_MASTERY_TP))
+                    end
+                end
+            elseif defender:isPet() or defender:isTrust() then
+                absorb = 50
+
+                -- Shield Mastery
+                if math.max(damage - defender:getMod(xi.mod.PHALANX) + defender:getMod(xi.mod.STONESKIN), 0) > 0 and defender:getMod(xi.mod.SHIELD_MASTERY_TP) then
+                    -- If the pet or trust blocked with a shield and has shield mastery, add shield mastery TP bonus
+                    -- unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
+                    defender:addTP(defender:getMod(xi.mod.SHIELD_MASTERY_TP))
+                end
+            else
+                absorb = 50
+            end
+
+            -- Reprisal
+            if damage > 0 and defender:hasStatusEffect(xi.effect.REPRISAL) then
+                -- Reflect a portion of the blocked damage back. This is calculated before Stoneskin, Phalanx, Sentinel or Invincible
+                local spikesBonus = 1 + defender:getMod(xi.mod.REPRISAL_SPIKES_BONUS) / 100
+                local effectPower = math.floor(defender:getStatusEffect(xi.effect.REPRISAL):getPower() * spikesBonus)
+                local blockedDamage = math.floor((damage * (100 - absorb)) / 100)
+
+                if defender:hasStatusEffect(xi.effect.INVINCIBLE) or defender:hasStatusEffect(xi.effect.SENTINEL) then
+                    blockedDamage = math.floor((baseDamage * (100 - absorb)) / 100)
+                end
+
+                local spikesDamage = math.floor(blockedDamage * (effectPower / 100))
+                defender:setMod(xi.mod.SPIKES_DMG, spikesDamage)
+            end
+
+            damage = math.floor((damage * absorb) / 100)
+        end
+    end
+
+    if damage > 0 then
+        damage = math.floor(math.max(damage - defender:getMod(xi.mod.PHALANX), 0))
+
+        damage = xi.combat.effect.handleStoneskin(defender, damage)
+        defender:handleAfflatusMiseryDamage(damage)
+    end
+
+    damage = utils.clamp(damage, -99999, 99999)
+    damage = defender:checkDamageCap(damage)
+    xi.combat.effect.handleScarletDelirium(defender, damage)
+
+    local corrected = defender:takeDamage(damage, attacker, attackType, damageType)
+    if damage < 0 then
+        damage = -corrected
+    end
+
+    local delay = 0
+    if isRanged then
+        delay = attacker:getBaseRangedDelay()
+    else
+        delay = attacker:getBaseDelay()
+    end
+
+    if giveTPtoAttacker then
+        if isRanged then
+            attacker:addTP(xi.combat.tp.getSingleRangedHitTPReturn(attacker, defender, delay))
+        else
+            local isZanshin = attacker:isPC() and physicalAttackType == xi.physicalAttackType.ZANSHIN
+            attacker:addTP(xi.combat.tp.getSingleMeleeHitTPReturn(attacker, defender, isZanshin, delay))
+        end
+    end
+    
+    if giveTPtoVictim then
+        defender:addTP(xi.combat.tp.calculateTPGainOnPhysicalDamage(damage, delay, attacker, defender))
+    end
+
+    return damage
+end
+
 -- 'fSTR' in English Wikis. 'SV function' in JP wiki and Studio Gobli.
 -- BG wiki: https://www.bg-wiki.com/ffxi/FSTR
 -- Gobli Wiki: https://w-atwiki-jp.translate.goog/studiogobli/pages/14.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp
@@ -1084,4 +1378,67 @@ xi.combat.physical.isGuarded = function(defender, attacker)
     end
 
     return guarded
+end
+
+xi.combat.physical.calculateDamageMultiplier = function(player, slot, damage, physicalAttackType, isFirstSwing)
+    local weapon = player:getEquippedItem(slot)
+
+    if weapon == nil then
+        return damage
+    end
+
+    local baseDamage = damage
+    local occ_do_triple_dmg = 0
+    local occ_do_double_dmg = 0
+
+    if physicalAttackType == xi.physicalAttackType.RAPID_SHOT then
+        occ_do_triple_dmg = math.floor(player:getMod(xi.mod.REM_OCC_DO_TRIPLE_DMG_RANGED) / 10)
+        occ_do_double_dmg = math.floor(player:getMod(xi.mod.REM_OCC_DO_DOUBLE_DMG_RANGED) / 10)
+    elseif physicalAttackType == xi.physicalAttackType.NORMAL then
+        if slot == xi.slot.MAIN then
+            occ_do_triple_dmg = math.floor(player:getMod(xi.mod.REM_OCC_DO_TRIPLE_DMG) / 10)
+            occ_do_double_dmg = math.floor(player:getMod(xi.mod.REM_OCC_DO_DOUBLE_DMG) / 10)
+        end
+    end
+
+    local occ_extra_dmg = xi.combat.utils.getScaledItemModifier(player, weapon, xi.mod.OCC_DO_EXTRA_DMG) / 100
+    local occ_extra_dmg_chance = math.floor(xi.combat.utils.getScaledItemModifier(player, weapon, xi.mod.EXTRA_DMG_CHANCE) / 10)
+
+    if isFirstSwing then
+        if occ_extra_dmg > 3 and occ_extra_dmg_chance > 0 and (1 + math.random(1, 100)) <= occ_extra_dmg_chance then
+            return math.floor(damage * occ_extra_dmg)
+        elseif occ_do_triple_dmg > 0 and (1 + math.random(1, 100)) <= occ_do_triple_dmg then
+            return math.floor(damage * 3)
+        elseif occ_extra_dmg > 2 and occ_extra_dmg_chance > 0 and (1 + math.random(1, 100)) <= occ_extra_dmg_chance then
+            return math.floor(damage * occ_extra_dmg)
+        elseif occ_do_double_dmg > 0 and (1 + math.random(1, 100)) <= occ_do_double_dmg then
+            return math.floor(damage * 2)
+        elseif occ_extra_dmg > 0 and occ_extra_dmg_chance > 0 and (1 + math.random(1, 100)) <= occ_extra_dmg_chance then
+            return math.floor(damage * occ_extra_dmg)
+        end
+    end
+
+    if physicalAttackType == xi.physicalAttackType.ZANSHIN then
+        if math.random(1, 100) < player:getMod(xi.mod.ZANSHIN_DOUBLE_DAMAGE) then
+            return baseDamage * 2
+        end
+    elseif physicalAttackType == xi.physicalAttackType.TRIPLE then
+        if math.random(1, 100) < player:getMod(xi.mod.TA_TRIPLE_DMG_RATE) then
+            return baseDamage * 3
+        end
+    elseif physicalAttackType == xi.physicalAttackType.DOUBLE then
+        if math.random(1, 100) < player:getMod(xi.mod.DA_DOUBLE_DMG_RATE) then
+            return baseDamage * 2
+        end
+    elseif physicalAttackType == xi.physicalAttackType.RAPID_SHOT then
+        if math.random(1, 100) < player.getMod(xi.mod.RAPID_SHOT_DOUBLE_DAMAGE) then
+            return baseDamage * 2
+        end
+    elseif physicalAttackType == xi.physicalAttackType.SAMBA then
+        if math.random(1, 100) < player.getMod(xi.mod.SAMBA_DOUBLE_DAMAGE) then
+            return baseDamage * 2
+        end
+    end
+
+    return baseDamage
 end

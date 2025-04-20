@@ -1170,13 +1170,13 @@ namespace battleutils
                         float sneakAttackTrickAttackBonus = 0.f;
 
                         // BG wiki claims 10x bonus for SA
-                        if (attack.CheckHadSneakAttack())
+                        if (attack.IsSA())
                         {
                             sneakAttackTrickAttackBonus += 10.f;
                         }
 
                         // BG wiki claims 10x bonus for TA
-                        if (attack.CheckHadTrickAttack())
+                        if (attack.IsTA())
                         {
                             sneakAttackTrickAttackBonus += 10.f;
                         }
@@ -2073,6 +2073,108 @@ namespace battleutils
                              uint8 slot, uint16 tpMultiplier, CBattleEntity* taChar, bool giveTPtoVictim, bool giveTPtoAttacker, bool isCounter, bool isCovered,
                              CBattleEntity* POriginalTarget)
     {
+        if (settings::get<bool>("map.ENABLE_AUTO_ATTACK_LUA"))
+        {
+            auto takePhysicalDamage = lua["xi"]["combat"]["physical"]["takePhysicalDamage"];
+            auto result = takePhysicalDamage(PAttacker, PDefender, physicalAttackType, damage, isBlocked, 
+                                            slot, tpMultiplier, taChar, giveTPtoVictim, giveTPtoAttacker, 
+                                            isCounter, isCovered, POriginalTarget);
+            if (result.valid())
+            {
+                damage = result.get<int32>(0);
+
+                bool isRanged = (slot == SLOT_AMMO || slot == SLOT_RANGED);
+                battleutils::ClaimMob(PDefender, PAttacker);
+
+                if (damage > 0)
+                {
+                    PDefender->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DAMAGE);
+
+                    // Check for bind breaking
+                    BindBreakCheck(PAttacker, PDefender);
+
+                    switch (PDefender->objtype)
+                    {
+                        case TYPE_MOB:
+                            if (taChar == nullptr)
+                            {
+                                ((CMobEntity*)PDefender)->PEnmityContainer->UpdateEnmityFromDamage(PAttacker, damage);
+                            }
+                            else
+                            {
+                                ((CMobEntity*)PDefender)->PEnmityContainer->UpdateEnmityFromDamage(taChar, damage);
+                            }
+
+                            if (((CMobEntity*)PDefender)->m_HiPCLvl < PAttacker->GetMLevel())
+                            {
+                                ((CMobEntity*)PDefender)->m_HiPCLvl = PAttacker->GetMLevel();
+                            }
+
+                            // if the mob is charmed by player
+                            if (PDefender->PMaster != nullptr && PDefender->PMaster->objtype == TYPE_PC)
+                            {
+                                ((CPetEntity*)PDefender)
+                                    ->loc.zone->UpdateEntityPacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT);
+
+                                if (PAttacker->objtype == TYPE_MOB)
+                                {
+                                    // charmed mob should lose enmity from normal attacks
+                                    ((CMobEntity*)PAttacker)->PEnmityContainer->UpdateEnmityFromAttack(PDefender, damage);
+                                }
+                            }
+                            break;
+
+                        case TYPE_PET:
+                            ((CPetEntity*)PDefender)->loc.zone->UpdateEntityPacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT);
+
+                            if (PAttacker->objtype == TYPE_MOB)
+                            {
+                                // pets should lose enmity from normal attacks
+                                ((CMobEntity*)PAttacker)->PEnmityContainer->UpdateEnmityFromAttack(PDefender, damage);
+                            }
+                            break;
+                        case TYPE_PC:
+                            if (PAttacker->objtype == TYPE_MOB)
+                            {
+                                if (isCovered)
+                                {
+                                    ((CMobEntity*)PAttacker)->PEnmityContainer->UpdateEnmityFromCover(POriginalTarget, PDefender);
+                                }
+                                else
+                                {
+                                    ((CMobEntity*)PAttacker)->PEnmityContainer->UpdateEnmityFromAttack(PDefender, damage);
+                                }
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
+                    // try to interrupt spell if not a ranged attack and not blocked by Shield Mastery
+                    if ((!isRanged) && !((isBlocked) && (PDefender->objtype == TYPE_PC) && (charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))))
+                    {
+                        PDefender->TryHitInterrupt(PAttacker);
+                    }
+                }
+                else if (PDefender->objtype == TYPE_MOB)
+                {
+                    ((CMobEntity*)PDefender)->PEnmityContainer->UpdateEnmityFromDamage(PAttacker, 0);
+                }
+
+                if (PAttacker->objtype == TYPE_PC && !isRanged && !isCounter)
+                {
+                    PAttacker->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ATTACK);
+                }
+            }
+            else
+            {
+                sol::error err = result;
+                ShowError("battleentity::TakePhysicalDamage(): %s", err.what());
+            }
+
+            return damage;
+        }
+
         auto* weapon           = GetEntityWeapon(PAttacker, (SLOTTYPE)slot);
         giveTPtoAttacker       = giveTPtoAttacker && !PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_MEIKYO_SHISUI);
         giveTPtoVictim         = giveTPtoVictim && physicalAttackType != PHYSICAL_ATTACK_TYPE::DAKEN;
@@ -2383,13 +2485,13 @@ namespace battleutils
                     PDefender->addTP(
                         (int16)(tpMultiplier * ((baseTp / 3) * sBlowMult *
                                                 (1.0f + 0.01f * (float)((PDefender->getMod(Mod::STORETP) +
-                                                                         getStoreTPbonusFromMerit(PAttacker))))))); // yup store tp counts on hits taken too!
+                                                                        getStoreTPbonusFromMerit(PAttacker))))))); // yup store tp counts on hits taken too!
                 }
                 else
                 {
                     PDefender->addTP((uint16)(tpMultiplier *
-                                              ((baseTp + 30) * sBlowMult *
-                                               (1.0f + 0.01f * (float)PDefender->getMod(Mod::STORETP))))); // subtle blow also reduces the "+30" on mob tp gain
+                                            ((baseTp + 30) * sBlowMult *
+                                            (1.0f + 0.01f * (float)PDefender->getMod(Mod::STORETP))))); // subtle blow also reduces the "+30" on mob tp gain
                 }
             }
         }
