@@ -14628,8 +14628,8 @@ bool CLuaBaseEntity::isSpellAoE(uint16 spellId)
  *  Notes   : Passes argument to CircleDmgAdjust member of battleutils.
  ************************************************************************/
 
- int32 CLuaBaseEntity::circleDmgAdjust(CLuaBaseEntity* PDefender, double damage)
- {
+int32 CLuaBaseEntity::circleDmgAdjust(CLuaBaseEntity* PDefender, double damage)
+{
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
         ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
@@ -14638,8 +14638,7 @@ bool CLuaBaseEntity::isSpellAoE(uint16 spellId)
     return battleutils::CircleDmgAdjust(
         static_cast<CBattleEntity*>(m_PBaseEntity),
         static_cast<CBattleEntity*>(PDefender->GetBaseEntity()),
-        static_cast<int32>(damage)
-    );
+        static_cast<int32>(damage));
  }
 
 /************************************************************************

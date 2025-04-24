@@ -1072,10 +1072,10 @@ enum class Mod
     ABSORB_EFFECT_DURATION  = 1138, // Absorb Spell duration +% ("Absorb" effect duration +x%)
 
     // Circle Abilities Bonus Damage and Reduced Damage Taken
-    WARDING_CIRCLE_DMG_BONUS        = 1144, // Only active while Warding Circle is up
-    ANCIENT_CIRCLE_DMG_BONUS        = 1145, // Only active while Ancient Circle is up
-    HOLY_CIRCLE_DMG_BONUS           = 1146, // Only active while Holy Circle is up
-    ARCANE_CIRCLE_DMG_BONUS         = 1147, // Only active while Arcane Circle is up
+    WARDING_CIRCLE_DMG_BONUS = 1144, // Only active while Warding Circle is up
+    ANCIENT_CIRCLE_DMG_BONUS = 1145, // Only active while Ancient Circle is up
+    HOLY_CIRCLE_DMG_BONUS    = 1146, // Only active while Holy Circle is up
+    ARCANE_CIRCLE_DMG_BONUS  = 1147, // Only active while Arcane Circle is up
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 

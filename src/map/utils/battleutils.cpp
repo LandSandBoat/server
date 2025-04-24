@@ -5132,7 +5132,7 @@ namespace battleutils
         }
 
         int16 damageReduction = 0;
-        int16 damageBonus = 0;
+        int16 damageBonus     = 0;
 
         switch (PAttacker->m_EcoSystem)
         {

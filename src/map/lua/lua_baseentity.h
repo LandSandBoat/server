@@ -729,7 +729,6 @@ public:
     int32 magicDmgTaken(double damage, sol::variadic_args va);
     int32 rangedDmgTaken(double damage, sol::variadic_args va);
     int32 breathDmgTaken(double damage);
-
     void  handleAfflatusMiseryDamage(double damage);
 
     bool   isWeaponTwoHanded();
