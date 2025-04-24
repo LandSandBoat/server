@@ -745,6 +745,7 @@ namespace battleutils
 
         damage = (int32)(damage * resist);
         damage = (int32)(damage * dBonus);
+        damage = CircleDmgAdjust(PAttacker, PDefender, damage);
         damage = MagicDmgTaken(PDefender, damage, (ELEMENT)(element));
 
         if (damage > 0)
@@ -865,6 +866,7 @@ namespace battleutils
                 spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                 spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
                 spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
+                spikesDamage = CircleDmgAdjust(PDefender, PAttacker, spikesDamage);
             }
 
             if (spikesDamage < 0) // because spikes damage in action packet is uint16, we have to change the healed amount to a positive number and cast to uint16
@@ -1011,6 +1013,7 @@ namespace battleutils
                 spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                 spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
                 spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
+                spikesDamage = CircleDmgAdjust(PDefender, PAttacker, spikesDamage);
             }
 
             if (spikesDamage < 0) // fit healed spikes into uint16
@@ -1064,6 +1067,7 @@ namespace battleutils
                     spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                     spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
                     spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
+                    spikesDamage = CircleDmgAdjust(PDefender, PAttacker, spikesDamage);
                 }
                 else if (spikesDamage < 0) // fit healed spikes into uint16
                 {
@@ -2108,6 +2112,10 @@ namespace battleutils
         int32       baseDamage = damage;
         ATTACK_TYPE attackType = ATTACK_TYPE::PHYSICAL;
         DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE;
+
+        // holy circle etc applies bonus damage & defense which stacks with all other bonuses
+        damage = CircleDmgAdjust(PAttacker, PDefender, damage);
+
         if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_FORMLESS_STRIKES) && !isCounter)
         {
             attackType        = ATTACK_TYPE::SPECIAL;
@@ -2474,7 +2482,7 @@ namespace battleutils
         {
             damage = getOverWhelmDamageBonus(PAttacker, PDefender, damage);
         }
-
+        damage = CircleDmgAdjust(PAttacker, PDefender, damage);
         HandleAfflatusMiseryDamage(PDefender, damage);
         damage = std::clamp(damage, -99999, 99999);
 
@@ -3580,6 +3588,12 @@ namespace battleutils
         if (CStatusEffect* PIntimidateEffect = PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_INTIMIDATE))
         {
             KillerEffect += PIntimidateEffect->GetPower();
+        }
+
+        // Reduce intimidation rate if the target is an NM
+        if (PDefender->objtype == TYPE_MOB && static_cast<CMobEntity*>(PDefender)->m_Type & MOBTYPE_NOTORIOUS)
+        {
+            KillerEffect = (int32)floor(KillerEffect * 2 / 3);
         }
 
         return (xirand::GetRandomNumber(100) < KillerEffect);
@@ -5103,6 +5117,72 @@ namespace battleutils
         }
 
         damage = CheckAndApplyDamageCap(damage, PDefender);
+
+        return damage;
+    }
+
+    int32 CircleDmgAdjust(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage)
+    {
+        // adjusts damage dealt based on the attacker/defender ecosystem, if attacker and/or
+        // defender has warding, ancient, arcane, or holy circle active
+        // https://wiki.ffo.jp/html/12868.html
+        if (PAttacker == nullptr || PDefender == nullptr)
+        {
+            return damage;
+        }
+
+        int16 damageReduction = 0;
+        int16 damageBonus = 0;
+
+        switch (PAttacker->m_EcoSystem)
+        {
+            case ECOSYSTEM::ARCANA:
+                damageReduction = PDefender->getMod(Mod::ARCANE_CIRCLE_DMG_BONUS);
+                break;
+            case ECOSYSTEM::DEMON:
+                damageReduction = PDefender->getMod(Mod::WARDING_CIRCLE_DMG_BONUS);
+                break;
+            case ECOSYSTEM::DRAGON:
+                damageReduction = PDefender->getMod(Mod::ANCIENT_CIRCLE_DMG_BONUS);
+                break;
+            case ECOSYSTEM::UNDEAD:
+                damageReduction = PDefender->getMod(Mod::HOLY_CIRCLE_DMG_BONUS);
+                break;
+            default:
+                break;
+        }
+
+        // Reduce effect if attacker is NM
+        if (PAttacker->objtype == TYPE_MOB && static_cast<CMobEntity*>(PAttacker)->m_Type & MOBTYPE_NOTORIOUS)
+        {
+            damageReduction = (int32)floor(damageReduction * 2 / 3);
+        }
+
+        switch (PDefender->m_EcoSystem)
+        {
+            case ECOSYSTEM::ARCANA:
+                damageBonus = PAttacker->getMod(Mod::ARCANE_CIRCLE_DMG_BONUS);
+                break;
+            case ECOSYSTEM::DEMON:
+                damageBonus = PAttacker->getMod(Mod::WARDING_CIRCLE_DMG_BONUS);
+                break;
+            case ECOSYSTEM::DRAGON:
+                damageBonus = PAttacker->getMod(Mod::ANCIENT_CIRCLE_DMG_BONUS);
+                break;
+            case ECOSYSTEM::UNDEAD:
+                damageBonus = PAttacker->getMod(Mod::HOLY_CIRCLE_DMG_BONUS);
+                break;
+            default:
+                break;
+        }
+
+        // Reduce effect if target is NM
+        if (PDefender->objtype == TYPE_MOB && static_cast<CMobEntity*>(PDefender)->m_Type & MOBTYPE_NOTORIOUS)
+        {
+            damageBonus = (int32)floor(damageBonus * 2 / 3);
+        }
+
+        damage = (int32)(damage * (1 + damageBonus / 100.f) * (1 - damageReduction / 100.f));
 
         return damage;
     }

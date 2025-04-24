@@ -214,6 +214,7 @@ namespace battleutils
     int32 MagicDmgTaken(CBattleEntity* PDefender, int32 damage, ELEMENT element);
     int32 PhysicalDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered = false);
     int32 RangedDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered = false);
+    int32 CircleDmgAdjust(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage);
     int32 HandleSteamJacket(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType);
     int32 CheckAndApplyDamageCap(int32 damage, CBattleEntity* PDefender);
 

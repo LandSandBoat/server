@@ -14622,6 +14622,27 @@ bool CLuaBaseEntity::isSpellAoE(uint16 spellId)
 }
 
 /************************************************************************
+ *  Function: circleDmgAdjust()
+ *  Purpose : Returns the adjusted damage dealt based on Circle abilities
+ *  Example : dmg = attacker:circleDmgAdjust(target, dmg)
+ *  Notes   : Passes argument to CircleDmgAdjust member of battleutils.
+ ************************************************************************/
+
+ int32 CLuaBaseEntity::circleDmgAdjust(CLuaBaseEntity* PDefender, double damage)
+ {
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return 0;
+    }
+    return battleutils::CircleDmgAdjust(
+        static_cast<CBattleEntity*>(m_PBaseEntity),
+        static_cast<CBattleEntity*>(PDefender->GetBaseEntity()),
+        static_cast<int32>(damage)
+    );
+ }
+
+/************************************************************************
  *  Function: physicalDmgTaken()
  *  Purpose : Returns the value of Physical Damage taken after calculation
  *  Example : dmg = target:physicalDmgTaken(dmg, damageType)
@@ -19615,6 +19636,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("isSpellAoE", CLuaBaseEntity::isSpellAoE);
 
+    SOL_REGISTER("circleDmgAdjust", CLuaBaseEntity::circleDmgAdjust);
     SOL_REGISTER("physicalDmgTaken", CLuaBaseEntity::physicalDmgTaken);
     SOL_REGISTER("magicDmgTaken", CLuaBaseEntity::magicDmgTaken);
     SOL_REGISTER("rangedDmgTaken", CLuaBaseEntity::rangedDmgTaken);

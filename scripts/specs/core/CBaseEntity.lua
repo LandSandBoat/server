@@ -3156,6 +3156,13 @@ function CBaseEntity:isSpellAoE(spellId)
 end
 
 ---@nodiscard
+---@param defender CBaseEntity
+---@param damage number
+---@return integer
+function CBaseEntity:circleDmgAdjust(defender, damage)
+end
+
+---@nodiscard
 ---@param damage number
 ---@param damageType integer?
 ---@return integer

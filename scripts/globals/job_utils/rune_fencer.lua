@@ -566,6 +566,11 @@ local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonu
         damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)
     end
 
+    -- Handle Circle abilities
+    if damage > 0 then
+        damage = utils.clamp(player:circleDmgAdjust(target, damage), -99999, 99999)
+    end
+
     return damage
 end
 

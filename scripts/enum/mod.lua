@@ -933,6 +933,12 @@ xi.mod =
     ANCIENT_CIRCLE_POTENCY          = 1142, -- Increases the potency of the Ancient Circle effect (e.g. mod value 2 = +2% Dragon Killer)
     WARDING_CIRCLE_POTENCY          = 1143, -- Increases the potency of the Warding Circle effect (e.g. mod value 2 = +2% Demon Killer)
 
+    -- Circle Abilities Bonus Damage and Reduced Damage Taken
+    WARDING_CIRCLE_DMG_BONUS        = 1144, -- Only active while Warding Circle is up
+    ANCIENT_CIRCLE_DMG_BONUS        = 1145, -- Only active while Ancient Circle is up
+    HOLY_CIRCLE_DMG_BONUS           = 1146, -- Only active while Holy Circle is up
+    ARCANE_CIRCLE_DMG_BONUS         = 1147, -- Only active while Arcane Circle is up
+
     -- Other
     CURE2MP_PERCENT                 = 860, -- Converts % of "Cure" amount to MP
     DIVINE_BENISON                  = 910, -- Adds fast cast and enmity reduction to -Na spells (includes Erase). Enmity reduction is half of the fast cast amount

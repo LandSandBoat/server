@@ -154,6 +154,7 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
         finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
         finalDamage = utils.clamp(utils.oneforall(target, finalDamage), 0, 99999)
         finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
+        finalDamage = caster:circleDmgAdjust(target, finalDamage)
         finalDamage = target:checkDamageCap(finalDamage)
 
         -- Handle Bind break and TP?
@@ -194,7 +195,7 @@ xi.spells.absorb.doAbsorbTPSpell = function(caster, target, spell)
     local finalDamage = 0
 
     -- Early return: Target absorbs or nullifies dark.
-    if xi.spells.damage.calculateNukeAbsorbOrNullify(target, xi.element.DARK) then
+    if xi.spells.damage.calculateNukeAbsorbOrNullify(target, xi.element.DARK) ~= 1 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         return finalDamage
     end

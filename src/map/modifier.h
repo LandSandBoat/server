@@ -1071,13 +1071,19 @@ enum class Mod
     AUGMENTS_ABSORB         = 1337, // Non-Liberator Absorb Spell potency +x% (Augments "Absorb" effects)
     ABSORB_EFFECT_DURATION  = 1138, // Absorb Spell duration +% ("Absorb" effect duration +x%)
 
+    // Circle Abilities Bonus Damage and Reduced Damage Taken
+    WARDING_CIRCLE_DMG_BONUS        = 1144, // Only active while Warding Circle is up
+    ANCIENT_CIRCLE_DMG_BONUS        = 1145, // Only active while Ancient Circle is up
+    HOLY_CIRCLE_DMG_BONUS           = 1146, // Only active while Holy Circle is up
+    ARCANE_CIRCLE_DMG_BONUS         = 1147, // Only active while Arcane Circle is up
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs: 544 to 551, both included.
-    // SPARE IDs: 1144 and onward
+    // SPARE IDs: 1148 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

@@ -401,6 +401,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
     finalDamage = utils.clamp(utils.oneforall(target, finalDamage), 0, 99999)
     finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
+    finalDamage = caster:circleDmgAdjust(target, finalDamage)
     finalDamage = utils.clamp(finalDamage, 0, target:getHP())
 
     -- Check if the mob has a damage cap
@@ -500,6 +501,7 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
         dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
         dmg = utils.clamp(utils.oneforall(target, dmg), 0, 99999)
         dmg = utils.clamp(utils.stoneskin(target, dmg), -99999, 99999)
+        dmg = caster:circleDmgAdjust(target, dmg)
         dmg = utils.clamp(dmg, 0, target:getHP())
         dmg = target:checkDamageCap(dmg)
     end
@@ -553,6 +555,9 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
 
     -- handle stoneskin
     dmg = utils.stoneskin(target, dmg)
+
+    -- handle Circle abilities
+    dmg = caster:circleDmgAdjust(target, dmg)
 
     -- Check if the mob has a damage cap
     dmg = target:checkDamageCap(dmg)

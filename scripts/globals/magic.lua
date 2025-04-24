@@ -274,8 +274,12 @@ function finalMagicAdjustments(caster, target, spell, dmg)
     -- handle one for all
     dmg = utils.oneforall(target, dmg)
 
-    --handling stoneskin
+    -- handle stoneskin
     dmg = utils.stoneskin(target, dmg)
+
+    --handle circle abilities
+    dmg = caster:circleDmgAdjust(target, dmg)
+
     dmg = utils.clamp(dmg, -99999, 99999)
 
     if dmg < 0 then
@@ -311,8 +315,11 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     -- handle one for all
     dmg = utils.oneforall(target, dmg)
 
-    -- handling stoneskin
+    -- handle stoneskin
     dmg = utils.stoneskin(target, dmg)
+
+    --handle circle abilities
+    dmg = caster:circleDmgAdjust(target, dmg)
 
     dmg = utils.clamp(dmg, -99999, 99999)
 

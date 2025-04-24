@@ -97,8 +97,6 @@ xi.job_utils.paladin.useFealty = function(player, target, ability)
 end
 
 xi.job_utils.paladin.useHolyCircle = function(player, target, ability)
-    -- TODO:
-    -- Create Bonus vs Ecosystem handling
     -- https://www.bg-wiki.com/ffxi/Holy_Circle
     -- Main (PLD) job gives a unique 15% damage bonus against undead, 15% damage resistance from undead, and likely +15% Undead Killer.
     -- When subbed, gives 5% of these bonuses.

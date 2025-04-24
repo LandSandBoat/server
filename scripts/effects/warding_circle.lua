@@ -8,6 +8,7 @@ effectObject.onEffectGain = function(target, effect)
     local jpValue = target:getJobPointLevel(xi.jp.WARDING_CIRCLE_EFFECT)
 
     target:addMod(xi.mod.DEMON_KILLER, effect:getPower() + jpValue)
+    target:addMod(xi.mod.WARDING_CIRCLE_DMG_BONUS, effect:getPower() + jpValue)
 end
 
 effectObject.onEffectTick = function(target, effect)
@@ -17,6 +18,7 @@ effectObject.onEffectLose = function(target, effect)
     local jpValue = target:getJobPointLevel(xi.jp.WARDING_CIRCLE_EFFECT)
 
     target:delMod(xi.mod.DEMON_KILLER, effect:getPower() + jpValue)
+    target:delMod(xi.mod.WARDING_CIRCLE_DMG_BONUS, effect:getPower() + jpValue)
 end
 
 return effectObject

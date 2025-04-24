@@ -492,6 +492,7 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
         target:setLocalVar('analyzer_hits', analyzerHits)
     end
 
+    dmg = mob:circleDmgAdjust(target, dmg)
     if attackType == xi.attackType.PHYSICAL then
         dmg = target:physicalDmgTaken(dmg, damageType)
     elseif attackType == xi.attackType.MAGICAL then
