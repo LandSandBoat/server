@@ -14639,7 +14639,7 @@ int32 CLuaBaseEntity::circleDmgAdjust(CLuaBaseEntity* PDefender, double damage)
         static_cast<CBattleEntity*>(m_PBaseEntity),
         static_cast<CBattleEntity*>(PDefender->GetBaseEntity()),
         static_cast<int32>(damage));
- }
+}
 
 /************************************************************************
  *  Function: physicalDmgTaken()
