@@ -135,6 +135,8 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
         netherVoidMultiplier = 1 + caster:getStatusEffect(xi.effect.NETHER_VOID):getPower() / 100
     end
 
+    local circleDmgMultiplier    = xi.spells.damage.calculateCircleDmgMultiplier(caster, target)
+
     -- Operations.
     finalDamage = math.floor(baseDamage * resistTier)
     finalDamage = math.floor(finalDamage * additionalResistTier)
@@ -145,6 +147,7 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * absorbMultiplier)
     finalDamage = math.floor(finalDamage * liberatorMultiplier)
     finalDamage = math.floor(finalDamage * netherVoidMultiplier)
+    finalDamage = math.floor(finalDamage * circleDmgMultiplier)
 
     -- Clamp: We cannot absorb more HP/MP than the target has.
     finalDamage = utils.clamp(finalDamage, 0, targetPoints)
@@ -154,7 +157,6 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
         finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
         finalDamage = utils.clamp(utils.oneforall(target, finalDamage), 0, 99999)
         finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
-        finalDamage = caster:circleDmgAdjust(target, finalDamage)
         finalDamage = target:checkDamageCap(finalDamage)
 
         -- Handle Bind break and TP?

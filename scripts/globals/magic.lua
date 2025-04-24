@@ -264,6 +264,7 @@ function finalMagicAdjustments(caster, target, spell, dmg)
         dmg = dmg * xi.settings.main.DIVINE_POWER
     end
 
+    dmg = math.floor(dmg * xi.spells.damage.calculateCircleDmgMultiplier(caster, target))
     dmg = target:magicDmgTaken(dmg)
 
     if dmg > 0 then
@@ -276,9 +277,6 @@ function finalMagicAdjustments(caster, target, spell, dmg)
 
     -- handle stoneskin
     dmg = utils.stoneskin(target, dmg)
-
-    --handle circle abilities
-    dmg = caster:circleDmgAdjust(target, dmg)
 
     dmg = utils.clamp(dmg, -99999, 99999)
 
@@ -305,6 +303,7 @@ end
 function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     -- Handles target's HP adjustment and returns SIGNED dmg (negative values on absorb)
 
+    dmg = math.floor(dmg * xi.spells.damage.calculateCircleDmgMultiplier(caster, target))
     dmg = target:magicDmgTaken(dmg)
 
     if dmg > 0 then
@@ -317,9 +316,6 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
 
     -- handle stoneskin
     dmg = utils.stoneskin(target, dmg)
-
-    --handle circle abilities
-    dmg = caster:circleDmgAdjust(target, dmg)
 
     dmg = utils.clamp(dmg, -99999, 99999)
 

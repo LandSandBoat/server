@@ -386,6 +386,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     finalDamage = math.floor(addBonuses(caster, spell, target, finalDamage))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateTMDA(target, spell:getElement()))
     finalDamage = math.floor(finalDamage * xi.settings.main.BLUE_POWER)
+    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateCircleDmgMultiplier(caster, target))
 
     -- MP drain
     if mpDrain then
@@ -401,7 +402,6 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
     finalDamage = utils.clamp(utils.oneforall(target, finalDamage), 0, 99999)
     finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
-    finalDamage = caster:circleDmgAdjust(target, finalDamage)
     finalDamage = utils.clamp(finalDamage, 0, target:getHP())
 
     -- Check if the mob has a damage cap
@@ -461,6 +461,7 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     local ninjutsuMultiplier          = xi.spells.damage.calculateNinjutsuMultiplier(caster, target, xi.skill.BLUE_MAGIC)
     local scarletDeliriumMultiplier   = xi.spells.damage.calculateScarletDeliriumMultiplier(caster)
     local areaOfEffectResistance      = xi.spells.damage.calculateAreaOfEffectResistance(target, spell)
+    local circleDmgMultiplier         = xi.spells.damage.calculateCircleDmgMultiplier(caster, target)
 
     dmg = math.floor(dmg * correlationMultiplier)
     dmg = math.floor(dmg * breathSDT)
@@ -478,6 +479,7 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     dmg = math.floor(dmg * ninjutsuMultiplier)
     dmg = math.floor(dmg * scarletDeliriumMultiplier)
     dmg = math.floor(dmg * areaOfEffectResistance)
+    dmg = math.floor(dmg * circleDmgMultiplier)
 
     -- Handle "Nuke Wall". It must be handled after all previous calculations, but before clamp.
     if nukeAbsorbOrNullify > 0 then
@@ -501,7 +503,6 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
         dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
         dmg = utils.clamp(utils.oneforall(target, dmg), 0, 99999)
         dmg = utils.clamp(utils.stoneskin(target, dmg), -99999, 99999)
-        dmg = caster:circleDmgAdjust(target, dmg)
         dmg = utils.clamp(dmg, 0, target:getHP())
         dmg = target:checkDamageCap(dmg)
     end
@@ -525,6 +526,7 @@ end
 -- Apply spell damage
 xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, trickAttackTarget)
     dmg                 = math.floor(dmg * xi.settings.main.BLUE_POWER)
+    dmg                 = math.floor(dmg * xi.spells.damage.calculateCircleDmgMultiplier(caster, target))
     local attackType    = params.attackType or xi.attackType.NONE
     local damageType    = params.damageType or xi.damageType.NONE
     local tpHits        = params.tphitslanded or 0
@@ -555,9 +557,6 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
 
     -- handle stoneskin
     dmg = utils.stoneskin(target, dmg)
-
-    -- handle Circle abilities
-    dmg = caster:circleDmgAdjust(target, dmg)
 
     -- Check if the mob has a damage cap
     dmg = target:checkDamageCap(dmg)

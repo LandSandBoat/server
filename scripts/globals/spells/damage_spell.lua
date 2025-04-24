@@ -886,6 +886,49 @@ xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
     return nukeAbsorbOrNullify
 end
 
+xi.spells.damage.calculateCircleDmgMultiplier = function(caster, target)
+    local circleDmgMultiplier = 1
+    -- Modifies damage based on the attacker/defender ecosystem, if attacker and/or
+    -- defender has warding, ancient, arcane, or holy circle active
+    -- https://wiki.ffo.jp/html/12868.html
+
+    local ecoTable =
+    -- TODO: Expand this for Killer Instinct (BST merit ability)
+    {
+        [xi.eco.ARCANA] = xi.mod.ARCANE_CIRCLE_DMG_BONUS,
+        [xi.eco.DEMON ] = xi.mod.WARDING_CIRCLE_DMG_BONUS,
+        [xi.eco.DRAGON] = xi.mod.ANCIENT_CIRCLE_DMG_BONUS,
+        [xi.eco.UNDEAD] = xi.mod.HOLY_CIRCLE_DMG_BONUS,
+    }
+
+    -- Handle both cases separately. It's possible, however unlikely, that both target and
+    -- caster have a circle ability up which counters the other entity's ecosystem
+    local casterWeakCircle = ecoTable[caster:getEcosystem()]
+    local targetWeakCircle = ecoTable[target:getEcosystem()]
+    local reduction        = 0
+    local bonus            = 0
+
+    if casterWeakCircle then
+        reduction = target:getMod(casterWeakCircle)
+        if caster:isNM() then
+            reduction = reduction * 2 / 3
+        end
+
+        circleDmgMultiplier = circleDmgMultiplier * (1 - reduction)
+    end
+
+    if targetWeakCircle then
+        bonus = caster:getMod(targetWeakCircle)
+        if target:isNM() then
+            bonus = bonus * 2 / 3
+        end
+
+        circleDmgMultiplier = circleDmgMultiplier * (1 + bonus)
+    end
+
+    return circleDmgMultiplier
+end
+
 xi.spells.damage.calculateIfMagicBurst = function(target, spellElement, skillchainCount)
     local magicBurst = 1 -- The variable we want to calculate
 
@@ -1091,6 +1134,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local scarletDeliriumMultiplier = xi.spells.damage.calculateScarletDeliriumMultiplier(caster)
     local helixMeritMultiplier      = xi.spells.damage.calculateHelixMeritMultiplier(caster, spellId)
     local areaOfEffectResistance    = xi.spells.damage.calculateAreaOfEffectResistance(target, spell)
+    local circleDmgMultiplier       = xi.spells.damage.calculateCircleDmgMultiplier(caster, target)
 
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
     finalDamage = math.floor(spellDamage * multipleTargetReduction)
@@ -1116,6 +1160,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
     finalDamage = math.floor(finalDamage * magicBurst)
     finalDamage = math.floor(finalDamage * magicBurstBonus)
+    finalDamage = math.floor(finalDamage * circleDmgMultiplier)
 
     -- Handle "Nuke Wall". It must be handled after all previous calculations, but before clamp.
     if nukeAbsorbOrNullify > 0 then
@@ -1135,7 +1180,6 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
     finalDamage = utils.clamp(utils.oneforall(target, finalDamage), 0, 99999)
     finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
-    finalDamage = caster:circleDmgAdjust(target, finalDamage)
 
     -- Handle final adjustments. Most are located in core. TODO: Decide if we want core handling this.
     -- Check if the mob has a damage cap

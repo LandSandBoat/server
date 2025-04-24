@@ -861,12 +861,12 @@ namespace battleutils
 
             // calculate damage
             int32 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage)));
+            spikesDamage       = CircleDmgAdjust(PDefender, PAttacker, spikesDamage);
             if (spikesDamage > 0)
             {
                 spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                 spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
                 spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
-                spikesDamage = CircleDmgAdjust(PDefender, PAttacker, spikesDamage);
             }
 
             if (spikesDamage < 0) // because spikes damage in action packet is uint16, we have to change the healed amount to a positive number and cast to uint16
@@ -1008,12 +1008,12 @@ namespace battleutils
         {
             // calculate damage
             int32 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage)));
+            spikesDamage       = CircleDmgAdjust(PDefender, PAttacker, spikesDamage);
             if (spikesDamage > 0)
             {
                 spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                 spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
                 spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
-                spikesDamage = CircleDmgAdjust(PDefender, PAttacker, spikesDamage);
             }
 
             if (spikesDamage < 0) // fit healed spikes into uint16
@@ -1062,12 +1062,12 @@ namespace battleutils
 
                 // calculate damage
                 int32 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, damage - xirand::GetRandomNumber<uint16>(ratio) + xirand::GetRandomNumber<uint16>(ratio));
+                spikesDamage       = CircleDmgAdjust(PDefender, PAttacker, spikesDamage);
                 if (spikesDamage > 0)
                 {
                     spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                     spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
                     spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
-                    spikesDamage = CircleDmgAdjust(PDefender, PAttacker, spikesDamage);
                 }
                 else if (spikesDamage < 0) // fit healed spikes into uint16
                 {
@@ -2472,6 +2472,8 @@ namespace battleutils
             damage = 0;
         }
 
+        damage = CircleDmgAdjust(PAttacker, PDefender, damage);
+
         if (damage > 0)
         {
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
@@ -2482,7 +2484,7 @@ namespace battleutils
         {
             damage = getOverWhelmDamageBonus(PAttacker, PDefender, damage);
         }
-        damage = CircleDmgAdjust(PAttacker, PDefender, damage);
+
         HandleAfflatusMiseryDamage(PDefender, damage);
         damage = std::clamp(damage, -99999, 99999);
 

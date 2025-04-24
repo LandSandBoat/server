@@ -524,6 +524,7 @@ local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc
     multipliers.nukeAbsorbOrNullify = xi.spells.damage.calculateNukeAbsorbOrNullify(target, element)
     multipliers.magicBurst          = 1
     multipliers.magicBurstBonus     = 1
+    multipliers.circleDmgMultiplier = xi.spells.damage.calculateCircleDmgMultiplier(player, target)
 
     local _, skillchainCount = xi.magicburst.formMagicBurst(element, target)
 
@@ -550,6 +551,7 @@ local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonu
     damage = math.floor(damage * multipliers.magicBonusDiff)
     damage = math.floor(damage * multipliers.TMDA)
     damage = math.floor(damage * multipliers.nukeAbsorbOrNullify)
+    damage = math.floor(damage * multipliers.circleDmgMultiplier)
 
     -- Handle Phalanx
     if damage > 0 then
@@ -564,11 +566,6 @@ local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonu
     -- Handle Stoneskin
     if damage > 0 then
         damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)
-    end
-
-    -- Handle Circle abilities
-    if damage > 0 then
-        damage = utils.clamp(player:circleDmgAdjust(target, damage), -99999, 99999)
     end
 
     return damage
