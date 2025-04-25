@@ -221,7 +221,7 @@ xi.job_utils.thief.useDespoil = function(player, target, ability, action)
         despoiled ~= 0
     then
         if player:getObjType() == xi.objType.TRUST then
-            player:getMaster():addItem(stolen)
+            player:getMaster():addItem(despoiled)
         else
             player:addItem(despoiled)
         end
