@@ -63,7 +63,7 @@ xi.ability.adjustDamage = function(dmg, attacker, skill, target, skilltype, skil
     end
 
     local circleDmgMultiplier = xi.spells.damage.calculateCircleDmgMultiplier(attacker, target)
-    dmg = dmg * circleDmgMultiplier
+    dmg = math.floor(dmg * circleDmgMultiplier)
 
     if skilltype == xi.attackType.PHYSICAL then
         dmg = target:physicalDmgTaken(dmg, skillparam)
