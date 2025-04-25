@@ -134,6 +134,7 @@ CMobEntity::CMobEntity()
 , m_HiPartySize(0)
 , m_THLvl(0)
 , m_ItemStolen(false)
+, m_ItemDespoiled(false)
 , m_Family(0)
 , m_SuperFamily(0)
 , m_MobSkillList(0)
@@ -593,13 +594,14 @@ void CMobEntity::Spawn()
 {
     TracyZoneScoped;
     CBattleEntity::Spawn();
-    m_giveExp      = true;
-    m_HiPCLvl      = 0;
-    m_HiPartySize  = 0;
-    m_THLvl        = 0;
-    m_ItemStolen   = false;
-    m_DropItemTime = 1000;
-    animationsub   = (uint8)getMobMod(MOBMOD_SPAWN_ANIMATIONSUB);
+    m_giveExp       = true;
+    m_HiPCLvl       = 0;
+    m_HiPartySize   = 0;
+    m_THLvl         = 0;
+    m_ItemStolen    = false;
+    m_ItemDespoiled = false;
+    m_DropItemTime  = 1000;
+    animationsub    = (uint8)getMobMod(MOBMOD_SPAWN_ANIMATIONSUB);
     SetCallForHelpFlag(false);
 
     PEnmityContainer->Clear();

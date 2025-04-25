@@ -3993,6 +3993,11 @@ function CBaseEntity:itemStolen()
 end
 
 ---@nodiscard
+---@return boolean
+function CBaseEntity:itemDespoiled()
+end
+
+---@nodiscard
 ---@return integer
 function CBaseEntity:getTHlevel()
 end
