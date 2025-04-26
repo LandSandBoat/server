@@ -32,7 +32,72 @@ CLuaAttack::CLuaAttack(CAttack* attack)
     }
 }
 
-bool CLuaAttack::getCritical() const
+CBattleEntity* CLuaAttack::getAttacker()
+{
+    return m_PLuaAttack->GetAttacker();
+}
+
+CBattleEntity* CLuaAttack::getVictim()
+{
+    return m_PLuaAttack->GetVictim(); 
+}
+
+CBattleEntity* CLuaAttack::getTAEntity()
+{
+    return m_PLuaAttack->GetTAEntity(); 
+}
+
+bool CLuaAttack::isH2H()
+{
+    return m_PLuaAttack->IsH2H(); 
+}
+
+uint8 CLuaAttack::getWeaponSlot()
+{
+    return m_PLuaAttack->GetWeaponSlot(); 
+}
+
+bool CLuaAttack::isFirstSwing() const
+{
+    return m_PLuaAttack->IsFirstSwing();
+}
+
+bool CLuaAttack::isSA() const
+{
+    return m_PLuaAttack->IsSA();
+}
+
+void CLuaAttack::setSA(bool val)
+{
+    m_PLuaAttack->SetSA(val);
+}
+
+bool CLuaAttack::isTA() const
+{
+    return m_PLuaAttack->IsTA();
+}
+
+void CLuaAttack::setTA(bool val)
+{
+    m_PLuaAttack->SetTA(val);
+}
+
+PHYSICAL_ATTACK_TYPE CLuaAttack::getAttackType() const
+{
+    return m_PLuaAttack->GetAttackType(); 
+}
+
+void CLuaAttack::setAttackType(PHYSICAL_ATTACK_TYPE type)
+{
+    return m_PLuaAttack->SetAttackType(type); 
+}
+
+float CLuaAttack::getDamageRatio() const
+{
+    return m_PLuaAttack->GetDamageRatio(); 
+}
+
+bool CLuaAttack::isCritical() const
 {
     return m_PLuaAttack->IsCritical();
 }
@@ -47,9 +112,29 @@ void CLuaAttack::setCritical(bool critical)
 void CLuaAttack::Register()
 {
     SOL_USERTYPE("CAttack", CLuaAttack);
-    SOL_REGISTER("getCritical", CLuaAttack::getCritical);
+    
+    SOL_REGISTER("getAttacker", CLuaAttack::getAttacker);
+    SOL_REGISTER("getVictim", CLuaAttack::getVictim);
+    SOL_REGISTER("getTAEntity", CLuaAttack::getTAEntity);
+    
+    SOL_REGISTER("isH2H", CLuaAttack::isH2H);
+    SOL_REGISTER("getWeaponSlot", CLuaAttack::getWeaponSlot);
+    SOL_REGISTER("isFirstSwing", CLuaAttack::isFirstSwing);
+
+    SOL_REGISTER("isSA", CLuaAttack::isSA);
+    SOL_REGISTER("setSA", CLuaAttack::setSA);
+
+    SOL_REGISTER("isTA", CLuaAttack::isTA);
+    SOL_REGISTER("setTA", CLuaAttack::setTA);
+
+    SOL_REGISTER("getAttackType", CLuaAttack::getAttackType);
+    SOL_REGISTER("setAttackType", CLuaAttack::setAttackType);
+
+    SOL_REGISTER("getDamageRatio", CLuaAttack::getDamageRatio);
+
+    SOL_REGISTER("isCritical", CLuaAttack::isCritical);
     SOL_REGISTER("setCritical", CLuaAttack::setCritical);
-};
+}
 
 std::ostream& operator<<(std::ostream& os, const CLuaAttack& attack)
 {

@@ -70,37 +70,42 @@ class CAttack
 public:
     CAttack(CBattleEntity* attacker, CBattleEntity* defender, PHYSICAL_ATTACK_TYPE type, PHYSICAL_ATTACK_DIRECTION direction, CAttackRound* attackRound);
 
-    uint16                    GetAnimationID();                     // Returns the animation ID.
-    PHYSICAL_ATTACK_TYPE      GetAttackType();                      // Returns the attack type (Double, Triple, Zanshin ect).
-    PHYSICAL_ATTACK_DIRECTION GetAttackDirection();                 // Returns the attack direction.
-    uint8                     GetWeaponSlot();                      // Returns the attacking slot.
-    uint8                     GetHitRate();                         // Returns the hitrate for this swing.
-    int32                     GetDamage() const;                    // Returns the damage for this attack.
-    void                      SetDamage(int32);                     // Sets the damage for this attack.
-    bool                      IsCritical() const;                   // Returns the isCritical flag.
-    void                      SetCritical(bool);                    // Sets the isCritical flag;
-    bool                      IsFirstSwing() const;                 // Returns the isFirstSwing flag.
-    void                      SetAsFirstSwing(bool isFirst = true); // Sets this attack as the first swing.
-    float                     GetDamageRatio() const;               // Gets the damage ratio.
-    void                      SetGuarded(bool);                     // Sets the isGuarded flag.
-    bool                      IsGuarded();                          // Sets the isGuarded flag. Also alters the damage ratio accordingly.
-    bool                      IsEvaded() const;                     // Gets the evaded flag.
-    void                      SetEvaded(bool value);                // Sets the evaded flag.
-    bool                      IsBlocked() const;                    // Returns the blocked flag.
+    CBattleEntity*            GetAttacker();
+    CBattleEntity*            GetVictim();
+    CBattleEntity*            GetTAEntity();
+    bool                      IsH2H();
+    uint16                    GetAnimationID();                         // Returns the animation ID.
+    PHYSICAL_ATTACK_TYPE      GetAttackType() const;                    // Returns the attack type (Double, Triple, Zanshin ect).
+    void                      SetAttackType(PHYSICAL_ATTACK_TYPE type); // Sets the attack type.
+    PHYSICAL_ATTACK_DIRECTION GetAttackDirection() const;               // Returns the attack direction.
+    uint8                     GetWeaponSlot();                          // Returns the attacking slot.
+    uint8                     GetHitRate();                             // Returns the hitrate for this swing.
+    int32                     GetDamage() const;                        // Returns the damage for this attack.
+    void                      SetDamage(int32);                         // Sets the damage for this attack.
+    bool                      IsCritical() const;                       // Returns the isCritical flag.
+    void                      SetCritical(bool);                        // Sets the isCritical flag;
+    bool                      IsFirstSwing() const;                     // Returns the isFirstSwing flag.
+    void                      SetAsFirstSwing(bool isFirst = true);     // Sets this attack as the first swing.
+    float                     GetDamageRatio() const;                   // Gets the damage ratio.
+    void                      SetGuarded(bool);                         // Sets the isGuarded flag.
+    bool                      IsGuarded();                              // Sets the isGuarded flag. Also alters the damage ratio accordingly.
+    bool                      IsEvaded() const;                         // Gets the evaded flag.
+    void                      SetEvaded(bool value);                    // Sets the evaded flag.
+    bool                      IsBlocked() const;                        // Returns the blocked flag.
     bool                      IsParried() const;
     bool                      CheckParried();
     bool                      IsAnticipated() const;
     bool                      IsDeflected() const;
     bool                      CheckAnticipated();
-    bool                      CheckHadSneakAttack() const;
-    bool                      CheckHadTrickAttack() const;
+    bool                      IsSA() const;
+    void                      SetSA(bool);
+    bool                      IsTA() const;
+    void                      SetTA(bool);
     bool                      IsCountered() const;
     bool                      CheckCounter();
     bool                      IsCovered() const; // Returns the covered flag.
     bool                      CheckCover();      // Sets the covered flag and returns it.
     void                      ProcessDamage();   // Processes the damage for this swing.
-
-    void SetAttackType(PHYSICAL_ATTACK_TYPE type); // Sets the attack type.
 
 private:
     CBattleEntity*            m_attacker;            // The attacker.

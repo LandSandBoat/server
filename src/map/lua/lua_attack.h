@@ -23,6 +23,7 @@
 
 #include "common/cbasetypes.h"
 #include "luautils.h"
+#include "utils/attackutils.h"
 
 class CAttack;
 
@@ -38,8 +39,28 @@ public:
         return m_PLuaAttack;
     }
 
-    bool getCritical() const;
+    CBattleEntity* getAttacker();
+    CBattleEntity* getVictim();
+
+    CBattleEntity* getTAEntity();
+    bool           isH2H();
+    uint8          getWeaponSlot();
+    bool           isFirstSwing() const;
+    
+
+    bool isSA() const;
+    void setSA(bool val);
+
+    bool isTA() const;
+    void setTA(bool val);
+
+    float getDamageRatio() const;
+
+    bool isCritical() const;
     void setCritical(bool critical);
+
+    PHYSICAL_ATTACK_TYPE getAttackType() const;
+    void                 setAttackType(PHYSICAL_ATTACK_TYPE type);
 
     friend std::ostream& operator<<(std::ostream& out, const CLuaAttack& action);
 

@@ -1170,13 +1170,13 @@ namespace battleutils
                         float sneakAttackTrickAttackBonus = 0.f;
 
                         // BG wiki claims 10x bonus for SA
-                        if (attack.CheckHadSneakAttack())
+                        if (attack.IsSA())
                         {
                             sneakAttackTrickAttackBonus += 10.f;
                         }
 
                         // BG wiki claims 10x bonus for TA
-                        if (attack.CheckHadTrickAttack())
+                        if (attack.IsTA())
                         {
                             sneakAttackTrickAttackBonus += 10.f;
                         }
