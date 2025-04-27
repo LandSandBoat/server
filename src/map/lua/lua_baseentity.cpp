@@ -14402,7 +14402,15 @@ uint16 CLuaBaseEntity::getStat(uint16 statId, sol::variadic_args va)
                 }
                 else
                 {
-                    value = PEntity->RATT(SKILL_MARKSMANSHIP); // TODO: does this edge case exist? will mobs or trusts hit this?
+                    PWeapon = dynamic_cast<CItemWeapon*>(PEntity->m_Weapons[SLOTTYPE::SLOT_AMMO]);
+                    if (PWeapon)
+                    {
+                        value = PEntity->RATT(PWeapon->getSkillType());
+                    }
+                    else
+                    {
+                        value = PEntity->RATT(SKILL_MARKSMANSHIP); // TODO: does this edge case exist? will mobs or trusts hit this?
+                    }
                 }
             }
         }
