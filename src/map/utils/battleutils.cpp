@@ -6405,6 +6405,15 @@ namespace battleutils
 
         recast = std::max<int32>(recast, static_cast<int32>(base * 0.2f));
 
+        if (PSpell->getSkillType() == SKILLTYPE::SKILL_ELEMENTAL_MAGIC)
+        {
+            recast = static_cast<int32>(recast * ((100.0f + PEntity->getMod(Mod::ELEMENTAL_MAGIC_RECAST)) / 100.0f));
+        }
+        if (PSpell->getSkillType() == SKILLTYPE::SKILL_BLUE_MAGIC)
+        {
+            recast = static_cast<int32>(recast * ((100.0f + PEntity->getMod(Mod::BLUE_MAGIC_RECAST)) / 100.0f));
+        }
+
         // Light/Dark arts recast bonus/penalties applies after other bonuses
         if (PSpell->getSpellGroup() == SPELLGROUP_BLACK)
         {

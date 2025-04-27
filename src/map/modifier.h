@@ -401,7 +401,7 @@ enum class Mod
     KICK_ATTACK_RATE    = 292,   // Percent chance to kick
     PERFECT_COUNTER_ATT = 428,   // TODO: Raises weapon damage by 20 when countering while under the Perfect Counter effect. This also affects Weapon Rank (though
                                  // not if fighting barehanded).
-    COUNTER_DAMAGE       = 1047, // TODO: Increases Damage from Counter Attacks (Percent)
+    COUNTER_DAMAGE       = 1047, // Increases Damage from Counter Attacks (Percent)
     FOOTWORK_ATT_BONUS   = 429,  // Raises the attack bonus of Footwork. (Tantra Gaiters +2 raise 25/256 to 38/256)
     COUNTERSTANCE_EFFECT = 543,  // Counterstance effect in percents
     DODGE_EFFECT         = 552,  // Dodge effect in percents
@@ -420,8 +420,9 @@ enum class Mod
     REGEN_BONUS      = 989, // Increases the amount of HP restored by Regen
 
     // Black Mage
-    CLEAR_MIND  = 295, // Used in conjunction with HEALMP to increase amount between tics
-    CONSERVE_MP = 296, // Percent chance
+    CLEAR_MIND             = 295,  // Used in conjunction with HEALMP to increase amount between tics
+    CONSERVE_MP            = 296,  // Percent chance
+    ELEMENTAL_MAGIC_RECAST = 1144, // Recast time for elemental magic spells (percent, usually negative)
 
     // Red Mage
     BLINK             = 299, // Tracks blink shadows
@@ -610,6 +611,7 @@ enum class Mod
     BLUE_MAGIC_EFFECT       = 1059, // TODO: Bonus to Attribute Value of spell (percent)
     ENHANCES_BURST_AFFINITY = 1139, // Increases WSC bonus on spells cast with Burst Affinity (percent)
     ENHANCES_CHAIN_AFFINITY = 1140, // TODO: Increases WSC bonus on spells cast with Chain Affinity (base damage +)
+    BLUE_MAGIC_RECAST       = 1145, // Recast time for blue magic spells (percent, usually negative)
 
     // Corsair
     EXP_BONUS         = 382,  //
@@ -1077,7 +1079,7 @@ enum class Mod
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs: 544 to 551, both included.
-    // SPARE IDs: 1144 and onward
+    // SPARE IDs: 1146 and onward, but skip 1337 (AUGMENTS_ABSORB)
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

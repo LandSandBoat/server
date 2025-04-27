@@ -37,7 +37,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.chr_wsc     = 0.0
 
     -- Handle damage.
-    local damage = xi.spells.blue.useBreathSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
     if caster:isBehind(target) then
         damage = math.floor(damage * 1.25)
     end
