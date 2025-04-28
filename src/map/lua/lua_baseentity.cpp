@@ -14409,6 +14409,7 @@ uint16 CLuaBaseEntity::getStat(uint16 statId, sol::variadic_args va)
                     }
                     else
                     {
+                        ShowError("CLuaBaseEntity::getStat(): Ranged attack with no ranged weapon or ammo, defaulting to marksmanship");
                         value = PEntity->RATT(SKILL_MARKSMANSHIP); // TODO: does this edge case exist? will mobs or trusts hit this?
                     }
                 }
