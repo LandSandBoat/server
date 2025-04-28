@@ -24,10 +24,16 @@ entity.onMobSpawn = function(mob)
     -- base damage scaled down from Bahamut v2 (wyrmking decends) value based on level difference
     -- base damage of 136 = (lvl 83 + 2) + 51
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 51)
-    -- Note baha has a job trait with fast cast of 15% so 75% total
+    -- has a job trait with fast cast of 15% so 75% total
     mob:setMod(xi.mod.UFASTCAST, 60)
     -- ATT scaled down from Bahamut v2 (wyrmking decends) value based on level difference
-    mob:setMod(xi.mod.ATT, 425)
+    -- 344 base + 94 (STR bonus) = 438 total ATT
+    mob:setMod(xi.mod.ATT, 344)
+    -- INT scaled down from Bahamut v2 (wyrmking decends) value based on level difference
+    -- 88 base + 18 (boost) = 106 INT
+    mob:setMod(xi.mod.INT, 18)
+    -- MAB scaled down from Bahamut v2 (wyrmking decends) value based on level difference
+    mob:setMod(xi.mod.MATT, 11)
     -- should use mob skill every ~60 sec (without TP feed)
     mob:addMod(xi.mod.REGAIN, 50)
     mob:addMod(xi.mod.REGEN, 50)
@@ -51,7 +57,6 @@ local megaflareHPP =
 entity.onMobFight = function(mob, target)
     local megaFlareQueue = mob:getLocalVar('MegaFlareQueue')
     local megaFlareTrigger = mob:getLocalVar('MegaFlareTrigger')
-    -- local megaFlareUses = mob:getLocalVar('MegaFlareUses')
     local flareWait = mob:getLocalVar('FlareWait')
     local gigaFlare = mob:getLocalVar('GigaFlare')
     local tauntShown = mob:getLocalVar('tauntShown')

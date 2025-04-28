@@ -5937,11 +5937,11 @@ INSERT INTO `mob_spawn_points` VALUES (16896155,'Unstable_Cluster','Unstable Clu
 INSERT INTO `mob_spawn_points` VALUES (16896156,'Bahamut','Bahamut',17,-706.661,0.405,820.898,3);
 
 -- The Wyrmking Descends
-INSERT INTO `mob_spawn_points` VALUES (16896157,'Bahamut','Bahamut',17,-704.021,0.168,822.955,229);
-INSERT INTO `mob_spawn_points` VALUES (16896158,'Ouryu','Ouryu',18,-694.789,0.099,825.472,255);
-INSERT INTO `mob_spawn_points` VALUES (16896159,'Tiamat','Tiamat',19,-696.976,0.151,821.501,208);
-INSERT INTO `mob_spawn_points` VALUES (16896160,'Jormungand','Jormungand',20,-704.433,0.464,798.733,150);
-INSERT INTO `mob_spawn_points` VALUES (16896161,'Vrtra','Vrtra',21,-694.231,0.024,830.624,57);
+INSERT INTO `mob_spawn_points` VALUES (16896157,'Bahamutv2','Bahamut',28,-704.021,0.168,822.955,229);
+INSERT INTO `mob_spawn_points` VALUES (16896158,'Ouryu_Wyrmking','Ouryu',18,-694.789,0.099,825.472,255);
+INSERT INTO `mob_spawn_points` VALUES (16896159,'Tiamat_Wyrmking','Tiamat',19,-696.976,0.151,821.501,208);
+INSERT INTO `mob_spawn_points` VALUES (16896160,'Jormungand_Wyrmking','Jormungand',20,-704.433,0.464,798.733,150);
+INSERT INTO `mob_spawn_points` VALUES (16896161,'Vrtra_Wyrmking','Vrtra',21,-694.231,0.024,830.624,57);
 INSERT INTO `mob_spawn_points` VALUES (16896162,'Ziryu','Ziryu',22,1.000,1.000,1.000,0);
 INSERT INTO `mob_spawn_points` VALUES (16896163,'Ziryu','Ziryu',22,1.000,1.000,1.000,0);
 INSERT INTO `mob_spawn_points` VALUES (16896164,'Ziryu','Ziryu',22,1.000,1.000,1.000,0);

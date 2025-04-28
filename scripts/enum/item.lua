@@ -1275,6 +1275,7 @@ xi.item =
     SUMMONERS_BRACERS_M1                = 2105,
     SUMMONERS_SPATS_M1                  = 2106,
     SUMMONERS_PIGACHES_M1               = 2107,
+    MONARCHS_ORB                        = 2108,
     CATOBLEPAS_HIDE                     = 2123,
     SPINDLE                             = 2128,
     TANNING_VAT                         = 2129,

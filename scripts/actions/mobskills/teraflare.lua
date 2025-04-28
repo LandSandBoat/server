@@ -1,15 +1,16 @@
 -----------------------------------
---  Megaflare
+--  Teraflare
 --  Family: Bahamut
---  Description: Deals heavy Fire damage to enemies within a fan-shaped area.
+--  Description: Deals massive Fire damage to enemies within a fan-shaped area.
 --  Type: Magical
 --  Utsusemi/Blink absorb: Wipes shadows
---  Notes: Used by Bahamut when at 90%, 80%, 70%, 60%, 50%, 40%, 30%, 20% HP
---  Notes: Used by BahamutV2 when at 90%, 80%, 70% HP
---  Notes: No evidence that either Bahamut can use it at will
---  Notes: See (Bv1 https://youtu.be/da2ox_Wu374?t=5002 and Bv2 https://youtu.be/5uoWLnYtQGM)
+--  Range:
+--  Notes: Used by BahamutV2 when at 10% HP
+--  Notes: BahamutV2 can use multiple times when under 10%
+--  Notes: (see https://youtu.be/5uoWLnYtQGM?t=1600 and https://youtu.be/YHBfqLpGsp0?t=1491 / https://youtu.be/YHBfqLpGsp0?t=1556)
 -----------------------------------
----@type TMobSkill
+require("scripts/globals/mobskills")
+-----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -17,18 +18,18 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    -- Mob logic. TODO: Remove from here
-    mob:setLocalVar('MegaFlareQueue', mob:getLocalVar('MegaFlareQueue') - 1)
-    mob:setLocalVar('FlareWait', 0) -- reset the variables for Megaflare.
+    mob:setLocalVar('FlareWait', 0)
     mob:setLocalVar('tauntShown', 0)
-    mob:setMobAbilityEnabled(true) -- re-enable the other actions on success
+    -- Track the last time used Teraflare so can repeat every 20 seconds
+    mob:setLocalVar('lastTeraFlareTime', os.time())
+
+    mob:setMobAbilityEnabled(true) -- enable the spells/other mobskills again
 
     if bit.band(mob:getBehavior(), xi.behavior.NO_TURN) == 0 then -- re-enable noturn
         mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
     end
 
-    -- Damage calculation
-    local damage = mob:getMainLvl() * 10
+    local damage = mob:getMainLvl() * 20
 
     damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
     damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
