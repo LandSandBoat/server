@@ -1090,7 +1090,6 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 544 to 551, both included.
     // SPARE IDs: 1148 and onward, but skip 1337 (AUGMENTS_ABSORB)
 };
 
