@@ -458,7 +458,7 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     local skillTypeMultiplier         = xi.spells.damage.calculateSkillTypeMultiplier(xi.skill.BLUE_MAGIC)
     local ninFutaeBonus               = xi.spells.damage.calculateNinFutaeBonus(caster, xi.skill.BLUE_MAGIC)
     local ninjutsuMultiplier          = xi.spells.damage.calculateNinjutsuMultiplier(caster, target, xi.skill.BLUE_MAGIC)
-    local scarletDeliriumMultiplier   = xi.spells.damage.calculateScarletDeliriumMultiplier(caster)
+    local scarletDeliriumMultiplier   = xi.combat.damage.scarletDeliriumMultiplier(caster)
     local areaOfEffectResistance      = xi.spells.damage.calculateAreaOfEffectResistance(target, spell)
 
     dmg = math.floor(dmg * correlationMultiplier)

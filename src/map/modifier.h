@@ -381,6 +381,18 @@ enum class Mod
     MIJIN_RERAISE = 258, // Augments Mijin Gakure
     DUAL_WIELD    = 259, // Percent reduction in dual wield delay.
 
+    // fTP modifiers
+    FIRE_FTP_BONUS    = 544,  // Gives bonus fTP when weaponskill has a Fire property. (Elemental beltes and gorgets) /256
+    ICE_FTP_BONUS     = 545,  // Gives bonus fTP when weaponskill has a Ice property. (Elemental beltes and gorgets) /256
+    WIND_FTP_BONUS    = 546,  // Gives bonus fTP when weaponskill has a Wind property. (Elemental beltes and gorgets) /256
+    EARTH_FTP_BONUS   = 547,  // Gives bonus fTP when weaponskill has a Earth property. (Elemental beltes and gorgets) /256
+    THUNDER_FTP_BONUS = 548,  // Gives bonus fTP when weaponskill has a Thunder property. (Elemental beltes and gorgets) /256
+    WATER_FTP_BONUS   = 549,  // Gives bonus fTP when weaponskill has a Water property. (Elemental beltes and gorgets) /256
+    LIGHT_FTP_BONUS   = 550,  // Gives bonus fTP when weaponskill has a Light property. (Elemental beltes and gorgets) /256
+    DARK_FTP_BONUS    = 551,  // Gives bonus fTP when weaponskill has a Dark property. (Elemental beltes and gorgets) /256
+    ANY_FTP_BONUS     = 1144, // Gives bonus fTP when weaponskill has a (any) property. (Fotia Gorget, Fotia Belt) /256
+    DAY_FTP_BONUS     = 1145, // Gives bonus fTP when weaponskill has a property that matches current day. (Mekira Oto, Gavialis helm, etc...) /256
+
     // Warrior
     DOUBLE_ATTACK       = 288,  // Percent chance to proc
     DOUBLE_ATTACK_DMG   = 1038, // Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
@@ -422,7 +434,7 @@ enum class Mod
     // Black Mage
     CLEAR_MIND             = 295,  // Used in conjunction with HEALMP to increase amount between tics
     CONSERVE_MP            = 296,  // Percent chance
-    ELEMENTAL_MAGIC_RECAST = 1144, // Recast time for elemental magic spells (percent, usually negative)
+    ELEMENTAL_MAGIC_RECAST = 1146, // Recast time for elemental magic spells (percent, usually negative)
 
     // Red Mage
     BLINK             = 299, // Tracks blink shadows
@@ -611,7 +623,7 @@ enum class Mod
     BLUE_MAGIC_EFFECT       = 1059, // TODO: Bonus to Attribute Value of spell (percent)
     ENHANCES_BURST_AFFINITY = 1139, // Increases WSC bonus on spells cast with Burst Affinity (percent)
     ENHANCES_CHAIN_AFFINITY = 1140, // TODO: Increases WSC bonus on spells cast with Chain Affinity (base damage +)
-    BLUE_MAGIC_RECAST       = 1145, // Recast time for blue magic spells (percent, usually negative)
+    BLUE_MAGIC_RECAST       = 1147, // Recast time for blue magic spells (percent, usually negative)
 
     // Corsair
     EXP_BONUS         = 382,  //
@@ -1079,7 +1091,7 @@ enum class Mod
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs: 544 to 551, both included.
-    // SPARE IDs: 1146 and onward, but skip 1337 (AUGMENTS_ABSORB)
+    // SPARE IDs: 1148 and onward, but skip 1337 (AUGMENTS_ABSORB)
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

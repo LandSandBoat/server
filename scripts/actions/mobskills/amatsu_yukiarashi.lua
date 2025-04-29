@@ -28,7 +28,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
 
     if info.hitslanded > 0 then
-        target:addStatusEffect(xi.effect.BIND, power, 0, duration)
+        target:addStatusEffect(xi.effect.BLINDNESS, power, 0, duration)
     end
 
     return dmg

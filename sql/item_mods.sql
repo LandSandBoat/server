@@ -1425,14 +1425,15 @@ INSERT INTO `item_mods` VALUES (10500,9,4);   -- DEX: 4
 INSERT INTO `item_mods` VALUES (10500,73,10); -- STORETP: 10
 
 -- Athoss Gloves
-INSERT INTO `item_mods` VALUES (10501,1,30); -- DEF: 30
-INSERT INTO `item_mods` VALUES (10501,8,7);  -- STR: 7
-INSERT INTO `item_mods` VALUES (10501,9,7);  -- DEX: 7
-INSERT INTO `item_mods` VALUES (10501,10,7); -- VIT: 7
-INSERT INTO `item_mods` VALUES (10501,11,7); -- AGI: 7
-INSERT INTO `item_mods` VALUES (10501,12,7); -- INT: 7
-INSERT INTO `item_mods` VALUES (10501,13,7); -- MND: 7
-INSERT INTO `item_mods` VALUES (10501,14,7); -- CHR: 7
+INSERT INTO `item_mods` VALUES (10501,1,30);    -- DEF: 30
+INSERT INTO `item_mods` VALUES (10501,8,7);     -- STR: 7
+INSERT INTO `item_mods` VALUES (10501,9,7);     -- DEX: 7
+INSERT INTO `item_mods` VALUES (10501,10,7);    -- VIT: 7
+INSERT INTO `item_mods` VALUES (10501,11,7);    -- AGI: 7
+INSERT INTO `item_mods` VALUES (10501,12,7);    -- INT: 7
+INSERT INTO `item_mods` VALUES (10501,13,7);    -- MND: 7
+INSERT INTO `item_mods` VALUES (10501,14,7);    -- CHR: 7
+INSERT INTO `item_mods` VALUES (10501,1145,15); -- DAY_FTP_BONUS: 15
 
 -- Rubeus Gloves
 INSERT INTO `item_mods` VALUES (10502,1,30);   -- DEF: 30
@@ -3661,9 +3662,10 @@ INSERT INTO `item_mods` VALUES (10865,28,5);  -- MATT: 5
 INSERT INTO `item_mods` VALUES (10865,30,5);  -- MACC: 5
 
 -- Mekira-Oto
-INSERT INTO `item_mods` VALUES (10866,1,40);  -- DEF: 40
-INSERT INTO `item_mods` VALUES (10866,8,15);  -- STR: 15
-INSERT INTO `item_mods` VALUES (10866,23,25); -- ATT: 25
+INSERT INTO `item_mods` VALUES (10866,1,40);    -- DEF: 40
+INSERT INTO `item_mods` VALUES (10866,8,15);    -- STR: 15
+INSERT INTO `item_mods` VALUES (10866,23,25);   -- ATT: 25
+INSERT INTO `item_mods` VALUES (10866,1145,25); -- DAY_FTP_BONUS: 25
 
 -- Ocelomeh Headpiece +1
 INSERT INTO `item_mods` VALUES (10867,1,32);    -- DEF: 32
@@ -3680,9 +3682,10 @@ INSERT INTO `item_mods` VALUES (10868,28,6);  -- MATT: 6
 INSERT INTO `item_mods` VALUES (10868,30,6);  -- MACC: 6
 
 -- Mekira-Oto +1
-INSERT INTO `item_mods` VALUES (10869,1,41);  -- DEF: 41
-INSERT INTO `item_mods` VALUES (10869,8,16);  -- STR: 16
-INSERT INTO `item_mods` VALUES (10869,23,30); -- ATT: 30
+INSERT INTO `item_mods` VALUES (10869,1,41);    -- DEF: 41
+INSERT INTO `item_mods` VALUES (10869,8,16);    -- STR: 16
+INSERT INTO `item_mods` VALUES (10869,23,30);   -- ATT: 30
+INSERT INTO `item_mods` VALUES (10869,1145,25); -- DAY_FTP_BONUS: 25
 
 -- Sceamol Band
 INSERT INTO `item_mods` VALUES (10870,23,14);    -- ATT: 14
@@ -8643,28 +8646,36 @@ INSERT INTO `item_mods` VALUES (11754,13,5);  -- MND: 5
 INSERT INTO `item_mods` VALUES (11754,27,-3); -- ENMITY: -3
 
 -- Flame Belt
-INSERT INTO `item_mods` VALUES (11755,1,7); -- DEF: 7
+INSERT INTO `item_mods` VALUES (11755,1,7);    -- DEF: 7
+INSERT INTO `item_mods` VALUES (11755,544,25); -- FIRE_FTP_BONUS: 25
 
 -- Snow Belt
-INSERT INTO `item_mods` VALUES (11756,1,7); -- DEF: 7
+INSERT INTO `item_mods` VALUES (11756,1,7);    -- DEF: 7
+INSERT INTO `item_mods` VALUES (11756,545,25); -- ICE_FTP_BONUS: 25
 
 -- Breeze Belt
-INSERT INTO `item_mods` VALUES (11757,1,7); -- DEF: 7
+INSERT INTO `item_mods` VALUES (11757,1,7);    -- DEF: 7
+INSERT INTO `item_mods` VALUES (11757,546,25); -- WIND_FTP_BONUS: 25
 
 -- Soil Belt
-INSERT INTO `item_mods` VALUES (11758,1,7); -- DEF: 7
+INSERT INTO `item_mods` VALUES (11758,1,7);    -- DEF: 7
+INSERT INTO `item_mods` VALUES (11758,547,25); -- EARTH_FTP_BONUS: 25
 
 -- Thunder Belt
-INSERT INTO `item_mods` VALUES (11759,1,7); -- DEF: 7
+INSERT INTO `item_mods` VALUES (11759,1,7);    -- DEF: 7
+INSERT INTO `item_mods` VALUES (11759,548,25); -- THUNDER_FTP_BONUS: 25
 
 -- Aqua Belt
-INSERT INTO `item_mods` VALUES (11760,1,7); -- DEF: 7
+INSERT INTO `item_mods` VALUES (11760,1,7);    -- DEF: 7
+INSERT INTO `item_mods` VALUES (11760,549,25); -- WATER_FTP_BONUS: 25
 
 -- Light Belt
-INSERT INTO `item_mods` VALUES (11761,1,7); -- DEF: 7
+INSERT INTO `item_mods` VALUES (11761,1,7);    -- DEF: 7
+INSERT INTO `item_mods` VALUES (11761,550,25); -- LIGHT_FTP_BONUS: 25
 
 -- Shadow Belt
-INSERT INTO `item_mods` VALUES (11762,1,7); -- DEF: 7
+INSERT INTO `item_mods` VALUES (11762,1,7);    -- DEF: 7
+INSERT INTO `item_mods` VALUES (11762,551,25); -- DARK_FTP_BONUS: 25
 
 -- Beir Belt
 INSERT INTO `item_mods` VALUES (11763,1,9);  -- DEF: 9
@@ -27778,6 +27789,30 @@ INSERT INTO `item_mods` VALUES (15494,6,1);  -- MPP: 1
 INSERT INTO `item_mods` VALUES (15494,68,3); -- EVA: 3
 INSERT INTO `item_mods` VALUES (15494,71,1); -- MPHEAL: 1
 
+-- Flame Gorget
+INSERT INTO `item_mods` VALUES (15495,544,25); -- FIRE_FTP_BONUS: 25
+
+-- Snow Gorget
+INSERT INTO `item_mods` VALUES (15496,545,25); -- ICE_FTP_BONUS: 25
+
+-- Breeze Gorget
+INSERT INTO `item_mods` VALUES (15497,546,25); -- WIND_FTP_BONUS: 25
+
+-- Soil Gorget
+INSERT INTO `item_mods` VALUES (15498,547,25); -- EARTH_FTP_BONUS: 25
+
+-- Thunder Gorget
+INSERT INTO `item_mods` VALUES (15499,548,25); -- THUNDER_FTP_BONUS: 25
+
+-- Aqua Gorget
+INSERT INTO `item_mods` VALUES (15500,549,25); -- WATER_FTP_BONUS: 25
+
+-- Light Gorget
+INSERT INTO `item_mods` VALUES (15501,550,25); -- LIGHT_FTP_BONUS: 25
+
+-- Shadow Gorget
+INSERT INTO `item_mods` VALUES (15502,551,25); -- DARK_FTP_BONUS: 25
+
 -- Van Pendant
 INSERT INTO `item_mods` VALUES (15503,1,3);    -- DEF: 3
 INSERT INTO `item_mods` VALUES (15503,166,-1); -- ENEMYCRITRATE: -1
@@ -37975,6 +38010,9 @@ INSERT INTO `item_mods` VALUES (18596,29,5); -- MDEF: 5
 
 -- Catalyst
 INSERT INTO `item_mods` VALUES (18597,487,5); -- MAG_BURST_BONUS: 5
+
+-- Prester
+INSERT INTO `item_mods` VALUES (18598,546,25); -- WIND_FTP_BONUS: 25
 
 -- Pestle
 INSERT INTO `item_mods` VALUES (18599,5,10);   -- MP: 10
@@ -63321,6 +63359,7 @@ INSERT INTO `item_mods` VALUES (26702,29,2);    -- MDEF: 2
 INSERT INTO `item_mods` VALUES (26702,31,53);   -- MEVA: 53
 INSERT INTO `item_mods` VALUES (26702,68,44);   -- EVA: 44
 INSERT INTO `item_mods` VALUES (26702,384,800); -- HASTE_GEAR: 800
+INSERT INTO `item_mods` VALUES (26702,1145,30); -- DAY_FTP_BONUS: 30
 
 -- Imperial Wing Hairpin +1
 INSERT INTO `item_mods` VALUES (26710,9,27);  -- DEX: 27
@@ -73089,7 +73128,8 @@ INSERT INTO `item_mods` VALUES (27507,28,10); -- MATT: 10
 INSERT INTO `item_mods` VALUES (27507,296,2); -- CONSERVE_MP: 2
 
 -- Fotia Gorget
-INSERT INTO `item_mods` VALUES (27510,949,1); -- WS_NO_DEPLETE: 1
+INSERT INTO `item_mods` VALUES (27510,949,1);   -- WS_NO_DEPLETE: 1
+INSERT INTO `item_mods` VALUES (27510,1144,25); -- ANY_FTP_BONUS: 25
 
 -- Satlada Necklace
 INSERT INTO `item_mods` VALUES (27516,12,6);   -- INT: 6
@@ -83293,8 +83333,9 @@ INSERT INTO `item_mods` VALUES (28419,537,1); -- FORCE_LIGHT_DWBONUS: 1
 INSERT INTO `item_mods` VALUES (28419,538,1); -- FORCE_DARK_DWBONUS: 1
 
 -- Fotia Belt
-INSERT INTO `item_mods` VALUES (28420,1,7);   -- DEF: 7
-INSERT INTO `item_mods` VALUES (28420,949,1); -- WS_NO_DEPLETE: 1
+INSERT INTO `item_mods` VALUES (28420,1,7);     -- DEF: 7
+INSERT INTO `item_mods` VALUES (28420,949,1);   -- WS_NO_DEPLETE: 1
+INSERT INTO `item_mods` VALUES (28420,1144,25); -- ANY_FTP_BONUS: 25
 
 -- Rumination Sash
 INSERT INTO `item_mods` VALUES (28421,13,4);   -- MND: 4

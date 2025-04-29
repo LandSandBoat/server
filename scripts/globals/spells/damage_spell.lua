@@ -810,19 +810,6 @@ xi.spells.damage.calculateUndeadDivinePenalty = function(target, skillType)
     return undeadDivinePenalty
 end
 
-xi.spells.damage.calculateScarletDeliriumMultiplier = function(caster)
-    local scarletDeliriumMultiplier = 1
-
-    -- Scarlet delirium are 2 different status effects. SCARLET_DELIRIUM_1 is the one that boosts power.
-    if caster:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
-        local power = caster:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1):getPower()
-
-        scarletDeliriumMultiplier = 1 + power / 100
-    end
-
-    return scarletDeliriumMultiplier
-end
-
 xi.spells.damage.calculateHelixMeritMultiplier = function(caster, spellId)
     local helixMeritMultiplier = 1
 
@@ -1089,7 +1076,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local ninFutaeBonus             = xi.spells.damage.calculateNinFutaeBonus(caster, skillType)
     local ninjutsuMultiplier        = xi.spells.damage.calculateNinjutsuMultiplier(caster, target, skillType)
     local undeadDivinePenalty       = xi.spells.damage.calculateUndeadDivinePenalty(target, skillType)
-    local scarletDeliriumMultiplier = xi.spells.damage.calculateScarletDeliriumMultiplier(caster)
+    local scarletDeliriumMultiplier = xi.combat.damage.scarletDeliriumMultiplier(caster)
     local helixMeritMultiplier      = xi.spells.damage.calculateHelixMeritMultiplier(caster, spellId)
     local areaOfEffectResistance    = xi.spells.damage.calculateAreaOfEffectResistance(target, spell)
 

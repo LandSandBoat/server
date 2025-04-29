@@ -158,7 +158,7 @@ quest.sections =
         {
             ['Mhebi_Juhbily'] = quest:progressEvent(133),
 
-            ['Vah_Keshura'] =  quest:event(132),
+            ['Vah_Keshura'] = quest:event(132),
 
             onEventFinish =
             {

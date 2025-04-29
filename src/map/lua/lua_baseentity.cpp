@@ -14643,26 +14643,6 @@ int32 CLuaBaseEntity::physicalDmgTaken(double damage, sol::variadic_args va)
 }
 
 /************************************************************************
- *  Function: magicDmgTaken()
- *  Purpose : Returns the value of Magic Damage taken after calculation
- *  Example : dmg = target:magicDmgTaken(dmg)
- *  Notes   : Passes argument to MagicDmgTaken member of battleutils
- ************************************************************************/
-
-int32 CLuaBaseEntity::magicDmgTaken(double damage, sol::variadic_args va)
-{
-    if (m_PBaseEntity->objtype == TYPE_NPC)
-    {
-        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
-        return 0;
-    }
-
-    ELEMENT elementType = va[0].is<uint32>() ? va[0].as<ELEMENT>() : ELEMENT_NONE;
-
-    return battleutils::MagicDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), elementType);
-}
-
-/************************************************************************
  *  Function: rangedDmgTaken()
  *  Purpose : Returns the value of Ranged Damage taken after calculation
  *  Example : dmg = target:rangedDmgTaken(dmg)
@@ -19635,7 +19615,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("isSpellAoE", CLuaBaseEntity::isSpellAoE);
 
     SOL_REGISTER("physicalDmgTaken", CLuaBaseEntity::physicalDmgTaken);
-    SOL_REGISTER("magicDmgTaken", CLuaBaseEntity::magicDmgTaken);
     SOL_REGISTER("rangedDmgTaken", CLuaBaseEntity::rangedDmgTaken);
     SOL_REGISTER("breathDmgTaken", CLuaBaseEntity::breathDmgTaken);
     SOL_REGISTER("handleAfflatusMiseryDamage", CLuaBaseEntity::handleAfflatusMiseryDamage);
