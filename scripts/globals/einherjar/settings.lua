@@ -19,7 +19,7 @@ xi.einherjar.settings =
     -- How long before a player can reenter Einherjar, in hours. Reentry with ROV KI is fixed at 1 hour.
     EINHERJAR_REENTRY_TIME = xi.settings.main.EINHERJAR_REENTRY_TIME or 20,
 
-    -- How long before all players are expelled from the chamber when wiped
+    -- How long before all players are expelled from the chamber when wiped, in minutes.
     EINHERJAR_KO_EXPEL_TIME = xi.settings.main.EINHERJAR_KO_EXPEL_TIME or 3,
 
     -- How long a chamber reservation is valid for, in minutes.
@@ -28,12 +28,13 @@ xi.einherjar.settings =
     -- Multiplier for awarded Therion Ichor.
     EINHERJAR_ICHOR_RATE = xi.settings.main.EINHERJAR_ICHOR_RATE or 1.0,
 
-    -- How long until a reservation is released if the player does not enter, in minutes.
+    -- How long until a reservation is released if the leader does not enter, in minutes.
+    -- This also defines how long before a chamber is released once all players have left
     EINHERJAR_RESERVATION_TIMEOUT = xi.settings.main.EINHERJAR_RESERVATION_TIMEOUT or 3,
 
     -- How many players can enter a chamber before it is considered full
     EINHERJAR_MAX_PLAYERS_PER_CHAMBER = xi.settings.main.EINHERJAR_MAX_PLAYERS_PER_CHAMBER or 36,
 
-    -- How long before the chamber kicks everyone out after the chest has been opened.
+    -- How long before the chamber kicks everyone out after the chest has been opened, in minutes.
     EINHERJAR_CLEAR_EXTRA_TIME = xi.settings.main.EINHERJAR_CLEAR_EXTRA_TIME or 5,
 }

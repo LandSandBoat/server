@@ -153,6 +153,16 @@ void MapServer::loadConsoleCommands()
     {
         mapStatistics_->print();
     });
+
+    consoleService_->registerCommand("backtrace", "Print backtrace",
+    [&](std::vector<std::string>& inputs)
+    {
+        const auto backtrace = logging::GetBacktrace();
+        for (const auto& line : backtrace)
+        {
+            fmt::print("{}\n", line);
+        }
+    });
     // clang-format on
 }
 

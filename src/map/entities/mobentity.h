@@ -238,10 +238,11 @@ public:
     position_t m_SpawnPoint; // spawn point of mob
 
     uint8  m_Element;
-    uint8  m_HiPCLvl;     // Highest Level of Player Character that hit the Monster
-    uint8  m_HiPartySize; // Largest party size that hit the Monster
-    int16  m_THLvl;       // Highest Level of Treasure Hunter that apply to drops
-    bool   m_ItemStolen;  // if true, mob has already been robbed. reset on respawn. also used for thf maat fight
+    uint8  m_HiPCLvl;       // Highest Level of Player Character that hit the Monster
+    uint8  m_HiPartySize;   // Largest party size that hit the Monster
+    int16  m_THLvl;         // Highest Level of Treasure Hunter that apply to drops
+    bool   m_ItemStolen;    // if true, mob has already been robbed. reset on respawn. also used for thf maat fight
+    bool   m_ItemDespoiled; // if true, mob has already been despoiled. reset on respawn.
     uint16 m_Family;
     uint16 m_SuperFamily;
     uint16 m_MobSkillList; // Mob skill list defined from mob_pools

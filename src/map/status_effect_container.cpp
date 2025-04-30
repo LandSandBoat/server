@@ -475,7 +475,7 @@ void CStatusEffectContainer::OverwriteStatusEffect(CStatusEffect* StatusEffect)
  *                                                                         *
  **************************************************************************/
 
-bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool silent)
+bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, EffectNotice notice)
 {
     if (PStatusEffect == nullptr)
     {
@@ -611,7 +611,7 @@ void CStatusEffectContainer::DeleteStatusEffects()
     }
 }
 
-void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, bool silent)
+void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, EffectNotice notice)
 {
     if (!PStatusEffect->deleted)
     {
@@ -626,9 +626,9 @@ void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, bo
 
             if (PStatusEffect->GetIcon() != 0)
             {
-                if (!silent && !(PStatusEffect->HasEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE)))
+                if (notice != EffectNotice::Silent && !(PStatusEffect->HasEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE)))
                 {
-                    PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, PStatusEffect->GetIcon(), 0, 206);
+                    PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, PStatusEffect->GetIcon(), 0, MsgStd::EffectWearsOff);
                 }
             }
 
@@ -639,9 +639,9 @@ void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, bo
         }
         else
         {
-            if (!silent && PStatusEffect->GetIcon() != 0 && (!(PStatusEffect->HasEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE))) && !m_POwner->isDead())
+            if (notice != EffectNotice::Silent && PStatusEffect->GetIcon() != 0 && (!(PStatusEffect->HasEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE))) && !m_POwner->isDead())
             {
-                m_POwner->loc.zone->PushPacket(m_POwner, CHAR_INRANGE, std::make_unique<CMessageBasicPacket>(m_POwner, m_POwner, PStatusEffect->GetIcon(), 0, 206));
+                m_POwner->loc.zone->PushPacket(m_POwner, CHAR_INRANGE, std::make_unique<CMessageBasicPacket>(m_POwner, m_POwner, PStatusEffect->GetIcon(), 0, MsgStd::EffectWearsOff));
             }
         }
     }
@@ -672,7 +672,7 @@ bool CStatusEffectContainer::DelStatusEffectSilent(EFFECT StatusID)
     {
         if (PStatusEffect->GetStatusID() == StatusID && !PStatusEffect->deleted)
         {
-            RemoveStatusEffect(PStatusEffect, true);
+            RemoveStatusEffect(PStatusEffect, EffectNotice::Silent);
             return true;
         }
     }
@@ -711,7 +711,7 @@ bool CStatusEffectContainer::DelStatusEffectByTier(EFFECT StatusID, uint16 tier)
     {
         if (PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetTier() == tier && !PStatusEffect->deleted)
         {
-            RemoveStatusEffect(PStatusEffect, true);
+            RemoveStatusEffect(PStatusEffect, EffectNotice::Silent);
             return true;
         }
     }
@@ -807,12 +807,12 @@ void CStatusEffectContainer::DelStatusEffectsByType(uint16 Type)
     {
         if (PStatusEffect->GetEffectType() == Type)
         {
-            RemoveStatusEffect(PStatusEffect, true);
+            RemoveStatusEffect(PStatusEffect, EffectNotice::Silent);
         }
     }
 }
 
-void CStatusEffectContainer::DelStatusEffectsByFlag(uint32 flag, bool silent)
+void CStatusEffectContainer::DelStatusEffectsByFlag(uint32 flag, EffectNotice notice)
 {
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
@@ -828,7 +828,7 @@ void CStatusEffectContainer::DelStatusEffectsByFlag(uint32 flag, bool silent)
                 continue;
             }
 
-            RemoveStatusEffect(PStatusEffect, silent);
+            RemoveStatusEffect(PStatusEffect, notice);
         }
     }
 }
@@ -920,7 +920,7 @@ EFFECT CStatusEffectContainer::DispelStatusEffect(EFFECTFLAG flag)
     {
         auto   rndIdx = xirand::GetRandomNumber(dispelableList.size());
         EFFECT result = dispelableList.at(rndIdx)->GetStatusID();
-        RemoveStatusEffect(dispelableList.at(rndIdx), true);
+        RemoveStatusEffect(dispelableList.at(rndIdx), EffectNotice::Silent);
         return result;
     }
     return EFFECT_NONE;
@@ -937,7 +937,7 @@ uint8 CStatusEffectContainer::DispelAllStatusEffect(EFFECTFLAG flag)
     {
         if (PStatusEffect->HasEffectFlag(flag) && PStatusEffect->GetDuration() > 0 && !PStatusEffect->deleted)
         {
-            RemoveStatusEffect(PStatusEffect, true);
+            RemoveStatusEffect(PStatusEffect, EffectNotice::Silent);
             count++;
         }
     }
@@ -1069,7 +1069,7 @@ bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, ui
                     PStatusEffect->SetDuration(PEffect->GetDuration());
                     PStatusEffect->SetEffectSlot(PEffect->GetEffectSlot());
                     DelStatusEffectSilent(PStatusEffect->GetStatusID());
-                    AddStatusEffect(PStatusEffect, true);
+                    AddStatusEffect(PStatusEffect, EffectNotice::Silent);
                     return true;
                 }
                 else
@@ -1082,7 +1082,7 @@ bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, ui
                             duration -= bustDuration;
                             CStatusEffect* bustEffect = new CStatusEffect(EFFECT_BUST, EFFECT_BUST, PStatusEffect->GetPower(), 0, duration,
                                                                           PStatusEffect->GetTier(), PStatusEffect->GetStatusID());
-                            AddStatusEffect(bustEffect, true);
+                            AddStatusEffect(bustEffect, EffectNotice::Silent);
                             DelStatusEffectSilent(EFFECT_DOUBLE_UP_CHANCE);
                         }
                     }
@@ -1110,7 +1110,7 @@ bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, ui
     if (numOfEffects < maxRolls)
     {
         PStatusEffect->SetEffectSlot(GetLowestFreeSlot());
-        AddStatusEffect(PStatusEffect, true);
+        AddStatusEffect(PStatusEffect, EffectNotice::Silent);
         return true;
     }
     else
@@ -1336,7 +1336,7 @@ CStatusEffect* CStatusEffectContainer::GetStatusEffectBySource(EFFECT StatusID, 
  *                                                                       *
  ************************************************************************/
 
-CStatusEffect* CStatusEffectContainer::StealStatusEffect(EFFECTFLAG flag)
+CStatusEffect* CStatusEffectContainer::StealStatusEffect(EFFECTFLAG flag, EffectNotice notice)
 {
     std::vector<CStatusEffect*> dispelableList;
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
@@ -1357,7 +1357,7 @@ CStatusEffect* CStatusEffectContainer::StealStatusEffect(EFFECTFLAG flag)
                                                       oldEffect->GetDuration() / 1000, oldEffect->GetSubID(), oldEffect->GetSubPower(), oldEffect->GetTier(),
                                                       oldEffect->GetEffectFlags());
 
-        RemoveStatusEffect(oldEffect);
+        RemoveStatusEffect(oldEffect, notice);
 
         return EffectCopy;
     }
@@ -1478,7 +1478,7 @@ void CStatusEffectContainer::RemoveOldestStatusEffectInIDRange(EFFECT start, EFF
     }
     if (oldest)
     {
-        RemoveStatusEffect(oldest, true);
+        RemoveStatusEffect(oldest, EffectNotice::Silent);
     }
 }
 
@@ -1497,7 +1497,7 @@ void CStatusEffectContainer::RemoveNewestStatusEffectInIDRange(EFFECT start, EFF
     }
     if (newest)
     {
-        RemoveStatusEffect(newest, true);
+        RemoveStatusEffect(newest, EffectNotice::Silent);
     }
 }
 
@@ -1507,7 +1507,7 @@ void CStatusEffectContainer::RemoveAllStatusEffectsInIDRange(EFFECT start, EFFEC
     {
         if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end)
         {
-            RemoveStatusEffect(PStatusEffect, true);
+            RemoveStatusEffect(PStatusEffect, EffectNotice::Silent);
         }
     }
 }
@@ -1713,7 +1713,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
     {
         if ((logout && PStatusEffect->HasEffectFlag(EFFECTFLAG_LOGOUT)) || (!logout && PStatusEffect->HasEffectFlag(EFFECTFLAG_ON_ZONE)))
         {
-            RemoveStatusEffect(PStatusEffect, true);
+            RemoveStatusEffect(PStatusEffect, EffectNotice::Silent);
             continue;
         }
 
@@ -1854,7 +1854,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                                                     4);                                             // Duration
                         PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
                         PEffect->AddEffectFlag(EFFECTFLAG_ALWAYS_EXPIRING);
-                        PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                        PMember->StatusEffectContainer->AddStatusEffect(PEffect, EffectNotice::Silent);
                     }
                 }
             });
@@ -1896,7 +1896,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                                                     4);                                             // Duration
                         PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
                         PEffect->AddEffectFlag(EFFECTFLAG_ALWAYS_EXPIRING);
-                        PTarget->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                        PTarget->StatusEffectContainer->AddStatusEffect(PEffect, EffectNotice::Silent);
                     }
                 }
             }
@@ -1941,7 +1941,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                                                     4);                                             // Duration
                         PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
                         PEffect->AddEffectFlag(EFFECTFLAG_ALWAYS_EXPIRING);
-                        PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                        PMember->StatusEffectContainer->AddStatusEffect(PEffect, EffectNotice::Silent);
                     }
                 }
             });
@@ -1986,7 +1986,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                                                     4);                                             // Duration
                         PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
                         PEffect->AddEffectFlag(EFFECTFLAG_ALWAYS_EXPIRING);
-                        PTarget->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                        PTarget->StatusEffectContainer->AddStatusEffect(PEffect, EffectNotice::Silent);
                     }
                 }
             }

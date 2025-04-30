@@ -20,6 +20,8 @@ abilityObject.onUseAbility = function(player, target, ability)
         power = 15
     end
 
+    power = power + player:getMod(xi.mod.WARDING_CIRCLE_POTENCY)
+
     target:addStatusEffect(xi.effect.WARDING_CIRCLE, power, 0, duration)
 end
 

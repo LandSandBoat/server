@@ -511,7 +511,7 @@ namespace db
 
             if constexpr (!is_blob_v<UnderlyingT>)
             {
-                DebugSQL(fmt::format("binding {}: {}", counter, value));
+                DebugSQLFmt("binding {}: {}", counter, value);
             }
 
             if constexpr (std::is_enum_v<UnderlyingT>)
@@ -580,7 +580,7 @@ namespace db
                 const auto blobWrapper = BlobWrapper::create(value);
                 blobs.push_back(blobWrapper);
 
-                DebugSQL(fmt::format("binding {}: {}", counter, blobWrapper->toString()));
+                DebugSQLFmt("binding {}: {}", counter, blobWrapper->toString());
 
                 stmt->setBlob(counter, &blobWrapper->istream);
             }
@@ -688,7 +688,7 @@ namespace db
                     state.lazyPreparedStatements[rawQuery] = std::unique_ptr<sql::PreparedStatement>(state.connection->prepareStatement(rawQuery.c_str()));
                 }
 
-                DebugSQL(fmt::format("preparedStmt: {}", rawQuery));
+                DebugSQLFmt("preparedStmt: {}", rawQuery);
 
                 // NOTE: Everything is 1-indexed, but we're going to increment right away insider binder!
                 auto counter = 0;

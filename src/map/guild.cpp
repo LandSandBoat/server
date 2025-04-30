@@ -67,7 +67,7 @@ void CGuild::updateGuildPointsPattern(uint8 pattern)
                 const auto points    = rset->get<uint16>("points");
                 const auto maxPoints = rset->get<uint16>("max_points");
 
-                m_GPItems[i].emplace_back(itemutils::GetItemPointer(itemId), points, maxPoints);
+                m_GPItems[i].emplace_back(itemutils::GetItemPointer(itemId), maxPoints, points);
             }
         }
     }

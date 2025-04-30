@@ -127,6 +127,7 @@ zones[xi.zone.NYZUL_ISLE] =
         ACCEPT_THY_DESTRUCTION        = 7556, -- Accept thy destruction... Wish for eternity...yearn for immortality... Sense thy transience...know thy insignificance...
         OMEGA_SPAM                    = 7557, -- OOOOOOO
         SHALL_KNOW_OBLIVION           = 7558, -- I am...Alexander... The fearful...shall be embraced... The bold...shall know oblivion...
+        LIGHTNING_CELL_SPARKS         = 7566, -- The % begins to crackle and emit sparks!
     },
 
     mob =
@@ -149,9 +150,13 @@ zones[xi.zone.NYZUL_ISLE] =
         NAJA_SALAHEEM        = GetFirstID('Naja_Salaheem'),
 
         -- Instance ID: 59 - Nashmeiras Plea
-        ALEXANDER = GetFirstID('Alexander'),
+        ALEXANDER = GetFirstID('Alexander_NP'),
         RAUBAHN   = GetFirstID('Raubahn'),
         RAZFAHD   = GetFirstID('Razfahd'),
+
+        -- Instance ID: 60 - Waking the Colossus/Divine Interference
+        ALEXANDER_WTC   = GetFirstID('Alexander_WTC'),
+        ALEXANDER_IMAGE = GetTableOfIDs('Alexander_Image'),
     },
 
     npc =

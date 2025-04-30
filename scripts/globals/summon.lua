@@ -110,6 +110,16 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     local acc = avatar:getACC() + xi.summon.getSummoningSkillOverCap(avatar)
     local eva = target:getEVA()
 
+    -- Handle double/triple attack
+    local bonusHits    = 0
+    local doubleRate   = avatar:getMod(xi.mod.DOUBLE_ATTACK)
+    local tripleRate   = avatar:getMod(xi.mod.TRIPLE_ATTACK)
+    if math.random(1, 100) <= tripleRate then
+        bonusHits = bonusHits + 2
+    elseif math.random(1, 100) <= doubleRate then
+        bonusHits = bonusHits + 1
+    end
+
     -- Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
     -- https://www.bg-wiki.com/bg/PDIF#Level_Correction_Function_.28cRatio.29
     local shouldApplyLevelCorrection = xi.combat.levelCorrection.isLevelCorrectedZone(avatar)
@@ -159,7 +169,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         numHitsLanded  = numHitsLanded + 1
     end
 
-    while numHitsProcessed < numberofhits do
+    while numHitsProcessed < (numberofhits + bonusHits) do
         if math.random() < hitrateSubsequent then
             numHitsLanded = numHitsLanded + 1
         end

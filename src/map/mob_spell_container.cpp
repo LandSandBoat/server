@@ -843,7 +843,7 @@ std::optional<SpellID> CMobSpellContainer::GetDebuffSpell()
 
 std::optional<SpellID> CMobSpellContainer::GetHealSpell()
 {
-    if (m_PMob->m_EcoSystem == ECOSYSTEM::UNDEAD || m_healList.empty())
+    if (m_healList.empty())
     {
         return {};
     }

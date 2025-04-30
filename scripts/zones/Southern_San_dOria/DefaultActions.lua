@@ -48,4 +48,5 @@ return {
     ['Sobane']               = { text = ID.text.SOBANE_DIALOG },
     ['Taumila']              = { text = ID.text.TAUMILA_DIALOG },
     ['Valderotaux']          = { event = 58 },
+    ['Varchet']              = { event = 525 },
 }

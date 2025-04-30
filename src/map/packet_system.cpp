@@ -1083,7 +1083,7 @@ void SmallPacket0x01A(MapSession* const PSession, CCharEntity* const PChar, CBas
                                                                   1800,
                                                                   0,
                                                                   0x40), // previously known as nameflag "FLAG_CHOCOBO"
-                                                              true);
+                                                              EffectNotice::Silent);
 
                 PChar->PRecastContainer->Add(RECAST_ABILITY, 256, 60);
                 PChar->pushPacket<CCharRecastPacket>(PChar);

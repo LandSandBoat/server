@@ -118,7 +118,7 @@ xi.einherjar.chambers =
 -- Wing 1 is always accessible
 -- Mark of the Einherjar owners have all wings open
 xi.einherjar.getChambersMenu = function(player)
-    local mask = 0xFF0
+    local mask  = 0xFF0
     local wings =
     {
         xi.einherjar.wing.WING_1,
@@ -128,14 +128,14 @@ xi.einherjar.getChambersMenu = function(player)
     }
 
     -- Mark of the Einherjar owners don't need to have all previous tiers KI
-    -- Odin still requires all 9 feathers to be owned.
+    -- Odin requires at least 1 feather of each tier to be owned.
     if player:hasKeyItem(xi.ki.MARK_OF_THE_EINHERJAR) then
         -- TODO: Uncomment when Odin is implemented
         --local ownedFeathers = xi.einherjar.getFeathers(player)
         --if
-        --    #ownedFeathers[xi.einherjar.wing.WING_1] == 3 and
-        --    #ownedFeathers[xi.einherjar.wing.WING_2] == 3 and
-        --    #ownedFeathers[xi.einherjar.wing.WING_3] == 3
+        --    #ownedFeathers[xi.einherjar.wing.WING_1] >= 1 and
+        --    #ownedFeathers[xi.einherjar.wing.WING_2] >= 1 and
+        --    #ownedFeathers[xi.einherjar.wing.WING_3] >= 1
         --then
         --    return 0x0800 -- All 3 wings + Odin
         --end

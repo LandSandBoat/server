@@ -17,6 +17,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerCuboidTriggerArea(10, -89,  0.0,   -8,  -71,  0.0,    8) -- Balrahn Way
     zone:registerCuboidTriggerArea(11,  22,  1.0, -100, 24.5,  3.0,  -98) -- The Prankster
     zone:registerCuboidTriggerArea(12,  25, -7.0, -127,   30, -5.0, -123) -- The Prankster
+    zone:registerCuboidTriggerArea(13,  30, -7.0,  -51,   39, -5.0,  -40) -- Waking the Colossus/Divine Interference
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

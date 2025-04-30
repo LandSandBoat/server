@@ -50,30 +50,6 @@ local corsairRollMods =
     [xi.jobAbility.AVENGERS_ROLL   ] = { {   2,   2,    3,  12,    4,    5,   6,    1,    7,    9,   18,   6 },   1,   0, xi.effect.AVENGERS_ROLL,    xi.mod.COUNTER,                 xi.job.NONE },
 }
 
--- Check for xi.mod.PHANTOM_ROLL Value and apply non-stack logic.
-local function phantombuffMultiple(caster)
-    local phantomValue = caster:getMod(xi.mod.PHANTOM_ROLL)
-    local phantomBuffMultiplier = 0
-
-    if phantomValue == 3 then
-        phantomBuffMultiplier = 3
-    elseif
-        phantomValue == 5 or
-        phantomValue == 8
-    then
-        phantomBuffMultiplier = 5
-    elseif
-        phantomValue == 7 or
-        phantomValue == 10 or
-        phantomValue == 12 or
-        phantomValue == 15
-    then
-        phantomBuffMultiplier = 7
-    end
-
-    return phantomBuffMultiplier
-end
-
 -- Sets local var if party contains specified job
 local function checkForJobBonus(caster, job)
     local jobBonus = 0
@@ -181,7 +157,8 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
 
     -- Apply Additional Phantom Roll+ Buff
     local phantomBase = corsairRollMods[abilityId][2] -- Base increment buff
-    effectpower       = effectpower + (phantomBase * phantombuffMultiple(caster))
+    local phantomMult = caster:getMaxGearMod(xi.mod.PHANTOM_ROLL)
+    effectpower       = effectpower + (phantomBase * phantomMult)
 
     -- Effect Power varies depending on COR level (Main vs Sub)
     local actorLevel  = utils.getActiveJobLevel(caster, xi.job.COR)

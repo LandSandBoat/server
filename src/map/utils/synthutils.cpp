@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -39,6 +39,7 @@
 #include "packets/synth_result.h"
 
 #include "item_container.h"
+#include "items.h"
 #include "map_server.h"
 #include "roe.h"
 #include "trade_container.h"
@@ -116,43 +117,43 @@ namespace synthutils
 
             switch (crystalID)
             {
-                case 4096: // Fire Crystal
-                case 4238: // Inferno Crystal
+                case ITEMID::FIRE_CRYSTAL:
+                case ITEMID::INFERNO_CRYSTAL:
                     out = "Fire";
                     break;
 
-                case 4097: // Ice Crystal
-                case 4239: // Glacier Crystal
+                case ITEMID::ICE_CRYSTAL:
+                case ITEMID::GLACIER_CRYSTAL:
                     out = "Ice";
                     break;
 
-                case 4098: // Wind Crystal
-                case 4240: // Cyclone Crystal
+                case ITEMID::WIND_CRYSTAL:
+                case ITEMID::CYCLONE_CRYSTAL:
                     out = "Wind";
                     break;
 
-                case 4099: // Earth Crystal
-                case 4241: // Terra Crystal
+                case ITEMID::EARTH_CRYSTAL:
+                case ITEMID::TERRA_CRYSTAL:
                     out = "Earth";
                     break;
 
-                case 4100: // Lightning Crystal
-                case 4242: // Plasma Crystal
+                case ITEMID::LIGHTNING_CRYSTAL:
+                case ITEMID::PLASMA_CRYSTAL:
                     out = "Lightning";
                     break;
 
-                case 4101: // Water Crystal
-                case 4243: // Torrent Crystal
+                case ITEMID::WATER_CRYSTAL:
+                case ITEMID::TORRENT_CRYSTAL:
                     out = "Water";
                     break;
 
-                case 4102: // Light Crystal
-                case 4244: // Aurora Crystal
+                case ITEMID::LIGHT_CRYSTAL:
+                case ITEMID::AURORA_CRYSTAL:
                     out = "Light";
                     break;
 
-                case 4103: // Dark Crystal
-                case 4245: // Twilight Crystal
+                case ITEMID::DARK_CRYSTAL:
+                case ITEMID::TWILIGHT_CRYSTAL:
                     out = "Dark";
                     break;
             }
@@ -674,42 +675,45 @@ namespace synthutils
             int16 baseDiff = PChar->CraftContainer->getQuantity(skillID - 40) - charSkill / 10; // the 5 lvl difference rule for breaks does NOT consider the effects of image support/gear
 
             // We don't Skill Up if over 10 levels above synth skill. (Or at AND above synth skill in era)
-            if ((settings::get<bool>("map.CRAFT_MODERN_SYSTEM") && (baseDiff <= -11)) || (!settings::get<bool>("map.CRAFT_MODERN_SYSTEM") && (baseDiff <= 0)))
+            if ((settings::get<bool>("map.CRAFT_MODERN_SYSTEM") && (baseDiff <= -11)) || (!settings::get<bool>("map.CRAFT_MODERN_SYSTEM") && baseDiff <= 0))
             {
                 continue; // Break current loop iteration.
             }
 
             // We don't Skill Up if the synth breaks outside the [-5, 0) interval
-            if ((PChar->CraftContainer->getQuantity(0) == SYNTHESIS_FAIL) && ((baseDiff > 5) || (baseDiff <= 0)))
+            if (PChar->CraftContainer->getQuantity(0) == SYNTHESIS_FAIL && (baseDiff > 5 || baseDiff <= 0))
             {
                 continue; // Break current loop iteration.
             }
 
             //------------------------------
-            // Section 2: Skill up equations and penalties
+            // Section 2: Skill up chance calculation
             //------------------------------
-            double skillUpChance         = 0;
-            double craftChanceMultiplier = settings::get<double>("map.CRAFT_CHANCE_MULTIPLIER");
+            double skillUpChance = 0;
 
             if (settings::get<bool>("map.CRAFT_MODERN_SYSTEM"))
             {
-                if (baseDiff > 0)
+                if (baseDiff > 1)
                 {
-                    skillUpChance = (double)baseDiff * craftChanceMultiplier * (3 - (log(1.2 + charSkill / 100))) / 5; // Original skill up equation with "x2 chance" applied.
+                    skillUpChance = (double)baseDiff * (3 - log(1.2 + charSkill / 100)) / 5; // Original skill up equation with "x2 chance" applied.
                 }
                 else
                 {
-                    skillUpChance = craftChanceMultiplier * (3 - (log(1.2 + charSkill / 100))) / (6 - baseDiff); // Equation used when over cap.
+                    skillUpChance = (3 - log(1.2 + charSkill / 100)) / (6 - baseDiff); // Equation used when over cap.
                 }
             }
             else
             {
-                skillUpChance = (double)baseDiff * craftChanceMultiplier * (3 - (log(1.2 + charSkill / 100))) / 10; // Original skill up equation
+                skillUpChance = (double)baseDiff * (3 - log(1.2 + charSkill / 100)) / 10; // Original skill up equation.
             }
 
             // Apply synthesis skill gain rate modifier before synthesis fail modifier
-            int16 modSynthSkillGain = PChar->getMod(Mod::SYNTH_SKILL_GAIN);
-            skillUpChance += (double)modSynthSkillGain * 0.01;
+            double modSynthSkillGain = PChar->getMod(Mod::SYNTH_SKILL_GAIN) / 100.0f;
+            skillUpChance            = skillUpChance + modSynthSkillGain;
+
+            // Apply setting multiplier.
+            double craftChanceMultiplier = settings::get<double>("map.CRAFT_CHANCE_MULTIPLIER");
+            skillUpChance                = skillUpChance * craftChanceMultiplier;
 
             // Chance penalties.
             uint8 penalty = 1;
@@ -727,156 +731,140 @@ namespace synthutils
             skillUpChance = skillUpChance / penalty; // Lower skill up chance if synth breaks
 
             //------------------------------
-            // Section 3: Calculate Skill Up and Skill Up Amount
+            // Section 3: Skill Up or break loop
             //------------------------------
             double random = xirand::GetRandomNumber(1.);
 
-            if (random < skillUpChance) // If character skills up
+            if (random >= skillUpChance) // If character doesn't skill up
             {
-                uint8 skillUpAmount = 1;
+                continue; // Break current loop iteration.
+            }
 
-                if (charSkill < 600) // No skill ups over 0.1 happen over level 60 normally, without some sort of buff to it.
+            //------------------------------
+            // Section 4: Calculate Skill Up Amount
+            //------------------------------
+            uint8 skillUpAmount = 1;
+
+            if (charSkill < 600) // No skill ups over 0.1 happen over level 60.
+            {
+                uint8  satier = 0; // Maximum ammount of skill-up quantity value.
+                double chance = 0.0f;
+
+                // Set satier initial rank
+                if (baseDiff >= 10)
                 {
-                    uint8  satier = 0;
-                    double chance = 0;
-
-                    // Set satier initial rank
-                    if ((baseDiff >= 1) && (baseDiff < 3))
-                    {
-                        satier = 1;
-                    }
-                    else if ((baseDiff >= 3) && (baseDiff < 5))
-                    {
-                        satier = 2;
-                    }
-                    else if ((baseDiff >= 5) && (baseDiff < 8))
-                    {
-                        satier = 3;
-                    }
-                    else if ((baseDiff >= 8) && (baseDiff < 10))
-                    {
-                        satier = 4;
-                    }
-                    else if (baseDiff >= 10)
-                    {
-                        satier = 5;
-                    }
-
-                    for (uint8 i = 0; i < 4; i++) // cicle up to 4 times until cap (0.5) or break. The lower the satier, the more likely it will break
-                    {
-                        switch (satier)
-                        {
-                            case 5:
-                                chance = 0.900;
-                                break;
-                            case 4:
-                                chance = 0.700;
-                                break;
-                            case 3:
-                                chance = 0.500;
-                                break;
-                            case 2:
-                                chance = 0.300;
-                                break;
-                            case 1:
-                                chance = 0.200;
-                                break;
-                            default:
-                                chance = 0.000;
-                                break;
-                        }
-
-                        random = xirand::GetRandomNumber(1.);
-
-                        if (chance < random)
-                        {
-                            break;
-                        }
-
-                        skillUpAmount++;
-                        satier--;
-                    }
+                    satier = 5;
+                }
+                else if (baseDiff >= 8)
+                {
+                    satier = 4;
+                }
+                else if (baseDiff >= 5)
+                {
+                    satier = 3;
+                }
+                else if (baseDiff >= 3)
+                {
+                    satier = 2;
+                }
+                else if (baseDiff >= 1)
+                {
+                    satier = 1;
                 }
 
-                // Do skill amount multiplier
-                if (settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER") > 1)
+                for (uint8 i = 0; i < 4; i++) // cicle up to 4 times until cap (0.5) or break. The lower the satier, the more likely it will break
                 {
-                    skillUpAmount += skillUpAmount * settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER");
-                    if (skillUpAmount > 9)
+                    chance = satier * 0.15f;
+                    random = xirand::GetRandomNumber(1.);
+
+                    if (chance < random)
                     {
-                        skillUpAmount = 9;
+                        break;
                     }
+
+                    skillUpAmount++;
+                    satier--;
                 }
+            }
 
-                // Cap skill gain amount if character hits the current cap
-                if ((skillUpAmount + charSkill) > maxSkill)
+            // Settings skill amount multiplier
+            if (settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER") > 1)
+            {
+                skillUpAmount += skillUpAmount * settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER");
+                if (skillUpAmount > 9)
                 {
-                    skillUpAmount = maxSkill - charSkill;
+                    skillUpAmount = 9;
                 }
+            }
 
-                //------------------------------
-                // Section 4: Spezialization System (Craft delevel system over certain point)
-                //------------------------------
-                uint16 craftCommonCap    = settings::get<uint16>("map.CRAFT_COMMON_CAP");
-                uint16 skillCumulation   = skillUpAmount;
-                uint8  skillHighest      = skillID; // Default to lowering current skill in use, since we have to lower something if it's going past the limit... (AKA, badly configurated server)
-                uint16 skillHighestValue = settings::get<uint16>("map.CRAFT_COMMON_CAP");
+            // Cap skill gain amount if character hits the current cap
+            if ((skillUpAmount + charSkill) > maxSkill)
+            {
+                skillUpAmount = maxSkill - charSkill;
+            }
 
-                if ((charSkill + skillUpAmount) > craftCommonCap) // If server is using the specialization system
+            //------------------------------
+            // Section 5: Spezialization System (Craft delevel system over certain point)
+            //------------------------------
+            uint16 craftCommonCap    = settings::get<uint16>("map.CRAFT_COMMON_CAP");
+            uint16 skillCumulation   = skillUpAmount;
+            uint8  skillHighest      = skillID; // Default to lowering current skill in use, since we have to lower something if it's going past the limit... (AKA, badly configurated server)
+            uint16 skillHighestValue = settings::get<uint16>("map.CRAFT_COMMON_CAP");
+
+            if ((charSkill + skillUpAmount) > craftCommonCap) // If server is using the specialization system
+            {
+                for (uint8 i = SKILL_WOODWORKING; i <= SKILL_COOKING; i++) // Cycle through all skills
                 {
-                    for (uint8 i = SKILL_WOODWORKING; i <= SKILL_COOKING; i++) // Cycle through all skills
+                    if (PChar->RealSkills.skill[i] > craftCommonCap) // If the skill being checked is above the cap from wich spezialitation points start counting.
                     {
-                        if (PChar->RealSkills.skill[i] > craftCommonCap) // If the skill being checked is above the cap from wich spezialitation points start counting.
-                        {
-                            skillCumulation += (PChar->RealSkills.skill[i] - craftCommonCap); // Add to the ammount of specialization points in use.
+                        skillCumulation += (PChar->RealSkills.skill[i] - craftCommonCap); // Add to the ammount of specialization points in use.
 
-                            if (skillID != i && PChar->RealSkills.skill[i] > skillHighestValue) // Set the ID of the highest craft UNLESS it's the craft currently in use and if it's the highest skill.
-                            {
-                                skillHighest      = i;
-                                skillHighestValue = PChar->RealSkills.skill[i];
-                            }
+                        if (skillID != i && PChar->RealSkills.skill[i] > skillHighestValue) // Set the ID of the highest craft UNLESS it's the craft currently in use and if it's the highest skill.
+                        {
+                            skillHighest      = i;
+                            skillHighestValue = PChar->RealSkills.skill[i];
                         }
                     }
                 }
+            }
 
-                //------------------------------
-                // Section 5: Handle messages and save results.
-                //------------------------------
+            //------------------------------
+            // Section 6: Handle messages and save results.
+            //------------------------------
 
-                // Skill Up addition:
-                PChar->RealSkills.skill[skillID] += skillUpAmount;
-                PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillID, skillUpAmount, 38);
+            // Skill Up addition:
+            PChar->RealSkills.skill[skillID] += skillUpAmount;
+            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillID, skillUpAmount, 38);
 
-                if ((charSkill / 10) < (charSkill + skillUpAmount) / 10)
+            if ((charSkill / 10) < (charSkill + skillUpAmount) / 10)
+            {
+                PChar->WorkingSkills.skill[skillID] += 0x20;
+
+                if (PChar->RealSkills.skill[skillID] >= maxSkill)
                 {
-                    PChar->WorkingSkills.skill[skillID] += 0x20;
+                    PChar->WorkingSkills.skill[skillID] |= 0x8000; // blue capped text
+                }
 
-                    if (PChar->RealSkills.skill[skillID] >= maxSkill)
-                    {
-                        PChar->WorkingSkills.skill[skillID] |= 0x8000; // blue capped text
-                    }
+                PChar->pushPacket<CCharSkillsPacket>(PChar);
+                PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, 53);
+            }
 
+            charutils::SaveCharSkills(PChar, skillID);
+
+            // Skill Up removal if using spezialization system
+            if (skillCumulation > settings::get<uint16>("map.CRAFT_SPECIALIZATION_POINTS"))
+            {
+                PChar->RealSkills.skill[skillHighest] -= skillUpAmount;
+                PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillHighest, skillUpAmount, 310);
+
+                if ((PChar->RealSkills.skill[skillHighest] + skillUpAmount) / 10 > (PChar->RealSkills.skill[skillHighest]) / 10)
+                {
+                    PChar->WorkingSkills.skill[skillHighest] -= 0x20;
                     PChar->pushPacket<CCharSkillsPacket>(PChar);
-                    PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, 53);
+                    PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillHighest, (PChar->RealSkills.skill[skillHighest] - skillUpAmount) / 10, 53);
                 }
 
-                charutils::SaveCharSkills(PChar, skillID);
-
-                // Skill Up removal if using spezialization system
-                if (skillCumulation > settings::get<uint16>("map.CRAFT_SPECIALIZATION_POINTS"))
-                {
-                    PChar->RealSkills.skill[skillHighest] -= skillUpAmount;
-                    PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillHighest, skillUpAmount, 310);
-
-                    if ((PChar->RealSkills.skill[skillHighest] + skillUpAmount) / 10 > (PChar->RealSkills.skill[skillHighest]) / 10)
-                    {
-                        PChar->WorkingSkills.skill[skillHighest] -= 0x20;
-                        PChar->pushPacket<CCharSkillsPacket>(PChar);
-                        PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillHighest, (PChar->RealSkills.skill[skillHighest] - skillUpAmount) / 10, 53);
-                    }
-
-                    charutils::SaveCharSkills(PChar, skillHighest);
-                }
+                charutils::SaveCharSkills(PChar, skillHighest);
             }
         }
     }

@@ -364,6 +364,7 @@ enum SUBEFFECT : uint8
     SUBEFFECT_HP_DRAIN         = 21, // 1-10101   43  This is retail correct animation
     SUBEFFECT_MP_DRAIN         = 22, // Verified shared group 3
     SUBEFFECT_TP_DRAIN         = 22, // Verified shared group 3
+    SUBEFFECT_STATUS_DRAIN     = 22, // Verified shared group 3
     SUBEFFECT_HASTE            = 23,
     // There are no additional attack effect animations beyond 23. Some effects share subeffect/animations.
 

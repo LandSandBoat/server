@@ -481,7 +481,7 @@ end
 -- see https://www.bg-wiki.com/ffxi/Battuta
 xi.job_utils.rune_fencer.useBattuta = function(player, target, ability, action)
     local meritPower      = player:getMerit(xi.merit.MERIT_BATTUTA) -- power is 4
-    local modBonus        = (100 + (player:getMod(xi.mod.ENHANCES_BATTUTA) * meritPower / 4)) / 100
+    local modBonus        = 1 + (player:getMod(xi.mod.ENHANCES_BATTUTA) * meritPower / 4) / 100
     local inquartataPower = 36 + meritPower -- base 36% + merit power of 4% each = max of 56%
     local spikesPower     = 6 + meritPower  -- damage is static 26 per rune barring SDT/MDT at 5/5 Battuta merits. 6 + 4*5 = 26.
     local runeCount       = target:getActiveRuneCount()
@@ -515,7 +515,7 @@ local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc
     local multipliers = {}
 
     multipliers.eleStaffBonus       = xi.spells.damage.calculateElementalStaffBonus(player, element)
-    multipliers.magianAffinity      = xi.spells.damage.calculateMagianAffinity() -- Presumed but untested.
+    multipliers.eleAffinityBonus    = xi.spells.damage.calculateElementalAffinityBonus(player, element)
     multipliers.SDT                 = xi.spells.damage.calculateSDT(target, element)
     multipliers.resist              = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, 0, element, 0, 0, bonusMacc)
     multipliers.dayAndWeather       = xi.spells.damage.calculateDayAndWeather(player, element, false)
@@ -528,20 +528,20 @@ local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc
     local _, skillchainCount = xi.magicburst.formMagicBurst(element, target)
 
     if skillchainCount > 0 then
-        multipliers.magicBurst          = xi.spells.damage.calculateIfMagicBurst(target, element, skillchainCount)
-        multipliers.magicBurstBonus     = xi.spells.damage.calculateIfMagicBurstBonus(player, target, 0, element)
+        multipliers.magicBurst      = xi.spells.damage.calculateIfMagicBurst(target, element, skillchainCount)
+        multipliers.magicBurstBonus = xi.spells.damage.calculateIfMagicBurstBonus(player, target, 0, element)
     end
 
     return multipliers
 end
 
 local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonus, numHits, multipliers)
-    local damage = math.floor(skillModifier * (0.50 + 0.25 * numHits + (gearBonus / 100)))
+    local damage = math.floor(skillModifier * (0.50 + 0.25 * numHits + gearBonus / 100))
 
     damage = damage + player:getMod(xi.mod.MAGIC_DAMAGE) -- add mdamage to base damage
 
     damage = math.floor(damage * multipliers.eleStaffBonus)
-    damage = math.floor(damage * multipliers.magianAffinity)
+    damage = math.floor(damage * multipliers.eleAffinityBonus)
     damage = math.floor(damage * multipliers.SDT)
     damage = math.floor(damage * multipliers.resist)
     damage = math.floor(damage * multipliers.magicBurst)
@@ -553,17 +553,9 @@ local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonu
 
     -- Handle Phalanx
     if damage > 0 then
-        damage = utils.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)
-    end
-
-    -- Handle One For All
-    if damage > 0 then
-        damage = utils.clamp(utils.oneforall(target, damage), 0, 99999)
-    end
-
-    -- Handle Stoneskin
-    if damage > 0 then
-        damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)
+        damage = utils.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999) -- Handle Phalanx
+        damage = utils.clamp(utils.oneforall(target, damage), 0, 99999)        -- Handle One For All
+        damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)   -- Handle Stoneskin
     end
 
     return damage
@@ -585,7 +577,7 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
         numHits = player:getActiveRuneCount()  -- num hits equals num active runes
     end
 
-    local skillModifier    = (player:getSkillLevel(weaponSkillType) + player:getILvlSkill()) * ((100 + jobPointBonus) / 100)
+    local skillModifier    = (player:getSkillLevel(weaponSkillType) + player:getILvlSkill()) * (1 + jobPointBonus / 100)
     local shadowsHit       = 0
     local cumulativeDamage = 0
     local runesUsed        = 0
@@ -632,7 +624,7 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
                     -- try less duplicate rune count if not on final duplicate rune
                     for x = 1, runeStrength-1, 1 do
                         local lowerRuneStrengthDamage = calculateSwipeLungeDamage(player, target, skillModifier, gearBonus, runeStrength-x, multipliers)
-                        if target:getHP()-lowerRuneStrengthDamage <= 0 then
+                        if target:getHP() - lowerRuneStrengthDamage <= 0 then
                             damage = lowerRuneStrengthDamage
                         end
                     end
@@ -772,7 +764,7 @@ xi.job_utils.rune_fencer.useRayke = function(player, target, ability, action)
     local weaponSkillType = player:getWeaponSkillType(xi.slot.MAIN)
     local meritValue      = player:getMerit(xi.merit.MERIT_RAYKE)
     local duration        = 27 + player:getMerit(xi.merit.MERIT_RAYKE)              -- 1 merit = 30 seconds (27 + 3)
-    local modDuration     = (meritValue / 3) * player:getMod(xi.mod.RAYKE_DURATION) -- Futhark boots aug
+    local modDuration     = player:getMod(xi.mod.RAYKE_DURATION) * meritValue / 3 -- Futhark boots aug
 
     action:speceffect(target:getID(), getSpecEffectElementEffusion(highestRune)) -- set element color for animation.
     action:setAnimation(target:getID(), getAnimationEffusion(weaponSkillType, 20)) -- set animation for currently equipped weapon

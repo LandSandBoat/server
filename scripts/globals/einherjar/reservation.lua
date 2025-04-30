@@ -54,7 +54,12 @@ xi.einherjar.meetsRequirementsForEntry = function(player, chamberId)
     end
 
     -- 3. Player must not be locked out
-    if lockout ~= 0 then
+    -- Note: This check does not apply to the leader who reserved the chamber
+    -- since their lockout is applied at reservation
+    if
+        lockout ~= 0 and
+        (not chamberData.players[chamberData.leaderId] and player:getID() ~= chamberData.leaderId)
+    then
         player:messageSpecial(texts.ENTRY_PROHIBITED, lockout)
         return false
     end

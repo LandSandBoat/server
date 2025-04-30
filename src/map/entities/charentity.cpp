@@ -3333,8 +3333,8 @@ auto CCharEntity::getCharVarsWithPrefix(std::string const& prefix) -> std::vecto
 
     std::vector<std::pair<std::string, int32>> charVars;
 
-    const auto rset = db::preparedStmt("SELECT varname, value, expiry FROM char_vars WHERE charid = ? AND varname LIKE CONCAT(?, '%')",
-                                       this->id, prefix);
+    const auto rset = db::preparedStmt("SELECT varname, value, expiry FROM char_vars WHERE charid = ? AND varname LIKE ?",
+                                       this->id, fmt::format("{}%", prefix));
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -3395,7 +3395,7 @@ void CCharEntity::clearCharVarsWithPrefix(std::string const& prefix)
         ++iter;
     }
 
-    db::preparedStmt("DELETE FROM char_vars WHERE charid = ? AND varname LIKE CONCAT(?, '%')", this->id, prefix);
+    db::preparedStmt("DELETE FROM char_vars WHERE charid = ? AND varname LIKE ?", this->id, fmt::format("{}%", prefix));
 }
 
 bool CCharEntity::startSynth(SKILLTYPE synthSkill)

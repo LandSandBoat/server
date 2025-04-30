@@ -86,14 +86,14 @@ enum class Mod
     MEVA = 31, // Magic Evasion
 
     // Magic Accuracy and Elemental Attacks
-    FIREATT      = 32, // Fire Damage
-    ICEATT       = 33, // Ice Damage
-    WINDATT      = 34, // Wind Damage
-    EARTHATT     = 35, // Earth Damage
-    THUNDERATT   = 36, // Thunder Damage
-    WATERATT     = 37, // Water Damage
-    LIGHTATT     = 38, // Light Damage
-    DARKATT      = 39, // Dark Damage
+    FIRE_MAB     = 32, // Elemental "Magic Attack Bonus" aka "Affinity"
+    ICE_MAB      = 33, // Elemental "Magic Attack Bonus" aka "Affinity"
+    WIND_MAB     = 34, // Elemental "Magic Attack Bonus" aka "Affinity"
+    EARTH_MAB    = 35, // Elemental "Magic Attack Bonus" aka "Affinity"
+    THUNDER_MAB  = 36, // Elemental "Magic Attack Bonus" aka "Affinity"
+    WATER_MAB    = 37, // Elemental "Magic Attack Bonus" aka "Affinity"
+    LIGHT_MAB    = 38, // Elemental "Magic Attack Bonus" aka "Affinity"
+    DARK_MAB     = 39, // Elemental "Magic Attack Bonus" aka "Affinity"
     FIRE_MACC    = 40, // Fire Accuracy
     ICE_MACC     = 41, // Ice Accuracy
     WIND_MACC    = 42, // Wind Accuracy
@@ -381,6 +381,18 @@ enum class Mod
     MIJIN_RERAISE = 258, // Augments Mijin Gakure
     DUAL_WIELD    = 259, // Percent reduction in dual wield delay.
 
+    // fTP modifiers
+    FIRE_FTP_BONUS    = 544,  // Gives bonus fTP when weaponskill has a Fire property. (Elemental beltes and gorgets) /256
+    ICE_FTP_BONUS     = 545,  // Gives bonus fTP when weaponskill has a Ice property. (Elemental beltes and gorgets) /256
+    WIND_FTP_BONUS    = 546,  // Gives bonus fTP when weaponskill has a Wind property. (Elemental beltes and gorgets) /256
+    EARTH_FTP_BONUS   = 547,  // Gives bonus fTP when weaponskill has a Earth property. (Elemental beltes and gorgets) /256
+    THUNDER_FTP_BONUS = 548,  // Gives bonus fTP when weaponskill has a Thunder property. (Elemental beltes and gorgets) /256
+    WATER_FTP_BONUS   = 549,  // Gives bonus fTP when weaponskill has a Water property. (Elemental beltes and gorgets) /256
+    LIGHT_FTP_BONUS   = 550,  // Gives bonus fTP when weaponskill has a Light property. (Elemental beltes and gorgets) /256
+    DARK_FTP_BONUS    = 551,  // Gives bonus fTP when weaponskill has a Dark property. (Elemental beltes and gorgets) /256
+    ANY_FTP_BONUS     = 1144, // Gives bonus fTP when weaponskill has a (any) property. (Fotia Gorget, Fotia Belt) /256
+    DAY_FTP_BONUS     = 1145, // Gives bonus fTP when weaponskill has a property that matches current day. (Mekira Oto, Gavialis helm, etc...) /256
+
     // Warrior
     DOUBLE_ATTACK       = 288,  // Percent chance to proc
     DOUBLE_ATTACK_DMG   = 1038, // Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
@@ -401,7 +413,7 @@ enum class Mod
     KICK_ATTACK_RATE    = 292,   // Percent chance to kick
     PERFECT_COUNTER_ATT = 428,   // TODO: Raises weapon damage by 20 when countering while under the Perfect Counter effect. This also affects Weapon Rank (though
                                  // not if fighting barehanded).
-    COUNTER_DAMAGE       = 1047, // TODO: Increases Damage from Counter Attacks (Percent)
+    COUNTER_DAMAGE       = 1047, // Increases Damage from Counter Attacks (Percent)
     FOOTWORK_ATT_BONUS   = 429,  // Raises the attack bonus of Footwork. (Tantra Gaiters +2 raise 25/256 to 38/256)
     COUNTERSTANCE_EFFECT = 543,  // Counterstance effect in percents
     DODGE_EFFECT         = 552,  // Dodge effect in percents
@@ -420,8 +432,9 @@ enum class Mod
     REGEN_BONUS      = 989, // Increases the amount of HP restored by Regen
 
     // Black Mage
-    CLEAR_MIND  = 295, // Used in conjunction with HEALMP to increase amount between tics
-    CONSERVE_MP = 296, // Percent chance
+    CLEAR_MIND             = 295,  // Used in conjunction with HEALMP to increase amount between tics
+    CONSERVE_MP            = 296,  // Percent chance
+    ELEMENTAL_MAGIC_RECAST = 1146, // Recast time for elemental magic spells (percent, usually negative)
 
     // Red Mage
     BLINK             = 299, // Tracks blink shadows
@@ -449,6 +462,7 @@ enum class Mod
 
     // Paladin
     HOLY_CIRCLE_DURATION   = 857,  // Holy Circle extended duration in seconds
+    HOLY_CIRCLE_POTENCY    = 1141, // Increases the potency of the Holy Circle effect (e.g. mod value 2 = +2% Undead Killer)
     RAMPART_DURATION       = 92,   // Rampart duration in seconds
     ABSORB_PHYSDMG_TO_MP   = 426,  // Absorbs a percentage of physical damage taken to MP.
     SHIELD_MASTERY_TP      = 485,  // Shield mastery TP bonus when blocking with a shield
@@ -542,6 +556,7 @@ enum class Mod
 
     // Samurai
     WARDING_CIRCLE_DURATION   = 95,   // Warding Circle extended duration in seconds
+    WARDING_CIRCLE_POTENCY    = 1143, // Increases the potency of the Warding Circle effect (e.g. mod value 2 = +2% Demon Killer)
     MEDITATE_DURATION         = 94,   // Meditate duration in seconds
     ZANSHIN                   = 306,  // Zanshin percent chance
     THIRD_EYE_COUNTER_RATE    = 508,  // Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%
@@ -563,6 +578,7 @@ enum class Mod
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION    = 859,  // Ancient Circle extended duration in seconds
+    ANCIENT_CIRCLE_POTENCY     = 1142, // Increases the potency of the Ancient Circle effect (e.g. mod value 2 = +2% Dragon Killer)
     JUMP_TP_BONUS              = 361,  // bonus tp player receives when using jump
     JUMP_SPIRIT_TP_BONUS       = 285,  // bonus tp player receives when using jump for spirit jump only
     JUMP_ATT_BONUS             = 362,  // ATT% bonus for all jumps
@@ -601,10 +617,13 @@ enum class Mod
     SPIRIT_CAST_REDUCTION     = 140,  // Spirit Pact casting time reduction in seconds
 
     // Blue Mage
-    BLUE_POINTS          = 309,  // Tracks extra blue points
-    BLUE_LEARN_CHANCE    = 945,  // Additional chance to learn blue magic
-    BLUE_JOB_TRAIT_BONUS = 1058, // TODO: Increases job traits gained from equipped blue magic (percent)
-    BLUE_MAGIC_EFFECT    = 1059, // TODO: Bonus to Attribute Value of spell (percent)
+    BLUE_POINTS             = 309,  // Tracks extra blue points
+    BLUE_LEARN_CHANCE       = 945,  // Additional chance to learn blue magic
+    BLUE_JOB_TRAIT_BONUS    = 1058, // TODO: Increases job traits gained from equipped blue magic (percent)
+    BLUE_MAGIC_EFFECT       = 1059, // TODO: Bonus to Attribute Value of spell (percent)
+    ENHANCES_BURST_AFFINITY = 1139, // Increases WSC bonus on spells cast with Burst Affinity (percent)
+    ENHANCES_CHAIN_AFFINITY = 1140, // TODO: Increases WSC bonus on spells cast with Chain Affinity (base damage +)
+    BLUE_MAGIC_RECAST       = 1147, // Recast time for blue magic spells (percent, usually negative)
 
     // Corsair
     EXP_BONUS         = 382,  //
@@ -764,24 +783,14 @@ enum class Mod
     SPECIAL_ATTACK_EVASION      = 1024, // Foil "Special Attack" evasion
     AUGMENTS_SLEIGHT_OF_SWORD   = 277,  // Enhances bonus "Subtle Blow" per merit.
 
-    // Stores the amount of elemental affinity (elemental staves mostly) - damage, acc, and perpetuation is all handled separately
-    FIRE_AFFINITY_DMG    = 347, // They're stored separately due to Magian stuff - they can grant different levels of
-    ICE_AFFINITY_DMG     = 348, // the damage/acc/perp affinity on the same weapon, so they must be separated.
-    WIND_AFFINITY_DMG    = 349, // Each level of damage affinity is +/-5% damage, acc is +/-10 acc, and perp is
-    EARTH_AFFINITY_DMG   = 350, // +/-1 mp/tic. This means that anyone adding these modifiers will have to add
-    THUNDER_AFFINITY_DMG = 351, // 1 to the wiki amount. For example, Fire Staff has 2 in fire affinity for
-    WATER_AFFINITY_DMG   = 352, // DMG, ACC, and PERP, while the wiki lists it as having 1 in each.
-    LIGHT_AFFINITY_DMG   = 353,
-    DARK_AFFINITY_DMG    = 354,
-
-    FIRE_AFFINITY_ACC    = 544,
-    ICE_AFFINITY_ACC     = 545,
-    WIND_AFFINITY_ACC    = 546,
-    EARTH_AFFINITY_ACC   = 547,
-    THUNDER_AFFINITY_ACC = 548,
-    WATER_AFFINITY_ACC   = 549,
-    LIGHT_AFFINITY_ACC   = 550,
-    DARK_AFFINITY_ACC    = 551,
+    FIRE_STAFF_BONUS    = 347,
+    ICE_STAFF_BONUS     = 348,
+    WIND_STAFF_BONUS    = 349,
+    EARTH_STAFF_BONUS   = 350,
+    THUNDER_STAFF_BONUS = 351,
+    WATER_STAFF_BONUS   = 352,
+    LIGHT_STAFF_BONUS   = 353,
+    DARK_STAFF_BONUS    = 354,
 
     FIRE_AFFINITY_PERP    = 553,
     ICE_AFFINITY_PERP     = 554,
@@ -905,7 +914,7 @@ enum class Mod
     SHIELDBLOCKRATE           = 518, // Affects shield block rate, percent based
     DIA_DOT                   = 313, // Increases the DoT damage of Dia
     ENH_DRAIN_ASPIR           = 315, // % damage boost to Drain and Aspir
-    AUGMENTS_ABSORB           = 521, // Direct Absorb spell increase while Liberator is equipped (percentage based)
+    AUGMENTS_ABSORB_LIBERATOR = 521, // Direct Absorb spell increase while Liberator is equipped (percentage based) (Augments "Absorb" spells)
     AMMO_SWING                = 523, // Follow-up swing rate w/ virtue stone ammo (Jailer weapons). Does nothing for non-players.
     AUGMENTS_CONVERT          = 525, // Convert HP to MP Ratio Multiplier. Value = MP multiplier rate.
     AUGMENTS_SA               = 526, // Adds Critical Attack Bonus to Sneak Attack, percentage based.
@@ -1072,12 +1081,16 @@ enum class Mod
 
     PARRY_HP_RECOVERY = 1135, // Recover <Mod Value> HP on successful parry.
 
+    ENHANCES_ABSORB_EFFECTS = 1136, // Absorb Spell duration +x seconds (Enhances "Absorb" effects)
+    AUGMENTS_ABSORB         = 1337, // Non-Liberator Absorb Spell potency +x% (Augments "Absorb" effects)
+    ABSORB_EFFECT_DURATION  = 1138, // Absorb Spell duration +% ("Absorb" effect duration +x%)
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1136 and onward
+    // SPARE IDs: 1148 and onward, but skip 1337 (AUGMENTS_ABSORB)
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

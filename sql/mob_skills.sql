@@ -2161,7 +2161,7 @@ INSERT INTO `mob_skills` VALUES (2143,1467,'perfect_defense',1,0.0,10.0,2000,100
 INSERT INTO `mob_skills` VALUES (2144,1470,'divine_spear',1,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2145,1466,'gospel_of_the_lost',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2146,1469,'void_of_repentance',0,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2147,1468,'divine_judgement',1,0.0,10.0,2000,1000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2147,1468,'divine_judgment',1,0.0,10.0,2000,1000,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2148,1464,'eagle_eye_shot',0,0.0,7.0,2000,1500,4,2,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2149,1463,'chi_blast',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2150,1894,'snatch_morsel',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);

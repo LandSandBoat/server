@@ -681,7 +681,7 @@ public:
     uint8  eraseAllStatusEffect();
     int32  dispelStatusEffect(sol::object const& flagObj);
     uint8  dispelAllStatusEffect(sol::object const& flagObj);
-    uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj);
+    uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj, sol::object const& silentObj);
 
     void  addMod(uint16 type, int16 amount);
     int16 getMod(uint16 modID);
@@ -725,7 +725,6 @@ public:
     bool   isSpellAoE(uint16 spellId);
 
     int32 physicalDmgTaken(double damage, sol::variadic_args va);
-    int32 magicDmgTaken(double damage, sol::variadic_args va);
     int32 rangedDmgTaken(double damage, sol::variadic_args va);
     int32 breathDmgTaken(double damage);
     void  handleAfflatusMiseryDamage(double damage);
@@ -911,6 +910,7 @@ public:
     uint16 getDespoilItem();                // gets ItemID of droplist despoil item from mob (steal item if no despoil item)
     uint16 getDespoilDebuff(uint16 itemID); // gets the status effect id to apply to the mob on successful despoil
     bool   itemStolen();                    // sets mob's ItemStolen var = true
+    bool   itemDespoiled();                 // sets mob's ItemDespoiled var = true
     int16  getTHlevel();                    // Returns the Monster's current Treasure Hunter Tier
     void   setTHlevel(int16 newLevel);      // Sets the Monster's current Treasure Hunter Tier
 

@@ -104,6 +104,7 @@ INSERT INTO `item_latents` VALUES(11405,25,20,13,406); -- +20 accuracy during Fo
 
 -- Louhi's Mask
 INSERT INTO `item_latents` VALUES (11474,161,-300,26,0);   -- Daytime: Physical damage taken -3%
+INSERT INTO `item_latents` VALUES (11474,164,-300,26,0);   -- Daytime: Ranged damage taken -3%
 INSERT INTO `item_latents` VALUES (11474,163,-300,26,1);   -- Nighttime: Magic damage taken -3%
 
 -- Diana Corona
@@ -418,15 +419,18 @@ INSERT INTO `item_latents` VALUES (13425,168,30,2,25);   -- Spell interruption r
 
 -- Slayer's Earring
 INSERT INTO `item_latents` VALUES (13426,161,-2000,2,25);  -- Physical damage taken -20% while HP <=25% and TP <=100%
+INSERT INTO `item_latents` VALUES (13426,164,-2000,2,25);  -- Ranged damage taken -20% while HP <=25% and TP <=100%
 
 -- Tamer's Earring
 INSERT INTO `item_latents` VALUES (13427,304,5,2,25);    -- "Tame" success rate  while HP <=25% and TP <=100%
 
 -- Minstrel's Earring
 INSERT INTO `item_latents` VALUES (13428,161,-3000,2,25);  -- Physical damage taken -30% while HP <=25% and TP <=100%
+INSERT INTO `item_latents` VALUES (13428,164,-3000,2,25);  -- Ranged damage taken -30% while HP <=25% and TP <=100%
 
 -- Tracker's Earring
 INSERT INTO `item_latents` VALUES (13429,161,-3000,2,25);  -- Physical damage taken -30% while HP <=25% and TP <=100%
+INSERT INTO `item_latents` VALUES (13429,164,-3000,2,25);  -- Ranged damage taken -30% while HP <=25% and TP <=100%
 
 -- Ronin Earring
 INSERT INTO `item_latents` VALUES (13430,163,-2000,2,25);  -- Magic damage taken -20% while HP <=25% and TP <=100%
@@ -497,11 +501,17 @@ INSERT INTO `item_latents` VALUES (13565,296,15,30,0);   -- +15 "Conserve MP" on
 INSERT INTO `item_latents` VALUES (13572,1,10,26,0);     -- Daytime: DEF +10
 INSERT INTO `item_latents` VALUES (13572,27,3,26,1);     -- Nighttime: Enmity +3
 
--- Cheviot/Umbra Cape (physical damage reduction doubled at night)
+-- Cheviot Cape (physical/ranged damage reduction doubled at night)
 INSERT INTO `item_latents` VALUES (13651,161,-500,26,1);
+INSERT INTO `item_latents` VALUES (13651,164,-500,26,1);
 
+-- Umbra Cape (physical/ranged damage reduction doubled at night)
 INSERT INTO `item_latents` VALUES (13652,161,-600,26,1);
+INSERT INTO `item_latents` VALUES (13652,164,-600,26,1);
+
+-- Sand Mantle
 INSERT INTO `item_latents` VALUES (13655,161,-2000,13,7);
+INSERT INTO `item_latents` VALUES (13655,164,-2000,13,7);
 
 -- Shadow Mantle
 INSERT INTO `item_latents` VALUES (13658,10,20,32,0);    -- Darksday: VIT+20
@@ -1442,10 +1452,11 @@ INSERT INTO `item_latents` VALUES (16032,289,3,22,19);   -- Muffle Earring,Subtl
 INSERT INTO `item_latents` VALUES (16033,71,1,22,20);    -- Sylph Earring,Healing MP +1 if SCH is in party
 
 -- Aesir Ear Pendant
--- NEED modID# INSERT INTO `item_latents` VALUES (16057,??,6,52,8); -- conserve tp+6 during dark weather
+INSERT INTO `item_latents` VALUES (16057,944,3,52,8);    -- conserve tp+6 during dark weather (already has +3)
 
 -- Colossus's Earring
 INSERT INTO `item_latents` VALUES (16058,161,-100,52,7);   -- physical damage -2% during light weather (has -1% normally)
+INSERT INTO `item_latents` VALUES (16058,164,-100,52,7);   -- ranged damage -2% during light weather (has -1% normally)
 
 INSERT INTO `item_latents` VALUES (16071,48,5,13,5);
 INSERT INTO `item_latents` VALUES (16071,165,5,13,5);

@@ -285,14 +285,12 @@ xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, action
     local resist                      = xi.mobskills.applyPlayerResistance(actor, nil, target, actor:getStat(xi.mod.INT) - target:getStat(xi.mod.INT), petAccBonus, actionElement)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(actor, actionElement, false)
     local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(actor, target, 0, 0, actionElement)
-    local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, actionElement)
 
     -- Calculate final damage.
     finalDamage = math.floor(finalDamage * sdt)
     finalDamage = math.floor(finalDamage * resist)
     finalDamage = math.floor(finalDamage * dayAndWeather)
     finalDamage = math.floor(finalDamage * magicBonusDiff)
-    finalDamage = math.floor(finalDamage * targetMagicDamageAdjustment)
     finalDamage = math.floor(finalDamage * damageModifier)
 
     -- magical mob skills are single hit so provide single Melee hit TP return if primary target
@@ -495,7 +493,9 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     if attackType == xi.attackType.PHYSICAL then
         dmg = target:physicalDmgTaken(dmg, damageType)
     elseif attackType == xi.attackType.MAGICAL then
-        dmg = target:magicDmgTaken(dmg, damageType - xi.damageType.ELEMENTAL)
+        local element = utils.clamp(damageType - 5, xi.element.NONE, xi.element.DARK) -- Transform damage type to element
+        dmg = math.floor(dmg * xi.spells.damage.calculateTMDA(target, element))
+        dmg = math.floor(dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, element))
     elseif attackType == xi.attackType.BREATH then
         dmg = target:breathDmgTaken(dmg)
     elseif attackType == xi.attackType.RANGED then
@@ -629,9 +629,14 @@ end
 -- Adds a status effect to a target
 xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick, duration, subType, subPower, tier)
     if target:canGainStatusEffect(typeEffect, power) then
-        local statmod = xi.mod.INT
-        local element = mob:getStatusEffectElement(typeEffect)
-        local resist  = xi.mobskills.applyPlayerResistance(mob, typeEffect, target, mob:getStat(statmod)-target:getStat(statmod), 0, element)
+        local statmod    = xi.mod.INT
+        local element    = mob:getStatusEffectElement(typeEffect)
+        local fullResist = xi.combat.statusEffect.isTargetResistant(mob, target, typeEffect)
+        local resist     = xi.mobskills.applyPlayerResistance(mob, typeEffect, target, mob:getStat(statmod)-target:getStat(statmod), 0, element)
+
+        if fullResist then
+            return xi.msg.basic.SKILL_MISS -- resist !
+        end
 
         if resist >= 0.25 then
             local totalDuration = utils.clamp(duration * resist, 1)

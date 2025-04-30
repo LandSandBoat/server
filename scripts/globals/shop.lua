@@ -268,16 +268,16 @@ xi.shop =
             xi.item.MAHOGANY_LOG,              4500,   xi.craftRank.JOURNEYMAN,      -- Mahogany Log
             xi.item.EBONY_LOG,                 5000,    xi.craftRank.CRAFTSMAN,      -- Ebony Log
             xi.item.FEYWEALD_LOG,              5500,    xi.craftRank.CRAFTSMAN,      -- Feyweald Log
-            xi.item.SMITHING_KIT_5,             300,      xi.craftRank.AMATEUR,      -- Smithing Kit 5
-            xi.item.SMITHING_KIT_10,            400,      xi.craftRank.AMATEUR,      -- Smithing Kit 10
-            xi.item.SMITHING_KIT_15,            650,      xi.craftRank.AMATEUR,      -- Smithing Kit 15
-            xi.item.SMITHING_KIT_20,           1050,      xi.craftRank.AMATEUR,      -- Smithing Kit 20
-            xi.item.SMITHING_KIT_25,           1600,      xi.craftRank.AMATEUR,      -- Smithing Kit 25
-            xi.item.SMITHING_KIT_30,           2300,      xi.craftRank.AMATEUR,      -- Smithing Kit 30
-            xi.item.SMITHING_KIT_35,           3150,      xi.craftRank.AMATEUR,      -- Smithing Kit 35
-            xi.item.SMITHING_KIT_40,           4150,      xi.craftRank.AMATEUR,      -- Smithing Kit 40
-            xi.item.SMITHING_KIT_45,           5300,      xi.craftRank.AMATEUR,      -- Smithing Kit 45
-            xi.item.SMITHING_KIT_50,           7600,      xi.craftRank.AMATEUR,      -- Smithing Kit 50
+            xi.item.WOODWORKING_KIT_5,          300,      xi.craftRank.AMATEUR,      -- Woodworking Kit 5
+            xi.item.WOODWORKING_KIT_10,         400,      xi.craftRank.AMATEUR,      -- Woodworking Kit 10
+            xi.item.WOODWORKING_KIT_15,         650,      xi.craftRank.AMATEUR,      -- Woodworking Kit 15
+            xi.item.WOODWORKING_KIT_20,        1050,      xi.craftRank.AMATEUR,      -- Woodworking Kit 20
+            xi.item.WOODWORKING_KIT_25,        1600,      xi.craftRank.AMATEUR,      -- Woodworking Kit 25
+            xi.item.WOODWORKING_KIT_30,        2300,      xi.craftRank.AMATEUR,      -- Woodworking Kit 30
+            xi.item.WOODWORKING_KIT_35,        3150,      xi.craftRank.AMATEUR,      -- Woodworking Kit 35
+            xi.item.WOODWORKING_KIT_40,        4150,      xi.craftRank.AMATEUR,      -- Woodworking Kit 40
+            xi.item.WOODWORKING_KIT_45,        5300,      xi.craftRank.AMATEUR,      -- Woodworking Kit 45
+            xi.item.WOODWORKING_KIT_50,        7600,      xi.craftRank.AMATEUR,      -- Woodworking Kit 50
             xi.item.CYPRESS_LOG,            1126125,      xi.craftRank.AMATEUR       -- Cypress Log
         },
 

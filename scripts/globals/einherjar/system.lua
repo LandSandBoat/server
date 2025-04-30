@@ -13,22 +13,23 @@ local mobType =
     SPECIAL = 3,
 }
 
-local function forEachPlayer(players, callback)
-    for _, player in pairs(players) do
-        if player then
-            callback(player)
-        end
+local function playersCount(players)
+    local count = 0
+    for _ in pairs(players) do
+        count = count + 1
     end
+
+    return count
 end
 
 local function allPlayersDead(players)
-    for _, player in pairs(players) do
-        if player and not player:isDead() then
-            return false
-        end
+    if playersCount(players) == 0 then
+        return false
     end
 
-    return true
+    return utils.all(players, function(_, player)
+        return player and player:isDead()
+    end)
 end
 
 local function log(chamberId, msg)
@@ -79,10 +80,23 @@ xi.einherjar.createNewChamber = function(chamberId, leader)
     return chambersInstances[chamberId]
 end
 
+local function despawnSpecialMob(specialId)
+    if specialId then
+        local specialMob = GetMobByID(specialId)
+        if specialMob and specialMob:isSpawned() then
+            specialMob:removeListener('EINHERJAR_ENGAGE')
+            specialMob:removeListener('EINHERJAR_DEATH')
+            specialMob:removeListener('EINHERJAR_DESPAWN')
+            DespawnMob(specialId)
+        end
+    end
+end
+
 -- Clean up related entities, hide chests, despawn mobs, etc.
 local function cleanChamber(chamberData)
+    despawnSpecialMob(chamberData.encounters.special)
     for _, mob in pairs(chamberData.mobs) do
-        if mob:isSpawned() then
+        if mob and mob:isSpawned() then
             mob:removeListener('EINHERJAR_ENGAGE')
             mob:removeListener('EINHERJAR_DEATH')
             mob:removeListener('EINHERJAR_DESPAWN')
@@ -110,7 +124,7 @@ local function cleanChamber(chamberData)
 end
 
 local function releaseChamber(chamberId)
-    log(chamberId, 'Releasing chamber ' .. chamberId)
+    log(chamberId, 'Releasing chamber')
     chambersInstances[chamberId] = nil
 end
 
@@ -118,19 +132,21 @@ end
 local function expelAllFromChamber(chamberData)
     -- TODO: Flush the chamber-scoped pool
 
-    forEachPlayer(chamberData.players, function(player)
+    utils.each(chamberData.players, function(_, player)
         log(chamberData.id, 'Expelling player: ' .. player:getName() .. ' (' .. player:getID() .. ')')
-        xi.einherjar.onChamberExit(chamberData, player)
+        xi.einherjar.onChamberExit(chamberData, player, false)
     end)
+
+    cleanChamber(chamberData)
+    releaseChamber(chamberData.id)
 end
 
 local function onWin(chamberData)
-    forEachPlayer(chamberData.players, function(player)
-        player:setCharVar('[ein]chamber', 0)
+    utils.each(chamberData.players, function(_, player)
         player:messageSpecial(
-                ID.text.CHAMBER_CLEARED,
-                xi.einherjar.settings.EINHERJAR_CLEAR_EXTRA_TIME,
-                chamberData.id - 1
+            ID.text.CHAMBER_CLEARED,
+            xi.einherjar.settings.EINHERJAR_CLEAR_EXTRA_TIME,
+            chamberData.id - 1
         )
         xi.einherjar.giveChamberFeather(player, chamberData.id)
     end)
@@ -140,11 +156,18 @@ local function onWin(chamberData)
         chamberData.eventsQueue[k] = nil
     end
 
-    chamberData.eventsQueue[os.time() + (xi.einherjar.settings.EINHERJAR_CLEAR_EXTRA_TIME * 60)] = function()
+    local expelTime = os.time() + (xi.einherjar.settings.EINHERJAR_CLEAR_EXTRA_TIME * 60)
+    log(chamberData.id, 'Post-win timeout queued at ' .. expelTime)
+    chamberData.eventsQueue[expelTime] = function()
         log(chamberData.id, 'Post-win timeout, expelling players and cleaning chamber.')
         expelAllFromChamber(chamberData)
-        cleanChamber(chamberData)
-        releaseChamber(chamberData.id)
+    end
+end
+
+local function emptyChamberCheck(chamberData)
+    if playersCount(chamberData.players) == 0 then
+        log(chamberData.id, 'Reservation timeout, clearing chamber.')
+        expelAllFromChamber(chamberData)
     end
 end
 
@@ -165,7 +188,14 @@ local function onArmouryCrateTrigger(chamberData, chestOpener, armouryCrate)
     end)
 end
 
-local function onSpecialMobDespawn(chamberData, mob)
+xi.einherjar.onSpecialMobDespawn = function(mob)
+    local chamberId = mob:getLocalVar('[ein]chamber')
+    local chamberData = xi.einherjar.getChamber(chamberId)
+
+    if not chamberData then
+        return
+    end
+
     local specialMobHandlers =
     {
         ['Saehrimnir'] = function()
@@ -177,7 +207,7 @@ local function onSpecialMobDespawn(chamberData, mob)
                 spawnedMob:setMod(xi.mod.REGAIN, 30)
             end
 
-            forEachPlayer(chamberData.players, function(player)
+            utils.each(chamberData.players, function(_, player)
                 player:messageSpecial(ID.text.STAGNANT_AURA_CLEARED)
                 player:messageSpecial(ID.text.CREATURES_RESTLESS)
             end)
@@ -189,13 +219,16 @@ local function onSpecialMobDespawn(chamberData, mob)
     end
 end
 
-local function onSpecialMobDeath(chamberData, mob)
+xi.einherjar.onSpecialMobDeath = function(mob)
+    local chamberId = mob:getLocalVar('[ein]chamber')
+    local chamberData = xi.einherjar.getChamber(chamberId)
+
+    if not chamberData then
+        return
+    end
+
     local specialMobHandlers =
     {
-        ['Saehrimnir'] = function()
-            mob:removeListener('EINHERJAR_DESPAWN')
-        end,
-
         ['Heithrun'] = function()
             -- TODO: Not enough data on Heithrun effect
         end,
@@ -207,7 +240,7 @@ local function onSpecialMobDeath(chamberData, mob)
                 spawnedMob:updateHealth()
             end
 
-            forEachPlayer(chamberData.players, function(player)
+            utils.each(chamberData.players, function(_, player)
                 player:messageSpecial(ID.text.STAGNANT_AURA_CLEARED)
                 player:messageSpecial(ID.text.CREATURES_CALMED)
             end)
@@ -253,15 +286,29 @@ local function onMobDespawn(chamberData, mob)
 end
 
 -- Lock the chamber when any mob is engaged
-local function onMobEngage(chamberData, mob)
+xi.einherjar.onMobEngage = function(mob, target)
+    local chamberId = mob:getLocalVar('[ein]chamber')
+    local chamberData = xi.einherjar.getChamber(chamberId)
+
+    if not chamberData then
+        return
+    end
+
     if not chamberData.locked then
         chamberData.locked = true
         log(chamberData.id, 'Mobs engaged, locking the chamber.')
         if chamberData.encounters.special then
             -- Unknown if that's the actual trigger for countdown
             -- Captures show special spawn as early as 1.5 minutes from engaging mobs
-            chamberData.eventsQueue[os.time() + math.random(90, 300)] = function()
-                local x, y, z    = unpack(xi.einherjar.getRandomPosForMobGroup(chamberData.id, 10, 30))
+            local specialMobSpawnTime = os.time() + math.random(90, 300)
+            log(chamberData.id, 'Special mob will spawn at ' .. specialMobSpawnTime)
+            chamberData.eventsQueue[specialMobSpawnTime] = function()
+                -- If final crate is already up and visible, don't spawn special mob
+                if chamberData.completed then
+                    return
+                end
+
+                local x, y, z = unpack(xi.einherjar.getRandomPosForMobGroup(chamberData.id, 10, 30))
                 local specialMob = GetMobByID(chamberData.encounters.special)
                 if specialMob then
                     specialMob:setSpawn(x, y, z, math.random(0, 255))
@@ -270,36 +317,47 @@ local function onMobEngage(chamberData, mob)
             end
         end
     end
+
+    -- Add enmity to all players - this replicates more or less ALLI_HATE but scoped to the chamber
+    utils.each(chamberData.players, function(_, player)
+        if player ~= target then
+            mob:addBaseEnmity(player)
+        end
+    end)
+
+    mob:addBaseEnmity(target)
+    mob:updateEnmity(target)
 end
 
 -- Check if everyone is dead, queue emergency teleportation
 local function onPlayerDeath(chamberData, player)
-    if not allPlayersDead(chamberData.players) then
+    if
+        playersCount(chamberData.players) == 0 or
+        not allPlayersDead(chamberData.players)
+    then
         return
     end
 
     log(chamberData.id, string.format('All players dead, queueing emergency teleportation in %d minutes.', xi.einherjar.settings.EINHERJAR_KO_EXPEL_TIME))
 
     local expelTime = os.time() + (xi.einherjar.settings.EINHERJAR_KO_EXPEL_TIME * 60)
-    forEachPlayer(chamberData.players, function(chamberPlayer)
+    utils.each(chamberData.players, function(_, chamberPlayer)
         chamberPlayer:messageSpecial(ID.text.EXPEDITION_INCAPACITATED_WARN, xi.einherjar.settings.EINHERJAR_KO_EXPEL_TIME)
     end)
 
     local function checkExpel()
         if not allPlayersDead(chamberData.players) then
-            log(chamberData.id, 'Players no longer dead, cancelling emergency teleportation.')
+            log(chamberData.id, 'No more players or players no longer dead, cancelling emergency teleportation.')
             return
         end
 
         if os.time() >= expelTime then
             log(chamberData.id, 'Emergency teleportation, expelling all players.')
-            forEachPlayer(chamberData.players, function(chamberPlayer)
+            utils.each(chamberData.players, function(_, chamberPlayer)
                 chamberPlayer:messageSpecial(ID.text.EXPEDITION_INCAPACITATED)
             end)
 
             expelAllFromChamber(chamberData)
-            cleanChamber(chamberData)
-            releaseChamber(chamberData.id)
         else
             chamberData.eventsQueue[os.time() + 5] = checkExpel
         end
@@ -321,6 +379,7 @@ xi.einherjar.new = function(chamberId, leader)
         startTime   = startTime,
         endTime     = startTime + (xi.einherjar.settings.EINHERJAR_TIME_LIMIT * 60),
         locked      = false,
+        completed   = false,
         players     = {},
 
         encounters  = xi.einherjar.makeChamberPlan(chamberId),
@@ -329,11 +388,9 @@ xi.einherjar.new = function(chamberId, leader)
         plannedMobs = 0,
         mobMods     =
         {
-            [xi.mobMod.ALLI_HATE]      = 100,
-            [xi.mobMod.CHECK_AS_NM]    = 1,
             [xi.mobMod.CHARMABLE]      = 0,
-            [xi.mobMod.DONT_ROAM_HOME] = 1,
             [xi.mobMod.CLAIM_TYPE]     = xi.claimType.NON_EXCLUSIVE,
+            [xi.mobMod.DONT_ROAM_HOME] = 1,
             [xi.mobMod.EXP_BONUS]      = -100,
             [xi.mobMod.GIL_BONUS]      = -100,
         },
@@ -370,31 +427,32 @@ xi.einherjar.new = function(chamberId, leader)
         xi.einherjar.hideCrate(chamberData.tempCrate)
     end
 
+    log(chamberId, 'Queueing leader entry timeout at ' .. chamberData.startTime + (xi.einherjar.settings.EINHERJAR_RESERVATION_TIMEOUT * 60))
+    log(chamberId, 'Queueing 10 minutes timeout at ' .. chamberData.endTime - 600)
+    log(chamberId, 'Queueing 5 minutes timeout at ' .. chamberData.endTime - 300)
+    log(chamberId, 'Queueing 30 seconds timeout at ' .. chamberData.endTime - 30)
+
     chamberData.eventsQueue =
     {
         [chamberData.startTime + (xi.einherjar.settings.EINHERJAR_RESERVATION_TIMEOUT * 60)] = function()
-            if not chamberData.players[chamberData.leaderId] then
-                log(chamberId, 'Leader never entered chamber, cancelling reservation.')
-                cleanChamber(chamberData)
-                releaseChamber(chamberData.id)
-            end
+            emptyChamberCheck(chamberData)
         end,
 
         -- 10 minutes, 5 minutes, 30 seconds warnings
         [chamberData.endTime - 600] = function()
-            forEachPlayer(chamberData.players, function(player)
+            utils.each(chamberData.players, function(_, player)
                 player:messageSpecial(ID.text.TIMEOUT_WARNING, 10)
             end)
         end,
 
         [chamberData.endTime - 300] = function()
-            forEachPlayer(chamberData.players, function(player)
+            utils.each(chamberData.players, function(_, player)
                 player:messageSpecial(ID.text.TIMEOUT_WARNING, 5)
             end)
         end,
 
         [chamberData.endTime - 30] = function()
-            forEachPlayer(chamberData.players, function(player)
+            utils.each(chamberData.players, function(_, player)
                 player:messageSpecial(ID.text.TIMEOUT_WARNING_SECONDS, 30)
             end)
         end,
@@ -423,68 +481,94 @@ xi.einherjar.onChamberEnter = function(chamberData, player, reconnecting)
 
     chamberData.players[playerId] = player
 
-    if not reconnecting then
+    -- Apply lockout, unless they're reconnecting or the leader
+    -- Leader lockout is applied at reservation
+    if
+        playerId ~= chamberData.leaderId and
+        not reconnecting
+    then
         xi.einherjar.recordLockout(player)
     end
+
+    -- Cancel the initial empty check when any player has entered
+    chamberData.eventsQueue[chamberData.startTime + (xi.einherjar.settings.EINHERJAR_RESERVATION_TIMEOUT * 60)] = nil
 end
 
-xi.einherjar.onChamberExit = function(chamberData, player)
-    player:delContainerItems(xi.inv.TEMPITEMS)
-    if not chamberData.players[player:getID()] then -- player dropped glass without entering
+xi.einherjar.onChamberExit = function(chamberData, player, isZoningOut)
+    local playerId = player:getID()
+    if not chamberData.players[playerId] then -- player dropped glass without entering or was already expelled
         return
     end
 
-    for _, remainingMob in pairs(chamberData.mobs) do
-        remainingMob:clearEnmityForEntity(player)
+    log(chamberData.id, 'Player left: ' .. player:getName() .. ' (' .. playerId .. ')')
+    player:delContainerItems(xi.inv.TEMPITEMS)
+    player:removeListener('EINHERJAR_DEATH')
+
+    chamberData.players[playerId] = nil
+
+    -- Check if remaining players are dead
+    onPlayerDeath(chamberData, player)
+
+    -- If no players are left, schedule a reservation timeout in EINHERJAR_RESERVATION_TIMEOUT minutes
+    if playersCount(chamberData.players) == 0 then
+        local chamberTimeout = os.time() + (xi.einherjar.settings.EINHERJAR_RESERVATION_TIMEOUT * 60)
+        log(chamberData.id, 'No players left in chamber, scheduling timeout at ' .. chamberTimeout)
+        chamberData.eventsQueue[chamberTimeout] = function()
+            emptyChamberCheck(chamberData)
+        end
     end
 
-    -- Expel player from chamber
-    player:startEvent(4)
+    if not isZoningOut then
+        player:setCharVar('[ein]chamber', 0)
+        xi.einherjar.voidAllLamps(player, chamberData.id)
 
-    player:messageSpecial(ID.text.LAMP_POWER_FADED, xi.item.GLOWING_LAMP)
+        for _, remainingMob in pairs(chamberData.mobs) do
+            remainingMob:clearEnmityForEntity(player)
+        end
 
-    -- Award Therion Ichor
-    local ampoulesReward = xi.einherjar.getAmpoulesReward(chamberData.id, #chamberData.deadMobs, chamberData.plannedMobs)
-    player:messageSpecial(ID.text.AMPOULES_OBTAINED, ampoulesReward)
+        -- Expel player from chamber
+        player:messageSpecial(ID.text.LAMP_POWER_FADED, xi.item.GLOWING_LAMP)
+        player:startEvent(4)
 
-    if ampoulesReward ~= 0 then
-        player:addCurrency('therion_ichor', ampoulesReward)
+        -- Award Therion Ichor
+        local ampoulesReward = xi.einherjar.getAmpoulesReward(chamberData.id, #chamberData.deadMobs, chamberData.plannedMobs)
+        player:messageSpecial(ID.text.AMPOULES_OBTAINED, ampoulesReward)
+
+        if ampoulesReward ~= 0 then
+            player:addCurrency('therion_ichor', ampoulesReward)
+        end
+
+        -- TODO: Remove from chamber treasure pool
+        -- TODO: If last player to leave pool, pool is forcefully flushed
+
+        for i = 0, 3 do
+            player:changeMusic(i, 0x0)
+        end
     end
+end
 
-    -- Clean player state
-    player:setCharVar('[ein]chamber', 0)
-    -- TODO: Remove from chamber treasure pool
+xi.einherjar.onBossInitialize = function(mob)
+    -- All bosses are immune to sleep, petrify, and terror
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.TERROR)
 
-    for i = 0, 3 do
-        player:changeMusic(i, 0x0)
-    end
+    -- Bosses aggro 20 yalms in any direction (regardless of their family aggro behaviors)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 20)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 20)
+    mob:setMobMod(xi.mobMod.DETECTION, bit.bor(xi.detects.SIGHT, xi.detects.HEARING))
 
-    chamberData.players[player:getID()] = nil
-
-    xi.einherjar.voidAllLamps(player, chamberData.id)
-
-    -- Release chamber if no players are left without waiting for the timeout
-    if #chamberData.players == 0 then
-        cleanChamber(chamberData)
-        releaseChamber(chamberData.id)
-    end
+    -- Bosses have +100 Regain
+    mob:setMod(xi.mod.REGAIN, 100)
 end
 
 xi.einherjar.spawnMob = function(mob, newMobType, chamberData)
     mob:setCallForHelpBlocked(true)
 
-    if newMobType == mobType.SPECIAL then
-        mob:addListener('DEATH', 'EINHERJAR_DEATH', utils.bind(onSpecialMobDeath, chamberData))
-        mob:addListener('DESPAWN', 'EINHERJAR_DESPAWN', utils.bind(onSpecialMobDespawn, chamberData))
-        mob:addListener('ENGAGE', 'EINHERJAR_ENGAGE', utils.bind(onMobEngage, chamberData))
-
-        -- Despawn special mob after 5 minutes
-        chamberData.eventsQueue[os.time() + 300] = function()
-            DespawnMob(mob:getID())
-        end
-    else
+    if newMobType ~= mobType.SPECIAL then
         mob:addListener('DESPAWN', 'EINHERJAR_DESPAWN', utils.bind(onMobDespawn, chamberData))
-        mob:addListener('ENGAGE', 'EINHERJAR_ENGAGE', utils.bind(onMobEngage, chamberData))
+        mob:addListener('ENGAGE', 'EINHERJAR_ENGAGE', xi.einherjar.onMobEngage)
         table.insert(chamberData.mobs, mob)
     end
 
@@ -496,13 +580,10 @@ xi.einherjar.spawnMob = function(mob, newMobType, chamberData)
         mob:setMobMod(mod, value)
     end
 
-    if newMobType == mobType.SPECIAL then
-        -- Special mobs have unique roaming properties
-        mob:setMobMod(xi.mobMod.ROAM_COOL, 8)
-        mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 60)
-        mob:setMobMod(xi.mobMod.ROAM_RATE, 5)
-    elseif newMobType == mobType.REGULAR then
+    if newMobType == mobType.REGULAR then
         mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 20)
+    elseif newMobType == mobType.BOSS then
+        xi.einherjar.onBossInitialize(mob)
     end
 
     for mod, value in pairs(chamberData.mods) do
@@ -510,20 +591,6 @@ xi.einherjar.spawnMob = function(mob, newMobType, chamberData)
     end
 
     log(chamberData.id, 'Spawned mob: ' .. mob:getName() .. '[' .. mob:getID() .. ']')
-
-    -- Special case: Hrungnir spawns a clone
-    if mob:getID() == ID.mob.HRUNGNIR then
-        local clone = GetMobByID(ID.mob.HRUNGNIR_CLONE)
-        if clone then
-            clone:setSpawn(
-                mob:getXPos() + 1,
-                mob:getYPos(),
-                mob:getZPos(),
-                mob:getRotPos()
-            )
-            xi.einherjar.spawnMob(clone, mobType.BOSS, chamberData)
-        end
-    end
 end
 
 -- Spawn mobs for the next wave, including the boss on the last wave
@@ -531,7 +598,9 @@ end
 xi.einherjar.cycleWave = function(chamberData)
     if not chamberData.encounters.waves[chamberData.waveIndex + 1] then
         log(chamberData.id, 'All waves cleared! Showing armoury crate.')
+        despawnSpecialMob(chamberData.encounters.special)
         npcUtil.showCrate(chamberData.lootCrate)
+        chamberData.completed = true
         chamberData.lootCrate:setLocalVar('[ein]chamber', chamberData.id)
 
         return
@@ -606,9 +675,8 @@ end
 -- Zoning out without dropping glass forfeits ichor rewards
 xi.einherjar.onZoneOut = function(chamberData, player)
     if chamberData.players[player:getID()] then
-        player:delContainerItems(xi.inv.TEMPITEMS)
         log(chamberData.id, 'Player zoned out: ' .. player:getName() .. ' (' .. player:getID() .. ')')
-        chamberData.players[player:getID()] = nil
+        xi.einherjar.onChamberExit(chamberData, player, true)
     end
 end
 

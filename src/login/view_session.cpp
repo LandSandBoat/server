@@ -224,20 +224,20 @@ void view_session::read_func()
                 if (settings::get<bool>("login.DISABLE_MOB_NPC_CHAR_NAMES"))
                 {
                     const auto query =
-                        "WITH results AS "
-                        "( "
-                        "    SELECT polutils_name AS `name` FROM npc_list "
-                        "    UNION "
-                        "    SELECT packet_name AS `name` FROM mob_pools "
-                        ") "
-                        "SELECT * FROM results WHERE REPLACE(REPLACE(UPPER(`name`), '-', ''), '_', '') LIKE REPLACE(REPLACE(UPPER(?), '-', ''), '_', '')";
+                        "SELECT polutils_name AS `name` FROM npc_list "
+                        "WHERE REPLACE(REPLACE(UPPER(polutils_name), '-', ''), '_', '') "
+                        "LIKE REPLACE(REPLACE(UPPER(?), '-', ''), '_', '') "
+                        "UNION "
+                        "SELECT packet_name AS `name` FROM mob_pools "
+                        "WHERE REPLACE(REPLACE(UPPER(packet_name), '-', ''), '_', '') "
+                        "LIKE REPLACE(REPLACE(UPPER(?), '-', ''), '_', '')";
 
-                    const auto rset1 = db::preparedStmt(query, nameStr);
+                    const auto rset1 = db::preparedStmt(query, nameStr, nameStr);
                     if (!rset1)
                     {
                         invalidNameReason = "Internal entity name query failed";
                     }
-                    else if (rset1 && rset1->rowsCount() != 0)
+                    else if (rset1->rowsCount() != 0)
                     {
                         invalidNameReason = "Name already in use.";
                     }

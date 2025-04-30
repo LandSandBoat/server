@@ -19,68 +19,6 @@ require('scripts/globals/combat/physical_utilities')
 xi = xi or {}
 xi.weaponskills = xi.weaponskills or {}
 
--- Obtains alpha, used for working out WSC on legacy servers
--- Retail has no alpha anymore as of 2014 Weaponskill functions
-local function getAlpha(level)
-    local alpha = 1
-
-    if not xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        if level > 75 then
-            alpha = 0.85
-        elseif level > 59 then
-            alpha = 0.9 - math.floor((level - 60) / 2) / 100
-        elseif level > 5 then
-            alpha = 1 - math.floor(level / 6) / 100
-        end
-    end
-
-    return alpha
-end
-
--- Returns fSTR based on range and divisor
-local function calculateRawFstr(dSTR, divisor)
-    local fSTR = 0
-
-    if dSTR >= 12 then
-        fSTR = dSTR + 4
-    elseif dSTR >= 6 then
-        fSTR = dSTR + 6
-    elseif dSTR >= 1 then
-        fSTR = dSTR + 7
-    elseif dSTR >= -2 then
-        fSTR = dSTR + 8
-    elseif dSTR >= -7 then
-        fSTR = dSTR + 9
-    elseif dSTR >= -15 then
-        fSTR = dSTR + 10
-    elseif dSTR >= -21 then
-        fSTR = dSTR + 12
-    else
-        fSTR = dSTR + 13
-    end
-
-    return fSTR / divisor
-end
-
--- Given the attacker's str and the mob's vit, fSTR2 is calculated (for ranged WS)
-xi.weaponskills.fSTR2 = function(atkStr, defVit, weaponRank)
-    local dSTR  = atkStr - defVit
-    local fSTR2 = calculateRawFstr(dSTR, 2)
-
-    -- Apply fSTR2 caps.
-    local lowerCap = weaponRank * -2
-
-    if weaponRank == 0 then
-        lowerCap = -2
-    elseif weaponRank == 1 then
-        lowerCap = -3
-    end
-
-    fSTR2 = utils.clamp(fSTR2, lowerCap, (weaponRank + 8) * 2)
-
-    return fSTR2
-end
-
 -- http://wiki.ffo.jp/html/1705.html
 -- https://www.ffxiah.com/forum/topic/21497/stalwart-soul/ some anecdotal data that aligns with JP
 -- https://www.bg-wiki.com/ffxi/Agwu%27s_Scythe Souleater Effect that goes beyond established cap, Stalwart Soul bonus being additive to trait
@@ -103,18 +41,6 @@ local function souleaterBonus(attacker, wsParams)
     end
 
     return 0
-end
-
-local scarletDeliriumBonus = function(attacker)
-    local bonus = 1
-
-    if attacker:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
-        local power = attacker:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1):getPower()
-
-        bonus = 1 + power / 100
-    end
-
-    return bonus
 end
 
 local consumeManaBonus = function(attacker)
@@ -360,7 +286,7 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
     end
 
     -- Scarlet Delirium
-    adjustedDamage = adjustedDamage * scarletDeliriumBonus(attacker)
+    adjustedDamage = adjustedDamage * xi.combat.damage.scarletDeliriumMultiplier(attacker)
 
     -- Souleater
     adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
@@ -375,53 +301,30 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
     return adjustedDamage
 end
 
-local modParameters =
-{
-    ['str_wsc'] = { xi.mod.STR, xi.mod.WS_STR_BONUS },
-    ['dex_wsc'] = { xi.mod.DEX, xi.mod.WS_DEX_BONUS },
-    ['vit_wsc'] = { xi.mod.VIT, xi.mod.WS_VIT_BONUS },
-    ['agi_wsc'] = { xi.mod.AGI, xi.mod.WS_AGI_BONUS },
-    ['int_wsc'] = { xi.mod.INT, xi.mod.WS_INT_BONUS },
-    ['mnd_wsc'] = { xi.mod.MND, xi.mod.WS_MND_BONUS },
-    ['chr_wsc'] = { xi.mod.CHR, xi.mod.WS_CHR_BONUS },
-}
-
-local function calculateWsMods(attacker, calcParams, wsParams)
-    local wsMods = 0
-
-    for parameterName, modList in pairs(modParameters) do
-        local paramValue = wsParams[parameterName] and wsParams[parameterName] or 0
-
-        wsMods = wsMods + attacker:getStat(modList[1]) * paramValue
-    end
-
-    return wsMods * calcParams.alpha + calcParams.fSTR
-end
-
 -- Compute magic damage component of hybrid weaponskill
 -- https://wiki.ffo.jp/html/1261.html
 -- https://www.ffxiah.com/forum/topic/33470/the-sealed-dagger-a-ninja-guide/151/#3420836
 -- https://www.ffxiah.com/forum/topic/49614/blade-chi-damage-formula/2/#3171538
 local function calculateHybridMagicDamage(tp, physicaldmg, attacker, target, wsParams, calcParams, wsID)
     local ftp      = xi.weaponskills.fTP(tp, wsParams.ftpMod)
-    local magicdmg = physicaldmg * ftp + attacker:getMod(xi.mod.MAGIC_DAMAGE)
+    local magicdmg = math.floor(physicaldmg * ftp + attacker:getMod(xi.mod.MAGIC_DAMAGE))
     local wsd      = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS)
 
     if attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then
         wsd = wsd + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
     end
 
-    magicdmg = magicdmg * (100 + wsd) / 100
-    magicdmg = addBonusesAbility(attacker, wsParams.ele, target, magicdmg, wsParams)
-    magicdmg = magicdmg + calcParams.bonusfTP * physicaldmg
-    magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, calcParams.bonusAcc)
-    magicdmg = target:magicDmgTaken(magicdmg, wsParams.ele)
+    magicdmg = math.floor(magicdmg * (100 + wsd) / 100)
+    magicdmg = math.floor(addBonusesAbility(attacker, wsParams.ele, target, magicdmg, wsParams))
+    magicdmg = math.floor(magicdmg + calcParams.bonusfTP * physicaldmg)
+    magicdmg = math.floor(magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, calcParams.bonusAcc))
+    magicdmg = math.floor(magicdmg * xi.spells.damage.calculateTMDA(target, wsParams.ele))
 
     if magicdmg > 0 then
-        magicdmg = magicdmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, wsParams.ele)
+        magicdmg = math.floor(magicdmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, wsParams.ele))
     end
 
-    if magicdmg > 0 then                                           -- handle nonzero damage if previous function does not absorb or nullify
+    if magicdmg > 0 then -- handle nonzero damage if previous function does not absorb or nullify
         magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
         magicdmg = utils.clamp(magicdmg, 0, 99999)
         magicdmg = utils.oneforall(target, magicdmg)
@@ -447,25 +350,21 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local targetLvl = target:getMainLvl()
     local targetHp  = target:getHP() + target:getMod(xi.mod.STONESKIN)
 
-    -- Calculate alpha, WSC, and our modifiers for our base per-hit damage
-    calcParams.alpha = getAlpha(attacker:getMainLvl())
-
-    -- Begin Checks for bonus wsc bonuses. See the following for details:
-    -- https://www.bg-wiki.com/bg/Utu_Grip
-    -- https://www.bluegartr.com/threads/108199-Random-Facts-Thread-Other?p=6826618&viewfull=1#post6826618
-
-    for parameterName, modList in pairs(modParameters) do
-        if attacker:getMod(modList[2]) > 0 then
-            if wsParams[parameterName] then
-                wsParams[parameterName] = wsParams[parameterName] + (attacker:getMod(modList[2]) / 100)
-            else
-                wsParams[parameterName] = attacker:getMod(modList[2]) / 100
-            end
+    -- Obtains alpha, used for working out WSC on legacy servers. Retail has no alpha anymore as of 2014 Weaponskill functions
+    local alpha = 1
+    if not xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        local level = attacker:getMainLvl()
+        if level > 75 then
+            alpha = 0.85
+        elseif level > 59 then
+            alpha = 0.9 - math.floor((level - 60) / 2) / 100
+        elseif level > 5 then
+            alpha = 1 - math.floor(level / 6) / 100
         end
     end
 
-    local wsMods   = calculateWsMods(attacker, calcParams, wsParams)
-    local mainBase = calcParams.weaponDamage[1] + wsMods + calcParams.bonusWSmods
+    local wsc      = xi.combat.physical.calculateWSC(attacker, wsParams.str_wsc, wsParams.dex_wsc, wsParams.vit_wsc, wsParams.agi_wsc, wsParams.int_wsc, wsParams.mnd_wsc, wsParams.chr_wsc)
+    local mainBase = math.floor(calcParams.weaponDamage[1] + calcParams.fSTR + calcParams.bonusWSmods + wsc * alpha)
 
     -- Calculate fTP multiplier
     local ftp = xi.weaponskills.fTP(tp, wsParams.ftpMod) + calcParams.bonusfTP
@@ -536,14 +435,25 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     -- Have to calculate added bonus for SA/TA here since it is done outside of the fTP multiplier
     if attacker:getMainJob() == xi.job.THF then
-        -- Add DEX/AGI bonus to first hit if THF main and valid Sneak/Trick Attack
+        -- Add DEX/AGI bonus to base damage of first hit if THF main and valid Sneak/Trick Attack
         if calcParams.sneakApplicable then
-            finaldmg = finaldmg + calcParams.pdif * attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX) / 100) * (1 + attacker:getMod(xi.mod.AUGMENTS_SA) / 100)
+            local dexFactor = math.floor(attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX) / 100))
+            finaldmg = math.floor(finaldmg + calcParams.pdif * dexFactor)
         end
 
         if calcParams.trickApplicable then
-            finaldmg = finaldmg + calcParams.pdif * attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI) / 100) * (1 + attacker:getMod(xi.mod.AUGMENTS_TA) / 100)
+            local agiFactor = math.floor(attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI) / 100))
+            finaldmg = math.floor(finaldmg + calcParams.pdif * agiFactor)
         end
+    end
+
+    -- these are deliberately left outside of the "If main job is THF" if-statement
+    if calcParams.sneakApplicable then
+        finaldmg = math.floor(finaldmg * (1 + attacker:getMod(xi.mod.AUGMENTS_SA) / 100))
+    end
+
+    if calcParams.trickApplicable then
+        finaldmg = math.floor(finaldmg * (1 + attacker:getMod(xi.mod.AUGMENTS_TA) / 100))
     end
 
     -- We've now accounted for any crit from SA/TA, so nullify them
@@ -659,7 +569,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     -- Do the extra hit for our offhand if applicable
     if calcParams.extraOffhandHit and hitsDone < 8 and finaldmg < targetHp then
         calcParams.hitsLanded = 0
-        local offhandDmg      = calcParams.weaponDamage[2] + wsMods
+        local offhandDmg      = calcParams.weaponDamage[2] + calcParams.fSTR + wsc * alpha
         hitdmg, calcParams    = getSingleHitDamage(attacker, target, offhandDmg, ftp, wsParams, calcParams)
 
         if calcParams.melee then
@@ -693,7 +603,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local offhandMultiHitsDone = 0
 
     while hitsDone < 8 and offhandMultiHitsDone < numOffhandMultis and finaldmg < targetHp do
-        local offhandDmg      = calcParams.weaponDamage[2] + wsMods
+        local offhandDmg      = calcParams.weaponDamage[2] + calcParams.fSTR + wsc * alpha
         calcParams.hitsLanded = 0
         hitdmg, calcParams    = getSingleHitDamage(attacker, target, offhandDmg, ftp, wsParams, calcParams)
 
@@ -762,7 +672,7 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
     calcParams.wsID                    = wsID
     calcParams.attackInfo              = attack
     calcParams.weaponDamage            = xi.weaponskills.getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
-    calcParams.fSTR                    = xi.weaponskills.fSTR(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getWeaponDmgRank())
+    calcParams.fSTR                    = xi.combat.physical.calculateMeleeStatFactor(attacker, target)
     calcParams.accStat                 = attacker:getACC()
     calcParams.melee                   = true
     calcParams.mustMiss                = target:hasStatusEffect(xi.effect.PERFECT_DODGE) or (target:hasStatusEffect(xi.effect.ALL_MISS) and not wsParams.hitsHigh)
@@ -842,7 +752,7 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
         attackInfo              = attack,
         weaponDamage            = { attacker:getRangedDmg() },
         skillType               = attacker:getWeaponSkillType(xi.slot.RANGED),
-        fSTR                    = xi.weaponskills.fSTR2(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getRangedDmgRank()),
+        fSTR                    = xi.combat.physical.calculateRangedStatFactor(attacker, target),
         accStat                 = attacker:getRACC(),
         melee                   = false,
         mustMiss                = false,
@@ -929,23 +839,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
 
     -- Magic-based WSes never miss, so we don't need to worry about calculating a miss, only if a shadow absorbed it.
     if not shadowAbsorb(target) then
-
-        -- Begin Checks for bonus wsc bonuses. See the following for details:
-        -- https://www.bg-wiki.com/bg/Utu_Grip
-        -- https://www.bluegartr.com/threads/108199-Random-Facts-Thread-Other?p=6826618&viewfull=1#post6826618
-
-        for parameterName, modList in pairs(modParameters) do
-            if attacker:getMod(modList[2]) > 0 then
-                wsParams[parameterName] = wsParams[parameterName] + (attacker:getMod(modList[2]) / 100)
-            end
-        end
-
-        for parameterName, modList in pairs(modParameters) do
-            local paramValue = wsParams[parameterName] and wsParams[parameterName] or 0
-
-            dmg = dmg + attacker:getStat(modList[1]) * paramValue
-        end
-
+        dmg = dmg + xi.combat.physical.calculateWSC(attacker, wsParams.str_wsc, wsParams.dex_wsc, wsParams.vit_wsc, wsParams.agi_wsc, wsParams.int_wsc, wsParams.mnd_wsc, wsParams.chr_wsc)
         dmg = dmg + attacker:getMainLvl() + 2 + fint
 
         -- Applying fTP multiplier
@@ -954,8 +848,8 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         dmg = dmg * ftp
 
         -- Apply Consume Mana and Scarlet Delirium
-        -- TODO: dmg = (dmg + consumeManaBonus(attacker)) * scarletDeliriumBonus(attacker)
-        dmg = dmg * scarletDeliriumBonus(attacker)
+        -- dmg = dmg + consumeManaBonus(attacker
+        dmg = dmg * xi.combat.damage.scarletDeliriumMultiplier(attacker)
 
         -- Factor in "all hits" bonus damage mods
         local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS
@@ -972,9 +866,9 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         dmg = dmg + dmg * attacker:getMod(xi.mod.ALL_WSDMG_FIRST_HIT) / 100 -- Add in our "first hit" WS dmg bonus
 
         -- Calculate magical bonuses and reductions
-        dmg = addBonusesAbility(attacker, wsParams.ele, target, dmg, wsParams)
-        dmg = dmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, bonusacc)
-        dmg = target:magicDmgTaken(dmg, wsParams.ele)
+        dmg = math.floor(addBonusesAbility(attacker, wsParams.ele, target, dmg, wsParams))
+        dmg = math.floor(dmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, bonusacc))
+        dmg = math.floor(dmg * xi.spells.damage.calculateTMDA(target, wsParams.ele))
 
         if dmg < 0 then
             calcParams.finalDmg = dmg
@@ -1212,19 +1106,6 @@ xi.weaponskills.calculatedIgnoredDef = function(tp, def, ignoredDefenseTable)
     end
 
     return 0
-end
-
--- Given the attacker's str and the mob's vit, fSTR is calculated (for melee WS)
-xi.weaponskills.fSTR = function(atkStr, defVit, weaponRank)
-    local dSTR = atkStr - defVit
-    local fSTR = calculateRawFstr(dSTR, 4)
-
-    -- Apply fSTR caps.
-    local lowerCap = math.min(-1, weaponRank * -1)
-
-    fSTR = utils.clamp(fSTR, lowerCap, weaponRank + 8)
-
-    return fSTR
 end
 
 xi.weaponskills.handleWSGorgetBelt = function(attacker)

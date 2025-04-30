@@ -168,12 +168,15 @@ auto db::detail::validateQueryLeadingKeyword(std::string const& query) -> Result
 
 auto db::detail::validateQueryContent(std::string const& query) -> bool
 {
+    // NOTE: We shouldn't be checking for the presence of '%', as this
+    //     : is the SQL wildcard character.
+
     if (query.find("{}") != std::string::npos)
     {
         return false;
     }
 
-    if (query.find(";") != std::string::npos)
+    if (query.find(';') != std::string::npos)
     {
         return false;
     }
@@ -260,7 +263,7 @@ auto db::queryStr(std::string const& rawQuery) -> std::unique_ptr<db::detail::Re
         {
             auto stmt = state.connection->createStatement();
 
-            DebugSQL(fmt::format("query: {}", rawQuery));
+            DebugSQLFmt("query: {}", rawQuery);
             const auto queryTimer = detail::timer(rawQuery);
 
             if (queryType == detail::ResultSetType::Select)

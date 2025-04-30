@@ -81,6 +81,7 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         ZASSHAL_DIALOG                = 11029, -- 'ang about. Looks like the permit you got was the last one I 'ad, so it might take me a bit o' time to scrounge up some more. 'ere, don't gimme that look. I'll be restocked before you know it.
         SECOND_LIEUTENANT             = 12055, -- <player> has been promoted to Second Lieutenant!
         PROMOTION_CHIEF_SERGEANT      = 12359, -- <player> has been promoted to Chief Sergeant!
+        ALEXANDER_UNLOCKED            = 12387, -- You have gained the ability to summon Alexander!
         HOPES_REST                    = 13139, -- Our hopes rest upon your able shoulders, noble adventurer.
         ALREADY_IN_POSSESSION         = 13145, -- Oh, it seems you are already in possession of one. In that case, you will not be requiring another.
         APPRECIATE_MORE               = 13146, -- I appreciate you bringing me more <item>. However, I'm afraid I can only accept up to <number> for each <number> [day/days]. After all, we need to travel light.

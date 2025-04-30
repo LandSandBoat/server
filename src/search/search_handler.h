@@ -64,12 +64,7 @@ public:
     std::string           ipAddress; // Store IP address in class -- once the file handle is invalid this can no longer be obtained from socket_
     asio::ip::tcp::socket socket_;
 
-    // TODO: Use std::array
-    enum
-    {
-        max_length = 4096
-    };
-    uint8_t data_[max_length] = {};
+    std::array<uint8, 4096> buffer_;
 
     // Blowfish key
     // clang-format off
@@ -91,7 +86,7 @@ private:
     // Deadline timer to drop a read
     asio::steady_timer deadline_;
 
-    void checkDeadline();
+    void checkDeadline(std::shared_ptr<search_handler> self);
 
     uint16_t getNumSessionsInUse(std::string const& ipAddressStr);
     void     addToUsedIPAddresses(std::string const& ipAddressStr);

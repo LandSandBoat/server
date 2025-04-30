@@ -234,37 +234,26 @@ function finalMagicAdjustments(caster, target, spell, dmg)
 
         if total > 9 then
             -- ga spells on 10+ targets = 0.4
-            dmg = dmg * 0.4
+            dmg = math.floor(dmg * 0.4)
         elseif total > 1 then
             -- -ga spells on 2 to 9 targets = 0.9 - 0.05T where T = number of targets
-            dmg = dmg * (0.9 - 0.05 * total)
+            dmg = math.floor(dmg * (0.9 - 0.05 * total))
         end
-
-        -- kill shadows
-        -- target:delStatusEffect(xi.effect.COPY_IMAGE)
-        -- target:delStatusEffect(xi.effect.BLINK)
-    else
-        -- this logic will eventually be moved here
-        -- dmg = utils.takeShadows(target, dmg, 1)
-
-        -- if (dmg == 0) then
-            -- spell:setMsg(xi.msg.basic.SHADOW_ABSORB)
-            -- return 1
-        -- end
     end
 
     local skill = spell:getSkillType()
     if skill == xi.skill.ELEMENTAL_MAGIC then
-        dmg = dmg * xi.settings.main.ELEMENTAL_POWER
+        dmg = math.floor(dmg * xi.settings.main.ELEMENTAL_POWER)
     elseif skill == xi.skill.DARK_MAGIC then
-        dmg = dmg * xi.settings.main.DARK_POWER
+        dmg = math.floor(dmg * xi.settings.main.DARK_POWER)
     elseif skill == xi.skill.NINJUTSU then
-        dmg = dmg * xi.settings.main.NINJUTSU_POWER
+        dmg = math.floor(dmg * xi.settings.main.NINJUTSU_POWER)
     elseif skill == xi.skill.DIVINE_MAGIC then
-        dmg = dmg * xi.settings.main.DIVINE_POWER
+        dmg = math.floor(dmg * xi.settings.main.DIVINE_POWER)
     end
 
-    dmg = target:magicDmgTaken(dmg)
+    dmg = math.floor(dmg * xi.spells.damage.calculateTMDA(target, spell:getElement()))
+    dmg = math.floor(dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement()))
 
     if dmg > 0 then
         dmg = dmg - target:getMod(xi.mod.PHALANX)
@@ -301,7 +290,8 @@ end
 function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     -- Handles target's HP adjustment and returns SIGNED dmg (negative values on absorb)
 
-    dmg = target:magicDmgTaken(dmg)
+    dmg = math.floor(dmg * xi.spells.damage.calculateTMDA(target, ele))
+    dmg = math.floor(dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, ele))
 
     if dmg > 0 then
         dmg = dmg - target:getMod(xi.mod.PHALANX)

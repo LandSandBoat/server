@@ -56,7 +56,7 @@ local function magicAccuracyFromElement(actor, actionElement)
     local magicAcc = 0
 
     if actionElement > xi.element.NONE then
-        magicAcc = actor:getMod(xi.combat.element.getElementalMACCModifier(actionElement)) + actor:getMod(xi.combat.element.getElementalAffinityMACCModifier(actionElement)) * 10
+        magicAcc = actor:getMod(xi.combat.element.getElementalMACCModifier(actionElement)) + actor:getMod(xi.combat.element.getElementalStaffModifier(actionElement)) * 10
     end
 
     return magicAcc

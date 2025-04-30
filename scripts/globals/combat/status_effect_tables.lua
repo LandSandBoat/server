@@ -35,6 +35,7 @@ local column =
 xi.combat.statusEffect.dataTable =
 {
     [xi.effect.ADDLE        ] = { 0,               xi.effect.NOCTURNE, xi.element.FIRE,    xi.immunity.ADDLE,      xi.mod.SLOWRES,     0, 0,                    xi.mod.ADDLE_IMMUNOBREAK    }, -- Addle cant be immunobroken?
+    [xi.effect.AMNESIA      ] = { 0,               0,                  xi.element.FIRE,    0,                      xi.mod.AMNESIARES,  0, xi.mod.AMNESIA_MEVA,  0                           },
     [xi.effect.BIND         ] = { 0,               0,                  xi.element.ICE,     xi.immunity.BIND,       xi.mod.BINDRES,     0, xi.mod.BIND_MEVA,     xi.mod.BIND_IMMUNOBREAK     },
     [xi.effect.BLINDNESS    ] = { 0,               0,                  xi.element.DARK,    xi.immunity.BLIND,      xi.mod.BLINDRES,    0, xi.mod.BLIND_MEVA,    xi.mod.BLIND_IMMUNOBREAK    },
     [xi.effect.BURN         ] = { xi.effect.DROWN, 0,                  xi.element.FIRE,    0,                      0,                  0, 0,                    0                           },

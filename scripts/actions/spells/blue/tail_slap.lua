@@ -21,34 +21,41 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.ecosystem = xi.ecosystem.BEASTMEN
-    params.tpmod = xi.spells.blue.tpMod.ATTACK
+    params.ecosystem  = xi.ecosystem.BEASTMEN
+    params.tpmod      = xi.spells.blue.tpMod.ATTACK
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.HTH
-    params.scattr = xi.skillchainType.REVERBERATION
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.numhits = 1
+    params.scattr     = xi.skillchainType.REVERBERATION
+    params.attribute  = xi.mod.INT
+    params.skillType  = xi.skill.BLUE_MAGIC
+    params.numhits    = 1
     params.multiplier = 1.625
-    params.tp150 = 1.625
-    params.tp300 = 1.625
-    params.azuretp = 1.625
-    params.duppercap = 75
-    params.str_wsc = 0.2
-    params.dex_wsc = 0.0
-    params.vit_wsc = 0.5
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
+    params.tp150      = 1.625
+    params.tp300      = 1.625
+    params.azuretp    = 1.625
+    params.duppercap  = 75
+    params.str_wsc    = 0.2
+    params.dex_wsc    = 0.0
+    params.vit_wsc    = 0.5
+    params.agi_wsc    = 0.0
+    params.int_wsc    = 0.0
+    params.mnd_wsc    = 0.0
+    params.chr_wsc    = 0.0
 
-    params.effect = xi.effect.STUN
-    local power = 1
-    local tick = 0
-    local duration = 5
-
+    -- Handle damage.
     local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
-    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
+
+    if damage <= 0 then
+        return damage
+    end
+
+    -- Handle status effects.
+    local effectTable =
+    {
+        [1] = { xi.effect.STUN, 1, 0, 5 },
+    }
+
+    xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)
 
     return damage
 end

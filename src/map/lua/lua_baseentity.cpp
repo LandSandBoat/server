@@ -13318,7 +13318,9 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
                           tier,
                           effectFlag); // Effect Flag (i.e in lua xi.effectFlag.AURA will make this an aura effect)
 
-    return ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->AddStatusEffect(PEffect, silent);
+    auto addNotice = silent ? EffectNotice::Silent : EffectNotice::ShowMessage;
+
+    return ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->AddStatusEffect(PEffect, addNotice);
 }
 
 /************************************************************************
@@ -13655,9 +13657,9 @@ void CLuaBaseEntity::delStatusEffectsByFlag(uint32 flag, sol::object const& sile
         return;
     }
 
-    bool bool_silent = silent.is<bool>() ? silent.as<bool>() : false;
+    auto removalNotice = (silent.is<bool>() && silent.as<bool>()) ? EffectNotice::Silent : EffectNotice::ShowMessage;
 
-    PBattleEntity->StatusEffectContainer->DelStatusEffectsByFlag(static_cast<EFFECTFLAG>(flag), bool_silent);
+    PBattleEntity->StatusEffectContainer->DelStatusEffectsByFlag(static_cast<EFFECTFLAG>(flag), removalNotice);
 }
 
 /************************************************************************
@@ -13793,7 +13795,7 @@ uint8 CLuaBaseEntity::dispelAllStatusEffect(sol::object const& flagObj)
  *  Notes   :
  ************************************************************************/
 
-uint16 CLuaBaseEntity::stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj)
+uint16 CLuaBaseEntity::stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj, sol::object const& silentObj)
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
@@ -13813,9 +13815,10 @@ uint16 CLuaBaseEntity::stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::obj
         return 0;
     }
 
-    uint32 flag = flagObj.is<uint32>() ? flagObj.as<uint32>() : (uint32)EFFECTFLAG_DISPELABLE;
+    uint32 flag          = flagObj.is<uint32>() ? flagObj.as<uint32>() : (uint32)EFFECTFLAG_DISPELABLE;
+    auto   removalNotice = (silentObj.is<bool>() && silentObj.as<bool>()) ? EffectNotice::Silent : EffectNotice::ShowMessage;
 
-    if (CStatusEffect* PStatusEffect = PTargetBattleEntity->StatusEffectContainer->StealStatusEffect(static_cast<EFFECTFLAG>(flag)))
+    if (CStatusEffect* PStatusEffect = PTargetBattleEntity->StatusEffectContainer->StealStatusEffect(static_cast<EFFECTFLAG>(flag), removalNotice))
     {
         PBattleEntity->StatusEffectContainer->AddStatusEffect(PStatusEffect);
         return PStatusEffect->GetStatusID();
@@ -14399,7 +14402,16 @@ uint16 CLuaBaseEntity::getStat(uint16 statId, sol::variadic_args va)
                 }
                 else
                 {
-                    value = PEntity->RATT(SKILL_MARKSMANSHIP); // TODO: does this edge case exist? will mobs or trusts hit this?
+                    PWeapon = dynamic_cast<CItemWeapon*>(PEntity->m_Weapons[SLOTTYPE::SLOT_AMMO]);
+                    if (PWeapon)
+                    {
+                        value = PEntity->RATT(PWeapon->getSkillType());
+                    }
+                    else
+                    {
+                        ShowError("CLuaBaseEntity::getStat(): Ranged attack with no ranged weapon or ammo, defaulting to marksmanship");
+                        value = PEntity->RATT(SKILL_MARKSMANSHIP); // TODO: does this edge case exist? will mobs or trusts hit this?
+                    }
                 }
             }
         }
@@ -14637,26 +14649,6 @@ int32 CLuaBaseEntity::physicalDmgTaken(double damage, sol::variadic_args va)
     DAMAGE_TYPE damageType = va[0].is<uint32>() ? va[0].as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
 
     return battleutils::PhysicalDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType);
-}
-
-/************************************************************************
- *  Function: magicDmgTaken()
- *  Purpose : Returns the value of Magic Damage taken after calculation
- *  Example : dmg = target:magicDmgTaken(dmg)
- *  Notes   : Passes argument to MagicDmgTaken member of battleutils
- ************************************************************************/
-
-int32 CLuaBaseEntity::magicDmgTaken(double damage, sol::variadic_args va)
-{
-    if (m_PBaseEntity->objtype == TYPE_NPC)
-    {
-        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
-        return 0;
-    }
-
-    ELEMENT elementType = va[0].is<uint32>() ? va[0].as<ELEMENT>() : ELEMENT_NONE;
-
-    return battleutils::MagicDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), elementType);
 }
 
 /************************************************************************
@@ -18321,7 +18313,7 @@ uint16 CLuaBaseEntity::getDespoilItem()
 
     DropList_t* PDropList = itemutils::GetDropList(PMob->m_DropID);
 
-    if (PDropList && !PMob->m_ItemStolen)
+    if (PDropList && !PMob->m_ItemDespoiled)
     {
         std::vector<DropItem_t> despoilableItems;
 
@@ -18358,7 +18350,7 @@ uint16 CLuaBaseEntity::getDespoilDebuff(uint16 itemID)
  *  Function: itemStolen()
  *  Purpose : Flags a mob's item as stolen, returns true upon update
  *  Example : target:itemStolen()
- *  Notes   : Used in scripts/actions/abilities/steal.lua
+ *  Notes   : Used in scripts/globals/job_utils/thief.lua
  ************************************************************************/
 
 bool CLuaBaseEntity::itemStolen()
@@ -18370,6 +18362,25 @@ bool CLuaBaseEntity::itemStolen()
     }
 
     static_cast<CMobEntity*>(m_PBaseEntity)->m_ItemStolen = true;
+    return true;
+}
+
+/************************************************************************
+ *  Function: itemDespoiled()
+ *  Purpose : Flags a mob's item as despoiled, returns true upon update
+ *  Example : target:itemDespoiled()
+ *  Notes   : Used in scripts/globals/job_utils/thief.lua
+ ************************************************************************/
+
+bool CLuaBaseEntity::itemDespoiled()
+{
+    if (m_PBaseEntity->objtype != TYPE_MOB)
+    {
+        ShowWarning("Attempting to flag despoiled item for invalid entity type (%s).", m_PBaseEntity->getName());
+        return false;
+    }
+
+    static_cast<CMobEntity*>(m_PBaseEntity)->m_ItemDespoiled = true;
     return true;
 }
 
@@ -19613,7 +19624,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("isSpellAoE", CLuaBaseEntity::isSpellAoE);
 
     SOL_REGISTER("physicalDmgTaken", CLuaBaseEntity::physicalDmgTaken);
-    SOL_REGISTER("magicDmgTaken", CLuaBaseEntity::magicDmgTaken);
     SOL_REGISTER("rangedDmgTaken", CLuaBaseEntity::rangedDmgTaken);
     SOL_REGISTER("breathDmgTaken", CLuaBaseEntity::breathDmgTaken);
     SOL_REGISTER("handleAfflatusMiseryDamage", CLuaBaseEntity::handleAfflatusMiseryDamage);
@@ -19797,6 +19807,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getDespoilItem", CLuaBaseEntity::getDespoilItem);
     SOL_REGISTER("getDespoilDebuff", CLuaBaseEntity::getDespoilDebuff);
     SOL_REGISTER("itemStolen", CLuaBaseEntity::itemStolen);
+    SOL_REGISTER("itemDespoiled", CLuaBaseEntity::itemDespoiled);
     SOL_REGISTER("getTHlevel", CLuaBaseEntity::getTHlevel);
     SOL_REGISTER("setTHlevel", CLuaBaseEntity::setTHlevel);
 

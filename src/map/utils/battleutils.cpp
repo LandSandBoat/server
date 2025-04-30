@@ -518,14 +518,30 @@ namespace battleutils
     }
 
     // TODO: Apply fire in generous quantities. Replace with existing lua functions.
-    int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 Tier, uint8 element)
+    int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 Tier, uint8 element, CItemWeapon* pWeaponHit)
     {
         int32 damage = 0;
+
+        auto* PChar    = dynamic_cast<CCharEntity*>(PAttacker);
+        int32 totalMod = PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+        int32 exclude  = 0;
+        if (PChar)
+        {
+            constexpr SLOTTYPE slots[] = { SLOT_MAIN, SLOT_SUB };
+            for (SLOTTYPE slot : slots)
+            {
+                if (auto* eq = PChar->getEquip(slot); eq && eq != pWeaponHit)
+                {
+                    exclude += eq->getModifier(Mod::ENSPELL_DMG_BONUS);
+                }
+            }
+        }
+        int32 bonus = totalMod - exclude;
 
         // Tier 1 enspells have their damaged pre-calculated AT CAST TIME and is stored in Mod::ENSPELL_DMG
         if (Tier == 1)
         {
-            damage      = PAttacker->getMod(Mod::ENSPELL_DMG) + PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+            damage      = PAttacker->getMod(Mod::ENSPELL_DMG) + bonus;
             auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
             if (PChar)
             {
@@ -557,7 +573,7 @@ namespace battleutils
                 PAttacker->addModifier(Mod::ENSPELL_DMG, 1);
                 damage = PAttacker->getMod(Mod::ENSPELL_DMG) - 1;
             }
-            damage += PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+            damage += bonus;
 
             auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
             if (PChar)
@@ -585,7 +601,7 @@ namespace battleutils
                 }
             }
 
-            damage += PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+            damage += bonus;
         }
         else if (Tier == 4) // Rune Enhancement
         {
@@ -1257,17 +1273,17 @@ namespace battleutils
             }
             if (PDefender->objtype == TYPE_PC)
             {
-                PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(previous_daze, 0, previous_daze_power, 0, 10, PAttacker->id), true);
+                PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(previous_daze, 0, previous_daze_power, 0, 10, PAttacker->id), EffectNotice::Silent);
             }
             else
             {
                 if (previous_daze == EFFECT_DRAIN_DAZE && PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD)
                 {
-                    PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_DRAIN_DAZE, 0, previous_daze_power, 0, 10, PAttacker->id), true);
+                    PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_DRAIN_DAZE, 0, previous_daze_power, 0, 10, PAttacker->id), EffectNotice::Silent);
                 }
                 else
                 {
-                    PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(previous_daze, 0, previous_daze_power, 0, 10, PAttacker->id), true);
+                    PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(previous_daze, 0, previous_daze_power, 0, 10, PAttacker->id), EffectNotice::Silent);
                 }
             }
         }
@@ -1331,7 +1347,7 @@ namespace battleutils
                     damageType               = GetRuneEnhancementDamageType(highestRuneEffect);
                 }
 
-                Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 4, element);
+                Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 4, element, weapon);
 
                 if (Action->addEffectParam < 0)
                 {
@@ -1349,7 +1365,7 @@ namespace battleutils
             {
                 Action->additionalEffect = SUBEFFECT_LIGHT_DAMAGE;
                 Action->addEffectMessage = 229;
-                Action->addEffectParam   = CalculateEnspellDamage(PAttacker, PDefender, 2, 7);
+                Action->addEffectParam   = CalculateEnspellDamage(PAttacker, PDefender, 2, 7, weapon);
 
                 if (Action->addEffectParam < 0)
                 {
@@ -1365,18 +1381,18 @@ namespace battleutils
                 {
                     // Enlight II and Endark II currently not implemented; may vary
                     Action->additionalEffect = enspell_subeffects[enspell - 9];
-                    Action->addEffectParam   = CalculateEnspellDamage(PAttacker, PDefender, 2, enspell - 8);
+                    Action->addEffectParam   = CalculateEnspellDamage(PAttacker, PDefender, 2, enspell - 8, weapon);
                 }
                 else if (enspell <= ENSPELL_I_DARK) // Tier I elemental enspell
                 {
                     Action->additionalEffect = enspell_subeffects[enspell - 1];
                     if (enspell >= ENSPELL_I_LIGHT) // Enlight or Endark
                     {
-                        Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 3, enspell);
+                        Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 3, enspell, weapon);
                     }
                     else
                     {
-                        Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 1, enspell);
+                        Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 1, enspell, weapon);
                     }
                 }
 
@@ -1659,7 +1675,19 @@ namespace battleutils
         float pDIF = 1.0;
 
         auto* targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_RANGED]);
-        uint8 weaponType  = targ_weapon ? targ_weapon->getSkillType() : static_cast<uint8>(SKILL_MARKSMANSHIP); // TODO: does the no-weapon case actually hit?
+        if (!targ_weapon)
+        {
+            // No ranged weapon, check ammo slot for throwing
+            targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_AMMO]);
+
+            if (!targ_weapon)
+            {
+                ShowError("battleutils::GetRangedDamageRatio(): No ranged weapon or ammo");
+                return pDIF;
+            }
+        }
+
+        uint8 weaponType = targ_weapon->getSkillType();
 
         auto levelCorrectionFunc = lua["xi"]["combat"]["levelCorrection"]["isLevelCorrectedZone"];
         auto rangedPDIFFunc      = lua["xi"]["combat"]["physical"]["calculateRangedPDIF"];
@@ -5283,7 +5311,7 @@ namespace battleutils
 
             // Convert status effect from "Absorb damage" mode to "Provide damage bonus" mode
             PDefender->StatusEffectContainer->DelStatusEffectSilent(EFFECT_SCARLET_DELIRIUM);
-            PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SCARLET_DELIRIUM_1, EFFECT_SCARLET_DELIRIUM_1, bonus, 0, duration), true);
+            PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SCARLET_DELIRIUM_1, EFFECT_SCARLET_DELIRIUM_1, bonus, 0, duration), EffectNotice::Silent);
         }
     }
 
@@ -6376,6 +6404,15 @@ namespace battleutils
         }
 
         recast = std::max<int32>(recast, static_cast<int32>(base * 0.2f));
+
+        if (PSpell->getSkillType() == SKILLTYPE::SKILL_ELEMENTAL_MAGIC)
+        {
+            recast = static_cast<int32>(recast * ((100.0f + PEntity->getMod(Mod::ELEMENTAL_MAGIC_RECAST)) / 100.0f));
+        }
+        if (PSpell->getSkillType() == SKILLTYPE::SKILL_BLUE_MAGIC)
+        {
+            recast = static_cast<int32>(recast * ((100.0f + PEntity->getMod(Mod::BLUE_MAGIC_RECAST)) / 100.0f));
+        }
 
         // Light/Dark arts recast bonus/penalties applies after other bonuses
         if (PSpell->getSpellGroup() == SPELLGROUP_BLACK)

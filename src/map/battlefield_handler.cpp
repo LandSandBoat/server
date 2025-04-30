@@ -97,7 +97,7 @@ void CBattlefieldHandler::HandleBattlefields(time_point tick)
         if (PChar)
         {
             luautils::OnBattlefieldKick(PChar);
-            PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, EffectNotice::Silent);
             m_PZone->updateCharLevelRestriction(PChar);
         }
         iter = m_orphanedPlayers.erase(iter);
@@ -158,7 +158,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
     if (!PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD))
     {
         PChar->StatusEffectContainer->AddStatusEffect(
-            new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, PBattlefield->GetID(), 0, 0, PChar->id, PBattlefield->GetArea()), true);
+            new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, PBattlefield->GetID(), 0, 0, PChar->id, PBattlefield->GetArea()), EffectNotice::Silent);
     }
 
     luautils::OnBattlefieldRegister(PChar, PBattlefield);

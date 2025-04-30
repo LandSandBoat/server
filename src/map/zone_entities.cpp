@@ -23,6 +23,7 @@
 
 #include "common/utils.h"
 #include "enmity_container.h"
+#include "instance.h"
 #include "latent_effect_container.h"
 #include "mob_modifier.h"
 #include "party.h"
@@ -287,36 +288,51 @@ void CZoneEntities::InsertPET(CBaseEntity* PPet)
 {
     TracyZoneScoped;
 
-    if (PPet != nullptr)
+    if (PPet == nullptr)
+    {
+        ShowError("CZone::InsertPET: entity is null");
+    }
+
+    if (PPet->PInstance)
+    {
+        PPet->PInstance->AssignDynamicTargIDandLongID(PPet);
+    }
+    else
     {
         m_zone->GetZoneEntities()->AssignDynamicTargIDandLongID(PPet);
-
-        m_petList[PPet->targid] = PPet;
-
-        TryAddToNearbySpawnLists(PPet);
-
-        PPet->spawnAnimation = SPAWN_ANIMATION::NORMAL; // Turn off special spawn animation
-
-        return;
     }
-    ShowError("CZone::InsertPET : entity is null");
+
+    m_petList[PPet->targid] = PPet;
+
+    TryAddToNearbySpawnLists(PPet);
+
+    PPet->spawnAnimation = SPAWN_ANIMATION::NORMAL; // Turn off special spawn animation
 }
 
 void CZoneEntities::InsertTRUST(CBaseEntity* PTrust)
 {
     TracyZoneScoped;
 
-    if (PTrust != nullptr)
+    if (PTrust == nullptr)
     {
-        m_zone->GetZoneEntities()->AssignDynamicTargIDandLongID(PTrust);
-        m_trustList[PTrust->targid] = PTrust;
-
-        TryAddToNearbySpawnLists(PTrust);
-
-        PTrust->spawnAnimation = SPAWN_ANIMATION::NORMAL; // Turn off special spawn animation
-
+        ShowError("CZone::InsertTRUST: entity is null");
         return;
     }
+
+    if (PTrust->PInstance)
+    {
+        PTrust->PInstance->AssignDynamicTargIDandLongID(PTrust);
+    }
+    else
+    {
+        m_zone->GetZoneEntities()->AssignDynamicTargIDandLongID(PTrust);
+    }
+
+    m_trustList[PTrust->targid] = PTrust;
+
+    TryAddToNearbySpawnLists(PTrust);
+
+    PTrust->spawnAnimation = SPAWN_ANIMATION::NORMAL; // Turn off special spawn animation
 }
 
 void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)

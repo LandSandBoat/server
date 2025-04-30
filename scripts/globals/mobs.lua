@@ -201,6 +201,7 @@ xi.mob.additionalEffect =
     TP_DRAIN   = 21,
     WEIGHT     = 22,
     ENAMNESIA  = 23,
+    DISPEL     = 24,
 }
 xi.mob.ae = xi.mob.additionalEffect
 
@@ -507,7 +508,120 @@ local additionalEffects =
         minDuration = 1,
         maxDuration = 45,
     },
+
+    [xi.mob.ae.DISPEL] =
+    {
+        chance      = 25,
+        ele         = xi.element.DARK,
+        sub         = xi.subEffect.DISPEL,
+        msg         = xi.msg.basic.ADD_EFFECT_DISPEL,
+        applyEffect = false,
+        power       = 1,
+    },
 }
+
+--[[
+    Helper function for xi.mob.onAddEffect that applies a status effect.
+--]]
+local addEffectStatus = function(mob, target, ae, params)
+    local resist = 1
+
+    if ae.ele then
+        resist = applyResistanceAddEffect(mob, target, ae.ele, ae.eff)
+    end
+
+    if resist > 0.5 and not target:hasStatusEffect(ae.eff) then
+        local power    = params.power or ae.power or 0
+        local tick     = ae.tick or 0
+        local duration = params.duration or ae.duration
+
+        duration = utils.clamp(duration, ae.minDuration, ae.maxDuration) * resist
+
+        target:addStatusEffect(ae.eff, power, tick, duration)
+
+        if params.code then
+            params.code(mob, target, power)
+        elseif ae.code then
+            ae.code(mob, target, power)
+        end
+
+        return ae.sub, ae.msg, ae.eff
+    end
+
+    return 0, 0, 0
+end
+
+--[[
+    Helper function for xi.mob.onAddEffect that dispels an effect.
+--]]
+local addEffectDispel = function(target, ae)
+    local dispelledEffect = target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
+
+    if dispelledEffect == xi.effect.NONE then
+        return 0, 0, 0
+    end
+
+    return ae.sub, ae.msg, dispelledEffect
+end
+
+--[[
+    Helper function for xi.mob.onAddEffect that applies damage.
+--]]
+local addEffectImmediate = function(mob, target, damage, ae, params)
+    local power = 0
+
+    if params.power then
+        power = params.power
+    elseif ae.mod then
+        local dMod = mob:getStat(ae.mod) - target:getStat(ae.mod)
+
+        if dMod > 20 then
+            dMod = 20 + (dMod - 20) / 2
+        end
+
+        -- This is a bad assumption, but it prevents some negative damage (healing) when there otherwise shouldn't be
+        -- TODO: better understand damage add effects from mobs
+        if dMod < 0 then
+            dMod = 0
+        end
+
+        power = dMod + target:getMainLvl() - mob:getMainLvl() + damage / 2
+    end
+
+    -- target:printToPlayer(string.format('Initial Power: %f', power)) -- DEBUG
+
+    power = addBonusesAbility(mob, ae.ele, target, power, ae.bonusAbilityParams)
+    power = power * applyResistanceAddEffect(mob, target, ae.ele, 0)
+    power = power * xi.spells.damage.calculateNukeAbsorbOrNullify(target, ae.ele)
+
+    if ae.sub ~= xi.subEffect.TP_DRAIN and ae.sub ~= xi.subEffect.MP_DRAIN then
+        power = finalMagicNonSpellAdjustments(mob, target, ae.ele, power)
+    end
+
+    -- target:printToPlayer(string.format('Adjusted Power: %f', power)) -- DEBUG
+
+    local message = ae.msg
+    if power < 0 then
+        if ae.negMsg then
+            message = ae.negMsg
+            power   = power * -1 -- outgoing action packets only support unsigned integers. The "negative message" will also handle healing automagically deep inside core somewhere.
+        else
+            power = 0
+        end
+    end
+
+    if power ~= 0 then
+        if params.code then
+            params.code(mob, target, power)
+        elseif ae.code then
+            ae.code(mob, target, power)
+        end
+
+        return ae.sub, message, power
+    end
+
+    return 0, 0, 0
+end
 
 --[[
     mob, target, and damage are passed from core into mob script's onAdditionalEffect
@@ -541,82 +655,25 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
 
             -- STATUS EFFECT
             if ae.applyEffect then
-                local resist = 1
-                if ae.ele then
-                    resist = applyResistanceAddEffect(mob, target, ae.ele, ae.eff)
+                return addEffectStatus(mob, target, ae, params)
+
+            -- DISPEL
+            elseif effect == xi.mob.ae.DISPEL and target then
+                return addEffectDispel(target, ae)
+
+            -- DISPEL
+            elseif effect == xi.mob.ae.DISPEL and target then
+                local dispelledEffect = target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
+
+                if dispelledEffect == xi.effect.NONE then
+                    return 0, 0, 0
                 end
 
-                if resist > 0.5 and not target:hasStatusEffect(ae.eff) then
-                    local power    = params.power or ae.power or 0
-                    local tick     = ae.tick or 0
-                    local duration = params.duration or ae.duration
-
-                    duration = utils.clamp(duration, ae.minDuration, ae.maxDuration) * resist
-
-                    target:addStatusEffect(ae.eff, power, tick, duration)
-
-                    if params.code then
-                        params.code(mob, target, power)
-                    elseif ae.code then
-                        ae.code(mob, target, power)
-                    end
-
-                    return ae.sub, ae.msg, ae.eff
-                end
+                return ae.sub, ae.msg, dispelledEffect
 
             -- IMMEDIATE EFFECT
             else
-                local power = 0
-
-                if params.power then
-                    power = params.power
-                elseif ae.mod then
-                    local dMod = mob:getStat(ae.mod) - target:getStat(ae.mod)
-
-                    if dMod > 20 then
-                        dMod = 20 + (dMod - 20) / 2
-                    end
-
-                    -- This is a bad assumption, but it prevents some negative damage (healing) when there otherwise shouldn't be
-                    -- TODO: better understand damage add effects from mobs
-                    if dMod < 0 then
-                        dMod = 0
-                    end
-
-                    power = dMod + target:getMainLvl() - mob:getMainLvl() + damage / 2
-                end
-
-                -- target:printToPlayer(string.format('Initial Power: %f', power)) -- DEBUG
-
-                power = addBonusesAbility(mob, ae.ele, target, power, ae.bonusAbilityParams)
-                power = power * applyResistanceAddEffect(mob, target, ae.ele, 0)
-                power = power * xi.spells.damage.calculateNukeAbsorbOrNullify(target, ae.ele)
-
-                if ae.sub ~= xi.subEffect.TP_DRAIN and ae.sub ~= xi.subEffect.MP_DRAIN then
-                    power = finalMagicNonSpellAdjustments(mob, target, ae.ele, power)
-                end
-
-                -- target:printToPlayer(string.format('Adjusted Power: %f', power)) -- DEBUG
-
-                local message = ae.msg
-                if power < 0 then
-                    if ae.negMsg then
-                        message = ae.negMsg
-                        power   = power * -1 -- outgoing action packets only support unsigned integers. The "negative message" will also handle healing automagically deep inside core somewhere.
-                    else
-                        power = 0
-                    end
-                end
-
-                if power ~= 0 then
-                    if params.code then
-                        params.code(mob, target, power)
-                    elseif ae.code then
-                        ae.code(mob, target, power)
-                    end
-
-                    return ae.sub, message, power
-                end
+                return addEffectImmediate(mob, target, damage, ae, params)
             end
         end
     else

@@ -137,7 +137,7 @@ INSERT INTO `instance_list` VALUES (7600,'silver_sea_remnants',76,72,100,340.000
 -- NYZUL_ISLE (zoneID: 77, starting id: 7700)
 INSERT INTO `instance_list` VALUES (7700,'path_of_darkness',77,72,30,500.000,0.000,-572.000,192,143,143,143,143);
 INSERT INTO `instance_list` VALUES (7701,'nashmeiras_plea',77,72,45,-444.000,-4.000,420.000,127,143,143,143,143);
--- INSERT INTO `instance_list` VALUES (7702,'waking_the_colossus',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (7702,'waking_the_colossus',77,72,15,-444.000,-4.000,420.000,127,187,187,187,187);
 -- INSERT INTO `instance_list` VALUES (7703,'forging_a_new_myth',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 INSERT INTO `instance_list` VALUES (7704,'nyzul_isle_investigation',77,72,30,-20.000,-4.000,-20.000,196,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (7705,'nyzul_isle_uncharted_survey',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);

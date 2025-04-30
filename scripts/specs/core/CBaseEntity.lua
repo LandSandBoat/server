@@ -2955,8 +2955,9 @@ end
 
 ---@param PTargetEntity CBaseEntity
 ---@param flagObj integer?
+---@param silentObj boolean?
 ---@return integer
-function CBaseEntity:stealStatusEffect(PTargetEntity, flagObj)
+function CBaseEntity:stealStatusEffect(PTargetEntity, flagObj, silentObj)
 end
 
 ---@param type integer
@@ -3159,13 +3160,6 @@ end
 ---@param damageType integer?
 ---@return integer
 function CBaseEntity:physicalDmgTaken(damage, damageType)
-end
-
----@nodiscard
----@param damage number
----@param element integer?
----@return integer
-function CBaseEntity:magicDmgTaken(damage, element)
 end
 
 ---@nodiscard
@@ -3989,6 +3983,11 @@ end
 ---@nodiscard
 ---@return boolean
 function CBaseEntity:itemStolen()
+end
+
+---@nodiscard
+---@return boolean
+function CBaseEntity:itemDespoiled()
 end
 
 ---@nodiscard

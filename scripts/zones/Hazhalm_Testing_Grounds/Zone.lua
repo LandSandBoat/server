@@ -4,6 +4,10 @@
 ---@type TZone
 local zoneObject = {}
 
+local function isPastGate(player)
+    return player:getXPos() < 486
+end
+
 zoneObject.onInitialize = function(zone)
 end
 
@@ -31,7 +35,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     -- Eject players past the gate if they no longer have a valid reservation
     -- TODO: Will likely conflict with The Rider Cometh
     local inEinherjar = player:getCharVar('[ein]chamber')
-    if inEinherjar then
+    if inEinherjar and isPastGate(player) then
         local chamberData = xi.einherjar.getChamber(inEinherjar)
         if chamberData then
             local validForChamber = xi.einherjar.onReconnection(chamberData, player)
@@ -41,7 +45,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         end
     end
 
-    if player:getXPos() < 486 then
+    if isPastGate(player) then
         -- Cutscene warps them back to entrance
         cs = 4
     end

@@ -424,7 +424,7 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
         end
 
         local applyLevelCorrection = xi.combat.levelCorrection.isLevelCorrectedZone(player)
-        local baseDmg              = weaponDamage + xi.weaponskills.fSTR(player:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), player:getWeaponDmgRank())
+        local baseDmg              = weaponDamage + xi.combat.physical.calculateMeleeStatFactor(player, target)
         local pdif                 = xi.combat.physical.calculateMeleePDIF(player, target, weaponType, 1.0, false, applyLevelCorrection, false, 0.0, false, xi.slot.MAIN, false)
         local dmg                  = baseDmg * pdif
 

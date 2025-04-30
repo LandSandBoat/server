@@ -2845,7 +2845,13 @@ namespace luautils
             return {};
         }
 
-        auto result = onMobMagicPrepare(PCaster, PTarget, spell::GetSpell(startingSpellId.value()));
+        CSpell* PSpell = nullptr;
+        if (startingSpellId.has_value())
+        {
+            PSpell = spell::GetSpell(startingSpellId.value());
+        }
+
+        auto result = onMobMagicPrepare(PCaster, PTarget, PSpell);
         if (!result.valid())
         {
             sol::error err = result;

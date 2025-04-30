@@ -25,7 +25,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
 
     local duration = xi.mobskills.calculateDuration(skill:getTP(), 30, 60)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 50, 0, duration))
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 50, 0, duration)
 
     return dmg
 end

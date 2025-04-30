@@ -25,24 +25,24 @@ xi.combat.physical = xi.combat.physical or {}
 -----------------------------------
 local wsElementalProperties =
 {
-    -- [Skillchain type             ] = { None, Fire, Ice, Wind, Earth, Thunder, Water, Light, Dark },
-    [xi.skillchainType.NONE         ] = {    0,    0,   0,    0,     0,       0,     0,     0,    0 }, -- Lv0 None
-    [xi.skillchainType.TRANSFIXION  ] = {    0,    0,   0,    0,     0,       0,     0,     1,    0 }, -- Lv1 Light
-    [xi.skillchainType.COMPRESSION  ] = {    0,    0,   0,    0,     0,       0,     0,     0,    1 }, -- Lv1 Dark
-    [xi.skillchainType.LIQUEFACTION ] = {    0,    1,   0,    0,     0,       0,     0,     0,    0 }, -- Lv1 Fire
-    [xi.skillchainType.SCISSION     ] = {    0,    0,   0,    0,     1,       0,     0,     0,    0 }, -- Lv1 Earth
-    [xi.skillchainType.REVERBERATION] = {    0,    0,   0,    0,     0,       0,     1,     0,    0 }, -- Lv1 Water
-    [xi.skillchainType.DETONATION   ] = {    0,    0,   0,    1,     0,       0,     0,     0,    0 }, -- Lv1 Wind
-    [xi.skillchainType.INDURATION   ] = {    0,    0,   1,    0,     0,       0,     0,     0,    0 }, -- Lv1 Ice
-    [xi.skillchainType.IMPACTION    ] = {    0,    0,   0,    0,     0,       1,     0,     0,    0 }, -- Lv1 Thunder
-    [xi.skillchainType.GRAVITATION  ] = {    0,    0,   0,    0,     1,       0,     0,     0,    1 }, -- Lv2 Earth & Dark
-    [xi.skillchainType.DISTORTION   ] = {    0,    0,   1,    0,     0,       0,     1,     0,    0 }, -- Lv2 Ice & Water
-    [xi.skillchainType.FUSION       ] = {    0,    1,   0,    0,     0,       0,     0,     1,    0 }, -- Lv2 Fire & Light
-    [xi.skillchainType.FRAGMENTATION] = {    0,    0,   0,    1,     0,       1,     0,     0,    0 }, -- Lv2 Wind & Thunder
-    [xi.skillchainType.LIGHT        ] = {    0,    1,   0,    1,     0,       1,     0,     1,    0 }, -- Lv3 Fire, Wind, Thunder, Light
-    [xi.skillchainType.DARKNESS     ] = {    0,    0,   1,    0,     1,       0,     1,     0,    1 }, -- Lv3 Ice, Earth, Water, Dark
-    [xi.skillchainType.LIGHT_II     ] = {    0,    1,   0,    1,     0,       1,     0,     1,    0 }, -- Lv4 Fire, Wind, Thunder, Light
-    [xi.skillchainType.DARKNESS_II  ] = {    0,    0,   1,    0,     1,       0,     1,     0,    1 }, -- Lv4 Ice, Earth, Water, Dark
+    -- [Skillchain type             ] = { Fire, Ice, Wind, Earth, Thunder, Water, Light, Dark },
+    [xi.skillchainType.NONE         ] = { 0, 0, 0, 0, 0, 0, 0, 0 }, -- Lv0 None
+    [xi.skillchainType.LIQUEFACTION ] = { 1, 0, 0, 0, 0, 0, 0, 0 }, -- Lv1 Fire
+    [xi.skillchainType.INDURATION   ] = { 0, 1, 0, 0, 0, 0, 0, 0 }, -- Lv1 Ice
+    [xi.skillchainType.DETONATION   ] = { 0, 0, 1, 0, 0, 0, 0, 0 }, -- Lv1 Wind
+    [xi.skillchainType.SCISSION     ] = { 0, 0, 0, 1, 0, 0, 0, 0 }, -- Lv1 Earth
+    [xi.skillchainType.IMPACTION    ] = { 0, 0, 0, 0, 1, 0, 0, 0 }, -- Lv1 Thunder
+    [xi.skillchainType.REVERBERATION] = { 0, 0, 0, 0, 0, 1, 0, 0 }, -- Lv1 Water
+    [xi.skillchainType.TRANSFIXION  ] = { 0, 0, 0, 0, 0, 0, 1, 0 }, -- Lv1 Light
+    [xi.skillchainType.COMPRESSION  ] = { 0, 0, 0, 0, 0, 0, 0, 1 }, -- Lv1 Dark
+    [xi.skillchainType.FUSION       ] = { 1, 0, 0, 0, 0, 0, 1, 0 }, -- Lv2 Fire & Light
+    [xi.skillchainType.DISTORTION   ] = { 0, 1, 0, 0, 0, 1, 0, 0 }, -- Lv2 Ice & Water
+    [xi.skillchainType.FRAGMENTATION] = { 0, 0, 1, 0, 1, 0, 0, 0 }, -- Lv2 Wind & Thunder
+    [xi.skillchainType.GRAVITATION  ] = { 0, 0, 0, 1, 0, 0, 0, 1 }, -- Lv2 Earth & Dark
+    [xi.skillchainType.LIGHT        ] = { 1, 0, 1, 0, 1, 0, 1, 0 }, -- Lv3 Fire, Wind, Thunder, Light
+    [xi.skillchainType.DARKNESS     ] = { 0, 1, 0, 1, 0, 1, 0, 1 }, -- Lv3 Ice, Earth, Water, Dark
+    [xi.skillchainType.LIGHT_II     ] = { 1, 0, 1, 0, 1, 0, 1, 0 }, -- Lv4 Fire, Wind, Thunder, Light
+    [xi.skillchainType.DARKNESS_II  ] = { 0, 1, 0, 1, 0, 1, 0, 1 }, -- Lv4 Ice, Earth, Water, Dark
 }
 
 -- Table with pDIF caps per weapon/skill type.
@@ -78,30 +78,6 @@ local shieldSizeToBlockRateTable =
     [4] =  30, -- Tower
     [5] =  50, -- Aegis and Srivatsa
     [6] = 100, -- Ochain  https://www.bg-wiki.com/ffxi/Category:Shields
-}
-
-local elementalGorget = -- Ordered by element.
-{
-    xi.item.FLAME_GORGET,
-    xi.item.SNOW_GORGET,
-    xi.item.BREEZE_GORGET,
-    xi.item.SOIL_GORGET,
-    xi.item.THUNDER_GORGET,
-    xi.item.AQUA_GORGET,
-    xi.item.LIGHT_GORGET,
-    xi.item.SHADOW_GORGET
-}
-
-local elementalBelt = -- Ordered by element.
-{
-    xi.item.FLAME_BELT,
-    xi.item.SNOW_BELT,
-    xi.item.BREEZE_BELT,
-    xi.item.SOIL_BELT,
-    xi.item.THUNDER_BELT,
-    xi.item.AQUA_BELT,
-    xi.item.LIGHT_BELT,
-    xi.item.SHADOW_BELT
 }
 
 -- 'fSTR' in English Wikis. 'SV function' in JP wiki and Studio Gobli.
@@ -233,14 +209,23 @@ end
 xi.combat.physical.calculateWSC = function(actor, wsSTRmod, wsDEXmod, wsVITmod, wsAGImod, wsINTmod, wsMNDmod, wsCHRmod)
     local finalWSC = 0
 
+    -- Sanitize parameters.
+    local strMultiplier = wsSTRmod or 0
+    local dexMultiplier = wsDEXmod or 0
+    local vitMultiplier = wsVITmod or 0
+    local agiMultiplier = wsAGImod or 0
+    local intMultiplier = wsINTmod or 0
+    local mndMultiplier = wsMNDmod or 0
+    local chrMultiplier = wsCHRmod or 0
+
     -- wscSTAT = actor stat * (WS stat modifier + Actor-specific WS stat modifier)
-    local wscSTR = actor:getStat(xi.mod.STR) * (wsSTRmod + actor:getMod(xi.mod.WS_STR_BONUS) / 100)
-    local wscDEX = actor:getStat(xi.mod.DEX) * (wsDEXmod + actor:getMod(xi.mod.WS_DEX_BONUS) / 100)
-    local wscVIT = actor:getStat(xi.mod.VIT) * (wsVITmod + actor:getMod(xi.mod.WS_VIT_BONUS) / 100)
-    local wscAGI = actor:getStat(xi.mod.AGI) * (wsAGImod + actor:getMod(xi.mod.WS_AGI_BONUS) / 100)
-    local wscINT = actor:getStat(xi.mod.INT) * (wsINTmod + actor:getMod(xi.mod.WS_INT_BONUS) / 100)
-    local wscMND = actor:getStat(xi.mod.MND) * (wsMNDmod + actor:getMod(xi.mod.WS_MND_BONUS) / 100)
-    local wscCHR = actor:getStat(xi.mod.CHR) * (wsCHRmod + actor:getMod(xi.mod.WS_CHR_BONUS) / 100)
+    local wscSTR = math.floor(actor:getStat(xi.mod.STR) * (strMultiplier + actor:getMod(xi.mod.WS_STR_BONUS) / 100))
+    local wscDEX = math.floor(actor:getStat(xi.mod.DEX) * (dexMultiplier + actor:getMod(xi.mod.WS_DEX_BONUS) / 100))
+    local wscVIT = math.floor(actor:getStat(xi.mod.VIT) * (vitMultiplier + actor:getMod(xi.mod.WS_VIT_BONUS) / 100))
+    local wscAGI = math.floor(actor:getStat(xi.mod.AGI) * (agiMultiplier + actor:getMod(xi.mod.WS_AGI_BONUS) / 100))
+    local wscINT = math.floor(actor:getStat(xi.mod.INT) * (intMultiplier + actor:getMod(xi.mod.WS_INT_BONUS) / 100))
+    local wscMND = math.floor(actor:getStat(xi.mod.MND) * (mndMultiplier + actor:getMod(xi.mod.WS_MND_BONUS) / 100))
+    local wscCHR = math.floor(actor:getStat(xi.mod.CHR) * (chrMultiplier + actor:getMod(xi.mod.WS_CHR_BONUS) / 100))
 
     finalWSC = wscSTR + wscDEX + wscVIT + wscAGI + wscINT + wscMND + wscCHR
 
@@ -267,112 +252,41 @@ xi.combat.physical.calculateFTP = function(actor, tpFactor)
     ------------------------------
     local fTP = tpFactor
 
-    ------------------------------
-    -- Equipment fTP bonuses.
-    ------------------------------
-    -- TODO: Use item mods and latents for the conditional fTP bonuses they provide.
+    -- Early return: Gear bonuses only come from gear.
+    if actor:getObjType() ~= xi.objType.PC then
+        return fTP
+    end
+
+    -- Early return: Gear bonuses only apply to weaponskills with elemental properties.
     local scProp1, scProp2, scProp3 = actor:getWSSkillchainProp()
-    local dayElement                = VanadielDayElement() + 1 -- "+ 1" because index 1 in table is for non-elemental, not fire.
+    if
+        scProp1 == xi.skillchainType.NONE and
+        scProp2 == xi.skillchainType.NONE and
+        scProp3 == xi.skillchainType.NONE
+    then
+        return fTP
+    end
 
-    local neckFtpBonus   = 0
-    local waistFtpBonus  = 0
-    local headFtpBonus   = 0
-    local handsFtpBonus  = 0
-    local weaponFtpBonus = 0
+    ------------------------------
+    -- fTP bonuses.
+    ------------------------------
+    local dayElement = VanadielDayElement()
 
-    if actor:getObjType() == xi.objType.PC then
-        -- Calculate Neck fTP bonus.
-        local neckItem    = actor:getEquipID(xi.slot.NECK)
-        local neckElement = 1 -- We start at 1 for table lookup. 1 = no element.
+    for elementChecked = xi.element.FIRE, xi.element.DARK do
+        if
+            wsElementalProperties[scProp1][elementChecked] == 1 or
+            wsElementalProperties[scProp2][elementChecked] == 1 or
+            wsElementalProperties[scProp3][elementChecked] == 1
+        then
+            fTP = fTP + actor:getMod(xi.combat.element.getElementalFTPModifier(elementChecked)) / 256
 
-        -- Get Gorget associated element.
-        for i, v in ipairs(elementalGorget) do
-            if neckItem == v then
-                neckElement = neckElement + i
-
-                break
+            if dayElement == elementChecked then
+                fTP = fTP + actor:getMod(xi.mod.DAY_FTP_BONUS) / 256
             end
-        end
-
-        -- Compare WS elemental property with Gorget element.
-        if
-            wsElementalProperties[scProp1][neckElement] == 1 or
-            wsElementalProperties[scProp2][neckElement] == 1 or
-            wsElementalProperties[scProp3][neckElement] == 1 or
-            neckItem == xi.item.FOTIA_GORGET
-        then
-            neckFtpBonus = 0.1
-        end
-
-        -- Calculate Waist fTP bonus.
-        local waistItem    = actor:getEquipID(xi.slot.WAIST)
-        local waistElement = 1 -- We start at 1 for table lookup. 1 = no element.
-
-        -- Get Belt associated element.
-        for i, v in ipairs(elementalBelt) do
-            if waistItem == v then
-                waistElement = waistElement + i
-
-                break
-            end
-        end
-
-        -- Compare WS elemental property with Belt element.
-        if
-            wsElementalProperties[scProp1][waistElement] == 1 or
-            wsElementalProperties[scProp2][waistElement] == 1 or
-            wsElementalProperties[scProp3][waistElement] == 1 or
-            waistItem == xi.item.FOTIA_BELT
-        then
-            waistFtpBonus = 0.1
-        end
-
-        -- Claculate Head fTP bonus.
-        local headItem = actor:getEquipID(xi.slot.HEAD)
-
-        if
-            wsElementalProperties[scProp1][dayElement] == 1 or
-            wsElementalProperties[scProp2][dayElement] == 1 or
-            wsElementalProperties[scProp3][dayElement] == 1
-        then
-            if
-                headItem == xi.item.MEKIRA_OTO or
-                headItem == xi.item.MEKIRA_OTO_P1
-            then
-                headFtpBonus = 0.1
-            elseif headItem == xi.item.GAVIALIS_HELM then
-                headFtpBonus = 0.117
-            end
-        end
-
-        -- Calculate Hands fTP bonus.
-        local handsItem = actor:getEquipID(xi.slot.HANDS)
-
-        if
-            wsElementalProperties[scProp1][dayElement] == 1 or
-            wsElementalProperties[scProp2][dayElement] == 1 or
-            wsElementalProperties[scProp3][dayElement] == 1
-        then
-            if handsItem == xi.item.ATHOSS_GLOVES then
-                handsFtpBonus = 0.06
-            end
-        end
-
-        -- Calculate Weapon fTP bonus.
-        local weaponItem = actor:getEquipID(xi.slot.MAIN)
-
-        if
-            weaponItem == xi.item.PRESTER and
-            (wsElementalProperties[scProp1][xi.element.WIND] == 1 or
-            wsElementalProperties[scProp2][xi.element.WIND] == 1 or
-            wsElementalProperties[scProp3][xi.element.WIND] == 1)
-        then
-            weaponFtpBonus = 0.1
         end
     end
 
-    -- Add all bonuses and return.
-    fTP = fTP + neckFtpBonus + waistFtpBonus + headFtpBonus + handsFtpBonus + weaponFtpBonus
+    fTP = fTP + actor:getMod(xi.mod.ANY_FTP_BONUS) / 256
 
     return fTP
 end

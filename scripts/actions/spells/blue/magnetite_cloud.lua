@@ -21,21 +21,29 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.ecosystem = xi.ecosystem.BEASTMEN
+    params.ecosystem  = xi.ecosystem.BEASTMEN
     params.attackType = xi.attackType.BREATH
     params.damageType = xi.damageType.EARTH
-    params.diff = 0 -- no stat increases magic accuracy
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.hpMod = 6
-    params.lvlMod = 1.875
+    params.diff       = 0 -- no stat increases magic accuracy
+    params.skillType  = xi.skill.BLUE_MAGIC
+    params.hpMod      = 6
+    params.lvlMod     = 1.875
+    params.isConal    = true
 
-    local results = xi.spells.blue.useBreathSpell(caster, target, spell, params, true)
-    local damage = results[1]
-    local resist = results[2]
+    -- Handle damage.
+    local damage = xi.spells.blue.useBreathSpell(caster, target, spell, params)
 
-    if resist >= 0.5 then
-        target:addStatusEffect(xi.effect.WEIGHT, 25, 0, 60 * resist)
+    if damage <= 0 then
+        return damage
     end
+
+    -- Handle status effects.
+    local effectTable =
+    {
+        [1] = { xi.effect.WEIGHT, 25, 0, 60 },
+    }
+
+    xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)
 
     return damage
 end
