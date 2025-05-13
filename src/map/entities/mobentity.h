@@ -29,6 +29,7 @@
 class CMobSpellContainer;
 class CMobSpellList;
 class CEnmityContainer;
+class CMobParty;
 
 enum SPAWNTYPE
 {
@@ -270,15 +271,22 @@ public:
     static constexpr float sight_range{ 15.f };
     static constexpr float magic_range{ 20.f };
 
+    void setParty(CMobParty& party);
+    void clearParty();
+    bool hasParty() const;
+    auto getParty() const -> CMobParty&;
+    void ForEveryPartyMember(const std::function<void(CMobEntity*)>& func);
+
 protected:
     void DistributeRewards();
     void DropItems(CCharEntity* PChar);
 
 private:
-    timer::time_point              m_DespawnTimer{ timer::time_point::min() }; // Despawn Timer to despawn mob after set duration
-    std::unordered_map<int, int16> m_mobModStat;
-    std::unordered_map<int, int16> m_mobModStatSave;
-    static constexpr float         roam_home_distance{ 60.f };
+    std::optional<std::reference_wrapper<CMobParty>> m_Party;
+    timer::time_point                                m_DespawnTimer{ timer::time_point::min() }; // Despawn Timer to despawn mob after set duration
+    std::unordered_map<int, int16>                   m_mobModStat;
+    std::unordered_map<int, int16>                   m_mobModStatSave;
+    static constexpr float                           roam_home_distance{ 60.f };
 };
 
 #endif

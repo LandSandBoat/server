@@ -548,21 +548,14 @@ public:
     auto   getParty() -> sol::table;
     auto   getPartyWithTrusts() -> sol::table;
     uint8  getPartySize(sol::object const& arg0);
-    bool   hasPartyJob(uint8 job);
     auto   getPartyMember(uint8 member, uint8 allianceparty) -> CBaseEntity*;
     auto   getPartyLeader() -> CBaseEntity*;
     uint32 getLeaderID();
     uint32 getPartyLastMemberJoinedTime();
     void   forMembersInRange(float range, sol::function function);
 
-    void addPartyEffect(sol::variadic_args va);
-    bool hasPartyEffect(uint16 effectid);
-    void removePartyEffect(uint16 effectid);
+    auto getAlliance() -> sol::table;
 
-    auto  getAlliance() -> sol::table;
-    uint8 getAllianceSize();
-
-    void reloadParty();
     void disableLevelSync();
     bool isLevelSync();
 

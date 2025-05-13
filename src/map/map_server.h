@@ -38,6 +38,7 @@ class SqlConnection;
 class MapNetworking;
 class MapStatistics;
 class CZone;
+class PartyContainer;
 
 //
 // Exposed globals
@@ -83,10 +84,12 @@ public:
     auto networking() -> MapNetworking&;
     auto statistics() -> MapStatistics&;
     auto zones() -> std::map<uint16, CZone*>&; // g_PZoneList
+    auto parties() const -> PartyContainer&;
     // gameState()
 
 private:
-    std::unique_ptr<MapStatistics> mapStatistics_;
-    std::unique_ptr<MapNetworking> networking_;
-    std::unique_ptr<Watchdog>      watchdog_;
+    std::unique_ptr<MapStatistics>  mapStatistics_;
+    std::unique_ptr<MapNetworking>  networking_;
+    std::unique_ptr<Watchdog>       watchdog_;
+    std::unique_ptr<PartyContainer> parties_;
 };

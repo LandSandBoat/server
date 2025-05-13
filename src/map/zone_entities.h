@@ -127,6 +127,8 @@ private:
     timer::time_point m_charPersistTime{ timer::now() };
     uint16            m_lastCharPersistTargId{ 0 };
 
+    std::vector<CMobParty> m_mobParties;
+
     //
     // Intermediate collections for use inside ZoneServer
     //

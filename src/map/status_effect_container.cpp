@@ -1410,10 +1410,11 @@ void CStatusEffectContainer::UpdateStatusIcons()
     }
     PChar->m_EffectsChanged = true;
 
-    if (PChar->PParty)
-    {
-        PChar->PParty->EffectsChanged();
-    }
+    // TODO: Uplift with new PT system
+    // if (PChar->PParty)
+    // {
+    //     PChar->PParty->EffectsChanged();
+    // }
 }
 
 std::vector<EFFECT> CStatusEffectContainer::GetStatusEffectsInIDRange(EFFECT start, EFFECT end)
@@ -1818,7 +1819,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
         if (auraTarget == AURA_TARGET::ALLIES)
         {
             // clang-format off
-            PChar->ForPartyWithTrusts([&](CBattleEntity* PMember)
+            PChar->ForEveryPartyMemberWithTrusts([&](CBattleEntity* PMember)
             {
                 if (PMember != nullptr &&
                     m_POwner->loc.zone &&
@@ -1906,7 +1907,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
         if (auraTarget == AURA_TARGET::ALLIES)
         {
             // clang-format off
-            PEntity->ForParty([&](CBattleEntity* PMember)
+            static_cast<CMobEntity*>(PEntity)->ForEveryPartyMember([&](CBattleEntity* PMember)
             {
                 if (PMember != nullptr &&
                     m_POwner->loc.zone &&

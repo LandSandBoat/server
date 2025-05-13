@@ -19,23 +19,24 @@
 ===========================================================================
 */
 
-#ifndef _CPARTYMEMBERUPDATEPACKET_H
-#define _CPARTYMEMBERUPDATEPACKET_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
+#include "common/party/base.h"
 #include "basic.h"
+
+#include <common/ipc_structs.h>
 
 class CCharEntity;
 class CTrustEntity;
 class CAlliance;
+class CCharParty;
 
 class CPartyMemberUpdatePacket : public CBasicPacket
 {
 public:
-    CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 MemberNumber, uint16 memberflags, uint16 zoneid);
+    CPartyMemberUpdatePacket(CCharEntity* PSolo);
     CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 MemberNumber);
-    CPartyMemberUpdatePacket(uint32 id, const std::string& name, uint16 memberFlags, uint8 MemberNumber, uint16 ZoneID);
+    CPartyMemberUpdatePacket(const CCharParty& PParty, const PartyMember& PMember, const CCharEntity* PRecipient, uint8 MemberNumber);
 };
-
-#endif

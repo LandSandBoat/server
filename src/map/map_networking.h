@@ -30,6 +30,7 @@
 #include "map_session_container.h"
 #include "map_socket.h"
 #include "map_statistics.h"
+#include "party/container.h"
 
 #include <span>
 
@@ -62,6 +63,7 @@ public:
 
     auto ipp() -> IPP;
     auto sessions() -> MapSessionContainer&;
+    auto server() -> MapServer&;
     auto socket() -> MapSocket&;
 
 private:

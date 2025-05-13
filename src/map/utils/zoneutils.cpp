@@ -38,6 +38,7 @@
 #include "mob_spell_list.h"
 #include "mobutils.h"
 #include "packets/entity_update.h"
+#include "party/char_party.h"
 #include "zone_instance.h"
 
 #include <algorithm>
@@ -197,7 +198,7 @@ namespace zoneutils
                     {
                         PPrimary = PChar;
                     }
-                    else if (PChar->PParty && PChar->PParty->GetPartyID() == primary)
+                    else if (PChar->hasParty() && PChar->getParty().getPartyId() == primary)
                     {
                         PSecondary = PChar;
                     }

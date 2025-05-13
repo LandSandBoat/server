@@ -32,6 +32,7 @@
 #include "ai/states/weaponskill_state.h"
 #include "attack.h"
 #include "enmity_container.h"
+#include "ipc_client.h"
 #include "mob_spell_container.h"
 #include "mob_spell_list.h"
 #include "packets/char_health.h"
@@ -75,10 +76,10 @@ void CTrustEntity::PostTick()
         m_nextUpdateTimer = now + 250ms;
         loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);
 
-        if (PMaster && PMaster->PParty && updatemask & UPDATE_HP)
+        if (PMaster && static_cast<CCharEntity*>(PMaster)->hasParty() && updatemask & UPDATE_HP)
         {
             // clang-format off
-            PMaster->ForParty([this](auto PMember)
+            static_cast<CCharEntity*>(PMaster)->ForEveryPartyMember([this](auto PMember)
             {
                 static_cast<CCharEntity*>(PMember)->pushPacket<CCharHealthPacket>(this);
             });
@@ -457,7 +458,11 @@ bool CTrustEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 
     if (targetFlags & TARGET_PLAYER_PARTY && PInitiator->allegiance == allegiance && PMaster)
     {
-        return PInitiator->PParty == PMaster->PParty;
+        // TODO: wtf is this
+        // Trust target finding?
+        // Means we must handle Mob<>Trust, Trust<>PChar, PChar<>PChar?
+        return true;
+        // return PInitiator->PParty == static_cast<CCharEntity*>(PMaster)->PParty;
     }
 
     return CMobEntity::ValidTarget(PInitiator, targetFlags);

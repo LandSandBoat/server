@@ -9,6 +9,8 @@ set(LUA_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_baseentity.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_battlefield.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_battlefield.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_char_party.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_char_party.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_instance.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_instance.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_item.cpp

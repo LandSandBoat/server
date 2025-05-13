@@ -34,7 +34,7 @@
 #include "mob_modifier.h"
 #include "mob_spell_container.h"
 #include "mobskill.h"
-#include "party.h"
+#include "party/mob_party.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/petutils.h"
@@ -207,9 +207,9 @@ void CMobController::TryLink()
     }
 
     // Handle monster linking if they are close enough
-    if (PMob->PParty != nullptr && !PMob->getMobMod(MOBMOD_ONE_WAY_LINKING))
+    if (PMob->hasParty() && !PMob->getMobMod(MOBMOD_ONE_WAY_LINKING))
     {
-        for (auto& member : PMob->PParty->members)
+        for (auto& member : PMob->getParty().getMembers())
         {
             CMobEntity* PPartyMember = dynamic_cast<CMobEntity*>(member);
             // Note if the mob to link with this one is a pet then do not link

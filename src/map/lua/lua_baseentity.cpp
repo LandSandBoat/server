@@ -152,6 +152,7 @@
 #include "packets/shop_menu.h"
 #include "packets/weather.h"
 
+#include "party/char_party.h"
 #include "utils/battleutils.h"
 #include "utils/blueutils.h"
 #include "utils/charutils.h"
@@ -365,25 +366,30 @@ void CLuaBaseEntity::printToArea(std::string const& message, sol::object const& 
     }
     else if (messageRange == ChatMessageArea::Party)
     {
-        if (PChar->PParty && PChar->PParty->m_PAlliance)
+        if (PChar->hasParty())
         {
-            message::send(ipc::ChatMessageAlliance{
-                .allianceId  = PChar->PParty->m_PAlliance->m_AllianceID,
-                .senderId    = PChar->id,
-                .senderName  = name,
-                .message     = message,
-                .messageType = messageLook,
-            });
-        }
-        else if (PChar->PParty)
-        {
-            message::send(ipc::ChatMessageParty{
-                .partyId     = PChar->PParty->GetPartyID(),
-                .senderId    = PChar->id,
-                .senderName  = name,
-                .message     = message,
-                .messageType = messageLook,
-            });
+            CCharParty& party = PChar->getParty();
+            if (party.isPartOfAlliance())
+            {
+                // TODO: Alliance handling
+                message::send(ipc::ChatMessageAlliance{
+                    .allianceId  = party.getPartyId(),
+                    .senderId    = PChar->id,
+                    .senderName  = name,
+                    .message     = message,
+                    .messageType = messageLook,
+                });
+            }
+            else
+            {
+                message::send(ipc::ChatMessageParty{
+                    .partyId     = PChar->getParty().getPartyId(),
+                    .senderId    = PChar->id,
+                    .senderName  = name,
+                    .message     = message,
+                    .messageType = messageLook,
+                });
+            }
         }
     }
     else if (messageRange == ChatMessageArea::Yell)
@@ -6422,9 +6428,9 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
         charutils::BuildingCharTraitsTable(PChar);
 
         // clang-format off
-        PChar->ForParty([](CBattleEntity* PMember)
+        PChar->ForEveryPartyMember([](const CCharEntity* PMember)
         {
-            ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs();
+            PMember->PLatentEffectContainer->CheckLatentsPartyJobs();
         });
         // clang-format on
 
@@ -10895,12 +10901,35 @@ sol::table CLuaBaseEntity::getParty()
         return sol::lua_nil;
     }
 
-    // clang-format off
+    // TODO: Is this used on Trusts?
+    // TODO: This should return a CLuaCharParty instead of a table
+    // but there is a lot of scripts using this right now
     auto table = lua.create_table();
-    ((CBattleEntity*)m_PBaseEntity)->ForParty([&table](CBattleEntity* member)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        table.add(CLuaBaseEntity(member));
-    });
+        // clang-format off
+        PChar->ForEveryPartyMember([&table](CCharEntity* member)
+        {
+            table.add(CLuaBaseEntity(member));
+        });
+        // clang-format on
+
+        return table;
+    }
+
+    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
+    {
+        // clang-format off
+        PMob->ForEveryPartyMember([&table](CMobEntity* member)
+        {
+            table.add(CLuaBaseEntity(member));
+        });
+        // clang-format on
+    }
+    else
+    {
+        ShowWarning("Invalid Entity type calling function (%s).", m_PBaseEntity->getName());
+    }
     // clang-format on
 
     return table;
@@ -10923,7 +10952,7 @@ sol::table CLuaBaseEntity::getPartyWithTrusts()
 
     // clang-format off
     auto table = lua.create_table();
-    ((CCharEntity*)m_PBaseEntity)->ForPartyWithTrusts([&table](CBattleEntity* member)
+    static_cast<CCharEntity*>(m_PBaseEntity)->ForEveryPartyMemberWithTrusts([&table](CBattleEntity* member)
     {
         table.add(CLuaBaseEntity(member));
     });
@@ -10941,63 +10970,14 @@ sol::table CLuaBaseEntity::getPartyWithTrusts()
 
 uint8 CLuaBaseEntity::getPartySize(sol::object const& arg0)
 {
+    // TODO: Deprecate and use CLuaCharParty binding
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
         ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
         return 0;
     }
 
-    uint8 allianceparty = (arg0 == sol::lua_nil) ? 0 : arg0.as<uint8>();
-    uint8 partysize     = 1;
-
-    auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
-
-    if (PBattle->PParty != nullptr)
-    {
-        if (allianceparty == 0)
-        {
-            partysize = static_cast<uint8>(PBattle->PParty->members.size());
-        }
-        else if (PBattle->PParty->m_PAlliance != nullptr)
-        {
-            partysize = static_cast<uint8>(PBattle->PParty->m_PAlliance->partyList.at(allianceparty)->members.size());
-        }
-    }
-
-    return partysize;
-}
-
-/************************************************************************
- *  Function: hasPartyJob()
- *  Purpose : Loops over party members and returns true if job is found
- *  Example : if caster:hasPartyJob(xi.job.DRK) then
- *  Notes   : Highly useful for future addition of features
- ************************************************************************/
-
-bool CLuaBaseEntity::hasPartyJob(uint8 job)
-{
-    if (static_cast<CCharEntity*>(m_PBaseEntity)->PParty != nullptr)
-    {
-        for (auto const& member : static_cast<CCharEntity*>(m_PBaseEntity)->PParty->members)
-        {
-            CCharEntity* PTarget = static_cast<CCharEntity*>(member);
-
-            if (PTarget->GetMJob() == job)
-            {
-                return true;
-            }
-
-            for (auto* PTrust : PTarget->PTrusts)
-            {
-                if (PTrust->GetMJob() == job)
-                {
-                    return true;
-                }
-            }
-        }
-    }
-
-    return false;
+    return 1;
 }
 
 /************************************************************************
@@ -11009,38 +10989,9 @@ bool CLuaBaseEntity::hasPartyJob(uint8 job)
 
 auto CLuaBaseEntity::getPartyMember(uint8 member, uint8 allianceparty) -> CBaseEntity*
 {
-    if (m_PBaseEntity->objtype == TYPE_NPC)
-    {
-        ShowWarning("CLuaBaseEntity::getPartyMember() - NPC calling function.");
-        return nullptr;
-    }
+    // TODO: Deprecate and use CLuaCharParty/CLuaMobParty binding
+    // Only used by Apkallus
 
-    CBattleEntity* PBattle     = static_cast<CBattleEntity*>(m_PBaseEntity);
-    CBattleEntity* PTargetChar = nullptr;
-
-    if (allianceparty == 0 && member == 0)
-    {
-        PTargetChar = PBattle;
-    }
-    else if (PBattle->PParty != nullptr)
-    {
-        if (allianceparty == 0 && member < PBattle->PParty->members.size())
-        {
-            PTargetChar = PBattle->PParty->members[member];
-        }
-        else if (PBattle->PParty->m_PAlliance != nullptr &&
-                 member <= PBattle->PParty->m_PAlliance->partyList.at(allianceparty)->members.size())
-        {
-            PTargetChar = PBattle->PParty->m_PAlliance->partyList.at(allianceparty)->members[member];
-        }
-    }
-
-    if (PTargetChar != nullptr)
-    {
-        return PTargetChar;
-    }
-
-    ShowError("Lua::getPartyMember :: Member or Alliance Number is not valid.");
     return nullptr;
 }
 
@@ -11053,17 +11004,16 @@ auto CLuaBaseEntity::getPartyMember(uint8 member, uint8 allianceparty) -> CBaseE
 
 auto CLuaBaseEntity::getPartyLeader() -> CBaseEntity*
 {
+    // TODO: Deprecate and use CLuaCharParty binding
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("CLuaBaseEntity::getPartyLeader() - Non-PC called function.");
         return nullptr;
     }
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-    if (PChar->PParty)
+    if (const auto PChar = static_cast<CCharEntity*>(m_PBaseEntity); PChar->hasParty())
     {
-        CBattleEntity* PLeader = PChar->PParty->GetLeader();
-        if (PLeader != nullptr)
+        if (CBattleEntity* PLeader = PChar->getParty().getLeader(); PLeader != nullptr)
         {
             return PLeader;
         }
@@ -11081,10 +11031,10 @@ auto CLuaBaseEntity::getPartyLeader() -> CBaseEntity*
 
 void CLuaBaseEntity::forMembersInRange(float range, sol::function function)
 {
-    auto* target = (CBattleEntity*)m_PBaseEntity;
+    auto* target = (CCharEntity*)m_PBaseEntity;
 
     // clang-format off
-    target->ForParty([&target, &range, &function](CBattleEntity* member)
+    target->ForEveryPartyMember([&target, &range, &function](CBattleEntity* member)
     {
         if (target->loc.zone == member->loc.zone && isWithinDistance(target->loc.p, member->loc.p, range))
         {
@@ -11092,102 +11042,6 @@ void CLuaBaseEntity::forMembersInRange(float range, sol::function function)
         }
     });
     // clang-format on
-}
-
-/************************************************************************
- *  Function: addPartyEffect()
- *  Purpose : Adds effect to members of the entire party
- *  Example : player:addPartyEffect(effect, 1, 2, 3, ...)?
- *  Notes   : Must have at least three members, scales to six max
- ************************************************************************/
-
-void CLuaBaseEntity::addPartyEffect(sol::variadic_args va)
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        ShowWarning("CLuaBaseEntity::addPartyEffect() - Non-PC called function.");
-        return;
-    }
-
-    std::vector<uint16> args(7, 0);
-
-    uint8 idx = 0;
-    for (auto const& v : va)
-    {
-        args[idx++] = v.get<uint16>();
-    }
-
-    CStatusEffect* PEffect =
-        new CStatusEffect(static_cast<EFFECT>(args[0]), args[1], args[2], std::chrono::seconds(args[3]), std::chrono::seconds(args[4]), args[5], args[6]);
-
-    CBattleEntity* PEntity = ((CBattleEntity*)m_PBaseEntity);
-
-    // clang-format off
-    PEntity->ForParty([PEffect](CBattleEntity* PMember)
-    {
-        PMember->StatusEffectContainer->AddStatusEffect(PEffect);
-    });
-    // clang-format on
-}
-
-/************************************************************************
- *  Function: hasPartyEffect()
- *  Purpose : Returns true if all members of party have a specified effect
- *  Example : if player:hasPartyEffect(effect) then
- *  Notes   : Currently not used in any script
- ************************************************************************/
-
-bool CLuaBaseEntity::hasPartyEffect(uint16 effectid)
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        ShowWarning("CLuaBaseEntity::hasPartyEffect() - Non-PC called function.");
-        return false;
-    }
-
-    CCharEntity* PChar = ((CCharEntity*)m_PBaseEntity);
-
-    if (PChar->PParty != nullptr)
-    {
-        for (const auto& member : PChar->PParty->members)
-        {
-            if (member->loc.zone == PChar->loc.zone)
-            {
-                // Bail out if someone DOESN'T have the desired effect
-                if (!member->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(effectid)))
-                {
-                    return false;
-                }
-            }
-        }
-    }
-    return true;
-}
-
-/************************************************************************
- *  Function: removePartyEffect()
- *  Purpose : Deletes specified effect from all party members
- *  Example : player:removePartyEffect(effect)
- *  Notes   :
- ************************************************************************/
-
-void CLuaBaseEntity::removePartyEffect(uint16 effectid)
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        ShowWarning("CLuaBaseEntity::removePartyEffect() - Non-PC called function.");
-        return;
-    }
-
-    CCharEntity* PChar = ((CCharEntity*)m_PBaseEntity);
-
-    for (const auto& member : PChar->PParty->members)
-    {
-        if (member->loc.zone == PChar->loc.zone)
-        {
-            member->StatusEffectContainer->DelStatusEffect(static_cast<EFFECT>(effectid));
-        }
-    }
 }
 
 /************************************************************************
@@ -11199,6 +11053,7 @@ void CLuaBaseEntity::removePartyEffect(uint16 effectid)
 
 sol::table CLuaBaseEntity::getAlliance()
 {
+    // TODO: Should return CLuaCharAlliance, but this is used in a lot of scripts
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
         ShowWarning("CLuaBaseEntity::getAlliance() - NPC passed to function.");
@@ -11210,51 +11065,13 @@ sol::table CLuaBaseEntity::getAlliance()
     auto table = lua.create_table();
 
     // clang-format off
-    PChar->ForAlliance([&table](CBattleEntity* PMember)
+    PChar->ForEveryAllianceMember([&table](CCharEntity* PMember)
     {
         table.add(CLuaBaseEntity(PMember));
     });
     // clang-format on
 
     return table;
-}
-
-/************************************************************************
- *  Function: getAllianceSize()
- *  Purpose : Returns the number of members in the alliance
- *  Example : local count = player:getAllianceSize()
- *  Notes   :
- ************************************************************************/
-
-uint8 CLuaBaseEntity::getAllianceSize()
-{
-    if (m_PBaseEntity->objtype == TYPE_NPC)
-    {
-        ShowWarning("CLuaBaseEntity::getAllianceSize() - NPC passed to function.");
-        return 1;
-    }
-
-    auto* PBattle      = static_cast<CBattleEntity*>(m_PBaseEntity);
-    uint8 alliancesize = 1;
-
-    if (PBattle->PParty != nullptr)
-    {
-        if (PBattle->PParty->m_PAlliance != nullptr)
-        {
-            // Reset to use as counter..
-            alliancesize = 0;
-            for (const CParty* PParty : PBattle->PParty->m_PAlliance->partyList)
-            {
-                alliancesize += static_cast<uint8>(PParty->members.size());
-            }
-        }
-        else
-        {
-            return static_cast<uint8>(PBattle->PParty->members.size());
-        }
-    }
-
-    return alliancesize;
 }
 
 /************************************************************************
@@ -11268,6 +11085,8 @@ uint8 CLuaBaseEntity::getAllianceSize()
 
 uint32 CLuaBaseEntity::getLeaderID()
 {
+    // TODO: Deprecate and use CLuaCharParty binding
+    // Only used by a few scripts.
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
@@ -11276,14 +11095,14 @@ uint32 CLuaBaseEntity::getLeaderID()
 
     if (const CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        if (PChar->PParty != nullptr)
+        if (PChar->hasParty())
         {
-            if (PChar->PParty->m_PAlliance != nullptr)
-            {
-                return PChar->PParty->m_PAlliance->m_AllianceID;
-            }
+            // if (PChar->PParty->m_PAlliance != nullptr)
+            // {
+            //     return PChar->PParty->m_PAlliance->m_AllianceID;
+            // }
 
-            return PChar->PParty->GetPartyID();
+            return PChar->getParty().getLeaderId();
         }
 
         return PChar->id;
@@ -11301,38 +11120,21 @@ uint32 CLuaBaseEntity::getLeaderID()
 
 uint32 CLuaBaseEntity::getPartyLastMemberJoinedTime()
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    // TODO: Deprecate/CLuaCharParty.
+    // This binding is only used by trusts for a single check, and that check is wrong.
+    if (const auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        if (PChar->hasParty())
+        {
+            return std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - PChar->getParty().getTimeLastMemberJoined()).count();
+        }
+    }
+    else
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return 0;
-    }
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    if (PChar->PParty != nullptr)
-    {
-        return earth_time::timestamp(timer::to_utc(PChar->PParty->GetTimeLastMemberJoined()));
     }
 
     return 0;
-}
-
-/************************************************************************
- *  Function: reloadParty()
- *  Purpose : Display a new party in the event of alliance form/disband
- *  Example : Creates/Destroys the other parties being displayed
- *  Notes   : Only a function of the core at the moment - future plans?
- ************************************************************************/
-
-void CLuaBaseEntity::reloadParty()
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return;
-    }
-
-    static_cast<CCharEntity*>(m_PBaseEntity)->ReloadPartyInc();
 }
 
 /************************************************************************
@@ -11344,6 +11146,8 @@ void CLuaBaseEntity::reloadParty()
 
 void CLuaBaseEntity::disableLevelSync()
 {
+    // TODO: Not sure this binding is useful at this level.
+    // Review level sync effect
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
@@ -11352,16 +11156,11 @@ void CLuaBaseEntity::disableLevelSync()
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    if (PChar->PParty)
+    // TODO: Provide binding for disabling sync on party.
+    if (PChar->m_LevelRestriction != 0)
     {
-        if (PChar->PParty->GetSyncTarget() == PChar)
-        {
-            PChar->PParty->SetSyncTarget("", MsgStd::LevelSyncRemoveLeftParty);
-        }
-        else
-        {
-            PChar->PParty->DisableSync();
-        }
+        PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
+        PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_RESTRICTION);
     }
 
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(PChar));
@@ -11384,9 +11183,9 @@ bool CLuaBaseEntity::isLevelSync()
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    if (PChar->PParty)
+    if (PChar->hasParty())
     {
-        return PChar->PParty->GetSyncTarget() && PChar->PParty->GetSyncTarget() != PChar;
+        return PChar->getParty().getSyncTarget() && PChar->getParty().getSyncTarget() != PChar;
     }
 
     return false;
@@ -11407,14 +11206,14 @@ uint8 CLuaBaseEntity::checkSoloPartyAlliance()
         return 0;
     }
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    const auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     uint8 SoloPartyAlliance = 0;
 
-    if (PChar->PParty != nullptr)
+    if (PChar->hasParty())
     {
         SoloPartyAlliance = 1;
-        if (PChar->PParty->m_PAlliance != nullptr)
+        if (PChar->getParty().isPartOfAlliance())
         {
             SoloPartyAlliance = 2;
         }
@@ -11448,9 +11247,9 @@ bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object
 
     if (charutils::CheckMob(PMob->m_HiPCLvl, PMob->GetMLevel()) > EMobDifficulty::TooWeak && distance(PMob->loc.p, PChar->loc.p) < range && !PMob->GetCallForHelpFlag())
     {
-        if (PChar->PParty && PChar->PParty->GetSyncTarget())
+        if (PChar->hasParty() && PChar->getParty().getSyncTarget())
         {
-            if (distance(PMob->loc.p, PChar->PParty->GetSyncTarget()->loc.p) < range && PChar->PParty->GetSyncTarget()->health.hp)
+            if (distance(PMob->loc.p, PChar->getParty().getSyncTarget()->loc.p) < range && PChar->getParty().getSyncTarget()->health.hp)
             {
                 credit = true;
             }
@@ -15346,10 +15145,9 @@ void CLuaBaseEntity::trustPartyMessage(uint32 message_id)
     if (auto* PMaster = dynamic_cast<CCharEntity*>(PTrust->PMaster))
     {
         // clang-format off
-        PMaster->ForParty([&](CBattleEntity* PMember)
+        PMaster->ForEveryPartyMember([&](CCharEntity* PMember)
         {
-            auto* PCharMember = static_cast<CCharEntity*>(PMember);
-            PCharMember->pushPacket<CMessageCombatPacket>(PTrust, PMember, message_id, 0, 711);
+            PMember->pushPacket<CMessageCombatPacket>(PTrust, PMember, message_id, 0, 711);
         });
         // clang-format on
     }
@@ -19462,21 +19260,14 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getParty", CLuaBaseEntity::getParty);
     SOL_REGISTER("getPartyWithTrusts", CLuaBaseEntity::getPartyWithTrusts);
     SOL_REGISTER("getPartySize", CLuaBaseEntity::getPartySize);
-    SOL_REGISTER("hasPartyJob", CLuaBaseEntity::hasPartyJob);
     SOL_REGISTER("getPartyMember", CLuaBaseEntity::getPartyMember);
     SOL_REGISTER("getPartyLeader", CLuaBaseEntity::getPartyLeader);
     SOL_REGISTER("getLeaderID", CLuaBaseEntity::getLeaderID);
     SOL_REGISTER("getPartyLastMemberJoinedTime", CLuaBaseEntity::getPartyLastMemberJoinedTime);
     SOL_REGISTER("forMembersInRange", CLuaBaseEntity::forMembersInRange);
 
-    SOL_REGISTER("addPartyEffect", CLuaBaseEntity::addPartyEffect);
-    SOL_REGISTER("hasPartyEffect", CLuaBaseEntity::hasPartyEffect);
-    SOL_REGISTER("removePartyEffect", CLuaBaseEntity::removePartyEffect);
-
     SOL_REGISTER("getAlliance", CLuaBaseEntity::getAlliance);
-    SOL_REGISTER("getAllianceSize", CLuaBaseEntity::getAllianceSize);
 
-    SOL_REGISTER("reloadParty", CLuaBaseEntity::reloadParty);
     SOL_REGISTER("disableLevelSync", CLuaBaseEntity::disableLevelSync);
     SOL_REGISTER("isLevelSync", CLuaBaseEntity::isLevelSync);
 

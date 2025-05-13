@@ -5,6 +5,7 @@ add_subdirectory(los)
 add_subdirectory(lua)
 add_subdirectory(packets)
 add_subdirectory(utils)
+add_subdirectory(party)
 
 set(SOURCES
     ${COMMON_SOURCES}
@@ -15,6 +16,7 @@ set(SOURCES
     ${LUA_SOURCES}
     ${PACKET_SOURCES}
     ${UTIL_SOURCES}
+    ${PARTY_SOURCES}
     ${CMAKE_CURRENT_SOURCE_DIR}/ability.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ability.h
     ${CMAKE_CURRENT_SOURCE_DIR}/alliance.cpp
@@ -109,8 +111,6 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/packet_guard.h
     ${CMAKE_CURRENT_SOURCE_DIR}/packet_system.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/packet_system.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/party.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/party.h
     ${CMAKE_CURRENT_SOURCE_DIR}/petskill.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/petskill.h
     ${CMAKE_CURRENT_SOURCE_DIR}/recast_container.cpp

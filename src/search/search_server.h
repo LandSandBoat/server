@@ -38,6 +38,7 @@
 #endif
 
 // search specific stuff
+#include "common/zmq_dealer_wrapper.h"
 #include "handler.h"
 #include "search_handler.h"
 
@@ -62,4 +63,6 @@ private:
 
     // NOTE: We're only using the read-lock for this
     SynchronizedShared<std::unordered_set<std::string>> IPAddressWhitelist_;
+
+    ZMQDealerWrapper zmqDealerWrapper_;
 };

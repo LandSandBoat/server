@@ -31,7 +31,8 @@
 #include "conquest_system.h"
 #include "http_server.h"
 #include "ipc_server.h"
-#include "party_system.h"
+#include "party/system.h"
+#include "party/world.h"
 #include "time_server.h"
 
 namespace
@@ -66,6 +67,19 @@ int32 pump_queues(timer::time_point tick, CTaskManager::CTask* PTask)
     return 0;
 }
 
+int32 party_system_sync(timer::time_point tick, CTaskManager::CTask* PTask)
+{
+    std::any_cast<WorldServer*>(PTask->m_data)->ipcServer_->broadcastMessage(ipc::PartySystemSync{});
+    return 0;
+}
+
+// Only for debugging. Make this a command later.
+int32 party_system_dump(timer::time_point tick, CTaskManager::CTask* PTask)
+{
+    std::any_cast<WorldServer*>(PTask->m_data)->partySystem_->dump();
+    return 0;
+}
+
 WorldServer::WorldServer(int argc, char** argv)
 : Application("world", argc, argv)
 , ipcServer_(std::make_unique<IPCServer>(*this))
@@ -81,6 +95,9 @@ WorldServer::WorldServer(int argc, char** argv)
 
     // TODO: Make this more reactive than a polling job
     CTaskManager::getInstance()->AddTask("pump_queues", timer::now(), this, CTaskManager::TASK_INTERVAL, kPumpQueuesTime, pump_queues);
+
+    CTaskManager::getInstance()->AddTask("party_system_sync", timer::now() + 5s, this, CTaskManager::TASK_ONCE, 5000ms, party_system_sync);
+    CTaskManager::getInstance()->AddTask("dump_parties", timer::now(), this, CTaskManager::TASK_INTERVAL, 5000ms, party_system_dump);
 
     // asio::steady_timer timeServerTimer(io_context_, kPumpQueuesTime);
     // timeServerTimer.async_wait(std::bind(&pump_queues, this, &timeServerTimer));

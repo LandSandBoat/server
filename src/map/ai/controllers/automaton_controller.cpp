@@ -38,6 +38,8 @@
 #include "utils/petutils.h"
 #include "utils/puppetutils.h"
 
+#include "party/char_party.h"
+
 CAutomatonController::CAutomatonController(CAutomatonEntity* PPet)
 : CPetController(PPet)
 , PAutomaton(PPet)
@@ -498,13 +500,13 @@ bool CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers)
         }
     }
 
-    if (maneuvers.light && !PCastTarget && PAutomaton->getHead() == HEAD_SOULSOOTHER && PAutomaton->PMaster->PParty) // Light + Soulsoother head -> Heal party
+    if (maneuvers.light && !PCastTarget && PAutomaton->getHead() == HEAD_SOULSOOTHER && static_cast<CCharEntity*>(PAutomaton->PMaster)->hasParty()) // Light + Soulsoother head -> Heal party
     {
         // clang-format off
         if (PMob)
         {
             uint16 highestEnmity = 0;
-            static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+            static_cast<CCharEntity*>(PAutomaton->PMaster)->ForEveryPartyMemberWithTrusts([&](CBattleEntity* PMember)
             {
                 if (PMember->id != PAutomaton->PMaster->id)
                 {
@@ -520,7 +522,7 @@ bool CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers)
         }
         else
         {
-            static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+            static_cast<CCharEntity*>(PAutomaton->PMaster)->ForEveryPartyMemberWithTrusts([&](CBattleEntity* PMember)
             {
                 if (PMember->id != PAutomaton->PMaster->id && distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
                 {
@@ -1126,9 +1128,9 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
         }
     }
 
-    if (maneuvers.water && PAutomaton->getHead() == HEAD_SOULSOOTHER && PAutomaton->PMaster->PParty) // Water + Soulsoother head -> Remove party's statuses
+    if (maneuvers.water && PAutomaton->getHead() == HEAD_SOULSOOTHER && static_cast<CCharEntity*>(PAutomaton->PMaster)->hasParty()) // Water + Soulsoother head -> Remove party's statuses
     {
-        for (auto member : PAutomaton->PMaster->PParty->members)
+        for (auto member : static_cast<CCharEntity*>(PAutomaton->PMaster)->getParty().getMembers())
         {
             if (member->id != PAutomaton->PMaster->id)
             {
@@ -1335,11 +1337,11 @@ bool CAutomatonController::TryEnhance()
     size_t members = 0;
 
     // Unknown whether it only applies buffs to other members if they have hate or if the Soulsoother head is needed
-    if (PAutomaton->PMaster->PParty)
+    if (static_cast<CCharEntity*>(PAutomaton->PMaster)->hasParty())
     {
-        members = PAutomaton->PMaster->PParty->members.size();
+        members = static_cast<CCharEntity*>(PAutomaton->PMaster)->getParty().getMembers().size();
         // clang-format off
-        static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+        static_cast<CCharEntity*>(PAutomaton->PMaster)->ForEveryPartyMemberWithTrusts([&](CBattleEntity* PMember)
         {
             if (PMember->id != PAutomaton->PMaster->id && distance(PAutomaton->loc.p, PMember->loc.p) < 20)
             {

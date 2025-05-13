@@ -24,57 +24,48 @@
 #include "party_member_update.h"
 
 #include "alliance.h"
+#include "common/party/base.h"
 #include "entities/charentity.h"
 #include "entities/trustentity.h"
-#include "party.h"
+#include "party/char_party.h"
+#include "party_define.h"
+#include "utils/zoneutils.h"
 
-CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 MemberNumber, uint16 memberflags, uint16 ZoneID)
+// This packet size may have changed in the Nov 2021 Update with the introduction of master levels, but it broke things for us in the following ways:
+// 1. Trusts would not appear in the party list
+// 2. Players in a party would always appear as out of zone
+// Modify with caution for the below functions!
+
+// Used to notify the player they're now solo.
+CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PSolo)
 {
     this->setType(0xDD);
-
-    // This packet size may have changed in the Nov 2021 Update with the introduction of master levels, but it broke things for us in the following ways:
-    // 1. Trusts would not appear in the party list
-    // 2. Players in a party would always appear as out of zone
-    // Modify with caution for the below functions!
     this->setSize(0x40);
 
-    if (PChar == nullptr)
+    ref<uint32>(0x04) = PSolo->id;
+
+    ref<uint16>(0x14) = 0;
+    ref<uint32>(0x08) = PSolo->health.hp;
+    ref<uint32>(0x0C) = PSolo->health.mp;
+    ref<uint16>(0x10) = PSolo->health.tp;
+    ref<uint16>(0x18) = PSolo->targid;
+    ref<uint8>(0x1A)  = 0;
+    ref<uint8>(0x1D)  = PSolo->GetHPP();
+    ref<uint8>(0x1E)  = PSolo->GetMPP();
+
+    if (!PSolo->isAnon())
     {
-        ShowError("CPartyMemberUpdatePacket::CPartyMemberUpdatePacket() - PChar was null.");
-        return;
+        ref<uint8>(0x22) = PSolo->GetMJob();
+        ref<uint8>(0x23) = PSolo->GetMLevel();
+        ref<uint8>(0x24) = PSolo->GetSJob();
+        ref<uint8>(0x25) = PSolo->GetSLevel();
     }
 
-    ref<uint32>(0x04) = PChar->id;
-
-    ref<uint16>(0x14) = memberflags;
-
-    if (PChar->getZone() != ZoneID)
-    {
-        ref<uint16>(0x20) = PChar->getZone();
-    }
-    else
-    {
-        ref<uint32>(0x08) = PChar->health.hp;
-        ref<uint32>(0x0C) = PChar->health.mp;
-        ref<uint16>(0x10) = PChar->health.tp;
-        ref<uint16>(0x18) = PChar->targid;
-        ref<uint8>(0x1A)  = MemberNumber;
-        ref<uint8>(0x1D)  = PChar->GetHPP();
-        ref<uint8>(0x1E)  = PChar->GetMPP();
-
-        if (!PChar->isAnon())
-        {
-            ref<uint8>(0x22) = PChar->GetMJob();
-            ref<uint8>(0x23) = PChar->GetMLevel();
-            ref<uint8>(0x24) = PChar->GetSJob();
-            ref<uint8>(0x25) = PChar->GetSLevel();
-        }
-    }
-
-    std::memcpy(buffer_.data() + 0x28, PChar->getName().c_str(), PChar->getName().size());
+    std::memcpy(buffer_.data() + 0x28, PSolo->getName().c_str(), PSolo->getName().size());
 }
 
-CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 MemberNumber)
+// Notifying player of a trust information
+CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, const uint8 MemberNumber)
 {
     this->setType(0xDD);
     this->setSize(0x40);
@@ -104,15 +95,38 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 M
     std::memcpy(buffer_.data() + 0x28, PTrust->packetName.c_str(), PTrust->packetName.size());
 }
 
-CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(uint32 id, const std::string& name, uint16 memberFlags, uint8 MemberNumber, uint16 ZoneID)
+// Notifying player of a party member information
+CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(const CCharParty& PParty, const PartyMember& Member, const CCharEntity* PRecipient, const uint8 MemberNumber)
 {
     this->setType(0xDD);
     this->setSize(0x40);
 
-    ref<uint32>(0x04) = id;
+    // Convert to actual CCharEntity. If they're in the same zone/process, we'll send more information.
+    auto* PMember = PParty.getMemberById(Member.getId());
 
-    ref<uint16>(0x14) = memberFlags;
-    ref<uint16>(0x20) = ZoneID;
+    ref<uint32>(0x04) = Member.getId();
 
-    std::memcpy(buffer_.data() + 0x28, name.c_str(), name.size());
+    // TODO: Alliance flags
+    ref<uint16>(0x14) = PParty.getFlagsForMember(Member);
+    ref<uint8>(0x1A)  = MemberNumber;
+
+    if (PMember && PRecipient && PMember->getZone() == PRecipient->getZone())
+    {
+        ref<uint32>(0x08) = PMember->health.hp;
+        ref<uint32>(0x0C) = PMember->health.mp;
+        ref<uint16>(0x10) = PMember->health.tp;
+        ref<uint16>(0x18) = PMember->targid;
+        ref<uint8>(0x1D)  = PMember->GetHPP();
+        ref<uint8>(0x1E)  = PMember->GetMPP();
+
+        if (!PMember->isAnon())
+        {
+            ref<uint8>(0x22) = PMember->GetMJob();
+            ref<uint8>(0x23) = PMember->GetMLevel();
+            ref<uint8>(0x24) = PMember->GetSJob();
+            ref<uint8>(0x25) = PMember->GetSLevel();
+        }
+    }
+
+    std::memcpy(buffer_.data() + 0x28, Member.getName().c_str(), Member.getName().size());
 }

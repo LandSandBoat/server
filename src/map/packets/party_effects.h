@@ -32,9 +32,7 @@ class CBattleEntity;
 class CPartyEffectsPacket : public CBasicPacket
 {
 public:
-    explicit CPartyEffectsPacket(const std::vector<CCharEntity*>& membersList);
-    void AddMemberEffects(std::size_t partyIndex, CCharEntity* PMember);
-    void AddMemberEffects(uint32 id);
+    explicit CPartyEffectsPacket(const CCharEntity* PTarget, const std::vector<CCharEntity*>& membersList);
 };
 
 #endif

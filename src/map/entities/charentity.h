@@ -230,6 +230,7 @@ class CAbilityState;
 class CRangeState;
 class CItemState;
 class CItemUsable;
+class CCharParty;
 
 typedef std::map<uint32, CBaseEntity*> SpawnIDList_t;
 typedef std::vector<EntityID_t>        BazaarList_t;
@@ -237,8 +238,7 @@ typedef std::vector<EntityID_t>        BazaarList_t;
 class CCharEntity : public CBattleEntity
 {
 public:
-    uint32 accid{}; // Account ID associated with the character.
-
+    uint32      accid{}; // Account ID associated with the character.
     MapSession* PSession = nullptr;
 
     jobs_t     jobs{}; // Available Character jobs
@@ -347,35 +347,9 @@ public:
 
     std::vector<CTrustEntity*> PTrusts; // Active trusts
 
-    template <typename F, typename... Args>
-    void ForPartyWithTrusts(F const& func, Args&&... args)
-    {
-        if (PParty)
-        {
-            for (auto* PMember : PParty->members)
-            {
-                func(PMember, std::forward<Args>(args)...);
-            }
-            for (auto* PMember : PParty->members)
-            {
-                if (auto* PCharMember = dynamic_cast<CCharEntity*>(PMember))
-                {
-                    for (auto* PTrust : PCharMember->PTrusts)
-                    {
-                        func(PTrust, std::forward<Args>(args)...);
-                    }
-                }
-            }
-        }
-        else
-        {
-            func(this, std::forward<Args>(args)...);
-            for (auto PTrust : this->PTrusts)
-            {
-                func(PTrust, std::forward<Args>(args)...);
-            }
-        }
-    }
+    void ForEveryPartyMember(const std::function<void(CCharEntity*)>& func);
+    void ForEveryPartyMemberWithTrusts(const std::function<void(CBattleEntity*)>& func);
+    void ForEveryAllianceMember(const std::function<void(CCharEntity*)>& func);
 
     CBattleEntity* PClaimedMob = nullptr;
 
@@ -533,9 +507,6 @@ public:
     uint32          fishingToken; // To track fishing process
     uint8           hookDelay;    // How long it takes to hook a fish
 
-    void ReloadPartyInc();
-    void ReloadPartyDec();
-    bool ReloadParty() const;
     void ClearTrusts();
     void RemoveTrust(CTrustEntity*);
 
@@ -617,6 +588,11 @@ public:
     // Starts a synth with skillType X
     bool startSynth(SKILLTYPE synthSkill);
 
+    void setParty(CCharParty& party);
+    void clearParty();
+    bool hasParty() const;
+    auto getParty() const -> CCharParty&;
+
     CCharEntity();
     ~CCharEntity();
 
@@ -625,6 +601,8 @@ protected:
     void TrackArrowUsageForScavenge(CItemWeapon* PAmmo);
 
 private:
+    std::optional<std::reference_wrapper<CCharParty>> m_Party;
+
     std::unique_ptr<CItemContainer> m_Inventory;
     std::unique_ptr<CItemContainer> m_Mogsafe;
     std::unique_ptr<CItemContainer> m_Storage;

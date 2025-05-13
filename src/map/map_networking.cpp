@@ -776,3 +776,8 @@ auto MapNetworking::socket() -> MapSocket&
 {
     return *mapSocket_;
 }
+
+auto MapNetworking::server() -> MapServer&
+{
+    return mapServer_;
+}

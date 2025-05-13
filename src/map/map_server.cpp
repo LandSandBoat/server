@@ -102,6 +102,7 @@ MapServer::MapServer(int argc, char** argv)
 : Application("map", argc, argv)
 , mapStatistics_(std::make_unique<MapStatistics>())
 , networking_(std::make_unique<MapNetworking>(*this, *mapStatistics_))
+, parties_(std::make_unique<PartyContainer>())
 {
     do_init();
 }
@@ -458,4 +459,9 @@ auto MapServer::statistics() -> MapStatistics&
 auto MapServer::zones() -> std::map<uint16, CZone*>&
 {
     return g_PZoneList;
+}
+
+auto MapServer::parties() const -> PartyContainer&
+{
+    return *parties_;
 }

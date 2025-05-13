@@ -27,62 +27,74 @@
 
 #include "entities/charentity.h"
 #include "entities/trustentity.h"
+#include "party/char_party.h"
 #include "utils/zoneutils.h"
 
-const char* partyQuery = "SELECT chars.charid, partyflag, pos_zone, pos_prevzone FROM accounts_parties \
-                                        LEFT JOIN chars ON accounts_parties.charid = chars.charid WHERE \
-                                        IF (allianceid <> 0, allianceid = %d, partyid = %d) ORDER BY partyflag & %u, timestamp";
-
-CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
+CPartyDefinePacket::CPartyDefinePacket(const CCharEntity* PReceiver, const CCharParty* party)
 {
     this->setType(0xC8);
     this->setSize(0xF8);
+    // TODO: Alliance
 
-    if (PParty)
+    // Party can be null to notify player they are now solo.
+    if (!party)
     {
-        uint32 allianceid = 0;
-        if (PParty->m_PAlliance)
+        return;
+    }
+
+    uint8 i = 0;
+
+    for (const PartyMember& member : static_cast<const PartyBase*>(party)->getMembers())
+    {
+        if (member.getType() == PartyMemberType::Player)
         {
-            allianceid = PParty->m_PAlliance->m_AllianceID;
-        }
-
-        uint8 i = 0;
-
-        int ret = _sql->Query(partyQuery, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
-
-        if (ret != SQL_ERROR && _sql->NumRows() > 0)
-        {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            // If PChar is available AND in the same zone as the intended receiver, stream full set of data
+            if (const auto* PChar = zoneutils::GetChar(member.getId()); PChar && PChar->getZone() == PReceiver->getZone())
             {
-                uint16       targid = 0;
-                CCharEntity* PChar  = zoneutils::GetChar(_sql->GetUIntData(0));
-                if (PChar)
+                ref<uint32>(12 * i + 0x08) = PChar->id;                       // UniqueNo
+                ref<uint16>(12 * i + 0x0C) = PChar->targid;                   // ActIndex
+                ref<uint16>(12 * i + 0x0E) = party->getFlagsForMember(member); // Flags
+                ref<uint16>(12 * i + 0x10) = PChar->getZone();                // Supposed to be prevzone if not
+            }
+            else
+            {
+                ref<uint32>(12 * i + 0x08) = member.getId();                  // UniqueNo
+                ref<uint16>(12 * i + 0x0C) = 0;                               // ActIndex
+                ref<uint16>(12 * i + 0x0E) = party->getFlagsForMember(member); // Flags
+                ref<uint16>(12 * i + 0x10) = member.getZone();                // Supposed to be prevzone if not
+            }
+        }
+        else if (member.getType() == PartyMemberType::Trust)
+        {
+            // For trusts, we need to check if the leader is on this process AND in the same zone.
+            // Trust data is not sent if you're not in the same zone
+            if (const auto* PLeader = party->getLeader())
+            {
+                if (PLeader->getZone() == PReceiver->getZone())
                 {
-                    targid = PChar->targid;
+                    // clang-format off
+                    auto it = std::find_if(PLeader->PTrusts.begin(), PLeader->PTrusts.end(),
+                    [member](const CTrustEntity* PTrust)
+                    {
+                        return PTrust->id == member.getId();
+                    });
+                    // clang-format on
+
+                    if (it != PLeader->PTrusts.end())
+                    {
+                        ref<uint32>(12 * i + (0x08)) = (*it)->id;
+                        ref<uint16>(12 * i + (0x0C)) = (*it)->targid;
+                        ref<uint16>(12 * i + (0x0E)) = 0;
+                        ref<uint16>(12 * i + (0x10)) = (*it)->getZone();
+                    }
+                    else
+                    {
+                        ShowErrorFmt("Could not find trust with ID: {} in leader's trust list?!", member.getId());
+                    }
                 }
-                ref<uint32>(12 * i + 0x08) = _sql->GetUIntData(0);
-                ref<uint16>(12 * i + 0x0C) = targid;
-                ref<uint16>(12 * i + 0x0E) = _sql->GetUIntData(1);
-                ref<uint16>(12 * i + 0x10) = _sql->GetUIntData(2) ? _sql->GetUIntData(2) : _sql->GetUIntData(3);
-                i++;
             }
         }
 
-        if (loadTrust)
-        {
-            CCharEntity* PLeader = (CCharEntity*)PParty->GetLeader();
-
-            if (PLeader != nullptr)
-            {
-                for (auto* PTrust : PLeader->PTrusts)
-                {
-                    ref<uint32>(12 * i + (0x08)) = PTrust->id;
-                    ref<uint16>(12 * i + (0x0C)) = PTrust->targid;
-                    ref<uint16>(12 * i + (0x0E)) = 0;
-                    ref<uint16>(12 * i + (0x10)) = PTrust->getZone();
-                    i++;
-                }
-            }
-        }
+        ++i;
     }
 }

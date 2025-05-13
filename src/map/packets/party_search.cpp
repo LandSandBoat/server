@@ -22,15 +22,16 @@
 #include "party_search.h"
 
 #include "entities/charentity.h"
-#include "party.h"
 
-CPartySearchPacket::CPartySearchPacket(CCharEntity* PChar)
+#include "party/char_party.h"
+
+CPartySearchPacket::CPartySearchPacket(const CCharEntity* PChar)
 {
     this->setType(0xE1);
     this->setSize(0x08);
 
-    if (PChar->PParty != nullptr)
+    if (PChar->hasParty())
     {
-        ref<uint32>(0x04) = PChar->PParty->GetPartyID();
+        ref<uint32>(0x04) = PChar->getParty().getPartyId();
     }
 }

@@ -1,0 +1,8 @@
+- Can invite and create party through /sea
+- Can invite and create party through /pcmd
+- Can summon trusts when leader
+- Cannot summon trusts when not leader
+- Cannot summon trusts where disabled
+- Trusts show only when in same zone
+- Party buffs show when in same zone
+- <Add the missing billion tests here>

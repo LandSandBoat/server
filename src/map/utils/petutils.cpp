@@ -1155,7 +1155,7 @@ namespace petutils
             PMasterChar->PLatentEffectContainer->CheckLatentsPetType();
 
             // clang-format off
-            PMasterChar->ForParty([](CBattleEntity* PMember)
+            PMasterChar->ForEveryPartyMember([](CBattleEntity* PMember)
             {
                 if (const auto* PMemberChar = dynamic_cast<CCharEntity*>(PMember))
                 {
@@ -1399,7 +1399,7 @@ namespace petutils
             static_cast<CCharEntity*>(PMaster)->PLatentEffectContainer->CheckLatentsPetType();
 
             // clang-format off
-            PMaster->ForParty([](CBattleEntity* PMember)
+            static_cast<CCharEntity*>(PMaster)->ForEveryPartyMember([](CBattleEntity* PMember)
             {
                 static_cast<CCharEntity*>(PMember)->PLatentEffectContainer->CheckLatentsPartyAvatar();
             });

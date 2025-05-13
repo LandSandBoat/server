@@ -21,24 +21,32 @@
 
 #pragma once
 
-#include "world_server.h"
+#include "party/world.h"
 
+class WorldServer;
+
+// Retrieve a couple of information about a character from database to make decisions.
 class PartySystem
 {
 public:
-    PartySystem(WorldServer& worldServer)
-    : worldServer_(worldServer)
-    {
-        std::ignore = worldServer_;
-    }
+    DISALLOW_COPY_AND_MOVE(PartySystem);
 
+    PartySystem(WorldServer& worldServer);
     ~PartySystem() = default;
 
-    bool handleMessage(uint8 messageType, IPPMessage&& message)
-    {
-        return false;
-    }
+    WorldParty* getParty(uint32 partyId);
+
+    bool onPartyEvent(const IPP& ipp, const ipc::PartyEvent& message);
+    bool onCharZoneOut(const IPP& ipp, const ipc::CharZoneOut& message);
+    bool onCharZoneIn(const IPP& ipp, const ipc::CharZoneIn& message);
+    bool onSync(const PartyFullUpdateMessage& message);
+
+    bool createParty(uint32 leader);
+    bool removeParty(uint32 partyId);
+
+    void dump();
 
 private:
-    WorldServer& worldServer_;
+    WorldServer&                           m_WorldServer;
+    std::unordered_map<uint32, WorldParty> m_Parties;
 };

@@ -37,7 +37,7 @@ class CCharEntity;
 class CPartySearchPacket : public CBasicPacket
 {
 public:
-    CPartySearchPacket(CCharEntity* PChar);
+    CPartySearchPacket(const CCharEntity* PChar);
 };
 
 #endif

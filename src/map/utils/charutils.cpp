@@ -82,6 +82,7 @@
 #include "map_networking.h"
 #include "map_server.h"
 #include "mob_modifier.h"
+#include "party/char_party.h"
 #include "recast_container.h"
 #include "roe.h"
 #include "spell.h"
@@ -93,14 +94,13 @@
 #include "universal_container.h"
 #include "weapon_skill.h"
 
+#include "battleutils.h"
+#include "blueutils.h"
+#include "charutils.h"
 #include "entities/automatonentity.h"
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
 #include "entities/petentity.h"
-
-#include "battleutils.h"
-#include "blueutils.h"
-#include "charutils.h"
 #include "itemutils.h"
 #include "petutils.h"
 #include "puppetutils.h"
@@ -4136,13 +4136,13 @@ namespace charutils
         }
 
         // Distribute gil to player/party/alliance
-        if (PChar->PParty != nullptr)
+        if (PChar->hasParty())
         {
             std::vector<CCharEntity*> members;
 
             // First gather all valid party members
             // clang-format off
-            PChar->ForAlliance([PMob, &members](CBattleEntity* PPartyMember)
+            PChar->ForEveryAllianceMember([PMob, &members](CBattleEntity* PPartyMember)
             {
                 if (PPartyMember->getZone() == PMob->getZone() && isWithinDistance(PPartyMember->loc.p, PMob->loc.p, 100.f))
                 {
@@ -4274,20 +4274,20 @@ namespace charutils
         uint8       maxlevel = PChar->GetMLevel();
         REGION_TYPE region   = PChar->loc.zone->GetRegionID();
 
-        if (PChar->PParty)
+        if (PChar->hasParty())
         {
-            if (PChar->PParty->GetSyncTarget())
+            if (PChar->getParty().getSyncTarget())
             {
-                if (distance(PMob->loc.p, PChar->PParty->GetSyncTarget()->loc.p) >= 100 || PChar->PParty->GetSyncTarget()->health.hp == 0)
+                if (distance(PMob->loc.p, PChar->getParty().getSyncTarget()->loc.p) >= 100 || PChar->getParty().getSyncTarget()->health.hp == 0)
                 {
                     // clang-format off
-                    PChar->ForParty([&PMob](CBattleEntity* PMember)
+                    PChar->ForEveryPartyMember([&PMob](CBattleEntity* PMember)
                     {
                         if (PMember->getZone() == PMob->getZone() && distance(PMember->loc.p, PMob->loc.p) < 100)
                         {
-                            if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(PMember))
+                            if (auto* PMemberE = dynamic_cast<CCharEntity*>(PMember))
                             {
-                                PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, 545);
+                                PMemberE->pushPacket<CMessageBasicPacket>(PMemberE, PMemberE, 0, 0, 545);
                             }
                         }
                     });
@@ -4299,7 +4299,7 @@ namespace charutils
         }
 
         // clang-format off
-        PChar->ForAlliance([&pcinzone, &PMob, &minlevel, &maxlevel](CBattleEntity* PMember)
+        PChar->ForEveryAllianceMember([&pcinzone, &PMob, &minlevel, &maxlevel](CBattleEntity* PMember)
         {
             if (PMember->getZone() == PMob->getZone() && distance(PMember->loc.p, PMob->loc.p) < 100)
             {
@@ -4326,7 +4326,7 @@ namespace charutils
         PMob->m_HiPCLvl     = maxlevel;
 
         // clang-format off
-        PChar->ForAlliance([&PMob, &region, &maxlevel, &pcinzone](CBattleEntity* PPartyMember)
+        PChar->ForEveryAllianceMember([&PMob, &region, &maxlevel, &pcinzone](CBattleEntity* PPartyMember)
         {
             CCharEntity* PMember = dynamic_cast<CCharEntity*>(PPartyMember);
             if (!PMember || PMember->isDead())
@@ -4680,8 +4680,8 @@ namespace charutils
         ZONEID zone     = PChar->loc.zone->GetID();
         uint8  mobLevel = PMob->GetMLevel();
 
-        PChar->ForAlliance([&PMob, &zone, &mobLevel](CBattleEntity* PPartyMember)
-                           {
+        PChar->ForEveryAllianceMember([&PMob, &zone, &mobLevel](CBattleEntity* PPartyMember)
+                                      {
             CCharEntity* PMember = dynamic_cast<CCharEntity*>(PPartyMember);
 
             if (!PMember || PMember->isDead() || (PMember->loc.zone->GetID() != zone))
@@ -4944,13 +4944,12 @@ namespace charutils
                 SaveCharStats(PChar);
                 SaveCharJob(PChar, PChar->GetMJob());
 
-                if (PChar->PParty != nullptr)
+                if (PChar->hasParty())
                 {
-                    if (PChar->PParty->GetSyncTarget() == PChar)
+                    if (PChar->getParty().getSyncTarget() == PChar)
                     {
-                        PChar->PParty->RefreshSync();
+                        PChar->getParty().refreshSync();
                     }
-                    PChar->PParty->ReloadParty();
                 }
 
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CMessageCombatPacket>(PChar, PChar, PChar->jobs.job[PChar->GetMJob()], 0, 11));
@@ -5110,9 +5109,9 @@ namespace charutils
             if (PChar->jobs.job[PChar->GetMJob()] >= PChar->jobs.genkai)
             {
                 PChar->jobs.exp[PChar->GetMJob()] = GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) - 1;
-                if (PChar->PParty && PChar->PParty->GetSyncTarget() == PChar)
+                if (PChar->hasParty() && PChar->getParty().getSyncTarget() == PChar)
                 {
-                    PChar->PParty->SetSyncTarget("", MsgStd::LevelSyncRemoveIneligibleExp);
+                    PChar->getParty().clearSyncTarget(MsgStd::LevelSyncRemoveIneligibleExp);
                 }
             }
             else
@@ -5139,13 +5138,12 @@ namespace charutils
                 }
                 PChar->PLatentEffectContainer->CheckLatentsJobLevel();
 
-                if (PChar->PParty != nullptr)
+                if (PChar->hasParty())
                 {
-                    if (PChar->PParty->GetSyncTarget() == PChar)
+                    if (PChar->getParty().getSyncTarget() == PChar)
                     {
-                        PChar->PParty->RefreshSync();
+                        PChar->getParty().refreshSync();
                     }
-                    PChar->PParty->ReloadParty();
                 }
 
                 PChar->UpdateHealth();
@@ -6316,131 +6314,13 @@ namespace charutils
         }
     }
 
-    void ReloadParty(CCharEntity* PChar)
-    {
-        TracyZoneScoped;
-
-        int ret = _sql->Query("SELECT partyid, allianceid, partyflag & %d FROM accounts_sessions s JOIN accounts_parties p ON "
-                              "s.charid = p.charid WHERE p.charid = %u",
-                              (PARTY_SECOND | PARTY_THIRD), PChar->id);
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
-        {
-            uint32 partyid     = _sql->GetUIntData(0);
-            uint32 allianceid  = _sql->GetUIntData(1);
-            uint32 partynumber = _sql->GetUIntData(2);
-
-            // first, parties and alliances must be created or linked if the character's current party has changed
-            // for example, joining a party from another server
-            if (PChar->PParty)
-            {
-                if (PChar->PParty->GetPartyID() != partyid)
-                {
-                    PChar->PParty->SetPartyID(partyid);
-                }
-            }
-            else
-            {
-                // find if party exists on this server already
-                CParty* PParty = nullptr;
-                zoneutils::ForEachZone([partyid, &PParty](CZone* PZone)
-                                       { PZone->ForEachChar([partyid, &PParty](CCharEntity* PChar)
-                                                            {
-                        if (PChar->PParty && PChar->PParty->GetPartyID() == partyid)
-                        {
-                            PParty = PChar->PParty;
-                        } }); });
-
-                // create new party if it doesn't exist already
-                if (!PParty)
-                {
-                    PParty = new CParty(partyid);
-                }
-
-                PParty->PushMember(PChar);
-            }
-
-            CBattleEntity* PSyncTarget = PChar->PParty->GetSyncTarget();
-            if (PSyncTarget && PChar->getZone() == PSyncTarget->getZone() && !(PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC)) &&
-                PSyncTarget->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC) &&
-                PSyncTarget->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC)->GetDuration() == 0s)
-            {
-                PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, PSyncTarget->GetMLevel(), 540);
-                PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_SYNC, EFFECT_LEVEL_SYNC, PSyncTarget->GetMLevel(), 0s, 0s), EffectNotice::Silent);
-                PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE);
-            }
-
-            if (allianceid != 0)
-            {
-                if (PChar->PParty->m_PAlliance)
-                {
-                    if (PChar->PParty->m_PAlliance->m_AllianceID != allianceid)
-                    {
-                        PChar->PParty->m_PAlliance->m_AllianceID = allianceid;
-                    }
-                }
-                else
-                {
-                    // find if the alliance exists on this server already
-                    // clang-format off
-                    CAlliance* PAlliance = nullptr;
-                    zoneutils::ForEachZone([allianceid, &PAlliance](CZone* PZone)
-                    {
-                        PZone->ForEachChar([allianceid, &PAlliance](CCharEntity* PChar)
-                        {
-                            if (PChar->PParty && PChar->PParty->m_PAlliance && PChar->PParty->m_PAlliance->m_AllianceID == allianceid)
-                            {
-                                PAlliance = PChar->PParty->m_PAlliance;
-                            }
-                        });
-                    });
-                    // clang-format on
-
-                    // create new alliance if it doesn't exist on this server already
-                    if (!PAlliance)
-                    {
-                        PAlliance = new CAlliance(allianceid);
-                    }
-
-                    PAlliance->pushParty(PChar->PParty, partynumber);
-                }
-            }
-            else if (PChar->PParty->m_PAlliance)
-            {
-                PChar->PParty->m_PAlliance->delParty(PChar->PParty);
-            }
-
-            // once parties and alliances have been reassembled, reload the party/parties
-            PChar->PParty->ReloadParty();
-        }
-        else
-        {
-            if (PChar->PParty)
-            {
-                PChar->PParty->DelMember(PChar);
-            }
-            PChar->ReloadPartyDec();
-        }
-
-        // Attempt to disband party if the last trust was just released
-        // NOTE: Trusts are not counted as party members, so the current member count will be 1
-        if (PChar->PParty && PChar->PParty->HasOnlyOneMember() && PChar->PTrusts.empty())
-        {
-            // Looks good so far, check OTHER processes to see if we should disband
-            if (PChar->PParty->GetMemberCountAcrossAllProcesses() == 1)
-            {
-                PChar->PParty->DisbandParty();
-                destroy(PChar->PParty);
-            }
-        }
-    }
-
     bool IsAidBlocked(CCharEntity* PInitiator, CCharEntity* PTarget)
     {
         if (PTarget->getBlockingAid())
         {
             // clang-format off
             bool inAlliance = false;
-            PTarget->ForAlliance([&PInitiator, &inAlliance](CBattleEntity* PEntity)
+            PTarget->ForEveryAllianceMember([&PInitiator, &inAlliance](CBattleEntity* PEntity)
             {
                 if (PEntity->id == PInitiator->id)
                 {
@@ -6593,7 +6473,7 @@ namespace charutils
                     (PChar->m_moghouseID || PChar->loc.destination == PChar->getZone()) ? PChar->loc.prevzone : PChar->getZone(), PChar->loc.p.rotation,
                     PChar->loc.p.x, PChar->loc.p.y, PChar->loc.p.z, PChar->m_moghouseID, PChar->loc.boundary, PChar->id);
 
-        message::send(ipc::CharZone{
+        message::send(ipc::CharZoneOut{
             .charId            = PChar->id,
             .destinationZoneId = PChar->loc.destination,
         });
@@ -6624,7 +6504,7 @@ namespace charutils
 
         SaveCharPosition(PChar);
 
-        message::send(ipc::CharZone{
+        message::send(ipc::CharZoneOut{
             .charId            = PChar->id,
             .destinationZoneId = 0xFFFF, // Clear cache
         });
@@ -7298,39 +7178,7 @@ namespace charutils
 
         if (PChar->status == STATUS_TYPE::SHUTDOWN)
         {
-            if (PChar->PParty != nullptr)
-            {
-                if (PChar->PParty->m_PAlliance != nullptr)
-                {
-                    if (PChar->PParty->GetLeader() == PChar)
-                    {
-                        if (PChar->PParty->HasOnlyOneMember())
-                        {
-                            if (PChar->PParty->m_PAlliance->hasOnlyOneParty())
-                            {
-                                PChar->PParty->m_PAlliance->dissolveAlliance();
-                            }
-                            else
-                            {
-                                PChar->PParty->m_PAlliance->removeParty(PChar->PParty);
-                            }
-                        }
-                        else
-                        { // party leader logged off - will pass party lead
-                            PChar->PParty->RemoveMember(PChar);
-                        }
-                    }
-                    else
-                    { // not party leader - just drop from party
-                        PChar->PParty->RemoveMember(PChar);
-                    }
-                }
-                else
-                {
-                    // normal party - just drop group
-                    PChar->PParty->RemoveMember(PChar);
-                }
-            }
+            // Party removal used to be handled here but the world server processes the ZoneOut event instead.
 
             if (PChar->shouldPetPersistThroughZoning())
             {

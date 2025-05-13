@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CHARUTILS_H
-#define _CHARUTILS_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -229,7 +228,6 @@ namespace charutils
     void ApplyAllEquipMods(CCharEntity* PChar);
 
     void ClearTempItems(CCharEntity* PChar);
-    void ReloadParty(CCharEntity* PChar);
 
     bool IsAidBlocked(CCharEntity* PInitiator, CCharEntity* PTarget);
 
@@ -294,5 +292,3 @@ namespace charutils
     bool isOrchestrionPlaced(CCharEntity* PChar);
     void updateMannequins(CCharEntity* PChar);
 }; // namespace charutils
-
-#endif // _CHARUTILS_H

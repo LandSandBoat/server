@@ -79,7 +79,10 @@
 #include "modifier.h"
 #include "notoriety_container.h"
 #include "packets/char_job_extra.h"
+#include "packets/party_define.h"
+#include "packets/party_member_update.h"
 #include "packets/status_effects.h"
+#include "party/char_party.h"
 #include "petskill.h"
 #include "spell.h"
 #include "status_effect_container.h"
@@ -233,8 +236,7 @@ CCharEntity::CCharEntity()
     resetPetZoningInfo();
     petZoningInfo.petID = 0;
 
-    m_SaveTime    = timer::time_point::min();
-    m_reloadParty = false;
+    m_SaveTime = timer::time_point::min();
 
     m_moghouseID     = 0;
     m_moghancementID = 0;
@@ -305,46 +307,13 @@ CCharEntity::~CCharEntity()
 
     if (m_LevelRestriction != 0)
     {
-        if (PParty)
-        {
-            if (PParty->GetSyncTarget() == this || PParty->GetLeader() == this)
-            {
-                PParty->SetSyncTarget("", MsgStd::LevelSyncDeactivateLeftArea);
-            }
-            if (PParty->GetSyncTarget() != nullptr)
-            {
-                uint8 count = 0;
-                for (uint32 i = 0; i < PParty->members.size(); ++i)
-                {
-                    if (PParty->members.at(i) != this && PParty->members.at(i)->getZone() == PParty->GetSyncTarget()->getZone())
-                    {
-                        count++;
-                    }
-                }
-                if (count < 2) // 3, because one is zoning out - thus at least 2 will be left
-                {
-                    PParty->SetSyncTarget("", MsgStd::LevelSyncRemoveTooFewMembers);
-                }
-            }
-        }
         StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
         StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_RESTRICTION);
     }
 
-    if (PParty && loc.destination != 0 && m_moghouseID == 0)
+    if (hasParty()) // party membership is handled separately by the world server
     {
-        if (PParty->m_PAlliance)
-        {
-            message::send(ipc::AllianceReload{
-                .allianceId = PParty->m_PAlliance->m_AllianceID,
-            });
-        }
-        else
-        {
-            message::send(ipc::PartyReload{
-                .partyId = PParty->GetPartyID(),
-            });
-        }
+        clearParty();
     }
 
     SpawnPCList.clear();
@@ -352,11 +321,6 @@ CCharEntity::~CCharEntity()
     SpawnMOBList.clear();
     SpawnPETList.clear();
     SpawnTRUSTList.clear();
-
-    if (PParty)
-    {
-        PParty->PopMember(this);
-    }
 
     charutils::WriteHistory(this);
 
@@ -906,21 +870,6 @@ CItemEquipment* CCharEntity::getEquip(SLOTTYPE slot)
     return item;
 }
 
-void CCharEntity::ReloadPartyInc()
-{
-    m_reloadParty = true;
-}
-
-void CCharEntity::ReloadPartyDec()
-{
-    m_reloadParty = false;
-}
-
-bool CCharEntity::ReloadParty() const
-{
-    return m_reloadParty;
-}
-
 void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
 {
     if (!PTrust->PAI->IsSpawned())
@@ -937,6 +886,11 @@ void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
 
     if (trustIt != PTrusts.end())
     {
+        if (hasParty())
+        {
+            getParty().removeMember(PTrust->id);
+        }
+
         if (PTrust->animation == ANIMATION_DESPAWN)
         {
             luautils::OnMobDespawn(PTrust);
@@ -944,19 +898,21 @@ void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
         PTrust->PAI->Despawn();
         PTrusts.erase(trustIt);
     }
-
-    ReloadPartyInc();
 }
 
 void CCharEntity::ClearTrusts()
 {
-    for (auto* PTrust : PTrusts)
+    for (const auto* PTrust : PTrusts)
     {
+        if (hasParty())
+        {
+            getParty().removeMember(PTrust->id);
+        }
+
         PTrust->PAI->Despawn();
     }
-    PTrusts.clear();
 
-    ReloadPartyInc();
+    PTrusts.clear();
 }
 
 void CCharEntity::RequestPersist(CHAR_PERSIST toPersist)
@@ -1072,11 +1028,6 @@ void CCharEntity::PostTick()
         pushPacket<CInventoryFinishPacket>();
     }
 
-    if (ReloadParty())
-    {
-        charutils::ReloadParty(this);
-    }
-
     if (m_EffectsChanged)
     {
         pushPacket<CCharStatusPacket>(this);
@@ -1084,10 +1035,21 @@ void CCharEntity::PostTick()
         pushPacket<CCharJobExtraPacket>(this, true);
         pushPacket<CCharJobExtraPacket>(this, false);
         pushPacket<CStatusEffectPacket>(this);
-        if (PParty)
+
+        if (hasParty())
         {
-            PParty->PushEffectsPacket();
+            // TODO: Could move this directly to the party
+            // clang-format off
+            ForEveryPartyMember([&](CCharEntity* PMember)
+            {
+                if (PMember->getZone() == getZone())
+                {
+                    getParty().pushEffectsPacket(PMember);
+                }
+            });
+            // clang-format on
         }
+
         m_EffectsChanged = false;
     }
 
@@ -1110,7 +1072,7 @@ void CCharEntity::PostTick()
         if (updatemask & UPDATE_HP)
         {
             // clang-format off
-            ForAlliance([&](auto PEntity)
+            ForEveryAllianceMember([&](auto PEntity)
             {
                 static_cast<CCharEntity*>(PEntity)->pushPacket<CCharHealthPacket>(this);
             });
@@ -1161,10 +1123,11 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return true;
     }
 
-    bool isSameParty      = PParty && PInitiator->PParty && PInitiator->PParty == PParty;
-    bool isSameAlliance   = PParty && PParty->m_PAlliance && PInitiator->PParty && PInitiator->PParty->m_PAlliance && PParty->m_PAlliance == PInitiator->PParty->m_PAlliance;
-    bool isPartyPetMaster = PInitiator->PMaster && PInitiator->PMaster->PParty && PInitiator->PMaster->PParty == PParty;
-    bool isSoloPetMaster  = PParty == nullptr && PInitiator->PMaster == this;
+    // TODO: Probably need some special handling for trusts here.
+    bool isSameParty      = hasParty() && &static_cast<CCharEntity*>(PInitiator)->getParty() == &getParty();
+    bool isSameAlliance   = hasParty() && getParty().isAllianced(static_cast<CCharEntity*>(PInitiator)->getParty());
+    bool isPartyPetMaster = PInitiator->PMaster && static_cast<CCharEntity*>(PInitiator->PMaster)->hasParty() && &static_cast<CCharEntity*>(PInitiator->PMaster)->getParty() == &getParty();
+    bool isSoloPetMaster  = !hasParty() && PInitiator->PMaster == this;
     bool targetsParty     = targetFlags & TARGET_PLAYER_PARTY;
     bool targetsAlliance  = targetFlags & TARGET_PLAYER_ALLIANCE;
     bool hasPianissimo    = (targetFlags & TARGET_PLAYER_PARTY_PIANISSIMO) && PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO);
@@ -1820,7 +1783,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         // Special cases go here
         auto isAbilityAoE = [&]() -> bool
         {
-            if (this->PParty != nullptr)
+            if (hasParty())
             {
                 if (PAbility->isAoE())
                 {
@@ -2405,7 +2368,7 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
     bool found = false;
 
     // clang-format off
-    ForAlliance([&PBattleTarget, &found](CBattleEntity* PEntity)
+    ForEveryAllianceMember([&PBattleTarget, &found](CBattleEntity* PEntity)
     {
         if (PEntity->id == PBattleTarget->m_OwnerID.id)
         {
@@ -2538,7 +2501,8 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 {
     TracyZoneScoped;
 
-    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    // TODO: Likely blow up if the target is not a CCharEntity
+    auto* PTarget = static_cast<CCharEntity*>(state.GetTarget());
     auto* PItem   = state.GetItem();
 
     if (!PItem->isType(ITEM_EQUIPMENT) && (PItem->getQuantity() < 1 || PItem->getReserve() > 0))
@@ -2553,7 +2517,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     if (PItem->getAoE())
     {
         // clang-format off
-        PTarget->ForParty([this, PItem, PTarget](CBattleEntity* PMember)
+        PTarget->ForEveryPartyMember([this, PItem, PTarget](CBattleEntity* PMember)
         {
             if (!PMember->isDead() && distance(PTarget->loc.p, PMember->loc.p) <= 10)
             {
@@ -3405,4 +3369,67 @@ bool CCharEntity::startSynth(SKILLTYPE synthSkill)
         return PAI->Internal_Synth(synthSkill);
     }
     return false;
+}
+
+void CCharEntity::ForEveryPartyMember(const std::function<void(CCharEntity*)>& func)
+{
+    if (hasParty())
+    {
+        getParty().ForEveryMember(func);
+    }
+    else
+    {
+        func(this);
+    }
+}
+
+void CCharEntity::ForEveryPartyMemberWithTrusts(const std::function<void(CBattleEntity*)>& func)
+{
+    if (hasParty())
+    {
+        getParty().ForEveryMemberWithTrusts(func);
+    }
+    else
+    {
+        func(this);
+    }
+}
+
+void CCharEntity::ForEveryAllianceMember(const std::function<void(CCharEntity*)>& func)
+{
+    if (hasParty())
+    {
+        getParty().ForEveryAllianceMember(func);
+    }
+    else
+    {
+        func(this);
+    }
+}
+
+void CCharEntity::setParty(CCharParty& party)
+{
+    m_Party = std::ref(party);
+}
+
+void CCharEntity::clearParty()
+{
+    m_Party.reset();
+
+    // Send packets to update client state, so that they show solo.
+    // This replaces PlayerKick IPC
+    this->pushPacket<CPartyDefinePacket>(this, nullptr);
+    this->pushPacket<CPartyMemberUpdatePacket>(this);
+    this->pushPacket<CCharStatusPacket>(this);
+}
+
+bool CCharEntity::hasParty() const
+{
+    return m_Party.has_value();
+}
+
+// Check with hasParty before calling this.
+auto CCharEntity::getParty() const -> CCharParty&
+{
+    return m_Party.value();
 }

@@ -20,10 +20,30 @@
 */
 
 #include "search_server.h"
+#include "common/ipp.h"
 #include "data_loader.h"
+
+namespace
+{
+    auto getZMQEndpointString() -> std::string
+    {
+        return fmt::format("tcp://{}:{}", settings::get<std::string>("network.ZMQ_IP"), settings::get<uint16>("network.ZMQ_PORT"));
+    }
+
+    auto getZMQRoutingId() -> uint64
+    {
+        // We will only ever have a single search server, so we can use different logic for the routing id
+
+        const auto ip   = str2ip(settings::get<std::string>("network.SEARCH_IP"));
+        const auto port = settings::get<uint16>("network.SEARCH_PORT");
+
+        return IPP(ip, port).getRawIPP();
+    }
+} // namespace
 
 SearchServer::SearchServer(int argc, char** argv)
 : Application("search", argc, argv)
+, zmqDealerWrapper_(getZMQEndpointString(), getZMQRoutingId())
 {
 }
 

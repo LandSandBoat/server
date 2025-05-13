@@ -17,7 +17,8 @@ IPC_STRUCT_NAMES = [
     "EmptyStruct",
 
     "CharLogin",
-    "CharZone",
+    "CharZoneOut",
+    "CharZoneIn",
     "CharVarUpdate",
 
     "ChatMessageTell",
@@ -29,17 +30,12 @@ IPC_STRUCT_NAMES = [
     "ChatMessageServerMessage",
     "ChatMessageCustom",
 
-    "PartyInvite",
-    "PartyInviteResponse",
-    "PartyReload",
-    "PartyDisband",
 
-    "AllianceReload",
     "AllianceDissolve",
 
-    "PlayerKick",
 
     "MessageStandard",
+    "MessageBasic",
     "MessageSystem",
 
     "LinkshellRankChange",
@@ -59,6 +55,12 @@ IPC_STRUCT_NAMES = [
     "EntityInformationResponse",
 
     "SendPlayerToLocation",
+
+    "PartyChangeId",
+    "PartySystemSync",
+    "PartyInvite",
+    "PartyInviteResponse",
+    "PartyEvent",
 ]
 
 

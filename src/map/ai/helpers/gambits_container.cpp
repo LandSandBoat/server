@@ -151,7 +151,7 @@ namespace gambits
             else if (targetType == G_TARGET::PARTY)
             {
                 // clang-format off
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                static_cast<CCharEntity*>(POwner->PMaster)->ForEveryPartyMemberWithTrusts([&](CBattleEntity* PMember)
                 {
                     if (isValidMember(target, PMember))
                     {
@@ -170,7 +170,7 @@ namespace gambits
                 if (mob != nullptr)
                 {
                     // clang-format off
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForParty([&](CBattleEntity* PMember) {
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForEveryPartyMember([&](CBattleEntity* PMember) {
                         if (PMember->isDead())
                         {
                             potentialTargets.push_back(PMember);
@@ -182,7 +182,7 @@ namespace gambits
             else if (targetType == G_TARGET::TANK)
             {
                 // clang-format off
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                static_cast<CCharEntity*>(POwner->PMaster)->ForEveryPartyMemberWithTrusts([&](CBattleEntity* PMember)
                 {
                     if (isValidMember(target, PMember) &&
                         (PMember->GetMJob() == JOB_PLD || PMember->GetMJob() == JOB_RUN))
@@ -195,7 +195,7 @@ namespace gambits
             else if (targetType == G_TARGET::MELEE)
             {
                 // clang-format off
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                static_cast<CCharEntity*>(POwner->PMaster)->ForEveryPartyMemberWithTrusts([&](CBattleEntity* PMember)
                 {
                     if (isValidMember(target, PMember) &&
                         melee_jobs.find(PMember->GetMJob()) != melee_jobs.end())
@@ -208,7 +208,7 @@ namespace gambits
             else if (targetType == G_TARGET::RANGED)
             {
                 // clang-format off
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                static_cast<CCharEntity*>(POwner->PMaster)->ForEveryPartyMemberWithTrusts([&](CBattleEntity* PMember)
                 {
                     if (isValidMember(target, PMember) &&
                         (PMember->GetMJob() == JOB_RNG || PMember->GetMJob() == JOB_COR))
@@ -221,7 +221,7 @@ namespace gambits
             else if (targetType == G_TARGET::CASTER)
             {
                 // clang-format off
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                static_cast<CCharEntity*>(POwner->PMaster)->ForEveryPartyMemberWithTrusts([&](CBattleEntity* PMember)
                 {
                     if (isValidMember(target, PMember) &&
                         caster_jobs.find(PMember->GetMJob()) != caster_jobs.end())
@@ -236,7 +236,7 @@ namespace gambits
                 if (auto* PMob = dynamic_cast<CMobEntity*>(POwner->GetBattleTarget()))
                 {
                     // clang-format off
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForEveryPartyMemberWithTrusts([&](CBattleEntity* PMember)
                     {
                         if (isValidMember(target, PMember) &&
                             PMob->PEnmityContainer->GetHighestEnmity() == PMember)
@@ -250,7 +250,7 @@ namespace gambits
             else if (targetType == G_TARGET::CURILLA)
             {
                 // clang-format off
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                static_cast<CCharEntity*>(POwner->PMaster)->ForEveryPartyMemberWithTrusts([&](CBattleEntity* PMember)
                 {
                     if (isValidMember(target, PMember))
                     {
@@ -835,7 +835,7 @@ namespace gambits
                 {
                     bool result = false;
                     // clang-format off
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForEveryPartyMemberWithTrusts([&](CBattleEntity* PMember)
                     {
                         if (PMember->health.tp >= 1000 && PMember != POwner)
                         {
@@ -1018,7 +1018,7 @@ namespace gambits
     {
         bool hasHealer = false;
         // clang-format off
-        static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+        static_cast<CCharEntity*>(POwner->PMaster)->ForEveryPartyMemberWithTrusts([&](CBattleEntity* PMember)
         {
             auto jobType = PMember->GetMJob();
 
@@ -1036,7 +1036,7 @@ namespace gambits
     {
         bool hasTank = false;
         // clang-format off
-        static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+        static_cast<CCharEntity*>(POwner->PMaster)->ForEveryPartyMemberWithTrusts([&](CBattleEntity* PMember)
         {
             auto jobType = PMember->GetMJob();
 

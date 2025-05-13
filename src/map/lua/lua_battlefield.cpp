@@ -34,6 +34,7 @@
 #include "status_effect_container.h"
 #include "utils/mobutils.h"
 #include "utils/zoneutils.h"
+#include "party/mob_party.h"
 
 CLuaBattlefield::CLuaBattlefield(CBattlefield* PBattlefield)
 : m_PLuaBattlefield(PBattlefield)
@@ -466,7 +467,7 @@ void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas
         bool isParty = groupData.get_or("isParty", false);
         if (isParty)
         {
-            CParty* party = nullptr;
+            CMobParty* party = nullptr;
             for (CBaseEntity* entity : groupEntities)
             {
                 auto PMob = dynamic_cast<CMobEntity*>(entity);
@@ -477,18 +478,21 @@ void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas
                 }
 
                 // Leave existing party first before joining this new one
-                if (PMob->PParty != nullptr)
+                if (PMob->hasParty())
                 {
-                    PMob->PParty->RemoveMember(PMob);
+                    PMob->getParty().removeMember(PMob);
                 }
 
                 if (party == nullptr)
                 {
-                    party = new CParty(PMob);
+                    // TODO: The parties need to be stored somewhere else, maybe with the zone entities.
+                    // TODO: Figure out how to stream back up to the zone entities so parties can be stored in the same place as the other bit of code
+                    party = new CMobParty();
+                    party->addMember(PMob);
                 }
                 else
                 {
-                    party->AddMember(PMob);
+                    party->addMember(PMob);
                 }
             }
         }

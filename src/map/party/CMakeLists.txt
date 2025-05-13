@@ -1,0 +1,10 @@
+set(PARTY_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/container.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/char_party.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/char_party.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/char_party_ipc.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/mob_party.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/mob_party.cpp
+    PARENT_SCOPE
+)

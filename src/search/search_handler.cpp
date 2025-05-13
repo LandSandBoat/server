@@ -342,21 +342,21 @@ void DebugPrintPacket(char* data, uint16_t size)
 
 void search_handler::HandleGroupListRequest()
 {
-    uint32 partyid      = ref<uint32>(buffer_.data(), 0x10);
-    uint32 allianceid   = ref<uint32>(buffer_.data(), 0x14);
+    uint32 partyId      = ref<uint32>(buffer_.data(), 0x10);
+    uint32 allianceId   = ref<uint32>(buffer_.data(), 0x14);
     uint32 linkshellid1 = ref<uint32>(buffer_.data(), 0x18);
     uint32 linkshellid2 = ref<uint32>(buffer_.data(), 0x1C);
 
-    ShowInfoFmt("SEARCH::PartyID = {}", partyid);
+    ShowInfoFmt("SEARCH::PartyID = {}", partyId);
     ShowInfoFmt("SEARCH::LinkshellIDs = {}, {}", linkshellid1, linkshellid2);
 
     CDataLoader PDataLoader;
 
-    if (partyid != 0 || allianceid != 0)
+    if (partyId != 0 || allianceId != 0)
     {
-        std::list<SearchEntity*> PartyList = PDataLoader.GetPartyList(partyid, allianceid);
+        std::list<SearchEntity*> PartyList = PDataLoader.GetPartyList(partyId, allianceId);
 
-        CPartyListPacket PPartyPacket(partyid, (uint32)PartyList.size());
+        CPartyListPacket PPartyPacket(partyId, (uint32)PartyList.size());
 
         for (auto& it : PartyList)
         {

@@ -30,7 +30,7 @@
 class CBasicPacket;
 class CBattleEntity;
 class CCharEntity;
-class CParty;
+class CCharParty;
 
 // it's assumed here that the alliance leader is the party leader of the lead party. sounds confusing, but it's logical.
 class CAlliance
@@ -41,22 +41,22 @@ public:
     ~CAlliance();
 
     uint32  m_AllianceID;
-    CParty* getMainParty();
-    void    setMainParty(CParty* aLeader);
-    void    addParty(CParty* party);
+    CCharParty* getMainParty();
+    void    setMainParty(CCharParty* aLeader);
+    void    addParty(CCharParty* party);
     void    addParty(uint32 partyid) const;
-    void    pushParty(CParty* PParty, uint8 number);
-    void    removeParty(CParty* party);
-    void    delParty(CParty* party);
+    void    pushParty(CCharParty* PParty, uint8 number);
+    void    removeParty(CCharParty* party);
+    void    delParty(CCharParty* party);
     void    dissolveAlliance(bool playerInitiated = true);
     void    assignAllianceLeader(const std::string& name);
     bool    hasOnlyOneParty() const;
     bool    isFull() const;
 
-    std::vector<CParty*> partyList; // list of parties in alliance on this server
+    std::vector<CCharParty*> partyList; // list of parties in alliance on this server
 
 private:
-    CParty* aLeader; // alliance lead party
+    CCharParty* aLeader; // alliance lead party
     uint32  loadPartyCount() const;
 };
 

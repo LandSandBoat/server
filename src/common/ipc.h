@@ -52,7 +52,7 @@ namespace ipc
 #include "ipc_structs.h"
 #include "ipc_stubs.h"
 
-#include <alpaca/alpaca.h>
+#include "common/alpaca_custom_types.h"
 
 namespace ipc
 {

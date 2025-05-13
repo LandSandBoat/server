@@ -26,7 +26,6 @@
 #include "instance.h"
 #include "latent_effect_container.h"
 #include "mob_modifier.h"
-#include "party.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
 #include "trade_container.h"
@@ -49,6 +48,8 @@
 #include "lua/luautils.h"
 
 #include "battlefield.h"
+#include "party/char_party.h"
+#include "party/mob_party.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/moduleutils.h"
@@ -353,11 +354,12 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
 
     CMobEntity* PMob = static_cast<CMobEntity*>(PEntity);
 
+    // TODO: don't understand the mob partying logic, will need to revisit.
     // force all mobs in a burning circle to link
     ZONE_TYPE zonetype  = m_zone->GetTypeMask();
     bool      forceLink = zonetype & ZONE_TYPE::DYNAMIS || PMob->getMobMod(MOBMOD_SUPERLINK);
 
-    if ((forceLink || PMob->m_Link || PMob->m_Type & MOBTYPE_BATTLEFIELD) && PMob->PParty == nullptr)
+    if ((forceLink || PMob->m_Link || PMob->m_Type & MOBTYPE_BATTLEFIELD) && !PMob->hasParty())
     {
         FOR_EACH_PAIR_CAST_SECOND(CMobEntity*, PCurrentMob, m_mobList)
         {
@@ -373,12 +375,22 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
             {
                 if (PCurrentMob->PMaster == nullptr || PCurrentMob->PMaster->objtype == TYPE_MOB)
                 {
-                    PCurrentMob->PParty->AddMember(PMob);
+                    if (PCurrentMob->hasParty())
+                    {
+                        PCurrentMob->getParty().addMember(PMob);
+                    }
+                    else
+                    {
+                        m_mobParties.emplace_back();
+                        m_mobParties.back().addMember(PCurrentMob);
+                        m_mobParties.back().addMember(PMob);
+                    }
                     return;
                 }
             }
         }
-        PMob->PParty = new CParty(PMob);
+        m_mobParties.emplace_back();
+        m_mobParties.back().addMember(PMob);
     }
 }
 
@@ -991,14 +1003,15 @@ float getSignificanceScore(CCharEntity* originChar, CCharEntity* targetChar)
         return CHARACTER_SYNC_ALLI_SIGNIFICANCE;
     }
 
-    if (originChar->PParty && targetChar->PParty)
+    if (originChar->hasParty() && targetChar->hasParty())
     {
-        if (originChar->PParty->GetPartyID() == targetChar->PParty->GetPartyID())
+        if (&originChar->getParty() == &targetChar->getParty())
         {
             // Same party
             return CHARACTER_SYNC_PARTY_SIGNIFICANCE;
         }
-        else if (originChar->PParty->m_PAlliance && targetChar->PParty->m_PAlliance && originChar->PParty->m_PAlliance->m_AllianceID == targetChar->PParty->m_PAlliance->m_AllianceID)
+
+        if (originChar->getParty().isAllianced(targetChar->getParty()))
         {
             // Same alliance
             return CHARACTER_SYNC_ALLI_SIGNIFICANCE;
@@ -1724,9 +1737,9 @@ void CZoneEntities::ZoneServer(timer::time_point tick)
                 POtherMob->PEnmityContainer->Clear(PMob->id);
             }
 
-            if (PMob->PParty)
+            if (PMob->hasParty())
             {
-                PMob->PParty->RemoveMember(PMob);
+                PMob->getParty().removeMember(PMob);
             }
 
             FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PChar, m_charList)

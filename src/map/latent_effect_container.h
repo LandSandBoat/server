@@ -53,7 +53,7 @@ public:
     void CheckLatentsMoonPhase();
     void CheckLatentsHours();
     void CheckLatentsWeekDay();
-    void CheckLatentsPartyMembers(size_t members, size_t trustCount);
+    void CheckLatentsPartyMembers(const CCharParty& party);
     void CheckLatentsPartyJobs();
     void CheckLatentsPartyAvatar();
     void CheckLatentsJobLevel();

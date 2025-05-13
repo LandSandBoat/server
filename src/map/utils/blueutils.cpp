@@ -41,7 +41,7 @@
 #include "job_points.h"
 #include "merit.h"
 #include "modifier.h"
-#include "party.h"
+#include "party/char_party.h"
 #include "spell.h"
 
 namespace blueutils
@@ -102,34 +102,32 @@ namespace blueutils
         }
 
         std::vector<CCharEntity*> PBlueMages;
-        auto                      AddBlueMages = [&PMob, &PBlueMages](const CParty* PParty)
+        auto                      AddBlueMages = [&PMob, &PBlueMages](const CCharParty& PParty)
         {
-            for (const auto& member : PParty->members)
+            for (const auto& member : PParty.getPlayers({ .zoneId = PMob->getZone() }))
             {
-                auto* PMember = dynamic_cast<CCharEntity*>(member);
-                if (PMember &&
-                    PMember->GetMJob() == JOB_BLU &&
-                    PMember->getZone() == PMob->getZone())
+                if (member &&
+                    member->GetMJob() == JOB_BLU)
                 {
-                    PBlueMages.emplace_back(PMember);
+                    PBlueMages.emplace_back(member);
                 }
             }
         };
 
         // populate PBlueMages
-        if (PChar->PParty != nullptr)
+        if (PChar->hasParty())
         {
-            if (PChar->PParty->m_PAlliance)
-            {
-                for (const auto* party : PChar->PParty->m_PAlliance->partyList)
-                {
-                    AddBlueMages(party);
-                }
-            }
-            else
-            {
-                AddBlueMages(PChar->PParty);
-            }
+            // if (PChar->PParty->m_PAlliance)
+            // {
+            //     for (const auto* party : PChar->PParty->m_PAlliance->partyList)
+            //     {
+            //         AddBlueMages(party);
+            //     }
+            // }
+            // else
+            // {
+            AddBlueMages(PChar->getParty());
+            // }
         }
         else if (PChar->GetMJob() == JOB_BLU)
         {

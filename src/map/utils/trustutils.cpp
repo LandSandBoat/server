@@ -34,6 +34,7 @@
 #include "zoneutils.h"
 
 #include "grades.h"
+#include "ipc_client.h"
 #include "map_server.h"
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
@@ -41,6 +42,7 @@
 #include "ai/ai_container.h"
 #include "ai/controllers/trust_controller.h"
 #include "ai/helpers/gambits_container.h"
+#include "common/party/base.h"
 #include "entities/mobentity.h"
 #include "entities/trustentity.h"
 #include "items/item_weapon.h"
@@ -48,6 +50,7 @@
 #include "packets/char_sync.h"
 #include "packets/entity_update.h"
 #include "packets/message_standard.h"
+#include "packets/party_member_update.h"
 #include "status_effect_container.h"
 #include "weapon_skill.h"
 #include "zone_instance.h"
@@ -156,11 +159,6 @@ auto trustutils::SpawnTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntit
         return nullptr;
     }
 
-    if (PMaster->PParty == nullptr)
-    {
-        PMaster->PParty = new CParty(PMaster);
-    }
-
     PMaster->PTrusts.insert(PMaster->PTrusts.end(), PTrust);
     PMaster->StatusEffectContainer->CopyConfrontationEffect(PTrust);
     PTrust->setBattleID(PMaster->getBattleID());
@@ -178,7 +176,14 @@ auto trustutils::SpawnTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntit
     PMaster->loc.zone->InsertTRUST(PTrust);
     PTrust->Spawn();
 
-    PMaster->PParty->ReloadParty();
+    // Party MAY not yet be created when we get there, if this is the first trust.
+    // Therefore, default to PMaster->id as partyId
+    message::send(ipc::PartyEvent{
+        .partyId = PMaster->id,
+        .payload = MemberAddMessage{
+            .charId = PTrust->id,
+            .type   = PartyMemberType::Trust,
+        } });
 
     return PTrust;
 }

@@ -23,6 +23,7 @@
 
 #include "cbasetypes.h"
 
+#include "common/party/events.h"
 #include "common/regional_event.h"
 
 #include "map/packets/chat_message.h"
@@ -32,7 +33,11 @@
 #include <cstdint>
 #include <iostream>
 #include <string>
+#include <variant>
 #include <vector>
+
+class PartyMember;
+enum class PartyMemberType : uint8;
 
 namespace ipc
 {
@@ -46,10 +51,16 @@ namespace ipc
         uint32 charId{};
     };
 
-    struct CharZone
+    struct CharZoneOut
     {
         uint32 charId{};
         uint16 destinationZoneId{};
+    };
+
+    struct CharZoneIn
+    {
+        uint32 charId{};
+        uint16 zoneId{};
     };
 
     struct CharVarUpdate
@@ -142,51 +153,20 @@ namespace ipc
         CHAT_MESSAGE_TYPE messageType{};
     };
 
-    struct PartyInvite
-    {
-        uint32      inviteeId{};
-        uint16      inviteeTargId{};
-        uint32      inviterId{};
-        uint16      inviterTargId{};
-        std::string inviterName{};
-        INVITETYPE  inviteType{};
-    };
-
-    struct PartyInviteResponse
-    {
-        uint32 inviteeId{};
-        uint16 inviteeTargId{};
-        uint32 inviterId{};
-        uint16 inviterTargId{};
-        uint8  inviteAnswer{};
-    };
-
-    struct PartyReload
-    {
-        uint32 partyId{};
-    };
-
-    struct PartyDisband
-    {
-        uint32 partyId{};
-    };
-
-    struct AllianceReload
-    {
-        uint32 allianceId{};
-    };
-
     struct AllianceDissolve
     {
         uint32 allianceId{};
     };
 
-    struct PlayerKick
+    struct MessageStandard
     {
-        uint32 victimId{};
+        uint32 recipientId{};
+        MsgStd message{};
+        uint32 param0{};
+        uint32 param1{};
     };
 
-    struct MessageStandard
+    struct MessageBasic
     {
         uint32 recipientId{};
         MsgStd message{};
@@ -297,4 +277,53 @@ namespace ipc
         uint8  rot{};
         uint32 moghouseId{};
     };
+
+    struct PartyChangeId
+    {
+        uint32 formerId{};
+        uint32 newId{};
+    };
+
+    struct PartySystemSync
+    {
+        uint8 dummy{};
+    };
+    struct PartyInvite
+    {
+        uint32      inviteeId{};
+        uint16      inviteeTargId{};
+        uint32      inviterId{};
+        uint16      inviterTargId{};
+        std::string inviterName{};
+        INVITETYPE  inviteType{};
+    };
+
+    struct PartyInviteResponse
+    {
+        uint32 inviteeId{};
+        uint16 inviteeTargId{};
+        uint32 inviterId{};
+        uint16 inviterTargId{};
+        uint8  inviteAnswer{};
+    };
+
+    struct PartyDisband
+    {
+        uint32 partyId{};
+    };
+
+    struct PartyEvent
+    {
+        uint32 partyId{};
+        std::variant<
+            PartyFullUpdateMessage,
+            MemberAddMessage,
+            MemberRemoveMessage,
+            LeaderSetMessage,
+            QuartermasterSetMessage,
+            SyncTargetSetMessage,
+            DisbandMessage>
+            payload{};
+    };
+
 } // namespace ipc

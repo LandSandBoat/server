@@ -30,7 +30,6 @@
 #include "baseentity.h"
 #include "map_server.h"
 #include "modifier.h"
-#include "party.h"
 #include "trait.h"
 
 enum class DEATH_TYPE : uint8
@@ -643,51 +642,6 @@ public:
     void applyPetModifiers(CPetEntity* PPet);
     void removePetModifiers(CPetEntity* PPet);
 
-    template <typename F, typename... Args>
-    void ForParty(F func, Args&&... args)
-    {
-        if (PParty)
-        {
-            for (auto PMember : PParty->members)
-            {
-                func(PMember, std::forward<Args>(args)...);
-            }
-        }
-        else
-        {
-            func(this, std::forward<Args>(args)...);
-        }
-    }
-
-    template <typename F, typename... Args>
-    void ForAlliance(F func, Args&&... args)
-    {
-        if (PParty)
-        {
-            if (PParty->m_PAlliance)
-            {
-                for (auto PAllianceParty : PParty->m_PAlliance->partyList)
-                {
-                    for (auto PMember : PAllianceParty->members)
-                    {
-                        func(PMember, std::forward<Args>(args)...);
-                    }
-                }
-            }
-            else
-            {
-                for (auto PMember : PParty->members)
-                {
-                    func(PMember, std::forward<Args>(args)...);
-                }
-            }
-        }
-        else
-        {
-            func(this);
-        }
-    }
-
     virtual void addTrait(CTrait*);
     virtual void delTrait(CTrait*);
     virtual bool hasTrait(uint16);
@@ -773,7 +727,6 @@ public:
 
     ActionList_t m_ActionList{}; // List of actions performed in one attack (you will need to write a structure that includes an ActionList in which there will be categories, animations, etc.)
 
-    CParty*           PParty;
     CBattleEntity*    PPet;
     CBattleEntity*    PMaster; // Owner/owner of the entity (applies to all combat entities)
     CBattleEntity*    PLastAttacker;

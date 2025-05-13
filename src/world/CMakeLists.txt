@@ -17,8 +17,10 @@ set(SOURCES
     ipc_server.cpp
     ipc_server.h
     main.cpp
-    party_system.cpp
-    party_system.h
+    party/system.h
+    party/system.cpp
+    party/world.h
+    party/world.cpp
     time_server.h
     time_server.cpp
     world_server.cpp

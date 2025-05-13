@@ -1,4 +1,5 @@
 set(COMMON_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/alpaca_custom_types.h
     ${CMAKE_CURRENT_SOURCE_DIR}/application.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/application.h
     ${CMAKE_CURRENT_SOURCE_DIR}/arguments.cpp
@@ -28,6 +29,13 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/md52.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/md52.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mmo.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/party/flags.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/party/base.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/party/base.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/party/events.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/party/member.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/party/member_serialization.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/party/member.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/settings.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/settings.h
     ${CMAKE_CURRENT_SOURCE_DIR}/sql.cpp

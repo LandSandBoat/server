@@ -25,13 +25,15 @@
 #include "common/cbasetypes.h"
 
 #include "basic.h"
+#include "entities/battleentity.h"
 
 class CParty;
+class CCharParty;
 
 class CPartyDefinePacket : public CBasicPacket
 {
 public:
-    CPartyDefinePacket(CParty* PParty, bool loadTrust = false);
+    CPartyDefinePacket(const CCharEntity* PReceiver, const CCharParty* party);
 };
 
 #endif

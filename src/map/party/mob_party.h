@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2025 LandSandBoat Dev Teams
@@ -19,4 +19,20 @@
 ===========================================================================
 */
 
-#include "party_system.h"
+#pragma once
+
+class CMobEntity;
+
+class CMobParty
+{
+public:
+    ~CMobParty();
+
+    auto getMembers() const -> const std::vector<CMobEntity*>&;
+    auto addMember(CMobEntity* PEntity) -> bool;
+    auto removeMember(CMobEntity* PEntity) -> bool;
+    void ForEveryMember(const std::function<void(CMobEntity*)>& func) const;
+
+private:
+    std::vector<CMobEntity*> members;
+};

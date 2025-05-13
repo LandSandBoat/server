@@ -44,6 +44,7 @@
 #include "packets/action.h"
 #include "packets/entity_update.h"
 #include "packets/pet_sync.h"
+#include "party/mob_party.h"
 #include "recast_container.h"
 #include "roe.h"
 #include "status_effect_container.h"
@@ -174,16 +175,9 @@ CMobEntity::~CMobEntity()
     destroy(PEnmityContainer);
     destroy(SpellContainer);
 
-    if (PParty)
+    if (hasParty())
     {
-        if (PParty->HasOnlyOneMember())
-        {
-            destroy(PParty);
-        }
-        else
-        {
-            PParty->DelMember(this);
-        }
+        getParty().removeMember(this);
     }
 }
 
@@ -682,7 +676,7 @@ void CMobEntity::DistributeRewards()
 
             // RoE Mob kill event for all party members
             // clang-format off
-            PChar->ForAlliance([this, PChar](CBattleEntity* PMember)
+            PChar->ForEveryAllianceMember([this, PChar](CBattleEntity* PMember)
             {
                 if (PMember->getZone() == PChar->getZone())
                 {
@@ -830,16 +824,16 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     // Checks if the party is eligible for adding global drops (seals, geodes, avatarites)
     auto CanAddSpecial = [PChar](const uint16 id)
     {
-        const auto PParty = PChar->PParty;
-
-        if (!PParty || !PChar->PTreasurePool)
+        if (!PChar->hasParty() || !PChar->PTreasurePool)
         {
             return !PChar->PRecastContainer->Has(RECAST_LOOT, id);
         }
 
+        const auto& PParty = PChar->getParty();
+
         for (const auto& member : PChar->PTreasurePool->getMembers())
         {
-            if (member->PParty == PParty)
+            if (&member->getParty() == &PParty)
             {
                 if (member->PRecastContainer->Has(RECAST_LOOT, id))
                 {
@@ -859,17 +853,17 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     // - The cooldown does reset when zoning.
     auto AddSpecialRecast = [PChar](const uint16 id)
     {
-        const auto PParty = PChar->PParty;
-
-        if (!PParty || !PChar->PTreasurePool)
+        if (!PChar->hasParty() || !PChar->PTreasurePool)
         {
             PChar->PRecastContainer->Add(RECAST_LOOT, id, SPECIAL_DROP_COOLDOWN);
             return;
         }
 
+        const auto& PParty = PChar->getParty();
+
         for (const auto& member : PChar->PTreasurePool->getMembers())
         {
-            if (member->PParty == PParty)
+            if (&member->getParty() == &PParty)
             {
                 member->PRecastContainer->Add(RECAST_LOOT, id, SPECIAL_DROP_COOLDOWN);
             }
@@ -1011,7 +1005,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
         uint8 crystalRolls = 0;
         // clang-format off
-        PChar->ForParty([this, &crystalRolls, &effect](CBattleEntity* PMember)
+        PChar->ForEveryPartyMember([this, &crystalRolls, &effect](CBattleEntity* PMember)
         {
             switch (effect)
             {
@@ -1107,7 +1101,7 @@ void CMobEntity::OnEngage(CAttackState& state)
         if (PTarget->objtype == TYPE_PC)
         {
             // clang-format off
-            ((CCharEntity*)PTarget)->ForAlliance([this, PTarget, range](CBattleEntity* PMember)
+            ((CCharEntity*)PTarget)->ForEveryAllianceMember([this, PTarget, range](CBattleEntity* PMember)
             {
                 auto currentDistance = distance(PMember->loc.p, PTarget->loc.p);
                 if (currentDistance < range)
@@ -1258,4 +1252,37 @@ bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
 bool CMobEntity::isWideScannable()
 {
     return CBaseEntity::isWideScannable() && !getMobMod(MOBMOD_NO_WIDESCAN);
+}
+
+void CMobEntity::setParty(CMobParty& party)
+{
+    m_Party = std::ref(party);
+}
+
+void CMobEntity::clearParty()
+{
+    m_Party.reset();
+}
+
+bool CMobEntity::hasParty() const
+{
+    return m_Party.has_value();
+}
+
+// Check with hasParty before calling this.
+auto CMobEntity::getParty() const -> CMobParty&
+{
+    return m_Party.value();
+}
+
+void CMobEntity::ForEveryPartyMember(const std::function<void(CMobEntity*)>& func)
+{
+    if (hasParty())
+    {
+        getParty().ForEveryMember(func);
+    }
+    else
+    {
+        func(this);
+    }
 }

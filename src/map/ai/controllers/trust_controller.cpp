@@ -464,7 +464,7 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
     bool canCast      = true;
 
     // clang-format off
-    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+    static_cast<CCharEntity*>(POwner->PMaster)->ForEveryPartyMemberWithTrusts([&](const CBattleEntity* PMember)
     {
         if (PMember->objtype == TYPE_TRUST && PMember->PAI->IsCurrentState<CMagicState>())
         {
