@@ -42,4 +42,5 @@ return {
     ['Solgierte']    = { event = 567 },
     ['Teilsa']       = { event = 573 },
     ['Thierride']    = { event = 521 },
+    ['Vounebariont'] = { event = 568 },
 }

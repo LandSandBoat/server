@@ -109,7 +109,7 @@ xi.quest.id =
         OVER_THE_HILLS_AND_FAR_AWAY     = 112,
         LURE_OF_THE_WILDCAT             = 113, -- ±
         ATELLOUNES_LAMENT               = 114, -- + Converted
-        THICK_SHELLS                    = 117, -- ±
+        THICK_SHELLS                    = 117, -- ± Converted
         FOREST_FOR_THE_TREES            = 118,
         TRUST_SANDORIA                  = 119, -- ±
     },
