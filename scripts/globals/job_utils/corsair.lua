@@ -50,30 +50,6 @@ local corsairRollMods =
     [xi.jobAbility.AVENGERS_ROLL   ] = { {   2,   2,    3,  12,    4,    5,   6,    1,    7,    9,   18,   6 },   1,   0, xi.effect.AVENGERS_ROLL,    xi.mod.COUNTER,                 xi.job.NONE },
 }
 
--- Check for xi.mod.PHANTOM_ROLL Value and apply non-stack logic.
-local function phantombuffMultiple(caster)
-    local phantomValue = caster:getMod(xi.mod.PHANTOM_ROLL)
-    local phantomBuffMultiplier = 0
-
-    if phantomValue == 3 then
-        phantomBuffMultiplier = 3
-    elseif
-        phantomValue == 5 or
-        phantomValue == 8
-    then
-        phantomBuffMultiplier = 5
-    elseif
-        phantomValue == 7 or
-        phantomValue == 10 or
-        phantomValue == 12 or
-        phantomValue == 15
-    then
-        phantomBuffMultiplier = 7
-    end
-
-    return phantomBuffMultiplier
-end
-
 -- Sets local var if party contains specified job
 local function checkForJobBonus(caster, job)
     local jobBonus = 0
@@ -144,6 +120,7 @@ local function corsairSetup(caster, ability, action, effect, job)
     caster:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
     caster:addStatusEffectEx(xi.effect.DOUBLE_UP_CHANCE, xi.effect.DOUBLE_UP_CHANCE, roll, 0, 45, ability:getID(), effect, job, true)
     caster:setLocalVar('corsairRollTotal', roll)
+    caster:setLocalVar('corsairDuEffect', effect)
     action:speceffect(caster:getID(), roll)
 
     local recastReduction = utils.clamp(caster:getMerit(xi.merit.PHANTOM_ROLL_RECAST) + caster:getMod(xi.mod.PHANTOM_RECAST), 0, 45)
@@ -180,7 +157,8 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
 
     -- Apply Additional Phantom Roll+ Buff
     local phantomBase = corsairRollMods[abilityId][2] -- Base increment buff
-    effectpower       = effectpower + (phantomBase * phantombuffMultiple(caster))
+    local phantomMult = caster:getMaxGearMod(xi.mod.PHANTOM_ROLL)
+    effectpower       = effectpower + (phantomBase * phantomMult)
 
     -- Effect Power varies depending on COR level (Main vs Sub)
     local actorLevel  = utils.getActiveJobLevel(caster, xi.job.COR)
@@ -190,6 +168,7 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
         effectpower = effectpower * actorLevel / targetLevel
     end
 
+    caster:setLocalVar('corsairApplyingRoll', 1)
     if not target:addCorsairRoll(caster:getMainJob(), caster:getMerit(xi.merit.BUST_DURATION), corsairRollMods[abilityId][4], effectpower, 0, duration, caster:getID(), total, corsairRollMods[abilityId][5]) then
         -- no effect or otherwise prevented
         if caster:getID() == target:getID() then                  -- dead code? you can't roll if the same roll is already active. There is no known buff that would prevent a corsair roll.
@@ -217,6 +196,7 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
         end
     end
 
+    caster:setLocalVar('corsairApplyingRoll', 0)
     return total
 end
 
@@ -352,5 +332,19 @@ xi.job_utils.corsair.onDoubleUpAbilityCheck = function(player, target, ability)
         return xi.msg.basic.NO_ELIGIBLE_ROLL, 0
     else
         return 0, 0
+    end
+end
+
+xi.job_utils.corsair.onRollEffectLose = function(player, effect)
+    -- Ignore effect loss if COR is doubling up
+    if player:getLocalVar('corsairApplyingRoll') == 1 then
+        return
+    end
+
+    if player:hasStatusEffect(xi.effect.DOUBLE_UP_CHANCE) then
+        if player:getLocalVar('corsairDuEffect') == effect:getEffectType() then
+            player:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
+            player:setLocalVar('corsairDuEffect', 0)
+        end
     end
 end

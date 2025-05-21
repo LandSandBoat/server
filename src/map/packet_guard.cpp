@@ -1,4 +1,27 @@
-﻿#include "packet_guard.h"
+﻿/*
+===========================================================================
+
+  Copyright (c) 2025 LandSandBoat Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#include "packet_guard.h"
+
+#include "common/timer.h"
 
 // #define PACKETGUARD_CAP_ENABLED 1
 
@@ -15,7 +38,9 @@ namespace PacketGuard
 #endif
 
     std::unordered_map<CHAR_SUBSTATE, std::unordered_map<uint16, bool>> allowList;
-    std::unordered_map<uint16, uint32>                                  ratelimitList; // Default will be 0 - No Limit
+
+    // Time in seconds (double)
+    std::unordered_map<uint16, timer::duration> ratelimitList;
 
     void Init()
     {
@@ -55,11 +80,15 @@ namespace PacketGuard
 
         // Rate limiting
         // NOTE: You should rate limit any packet that a player can
-        //       send at will that results in an immediate database hit
-        // ratelimitList[0x03B] = 1; // Mannequin Equip
-        ratelimitList[0x05D] = 2000; // Emotes
-        ratelimitList[0x11B] = 2000; // Set Job Master Display
-        ratelimitList[0x11D] = 2000; // Jump
+        //     : send at will that results in an immediate database hit
+        //     : or generates logs or results in file or network io.
+        ratelimitList[0x017] = 1s; // Invalid NPC Information Response
+        ratelimitList[0x03B] = 1s; // Mannequin Equip
+        ratelimitList[0x05D] = 2s; // Emotes
+        ratelimitList[0x0F4] = 1s; // Wide Scan
+        ratelimitList[0x0F5] = 1s; // Wide Scan Track
+        ratelimitList[0x11B] = 2s; // Set Job Master Display
+        ratelimitList[0x11D] = 2s; // Jump
     }
 
     bool PacketIsValidForPlayerState(CCharEntity* PChar, uint16 SmallPD_Type)
@@ -85,19 +114,38 @@ namespace PacketGuard
     bool IsRateLimitedPacket(CCharEntity* PChar, uint16 SmallPD_Type)
     {
         TracyZoneScoped;
-        using namespace std::chrono;
-        uint32 lastPacketRecievedTime = PChar->m_PacketRecievedTimestamps[SmallPD_Type];
-        uint32 timeNowMilliseconds    = static_cast<uint32>(time_point_cast<milliseconds>(server_clock::now()).time_since_epoch().count());
-        uint32 ratelimitTime          = ratelimitList[SmallPD_Type];
+        auto timeNow            = timer::now();
+        auto lastPacketRecieved = PChar->m_PacketRecievedTimestamps.emplace(SmallPD_Type, timeNow);
 
-        PChar->m_PacketRecievedTimestamps[SmallPD_Type] = timeNowMilliseconds;
+        if (lastPacketRecieved.second || ratelimitList.count(SmallPD_Type) == 0)
+        {
+            return false;
+        }
+        auto lastPacketRecievedTime = lastPacketRecieved.first->second;
+        auto ratelimitTime          = ratelimitList[SmallPD_Type];
 
-        if (lastPacketRecievedTime == 0 || ratelimitTime == 0)
+        PChar->m_PacketRecievedTimestamps[SmallPD_Type] = timeNow;
+
+        return timeNow < lastPacketRecievedTime + ratelimitTime;
+    }
+
+    bool PacketsArrivingInCorrectOrder(CCharEntity* PChar, uint16 SmallPD_Type)
+    {
+        TracyZoneScoped;
+
+        const auto currentPacketId  = SmallPD_Type;
+        const auto previousPacketId = PChar->m_LastPacketType;
+
+        // Update the last packet type now that we've cached it
+        PChar->m_LastPacketType = currentPacketId;
+
+        // 0x084 (vendor appraise) should always lead into 0x085 (vendor sell)
+        if (currentPacketId == 0x085 && previousPacketId != 0x084)
         {
             return false;
         }
 
-        return timeNowMilliseconds - lastPacketRecievedTime < ratelimitList[SmallPD_Type];
+        return true;
     }
 
     void PrintPacketList(CCharEntity* PChar)

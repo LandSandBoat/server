@@ -69,9 +69,6 @@ entity.onTrigger = function(player, npc)
 -- End Wonder Wands Section
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 274 and option == 1 then
             player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)

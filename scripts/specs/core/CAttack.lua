@@ -6,7 +6,7 @@ local CAttack = {}
 
 ---@nodiscard
 ---@return boolean
-function CAttack:getCritical()
+function CAttack:isCritical()
 end
 
 ---@param critical boolean

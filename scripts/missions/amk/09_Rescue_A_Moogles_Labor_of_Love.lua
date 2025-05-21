@@ -131,8 +131,7 @@ mission.sections =
 
                     -- Give KI if QM is correct
                     if keyItem and not player:hasKeyItem(keyItem) then
-                        player:addKeyItem(keyItem)
-                        return mission:messageSpecial(ID.text.KEYITEM_OBTAINED, keyItem)
+                        return mission:keyItem(keyItem)
                     end
                 end,
             },

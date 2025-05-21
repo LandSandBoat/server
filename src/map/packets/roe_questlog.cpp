@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "roe_questlog.h"
 
 #include "entities/charentity.h"

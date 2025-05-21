@@ -20,7 +20,6 @@
 */
 
 #include "server_message.h"
-#include "common/socket.h"
 
 #include <cstring>
 
@@ -33,7 +32,7 @@ CServerMessagePacket::CServerMessagePacket(const std::string& message, int8 lang
     ref<uint8>(0x05)  = 1;
     ref<uint8>(0x06)  = 1;
     ref<uint8>(0x07)  = language;
-    ref<uint32>(0x08) = (uint32)(timestamp == 0 ? time(nullptr) : timestamp);
+    ref<uint32>(0x08) = static_cast<uint32>(timestamp == 0 ? earth_time::timestamp() : timestamp);
     ref<uint32>(0x0C) = 0; // Message Length (Total)
     ref<uint32>(0x10) = 0; // Message Offset
     ref<uint32>(0x14) = 0; // Message Length

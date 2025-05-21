@@ -41,16 +41,16 @@ CStatusEffectPacket::CStatusEffectPacket(CCharEntity* PChar)
     {
         if (PEffect->GetIcon() != 0)
         {
+            auto durationRemaining = 0x7FFFFFFF;
+            if (PEffect->GetDuration() > 0s && !PEffect->HasEffectFlag(EFFECTFLAG_HIDE_TIMER))
+            {
+                // this value overflows, but the client expects the overflowed timestamp and corrects it
+                durationRemaining = timer::count_seconds(PEffect->GetStartTime() - timer::now() + PEffect->GetDuration());
+                durationRemaining += earth_time::vanadiel_timestamp();
+                durationRemaining *= 60;
+            }
             ref<uint16>(0x08 + (i * 0x02)) = PEffect->GetIcon();
-            // this value overflows, but the client expects the overflowed timestamp and corrects it
-            ref<uint32>(0x48 + (i * 0x04)) =
-                PEffect->GetDuration() == 0 || (PEffect->HasEffectFlag(EFFECTFLAG_HIDE_TIMER))
-                    ? 0x7FFFFFFF
-                    : (((PEffect->GetDuration() -
-                         (uint32)std::chrono::duration_cast<std::chrono::milliseconds>(server_clock::now() - PEffect->GetStartTime()).count()) /
-                        1000) +
-                       CVanaTime::getInstance()->getVanaTime()) *
-                          60;
+            ref<uint32>(0x48 + (i * 0x04)) = durationRemaining;
             ++i;
         }
     });

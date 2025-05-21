@@ -1,45 +1,33 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Quelpia
--- Standard Merchant NPC
------------------------------------
-local ID = zones[xi.zone.SELBINA]
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4610,   585,    -- Scroll of Cure II
-        4611,  3261,    -- Scroll of Cure III
-        4616, 10080,    -- Scroll of Curaga II
-        4620,  5178,    -- Scroll of Raise
-        4629, 31500,    -- Scroll of Holy
-        4632, 10080,    -- Scroll of Dia II
-        4637,  8100,    -- Scroll of Banish II
-        4652,  6366,    -- Scroll of Protect II
-        4657, 15840,    -- Scroll of Shell II
-        4665, 18000,    -- Scroll of Haste
-        4708,  4644,    -- Scroll of Enfire
-        4709,  3688,    -- Scroll of Enblizzard
-        4710,  2250,    -- Scroll of Enaero
-        4711,  1827,    -- Scroll of Enstone
-        4712,  1363,    -- Scroll of Enthunder
-        4713,  6366,    -- Scroll of Enwater
+        { xi.item.SCROLL_OF_CURE_II,      676 },
+        { xi.item.SCROLL_OF_CURE_III,    3768 },
+        { xi.item.SCROLL_OF_CURAGA_II,  11648 },
+        { xi.item.SCROLL_OF_RAISE,       5984 },
+        { xi.item.SCROLL_OF_HOLY,       36400 },
+        { xi.item.SCROLL_OF_DIA_II,     11648 },
+        { xi.item.SCROLL_OF_BANISH_II,   9360 },
+        { xi.item.SCROLL_OF_PROTECT_II,  7356 },
+        { xi.item.SCROLL_OF_SHELL_II,   18304 },
+        { xi.item.SCROLL_OF_HASTE,      20800 },
+        { xi.item.SCROLL_OF_ENFIRE,      5366 },
+        { xi.item.SCROLL_OF_ENBLIZZARD,  4261 },
+        { xi.item.SCROLL_OF_ENAERO,      2600 },
+        { xi.item.SCROLL_OF_ENSTONE,     2111 },
+        { xi.item.SCROLL_OF_ENTHUNDER,   1575 },
+        { xi.item.SCROLL_OF_ENWATER,     7356 },
     }
 
-    player:showText(npc, ID.text.QUELPIA_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.SELBINA].text.QUELPIA_SHOP_DIALOG)
     xi.shop.general(player, stock)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

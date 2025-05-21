@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include <cstring>
 
 #include "guild_menu_sell.h"

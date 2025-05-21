@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "blacklist_edit_response.h"
 #include "entities/charentity.h"
 

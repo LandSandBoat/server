@@ -2,6 +2,11 @@
 -- Area: Caedarva Mire
 --   NM: Khimaira
 -----------------------------------
+mixins =
+{
+    require('scripts/mixins/families/khimaira'),
+}
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

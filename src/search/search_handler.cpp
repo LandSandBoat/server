@@ -20,10 +20,13 @@
 */
 
 #include "search_handler.h"
+
 #include "common/md52.h"
-#include "common/socket.h" // for ref<T>
-#include "common/utils.h"  // for unpack/pack bits
+#include "common/timer.h"
+#include "common/utils.h"
+
 #include "data_loader.h"
+
 #include <map>
 #include <unordered_set>
 
@@ -34,13 +37,13 @@
 #include "packets/search_comment.h"
 #include "packets/search_list.h"
 
-search_handler::search_handler(asio::ip::tcp::socket socket, asio::io_context& io_context, shared_guarded<std::map<std::string, uint16_t>>& IPAddressesInUseList, shared_guarded<std::unordered_set<std::string>>& IPAddressWhitelist)
+search_handler::search_handler(asio::ip::tcp::socket socket, asio::io_context& io_context, SynchronizedShared<std::map<std::string, uint16_t>>& IPAddressesInUseList, SynchronizedShared<std::unordered_set<std::string>>& IPAddressWhitelist)
 : socket_(std::move(socket))
 , IPAddressesInUse_(IPAddressesInUseList)
 , IPAddressWhitelist_(IPAddressWhitelist)
 , deadline_(io_context)
 {
-    DebugSockets(fmt::format("New connection from IP {}", socket_.lowest_layer().remote_endpoint().address().to_string()));
+    DebugSocketsFmt("New connection from IP {}", socket_.lowest_layer().remote_endpoint().address().to_string());
 
     asio::error_code ec = {};
     socket_.lowest_layer().set_option(asio::socket_base::reuse_address(true));
@@ -57,7 +60,7 @@ search_handler::search_handler(asio::ip::tcp::socket socket, asio::io_context& i
 
         if (getNumSessionsInUse(ipAddress) > 5)
         {
-            ShowError(fmt::format("More than 5 simultaneous connections from {}. Closing socket.", ipAddress));
+            ShowErrorFmt("More than 5 simultaneous connections from {}. Closing socket.", ipAddress);
             socket_.lowest_layer().close();
             return;
         }
@@ -66,7 +69,7 @@ search_handler::search_handler(asio::ip::tcp::socket socket, asio::io_context& i
 
 search_handler::~search_handler()
 {
-    DebugSockets(fmt::format("Connection from IP {} closed", ipAddress));
+    DebugSocketsFmt("Connection from IP {} closed", ipAddress);
     removeFromUsedIPAddresses(ipAddress);
 }
 
@@ -74,8 +77,8 @@ void search_handler::start()
 {
     if (socket_.lowest_layer().is_open())
     {
-        deadline_.expires_after(std::chrono::milliseconds(10000)); // AH searches can take quite a while
-        deadline_.async_wait(std::bind(&search_handler::checkDeadline, this));
+        deadline_.expires_after(10s); // AH searches can take quite a while
+        deadline_.async_wait(std::bind(&search_handler::checkDeadline, this, shared_from_this()));
 
         do_read();
     }
@@ -84,12 +87,12 @@ void search_handler::start()
 void search_handler::do_read()
 {
     // clang-format off
-    socket_.async_read_some(asio::buffer(data_, max_length),
+    socket_.async_read_some(asio::buffer(buffer_.data(), buffer_.size()),
     [this, self = shared_from_this()](std::error_code ec, std::size_t length)
     {
         if (!ec)
         {
-            DebugSockets(fmt::format("async_read_some: Received packet from IP {} ({} bytes)", ipAddress, length));
+            DebugSocketsFmt("async_read_some: Received packet from IP {} ({} bytes)", ipAddress, length);
             read_func(length);
         }
         else
@@ -97,7 +100,7 @@ void search_handler::do_read()
             // EOF when searchPackets is empty is normal. Any other state is a legitimate error.
             if (!searchPackets.empty() || (searchPackets.empty() && ec.value() != asio::error::eof))
             {
-                DebugSockets(fmt::format("async_read_some error in from IP {} ({}: {})", ipAddress, ec.value(), ec.message()));
+                DebugSocketsFmt("async_read_some error in from IP {} ({}: {})", ipAddress, ec.value(), ec.message());
                 handle_error(ec, self);
             }
         }
@@ -110,15 +113,15 @@ void search_handler::do_write()
     auto packet = searchPackets.front();
     auto length = packet.getSize();
 
-    std::memcpy(data_, packet.getData(), packet.getSize());
+    std::memcpy(buffer_.data(), packet.getData(), packet.getSize());
 
     searchPackets.pop_front();
 
     encrypt(length);
 
     // clang-format off
-    DebugSockets(fmt::format("async_write: Sending packet to IP {} ({} bytes)", ipAddress, length));
-    socket_.async_write_some(asio::buffer(data_, length),
+    DebugSocketsFmt("async_write: Sending packet to IP {} ({} bytes)", ipAddress, length);
+    socket_.async_write_some(asio::buffer(buffer_.data(), length),
     [this, self = shared_from_this()](std::error_code ec, std::size_t /*length*/)
     {
         if (!ec)
@@ -128,7 +131,7 @@ void search_handler::do_write()
         }
         else
         {
-            DebugSockets(fmt::format("async_write_some error in from IP {} ({}: {})", ipAddress, ec.value(), ec.message()));
+            DebugSocketsFmt("async_write_some error in from IP {} ({}: {})", ipAddress, ec.value(), ec.message());
             handle_error(ec, self);
         }
     });
@@ -137,10 +140,10 @@ void search_handler::do_write()
 
 void search_handler::decrypt(uint16_t length)
 {
-    DebugSockets(fmt::format("Decrypting packet from IP {} ({} bytes)", ipAddress, length));
+    DebugSocketsFmt("Decrypting packet from IP {} ({} bytes)", ipAddress, length);
 
     // Get key from packet
-    ref<uint32>(key, 16) = ref<uint32>(data_, length - 4);
+    ref<uint32>(key, 16) = ref<uint32>(buffer_.data(), length - 4);
 
     // Decrypt packet
     md5(reinterpret_cast<uint8*>(key), blowfish.hash, 20);
@@ -152,39 +155,39 @@ void search_handler::decrypt(uint16_t length)
 
     for (uint16_t i = 0; i < tmp; i += 2)
     {
-        blowfish_decipher(reinterpret_cast<uint32*>(data_) + i + 2, reinterpret_cast<uint32*>(data_) + i + 3, blowfish.P, blowfish.S[0]);
+        blowfish_decipher(reinterpret_cast<uint32*>(buffer_.data()) + i + 2, reinterpret_cast<uint32*>(buffer_.data()) + i + 3, blowfish.P, blowfish.S[0]);
     }
 
-    ref<uint32>(key, 20) = ref<uint32>(data_, length - 0x18);
+    ref<uint32>(key, 20) = ref<uint32>(buffer_.data(), length - 0x18);
 }
 
 void search_handler::encrypt(uint16_t length)
 {
-    DebugSockets(fmt::format("Encrypting packet for IP {} ({} bytes)", ipAddress, length));
+    DebugSocketsFmt("Encrypting packet for IP {} ({} bytes)", ipAddress, length);
 
-    ref<uint16>(data_, 0x00) = length;     // packet size
-    ref<uint32>(data_, 0x04) = 0x46465849; // "IXFF"
+    ref<uint16>(buffer_.data(), 0x00) = length;     // packet size
+    ref<uint32>(buffer_.data(), 0x04) = 0x46465849; // "IXFF"
 
     md5(reinterpret_cast<uint8*>(key), blowfish.hash, 24);
 
     blowfish_init((int8*)blowfish.hash, 16, blowfish.P, blowfish.S[0]);
 
-    md5(data_ + 8, data_ + length - 0x18 + 0x04, length - 0x18 - 0x04);
+    md5(buffer_.data() + 8, buffer_.data() + length - 0x18 + 0x04, length - 0x18 - 0x04);
 
     uint8 tmp = (length - 12) / 4;
     tmp -= tmp % 2;
 
     for (uint8 i = 0; i < tmp; i += 2)
     {
-        blowfish_encipher(reinterpret_cast<uint32*>(data_) + i + 2, reinterpret_cast<uint32*>(data_) + i + 3, blowfish.P, blowfish.S[0]);
+        blowfish_encipher(reinterpret_cast<uint32*>(buffer_.data()) + i + 2, reinterpret_cast<uint32*>(buffer_.data()) + i + 3, blowfish.P, blowfish.S[0]);
     }
 
-    memcpy(&data_[length] - 0x04, key + 16, 4);
+    memcpy(&buffer_[length] - 0x04, key + 16, 4);
 }
 
 bool search_handler::validatePacket(uint16_t length)
 {
-    DebugSockets(fmt::format("Validating packet from IP {} ({} bytes)", ipAddress, length));
+    DebugSocketsFmt("Validating packet from IP {} ({} bytes)", ipAddress, length);
 
     // Check if packet is valid
     uint8 PacketHash[16]{};
@@ -195,13 +198,13 @@ bool search_handler::validatePacket(uint16_t length)
     toHash -= 0x10; // -hashsize
     toHash -= 0x04; // -keysize
 
-    md5(reinterpret_cast<uint8*>(&data_[8]), PacketHash, toHash);
+    md5(reinterpret_cast<uint8*>(&buffer_[8]), PacketHash, toHash);
 
     for (uint8 i = 0; i < 16; ++i)
     {
-        if (data_[length - 0x14 + i] != PacketHash[i])
+        if (buffer_[length - 0x14 + i] != PacketHash[i])
         {
-            ShowError("Search hash wrong byte %d: 0x%.2X should be 0x%.2x", i, PacketHash[i], data_[length - 0x14 + i]);
+            ShowErrorFmt("Search hash wrong byte {}: {} should be {}", i, hex8ToString(PacketHash[i]), hex8ToString(buffer_[length - 0x14 + i]));
             return false;
         }
     }
@@ -243,19 +246,20 @@ void search_handler::read_func(uint16_t length)
         return;
     }
 
-    deadline_.cancel(); // If we read, don't abort the deadline in the future
-    if (length != ref<uint16>(data_, 0x00) || length < 28)
+    if (length != ref<uint16>(buffer_.data(), 0x00) || length < 28)
     {
-        ShowError("Search packetsize wrong. Size %d should be %d.", length, ref<uint16>(data_, 0x00));
+        ShowErrorFmt("Search packetsize wrong. Size {} should be {}.", length, ref<uint16>(buffer_.data(), 0x00));
         return;
     }
 
+    deadline_.cancel(); // If we read, don't abort the deadline in the future
     decrypt(length);
+
     if (validatePacket(length))
     {
-        uint8 packetType = data_[0x0B];
+        uint8 packetType = buffer_[0x0B];
 
-        ShowInfo("Search Request: %s (%u), size: %u, ip: %s", searchTypeToString(packetType), packetType, length, ipAddress);
+        ShowInfoFmt("Search Request: {} ({}), size: {}, ip: {}", searchTypeToString(packetType), packetType, length, ipAddress);
 
         switch (packetType)
         {
@@ -289,7 +293,7 @@ void search_handler::read_func(uint16_t length)
             break;
             default:
             {
-                ShowError("Unknown packet type: %u", packetType);
+                ShowErrorFmt("Unknown packet type: {}", packetType);
             }
         }
     }
@@ -298,7 +302,8 @@ void search_handler::read_func(uint16_t length)
 void search_handler::handle_error(std::error_code ec, std::shared_ptr<search_handler> self)
 {
     std::ignore = ec;
-    std::ignore = self;
+
+    self = nullptr;
 }
 
 // Mostly copy-pasted DSP era code. It works, so why change it?
@@ -318,13 +323,14 @@ void DebugPrintPacket(char* data, uint16_t size)
     std::string outStr = "\n";
     for (int32 y = 0; y < size; y++)
     {
-        outStr += fmt::sprintf("%02x ", (uint8)data[y]);
+        outStr += fmt::format("{:02X} ", (uint8)data[y]);
         if (((y + 1) % 16) == 0)
         {
             outStr += "\n";
         }
     }
 
+    // TODO: This can't be the Fmt variant because of constexpr things?
     ShowDebug(outStr);
 }
 
@@ -336,13 +342,13 @@ void DebugPrintPacket(char* data, uint16_t size)
 
 void search_handler::HandleGroupListRequest()
 {
-    uint32 partyid      = ref<uint32>(data_, 0x10);
-    uint32 allianceid   = ref<uint32>(data_, 0x14);
-    uint32 linkshellid1 = ref<uint32>(data_, 0x18);
-    uint32 linkshellid2 = ref<uint32>(data_, 0x1C);
+    uint32 partyid      = ref<uint32>(buffer_.data(), 0x10);
+    uint32 allianceid   = ref<uint32>(buffer_.data(), 0x14);
+    uint32 linkshellid1 = ref<uint32>(buffer_.data(), 0x18);
+    uint32 linkshellid2 = ref<uint32>(buffer_.data(), 0x1C);
 
-    ShowInfo("SEARCH::PartyID = %u", partyid);
-    ShowInfo("SEARCH::LinkshellIDs = %u, %u", linkshellid1, linkshellid2);
+    ShowInfoFmt("SEARCH::PartyID = {}", partyid);
+    ShowInfoFmt("SEARCH::LinkshellIDs = {}, {}", linkshellid1, linkshellid2);
 
     CDataLoader PDataLoader;
 
@@ -399,12 +405,15 @@ void search_handler::HandleGroupListRequest()
         } while (currentResult < totalResults);
     }
 
-    do_write();
+    if (!searchPackets.empty())
+    {
+        do_write();
+    }
 }
 
 void search_handler::HandleSearchComment()
 {
-    uint32 playerId = ref<uint32>(data_, 0x10);
+    uint32 playerId = ref<uint32>(buffer_.data(), 0x10);
 
     CDataLoader PDataLoader;
     std::string comment = PDataLoader.GetSearchComment(playerId);
@@ -465,12 +474,15 @@ void search_handler::HandleSearchRequest()
 
     } while (currentResult < totalResults);
 
-    do_write();
+    if (!searchPackets.empty())
+    {
+        do_write();
+    }
 }
 
 void search_handler::HandleAuctionHouseRequest()
 {
-    uint8  AHCatID = ref<uint8>(data_, 0x16);
+    uint8 AHCatID = ref<uint8>(buffer_.data(), 0x16);
 
     // 2 - level
     // 3 - race
@@ -481,11 +493,11 @@ void search_handler::HandleAuctionHouseRequest()
     // 8 - resistance
     // 9 - name
     std::string OrderByString = "ORDER BY";
-    uint8       paramCount    = ref<uint8>(data_, 0x12);
+    uint8       paramCount    = ref<uint8>(buffer_.data(), 0x12);
     for (uint8 i = 0; i < paramCount; ++i) // Item sort options
     {
-        uint8 param = ref<uint32>(data_, 0x18 + 8 * i);
-        ShowInfo(" Param%u: %u", i, param);
+        uint8 param = ref<uint32>(buffer_.data(), 0x18 + 8 * i);
+        ShowInfoFmt(" Param{}: {}", i, param);
         switch (param)
         {
             case 2:
@@ -529,13 +541,16 @@ void search_handler::HandleAuctionHouseRequest()
         searchPackets.emplace_back(PAHPacket.GetData(), length);
     }
 
-    do_write();
+    if (!searchPackets.empty())
+    {
+        do_write();
+    }
 }
 
 void search_handler::HandleAuctionHouseHistory()
 {
-    uint16 ItemID = ref<uint16>(data_, 0x12);
-    uint8  stack  = ref<uint8>(data_, 0x15);
+    uint16 ItemID = ref<uint16>(buffer_.data(), 0x12);
+    uint8  stack  = ref<uint8>(buffer_.data(), 0x15);
 
     CDataLoader             PDataLoader;
     std::vector<ahHistory*> HistoryList = PDataLoader.GetAHItemHistory(ItemID, stack != 0);
@@ -584,7 +599,7 @@ search_req search_handler::_HandleSearchRequest()
 
     uint32 flags = 0;
 
-    uint8  size = ref<uint8>(data_, 0x10);
+    uint8 size = ref<uint8>(buffer_.data(), 0x10);
 
     uint16 workloadBits = size * 8;
 
@@ -598,7 +613,7 @@ search_req search_handler::_HandleSearchRequest()
             break;
         }
 
-        uint8 EntryType = (uint8)unpackBitsLE(&data_[0x11], bitOffset, 5);
+        uint8 EntryType = (uint8)unpackBitsLE(&buffer_[0x11], bitOffset, 5);
         bitOffset += 5;
 
         if ((EntryType != SEARCH_FRIEND) && (EntryType != SEARCH_LINKSHELL) && (EntryType != SEARCH_COMMENT) && (EntryType != SEARCH_FLAGS2))
@@ -608,10 +623,10 @@ search_req search_handler::_HandleSearchRequest()
                 bitOffset = workloadBits;
                 break;
             }
-            sortDescending = (unsigned char)unpackBitsLE(&data_[0x11], bitOffset, 1);
+            sortDescending = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 1);
             bitOffset += 1;
 
-            isPresent = (unsigned char)unpackBitsLE(&data_[0x11], bitOffset, 1);
+            isPresent = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 1);
             bitOffset += 1;
         }
 
@@ -626,14 +641,14 @@ search_req search_handler::_HandleSearchRequest()
                         bitOffset = workloadBits;
                         break;
                     }
-                    nameLen       = (unsigned char)unpackBitsLE(&data_[0x11], bitOffset, 5);
+                    nameLen       = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 5);
                     name[nameLen] = '\0';
 
                     bitOffset += 5;
 
                     for (unsigned char i = 0; i < nameLen; i++)
                     {
-                        name[i] = (char)unpackBitsLE(&data_[0x11], bitOffset, 7);
+                        name[i] = (char)unpackBitsLE(&buffer_[0x11], bitOffset, 7);
                         bitOffset += 7;
                     }
                 }
@@ -643,11 +658,11 @@ search_req search_handler::_HandleSearchRequest()
             {
                 if (isPresent == 0) // no more Area entries
                 {
-                    ShowTrace("Area List End found.");
+                    ShowTraceFmt("Area List End found.");
                 }
                 else // 8 Bit = 1 Byte per Area Code
                 {
-                    areas[areaCount] = (uint16)unpackBitsLE(&data_[0x11], bitOffset, 10);
+                    areas[areaCount] = (uint16)unpackBitsLE(&buffer_[0x11], bitOffset, 10);
                     areaCount++;
                     bitOffset += 10;
                 }
@@ -657,11 +672,11 @@ search_req search_handler::_HandleSearchRequest()
             {
                 if (isPresent == 0x1)
                 {
-                    unsigned char country = (unsigned char)unpackBitsLE(&data_[0x11], bitOffset, 2);
+                    unsigned char country = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 2);
                     bitOffset += 2;
                     nationid = country;
 
-                    ShowInfo("Nationality Entry found. (%2X) Sorting: (%s).", country, (sortDescending == 0x00) ? "ascending" : "descending");
+                    ShowInfoFmt("Nationality Entry found. ({}) Sorting: ({}).", hex8ToString(country), (sortDescending == 0x00) ? "ascending" : "descending");
                 }
                 break;
             }
@@ -669,7 +684,7 @@ search_req search_handler::_HandleSearchRequest()
             {
                 if (isPresent == 0x1)
                 {
-                    unsigned char job = (unsigned char)unpackBitsLE(&data_[0x11], bitOffset, 5);
+                    unsigned char job = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 5);
                     bitOffset += 5;
                     jobid = job;
                 }
@@ -679,9 +694,9 @@ search_req search_handler::_HandleSearchRequest()
             {
                 if (isPresent == 0x1)
                 {
-                    unsigned char fromLvl = (unsigned char)unpackBitsLE(&data_[0x11], bitOffset, 8);
+                    unsigned char fromLvl = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 8);
                     bitOffset += 8;
-                    unsigned char toLvl = (unsigned char)unpackBitsLE(&data_[0x11], bitOffset, 8);
+                    unsigned char toLvl = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 8);
                     bitOffset += 8;
                     minLvl = fromLvl;
                     maxLvl = toLvl;
@@ -692,71 +707,71 @@ search_req search_handler::_HandleSearchRequest()
             {
                 if (isPresent == 0x1)
                 {
-                    unsigned char race = (unsigned char)unpackBitsLE(&data_[0x11], bitOffset, 4);
+                    unsigned char race = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 4);
                     bitOffset += 4;
                     raceid = race;
 
-                    ShowInfo("Race Entry found. (%2X) Sorting: (%s).", race, (sortDescending == 0x00) ? "ascending" : "descending");
+                    ShowInfoFmt("Race Entry found. ({}) Sorting: ({}).", hex8ToString(race), (sortDescending == 0x00) ? "ascending" : "descending");
                 }
-                ShowInfo("SortByRace: %s.", (sortDescending == 0x00) ? "ascending" : "descending");
+                ShowInfoFmt("SortByRace: {}.", (sortDescending == 0x00) ? "ascending" : "descending");
                 break;
             }
             case SEARCH_RANK: // Rank - 2 byte
             {
                 if (isPresent == 0x1)
                 {
-                    unsigned char fromRank = (unsigned char)unpackBitsLE(&data_[0x11], bitOffset, 8);
+                    unsigned char fromRank = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 8);
                     bitOffset += 8;
                     minRank              = fromRank;
-                    unsigned char toRank = (unsigned char)unpackBitsLE(&data_[0x11], bitOffset, 8);
+                    unsigned char toRank = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 8);
                     bitOffset += 8;
                     maxRank = toRank;
 
-                    ShowInfo("Rank Entry found. (%d - %d) Sorting: (%s).", fromRank, toRank, (sortDescending == 0x00) ? "ascending" : "descending");
+                    ShowInfoFmt("Rank Entry found. ({} - {}) Sorting: ({}).", fromRank, toRank, (sortDescending == 0x00) ? "ascending" : "descending");
                 }
-                ShowInfo("SortByRank: %s.", (sortDescending == 0x00) ? "ascending" : "descending");
+                ShowInfoFmt("SortByRank: {}.", (sortDescending == 0x00) ? "ascending" : "descending");
                 break;
             }
             case SEARCH_COMMENT: // 4 Byte
             {
-                commentType = (uint8)unpackBitsLE(&data_[0x11], bitOffset, 32);
+                commentType = (uint8)unpackBitsLE(&buffer_[0x11], bitOffset, 32);
                 bitOffset += 32;
 
-                ShowInfo("Comment Entry found. (%2X).", commentType);
+                ShowInfoFmt("Comment Entry found. ({}).", hex8ToString(commentType));
                 break;
             }
             // the following 4 Entries were generated with /sea (ballista|friend|linkshell|away|inv)
             // so they may be off
             case SEARCH_LINKSHELL: // 4 Byte
             {
-                unsigned int lsId = (unsigned int)unpackBitsLE(&data_[0x11], bitOffset, 32);
+                unsigned int lsId = (unsigned int)unpackBitsLE(&buffer_[0x11], bitOffset, 32);
                 bitOffset += 32;
 
-                ShowInfo("Linkshell Entry found. Value: %.8X", lsId);
+                ShowInfoFmt("Linkshell Entry found. Value: {}", hex32ToString(lsId));
                 break;
             }
             case SEARCH_FRIEND: // Friend Packet, 0 byte
             {
-                ShowInfo("Friend Entry found.");
+                ShowInfoFmt("Friend Entry found.");
                 break;
             }
             case SEARCH_FLAGS1: // Flag Entry #1, 2 byte,
             {
                 if (isPresent == 0x1)
                 {
-                    unsigned short flags1 = (unsigned short)unpackBitsLE(&data_[0x11], bitOffset, 16);
+                    unsigned short flags1 = (unsigned short)unpackBitsLE(&buffer_[0x11], bitOffset, 16);
                     bitOffset += 16;
 
-                    ShowInfo("Flag Entry #1 (%.4X) found. Sorting: (%s).", flags1, (sortDescending == 0x00) ? "ascending" : "descending");
+                    ShowInfoFmt("Flag Entry #1 ({}) found. Sorting: ({}).", hex16ToString(flags1), (sortDescending == 0x00) ? "ascending" : "descending");
 
                     flags = flags1;
                 }
-                ShowInfo("SortByFlags: %s", (sortDescending == 0 ? "ascending" : "descending"));
+                ShowInfoFmt("SortByFlags: {}", (sortDescending == 0 ? "ascending" : "descending"));
                 break;
             }
             case SEARCH_FLAGS2: // Flag Entry #2 - 4 byte
             {
-                unsigned int flags2 = (unsigned int)unpackBitsLE(&data_[0x11], bitOffset, 32);
+                unsigned int flags2 = (unsigned int)unpackBitsLE(&buffer_[0x11], bitOffset, 32);
 
                 bitOffset += 32;
                 flags = flags2;
@@ -764,13 +779,14 @@ search_req search_handler::_HandleSearchRequest()
             }
             default:
             {
-                ShowInfo("Unknown Search Param %.2X!", EntryType);
+                ShowInfoFmt("Unknown Search Param {}!", EntryType);
                 break;
             }
         }
     }
 
-    ShowInfo("Name: %s Job: %u Lvls: %u ~ %u ", (nameLen > 0 ? name : nullptr), jobid, minLvl, maxLvl);
+    const auto printableName = nameLen > 0 ? name : "<empty>";
+    ShowInfoFmt("Name: {} Job: {} Lvls: {} ~ {}", printableName, jobid, minLvl, maxLvl);
 
     search_req sr;
     sr.jobid  = jobid;
@@ -798,7 +814,7 @@ search_req search_handler::_HandleSearchRequest()
 
 uint16_t search_handler::getNumSessionsInUse(std::string const& ipAddressStr)
 {
-    DebugSockets(fmt::format("Checking if IP is in use: {}", ipAddressStr).c_str());
+    DebugSocketsFmt("Checking if IP is in use: {}", ipAddressStr);
 
     // clang-format off
     if (IPAddressWhitelist_.read([ipAddressStr](auto const& ipWhitelist)
@@ -810,7 +826,7 @@ uint16_t search_handler::getNumSessionsInUse(std::string const& ipAddressStr)
     }
     // clang-format on
 
-    // ShowInfo(fmt::format("Checking if IP is in use: {}", ipAddressStr).c_str());
+    // ShowInfoFmt("Checking if IP is in use: {}", ipAddressStr);
     // clang-format off
     return IPAddressesInUse_.read([ipAddressStr](auto const& ipAddrsInUse) -> uint16_t
     {
@@ -826,7 +842,7 @@ uint16_t search_handler::getNumSessionsInUse(std::string const& ipAddressStr)
 
 void search_handler::removeFromUsedIPAddresses(std::string const& ipAddressStr)
 {
-    DebugSockets(fmt::format("Removing IP from active set: {}", ipAddressStr).c_str());
+    DebugSocketsFmt("Removing IP from active set: {}", ipAddressStr);
 
     // clang-format off
     if (IPAddressWhitelist_.read([ipAddressStr](auto const& ipWhitelist)
@@ -838,7 +854,7 @@ void search_handler::removeFromUsedIPAddresses(std::string const& ipAddressStr)
     }
     // clang-format on
 
-    // ShowInfo(fmt::format("Removing IP from set: {}", ipAddressStr).c_str());
+    // ShowInfoFmt("Removing IP from set: {}", ipAddressStr);
     // clang-format off
     IPAddressesInUse_.write([ipAddressStr](auto& ipAddrsInUse)
     {
@@ -862,7 +878,7 @@ void search_handler::removeFromUsedIPAddresses(std::string const& ipAddressStr)
 
 void search_handler::addToUsedIPAddresses(std::string const& ipAddressStr)
 {
-    DebugSockets(fmt::format("Adding IP to active set: {}", ipAddressStr).c_str());
+    DebugSocketsFmt("Adding IP to active set: {}", ipAddressStr);
 
     // clang-format off
     if (IPAddressWhitelist_.read([ipAddressStr](auto const& ipWhitelist)
@@ -874,7 +890,7 @@ void search_handler::addToUsedIPAddresses(std::string const& ipAddressStr)
     }
     // clang-format on
 
-    // ShowInfo(fmt::format("Adding IP to set: {}", ipAddressStr).c_str());
+    // ShowInfoFmt("Adding IP to set: {}", ipAddressStr);
     // clang-format off
     IPAddressesInUse_.write([ipAddressStr](auto& ipAddrsInUse)
     {
@@ -890,11 +906,11 @@ void search_handler::addToUsedIPAddresses(std::string const& ipAddressStr)
     // clang-format on
 }
 
-void search_handler::checkDeadline()
+void search_handler::checkDeadline(std::shared_ptr<search_handler> self) // self to keep the object alive
 {
-    if (std::chrono::steady_clock::now() > deadline_.expiry())
+    if (timer::now() > deadline_.expiry())
     {
-        DebugSockets(fmt::format("Socket timed out from {}", ipAddress));
+        DebugSocketsFmt("Socket timed out from {}", ipAddress);
         socket_.cancel();
     }
 }

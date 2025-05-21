@@ -21,7 +21,6 @@
 
 #include "char_check.h"
 
-#include "common/socket.h"
 #include "common/utils.h"
 #include "common/vana_time.h"
 
@@ -54,15 +53,15 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
 
             if (PItem->isSubType(ITEM_CHARGED))
             {
-                uint32 currentTime = CVanaTime::getInstance()->getVanaTime();
-                uint32 nextUseTime = ((CItemUsable*)PItem)->getLastUseTime() + ((CItemUsable*)PItem)->getReuseDelay();
+                timer::time_point currentTime = timer::now();
+                timer::time_point nextUseTime = static_cast<CItemUsable*>(PItem)->getNextUseTime();
 
                 ref<uint8>(size * 2 + 0x04) = 0x01;
                 ref<uint8>(size * 2 + 0x05) = ((CItemUsable*)PItem)->getCurrentCharges();
                 ref<uint8>(size * 2 + 0x07) = (nextUseTime > currentTime ? 0x90 : 0xD0);
 
-                ref<uint32>(size * 2 + 0x08) = nextUseTime;
-                ref<uint32>(size * 2 + 0x0C) = ((CItemUsable*)PItem)->getUseDelay() + currentTime;
+                ref<uint32>(size * 2 + 0x08) = earth_time::vanadiel_timestamp(timer::to_utc(nextUseTime));
+                ref<uint32>(size * 2 + 0x0C) = static_cast<uint32>(timer::count_seconds(static_cast<CItemUsable*>(PItem)->getUseDelay()) + earth_time::vanadiel_timestamp());
             }
 
             if (PItem->isSubType(ITEM_AUGMENTED))

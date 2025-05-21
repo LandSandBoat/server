@@ -10,9 +10,6 @@ local ID = zones[xi.zone.LOWER_JEUNO]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local theWonderMagicSet = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
     local hasWonderMagicSet = player:hasKeyItem(xi.ki.WONDER_MAGIC_SET)
@@ -35,7 +32,7 @@ entity.onTrigger = function(player, npc)
 
     elseif
         theWonderMagicSet == xi.questStatus.QUEST_COMPLETED and
-        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE) ~= xi.questStatus.QUEST_COMPLETED
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOKS_PRIDE) ~= xi.questStatus.QUEST_COMPLETED
     then
         player:startEvent(40) -- Standard dialog
 
@@ -61,9 +58,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(78) -- Base standard dialog
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "message_combat.h"
 
 #include "entities/baseentity.h"

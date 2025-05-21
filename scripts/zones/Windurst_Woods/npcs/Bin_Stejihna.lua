@@ -4,47 +4,27 @@
 -- Only sells when Windurst controlls Zulkheim Region
 -- Confirmed shop stock, August 2013
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WOODS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
-    local regionOwner = GetRegionOwner(xi.region.ZULKHEIM)
-
-    if regionOwner ~= xi.nation.WINDURST then
-        player:showText(npc, ID.text.BIN_STEJIHNA_CLOSED_DIALOG)
-    else
-        player:showText(npc, ID.text.BIN_STEJIHNA_OPEN_DIALOG)
-
+    if GetRegionOwner(xi.region.ZULKHEIM) == xi.nation.WINDURST then
         local stock =
         {
-            1840,  1840,  -- Semolina
-            4372,    44,  -- Giant Sheep Meat
-            622,     44,  -- Dried Marjoram
-            610,     55,  -- San d'Orian Flour
-            611,     36,  -- Rye Flour
-            4366,    22,  -- La Theine Cabbage
-            4378,    55   -- Selbina Milk
+            { xi.item.SLICE_OF_GIANT_SHEEP_MEAT,   50 },
+            { xi.item.PINCH_OF_DRIED_MARJORAM,     50 },
+            { xi.item.BAG_OF_SAN_DORIAN_FLOUR,     63 },
+            { xi.item.BAG_OF_RYE_FLOUR,            42 },
+            { xi.item.BAG_OF_SEMOLINA,           2100 },
+            { xi.item.LA_THEINE_CABBAGE,           25 },
+            { xi.item.JUG_OF_SELBINA_MILK,         63 },
         }
 
-        local rank = GetNationRank(xi.nation.WINDURST)
-        if rank ~= 3 then
-            table.insert(stock, 1840) --Semolina
-            table.insert(stock, 1840)
-        end
-
+        player:showText(npc, zones[xi.zone.WINDURST_WOODS].text.BIN_STEJIHNA_OPEN_DIALOG)
         xi.shop.general(player, stock, xi.fameArea.WINDURST)
+    else
+        player:showText(npc, zones[xi.zone.WINDURST_WOODS].text.BIN_STEJIHNA_CLOSED_DIALOG)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "change_music.h"
 
 CChangeMusicPacket::CChangeMusicPacket(uint16 BlockID, uint16 MusicTrackID)

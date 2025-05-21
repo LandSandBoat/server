@@ -29,7 +29,7 @@
 
 #include "utils/serverutils.h"
 
-#include "map.h"
+#include "map_server.h"
 
 namespace serverutils
 {
@@ -38,21 +38,19 @@ namespace serverutils
 
     uint32 GetServerVar(std::string const& name)
     {
-        int32 ret = _sql->Query("SELECT value, expiry FROM server_variables WHERE name = '%s' LIMIT 1", name);
+        const auto rset = db::preparedStmt("SELECT value, expiry FROM server_variables WHERE name = ? LIMIT 1", name);
 
         int32  value  = 0;
         uint32 expiry = 0;
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        if (rset && rset->rowsCount() > 0 && rset->next())
         {
-            value  = _sql->GetIntData(0);
-            expiry = _sql->GetUIntData(1);
+            value  = rset->get<int32>("value");
+            expiry = rset->get<uint32>("expiry");
 
-            uint32 currentTimestamp = CVanaTime::getInstance()->getSysTime();
-
-            if (expiry > 0 && expiry <= currentTimestamp)
+            if (expiry > 0 && expiry <= earth_time::timestamp())
             {
                 value = 0;
-                _sql->Query("DELETE FROM server_variables WHERE name = '%s'", name);
+                db::preparedStmt("DELETE FROM server_variables WHERE name = ? LIMIT 1", name);
             }
         }
 
@@ -75,12 +73,11 @@ namespace serverutils
     {
         if (auto var = serverVarCache.find(name); var != serverVarCache.end())
         {
-            std::pair cachedVarData    = var->second;
-            uint32    currentTimestamp = CVanaTime::getInstance()->getSysTime();
+            std::pair cachedVarData = var->second;
 
             // If the cached variable is not expired, return it.  Else, fall through so that the
             // database can be cleaned up.
-            if (cachedVarData.second == 0 || cachedVarData.second > currentTimestamp)
+            if (cachedVarData.second == 0 || cachedVarData.second > earth_time::timestamp())
             {
                 return cachedVarData.first;
             }
@@ -89,14 +86,14 @@ namespace serverutils
         return GetServerVar(name);
     }
 
-    int32 PersistVolatileServerVars(time_point tick, CTaskMgr::CTask* PTask)
+    int32 PersistVolatileServerVars(timer::time_point tick, CTaskManager::CTask* PTask)
     {
         if (serverVarChanges.empty())
         {
             return 0;
         }
 
-        for (auto&& name : serverVarChanges)
+        for (const auto& name : serverVarChanges)
         {
             auto   cachedServerVar = serverVarCache[name];
             int32  value           = cachedServerVar.first;
@@ -104,15 +101,11 @@ namespace serverutils
 
             if (value == 0)
             {
-                // TODO: Re-enable async
-                // async_work::doQuery("DELETE FROM server_variables WHERE name = '%s' LIMIT 1", varName);
-                _sql->Query("DELETE FROM server_variables WHERE name = '%s' LIMIT 1", name);
+                db::preparedStmt("DELETE FROM server_variables WHERE name = ? LIMIT 1", name);
             }
             else
             {
-                // TODO: Re-enable async
-                // async_work::doQuery("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i", varName, value, value);
-                _sql->Query("INSERT INTO server_variables VALUES ('%s', %i, %d) ON DUPLICATE KEY UPDATE value = %i, expiry = %d", name, value, varTimestamp, value, varTimestamp);
+                db::preparedStmt("INSERT INTO server_variables VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE value = ?, expiry = ?", name, value, varTimestamp, value, varTimestamp);
             }
         }
 
@@ -126,7 +119,7 @@ namespace serverutils
         int32 tries  = 0;
         int32 verify = INT_MIN;
 
-        auto setVarMaxRetry = settings::get<uint8>("map.SETVAR_RETRY_MAX");
+        const auto setVarMaxRetry = settings::get<uint8>("map.SETVAR_RETRY_MAX");
 
         do
         {
@@ -135,29 +128,24 @@ namespace serverutils
 
             if (value == 0)
             {
-                _sql->Query("DELETE FROM server_variables WHERE name = '%s' LIMIT 1", name);
+                db::preparedStmt("DELETE FROM server_variables WHERE name = ? LIMIT 1", name);
             }
             else
             {
-                _sql->Query("INSERT INTO server_variables VALUES ('%s', %i, %d) ON DUPLICATE KEY UPDATE value = %i, expiry = %d", name, value, expiry, value, expiry);
+                db::preparedStmt("INSERT INTO server_variables VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE value = ?, expiry = ?", name, value, expiry, value, expiry);
             }
 
             if (setVarMaxRetry > 0)
             {
-                // Cannot usleep(microseconds) or use std::this_thread::sleep_for(std::chrono::microseconds(usec))
-                // because, you guessed it, DSP design.  Close inspection of other DSP code shows sleeping is not
-                // something it does.  However, we actually get the same 'effect' by simply asking to read the
-                // value that was written.  The access back to the DB is just a few milliseconds.  Down side is
-                // that we have to give up at some point.
-                // Also, don't use GetServerVariable, as that manipulates the Lua variable stack.
-                if (_sql->Query("SELECT value FROM server_variables WHERE name = '%s' LIMIT 1", name) != SQL_ERROR)
+                const auto rset = db::preparedStmt("SELECT value FROM server_variables WHERE name = ? LIMIT 1", name);
+                if (rset)
                 {
-                    if (_sql->NumRows() > 0)
+                    if (rset->rowsCount() > 0)
                     {
                         // Can get it, so let's make sure it matches.
-                        if (_sql->NextRow() == SQL_SUCCESS)
+                        if (rset->next())
                         {
-                            verify = _sql->GetIntData(0);
+                            verify = rset->get<int32>("value");
                         }
                     }
                     else

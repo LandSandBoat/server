@@ -7,9 +7,6 @@ local ID = zones[xi.zone.MAMOOK]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     player:startEvent(214)
 end

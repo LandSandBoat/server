@@ -9,9 +9,6 @@ local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local wildcatSandy = player:getCharVar('WildcatSandy')
 
@@ -23,9 +20,6 @@ entity.onTrigger = function(player, npc)
     else
         player:showText(npc, ID.text.BERTENONT_DIALOG)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

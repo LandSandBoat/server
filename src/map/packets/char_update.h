@@ -31,7 +31,8 @@ class CCharEntity;
 class CCharUpdatePacket : public CBasicPacket
 {
 public:
-    CCharUpdatePacket(CCharEntity* PChar);
+    CCharUpdatePacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
+    void updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
 };
 
 #endif

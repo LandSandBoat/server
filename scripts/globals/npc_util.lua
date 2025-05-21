@@ -56,19 +56,20 @@ function npcUtil.popFromQM(player, qm, mobId, params)
     end
 
     -- get list of mobs to pop
-    local mobs = {}
+    local mobIds = {}
     if type(mobId) == 'number' then
-        table.insert(mobs, mobId)
+        table.insert(mobIds, mobId)
     elseif type(mobId) == 'table' then
         for _, v in pairs(mobId) do
             if type(v) == 'number' then
-                table.insert(mobs, v)
+                table.insert(mobIds, v)
             end
         end
     end
 
-    -- make sure none are spawned
-    for k, v in pairs(mobs) do
+    -- make sure none are spawned, translate table from integers to CLuaBaseEntities
+    local mobs = {}
+    for k, v in pairs(mobIds) do
         local mob = GetMobByID(v)
         if mob == nil or mob:isSpawned() then
             return false
@@ -99,6 +100,16 @@ function npcUtil.popFromQM(player, qm, mobId, params)
         -- claim
         if params.claim then
             mob:updateClaim(player)
+        end
+
+        -- Distribute enmity
+        if type(params.enmityPlayerList) == 'table' then
+            -- Add 1 CE to ensure mobs go after spawner first in case params.claim == false
+            mob:addEnmity(player, 1, 0)
+
+            for _, member in ipairs(params.enmityPlayerList) do
+                mob:addEnmity(member, 1, 0)
+            end
         end
 
         -- look
@@ -176,6 +187,10 @@ function npcUtil.queueMove(npc, point, delay)
     end
 
     local x, y, z, rot = unpack(point)
+
+    -- TODO: Current LLS version is treating all table entries as nil-able, where only rot is.  Ignore
+    -- until resolved.
+    ---@diagnostic disable-next-line: param-type-mismatch
     npc:queue(delay, doMove(x, y, z, rot))
 end
 
@@ -242,6 +257,9 @@ end
         "Try trading again after sorting your inventory"
         instead of
         "Come back again after sorting your inventory"
+    multiple (boolean default false)
+        if set, force message type as multiples version
+        eg. You obtain 1 chunk of rock salt!
 --]]
 
 ---@class itemQuantityEntry : { [xi.item]: xi.item, [integer]: integer }
@@ -251,7 +269,7 @@ end
 
 ---@param player CBaseEntity
 ---@param items xi.item|itemQuantityEntry|multipleItemList
----@param params { silent: boolean?, fromTrade: boolean? }?
+---@param params { silent: boolean?, fromTrade: boolean?, multiple: boolean? }?
 ---@return boolean
 function npcUtil.giveItem(player, items, params)
     params = params or {}
@@ -294,7 +312,10 @@ function npcUtil.giveItem(player, items, params)
     for _, v in pairs(givenItems) do
         if player:addItem(v[1], v[2], true) then
             if not params.silent and not messagedItems[v[1]] then
-                if v[2] > 1 then
+                if
+                    v[2] > 1 or
+                    params.multiple
+                then
                     player:messageSpecial(ID.text.ITEM_OBTAINED + 9, v[1], v[2])
                 else
                     player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
@@ -502,7 +523,7 @@ end
 
 ---@class rewardParam
 ---@field item xi.item|itemQuantityEntry|multipleItemList?
----@field itemParams { silent: boolean?, fromTrade: boolean? }?
+---@field itemParams { silent: boolean?, fromTrade: boolean?, multiple: boolean? }?
 ---@field keyItem xi.keyItem|{ [integer]: xi.keyItem }?
 ---@field ki xi.keyItem|{ [integer]: xi.keyItem }?
 ---@field fame integer?

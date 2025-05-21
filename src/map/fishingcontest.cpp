@@ -22,7 +22,6 @@
 #include "fishingcontest.h"
 
 #include <algorithm>
-#include <cmath>
 #include <cstring>
 #include <time.h>
 
@@ -126,7 +125,7 @@ namespace fishingcontest
             return;
         }
 
-        uint32 currentTime = CVanaTime::getInstance()->getSysTime();
+        uint32 currentTime = earth_time::timestamp();
         if (currentTime > CurrentFishingContest.changeTime)
         {
             FISHING_CONTEST_STATUS newStatus = static_cast<FISHING_CONTEST_STATUS>((static_cast<int>(CurrentFishingContest.status) + 1) % static_cast<int>(FISHING_CONTEST_STATUS::CLOSED));
@@ -201,10 +200,33 @@ namespace fishingcontest
                 // Set the rank value
                 if (rankGroup > 0)
                 {
-                    std::string Query = "INSERT INTO char_fishing_contest_history (charid, contest_rank_{}) "
-                                        "VALUES ({}, 1) ON DUPLICATE KEY UPDATE contest_rank_{} = contest_rank_{} + 1";
-                    auto        rset  = db::query(fmt::format(Query, rankGroup, charID, rankGroup, rankGroup));
+                    const auto getQuery = [&]() -> std::string
+                    {
+                        switch (rankGroup)
+                        {
+                            case 1:
+                                return ("INSERT INTO char_fishing_contest_history (charid, contest_rank_1) "
+                                        "VALUES (?, 1) ON DUPLICATE KEY UPDATE contest_rank_1 = contest_rank_1 + 1");
+                                break;
+                            case 2:
+                                return "INSERT INTO char_fishing_contest_history (charid, contest_rank_2) "
+                                       "VALUES (?, 1) ON DUPLICATE KEY UPDATE contest_rank_2 = contest_rank_2 + 1";
+                                break;
+                            case 3:
+                                return "INSERT INTO char_fishing_contest_history (charid, contest_rank_3) "
+                                       "VALUES (?, 1) ON DUPLICATE KEY UPDATE contest_rank_3 = contest_rank_3 + 1";
+                                break;
+                            case 4:
+                                return "INSERT INTO char_fishing_contest_history (charid, contest_rank_4) "
+                                       "VALUES (?, 1) ON DUPLICATE KEY UPDATE contest_rank_4 = contest_rank_4 + 1";
+                                break;
+                            default:
+                                return "";
+                                break;
+                        }
+                    };
 
+                    const auto rset = db::preparedStmt(getQuery(), charID);
                     if (!rset)
                     {
                         ShowWarning("Unable to update player [%s] fishing reward history.", entry.name);
@@ -418,25 +440,22 @@ namespace fishingcontest
         }
 
         // Update the DB with the current contest entries
-        std::string Query = "REPLACE INTO `fishing_contest_entries` "
-                            "(charid, mjob, sjob, mlevel, slevel, race, allegiance, fishRank, score, submitTime, contestRank, share) "
-                            "SELECT charid, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} "
-                            "FROM chars WHERE charname = '{}'";
-
-        auto rset = db::query(fmt::format(Query,
-                                          entry->mjob,
-                                          entry->sjob,
-                                          entry->mlvl,
-                                          entry->slvl,
-                                          entry->race,
-                                          entry->allegiance,
-                                          entry->fishRank,
-                                          entry->score,
-                                          entry->submitTime,
-                                          entry->contestRank,
-                                          entry->share,
-                                          entry->name));
-
+        const auto rset = db::preparedStmt("REPLACE INTO `fishing_contest_entries` "
+                                           "(charid, mjob, sjob, mlevel, slevel, race, allegiance, fishRank, score, submitTime, contestRank, share) "
+                                           "SELECT charid, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
+                                           "FROM chars WHERE charname = ?",
+                                           entry->mjob,
+                                           entry->sjob,
+                                           entry->mlvl,
+                                           entry->slvl,
+                                           entry->race,
+                                           entry->allegiance,
+                                           entry->fishRank,
+                                           entry->score,
+                                           entry->submitTime,
+                                           entry->contestRank,
+                                           entry->share,
+                                           entry->name);
         if (!rset)
         {
             ShowDebug("Error writing fishing contest data to database.");
@@ -471,7 +490,7 @@ namespace fishingcontest
         entry.allegiance  = (uint8)PChar->allegiance;
         entry.fishRank    = PChar->RealSkills.rank[SKILLTYPE::SKILL_FISHING];
         entry.score       = score;
-        entry.submitTime  = CVanaTime::getInstance()->getVanaTime();
+        entry.submitTime  = earth_time::vanadiel_timestamp();
         entry.contestRank = 0;
         entry.share       = 0;
         entry.dataset_b   = 0;
@@ -493,10 +512,7 @@ namespace fishingcontest
         if (PEntry != nullptr)
         {
             // Remove from the database
-            const char* Query = "DELETE FROM `fishing_contest_entries` \
-                                 WHERE `charid` = {}";
-            auto        rset  = db::query(fmt::format(Query, PChar->id));
-
+            const auto rset = db::preparedStmt("DELETE FROM fishing_contest_entries WHERE charid = ?", PChar->id);
             if (!rset)
             {
                 ShowError("Failed to remove entry from fishing entry database.");
@@ -610,7 +626,7 @@ namespace fishingcontest
     {
         // Clear any table data involving this contest
         {
-            const auto rset = db::query("DELETE FROM `fishing_contest`");
+            const auto rset = db::preparedStmt("DELETE FROM `fishing_contest`");
             if (!rset)
             {
                 ShowDebug("Error removing contest data.");
@@ -621,7 +637,7 @@ namespace fishingcontest
         // Clear the fishing contest entries from cache and database
         {
             FishingContestEntries.clear();
-            const auto rset = db::query("DELETE FROM `fishing_contest_entries`");
+            const auto rset = db::preparedStmt("DELETE FROM `fishing_contest_entries`");
             if (!rset)
             {
                 ShowDebug("Error removing contest entry data.");
@@ -637,7 +653,7 @@ namespace fishingcontest
         SetContestFish(fishId);
         SetContestCriteria(criteria);
         SetContestMeasure(measure);
-        SetContestStartTime(CVanaTime::getInstance()->getSysTime());
+        SetContestStartTime(earth_time::timestamp());
         SetContestChangeTime(GetStageChangeTime(FISHING_CONTEST_STATUS::CONTESTING, CurrentFishingContest.startTime));
         SetContestStatus(FISHING_CONTEST_STATUS::CONTESTING);
 
@@ -662,11 +678,11 @@ namespace fishingcontest
             CurrentFishingContest.startTime  = rset->get<uint32>("starttime");
             CurrentFishingContest.changeTime = rset->get<uint32>("nextstagetime");
         }
-        else if (rset->rowsCount() == 0)
+        else if (rset && rset->rowsCount() == 0)
         {
             // No contests found in the database, so we need to create one
             InitNewContest();
-            ShowWarning("No Active Fishing Contest found in database.  Initializing new one.");
+            ShowInfo("No Active Fishing Contest found in database. Initializing new one.");
         }
     }
 

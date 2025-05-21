@@ -38,9 +38,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 328 or csid == 330 then
         -- cheat prevention

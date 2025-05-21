@@ -7,6 +7,10 @@ local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+end
+
 entity.onMobFight = function(mob, target)
     -- Spawn the pets if they are despawned
     -- TODO: summon animations?

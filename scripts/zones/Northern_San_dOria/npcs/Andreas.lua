@@ -19,13 +19,13 @@ end
 
 entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 731 then
-        xi.crafting.guildPointOnEventFinish(player, option, npc, xi.guild.WOODWORKING)
+        xi.crafting.guildPointOnEventUpdate(player, option, npc, xi.guild.WOODWORKING)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 731 then
-        xi.crafting.guildPointOnEventFinish(player, option, npc, xi.guild.WOODWORKING)
+        xi.crafting.guildPointOnEventFinish(player, option, xi.guild.WOODWORKING)
     elseif csid == 732 then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end

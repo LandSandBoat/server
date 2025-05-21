@@ -11,7 +11,7 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setSpeed(100)
+    mob:setBaseSpeed(100)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.AURA_SIZE, -575) -- 6.25 + (-575) / 100 = .5'
 end

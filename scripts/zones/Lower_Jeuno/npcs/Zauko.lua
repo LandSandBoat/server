@@ -10,9 +10,6 @@ local ID = zones[xi.zone.LOWER_JEUNO]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local hour              = VanadielHour()
     local playerOnQuestId   = GetServerVariable('[JEUNO]CommService')

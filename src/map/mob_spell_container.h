@@ -67,7 +67,10 @@ public:
     std::optional<SpellID> GetBestAvailable(SPELLFAMILY family);
     std::optional<SpellID> GetBestIndiSpell(CBattleEntity* PMaster);
     std::optional<SpellID> GetBestEntrustedSpell(CBattleEntity* PMaster);
-    std::optional<SpellID> GetBestAgainstTargetWeakness(CBattleEntity* PTarget);
+    std::optional<SpellID> GetBestAgainstTargetWeakness(CBattleEntity* PTarget, SpellID spellId);
+    std::optional<SpellID> EnSpellAgainstTargetWeakness(CBattleEntity* PTarget);
+    std::optional<SpellID> StormDayAgainstTargetWeakness(CBattleEntity* PTarget);
+    std::optional<SpellID> HelixAgainstTargetWeakness(CBattleEntity* PTarget);
     std::optional<SpellID> GetStormDay();
     std::optional<SpellID> GetHelixDay();
 

@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _SETTINGS_H
-#define _SETTINGS_H
+#pragma once
 
 #include "logging.h"
 #include "utils.h"
@@ -163,7 +162,7 @@ namespace settings
     //
     // TODO: Gracefully convert like-types into types for the variant
     // TODO: Publish back up into Lua
-    void set(std::string name, auto value)
+    void set(const auto& name, const auto& value)
     {
         const auto key   = to_upper(name);
         settingsMap[key] = SettingsVariant_t(value);
@@ -171,5 +170,3 @@ namespace settings
 
     void visit(const std::function<void(std::string, SettingsVariant_t)>& visitor);
 } // namespace settings
-
-#endif // _SETTINGS_H

@@ -48,9 +48,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 77 then
         player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_IMMORTAL_LU_SHANG)

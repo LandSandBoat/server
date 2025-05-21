@@ -8,7 +8,7 @@ local lowerJeunoGlobal = require('scripts/zones/Lower_Jeuno/globals')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, 23, 0, -43, 44, 7, -39) -- Inside Tenshodo HQ. TODO: Find out if this is used other than in ZM 17 (not anymore). Remove if not.
+    zone:registerCuboidTriggerArea(1, 23, 0, -43, 44, 7, -39) -- Inside Tenshodo HQ. TODO: Find out if this is used other than in ZM 17 (not anymore). Remove if not.
     xi.chocobo.initZone(zone)
 end
 
@@ -41,7 +41,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

@@ -5,16 +5,19 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -522, -2, -49,  -517, -1, -43) -- To Upper Delkfutt's Tower
-    zone:registerTriggerArea(2, 318, -3, 2,  322, 1, 6) -- Exit BCNM to ?
+    zone:registerCuboidTriggerArea(1, -522, -2, -49, -517, -1, -43) -- To Upper Delkfutt's Tower
+    zone:registerCuboidTriggerArea(2,  318, -3,   2,  322,  1,   6) -- Exit BCNM to ?
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
+    if prevZone == xi.zone.UPPER_DELKFUTTS_TOWER then
+        cs = 7 -- Teleport.
+    end
 
     if
         player:getXPos() == 0 and
@@ -28,7 +31,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
+    switch (triggerArea:getTriggerAreaID()): caseof
     {
         [1] = function()
             player:startEvent(8)

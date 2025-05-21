@@ -8,9 +8,6 @@ local ID = zones[xi.zone.GARLAIGE_CITADEL]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if player:hasKeyItem(xi.ki.POUCH_OF_WEIGHTED_STONES) then
         -- Door opens from both sides.
@@ -29,12 +26,6 @@ entity.onTrigger = function(player, npc)
             player:messageSpecial(ID.text.YOU_COULD_OPEN_THE_GATE, xi.ki.POUCH_OF_WEIGHTED_STONES)
         end
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

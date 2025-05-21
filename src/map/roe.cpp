@@ -21,11 +21,7 @@
 
 #include "roe.h"
 
-#include "common/vana_time.h"
-
-#include <ctime>
-
-#include "common/vana_time.h"
+#include "common/timer.h"
 #include "lua/luautils.h"
 #include "packets/chat_message.h"
 #include "utils/charutils.h"
@@ -36,7 +32,7 @@
 #include "packets/roe_sparkupdate.h"
 #include "packets/roe_update.h"
 
-#define ROE_CACHETIME 15
+#define ROE_CACHETIME 15s
 
 std::array<RoeCheckHandler, ROE_NONE> RoeHandlers;
 RoeSystemData                         roeutils::RoeSystem;
@@ -44,7 +40,7 @@ RoeSystemData                         roeutils::RoeSystem;
 void SaveEminenceDataNice(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    if (PChar->m_eminenceCache.lastWriteout < time(nullptr) - ROE_CACHETIME)
+    if (PChar->m_eminenceCache.lastWriteout < timer::now() - ROE_CACHETIME)
     {
         charutils::SaveEminenceData(PChar);
     }
@@ -74,7 +70,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
         }
         else if (auto PMob = std::get_if<CMobEntity*>(&datagram.data))
         {
-            params[datagram.luaKey] = CLuaBaseEntity(*PMob);
+            params[datagram.luaKey] = *PMob;
         }
         else if (auto text = std::get_if<std::string>(&datagram.data))
         {
@@ -87,7 +83,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
     }
 
     // Call
-    auto result = onRecordTrigger(CLuaBaseEntity(PChar), recordID, params);
+    auto result = onRecordTrigger(PChar, recordID, params);
     if (!result.valid())
     {
         sol::error err = result;
@@ -451,38 +447,35 @@ namespace roeutils
         // Only chars with First Step Forward complete can get timed/daily records
         if (GetEminenceRecordCompletion(PChar, 1))
         {
-            time_t lastOnline      = PChar->lastOnline;
-            time_t lastJstMidnight = CVanaTime::getInstance()->getJstMidnight() - (60 * 60 * 24); // Unix timestamp of the last JST midnight
+            auto currentTime     = earth_time::now();
+            auto lastJstMidnight = earth_time::jst::get_next_midnight(currentTime) - 24h; // Most recent JST midnight
 
             { // Daily Reset
-                if (lastOnline < lastJstMidnight)
+                if (PChar->lastOnline < lastJstMidnight)
                 {
                     ClearDailyRecords(PChar);
                 }
             }
 
             { // Weekly Reset
-                // Get the current JST DOTW (0-6), that plus 6 mod 7 will push the start of the week to Monday.
-                // Multiply that to get seconds, and subtract from last JST midnight.
-                uint32 jstWeekday         = (CVanaTime::getInstance()->getJstWeekDay() + 6) % 7;
-                time_t lastJstWeeklyReset = lastJstMidnight - (jstWeekday * (60 * 60 * 24)); // Unix timestamp of last JST Midnight (Sunday->Monday)
-                time_t lastTwoJstResets   = lastJstWeeklyReset - (7 * (60 * 60 * 24));       // Unix timestamp of two JST resets ago
-
-                if (lastOnline < lastJstWeeklyReset)
+                auto lastWeeklyReset = earth_time::get_next_game_week(currentTime) - std::chrono::days(7);
+                if (PChar->lastOnline < lastWeeklyReset)
                 {
                     ClearWeeklyRecords(PChar);
 
-                    if (lastOnline < lastTwoJstResets)
+                    auto prevLastWeeklyReset = lastWeeklyReset - std::chrono::days(7);
+                    if (PChar->lastOnline < prevLastWeeklyReset)
                     {
                         charutils::SetPoints(PChar, "prev_accolades", 0);
                     }
                 }
             }
 
-            {                                                                                                                                  // 4hr Reset
-                time_t lastJstTimedBlock = lastJstMidnight + (static_cast<uint8>(CVanaTime::getInstance()->getJstHour() / 4) * (60 * 60 * 4)); // Unix timestamp of the start of the current 4-hr block
+            { // 4hr Reset
+                uint8 currentBlock      = static_cast<uint8>(earth_time::jst::get_hour(currentTime) / 4);
+                auto  lastJstTimedBlock = lastJstMidnight + std::chrono::hours(currentBlock * 4); // Start of the current 4-hr block
 
-                if (lastOnline < lastJstTimedBlock || PChar->m_eminenceLog.active[30] != GetActiveTimedRecord())
+                if (PChar->lastOnline < lastJstTimedBlock || PChar->m_eminenceLog.active[30] != GetActiveTimedRecord())
                 {
                     PChar->m_eminenceCache.notifyTimedRecord = static_cast<bool>(GetActiveTimedRecord());
                     AddActiveTimedRecord(PChar);
@@ -515,8 +508,9 @@ namespace roeutils
     uint16 GetActiveTimedRecord()
     {
         TracyZoneScoped;
-        uint8 day   = static_cast<uint8>(CVanaTime::getInstance()->getJstWeekDay());
-        uint8 block = static_cast<uint8>(CVanaTime::getInstance()->getJstHour() / 4);
+        auto  currentTime = earth_time::now();
+        uint8 day         = static_cast<uint8>(earth_time::jst::get_weekday(currentTime));
+        uint8 block       = static_cast<uint8>(earth_time::jst::get_hour(currentTime) / 4);
         return RoeSystem.TimedRecordTable[day][block];
     }
 
@@ -687,8 +681,6 @@ namespace roeutils
 
         const char* rankingQuery = "UPDATE unity_system SET members_prev = members_current, points_prev = points_current, members_current = 0, points_current = 0";
         _sql->Query(rankingQuery);
-
-        roeutils::UpdateUnityRankings();
     }
 
     void UpdateUnityRankings()

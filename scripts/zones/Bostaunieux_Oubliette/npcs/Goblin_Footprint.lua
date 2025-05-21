@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bostaunieux Oubliette
 --  NPC: Goblin Footprint
--- Type: NPC
 -- !pos  111.806 -24.007 57.266 167
 -----------------------------------
 ---@type TNpcEntity
@@ -13,9 +12,6 @@ end
 
 entity.onTrigger = function(player, npc)
     xi.goblinfootprint.rewatch(player, true)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

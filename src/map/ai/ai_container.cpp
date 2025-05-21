@@ -41,6 +41,7 @@
 #include "states/raise_state.h"
 #include "states/range_state.h"
 #include "states/respawn_state.h"
+#include "states/synth_state.h"
 #include "states/trigger_state.h"
 #include "states/weaponskill_state.h"
 #include "status_effect_container.h"
@@ -55,8 +56,8 @@ CAIContainer::CAIContainer(CBaseEntity* _PEntity, std::unique_ptr<CPathFind>&& _
 : TargetFind(std::move(_targetfind))
 , PathFind(std::move(_pathfind))
 , Controller(std::move(_controller))
-, m_Tick(server_clock::now())
-, m_PrevTick(server_clock::now())
+, m_Tick(timer::now())
+, m_PrevTick(timer::now())
 , PEntity(_PEntity)
 , ActionQueue(_PEntity)
 {
@@ -150,7 +151,7 @@ bool CAIContainer::Trigger(CCharEntity* player)
 {
     // TODO: ensure idempotency of all onTrigger lua calls (i.e. chests can only be opened once)
     bool isDoor = luautils::OnTrigger(player, PEntity) == -1;
-    PEntity->PAI->EventHandler.triggerListener("ON_TRIGGER", CLuaBaseEntity(player), CLuaBaseEntity(PEntity));
+    PEntity->PAI->EventHandler.triggerListener("ON_TRIGGER", player, PEntity);
     if (CanChangeState())
     {
         auto ret = ChangeState<CTriggerState>(PEntity, player->targid, isDoor);
@@ -173,12 +174,12 @@ bool CAIContainer::UseItem(uint16 targid, uint8 loc, uint8 slotid)
     return false;
 }
 
-bool CAIContainer::Inactive(duration _duration, bool canChangeState)
+bool CAIContainer::Inactive(timer::duration _duration, bool canChangeState)
 {
     return ForceChangeState<CInactiveState>(PEntity, _duration, canChangeState, false);
 }
 
-bool CAIContainer::Untargetable(duration _duration, bool canChangeState)
+bool CAIContainer::Untargetable(timer::duration _duration, bool canChangeState)
 {
     return ForceChangeState<CInactiveState>(PEntity, _duration, canChangeState, true);
 }
@@ -334,7 +335,7 @@ bool CAIContainer::Internal_RangedAttack(uint16 targetid)
     return false;
 }
 
-bool CAIContainer::Internal_Die(duration deathTime)
+bool CAIContainer::Internal_Die(timer::duration deathTime)
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
@@ -411,14 +412,14 @@ void CAIContainer::Reset()
     }
 }
 
-void CAIContainer::Tick(time_point _tick)
+void CAIContainer::Tick(timer::time_point _tick)
 {
     TracyZoneScoped;
     m_PrevTick = m_Tick;
     m_Tick     = _tick;
 
     // TODO: timestamp in the event?
-    EventHandler.triggerListener("TICK", CLuaBaseEntity(PEntity));
+    EventHandler.triggerListener("TICK", PEntity);
     PEntity->Tick(_tick);
 
     // TODO: check this in the controller instead maybe? (might not want to check every tick)
@@ -431,7 +432,7 @@ void CAIContainer::Tick(time_point _tick)
         PathFind->FollowPath(_tick);
         if (PathFind->OnPoint())
         {
-            EventHandler.triggerListener("PATH", CLuaBaseEntity(PEntity));
+            EventHandler.triggerListener("PATH", PEntity);
             luautils::OnPath(PEntity);
         }
     }
@@ -463,7 +464,7 @@ void CAIContainer::ClearStateStack()
 {
     while (!m_stateStack.empty())
     {
-        m_stateStack.top()->Cleanup(server_clock::now());
+        m_stateStack.top()->Cleanup(timer::now());
         m_stateStack.pop();
     }
 }
@@ -472,7 +473,7 @@ void CAIContainer::InterruptStates()
 {
     while (!m_stateStack.empty() && m_stateStack.top()->CanInterrupt())
     {
-        m_stateStack.top()->Cleanup(server_clock::now());
+        m_stateStack.top()->Cleanup(timer::now());
         m_stateStack.pop();
     }
 }
@@ -497,12 +498,12 @@ bool CAIContainer::IsUntargetable()
     return (PEntity->PAI->IsCurrentState<CInactiveState>() && static_cast<CInactiveState*>(PEntity->PAI->GetCurrentState())->GetUntargetable()) || PEntity->GetUntargetable();
 }
 
-time_point CAIContainer::getTick()
+timer::time_point CAIContainer::getTick()
 {
     return m_Tick;
 }
 
-time_point CAIContainer::getPrevTick()
+timer::time_point CAIContainer::getPrevTick()
 {
     return m_PrevTick;
 }
@@ -541,7 +542,7 @@ void CAIContainer::ClearTimerQueue()
 
 void CAIContainer::checkQueueImmediately()
 {
-    ActionQueue.checkAction(server_clock::now());
+    ActionQueue.checkAction(timer::now());
 }
 
 bool CAIContainer::Internal_Despawn(bool instantDespawn)
@@ -553,7 +554,7 @@ bool CAIContainer::Internal_Despawn(bool instantDespawn)
     return false;
 }
 
-bool CAIContainer::Internal_Respawn(duration _duration)
+bool CAIContainer::Internal_Respawn(timer::duration _duration)
 {
     if (!IsCurrentState<CRespawnState>())
     {
@@ -562,11 +563,21 @@ bool CAIContainer::Internal_Respawn(duration _duration)
     return false;
 }
 
+bool CAIContainer::Internal_Synth(SKILLTYPE synthSkill)
+{
+    auto PChar = dynamic_cast<CCharEntity*>(PEntity);
+    if (PChar && !IsCurrentState<CSynthState>())
+    {
+        return ForceChangeState<CSynthState>(PChar, synthSkill);
+    }
+    return false;
+}
+
 void CAIContainer::CheckCompletedStates()
 {
     while (!m_stateStack.empty() && m_stateStack.top()->IsCompleted())
     {
-        m_stateStack.top()->Cleanup(server_clock::now());
+        m_stateStack.top()->Cleanup(timer::now());
         m_stateStack.pop();
     }
 }

@@ -7,9 +7,6 @@ entity.onTrigger = function(player, npc)
     player:startEvent(300)
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, door)
     if csid == 300 and option == 1 then
         door:setAnimation(8)

@@ -159,7 +159,7 @@ log_path = os.path.abspath(log_path)
 scripts_path = os.path.abspath(scripts_path)
 modules_path = os.path.abspath(modules_path)
 
-check_command = f'{lua_server_path} --loglevel="trace" --logpath="{log_path}" --configpath="{config_path}" --checklevel="Information" --check="{scripts_path}"'
+check_command = f'{lua_server_path} --loglevel="trace" --logpath="{log_path}" --check_format="json" --configpath="{config_path}" --checklevel="Information" --check="{scripts_path}"'
 
 if args.force and os.path.exists("./check.json"):
     print("Force flag is enabled, removing existing check.json.")

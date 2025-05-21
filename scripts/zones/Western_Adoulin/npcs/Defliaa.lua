@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Defliaa
--- Type: Quest NPC and Shop NPC
 -- Involved with Quest: 'All the Way to the Bank'
 -- !pos 43 2 -113 256
 -----------------------------------
@@ -25,18 +24,15 @@ entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.DEFLIAA_SHOP_TEXT)
     local stock =
     {
-        5166, 3400,   -- Coeurl Sub
-        4421, 1560,   -- Melon Pie
-        5889, 19440,  -- Stuffed Pitaru
-        5885, 18900,  -- Saltena
-        4396, 280,    -- Sausage Roll
-        4356, 200,    -- White Bread
-        5686, 800,    -- Cheese Sandwich
+        { 5166,  3400, }, -- Coeurl Sub
+        { 4421,  1560, }, -- Melon Pie
+        { 5889, 19440, }, -- Stuffed Pitaru
+        { 5885, 18900, }, -- Saltena
+        { 4396,   280, }, -- Sausage Roll
+        { 4356,   200, }, -- White Bread
+        { 5686,   800, }, -- Cheese Sandwich
     }
     xi.shop.general(player, stock)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

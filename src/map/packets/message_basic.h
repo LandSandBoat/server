@@ -122,6 +122,8 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_MOVE_AND_INTERRUPT = 218, // You move and interrupt your aim.
 
     // Charm
+    MSGBASIC_CHARM_SUCCESS        = 136, // The <player> uses .. <target> is now under the <player>'s control.
+    MSGBASIC_CHARM_FAIL           = 137, // The <player> uses .. The <player> fails to charm <target>.
     MSGBASIC_CANNOT_CHARM         = 210, // The <player> cannot charm <target>!
     MSGBASIC_VERY_DIFFICULT_CHARM = 211, // It would be very difficult for the <player> to charm <target>.
     MSGBASIC_DIFFICULT_TO_CHARM   = 212, // It would be difficult for the <player> to charm <target>.

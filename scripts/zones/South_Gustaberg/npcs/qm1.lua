@@ -15,19 +15,11 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.popFromQM(player, npc, ID.mob.BUBBLY_BERNIE, { hide = 0 })
     then
         player:confirmTrade()
-    else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
 
 entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.MONSTER_TRACKS)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

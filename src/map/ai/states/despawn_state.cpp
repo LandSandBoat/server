@@ -35,7 +35,7 @@ CDespawnState::CDespawnState(CBaseEntity* _PEntity, bool instantDespawn)
     }
 }
 
-bool CDespawnState::Update(time_point tick)
+bool CDespawnState::Update(timer::time_point tick)
 {
     if (tick > GetEntryTime() + 3s && !IsCompleted() && !(static_cast<CMobEntity*>(m_PEntity)->m_Behavior & BEHAVIOR_NO_DESPAWN))
     {
@@ -45,7 +45,7 @@ bool CDespawnState::Update(time_point tick)
     return IsCompleted();
 }
 
-void CDespawnState::Cleanup(time_point tick)
+void CDespawnState::Cleanup(timer::time_point tick)
 {
 }
 

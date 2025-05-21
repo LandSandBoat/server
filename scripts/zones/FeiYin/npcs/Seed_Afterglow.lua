@@ -17,9 +17,6 @@ local ID = zones[xi.zone.FEIYIN]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local offset               = npc:getID() - ID.npc.AFTERGRLOW_OFFSET
     local aCrystallineProphecy = player:getCurrentMission(xi.mission.log_id.ACP)
@@ -61,9 +58,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.SOFTLY_SHIMMERING_LIGHT)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

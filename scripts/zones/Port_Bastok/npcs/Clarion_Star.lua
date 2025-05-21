@@ -13,12 +13,6 @@ entity.onTrade = function(player, npc, trade)
     xi.trust.onTradeCipher(player, trade, 437, 457, 458)
 end
 
-entity.onTrigger = function(player, npc)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 437 or csid == 458 then
         local spellID = player:getLocalVar('TradingTrustCipher')

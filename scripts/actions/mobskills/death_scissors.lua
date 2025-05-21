@@ -10,17 +10,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
+-- TODO: can crit
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
-    local dmgmod = math.random(4, 6) + math.random()
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1, 2, 3)
+    local ftp    = 4
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.ATK_VARIES, 2.5, 2.5, 2.5)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
-
-    -- keep damage around 700
-    if dmg > 700 then
-        dmg = dmg * 0.7
-    end
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
     return dmg

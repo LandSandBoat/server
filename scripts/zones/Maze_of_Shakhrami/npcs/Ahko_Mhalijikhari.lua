@@ -1,14 +1,10 @@
 -----------------------------------
 -- Area: Maze of Shakhrami
 --  NPC: Ahko Mhalijikhari
--- Type: Quest NPC
 -- !pos -344.617 -12.226 -166.233 198
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
-
-entity.onTrade = function(player, npc, trade)
-end
 
 entity.onTrigger = function(player, npc)
     if player:getCharVar('EcoStatus') == 201 then
@@ -22,9 +18,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(61) -- Default dialogue
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

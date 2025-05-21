@@ -9,9 +9,6 @@ local ID = zones[xi.zone.FORT_KARUGO_NARUGO_S]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local loafersQuestProgress = player:getCharVar('AF_SCH_BOOTS')
 
@@ -23,9 +20,7 @@ entity.onTrigger = function(player, npc)
         loafersQuestProgress < 3 and
         not player:hasKeyItem(xi.ki.RAFFLESIA_DREAMSPIT)
     then
-
-        player:addKeyItem(xi.ki.RAFFLESIA_DREAMSPIT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RAFFLESIA_DREAMSPIT)
+        npcUtil.giveKeyItem(player, xi.ki.RAFFLESIA_DREAMSPIT)
         player:setCharVar('AF_SCH_BOOTS', loafersQuestProgress + 1)
 
         -- Move the markings around
@@ -48,12 +43,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

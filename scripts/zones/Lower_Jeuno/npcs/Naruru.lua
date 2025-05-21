@@ -9,11 +9,8 @@ local ID = zones[xi.zone.LOWER_JEUNO]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
-    local cooksPride     = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+    local cooksPride     = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOKS_PRIDE)
     local theKindCardian = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if
@@ -59,15 +56,12 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if
         (csid == 189 or csid == 188) and
         option == 0
     then
-        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.COOKS_PRIDE)
 
     elseif csid == 189 and option == 1 then
         player:setCharVar('CooksPrideVar', 1)
@@ -83,7 +77,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.MYTHRIL_RING)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.MYTHRIL_RING)
             player:addFame(xi.fameArea.JEUNO, 30)
-            player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+            player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.COOKS_PRIDE)
         end
     end
 end

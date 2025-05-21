@@ -1,44 +1,32 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Brave Wolf
--- Standard Merchant NPC
------------------------------------
-local ID = zones[xi.zone.RABAO]
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        12301, 31201,    -- Buckler
-        12302, 60260,    -- Darksteel Buckler
-        13979, 24373,    -- Silver Bangles
-        12554, 66066,    -- Banded Mail
-        12682, 35285,    -- Mufflers
-        12810, 52552,    -- Breeches
-        12938, 32382,    -- Sollerets
-        12609,  9423,    -- Black Tunic
-        12737,  4395,    -- White Mitts
-        12865,  6279,    -- Black Slacks
-        12993,  4084,    -- Sandals
-        12578, 28654,    -- Padded Armor
-        12706, 15724,    -- Iron Mittens
-        12836, 23063,    -- Iron Subligar
-        12962, 14327,    -- Leggins
+        { xi.item.BUCKLER,           35658 },
+        { xi.item.DARKSTEEL_BUCKLER, 68868 },
+        { xi.item.SILVER_BANGLES,    27855 },
+        { xi.item.BANDED_MAIL,       75504 },
+        { xi.item.MUFFLERS,          40326 },
+        { xi.item.BREECHES,          60060 },
+        { xi.item.SOLLERETS,         36894 },
+        { xi.item.BLACK_TUNIC,       10770 },
+        { xi.item.WHITE_MITTS,        5023 },
+        { xi.item.BLACK_SLACKS,       7176 },
+        { xi.item.SANDALS,            4667 },
+        { xi.item.PADDED_ARMOR,      32747 },
+        { xi.item.IRON_MITTENS,      17971 },
+        { xi.item.IRON_SUBLIGAR,     26357 },
+        { xi.item.LEGGINGS,          16373 },
     }
 
-    player:showText(npc, ID.text.BRAVEWOLF_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.RABAO].text.BRAVEWOLF_SHOP_DIALOG)
     xi.shop.general(player, stock)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

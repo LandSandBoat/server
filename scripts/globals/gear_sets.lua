@@ -2237,7 +2237,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.DMG, -4, -6, -8, -10 },
+            { xi.mod.DMG, -400, -600, -800, -1000 },
         },
     },
 

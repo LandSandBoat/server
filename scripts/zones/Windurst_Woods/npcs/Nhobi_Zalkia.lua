@@ -2,9 +2,6 @@
 -- Area: Windurst_Woods
 --  NPC: Nhobi Zalkia
 -- Only sells when Windurst controlls Kuzotz Region
--- Confirmed shop stock, August 2013
------------------------------------
-local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
@@ -14,27 +11,19 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local regionOwner = GetRegionOwner(xi.region.KUZOTZ)
-
-    if regionOwner ~= xi.nation.WINDURST then
-        player:showText(npc, ID.text.NHOBI_ZALKIA_CLOSED_DIALOG)
-    else
-        player:showText(npc, ID.text.NHOBI_ZALKIA_OPEN_DIALOG)
-
+    if GetRegionOwner(xi.region.KUZOTZ) == xi.nation.WINDURST then
         local stock =
         {
-            916,   855,  -- Cactuar Needle
-            4412,  299,  -- Thundermelon
-            4491,  184   -- Watermelon
+            { xi.item.THUNDERMELON,   341 },
+            { xi.item.CACTUAR_NEEDLE, 976 },
+            { xi.item.WATERMELON,     210 },
         }
+
+        player:showText(npc, zones[xi.zone.WINDURST_WOODS].text.NHOBI_ZALKIA_OPEN_DIALOG)
         xi.shop.general(player, stock, xi.fameArea.WINDURST)
+    else
+        player:showText(npc, zones[xi.zone.WINDURST_WOODS].text.NHOBI_ZALKIA_CLOSED_DIALOG)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

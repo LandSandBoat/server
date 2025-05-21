@@ -131,17 +131,11 @@ local prospectorEnhancement =
     },
 }
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local cruor = player:getCurrency('cruor')
     local demilune = xi.abyssea.getDemiluneAbyssite(player)
 
     player:startEvent(2002, cruor, demilune)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

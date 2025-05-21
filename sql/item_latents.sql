@@ -104,6 +104,7 @@ INSERT INTO `item_latents` VALUES(11405,25,20,13,406); -- +20 accuracy during Fo
 
 -- Louhi's Mask
 INSERT INTO `item_latents` VALUES (11474,161,-300,26,0);   -- Daytime: Physical damage taken -3%
+INSERT INTO `item_latents` VALUES (11474,164,-300,26,0);   -- Daytime: Ranged damage taken -3%
 INSERT INTO `item_latents` VALUES (11474,163,-300,26,1);   -- Nighttime: Magic damage taken -3%
 
 -- Diana Corona
@@ -418,15 +419,18 @@ INSERT INTO `item_latents` VALUES (13425,168,30,2,25);   -- Spell interruption r
 
 -- Slayer's Earring
 INSERT INTO `item_latents` VALUES (13426,161,-2000,2,25);  -- Physical damage taken -20% while HP <=25% and TP <=100%
+INSERT INTO `item_latents` VALUES (13426,164,-2000,2,25);  -- Ranged damage taken -20% while HP <=25% and TP <=100%
 
 -- Tamer's Earring
 INSERT INTO `item_latents` VALUES (13427,304,5,2,25);    -- "Tame" success rate  while HP <=25% and TP <=100%
 
 -- Minstrel's Earring
 INSERT INTO `item_latents` VALUES (13428,161,-3000,2,25);  -- Physical damage taken -30% while HP <=25% and TP <=100%
+INSERT INTO `item_latents` VALUES (13428,164,-3000,2,25);  -- Ranged damage taken -30% while HP <=25% and TP <=100%
 
 -- Tracker's Earring
 INSERT INTO `item_latents` VALUES (13429,161,-3000,2,25);  -- Physical damage taken -30% while HP <=25% and TP <=100%
+INSERT INTO `item_latents` VALUES (13429,164,-3000,2,25);  -- Ranged damage taken -30% while HP <=25% and TP <=100%
 
 -- Ronin Earring
 INSERT INTO `item_latents` VALUES (13430,163,-2000,2,25);  -- Magic damage taken -20% while HP <=25% and TP <=100%
@@ -497,11 +501,17 @@ INSERT INTO `item_latents` VALUES (13565,296,15,30,0);   -- +15 "Conserve MP" on
 INSERT INTO `item_latents` VALUES (13572,1,10,26,0);     -- Daytime: DEF +10
 INSERT INTO `item_latents` VALUES (13572,27,3,26,1);     -- Nighttime: Enmity +3
 
--- Cheviot/Umbra Cape (physical damage reduction doubled at night)
+-- Cheviot Cape (physical/ranged damage reduction doubled at night)
 INSERT INTO `item_latents` VALUES (13651,161,-500,26,1);
+INSERT INTO `item_latents` VALUES (13651,164,-500,26,1);
 
+-- Umbra Cape (physical/ranged damage reduction doubled at night)
 INSERT INTO `item_latents` VALUES (13652,161,-600,26,1);
+INSERT INTO `item_latents` VALUES (13652,164,-600,26,1);
+
+-- Sand Mantle
 INSERT INTO `item_latents` VALUES (13655,161,-2000,13,7);
+INSERT INTO `item_latents` VALUES (13655,164,-2000,13,7);
 
 -- Shadow Mantle
 INSERT INTO `item_latents` VALUES (13658,10,20,32,0);    -- Darksday: VIT+20
@@ -1442,10 +1452,11 @@ INSERT INTO `item_latents` VALUES (16032,289,3,22,19);   -- Muffle Earring,Subtl
 INSERT INTO `item_latents` VALUES (16033,71,1,22,20);    -- Sylph Earring,Healing MP +1 if SCH is in party
 
 -- Aesir Ear Pendant
--- NEED modID# INSERT INTO `item_latents` VALUES (16057,??,6,52,8); -- conserve tp+6 during dark weather
+INSERT INTO `item_latents` VALUES (16057,944,3,52,8);    -- conserve tp+6 during dark weather (already has +3)
 
 -- Colossus's Earring
 INSERT INTO `item_latents` VALUES (16058,161,-100,52,7);   -- physical damage -2% during light weather (has -1% normally)
+INSERT INTO `item_latents` VALUES (16058,164,-100,52,7);   -- ranged damage -2% during light weather (has -1% normally)
 
 INSERT INTO `item_latents` VALUES (16071,48,5,13,5);
 INSERT INTO `item_latents` VALUES (16071,165,5,13,5);
@@ -1857,7 +1868,11 @@ INSERT INTO `item_latents` VALUES (17699,141,6,47,0);    -- Dissector Crit Rate 
 INSERT INTO `item_latents` VALUES (17699,287,13,47,0);   -- Dissector DMG+13 when broken (500 WS points)
 
 -- Shiva's Shotel
-INSERT INTO `item_latents` VALUES (17711,431,1,21,14);   -- Additional effect: Ice damage
+INSERT INTO `item_latents` VALUES (17711,431,1,21,14);    -- Additional effect: Ice damage
+INSERT INTO `item_latents` VALUES (17711,499,2,21,14);    -- ITEM_SUBEFFECT: SUBEFFECT_ICE_DAMAGE
+INSERT INTO `item_latents` VALUES (17711,500,60,21,14);   -- ITEM_ADDEFFECT_DMG: 60
+INSERT INTO `item_latents` VALUES (17711,501,50,21,14);   -- ITEM_ADDEFFECT_CHANCE: 50
+INSERT INTO `item_latents` VALUES (17711,950,2,21,14);    -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_ICE
 
 -- Mensur Epee
 INSERT INTO `item_latents` VALUES (17719,287,-2,15,2);   -- DMG: 47~39, decreases by 2 for every person in party (excl. wearer)
@@ -2056,7 +2071,11 @@ INSERT INTO `item_latents` VALUES (18099,287,5,6,1000);  -- DMG+5 while TP <100%
 INSERT INTO `item_latents` VALUES (18101,8,12,41,0);     -- STR+12 during WS
 
 -- Leviathan's Couse
--- TODO: INSERT INTO `item_latents` VALUES (18109,431,1,21,12); -- Additional effect: Water damage while you or a party member has Leviathan summoned
+INSERT INTO `item_latents` VALUES (18109,431,1,21,12);    -- Additional effect: Water damage
+INSERT INTO `item_latents` VALUES (18109,499,6,21,12);    -- ITEM_SUBEFFECT: SUBEFFECT_WATER_DAMAGE
+INSERT INTO `item_latents` VALUES (18109,500,60,21,12);   -- ITEM_ADDEFFECT_DMG: 60
+INSERT INTO `item_latents` VALUES (18109,501,50,21,12);   -- ITEM_ADDEFFECT_CHANCE: 50
+INSERT INTO `item_latents` VALUES (18109,950,6,21,12);    -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_WATER
 
 INSERT INTO `item_latents` VALUES (18112,287,9,58,0);    -- Puk Lance DMG+9 in Assault
 -- TODO: -- Puk Lance Wyvern: HP +50 in Assault
@@ -2242,7 +2261,11 @@ INSERT INTO `item_latents` VALUES (18387,287,3,58,0);    -- Djinnbringer DMG+3 i
 INSERT INTO `item_latents` VALUES (18390,28,3,8,4);
 
 -- Ramuh's Mace
--- TODO: INSERT INTO `item_latents` VALUES (18404,431,1,21,15); -- Additional effect: Lightning damage
+INSERT INTO `item_latents` VALUES (18404,431,1,21,15);    -- Additional effect: Lightning damage
+INSERT INTO `item_latents` VALUES (18404,499,5,21,15);    -- ITEM_SUBEFFECT: SUBEFFECT_LIGHTNING_DAMAGE
+INSERT INTO `item_latents` VALUES (18404,500,60,21,15);   -- ITEM_ADDEFFECT_DMG: 60
+INSERT INTO `item_latents` VALUES (18404,501,50,21,15);   -- ITEM_ADDEFFECT_CHANCE: 50
+INSERT INTO `item_latents` VALUES (18404,950,5,21,15);    -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHTNING
 
 INSERT INTO `item_latents` VALUES (18407,5,20,58,0);     -- Imperial Wand MP +20 in Assault
 INSERT INTO `item_latents` VALUES (18407,27,-3,58,0);    -- Imperial Wand Enmity -3 in Assault
@@ -2290,8 +2313,12 @@ INSERT INTO `item_latents` VALUES (18508,25,2,16,4);     -- ACC +2~8,party size 
 INSERT INTO `item_latents` VALUES (18508,25,2,16,5);     -- ACC +2~8,party size 3+. Effect strengthens with more members
 INSERT INTO `item_latents` VALUES (18508,25,2,16,6);     -- ACC +2~8,party size 3+. Effect strengthens with more members
 
--- Carbuncle's Pole-
-INSERT INTO `item_latents` VALUES (18581,431,2,21,8);    -- Additional effect: Light damage
+-- Carbuncle's Pole
+INSERT INTO `item_latents` VALUES (18581,431,1,21,8);    -- Additional effect: Light damage
+INSERT INTO `item_latents` VALUES (18581,499,7,21,8);    -- ITEM_SUBEFFECT: SUBEFFECT_LIGHT_DAMAGE
+INSERT INTO `item_latents` VALUES (18581,500,80,21,8);   -- ITEM_ADDEFFECT_DMG: 80
+INSERT INTO `item_latents` VALUES (18581,501,60,21,8);   -- ITEM_ADDEFFECT_CHANCE: 60
+INSERT INTO `item_latents` VALUES (18581,950,7,21,8);    -- ITEM_ADDEFFECT_ELEMENT: ELEMENT_LIGHT
 
 INSERT INTO `item_latents` VALUES (18582,6,2,58,0);      -- Yigit Staff MP% +2 in Assault
 INSERT INTO `item_latents` VALUES (18582,287,1,58,0);    -- Yigit Staff DMG+1 in Assault
@@ -2842,6 +2869,11 @@ INSERT INTO `item_latents` VALUES (27367,399,16,52,5);   -- Pedagogy Loafers+1: 
 INSERT INTO `item_latents` VALUES (27367,399,16,52,6);   -- Pedagogy Loafers+1: Weather: Enhances Celerity and Alacrity Effect +16% (THUNDER)
 INSERT INTO `item_latents` VALUES (27367,399,16,52,7);   -- Pedagogy Loafers+1: Weather: Enhances Celerity and Alacrity Effect +16% (LIGHT)
 INSERT INTO `item_latents` VALUES (27367,399,16,52,8);   -- Pedagogy Loafers+1: Weather: Enhances Celerity and Alacrity Effect +16% (DARK)
+
+-- She-slime Hat
+INSERT INTO `item_latents` VALUES (27726,370,1,13,2);   -- While Sleeping: REGEN +1
+INSERT INTO `item_latents` VALUES (27726,370,1,13,19);  -- While Sleeping: REGEN +1
+INSERT INTO `item_latents` VALUES (27726,370,1,13,193); -- While Sleeping: REGEN +1
 
 -- Councilor's Garb
 INSERT INTO `item_latents` VALUES (27923,76,24,63,0);   -- While in Adoulin: MOVE_SPEED_GEAR_BONUS +25% (retail testing shows +24%)

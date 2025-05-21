@@ -25,13 +25,14 @@
 #include "common/cbasetypes.h"
 
 #include "basic.h"
+#include "position.h"
 
 class CCharEntity;
 
 class CCSPositionPacket : public CBasicPacket
 {
 public:
-    CCSPositionPacket(CCharEntity* PChar);
+    CCSPositionPacket(CBaseEntity* PEntity, position_t position, POSMODE mode = POSMODE::NORMAL);
 };
 
 #endif

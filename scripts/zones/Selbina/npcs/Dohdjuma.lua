@@ -1,40 +1,28 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Dohdjuma
--- Standard Merchant NPC
------------------------------------
-local ID = zones[xi.zone.SELBINA]
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        611,    36,    -- Rye Flour
-        5011,  233,    -- Scroll of Sheepfoe Mambo
-        4150, 2335,    -- Eye Drops
-        4148,  284,    -- Antidote
-        4509,   10,    -- Distilled Water
-        4112,  819,    -- Potion
-        17395,  10,    -- Lugworm
-        4378,   54,    -- Selbina Milk
-        4490,  432,    -- Pickled Herring
-        4559, 4485,    -- Herb Quus
-        2866, 9200,    -- Selbina Waystone
+        { xi.item.BAG_OF_RYE_FLOUR,            41 },
+        { xi.item.SCROLL_OF_SHEEPFOE_MAMBO,   269 },
+        { xi.item.FLASK_OF_EYE_DROPS,        2698 },
+        { xi.item.ANTIDOTE,                   328 },
+        { xi.item.FLASK_OF_DISTILLED_WATER,    12 },
+        { xi.item.POTION,                     946 },
+        { xi.item.LUGWORM,                     12 },
+        { xi.item.JUG_OF_SELBINA_MILK,         62 },
+        { xi.item.PICKLED_HERRING,            499 },
+        { xi.item.SERVING_OF_HERB_QUUS,      5183 },
+        { xi.item.SELBINA_WAYSTONE,         10400 },
     }
 
-    player:showText(npc, ID.text.DOHDJUMA_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.SELBINA].text.DOHDJUMA_SHOP_DIALOG)
     xi.shop.general(player, stock)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

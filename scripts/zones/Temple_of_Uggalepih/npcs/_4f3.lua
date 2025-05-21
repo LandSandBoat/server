@@ -9,9 +9,6 @@ local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local killCount = player:getCharVar('EVERYONES_GRUDGE_KILLS')
 
@@ -25,9 +22,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.DOOR_SHUT)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

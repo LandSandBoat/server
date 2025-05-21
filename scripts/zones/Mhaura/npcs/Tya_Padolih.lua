@@ -1,40 +1,28 @@
 -----------------------------------
 -- Area: Mhaura
 --  NPC: Tya Padolih
--- Standard Merchant NPC
 -- !pos -48 -4 30 249
------------------------------------
-local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4716,  4147,    -- Scroll of Regen
-        4718,  7516,    -- Scroll of Regen II
-        4881, 10752,    -- Scroll of Sleepga
-        4690, 29030,    -- Scroll of Baramnesia
-        4691, 29030,    -- Scroll of Baramnesra
-        4744,  5523,    -- Scroll of Invisible
-        4745,  2400,    -- Scroll of Sneak
-        4746,  1243,    -- Scroll of Deodorize
-        4912, 18032,    -- Scroll of Distract
-        4914, 25038,    -- Scroll of Frazzle
+        { xi.item.SCROLL_OF_REGEN,       4492 },
+        { xi.item.SCROLL_OF_REGEN_II,    8143 },
+        { xi.item.SCROLL_OF_SLEEPGA,    11648 },
+        { xi.item.SCROLL_OF_BARAMNESIA, 31449 },
+        { xi.item.SCROLL_OF_BARAMNESRA, 31449 },
+        { xi.item.SCROLL_OF_INVISIBLE,   5984 },
+        { xi.item.SCROLL_OF_SNEAK,       2600 },
+        { xi.item.SCROLL_OF_DEODORIZE,   1346 },
+        { xi.item.SCROLL_OF_DISTRACT,   20384 },
+        { xi.item.SCROLL_OF_FRAZZLE,    28304 },
     }
 
-    player:showText(npc, ID.text.TYAPADOLIH_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.MHAURA].text.TYAPADOLIH_SHOP_DIALOG)
     xi.shop.general(player, stock)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

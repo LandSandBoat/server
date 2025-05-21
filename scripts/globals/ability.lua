@@ -4,7 +4,7 @@
 xi = xi or {}
 xi.ability = xi.ability or {}
 
-xi.ability.adjustDamage = function(dmg, mob, skill, target, skilltype, skillparam, shadowbehav) -- seems to only be used for Wyvern breaths and chi blast
+xi.ability.adjustDamage = function(dmg, attacker, skill, target, skilltype, skillparam, shadowbehav) -- seems to only be used for Wyvern breaths and chi blast
     -- physical attack missed, skip rest
     local msg = skill:getMsg()
     if
@@ -65,7 +65,9 @@ xi.ability.adjustDamage = function(dmg, mob, skill, target, skilltype, skillpara
     if skilltype == xi.attackType.PHYSICAL then
         dmg = target:physicalDmgTaken(dmg, skillparam)
     elseif skilltype == xi.attackType.MAGICAL then
-        dmg = target:magicDmgTaken(dmg, skillparam)
+        local element = utils.clamp(skillparam - 5, xi.element.NONE, xi.element.DARK) -- Transform damage type to element
+        dmg = math.floor(dmg * xi.spells.damage.calculateTMDA(target, element))
+        dmg = math.floor(dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, element))
     elseif skilltype == xi.attackType.BREATH then
         dmg = target:breathDmgTaken(dmg)
     elseif skilltype == xi.attackType.RANGED then
@@ -89,7 +91,7 @@ xi.ability.adjustDamage = function(dmg, mob, skill, target, skilltype, skillpara
 
     if dmg > 0 then
         target:wakeUp()
-        target:updateEnmityFromDamage(mob, dmg)
+        target:updateEnmityFromDamage(attacker, dmg)
     end
 
     return dmg

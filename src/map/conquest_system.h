@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/regional_event.h"
 
 #include "conquest_data.h"
 #include "zone.h"
@@ -30,7 +31,7 @@ enum ConquestUpdate : uint8
 {
     Conquest_Tally_Start = 0,
     Conquest_Tally_End   = 1,
-    Conquest_Update      = 2
+    Conquest_Update      = 2,
 };
 
 class CCharEntity;
@@ -42,9 +43,9 @@ class CCharEntity;
  */
 namespace conquest
 {
-    std::shared_ptr<ConquestData> GetConquestData(); // Cached data with influences / region controls
+    ConquestData& GetConquestData(); // Cached data with influences / region controls
 
-    void HandleZMQMessage(uint8* data);
+    void HandleMessage(ConquestMessage type, const std::span<const uint8> data);
 
     void UpdateConquestGM(ConquestUpdate type);                  // Update conquest system by GM (modify in the DB and use @updateconquest)
     void GainInfluencePoints(CCharEntity* PChar, uint32 points); // Gain influence for player's nation (+1)
@@ -66,7 +67,7 @@ namespace conquest
     uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst,  // Determine if losing nations are allied
                       uint8 sandoria_prev, uint8 bastok_prev, uint8 windurst_prev);
     bool  IsAlliance();                         // Determine if losing nations are allied
-    uint8 GetNexTally();                        // Next tally (weekly or every hour ?)
+    uint8 GetNextTally();                       // Vana'diel days until next weekly conquest tally
     uint8 GetRegionOwner(REGION_TYPE RegionID); // Get owner of the region
 
     uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp); // Add conquest points

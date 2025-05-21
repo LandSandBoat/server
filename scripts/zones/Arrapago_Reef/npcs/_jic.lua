@@ -8,9 +8,6 @@ local ID = zones[xi.zone.ARRAPAGO_REEF]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if not xi.instance.onTrigger(player, npc, xi.zone.ILRUSI_ATOLL) then
         player:messageSpecial(ID.text.NOTHING_HAPPENS)

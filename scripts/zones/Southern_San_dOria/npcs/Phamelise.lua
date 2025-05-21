@@ -3,8 +3,6 @@
 --  NPC: Phamelise
 -- Zulkheim Regional Merchant
 -----------------------------------
-local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -13,29 +11,23 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if GetRegionOwner(xi.region.ZULKHEIM) ~= xi.nation.SANDORIA then
-        player:showText(npc, ID.text.PHAMELISE_CLOSED_DIALOG)
-    else
+    if GetRegionOwner(xi.region.ZULKHEIM) == xi.nation.SANDORIA then
         local stock =
         {
-            4372,   44,    -- Giant Sheep Meat
-            622,    44,    -- Dried Marjoram
-            610,    55,    -- San d'Orian Flour
-            611,    36,    -- Rye Flour
-            1840, 1840,    -- Semolina
-            4366,   22,    -- La Theine Cabbage
-            4378,   55,    -- Selbina Milk
+            { xi.item.SLICE_OF_GIANT_SHEEP_MEAT,   50 },
+            { xi.item.PINCH_OF_DRIED_MARJORAM,     50 },
+            { xi.item.BAG_OF_SAN_DORIAN_FLOUR,     63 },
+            { xi.item.BAG_OF_RYE_FLOUR,            42 },
+            { xi.item.BAG_OF_SEMOLINA,           2100 },
+            { xi.item.LA_THEINE_CABBAGE,           25 },
+            { xi.item.JUG_OF_SELBINA_MILK,         63 },
         }
 
-        player:showText(npc, ID.text.PHAMELISE_OPEN_DIALOG)
+        player:showText(npc, zones[xi.zone.SOUTHERN_SAN_DORIA].text.PHAMELISE_OPEN_DIALOG)
         xi.shop.general(player, stock, xi.fameArea.SANDORIA)
+    else
+        player:showText(npc, zones[xi.zone.SOUTHERN_SAN_DORIA].text.PHAMELISE_CLOSED_DIALOG)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

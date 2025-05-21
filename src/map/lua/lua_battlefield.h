@@ -71,7 +71,7 @@ public:
     void setRecord(std::string const& name, uint32 seconds);
     void setStatus(uint8 status);
     void setLocalVar(std::string const& name, uint64_t value);
-    auto insertEntity(uint16 targid, bool ally, bool inBattlefield) -> std::optional<CLuaBaseEntity>;
+    auto insertEntity(uint16 targid, bool ally, bool inBattlefield) -> CBaseEntity*;
     bool cleanup(bool cleanup);
     void win();
     void lose();

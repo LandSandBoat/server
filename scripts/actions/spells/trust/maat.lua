@@ -16,8 +16,7 @@ spellObject.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
 
     -- On cooldown
-    mob:addSimpleGambit(ai.t.SELF, ai.c.ALWAYS, 0,
-                        ai.r.JA, ai.s.SPECIFIC, xi.ja.MANTRA)
+    mob:addGambit(ai.t.SELF, { ai.c.ALWAYS, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.MANTRA })
 
     mob:addListener('WEAPONSKILL_USE', 'MAAT_WEAPONSKILL_USE', function(mobArg, target, wsid, tp, action)
         if wsid == 3263 then -- Bear Killer

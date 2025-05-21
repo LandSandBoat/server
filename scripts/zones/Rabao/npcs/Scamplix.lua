@@ -1,42 +1,30 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Scamplix
--- Standard Merchant NPC
------------------------------------
-local ID = zones[xi.zone.RABAO]
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4509,    10,    -- Distilled Waterr
-        4376,   108,    -- Meat Jerky
-        4458,   270,    -- Goblin Bread
-        1817,   720,    -- Cactus Arm
-        4128,  4348,    -- Ether
-        4412,   292,    -- Thundermelon
-        4491,   180,    -- Watermelon
-        4112,   819,    -- Potion
-        4148,   284,    -- Antidote
-        4163,  1080,    -- Blinding Potion
-        13328, 4050,    -- Mythril Earring
-        107,    180,    -- Water Jug
-        2868,  9000,    -- Rabao Waystone
+        { xi.item.FLASK_OF_DISTILLED_WATER,     12 },
+        { xi.item.STRIP_OF_MEAT_JERKY,         124 },
+        { xi.item.LOAF_OF_GOBLIN_BREAD,        312 },
+        { xi.item.CACTUS_ARM,                  832 },
+        { xi.item.RABAO_WAYSTONE,            10400 },
+        { xi.item.ETHER,                      5025 },
+        { xi.item.THUNDERMELON,                338 },
+        { xi.item.WATERMELON,                  208 },
+        { xi.item.POTION,                      946 },
+        { xi.item.ANTIDOTE,                    328 },
+        { xi.item.FLASK_OF_BLINDNESS_POTION,  1248 },
+        { xi.item.MYTHRIL_EARRING,            4680 },
+        { xi.item.WATER_JUG,                   208 },
     }
 
-    player:showText(npc, ID.text.SCAMPLIX_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.RABAO].text.SCAMPLIX_SHOP_DIALOG)
     xi.shop.general(player, stock)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

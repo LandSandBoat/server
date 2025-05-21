@@ -34,6 +34,7 @@ entity.onMobSpawn = function(mob)
     })
 
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    mob:addImmunity(xi.immunity.SILENCE)
     mob:setAnimationSub(0)
     mob:setAutoAttackEnabled(true)
     mob:setMobAbilityEnabled(true)

@@ -42,7 +42,7 @@ void CAIActionQueue::pushAction(queueAction_t&& action)
     }
 }
 
-void CAIActionQueue::checkAction(time_point tick)
+void CAIActionQueue::checkAction(timer::time_point tick)
 {
     while (!timerQueue.empty())
     {
@@ -78,7 +78,7 @@ void CAIActionQueue::handleAction(queueAction_t& action)
 {
     if (action.lua_func.valid())
     {
-        auto result = action.lua_func(CLuaBaseEntity(PEntity));
+        auto result = action.lua_func(PEntity);
         if (!result.valid())
         {
             sol::error err = result;

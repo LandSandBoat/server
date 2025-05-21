@@ -18,9 +18,11 @@
 
 ===========================================================================
 */
+
 #pragma once
 
 #include "cbasetypes.h"
+#include "timer.h"
 
 #include <chrono>
 #include <condition_variable>
@@ -29,10 +31,10 @@
 
 #include <nonstd/jthread.hpp>
 
-class Watchdog
+class Watchdog final
 {
 public:
-    Watchdog(duration timeout, std::function<void()> callback);
+    Watchdog(timer::duration timeout, std::function<void()> callback);
     ~Watchdog();
 
     void update();
@@ -42,9 +44,9 @@ private:
 
     using voidFunc_t = std::function<void()>;
 
-    duration   m_timeout;
-    voidFunc_t m_callback;
-    time_point m_lastUpdate;
+    timer::duration   m_timeout;
+    voidFunc_t        m_callback;
+    timer::time_point m_lastUpdate;
 
     nonstd::jthread         m_watchdog;
     std::atomic_bool        m_running;

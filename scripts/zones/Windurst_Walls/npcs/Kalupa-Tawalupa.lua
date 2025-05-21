@@ -7,9 +7,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local toBee = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
     local toBeeOrNotStatus = player:getCharVar('ToBeeOrNot_var')
@@ -33,10 +30,5 @@ end
 -- CS 72 - player:startEvent(72) -- During Too Bee quest after some honey was given to Zayhi: "hey did that honey help you just now?"
 -- *CS 75 - player:startEvent(75) -- Combo CS: During Too Bee quest, kicked off from Zayhi
 -- CS 77 - player:startEvent(77) -- After Too Bee quest but before zone: "well I guess a tooth ache is to be expected"
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
-end
 
 return entity

@@ -23,7 +23,7 @@
 
 #include <cstring>
 
-#include "packets/char_update.h"
+#include "packets/char_status.h"
 #include "packets/chat_message.h"
 #include "packets/inventory_assign.h"
 #include "packets/inventory_finish.h"
@@ -33,11 +33,11 @@
 #include "packets/message_system.h"
 
 #include "conquest_system.h"
+#include "ipc_client.h"
 #include "item_container.h"
 #include "items/item_linkshell.h"
 #include "linkshell.h"
-#include "map.h"
-#include "message.h"
+#include "map_server.h"
 #include "packets/linkshell_message.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -69,7 +69,7 @@ void CLinkshell::setColor(uint16 color)
 void CLinkshell::setPostRights(uint8 postrights)
 {
     m_postRights = postrights;
-    _sql->Query("UPDATE linkshells SET postrights = %u WHERE linkshellid = %d", postrights, m_id);
+    db::preparedStmt("UPDATE linkshells SET postrights = ? WHERE linkshellid = ?", postrights, m_id);
 }
 
 const std::string& CLinkshell::getName()
@@ -84,20 +84,23 @@ void CLinkshell::setName(const std::string& name)
 
 void CLinkshell::setMessage(const std::string& message, const std::string& poster)
 {
-    const auto query = "UPDATE linkshells SET poster = ?, message = ?, messagetime = ? WHERE linkshellid = ?";
-    if (!db::preparedStmt(query, poster, message, static_cast<uint32>(time(nullptr)), m_id))
+    const auto postTime = earth_time::timestamp();
+
+    if (!db::preparedStmt("UPDATE linkshells SET poster = ?, message = ?, messagetime = ? WHERE linkshellid = ?", poster, message, postTime, m_id))
     {
         ShowError("Failed to update linkshell message for linkshell %u", m_id);
         return;
     }
 
-    int8 packetData[8]{};
-    ref<uint32>(packetData, 0) = m_id;
-    ref<uint32>(packetData, 4) = 0;
     if (message.size() != 0)
     {
-        message::send(MSG_CHAT_LINKSHELL, packetData, sizeof(packetData),
-                      std::make_unique<CLinkshellMessagePacket>(poster, message, m_name, std::numeric_limits<uint32>::min(), true));
+        message::send(ipc::LinkshellSetMessage{
+            .linkshellId   = m_id,
+            .linkshellName = m_name,
+            .poster        = poster,
+            .message       = message,
+            .postTime      = 0, // Indicator to look up the LS message
+        });
     }
 }
 
@@ -119,12 +122,12 @@ void CLinkshell::AddMember(CCharEntity* PChar, int8 type, uint8 lsNum)
 
     if (lsNum == 1)
     {
-        _sql->Query("UPDATE accounts_sessions SET linkshellid1 = %u , linkshellrank1 = %u WHERE charid = %u", this->getID(), type, PChar->id);
+        db::preparedStmt("UPDATE accounts_sessions SET linkshellid1 = ?, linkshellrank1 = ? WHERE charid = ?", this->getID(), type, PChar->id);
         PChar->PLinkshell1 = this;
     }
     else
     {
-        _sql->Query("UPDATE accounts_sessions SET linkshellid2 = %u , linkshellrank2 = %u WHERE charid = %u", this->getID(), type, PChar->id);
+        db::preparedStmt("UPDATE accounts_sessions SET linkshellid2 = ?, linkshellrank2 = ? WHERE charid = ?", this->getID(), type, PChar->id);
         PChar->PLinkshell2 = this;
     }
 }
@@ -138,12 +141,12 @@ bool CLinkshell::DelMember(CCharEntity* PChar)
         {
             if (PChar->PLinkshell1 == this)
             {
-                _sql->Query("UPDATE accounts_sessions SET linkshellid1 = 0 , linkshellrank1 = 0 WHERE charid = %u", PChar->id);
+                db::preparedStmt("UPDATE accounts_sessions SET linkshellid1 = 0, linkshellrank1 = 0 WHERE charid = ?", PChar->id);
                 PChar->PLinkshell1 = nullptr;
             }
             else if (PChar->PLinkshell2 == this)
             {
-                _sql->Query("UPDATE accounts_sessions SET linkshellid2 = 0 , linkshellrank2 = 0 WHERE charid = %u", PChar->id);
+                db::preparedStmt("UPDATE accounts_sessions SET linkshellid2 = 0, linkshellrank2 = 0 WHERE charid = ?", PChar->id);
                 PChar->PLinkshell2 = nullptr;
             }
             members.erase(members.begin() + i);
@@ -194,21 +197,18 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, uint8 toSack)
                     destroy(PItemLinkshell);
 
                     PItemLinkshell = newShellItem;
-                    char extra[sizeof(PItemLinkshell->m_extra) * 2 + 1];
-                    _sql->EscapeStringLen(extra, (const char*)PItemLinkshell->m_extra, sizeof(PItemLinkshell->m_extra));
-
                     PMember->getStorage(LocationID)->InsertItem(PItemLinkshell, SlotID);
-                    const char* Query = "UPDATE char_inventory SET itemid = %u, extra = '%s' WHERE charid = %u AND location = %u AND slot = %u LIMIT 1";
-                    _sql->Query(Query, PItemLinkshell->getID(), extra, PMember->id, LocationID, SlotID);
+                    db::preparedStmt("UPDATE char_inventory SET itemid = ?, extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
+                                     PItemLinkshell->getID(), PItemLinkshell->m_extra, PMember->id, LocationID, SlotID);
                     if (lsID == 1)
                     {
-                        _sql->Query("UPDATE accounts_sessions SET linkshellid1 = %u , linkshellrank1 = %u WHERE charid = %u", m_id,
-                                    static_cast<uint8>(PItemLinkshell->GetLSType()), PMember->id);
+                        db::preparedStmt("UPDATE accounts_sessions SET linkshellid1 = ?, linkshellrank1 = ? WHERE charid = ? LIMIT 1",
+                                         m_id, static_cast<uint8>(PItemLinkshell->GetLSType()), PMember->id);
                     }
                     else if (lsID == 2)
                     {
-                        _sql->Query("UPDATE accounts_sessions SET linkshellid2 = %u , linkshellrank2 = %u WHERE charid = %u", m_id,
-                                    static_cast<uint8>(PItemLinkshell->GetLSType()), PMember->id);
+                        db::preparedStmt("UPDATE accounts_sessions SET linkshellid2 = ?, linkshellrank2 = ? WHERE charid = ?",
+                                         m_id, static_cast<uint8>(PItemLinkshell->GetLSType()), PMember->id);
                     }
 
                     PMember->pushPacket<CInventoryAssignPacket>(PItemLinkshell, INV_NORMAL);
@@ -220,7 +220,7 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, uint8 toSack)
                 charutils::SaveCharEquip(PMember);
 
                 PMember->pushPacket<CInventoryFinishPacket>();
-                PMember->pushPacket<CCharUpdatePacket>(PMember);
+                PMember->pushPacket<CCharStatusPacket>(PMember);
                 return;
             }
         }
@@ -278,10 +278,10 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 kickerR
                             if (newPItemLinkshell->GetLSType() != LSTYPE_LINKSHELL)
                             {
                                 newPItemLinkshell->SetLSType(LSTYPE_BROKEN);
-                                char extra[sizeof(newPItemLinkshell->m_extra) * 2 + 1];
-                                _sql->EscapeStringLen(extra, (const char*)newPItemLinkshell->m_extra, sizeof(newPItemLinkshell->m_extra));
-                                const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u LIMIT 1";
-                                _sql->Query(Query, extra, PMember->id, LocationID, SlotID);
+
+                                db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
+                                                 newPItemLinkshell->m_extra, PMember->id, LocationID, SlotID);
+
                                 PMember->pushPacket<CInventoryItemPacket>(newPItemLinkshell, LocationID, SlotID);
                             }
                         }
@@ -293,7 +293,7 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 kickerR
             charutils::SaveCharEquip(PMember);
 
             PMember->pushPacket<CInventoryFinishPacket>();
-            PMember->pushPacket<CCharUpdatePacket>(PMember);
+            PMember->pushPacket<CCharStatusPacket>(PMember);
             if (breakLinkshell)
             {
                 PMember->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellNoLongerExists);
@@ -319,7 +319,7 @@ void CLinkshell::BreakLinkshell()
         RemoveMemberByName(members.at(0)->getName(), LSTYPE_LINKSHELL, true);
     }
     // set the linkshell as broken
-    _sql->Query("UPDATE linkshells SET broken = 1 WHERE linkshellid = %u LIMIT 1", lsid);
+    db::preparedStmt("UPDATE linkshells SET broken = 1 WHERE linkshellid = ? LIMIT 1", lsid);
 }
 
 // send linkshell message to all online members
@@ -346,7 +346,7 @@ void CLinkshell::PushPacket(uint32 senderID, const std::unique_ptr<CBasicPacket>
     }
 }
 
-void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, bool ls1)
+void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, LinkshellSlot slot)
 {
     const auto rset = db::preparedStmt("SELECT poster, message, messagetime FROM linkshells WHERE linkshellid = ?", m_id);
     if (rset && rset->rowsCount() && rset->next())
@@ -356,7 +356,7 @@ void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, bool ls1)
         const auto messageTime = rset->getOrDefault<uint32>("messagetime", 0);
         if (!message.empty())
         {
-            PChar->pushPacket<CLinkshellMessagePacket>(poster, message, m_name, messageTime, ls1);
+            PChar->pushPacket<CLinkshellMessagePacket>(poster, message, m_name, messageTime, slot);
         }
     }
 }
@@ -367,26 +367,30 @@ namespace linkshell
 
     CLinkshell* LoadLinkshell(uint32 id)
     {
-        int32 ret = _sql->Query("SELECT linkshellid, color, name, postrights FROM linkshells WHERE linkshellid = %d", id);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        const auto rset = db::preparedStmt("SELECT linkshellid, color, name, postrights FROM linkshells WHERE linkshellid = ? LIMIT 1", id);
+        if (rset && rset->rowsCount() && rset->next())
         {
-            auto PLinkshell = std::make_unique<CLinkshell>(_sql->GetUIntData(0));
+            const auto linkshellid = rset->get<uint32>("linkshellid");
+            const auto color       = rset->get<uint16>("color");
+            const auto name        = rset->get<std::string>("name");
+            const auto postrights  = rset->get<uint8>("postrights");
 
-            PLinkshell->setColor(_sql->GetIntData(1));
+            auto PLinkshell = std::make_unique<CLinkshell>(linkshellid);
+
+            PLinkshell->setColor(color);
             char EncodedName[LinkshellStringLength];
 
             std::memset(&EncodedName, 0, sizeof(EncodedName));
 
-            EncodeStringLinkshell(_sql->GetStringData(2).c_str(), EncodedName);
+            EncodeStringLinkshell(name.c_str(), EncodedName);
             PLinkshell->setName(EncodedName);
-            if (_sql->GetUIntData(3) < LSTYPE_LINKSHELL || _sql->GetUIntData(3) > LSTYPE_LINKPEARL)
+            if (postrights < LSTYPE_LINKSHELL || postrights > LSTYPE_LINKPEARL)
             {
                 PLinkshell->setPostRights(LSTYPE_PEARLSACK);
             }
             else
             {
-                PLinkshell->m_postRights = _sql->GetUIntData(3);
+                PLinkshell->m_postRights = postrights;
             }
             LinkshellList[id] = std::move(PLinkshell);
             return LinkshellList[id].get();
@@ -460,18 +464,23 @@ namespace linkshell
 
     bool IsValidLinkshellName(const std::string& name)
     {
-        auto ret = _sql->Query("SELECT linkshellid FROM linkshells WHERE name = '%s' AND broken != 1", name);
-        return ret == SQL_ERROR || _sql->NumRows() == 0;
+        const auto rset = db::preparedStmt("SELECT linkshellid FROM linkshells WHERE name = ? AND broken != 1", name);
+        return !rset || rset->rowsCount() == 0;
     }
 
     uint32 RegisterNewLinkshell(const std::string& name, uint16 color)
     {
         if (IsValidLinkshellName(name))
         {
-            if (_sql->Query("INSERT INTO linkshells (name, color, postrights) VALUES ('%s', %u, %u)", name, color,
-                            static_cast<uint8>(LSTYPE_PEARLSACK)) != SQL_ERROR)
+            if (db::preparedStmt("INSERT INTO linkshells (name, color, postrights) VALUES (?, ?, ?)",
+                                 name, color, static_cast<uint8>(LSTYPE_PEARLSACK)))
             {
-                return LoadLinkshell((uint32)_sql->LastInsertId())->getID();
+                const auto rset = db::preparedStmt("SELECT linkshellid FROM linkshells WHERE name = ? AND broken != 1", name);
+                if (rset && rset->rowsCount() && rset->next())
+                {
+                    const auto id = rset->get<uint32>("linkshellid");
+                    return LoadLinkshell(id)->getID();
+                }
             }
         }
         return 0;

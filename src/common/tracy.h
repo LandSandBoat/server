@@ -18,13 +18,37 @@
 
 ===========================================================================
 */
-#ifndef _TRACY_H
-#define _TRACY_H
+
+#pragma once
+
+#include <fmt/format.h>
+
+//
+// TODO: Move these somewhere else
+//
+
+inline std::string hex8ToString(std::uint8_t hex)
+{
+    return fmt::format("0x{:02X}", hex);
+}
+
+inline std::string hex16ToString(std::uint16_t hex)
+{
+    return fmt::format("0x{:04X}", hex);
+}
+
+inline std::string hex32ToString(std::uint32_t hex)
+{
+    return fmt::format("0x{:08X}", hex);
+}
 
 // clang-format off
 #ifdef TRACY_ENABLE
 
+#ifndef TRACY_CALLSTACK
 #define TRACY_CALLSTACK 4
+#endif
+
 #include "tracy/Tracy.hpp"
 
 #include <cstdint>
@@ -42,22 +66,16 @@
 #define TracyMessageStr(str)    TracyMessage(str.c_str(), str.size())
 #define TracySetThreadName(str) tracy::SetThreadName(str)
 
-inline std::string Hex8ToString(std::uint8_t hex)
-{
-    return fmt::format("0x{:02X}", hex);
-}
-
-inline std::string Hex16ToString(std::uint16_t hex)
-{
-    return fmt::format("0x{:04X}", hex);
-}
-
 #define TracyZoneHex8(num) \
-    auto str = Hex8ToString(num); \
+    auto str = hex8ToString(num); \
     TracyZoneText(str.c_str(), str.size());
 
 #define TracyZoneHex16(num) \
-    auto str = Hex16ToString(num); \
+    auto str = hex16ToString(num); \
+    TracyZoneText(str.c_str(), str.size());
+
+#define TracyZoneHex32(num) \
+    auto str = hex32ToString(num); \
     TracyZoneText(str.c_str(), str.size());
 
 #define TracyReportGraphNumber(name, num) \
@@ -87,6 +105,7 @@ inline std::string Hex16ToString(std::uint16_t hex)
 #define TracyZoneIString(istr)             std::ignore = istr
 #define TracyZoneHex8(num)                 std::ignore = num
 #define TracyZoneHex16(num)                std::ignore = num
+#define TracyZoneHex32(num)                std::ignore = num
 #define TracyReportGraphNumber(name, num)  std::ignore = name; std::ignore = num
 #define TracyReportGraphBytes(name, num)   std::ignore = name; std::ignore = num
 #define TracyReportGraphPercent(name, num) std::ignore = name; std::ignore = num
@@ -98,5 +117,3 @@ inline std::string Hex16ToString(std::uint16_t hex)
 #define LockMark(m)                        std::ignore = m
 #endif
 // clang-format on
-
-#endif // _TRACY_H

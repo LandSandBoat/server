@@ -70,6 +70,9 @@ xi.settings.main =
     -- VoidWalker
     ENABLE_VOIDWALKER = 1,
 
+    -- Moblin Maze Mongers
+    ENABLE_MMM = 0,
+
     -- Monstrosity (Heavily in development, use at your own risk!)
     ENABLE_MONSTROSITY               = 0,
     MONSTROSITY_INFAMY_RATIO         = 0.1, -- (float) The ratio of exp gained to infamy gained on defeating a mob.
@@ -136,6 +139,8 @@ xi.settings.main =
     USE_ADOULIN_WEAPON_SKILL_CHANGES = true,  -- true/false. Change to toggle new Adoulin weapon skill damage calculations
     DISABLE_PARTY_EXP_PENALTY        = false, -- true/false.
     ENABLE_IMMUNOBREAK               = true,  -- true/false. Allow/Disallow immunobreaks to happen.
+    USE_PRE_2013_DEX_MULTIPLIER      = false, -- true/false. False uses 75% of DEX for accuracy calculation. Prior to 2013 50% of DEX was used.
+    USE_PRE_2013_STR_MULTIPLIER      = false, -- true/false. False uses STR multiplier of 1.0 for two handed, one handed main, and ranged attacks, 0.75 for H2H, and 0.5 for one handed in sub slot. True uses 0.5 of STR across the board and is how the game was from release to mid 2013.
 
     -- TRUSTS
     ENABLE_TRUST_CASTING           = 1,
@@ -222,8 +227,6 @@ xi.settings.main =
     SPIKE_EFFECT_DURATION           = 180,   -- the duration of RDM, BLM spikes effects (not Reprisal)
     ELEMENTAL_DEBUFF_DURATION       = 120,   -- base duration of elemental debuffs
     AQUAVEIL_COUNTER                = 1,     -- Base amount of hits Aquaveil absorbs to prevent spell interrupts. Retail is 1.
-    ABSORB_SPELL_AMOUNT             = 8,     -- how much of a stat gets absorbed by DRK absorb spells - expected to be a multiple of 8.
-    ABSORB_SPELL_TICK               = 9,     -- duration of 1 absorb spell tick
     SNEAK_INVIS_DURATION_MULTIPLIER = 1,     -- multiplies duration of sneak, invis, deodorize to reduce player torture. 1 = retail behavior.
     USE_OLD_CURE_FORMULA            = false, -- true/false. if true, uses older cure formula (3*MND + VIT + 3*(healing skill/5)) // cure 6 will use the newer formula
     USE_OLD_MAGIC_DAMAGE            = false, -- true/false. if true, uses older magic damage formulas

@@ -8,18 +8,12 @@ local ID = zones[xi.zone.JUGNER_FOREST_S]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if not player:hasKeyItem(xi.ki.JUGNER_GATE_CRYSTAL) then
         player:startEvent(1)
     else
         player:messageSpecial(ID.text.ALREADY_OBTAINED_TELE)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

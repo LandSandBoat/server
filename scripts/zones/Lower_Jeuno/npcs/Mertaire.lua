@@ -9,9 +9,6 @@ local ID = zones[xi.zone.LOWER_JEUNO]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local painfulMemory  = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY)
     local circleOfTime   = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
@@ -54,9 +51,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     -- PAINFUL MEMORY (Bard AF1)
     if csid == 138 and option == 0 then
@@ -68,8 +62,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     then
         player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY)
         player:setCharVar('PainfulMemoryCS', 0)
-        player:addKeyItem(xi.ki.MERTAIRES_BRACELET)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MERTAIRES_BRACELET)
+        npcUtil.giveKeyItem(player, xi.ki.MERTAIRES_BRACELET)
 
     -- CIRCLE OF TIME (Bard AF3)
     elseif csid == 139 then

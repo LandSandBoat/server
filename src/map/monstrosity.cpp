@@ -308,9 +308,9 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
     // TODO: There are more conditions to handle here?
     if (PChar->loc.zone->GetID() != ZONE_FERETORY)
     {
-        uint32 duration = PChar->m_PMonstrosity->Belligerency ? 60 : 64800 /* 18 hours */;
+        auto duration = PChar->m_PMonstrosity->Belligerency ? 1min : 18h;
 
-        CStatusEffect* PEffect = new CStatusEffect(EFFECT::EFFECT_GESTATION, EFFECT::EFFECT_GESTATION, 0, 0, duration);
+        CStatusEffect* PEffect = new CStatusEffect(EFFECT::EFFECT_GESTATION, EFFECT::EFFECT_GESTATION, 0, 0s, duration);
 
         // TODO: Move these into the db
         PEffect->AddEffectFlag(EFFECTFLAG_INVISIBLE);
@@ -325,7 +325,7 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
         // NOTE: It DOES say the effect wears off
         // PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
 
-        PChar->StatusEffectContainer->AddStatusEffect(PEffect, true);
+        PChar->StatusEffectContainer->AddStatusEffect(PEffect, EffectNotice::Silent);
     }
 
     SendFullMonstrosityUpdate(PChar);
@@ -616,7 +616,7 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, uint8 type)
         PChar->loc.p.y = 0.0f;
         PChar->loc.p.z = 0.0f;
 
-        PChar->SetDeathTimestamp(0);
+        PChar->SetDeathTime(timer::time_point::min());
 
         PChar->status = STATUS_TYPE::DISAPPEAR;
 
@@ -624,7 +624,7 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, uint8 type)
 
         // Restart this zone with Gestation effect
         PChar->loc.destination = PChar->loc.zone->GetID();
-        charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
+        charutils::SendToZone(PChar, PChar->loc.destination);
     }
 }
 

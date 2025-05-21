@@ -48,14 +48,14 @@ spellObject.onMobSpawn = function(mob)
     end)
 
     -- Sets stance
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.SABER_DANCE, ai.r.JA, ai.s.SPECIFIC, xi.ja.SABER_DANCE)
+    mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.SABER_DANCE }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SABER_DANCE })
 
     -- Step usage: -DEF debuff and stuns
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, xi.effect.WEAKENED_DAZE_5, ai.r.JA, ai.s.SPECIFIC, xi.ja.STUTTER_STEP)
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.READYING_WS, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH)
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.READYING_MS, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH)
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.READYING_JA, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH)
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.CASTING_MA, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH)
+    mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.WEAKENED_DAZE_5 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.STUTTER_STEP })
+    mob:addGambit(ai.t.TARGET, { ai.c.READYING_WS, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH })
+    mob:addGambit(ai.t.TARGET, { ai.c.READYING_MS, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH })
+    mob:addGambit(ai.t.TARGET, { ai.c.READYING_JA, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH })
+    mob:addGambit(ai.t.TARGET, { ai.c.CASTING_MA, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH })
 
     -- Samba logic
     -- Checks masters job, adjusts samba type if master has a healer main job.
@@ -65,14 +65,14 @@ spellObject.onMobSpawn = function(mob)
             master and
             master:getMainJob() == healingJobs[i]
         then
-            mob:addSimpleGambit(ai.t.SELF, ai.c.NO_SAMBA, ai.r.JA, 0, ai.s.SPECIFIC, xi.ja.HASTE_SAMBA)
+            mob:addGambit(ai.t.SELF, { ai.c.NO_SAMBA, ai.r.JA }, { 0, ai.s.SPECIFIC, xi.ja.HASTE_SAMBA })
         end
     end
 
     -- Adds ecosystem to adjust samba to haste if target is undead
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.IS_ECOSYSTEM, xi.ecosystem.UNDEAD, ai.r.JA, ai.s.SPECIFIC, xi.ja.HASTE_SAMBA)
+    mob:addGambit(ai.t.TARGET, { ai.c.IS_ECOSYSTEM, xi.ecosystem.UNDEAD }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.HASTE_SAMBA })
     -- Else picks highest drain spell available
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NO_SAMBA, 0, ai.r.JA, ai.s.BEST_SAMBA, xi.ja.DRAIN_SAMBA)
+    mob:addGambit(ai.t.SELF, { ai.c.NO_SAMBA, 0 }, { ai.r.JA, ai.s.BEST_SAMBA, xi.ja.DRAIN_SAMBA })
 end
 
 spellObject.onMobDespawn = function(mob)

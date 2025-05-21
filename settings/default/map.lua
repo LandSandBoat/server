@@ -48,7 +48,7 @@ xi.settings.map =
 
     -- Max open listings per player, 0 = no limit. (Default 7)
     -- Note = Settings over 7 may need client-side plugin to work under all circumstances.
-    -- If this is the case, consider using the ah_pagination module
+    -- If this is the case, consider using the ah_pagination module (which supports setting AH_LIST_LIMIT to 0 or >7).
     AH_LIST_LIMIT = 7,
 
     -- The total enmity cap for a given entity on the enmity table.
@@ -94,6 +94,9 @@ xi.settings.map =
 
     -- Disables ability to equip higher level gear when level cap/sync effect is on player.
     DISABLE_GEAR_SCALING = false,
+
+    -- Disables Treasure Hunter procs (Era behavior wants this true)
+    DISABLE_TREASURE_HUNTER_PROCS = false,
 
     -- Weaponskill point base (before skillchain) for breaking latent - whole numbers only. retail is 1.
     WS_POINTS_BASE = 1,
@@ -271,14 +274,15 @@ xi.settings.map =
     AUDIT_UNITY     = false,
     AUDIT_PARTY     = false,
 
+    -- Player Item Transaction Logging (Default: Off)
+    -- Logs player item transactions to the database for persistence.
+    AUDIT_PLAYER_TRADES = false,
+    AUDIT_PLAYER_BAZAAR = false,
+    AUDIT_PLAYER_DBOX   = false,
+    AUDIT_PLAYER_VENDOR = false,
+
     -- Seconds between healing ticks. Default is 10
     HEALING_TICK_DELAY = 10,
-
-    -- Set to 1 to enable server side anti-cheating measurements
-    ANTICHEAT_ENABLED = true,
-
-    -- Set to 1 to completely disable auto-jailing offenders
-    ANTICHEAT_JAIL_DISABLE = false,
 
     -- Enable/disable keeping jug pets through zoning
     KEEP_JUGPET_THROUGH_ZONING = false,

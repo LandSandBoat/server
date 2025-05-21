@@ -7,6 +7,12 @@ mixins = { require('scripts/mixins/rage') }
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 20000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 20000)
+    mob:addImmunity(xi.immunity.POISON)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('[rage]timer', 1800) -- 30 minutes
 end

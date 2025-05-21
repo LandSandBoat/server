@@ -18,23 +18,17 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            xi.item.BUNCH_OF_GYSAHL_GREENS,   70,
-            xi.item.GINGER_ROOT,             161,
-            xi.item.FLASK_OF_OLIVE_OIL,       16,
-            xi.item.WIJNRUIT,                124,
-            xi.item.DERFLAND_PEAR,           145,
-            xi.item.OLIVE_FLOWER,           1872,
+            { xi.item.BUNCH_OF_GYSAHL_GREENS,   70, },
+            { xi.item.GINGER_ROOT,             161, },
+            { xi.item.FLASK_OF_OLIVE_OIL,       16, },
+            { xi.item.WIJNRUIT,                124, },
+            { xi.item.DERFLAND_PEAR,           145, },
+            { xi.item.OLIVE_FLOWER,           1872, },
         }
 
         player:showText(npc, ID.text.POURETTE_OPEN_DIALOG)
         xi.shop.general(player, stock, xi.fameArea.SANDORIA)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

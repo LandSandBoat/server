@@ -10,7 +10,7 @@ local entity = {}
 
 local ramponneauPHTable =
 {
-    [ID.mob.RAMPONNEAU - 1] = ID.mob.RAMPONNEAU, -- 78.836 -0.109 -199.204
+    [ID.mob.RAMPONNEAU - 4] = ID.mob.RAMPONNEAU, -- 78.836 -0.109 -199.204
 }
 
 entity.onMobDeath = function(mob, player, optParams)

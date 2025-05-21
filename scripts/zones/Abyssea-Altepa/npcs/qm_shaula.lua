@@ -17,10 +17,4 @@ entity.onTrigger = function(player, npc)
     xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.item.VIAL_OF_VADLEANY_FLUID, xi.item.HIGH_QUALITY_SCORPION_CLAW })
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
-end
-
 return entity

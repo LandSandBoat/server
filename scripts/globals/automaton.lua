@@ -29,6 +29,7 @@ xi.automaton.abilities =
     STRING_SHREDDER = 2743,
     ARMOR_SHATTERER = 2744,
     HEAT_CAPACITOR  = 2745,
+    BARRAGE_TURBINE = 2746,
     DISRUPTOR       = 2747,
 }
 
@@ -85,7 +86,7 @@ local attachmentModifiers =
     ['galvanizer']          = { { xi.mod.COUNTER,                     {    10,    20,    35,    50 }, true  }, },
     ['hammermill']          = { { xi.mod.SHIELD_BASH,                 {    15,    25,    50,   100 }, true  },
                                 { xi.mod.AUTO_SHIELD_BASH_SLOW,       {     0,    12,    19,    25 }, true  }, },
-    ['heatsink']            = { { xi.mod.BURDEN_DECAY,                {     2,     4,     5,     6 }, true  }, },
+    ['heatsink']            = { { xi.mod.BURDEN_DECAY,                {     1,     3,     4,     5 }, true  }, },
     ['inhibitor']           = { { xi.mod.STORETP,                     {     5,    15,    25,    40 }, true  },
                                 { xi.mod.AUTO_TP_EFFICIENCY,          {   900,   900,   900,   900 }, false }, },
     ['inhibitor_ii']        = { { xi.mod.STORETP,                     {    10,    25,    40,    65 }, true  },
@@ -158,6 +159,8 @@ local attachmentModifiers =
     ['turbo_charger_ii']    = { { xi.mod.HASTE_MAGIC,                 {   700,  1700,  2800,  4375 }, true  }, },
     ['vivi-valve']          = { { xi.mod.CURE_POTENCY,                {     5,    15,    30,    45 }, true  }, },
     ['vivi-valve_ii']       = { { xi.mod.CURE_POTENCY,                {    10,    20,    35,    50 }, true  }, },
+    ['volt_gun']            = { { xi.mod.ENSPELL,                     {     5,     5,     5,     5 }, false },
+                                { xi.mod.ENSPELL_CHANCE,              {     20,   35,    50,    65 }, false }, },
 }
 
 -- Auto Repair Kits and Mana Tanks use a formula based on Max HP/MP in the form of
@@ -226,8 +229,14 @@ xi.automaton.onAttachmentUnequip = function(pet, attachment)
     local modTable = attachmentModifiers[attachment:getName()]
 
     for k, modList in ipairs(modTable) do
-        pet:delMod(modList[1], modList[2][1])
+        if modList[2][1] then
+            pet:delMod(modList[1], modList[2][1])
+        else
+            pet:setMod(modList[1], 0)
+        end
     end
+
+    pet:clearLocalVarsWithPrefix(attachment:getName())
 end
 
 xi.automaton.onManeuverGain = function(pet, attachment, maneuvers)
@@ -269,6 +278,8 @@ xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
 
         if modValue ~= previousMod then
             if previousMod ~= 0 then
+                -- If the automaton was reset to a blank state (LEVEL_RESTRICTION)
+                -- and the local variables were not cleared, this will under/overflow
                 pet:delMod(modList[1], previousMod)
             end
 

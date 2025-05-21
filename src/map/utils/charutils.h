@@ -27,6 +27,7 @@
 #include "entities/charentity.h"
 #include "items/item_equipment.h"
 #include "trait.h"
+#include "zone.h"
 
 class CPetEntity;
 class CMobEntity;
@@ -237,7 +238,8 @@ namespace charutils
     int32 GetPoints(CCharEntity* PChar, const char* type);
     void  SetUnityLeader(CCharEntity* PChar, uint8 leaderID);
     auto  GetConquestPointsName(CCharEntity* PChar) -> std::string;
-    void  SendToZone(CCharEntity* PChar, uint8 type, uint64 ipp);
+    void  SendToZone(CCharEntity* PChar, uint16 zoneId);
+    void  SendDisconnect(CCharEntity* PChar);
     void  ForceLogout(CCharEntity* PChar);
     void  ForceRezone(CCharEntity* PChar);
     void  HomePoint(CCharEntity* PChar, bool resetHPMP);
@@ -247,7 +249,6 @@ namespace charutils
     void  SetCharVar(uint32 charId, std::string const& var, int32 value, uint32 expiry = 0);
     void  SetCharVar(CCharEntity* PChar, std::string const& var, int32 value, uint32 expiry = 0);
     int32 ClearCharVarsWithPrefix(CCharEntity* PChar, std::string const& prefix);
-    int32 RemoveCharVarsWithTag(CCharEntity* PChar, std::string const& varsTag);
     void  ClearCharVarFromAll(std::string const& varName, bool localOnly = false);
     void  IncrementCharVar(CCharEntity* PChar, std::string const& var, int32 value);
 
@@ -258,15 +259,15 @@ namespace charutils
     uint16 getWideScanRange(CCharEntity* PChar);
 
     void SendTimerPacket(CCharEntity* PChar, uint32 seconds);
-    void SendTimerPacket(CCharEntity* PChar, duration dur);
+    void SendTimerPacket(CCharEntity* PChar, timer::duration dur);
     void SendClearTimerPacket(CCharEntity* PChar);
 
-    time_t getTraverserEpoch(CCharEntity* PChar);
-    void   setTraverserEpoch(CCharEntity* PChar);
-    uint32 getClaimedTraverserStones(CCharEntity* PChar);
-    void   addClaimedTraverserStones(CCharEntity* PChar, uint16 numStones);
-    void   setClaimedTraverserStones(CCharEntity* PChar, uint16 stoneTotal);
-    uint32 getAvailableTraverserStones(CCharEntity* PChar);
+    earth_time::time_point getTraverserEpoch(CCharEntity* PChar);
+    void                   setTraverserEpoch(CCharEntity* PChar);
+    uint32                 getClaimedTraverserStones(CCharEntity* PChar);
+    void                   addClaimedTraverserStones(CCharEntity* PChar, uint16 numStones);
+    void                   setClaimedTraverserStones(CCharEntity* PChar, uint16 stoneTotal);
+    uint32                 getAvailableTraverserStones(CCharEntity* PChar);
 
     void ReadHistory(CCharEntity* PChar);
     void WriteHistory(CCharEntity* PChar);
@@ -278,11 +279,20 @@ namespace charutils
 
     bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity);
 
-    uint32 getCharIdFromName(std::string const& name);
+    auto getCharIdFromName(const std::string& name) -> uint32;
+    auto getAccountIdFromName(const std::string& name) -> uint32;
+    auto getCharIdAndAccountIdFromName(const std::string& name) -> std::pair<uint32, uint32>;
 
     void forceSynthCritFail(const std::string& sourceFunction, CCharEntity* PChar);
 
     void removeCharFromZone(CCharEntity* PChar);
+
+    void updateSession(MapSession* PSession, CCharEntity* PChar, CZone* currentZone);
+    void loadDeathTimestamp(CCharEntity* PChar);
+    void loadZoningFlag(CCharEntity* PChar);
+
+    bool isOrchestrionPlaced(CCharEntity* PChar);
+    void updateMannequins(CCharEntity* PChar);
 }; // namespace charutils
 
 #endif // _CHARUTILS_H

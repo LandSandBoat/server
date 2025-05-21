@@ -17,10 +17,4 @@ entity.onTrigger = function(player, npc)
     xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.item.MINARUJA_SKULL, xi.item.JACULUS_WING, xi.item.HIGH_QUALITY_WIVRE_HIDE })
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
-end
-
 return entity

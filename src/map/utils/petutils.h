@@ -71,10 +71,10 @@ struct Pet_t
     uint8 minLevel;
     uint8 maxLevel;
 
-    uint8  name_prefix;
-    uint8  radius; // Model Radius - affects melee range etc.
-    uint16 m_Family;
-    uint32 time; // Duration of pet's "life span" before despawning
+    uint8           name_prefix;
+    uint8           radius; // Model Radius - affects melee range etc.
+    uint16          m_Family;
+    timer::duration time; // Duration of pet's "life span" before despawning
 
     uint8 mJob;
     uint8 sJob;
@@ -138,7 +138,7 @@ struct Pet_t
     , name_prefix(0)
     , radius(0)
     , m_Family(0)
-    , time(0)
+    , time(0s)
     , mJob(0)
     , sJob(0)
     , m_Element(0)
@@ -207,13 +207,14 @@ namespace petutils
     void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet);
     void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet);
     void CalculateJugPetStats(CBattleEntity* PMaster, CPetEntity* PPet);
-    void CalculateAutomatonStats(CBattleEntity* PMaster, CPetEntity* PPet);
+    void CalculateAutomatonStats(CBattleEntity* PMaster, CBattleEntity* PPet);
     void CalculateLuopanStats(CBattleEntity* PMaster, CPetEntity* PPet);
     void FinalizePetStatistics(CBattleEntity* PMaster, CPetEntity* PPet);
 
     void SetupPetWithMaster(CBattleEntity* PMaster, CPetEntity* PPet);
 
     bool CheckPetModType(CBattleEntity* PPet, PetModType petmod);
+    bool IsTandemActive(CBattleEntity* PAttacker);
 
     Pet_t* GetPetInfo(uint32 PetID);
 }; // namespace petutils

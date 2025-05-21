@@ -52,15 +52,15 @@ protected:
     {
         return true;
     }
-    virtual bool Update(time_point tick) override;
-    virtual void Cleanup(time_point tick) override;
+    virtual bool Update(timer::time_point tick) override;
+    virtual void Cleanup(timer::time_point tick) override;
     void         SpendCost();
 
 private:
     CPetEntity* const          m_PEntity;
     std::unique_ptr<CPetSkill> m_PSkill;
-    time_point                 m_finishTime;
-    duration                   m_castTime{};
+    timer::time_point          m_finishTime;
+    timer::duration            m_castTime{};
     int16                      m_spentTP;
 };
 

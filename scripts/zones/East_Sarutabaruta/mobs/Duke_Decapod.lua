@@ -7,6 +7,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+    mob:addImmunity(xi.immunity.SILENCE)
 end
 
 entity.onMobFight = function(mob, target)

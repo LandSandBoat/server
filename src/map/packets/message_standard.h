@@ -29,12 +29,9 @@
 // Valid MessageIDs for both standard and SYSTEM type messages
 // Found in ROM/27/76.dat or 1-27-76.xml if using mass extractor
 // Todo: move msg enums to common location out of packet headers
-enum class MsgStd
+enum class MsgStd : uint16
 {
-    // Used as a sentinel value. This should not be used as part of a packet.
-    Unknown = -1,
-
-    // Keep message IDs in order OR ELSE UNSPECIFIED CONSQUENSES SHALL ENSUE
+    // Keep message IDs in order OR ELSE UNSPECIFIED CONSEQUENCES SHALL ENSUE
 
     CouldNotEnter                = 2,   // You could not enter the next area. [0,1,3,4, all same message]
     CouldNotEnterYourRoom        = 5,   // You could not enter your room.
@@ -89,6 +86,8 @@ enum class MsgStd
     UnableToProcessRequest       = 183, // Unable to process request.
     ExpansionPackNotRegistered   = 184, // Unable to enter next area. Expansion pack not registered.
     ExpansionPackNotInstalled    = 185, // Unable to enter next area. Expansion pack not installed.
+    GainsEffect                  = 205, // Player Name gains the effect of <effect>.
+    EffectWearsOff               = 206, // Player Name's <effect> wears off.
     CannotPerformPetra           = 209, // You cannot perform that action while holding a Petra.
     CannotPerformNoPetra         = 210, // You cannot perform that action without a Petra.
     LostYourPetras               = 211, // You lost your Petras.
@@ -149,6 +148,7 @@ enum class MsgStd
     LevelSyncRemoveLowLevel      = 554, // Level sync will be deactivated in 30 seconds. The Level Sync designee has fallen below level 10.
     LevelSyncRemoveJobChange     = 555, // Level sync will be deactivated in 30 seconds. A party member has undergone a job change.
     LevelSyncRemoveIneligibleExp = 556, // Level sync will be deactivated in 30 seconds. The Level Sync designee is incapable of receiving experience points.
+    TreasureHunterProc           = 603, // Additional effect: Treasure Hunter effectiveness against <Target> increases to <number>
 };
 
 class CCharEntity;

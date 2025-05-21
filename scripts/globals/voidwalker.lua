@@ -368,6 +368,10 @@ local modByMobName =
         mob:addImmunity(xi.immunity.GRAVITY)
         mob:addImmunity(xi.immunity.BIND)
     end,
+
+    ['Gjenganger'] = function(mob)
+        mob:addImmunity(xi.immunity.STUN)
+    end,
 }
 
 local mixinByMobName =

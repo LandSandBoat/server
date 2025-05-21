@@ -23,21 +23,15 @@ entity.onTrigger = function(player, npc)
 
         local stock =
         {
-            4352,  128, -- Derfland Pear
-            617,   142, -- Ginger
-            4545,   62, -- Gysahl Greens
-            1412, 1656, -- Olive Flower
-            633,    14, -- Olive Oil
-            951,   110  -- Wijnruit
+            { 4352,  128, }, -- Derfland Pear
+            { 617,   142, }, -- Ginger
+            { 4545,   62, }, -- Gysahl Greens
+            { 1412, 1656, }, -- Olive Flower
+            { 633,    14, }, -- Olive Oil
+            { 951,   110, }, -- Wijnruit
         }
         xi.shop.general(player, stock, xi.fameArea.WINDURST)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

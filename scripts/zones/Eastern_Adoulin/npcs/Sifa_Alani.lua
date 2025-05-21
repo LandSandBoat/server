@@ -30,9 +30,6 @@ local mapList =
     { xi.ki.MAP_OF_RAKAZNAR,              2000 },
 }
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     -- Event Parameter options:
     -- 0 : Unknown (Does not appear to impact CS)
@@ -57,9 +54,6 @@ entity.onTrigger = function(player, npc)
     end
 
     player:startEvent(7530, 0, mapMask, frontierMask, playerBayld)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

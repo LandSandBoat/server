@@ -34,7 +34,7 @@ xi.mobMod =
     IMMUNITY               = 23, -- immune to set status effects. This only works from the db, not scripts
     GRADUAL_RAGE           = 24, -- (!) TODO: NOT YET IMPLEMENTED -- gradually rages
     BUILD_RESIST           = 25, -- (!) TODO: NOT YET IMPLEMENTED -- builds resistance to given effects
-    SUPERLINK              = 26, -- super link group. Only use this in mob_spawn_mods / scripts!
+    SUPERLINK              = 26, -- super link group. Only use this in scripts!
     SPELL_LIST             = 27, -- set spell list
     EXP_BONUS              = 28, -- bonus exp (bonus / 100) negative values reduce exp.
     ASSIST                 = 29, -- mobs will assist me
@@ -91,4 +91,5 @@ xi.mobMod =
     SKIP_ALLEGIANCE_CHECK  = 80, -- Skip the allegiance check for valid target (allows for example a mob to cast a TARGET_ENEMY spell on itself)
     ABILITY_RESPONSE       = 81, -- Mob can respond to player ability use with onPlayerAbilityUse()
     RUN_SPEED_MULT         = 82, -- Multiplier for the speed of a mob while running (generally when the target is out of range) 100 = 1.00x
+    CLAIM_TYPE             = 83, -- Changes the claim behavior of the mob. See xi.claimType enum.
 }

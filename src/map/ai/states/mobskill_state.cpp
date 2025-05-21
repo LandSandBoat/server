@@ -47,14 +47,21 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
 
     auto* PTarget = m_PEntity->IsValidTarget(m_targid, skill->getValidTargets(), m_errorMsg);
 
-    if (!PTarget || m_errorMsg)
+    if (!PTarget || this->HasErrorMsg())
     {
-        throw CStateInitException(m_errorMsg->copy());
+        if (this->HasErrorMsg())
+        {
+            throw CStateInitException(m_errorMsg->copy());
+        }
+        else
+        {
+            throw CStateInitException(std::make_unique<CBasicPacket>());
+        }
     }
 
     m_PSkill = std::make_unique<CMobSkill>(*skill);
 
-    m_castTime = std::chrono::milliseconds(m_PSkill->getActivationTime());
+    m_castTime = m_PSkill->getActivationTime();
 
     if (m_castTime > 0s)
     {
@@ -77,7 +84,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
         // face toward target // TODO : add force param to turnTowardsTarget on certain TP moves like Petro Eyes
         battleutils::turnTowardsTarget(m_PEntity, PTarget);
     }
-    m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
+    m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", m_PEntity, m_PSkill->getID());
     SpendCost();
 }
 
@@ -110,7 +117,7 @@ void CMobSkillState::SpendCost()
     }
 }
 
-bool CMobSkillState::Update(time_point tick)
+bool CMobSkillState::Update(timer::time_point tick)
 {
     // Rotate towards target during ability // TODO : add force param to turnTowardsTarget on certain TP moves like Petro Eyes
     if (m_castTime > 0s && tick < GetEntryTime() + m_castTime)
@@ -127,8 +134,7 @@ bool CMobSkillState::Update(time_point tick)
         action_t action;
         m_PEntity->OnMobSkillFinished(*this, action);
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
-        auto delay   = std::chrono::milliseconds(m_PSkill->getAnimationTime());
-        m_finishTime = tick + delay;
+        m_finishTime = tick + m_PSkill->getAnimationTime();
         Complete();
     }
     if (IsCompleted() && tick > m_finishTime)
@@ -138,7 +144,7 @@ bool CMobSkillState::Update(time_point tick)
         {
             static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0);
         }
-        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
+        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
 
         if (m_PEntity->objtype == TYPE_PET && m_PEntity->PMaster && m_PEntity->PMaster->objtype == TYPE_PC && (m_PSkill->isBloodPactRage() || m_PSkill->isBloodPactWard()))
         {
@@ -157,7 +163,7 @@ bool CMobSkillState::Update(time_point tick)
     return false;
 }
 
-void CMobSkillState::Cleanup(time_point tick)
+void CMobSkillState::Cleanup(timer::time_point tick)
 {
     if (m_PEntity && m_PEntity->isAlive() && !IsCompleted())
     {

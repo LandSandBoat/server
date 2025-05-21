@@ -11,6 +11,12 @@ entity.onMobInitialize = function(mob)
     mob:getStatusEffect(xi.effect.SHOCK_SPIKES):setEffectFlags(xi.effectFlag.DEATH)
 end
 
+entity.onMobSpawn = function(mob)
+    mob:addMod(xi.mod.ATT, 50)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 25)
+end
+
 entity.onSpikesDamage = function(mob, target, damage)
     -- "damage" is the power of the status effect up in onMobinitialize.
     local intDiff = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)

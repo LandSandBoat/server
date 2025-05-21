@@ -69,9 +69,6 @@ local function giveReducedIncidents(player)
     return 10
 end
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     -- be noisy to try to get server admins to notice
     if npc:getLocalVar('firstClammingPoint') == 0 then

@@ -24,13 +24,13 @@
 #include "entities/baseentity.h"
 #include "entities/mobentity.h"
 
-CRespawnState::CRespawnState(CBaseEntity* _PEntity, duration spawnTime)
+CRespawnState::CRespawnState(CBaseEntity* _PEntity, timer::duration spawnTime)
 : CState(_PEntity, _PEntity->targid)
 , m_spawnTime(spawnTime)
 {
 }
 
-bool CRespawnState::Update(time_point tick)
+bool CRespawnState::Update(timer::time_point tick)
 {
     // make sure that the respawn time is up to date
     auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity);
@@ -45,9 +45,9 @@ bool CRespawnState::Update(time_point tick)
         }
         else
         {
-            if (std::chrono::milliseconds(PMob->m_RespawnTime) != m_spawnTime)
+            if (PMob->m_RespawnTime != m_spawnTime)
             {
-                m_spawnTime = std::chrono::milliseconds(PMob->m_RespawnTime);
+                m_spawnTime = PMob->m_RespawnTime;
             }
         }
     }
@@ -59,7 +59,7 @@ bool CRespawnState::Update(time_point tick)
     return false;
 }
 
-void CRespawnState::Cleanup(time_point tick)
+void CRespawnState::Cleanup(timer::time_point tick)
 {
 }
 

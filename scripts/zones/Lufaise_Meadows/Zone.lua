@@ -7,14 +7,14 @@ local ID = zones[xi.zone.LUFAISE_MEADOWS]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, 179, -26, 327, 219, -18, 347)
+    zone:registerCuboidTriggerArea(1, 179, -26, 327, 219, -18, 347)
 
     SetServerVariable('realPadfoot', math.random(1, 5))
     for _, v in pairs(ID.mob.PADFOOT) do
         SpawnMob(v)
     end
 
-    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
 
     GetMobByID(ID.mob.FLOCKBOCK):setRespawnTime(math.random(3600, 7200))
 
@@ -22,7 +22,7 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

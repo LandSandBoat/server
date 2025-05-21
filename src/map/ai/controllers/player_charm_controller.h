@@ -32,7 +32,7 @@ public:
     CPlayerCharmController(CCharEntity*);
     virtual ~CPlayerCharmController();
 
-    virtual void Tick(time_point) override;
+    virtual void Tick(timer::time_point) override;
 
     virtual bool Cast(uint16 targid, SpellID spellid) override
     {
@@ -58,8 +58,8 @@ public:
 
 private:
     static constexpr float RoamDistance{ 2.1f };
-    void                   DoCombatTick(time_point tick);
-    void                   DoRoamTick(time_point tick);
+    void                   DoCombatTick(timer::time_point tick);
+    void                   DoRoamTick(timer::time_point tick);
 };
 
 #endif // _PLAYERCONTROLLER

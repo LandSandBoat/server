@@ -29,6 +29,8 @@
 #include "login_helpers.h"
 #include "login_packets.h"
 
+#include "common/ipp.h"
+
 // port 54230
 class data_session : public handler_session
 {

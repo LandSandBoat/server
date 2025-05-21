@@ -9,9 +9,6 @@ local ID = zones[xi.zone.CAEDARVA_MIRE]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local operationTeatime = player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME)
     local operationTeatimeProgress = player:getCharVar('OperationTeatimeProgress')
@@ -24,9 +21,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

@@ -45,7 +45,7 @@ CMobController::CMobController(CMobEntity* PEntity)
 {
 }
 
-void CMobController::Tick(time_point tick)
+void CMobController::Tick(timer::time_point tick)
 {
     TracyZoneScoped;
     TracyZoneString(PMob->getName());
@@ -563,7 +563,7 @@ void CMobController::CastSpell(SpellID spellid)
     }
 }
 
-void CMobController::DoCombatTick(time_point tick)
+void CMobController::DoCombatTick(timer::time_point tick)
 {
     TracyZoneScopedC(0xFF0000);
     if (PMob->m_OwnerID.targid != 0 && static_cast<CCharEntity*>(PMob->GetEntity(PMob->m_OwnerID.targid))->PClaimedMob != static_cast<CBattleEntity*>(PMob))
@@ -586,7 +586,7 @@ void CMobController::DoCombatTick(time_point tick)
 
     TryLink();
 
-    PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", CLuaBaseEntity(PMob));
+    PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", PMob);
     luautils::OnMobFight(PMob, PTarget);
 
     if (PMob->PAI->IsCurrentState<CInactiveState>() || !PMob->PAI->CanChangeState())
@@ -604,7 +604,7 @@ void CMobController::DoCombatTick(time_point tick)
         }
         else
         {
-            PMob->PAI->EventHandler.triggerListener("RUN_AWAY", CLuaBaseEntity(PMob), CLuaBaseEntity(PFollowTarget));
+            PMob->PAI->EventHandler.triggerListener("RUN_AWAY", PMob, PFollowTarget);
             ClearFollowTarget();
         }
         return;
@@ -624,7 +624,7 @@ void CMobController::DoCombatTick(time_point tick)
             return;
         }
 
-        if (m_Tick >= m_LastMobSkillTime && xirand::GetRandomNumber(1, 10000) <= PMob->TPUseChance() && MobSkill())
+        if (m_Tick >= m_LastMobSkillTime && (1 + xirand::GetRandomNumber(10000)) <= PMob->TPUseChance() && MobSkill())
         {
             return;
         }
@@ -720,7 +720,7 @@ void CMobController::Move()
 
         if (((currentDistance > closeDistance) || move) && PMob->PAI->CanFollowPath())
         {
-            if (PMob->speed != 0 && PMob->getMobMod(MOBMOD_NO_MOVE) == 0 && m_Tick >= m_LastSpecialTime)
+            if (PMob->GetSpeed() != 0 && PMob->getMobMod(MOBMOD_NO_MOVE) == 0 && m_Tick >= m_LastSpecialTime)
             {
                 // attempt to teleport to target (if in range)
                 if (PMob->getMobMod(MOBMOD_TELEPORT_TYPE) == 2)
@@ -745,7 +745,7 @@ void CMobController::Move()
                             PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                         }
                     }
-                    else if (distanceSquared(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p) > 10)
+                    else if (!isWithinDistance(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p, 2.5f))
                     {
                         // try to find path towards target
                         PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
@@ -886,7 +886,7 @@ void CMobController::HandleEnmity()
     }
 }
 
-void CMobController::DoRoamTick(time_point tick)
+void CMobController::DoRoamTick(timer::time_point tick)
 {
     TracyZoneScopedC(0x00FF00);
     // If there's someone on our enmity list, go from roaming -> engaging
@@ -908,7 +908,7 @@ void CMobController::DoRoamTick(time_point tick)
         return;
     }
     // TODO
-    else if (PMob->GetDespawnTime() > time_point::min() && PMob->GetDespawnTime() < m_Tick)
+    else if (PMob->GetDespawnTime() > timer::time_point::min() && PMob->GetDespawnTime() < m_Tick)
     {
         Despawn();
         return;
@@ -970,10 +970,12 @@ void CMobController::DoRoamTick(time_point tick)
             }
 
             // if I just disengaged check if I should despawn
+            PMob->m_IsPathingHome = false;
             if (!PMob->getMobMod(MOBMOD_DONT_ROAM_HOME) && PMob->IsFarFromHome())
             {
                 if (PMob->CanRoamHome())
                 {
+                    PMob->m_IsPathingHome = true;
                     // walk back to spawn if too far away
                     if (!PMob->PAI->PathFind->IsFollowingPath() && !PMob->PAI->PathFind->PathTo(PMob->m_SpawnPoint))
                     {
@@ -1024,7 +1026,7 @@ void CMobController::DoRoamTick(time_point tick)
                 else if (PMob->m_roamFlags & ROAMFLAG_SCRIPTED)
                 {
                     // allow custom event action
-                    PMob->PAI->EventHandler.triggerListener("ROAM_ACTION", CLuaBaseEntity(PMob));
+                    PMob->PAI->EventHandler.triggerListener("ROAM_ACTION", PMob);
                     luautils::OnMobRoamAction(PMob);
                     m_LastActionTime = m_Tick;
                 }
@@ -1063,13 +1065,13 @@ void CMobController::DoRoamTick(time_point tick)
     }
     if (m_Tick >= m_LastRoamScript + 3s)
     {
-        PMob->PAI->EventHandler.triggerListener("ROAM_TICK", CLuaBaseEntity(PMob));
+        PMob->PAI->EventHandler.triggerListener("ROAM_TICK", PMob);
         luautils::OnMobRoam(PMob);
         m_LastRoamScript = m_Tick;
     }
 }
 
-void CMobController::Wait(duration _duration)
+void CMobController::Wait(timer::duration _duration)
 {
     if (m_Tick > m_WaitTime)
     {
@@ -1121,7 +1123,7 @@ void CMobController::FollowRoamPath()
 
         if (PMob->PAI->PathFind->OnPoint())
         {
-            PMob->PAI->EventHandler.triggerListener("PATH", CLuaBaseEntity(PMob));
+            PMob->PAI->EventHandler.triggerListener("PATH", PMob);
             luautils::OnPath(PMob);
         }
     }

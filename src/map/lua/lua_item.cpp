@@ -26,7 +26,7 @@
 #include "items/item_equipment.h"
 #include "items/item_general.h"
 #include "items/item_weapon.h"
-#include "map.h"
+#include "map_server.h"
 #include "utils/itemutils.h"
 
 CLuaItem::CLuaItem(CItem* PItem)
@@ -324,9 +324,9 @@ bool CLuaItem::isInstalled()
     return PFurnishing->isInstalled();
 }
 
-void CLuaItem::setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
+void CLuaItem::setSoulPlateData(std::string const& name, uint32 interestData, uint8 zeni, uint16 skillIndex, uint8 fp)
 {
-    m_PLuaItem->setSoulPlateData(name, mobFamily, zeni, skillIndex, fp);
+    m_PLuaItem->setSoulPlateData(name, interestData, zeni, skillIndex, fp);
 }
 
 auto CLuaItem::getSoulPlateData() -> sol::table
@@ -334,11 +334,11 @@ auto CLuaItem::getSoulPlateData() -> sol::table
     auto       data  = m_PLuaItem->getSoulPlateData();
     sol::table table = lua.create_table();
 
-    table["name"]       = std::get<0>(data);
-    table["mobFamily"]  = std::get<1>(data);
-    table["zeni"]       = std::get<2>(data);
-    table["skillIndex"] = std::get<3>(data);
-    table["fp"]         = std::get<4>(data);
+    table["name"]         = std::get<0>(data);
+    table["interestData"] = std::get<1>(data);
+    table["zeni"]         = std::get<2>(data);
+    table["skillIndex"]   = std::get<3>(data);
+    table["fp"]           = std::get<4>(data);
 
     return table;
 }

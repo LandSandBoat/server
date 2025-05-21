@@ -28,6 +28,27 @@
 #include <type_traits>
 #include <vector>
 
+#include "cbasetypes.h"
+
+//
+// Forward declarations (before including ipc headers)
+//
+
+namespace ipc
+{
+    template <typename T>
+    auto toBytes(const T& object) -> std::vector<uint8>;
+
+    template <typename T>
+    auto toBytesWithHeader(const T& object) -> std::vector<uint8>;
+
+    template <typename T>
+    auto fromBytes(const std::span<const uint8> message) -> std::optional<T>;
+
+    template <typename T>
+    auto fromBytesWithHeader(const std::span<const uint8> message) -> std::optional<T>;
+} // namespace ipc
+
 #include "ipc_structs.h"
 #include "ipc_stubs.h"
 
@@ -35,22 +56,27 @@
 
 namespace ipc
 {
-    // Forward declarations
-    enum class MessageType : uint8_t;
-
-    template <typename T>
-    MessageType getEnumType();
-
+    //
     // Helpers
+    //
+
     template <typename T>
-    auto toBytes(const T& object) -> std::vector<uint8_t>
+    auto toBytes(const T& object) -> std::vector<uint8>
     {
-        auto bytes         = std::vector<uint8_t>();
-        auto bytes_written = alpaca::serialize(object, bytes);
+        auto bytes = std::vector<uint8>();
+        alpaca::serialize(object, bytes);
+        return bytes;
+    }
 
-        const auto type = static_cast<uint8_t>(getEnumType<T>());
+    template <typename T>
+    auto toBytesWithHeader(const T& object) -> std::vector<uint8>
+    {
+        auto       bytes         = std::vector<uint8>();
+        const auto bytes_written = alpaca::serialize(object, bytes);
 
-        std::vector<uint8_t> message(1 + bytes_written);
+        const auto type = static_cast<uint8>(EnumTypeV<T>);
+
+        std::vector<uint8> message(1 + bytes_written);
         message[0] = type;
         std::memcpy(message.data() + 1, bytes.data(), bytes_written);
 
@@ -58,7 +84,25 @@ namespace ipc
     }
 
     template <typename T>
-    auto fromBytes(const std::vector<uint8_t>& message) -> std::optional<T>
+    auto fromBytes(const std::span<const uint8> message) -> std::optional<T>
+    {
+        if (message.empty())
+        {
+            return std::nullopt;
+        }
+
+        auto       ec     = std::error_code{};
+        const auto object = alpaca::deserialize<T>(message, ec);
+        if (ec)
+        {
+            return std::nullopt;
+        }
+
+        return object;
+    }
+
+    template <typename T>
+    auto fromBytesWithHeader(const std::span<const uint8> message) -> std::optional<T>
     {
         if (message.empty())
         {
@@ -66,28 +110,20 @@ namespace ipc
         }
 
         const auto type = static_cast<MessageType>(message[0]);
-        if (type != getEnumType<T>())
+        if (type != EnumTypeV<T>)
         {
             return std::nullopt;
         }
 
         const auto bytes = std::span(message.data() + 1, message.size() - 1);
 
-        auto ec     = std::error_code{};
-        auto object = alpaca::deserialize<T>(bytes, ec);
+        auto       ec     = std::error_code{};
+        const auto object = alpaca::deserialize<T>(bytes, ec);
         if (ec)
         {
             return std::nullopt;
         }
 
-        return std::move(object);
+        return object;
     }
-
-    // Message handler implementation
-    class IPCMessageHandler : public IIPCMessageHandler
-    {
-    private:
-        // Don't handle this message type if we get it
-        void handleMessage_SomeData(const SomeData& message) override = default;
-    };
 } // namespace ipc

@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include <cstring>
 
 #include "party_member_update.h"

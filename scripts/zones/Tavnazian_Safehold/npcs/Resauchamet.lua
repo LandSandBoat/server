@@ -5,9 +5,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local kill = player:getCharVar('FOMOR_HATE')
     local n = 0
@@ -23,12 +20,6 @@ entity.onTrigger = function(player, npc)
     end
 
     player:startEvent(355, n)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

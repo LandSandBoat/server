@@ -19,10 +19,25 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "world_pass.h"
+
 #include <cinttypes>
+
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0059
+// PS2: GP_SERV_FRIENDPASS
+struct GP_SERV_FRIENDPASS
+{
+    uint16_t id : 9;
+    uint16_t size : 7;
+    uint16_t sync;
+    int32_t  leftNum;    // PS2: leftNum
+    int32_t  leftDays;   // PS2: leftDays
+    int32_t  passPop;    // PS2: passPop
+    char     String[16]; // PS2: String
+    char     Type;       // PS2: Type
+    char     unknown21;  // PS2: (New; did not exist.)
+    uint16_t padding00;  // PS2: (New; did not exist.)
+};
 
 CWorldPassPacket::CWorldPassPacket(uint32 WorldPass)
 {
@@ -43,13 +58,8 @@ CWorldPassPacket::CWorldPassPacket(uint32 WorldPass)
 
         ref<uint8>(0x20) = 0x06;
 
-        /* Assumption made: MAX u32 value is 10 digits */
-        std::string strbuff = fmt::sprintf("%" PRIu32, WorldPass);
-        if (strbuff.length() > 10)
-        {
-            ShowWarning("String exceeds maximum (Expected: 10, Actual: %d)", strbuff.length());
-            return;
-        }
+        // Force to be 10 digits
+        std::string strbuff = fmt::format("{:0>10}", WorldPass);
 
         std::memset(buffer_.data() + 0x10, 0, 10);
         std::memcpy(buffer_.data() + 0x10, strbuff.c_str(), strbuff.length());

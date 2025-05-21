@@ -9,16 +9,10 @@ local ID = zones[xi.zone.BASTOK_MARKETS]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if player:getCharVar('TOO_MANY_CHEFS') == 5 then -- end Quest Too Many Chefs
         player:startEvent(473)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

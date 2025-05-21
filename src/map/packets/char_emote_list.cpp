@@ -20,7 +20,7 @@
 */
 
 #include "char_emote_list.h"
-#include "common/socket.h"
+
 #include "entities/baseentity.h"
 #include "lua/luautils.h"
 #include "utils/charutils.h"

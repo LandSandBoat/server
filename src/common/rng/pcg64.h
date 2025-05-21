@@ -19,8 +19,9 @@
 ===========================================================================
 */
 
-#ifndef _PCG64_H_
-#define _PCG64_H_
+#pragma once
+
+#include "common/logging.h"
 
 // https://github.com/imneme/pcg-cpp
 #include "pcg_random.hpp"
@@ -59,9 +60,10 @@ public:
         rng().seed(seq);
     }
 
-    /*
-        declarations for RNG methods implemented in xirand.h.
-    */
+    //
+    // Declarations for RNG methods implemented in xirand.h.
+    //
+
     template <typename T>
     static inline typename std::enable_if<std::is_integral<T>::value, T>::type GetRandomNumber(T min, T max);
 
@@ -80,5 +82,3 @@ public:
     template <typename T>
     static inline T GetRandomElement(std::initializer_list<T> list);
 };
-
-#endif // _PCG_H_

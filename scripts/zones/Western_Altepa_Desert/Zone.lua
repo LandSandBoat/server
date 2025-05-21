@@ -12,11 +12,11 @@ zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.KING_VINEGARROON)
     GetMobByID(ID.mob.KING_VINEGARROON):setRespawnTime(math.random(900, 10800))
 
-    xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
+    xi.beastmenTreasure.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 end
 
 zoneObject.onGameDay = function()
-    xi.bmt.updatePeddlestox(xi.zone.WESTERN_ALTEPA_DESERT, ID.npc.PEDDLESTOX)
+    xi.beastmenTreasure.updatePeddlestox(xi.zone.WESTERN_ALTEPA_DESERT, ID.npc.PEDDLESTOX)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -43,7 +43,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -59,22 +59,56 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 zoneObject.onZoneWeatherChange = function(weather)
+    -- HNM King Vinegarroon only spawns during earth weather
     local kvMob = GetMobByID(ID.mob.KING_VINEGARROON)
-    if not kvMob then
-        return
+
+    if kvMob then
+        if weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM then
+            DisallowRespawn(ID.mob.KING_VINEGARROON, false) -- Allow respawn.
+
+            -- Check for respawn.
+            if
+                not kvMob:isSpawned() and
+                kvMob:getRespawnTime() == 0
+            then
+                if
+                    (weather == xi.weather.DUST_STORM and math.random(1, 100) <= 10) or
+                    weather == xi.weather.SAND_STORM
+                then
+                    SpawnMob(ID.mob.KING_VINEGARROON)
+                end
+            end
+
+        else
+            DisallowRespawn(ID.mob.KING_VINEGARROON, true) -- Disallow respawn.
+        end
     end
 
-    if
-        kvMob:getCurrentAction() == xi.act.DESPAWN and
-        (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM)
-    then
-        kvMob:spawn()
-    elseif
-        kvMob:getCurrentAction() == xi.act.ROAMING and
-        weather ~= xi.weather.DUST_STORM and
-        weather ~= xi.weather.SAND_STORM
-    then
-        DespawnMob(ID.mob.KING_VINEGARROON)
+    -- NM Dahu only spawns during fire or earth weather
+    local dahu = GetMobByID(ID.mob.DAHU)
+
+    if dahu then
+        local dahuValidWeather =
+        {
+            xi.weather.DUST_STORM,
+            xi.weather.SAND_STORM,
+            xi.weather.HOT_SPELL,
+            xi.weather.HEAT_WAVE,
+        }
+
+        if utils.contains(weather, dahuValidWeather) then
+            DisallowRespawn(ID.mob.DAHU, false) -- Allow respawn.
+
+            -- Spawn if respawn is up
+            if
+                not dahu:isSpawned() and
+                dahu:getRespawnTime() == 0
+            then
+                SpawnMob(ID.mob.DAHU)
+            end
+        else
+            DisallowRespawn(ID.mob.DAHU, true) -- Disallow respawn.
+        end
     end
 end
 

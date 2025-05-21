@@ -19,10 +19,8 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
-#include "entities/charentity.h"
 #include "inventory_size.h"
+#include "entities/charentity.h"
 #include "item_container.h"
 #include "utils/charutils.h"
 

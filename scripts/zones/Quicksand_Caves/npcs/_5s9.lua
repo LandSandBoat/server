@@ -9,9 +9,6 @@ local ID = zones[xi.zone.QUICKSAND_CAVES]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local difX = player:getXPos()-(-352)
     local difZ = player:getZPos()-(820)
@@ -21,12 +18,6 @@ entity.onTrigger = function(player, npc)
     end
 
     player:messageSpecial(ID.text.DOOR_FIRMLY_SHUT)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

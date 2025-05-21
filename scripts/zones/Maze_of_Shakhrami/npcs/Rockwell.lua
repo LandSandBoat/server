@@ -30,9 +30,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 52 and npcUtil.giveItem(player, xi.item.DIVINATION_SPHERE) then
         player:setCharVar('QuestYourCrystalBall_prog', 0)

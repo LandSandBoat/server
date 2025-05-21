@@ -23,7 +23,7 @@
 #define _LATENTEFFECTCONTAINER_H
 
 #include "common/cbasetypes.h"
-#include "common/taskmgr.h"
+#include "common/task_manager.h"
 
 #include "entities/petentity.h"
 #include "items/item_equipment.h"

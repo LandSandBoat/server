@@ -4,13 +4,8 @@
 -- Involved in Quests: The Holy Crest, Lure of the Wildcat (San d'Oria)
 -- !pos -28 0.1 -6 233
 -----------------------------------
-local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
-
-entity.onTrade = function(player, npc, trade)
-end
 
 entity.onTrigger = function(player, npc)
     local crestProgress = player:getCharVar('TheHolyCrest_Event')
@@ -60,13 +55,9 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 60 then
-        player:addKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DRAGON_CURSE_REMEDY)
+        npcUtil.giveKeyItem(player, xi.ki.DRAGON_CURSE_REMEDY)
     elseif csid == 559 then
         player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 17, true))
     elseif csid == 121 then

@@ -16,7 +16,7 @@ local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SONGBIRD
 
 quest.reward =
 {
-    item  = xi.item.ICARUS_WING,
+    item = xi.item.ICARUS_WING,
 }
 
 -- NOTE: For fishing up the required Key Items, capture was accomplished with 0 skill, and the

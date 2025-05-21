@@ -23,6 +23,7 @@
 #define _CSERVERIPPACKET_H
 
 #include "common/cbasetypes.h"
+#include "common/ipp.h"
 
 #include "basic.h"
 
@@ -31,10 +32,10 @@ class CCharEntity;
 class CServerIPPacket : public CBasicPacket
 {
 public:
-    CServerIPPacket(CCharEntity* PChar, uint8 zone_type, uint64 zone_ipp);
+    CServerIPPacket(CCharEntity* PChar, uint8 zone_type, IPP zone_ipp);
 
-    uint8  zoneType();
-    uint64 zoneIPP();
+    auto zoneType() const -> uint8;
+    auto zoneIPP() const -> IPP;
 };
 
 #endif

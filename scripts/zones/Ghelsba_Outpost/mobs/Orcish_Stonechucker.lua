@@ -15,9 +15,6 @@ local thousandarmPHTable =
     [ID.mob.THOUSANDARM_DESHGLESH - 2] = ID.mob.THOUSANDARM_DESHGLESH, -- 82.000 -0.500 366.000
 }
 
-entity.onMobDeath = function(mob, player, optParams)
-end
-
 entity.onMobDespawn = function(mob)
     xi.mob.phOnDespawn(mob, thousandarmPHTable, 5, 3600) -- 1 hour minimum
 end

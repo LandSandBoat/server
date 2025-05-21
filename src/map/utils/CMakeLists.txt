@@ -1,6 +1,8 @@
 set(UTIL_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/attackutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/attackutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/auctionutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/auctionutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/battleutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/battleutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/blacklistutils.cpp
@@ -9,6 +11,8 @@ set(UTIL_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/blueutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/charutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/charutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/dboxutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dboxutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fellowutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/fellowutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fishingutils.cpp

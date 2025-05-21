@@ -22,6 +22,7 @@
 #include "lua_instance.h"
 
 #include "common/logging.h"
+#include "common/timer.h"
 
 #include "instance.h"
 #include "lua_baseentity.h"
@@ -60,62 +61,67 @@ uint32 CLuaInstance::getEntranceZoneID()
 
 sol::table CLuaInstance::getAllies()
 {
+    // clang-format off
     auto table = lua.create_table();
-    for (auto& member : m_PLuaInstance->m_allyList)
+    m_PLuaInstance->ForEachAlly([&](CMobEntity* PAlly)
     {
-        table.add(CLuaBaseEntity(member.second));
-    }
-
+        table.add(CLuaBaseEntity(PAlly));
+    });
     return table;
+    // clang-format on
 }
 
 sol::table CLuaInstance::getChars()
 {
+    // clang-format off
     auto table = lua.create_table();
-    for (auto& member : m_PLuaInstance->m_charList)
+    m_PLuaInstance->ForEachChar([&](CCharEntity* PChar)
     {
-        table.add(CLuaBaseEntity(member.second));
-    }
-
+        table.add(CLuaBaseEntity(PChar));
+    });
     return table;
+    // clang-format on
 }
 
 sol::table CLuaInstance::getMobs()
 {
+    // clang-format off
     auto table = lua.create_table();
-    for (auto& member : m_PLuaInstance->m_mobList)
+    m_PLuaInstance->ForEachMob([&](CMobEntity* PMob)
     {
-        table.add(CLuaBaseEntity(member.second));
-    }
-
+        table.add(CLuaBaseEntity(PMob));
+    });
     return table;
+    // clang-format on
 }
 
 sol::table CLuaInstance::getNpcs()
 {
+    // clang-format off
     auto table = lua.create_table();
-    for (auto& member : m_PLuaInstance->m_npcList)
+    m_PLuaInstance->ForEachNpc([&](CNpcEntity* PNpc)
     {
-        table.add(CLuaBaseEntity(member.second));
-    }
-
+        table.add(CLuaBaseEntity(PNpc));
+    });
     return table;
+    // clang-format on
 }
 
 sol::table CLuaInstance::getPets()
 {
+    // clang-format off
     auto table = lua.create_table();
-    for (auto& member : m_PLuaInstance->m_petList)
+    m_PLuaInstance->ForEachPet([&](CPetEntity* PPet)
     {
-        table.add(CLuaBaseEntity(member.second));
-    }
-
+        table.add(CLuaBaseEntity(PPet));
+    });
     return table;
+    // clang-format on
 }
 
 uint32 CLuaInstance::getTimeLimit()
 {
-    uint32 limit = std::chrono::duration_cast<std::chrono::minutes>(m_PLuaInstance->GetTimeLimit()).count();
+    uint32 limit = std::chrono::floor<std::chrono::minutes>(m_PLuaInstance->GetTimeLimit()).count();
     return limit;
 }
 
@@ -139,7 +145,7 @@ uint8 CLuaInstance::getLevelCap()
 
 uint32 CLuaInstance::getLastTimeUpdate()
 {
-    auto time_ms = std::chrono::duration_cast<std::chrono::milliseconds>(m_PLuaInstance->GetLastTimeUpdate()).count();
+    auto time_ms = timer::count_milliseconds(m_PLuaInstance->GetLastTimeUpdate());
     return static_cast<uint32>(time_ms);
 }
 
@@ -150,11 +156,11 @@ uint32 CLuaInstance::getProgress()
 
 uint32 CLuaInstance::getWipeTime()
 {
-    auto time_ms = std::chrono::duration_cast<std::chrono::milliseconds>(m_PLuaInstance->GetWipeTime()).count();
+    auto time_ms = timer::count_milliseconds(m_PLuaInstance->GetWipeTime());
     return static_cast<uint32>(time_ms);
 }
 
-std::optional<CLuaBaseEntity> CLuaInstance::getEntity(uint16 targid, sol::object const& filterObj)
+auto CLuaInstance::getEntity(uint16 targid, sol::object const& filterObj) -> CBaseEntity*
 {
     uint8 filter = -1;
     if (filterObj.is<uint8>())
@@ -162,14 +168,7 @@ std::optional<CLuaBaseEntity> CLuaInstance::getEntity(uint16 targid, sol::object
         filter = filterObj.as<uint8>();
     }
 
-    CBaseEntity* PEntity = m_PLuaInstance->GetEntity(targid, filter);
-
-    if (PEntity)
-    {
-        return std::optional<CLuaBaseEntity>(PEntity);
-    }
-
-    return std::nullopt;
+    return m_PLuaInstance->GetEntity(targid, filter);
 }
 
 uint32 CLuaInstance::getStage()
@@ -237,20 +236,20 @@ bool CLuaInstance::completed()
     return m_PLuaInstance->Completed();
 }
 
-std::optional<CLuaBaseEntity> CLuaInstance::insertAlly(uint32 groupid)
+auto CLuaInstance::insertAlly(uint32 groupid) -> CBaseEntity*
 {
     CMobEntity* PAlly = mobutils::InstantiateAlly(groupid, m_PLuaInstance->GetZone()->GetID(), m_PLuaInstance);
 
     if (PAlly)
     {
-        return std::optional<CLuaBaseEntity>(PAlly);
+        return PAlly;
     }
 
     ShowError("CLuaBattlefield::insertAlly - group ID %u not found!", groupid);
-    return std::nullopt;
+    return PAlly;
 }
 
-auto CLuaInstance::insertDynamicEntity(sol::table table) -> std::optional<CLuaBaseEntity>
+auto CLuaInstance::insertDynamicEntity(sol::table table) -> CBaseEntity*
 {
     return luautils::GenerateDynamicEntity(m_PLuaInstance->GetZone(), m_PLuaInstance, std::move(table));
 }

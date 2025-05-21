@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "message_basic.h"
 #include "message_standard.h"
 

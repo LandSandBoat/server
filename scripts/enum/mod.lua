@@ -67,26 +67,48 @@ xi.mod =
     TWOHAND_ACC                     = 219, -- Same as ACC, but only active when using a two handed weapon (e.g. Hasso)
     ENMITY                          = 27,
     ENMITY_LOSS_REDUCTION           = 427,
-    MATT                            = 28,
+    MATT                            = 28, -- Magic attack bonus
     MDEF                            = 29,
     MACC                            = 30, -- This is NOT item level "magic accuracy skill" ! That happens in item_weapon.sql instead
     MEVA                            = 31,
-    FIREATT                         = 32,
-    ICEATT                          = 33,
-    WINDATT                         = 34,
-    EARTHATT                        = 35,
-    THUNDERATT                      = 36,
-    WATERATT                        = 37,
-    LIGHTATT                        = 38,
-    DARKATT                         = 39,
-    FIREACC                         = 40,
-    ICEACC                          = 41,
-    WINDACC                         = 42,
-    EARTHACC                        = 43,
-    THUNDERACC                      = 44,
-    WATERACC                        = 45,
-    LIGHTACC                        = 46,
-    DARKACC                         = 47,
+
+    -- Elemental mods
+    FIRE_MAB                        = 32, -- Elemental "Magic Attack Bonus" aka "Affinity"
+    ICE_MAB                         = 33, -- Elemental "Magic Attack Bonus" aka "Affinity"
+    WIND_MAB                        = 34, -- Elemental "Magic Attack Bonus" aka "Affinity"
+    EARTH_MAB                       = 35, -- Elemental "Magic Attack Bonus" aka "Affinity"
+    THUNDER_MAB                     = 36, -- Elemental "Magic Attack Bonus" aka "Affinity"
+    WATER_MAB                       = 37, -- Elemental "Magic Attack Bonus" aka "Affinity"
+    LIGHT_MAB                       = 38, -- Elemental "Magic Attack Bonus" aka "Affinity"
+    DARK_MAB                        = 39, -- Elemental "Magic Attack Bonus" aka "Affinity"
+
+    FIRE_MACC                       = 40,
+    ICE_MACC                        = 41,
+    WIND_MACC                       = 42,
+    EARTH_MACC                      = 43,
+    THUNDER_MACC                    = 44,
+    WATER_MACC                      = 45,
+    LIGHT_MACC                      = 46,
+    DARK_MACC                       = 47,
+
+    FIRE_STAFF_BONUS                = 347, -- Elemental staff bonus (DMG and MACC).
+    ICE_STAFF_BONUS                 = 348, -- Elemental staff bonus (DMG and MACC).
+    WIND_STAFF_BONUS                = 349, -- Elemental staff bonus (DMG and MACC).
+    EARTH_STAFF_BONUS               = 350, -- Elemental staff bonus (DMG and MACC).
+    THUNDER_STAFF_BONUS             = 351, -- Elemental staff bonus (DMG and MACC).
+    WATER_STAFF_BONUS               = 352, -- Elemental staff bonus (DMG and MACC).
+    LIGHT_STAFF_BONUS               = 353, -- Elemental staff bonus (DMG and MACC).
+    DARK_STAFF_BONUS                = 354, -- Elemental staff bonus (DMG and MACC).
+
+    FIRE_AFFINITY_PERP              = 553,
+    ICE_AFFINITY_PERP               = 554,
+    WIND_AFFINITY_PERP              = 555,
+    EARTH_AFFINITY_PERP             = 556,
+    THUNDER_AFFINITY_PERP           = 557,
+    WATER_AFFINITY_PERP             = 558,
+    LIGHT_AFFINITY_PERP             = 559,
+    DARK_AFFINITY_PERP              = 560,
+
     WSACC                           = 48,
     ATTP                            = 62,
     DEFP                            = 63,
@@ -122,9 +144,9 @@ xi.mod =
     CAMOUFLAGE_DURATION             = 98,  -- Camouflage duration in percents
 
     -- These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
-    AUTO_MELEE_SKILL                = 101,
-    AUTO_RANGED_SKILL               = 102,
-    AUTO_MAGIC_SKILL                = 103,
+    AUTO_MELEE_SKILL                = 101, -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
+    AUTO_RANGED_SKILL               = 102, -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
+    AUTO_MAGIC_SKILL                = 103, -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
     ARCHERY                         = 104,
     MARKSMAN                        = 105,
     THROW                           = 106,
@@ -180,10 +202,10 @@ xi.mod =
     DMG_AOE                         = 158, -- Mob only. Damage Taken % when not main target of an AoE action. (Ex: Locus Mobs). Uncaped.
     RECEIVED_DAMAGE_CAP             = 221, -- Caps the damage taken recieved by the attacker
     RECEIVED_DAMAGE_VARIANT         = 222, -- The variance that you want the damage cap to changed by. Ex: If you want the damage to be from 90-100 instead of a flat 100 you can set this to 10. It will random the value between 90-100 if the damage is above 100.
-    SLASH_SDT                       =  49, -- Overrides mob_resistances.sql. NOT base 10000. TODO: Change to work as all the others.
-    PIERCE_SDT                      =  50, -- Overrides mob_resistances.sql. NOT base 10000. TODO: Change to work as all the others.
-    IMPACT_SDT                      =  51, -- Overrides mob_resistances.sql. NOT base 10000. TODO: Change to work as all the others.
-    HTH_SDT                         =  52, -- Overrides mob_resistances.sql. NOT base 10000. TODO: Change to work as all the others.
+    SLASH_SDT                       =  49, -- Overrides mob_resistances.sql.
+    PIERCE_SDT                      =  50, -- Overrides mob_resistances.sql.
+    IMPACT_SDT                      =  51, -- Overrides mob_resistances.sql.
+    HTH_SDT                         =  52, -- Overrides mob_resistances.sql.
     FIRE_SDT                        =  54, -- Overrides mob_resistances.sql.
     ICE_SDT                         =  55, -- Overrides mob_resistances.sql.
     WIND_SDT                        =  56, -- Overrides mob_resistances.sql.
@@ -347,6 +369,7 @@ xi.mod =
     SUBTLE_BLOW                     = 289,
     SUBTLE_BLOW_II                  = 973, -- Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     ENF_MAG_POTENCY                 = 290, -- Increases Enfeebling magic potency %
+    ENF_MAG_DURATION                = 1151, -- Increases enfeebling magic duration %
     COUNTER                         = 291,
     KICK_ATTACK_RATE                = 292,
     AFFLATUS_SOLACE                 = 293,
@@ -363,8 +386,8 @@ xi.mod =
     TRIPLE_ATTACK                   = 302,
     TRIPLE_ATTACK_DMG               = 1039, -- Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
     TREASURE_HUNTER                 = 303,
-    TREASURE_HUNTER_PROC            = 1048, -- TODO: Increases Treasure Hunter proc rate (percent)
-    TREASURE_HUNTER_CAP             = 1049, -- TODO: Increases the Treasure Hunter Cap (e.g. THF JP Gift)
+    TREASURE_HUNTER_PROC            = 1048, -- Increases Treasure Hunter proc rate (percent)
+    TREASURE_HUNTER_CAP             = 1049, -- Increases the Treasure Hunter Cap (e.g. THF JP Gift)
     TAME                            = 304,
     RECYCLE                         = 305,
     ZANSHIN                         = 306,
@@ -424,6 +447,18 @@ xi.mod =
     PERPETUATION_REDUCTION          = 346,
     SPIKES_DMG_BONUS                = 1079, -- Increases Blaze/Ice/Shock spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
 
+    -- fTP modifiers
+    FIRE_FTP_BONUS                  = 544,  -- Gives bonus fTP when weaponskill has a Fire property. (Elemental beltes and gorgets) /256
+    ICE_FTP_BONUS                   = 545,  -- Gives bonus fTP when weaponskill has a Ice property. (Elemental beltes and gorgets) /256
+    WIND_FTP_BONUS                  = 546,  -- Gives bonus fTP when weaponskill has a Wind property. (Elemental beltes and gorgets) /256
+    EARTH_FTP_BONUS                 = 547,  -- Gives bonus fTP when weaponskill has a Earth property. (Elemental beltes and gorgets) /256
+    THUNDER_FTP_BONUS               = 548,  -- Gives bonus fTP when weaponskill has a Thunder property. (Elemental beltes and gorgets) /256
+    WATER_FTP_BONUS                 = 549,  -- Gives bonus fTP when weaponskill has a Water property. (Elemental beltes and gorgets) /256
+    LIGHT_FTP_BONUS                 = 550,  -- Gives bonus fTP when weaponskill has a Light property. (Elemental beltes and gorgets) /256
+    DARK_FTP_BONUS                  = 551,  -- Gives bonus fTP when weaponskill has a Dark property. (Elemental beltes and gorgets) /256
+    ANY_FTP_BONUS                   = 1144, -- Gives bonus fTP when weaponskill has a (any) property. (Fotia Gorget, Fotia Belt) /256
+    DAY_FTP_BONUS                   = 1145, -- Gives bonus fTP when weaponskill has a property that matches current day. (Mekira Oto, Gavialis helm, etc...) /256
+
     -- Warrior
     BERSERK_POTENCY                 = 948,  -- Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
     BERSERK_DURATION                = 954,  -- Berserk Duration
@@ -436,6 +471,10 @@ xi.mod =
     ADDITIVE_GUARD                  = 1092, -- Additive % bonus to final Guard rate (adds after clamp)
     AUGMENTS_IMPETUS                = 1097, -- see https://www.bg-wiki.com/ffxi/Impetus, adds Crit Hit Damage & Accuracy for Impetus
 
+    -- Black Mage
+    ENHANCES_ELEMENTAL_SEAL         = 1149, -- Bonus magic damage when using Elemental Seal (percent)
+    ELEMENTAL_DEBUFF_EFFECT         = 1150, -- Increase stat reduction by N, and DoT by N/2 HP per tick
+
     -- Paladin
     ENHANCES_CHIVALRY               = 1061, -- Enhances "Chivalry" effect (increases the base TP modifier by the provided value / 100, e.g. mod value 5 = +0.05)
     ENHANCES_DIVINE_EMBLEM          = 1062, -- Enhances "Divine Emblem" effect/"Divine Emblem" + (increases the ability's special enmity bonus by the provided value)
@@ -446,6 +485,9 @@ xi.mod =
     REPRISAL_BLOCK_BONUS            = 1067, -- Increases block rate while under the effects of Reprisal (multiplicative, not additive)
     REPRISAL_SPIKES_BONUS           = 1068, -- Increases Reprisal spikes damage by percentage (e.g. mod value of 50 will increase spikes damage by 50%)
     SHIELD_BARRIER                  = 1082, -- Grants a bonus to Protect spells cast by self while a shield is equipped.
+
+    -- Ranger
+    BOUNTY_SHOT_TH_BONUS            = 826, -- Boosts base TH level of bounty shot
 
     -- Dark Knight
     ARCANE_CIRCLE_DURATION          = 858,  -- Arcane Circle extended duration in seconds
@@ -462,10 +504,15 @@ xi.mod =
     ENHANCES_DIABOLIC_EYE           = 275,  -- Diabolic Eye duration + "modifier-value" seconds per Diabolic Eye merit.
     ENHANCES_NETHER_VOID            = 1083, -- Enhances "Nether Void" effect (Increases the potency of the next Absorb or Drain Dark Magic by <value>%
     ENHANCES_MUTED_SOUL             = 1084, -- Enhances "Muted Soul" effect (Adds 3% Zanshin rate per MUTED_SOUL merit level)
+    ENHANCES_ABSORB_EFFECTS         = 1136, -- Absorb Spell duration +x seconds (Enhances "Absorb" effects)
+    AUGMENTS_ABSORB                 = 1137, -- Non-Liberator Absorb Spell potency +x% (Augments "Absorb" effects)
+    ABSORB_EFFECT_DURATION          = 1138, -- Absorb Spell duration +% ("Absorb" effect duration +x%)
+    AUGMENTS_ABSORB_TP              = 1153, -- Increases absorb-TP potency, stacks with AUGMENTS_ABSORB
 
     -- Beastmaster
     TANDEM_STRIKE_POWER             = 271,  -- Grants a bonus to your and your pet's accuracy and magic accuracy when you and your pet are attacking the same target.
     TANDEM_BLOW_POWER               = 272,  -- Reduces amount of TP gained by enemies when striking them if you and your pet are attacking the same target.
+    ENHANCES_MONSTER_CORRELATION    = 1155, -- Grants acc +X and attp +X% against a weaker opposing ecosystem. Typically applied to pet, not owner (item_mods_pet.sql)
 
     -- Samurai
     SENGIKORI_SC_DMG_DEBUFF         = 1088, -- % Increase to closing skillchain damage. Applied to defender.
@@ -474,6 +521,7 @@ xi.mod =
 
     -- Ninja
     ENHANCES_SANGE                  = 1091, -- 1 = +1 attack for Daken during Sange per Sange merit (i.e. 20 with 5 merits = +100 attack during Sange)
+    ENHANCES_FUTAE                  = 1148, -- Adds to the +50% bonus damage to elemental ninjutsu provided by Futae (percent)
 
     -- Dragoon
     WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)
@@ -488,6 +536,11 @@ xi.mod =
 
     -- Puppetmaster
     AUTOMATON_LVL_BONUS             = 1044, -- Automaton: Lv. (Increases automaton's base level above 99)
+
+    -- Blue Mage
+    ENHANCES_BURST_AFFINITY         = 1139, -- Increases WSC bonus on spells cast with Burst Affinity (percent)
+    ENHANCES_CHAIN_AFFINITY         = 1140, -- TODO: Increases WSC bonus on spells cast with Chain Affinity (base damage +)
+    BLUE_MAGIC_RECAST               = 1147, -- Recast time for blue magic spells (percent, usually negative)
 
     -- Geomancer
     FULL_CIRCLE                     = 1025, -- Increases the initial multiplier on MP returned via Full Circle
@@ -519,33 +572,6 @@ xi.mod =
     SPECIAL_ATTACK_EVASION      = 1024, -- Foil "Special Attack" evasion
     AUGMENTS_SLEIGHT_OF_SWORD   = 277,  -- Enhances bonus "Subtle Blow" per merit.
 
-    FIRE_AFFINITY_DMG               = 347,
-    ICE_AFFINITY_DMG                = 348,
-    WIND_AFFINITY_DMG               = 349,
-    EARTH_AFFINITY_DMG              = 350,
-    THUNDER_AFFINITY_DMG            = 351,
-    WATER_AFFINITY_DMG              = 352,
-    LIGHT_AFFINITY_DMG              = 353,
-    DARK_AFFINITY_DMG               = 354,
-
-    FIRE_AFFINITY_ACC               = 544,
-    ICE_AFFINITY_ACC                = 545,
-    WIND_AFFINITY_ACC               = 546,
-    EARTH_AFFINITY_ACC              = 547,
-    THUNDER_AFFINITY_ACC            = 548,
-    WATER_AFFINITY_ACC              = 549,
-    LIGHT_AFFINITY_ACC              = 550,
-    DARK_AFFINITY_ACC               = 551,
-
-    FIRE_AFFINITY_PERP              = 553,
-    ICE_AFFINITY_PERP               = 554,
-    WIND_AFFINITY_PERP              = 555,
-    EARTH_AFFINITY_PERP             = 556,
-    THUNDER_AFFINITY_PERP           = 557,
-    WATER_AFFINITY_PERP             = 558,
-    LIGHT_AFFINITY_PERP             = 559,
-    DARK_AFFINITY_PERP              = 560,
-
     ADDS_WEAPONSKILL                = 355,
     ADDS_WEAPONSKILL_DYN            = 356,
     BP_DELAY                        = 357,
@@ -562,7 +588,7 @@ xi.mod =
     ENHANCES_STRAFE                 = 282, -- Strafe merit augment, +50 TP gained per merit level on breath use.
     ENHANCES_SPIRIT_LINK            = 281, -- Adds erase/-na to Spirit Link
     REWARD_HP_BONUS                 = 364,
-    SNAP_SHOT                       = 365,
+    SNAPSHOT                        = 365,
 
     DMG_RATING                      = 287, -- adds damage rating to weapon (+DMG augments, maneater/blau dolch etc hidden effects)
     MAIN_DMG_RATING                 = 366, -- adds damage rating to mainhand weapon
@@ -598,6 +624,7 @@ xi.mod =
     WHITE_MAGIC_CAST                = 396,
     BLACK_MAGIC_RECAST              = 397,
     WHITE_MAGIC_RECAST              = 398,
+    ELEMENTAL_MAGIC_RECAST          = 1146, -- Recast time for elemental magic spells (percent, usually negative)
     ALACRITY_CELERITY_EFFECT        = 399,
     LIGHT_ARTS_EFFECT               = 334,
     DARK_ARTS_EFFECT                = 335,
@@ -673,7 +700,7 @@ xi.mod =
     SONG_DURATION_BONUS             = 454, --
     SONG_SPELLCASTING_TIME          = 455, --
 
-    AVATARS_FAVOR_ENHANCE           = 141, -- Adds 1 rank to avatars favor
+    AVATARS_FAVOR_ENHANCE           = 1154, -- Adds 1 rank to avatars favor
 
     QUICK_DRAW_DMG                  = 411, --
     QUICK_DRAW_MACC                 = 191, -- Quick draw magic accuracy
@@ -823,7 +850,7 @@ xi.mod =
     AUTO_RANGED_DAMAGEP             = 1002, -- Increases Automaton Ranged Weapon damage by a %
 
     -- Mythic Weapon Mods
-    AUGMENTS_ABSORB                 = 521, -- Direct Absorb spell increase while Liberator is equipped (percentage based)
+    AUGMENTS_ABSORB_LIBERATOR       = 521, -- Direct Absorb spell increase while Liberator is equipped (percentage based) (Augments "Absorb" spells)
     AOE_NA                          = 524, -- Set to 1 to make -na spells/erase always AoE w/ Divine Veil
     AUGMENTS_CONVERT                = 525, -- Convert HP to MP Ratio Multiplier. Value = MP multiplier rate.
     AUGMENTS_SA                     = 526, -- Adds Critical Attack Bonus to Sneak Attack, percentage based.
@@ -930,7 +957,10 @@ xi.mod =
 
     -- Circle Abilities Extended Duration from AF/AF+1
     HOLY_CIRCLE_DURATION            = 857,
+    HOLY_CIRCLE_POTENCY             = 1141, -- Increases the potency of the Holy Circle effect (e.g. mod value 2 = +2% Undead Killer)
     ANCIENT_CIRCLE_DURATION         = 859,
+    ANCIENT_CIRCLE_POTENCY          = 1142, -- Increases the potency of the Ancient Circle effect (e.g. mod value 2 = +2% Dragon Killer)
+    WARDING_CIRCLE_POTENCY          = 1143, -- Increases the potency of the Warding Circle effect (e.g. mod value 2 = +2% Demon Killer)
 
     -- Other
     CURE2MP_PERCENT                 = 860, -- Converts % of "Cure" amount to MP
@@ -939,13 +969,14 @@ xi.mod =
     SMITE                           = 898, -- Att increase with H2H or 2H weapons
     TACTICAL_GUARD                  = 899, -- Tp gain increase when guarding
     GUARD_PERCENT                   = 976, -- Guard Percent
-    COUNTER_DAMAGE                  = 1047, -- TODO: Increases Damage from Counter Attacks (Percent)
+    COUNTER_DAMAGE                  = 1047, -- Increases Damage from Counter Attacks (adds to base damage)
     FENCER_TP_BONUS                 = 903, -- TP Bonus to weapon skills from Fencer Trait
     FENCER_CRITHITRATE              = 904, -- Increased Crit chance from Fencer Trait
     SHIELD_DEF_BONUS                = 905, -- Shield Defense Bonus
     SNEAK_DURATION                  = 946, -- Additional duration in seconds
     INVISIBLE_DURATION              = 947, -- Additional duration in seconds
     CARDINAL_CHANT                  = 959,
+    CARDINAL_CHANT_BONUS            = 1132, -- Geomancy galero
     INDI_DURATION                   = 960,
     GEOMANCY_BONUS                  = 961, -- Used to increase potency of "Geomancy +" items (only the highest value is counted)
     WIDENED_COMPASS                 = 962,
@@ -1008,6 +1039,7 @@ xi.mod =
     QUICK_DRAW_RECAST       = 1060, -- Quick Draw Charge Reduction (seconds)
 
     DIG_BYPASS_FATIGUE      = 1074, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
+    DIG_RARE_ABILITY        = 1133, -- Chocobo digging modifier found in "Black Chocobo Suit" and "Denim Pants +1".
     BREATH_DMG_DEALT        = 1075, -- Breath damage dealt
 
     STEP_TP_CONSUMED        = 1077, -- Modifies the amount of TP consumed by dancer steps
@@ -1017,6 +1049,13 @@ xi.mod =
 
     MAGIC_BURST_BONUS_CAPPED   = 487, -- Magic Burst Bonus I from gear, Ancient Magic Merits, Atmas. Cap at 40% bonus (1.4 multiplier)
     MAGIC_BURST_BONUS_UNCAPPED = 274, -- Magic Burst Bonus II from gear, JP Gifts, BLM JPs and Job traits. No known cap.
+
+    DESPAWN_TIME_REDUCTION = 1134, -- Reduction in seconds. 1 = 1 second less to despawn.
+
+    PARRY_HP_RECOVERY = 1135, -- Recover <Mod Value> HP on successful parry.
+
+    -- TODO: These mods are not yet implemented.
+    REWARD_RECAST                   = 1152, -- TODO: Reduces Reward recast time (seconds)
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 

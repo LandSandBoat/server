@@ -15,7 +15,7 @@ zoneObject.onInitialize = function(zone)
         GetMobByID(ID.mob.BACKOO):setRespawnTime(1)
     end
 
-    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.helm.initZone(zone, xi.helmType.LOGGING)
 end
@@ -48,7 +48,7 @@ zoneObject.afterZoneIn = function(player)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

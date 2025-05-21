@@ -1,42 +1,30 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Torapiont
--- Standard Merchant NPC
------------------------------------
-local ID = zones[xi.zone.SELBINA]
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        16411, 11491,    -- Claws
-        16451,  7727,    -- Mythril Dagger
-        16513, 11588,    -- Tuck
-        16584, 37800,    -- Mythril Claymore
-        16643, 11040,    -- Battleaxe
-        16705,  4095,    -- Greataxe
-        17050,   333,    -- Willow Wand
-        17051,  1409,    -- Yew Wand
-        17089,   571,    -- Holly Staff
-        17307,     9,    -- Dart
-        17336,     5,    -- Crossbow Bolt
-        17318,     3,    -- Wooden Arrow
-        17320,     7,    -- Iron Arrow
+        { xi.item.CLAWS,            13278 },
+        { xi.item.MYTHRIL_DAGGER,    8929 },
+        { xi.item.TUCK,             13391 },
+        { xi.item.MYTHRIL_CLAYMORE, 43680 },
+        { xi.item.BATTLEAXE,        12757 },
+        { xi.item.GREATAXE,          4732 },
+        { xi.item.WILLOW_WAND,        384 },
+        { xi.item.YEW_WAND,          1628 },
+        { xi.item.HOLLY_STAFF,        660 },
+        { xi.item.DART,                10 },
+        { xi.item.CROSSBOW_BOLT,        6 },
+        { xi.item.WOODEN_ARROW,         4 },
+        { xi.item.IRON_ARROW,           8 },
     }
 
-    player:showText(npc, ID.text.TORAPIONT_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.SELBINA].text.TORAPIONT_SHOP_DIALOG)
     xi.shop.general(player, stock)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

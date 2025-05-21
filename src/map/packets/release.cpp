@@ -19,10 +19,8 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
-#include "entities/charentity.h"
 #include "release.h"
+#include "entities/charentity.h"
 
 CReleasePacket::CReleasePacket(CCharEntity* PChar, RELEASE_TYPE releaseType)
 {

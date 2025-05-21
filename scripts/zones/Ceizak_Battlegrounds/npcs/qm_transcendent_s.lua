@@ -14,16 +14,8 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.popFromQM(player, npc, ID.mob.TRANSCENDENT_SCORPION, { radius = 1 })
     then
         player:confirmTrade()
+        player:messageSpecial(ID.text.MONSTER_APPEAR)
     end
-end
-
-entity.onTrigger = function(player, npc)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

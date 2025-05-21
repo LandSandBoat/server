@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "chocobo_digging.h"
 
 #include "entities/charentity.h"

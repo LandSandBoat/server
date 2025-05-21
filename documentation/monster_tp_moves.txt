@@ -1891,7 +1891,7 @@
   1888    Divine Spear
   1889    Gospel of the Lost
   1890    Void of Repentance
-  1891    Divine Judgement
+  1891    Divine Judgment
   1892    .
   1893    .
   1894    Snatch Morsel

@@ -41,9 +41,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 241 then
         player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH)

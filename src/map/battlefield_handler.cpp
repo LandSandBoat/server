@@ -54,7 +54,7 @@ CBattlefieldHandler::CBattlefieldHandler(CZone* PZone)
 {
 }
 
-void CBattlefieldHandler::HandleBattlefields(time_point tick)
+void CBattlefieldHandler::HandleBattlefields(timer::time_point tick)
 {
     TracyZoneScoped;
     // todo: use raw pointers otherwise might be harming lua
@@ -97,7 +97,7 @@ void CBattlefieldHandler::HandleBattlefields(time_point tick)
         if (PChar)
         {
             luautils::OnBattlefieldKick(PChar);
-            PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, EffectNotice::Silent);
             m_PZone->updateCharLevelRestriction(PChar);
         }
         iter = m_orphanedPlayers.erase(iter);
@@ -128,22 +128,21 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
 
     auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar);
 
-    const auto* fmtQuery = "SELECT name, fastestName, fastestTime, fastestPartySize\
-                            FROM bcnm_records i\
-                            WHERE bcnmId = %u";
+    const auto rset = db::preparedStmt("SELECT name, fastestName, fastestTime, fastestPartySize "
+                                       "FROM bcnm_records "
+                                       "WHERE bcnmId = ?",
+                                       registration.id);
 
-    auto ret = _sql->Query(fmtQuery, registration.id);
-
-    if (ret == SQL_ERROR || _sql->NumRows() == 0 || _sql->NextRow() != SQL_SUCCESS)
+    if (!rset || rset->rowsCount() == 0 || !rset->next())
     {
         ShowError("Cannot load battlefield : %u ", registration.id);
         return BATTLEFIELD_RETURN_CODE_REQS_NOT_MET;
     }
 
-    auto name            = _sql->GetStringData(0);
-    auto recordholder    = _sql->GetStringData(1);
-    auto recordtime      = std::chrono::seconds(_sql->GetUIntData(2));
-    auto recordPartySize = _sql->GetUIntData(3);
+    const auto name            = rset->get<std::string>("name");
+    const auto recordholder    = rset->get<std::string>("fastestName");
+    const auto recordtime      = std::chrono::seconds(rset->get<uint32>("fastestTime"));
+    const auto recordPartySize = rset->get<size_t>("fastestPartySize");
 
     PBattlefield->SetName(name);
     PBattlefield->SetRecord(recordholder, recordtime, recordPartySize);
@@ -159,7 +158,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
     if (!PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD))
     {
         PChar->StatusEffectContainer->AddStatusEffect(
-            new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, PBattlefield->GetID(), 0, 0, PChar->id, PBattlefield->GetArea()), true);
+            new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, PBattlefield->GetID(), 0s, 0s, PChar->id, PBattlefield->GetArea()), EffectNotice::Silent);
     }
 
     luautils::OnBattlefieldRegister(PChar, PBattlefield);
@@ -318,6 +317,6 @@ uint8 CBattlefieldHandler::MaxBattlefieldAreas() const
 
 void CBattlefieldHandler::addOrphanedPlayer(CCharEntity* PChar)
 {
-    auto orphan = std::make_pair(PChar->id, server_clock::now() + 5s);
+    auto orphan = std::make_pair(PChar->id, timer::now() + 5s);
     m_orphanedPlayers.emplace_back(orphan);
 }

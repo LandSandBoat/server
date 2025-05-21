@@ -7,6 +7,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:addImmunity(xi.immunity.SILENCE)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

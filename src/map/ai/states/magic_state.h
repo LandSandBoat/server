@@ -38,8 +38,8 @@ class CMagicState : public CState
 {
 public:
     CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid, uint8 flags = 0);
-    virtual bool Update(time_point tick) override;
-    virtual void Cleanup(time_point tick) override;
+    virtual bool Update(timer::time_point tick) override;
+    virtual void Cleanup(timer::time_point tick) override;
     virtual bool CanChangeState() override;
     virtual bool CanFollowPath() override
     {
@@ -53,10 +53,10 @@ public:
     CSpell*      GetSpell();
     virtual void TryInterrupt(CBattleEntity* PAttacker) override;
 
-    void   SpendCost();
-    uint32 GetRecast();
-    void   ApplyEnmity(CBattleEntity* PTarget, int ce, int ve);
-    void   ApplyMagicCoverEnmity(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser, CMobEntity* PMob);
+    void            SpendCost();
+    timer::duration GetRecast();
+    void            ApplyEnmity(CBattleEntity* PTarget, int ce, int ve);
+    void            ApplyMagicCoverEnmity(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser, CMobEntity* PMob);
 
     void SetInstantCast(bool const bInstantCast)
     {
@@ -77,7 +77,7 @@ protected:
 
     CBattleEntity* const    m_PEntity;
     std::unique_ptr<CSpell> m_PSpell;
-    duration                m_castTime{};
+    timer::duration         m_castTime{};
     position_t              m_startPos;
     bool                    m_interrupted{ false };
     bool                    m_instantCast{ false };

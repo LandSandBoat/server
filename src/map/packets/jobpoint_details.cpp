@@ -14,8 +14,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "jobpoint_details.h"
 
 #include "entities/charentity.h"

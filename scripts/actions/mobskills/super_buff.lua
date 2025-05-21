@@ -11,7 +11,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    target:addStatusEffectEx(xi.effect.SUPER_BUFF, 0, 50, 0, 30)
+    target:addStatusEffectEx(xi.effect.SUPER_BUFF, 0, 25, 0, 30)
     skill:setMsg(xi.msg.basic.NONE)
     return 0
 end

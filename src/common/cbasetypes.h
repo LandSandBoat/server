@@ -1,39 +1,40 @@
-#ifndef _CBASETYPES_H_
-#define _CBASETYPES_H_
+/*
+===========================================================================
+
+  Copyright (c) 2010-2015 Darkstar Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#pragma once
 
 #include <algorithm>
 #include <cctype>
+#include <chrono>
 #include <climits>
 #include <cstddef>
 #include <cstdint>
+#include <queue>
+#include <span>
 #include <utility>
+#include <vector>
 
-#include "logging.h"
+#include "macros.h"
+#include "tracy.h"
 
-// The following definitions are set by CMake based on the architecture
-// #define ENV64BIT
-// #define ENV32BIT
-
-// Ensure one of the definitions is set
-#if !defined(ENV64BIT) && !defined(ENV32BIT)
-#error "Neither ENV64BIT nor ENV32BIT is defined"
-#endif
-
-// Debug mode
-#if defined(_DEBUG) && !defined(DEBUG)
-#define DEBUG
-#endif
-
-// Release mode
-#if !defined(_DEBUG) && !defined(RELEASE)
-#define RELEASE
-#endif
-
-// define a break macro for debugging
-#define XI_DEBUG_BREAK_IF(_CONDITION_) \
-    static_assert(false, "Use of XI_DEBUG_BREAK_IF is deprecated. Check your conditions and log appropriately instead.")
-
-// typedef/using
 using int8  = std::int8_t;
 using int16 = std::int16_t;
 using int32 = std::int32_t;
@@ -71,38 +72,7 @@ inline void destroy_arr(T*& ptr)
     ptr = nullptr;
 }
 
-// string case comparison for *nix portability
-#if !defined(_MSC_VER)
-#define strcmpi strcasecmp
-#define stricmp strcasecmp
-
-// https://stackoverflow.com/questions/12044519/what-is-the-windows-equivalent-of-the-unix-function-gmtime-r
-// gmtime_r() is the thread-safe version of gmtime(). The MSVC implementation of gmtime() is already thread safe,
-// the returned struct tm* is allocated in thread-local storage.
-// That doesn't make it immune from trouble if the function is called multiple times on the same
-// thread and the returned pointer is stored.
-// You can use gmtime_s() instead. Closest to gmtime_r() but with the arguments reversed
-
-// Provide func_s implementations for Unix
-#define _gmtime_s(a, b)    gmtime_r(b, a)
-#define _localtime_s(a, b) localtime_r(b, a)
-#else // MSVC
-#define _gmtime_s(a, b)    gmtime_s(a, b)
-#define _localtime_s(a, b) localtime_s(a, b)
-#endif
-
-#include <chrono>
-
 using namespace std::literals::chrono_literals;
-using server_clock = std::chrono::system_clock;
-using time_point   = server_clock::time_point;
-using duration     = server_clock::duration;
-
-using hires_clock      = std::chrono::high_resolution_clock;
-using hires_time_point = server_clock::time_point;
-using hires_duration   = server_clock::duration;
-
-#include <queue>
 
 template <class T>
 using MinHeap = std::priority_queue<T, std::vector<T>, std::greater<T>>;
@@ -118,19 +88,3 @@ struct PtrGreater
 
 template <class T>
 using MinHeapPtr = std::priority_queue<T, std::vector<T>, PtrGreater<T>>;
-
-#define DISALLOW_COPY(TypeName)                    \
-    TypeName(const TypeName&)            = delete; \
-    TypeName& operator=(const TypeName&) = delete;
-
-#define DISALLOW_MOVE(TypeName)               \
-    TypeName(TypeName&&)            = delete; \
-    TypeName& operator=(TypeName&&) = delete;
-
-#define DISALLOW_COPY_AND_MOVE(TypeName) \
-    DISALLOW_COPY(TypeName)              \
-    DISALLOW_MOVE(TypeName)
-
-#include "tracy.h"
-
-#endif /* _CBASETYPES_H_ */

@@ -11,7 +11,7 @@ itemObject.onItemCheck = function(target, item, param, caster)
     local region = target:getCurrentRegion()
 
     if
-        not xi.conq.canTeleportToOutpost(target, region) or
+        not xi.conquest.canTeleportToOutpost(target, region) or
         GetRegionOwner(region) ~= target:getNation()
     then
         result = xi.msg.basic.CANT_BE_USED_IN_AREA

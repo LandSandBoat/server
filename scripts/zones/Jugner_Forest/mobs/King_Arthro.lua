@@ -14,6 +14,8 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.UFASTCAST, 100)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 15000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 20000)
 end
 
 entity.onMobSpawn = function(mob)

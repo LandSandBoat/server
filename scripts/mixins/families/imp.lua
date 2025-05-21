@@ -9,9 +9,9 @@ g_mixins.families.imp = function(impMob)
     impMob:addListener('CRITICAL_TAKE', 'IMP_CRITICAL_TAKE', function(mob)
         local random = math.random(1, 100)
 
-        if random <= 20 and mob:getAnimationSub() == 0 then
-            mob:setAnimationSub(1)
-            if mob:getLocalVar('hornDisabled') ~= 1 then
+        if random <= 20 and mob:getAnimationSub() == 4 then
+            mob:setAnimationSub(5)
+            if mob:getLocalVar('hornDisabled') ~= 5 then
                 local time = 25 + (math.ceil(random / 5) * 5)
 
                 if random <= 2 then
@@ -20,7 +20,7 @@ g_mixins.families.imp = function(impMob)
 
                 mob:timer(time * 1000, function(mobArg)
                     if mob:isAlive() then
-                        mob:setAnimationSub(0)
+                        mob:setAnimationSub(4)
                     end
                 end)
             end

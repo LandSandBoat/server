@@ -2,8 +2,6 @@
 -- Area: Cloister of Flames
 -- BCNM: Waking the Beast
 -----------------------------------
-local cloisterOfFlamesID = zones[xi.zone.CLOISTER_OF_FLAMES]
------------------------------------
 
 local content = BattlefieldQuest:new({
     zoneId           = xi.zone.CLOISTER_OF_FLAMES,
@@ -14,27 +12,29 @@ local content = BattlefieldQuest:new({
     index            = 2,
     entryNpc         = 'FP_Entrance',
     exitNpc          = 'Fire_Protocrystal',
-    requiredKeyItems = { xi.ki.RAINBOW_RESONATOR },
 
     questArea = xi.questLog.OTHER_AREAS,
     quest     = xi.quest.id.otherAreas.WAKING_THE_BEAST,
 })
 
-function content:onEventFinishWin(player, csid, option, npc)
-    npcUtil.giveKeyItem(player, xi.ki.EYE_OF_FLAMES)
+-- can help if you are doing the quest or already completed the quest
+function content:entryRequirement(player, npc, isRegistrant, trade)
+    local hasQuestItem = player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+    local prevCompletedQuest = player:getQuestStatus(self.questArea, self.quest) == xi.questStatus.QUEST_COMPLETED
+
+    -- registrant must actually be doing the quest
+    if isRegistrant then
+        return hasQuestItem
+    -- others can help if they are either doing the quest or already completed the quest
+    else
+        return hasQuestItem or prevCompletedQuest
+    end
 end
 
 content.groups =
 {
     {
-        -- avatar
-        mobIds =
-        {
-            { cloisterOfFlamesID.mob.IFRIT_PRIME_WTB      },
-            { cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 5  },
-            { cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 10 },
-        },
-
+        mobs = { 'Ifrit_Prime_WTB' },
         allDeath = function(battlefield, mob)
             -- when avatar defeated then all elementals should also die
             for i = 1, 4 do
@@ -44,35 +44,19 @@ content.groups =
                 end
             end
 
+            -- giving the player the eye key item is done in the WTB quest script
             battlefield:setStatus(xi.battlefield.status.WON)
         end,
     },
 
     {
-        -- elementals
-        mobIds =
+        mobs =
         {
-            {
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 1,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 2,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 3,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 4,
-            },
-
-            {
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 6,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 7,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 8,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 9,
-            },
-
-            {
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 11,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 12,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 13,
-                cloisterOfFlamesID.mob.IFRIT_PRIME_WTB + 14,
-            },
+            'Ifrit_Prime_WTB',
+            'Fire_Elemental',
         },
+        isParty   = true,
+        superlink = true,
     },
 }
 

@@ -7,7 +7,7 @@ require('scripts/quests/i_can_hear_a_rainbow')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
     xi.voidwalker.zoneOnInit(zone)
 end
 
@@ -53,7 +53,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

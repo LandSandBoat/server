@@ -161,7 +161,7 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
     local curePot         = math.min(caster:getMod(xi.mod.CURE_POTENCY), 50) / 100 -- caps at 50%
     local curePotII       = math.min(caster:getMod(xi.mod.CURE_POTENCY_II), 30) / 100 -- caps at 30%
     local potency         = 1 + curePot + curePotII
-    local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, spell:getID(), spell:getElement())
+    local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, spell:getElement(), false)
     local dSeal           = 1
 
     if caster:hasStatusEffect(xi.effect.DIVINE_SEAL) then
@@ -234,37 +234,26 @@ function finalMagicAdjustments(caster, target, spell, dmg)
 
         if total > 9 then
             -- ga spells on 10+ targets = 0.4
-            dmg = dmg * 0.4
+            dmg = math.floor(dmg * 0.4)
         elseif total > 1 then
             -- -ga spells on 2 to 9 targets = 0.9 - 0.05T where T = number of targets
-            dmg = dmg * (0.9 - 0.05 * total)
+            dmg = math.floor(dmg * (0.9 - 0.05 * total))
         end
-
-        -- kill shadows
-        -- target:delStatusEffect(xi.effect.COPY_IMAGE)
-        -- target:delStatusEffect(xi.effect.BLINK)
-    else
-        -- this logic will eventually be moved here
-        -- dmg = utils.takeShadows(target, dmg, 1)
-
-        -- if (dmg == 0) then
-            -- spell:setMsg(xi.msg.basic.SHADOW_ABSORB)
-            -- return 1
-        -- end
     end
 
     local skill = spell:getSkillType()
     if skill == xi.skill.ELEMENTAL_MAGIC then
-        dmg = dmg * xi.settings.main.ELEMENTAL_POWER
+        dmg = math.floor(dmg * xi.settings.main.ELEMENTAL_POWER)
     elseif skill == xi.skill.DARK_MAGIC then
-        dmg = dmg * xi.settings.main.DARK_POWER
+        dmg = math.floor(dmg * xi.settings.main.DARK_POWER)
     elseif skill == xi.skill.NINJUTSU then
-        dmg = dmg * xi.settings.main.NINJUTSU_POWER
+        dmg = math.floor(dmg * xi.settings.main.NINJUTSU_POWER)
     elseif skill == xi.skill.DIVINE_MAGIC then
-        dmg = dmg * xi.settings.main.DIVINE_POWER
+        dmg = math.floor(dmg * xi.settings.main.DIVINE_POWER)
     end
 
-    dmg = target:magicDmgTaken(dmg)
+    dmg = math.floor(dmg * xi.spells.damage.calculateTMDA(target, spell:getElement()))
+    dmg = math.floor(dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement()))
 
     if dmg > 0 then
         dmg = dmg - target:getMod(xi.mod.PHALANX)
@@ -301,7 +290,8 @@ end
 function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     -- Handles target's HP adjustment and returns SIGNED dmg (negative values on absorb)
 
-    dmg = target:magicDmgTaken(dmg)
+    dmg = math.floor(dmg * xi.spells.damage.calculateTMDA(target, ele))
+    dmg = math.floor(dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, ele))
 
     if dmg > 0 then
         dmg = dmg - target:getMod(xi.mod.PHALANX)
@@ -333,7 +323,7 @@ function addBonuses(caster, spell, target, dmg, params)
     local ele             = spell:getElement()
     local affinityBonus   = xi.spells.damage.calculateElementalStaffBonus(caster, ele)
     local magicDefense    = xi.spells.damage.calculateSDT(target, ele)
-    local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, spell:getID(), ele)
+    local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, ele, false)
     local casterJob       = caster:getMainJob()
 
     params = params or {}
@@ -410,7 +400,7 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     local magicDefense = xi.spells.damage.calculateSDT(target, ele)
     dmg = math.floor(dmg * magicDefense)
 
-    local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, 0, ele)
+    local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, ele, false)
     dmg = math.floor(dmg * dayWeatherBonus)
 
     local mab = 1
@@ -436,45 +426,6 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     dmg = math.floor(dmg * mab)
 
     return dmg
-end
-
-function handleThrenody(caster, target, spell, basePower, baseDuration, modifier)
-    -- Process resitances
-    local staff  = caster:getMod(xi.combat.element.getElementalAffinityMACCModifier(spell:getElement())) * 10
-    local params = {}
-
-    params.attribute = xi.mod.CHR
-    params.skillType = xi.skill.SINGING
-    params.bonus = staff
-
-    local resm = applyResistanceEffect(caster, target, spell, params)
-
-    if resm < 0.5 then
-        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
-        return xi.effect.THRENODY
-    end
-
-    -- Remove previous Threnody
-    target:delStatusEffect(xi.effect.THRENODY)
-
-    local iBoost = caster:getMod(xi.mod.THRENODY_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
-    local power = basePower + iBoost * 5
-    local duration = baseDuration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS) / 100) + 1)
-
-    if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
-        power = power * 2
-    elseif caster:hasStatusEffect(xi.effect.MARCATO) then
-        power = power * 1.5
-    end
-
-    if caster:hasStatusEffect(xi.effect.TROUBADOUR) then
-        duration = duration * 2
-    end
-
-    -- Set spell message and apply status effect
-    target:addStatusEffect(xi.effect.THRENODY, -power, 0, duration, 0, modifier, 0)
-
-    return xi.effect.THRENODY
 end
 
 function calculateDuration(duration, magicSkill, spellGroup, caster, target, useComposure)

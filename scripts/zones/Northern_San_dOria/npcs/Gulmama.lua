@@ -10,9 +10,6 @@ local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local trialByIce = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
     local classReunion = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
@@ -77,9 +74,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 706 and option == 1 then
         if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) == xi.questStatus.QUEST_COMPLETED then
@@ -88,11 +82,9 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
         player:setCharVar('TrialByIce_date', 0)
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_ICE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_ICE)
+        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_ICE)
     elseif csid == 718 then
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_ICE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_ICE)
+        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_ICE)
     elseif csid == 709 then
         local item = 0
 

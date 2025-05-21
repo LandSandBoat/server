@@ -4,13 +4,8 @@
 -- Involved in Quest: A Crisis in the Making
 -- !pos -137 17 177 145
 -----------------------------------
-local ID = zones[xi.zone.GIDDEUS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
-
-entity.onTrade = function(player, npc, trade)
-end
 
 entity.onTrigger = function(player, npc)
     local crisisstatus = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
@@ -21,13 +16,9 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 53 and option == 1 then
-        player:addKeyItem(xi.ki.OFF_OFFERING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OFF_OFFERING)
+        npcUtil.giveKeyItem(player, xi.ki.OFF_OFFERING)
         player:setCharVar('QuestCrisisMaking_var', 2)
     end
 end

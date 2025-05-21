@@ -136,31 +136,31 @@ xi.instance.lookup =
 
     [xi.zone.ZHAYOLM_REMNANTS] =
     {
-        -- Salvage
+        { 7300, { 407, 0, -6, 0, 0, 7 }, { 407, 4 }, { 411, 7 } }, -- Salvage I, Zhayolm Remnants
     },
 
     [xi.zone.ARRAPAGO_REMNANTS] =
     {
-        -- Salvage
+        { 7400, { 408, 0, -6, 0, 0, 8 }, { 408, 4 }, { 411, 8 } }, -- Salvage I, Arrapago Remnants
     },
 
     [xi.zone.BHAFLAU_REMNANTS] =
     {
-        -- Salvage
+        { 7500, { 409, 0, -6, 0, 0, 9 }, { 409, 4 }, { 411, 9 } }, -- Salvage I, Bhaflau Remnants
     },
 
     [xi.zone.SILVER_SEA_REMNANTS] =
     {
-        -- Salvage
+        { 7600, { 410, 0, -6, 0, 0, 10 }, { 410, 4 }, { 411, 10 } }, -- Salvage I, Silver Sea Remnants
     },
 
     [xi.zone.NYZUL_ISLE] =
     {
-        { 7700, { 405, 58,  -6, 0, 99, 5, 0 }, { 116, 1 }, { 411, 5 } }, -- Path of Darkness
-        { 7701, { 405, 59, -10, 0, 99, 5, 0 }, { 116, 1 }, { 411, 5 } }, -- Nashmeira's Plea
-        -- Waking the Colossus / Divine Interference
+        { 7700, { 405, 58,  -6, 0, 99, 5, 0 }, { 116, 1 }, { 411, 5 } },        -- Path of Darkness
+        { 7701, { 405, 59, -10, 0, 99, 5, 0 }, { 116, 1 }, { 411, 5 } },        -- Nashmeira's Plea
+        { 7702, { 405, 60, -34, 0, 99, 5, 1, 0, 14 }, { 116, 1 }, { 411, 5 } }, -- Waking the Colossus/Divine Interference
         -- Forging a New Myth
-        { 7704, { 405, 51,  -4, 0, 75, 5, 1 }, { 116, 2 }, { 411, 5 } }, -- Nyzul Isle Investigation
+        { 7704, { 405, 51,  -4, 0, 75, 5, 1 }, { 116, 2 }, { 411, 5 } },        -- Nyzul Isle Investigation
     },
 
     [xi.zone.EVERBLOOM_HOLLOW] =
@@ -293,6 +293,19 @@ xi.instance.lookup =
     },
 }
 
+local getInstanceName = function(player, instanceId)
+    return switch (instanceId) : caseof
+    {
+        [7702] = function()
+            if player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.DIVINE_INTERFERENCE) >= xi.questStatus.QUEST_ACCEPTED then
+                return 1 -- Divine Interference
+            else
+                return 0 -- Waking the Colossus
+            end
+        end,
+    }
+end
+
 -- Party leader registering
 local checkRegistryReqs = function(player, instanceId)
     local instanceObj = GetCachedInstanceScript(instanceId)
@@ -352,6 +365,10 @@ xi.instance.onTrigger = function(player, npc, instanceZoneID)
 
     if hasValidEntry then
         player:setLocalVar('INSTANCE_ID', instanceId)
+        if instanceTriggerArgs[8] ~= nil then
+            instanceTriggerArgs[8] = getInstanceName(player, instanceId)
+        end
+
         player:startEvent(unpack(instanceTriggerArgs))
 
         return true

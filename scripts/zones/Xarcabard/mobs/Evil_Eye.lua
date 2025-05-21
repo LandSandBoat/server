@@ -11,11 +11,6 @@ local entity = {}
 local shadowEyePHTable =
 {
     [ID.mob.SHADOW_EYE - 6] = ID.mob.SHADOW_EYE,
-    [ID.mob.SHADOW_EYE - 5] = ID.mob.SHADOW_EYE,
-    [ID.mob.SHADOW_EYE - 4] = ID.mob.SHADOW_EYE,
-    [ID.mob.SHADOW_EYE - 3] = ID.mob.SHADOW_EYE,
-    [ID.mob.SHADOW_EYE - 2] = ID.mob.SHADOW_EYE,
-    [ID.mob.SHADOW_EYE - 1] = ID.mob.SHADOW_EYE,
 }
 
 entity.onMobDeath = function(mob, player, optParams)

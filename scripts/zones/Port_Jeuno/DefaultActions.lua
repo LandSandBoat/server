@@ -1,9 +1,16 @@
 local ID = zones[xi.zone.PORT_JEUNO]
 
 return {
+    ['_6u2']             = { event = 54 },
+    ['_6u6']             = { event = 53 },
+    ['_6uc']             = { event = 52 },
+    ['_6ug']             = { event = 55 },
+    ['Asolmieu']         = { text = ID.text.DEPARTURE_NPC },
     ['Buntz']            = { event = 59 },
+    ['Cheli']            = { text = ID.text.DEPARTURE_NPC },
     ['Cumetouflaix']     = { text = ID.text.CUMETOUFLAIX_DIALOG },
     ['Daju']             = { event = 53 },
+    ['Dhaso_Toehprin']   = { text = ID.text.DEPARTURE_NPC },
     ['Dohhel']           = { event = 10028 },
     ['Falak']            = { event = 28 },
     ['Funono']           = { event = 55 },
@@ -20,7 +27,9 @@ return {
     ['Moulloie']         = { event = 46 },
     ['Naurmaire']        = { event = 7 },
     ['Nikki']            = { event = 52 },
+    ['Phouminnet']       = { text = ID.text.DEPARTURE_NPC },
     ['Pitantimand']      = { event = 63 },
+    ['Pranab']           = { text = ID.text.DEPARTURE_NPC },
     ['Rachocho']         = { event = 47 },
     ['Ramicharaux']      = { event = 60 },
     ['Red_Ghost']        = { event = 34 },
@@ -28,6 +37,8 @@ return {
     ['Roupatour']        = { event = 54 },
     ['Sanosuke']         = { event = 303 },
     ['Silent_Lynx']      = { event = 18 },
+    ['Tsolag']           = { text = ID.text.DEPARTURE_NPC },
     ['White_Beetle']     = { event = 52 },
+    ['Yon_Boskoti']      = { text = ID.text.DEPARTURE_NPC },
     ['Yurugu-Homurugu']  = { event = 21 },
 }

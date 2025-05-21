@@ -9,9 +9,6 @@ local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     -- killed Dark Spark and clicked same torch used to spawn
     if player:getCharVar('BorghertzSparkKilled') == 1 then
@@ -32,12 +29,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

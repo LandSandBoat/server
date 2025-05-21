@@ -30,15 +30,8 @@ ConquestData::ConquestData()
 : regionControls(std::vector<region_control_t>(19))
 , influences(std::vector<influence_t>(19))
 {
-    load();
-}
-
-void ConquestData::load()
-{
-    const char* Query = "SELECT region_id, region_control, region_control_prev, sandoria_influence, bastok_influence, windurst_influence, beastmen_influence \
-                         FROM conquest_system";
-
-    auto rset = db::query(Query);
+    const auto rset = db::preparedStmt("SELECT region_id, region_control, region_control_prev, sandoria_influence, bastok_influence, windurst_influence, beastmen_influence "
+                                       "FROM conquest_system");
     while (rset && rset->next())
     {
         const auto regionId = rset->get<uint32>("region_id");

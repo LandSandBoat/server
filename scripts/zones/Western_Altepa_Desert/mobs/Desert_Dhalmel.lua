@@ -8,12 +8,17 @@ local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 ---@type TMobEntity
 local entity = {}
 
+local celphiePHTable =
+{
+    [ID.mob.CELPHIE - 1] = ID.mob.CELPHIE, -- 50.014 0.256 7.088
+}
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 135, 1, xi.regime.type.FIELDS)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.CELPHIE_PH, 5, math.random(7200, 28800)) -- 2 to 8 hours
+    xi.mob.phOnDespawn(mob, celphiePHTable, 10, 7200) -- 2 hours
 end
 
 return entity

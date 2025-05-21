@@ -7,9 +7,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local theHolyCrest = player:getCharVar('TheHolyCrest_Event')
 
@@ -21,9 +18,6 @@ entity.onTrigger = function(player, npc)
     then -- Wyvern Egg
         player:startEvent(62)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

@@ -43,13 +43,7 @@ end
 content.groups =
 {
     {
-        mobIds =
-        {
-            { cloisterOfFlamesID.mob.IFRIT_PRIME + 3 },
-            { cloisterOfFlamesID.mob.IFRIT_PRIME + 4 },
-            { cloisterOfFlamesID.mob.IFRIT_PRIME + 5 },
-        },
-
+        mobs = { 'Ifrit_Prime_TSTBF' },
         allDeath = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
         end,

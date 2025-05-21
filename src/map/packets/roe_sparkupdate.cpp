@@ -19,11 +19,11 @@
 ===========================================================================
 */
 
-#include <math.h>
-
-#include "common/socket.h"
-
 #include "roe_sparkupdate.h"
+
+#include "common/database.h"
+#include "common/logging.h"
+#include "common/sql.h"
 
 #include "entities/charentity.h"
 
@@ -32,18 +32,16 @@ CRoeSparkUpdatePacket::CRoeSparkUpdatePacket(CCharEntity* PChar)
     this->setType(0x110);
     this->setSize(0x14);
 
-    const char* query = "SELECT spark_of_eminence, deeds, plaudits FROM char_points WHERE charid = %d";
+    earth_time::duration vanaTime        = std::chrono::seconds(earth_time::vanadiel_timestamp());
+    uint32               daysSinceEpoch  = std::chrono::floor<std::chrono::days>(vanaTime).count();
+    uint32               weeksSinceEpoch = std::chrono::floor<std::chrono::weeks>(vanaTime).count();
 
-    uint32 vanaTime        = CVanaTime::getInstance()->getVanaTime();
-    uint32 daysSinceEpoch  = vanaTime / (60 * 60 * 24);
-    uint32 weeksSinceEpoch = daysSinceEpoch / 7;
-
-    int ret = _sql->Query(query, PChar->id);
-    if (ret != SQL_ERROR && _sql->NextRow() == SQL_SUCCESS)
+    const auto rset = db::preparedStmt("SELECT spark_of_eminence, deeds, plaudits FROM char_points WHERE charid = ? LIMIT 1", PChar->id);
+    if (rset && rset->rowsCount() && rset->next())
     {
-        ref<uint32>(0x04) = _sql->GetIntData(0);
-        ref<uint16>(0x08) = _sql->GetIntData(1);
-        ref<uint16>(0x0A) = _sql->GetIntData(2);
+        ref<uint32>(0x04) = rset->get<uint32>("spark_of_eminence");
+        ref<uint16>(0x08) = rset->get<uint16>("deeds");
+        ref<uint16>(0x0A) = rset->get<uint16>("plaudits");
         ref<uint8>(0x0C)  = daysSinceEpoch % 6;  // Unity Shared Daily (0-5)
         ref<uint8>(0x0D)  = weeksSinceEpoch % 4; // Unity Leader Weekly (0-3)
         ref<uint16>(0x0E) = 0xFFFF;

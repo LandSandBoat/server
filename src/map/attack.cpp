@@ -28,13 +28,6 @@
 #include "status_effect_container.h"
 #include "utils/puppetutils.h"
 
-#include <cmath>
-
-/************************************************************************
- *                                                                      *
- *  Constructor.                                                            *
- *                                                                      *
- ************************************************************************/
 CAttack::CAttack(CBattleEntity* attacker, CBattleEntity* defender, PHYSICAL_ATTACK_TYPE type, PHYSICAL_ATTACK_DIRECTION direction, CAttackRound* attackRound)
 : m_attacker(attacker)
 , m_victim(defender)
@@ -49,17 +42,17 @@ CAttack::CAttack(CBattleEntity* attacker, CBattleEntity* defender, PHYSICAL_ATTA
  *  Returns the attack direction.                                       *
  *                                                                      *
  ************************************************************************/
-PHYSICAL_ATTACK_DIRECTION CAttack::GetAttackDirection()
+PHYSICAL_ATTACK_DIRECTION CAttack::GetAttackDirection() const
 {
     return m_attackDirection;
 }
 
 /************************************************************************
  *                                                                      *
- *  Returns the attack type.                                                *
+ *  Returns the attack type.                                            *
  *                                                                      *
  ************************************************************************/
-PHYSICAL_ATTACK_TYPE CAttack::GetAttackType()
+PHYSICAL_ATTACK_TYPE CAttack::GetAttackType() const
 {
     return m_attackType;
 }
@@ -76,7 +69,7 @@ void CAttack::SetAttackType(PHYSICAL_ATTACK_TYPE type)
 
 /************************************************************************
  *                                                                      *
- *  Returns the isCritical flag.                                            *
+ *  Returns the isCritical flag.                                        *
  *                                                                      *
  ************************************************************************/
 bool CAttack::IsCritical() const
@@ -139,7 +132,7 @@ void CAttack::SetCritical(bool value)
         }
 
         // need to pass the weapon slot because damage ratio depends on ATT which varies by slot
-        m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus, skilltype, weaponSlot);
+        m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus, skilltype, weaponSlot, false);
     }
 }
 
@@ -461,6 +454,16 @@ bool CAttack::CheckAnticipated()
     }
 }
 
+bool CAttack::IsSneakAttack() const
+{
+    return m_isSA;
+}
+
+bool CAttack::IsTrickAttack() const
+{
+    return m_isTA;
+}
+
 bool CAttack::IsCountered() const
 {
     return m_isCountered;
@@ -518,7 +521,7 @@ bool CAttack::CheckCounter()
             }
             else
             {
-                m_attacker->PAI->EventHandler.triggerListener("MELEE_SWING_MISS", CLuaBaseEntity(m_attacker), CLuaBaseEntity(m_victim), CLuaAttack(this));
+                m_attacker->PAI->EventHandler.triggerListener("MELEE_SWING_MISS", m_attacker, m_victim, this);
             }
         }
         else if (m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_COUNTER))
@@ -558,27 +561,25 @@ bool CAttack::CheckCover()
 
 /************************************************************************
  *                                                                      *
- *  Processes the damage for this swing.                                    *
+ *  Processes the damage for this swing.                                *
  *                                                                      *
  ************************************************************************/
 void CAttack::ProcessDamage()
 {
-    auto saDmgBonus = false;
-    auto taDmgBonus = false;
     // Sneak attack.
     if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
         (behind(m_attacker->loc.p, m_victim->loc.p, 64) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) ||
          m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBT)))
     {
         m_bonusBasePhysicalDamage += m_attacker->DEX() * (1.0f + m_attacker->getMod(Mod::SNEAK_ATK_DEX) / 100.0f);
-        saDmgBonus = true;
+        m_isSA = true;
     }
 
     // Trick attack.
     if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attackRound->GetTAEntity() != nullptr)
     {
         m_bonusBasePhysicalDamage += m_attacker->AGI() * (1.0f + m_attacker->getMod(Mod::TRICK_ATK_AGI) / 100.0f);
-        taDmgBonus = true;
+        m_isTA = true;
     }
 
     // Consume mana
@@ -592,7 +593,16 @@ void CAttack::ProcessDamage()
     {
         m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
         m_baseDamage       = m_attacker->GetMainWeaponDmg();
-        m_damage           = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+
+        if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
+        {
+            int32 kickDamage = m_naturalH2hDamage + m_attacker->getMod(Mod::KICK_DMG); // KICK_DMG includes weapon dmg if footwork is active
+            m_damage         = (uint32)(((kickDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+        }
+        else
+        {
+            m_damage = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+        }
     }
     else if (slot == SLOT_MAIN)
     {
@@ -644,13 +654,13 @@ void CAttack::ProcessDamage()
         attackutils::CheckForDamageMultiplier((CCharEntity*)m_attacker, dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]), m_damage, m_attackType, slot, m_isFirstSwing);
 
     // Apply Sneak Attack Augment Mod
-    if (m_attacker->getMod(Mod::AUGMENTS_SA) > 0 && saDmgBonus && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK))
+    if (m_attacker->getMod(Mod::AUGMENTS_SA) > 0 && IsSneakAttack() && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK))
     {
         m_damage += (int32)(m_damage * ((100 + (m_attacker->getMod(Mod::AUGMENTS_SA))) / 100.0f));
     }
 
     // Apply Trick Attack Augment Mod
-    if (m_attacker->getMod(Mod::AUGMENTS_TA) > 0 && taDmgBonus && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
+    if (m_attacker->getMod(Mod::AUGMENTS_TA) > 0 && IsTrickAttack() && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
     {
         m_damage += (int32)(m_damage * ((100 + (m_attacker->getMod(Mod::AUGMENTS_TA))) / 100.0f));
     }

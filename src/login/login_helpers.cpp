@@ -33,10 +33,15 @@ namespace loginHelpers
 
     bool isStringMalformed(std::string const& str, std::size_t max_length)
     {
+        // clang-format off
         const bool isEmpty        = str.empty();
         const bool isTooLong      = str.size() > max_length;
-        const bool hasInvalidChar = std::any_of(str.cbegin(), str.cend(), [](char const& c)
-                                                { return c < 0x20; });
+        const bool hasInvalidChar = std::any_of(str.cbegin(), str.cend(),
+                                                [](char const& c)
+                                                {
+                                                    return c < 0x20;
+                                                });
+        // clang-format on
 
         return isEmpty || isTooLong || hasInvalidChar;
     }
@@ -46,24 +51,8 @@ namespace loginHelpers
         return authenticatedSessions_[ipAddr][sessionHash]; // NOTE: Will construct if doesn't exist
     }
 
-    // hostname/ip conversion functions
-    std::string ip2str(uint32 ip)
-    {
-        uint32 reversed_ip = htonl(ip);
-        char   address[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &reversed_ip, address, INET_ADDRSTRLEN);
-        return fmt::format("{}", str(address));
-    }
-
-    uint32 str2ip(const char* ip_str)
-    {
-        uint32 ip = 0;
-        inet_pton(AF_INET, ip_str, &ip);
-        return ntohl(ip);
-    }
-
     // https://github.com/atom0s/XiPackets/blob/main/lobby/S2C_0x0004_ResponseError.md
-    void generateErrorMessage(char* packet, uint16 errorCode)
+    void generateErrorMessage(uint8* packet, uint16 errorCode)
     {
         std::memset(packet, 0, 0x24);
 
@@ -80,8 +69,8 @@ namespace loginHelpers
 
         ref<uint16>(packet, 32) = errorCode;
 
-        unsigned char hash[16];
-        md5(reinterpret_cast<uint8*>(packet), hash, 0x24);
+        uint8 hash[16];
+        md5(packet, hash, 0x24);
         std::memcpy(packet + 12, hash, 16);
     }
 
@@ -142,82 +131,75 @@ namespace loginHelpers
 
     int32 saveCharacter(uint32 accid, uint32 charid, char_mini* createchar)
     {
-        if (!db::query("INSERT INTO chars(charid,accid,charname,pos_zone,nation) VALUES(%u,%u,'%s',%u,%u)",
-                       charid, accid, str(createchar->m_name), createchar->m_zone, createchar->m_nation))
+        const auto charName = asStringFromUntrustedSource(createchar->m_name);
+
+        if (!db::preparedStmt("INSERT INTO chars(charid,accid,charname,pos_zone,nation) VALUES(?, ?, ?, ?, ?)", charid, accid, charName, createchar->m_zone, createchar->m_nation))
         {
-            ShowDebug(fmt::format("lobby_ccsave: char<{}>, accid: {}, charid: {}", str(createchar->m_name), accid, charid));
+            ShowDebug(fmt::format("lobby_ccsave: char<{}>, accid: {}, charid: {}", charName, accid, charid));
             return -1;
         }
 
-        if (!db::query("INSERT INTO char_look(charid,face,race,size) VALUES(%u,%u,%u,%u)",
-                       charid, createchar->m_look.face, createchar->m_look.race, createchar->m_look.size))
+        if (!db::preparedStmt("INSERT INTO char_look(charid,face,race,size) VALUES(?, ?, ?, ?)", charid, createchar->m_look.face, createchar->m_look.race, createchar->m_look.size))
         {
-            ShowDebug(fmt::format("lobby_cLook: char<{}>, charid: {}", str(createchar->m_name), charid));
+            ShowDebug(fmt::format("lobby_cLook: char<{}>, charid: {}", charName, charid));
             return -1;
         }
 
-        if (!db::query("INSERT INTO char_stats(charid,mjob) VALUES(%u,%u)",
-                       charid, createchar->m_mjob))
+        if (!db::preparedStmt("INSERT INTO char_stats(charid,mjob) VALUES(?, ?)", charid, createchar->m_mjob))
         {
             ShowDebug(fmt::format("lobby_cStats: charid: {}", charid));
             return -1;
         }
 
-        if (!db::query("INSERT INTO char_exp(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid",
-                       charid, createchar->m_mjob))
+        if (!db::preparedStmt("INSERT INTO char_exp(charid) VALUES(?) ON DUPLICATE KEY UPDATE charid = charid", charid))
         {
             return -1;
         }
 
-        if (!db::query("INSERT INTO char_flags(charid) VALUES(%u) ON DUPLICATE KEY UPDATE disconnecting = disconnecting", charid))
+        if (!db::preparedStmt("INSERT INTO char_flags(charid) VALUES(?) ON DUPLICATE KEY UPDATE disconnecting = disconnecting", charid))
         {
             return -1;
         }
 
-        if (!db::query("INSERT INTO char_jobs(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid",
-                       charid, createchar->m_mjob))
+        if (!db::preparedStmt("INSERT INTO char_jobs(charid) VALUES(?) ON DUPLICATE KEY UPDATE charid = charid", charid))
         {
             return -1;
         }
 
-        if (!db::query("INSERT INTO char_points(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid",
-                       charid, createchar->m_mjob))
+        if (!db::preparedStmt("INSERT INTO char_points(charid) VALUES(?) ON DUPLICATE KEY UPDATE charid = charid", charid))
         {
             return -1;
         }
 
-        if (!db::query("INSERT INTO char_unlocks(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid",
-                       charid, createchar->m_mjob))
+        if (!db::preparedStmt("INSERT INTO char_unlocks(charid) VALUES(?) ON DUPLICATE KEY UPDATE charid = charid", charid))
         {
             return -1;
         }
 
-        if (!db::query("INSERT INTO char_profile(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid",
-                       charid, createchar->m_mjob))
+        if (!db::preparedStmt("INSERT INTO char_profile(charid) VALUES(?) ON DUPLICATE KEY UPDATE charid = charid", charid))
         {
             return -1;
         }
 
-        if (!db::query("INSERT INTO char_storage(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid",
-                       charid, createchar->m_mjob))
+        if (!db::preparedStmt("INSERT INTO char_storage(charid) VALUES(?) ON DUPLICATE KEY UPDATE charid = charid", charid))
         {
             return -1;
         }
 
-        if (!db::query("DELETE FROM char_inventory WHERE charid = %u", charid))
+        if (!db::preparedStmt("DELETE FROM char_inventory WHERE charid = ?", charid))
         {
             return -1;
         }
 
-        if (!db::query("INSERT INTO char_inventory(charid) VALUES(%u)", charid, createchar->m_mjob))
+        if (!db::preparedStmt("INSERT INTO char_inventory(charid) VALUES(?)", charid))
         {
             return -1;
         }
 
         if (settings::get<bool>("main.NEW_CHARACTER_CUTSCENE"))
         {
-            if (!db::query("INSERT INTO char_vars(charid, varname, value) VALUES(%u, '%s', %u)",
-                           charid, "HQuest[newCharacterCS]notSeen", 1))
+            if (!db::preparedStmt("INSERT INTO char_vars(charid, varname, value) VALUES(?, ?, ?)",
+                                  charid, "HQuest[newCharacterCS]notSeen", 1))
             {
                 return -1;
             }
@@ -225,11 +207,13 @@ namespace loginHelpers
         return 0;
     }
 
-    int32 createCharacter(session_t& session, char* buf)
+    int32 createCharacter(session_t& session, uint8* buf)
     {
-        char_mini createchar;
+        char_mini createchar{};
 
         std::memcpy(createchar.m_name, session.requestedNewCharacterName.c_str(), 16);
+
+        const auto charName = asStringFromUntrustedSource(createchar.m_name);
 
         createchar.m_look.race = ref<uint8>(buf, 48);
         createchar.m_look.size = ref<uint8>(buf, 57);
@@ -243,7 +227,7 @@ namespace loginHelpers
         if (mjob != createchar.m_mjob)
         {
             ShowInfo(fmt::format("{} attempted to create invalid starting job {} substituting {}",
-                                 session.requestedNewCharacterName, mjob, createchar.m_mjob));
+                                 charName, mjob, createchar.m_mjob));
         }
 
         createchar.m_nation = ref<uint8>(buf, 54);
@@ -278,7 +262,6 @@ namespace loginHelpers
         }
 
         uint32 charID = 0;
-
         if (rset->rowsCount() != 0 && rset->next())
         {
             charID = rset->get<uint32>("max(charid)") + 1;
@@ -289,37 +272,13 @@ namespace loginHelpers
             return -1;
         }
 
-        ShowDebug(fmt::format("char<{}> successfully saved", str(createchar.m_name)));
+        ShowDebug(fmt::format("char<{}> successfully saved", charName));
         return 0;
     }
 
-    void PrintPacket(const char* data, uint32 size)
+    std::string getHashFromPacket(std::string const& ip_str, uint8* data)
     {
-        std::string message;
-
-        for (size_t y = 0; y < size; y++)
-        {
-            message.append(fmt::sprintf("%02hhx ", data[y]));
-
-            if (((y + 1) % 16) == 0)
-            {
-                message += "\n";
-                ShowDebug(message);
-                message.clear();
-            }
-        }
-
-        if (message.length() > 0)
-        {
-            message += "\n";
-            ShowDebug(message.c_str());
-        }
-    }
-
-    std::string getHashFromPacket(std::string const& ip_str, char* data)
-    {
-        std::string hash = std::string(data + 12, 16);
-
+        auto hash = asStringFromUntrustedSource(data + 12, 16);
         if (authenticatedSessions_[ip_str].find(hash) == authenticatedSessions_[ip_str].end())
         {
             return "";

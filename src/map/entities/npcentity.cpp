@@ -19,13 +19,15 @@
 ===========================================================================
 */
 
-#include "common/taskmgr.h"
+#include "npcentity.h"
 
 #include "ai/ai_container.h"
-#include "npcentity.h"
-#include "utils/zoneutils.h"
+
+#include "common/task_manager.h"
 
 #include "packets/entity_update.h"
+
+#include "utils/zoneutils.h"
 
 /************************************************************************
  *                                                                       *
@@ -107,7 +109,7 @@ bool CNpcEntity::isWideScannable()
 
 void CNpcEntity::PostTick()
 {
-    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+    timer::time_point now = timer::now();
     if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR && now > m_nextUpdateTimer)
     {
         m_nextUpdateTimer = now + 250ms;

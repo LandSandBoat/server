@@ -10,6 +10,8 @@ return {
     ['Laurisse']            = { text = ID.text.RESCUE_DRILL + 36 },
     ['Narvecaint']          = { text = ID.text.RESCUE_DRILL + 37 },
     ['Shattered_Telepoint'] = { messageSpecial = ID.text.TELEPOINT_HAS_BEEN_SHATTERED },
+    ['Stone_Monument']      = { event = 900 },
+    ['Tayula']              = { event = 105 },
     ['Vicorpasse']          = { text = ID.text.RESCUE_DRILL + 38 },
     ['Yaucevouchat']        = { text = ID.text.RESCUE_DRILL + 34 },
 }

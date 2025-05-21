@@ -23,75 +23,84 @@
 
 #include "common/application.h"
 #include "common/logging.h"
+#include "common/timer.h"
+
+#include "besieged_system.h"
+#include "campaign_system.h"
+#include "colonization_system.h"
+#include "conquest_system.h"
+#include "http_server.h"
+#include "ipc_server.h"
+#include "party_system.h"
 #include "time_server.h"
 
-int32 forward_queued_messages_to_handlers(time_point tick, CTaskMgr::CTask* PTask)
+namespace
+{
+    static constexpr auto kTimeServerTickInterval = 2400ms;
+    static constexpr auto kPumpQueuesTime         = 250ms;
+    static constexpr auto kMainLoopInterval       = 200ms;
+} // namespace
+
+/*
+void pump_queues(WorldServer* worldServer, asio::steady_timer* timer)
 {
     TracyZoneScoped;
-    WorldServer* worldServer = std::any_cast<WorldServer*>(PTask->m_data);
 
-    while (std::optional<HandleableMessage> maybeMessage = pop_external_processing_message())
+    worldServer->ipcServer_->handleIncomingMessages();
+
+    if (worldServer->isRunning())
     {
-        HandleableMessage message = *maybeMessage;
-        auto              subType = static_cast<REGIONALMSGTYPE>(ref<uint8>(message.payload.data(), 0));
-        IMessageHandler*  handler = nullptr;
-        switch (subType)
-        {
-            case REGIONAL_EVT_MSG_CONQUEST:
-            {
-                handler = worldServer->conquestSystem.get();
-            }
-            break;
-            case REGIONAL_EVT_MSG_BESIEGED:
-            {
-                handler = worldServer->besiegedSystem.get();
-            }
-            break;
-            case REGIONAL_EVT_MSG_CAMPAIGN:
-            {
-                handler = worldServer->campaignSystem.get();
-            }
-            break;
-            case REGIONAL_EVT_MSG_COLONIZATION:
-            {
-                handler = worldServer->colonizationSystem.get();
-            }
-            break;
-            default:
-            {
-                ShowError(fmt::format("Unknown IMessageHandler type requested: {}", subType));
-            }
-            break;
-        }
-
-        if (handler)
-        {
-            handler->handleMessage(std::move(message));
-        }
+        // reset timer
+        timer->expires_at(timer->expiry() + kPumpQueuesTime);
+        timer->async_wait(std::bind(&pump_queues, worldServer, timer));
     }
+}
+*/
+
+int32 pump_queues(timer::time_point tick, CTaskManager::CTask* PTask)
+{
+    TracyZoneScoped;
+
+    std::any_cast<WorldServer*>(PTask->m_data)->ipcServer_->handleIncomingMessages();
 
     return 0;
 }
 
 WorldServer::WorldServer(int argc, char** argv)
 : Application("world", argc, argv)
-, httpServer(std::make_unique<HTTPServer>())
-, messageServer(std::make_unique<message_server_wrapper_t>(std::ref(m_RequestExit)))
-, conquestSystem(std::make_unique<ConquestSystem>())
-, besiegedSystem(std::make_unique<BesiegedSystem>())
-, campaignSystem(std::make_unique<CampaignSystem>())
-, colonizationSystem(std::make_unique<ColonizationSystem>())
+, ipcServer_(std::make_unique<IPCServer>(*this))
+, partySystem_(std::make_unique<PartySystem>(*this))
+, conquestSystem_(std::make_unique<ConquestSystem>(*this))
+, besiegedSystem_(std::make_unique<BesiegedSystem>(*this))
+, campaignSystem_(std::make_unique<CampaignSystem>(*this))
+, colonizationSystem_(std::make_unique<ColonizationSystem>(*this))
+, httpServer_(std::make_unique<HTTPServer>())
 {
     // Tasks
-    CTaskMgr::getInstance()->AddTask("time_server", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, time_server, 2400ms);
+    CTaskManager::getInstance()->AddTask("time_server", timer::now(), this, CTaskManager::TASK_INTERVAL, kTimeServerTickInterval, time_server);
 
     // TODO: Make this more reactive than a polling job
-    CTaskMgr::getInstance()->AddTask("forward_queued_messages_to_handlers", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, forward_queued_messages_to_handlers, 250ms);
+    CTaskManager::getInstance()->AddTask("pump_queues", timer::now(), this, CTaskManager::TASK_INTERVAL, kPumpQueuesTime, pump_queues);
+
+    // asio::steady_timer timeServerTimer(io_context_, kPumpQueuesTime);
+    // timeServerTimer.async_wait(std::bind(&pump_queues, this, &timeServerTimer));
 }
 
 WorldServer::~WorldServer() = default;
 
-void WorldServer::Tick()
+void WorldServer::loadConsoleCommands()
 {
-    Application::Tick();
+}
+
+void WorldServer::run()
+{
+    Application::markLoaded();
+
+    while (Application::isRunning())
+    {
+        const auto tickStart     = timer::now();
+        const auto tasksDuration = CTaskManager::getInstance()->doExpiredTasks(tickStart);
+        const auto sleepFor      = kMainLoopInterval - tasksDuration;
+        std::this_thread::sleep_for(sleepFor);
+    }
 }

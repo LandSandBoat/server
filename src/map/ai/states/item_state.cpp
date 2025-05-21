@@ -80,9 +80,16 @@ CItemState::CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slo
     UpdateTarget(PEntity->IsValidTarget(targid, m_PItem->getValidTarget(), m_errorMsg));
     auto* PTarget = GetTarget();
 
-    if (!PTarget || m_errorMsg)
+    if (!PTarget || this->HasErrorMsg())
     {
-        throw CStateInitException(m_errorMsg->copy());
+        if (this->HasErrorMsg())
+        {
+            throw CStateInitException(m_errorMsg->copy());
+        }
+        else
+        {
+            throw CStateInitException(std::make_unique<CBasicPacket>());
+        }
     }
 
     auto [error, param, value] = luautils::OnItemCheck(PTarget, m_PItem, ITEMCHECK::NONE, m_PEntity);
@@ -106,8 +113,8 @@ CItemState::CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slo
     m_PEntity->UContainer->SetItem(0, m_PItem);
 
     m_startPos      = m_PEntity->loc.p;
-    m_castTime      = std::chrono::milliseconds(m_PItem->getActivationTime());
-    m_animationTime = std::chrono::milliseconds(m_PItem->getAnimationTime());
+    m_castTime      = m_PItem->getActivationTime();
+    m_animationTime = m_PItem->getAnimationTime();
 
     action_t action;
     action.id         = m_PEntity->id;
@@ -125,7 +132,7 @@ CItemState::CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slo
     actionTarget.messageID  = 28;
     actionTarget.knockback  = 0;
 
-    m_PEntity->PAI->EventHandler.triggerListener("ITEM_START", CLuaBaseEntity(PTarget), CLuaItem(m_PItem), CLuaAction(&action));
+    m_PEntity->PAI->EventHandler.triggerListener("ITEM_START", PTarget, m_PItem, &action);
     m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
 
     m_PItem->setSubType(ITEM_LOCKED);
@@ -164,7 +171,7 @@ void CItemState::UpdateTarget(uint16 targid)
     }
 }
 
-bool CItemState::Update(time_point tick)
+bool CItemState::Update(timer::time_point tick)
 {
     if (tick > GetEntryTime() + m_castTime && !IsCompleted())
     {
@@ -181,7 +188,7 @@ bool CItemState::Update(time_point tick)
         {
             FinishItem(action);
         }
-        m_PEntity->PAI->EventHandler.triggerListener("ITEM_USE", CLuaBaseEntity(m_PEntity), CLuaItem(m_PItem), CLuaAction(&action));
+        m_PEntity->PAI->EventHandler.triggerListener("ITEM_USE", m_PEntity, m_PItem, &action);
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
         Complete();
     }
@@ -192,13 +199,13 @@ bool CItemState::Update(time_point tick)
             CCharEntity* PChar = m_PEntity;
             PChar->m_charHistory.itemsUsed++;
         }
-        m_PEntity->PAI->EventHandler.triggerListener("ITEM_STATE_EXIT", CLuaBaseEntity(m_PEntity), CLuaItem(m_PItem));
+        m_PEntity->PAI->EventHandler.triggerListener("ITEM_STATE_EXIT", m_PEntity, m_PItem);
         return true;
     }
     return false;
 }
 
-void CItemState::Cleanup(time_point tick)
+void CItemState::Cleanup(timer::time_point tick)
 {
     m_PEntity->UContainer->Clean();
 
@@ -294,7 +301,14 @@ void CItemState::InterruptItem(action_t& action)
         actionTarget.messageID  = 0;
         actionTarget.knockback  = 0;
 
-        m_PEntity->pushPacket(m_errorMsg->copy());
+        if (this->HasErrorMsg())
+        {
+            m_PEntity->pushPacket(m_errorMsg->copy());
+        }
+        else
+        {
+            throw CStateInitException(std::make_unique<CBasicPacket>());
+        }
     }
 }
 

@@ -161,6 +161,7 @@ xi.msg.basic =
     STATUS_BOOST_2         = 365, -- All of <target>'s status parameters are boosted.
     JA_MAGIC_BURST         = 379, -- <user> uses <ability>. Magic Burst! the <target> takes <amount> damage.
     JA_ENMITY_DECREASE     = 743, -- <user> uses <ability>. <target>'s enmity decreases.
+    JA_TH_EFFECTIVENESS    = 608, -- <user> uses <ability>. Treasure Hunter effectiveness against <target> increases to <amount>.
 
     -- "Fortified against" messages
     FORTIFIED_DEMONS       = 149, -- <target> is fortified against demons.
@@ -194,6 +195,7 @@ xi.msg.basic =
     CANNOT_ON_THAT_TARG    = 155, -- You cannot perform that action on the specified target.
     REQUIRES_SHIELD        = 199, -- That action requires a shield.
     DISAPPEAR_NUM          = 231, -- <num> of <target>'s effects disappear!
+    DRAWN_IN               = 232, -- <target> is drawn in.
     MUG_FAIL               = 244, -- <user> fails to mug <target>.
     IS_EFFECT              = 277, -- "is <status>" - that's the entire message.
     EVADES                 = 282, -- <target> evades.
@@ -252,6 +254,7 @@ xi.msg.basic =
     ITEM_NO_PETRAS                  = 65,  -- You are not carrying any Petras.<br>You cannot use the <item>.
     ITEM_DOES_NOT_HAVE              = 91,  -- <actor> does not have any <item>.
     ITEM_CANNOT_USE_ON              = 92,  -- Cannot use the <item> on <target>.
+    ITEM_CANNOT_USE_TARGET          = 517, -- The <item> cannot bed used on that target.
     ITEM_YOU_OBTAIN_FROM            = 98,  -- You obtain a <item> from <target>.
     ITEM_NO_USE_LEVEL               = 104, -- Unable to use item.<br>You do not meet the level requirement.
     ITEM_NO_USE_MEDICATED           = 111, -- You cannot use <item> while medicated.
@@ -260,7 +263,18 @@ xi.msg.basic =
     ITEM_OBTAINS_A                  = 376, -- <actor> uses a <item>.<br><target> obtains a <item2>.
     ITEM_OBTAINS                    = 377, -- <actor> uses a <item>.<br><target> obtains <item2>.
     ITEM_EFFECT_DISAPPEARS          = 378, -- <actor> uses a <item>.<br><target>'s <status> effect disappears!
+    ITEM_PETRA_VANISH               = 399, -- <actor> uses a <item>.<br>All of <target>'s Petras vanish!
+    ITEM_AILMENTS_DISAPPEARS        = 400, -- <actor> uses a <item>.<br><num> of <target>'s effects disappears!
+    ITEM_EFFECTS_DISAPPEARS         = 401, -- <actor> uses a <item>.<br><num> of <target>'s status ailments disappears!
+    ITEM_NO_EFFECT                  = 408, -- <actor> uses a <item>.<br>No effect on <target>.
+    ITEM_NO_TARGET                  = 410, -- No target available. Unable to use item.
     ITEM_UNABLE_TO_USE_PARTY_LEADER = 580, -- Unable to use <item>. The party leader is in either an area beyond warping range or a place you have yet to visit.
+    ITEM_NO_ITEMS_EQUIPPED          = 514, -- You do not have the proper items equipped to use the <item>.
+    ITEM_NO_USE_SNEAK               = 518, -- The <item> cannot be used while under the effect of invisible or sneak
+
+    -- Two-handed Weapon Grips
+    GRIP_NO_2HAND_EQUIPPED = 512, -- You must have a two-handed weapon equipped in the main weapon slot in order to equip a grip
+    GRIP_NOT_COMPATIBLE    = 513, -- This grip is not compatible with the two-handed weapon you currently have equipped
 
     -- Ranged
     NO_RANGED_WEAPON       = 216, -- You do not have an appropriate ranged weapon equipped.
@@ -307,11 +321,17 @@ xi.msg.basic =
     TIME_DYNAMIS_EXTENDED  = 448, -- Time allowed in Dynamis has been extended by <param> minutes
     TIME_DYNAMIS_REMAINING = 449, -- ----== WARNING ==----Time remaining in Dynamis: <param> minutes.
     -- Charm
+    CHARM_SUCCESS          = 136, -- <actor> uses charm. <target> is now under the <actor>'s control.
+    CHARM_FAIL             = 137, -- <actor> uses charm. <actor> fails to charm <target>.
     CANNOT_CHARM           = 210, -- <actor> cannot charm <target>!
     VERY_DIFFICULT_CHARM   = 211, -- It would be very difficult for <actor> to charm <target>.
     DIFFICULT_TO_CHARM     = 212, -- It would be difficult for <actor> to charm <target>.
     MIGHT_BE_ABLE_CHARM    = 213, -- <actor> might be able to charm <target>.
     SHOULD_BE_ABLE_CHARM   = 214, -- <actor> should be able to charm <target>.
+
+    -- Soultrapper (Pankration)
+    SOULTRAPPER_SUCCESS    = 515,    -- <actor> has successfully recorded the target's image onto an <item>.
+    SOULTRAPPER_FAILED     = 516,    -- <actor> was unable to capture the target's image.
 
     -- BLU
     LEARNS_SPELL           = 419, -- <target> learns (NULL)!

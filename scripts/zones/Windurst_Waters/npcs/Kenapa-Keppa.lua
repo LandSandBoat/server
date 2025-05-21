@@ -9,9 +9,6 @@ local ID = zones[xi.zone.WINDURST_WATERS]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local sayItWithFlowers = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     local flowerProgress = player:getCharVar('FLOWER_PROGRESS') -- progress of Say It with Flowers
@@ -34,9 +31,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(303) -- Standard converstation
         end
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

@@ -1,6 +1,10 @@
+-----------------------------------
+require('scripts/globals/utils')
+-----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.treasureHunter = xi.combat.treasureHunter or {}
+-----------------------------------
 
 -- https://forum.square-enix.com/ffxi/threads/56550
 xi.combat.treasureHunter.treasureHunterTable =
@@ -36,8 +40,8 @@ xi.combat.treasureHunter.dropBracketTable =
 
 xi.combat.treasureHunter.getDropRate = function(thLevel, dropRate)
     -- Sanitize parameters
-    local thTier     = thLevel or 0
-    local thDropRate = dropRate or 0
+    local thTier     = utils.defaultIfNil(thLevel, 0)
+    local thDropRate = utils.defaultIfNil(dropRate, 0)
 
     thTier     = utils.clamp(thTier, 0, 14)
     thDropRate = utils.clamp(thDropRate, 0, 10000)

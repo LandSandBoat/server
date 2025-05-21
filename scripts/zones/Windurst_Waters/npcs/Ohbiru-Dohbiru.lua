@@ -10,9 +10,6 @@ local ID = zones[xi.zone.WINDURST_WATERS]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
     local sayFlowers = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
@@ -30,9 +27,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(516, 0, 0, 0, 0, 950)
         end
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

@@ -19,7 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
 #include "common/timer.h"
 
 #include <cstring>
@@ -40,22 +39,22 @@ CCharRecastPacket::CCharRecastPacket(CCharEntity* PChar)
 
     for (auto&& recast : *RecastList)
     {
-        uint32 recasttime = (recast.RecastTime == 0 ? 0 : ((recast.RecastTime - (uint32)(time(nullptr) - recast.TimeStamp))));
+        uint32 recastSeconds = static_cast<uint32>(timer::count_seconds(recast.RecastTime == 0s ? 0s : (recast.TimeStamp - timer::now() + recast.RecastTime)));
 
         if (recast.ID == 256) // borrowing this id for mount recast
         {
-            ref<uint32>(0xFC) = recasttime;
+            ref<uint32>(0xFC) = recastSeconds;
             ref<uint16>(0xFE) = recast.ID;
         }
         else if (recast.ID != 0)
         {
-            ref<uint32>(0x0C + count * 8) = recasttime;
+            ref<uint32>(0x0C + count * 8) = recastSeconds;
             ref<uint8>(0x0F + count * 8)  = (uint8)recast.ID;
             count++;
         }
         else
         {
-            ref<uint32>(0x04) = recasttime; // 2h ability (recast id is 0)
+            ref<uint32>(0x04) = recastSeconds; // 2h ability (recast id is 0)
         }
 
         // Retail currently only allows 31 distinct recasts to be sent in the packet

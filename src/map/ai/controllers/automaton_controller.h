@@ -65,7 +65,7 @@ public:
     virtual bool Disengage() override;
 
 protected:
-    virtual void DoCombatTick(time_point tick) override;
+    virtual void DoCombatTick(timer::time_point tick) override;
     virtual void Move() override;
 
     void         setCooldowns();
@@ -92,27 +92,27 @@ private:
 
     CAutomatonEntity* PAutomaton;
 
-    duration             m_actionCooldown{ 3s };
-    duration             m_rangedCooldown{};
+    timer::duration      m_actionCooldown{ 3s };
+    timer::duration      m_rangedCooldown{};
     static constexpr int m_RangedAbility{ 1949 };
-    duration             m_magicCooldown{};
-    duration             m_enfeebleCooldown{};
-    duration             m_elementalCooldown{};
-    duration             m_healCooldown{};
-    duration             m_enhanceCooldown{};
-    duration             m_statusCooldown{};
-    duration             m_shieldbashCooldown{};
+    timer::duration      m_magicCooldown{};
+    timer::duration      m_enfeebleCooldown{};
+    timer::duration      m_elementalCooldown{};
+    timer::duration      m_healCooldown{};
+    timer::duration      m_enhanceCooldown{};
+    timer::duration      m_statusCooldown{};
+    timer::duration      m_shieldbashCooldown{};
     static constexpr int m_ShieldBashAbility{ 1944 };
 
-    time_point m_LastActionTime;
-    time_point m_LastMagicTime;
-    time_point m_LastEnfeebleTime;
-    time_point m_LastElementalTime;
-    time_point m_LastHealTime;
-    time_point m_LastEnhanceTime;
-    time_point m_LastStatusTime;
-    time_point m_LastRangedTime;
-    time_point m_LastShieldBashTime;
+    timer::time_point m_LastActionTime;
+    timer::time_point m_LastMagicTime;
+    timer::time_point m_LastEnfeebleTime;
+    timer::time_point m_LastElementalTime;
+    timer::time_point m_LastHealTime;
+    timer::time_point m_LastEnhanceTime;
+    timer::time_point m_LastStatusTime;
+    timer::time_point m_LastRangedTime;
+    timer::time_point m_LastShieldBashTime;
 };
 
 namespace automaton

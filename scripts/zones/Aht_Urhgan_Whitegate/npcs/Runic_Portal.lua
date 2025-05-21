@@ -8,9 +8,6 @@ local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local runicPortals  = player:getTeleport(xi.teleport.type.RUNIC_PORTAL)
     local assaultOrders =
@@ -43,17 +40,26 @@ entity.onTrigger = function(player, npc)
         local mercRank  = xi.besieged.getMercenaryRank(player)
         local points    = player:getCurrency('imperial_standing')
         local hasAstral = xi.besieged.getAstralCandescence()
+        local isCaptain = player:hasKeyItem(xi.ki.CAPTAIN_WILDCAT_BADGE)
 
-        player:startEvent(101, hasPermit and xi.ki.RUNIC_PORTAL_USE_PERMIT or 0, runicPortals, mercRank, points, 0, hasAstral, hasPermit and 1 or 0)
+        if isCaptain then
+            player:messageSpecial(ID.text.IMPERIAL_AUTHORIZATION) -- TODO: This may show in other cases
+            hasPermit = false -- #1 and  #7 are always set to 0 for Captains
+        end
+
+        player:startEvent(101, hasPermit and xi.ki.RUNIC_PORTAL_USE_PERMIT or 0, runicPortals, mercRank, points, isCaptain and 1 or 0, hasAstral, hasPermit and 1 or 0, 0)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
     local portalPick =
     {
+        [1]    = xi.teleport.id.AZOUPH_SP,
+        [2]    = xi.teleport.id.DVUCCA_SP,
+        [3]    = xi.teleport.id.MAMOOL_SP,
+        [4]    = xi.teleport.id.HALVUNG_SP,
+        [5]    = xi.teleport.id.ILRUSI_SP,
+        [6]    = xi.teleport.id.NYZUL_SP,
         [101]  = xi.teleport.id.AZOUPH_SP,
         [102]  = xi.teleport.id.DVUCCA_SP,
         [103]  = xi.teleport.id.MAMOOL_SP,
@@ -86,7 +92,8 @@ entity.onEventFinish = function(player, csid, option, npc)
                 player:messageSpecial(ID.text.SUFFICIENT_IMPERIAL_STANDING)
             end
         end
-
+    elseif csid == 101 and option >= 1 and option <= 6 then -- Captains dont lose permit
+        xi.teleport.to(player, portalPick[option])
     elseif csid >= 120 and csid <= 125 and option == 1 then
         xi.teleport.to(player, portalPick[csid])
     end

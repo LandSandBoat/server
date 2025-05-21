@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Castle Zvahl Keep
 --  NPC: Goblin Footprint
--- Type: NPC
 -- !pos  45.948 -0.037 -17.059 162
 -----------------------------------
 ---@type TNpcEntity
@@ -13,9 +12,6 @@ end
 
 entity.onTrigger = function(player, npc)
     xi.goblinfootprint.rewatch(player, true)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

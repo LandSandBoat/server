@@ -54,9 +54,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 634 then    -- WONDERING_MINSTREL: Quest Start
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)

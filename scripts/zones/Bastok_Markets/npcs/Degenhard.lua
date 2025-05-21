@@ -25,9 +25,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 15 then
         npcUtil.giveItem(player, xi.item.OLDE_RARAB_TAIL)

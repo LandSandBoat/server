@@ -9,6 +9,10 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
+
 entity.onMobSpawn = function(mob)
     -- Resistances Confirmed
     mob:addImmunity(xi.immunity.DARK_SLEEP)

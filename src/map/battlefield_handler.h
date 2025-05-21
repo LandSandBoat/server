@@ -24,6 +24,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "common/timer.h"
 
 #include <map>
 #include <memory>
@@ -37,22 +38,22 @@ class CZone;
 
 struct BattlefieldRegistration
 {
-    uint16               id         = -1;
-    uint8                area       = 1;
-    uint32               initiator  = 0;
-    uint32               maxPlayers = 0;
-    uint32               levelCap   = 0;
-    uint32               rules      = 0;
-    std::chrono::seconds timeLimit  = std::chrono::seconds(0);
-    bool                 isMission  = false;
-    bool                 showTimer  = true;
+    uint16          id         = -1;
+    uint8           area       = 1;
+    uint32          initiator  = 0;
+    uint32          maxPlayers = 0;
+    uint32          levelCap   = 0;
+    uint32          rules      = 0;
+    timer::duration timeLimit  = 0s;
+    bool            isMission  = false;
+    bool            showTimer  = true;
 };
 
 class CBattlefieldHandler
 {
 public:
     CBattlefieldHandler(CZone* PZone);
-    void          HandleBattlefields(time_point tick);                                              // called every tick to handle win/lose conditions, locking the bcnm, etc
+    void          HandleBattlefields(timer::time_point tick);                                       // called every tick to handle win/lose conditions, locking the bcnm, etc
     uint8         LoadBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration); // attempts to load battlefield, returns BATTLEFIELD_RETURN_CODE
     CBattlefield* GetBattlefield(CBaseEntity* PEntity, bool checkRegistered = false);               // return pointer to battlefield if exists
     CBattlefield* GetBattlefieldByArea(uint8 area) const;
@@ -71,7 +72,7 @@ private:
     std::map<uint32, uint8>      m_ReservedAreas;   // <charid, area>
 
     // Players that need to be kicked from whatever battlefield they were in
-    std::vector<std::pair<uint32, time_point>> m_orphanedPlayers;
+    std::vector<std::pair<uint32, timer::time_point>> m_orphanedPlayers;
 };
 
 #endif

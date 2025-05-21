@@ -21,10 +21,10 @@
 
 #include "watchdog.h"
 
-Watchdog::Watchdog(duration timeout, std::function<void()> callback)
+Watchdog::Watchdog(timer::duration timeout, std::function<void()> callback)
 : m_timeout(timeout)
 , m_callback(std::move(callback))
-, m_lastUpdate(server_clock::now())
+, m_lastUpdate(timer::now())
 , m_running(true)
 {
     m_watchdog = nonstd::jthread(&Watchdog::_innerFunc, this);
@@ -45,14 +45,14 @@ void Watchdog::update()
 {
     std::unique_lock<std::mutex> lock(m_bottleneck);
 
-    m_lastUpdate = server_clock::now();
+    m_lastUpdate = timer::now();
 }
 
 void Watchdog::_innerFunc()
 {
     std::unique_lock<std::mutex> lock(m_bottleneck);
 
-    while ((server_clock::now() - m_lastUpdate) < m_timeout)
+    while ((timer::now() - m_lastUpdate) < m_timeout)
     {
         m_stopCondition.wait_for(lock, m_timeout);
     }

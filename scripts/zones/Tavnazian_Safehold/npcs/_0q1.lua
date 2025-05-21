@@ -6,16 +6,10 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LOST_CITY) then
         player:startEvent(502)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

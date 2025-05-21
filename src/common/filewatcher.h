@@ -31,7 +31,7 @@
 #include <concurrentqueue.h>
 #include <efsw/efsw.hpp>
 
-class Filewatcher : public efsw::FileWatchListener
+class Filewatcher final : public efsw::FileWatchListener
 {
 public:
     Filewatcher(std::vector<std::string> const& paths);
@@ -50,7 +50,7 @@ public:
         Moved    = 4,
     };
 
-    auto getChangedLuaFiles() -> std::vector<std::pair<std::filesystem::path, Action>>;
+    auto popChangedLuaFilesList() -> std::vector<std::pair<std::filesystem::path, Action>>;
 
 private:
     std::unique_ptr<efsw::FileWatcher> fileWatcherImpl;

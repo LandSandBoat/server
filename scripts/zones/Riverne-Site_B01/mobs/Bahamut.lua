@@ -1,21 +1,46 @@
 -----------------------------------
 -- Area: Riverne - Site B01 (BCNM)
---   NM: Bahamut
+-- NM: Bahamut
+-- !pos -612.800 1.750 693.190 29
 -----------------------------------
 local ID = zones[xi.zone.RIVERNE_SITE_B01]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
-end
-
 entity.onMobSpawn = function(mob)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.PARALYZE)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 20)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 20)
+    -- should cast a spell every ~30 seconds
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 50)
+    -- base damage scaled down from Bahamut v2 (wyrmking decends) value based on level difference
+    -- base damage of 136 = (lvl 83 + 2) + 51
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 51)
+    -- Note baha has a job trait with fast cast of 15% so 75% total
+    mob:setMod(xi.mod.UFASTCAST, 60)
+    -- ATT scaled down from Bahamut v2 (wyrmking decends) value based on level difference
+    mob:setMod(xi.mod.ATT, 425)
+    -- should use mob skill every ~60 sec (without TP feed)
+    mob:addMod(xi.mod.REGAIN, 50)
+    mob:addMod(xi.mod.REGEN, 50)
+    -- MDEF bonus scaled down from Bahamut v2 (wyrmking decends) value based on level difference
+    mob:setMod(xi.mod.MDEF, 55)
     mob:addStatusEffect(xi.effect.PHALANX, 35, 0, 180)
     mob:addStatusEffect(xi.effect.STONESKIN, 350, 0, 300)
     mob:addStatusEffect(xi.effect.PROTECT, 175, 0, 1800)
     mob:addStatusEffect(xi.effect.SHELL, 24, 0, 1800)
+    -- set these here to make sure no issues if previously killed during a flare mobskill
+    mob:setMobAbilityEnabled(true)
+    mob:setMagicCastingEnabled(true)
+    mob:setAutoAttackEnabled(true)
 end
 
 local megaflareHPP =
@@ -40,7 +65,7 @@ entity.onMobFight = function(mob, target)
         act == xi.act.MOBABILITY_FINISH or
         act == xi.act.MAGIC_START or
         act == xi.act.MAGIC_CASTING or
-        act == xi.act.MAGIC_START
+        act == xi.act.MAGIC_FINISH
     then
         isBusy = true -- is set to true if Bahamut is in any stage of using a mobskill or casting a spell
     end

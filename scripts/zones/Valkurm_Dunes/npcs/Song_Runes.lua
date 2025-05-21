@@ -9,9 +9,6 @@ local ID = zones[xi.zone.VALKURM_DUNES]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     -- PATH OF THE BARD (Bard Flag)
     if
@@ -24,9 +21,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.SONG_RUNES_DEFAULT)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

@@ -13,6 +13,9 @@ xi.pets.automaton.onMobSpawn = function(mob)
             automaton:setLocalVar('MANEUVER_DURATION', math.min(dur + 3, 300))
         end
     end)
+
+    -- Barrage Turbine cannot be used unless the automaton has been active for at least 3 minutes.
+    mob:addRecast(xi.recast.ABILITY, xi.automaton.abilities.BARRAGE_TURBINE, 60 * 3)
 end
 
 xi.pets.automaton.onMobDeath = function(mob)

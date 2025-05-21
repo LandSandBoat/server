@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include <cstring>
 
 #include "char_spells.h"
@@ -32,5 +30,5 @@ CCharSpellsPacket::CCharSpellsPacket(CCharEntity* PChar)
     this->setType(0xAA);
     this->setSize(0x84);
 
-    ref<std::bitset<1024>>(0x04) = PChar->m_SpellList;
+    ref<xi::bitset<1024>>(0x04) = PChar->m_SpellList;
 }

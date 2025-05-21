@@ -8,9 +8,6 @@ local ID = zones[xi.zone.HALVUNG]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if player:hasKeyItem(xi.ki.BRACELET_OF_VERVE) then
         GetNPCByID(ID.npc.LEVER_EF_DOOR):openDoor(30)
@@ -18,12 +15,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(100)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity
