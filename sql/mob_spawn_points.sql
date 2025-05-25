@@ -6178,7 +6178,7 @@ INSERT INTO `mob_spawn_points` VALUES (16900312,'Water_Elemental','Water Element
 INSERT INTO `mob_spawn_points` VALUES (16900313,'Earth_Elemental','Earth Elemental',16,-0.28,76.34,-737.49,41);
 
 -- Ouryu Cometh
-INSERT INTO `mob_spawn_points` VALUES (16900314,'Ouryu','Ouryu',17,18.67,76.18,-740.65,224);
+INSERT INTO `mob_spawn_points` VALUES (16900314,'Ouryu_Ouryu_Cometh','Ouryu',17,18.67,76.18,-740.65,224);
 INSERT INTO `mob_spawn_points` VALUES (16900315,'Ziryu','Ziryu',18,-8.300,75.828,-757.276,100);
 INSERT INTO `mob_spawn_points` VALUES (16900316,'Ziryu','Ziryu',18,0.680,76.098,-728.375,143);
 INSERT INTO `mob_spawn_points` VALUES (16900317,'Ziryu','Ziryu',18,20.744,76.462,-756.730,229);
@@ -6203,9 +6203,9 @@ INSERT INTO `mob_spawn_points` VALUES (16904200,'Mammet-19_Epsilon','Mammet-19 E
 INSERT INTO `mob_spawn_points` VALUES (16904201,'Mammet-19_Epsilon','Mammet-19 Epsilon',1,600.000,-77.800,0.000,253);
 
 -- The Savage
-INSERT INTO `mob_spawn_points` VALUES (16904202,'Ouryu','Ouryu',2,-605.000,81.699,1.000,1);
-INSERT INTO `mob_spawn_points` VALUES (16904203,'Ouryu','Ouryu',2,-1.411,1.534,0.574,1);
-INSERT INTO `mob_spawn_points` VALUES (16904204,'Ouryu','Ouryu',2,595.750,-78.254,1.430,1);
+INSERT INTO `mob_spawn_points` VALUES (16904202,'Ouryu_The_Savage','Ouryu',2,-605.000,81.699,1.000,1);
+INSERT INTO `mob_spawn_points` VALUES (16904203,'Ouryu_The_Savage','Ouryu',2,-1.411,1.534,0.574,1);
+INSERT INTO `mob_spawn_points` VALUES (16904204,'Ouryu_The_Savage','Ouryu',2,595.750,-78.254,1.430,1);
 
 -- Bad Seed
 INSERT INTO `mob_spawn_points` VALUES (16904205,'Hamadryad','Hamadryad',3,-599.141,81.699,-8.370,189);

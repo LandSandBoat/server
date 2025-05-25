@@ -39,9 +39,9 @@ content.groups =
     {
         mobIds =
         {
-            { monarchLinnID.mob.OURYU     },
-            { monarchLinnID.mob.OURYU + 1 },
-            { monarchLinnID.mob.OURYU + 2 },
+            { monarchLinnID.mob.OURYU_THE_SAVAGE     },
+            { monarchLinnID.mob.OURYU_THE_SAVAGE + 1 },
+            { monarchLinnID.mob.OURYU_THE_SAVAGE + 2 },
         },
 
         allDeath = function(battlefield, mob)

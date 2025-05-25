@@ -30,7 +30,7 @@ zones[xi.zone.MONARCH_LINN] =
     mob =
     {
         MAMMET_19_EPSILON = GetFirstID('Mammet-19_Epsilon'),
-        OURYU             = GetFirstID('Ouryu'),
+        OURYU_THE_SAVAGE  = GetFirstID('Ouryu_The_Savage'),
         RAZON             = GetFirstID('Razon'),
     },
     npc =

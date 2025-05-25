@@ -2,6 +2,8 @@
 -- Area: Uleguerand Range
 --  Mob: Jormungand
 -----------------------------------
+mixins = { require('scripts/mixins/families/flying_wyrm') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -59,15 +61,16 @@ local spawnPoints =
     { x = -204.299, y = -176.740, z = 133.447 },
 }
 
-local function enterFlight(mob)
-    mob:setAnimationSub(1)
-    mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-    mob:setMobSkillAttack(732)
-    mob:setLocalVar('flightTime', os.time() + 30)
-    mob:setLocalVar('changeHP', mob:getHP() - 6000)
-end
-
 entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.PARALYZE)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.PLAGUE)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.TERROR)
+
     mob:setCarefulPathing(true)
 
     xi.mob.updateNMSpawnPoint(mob, spawnPoints)
@@ -75,12 +78,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    -- Ensure Jorm spawns with correct ground status
-    mob:setAnimationSub(0)
-    mob:setMobSkillAttack(0)
-    mob:delStatusEffect(xi.effect.ALL_MISS)
-    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-
     mob:setMod(xi.mod.ATT, 348)
     mob:setMod(xi.mod.ACC, 442)
     mob:setMod(xi.mod.CURSE_MEVA, 1000) -- TODO: Needs curse immunity verification
@@ -99,14 +96,6 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 5)
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 158) -- 255 total weapon damage
     mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
-    mob:addImmunity(xi.immunity.BIND)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
-    mob:addImmunity(xi.immunity.PARALYZE)
-    mob:addImmunity(xi.immunity.SILENCE)
-    mob:addImmunity(xi.immunity.PETRIFY)
-    mob:addImmunity(xi.immunity.PLAGUE)
-    mob:addImmunity(xi.immunity.GRAVITY)
-    mob:addImmunity(xi.immunity.TERROR)
 end
 
 entity.onMobRoam = function(mob)
@@ -114,62 +103,19 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    local flightTime = mob:getLocalVar('flightTime')
-
-    -- Set flight time to two min if fresh spawn
-    if flightTime == 0 then
-        mob:setLocalVar('flightTime', os.time() + 30)
-    -- Otherwise, set how many seconds left to fly from last pull
-    else
-        mob:setLocalVar('flightTime', os.time() + flightTime)
-    end
-
     mob:setLocalVar('twohourTime', os.time() + 210)
-    mob:setLocalVar('changeHP', mob:getHP() - 6000)
 end
 
 entity.onMobFight = function(mob, target)
-    -- Animation (Ground or flight mode) logic.
+    -- 2-Hour logic.
     if
+        mob:getAnimationSub() ~= 1 and -- Disallow 2-houring while flying.
         not mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and
-        mob:actionQueueEmpty()
+        mob:actionQueueEmpty() and
+        os.time() > mob:getLocalVar('twohourTime')
     then
-        local flightTime  = mob:getLocalVar('flightTime')
-        local twohourTime = mob:getLocalVar('twohourTime')
-        local changeHP    = mob:getLocalVar('changeHP')
-        local animation   = mob:getAnimationSub()
-
-        -- Initial grounded mode.
-        if
-            animation == 0 and
-            (os.time() > flightTime and mob:getHP() < changeHP)
-        then
-            enterFlight(mob)
-
-        -- Flight mode.
-        elseif
-            animation == 1 and
-            (os.time() > flightTime and mob:getHP() < changeHP) and
-            mob:checkDistance(target) <= 6 -- This 2 checks are a hack until we can handle skills targeting a position and not an entity.
-        then
-            mob:useMobAbility(1292) -- Touchdown: This ability also handles animation change to 2.
-            mob:setLocalVar('flightTime', os.time() + 60)
-            mob:setLocalVar('changeHP', mob:getHP() - 6000)
-
-        -- Subsequent grounded mode.
-        elseif animation == 2 then
-             -- 2-Hour logic.
-            if os.time() > twohourTime then
-                mob:useMobAbility(695) -- Blood Weapon
-                mob:setLocalVar('twohourTime', os.time() + 300)
-
-            elseif
-                os.time() > flightTime or
-                mob:getHP() < changeHP
-            then
-                enterFlight(mob)
-            end
-        end
+        mob:useMobAbility(695) -- Blood Weapon
+        mob:setLocalVar('twohourTime', os.time() + 300)
     end
 
     -- Jorm draws in from set boundaries leaving her spawn area
@@ -204,22 +150,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
-    if mob:getAnimationSub() == 1 then
-        mob:setLocalVar('skill_tp', mob:getTP())
-    end
-end
-
 entity.onMobWeaponSkill = function(target, mob, skill)
-    -- Don't lose TP from autos during flight
-    if skill:getID() == 1288 then
-        mob:addTP(64) -- Needs to gain TP from flight auto attacks
-        mob:setLocalVar('skill_tp', 0)
-    elseif skill:getID() == 1292 then -- Don't lose TP from Touchdown
-        mob:addTP(mob:getLocalVar('skill_tp'))
-        mob:setLocalVar('skill_tp', 0)
-    end
-
     -- Below 25% Jorm can Horrid Roar 3x
     local roarCount = mob:getLocalVar('roarCount')
 
@@ -244,19 +175,6 @@ end
 
 entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENBLIZZARD, { chance = 20, power = 100 })
-end
-
-entity.onMobDisengage = function(mob)
-    -- Reset Jorm back to the ground on wipe
-    if mob:getAnimationSub() == 1 then
-        local flightTime = mob:getLocalVar('flightTime')
-        mob:setLocalVar('flightTime', flightTime - os.time()) -- Get seconds left to fly for next pull
-        mob:setAnimationSub(0)
-        mob:delStatusEffect(xi.effect.ALL_MISS)
-        mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
-        mob:setMobSkillAttack(0)
-        mob:setLocalVar('changeHP', 0)
-    end
 end
 
 entity.onMobDeath = function(mob, player, optParams)

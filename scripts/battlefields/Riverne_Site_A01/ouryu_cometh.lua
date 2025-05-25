@@ -40,7 +40,7 @@ end
 content.groups =
 {
     {
-        mobs           = { 'Ouryu' },
+        mobs           = { 'Ouryu_Ouryu_Cometh' },
         superlinkGroup = 1,
 
         -- This death handler needs to be defined locally since there is no armoury crate.
