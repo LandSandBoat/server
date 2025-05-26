@@ -54,6 +54,7 @@ public:
     auto   getTargets() -> sol::table;
     uint16 getTotalTargets();
     uint32 getPrimaryTargetID();
+    void   setKnockBack(uint8 knockback);
 
     bool operator==(const CLuaMobSkill& other) const
     {

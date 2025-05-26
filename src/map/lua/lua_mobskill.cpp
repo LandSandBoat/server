@@ -124,6 +124,11 @@ uint8 CLuaMobSkill::getMobHPP()
     return m_PLuaMobSkill->getHPP();
 }
 
+void CLuaMobSkill::setKnockBack(uint8 knockback)
+{
+    m_PLuaMobSkill->setKnockback(knockback);
+}
+
 //======================================================//
 
 void CLuaMobSkill::Register()
@@ -142,6 +147,7 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("getPrimaryTargetID", CLuaMobSkill::getPrimaryTargetID);
     SOL_REGISTER("getTP", CLuaMobSkill::getTP);
     SOL_REGISTER("getMobHPP", CLuaMobSkill::getMobHPP);
+    SOL_REGISTER("setKnockBack", CLuaMobSkill::setKnockBack);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaMobSkill& mobskill)
