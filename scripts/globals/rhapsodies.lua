@@ -1,4 +1,9 @@
 -----------------------------------
+-- Rhapsodies of Vana'diel helpers
+--
+-- Lockout Table:
+-- http://forum.square-enix.com/ffxi/threads/47983-What-should-I-do-if-I-can%E2%80%99t-progress-in-Rhapsodies-of-Vana%E2%80%99diel
+-----------------------------------
 require('scripts/globals/missions')
 -----------------------------------
 xi = xi or {}
@@ -375,17 +380,66 @@ xi.rhapsodies.requiredCharacters =
     },
 }
 
+xi.rhapsodies.lockoutExceptions =
+{
+    [xi.rhapsodies.character.PRISHE] =
+    {
+        -- TODO: The Three Forks, Prishe will temporarily become available by progressing from Where Messengers Gather to Head Wind.
+        -- TODO: In Darkness Named, Prishe will become temporarily available after vanquishing Diabolos.
+        -- TODO: In Slanderous Utterings, Prishe will become unavailable after departing from Tavnazia by ship.
+        -- TODO: In More Questions than Answers, Prishe becomes available after reuniting with her.
+
+        -- In Dawn, Prishe is unavailable until viewing the cutscene for The Chains Fall Free in Lufaise Meadows.
+        [xi.mission.id.cop.DAWN] = function(player)
+            -- This title is given when the player has completed the mission step "The Chains Fall Free" in Lufaise Meadows,
+            -- it's easier to check for this than the mission char vars.
+            return player:hasTitle(xi.title.BANISHER_OF_EMPTINESS)
+        end,
+    },
+    [xi.rhapsodies.character.TENZEN] =
+    {
+        -- In Dawn, Tenzen is unavailable until viewing the cutscene for The Chains Fall Free in Lufaise Meadows.
+        [xi.mission.id.cop.DAWN] = function(player)
+            -- This title is given when the player has completed the mission step "The Chains Fall Free" in Lufaise Meadows,
+            -- it's easier to check for this than the mission char vars.
+            return player:hasTitle(xi.title.BANISHER_OF_EMPTINESS)
+        end,
+    },
+    [xi.rhapsodies.character.APHMAU] =
+    {
+        -- No exceptions
+    },
+    [xi.rhapsodies.character.LILLISETTE] =
+    {
+        -- TODO: Lilisette will become available once the player has accepted the quest A Forbidden Reunion and reunited with her.
+    },
+    [xi.rhapsodies.character.CAIT_SITH] =
+    {
+        -- TODO: Cait Sith will become available once the player has accepted the quest Champion of the Dawn.
+    },
+    [xi.rhapsodies.character.ARCIELA] =
+    {
+        -- In The Light Within, Arciela will not be available between the time when you view the epilogue in Ceizak Battlegrounds until you speak with Ploh Trishbahk in front of the Castle Adoulin gates in Eastern Adoulin.
+        [xi.mission.id.soa.THE_LIGHT_WITHIN] = function(player)
+            local status         = xi.mission.getVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHT_WITHIN, 'Status')
+            local startOfMission = status == 1
+            local endOfMission   = status == 0
+            return startOfMission or endOfMission
+        end,
+    },
+}
+
 -----------------------------------
 -- PUBLIC FUNCTIONS
 -----------------------------------
--- Lockout Table:
--- http://forum.square-enix.com/ffxi/threads/47983-What-should-I-do-if-I-can%E2%80%99t-progress-in-Rhapsodies-of-Vana%E2%80%99diel
 
 xi.rhapsodies.charactersAvailable = function(player)
     local rovMission = player:getCurrentMission(xi.mission.log_id.ROV)
-    for _, char in pairs(xi.rhapsodies.requiredCharacters[rovMission]) do
-        local expansionMission = player:getCurrentMission(xi.rhapsodies.expansion[char])
-        if xi.rhapsodies.unavailability[char][expansionMission] then
+    for _, requiredCharacter in pairs(xi.rhapsodies.requiredCharacters[rovMission]) do
+        local expansionMission = player:getCurrentMission(xi.rhapsodies.expansion[requiredCharacter])
+        local isUnavailable    = xi.rhapsodies.unavailability[requiredCharacter][expansionMission]
+        local hasException     = xi.rhapsodies.lockoutExceptions[requiredCharacter][expansionMission](player)
+        if isUnavailable and not hasException then
             return false
         end
     end
