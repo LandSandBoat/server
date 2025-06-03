@@ -50,6 +50,8 @@
 #include "monstrosity.h"
 #include "notoriety_container.h"
 #include "packet_system.h"
+
+#include "items.h"
 #include "party.h"
 #include "recast_container.h"
 #include "roe.h"
@@ -1263,8 +1265,7 @@ void SmallPacket0x028(MapSession* const PSession, CCharEntity* const PChar, CBas
     }
 
     // Linkshells (other than Linkpearls and Pearlsacks) and temporary items cannot be stored in the Recycle Bin.
-    // TODO: Are there any special messages here?
-    if (!settings::get<bool>("map.ENABLE_ITEM_RECYCLE_BIN") || PItem->isType(ITEM_LINKSHELL) || container == CONTAINER_ID::LOC_TEMPITEMS)
+    if (!settings::get<bool>("map.ENABLE_ITEM_RECYCLE_BIN") || ItemID == ITEMID::LINKSHELL || container == CONTAINER_ID::LOC_TEMPITEMS)
     {
         charutils::DropItem(PChar, container, slotID, quantity, ItemID);
         return;
@@ -3635,10 +3636,10 @@ void SmallPacket0x071(MapSession* const PSession, CCharEntity* const PChar, CBas
             if (PChar->PLinkshell1 && PItemLinkshell)
             {
                 message::send(ipc::LinkshellRemove{
-                    .changerId     = PChar->id,
+                    .requesterId   = PChar->id,
+                    .requesterRank = PItemLinkshell->GetLSType(),
                     .victimName    = victimName,
                     .linkshellId   = PChar->PLinkshell1->getID(),
-                    .linkshellType = PItemLinkshell->GetLSType(),
                 });
             }
         }
@@ -3650,10 +3651,10 @@ void SmallPacket0x071(MapSession* const PSession, CCharEntity* const PChar, CBas
             if (PChar->PLinkshell2 && PItemLinkshell)
             {
                 message::send(ipc::LinkshellRemove{
-                    .changerId     = PChar->id,
+                    .requesterId   = PChar->id,
+                    .requesterRank = PItemLinkshell->GetLSType(),
                     .victimName    = victimName,
                     .linkshellId   = PChar->PLinkshell2->getID(),
-                    .linkshellType = PItemLinkshell->GetLSType(),
                 });
             }
         }
@@ -3898,26 +3899,30 @@ void SmallPacket0x077(MapSession* const PSession, CCharEntity* const PChar, CBas
         break;
         case 1: // linkshell
         {
-            if (PChar->PLinkshell1 != nullptr)
+            CItemLinkshell* PItemLinkshell = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
+            if (PChar->PLinkshell1 && PItemLinkshell)
             {
                 message::send(ipc::LinkshellRankChange{
-                    .changerId   = PChar->id,
-                    .memberName  = memberName,
-                    .linkshellId = PChar->PLinkshell1->getID(),
-                    .permission  = permission,
+                    .requesterId   = PChar->id,
+                    .requesterRank = PItemLinkshell->GetLSType(),
+                    .memberName    = memberName,
+                    .linkshellId   = PChar->PLinkshell1->getID(),
+                    .newRank       = permission,
                 });
             }
         }
         break;
         case 2: // linkshell2
         {
-            if (PChar->PLinkshell2 != nullptr)
+            CItemLinkshell* PItemLinkshell = (CItemLinkshell*)PChar->getEquip(SLOT_LINK2);
+            if (PChar->PLinkshell2 && PItemLinkshell)
             {
                 message::send(ipc::LinkshellRankChange{
-                    .changerId   = PChar->id,
-                    .memberName  = memberName,
-                    .linkshellId = PChar->PLinkshell2->getID(),
-                    .permission  = permission,
+                    .requesterId   = PChar->id,
+                    .requesterRank = PItemLinkshell->GetLSType(),
+                    .memberName    = memberName,
+                    .linkshellId   = PChar->PLinkshell2->getID(),
+                    .newRank       = permission,
                 });
             }
         }
@@ -5054,7 +5059,7 @@ void SmallPacket0x0C3(MapSession* const PSession, CCharEntity* const PChar, CBas
     if (PItemLinkshell != nullptr && PItemLinkshell->isType(ITEM_LINKSHELL) &&
         (PItemLinkshell->GetLSType() == LSTYPE_PEARLSACK || PItemLinkshell->GetLSType() == LSTYPE_LINKSHELL))
     {
-        CItemLinkshell* PItemLinkPearl = (CItemLinkshell*)itemutils::GetItem(515);
+        CItemLinkshell* PItemLinkPearl = (CItemLinkshell*)itemutils::GetItem(ITEMID::LINKPEARL);
         if (PItemLinkPearl)
         {
             PItemLinkPearl->setQuantity(1);
@@ -5085,7 +5090,7 @@ void SmallPacket0x0C4(MapSession* const PSession, CCharEntity* const PChar, CBas
     if (PItemLinkshell != nullptr && PItemLinkshell->isType(ITEM_LINKSHELL))
     {
         // Create new linkshell
-        if (PItemLinkshell->getID() == 512)
+        if (PItemLinkshell->getID() == ITEMID::NEW_LINKSHELL)
         {
             uint32 LinkshellID    = 0;
             uint16 LinkshellColor = data.ref<uint16>(0x04);
@@ -5107,7 +5112,7 @@ void SmallPacket0x0C4(MapSession* const PSession, CCharEntity* const PChar, CBas
             if (LinkshellID != 0)
             {
                 destroy(PItemLinkshell);
-                PItemLinkshell = (CItemLinkshell*)itemutils::GetItem(513);
+                PItemLinkshell = (CItemLinkshell*)itemutils::GetItem(ITEMID::LINKSHELL);
                 if (PItemLinkshell == nullptr)
                 {
                     return;

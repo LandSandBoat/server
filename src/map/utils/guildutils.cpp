@@ -52,15 +52,15 @@ namespace guildutils
 {
     void Initialize()
     {
-        const char* fmtQuery = "SELECT DISTINCT id, points_name FROM guilds ORDER BY id ASC";
-        if (_sql->Query(fmtQuery) != SQL_ERROR && _sql->NumRows() != 0)
+        auto rset = db::preparedStmt("SELECT DISTINCT id, points_name FROM guilds ORDER BY id ASC");
+        if (rset)
         {
-            g_PGuildList.reserve((unsigned int)_sql->NumRows());
+            g_PGuildList.reserve(rset->rowsCount());
+        }
 
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                g_PGuildList.emplace_back(new CGuild(_sql->GetIntData(0), _sql->GetStringData(1)));
-            }
+        FOR_DB_MULTIPLE_RESULTS(rset)
+        {
+            g_PGuildList.emplace_back(new CGuild(rset->get<uint8>("id"), rset->get<std::string>("points_name")));
         }
 
         if (g_PGuildShopList.size() != 0)
@@ -69,46 +69,46 @@ namespace guildutils
             return;
         }
 
-        fmtQuery = "SELECT DISTINCT guildid FROM guild_shops ORDER BY guildid ASC LIMIT 256";
-
-        if (_sql->Query(fmtQuery) != SQL_ERROR && _sql->NumRows() != 0)
+        rset = db::preparedStmt("SELECT DISTINCT guildid FROM guild_shops ORDER BY guildid ASC LIMIT 256");
+        if (rset)
         {
-            g_PGuildShopList.reserve((unsigned int)_sql->NumRows());
-
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                g_PGuildShopList.emplace_back(new CItemContainer(_sql->GetIntData(0)));
-            }
+            g_PGuildShopList.reserve(rset->rowsCount());
         }
+
+        FOR_DB_MULTIPLE_RESULTS(rset)
+        {
+            g_PGuildShopList.emplace_back(new CItemContainer(rset->get<uint16>("guildid")));
+        }
+
         for (auto* PGuildShop : g_PGuildShopList)
         {
-            fmtQuery = "SELECT itemid, min_price, max_price, max_quantity, daily_increase, initial_quantity \
-                    FROM guild_shops \
-                    WHERE guildid = %u \
-                    LIMIT %u";
-
-            int32 ret = _sql->Query(fmtQuery, PGuildShop->GetID(), MAX_CONTAINER_SIZE);
-
-            if (ret != SQL_ERROR && _sql->NumRows() != 0)
+            rset = db::preparedStmt("SELECT gs.itemid, gs.min_price, gs.max_price, gs.max_quantity, gs.daily_increase, gs.initial_quantity, ib.flags "
+                                    "FROM guild_shops gs "
+                                    "JOIN item_basic ib ON gs.itemid = ib.itemid "
+                                    "WHERE gs.guildid = ? "
+                                    "LIMIT ?",
+                                    PGuildShop->GetID(), MAX_CONTAINER_SIZE);
+            if (rset)
             {
-                PGuildShop->SetSize((uint8)_sql->NumRows());
+                PGuildShop->SetSize(static_cast<uint8>(rset->rowsCount()));
+            }
 
-                while (_sql->NextRow() == SQL_SUCCESS)
-                {
-                    CItemShop* PItem = new CItemShop(_sql->GetIntData(0));
+            FOR_DB_MULTIPLE_RESULTS(rset)
+            {
+                CItemShop* PItem = new CItemShop(rset->get<uint32>("itemid"));
 
-                    PItem->setMinPrice(_sql->GetIntData(1));
-                    PItem->setMaxPrice(_sql->GetIntData(2));
-                    PItem->setStackSize(_sql->GetIntData(3));
-                    PItem->setDailyIncrease(_sql->GetIntData(4));
-                    PItem->setInitialQuantity(_sql->GetIntData(5));
+                PItem->setMinPrice(rset->get<uint32>("min_price"));
+                PItem->setMaxPrice(rset->get<uint32>("max_price"));
+                PItem->setStackSize(rset->get<uint32>("max_quantity"));
+                PItem->setDailyIncrease(rset->get<uint16>("daily_increase"));
+                PItem->setInitialQuantity(rset->get<uint16>("initial_quantity"));
+                PItem->setFlag(rset->get<uint16>("flags"));
 
-                    PItem->setQuantity(PItem->IsDailyIncrease() ? PItem->getInitialQuantity() : 0);
-                    PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *
-                                                                            (PItem->getMaxPrice() - PItem->getMinPrice())));
+                PItem->setQuantity(PItem->IsDailyIncrease() ? PItem->getInitialQuantity() : 0);
+                PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *
+                                                                        (PItem->getMaxPrice() - PItem->getMinPrice())));
 
-                    PGuildShop->InsertItem(PItem);
-                }
+                PGuildShop->InsertItem(PItem);
             }
         }
 

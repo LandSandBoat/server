@@ -26,6 +26,10 @@
 
 enum ITEMID : uint16
 {
+    NEW_LINKSHELL       = 512,
+    LINKSHELL           = 513,
+    PEARLSACK           = 514,
+    LINKPEARL           = 515,
     BEASTMENS_SEAL      = 1126,
     KINDREDS_SEAL       = 1127,
     UCHITAKE            = 1161,

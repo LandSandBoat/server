@@ -37,6 +37,8 @@
 #include "item_container.h"
 #include "items/item_linkshell.h"
 #include "linkshell.h"
+
+#include "items.h"
 #include "map_server.h"
 #include "packets/linkshell_message.h"
 #include "utils/charutils.h"
@@ -157,13 +159,25 @@ bool CLinkshell::DelMember(CCharEntity* PChar)
 }
 
 // Promotes or demotes the target member (pearlsack/linkpearl)
-void CLinkshell::ChangeMemberRank(const std::string& MemberName, uint8 toSack)
+void CLinkshell::ChangeMemberRank(const std::string& MemberName, const uint8 requesterRank, const uint8 newRank)
 {
-    // topearl = 3
-    // tosack = 2
-    int newId = 512 + toSack;
+    // 2 = Pearl to sack
+    // 3 = Sack to pearl
+    if (newRank < 2 || newRank > 3)
+    {
+        ShowErrorFmt("CLinkshell::ChangeMemberRank: Invalid rank change request for member '{}' in linkshell {}.", MemberName, m_id);
+        return;
+    }
 
-    if (newId == 514 || newId == 515)
+    if (requesterRank != LSTYPE_LINKSHELL)
+    {
+        ShowErrorFmt("CLinkshell::ChangeMemberRank: Invalid rank change request for member '{}' in linkshell {}.", MemberName, m_id);
+        return;
+    }
+
+    const int newId = (ITEMID::LINKSHELL + newRank) - 1;
+
+    if (newId == ITEMID::PEARLSACK || newId == ITEMID::LINKPEARL)
     {
         for (auto& member : members)
         {
@@ -190,7 +204,7 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, uint8 toSack)
                     }
                     newShellItem->setQuantity(1);
                     std::memcpy(newShellItem->m_extra, PItemLinkshell->m_extra, 24);
-                    newShellItem->SetLSType(newId == 514 ? LSTYPE_PEARLSACK : LSTYPE_LINKPEARL);
+                    newShellItem->SetLSType(newId == ITEMID::PEARLSACK ? LSTYPE_PEARLSACK : LSTYPE_LINKPEARL);
                     newShellItem->setSubType(ITEM_LOCKED);
                     uint8 LocationID = PItemLinkshell->getLocationID();
                     uint8 SlotID     = PItemLinkshell->getSlotID();
@@ -229,7 +243,7 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, uint8 toSack)
 
 // Remove a character from Linkshell by name.
 // Breaks all pearls/sacks if, kicked by shell holder, otherwise equipped pearl only.
-void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 kickerRank, bool breakLinkshell)
+void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 requesterRank, bool breakLinkshell)
 {
     uint32 lsid = m_id;
     for (auto& member : members)
@@ -273,7 +287,7 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 kickerR
                     CItemLinkshell* newPItemLinkshell = (CItemLinkshell*)Inventory->GetItem(SlotID);
                     if (newPItemLinkshell != nullptr && newPItemLinkshell->isType(ITEM_LINKSHELL) && newPItemLinkshell->GetLSID() == lsid)
                     {
-                        if (kickerRank == LSTYPE_LINKSHELL || newPItemLinkshell == PItemLinkshell)
+                        if (requesterRank == LSTYPE_LINKSHELL || newPItemLinkshell == PItemLinkshell)
                         {
                             if (newPItemLinkshell->GetLSType() != LSTYPE_LINKSHELL)
                             {

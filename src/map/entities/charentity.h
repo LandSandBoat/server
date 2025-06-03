@@ -209,10 +209,9 @@ enum CHAR_SUBSTATE
 
 enum CHAR_PERSIST : uint8
 {
-    EQUIP     = 0x01,
-    POSITION  = 0x02,
-    EFFECTS   = 0x04,
-    LINKSHELL = 0x08,
+    EQUIP    = 0x01,
+    POSITION = 0x02,
+    EFFECTS  = 0x04,
 };
 
 class CBasicPacket;

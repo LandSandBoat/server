@@ -52,6 +52,12 @@ CGuildMenuSellPacket::CGuildMenuSellPacket(CCharEntity* PChar, CItemContainer* P
             return;
         }
 
+        if (PItem->getFlag() & ITEM_FLAG_NOSALE)
+        {
+            // Skip items that cannot be sold to NPCs
+            continue;
+        }
+
         if (ItemCount == 30)
         {
             ref<uint8>(0xF4) = ItemCount;

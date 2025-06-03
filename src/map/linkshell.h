@@ -57,8 +57,8 @@ public:
     bool DelMember(CCharEntity* PChar);
 
     void BreakLinkshell();
-    void RemoveMemberByName(const std::string& MemberName, uint8 kickerRank, bool breakLinkshell = false);
-    void ChangeMemberRank(const std::string& MemberName, uint8 toSack);
+    void RemoveMemberByName(const std::string& MemberName, uint8 requesterRank, bool breakLinkshell = false);
+    void ChangeMemberRank(const std::string& MemberName, uint8 requesterRank, uint8 newRank);
 
     void PushPacket(uint32 senderID, const std::unique_ptr<CBasicPacket>& packet);
     void PushLinkshellMessage(CCharEntity* PChar, LinkshellSlot slot);

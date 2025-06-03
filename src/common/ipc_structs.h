@@ -204,18 +204,19 @@ namespace ipc
 
     struct LinkshellRankChange
     {
-        uint32      changerId{};
+        uint32      requesterId{};
+        uint8       requesterRank{};
         std::string memberName{};
         uint32      linkshellId{};
-        uint8       permission{};
+        uint8       newRank{};
     };
 
     struct LinkshellRemove
     {
-        uint32      changerId{};
+        uint32      requesterId{};
+        uint8       requesterRank{};
         std::string victimName{};
         uint32      linkshellId{};
-        uint8       linkshellType{};
     };
 
     struct LinkshellSetMessage
