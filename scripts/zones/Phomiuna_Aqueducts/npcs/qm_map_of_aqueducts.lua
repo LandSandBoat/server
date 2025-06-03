@@ -10,20 +10,11 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if not player:hasKeyItem(xi.ki.MAP_OF_THE_AQUEDUCTS) then
         npcUtil.giveKeyItem(player, xi.ki.MAP_OF_THE_AQUEDUCTS)
         -- TODO: find other three locations, hide QM, respawn 30 minutes later at random location
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

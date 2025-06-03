@@ -53,12 +53,14 @@ xi.job_utils.dark_knight.useArcaneCircle = function(player, target, ability)
     -- Job Points bonus will need to be handled in the Bonus vs Ecosystem handling system
     -- https://www.bg-wiki.com/ffxi/Job_Points#Dark_Knight
     -- Arcane Circle Effect: Reduces the amount of damage taken from arcana while under the effects of Arcane Circle.
-    local duration = 180 * (1 + player:getMod(xi.mod.ARCANE_CIRCLE_DURATION) / 100)
-    local power    = 15 + player:getMod(xi.mod.ARCANE_CIRCLE_POTENCY)
+    local duration = 180 + player:getMod(xi.mod.ARCANE_CIRCLE_DURATION)
+    local power    = 15
 
     if player:getMainJob() ~= xi.job.DRK then
         power = 5
     end
+
+    power = power + player:getMod(xi.mod.ARCANE_CIRCLE_POTENCY)
 
     -- Handle simplified message for other party memebers.
     if player:getID() ~= target:getID() then

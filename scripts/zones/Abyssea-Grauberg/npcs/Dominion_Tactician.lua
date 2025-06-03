@@ -95,9 +95,6 @@ local function giveAugmentedItem(player, itemID, augmentList, maxAugments)
     end
 end
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local dominionNotes = player:getCurrency('dominion_note')
     local trophyMask = 0 -- 5 bits per trophy, cap at 30ea (31 can be displayed, but non-retail), 5th echelon is least sig

@@ -3,34 +3,23 @@
 --  NPC: Rodellieux
 -- Fauregandi Regional Merchant
 -----------------------------------
-local ID = zones[xi.zone.BASTOK_MINES]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if GetRegionOwner(xi.region.FAUREGANDI) ~= xi.nation.BASTOK then
-        player:showText(npc, ID.text.RODELLIEUX_CLOSED_DIALOG)
+        player:showText(npc, zones[xi.zone.BASTOK_MINES].text.RODELLIEUX_CLOSED_DIALOG)
     else
         local stock =
         {
-            4571, 90, -- Beaugreens
-            4363, 39, -- Faerie Apple
-            691,  54, -- Maple Log
+            { xi.item.MAPLE_LOG,            63 },
+            { xi.item.FAERIE_APPLE,         46 },
+            { xi.item.CLUMP_OF_BEAUGREENS, 105 },
         }
 
-        player:showText(npc, ID.text.RODELLIEUX_OPEN_DIALOG)
+        player:showText(npc, zones[xi.zone.BASTOK_MINES].text.RODELLIEUX_OPEN_DIALOG)
         xi.shop.general(player, stock, xi.fameArea.BASTOK)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

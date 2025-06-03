@@ -19,9 +19,12 @@
 ===========================================================================
 */
 
-#include "common/utils.h"
+#include "mobutils.h"
 
-#include <cmath>
+#include "common/database.h"
+#include "common/logging.h"
+#include "common/sql.h"
+#include "common/utils.h"
 
 #include "battlefield.h"
 #include "battleutils.h"
@@ -31,7 +34,6 @@
 #include "mob_modifier.h"
 #include "mob_spell_container.h"
 #include "mob_spell_list.h"
-#include "mobutils.h"
 #include "packets/action.h"
 #include "petutils.h"
 #include "spell.h"
@@ -106,8 +108,16 @@ namespace mobutils
 
     uint16 GetMagicEvasion(CMobEntity* PMob)
     {
-        uint8 mEvaRank = PMob->evaRank;
-        return GetBaseSkill(PMob, mEvaRank);
+        uint8 mlvl = std::min<uint8>(PMob->GetMLevel(), 99);
+
+        // Assume trusts have G rank meva like players
+        if (PMob->objtype == TYPE_TRUST)
+        {
+            return battleutils::GetMaxSkill(12, mlvl);
+        }
+
+        // Mobs have rank C magic evasion
+        return battleutils::GetMaxSkill(7, mlvl);
     }
 
     /************************************************************************
@@ -788,6 +798,11 @@ namespace mobutils
             SetupNMMob(PMob);
         }
 
+        if (zoneType & ZONE_TYPE::INSTANCED)
+        {
+            SetupDungeonInstanceMob(PMob);
+        }
+
         if (PMob->m_Type & MOBTYPE_EVENT)
         {
             SetupEventMob(PMob);
@@ -1155,6 +1170,26 @@ namespace mobutils
         }
     }
 
+    void SetupDungeonInstanceMob(CMobEntity* PMob)
+    {
+        PMob->setMobMod(MOBMOD_GIL_MAX, 0);
+        PMob->setMobMod(MOBMOD_MUG_GIL, 0);
+        PMob->loc.p = PMob->m_SpawnPoint;
+        // never despawn
+        PMob->SetDespawnTime(0s);
+        PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
+        // Salvage and Nyzul
+        if (PMob->getZone() >= ZONE_ZHAYOLM_REMNANTS && PMob->getZone() <= ZONE_NYZUL_ISLE)
+        {
+            // Salvage and Nyzul mobs can not be charmed
+            PMob->setMobMod(MOBMOD_CHARMABLE, 0);
+            if (PMob->getZone() != ZONE_NYZUL_ISLE)
+            {
+                PMob->setMobMod(MOBMOD_CHECK_AS_NM, 1);
+            }
+        }
+    }
+
     void RecalculateSpellContainer(CMobEntity* PMob)
     {
         // clear spell list
@@ -1207,9 +1242,6 @@ namespace mobutils
     void InitializeMob(CMobEntity* PMob)
     {
         // add special mob mods
-
-        PMob->m_Immunity |= PMob->getMobMod(MOBMOD_IMMUNITY);
-
         PMob->defaultMobMod(MOBMOD_SKILL_LIST, PMob->m_MobSkillList);
         PMob->defaultMobMod(MOBMOD_LINK_RADIUS, 10);
         PMob->defaultMobMod(MOBMOD_TP_USE_CHANCE,
@@ -1335,32 +1367,6 @@ namespace mobutils
                 else
                 {
                     poolMods->mods.emplace_back(mod);
-                }
-            }
-        }
-
-        // load spawn mods
-        const char QuerySpawnMods[] = "SELECT mobid, modid, value, is_mob_mod FROM mob_spawn_mods";
-
-        ret = _sql->Query(QuerySpawnMods);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
-        {
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                ModsList_t* spawnMods = GetMobSpawnMods(_sql->GetUIntData(0), true);
-
-                CModifier* mod = new CModifier(static_cast<Mod>(_sql->GetUIntData(1)));
-                mod->setModAmount(_sql->GetUIntData(2));
-
-                int8 isMobMod = _sql->GetIntData(3);
-                if (isMobMod == 1)
-                {
-                    spawnMods->mobMods.emplace_back(mod);
-                }
-                else
-                {
-                    spawnMods->mods.emplace_back(mod);
                 }
             }
         }
@@ -1568,13 +1574,13 @@ namespace mobutils
         {
             if (_sql->NextRow() == SQL_SUCCESS)
             {
-                PMob            = new CMobEntity;
+                PMob            = new CMobEntity();
                 PMob->PInstance = instance;
 
                 PMob->name.insert(0, (const char*)_sql->GetData(1));
                 PMob->packetName.insert(0, (const char*)_sql->GetData(2));
 
-                PMob->m_RespawnTime = _sql->GetUIntData(3) * 1000;
+                PMob->m_RespawnTime = std::chrono::seconds(_sql->GetUIntData(3));
                 PMob->m_SpawnType   = (SPAWNTYPE)_sql->GetUIntData(4);
                 PMob->m_DropID      = _sql->GetUIntData(5);
 
@@ -1605,8 +1611,8 @@ namespace mobutils
                 PMob->m_ModelRadius = (float)_sql->GetIntData(21);
 
                 PMob->baseSpeed      = (uint8)_sql->GetIntData(22); // Overwrites baseentity.cpp's defined baseSpeed
-                PMob->speed          = (uint8)_sql->GetIntData(22); // Overwrites baseentity.cpp's defined speed
                 PMob->animationSpeed = (uint8)_sql->GetIntData(22); // Overwrites baseentity.cpp's defined animationSpeed
+                PMob->UpdateSpeed();
 
                 PMob->strRank = (uint8)_sql->GetIntData(23);
                 PMob->dexRank = (uint8)_sql->GetIntData(24);
@@ -1620,10 +1626,10 @@ namespace mobutils
                 PMob->attRank = (uint8)_sql->GetIntData(32);
                 PMob->accRank = (uint8)_sql->GetIntData(33);
 
-                PMob->setModifier(Mod::SLASH_SDT, (uint16)(_sql->GetFloatData(34) * 1000));
-                PMob->setModifier(Mod::PIERCE_SDT, (uint16)(_sql->GetFloatData(35) * 1000));
-                PMob->setModifier(Mod::HTH_SDT, (uint16)(_sql->GetFloatData(36) * 1000));
-                PMob->setModifier(Mod::IMPACT_SDT, (uint16)(_sql->GetFloatData(37) * 1000));
+                PMob->setModifier(Mod::SLASH_SDT, (int16)_sql->GetIntData(34));
+                PMob->setModifier(Mod::PIERCE_SDT, (int16)_sql->GetIntData(35));
+                PMob->setModifier(Mod::HTH_SDT, (int16)_sql->GetIntData(36));
+                PMob->setModifier(Mod::IMPACT_SDT, (int16)_sql->GetIntData(37));
 
                 PMob->setModifier(Mod::UDMGMAGIC, (int16)_sql->GetIntData(38)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 
@@ -1674,14 +1680,10 @@ namespace mobutils
                 PMob->m_TrueDetection = _sql->GetUIntData(69);
                 PMob->setMobMod(MOBMOD_DETECTION, _sql->GetUIntData(70));
 
-                CZone* newZone = zoneutils::GetZone(zoneID);
-                if (newZone)
+                if (CZone* PZone = zoneutils::GetZone(zoneID))
                 {
-                    // Get dynamic targid
-                    newZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PMob);
-
-                    // Insert ally into zone's mob list. TODO: Do we need to assign party for allies?
-                    newZone->GetZoneEntities()->m_mobList[PMob->targid] = PMob;
+                    PZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PMob);
+                    PZone->GetZoneEntities()->InsertMOB(PMob);
                 }
                 else
                 {
@@ -1736,7 +1738,7 @@ namespace mobutils
                 PMob->name.insert(0, (const char*)_sql->GetData(1));
                 PMob->packetName.insert(0, (const char*)_sql->GetData(2));
 
-                PMob->m_RespawnTime = _sql->GetUIntData(3) * 1000;
+                PMob->m_RespawnTime = std::chrono::seconds(_sql->GetUIntData(3));
                 PMob->m_SpawnType   = (SPAWNTYPE)_sql->GetUIntData(4);
                 PMob->m_DropID      = _sql->GetUIntData(5);
 
@@ -1767,8 +1769,8 @@ namespace mobutils
                 PMob->m_ModelRadius = (float)_sql->GetIntData(21);
 
                 PMob->baseSpeed      = (uint8)_sql->GetIntData(22); // Overwrites baseentity.cpp's defined baseSpeed
-                PMob->speed          = (uint8)_sql->GetIntData(22); // Overwrites baseentity.cpp's defined speed
                 PMob->animationSpeed = (uint8)_sql->GetIntData(22); // Overwrites baseentity.cpp's defined animationSpeed
+                PMob->UpdateSpeed();
 
                 PMob->strRank = (uint8)_sql->GetIntData(23);
                 PMob->dexRank = (uint8)_sql->GetIntData(24);
@@ -1782,10 +1784,10 @@ namespace mobutils
                 PMob->attRank = (uint8)_sql->GetIntData(32);
                 PMob->accRank = (uint8)_sql->GetIntData(33);
 
-                PMob->setModifier(Mod::SLASH_SDT, (uint16)(_sql->GetFloatData(34) * 1000));
-                PMob->setModifier(Mod::PIERCE_SDT, (uint16)(_sql->GetFloatData(35) * 1000));
-                PMob->setModifier(Mod::HTH_SDT, (uint16)(_sql->GetFloatData(36) * 1000));
-                PMob->setModifier(Mod::IMPACT_SDT, (uint16)(_sql->GetFloatData(37) * 1000));
+                PMob->setModifier(Mod::SLASH_SDT, (int16)_sql->GetIntData(34));
+                PMob->setModifier(Mod::PIERCE_SDT, (int16)_sql->GetIntData(35));
+                PMob->setModifier(Mod::HTH_SDT, (int16)_sql->GetIntData(36));
+                PMob->setModifier(Mod::IMPACT_SDT, (int16)_sql->GetIntData(37));
 
                 PMob->setModifier(Mod::UDMGMAGIC, (int16)_sql->GetIntData(38)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 

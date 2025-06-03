@@ -32,7 +32,6 @@
 #include "items/item_weapon.h"
 #include "mob_modifier.h"
 #include "mob_spell_container.h"
-#include "packets/char.h"
 #include "player_controller.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
@@ -84,7 +83,7 @@ void CTrustController::Despawn()
     CMobController::Despawn();
 }
 
-void CTrustController::Tick(time_point tick)
+void CTrustController::Tick(timer::time_point tick)
 {
     TracyZoneScoped;
     TracyZoneString(POwner->getName());
@@ -111,7 +110,7 @@ void CTrustController::Tick(time_point tick)
     }
 }
 
-void CTrustController::DoCombatTick(time_point tick)
+void CTrustController::DoCombatTick(timer::time_point tick)
 {
     TracyZoneScoped;
 
@@ -140,7 +139,7 @@ void CTrustController::DoCombatTick(time_point tick)
 
     if (PTarget)
     {
-        if (POwner->PAI->CanFollowPath() && POwner->speed > 0)
+        if (POwner->PAI->CanFollowPath() && POwner->GetSpeed() > 0)
         {
             float currentDistanceToTarget = distance(POwner->loc.p, PTarget->loc.p);
             float currentDistanceToMaster = distance(POwner->loc.p, PMaster->loc.p);
@@ -171,7 +170,7 @@ void CTrustController::DoCombatTick(time_point tick)
                 case TRUST_MOVEMENT_TYPE::MELEE:
                 {
                     std::unique_ptr<CBasicPacket> err;
-                    if (!POwner->CanAttack(PTarget, err) && POwner->speed > 0)
+                    if (!POwner->CanAttack(PTarget, err) && POwner->GetSpeed() > 0)
                     {
                         if (currentDistanceToTarget > RoamDistance)
                         {
@@ -180,7 +179,7 @@ void CTrustController::DoCombatTick(time_point tick)
                             {
                                 POwner->PAI->PathFind->FollowPath(m_Tick);
                             }
-                            else if (POwner->speed > 0)
+                            else if (POwner->GetSpeed() > 0)
                             {
                                 POwner->PAI->PathFind->StepTo(PTarget->loc.p, true);
                             }
@@ -212,17 +211,17 @@ void CTrustController::DoCombatTick(time_point tick)
 
         m_GambitsContainer->Tick(tick);
 
-        POwner->PAI->EventHandler.triggerListener("COMBAT_TICK", CLuaBaseEntity(POwner), CLuaBaseEntity(POwner->PMaster), CLuaBaseEntity(PTarget));
+        POwner->PAI->EventHandler.triggerListener("COMBAT_TICK", POwner, POwner->PMaster, PTarget);
     }
 }
 
-void CTrustController::DoRoamTick(time_point tick)
+void CTrustController::DoRoamTick(timer::time_point tick)
 {
     TracyZoneScoped;
 
     auto* PMaster              = static_cast<CCharEntity*>(POwner->PMaster);
     auto  masterLastAttackTime = static_cast<CPlayerController*>(PMaster->PAI->GetController())->getLastAttackTime();
-    bool  masterMeleeSwing     = masterLastAttackTime > server_clock::now() - 1s;
+    bool  masterMeleeSwing     = masterLastAttackTime > timer::now() - 1s;
 
     bool trustEngageCondition = false;
     // NOTE: charvars are now cached, this is essentially a localvar read now.
@@ -288,7 +287,7 @@ void CTrustController::DoRoamTick(time_point tick)
         {
             POwner->PAI->PathFind->FollowPath(m_Tick);
         }
-        else if (POwner->speed > 0)
+        else if (POwner->GetSpeed() > 0)
         {
             POwner->PAI->PathFind->StepTo(PFollowTarget->loc.p, true);
         }
@@ -366,7 +365,7 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
         std::vector<position_t> positions(5);
         for (auto& position : positions)
         {
-            int        random_angle       = xirand::GetRandomNumber(255);
+            int        random_angle       = xirand::GetRandomNumber(256);
             position_t potential_position = {
                 PTarget->loc.p.x - (cosf(rotationToRadian(random_angle)) * amount),
                 PTarget->loc.p.y,
@@ -408,7 +407,7 @@ bool CTrustController::Ability(uint16 targid, uint16 abilityid)
 {
     TracyZoneScoped;
 
-    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, abilityid, 0))
+    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, abilityid, 0s))
     {
         return false;
     }
@@ -425,7 +424,7 @@ bool CTrustController::RangedAttack(uint16 targid)
 {
     TracyZoneScoped;
 
-    duration rangedDelay = 10s;
+    timer::duration rangedDelay = 10s;
     if (CItemWeapon* PRange = dynamic_cast<CItemWeapon*>(POwner->m_Weapons[SLOT_RANGED]))
     {
         rangedDelay = std::chrono::milliseconds(PRange->getDelay());

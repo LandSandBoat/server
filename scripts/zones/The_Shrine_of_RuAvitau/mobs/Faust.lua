@@ -39,6 +39,11 @@ local handleFaustFacingDirectionMechanics = function(faust)
     end
 end
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 17986)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 27482)
+end
+
 entity.onMobSpawn = function(mob)
     setFaustNextTurnTime(mob)
     setFaustFacingDirection(mob, north) -- start him facing north (though the database technically already does this, we need to absorb the local dir)

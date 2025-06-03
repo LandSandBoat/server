@@ -1,4 +1,25 @@
-﻿#include "common/zlib.h"
+﻿/*
+===========================================================================
+
+  Copyright (c) 2010-2015 Darkstar Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#include "common/zlib.h"
 
 #include "common/logging.h"
 #include "common/utils.h"
@@ -40,7 +61,7 @@
 #endif
 
 // Resolve the next address in jump table (0 == no jump, 1 == next address)
-#define JMPBIT(table, i) (((table)[(i) / 8] >> ((i)&7)) & 1)
+#define JMPBIT(table, i) (((table)[(i) / 8] >> ((i) & 7)) & 1)
 
 struct zlib_jump
 {
@@ -53,7 +74,7 @@ struct zlib
     std::vector<struct zlib_jump> jump;
 };
 
-static struct zlib zlib;
+static zlib zlib;
 
 static void swap32_if_be(const uint32* v, const size_t memb)
 {

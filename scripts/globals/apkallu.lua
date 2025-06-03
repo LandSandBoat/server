@@ -34,18 +34,16 @@ xi.apkallu.initialize = function(mob)
         mob:setLink(0)
     end
 
-    if hate > 25 then
-        local reduction = hate - 25
-        mob:setMod(xi.mod.DMGPHYS, -reduction)
-        mob:setMod(xi.mod.DMGRANGE, -reduction)
-        mob:setMod(xi.mod.DMGMAGIC, -reduction)
-    end
+    local reduction = utils.clamp((hate - 5) * 100, 0, 9500)
+    mob:setMod(xi.mod.DMGPHYS, -reduction)
+    mob:setMod(xi.mod.DMGRANGE, -reduction)
+    mob:setMod(xi.mod.DMGMAGIC, -reduction)
 end
 
 xi.apkallu.updateHate = function(zoneID, amount)
-    local ID = zones[zoneID]
-    local previousHate = GetServerVariable('ApkalluHate_'..zoneID)
-    local hate = previousHate + amount
+    local ID               = zones[zoneID]
+    local previousHate     = GetServerVariable('ApkalluHate_'..zoneID)
+    local hate             = previousHate + amount
     local shouldCheckTiers = true
     if hate > 100 then
         hate = 100
@@ -67,7 +65,7 @@ xi.apkallu.updateHate = function(zoneID, amount)
     end
 
     local previousTier = xi.apkallu.getHateTier(previousHate)
-    local currentTier = xi.apkallu.getHateTier(hate)
+    local currentTier  = xi.apkallu.getHateTier(hate)
     if currentTier ~= previousTier then
         if amount > 0 then
             if currentTier == 1 then
@@ -104,7 +102,7 @@ xi.apkallu.updateHate = function(zoneID, amount)
         end
     end
 
-    local reduction = math.max(0, hate - 25)
+    local reduction = utils.clamp((hate - 5) * 100, 0, 9500)
     for _, mob in ipairs(apkallus) do
         mob:setMod(xi.mod.DMGPHYS, -reduction)
         mob:setMod(xi.mod.DMGRANGE, -reduction)

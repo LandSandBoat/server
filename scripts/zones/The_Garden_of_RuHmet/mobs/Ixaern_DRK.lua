@@ -14,6 +14,8 @@ local entity = {}
 -- TODO: Resistances need verifying: Light_Sleep, Poison, Requiem, Terror, Dispel, Petrify
 
 entity.onMobInitialize = function(IxAernDrkMob)
+    IxAernDrkMob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+
     IxAernDrkMob:addListener('DEATH', 'AERN_DEATH', function(mob, killer)
         local timesReraised = mob:getLocalVar('AERN_RERAISES')
         if math.random (1, 10) < 10 then

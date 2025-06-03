@@ -38,9 +38,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 196 then
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TO_CATCH_A_FALLING_STAR)

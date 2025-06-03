@@ -28,7 +28,7 @@
 
 #include "alliance.h"
 #include "baseentity.h"
-#include "map.h"
+#include "map_server.h"
 #include "modifier.h"
 #include "party.h"
 #include "trait.h"
@@ -66,11 +66,11 @@ enum class ECOSYSTEM : uint8
     UNCLASSIFIED   = 18,
     UNDEAD         = 19,
     VERMIN         = 20,
-    VORAGEAN       = 21
+    VORAGEAN       = 21,
 };
 DECLARE_FORMAT_AS_UNDERLYING(ECOSYSTEM);
 
-enum JOBTYPE
+enum JOBTYPE : uint8
 {
     JOB_NON = 0,
     JOB_WAR = 1,
@@ -100,7 +100,7 @@ enum JOBTYPE
 #define MAX_JOBTYPE 24
 DECLARE_FORMAT_AS_UNDERLYING(JOBTYPE);
 
-enum SKILLTYPE
+enum SKILLTYPE : uint8
 {
     SKILL_NONE         = 0,
     SKILL_HAND_TO_HAND = 1,
@@ -152,12 +152,12 @@ enum SKILLTYPE
     SKILL_COOKING      = 56,
     SKILL_SYNERGY      = 57,
     SKILL_RID          = 58,
-    SKILL_DIG          = 59
+    SKILL_DIG          = 59,
 };
 #define MAX_SKILLTYPE 64
 DECLARE_FORMAT_AS_UNDERLYING(SKILLTYPE);
 
-enum SUBSKILLTYPE
+enum SUBSKILLTYPE : uint8
 {
     SUBSKILL_XBO      = 0,
     SUBSKILL_GUN      = 1,
@@ -213,11 +213,11 @@ enum SUBSKILLTYPE
     SUBSKILL_RAPHIE     = 65,
     SUBSKILL_MAC        = 66,
     SUBSKILL_SILAS      = 67,
-    SUBSKILL_TOLOI      = 68
+    SUBSKILL_TOLOI      = 68,
 };
 DECLARE_FORMAT_AS_UNDERLYING(SUBSKILLTYPE);
 
-enum SLOTTYPE
+enum SLOTTYPE : uint8
 {
     SLOT_MAIN   = 0x00,
     SLOT_SUB    = 0x01,
@@ -241,14 +241,14 @@ enum SLOTTYPE
 #define MAX_SLOTTYPE 18
 DECLARE_FORMAT_AS_UNDERLYING(SLOTTYPE);
 
-enum class ATTACK_TYPE
+enum class ATTACK_TYPE : uint8
 {
     NONE     = 0,
     PHYSICAL = 1,
     MAGICAL  = 2,
     RANGED   = 3,
     SPECIAL  = 4,
-    BREATH   = 5
+    BREATH   = 5,
 };
 DECLARE_FORMAT_AS_UNDERLYING(ATTACK_TYPE);
 
@@ -267,7 +267,7 @@ enum class DAMAGE_TYPE : uint16
     LIGHTNING = 10,
     WATER     = 11,
     LIGHT     = 12,
-    DARK      = 13
+    DARK      = 13,
 };
 DECLARE_FORMAT_AS_UNDERLYING(DAMAGE_TYPE);
 
@@ -312,18 +312,18 @@ inline REACTION operator|=(REACTION& a, REACTION b)
     return a;
 }
 
-enum class SPECEFFECT
+enum class SPECEFFECT : uint8
 {
     NONE         = 0x00,
     BLOOD        = 0x02,
     HIT          = 0x10,
     RAISE        = 0x11,
     RECOIL       = 0x20,
-    CRITICAL_HIT = 0x22
+    CRITICAL_HIT = 0x22,
 };
 DECLARE_FORMAT_AS_UNDERLYING(SPECEFFECT);
 
-enum class MODIFIER
+enum class MODIFIER : uint8
 {
     NONE        = 0x00,
     COVER       = 0x01,
@@ -333,7 +333,7 @@ enum class MODIFIER
 };
 DECLARE_FORMAT_AS_UNDERLYING(MODIFIER);
 
-enum SUBEFFECT
+enum SUBEFFECT : uint8
 {
     // ATTACK
     SUBEFFECT_FIRE_DAMAGE      = 1,  // 110000     3
@@ -364,6 +364,7 @@ enum SUBEFFECT
     SUBEFFECT_HP_DRAIN         = 21, // 1-10101   43  This is retail correct animation
     SUBEFFECT_MP_DRAIN         = 22, // Verified shared group 3
     SUBEFFECT_TP_DRAIN         = 22, // Verified shared group 3
+    SUBEFFECT_STATUS_DRAIN     = 22, // Verified shared group 3
     SUBEFFECT_HASTE            = 23,
     // There are no additional attack effect animations beyond 23. Some effects share subeffect/animations.
 
@@ -411,24 +412,24 @@ enum SUBEFFECT
 };
 DECLARE_FORMAT_AS_UNDERLYING(SUBEFFECT);
 
-enum TARGETTYPE
+enum TARGETTYPE : uint16
 {
-    TARGET_NONE                    = 0x00,
-    TARGET_SELF                    = 0x01,
-    TARGET_PLAYER_PARTY            = 0x02,
-    TARGET_ENEMY                   = 0x04,
-    TARGET_PLAYER_ALLIANCE         = 0x08,
-    TARGET_PLAYER                  = 0x10,
-    TARGET_PLAYER_DEAD             = 0x20,
-    TARGET_NPC                     = 0x40, // an npc is a mob that looks like an npc and fights on the side of the character
-    TARGET_PLAYER_PARTY_PIANISSIMO = 0x80,
-    TARGET_PET                     = 0x100,
-    TARGET_PLAYER_PARTY_ENTRUST    = 0x200,
-    TARGET_IGNORE_BATTLEID         = 0x400, // Can hit targets that do not have the same battle ID
+    TARGET_NONE                    = 0x0000,
+    TARGET_SELF                    = 0x0001,
+    TARGET_PLAYER_PARTY            = 0x0002,
+    TARGET_ENEMY                   = 0x0004,
+    TARGET_PLAYER_ALLIANCE         = 0x0008,
+    TARGET_PLAYER                  = 0x0010,
+    TARGET_PLAYER_DEAD             = 0x0020,
+    TARGET_NPC                     = 0x0040, // an npc is a mob that looks like an npc and fights on the side of the character
+    TARGET_PLAYER_PARTY_PIANISSIMO = 0x0080,
+    TARGET_PET                     = 0x0100,
+    TARGET_PLAYER_PARTY_ENTRUST    = 0x0200,
+    TARGET_IGNORE_BATTLEID         = 0x0400, // Can hit targets that do not have the same battle ID
 };
 DECLARE_FORMAT_AS_UNDERLYING(TARGETTYPE);
 
-enum SKILLCHAIN_ELEMENT
+enum SKILLCHAIN_ELEMENT : uint8
 {
     SC_NONE = 0, // Lv0 None
 
@@ -564,10 +565,9 @@ public:
     uint16 RATT(uint8 skill, uint16 bonusSkill = 0);
     uint16 RACC(uint8 skill, uint16 bonusSkill = 0);
 
-    uint8 UpdateSpeed(bool run = false);
-
     bool isDead();
     bool isAlive();
+    bool isFullyHealed();
     bool isInAdoulin();
     bool isInAssault();
     bool isInDynamis();
@@ -595,6 +595,7 @@ public:
     uint8 GetMPP() const;
     int32 GetMaxMP() const;
     void  UpdateHealth(); // recalculation of the maximum amount of hp and mp, as well as adjusting their current values
+    uint8 UpdateSpeed(bool run = false) override;
 
     int16  GetWeaponDelay(bool tp);              // returns delay of combined weapons
     float  GetMeleeRange() const;                // returns the distance considered to be within melee range of the entity
@@ -703,6 +704,8 @@ public:
     }
     CBattleEntity* GetBattleTarget();
 
+    bool hasEnmityEXPENSIVE() const; // Returns true if own notoriety container is not empty or mob in zone has entity listed as battle target
+
     /* State callbacks */
     /* Auto attack */
     virtual bool OnAttack(CAttackState&, action_t&);
@@ -739,13 +742,13 @@ public:
     virtual void TryHitInterrupt(CBattleEntity* PAttacker);
     virtual void OnDespawn(CDespawnState&);
 
-    void     SetBattleStartTime(time_point);
-    duration GetBattleTime();
+    void            SetBattleStartTime(timer::time_point);
+    timer::duration GetBattleTime();
 
     void   setBattleID(uint16 battleID);
     uint16 getBattleID();
 
-    virtual void Tick(time_point) override;
+    virtual void Tick(timer::time_point) override;
     virtual void PostTick() override;
 
     health_t health{}; // hp,mp,tp
@@ -755,8 +758,8 @@ public:
     uint16   m_magicEvasion; // store this so it can be removed easily
     bool     m_unkillable;   // entity is not able to die (probably until some action removes this flag)
 
-    time_point charmTime; // to hold the time entity is charmed
-    bool       isCharmed; // is the battle entity charmed?
+    timer::time_point charmTime; // to hold the time entity is charmed
+    bool              isCharmed; // is the battle entity charmed?
 
     float           m_ModelRadius;  // The radius of the entity model, for calculating the range of a physical attack
     ECOSYSTEM       m_EcoSystem{};  // Entity eco system
@@ -770,25 +773,25 @@ public:
 
     ActionList_t m_ActionList{}; // List of actions performed in one attack (you will need to write a structure that includes an ActionList in which there will be categories, animations, etc.)
 
-    CParty*         PParty;
-    CBattleEntity*  PPet;
-    CBattleEntity*  PMaster; // Owner/owner of the entity (applies to all combat entities)
-    CBattleEntity*  PLastAttacker;
-    time_point      LastAttacked;
-    battlehistory_t BattleHistory{}; // Stores info related to most recent combat actions taken towards this entity.
+    CParty*           PParty;
+    CBattleEntity*    PPet;
+    CBattleEntity*    PMaster; // Owner/owner of the entity (applies to all combat entities)
+    CBattleEntity*    PLastAttacker;
+    timer::time_point LastAttacked;
+    battlehistory_t   BattleHistory{}; // Stores info related to most recent combat actions taken towards this entity.
 
     std::unique_ptr<CStatusEffectContainer> StatusEffectContainer;
     std::unique_ptr<CRecastContainer>       PRecastContainer;
     std::unique_ptr<CNotorietyContainer>    PNotorietyContainer;
 
 private:
-    JOBTYPE    m_mjob;
-    JOBTYPE    m_sjob;
-    uint8      m_mlvl; // CURRENT level of the main job
-    uint8      m_slvl; // CURRENT level of the sub job
-    uint16     m_battleTarget{ 0 };
-    time_point m_battleStartTime;
-    uint16     m_battleID = 0; // Current battle the entity is participating in. Battle ID must match in order for entities to interact with each other.
+    JOBTYPE           m_mjob;
+    JOBTYPE           m_sjob;
+    uint8             m_mlvl; // CURRENT level of the main job
+    uint8             m_slvl; // CURRENT level of the sub job
+    uint16            m_battleTarget{ 0 };
+    timer::time_point m_battleStartTime;
+    uint16            m_battleID = 0; // Current battle the entity is participating in. Battle ID must match in order for entities to interact with each other.
 
     std::unordered_map<Mod, int16, EnumClassHash>                                                m_modStat;     // array of modifiers
     std::unordered_map<Mod, int16, EnumClassHash>                                                m_modStatSave; // saved state

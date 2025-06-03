@@ -9,9 +9,6 @@ local ID = zones[xi.zone.THE_BOYAHDA_TREE]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     -- Notes: does ??? depop when Agas is spawned?
     -- current implementation: when Agas is active, triggering ??? will result in detarget
@@ -43,13 +40,9 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 14 then
-        player:addKeyItem(xi.ki.MOONDROP)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MOONDROP)
+        npcUtil.giveKeyItem(player, xi.ki.MOONDROP)
         player:setCharVar('Searching_AgasKilled', 0)
     end
 end

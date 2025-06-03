@@ -8,9 +8,6 @@ local ID = zones[xi.zone.RULUDE_GARDENS]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
 
@@ -22,12 +19,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.RESTRICTED + 1) -- you have no letter of introduction
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

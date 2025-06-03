@@ -2,15 +2,11 @@
 -- Zone: Carpenters_Landing (2)
 -----------------------------------
 local func = require('scripts/zones/Carpenters_Landing/globals')
-local ID = zones[xi.zone.CARPENTERS_LANDING]
 -----------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.TEMPEST_TIGON)
-    GetMobByID(ID.mob.TEMPEST_TIGON):setRespawnTime(math.random(900, 10800))
-
     xi.helm.initZone(zone, xi.helmType.LOGGING)
     func.herculesTreeOnGameHour()
 end
@@ -30,7 +26,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onGameHour = function(zone)

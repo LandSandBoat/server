@@ -130,7 +130,7 @@ INSERT INTO `fishing_fish` VALUES (5448,'Kalamar',48,40,10,5,1,1,10,0,0,255,255,
 INSERT INTO `fishing_fish` VALUES (5140,'Kalkanbaligi',105,19,6,12,60,120,27,1,1,255,255,0,16,3,5,8,1,0,0,1,500,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (5464,'Kaplumbaga',53,28,8,5,1,1,11,0,0,255,255,0,0,0,5,4,0,0,0,1,800,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (5460,'Kayabaligi',75,30,7,8,1,1,10,0,0,255,255,0,0,3,1,2,0,0,0,1,650,0,'',0,0,0,0);
-INSERT INTO `fishing_fish` VALUES (5451,'Kilicbaligi',62,18,10,11,1,1,23,0,0,255,255,0,0,7,1,8,0,0,0,1,800,0,'',0,0,0,0);
+INSERT INTO `fishing_fish` VALUES (5451,'Kilicbaligi',62,18,10,11,1,1,23,1,0,255,255,0,0,7,1,8,0,0,0,1,800,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (5450,'Lakerda',41,16,6,13,55,100,22,1,0,255,255,0,0,1,4,0,0,0,0,1,900,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (2216,'Lamp Marimo',3,26,13,2,1,1,1,0,0,255,255,0,0,6,2,5,0,0,0,1,1000,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (5129,'Lik',140,48,2,14,185,465,33,1,0,255,255,0,0,3,1,6,1,8,0,1,850,1977,'',0,0,1,0);

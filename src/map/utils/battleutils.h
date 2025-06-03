@@ -25,6 +25,7 @@
 #include "blue_spell.h"
 #include "common/cbasetypes.h"
 #include "merit.h"
+#include "packets/weather.h"
 #include "status_effect.h"
 
 #include <list>
@@ -32,6 +33,7 @@
 #include "entities/battleentity.h"
 
 class CAbility;
+class CAttack;
 class CItemWeapon;
 class CMobSkill;
 class CPetSkill;
@@ -109,7 +111,7 @@ namespace battleutils
 
     uint8 getHitCount(uint8 hits);
 
-    int16 GetSnapshotReduction(CBattleEntity* battleEntity, int16 delay);
+    int16 GetRangedDelayReduction(CBattleEntity* battleEntity, int16 delay);
     int32 GetRangedAttackBonuses(CBattleEntity* battleEntity);
     int32 GetRangedAccuracyBonuses(CBattleEntity* battleEntity);
 
@@ -152,7 +154,7 @@ namespace battleutils
     float GetBlockRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8 GetParryRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8 GetGuardRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
-    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, SKILLTYPE weaponType, SLOTTYPE weaponSlot);
+    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, SKILLTYPE weaponType, SLOTTYPE weaponSlot, bool isCannonball);
 
     int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYSICAL_ATTACK_TYPE physicalAttackType, int32 damage, bool isBlocked,
                              uint8 slot, uint16 tpMultiplier, CBattleEntity* taChar, bool giveTPtoVictim, bool giveTPtoAttacker, bool isCounter = false,
@@ -171,18 +173,18 @@ namespace battleutils
     bool  HandleParrySpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);
     bool  HandleSpikesEquip(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint8 damage, SUBEFFECT spikesType, uint8 chance);
     void  HandleSpikesStatusEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action);
-    void  HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, bool isFirstSwing, CItemWeapon* weapon, int32 damage);
+    void  HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, bool isFirstSwing, CItemWeapon* weapon, int32 damage, CAttack& attack);
     uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage);
     uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage, int16 accBonus);
     int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 Tier, uint8 element);
 
-    int16 GetEnmityModDamage(int16 level);
-    int16 GetEnmityModCure(int16 level);
+    int32 GetEnmityModDamage(int16 level);
+    int32 GetEnmityModCure(int16 level);
     bool  isValidSelfTargetWeaponskill(int wsid);
     bool  CanUseWeaponskill(CCharEntity* PChar, CWeaponSkill* PSkill);
     int16 CalculateBaseTP(int32 delay);
     void  GenerateCureEnmity(CBattleEntity* PSource, CBattleEntity* PTarget, int32 amount, int32 fixedCE = 0, int32 fixedVE = 0);
-    void  GenerateInRangeEnmity(CBattleEntity* PSource, int16 CE, int16 VE);
+    void  GenerateInRangeEnmity(CBattleEntity* PSource, int32 CE, int32 VE);
 
     CItemWeapon*    GetEntityWeapon(CBattleEntity* PEntity, SLOTTYPE Slot);
     CItemEquipment* GetEntityArmor(CBattleEntity* PEntity, SLOTTYPE Slot);
@@ -193,7 +195,7 @@ namespace battleutils
 
     bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool);
 
-    void applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, duration charmTime = 0s);
+    void applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, timer::duration charmTime = 0s);
     void unCharm(CBattleEntity* PEntity);
 
     uint16 doSoulEaterEffect(CCharEntity* m_PChar, uint32 damage);
@@ -254,13 +256,13 @@ namespace battleutils
     void AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
     bool HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);
 
-    uint32 CalculateSpellCastTime(CBattleEntity*, CMagicState*);
-    uint16 CalculateSpellCost(CBattleEntity*, CSpell*);
-    uint32 CalculateSpellRecastTime(CBattleEntity*, CSpell*);
-    int16  CalculateSpellTP(CBattleEntity* PEntity, CSpell* PSpell);
-    int16  CalculateWeaponSkillTP(CBattleEntity*, CWeaponSkill*, int16);
-    bool   RemoveAmmo(CCharEntity*, int quantity = 1);
-    int32  GetMeritValue(CBattleEntity*, MERIT_TYPE);
+    timer::duration CalculateSpellCastTime(CBattleEntity*, CMagicState*);
+    uint16          CalculateSpellCost(CBattleEntity*, CSpell*);
+    timer::duration CalculateSpellRecastTime(CBattleEntity*, CSpell*);
+    int16           CalculateSpellTP(CBattleEntity* PEntity, CSpell* PSpell);
+    int16           CalculateWeaponSkillTP(CBattleEntity*, CWeaponSkill*, int16);
+    bool            RemoveAmmo(CCharEntity*, int quantity = 1);
+    int32           GetMeritValue(CBattleEntity*, MERIT_TYPE);
 
     int32       GetScaledItemModifier(CBattleEntity*, CItemEquipment*, Mod);
     DAMAGE_TYPE GetSpikesDamageType(SUBEFFECT spikesType);

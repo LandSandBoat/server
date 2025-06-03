@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "lock_on.h"
 
 #include "entities/battleentity.h"

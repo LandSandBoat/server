@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    local naja = GetMobByID(ID.mob[58].NAJA, mob:getInstance())
+    local naja = GetMobByID(ID.mob.NAJA_SALAHEEM, mob:getInstance())
 
     if naja then
         naja:setLocalVar('ready', 1)

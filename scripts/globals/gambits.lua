@@ -24,6 +24,36 @@ ai.target =
 }
 ai.t = ai.target
 
+-- Logic
+ai.logic =
+{
+    AND = 0,
+}
+
+ai.logic.OR = setmetatable(
+    { value = 1 },
+    {
+        __call = function(self, ...)
+            local args = { ... }
+            local conditions = {}
+
+            for _, condition in ipairs(args) do
+                if type(condition) == 'table' then
+                    table.insert(conditions, condition)
+                else
+                    error('ai.logic.OR expects only tables as arguments, got ' .. type(condition))
+                end
+            end
+
+            return {
+                logic = self.value,
+                conditions = conditions,
+            }
+        end,
+    }
+)
+ai.l = ai.logic
+
 -- Condition
 ai.condition =
 {
@@ -83,6 +113,9 @@ ai.select =
     BEST_INDI           = 10,
     STORM_DAY           = 11,
     HELIX_DAY           = 12,
+    EN_MOB_WEAKNESS     = 13,
+    STORM_MOB_WEAKNESS  = 14,
+    HELIX_MOB_WEAKNESS  = 15,
 }
 ai.s = ai.select
 

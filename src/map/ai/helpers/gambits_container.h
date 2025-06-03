@@ -1,5 +1,25 @@
-﻿#ifndef _GAMBITSCONTAINER
-#define _GAMBITSCONTAINER
+﻿/*
+===========================================================================
+
+  Copyright (c) 2025 LandSandBoat Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#pragma once
 
 #include "ai/ai_container.h"
 #include "ai/controllers/trust_controller.h"
@@ -11,6 +31,7 @@
 #include "status_effect_container.h"
 
 #include <set>
+#include <utility>
 
 namespace gambits
 {
@@ -28,6 +49,12 @@ namespace gambits
         CURILLA     = 9, // Special case for Rainemard
         PARTY_DEAD  = 10,
         PARTY_MULTI = 11,
+    };
+
+    enum class G_LOGIC : uint16
+    {
+        AND = 0,
+        OR  = 1,
     };
 
     enum class G_CONDITION : uint16
@@ -84,6 +111,9 @@ namespace gambits
         BEST_INDI           = 10,
         STORM_DAY           = 11,
         HELIX_DAY           = 12,
+        EN_MOB_WEAKNESS     = 13,
+        STORM_MOB_WEAKNESS  = 14,
+        HELIX_MOB_WEAKNESS  = 15,
     };
 
     enum class G_TP_TRIGGER : uint16
@@ -97,7 +127,6 @@ namespace gambits
 
     struct Predicate_t
     {
-        G_TARGET    target;
         G_CONDITION condition;
         uint32      condition_arg;
 
@@ -106,20 +135,15 @@ namespace gambits
         {
         }
 
-        Predicate_t(G_TARGET _target, G_CONDITION _condition, uint32 _condition_arg)
-        : target(_target)
-        , condition(_condition)
+        Predicate_t(G_CONDITION _condition, uint32 _condition_arg)
+        : condition(_condition)
         , condition_arg(_condition_arg)
         {
         }
 
         bool parseInput(std::string const& key, uint32 value)
         {
-            if (key.compare("target") == 0)
-            {
-                target = static_cast<G_TARGET>(value);
-            }
-            else if (key.compare("condition") == 0)
+            if (key.compare("condition") == 0)
             {
                 condition = static_cast<G_CONDITION>(value);
             }
@@ -133,6 +157,18 @@ namespace gambits
                 return false;
             }
             return true;
+        }
+    };
+
+    struct PredicateGroup_t
+    {
+        G_LOGIC                  logic;
+        std::vector<Predicate_t> predicates;
+
+        PredicateGroup_t(G_LOGIC _logic, std::vector<Predicate_t> _predicates)
+        : logic(_logic)
+        , predicates(std::move(_predicates))
+        {
         }
     };
 
@@ -174,11 +210,12 @@ namespace gambits
 
     struct Gambit_t
     {
-        std::vector<Predicate_t> predicates;
-        std::vector<Action_t>    actions;
-        uint16                   retry_delay;
-        time_point               last_used;
-        std::string              identifier;
+        std::vector<PredicateGroup_t> predicate_groups;
+        std::vector<Action_t>         actions;
+        G_TARGET                      target_selector;
+        uint16                        retry_delay;
+        timer::time_point             last_used;
+        std::string                   identifier;
 
         Gambit_t()
         : retry_delay(0)
@@ -234,10 +271,11 @@ namespace gambits
         }
         ~CGambitsContainer() = default;
 
+        auto NewGambitIdentifier(Gambit_t const& gambit) const -> std::string;
         auto AddGambit(Gambit_t const& gambit) -> std::string;
         void RemoveGambit(std::string const& id);
         void RemoveAllGambits();
-        void Tick(time_point tick);
+        void Tick(timer::time_point tick);
 
         // TODO: make private
         std::vector<TrustSkill_t> tp_skills;
@@ -246,13 +284,13 @@ namespace gambits
         uint16                    tp_value;
 
     private:
-        bool CheckTrigger(CBattleEntity* trigger_target, Predicate_t& predicate);
+        bool CheckTrigger(const CBattleEntity* triggerTarget, PredicateGroup_t& predicateGroup);
         bool TryTrustSkill();
         bool PartyHasHealer();
         bool PartyHasTank();
 
         CTrustEntity*         POwner;
-        time_point            m_lastAction;
+        timer::time_point     m_lastAction;
         std::vector<Gambit_t> gambits;
 
         // clang-format off
@@ -289,5 +327,3 @@ namespace gambits
     };
 
 } // namespace gambits
-
-#endif // _GAMBITSCONTAINER

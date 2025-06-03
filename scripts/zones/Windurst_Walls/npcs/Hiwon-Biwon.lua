@@ -6,9 +6,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local makingHeadlines = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
     local cursesFoiledAgain1 = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
@@ -48,9 +45,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(169)
         end
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

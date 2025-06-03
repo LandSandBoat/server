@@ -23,74 +23,46 @@
 
 #include "trigger_area.h"
 
-CLuaTriggerArea::CLuaTriggerArea(CTriggerArea* PTriggerArea)
+CLuaTriggerArea::CLuaTriggerArea(ITriggerArea* PTriggerArea)
 : m_PLuaTriggerArea(PTriggerArea)
 {
     if (PTriggerArea == nullptr)
     {
-        ShowError("CLuaTriggerArea created with nullptr instead of valid CTriggerArea*!");
+        ShowError("CLuaTriggerArea created with nullptr instead of valid ITriggerArea*!");
     }
 }
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
-uint32 CLuaTriggerArea::GetTriggerAreaID()
+uint32 CLuaTriggerArea::getTriggerAreaID()
 {
-    return m_PLuaTriggerArea->GetTriggerAreaID();
+    return m_PLuaTriggerArea->getTriggerAreaID();
 }
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
-int16 CLuaTriggerArea::GetCount()
+int16 CLuaTriggerArea::getCount()
 {
-    return m_PLuaTriggerArea->GetCount();
+    return m_PLuaTriggerArea->getCount();
 }
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
-int16 CLuaTriggerArea::AddCount(int16 count)
+int16 CLuaTriggerArea::addCount(int16 count)
 {
-    return m_PLuaTriggerArea->AddCount(count);
+    return m_PLuaTriggerArea->addCount(count);
 }
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
-int16 CLuaTriggerArea::DelCount(int16 count)
+int16 CLuaTriggerArea::delCount(int16 count)
 {
-    return m_PLuaTriggerArea->DelCount(count);
+    return m_PLuaTriggerArea->delCount(count);
 }
-
-//======================================================//
 
 void CLuaTriggerArea::Register()
 {
-    SOL_USERTYPE("CTriggerArea", CLuaTriggerArea);
-    SOL_REGISTER("GetTriggerAreaID", CLuaTriggerArea::GetTriggerAreaID);
-    SOL_REGISTER("GetCount", CLuaTriggerArea::GetCount);
-    SOL_REGISTER("AddCount", CLuaTriggerArea::AddCount);
-    SOL_REGISTER("DelCount", CLuaTriggerArea::DelCount);
+    SOL_USERTYPE("ITriggerArea", CLuaTriggerArea);
+    SOL_REGISTER("getTriggerAreaID", CLuaTriggerArea::getTriggerAreaID);
+    SOL_REGISTER("getCount", CLuaTriggerArea::getCount);
+    SOL_REGISTER("addCount", CLuaTriggerArea::addCount);
+    SOL_REGISTER("delCount", CLuaTriggerArea::delCount);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaTriggerArea& triggerArea)
 {
-    std::string id = triggerArea.m_PLuaTriggerArea ? std::to_string(triggerArea.m_PLuaTriggerArea->GetTriggerAreaID()) : "nullptr";
+    std::string id = triggerArea.m_PLuaTriggerArea ? std::to_string(triggerArea.m_PLuaTriggerArea->getTriggerAreaID()) : "nullptr";
     return os << "CLuaTriggerArea(" << id << ")";
 }
-
-//======================================================//

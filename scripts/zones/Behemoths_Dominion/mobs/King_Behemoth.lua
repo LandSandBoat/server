@@ -16,6 +16,15 @@ end
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 58) -- 145 total weapaon damage
+    mob:setMod(xi.mod.MDEF, 20)
+    mob:setMod(xi.mod.ATT, 462)
+    mob:setMod(xi.mod.DEF, 500)
+    mob:setMod(xi.mod.EVA, 370)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.STUN)
 
     -- Despawn the ???
     GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
@@ -45,10 +54,19 @@ entity.onMobFight = function(mob, target)
             mob:setMobMod(xi.mobMod.NO_MOVE, 0)
         end
     end
+
+    local delay = mob:getLocalVar('delay')
+    if
+        os.time() > delay and
+        mob:canUseAbilities()
+    then -- Use Meteor every 40s, based on capture
+        mob:castSpell(218, target) -- meteor
+        mob:setLocalVar('delay', os.time() + 40)
+    end
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, { chance = 20, duration = math.random(5, 10) })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, { chance = 20, duration = math.random(4, 8) })
 end
 
 entity.onSpellPrecast = function(mob, spell)
@@ -57,7 +75,7 @@ entity.onSpellPrecast = function(mob, spell)
         spell:setFlag(xi.magic.spellFlag.HIT_ALL)
         spell:setRadius(30)
         spell:setAnimation(280)
-        spell:setMPCost(1)
+        spell:setMPCost(0)
     end
 end
 

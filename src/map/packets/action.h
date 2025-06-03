@@ -129,7 +129,7 @@ struct action_t
     uint32                    id;
     ACTIONTYPE                actiontype;
     uint16                    actionid;
-    uint16                    recast;
+    timer::duration           recast;
     SPELLGROUP                spellgroup;
     std::vector<actionList_t> actionLists;
 
@@ -137,7 +137,7 @@ struct action_t
     : id(0)
     , actiontype(ACTION_NONE)
     , actionid(0)
-    , recast(0)
+    , recast(0s)
     , spellgroup(SPELLGROUP_NONE)
     {
     }

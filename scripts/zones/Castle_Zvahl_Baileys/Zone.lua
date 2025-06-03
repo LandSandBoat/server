@@ -1,38 +1,21 @@
 -----------------------------------
 -- Zone: Castle_Zvahl_Baileys (161)
 -----------------------------------
-local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
------------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -90, 17, 45, -84, 19, 51)  -- map 4 NW porter
-    zone:registerTriggerArea(1, 17, -90, 45, -85, 18, 51)  -- map 4 NW porter
-    zone:registerTriggerArea(2, -90, 17, -10, -85, 18, -5)  -- map 4 SW porter
-    zone:registerTriggerArea(3, -34, 17, -10, -30, 18, -5)  -- map 4 SE porter
-    zone:registerTriggerArea(4, -34, 17, 45, -30, 18, 51)  -- map 4 NE porter
-
-    UpdateNMSpawnPoint(ID.mob.LIKHO)
-    GetMobByID(ID.mob.LIKHO):setRespawnTime(math.random(3600, 4200))
-
-    UpdateNMSpawnPoint(ID.mob.MARQUIS_ALLOCEN)
-    GetMobByID(ID.mob.MARQUIS_ALLOCEN):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.MARQUIS_AMON)
-    GetMobByID(ID.mob.MARQUIS_AMON):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.DUKE_HABORYM)
-    GetMobByID(ID.mob.DUKE_HABORYM):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.GRAND_DUKE_BATYM)
-    GetMobByID(ID.mob.GRAND_DUKE_BATYM):setRespawnTime(math.random(900, 10800))
+    zone:registerCuboidTriggerArea(1, -90, 17, 45, -84, 19, 51)  -- map 4 NW porter
+    zone:registerCuboidTriggerArea(1, 17, -90, 45, -85, 18, 51)  -- map 4 NW porter
+    zone:registerCuboidTriggerArea(2, -90, 17, -10, -85, 18, -5)  -- map 4 SW porter
+    zone:registerCuboidTriggerArea(3, -34, 17, -10, -30, 18, -5)  -- map 4 SE porter
+    zone:registerCuboidTriggerArea(4, -34, 17, 45, -30, 18, 51)  -- map 4 NE porter
 
     xi.treasure.initZone(zone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -58,7 +41,7 @@ local teleportEventsByArea =
 }
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    local areaId = triggerArea:GetTriggerAreaID()
+    local areaId = triggerArea:getTriggerAreaID()
 
     if teleportEventsByArea[areaId] then
         player:startEvent(teleportEventsByArea[areaId])

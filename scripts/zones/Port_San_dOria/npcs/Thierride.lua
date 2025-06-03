@@ -4,32 +4,11 @@
 -- Type: Quest Giver
 -- !pos -67 -5 -28 232
 -----------------------------------
--- Starts and Finishes Quest: A Taste For Meat
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if
-        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == xi.questStatus.QUEST_ACCEPTED and
-        trade:hasItemQty(xi.item.PARCEL_FOR_THE_PUB, 1) and
-        trade:getItemCount() == 1
-    then
-        player:tradeComplete()
-        player:startEvent(539)
-        player:setCharVar('TheBrugaireConsortium-Parcels', 31)
-    else
-        player:startEvent(529)
-    end
-end
-
-entity.onTrigger = function(player, npc)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
+    player:startEvent(529)
 end
 
 return entity

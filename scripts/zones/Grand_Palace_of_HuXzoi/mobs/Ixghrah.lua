@@ -17,6 +17,10 @@ local spellTable =
     [1168] = { 469, 477 },
 }
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('twoHourPer', 50)
     mob:setLocalVar('canTwoHour', 0)

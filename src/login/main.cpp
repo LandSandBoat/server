@@ -18,6 +18,7 @@
 
 ===========================================================================
 */
+
 #include "connect_server.h"
 
 // openssl applink.c prevents issues with debug vs release vs threaded/single threaded .dlls at runtime
@@ -26,18 +27,8 @@
 #include <ms/applink.c>
 #endif
 
-// TODO: Standardize our running arguments for shutdown and thread signals
-std::atomic<bool> gRunFlag = true;
-
 int main(int argc, char** argv)
 {
-    auto pConnectServer = std::make_unique<ConnectServer>(argc, argv);
-
-    // TODO: We don't need this
-    while (pConnectServer->IsRunning())
-    {
-        pConnectServer->Tick();
-    }
-
+    std::make_unique<ConnectServer>(argc, argv)->run();
     return 0;
 }

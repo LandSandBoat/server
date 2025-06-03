@@ -11,11 +11,11 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     GetMobByID(ID.mob.NOBLE_MOLD):setLocalVar('pop', os.time() + math.random(43200, 57600)) -- 12 to 16 hr
 
-    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

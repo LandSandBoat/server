@@ -4,8 +4,6 @@
 -- Gustaberg Regional Merchant
 -- !pos 72 2 0 230
 -----------------------------------
-local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -14,26 +12,20 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if GetRegionOwner(xi.region.GUSTABERG) ~= xi.nation.SANDORIA then
-        player:showText(npc, ID.text.APAIREMANT_CLOSED_DIALOG)
-    else
+    if GetRegionOwner(xi.region.GUSTABERG) == xi.nation.SANDORIA then
         local stock =
         {
-            1108, 703,    -- Sulfur
-            619,   43,    -- Popoto
-            611,   36,    -- Rye Flour
-            4388,  40,    -- Eggplant
+            { xi.item.PINCH_OF_SULFUR,  803 },
+            { xi.item.POPOTO,            50 },
+            { xi.item.BAG_OF_RYE_FLOUR,  42 },
+            { xi.item.EGGPLANT,          46 },
         }
 
-        player:showText(npc, ID.text.APAIREMANT_OPEN_DIALOG)
+        player:showText(npc, zones[xi.zone.SOUTHERN_SAN_DORIA].text.APAIREMANT_OPEN_DIALOG)
         xi.shop.general(player, stock, xi.fameArea.SANDORIA)
+    else
+        player:showText(npc, zones[xi.zone.SOUTHERN_SAN_DORIA].text.APAIREMANT_CLOSED_DIALOG)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

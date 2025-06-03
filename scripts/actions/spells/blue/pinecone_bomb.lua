@@ -21,33 +21,39 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.ecosystem = xi.ecosystem.PLANTOID
-    params.tpmod = xi.spells.blue.tpMod.DURATION
+    params.ecosystem  = xi.ecosystem.PLANTOID
+    params.tpmod      = xi.spells.blue.tpMod.DURATION
     params.attackType = xi.attackType.RANGED
     params.damageType = xi.damageType.PIERCING
-    params.scattr = xi.skillchainType.LIQUEFACTION
-
-    params.numhits = 1
+    params.scattr     = xi.skillchainType.LIQUEFACTION
+    params.numhits    = 1
     params.multiplier = 2.25
-    params.tp150 = 2.25
-    params.tp300 = 2.25
-    params.azuretp = 2.25
-    params.duppercap = 37
-    params.str_wsc = 0.2
-    params.dex_wsc = 0.0
-    params.vit_wsc = 0.0
-    params.agi_wsc = 0.2
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
+    params.tp150      = 2.25
+    params.tp300      = 2.25
+    params.azuretp    = 2.25
+    params.duppercap  = 37
+    params.str_wsc    = 0.2
+    params.dex_wsc    = 0.0
+    params.vit_wsc    = 0.0
+    params.agi_wsc    = 0.2
+    params.int_wsc    = 0.0
+    params.mnd_wsc    = 0.0
+    params.chr_wsc    = 0.0
 
-    params.effect = xi.effect.SLEEP_I
-    local power = 1
-    local tick = 0
-    local duration = 60
-
+    -- Handle damage.
     local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
-    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
+
+    if damage <= 0 then
+        return damage
+    end
+
+    -- Handle status effects.
+    local effectTable =
+    {
+        [1] = { xi.effect.SLEEP_I, 1, 0, 60 },
+    }
+
+    xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)
 
     return damage
 end

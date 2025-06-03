@@ -11,6 +11,8 @@
 -- Example: Siren's elegy is wind while spell elegies are earth. Same effect, diferent elements.
 -- Unlike sleep, elegy effect doesnt have an associated "effect resistance rank" and uses "element resistance rank" instead.
 -----------------------------------
+require('scripts/globals/utils')
+-----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.statusEffect = xi.combat.statusEffect or {}
@@ -33,6 +35,7 @@ local column =
 xi.combat.statusEffect.dataTable =
 {
     [xi.effect.ADDLE        ] = { 0,               xi.effect.NOCTURNE, xi.element.FIRE,    xi.immunity.ADDLE,      xi.mod.SLOWRES,     0, 0,                    xi.mod.ADDLE_IMMUNOBREAK    }, -- Addle cant be immunobroken?
+    [xi.effect.AMNESIA      ] = { 0,               0,                  xi.element.FIRE,    0,                      xi.mod.AMNESIARES,  0, xi.mod.AMNESIA_MEVA,  0                           },
     [xi.effect.BIND         ] = { 0,               0,                  xi.element.ICE,     xi.immunity.BIND,       xi.mod.BINDRES,     0, xi.mod.BIND_MEVA,     xi.mod.BIND_IMMUNOBREAK     },
     [xi.effect.BLINDNESS    ] = { 0,               0,                  xi.element.DARK,    xi.immunity.BLIND,      xi.mod.BLINDRES,    0, xi.mod.BLIND_MEVA,    xi.mod.BLIND_IMMUNOBREAK    },
     [xi.effect.BURN         ] = { xi.effect.DROWN, 0,                  xi.element.FIRE,    0,                      0,                  0, 0,                    0                           },
@@ -61,7 +64,7 @@ xi.combat.statusEffect.dataTable =
 -----------------------------------
 xi.combat.statusEffect.getNullificatingEffect = function(effectId)
     -- Sanitize fed value
-    local effectToCheck = effectId or 0
+    local effectToCheck = utils.defaultIfNil(effectId, 0)
 
     -- Fetch effect ID from table if entry exists.
     if xi.combat.statusEffect.dataTable[effectToCheck] then
@@ -73,7 +76,7 @@ end
 
 xi.combat.statusEffect.getEffectToRemove = function(effectId)
     -- Sanitize fed value
-    local effectToCheck = effectId or 0
+    local effectToCheck = utils.defaultIfNil(effectId, 0)
 
     -- Fetch effect ID from table if entry exists.
     if xi.combat.statusEffect.dataTable[effectToCheck] then
@@ -85,8 +88,8 @@ end
 
 xi.combat.statusEffect.getAssociatedElement = function(effectId, actionElement)
     -- Sanitize fed values
-    local effectToCheck  = effectId or 0
-    local elementToCheck = actionElement or 0
+    local effectToCheck  = utils.defaultIfNil(effectId, 0)
+    local elementToCheck = utils.defaultIfNil(actionElement, 0)
 
     -- Sleep exception.
     if effectToCheck == xi.effect.SLEEP_I then
@@ -104,8 +107,8 @@ end
 
 xi.combat.statusEffect.getAssociatedImmunity = function(effectId, actionElement)
     -- Sanitize fed values
-    local effectToCheck  = effectId or 0
-    local elementToCheck = actionElement or 0
+    local effectToCheck  = utils.defaultIfNil(effectId, 0)
+    local elementToCheck = utils.defaultIfNil(actionElement, 0)
 
     -- Sleep exception.
     if
@@ -125,7 +128,7 @@ end
 
 xi.combat.statusEffect.getAssociatedResistTraitModifier = function(effectId)
     -- Sanitize fed value
-    local effectToCheck = effectId or 0
+    local effectToCheck  = utils.defaultIfNil(effectId, 0)
 
     -- Fetch modifier ID from table if entry exists.
     if xi.combat.statusEffect.dataTable[effectToCheck] then
@@ -137,7 +140,7 @@ end
 
 xi.combat.statusEffect.getAssociatedResistanceRankModifier = function(effectId)
     -- Sanitize fed value
-    local effectToCheck = effectId or 0
+    local effectToCheck  = utils.defaultIfNil(effectId, 0)
 
     -- Fetch modifier ID from table if entry exists.
     if xi.combat.statusEffect.dataTable[effectToCheck] then
@@ -149,7 +152,7 @@ end
 
 xi.combat.statusEffect.getAssociatedMagicEvasionModifier = function(effectId)
     -- Sanitize fed value
-    local effectToCheck = effectId or 0
+    local effectToCheck  = utils.defaultIfNil(effectId, 0)
 
     -- Fetch modifier ID from table if entry exists.
     if xi.combat.statusEffect.dataTable[effectToCheck] then
@@ -161,7 +164,7 @@ end
 
 xi.combat.statusEffect.getAssociatedImmunobreakModifier = function(effectId)
     -- Sanitize fed value
-    local effectToCheck = effectId or 0
+    local effectToCheck  = utils.defaultIfNil(effectId, 0)
 
     -- Fetch modifier ID from table if entry exists.
     if xi.combat.statusEffect.dataTable[effectToCheck] then

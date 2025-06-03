@@ -7,9 +7,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local rockRacketeer = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
     local chasingQuotasStatus = player:getCharVar('ChasingQuotas_Progress')
@@ -26,9 +23,6 @@ entity.onTrigger = function(player, npc)
     elseif chasingQuotasStatus == 4 then
         player:startEvent(265) -- They'll be happy if you return it.
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

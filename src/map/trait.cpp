@@ -25,7 +25,7 @@
 
 #include "blue_trait.h"
 #include "entities/battleentity.h"
-#include "map.h"
+#include "map_server.h"
 #include "trait.h"
 
 /************************************************************************
@@ -54,10 +54,10 @@ namespace traits
      ************************************************************************/
     void LoadTraitsList()
     {
-        const char* Query = "SELECT traitid, job, level, rank, modifier, value, content_tag, meritid \
-                             FROM traits \
-                             WHERE traitid < %u \
-                             ORDER BY job, traitid ASC, rank DESC";
+        const char* Query = "SELECT traitid, job, level, rank, modifier, value, content_tag, meritid "
+                            "FROM traits "
+                            "WHERE traitid < %u "
+                            "ORDER BY job, traitid ASC, rank DESC";
 
         int32 ret = _sql->Query(Query, MAX_TRAIT_ID);
 
@@ -65,9 +65,8 @@ namespace traits
         {
             while (_sql->NextRow() == SQL_SUCCESS)
             {
-                char* contentTag = nullptr;
-                _sql->GetData(6, &contentTag, nullptr);
-
+                // const auto contentTag = rset->getOrDefault<std::string>("content_tag", "");
+                const auto contentTag = _sql->GetStringData(6);
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;

@@ -24,6 +24,7 @@
 #include "ai/ai_container.h"
 #include "battlefield.h"
 #include "campaign_system.h"
+#include "common/async.h"
 #include "common/logging.h"
 #include "common/timer.h"
 #include "conquest_system.h"
@@ -31,7 +32,8 @@
 #include "entities/npcentity.h"
 #include "items/item_weapon.h"
 #include "lua/luautils.h"
-#include "map.h"
+#include "map_networking.h"
+#include "map_server.h"
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
 #include "mobutils.h"
@@ -41,8 +43,6 @@
 #include <algorithm>
 #include <cstring>
 #include <execution>
-
-#include <task_system.hpp>
 
 std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 CNpcEntity*              g_PTrigger;  // trigger to start events
@@ -55,7 +55,7 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    void TOTDChange(TIMETYPE TOTD)
+    void TOTDChange(vanadiel_time::TOTD TOTD)
     {
         for (auto PZone : g_PZoneList)
         {
@@ -222,37 +222,36 @@ namespace zoneutils
         return PTertiary;
     }
 
-    auto GetZonesOnThisProcess() -> std::vector<uint16>
+    auto GetZonesAssignedToThisProcess(IPP mapIPP) -> std::vector<uint16>
     {
-        char address[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
+        const auto ip    = mapIPP.getIP();
+        const auto ipStr = mapIPP.getIPString();
+        const auto port  = mapIPP.getPort();
 
-        // clang-format off
-        auto zonesQuery = fmt::sprintf(R"(
-            SELECT zoneid
-            FROM zone_settings
-            WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE);
-        )", map_ip.s_addr, address, map_port);
-        // clang-format on
+        // NOTE: We normally don't want to build a prepared statement with fmt::format,
+        //     : but this query is entirely internal, so it's OK.
+        const auto zonesQuery = fmt::format("SELECT zoneid "
+                                            "FROM zone_settings "
+                                            "WHERE IF({} <> 0, '{}' = zoneip AND {} = zoneport, TRUE)",
+                                            ip, ipStr, port);
 
         std::vector<uint16> zonesOnThisProcess;
 
-        int32 ret = _sql->Query(zonesQuery.c_str());
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        const auto rset = db::preparedStmt(zonesQuery);
+        if (rset && rset->rowsCount())
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                uint16 zoneId = static_cast<uint16>(_sql->GetUIntData(0));
-                zonesOnThisProcess.emplace_back(zoneId);
+                zonesOnThisProcess.emplace_back(rset->get<uint16>("zoneid"));
             }
         }
 
         return zonesOnThisProcess;
     }
 
-    bool IsZoneOnThisProcess(ZONEID zoneId)
+    bool IsZoneAssignedToThisProcess(IPP mapIPP, ZONEID zoneId)
     {
-        std::vector processZones = GetZonesOnThisProcess();
+        std::vector processZones = GetZonesAssignedToThisProcess(mapIPP);
         for (auto& zone : processZones)
         {
             if (zone == zoneId)
@@ -270,102 +269,102 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    void LoadNPCList()
+    void LoadNPCList(IPP mapIPP)
     {
         TracyZoneScoped;
         ShowInfo("Loading NPCs");
 
-        auto zonesOnThisProcess = GetZonesOnThisProcess();
+        const auto zonesOnThisProcess = GetZonesAssignedToThisProcess(mapIPP);
 
         // clang-format off
+        for (const auto zoneId : zonesOnThisProcess)
         {
-            ts::task_system ts;
-            for (auto zoneId : zonesOnThisProcess)
+            Async::getInstance()->submit([zoneId]()
             {
-                ts.schedule([zoneId]()
+                TracyZoneScoped;
+
+                auto* PZone = g_PZoneList[zoneId];
+
+                const auto query = "SELECT "
+                    "content_tag, "
+                    "npcid, "
+                    "npc_list.name, "
+                    "npc_list.polutils_name, "
+                    "pos_rot, "
+                    "pos_x, "
+                    "pos_y, "
+                    "pos_z, "
+                    "flag, "
+                    "speed, "
+                    "speedsub, "
+                    "animation, "
+                    "animationsub, "
+                    "namevis, "
+                    "status, "
+                    "entityFlags,"
+                    "look,"
+                    "name_prefix, "
+                    "widescan "
+                    "FROM npc_list INNER JOIN zone_settings "
+                    "ON (npcid & 0xFFF000) >> 12 = zone_settings.zoneid "
+                    "WHERE ((npcid & 0xFFF000) >> 12) = ?";
+
+                const auto rset = db::preparedStmt(query, zoneId);
+                if (rset && rset->rowsCount())
                 {
-                    TracyZoneScoped;
-                    auto* PZone = g_PZoneList[zoneId];
-
-                    auto Query = fmt::format("SELECT "
-                        "content_tag, "
-                        "npcid, "
-                        "npc_list.name, "
-                        "npc_list.polutils_name, "
-                        "pos_rot, "
-                        "pos_x, "
-                        "pos_y, "
-                        "pos_z, "
-                        "flag, "
-                        "speed, "
-                        "speedsub, "
-                        "animation, "
-                        "animationsub, "
-                        "namevis, "
-                        "status, "
-                        "entityFlags,"
-                        "look,"
-                        "name_prefix, "
-                        "widescan "
-                        "FROM npc_list INNER JOIN zone_settings "
-                        "ON (npcid & 0xFFF000) >> 12 = zone_settings.zoneid "
-                        "WHERE ((npcid & 0xFFF000) >> 12) = {}", zoneId);
-
-                    auto rset = db::query(Query);
-                    if (rset && rset->rowsCount())
+                    while (rset->next())
                     {
-                        while (rset->next())
+                        // If there is no content tag, the NPC will always be loaded
+                        const auto contentTag = rset->getOrDefault<std::string>("content_tag", "");
+                        if (!luautils::IsContentEnabled(contentTag))
                         {
-                            // If there is no content tag, always load the NPC
-                            const auto contentTagFound = !rset->isNull("content_tag");
-                            if (contentTagFound && !luautils::IsContentEnabled(rset->get<std::string>("content_tag").c_str()))
-                            {
-                                continue;
-                            }
+                            continue;
+                        }
 
-                            uint32 NpcID = rset->get<uint32>("npcid");
+                        const auto NpcID = rset->get<uint32>("npcid");
 
-                            if (!(PZone->GetTypeMask() & ZONE_TYPE::INSTANCED))
-                            {
-                                CNpcEntity* PNpc = new CNpcEntity;
-                                PNpc->targid     = NpcID & 0xFFF;
-                                PNpc->id         = NpcID;
+                        if (!(PZone->GetTypeMask() & ZONE_TYPE::INSTANCED))
+                        {
+                            CNpcEntity* PNpc = new CNpcEntity;
+                            PNpc->targid     = NpcID & 0xFFF;
+                            PNpc->id         = NpcID;
 
-                                PNpc->name       = rset->get<std::string>("name");          // Internal name
-                                PNpc->packetName = rset->get<std::string>("polutils_name"); // Name sent to the client (when applicable)
+                            PNpc->name       = rset->get<std::string>("name");          // Internal name
+                            PNpc->packetName = rset->get<std::string>("polutils_name"); // Name sent to the client (when applicable)
 
-                                PNpc->loc.p.rotation = rset->get<uint8>("pos_rot");
-                                PNpc->loc.p.x        = rset->get<float>("pos_x");
-                                PNpc->loc.p.y        = rset->get<float>("pos_y");
-                                PNpc->loc.p.z        = rset->get<float>("pos_z");
-                                PNpc->loc.p.moving   = rset->get<uint16>("flag");
+                            PNpc->loc.p.rotation = rset->get<uint8>("pos_rot");
+                            PNpc->loc.p.x        = rset->get<float>("pos_x");
+                            PNpc->loc.p.y        = rset->get<float>("pos_y");
+                            PNpc->loc.p.z        = rset->get<float>("pos_z");
+                            PNpc->loc.p.moving   = rset->get<uint16>("flag");
 
-                                PNpc->m_TargID = rset->get<uint32>("flag") >> 16;
+                            PNpc->m_TargID = rset->get<uint32>("flag") >> 16;
 
-                                PNpc->speed          = rset->get<uint8>("speed");    // Overwrites baseentity.cpp's defined speed
-                                PNpc->animationSpeed = rset->get<uint8>("speedsub"); // Overwrites baseentity.cpp's defined animationSpeed
-                                PNpc->baseSpeed      = rset->get<uint8>("speedsub"); // Overwrites baseentity.cpp's defined baseSpeed
+                            PNpc->animationSpeed = rset->get<uint8>("speedsub"); // Overwrites baseentity.cpp's defined animationSpeed
+                            PNpc->baseSpeed      = rset->get<uint8>("speed");    // Overwrites baseentity.cpp's defined baseSpeed
+                            PNpc->UpdateSpeed();
 
-                                PNpc->animation    = rset->get<uint8>("animation");
-                                PNpc->animationsub = rset->get<uint8>("animationsub");
+                            PNpc->animation    = rset->get<uint8>("animation");
+                            PNpc->animationsub = rset->get<uint8>("animationsub");
 
-                                PNpc->namevis = rset->get<uint8>("namevis");
-                                PNpc->status  = static_cast<STATUS_TYPE>(rset->get<uint8>("status"));
-                                PNpc->m_flags = rset->get<uint32>("entityFlags");
+                            PNpc->namevis = rset->get<uint8>("namevis");
+                            PNpc->status  = static_cast<STATUS_TYPE>(rset->get<uint8>("status"));
+                            PNpc->m_flags = rset->get<uint32>("entityFlags");
 
-                                db::extractFromBlob(rset, "look", PNpc->look);
+                            db::extractFromBlob(rset, "look", PNpc->look);
 
-                                PNpc->name_prefix = rset->get<uint8>("name_prefix");
-                                PNpc->widescan    = rset->get<uint8>("widescan");
+                            PNpc->name_prefix = rset->get<uint8>("name_prefix");
+                            PNpc->widescan    = rset->get<uint8>("widescan");
 
-                                PZone->InsertNPC(PNpc);
-                            }
+                            PZone->InsertNPC(PNpc);
                         }
                     }
-                });
-            }
+                }
+            });
         }
         // clang-format on
+
+        Async::getInstance()->wait();
 
         ShowInfo("Loading NPC scripts");
         // handle npc spawn functions after they're all done loading
@@ -394,262 +393,259 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    void LoadMOBList()
+    void LoadMOBList(IPP mapIPP)
     {
         TracyZoneScoped;
         ShowInfo("Loading Mobs");
 
-        auto zonesOnThisProcess = GetZonesOnThisProcess();
+        const auto zonesOnThisProcess = GetZonesAssignedToThisProcess(mapIPP);
 
-        uint8 normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
-        uint8 normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
+        const auto normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
+        const auto normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
         // clang-format off
+        for (const auto zoneId : zonesOnThisProcess)
         {
-            ts::task_system ts;
-            for (auto zoneId : zonesOnThisProcess)
+            Async::getInstance()->submit([normalLevelRangeMin, normalLevelRangeMax, zoneId]()
             {
-                ts.schedule([normalLevelRangeMin, normalLevelRangeMax, zoneId]()
+                TracyZoneScoped;
+
+                auto* PZone = g_PZoneList[zoneId];
+
+                const auto query = "SELECT mobname, mobid, pos_rot, pos_x, pos_y, pos_z, "
+                    "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, "
+                    "modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, "
+                    "ecosystemID, mobradius, speed, "
+                    "STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, "
+                    "slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, "
+                    "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
+                    "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
+                    "Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, "
+                    "(mob_family_system.HP / 100), (mob_family_system.MP / 100), spellList, mob_groups.poolid, "
+                    "allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, "
+                    "mob_family_system.charmable "
+                    "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
+                    "INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id "
+                    "INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid "
+                    "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
+                    "INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid "
+                    "WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) "
+                    "AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF) "
+                    "AND mob_groups.zoneid = ?";
+
+                const auto rset = db::preparedStmt(query, zoneId);
+                if (rset && rset->rowsCount())
                 {
-                    TracyZoneScoped;
-                    auto  sql   = std::make_unique<SqlConnection>();
-                    auto* PZone = g_PZoneList[zoneId];
-
-                    auto Query = fmt::format("SELECT mob_groups.zoneid, mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
-                        respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
-                        modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
-                        ecosystemID, mobradius, speed, \
-                        STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
-                        slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
-                        magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
-                        fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
-                        Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, \
-                        (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
-                        allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
-                        mob_family_system.charmable \
-                        FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
-                        INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
-                        INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid \
-                        INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
-                        INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
-                        WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) \
-                        AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF) \
-                        AND mob_groups.zoneid = {}", zoneId);
-
-                    int32 ret = sql->Query(Query.c_str());
-
-                    if (ret != SQL_ERROR && sql->NumRows() != 0)
+                    while (rset->next())
                     {
-                        while (sql->NextRow() == SQL_SUCCESS)
+                        ZONE_TYPE zoneType = PZone->GetTypeMask();
+
+                        if (!(zoneType & ZONE_TYPE::INSTANCED))
                         {
-                            ZONE_TYPE zoneType = PZone->GetTypeMask();
+                            CMobEntity* PMob = new CMobEntity;
 
-                            if (!(zoneType & ZONE_TYPE::INSTANCED))
+                            PMob->name = rset->get<std::string>("mobname");
+                            PMob->id   = rset->get<uint32>("mobid");
+
+                            PMob->targid = static_cast<uint16>(PMob->id & 0x0FFF);
+
+                            PMob->m_SpawnPoint.rotation = rset->get<uint8>("pos_rot");
+                            PMob->m_SpawnPoint.x        = rset->get<float>("pos_x");
+                            PMob->m_SpawnPoint.y        = rset->get<float>("pos_y");
+                            PMob->m_SpawnPoint.z        = rset->get<float>("pos_z");
+                            PMob->loc.p                 = PMob->m_SpawnPoint;
+
+                            PMob->m_RespawnTime = std::chrono::seconds(rset->get<uint32>("respawntime"));
+                            PMob->m_SpawnType   = static_cast<SPAWNTYPE>(rset->get<uint8>("spawntype"));
+                            PMob->m_DropID      = rset->get<uint32>("dropid");
+
+                            PMob->HPmodifier = rset->get<uint32>("HP");
+                            PMob->MPmodifier = rset->get<uint32>("MP");
+
+                            PMob->m_minLevel = rset->get<uint8>("minLevel");
+                            PMob->m_maxLevel = rset->get<uint8>("maxLevel");
+
+                            db::extractFromBlob(rset, "modelid", PMob->look);
+
+                            PMob->SetMJob(rset->get<uint8>("mJob"));
+                            PMob->SetSJob(rset->get<uint8>("sJob"));
+
+                            auto* mainWeapon = static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN]);
+
+                            mainWeapon->setMaxHit(1);
+                            mainWeapon->setSkillType(rset->get<uint8>("cmbSkill"));
+
+                            PMob->m_dmgMult = rset->get<uint16>("cmbDmgMult");
+
+                            mainWeapon->setDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
+                            mainWeapon->setBaseDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
+
+                            PMob->m_Behavior    = rset->get<uint16>("behavior");
+                            PMob->m_Link        = rset->get<uint32>("links");
+                            PMob->m_Type        = static_cast<MOBTYPE>(rset->get<uint32>("mobType"));
+                            PMob->m_Immunity    = rset->get<uint32>("immunity");
+                            PMob->m_EcoSystem   = static_cast<ECOSYSTEM>(rset->get<uint32>("ecosystemID"));
+                            PMob->m_ModelRadius = rset->get<float>("mobradius");
+
+                            PMob->baseSpeed      = rset->get<uint8>("speed");
+                            PMob->animationSpeed = rset->get<uint8>("speed");
+                            PMob->UpdateSpeed();
+
+                            PMob->strRank = rset->get<uint8>("STR");
+                            PMob->dexRank = rset->get<uint8>("DEX");
+                            PMob->vitRank = rset->get<uint8>("VIT");
+                            PMob->agiRank = rset->get<uint8>("AGI");
+                            PMob->intRank = rset->get<uint8>("INT");
+                            PMob->mndRank = rset->get<uint8>("MND");
+                            PMob->chrRank = rset->get<uint8>("CHR");
+                            PMob->evaRank = rset->get<uint8>("EVA");
+                            PMob->defRank = rset->get<uint8>("DEF");
+                            PMob->attRank = rset->get<uint8>("ATT");
+                            PMob->accRank = rset->get<uint8>("ACC");
+
+                            PMob->setModifier(Mod::SLASH_SDT, rset->get<int16>("slash_sdt"));
+                            PMob->setModifier(Mod::PIERCE_SDT, rset->get<int16>("pierce_sdt"));
+                            PMob->setModifier(Mod::HTH_SDT, rset->get<int16>("h2h_sdt"));
+                            PMob->setModifier(Mod::IMPACT_SDT, rset->get<int16>("impact_sdt"));
+
+                            PMob->setModifier(Mod::UDMGMAGIC, rset->get<int16>("magical_sdt"));
+
+                            PMob->setModifier(Mod::FIRE_SDT, rset->get<int16>("fire_sdt"));
+                            PMob->setModifier(Mod::ICE_SDT, rset->get<int16>("ice_sdt"));
+                            PMob->setModifier(Mod::WIND_SDT, rset->get<int16>("wind_sdt"));
+                            PMob->setModifier(Mod::EARTH_SDT, rset->get<int16>("earth_sdt"));
+                            PMob->setModifier(Mod::THUNDER_SDT, rset->get<int16>("lightning_sdt"));
+                            PMob->setModifier(Mod::WATER_SDT, rset->get<int16>("water_sdt"));
+                            PMob->setModifier(Mod::LIGHT_SDT, rset->get<int16>("light_sdt"));
+                            PMob->setModifier(Mod::DARK_SDT, rset->get<int16>("dark_sdt"));
+
+                            PMob->setModifier(Mod::FIRE_RES_RANK, rset->get<int8>("fire_res_rank"));
+                            PMob->setModifier(Mod::ICE_RES_RANK, rset->get<int8>("ice_res_rank"));
+                            PMob->setModifier(Mod::WIND_RES_RANK, rset->get<int8>("wind_res_rank"));
+                            PMob->setModifier(Mod::EARTH_RES_RANK, rset->get<int8>("earth_res_rank"));
+                            PMob->setModifier(Mod::THUNDER_RES_RANK, rset->get<int8>("lightning_res_rank"));
+                            PMob->setModifier(Mod::WATER_RES_RANK, rset->get<int8>("water_res_rank"));
+                            PMob->setModifier(Mod::LIGHT_RES_RANK, rset->get<int8>("light_res_rank"));
+                            PMob->setModifier(Mod::DARK_RES_RANK, rset->get<int8>("dark_res_rank"));
+
+                            PMob->m_Element     = rset->get<uint8>("Element");
+                            PMob->m_Family      = rset->get<uint16>("familyid");
+                            PMob->m_SuperFamily = rset->get<uint16>("superFamilyID");
+                            PMob->m_name_prefix = rset->get<uint8>("name_prefix");
+                            PMob->m_flags       = rset->get<uint32>("entityFlags");
+
+                            // Cap Level if Necessary (Don't Cap NMs)
+                            if (normalLevelRangeMin > 0 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && PMob->m_minLevel > normalLevelRangeMin)
                             {
-                                CMobEntity* PMob = new CMobEntity;
-
-                                PMob->name.insert(0, (const char*)sql->GetData(1));
-                                PMob->id = sql->GetUIntData(2);
-
-                                PMob->targid = (uint16)PMob->id & 0x0FFF;
-
-                                PMob->m_SpawnPoint.rotation = (uint8)sql->GetIntData(3);
-                                PMob->m_SpawnPoint.x        = sql->GetFloatData(4);
-                                PMob->m_SpawnPoint.y        = sql->GetFloatData(5);
-                                PMob->m_SpawnPoint.z        = sql->GetFloatData(6);
-                                PMob->loc.p                 = PMob->m_SpawnPoint;
-
-                                PMob->m_RespawnTime = sql->GetUIntData(7) * 1000;
-                                PMob->m_SpawnType   = (SPAWNTYPE)sql->GetUIntData(8);
-                                PMob->m_DropID      = sql->GetUIntData(9);
-
-                                PMob->HPmodifier = (uint32)sql->GetIntData(10);
-                                PMob->MPmodifier = (uint32)sql->GetIntData(11);
-
-                                PMob->m_minLevel = (uint8)sql->GetIntData(12);
-                                PMob->m_maxLevel = (uint8)sql->GetIntData(13);
-
-                                uint16 sqlModelID[10];
-                                std::memcpy(&sqlModelID, sql->GetData(14), 20);
-                                PMob->look = look_t(sqlModelID);
-
-                                PMob->SetMJob(sql->GetIntData(15));
-                                PMob->SetSJob(sql->GetIntData(16));
-
-                                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
-                                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(sql->GetIntData(17));
-                                PMob->m_dmgMult = sql->GetUIntData(18);
-                                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((sql->GetIntData(19) * 1000) / 60);
-                                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((sql->GetIntData(19) * 1000) / 60);
-
-                                PMob->m_Behavior   = (uint16)sql->GetIntData(20);
-                                PMob->m_Link        = (uint8)sql->GetIntData(21);
-                                PMob->m_Type        = (uint8)sql->GetIntData(22);
-                                PMob->m_Immunity    = (IMMUNITY)sql->GetIntData(23);
-                                PMob->m_EcoSystem   = (ECOSYSTEM)sql->GetIntData(24);
-                                PMob->m_ModelRadius = (float)sql->GetIntData(25);
-
-                                PMob->baseSpeed       = (uint8)sql->GetIntData(26);
-                                PMob->speed           = (uint8)sql->GetIntData(26);
-                                PMob->animationSpeed  = (uint8)sql->GetIntData(26);
-
-                                PMob->strRank = (uint8)sql->GetIntData(27);
-                                PMob->dexRank = (uint8)sql->GetIntData(28);
-                                PMob->vitRank = (uint8)sql->GetIntData(29);
-                                PMob->agiRank = (uint8)sql->GetIntData(30);
-                                PMob->intRank = (uint8)sql->GetIntData(31);
-                                PMob->mndRank = (uint8)sql->GetIntData(32);
-                                PMob->chrRank = (uint8)sql->GetIntData(33);
-                                PMob->evaRank = (uint8)sql->GetIntData(34);
-                                PMob->defRank = (uint8)sql->GetIntData(35);
-                                PMob->attRank = (uint8)sql->GetIntData(36);
-                                PMob->accRank = (uint8)sql->GetIntData(37);
-
-                                PMob->setModifier(Mod::SLASH_SDT, (uint16)(sql->GetFloatData(38) * 1000));
-                                PMob->setModifier(Mod::PIERCE_SDT, (uint16)(sql->GetFloatData(39) * 1000));
-                                PMob->setModifier(Mod::HTH_SDT, (uint16)(sql->GetFloatData(40) * 1000));
-                                PMob->setModifier(Mod::IMPACT_SDT, (uint16)(sql->GetFloatData(41) * 1000));
-
-                                PMob->setModifier(Mod::UDMGMAGIC, (int16)sql->GetIntData(42)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
-
-                                PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetIntData(43));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                                PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetIntData(44));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                                PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetIntData(45));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                                PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetIntData(46));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                                PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetIntData(47)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                                PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetIntData(48));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                                PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(49));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                                PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(50));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
-
-                                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(51)));
-                                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(52)));
-                                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(53)));
-                                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(54)));
-                                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(55)));
-                                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(56)));
-                                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(57)));
-                                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(58)));
-
-                                PMob->m_Element     = (uint8)sql->GetIntData(59);
-                                PMob->m_Family      = (uint16)sql->GetIntData(60);
-                                PMob->m_SuperFamily = (uint16)sql->GetIntData(61);
-                                PMob->m_name_prefix = (uint8)sql->GetIntData(62);
-                                PMob->m_flags       = (uint32)sql->GetIntData(63);
-
-                                // Cap Level if Necessary (Don't Cap NMs)
-                                if (normalLevelRangeMin > 0 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && PMob->m_minLevel > normalLevelRangeMin)
-                                {
-                                    PMob->m_minLevel = normalLevelRangeMin;
-                                }
-
-                                if (normalLevelRangeMax > 0 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && PMob->m_maxLevel > normalLevelRangeMax)
-                                {
-                                    PMob->m_maxLevel = normalLevelRangeMax;
-                                }
-
-                                // Special sub animation for Mob (yovra, jailer of love, phuabo)
-                                // yovra 1: On top/in the sky, 2: , 3: On top/in the sky
-                                // phuabo 1: Underwater, 2: Out of the water, 3: Goes back underwater
-                                PMob->animationsub = (uint32)sql->GetIntData(64);
-
-                                if (PMob->animationsub != 0)
-                                {
-                                    PMob->setMobMod(MOBMOD_SPAWN_ANIMATIONSUB, PMob->animationsub);
-                                }
-
-                                // Setup HP / MP Stat Percentage Boost
-                                PMob->HPscale = sql->GetFloatData(65);
-                                PMob->MPscale = sql->GetFloatData(66);
-
-                                // Check if we should be looking up scripts for this mob
-                                // PMob->m_HasSpellScript = (uint8)sql->GetIntData(67);
-
-                                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(68));
-
-                                PMob->m_Pool = sql->GetUIntData(69);
-
-                                PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(70));
-                                PMob->namevis    = sql->GetUIntData(71);
-                                PMob->m_Aggro    = sql->GetUIntData(72);
-
-                                PMob->m_roamFlags    = (uint16)sql->GetUIntData(73);
-                                PMob->m_MobSkillList = sql->GetUIntData(74);
-
-                                PMob->m_TrueDetection = sql->GetUIntData(75);
-                                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(76));
-
-                                PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(77));
-
-                                // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
-                                // can be set in mob_spawn_mods or in their onInitialize
-                                if (PMob->m_Type & MOBTYPE_EVENT ||
-                                    PMob->m_Type & MOBTYPE_FISHED ||
-                                    PMob->m_Type & MOBTYPE_BATTLEFIELD ||
-                                    PMob->m_Type & MOBTYPE_NOTORIOUS ||
-                                    zoneType & ZONE_TYPE::DYNAMIS)
-                                {
-                                    PMob->setMobMod(MOBMOD_CHARMABLE, 0);
-                                }
-
-                                // must be here first to define mobmods
-                                mobutils::InitializeMob(PMob);
-
-                                PZone->InsertMOB(PMob);
+                                PMob->m_minLevel = normalLevelRangeMin;
                             }
+
+                            if (normalLevelRangeMax > 0 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && PMob->m_maxLevel > normalLevelRangeMax)
+                            {
+                                PMob->m_maxLevel = normalLevelRangeMax;
+                            }
+
+                            // Special sub animation for Mob (yovra, jailer of love, phuabo)
+                            // yovra 1: On top/in the sky, 2: , 3: On top/in the sky
+                            // phuabo 1: Underwater, 2: Out of the water, 3: Goes back underwater
+                            PMob->animationsub = rset->get<uint8>("animationsub");
+
+                            if (PMob->animationsub != 0)
+                            {
+                                PMob->setMobMod(MOBMOD_SPAWN_ANIMATIONSUB, PMob->animationsub);
+                            }
+
+                            // Setup HP / MP Stat Percentage Boost
+                            PMob->HPscale = rset->get<float>("(mob_family_system.HP / 100)");
+                            PMob->MPscale = rset->get<float>("(mob_family_system.MP / 100)");
+
+                            PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(rset->get<uint16>("spellList"));
+
+                            PMob->m_Pool = rset->get<uint32>("poolid");
+
+                            PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(rset->get<uint8>("allegiance"));
+                            PMob->namevis    = rset->get<uint8>("namevis");
+                            PMob->m_Aggro    = rset->get<bool>("aggro");
+
+                            PMob->m_roamFlags    = rset->get<uint16>("roamflag");
+                            PMob->m_MobSkillList = rset->get<uint16>("skill_list_id");
+
+                            PMob->m_TrueDetection = rset->get<bool>("true_detection");
+                            PMob->setMobMod(MOBMOD_DETECTION, rset->get<uint16>("detects"));
+
+                            PMob->setMobMod(MOBMOD_CHARMABLE, rset->get<uint16>("charmable"));
+
+                            // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
+                            // can be set in their onInitialize
+                            if (PMob->m_Type & MOBTYPE_EVENT ||
+                                PMob->m_Type & MOBTYPE_FISHED ||
+                                PMob->m_Type & MOBTYPE_BATTLEFIELD ||
+                                PMob->m_Type & MOBTYPE_NOTORIOUS ||
+                                zoneType & ZONE_TYPE::DYNAMIS)
+                            {
+                                PMob->setMobMod(MOBMOD_CHARMABLE, 0);
+                            }
+
+                            // must be here first to define mobmods
+                            mobutils::InitializeMob(PMob);
+
+                            PZone->InsertMOB(PMob);
                         }
                     }
+                }
 
-                    // attach pets to mobs
-                    auto PetQuery = fmt::format("SELECT mob_groups.zoneid, mob_mobid, pet_offset \
-                        FROM mob_pets \
-                        LEFT JOIN mob_spawn_points ON mob_pets.mob_mobid = mob_spawn_points.mobid \
-                        LEFT JOIN mob_groups ON mob_spawn_points.groupid = mob_groups.groupid \
-                        INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
-                        WHERE mob_groups.zoneid = ((mobid >> 12) & 0xFFF) \
-                        AND mob_groups.zoneid = {}", zoneId);
+                // attach pets to mobs
+                const auto petQuery = "SELECT mob_groups.zoneid, mob_mobid, pet_offset "
+                    "FROM mob_pets "
+                    "LEFT JOIN mob_spawn_points ON mob_pets.mob_mobid = mob_spawn_points.mobid "
+                    "LEFT JOIN mob_groups ON mob_spawn_points.groupid = mob_groups.groupid "
+                    "INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid "
+                    "WHERE mob_groups.zoneid = ((mobid >> 12) & 0xFFF) "
+                    "AND mob_groups.zoneid = ?";
 
-                    ret = sql->Query(PetQuery.c_str());
-                    if (ret != SQL_ERROR && sql->NumRows() != 0)
+                const auto rset2 = db::preparedStmt(petQuery, zoneId);
+                if (rset2 && rset2->rowsCount())
+                {
+                    while (rset2->next())
                     {
-                        while (sql->NextRow() == SQL_SUCCESS)
+                        uint16 ZoneID   = rset2->get<uint16>("zoneid");
+                        uint32 masterid = rset2->get<uint32>("mob_mobid");
+                        uint32 petid    = masterid + rset2->get<uint32>("pet_offset");
+
+                        CMobEntity* PMaster = (CMobEntity*)GetZone(ZoneID)->GetEntity(masterid & 0x0FFF, TYPE_MOB);
+                        CMobEntity* PPet    = (CMobEntity*)GetZone(ZoneID)->GetEntity(petid & 0x0FFF, TYPE_MOB);
+
+                        if (PMaster == nullptr)
                         {
-                            uint16 ZoneID   = (uint16)sql->GetUIntData(0);
-                            uint32 masterid = sql->GetUIntData(1);
-                            uint32 petid    = masterid + sql->GetUIntData(2);
+                            ShowError("zoneutils::loadMOBList PMaster is nullptr. masterid: %d. Make sure x,y,z are not zeros, and that all entities are entered in the "
+                                    "database!",
+                                    masterid);
+                        }
+                        else if (PPet == nullptr)
+                        {
+                            ShowError("zoneutils::loadMOBList PPet is nullptr. petid: %d. Make sure x,y,z are not zeros!", petid);
+                        }
+                        else if (masterid == petid)
+                        {
+                            ShowError("zoneutils::loadMOBList Master and Pet are the same entity: %d", masterid);
+                        }
+                        else
+                        {
+                            // pet is always spawned by master
+                            PPet->m_AllowRespawn = false;
+                            PPet->m_SpawnType    = SPAWNTYPE_SCRIPTED;
+                            PPet->SetDespawnTime(0s);
 
-                            CMobEntity* PMaster = (CMobEntity*)GetZone(ZoneID)->GetEntity(masterid & 0x0FFF, TYPE_MOB);
-                            CMobEntity* PPet    = (CMobEntity*)GetZone(ZoneID)->GetEntity(petid & 0x0FFF, TYPE_MOB);
-
-                            if (PMaster == nullptr)
-                            {
-                                ShowError("zoneutils::loadMOBList PMaster is nullptr. masterid: %d. Make sure x,y,z are not zeros, and that all entities are entered in the "
-                                        "database!",
-                                        masterid);
-                            }
-                            else if (PPet == nullptr)
-                            {
-                                ShowError("zoneutils::loadMOBList PPet is nullptr. petid: %d. Make sure x,y,z are not zeros!", petid);
-                            }
-                            else if (masterid == petid)
-                            {
-                                ShowError("zoneutils::loadMOBList Master and Pet are the same entity: %d", masterid);
-                            }
-                            else
-                            {
-                                // pet is always spawned by master
-                                PPet->m_AllowRespawn = false;
-                                PPet->m_SpawnType    = SPAWNTYPE_SCRIPTED;
-                                PPet->SetDespawnTime(0s);
-
-                                PMaster->PPet = PPet;
-                                PPet->PMaster = PMaster;
-                            }
+                            PMaster->PPet = PPet;
+                            PPet->PMaster = PMaster;
                         }
                     }
-                });
-            }
+                }
+            });
         }
         // clang-format on
+
+        Async::getInstance()->wait();
 
         ShowInfo("Loading Mob scripts");
         // handle mob Initialize functions after they're all loaded
@@ -684,7 +680,12 @@ namespace zoneutils
                 }
                 else
                 {
-                    PMob->PAI->Internal_Respawn(std::chrono::milliseconds(PMob->m_RespawnTime));
+                    PMob->PAI->Internal_Respawn(PMob->m_RespawnTime);
+                    // If the mob is a scripted spawn and it has a respawn time defined when the mob initializes then allow it to respawn
+                    if (PMob->m_SpawnType == SPAWNTYPE_SCRIPTED && PMob->m_RespawnTime > 0s)
+                    {
+                        PMob->m_AllowRespawn = true;
+                    }
                 }
             });
         });
@@ -699,13 +700,15 @@ namespace zoneutils
 
     CZone* CreateZone(uint16 ZoneID)
     {
-        static const char* Query = "SELECT zonetype, restriction FROM zone_settings "
-                                   "WHERE zoneid = %u LIMIT 1";
+        const auto query = "SELECT zonetype, restriction FROM zone_settings "
+                           "WHERE zoneid = ? LIMIT 1";
 
-        if (_sql->Query(Query, ZoneID) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        const auto rset = db::preparedStmt(query, ZoneID);
+        if (rset && rset->rowsCount() && rset->next())
         {
-            ZONE_TYPE zoneType    = static_cast<ZONE_TYPE>(_sql->GetUIntData(0));
-            uint8     restriction = static_cast<uint8>(_sql->GetUIntData(1));
+            const auto zoneType    = static_cast<ZONE_TYPE>(rset->get<uint16>("zonetype"));
+            const auto restriction = rset->get<uint8>("restriction");
+
             if (zoneType & ZONE_TYPE::INSTANCED)
             {
                 return new CZoneInstance((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
@@ -728,29 +731,19 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    void LoadZoneList()
+    void LoadZoneList(IPP mapIPP)
     {
         TracyZoneScoped;
+
+        Async::getInstance()->setThreadpoolSize(std::max<std::size_t>(std::thread::hardware_concurrency() - 1, 1));
+
         g_PTrigger = new CNpcEntity(); // you need to set the default model in the CNpcEntity constructor
 
-        std::vector<uint16> zones;
-        const char*         query = "SELECT zoneid FROM zone_settings WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
-
-        char address[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-        int ret = _sql->Query(query, map_ip.s_addr, address, map_port);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
-        {
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                zones.emplace_back(static_cast<uint16>(_sql->GetUIntData(0)));
-            }
-        }
-        else
+        std::vector<uint16> zones = GetZonesAssignedToThisProcess(mapIPP);
+        if (zones.empty())
         {
             ShowCritical("Unable to load any zones! Check IP and port params");
-            do_final(EXIT_FAILURE);
+            std::exit(1);
         }
 
         ShowInfo(fmt::format("Loading {} zones", zones.size()));
@@ -772,34 +765,33 @@ namespace zoneutils
 #endif // ENV32BIT
 
         // clang-format off
+        for (const auto zoneId : zones)
         {
-            ts::task_system ts;
-            for (auto zone : zones)
+            Async::getInstance()->submit([zoneId]()
             {
-                ts.schedule([zone]()
-                {
-                    // NOTE: It is not safe to use SQL in this parallel loop!
-                    g_PZoneList[zone]->LoadNavMesh();
-                });
+                // NOTE: It is not safe to use SQL in this parallel loop!
+                g_PZoneList[zoneId]->LoadNavMesh();
+            });
 #ifndef ENV32BIT
-                // The LOS meshes take up A LOT of memory, so they're hard-disabled on 32-bit builds.
-                // (If you re-enable them, you'll meed the memory limit for a 32-bit application and crash!)
-                // TODO: Find a sane way around this
-                ts.schedule([zone]()
-                {
-                    // NOTE: It is not safe to use SQL in this parallel loop!
-                    g_PZoneList[zone]->LoadZoneLos();
-                });
+            // The LOS meshes take up A LOT of memory, so they're hard-disabled on 32-bit builds.
+            // (If you re-enable them, you'll meed the memory limit for a 32-bit application and crash!)
+            // TODO: Find a sane way around this
+            Async::getInstance()->submit([zoneId]()
+            {
+                // NOTE: It is not safe to use SQL in this parallel loop!
+                g_PZoneList[zoneId]->LoadZoneLos();
+            });
 #endif // !ENV32BIT
-            }
         }
+
+        Async::getInstance()->wait();
         // clang-format on
 
         // IDs attached to xi.zone[name] need to be populated before NPCs and Mobs are loaded
         luautils::PopulateIDLookupsByZone();
 
-        LoadNPCList();
-        LoadMOBList();
+        LoadNPCList(mapIPP);
+        LoadMOBList(mapIPP);
 
         campaign::LoadState();
         campaign::LoadNations();
@@ -813,6 +805,8 @@ namespace zoneutils
         }
 
         luautils::InitInteractionGlobal();
+
+        Async::getInstance()->setThreadpoolSize(1U);
     }
 
     /************************************************************************
@@ -934,7 +928,7 @@ namespace zoneutils
             case ZONE_NORG:
             case ZONE_SEA_SERPENT_GROTTO:
             case ZONE_YUHTUNGA_JUNGLE:
-                return REGION_TYPE::ELSHIMOLOWLANDS;
+                return REGION_TYPE::ELSHIMO_LOWLANDS;
             case ZONE_CLOISTER_OF_FLAMES:
             case ZONE_CLOISTER_OF_TIDES:
             case ZONE_DEN_OF_RANCOR:
@@ -942,7 +936,7 @@ namespace zoneutils
             case ZONE_SACRIFICIAL_CHAMBER:
             case ZONE_TEMPLE_OF_UGGALEPIH:
             case ZONE_YHOATOR_JUNGLE:
-                return REGION_TYPE::ELSHIMOUPLANDS;
+                return REGION_TYPE::ELSHIMO_UPLANDS;
             case ZONE_THE_CELESTIAL_NEXUS:
             case ZONE_LALOFF_AMPHITHEATER:
             case ZONE_RUAUN_GARDENS:
@@ -1134,7 +1128,7 @@ namespace zoneutils
         // TODO: Fix weather ordering; at the moment, this current fire, water, earth, wind, snow, thunder
         // order MUST be preserved due to the weather enums going in this order. Those enums will
         // most likely have rippling effects, such as how weather data is stored in the db
-        static uint8 Element[] = {
+        constexpr uint8 Element[] = {
             0, // WEATHER_NONE
             0, // WEATHER_SUNSHINE
             0, // WEATHER_CLOUDS
@@ -1185,21 +1179,23 @@ namespace zoneutils
 
     uint64 GetZoneIPP(uint16 zoneID)
     {
-        uint64      ipp   = 0;
-        const char* query = "SELECT zoneip, zoneport FROM zone_settings WHERE zoneid = %u";
+        uint64 ipp = 0;
 
-        int ret = _sql->Query(query, zoneID);
+        const auto query = "SELECT zoneip, zoneport FROM zone_settings WHERE zoneid = ?";
 
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        const auto rset = db::preparedStmt(query, zoneID);
+        if (rset && rset->rowsCount() && rset->next())
         {
-            inet_pton(AF_INET, (const char*)_sql->GetData(0), &ipp);
-            uint64 port = _sql->GetUIntData(1);
-            ipp |= (port << 32);
+            const auto zoneip = str2ip(rset->get<std::string>("zoneip"));
+            const auto port   = rset->get<uint16>("zoneport");
+
+            ipp = IPP(zoneip, port).getRawIPP();
         }
         else
         {
             ShowCritical("zoneutils::GetZoneIPP: Cannot find zone %u", zoneID);
         }
+
         return ipp;
     }
 

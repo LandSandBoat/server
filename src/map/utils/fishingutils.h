@@ -931,7 +931,6 @@ namespace fishingutils
     uint32 HandleFishingAction(CCharEntity* PChar, CBasicPacket& data);
 
     // Calculations
-    uint32              GetSundayMidnightTimestamp();
     uint8               GetMoonPhase();
     uint8               GetHookTime(CCharEntity* PChar);
     float               GetMonthlyTidalInfluence(fish_t* fish);

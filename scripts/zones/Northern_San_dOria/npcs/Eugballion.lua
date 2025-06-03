@@ -8,27 +8,18 @@ local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if GetRegionOwner(xi.region.QUFIMISLAND) ~= xi.nation.SANDORIA then
         player:showText(npc, ID.text.EUGBALLION_CLOSED_DIALOG)
     else
         local stock =
         {
-            954, 4121,    -- Magic Pot Shard
+            { 954, 4121, }, -- Magic Pot Shard
         }
 
         player:showText(npc, ID.text.EUGBALLION_OPEN_DIALOG)
         xi.shop.general(player, stock, xi.fameArea.SANDORIA)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

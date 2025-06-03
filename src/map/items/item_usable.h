@@ -32,41 +32,42 @@ public:
     CItemUsable(uint16);
     virtual ~CItemUsable();
 
-    uint8  getUseDelay() const;
-    uint8  getCurrentCharges();
-    uint8  getMaxCharges() const;
-    uint16 getAnimationID() const;
-    uint16 getAnimationTime() const;
-    uint16 getActivationTime() const;
-    uint16 getValidTarget() const;
-    uint32 getReuseTime();
-    uint32 getReuseDelay() const;
-    uint32 getLastUseTime();
-    uint32 getNextUseTime();
-    uint16 getAoE() const;
+    timer::duration   getUseDelay() const;
+    uint8             getCurrentCharges();
+    uint8             getMaxCharges() const;
+    uint16            getAnimationID() const;
+    timer::duration   getAnimationTime() const;
+    timer::duration   getActivationTime() const;
+    uint16            getValidTarget() const;
+    timer::duration   getReuseTime();
+    timer::duration   getReuseDelay() const;
+    timer::time_point getLastUseTime();
+    timer::time_point getNextUseTime();
+    uint16            getAoE() const;
 
-    void setUseDelay(uint8 UseDelay);
+    void setUseDelay(timer::duration UseDelay);
     void setCurrentCharges(uint8 CurrCharges);
     void setMaxCharges(uint8 MaxCharges);
     void setAnimationID(uint16 Animation);
-    void setAnimationTime(uint16 AnimationTime);
-    void setActivationTime(uint16 ActivationTime);
+    void setAnimationTime(timer::duration AnimationTime);
+    void setActivationTime(timer::duration ActivationTime);
     void setValidTarget(uint16 ValidTarget);
-    void setReuseDelay(uint32 ReuseDelay);
-    void setLastUseTime(uint32 LastUseTime);
-    void setAssignTime(uint32 VanaTime);
+    void setReuseDelay(timer::duration ReuseDelay);
+    void setLastUseTime(timer::time_point LastUseTime);
+    void setAssignTime(timer::time_point VanaTime);
     void setAoE(uint16 AoE);
 
 private:
-    uint8  m_UseDelay;
-    uint8  m_MaxCharges;
-    uint16 m_Animation;
-    uint16 m_AnimationTime;
-    uint16 m_ActivationTime;
-    uint16 m_ValidTarget;
-    uint32 m_ReuseDelay;
-    uint32 m_AssignTime;
-    uint16 m_AoE;
+    timer::duration   m_UseDelay;
+    uint8             m_MaxCharges;
+    uint16            m_Animation;
+    timer::duration   m_AnimationTime;
+    timer::duration   m_ActivationTime;
+    uint16            m_ValidTarget;
+    timer::duration   m_ReuseDelay;
+    timer::time_point m_AssignTime;
+    timer::time_point m_LastUseTime;
+    uint16            m_AoE;
 };
 
 #endif

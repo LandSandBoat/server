@@ -9,9 +9,6 @@ local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if
         player:hasKeyItem(xi.ki.OLD_RUSTY_KEY) or
@@ -22,9 +19,6 @@ entity.onTrigger = function(player, npc)
         local offset = npc:getID() - ID.npc.BOOK_OFFSET
         player:startEvent(61 + offset)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
@@ -52,8 +46,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     if player:getCharVar('paintbrushOfSouls_book') == 7 then
         player:messageSpecial(ID.text.FALLS_FROM_THE_BOOK, xi.ki.OLD_RUSTY_KEY)
-        player:addKeyItem(xi.ki.OLD_RUSTY_KEY)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_RUSTY_KEY)
+        npcUtil.giveKeyItem(player, xi.ki.OLD_RUSTY_KEY)
         player:setCharVar('paintbrushOfSouls_book', 0)
     end
 end

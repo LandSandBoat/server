@@ -5,17 +5,12 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
-    player:startEvent(10095)
+    xi.mmm.shopOnTrigger(player)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
+    xi.mmm.shopOnEventUpdate(player, csid, option)
 end
 
 return entity

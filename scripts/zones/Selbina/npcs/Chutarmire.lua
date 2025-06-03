@@ -1,45 +1,33 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Chutarmire
--- Standard Merchant NPC
------------------------------------
-local ID = zones[xi.zone.SELBINA]
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4768,  5751,    -- Scroll of Stone II
-        4778,  8100,    -- Scroll of Water II
-        4763, 11970,    -- Scroll of Aero II
-        4753, 16560,    -- Scroll of Fire II
-        4758, 21870,    -- Scroll of Blizzard II
-        4773, 27900,    -- Scroll of Thunder II
-        4797,  1165,    -- Scroll of Stonega
-        4807,  2097,    -- Scroll of Waterga
-        4792,  4147,    -- Scroll of Aeroga
-        4782,  7025,    -- Scroll of Firaga
-        4787, 10710,    -- Scroll of Blizzaga
-        4802, 15120,    -- Scroll of Thundaga
-        4829, 22680,    -- Scroll of Poison II
-        4839, 12600,    -- Scroll of Bio II
-        4833,  4644,    -- Scroll of Poisonga
-        4859,  8100,    -- Scroll of Shock Spikes
+        { xi.item.SCROLL_OF_STONE_II,      6645 },
+        { xi.item.SCROLL_OF_WATER_II,      9360 },
+        { xi.item.SCROLL_OF_AERO_II,      13832 },
+        { xi.item.SCROLL_OF_FIRE_II,      19136 },
+        { xi.item.SCROLL_OF_BLIZZARD_II,  25272 },
+        { xi.item.SCROLL_OF_THUNDER_II,   32240 },
+        { xi.item.SCROLL_OF_STONEGA,       1346 },
+        { xi.item.SCROLL_OF_WATERGA,       2423 },
+        { xi.item.SCROLL_OF_AEROGA,        4792 },
+        { xi.item.SCROLL_OF_FIRAGA,        8118 },
+        { xi.item.SCROLL_OF_BLIZZAGA,     12376 },
+        { xi.item.SCROLL_OF_THUNDAGA,     17472 },
+        { xi.item.SCROLL_OF_POISON_II,    26208 },
+        { xi.item.SCROLL_OF_BIO_II,       14560 },
+        { xi.item.SCROLL_OF_POISONGA,      5366 },
+        { xi.item.SCROLL_OF_SHOCK_SPIKES,  9360 },
     }
 
-    player:showText(npc, ID.text.CHUTARMIRE_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.SELBINA].text.CHUTARMIRE_SHOP_DIALOG)
     xi.shop.general(player, stock)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

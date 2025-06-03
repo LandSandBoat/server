@@ -1,17 +1,11 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Deadly Minnow
--- Standard Merchant NPC
 -- Involved in Quest: Borghertz's Hands (1st quest only)
 -- !pos -5 1 48 244
 -----------------------------------
-local ID = zones[xi.zone.UPPER_JEUNO]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
-
-entity.onTrade = function(player, npc, trade)
-end
 
 entity.onTrigger = function(player, npc)
     if player:getCharVar('BorghertzHandsFirstTime') == 1 then
@@ -19,24 +13,21 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            12442, 13179,    -- Studded Bandana
-            12425, 22800,    -- Silver Mask
-            12426, 47025,    -- Banded Helm
-            12570, 20976,    -- Studded Vest
-            12553, 35200,    -- Silver Mail
-            12554, 66792,    -- Banded Mail
-            12698, 11012,    -- Studded Gloves
-            12681, 18800,    -- Silver Mittens
-            12672, 23846,    -- Gauntlets
-            12682, 35673,    -- Mufflers
+            { xi.item.STUDDED_BANDANA, 14326 },
+            { xi.item.SILVER_MASK,     22800 },
+            { xi.item.BANDED_HELM,     47025 },
+            { xi.item.STUDDED_VEST,    22800 },
+            { xi.item.SILVER_MAIL,     35200 },
+            { xi.item.BANDED_MAIL,     72600 },
+            { xi.item.STUDDED_GLOVES,  11970 },
+            { xi.item.SILVER_MITTENS,  18800 },
+            { xi.item.GAUNTLETS,       25920 },
+            { xi.item.MUFFLERS,        38775 },
         }
 
-        player:showText(npc, ID.text.DURABLE_SHIELDS_SHOP_DIALOG)
+        player:showText(npc, zones[xi.zone.UPPER_JEUNO].text.DURABLE_SHIELDS_SHOP_DIALOG)
         xi.shop.general(player, stock)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

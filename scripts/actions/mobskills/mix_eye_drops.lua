@@ -9,8 +9,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    target:delStatusEffect(xi.effect.BLINDNESS)
-    return 0
+    if target:hasStatusEffect(xi.effect.BLINDNESS) then
+        skill:setMsg(xi.msg.basic.SKILL_ERASE)
+        target:delStatusEffect(xi.effect.BLINDNESS)
+        return xi.effect.BLINDNESS
+    else
+        skill:setMsg(xi.msg.basic.NO_EFFECT)
+    end
 end
 
 return mobskillObject

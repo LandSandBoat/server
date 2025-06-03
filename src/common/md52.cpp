@@ -257,7 +257,7 @@ void md5_finish(md5_context* ctx, uint8 digest[16])
  * those are the standard RFC 1321 test vectors
  */
 
-void md5(unsigned char* text, unsigned char* hash, int size)
+void md5(uint8* text, uint8* hash, int32 size)
 {
     md5_context ctx{};
     md5_starts(&ctx);

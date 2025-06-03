@@ -6,9 +6,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     -- local vars to reduce repeat calls..
     local lever = npc:getID()
@@ -38,12 +35,6 @@ entity.onTrigger = function(player, npc)
 
     -- Move platform
     RunElevator(xi.elevator.FORT_GHELSBA_LIFT)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

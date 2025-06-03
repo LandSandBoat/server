@@ -33,9 +33,6 @@ entity.onTrigger = function(player, npc)
     player:startEvent(30, 12, 0, xi.item.CHUNK_OF_MINE_GRAVEL)
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 51 and npcUtil.giveItem(player, xi.item.SHARP_STONE) then
         player:confirmTrade()

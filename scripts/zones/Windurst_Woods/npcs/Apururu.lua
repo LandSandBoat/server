@@ -99,9 +99,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
         -- THE KIND CARDIAN
     if csid == 392 and option == 1 then

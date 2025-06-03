@@ -6,15 +6,6 @@
 add_subdirectory(concurrentqueue)
 add_subdirectory(sol)
 
-option(TRACY_ENABLE "Enable Tracy profiling." OFF)
-
-# Also handle close flags:
-if(ENABLE_TRACY OR TRACY_ENABLED OR TRACY)
-    set(TRACY_ENABLE ON)
-endif()
-
-message(STATUS "TRACY_ENABLE: ${TRACY_ENABLE}")
-
 # CPM Modules
 if(TRACY_ENABLE)
     # Tracy version tag, without the leading 'v'
@@ -28,7 +19,6 @@ if(TRACY_ENABLE)
         OPTIONS
             "TRACY_ENABLE ON"
             "TRACY_ON_DEMAND ON"
-            "TRACY_CALLSTACK ON" # Value hardcoded to 4 in common/tracy.h
             "TRACY_NO_BROADCAST ON"
             "TRACY_NO_CONTEXT_SWITCH ON"
             "TRACY_NO_EXIT ON"
@@ -83,11 +73,16 @@ CPMAddPackage(
 CPMAddPackage(
     NAME recastnavigation
     GITHUB_REPOSITORY recastnavigation/recastnavigation
-    GIT_TAG 455a019e7aef99354ac3020f04c1fe3541aa4d19
+    GIT_TAG bd98d84c274ee06842bf51a4088ca82ac71f8c2d
     OPTIONS
+        # TODO: Remove this once recast is updated to use CMake 3.5+, it's currently set to what we use in the root CMakeLists.txt
+        "CMAKE_POLICY_VERSION_MINIMUM 3.20"
         "RECASTNAVIGATION_DEMO OFF"
         "RECASTNAVIGATION_TESTS OFF"
         "RECASTNAVIGATION_EXAMPLES OFF"
+        "RECASTNAVIGATION_DT_POLYREF64 OFF"
+        "RECASTNAVIGATION_DT_VIRTUAL_QUERYFILTER OFF"
+        "RECASTNAVIGATION_ENABLE_ASSERTS OFF"
 ) # defines: RecastNavigation::Recast, RecastNavigation::Detour
 
 CPMAddPackage(
@@ -99,19 +94,8 @@ CPMAddPackage(
 CPMAddPackage(
     NAME argparse
     GITHUB_REPOSITORY p-ranav/argparse
-    GIT_TAG cbd9fd8ed675ed6a2ac1bd7142d318c6ad5d3462
+    GIT_TAG d924b84eba1f0f0adf38b20b7b4829f6f65b6570
 ) # defines: argparse
-
-CPMAddPackage(
-    NAME task_system
-    GITHUB_REPOSITORY p-ranav/task_system
-    GIT_TAG 241acb039152b646589fcbbcfb4d8d8e5bddc815
-) # defines: task_system
-
-if(task_system_ADDED)
-    add_library(task_system INTERFACE)
-    target_include_directories(task_system SYSTEM INTERFACE ${task_system_SOURCE_DIR}/include/task_system/)
-endif()
 
 CPMAddPackage(
     NAME efsw
@@ -246,53 +230,94 @@ CPMAddPackage(
     GIT_TAG 83a592f0c3807500f1aaf3b07fd48105a01e2780
 ) # defines: alpaca
 
-set(EXTERNAL_LIBS
+CPMAddPackage(
+    NAME magic_enum
+    GITHUB_REPOSITORY Neargye/magic_enum
+    GIT_TAG 1a1824df7ac798177a521eed952720681b0bf482
+) # defines: magic_enum
+
+set(SHARED_EXTERNAL_LIBS
     fmt::fmt
     spdlog
     concurrentqueue
     mariadbclient
     mariadbcpp
-    RecastNavigation::Recast
-    RecastNavigation::Detour
-    fast_obj
     sol2_single
     argparse
-    task_system
     efsw
     jthread-lite
     expected-lite
-    httplib::httplib
-    nlohmann_json::nlohmann_json
     pcg-cpp
     asio
-    bcrypt
     alpaca
+    magic_enum
 )
 
 if(WIN32)
     # add wepoll for epoll support on windows
     add_subdirectory(wepoll)
 
-    list(APPEND EXTERNAL_LIBS
+    list(APPEND SHARED_EXTERNAL_LIBS
         wepoll
     )
 
 # backwards needs these to add to linker
 elseif(APPLE)
     # MacOS has bfd built in clang
-    list(APPEND EXTERNAL_LIBS
+    list(APPEND SHARED_EXTERNAL_LIBS
         dl
     )
 elseif(UNIX)
     # Linux needs bfd as it's not native like MacOS
-    list(APPEND EXTERNAL_LIBS
+    list(APPEND SHARED_EXTERNAL_LIBS
         bfd
         dl
     )
 endif()
 
-# copy external libs to parent scope
-set(EXTERNAL_LIBS
-    ${EXTERNAL_LIBS}
+set(CONNECT_ONLY_EXTERNAL_LIBS
+    bcrypt
+)
+
+set(MAP_ONLY_EXTERNAL_LIBS
+    RecastNavigation::Recast
+    RecastNavigation::Detour
+    fast_obj
+)
+
+set(SEARCH_ONLY_EXTERNAL_LIBS
+)
+
+set(WORLD_ONLY_EXTERNAL_LIBS
+    httplib::httplib
+    nlohmann_json::nlohmann_json
+)
+
+#
+# copy external lib lists to parent scope
+#
+
+set(SHARED_EXTERNAL_LIBS
+    ${SHARED_EXTERNAL_LIBS}
+    PARENT_SCOPE
+)
+
+set(CONNECT_ONLY_EXTERNAL_LIBS
+    ${CONNECT_ONLY_EXTERNAL_LIBS}
+    PARENT_SCOPE
+)
+
+set(MAP_ONLY_EXTERNAL_LIBS
+    ${MAP_ONLY_EXTERNAL_LIBS}
+    PARENT_SCOPE
+)
+
+set(SEARCH_ONLY_EXTERNAL_LIBS
+    ${SEARCH_ONLY_EXTERNAL_LIBS}
+    PARENT_SCOPE
+)
+
+set(WORLD_ONLY_EXTERNAL_LIBS
+    ${WORLD_ONLY_EXTERNAL_LIBS}
     PARENT_SCOPE
 )

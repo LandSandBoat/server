@@ -37,6 +37,7 @@
 #include "utils/mobutils.h"
 #include "utils/petutils.h"
 
+#include "common/timer.h"
 #include "common/utils.h"
 #include "petentity.h"
 
@@ -45,15 +46,14 @@ CPetEntity::CPetEntity(PET_TYPE petType)
 , m_PetID(0)
 , m_PetType(petType)
 , m_spawnLevel(0)
-, m_jugSpawnTime(time_point::min())
-, m_jugDuration(duration::min())
+, m_jugSpawnTime(timer::time_point::min())
+, m_jugDuration(timer::duration::min())
 {
     TracyZoneScoped;
     objtype                     = TYPE_PET;
     m_EcoSystem                 = ECOSYSTEM::UNCLASSIFIED;
     allegiance                  = ALLEGIANCE_TYPE::PLAYER;
     m_MobSkillList              = 0;
-    m_IsClaimable               = false;
     m_bReleaseTargIDOnDisappear = true;
     spawnAnimation              = SPAWN_ANIMATION::SPECIAL; // Initial spawn has the special spawn-in animation
 
@@ -85,19 +85,17 @@ bool CPetEntity::isBstPet()
     return getPetType() == PET_TYPE::JUG_PET || objtype == TYPE_MOB;
 }
 
-uint32 CPetEntity::getJugSpawnTime()
+timer::time_point CPetEntity::getJugSpawnTime()
 {
     if (m_PetType != PET_TYPE::JUG_PET)
     {
         ShowWarning("Non-Jug Pet calling function (%d).", static_cast<uint8>(m_PetType));
-        return 0;
     }
 
-    const auto epoch = m_jugSpawnTime.time_since_epoch();
-    return static_cast<uint32>(std::chrono::duration_cast<std::chrono::seconds>(epoch).count());
+    return m_jugSpawnTime;
 }
 
-void CPetEntity::setJugSpawnTime(uint32 spawnTime)
+void CPetEntity::setJugSpawnTime(timer::time_point spawnTime)
 {
     if (m_PetType != PET_TYPE::JUG_PET)
     {
@@ -105,21 +103,21 @@ void CPetEntity::setJugSpawnTime(uint32 spawnTime)
         return;
     }
 
-    m_jugSpawnTime = std::chrono::system_clock::time_point(std::chrono::duration<uint32>(spawnTime));
+    m_jugSpawnTime = spawnTime;
 }
 
-uint32 CPetEntity::getJugDuration()
+timer::duration CPetEntity::getJugDuration()
 {
     if (m_PetType != PET_TYPE::JUG_PET)
     {
         ShowWarning("Non-Jug Pet calling function (%d).", static_cast<uint8>(m_PetType));
-        return 0;
+        return 0s;
     }
 
-    return static_cast<uint32>(std::chrono::duration_cast<std::chrono::seconds>(m_jugDuration).count());
+    return m_jugDuration;
 }
 
-void CPetEntity::setJugDuration(uint32 seconds)
+void CPetEntity::setJugDuration(timer::duration seconds)
 {
     if (m_PetType != PET_TYPE::JUG_PET)
     {
@@ -127,7 +125,7 @@ void CPetEntity::setJugDuration(uint32 seconds)
         return;
     }
 
-    m_jugDuration = std::chrono::seconds(seconds);
+    m_jugDuration = seconds;
 }
 
 const std::string CPetEntity::GetScriptName()
@@ -205,7 +203,7 @@ WYVERN_TYPE CPetEntity::getWyvernType()
 void CPetEntity::PostTick()
 {
     CBattleEntity::PostTick();
-    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+    timer::time_point now = timer::now();
     if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR && now > m_nextUpdateTimer)
     {
         m_nextUpdateTimer = now + 250ms;
@@ -263,7 +261,7 @@ void CPetEntity::Spawn()
 
     if (m_PetType == PET_TYPE::JUG_PET)
     {
-        m_jugSpawnTime = server_clock::now();
+        m_jugSpawnTime = timer::now();
     }
 
     // NOTE: This is purposefully calling CBattleEntity's impl.
@@ -570,7 +568,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         {
             target.speceffect = SPECEFFECT::RECOIL;
             target.knockback  = PSkill->getKnockback();
-            if (first && (PSkill->getPrimarySkillchain() != 0))
+            if (first && PTargetFound->health.hp > 0 && PSkill->getPrimarySkillchain() != 0)
             {
                 SUBEFFECT effect = battleutils::GetSkillChainEffect(PTargetFound, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(),
                                                                     PSkill->getTertiarySkillchain());

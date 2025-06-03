@@ -16,9 +16,6 @@ entity.onTrigger = function(player, npc)
     player:startEvent(606)  -- my brother always takes my sweets
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 606 then
         player:setCharVar('BrothersCS', 1)

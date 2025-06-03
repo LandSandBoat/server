@@ -131,7 +131,7 @@ local function getElementalDebuffPotency(caster, statUsed)
         potency = potency + 1
     end
 
-    potency = potency + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT) -- TODO: Add BLM Toban gear effect (potency) here.
+    potency = potency + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT) + caster:getMod(xi.mod.ELEMENTAL_DEBUFF_EFFECT) / 2
 
     return potency
 end
@@ -324,47 +324,38 @@ xi.spells.enfeebling.calculateDuration = function(caster, target, spellId, spell
                 duration = duration + caster:getJobPointLevel(xi.jp.STYMIE_EFFECT)
             end
         end
+
+        duration = math.floor(duration * (1 + caster:getMod(xi.mod.ENF_MAG_DURATION) / 100))
     end
 
     ---@cast duration integer
     return math.floor(duration)
 end
 
-xi.spells.enfeebling.handleEffectNullification = function(caster, target, spell, spellEffect)
-    -- Determine if target mob is completely immune to a status effect.
-    if xi.combat.statusEffect.isTargetImmune(target, spellEffect, spell:getElement()) then
-        spell:setMsg(xi.msg.basic.MAGIC_COMPLETE_RESIST)
+-- Main function, called by spell scripts
+xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
+    local spellId      = spell:getID()
+    local spellElement = spell:getElement()
+    local spellEffect  = pTable[spellId][column.EFFECT_ID]
 
-        return true
+    ------------------------------
+    -- STEP 1: Check spell nullification.
+    ------------------------------
+    if xi.combat.statusEffect.isTargetImmune(target, spellEffect, spellElement) then
+        spell:setMsg(xi.msg.basic.MAGIC_COMPLETE_RESIST)
+        return spellEffect
     end
 
     -- Check trait nullification trigger.
     if xi.combat.statusEffect.isTargetResistant(caster, target, spellEffect) then
         spell:setModifier(xi.msg.actionModifier.RESIST)
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
-
-        return true
+        return spellEffect
     end
 
     -- Target already has an status effect that nullifies current.
     if xi.combat.statusEffect.isEffectNullified(target, spellEffect) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-
-        return true
-    end
-
-    return false
-end
-
--- Main function, called by spell scripts
-xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
-    local spellId     = spell:getID()
-    local spellEffect = pTable[spellId][column.EFFECT_ID]
-
-    ------------------------------
-    -- STEP 1: Check spell nullification.
-    ------------------------------
-    if xi.spells.enfeebling.handleEffectNullification(caster, target, spell, spellEffect) then
         return spellEffect
     end
 
@@ -372,7 +363,6 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     -- STEP 2: Calculate resist tiers.
     ------------------------------
     local skillType    = spell:getSkillType()
-    local spellElement = spell:getElement()
     local spellGroup   = spell:getSpellGroup()
     local statUsed     = pTable[spellId][column.STAT_USED]
     local resistStages = pTable[spellId][column.RESIST_STAGES]

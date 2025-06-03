@@ -19,33 +19,48 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "cs_position.h"
-
+#include "entities/baseentity.h"
 #include "entities/charentity.h"
 
-CCSPositionPacket::CCSPositionPacket(CCharEntity* PChar)
+CCSPositionPacket::CCSPositionPacket(CBaseEntity* PEntity, position_t position, POSMODE mode)
 {
     this->setType(0x65);
-    this->setSize(0x20);
+    this->setSize(0x1C);
 
-    ref<float>(0x04) = PChar->loc.p.x;
-    ref<float>(0x08) = PChar->loc.p.y;
-    ref<float>(0x0C) = PChar->loc.p.z;
-    ref<uint8>(0x17) = PChar->loc.p.rotation;
-
-    ref<uint32>(0x10) = PChar->id;
-    ref<uint16>(0x14) = PChar->targid;
-
-    if (PChar->status == STATUS_TYPE::DISAPPEAR)
+    // Doing this here prevents conflicts when the client receives the packet.
+    auto* PChar = dynamic_cast<CCharEntity*>(PEntity);
+    if (mode == POSMODE::NORMAL ||
+        mode == POSMODE::EVENT ||
+        mode == POSMODE::POP ||
+        mode == POSMODE::RESET ||
+        mode == POSMODE::MATERIALIZE)
     {
-        ref<uint8>(0x16) = 0x05;
-        ref<uint8>(0x1C) = 0x01;
+        PEntity->loc.p.x        = position.x;
+        PEntity->loc.p.y        = position.y;
+        PEntity->loc.p.z        = position.z;
+        PEntity->loc.p.rotation = position.rotation;
+        if (PChar && mode == POSMODE::RESET)
+        {
+            PChar->setLocked(false);
+        }
     }
-    else
+    else if (mode == POSMODE::ROTATE)
     {
-        ref<uint8>(0x16) = 0x01;
-        ref<uint8>(0x18) = 0x01;
+        PEntity->loc.p.rotation = position.rotation;
     }
+    else if (PChar && (mode == POSMODE::LOCK || mode == POSMODE::UNLOCK))
+    {
+        PChar->setLocked(mode == POSMODE::LOCK);
+    }
+
+    ref<float>(0x04) = PEntity->loc.p.x;
+    ref<float>(0x08) = PEntity->loc.p.y;
+    ref<float>(0x0C) = PEntity->loc.p.z;
+    ref<uint8>(0x17) = PEntity->loc.p.rotation;
+
+    ref<uint32>(0x10) = PEntity->id;
+    ref<uint16>(0x14) = PEntity->targid;
+
+    ref<uint8>(0x16) = static_cast<uint8>(mode);
 }

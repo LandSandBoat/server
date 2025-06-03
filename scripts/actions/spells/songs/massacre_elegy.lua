@@ -9,54 +9,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    if target:hasImmunity(xi.immunity.ELEGY) then
-        spell:setMsg(xi.msg.basic.MAGIC_COMPLETE_RESIST)
-        return
-    end
-
-    local duration = 240
-    local power = 10000
-
-    -- local pCHR = caster:getStat(xi.mod.CHR)
-    -- local mCHR = target:getStat(xi.mod.CHR)
-    -- local dCHR = pCHR - mCHR
-    local params = {}
-    params.diff = nil
-    params.attribute = xi.mod.CHR
-    params.skillType = xi.skill.SINGING
-    params.bonus = 0
-    params.effect = xi.effect.ELEGY
-    local resm = applyResistanceEffect(caster, target, spell, params)
-
-    if resm < 0.5 then
-        spell:setMsg(xi.msg.basic.MAGIC_RESIST) -- resist message
-    else
-        local iBoost = caster:getMod(xi.mod.ELEGY_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
-        power = power + iBoost * 100
-
-        if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
-            power = power * 2
-        elseif caster:hasStatusEffect(xi.effect.MARCATO) then
-            power = power * 1.5
-        end
-
-        caster:delStatusEffect(xi.effect.MARCATO)
-
-        duration = duration * (iBoost * 0.1 + caster:getMod(xi.mod.SONG_DURATION_BONUS) / 100 + 1)
-
-        if caster:hasStatusEffect(xi.effect.TROUBADOUR) then
-            duration = duration * 2
-        end
-
-        -- Try to overwrite weaker elegy
-        if target:addStatusEffect(xi.effect.ELEGY, power, 0, duration) then
-            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
-        else
-            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
-        end
-    end
-
-    return xi.effect.ELEGY
+    return xi.spells.enfeebling.useEnfeeblingSong(caster, target, spell)
 end
 
 return spellObject

@@ -6,9 +6,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local scaredyCats = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.SCAREDYCATS)
     local scaredyCatsStatus = player:getCharVar('Scaredycats_Status')
@@ -31,9 +28,6 @@ entity.onTrigger = function(player, npc)
         -- Dialogue after completeing Quest: 'Scaredy-Cats'
         player:startEvent(5030)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

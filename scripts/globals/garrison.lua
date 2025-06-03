@@ -189,7 +189,7 @@ xi.garrison.spawnNPC = function(zone, zoneData, pos, name, groupId, look)
     mob:spawn()
 
     DisallowRespawn(mob:getID(), true)
-    mob:setSpeed(25)
+    mob:setBaseSpeed(25)
     mob:setAllegiance(1)
 
     -- NPCs don't cast spells or use TP skills

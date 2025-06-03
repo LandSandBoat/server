@@ -16,6 +16,12 @@ local skillToAbsorb =
     [828] = xi.mod.WATER_ABSORB, -- water_blade
 }
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+end
+
 entity.onMobEngage = function(mob, target)
     mob:setLocalVar('nextEnSkill', os.time() + 10)
 end
@@ -30,7 +36,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    local skillId = skill:getID()
+    local skillId  = skill:getID()
     local absorbId = skillToAbsorb[skillId]
 
     if absorbId then
@@ -52,9 +58,6 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         -- return TP
         mob:setTP(mob:getLocalVar('currentTP'))
     end
-end
-
-entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

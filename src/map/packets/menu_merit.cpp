@@ -19,10 +19,8 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
-#include "job_points.h"
 #include "menu_merit.h"
+#include "job_points.h"
 
 #include "entities/charentity.h"
 #include "utils/charutils.h"

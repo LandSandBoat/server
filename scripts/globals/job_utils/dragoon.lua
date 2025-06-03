@@ -231,6 +231,8 @@ xi.job_utils.dragoon.useAncientCircle = function(player, target, ability)
         power = 15 + jpValue
     end
 
+    power = power + player:getMod(xi.mod.ANCIENT_CIRCLE_POTENCY)
+
     target:addStatusEffect(xi.effect.ANCIENT_CIRCLE, power, 0, duration)
 end
 

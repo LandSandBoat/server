@@ -30,7 +30,7 @@ CRaiseState::CRaiseState(CBattleEntity* PEntity)
 {
 }
 
-bool CRaiseState::Update(time_point tick)
+bool CRaiseState::Update(timer::time_point tick)
 {
     if (!IsCompleted())
     {

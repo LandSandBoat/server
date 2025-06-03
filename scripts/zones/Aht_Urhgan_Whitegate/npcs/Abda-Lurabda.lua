@@ -7,18 +7,12 @@ local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if player:getMainJob() == xi.job.PUP then
         player:startEvent(648, 0, 9800, player:getGil())
     else
         player:startEvent(257)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

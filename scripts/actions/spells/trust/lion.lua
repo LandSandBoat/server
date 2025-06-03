@@ -25,10 +25,10 @@ spellObject.onMobSpawn = function(mob)
     })
 
     -- Stun all the things!
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.READYING_WS, 0, ai.r.WS, ai.s.SPECIFIC, kGrapeshot)
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.READYING_MS, 0, ai.r.WS, ai.s.SPECIFIC, kGrapeshot)
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.READYING_JA, 0, ai.r.WS, ai.s.SPECIFIC, kGrapeshot)
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.CASTING_MA,  0, ai.r.WS, ai.s.SPECIFIC, kGrapeshot)
+    mob:addGambit(ai.t.TARGET, { ai.c.READYING_WS, 0 }, { ai.r.WS, ai.s.SPECIFIC, kGrapeshot })
+    mob:addGambit(ai.t.TARGET, { ai.c.READYING_MS, 0 }, { ai.r.WS, ai.s.SPECIFIC, kGrapeshot })
+    mob:addGambit(ai.t.TARGET, { ai.c.READYING_JA, 0 }, { ai.r.WS, ai.s.SPECIFIC, kGrapeshot })
+    mob:addGambit(ai.t.TARGET, { ai.c.CASTING_MA,  0 }, { ai.r.WS, ai.s.SPECIFIC, kGrapeshot })
 
     mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.RANDOM)
 end

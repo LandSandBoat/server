@@ -21,32 +21,39 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.ecosystem = xi.ecosystem.PLANTOID
-    params.tpmod = xi.spells.blue.tpMod.DURATION
+    params.ecosystem  = xi.ecosystem.PLANTOID
+    params.tpmod      = xi.spells.blue.tpMod.DURATION
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.BLUNT
-    params.scattr = xi.skillchainType.REVERBERATION
-    params.numhits = 1
+    params.scattr     = xi.skillchainType.REVERBERATION
+    params.numhits    = 1
     params.multiplier = 1.5
-    params.tp150 = 1.5
-    params.tp300 = 1.5
-    params.azuretp = 1.5
-    params.duppercap = 11
-    params.str_wsc = 0.0
-    params.dex_wsc = 0.0
-    params.vit_wsc = 0.3
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
+    params.tp150      = 1.5
+    params.tp300      = 1.5
+    params.azuretp    = 1.5
+    params.duppercap  = 11
+    params.str_wsc    = 0.0
+    params.dex_wsc    = 0.0
+    params.vit_wsc    = 0.3
+    params.agi_wsc    = 0.0
+    params.int_wsc    = 0.0
+    params.mnd_wsc    = 0.0
+    params.chr_wsc    = 0.0
 
-    params.effect = xi.effect.SLOW
-    local power = 1500
-    local tick = 0
-    local duration = 180
-
+    -- Handle damage.
     local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
-    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
+
+    if damage <= 0 then
+        return damage
+    end
+
+    -- Handle status effects.
+    local effectTable =
+    {
+        [1] = { xi.effect.SLOW, 1500, 0, 180 },
+    }
+
+    xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)
 
     return damage
 end

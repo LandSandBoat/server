@@ -24,6 +24,7 @@
 #include "battleutils.h"
 #include "common/utils.h"
 #include "items/item_weapon.h"
+#include "lua/luautils.h"
 #include "status_effect_container.h"
 
 namespace attackutils
@@ -232,10 +233,26 @@ namespace attackutils
 
     bool IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     {
-        if (facing(PDefender->loc.p, PAttacker->loc.p, 64))
+        auto isParriedFunc = lua["xi"]["combat"]["physical"]["isParried"];
+
+        if (isParriedFunc.valid())
         {
-            return (xirand::GetRandomNumber(100) < battleutils::GetParryRate(PAttacker, PDefender));
+            try
+            {
+                bool result = isParriedFunc(PDefender, PAttacker);
+                return result;
+            }
+            catch (const sol::error& err)
+            {
+                ShowError("attackutils::IsParried(): %s", err.what());
+                return false;
+            }
         }
+        else
+        {
+            ShowError("attackutils::IsParried() failed to run Lua function");
+        }
+
         return false;
     }
 
@@ -296,23 +313,23 @@ namespace attackutils
 
         if (allowProc)
         {
-            if (occ_extra_dmg > 3.f && occ_extra_dmg_chance > 0 && xirand::GetRandomNumber(100) <= occ_extra_dmg_chance)
+            if (occ_extra_dmg > 3.f && occ_extra_dmg_chance > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_extra_dmg_chance)
             {
                 return (uint32)(damage * occ_extra_dmg);
             }
-            else if (occ_do_triple_dmg > 0 && xirand::GetRandomNumber(100) <= occ_do_triple_dmg)
+            else if (occ_do_triple_dmg > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_do_triple_dmg)
             {
                 return (uint32)(damage * 3.f);
             }
-            else if (occ_extra_dmg > 2.f && occ_extra_dmg_chance > 0 && xirand::GetRandomNumber(100) <= occ_extra_dmg_chance)
+            else if (occ_extra_dmg > 2.f && occ_extra_dmg_chance > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_extra_dmg_chance)
             {
                 return (uint32)(damage * occ_extra_dmg);
             }
-            else if (occ_do_double_dmg > 0 && xirand::GetRandomNumber(100) <= occ_do_double_dmg)
+            else if (occ_do_double_dmg > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_do_double_dmg)
             {
                 return (uint32)(damage * 2.f);
             }
-            else if (occ_extra_dmg > 0 && occ_extra_dmg_chance > 0 && xirand::GetRandomNumber(100) <= occ_extra_dmg_chance)
+            else if (occ_extra_dmg > 0 && occ_extra_dmg_chance > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_extra_dmg_chance)
             {
                 return (uint32)(damage * occ_extra_dmg);
             }

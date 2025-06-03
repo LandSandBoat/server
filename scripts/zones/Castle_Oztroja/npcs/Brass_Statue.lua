@@ -25,9 +25,6 @@ local passwordTable =
     [8] = { [1] = { 17, 'Mjuu'  }, [2] = { 19, 'Ouzi'  }, [3] = { 23, 'Buxu' } },
 }
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local statue = npc:getID()
     local passwordIndex = GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):getLocalVar('password')

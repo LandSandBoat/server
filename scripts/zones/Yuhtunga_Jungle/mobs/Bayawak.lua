@@ -16,9 +16,10 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobRoam = function(mob)
+    local weather = mob:getWeather()
     if
-        not (mob:getWeather() == xi.weather.HOT_SPELL or
-        mob:getWeather() == xi.weather.HEAT_WAVE)
+        weather ~= xi.weather.HOT_SPELL and
+        weather ~= xi.weather.HEAT_WAVE
     then
         DespawnMob(mob:getID())
     end

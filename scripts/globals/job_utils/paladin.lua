@@ -109,6 +109,8 @@ xi.job_utils.paladin.useHolyCircle = function(player, target, ability)
         power = 5
     end
 
+    power = power + player:getMod(xi.mod.HOLY_CIRCLE_POTENCY)
+
     target:addStatusEffect(xi.effect.HOLY_CIRCLE, power, 0, duration)
 end
 

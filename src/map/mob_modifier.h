@@ -54,7 +54,7 @@ enum MOBMODIFIER : int
     MOBMOD_IMMUNITY               = 23, // immune to set status effects. This only works from the db, not scripts
     MOBMOD_GRADUAL_RAGE           = 24, // (!) TODO: NOT YET IMPLEMENTED -- gradually rages
     MOBMOD_BUILD_RESIST           = 25, // (!) TODO: NOT YET IMPLEMENTED -- builds resistance to given effects
-    MOBMOD_SUPERLINK              = 26, // super link group. Only use this in mob_spawn_mods / scripts!
+    MOBMOD_SUPERLINK              = 26, // super link group. Only use this in scripts!
     MOBMOD_SPELL_LIST             = 27, // set spell list
     MOBMOD_EXP_BONUS              = 28, // bonus exp (bonus / 100) negative values reduce exp.
     MOBMOD_ASSIST                 = 29, // mobs will assist me
@@ -111,6 +111,7 @@ enum MOBMODIFIER : int
     MOBMOD_SKIP_ALLEGIANCE_CHECK  = 80, // Skip the allegiance check for valid target (allows for example a mob to cast a TARGET_ENEMY spell on itself)
     MOBMOD_ABILITY_RESPONSE       = 81, // Mob can respond to player ability use with onPlayerAbilityUse()
     MOBMOD_RUN_SPEED_MULT         = 82, // Multiplier for the speed of a mob while running (generally when the target is out of range) 100 = 1.00x
+    MOBMOD_CLAIM_TYPE             = 83, // Changes the claim behavior of the mob. See ClaimType enum.
 };
 
 #endif

@@ -7,18 +7,12 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local door = GetNPCByID(npc:getID() - 2)
 
     if door and door:getAnimation() == xi.anim.CLOSE_DOOR then
         player:startEvent(51)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

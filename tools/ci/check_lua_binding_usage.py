@@ -5,6 +5,7 @@
 import glob
 import os
 import re
+import regex
 
 function_names = []
 
@@ -131,8 +132,10 @@ def main():
                     line = line.split("--", 1)[0]
 
                     # Don't look inside strings (replace with placeholder)
-                    line = re.sub(r'\"([^\"]*?)\"', "strVal", line)
-                    line = re.sub(r"\'([^\"]*?)\'", "strVal", line)
+                    quote_regex = regex.compile(
+                        r"\"(([^\"\"]+)|(?R))*+\"|\'(([^\'\']+)|(?R))*+\'", re.S
+                    )
+                    line = regex.sub(quote_regex, "strVal", line)
 
                     # Try and ignore function definitions
                     line = line.split("function", 1)[0]

@@ -26,7 +26,7 @@
 
 #include "basic.h"
 
-enum WEATHER
+enum WEATHER : uint8
 {
     WEATHER_NONE          = 0,
     WEATHER_SUNSHINE      = 1,
@@ -47,7 +47,7 @@ enum WEATHER
     WEATHER_AURORAS       = 16,
     WEATHER_STELLAR_GLARE = 17,
     WEATHER_GLOOM         = 18,
-    WEATHER_DARKNESS      = 19
+    WEATHER_DARKNESS      = 19,
 };
 #define MAX_WEATHER_ID 20
 DECLARE_FORMAT_AS_UNDERLYING(WEATHER);

@@ -23,6 +23,7 @@
 #define _CPARTYEFFECTSPACKET_H
 
 #include "common/cbasetypes.h"
+#include "entities/charentity.h"
 
 #include "basic.h"
 
@@ -31,12 +32,9 @@ class CBattleEntity;
 class CPartyEffectsPacket : public CBasicPacket
 {
 public:
-    CPartyEffectsPacket();
-    void AddMemberEffects(CBattleEntity* PMember);
+    explicit CPartyEffectsPacket(const std::vector<CCharEntity*>& membersList);
+    void AddMemberEffects(std::size_t partyIndex, CCharEntity* PMember);
     void AddMemberEffects(uint32 id);
-
-private:
-    int members{ 0 };
 };
 
 #endif

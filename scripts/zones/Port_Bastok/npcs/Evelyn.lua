@@ -3,35 +3,24 @@
 --  NPC: Evelyn
 -- Gustaberg Regional Merchant
 -----------------------------------
-local ID = zones[xi.zone.PORT_BASTOK]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
-    if GetRegionOwner(xi.region.GUSTABERG) ~= xi.nation.BASTOK then
-        player:showText(npc, ID.text.EVELYN_CLOSED_DIALOG)
-    else
+    if GetRegionOwner(xi.region.GUSTABERG) == xi.nation.BASTOK then
         local stock =
         {
-            xi.item.PINCH_OF_SULFUR,  795,
-            xi.item.POPOTO,            49,
-            xi.item.BAG_OF_RYE_FLOUR,  41,
-            xi.item.EGGPLANT,          45,
+            { xi.item.PINCH_OF_SULFUR,  803 },
+            { xi.item.POPOTO,            50 },
+            { xi.item.BAG_OF_RYE_FLOUR,  42 },
+            { xi.item.EGGPLANT,          46 },
         }
 
-        player:showText(npc, ID.text.EVELYN_OPEN_DIALOG)
+        player:showText(npc, zones[xi.zone.PORT_BASTOK].text.EVELYN_OPEN_DIALOG)
         xi.shop.general(player, stock, xi.fameArea.BASTOK)
+    else
+        player:showText(npc, zones[xi.zone.PORT_BASTOK].text.EVELYN_CLOSED_DIALOG)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

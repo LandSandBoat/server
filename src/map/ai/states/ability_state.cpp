@@ -45,9 +45,16 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
     }
     auto* PTarget = m_PEntity->IsValidTarget(m_targid, PAbility->getValidTarget(), m_errorMsg);
 
-    if (!PTarget || m_errorMsg)
+    if (!PTarget || this->HasErrorMsg())
     {
-        throw CStateInitException(m_errorMsg->copy());
+        if (this->HasErrorMsg())
+        {
+            throw CStateInitException(m_errorMsg->copy());
+        }
+        else
+        {
+            throw CStateInitException(std::make_unique<CBasicPacket>());
+        }
     }
     SetTarget(PTarget->targid);
     m_PAbility = std::make_unique<CAbility>(*PAbility);
@@ -66,14 +73,14 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
         actionTarget.messageID = 326;
         actionTarget.param     = PAbility->getID();
         PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
-        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", CLuaBaseEntity(m_PEntity), CLuaAbility(PAbility));
+        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", m_PEntity, PAbility);
 
         // face toward target
         battleutils::turnTowardsTarget(m_PEntity, PTarget);
     }
     else
     {
-        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", CLuaBaseEntity(m_PEntity), CLuaAbility(PAbility));
+        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", m_PEntity, PAbility);
     }
 }
 
@@ -108,7 +115,7 @@ bool CAbilityState::CanChangeState()
     return IsCompleted();
 }
 
-bool CAbilityState::Update(time_point tick)
+bool CAbilityState::Update(timer::time_point tick)
 {
     // Rotate towards target during ability
     if (m_castTime > 0s && tick < GetEntryTime() + m_castTime)
@@ -126,11 +133,11 @@ bool CAbilityState::Update(time_point tick)
         {
             action_t action;
             m_PEntity->OnAbility(*this, action);
-            m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(GetTarget()), CLuaAbility(m_PAbility.get()), CLuaAction(&action));
+            m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", m_PEntity, GetTarget(), m_PAbility.get(), &action);
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
             if (auto* target = GetTarget())
             {
-                target->PAI->EventHandler.triggerListener("ABILITY_TAKE", CLuaBaseEntity(target), CLuaBaseEntity(m_PEntity), CLuaAbility(m_PAbility.get()), CLuaAction(&action));
+                target->PAI->EventHandler.triggerListener("ABILITY_TAKE", target, m_PEntity, m_PAbility.get(), &action);
             }
         }
         else if (m_castTime > 0s) // Instant abilities do not need to be interrupted
@@ -161,7 +168,7 @@ bool CAbilityState::Update(time_point tick)
             CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
             PChar->m_charHistory.abilitiesUsed++;
         }
-        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_STATE_EXIT", CLuaBaseEntity(m_PEntity), CLuaAbility(m_PAbility.get()));
+        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_STATE_EXIT", m_PEntity, m_PAbility.get());
         return true;
     }
 

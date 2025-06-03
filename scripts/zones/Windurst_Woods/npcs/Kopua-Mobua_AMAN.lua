@@ -7,9 +7,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local var = 0
     if not player:getMentor() then
@@ -21,9 +18,6 @@ entity.onTrigger = function(player, npc)
     end
 
     player:startEvent(10026, var)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

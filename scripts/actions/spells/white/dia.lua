@@ -43,11 +43,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Check for Bio
     local bio = target:getStatusEffect(xi.effect.BIO)
 
-    if  bio == nil then -- if no bio, add dia dot
+    if not bio then -- if no bio, add dia dot
         target:addStatusEffect(xi.effect.DIA, 1 + dotBonus, 3, duration, 0, 10, 1)
-    elseif  bio:getSubPower() == 10 and xi.settings.main.BIO_OVERWRITE == 1 then -- Try to kill same tier Bio (non-default behavior)
-            target:delStatusEffect(xi.effect.BIO)
-            target:addStatusEffect(xi.effect.DIA, 1 + dotBonus, 3, duration, 0, 10, 1)
+    elseif bio:getSubPower() == 10 and xi.settings.main.BIO_OVERWRITE == 1 then -- Try to kill same tier Bio (non-default behavior)
+        target:delStatusEffect(xi.effect.BIO)
+        target:addStatusEffect(xi.effect.DIA, 1 + dotBonus, 3, duration, 0, 10, 1)
     end
 
     return final

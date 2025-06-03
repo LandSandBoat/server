@@ -7,9 +7,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local theWaywardAutomaton = player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)
     local theWaywardAutomatonProgress = player:getCharVar('TheWaywardAutomatonProgress')
@@ -27,7 +24,7 @@ entity.onTrigger = function(player, npc)
     -- Quest: Operation Teatime
     elseif
         operationTeatimeProgress == 2 and
-        player:getCharVar('OTT_DayWait') ~= VanadielDayOfTheYear()
+        player:getCharVar('OTT_DayWait') ~= VanadielUniqueDay()
     then
         player:startEvent(290) -- CS for Chai
     else
@@ -35,14 +32,11 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 289 then
         player:setCharVar('TheWaywardAutomatonProgress', 2)
     elseif csid == 290 and option == 0 then
-        player:setCharVar('OTT_DayWait', VanadielDayOfTheYear())
+        player:setCharVar('OTT_DayWait', VanadielUniqueDay())
     elseif csid == 290 and option == 1 then
         player:setCharVar('OperationTeatimeProgress', 3)
         player:setCharVar('OTT_DayWait', 0)

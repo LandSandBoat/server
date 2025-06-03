@@ -169,7 +169,7 @@ bool CLatentEffect::Deactivate()
         }
 
         m_Activated = false;
-        // printf("LATENT DEACTIVATED: %d\n", m_ModValue);
+        // printf("LATENT DEACTIVATED: %d", m_ModValue);
         return true;
     }
     return false;

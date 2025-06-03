@@ -40,12 +40,14 @@ local bracerMode = function(mob, qnAern1, qnAern2)
 end
 
 entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+
     mob:addListener('ITEM_DROPS', 'ITEM_DROPS_IXAERN_MNK', function(mobArg, loot)
         local rate = mob:getLocalVar('[SEA]IxAern_DropRate')
         loot:addGroupFixed(rate,
         {
-            { item = xi.item.DEED_OF_PLACIDITY, weight = 750 },
-            { item = xi.item.VICE_OF_ANTIPATHY, weight = 250 },
+            { item = xi.item.DEED_OF_PLACIDITY, weight = 850 },
+            { item = xi.item.VICE_OF_ANTIPATHY, weight = 150 },
         })
     end)
 end

@@ -9,9 +9,6 @@ local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local pet = player:getPet()
     if
@@ -28,9 +25,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.SOME_SORT_OF_CEREMONY)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

@@ -100,9 +100,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     -- THE ALL NEW C-2000
     if csid == 285 and option ~= 2 then  -- option 2 is declining the quest for the second question

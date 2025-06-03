@@ -107,6 +107,67 @@ xi.moghouse.set2ndFloorStyle = function(player, style)
     player:setMoghouseFlag(mhflag)
 end
 
+xi.moghouse.getAvailableMusic = function(player)
+    -- See documentation/songdata.txt or documentation/MusicIDs.txt for song data.
+    local possibleSongs = {}
+
+    local orchestrion  = player:findItem(xi.item.ORCHESTRION)
+    local spinet       = player:findItem(xi.item.SPINET)
+    local nanaaStatue1 = player:findItem(xi.item.NANAA_MIHGO_STATUE)
+    local nanaaStatue2 = player:findItem(xi.item.NANAA_MIHGO_STATUE_II)
+
+    local hasOrchestrion  = orchestrion and orchestrion:isInstalled()
+    local hasSpinet       = spinet and spinet:isInstalled()
+    local hasNanaaStatue1 = nanaaStatue1 and nanaaStatue1:isInstalled()
+    local hasNanaaStatue2 = nanaaStatue2 and nanaaStatue2:isInstalled()
+
+    -- NOTE: Since Spinet, Nanaa Mihgo Statue I, and Nanaa Mihgo Statue II are promotional-only items,
+    --     : it is extremely difficult to get them and test what they do when used together.
+    --     : We're completely guessing how they interact with each other.
+    --     : TODO: Do these overwrite eachother in some way, or do they work together (as we've implemented
+    --     : them here)?
+    if not hasOrchestrion then
+        -- https://www.bg-wiki.com/ffxi/Orchestrion
+        if hasSpinet then
+            table.insert(possibleSongs, 112) -- Selbina
+            table.insert(possibleSongs, 196) -- Fighters of the Crystal
+            table.insert(possibleSongs, 230) -- A New Horizon
+            table.insert(possibleSongs, 187) -- Ragnarok
+            table.insert(possibleSongs, 215) -- Clash of Standards
+            table.insert(possibleSongs, 47)  -- Echoes of Creation
+            table.insert(possibleSongs, 49)  -- Luck of the Mog
+            table.insert(possibleSongs, 50)  -- Feast of the Ladies
+            table.insert(possibleSongs, 51)  -- Abyssea
+            table.insert(possibleSongs, 52)  -- Melodies Errant
+            table.insert(possibleSongs, 109) -- Ronfaure
+            table.insert(possibleSongs, 251) -- Autumn Footfalls
+            table.insert(possibleSongs, 48)  -- Main Theme
+            table.insert(possibleSongs, 126) -- Mog House
+        end
+
+        if hasNanaaStatue1 then
+            table.insert(possibleSongs, 69) -- Distant Worlds (Nanaa Mihgo's Version)
+        end
+
+        if hasNanaaStatue2 then
+            table.insert(possibleSongs, 59) -- The Pioneers (Nanaa Mihgo's Version)
+        end
+    end
+
+    return possibleSongs
+end
+
+xi.moghouse.trySetMusic = function(player)
+    local possibleSongs = xi.moghouse.getAvailableMusic(player)
+
+    if #possibleSongs > 0 then
+        -- This needs a moment before music changes can take effect
+        player:timer(1000, function(playerArg)
+            playerArg:changeMusic(6, utils.randomEntry(possibleSongs))
+        end)
+    end
+end
+
 xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
     local cs = -1
 
@@ -155,6 +216,8 @@ xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
         xi.moghouse.set2ndFloorStyle(player, nation)
     end
 
+    xi.moghouse.trySetMusic(player)
+
     return cs
 end
 
@@ -202,7 +265,7 @@ xi.moghouse.moogleTrigger = function(player, npc)
             end
         end
 
-        player:sendMenu(1)
+        player:sendMenu(xi.menuType.MOOGLE)
     end
 end
 

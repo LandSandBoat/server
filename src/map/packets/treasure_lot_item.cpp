@@ -19,12 +19,11 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
+#include "treasure_lot_item.h"
+
 #include "common/utils.h"
 
 #include <cstring>
-
-#include "treasure_lot_item.h"
 
 #include "entities/baseentity.h"
 

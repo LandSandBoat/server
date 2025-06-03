@@ -19,15 +19,13 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include <cstring>
 
 #include "party_invite.h"
 
 #include "entities/charentity.h"
 
-CPartyInvitePacket::CPartyInvitePacket(uint32 id, uint16 targid, CCharEntity* PInviter, INVITETYPE InviteType)
+CPartyInvitePacket::CPartyInvitePacket(uint32 id, uint16 targid, const std::string& inviterName, INVITETYPE InviteType)
 {
     this->setType(0xDC);
     this->setSize(0x20);
@@ -37,5 +35,5 @@ CPartyInvitePacket::CPartyInvitePacket(uint32 id, uint16 targid, CCharEntity* PI
 
     ref<uint8>(0x0B) = InviteType;
 
-    std::memcpy(buffer_.data() + 0x0C, PInviter->getName().c_str(), PInviter->getName().size());
+    std::memcpy(buffer_.data() + 0x0C, inviterName.c_str(), inviterName.size());
 }

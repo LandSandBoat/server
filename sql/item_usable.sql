@@ -1869,6 +1869,9 @@ INSERT INTO `item_usable` VALUES (6183,'pluton_box',1,1,24,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6184,'beitetsu_box',1,1,24,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6185,'boulder_box',1,1,24,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6186,'slime_rocket',1,1,115,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6187,'piece_of_slimeulation_candy',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6188,'piece_of_she-slime_candy',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6189,'piece_of_metal_slime_candy',1,1,55,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6190,'spriggan_spark',1,1,114,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6211,'slice_of_marinara_pizza',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6212,'slice_of_marinara_pizza_+1',1,1,28,0,0,0,0,0);
@@ -1969,6 +1972,10 @@ INSERT INTO `item_usable` VALUES (6571,'scroll_of_phalanx_ii',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6576,'turkey_with_rolanberry_sauce',1,1,28,0,0,0,0,0); -- TODO: verify animation from retail
 INSERT INTO `item_usable` VALUES (6601,'omelette_sandwich',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6602,'omelette_sandwich_+1',1,1,28,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6690,'sheet_of_starlight_tunes',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6691,'sheet_of_mapitoto_tunes',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6696,'sheet_of_near_east_tunes',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6704,'sheet_of_divine_tunes',1,1,117,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (10250,'moogle_suit',1,8,0,0,1,30,86400,0);
 INSERT INTO `item_usable` VALUES (10253,'decennial_coat_+1',1,8,0,0,1,30,86400,0);
 INSERT INTO `item_usable` VALUES (10254,'decennial_dress_+1',1,8,0,0,1,30,86400,0);
@@ -2365,18 +2372,22 @@ INSERT INTO `item_usable` VALUES (22142,'armageddon',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (22143,'fomalhaut',1,1,55,0,1,10,3600,0);
 -- INSERT INTO `item_usable` VALUES (22288,'mandragora_pouch',1,2,55,0,1,10,216000,0);  -- Enchantment: Tiny Allowance (Enchantment gives a random small amount of gil (<2,000))
 INSERT INTO `item_usable` VALUES (25585,'black_chocobo_cap',1,8,79,0,1,30,72000,0);
-INSERT INTO `item_usable` VALUES (26164,'caliber_ring',1,3,76,0,3,5,900,0);
-INSERT INTO `item_usable` VALUES (26271,'hi-elixir_tank',1,2,55,0,3,30,60,0);
-INSERT INTO `item_usable` VALUES (26272,'super_reraiser_tank',1,2,55,0,5,30,60,0);
-INSERT INTO `item_usable` VALUES (26517,'shadow_lord_shirt',1,8,79,0,1,30,72000,0);
 INSERT INTO `item_usable` VALUES (25679,'white_rarab_cap_+1',1,8,33,0,1,30,72000,0);
 INSERT INTO `item_usable` VALUES (25774,'fancy_gilet',1,2,55,0,1,30,86400,0); -- Dispense: persikos snow cone
 INSERT INTO `item_usable` VALUES (25775,'fancy_top',1,2,55,0,1,30,86400,0); -- Dispense: persikos snow cone
+INSERT INTO `item_usable` VALUES (26164,'caliber_ring',1,3,76,0,3,5,900,0);
 INSERT INTO `item_usable` VALUES (26165,'facility_ring',1,3,76,0,3,5,900,0);
+INSERT INTO `item_usable` VALUES (26271,'hi-elixir_tank',1,2,55,0,3,30,60,0);
+INSERT INTO `item_usable` VALUES (26272,'super_reraiser_tank',1,2,55,0,5,30,60,0);
+INSERT INTO `item_usable` VALUES (26517,'shadow_lord_shirt',1,8,79,0,1,30,72000,0);
 INSERT INTO `item_usable` VALUES (26720,'sheep_cap_+1',1,2,55,0,1,30,86400,0);
+INSERT INTO `item_usable` VALUES (26788,'rabbit_cap',1,1,55,8,1,30,72000,0);
 INSERT INTO `item_usable` VALUES (26955,'behemoth_suit_+1',1,2,55,0,1,30,72000,0);
 INSERT INTO `item_usable` VALUES (27556,'echad_ring',1,3,76,0,1,5,7200,0);
 INSERT INTO `item_usable` VALUES (27557,'trizek_ring',1,3,76,0,1,5,7200,0);
+INSERT INTO `item_usable` VALUES (27726,'she_slime_hat',1,2,55,0,1,30,86400,0);
+INSERT INTO `item_usable` VALUES (27727,'metal_slime_hat',1,2,55,0,1,30,86400,0);
+INSERT INTO `item_usable` VALUES (27756,'slime_cap',1,2,55,0,1,30,86400,0);
 INSERT INTO `item_usable` VALUES (28469,'endorsement_ring',1,3,76,0,1,5,7200,0);
 INSERT INTO `item_usable` VALUES (28528,'undecennial_ring',1,3,76,0,11,15,3600,0);
 INSERT INTO `item_usable` VALUES (28540,'warp_ring',1,8,80,3,1,8,600,0);
@@ -2386,7 +2397,7 @@ INSERT INTO `item_usable` VALUES (28563,'vocation_ring',1,3,76,0,12,15,3600,0);
 INSERT INTO `item_usable` VALUES (28568,'resolution_ring',1,3,76,0,5,5,900,0);
 INSERT INTO `item_usable` VALUES (28569,'expertise_ring',1,3,76,0,10,5,900,0);
 INSERT INTO `item_usable` VALUES (28652,'hatchling_shield',1,1,55,8,1,30,86400,0);
-INSERT INTO `item_usable` VALUES (26788,'rabbit_cap',1,1,55,8,1,30,86400,0);
+
 /*!40000 ALTER TABLE `item_usable` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

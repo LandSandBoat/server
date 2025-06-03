@@ -46,7 +46,7 @@ entity.onTrigger = function(player, npc)
         jeunoFame >= 5 and
         yourCrystalBall == xi.questStatus.QUEST_COMPLETED and
         player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN) == xi.questStatus.QUEST_AVAILABLE and
-        player:getCharVar('QuestNeverToReturn_day') ~= VanadielDayOfTheYear()
+        player:getCharVar('QuestNeverToReturn_day') ~= VanadielUniqueDay()
     then
         local prog = player:getCharVar('QuestNeverToReturn_prog')
         if prog <= 2 then
@@ -86,9 +86,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 194 and option == 0 then
         player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
@@ -101,7 +98,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     elseif csid == 204 and option == 0 then
         player:incrementCharVar('QuestNeverToReturn_prog', 1)  -- Keep track of how many times the players fortune has been read
-        player:setCharVar('QuestNeverToReturn_day', VanadielDayOfTheYear()) -- new vanadiel day
+        player:setCharVar('QuestNeverToReturn_day', VanadielUniqueDay()) -- new vanadiel day
 
     elseif csid == 202 and option == 0 then
         player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)

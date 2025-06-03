@@ -1,12 +1,19 @@
 -----------------------------------
 -- Area: Xarcabard
 --   NM: Timeworn Warrior
+--  WOTG Nov 2009 NM: Immune to Bind, Sleep, Gravity.
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.BIND)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

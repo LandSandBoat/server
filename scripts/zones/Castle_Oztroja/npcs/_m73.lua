@@ -23,9 +23,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if option == 1 then
         local brassDoor = GetNPCByID(ID.npc.BRASS_DOOR_FLOOR_4_H7)

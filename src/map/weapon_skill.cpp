@@ -114,7 +114,7 @@ void CWeaponSkill::setAnimationId(int8 id)
     m_AnimationId = id;
 }
 
-void CWeaponSkill::setAnimationTime(duration time)
+void CWeaponSkill::setAnimationTime(timer::duration time)
 {
     m_AnimationTime = time;
 }
@@ -169,7 +169,7 @@ uint8 CWeaponSkill::getAnimationId() const
     return m_AnimationId;
 }
 
-duration CWeaponSkill::getAnimationTime()
+timer::duration CWeaponSkill::getAnimationTime()
 {
     return m_AnimationTime;
 }

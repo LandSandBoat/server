@@ -7,9 +7,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == xi.questStatus.QUEST_COMPLETED then
         local fired = player:getCharVar('Fired')
@@ -24,16 +21,13 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 505 then
         player:setCharVar('Fired', 1)
     end
 end
 
--------for future use
+-- for future use
 --    player:startEvent(32691) -- starlight celebration
 
 return entity

@@ -4,37 +4,24 @@
 -- Only sells when Windurst controlls Gustaberg Region
 -- Confirmed shop stock, August 2013
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WOODS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
-    local regionOwner = GetRegionOwner(xi.region.GUSTABERG)
-
-    if regionOwner ~= xi.nation.WINDURST then
-        player:showText(npc, ID.text.NYALABICCIO_CLOSED_DIALOG)
-    else
-        player:showText(npc, ID.text.NYALABICCIO_OPEN_DIALOG)
-
+    if GetRegionOwner(xi.region.GUSTABERG) == xi.nation.WINDURST then
         local stock =
         {
-            1108,  703, -- Sulfur
-            619,    43, -- Popoto
-            611,    36, -- Rye Flour
-            4388,   40  -- Eggplant
+            { xi.item.PINCH_OF_SULFUR,  803 },
+            { xi.item.POPOTO,            50 },
+            { xi.item.BAG_OF_RYE_FLOUR,  42 },
+            { xi.item.EGGPLANT,          46 },
         }
+
+        player:showText(npc, zones[xi.zone.WINDURST_WOODS].text.NYALABICCIO_OPEN_DIALOG)
         xi.shop.general(player, stock, xi.fameArea.WINDURST)
+    else
+        player:showText(npc, zones[xi.zone.WINDURST_WOODS].text.NYALABICCIO_CLOSED_DIALOG)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

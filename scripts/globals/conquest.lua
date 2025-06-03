@@ -57,25 +57,25 @@ end
 
 local outposts =
 {
-    [xi.region.RONFAURE]        = { zone = xi.zone.WEST_RONFAURE,          ki = xi.ki.RONFAURE_SUPPLIES,              cp = 10, lvl = 10, fee = 100 },
-    [xi.region.ZULKHEIM]        = { zone = xi.zone.VALKURM_DUNES,          ki = xi.ki.ZULKHEIM_SUPPLIES,              cp = 30, lvl = 10, fee = 100 },
-    [xi.region.NORVALLEN]       = { zone = xi.zone.JUGNER_FOREST,          ki = xi.ki.NORVALLEN_SUPPLIES,             cp = 40, lvl = 15, fee = 150 },
-    [xi.region.GUSTABERG]       = { zone = xi.zone.NORTH_GUSTABERG,        ki = xi.ki.GUSTABERG_SUPPLIES,             cp = 10, lvl = 10, fee = 100 },
-    [xi.region.DERFLAND]        = { zone = xi.zone.PASHHOW_MARSHLANDS,     ki = xi.ki.DERFLAND_SUPPLIES,              cp = 40, lvl = 15, fee = 150 },
-    [xi.region.SARUTABARUTA]    = { zone = xi.zone.WEST_SARUTABARUTA,      ki = xi.ki.SARUTABARUTA_SUPPLIES,          cp = 10, lvl = 10, fee = 100 },
-    [xi.region.KOLSHUSHU]       = { zone = xi.zone.BUBURIMU_PENINSULA,     ki = xi.ki.KOLSHUSHU_SUPPLIES,             cp = 40, lvl = 10, fee = 100 },
-    [xi.region.ARAGONEU]        = { zone = xi.zone.MERIPHATAUD_MOUNTAINS,  ki = xi.ki.ARAGONEU_SUPPLIES,              cp = 40, lvl = 15, fee = 150 },
-    [xi.region.FAUREGANDI]      = { zone = xi.zone.BEAUCEDINE_GLACIER,     ki = xi.ki.FAUREGANDI_SUPPLIES,            cp = 70, lvl = 35, fee = 350 },
-    [xi.region.VALDEAUNIA]      = { zone = xi.zone.XARCABARD,              ki = xi.ki.VALDEAUNIA_SUPPLIES,            cp = 50, lvl = 40, fee = 400 },
-    [xi.region.QUFIMISLAND]     = { zone = xi.zone.QUFIM_ISLAND,           ki = xi.ki.QUFIM_SUPPLIES,                 cp = 60, lvl = 15, fee = 150 },
-    [xi.region.LITELOR]         = { zone = xi.zone.THE_SANCTUARY_OF_ZITAH, ki = xi.ki.LITELOR_SUPPLIES,               cp = 40, lvl = 25, fee = 250 },
-    [xi.region.KUZOTZ]          = { zone = xi.zone.EASTERN_ALTEPA_DESERT,  ki = xi.ki.KUZOTZ_SUPPLIES,                cp = 70, lvl = 30, fee = 300 },
-    [xi.region.VOLLBOW]         = { zone = xi.zone.CAPE_TERIGGAN,          ki = xi.ki.VOLLBOW_SUPPLIES,               cp = 70, lvl = 50, fee = 500 },
-    [xi.region.ELSHIMOLOWLANDS] = { zone = xi.zone.YUHTUNGA_JUNGLE,        ki = xi.ki.ELSHIMO_LOWLANDS_SUPPLIES,      cp = 70, lvl = 25, fee = 250 },
-    [xi.region.ELSHIMOUPLANDS]  = { zone = xi.zone.YHOATOR_JUNGLE,         ki = xi.ki.ELSHIMO_UPLANDS_SUPPLIES,       cp = 70, lvl = 35, fee = 350 },
-    [xi.region.TULIA]           = { zone = xi.zone.RUAUN_GARDENS,                                                     cp = 0,  lvl = 70, fee = 500 },
-    [xi.region.MOVALPOLOS]      = { zone = xi.zone.OLDTON_MOVALPOLOS,                                                 cp = 40, lvl = 25, fee = 250 },
-    [xi.region.TAVNAZIANARCH]   = { zone = xi.zone.LUFAISE_MEADOWS,        ki = xi.ki.TAVNAZIAN_ARCHIPELAGO_SUPPLIES, cp = 70, lvl = 30, fee = 300 },
+    [xi.region.RONFAURE]         = { zone = xi.zone.WEST_RONFAURE,          ki = xi.ki.RONFAURE_SUPPLIES,              cp = 10, lvl = 10, fee = 100 },
+    [xi.region.ZULKHEIM]         = { zone = xi.zone.VALKURM_DUNES,          ki = xi.ki.ZULKHEIM_SUPPLIES,              cp = 30, lvl = 10, fee = 100 },
+    [xi.region.NORVALLEN]        = { zone = xi.zone.JUGNER_FOREST,          ki = xi.ki.NORVALLEN_SUPPLIES,             cp = 40, lvl = 15, fee = 150 },
+    [xi.region.GUSTABERG]        = { zone = xi.zone.NORTH_GUSTABERG,        ki = xi.ki.GUSTABERG_SUPPLIES,             cp = 10, lvl = 10, fee = 100 },
+    [xi.region.DERFLAND]         = { zone = xi.zone.PASHHOW_MARSHLANDS,     ki = xi.ki.DERFLAND_SUPPLIES,              cp = 40, lvl = 15, fee = 150 },
+    [xi.region.SARUTABARUTA]     = { zone = xi.zone.WEST_SARUTABARUTA,      ki = xi.ki.SARUTABARUTA_SUPPLIES,          cp = 10, lvl = 10, fee = 100 },
+    [xi.region.KOLSHUSHU]        = { zone = xi.zone.BUBURIMU_PENINSULA,     ki = xi.ki.KOLSHUSHU_SUPPLIES,             cp = 40, lvl = 10, fee = 100 },
+    [xi.region.ARAGONEU]         = { zone = xi.zone.MERIPHATAUD_MOUNTAINS,  ki = xi.ki.ARAGONEU_SUPPLIES,              cp = 40, lvl = 15, fee = 150 },
+    [xi.region.FAUREGANDI]       = { zone = xi.zone.BEAUCEDINE_GLACIER,     ki = xi.ki.FAUREGANDI_SUPPLIES,            cp = 70, lvl = 35, fee = 350 },
+    [xi.region.VALDEAUNIA]       = { zone = xi.zone.XARCABARD,              ki = xi.ki.VALDEAUNIA_SUPPLIES,            cp = 50, lvl = 40, fee = 400 },
+    [xi.region.QUFIMISLAND]      = { zone = xi.zone.QUFIM_ISLAND,           ki = xi.ki.QUFIM_SUPPLIES,                 cp = 60, lvl = 15, fee = 150 },
+    [xi.region.LITELOR]          = { zone = xi.zone.THE_SANCTUARY_OF_ZITAH, ki = xi.ki.LITELOR_SUPPLIES,               cp = 40, lvl = 25, fee = 250 },
+    [xi.region.KUZOTZ]           = { zone = xi.zone.EASTERN_ALTEPA_DESERT,  ki = xi.ki.KUZOTZ_SUPPLIES,                cp = 70, lvl = 30, fee = 300 },
+    [xi.region.VOLLBOW]          = { zone = xi.zone.CAPE_TERIGGAN,          ki = xi.ki.VOLLBOW_SUPPLIES,               cp = 70, lvl = 50, fee = 500 },
+    [xi.region.ELSHIMO_LOWLANDS] = { zone = xi.zone.YUHTUNGA_JUNGLE,        ki = xi.ki.ELSHIMO_LOWLANDS_SUPPLIES,      cp = 70, lvl = 25, fee = 250 },
+    [xi.region.ELSHIMO_UPLANDS]  = { zone = xi.zone.YHOATOR_JUNGLE,         ki = xi.ki.ELSHIMO_UPLANDS_SUPPLIES,       cp = 70, lvl = 35, fee = 350 },
+    [xi.region.TULIA]            = { zone = xi.zone.RUAUN_GARDENS,                                                     cp = 0,  lvl = 70, fee = 500 },
+    [xi.region.MOVALPOLOS]       = { zone = xi.zone.OLDTON_MOVALPOLOS,                                                 cp = 40, lvl = 25, fee = 250 },
+    [xi.region.TAVNAZIANARCH]    = { zone = xi.zone.LUFAISE_MEADOWS,        ki = xi.ki.TAVNAZIAN_ARCHIPELAGO_SUPPLIES, cp = 70, lvl = 30, fee = 300 },
 }
 
 local function hasOutpost(player, region)
@@ -85,7 +85,7 @@ local function hasOutpost(player, region)
         if xi.settings.main.UNLOCK_OUTPOST_WARPS == 2 then
             hasOP = true
         elseif xi.settings.main.UNLOCK_OUTPOST_WARPS == 1 then
-            hasOP = region <= xi.region.ELSHIMOUPLANDS
+            hasOP = region <= xi.region.ELSHIMO_UPLANDS
         end
     end
 
@@ -479,7 +479,7 @@ local overseerOffsets =
         { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
         { offset = 10, nation = xi.nation.OTHER    }, -- Bright Moon
     },
-    [xi.region.ELSHIMOLOWLANDS] =
+    [xi.region.ELSHIMO_LOWLANDS] =
     {
         { offset =  0, nation = xi.nation.SANDORIA }, -- Zorchorevi, R.K.
         { offset =  7, nation = xi.nation.SANDORIA }, -- Mupia, R.K.
@@ -497,7 +497,7 @@ local overseerOffsets =
         { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
         { offset = 10, nation = xi.nation.OTHER    }, -- Robino-Mobino
     },
-    [xi.region.ELSHIMOUPLANDS] =
+    [xi.region.ELSHIMO_UPLANDS] =
     {
         { offset =  0, nation = xi.nation.SANDORIA }, -- Ilieumort, R.K.
         { offset =  7, nation = xi.nation.SANDORIA }, -- Emila, R.K.
@@ -1710,5 +1710,3 @@ xi.conquest.onCityConquestUpdate = function(zone, updatetype, ranking, isconques
         end
     end
 end
-
-xi.conq = xi.conquest

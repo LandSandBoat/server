@@ -23,14 +23,14 @@
 
 #include "gardenutils.h"
 
+#include "common/database.h"
+#include "common/logging.h"
 #include "common/vana_time.h"
-
-#include <cmath>
 
 #include "entities/charentity.h"
 #include "item_container.h"
 #include "items/item_flowerpot.h"
-#include "map.h"
+#include "map_server.h"
 #include "packets/inventory_item.h"
 
 #define MAX_RESULTID 2500
@@ -55,24 +55,25 @@ namespace gardenutils
 {
     void LoadResultList()
     {
-        int32 ret = _sql->Query("SELECT resultId, seed, element1, element2, result, min_quantity, max_quantity, weight FROM gardening_results");
+        const auto rset = db::preparedStmt("SELECT resultId, seed, element1, element2, result, min_quantity, max_quantity, weight FROM gardening_results");
 
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        if (rset && rset->rowsCount())
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                uint8 SeedID   = (uint8)_sql->GetUIntData(1);
-                uint8 Element1 = (uint8)_sql->GetUIntData(2);
-                uint8 Element2 = (uint8)_sql->GetUIntData(3);
+                uint8 SeedID   = rset->get<uint8>("seed");
+                uint8 Element1 = rset->get<uint8>("element1");
+                uint8 Element2 = rset->get<uint8>("element2");
 
                 uint32 uid = (SeedID << 8) + (Element1 << 4) + Element2;
 
                 GardenResultList_t& resultList = g_pGardenResultMap[uid];
 
-                uint16 ItemID      = (uint16)_sql->GetIntData(4);
-                uint8  MinQuantity = (uint8)_sql->GetIntData(5);
-                uint8  MaxQuantity = (uint8)_sql->GetIntData(6);
-                uint8  Weight      = (uint8)_sql->GetIntData(7);
+                uint16 ItemID      = rset->get<uint16>("result");
+                uint8  MinQuantity = rset->get<uint8>("min_quantity");
+                uint8  MaxQuantity = rset->get<uint8>("max_quantity");
+                uint8  Weight      = rset->get<uint8>("weight");
+
                 resultList.emplace_back(ItemID, MinQuantity, MaxQuantity, Weight);
             }
         }
@@ -86,7 +87,7 @@ namespace gardenutils
     void UpdateGardening(CCharEntity* PChar, bool sendPacket)
     {
         TracyZoneScoped;
-        uint32 vanatime = CVanaTime::getInstance()->getVanaTime();
+        uint32 vanatime = earth_time::vanadiel_timestamp();
         for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
         {
             CItemContainer* PContainer = PChar->getStorage(containerID);
@@ -115,10 +116,8 @@ namespace gardenutils
 
                         PPotItem->clearExamined();
 
-                        char extra[sizeof(PItem->m_extra) * 2 + 1];
-                        _sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
-                        const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u";
-                        _sql->Query(Query, extra, PChar->id, containerID, slotID);
+                        db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
+                                         PItem->m_extra, PChar->id, containerID, slotID);
 
                         if (sendPacket)
                         {
@@ -171,8 +170,9 @@ namespace gardenutils
 
         if (settings::get<bool>("map.GARDEN_DAY_MATTERS"))
         {
-            uint32 vanaDate   = PItem->getPlantTimestamp();
-            uint32 dayElement = ((vanaDate % VTIME_WEEK) / VTIME_DAY) + 1;
+            earth_time::duration      vanaTimestamp = std::chrono::seconds(PItem->getPlantTimestamp());
+            vanadiel_time::time_point vanaDate      = vanadiel_time::time_point(std::chrono::duration_cast<vanadiel_time::duration>(vanaTimestamp));
+            uint32                    dayElement    = vanadiel_time::get_weekday(vanaDate) + 1;
             elements[dayElement] += 10;
         }
 
@@ -240,7 +240,7 @@ namespace gardenutils
 
         if (settings::get<bool>("map.GARDEN_MOONPHASE_MATTERS"))
         {
-            strength += (int16)std::ceil(CVanaTime::getInstance()->getMoonPhase() / 10.0f);
+            strength += static_cast<int16>(std::ceil(vanadiel_time::moon::get_phase() / 10.0f));
         }
 
         if (settings::get<bool>("map.GARDEN_MH_AURA_MATTERS"))
@@ -358,7 +358,8 @@ namespace gardenutils
                 break;
         }
 
-        PItem->setStageTimestamp(CVanaTime::getInstance()->getVanaTime() + GetStageDuration(PItem, growFromFeed) * VANADAY_SECONDS);
+        vanadiel_time::time_point stageTimestamp = vanadiel_time::now() + xi::vanadiel_clock::days(GetStageDuration(PItem, growFromFeed));
+        PItem->setStageTimestamp(earth_time::vanadiel_timestamp(vanadiel_time::to_earth_time(stageTimestamp)));
     }
 
     uint8 GetStageDuration(CItemFlowerpot* PItem, bool growFromFeed /*= false*/)

@@ -29,7 +29,6 @@
 #include "lua/lua_baseentity.h"
 #include "lua/luautils.h"
 
-#include <cmath>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -277,7 +276,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::stri
                 break;
 
             default:
-                ShowError("cmdhandler::call: (%s) undefined type for param; symbol: %s", cmdname.c_str(), *parameter);
+                ShowError("cmdhandler::call: (%s) undefined type for param: symbol: %s", cmdname.c_str(), *parameter);
                 break;
         }
 
@@ -285,7 +284,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::stri
     }
 
     // Call the function
-    auto result = onTrigger(CLuaBaseEntity(PChar), sol::as_args(args));
+    auto result = onTrigger(PChar, sol::as_args(args));
     if (!result.valid())
     {
         sol::error err = result;

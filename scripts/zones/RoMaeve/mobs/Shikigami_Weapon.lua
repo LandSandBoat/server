@@ -1,6 +1,8 @@
 -----------------------------------
 -- Area: RoMaeve
 --   NM: Shikigami Weapon
+-- TODO: Needs additional spawn points added along with pathfind being adjusted
+--       to path to the nearest pos in pathNodes on spawn and disengage
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -41,6 +43,7 @@ local pathNodes =
 }
 
 entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.SILENCE)
     mob:setMod(xi.mod.REGEN, 5) -- "Has a minor Auto Regen effect"
 end
 

@@ -30,21 +30,18 @@ namespace synergyutils
 
     void LoadSynergyRecipes()
     {
-        const auto rset = db::preparedStmt(R"""(
-            SELECT
-            id,
-            primary_skill, primary_rank, secondary_skill, secondary_rank, tertiary_skill, tertiary_rank,
-            cost_fire_fewell, cost_ice_fewell, cost_wind_fewell, cost_earth_fewell,
-            cost_lightning_fewell, cost_water_fewell, cost_light_fewell, cost_dark_fewell,
-            ingredient1, ingredient2, ingredient3, ingredient4,
-            ingredient5, ingredient6, ingredient7, ingredient8,
-            result, resultHQ1, resultHQ2, resultHQ3,
-            resultQty, resultHQ1Qty, resultHQ2Qty, resultHQ3Qty,
-            resultName
-            FROM synergy_recipes;
-            )""");
-
-        if (rset || rset->rowsCount())
+        const auto rset = db::preparedStmt("SELECT "
+                                           "id, "
+                                           "primary_skill, primary_rank, secondary_skill, secondary_rank, tertiary_skill, tertiary_rank, "
+                                           "cost_fire_fewell, cost_ice_fewell, cost_wind_fewell, cost_earth_fewell, "
+                                           "cost_lightning_fewell, cost_water_fewell, cost_light_fewell, cost_dark_fewell, "
+                                           "ingredient1, ingredient2, ingredient3, ingredient4, "
+                                           "ingredient5, ingredient6, ingredient7, ingredient8, "
+                                           "result, resultHQ1, resultHQ2, resultHQ3, "
+                                           "resultQty, resultHQ1Qty, resultHQ2Qty, resultHQ3Qty, "
+                                           "resultName "
+                                           "FROM synergy_recipes");
+        if (rset && rset->rowsCount())
         {
             synergyRecipes.reserve(rset->rowsCount());
 

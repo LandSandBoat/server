@@ -478,11 +478,11 @@ function InteractionLookup:onMobDeath(mob, player, optParams, fallbackFn)
 end
 
 function InteractionLookup:onTriggerAreaEnter(player, triggerArea, instance, fallbackFn)
-    return onHandler(self.data, 'onTriggerAreaEnter', triggerArea:GetTriggerAreaID(), { player, triggerArea, instance }, fallbackFn)
+    return onHandler(self.data, 'onTriggerAreaEnter', triggerArea:getTriggerAreaID(), { player, triggerArea, instance }, fallbackFn)
 end
 
 function InteractionLookup:onTriggerAreaLeave(player, triggerArea, instance, fallbackFn)
-    return onHandler(self.data, 'onTriggerAreaLeave', triggerArea:GetTriggerAreaID(), { player, triggerArea, instance }, fallbackFn)
+    return onHandler(self.data, 'onTriggerAreaLeave', triggerArea:getTriggerAreaID(), { player, triggerArea, instance }, fallbackFn)
 end
 
 function InteractionLookup:onZoneIn(player, prevZone, fallbackFn)

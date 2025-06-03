@@ -21,6 +21,9 @@
 
 #include "guildutils.h"
 
+#include "common/database.h"
+#include "common/logging.h"
+#include "common/sql.h"
 #include "common/vana_time.h"
 
 #include <vector>
@@ -31,7 +34,7 @@
 #include "guild.h"
 #include "item_container.h"
 #include "itemutils.h"
-#include "map.h"
+#include "map_server.h"
 #include "serverutils.h"
 
 // TODO: During the closure of the guild, all viewing products of the goods are sent 0x86 with information about the closure of the guild
@@ -154,14 +157,14 @@ namespace guildutils
     void UpdateGuildPointsPattern()
     {
         // TODO: This function can be faulty when dealing with multiple processes. Needs to be synchronized properly across servers.
-
-        bool doUpdate = static_cast<uint32>(serverutils::GetServerVar("[GUILD]pattern_update")) != CVanaTime::getInstance()->getJstYearDay();
+        auto jstDayOfYear = earth_time::jst::get_yearday();
+        bool doUpdate     = static_cast<uint32>(serverutils::GetServerVar("[GUILD]pattern_update")) != jstDayOfYear;
 
         uint8 pattern = xirand::GetRandomNumber(8);
         if (doUpdate)
         {
             // write the new pattern and update time to try to prevent other servers from updating the pattern
-            serverutils::SetServerVar("[GUILD]pattern_update", CVanaTime::getInstance()->getJstYearDay());
+            serverutils::SetServerVar("[GUILD]pattern_update", jstDayOfYear);
             serverutils::SetServerVar("[GUILD]pattern", pattern);
             charutils::ClearCharVarFromAll("[GUILD]daily_points");
         }

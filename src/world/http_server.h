@@ -22,14 +22,14 @@
 #pragma once
 
 #include "common/logging.h"
-#include "common/mutex_guarded.h"
+#include "common/synchronized.h"
+#include "common/timer.h"
 
 #include "map/zone.h"
 
 #include <mutex>
 
 #include <httplib.h>
-#include <task_system.hpp>
 
 class HTTPServer
 {
@@ -40,10 +40,8 @@ public:
     void LockingUpdate();
 
 private:
-    httplib::Server         m_httpServer;
-    std::atomic<time_point> m_lastUpdate;
-
-    std::unique_ptr<ts::task_system> ts;
+    httplib::Server                m_httpServer;
+    std::atomic<timer::time_point> m_lastUpdate;
 
     struct APIDataCache
     {
@@ -52,5 +50,5 @@ private:
         std::array<uint32, ZONEID::MAX_ZONEID> zonePlayerCounts;
     };
 
-    shared_guarded<APIDataCache> m_apiDataCache;
+    SynchronizedShared<APIDataCache> m_apiDataCache;
 };

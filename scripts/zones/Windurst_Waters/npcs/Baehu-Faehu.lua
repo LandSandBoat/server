@@ -9,9 +9,6 @@ local ID = zones[xi.zone.WINDURST_WATERS]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local regionOwner = GetRegionOwner(xi.region.SARUTABARUTA)
     if regionOwner ~= xi.nation.WINDURST then
@@ -21,21 +18,15 @@ entity.onTrigger = function(player, npc)
 
         local stock =
         {
-            4444,  22,  -- Rarab Tail
-            689,   33,  -- Lauan Log
-            619,   43,  -- Popoto
-            4392,  29,  -- Saruta Orange
-            635,   18   -- Windurstian Tea Leaves
+            { 4444,  22, }, -- Rarab Tail
+            { 689,   33, }, -- Lauan Log
+            { 619,   43, }, -- Popoto
+            { 4392,  29, }, -- Saruta Orange
+            { 635,   18, }, -- Windurstian Tea Leaves
         }
 
         xi.shop.general(player, stock, xi.fameArea.WINDURST)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

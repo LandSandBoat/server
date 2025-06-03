@@ -25,21 +25,10 @@ entity.onSpawn = function(npc)
     npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if player:getCharVar('BathedInScent') == 1 then
         player:startEvent(163) -- scent from Blue Rafflesias
-    else
-        player:startEvent(190)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

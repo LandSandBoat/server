@@ -24,16 +24,16 @@ spellObject.onMobSpawn = function(mob)
     })
 
     -- DD Mode
-    mob:addSimpleGambit(ai.t.SELF, ai.c.PT_HAS_TANK, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.BERSERK)
-    mob:addSimpleGambit(ai.t.SELF, ai.c.PT_HAS_TANK, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.AGGRESSOR)
-    mob:addSimpleGambit(ai.t.TANK, ai.c.HPP_LT, 50, ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE)
+    mob:addGambit(ai.t.SELF, { ai.c.PT_HAS_TANK, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.BERSERK })
+    mob:addGambit(ai.t.SELF, { ai.c.PT_HAS_TANK, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.AGGRESSOR })
+    mob:addGambit(ai.t.TANK, { ai.c.HPP_LT, 50 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE })
 
     -- Tank Mode
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_PT_HAS_TANK, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE)
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_PT_HAS_TANK, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.DEFENDER)
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_PT_HAS_TANK, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.RETALIATION)
+    mob:addGambit(ai.t.TARGET, { ai.c.NOT_PT_HAS_TANK, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE })
+    mob:addGambit(ai.t.SELF, { ai.c.NOT_PT_HAS_TANK, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.DEFENDER })
+    mob:addGambit(ai.t.SELF, { ai.c.NOT_PT_HAS_TANK, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.RETALIATION })
 
-    mob:addSimpleGambit(ai.t.MASTER, ai.c.HPP_LT, 50, ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE)
+    mob:addGambit(ai.t.MASTER, { ai.c.HPP_LT, 50 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE })
 
     -- TODO: Add Warriors Charge + WS Logic
 end

@@ -643,9 +643,9 @@ xi.job_utils.beastmaster.attemptCharm = function(charmer, target)
 
         if duration > 0 then
             charmer:charm(target, duration)
-            return xi.msg.basic.NONE
+            return xi.msg.basic.CHARM_SUCCESS
         end
     end
 
-    return xi.msg.basic.JA_MISS
+    return xi.msg.basic.CHARM_FAIL
 end

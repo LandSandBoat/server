@@ -7,9 +7,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local ayameAndKaede = player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE)
 
@@ -30,9 +27,6 @@ entity.onTrigger = function(player, npc)
     elseif player:getCharVar('illTakeTheBigBoxCS') == 1 then
         player:startEvent(265)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

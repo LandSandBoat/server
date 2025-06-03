@@ -7,12 +7,12 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
-    -- TODO: Should there be a failure message here?
-    return target:hasKeyItem(xi.ki.MOG_PATIO_DESIGN_DOCUMENT) and 1 or 0
+    -- TODO: The error message returned by this is wrong
+    return target:hasKeyItem(xi.keyItem.MOG_PATIO_DESIGN_DOCUMENT) and 1 or 0
 end
 
 itemObject.onItemUse = function(target)
-    npcUtil.giveKeyItem(target, xi.ki.MOG_PATIO_DESIGN_DOCUMENT)
+    npcUtil.giveKeyItem(target, xi.keyItem.MOG_PATIO_DESIGN_DOCUMENT)
 end
 
 return itemObject

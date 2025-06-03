@@ -27,12 +27,13 @@
 
 #include "packets/action.h"
 #include "packets/basic.h"
-#include "packets/char.h"
 #include "packets/char_appearance.h"
 #include "packets/char_health.h"
 #include "packets/char_recast.h"
+#include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/char_update.h"
+#include "packets/entity_update.h"
 #include "packets/event.h"
 #include "packets/event_string.h"
 #include "packets/inventory_finish.h"
@@ -65,6 +66,7 @@
 #include "char_recast_container.h"
 #include "charentity.h"
 #include "conquest_system.h"
+#include "ipc_client.h"
 #include "item_container.h"
 #include "items/item_furnishing.h"
 #include "items/item_usable.h"
@@ -72,7 +74,6 @@
 #include "job_points.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
-#include "message.h"
 #include "mob_modifier.h"
 #include "mobskill.h"
 #include "modifier.h"
@@ -96,6 +97,7 @@
 #include "weapon_skill.h"
 
 CCharEntity::CCharEntity()
+: m_PlayTime(0s)
 {
     TracyZoneScoped;
     objtype     = TYPE_PC;
@@ -142,10 +144,10 @@ CCharEntity::CCharEntity()
     std::memset(&equip, 0, sizeof(equip));
     std::memset(&equipLoc, 0, sizeof(equipLoc));
 
-    m_SpellList = {};
+    m_SpellList.reset();
     std::memset(&m_LearnedAbilities, 0, sizeof(m_LearnedAbilities));
     std::memset(&m_TitleList, 0, sizeof(m_TitleList));
-    std::memset(&m_ZonesList, 0, sizeof(m_ZonesList));
+    std::memset(&m_ZonesVisitedList, 0, sizeof(m_ZonesVisitedList));
     std::memset(&m_Abilities, 0, sizeof(m_Abilities));
     std::memset(&m_TraitList, 0, sizeof(m_TraitList));
     std::memset(&m_PetCommands, 0, sizeof(m_PetCommands));
@@ -181,17 +183,16 @@ CCharEntity::CCharEntity()
 
     m_PMonstrosity = nullptr;
 
-    m_Costume             = 0;
-    m_Costume2            = 0;
-    m_hasTractor          = 0;
-    m_hasRaise            = 0;
-    m_weaknessLvl         = 0;
-    m_hasArise            = false;
-    m_InsideTriggerAreaID = 0;
-    m_LevelRestriction    = 0;
-    m_lastBcnmTimePrompt  = 0;
-    m_AHHistoryTimestamp  = 0;
-    m_DeathTimestamp      = 0;
+    m_Costume            = 0;
+    m_Costume2           = 0;
+    m_hasTractor         = 0;
+    m_hasRaise           = 0;
+    m_weaknessLvl        = 0;
+    m_hasArise           = false;
+    m_LevelRestriction   = 0;
+    m_lastBcnmTimePrompt = 0;
+    m_AHHistoryTimestamp = timer::time_point::min();
+    m_DeathTimestamp     = timer::time_point::min();
 
     m_EquipFlag         = 0;
     m_EquipBlock        = 0;
@@ -220,7 +221,6 @@ CCharEntity::CCharEntity()
     PUnityChat    = nullptr;
     PTreasurePool = nullptr;
 
-    PAutomaton             = nullptr;
     PClaimedMob            = nullptr;
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
@@ -233,11 +233,9 @@ CCharEntity::CCharEntity()
     resetPetZoningInfo();
     petZoningInfo.petID = 0;
 
-    m_PlayTime    = 0;
-    m_SaveTime    = 0;
+    m_SaveTime    = timer::time_point::min();
     m_reloadParty = false;
 
-    m_LastYell       = 0;
     m_moghouseID     = 0;
     m_moghancementID = 0;
 
@@ -269,6 +267,7 @@ CCharEntity::CCharEntity()
     wallhackEnabled       = false;
     isSettingBazaarPrices = false;
     isLinkDead            = false;
+    pendingPositionUpdate = false;
 }
 
 CCharEntity::~CCharEntity()
@@ -279,7 +278,7 @@ CCharEntity::~CCharEntity()
     if (PTreasurePool != nullptr)
     {
         // remove myself
-        PTreasurePool->DelMember(this);
+        PTreasurePool->delMember(this);
     }
 
     ClearTrusts(); // trusts don't survive zone lines
@@ -334,17 +333,17 @@ CCharEntity::~CCharEntity()
 
     if (PParty && loc.destination != 0 && m_moghouseID == 0)
     {
-        uint8 data[4]{};
-
         if (PParty->m_PAlliance)
         {
-            ref<uint32>(data, 0) = PParty->m_PAlliance->m_AllianceID;
-            message::send(MSG_ALLIANCE_RELOAD, data, sizeof(data), nullptr);
+            message::send(ipc::AllianceReload{
+                .allianceId = PParty->m_PAlliance->m_AllianceID,
+            });
         }
         else
         {
-            ref<uint32>(data, 0) = PParty->GetPartyID();
-            message::send(MSG_PT_RELOAD, data, sizeof(data), nullptr);
+            message::send(ipc::PartyReload{
+                .partyId = PParty->GetPartyID(),
+            });
         }
     }
 
@@ -357,11 +356,6 @@ CCharEntity::~CCharEntity()
     if (PParty)
     {
         PParty->PopMember(this);
-    }
-
-    if (PAutomaton)
-    {
-        PAutomaton->PMaster = nullptr;
     }
 
     charutils::WriteHistory(this);
@@ -397,6 +391,21 @@ bool CCharEntity::isPacketListEmpty()
     return PacketList.empty();
 }
 
+auto CCharEntity::getPacketList() const -> const std::deque<std::unique_ptr<CBasicPacket>>&
+{
+    return PacketList;
+}
+
+auto CCharEntity::getPacketListCopy() -> std::deque<std::unique_ptr<CBasicPacket>>
+{
+    std::deque<std::unique_ptr<CBasicPacket>> PacketListCopy;
+    for (const auto& packet : PacketList)
+    {
+        PacketListCopy.emplace_back(std::make_unique<CBasicPacket>(packet));
+    }
+    return PacketListCopy;
+}
+
 void CCharEntity::clearPacketList()
 {
     while (!PacketList.empty())
@@ -421,51 +430,48 @@ void CCharEntity::pushPacket(std::unique_ptr<CBasicPacket>&& packet)
 
     if (packet->getType() == 0x5B)
     {
-        if (PendingPositionPacket)
+        if (packet->ref<uint32>(0x10) == this->id)
         {
-            PendingPositionPacket = packet->copy();
-        }
-        else
-        {
-            PendingPositionPacket = packet->copy();
-            PacketList.emplace_back(std::move(packet));
+            pendingPositionUpdate = true;
         }
     }
-    else
-    {
-        PacketList.emplace_back(std::move(packet));
-    }
-}
 
-void CCharEntity::updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
-{
-    auto existing = PendingCharPackets.find(PChar->id);
-    if (existing == PendingCharPackets.end())
-    {
-        // No existing packet update for the given char, so we push new packet
-        PacketList.emplace_back(std::make_unique<CCharPacket>(PChar, type, updatemask));
-        PendingCharPackets.emplace(PChar->id, std::make_unique<CCharPacket>(PChar, type, updatemask));
-    }
-    else
-    {
-        // Found existing packet update for the given char, so we update it instead of pushing new
-        existing->second->updateWith(PChar, type, updatemask);
-    }
+    PacketList.emplace_back(std::move(packet));
 }
 
 void CCharEntity::updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask)
 {
-    auto existing = PendingEntityPackets.find(PEntity->id);
-    if (existing == PendingEntityPackets.end())
+    auto       itr              = EntityUpdatePackets.find(PEntity->id);
+    const bool hasPendingPacket = itr != EntityUpdatePackets.end() && itr->second != nullptr;
+    auto*      PChar            = dynamic_cast<CCharEntity*>(PEntity);
+    if (hasPendingPacket)
     {
-        // No existing packet update for the given entity, so we push new packet
-        PacketList.emplace_back(std::make_unique<CEntityUpdatePacket>(PEntity, type, updatemask));
-        PendingEntityPackets.emplace(PEntity->id, std::make_unique<CEntityUpdatePacket>(PEntity, type, updatemask));
+        // Found existing packet update for the given entity, so we update it instead of pushing new
+        auto& packet = itr->second;
+        if (PChar)
+        {
+            static_cast<CCharUpdatePacket*>(packet)->updateWith(PChar, type, updatemask);
+        }
+        else
+        {
+            static_cast<CEntityUpdatePacket*>(packet)->updateWith(PEntity, type, updatemask);
+        }
     }
     else
     {
-        // Found existing packet update for the given entity, so we update it instead of pushing new
-        existing->second->updateWith(PEntity, type, updatemask);
+        // No existing packet update for the given entity, so we push new packet
+        if (PChar)
+        {
+            auto packet                    = std::make_unique<CCharUpdatePacket>(PChar, type, updatemask);
+            EntityUpdatePackets[PChar->id] = packet.get();
+            PacketList.emplace_back(std::move(packet));
+        }
+        else
+        {
+            auto packet                      = std::make_unique<CEntityUpdatePacket>(PEntity, type, updatemask);
+            EntityUpdatePackets[PEntity->id] = packet.get();
+            PacketList.emplace_back(std::move(packet));
+        }
     }
 }
 
@@ -474,33 +480,25 @@ auto CCharEntity::popPacket() -> std::unique_ptr<CBasicPacket>
     auto PPacket = std::move(PacketList.front());
     PacketList.pop_front();
 
-    // Clean up pending maps
+    // Clean up pending
     switch (PPacket->getType())
     {
         case 0x0D: // Char update
-            PendingCharPackets.erase(PPacket->ref<uint32>(0x04));
-            break;
+            [[fallthrough]];
         case 0x0E: // Entity update
-            PendingEntityPackets.erase(PPacket->ref<uint32>(0x04));
+            EntityUpdatePackets.erase(PPacket->ref<uint32>(0x04));
             break;
         case 0x5B: // Position update
-            PendingPositionPacket = nullptr;
+            if (PPacket->ref<uint32>(0x10) == this->id)
+            {
+                pendingPositionUpdate = false;
+            }
             break;
         default:
             break;
     }
 
     return PPacket;
-}
-
-auto CCharEntity::getPacketListCopy() -> std::deque<std::unique_ptr<CBasicPacket>>
-{
-    std::deque<std::unique_ptr<CBasicPacket>> PacketListCopy;
-    for (const auto& packet : PacketList)
-    {
-        PacketListCopy.emplace_back(std::make_unique<CBasicPacket>(packet));
-    }
-    return PacketListCopy;
 }
 
 size_t CCharEntity::getPacketCount()
@@ -606,8 +604,8 @@ void CCharEntity::resetPetZoningInfo()
     petZoningInfo.petMP        = 0;
     petZoningInfo.respawnPet   = false;
     petZoningInfo.petType      = PET_TYPE::AVATAR;
-    petZoningInfo.jugSpawnTime = 0;
-    petZoningInfo.jugDuration  = 0;
+    petZoningInfo.jugSpawnTime = timer::time_point::min();
+    petZoningInfo.jugDuration  = 0s;
 }
 
 bool CCharEntity::shouldPetPersistThroughZoning()
@@ -633,6 +631,83 @@ bool CCharEntity::shouldPetPersistThroughZoning()
            petType == PET_TYPE::AVATAR ||
            petType == PET_TYPE::AUTOMATON ||
            (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
+}
+
+void CCharEntity::setAutomatonFrame(AUTOFRAMETYPE frame)
+{
+    automatonInfo.m_Equip.Frame = frame;
+}
+
+void CCharEntity::setAutomatonHead(AUTOHEADTYPE head)
+{
+    automatonInfo.m_Equip.Head = head;
+}
+
+void CCharEntity::setAutomatonAttachment(uint8 slotid, uint8 id)
+{
+    automatonInfo.m_Equip.Attachments[slotid] = id;
+}
+
+void CCharEntity::setAutomatonElementMax(uint8 element, uint8 max)
+{
+    automatonInfo.m_ElementMax[element] = max;
+}
+void CCharEntity::addAutomatonElementCapacity(uint8 element, int8 value)
+{
+    automatonInfo.m_ElementEquip[element] += value;
+}
+
+void CCharEntity::setAutomatonElementalCapacityBonus(uint8 bonus)
+{
+    if (bonus == automatonInfo.m_elementalCapacityBonus)
+    {
+        return;
+    }
+
+    int8 difference = static_cast<int8>(bonus) - automatonInfo.m_elementalCapacityBonus;
+    for (size_t i = 0; i < automatonInfo.m_ElementMax.size(); ++i)
+    {
+        automatonInfo.m_ElementMax[i] += difference;
+    }
+
+    automatonInfo.m_elementalCapacityBonus = bonus;
+}
+
+AUTOFRAMETYPE CCharEntity::getAutomatonFrame() const
+{
+    return static_cast<AUTOFRAMETYPE>(automatonInfo.m_Equip.Frame);
+}
+
+AUTOHEADTYPE CCharEntity::getAutomatonHead() const
+{
+    return static_cast<AUTOHEADTYPE>(automatonInfo.m_Equip.Head);
+}
+
+uint8 CCharEntity::getAutomatonAttachment(uint8 slotid)
+{
+    return automatonInfo.m_Equip.Attachments[slotid];
+}
+
+bool CCharEntity::hasAutomatonAttachment(uint8 attachment)
+{
+    for (auto&& attachmentid : automatonInfo.m_Equip.Attachments)
+    {
+        if (attachmentid == attachment)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+uint8 CCharEntity::getAutomatonElementMax(uint8 element)
+{
+    return automatonInfo.m_ElementMax[element];
+}
+
+uint8 CCharEntity::getAutomatonElementCapacity(uint8 element)
+{
+    return automatonInfo.m_ElementEquip[element];
 }
 
 /************************************************************************
@@ -799,17 +874,17 @@ void CCharEntity::setBlockingAid(bool isBlockingAid)
     m_isBlockingAid = isBlockingAid;
 }
 
-void CCharEntity::SetPlayTime(uint32 playTime)
+void CCharEntity::SetPlayTime(timer::duration playTime)
 {
     m_PlayTime = playTime;
-    m_SaveTime = gettick() / 1000;
+    m_SaveTime = timer::now();
 }
 
-uint32 CCharEntity::GetPlayTime(bool needUpdate)
+timer::duration CCharEntity::GetPlayTime(bool needUpdate)
 {
     if (needUpdate)
     {
-        uint32 currentTime = gettick() / 1000;
+        auto currentTime = timer::now();
 
         m_PlayTime += currentTime - m_SaveTime;
         m_SaveTime = currentTime;
@@ -940,7 +1015,7 @@ bool CCharEntity::PersistData()
     return didPersist;
 }
 
-bool CCharEntity::PersistData(time_point tick)
+bool CCharEntity::PersistData(timer::time_point tick)
 {
     if (tick < nextDataPersistTime || !PersistData())
     {
@@ -951,11 +1026,11 @@ bool CCharEntity::PersistData(time_point tick)
     return true;
 }
 
-void CCharEntity::Tick(time_point tick)
+void CCharEntity::Tick(timer::time_point tick)
 {
     TracyZoneScoped;
     CBattleEntity::Tick(tick);
-    if (m_DeathTimestamp > 0 && tick >= m_deathSyncTime)
+    if (m_DeathTimestamp > timer::time_point::min() && tick >= m_deathSyncTime)
     {
         // Send an update packet at a regular interval to keep the player's death variables synced
         updatemask |= UPDATE_STATUS;
@@ -1004,7 +1079,7 @@ void CCharEntity::PostTick()
 
     if (m_EffectsChanged)
     {
-        pushPacket<CCharUpdatePacket>(this);
+        pushPacket<CCharStatusPacket>(this);
         pushPacket<CCharSyncPacket>(this);
         pushPacket<CCharJobExtraPacket>(this, true);
         pushPacket<CCharJobExtraPacket>(this, false);
@@ -1016,7 +1091,7 @@ void CCharEntity::PostTick()
         m_EffectsChanged = false;
     }
 
-    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+    timer::time_point now = timer::now();
 
     if (updatemask && now > m_nextUpdateTimer)
     {
@@ -1024,12 +1099,12 @@ void CCharEntity::PostTick()
 
         if (loc.zone && !m_isGMHidden)
         {
-            loc.zone->UpdateCharPacket(this, ENTITY_UPDATE, updatemask);
+            loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);
         }
 
         if (isCharmed)
         {
-            updateCharPacket(this, ENTITY_UPDATE, updatemask);
+            updateEntityPacket(this, ENTITY_UPDATE, updatemask);
         }
 
         if (updatemask & UPDATE_HP)
@@ -1044,7 +1119,7 @@ void CCharEntity::PostTick()
         // Do not send an update packet when only the position has change
         if (updatemask ^ UPDATE_POS)
         {
-            pushPacket<CCharUpdatePacket>(this);
+            pushPacket<CCharStatusPacket>(this);
         }
         updatemask = 0;
     }
@@ -1196,7 +1271,7 @@ bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
 {
     TracyZoneScoped;
     auto* controller{ static_cast<CPlayerController*>(PAI->GetController()) };
-    controller->setLastAttackTime(server_clock::now());
+    controller->setLastAttackTime(timer::now());
     auto ret = CBattleEntity::OnAttack(state, action);
 
     return ret;
@@ -1255,7 +1330,8 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
             }
 
             // Immanence will create or extend a skillchain for elemental spells
-            if (actionTarget.param >= 0 &&
+            if (PTarget->health.hp > 0 &&
+                actionTarget.param >= 0 &&
                 PSpell->dealsDamage() &&
                 PSpell->getSpellGroup() == SPELLGROUP_BLACK &&
                 (StatusEffectContainer->HasStatusEffect(EFFECT_IMMANENCE)))
@@ -1339,7 +1415,7 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
                     auto scEffect = PTarget->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
                     if (isHelix && scEffect)
                     {
-                        scEffect->SetDuration(scEffect->GetDuration() + 2000);
+                        scEffect->SetDuration(scEffect->GetDuration() + 2s);
                     }
                 }
             }
@@ -1507,7 +1583,8 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                 if ((actionTarget.reaction & REACTION::MISS) == REACTION::NONE)
                 {
                     int wspoints = settings::get<uint8>("map.WS_POINTS_BASE");
-                    if (PWeaponSkill->getPrimarySkillchain() != 0)
+
+                    if (PBattleTarget->health.hp > 0 && PWeaponSkill->getPrimarySkillchain() != 0)
                     {
                         // NOTE: GetSkillChainEffect is INSIDE this if statement because it
                         //  ALTERS the state of the resonance, which misses and non-elemental skills should NOT do.
@@ -1644,17 +1721,22 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         }
 
         // get any available merit recast reduction
-        uint8 meritRecastReduction = 0;
+        auto meritRecastReduction = 0s;
 
         if (PAbility->getMeritModID() > 0 && !(PAbility->getAddType() & ADDTYPE_MERIT))
         {
-            meritRecastReduction = PMeritPoints->GetMeritValue((MERIT_TYPE)PAbility->getMeritModID(), this);
+            meritRecastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue((MERIT_TYPE)PAbility->getMeritModID(), this));
         }
 
         auto* charge = ability::GetCharge(this, PAbility->getRecastId());
         if (charge && PAbility->getID() != ABILITY_SIC)
         {
-            action.recast = charge->chargeTime * PAbility->getRecastTime() - meritRecastReduction;
+            // TODO: this is bad
+            // "recast" 1-4 = sic/ready
+            // "recast" 1 = quickdraw, stratagems
+            auto crypticRecastSecondsAsType = timer::count_seconds(PAbility->getRecastTime());
+
+            action.recast = charge->chargeTime * crypticRecastSecondsAsType - meritRecastReduction;
         }
         else
         {
@@ -1665,7 +1747,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         {
             if (this->StatusEffectContainer->HasStatusEffect(EFFECT_TABULA_RASA))
             {
-                action.recast = 0;
+                action.recast = 0s;
             }
         }
         else if (PAbility->getRecastId() == 173 || PAbility->getRecastId() == 174) // BP rage, BP ward
@@ -1685,10 +1767,10 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
             // Localvar will set the BP ability timer when the move consumes MP
             // The delay is snapshot when the player uses the ability: https://www.bg-wiki.com/ffxi/Blood_Pact_Ability_Delay
-            this->SetLocalVar("bpRecastTime", static_cast<uint16>(std::max<int16>(0, action.recast - bloodPactDelayReduction)));
+            this->SetLocalVar("bpRecastTime", static_cast<uint16>(timer::count_seconds(std::max<timer::duration>(0s, action.recast - std::chrono::seconds(bloodPactDelayReduction)))));
 
             // Recast is actually triggered when the bp goes off (no recast packet at all on using a bp and the target moving out of range of the pet)
-            action.recast = 0;
+            action.recast = 0s;
         }
 
         // remove invisible if aggressive
@@ -1722,12 +1804,12 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             {
                 // TODO: Transform this into an item Mod::REWARD_RECAST perhaps ?
                 // The Bison/Brave's Warbonnet & Khimaira/Stout Bonnet reduces recast time by 10 seconds.
-                action.recast -= 10; // remove 10 seconds
+                action.recast -= 10s; // remove 10 seconds
             }
         }
         else if (PAbility->getID() == ABILITY_READY || PAbility->getID() == ABILITY_SIC)
         {
-            action.recast = static_cast<uint16>(std::max<int16>(0, action.recast - getMod(Mod::SIC_READY_RECAST)));
+            action.recast = std::max<timer::duration>(0s, action.recast - std::chrono::seconds(getMod(Mod::SIC_READY_RECAST)));
         }
 
         action.id         = this->id;
@@ -1818,7 +1900,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                     addMP((int32)-mpCost);
                     if (this->GetLocalVar("bpRecastTime") > 0) // This will go away when all smn petskills are handled via jobutils/summoner.lua
                     {
-                        action.recast = this->GetLocalVar("bpRecastTime");
+                        action.recast = std::chrono::seconds(this->GetLocalVar("bpRecastTime"));
                     }
 
                     if (PAbility->getValidTarget() == TARGET_SELF)
@@ -2312,6 +2394,14 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
         return true;
     }
 
+    if (auto* PMob = dynamic_cast<CMobEntity*>(PBattleTarget))
+    {
+        if (PMob->getMobMod(MOBMOD_CLAIM_TYPE) == static_cast<int16>(ClaimType::NonExclusive))
+        {
+            return true;
+        }
+    }
+
     bool found = false;
 
     // clang-format off
@@ -2330,6 +2420,7 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 void CCharEntity::HandleErrorMessage(std::unique_ptr<CBasicPacket>& msg)
 {
     TracyZoneScoped;
+
     if (msg && !isCharmed)
     {
         pushPacket(std::move(msg));
@@ -2339,6 +2430,7 @@ void CCharEntity::HandleErrorMessage(std::unique_ptr<CBasicPacket>& msg)
 void CCharEntity::OnDeathTimer()
 {
     TracyZoneScoped;
+
     charutils::SetCharVar(this, "expLost", 0);
     charutils::HomePoint(this, true);
 }
@@ -2346,6 +2438,7 @@ void CCharEntity::OnDeathTimer()
 void CCharEntity::OnRaise()
 {
     TracyZoneScoped;
+
     // TODO: Moghancement Experience needs to be factored in here somewhere.
     if (m_hasRaise > 0)
     {
@@ -2358,15 +2451,15 @@ void CCharEntity::OnRaise()
         // add weakness effect (75% reduction in HP/MP)
         if (GetLocalVar("MijinGakure") == 0)
         {
-            uint32 weaknessTime = 300;
+            auto weaknessTime = 5min;
 
             // Arise has a reduced weakness time of 3 mins
             if (m_hasArise)
             {
-                weaknessTime = 180;
+                weaknessTime = 3min;
             }
 
-            CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, m_weaknessLvl, 0, weaknessTime);
+            CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, m_weaknessLvl, 0s, weaknessTime);
             StatusEffectContainer->AddStatusEffect(PWeaknessEffect);
         }
 
@@ -2431,7 +2524,7 @@ void CCharEntity::OnRaise()
         // If Arise was used then apply a reraise 3 effect on the target
         if (m_hasArise)
         {
-            CStatusEffect* PReraiseEffect = new CStatusEffect(EFFECT_RERAISE, EFFECT_RERAISE, 3, 0, 3600);
+            CStatusEffect* PReraiseEffect = new CStatusEffect(EFFECT_RERAISE, EFFECT_RERAISE, 3, 0s, 1h);
             StatusEffectContainer->AddStatusEffect(PReraiseEffect);
         }
 
@@ -2444,6 +2537,7 @@ void CCharEntity::OnRaise()
 void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 {
     TracyZoneScoped;
+
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
     auto* PItem   = state.GetItem();
 
@@ -2489,21 +2583,17 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
         {
             PItem->setCurrentCharges(PItem->getCurrentCharges() - 1);
         }
-        PItem->setLastUseTime(CVanaTime::getInstance()->getVanaTime());
+        PItem->setLastUseTime(timer::now());
 
-        char extra[sizeof(PItem->m_extra) * 2 + 1];
-        _sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
-
-        const char* Query = "UPDATE char_inventory "
-                            "SET extra = '%s' "
-                            "WHERE charid = %u AND location = %u AND slot = %u";
-
-        _sql->Query(Query, extra, this->id, PItem->getLocationID(), PItem->getSlotID());
+        db::preparedStmt("UPDATE char_inventory "
+                         "SET extra = ? "
+                         "WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
+                         PItem->m_extra, this->id, PItem->getLocationID(), PItem->getSlotID());
 
         if (PItem->getCurrentCharges() != 0)
         {
-            this->PRecastContainer->Add(RECAST_ITEM, PItem->getSlotID() << 8 | PItem->getLocationID(),
-                                        PItem->getReuseTime() / 1000); // add recast timer to Recast List from any bag
+            // add recast timer to Recast List from any bag
+            this->PRecastContainer->Add(RECAST_ITEM, PItem->getSlotID() << 8 | PItem->getLocationID(), PItem->getReuseTime());
         }
     }
     else // unlock all items except equipment
@@ -2517,6 +2607,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)
 {
     TracyZoneScoped;
+
     auto* PTarget = CBattleEntity::IsValidTarget(targid, validTargetFlags, errMsg);
     if (PTarget)
     {
@@ -2553,6 +2644,7 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
 void CCharEntity::Die()
 {
     TracyZoneScoped;
+
     if (PLastAttacker)
     {
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<CMessageBasicPacket>(PLastAttacker, this, 0, 0, MSGBASIC_PLAYER_DEFEATED_BY));
@@ -2570,7 +2662,7 @@ void CCharEntity::Die()
     }
 
     Die(death_duration);
-    SetDeathTimestamp((uint32)time(nullptr));
+    SetDeathTime(timer::now());
 
     setBlockingAid(false);
 
@@ -2588,9 +2680,10 @@ void CCharEntity::Die()
     luautils::OnPlayerDeath(this);
 }
 
-void CCharEntity::Die(duration _duration)
+void CCharEntity::Die(timer::duration _duration)
 {
     TracyZoneScoped;
+
     this->ClearTrusts();
 
     if (StatusEffectContainer->HasStatusEffect(EFFECT_WEAKNESS))
@@ -2606,7 +2699,7 @@ void CCharEntity::Die(duration _duration)
         m_weaknessLvl = 0;
     }
 
-    m_deathSyncTime = server_clock::now() + death_update_frequency;
+    m_deathSyncTime = timer::now() + death_update_frequency;
     PAI->ClearStateStack();
     PAI->Internal_Die(_duration);
 
@@ -2642,42 +2735,38 @@ void CCharEntity::Die(duration _duration)
 void CCharEntity::Raise()
 {
     TracyZoneScoped;
+
     PAI->Internal_Raise();
-    SetDeathTimestamp(0);
+    SetDeathTime(timer::time_point::min());
 }
 
-void CCharEntity::SetDeathTimestamp(uint32 timestamp)
+void CCharEntity::SetDeathTime(timer::time_point timestamp)
 {
     m_DeathTimestamp = timestamp;
 }
 
-int32 CCharEntity::GetSecondsElapsedSinceDeath() const
+timer::duration CCharEntity::GetTimeSinceDeath() const
 {
-    return m_DeathTimestamp > 0 ? (uint32)time(nullptr) - m_DeathTimestamp : 0;
+    return m_DeathTimestamp > timer::time_point::min() ? timer::now() - m_DeathTimestamp : 0s;
 }
 
-int32 CCharEntity::GetTimeRemainingUntilDeathHomepoint() const
+timer::duration CCharEntity::GetTimeUntilDeathHomepoint() const
 {
-    // 0x0003A020 is 60 * 3960 and 3960 is 66 minutes in seconds
-    // The client uses this time as the maximum amount of time for death
-    // We convert the elapsed death time to this total time and subtract it which gives us the remaining time to a forced homepoint
-    // Once the returned value here reaches below 360 then the client with force homepoint the character
-    return 0x0003A020 - (60 * GetSecondsElapsedSinceDeath());
+    return 60min - GetTimeSinceDeath();
 }
 
-int32 CCharEntity::GetTimeCreated()
+earth_time::time_point CCharEntity::GetTimeCreated()
 {
     TracyZoneScoped;
-    const char* fmtQuery = "SELECT UNIX_TIMESTAMP(timecreated) FROM chars WHERE charid = %u";
 
-    int32 ret = _sql->Query(fmtQuery, id);
+    const auto rset = db::preparedStmt("SELECT UNIX_TIMESTAMP(timecreated) FROM chars WHERE charid = ? LIMIT 1", id);
 
-    if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+    if (rset && rset->rowsCount() && rset->next())
     {
-        return _sql->GetIntData(0);
+        return earth_time::time_point(std::chrono::seconds(rset->get<uint32>("UNIX_TIMESTAMP(timecreated)")));
     }
 
-    return 0;
+    return earth_time::time_point::min();
 }
 
 uint8 CCharEntity::getHighestJobLevel()
@@ -3086,6 +3175,26 @@ bool CCharEntity::OnAttackError(CAttackState& state)
     return false;
 }
 
+bool CCharEntity::isInTriggerArea(uint32 triggerAreaID)
+{
+    return charTriggerAreaIDs.find(triggerAreaID) != charTriggerAreaIDs.end();
+}
+
+void CCharEntity::onTriggerAreaEnter(uint32 triggerAreaID)
+{
+    charTriggerAreaIDs.insert(triggerAreaID);
+}
+
+void CCharEntity::onTriggerAreaLeave(uint32 triggerAreaID)
+{
+    charTriggerAreaIDs.erase(triggerAreaID);
+}
+
+void CCharEntity::clearTriggerAreas()
+{
+    charTriggerAreaIDs.clear();
+}
+
 bool CCharEntity::isInEvent()
 {
     return currentEvent->eventId != -1;
@@ -3202,12 +3311,11 @@ int32 CCharEntity::getCharVar(std::string const& charVarName)
 {
     if (auto charVar = charVarCache.find(charVarName); charVar != charVarCache.end())
     {
-        std::pair cachedVarData    = charVar->second;
-        uint32    currentTimestamp = CVanaTime::getInstance()->getSysTime();
+        std::pair cachedVarData = charVar->second;
 
         // If the cached variable is not expired, return it.  Else, fall through so that the
         // database can be cleaned up.
-        if (cachedVarData.second == 0 || cachedVarData.second > currentTimestamp)
+        if (cachedVarData.second == 0 || cachedVarData.second > earth_time::timestamp())
         {
             return cachedVarData.first;
         }
@@ -3217,6 +3325,34 @@ int32 CCharEntity::getCharVar(std::string const& charVarName)
 
     charVarCache[charVarName] = value;
     return value.first;
+}
+
+auto CCharEntity::getCharVarsWithPrefix(std::string const& prefix) -> std::vector<std::pair<std::string, int32>>
+{
+    const auto currentTimestamp = earth_time::timestamp();
+
+    std::vector<std::pair<std::string, int32>> charVars;
+
+    const auto rset = db::preparedStmt("SELECT varname, value, expiry FROM char_vars WHERE charid = ? AND varname LIKE ?",
+                                       this->id, fmt::format("{}%", prefix));
+    if (rset && rset->rowsCount())
+    {
+        while (rset->next())
+        {
+            const auto varname = rset->get<std::string>("varname");
+            const auto value   = rset->get<int32>("value");
+            const auto expiry  = rset->get<uint32>("expiry");
+
+            if (expiry == 0 || expiry > currentTimestamp)
+            {
+                charVarCache[varname] = { value, expiry };
+
+                charVars.emplace_back(varname, value);
+            }
+        }
+    }
+
+    return charVars;
 }
 
 void CCharEntity::setCharVar(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)
@@ -3259,5 +3395,14 @@ void CCharEntity::clearCharVarsWithPrefix(std::string const& prefix)
         ++iter;
     }
 
-    _sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname LIKE '%s%%'", this->id, prefix.c_str());
+    db::preparedStmt("DELETE FROM char_vars WHERE charid = ? AND varname LIKE ?", this->id, fmt::format("{}%", prefix));
+}
+
+bool CCharEntity::startSynth(SKILLTYPE synthSkill)
+{
+    if (PAI)
+    {
+        return PAI->Internal_Synth(synthSkill);
+    }
+    return false;
 }

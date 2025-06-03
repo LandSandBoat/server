@@ -26,7 +26,7 @@
 
 #include "blue_spell.h"
 #include "items/item_weapon.h"
-#include "map.h"
+#include "map_server.h"
 #include "mob_spell_list.h"
 #include "spell.h"
 #include "status_effect_container.h"
@@ -73,22 +73,22 @@ void CSpell::setJob(int8* jobs)
     std::memcpy(&m_job[1], jobs, 22);
 }
 
-uint32 CSpell::getCastTime() const
+timer::duration CSpell::getCastTime() const
 {
     return m_castTime;
 }
 
-void CSpell::setCastTime(uint32 CastTime)
+void CSpell::setCastTime(timer::duration CastTime)
 {
     m_castTime = CastTime;
 }
 
-uint32 CSpell::getRecastTime() const
+timer::duration CSpell::getRecastTime() const
 {
     return m_recastTime;
 }
 
-void CSpell::setRecastTime(uint32 RecastTime)
+void CSpell::setRecastTime(timer::duration RecastTime)
 {
     m_recastTime = RecastTime;
 }
@@ -217,12 +217,12 @@ void CSpell::setAnimationID(uint16 AnimationID)
     m_animation = AnimationID;
 }
 
-uint16 CSpell::getAnimationTime() const
+timer::duration CSpell::getAnimationTime() const
 {
     return m_animationTime;
 }
 
-void CSpell::setAnimationTime(uint16 AnimationTime)
+void CSpell::setAnimationTime(timer::duration AnimationTime)
 {
     m_animationTime = AnimationTime;
 }
@@ -352,12 +352,12 @@ void CSpell::setElement(uint16 element)
     m_element = element;
 }
 
-void CSpell::setCE(uint16 ce)
+void CSpell::setCE(int32 ce)
 {
     m_CE = ce;
 }
 
-uint16 CSpell::getCE() const
+int32 CSpell::getCE() const
 {
     return m_CE;
 }
@@ -367,22 +367,22 @@ void CSpell::setRadius(float radius)
     m_radius = radius;
 }
 
-void CSpell::setVE(uint16 ve)
+void CSpell::setVE(int32 ve)
 {
     m_VE = ve;
 }
 
-uint16 CSpell::getVE() const
+int32 CSpell::getVE() const
 {
     return m_VE;
 }
 
-void CSpell::setModifiedRecast(uint32 mrec)
+void CSpell::setModifiedRecast(timer::duration mrec)
 {
     m_modifiedRecastTime = mrec;
 }
 
-uint32 CSpell::getModifiedRecast() const
+timer::duration CSpell::getModifiedRecast() const
 {
     return m_modifiedRecastTime;
 }
@@ -479,10 +479,10 @@ namespace spell
                 PSpell->setSpellFamily((SPELLFAMILY)_sql->GetIntData(4));
                 PSpell->setValidTarget(_sql->GetIntData(5));
                 PSpell->setSkillType(_sql->GetIntData(6));
-                PSpell->setCastTime(_sql->GetIntData(7));
-                PSpell->setRecastTime(_sql->GetIntData(8));
+                PSpell->setCastTime(std::chrono::milliseconds(_sql->GetIntData(7)));
+                PSpell->setRecastTime(std::chrono::milliseconds(_sql->GetIntData(8)));
                 PSpell->setAnimationID(_sql->GetIntData(9));
-                PSpell->setAnimationTime(_sql->GetIntData(10));
+                PSpell->setAnimationTime(std::chrono::milliseconds(_sql->GetIntData(10)));
                 PSpell->setMPCost(_sql->GetIntData(11));
                 PSpell->setAOE(_sql->GetIntData(12));
                 PSpell->setBase(_sql->GetIntData(13));
@@ -563,10 +563,10 @@ namespace spell
             }
         }
 
-        const char* blueQuery = "SELECT blue_spell_list.spellid, blue_spell_list.mob_skill_id, blue_spell_list.set_points, \
-                                blue_spell_list.trait_category, blue_spell_list.trait_category_weight, blue_spell_list.primary_sc, \
-                                blue_spell_list.secondary_sc, blue_spell_list.tertiary_sc, spell_list.content_tag \
-                             FROM blue_spell_list JOIN spell_list on blue_spell_list.spellid = spell_list.spellid";
+        const char* blueQuery = "SELECT blue_spell_list.spellid, blue_spell_list.mob_skill_id, blue_spell_list.set_points, "
+                                "blue_spell_list.trait_category, blue_spell_list.trait_category_weight, blue_spell_list.primary_sc, "
+                                "blue_spell_list.secondary_sc, blue_spell_list.tertiary_sc, spell_list.content_tag "
+                                "FROM blue_spell_list JOIN spell_list on blue_spell_list.spellid = spell_list.spellid";
 
         ret = _sql->Query(blueQuery);
 
@@ -574,7 +574,8 @@ namespace spell
         {
             while (_sql->NextRow() == SQL_SUCCESS)
             {
-                char* contentTag = (char*)_sql->GetData(8);
+                // const auto contentTag = rset->getOrDefault<std::string>("content_tag", "");
+                const auto contentTag = _sql->GetStringData(8);
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
@@ -623,7 +624,8 @@ namespace spell
         {
             while (_sql->NextRow() == SQL_SUCCESS)
             {
-                char* contentTag = (char*)_sql->GetData(2);
+                // const auto contentTag = rset->getOrDefault<std::string>("content_tag", "");
+                const auto contentTag = _sql->GetStringData(2);
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;

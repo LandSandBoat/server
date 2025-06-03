@@ -50,15 +50,15 @@ public:
     uint16 getAnimation();
     uint16 getAddType(); // see map/ability.h for definitions. These can tell if the ability is a Merit ability, Astral Flow only ability, etc
 
-    void   setMsg(uint16 messageID);
-    void   setAnimation(uint16 animationID);
-    void   setRecast(uint16 recastTime);
-    uint16 getCE();
-    void   setCE(uint16 ce);
-    uint16 getVE();
-    void   setVE(uint16 ve);
-    void   setRange(float range);
-    void   setPostActionCleanupEffect(EFFECT effectToCleanup);
+    void  setMsg(uint16 messageID);
+    void  setAnimation(uint16 animationID);
+    void  setRecast(uint16 recastTime);
+    int32 getCE();
+    void  setCE(int32 ce);
+    int32 getVE();
+    void  setVE(int32 ve);
+    void  setRange(float range);
+    void  setPostActionCleanupEffect(EFFECT effectToCleanup);
 
     bool operator==(const CLuaAbility& other) const
     {

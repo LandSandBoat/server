@@ -10,9 +10,6 @@ local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
     local wildcatSandy = player:getCharVar('WildcatSandy')
@@ -23,14 +20,6 @@ entity.onTrigger = function(player, npc)
         not utils.mask.getBit(wildcatSandy, 16)
     then
         player:startEvent(558)
-    -- Blackmail quest
-    elseif
-        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL) == xi.questStatus.QUEST_ACCEPTED and
-        player:hasKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
-    then
-        player:startEvent(549)
-        player:setCharVar('BlackMailQuest', 1)
-        player:delKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
     elseif pNation == xi.nation.SANDORIA then
         -- Rank 10 default dialogue
         if player:getRank(player:getNation()) == 10 then
@@ -42,9 +31,6 @@ entity.onTrigger = function(player, npc)
     elseif pNation == xi.nation.BASTOK then
         player:showText(npc, ID.text.HALVER_OFFSET + 1092)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

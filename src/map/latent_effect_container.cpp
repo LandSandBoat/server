@@ -732,6 +732,8 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
         return false;
     }
 
+    vanadiel_time::time_point vanaTime   = vanadiel_time::now();
+
     // find the latent type from the enum and find the expression to tests againts
     switch (latentEffect.GetConditionsID())
     {
@@ -853,9 +855,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             {
                 for (auto* member : m_POwner->PParty->members)
                 {
-                    if (member->PPet != nullptr)
+                    if (member->PPet != nullptr && member->PPet->objtype == TYPE_PET)
                     {
-                        auto* PPet = (CPetEntity*)member->PPet;
+                        auto* PPet = static_cast<CPetEntity*>(member->PPet);
                         if (
                                 !PPet->isDead() && PPet->m_PetID < 21 && // is a live avatar
                                 (PPet->m_PetID == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21)
@@ -934,7 +936,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             break;
         case LATENT::TIME_OF_DAY:
         {
-            uint32 VanadielHour = CVanaTime::getInstance()->getHour();
+            uint32 VanadielHour = vanadiel_time::get_hour(vanaTime);
             switch (latentEffect.GetConditionsValue())
             {
                 case 0:
@@ -954,7 +956,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
         }
         case LATENT::HOUR_OF_DAY:
         {
-            uint32 VanadielHour = CVanaTime::getInstance()->getHour();
+            uint32 VanadielHour = vanadiel_time::get_hour(vanaTime);
             switch (latentEffect.GetConditionsValue())
             {
                 case 1:
@@ -985,33 +987,33 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             break;
         }
         case LATENT::FIRESDAY:
-            expression = CVanaTime::getInstance()->getWeekday() == FIRESDAY;
+            expression = vanadiel_time::get_weekday(vanaTime) == FIRESDAY;
             break;
         case LATENT::EARTHSDAY:
-            expression = CVanaTime::getInstance()->getWeekday() == EARTHSDAY;
+            expression = vanadiel_time::get_weekday(vanaTime) == EARTHSDAY;
             break;
         case LATENT::WATERSDAY:
-            expression = CVanaTime::getInstance()->getWeekday() == WATERSDAY;
+            expression = vanadiel_time::get_weekday(vanaTime) == WATERSDAY;
             break;
         case LATENT::WINDSDAY:
-            expression = CVanaTime::getInstance()->getWeekday() == WINDSDAY;
+            expression = vanadiel_time::get_weekday(vanaTime) == WINDSDAY;
             break;
         case LATENT::DARKSDAY:
-            expression = CVanaTime::getInstance()->getWeekday() == DARKSDAY;
+            expression = vanadiel_time::get_weekday(vanaTime) == DARKSDAY;
             break;
         case LATENT::ICEDAY:
-            expression = CVanaTime::getInstance()->getWeekday() == ICEDAY;
+            expression = vanadiel_time::get_weekday(vanaTime) == ICEDAY;
             break;
         case LATENT::LIGHTNINGSDAY:
-            expression = CVanaTime::getInstance()->getWeekday() == LIGHTNINGDAY;
+            expression = vanadiel_time::get_weekday(vanaTime) == LIGHTNINGDAY;
             break;
         case LATENT::LIGHTSDAY:
-            expression = CVanaTime::getInstance()->getWeekday() == LIGHTSDAY;
+            expression = vanadiel_time::get_weekday(vanaTime) == LIGHTSDAY;
             break;
         case LATENT::MOON_PHASE:
         {
-            uint32 MoonPhase     = CVanaTime::getInstance()->getMoonPhase();
-            uint32 MoonDirection = CVanaTime::getInstance()->getMoonDirection(); // directions: 1 = waning, 2 = waxing, 0 = neither
+            uint32 MoonPhase     = vanadiel_time::moon::get_phase(vanaTime);
+            uint32 MoonDirection = vanadiel_time::moon::get_direction(vanaTime); // directions: 1 = waning, 2 = waxing, 0 = neither
             switch (latentEffect.GetConditionsValue())
             {
                 case 0:
@@ -1064,11 +1066,11 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
         case LATENT::JOB_MULTIPLE_AT_NIGHT:
             if (latentEffect.GetConditionsValue() == 0)
             {
-                expression = m_POwner->GetMLevel() % 2 == 1 && CVanaTime::getInstance()->SyncTime() == TIME_NIGHT;
+                expression = m_POwner->GetMLevel() % 2 == 1 && vanadiel_time::get_totd(vanaTime) == vanadiel_time::TOTD::NIGHT;
             }
             else
             {
-                expression = m_POwner->GetMLevel() % latentEffect.GetConditionsValue() == 0 && CVanaTime::getInstance()->SyncTime() == TIME_NIGHT;
+                expression = m_POwner->GetMLevel() % latentEffect.GetConditionsValue() == 0 && vanadiel_time::get_totd(vanaTime) == vanadiel_time::TOTD::NIGHT;
             }
             break;
         case LATENT::WEAPON_DRAWN_HP_UNDER:

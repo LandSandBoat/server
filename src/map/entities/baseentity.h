@@ -24,6 +24,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "common/timer.h"
 #include "packets/message_basic.h"
 
 #include <map>
@@ -268,11 +269,13 @@ public:
     virtual const std::string& getName();       // Internal name of entity
     virtual const std::string& getPacketName(); // Name of entity sent to the client
 
-    uint16 getZone() const; // Current zone
-    float  GetXPos() const; // Position of co-ordinate X
-    float  GetYPos() const; // Position of co-ordinate Y
-    float  GetZPos() const; // Position of co-ordinate Z
-    uint8  GetRotPos() const;
+    uint16        getZone() const; // Current zone
+    float         GetXPos() const; // Position of co-ordinate X
+    float         GetYPos() const; // Position of co-ordinate Y
+    float         GetZPos() const; // Position of co-ordinate Z
+    uint8         GetRotPos() const;
+    uint8         GetSpeed() const;
+    virtual uint8 UpdateSpeed(bool run = false);
 
     void         HideName(bool hide);     // hide / show name
     void         GhostPhase(bool ghost);  // makes mob semi transparent
@@ -292,7 +295,7 @@ public:
     auto   GetLocalVars() -> std::map<std::string, uint32>&;
 
     // pre-tick update
-    virtual void Tick(time_point) = 0;
+    virtual void Tick(timer::time_point) = 0;
     // post-tick update
     virtual void PostTick() = 0;
 
@@ -316,7 +319,6 @@ public:
     uint8           animation;      // animation
     uint8           animationsub;   // Additional animation parameter
     uint8           baseSpeed;      // base movement speed
-    uint8           speed;          // speed of movement
     uint8           animationSpeed; // speed of movement animation
     uint8           namevis;
     ALLEGIANCE_TYPE allegiance;     // what types of targets the entity can fight
@@ -333,10 +335,11 @@ public:
     CBattlefield*                 PBattlefield; // pointer to battlefield (if in one)
     CInstance*                    PInstance;
 
-    std::chrono::steady_clock::time_point m_nextUpdateTimer; // next time the entity should push an update packet
+    timer::time_point m_nextUpdateTimer; // next time the entity should push an update packet
 
 protected:
     std::map<std::string, uint32> m_localVars;
+    uint8                         speed; // speed of movement
 };
 
 #endif // _BASEENTITY_H

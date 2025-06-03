@@ -8,9 +8,6 @@ local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if npc:getAnimation() == xi.anim.CLOSE_DOOR then
         if player:getZPos() > 137 then
@@ -19,12 +16,6 @@ entity.onTrigger = function(player, npc)
             player:messageSpecial(ID.text.THE_DOOR_IS_LOCKED)
         end
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

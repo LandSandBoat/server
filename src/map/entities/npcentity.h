@@ -23,7 +23,7 @@
 #define _NPCENTITY_H
 
 #include "common/cbasetypes.h"
-#include "common/taskmgr.h"
+#include "common/task_manager.h"
 
 #include "baseentity.h"
 
@@ -43,7 +43,7 @@ public:
     bool         IsTriggerable() const;
     virtual bool isWideScannable() override;
     virtual void PostTick() override;
-    virtual void Tick(time_point) override
+    virtual void Tick(timer::time_point) override
     {
     }
 

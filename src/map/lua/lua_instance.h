@@ -58,7 +58,7 @@ public:
     uint32 getLastTimeUpdate();
     uint32 getProgress();
     uint32 getWipeTime();
-    auto   getEntity(uint16 targid, sol::object const& filterObj) -> std::optional<CLuaBaseEntity>;
+    auto   getEntity(uint16 targid, sol::object const& filterObj) -> CBaseEntity*;
     uint32 getStage();
     auto   getLocalVar(std::string const& name) -> uint64_t;
 
@@ -75,8 +75,8 @@ public:
     void complete();
     bool completed();
 
-    auto insertAlly(uint32 groupid) -> std::optional<CLuaBaseEntity>;
-    auto insertDynamicEntity(sol::table table) -> std::optional<CLuaBaseEntity>;
+    auto insertAlly(uint32 groupid) -> CBaseEntity*;
+    auto insertDynamicEntity(sol::table table) -> CBaseEntity*;
 
     bool operator==(const CLuaInstance& other) const
     {

@@ -9,10 +9,14 @@
     "editor.renderWhitespace": "all",
     "editor.renderControlCharacters": true,
     "editor.trimAutoWhitespace": true,
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
 
     "Lua.diagnostics.globals": [
         "bit",
         "fmt",
+        "sleep",
 
         "xi",
         "ai",
@@ -26,7 +30,9 @@
         "item_utils",
 
         "Module",
+        "Override",
         "super",
+        "applyOverride",
 
         "mixins",
         "g_mixins",
@@ -328,6 +334,7 @@
 
         "GetSynergyRecipeByID",
         "GetSynergyRecipeByTrade",
+        "ReloadSynthRecipes",
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
@@ -463,6 +470,16 @@
         "__split_buffer": "cpp",
         "__threading_support": "cpp",
         "__tree": "cpp",
-        "print": "cpp"
+        "print": "cpp",
+        "__bits": "cpp",
+        "__debug": "cpp",
+        "__errc": "cpp",
+        "__functional_base": "cpp",
+        "__mutex_base": "cpp",
+        "__nullptr": "cpp",
+        "__std_stream": "cpp",
+        "__string": "cpp",
+        "__tuple": "cpp",
+        "climits": "cpp"
     },
 }

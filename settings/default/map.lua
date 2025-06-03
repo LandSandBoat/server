@@ -93,6 +93,9 @@ xi.settings.map =
     -- レベルキャップ/同期効果がプレイヤーに適用されているときに、より高いレベルの装備を装備する機能を無効にします。
     DISABLE_GEAR_SCALING = false,
 
+    -- Disables Treasure Hunter procs (Era behavior wants this true)
+    DISABLE_TREASURE_HUNTER_PROCS = false,
+
     -- ウェポンスキルポイントベース (スキルチェイン前) の潜在能力解放 - 整数のみ。公式は 1 です。
     WS_POINTS_BASE = 1,
 
@@ -269,6 +272,13 @@ xi.settings.map =
     AUDIT_UNITY     = false, -- ユニティチャットログ
     AUDIT_PARTY     = false, -- パーティチャットログ
 
+    -- Player Item Transaction Logging (Default: Off)
+    -- Logs player item transactions to the database for persistence.
+    AUDIT_PLAYER_TRADES = false,
+    AUDIT_PLAYER_BAZAAR = false,
+    AUDIT_PLAYER_DBOX   = false,
+    AUDIT_PLAYER_VENDOR = false,
+
     -- 回復ティック間の秒数。デフォルトは 10 です。
     HEALING_TICK_DELAY = 10,
 
@@ -325,6 +335,9 @@ xi.settings.map =
     -- ミッションの進行を直列にするカスタム
     -- ジラート終了後にプロマシアが受託できる。それ移行もミッションクリア後に次のミッションが発生する
     MISSION_PROGRESS_CUSTOM = false,
+
+    -- 魔封門の札を受け取れるタイミングをそれぞれの正義クリア時に変更する
+    AMULETTE_DE_PORTAIL_MISSION_TO_EACH_HIS_OWN_RIGHT = false,
 
     -- カスタムインベントリを有効にする
     CUSTOM_INVENTORY = false,

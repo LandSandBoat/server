@@ -9,12 +9,20 @@
 #include "map/utils/moduleutils.h"
 
 #include "common/timer.h"
+
+#include "map/packet_system.h"
 #include "map/packets/auction_house.h"
+#include "map/packets/basic.h"
 #include "map/packets/chat_message.h"
+
+#include "map/map_session.h"
 #include "map/zone.h"
 
-extern uint8                                                                             PacketSize[512];
-extern std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
+#include <functional>
+#include <numeric>
+
+extern uint8                                                                     PacketSize[512];
+extern std::function<void(MapSession* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
 
 class AHPaginationModule : public CPPModule
 {
@@ -22,38 +30,39 @@ class AHPaginationModule : public CPPModule
     {
         TracyZoneScoped;
 
-        // If this is set to 7, the client won't let you put up more than 7 items. So, 6.
-        const auto ITEMS_PER_PAGE = 6U;
-        const auto TOTAL_PAGES    = 6U;
-        const auto AH_LIST_LIMIT  = ITEMS_PER_PAGE * TOTAL_PAGES;
-
-        ShowInfo("[AH PAGES] Setting AH_LIST_LIMIT to %i.", AH_LIST_LIMIT);
-
-        settings::set("map.AH_LIST_LIMIT", static_cast<double>(AH_LIST_LIMIT));
-        if (settings::get<uint32>("map.AH_LIST_LIMIT") != AH_LIST_LIMIT)
+        const auto originalAHListLimit = settings::get<uint32>("map.AH_LIST_LIMIT");
+        if (originalAHListLimit != 0 && originalAHListLimit <= 7)
         {
-            ShowError("Failed to set AH_LIST_LIMIT to %i.", AH_LIST_LIMIT);
+            ShowWarning("[AH PAGES] AH_LIST_LIMIT is already set to %i. AH_LIST_LIMIT <= 7 is handled by the client. This module isn't required.", originalAHListLimit);
+            return;
         }
 
-        auto originalHandler = PacketParser[0x04E];
+        // If this is set to 7, the client won't let you put up more than 7 items. So, 6.
+        const auto ITEMS_PER_PAGE = 6U;
+        const auto TOTAL_PAGES    = originalAHListLimit == 0 ? 99 : (originalAHListLimit / 6U) + 1;
 
-        auto newHandler = [ITEMS_PER_PAGE, TOTAL_PAGES, originalHandler](map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
+        ShowInfo("[AH PAGES] AH_LIST_LIMIT is set to %i. Enabling pagination of %i pages with %i items per page.", originalAHListLimit, TOTAL_PAGES, ITEMS_PER_PAGE);
+
+        const auto originalHandler = PacketParser[0x04E];
+
+        const auto newHandler = [ITEMS_PER_PAGE, TOTAL_PAGES, originalHandler](MapSession* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
         {
             TracyZoneScoped;
 
             if (PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH))
             {
-                ShowWarning("%s is trying to use the auction house in a disallowed zone [%s]", PChar->getName(), PChar->loc.zone->getName());
+                ShowWarning("[AH PAGES] %s is trying to use the auction house in a disallowed zone [%s]", PChar->getName(), PChar->loc.zone->getName());
                 return;
             }
 
             // Only intercept for action 0x05: Open List Of Sales / Wait
-            auto action = data.ref<uint8>(0x04);
+            const auto action = data.ref<uint8>(0x04);
             if (action == 0x05)
             {
-                uint32 curTick = gettick();
-                if (curTick - PChar->m_AHHistoryTimestamp > 1500)
+                const timer::time_point curTick = timer::now();
+                if (curTick > PChar->m_AHHistoryTimestamp + 1500ms)
                 {
+                    // Not const, because we're going to increment it below
                     // This will get wiped on zoning
                     auto currentAHPage = PChar->GetLocalVar("AH_PAGE");
 
@@ -66,10 +75,11 @@ class AHPaginationModule : public CPPModule
                         const auto ahListings = [&]() -> uint32
                         {
                             const auto rset = db::preparedStmt("SELECT COUNT(*) FROM auction_house WHERE seller = ? AND sale = 0", PChar->id);
-                            if (rset && rset->rowsCount() && rset->next())
+                            FOR_DB_SINGLE_RESULT(rset)
                             {
                                 return rset->get<uint32>(0);
                             }
+
                             return 0;
                         }();
                         PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("You have {} items listed for sale.", ahListings).c_str(), "");
@@ -100,22 +110,22 @@ class AHPaginationModule : public CPPModule
                         PChar->SetLocalVar("AH_PAGE", currentAHPage + 1);
                     }
 
+                    // TODO: Don't use TOTAL_PAGES here, use the actual number of pages of results.
+                    // Current (10 items): Current page: 2 of 99. Showing 4 items.
+                    // Desired (10 items): Current page: 2 of 2. Showing 4 items.
                     PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("Current page: {} of {}. Showing {} items.", currentAHPage + 1, TOTAL_PAGES, rset->rowsCount()).c_str(), "");
 
-                    if (rset && rset->rowsCount())
+                    FOR_DB_MULTIPLE_RESULTS(rset)
                     {
-                        while (rset->next())
-                        {
-                            PChar->m_ah_history.emplace_back(AuctionHistory_t{
-                                .itemid = rset->get<uint16>("itemid"),
-                                .stack  = rset->get<uint8>("stack"),
-                                .price  = rset->get<uint32>("price"),
-                                .status = 0,
-                            });
-                        }
+                        PChar->m_ah_history.emplace_back(AuctionHistory_t{
+                            .itemid = rset->get<uint16>("itemid"),
+                            .stack  = rset->get<uint8>("stack"),
+                            .price  = rset->get<uint32>("price"),
+                            .status = 0,
+                        });
                     }
 
-                    auto totalItemsOnAh = PChar->m_ah_history.size();
+                    const auto totalItemsOnAh = PChar->m_ah_history.size();
                     for (size_t slot = 0; slot < totalItemsOnAh; slot++)
                     {
                         PChar->pushPacket<CAuctionHousePacket>(0x0C, (uint8)slot, PChar);

@@ -93,6 +93,7 @@ quest.sections =
             onEventFinish =
             {
                 [1000] = function(player, csid, option, npc)
+                    player:confirmTrade()
                     npcUtil.giveKeyItem(player, xi.ki.TRADERS_SACK)
                 end,
             },

@@ -14,8 +14,6 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "menu_jobpoints.h"
 
 #include "entities/battleentity.h"

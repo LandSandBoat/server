@@ -33,8 +33,8 @@ CMobSkill::CMobSkill(uint16 id)
 , m_Distance(0)
 , m_Flag(0)
 , m_ValidTarget(0)
-, m_AnimationTime(0)
-, m_ActivationTime(0)
+, m_AnimationTime(0s)
+, m_ActivationTime(0s)
 , m_Message(0)
 , m_TP(0)
 , m_HPP(0)
@@ -164,12 +164,12 @@ void CMobSkill::setHPP(uint8 hpp)
     m_HPP = hpp;
 }
 
-void CMobSkill::setAnimationTime(uint16 AnimationTime)
+void CMobSkill::setAnimationTime(timer::duration AnimationTime)
 {
     m_AnimationTime = AnimationTime;
 }
 
-void CMobSkill::setActivationTime(uint16 ActivationTime)
+void CMobSkill::setActivationTime(timer::duration ActivationTime)
 {
     m_ActivationTime = ActivationTime;
 }
@@ -331,12 +331,12 @@ uint16 CMobSkill::getValidTargets() const
     return m_ValidTarget;
 }
 
-uint16 CMobSkill::getAnimationTime() const
+timer::duration CMobSkill::getAnimationTime() const
 {
     return m_AnimationTime;
 }
 
-uint16 CMobSkill::getActivationTime() const
+timer::duration CMobSkill::getActivationTime() const
 {
     return m_ActivationTime;
 }

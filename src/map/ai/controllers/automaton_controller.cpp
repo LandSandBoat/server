@@ -20,10 +20,12 @@
 */
 
 #include "automaton_controller.h"
+
 #include "ai/ai_container.h"
 #include "ai/states/ability_state.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/weaponskill_state.h"
+#include "common/database.h"
 #include "common/utils.h"
 #include "enmity_container.h"
 #include "entities/trustentity.h"
@@ -173,7 +175,7 @@ CurrentManeuvers CAutomatonController::GetCurrentManeuvers() const
              statuses->GetEffectsCount(EFFECT_LIGHT_MANEUVER), statuses->GetEffectsCount(EFFECT_DARK_MANEUVER) };
 }
 
-void CAutomatonController::DoCombatTick(time_point tick)
+void CAutomatonController::DoCombatTick(timer::time_point tick)
 {
     if ((PAutomaton->PMaster == nullptr || PAutomaton->PMaster->isDead()) && PAutomaton->isAlive())
     {
@@ -223,9 +225,8 @@ void CAutomatonController::DoCombatTick(time_point tick)
 
 void CAutomatonController::Move()
 {
-    float currentDistance = distanceSquared(PAutomaton->loc.p, PTarget->loc.p);
-
-    if ((shouldStandBack() && (currentDistance > 225)) || (PAutomaton->health.mp < 8 && PAutomaton->health.maxmp > 8))
+    if ((shouldStandBack() && !isWithinDistance(PAutomaton->loc.p, PTarget->loc.p, 15.0f)) ||
+        (PAutomaton->health.mp < 8 && PAutomaton->health.maxmp > 8))
     {
         PAutomaton->m_Behavior &= ~BEHAVIOR_STANDBACK;
     }
@@ -238,7 +239,7 @@ bool CAutomatonController::TryAction()
     if (m_Tick > m_LastActionTime + (m_actionCooldown - std::chrono::milliseconds(PAutomaton->getMod(Mod::AUTO_DECISION_DELAY) * 10)))
     {
         m_LastActionTime = m_Tick;
-        PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_AI_TICK", CLuaBaseEntity(PAutomaton), CLuaBaseEntity(PTarget));
+        PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_AI_TICK", PAutomaton, PTarget);
 
         return true;
     }
@@ -467,9 +468,9 @@ bool CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers)
         }
         else
         {
-            uint16 selfEnmity   = selfEnmity_obj->second.CE + selfEnmity_obj->second.VE;
-            uint16 masterEnmity = masterEnmity_obj->second.CE + masterEnmity_obj->second.VE;
-            haveHate            = selfEnmity > masterEnmity;
+            int32 selfEnmity   = selfEnmity_obj->second.CE + selfEnmity_obj->second.VE;
+            int32 masterEnmity = masterEnmity_obj->second.CE + masterEnmity_obj->second.VE;
+            haveHate           = selfEnmity > masterEnmity;
         }
     }
 
@@ -719,7 +720,7 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             // clang-format off
             PTarget->StatusEffectContainer->ForEachEffect([&dispel](CStatusEffect* PStatus)
             {
-                if (!dispel && PStatus->GetDuration() > 0)
+                if (!dispel && PStatus->GetDuration() > 0s)
                 {
                     if (PStatus->HasEffectFlag(EFFECTFLAG_DISPELABLE))
                     {
@@ -1082,7 +1083,7 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
     // clang-format off
     PAutomaton->PMaster->StatusEffectContainer->ForEachEffect([&castPriority](CStatusEffect* PStatus)
     {
-        if (PStatus->GetDuration() > 0)
+        if (PStatus->GetDuration() > 0s)
         {
             auto id = automaton::FindNaSpell(PStatus);
             if (id.has_value())
@@ -1106,7 +1107,7 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
     // clang-format off
     PAutomaton->StatusEffectContainer->ForEachEffect([&castPriority](CStatusEffect* PStatus)
     {
-        if (PStatus->GetDuration() > 0)
+        if (PStatus->GetDuration() > 0s)
         {
             auto id = automaton::FindNaSpell(PStatus);
             if (id.has_value())
@@ -1136,7 +1137,7 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
                 // clang-format off
                 member->StatusEffectContainer->ForEachEffect([&castPriority](CStatusEffect* PStatus)
                 {
-                    if (PStatus->GetDuration() > 0)
+                    if (PStatus->GetDuration() > 0s)
                     {
                         auto id = automaton::FindNaSpell(PStatus);
                         if (id.has_value())
@@ -1216,7 +1217,7 @@ bool CAutomatonController::TryEnhance()
         PAutomaton->PMaster->StatusEffectContainer->ForEachEffect(
             [&protect, &protectcount, &shell, &shellcount, &haste, &stoneskin, &phalanx](CStatusEffect* PStatus)
             {
-                if (PStatus->GetDuration() > 0)
+                if (PStatus->GetDuration() > 0s)
                 {
                     if (PStatus->GetStatusID() == EFFECT_PROTECT)
                     {
@@ -1296,7 +1297,7 @@ bool CAutomatonController::TryEnhance()
     // clang-format off
     PAutomaton->StatusEffectContainer->ForEachEffect([&protect, &shell, &haste](CStatusEffect* PStatus)
     {
-        if (PStatus->GetDuration() > 0)
+        if (PStatus->GetDuration() > 0s)
         {
             if (PStatus->GetStatusID() == EFFECT_PROTECT)
             {
@@ -1369,7 +1370,7 @@ bool CAutomatonController::TryEnhance()
 
                 PMember->StatusEffectContainer->ForEachEffect([&protect, &protectcount, &shell, &shellcount, &haste](CStatusEffect* PStatus)
                 {
-                    if (PStatus->GetDuration() > 0)
+                    if (PStatus->GetDuration() > 0s)
                     {
                         if (PStatus->GetStatusID() == EFFECT_PROTECT)
                         {
@@ -1514,7 +1515,7 @@ bool CAutomatonController::TryTPMove()
         if (attemptChain)
         {
             CStatusEffect* PSCEffect = PTarget->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
-            if (PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now())
+            if (PSCEffect && PSCEffect->GetStartTime() + 3s < timer::now())
             {
                 std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
 
@@ -1576,8 +1577,8 @@ bool CAutomatonController::TryRangedAttack() // TODO: Find the animation for its
 {
     if (PAutomaton->getFrame() == FRAME_SHARPSHOT)
     {
-        duration minDelay   = PAutomaton->getHead() == AUTOHEADTYPE::HEAD_SHARPSHOT ? 5s : 10s;
-        duration attackTime = m_rangedCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_RANGED_DELAY));
+        timer::duration minDelay   = PAutomaton->getHead() == AUTOHEADTYPE::HEAD_SHARPSHOT ? 5s : 10s;
+        timer::duration attackTime = m_rangedCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_RANGED_DELAY));
 
         if (m_rangedCooldown > 0s && m_Tick > m_LastRangedTime + std::max(attackTime, minDelay))
         {
@@ -1595,7 +1596,7 @@ bool CAutomatonController::TryAttachment()
         return false;
     }
 
-    PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_ATTACHMENT_CHECK", CLuaBaseEntity(PAutomaton), CLuaBaseEntity(PTarget));
+    PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_ATTACHMENT_CHECK", PAutomaton, PTarget);
 
     return false;
 }
@@ -1614,7 +1615,7 @@ bool CAutomatonController::CanCastSpells()
 
 bool CAutomatonController::Cast(uint16 targid, SpellID spellid)
 {
-    if (!automaton::CanUseSpell(PAutomaton, spellid) || PAutomaton->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<uint16>(spellid), 0))
+    if (!automaton::CanUseSpell(PAutomaton, spellid) || PAutomaton->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<uint16>(spellid), 0s))
     {
         return false;
     }
@@ -1624,7 +1625,7 @@ bool CAutomatonController::Cast(uint16 targid, SpellID spellid)
 
 bool CAutomatonController::MobSkill(uint16 targid, uint16 wsid)
 {
-    if (PAutomaton->PRecastContainer->HasRecast(RECAST_ABILITY, wsid, 0))
+    if (PAutomaton->PRecastContainer->HasRecast(RECAST_ABILITY, wsid, 0s))
     {
         return false;
     }
@@ -1649,31 +1650,25 @@ namespace automaton
 
     void LoadAutomatonSpellList()
     {
-        const char* Query = "SELECT spellid, skilllevel, heads, enfeeble, immunity, removes FROM automaton_spells";
-
-        int32 ret = _sql->Query(Query);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        const auto rset = db::preparedStmt("SELECT spellid, skilllevel, heads, enfeeble, immunity, removes FROM automaton_spells");
+        if (rset && rset->rowsCount())
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                SpellID id = (SpellID)_sql->GetUIntData(0);
+                SpellID id = static_cast<SpellID>(rset->get<uint16>("spellid"));
 
-                // clang-format off
-                AutomatonSpell PSpell
-                {
-                    (uint16)_sql->GetUIntData(1),
-                    (uint8)_sql->GetUIntData(2),
-                    (EFFECT)_sql->GetUIntData(3),
-                    (IMMUNITY)_sql->GetUIntData(4),
-                    {} // Will handle in a moment
+                AutomatonSpell PSpell{
+                    .skilllevel = rset->get<uint16>("skilllevel"),
+                    .heads      = rset->get<uint8>("heads"),
+                    .enfeeble   = static_cast<EFFECT>(rset->get<uint16>("enfeeble")),
+                    .immunity   = static_cast<IMMUNITY>(rset->get<uint32>("immunity")),
+                    .removes    = {}, // Will handle in a moment
                 };
-                // clang-format on
 
-                uint32 removes = _sql->GetUIntData(5);
+                uint32 removes = rset->get<uint32>("removes");
                 while (removes > 0)
                 {
-                    PSpell.removes.emplace_back((EFFECT)(removes & 0xFF));
+                    PSpell.removes.emplace_back(static_cast<EFFECT>(removes & 0xFF));
                     removes = removes >> 8;
                 }
 
@@ -1724,20 +1719,24 @@ namespace automaton
 
     void LoadAutomatonAbilities()
     {
-        const char* Query = "SELECT abilityid, abilityname, reqframe, skilllevel FROM automaton_abilities";
+        const auto rset = db::preparedStmt("SELECT abilityid, abilityname, reqframe, skilllevel FROM automaton_abilities");
 
-        int32 ret = _sql->Query(Query);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        if (rset && rset->rowsCount())
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                uint16           id = (uint16)_sql->GetUIntData(0);
-                AutomatonAbility PAbility{ (uint8)_sql->GetUIntData(2), (uint16)_sql->GetUIntData(3) };
+                uint16 id = rset->get<uint16>("abilityid");
+
+                AutomatonAbility PAbility{
+                    .requiredFrame = rset->get<uint8>("reqframe"),
+                    .skillLevel    = rset->get<uint16>("skilllevel"),
+                };
 
                 autoAbilityList[id] = PAbility;
 
-                auto filename = fmt::format("./scripts/actions/abilities/pets/automaton/{}.lua", _sql->GetStringData(1));
+                const auto abilityName = rset->get<std::string>("abilityname");
+
+                const auto filename = fmt::format("./scripts/actions/abilities/pets/automaton/{}.lua", abilityName);
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }

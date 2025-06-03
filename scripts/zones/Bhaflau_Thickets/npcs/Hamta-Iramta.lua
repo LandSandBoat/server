@@ -4,49 +4,47 @@
 -- Type: Alzadaal Undersea Ruins
 -- !pos -459.942 -20.048 -4.999 52
 -----------------------------------
+local ID = zones[xi.zone.BHAFLAU_THICKETS]
+-----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
+local function isOutsideAlzadaal(player)
+    if player:getYPos() <= -16.01 then
+        return true
+    end
+
+    return false
+end
+
 entity.onTrade = function(player, npc, trade)
     if
+        isOutsideAlzadaal(player) and
         trade:getItemCount() == 1 and
         trade:hasItemQty(xi.item.IMPERIAL_SILVER_PIECE, 1)
     then
         player:tradeComplete()
-        player:setPos(-458, -16, 0, 189) -- using the pos method until the problem below is fixed
-        -- player:startEvent(135) -- << this CS goes black at the end, never fades in
+        player:startEvent(135)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    -- NPC is on a slant which makes this really difficult
-    if
-        player:getXPos() < -456 and
-        player:getXPos() > -459 and
-        player:getYPos() < -16.079
-    then
-        player:startEvent(134)
-    elseif
-        player:getXPos() < -459 and
-        player:getXPos() > -462 and
-        player:getYPos() < -16.070
-    then
-        player:startEvent(134)
-    elseif
-        player:getXPos() < -462 and
-        player:getXPos() > -464 and
-        player:getYPos() < -16.071
-    then
-        player:startEvent(134)
+    if isOutsideAlzadaal(player) then
+        if player:hasKeyItem(xi.ki.CAPTAIN_WILDCAT_BADGE) then
+            player:messageSpecial(ID.text.YOU_HAVE_A_BADGE, xi.ki.CAPTAIN_WILDCAT_BADGE)
+            player:startEvent(135)
+        else
+            player:startEvent(134)
+        end
     else
         player:startEvent(136)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 135 then
+        player:setPos(-115, -4, -620, 253, xi.zone.ALZADAAL_UNDERSEA_RUINS)
+    end
 end
 
 return entity

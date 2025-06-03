@@ -98,18 +98,19 @@ namespace daily
 
     void LoadDailyItems()
     {
-        int32  ret    = _sql->Query("SELECT itemid, aH, flags FROM item_basic WHERE flags & 4 > 0");
+        const auto rset = db::preparedStmt("SELECT itemid, aH, flags FROM item_basic WHERE flags & 4 > 0");
+
         uint16 itemid = 0;
         uint16 aH     = 0;
         uint16 flags  = 0;
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        if (rset && rset->rowsCount())
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                itemid = _sql->GetUIntData(0);
-                aH     = _sql->GetUIntData(1);
-                flags  = _sql->GetUIntData(2);
+                itemid = rset->get<uint16>("itemid");
+                aH     = rset->get<uint16>("aH");
+                flags  = rset->get<uint16>("flags");
+
                 specialDialItems.emplace_back(itemid);
                 switch (aH)
                 {

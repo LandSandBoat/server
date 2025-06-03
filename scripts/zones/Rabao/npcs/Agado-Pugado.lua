@@ -9,9 +9,6 @@ local ID = zones[xi.zone.RABAO]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local trialByWind = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
     local carbuncleDebacle = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
@@ -84,9 +81,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 66 and option == 1 then
         if player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND) == xi.questStatus.QUEST_COMPLETED then
@@ -95,11 +89,9 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
         player:setCharVar('TrialByWind_date', 0)
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_WIND)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WIND)
+        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_WIND)
     elseif csid == 107 then
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_WIND)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WIND)
+        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_WIND)
     elseif csid == 69 then
         local item = 0
         if option == 1 then

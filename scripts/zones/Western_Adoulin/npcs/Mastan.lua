@@ -5,13 +5,8 @@
 --                        'The Curious Case of Melvien'
 -- !pos -9 0 67 256
 -----------------------------------
-local ID = zones[xi.zone.WESTERN_ADOULIN]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
-
-entity.onTrade = function(player, npc, trade)
-end
 
 entity.onTrigger = function(player, npc)
     local tccom = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_CURIOUS_CASE_OF_MELVIEN)
@@ -28,17 +23,11 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 70 then
-        -- Progresses Quest: 'Order Up'
         player:setCharVar('Order_Up_NPCs', utils.mask.setBit(player:getCharVar('Order_Up_NPCs'), 11, true))
     elseif csid == 184 and option == 1 then
-        -- Progresses Quest: 'The Curious Case of Melvien'
-        player:addKeyItem(xi.ki.MELVIENS_DEATH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MELVIENS_DEATH)
+        npcUtil.giveKeyItem(player, xi.ki.MELVIENS_DEATH)
     end
 end
 

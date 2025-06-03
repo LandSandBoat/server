@@ -23,9 +23,6 @@ local pincerstoneTable =
     [ID.npc.PINCERSTONE_OFFSET + 18] = ID.npc.PORTAL_OFFSET + 13, -- Main Island to SW Island
 }
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local npcId    = npc:getID()
     local portalId = pincerstoneTable[npcId]
@@ -40,12 +37,6 @@ entity.onTrigger = function(player, npc)
             player:messageSpecial(ID.text.IT_IS_ALREADY_FUNCTIONING)
         end
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

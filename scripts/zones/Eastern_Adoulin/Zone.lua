@@ -5,7 +5,7 @@
 local zoneObject = {}
 
 local defineZoneAroundXYZ = function(zone, id, x, y, z, distance)
-    zone:registerTriggerArea(id,
+    zone:registerCuboidTriggerArea(id,
         x - distance, y - distance, z - distance,
         x + distance, y + distance, z + distance)
 end

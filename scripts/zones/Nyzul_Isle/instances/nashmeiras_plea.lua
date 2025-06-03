@@ -17,8 +17,8 @@ instanceObject.entryRequirements = function(player)
 end
 
 instanceObject.onInstanceCreated = function(instance)
-    SpawnMob(ID.mob[59].RAUBAHN, instance)
-    SpawnMob(ID.mob[59].RAZFAHD, instance)
+    SpawnMob(ID.mob.RAUBAHN, instance)
+    SpawnMob(ID.mob.RAZFAHD, instance)
 end
 
 instanceObject.onInstanceCreatedCallback = function(player, instance)
@@ -57,14 +57,14 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
         local chars = instance:getChars()
         local entryPos = instance:getEntryPos()
 
-        DespawnMob(ID.mob[59].RAUBAHN, instance)
-        DespawnMob(ID.mob[59].RAZFAHD, instance)
+        DespawnMob(ID.mob.RAUBAHN, instance)
+        DespawnMob(ID.mob.RAZFAHD, instance)
         for i, v in pairs(chars) do
             v:startEvent(203)
             v:setPos(entryPos.x, entryPos.y, entryPos.z, entryPos.rot)
         end
 
-        SpawnMob(ID.mob[59].ALEXANDER, instance)
+        SpawnMob(ID.mob.ALEXANDER, instance)
 
     elseif progress == 5 then
         instance:complete()

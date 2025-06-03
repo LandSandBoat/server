@@ -9,9 +9,6 @@ local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local guardian = GetMobByID(ID.mob.TEMPLE_GUARDIAN)
 
@@ -22,12 +19,6 @@ entity.onTrigger = function(player, npc)
     if guardian ~= nil and guardian:getHP() > 0 and guardian:getTarget() == nil then
         guardian:updateClaim(player)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -37,7 +37,7 @@ public:
     {
     }
     virtual void          Check() override;
-    virtual void          Add(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime, uint8 maxCharges) override;
+    virtual void          Add(RECASTTYPE type, uint16 id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges) override;
     virtual void          Del(RECASTTYPE type) override;
     virtual void          Del(RECASTTYPE type, uint16 id) override;
     virtual void          DeleteByIndex(RECASTTYPE type, uint8 index) override;

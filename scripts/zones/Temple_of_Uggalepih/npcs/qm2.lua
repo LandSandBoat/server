@@ -8,9 +8,6 @@ local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if not player:hasItem(xi.item.OFFERING_TO_UGGALEPIH) then
         if npcUtil.giveItem(player, xi.item.OFFERING_TO_UGGALEPIH) then -- Uggalepih Offering

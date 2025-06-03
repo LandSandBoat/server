@@ -3,8 +3,6 @@
 --  NPC: Isakoth
 -- Records of Eminence NPC
 -----------------------------------
-local ID = zones[xi.zone.BASTOK_MARKETS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -19,7 +17,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(25)
     else
         player:triggerRoeEvent(xi.roeTrigger.TRIGGER_NPC)
-        player:messageSpecial(ID.text.TURNING_IN_SPARKS)
+        player:messageSpecial(zones[xi.zone.BASTOK_MARKETS].text.TURNING_IN_SPARKS)
         xi.sparkshop.onTrigger(player, npc, 26)
     end
 end

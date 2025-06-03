@@ -44,9 +44,10 @@ ZoneLos::ZoneLos(Triangle* elements, int elementCount)
 {
 }
 
-ZoneLos* ZoneLos::Load(uint16 zoneId, std::string const& pathToObj)
+auto ZoneLos::Load(uint16 zoneId, std::string const& pathToObj) -> std::unique_ptr<ZoneLos>
 {
     TracyZoneScoped;
+
     // Check if file exists before loading the OBJ model.
     if (FILE* file = fopen(pathToObj.c_str(), "r"))
     {
@@ -94,7 +95,7 @@ ZoneLos* ZoneLos::Load(uint16 zoneId, std::string const& pathToObj)
         }
     }
 
-    auto zoneLos = new ZoneLos(elements, mesh->face_count);
+    auto zoneLos = std::unique_ptr<ZoneLos>(new ZoneLos(elements, mesh->face_count));
 
 #ifdef LOS_DEBUG
     auto stats = zoneLos->tree.GetStats();

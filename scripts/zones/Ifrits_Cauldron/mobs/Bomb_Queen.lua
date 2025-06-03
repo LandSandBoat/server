@@ -9,12 +9,16 @@ mixins = { require('scripts/mixins/draw_in') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 900)
     mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 15000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 18000)
+    mob:setMobMod(xi.mobMod.MUG_GIL, 3370)
     mob:setMod(xi.mod.STUN_MEVA, 50)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:addImmunity(xi.immunity.STUN)
     mob:setLocalVar('spawn_time', os.time() + 5) -- five seconds for first pet
 end
 

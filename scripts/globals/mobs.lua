@@ -31,17 +31,38 @@ local function lotteryPrimed(phList)
     return false
 end
 
+xi.mob.updateNMSpawnPoint = function(mob, spawnPoints)
+    -- This function is used to replace UpdateNMSpawnPoints() inside the Zone.lua files and the NM despawn scripts
+    -- Once UpdateNMSpawnPoints() is no longer used, this note can be removed
+    -- Spawnpoints is a table of {x = , y = , z = }
+    if spawnPoints ~= nil and #spawnPoints > 0 then
+        local chosenSpawn    = utils.randomEntry(spawnPoints)
+        local randomRotation = math.random(0, 255) -- rotation does not matter
+
+        -- Updates the mob's spawn point
+        mob:setSpawn(chosenSpawn.x, chosenSpawn.y, chosenSpawn.z, randomRotation)
+    else
+        printf('No spawn points defined for mob %s (%u) in spawnPoints.', mob:getName(), mob:getID())
+    end
+end
+
 -- potential lottery placeholder was killed
 xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
     params = params or {}
     --[[
         params.immediate   = true    pop NM without waiting for next PH pop time
+        params.dayOnly     = true    spawn NM only at day time
         params.nightOnly   = true    spawn NM only at night time
         params.noPosUpdate = true    do not run UpdateNMSpawnPoint()
+        params.spawnPoints = {x = , y = , z = } table of spawn points to choose from
     ]]
 
     if type(params.immediate) ~= 'boolean' then
         params.immediate = false
+    end
+
+    if type(params.dayOnly) ~= 'boolean' then
+        params.dayOnly = false
     end
 
     if type(params.nightOnly) ~= 'boolean' then
@@ -75,14 +96,17 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
                 not lotteryPrimed(phList) and
                 math.random(1, 1000) <= chance
             then
-                local nextRepopTime = os.time() + GetMobRespawnTime(phId)
-                -- That's earth time, subtract SE epoch to get Vanatime
-                nextRepopTime = nextRepopTime - 1009810800
-                -- The enum bakes in a multiplication of 2.4, gotta reverse that to get accurate hour
-                local nextRepopDate = (nextRepopTime / 60 * 25) + 886 * (xi.vanaTime.YEAR / 2.4)
-                local nextRepopHour = (nextRepopDate % (xi.vanaTime.DAY / 2.4)) / (xi.vanaTime.HOUR / 2.4)
-                -- If the NM is night only and spawn would happen during the day, bail out
+                local nextRepopTime = VanadielTime() + GetMobRespawnTime(phId)
+                local nextRepopHour = math.floor((nextRepopTime % xi.vanaTime.DAY) / xi.vanaTime.HOUR)
+                -- If the NM is day only and spawn would happen during the night, bail out
                 if
+                    params.dayOnly and
+                    nextRepopHour < 4 and
+                    nextRepopHour >= 20
+                then
+                    return false
+                -- If the NM is night only and spawn would happen during the day, bail out
+                elseif
                     params.nightOnly and
                     nextRepopHour >= 4 and
                     nextRepopHour < 20
@@ -94,8 +118,19 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
                 DisallowRespawn(phId, true)
                 DisallowRespawn(nmId, false)
 
+                -- This is a temporary solution until all NMs have been updated to use params.spawnPoints and moved out of sql
+                if params.spawnPoints then
+                    if params.spawnPoints[nmId] then -- Special check for NMs with multiple IDs
+                        xi.mob.updateNMSpawnPoint(nm, params.spawnPoints[nmId])
+                    else
+                        xi.mob.updateNMSpawnPoint(nm, params.spawnPoints)
+                    end
+
+                    params.noPosUpdate = true -- If we have a table of spawn points, we don't need to run UpdateNMSpawnPoint()
+                end
+
                 if not params.noPosUpdate then
-                    UpdateNMSpawnPoint(nmId)
+                    UpdateNMSpawnPoint(nmId) -- This needs to stay here until all NMs have been updated to use params.spawnPoints and moved out of sql
                 end
 
                 -- if params.immediate is true, spawn the nm params.immediately (1ms) else use placeholder's timer
@@ -162,6 +197,7 @@ xi.mob.additionalEffect =
     TP_DRAIN   = 21,
     WEIGHT     = 22,
     ENAMNESIA  = 23,
+    DISPEL     = 24,
 }
 xi.mob.ae = xi.mob.additionalEffect
 
@@ -468,7 +504,120 @@ local additionalEffects =
         minDuration = 1,
         maxDuration = 45,
     },
+
+    [xi.mob.ae.DISPEL] =
+    {
+        chance      = 25,
+        ele         = xi.element.DARK,
+        sub         = xi.subEffect.DISPEL,
+        msg         = xi.msg.basic.ADD_EFFECT_DISPEL,
+        applyEffect = false,
+        power       = 1,
+    },
 }
+
+--[[
+    Helper function for xi.mob.onAddEffect that applies a status effect.
+--]]
+local addEffectStatus = function(mob, target, ae, params)
+    local resist = 1
+
+    if ae.ele then
+        resist = applyResistanceAddEffect(mob, target, ae.ele, ae.eff)
+    end
+
+    if resist > 0.5 and not target:hasStatusEffect(ae.eff) then
+        local power    = params.power or ae.power or 0
+        local tick     = ae.tick or 0
+        local duration = params.duration or ae.duration
+
+        duration = utils.clamp(duration, ae.minDuration, ae.maxDuration) * resist
+
+        target:addStatusEffect(ae.eff, power, tick, duration)
+
+        if params.code then
+            params.code(mob, target, power)
+        elseif ae.code then
+            ae.code(mob, target, power)
+        end
+
+        return ae.sub, ae.msg, ae.eff
+    end
+
+    return 0, 0, 0
+end
+
+--[[
+    Helper function for xi.mob.onAddEffect that dispels an effect.
+--]]
+local addEffectDispel = function(target, ae)
+    local dispelledEffect = target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
+
+    if dispelledEffect == xi.effect.NONE then
+        return 0, 0, 0
+    end
+
+    return ae.sub, ae.msg, dispelledEffect
+end
+
+--[[
+    Helper function for xi.mob.onAddEffect that applies damage.
+--]]
+local addEffectImmediate = function(mob, target, damage, ae, params)
+    local power = 0
+
+    if params.power then
+        power = params.power
+    elseif ae.mod then
+        local dMod = mob:getStat(ae.mod) - target:getStat(ae.mod)
+
+        if dMod > 20 then
+            dMod = 20 + (dMod - 20) / 2
+        end
+
+        -- This is a bad assumption, but it prevents some negative damage (healing) when there otherwise shouldn't be
+        -- TODO: better understand damage add effects from mobs
+        if dMod < 0 then
+            dMod = 0
+        end
+
+        power = dMod + target:getMainLvl() - mob:getMainLvl() + damage / 2
+    end
+
+    -- target:printToPlayer(string.format('Initial Power: %f', power)) -- DEBUG
+
+    power = addBonusesAbility(mob, ae.ele, target, power, ae.bonusAbilityParams)
+    power = power * applyResistanceAddEffect(mob, target, ae.ele, 0)
+    power = power * xi.spells.damage.calculateNukeAbsorbOrNullify(target, ae.ele)
+
+    if ae.sub ~= xi.subEffect.TP_DRAIN and ae.sub ~= xi.subEffect.MP_DRAIN then
+        power = finalMagicNonSpellAdjustments(mob, target, ae.ele, power)
+    end
+
+    -- target:printToPlayer(string.format('Adjusted Power: %f', power)) -- DEBUG
+
+    local message = ae.msg
+    if power < 0 then
+        if ae.negMsg then
+            message = ae.negMsg
+            power   = power * -1 -- outgoing action packets only support unsigned integers. The "negative message" will also handle healing automagically deep inside core somewhere.
+        else
+            power = 0
+        end
+    end
+
+    if power ~= 0 then
+        if params.code then
+            params.code(mob, target, power)
+        elseif ae.code then
+            ae.code(mob, target, power)
+        end
+
+        return ae.sub, message, power
+    end
+
+    return 0, 0, 0
+end
 
 --[[
     mob, target, and damage are passed from core into mob script's onAdditionalEffect
@@ -502,82 +651,25 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
 
             -- STATUS EFFECT
             if ae.applyEffect then
-                local resist = 1
-                if ae.ele then
-                    resist = applyResistanceAddEffect(mob, target, ae.ele, ae.eff)
+                return addEffectStatus(mob, target, ae, params)
+
+            -- DISPEL
+            elseif effect == xi.mob.ae.DISPEL and target then
+                return addEffectDispel(target, ae)
+
+            -- DISPEL
+            elseif effect == xi.mob.ae.DISPEL and target then
+                local dispelledEffect = target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
+
+                if dispelledEffect == xi.effect.NONE then
+                    return 0, 0, 0
                 end
 
-                if resist > 0.5 and not target:hasStatusEffect(ae.eff) then
-                    local power    = params.power or ae.power or 0
-                    local tick     = ae.tick or 0
-                    local duration = params.duration or ae.duration
-
-                    duration = utils.clamp(duration, ae.minDuration, ae.maxDuration) * resist
-
-                    target:addStatusEffect(ae.eff, power, tick, duration)
-
-                    if params.code then
-                        params.code(mob, target, power)
-                    elseif ae.code then
-                        ae.code(mob, target, power)
-                    end
-
-                    return ae.sub, ae.msg, ae.eff
-                end
+                return ae.sub, ae.msg, dispelledEffect
 
             -- IMMEDIATE EFFECT
             else
-                local power = 0
-
-                if params.power then
-                    power = params.power
-                elseif ae.mod then
-                    local dMod = mob:getStat(ae.mod) - target:getStat(ae.mod)
-
-                    if dMod > 20 then
-                        dMod = 20 + (dMod - 20) / 2
-                    end
-
-                    -- This is a bad assumption, but it prevents some negative damage (healing) when there otherwise shouldn't be
-                    -- TODO: better understand damage add effects from mobs
-                    if dMod < 0 then
-                        dMod = 0
-                    end
-
-                    power = dMod + target:getMainLvl() - mob:getMainLvl() + damage / 2
-                end
-
-                -- target:printToPlayer(string.format('Initial Power: %f', power)) -- DEBUG
-
-                power = addBonusesAbility(mob, ae.ele, target, power, ae.bonusAbilityParams)
-                power = power * applyResistanceAddEffect(mob, target, ae.ele, 0)
-                power = power * xi.spells.damage.calculateNukeAbsorbOrNullify(target, ae.ele)
-
-                if ae.sub ~= xi.subEffect.TP_DRAIN and ae.sub ~= xi.subEffect.MP_DRAIN then
-                    power = finalMagicNonSpellAdjustments(mob, target, ae.ele, power)
-                end
-
-                -- target:printToPlayer(string.format('Adjusted Power: %f', power)) -- DEBUG
-
-                local message = ae.msg
-                if power < 0 then
-                    if ae.negMsg then
-                        message = ae.negMsg
-                        power   = power * -1 -- outgoing action packets only support unsigned integers. The "negative message" will also handle healing automagically deep inside core somewhere.
-                    else
-                        power = 0
-                    end
-                end
-
-                if power ~= 0 then
-                    if params.code then
-                        params.code(mob, target, power)
-                    elseif ae.code then
-                        ae.code(mob, target, power)
-                    end
-
-                    return ae.sub, message, power
-                end
+                return addEffectImmediate(mob, target, damage, ae, params)
             end
         end
     else

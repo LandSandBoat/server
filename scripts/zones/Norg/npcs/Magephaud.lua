@@ -2,8 +2,6 @@
 -- Area: Norg
 --  NPC: Magephaud
 -----------------------------------
-local ID = zones[xi.zone.NORG]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -37,9 +35,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 116 then
         player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVERYONES_GRUDGE)
@@ -48,8 +43,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVERYONES_GRUDGE)
         player:tradeComplete()
         player:addFame(xi.fameArea.NORG, 80)
-        player:addKeyItem(xi.ki.TONBERRY_PRIEST_KEY)    -- Permanent Tonberry key
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TONBERRY_PRIEST_KEY)
+        npcUtil.giveKeyItem(player, xi.ki.TONBERRY_PRIEST_KEY)
         player:setCharVar('EveryonesGrudgeStarted', 0)
         player:addTitle(xi.title.HONORARY_DOCTORATE_MAJORING_IN_TONBERRIES)
     end

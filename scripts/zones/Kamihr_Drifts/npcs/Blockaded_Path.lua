@@ -17,9 +17,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 57 and option == 1 then
         player:setPos(16.725, 0.493, -19.652, 131, xi.zone.LEAFALLIA)

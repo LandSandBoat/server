@@ -7,20 +7,11 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     -- CHILDREN OF THE RUNE
     if player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE) == xi.questStatus.QUEST_ACCEPTED then
         npcUtil.giveKeyItem(player, xi.ki.YAHSE_WILDFLOWER_PETAL)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

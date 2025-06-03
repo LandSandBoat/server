@@ -23,13 +23,13 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.IROHA_II] = xi.trust.messageOffset.TEAMWORK_5,
     })
 
-    local itemOneGambit = mob:addSimpleGambit(ai.t.SELF, ai.c.HPP_LT, 35, ai.r.MS, ai.s.SPECIFIC, psychoAnima)
+    local itemOneGambit = mob:addGambit(ai.t.SELF, { ai.c.HPP_LT, 35 }, { ai.r.MS, ai.s.SPECIFIC, psychoAnima })
     -- TODO: Add additional logic for Hysteroanima
-    -- local itemTwoGambit = mob:addSimpleGambit(ai.t.TARGET, ai.c.CASTING_MA, 35, ai.r.MS, ai.s.SPECIFIC, 3540)
+    -- local itemTwoGambit = mob:addGambit(ai.t.TARGET, { ai.c.CASTING_MA, 35 }, { ai.r.MS, ai.s.SPECIFIC, 3540 })
 
-    mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 25, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURAGA)
-    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.SLEEP_I, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURAGA)
-    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.SLEEP_II, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURAGA)
+    mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 25 }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURAGA })
+    mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.SLEEP_I }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURAGA })
+    mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.SLEEP_II }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURAGA })
 
     -- TODO: Trust Synergy: If Ulmia in the party, Prishe will cast Curaga when party members are in the yellow instead of red.
     -- Prishe will use Cure spells exclusively on Ulmia (Only Cure I-IV)
@@ -44,12 +44,12 @@ spellObject.onMobSpawn = function(mob)
 
     mob:addListener('WEAPONSKILL_STATE_EXIT', 'ANIMA_USED', function(mobArg, wsid)
         if wsid == psychoAnima then
-            mobArg:removeSimpleGambit(itemOneGambit)
+            mobArg:removeGambit(itemOneGambit)
         end
 
         --[[
         if wsid == hysteroAnima then
-            mobArg:removeSimpleGambit(itemTwoGambit)
+            mobArg:removeGambit(itemTwoGambit)
         end
         ]]--
     end)

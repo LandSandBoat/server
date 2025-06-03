@@ -24,7 +24,6 @@
 #include "ai/ai_container.h"
 #include "common/utils.h"
 #include "entities/charentity.h"
-#include "packets/char.h"
 #include "status_effect_container.h"
 
 CPlayerCharmController::CPlayerCharmController(CCharEntity* PChar)
@@ -43,7 +42,7 @@ CPlayerCharmController::~CPlayerCharmController()
     POwner->allegiance = ALLEGIANCE_TYPE::PLAYER;
 }
 
-void CPlayerCharmController::Tick(time_point tick)
+void CPlayerCharmController::Tick(timer::time_point tick)
 {
     m_Tick = tick;
     if (POwner->PMaster == nullptr || !POwner->PMaster->isAlive())
@@ -62,7 +61,7 @@ void CPlayerCharmController::Tick(time_point tick)
     }
 }
 
-void CPlayerCharmController::DoCombatTick(time_point tick)
+void CPlayerCharmController::DoCombatTick(timer::time_point tick)
 {
     if (!POwner->PMaster->PAI->IsEngaged())
     {
@@ -81,7 +80,7 @@ void CPlayerCharmController::DoCombatTick(time_point tick)
             std::unique_ptr<CBasicPacket> err;
             if (!POwner->CanAttack(PTarget, err))
             {
-                if (POwner->speed > 0)
+                if (POwner->GetSpeed() > 0)
                 {
                     POwner->PAI->PathFind->PathAround(PTarget->loc.p, 2.0f, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                     POwner->PAI->PathFind->FollowPath(m_Tick);
@@ -91,7 +90,7 @@ void CPlayerCharmController::DoCombatTick(time_point tick)
     }
 }
 
-void CPlayerCharmController::DoRoamTick(time_point tick)
+void CPlayerCharmController::DoRoamTick(timer::time_point tick)
 {
     if (POwner->PMaster->PAI->IsEngaged())
     {
@@ -108,7 +107,7 @@ void CPlayerCharmController::DoRoamTick(time_point tick)
             {
                 POwner->PAI->PathFind->FollowPath(m_Tick);
             }
-            else if (POwner->speed > 0)
+            else if (POwner->GetSpeed() > 0)
             {
                 POwner->PAI->PathFind->WarpTo(POwner->PMaster->loc.p, RoamDistance);
             }

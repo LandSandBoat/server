@@ -21,6 +21,7 @@
 
 #include "battlefield.h"
 
+#include "common/settings.h"
 #include "common/timer.h"
 
 #include "ai/ai_container.h"
@@ -59,7 +60,7 @@ CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PIn
 , m_Area(area)
 , m_Record(BattlefieldRecord_t())
 , m_Rules(0)
-, m_StartTime(server_clock::now())
+, m_StartTime(timer::now())
 , m_LastPromptTime(0s)
 , m_MaxParticipants(8)
 , m_LevelCap(0)
@@ -123,42 +124,42 @@ uint16 CBattlefield::GetRuleMask() const
     return m_Rules;
 }
 
-time_point CBattlefield::GetStartTime() const
+timer::time_point CBattlefield::GetStartTime() const
 {
     return m_StartTime;
 }
 
-duration CBattlefield::GetTimeInside() const
+timer::duration CBattlefield::GetTimeInside() const
 {
     return m_Tick - m_StartTime;
 }
 
-time_point CBattlefield::GetFightTime() const
+timer::time_point CBattlefield::GetFightTime() const
 {
     return m_FightTick;
 }
 
-duration CBattlefield::GetTimeLimit() const
+timer::duration CBattlefield::GetTimeLimit() const
 {
     return m_TimeLimit;
 }
 
-time_point CBattlefield::GetWipeTime() const
+timer::time_point CBattlefield::GetWipeTime() const
 {
     return m_WipeTime;
 }
 
-duration CBattlefield::GetFinishTime() const
+timer::duration CBattlefield::GetFinishTime() const
 {
     return m_FinishTime;
 }
 
-duration CBattlefield::GetRemainingTime() const
+timer::duration CBattlefield::GetRemainingTime() const
 {
-    return GetTimeLimit() > GetTimeInside() ? GetTimeLimit() - GetTimeInside() : duration(0);
+    return GetTimeLimit() > GetTimeInside() ? GetTimeLimit() - GetTimeInside() : timer::duration(0);
 }
 
-duration CBattlefield::GetLastTimeUpdate() const
+timer::duration CBattlefield::GetLastTimeUpdate() const
 {
     return m_LastPromptTime;
 }
@@ -199,13 +200,21 @@ void CBattlefield::SetInitiator(std::string const& name)
     m_Initiator.name = name;
 }
 
-void CBattlefield::SetTimeLimit(duration time)
+void CBattlefield::SetTimeLimit(timer::duration time)
 {
     m_TimeLimit      = time;
     m_LastPromptTime = time;
+
+    if (m_showTimer)
+    {
+        for (auto player : m_EnteredPlayers)
+        {
+            charutils::SendTimerPacket(GetZone()->GetCharByID(player), GetRemainingTime());
+        }
+    }
 }
 
-void CBattlefield::SetWipeTime(time_point time)
+void CBattlefield::SetWipeTime(timer::time_point time)
 {
     m_WipeTime = time;
 }
@@ -215,7 +224,7 @@ void CBattlefield::SetArea(uint8 area)
     m_Area = area;
 }
 
-void CBattlefield::SetRecord(std::string const& name, duration time, size_t partySize)
+void CBattlefield::SetRecord(std::string const& name, timer::duration time, size_t partySize)
 {
     m_Record.name      = !name.empty() ? name : m_Initiator.name;
     m_Record.time      = time;
@@ -248,7 +257,7 @@ void CBattlefield::SetLocalVar(std::string const& name, uint64_t value)
     m_LocalVars[name] = value;
 }
 
-void CBattlefield::SetLastTimeUpdate(duration time)
+void CBattlefield::SetLastTimeUpdate(timer::duration time)
 {
     m_LastPromptTime = time;
 }
@@ -273,8 +282,8 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
             cap = settings::get<uint8>("main.MAX_LEVEL"); // Cap to server max level to strip buffs - this is the retail diff between uncapped and capped to max lv.
         }
 
-        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE, true);
-        PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_RESTRICTION, cap, 0, 0));
+        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE, EffectNotice::Silent);
+        PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_RESTRICTION, cap, 0s, 0s));
     }
     else
     {
@@ -284,7 +293,7 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
     // Check if we should remove SJ, whether or not there is a lv cap.
     if (!(m_Rules & BCRULES::RULES_ALLOW_SUBJOBS))
     {
-        PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SJ_RESTRICTION, EFFECT_SJ_RESTRICTION, 0, 0, 0));
+        PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SJ_RESTRICTION, EFFECT_SJ_RESTRICTION, 0, 0s, 0s));
     }
 }
 
@@ -421,7 +430,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
         else
         {
             entity->StatusEffectContainer->AddStatusEffect(
-                new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, this->GetID(), 0, 0, m_Initiator.id, this->GetArea()), true);
+                new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, this->GetID(), 0s, 0s, m_Initiator.id, this->GetArea()), EffectNotice::Silent);
         }
     }
 
@@ -535,7 +544,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         {
             if (GetStatus() == BATTLEFIELD_STATUS_LOCKED)
             {
-                PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+                PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, EffectNotice::Silent);
             }
             else
             {
@@ -663,7 +672,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
     return found;
 }
 
-void CBattlefield::onTick(time_point time)
+void CBattlefield::onTick(timer::time_point time)
 {
     TracyZoneScoped;
     if (!m_Attacked)
@@ -692,7 +701,7 @@ bool CBattlefield::CanCleanup(bool cleanup)
     return m_Cleanup || m_EnteredPlayers.empty();
 }
 
-bool CBattlefield::Cleanup(time_point time, bool force)
+bool CBattlefield::Cleanup(timer::time_point time, bool force)
 {
     // Wait until
     if (!force && !m_EnteredPlayers.empty() && m_cleanupTime > time)
@@ -778,7 +787,7 @@ bool CBattlefield::Cleanup(time_point time, bool force)
         auto* PChar = GetZone()->GetCharByID(id);
         if (PChar)
         {
-            PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, EffectNotice::Silent);
             m_Zone->updateCharLevelRestriction(PChar);
 
             // Remove allies from player's spawn list
@@ -793,27 +802,28 @@ bool CBattlefield::Cleanup(time_point time, bool force)
 
             if (PChar->PPet)
             {
-                PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+                PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, EffectNotice::Silent);
             }
         }
     }
 
     if (m_Attacked && m_Status == BATTLEFIELD_STATUS_WON)
     {
-        const char* query        = "SELECT fastestTime FROM bcnm_records WHERE bcnmId = %u AND zoneId = %u";
-        auto        ret          = _sql->Query(query, this->GetID(), this->GetZoneID());
-        bool        updateRecord = true;
-        if (ret != SQL_ERROR && _sql->NextRow() == SQL_SUCCESS)
+        bool updateRecord = true;
+
+        const auto rset = db::preparedStmt("SELECT fastestTime FROM bcnm_records WHERE bcnmId = ? AND zoneId = ?", this->GetID(), this->GetZoneID());
+        if (rset && rset->rowsCount() && rset->next())
         {
-            updateRecord = _sql->GetUIntData(0) > std::chrono::duration_cast<std::chrono::seconds>(m_Record.time).count();
+            const auto fastestTime = rset->get<uint32>("fastestTime");
+            updateRecord           = fastestTime > timer::count_seconds(m_Record.time);
         }
 
         if (updateRecord)
         {
-            query          = "UPDATE bcnm_records SET fastestName = '%s', fastestTime = %u, fastestPartySize = %u WHERE bcnmId = %u AND zoneid = %u";
-            auto timeThing = std::chrono::duration_cast<std::chrono::seconds>(m_Record.time).count();
+            const uint32 timeThing = timer::count_seconds(m_Record.time);
 
-            _sql->Query(query, m_Record.name.c_str(), timeThing, m_Record.partySize, this->GetID(), GetZoneID());
+            db::preparedStmt("UPDATE bcnm_records SET fastestName = ?, fastestTime = ?, fastestPartySize = ? WHERE bcnmId = ? AND zoneid = ?",
+                             m_Record.name, timeThing, m_Record.partySize, this->GetID(), GetZoneID());
         }
     }
 
@@ -928,7 +938,7 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
 
             if (group.deathCallback.valid())
             {
-                auto result = group.deathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity), deathCount);
+                auto result = group.deathCallback(this, PEntity, deathCount);
                 if (!result.valid())
                 {
                     sol::error err = result;
@@ -938,7 +948,7 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
 
             if (group.allDeathCallback.valid() && deathCount >= group.mobIds.size())
             {
-                auto result = group.allDeathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity));
+                auto result = group.allDeathCallback(this, PEntity);
                 if (!result.valid())
                 {
                     sol::error err = result;
@@ -948,7 +958,7 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
 
             if (group.randomDeathCallback.valid() && mobId == group.randomMobId)
             {
-                auto result = group.randomDeathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity));
+                auto result = group.randomDeathCallback(this, PEntity);
                 if (!result.valid())
                 {
                     sol::error err = result;

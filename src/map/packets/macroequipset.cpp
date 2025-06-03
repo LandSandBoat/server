@@ -20,7 +20,6 @@
 */
 
 #include "macroequipset.h"
-#include "common/socket.h"
 
 #include "item_container.h"
 #include "items/item_equipment.h"

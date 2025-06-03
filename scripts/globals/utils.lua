@@ -112,6 +112,25 @@ function utils.bind(func, ...)
     end
 end
 
+-- Appends two array-style tables into a new one
+-- Creates and returns a new iterable table containing all elements from both input arrays `a` and `b`,
+---@nodiscard
+---@param a table
+---@param b table
+---@return table
+function utils.appendArrays(a, b)
+    local result = {}
+    for i = 1, #a do
+        result[#result + 1] = a[i]
+    end
+
+    for i = 1, #b do
+        result[#result + 1] = b[i]
+    end
+
+    return result
+end
+
 -- Creates a slice of an input table and returns a new table
 ---@nodiscard
 ---@param inputTable table
@@ -336,6 +355,15 @@ function utils.map(tbl, func)
     return t
 end
 
+-- Iterates through the table and calls the callback on each key, value pair.
+---@param tbl table
+---@param func function
+function utils.each(tbl, func)
+    for k, v in pairs(tbl) do
+        func(k, v)
+    end
+end
+
 -- Given a table and a filter function, returns a new table composed of the
 -- elements that pass the given filter.
 -- e.g: utils.filter({ 'a', 'b', 'c', 'd' }, function(k, v) return v >= 'c' end)  --> { 'c', 'd }
@@ -389,6 +417,22 @@ function utils.any(tbl, predicate)
     end
 
     return false
+end
+
+-- Returns true if all members of the given table pass the given
+-- predicate function
+---@nodiscard
+---@param tbl table
+---@param predicate function
+---@return boolean
+function utils.all(tbl, predicate)
+    for k, v in pairs(tbl) do
+        if not predicate(k, v) then
+            return false
+        end
+    end
+
+    return true
 end
 
 -- Returns the sum of applying the given function to each element of the given table
@@ -723,6 +767,25 @@ utils.mask =
 
         return bit.band(mask, fullMask) == fullMask
     end,
+
+    splitBits = function(bits, size)
+        local result = {}
+        local mask = bit.lshift(1, size) - 1
+
+        while bits > 0 do
+            result[#result + 1] = bit.band(bits, mask)
+            bits = bit.rshift(bits, size)
+        end
+
+        return result
+    end,
+
+    varSplit = function(option, splitBit)
+        splitBit = splitBit or 16
+        local mask = bit.lshift(1, splitBit) - 1
+
+        return bit.band(option, mask), bit.rshift(option, splitBit)
+    end,
 }
 
 function utils.prequire(...)
@@ -904,7 +967,7 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     mob:setMagicCastingEnabled(false)
     mob:setMobAbilityEnabled(false)
     mob:setPos(pos, 0)
-    mob:setSpeed(0)
+    mob:setBaseSpeed(0)
 
     -- TODO: Temporary workaround
     ---@diagnostic enable: param-type-mismatch
@@ -916,7 +979,7 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
         mobArg:setAutoAttackEnabled(true)
         mobArg:setMagicCastingEnabled(true)
         mobArg:setMobAbilityEnabled(true)
-        mobArg:setSpeed(mobSpeed)
+        mobArg:setBaseSpeed(mobSpeed)
         mobArg:entityAnimationPacket(reapAnim)
 
         if mobArg:isDead() then
@@ -1214,4 +1277,15 @@ function utils.drawIn(target, table)
 
     target:setLocalVar('[Draw-In]WaitTime', 0)
     return false
+end
+
+function utils.defaultIfNil(inputValue, defaultValue)
+    if inputValue == nil then
+        local info = debug.getinfo(2, 'Sl')
+        print(string.format('nil value encounted at %s:%i, defaulting to %i', info.source, info.currentline, defaultValue))
+
+        return defaultValue
+    end
+
+    return inputValue
 end

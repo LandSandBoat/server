@@ -78,17 +78,17 @@ typedef std::array<RecordTimetable_D, 7> RecordTimetable_W;
 struct RoeSystemData
 {
     RecordTimetable_W        TimedRecordTable;
-    std::bitset<4096>        ImplementedRecords;
-    std::bitset<4096>        RepeatableRecords;
-    std::bitset<4096>        RetroactiveRecords;
-    std::bitset<4096>        HiddenRecords;
-    std::bitset<4096>        DailyRecords;
+    xi::bitset<4096>         ImplementedRecords;
+    xi::bitset<4096>         RepeatableRecords;
+    xi::bitset<4096>         RetroactiveRecords;
+    xi::bitset<4096>         HiddenRecords;
+    xi::bitset<4096>         DailyRecords;
     std::vector<uint16>      DailyRecordIDs;
-    std::bitset<4096>        WeeklyRecords;
+    xi::bitset<4096>         WeeklyRecords;
     std::vector<uint16>      WeeklyRecordIDs;
-    std::bitset<4096>        UnityRecords;
+    xi::bitset<4096>         UnityRecords;
     std::vector<uint16>      UnityRecordIDs;
-    std::bitset<4096>        TimedRecords;
+    xi::bitset<4096>         TimedRecords;
     std::array<uint32, 4096> NotifyThresholds    = {};
     uint8                    unityLeaderRank[11] = {}; // 0..10 for Unity Leader, stores rank position
 
@@ -100,7 +100,7 @@ struct RoeSystemData
 
 struct RoeCheckHandler
 {
-    std::bitset<4096> bitmap;
+    xi::bitset<4096> bitmap;
 };
 
 extern std::array<RoeCheckHandler, ROE_NONE> RoeHandlers;

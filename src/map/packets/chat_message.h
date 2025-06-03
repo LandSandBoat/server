@@ -19,15 +19,15 @@
 ===========================================================================
 */
 
-#ifndef _CCHATMESSAGEPACKET_H
-#define _CCHATMESSAGEPACKET_H
+#pragma once
 
 #include "common/cbasetypes.h"
+#include "common/logging.h"
 
 #include "basic.h"
 
 // Extracted from client.
-enum CHAT_MESSAGE_TYPE
+enum CHAT_MESSAGE_TYPE : uint8
 {
     MESSAGE_SAY       = 0,
     MESSAGE_SHOUT     = 1,
@@ -64,18 +64,20 @@ enum CHAT_MESSAGE_TYPE
     MESSAGE_JP_ASSIST     = 34,
     MESSAGE_NA_ASSIST     = 35,
 };
+DECLARE_FORMAT_AS_UNDERLYING(CHAT_MESSAGE_TYPE);
 
-// Made up, but if you edit this to change the order,
-// You will break things that expect this order.
-enum CHAT_MESSAGE_AREA
+// This is internal and has no relation to anything to do with the client.
+// Used mainly for `printToArea`.
+enum class ChatMessageArea : uint8
 {
-    MESSAGE_AREA_SYSTEM = 0, // All zones world wide
-    MESSAGE_AREA_SAY    = 1, // Say range
-    MESSAGE_AREA_SHOUT  = 2, // Shout
-    MESSAGE_AREA_PARTY  = 3, // Party and Alliance
-    MESSAGE_AREA_YELL   = 4, // Yell zones only
-    MESSAGE_AREA_UNITY  = 5, // Currently -all- unities
+    System = 0, // All zones world wide
+    Say    = 1, // Say range
+    Shout  = 2, // Shout
+    Party  = 3, // Party and Alliance
+    Yell   = 4, // Yell zones only
+    Unity  = 5, // Currently -all- unities
 };
+DECLARE_FORMAT_AS_UNDERLYING(ChatMessageArea);
 
 class CCharEntity;
 
@@ -84,6 +86,5 @@ class CChatMessagePacket : public CBasicPacket
 public:
     static const uint16 id{ 0x17 };
     CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE MessageType, std::string const& message, std::string const& sender = std::string());
+    CChatMessagePacket(const std::string& name, uint16 zone, CHAT_MESSAGE_TYPE MessageType, const std::string& message, uint8 gmLevel = 0);
 };
-
-#endif

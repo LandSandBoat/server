@@ -17,10 +17,4 @@ entity.onTrigger = function(player, npc)
     xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.item.JAR_OF_GOBLIN_GUNPOWDER, xi.item.JAR_OF_GOBLIN_OIL })
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
-end
-
 return entity

@@ -7,9 +7,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local borghertzCS = player:getCharVar('BorghertzCS')
 
@@ -26,15 +23,12 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 20 and option == 1 then
         player:setCharVar('BorghertzCS', 2)
     elseif csid == 48 then
         local questJob = player:getCharVar('BorghertzAlreadyActiveWithJob')
-        local quest = xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + questJob - 1
+        local quest = xi.quest.id.jeuno.BORGHERTZS_WARRING_HANDS + questJob - 1
         local reward = 13960 + questJob
 
         if

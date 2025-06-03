@@ -6,7 +6,25 @@ require('scripts/globals/utils')
 xi = xi or {}
 xi.module = xi.module or {}
 
+--
+-- applyOverride: Provides the "super" functionality for overriding functions
+--
+function applyOverride(base_table, name, func, fullname, filename)
+    local old = base_table[name]
+
+    local thisenv = getfenv(old)
+
+    local env = { super = old }
+    setmetatable(env, { __index = thisenv })
+
+    setfenv(func, env)
+
+    base_table[name] = func
+end
+
+--
 -- Helpers
+--
 
 -- Iterate through all the sections of a table-string, and instantiate them if they don't exist
 -- Example: xi.module.ensureTable('xi.aName.anotherName') will ensure the table: xi.aName.anotherName

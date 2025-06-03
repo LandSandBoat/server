@@ -3,8 +3,6 @@
 --  NPC: Perchond
 -- !pos -182.844 4 -164.948 166
 -----------------------------------
-local ID = zones[xi.zone.RANGUEMONT_PASS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -31,16 +29,12 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 3 then
         player:setCharVar('sinHunting', 2)
     elseif csid == 5 then
         player:tradeComplete()
-        player:addKeyItem(xi.ki.PERCHONDS_ENVELOPE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PERCHONDS_ENVELOPE)
+        npcUtil.giveKeyItem(player, xi.ki.PERCHONDS_ENVELOPE)
         player:setCharVar('sinHunting', 3)
     end
 end

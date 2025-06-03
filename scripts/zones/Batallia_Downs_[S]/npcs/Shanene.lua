@@ -6,9 +6,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local hasScrollsBundle = player:hasKeyItem(xi.ki.BUNDLE_OF_HALF_INSCRIBED_SCROLLS)
     local hasRainemard = player:hasItem(xi.item.CIPHER_OF_RAINEMARDS_ALTER_EGO) or player:hasSpell(xi.magic.spell.RAINEMARD)
@@ -18,9 +15,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(37)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

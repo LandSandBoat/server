@@ -8,9 +8,6 @@ local ID = zones[xi.zone.WESTERN_ADOULIN]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local raptorRapture = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
     local raptorRaptureStatus = player:getCharVar('Raptor_Rapture_Status')
@@ -58,9 +55,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(5041)
         end
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

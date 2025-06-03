@@ -60,9 +60,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 514 and option == 1 then
         player:setCharVar('FLOWER_PROGRESS', 1)

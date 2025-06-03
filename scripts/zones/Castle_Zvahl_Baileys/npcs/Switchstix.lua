@@ -17,113 +17,759 @@ local currencyAmount = 3
 local stageNumber = 4
 local csParam = 5
 
-local currency =
-{
-    BYNE_100 = 1456,
-    BYNE_10000 = 1457,
-    SILVER_100 = 1453,
-    SILVER_10000 = 1454,
-    SHELL_100 = 1450,
-    SHELL_10000 = 1451,
-}
-
 local relics =
 {
     -- Spharai
-    [18260] = { { 1460, 1459, 665 }, currency.BYNE_100, 4, 1, 1 }, -- Relic Knuckles
-    [18261] = { { 16390, 16392, 16396 }, currency.SILVER_100, 14, 2, 2 }, -- Militant Knuckles
-    [18262] = { { 1556 }, currency.SHELL_100, 61, 3, 3 }, -- Dynamis Knuckles
-    [18263] = { { 1571, 1589 }, currency.BYNE_10000, 1, 4, 3 }, -- Caestus
+    [xi.item.RELIC_KNUCKLES]    =
+    {
+        {
+            xi.item.KOH_I_NOOR,
+            xi.item.SQUARE_OF_GRIFFON_LEATHER,
+            xi.item.ADAMAN_SHEET
+        },
+        xi.item.ONE_HUNDRED_BYNE_BILL,
+        4,
+        1,
+        1
+    },
+    [xi.item.MILITANT_KNUCKLES] =
+    {
+        {
+            xi.item.BRONZE_KNUCKLES,
+            xi.item.METAL_KNUCKLES,
+            xi.item.KOENIGS_KNUCKLES
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        14,
+        2,
+        2
+    },
+    [xi.item.DYNAMIS_KNUCKLES]  =
+    {
+        {
+            xi.item.ATTESTATION_OF_MIGHT
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        61,
+        3,
+        3
+    },
+    [xi.item.CAESTUS]           =
+    {
+        {
+            xi.item.MYSTIC_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.TEN_THOUSAND_BYNE_BILL,
+        1,
+        4,
+        3
+    },
 
     -- Mandau
-    [18266] = { { 4246, 747, 4166 }, currency.BYNE_100, 4, 1, 1 }, -- Relic Dagger
-    [18267] = { { 16449, 16496, 16452 }, currency.SILVER_100, 14, 2, 2 }, -- Malefic Dagger
-    [18268] = { { 1557 }, currency.SHELL_100, 61, 3, 3 }, -- Dynamis Dagger
-    [18269] = { { 1572, 1589 }, currency.BYNE_10000, 1, 4, 3 }, -- Batardeau
+    [xi.item.RELIC_DAGGER]      =
+    {
+        {
+            xi.item.BOTTLE_OF_CANTARELLA,
+            xi.item.ORICHALCUM_INGOT,
+            xi.item.FLASK_OF_DEODORIZER
+        },
+        xi.item.ONE_HUNDRED_BYNE_BILL,
+        4,
+        1,
+        1
+    },
+    [xi.item.MALEFIC_DAGGER]    =
+    {
+        {
+            xi.item.BRASS_DAGGER,
+            xi.item.POISON_DAGGER,
+            xi.item.MISERICORDE
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        14,
+        2,
+        2
+    },
+    [xi.item.DYNAMIS_DAGGER]    =
+    {
+        {
+            xi.item.ATTESTATION_OF_CELERITY
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        61,
+        3,
+        3
+    },
+    [xi.item.BATARDEAU]         =
+    {
+        {
+            xi.item.ORNATE_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.TEN_THOUSAND_BYNE_BILL,
+        1,
+        4,
+        3
+    },
 
     -- Excalibur
-    [18272] = { { 1460, 763, 931 }, currency.SILVER_100, 4, 1, 1 }, -- Relic Sword
-    [18273] = { { 16535, 16537, 16542 }, currency.BYNE_100, 14, 2, 2 }, -- Glyptic Sword
-    [18274] = { { 1558 }, currency.SHELL_100, 61, 3, 3 }, -- Dynamis Sword
-    [18275] = { { 1573, 1589 }, currency.SILVER_10000, 1, 4, 3 }, -- Caliburn
+    [xi.item.RELIC_SWORD]       =
+    {
+        {
+            xi.item.KOH_I_NOOR,
+            xi.item.ORICHALCUM_CHAIN,
+            xi.item.CERMET_CHUNK
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        4,
+        1,
+        1
+    },
+    [xi.item.GLYPTIC_SWORD]     =
+    {
+        {
+            xi.item.BRONZE_SWORD,
+            xi.item.MYTHRIL_SWORD,
+            xi.item.WING_SWORD
+        },
+        xi.item.ONE_HUNDRED_BYNE_BILL,
+        14,
+        2,
+        2
+    },
+    [xi.item.DYNAMIS_SWORD]     =
+    {
+        {
+            xi.item.ATTESTATION_OF_GLORY
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        61,
+        3,
+        3
+    },
+    [xi.item.CALIBURN]          =
+    {
+        {
+            xi.item.HOLY_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.RANPERRE_GOLDPIECE,
+        1,
+        4,
+        3
+    },
 
     -- Ragnarok
-    [18278] = { { 1459, 655, 746 }, currency.SILVER_100, 4, 1, 1 }, -- Relic Blade
-    [18279] = { { 16583, 16584, 16585 }, currency.SHELL_100, 14, 2, 2 }, -- Gilded Blade
-    [18280] = { { 1559 }, currency.BYNE_100, 61, 3, 3 }, -- Dynamis Blade
-    [18281] = { { 1574, 1589 }, currency.SILVER_10000, 1, 4, 3 }, -- Valhalla
+    [xi.item.RELIC_BLADE]       =
+    {
+        {
+            xi.item.SQUARE_OF_GRIFFON_LEATHER,
+            xi.item.ADAMAN_INGOT,
+            xi.item.PLATINUM_INGOT
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        4,
+        1,
+        1
+    },
+    [xi.item.GILDED_BLADE]      =
+    {
+        {
+            xi.item.CLAYMORE,
+            xi.item.MYTHRIL_CLAYMORE,
+            xi.item.DARKSTEEL_CLAYMORE
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        16,
+        2,
+        2
+    },
+    [xi.item.DYNAMIS_BLADE]     =
+    {
+        {
+            xi.item.ATTESTATION_OF_RIGHTEOUSNESS
+        },
+        xi.item.ONE_HUNDRED_BYNE_BILL,
+        61,
+        3,
+        3
+    },
+    [xi.item.VALHALLA]          =
+    {
+        {
+            xi.item.INTRICATE_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.RANPERRE_GOLDPIECE,
+        1,
+        4,
+        3
+    },
 
     -- Guttler
-    [18284] = { { 1312, 1463, 13060 }, currency.SHELL_100, 3, 1, 1 }, -- Relic Axe
-    [18285] = { { 16657, 16658, 16659 }, currency.SILVER_100, 14, 2, 2 }, -- Leonine Axe
-    [18286] = { { 1560 }, currency.BYNE_100, 60, 3, 3 }, -- Dynamis Axe
-    [18287] = { { 1575, 1589 }, currency.SHELL_10000, 1, 4, 3 }, -- Ogre Killer
+    [xi.item.RELIC_AXE]         =
+    {
+        {
+            xi.item.PIECE_OF_ANGEL_SKIN,
+            xi.item.CHRONOS_TOOTH,
+            xi.item.FEATHER_COLLAR_P1
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        3,
+        1,
+        1
+    },
+    [xi.item.LEONINE_AXE]       =
+    {
+        {
+            xi.item.TABAR,
+            xi.item.DARKSTEEL_TABAR,
+            xi.item.TABARZIN
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        14,
+        2,
+        2
+    },
+    [xi.item.DYNAMIS_AXE]       =
+    {
+        {
+            xi.item.ATTESTATION_OF_BRAVERY
+        },
+        xi.item.ONE_HUNDRED_BYNE_BILL,
+        60,
+        3,
+        3
+    },
+    [xi.item.OGRE_KILLER]       =
+    {
+        {
+            xi.item.RUNAEIC_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.RIMILALA_STRIPESHELL,
+        1,
+        4,
+        3
+    },
 
     -- Bravura
-    [18290] = { { 1461, 658, 720 }, currency.BYNE_100, 3, 1, 1 }, -- Relic Bhuj
-    [18291] = { { 16704, 16705, 16724 }, currency.SHELL_100, 16, 2, 2 }, -- Agonal Bhuj
-    [18292] = { { 1561 }, currency.SILVER_100, 60, 3, 3 }, -- Dynamis Bhuj
-    [18293] = { { 1576, 1589 }, currency.BYNE_10000, 1, 4, 3 }, -- Abaddon Killer
+    [xi.item.RELIC_BHUJ]        =
+    {
+        {
+            xi.item.WOOTZ_INGOT,
+            xi.item.DAMASCUS_INGOT,
+            xi.item.PIECE_OF_ANCIENT_LUMBER
+        },
+        xi.item.ONE_HUNDRED_BYNE_BILL,
+        3,
+        1,
+        1
+    },
+    [xi.item.AGONAL_BHUJ]       =
+    {
+        {
+            xi.item.BUTTERFLY_AXE,
+            xi.item.GREATAXE,
+            xi.item.HEAVY_DARKSTEEL_AXE
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        16,
+        2,
+        2
+    },
+    [xi.item.DYNAMIS_BHUJ]      =
+    {
+        {
+            xi.item.ATTESTATION_OF_FORCE
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        60,
+        3,
+        3
+    },
+    [xi.item.ABADDON_KILLER]    =
+    {
+        {
+            xi.item.SERAPHIC_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.TEN_THOUSAND_BYNE_BILL,
+        1,
+        4,
+        3
+    },
 
     -- Gungnir
-    [18296] = { { 1462, 747, 1294 }, currency.SHELL_100, 4, 1, 1 }, -- Relic Lance
-    [18297] = { { 16834, 16836, 16841 }, currency.BYNE_100, 16, 2, 2 }, -- Hotspur Lance
-    [18298] = { { 1563 }, currency.SILVER_100, 61, 3, 3 }, -- Dynamis Lance
-    [18299] = { { 1578, 1589 }, currency.SHELL_10000, 1, 4, 3 }, -- Gae Assail
+    [xi.item.RELIC_LANCE]       =
+    {
+        {
+            xi.item.PIECE_OF_LANCEWOOD_LUMBER,
+            xi.item.ORICHALCUM_INGOT,
+            xi.item.SPOOL_OF_ARACHNE_THREAD
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        4,
+        1,
+        1
+    },
+    [xi.item.HOTSPUR_LANCE]     =
+    {
+        {
+            xi.item.BRASS_SPEAR,
+            xi.item.HALBERD,
+            xi.item.WYVERN_SPEAR
+        },
+        xi.item.ONE_HUNDRED_BYNE_BILL,
+        16,
+        2,
+        2
+    },
+    [xi.item.DYNAMIS_LANCE]     =
+    {
+        {
+            xi.item.ATTESTATION_OF_FORTITUDE
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        61,
+        3,
+        3
+    },
+    [xi.item.GAE_ASSAIL]        =
+    {
+        {
+            xi.item.STELLAR_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.RIMILALA_STRIPESHELL,
+        1,
+        4,
+        3
+    },
 
     -- Apocalypse
-    [18302] = { { 1458, 1117, 13208 }, currency.SHELL_100, 5, 1, 1 }, -- Relic Scythe
-    [18303] = { { 16774, 16794, 16777 }, currency.SILVER_100, 16, 2, 2 }, -- Memento Scythe
-    [18304] = { { 1562 }, currency.BYNE_100, 62, 3, 3 }, -- Dynamis Scythe
-    [18305] = { { 1577, 1589 }, currency.SHELL_10000, 1, 4, 3 }, -- Bec De Faucon
+    [xi.item.RELIC_SCYTHE]      =
+    {
+        {
+            xi.item.MAMMOTH_TUSK,
+            xi.item.SQUARE_OF_MANTICORE_LEATHER,
+            xi.item.RAINBOW_OBI
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        5,
+        1,
+        1
+    },
+    [xi.item.MEMENTO_SCYTHE]    =
+    {
+        {
+            xi.item.SCYTHE,
+            xi.item.BONE_SCYTHE,
+            xi.item.DEATH_SCYTHE
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        16,
+        2,
+        2
+    },
+    [xi.item.DYNAMIS_SCYTHE]    =
+    {
+        {
+            xi.item.ATTESTATION_OF_VIGOR
+        },
+        xi.item.ONE_HUNDRED_BYNE_BILL,
+        62,
+        3,
+        3
+    },
+    [xi.item.BEC_DE_FAUCON]     =
+    {
+        {
+            xi.item.TENEBROUS_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.RIMILALA_STRIPESHELL,
+        1,
+        4,
+        3
+    },
 
     -- Kikoku
-    [18308] = { { 1467, 1276, 1278 }, currency.BYNE_100, 4, 1, 1 }, -- Ihintanto
-    [18309] = { { 16900, 16903, 16902 }, currency.SHELL_100, 16, 2, 2 }, -- Mimizuku
-    [18310] = { { 1564 }, currency.SILVER_100, 61, 3, 3 }, -- Rogetsu
-    [18311] = { { 1579, 1589 }, currency.BYNE_10000, 1, 4, 3 }, -- Yoshimitsu
+    [xi.item.IHINTANTO]         =
+    {
+        {
+            xi.item.CHUNK_OF_RELIC_STEEL,
+            xi.item.TARASQUE_SKIN,
+            xi.item.SPOOL_OF_TWINTHREAD
+        },
+        xi.item.ONE_HUNDRED_BYNE_BILL,
+        4,
+        1,
+        1
+    },
+    [xi.item.MIMIZUKU]          =
+    {
+        {
+            xi.item.WAKIZASHI,
+            xi.item.KABUTOWARI,
+            xi.item.SAKURAFUBUKI
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        16,
+        2,
+        2
+    },
+    [xi.item.ROGETSU]           =
+    {
+        {
+            xi.item.ATTESTATION_OF_LEGERITY
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        61,
+        3,
+        3
+    },
+    [xi.item.YOSHIMITSU]        =
+    {
+        {
+            xi.item.DEMONIAC_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.TEN_THOUSAND_BYNE_BILL,
+        1,
+        4,
+        3
+    },
 
     -- Amanomurakumo
-    [18314] = { { 1467, 1409, 657 }, currency.SILVER_100, 3, 1, 1 }, -- Ito
-    [18315] = { { 16966, 16967, 16972 }, currency.SHELL_100, 15, 2, 2 }, -- Hayatemaru
-    [18316] = { { 1565 }, currency.BYNE_100, 60, 3, 3 }, -- Oboromaru
-    [18317] = { { 1580, 1589 }, currency.SILVER_10000, 1, 4, 3 }, -- Totsukanotsurugi
+    [xi.item.ITO]               =
+    {
+        {
+            xi.item.CHUNK_OF_RELIC_STEEL,
+            xi.item.SPOOL_OF_SIRENS_MACRAME,
+            xi.item.LUMP_OF_TAMA_HAGANE
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        3,
+        1,
+        1
+    },
+    [xi.item.HAYATEMARU]        =
+    {
+        {
+            xi.item.TACHI,
+            xi.item.MIKAZUKI,
+            xi.item.KAZARIDACHI
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        15,
+        2,
+        2
+    },
+    [xi.item.OBOROMARU]         =
+    {
+        {
+            xi.item.ATTESTATION_OF_DECISIVENESS
+        },
+        xi.item.ONE_HUNDRED_BYNE_BILL,
+        60,
+        3,
+        3
+    },
+    [xi.item.TOTSUKANOTSURUGI]  =
+    {
+        {
+            xi.item.DIVINE_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.RANPERRE_GOLDPIECE,
+        1,
+        4,
+        3
+    },
 
     -- Mjollnir
-    [18320] = { { 1461, 746, 830 }, currency.SILVER_100, 5, 1, 1 }, -- Relic Maul
-    [18321] = { { 17044, 17080, 17043 }, currency.BYNE_100, 16, 2, 2 }, -- Battering Maul
-    [18322] = { { 1566 }, currency.SHELL_100, 62, 3, 3 }, -- Dynamis Maul
-    [18323] = { { 1581, 1589 }, currency.SILVER_10000, 1, 4, 3 }, -- Gullintani
+    [xi.item.RELIC_MAUL]        =
+    {
+        {
+            xi.item.WOOTZ_INGOT,
+            xi.item.PLATINUM_INGOT,
+            xi.item.SQUARE_OF_RAINBOW_CLOTH
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        5,
+        1,
+        1
+    },
+    [xi.item.BATTERING_MAUL]    =
+    {
+        {
+            xi.item.WARHAMMER,
+            xi.item.HOLY_MAUL,
+            xi.item.BRASS_HAMMER
+        },
+        xi.item.ONE_HUNDRED_BYNE_BILL,
+        16,
+        2,
+        2
+    },
+    [xi.item.DYNAMIS_MAUL]      =
+    {
+        {
+            xi.item.ATTESTATION_OF_SACRIFICE
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        62,
+        3,
+        3
+    },
+    [xi.item.GULLINTANI]        =
+    {
+        {
+            xi.item.HEAVENLY_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.RANPERRE_GOLDPIECE,
+        1,
+        4,
+        3
+    },
 
     -- Claustrum
-    [18326] = { { 1462, 1271, 1415 }, currency.SHELL_100, 5, 1, 1 }, -- Relic Staff
-    [18327] = { { 17088, 17090, 17092 }, currency.BYNE_100, 16, 2, 2 }, -- Sage's Staff
-    [18328] = { { 1567 }, currency.SILVER_100, 62, 3, 3 }, -- Dynamis Staff
-    [18329] = { { 1582, 1589 }, currency.SHELL_10000, 1, 4, 3 }, -- Thyrus
+    [xi.item.RELIC_STAFF]       =
+    {
+        {
+            xi.item.PIECE_OF_LANCEWOOD_LUMBER,
+            xi.item.PIGEONS_BLOOD_RUBY,
+            xi.item.POT_OF_URUSHI
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        5,
+        1,
+        1
+    },
+    [xi.item.SAGES_STAFF]       =
+    {
+        {
+            xi.item.ASH_STAFF,
+            xi.item.ELM_STAFF,
+            xi.item.MAHOGANY_STAFF
+        },
+        xi.item.ONE_HUNDRED_BYNE_BILL,
+        16,
+        2,
+        2
+    },
+    [xi.item.DYNAMIS_STAFF]     =
+    {
+        {
+            xi.item.ATTESTATION_OF_VIRTUE
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        62,
+        3,
+        3
+    },
+    [xi.item.THYRUS]            =
+    {
+        {
+            xi.item.CELESTIAL_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.RIMILALA_STRIPESHELL,
+        1,
+        4,
+        3
+    },
 
     -- Annihilator
-    [18332] = { { 1468, 830, 654 }, currency.BYNE_100, 5, 1, 1 }, -- Relic Gun
-    [18333] = { { 17248, 17251, 17259 }, currency.SHELL_100, 15, 2, 2 }, -- Marksman Gun
-    [18334] = { { 1570 }, currency.SILVER_100, 62, 3, 3 }, -- Dynamis Gun
-    [18335] = { { 1585, 1589 }, currency.BYNE_10000, 1, 4, 3 }, -- Ferdinand
+    [xi.item.RELIC_GUN]         =
+    {
+        {
+            xi.item.FLASK_OF_MARKSMANS_OIL,
+            xi.item.SQUARE_OF_RAINBOW_CLOTH,
+            xi.item.DARKSTEEL_INGOT
+        },
+        xi.item.ONE_HUNDRED_BYNE_BILL,
+        5,
+        1,
+        1
+    },
+    [xi.item.MARKSMANS_GUN]     =
+    {
+        {
+            xi.item.ARQUEBUS,
+            xi.item.HELLFIRE,
+            xi.item.PIRATES_GUN
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        15,
+        2,
+        2
+    },
+    [xi.item.DYNAMIS_GUN]       =
+    {
+        {
+            xi.item.ATTESTATION_OF_ACCURACY
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        62,
+        3,
+        3
+    },
+    [xi.item.FERDINAND]         =
+    {
+        {
+            xi.item.ETHEREAL_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.TEN_THOUSAND_BYNE_BILL,
+        1,
+        4,
+        3
+    },
 
     -- Gjallarhorn
-    [18338] = { { 1458, 1463, 13232 }, currency.SHELL_100, 3, 1, 1 }, -- Relic Horn
-    [18339] = { { 17352, 17351, 17362 }, currency.BYNE_100, 14, 2, 2 }, -- Pyrrhic Horn
-    [18340] = { { 1569 }, currency.SILVER_100, 60, 3, 3 }, -- Dynamis Horn
-    [18341] = { { 1584, 1589 }, currency.SHELL_10000, 1, 4, 3 }, -- Milennium Horn
+    [xi.item.RELIC_HORN]        =
+    {
+        {
+            xi.item.MAMMOTH_TUSK,
+            xi.item.CHRONOS_TOOTH,
+            xi.item.SWORDBELT_P1
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        3,
+        1,
+        1
+    },
+    [xi.item.PYRRHIC_HORN]      =
+    {
+        {
+            xi.item.HORN,
+            xi.item.GEMSHORN,
+            xi.item.SHOFAR
+        },
+        xi.item.ONE_HUNDRED_BYNE_BILL,
+        14,
+        2,
+        2
+    },
+    [xi.item.DYNAMIS_HORN]      =
+    {
+        {
+            xi.item.ATTESTATION_OF_HARMONY
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        60,
+        3,
+        3
+    },
+    [xi.item.MILLENNIUM_HORN]   =
+    {
+        {
+            xi.item.MYSTERIAL_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.RIMILALA_STRIPESHELL,
+        1,
+        4,
+        3
+    },
 
     -- Yoichinoyumi
-    [18344] = { { 883, 1462, 932 }, currency.SILVER_100, 4, 1, 1 }, -- Relic Bow
-    [18345] = { { 17161, 17164, 18142 }, currency.SILVER_100, 15, 2, 2 }, -- Wolver Bow
-    [18346] = { { 1568 }, currency.SHELL_100, 61, 3, 3 }, -- Dynamis Bow
-    [18347] = { { 1583, 1589 }, currency.SILVER_10000, 1, 4, 3 }, -- Futatokoroto
+    [xi.item.RELIC_BOW]         =
+    {
+        {
+            xi.item.BEHEMOTH_HORN,
+            xi.item.PIECE_OF_LANCEWOOD_LUMBER,
+            xi.item.LOOP_OF_CARBON_FIBER
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        4,
+        1,
+        1
+    },
+    [xi.item.WOLVER_BOW]        =
+    {
+        {
+            xi.item.POWER_BOW,
+            xi.item.WAR_BOW,
+            xi.item.SHIGETO_BOW
+        },
+        xi.item.MONTIONT_SILVERPIECE,
+        15,
+        2,
+        2
+    },
+    [xi.item.DYNAMIS_BOW]       =
+    {
+        {
+            xi.item.ATTESTATION_OF_TRANSCENDENCE
+        },
+        xi.item.LUNGO_NANGO_JADESHELL,
+        61,
+        3,
+        3
+    },
+    [xi.item.FUTATOKOROTO]      =
+    {
+        {
+            xi.item.SNARLED_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.RANPERRE_GOLDPIECE,
+        1,
+        4,
+        3
+    },
 
     -- Aegis
-    [15066] = { { 875, 668, 720 }, 0, 1, 1, 4 }, -- Relic Shield
-    [15067] = { { 12301, 12295, 12387 }, 0, 4, 2, 5 }, -- Bulwark Shield
-    [15068] = { { 1821 }, 0, 20, 3, 6 }, -- Dynamis Shield
-    [15069] = { { 1822, 1589 }, currency.SILVER_10000, 1, 4, 6 }, -- Ancile
+    [xi.item.RELIC_SHIELD]      =
+    {
+        {
+            xi.item.SQUARE_OF_AMALTHEIA_LEATHER,
+            xi.item.ORICHALCUM_SHEET,
+            xi.item.PIECE_OF_ANCIENT_LUMBER
+        },
+        0,
+        1,
+        1,
+        4
+    },
+    [xi.item.BULWARK_SHIELD]    =
+    {
+        {
+            xi.item.BUCKLER,
+            xi.item.ROUND_SHIELD,
+            xi.item.KOENIG_SHIELD
+        },
+        0,
+        4,
+        2,
+        5
+    },
+    [xi.item.DYNAMIS_SHIELD]    =
+    {
+        {
+            xi.item.ATTESTATION_OF_INVULNERABILITY
+        },
+        0,
+        20,
+        3,
+        6
+    },
+    [xi.item.ANCILE]            =
+    {
+        {
+            xi.item.SUPERNAL_FRAGMENT,
+            xi.item.SHARD_OF_NECROPSYCHE
+        },
+        xi.item.RANPERRE_GOLDPIECE,
+        1,
+        4,
+        6
+    }
 }
 
 local function hasRelic(player, isTrade)
@@ -149,13 +795,24 @@ end
 local function tradeHasRequiredCurrency(trade, currentRelic)
     local relic = relics[currentRelic]
 
-    if currentRelic == 15066 or currentRelic == 15067 or currentRelic == 15068 then
-        if currentRelic == 15066 and trade:getItemCount() == 3 then
-            return trade:hasItemQty(currency.BYNE_100, 1) and trade:hasItemQty(currency.SILVER_100, 1) and trade:hasItemQty(currency.SHELL_100, 1)
-        elseif currentRelic == 15067 and trade:getItemCount() == 12 then
-            return trade:hasItemQty(currency.BYNE_100, 4) and trade:hasItemQty(currency.SILVER_100, 4) and trade:hasItemQty(currency.SHELL_100, 4)
-        elseif currentRelic == 15068 and trade:getItemCount() == 60 then
-            return trade:hasItemQty(currency.BYNE_100, 20) and trade:hasItemQty(currency.SILVER_100, 20) and trade:hasItemQty(currency.SHELL_100, 20)
+    -- Aegis multi-currency trades
+    if
+        currentRelic == xi.item.RELIC_SHIELD or
+        currentRelic == xi.item.BULWARK_SHIELD or
+        currentRelic == xi.item.DYNAMIS_SHIELD
+    then
+        if currentRelic == xi.item.RELIC_SHIELD and trade:getItemCount() == 3 then
+            return trade:hasItemQty(xi.item.ONE_HUNDRED_BYNE_BILL, 1) and
+                trade:hasItemQty(xi.item.MONTIONT_SILVERPIECE, 1) and
+                trade:hasItemQty(xi.item.LUNGO_NANGO_JADESHELL, 1)
+        elseif currentRelic == xi.item.BULWARK_SHIELD and trade:getItemCount() == 12 then
+            return trade:hasItemQty(xi.item.ONE_HUNDRED_BYNE_BILL, 4) and
+                trade:hasItemQty(xi.item.MONTIONT_SILVERPIECE, 4) and
+                trade:hasItemQty(xi.item.LUNGO_NANGO_JADESHELL, 4)
+        elseif currentRelic == xi.item.DYNAMIS_SHIELD and trade:getItemCount() == 60 then
+            return trade:hasItemQty(xi.item.ONE_HUNDRED_BYNE_BILL, 20) and
+                trade:hasItemQty(xi.item.MONTIONT_SILVERPIECE, 20) and
+                trade:hasItemQty(xi.item.LUNGO_NANGO_JADESHELL, 20)
         else
             return false
         end
@@ -292,25 +949,24 @@ entity.onTrigger = function(player, npc)
         elseif currentStage == 3 then
             player:startEvent(50, relicId, requiredItem1, requiredItem2, requiredItem3, 0, 0, 0, relic[csParam])
         elseif currentStage == 4 then
-            -- TODO: Use xi.items enum in key for the below table
             local itemToEventId =
             {
-                [18263] = 68, -- Spharai
-                [18269] = 69, -- Mandau
-                [18275] = 70, -- Excalibur
-                [18281] = 71, -- Ragnarok
-                [18287] = 72, -- Guttler
-                [18293] = 73, -- Bravura
-                [18299] = 75, -- Gungnir
-                [18305] = 74, -- Apocalypse
-                [18311] = 76, -- Kikoku
-                [18317] = 77, -- Amanomurakumo
-                [18323] = 78, -- Mjollnir
-                [18329] = 79, -- Claustrum
-                [18335] = 81, -- Annihilator
-                [18341] = 82, -- Gjallarhorn
-                [18347] = 80, -- Yoichinoyumi
-                [15069] = 86, -- Aegis
+                [xi.item.CAESTUS]          = 68, -- Spharai
+                [xi.item.BATARDEAU]        = 69, -- Mandau
+                [xi.item.CALIBURN]         = 70, -- Excalibur
+                [xi.item.VALHALLA]         = 71, -- Ragnarok
+                [xi.item.OGRE_KILLER]      = 72, -- Guttler
+                [xi.item.ABADDON_KILLER]   = 73, -- Bravura
+                [xi.item.GAE_ASSAIL]       = 75, -- Gungnir
+                [xi.item.BEC_DE_FAUCON]    = 74, -- Apocalypse
+                [xi.item.YOSHIMITSU]       = 76, -- Kikoku
+                [xi.item.TOTSUKANOTSURUGI] = 77, -- Amanomurakumo
+                [xi.item.GULLINTANI]       = 78, -- Mjollnir
+                [xi.item.THYRUS]           = 79, -- Claustrum
+                [xi.item.FERDINAND]        = 81, -- Annihilator
+                [xi.item.MILLENNIUM_HORN]  = 82, -- Gjallarhorn
+                [xi.item.FUTATOKOROTO]     = 80, -- Yoichinoyumi
+                [xi.item.ANCILE]           = 86, -- Aegis
             }
 
             player:startEvent(itemToEventId[relicId], requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId)
@@ -324,11 +980,20 @@ entity.onEventUpdate = function(player, csid, option, npc)
     -- Handles the displayed currency types and amounts for Aegis Stage 1->2, 2->3, and 3->4 based on option.
     if (csid == 11 or csid == 12 or csid == 13) and option ~= 0 then
         if option == 1 then
-            player:updateEvent(15066, 1453, 1, 1456, 1, 1450, 1)
+            player:updateEvent(xi.item.RELIC_SHIELD,
+                xi.item.MONTIONT_SILVERPIECE, 1,
+                xi.item.ONE_HUNDRED_BYNE_BILL, 1,
+                xi.item.LUNGO_NANGO_JADESHELL, 1)
         elseif option == 2 then
-            player:updateEvent(15067, 1453, 4, 1456, 4, 1450, 4)
+            player:updateEvent(xi.item.BULWARK_SHIELD,
+                xi.item.MONTIONT_SILVERPIECE, 4,
+                xi.item.ONE_HUNDRED_BYNE_BILL, 4,
+                xi.item.LUNGO_NANGO_JADESHELL, 4)
         elseif option == 3 then
-            player:updateEvent(15068, 1453, 20, 1456, 20, 1450, 20)
+            player:updateEvent(xi.item.DYNAMIS_SHIELD,
+                xi.item.MONTIONT_SILVERPIECE, 20,
+                xi.item.ONE_HUNDRED_BYNE_BILL, 20,
+                xi.item.LUNGO_NANGO_JADESHELL, 20)
         end
     end
 end
@@ -375,25 +1040,24 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         -- Stage 4 cutscenes
     elseif (csid >= 68 and csid <= 82) or csid == 86 then
-        -- TODO: Use xi.items enum below
         local eventToItemId =
         {
-                [68] = 18263, -- Spharai
-                [69] = 18269, -- Mandau
-                [70] = 18275, -- Excalibur
-                [71] = 18281, -- Ragnarok
-                [72] = 18287, -- Guttler
-                [73] = 18293, -- Bravura
-                [75] = 18299, -- Gungnir
-                [74] = 18305, -- Apocalypse
-                [76] = 18311, -- Kikoku
-                [77] = 18317, -- Amanomurakumo
-                [78] = 18323, -- Mjollnir
-                [79] = 18329, -- Claustrum
-                [81] = 18335, -- Annihilator
-                [82] = 18341, -- Gjallarhorn
-                [80] = 18347, -- Yoichinoyumi
-                [86] = 15069, -- Aegis
+            [68] = xi.item.CAESTUS,          -- Spharai
+            [69] = xi.item.BATARDEAU,        -- Mandau
+            [70] = xi.item.CALIBURN,         -- Excalibur
+            [71] = xi.item.VALHALLA,         -- Ragnarok
+            [72] = xi.item.OGRE_KILLER,      -- Guttler
+            [73] = xi.item.ABADDON_KILLER,   -- Bravura
+            [75] = xi.item.GAE_ASSAIL,       -- Gungnir
+            [74] = xi.item.BEC_DE_FAUCON,    -- Apocalypse
+            [76] = xi.item.YOSHIMITSU,       -- Kikoku
+            [77] = xi.item.TOTSUKANOTSURUGI, -- Amanomurakumo
+            [78] = xi.item.GULLINTANI,       -- Mjollnir
+            [79] = xi.item.THYRUS,           -- Claustrum
+            [81] = xi.item.FERDINAND,        -- Annihilator
+            [82] = xi.item.MILLENNIUM_HORN,  -- Gjallarhorn
+            [80] = xi.item.FUTATOKOROTO,     -- Yoichinoyumi
+            [86] = xi.item.ANCILE,           -- Aegis
         }
 
         player:setCharVar('RELIC_CONQUEST_WAIT', 0)

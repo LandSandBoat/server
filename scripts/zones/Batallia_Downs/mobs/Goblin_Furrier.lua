@@ -2,8 +2,6 @@
 -- Area: Batallia Downs
 --  Mob: Goblin Furrier
 -----------------------------------
-local ID = zones[xi.zone.BATALLIA_DOWNS]
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -16,8 +14,7 @@ entity.onMobDeath = function(mob, player, optParams)
     then
         -- Guesstimating 15% chance
         if math.random(1, 100) >= 85 then
-            player:addKeyItem(xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
+            npcUtil.giveKeyItem(player, xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
         end
     end
 end

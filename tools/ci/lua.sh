@@ -24,12 +24,14 @@ global_objects=(
     xi
     ai
     os
+    sleep
     _
     _G
 
     Module
     Override
     super
+    applyOverride
 
     common
     zones
@@ -96,6 +98,8 @@ global_objects=(
     BuildString
 
     GetFirstID
+
+    ReloadSynthRecipes
 )
 
 ignores=(

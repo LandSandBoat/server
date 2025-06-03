@@ -23,6 +23,8 @@
 
 #include "handler_session.h"
 
+#include "common/timer.h"
+
 // Metadata about each session
 struct session_t
 {
@@ -39,5 +41,5 @@ struct session_t
     bool        justCreatedNewChar        = false;
     bool        versionMismatch           = false;
 
-    std::chrono::time_point<std::chrono::system_clock> authorizedTime = server_clock::now();
+    timer::time_point authorizedTime = timer::now();
 };

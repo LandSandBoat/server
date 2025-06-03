@@ -23,6 +23,8 @@ local yuhtungaJungleID    = zones[xi.zone.YUHTUNGA_JUNGLE]
 local sanctuaryOfZitahID  = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 
+-- TODO: Cerment headstones have a distance check
+
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.HEADSTONE_PILGRIMAGE)
 
 mission.reward =
@@ -113,21 +115,22 @@ mission.sections =
             ['Cermet_Headstone'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        player:hasKeyItem(xi.ki.WIND_FRAGMENT) and
-                        not player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.WANDERING_SOULS)
-                    then
-                        player:messageName(capeTerigganID.text.ALREADY_OBTAINED_FRAG, nil, xi.ki.WIND_FRAGMENT)
-
-                        return mission:noAction()
-                    elseif os.time() >= npc:getLocalVar('cooldown') then
-                        if not GetMobByID(capeTerigganID.mob.AXESARION_THE_WANDERER):isSpawned() then
-                            return mission:progressEvent(200, xi.ki.WIND_FRAGMENT)
-                        else
-                            return mission:messageSpecial(capeTerigganID.text.SOMETHING_BETTER)
+                    if player:hasKeyItem(xi.ki.WIND_FRAGMENT) then
+                        -- If the quest isn't completed, it's accepted by force, and we use quest trigger.
+                        if player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.WANDERING_SOULS) then
+                            player:messageName(capeTerigganID.text.ALREADY_OBTAINED_FRAG, nil, xi.ki.WIND_FRAGMENT)
+                            return mission:noAction()
                         end
                     else
-                        return mission:progressEvent(201, xi.ki.WIND_FRAGMENT)
+                        if os.time() >= npc:getLocalVar('cooldown') then
+                            if not GetMobByID(capeTerigganID.mob.AXESARION_THE_WANDERER):isSpawned() then
+                                return mission:progressEvent(200, xi.ki.WIND_FRAGMENT)
+                            else
+                                return mission:messageSpecial(capeTerigganID.text.SOMETHING_BETTER)
+                            end
+                        else
+                            return mission:progressEvent(201, xi.ki.WIND_FRAGMENT) -- Gives KI. Starts quest.
+                        end
                     end
                 end,
             },
@@ -231,21 +234,22 @@ mission.sections =
             ['Cermet_Headstone'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        player:hasKeyItem(xi.ki.LIGHT_FRAGMENT) and
-                        not player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.SOUL_SEARCHING)
-                    then
-                        player:messageName(sanctuaryOfZitahID.text.ALREADY_OBTAINED_FRAG, nil, xi.ki.LIGHT_FRAGMENT)
-
-                        return mission:noAction()
-                    elseif os.time() >= npc:getLocalVar('cooldown') then
-                        if not GetMobByID(sanctuaryOfZitahID.mob.DOOMED_PILGRIMS):isSpawned() then
-                            return mission:progressEvent(200, xi.ki.LIGHT_FRAGMENT)
-                        else
-                            return mission:messageSpecial(sanctuaryOfZitahID.text.SOMETHING_BETTER)
+                    if player:hasKeyItem(xi.ki.LIGHT_FRAGMENT) then
+                         -- If the quest isn't completed, it's accepted and we use quest trigger.
+                        if player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.SOUL_SEARCHING) then
+                            player:messageName(sanctuaryOfZitahID.text.ALREADY_OBTAINED_FRAG, nil, xi.ki.LIGHT_FRAGMENT)
+                            return mission:noAction()
                         end
                     else
-                        return mission:progressEvent(201, xi.ki.LIGHT_FRAGMENT)
+                        if os.time() >= npc:getLocalVar('cooldown') then
+                            if not GetMobByID(sanctuaryOfZitahID.mob.DOOMED_PILGRIMS):isSpawned() then
+                                return mission:progressEvent(200, xi.ki.LIGHT_FRAGMENT)
+                            else
+                                return mission:messageSpecial(sanctuaryOfZitahID.text.SOMETHING_BETTER)
+                            end
+                        else
+                            return mission:progressEvent(201, xi.ki.LIGHT_FRAGMENT) -- Gives KI. Starts quest.
+                        end
                     end
                 end,
             },
@@ -313,20 +317,24 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.FIRE_FRAGMENT) then
-                        player:messageName(yuhtungaJungleID.text.ALREADY_OBTAINED_FRAG, nil, xi.ki.FIRE_FRAGMENT)
-
-                        return mission:noAction()
-                    elseif os.time() >= npc:getLocalVar('cooldown') then
-                        if
-                            not GetMobByID(yuhtungaJungleID.mob.TIPHA):isSpawned() and
-                            not GetMobByID(yuhtungaJungleID.mob.CARTHI):isSpawned()
-                        then
-                            return mission:progressEvent(200, xi.ki.FIRE_FRAGMENT)
-                        else
-                            return mission:messageSpecial(yuhtungaJungleID.text.SOMETHING_BETTER)
+                        -- If the quest isn't completed, it's accepted and we use quest trigger.
+                        if player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.WRATH_OF_THE_OPO_OPOS) then
+                            player:messageName(yuhtungaJungleID.text.ALREADY_OBTAINED_FRAG, nil, xi.ki.FIRE_FRAGMENT)
+                            return mission:noAction()
                         end
                     else
-                        return mission:progressEvent(201, xi.ki.FIRE_FRAGMENT)
+                        if os.time() >= npc:getLocalVar('cooldown') then
+                            if
+                                not GetMobByID(yuhtungaJungleID.mob.TIPHA):isSpawned() and
+                                not GetMobByID(yuhtungaJungleID.mob.CARTHI):isSpawned()
+                            then
+                                return mission:progressEvent(200, xi.ki.FIRE_FRAGMENT)
+                            else
+                                return mission:messageSpecial(yuhtungaJungleID.text.SOMETHING_BETTER)
+                            end
+                        else
+                            return mission:progressEvent(201, xi.ki.FIRE_FRAGMENT) -- Gives KI. Starts quest.
+                        end
                     end
                 end,
             },

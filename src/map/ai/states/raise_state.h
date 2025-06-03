@@ -30,9 +30,9 @@ public:
     CRaiseState(CBattleEntity* PEntity);
 
     // state logic done per tick - returns whether to exit the state or not
-    virtual bool Update(time_point tick) override;
+    virtual bool Update(timer::time_point tick) override;
 
-    virtual void Cleanup(time_point tick) override
+    virtual void Cleanup(timer::time_point tick) override
     {
     }
     // whether the state can be changed by normal means

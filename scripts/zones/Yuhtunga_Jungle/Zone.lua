@@ -10,14 +10,14 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- A Chocobo Riding Game finish line
-    zone:registerTriggerArea(1, -485.54, 5, -379.19, 0, 0, 0)
+    zone:registerCylindricalTriggerArea(1, -485.54, -379.19, 5)
 
-    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.helm.initZone(zone, xi.helmType.HARVESTING)
     xi.helm.initZone(zone, xi.helmType.LOGGING)
 
-    xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
+    xi.beastmenTreasure.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 
     GetMobByID(ID.mob.TURTLERIDER):setRespawnTime(math.random(900, 10800))
 
@@ -25,11 +25,11 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onGameDay = function()
-    xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
+    xi.beastmenTreasure.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -60,7 +60,7 @@ zoneObject.afterZoneIn = function(player)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    local triggerAreaID = triggerArea:GetTriggerAreaID()
+    local triggerAreaID = triggerArea:getTriggerAreaID()
 
     if triggerAreaID == 1 and player:hasStatusEffect(xi.effect.MOUNTED) then
         xi.chocoboGame.onTriggerAreaEnter(player)
@@ -88,7 +88,10 @@ zoneObject.onZoneWeatherChange = function(weather)
             DisallowRespawn(bayawak:getID(), false)
 
             -- Spawn if respawn is up
-            if os.time() > bayawak:getLocalVar('respawn') then
+            if
+                os.time() > bayawak:getLocalVar('respawn') and
+                not bayawak:isSpawned()
+            then
                 SpawnMob(bayawak:getID())
             end
         else

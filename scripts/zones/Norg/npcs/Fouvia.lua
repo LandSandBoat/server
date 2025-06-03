@@ -9,9 +9,6 @@ local ID = zones[xi.zone.NORG]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if player:getMainJob() ~= xi.job.DRG then
         player:showText(npc, ID.text.FOUIVA_DIALOG) -- Oi 'av naw business wi' de likes av you.
@@ -20,9 +17,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(130, 0, 0, 0, 0, 0, 0, player:getCharVar('ChangedWyvernName'))
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

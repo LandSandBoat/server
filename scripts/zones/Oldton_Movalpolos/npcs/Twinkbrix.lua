@@ -98,9 +98,6 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
-end
-
 entity.onEventFinish = function(player, csid, option)
     if csid == 51 then
         -- TODO entering battle sets the cooldown (extra important here as using the teleport consumes this key item, and it should be possible to immediately get another)

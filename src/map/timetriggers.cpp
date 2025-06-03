@@ -27,20 +27,23 @@
 
 void CTriggerHandler::insertTrigger(Trigger_t trigger)
 {
-    trigger.lastTrigger = (CVanaTime::getInstance()->getDate() - trigger.minuteOffset) / trigger.period;
+    vanadiel_time::duration alignedTime = vanadiel_time::now().time_since_epoch() - trigger.minuteOffset;
+    trigger.lastTrigger                 = alignedTime / trigger.period;
     triggerList.emplace_back(trigger);
 }
 
 void CTriggerHandler::triggerTimer()
 {
-    uint32     vanaTime  = CVanaTime::getInstance()->getDate();
-    uint32     timeCount = 0;
-    Trigger_t* trigger   = nullptr;
+    Trigger_t*              trigger  = nullptr;
+    vanadiel_time::duration vanaTime = vanadiel_time::now().time_since_epoch();
+    vanadiel_time::duration alignedTime;
+    uint32                  timeCount;
 
     for (auto& i : triggerList)
     {
-        trigger   = &i;
-        timeCount = (vanaTime - trigger->minuteOffset) / trigger->period;
+        trigger     = &i;
+        alignedTime = vanaTime - trigger->minuteOffset;
+        timeCount   = alignedTime / trigger->period;
 
         if (timeCount > trigger->lastTrigger)
         {

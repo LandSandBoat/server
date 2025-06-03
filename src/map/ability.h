@@ -678,12 +678,12 @@ enum ABILITY
 
 struct Charge_t
 {
-    uint16  ID;         // recastId
-    JOBTYPE job;        // job
-    uint8   level;      // level
-    uint8   maxCharges; // maximum number of stored charges
-    uint32  chargeTime; // time required to restore one charge
-    uint16  merit;
+    uint16          ID;         // recastId
+    JOBTYPE         job;        // job
+    uint8           level;      // level
+    uint8           maxCharges; // maximum number of stored charges
+    timer::duration chargeTime; // time required to restore one charge
+    uint16          merit;
 };
 
 /************************************************************************
@@ -701,43 +701,43 @@ public:
     bool isAoE() const;
     bool isConal();
 
-    uint16     getID() const;
-    uint16     getMobSkillID() const;
-    JOBTYPE    getJob();
-    uint8      getLevel() const;
-    uint16     getAnimationID() const;
-    duration   getAnimationTime();
-    duration   getCastTime();
-    float      getRange() const;
-    uint8      getAOE() const;
-    uint16     getValidTarget() const;
-    uint16     getAddType() const;
-    uint16     getMessage() const;
-    uint16     getAoEMsg() const;
-    uint16     getRecastTime() const;
-    uint16     getRecastId() const;
-    uint16     getCE() const;
-    uint16     getVE() const;
-    uint16     getMeritModID() const;
-    ACTIONTYPE getActionType();
-    EFFECT     getPostActionEffectCleanup();
+    uint16          getID() const;
+    uint16          getMobSkillID() const;
+    JOBTYPE         getJob();
+    uint8           getLevel() const;
+    uint16          getAnimationID() const;
+    timer::duration getAnimationTime();
+    timer::duration getCastTime();
+    float           getRange() const;
+    uint8           getAOE() const;
+    uint16          getValidTarget() const;
+    uint16          getAddType() const;
+    uint16          getMessage() const;
+    uint16          getAoEMsg() const;
+    timer::duration getRecastTime() const;
+    uint16          getRecastId() const;
+    int32           getCE() const;
+    int32           getVE() const;
+    uint16          getMeritModID() const;
+    ACTIONTYPE      getActionType();
+    EFFECT          getPostActionEffectCleanup();
 
     void setID(uint16 id);
     void setMobSkillID(uint16 id);
     void setJob(JOBTYPE Job);
     void setLevel(uint8 level);
     void setAnimationID(uint16 animationID);
-    void setAnimationTime(duration time);
-    void setCastTime(duration time);
+    void setAnimationTime(timer::duration time);
+    void setCastTime(timer::duration time);
     void setRange(float range);
     void setAOE(uint8 aoe);
     void setValidTarget(uint16 validTarget);
     void setAddType(uint16 addtype);
     void setMessage(uint16 message);
-    void setRecastTime(uint16 recastTime);
+    void setRecastTime(timer::duration recastTime);
     void setRecastId(uint16 recastId);
-    void setCE(uint16 CE);
-    void setVE(uint16 VE);
+    void setCE(int32 CE);
+    void setVE(int32 VE);
     void setMeritModID(uint16 value);
     void setActionType(ACTIONTYPE type);
     void setPostActionEffectCleanup(EFFECT effectToCleanup);
@@ -746,26 +746,26 @@ public:
     void               setName(const std::string& name);
 
 private:
-    uint16      m_ID;
-    JOBTYPE     m_Job;
-    uint8       m_level;
-    uint16      m_animationID;
-    duration    m_animationTime{};
-    duration    m_castTime{};
-    float       m_range;
-    uint8       m_aoe;
-    uint16      m_validTarget;
-    uint16      m_addType;
-    uint16      m_message;
-    uint16      m_recastTime;
-    uint16      m_recastId;
-    uint16      m_CE;
-    uint16      m_VE;
-    uint16      m_meritModID;
-    std::string m_name;
-    uint16      m_mobskillId;
-    ACTIONTYPE  m_actionType{};
-    EFFECT      m_cleanupEffect{};
+    uint16          m_ID;
+    JOBTYPE         m_Job;
+    uint8           m_level;
+    uint16          m_animationID;
+    timer::duration m_animationTime{};
+    timer::duration m_castTime{};
+    float           m_range;
+    uint8           m_aoe;
+    uint16          m_validTarget;
+    uint16          m_addType;
+    uint16          m_message;
+    timer::duration m_recastTime{};
+    uint16          m_recastId;
+    int32           m_CE;
+    int32           m_VE;
+    uint16          m_meritModID;
+    std::string     m_name;
+    uint16          m_mobskillId;
+    ACTIONTYPE      m_actionType{};
+    EFFECT          m_cleanupEffect{};
 };
 
 /************************************************************************
@@ -777,7 +777,6 @@ private:
 namespace ability
 {
     void LoadAbilitiesList();
-    void CleanupAbilitiesList();
 
     CAbility* GetAbility(uint16 AbilityID);
 

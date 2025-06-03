@@ -5,16 +5,26 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, 403, -34, 83, 409, -33, 89) -- Third Floor G-6 porter to Middle Delkfutt's Tower
-    zone:registerTriggerArea(2, 390, -34, -49, 397, -33, -43) -- Third Floor F-10 porter to Middle Delkfutt's Tower "1"
+    zone:registerCuboidTriggerArea(1, 403, -34, 83, 409, -33, 89) -- Third Floor G-6 porter to Middle Delkfutt's Tower
+    zone:registerCuboidTriggerArea(2, 390, -34, -49, 397, -33, -43) -- Third Floor F-10 porter to Middle Delkfutt's Tower "1"
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
+    if prevZone == xi.zone.MIDDLE_DELKFUTTS_TOWER then
+        cs = 14 -- Teleport.
+    -- BORN OF HER NIGHTMARES
+    -- TODO: Convert to interaction.
+    elseif
+        prevZone == xi.zone.QUFIM_ISLAND and
+        player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.BORN_OF_HER_NIGHTMARES
+    then
+        cs = 34
+    end
 
     if
         player:getXPos() == 0 and
@@ -24,19 +34,11 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(460.022, -1.77, -103.442, 188)
     end
 
-    -- BORN OF HER NIGHTMARES
-    if
-        player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.BORN_OF_HER_NIGHTMARES and
-        prevZone == xi.zone.QUFIM_ISLAND
-    then
-        cs = 34
-    end
-
     return cs
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
+    switch (triggerArea:getTriggerAreaID()): caseof
     {
         [1] = function()
             player:setCharVar('option', 1)

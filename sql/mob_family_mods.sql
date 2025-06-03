@@ -198,15 +198,18 @@ INSERT INTO `mob_family_mods` VALUES (59,51,2,1);   -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (59,52,30,1);  -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (59,63,20,0);  -- DEFP: 20
 
--- Cardian
-INSERT INTO `mob_family_mods` VALUES (61,29,25,0);   -- MDEF: 25
-INSERT INTO `mob_family_mods` VALUES (61,36,40,1);   -- ROAM_COOL: 40
-INSERT INTO `mob_family_mods` VALUES (61,51,2,1);    -- ROAM_TURNS: 2
-INSERT INTO `mob_family_mods` VALUES (61,52,20,1);   -- ROAM_RATE: 20
-INSERT INTO `mob_family_mods` VALUES (61,389,-25,0); -- UDMGMAGIC: -25
+-- Cardian: https://www.bg-wiki.com/ffxi/Category:Cardian
+INSERT INTO `mob_family_mods` VALUES (61,29,25,0);     -- MDEF: 25
+INSERT INTO `mob_family_mods` VALUES (61,36,40,1);     -- ROAM_COOL: 40
+INSERT INTO `mob_family_mods` VALUES (61,51,2,1);      -- ROAM_TURNS: 2
+INSERT INTO `mob_family_mods` VALUES (61,52,20,1);     -- ROAM_RATE: 20
+INSERT INTO `mob_family_mods` VALUES (61,389,-2500,0); -- UDMGMAGIC: -2500
 
 -- Cerberus
 INSERT INTO `mob_family_mods` VALUES (62,36,50,1); -- ROAM_COOL: 50
+
+-- Chariot
+INSERT INTO `mob_family_mods` VALUES (63,10,15,1); -- SUBLINK: 15
 
 -- Cluster
 INSERT INTO `mob_family_mods` VALUES (68,36,40,1); -- ROAM_COOL: 40
@@ -235,12 +238,13 @@ INSERT INTO `mob_family_mods` VALUES (72,51,2,1);  -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (72,52,30,1); -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (72,68,20,0); -- EVA: 20
 
--- Corse
-INSERT INTO `mob_family_mods` VALUES (74,29,25,0);   -- MDEF: 25
-INSERT INTO `mob_family_mods` VALUES (74,36,50,1);   -- ROAM_COOL: 50
-INSERT INTO `mob_family_mods` VALUES (74,51,2,1);    -- ROAM_TURNS: 2
-INSERT INTO `mob_family_mods` VALUES (74,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (74,389,-25,0); -- UDMGMAGIC: -25
+-- Corse: https://www.bg-wiki.com/ffxi/Category:Corse
+INSERT INTO `mob_family_mods` VALUES (74,29,25,0);     -- MDEF: 25
+INSERT INTO `mob_family_mods` VALUES (74,36,50,1);     -- ROAM_COOL: 50
+INSERT INTO `mob_family_mods` VALUES (74,51,2,1);      -- ROAM_TURNS: 2
+INSERT INTO `mob_family_mods` VALUES (74,52,30,1);     -- ROAM_RATE: 30
+INSERT INTO `mob_family_mods` VALUES (74,388,-5000,0); -- UDMGBREATH: -5000
+INSERT INTO `mob_family_mods` VALUES (74,389,-2500,0); -- UDMGMAGIC: -2500
 
 -- Crab
 INSERT INTO `mob_family_mods` VALUES (75,36,15,1); -- ROAM_COOL: 15
@@ -353,21 +357,22 @@ INSERT INTO `mob_family_mods` VALUES (105,56,-1,1); -- HP_STANDBACK: -1
 INSERT INTO `mob_family_mods` VALUES (106,51,3,1);  -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (106,56,-1,1); -- HP_STANDBACK: -1
 
--- Evil Weapon
-INSERT INTO `mob_family_mods` VALUES (110,3,50,1);    -- MP_BASE: 50
-INSERT INTO `mob_family_mods` VALUES (110,29,13,0);   -- MDEF: 13
-INSERT INTO `mob_family_mods` VALUES (110,36,45,1);   -- ROAM_COOL: 45
-INSERT INTO `mob_family_mods` VALUES (110,51,3,1);    -- ROAM_TURNS: 3
-INSERT INTO `mob_family_mods` VALUES (110,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (110,389,-13,0); -- UDMGMAGIC: -13
+-- Evil Weapon: https://www.bg-wiki.com/ffxi/Category:Evil_Weapon
+INSERT INTO `mob_family_mods` VALUES (110,3,50,1);      -- MP_BASE: 50
+INSERT INTO `mob_family_mods` VALUES (110,29,13,0);     -- MDEF: 13
+INSERT INTO `mob_family_mods` VALUES (110,36,45,1);     -- ROAM_COOL: 45
+INSERT INTO `mob_family_mods` VALUES (110,51,3,1);      -- ROAM_TURNS: 3
+INSERT INTO `mob_family_mods` VALUES (110,52,30,1);     -- ROAM_RATE: 30
+INSERT INTO `mob_family_mods` VALUES (110,389,-1250,0); -- UDMGMAGIC: -1250
 
 -- Non-Beastmen regular frogs
 INSERT INTO `mob_family_mods` VALUES (111,62,1,1); -- NO_STANDBACK: 1
 
--- Flan
-INSERT INTO `mob_family_mods` VALUES (112,51,2,1);   -- ROAM_TURNS: 2
-INSERT INTO `mob_family_mods` VALUES (112,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (112,389,25,0); -- UDMGMAGIC: 25
+-- Flan: https://www.bg-wiki.com/ffxi/Category:Flan
+INSERT INTO `mob_family_mods` VALUES (112,51,2,1);     -- ROAM_TURNS: 2
+INSERT INTO `mob_family_mods` VALUES (112,52,30,1);    -- ROAM_RATE: 30
+INSERT INTO `mob_family_mods` VALUES (112,388,2500,0); -- UDMGBREATH: 2500
+INSERT INTO `mob_family_mods` VALUES (112,389,2500,0); -- UDMGMAGIC: 2500
 
 -- Fomor
 INSERT INTO `mob_family_mods` VALUES (115,36,50,1);   -- ROAM_COOL: 50
@@ -380,18 +385,22 @@ INSERT INTO `mob_family_mods` VALUES (116,31,15,1); -- ROAM_DISTANCE: 15
 INSERT INTO `mob_family_mods` VALUES (116,36,60,1); -- ROAM_COOL: 60
 INSERT INTO `mob_family_mods` VALUES (116,52,30,1); -- ROAM_RATE: 30
 
+-- Gear
+INSERT INTO `mob_family_mods` VALUES (119,10,15,1); -- SUBLINK: 15
+INSERT INTO `mob_family_mods` VALUES (120,10,15,1); -- SUBLINK: 15
+
 -- Ghost
 INSERT INTO `mob_family_mods` VALUES (121,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (121,52,30,1);   -- ROAM_RATE: 30
 
--- Ghrah
-INSERT INTO `mob_family_mods` VALUES (122,389,-13,0); -- UDMGMAGIC: -13
+-- Ghrah: https://www.bg-wiki.com/ffxi/Category:Ghrah
+INSERT INTO `mob_family_mods` VALUES (122,389,-1250,0); -- UDMGMAGIC: -1250
 
--- Ghrah
-INSERT INTO `mob_family_mods` VALUES (123,389,-13,0); -- UDMGMAGIC: -13
+-- Ghrah: https://www.bg-wiki.com/ffxi/Category:Ghrah
+INSERT INTO `mob_family_mods` VALUES (123,389,-1250,0); -- UDMGMAGIC: -1250
 
--- Ghrah
-INSERT INTO `mob_family_mods` VALUES (124,389,-13,0); -- UDMGMAGIC: -13
+-- Ghrah: https://www.bg-wiki.com/ffxi/Category:Ghrah
+INSERT INTO `mob_family_mods` VALUES (124,389,-1250,0); -- UDMGMAGIC: -1250
 
 -- Greater Bird
 INSERT INTO `mob_family_mods` VALUES (125,36,40,1);   -- ROAM_COOL: 40
@@ -526,20 +535,20 @@ INSERT INTO `mob_family_mods` VALUES (166,56,-1,1); -- HP_STANDBACK: -1
 INSERT INTO `mob_family_mods` VALUES (166,4,10,1);  -- SIGHT_RANGE: 10
 INSERT INTO `mob_family_mods` VALUES (166,5,5,1);   -- SOUND_RANGE: 5
 
--- Kindred
-INSERT INTO `mob_family_mods` VALUES (169,10,1,1);    -- SUBLINK: 1
-INSERT INTO `mob_family_mods` VALUES (169,11,15,1);   -- LINK_RADIUS: 15
-INSERT INTO `mob_family_mods` VALUES (169,29,25,0);   -- MDEF: 25
-INSERT INTO `mob_family_mods` VALUES (169,31,15,1);   -- ROAM_DISTANCE: 15
-INSERT INTO `mob_family_mods` VALUES (169,36,50,1);   -- ROAM_COOL: 50
-INSERT INTO `mob_family_mods` VALUES (169,51,3,1);    -- ROAM_TURNS: 3
-INSERT INTO `mob_family_mods` VALUES (169,54,120,1);  -- GIL_BONUS: 120
-INSERT INTO `mob_family_mods` VALUES (169,389,-25,0); -- UDMGMAGIC: -25
+-- Kindred: https://www.bg-wiki.com/ffxi/Category:Demon
+INSERT INTO `mob_family_mods` VALUES (169,10,1,1);      -- SUBLINK: 1
+INSERT INTO `mob_family_mods` VALUES (169,11,15,1);     -- LINK_RADIUS: 15
+INSERT INTO `mob_family_mods` VALUES (169,29,25,0);     -- MDEF: 25
+INSERT INTO `mob_family_mods` VALUES (169,31,15,1);     -- ROAM_DISTANCE: 15
+INSERT INTO `mob_family_mods` VALUES (169,36,50,1);     -- ROAM_COOL: 50
+INSERT INTO `mob_family_mods` VALUES (169,51,3,1);      -- ROAM_TURNS: 3
+INSERT INTO `mob_family_mods` VALUES (169,54,120,1);    -- GIL_BONUS: 120
+INSERT INTO `mob_family_mods` VALUES (169,389,-2500,0); -- UDMGMAGIC: -2500
 
--- Lamiae
-INSERT INTO `mob_family_mods` VALUES (171,10,10,1);   -- SUBLINK: 10
-INSERT INTO `mob_family_mods` VALUES (171,29,13,0);   -- MDEF: 13
-INSERT INTO `mob_family_mods` VALUES (171,389,-13,0); -- UDMGMAGIC: -13
+-- Lamiae: https://www.bg-wiki.com/ffxi/Category:Lamiae
+INSERT INTO `mob_family_mods` VALUES (171,10,10,1);     -- SUBLINK: 10
+INSERT INTO `mob_family_mods` VALUES (171,29,13,0);     -- MDEF: 13
+INSERT INTO `mob_family_mods` VALUES (171,389,-1250,0); -- UDMGMAGIC: -1250
 
 -- Leech
 INSERT INTO `mob_family_mods` VALUES (172,31,15,1); -- ROAM_DISTANCE: 15
@@ -549,12 +558,12 @@ INSERT INTO `mob_family_mods` VALUES (174,36,60,1); -- ROAM_COOL: 60
 INSERT INTO `mob_family_mods` VALUES (174,51,4,1);  -- ROAM_TURNS: 4
 INSERT INTO `mob_family_mods` VALUES (174,52,30,1); -- ROAM_RATE: 30
 
--- Magic Pot
-INSERT INTO `mob_family_mods` VALUES (175,29,50,0);   -- MDEF: 50
-INSERT INTO `mob_family_mods` VALUES (175,31,5,1);    -- ROAM_DISTANCE: 5
-INSERT INTO `mob_family_mods` VALUES (175,36,55,1);   -- ROAM_COOL: 55
-INSERT INTO `mob_family_mods` VALUES (175,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (175,389,-50,0); -- UDMGMAGIC: -50
+-- Magic Pot: https://www.bg-wiki.com/ffxi/Category:Magic_Pot
+INSERT INTO `mob_family_mods` VALUES (175,29,50,0);     -- MDEF: 50
+INSERT INTO `mob_family_mods` VALUES (175,31,5,1);      -- ROAM_DISTANCE: 5
+INSERT INTO `mob_family_mods` VALUES (175,36,55,1);     -- ROAM_COOL: 55
+INSERT INTO `mob_family_mods` VALUES (175,52,30,1);     -- ROAM_RATE: 30
+INSERT INTO `mob_family_mods` VALUES (175,389,-5000,0); -- UDMGMAGIC: -5000
 
 -- Mamool Ja
 INSERT INTO `mob_family_mods` VALUES (176,10,8,1);  -- SUBLINK: 8
@@ -635,6 +644,9 @@ INSERT INTO `mob_family_mods` VALUES (208,52,30,1);  -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (208,62,10,0);  -- ATTP: 10
 INSERT INTO `mob_family_mods` VALUES (208,63,20,0);  -- DEFP: 20
 
+-- Rampart
+INSERT INTO `mob_family_mods` VALUES (209,10,15,1); -- SUBLINK: 15
+
 -- Raptor
 INSERT INTO `mob_family_mods` VALUES (210,31,30,1);  -- ROAM_DISTANCE: 30
 INSERT INTO `mob_family_mods` VALUES (210,36,40,1);  -- ROAM_COOL: 40
@@ -647,7 +659,7 @@ INSERT INTO `mob_family_mods` VALUES (212,52,20,1); -- ROAM_RATE: 20
 
 -- Sahagin
 INSERT INTO `mob_family_mods` VALUES (213,10,8,1);   -- SUBLINK: 8
-INSERT INTO `mob_family_mods` VALUES (213,20,128,0); -- WATER_RES: 128
+INSERT INTO `mob_family_mods` VALUES (213,20,128,0); -- WATER_MEVA: 128
 
 -- Sapling
 INSERT INTO `mob_family_mods` VALUES (216,10,4,1);  -- SUBLINK: 4
@@ -805,9 +817,6 @@ INSERT INTO `mob_family_mods` VALUES (271,3,50,1); -- MP_BASE: 50
 INSERT INTO `mob_family_mods` VALUES (272,4,10,1);    -- SIGHT_RANGE: 10
 INSERT INTO `mob_family_mods` VALUES (272,102,60,1);  -- MOBMOD_SIGHT_ANGLE
 
--- Scorpion-Serket
-INSERT INTO `mob_family_mods` VALUES (273,23,256,1); -- IMMUNITY: 256
-
 -- Scorpion-Kingv
 INSERT INTO `mob_family_mods` VALUES (274,23,256,1); -- IMMUNITY: 256
 
@@ -855,14 +864,14 @@ INSERT INTO `mob_family_mods` VALUES (334,10,2,1); -- SUBLINK: 2
 -- Antlion-Ambush
 INSERT INTO `mob_family_mods` VALUES (357,63,20,0); -- DEFP: 20
 
--- Kindred
-INSERT INTO `mob_family_mods` VALUES (358,10,1,1);    -- SUBLINK: 1
-INSERT INTO `mob_family_mods` VALUES (358,11,15,1);   -- LINK_RADIUS: 15
-INSERT INTO `mob_family_mods` VALUES (358,31,15,1);   -- ROAM_DISTANCE: 15
-INSERT INTO `mob_family_mods` VALUES (358,36,50,1);   -- ROAM_COOL: 50
-INSERT INTO `mob_family_mods` VALUES (358,51,3,1);    -- ROAM_TURNS: 3
-INSERT INTO `mob_family_mods` VALUES (358,54,120,1);  -- GIL_BONUS: 120
-INSERT INTO `mob_family_mods` VALUES (358,389,-25,0); -- UDMGMAGIC: -25
+-- Kindred: https://www.bg-wiki.com/ffxi/Category:Demon
+INSERT INTO `mob_family_mods` VALUES (358,10,1,1);      -- SUBLINK: 1
+INSERT INTO `mob_family_mods` VALUES (358,11,15,1);     -- LINK_RADIUS: 15
+INSERT INTO `mob_family_mods` VALUES (358,31,15,1);     -- ROAM_DISTANCE: 15
+INSERT INTO `mob_family_mods` VALUES (358,36,50,1);     -- ROAM_COOL: 50
+INSERT INTO `mob_family_mods` VALUES (358,51,3,1);      -- ROAM_TURNS: 3
+INSERT INTO `mob_family_mods` VALUES (358,54,120,1);    -- GIL_BONUS: 120
+INSERT INTO `mob_family_mods` VALUES (358,389,-2500,0); -- UDMGMAGIC: -2500
 
 -- Fomor
 INSERT INTO `mob_family_mods` VALUES (359,36,50,1);   -- ROAM_COOL: 50
@@ -898,18 +907,6 @@ INSERT INTO `mob_family_mods` VALUES (376,51,3,1);  -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (377,31,30,1); -- ROAM_DISTANCE: 30
 INSERT INTO `mob_family_mods` VALUES (377,36,40,1); -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (377,51,3,1);  -- ROAM_TURNS: 3
-
--- Wyrm-Vrtra
-INSERT INTO `mob_family_mods` VALUES (391,31,5,1);  -- ROAM_DISTANCE: 5
-INSERT INTO `mob_family_mods` VALUES (391,36,55,1); -- ROAM_COOL: 55
-
--- Wyrm-Jormungand
-INSERT INTO `mob_family_mods` VALUES (392,31,5,1);  -- ROAM_DISTANCE: 5
-INSERT INTO `mob_family_mods` VALUES (392,36,55,1); -- ROAM_COOL: 55
-
--- Wyrm-Tiamat
-INSERT INTO `mob_family_mods` VALUES (393,31,5,1);  -- ROAM_DISTANCE: 5
-INSERT INTO `mob_family_mods` VALUES (393,36,55,1); -- ROAM_COOL: 55
 
 -- Humanoid-Hume
 INSERT INTO `mob_family_mods` VALUES (394,4,30,1);   -- SIGHT_RANGE: 30

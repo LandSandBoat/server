@@ -8,9 +8,9 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- A Chocobo Riding Game finish line
-    zone:registerTriggerArea(1, -135.60, 8, 264.53, 0, 0, 0)
+    zone:registerCylindricalTriggerArea(1, -135.60, 264.53, 8)
 
-    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -36,11 +36,11 @@ zoneObject.afterZoneIn = function(player)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    local triggerAreaID = triggerArea:GetTriggerAreaID()
+    local triggerAreaID = triggerArea:getTriggerAreaID()
 
     if triggerAreaID == 1 and player:hasStatusEffect(xi.effect.MOUNTED) then
         xi.chocoboGame.onTriggerAreaEnter(player)

@@ -84,9 +84,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 222 then    -- correct trade, onto next opo
         if player:getCharVar('OPO_OPO_PROGRESS') == 3 then

@@ -8,9 +8,6 @@ local whitegateShared = require('scripts/zones/Aht_Urhgan_Whitegate/Shared')
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local noWeapons = player:getEquipID(xi.slot.MAIN) == 0 and player:getEquipID(xi.slot.SUB) == 0
 

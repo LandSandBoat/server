@@ -81,23 +81,23 @@ Recast_t* CRecastContainer::GetRecast(RECASTTYPE type, uint16 id)
  *                                                                       *
  ************************************************************************/
 
-void CRecastContainer::Add(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime, uint8 maxCharges)
+void CRecastContainer::Add(RECASTTYPE type, uint16 id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
 {
     Load(type, id, duration, chargeTime, maxCharges);
 }
 
-Recast_t* CRecastContainer::Load(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime, uint8 maxCharges)
+Recast_t* CRecastContainer::Load(RECASTTYPE type, uint16 id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
 {
     Recast_t* recast = GetRecast(type, id);
 
     if (recast == nullptr)
     {
-        GetRecastList(type)->emplace_back(Recast_t{ id, time(nullptr), duration, chargeTime, maxCharges });
+        GetRecastList(type)->emplace_back(Recast_t{ id, timer::now(), duration, chargeTime, maxCharges });
         return &GetRecastList(type)->back();
     }
     else
     {
-        if (chargeTime)
+        if (chargeTime != 0s)
         {
             recast->chargeTime = chargeTime;
         }
@@ -105,16 +105,16 @@ Recast_t* CRecastContainer::Load(RECASTTYPE type, uint16 id, uint32 duration, ui
         {
             recast->maxCharges = maxCharges;
         }
-        if (recast->chargeTime == 0)
+        if (recast->chargeTime == 0s)
         {
-            recast->TimeStamp  = time(nullptr);
+            recast->TimeStamp  = timer::now();
             recast->RecastTime = duration;
         }
         else
         {
-            if (recast->RecastTime == 0)
+            if (recast->RecastTime == 0s)
             {
-                recast->TimeStamp = time(nullptr);
+                recast->TimeStamp = timer::now();
             }
             else if (recast->RecastTime + duration > recast->chargeTime * recast->maxCharges)
             {
@@ -141,7 +141,7 @@ void CRecastContainer::Del(RECASTTYPE type)
     {
         for (auto&& recast : *PRecastList)
         {
-            recast.RecastTime = 0;
+            recast.RecastTime = 0s;
         }
     }
     else
@@ -164,7 +164,7 @@ void CRecastContainer::Del(RECASTTYPE type, uint16 id)
     {
         if (auto* recast = GetRecast(RECAST_ABILITY, id))
         {
-            recast->RecastTime = 0;
+            recast->RecastTime = 0s;
         }
     }
     else
@@ -186,7 +186,7 @@ void CRecastContainer::DeleteByIndex(RECASTTYPE type, uint8 index)
     RecastList_t* PRecastList = GetRecastList(type);
     if (type == RECAST_ABILITY)
     {
-        PRecastList->at(index).RecastTime = 0;
+        PRecastList->at(index).RecastTime = 0s;
     }
     else
     {
@@ -220,28 +220,35 @@ bool CRecastContainer::Has(RECASTTYPE type, uint16 id)
  *                                                                       *
  ************************************************************************/
 
-bool CRecastContainer::HasRecast(RECASTTYPE type, uint16 id, uint32 recast)
+bool CRecastContainer::HasRecast(RECASTTYPE type, uint16 id, timer::duration recast)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
     for (auto& i : *PRecastList)
     {
-        if (i.ID == id && i.RecastTime > 0)
+        if (i.ID == id && i.RecastTime > 0s)
         {
-            if (i.chargeTime == 0)
+            if (i.chargeTime == 0s)
             {
                 return true;
             }
             else
             {
                 // a request to use more charges than the maximum only applies to abilities who share normal recasts with charges (ie. sic)
-                if (recast > i.maxCharges)
+                // TODO: this is bad
+                // "recast" 1-4 = sic/ready
+                // "recast" 1 = quickdraw, stratagems
+                auto crypticRecastSecondsAsType = timer::count_seconds(recast);
+                if (crypticRecastSecondsAsType > i.maxCharges)
                 {
                     return true;
                 }
-                auto charges = i.maxCharges - ((i.RecastTime - (uint32)(time(nullptr) - i.TimeStamp)) / (i.chargeTime)) - 1;
 
-                if (charges < recast)
+                auto  currentRecast    = i.TimeStamp - timer::now() + i.RecastTime;
+                uint8 availableCharges = static_cast<uint8>(currentRecast / i.chargeTime);
+                auto  charges          = i.maxCharges - availableCharges - 1;
+
+                if (charges < crypticRecastSecondsAsType)
                 {
                     return true;
                 }
@@ -268,7 +275,7 @@ void CRecastContainer::Check()
         {
             Recast_t* recast = &PRecastList->at(i);
 
-            if (time(nullptr) >= (recast->TimeStamp + recast->RecastTime))
+            if (timer::now() >= recast->TimeStamp + recast->RecastTime)
             {
                 if (type == RECAST_MAGIC)
                 {
@@ -276,7 +283,7 @@ void CRecastContainer::Check()
                 }
                 else
                 {
-                    recast->RecastTime = 0;
+                    recast->RecastTime = 0s;
                 }
             }
         }
@@ -297,7 +304,7 @@ void CRecastContainer::ResetAbilities()
     {
         if (recast.ID != 0)
         {
-            Load(RECAST_ABILITY, recast.ID, 0);
+            Load(RECAST_ABILITY, recast.ID, 0s);
         }
     }
 }

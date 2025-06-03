@@ -9,18 +9,12 @@ local ID = zones[xi.zone.GARLAIGE_CITADEL]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if not player:hasKeyItem(xi.ki.POUCH_OF_WEIGHTED_STONES) then
         player:startEvent(23) -- Key Item name hardcoded in the event.
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

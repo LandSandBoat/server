@@ -13,7 +13,7 @@ zoneObject.onInitialize = function(zone)
     xi.voidwalker.zoneOnInit(zone)
 
     -- A Chocobo Riding Game finish line
-    zone:registerTriggerArea(1, 218.533, 20, 484.50, 0, 0, 0)
+    zone:registerCylindricalTriggerArea(1, 218.533, 484.50, 20)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -39,11 +39,11 @@ zoneObject.afterZoneIn = function(player)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    local triggerAreaID = triggerArea:GetTriggerAreaID()
+    local triggerAreaID = triggerArea:getTriggerAreaID()
 
     if triggerAreaID == 1 and player:hasStatusEffect(xi.effect.MOUNTED) then
         xi.chocoboGame.onTriggerAreaEnter(player)

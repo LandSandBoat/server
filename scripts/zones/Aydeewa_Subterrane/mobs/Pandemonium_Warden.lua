@@ -44,6 +44,10 @@ local skillID =    {  1000,    316,  1001,    316,  1002,    316,  1003,    316,
 local avatarAbilities = {  917,   918,   914,   913,   915,   916,   839,   919 }
 local avatarSkins =     {   22,    23,    19,    18,    20,    21,    17,    16 }
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 900)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DEF, 450)
     mob:setMod(xi.mod.MEVA, 380)

@@ -35,7 +35,7 @@ CPetController::CPetController(CMobEntity* _PPet)
     SetWeaponSkillEnabled(false);
 }
 
-void CPetController::Tick(time_point tick)
+void CPetController::Tick(timer::time_point tick)
 {
     TracyZoneScoped;
     TracyZoneString(PPet->getName());
@@ -56,9 +56,7 @@ void CPetController::Tick(time_point tick)
         auto* PPetEntity = dynamic_cast<CPetEntity*>(PPet);
         if (PPetEntity && PPetEntity->isAlive() && PPetEntity->getPetType() == PET_TYPE::JUG_PET)
         {
-            // need to covert tick to unix time (in seconds) because getJugSpawnTime and getJugDuration give unix time
-            auto tickAsUnixTime = static_cast<uint32>(std::chrono::duration_cast<std::chrono::seconds>(tick.time_since_epoch()).count());
-            if (tickAsUnixTime > PPetEntity->getJugSpawnTime() + PPetEntity->getJugDuration())
+            if (tick > PPetEntity->getJugSpawnTime() + PPetEntity->getJugDuration())
             {
                 petutils::DespawnPet(PPetEntity->PMaster);
                 return;
@@ -68,7 +66,7 @@ void CPetController::Tick(time_point tick)
     CMobController::Tick(tick);
 }
 
-void CPetController::DoRoamTick(time_point tick)
+void CPetController::DoRoamTick(timer::time_point tick)
 {
     if ((PPet->PMaster == nullptr || PPet->PMaster->isDead()) && PPet->isAlive() && PPet->objtype != TYPE_MOB)
     {
@@ -105,6 +103,10 @@ void CPetController::DoRoamTick(time_point tick)
                 return;
             }
         }
+        else if (PetEntity->m_PetID == PETID_LUOPAN) // Luopans do nothing
+        {
+            return;
+        }
     }
 
     float currentDistance = distance(PPet->loc.p, PPet->PMaster->loc.p);
@@ -123,7 +125,7 @@ void CPetController::DoRoamTick(time_point tick)
             }
             PPet->PAI->PathFind->FollowPath(m_Tick);
         }
-        else if (PPet->speed > 0)
+        else if (PPet->GetSpeed() > 0)
         {
             PPet->PAI->PathFind->WarpTo(PPet->PMaster->loc.p, PetRoamDistance);
         }
@@ -139,7 +141,7 @@ bool CPetController::PetIsHealing()
     {
         // animation down
         PPet->animation = ANIMATION_HEALING;
-        PPet->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, settings::get<uint8>("map.HEALING_TICK_DELAY"), 0));
+        PPet->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, std::chrono::seconds(settings::get<uint8>("map.HEALING_TICK_DELAY")), 0s));
         PPet->updatemask |= UPDATE_HP;
         return true;
     }

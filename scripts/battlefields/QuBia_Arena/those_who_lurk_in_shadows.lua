@@ -38,8 +38,7 @@ function content:onEventFinishWin(player, csid, option, npc)
         player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III
     then
         player:setCharVar('LastIvoryKey', getMidnight())
-        player:addKeyItem(xi.ki.IVORY_KEY)
-        player:messageSpecial(qubiaID.text.KEYITEM_OBTAINED, xi.ki.IVORY_KEY)
+        npcUtil.giveKeyItem(player, xi.ki.IVORY_KEY)
     end
 end
 

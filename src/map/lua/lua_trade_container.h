@@ -41,7 +41,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const CTradeContainer& trade);
 
     uint32 getGil();
-    auto   getItem(sol::object const& SlotIDObj) -> std::optional<CLuaItem>;
+    auto   getItem(sol::object const& SlotIDObj) -> CItem*;
     uint16 getItemId(sol::object const& SlotIDObj);
     uint16 getItemSubId(sol::object const& SlotIDObj);
     uint32 getItemQty(uint16 itemID);

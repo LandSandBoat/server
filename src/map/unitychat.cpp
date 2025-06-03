@@ -19,8 +19,8 @@
 #include <cstring>
 
 #include "entities/charentity.h"
-#include "map.h"
-#include "message.h"
+#include "ipc_client.h"
+#include "map_server.h"
 #include "unitychat.h"
 #include "utils/jailutils.h"
 
@@ -36,7 +36,7 @@ uint32 CUnityChat::getLeader() const
 
 void CUnityChat::AddMember(CCharEntity* PChar)
 {
-    _sql->Query("UPDATE accounts_sessions SET unitychat = %u WHERE charid = %u", this->getLeader(), PChar->id);
+    db::preparedStmt("UPDATE accounts_sessions SET unitychat = ? WHERE charid = ? LIMIT 1", this->getLeader(), PChar->id);
     PChar->PUnityChat = this;
     members.emplace_back(PChar);
 }
@@ -47,7 +47,7 @@ bool CUnityChat::DelMember(CCharEntity* PChar)
     {
         if (members.at(i) == PChar)
         {
-            _sql->Query("UPDATE accounts_sessions SET unitychat = 0 WHERE charid = %u", PChar->id);
+            db::preparedStmt("UPDATE accounts_sessions SET unitychat = 0 WHERE charid = ? LIMIT 1", PChar->id);
             PChar->PUnityChat = nullptr;
             members.erase(members.begin() + i);
             break;

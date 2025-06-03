@@ -38,7 +38,7 @@ public:
         return m_PLuaAttack;
     }
 
-    bool getCritical() const;
+    bool isCritical() const;
     void setCritical(bool critical);
 
     friend std::ostream& operator<<(std::ostream& out, const CLuaAttack& action);

@@ -48,10 +48,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
     then
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
-
     elseif csid == 301 then
-        player:addKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
+        npcUtil.giveKeyItem(player, xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
         player:tradeComplete()
     end
 end

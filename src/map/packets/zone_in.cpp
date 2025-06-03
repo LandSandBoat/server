@@ -85,6 +85,7 @@ struct GP_MYROOM_DANCER_PKT
 };
 
 // PS2: SAVE_CONF
+// Seems to be a truncated version of SAVE_CONF missing PvpFlg and AreaCode?
 struct SAVE_CONF_PKT
 {
     uint32_t unknown00[3]; // PS2: (Multiple fields; bits.)
@@ -162,11 +163,11 @@ uint16 GetMogHouseModelID(CCharEntity* PChar)
         case REGION_TYPE::SARUTA_FRONT:
             return 219;
         case REGION_TYPE::SANDORIA:
-            return PChar->profile.nation == 0 ? 0x0121 : 0x0101;
+            return PChar->profile.nation == NATION_SANDORIA ? 0x0121 : 0x0101;
         case REGION_TYPE::BASTOK:
-            return PChar->profile.nation == 1 ? 0x0122 : 0x0102;
+            return PChar->profile.nation == NATION_BASTOK ? 0x0122 : 0x0102;
         case REGION_TYPE::WINDURST:
-            return PChar->profile.nation == 2 ? 0x0123 : 0x0120;
+            return PChar->profile.nation == NATION_WINDURST ? 0x0123 : 0x0120;
         case REGION_TYPE::JEUNO:
             return 0x0100;
         case REGION_TYPE::ADOULIN_ISLANDS:
@@ -332,16 +333,18 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     auto const& nameStr = PChar->getName();
     std::memcpy(buffer_.data() + 0x84, nameStr.data(), nameStr.size());
 
-    ref<uint32>(0xA0) = PChar->GetPlayTime(); // time spent by the character in the game from the moment of creation
+    ref<uint32>(0xA0) = static_cast<uint32>(timer::count_seconds(PChar->GetPlayTime())); // time spent by the character in the game from the moment of creation
 
     ref<uint8>(0xAE) = GetMogHouseLeavingFlag(PChar);
 
-    uint32 pktTime = CVanaTime::getInstance()->getVanaTime();
+    auto currentTime  = earth_time::now();
+    ref<uint32>(0x38) = earth_time::timestamp(currentTime);
+    ref<uint32>(0x3C) = earth_time::vanadiel_timestamp(currentTime);
 
-    ref<uint32>(0x38) = pktTime + VTIME_BASEDATE;
-    ref<uint32>(0x3C) = pktTime;
-
-    ref<uint32>(0xA4) = PChar->GetTimeRemainingUntilDeathHomepoint();
+    // The client uses 66min as the maximum amount of time for death
+    // Once this value reaches below 6min then the client will force homepoint the character
+    auto deadRemaining = timer::count_seconds(6min + PChar->GetTimeUntilDeathHomepoint());
+    ref<uint32>(0xA4)  = static_cast<uint32>(60 * deadRemaining);
 
     ref<uint8>(0xB4) = PChar->GetMJob();
     ref<uint8>(0xB7) = PChar->GetSJob();
@@ -352,7 +355,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     ref<uint32>(0xEC) = PChar->GetMaxMP();
     // ref<uint8>(0xEF) = TODO: implement flag of 1 = high for "has unlocked sub and can change jobs"
 
-    std::memcpy(&buffer_[offsetof(GP_SERV_LOGIN, ConfData)], &PChar->playerConfig, sizeof(SAVE_CONF));
+    std::memcpy(&buffer_[offsetof(GP_SERV_LOGIN, ConfData)], &PChar->playerConfig, sizeof(SAVE_CONF_PKT));
 
     ref<uint8>(0x100) = 0x01; // observed: RoZ = 3, CoP = 5, ToAU = 9, WoTG = 11, SoA/original areas = 1
 

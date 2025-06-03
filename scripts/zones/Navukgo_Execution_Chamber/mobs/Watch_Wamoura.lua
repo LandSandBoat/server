@@ -6,7 +6,7 @@
 local entity = {}
 
 local function curl(mob)
-    mob:setSpeed(20)
+    mob:setBaseSpeed(20)
     mob:setMod(xi.mod.DMG, -9500)
     mob:addStatusEffect(xi.effect.BLAZE_SPIKES, 100, 0, 0)
     mob:setAnimationSub(5)
@@ -14,7 +14,7 @@ local function curl(mob)
 end
 
 local function stretch(mob)
-    mob:setSpeed(100)
+    mob:setBaseSpeed(100)
     mob:delMod(xi.mod.DMG, -9500)
     mob:delStatusEffect(xi.effect.BLAZE_SPIKES)
     mob:setAnimationSub(4)

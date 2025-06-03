@@ -102,6 +102,13 @@ enum BEHAVIOR : uint16
     BEHAVIOR_NO_TURN      = 0x400  // mob does not turn to face target
 };
 
+enum class ClaimType : uint8
+{
+    Exclusive    = 0, // Regular exclusive claim behavior. Only one entity and related group can attack.
+    NonExclusive = 1, // Regular claim behavior but multiple unrelated entities can attack and compete for claim. Rewards distributed to last claiming entity.
+    Unclaimable  = 2, // Mob cannot be claimed. Multiple unrelated entities can attack. Rewards will not be distributed.
+};
+
 class CMobSkillState;
 
 class CMobEntity : public CBattleEntity
@@ -118,19 +125,21 @@ public:
 
     uint16 TPUseChance(); // return % chance to use TP move per 400ms tick
 
-    bool       CanDeaggro() const;
-    time_point GetDespawnTime();
-    void       SetDespawnTime(duration _duration);
-    uint32     GetRandomGil();   // returns a random amount of gil
-    bool       CanRoamHome();    // is it possible for me to walk back?
-    bool       CanRoam();        // check if mob can walk around
-    void       TapDeaggroTime(); // call CMobController->TapDeaggroTime if PAI->GetController() is a CMobController, otherwise do nothing.
+    bool              CanDeaggro() const;
+    timer::time_point GetDespawnTime();
+    void              SetDespawnTime(timer::duration _duration);
+    uint32            GetRandomGil();   // returns a random amount of gil
+    bool              CanRoamHome();    // is it possible for me to walk back?
+    bool              CanRoam();        // check if mob can walk around
+    void              TapDeaggroTime(); // call CMobController->TapDeaggroTime if PAI->GetController() is a CMobController, otherwise do nothing.
 
     bool CanLink(position_t* pos, int16 superLink = 0);
 
     bool CanDropGil();    // mob has gil to drop
     bool CanStealGil();   // can steal gil from mob
     void ResetGilPurse(); // reset total gil held
+    auto GetEligibleSeals() -> std::vector<uint16>;
+    auto GetEligibleGeodes() -> std::vector<uint16>;
 
     void  setMobMod(uint16 type, int16 value);
     int16 getMobMod(uint16 type);
@@ -176,9 +185,9 @@ public:
     virtual void FadeOut() override;
     virtual bool isWideScannable() override;
 
-    bool   m_AllowRespawn; // if true, allow respawn
-    uint32 m_RespawnTime;  // respawn time
-    uint32 m_DropItemTime; // time until monster death animation
+    bool            m_AllowRespawn; // if true, allow respawn
+    timer::duration m_RespawnTime;  // respawn time
+    timer::duration m_DropItemTime; // time until monster death animation
 
     uint32 m_DropID; // dropid of items to be dropped. dropid in Database (mob_droplist)
 
@@ -229,10 +238,11 @@ public:
     position_t m_SpawnPoint; // spawn point of mob
 
     uint8  m_Element;
-    uint8  m_HiPCLvl;     // Highest Level of Player Character that hit the Monster
-    uint8  m_HiPartySize; // Largest party size that hit the Monster
-    int16  m_THLvl;       // Highest Level of Treasure Hunter that apply to drops
-    bool   m_ItemStolen;  // if true, mob has already been robbed. reset on respawn. also used for thf maat fight
+    uint8  m_HiPCLvl;       // Highest Level of Player Character that hit the Monster
+    uint8  m_HiPartySize;   // Largest party size that hit the Monster
+    int16  m_THLvl;         // Highest Level of Treasure Hunter that apply to drops
+    bool   m_ItemStolen;    // if true, mob has already been robbed. reset on respawn. also used for thf maat fight
+    bool   m_ItemDespoiled; // if true, mob has already been despoiled. reset on respawn.
     uint16 m_Family;
     uint16 m_SuperFamily;
     uint16 m_MobSkillList; // Mob skill list defined from mob_pools
@@ -254,7 +264,7 @@ public:
 
     CMobSpellContainer* SpellContainer;
 
-    bool m_IsClaimable;
+    bool m_IsPathingHome;
 
     static constexpr float sound_range{ 8.f };
     static constexpr float sight_range{ 15.f };
@@ -265,7 +275,7 @@ protected:
     void DropItems(CCharEntity* PChar);
 
 private:
-    time_point                     m_DespawnTimer{ time_point::min() }; // Despawn Timer to despawn mob after set duration
+    timer::time_point              m_DespawnTimer{ timer::time_point::min() }; // Despawn Timer to despawn mob after set duration
     std::unordered_map<int, int16> m_mobModStat;
     std::unordered_map<int, int16> m_mobModStatSave;
     static constexpr float         roam_home_distance{ 60.f };

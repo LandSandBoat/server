@@ -38,9 +38,6 @@ local function isNpcInBounds(npcXpos, npcZpos, signPostTable)
     return false
 end
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local xPos = npc:getXPos()
     local zPos = npc:getZPos()
@@ -50,12 +47,6 @@ entity.onTrigger = function(player, npc)
             player:messageSpecial(ID.text.SIGNPOST_OFFSET + offsetValue)
         end
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

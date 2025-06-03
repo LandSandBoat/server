@@ -9,9 +9,6 @@ local ID = zones[xi.zone.WINDURST_WATERS]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local hatMask = player:getCharVar('QuestHatInHand_var')
 
@@ -29,9 +26,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(43) -- Standard Conversation
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

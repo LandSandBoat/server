@@ -7,9 +7,6 @@ local ID = zones[xi.zone.RIVERNE_SITE_B01]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local offset = npc:getID() - ID.npc.DISPLACEMENT_OFFSET
     if offset >= 0 and offset <= 31 then
@@ -19,9 +16,6 @@ entity.onTrigger = function(player, npc)
     elseif offset > 35 and offset <= 41 then
         player:startOptionalCutscene(offset)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

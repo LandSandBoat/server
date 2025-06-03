@@ -3,36 +3,25 @@
 --  NPC: Bagnobrok
 -- Movalpolos Regional Merchant
 -----------------------------------
-local ID = zones[xi.zone.PORT_BASTOK]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
-    if GetRegionOwner(xi.region.MOVALPOLOS) ~= xi.nation.BASTOK then
-        player:showText(npc, ID.text.BAGNOBROK_CLOSED_DIALOG)
-    else
+    if GetRegionOwner(xi.region.MOVALPOLOS) == xi.nation.BASTOK then
         local stock =
         {
-            640,    11,    -- Copper Ore
-            4450,  694,    -- Coral Fungus
-            4375, 4032,    -- Danceshroom
-            1650, 6500,    -- Kopparnickel Ore
-            5165,  736,    -- Movalpolos Water
+            { xi.item.BOTTLE_OF_MOVALPOLOS_WATER,  840 },
+            { xi.item.CHUNK_OF_COPPER_ORE,          12 },
+            { xi.item.DANCESHROOM,                4704 },
+            { xi.item.CORAL_FUNGUS,                792 },
+            { xi.item.CHUNK_OF_KOPPARNICKEL_ORE,   840 },
         }
 
-        player:showText(npc, ID.text.BAGNOBROK_OPEN_DIALOG)
+        player:showText(npc, zones[xi.zone.PORT_BASTOK].text.BAGNOBROK_OPEN_DIALOG)
         xi.shop.general(player, stock, xi.fameArea.BASTOK)
+    else
+        player:showText(npc, zones[xi.zone.PORT_BASTOK].text.BAGNOBROK_CLOSED_DIALOG)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

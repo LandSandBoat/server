@@ -24,6 +24,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "common/timer.h"
 #include "spell.h"
 
 class CBattleEntity;
@@ -35,7 +36,7 @@ public:
     virtual ~CController()
     {
     }
-    virtual void Tick(time_point tick) = 0;
+    virtual void Tick(timer::time_point tick) = 0;
     virtual void Despawn();
     virtual void Reset();
     virtual bool Cast(uint16 targid, SpellID spellid);
@@ -58,11 +59,11 @@ public:
     bool canUpdate{ true };
 
 protected:
-    time_point     m_Tick;
-    CBattleEntity* POwner;
-    bool           m_AutoAttackEnabled{ true };
-    bool           m_WeaponSkillEnabled{ true };
-    bool           m_MagicCastingEnabled{ true };
+    timer::time_point m_Tick;
+    CBattleEntity*    POwner;
+    bool              m_AutoAttackEnabled{ true };
+    bool              m_WeaponSkillEnabled{ true };
+    bool              m_MagicCastingEnabled{ true };
 };
 
 #endif

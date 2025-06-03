@@ -4,13 +4,8 @@
 -- Note: Starts Quest "The Fighting Fourth"
 -- !pos 422.461 -48.000 175
 -----------------------------------
-local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS_S]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
-
-entity.onTrade = function(player, npc, trade)
-end
 
 entity.onTrigger = function(player, npc)
     if player:getCampaignAllegiance() > 0 then
@@ -27,13 +22,9 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 7 and option == 0 then
-        player:addKeyItem(xi.ki.BLUE_RECOMMENDATION_LETTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BLUE_RECOMMENDATION_LETTER)
+        npcUtil.giveKeyItem(player, xi.ki.BLUE_RECOMMENDATION_LETTER)
     end
 end
 

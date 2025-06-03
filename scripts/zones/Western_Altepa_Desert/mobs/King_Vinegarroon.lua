@@ -5,7 +5,7 @@
 ---@type TMobEntity
 local entity = {}
 
-local mobRegen = function(mob)
+local function mobRegen(mob)
     local hour = VanadielHour()
 
     if hour >= 6 and hour <= 20 then
@@ -23,30 +23,16 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PETRIFY, { chance = 100 })
 end
 
-entity.onMobDisengage = function(mob)
-    local weather = mob:getWeather()
-
-    if weather ~= xi.weather.DUST_STORM and weather ~= xi.weather.SAND_STORM then
-        DespawnMob(mob:getID())
-    end
-end
-
 entity.onMobRoam = function(mob)
     local weather = mob:getWeather()
-    mobRegen(mob)
-
-    if weather ~= xi.weather.DUST_STORM and weather ~= xi.weather.SAND_STORM then
+    if
+        weather ~= xi.weather.DUST_STORM and
+        weather ~= xi.weather.SAND_STORM
+    then
         DespawnMob(mob:getID())
     end
-end
 
-entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.VINEGAR_EVAPORATOR)
-end
-
-entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
+    mobRegen(mob)
 end
 
 entity.onMobFight = function(mob, target)
@@ -60,6 +46,7 @@ entity.onMobFight = function(mob, target)
         position = mob:getPos(),
         wait = 3,
     }
+
     for _, condition in ipairs(drawInTable.conditions) do
         if condition then
             mob:setMobMod(xi.mobMod.NO_MOVE, 1)
@@ -75,10 +62,27 @@ end
 
 entity.onMobSkillTarget = function(target, mob, mobskill)
     if mobskill:isAoE() then
-        for _, member in ipairs(target:getAlliance()) do
-            mob:drawIn(member)
+        -- Chance for draw in to be single target or alliance
+        if math.random(0, 100) >= 50 then
+            mob:drawIn()
+        else
+            for _, member in ipairs(target:getAlliance()) do
+                mob:drawIn(member, 0, 0)
+            end
         end
+
+        -- KV always does an AOE TP move followed by a single target TP move
+        mob:useMobAbility(({ 353, 350, 719, 720 })[math.random(1, 4)])
     end
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+    player:addTitle(xi.title.VINEGAR_EVAPORATOR)
+end
+
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
 end
 
 return entity

@@ -21,31 +21,74 @@
 
 #pragma once
 
+#include <asio.hpp>
+
 #include <memory>
 #include <string>
 
-#include <argparse/argparse.hpp>
+//
+// Forward declarations
+//
 
-#include "console_service.h"
+class Arguments;
+class ConsoleService;
+
+//
+// Globally exposed variables
+//
 
 class Application
 {
 public:
     Application(std::string const& serverName, int argc, char** argv);
-    virtual ~Application() = default;
+    virtual ~Application();
 
     Application(const Application&)            = delete;
     Application(Application&&)                 = delete;
     Application& operator=(const Application&) = delete;
     Application& operator=(Application&&)      = delete;
 
-    virtual bool IsRunning();
-    virtual void Tick();
+    //
+    // Init
+    //
+
+    void trySetConsoleTitle();
+    void registerSignalHandlers();
+    void usercheck();
+    void tryIncreaseRLimits();
+    void tryDisableQuickEditMode();
+    void tryRestoreQuickEditMode();
+    void prepareLogging();
+
+    virtual void loadConsoleCommands() = 0;
+
+    void markLoaded();
+
+    //
+    // Runtime
+    //
+
+    bool isRunning();
+    void requestExit();
+
+    // Is expected to block until requestExit() is called and/or isRunning() returns false
+    virtual void run() = 0;
+
+    bool isRunningInCI();
+
+    //
+    // Member accessors
+    //
+
+    auto ioContext() -> asio::io_context&;
+    auto args() -> Arguments&;
+    auto console() -> ConsoleService&;
 
 protected:
-    std::string       m_ServerName;
-    std::atomic<bool> m_RequestExit;
+    asio::io_context io_context_;
 
-    std::unique_ptr<argparse::ArgumentParser> gArgParser;
-    std::unique_ptr<ConsoleService>           gConsoleService;
+    std::string serverName_;
+
+    std::unique_ptr<Arguments>      args_;
+    std::unique_ptr<ConsoleService> consoleService_;
 };

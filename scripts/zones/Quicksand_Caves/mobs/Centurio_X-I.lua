@@ -9,6 +9,9 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 2000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 6000)
+    mob:setMobMod(xi.mobMod.MUG_GIL, 630)
 end
 
 entity.onMobSpawn = function(mob)

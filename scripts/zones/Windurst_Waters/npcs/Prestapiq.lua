@@ -4,38 +4,25 @@
 -- Only sells when Windurst controls Movalpolos
 -- Confirmed shop stock, August 2013
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WATERS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
-    local regionOwner = GetRegionOwner(xi.region.MOVALPOLOS)
-
-    if regionOwner ~= xi.nation.WINDURST then
-        player:showText(npc, ID.text.PRESTAPIQ_CLOSED_DIALOG)
-    else
-        player:showText(npc, ID.text.PRESTAPIQ_OPEN_DIALOG)
-
+    if GetRegionOwner(xi.region.MOVALPOLOS) == xi.nation.WINDURST then
         local stock =
         {
-            640,    11,   --Copper Ore
-            4450,   694,   --Coral Fungus
-            4375,  4032,   --Danceshroom
-            1650,  6500,   --Kopparnickel Ore
-            5165,   736    --Movalpolos Water
+            { xi.item.BOTTLE_OF_MOVALPOLOS_WATER,  840 },
+            { xi.item.CHUNK_OF_COPPER_ORE,          12 },
+            { xi.item.DANCESHROOM,                4704 },
+            { xi.item.CORAL_FUNGUS,                792 },
+            { xi.item.CHUNK_OF_KOPPARNICKEL_ORE,   840 },
         }
+
+        player:showText(npc, zones[xi.zone.WINDURST_WATERS].text.PRESTAPIQ_OPEN_DIALOG)
         xi.shop.general(player, stock, xi.fameArea.WINDURST)
+    else
+        player:showText(npc, zones[xi.zone.WINDURST_WATERS].text.PRESTAPIQ_CLOSED_DIALOG)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

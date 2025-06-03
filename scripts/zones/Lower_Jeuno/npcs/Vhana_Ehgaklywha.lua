@@ -10,9 +10,6 @@ local ID = zones[xi.zone.LOWER_JEUNO]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     -- speaking to pathing NPCs stops their progress, and they never resume
     -- so let's comment this out
@@ -47,12 +44,6 @@ entity.onPath = function(npc)
             end
         end
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

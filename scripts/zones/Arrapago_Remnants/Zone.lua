@@ -5,22 +5,22 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, 420, 5, -339, 0, 0, 0)
-    zone:registerTriggerArea(2, 420, 5, -499, 0, 0, 0)
-    zone:registerTriggerArea(3, 259, 5, -499, 0, 0, 0)
-    zone:registerTriggerArea(4, 259, 5, -339, 0, 0, 0)
-    zone:registerTriggerArea(5, 340, 5, 100, 0, 0, 0)
-    zone:registerTriggerArea(6, 339, 5, 419, 0, 0, 0)
-    zone:registerTriggerArea(7, 339, 5, 500, 0, 0, 0)
-    zone:registerTriggerArea(8, -379, 5, -620, 0, 0, 0)
-    zone:registerTriggerArea(9, -300, 5, -461, 0, 0, 0)
-    zone:registerTriggerArea(10, -339, 5, -99, 0, 0, 0)
-    zone:registerTriggerArea(11, -339, 5, 300, 0, 0, 0)
+    zone:registerCylindricalTriggerArea(1, 420, -339, 4)
+    zone:registerCylindricalTriggerArea(2, 420, -499, 4)
+    zone:registerCylindricalTriggerArea(3, 259, -499, 4)
+    zone:registerCylindricalTriggerArea(4, 259, -339, 4)
+    zone:registerCylindricalTriggerArea(5, 340, 100, 4)
+    zone:registerCylindricalTriggerArea(6, 339, 419, 4)
+    zone:registerCylindricalTriggerArea(7, 339, 500, 4)
+    zone:registerCylindricalTriggerArea(8, -379, -620, 4)
+    zone:registerCylindricalTriggerArea(9, -300, -461, 4)
+    zone:registerCylindricalTriggerArea(10, -339, -99, 4)
+    zone:registerCylindricalTriggerArea(11, -339, 300, 4)
 end
 
 zoneObject.onInstanceZoneIn = function(player, instance)
     if player:getInstance() == nil then
-        player:setPos(0, 0, 0, 0, xi.zone.ALZADAAL_UNDERSEA_RUINS)
+        player:setPos(-579, -0.050, -100, 192, xi.zone.ALZADAAL_UNDERSEA_RUINS)
 
         return
     end
@@ -35,9 +35,8 @@ zoneObject.onInstanceZoneIn = function(player, instance)
         local entrypos = instance:getEntryPos()
 
         player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
+        player:startEvent(101)
     end
-
-    player:addTempItem(5399)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

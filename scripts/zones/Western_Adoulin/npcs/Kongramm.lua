@@ -6,9 +6,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(xi.mission.log_id.SOA) == xi.mission.id.soa.A_CURSE_FROM_THE_PAST and
@@ -22,9 +19,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(149)
         end
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

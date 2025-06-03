@@ -9,9 +9,6 @@ local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     if player:hasKeyItem(xi.ki.OLD_RUSTY_KEY) then
         player:startEvent(64, xi.ki.OLD_RUSTY_KEY)
@@ -22,14 +19,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 64 and option == 1 then
         player:delKeyItem(xi.ki.OLD_RUSTY_KEY)
-        player:addKeyItem(xi.ki.PAINTBRUSH_OF_SOULS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PAINTBRUSH_OF_SOULS)
+        npcUtil.giveKeyItem(player, xi.ki.PAINTBRUSH_OF_SOULS)
     end
 end
 

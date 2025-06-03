@@ -28,10 +28,4 @@ entity.onTrigger = function(player, npc)
     GetNPCByID(npcID, instance):setStatus(xi.status.DISAPPEAR)
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
-end
-
 return entity

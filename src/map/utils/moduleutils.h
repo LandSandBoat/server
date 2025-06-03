@@ -99,7 +99,7 @@ namespace moduleutils
     // applied, and we can warn the user if there have been any
     // problems.
 
-    void LoadLuaModules();
+    void LoadLuaModules(IPP mapIPP);
     void CleanupLuaModules();
     void TryApplyLuaModules();
     void ReportLuaModuleUsage();

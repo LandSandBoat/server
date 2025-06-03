@@ -33,72 +33,44 @@ local killCounter = function(mob, player, optParams)
 end
 
 local assessment = function(player, npc)
-    local startTime     = mission:getVar(player, 'StartTime')
-    local startDay      = mission:getVar(player, 'StartDay')
-    local startHour     = mission:getVar(player, 'StartHour')
-    local secondsPassed = os.time() - startTime
-    local hoursPassed   = VanadielHour()
-    local killCount     = mission:getVar(player, 'KillCount')
-    local completed     = player:hasCompletedMission(mission.areaId, mission.missionId)
+    local currentTime = VanadielTime()
+    local endTime     = mission:getVar(player, 'EndTime')
+    local killCount   = mission:getVar(player, 'KillCount')
+    local completed   = player:hasCompletedMission(mission.areaId, mission.missionId)
 
     -- player took too long to speak under requirements in time, so they fail mission
-    if
-        (not completed and secondsPassed > 3456) or
-        (completed and secondsPassed > 6912)
-    then
+    if currentTime > endTime then
         return mission:progressEvent(202)
     end
 
+    -- player hasn't waited long enough to be assessed
+    if currentTime < endTime - xi.vanaTime.HOUR then
+        local hoursRemaining = math.ceil((endTime - currentTime) / xi.vanaTime.HOUR)
+        if completed then
+            return mission:progressEvent(204, 0, 0, 0, 0, 0, VanadielHour(), hoursRemaining, 0)
+        else
+            return mission:progressEvent(183, 0, VanadielHour(), hoursRemaining)
+        end
+    end
+
     -- handle the events for first-time doing the mission
-    if not completed and secondsPassed > 3312 then
-        local event = 198
+    if not completed then
+        local event = completed and 208 or 198
 
         if killCount >= 35 then
-            event = 201
+            event = completed and 206 or 201
         elseif killCount >= 30 then
-            event = 200
-        elseif killCount >= 19 then
+            event = completed and 209 or 200
+        elseif not completed and killCount >= 19 then
             event = 199
         end
 
         return mission:progressEvent(event, 0, VanadielHour(), 1, killCount)
-    -- handle the events for repeating mission
-    elseif completed and secondsPassed > 6768 then
-        local event = 208
-
-        if killCount >= 35 then
-            event = 206
-        elseif killCount >= 30 then
-            event = 209
-        end
-
-        return mission:progressEvent(event, 0, VanadielHour(), 1, killCount)
-    -- player hasn't waited long enough to be assessed
-    else
-        if VanadielDayOfTheYear() == startDay then
-            hoursPassed = hoursPassed - startHour
-        elseif VanadielDayOfTheYear() == startDay + 1 then
-            hoursPassed = hoursPassed - startHour + 24
-        else
-            if completed then
-                hoursPassed = (24 - startHour) + hoursPassed + 24
-            else
-                hoursPassed = (24 - startHour) + hoursPassed
-            end
-        end
-
-        if completed then
-            return mission:progressEvent(204, 0, 0, 0, 0, 0, VanadielHour(), 48 - hoursPassed, 0)
-        else
-            return mission:progressEvent(183, 0, VanadielHour(), 24 - hoursPassed)
-        end
     end
 end
 
 local failMission = function(player, csid, option, npc)
-    mission:setVar(player, 'StartDay', 0)
-    mission:setVar(player, 'StartHour', 0)
-    mission:setVar(player, 'StartTime', 0)
+    mission:setVar(player, 'EndTime', 0)
     mission:setVar(player, 'KillCount', 0)
     player:delKeyItem(xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
     player:delMission(mission.areaId, mission.missionId)
@@ -234,9 +206,7 @@ mission.sections =
                     if option == 2 then
                         player:setMissionStatus(mission.areaId, 2)
                         npcUtil.giveKeyItem(player, xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
-                        mission:setVar(player, 'StartDay', VanadielDayOfTheYear())
-                        mission:setVar(player, 'StartHour', VanadielHour())
-                        mission:setVar(player, 'StartTime', os.time())
+                        mission:setVar(player, 'EndTime', VanadielTime() + xi.vanaTime.DAY)
                     end
                 end,
 
@@ -244,9 +214,7 @@ mission.sections =
                     if option == 2 then
                         player:setMissionStatus(mission.areaId, 2)
                         npcUtil.giveKeyItem(player, xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
-                        mission:setVar(player, 'StartDay', VanadielDayOfTheYear())
-                        mission:setVar(player, 'StartHour', VanadielHour())
-                        mission:setVar(player, 'StartTime', os.time())
+                        mission:setVar(player, 'EndTime', VanadielTime() + (2 * xi.vanaTime.DAY))
                     end
                 end,
             },

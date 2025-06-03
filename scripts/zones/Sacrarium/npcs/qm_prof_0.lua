@@ -9,9 +9,6 @@ local ID = zones[xi.zone.SACRARIUM]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local isSpawnPoint = npc:getLocalVar('hasProfessorMariselle') == 1
 
@@ -21,12 +18,6 @@ entity.onTrigger = function(player, npc)
         player:messageSpecial(ID.text.DRAWER_OPEN)
         player:messageSpecial(ID.text.DRAWER_EMPTY)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

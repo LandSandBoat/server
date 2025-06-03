@@ -56,12 +56,12 @@ uint32 CLuaAction::getPrimaryTargetID()
 
 void CLuaAction::setRecast(uint16 recast)
 {
-    m_PLuaAction->recast = recast;
+    m_PLuaAction->recast = std::chrono::seconds(recast);
 }
 
 uint16 CLuaAction::getRecast()
 {
-    return m_PLuaAction->recast;
+    return static_cast<uint16>(timer::count_seconds(m_PLuaAction->recast));
 }
 
 void CLuaAction::actionID(uint16 actionid)

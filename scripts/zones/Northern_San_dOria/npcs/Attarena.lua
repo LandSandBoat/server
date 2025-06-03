@@ -18,19 +18,13 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            623,   119,    -- Bay Leaves
-            4154, 6440,    -- Holy Water
+            { 623,   119, }, -- Bay Leaves
+            { 4154, 6440, }, -- Holy Water
         }
 
         player:showText(npc, ID.text.ATTARENA_OPEN_DIALOG)
         xi.shop.general(player, stock, xi.fameArea.SANDORIA)
     end
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -9,9 +9,6 @@ local ID = zones[xi.zone.BIBIKI_BAY]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     local curentticket = 0
     if  player:hasKeyItem(xi.ki.MANACLIPPER_TICKET) then
@@ -28,19 +25,14 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 35 then
         if option == 1 then
             player:delGil(80)
-            player:addKeyItem(xi.ki.MANACLIPPER_TICKET)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MANACLIPPER_TICKET)
+            npcUtil.giveKeyItem(player, xi.ki.MANACLIPPER_TICKET)
         elseif option == 2 then
             player:delGil(500)
-            player:addKeyItem(xi.ki.MANACLIPPER_MULTI_TICKET)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MANACLIPPER_MULTI_TICKET)
+            npcUtil.giveKeyItem(player, xi.ki.MANACLIPPER_MULTI_TICKET)
             player:setCharVar('Manaclipper_Ticket', 10)
         end
     end

@@ -41,11 +41,8 @@ INSERT INTO `mob_pool_mods` VALUES (44,368,150,0); -- REGAIN: 150
 -- Agas
 INSERT INTO `mob_pool_mods` VALUES (60,370,20,0); -- REGEN: 20
 
--- Airi
-INSERT INTO `mob_pool_mods` VALUES (70,48,434,1); -- SHARE_TARGET: 434
-
 -- Animated Shield
-INSERT INTO `mob_pool_mods` VALUES (154,163,-70,0); -- DMGMAGIC: -70
+INSERT INTO `mob_pool_mods` VALUES (154,163,-1250,0); -- DMGMAGIC: -1250
 
 -- Antican Praetor
 INSERT INTO `mob_pool_mods` VALUES (181,1,6000,1); -- GIL_MIN: 6000
@@ -139,7 +136,7 @@ INSERT INTO `mob_pool_mods` VALUES (979,9,60,1); -- HP_HEAL_CHANCE: 60
 INSERT INTO `mob_pool_mods` VALUES (1013,28,-100,1); -- EXP_BONUS: -100
 
 -- Effigy Prototype
-INSERT INTO `mob_pool_mods` VALUES (1178,163,-100,0); -- DMGMAGIC: -100
+INSERT INTO `mob_pool_mods` VALUES (1178,163,-1000,0); -- DMGMAGIC: -1000
 
 -- Enkidu
 INSERT INTO `mob_pool_mods` VALUES (1234,4,4,1); -- SIGHT_RANGE: 4
@@ -187,31 +184,22 @@ INSERT INTO `mob_pool_mods` VALUES (1792,368,70,0); -- REGAIN: 70
 -- Greater Manticore
 INSERT INTO `mob_pool_mods` VALUES (1806,28,10,1); -- EXP_BONUS: 10
 
--- Guivre
-INSERT INTO `mob_pool_mods` VALUES (1841,28,10,1); -- EXP_BONUS: 10
-
 -- Hydras Hound
 INSERT INTO `mob_pool_mods` VALUES (2032,34,20,1);  -- MAGIC_COOL: 20
 INSERT INTO `mob_pool_mods` VALUES (2032,35,0,1);   -- STANDBACK_COOL: 0
 INSERT INTO `mob_pool_mods` VALUES (2032,244,15,0); -- SILENCERES: 15
 
 -- Icon Prototype
-INSERT INTO `mob_pool_mods` VALUES (2047,163,-100,0); -- DMGMAGIC: -100
+INSERT INTO `mob_pool_mods` VALUES (2047,163,-1000,0); -- DMGMAGIC: -1000
 
 -- Intulo
 INSERT INTO `mob_pool_mods` VALUES (2083,29,25,0); -- MDEF: 25
-
--- Iruci
-INSERT INTO `mob_pool_mods` VALUES (2105,48,434,1); -- SHARE_TARGET: 434
 
 -- Ixzdei Blm
 INSERT INTO `mob_pool_mods` VALUES (2114,4,15,1);  -- SIGHT_RANGE: 15
 INSERT INTO `mob_pool_mods` VALUES (2114,5,15,1);  -- SOUND_RANGE: 15
 INSERT INTO `mob_pool_mods` VALUES (2114,11,30,1); -- LINK_RADIUS: 30
 INSERT INTO `mob_pool_mods` VALUES (2114,34,60,1); -- MAGIC_COOL: 60
-
--- Jormungand
-INSERT INTO `mob_pool_mods` VALUES (2156,370,25,0); -- REGEN: 25
 
 -- Kaiser Behemoth S
 INSERT INTO `mob_pool_mods` VALUES (2180,3,100,1); -- MP_BASE: 100
@@ -301,12 +289,6 @@ INSERT INTO `mob_pool_mods` VALUES (3051,4,4,1); -- SIGHT_RANGE: 4
 -- Parata
 INSERT INTO `mob_pool_mods` VALUES (3099,23,23,1); -- IMMUNITY: 23
 
--- Pey
-INSERT INTO `mob_pool_mods` VALUES (3124,48,434,1); -- SHARE_TARGET: 434
-
--- Phantom Worm
-INSERT INTO `mob_pool_mods` VALUES (3129,370,50,0); -- REGEN: 50
-
 -- Polar Hare
 INSERT INTO `mob_pool_mods` VALUES (3168,28,10,1); -- EXP_BONUS: 10
 
@@ -353,11 +335,9 @@ INSERT INTO `mob_pool_mods` VALUES (3540,3,100,1); -- MP_BASE: 100
 INSERT INTO `mob_pool_mods` VALUES (3549,370,50,0); -- REGEN: 50
 
 -- Shikaree X
-INSERT INTO `mob_pool_mods` VALUES (3598,161,30,0); -- DMGPHYS: 30
 INSERT INTO `mob_pool_mods` VALUES (3598,368,70,0); -- REGAIN: 70
 
 -- Shikaree Y
-INSERT INTO `mob_pool_mods` VALUES (3600,161,30,0); -- DMGPHYS: 30
 INSERT INTO `mob_pool_mods` VALUES (3600,368,70,0); -- REGAIN: 70
 
 -- Shikaree Z
@@ -371,7 +351,7 @@ INSERT INTO `mob_pool_mods` VALUES (3667,28,-100,1); -- EXP_BONUS: -100
 INSERT INTO `mob_pool_mods` VALUES (3684,3,30,1); -- MP_BASE: 30
 
 -- Statue Prototype
-INSERT INTO `mob_pool_mods` VALUES (3759,163,-100,0); -- DMGMAGIC: -100
+INSERT INTO `mob_pool_mods` VALUES (3759,163,-1000,0); -- DMGMAGIC: -1000
 
 -- Stone Golem
 INSERT INTO `mob_pool_mods` VALUES (3781,4,4,1); -- SIGHT_RANGE: 4
@@ -392,13 +372,8 @@ INSERT INTO `mob_pool_mods` VALUES (3824,29,2,1); -- ASSIST: 2
 -- Tavnazian Ram
 INSERT INTO `mob_pool_mods` VALUES (3853,28,23,1); -- EXP_BONUS: 23
 
--- Tiamat
-INSERT INTO `mob_pool_mods` VALUES (3916,29,50,0);   -- MDEF: 50
-INSERT INTO `mob_pool_mods` VALUES (3916,164,-50,0); -- DMGRANGE: -50
-INSERT INTO `mob_pool_mods` VALUES (3916,370,25,0);  -- REGEN: 25
-
 -- Tombstone Prototype
-INSERT INTO `mob_pool_mods` VALUES (3941,163,-100,0); -- DMGMAGIC: -100
+INSERT INTO `mob_pool_mods` VALUES (3941,163,-1000,0); -- DMGMAGIC: -1000
 
 -- Tuchulcha
 INSERT INTO `mob_pool_mods` VALUES (4046,23,6191,1); -- IMMUNITY: 6191
@@ -559,10 +534,6 @@ INSERT INTO `mob_pool_mods` VALUES (4222,4,4,1); -- SIGHT_RANGE: 4
 -- Virulent Peiste
 INSERT INTO `mob_pool_mods` VALUES (4238,28,5,1); -- EXP_BONUS: 5
 
--- Vrtra
-INSERT INTO `mob_pool_mods` VALUES (4261,29,50,0);  -- MDEF: 50
-INSERT INTO `mob_pool_mods` VALUES (4261,370,10,0); -- REGEN: 10
-
 -- Woodland Sage
 INSERT INTO `mob_pool_mods` VALUES (4361,5,16,1);   -- SOUND_RANGE: 16
 INSERT INTO `mob_pool_mods` VALUES (4361,288,55,0); -- DOUBLE_ATTACK: 55
@@ -620,9 +591,20 @@ INSERT INTO `mob_pool_mods` VALUES (5922,6,150,0);      -- MPP: 150
 -- Trust: Fablinix
 INSERT INTO `mob_pool_mods` VALUES (5932,6,250,0);    -- MPP: 250
 
+-- Trust: Karaha-Baruha
+INSERT INTO `mob_pool_mods` VALUES (5936,3,-10,0); -- HPP: -10
+INSERT INTO `mob_pool_mods` VALUES (5936,6,20,0); -- MPP: 20
+
+-- Trust: Areuhat
+INSERT INTO `mob_pool_mods` VALUES (5939,1046,30,0); -- ENHANCES_BLOOD_RAGE: 30
+INSERT INTO `mob_pool_mods` VALUES (5939,234,8,0);  -- DEMON_KILLER: 8
+
 -- Trust: Ferreous Coffin
 INSERT INTO `mob_pool_mods` VALUES (5944,3,-10,0);      -- HPP: -10
 INSERT INTO `mob_pool_mods` VALUES (5944,6,35,0);       -- MPP: 35
+
+-- Trust: Rahal
+INSERT INTO `mob_pool_mods` VALUES (5951,233,8,0); -- DRAGON_KILLER: 8
 
 -- Trust: Prishe II
 INSERT INTO `mob_pool_mods` VALUES (6011,165,25,0);     -- CRITHITRATE: 25

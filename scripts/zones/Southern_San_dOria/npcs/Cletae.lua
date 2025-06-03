@@ -22,16 +22,8 @@ end
 
 entity.onTrigger = function(player, npc)
     local guildSkillId = xi.skill.LEATHERCRAFT
-    local stock = xi.shop.generalGuildStock[guildSkillId]
-
-    xi.shop.generalGuild(player, stock, guildSkillId)
+    xi.shop.generalGuild(player, xi.shop.generalGuildStock[guildSkillId], guildSkillId)
     player:showText(npc, ID.text.CLETAE_DIALOG)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

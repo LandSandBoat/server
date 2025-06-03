@@ -20,7 +20,15 @@ function CZone:resetLocalVars()
 end
 
 ---@return nil
-function CZone:registerTriggerArea(triggerAreaID, x1, y1, z1, x2, y2, z2)
+function CZone:registerCuboidTriggerArea(triggerAreaID, xMin, yMin, zMin, xMax, yMax, zMax)
+end
+
+---@return nil
+function CZone:registerCylindricalTriggerArea(triggerAreaID, xPos, zPos, radius)
+end
+
+---@return nil
+function CZone:registerSphericalTriggerArea(triggerAreaID, xPos, yPos, zPos, radius)
 end
 
 ---@deprecated

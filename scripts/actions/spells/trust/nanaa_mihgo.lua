@@ -17,8 +17,7 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.ROMAA_MIHGO] = xi.trust.messageOffset.TEAMWORK_1,
     })
 
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.ALWAYS, 0,
-                        ai.r.JA, ai.s.SPECIFIC, xi.ja.DESPOIL)
+    mob:addGambit(ai.t.TARGET, { ai.c.ALWAYS, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.DESPOIL })
 
     mob:setTrustTPSkillSettings(ai.tp.OPENER, ai.s.HIGHEST)
 end

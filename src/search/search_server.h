@@ -45,29 +45,21 @@ class SearchServer final : public Application
 {
 public:
     SearchServer(int argc, char** argv);
+    ~SearchServer() override;
 
-    ~SearchServer() override
-    {
-        // Everything should be handled with RAII
-    }
+    void loadConsoleCommands() override;
+
+    void run() override;
 
     void periodicCleanup(const asio::error_code& error, asio::steady_timer* timer);
-
     void ahCleanup();
 
-    // TODO: Currently never called. Need io_context asio::steady_timer callback with taskmgr to control timing?
-    void Tick() override
-    {
-        Application::Tick();
-
-        // Search Server specific things
-    }
 private:
     // A single IP should only have one request in flight at a time, so we are going to
     // be tracking the IP addresses of incoming requests and if we haven't cleared the
     // record for it - we block until it's done
-    shared_guarded<std::map<std::string, uint16_t>> IPAddressesInUse_;
+    SynchronizedShared<std::map<std::string, uint16_t>> IPAddressesInUse_;
 
     // NOTE: We're only using the read-lock for this
-    shared_guarded<std::unordered_set<std::string>> IPAddressWhitelist_;
+    SynchronizedShared<std::unordered_set<std::string>> IPAddressWhitelist_;
 };

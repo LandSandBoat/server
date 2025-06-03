@@ -39,28 +39,28 @@ public:
     bool isBloodPactWard() const;
     bool isBloodPactRage() const;
 
-    uint16 getID() const;
-    uint16 getAnimationID() const;
-    uint8  getAoe() const;
-    float  getDistance() const;
-    uint8  getFlag() const;
-    uint16 getAnimationTime() const;
-    uint16 getActivationTime() const;
-    uint16 getMsg() const;
-    uint8  getSkillFinishCategory() const;
-    uint16 getAoEMsg() const;
-    uint16 getValidTargets() const;
-    int16  getTP() const;
-    uint8  getHPP() const;
-    uint16 getTotalTargets() const;
-    uint32 getPrimaryTargetID() const;
-    uint16 getMsgForAction() const;
-    float  getRadius() const;
-    int16  getParam() const;
-    uint8  getKnockback() const;
-    uint8  getPrimarySkillchain() const;
-    uint8  getSecondarySkillchain() const;
-    uint8  getTertiarySkillchain() const;
+    uint16          getID() const;
+    uint16          getAnimationID() const;
+    uint8           getAoe() const;
+    float           getDistance() const;
+    uint8           getFlag() const;
+    timer::duration getAnimationTime() const;
+    timer::duration getActivationTime() const;
+    uint16          getMsg() const;
+    uint8           getSkillFinishCategory() const;
+    uint16          getAoEMsg() const;
+    uint16          getValidTargets() const;
+    int16           getTP() const;
+    uint8           getHPP() const;
+    uint16          getTotalTargets() const;
+    uint32          getPrimaryTargetID() const;
+    uint16          getMsgForAction() const;
+    float           getRadius() const;
+    int16           getParam() const;
+    uint8           getKnockback() const;
+    uint8           getPrimarySkillchain() const;
+    uint8           getSecondarySkillchain() const;
+    uint8           getTertiarySkillchain() const;
 
     bool isDamageMsg() const;
 
@@ -69,8 +69,8 @@ public:
     void setAoe(uint8 aoe);
     void setDistance(float distance);
     void setFlag(uint8 flag);
-    void setAnimationTime(uint16 AnimationTime);
-    void setActivationTime(uint16 ActivationTime);
+    void setAnimationTime(timer::duration AnimationTime);
+    void setActivationTime(timer::duration ActivationTime);
     void setMsg(uint16 msg);
     void setSkillFinishCategory(uint8 category);
     void setValidTargets(uint16 targ);
@@ -88,22 +88,22 @@ public:
     void               setName(const std::string& name);
 
 private:
-    uint16      m_ID;
-    uint16      m_AnimID; // animation id
-    std::string m_name;
-    uint8       m_Aoe;
-    float       m_Distance;
-    uint16      m_AnimationTime;  // how long the tp animation lasts for in ms
-    uint16      m_ActivationTime; // how long the pet prepares the tp move for
-    uint16      m_ValidTarget;
-    uint16      m_Message; // message param, scripters can edit this depending on self/resist/etc.
-    uint8       m_Flag;
-    int16       m_Param;
-    uint8       m_SkillFinishCategory;
-    uint8       m_knockback;         // knockback value (0-7)
-    uint8       m_primarySkillchain; // weaponskill ID of skillchain properties
-    uint8       m_secondarySkillchain;
-    uint8       m_tertiarySkillchain;
+    uint16          m_ID;
+    uint16          m_AnimID; // animation id
+    std::string     m_name;
+    uint8           m_Aoe;
+    float           m_Distance;
+    timer::duration m_AnimationTime;  // how long the tp animation lasts
+    timer::duration m_ActivationTime; // how long the pet prepares the tp move for
+    uint16          m_ValidTarget;
+    uint16          m_Message; // message param, scripters can edit this depending on self/resist/etc.
+    uint8           m_Flag;
+    int16           m_Param;
+    uint8           m_SkillFinishCategory;
+    uint8           m_knockback;         // knockback value (0-7)
+    uint8           m_primarySkillchain; // weaponskill ID of skillchain properties
+    uint8           m_secondarySkillchain;
+    uint8           m_tertiarySkillchain;
 
     int16  m_TP;  // the tp at the time of finish readying (for scripts)
     uint8  m_HPP; // HPP at the time of using mob skill (for scripts)

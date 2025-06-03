@@ -8,9 +8,6 @@ local ID = zones[xi.zone.BASTOK_MARKETS_S]
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 -- TODO: Reduce complexity
 -- Disable cyclomatic complexity check for this function:
 -- luacheck: ignore 561

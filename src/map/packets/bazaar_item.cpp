@@ -21,7 +21,6 @@
 
 #include "bazaar_item.h"
 
-#include "common/socket.h"
 #include "common/utils.h"
 #include "common/vana_time.h"
 
@@ -45,17 +44,19 @@ CBazaarItemPacket::CBazaarItemPacket(CItem* PItem, uint8 SlotID, uint16 Tax)
 
         if (PItem->isSubType(ITEM_CHARGED) && PItem->isType(ITEM_USABLE))
         {
-            uint32 currentTime = CVanaTime::getInstance()->getVanaTime();
-            uint32 nextUseTime = ((CItemUsable*)PItem)->getLastUseTime() + ((CItemUsable*)PItem)->getReuseDelay();
+            timer::time_point currentTime = timer::now();
+            timer::time_point nextUseTime = static_cast<CItemUsable*>(PItem)->getNextUseTime();
 
             ref<uint8>(0x11) = 0x01; // ITEM_CHARGED flag
             ref<uint8>(0x12) = ((CItemUsable*)PItem)->getCurrentCharges();
             ref<uint8>(0x14) = (nextUseTime > currentTime ? 0x90 : 0xD0);
 
-            ref<uint32>(0x15) = nextUseTime;
-            ref<uint32>(0x19) = ((CItemUsable*)PItem)->getUseDelay() + currentTime;
+            ref<uint32>(0x15) = earth_time::vanadiel_timestamp(timer::to_utc(nextUseTime));
+            ref<uint32>(0x19) = static_cast<uint32>(timer::count_seconds(static_cast<CItemUsable*>(PItem)->getUseDelay()) + earth_time::vanadiel_timestamp());
         }
-        // 12? characters? seems a bit short. TODO: research this.
-        std::memcpy(buffer_.data() + 0x1D, PItem->getSignature().c_str(), std::min<size_t>(PItem->getSignature().size(), 12));
+        else
+        {
+            std::memcpy(buffer_.data() + 0x11, PItem->m_extra, std::min<size_t>(CItem::extra_size, 24));
+        }
     }
 }

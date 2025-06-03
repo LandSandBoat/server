@@ -6,6 +6,10 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 240)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     if player:getCharVar('unbridledPassion') == 4 then
         player:setCharVar('unbridledPassion', 5)

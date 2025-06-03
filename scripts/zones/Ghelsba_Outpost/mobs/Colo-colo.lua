@@ -10,7 +10,4 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 15)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-end
-
 return entity
