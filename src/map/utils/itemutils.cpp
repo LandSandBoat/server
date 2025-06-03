@@ -482,6 +482,10 @@ namespace itemutils
                         {
                             ((CItemWeapon*)PItem)->setTotalUnlockPointsNeeded(settings::get<int>("map.TRIAL_WS_POINTS"));
                         }
+                        else if (unclock_point == 500)
+                        {
+                            ((CItemWeapon*)PItem)->setTotalUnlockPointsNeeded(settings::get<int>("map.RETRIAL_WS_POINTS"));
+                        }
                         else
                         {
                             ((CItemWeapon*)PItem)->setTotalUnlockPointsNeeded(unclock_point);
