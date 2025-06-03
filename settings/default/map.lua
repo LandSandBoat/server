@@ -312,6 +312,8 @@ xi.settings.map =
 
     -- トライアル武器のWSの必要ポイント数
     TRIAL_WS_POINTS = 300,
+    -- 逆トライアル武器のWSの必要ポイント数
+    RETRIAL_WS_POINTS = 500,
     -- 途中経過をメッセージに表示するか
     ENABLE_TRIAL_WS_POINT_MESSAGE = false,
     -- トライアル途中経過メッセージ：トライアルWS達成まで　%d/%d
