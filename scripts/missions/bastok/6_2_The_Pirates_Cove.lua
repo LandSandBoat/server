@@ -11,16 +11,16 @@
 -- qm4        : !pos 171 0 -25 205
 -- Gilgamesh  : !pos 122.452 -9.009 -12.052 252
 -----------------------------------
-local bastokMarketsID  = zones[xi.zone.BASTOK_MARKETS]
-local bastokMinesID    = zones[xi.zone.BASTOK_MINES]
-local ifritsCauldronID = zones[xi.zone.IFRITS_CAULDRON]
-local metalworksID     = zones[xi.zone.METALWORKS]
-local portBastokID     = zones[xi.zone.PORT_BASTOK]
+local bastokMarketsID     = zones[xi.zone.BASTOK_MARKETS]
+local bastokMinesID       = zones[xi.zone.BASTOK_MINES]
+local ifritsCauldronID    = zones[xi.zone.IFRITS_CAULDRON]
+local metalworksID        = zones[xi.zone.METALWORKS]
+local portBastokID        = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
-local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_PIRATES_COVE)
+local mission             = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_PIRATES_COVE)
 
-mission.reward =
+mission.reward            =
 {
     gil = 40000,
     rank = 7,
@@ -33,7 +33,7 @@ local handleAcceptMission = function(player, csid, option, npc)
     end
 end
 
-mission.sections =
+mission.sections          =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
@@ -125,6 +125,15 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
+            ['_700'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 1 then
+                        return mission:progressEvent(98)
+                    end
+                end,
+            },
+
             ['Gilgamesh'] =
             {
                 onTrade = function(player, npc, trade)
@@ -133,12 +142,6 @@ mission.sections =
                         npcUtil.tradeHasExactly(trade, xi.item.FRAG_ROCK)
                     then
                         return mission:progressEvent(99)
-                    end
-                end,
-
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return mission:progressEvent(98)
                     end
                 end,
             },
