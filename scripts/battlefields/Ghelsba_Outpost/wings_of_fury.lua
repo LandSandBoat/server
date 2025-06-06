@@ -9,6 +9,7 @@ local ghelsbaID = zones[xi.zone.GHELSBA_OUTPOST]
 local content = Battlefield:new({
     zoneId           = xi.zone.GHELSBA_OUTPOST,
     battlefieldId    = xi.battlefield.id.WINGS_OF_FURY,
+    allowTrusts      = true,
     maxPlayers       = 3,
     levelCap         = 20,
     timeLimit        = utils.minutes(15),

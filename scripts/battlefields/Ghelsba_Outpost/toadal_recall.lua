@@ -9,6 +9,7 @@ local ghelsbaID = zones[xi.zone.GHELSBA_OUTPOST]
 local content = Battlefield:new({
     zoneId           = xi.zone.GHELSBA_OUTPOST,
     battlefieldId    = xi.battlefield.id.TOADAL_RECALL,
+    allowTrusts      = true,
     maxPlayers       = 6,
     levelCap         = 30,
     timeLimit        = utils.minutes(30),

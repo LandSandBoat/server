@@ -9,6 +9,7 @@ local ID = zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER]
 local content = Battlefield:new({
     zoneId           = xi.zone.NAVUKGO_EXECUTION_CHAMBER,
     battlefieldId    = xi.battlefield.id.TOUGH_NUT_TO_CRACK,
+    allowTrusts      = true,
     maxPlayers       = 6,
     levelCap         = 60,
     timeLimit        = utils.minutes(30),

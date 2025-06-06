@@ -9,6 +9,7 @@ local ID = zones[xi.zone.JADE_SEPULCHER]
 local content = Battlefield:new({
     zoneId           = xi.zone.JADE_SEPULCHER,
     battlefieldId    = xi.battlefield.id.SHADOWS_OF_THE_MIND,
+    allowTrusts      = true,
     maxPlayers       = 6,
     levelCap         = 75,
     timeLimit        = utils.minutes(30),

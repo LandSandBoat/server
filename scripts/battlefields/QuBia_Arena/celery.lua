@@ -9,6 +9,7 @@ local qubiaID = zones[xi.zone.QUBIA_ARENA]
 local content = Battlefield:new({
     zoneId           = xi.zone.QUBIA_ARENA,
     battlefieldId    = xi.battlefield.id.CELERY,
+    allowTrusts      = true,
     maxPlayers       = 3,
     levelCap         = 60,
     timeLimit        = utils.minutes(15),

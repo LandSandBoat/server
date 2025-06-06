@@ -9,6 +9,7 @@ local horlaisID = zones[xi.zone.HORLAIS_PEAK]
 local content = Battlefield:new({
     zoneId           = xi.zone.HORLAIS_PEAK,
     battlefieldId    = xi.battlefield.id.DROPPING_LIKE_FLIES,
+    allowTrusts      = true,
     maxPlayers       = 6,
     levelCap         = 30,
     timeLimit        = utils.minutes(30),

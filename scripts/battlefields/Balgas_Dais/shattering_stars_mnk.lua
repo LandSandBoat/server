@@ -8,6 +8,7 @@ local balgasID = zones[xi.zone.BALGAS_DAIS]
 local content = Battlefield:new({
     zoneId        = xi.zone.BALGAS_DAIS,
     battlefieldId = xi.battlefield.id.SHATTERING_STARS_MNK,
+    allowTrusts   = true,
     maxPlayers    = 1,
     levelCap      = 99,
     allowSubjob   = false,

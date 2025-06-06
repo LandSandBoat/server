@@ -9,6 +9,7 @@ local chamberOfOraclesID = zones[xi.zone.CHAMBER_OF_ORACLES]
 local content = Battlefield:new({
     zoneId           = xi.zone.CHAMBER_OF_ORACLES,
     battlefieldId    = xi.battlefield.id.EYE_OF_THE_STORM,
+    allowTrusts      = true,
     maxPlayers       = 6,
     timeLimit        = utils.minutes(30),
     index            = 6,
