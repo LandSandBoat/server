@@ -9,6 +9,7 @@ local boneyardGullyID = zones[xi.zone.BONEYARD_GULLY]
 local content = Battlefield:new({
     zoneId           = xi.zone.BONEYARD_GULLY,
     battlefieldId    = xi.battlefield.id.SHELL_WE_DANCE,
+    allowTrusts      = true,
     maxPlayers       = 18,
     levelCap         = 75,
     timeLimit        = utils.minutes(30),

@@ -9,6 +9,7 @@ local ID = zones[xi.zone.TALACCA_COVE]
 local content = Battlefield:new({
     zoneId           = xi.zone.TALACCA_COVE,
     battlefieldId    = xi.battlefield.id.CALL_TO_ARMS,
+    allowTrusts      = true,
     maxPlayers       = 6,
     levelCap         = 60,
     timeLimit        = utils.minutes(30),

@@ -7,6 +7,7 @@
 local content = Battlefield:new({
     zoneId           = xi.zone.BONEYARD_GULLY,
     battlefieldId    = xi.battlefield.id.LIKE_THE_WIND,
+    allowTrusts      = true,
     maxPlayers       = 18,
     levelCap         = 75,
     timeLimit        = utils.minutes(15),

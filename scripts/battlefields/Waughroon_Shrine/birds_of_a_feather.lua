@@ -9,6 +9,7 @@ local waughroonID = zones[xi.zone.WAUGHROON_SHRINE]
 local content = Battlefield:new({
     zoneId           = xi.zone.WAUGHROON_SHRINE,
     battlefieldId    = xi.battlefield.id.BIRDS_OF_A_FEATHER,
+    allowTrusts      = true,
     maxPlayers       = 3,
     levelCap         = 30,
     timeLimit        = utils.minutes(15),

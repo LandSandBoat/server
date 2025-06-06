@@ -9,6 +9,7 @@ local sacrificialChamberID = zones[xi.zone.SACRIFICIAL_CHAMBER]
 local content = Battlefield:new({
     zoneId           = xi.zone.SACRIFICIAL_CHAMBER,
     battlefieldId    = xi.battlefield.id.AMPHIBIAN_ASSAULT,
+    allowTrusts      = true,
     maxPlayers       = 6,
     levelCap         = 60,
     timeLimit        = utils.minutes(30),

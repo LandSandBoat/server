@@ -9,6 +9,7 @@ local horlaisID = zones[xi.zone.HORLAIS_PEAK]
 local content = Battlefield:new({
     zoneId           = xi.zone.HORLAIS_PEAK,
     battlefieldId    = xi.battlefield.id.TODAYS_HOROSCOPE,
+    allowTrusts      = true,
     maxPlayers       = 6,
     timeLimit        = utils.minutes(30),
     index            = 16,

@@ -9,6 +9,7 @@ local ID = zones[xi.zone.JADE_SEPULCHER]
 local content = Battlefield:new({
     zoneId           = xi.zone.JADE_SEPULCHER,
     battlefieldId    = xi.battlefield.id.MAKING_A_MOCKERY,
+    allowTrusts      = true,
     maxPlayers       = 6,
     levelCap         = 60,
     timeLimit        = utils.minutes(30),

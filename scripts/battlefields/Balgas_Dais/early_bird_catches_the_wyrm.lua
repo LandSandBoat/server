@@ -9,6 +9,7 @@ local balgasID = zones[xi.zone.BALGAS_DAIS]
 local content = Battlefield:new({
     zoneId           = xi.zone.BALGAS_DAIS,
     battlefieldId    = xi.battlefield.id.EARLY_BIRD_CATCHES_THE_WYRM,
+    allowTrusts      = true,
     maxPlayers       = 18,
     timeLimit        = utils.minutes(30),
     index            = 11,
