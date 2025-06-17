@@ -426,6 +426,8 @@ entity.onTrigger = function(player, npc)
             cosmoTime = getCosmoCleanseTime(player)
         end
 
+        -- ‰¼‘Î‰BAF‚Ì‘Å‚¿’¼‚µ‚Ì˜b‚©‚çi‚Ü‚È‚¢‚½‚ß
+        menu = 3
         player:startEvent(310, menu, arg3, arg4, gil, cosmoTime, 1, hasCosmoCleanse, storedABCs)
     end
 end
