@@ -3,6 +3,7 @@ require('scripts/globals/utils')
 xi = xi or {}
 xi.mission = xi.mission or {}
 
+---@enum xi.mission.log_id
 xi.mission.log_id =
 {
     SANDORIA    =  0,

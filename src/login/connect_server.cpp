@@ -21,6 +21,7 @@
 
 #include "connect_server.h"
 
+#include "common/arguments.h"
 #include "common/timer.h"
 
 namespace
@@ -45,6 +46,7 @@ ConnectServer::ConnectServer(int argc, char** argv)
 : Application("connect", argc, argv)
 , zmqDealerWrapper_(getZMQEndpointString(), getZMQRoutingId())
 {
+    args_->parse();
 }
 
 ConnectServer::~ConnectServer() = default;

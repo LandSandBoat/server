@@ -72,27 +72,29 @@ namespace
     uint32 TotalPacketsDelayedPerTick = 0U;
 } // namespace
 
-MapNetworking::MapNetworking(MapServer& mapServer, MapStatistics& mapStatistics)
+MapNetworking::MapNetworking(MapServer& mapServer, MapStatistics& mapStatistics, const MapConfig& config)
 : mapServer_(mapServer)
 , mapStatistics_(mapStatistics)
 {
     TracyZoneScoped;
 
     auto ip = 0;
-    if (auto maybeIP = mapServer_.args().present("--ip"))
+    if (config.ip.size() > 0)
     {
-        ip = str2ip(*maybeIP);
+        ip = str2ip(config.ip);
     }
 
-    auto port = 0;
-    if (auto maybePort = mapServer_.args().present("--port"))
-    {
-        port = std::stoi(*maybePort);
-    }
+    const auto port = config.port;
 
     // The original logic relies on these being contructed as (0, 0) if not provided
     // TODO: Remove all of the SQL query logic that relies on these being 0.
     mapIPP_ = IPP(ip, port);
+
+    // Embedded map server for testing does not actually need to open a socket
+    if (config.isTestServer)
+    {
+        return;
+    }
 
     try
     {

@@ -57,6 +57,7 @@
 #include "zone_entities.h"
 
 #include "ai/controllers/automaton_controller.h"
+#include "common/arguments.h"
 
 #include "items/item_equipment.h"
 
@@ -84,6 +85,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <thread>
+#include <utility>
 
 #ifdef _WIN32
 #include <io.h>
@@ -98,13 +100,41 @@
 std::unique_ptr<SqlConnection>  _sql;
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
-MapServer::MapServer(int argc, char** argv)
+MapServer::MapServer(const int argc, char** argv)
 : Application("map", argc, argv)
 , mapStatistics_(std::make_unique<MapStatistics>())
-, networking_(std::make_unique<MapNetworking>(*this, *mapStatistics_))
+{
+    args_->add_argument("--ip")
+        .store_into(config_.ip)
+        .help("Specify the IP address to bind to");
+
+    args_->add_argument("--port")
+        .store_into(config_.port)
+        .help("Specify the port to bind to");
+
+    args_->parse();
+
+    networking_ = std::make_unique<MapNetworking>(*this, *mapStatistics_, config_);
+
+    do_init();
+}
+
+// Entrypoint for embedded xi_test
+// TODO: Untangle the application bits
+// clang-format off
+MapServer::MapServer(MapConfig config)
+: Application("map", 1, []()
+{
+    static char* argv[] = { const_cast<char*>("xi_map"), nullptr };
+    return argv;
+}())
+, config_(std::move(config))
+, mapStatistics_(std::make_unique<MapStatistics>())
+, networking_(std::make_unique<MapNetworking>(*this, *mapStatistics_, config))
 {
     do_init();
 }
+// clang-format on
 
 MapServer::~MapServer()
 {
@@ -115,7 +145,7 @@ void MapServer::loadConsoleCommands()
 {
     // clang-format off
     consoleService_->registerCommand("gm", "Change a character's GM level",
-    [](std::vector<std::string>& inputs)
+    [](const std::vector<std::string>& inputs)
     {
         if (inputs.size() != 3)
         {
@@ -354,21 +384,30 @@ void MapServer::do_init()
         ShowInfo("./losmeshes/ directory isn't present or is empty");
     }
 
-    ShowInfo("do_init: loading zones");
-    zoneutils::LoadZoneList(mapIPP);
+    if (!config_.dynamicZones)
+    {
+        ShowInfo("do_init: loading zones");
+        zoneutils::LoadZoneList(mapIPP);
+        instanceutils::LoadInstanceList(mapIPP);
+        CTransportHandler::getInstance()->InitializeTransport(mapIPP);
+    }
 
     fishingutils::InitializeFishingSystem();
-    instanceutils::LoadInstanceList(mapIPP);
 
     monstrosity::LoadStaticData();
 
-    zoneutils::InitializeWeather(); // Need VanaTime initialized
-
-    CTransportHandler::getInstance()->InitializeTransport(mapIPP);
+    if (!config_.controlledWeather)
+    {
+        zoneutils::InitializeWeather(); // Need VanaTime initialized
+    }
 
     CTaskManager::getInstance()->AddTask("time_server", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, kTimeServerTickInterval, time_server);
-    CTaskManager::getInstance()->AddTask("map_cleanup", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, 5s, std::bind(&MapServer::map_cleanup, this, std::placeholders::_1, std::placeholders::_2));
-    CTaskManager::getInstance()->AddTask("garbage_collect", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, 15min, std::bind(&MapServer::map_garbage_collect, this, std::placeholders::_1, std::placeholders::_2));
+    if (!config_.isTestServer)
+    {
+        CTaskManager::getInstance()->AddTask("map_cleanup", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, 5s, std::bind(&MapServer::map_cleanup, this, std::placeholders::_1, std::placeholders::_2));
+        CTaskManager::getInstance()->AddTask("garbage_collect", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, 15min, std::bind(&MapServer::map_garbage_collect, this, std::placeholders::_1, std::placeholders::_2));
+    }
+
     CTaskManager::getInstance()->AddTask("persist_server_vars", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, 1min, serverutils::PersistVolatileServerVars);
 
     zoneutils::TOTDChange(vanadiel_time::get_totd()); // This tells the zones to spawn stuff based on time of day conditions (such as undead at night)
@@ -389,7 +428,11 @@ void MapServer::do_init()
     _sql->EnableTimers();
     db::enableTimers();
 
-    prepareWatchdog();
+    // No watchdog during tests, since the tests drive the ticks.
+    if (!config_.isTestServer)
+    {
+        prepareWatchdog();
+    }
 
 #ifdef TRACY_ENABLE
     ShowInfo("*** TRACY IS ENABLED ***");
@@ -458,4 +501,9 @@ auto MapServer::statistics() -> MapStatistics&
 auto MapServer::zones() -> std::map<uint16, CZone*>&
 {
     return g_PZoneList;
+}
+
+auto MapServer::config() -> const MapConfig&
+{
+    return config_;
 }

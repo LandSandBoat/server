@@ -25,7 +25,7 @@ local function handleActiveOnTrigger(player, keyItemId, statusIncrease)
         player:setMissionStatus(xi.mission.log_id.ZILART, missionStatus + statusIncrease)
         player:messageSpecial(oraclesID.text.YOU_PLACE_THE, keyItemId)
 
-        if missionStatus == 255 then
+        if player:getMissionStatus(xi.mission.log_id.ZILART) == 255 then
             return mission:event(1)
         end
     elseif missionStatus == 255 then -- Execute cutscene if the player is interrupted.

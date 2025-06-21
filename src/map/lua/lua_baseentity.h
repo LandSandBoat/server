@@ -26,6 +26,7 @@
 #include "luautils.h"
 #include "packets/message_standard.h"
 #include "packets/position.h"
+#include "utils/battleutils.h"
 
 class CBaseEntity;
 class CCharEntity;
@@ -244,6 +245,7 @@ public:
     uint8  incrementItemWear(uint16 itemID);                               // Increment the item's worn value and returns it
     auto   findItem(uint16 itemID, sol::object const& location) -> CItem*; // Like hasItem, but returns the item object (nil if not found)
     auto   findItems(uint16 itemID, sol::object const& location) -> sol::table;
+    auto   getItems(sol::object const& location) -> sol::table;
 
     void createShop(uint8 size, sol::object const& arg1);
     void addShopItem(uint16 itemID, double rawPrice, sol::object const& arg2, sol::object const& arg3);
@@ -263,7 +265,7 @@ public:
 
     // Equipping
     bool canEquipItem(uint16 itemID, sol::object const& chkLevel);
-    void equipItem(uint16 itemID, sol::object const& container);
+    void equipItem(uint16 itemID, sol::object const& container, sol::object const& equipSlot);
     void unequipItem(uint8 slotID);
 
     void setEquipBlock(uint16 equipBlock);
@@ -711,6 +713,7 @@ public:
 
     void charm(CLuaBaseEntity const* target, sol::object const& p0);
     void uncharm();
+    auto isCharmed() const -> bool;
     bool isTandemActive();
 
     uint8 addBurden(uint8 element, uint8 burden);
@@ -876,6 +879,7 @@ public:
     void  delMobMod(uint16 mobModID, int16 value);
 
     uint32 getBattleTime();
+    auto   getElement() const -> ELEMENT;
 
     uint16 getBehavior();
     void   setBehavior(uint16 behavior);

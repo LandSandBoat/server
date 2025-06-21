@@ -46,9 +46,23 @@ class CZone;
 extern std::unique_ptr<SqlConnection> _sql;
 extern std::map<uint16, CZone*>       g_PZoneList; // Global array of pointers for zones
 
+// Selectively enable or disable certain features
+// Mostly to be used for testing, but can be extended to group future CLI flags
+struct MapConfig
+{
+    std::string ip   = "";
+    uint16      port = 0;
+    bool        isTestServer{ false };      // Are we under test?
+    bool        dynamicZones{ false };      // All zones loaded upfront if false
+    bool        controlledWeather{ false }; // Disables loading weather and associated tasks
+    bool        lazyMeshLoad{ false };      // Backported from Eden but not yet in use.
+    bool        disableLosLoad{ false };    // Backported from Eden but not yet in use.
+};
+
 class MapServer final : public Application
 {
 public:
+    MapServer(MapConfig config);
     MapServer(int argc, char** argv);
     ~MapServer() override;
 
@@ -83,9 +97,11 @@ public:
     auto networking() -> MapNetworking&;
     auto statistics() -> MapStatistics&;
     auto zones() -> std::map<uint16, CZone*>&; // g_PZoneList
+    auto config() -> const MapConfig&;
     // gameState()
 
 private:
+    MapConfig                      config_;
     std::unique_ptr<MapStatistics> mapStatistics_;
     std::unique_ptr<MapNetworking> networking_;
     std::unique_ptr<Watchdog>      watchdog_;

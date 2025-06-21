@@ -33,12 +33,13 @@
 
 #include <span>
 
+struct MapConfig;
 class MapServer;
 
 class MapNetworking
 {
 public:
-    MapNetworking(MapServer& mapServer, MapStatistics& mapStatistics);
+    MapNetworking(MapServer& mapServer, MapStatistics& mapStatistics, const MapConfig& config);
 
     //
     // Networking
@@ -65,7 +66,6 @@ public:
     auto socket() -> MapSocket&;
 
 private:
-    MapServer&                 mapServer_;
     MapStatistics&             mapStatistics_;
     IPP                        mapIPP_;
     MapSessionContainer        mapSessions_;

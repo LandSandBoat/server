@@ -100,6 +100,20 @@ global_objects=(
     GetFirstID
 
     ReloadSynthRecipes
+
+    assert
+    describe
+    it
+    pending
+    before_each
+    setup
+    teardown
+    after_each
+    PacketBuilder
+    SimulationWorld
+    SimulationClient
+    spy
+    stub
 )
 
 ignores=(

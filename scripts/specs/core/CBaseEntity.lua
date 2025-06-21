@@ -1003,6 +1003,12 @@ end
 function CBaseEntity:findItems(itemID, location)
 end
 
+---@nodiscard
+---@param location integer?
+---@return CItem[]
+function CBaseEntity:getItems(location)
+end
+
 ---@param size integer
 ---@param arg1 integer?
 ---@return nil
@@ -1089,8 +1095,9 @@ end
 
 ---@param itemID integer
 ---@param container integer?
+---@param slot integer?
 ---@return nil
-function CBaseEntity:equipItem(itemID, container)
+function CBaseEntity:equipItem(itemID, container, slot)
 end
 
 ---@param itemID integer
@@ -3114,6 +3121,11 @@ end
 
 ---@nodiscard
 ---@return boolean
+function CBaseEntity:isCharmed()
+end
+
+---@nodiscard
+---@return boolean
 function CBaseEntity:isTandemActive()
 end
 
@@ -3843,6 +3855,11 @@ end
 ---@nodiscard
 ---@return integer
 function CBaseEntity:getBattleTime()
+end
+
+---@nodiscard
+---@return integer
+function CBaseEntity:getElement()
 end
 
 ---@nodiscard

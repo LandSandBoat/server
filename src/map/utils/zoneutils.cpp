@@ -269,15 +269,13 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    void LoadNPCList(IPP mapIPP)
+    void LoadNPCList(const std::vector<uint16>& zoneIds)
     {
         TracyZoneScoped;
         ShowInfo("Loading NPCs");
 
-        const auto zonesOnThisProcess = GetZonesAssignedToThisProcess(mapIPP);
-
         // clang-format off
-        for (const auto zoneId : zonesOnThisProcess)
+        for (const auto zoneId : zoneIds)
         {
             Async::getInstance()->submit([zoneId]()
             {
@@ -393,18 +391,16 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    void LoadMOBList(IPP mapIPP)
+    void LoadMOBList(const std::vector<uint16>& zoneIds)
     {
         TracyZoneScoped;
         ShowInfo("Loading Mobs");
-
-        const auto zonesOnThisProcess = GetZonesAssignedToThisProcess(mapIPP);
 
         const auto normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
         const auto normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
         // clang-format off
-        for (const auto zoneId : zonesOnThisProcess)
+        for (const auto zoneId : zoneIds)
         {
             Async::getInstance()->submit([normalLevelRangeMin, normalLevelRangeMax, zoneId]()
             {
@@ -725,30 +721,36 @@ namespace zoneutils
         }
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Initialization of zones. Revive all monsters at server start.        *
-     *                                                                       *
-     ************************************************************************/
-
-    void LoadZoneList(IPP mapIPP)
+    void LoadZones(const std::vector<uint16>& zoneIds)
     {
         TracyZoneScoped;
 
-        Async::getInstance()->setThreadpoolSize(std::max<std::size_t>(std::thread::hardware_concurrency() - 1, 1));
+        std::vector<uint16> actualZones;
 
-        g_PTrigger = new CNpcEntity(); // you need to set the default model in the CNpcEntity constructor
-
-        std::vector<uint16> zones = GetZonesAssignedToThisProcess(mapIPP);
-        if (zones.empty())
+        for (const auto zoneId : zoneIds)
         {
-            ShowCritical("Unable to load any zones! Check IP and port params");
-            std::exit(1);
+            if (!g_PZoneList.contains(zoneId))
+            {
+                actualZones.push_back(zoneId);
+            }
         }
 
-        ShowInfo(fmt::format("Loading {} zones", zones.size()));
+        Async::getInstance()->setThreadpoolSize(std::max<std::size_t>(std::thread::hardware_concurrency() - 1, 1));
 
-        for (auto zone : zones)
+        if (g_PTrigger == nullptr)
+        {
+            g_PTrigger = new CNpcEntity(); // you need to set the default model in the CNpcEntity constructor
+        }
+
+        if (actualZones.empty())
+        {
+            // Requested zones are already loaded.
+            return;
+        }
+
+        ShowInfo(fmt::format("Loading {} zones", zoneIds.size()));
+
+        for (auto zone : actualZones)
         {
             g_PZoneList[zone] = CreateZone(zone);
         }
@@ -765,7 +767,7 @@ namespace zoneutils
 #endif // ENV32BIT
 
         // clang-format off
-        for (const auto zoneId : zones)
+        for (const auto zoneId : actualZones)
         {
             Async::getInstance()->submit([zoneId]()
             {
@@ -790,23 +792,43 @@ namespace zoneutils
         // IDs attached to xi.zone[name] need to be populated before NPCs and Mobs are loaded
         luautils::PopulateIDLookupsByZone();
 
-        LoadNPCList(mapIPP);
-        LoadMOBList(mapIPP);
+        LoadNPCList(actualZones);
+        LoadMOBList(actualZones);
 
         campaign::LoadState();
         campaign::LoadNations();
 
-        for (auto PZone : g_PZoneList)
+        for (auto zoneId : actualZones)
         {
-            if (PZone.second->GetIP() != 0)
+            if (g_PZoneList[zoneId]->GetIP() != 0)
             {
-                luautils::OnZoneInitialize(PZone.second->GetID());
+                luautils::OnZoneInitialize(g_PZoneList[zoneId]->GetID());
             }
         }
 
         luautils::InitInteractionGlobal();
 
         Async::getInstance()->setThreadpoolSize(1U);
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Initialization of zones. Revive all monsters at server start.        *
+     *                                                                       *
+     ************************************************************************/
+
+    void LoadZoneList(IPP mapIPP)
+    {
+        TracyZoneScoped;
+
+        const auto zoneIds = GetZonesAssignedToThisProcess(mapIPP);
+        if (zoneIds.empty())
+        {
+            ShowCritical("Unable to load any zones! Check IP and port params");
+            std::exit(1);
+        }
+
+        LoadZones(zoneIds);
     }
 
     /************************************************************************

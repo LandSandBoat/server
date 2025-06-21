@@ -20,11 +20,13 @@
 */
 
 #include "search_server.h"
+#include "common/arguments.h"
 #include "data_loader.h"
 
 SearchServer::SearchServer(int argc, char** argv)
 : Application("search", argc, argv)
 {
+    args_->parse();
 }
 
 SearchServer::~SearchServer() = default;
