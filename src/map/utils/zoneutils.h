@@ -33,6 +33,7 @@ class CNpcEntity;
 
 namespace zoneutils
 {
+    void LoadZones(const std::vector<uint16>& zoneIds);
     void LoadZoneList(IPP mapIPP);
     void FreeZoneList();
     void InitializeWeather();

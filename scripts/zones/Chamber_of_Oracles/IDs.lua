@@ -52,6 +52,7 @@ zones[xi.zone.CHAMBER_OF_ORACLES] =
     },
     npc =
     {
+        BCNM_ENTRY = GetFirstID('SC_Entrance')
     },
 }
 

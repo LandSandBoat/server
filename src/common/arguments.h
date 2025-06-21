@@ -35,8 +35,10 @@ public:
     Arguments(std::string const& serverName, int argc, char** argv);
     ~Arguments() = default;
 
+    void parse() const;
+
     template <typename T = std::string>
-    auto present(std::string_view arg_name) const -> std::optional<T>
+    auto present(const std::string_view arg_name) const -> std::optional<T>
     {
         try
         {
@@ -51,7 +53,7 @@ public:
     }
 
     template <typename T = std::string>
-    T get(std::string_view arg_name) const
+    T get(const std::string_view arg_name) const
     {
         try
         {
@@ -65,6 +67,14 @@ public:
         return {};
     }
 
+    template <typename... Targs>
+    auto add_argument(Targs... f_args) const -> argparse::Argument&
+    {
+        return args_->add_argument(f_args...);
+    }
+
 private:
     std::unique_ptr<argparse::ArgumentParser> args_;
+    int                                       argc_;
+    char**                                    argv_;
 };

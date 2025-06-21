@@ -10,9 +10,9 @@ import regex
 function_names = []
 
 
-def extract_function_names():
-    for filename in os.listdir("src/map/lua/"):
-        full_filename = os.path.join("src/map/lua/", filename)
+def extract_function_names(kind):
+    for filename in os.listdir(f"src/{kind}/lua/") :
+        full_filename = os.path.join(f"src/{kind}/lua/", filename)
         if os.path.isfile(full_filename):
             with open(full_filename, mode="r", encoding="utf-8") as file:
                 for line in file.readlines():
@@ -21,7 +21,8 @@ def extract_function_names():
 
 
 def main():
-    extract_function_names()
+    extract_function_names("map")
+    extract_function_names("test")
 
     # Add Lua exceptions
     function_names.append("format")
@@ -109,6 +110,37 @@ def main():
     function_names.append("find")
     function_names.append("sub")
     function_names.append("getStatusEffectBySource")
+
+    # Exceptions for xi_test
+    # TODO: Do we _really_ need this? Shouldn't LLS check be enough?
+    function_names.append("appendByte")
+    function_names.append("set")
+    function_names.append("setU32")
+    function_names.append("setU16")
+    function_names.append("setU8")
+    function_names.append("expectEvent")
+    function_names.append("sendEventPacket")
+    function_names.append("eventUpdate")
+    function_names.append("eventFinish")
+    function_names.append("trigger")
+    function_names.append("skipTime")
+    function_names.append("claimAndKillMob")
+    function_names.append("useAbility")
+    function_names.append("skipToVanaDay")
+    function_names.append("gotoAndTriggerEntity")
+    function_names.append("tradeNpc")
+    function_names.append("spawnPlayer")
+    function_names.append("useItem")
+    function_names.append("useSpell")
+    function_names.append("enterBcnmViaNpc")
+    function_names.append("acceptPartyInvite")
+    function_names.append("inviteToParty")
+    function_names.append("killBattlefieldMobs")
+    function_names.append("expectBcnmWin")
+    function_names.append("expectNotInEvent")
+    function_names.append("loadZone")
+    function_names.append("expectPackets")
+    function_names.append("getMobClaimer")
 
     # root_dir needs a trailing slash (i.e. /root/dir/)
     for filename in glob.iglob("./scripts/" + "**/*.lua", recursive=True):

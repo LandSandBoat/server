@@ -279,6 +279,10 @@ set(CONNECT_ONLY_EXTERNAL_LIBS
     bcrypt
 )
 
+set(TEST_ONLY_EXTERNAL_LIBS
+    bcrypt
+)
+
 set(MAP_ONLY_EXTERNAL_LIBS
     RecastNavigation::Recast
     RecastNavigation::Detour
@@ -319,5 +323,10 @@ set(SEARCH_ONLY_EXTERNAL_LIBS
 
 set(WORLD_ONLY_EXTERNAL_LIBS
     ${WORLD_ONLY_EXTERNAL_LIBS}
+    PARENT_SCOPE
+)
+
+set(TEST_ONLY_EXTERNAL_LIBS
+    ${TEST_ONLY_EXTERNAL_LIBS}
     PARENT_SCOPE
 )

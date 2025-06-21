@@ -24,8 +24,10 @@
 #include "logging.h"
 #include "version.h"
 
-Arguments::Arguments(std::string const& serverName, int argc, char** argv)
+Arguments::Arguments(std::string const& serverName, const int argc, char** argv)
 : args_(std::make_unique<argparse::ArgumentParser>(argv[0], version::GetVersionString()))
+, argc_(argc)
+, argv_(argv)
 {
     //
     // Defaults
@@ -49,26 +51,16 @@ Arguments::Arguments(std::string const& serverName, int argc, char** argv)
 
     args_->add_epilog("This is free and open-source software. You may use, modify, and distribute it under the terms of the GNU GPL v3.");
 
-    //
-    // MapServer specific args (TODO: Move these into MapServer)
-    //
+    // Parsing deferred until Application child is loaded and has added their own arguments.
+    // Call parse() explicitely to process
+}
 
-    if (serverName == "map")
-    {
-        args_->add_argument("--ip")
-            .help("Specify the IP address to bind to");
-
-        args_->add_argument("--port")
-            .help("Specify the port to bind to");
-    }
-
-    //
-    // Parse
-    //
-
+// Parse the arguments, catching any exceptions.
+void Arguments::parse() const
+{
     try
     {
-        args_->parse_args(argc, argv);
+        args_->parse_args(argc_, argv_);
     }
     catch (const std::runtime_error& err)
     {

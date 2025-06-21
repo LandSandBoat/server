@@ -4520,6 +4520,40 @@ auto CLuaBaseEntity::findItems(uint16 itemID, sol::object const& location) -> so
 }
 
 /************************************************************************
+ *  Function: getItems()
+ *  Purpose : Returns all items in a given container
+ *  Example : local items = player:getItems(xi.inv.INVENTORY)
+ *  Notes   : Note: Defaults to inventory if no location is specified
+ ************************************************************************/
+auto CLuaBaseEntity::getItems(sol::object const& location) -> sol::table
+{
+    auto  table = lua.create_table();
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (!PChar)
+    {
+        return table;
+    }
+
+    uint8 locationId = LOC_INVENTORY;
+    if (location != sol::lua_nil && location.get_type() == sol::type::number)
+    {
+        locationId = location.as<uint8>();
+        locationId = (locationId < CONTAINER_ID::MAX_CONTAINER_ID ? locationId : (uint8)LOC_INVENTORY);
+    }
+
+    for (int i = 0; i < PChar->getStorage(locationId)->GetSize(); ++i)
+    {
+        if (auto item = PChar->getStorage(locationId)->GetItem(i))
+        {
+            table.add(item);
+        }
+    }
+
+    return table;
+}
+
+/************************************************************************
  *  Function: createShop()
  *  Purpose : Create a temporary shop for display to a player
  *  Example : player:createShop(Size, Nation);
@@ -4941,11 +4975,11 @@ bool CLuaBaseEntity::canEquipItem(uint16 itemID, sol::object const& chkLevel)
 /************************************************************************
  *  Function: equipItem()
  *  Purpose : Equips an item on the player
- *  Example : equipItem(itemID, optional container ID)
+ *  Example : equipItem(itemID, optional container ID, optional equip slot)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::equipItem(uint16 itemID, sol::object const& container)
+void CLuaBaseEntity::equipItem(uint16 itemID, sol::object const& container, sol::object const& equipSlot)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -4953,8 +4987,9 @@ void CLuaBaseEntity::equipItem(uint16 itemID, sol::object const& container)
         return;
     }
 
-    auto*           PChar             = static_cast<CCharEntity*>(m_PBaseEntity);
-    uint8           containerID       = container.is<uint8>() ? container.as<uint8>() : static_cast<uint8>(LOC_INVENTORY);
+    auto* PChar       = static_cast<CCharEntity*>(m_PBaseEntity);
+    uint8 containerID = container.is<uint8>() ? container.as<uint8>() : static_cast<uint8>(LOC_INVENTORY);
+
     CItemContainer* PStorageContainer = PChar->getStorage(containerID);
 
     if (PStorageContainer == nullptr)
@@ -4968,7 +5003,7 @@ void CLuaBaseEntity::equipItem(uint16 itemID, sol::object const& container)
     {
         if (auto* PItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotId)))
         {
-            charutils::EquipItem(PChar, slotId, PItem->getSlotType(), containerID);
+            charutils::EquipItem(PChar, slotId, equipSlot.is<uint8>() ? equipSlot.as<uint8>() : PItem->getSlotType(), containerID);
             PChar->RequestPersist(CHAR_PERSIST::EQUIP);
         }
     }
@@ -14336,6 +14371,24 @@ void CLuaBaseEntity::uncharm()
 }
 
 /************************************************************************
+ *  Function: isCharmed()
+ *  Purpose : Is entity currently charmed?
+ *  Example : target:isCharmed()
+ *  Notes   :
+ ************************************************************************/
+
+auto CLuaBaseEntity::isCharmed() const -> bool
+{
+    if (auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity))
+    {
+        return PBattle->isCharmed;
+    }
+
+    ShowError("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+    return false;
+}
+
+/************************************************************************
  *  Function: isTandemActive()
  *  Purpose : If entity is pet or master, checks to see if both are fighting same target
  *  Example : player:isTandemActive()
@@ -16715,6 +16768,12 @@ bool CLuaBaseEntity::isMobType(uint8 mobType)
 
     CMobEntity* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
 
+    // Special case for isMobType(MOBTYPE_NORMAL), else 0 & 0 returns false.
+    if (mobType == MOBTYPE_NORMAL)
+    {
+        return PMob->m_Type == MOBTYPE_NORMAL;
+    }
+
     return PMob->m_Type & mobType;
 }
 
@@ -17562,6 +17621,25 @@ uint32 CLuaBaseEntity::getBattleTime()
 
     auto seconds = timer::count_seconds(static_cast<CBattleEntity*>(m_PBaseEntity)->GetBattleTime());
     return static_cast<uint32>(seconds);
+}
+
+/************************************************************************
+ *  Function: getElement()
+ *  Purpose : Returns a mob element
+ *  Example : mob:getElement()
+ *  Notes   :
+ ************************************************************************/
+auto CLuaBaseEntity::getElement() const -> ELEMENT
+{
+    const auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+
+    if (!PMob)
+    {
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return ELEMENT_NONE;
+    }
+
+    return static_cast<ELEMENT>(PMob->m_Element);
 }
 
 /************************************************************************
@@ -19216,6 +19294,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("incrementItemWear", CLuaBaseEntity::incrementItemWear);
     SOL_REGISTER("findItem", CLuaBaseEntity::findItem);
     SOL_REGISTER("findItems", CLuaBaseEntity::findItems);
+    SOL_REGISTER("getItems", CLuaBaseEntity::getItems);
 
     SOL_REGISTER("createShop", CLuaBaseEntity::createShop);
     SOL_REGISTER("addShopItem", CLuaBaseEntity::addShopItem);
@@ -19676,6 +19755,7 @@ void CLuaBaseEntity::Register()
     // BST
     SOL_REGISTER("charm", CLuaBaseEntity::charm);
     SOL_REGISTER("uncharm", CLuaBaseEntity::uncharm);
+    SOL_REGISTER("isCharmed", CLuaBaseEntity::isCharmed);
     SOL_REGISTER("isTandemActive", CLuaBaseEntity::isTandemActive);
 
     // PUP
@@ -19842,6 +19922,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("delMobMod", CLuaBaseEntity::delMobMod);
 
     SOL_REGISTER("getBattleTime", CLuaBaseEntity::getBattleTime);
+    SOL_REGISTER("getElement", CLuaBaseEntity::getElement);
 
     SOL_REGISTER("getBehavior", CLuaBaseEntity::getBehavior);
     SOL_REGISTER("setBehavior", CLuaBaseEntity::setBehavior);

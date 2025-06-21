@@ -132,13 +132,20 @@ void logging::InitializeLog(std::string const& serverName, std::string const& lo
 {
     ServerName = serverName;
 
-    // If you create more than one worker thread, messages may be delivered out of order
+    // Only initialize once per process
+    static bool initialized = false;
+    if (initialized)
+    {
+        return;
+    }
+
     spdlog::init_thread_pool(8192, 1);
     spdlog::flush_on(spdlog::level::warn);
     spdlog::flush_every(5s);
 
     // Sink to console
     std::vector<spdlog::sink_ptr> sinks;
+
     sinks.emplace_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
 
     // Daily Sink, creating new files at midnight
@@ -159,8 +166,9 @@ void logging::InitializeLog(std::string const& serverName, std::string const& lo
     }
 
     spdlog::set_level(spdlog::level::debug);
-
     spdlog::enable_backtrace(16);
+
+    initialized = true;
 }
 
 void logging::ShutDown()

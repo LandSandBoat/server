@@ -37,31 +37,42 @@ namespace timer
     using time_point = clock::time_point;
 
     inline const time_point start_time = clock::now();
+    inline int64            offset_seconds{ 0 };
 
     inline time_point now()
     {
-        return clock::now();
+        return clock::now() + std::chrono::seconds(offset_seconds);
     }
 
     inline duration get_uptime()
     {
-        return clock::now() - start_time;
+        return timer::now() - start_time;
     }
 
     // https://stackoverflow.com/questions/35282308/convert-between-c11-clocks/35282833#35282833
     inline earth_time::time_point to_utc(const time_point& timer_tp = now())
     {
-        auto utc_now   = earth_time::now();
-        auto timer_now = clock::now();
+        const auto utc_now   = earth_time::now();
+        const auto timer_now = timer::now();
         return std::chrono::time_point_cast<earth_time::duration>(timer_tp - timer_now + utc_now);
     };
 
     inline time_point from_utc(const earth_time::time_point& utc_tp = earth_time::now())
     {
-        auto timer_now = clock::now();
-        auto utc_now   = earth_time::now();
+        const auto timer_now = timer::now();
+        const auto utc_now   = earth_time::now();
         return utc_tp - utc_now + timer_now;
     };
+
+    inline void add_offset_seconds(const int64 seconds)
+    {
+        offset_seconds += seconds;
+    }
+
+    inline void reset_offset_seconds()
+    {
+        offset_seconds = 0;
+    }
 
     // Gets the Earth milliseconds of a duration.
     template <typename Rep, typename Period>
