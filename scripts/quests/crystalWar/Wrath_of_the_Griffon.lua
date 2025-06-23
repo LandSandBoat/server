@@ -58,7 +58,7 @@ quest.sections =
             {
                 [60] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        xi.quest.setVar(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.PERILS_OF_THE_GRIFFON, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.PERILS_OF_THE_GRIFFON, 'Timer', VanadielUniqueDay())
                         xi.quest.setMustZone(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.PERILS_OF_THE_GRIFFON)
                     end
                 end,

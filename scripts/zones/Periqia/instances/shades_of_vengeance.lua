@@ -47,7 +47,7 @@ instanceObject.onInstanceFailure = function(instance)
 
     for i, v in pairs(chars) do
         if v:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.SHADES_OF_VENGEANCE then
-            v:setCharVar('Mission[4][30]Timer', VanadielUniqueDay() + 1)
+            v:setCharVar('Mission[4][30]Timer', VanadielUniqueDay())
         end
 
         v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)

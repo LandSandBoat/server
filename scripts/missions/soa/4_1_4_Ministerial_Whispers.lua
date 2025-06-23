@@ -31,7 +31,7 @@ mission.sections =
             {
                 [158] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.A_DAY_IN_THE_LIFE_OF_A_PIONEER, 'Timer', VanadielUniqueDay() + 1)
+                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.A_DAY_IN_THE_LIFE_OF_A_PIONEER, 'Timer', VanadielUniqueDay())
                         xi.mission.setMustZone(player, xi.mission.log_id.SOA, xi.mission.id.soa.A_DAY_IN_THE_LIFE_OF_A_PIONEER)
                     end
                 end,

@@ -72,7 +72,7 @@ quest.sections =
                             player:messageSpecial(feretoryID.text.MAY_POSSESS_BEES)
                         end
                     elseif option == 2 then
-                        quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                        quest:setVar(player, 'Timer', VanadielUniqueDay())
                     end
                 end,
             },

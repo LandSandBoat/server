@@ -51,7 +51,7 @@ mission.sections =
             {
                 [1510] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_KEY, 'Timer', VanadielUniqueDay() + 1)
+                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_KEY, 'Timer', VanadielUniqueDay())
 
                         for _, keyItem in ipairs(purgationKeyItems) do
                             player:delKeyItem(keyItem)

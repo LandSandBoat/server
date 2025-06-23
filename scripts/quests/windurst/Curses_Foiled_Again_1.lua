@@ -60,7 +60,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:confirmTrade()
 
-                        xi.quest.setVar(player, xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2, 'Timer', VanadielUniqueDay())
 
                         -- NOTE: There's two zoning mechanics required prior to the next quest being displayed in logs.  To make this easier,
                         -- setting a mustZone value for this quest as a requisite in order to utilize mustZone in the next quest's available

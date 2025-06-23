@@ -100,7 +100,7 @@ local function handleSelectionEventFinish(player, csid, option, npc)
             player:delGil(500000)
             quest:setVar(player, 'Prog', 2)
             quest:setMustZone(player)
-            quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+            quest:setVar(player, 'Timer', VanadielUniqueDay())
         end
     end
 end
@@ -209,7 +209,7 @@ quest.sections =
                     player:confirmTrade()
                     quest:setMustZone(player)
                     quest:setVar(player, 'Prog', 3)
-                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay())
                 end,
 
                 [10070] = function(player, csid, option, npc)

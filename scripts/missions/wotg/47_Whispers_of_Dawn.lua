@@ -35,7 +35,7 @@ mission.sections =
             {
                 [26] = function(player, csid, option, npc)
                     if option == 1 then
-                        xi.mission.setVar(player, xi.mission.log_id.WOTG, xi.mission.id.wotg.A_DREAMY_INTERLUDE, 'Timer', VanadielUniqueDay() + 1)
+                        xi.mission.setVar(player, xi.mission.log_id.WOTG, xi.mission.id.wotg.A_DREAMY_INTERLUDE, 'Timer', VanadielUniqueDay())
                         xi.mission.setMustZone(player, xi.mission.log_id.WOTG, xi.mission.id.wotg.A_DREAMY_INTERLUDE)
 
                         mission:complete(player)

@@ -50,7 +50,7 @@ mission.sections =
                     if option == 3 then
                         player:delKeyItem(xi.ki.SOUL_SIPHON)
                         player:messageSpecial(kamihrID.text.LOST_KEYITEM, xi.ki.SOUL_SIPHON)
-                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.GLIMMER_OF_PORTENT, 'Timer', VanadielUniqueDay() + 1)
+                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.GLIMMER_OF_PORTENT, 'Timer', VanadielUniqueDay())
                         mission:complete(player)
                     end
                 end,

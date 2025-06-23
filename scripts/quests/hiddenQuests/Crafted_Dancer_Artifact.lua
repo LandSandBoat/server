@@ -130,7 +130,7 @@ quest.sections =
 
                 [495] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay())
                     quest:setVar(player, 'Prog', 5)
                 end,
 

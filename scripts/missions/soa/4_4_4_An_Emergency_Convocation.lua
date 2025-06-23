@@ -72,7 +72,7 @@ mission.sections =
 
                 [1552] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.BALAMOR_THE_DEATHBORNE_XOL, 'Timer', VanadielUniqueDay() + 1)
+                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.BALAMOR_THE_DEATHBORNE_XOL, 'Timer', VanadielUniqueDay())
                     end
                 end,
             },

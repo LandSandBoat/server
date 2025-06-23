@@ -64,7 +64,7 @@ mission.sections =
             {
                 [2] = function(player, csid, option, npc)
                     mission:complete(player)
-                    xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_TWIN_WORLD_TREES, 'Timer', VanadielUniqueDay() + 1)
+                    xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_TWIN_WORLD_TREES, 'Timer', VanadielUniqueDay())
                 end,
             },
         },

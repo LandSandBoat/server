@@ -109,7 +109,7 @@ quest.sections =
 
                         player:messageSpecial(ruludeID.text.YOU_HAND_THE_THREE_SLIVERS)
 
-                        xi.quest.setVar(player, xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH, 'Timer', VanadielUniqueDay())
                         xi.quest.setMustZone(player, xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
                     end
                 end,

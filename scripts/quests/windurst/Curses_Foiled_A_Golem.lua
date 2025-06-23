@@ -123,7 +123,7 @@ quest.sections =
 
                 [108] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.SHANTOTTOS_EX_SPELL)
-                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay())
                 end,
 
                 [109] = function(player, csid, option, npc)

@@ -78,7 +78,7 @@ mission.sections =
 
                 [1549] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHT_WITHIN, 'Timer', VanadielUniqueDay() + 1)
+                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHT_WITHIN, 'Timer', VanadielUniqueDay())
 
                         -- NOTE: Since The Light Within is not completed at the end of its events, start the status at 1, and then reset it to
                         -- 0 once the reward ring has been obtained.

@@ -56,7 +56,7 @@ mission.sections =
                 end,
 
                 [10099] = function(player, csid, option, npc)
-                    mission:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    mission:setVar(player, 'Timer', VanadielUniqueDay())
                     mission:setMustZone(player)
                 end,
             },

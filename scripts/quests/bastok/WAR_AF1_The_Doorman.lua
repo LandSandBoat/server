@@ -113,7 +113,7 @@ quest.sections =
                 [152] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.SWORD_GRIP_MATERIAL)
 
-                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay())
                     quest:setVar(player, 'Prog', 1)
                 end,
 

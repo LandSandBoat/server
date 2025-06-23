@@ -221,7 +221,7 @@ quest.sections =
                         local mushroomPatchOffset = npc:getID() - aydeewaID.npc.MUSHROOM_PATCH
 
                         quest:setVar(player, 'MPatch'..mushroomPatchOffset, patchStage.PLANTED)
-                        quest:setVar(player, 'MPatch_Time'..mushroomPatchOffset, VanadielUniqueDay() + 1)
+                        quest:setVar(player, 'MPatch_Time'..mushroomPatchOffset, VanadielUniqueDay())
                         player:needToZone(true)
                         player:delKeyItem(xi.ki.SCOURSHROOM)
                     end

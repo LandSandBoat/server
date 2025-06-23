@@ -115,7 +115,7 @@ quest.sections =
 
                 [264] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 4)
-                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay())
                     player:delKeyItem(xi.ki.ANTIQUE_AUTOMATON)
                 end,
 

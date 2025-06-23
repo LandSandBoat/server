@@ -77,7 +77,7 @@ quest.sections =
                     if quest:complete(player) then
                         -- Set mustZone and Timer for "The Road to Divadom" Quest
 
-                        player:setCharVar('Quest[3][97]Timer', VanadielUniqueDay() + 1)
+                        player:setCharVar('Quest[3][97]Timer', VanadielUniqueDay())
                         player:setLocalVar('Quest[3][97]mustZone', 1)
                     end
                 end,

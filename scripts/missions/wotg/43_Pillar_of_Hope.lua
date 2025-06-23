@@ -38,7 +38,7 @@ mission.sections =
                     if option == 1 then
                         mission:complete(player)
 
-                        xi.mission.setVar(player, xi.mission.log_id.WOTG, xi.mission.id.wotg.GLIMMER_OF_LIFE, 'Timer', VanadielUniqueDay() + 1)
+                        xi.mission.setVar(player, xi.mission.log_id.WOTG, xi.mission.id.wotg.GLIMMER_OF_LIFE, 'Timer', VanadielUniqueDay())
                         xi.mission.setMustZone(player, xi.mission.log_id.WOTG, xi.mission.id.wotg.GLIMMER_OF_LIFE)
                     else
                         mission:setVar(player, 'Option', 1)

@@ -37,7 +37,7 @@ mission.sections =
             {
                 [1513] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.CLEAR_SKIES, 'Timer', VanadielUniqueDay() + 1)
+                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.CLEAR_SKIES, 'Timer', VanadielUniqueDay())
                     end
                 end,
             },

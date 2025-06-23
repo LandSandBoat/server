@@ -73,11 +73,11 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getCurrentMission(xi.mission.log_id.SOA) <= xi.mission.id.soa.BUDDING_PROSPECTS then
-                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.BUDDING_PROSPECTS, 'Timer', VanadielUniqueDay() + 1)
+                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.BUDDING_PROSPECTS, 'Timer', VanadielUniqueDay())
                         xi.mission.setMustZone(player, xi.mission.log_id.SOA, xi.mission.id.soa.BUDDING_PROSPECTS)
                     end
 
-                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay())
 
                     return quest:progressEvent(83)
                 end,

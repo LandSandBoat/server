@@ -69,7 +69,7 @@ quest.sections =
                 if quest:complete(player) then
                     player:confirmTrade()
 
-                    xi.quest.setVar(player, xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_STARVING, 'Timer', VanadielUniqueDay() + 1)
+                    xi.quest.setVar(player, xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_STARVING, 'Timer', VanadielUniqueDay())
                 end
             end,
 

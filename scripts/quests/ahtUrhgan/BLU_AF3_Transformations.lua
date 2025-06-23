@@ -68,7 +68,7 @@ quest.sections =
                         player:messageSpecial(whitegateID.text.PAY_DIVINATION)
 
                         quest:setVar(player, 'Prog', 1)
-                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay())
                     end
                 end,
 
@@ -80,7 +80,7 @@ quest.sections =
                         player:delGil(1000)
                         player:messageSpecial(whitegateID.text.PAY_DIVINATION)
 
-                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay())
                     end
                 end,
 
@@ -120,7 +120,7 @@ quest.sections =
                         player:delGil(1000)
                         player:messageSpecial(whitegateID.text.PAY_DIVINATION)
 
-                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay())
                     end
                 end,
             },

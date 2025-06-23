@@ -122,7 +122,7 @@ quest.sections =
                     if VanadielHour() < 6 then
                         quest:setVar(player, 'dueDate', VanadielUniqueDay())
                     else
-                        quest:setVar(player, 'dueDate', VanadielUniqueDay() + 1)
+                        quest:setVar(player, 'dueDate', VanadielUniqueDay())
                     end
                 end,
             },

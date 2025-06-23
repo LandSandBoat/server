@@ -230,7 +230,7 @@ mission.sections =
                     player:delKeyItem(xi.ki.CERNUNNOS_RESIN)
                     player:setMissionStatus(mission.areaId, 6)
 
-                    mission:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    mission:setVar(player, 'Timer', VanadielUniqueDay())
                     mission:setMustZone(player)
                 end,
             },
