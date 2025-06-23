@@ -2469,7 +2469,7 @@ xi.casket_loot.casketItems =
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            { 1270,   737 }, -- Gold Ore
+            {  127,   737 }, -- Gold Ore
             { 1550,   739 }, -- Orichalcum Ore
             {  745,   748 }, -- Gold Beastcoin
             {  625,   769 }, -- Red Rock
@@ -2480,18 +2480,18 @@ xi.casket_loot.casketItems =
             {  240,  3309 }, -- Barrage Turbine
             {  310,  3313 }, -- Vivi-Valve
             {  290,  3314 }, -- Disruptor
-            { 1400,  3434 }, -- Cobalt Cell
-            {  725,  3435 }, -- Rubicund Cell
-            { 1020,  3436 }, -- Xanthous Cell
-            {  600,  3437 }, -- Jade Cell
-            { 1750,  3450 }, -- Voiddust
-            { 5000,  4119 }, -- Hi-Potion +3
-            { 4900,  4135 }, -- Hi-Ether +3
-            { 1700,  4144 }, -- Hi-Elixir
+            {    0,  3434 }, -- Cobalt Cell
+            {    0,  3435 }, -- Rubicund Cell
+            {    0,  3436 }, -- Xanthous Cell
+            {    0,  3437 }, -- Jade Cell
+            {    0,  3450 }, -- Voiddust
+            {   10,  4119 }, -- Hi-Potion +3
+            {   10,  4135 }, -- Hi-Ether +3
+            {   10,  4144 }, -- Hi-Elixir
             {  750,  4155 }, -- Remedy
-            { 2100,  4173 }, -- Hi-Reraiser
+            {  210,  4173 }, -- Hi-Reraiser
             {  630,  5662 }, -- Dragon Fruit
-            { 1050,  5821 }, -- Fsn. Bolt Quiver
+            {  105,  5821 }, -- Fsn. Bolt Quiver
             {   80, 13929 }, -- Errant Hat
             {   75, 14078 }, -- Errant Cuffs
             {   30, 14380 }, -- Errant Hpl.
