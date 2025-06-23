@@ -150,7 +150,7 @@ quest.sections =
             {
                 [24] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        xi.quest.setVar(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON, 'Timer', VanadielUniqueDay())
                     end
                 end,
 

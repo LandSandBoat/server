@@ -105,7 +105,7 @@ quest.sections =
                 [10100] = function(player, csid, option, npc)
                     quest:setMustZone(player)
                     quest:setVar(player, 'Prog', 5)
-                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay())
                 end,
 
                 [10109] = function(player, csid, option, npc)

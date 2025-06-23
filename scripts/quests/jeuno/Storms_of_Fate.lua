@@ -113,7 +113,7 @@ quest.sections =
             {
                 [143] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        xi.quest.setVar(player, xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED, 'Timer', VanadielUniqueDay())
                     end
                 end,
             },

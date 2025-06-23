@@ -117,12 +117,12 @@ quest.sections =
                     player:confirmTrade()
 
                     quest:setVar(player, 'Prog', 2)
-                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay())
                 end,
 
                 [165] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        xi.quest.setVar(player, xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT, 'Timer', VanadielUniqueDay())
                         xi.quest.setMustZone(player, xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT)
                     end
                 end,

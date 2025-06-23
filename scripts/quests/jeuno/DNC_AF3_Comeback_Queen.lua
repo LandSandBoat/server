@@ -129,13 +129,13 @@ quest.sections =
             onEventFinish =
             {
                 [10147] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay())
                     quest:setVar(player, 'Prog', 2)
                 end,
 
                 [10151] = function(player, csid, option, npc)
                     if option == 0 then
-                        quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                        quest:setVar(player, 'Timer', VanadielUniqueDay())
                         quest:setMustZone(player)
                         quest:setVar(player, 'Prog', 3)
                     else
@@ -149,7 +149,7 @@ quest.sections =
                     if npcUtil.giveItem(player, dancersCasaque) then
                         quest:complete(player)
 
-                        player:setCharVar('Quest[3][99]Timer', VanadielUniqueDay() + 1)
+                        player:setCharVar('Quest[3][99]Timer', VanadielUniqueDay())
                         player:setLocalVar('Quest[3][99]mustZone', 1)
                     end
                 end,
@@ -172,7 +172,7 @@ quest.sections =
                     if npcUtil.giveItem(player, dancersCasaque) then
                         quest:complete(player)
 
-                        player:setCharVar('Quest[3][99]Timer', VanadielUniqueDay() + 1)
+                        player:setCharVar('Quest[3][99]Timer', VanadielUniqueDay())
                         player:setLocalVar('Quest[3][99]mustZone', 1)
                     else
                         quest:setVar(player, 'Prog', 8)

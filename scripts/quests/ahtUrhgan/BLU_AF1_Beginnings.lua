@@ -72,7 +72,7 @@ quest.sections =
                     if option == 1 then
                         quest:begin(player)
 
-                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay())
                     end
                 end,
             },
@@ -110,13 +110,13 @@ quest.sections =
                         player:delGil(1000)
                         player:messageSpecial(whitegateID.text.PAY_DIVINATION)
 
-                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay())
                     end
                 end,
 
                 [707] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay())
                         xi.quest.setMustZone(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
                     end
                 end,

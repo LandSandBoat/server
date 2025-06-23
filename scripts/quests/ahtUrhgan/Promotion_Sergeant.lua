@@ -93,7 +93,7 @@ quest.sections =
                     if option == 2 then
                         quest:setVar(player, 'Prog', 2)
                     else
-                        quest:setVar(player, 'Stage', VanadielUniqueDay() + 1)
+                        quest:setVar(player, 'Stage', VanadielUniqueDay())
                     end
                 end,
             },

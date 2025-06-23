@@ -108,7 +108,7 @@ mission.sections =
                     if option == 1 then
                         if mission:getVar(player, 'failCount') == 3 then
                             mission:setVar(player, 'failCount', 0)
-                            mission:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                            mission:setVar(player, 'Timer', VanadielUniqueDay())
                         end
 
                         player:updateEvent(284)

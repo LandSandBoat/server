@@ -37,7 +37,7 @@ mission.sections =
                 [3097] = function(player, csid, option, npc)
                     if mission:complete(player) then
                         player:setLocalVar('Mission[4][24]mustZone', 1)
-                        player:setCharVar('Mission[4][24]Timer', VanadielUniqueDay() + 1)
+                        player:setCharVar('Mission[4][24]Timer', VanadielUniqueDay())
                     end
                 end,
             },

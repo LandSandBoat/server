@@ -108,7 +108,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.ULBRECHTS_SEALED_LETTER)
                         player:delKeyItem(xi.ki.SCHULTZS_SEALED_LETTER)
-                        xi.quest.setVar(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL, 'Timer', VanadielUniqueDay())
                         xi.quest.setMustZone(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
                     end
                 end,

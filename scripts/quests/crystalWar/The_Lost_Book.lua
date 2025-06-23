@@ -161,7 +161,7 @@ quest.sections =
                     player:confirmTrade()
                     player:delKeyItem(xi.ki.LYNX_PELT)
                     quest:setVar(player, 'Prog', 5)
-                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay())
                 end,
             },
         },

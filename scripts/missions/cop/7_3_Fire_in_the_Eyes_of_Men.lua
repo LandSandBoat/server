@@ -62,7 +62,7 @@ mission.sections =
             onEventFinish =
             {
                 [857] = function(player, csid, option, npc)
-                    mission:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    mission:setVar(player, 'Timer', VanadielUniqueDay())
                 end,
 
                 [890] = function(player, csid, option, npc)

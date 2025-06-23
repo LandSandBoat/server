@@ -82,13 +82,13 @@ quest.sections =
                     if option == 50 then
                         quest:begin(player)
                         quest:setMustZone(player)
-                        quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                        quest:setVar(player, 'Timer', VanadielUniqueDay())
                     elseif
                         option == 1 and
                         player:getGil() >= 1000
                     then
                         quest:setMustZone(player)
-                        quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                        quest:setVar(player, 'Timer', VanadielUniqueDay())
 
                         player:delGil(1000)
                         player:messageSpecial(whitegateID.text.PAY_DIVINATION)
@@ -236,14 +236,14 @@ quest.sections =
                     if option == 1 then
                         quest:setVar(player, 'completeEvent', 0)
 
-                        quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                        quest:setVar(player, 'Timer', VanadielUniqueDay())
                         xi.quest.setMustZone(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
                     end
                 end,
 
                 [78] = function(player, csid, option, npc)
                     if option == 1 and player:getGil() >= 1000 then
-                        quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                        quest:setVar(player, 'Timer', VanadielUniqueDay())
 
                         player:delGil(1000)
                         player:messageSpecial(whitegateID.text.PAY_DIVINATION)

@@ -78,7 +78,7 @@ quest.sections =
                     if npcUtil.giveItem(player, tightsItemID) then
                         quest:complete(player)
 
-                        player:setCharVar('Quest[3][98]Timer', VanadielUniqueDay() + 1)
+                        player:setCharVar('Quest[3][98]Timer', VanadielUniqueDay())
                         player:setLocalVar('Quest[3][98]mustZone', 1)
                         player:setCharVar('HQuest[DncArtifact]Prog', 1)
                     else

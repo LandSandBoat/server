@@ -57,7 +57,7 @@ mission.sections =
                 end,
 
                 [44] = function(player, csid, option, npc)
-                    mission:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    mission:setVar(player, 'Timer', VanadielUniqueDay())
                     npcUtil.giveKeyItem(player, xi.ki.PRIMAL_GLOW)
                 end,
             },

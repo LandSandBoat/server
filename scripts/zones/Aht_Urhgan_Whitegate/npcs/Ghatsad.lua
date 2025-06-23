@@ -125,7 +125,7 @@ end
 local function satisfy_attachment(player, newAttachmentStatus)
     player:tradeComplete()
     player:setCharVar('PUP_AttachmentStatus', newAttachmentStatus)
-    player:setCharVar('PUP_AttachmentReady', VanadielUniqueDay() + 1)
+    player:setCharVar('PUP_AttachmentReady', VanadielUniqueDay())
     player:startEvent(625)
 end
 
@@ -138,7 +138,7 @@ local function play_event902(player, newAttachmentStatus, waitDays)
     player:tradeComplete()
     player:setCharVar('PUP_AttachmentStatus', newAttachmentStatus)
     player:setCharVar('PUP_AttachmentReady', VanadielUniqueDay() + waitDays)
-    player:setCharVar('PUP_nextCoffeeTrade', VanadielUniqueDay() + 1)
+    player:setCharVar('PUP_nextCoffeeTrade', VanadielUniqueDay())
     player:startEvent(902)
 end
 
@@ -206,7 +206,7 @@ entity.onTrade = function(player, npc, trade)
         if npcUtil.tradeHasExactly(trade, xi.item.CUP_OF_IMPERIAL_COFFEE) then
             player:confirmTrade()
             player:setCharVar('PUP_AttachmentReady', player:getCharVar('PUP_AttachmentReady') - 1)
-            player:setCharVar('PUP_nextCoffeeTrade', VanadielUniqueDay() + 1)
+            player:setCharVar('PUP_nextCoffeeTrade', VanadielUniqueDay())
             player:startEvent(904)
         end
     end

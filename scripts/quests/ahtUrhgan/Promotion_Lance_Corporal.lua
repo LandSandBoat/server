@@ -250,7 +250,7 @@ quest.sections =
                         local startingContents = quest:getVar(player, 'Prog')
 
                         quest:setVar(player, 'Stage', stage.WAIT)
-                        quest:setVar(player, 'Wait', VanadielUniqueDay() + 1)
+                        quest:setVar(player, 'Wait', VanadielUniqueDay())
                         quest:setVar(player, 'Option', remainingTubeContents - startingContents)
 
                         for keyItem = xi.ki.EMPTY_TEST_TUBE_1, xi.ki.TEST_TUBE_5 do

@@ -95,7 +95,7 @@ quest.sections =
                 end,
 
                 [34] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay())
                 end,
 
                 [36] = function(player, csid, option, npc)
@@ -148,7 +148,7 @@ quest.sections =
                         -- NOTE: The Price of Valor also requires specific mission progress; however, it is possible to hit the below
                         -- conditions if this is a second or third nation being completed by the player.
 
-                        xi.quest.setVar(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_PRICE_OF_VALOR, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_PRICE_OF_VALOR, 'Timer', VanadielUniqueDay())
                         xi.quest.setMustZone(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_PRICE_OF_VALOR)
                     end
                 end,
