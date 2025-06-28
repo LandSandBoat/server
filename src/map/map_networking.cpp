@@ -205,7 +205,7 @@ void MapNetworking::handle_incoming_packet(const std::error_code& ec, std::span<
                 // It could be beneficial to parse 0x00D here anyway.
 
                 // Client failed to receive 0x00B, resend it
-                if (auto PChar = map_session_data->PChar)
+                if (auto* PChar = map_session_data->PChar.get())
                 {
                     PChar->clearPacketList();
                     PChar->pushPacket<CServerIPPacket>(PChar, map_session_data->zone_type, map_session_data->zone_ipp);
@@ -329,7 +329,7 @@ int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession* map_s
         // If we were pending zones, delete our old char
         if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE)
         {
-            destroy(map_session_data->PChar);
+            map_session_data->PChar.reset();
         }
 
         if (map_session_data->PChar == nullptr)
@@ -357,10 +357,10 @@ int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession* map_s
                 ShowError("recv_parse: Cannot load session_key for charid %u", charID);
             }
 
-            auto PChar = charutils::LoadChar(charID);
-
-            map_session_data->PChar  = PChar;
+            map_session_data->PChar  = charutils::LoadChar(charID);
             map_session_data->charID = charID;
+
+            auto* PChar = map_session_data->PChar.get();
 
             PChar->PSession = map_session_data;
 
@@ -439,7 +439,7 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* map_sessio
     uint8* PacketData_Begin = &buff[FFXI_HEADER_SIZE];
     uint8* PacketData_End   = &buff[*buffsize];
 
-    CCharEntity* PChar = map_session_data->PChar;
+    auto* PChar = map_session_data->PChar.get();
 
     TracyZoneString(PChar->getName());
 
@@ -584,7 +584,7 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* map_s
     ref<uint32>(buff, 8) = earth_time::timestamp();
 
     // build a large package, consisting of several small packets
-    CCharEntity* PChar = map_session_data->PChar;
+    auto* PChar = map_session_data->PChar.get();
     TracyZoneString(PChar->name);
 
     std::unique_ptr<CBasicPacket> PSmallPacket = nullptr;

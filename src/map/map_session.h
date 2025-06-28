@@ -34,16 +34,16 @@ class CCharEntity;
 
 struct MapSession
 {
-    IPP               client_ipp         = {};
-    uint16            client_packet_id   = 0;       // id of the last packet that came from the client
-    uint16            server_packet_id   = 0;       // id of the last packet sent by the server
-    NetworkBuffer     server_packet_data = {};      // data of the packet, which was previously sent to the client
-    size_t            server_packet_size = 0;       // the size of the packet that was previously sent to the client
-    timer::time_point last_update        = {};      // time of last packet recv
-    blowfish_t        blowfish           = {};      // unique decypher keys, these are the currently expected keys
-    CCharEntity*      PChar              = nullptr; // game char
-    uint8             shuttingDown       = 0;       // prevents double session closing
-    uint32            charID             = 0;
+    IPP                          client_ipp         = {};
+    uint16                       client_packet_id   = 0;  // id of the last packet that came from the client
+    uint16                       server_packet_id   = 0;  // id of the last packet sent by the server
+    NetworkBuffer                server_packet_data = {}; // data of the packet, which was previously sent to the client
+    size_t                       server_packet_size = 0;  // the size of the packet that was previously sent to the client
+    timer::time_point            last_update        = {}; // time of last packet recv
+    blowfish_t                   blowfish           = {}; // unique decypher keys, these are the currently expected keys
+    std::unique_ptr<CCharEntity> PChar;                   // game char
+    uint8                        shuttingDown = 0;        // prevents double session closing
+    uint32                       charID       = 0;
 
     // Store old blowfish data, when a player recieves 0x00B their key should increment
     // If it doesn't, and we can still successfully decrypt here, that means we need to resend 0x00B.

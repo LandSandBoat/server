@@ -148,8 +148,8 @@ void MapSessionContainer::cleanupSessions(IPP mapIPP)
     {
         auto& map_session_data = it->second;
 
-        CCharEntity* PChar = map_session_data->PChar;
-        auto         now   = timer::now();
+        auto* PChar = map_session_data->PChar.get();
+        auto  now   = timer::now();
 
         if (now > map_session_data->last_update + 5s)
         {
@@ -214,7 +214,7 @@ void MapSessionContainer::cleanupSessions(IPP mapIPP)
 
                     charutils::removeCharFromZone(PChar);
 
-                    destroy(map_session_data->PChar);
+                    map_session_data->PChar.reset();
 
                     sessions_.erase(it++);
                 }
@@ -282,9 +282,9 @@ void MapSessionContainer::destroySession(MapSession* map_session_data)
         if (PZone)
         {
             // This should already be done in removeCharFromZone, but just to be safe...
-            PZone->DecreaseZoneCounter(map_session_data->PChar);
+            PZone->DecreaseZoneCounter(map_session_data->PChar.get());
         }
-        destroy(map_session_data->PChar);
+        map_session_data->PChar.reset();
     }
 
     sessions_.erase(map_session_data->client_ipp);

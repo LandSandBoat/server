@@ -347,12 +347,13 @@ namespace charutils
      *                                                                       *
      ************************************************************************/
 
-    CCharEntity* LoadChar(uint32 charId)
+    auto LoadChar(uint32 charId) -> std::unique_ptr<CCharEntity>
     {
         TracyZoneScoped;
 
-        CCharEntity* PChar = new CCharEntity();
-        PChar->id          = charId;
+        std::unique_ptr<CCharEntity> charEntity = std::make_unique<CCharEntity>();
+        auto*                        PChar      = charEntity.get();
+        PChar->id                               = charId;
 
         uint8  meritPoints = 0;
         uint16 limitPoints = 0;
@@ -874,7 +875,7 @@ namespace charutils
 
         PChar->status = STATUS_TYPE::DISAPPEAR;
 
-        return PChar;
+        return charEntity;
     }
 
     void LoadSpells(CCharEntity* PChar)
