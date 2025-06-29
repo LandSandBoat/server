@@ -25,6 +25,12 @@
 
 int main(int argc, char** argv)
 {
-    std::make_unique<TestRunner>(argc, argv)->run();
-    return 0;
+    const auto testRunner = std::make_unique<TestRunner>(argc, argv);
+
+    if (testRunner->initialize())
+    {
+        return testRunner->run();
+    }
+
+    return EXIT_FAILURE;
 }

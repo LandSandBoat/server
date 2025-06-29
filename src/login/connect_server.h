@@ -72,9 +72,9 @@ public:
     ConnectServer(int argc, char** argv);
     ~ConnectServer() override;
 
-    void loadConsoleCommands() override;
-
-    void run() override;
+    void onConsoleCommandsRegister(ConsoleService* console) override;
+    auto onInitialize() -> bool override;
+    auto onRun() -> int override;
 
     // This cleanup function is to periodically poll for auth sessions that were successful but xiloader failed to actually launch FFXI
     // When this happens, the data/view socket are never opened and will never be cleaned up normally.

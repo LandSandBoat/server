@@ -48,95 +48,6 @@ TestRunner::TestRunner(const int argc, char** argv)
 : Application("test", argc, argv)
 , m_sink(std::make_shared<InMemorySink>())
 {
-    TestChar::clean();
-
-    args_->add_argument("--keep-going")
-        .default_value(false)
-        .implicit_value(true)
-        .store_into(m_options.keepGoing)
-        .help("Continue as much as possible after an error or failure.");
-
-    args_->add_argument("-r", "--runs")
-        .default_value(1)
-        .store_into(m_options.runs)
-        .help("Number of times to run the tests.")
-        .scan<'i', int>();
-
-    args_->add_argument("--verbose")
-        .default_value(false)
-        .implicit_value(true)
-        .store_into(m_options.verbose)
-        .help("Verbose output of errors.");
-
-    args_->add_argument("-t", "--tags")
-        .default_value(std::vector<std::string>{})
-        .append()
-        .store_into(m_options.tags)
-        .help("Only run tests with these #tags.");
-
-    args_->add_argument("--exclude-tags")
-        .default_value(std::vector<std::string>{})
-        .append()
-        .store_into(m_options.excludeTags)
-        .help("Do not run tests with these #tags, takes precedence over tags.");
-
-    args_->add_argument("--filter")
-        .default_value(std::vector<std::string>{})
-        .append()
-        .store_into(m_options.filter)
-        .help("Only run test names matching the pattern.");
-
-    args_->add_argument("--filter-out")
-        .default_value(std::vector<std::string>{})
-        .append()
-        .store_into(m_options.filterOut)
-        .help("Do not run test names matching the pattern, takes precedence over filter.");
-
-    args_->add_argument("--pattern")
-        .default_value(std::vector<std::string>{ "" })
-        .append()
-        .store_into(m_options.pattern)
-        .help("Only run test files matching the pattern.");
-
-    args_->add_argument("--exclude-pattern")
-        .default_value(std::vector<std::string>{ "" })
-        .append()
-        .store_into(m_options.excludePattern)
-        .help("Do not run test files matching the pattern, takes precedence over pattern.");
-
-    args_->add_argument("--root")
-        .default_value(std::vector<std::string>{ "scripts/tests/suites" })
-        .append()
-        .store_into(m_options.ROOT)
-        .help("Test script file/folder. Folders will be traversed for any file that matches the pattern option.");
-
-    args_->add_argument("-n", "--name")
-        .default_value(std::vector<std::string>{})
-        .append()
-        .store_into(m_options.name)
-        .help("Run test with the given full name.");
-
-    args_->add_argument("-o", "--output")
-        .default_value("term")
-        .store_into(m_options.output)
-        .help("Output format to use. One of 'term', 'junit'.");
-
-    args_->parse();
-
-    // Without a world server actively pumping the queues,
-    // the embedded map server deadlocks on exit
-    //
-    // We will need this to work to support multiprocess tests and validating systems that rely on world server.
-    // However, that requires deeper rework to the IPP logic so we can smartly route messages during tests.
-    m_worldServer = std::make_unique<WorldServer>(argc, argv);
-
-    m_mapServer = std::make_unique<MapServer>(MapConfig{
-        .isTestServer      = true,
-        .dynamicZones      = true,
-        .controlledWeather = true,
-        .lazyMeshLoad      = true, // Not currently used
-        .disableLosLoad    = true, // Not currently used
-    });
 }
 
 TestRunner::~TestRunner() = default;
@@ -170,14 +81,13 @@ void TestRunner::prepareLuaEnvironment() const
 
     // Inject paths to luarocks tree
     // LUAROCKS_TREE is set by CMake and is required to build xi_test
-    const auto sharePath = std::format(LUAROCKS_TREE, "share");
-    const auto libPath   = std::format(LUAROCKS_TREE, "lib");
+    const auto sharePath = LR_PATH;
+    const auto libPath   = LR_CPATH;
 
-    lua["package"]["path"]  = std::format("{};{}/?.lua;{}/?/init.lua",
+    lua["package"]["path"]  = std::format("{};{}",
                                           lua["package"]["path"].get<std::string>(),
-                                          sharePath,
                                           sharePath);
-    lua["package"]["cpath"] = std::format("{};{}/?.dll",
+    lua["package"]["cpath"] = std::format("{};{}",
                                           lua["package"]["cpath"].get<std::string>(),
                                           libPath);
 
@@ -251,24 +161,119 @@ bool TestRunner::executeTests()
         std::cerr << "Test execution successful." << '\n';
     }
 
-    return success;
+    return !success;
 }
 
-void TestRunner::run()
+void TestRunner::onArgumentsRegister(Arguments* args)
 {
-    captureLogger();
+    args->add_argument("--keep-going")
+        .default_value(false)
+        .implicit_value(true)
+        .store_into(m_options.keepGoing)
+        .help("Continue as much as possible after an error or failure.");
+
+    args->add_argument("-r", "--runs")
+        .default_value(1)
+        .store_into(m_options.runs)
+        .help("Number of times to run the tests.")
+        .scan<'i', int>();
+
+    args->add_argument("--verbose")
+        .default_value(false)
+        .implicit_value(true)
+        .store_into(m_options.verbose)
+        .help("Verbose output of errors.");
+
+    args->add_argument("-t", "--tags")
+        .default_value(std::vector<std::string>{})
+        .append()
+        .store_into(m_options.tags)
+        .help("Only run tests with these #tags.");
+
+    args->add_argument("--exclude-tags")
+        .default_value(std::vector<std::string>{})
+        .append()
+        .store_into(m_options.excludeTags)
+        .help("Do not run tests with these #tags, takes precedence over tags.");
+
+    args->add_argument("--filter")
+        .default_value(std::vector<std::string>{})
+        .append()
+        .store_into(m_options.filter)
+        .help("Only run test names matching the pattern.");
+
+    args->add_argument("--filter-out")
+        .default_value(std::vector<std::string>{})
+        .append()
+        .store_into(m_options.filterOut)
+        .help("Do not run test names matching the pattern, takes precedence over filter.");
+
+    args->add_argument("--pattern")
+        .default_value(std::vector<std::string>{ "" })
+        .append()
+        .store_into(m_options.pattern)
+        .help("Only run test files matching the pattern.");
+
+    args->add_argument("--exclude-pattern")
+        .default_value(std::vector<std::string>{ "" })
+        .append()
+        .store_into(m_options.excludePattern)
+        .help("Do not run test files matching the pattern, takes precedence over pattern.");
+
+    args->add_argument("--root")
+        .default_value(std::vector<std::string>{ "scripts/tests/suites" })
+        .append()
+        .store_into(m_options.ROOT)
+        .help("Test script file/folder. Folders will be traversed for any file that matches the pattern option.");
+
+    args->add_argument("-n", "--name")
+        .default_value(std::vector<std::string>{})
+        .append()
+        .store_into(m_options.name)
+        .help("Run test with the given full name.");
+
+    args->add_argument("-o", "--output")
+        .default_value("term")
+        .store_into(m_options.output)
+        .help("Output format to use. One of 'term', 'junit'.");
+}
+
+auto TestRunner::onInitialize() -> bool
+{
+    TestChar::clean();
+
     // From this point, every logging statements end up in the in-memory sink
     // Print to stderr directly if needed
+    captureLogger();
+
+    // Without a world server actively pumping the queues,
+    // the embedded map server deadlocks on exit
+    //
+    // We will need this to work to support multiprocess tests and validating systems that rely on world server.
+    // However, that requires deeper rework to the IPP logic so we can smartly route messages during tests.
+    m_worldServer = std::make_unique<WorldServer>(1, []()
+                                                  {
+    static char* argv[] = { const_cast<char*>("xi_world"), nullptr };
+    return argv; }());
+
+    m_worldServer->onInitialize();
+
+    m_mapServer = std::make_unique<MapServer>(MapConfig{
+        .isTestServer      = true,
+        .dynamicZones      = true,
+        .controlledWeather = true,
+        .lazyMeshLoad      = true, // Not currently used
+        .disableLosLoad    = true, // Not currently used
+    });
+
+    m_mapServer->onInitialize();
 
     prepareLuaEnvironment();
 
-    const auto result = executeTests();
-
-    requestExit();
-
-    std::exit(result);
+    return true;
 }
 
-void TestRunner::loadConsoleCommands()
+auto TestRunner::onRun() -> int
 {
+    return executeTests();
 }

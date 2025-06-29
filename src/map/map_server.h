@@ -70,9 +70,11 @@ public:
     // Application
     //
 
-    void loadConsoleCommands() override;
-
-    void run() override;
+    auto onFileSinkRegister() -> std::optional<std::string> override;
+    void onArgumentsRegister(Arguments* args) override;
+    void onConsoleCommandsRegister(ConsoleService* console) override;
+    auto onInitialize() -> bool override;
+    auto onRun() -> int override;
 
     //
     // Init

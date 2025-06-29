@@ -50,9 +50,6 @@ Arguments::Arguments(std::string const& serverName, const int argc, char** argv)
         .flag();
 
     args_->add_epilog("This is free and open-source software. You may use, modify, and distribute it under the terms of the GNU GPL v3.");
-
-    // Parsing deferred until Application child is loaded and has added their own arguments.
-    // Call parse() explicitely to process
 }
 
 // Parse the arguments, catching any exceptions.

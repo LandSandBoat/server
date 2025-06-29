@@ -23,6 +23,12 @@
 
 int main(int argc, char** argv)
 {
-    std::make_unique<WorldServer>(argc, argv)->run();
-    return 0;
+    const auto worldServer = std::make_unique<WorldServer>(argc, argv);
+
+    if (worldServer->initialize())
+    {
+        return worldServer->run();
+    }
+
+    return EXIT_FAILURE;
 }

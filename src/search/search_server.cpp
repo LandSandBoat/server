@@ -26,15 +26,18 @@
 SearchServer::SearchServer(int argc, char** argv)
 : Application("search", argc, argv)
 {
-    args_->parse();
 }
 
 SearchServer::~SearchServer() = default;
 
-void SearchServer::run()
+auto SearchServer::onInitialize() -> bool
 {
-    ShowInfoFmt("creating ports");
+    // TODO: Register ASIO handlers here
+    return true;
+}
 
+auto SearchServer::onRun() -> int
+{
     // clang-format off
     const auto search_handler_handler = handler(io_context_, settings::get<uint32>("network.SEARCH_PORT"), [&](asio::ip::tcp::socket socket) {
         const auto handler = std::make_shared<search_handler>(std::move(socket), io_context_, IPAddressesInUse_, IPAddressWhitelist_);
@@ -66,8 +69,6 @@ void SearchServer::run()
         // clang-format on
     }
 
-    Application::markLoaded();
-
     try
     {
         // NOTE: io_context_.run() takes over and blocks this thread. Anything after this point will only fire
@@ -91,26 +92,30 @@ void SearchServer::run()
             {
                 // TODO: make a list of "allowed exceptions", the rest can/should cause shutdown.
                 ShowErrorFmt("Inner fatal: {}", e.what());
+                return EXIT_FAILURE;
             }
         }
     }
     catch (std::exception& e)
     {
         ShowErrorFmt("Outer fatal: {}", e.what());
+        return EXIT_FAILURE;
     }
+
+    return true;
 }
 
-void SearchServer::loadConsoleCommands()
+void SearchServer::onConsoleCommandsRegister(ConsoleService* console)
 {
     // clang-format off
     const auto expiryDays = settings::get<uint16>("search.EXPIRE_DAYS");
-    consoleService_->registerCommand("ah_cleanup", fmt::format("AH task to return items older than {} days", expiryDays),
+    console->registerCommand("ah_cleanup", fmt::format("AH task to return items older than {} days", expiryDays),
     [&](std::vector<std::string>& inputs)
     {
         ahCleanup();
     });
 
-    consoleService_->registerCommand("expire_all", "Force-expire all items on the AH, returning to sender",
+    console->registerCommand("expire_all", "Force-expire all items on the AH, returning to sender",
     [](std::vector<std::string>& inputs)
     {
         CDataLoader data;
@@ -119,7 +124,7 @@ void SearchServer::loadConsoleCommands()
     // clang-format on
 }
 
-void SearchServer::ahCleanup()
+void SearchServer::ahCleanup() const
 {
     CDataLoader data;
     data.ExpireAHItems(settings::get<uint16>("search.EXPIRE_DAYS"));

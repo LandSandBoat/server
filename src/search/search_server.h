@@ -47,12 +47,12 @@ public:
     SearchServer(int argc, char** argv);
     ~SearchServer() override;
 
-    void loadConsoleCommands() override;
-
-    void run() override;
+    void onConsoleCommandsRegister(ConsoleService* console) override;
+    auto onInitialize() -> bool override;
+    auto onRun() -> int override;
 
     void periodicCleanup(const asio::error_code& error, asio::steady_timer* timer);
-    void ahCleanup();
+    void ahCleanup() const;
 
 private:
     // A single IP should only have one request in flight at a time, so we are going to

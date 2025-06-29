@@ -91,7 +91,7 @@ Application::Application(std::string const& serverName, int argc, char** argv)
 : serverName_(serverName)
 , args_(std::make_unique<Arguments>(serverName, argc, argv))
 {
-    prepareLogging();
+    logging::InitializeConsoleLogger(serverName_);
     trySetConsoleTitle();
     registerSignalHandlers();
     tryDisableQuickEditMode();
@@ -103,13 +103,27 @@ Application::Application(std::string const& serverName, int argc, char** argv)
 
     lua_init();
     settings::init();
+}
+
+Application::~Application()
+{
+    tryRestoreQuickEditMode();
+}
+
+auto Application::initialize() -> bool
+{
+    // Let child register its arguments
+    onArgumentsRegister(args_.get());
+    args_->parse();
+
+    registerFileSinks();
 
     //
     // It is safe to use the logging macros and settings from this point on
     //
 
     ShowInfoFmt("=======================================================================");
-    ShowInfoFmt("Begin {}-server init...", serverName);
+    ShowInfoFmt("Begin {}-server init...", serverName_);
 
     srand(earth_time::timestamp());
     xirand::seed();
@@ -121,11 +135,24 @@ Application::Application(std::string const& serverName, int argc, char** argv)
 #endif
 
     consoleService_ = std::make_unique<ConsoleService>(*this);
+
+    // Let child perform any init steps
+    // Initialization can be marked as failed by returning false
+    initialized_ = onInitialize();
+
+    return initialized_;
 }
 
-Application::~Application()
+auto Application::run() -> int
 {
-    tryRestoreQuickEditMode();
+    if (!initialized_)
+    {
+        std::cerr << fmt::format("Initialization failed, cannot run {}-server.\n", serverName_);
+        return EXIT_FAILURE;
+    }
+
+    Application::markLoaded();
+    return onRun();
 }
 
 void Application::trySetConsoleTitle()
@@ -135,7 +162,7 @@ void Application::trySetConsoleTitle()
 #endif
 }
 
-void Application::registerSignalHandlers()
+void Application::registerSignalHandlers() const
 {
     // TODO: Replace with asio::signal_set
 
@@ -155,7 +182,7 @@ void Application::registerSignalHandlers()
 #endif
 }
 
-void Application::usercheck()
+void Application::usercheck() const
 {
 #ifndef TRACY_ENABLE
     // We _need_ root/admin for Tracy to be able to collect the full suite
@@ -169,7 +196,7 @@ void Application::usercheck()
 #endif // TRACY_ENABLE
 }
 
-void Application::tryIncreaseRLimits()
+void Application::tryIncreaseRLimits() const
 {
 #ifndef _WIN32
     rlimit limits{};
@@ -189,7 +216,7 @@ void Application::tryIncreaseRLimits()
 #endif
 }
 
-void Application::tryDisableQuickEditMode()
+void Application::tryDisableQuickEditMode() const
 {
 #ifdef _WIN32
     // Disable Quick Edit Mode (Mark) in Windows Console to prevent users from accidentially
@@ -200,7 +227,7 @@ void Application::tryDisableQuickEditMode()
 #endif // _WIN32
 }
 
-void Application::tryRestoreQuickEditMode()
+void Application::tryRestoreQuickEditMode() const
 {
 #ifdef _WIN32
     // Re-enable Quick Edit Mode upon Exiting if it is still disabled
@@ -209,33 +236,16 @@ void Application::tryRestoreQuickEditMode()
 #endif // _WIN32
 }
 
-void Application::prepareLogging()
+void Application::registerFileSinks()
 {
     auto logFile    = fmt::format("log/{}-server.log", serverName_);
     bool appendDate = false;
 
     //
-    // MapServer specific setup (TODO: Move this into MapServer)
-    //
-
-    if (serverName_ == "map")
-    {
-        if (auto ipArg = args_->present("--ip"))
-        {
-            logFile = *ipArg;
-        }
-
-        if (auto portArg = args_->present("--port"))
-        {
-            logFile.append(*portArg);
-        }
-    }
-
-    //
     // Regular setup
     //
 
-    if (auto logArg = args_->present("--log"))
+    if (const auto logArg = args_->present("--log"))
     {
         logFile = *logArg;
     }
@@ -245,12 +255,17 @@ void Application::prepareLogging()
         appendDate = true;
     }
 
-    logging::InitializeLog(serverName_, logFile, appendDate);
+    // Child can define a custom log file name
+    const std::optional<std::string> overrideFileName = onFileSinkRegister();
+
+    auto finalFileName = overrideFileName.value_or(logFile);
+
+    logging::AddFileSink(logFile, appendDate);
 }
 
 void Application::markLoaded()
 {
-    loadConsoleCommands();
+    onConsoleCommandsRegister(consoleService_.get());
 
     ShowInfoFmt("The {}-server is ready to work...", serverName_);
     ShowInfoFmt("Type 'help' for a list of available commands.");
@@ -264,7 +279,7 @@ void Application::markLoaded()
     }
 }
 
-bool Application::isRunning()
+bool Application::isRunning() const
 {
     return gIsRunning;
 }
@@ -275,7 +290,7 @@ void Application::requestExit()
     io_context_.stop();
 }
 
-bool Application::isRunningInCI()
+bool Application::isRunningInCI() const
 {
     return args_->get<bool>("--ci");
 }
@@ -285,12 +300,7 @@ auto Application::ioContext() -> asio::io_context&
     return io_context_;
 }
 
-auto Application::args() -> Arguments&
+auto Application::onFileSinkRegister() -> std::optional<std::string>
 {
-    return *args_;
-}
-
-auto Application::console() -> ConsoleService&
-{
-    return *consoleService_;
+    return std::nullopt;
 }

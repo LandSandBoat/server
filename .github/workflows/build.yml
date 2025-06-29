@@ -238,7 +238,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat luajit libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
+          sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat luajit libluajit-5.1-dev luarocks libzmq3-dev zlib1g-dev libssl-dev binutils-dev
       - name: Cache 'build' folder
         uses: actions/cache@v4
         with:
@@ -274,7 +274,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat luajit libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
+          sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat luajit libluajit-5.1-dev luarocks libzmq3-dev zlib1g-dev libssl-dev binutils-dev
       - name: Cache 'build' folder
         uses: actions/cache@v4
         with:
@@ -305,7 +305,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat luajit libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev gcc-14 g++-14
+          sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat luajit libluajit-5.1-dev luarocks libzmq3-dev zlib1g-dev libssl-dev binutils-dev gcc-14 g++-14
 
       - name: Cache 'build' folder
         uses: actions/cache@v4
@@ -337,10 +337,6 @@ jobs:
         with:
           path: build
           key: ${{ runner.os }}-msvc64d
-      - name: Get LuaJIT
-        run: |
-          winget install WingetPathUpdater -e --accept-source-agreements --accept-package-agreements
-          winget install --id=DEVCOM.LuaJIT -e --accept-source-agreements --accept-package-agreements
       - name: Configure CMake
         shell: bash
         run: |
@@ -375,10 +371,6 @@ jobs:
         with:
           path: build
           key: ${{ runner.os }}-msvc64-t
-      - name: Get LuaJIT
-        run: |
-          winget install WingetPathUpdater -e --accept-source-agreements --accept-package-agreements
-          winget install --id=DEVCOM.LuaJIT -e --accept-source-agreements --accept-package-agreements
       - name: Enable Modules
         shell: bash
         run: |
@@ -418,7 +410,7 @@ jobs:
           fetch-depth: 1
       - name: Install Dependencies (Brew)
         run: |
-          brew install mariadb zeromq zmq luajit
+          brew install mariadb zeromq zmq luajit luarocks
       - name: Configure CMake
         run: |
           mkdir -p build
@@ -678,7 +670,7 @@ jobs:
             exit -1
           fi
 
-  Tests_Linux:
+  Linux_Tests:
     runs-on: ubuntu-24.04
     needs: Linux_Clang18_64bit
     services:
@@ -695,17 +687,23 @@ jobs:
         with:
           fetch-depth: 1
           submodules: recursive # For navmeshes
-      - uses: actions/download-artifact@v4
-        with:
-          name: linux_executables
-          path: .
       - name: Install Dependencies
         # TODO: Properly use python venv
         run: |
           python3 -m pip config set global.break-system-packages true
           sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
+          sudo apt-get install -y software-properties-common cmake mariadb-client libmariadb-dev-compat luajit libluajit-5.1-dev luarocks libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
           python3 -m pip install -r tools/requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: linux_executables
+          path: .
+      - name: Configure CMake
+        run: |
+          export CC=/usr/bin/clang-18
+          export CXX=/usr/bin/clang++-18
+          mkdir -p build
+          cmake -S . -B build
       - name: Verify MySQL connection from container
         run: |
           mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -716,7 +714,7 @@ jobs:
       - name: Copy settings
         run: |
           cp settings/default/* settings/
-      - name: Run tests
+      - name: Run tests (terminal)
         run: |
           chmod +x xi_test
           ls -l
@@ -729,7 +727,24 @@ jobs:
               echo "xi_test exited with code $xitest_result"
               exit $xitest_result
           fi
+      - name: Run tests (junit)
+        run: |
+          chmod +x xi_test
+          ls -l
 
+          printf "\nStart server processes\n"
+          ./xi_test --verbose --keep-going --output junit
+          xitest_result=$?
+          
+          if [[ "$xitest_result" -ne "0" ]]; then
+              echo "xi_test exited with code $xitest_result"
+              exit $xitest_result
+          fi
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v5
+        if: success() || failure()
+        with:
+          report_paths: 'xi_test.xml'
   Full_Startup_Checks_Windows:
     runs-on: windows-2025
     needs: Windows_64bit_Debug

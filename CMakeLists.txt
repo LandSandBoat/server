@@ -23,6 +23,7 @@ include(CompilerWarnings)
 include(Sanitizers)
 include(Valgrind)
 include(Git)
+include(LuaRocks)
 
 message(STATUS "CMAKE_VERSION: ${CMAKE_VERSION}")
 message(STATUS "CMAKE_C_COMPILER: ${CMAKE_C_COMPILER}")
