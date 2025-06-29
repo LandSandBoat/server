@@ -1087,8 +1087,9 @@ def launch_using_zone_settings():
     time.sleep(1)
 
     for port in ports:
-        print(f"Launching {xi_map_executable} --log log/map-server-{port}.log --ip {zoneip} --port {port}")
-        launch_process_in_background([xi_map_executable, "--log", f"log/map-server-{port}.log", "--ip", zoneip, "--port", port])
+        if port != "0":
+            print(f"Launching {xi_map_executable} --log log/map-server-{port}.log --ip {zoneip} --port {port}")
+            launch_process_in_background([xi_map_executable, "--log", f"log/map-server-{port}.log", "--ip", zoneip, "--port", port])
 
 def update_submodules():
     # fmt: off
