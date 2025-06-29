@@ -23,6 +23,12 @@
 
 int main(int argc, char** argv)
 {
-    std::make_unique<MapServer>(argc, argv)->run();
-    return 0;
+    const auto mapServer = std::make_unique<MapServer>(argc, argv);
+
+    if (mapServer->initialize())
+    {
+        return mapServer->run();
+    }
+
+    return EXIT_FAILURE;
 }

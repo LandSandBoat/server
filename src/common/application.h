@@ -51,16 +51,14 @@ public:
     //
     // Init
     //
-
+    auto initialize() -> bool;
     void trySetConsoleTitle();
-    void registerSignalHandlers();
-    void usercheck();
-    void tryIncreaseRLimits();
-    void tryDisableQuickEditMode();
-    void tryRestoreQuickEditMode();
-    void prepareLogging();
-
-    virtual void loadConsoleCommands() = 0;
+    void registerSignalHandlers() const;
+    void usercheck() const;
+    void tryIncreaseRLimits() const;
+    void tryDisableQuickEditMode() const;
+    void tryRestoreQuickEditMode() const;
+    void registerFileSinks();
 
     void markLoaded();
 
@@ -68,27 +66,31 @@ public:
     // Runtime
     //
 
-    bool isRunning();
+    auto run() -> int;
+    auto isRunning() const -> bool;
     void requestExit();
 
-    // Is expected to block until requestExit() is called and/or isRunning() returns false
-    virtual void run() = 0;
+    // Override these to add specific behavior
+    virtual auto onFileSinkRegister() -> std::optional<std::string>; // Return a custom log file name
+    virtual void onArgumentsRegister(Arguments* args) {};               // Register any child specific argument
+    virtual void onConsoleCommandsRegister(ConsoleService* console) {}; // Register any child specific console commands
+    virtual auto onInitialize() -> bool = 0;                            // Called after parent initialize, safe to use logger
+    virtual auto onRun() -> int         = 0;                            // Return exit code
 
-    bool isRunningInCI();
+    auto isRunningInCI() const -> bool;
 
     //
     // Member accessors
     //
-
     auto ioContext() -> asio::io_context&;
-    auto args() -> Arguments&;
-    auto console() -> ConsoleService&;
 
 protected:
     asio::io_context io_context_;
 
     std::string serverName_;
 
+private:
     std::unique_ptr<Arguments>      args_;
     std::unique_ptr<ConsoleService> consoleService_;
+    bool                            initialized_{ false };
 };

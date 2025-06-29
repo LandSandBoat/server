@@ -120,13 +120,6 @@ void CLuaSimulation::clean()
     xirand::seed();
 }
 
-/************************************************************************
- *  Function: tick()
- *  Purpose : Ticks all entities in the simulation, executes expired tasks.
- *  Example : sim:tick()
- *  Notes   : Will advance time if provided.
- ************************************************************************/
-
 void CLuaSimulation::tick(const std::optional<uint32> timeSeconds) const
 {
     ShowDebug("Ticking world");
@@ -147,13 +140,6 @@ void CLuaSimulation::tick(const std::optional<uint32> timeSeconds) const
     ShowDebug("Executing tasks");
     CTaskManager::getInstance()->doExpiredTasks(timer::now());
 }
-
-/************************************************************************
- *  Function: tickEntity()
- *  Purpose : Ticks a specific entity.
- *  Example : sim:tickEntity(player)
- *  Notes   : Does not advance time, does not process expired tasks.
- ************************************************************************/
 
 void CLuaSimulation::tickEntity(CLuaBaseEntity& entity) const
 {

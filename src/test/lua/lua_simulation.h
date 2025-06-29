@@ -44,7 +44,20 @@ public:
     void loadZones(sol::variadic_args va) const;
     void clean();
 
+    /// Ticks all entities in the simulation, executes expired tasks.
+    /// @param timeSeconds (Optional) How many seconds to advance the simulation clock.
+    /// \code{.lua}
+    /// sim:tick()
+    /// \endcode
+    /// @note Will advance time if provided.
     void tick(std::optional<uint32> timeSeconds) const;
+
+    /// Ticks a specific entity.
+    /// @param entity Entity to tick.
+    /// @code{.lua}
+    /// sim:tickEntity(player)
+    /// @endcode
+    /// @note Does not advance time, does not process expired tasks.
     void tickEntity(CLuaBaseEntity& entity) const;
     void addSeconds(uint32 seconds) const;
 

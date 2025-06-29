@@ -88,14 +88,13 @@ WorldServer::WorldServer(int argc, char** argv)
 
 WorldServer::~WorldServer() = default;
 
-void WorldServer::loadConsoleCommands()
+auto WorldServer::onInitialize() -> bool
 {
+    return true;
 }
 
-void WorldServer::run()
+auto WorldServer::onRun() -> int
 {
-    Application::markLoaded();
-
     while (Application::isRunning())
     {
         const auto tickStart     = timer::now();
@@ -103,4 +102,6 @@ void WorldServer::run()
         const auto sleepFor      = kMainLoopInterval - tasksDuration;
         std::this_thread::sleep_for(sleepFor);
     }
+
+    return EXIT_SUCCESS;
 }

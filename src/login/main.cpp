@@ -29,6 +29,12 @@
 
 int main(int argc, char** argv)
 {
-    std::make_unique<ConnectServer>(argc, argv)->run();
-    return 0;
+    const auto connectServer = std::make_unique<ConnectServer>(argc, argv);
+
+    if (connectServer->initialize())
+    {
+        return connectServer->run();
+    }
+
+    return EXIT_FAILURE;
 }

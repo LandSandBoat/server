@@ -72,7 +72,7 @@ namespace
     uint32 TotalPacketsDelayedPerTick = 0U;
 } // namespace
 
-MapNetworking::MapNetworking(MapServer& mapServer, MapStatistics& mapStatistics, const MapConfig& config)
+MapNetworking::MapNetworking(MapStatistics& mapStatistics, const MapConfig& config)
 : mapStatistics_(mapStatistics)
 {
     TracyZoneScoped;
@@ -107,7 +107,7 @@ MapNetworking::MapNetworking(MapServer& mapServer, MapStatistics& mapStatistics,
     }
 }
 
-void MapNetworking::tapStatistics()
+void MapNetworking::tapStatistics() const
 {
     // Collect statistics
     // TODO: Collect these inline
@@ -237,7 +237,7 @@ void MapNetworking::handle_incoming_packet(const std::error_code& ec, std::span<
     }
 }
 
-int32 MapNetworking::map_decipher_packet(uint8* buff, size_t buffsize, MapSession* PSession, blowfish_t* pbfkey)
+int32 MapNetworking::map_decipher_packet(uint8* buff, size_t buffsize, MapSession* PSession, blowfish_t* pbfkey) const
 {
     TracyZoneScoped;
 
@@ -432,7 +432,7 @@ int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession* map_s
     // return -1;
 }
 
-int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* map_session_data)
+int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* map_session_data) const
 {
     TracyZoneScoped;
 
@@ -568,7 +568,7 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* map_sessio
     return 0;
 }
 
-int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* map_session_data, bool usePreviousKey)
+int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* map_session_data, bool usePreviousKey) const
 {
     TracyZoneScoped;
 
@@ -763,7 +763,7 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* map_s
     return 0;
 }
 
-auto MapNetworking::ipp() -> IPP
+auto MapNetworking::ipp() const -> IPP
 {
     return mapIPP_;
 }
@@ -773,7 +773,7 @@ auto MapNetworking::sessions() -> MapSessionContainer&
     return mapSessions_;
 }
 
-auto MapNetworking::socket() -> MapSocket&
+auto MapNetworking::socket() const -> MapSocket&
 {
     return *mapSocket_;
 }

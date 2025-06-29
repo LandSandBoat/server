@@ -50,8 +50,11 @@ public:
     TestRunner(int argc, char** argv);
     ~TestRunner() override;
 
-    void loadConsoleCommands() override;
-    void run() override;
+    void onArgumentsRegister(Arguments* args) override;
+    auto onInitialize() -> bool override;
+    auto onRun() -> int override;
+
+    void overrideSettings() const;
     void prepareLuaEnvironment() const;
     bool executeTests();
     void captureLogger() const;

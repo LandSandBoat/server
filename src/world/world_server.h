@@ -44,9 +44,8 @@ public:
     WorldServer(int argc, char** argv);
     ~WorldServer() override;
 
-    void loadConsoleCommands() override;
-
-    void run() override;
+    auto onInitialize() -> bool override;
+    auto onRun() -> int override;
 
     std::unique_ptr<IPCServer> ipcServer_;
 

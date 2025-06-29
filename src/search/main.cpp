@@ -23,6 +23,12 @@
 
 int main(int argc, char** argv)
 {
-    std::make_unique<SearchServer>(argc, argv)->run();
-    return 0;
+    const auto searchServer = std::make_unique<SearchServer>(argc, argv);
+
+    if (searchServer->initialize())
+    {
+        return searchServer->run();
+    }
+
+    return EXIT_FAILURE;
 }
