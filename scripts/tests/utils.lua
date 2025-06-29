@@ -28,7 +28,7 @@ local utils =
     ---@param baseTable table Table where the target function is located
     ---@param funcName string Name of the function to mock in the table
     ---@param replacement function The replacement function to use
-    ---@param testContext fun(spy: luassert.spy) Code block to execute with the mocked function
+    ---@param testContext fun(spy: luassert.spy.assert) Code block to execute with the mocked function
     mock = function(baseTable, funcName, replacement, testContext)
         local spy = require('luassert.spy')
 
@@ -50,7 +50,7 @@ local utils =
         -- Handle results
         if success then
             -- If the code executed successfully but the spy was never called, this is an error
-            assertedSpy.was.called()
+            assertedSpy.was.called(1)
             return result
         else
             error(result)

@@ -529,7 +529,7 @@ end
 
 ---Executes the provided code and fails if expected packets are not received by the end.
 ---@param blockUnderTest fun()
----@param ... PacketBuilder[]
+---@param ... PacketBuilder
 function SimulationClient:expectPackets(blockUnderTest, ...)
     local expectedPackets = { ... }
 

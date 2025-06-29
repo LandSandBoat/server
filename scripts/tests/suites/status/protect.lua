@@ -25,7 +25,7 @@ describe('xi.effects.protect', function()
             xi.test.world:skipTime(3)
 
             assert.is.equal(existingDef + 666, player:getStat(xi.mod.DEF))
-            mockedFn.was.called()
+            mockedFn.called(1)
         end)
     end)
 end)

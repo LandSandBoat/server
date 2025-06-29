@@ -73,8 +73,7 @@ namespace
 } // namespace
 
 MapNetworking::MapNetworking(MapServer& mapServer, MapStatistics& mapStatistics, const MapConfig& config)
-: mapServer_(mapServer)
-, mapStatistics_(mapStatistics)
+: mapStatistics_(mapStatistics)
 {
     TracyZoneScoped;
 

@@ -91,6 +91,7 @@ suite['NM spawning'] = function(world)
     -- Valkurm Emperor and PH
     local placeholders = getMobs(17199434)
     local nm = client:getEntity(17199438)
+    assert(nm)
 
     local maxIterations = 10000
     for _ = 1, maxIterations do
@@ -107,6 +108,7 @@ suite['NM spawning'] = function(world)
         world:tick()
     end
 
+    assert(nm)
     assert(nm:isAlive(), string.format('NM did not spawn even after killing placeholders %u times.', maxIterations))
 
     client:claimAndKillMob(nm)

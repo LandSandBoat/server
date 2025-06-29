@@ -2,19 +2,6 @@ local assert = require('luassert.assert')
 local say    = require('say')
 local utils  = require('scripts/tests/utils')
 
--- luacheck: ignore 241
----@class luassert.quest
-local quest  = {}
-
-quest.has    = quest
-quest.no     = quest
-
----Assert that a quest has a specific status
----@param status xi.questStatus The expected quest status
----@return luassert.quest
-function quest.status(status)
-end
-
 local questLogIdStateKey = '__quest_logid_state'
 local questIdStateKey    = '__quest_id_state'
 

@@ -1,6 +1,6 @@
 --- Get the option needed to enter a specific BCNM
----@param player CBaseEntity
----@param bcnmId integer
+-- -@param player CBaseEntity
+-- -@param bcnmId integer
 -- local function getBcnmOption(player, bcnmId)
 --     local bcnmIndex = nil
 --     for idx, bcnmInfo in ipairs(xi.battlefield.contentsByZone[player:getZoneID()]) do

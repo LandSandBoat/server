@@ -39,3 +39,8 @@ end
 ---@return boolean
 function CSimClient:isPendingZone()
 end
+
+---@nodiscard
+---@return table
+function CSimClient:getIncomingPackets()
+end

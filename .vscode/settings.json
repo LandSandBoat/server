@@ -335,6 +335,16 @@
         "GetSynergyRecipeByID",
         "GetSynergyRecipeByTrade",
         "ReloadSynthRecipes",
+
+        "describe",
+        "it",
+        "pending",
+        "assert",
+        "before_each",
+        "after_each",
+        "setup",
+        "teardown",
+        "spy",
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
@@ -346,6 +356,10 @@
     "Lua.runtime.version": "LuaJIT",
     "Lua.workspace.preloadFileSize": 100000,
     "Lua.workspace.maxPreload": 100000,
+    "Lua.workspace.library": [
+        "${3rd}/busted/library",
+        "${3rd}/luassert/library",
+    ],
     "Lua.workspace.ignoreDir": [
         ".vscode",
         "tools/ci/tests/stylecheck.lua"
