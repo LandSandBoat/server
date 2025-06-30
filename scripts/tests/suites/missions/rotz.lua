@@ -1,4 +1,4 @@
-describe('Zilart Missions', function()
+describe('Rise of the Zilart Missions', function()
     local client, player
 
     before_each(function()

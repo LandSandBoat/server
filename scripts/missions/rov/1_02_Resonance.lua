@@ -5,7 +5,7 @@
 -- !addmission 13 2
 -----------------------------------
 
-local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
+local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.RESONANCE)
 
 mission.reward =
 {

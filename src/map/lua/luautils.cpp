@@ -439,7 +439,8 @@ namespace luautils
 
                 // Spec meta files should not be cached, and are only used
                 // for Lua Language Server parsing
-                if (!parts.empty() && parts[2] == "specs")
+                // Test files are handled by xi_test exclusively
+                if (!parts.empty() && (parts[2] == "specs" || parts[2] == "tests"))
                 {
                     continue;
                 }

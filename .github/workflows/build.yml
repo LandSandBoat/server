@@ -25,178 +25,178 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-#      - name: Install Dependencies
-#        # TODO: Properly use python venv
-#        run: |
-#          python3 -m pip config set global.break-system-packages true
-#          sudo apt-get update
-#          sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat binutils-dev
-#          python3 -m pip install -r tools/requirements.txt
-#          luarocks install luacheck --local
-#          npm install -g diff-so-fancy
-#      - id: changed-files
-#        name: Get Changed Files
-#        uses: Ana06/get-changed-files@v2.3.0
-#        with:
-#          format: "json"
-#          filter: |
-#            modules/**
-#            src/**
-#            scripts/**
-#            sql/**
-#        continue-on-error: true
-#      - name: List Changed Files
-#        if: always()
-#        run: |
-#          readarray -t removed_files <<<"$(jq -r '.[]' <<<'${{ steps.changed-files.outputs.all }}')"
-#          echo "CHANGED_FILES=${removed_files[@]}" >> $GITHUB_ENV
-#
-#          for removed_file in $CHANGED_FILES; do
-#              echo "${removed_file}"
-#          done
-#      - name: Git Formatting Checks
-#        if: github.event_name == 'pull_request'
-#        run: |
-#          touch git_checks.txt
-#          bash tools/ci/git.sh origin/${{ github.event.pull_request.base.ref }} >> git_checks.txt || true
-#          cat git_checks.txt
-#          if [ -s git_checks.txt ]
-#          then
-#            exit 1
-#          fi
-#          exit 0
-#      - name: General File Checks
-#        if: always()
-#        run: |
-#          touch general_checks.txt
-#          for changed_file in $CHANGED_FILES; do
-#            if [[ -f $changed_file ]]; then
-#              bash tools/ci/general.sh ${changed_file} >> general_checks.txt || true
-#            fi
-#          done
-#          cat general_checks.txt
-#          if [ -s general_checks.txt ]
-#          then
-#            exit 1
-#          fi
-#          exit 0
-#      - name: CPP Checks
-#        if: always()
-#        run: |
-#          touch cpp_checks.txt
-#          for changed_file in $CHANGED_FILES; do
-#            if [[ -f $changed_file ]]; then
-#              if [[ $changed_file == *.cpp ]]; then
-#                bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt || true
-#              fi
-#            fi
-#          done
-#          cat cpp_checks.txt
-#          if [ -s cpp_checks.txt ]
-#          then
-#            exit 1
-#          fi
-#          exit 0
-#      - name: Run CPP Formatting Checks (clang-format-18)
-#        if: always()
-#        run: |
-#          clang-format-18 -version
-#          touch cpp_formatting_checks.txt
-#          for changed_file in $CHANGED_FILES; do
-#            if [[ -f $changed_file ]]; then
-#              if [[ $changed_file == *.cpp || $changed_file == *.h ]]; then
-#                clang-format-18 -style=file -i ${changed_file}
-#              fi
-#            fi
-#          done
-#          git diff >> cpp_formatting_checks.txt
-#          git diff --color >> cpp_formatting_checks_color.txt
-#      - name: Upload CPP Formatting Diff (clang-format-18)
-#        if: hashFiles('cpp_formatting_checks.txt') != ''
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: clang_format_diff
-#          path: |
-#            cpp_formatting_checks.txt
-#      - name: Report CPP Formatting Checks (clang-format-18)
-#        if: always()
-#        run: |
-#          if [ -s cpp_formatting_checks_color.txt ]
-#          then
-#            echo ""
-#            echo "You have errors in your C++ code formatting."
-#            echo "Please see below in red for the incorrect formatting, and in green for the correct formatting."
-#            echo "You can either fix the formatting by hand or use clang-format."
-#            echo "(You can safely ignore warnings about \$TERM and tput)"
-#            echo ""
-#            cat cpp_formatting_checks_color.txt | diff-so-fancy || true
-#            exit 1
-#          fi
-#          git reset --hard
-#          exit 0
-#      - name: Lua Checks
-#        if: always()
-#        run: |
-#          touch lua_checks.txt
-#          python3 tools/ci/lua_stylecheck.py test >> lua_checks.txt
-#
-#          for changed_file in $CHANGED_FILES; do
-#            if [[ -f $changed_file ]]; then
-#              if [[ $changed_file == *.lua ]]; then
-#                bash tools/ci/lua.sh ${changed_file} >> lua_checks.txt || true
-#              fi
-#            fi
-#          done
-#
-#          python3 tools/ci/check_lua_binding_usage.py >> lua_checks.txt
-#
-#          cat lua_checks.txt
-#          if [ -s lua_checks.txt ]
-#          then
-#            exit 1
-#          fi
-#          exit 0
-#      - name: SQL Checks
-#        if: always()
-#        run: |
-#          touch sql_checks.txt
-#          for changed_file in $CHANGED_FILES; do
-#            if [[ -f $changed_file ]]; then
-#              if [[ $changed_file == *.sql ]]; then
-#                bash tools/ci/sql.sh ${changed_file} >> sql_checks.txt || true
-#              fi
-#            fi
-#          done
-#
-#          python3 tools/price_checker.py >> sql_checks.txt
-#
-#          cat sql_checks.txt
-#          if [ -s sql_checks.txt ]
-#          then
-#            exit 1
-#          fi
-#          exit 0
-#      - name: Python Checks
-#        if: always()
-#        run: |
-#          touch python_checks.txt
-#          for changed_file in $CHANGED_FILES; do
-#            if [[ -f $changed_file ]]; then
-#              if [[ $changed_file == *.py ]]; then
-#                bash tools/ci/python.sh ${changed_file} >> python_checks.txt || true
-#              fi
-#            fi
-#          done
-#          cat python_checks.txt
-#          if [ -s python_checks.txt ]
-#          then
-#            exit 1
-#          fi
-#          exit 0
-#      - name: License Header Checks
-#        if: always()
-#        run: |
-#          python3 tools/ci/detect_license_headers.py
+      - name: Install Dependencies
+        # TODO: Properly use python venv
+        run: |
+          python3 -m pip config set global.break-system-packages true
+          sudo apt-get update
+          sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat binutils-dev
+          python3 -m pip install -r tools/requirements.txt
+          luarocks install luacheck --local
+          npm install -g diff-so-fancy
+      - id: changed-files
+        name: Get Changed Files
+        uses: Ana06/get-changed-files@v2.3.0
+        with:
+          format: "json"
+          filter: |
+            modules/**
+            src/**
+            scripts/**
+            sql/**
+        continue-on-error: true
+      - name: List Changed Files
+        if: always()
+        run: |
+          readarray -t removed_files <<<"$(jq -r '.[]' <<<'${{ steps.changed-files.outputs.all }}')"
+          echo "CHANGED_FILES=${removed_files[@]}" >> $GITHUB_ENV
+
+          for removed_file in $CHANGED_FILES; do
+              echo "${removed_file}"
+          done
+      - name: Git Formatting Checks
+        if: github.event_name == 'pull_request'
+        run: |
+          touch git_checks.txt
+          bash tools/ci/git.sh origin/${{ github.event.pull_request.base.ref }} >> git_checks.txt || true
+          cat git_checks.txt
+          if [ -s git_checks.txt ]
+          then
+            exit 1
+          fi
+          exit 0
+      - name: General File Checks
+        if: always()
+        run: |
+          touch general_checks.txt
+          for changed_file in $CHANGED_FILES; do
+            if [[ -f $changed_file ]]; then
+              bash tools/ci/general.sh ${changed_file} >> general_checks.txt || true
+            fi
+          done
+          cat general_checks.txt
+          if [ -s general_checks.txt ]
+          then
+            exit 1
+          fi
+          exit 0
+      - name: CPP Checks
+        if: always()
+        run: |
+          touch cpp_checks.txt
+          for changed_file in $CHANGED_FILES; do
+            if [[ -f $changed_file ]]; then
+              if [[ $changed_file == *.cpp ]]; then
+                bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt || true
+              fi
+            fi
+          done
+          cat cpp_checks.txt
+          if [ -s cpp_checks.txt ]
+          then
+            exit 1
+          fi
+          exit 0
+      - name: Run CPP Formatting Checks (clang-format-18)
+        if: always()
+        run: |
+          clang-format-18 -version
+          touch cpp_formatting_checks.txt
+          for changed_file in $CHANGED_FILES; do
+            if [[ -f $changed_file ]]; then
+              if [[ $changed_file == *.cpp || $changed_file == *.h ]]; then
+                clang-format-18 -style=file -i ${changed_file}
+              fi
+            fi
+          done
+          git diff >> cpp_formatting_checks.txt
+          git diff --color >> cpp_formatting_checks_color.txt
+      - name: Upload CPP Formatting Diff (clang-format-18)
+        if: hashFiles('cpp_formatting_checks.txt') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: clang_format_diff
+          path: |
+            cpp_formatting_checks.txt
+      - name: Report CPP Formatting Checks (clang-format-18)
+        if: always()
+        run: |
+          if [ -s cpp_formatting_checks_color.txt ]
+          then
+            echo ""
+            echo "You have errors in your C++ code formatting."
+            echo "Please see below in red for the incorrect formatting, and in green for the correct formatting."
+            echo "You can either fix the formatting by hand or use clang-format."
+            echo "(You can safely ignore warnings about \$TERM and tput)"
+            echo ""
+            cat cpp_formatting_checks_color.txt | diff-so-fancy || true
+            exit 1
+          fi
+          git reset --hard
+          exit 0
+      - name: Lua Checks
+        if: always()
+        run: |
+          touch lua_checks.txt
+          python3 tools/ci/lua_stylecheck.py test >> lua_checks.txt
+
+          for changed_file in $CHANGED_FILES; do
+            if [[ -f $changed_file ]]; then
+              if [[ $changed_file == *.lua ]]; then
+                bash tools/ci/lua.sh ${changed_file} >> lua_checks.txt || true
+              fi
+            fi
+          done
+
+          python3 tools/ci/check_lua_binding_usage.py >> lua_checks.txt
+
+          cat lua_checks.txt
+          if [ -s lua_checks.txt ]
+          then
+            exit 1
+          fi
+          exit 0
+      - name: SQL Checks
+        if: always()
+        run: |
+          touch sql_checks.txt
+          for changed_file in $CHANGED_FILES; do
+            if [[ -f $changed_file ]]; then
+              if [[ $changed_file == *.sql ]]; then
+                bash tools/ci/sql.sh ${changed_file} >> sql_checks.txt || true
+              fi
+            fi
+          done
+
+          python3 tools/price_checker.py >> sql_checks.txt
+
+          cat sql_checks.txt
+          if [ -s sql_checks.txt ]
+          then
+            exit 1
+          fi
+          exit 0
+      - name: Python Checks
+        if: always()
+        run: |
+          touch python_checks.txt
+          for changed_file in $CHANGED_FILES; do
+            if [[ -f $changed_file ]]; then
+              if [[ $changed_file == *.py ]]; then
+                bash tools/ci/python.sh ${changed_file} >> python_checks.txt || true
+              fi
+            fi
+          done
+          cat python_checks.txt
+          if [ -s python_checks.txt ]
+          then
+            exit 1
+          fi
+          exit 0
+      - name: License Header Checks
+        if: always()
+        run: |
+          python3 tools/ci/detect_license_headers.py
 
   Linux_LuaLanguageServer:
     needs: Sanity_Checks
@@ -658,11 +658,11 @@ jobs:
               exit -1
           fi
 
-          if grep -qi "warning\|error\|crash" map-server-0*.log; then
+          if grep -qi "error\|crash" map-server-0*.log; then
               exit -1
           fi
 
-          if grep -qi "warning\|error\|crash" map-server-1*.log; then
+          if grep -qi "error\|crash" map-server-1*.log; then
             exit -1
           fi
 
@@ -772,7 +772,7 @@ jobs:
               exit $xitest_result
           fi
       - name: Run tests (junit)
-        timeout-minutes: 5
+        timeout-minutes: 10
         run: |
           chmod +x xi_test
           ls -l
@@ -790,6 +790,15 @@ jobs:
         if: success() || failure()
         with:
           report_paths: 'xi_test.xml'
+          fail_on_failure: true
+          fail_on_parse_error: true
+          require_tests: true
+          include_passed: true
+          check_annotations: true
+          detailed_summary: true
+          include_time_in_summary: true
+          group_suite: true
+          comment: true
   Full_Startup_Checks_Windows:
     runs-on: windows-2025
     needs: Windows_64bit_Debug

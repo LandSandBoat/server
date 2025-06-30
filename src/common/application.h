@@ -71,7 +71,7 @@ public:
     void requestExit();
 
     // Override these to add specific behavior
-    virtual auto onFileSinkRegister() -> std::optional<std::string>; // Return a custom log file name
+    virtual auto onFileSinkRegister() -> std::optional<std::string>;    // Return a custom log file name
     virtual void onArgumentsRegister(Arguments* args) {};               // Register any child specific argument
     virtual void onConsoleCommandsRegister(ConsoleService* console) {}; // Register any child specific console commands
     virtual auto onInitialize() -> bool = 0;                            // Called after parent initialize, safe to use logger
