@@ -2,6 +2,8 @@
 -- Area: Attohwa Chasm
 --  Mob: Tiamat
 -----------------------------------
+mixins = { require('scripts/mixins/families/flying_wyrm') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -59,15 +61,14 @@ local spawnPoints =
     { x = -549.802, y = -8.944,  z = -24.848 },
 }
 
-local function enterFlight(mob)
-    mob:setAnimationSub(1) -- Change to flight.
-    mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-    mob:setMobSkillAttack(730)
-    mob:setLocalVar('flightTime', os.time() + 120)
-    mob:setLocalVar('changeHP', mob:getHP() - 10000)
-end
-
 entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.PARALYZE)
+    mob:addImmunity(xi.immunity.PLAGUE)
+    mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+
     mob:setCarefulPathing(true) -- Used for drawin
 
     xi.mob.updateNMSpawnPoint(mob, spawnPoints)
@@ -75,12 +76,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    -- Ensure Tiamat spawns with correct ground status
-    mob:setMobSkillAttack(0)
-    mob:setAnimationSub(0)
-    mob:delStatusEffect(xi.effect.ALL_MISS)
-    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-
     mob:setMod(xi.mod.ACC, 444)
     mob:setMod(xi.mod.ATT, 388)
     mob:setMod(xi.mod.COUNTER, 10)
@@ -100,12 +95,6 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 150) -- 247 total weapon damage
     mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
-    mob:addImmunity(xi.immunity.BIND)
-    mob:addImmunity(xi.immunity.PARALYZE)
-    mob:addImmunity(xi.immunity.PLAGUE)
-    mob:addImmunity(xi.immunity.PETRIFY)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
-    mob:addImmunity(xi.immunity.TERROR)
 end
 
 entity.onMobRoam = function(mob)
@@ -113,21 +102,21 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    local flightTime = mob:getLocalVar('flightTime')
-
-    -- Set flight time to two min if fresh spawn
-    if flightTime == 0 then
-        mob:setLocalVar('flightTime', os.time() + 120)
-    -- Otherwise, set how many seconds left to fly from last pull
-    else
-        mob:setLocalVar('flightTime', os.time() + flightTime)
-    end
-
     mob:setLocalVar('twohourTime', os.time() + 210)
-    mob:setLocalVar('changeHP', mob:getHP() - 10000)
 end
 
 entity.onMobFight = function(mob, target)
+    -- 2-Hour logic.
+    if
+        mob:getAnimationSub() ~= 1 and -- Disallow 2-houring while flying.
+        not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and
+        mob:actionQueueEmpty() and
+        os.time() > mob:getLocalVar('twohourTime')
+    then
+        mob:useMobAbility(688) -- Mighty Strikes
+        mob:setLocalVar('twohourTime', os.time() + 210)
+    end
+
     -- Tiamat draws in from set boundaries leaving her spawn area
     local drawInTable =
     {
@@ -169,94 +158,10 @@ entity.onMobFight = function(mob, target)
         mob:delMod(xi.mod.DELAY, 833)
         mob:setLocalVar('appliedDelayReduction', 0)
     end
-
-    -- Animation (Ground or flight mode) logic.
-    if
-        not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and
-        mob:actionQueueEmpty()
-    then
-        local flightTime  = mob:getLocalVar('flightTime')
-        local twohourTime = mob:getLocalVar('twohourTime')
-        local changeHP    = mob:getLocalVar('changeHP')
-        local animation   = mob:getAnimationSub()
-
-        -- Initial grounded mode.
-        if
-            animation == 0 and
-            (os.time() > flightTime and mob:getHP() < changeHP)
-        then
-            enterFlight(mob)
-
-        -- Flight mode.
-        elseif
-            animation == 1 and
-            (os.time() > flightTime and mob:getHP() < changeHP) and
-            mob:checkDistance(target) <= 6 -- This 2 checks are a hack until we can handle skills targeting a position and not an entity.
-        then
-            mob:useMobAbility(1282) -- This ability also handles animation change to 2.
-            mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
-            mob:setLocalVar('flightTime', os.time() + 120)
-            mob:setLocalVar('changeHP', mob:getHP() - 10000)
-
-        -- Subsequent grounded mode.
-        elseif animation == 2 then
-             -- 2-Hour logic.
-            if os.time() > twohourTime then
-                mob:useMobAbility(688) -- Mighty Strikes
-                mob:setLocalVar('twohourTime', os.time() + 210)
-
-            elseif
-                os.time() > flightTime or
-                mob:getHP() < changeHP
-            then
-                enterFlight(mob)
-            end
-        end
-    end
-
-    -- Tiamat wakes from sleep in air
-    if
-        (mob:hasStatusEffect(xi.effect.SLEEP_I) or
-        mob:hasStatusEffect(xi.effect.SLEEP_II) or
-        mob:hasStatusEffect(xi.effect.LULLABY)) and
-        mob:getAnimationSub() == 1
-    then
-        mob:wakeUp()
-    end
-end
-
-entity.onMobWeaponSkillPrepare = function(mob, target)
-    if mob:getAnimationSub() == 1 then
-        mob:setLocalVar('skill_tp', mob:getTP())
-    end
-end
-
-entity.onMobWeaponSkill = function(target, mob, skill)
-    -- Don't lose TP from autos during flight
-    if skill:getID() == 1278 then
-        mob:addTP(64) -- Needs to gain TP from flight auto attacks
-        mob:setLocalVar('skill_tp', 0)
-    elseif skill:getID() == 1282 then -- Don't consume TP on touchdown
-        mob:addTP(mob:getLocalVar('skill_tp'))
-        mob:setLocalVar('skill_tp', 0)
-    end
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENFIRE, { chance = 20, power = 100 })
-end
-
-entity.onMobDisengage = function(mob)
-    -- Reset Tiamat back to the ground on wipe
-    if mob:getAnimationSub() == 1 then
-        local flightTime = mob:getLocalVar('flightTime')
-        mob:setLocalVar('flightTime', flightTime - os.time()) -- Get seconds left to fly for next pull
-        mob:setAnimationSub(0)
-        mob:delStatusEffect(xi.effect.ALL_MISS)
-        mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
-        mob:setMobSkillAttack(0)
-        mob:setLocalVar('changeHP', 0)
-    end
 end
 
 entity.onMobDeath = function(mob, player, optParams)

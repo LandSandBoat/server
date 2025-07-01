@@ -68,6 +68,8 @@ xi.mobSkill =
 
     VULTURE_3                =  626,
 
+    TOUCHDOWN_1              =  640,
+
     BENEDICTION_1            =  689, -- Season's Greetings KSNM 30 (Gilagoge Tlugvi)
     HUNDRED_FISTS_1          =  690, -- Season's Greetings KSNM 30 (Goga Tlugvi)
 
@@ -114,6 +116,8 @@ xi.mobSkill =
     JUDGMENT_BOLT_2          =  918, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin) (Ramuh model avatar)
     SEARING_LIGHT_2          =  919, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin, Crimson-toothed Pawberry) (Carbuncle model avatar)
 
+    TOUCHDOWN_2              =  954,
+
     PHASE_SHIFT_1_EXOPLATES  =  993,
 
     PHASE_SHIFT_2_EXOPLATES  =  997,
@@ -148,11 +152,23 @@ xi.mobSkill =
     RANGED_ATTACK_13         = 1213,
     RANGED_ATTACK_14         = 1214,
 
+    TOUCHDOWN_TIAMAT         = 1282,
+
+    TOUCHDOWN_JORMUNGAND     = 1292,
+
+    TOUCHDOWN_OURYU          = 1302,
+
+    TOUCHDOWN_6              = 1312,
+
     MANTLE_PIERCE            = 1349,
     AERIAL_COLLISION         = 1353,
     SINUATE_RUSH             = 1367,
 
+    TOUCHDOWN_7              = 1409,
+
     HOWLING_MOON_3           = 1520, -- Unknown usage.
+
+    TOUCHDOWN_BAHAMUT        = 1544,
 
     FOOT_KICK_2              = 1567,
     DUST_CLOUD_2             = 1568,
