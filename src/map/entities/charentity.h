@@ -461,7 +461,7 @@ public:
     CUnityChat*                   PUnityChat;
     CTreasurePool*                PTreasurePool;
     std::unique_ptr<CMeritPoints> PMeritPoints;
-    CJobPoints*                   PJobPoints;
+    std::unique_ptr<CJobPoints>   PJobPoints;
     bool                          MeritMode;
 
     CLatentEffectContainer* PLatentEffectContainer;
