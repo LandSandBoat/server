@@ -851,7 +851,7 @@ namespace charutils
         PChar->PMeritPoints = std::make_unique<CMeritPoints>(PChar);
         PChar->PMeritPoints->SetMeritPoints(meritPoints);
         PChar->PMeritPoints->SetLimitPoints(limitPoints);
-        PChar->PJobPoints = new CJobPoints(PChar);
+        PChar->PJobPoints = std::make_unique<CJobPoints>(PChar);
 
         rset = db::preparedStmt("SELECT field_chocobo FROM char_pet WHERE charid = (?)", PChar->id);
         if (rset && rset->rowsCount() && rset->next())
