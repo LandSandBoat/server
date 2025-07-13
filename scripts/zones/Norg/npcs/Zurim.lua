@@ -53,7 +53,7 @@ local domainInvasionItems =
             [9] = { item = xi.item.VOLUSPA_KATANA, cost = 80 },
             [10] = { item = xi.item.VOLUSPA_TACHI, cost = 80 },
             [11] = { item = xi.item.VOLUSPA_HAMMER, cost = 80 },
-            [12] = { item = xi.item.VOLUSPA_POLE, cost = 80 }, 
+            [12] = { item = xi.item.VOLUSPA_POLE, cost = 80 },
             [13] = { item = xi.item.VOLUSPA_BOW, cost = 80 },
             [14] = { item = xi.item.VOLUSPA_GUN, cost = 80 },
             [15] = { item = xi.item.VOLUSPA_GRIP, cost = 80 },
@@ -123,11 +123,11 @@ local domainInvasionItems =
             [7] = { item = xi.item.BUSHIN_ABJURATION_BODY, cost = 400 },
             [8] = { item = xi.item.BUSHIN_ABJURATION_HANDS, cost = 400 },
             [9] = { item = xi.item.BUSHIN_ABJURATION_LEGS, cost = 400 },
-            [10] = { item = xi.item.BUSHIN_ABJURATION_FEET, cost = 400 }, 
+            [10] = { item = xi.item.BUSHIN_ABJURATION_FEET, cost = 400 },
             [11] = { item = xi.item.VALE_ABJURATION_HEAD, cost = 400 },
-            [12] = { item = xi.item.VALE_ABJURATION_BODY, cost = 400 }, 
-            [13] = { item = xi.item.VALE_ABJURATION_HANDS, cost = 400 }, 
-            [14] = { item = xi.item.VALE_ABJURATION_LEGS, cost = 400 }, 
+            [12] = { item = xi.item.VALE_ABJURATION_BODY, cost = 400 },
+            [13] = { item = xi.item.VALE_ABJURATION_HANDS, cost = 400 },
+            [14] = { item = xi.item.VALE_ABJURATION_LEGS, cost = 400 },
             [15] = { item = xi.item.VALE_ABJURATION_FEET, cost = 400 },
             [16] = { item = xi.item.GROVE_ABJURATION_HEAD, cost = 400 },
         },
@@ -201,7 +201,7 @@ local domainInvasionItems =
             [15] = { item = xi.item.GERSEMI_EARRING, cost = 600 },
             [16] = { item = xi.item.HNOSS_EARRING, cost = 600 },
         },
-        [2] = 
+        [2] =
         {
             [1] = { item = xi.item.GNA_EARRING, cost = 600 },
             [2] = { item = xi.item.FULLA_EARRING, cost = 600 },
@@ -296,13 +296,14 @@ end
 entity.onTrigger = function(player, npc)
     local domainInvPoints = player:getCurrency('domain_points')
 
-    player:startEvent(9512,domainInvPoints)
+    player:startEvent(9512, domainInvPoints)
+
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
-    local itemPage = bit.band(bit.rshift(option, 2), 0x0F) +1
-    local itemSubPage = bit.band(bit.rshift(option, 10), 0x0F) +1
-    local itemSelected = bit.band(bit.rshift(option, 6), 0x0F) +1
+    local itemPage = bit.band(bit.rshift(option, 2), 0x0F) + 1
+    local itemSubPage = bit.band(bit.rshift(option, 10), 0x0F) + 1
+    local itemSelected = bit.band(bit.rshift(option, 6), 0x0F) + 1
     local domainInvPurchase = domainInvasionItems[itemPage][itemSubPage][itemSelected]
     local domainInvPoints = player:getCurrency('domain_points')
 
@@ -311,6 +312,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
     end
 
     player:updateEvent(domainInvPoints - domainInvPurchase.cost)
+
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
