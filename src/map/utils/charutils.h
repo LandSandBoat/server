@@ -134,11 +134,11 @@ namespace charutils
     void   AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity);
     void   EmptyRecycleBin(CCharEntity* PChar);
 
-    auto hasKeyItem(CCharEntity* PChar, KeyItem keyItemId) -> bool;  // checking the presence of a key item
-    auto seenKeyItem(CCharEntity* PChar, KeyItem keyItemId) -> bool; // checking whether the description of the key item has been read
-    void unseenKeyItem(CCharEntity* PChar, KeyItem keyItemId);       // attempt to remove keyitem from seen list
-    void addKeyItem(CCharEntity* PChar, KeyItem keyItemId);          // add a key item
-    void delKeyItem(CCharEntity* PChar, KeyItem keyItemId);          // delete a key item
+    auto hasKeyItem(const CCharEntity* PChar, KeyItem keyItemId) -> bool; // checking the presence of a key item
+    auto seenKeyItem(CCharEntity* PChar, KeyItem keyItemId) -> bool;      // checking whether the description of the key item has been read
+    void unseenKeyItem(CCharEntity* PChar, KeyItem keyItemId);            // attempt to remove keyitem from seen list
+    void addKeyItem(CCharEntity* PChar, KeyItem keyItemId);               // add a key item
+    void delKeyItem(CCharEntity* PChar, KeyItem keyItemId);               // delete a key item
 
     int32 hasSpell(CCharEntity* PChar, uint16 SpellID); // checking for the presence of a spell
     int32 addSpell(CCharEntity* PChar, uint16 SpellID); // add a spell
@@ -205,7 +205,7 @@ namespace charutils
     void SaveTeleport(CCharEntity* PChar, TELEPORT_TYPE type); // save the character's teleports (homepoints, outposts, maws, etc)
     void SaveDeathTime(CCharEntity* PChar);                    // save when this character last died
     void SavePlayTime(CCharEntity* PChar);                     // save this character's total play time
-    bool hasMogLockerAccess(CCharEntity* PChar);               // true if have access, false otherwise
+    bool hasMogLockerAccess(const CCharEntity* PChar);         // true if have access, false otherwise
 
     uint8 getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest); // Get Quest status (used in FishingUtils.cpp, allows to fish quest specific mobs, like PLD AF NM)
 

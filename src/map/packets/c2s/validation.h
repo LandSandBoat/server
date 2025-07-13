@@ -138,7 +138,14 @@ public:
     {
         if (!container.contains(value))
         {
-            result_.addError(std::format("{} value {} is not allowed.", fieldName, value));
+            if constexpr (std::is_enum_v<T>)
+            {
+                result_.addError(std::format("{} value {} is not allowed.", fieldName, static_cast<std::underlying_type_t<T>>(value)));
+            }
+            else
+            {
+                result_.addError(std::format("{} value {} is not allowed.", fieldName, value));
+            }
         }
 
         return *this;
@@ -148,7 +155,7 @@ public:
     template <typename E>
     auto oneOf(const std::underlying_type_t<E> value) -> PacketValidator&
     {
-        static_assert(magic_enum::is_scoped_enum_v<E>, "Template parameter E must be an enum class");
+        static_assert(std::is_enum_v<E>, "Template parameter E must be an enum");
 
         if (!magic_enum::enum_contains<E>(value))
         {
@@ -165,6 +172,8 @@ public:
     auto isNormalStatus(const CCharEntity* PChar) -> PacketValidator&;
     // Character must not have any status effect preventing action (Sleep, Stun, Terror etc..)
     auto isNotPreventedAction(const CCharEntity* PChar) -> PacketValidator&;
+    // Character is not assuming a Monstrosity form
+    auto isNotMonstrosity(const CCharEntity* PChar) -> PacketValidator&;
 
     // Custom validation function
     template <typename Func>

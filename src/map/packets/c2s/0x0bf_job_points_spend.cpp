@@ -28,7 +28,7 @@
 auto GP_CLI_COMMAND_JOB_POINTS_SPEND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
-        .mustNotEqual(PChar->m_moghouseID, 0, "Character not in a mog house.")
+        .mustNotEqual(PChar->m_moghouseID, 0, "Character not in a mog house.") // Has been verified to work in ANY Mog House.
         .mustEqual(PChar->PJobPoints && PChar->PJobPoints->IsJobPointExist(static_cast<JOBPOINT_TYPE>(Index)), true, "Job point does not exist.");
 }
 

@@ -468,7 +468,7 @@ public:
     bool                    retriggerLatents; // used to retrigger all latent effects if some event requires them to be retriggered
 
     CItemContainer* PGuildShop;
-    CItemContainer* getStorage(uint8 LocationID);
+    CItemContainer* getStorage(uint8 locationId) const;
 
     CTradeContainer* TradeContainer; // Container used specifically for trading.
     CTradeContainer* Container;      // Universal container for exchange, synthesis, store, etc.
@@ -641,12 +641,12 @@ public:
 
     virtual void OnItemFinish(CItemState&, action_t&);
 
-    int32 getCharVar(std::string const& varName);
-    auto  getCharVarsWithPrefix(std::string const& prefix) -> std::vector<std::pair<std::string, int32>>;
-    void  setCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
-    void  setVolatileCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
-    void  updateCharVarCache(std::string const& varName, int32 value, uint32 expiry = 0);
-    void  removeFromCharVarCache(std::string const& varName);
+    auto getCharVar(std::string const& varName) const -> int32;
+    auto getCharVarsWithPrefix(std::string const& prefix) -> std::vector<std::pair<std::string, int32>>;
+    void setCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
+    void setVolatileCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
+    void updateCharVarCache(std::string const& varName, int32 value, uint32 expiry = 0);
+    void removeFromCharVarCache(std::string const& varName);
 
     void clearCharVarsWithPrefix(std::string const& prefix);
 
@@ -686,9 +686,9 @@ private:
     bool m_isBlockingAid;
     bool m_reloadParty;
 
-    std::unordered_map<std::string, std::pair<int32, uint32>> charVarCache;
-    std::unordered_set<std::string>                           charVarChanges;
-    std::unordered_set<uint32>                                charTriggerAreaIDs; // Holds any TriggerArea IDs that the player is currently within the bounds of
+    mutable std::unordered_map<std::string, std::pair<int32, uint32>> charVarCache;
+    std::unordered_set<std::string>                                   charVarChanges;
+    std::unordered_set<uint32>                                        charTriggerAreaIDs; // Holds any TriggerArea IDs that the player is currently within the bounds of
 
     uint8             dataToPersist = 0;
     timer::time_point nextDataPersistTime{};

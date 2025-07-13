@@ -69,7 +69,8 @@ void GP_CLI_COMMAND_CHARREQ::process(MapSession* PSession, CCharEntity* PChar) c
             }
 
             // Special case for onZoneIn cutscenes in Mog House
-            if (PChar->m_moghouseID &&
+            // TODO: Verify this condition when Mog House sharing is implemented.
+            if (PChar->m_moghouseID == PChar->id &&
                 PEntity->status == STATUS_TYPE::DISAPPEAR &&
                 PEntity->loc.p.z == 1.5 &&
                 PEntity->look.face == 0x52)

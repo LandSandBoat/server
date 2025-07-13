@@ -53,6 +53,7 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_CANNOT_CAST_SPELL     = 47,  // <player> cannot cast <spell>.
     MSGBASIC_CANNOT_IN_THIS_AREA   = 40,  // cannot use in this area
     MSGBASIC_UNABLE_TO_CAST_SPELLS = 49,  // The <player> is unable to cast spells.
+    MSGBASIC_UNABLE_TO_USE_ITEM    = 56,  // Unable to use item.
     MSGBASIC_MAGIC_NO_EFFECT       = 75,  // <caster>'s <spell> has no effect on <target>.
     MSGBASIC_IS_PARALYZED_2        = 84,  // <target> is paralyzed.
     MSGBASIC_MAGIC_TELEPORT        = 93,  // <caster> casts <spell>. <target> vanishes.

@@ -719,9 +719,9 @@ uint8 CCharEntity::getAutomatonElementCapacity(uint8 element)
  *
  ************************************************************************/
 
-CItemContainer* CCharEntity::getStorage(uint8 LocationID)
+auto CCharEntity::getStorage(const uint8 locationId) const -> CItemContainer*
 {
-    switch (LocationID)
+    switch (locationId)
     {
         case LOC_INVENTORY:
             return m_Inventory.get();
@@ -761,7 +761,7 @@ CItemContainer* CCharEntity::getStorage(uint8 LocationID)
             return m_RecycleBin.get();
     }
 
-    ShowWarning("Unhandled or Invalid Location ID (%d) passed to function.", LocationID);
+    ShowWarning("Unhandled or Invalid Location ID (%d) passed to function.", locationId);
     return nullptr;
 }
 
@@ -3336,9 +3336,9 @@ void CCharEntity::setLocked(bool locked)
     }
 }
 
-int32 CCharEntity::getCharVar(std::string const& charVarName)
+auto CCharEntity::getCharVar(std::string const& varName) const -> int32
 {
-    if (auto charVar = charVarCache.find(charVarName); charVar != charVarCache.end())
+    if (auto charVar = charVarCache.find(varName); charVar != charVarCache.end())
     {
         std::pair cachedVarData = charVar->second;
 
@@ -3350,9 +3350,9 @@ int32 CCharEntity::getCharVar(std::string const& charVarName)
         }
     }
 
-    auto value = charutils::FetchCharVar(this->id, charVarName);
+    const auto value = charutils::FetchCharVar(this->id, varName);
 
-    charVarCache[charVarName] = value;
+    charVarCache[varName] = value;
     return value.first;
 }
 

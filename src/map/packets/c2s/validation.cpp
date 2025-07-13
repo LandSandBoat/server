@@ -55,3 +55,13 @@ auto PacketValidator::isNotPreventedAction(const CCharEntity* PChar) -> PacketVa
 
     return *this;
 }
+
+auto PacketValidator::isNotMonstrosity(const CCharEntity* PChar) -> PacketValidator&
+{
+    if (PChar->m_PMonstrosity)
+    {
+        result_.addError("Character is a Monstrosity.");
+    }
+
+    return *this;
+}

@@ -2,6 +2,10 @@ set(PACKET_C2S_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/base.h
     ${CMAKE_CURRENT_SOURCE_DIR}/validation.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/validation.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x00a_login.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x00a_login.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x00c_gameok.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x00c_gameok.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x00d_netend.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x00d_netend.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x00f_clstat.cpp
@@ -18,12 +22,32 @@ set(PACKET_C2S_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01b_friendpass.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01c_unknown.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01c_unknown.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x01e_gm.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x01e_gm.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01f_gmcommand.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01f_gmcommand.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x028_item_dump.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x028_item_dump.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x029_item_move.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x029_item_move.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02b_translate.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02b_translate.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02c_itemsearch.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02c_itemsearch.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x032_trade_req.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x032_trade_req.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x033_trade_res.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x033_trade_res.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x034_trade_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x034_trade_list.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x036_item_transfer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x036_item_transfer.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x037_item_use.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x037_item_use.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03a_item_stack.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03a_item_stack.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03b_subcontainer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03b_subcontainer.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x041_trophy_entry.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x041_trophy_entry.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x042_trophy_absence.cpp

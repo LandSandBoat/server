@@ -3727,7 +3727,7 @@ namespace charutils
      *                                                                       *
      ************************************************************************/
 
-    auto hasKeyItem(CCharEntity* PChar, KeyItem keyItemId) -> bool
+    auto hasKeyItem(const CCharEntity* PChar, const KeyItem keyItemId) -> bool
     {
         const auto keyItemTable = static_cast<uint16_t>(keyItemId) / 512;
         const auto keyItemIndex = static_cast<uint16_t>(keyItemId) % 512;
@@ -6084,14 +6084,39 @@ namespace charutils
         return exp;
     }
 
-    bool hasMogLockerAccess(CCharEntity* PChar)
+    auto hasMogLockerAccess(const CCharEntity* PChar) -> bool
     {
         TracyZoneScoped;
-        auto tstamp = static_cast<uint32>(PChar->getCharVar("mog-locker-expiry-timestamp"));
+
+        const auto tstamp     = static_cast<uint32>(PChar->getCharVar("mog-locker-expiry-timestamp"));
+        const auto accessType = static_cast<uint32>(PChar->getCharVar("mog-locker-access-type"));
         if (earth_time::vanadiel_timestamp() < tstamp)
         {
-            return true;
+            const auto curZone = PChar->loc.zone;
+            switch (accessType)
+            {
+                case 1: // All areas
+                    // Allowed if in a zone with a Nomad Moogle or in your own Mog House
+                    return curZone->CanUseMisc(MISC_MOGMENU) || PChar->m_moghouseID == PChar->id;
+                case 0: // Al Zahbi only
+                default:
+                    const auto zoneId = curZone->GetID();
+
+                    // Either in your own MH in Al Zahbi or Whitegate
+                    if (PChar->m_moghouseID == PChar->id &&
+                        (zoneId == ZONE_AL_ZAHBI || zoneId == ZONE_AHT_URHGAN_WHITEGATE))
+                    {
+                        return true;
+                    }
+
+                    // Or in Nashmau where a Nomad Moogle is present.
+                    if (zoneId == ZONE_NASHMAU)
+                    {
+                        return true;
+                    }
+            };
         }
+
         return false;
     }
 
