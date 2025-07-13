@@ -7576,6 +7576,17 @@ INSERT INTO `item_basic` VALUES (9890,0,'tarazacum_orb','tarazacum_orb',1,61504,
 INSERT INTO `item_basic` VALUES (9891,0,'zinnia_orb','zinnia_orb',1,61504,@NONE,0,0);
 INSERT INTO `item_basic` VALUES (9892,0,'lions_roar','lions_roar',1,61504,@NONE,0,0);
 INSERT INTO `item_basic` VALUES (9893,0,'pile_of_wyrm_ash','wyrm_ash',12,4096,@NONE,1,0);
+INSERT INTO `item_basic` VALUES (9937,0,'ambuscade_voucher_replica','a._voucher_replica',12,28736,@NONE,0,0);
+INSERT INTO `item_basic` VALUES (9938,0,'ambuscade_chit_head','a._chit_head',12,28736,@NONE,0,0);
+INSERT INTO `item_basic` VALUES (9939,0,'ambuscade_chit_body','a._chit_body',12,28736,@NONE,0,0);
+INSERT INTO `item_basic` VALUES (9940,0,'ambuscade_chit_hands','a._chit_hands',12,28736,@NONE,0,0);
+INSERT INTO `item_basic` VALUES (9941,0,'ambuscade_chit_legs','a._chit_legs',12,28736,@NONE,0,0);
+INSERT INTO `item_basic` VALUES (9942,0,'ambuscade_chit_feet','a._chit_feet',12,28736,@NONE,0,0);
+INSERT INTO `item_basic` VALUES (9943,0,'ambuscade_chit_head_+1','a._chit_head_+1',12,28736,@NONE,0,0);
+INSERT INTO `item_basic` VALUES (9944,0,'ambuscade_chit_body_+1','a._chit_body_+1',12,28736,@NONE,0,0);
+INSERT INTO `item_basic` VALUES (9945,0,'ambuscade_chit_hands_+1','a._chit_hands_+1',12,28736,@NONE,0,0);
+INSERT INTO `item_basic` VALUES (9946,0,'ambuscade_chit_legs_+1','a._chit_legs_+1',12,28736,@NONE,0,0);
+INSERT INTO `item_basic` VALUES (9947,0,'ambuscade_chit_feet_+1','a._chit_feet_+1',12,28736,@NONE,0,0);
 INSERT INTO `item_basic` VALUES (10049,0,'♪raptor','♪raptor',1,61504,@NONE,0,0);
 INSERT INTO `item_basic` VALUES (10050,0,'♪tiger','♪tiger',1,61504,@NONE,0,0);
 INSERT INTO `item_basic` VALUES (10051,0,'♪crab','♪crab',1,61504,@NONE,0,0);
