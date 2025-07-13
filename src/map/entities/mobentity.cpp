@@ -751,7 +751,9 @@ auto CMobEntity::GetEligibleSeals() -> std::vector<uint16>
 auto CMobEntity::GetEligibleGeodes() -> std::vector<uint16>
 {
     if (!luautils::IsContentEnabled("ABYSSEA"))
+    {
         return {};
+    }
 
     uint8 element = 0;
 
