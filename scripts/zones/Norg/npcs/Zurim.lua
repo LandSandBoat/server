@@ -24,7 +24,7 @@ local domainInvasionItems =
             [1] = { item = xi.item.HERVOR_GALEA, cost = 40 },
             [2] = { item = xi.item.HERVOR_HAUBERT, cost = 40 },
             [3] = { item = xi.item.HERVOR_MOUFFLES, cost = 40 },
-            [4] = { item = xi.item.HERVOR_BRAYETTAS, cost = 40 },
+            [4] = { item = xi.item.HERVOR_BRAYETTES, cost = 40 },
             [5] = { item = xi.item.HERVOR_SOLLERETS, cost = 40 },
             [6] = { item = xi.item.HEIDREK_MASK, cost = 40 },
             [7] = { item = xi.item.HEIDREK_HARNESS, cost = 40 },
@@ -42,7 +42,7 @@ local domainInvasionItems =
     {
         [1] =
         {
-            [1] = { item = xi.item.VOLUSPA_KNUCKLES, cost = 80 },
+            [1] = { item = xi.item.PAIR_OF_VOLUSPA_KNUCKLES, cost = 80 },
             [2] = { item = xi.item.VOLUSPA_KNIFE, cost = 80 },
             [3] = { item = xi.item.VOLUSPA_SWORD, cost = 80 },
             [4] = { item = xi.item.VOLUSPA_BLADE, cost = 80 },
