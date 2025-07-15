@@ -111,7 +111,7 @@ entity.onMobDespawn = function(mob)
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(ph, false)
     GetMobByID(ph):setRespawnTime(GetMobRespawnTime(ph))
-    mob:setLocalVar('pop', os.time() + 900) -- 15 mins
+    mob:setLocalVar('pop', GetSystemTime() + 900) -- 15 mins
     huxzoiGlobal.pickTemperancePH()
 end
 

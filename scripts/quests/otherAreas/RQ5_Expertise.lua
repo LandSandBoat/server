@@ -102,7 +102,7 @@ quest.sections =
                     elseif questProgress == 2 then
                         local readyTime = quest:getVar(player, 'readyTime')
 
-                        if readyTime <= os.time() then -- Done waiting
+                        if readyTime <= GetSystemTime() then -- Done waiting
                             return quest:progressEvent(105) -- Get food.
                         else
                             return quest:event(141)
@@ -128,7 +128,7 @@ quest.sections =
 
                 [103] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
-                    quest:setVar(player, 'readyTime', os.time() + 24 * 144) -- Current time + 24 hours * 144 real seconds (Thats the ammount of seconds a Vana'Diel hour takes)
+                    quest:setVar(player, 'readyTime', GetSystemTime() + 24 * 144) -- Current time + 24 hours * 144 real seconds (Thats the ammount of seconds a Vana'Diel hour takes)
                     player:confirmTrade()
                 end,
 

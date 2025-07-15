@@ -759,7 +759,7 @@ xi.amk.helpers.puzzleTwoOnTrigger = function(player, npc, mission)
             previousStooge,
             stoogeNum,
             timeLimit,
-            os.time()
+            GetSystemTime()
         )
     end
 end
@@ -767,7 +767,7 @@ end
 xi.amk.helpers.puzzleTwoOnEventUpdate = function(player, csid, option, npc, mission)
     if option >= 1 and option <= 3 then
         local stooge = stooges[npc:getID()]
-        local timeLimit = os.time() + 180 -- Three minutes
+        local timeLimit = GetSystemTime() + 180 -- Three minutes
         local p2Progress = mission:getLocalVar(player, '[p2]progress')
         local currentQuestion = mission:getLocalVar(player, '[p2]question' .. p2Progress)
         local answers = xi.amk.helpers.triviaQuestions[currentQuestion](player)
@@ -797,7 +797,7 @@ xi.amk.helpers.puzzleTwoOnEventUpdate = function(player, csid, option, npc, miss
             stooge.answerTwo,
             currentQuestion,
             timeLimit,
-            os.time()
+            GetSystemTime()
         )
     elseif option == 11 then
         -- Incorrect Answer

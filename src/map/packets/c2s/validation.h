@@ -21,6 +21,10 @@
 
 #pragma once
 
+#include "magic_enum/magic_enum.hpp"
+
+enum LSTYPE : std::uint8_t;
+class CCharEntity;
 class PacketValidationResult
 {
 public:
@@ -129,17 +133,52 @@ public:
         return *this;
     }
 
-    // Value must be in the vector of allowed values
+    // Value must be in the set of allowed values
     template <typename T>
-    PacketValidator& oneOf(const std::string& fieldName, T value, const std::set<T>& container)
+    auto oneOf(const std::string& fieldName, T value, const std::set<T>& container) -> PacketValidator&
     {
         if (!container.contains(value))
         {
-            result_.addError(std::format("{} value {} is not allowed.", fieldName, value));
+            if constexpr (std::is_enum_v<T>)
+            {
+                result_.addError(std::format("{} value {} is not allowed.", fieldName, static_cast<std::underlying_type_t<T>>(value)));
+            }
+            else
+            {
+                result_.addError(std::format("{} value {} is not allowed.", fieldName, value));
+            }
         }
 
         return *this;
     }
+
+    // Value must be contained in the enum class
+    template <typename E>
+    auto oneOf(const std::underlying_type_t<E> value) -> PacketValidator&
+    {
+        static_assert(std::is_enum_v<E>, "Template parameter E must be an enum");
+
+        if (!magic_enum::enum_contains<E>(value))
+        {
+            constexpr std::string_view enumTypeName = magic_enum::enum_type_name<E>();
+            result_.addError(std::format("{} not a valid {} value.", value, enumTypeName));
+        }
+
+        return *this;
+    }
+
+    // Character must not be crafting
+    auto isNotCrafting(const CCharEntity* PChar) -> PacketValidator&;
+    // Character current status must be NORMAL
+    auto isNormalStatus(const CCharEntity* PChar) -> PacketValidator&;
+    // Character must not have any status effect preventing action (Sleep, Stun, Terror etc..)
+    auto isNotPreventedAction(const CCharEntity* PChar) -> PacketValidator&;
+    // Character is not assuming a Monstrosity form
+    auto isNotMonstrosity(const CCharEntity* PChar) -> PacketValidator&;
+    // Character must be in a valid event state, with optional eventId check.
+    auto isInEvent(const CCharEntity* PChar, std::optional<uint16_t> eventId = std::nullopt) -> PacketValidator&;
+    // Character must have necessary rank in the linkshell in the given slot
+    auto hasLinkshellRank(const CCharEntity* PChar, uint8_t slot, LSTYPE rank) -> PacketValidator&;
 
     // Custom validation function
     template <typename Func>

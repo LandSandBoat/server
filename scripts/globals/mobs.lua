@@ -92,7 +92,7 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
             chance = math.ceil(chance * 10) -- chance / 1000.
 
             if
-                os.time() > pop and
+                GetSystemTime() > pop and
                 not lotteryPrimed(phList) and
                 math.random(1, 1000) <= chance
             then
@@ -143,7 +143,7 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
                     GetMobByID(phId):setRespawnTime(GetMobRespawnTime(phId))
 
                     if m:getLocalVar('doNotInvokeCooldown') == 0 then
-                        m:setLocalVar('pop', os.time() + cooldown)
+                        m:setLocalVar('pop', GetSystemTime() + cooldown)
                     end
 
                     m:removeListener('DESPAWN_' .. nmId)

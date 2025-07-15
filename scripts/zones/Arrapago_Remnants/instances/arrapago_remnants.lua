@@ -71,11 +71,11 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress, elapsed)
     elseif instance:getStage() == 3 and progress == 1 then
         SpawnMob(ID.mob[2][0].astrologer, instance)
     elseif instance:getStage() == 6 and progress == 1 then
-        GetNPCByID(ID.npc[6].DOOR, instance):setLocalVar('start', os.time())
+        GetNPCByID(ID.npc[6].DOOR, instance):setLocalVar('start', GetSystemTime())
     elseif instance:getStage() == 7 and progress == 0 then
         local door = GetNPCByID(ID.npc[6].DOOR, instance)
         if door then
-            door:setLocalVar('current', os.time())
+            door:setLocalVar('current', GetSystemTime())
             if door:getLocalVar('current') - door:getLocalVar('start') <= 420 then
                 SpawnMob(ID.mob[6].treasure_hunter1, instance)
                 SpawnMob(ID.mob[6].treasure_hunter2, instance)

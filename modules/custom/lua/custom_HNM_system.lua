@@ -31,7 +31,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.Zone.onInitialize', function(zone)
     super(zone)
 
     local hnmPopTime  = GetServerVariable('[HNM]Fafnir')   -- Time the NM will spawn at.
-    local currentTime = os.time()
+    local currentTime = GetSystemTime()
 
     -- First-time setup.
     if hnmPopTime == 0 then
@@ -56,7 +56,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn', function
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
 
-    SetServerVariable('[HNM]Fafnir', os.time() + randomPopTime) -- Save next pop time.
+    SetServerVariable('[HNM]Fafnir', GetSystemTime() + randomPopTime) -- Save next pop time.
 
     -- Set spawn time and position.
     GetMobByID(dragonsAeryID.mob.FAFNIR):setRespawnTime(randomPopTime)
@@ -81,7 +81,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.Zone.onInitialize', function(z
     super(zone)
 
     local hnmPopTime  = GetServerVariable('[HNM]Adamantoise')   -- Time the NM will spawn at.
-    local currentTime = os.time()
+    local currentTime = GetSystemTime()
 
     -- First-time setup.
     if hnmPopTime == 0 then
@@ -106,7 +106,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn'
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
 
-    SetServerVariable('[HNM]Adamantoise', os.time() + randomPopTime) -- Save next pop time.
+    SetServerVariable('[HNM]Adamantoise', GetSystemTime() + randomPopTime) -- Save next pop time.
 
     -- Set spawn time and position.
     GetMobByID(valleySorrowsID.mob.ADAMANTOISE):setRespawnTime(randomPopTime)
@@ -131,7 +131,7 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.Zone.onInitialize', function(
     super(zone)
 
     local hnmPopTime  = GetServerVariable('[HNM]Behemoth')   -- Time the NM will spawn at.
-    local currentTime = os.time()
+    local currentTime = GetSystemTime()
 
     -- First-time setup.
     if hnmPopTime == 0 then
@@ -156,7 +156,7 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn', 
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
 
-    SetServerVariable('[HNM]Behemoth', os.time() + randomPopTime) -- Save next pop time.
+    SetServerVariable('[HNM]Behemoth', GetSystemTime() + randomPopTime) -- Save next pop time.
 
     -- Set spawn time and position.
     GetMobByID(behemothDomID.mob.BEHEMOTH):setRespawnTime(randomPopTime)

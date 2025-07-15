@@ -58,14 +58,14 @@ namespace mobSpellList
         std::memset(PMobSpellList, 0, sizeof(PMobSpellList));
         PMobSpellList[0] = new CMobSpellList();
 
-        const char* Query = "SELECT mob_spell_lists.spell_list_id, \
-                            mob_spell_lists.spell_id, \
-                            mob_spell_lists.min_level, \
-                            mob_spell_lists.max_level, \
-                            spell_list.content_tag \
-                            FROM mob_spell_lists JOIN spell_list ON spell_list.spellid = mob_spell_lists.spell_id \
-                            WHERE spell_list_id < %u \
-                            ORDER BY min_level ASC";
+        const char* Query = "SELECT mob_spell_lists.spell_list_id, "
+                            "mob_spell_lists.spell_id, "
+                            "mob_spell_lists.min_level, "
+                            "mob_spell_lists.max_level, "
+                            "spell_list.content_tag "
+                            "FROM mob_spell_lists JOIN spell_list ON spell_list.spellid = mob_spell_lists.spell_id "
+                            "WHERE spell_list_id < %u "
+                            "ORDER BY min_level ASC";
 
         int32 ret = _sql->Query(Query, MAX_MOBSPELLLIST_ID);
 

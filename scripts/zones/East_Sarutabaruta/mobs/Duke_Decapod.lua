@@ -27,9 +27,9 @@ end
 entity.onMobFight = function(mob, target)
     local castTime = mob:getLocalVar('dukeWater')
 
-    if os.time() > castTime then
+    if GetSystemTime() > castTime then
         mob:castSpell(169, target)
-        mob:setLocalVar('dukeWater', os.time() + 10)
+        mob:setLocalVar('dukeWater', GetSystemTime() + 10)
     end
 end
 

@@ -128,7 +128,7 @@ end
 
 -- TODO: handle pets and pet sp abilities
 local handleSP = function(mob)
-    local now = os.time()
+    local now = GetSystemTime()
     if now > xi.av.nextsp then
         if xi.av.bracelets and #xi.av.braceletsps ~= 0 then
             local trigger = xi.av.braceletsps[math.random(1, #xi.av.braceletsps)]
@@ -139,14 +139,14 @@ local handleSP = function(mob)
 
             for _, jsa in ipairs(combo) do
                 if not isLocked(jsa) then
-                    mob:setLocalVar(string.format('sp_%u', jsa), os.time())
+                    mob:setLocalVar(string.format('sp_%u', jsa), GetSystemTime())
                     avdebug(string.format('%s using %d', mob:getName(), jsa))
                     mob:useMobAbility(jsa)
                 end
             end
         elseif #xi.av.sps ~= 0 then
             local sp = xi.av.sps[math.random(1, #xi.av.sps)]
-            mob:setLocalVar(string.format('sp_%u', sp), os.time())
+            mob:setLocalVar(string.format('sp_%u', sp), GetSystemTime())
             avdebug(string.format('%s using %d', mob:getName(), sp))
             mob:useMobAbility(sp)
         end
@@ -262,7 +262,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    xi.av.nextsp = os.time() + math.random(45, 90)
+    xi.av.nextsp = GetSystemTime() + math.random(45, 90)
 end
 
 entity.onPlayerAbilityUse = function(mob, player, ability)
@@ -270,7 +270,7 @@ entity.onPlayerAbilityUse = function(mob, player, ability)
     local abilityID = ability:getID()
     local sp = playerAbilityToMobSP[abilityID]
     if sp ~= nil and player:checkDistance(mob) <= 15 then
-        local now = os.time()
+        local now = GetSystemTime()
         local used = mob:getLocalVar(string.format('sp_%u', sp))
         local lockWindowTime = 3 -- Just over 1x game tick
         if used ~= 0 and now < used + lockWindowTime then

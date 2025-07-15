@@ -28,8 +28,8 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(xi.ki.MARK_OF_SEED) or
         player:hasKeyItem(xi.ki.AZURE_KEY) or
         player:hasKeyItem(xi.ki.IVORY_KEY) or
-        os.time() < player:getCharVar('LastAzureKey') or
-        os.time() < player:getCharVar('LastIvoryKey') or
+        GetSystemTime() < player:getCharVar('LastAzureKey') or
+        GetSystemTime() < player:getCharVar('LastIvoryKey') or
         aCrystallineProphecy < xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II
     then
         player:messageSpecial(ID.text.SOFTLY_SHIMMERING_LIGHT)

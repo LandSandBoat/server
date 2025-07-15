@@ -104,7 +104,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local requestedBody = poseItems[player:getMainJob()]
 
-                    quest:setVar(player, 'Stage', os.time() + 300)
+                    quest:setVar(player, 'Stage', GetSystemTime() + 300)
                     quest:setVar(player, 'Prog', requestedBody)
 
                     return quest:progressEvent(92, 0, 0, 0, requestedBody)
@@ -125,7 +125,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     local requestedBody = quest:getVar(player, 'Prog')
-                    if quest:getVar(player, 'Stage') >= os.time() then -- Under time. Quest completed.
+                    if quest:getVar(player, 'Stage') >= GetSystemTime() then -- Under time. Quest completed.
                         if player:getEquipID(xi.slot.BODY) == requestedBody then
                             return quest:progressEvent(96)
                         else

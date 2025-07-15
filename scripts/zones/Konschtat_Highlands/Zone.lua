@@ -63,7 +63,7 @@ zoneObject.onGameHour = function(zone)
         local phase = VanadielMoonPhase()
         local haty = GetMobByID(ID.mob.HATY)
         local vran = GetMobByID(ID.mob.BENDIGEIT_VRAN)
-        local time = os.time()
+        local time = GetSystemTime()
 
         if
             haty and

@@ -66,6 +66,7 @@
 #include "char_recast_container.h"
 #include "charentity.h"
 #include "conquest_system.h"
+#include "enums/key_items.h"
 #include "ipc_client.h"
 #include "item_container.h"
 #include "items/item_furnishing.h"
@@ -364,8 +365,6 @@ CCharEntity::~CCharEntity()
     destroy(Container);
     destroy(UContainer);
     destroy(CraftContainer);
-    destroy(PMeritPoints);
-    destroy(PJobPoints);
     destroy(PLatentEffectContainer);
 
     PGuildShop = nullptr;
@@ -720,9 +719,9 @@ uint8 CCharEntity::getAutomatonElementCapacity(uint8 element)
  *
  ************************************************************************/
 
-CItemContainer* CCharEntity::getStorage(uint8 LocationID)
+auto CCharEntity::getStorage(const uint8 locationId) const -> CItemContainer*
 {
-    switch (LocationID)
+    switch (locationId)
     {
         case LOC_INVENTORY:
             return m_Inventory.get();
@@ -762,7 +761,7 @@ CItemContainer* CCharEntity::getStorage(uint8 LocationID)
             return m_RecycleBin.get();
     }
 
-    ShowWarning("Unhandled or Invalid Location ID (%d) passed to function.", LocationID);
+    ShowWarning("Unhandled or Invalid Location ID (%d) passed to function.", locationId);
     return nullptr;
 }
 
@@ -893,16 +892,17 @@ timer::duration CCharEntity::GetPlayTime(bool needUpdate)
     return m_PlayTime;
 }
 
-CItemEquipment* CCharEntity::getEquip(SLOTTYPE slot)
+auto CCharEntity::getEquip(const SLOTTYPE slot) const -> CItemEquipment*
 {
-    uint8           loc  = equip[slot];
-    uint8           est  = equipLoc[slot];
+    const uint8     loc  = equip[slot];
+    const uint8     est  = equipLoc[slot];
     CItemEquipment* item = nullptr;
 
     if (loc != 0)
     {
-        item = (CItemEquipment*)getStorage(est)->GetItem(loc);
+        item = static_cast<CItemEquipment*>(getStorage(est)->GetItem(loc));
     }
+
     return item;
 }
 
@@ -2107,7 +2107,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     actionTarget_t& actionTarget = actionList.getNewActionTarget();
     actionTarget.reaction        = REACTION::HIT;   // 0x10
     actionTarget.speceffect      = SPECEFFECT::HIT; // 0x60 (SPECEFFECT_HIT + SPECEFFECT_RECOIL)
-    actionTarget.messageID       = 352;
+    actionTarget.messageID       = MSGBASIC_RANGED_ATTACK_HIT;
 
     CItemWeapon* PItem = (CItemWeapon*)this->getEquip(SLOT_RANGED);
     CItemWeapon* PAmmo = (CItemWeapon*)this->getEquip(SLOT_AMMO);
@@ -2167,7 +2167,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
                 if (isCritical)
                 {
                     actionTarget.speceffect = SPECEFFECT::CRITICAL_HIT;
-                    actionTarget.messageID  = 353;
+                    actionTarget.messageID  = MSGBASIC_RANGED_ATTACK_CRIT;
                 }
 
                 // at least 1 hit occured
@@ -2233,10 +2233,40 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     // if a hit did occur (even without barrage)
     if (hitOccured)
     {
+        // Critical Hits don't get distance messaging
+        if (actionTarget.messageID != MSGBASIC_RANGED_ATTACK_CRIT)
+        {
+            auto rangedPenaltyFunction = lua["xi"]["combat"]["ranged"]["attackDistancePenalty"];
+            auto distancePenaltyResult = rangedPenaltyFunction(this, PTarget);
+            int  distancePenalty       = 0;
+
+            if (!distancePenaltyResult.valid())
+            {
+                sol::error err = distancePenaltyResult;
+                ShowError("charentity::OnRangedAttack: %s", err.what());
+            }
+            else
+            {
+                distancePenalty = distancePenaltyResult.get_type() == sol::type::number ? distancePenaltyResult.get<int16>(0) : 0;
+            }
+
+            if (distancePenalty == 0)
+            {
+                actionTarget.messageID = MSGBASIC_RANGED_ATTACK_PUMMELS;
+            }
+            else if (distancePenalty <= 15)
+            {
+                actionTarget.messageID = MSGBASIC_RANGED_ATTACK_SQUARELY;
+            }
+            else
+            {
+                actionTarget.messageID = MSGBASIC_RANGED_ATTACK_HIT;
+            }
+        }
+
         // any misses with barrage cause remaining shots to miss, meaning we must check Action.reaction
         if ((actionTarget.reaction & REACTION::MISS) != REACTION::NONE && StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE))
         {
-            actionTarget.messageID  = 352;
             actionTarget.reaction   = REACTION::HIT;
             actionTarget.speceffect = SPECEFFECT::CRITICAL_HIT;
         }
@@ -2870,13 +2900,13 @@ void CCharEntity::UpdateMoghancement()
         // Remove the previous moghancement
         if (m_moghancementID != 0)
         {
-            charutils::delKeyItem(this, m_moghancementID);
+            charutils::delKeyItem(this, static_cast<KeyItem>(m_moghancementID));
         }
 
         // Add the new moghancement
         if (newMoghancementID != 0)
         {
-            charutils::addKeyItem(this, newMoghancementID);
+            charutils::addKeyItem(this, static_cast<KeyItem>(newMoghancementID));
         }
 
         // Send only one key item packet if they are in the same key item table
@@ -2884,17 +2914,17 @@ void CCharEntity::UpdateMoghancement()
         uint8 currentTable = m_moghancementID >> 9;
         if (newTable == currentTable)
         {
-            pushPacket<CKeyItemsPacket>(this, (KEYS_TABLE)newTable);
+            pushPacket<CKeyItemsPacket>(this, static_cast<KEYS_TABLE>(newTable));
         }
         else
         {
             if (newTable != 0)
             {
-                pushPacket<CKeyItemsPacket>(this, (KEYS_TABLE)newTable);
+                pushPacket<CKeyItemsPacket>(this, static_cast<KEYS_TABLE>(newTable));
             }
             if (currentTable != 0)
             {
-                pushPacket<CKeyItemsPacket>(this, (KEYS_TABLE)currentTable);
+                pushPacket<CKeyItemsPacket>(this, static_cast<KEYS_TABLE>(currentTable));
             }
         }
         charutils::SaveKeyItems(this);
@@ -3195,7 +3225,7 @@ void CCharEntity::clearTriggerAreas()
     charTriggerAreaIDs.clear();
 }
 
-bool CCharEntity::isInEvent()
+auto CCharEntity::isInEvent() const -> bool
 {
     return currentEvent->eventId != -1;
 }
@@ -3307,9 +3337,9 @@ void CCharEntity::setLocked(bool locked)
     }
 }
 
-int32 CCharEntity::getCharVar(std::string const& charVarName)
+auto CCharEntity::getCharVar(std::string const& varName) const -> int32
 {
-    if (auto charVar = charVarCache.find(charVarName); charVar != charVarCache.end())
+    if (auto charVar = charVarCache.find(varName); charVar != charVarCache.end())
     {
         std::pair cachedVarData = charVar->second;
 
@@ -3321,9 +3351,9 @@ int32 CCharEntity::getCharVar(std::string const& charVarName)
         }
     }
 
-    auto value = charutils::FetchCharVar(this->id, charVarName);
+    const auto value = charutils::FetchCharVar(this->id, varName);
 
-    charVarCache[charVarName] = value;
+    charVarCache[varName] = value;
     return value.first;
 }
 

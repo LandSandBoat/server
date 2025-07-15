@@ -18,42 +18,46 @@ entity.onMobSpawn = function(mob)
     mob:setAnimationSub(0)
     mob:setAutoAttackEnabled(false)
     mob:setUnkillable(true)
+    mob:setLocalVar('phase', 0)
 end
 
 entity.onMobFight = function(mob, target)
     local animationSub = mob:getAnimationSub()
     local mobHPP       = mob:getHPP()
-    local shifts       = mob:getLocalVar('shifts')
-    local shiftTime    = mob:getLocalVar('shiftTime')
-    local battleTime   = mob:getBattleTime()
+    local phase        = mob:getLocalVar('phase')
 
-    if animationSub == 0 and mobHPP <= 66 then
-        if shifts == 0 then
-            mob:useMobAbility(xi.mobSkill.PHASE_SHIFT_1_EXOPLATES)
-            mob:setLocalVar('shifts', shifts + 1)
-            mob:setLocalVar('shiftTime', battleTime + 5)
-        elseif battleTime >= shiftTime then
-            mob:setAnimationSub(1)
-        end
-    elseif animationSub == 1 and mobHPP <= 33 then
-        if shifts == 1 then
-            mob:useMobAbility(xi.mobSkill.PHASE_SHIFT_2_EXOPLATES)
-            mob:setLocalVar('shifts', shifts + 1)
-            mob:setLocalVar('shiftTime', battleTime + 5)
-        elseif battleTime >= shiftTime then
-            mob:setAnimationSub(2)
-        end
-    elseif animationSub == 2 and mobHPP <= 2 then
-        if shifts == 2 then
-            mob:useMobAbility(xi.mobSkill.PHASE_SHIFT_2_EXOPLATES)
-            mob:setLocalVar('shifts', shifts + 1)
-        end
+    if animationSub == 0 and phase == 0 and mobHPP <= 66 then
+        mob:useMobAbility(xi.mobSkill.PHASE_SHIFT_1_EXOPLATES)
+    elseif animationSub == 1 and phase == 1 and mobHPP <= 33 then
+        mob:useMobAbility(xi.mobSkill.PHASE_SHIFT_2_EXOPLATES)
+    elseif animationSub == 2 and phase == 2 and mobHPP <= 2 then
+        mob:useMobAbility(xi.mobSkill.PHASE_SHIFT_3_EXOPLATES)
     end
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    if skill:getID() == xi.mobSkill.PHASE_SHIFT_3_EXOPLATES then
-        mob:setUnkillable(false)
+    local skillId = skill:getID()
+
+    -- First phase end.
+    if skillId == xi.mobSkill.PHASE_SHIFT_1_EXOPLATES then
+        mob:setLocalVar('phase', 1)
+        mob:timer(3000, function(mobArg)
+            mobArg:setAnimationSub(1)
+        end)
+
+    -- Second phase end.
+    elseif skillId == xi.mobSkill.PHASE_SHIFT_2_EXOPLATES then
+        mob:setLocalVar('phase', 2)
+        mob:timer(3000, function(mobArg)
+            mobArg:setAnimationSub(2)
+        end)
+
+    -- Third (Last) phase end.
+    elseif skillId == xi.mobSkill.PHASE_SHIFT_3_EXOPLATES then
+        mob:setLocalVar('phase', 3)
+        mob:timer(3000, function(mobArg)
+            mobArg:setUnkillable(false)
+        end)
     end
 end
 

@@ -18,18 +18,18 @@ entity.onMobFight = function(mob, target)
     local firstPet  = GetMobByID((mob:getID() + 1), instance)
     local secondPet = GetMobByID((mob:getID() + 2), instance)
 
-    if os.time() - popTime > 15 then
+    if GetSystemTime() - popTime > 15 then
         if firstPet and not firstPet:isSpawned() then
             firstPet:setSpawn(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:useMobAbility(2034)
-            mob:setLocalVar('lastPetPop', os.time())
+            mob:setLocalVar('lastPetPop', GetSystemTime())
             mob:timer(2500, function(m)
                 SpawnMob((m:getID() + 1), instance)
             end)
         elseif secondPet and not secondPet:isSpawned() then
             secondPet:setSpawn(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:useMobAbility(2034)
-            mob:setLocalVar('lastPetPop', os.time())
+            mob:setLocalVar('lastPetPop', GetSystemTime())
             mob:timer(2500, function(m)
                 SpawnMob((m:getID() + 2), instance)
             end)

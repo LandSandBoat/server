@@ -31,7 +31,7 @@ local gameOnEventUpdate = function(player, csid, option, npc)
         option == 1 and
         mission:getLocalVar(player, 'Timer') == 0
     then
-        mission:setLocalVar(player, 'Timer', os.time())
+        mission:setLocalVar(player, 'Timer', GetSystemTime())
     elseif option == 2 then
         mission:setLocalVar(player, 'Timer', 0)
     end
@@ -43,7 +43,7 @@ local gameOnEventFinish = function(player, csid, option, npc)
 
     if
         option == 1 and
-        os.time() - mission:getLocalVar(player, 'Timer') >= requiredTime
+        GetSystemTime() - mission:getLocalVar(player, 'Timer') >= requiredTime
     then
         mission:setVarBit(player, 'Status', pawprintNum - 3)
     end

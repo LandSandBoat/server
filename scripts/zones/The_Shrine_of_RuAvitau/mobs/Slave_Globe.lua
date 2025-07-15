@@ -34,7 +34,7 @@ entity.onMobDeath = function(mob, player, optParams)
     local mg = GetMobByID(ID.mob.MOTHER_GLOBE)
 
     if mg and mg:getLocalVar('nextSlaveSpawnTime') == 0 then
-        mg:setLocalVar('nextSlaveSpawnTime', os.time() + 30)
+        mg:setLocalVar('nextSlaveSpawnTime', GetSystemTime() + 30)
     end
 end
 

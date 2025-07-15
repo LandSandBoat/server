@@ -18,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
         spawnChance = 50
     end
 
-    if os.time() < timer then
+    if GetSystemTime() < timer then
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     elseif spawnChance > 0 then
         player:confirmTrade()

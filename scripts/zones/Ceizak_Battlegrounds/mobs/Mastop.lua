@@ -87,7 +87,7 @@ end
 
 local function handleBoomingBombination(mob)
     adjustResistance(mob) -- Adjust resistances first
-    mob:setLocalVar('boomingCooldown', os.time() + boomingCD)
+    mob:setLocalVar('boomingCooldown', GetSystemTime() + boomingCD)
 
     if math.random(100) <= auraChance then
         applyAura(mob)
@@ -114,7 +114,7 @@ entity.onMobSpawn = function(mob)
         -- Adjust resistance before resetting damage tracking
         if
             weaponSkillID == xi.mobSkill.BOOMING_BOMBINATION and
-            os.time() >= mobArg:getLocalVar('boomingCooldown')
+            GetSystemTime() >= mobArg:getLocalVar('boomingCooldown')
         then
             adjustResistance(mobArg)
             handleBoomingBombination(mobArg)

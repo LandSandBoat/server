@@ -15,8 +15,8 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    local month = tonumber(os.date('%m'))
-    local day = tonumber(os.date('%d'))
+    local month = JstMonth()
+    local day = JstDayOfTheMonth()
 
     -- Retail start/end dates vary, I am going with Dec 5th through Jan 5th.
     if

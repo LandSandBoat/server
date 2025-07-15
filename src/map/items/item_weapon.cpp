@@ -37,7 +37,7 @@ CItemWeapon::CItemWeapon(uint16 id)
     setType(ITEM_WEAPON);
 
     m_skillType      = SKILL_NONE;
-    m_subSkillType   = SUBSKILL_XBO;
+    m_subSkillType   = SUBSKILL_XBOW_SHORTBOW;
     m_iLvlSkill      = 0;
     m_iLvlParry      = 0;
     m_iLvlMacc       = 0;

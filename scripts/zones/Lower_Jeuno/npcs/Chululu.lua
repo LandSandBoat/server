@@ -78,11 +78,11 @@ entity.onTrigger = function(player, npc)
         allInTheCards >= xi.questStatus.QUEST_ACCEPTED and
         player:getLocalVar('Cardstemp') == 0
     then
-        if cdate >= os.time() then
+        if cdate >= GetSystemTime() then
             player:startEvent(10111) -- During quest 'All in the Cards' and same AllInTheCards_date value
         elseif cdate == 0 then
             player:startEvent(10113) -- Start quest 'All in the Cards' repeat with option
-        elseif cdate < os.time() then
+        elseif cdate < GetSystemTime() then
             player:startEvent(10112) -- During quest 'All in the Cards'  THIS ONE GIVES ANOTHER BATCH
         end
 

@@ -26,7 +26,7 @@ entity.onMobDeath = function(mob, player, optParams)
         end
 
         local ph = nm:getLocalVar('ph')
-        if ph == mobId and os.time() > nm:getLocalVar('pop') then
+        if ph == mobId and GetSystemTime() > nm:getLocalVar('pop') then
             local pos = mob:getSpawnPos()
             nm:setSpawn(pos.x, pos.y, pos.z)
             SpawnMob(ID.mob.JAILER_OF_TEMPERANCE):updateClaim(player)

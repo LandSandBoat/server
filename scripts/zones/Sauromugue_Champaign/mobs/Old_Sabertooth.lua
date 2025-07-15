@@ -61,7 +61,7 @@ entity.onMobDeath = function(mob, player, optParams)-- TODO: We currently can't 
             if mob:getLocalVar('tookDamage') == 0 then
                 person:setCharVar('Quest[2][31]Prog', 1)
             else
-                person:setCharVar('Quest[2][31]Timer', os.time() + 300)
+                person:setCharVar('Quest[2][31]Timer', GetSystemTime() + 300)
             end
         end
     end

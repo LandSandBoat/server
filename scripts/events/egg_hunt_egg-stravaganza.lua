@@ -79,8 +79,8 @@ end
 loadSettings(settings, 'EGG_HUNT')
 
 xi.events.eggHunt.enabledCheck = function()
-    local month = tonumber(os.date('%m'))
-    local day = tonumber(os.date('%d'))
+    local month = JstMonth()
+    local day = JstDayOfTheMonth()
 
     if month == settings.START.MONTH then
         if day >= settings.START.DAY then

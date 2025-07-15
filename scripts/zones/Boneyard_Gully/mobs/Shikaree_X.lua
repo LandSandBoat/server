@@ -89,7 +89,7 @@ local skillchainHandler = function(mob, scPartner, scStep)
 
     -- We were waiting for the skillchain partner to get TP and now she has it. Start skillchain.
     elseif scPartner:getLocalVar('hasTP') > 0 and scStep == 1 then
-        local now           = os.time()
+        local now           = GetSystemTime()
         local firstWsDelay  = math.random(1, 2)
         local secondWsDelay = math.random(7, 8)
 
@@ -114,7 +114,7 @@ local battleController = function(mob, target, scPartner)
 
     local wsTime = mob:getLocalVar('wsTime')
     local scStep = mob:getLocalVar('scStep')
-    local now    = os.time()
+    local now    = GetSystemTime()
 
     -- Prepare skillchain logistics.
     if wsTime == 0 then

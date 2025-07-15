@@ -244,9 +244,16 @@ namespace luautils
 
     uint32 GetSystemTime();
     uint32 JstMidnight();
-    uint32 JstWeekday();
+    uint32 JstDayOfTheYear();
+    uint32 JstDayOfTheMonth();
+    uint32 JstDayOfTheWeek();
+    int32  JstYear();
+    uint32 JstMonth();
+    uint32 JstHour();
+
     uint32 NextGameTime(uint32 intervalSeconds);
     uint32 NextJstWeek();
+
     uint32 VanadielTime();
     uint8  VanadielTOTD();
     uint32 VanadielHour();

@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
     -- Trial by Wind
     elseif
         (trialByWind == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.SELBINA_RABAO) >= 5) or
-        (trialByWind == xi.questStatus.QUEST_COMPLETED and os.time() > player:getCharVar('TrialByWind_date'))
+        (trialByWind == xi.questStatus.QUEST_COMPLETED and GetSystemTime() > player:getCharVar('TrialByWind_date'))
     then
         player:startEvent(66, 0, 331) -- Start and restart quest 'Trial by Wind'
     elseif

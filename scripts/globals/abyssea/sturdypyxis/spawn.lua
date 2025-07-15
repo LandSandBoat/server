@@ -146,13 +146,13 @@ xi.pyxis.spawn.lightsMessage =
 -- NOTE: will NOT allow a spawn if time since last spanwed is under 5 mins.
 -----------------------------------
 local function timeElapsedCheck(npc, player)
-    local spawnTime = os.time() + 180000 -- default time in case no var set.
+    local spawnTime = GetSystemTime() + 180000 -- default time in case no var set.
 
     if npc:getLocalVar('[pyxis]SPAWNTIME') > 0 then
         spawnTime = npc:getLocalVar('[pyxis]SPAWNTIME')
     end
 
-    return os.time() - spawnTime <= 0
+    return GetSystemTime() - spawnTime <= 0
 end
 
 -----------------------------------
@@ -184,7 +184,7 @@ local function GetPyxisID(player)
                 if npc:getStatus() == xi.status.CUTSCENE_ONLY then
                     npc:setStatus(xi.status.DISAPPEAR)
                 elseif npc:getStatus() == xi.status.DISAPPEAR then
-                    npc:setLocalVar('[pyxis]SPAWNTIME', (os.time() + 180000))
+                    npc:setLocalVar('[pyxis]SPAWNTIME', (GetSystemTime() + 180000))
                 end
             end
         end
@@ -524,7 +524,7 @@ local function SetPyxisData(npc, mob, player)
         npc:setLocalVar('TIER', chestTier)
         npc:setLocalVar('SIZE', sizeflag)
         npc:setLocalVar('CHESTTYPE', chestType)
-        npc:setLocalVar('[pyxis]SPAWNTIME', os.time())
+        npc:setLocalVar('[pyxis]SPAWNTIME', GetSystemTime())
         npc:setLocalVar('RAND_NUM', randnum)
         npc:setLocalVar('REQUIRED', required)
         npc:setLocalVar('MAX_UNLOCK_NUMBER', maxUnlockNumber)

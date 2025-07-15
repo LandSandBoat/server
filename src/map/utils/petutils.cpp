@@ -66,40 +66,40 @@ namespace petutils
     {
         FreePetList();
 
-        const char* Query = "SELECT\
-                pet_list.petid,\
-                pet_list.name,\
-                modelid,\
-                minLevel,\
-                maxLevel,\
-                time,\
-                mobradius,\
-                ecosystemID,\
-                mob_pools.familyid,\
-                mob_pools.mJob,\
-                mob_pools.sJob,\
-                pet_list.element,\
-                (mob_family_system.HP / 100),\
-                (mob_family_system.MP / 100),\
-                mob_family_system.speed,\
-                mob_family_system.STR,\
-                mob_family_system.DEX,\
-                mob_family_system.VIT,\
-                mob_family_system.AGI,\
-                mob_family_system.INT,\
-                mob_family_system.MND,\
-                mob_family_system.CHR,\
-                mob_family_system.DEF,\
-                mob_family_system.ATT,\
-                mob_family_system.ACC, \
-                mob_family_system.EVA, \
-                hasSpellScript, spellList, \
-                slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
-                magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
-                fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
-                cmbDelay, name_prefix, mob_pools.skill_list_id, damageType \
-                FROM pet_list, mob_pools, mob_resistances, mob_family_system \
-                WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id AND mob_pools.familyid = mob_family_system.familyID";
+        const char* Query = "SELECT "
+                            "pet_list.petid, "
+                            "pet_list.name, "
+                            "modelid, "
+                            "minLevel, "
+                            "maxLevel, "
+                            "time, "
+                            "mobradius, "
+                            "ecosystemID, "
+                            "mob_pools.familyid, "
+                            "mob_pools.mJob, "
+                            "mob_pools.sJob, "
+                            "pet_list.element, "
+                            "(mob_family_system.HP / 100), "
+                            "(mob_family_system.MP / 100), "
+                            "mob_family_system.speed, "
+                            "mob_family_system.STR, "
+                            "mob_family_system.DEX, "
+                            "mob_family_system.VIT, "
+                            "mob_family_system.AGI, "
+                            "mob_family_system.INT, "
+                            "mob_family_system.MND, "
+                            "mob_family_system.CHR, "
+                            "mob_family_system.DEF, "
+                            "mob_family_system.ATT, "
+                            "mob_family_system.ACC, "
+                            "mob_family_system.EVA, "
+                            "hasSpellScript, spellList, "
+                            "slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, "
+                            "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
+                            "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
+                            "cmbDelay, name_prefix, mob_pools.skill_list_id, damageType "
+                            "FROM pet_list, mob_pools, mob_resistances, mob_family_system "
+                            "WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id AND mob_pools.familyid = mob_family_system.familyID";
 
         if (_sql->Query(Query) != SQL_ERROR && _sql->NumRows() != 0)
         {
@@ -1717,12 +1717,12 @@ namespace petutils
         {
             petType = PET_TYPE::WYVERN;
 
-            const char* Query = "SELECT\
-                pet_name.name,\
-                char_pet.wyvernid\
-                FROM pet_name, char_pet\
-                WHERE pet_name.id = char_pet.wyvernid AND \
-                char_pet.charid = %u";
+            const char* Query = "SELECT "
+                                "pet_name.name, "
+                                "char_pet.wyvernid "
+                                "FROM pet_name, char_pet "
+                                "WHERE pet_name.id = char_pet.wyvernid AND "
+                                "char_pet.charid = %u";
 
             if (_sql->Query(Query, PMaster->id) != SQL_ERROR && _sql->NumRows() != 0)
             {

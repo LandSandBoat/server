@@ -152,7 +152,7 @@ xi.ancestryMoogle.onTrigger = function(player, npc)
     local raceChangeExpiry = player:getCharVar('[RaceChange]Eligible')
 
     -- If the player is on cooldown, show a message and exit.
-    if raceChangeLast + settings.cooldown >= os.time() then
+    if raceChangeLast + settings.cooldown >= GetSystemTime() then
         player:startEvent(csidLookup[zoneID][csidKey.NOT_ELIGIBLE],
             236,
             0, -- unknown, seen 0
@@ -169,7 +169,7 @@ xi.ancestryMoogle.onTrigger = function(player, npc)
     -- Player must have "purchased" the service and have enough time left to use it.
     if
         raceChangeExpiry == 0 or          -- Expired charvar
-        raceChangeExpiry - os.time() <= 0 -- If the charvar is set but expired.
+        raceChangeExpiry - GetSystemTime() <= 0 -- If the charvar is set but expired.
     then
         player:startEvent(csidLookup[zoneID][csidKey.NOT_ELIGIBLE], 236)
         player:setCharVar('[RaceChange]Eligible', 0)
@@ -189,7 +189,7 @@ xi.ancestryMoogle.onTrigger = function(player, npc)
         bit.rshift(player:getFace(), 1), -- current face, flattened from 0-15 to 0-7
         player:getSize(),                -- current size
         player:getFace() % 2,            -- current hair color (face variant)
-        raceChangeExpiry - os.time(),    -- Time left to use the service, in seconds.
+        raceChangeExpiry - GetSystemTime(),    -- Time left to use the service, in seconds.
         0,                               -- unknown, seen 0
         0,                               -- unknown, seen random values
         0                                -- unknown, seen random values
@@ -211,7 +211,7 @@ xi.ancestryMoogle.onEventFinish = function(player, csid, option, npc)
         -- If timer expired between the event start and finish, reset
         if
             raceChangeExpiry == 0 or          -- Expired charvar
-            raceChangeExpiry - os.time() <= 0 -- If the charvar is set but expired.
+            raceChangeExpiry - GetSystemTime() <= 0 -- If the charvar is set but expired.
         then
             player:messageSpecial(zones[zoneID].text.UNABLE_RACE_CHANGE)
             -- Must rezone character to exit the special event.
@@ -251,7 +251,7 @@ xi.ancestryMoogle.onEventFinish = function(player, csid, option, npc)
         -- This is done before the actual race change since it will teleport the player
         -- and player may no longer be valid
         player:setCharVar('[RaceChange]Eligible', 0)
-        player:setCharVar('[RaceChange]Last', os.time())
+        player:setCharVar('[RaceChange]Last', GetSystemTime())
 
         if not player:raceChange(newRace, newFace, newSize) then
             player:messageSpecial(zones[zoneID].text.UNABLE_RACE_CHANGE)

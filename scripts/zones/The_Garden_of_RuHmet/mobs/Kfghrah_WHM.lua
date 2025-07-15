@@ -12,7 +12,7 @@ end
 entity.onMobSpawn = function(mob)
     -- Set core Skin and mob elemental bonus
     mob:setAnimationSub(0)
-    mob:setLocalVar('roamTime', os.time())
+    mob:setLocalVar('roamTime', GetSystemTime())
     mob:setModelId(1167) -- light
 
     -- Todo: confirm this is legit and move to mob_reistances table if so
@@ -23,14 +23,14 @@ end
 entity.onMobRoam = function(mob)
     local roamTime = mob:getLocalVar('roamTime')
     local roamForm
-    if os.time() - roamTime > 60 then
+    if GetSystemTime() - roamTime > 60 then
         roamForm = math.random(1, 3) -- forms 2 and 3 are spider and bird; can change forms at will
         if roamForm == 1 then
             roamForm = 0 -- We don't want form 1 as that's humanoid - make it 0 for ball
         end
 
         mob:setAnimationSub(roamForm)
-        mob:setLocalVar('roamTime', os.time())
+        mob:setLocalVar('roamTime', GetSystemTime())
     end
 end
 

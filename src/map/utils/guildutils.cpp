@@ -42,12 +42,6 @@
 std::vector<CGuild*>         g_PGuildList;
 std::vector<CItemContainer*> g_PGuildShopList;
 
-/************************************************************************
- *                                                                      *
- *                                                                      *
- *                                                                      *
- ************************************************************************/
-
 namespace guildutils
 {
     void Initialize()
@@ -95,7 +89,7 @@ namespace guildutils
 
             FOR_DB_MULTIPLE_RESULTS(rset)
             {
-                CItemShop* PItem = new CItemShop(rset->get<uint32>("itemid"));
+                auto* PItem = new CItemShop(rset->get<uint32>("itemid"));
 
                 PItem->setMinPrice(rset->get<uint32>("min_price"));
                 PItem->setMaxPrice(rset->get<uint32>("max_price"));
@@ -105,8 +99,7 @@ namespace guildutils
                 PItem->setFlag(rset->get<uint16>("flags"));
 
                 PItem->setQuantity(PItem->IsDailyIncrease() ? PItem->getInitialQuantity() : 0);
-                PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *
-                                                                        (PItem->getMaxPrice() - PItem->getMinPrice())));
+                PItem->setBasePrice(getItemDynamicBasePrice(PItem));
 
                 PGuildShop->InsertItem(PItem);
             }
@@ -122,27 +115,26 @@ namespace guildutils
         {
             destroy(guild);
         }
+
         g_PGuildList.clear();
 
         for (auto itemContainer : g_PGuildShopList)
         {
             destroy(itemContainer);
         }
-        g_PGuildList.clear();
+
+        g_PGuildShopList.clear();
     }
 
     void UpdateGuildsStock()
     {
-        for (auto* PGuildShop : g_PGuildShopList)
+        for (const auto* PGuildShop : g_PGuildShopList)
         {
             for (uint8 slotid = 1; slotid <= PGuildShop->GetSize(); ++slotid)
             {
-                CItemShop* PItem = (CItemShop*)PGuildShop->GetItem(slotid);
-
-                if (PItem != nullptr)
+                if (auto* PItem = static_cast<CItemShop*>(PGuildShop->GetItem(slotid)))
                 {
-                    PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *
-                                                                            (PItem->getMaxPrice() - PItem->getMinPrice())));
+                    PItem->setBasePrice(getItemDynamicBasePrice(PItem));
 
                     if (PItem->IsDailyIncrease())
                     {
@@ -151,14 +143,15 @@ namespace guildutils
                 }
             }
         }
+
         ShowDebug("UpdateGuildsStock is finished");
     }
 
     void UpdateGuildPointsPattern()
     {
         // TODO: This function can be faulty when dealing with multiple processes. Needs to be synchronized properly across servers.
-        auto jstDayOfYear = earth_time::jst::get_yearday();
-        bool doUpdate     = static_cast<uint32>(serverutils::GetServerVar("[GUILD]pattern_update")) != jstDayOfYear;
+        const auto jstDayOfYear = earth_time::jst::get_yearday();
+        const bool doUpdate     = serverutils::GetServerVar("[GUILD]pattern_update") != jstDayOfYear;
 
         uint8 pattern = xirand::GetRandomNumber(8);
         if (doUpdate)
@@ -166,16 +159,14 @@ namespace guildutils
             // write the new pattern and update time to try to prevent other servers from updating the pattern
             serverutils::SetServerVar("[GUILD]pattern_update", jstDayOfYear);
             serverutils::SetServerVar("[GUILD]pattern", pattern);
-            charutils::ClearCharVarFromAll("[GUILD]daily_points");
         }
         else
         {
             // load the pattern in case it was set by another server (and this server did not set it)
             pattern = serverutils::GetServerVar("[GUILD]pattern");
-            charutils::ClearCharVarFromAll("[GUILD]daily_points", true);
         }
 
-        for (auto PGuild : g_PGuildList)
+        for (const auto PGuild : g_PGuildList)
         {
             PGuild->updateGuildPointsPattern(pattern);
         }
@@ -183,27 +174,39 @@ namespace guildutils
         ShowDebug("Guild point pattern update has finished. New pattern: %d", pattern);
     }
 
-    CItemContainer* GetGuildShop(uint16 GuildShopID)
+    auto GetGuildShop(const uint16 guildShopId) -> CItemContainer*
     {
         for (auto* PGuildShop : g_PGuildShopList)
         {
-            if (PGuildShop->GetID() == GuildShopID)
+            if (PGuildShop->GetID() == guildShopId)
             {
                 return PGuildShop;
             }
         }
-        ShowDebug("GuildShop with id <%u> is not found on server", GuildShopID);
+
+        ShowDebug("GuildShop with id <%u> is not found on server", guildShopId);
         return nullptr;
     }
 
-    CGuild* GetGuild(uint8 GuildID)
+    auto GetGuild(const uint8 guildId) -> CGuild*
     {
-        if (GuildID < g_PGuildList.size())
+        if (guildId < g_PGuildList.size())
         {
-            return g_PGuildList.at(GuildID);
+            return g_PGuildList.at(guildId);
         }
-        ShowDebug("Guild with id <%u> is not found on server", GuildID);
+
+        ShowDebug("Guild with id <%u> is not found on server", guildId);
         return nullptr;
     }
 
+    auto getItemDynamicBasePrice(const CItemShop* PItem) -> uint32
+    {
+        // Calculate how much of the stock has been depleted (0.0 = full, 1.0 = empty)
+        const float depletionRatio = static_cast<float>(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize();
+        // Delta between min and max price
+        const uint32 priceRange = PItem->getMaxPrice() - PItem->getMinPrice();
+
+        // Price increases as stock depletes: min price + (depletion * price range)
+        return PItem->getMinPrice() + static_cast<uint32>(depletionRatio * priceRange);
+    }
 } // namespace guildutils

@@ -56,7 +56,7 @@ zoneObject.onZoneWeatherChange = function(weather)
         return
     end
 
-    local currentTime = os.time()
+    local currentTime = GetSystemTime()
 
     if toxicTamlyn:isSpawned() then
         if

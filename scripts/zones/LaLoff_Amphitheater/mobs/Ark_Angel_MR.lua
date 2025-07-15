@@ -30,7 +30,7 @@ local function spawnArkAngelPet(mob, target)
                 pet:addListener('DEATH', 'AAMR_PET_DEATH', function(petArg)
                     local petBattlefield = petArg:getBattlefield()
 
-                    petBattlefield:setLocalVar('petRespawnMR', os.time() + 30)
+                    petBattlefield:setLocalVar('petRespawnMR', GetSystemTime() + 30)
                 end)
 
                 pet:updateEnmity(target)
@@ -77,7 +77,7 @@ entity.onMobFight = function(mob, target)
     local respawnTime = battlefield:getLocalVar('petRespawnMR')
     if
         respawnTime ~= 0 and
-        respawnTime <= os.time()
+        respawnTime <= GetSystemTime()
     then
         battlefield:setLocalVar('petRespawnMR', 0)
         spawnArkAngelPet(mob, target)

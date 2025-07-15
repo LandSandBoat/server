@@ -26,7 +26,10 @@ quest.sections =
             ['Qutiba'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getMustZone(player) or quest:getVar(player, 'Stage') > os.time() then
+                    if
+                        quest:getMustZone(player) or
+                        quest:getVar(player, 'Stage') > GetSystemTime()
+                    then
                         return quest:progressEvent(52)
                     else
                         return quest:progressEvent(42) -- Starts Quest
@@ -37,7 +40,7 @@ quest.sections =
             ['Ulamaal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:needToZone() or quest:getVar(player, 'Stage') > os.time() then
+                    if player:needToZone() or quest:getVar(player, 'Stage') > GetSystemTime() then
                         return quest:progressEvent(53)
                     else
                         return quest:progressEvent(42) -- Starts Quest

@@ -55,7 +55,7 @@ entity.onMobFight = function(mob, target)
     if
         other and
         not other:isSpawned() and
-        os.time() > mob:getLocalVar('otherToD') + 60
+        GetSystemTime() > mob:getLocalVar('otherToD') + 60
     then
         spawnOther(mob)
         other:updateEnmity(target)
@@ -65,7 +65,7 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     local other = GetMobByID(mob:getID() == main and clone or main)
     if other and other:isAlive() then
-        other:setLocalVar('otherToD', os.time())
+        other:setLocalVar('otherToD', GetSystemTime())
     end
 end
 

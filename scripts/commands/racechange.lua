@@ -37,7 +37,7 @@ commandObj.onTrigger = function(player, arg1)
         end
     end
 
-    target:setCharVar('[RaceChange]Eligible', os.time() + 1209600, os.time() + 1209600)
+    target:setCharVar('[RaceChange]Eligible', GetSystemTime() + 1209600, GetSystemTime() + 1209600)
     target:setCharVar('[RaceChange]Last', 0)
 
     player:printToPlayer(string.format(

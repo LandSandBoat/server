@@ -190,8 +190,8 @@ entity.onMobEngage = function(mob, target)
     mob:setUntargetable(false)
     mob:setMagicCastingEnabled(true)
     mob:setAnimationSub(2)
-    mob:setLocalVar('elementAbsorb', os.time() + 120)
-    mob:setLocalVar('pop_pets', os.time() + 150) -- wait 2.5 minutes until spawning initial mobs
+    mob:setLocalVar('elementAbsorb', GetSystemTime() + 120)
+    mob:setLocalVar('pop_pets', GetSystemTime() + 150) -- wait 2.5 minutes until spawning initial mobs
 end
 
 entity.onMobFight = function(mob, target)
@@ -221,10 +221,10 @@ entity.onMobFight = function(mob, target)
     end
 
     -- every 2 minutes JoL will change the element it absorbs/casts spells this change happens after a two hour animation
-    if os.time() > mob:getLocalVar('elementAbsorb') then
+    if GetSystemTime() > mob:getLocalVar('elementAbsorb') then
 
         local previousAbsorb = mob:getLocalVar('currentAbsorb')
-        mob:setLocalVar('elementAbsorb', os.time() + 60)
+        mob:setLocalVar('elementAbsorb', GetSystemTime() + 60)
         mob:setLocalVar('twohour_tp', mob:getTP())
 
         -- remove previous absorb mod, if set
@@ -247,10 +247,10 @@ entity.onMobFight = function(mob, target)
 
     -- spawn minions in 2.5 minute intervals
     if
-        os.time() > mob:getLocalVar('pop_pets') and
+        GetSystemTime() > mob:getLocalVar('pop_pets') and
         mob:canUseAbilities()
     then
-        mob:setLocalVar('pop_pets', os.time() + 150)
+        mob:setLocalVar('pop_pets', GetSystemTime() + 150)
 
         local spawns = mob:getLocalVar('SPAWNS')
         if spawns < 8 then

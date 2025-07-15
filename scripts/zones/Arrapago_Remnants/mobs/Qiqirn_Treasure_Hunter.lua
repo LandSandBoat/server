@@ -24,7 +24,7 @@ end
 
 entity.onMobEngage = function(mob, target)
     if target:isPC() or target:isPet() then
-        mob:setLocalVar('runTime', os.time())
+        mob:setLocalVar('runTime', GetSystemTime())
     end
 end
 
@@ -43,17 +43,17 @@ entity.onMobFight = function(mob, target)
     --    isBusy = true -- is set to true if mob is in any stage of using a mobskill or casting a spell
     -- end
 
-    if not mob:isFollowingPath() and (os.time() - runTime > 20) then
-        mob:setLocalVar('runTime', os.time())
+    if not mob:isFollowingPath() and (GetSystemTime() - runTime > 20) then
+        mob:setLocalVar('runTime', GetSystemTime())
         entity.onMobRoamAction(mob)
     elseif mob:isFollowingPath() then
         if
             mobPet and
-            os.time() - popTime > 7
+            GetSystemTime() - popTime > 7
         then
             mobPet:updateEnmity(target)
             mobPet:setPos(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
-            mob:setLocalVar('popTime', os.time())
+            mob:setLocalVar('popTime', GetSystemTime())
             mobPet:setStatus(xi.status.UPDATE)
             mobPet:timer(1000, function(mobArg)
                 mobArg:useMobAbility(1838)

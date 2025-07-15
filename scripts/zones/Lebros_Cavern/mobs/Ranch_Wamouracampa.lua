@@ -10,7 +10,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     -- Eclosion should be between 10-20 minutes
     if mob:getLocalVar('eclosionTime') ~= 0 then
-        mob:setLocalVar('eclosionTime', os.time() + math.random(600, 1200))
+        mob:setLocalVar('eclosionTime', GetSystemTime() + math.random(600, 1200))
     end
 end
 
@@ -19,7 +19,7 @@ end
 
 entity.onMobDisengage = function(mob)
     if mob:getLocalVar('eclosionTime') ~= 0 then
-        mob:setLocalVar('eclosionTime', os.time() + math.random(600, 1200))
+        mob:setLocalVar('eclosionTime', GetSystemTime() + math.random(600, 1200))
     end
 end
 

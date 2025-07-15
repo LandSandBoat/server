@@ -94,13 +94,13 @@ local function onAddRoam(jarl, mob)
         disableInteractions(mob)
     end
 
-    if despawnTime >= os.time() and not mob:isFollowingPath() then
+    if despawnTime >= GetSystemTime() and not mob:isFollowingPath() then
         local pos = mob:getPos()
         mob:pathTo(pos.x + math.random(-30, 30), pos.y, pos.z + math.random(-30, 30), bit.bor(xi.pathflag.RUN, xi.pathflag.SCRIPT))
         return
     end
 
-    if despawnTime <= os.time() then
+    if despawnTime <= GetSystemTime() then
         local jarlPos = jarl:getPos()
         mob:pathTo(jarlPos.x, jarlPos.y, jarlPos.z, bit.bor(xi.pathflag.RUN, xi.pathflag.SCRIPT))
         if isPathingHome == 0 then
@@ -134,7 +134,7 @@ local function onAddFight(mob)
         mob:disengage()
     end
 
-    if mob:getLocalVar('despawnAt') <= os.time() then
+    if mob:getLocalVar('despawnAt') <= GetSystemTime() then
         disableInteractions(mob)
     end
 end
@@ -150,7 +150,7 @@ local function checkReappear(mob)
 
         if allAddsDespawned then
             reset(mob)
-            mob:setLocalVar('nextTransform', os.time() + 120)
+            mob:setLocalVar('nextTransform', GetSystemTime() + 120)
         end
     end
 end
@@ -172,7 +172,7 @@ entity.onMobSpawn   = despawnAllAdds
 
 entity.onMobEngage  = function(mob, target)
     if mob:getLocalVar('nextTransform') == 0 then
-        mob:setLocalVar('nextTransform', os.time() + 120)
+        mob:setLocalVar('nextTransform', GetSystemTime() + 120)
     end
 
     reset(mob)
@@ -186,7 +186,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     -- If Nocturnal Servitude and timer is up, spawn a random set of adds
     if
         skill:getID() == xi.mobSkill.NOCTURNAL_SERVITUDE and
-        mob:getLocalVar('nextTransform') <= os.time()
+        mob:getLocalVar('nextTransform') <= GetSystemTime()
     then
         local selectedMobs
         vanish(mob)
@@ -209,7 +209,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
                 add:addListener('ROAM_TICK', 'JARL_ROAM', utils.bind(onAddRoam, mob))
                 add:addListener('COMBAT_TICK', 'JARL_COMBAT_TICK', onAddFight)
                 add:spawn()
-                add:setLocalVar('despawnAt', os.time() + 120)
+                add:setLocalVar('despawnAt', GetSystemTime() + 120)
                 if mobId == randomInvincibleMob then
                     add:setLocalVar('invincible', 1)
                 end

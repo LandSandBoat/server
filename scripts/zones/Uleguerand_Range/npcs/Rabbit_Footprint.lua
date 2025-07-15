@@ -81,8 +81,8 @@ entity.onTimeTrigger = function(npc, triggerID)
     if not isSpawned then
         if IsMoonFull() or IsMoonNew() then
             if activeTime == 0 then
-                npc:setLocalVar('activeTime', os.time() + math.random(60 * 9, 60 * 15)) -- moon phase just changed, i'm active in 9 to 15 mins from now
-            elseif os.time() > activeTime then
+                npc:setLocalVar('activeTime', GetSystemTime() + math.random(60 * 9, 60 * 15)) -- moon phase just changed, i'm active in 9 to 15 mins from now
+            elseif GetSystemTime() > activeTime then
                 moveFootprint(npc)
             end
         else

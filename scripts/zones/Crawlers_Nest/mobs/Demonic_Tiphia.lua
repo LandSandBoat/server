@@ -10,10 +10,10 @@ entity.onMobFight = function(mob, target)
     if
         mob:getHPP() <= 50 and
         mob:actionQueueEmpty() and
-        os.time() > mob:getLocalVar('cureDelay')
+        GetSystemTime() > mob:getLocalVar('cureDelay')
     then
         mob:castSpell(xi.magic.spell.CURE_V, mob)
-        mob:setLocalVar('cureDelay', os.time() + 15)
+        mob:setLocalVar('cureDelay', GetSystemTime() + 15)
     end
 end
 

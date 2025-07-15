@@ -12,7 +12,7 @@ zoneObject.onInitialize = function(zone)
     local ph = GetMobByID(ID.mob.TAISAIJIN_PH[phIndex])
 
     if ph then
-        ph:setLocalVar('timeToGrow', os.time() + math.random(86400, 259200)) -- 1 to 3 days
+        ph:setLocalVar('timeToGrow', GetSystemTime() + math.random(86400, 259200)) -- 1 to 3 days
         ph:setLocalVar('phIndex', phIndex)
     end
 end

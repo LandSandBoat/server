@@ -139,7 +139,7 @@ void monstrosity::LoadStaticData()
 
     for (auto& [_, entry] : gMonstrosityInstinctMap)
     {
-        const auto rset = db::preparedStmt("SELECT modId, value FROM monstrosity_instinct_mods WHERE monstrosity_instinct_id = (?)", entry.monstrosityInstinctId);
+        const auto rset = db::preparedStmt("SELECT modId, value FROM monstrosity_instinct_mods WHERE monstrosity_instinct_id = ?", entry.monstrosityInstinctId);
         if (rset && rset->rowsCount())
         {
             while (rset->next())

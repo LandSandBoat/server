@@ -19,19 +19,13 @@
 ===========================================================================
 */
 
-#ifndef _GUILDUTILS_H
-#define _GUILDUTILS_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
-/************************************************************************
- *                                                                        *
- *                                                                        *
- *                                                                        *
- ************************************************************************/
-
 class CItemContainer;
 class CGuild;
+class CItemShop;
 
 namespace guildutils
 {
@@ -40,8 +34,8 @@ namespace guildutils
     void UpdateGuildsStock();
     void UpdateGuildPointsPattern();
 
-    CItemContainer* GetGuildShop(uint16 GuildShopID);
-    CGuild*         GetGuild(uint8 GuildID);
-} // namespace guildutils
+    auto GetGuildShop(uint16 guildShopId) -> CItemContainer*;
+    auto GetGuild(uint8 guildId) -> CGuild*;
 
-#endif
+    auto getItemDynamicBasePrice(const CItemShop* PItem) -> uint32;
+} // namespace guildutils

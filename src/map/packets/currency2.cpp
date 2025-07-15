@@ -29,25 +29,25 @@ CCurrencyPacket2::CCurrencyPacket2(CCharEntity* PChar)
     this->setType(0x118);
     this->setSize(159);
 
-    const char* query = "SELECT bayld, kinetic_unit, imprimaturs, mystical_canteen, obsidian_fragment, lebondopt_wing, \
-                         pulchridopt_wing, mweya_plasm, ghastly_stone, ghastly_stone_1, ghastly_stone_2, verdigris_stone, \
-                         verdigris_stone_1, verdigris_stone_2, wailing_stone, wailing_stone_1, wailing_stone_2, \
-                         snowslit_stone, snowslit_stone_1, snowslit_stone_2, snowtip_stone, snowtip_stone_1, snowtip_stone_2, \
-                         snowdim_stone, snowdim_stone_1, snowdim_stone_2, snoworb_stone, snoworb_stone_1, snoworb_stone_2, \
-                         leafslit_stone, leafslit_stone_1, leafslit_stone_2, leaftip_stone, leaftip_stone_1, leaftip_stone_2, \
-                         leafdim_stone, leafdim_stone_1, leafdim_stone_2, leaforb_stone, leaforb_stone_1, leaforb_stone_2, \
-                         duskslit_stone, duskslit_stone_1, duskslit_stone_2, dusktip_stone, dusktip_stone_1, dusktip_stone_2, \
-                         duskdim_stone, duskdim_stone_1, duskdim_stone_2, duskorb_stone, duskorb_stone_1, duskorb_stone_2, \
-                         pellucid_stone, fern_stone, taupe_stone, escha_beads, escha_silt, potpourri, current_hallmarks, \
-                         total_hallmarks, gallantry, crafter_points, fire_crystal_set, ice_crystal_set, wind_crystal_set, \
-                         earth_crystal_set, lightning_crystal_set, water_crystal_set, light_crystal_set, dark_crystal_set, \
-                         mc_s_sr01_set, mc_s_sr02_set, mc_s_sr03_set, liquefaction_spheres_set, induration_spheres_set, \
-                         detonation_spheres_set, scission_spheres_set, impaction_spheres_set, reverberation_spheres_set, \
-                         transfixion_spheres_set, compression_spheres_set, fusion_spheres_set, distortion_spheres_set, \
-                         fragmentation_spheres_set, gravitation_spheres_set, light_spheres_set, darkness_spheres_set, \
-                         silver_aman_voucher, domain_points, domain_points_daily, mog_segments, gallimaufry, is_accolades, \
-                         temenos_units, apollyon_units \
-                         FROM char_points WHERE charid = ?";
+    const char* query = "SELECT bayld, kinetic_unit, imprimaturs, mystical_canteen, obsidian_fragment, lebondopt_wing, "
+                        "pulchridopt_wing, mweya_plasm, ghastly_stone, ghastly_stone_1, ghastly_stone_2, verdigris_stone, "
+                        "verdigris_stone_1, verdigris_stone_2, wailing_stone, wailing_stone_1, wailing_stone_2, "
+                        "snowslit_stone, snowslit_stone_1, snowslit_stone_2, snowtip_stone, snowtip_stone_1, snowtip_stone_2, "
+                        "snowdim_stone, snowdim_stone_1, snowdim_stone_2, snoworb_stone, snoworb_stone_1, snoworb_stone_2, "
+                        "leafslit_stone, leafslit_stone_1, leafslit_stone_2, leaftip_stone, leaftip_stone_1, leaftip_stone_2, "
+                        "leafdim_stone, leafdim_stone_1, leafdim_stone_2, leaforb_stone, leaforb_stone_1, leaforb_stone_2, "
+                        "duskslit_stone, duskslit_stone_1, duskslit_stone_2, dusktip_stone, dusktip_stone_1, dusktip_stone_2, "
+                        "duskdim_stone, duskdim_stone_1, duskdim_stone_2, duskorb_stone, duskorb_stone_1, duskorb_stone_2, "
+                        "pellucid_stone, fern_stone, taupe_stone, escha_beads, escha_silt, potpourri, current_hallmarks, "
+                        "total_hallmarks, gallantry, crafter_points, fire_crystal_set, ice_crystal_set, wind_crystal_set, "
+                        "earth_crystal_set, lightning_crystal_set, water_crystal_set, light_crystal_set, dark_crystal_set, "
+                        "mc_s_sr01_set, mc_s_sr02_set, mc_s_sr03_set, liquefaction_spheres_set, induration_spheres_set, "
+                        "detonation_spheres_set, scission_spheres_set, impaction_spheres_set, reverberation_spheres_set, "
+                        "transfixion_spheres_set, compression_spheres_set, fusion_spheres_set, distortion_spheres_set, "
+                        "fragmentation_spheres_set, gravitation_spheres_set, light_spheres_set, darkness_spheres_set, "
+                        "silver_aman_voucher, domain_points, domain_points_daily, mog_segments, gallimaufry, is_accolades, "
+                        "temenos_units, apollyon_units "
+                        "FROM char_points WHERE charid = ?";
 
     const auto rset = db::preparedStmt(query, PChar->id);
     if (rset && rset->rowsCount() && rset->next())

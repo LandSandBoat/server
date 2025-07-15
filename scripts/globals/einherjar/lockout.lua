@@ -10,7 +10,7 @@ xi.einherjar.recordLockout = function(player)
         lockoutInHours = 1
     end
 
-    local expiry = os.time() + (lockoutInHours * 60 * 60)
+    local expiry = GetSystemTime() + (lockoutInHours * 60 * 60)
     player:setCharVar('[ein]lockout', expiry, expiry)
 end
 
@@ -20,5 +20,5 @@ xi.einherjar.isLockedOut = function(player)
         return 0
     end
 
-    return math.ceil((lockout - os.time()) / 2088) -- Vanadiel days
+    return math.ceil((lockout - GetSystemTime()) / 2088) -- Vanadiel days
 end

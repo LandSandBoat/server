@@ -132,7 +132,7 @@ entity.onMobFight = function(mob, target)
     -- Handle self-sleep when target is 15+ yalms away.
     if target then
         if mob:checkDistance(target) > sleepProximity and not isAsleep then
-            local now = os.time()
+            local now = GetSystemTime()
 
             -- Aries doesn't immediately go to sleep when ranged. Start a timer.
             if mob:getLocalVar('proximityTimer') == 0 then

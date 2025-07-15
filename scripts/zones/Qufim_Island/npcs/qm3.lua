@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
             seedspallRosem and
             seedspallCaerulum and
             seedspallViridis and
-            os.time() > lastViridian
+            GetSystemTime() > lastViridian
         then
             player:startEvent(32)
         elseif
@@ -53,7 +53,7 @@ entity.onTrigger = function(player, npc)
             -- change SEED_MANDY var number later when battle actually works (intended purpose is to track number of slain mandies).
             player:setCharVar('SEED_MANDY', 0)
             player:startEvent(34)
-        -- elseif missionACP >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I and not amberKey and os.time() > lastAmber and os.time() > lastViridian and SR and SC and SV and player:getCharVar('SEED_MANDY') == 0) then
+        -- elseif missionACP >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I and not amberKey and GetSystemTime() > lastAmber and GetSystemTime() > lastViridian and SR and SC and SV and player:getCharVar('SEED_MANDY') == 0) then
             -- This is for repeats to get amber keys.
             -- Spawn Seed mandragora's with xi.effect.CONFRONTATION for 30 min
         -- elseif SR and SC and SV and missionACP >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I and player:getCharVar('SEED_MANDY') == 1 then

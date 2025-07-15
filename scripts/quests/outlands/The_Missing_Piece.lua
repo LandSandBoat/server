@@ -113,12 +113,12 @@ quest.sections =
                         return quest:progressEvent(703) -- Player has turned in the KIs from Alfesar
                     elseif
                         progress == 3 and
-                        os.time() < quest:getVar(player, 'Wait')
+                        GetSystemTime() < quest:getVar(player, 'Wait')
                     then
                         return quest:event(704) -- Player has not waited a game day
                     elseif
                         progress == 3 and
-                        os.time() >= quest:getVar(player, 'Wait')
+                        GetSystemTime() >= quest:getVar(player, 'Wait')
                     then
                         return quest:progressEvent(705) -- Player has waited a game day. Quest Finished
                     end
@@ -128,7 +128,7 @@ quest.sections =
             onEventFinish =
             {
                 [703] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Wait', os.time() + 60)
+                    quest:setVar(player, 'Wait', GetSystemTime() + 60)
                     player:addTitle(xi.title.ACQUIRER_OF_ANCIENT_ARCANUM)
                     player:delKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC)
                     player:delKeyItem(xi.ki.LETTER_FROM_ALFESAR)

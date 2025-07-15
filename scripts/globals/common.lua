@@ -60,7 +60,7 @@ getMidnight = JstMidnight
 -----------------------------------
 
 function getVanaMidnight(day)
-    local curtime           = os.time()
+    local curtime           = GetSystemTime()
     local secondsToMidnight = xi.vanaTime.DAY - (VanadielTime() % xi.vanaTime.DAY)
 
     if day ~= nil then

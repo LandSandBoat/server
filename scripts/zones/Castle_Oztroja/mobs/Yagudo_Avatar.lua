@@ -29,7 +29,7 @@ entity.onMobDespawn = function(mob)
         local kills       = GetServerVariable('[PH]Tzee_Xicu_the_Manifest')
         local popNow      = (math.random(1, 5) == 3 or kills > 6)
 
-        if os.time() > timeOfDeath and popNow then
+        if GetSystemTime() > timeOfDeath and popNow then
             DisallowRespawn(nqId, true)
             DisallowRespawn(hqId, false)
             UpdateNMSpawnPoint(hqId)

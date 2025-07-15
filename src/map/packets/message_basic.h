@@ -53,6 +53,7 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_CANNOT_CAST_SPELL     = 47,  // <player> cannot cast <spell>.
     MSGBASIC_CANNOT_IN_THIS_AREA   = 40,  // cannot use in this area
     MSGBASIC_UNABLE_TO_CAST_SPELLS = 49,  // The <player> is unable to cast spells.
+    MSGBASIC_UNABLE_TO_USE_ITEM    = 56,  // Unable to use item.
     MSGBASIC_MAGIC_NO_EFFECT       = 75,  // <caster>'s <spell> has no effect on <target>.
     MSGBASIC_IS_PARALYZED_2        = 84,  // <target> is paralyzed.
     MSGBASIC_MAGIC_TELEPORT        = 93,  // <caster> casts <spell>. <target> vanishes.
@@ -117,9 +118,15 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_GARDENING_CRYSTAL_USED = 258, // Crystal used: <item>*/
 
     // Ranged
-    MSGBASIC_NO_RANGED_WEAPON   = 216, // You do not have an appropriate ranged weapon equipped.
-    MSGBASIC_CANNOT_SEE         = 217, // You cannot see <target>.
-    MSGBASIC_MOVE_AND_INTERRUPT = 218, // You move and interrupt your aim.
+    MSGBASIC_NO_RANGED_WEAPON        = 216, // You do not have an appropriate ranged weapon equipped.
+    MSGBASIC_CANNOT_SEE              = 217, // You cannot see <target>.
+    MSGBASIC_MOVE_AND_INTERRUPT      = 218, // You move and interrupt your aim.
+    MSGBASIC_RANGED_ATTACK_HIT       = 352, // <user> ranged attack hits <target> for <amount> points of damage.
+    MSGBASIC_RANGED_ATTACK_CRIT      = 353, // <user> ranged attack scores a critical hit! \n <target> takes <amount> points of damage.
+    MSGBASIC_RANGED_ATTACK_MISS      = 354, // <user> ranged attack misses.
+    MSGBASIC_RANGED_ATTACK_NO_EFFECT = 355, // <user> ranged attack has no effect on <target>.
+    MSGBASIC_RANGED_ATTACK_SQUARELY  = 576, // <user> ranged attack hits the <target> squarely for <amount> points of damage.,
+    MSGBASIC_RANGED_ATTACK_PUMMELS   = 577, // <user> ranged attack strikes true, pummeling <target> for <amount> points of damage!,
 
     // Charm
     MSGBASIC_CHARM_SUCCESS        = 136, // The <player> uses .. <target> is now under the <player>'s control.
@@ -207,6 +214,9 @@ enum MSGBASIC_ID : uint16
     // Merits
     MSGBASIC_MERIT_INCREASE = 380, // Your <merit> modification has risen to level <level>
     MSGBASIC_MERIT_DECREASE = 381, // Your <merit> modification has dropped to level <level>
+
+    // Job Points
+    MSGBASIC_JOB_POINTS_INCREASE = 720, // Your <job point category> modification has risen to level ≺level≻.
 
     // DEBUG MESSAGES
     MSGBASIC_DEBUG_RESISTED_SPELL   = 66,  // Debug: Resisted spell!

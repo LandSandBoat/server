@@ -156,7 +156,7 @@ local function onWin(chamberData)
         chamberData.eventsQueue[k] = nil
     end
 
-    local expelTime = os.time() + (xi.einherjar.settings.EINHERJAR_CLEAR_EXTRA_TIME * 60)
+    local expelTime = GetSystemTime() + (xi.einherjar.settings.EINHERJAR_CLEAR_EXTRA_TIME * 60)
     log(chamberData.id, 'Post-win timeout queued at ' .. expelTime)
     chamberData.eventsQueue[expelTime] = function()
         log(chamberData.id, 'Post-win timeout, expelling players and cleaning chamber.')
@@ -300,7 +300,7 @@ xi.einherjar.onMobEngage = function(mob, target)
         if chamberData.encounters.special then
             -- Unknown if that's the actual trigger for countdown
             -- Captures show special spawn as early as 1.5 minutes from engaging mobs
-            local specialMobSpawnTime = os.time() + math.random(90, 300)
+            local specialMobSpawnTime = GetSystemTime() + math.random(90, 300)
             log(chamberData.id, 'Special mob will spawn at ' .. specialMobSpawnTime)
             chamberData.eventsQueue[specialMobSpawnTime] = function()
                 -- If final crate is already up and visible, don't spawn special mob
@@ -340,7 +340,7 @@ local function onPlayerDeath(chamberData, player)
 
     log(chamberData.id, string.format('All players dead, queueing emergency teleportation in %d minutes.', xi.einherjar.settings.EINHERJAR_KO_EXPEL_TIME))
 
-    local expelTime = os.time() + (xi.einherjar.settings.EINHERJAR_KO_EXPEL_TIME * 60)
+    local expelTime = GetSystemTime() + (xi.einherjar.settings.EINHERJAR_KO_EXPEL_TIME * 60)
     utils.each(chamberData.players, function(_, chamberPlayer)
         chamberPlayer:messageSpecial(ID.text.EXPEDITION_INCAPACITATED_WARN, xi.einherjar.settings.EINHERJAR_KO_EXPEL_TIME)
     end)
@@ -351,7 +351,7 @@ local function onPlayerDeath(chamberData, player)
             return
         end
 
-        if os.time() >= expelTime then
+        if GetSystemTime() >= expelTime then
             log(chamberData.id, 'Emergency teleportation, expelling all players.')
             utils.each(chamberData.players, function(_, chamberPlayer)
                 chamberPlayer:messageSpecial(ID.text.EXPEDITION_INCAPACITATED)
@@ -359,16 +359,16 @@ local function onPlayerDeath(chamberData, player)
 
             expelAllFromChamber(chamberData)
         else
-            chamberData.eventsQueue[os.time() + 5] = checkExpel
+            chamberData.eventsQueue[GetSystemTime() + 5] = checkExpel
         end
     end
 
-    chamberData.eventsQueue[os.time() + 5] = checkExpel
+    chamberData.eventsQueue[GetSystemTime() + 5] = checkExpel
 end
 
 xi.einherjar.new = function(chamberId, leader)
     local leaderId  = leader:getID()
-    local startTime = os.time()
+    local startTime = GetSystemTime()
 
     local chamberData =
     {
@@ -511,7 +511,7 @@ xi.einherjar.onChamberExit = function(chamberData, player, isZoningOut)
 
     -- If no players are left, schedule a reservation timeout in EINHERJAR_RESERVATION_TIMEOUT minutes
     if playersCount(chamberData.players) == 0 then
-        local chamberTimeout = os.time() + (xi.einherjar.settings.EINHERJAR_RESERVATION_TIMEOUT * 60)
+        local chamberTimeout = GetSystemTime() + (xi.einherjar.settings.EINHERJAR_RESERVATION_TIMEOUT * 60)
         log(chamberData.id, 'No players left in chamber, scheduling timeout at ' .. chamberTimeout)
         chamberData.eventsQueue[chamberTimeout] = function()
             emptyChamberCheck(chamberData)
@@ -652,7 +652,7 @@ local function onChamberTick(chamberData)
         return
     end
 
-    local currentTime = os.time()
+    local currentTime = GetSystemTime()
 
     for timestamp, event in pairs(chamberData.eventsQueue) do
         if currentTime >= timestamp then

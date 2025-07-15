@@ -105,7 +105,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') >= 2 then
                         if quest:getVar(player, 'Time') > 0 then
-                            if quest:getVar(player, 'Time') <= os.time() then
+                            if quest:getVar(player, 'Time') <= GetSystemTime() then
                                 return quest:progressEvent(5) -- Quest complete.
                             else
                                 return quest:messageSpecial(crawlersID.text.EQUIPMENT_NOT_PURIFIED) -- Purification incomplete.
@@ -129,7 +129,7 @@ quest.sections =
                 [4] = function(player, csid, option, npc)
                     if option == 1 then
                         -- Set purification time.
-                        quest:setVar(player, 'Time', os.time() + 30)
+                        quest:setVar(player, 'Time', GetSystemTime() + 30)
 
                         -- Delete Key items.
                         player:delKeyItem(xi.ki.CRAWLER_BLOOD)

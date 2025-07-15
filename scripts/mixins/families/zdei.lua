@@ -16,7 +16,7 @@ g_mixins.families.zdei = function(mob)
 
     mob:addListener('ENGAGE', 'ZDEI_ENGAGE', function(mobArg, target)
         mob:setAnimationSub(1)
-        mob:setLocalVar('changeTime', os.time() + math.random(15, 30))
+        mob:setLocalVar('changeTime', GetSystemTime() + math.random(15, 30))
     end)
 
     mob:addListener('DISENGAGE', 'ZDEI_DISENGAGE', function(mobArg)
@@ -26,7 +26,7 @@ g_mixins.families.zdei = function(mob)
 
     mob:addListener('COMBAT_TICK', 'ZDEI_CTICK', function(mobArg)
         local changeTime = mob:getLocalVar('changeTime')
-        local now = os.time()
+        local now = GetSystemTime()
 
         -- Change to a new mode if time has expired and not currently charging optic induration
         if

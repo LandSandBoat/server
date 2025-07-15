@@ -88,7 +88,7 @@ end
 xi.einherjar.isLampExpired = function(lampObj)
     local lampData = xi.einherjar.decypherLamp(lampObj)
 
-    return lampData and lampData.endTime and os.time() > lampData.endTime
+    return lampData and lampData.endTime and GetSystemTime() > lampData.endTime
 end
 
 xi.einherjar.getMatchingLamps = function(player, chamberId, startTime)

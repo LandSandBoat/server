@@ -23,6 +23,7 @@
 #include "job_points.h"
 
 #include "entities/charentity.h"
+#include "enums/key_items.h"
 #include "utils/charutils.h"
 
 CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
@@ -54,7 +55,7 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
         ref<uint16>(0x0A) |= bluePointBonus << 7;
     }
 
-    bool canUseMeritMode = PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, 606);
+    bool canUseMeritMode = PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, KeyItem::LIMIT_BREAKER);
 
     ref<uint16>(0x0A) |= canUseMeritMode << 13; // Level >= 75 and has Limit Break KI
 

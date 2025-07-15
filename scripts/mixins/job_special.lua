@@ -237,7 +237,7 @@ end
 
 local abilitiesReady = function(mob)
     local abilities = {}
-    local now = os.time()
+    local now = GetSystemTime()
     local readyTime = mob:getLocalVar('[jobSpecial]readyInitial')
 
     if
@@ -291,7 +291,7 @@ g_mixins.job_special = function(jobSpecialMob)
 
     jobSpecialMob:addListener('ENGAGE', 'JOB_SPECIAL_ENGAGE', function(mob)
         if math.random(1, 100) <= mob:getLocalVar('[jobSpecial]chance') then
-            mob:setLocalVar('[jobSpecial]readyInitial', os.time() + mob:getLocalVar('[jobSpecial]delayInitial'))
+            mob:setLocalVar('[jobSpecial]readyInitial', GetSystemTime() + mob:getLocalVar('[jobSpecial]delayInitial'))
         end
     end)
 
@@ -301,7 +301,7 @@ g_mixins.job_special = function(jobSpecialMob)
         if #abilities > 0 then
             local i = abilities[math.random(#abilities)]
             local ability = mob:getLocalVar('[jobSpecial]ability_' .. i)
-            local now = os.time()
+            local now = GetSystemTime()
 
             if mob:getLocalVar('[jobSpecial]begCode_' .. i) == 1 then
                 mob:triggerListener('JOB_SPECIAL_BEG_' .. i, mob)

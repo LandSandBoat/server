@@ -36,7 +36,7 @@ zoneObject.onZoneTick = function(zone)
     for _, table in pairs(teleportTable) do
         local teleporter = GetNPCByID(table.npc)
 
-        if teleporter and teleporter:getLocalVar('timer') < os.time() then
+        if teleporter and teleporter:getLocalVar('timer') < GetSystemTime() then
             -- If a player is already on the pad, teleport them
             for _, player in pairs(zone:getPlayers()) do
                 if player:getLocalVar(string.format('Zvhal_teleporter_%s', table.npc)) == 1 then
@@ -45,7 +45,7 @@ zoneObject.onZoneTick = function(zone)
             end
 
             teleporter:openDoor(8)
-            teleporter:setLocalVar('timer', math.random(15, 60) + os.time())
+            teleporter:setLocalVar('timer', math.random(15, 60) + GetSystemTime())
         end
     end
 end

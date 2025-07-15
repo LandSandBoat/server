@@ -8,7 +8,7 @@ local zoneObject = {}
 
 zoneObject.onGameHour = function(zone)
     -- Script for Laughing Bison sign flip animations
-    local timer = 1152 - ((os.time() - 1009810802)%1152)
+    local timer = 1152 - ((GetSystemTime() - 1009810802)%1152)
 
     -- Next ferry is Al Zhabi for higher values.
     if timer >= 576 then

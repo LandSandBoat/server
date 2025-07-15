@@ -21,7 +21,7 @@ entity.onMobDespawn = function(mob)
 
     -- Check if Biast window is open, and there is not an Biast popped already
     if
-        biastTimeOfDeath <= os.time() and
+        biastTimeOfDeath <= GetSystemTime() and
         not GetMobByID(mob:getID() + 1):isSpawned()
     then
         if math.random(1, 20) == 5 then

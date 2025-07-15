@@ -1612,7 +1612,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
     end
 
     -- illusion: do not consume tool, and relocate chest after short delay
-    if os.time() < illusionCooldown then
+    if GetSystemTime() < illusionCooldown then
         player:messageSpecial(msgBase + 6)
         moveChest(npc, zoneId, chestType)
         return
@@ -1659,9 +1659,9 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
 
     player:confirmTrade()
     if chestType == xi.treasure.type.CHEST then
-        npc:setLocalVar('illusionCooldown', os.time() + math.random(xi.settings.main.CHEST_MIN_ILLUSION_TIME, xi.settings.main.CHEST_MAX_ILLUSION_TIME))
+        npc:setLocalVar('illusionCooldown', GetSystemTime() + math.random(xi.settings.main.CHEST_MIN_ILLUSION_TIME, xi.settings.main.CHEST_MAX_ILLUSION_TIME))
     else
-        npc:setLocalVar('illusionCooldown', os.time() + math.random(xi.settings.main.COFFER_MIN_ILLUSION_TIME, xi.settings.main.COFFER_MAX_ILLUSION_TIME))
+        npc:setLocalVar('illusionCooldown', GetSystemTime() + math.random(xi.settings.main.COFFER_MIN_ILLUSION_TIME, xi.settings.main.COFFER_MAX_ILLUSION_TIME))
     end
 
     moveChest(npc, zoneId, chestType)

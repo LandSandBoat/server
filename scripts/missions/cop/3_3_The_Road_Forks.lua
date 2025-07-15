@@ -48,7 +48,7 @@ jewelTimer = function(player)
         return
     end
 
-    local secondsRemaining = mission:getLocalVar(player, 'Timer') - os.time()
+    local secondsRemaining = mission:getLocalVar(player, 'Timer') - GetSystemTime()
     if secondsRemaining <= 0 then
         -- There are some conditions that can instantly break the jewel.  Short-circuit out
         -- here and display the final message should that occur.
@@ -407,7 +407,7 @@ mission.sections =
                             then
                                 npcUtil.giveKeyItem(player, xi.ki.MIMEO_JEWEL)
                                 mission:setLocalVar(player, 'Option', 0)
-                                mission:setLocalVar(player, 'Timer', os.time() + 30 * 60)
+                                mission:setLocalVar(player, 'Timer', GetSystemTime() + 30 * 60)
                                 jewelTimer(player)
                                 return mission:noAction()
                             end

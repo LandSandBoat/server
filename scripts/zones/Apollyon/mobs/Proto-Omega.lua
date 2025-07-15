@@ -59,11 +59,11 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('formTime', os.time() + 120)
+    mob:setLocalVar('formTime', GetSystemTime() + 120)
 end
 
 entity.onMobFight = function(mob, target)
-    local now = os.time()
+    local now = GetSystemTime()
 
     -- If in Final form then do Pod Ejection every 5 minutes
     if mob:getLocalVar('final') == 1 then

@@ -30,7 +30,7 @@ entity.onMobFight = function(mob, player)
 
     -- handle salt cooldown
     if
-        cd < os.time() and
+        cd < GetSystemTime() and
         salty == 1
     then
         player:messageText(player, ID.text.SHOOK_SALT)
@@ -39,7 +39,7 @@ entity.onMobFight = function(mob, player)
 
     -- big
     if
-        delay < os.time() and
+        delay < GetSystemTime() and
         mob:getAnimationSub() == 4 and
         mob:getBattleTime() - changeTime > 11
     then
@@ -49,7 +49,7 @@ entity.onMobFight = function(mob, player)
         mob:setDamage(140)
     -- bigger
     elseif
-        delay < os.time() and
+        delay < GetSystemTime() and
         mob:getAnimationSub() == 5 and
         mob:getBattleTime() - changeTime > 11
     then
@@ -60,7 +60,7 @@ entity.onMobFight = function(mob, player)
         mob:setDamage(150)
     -- biggest
     elseif
-        delay < os.time() and
+        delay < GetSystemTime() and
         mob:getAnimationSub() == 6 and
         mob:getBattleTime() - changeTime > 11
     then
@@ -70,7 +70,7 @@ entity.onMobFight = function(mob, player)
         mob:setDamage(160)
     -- self-destruct
     elseif
-        delay < os.time() and
+        delay < GetSystemTime() and
         mob:getAnimationSub() == 7 and
         mob:getBattleTime() - changeTime > 12
     then

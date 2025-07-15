@@ -456,19 +456,19 @@ public:
 
     virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
 
-    CLinkshell*    PLinkshell1;
-    CLinkshell*    PLinkshell2;
-    CUnityChat*    PUnityChat;
-    CTreasurePool* PTreasurePool;
-    CMeritPoints*  PMeritPoints;
-    CJobPoints*    PJobPoints;
-    bool           MeritMode;
+    CLinkshell*                   PLinkshell1;
+    CLinkshell*                   PLinkshell2;
+    CUnityChat*                   PUnityChat;
+    CTreasurePool*                PTreasurePool;
+    std::unique_ptr<CMeritPoints> PMeritPoints;
+    std::unique_ptr<CJobPoints>   PJobPoints;
+    bool                          MeritMode;
 
     CLatentEffectContainer* PLatentEffectContainer;
     bool                    retriggerLatents; // used to retrigger all latent effects if some event requires them to be retriggered
 
     CItemContainer* PGuildShop;
-    CItemContainer* getStorage(uint8 LocationID);
+    CItemContainer* getStorage(uint8 locationId) const;
 
     CTradeContainer* TradeContainer; // Container used specifically for trading.
     CTradeContainer* Container;      // Universal container for exchange, synthesis, store, etc.
@@ -561,7 +561,7 @@ public:
     void            SetPlayTime(timer::duration playTime); // Set playtime
     timer::duration GetPlayTime(bool needUpdate = true);   // Get playtime
 
-    CItemEquipment* getEquip(SLOTTYPE slot);
+    auto getEquip(SLOTTYPE slot) const -> CItemEquipment*;
 
     bool requestedInfoSync = false;
 
@@ -611,7 +611,7 @@ public:
     void onTriggerAreaLeave(uint32 triggerAreaId);
     void clearTriggerAreas();
 
-    bool isInEvent();
+    auto isInEvent() const -> bool;
     bool isNpcLocked();
     void queueEvent(EventInfo* eventToQueue);
     void endCurrentEvent();
@@ -641,12 +641,12 @@ public:
 
     virtual void OnItemFinish(CItemState&, action_t&);
 
-    int32 getCharVar(std::string const& varName);
-    auto  getCharVarsWithPrefix(std::string const& prefix) -> std::vector<std::pair<std::string, int32>>;
-    void  setCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
-    void  setVolatileCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
-    void  updateCharVarCache(std::string const& varName, int32 value, uint32 expiry = 0);
-    void  removeFromCharVarCache(std::string const& varName);
+    auto getCharVar(std::string const& varName) const -> int32;
+    auto getCharVarsWithPrefix(std::string const& prefix) -> std::vector<std::pair<std::string, int32>>;
+    void setCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
+    void setVolatileCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
+    void updateCharVarCache(std::string const& varName, int32 value, uint32 expiry = 0);
+    void removeFromCharVarCache(std::string const& varName);
 
     void clearCharVarsWithPrefix(std::string const& prefix);
 
@@ -686,9 +686,9 @@ private:
     bool m_isBlockingAid;
     bool m_reloadParty;
 
-    std::unordered_map<std::string, std::pair<int32, uint32>> charVarCache;
-    std::unordered_set<std::string>                           charVarChanges;
-    std::unordered_set<uint32>                                charTriggerAreaIDs; // Holds any TriggerArea IDs that the player is currently within the bounds of
+    mutable std::unordered_map<std::string, std::pair<int32, uint32>> charVarCache;
+    std::unordered_set<std::string>                                   charVarChanges;
+    std::unordered_set<uint32>                                        charTriggerAreaIDs; // Holds any TriggerArea IDs that the player is currently within the bounds of
 
     uint8             dataToPersist = 0;
     timer::time_point nextDataPersistTime{};

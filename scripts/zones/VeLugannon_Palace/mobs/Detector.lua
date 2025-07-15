@@ -26,7 +26,7 @@ end
 
 local getMobToSpawn = function(detector)
     local detectorID              = detector:getID()
-    local canSpawnSteamCleaner    = GetServerVariable('[POP]SteamCleaner') < os.time() and utils.contains(detectorID, detectorPHTable)
+    local canSpawnSteamCleaner    = GetServerVariable('[POP]SteamCleaner') < GetSystemTime() and utils.contains(detectorID, detectorPHTable)
     local steamCleanerSpawnChance = 10 -- percent
     local steamCleaner            = GetMobByID(ID.mob.STEAM_CLEANER)
 

@@ -59,7 +59,7 @@ end
 zoneObject.onGameHour = function(zone)
     local jarMoveTime = GetServerVariable('Davoi_Jar_Move_Time')
 
-    if os.time() >= jarMoveTime then
+    if GetSystemTime() >= jarMoveTime then
         local npc = GetNPCByID(ID.npc.JAR)
 
         xi.otherAreas.helpers.TestMyMettle.moveJar(npc)

@@ -82,7 +82,7 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, xi.item.SLICE_OF_GIANT_SHEEP_MEAT) then
                         if quest:getLocalVar(player, 'Timer') == 0 then
                             player:confirmTrade()
-                            quest:setLocalVar(player, 'Timer', os.time() + 60)
+                            quest:setLocalVar(player, 'Timer', GetSystemTime() + 60)
 
                             return quest:messageSpecial(southGustabergID.text.FIRE_PUT, xi.item.SLICE_OF_GIANT_SHEEP_MEAT)
                         else
@@ -96,7 +96,7 @@ quest.sections =
 
                     if cookTimer == 0 then
                         return quest:messageSpecial(southGustabergID.text.FIRE_GOOD)
-                    elseif os.time() < cookTimer then
+                    elseif GetSystemTime() < cookTimer then
                         return quest:messageSpecial(southGustabergID.text.FIRE_LONGER, xi.item.SLICE_OF_GIANT_SHEEP_MEAT)
                     else
                         quest:setLocalVar(player, 'Timer', 0)

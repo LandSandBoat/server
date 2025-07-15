@@ -10,7 +10,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setLocalVar('cooldown', os.time() + 900)
+    mob:setLocalVar('cooldown', GetSystemTime() + 900)
 end
 
 return entity

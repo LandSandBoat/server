@@ -941,7 +941,7 @@ function npcUtil.UpdateNPCSpawnPoint(id, minTime, maxTime, posTable, serverVar)
     serverVar = serverVar or nil -- serverVar is optional
 
     if serverVar then
-        if GetServerVariable(serverVar) <= os.time() then
+        if GetServerVariable(serverVar) <= GetSystemTime() then
             npc:hideNPC(1) -- hide so the NPC is not 'moving' through the zone
             npc:setPos(newPosition.x, newPosition.y, newPosition.z)
         end

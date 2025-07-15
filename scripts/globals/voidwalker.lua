@@ -321,10 +321,10 @@ local function randomly(mob, chance, between, effect, skill)
     if
         math.random(0, 100) <= chance and
         not mob:hasStatusEffect(effect) and
-        os.time() > (mob:getLocalVar('MOBSKILL_TIME') + between)
+        GetSystemTime() > (mob:getLocalVar('MOBSKILL_TIME') + between)
     then
         mob:setLocalVar('MOBSKILL_USE', 1)
-        mob:setLocalVar('MOBSKILL_TIME', os.time())
+        mob:setLocalVar('MOBSKILL_TIME', GetSystemTime())
         mob:useMobAbility(skill)
     end
 end
@@ -464,7 +464,7 @@ xi.voidwalker.onMobFight = function(mob, target)
     end
 
     local poptime = mob:getLocalVar('[VoidWalker]PopedAt')
-    local now     = os.time()
+    local now     = GetSystemTime()
 
     if
         mob:isSpawned() and
@@ -579,7 +579,7 @@ xi.voidwalker.onHealing = function(player)
 
         mob:setLocalVar('[VoidWalker]PopedBy', player:getID())
         mob:setLocalVar('[VoidWalker]PopedWith', mobNearest.keyItem)
-        mob:setLocalVar('[VoidWalker]PopedAt', os.time())
+        mob:setLocalVar('[VoidWalker]PopedAt', GetSystemTime())
 
         if
             mobNearest.keyItem ~= xi.keyItem.CLEAR_ABYSSITE and

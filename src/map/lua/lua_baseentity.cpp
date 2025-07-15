@@ -749,7 +749,7 @@ uint32 CLuaBaseEntity::getLocalVar(std::string const& var)
 /************************************************************************
  *  Function: setLocalVar()
  *  Purpose : Assigns a local variable to an entity
- *  Example : mob:setLocalVar("pop", os.time() + math.random(1200,7200));
+ *  Example : mob:setLocalVar("pop", GetSystemTime() + math.random(1200,7200));
  *  Notes   :
  ************************************************************************/
 
@@ -4589,20 +4589,18 @@ void CLuaBaseEntity::addShopItem(uint16 itemID, double rawPrice, sol::object con
  *  Notes   :
  ************************************************************************/
 
-auto CLuaBaseEntity::getCurrentGPItem(uint8 guildID) -> std::tuple<uint16, uint16>
+auto CLuaBaseEntity::getCurrentGPItem(const uint8 guildId) const -> std::tuple<uint16, uint16>
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return { 0, 0 };
+        const CGuild* PGuild           = guildutils::GetGuild(guildId);
+        auto [itemId, remainingPoints] = PGuild->getDailyGPItem(PChar);
+
+        return { itemId, remainingPoints };
     }
 
-    CGuild*      PGuild = guildutils::GetGuild(guildID);
-    CCharEntity* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    auto GPItem = PGuild->getDailyGPItem(PChar);
-
-    return { GPItem.first, GPItem.second };
+    ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+    return { 0, 0 };
 }
 
 /************************************************************************
@@ -8680,7 +8678,7 @@ void CLuaBaseEntity::completeAssault(uint8 missionID)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::addKeyItem(uint16 keyItemID)
+void CLuaBaseEntity::addKeyItem(const KeyItem keyItemID) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -8689,12 +8687,12 @@ void CLuaBaseEntity::addKeyItem(uint16 keyItemID)
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    uint8 table = keyItemID >> 9;
+    uint8 table = static_cast<uint16_t>(keyItemID) >> 9;
 
     if (table >= MAX_KEYS_TABLE)
     {
         // Bail out if an invalid keyitem is being added
-        ShowWarning("CLuaBaseEntity::addKeyItem() - Attempting to add invalid key item: %d", keyItemID);
+        ShowWarning("CLuaBaseEntity::addKeyItem() - Attempting to add invalid key item: %d", static_cast<uint16_t>(keyItemID));
         return;
     }
 
@@ -8716,7 +8714,7 @@ void CLuaBaseEntity::addKeyItem(uint16 keyItemID)
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::hasKeyItem(uint16 keyItemID)
+auto CLuaBaseEntity::hasKeyItem(const KeyItem keyItemID) const -> bool
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -8734,7 +8732,7 @@ bool CLuaBaseEntity::hasKeyItem(uint16 keyItemID)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::delKeyItem(uint16 keyItemID)
+void CLuaBaseEntity::delKeyItem(const KeyItem keyItemID) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -8743,12 +8741,12 @@ void CLuaBaseEntity::delKeyItem(uint16 keyItemID)
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    uint8 table = keyItemID >> 9;
+    uint8 table = static_cast<uint16_t>(keyItemID) >> 9;
 
     if (table >= MAX_KEYS_TABLE)
     {
         // Bail out if an invalid keyitem is being added
-        ShowWarning("CLuaBaseEntity::delKeyItem() - Attempting to delete invalid key item: %d", keyItemID);
+        ShowWarning("CLuaBaseEntity::delKeyItem() - Attempting to delete invalid key item: %d", static_cast<uint16_t>(keyItemID));
         return;
     }
 
@@ -8765,7 +8763,7 @@ void CLuaBaseEntity::delKeyItem(uint16 keyItemID)
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::seenKeyItem(uint16 keyItemID)
+bool CLuaBaseEntity::seenKeyItem(const KeyItem keyItemID) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -8783,7 +8781,7 @@ bool CLuaBaseEntity::seenKeyItem(uint16 keyItemID)
  *  Notes   : Some things just can't be unseen... (not implemented though)
  ************************************************************************/
 
-void CLuaBaseEntity::unseenKeyItem(uint16 keyItemID)
+void CLuaBaseEntity::unseenKeyItem(const KeyItem keyItemID) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -8792,12 +8790,12 @@ void CLuaBaseEntity::unseenKeyItem(uint16 keyItemID)
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    uint8 table = keyItemID >> 9;
+    uint8 table = static_cast<uint16_t>(keyItemID) >> 9;
 
     if (table >= MAX_KEYS_TABLE)
     {
         // Bail out if an invalid keyitem is being added
-        ShowWarning("CLuaBaseEntity::unseenKeyItem() - Attempting to unsee invalid key item: %d", keyItemID);
+        ShowWarning("CLuaBaseEntity::unseenKeyItem() - Attempting to unsee invalid key item: %d", static_cast<uint16_t>(keyItemID));
         return;
     }
 
@@ -9619,20 +9617,18 @@ void CLuaBaseEntity::delAssaultPoint(uint8 region, int32 points)
  *  Notes   :
  ************************************************************************/
 
-auto CLuaBaseEntity::addGuildPoints(uint8 guildID, uint8 slotID) -> std::tuple<uint8, int16>
+auto CLuaBaseEntity::addGuildPoints(const uint8 guildId, const uint8 slotId) const -> std::tuple<uint8, int16>
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return { 0, 0 };
+        const CGuild* PGuild              = guildutils::GetGuild(guildId);
+        auto [itemQuantity, earnedPoints] = PGuild->addGuildPoints(PChar, PChar->TradeContainer->getItem(slotId));
+
+        return { itemQuantity, earnedPoints };
     }
 
-    CGuild* PGuild = guildutils::GetGuild(guildID);
-    auto*   PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    std::pair<uint8, uint16> gpResult = PGuild->addGuildPoints(PChar, PChar->TradeContainer->getItem(slotID));
-
-    return { gpResult.first, gpResult.second };
+    ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+    return { 0, 0 };
 }
 
 /************************************************************************
@@ -10310,36 +10306,34 @@ void CLuaBaseEntity::capSkill(uint8 skill)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::capAllSkills()
+void CLuaBaseEntity::capAllSkills() const
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        for (uint8 i = SKILL_HAND_TO_HAND; i <= SKILL_HANDBELL; ++i) // For SKILL_HAND_TO_HAND (1) - SKILL_HANDBELL (46)
+        {
+            const char* Query = "INSERT INTO char_skills "
+                                "SET "
+                                "charid = ?, "
+                                "skillid = ?, "
+                                "value = ?, "
+                                "rank = ? "
+                                "ON DUPLICATE KEY UPDATE value = ?, rank = ?";
+
+            db::preparedStmt(Query, PChar->id, i, 5000, PChar->RealSkills.rank[i], 5000, PChar->RealSkills.rank[i]);
+
+            uint16 maxSkill               = 10 * battleutils::GetMaxSkill(static_cast<SKILLTYPE>(i), PChar->GetMJob(), PChar->GetMLevel());
+            PChar->RealSkills.skill[i]    = maxSkill; // set to capped
+            PChar->WorkingSkills.skill[i] = maxSkill / 10;
+            PChar->WorkingSkills.skill[i] |= 0x8000; // set blue capped flag
+        }
+
+        charutils::CheckWeaponSkill(PChar, SKILL_NONE);
+        PChar->pushPacket<CCharSkillsPacket>(PChar);
         return;
     }
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    for (uint8 i = SKILL_HAND_TO_HAND; i <= SKILL_HANDBELL; ++i) // For SKILL_HAND_TO_HAND (1) - SKILL_HANDBELL (46)
-    {
-        const char* Query = "INSERT INTO char_skills "
-                            "SET "
-                            "charid = ?, "
-                            "skillid = ?, "
-                            "value = ?, "
-                            "rank = ? "
-                            "ON DUPLICATE KEY UPDATE value = ?, rank = ? LIMIT 1";
-
-        db::preparedStmt(Query, PChar->id, i, 5000, PChar->RealSkills.rank[i], 5000, PChar->RealSkills.rank[i]);
-
-        uint16 maxSkill               = 10 * battleutils::GetMaxSkill(static_cast<SKILLTYPE>(i), PChar->GetMJob(), PChar->GetMLevel());
-        PChar->RealSkills.skill[i]    = maxSkill; // set to capped
-        PChar->WorkingSkills.skill[i] = maxSkill / 10;
-        PChar->WorkingSkills.skill[i] |= 0x8000; // set blue capped flag
-    }
-
-    charutils::CheckWeaponSkill(PChar, SKILL_NONE);
-    PChar->pushPacket<CCharSkillsPacket>(PChar);
+    ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
 }
 
 /************************************************************************
@@ -11348,7 +11342,7 @@ uint32 CLuaBaseEntity::getLeaderID()
 /************************************************************************
  *  Function: getPartyLastMemberJoinedTime()
  *  Purpose : Get the epoch time point in seconds that the last PC joined the party (if any)
- *  Example : seconds_since_last_member_joined = os.time() - player:getPartyLastMemberJoinedTime()
+ *  Example : seconds_since_last_member_joined = GetSystemTime() - player:getPartyLastMemberJoinedTime()
  *  Notes   :
  ************************************************************************/
 
@@ -18972,7 +18966,7 @@ auto CLuaBaseEntity::getContestRewardStatus() -> sol::table
     {
         std::string Query = "SELECT contestrank, share "
                             "FROM   fishing_contest_entries "
-                            "WHERE  charid = (?) "
+                            "WHERE  charid = ? "
                             "AND    claimed != 1";
 
         auto ret = db::preparedStmt(Query, PChar->id);

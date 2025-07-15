@@ -54,7 +54,7 @@ local chocoboInfo =
 local function getPrice(zoneId, info)
     local lastPrice = GetServerVariable('[CHOCOBO][' .. zoneId .. ']price')
     local lastTime  = GetServerVariable('[CHOCOBO][' .. zoneId .. ']time')
-    local decay     = math.floor((os.time() - lastTime) / info.decayTime) * info.decayPrice
+    local decay     = math.floor((GetSystemTime() - lastTime) / info.decayTime) * info.decayPrice
     local price     = math.max(lastPrice - decay, info.basePrice)
 
     return price
@@ -62,7 +62,7 @@ end
 
 local function updatePrice(zoneId, info, price)
     SetServerVariable('[CHOCOBO][' .. zoneId .. ']price', price + info.addedPrice)
-    SetServerVariable('[CHOCOBO][' .. zoneId .. ']time', os.time())
+    SetServerVariable('[CHOCOBO][' .. zoneId .. ']time', GetSystemTime())
 end
 
 -----------------------------------
@@ -75,7 +75,7 @@ xi.chocobo.initZone = function(zone)
 
     if info then
         SetServerVariable('[CHOCOBO][' .. zoneId .. ']price', info.basePrice)
-        SetServerVariable('[CHOCOBO][' .. zoneId .. ']time', os.time())
+        SetServerVariable('[CHOCOBO][' .. zoneId .. ']time', GetSystemTime())
     else
         printf('[warning] bad zoneId %i in xi.chocobo.initZone (%s)', zoneId, zone:getName())
     end

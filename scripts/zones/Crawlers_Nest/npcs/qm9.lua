@@ -15,11 +15,11 @@ entity.onTrigger = function(player, npc)
         VanadielUniqueDay() ~= player:getCharVar('DreadbugNM_Day')
     then
         if
-            os.time() > player:getCharVar('DreadbugNM_Timer') + 30 and
+            GetSystemTime() > player:getCharVar('DreadbugNM_Timer') + 30 and
             npcUtil.popFromQM(player, npc, ID.mob.DREADBUG, { claim = true, hide = 0 })
         then
             player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
-            player:setCharVar('DreadbugNM_Timer', os.time() + 180)
+            player:setCharVar('DreadbugNM_Timer', GetSystemTime() + 180)
             player:setCharVar('DreadbugNM_Day', VanadielUniqueDay())
         else
             player:messageSpecial(ID.text.NOTHING_SEEMS_TO_HAPPEN)

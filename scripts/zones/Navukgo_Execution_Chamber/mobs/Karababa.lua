@@ -10,7 +10,7 @@ local entity = {}
 entity.onMobFight = function(mob, target)
     local warp = mob:getLocalVar('warp')
     local wait = mob:getLocalVar('wait')
-    if mob:getLocalVar('warp') == 2 and wait < os.time() then
+    if mob:getLocalVar('warp') == 2 and wait < GetSystemTime() then
         mob:getBattlefield():lose()
     end
 
@@ -32,7 +32,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
     if warp == 1 then
         mob:showText(mob, ID.text.KARABABA_QUIT)
         mob:setLocalVar('warp', 2)
-        mob:setLocalVar('wait', os.time() + 8)
+        mob:setLocalVar('wait', GetSystemTime() + 8)
         return 261
     elseif rnd == 1 then
         mob:showText(mob, ID.text.KARABARA_FIRE)

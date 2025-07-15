@@ -29,7 +29,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGEN, 50)
 
     -- Regen Head every 1.5-4 minutes 90-240
-    mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
+    mob:setLocalVar('headTimer', GetSystemTime() + math.random(60, 190))
 
     -- Number of crits to lose a head
     mob:setLocalVar('CritToTheFace', math.random(10, 30))
@@ -39,9 +39,9 @@ end
 entity.onMobRoam = function(mob)
     -- Regen head
     local headTimer = mob:getLocalVar('headTimer')
-    if mob:getAnimationSub() == 2 and os.time() > headTimer then
+    if mob:getAnimationSub() == 2 and GetSystemTime() > headTimer then
         mob:setAnimationSub(1)
-        mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
+        mob:setLocalVar('headTimer', GetSystemTime() + math.random(60, 190))
 
         -- First time it regens second head, 25%. Reduced afterwards.
         if mob:getLocalVar('secondHead') == 0 then
@@ -51,9 +51,9 @@ entity.onMobRoam = function(mob)
             mob:addHP(mob:getMaxHP() * .05)
         end
 
-    elseif mob:getAnimationSub() == 1 and os.time() > headTimer then
+    elseif mob:getAnimationSub() == 1 and GetSystemTime() > headTimer then
         mob:setAnimationSub(0)
-        mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
+        mob:setLocalVar('headTimer', GetSystemTime() + math.random(60, 190))
 
         -- First time it regens third head, 25%. Reduced afterwards.
         if mob:getLocalVar('thirdHead') == 0 then
@@ -69,9 +69,9 @@ end
 
 entity.onMobFight = function(mob, target)
     local headTimer = mob:getLocalVar('headTimer')
-    if mob:getAnimationSub() == 2 and os.time() > headTimer then
+    if mob:getAnimationSub() == 2 and GetSystemTime() > headTimer then
         mob:setAnimationSub(1)
-        mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
+        mob:setLocalVar('headTimer', GetSystemTime() + math.random(60, 190))
 
         -- First time it regens second head, 25%. Reduced afterwards.
         if mob:getLocalVar('secondHead') == 0 then
@@ -89,9 +89,9 @@ entity.onMobFight = function(mob, target)
         mob:useMobAbility(1830) -- Polar Blast
         mob:useMobAbility(1832) -- Barofield
 
-    elseif mob:getAnimationSub() == 1 and os.time() > headTimer then
+    elseif mob:getAnimationSub() == 1 and GetSystemTime() > headTimer then
         mob:setAnimationSub(0)
-        mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
+        mob:setLocalVar('headTimer', GetSystemTime() + math.random(60, 190))
 
         -- First time it regens third head, 25%. Reduced afterwards.
         if mob:getLocalVar('thirdHead') == 0 then
@@ -112,7 +112,6 @@ entity.onMobFight = function(mob, target)
         mob:useMobAbility(1830) -- Polar Blast
         mob:useMobAbility(1832) -- Barofield
     end
-
 
     local drawInTable =
     {
@@ -135,10 +134,10 @@ entity.onCriticalHit = function(mob)
     if (critNum + 1) > mob:getLocalVar('CritToTheFace') then  -- Lose a head
         if mob:getAnimationSub() == 0 then
             mob:setAnimationSub(1)
-            mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
+            mob:setLocalVar('headTimer', GetSystemTime() + math.random(60, 190))
         elseif mob:getAnimationSub() == 1 then
             mob:setAnimationSub(2)
-            mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
+            mob:setLocalVar('headTimer', GetSystemTime() + math.random(60, 190))
         else
             -- Meh
         end

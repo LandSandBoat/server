@@ -277,7 +277,12 @@ namespace luautils
         lua.set_function("DrawIn", &luautils::DrawIn);
         lua.set_function("GetSystemTime", &luautils::GetSystemTime);
         lua.set_function("JstMidnight", &luautils::JstMidnight);
-        lua.set_function("JstWeekday", &luautils::JstWeekday);
+        lua.set_function("JstDayOfTheYear", &luautils::JstDayOfTheYear);
+        lua.set_function("JstDayOfTheMonth", &luautils::JstDayOfTheMonth);
+        lua.set_function("JstDayOfTheWeek", &luautils::JstDayOfTheWeek);
+        lua.set_function("JstYear", &luautils::JstYear);
+        lua.set_function("JstMonth", &luautils::JstMonth);
+        lua.set_function("JstHour", &luautils::JstHour);
         lua.set_function("NextConquestTally", &luautils::NextJstWeek);
         lua.set_function("NextGameTime", &luautils::NextGameTime);
         lua.set_function("NextJstDay", &luautils::JstMidnight);
@@ -1552,16 +1557,46 @@ namespace luautils
         return earth_time::timestamp(jstMidnight);
     }
 
+    uint32 JstDayOfTheYear()
+    {
+        TracyZoneScoped;
+        return earth_time::jst::get_yearday();
+    }
+
+    uint32 JstDayOfTheMonth()
+    {
+        TracyZoneScoped;
+        return earth_time::jst::get_monthday();
+    }
+
     /************************************************************************
      *                                                                       *
      * Returns days since Sunday JST                                         *
      *                                                                       *
      ************************************************************************/
 
-    uint32 JstWeekday()
+    uint32 JstDayOfTheWeek()
     {
         TracyZoneScoped;
         return earth_time::jst::get_weekday();
+    }
+
+    int32 JstYear()
+    {
+        TracyZoneScoped;
+        return earth_time::jst::get_year();
+    }
+
+    uint32 JstMonth()
+    {
+        TracyZoneScoped;
+        return earth_time::jst::get_month();
+    }
+
+    uint32 JstHour()
+    {
+        TracyZoneScoped;
+        return earth_time::jst::get_hour();
     }
 
     /************************************************************************

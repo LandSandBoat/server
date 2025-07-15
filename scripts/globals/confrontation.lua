@@ -83,7 +83,7 @@ xi.confrontation.check = function(lookupKey, setupTimer)
     end
 
     if lookup.timeLimit then
-        if os.time() > lookup.timeLimit then
+        if GetSystemTime() > lookup.timeLimit then
             didLose = true
         end
     end
@@ -191,7 +191,7 @@ xi.confrontation.start = function(player, npc, mobIds, params)
     lookup.onLose = params.loseFunc
 
     if params.timeLimit then
-        lookup.timeLimit = os.time() + params.timeLimit
+        lookup.timeLimit = GetSystemTime() + params.timeLimit
     end
 
     xi.confrontation.lookup[lookupKey] = lookup

@@ -70,7 +70,7 @@ zoneObject.onZoneWeatherChange = function(weather)
     if
         elel and
         elel:getZone():getLocalVar('elelQueued') == 0 and -- Why doesn't onZoneWeatherChange contain the zone object...?
-        not elel:isSpawned() and os.time() > elel:getLocalVar('cooldown') and
+        not elel:isSpawned() and GetSystemTime() > elel:getLocalVar('cooldown') and
         (weather == xi.weather.GLOOM or weather == xi.weather.DARKNESS) and
         (vanadielHour < 4 or vanadielHour >= 20)
     then
@@ -93,7 +93,7 @@ zoneObject.onZoneTick = function(zone)
             if
                 elel and
                 zone:getLocalVar('elelQueued') == 0 and
-                not elel:isSpawned() and os.time() > elel:getLocalVar('cooldown')
+                not elel:isSpawned() and GetSystemTime() > elel:getLocalVar('cooldown')
             then
                 DisallowRespawn(elel:getID(), false)
                 elel:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after dark weather starts

@@ -91,4 +91,5 @@ enum ITEMID : uint16
     TWILIGHT_CRYSTAL    = 4245,
     RANKA               = 8803,
     FURUSUMI            = 8804,
+    GIL                 = 65535,
 };

@@ -265,14 +265,14 @@ local checkCarbyTwoHour = function(mainCarbyID, battlefield)
                 (carby:isAlive() and carby:getHPP() < 10))
             then
                 triggerCoordTwoHour = true
-                battlefield:setLocalVar('lastCoordTwoHour', os.time())
+                battlefield:setLocalVar('lastCoordTwoHour', GetSystemTime())
                 break
             end
         end
     -- else check the 3 min timer
-    elseif os.time() > (lastCoorTwoHourTime + 180) then
+    elseif GetSystemTime() > (lastCoorTwoHourTime + 180) then
         triggerCoordTwoHour = true
-        battlefield:setLocalVar('lastCoordTwoHour', os.time())
+        battlefield:setLocalVar('lastCoordTwoHour', GetSystemTime())
     end
 
     if triggerCoordTwoHour then
@@ -309,14 +309,14 @@ local checkElementalAvatarTwoHour = function(mainCarbyID, battlefield, phase)
                 (avatar:isAlive() and avatar:getHPP() < 10))
             then
                 triggerCoordTwoHour = true
-                battlefield:setLocalVar('lastCoordTwoHour', os.time())
+                battlefield:setLocalVar('lastCoordTwoHour', GetSystemTime())
                 break
             end
         end
     -- else check the 3 min timer
-    elseif os.time() > (lastCoorTwoHourTime + 180) then
+    elseif GetSystemTime() > (lastCoorTwoHourTime + 180) then
         triggerCoordTwoHour = true
-        battlefield:setLocalVar('lastCoordTwoHour', os.time())
+        battlefield:setLocalVar('lastCoordTwoHour', GetSystemTime())
     end
 
     if triggerCoordTwoHour then
@@ -395,7 +395,7 @@ end
 local setBattlefieldLocalVarsForPhase = function(battlefield, phase, numToSpawn, typeToSpawn)
     battlefield:setLocalVar('phase', phase)
     -- set up an avatar spawn in 5 seconds
-    battlefield:setLocalVar('spawnTriggerTime', os.time() + 5)
+    battlefield:setLocalVar('spawnTriggerTime', GetSystemTime() + 5)
     battlefield:setLocalVar('numToSpawn', numToSpawn)
     battlefield:setLocalVar('typeToSpawn', typeToSpawn)
     battlefield:setLocalVar('lastCoordTwoHour', 0)
@@ -427,7 +427,7 @@ function content:onBattlefieldTick(battlefield, tick)
     -- the trigger time is set in the phase transition code
     if battlefield:getLocalVar('spawnTriggerTime') > 0 then
         -- if there is a pending spawning then check if time to spawn or need to wait
-        if os.time() > battlefield:getLocalVar('spawnTriggerTime') then
+        if GetSystemTime() > battlefield:getLocalVar('spawnTriggerTime') then
             local numToSpawn = battlefield:getLocalVar('numToSpawn')
 
             if

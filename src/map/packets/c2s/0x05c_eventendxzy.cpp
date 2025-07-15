@@ -1,0 +1,71 @@
+/*
+===========================================================================
+
+  Copyright (c) 2025 LandSandBoat Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#include "0x05c_eventendxzy.h"
+
+#include "entities/charentity.h"
+#include "lua/luautils.h"
+#include "packets/cs_position.h"
+#include "packets/release.h"
+
+auto GP_CLI_COMMAND_EVENTENDXZY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+{
+    return PacketValidator()
+        .mustEqual(Mode, 1, "Mode not 1")
+        .isInEvent(PChar, EventPara);
+}
+
+void GP_CLI_COMMAND_EVENTENDXZY::process(MapSession* PSession, CCharEntity* PChar) const
+{
+    const auto result  = EndPara;
+    const auto eventId = EventPara;
+
+    bool updatePosition = false;
+
+    // TODO: Currently the return value for onEventUpdate in Interaction Framework is not received.  Remove
+    // the localVar check when this is resolved.
+
+    const int32  updateResult     = luautils::OnEventUpdate(PChar, eventId, result);
+    const uint32 noPositionUpdate = PChar->GetLocalVar("noPosUpdate");
+    updatePosition                = noPositionUpdate == 0 ? updateResult == 1 : false;
+
+    PChar->SetLocalVar("noPosUpdate", 0);
+
+    if (updatePosition)
+    {
+        position_t newPos = {
+            x,
+            y,
+            z,
+            0,
+            static_cast<uint8_t>(dir),
+        };
+
+        PChar->pushPacket<CCSPositionPacket>(PChar, newPos, POSMODE::EVENT);
+        PChar->pushPacket<CPositionPacket>(PChar, newPos, POSMODE::NORMAL);
+    }
+    else
+    {
+        PChar->pushPacket<CCSPositionPacket>(PChar, PChar->loc.p, POSMODE::CLEAR);
+    }
+
+    PChar->pushPacket<CReleasePacket>(PChar, RELEASE_TYPE::EVENT);
+}

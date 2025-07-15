@@ -38,7 +38,7 @@ local checkWorldFirstServerVar = function(player, varName, worldMessage)
 
         -- Write out World First (WF) and World First Time (WT) to server vars)
         SetVolatileServerVariable(worldFirst, player:getID())
-        SetVolatileServerVariable(worldTime, os.time())
+        SetVolatileServerVariable(worldTime, GetSystemTime())
 
         -- Summon big swirly starry animation which lingers on the players client in the location
         -- where this event happened. It will linger in that area for anyone that saw it until

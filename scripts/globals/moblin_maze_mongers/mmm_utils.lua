@@ -17,7 +17,7 @@ xi.mmm.calculateCCPoints = function(player)
     local mazeExitTime = player:getCharVar('[MMM]exitTime')
 
     if mazeExitTime > 0 then
-        local timeDiff = os.time() - mazeExitTime - 3600 -- Current time - Re-Enter time
+        local timeDiff = GetSystemTime() - mazeExitTime - 3600 -- Current time - Re-Enter time
         ccPoints       = math.floor(timeDiff / 1200)     -- Recieve 1 point every 20 minutes. (First hour doesnt generate C.C. Points)
         ccPoints       = utils.clamp(ccPoints, 0, 6)     -- No negative points. Max 6.
     end

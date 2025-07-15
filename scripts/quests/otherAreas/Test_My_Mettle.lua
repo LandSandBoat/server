@@ -52,7 +52,7 @@ quest.sections =
                 player:getMainLvl() >= 10 and
                 player:getRank(player:getNation()) >= 2 and
                 player:getFameLevel(xi.fameArea.SELBINA_RABAO) >= 2 and
-                quest:getVar(player, 'Repeat') <= os.time()
+                quest:getVar(player, 'Repeat') <= GetSystemTime()
         end,
 
         [xi.zone.SELBINA] =
@@ -71,7 +71,7 @@ quest.sections =
                             player:delGil(betAmount)
 
                             -- One Vana'diel Hour is equal to 2m24s (144s)
-                            quest:setVar(player, 'Timer', os.time() + vanaHoursRemaining * 144)
+                            quest:setVar(player, 'Timer', GetSystemTime() + vanaHoursRemaining * 144)
                             quest:setVar(player, 'Reward', betAmount * rewardMultiplier[vanaHoursRemaining])
                             quest:begin(player)
                         else
@@ -94,7 +94,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.item.POWER_SANDALS) then
-                        local timeRemaining = quest:getVar(player, 'Timer') - os.time()
+                        local timeRemaining = quest:getVar(player, 'Timer') - GetSystemTime()
 
                         if timeRemaining > 0 then
                             return quest:progressEvent(122)
@@ -105,7 +105,7 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    local timeRemaining = quest:getVar(player, 'Timer') - os.time()
+                    local timeRemaining = quest:getVar(player, 'Timer') - GetSystemTime()
 
                     if timeRemaining > 0 then
                         local hoursRemaining = math.floor(timeRemaining / 144)

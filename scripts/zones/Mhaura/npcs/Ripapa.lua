@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
     -- Trial by Lightning
     elseif
         (trialByLightning == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.WINDURST) >= 6) or
-        (trialByLightning == xi.questStatus.QUEST_COMPLETED and os.time() > player:getCharVar('TrialByLightning_date'))
+        (trialByLightning == xi.questStatus.QUEST_COMPLETED and GetSystemTime() > player:getCharVar('TrialByLightning_date'))
     then
         player:startEvent(10016, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"
     elseif

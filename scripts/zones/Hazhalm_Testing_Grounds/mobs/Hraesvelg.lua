@@ -20,7 +20,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobFight = function(mob)
-    if os.time() >= mob:getLocalVar('resetEnmity') then
+    if GetSystemTime() >= mob:getLocalVar('resetEnmity') then
         local enmityList = mob:getEnmityList()
 
         for _, enmity in ipairs(enmityList) do
@@ -35,7 +35,7 @@ entity.onMobFight = function(mob)
         mob:addEnmity(randomTarget.entity, 30000, 30000)
         mob:updateTarget()
 
-        mob:setLocalVar('resetEnmity', os.time() + math.random(5, 20))
+        mob:setLocalVar('resetEnmity', GetSystemTime() + math.random(5, 20))
     end
 end
 

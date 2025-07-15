@@ -30,7 +30,7 @@ auto GP_CLI_COMMAND_FISHING_2::validate(MapSession* PSession, const CCharEntity*
         .mustEqual(PChar->GetMLevel() >= settings::get<uint8>("map.FISHING_MIN_LEVEL"), true, "Character below fishing minimum level")
         .mustEqual(UniqueNo, PChar->id, "Character id mismatch")
         .mustEqual(ActIndex, PChar->targid, "Character targid mismatch")
-        .range("mode", mode, GP_CLI_COMMAND_FISHING_2_MODE::RequestCheckHook, GP_CLI_COMMAND_FISHING_2_MODE::RequestPotentialTimeout)
+        .oneOf<GP_CLI_COMMAND_FISHING_2_MODE>(mode)
         .custom([&](PacketValidator& v)
                 {
                     // clang-format off

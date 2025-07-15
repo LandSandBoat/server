@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
     if
         player:hasKeyItem(xi.ki.MERTAIRES_BRACELET) and
         not GetMobByID(ID.mob.TROS):isSpawned() and
-        (trosKilled == 0 or (os.time() - player:getCharVar('Tros_Timer')) > 60)
+        (trosKilled == 0 or (GetSystemTime() - player:getCharVar('Tros_Timer')) > 60)
     then
         player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
         SpawnMob(ID.mob.TROS):updateClaim(player)

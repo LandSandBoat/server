@@ -72,7 +72,7 @@ zoneObject.onZoneWeatherChange = function(weather)
         elseif
             not habrok:isSpawned() and
             isHabrokWeather(weather) and
-            os.time() > habrok:getLocalVar('pop')
+            GetSystemTime() > habrok:getLocalVar('pop')
         then
             SpawnMob(ID.mob.HABROK)
         end

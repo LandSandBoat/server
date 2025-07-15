@@ -112,7 +112,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') == 0 and
-                        quest:getVar(player, 'Timer') <= os.time() and
+                        quest:getVar(player, 'Timer') <= GetSystemTime() and
                         not GetMobByID(sauromugueID.mob.OLD_SABERTOOTH):isSpawned()
                     then
                         SpawnMob(sauromugueID.mob.OLD_SABERTOOTH):addStatusEffect(xi.effect.POISON, 10, 10, 240)

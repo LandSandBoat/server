@@ -46,7 +46,7 @@
 auto GP_CLI_COMMAND_MYROOM_JOB::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     auto pv = PacketValidator()
-                  .mustEqual(PChar->loc.zone->CanUseMisc(MISC_MOGMENU) || PChar->m_moghouseID, true, "Player not in MH or zone with Moogle.");
+                  .mustEqual(PChar->loc.zone->CanUseMisc(MISC_MOGMENU) || PChar->m_moghouseID == PChar->id, true, "Player not in MH or zone with Moogle.");
 
     if (MainJobIndex)
     {
@@ -88,7 +88,7 @@ void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar
             blueutils::UnequipAllBlueSpells(PChar);
         }
 
-        bool canUseMeritMode = PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, 606);
+        bool canUseMeritMode = PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, KeyItem::LIMIT_BREAKER);
         if (!canUseMeritMode && PChar->MeritMode)
         {
             if (db::preparedStmt("UPDATE char_exp SET mode = ? WHERE charid = ? LIMIT 1", 0, PChar->id))

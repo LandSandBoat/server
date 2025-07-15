@@ -34,7 +34,7 @@ entity.onTrigger = function(player, npc)
         or
         (
             wakingDreams == xi.questStatus.QUEST_COMPLETED and
-            os.time() > player:getCharVar('Darkness_Named_date')
+            GetSystemTime() > player:getCharVar('Darkness_Named_date')
         )
     then
         player:startEvent(918)

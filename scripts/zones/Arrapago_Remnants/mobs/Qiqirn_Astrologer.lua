@@ -43,7 +43,7 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobEngage = function(mob)
-    mob:setLocalVar('runTime', os.time())
+    mob:setLocalVar('runTime', GetSystemTime())
 end
 
 entity.onMobFight = function(mob, target)
@@ -70,14 +70,14 @@ entity.onMobFight = function(mob, target)
     end
 
     if not mob:isFollowingPath() then
-        if os.time() - runTime > 10 then
+        if GetSystemTime() - runTime > 10 then
             if mob:actionQueueEmpty() and not isBusy then
                 if mob:getLocalVar('run') <= 1 then
                     mob:setLocalVar('run', 1)
-                    mob:setLocalVar('runTime', os.time())
+                    mob:setLocalVar('runTime', GetSystemTime())
                     entity.onMobDisengage(mob)
                 elseif mob:getLocalVar('run') <= 6 then
-                    mob:setLocalVar('runTime', os.time())
+                    mob:setLocalVar('runTime', GetSystemTime())
                     entity.onMobDisengage(mob)
                 elseif mob:getLocalVar('run') == 7 then
                     DespawnMob(ID.mob[stage - 1][prog - 1].astrologer, instance)

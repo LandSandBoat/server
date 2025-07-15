@@ -13,9 +13,9 @@ entity.onTrigger = function(player, npc)
 
     if missionaryManVar == 2 then
         player:startEvent(698, 0, 1146) -- Start statue creation
-    elseif missionaryManVar == 3 and finishtime > os.time() then
+    elseif missionaryManVar == 3 and finishtime > GetSystemTime() then
         player:startEvent(699) -- During statue creation
-    elseif missionaryManVar == 3 and finishtime <= os.time() then
+    elseif missionaryManVar == 3 and finishtime <= GetSystemTime() then
         player:startEvent(700) -- End of statue creation
     elseif missionaryManVar == 4 then
         player:startEvent(701) -- During quest (after creation)
@@ -27,7 +27,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 698 then
         player:setCharVar('MissionaryManVar', 3)
-        player:setCharVar('MissionaryMan_date', os.time() + 60)
+        player:setCharVar('MissionaryMan_date', GetSystemTime() + 60)
         player:delKeyItem(xi.ki.RAUTEINOTS_PARCEL)
         player:needToZone(true)
 

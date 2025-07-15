@@ -56,7 +56,7 @@ quest.sections =
                     player:addGil(3600)
                     quest:begin(player)
                     quest:setVar(player, 'Prog', 0)
-                    quest:setVar(player, 'Timer', os.time() + 60)
+                    quest:setVar(player, 'Timer', GetSystemTime() + 60)
                 end,
             },
         },
@@ -163,7 +163,7 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 0 then
-                        if os.time() < quest:getVar(player, 'Timer') then
+                        if GetSystemTime() < quest:getVar(player, 'Timer') then
                             return quest:progressEvent(359)
                         else
                             return quest:progressEvent(360)
@@ -191,7 +191,7 @@ quest.sections =
                 [365] = function(player, csid, option, npc)
                     player:confirmTrade()
                     quest:setVar(player, 'Prog', 0)
-                    quest:setVar(player, 'Timer', os.time() + 60)
+                    quest:setVar(player, 'Timer', GetSystemTime() + 60)
                 end,
 
                 [362] = function(player, csid, option, npc)

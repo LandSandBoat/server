@@ -750,6 +750,11 @@ auto CMobEntity::GetEligibleSeals() -> std::vector<uint16>
 // - Mob >= 80: Avatarites of matching weather/day can also drop. Weather takes priority.
 auto CMobEntity::GetEligibleGeodes() -> std::vector<uint16>
 {
+    if (!luautils::IsContentEnabled("ABYSSEA"))
+    {
+        return {};
+    }
+
     uint8 element = 0;
 
     // Set element by weather

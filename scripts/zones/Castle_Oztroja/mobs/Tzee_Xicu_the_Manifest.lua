@@ -31,7 +31,7 @@ end
 entity.onMobDespawn = function(mob)
     -- reset hqnm system back to the nm placeholder
     local nqId = mob:getID() - 3
-    SetServerVariable('[POP]Tzee_Xicu_the_Manifest', os.time() + 259200) -- 3 days
+    SetServerVariable('[POP]Tzee_Xicu_the_Manifest', GetSystemTime() + 259200) -- 3 days
     SetServerVariable('[PH]Tzee_Xicu_the_Manifest', 0)
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(nqId, false)

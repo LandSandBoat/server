@@ -7,14 +7,14 @@ local function nextRegrow(mob)
     local headRegrowMin = (mob:getLocalVar('headRegrowMin') ~= 0 and mob:getLocalVar('headRegrowMin')) or 120
     local headRegrowMax = (mob:getLocalVar('headRegrowMin') ~= 0 and mob:getLocalVar('headRegrowMin')) or 240
 
-    mob:setLocalVar('headgrow', os.time() + math.random(headRegrowMin, headRegrowMax))
+    mob:setLocalVar('headgrow', GetSystemTime() + math.random(headRegrowMin, headRegrowMax))
 end
 
 local function checkRegrowHead(mob)
     local headgrow      = mob:getLocalVar('headgrow')
     local broken        = mob:getAnimationSub()
 
-    if headgrow < os.time() and broken > 0 then
+    if headgrow < GetSystemTime() and broken > 0 then
         mob:setAnimationSub(broken - 1)
         nextRegrow(mob)
     end

@@ -254,7 +254,7 @@ local function tradeForKeyItem(player, trade, ki)
     local charVar = menuMetadata[1][ki].charVar
     if
         not player:hasKeyItem(ki) and
-        os.time() >= player:getCharVar(charVar)
+        GetSystemTime() >= player:getCharVar(charVar)
     then
         player:tradeComplete()
         player:setCharVar(charVar, getMidnight())
@@ -365,7 +365,7 @@ entity.onTrigger = function(player, npc)
     then
         player:showText(npc, ID.text.GET_LOST)
     else
-        local now          = os.time()
+        local now          = GetSystemTime()
         local finishedACP  = player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.A_CRYSTALLINE_PROPHECY_FIN
         local finishedAMK  = player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.A_MOOGLE_KUPO_DETAT_FIN
         local finishedASA  = player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.A_SHANTOTTO_ASCENSION_FIN

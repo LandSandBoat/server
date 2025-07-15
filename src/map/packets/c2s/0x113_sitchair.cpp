@@ -29,11 +29,9 @@
 auto GP_CLI_COMMAND_SITCHAIR::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
-        .mustEqual(PChar->status, STATUS_TYPE::NORMAL, "Character abnormal status")
-        .mustEqual(PChar->StatusEffectContainer->HasPreventActionEffect(), false, "Character has Prevent Action effect")
-        .range("Mode", Mode,
-               GP_CLI_COMMAND_SITCHAIR_MODE::Toggle,
-               GP_CLI_COMMAND_SITCHAIR_MODE::Off)
+        .isNormalStatus(PChar)
+        .isNotPreventedAction(PChar)
+        .oneOf<GP_CLI_COMMAND_SITCHAIR_MODE>(Mode)
         .range("ChairId", ChairId, 0, 20); // 10 chairs + 10 reserved slots for future use
 }
 
@@ -49,7 +47,7 @@ void GP_CLI_COMMAND_SITCHAIR::process(MapSession* PSession, CCharEntity* PChar) 
     uint8 chairId = ChairId + ANIMATION_SITCHAIR_0;
 
     // Validate key item ownership for 64 through 83
-    if (chairId != ANIMATION_SITCHAIR_0 && !charutils::hasKeyItem(PChar, chairId + 0xACA))
+    if (chairId != ANIMATION_SITCHAIR_0 && !charutils::hasKeyItem(PChar, static_cast<KeyItem>(chairId + 0xACA)))
     {
         chairId = ANIMATION_SITCHAIR_0;
     }

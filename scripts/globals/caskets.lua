@@ -104,7 +104,7 @@ end
 -- NOTE: will NOT allow a spawn if time since last spanwed is under 5 mins.
 -----------------------------------
 local function timeElapsedCheck(npc)
-    local spawnTime   = os.time() + 360000 -- defualt time in case no var set.
+    local spawnTime   = GetSystemTime() + 360000 -- defualt time in case no var set.
     local timeTable   = { 0, 0, 0 }        -- HOURS, MINUTES, SECONDS.
 
     if npc == nil then
@@ -115,7 +115,7 @@ local function timeElapsedCheck(npc)
         spawnTime = npc:getLocalVar('[caskets]SPAWNTIME')
     end
 
-    local lastSpawned = os.time() - spawnTime
+    local lastSpawned = GetSystemTime() - spawnTime
 
     timeTable = convertTime(lastSpawned)
 
@@ -269,7 +269,7 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
         end
 
         npc:setLocalVar('[caskets]SPAWNSTATUS', casketInfo.spawnStatus.SPAWNED_CLOSED)
-        npc:setLocalVar('[caskets]SPAWNTIME', os.time())
+        npc:setLocalVar('[caskets]SPAWNTIME', GetSystemTime())
         npc:setPos(x, y, z, r)
         npc:setStatus(xi.status.NORMAL)
         npc:entityAnimationPacket(xi.animationString.STATUS_VISIBLE)

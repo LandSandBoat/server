@@ -18,7 +18,7 @@ end
 
 local function spawnNMs(player, npc)
     if not isFightInProgress() then
-        npc:setLocalVar('cooldown', os.time() + 900) -- 15 minutes between repops
+        npc:setLocalVar('cooldown', GetSystemTime() + 900) -- 15 minutes between repops
         npc:setLocalVar('NasusKilled', 0)
         npc:setLocalVar('QuestPlayer', player:getID()) -- only the person who pops will complete quest
 
@@ -45,7 +45,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(29)
 
     elseif tuningOutProgress == 3 or tuningOutProgress == 4 then
-        if os.time() >= npc:getLocalVar('cooldown') then
+        if GetSystemTime() >= npc:getLocalVar('cooldown') then
             -- Only show CS if first time spawning mobs
             if tuningOutProgress == 3 then
                 player:startEvent(28)

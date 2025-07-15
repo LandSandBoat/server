@@ -186,7 +186,7 @@ local function areSuppliesRotten(player, npc, guardType)
     local rotten = false
     local text   = zones[player:getZoneID()].text
 
-    if region > 0 and fresh <= os.time() then
+    if region > 0 and fresh <= GetSystemTime() then
         rotten = true
     end
 

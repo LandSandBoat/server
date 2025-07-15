@@ -133,8 +133,9 @@ bool CPlayerController::Ability(uint16 targid, uint16 abilityid)
                 currentRecast -= recast->chargeTime * (recast->maxCharges - 1);
             }
 
+            currentRecast = std::chrono::ceil<std::chrono::seconds>(currentRecast);
             PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2);
-            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, timer::count_seconds(currentRecast), 0, MSGBASIC_TIME_LEFT);
+            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, static_cast<uint32>(std::max<int64>(timer::count_seconds(currentRecast), 0)), 0, MSGBASIC_TIME_LEFT);
             return false;
         }
         if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())

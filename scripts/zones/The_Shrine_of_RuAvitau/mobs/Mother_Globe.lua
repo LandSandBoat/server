@@ -121,12 +121,12 @@ local trySpawnSlaveGlobe = function(mg, nowTime, spawnedSlaves, notSpawnedSlaves
         local slaveGlobePos = validSlavePositions[slaveSlot]
 
         spawnSlaveGlobe(mg, slaveGlobe, slaveGlobePos)
-        setNextSpawnSlaveGlobe(mg, slaveSlot, os.time())
+        setNextSpawnSlaveGlobe(mg, slaveSlot, GetSystemTime())
     end
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('nextSlaveSpawnTime', os.time() + 30) -- spawn first 30s from now
+    mob:setLocalVar('nextSlaveSpawnTime', GetSystemTime() + 30) -- spawn first 30s from now
     mob:addStatusEffectEx(xi.effect.SHOCK_SPIKES, 0, 60, 0, 0) -- ~60 damage
     -- TODO: Effect can be stolen, giving a THF (Aura Steal) or BLU (Voracious Trunk) a 60 minute shock spikes effect (unknown potency).
     -- If effect is stolen, he will recast it instantly.
@@ -143,14 +143,14 @@ entity.onMobFight = function(mob, target)
 
     local spawnedSlaves, notSpawnedSlaves = getSlaves()
     local validSlavePositions = calculateValidSlaveGlobePositions(mob:getZone(), mob:getPos(), startingSpacingDistance)
-    trySpawnSlaveGlobe(mob, os.time(), spawnedSlaves, notSpawnedSlaves, validSlavePositions)
+    trySpawnSlaveGlobe(mob, GetSystemTime(), spawnedSlaves, notSpawnedSlaves, validSlavePositions)
 end
 
 entity.onMobRoam = function(mob)
     local spawnedSlaves, notSpawnedSlaves = getSlaves()
     local validSlavePositions = calculateValidSlaveGlobePositions(mob:getZone(), mob:getPos(), startingSpacingDistance)
 
-    trySpawnSlaveGlobe(mob, os.time(), spawnedSlaves, notSpawnedSlaves, validSlavePositions)
+    trySpawnSlaveGlobe(mob, GetSystemTime(), spawnedSlaves, notSpawnedSlaves, validSlavePositions)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

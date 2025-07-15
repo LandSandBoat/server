@@ -732,7 +732,7 @@ xi.chocoboRaising.newChocobo = function(player, egg)
     newChoco.first_name      = 'Chocobo'
     newChoco.last_name       = 'Chocobo'
     newChoco.sex             = math.ceil(math.random() - 0.5) -- Random 0 or 1
-    newChoco.created         = os.time()
+    newChoco.created         = GetSystemTime()
     newChoco.age             = 0
     newChoco.last_update_age = 1
     newChoco.stage           = stage.EGG
@@ -904,7 +904,7 @@ end
 
 local updateChocoState = function(player, chocoState)
     -- Update age and last_update_age
-    chocoState.age             = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
+    chocoState.age             = math.floor((GetSystemTime() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
     chocoState.last_update_age = chocoState.age
 
     debug(string.format('Writing chocoState to cache and db. age: %d, last_update_age: %d', chocoState.age, chocoState.last_update_age))
@@ -993,7 +993,7 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
         [cutscenes.CRYING_AT_NIGHT] = function()
             -- NOTE: The messaging is handled in the CS
             player:addKeyItem(xi.ki.WHITE_HANDKERCHIEF)
-            player:setCharVar('[choco]WH_TIME', os.time() * utils.days(1))
+            player:setCharVar('[choco]WH_TIME', GetSystemTime() * utils.days(1))
         end,
 
         [cutscenes.HAVENT_SEEN_YOU] = function()
@@ -1074,7 +1074,7 @@ xi.chocoboRaising.initChocoboData = function(player)
     -- Age is worked out alongside 'the day you handed in your egg'
     -- So on the 0th day, the chocobo is 1 day old.
 
-    chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
+    chocoState.age = math.floor((GetSystemTime() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
 
     debug('chocoState.age = ' .. chocoState.age)
     debug('chocoState.last_update_age = ' .. chocoState.last_update_age)

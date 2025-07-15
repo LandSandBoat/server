@@ -58,7 +58,10 @@ quest.sections =
                     elseif progress == 6 then
                         return quest:progressEvent(527)
                     elseif progress == 7 then
-                        if not player:needToZone() and quest:getVar(player, 'Stage') < os.time() then
+                        if
+                            not player:needToZone() and
+                            quest:getVar(player, 'Stage') < GetSystemTime()
+                        then
                             return quest:progressEvent(528)
                         else
                             return quest:event(539)

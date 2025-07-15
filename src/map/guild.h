@@ -56,8 +56,8 @@ public:
     uint8 id() const;
 
     void updateGuildPointsPattern(uint8 pattern);
-    auto addGuildPoints(CCharEntity* PChar, CItem* PItem) -> std::pair<uint8, int16>;
-    auto getDailyGPItem(CCharEntity* PChar) -> std::pair<uint16, uint16>;
+    auto addGuildPoints(CCharEntity* PChar, const CItem* PItem) const -> std::pair<uint8, int16>;
+    auto getDailyGPItem(CCharEntity* PChar) const -> std::pair<uint16, uint16>;
 
 private:
     uint8       m_id;

@@ -19,14 +19,14 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.STUN)
-    mob:setLocalVar('spawn_time', os.time() + 5) -- five seconds for first pet
+    mob:setLocalVar('spawn_time', GetSystemTime() + 5) -- five seconds for first pet
 end
 
 entity.onMobFight = function(mob, target)
     -- Every 30 seconds spawn a random Prince or Princess. If none remain then summon the Bastard.
     -- Retail confirmed
-    if os.time() >= mob:getLocalVar('spawn_time') then
-        mob:setLocalVar('spawn_time', os.time() + 30)
+    if GetSystemTime() >= mob:getLocalVar('spawn_time') then
+        mob:setLocalVar('spawn_time', GetSystemTime() + 30)
         local mobId = mob:getID()
         local canSpawnPet = false
         for id = mobId + 1, mobId + 5 do

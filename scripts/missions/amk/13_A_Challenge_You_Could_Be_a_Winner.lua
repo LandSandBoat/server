@@ -390,7 +390,7 @@ mission.sections =
 
                     if not player:needToZone() then
                         return mission:progressEvent(101, 4)
-                    elseif mission:getLocalVar(player, '[p3]timeLimit') < os.time() then
+                    elseif mission:getLocalVar(player, '[p3]timeLimit') < GetSystemTime() then
                         return mission:progressEvent(101, 1)
                     else
                         return mission:progressEvent(101, 2)
@@ -404,7 +404,7 @@ mission.sections =
                     if option == 1 then
                         -- Start run
                         player:needToZone(true)
-                        mission:setLocalVar(player, '[p3]timeLimit', os.time() + utils.minutes(8))
+                        mission:setLocalVar(player, '[p3]timeLimit', GetSystemTime() + utils.minutes(8))
                         player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 1, 0, 0)
 
                         -- https://www.bg-wiki.com/ffxi/Kupo_Mission_13 : "The effect durations are random. They can be 3-7 minutes long. "

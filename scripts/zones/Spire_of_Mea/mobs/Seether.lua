@@ -18,7 +18,7 @@ local vars =
 -- Add a short TP delay so that the preparation message shows in the chat.
 -----------------------------------
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar(vars.TP_DELAY, os.time() + 1)
+    mob:setLocalVar(vars.TP_DELAY, GetSystemTime() + 1)
 end
 
 -----------------------------------
@@ -29,7 +29,7 @@ entity.onMobFight = function(mob, target)
 
     if
         tpDelay > 0 and
-        tpDelay < os.time()
+        tpDelay < GetSystemTime()
     then
         mob:setTP(3000)
         mob:setLocalVar(vars.TP_DELAY, 0)

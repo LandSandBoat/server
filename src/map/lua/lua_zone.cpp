@@ -58,7 +58,7 @@ auto CLuaZone::getLocalVar(const char* key)
 /************************************************************************
  *  Function: setLocalVar()
  *  Purpose : Assigns a local variable to an entity
- *  Example : mob:setLocalVar("pop", os.time() + math.random(1200,7200));
+ *  Example : mob:setLocalVar("pop", GetSystemTime() + math.random(1200,7200));
  *  Notes   :
  ************************************************************************/
 

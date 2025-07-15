@@ -22,16 +22,16 @@ g_mixins.families.qutrub = function(qutrubMob)
     qutrubMob:addListener('COMBAT_TICK', 'QUTRUB_COMBAT_TICK', function(mob)
         local swapTime = mob:getLocalVar('swapTime')
 
-        if swapTime > 0 and os.time() > swapTime then
+        if swapTime > 0 and GetSystemTime() > swapTime then
             local animationSub = mob:getAnimationSub()
 
             if animationSub == 1 then
                 mob:setAnimationSub(2)
-                mob:setLocalVar('swapTime', os.time() + 60)
+                mob:setLocalVar('swapTime', GetSystemTime() + 60)
 
             elseif animationSub == 2 then
                 mob:setAnimationSub(1)
-                mob:setLocalVar('swapTime', os.time() + 60)
+                mob:setLocalVar('swapTime', GetSystemTime() + 60)
             end
         end
     end)
@@ -45,7 +45,7 @@ g_mixins.families.qutrub = function(qutrubMob)
             -- break first weapon
             if animationSub == 0 or animationSub == 4 then
                 mob:setAnimationSub(1)
-                mob:setLocalVar('swapTime', os.time() + 60)
+                mob:setLocalVar('swapTime', GetSystemTime() + 60)
 
             -- break second weapon
             elseif animationSub == 2 then

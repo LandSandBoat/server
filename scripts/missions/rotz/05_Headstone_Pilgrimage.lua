@@ -71,7 +71,7 @@ mission.sections =
                         player:messageName(behemothsDominionID.text.ALREADY_OBTAINED_FRAG, nil, xi.ki.LIGHTNING_FRAGMENT)
 
                         return mission:noAction()
-                    elseif os.time() >= npc:getLocalVar('cooldown') then
+                    elseif GetSystemTime() >= npc:getLocalVar('cooldown') then
                         if
                             not GetMobByID(behemothsDominionID.mob.ANCIENT_WEAPON):isSpawned() and
                             not GetMobByID(behemothsDominionID.mob.LEGENDARY_WEAPON):isSpawned()
@@ -122,7 +122,7 @@ mission.sections =
                             return mission:noAction()
                         end
                     else
-                        if os.time() >= npc:getLocalVar('cooldown') then
+                        if GetSystemTime() >= npc:getLocalVar('cooldown') then
                             if not GetMobByID(capeTerigganID.mob.AXESARION_THE_WANDERER):isSpawned() then
                                 return mission:progressEvent(200, xi.ki.WIND_FRAGMENT)
                             else
@@ -241,7 +241,7 @@ mission.sections =
                             return mission:noAction()
                         end
                     else
-                        if os.time() >= npc:getLocalVar('cooldown') then
+                        if GetSystemTime() >= npc:getLocalVar('cooldown') then
                             if not GetMobByID(sanctuaryOfZitahID.mob.DOOMED_PILGRIMS):isSpawned() then
                                 return mission:progressEvent(200, xi.ki.LIGHT_FRAGMENT)
                             else
@@ -323,7 +323,7 @@ mission.sections =
                             return mission:noAction()
                         end
                     else
-                        if os.time() >= npc:getLocalVar('cooldown') then
+                        if GetSystemTime() >= npc:getLocalVar('cooldown') then
                             if
                                 not GetMobByID(yuhtungaJungleID.mob.TIPHA):isSpawned() and
                                 not GetMobByID(yuhtungaJungleID.mob.CARTHI):isSpawned()

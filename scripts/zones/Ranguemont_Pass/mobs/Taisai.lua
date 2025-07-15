@@ -10,7 +10,7 @@ local entity = {}
 local function disturbMob(mob)
     local phIndex = mob:getLocalVar('phIndex')
     if phIndex > 0 then
-        mob:setLocalVar('timeToGrow', os.time() + math.random(86400, 259200)) -- 1 to 3 days
+        mob:setLocalVar('timeToGrow', GetSystemTime() + math.random(86400, 259200)) -- 1 to 3 days
     end
 end
 
@@ -29,7 +29,7 @@ end
 entity.onMobRoam = function(mob)
     -- if PH hasn't been disturbed, spawn NM
     local phIndex = mob:getLocalVar('phIndex')
-    if phIndex > 0 and os.time() > mob:getLocalVar('timeToGrow') then
+    if phIndex > 0 and GetSystemTime() > mob:getLocalVar('timeToGrow') then
         mob:setLocalVar('phIndex', 0)
         local nm = GetMobByID(ID.mob.TAISAIJIN)
 

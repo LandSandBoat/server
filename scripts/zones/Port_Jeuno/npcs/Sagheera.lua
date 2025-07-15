@@ -281,11 +281,11 @@ local function getCosmoCleanseTime(player)
         lastCosmoTime = lastCosmoTime + cosmoWaitTime
     end
 
-    if lastCosmoTime <= os.time() then
+    if lastCosmoTime <= GetSystemTime() then
         return cosmoReady
     end
 
-    return (lastCosmoTime - 1009843200) - 39600 -- (os.time number - BITMASK for the event) - 11 hours in seconds. Only works in this format (strangely).
+    return (lastCosmoTime - 1009843200) - 39600 -- (GetSystemTime number - BITMASK for the event) - 11 hours in seconds. Only works in this format (strangely).
 end
 
 entity.onTrade = function(player, npc, trade)
@@ -412,7 +412,7 @@ entity.onTrigger = function(player, npc)
         -- if player is waiting for an upgraded af or relic
         if afUpgrade > 0 then
             arg3 = afUpgrade
-            if player:getCharVar('AFupgradeDay') > os.time() then
+            if player:getCharVar('AFupgradeDay') > GetSystemTime() then
                 arg4 = afUpgrade
             end
         end

@@ -226,7 +226,7 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     end
 
     -- remember time player zoned in (e.g., to support zone-in delays)
-    player:setLocalVar('ZoneInTime', os.time())
+    player:setLocalVar('ZoneInTime', GetSystemTime())
     player:setLocalVar('ZoningIn', 1)
 
     -- Slight delay to ensure player is fully logged in

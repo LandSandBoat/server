@@ -244,9 +244,9 @@ void auth_session::read_func()
                     // Not a real problem because the account is locked out when a character is logged in.
 
                     /*
-                    const auto rset = db::preparedStmt("SELECT charid \
-                            FROM accounts_sessions \
-                            WHERE accid = ? LIMIT 1";, accountID);
+                    const auto rset = db::preparedStmt("SELECT charid "
+                            "FROM accounts_sessions "
+                            "WHERE accid = ? LIMIT 1", accountID);
                     if (rset && rset->rowsCount() != 0 && rset->next())
                     {
                         // TODO: kick player out of map server if already logged in

@@ -13,7 +13,7 @@ mixins =
 local entity = {}
 
 local intoShell = function(mob)
-    mob:setLocalVar('changeTime', os.time() + 90)
+    mob:setLocalVar('changeTime', GetSystemTime() + 90)
     mob:setAnimationSub(1)
     mob:setMobAbilityEnabled(false)
     mob:setAutoAttackEnabled(false)
@@ -59,7 +59,7 @@ entity.onMobFight = function(mob, target)
 
     if -- In shell
         mob:getAnimationSub() == 1 and
-        (os.time() > mob:getLocalVar('changeTime') or
+        (GetSystemTime() > mob:getLocalVar('changeTime') or
         mob:getHPP() == 100)
     then
         outOfShell(mob)

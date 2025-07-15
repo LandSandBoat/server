@@ -449,11 +449,12 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     ----------------------------------------
     -- Step 1: Attack / Defense Ratio
     ----------------------------------------
-    local baseRatio     = 0
-    local actorAttack   = 0
-    local targetDefense = math.max(1, target:getStat(xi.mod.DEF))
-    local flourishBonus = 1
-    local firstCap      = xi.combat.physical.pDifWeaponCapTable[weaponType][1]
+    local baseRatio       = 0
+    local actorAttack     = 0
+    local targetDefense   = math.max(1, target:getStat(xi.mod.DEF))
+    local flourishBonus   = 1
+    local firstCap        = xi.combat.physical.pDifWeaponCapTable[weaponType][1]
+    local distancePenalty = xi.combat.ranged.attackDistancePenalty(actor, target)
 
     -- Actor Weaponskill Specific Attack modifiers.
     -- TODO: verify this actually works on ranged WS
@@ -468,7 +469,7 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     end
 
     -- TODO: it is unknown if ws attack mod and flourish bonus are additive or multiplicative
-    actorAttack = math.max(1, math.floor((actor:getStat(xi.mod.RATT) + bonusRangedAttack) * wsAttackMod * flourishBonus))
+    actorAttack = math.max(1, math.floor((actor:getStat(xi.mod.RATT) + bonusRangedAttack - distancePenalty) * wsAttackMod * flourishBonus))
 
     -- Target Defense Modifiers.
     local ignoreDefenseFactor = 1

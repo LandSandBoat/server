@@ -121,21 +121,21 @@ INSERT INTO `zone_settings` VALUES (76,256,'127.0.0.1',54230,'Silver_Sea_Remnant
 INSERT INTO `zone_settings` VALUES (77,256,'127.0.0.1',54230,'Nyzul_Isle',148,148,144,144,0,0.00,6297);
 INSERT INTO `zone_settings` VALUES (78,0,'127.0.0.1',54230,'Hazhalm_Testing_Grounds',0,0,0,0,0,0.00,4249);
 INSERT INTO `zone_settings` VALUES (79,2,'127.0.0.1',54230,'Caedarva_Mire',173,173,101,138,0,0.00,2206);
-INSERT INTO `zone_settings` VALUES (80,1,'127.0.0.1',54230,'Southern_San_dOria_[S]',254,254,254,254,0,0.00,4200);
+INSERT INTO `zone_settings` VALUES (80,1,'127.0.0.1',54230,'Southern_San_dOria_[S]',254,254,254,254,0,0.00,4168);
 INSERT INTO `zone_settings` VALUES (81,2,'127.0.0.1',54230,'East_Ronfaure_[S]',251,251,101,215,0,0.00,2206);
 INSERT INTO `zone_settings` VALUES (82,2,'127.0.0.1',54230,'Jugner_Forest_[S]',0,0,101,215,0,0.00,2206);
 INSERT INTO `zone_settings` VALUES (83,2,'127.0.0.1',54230,'Vunkerl_Inlet_[S]',0,0,101,215,0,0.00,2206);
 INSERT INTO `zone_settings` VALUES (84,2,'127.0.0.1',54230,'Batallia_Downs_[S]',252,252,101,215,0,0.00,2206);
 INSERT INTO `zone_settings` VALUES (85,2,'127.0.0.1',54230,'La_Vaule_[S]',44,44,115,216,0,0.00,2201);
 INSERT INTO `zone_settings` VALUES (86,256,'127.0.0.1',54230,'Everbloom_Hollow',0,0,216,216,0,0.00,6296);
-INSERT INTO `zone_settings` VALUES (87,1,'127.0.0.1',54230,'Bastok_Markets_[S]',180,180,180,180,0,0.00,4200);
+INSERT INTO `zone_settings` VALUES (87,1,'127.0.0.1',54230,'Bastok_Markets_[S]',180,180,180,180,0,0.00,4168);
 INSERT INTO `zone_settings` VALUES (88,2,'127.0.0.1',54230,'North_Gustaberg_[S]',253,253,101,215,0,0.00,2206);
 INSERT INTO `zone_settings` VALUES (89,2,'127.0.0.1',54230,'Grauberg_[S]',0,0,101,215,0,0.00,2206);
 INSERT INTO `zone_settings` VALUES (90,2,'127.0.0.1',54230,'Pashhow_Marshlands_[S]',0,0,101,215,0,0.00,2206);
 INSERT INTO `zone_settings` VALUES (91,2,'127.0.0.1',54230,'Rolanberry_Fields_[S]',252,252,101,215,0,0.00,2206);
 INSERT INTO `zone_settings` VALUES (92,4,'127.0.0.1',54230,'Beadeaux_[S]',44,44,115,216,0,0.00,6297);
 INSERT INTO `zone_settings` VALUES (93,256,'127.0.0.1',54230,'Ruhotz_Silvermines',0,0,216,216,0,0.00,6297);
-INSERT INTO `zone_settings` VALUES (94,1,'127.0.0.1',54230,'Windurst_Waters_[S]',182,182,182,182,0,0.00,4200);
+INSERT INTO `zone_settings` VALUES (94,1,'127.0.0.1',54230,'Windurst_Waters_[S]',182,182,182,182,0,0.00,4168);
 INSERT INTO `zone_settings` VALUES (95,2,'127.0.0.1',54230,'West_Sarutabaruta_[S]',141,141,101,215,0,0.00,2206);
 INSERT INTO `zone_settings` VALUES (96,4,'127.0.0.1',54230,'Fort_Karugo-Narugo_[S]',0,0,101,215,0,0.00,6302);
 INSERT INTO `zone_settings` VALUES (97,2,'127.0.0.1',54230,'Meriphataud_Mountains_[S]',0,0,101,215,0,0.00,2206);
@@ -326,7 +326,7 @@ INSERT INTO `zone_settings` VALUES (281,0,'127.0.0.1',54230,'Leafallia',0,0,0,0,
 INSERT INTO `zone_settings` VALUES (282,0,'127.0.0.1',54230,'Mount_Kamihr',0,0,0,0,0,0.00,0);
 INSERT INTO `zone_settings` VALUES (283,0,'127.0.0.1',54230,'Silver_Knife',0,0,0,0,0,0.00,0);
 INSERT INTO `zone_settings` VALUES (284,1,'127.0.0.1',54230,'Celennia_Memorial_Library',63,63,0,0,0,0.00,4096);
-INSERT INTO `zone_settings` VALUES (285,1,'127.0.0.1',54230,'Feretory',0,0,0,0,0,0.00,4128);
+INSERT INTO `zone_settings` VALUES (285,1,'127.0.0.1',54230,'Feretory',0,0,0,0,0,0.00,4096);
 INSERT INTO `zone_settings` VALUES (286,0,'127.0.0.1',0,'286',0,0,0,0,0,0.00,0); -- Crashes the client if enabled and you try to go there
 INSERT INTO `zone_settings` VALUES (287,256,'127.0.0.1',54230,'Maquette_Abdhaljs-Legion_B',0,0,143,143,0,0.00,6298);
 INSERT INTO `zone_settings` VALUES (288,2,'127.0.0.1',54230,'Escha_ZiTah',80,80,80,80,0,0.00,2200);

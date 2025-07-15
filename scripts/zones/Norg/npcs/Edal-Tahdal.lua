@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
 
     if
         (trialByWater == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.NORG) >= 4) or
-        (trialByWater == xi.questStatus.QUEST_COMPLETED and os.time() > player:getCharVar('TrialByWater_date'))
+        (trialByWater == xi.questStatus.QUEST_COMPLETED and GetSystemTime() > player:getCharVar('TrialByWater_date'))
     then
         player:startEvent(109, 0, xi.ki.TUNING_FORK_OF_WATER) -- Start and restart quest 'Trial by Water'
     elseif

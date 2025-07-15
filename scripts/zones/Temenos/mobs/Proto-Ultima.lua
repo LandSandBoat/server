@@ -48,7 +48,7 @@ executeCitadelBusterState = function(mob)
         mob:setAutoAttackEnabled(true)
         mob:setMobAbilityEnabled(true)
         -- Use Citadel Buster at a regular interval
-        mob:setLocalVar('citadelBusterTime', os.time() + math.random(90, 100))
+        mob:setLocalVar('citadelBusterTime', GetSystemTime() + math.random(90, 100))
         return
     end
 
@@ -111,11 +111,11 @@ entity.onMobFight = function(mob, target)
         elseif phase == 4 then
             mob:setMobMod(xi.mobMod.SKILL_LIST, 1196)
             mob:setMod(xi.mod.REGAIN, 100)
-            mob:setLocalVar('citadelBusterTime', os.time() + math.random(20, 30))
+            mob:setLocalVar('citadelBusterTime', GetSystemTime() + math.random(20, 30))
         end
 
         mob:setLocalVar('phase', phase)
-    elseif phase == 4 and os.time() >= mob:getLocalVar('citadelBusterTime') then
+    elseif phase == 4 and GetSystemTime() >= mob:getLocalVar('citadelBusterTime') then
         mob:setMobAbilityEnabled(false)
         mob:setMagicCastingEnabled(false)
         mob:setAutoAttackEnabled(false)

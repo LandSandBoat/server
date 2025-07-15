@@ -409,7 +409,7 @@ xi.garrison.tick = function(npc)
     {
         [xi.garrison.state.SPAWN_NPCS] = function()
             debugLog('State: Spawn NPCs')
-            zoneData.stateTime = os.time()
+            zoneData.stateTime = GetSystemTime()
 
             if xi.garrison.spawnNPCs(zone, zoneData) then
                 zoneData.state = xi.garrison.state.BATTLE
@@ -448,7 +448,7 @@ xi.garrison.tick = function(npc)
             end
 
             -- Case 2: More mobs to spawn in this wave, and past next spawn time. Spawn Mobs.
-            local shouldSpawnMobs = os.time() >= zoneData.nextSpawnTime
+            local shouldSpawnMobs = GetSystemTime() >= zoneData.nextSpawnTime
             local numGroups       = #zoneData.spawnSchedule[zoneData.waveIndex]
             local isLastGroup     = zoneData.groupIndex > numGroups
 
@@ -492,7 +492,7 @@ xi.garrison.tick = function(npc)
             end
 
             -- Case 6: Timeout
-            if os.time() > zoneData.endTime then
+            if GetSystemTime() > zoneData.endTime then
                 -- You fought hard, and you proved yourself worthy...
                 debugPrintToPlayers(players, 'Mission failed by timeout')
                 messagePlayers(npc, players, ID.text.GARRISON_BASE + 39)
@@ -529,7 +529,7 @@ xi.garrison.tick = function(npc)
 
             zoneData.waveIndex = zoneData.waveIndex + 1
             zoneData.groupIndex = 1
-            zoneData.nextSpawnTime = os.time() + xi.garrison.waves.delayBetweenGroups
+            zoneData.nextSpawnTime = GetSystemTime() + xi.garrison.waves.delayBetweenGroups
             zoneData.state = xi.garrison.state.BATTLE
             zoneData.mobs = {}
 
@@ -572,7 +572,7 @@ xi.garrison.tick = function(npc)
 
             debugPrintToPlayers(players, 'Spawn: ' .. #zoneData.mobs .. '/' .. poolSize .. '. Wave: ' .. zoneData.waveIndex)
 
-            zoneData.nextSpawnTime = os.time() + xi.garrison.waves.delayBetweenGroups
+            zoneData.nextSpawnTime = GetSystemTime() + xi.garrison.waves.delayBetweenGroups
             zoneData.state = xi.garrison.state.BATTLE
             zoneData.groupIndex = zoneData.groupIndex + 1
         end,
@@ -596,7 +596,7 @@ xi.garrison.tick = function(npc)
     }
 
     -- Updates last tick so watchdog knows we are ok
-    zoneData.lastTick = os.time()
+    zoneData.lastTick = GetSystemTime()
 
     -- Keep running tick until done
     if zoneData.isRunning then
@@ -640,8 +640,8 @@ end
 local function isZoneOnLockout(zone)
     local nextValidAttemptTime = GetServerVariable('[Garrison]NextEntryTime_' .. zone:getID())
 
-    if os.time() < nextValidAttemptTime then
-        debugLogf('Zone lockout time remaining: %d', nextValidAttemptTime - os.time())
+    if GetSystemTime() < nextValidAttemptTime then
+        debugLogf('Zone lockout time remaining: %d', nextValidAttemptTime - GetSystemTime())
 
         return true
     end
@@ -658,7 +658,7 @@ end
 
 -- Stores the next valid entry time for the given zone, based on lockout.
 local function saveZoneLockout(zone)
-    local nextEntryTime = os.time() + xi.settings.main.GARRISON_LOCKOUT
+    local nextEntryTime = GetSystemTime() + xi.settings.main.GARRISON_LOCKOUT
 
     SetServerVariable('[Garrison]NextEntryTime_' .. zone:getID(), nextEntryTime)
 end
@@ -826,7 +826,7 @@ local function garrisonWatchdog(npc)
 
         if
             zoneData.isRunning and
-            os.time() - zoneData.lastTick > tickInterval
+            GetSystemTime() - zoneData.lastTick > tickInterval
         then
             local zone = npcArg:getZone()
             debugLogf('[error] Invalid garrison state detected for zone: %s. Stopping it now.', zone:getName())
@@ -848,17 +848,17 @@ xi.garrison.start = function(player, npc)
     zoneData.mobs          = {}
     zoneData.state         = xi.garrison.state.SPAWN_NPCS
     zoneData.isRunning     = true
-    zoneData.stateTime     = os.time()
+    zoneData.stateTime     = GetSystemTime()
     zoneData.waveIndex     = 1
     zoneData.groupIndex    = 1
     zoneData.bossSpawned   = false
     -- First mob spawn takes xi.garrison.waves.delayBetweenGroups to start
-    zoneData.nextSpawnTime     = os.time() + xi.garrison.waves.delayBetweenGroups
-    zoneData.endTime           = os.time() + xi.settings.main.GARRISON_TIME_LIMIT
+    zoneData.nextSpawnTime     = GetSystemTime() + xi.garrison.waves.delayBetweenGroups
+    zoneData.endTime           = GetSystemTime() + xi.settings.main.GARRISON_TIME_LIMIT
     zoneData.deadNPCCount      = 0
     zoneData.deadMobCount      = 0
     zoneData.despawnedMobCount = 0
-    zoneData.lastTick          = os.time()
+    zoneData.lastTick          = GetSystemTime()
 
     -- Register lockout for the player
     -- Only the trading player is locked out per tally

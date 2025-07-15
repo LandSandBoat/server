@@ -7,7 +7,7 @@ g_mixins.families.ghrah = function(ghrahMob)
     ghrahMob:addListener('SPAWN', 'GHRAH_SPAWN', function(mob)
         mob:setAnimationSub(0)
         mob:setAggressive(false)
-        mob:setLocalVar('roamTime', os.time())
+        mob:setLocalVar('roamTime', GetSystemTime())
         mob:setLocalVar('form2', math.random(1, 3))
         local skin = math.random(1161, 1168)
         mob:setModelId(skin)
@@ -73,10 +73,10 @@ g_mixins.families.ghrah = function(ghrahMob)
         local roamTime = mob:getLocalVar('roamTime')
         if
             mob:getAnimationSub() == 0 and
-            os.time() - roamTime > 60
+            GetSystemTime() - roamTime > 60
         then
             mob:setAnimationSub(mob:getLocalVar('form2'))
-            mob:setLocalVar('roamTime', os.time())
+            mob:setLocalVar('roamTime', GetSystemTime())
             mob:setAggressive(true)
 
             if mob:getAnimationSub() == 2 then
@@ -84,11 +84,11 @@ g_mixins.families.ghrah = function(ghrahMob)
             end
         elseif
             mob:getAnimationSub() == mob:getLocalVar('form2') and
-            os.time() - roamTime > 60
+            GetSystemTime() - roamTime > 60
         then
             mob:setAnimationSub(0)
             mob:setAggressive(false)
-            mob:setLocalVar('roamTime', os.time())
+            mob:setLocalVar('roamTime', GetSystemTime())
             mob:delMod(xi.mod.ATTP, 50)
         end
     end)

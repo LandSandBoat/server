@@ -106,10 +106,10 @@ namespace battleutils
 
     void LoadSkillTable()
     {
-        const char* fmtQuery = "SELECT r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13 \
-                            FROM skill_caps \
-                            ORDER BY level \
-                            LIMIT 100";
+        const char* fmtQuery = "SELECT r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13 "
+                               "FROM skill_caps "
+                               "ORDER BY level "
+                               "LIMIT 100";
 
         int32 ret = _sql->Query(fmtQuery);
 
@@ -124,9 +124,7 @@ namespace battleutils
             }
         }
 
-        fmtQuery = "SELECT skillid,war,mnk,whm,blm,rdm,thf,pld,drk,bst,brd,rng,sam,nin,drg,smn,blu,cor,pup,dnc,sch,geo,run \
-                FROM skill_ranks \
-                LIMIT 64";
+        fmtQuery = "SELECT skillid,war,mnk,whm,blm,rdm,thf,pld,drk,bst,brd,rng,sam,nin,drg,smn,blu,cor,pup,dnc,sch,geo,run FROM skill_ranks LIMIT 64";
 
         ret = _sql->Query(fmtQuery);
 
@@ -194,10 +192,10 @@ namespace battleutils
     void LoadMobSkillsList()
     {
         // Load all mob skills
-        const char* specialQuery = "SELECT mob_skill_id, mob_anim_id, mob_skill_name, \
-        mob_skill_aoe, mob_skill_aoe_radius, mob_skill_distance, mob_anim_time, mob_prepare_time, \
-        mob_valid_targets, mob_skill_flag, mob_skill_param, knockback, primary_sc, secondary_sc, tertiary_sc \
-        FROM mob_skills";
+        const char* specialQuery = "SELECT mob_skill_id, mob_anim_id, mob_skill_name, "
+                                   "mob_skill_aoe, mob_skill_aoe_radius, mob_skill_distance, mob_anim_time, mob_prepare_time, "
+                                   "mob_valid_targets, mob_skill_flag, mob_skill_param, knockback, primary_sc, secondary_sc, tertiary_sc "
+                                   "FROM mob_skills";
 
         int32 ret = _sql->Query(specialQuery);
 
@@ -228,8 +226,7 @@ namespace battleutils
             }
         }
 
-        const char* fmtQuery = "SELECT skill_list_id, mob_skill_id \
-        FROM mob_skill_lists";
+        const char* fmtQuery = "SELECT skill_list_id, mob_skill_id FROM mob_skill_lists";
 
         ret = _sql->Query(fmtQuery);
 
@@ -249,10 +246,10 @@ namespace battleutils
     void LoadPetSkillsList()
     {
         // Load all pet skills
-        const char* specialQuery = "SELECT pet_skill_id, pet_anim_id, pet_skill_name, \
-        pet_skill_aoe, pet_skill_distance, pet_anim_time, pet_prepare_time, \
-        pet_valid_targets, pet_message, pet_skill_flag, pet_skill_param, pet_skill_finish_category, knockback, primary_sc, secondary_sc, tertiary_sc \
-        FROM pet_skills";
+        const char* specialQuery = "SELECT pet_skill_id, pet_anim_id, pet_skill_name, "
+                                   "pet_skill_aoe, pet_skill_distance, pet_anim_time, pet_prepare_time, "
+                                   "pet_valid_targets, pet_message, pet_skill_flag, pet_skill_param, pet_skill_finish_category, knockback, primary_sc, secondary_sc, tertiary_sc "
+                                   "FROM pet_skills";
 
         int32 ret = _sql->Query(specialQuery);
 
@@ -286,9 +283,9 @@ namespace battleutils
 
     void LoadSkillChainDamageModifiers()
     {
-        const char* fmtQuery = "SELECT chain_level, chain_count, initial_modifier, magic_burst_modifier \
-                           FROM skillchain_damage_modifiers \
-                           ORDER BY chain_level, chain_count";
+        const char* fmtQuery = "SELECT chain_level, chain_count, initial_modifier, magic_burst_modifier "
+                               "FROM skillchain_damage_modifiers "
+                               "ORDER BY chain_level, chain_count";
 
         int32 ret = _sql->Query(fmtQuery);
 
@@ -1605,13 +1602,26 @@ namespace battleutils
 
     uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage, int16 accBonus)
     {
-        int acc     = 0;
-        int hitrate = 75;
+        int  acc                   = 0;
+        int  hitrate               = 75;
+        auto rangedPenaltyFunction = lua["xi"]["combat"]["ranged"]["accuracyDistancePenalty"];
+        auto distancePenaltyResult = rangedPenaltyFunction(PAttacker, PDefender);
+        int  distancePenalty       = 0;
 
         // Check to see if distance is greater than 25 and force hitrate to be 0
         if (distance(PAttacker->loc.p, PDefender->loc.p) > 25)
         {
             return 0;
+        }
+
+        if (!distancePenaltyResult.valid())
+        {
+            sol::error err = distancePenaltyResult;
+            ShowError("battleutils::GetRangedHitRate: %s", err.what());
+        }
+        else
+        {
+            distancePenalty = distancePenaltyResult.get_type() == sol::type::number ? distancePenaltyResult.get<int16>(0) : 0;
         }
 
         if (PAttacker->objtype == TYPE_PC)
@@ -1657,6 +1667,8 @@ namespace battleutils
         // Add any specific accuracy bonus, e.g. Daken RAcc +100
         acc += accBonus;
 
+        acc -= distancePenalty;
+
         int eva = PDefender->EVA();
         hitrate = hitrate + (acc - eva) / 2 + (PAttacker->GetMLevel() - PDefender->GetMLevel()) * 2;
 
@@ -1669,7 +1681,6 @@ namespace battleutils
         return GetRangedHitRate(PAttacker, PDefender, isBarrage, 0);
     }
 
-    // todo: need to penalise attacker's RangedAttack depending on distance from mob. (% decrease)
     float GetRangedDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, int16 bonusRangedAttack)
     {
         float pDIF = 1.0;

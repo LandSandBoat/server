@@ -507,11 +507,11 @@ uint16 CBattleEntity::GetWeaponDelay(bool tp)
                     hasteAbility = hasteAbility - getMod(Mod::TWOHAND_HASTE_ABILITY) / 10000.0f;
                 }
 
-                hasteMagic   = std::clamp<float>(hasteMagic, -0.4375f, 1.0f);
+                hasteMagic   = std::clamp<float>(hasteMagic, -1.0f, 0.4375f);
                 hasteAbility = std::clamp<float>(hasteAbility, -0.25f, 0.25f);
                 hasteGear    = std::clamp<float>(hasteGear, -0.25f, 0.25f);
 
-                hasteMultiplier = std::clamp<float>(1.0f + hasteMagic + hasteAbility + hasteGear, 0.2f, 2.0f);
+                hasteMultiplier = std::clamp<float>(1.0f - hasteMagic - hasteAbility - hasteGear, 0.2f, 2.0f);
             }
         }
 

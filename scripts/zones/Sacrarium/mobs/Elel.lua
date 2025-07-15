@@ -19,7 +19,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    mob:setLocalVar('cooldown', os.time() + 7200)
+    mob:setLocalVar('cooldown', GetSystemTime() + 7200)
 end
 
 -- TODO: implement/verify this "alternates nights with dark weather" claim on ffxiclopedia.

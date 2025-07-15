@@ -1,5 +1,6 @@
 add_subdirectory(ai)
 add_subdirectory(entities)
+add_subdirectory(enums)
 add_subdirectory(items)
 add_subdirectory(los)
 add_subdirectory(lua)
@@ -11,6 +12,7 @@ set(SOURCES
     ${COMMON_SOURCES}
     ${AI_SOURCES}
     ${ENTITY_SOURCES}
+    ${ENUMS_SOURCES}
     ${ITEM_SOURCES}
     ${LOS_SOURCES}
     ${LUA_SOURCES}

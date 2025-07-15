@@ -57,11 +57,11 @@ entity.onMobFight = function(mob, target)
 
     local delay = mob:getLocalVar('delay')
     if
-        os.time() > delay and
+        GetSystemTime() > delay and
         mob:canUseAbilities()
     then -- Use Meteor every 40s, based on capture
         mob:castSpell(218, target) -- meteor
-        mob:setLocalVar('delay', os.time() + 40)
+        mob:setLocalVar('delay', GetSystemTime() + 40)
     end
 end
 

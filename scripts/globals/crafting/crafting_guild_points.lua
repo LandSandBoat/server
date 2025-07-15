@@ -354,7 +354,8 @@ xi.crafting.guildPointOnEventFinish = function(player, option, guildId)
             player:messageSpecial(ID.text.GUILD_NEW_CONTRACT, guildId)
         else
             player:messageSpecial(ID.text.GUILD_TERMINATE_CONTRACT, guildId, oldGuild)
-            player:setCharVar('[GUILD]daily_points', 1)
+            -- Restrict player ability to turn in GP items until next day.
+            player:setCharVar('[GUILD]daily_points', 1, JstMidnight())
         end
     end
 end

@@ -16,7 +16,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local hatedPlayer = npc:getLocalVar('hatedPlayer')
-    local isInTime = npc:getLocalVar('hateTimer') > os.time()
+    local isInTime = npc:getLocalVar('hateTimer') > GetSystemTime()
 
     if hatedPlayer ~= 0 and not isInTime then
         -- player took too long, so reset animosity

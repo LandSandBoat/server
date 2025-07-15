@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.tradeHas(trade, xi.item.FLASK_OF_DISTILLED_WATER) and
         not GetMobByID(ID.mob.YARA_MA_YHA_WHO):isSpawned()
     then
-        if os.time() > npc:getLocalVar('tradeCooldown') then
+        if GetSystemTime() > npc:getLocalVar('tradeCooldown') then
             local trades = npc:getLocalVar('trades')
 
             if trades >= 3 and math.random(1, 100) <= 50 then
@@ -28,7 +28,7 @@ entity.onTrade = function(player, npc, trade)
             end
 
             player:confirmTrade()
-            npc:setLocalVar('tradeCooldown', os.time() + 3000) -- 50 minute until next trade
+            npc:setLocalVar('tradeCooldown', GetSystemTime() + 3000) -- 50 minute until next trade
         else
             player:messageSpecial(ID.text.SPROUT_DOES_NOT_NEED_WATER)
         end
@@ -38,7 +38,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if os.time() > npc:getLocalVar('tradeCooldown') then
+    if GetSystemTime() > npc:getLocalVar('tradeCooldown') then
         player:messageSpecial(ID.text.SPROUT_LOOKS_WITHERED)
     else
         player:messageSpecial(ID.text.SPROUT_LOOKING_BETTER)

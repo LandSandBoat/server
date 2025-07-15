@@ -39,7 +39,7 @@ for _, entry in pairs(nmsToPersist) do
 
         local respawn = respawnFunc()
         mob:setRespawnTime(respawn)
-        SetServerVariable(varName, (os.time() + respawn))
+        SetServerVariable(varName, (GetSystemTime() + respawn))
         print(string.format('Writing respawn time to server vars: %s %i', mob:getName(), respawn))
     end)
 
@@ -51,9 +51,9 @@ for _, entry in pairs(nmsToPersist) do
         local respawn = GetServerVariable(varName)
         print(string.format('Getting respawn time from server vars: %s %i', mob:getName(), respawn))
 
-        if os.time() < respawn then
+        if GetSystemTime() < respawn then
             UpdateNMSpawnPoint(mob:getID())
-            mob:setRespawnTime(respawn - os.time())
+            mob:setRespawnTime(respawn - GetSystemTime())
         else
             SpawnMob(mob:getID())
         end

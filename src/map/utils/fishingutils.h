@@ -23,6 +23,7 @@
 #define _FISHINGUTILS_H
 
 #include "common/cbasetypes.h"
+#include "enums/key_items.h"
 #include "items/item_fish.h"
 
 #include <list>
@@ -155,7 +156,7 @@ struct fish_t
     uint8                maxhook;         // maximum that can be hooked (with sabiki rig)
     uint16               rarity;          // [0-1000] : 0 = not rare, 1 = rarest, 1000 = most common
     uint16               baitPower;       // how strong players current lure attracts fish
-    uint16               reqKeyItem;      // required key item
+    KeyItem              reqKeyItem;      // required key item
     std::vector<uint16>* reqFish;         // list of required catches
     bool                 quest_only;      // is fish/item quest override only
     bool                 contest;         // is a fish ranking contest fish
@@ -184,7 +185,7 @@ struct fish_t
     , maxhook(0)
     , rarity(0)
     , baitPower(0)
-    , reqKeyItem(0)
+    , reqKeyItem(KeyItem::NONE)
     , reqFish(nullptr)
     , quest_only(false)
     , contest(false)
@@ -727,15 +728,6 @@ enum BAITFLAG : uint32
     BAITFLAG_GOLD_ARROW_BONUS   = 0x10,
     BAITFLAG_GOLDFISH_SCOOPING  = 0x20,
     BAITFLAG_SHELLFISH_AFFINITY = 0X40
-};
-
-/*  Key Items  */
-
-enum FISHINGKI : uint32
-{
-    FISHINGKI_FROG_FISHING   = 1976,
-    FISHINGKI_SERPENT_RUMORS = 1977,
-    FISHINGKI_MOOCHING       = 1978
 };
 
 /* Catch Patterns */

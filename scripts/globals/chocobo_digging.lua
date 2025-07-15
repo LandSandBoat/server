@@ -2110,7 +2110,7 @@ local function checkDiggingCooldowns(player)
     end
 
     -- Check digging cooldowns.
-    local currentTime  = os.time()
+    local currentTime  = GetSystemTime()
     local skillRank    = player:getSkillRank(xi.skill.DIG)
     local zoneCooldown = player:getLocalVar('ZoneInTime') + utils.clamp(60 - skillRank * 5, 10, 60)
     local digCooldown  = player:getLocalVar('[DIG]LastDigTime') + utils.clamp(15 - skillRank * 5, 3, 16)
@@ -2302,7 +2302,7 @@ xi.chocoboDig.start = function(player)
         xi.amk.helpers.chocoboDig(player, zoneId, text)
     then
         -- Note: The helper function handles the messages.
-        player:setLocalVar('[DIG]LastDigTime', os.time())
+        player:setLocalVar('[DIG]LastDigTime', GetSystemTime())
 
         return true
     end
@@ -2313,7 +2313,7 @@ xi.chocoboDig.start = function(player)
         xi.settings.main.DIG_FATIGUE <= todayDigCount
     then
         player:messageText(player, text.FIND_NOTHING)
-        player:setLocalVar('[DIG]LastDigTime', os.time())
+        player:setLocalVar('[DIG]LastDigTime', GetSystemTime())
 
         return true
     end
@@ -2327,7 +2327,7 @@ xi.chocoboDig.start = function(player)
         currentZ >= lastZ - 5 and currentZ <= lastZ + 5     -- Check current Z axis to see if you are too close to your last Z.
     then
         player:messageText(player, text.FIND_NOTHING)
-        player:setLocalVar('[DIG]LastDigTime', os.time())
+        player:setLocalVar('[DIG]LastDigTime', GetSystemTime())
 
         return true
     end
@@ -2341,7 +2341,7 @@ xi.chocoboDig.start = function(player)
     player:setLocalVar('[DIG]LastZPos', currentZ)
     player:setLocalVar('[DIG]LastXPosSign', currentXSign)
     player:setLocalVar('[DIG]LastZPosSign', currentZSign)
-    player:setLocalVar('[DIG]LastDigTime', os.time())
+    player:setLocalVar('[DIG]LastDigTime', GetSystemTime())
 
     -- Handle trasure layer. Incompatible with the other 3 layers. "Early" return.
     local trasureItemId = handleDiggingLayer(player, zoneId, diggingLayer.TREASURE)

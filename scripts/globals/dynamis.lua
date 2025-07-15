@@ -290,7 +290,7 @@ local function arg3(player, bit)
 end
 
 local function handleEntryTime(player)
-    local realDay = os.time()
+    local realDay = GetSystemTime()
 
     if xi.settings.main.DYNA_MIDNIGHT_RESET then
         realDay = getMidnight() - 86400
@@ -361,7 +361,7 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
 
         -- dynamis entry
         elseif not info.reqs or info.reqs(player) then
-            local realDay      = os.time()
+            local realDay      = GetSystemTime()
             local dynaWaitxDay = player:getCharVar('dynaWaitxDay')
             local sjobOption   = info.csBit > 6 and 1 or 0
 

@@ -28,7 +28,7 @@ entity.onMobDeath = function(mob, player, optParams)
 
         if qmDrk then
             local hatedPlayer = qmDrk:getLocalVar('hatedPlayer')
-            local isInTime    = qmDrk:getLocalVar('hateTimer') > os.time()
+            local isInTime    = qmDrk:getLocalVar('hateTimer') > GetSystemTime()
 
             if
                 qmDrk:getStatus() ~= xi.status.DISAPPEAR and
@@ -46,7 +46,7 @@ entity.onMobDeath = function(mob, player, optParams)
                 if offset >= 0 and offset <= 2 then
                     if math.random(1, 8) == 1 then
                         qmDrk:setLocalVar('hatedPlayer', player:getID())
-                        qmDrk:setLocalVar('hateTimer', os.time() + 600) -- player with animosity has 10 minutes to touch QM
+                        qmDrk:setLocalVar('hateTimer', GetSystemTime() + 600) -- player with animosity has 10 minutes to touch QM
                         player:messageSpecial(ID.text.SHEER_ANIMOSITY)
                     end
                 end

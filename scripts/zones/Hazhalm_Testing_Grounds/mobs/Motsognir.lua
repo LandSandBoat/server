@@ -54,7 +54,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getLocalVar('nextTpMove') <= os.time() then
+    if mob:getLocalVar('nextTpMove') <= GetSystemTime() then
         mob:setMobAbilityEnabled(true)
         mob:setTP(3000)
     else
@@ -127,12 +127,12 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         end
     end
 
-    mob:setLocalVar('nextTpMove', os.time() + 16)
+    mob:setLocalVar('nextTpMove', GetSystemTime() + 16)
 end
 
 entity.onMobEngage = function(mob)
     -- First TP move about 5 seconds in, then every 16 seconds
-    mob:setLocalVar('nextTpMove', os.time() + 5)
+    mob:setLocalVar('nextTpMove', GetSystemTime() + 5)
 end
 
 entity.onMobSpawn = function(mob)

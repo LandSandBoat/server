@@ -182,8 +182,10 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:canLearnSpell(xi.magic.spell.EMBRAVA) and
-                        player:canLearnSpell(xi.magic.spell.KAUSTRA)
+                        player:getMainJob() == xi.job.SCH and
+                        player:getMainLvl() >= 5 and
+                        not player:hasSpell(xi.magic.spell.EMBRAVA) and
+                        not player:hasSpell(xi.magic.spell.KAUSTRA)
                     then
                         return quest:progressEvent(47)
                     else

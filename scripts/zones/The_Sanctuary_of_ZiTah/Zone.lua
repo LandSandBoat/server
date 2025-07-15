@@ -9,7 +9,7 @@ require('scripts/missions/amk/helpers')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    GetMobByID(ID.mob.NOBLE_MOLD):setLocalVar('pop', os.time() + math.random(43200, 57600)) -- 12 to 16 hr
+    GetMobByID(ID.mob.NOBLE_MOLD):setLocalVar('pop', GetSystemTime() + math.random(43200, 57600)) -- 12 to 16 hr
 
     xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
 end

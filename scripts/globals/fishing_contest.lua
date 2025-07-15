@@ -170,7 +170,7 @@ end
 -- This returns the data necessary to send the packet with the 'time remaining until stage change' data to the player
 local function getTimeRemaining(changeTime)
     local timeTable = {}
-    local currentTime = os.time()
+    local currentTime = GetSystemTime()
     if changeTime > currentTime then
         local timeDelta = changeTime - currentTime
         timeTable =

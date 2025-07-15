@@ -55,6 +55,7 @@
 #include "battleutils.h"
 #include "charutils.h"
 #include "enmity_container.h"
+#include "enums/key_items.h"
 #include "item_container.h"
 #include "itemutils.h"
 #include "mob_modifier.h"
@@ -463,7 +464,7 @@ namespace fishingutils
             hookTime += 10;
         }
 
-        if (charutils::hasKeyItem(PChar, FISHINGKI_MOOCHING) && (bait->baitID == DRILL_CALAMARY || bait->baitID == DWARF_PUGIL))
+        if (charutils::hasKeyItem(PChar, KeyItem::MOOCHING) && (bait->baitID == DRILL_CALAMARY || bait->baitID == DWARF_PUGIL))
         {
             hookTime += 30;
         }
@@ -2207,7 +2208,7 @@ namespace fishingutils
                 }
 
                 // uint16 baitPower = fish.second; //@TODO: implement this in later patch
-                if ((fishingSkill >= fishIter->maxSkill || fishIter->maxSkill - fishingSkill <= 100) && (!fishIter->reqKeyItem || charutils::hasKeyItem(PChar, fishIter->reqKeyItem)))
+                if ((fishingSkill >= fishIter->maxSkill || fishIter->maxSkill - fishingSkill <= 100) && (fishIter->reqKeyItem == KeyItem::NONE || charutils::hasKeyItem(PChar, fishIter->reqKeyItem)))
                 { // Key item okay
                     if (!fishIter->quest_only && FishingPools[PChar->getZone()].catchPools[area->areaId].stock[fishIter->fishID].quantity == 0)
                     {
@@ -2234,7 +2235,7 @@ namespace fishingutils
                     continue;
                 }
 
-                if (item->quest_only || !item->reqKeyItem || charutils::hasKeyItem(PChar, item->reqKeyItem))
+                if (item->quest_only || item->reqKeyItem == KeyItem::NONE || charutils::hasKeyItem(PChar, item->reqKeyItem))
                 { // Key item okay
                     uint16 hookChance = 100;
                     if (item->quest < 255 && item->log < 255)
@@ -3048,7 +3049,7 @@ namespace fishingutils
                 fish->item            = ((uint8)_sql->GetUIntData(15) == 1);
                 fish->maxhook         = (uint8)_sql->GetUIntData(16);
                 fish->rarity          = (uint16)_sql->GetUIntData(17);
-                fish->reqKeyItem      = (uint16)_sql->GetUIntData(18);
+                fish->reqKeyItem      = static_cast<KeyItem>(_sql->GetUIntData(18));
 
                 size_t length  = 0;
                 char*  reqFish = nullptr;

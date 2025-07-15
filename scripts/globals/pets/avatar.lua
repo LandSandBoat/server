@@ -78,9 +78,9 @@ local setMagicCastCooldown = function(pet)
     local lastCastTimeStamp = pet:getLocalVar(lastCastTimeStampVar)
     if
         lastCastTimeStamp > 0 and
-        os.time() - lastCastTimeStamp > lastCastTime
+        GetSystemTime() - lastCastTimeStamp > lastCastTime
     then
-        lastCastTime = os.time() - lastCastTimeStamp
+        lastCastTime = GetSystemTime() - lastCastTimeStamp
     end
 
     if
@@ -164,7 +164,7 @@ xi.pets.avatar.onMobMagicPrepare = function(pet)
 
     -- meta checks for fresh pet, etc
     pet:setLocalVar(lastCastTimeVar, 0)
-    pet:setLocalVar(lastCastTimeStampVar, os.time())
+    pet:setLocalVar(lastCastTimeStampVar, GetSystemTime())
 
     -- early exit from casting a spell to prevent immediately casting a spell after being summoned
     if pet:getMobMod(xi.mobMod.MAGIC_COOL) == 1 then

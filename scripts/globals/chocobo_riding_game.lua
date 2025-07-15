@@ -94,7 +94,7 @@ xi.chocoboGame.beginRace = function(player, option)
         player:setCharVar('[ChocoGame]StartingCity', zoneId)
         player:setCharVar('[ChocoGame]DestCity', destCity)
         player:setCharVar('[ChocoGame]NextEntryTime', 1, NextConquestTally())
-        player:setCharVar('[ChocoGame]StartTime', os.time())
+        player:setCharVar('[ChocoGame]StartTime', GetSystemTime())
     else -- Player declined race, clearing var
         player:setLocalVar('[ChocoGame]DestCity', 0)
     end
@@ -136,7 +136,7 @@ xi.chocoboGame.onTriggerAreaEnter = function(player)
     local destCity = player:getCharVar('[ChocoGame]DestCity')
 
     if player:getZoneID() == destCity then
-        local clearTime = os.time() - player:getCharVar('[ChocoGame]StartTime')
+        local clearTime = GetSystemTime() - player:getCharVar('[ChocoGame]StartTime')
         local startingCity = player:getCharVar('[ChocoGame]StartingCity')
         local recordId = GetServerVariable('[ChocoGame][RecordHolder]'..startingCity..'+'..destCity)
         local recordTime = GetServerVariable('[ChocoGame][RecordTime]'..startingCity..'+'..destCity)
@@ -166,7 +166,7 @@ end
 
 -- Remove chocobo and give player reward
 xi.chocoboGame.onEventFinish = function(player, csid)
-    local clearTime = os.time() - player:getCharVar('[ChocoGame]StartTime')
+    local clearTime = GetSystemTime() - player:getCharVar('[ChocoGame]StartTime')
     local startingCity = player:getCharVar('[ChocoGame]StartingCity')
     local destCity = player:getCharVar('[ChocoGame]DestCity')
 
@@ -191,7 +191,7 @@ end
 
 xi.chocoboGame.handleMessage = function(player)
     local startTime = player:getCharVar('[ChocoGame]StartTime')
-    local raceTime  = os.time() - startTime
+    local raceTime  = GetSystemTime() - startTime
     local ID        = zones[player:getZoneID()]
 
     -- Check if player is in race and hasn't just started

@@ -1100,7 +1100,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
             }
 
             float charDistance = distance(PChar->loc.p, PCurrentChar->loc.p);
-            if (charDistance > CHARACTER_SYNC_DISTANCE)
+            if (charDistance > CHARACTER_SYNC_DISTANCE || !isWithinVerticalDistance(PChar, PCurrentChar))
             {
                 continue;
             }

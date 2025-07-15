@@ -81,7 +81,7 @@ entity.onTrigger = function(player, npc)
         local tradesMamaMia = player:getCharVar('tradesMamaMia')
 
         if utils.mask.isFull(tradesMamaMia, 7) then
-            if os.time() < questday then
+            if GetSystemTime() < questday then
                 player:startEvent(196) --need to wait longer for reward
             else
                 player:startEvent(197) --Reward

@@ -11,8 +11,8 @@ xi.events.harvestFestival = xi.events.harvestFestival or {}
 
 xi.events.harvestFestival.isHalloweenEnabled = function()
     local option = 0
-    local month = tonumber(os.date('%m'))
-    local day = tonumber(os.date('%d'))
+    local month = JstMonth()
+    local day = JstDayOfTheMonth()
 
     if
         month == 10 and day >= 20 or

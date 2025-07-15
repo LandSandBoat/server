@@ -125,7 +125,7 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, xi.item.BUNCH_OF_GYSAHL_GREENS) then
                         return quest:progressEvent(76)
                     elseif npcUtil.tradeHasExactly(trade, xi.item.CLUMP_OF_GAUSEBIT_WILDGRASS) then
-                        if quest:getVar(player, 'Timer') <= os.time() then
+                        if quest:getVar(player, 'Timer') <= GetSystemTime() then
                             return quest:progressEvent(chocoboFeedTrades[quest:getVar(player, 'Prog')])
                         else
                             return quest:progressEvent(73)
@@ -148,18 +148,18 @@ quest.sections =
             onEventFinish =
             {
                 [57] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Timer', os.time() + 45)
+                    quest:setVar(player, 'Timer', GetSystemTime() + 45)
                     quest:setVar(player, 'Prog', 2)
                 end,
 
                 [58] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Timer', os.time() + 45)
+                    quest:setVar(player, 'Timer', GetSystemTime() + 45)
                     quest:setVar(player, 'Prog', 3)
                 end,
 
                 [59] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    quest:setVar(player, 'Timer', os.time() + 45)
+                    quest:setVar(player, 'Timer', GetSystemTime() + 45)
                     quest:setVar(player, 'Prog', 4)
 
                     -- TODO: This needs retail verification to confirm no zoning
@@ -169,13 +169,13 @@ quest.sections =
 
                 [60] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    quest:setVar(player, 'Timer', os.time() + 45)
+                    quest:setVar(player, 'Timer', GetSystemTime() + 45)
                     quest:setVar(player, 'Prog', 5)
                 end,
 
                 [63] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    quest:setVar(player, 'Timer', os.time() + 45)
+                    quest:setVar(player, 'Timer', GetSystemTime() + 45)
                     quest:setVar(player, 'Prog', 6)
                 end,
 

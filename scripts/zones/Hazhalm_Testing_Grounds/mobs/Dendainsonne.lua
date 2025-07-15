@@ -57,7 +57,7 @@ entity.onMobSpawn = function(mob)
         -- The increases appear to be guaranteed if you meet the conditions
         -- There is likely a 2-3 seconds cooldown in between possible increases
         if
-            mobArg:getLocalVar('rageIncreaseCD') > os.time() or
+            mobArg:getLocalVar('rageIncreaseCD') > GetSystemTime() or
             amount < 300
         then
             return
@@ -66,7 +66,7 @@ entity.onMobSpawn = function(mob)
         local rageLevel = math.min(mobArg:getLocalVar('rageLevel') + 1, 2)
         if rageLevel == 2 then
             if
-                mobArg:getLocalVar('meteorCD') <= os.time() and
+                mobArg:getLocalVar('meteorCD') <= GetSystemTime() and
                 notBusy(mob) and
                 mobArg:getLocalVar('meteorQueued') ~= 1
             then
@@ -83,13 +83,13 @@ entity.onMobSpawn = function(mob)
             mobArg:setLocalVar('rageLevel', 1)
         end
 
-        mobArg:setLocalVar('rageIncreaseCD', os.time() + 3)
+        mobArg:setLocalVar('rageIncreaseCD', GetSystemTime() + 3)
     end)
 
     mob:addListener('MAGIC_STATE_EXIT', 'DENDAINSONNE_MAGIC_EXIT', function(mobArg, spell)
         if spell:getID() == xi.magic.spell.METEOR then
             mobArg:setLocalVar('rageLevel', 0)
-            mobArg:setLocalVar('meteorCD', os.time() + 30)
+            mobArg:setLocalVar('meteorCD', GetSystemTime() + 30)
             mobArg:setLocalVar('meteorQueued', 0)
         end
     end)
@@ -102,7 +102,7 @@ entity.onMobFight = function(mob, target)
 
     if
         not notBusy(mob) or
-        notifyCD > os.time()
+        notifyCD > GetSystemTime()
     then
         return
     end
@@ -113,11 +113,11 @@ entity.onMobFight = function(mob, target)
         mob:messageText(mob, ID.text.DENDAINSONNE_ANGRY, false)
     elseif rageLevel == 1 then
         mob:messageText(mob, ID.text.DENDAINSONNE_ENRAGED, false)
-    elseif rageLevel == 2 and meteorCD > os.time() then
+    elseif rageLevel == 2 and meteorCD > GetSystemTime() then
         mob:messageText(mob, ID.text.DENDAINSONNE_OUT_OF_CONTROL, false)
     end
 
-    mob:setLocalVar('notifyCD', os.time() + 12)
+    mob:setLocalVar('notifyCD', GetSystemTime() + 12)
 end
 
 entity.onSpellPrecast = function(mob, spell)

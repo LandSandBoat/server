@@ -47,7 +47,7 @@ commandObj.onTrigger = function(player, value, target, days)
             days = 0
         end
 
-        target:setCharVar('[YELL]Banned', 1, os.time() + utils.days(days))
+        target:setCharVar('[YELL]Banned', 1, GetSystemTime() + utils.days(days))
         player:printToPlayer(string.format('%s has been banned from using the /yell command.', target:getName()))
     end
 end

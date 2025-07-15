@@ -550,7 +550,7 @@ class CZone
 public:
     DISALLOW_COPY_AND_MOVE(CZone);
 
-    ZONEID             GetID();
+    auto               GetID() const -> ZONEID;
     ZONE_TYPE          GetTypeMask();
     REGION_TYPE        GetRegionID();
     CONTINENT_TYPE     GetContinentID();

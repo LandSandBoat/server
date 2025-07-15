@@ -879,9 +879,9 @@ entity.onTrade = function(player, npc, trade)
             if currentStage == 1 then
                 player:setCharVar('RELIC_DUE_AT', getVanaMidnight())
             elseif currentStage == 2 then
-                player:setCharVar('RELIC_DUE_AT', os.time() + xi.settings.main.RELIC_2ND_UPGRADE_WAIT_TIME)
+                player:setCharVar('RELIC_DUE_AT', GetSystemTime() + xi.settings.main.RELIC_2ND_UPGRADE_WAIT_TIME)
             elseif currentStage == 3 then
-                player:setCharVar('RELIC_DUE_AT', os.time() + xi.settings.main.RELIC_3RD_UPGRADE_WAIT_TIME)
+                player:setCharVar('RELIC_DUE_AT', GetSystemTime() + xi.settings.main.RELIC_3RD_UPGRADE_WAIT_TIME)
             end
 
             player:tradeComplete()
@@ -904,7 +904,7 @@ entity.onTrigger = function(player, npc)
         local relic = relics[currentRelic]
         local currentStage = relic[stageNumber]
 
-        if relicWait > os.time() then
+        if relicWait > GetSystemTime() then
             -- Not enough time has passed
             if currentStage == 1 then
                 player:startEvent(15, 0, 0, 0, 0, 0, 0, 0, relic[csParam])
@@ -913,7 +913,7 @@ entity.onTrigger = function(player, npc)
             elseif currentStage == 3 then
                 player:startEvent(51, 0, 0, 0, 0, 0, 0, 0, relic[csParam])
             end
-        elseif relicWait <= os.time() then
+        elseif relicWait <= GetSystemTime() then
             -- Enough time has passed
             if currentStage == 1 then
                 player:startEvent(16, currentRelic, 0, 0, 0, 0, 0, 0, relic[csParam])
@@ -931,10 +931,10 @@ entity.onTrigger = function(player, npc)
         -- Need currency to start timer
         local relic = relics[currentRelic]
         player:startEvent(12, currentRelic, relic[currencyType], relic[currencyAmount], 0, 0, 0, 0, relic[csParam])
-    elseif relicId == nil or relicConquest > os.time() then
+    elseif relicId == nil or relicConquest > GetSystemTime() then
         -- Player doesn't have a relevant item and hasn't started one
         player:startEvent(10)
-    elseif relicId ~= nil and relicConquest <= os.time() then
+    elseif relicId ~= nil and relicConquest <= GetSystemTime() then
         -- Player has a relevant item and conquest tally has passed
         local relic = relics[relicId]
         local currentStage = relic[stageNumber]

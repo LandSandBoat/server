@@ -29,8 +29,8 @@ g_mixins.families.colibri_mimic = function(colibriMob)
             (spell:getSpellGroup() ~= xi.magic.spellGroup.BLUE or target:getLocalVar('[colibri]reflect_blue_magic') == 1)
         then
             target:setLocalVar('[colibri]spellToMimic', spell:getID()) -- which spell to mimic
-            target:setLocalVar('[colibri]castWindow', os.time() + 30) -- after thirty seconds, will stop attempting to mimic
-            target:setLocalVar('[colibri]castTime', os.time() + 6) -- enforce a delay between original spell, and mimic spell.
+            target:setLocalVar('[colibri]castWindow', GetSystemTime() + 30) -- after thirty seconds, will stop attempting to mimic
+            target:setLocalVar('[colibri]castTime', GetSystemTime() + 6) -- enforce a delay between original spell, and mimic spell.
             target:setAnimationSub(openBeak)
         end
     end)
@@ -39,7 +39,7 @@ g_mixins.families.colibri_mimic = function(colibriMob)
         local spellToMimic = mob:getLocalVar('[colibri]spellToMimic')
         local castWindow = mob:getLocalVar('[colibri]castWindow')
         local castTime = mob:getLocalVar('[colibri]castTime')
-        local osTime = os.time()
+        local osTime = GetSystemTime()
 
         if mob:getAnimationSub() == openBeak then
             if

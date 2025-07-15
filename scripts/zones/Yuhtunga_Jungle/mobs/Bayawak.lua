@@ -32,7 +32,7 @@ end
 entity.onMobDespawn = function(mob)
     local respawn = math.random(5400, 7200)
     mob:setRespawnTime(respawn)
-    mob:setLocalVar('respawn', os.time() + respawn)
+    mob:setLocalVar('respawn', GetSystemTime() + respawn)
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no fire weather and immediate despawn
     UpdateNMSpawnPoint(mob:getID())
 end

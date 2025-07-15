@@ -307,7 +307,7 @@ xi.moghouse.getMogLockerExpiryTimestamp = function(player)
         return nil
     end
 
-    local now = os.time() - mogLockerStartTimestamp
+    local now = GetSystemTime() - mogLockerStartTimestamp
 
     if now > expiryTime then
         player:setCharVar(mogLockerTimestampVarName, -1)
@@ -337,7 +337,7 @@ xi.moghouse.addMogLockerExpiryTime = function(player, numBronze)
     end
 
     if currentTs == -1 then
-        currentTs = os.time() - mogLockerStartTimestamp
+        currentTs = GetSystemTime() - mogLockerStartTimestamp
     end
 
     local timeIncrease = 60 * 60 * 24 * numDaysPerBronze * numBronze

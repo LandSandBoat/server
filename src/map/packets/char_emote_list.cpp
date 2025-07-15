@@ -22,39 +22,81 @@
 #include "char_emote_list.h"
 
 #include "entities/baseentity.h"
-#include "lua/luautils.h"
+#include "enums/key_items.h"
 #include "utils/charutils.h"
+
+namespace
+{
+    const std::vector jobGestureKeyItems = {
+        KeyItem::JOB_GESTURE_WARRIOR,
+        KeyItem::JOB_GESTURE_MONK,
+        KeyItem::JOB_GESTURE_WHITE_MAGE,
+        KeyItem::JOB_GESTURE_BLACK_MAGE,
+        KeyItem::JOB_GESTURE_RED_MAGE,
+        KeyItem::JOB_GESTURE_THIEF,
+        KeyItem::JOB_GESTURE_PALADIN,
+        KeyItem::JOB_GESTURE_DARK_KNIGHT,
+        KeyItem::JOB_GESTURE_BEASTMASTER,
+        KeyItem::JOB_GESTURE_BARD,
+        KeyItem::JOB_GESTURE_RANGER,
+        KeyItem::JOB_GESTURE_SAMURAI,
+        KeyItem::JOB_GESTURE_NINJA,
+        KeyItem::JOB_GESTURE_DRAGOON,
+        KeyItem::JOB_GESTURE_SUMMONER,
+        KeyItem::JOB_GESTURE_BLUE_MAGE,
+        KeyItem::JOB_GESTURE_CORSAIR,
+        KeyItem::JOB_GESTURE_PUPPETMASTER,
+        KeyItem::JOB_GESTURE_DANCER,
+        KeyItem::JOB_GESTURE_SCHOLAR,
+        KeyItem::JOB_GESTURE_GEOMANCER,
+        KeyItem::JOB_GESTURE_RUNE_FENCER,
+    };
+
+    const std::vector chairKeyItems = {
+        KeyItem::IMPERIAL_CHAIR,
+        KeyItem::DECORATIVE_CHAIR,
+        KeyItem::ORNATE_STOOL,
+        KeyItem::REFINED_CHAIR,
+        KeyItem::PORTABLE_CONTAINER,
+        KeyItem::CHOCOBO_CHAIR,
+        KeyItem::EPHRAMADIAN_THRONE,
+        KeyItem::SHADOW_THRONE,
+        KeyItem::LEAF_BENCH,
+        KeyItem::ASTRAL_CUBE,
+        KeyItem::CHOCOBO_CHAIR_II,
+    };
+} // namespace
 
 CCharEmoteListPacket::CCharEmoteListPacket(CCharEntity* PChar)
 {
     this->setType(0x11A);
     this->setSize(0x0C);
 
-    // RUN and GEO are not sequential with the rest of the list, so grab those two separate offsets first.
-    // Geomancer begins with bit 20, so create the offset based on an ID with that value subtracted.
-    auto warriorKeyItem   = lua["xi"]["keyItem"]["JOB_GESTURE_WARRIOR"].get<uint16>();
-    auto geomancerKeyItem = lua["xi"]["keyItem"]["JOB_GESTURE_GEOMANCER"].get<uint16>();
-
     uint32 jobEmotes = 0;
-    for (const auto& keyItemName : jobGestureKeyItems)
+    for (const auto keyItemId : jobGestureKeyItems)
     {
-        auto keyItemId = lua["xi"]["keyItem"][keyItemName].get<uint16>();
         if (charutils::hasKeyItem(PChar, keyItemId))
         {
-            uint16 bitOffset = keyItemId < geomancerKeyItem ? warriorKeyItem : geomancerKeyItem - 20;
-            jobEmotes |= 1 << (keyItemId - bitOffset);
+            uint16 bitOffset = 0;
+            if (keyItemId < KeyItem::JOB_GESTURE_GEOMANCER)
+            {
+                bitOffset = static_cast<uint16_t>(KeyItem::JOB_GESTURE_WARRIOR);
+            }
+            else
+            {
+                bitOffset = static_cast<uint16_t>(KeyItem::JOB_GESTURE_GEOMANCER) - 20;
+            }
+
+            jobEmotes |= 1 << (static_cast<uint16_t>(keyItemId) - bitOffset);
         }
     }
 
-    auto imperialChairKeyItem = lua["xi"]["keyItem"]["IMPERIAL_CHAIR"].get<uint16>();
-
     uint16 chairEmotes = 0;
-    for (const auto& keyItemName : chairKeyItems)
+    for (const auto keyItemId : chairKeyItems)
     {
-        auto keyItemId = lua["xi"]["keyItem"][keyItemName].get<uint16>();
         if (charutils::hasKeyItem(PChar, keyItemId))
         {
-            chairEmotes |= 1 << (keyItemId - imperialChairKeyItem);
+            chairEmotes |= 1 << (static_cast<uint16_t>(keyItemId) - static_cast<uint16_t>(KeyItem::IMPERIAL_CHAIR));
         }
     }
 

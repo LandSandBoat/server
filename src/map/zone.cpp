@@ -130,7 +130,7 @@ CZone::~CZone()
     m_zoneLineList.clear();
 }
 
-ZONEID CZone::GetID()
+auto CZone::GetID() const -> ZONEID
 {
     return m_zoneID;
 }

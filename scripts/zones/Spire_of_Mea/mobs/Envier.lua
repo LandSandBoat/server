@@ -28,7 +28,7 @@ local seetherParams =
 -- Set the spawn time for the next Seether.
 -----------------------------------
 local setSeetherSpawnTime = function(mob)
-    mob:setLocalVar(vars.SEETHER_TIME, os.time() + math.random(seetherParams.SPAWN_MIN, seetherParams.SPAWN_MAX))
+    mob:setLocalVar(vars.SEETHER_TIME, GetSystemTime() + math.random(seetherParams.SPAWN_MIN, seetherParams.SPAWN_MAX))
 end
 
 -----------------------------------
@@ -62,7 +62,7 @@ entity.onMobFight = function(mob, target)
     -- Check if it is time to spawn a Seether.
     if
         mob:getLocalVar(vars.SEETHER_ELIGIBLE) > 0 and
-        mob:getLocalVar(vars.SEETHER_TIME) < os.time()
+        mob:getLocalVar(vars.SEETHER_TIME) < GetSystemTime()
     then
         local mobID  = mob:getID()
         local mobPos = mob:getPos()

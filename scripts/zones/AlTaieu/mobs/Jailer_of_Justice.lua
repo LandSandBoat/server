@@ -13,7 +13,7 @@ entity.onMobFight = function(mob, target)
     local popTime = mob:getLocalVar('lastPetPop')
     -- ffxiclopedia says 30 sec, bgwiki says 1-2 min..
     -- Going with 60 seconds until I see proof of retails timing.
-    if os.time() - popTime > 60 then
+    if GetSystemTime() - popTime > 60 then
         local alreadyPopped = false
         for Xzomit = mob:getID() + 1, mob:getID() + 6 do
             if alreadyPopped then
@@ -21,7 +21,7 @@ entity.onMobFight = function(mob, target)
             else
                 if not GetMobByID(Xzomit):isSpawned() then
                     SpawnMob(Xzomit, 300):updateEnmity(target)
-                    mob:setLocalVar('lastPetPop', os.time())
+                    mob:setLocalVar('lastPetPop', GetSystemTime())
                     alreadyPopped = true
                 end
             end

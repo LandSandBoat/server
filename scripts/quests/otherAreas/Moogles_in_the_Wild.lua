@@ -27,7 +27,7 @@ quest.sections[1] =
             not quest:getMustZone(player) and
             quest:getLocalVar(player, 'questSeen') == 0 and
             bedPlacedTime ~= 0 and
-            os.time() > bedPlacedTime + 60
+            GetSystemTime() > bedPlacedTime + 60
     end
 }
 
@@ -83,7 +83,7 @@ local questAccepted =
                 return quest:progressEvent(30014, 0, 0, 0, 0, 0, xi.item.RAPTOR_MANTLE, xi.item.WOOL_HAT)
             elseif
                 questProgress == 1 and
-                quest:getVar(player, 'Timer') < os.time()
+                quest:getVar(player, 'Timer') < GetSystemTime()
             then
                 return quest:progressEvent(30016)
             end
@@ -99,7 +99,7 @@ local questAccepted =
         [30015] = function(player, csid, option, npc)
             player:confirmTrade()
             quest:setVar(player, 'Prog', 1)
-            quest:setVar(player, 'Timer', os.time() + 60)
+            quest:setVar(player, 'Timer', GetSystemTime() + 60)
         end,
 
         [30016] = function(player, csid, option, npc)

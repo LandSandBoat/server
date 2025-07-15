@@ -62,13 +62,13 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('healTimer', os.time() + math.random(30, 60))
-    mob:setLocalVar('hateTimer', os.time() + math.random(10, 20))
+    mob:setLocalVar('healTimer', GetSystemTime() + math.random(30, 60))
+    mob:setLocalVar('hateTimer', GetSystemTime() + math.random(10, 20))
 end
 
 entity.onMobFight = function(mob, target)
     -- every 30-60 seconds have one of the elementals heal (via absorbing T4 spell) either self or Garuda
-    if mob:getLocalVar('healTimer') < os.time() then
+    if mob:getLocalVar('healTimer') < GetSystemTime() then
         local avatarDamaged = mob:getHPP() < 100
 
         for i = 1, 4 do
@@ -94,7 +94,7 @@ entity.onMobFight = function(mob, target)
 
                 if spellTarget then
                     elemental:castSpell(xi.magic.spell.AERO_IV, spellTarget)
-                    mob:setLocalVar('healTimer', os.time() + math.random(30, 60))
+                    mob:setLocalVar('healTimer', GetSystemTime() + math.random(30, 60))
                     break
                 end
             end
@@ -102,13 +102,13 @@ entity.onMobFight = function(mob, target)
     end
 
     -- every 10-20 seconds have the elementals refocus on the avatar's battle target
-    if mob:getLocalVar('hateTimer') < os.time() then
+    if mob:getLocalVar('hateTimer') < GetSystemTime() then
         for i = 1, 4 do
             local elemental = GetMobByID(mob:getID() + i)
 
             if elemental and elemental:isAlive() then
                 elemental:updateEnmity(target)
-                mob:setLocalVar('hateTimer', os.time() + math.random(10, 20))
+                mob:setLocalVar('hateTimer', GetSystemTime() + math.random(10, 20))
             end
         end
     end

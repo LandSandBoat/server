@@ -14,7 +14,7 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     if player:hasKeyItem(xi.ki.MERTAIRES_BRACELET) then
         player:setCharVar('TrosKilled', 1)
-        player:setCharVar('Tros_Timer', os.time())
+        player:setCharVar('Tros_Timer', GetSystemTime())
     end
 end
 

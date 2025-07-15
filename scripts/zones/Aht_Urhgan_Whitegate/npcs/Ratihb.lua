@@ -10,7 +10,7 @@ entity.onTrigger = function(player, npc)
     if
         player:getCharVar('AgainstAllOdds') == 2 and
         (
-            player:getCharVar('AgainstAllOddsTimer') < os.time() or
+            player:getCharVar('AgainstAllOddsTimer') < GetSystemTime() or
             player:getCharVar('AgainstAllOddsTimer') == 0
         )
     then

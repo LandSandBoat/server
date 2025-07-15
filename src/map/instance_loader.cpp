@@ -69,24 +69,24 @@ CInstance* CInstanceLoader::LoadInstance()
 {
     TracyZoneScoped;
 
-    const char* Query = "SELECT mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
-            respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
-            modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
-            ecosystemID, mobradius, speed, \
-            STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
-            slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
-            magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
-            fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
-            Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
-            (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
-            allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, detects, \
-            mob_family_system.charmable \
-            FROM instance_entities INNER JOIN mob_spawn_points ON instance_entities.id = mob_spawn_points.mobid \
-            INNER JOIN mob_groups ON mob_groups.groupid = mob_spawn_points.groupid AND mob_groups.zoneid=((mob_spawn_points.mobid>>12)&0xFFF) \
-            INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
-            INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
-            INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
-            WHERE instanceid = %u AND NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0)";
+    const char* Query = "SELECT mobname, mobid, pos_rot, pos_x, pos_y, pos_z, "
+                        "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, "
+                        "modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, "
+                        "ecosystemID, mobradius, speed, "
+                        "STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, "
+                        "slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, "
+                        "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
+                        "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
+                        "Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, "
+                        "(mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, "
+                        "allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, detects, "
+                        "mob_family_system.charmable "
+                        "FROM instance_entities INNER JOIN mob_spawn_points ON instance_entities.id = mob_spawn_points.mobid "
+                        "INNER JOIN mob_groups ON mob_groups.groupid = mob_spawn_points.groupid AND mob_groups.zoneid=((mob_spawn_points.mobid>>12)&0xFFF) "
+                        "INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
+                        "INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id "
+                        "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
+                        "WHERE instanceid = %u AND NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0)";
 
     int32 ret = _sql->Query(Query, m_PInstance->GetID());
 
@@ -231,12 +231,12 @@ CInstance* CInstanceLoader::LoadInstance()
             m_PInstance->InsertMOB(PMob);
         }
 
-        Query = "SELECT npcid, name, pos_rot, pos_x, pos_y, pos_z,\
-            flag, speed, speedsub, animation, animationsub, namevis,\
-            status, entityFlags, look, name_prefix, widescan \
-            FROM instance_entities INNER JOIN npc_list ON \
-            (instance_entities.id = npc_list.npcid) \
-            WHERE instanceid = %u AND npcid >= %u AND npcid < %u";
+        Query = "SELECT npcid, name, pos_rot, pos_x, pos_y, pos_z, "
+                "flag, speed, speedsub, animation, animationsub, namevis, "
+                "status, entityFlags, look, name_prefix, widescan "
+                "FROM instance_entities INNER JOIN npc_list ON "
+                "(instance_entities.id = npc_list.npcid) "
+                "WHERE instanceid = %u AND npcid >= %u AND npcid < %u";
 
         uint32 zoneMin = (m_PZone->GetID() << 12) + 0x1000000;
         uint32 zoneMax = zoneMin + 1024;

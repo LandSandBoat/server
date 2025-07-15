@@ -20,7 +20,7 @@ end
 
 entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
-    mob:setLocalVar('cooldown', os.time() + (144 * 13)) -- 13 vanadiel hours guarantees it will not spawn twice in the same night
+    mob:setLocalVar('cooldown', GetSystemTime() + (144 * 13)) -- 13 vanadiel hours guarantees it will not spawn twice in the same night
 end
 
 return entity

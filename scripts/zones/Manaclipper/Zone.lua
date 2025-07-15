@@ -27,16 +27,16 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     -- If Zoredonite respawn is up, 30% chance to spawn
     if
-        os.time() > zoreRespawn and
-        os.time() > zoneWindow and
+        GetSystemTime() > zoreRespawn and
+        GetSystemTime() > zoneWindow and
         math.random(1, 10) > 7
     then
         GetMobByID(ID.mob.ZOREDONITE):setRespawnTime(math.random(120, 480))
     end
 
-    if os.time() > zoneWindow then
+    if GetSystemTime() > zoneWindow then
         -- Block multiple spawn chance rolls per boat ride
-        GetMobByID(ID.mob.ZOREDONITE):setLocalVar('zoneWindow', os.time() + 20)
+        GetMobByID(ID.mob.ZOREDONITE):setLocalVar('zoneWindow', GetSystemTime() + 20)
     end
 
     return cs

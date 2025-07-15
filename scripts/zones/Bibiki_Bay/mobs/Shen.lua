@@ -49,8 +49,8 @@ entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.REQUIEM)
     mob:setMod(xi.mod.WATER_ABSORB, 100)
 
-    mob:setLocalVar('shellTimer', os.time() + 60)
-    mob:setLocalVar('petCooldown', os.time() + 20)
+    mob:setLocalVar('shellTimer', GetSystemTime() + 60)
+    mob:setLocalVar('petCooldown', GetSystemTime() + 20)
     exitShell(mob)
 
     mob:addListener('MAGIC_STATE_EXIT', 'SHEN_MAGIC_EXIT', function(shen, spell)
@@ -66,13 +66,13 @@ end
 
 entity.onMobFight = function(mob, target)
     -- check timer for going into or out of shell
-    if os.time() > mob:getLocalVar('shellTimer') then
+    if GetSystemTime() > mob:getLocalVar('shellTimer') then
         if mob:getLocalVar('inShell') == 0 and mob:getAnimationSub() == 0 then
             enterShell(mob)
-            mob:setLocalVar('shellTimer', os.time() + math.random(30, 100))
+            mob:setLocalVar('shellTimer', GetSystemTime() + math.random(30, 100))
         elseif mob:getLocalVar('inShell') == 1 and mob:getAnimationSub() == 1 then
             exitShell(mob)
-            mob:setLocalVar('shellTimer', os.time() + math.random(30, 100))
+            mob:setLocalVar('shellTimer', GetSystemTime() + math.random(30, 100))
         end
     end
 
@@ -100,7 +100,7 @@ entity.onMobFight = function(mob, target)
 
     -- Shen instant casts Flood to spawn a pet
     if
-        os.time() >= petCooldown and
+        GetSystemTime() >= petCooldown and
         petOne and
         petTwo and
         (not petOne:isSpawned() or not petTwo:isSpawned()) and
@@ -109,7 +109,7 @@ entity.onMobFight = function(mob, target)
         mob:setMagicCastingEnabled(false)
         mob:addStatusEffectEx(xi.effect.CHAINSPELL, xi.effect.CHAINSPELL, 1, 0, 3, true)
         mob:castSpell(xi.magic.spell.FLOOD, target)
-        mob:setLocalVar('petCooldown', os.time() + 20)
+        mob:setLocalVar('petCooldown', GetSystemTime() + 20)
     end
 
     -- Shen exits shell if a pet dies so that it can respawn it
@@ -117,14 +117,14 @@ entity.onMobFight = function(mob, target)
     if petDeath == 1 then
         if mob:getLocalVar('inShell') == 1 and mob:getAnimationSub() == 1 then
             exitShell(mob)
-            mob:setLocalVar('shellTimer', os.time() + math.random(30, 100))
+            mob:setLocalVar('shellTimer', GetSystemTime() + math.random(30, 100))
         end
 
         mob:setLocalVar('filtrateDeath', 0)
     end
 
     -- every 30-90 seconds have one of the filtrates heal Shen via a water spell
-    if os.time() > mob:getLocalVar('healTimer') then
+    if GetSystemTime() > mob:getLocalVar('healTimer') then
         local pets = { petOne, petTwo }
         pets = utils.shuffle(pets)
 
@@ -137,7 +137,7 @@ entity.onMobFight = function(mob, target)
                 local spells = { xi.magic.spell.WATER_IV, xi.magic.spell.WATER_III }
                 local spellID = spells[math.random(1, #spells)]
                 shenFiltrate:castSpell(spellID, mob)
-                mob:setLocalVar('healTimer', os.time() + math.random(40, 100))
+                mob:setLocalVar('healTimer', GetSystemTime() + math.random(40, 100))
                 break
             end
         end

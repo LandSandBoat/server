@@ -1349,7 +1349,7 @@ xi.abyssea.traverserNPCOnUpdate = function(player, csid, option, npc)
             -- the result as a minute value to the player.
 
             local rechargeInterval = 20 - xi.abyssea.getAbyssiteTotal(player, xi.abyssea.abyssiteType.CELERITY)
-            local lastStoneClaimedTime = os.time() - player:getTraverserEpoch() - rechargeInterval * 3600 * player:getClaimedTraverserStones()
+            local lastStoneClaimedTime = GetSystemTime() - player:getTraverserEpoch() - rechargeInterval * 3600 * player:getClaimedTraverserStones()
             local rechargeRemaining = rechargeInterval * 60 - lastStoneClaimedTime / 60
 
             player:updateEvent(0, 0, 0, 0, rechargeRemaining)

@@ -20,11 +20,11 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('boreas_mantle', os.time() + math.random(15, 45))
+    mob:setLocalVar('boreas_mantle', GetSystemTime() + math.random(15, 45))
 end
 
 entity.onMobFight = function(mob, target)
-    local now = os.time()
+    local now = GetSystemTime()
     if mob:getLocalVar('boreas_mantle') <= now then
         mob:useMobAbility(xi.mobSkill.BOREAS_MANTLE, mob)
         mob:setLocalVar('boreas_mantle', now + math.random(60, 90))

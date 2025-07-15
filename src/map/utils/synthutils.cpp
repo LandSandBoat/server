@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -46,6 +46,7 @@
 #include "trade_container.h"
 
 #include "charutils.h"
+#include "enums/key_items.h"
 #include "itemutils.h"
 #include "zone.h"
 #include "zoneutils.h"
@@ -54,35 +55,35 @@ namespace synthutils
 {
     struct SynthRecipe
     {
-        uint32 ID;
-        uint8  Desynth;
-        uint16 KeyItem;
-        uint8  Wood;
-        uint8  Smith;
-        uint8  Gold;
-        uint8  Cloth;
-        uint8  Leather;
-        uint8  Bone;
-        uint8  Alchemy;
-        uint8  Cook;
-        uint16 Crystal;
-        uint16 HQCrystal;
-        uint16 Ingredient1;
-        uint16 Ingredient2;
-        uint16 Ingredient3;
-        uint16 Ingredient4;
-        uint16 Ingredient5;
-        uint16 Ingredient6;
-        uint16 Ingredient7;
-        uint16 Ingredient8;
-        uint16 Result;
-        uint16 ResultHQ1;
-        uint16 ResultHQ2;
-        uint16 ResultHQ3;
-        uint8  ResultQty;
-        uint8  ResultHQ1Qty;
-        uint8  ResultHQ2Qty;
-        uint8  ResultHQ3Qty;
+        uint32  ID;
+        uint8   Desynth;
+        KeyItem RequiredKeyItem;
+        uint8   Wood;
+        uint8   Smith;
+        uint8   Gold;
+        uint8   Cloth;
+        uint8   Leather;
+        uint8   Bone;
+        uint8   Alchemy;
+        uint8   Cook;
+        uint16  Crystal;
+        uint16  HQCrystal;
+        uint16  Ingredient1;
+        uint16  Ingredient2;
+        uint16  Ingredient3;
+        uint16  Ingredient4;
+        uint16  Ingredient5;
+        uint16  Ingredient6;
+        uint16  Ingredient7;
+        uint16  Ingredient8;
+        uint16  Result;
+        uint16  ResultHQ1;
+        uint16  ResultHQ2;
+        uint16  ResultHQ3;
+        uint8   ResultQty;
+        uint8   ResultHQ1Qty;
+        uint8   ResultHQ2Qty;
+        uint8   ResultHQ3Qty;
 
         std::string ResultName;
         std::string ContentTag;
@@ -194,39 +195,39 @@ namespace synthutils
 
         // TODO: If we limit by ID ranges, we could use multiple threads to load the recipes
 
-        const auto rset = db::preparedStmt("SELECT \
-            ID, \
-            Desynth, \
-            KeyItem, \
-            Wood, \
-            Smith, \
-            Gold, \
-            Cloth, \
-            Leather, \
-            Bone, \
-            Alchemy, \
-            Cook, \
-            Crystal, \
-            HQCrystal, \
-            Ingredient1, \
-            Ingredient2, \
-            Ingredient3, \
-            Ingredient4, \
-            Ingredient5, \
-            Ingredient6, \
-            Ingredient7, \
-            Ingredient8, \
-            Result, \
-            ResultHQ1, \
-            ResultHQ2, \
-            ResultHQ3, \
-            ResultQty, \
-            ResultHQ1Qty, \
-            ResultHQ2Qty, \
-            ResultHQ3Qty, \
-            ResultName, \
-            content_tag \
-            FROM synth_recipes");
+        const auto rset = db::preparedStmt("SELECT "
+                                           "ID, "
+                                           "Desynth, "
+                                           "KeyItem, "
+                                           "Wood, "
+                                           "Smith, "
+                                           "Gold, "
+                                           "Cloth, "
+                                           "Leather, "
+                                           "Bone, "
+                                           "Alchemy, "
+                                           "Cook, "
+                                           "Crystal, "
+                                           "HQCrystal, "
+                                           "Ingredient1, "
+                                           "Ingredient2, "
+                                           "Ingredient3, "
+                                           "Ingredient4, "
+                                           "Ingredient5, "
+                                           "Ingredient6, "
+                                           "Ingredient7, "
+                                           "Ingredient8, "
+                                           "Result, "
+                                           "ResultHQ1, "
+                                           "ResultHQ2, "
+                                           "ResultHQ3, "
+                                           "ResultQty, "
+                                           "ResultHQ1Qty, "
+                                           "ResultHQ2Qty, "
+                                           "ResultHQ3Qty, "
+                                           "ResultName, "
+                                           "content_tag "
+                                           "FROM synth_recipes");
 
         if (!rset || !rset->rowsCount())
         {
@@ -237,37 +238,37 @@ namespace synthutils
         while (rset->next())
         {
             const auto recipe = SynthRecipe{
-                .ID           = rset->get<uint32>("ID"),
-                .Desynth      = rset->get<uint8>("Desynth"),
-                .KeyItem      = rset->get<uint16>("KeyItem"),
-                .Wood         = rset->get<uint8>("Wood"),
-                .Smith        = rset->get<uint8>("Smith"),
-                .Gold         = rset->get<uint8>("Gold"),
-                .Cloth        = rset->get<uint8>("Cloth"),
-                .Leather      = rset->get<uint8>("Leather"),
-                .Bone         = rset->get<uint8>("Bone"),
-                .Alchemy      = rset->get<uint8>("Alchemy"),
-                .Cook         = rset->get<uint8>("Cook"),
-                .Crystal      = rset->get<uint16>("Crystal"),
-                .HQCrystal    = rset->get<uint16>("HQCrystal"),
-                .Ingredient1  = rset->get<uint16>("Ingredient1"),
-                .Ingredient2  = rset->get<uint16>("Ingredient2"),
-                .Ingredient3  = rset->get<uint16>("Ingredient3"),
-                .Ingredient4  = rset->get<uint16>("Ingredient4"),
-                .Ingredient5  = rset->get<uint16>("Ingredient5"),
-                .Ingredient6  = rset->get<uint16>("Ingredient6"),
-                .Ingredient7  = rset->get<uint16>("Ingredient7"),
-                .Ingredient8  = rset->get<uint16>("Ingredient8"),
-                .Result       = rset->get<uint16>("Result"),
-                .ResultHQ1    = rset->get<uint16>("ResultHQ1"),
-                .ResultHQ2    = rset->get<uint16>("ResultHQ2"),
-                .ResultHQ3    = rset->get<uint16>("ResultHQ3"),
-                .ResultQty    = rset->get<uint8>("ResultQty"),
-                .ResultHQ1Qty = rset->get<uint8>("ResultHQ1Qty"),
-                .ResultHQ2Qty = rset->get<uint8>("ResultHQ2Qty"),
-                .ResultHQ3Qty = rset->get<uint8>("ResultHQ3Qty"),
-                .ResultName   = rset->get<std::string>("ResultName"),
-                .ContentTag   = rset->getOrDefault<std::string>("content_tag", ""),
+                .ID              = rset->get<uint32>("ID"),
+                .Desynth         = rset->get<uint8>("Desynth"),
+                .RequiredKeyItem = static_cast<KeyItem>(rset->get<uint16>("KeyItem")),
+                .Wood            = rset->get<uint8>("Wood"),
+                .Smith           = rset->get<uint8>("Smith"),
+                .Gold            = rset->get<uint8>("Gold"),
+                .Cloth           = rset->get<uint8>("Cloth"),
+                .Leather         = rset->get<uint8>("Leather"),
+                .Bone            = rset->get<uint8>("Bone"),
+                .Alchemy         = rset->get<uint8>("Alchemy"),
+                .Cook            = rset->get<uint8>("Cook"),
+                .Crystal         = rset->get<uint16>("Crystal"),
+                .HQCrystal       = rset->get<uint16>("HQCrystal"),
+                .Ingredient1     = rset->get<uint16>("Ingredient1"),
+                .Ingredient2     = rset->get<uint16>("Ingredient2"),
+                .Ingredient3     = rset->get<uint16>("Ingredient3"),
+                .Ingredient4     = rset->get<uint16>("Ingredient4"),
+                .Ingredient5     = rset->get<uint16>("Ingredient5"),
+                .Ingredient6     = rset->get<uint16>("Ingredient6"),
+                .Ingredient7     = rset->get<uint16>("Ingredient7"),
+                .Ingredient8     = rset->get<uint16>("Ingredient8"),
+                .Result          = rset->get<uint16>("Result"),
+                .ResultHQ1       = rset->get<uint16>("ResultHQ1"),
+                .ResultHQ2       = rset->get<uint16>("ResultHQ2"),
+                .ResultHQ3       = rset->get<uint16>("ResultHQ3"),
+                .ResultQty       = rset->get<uint8>("ResultQty"),
+                .ResultHQ1Qty    = rset->get<uint8>("ResultHQ1Qty"),
+                .ResultHQ2Qty    = rset->get<uint8>("ResultHQ2Qty"),
+                .ResultHQ3Qty    = rset->get<uint8>("ResultHQ3Qty"),
+                .ResultName      = rset->get<std::string>("ResultName"),
+                .ContentTag      = rset->getOrDefault<std::string>("content_tag", ""),
             };
 
             synthRecipes[recipe.key()] = recipe;
@@ -310,7 +311,7 @@ namespace synthutils
                 return false;
             }
 
-            if (recipe.KeyItem == 0 || charutils::hasKeyItem(PChar, recipe.KeyItem))
+            if (recipe.RequiredKeyItem == KeyItem::NONE || charutils::hasKeyItem(PChar, recipe.RequiredKeyItem))
             {
                 // in the ninth cell write the id of the recipe
                 PChar->CraftContainer->setItem(9, recipe.ID, 0xFF, 0);

@@ -279,7 +279,7 @@ xi.darkixion.repop = function(mob)
     local randZoneID = keys[math.random(#keys)]
     SetServerVariable('DarkIxion_ZoneID', randZoneID)
     -- wiki says 'It can pop there in less than 10 seconds or take the whole 15 minutes'
-    SetServerVariable('DarkIxion_PopTime', os.time() + math.random(1, 15 * 60)) -- based on onGameHour function timing
+    SetServerVariable('DarkIxion_PopTime', GetSystemTime() + math.random(1, 15 * 60)) -- based on onGameHour function timing
 end
 
 -- Adjustments made once to Dark Ixion when he begins roaming
@@ -323,7 +323,7 @@ xi.darkixion.zoneOnInit = function(zone)
     -- check this on only one zone to catch when ixion has no zone assignment
     if
         xi.darkixion.zoneinfo[ixionZoneID] == nil or
-        (GetServerVariable('DarkIxion_PopTime') < os.time() and ixionZoneID == zone:getID())
+        (GetServerVariable('DarkIxion_PopTime') < GetSystemTime() and ixionZoneID == zone:getID())
     then
         -- reset zone ID but let him spawn next game hour
         if xi.darkixion.zoneinfo[ixionZoneID] == nil then
@@ -331,14 +331,14 @@ xi.darkixion.zoneOnInit = function(zone)
         end
 
         -- 'If Dark Ixion is due to spawn or is already spawned during maintenance, he will spawn shortly after server comes back online.'
-        SetServerVariable('DarkIxion_PopTime', os.time() + 10)
+        SetServerVariable('DarkIxion_PopTime', GetSystemTime() + 10)
     elseif
-        GetServerVariable('DarkIxion_PopTime') > os.time() and
+        GetServerVariable('DarkIxion_PopTime') > GetSystemTime() and
         ixionZoneID == zone:getID()
     then
         -- leave zone alone, push back repop ... since zone was already randomized, implied by PopTime being in the future
         -- 'If he was not due to spawn during this time frame (after maintenance), his spawn window will reset to 21 hours after servers come online.'
-        SetServerVariable('DarkIxion_PopTime', os.time() + 21 * 60 * 60)
+        SetServerVariable('DarkIxion_PopTime', GetSystemTime() + 21 * 60 * 60)
     end
 end
 
@@ -346,14 +346,14 @@ xi.darkixion.zoneOnGameHour = function(zone)
     local ixion = zone:queryEntitiesByName('Dark_Ixion')[1]
     if
         GetServerVariable('DarkIxion_ZoneID') == zone:getID() and
-        GetServerVariable('DarkIxion_PopTime') < os.time() - 24 * 60 * 60
+        GetServerVariable('DarkIxion_PopTime') < GetSystemTime() - 24 * 60 * 60
     then
         -- wander logic in onGameHour so even sleeping zones with no players can hold DI and cycle him out
         xi.darkixion.repop(ixion)
     elseif
         not ixion:isSpawned() and
         GetServerVariable('DarkIxion_ZoneID') == zone:getID() and
-        GetServerVariable('DarkIxion_PopTime') < os.time() - 45
+        GetServerVariable('DarkIxion_PopTime') < GetSystemTime() - 45
     then
         -- if gamehour flip is within 45s, randomly spawn within next twice that
         ixion:setRespawnTime(math.random(0, 90))
@@ -381,14 +381,14 @@ xi.darkixion.onMobDespawn = function(mob)
     DisallowRespawn(mob:getID(), true)
     if mob:getZoneID() == GetServerVariable('DarkIxion_ZoneID') then
         xi.darkixion.repop(mob)
-        SetServerVariable('DarkIxion_PopTime', os.time() + math.random(20, 24) * 60 * 60) -- repop 20-24 hours after death
+        SetServerVariable('DarkIxion_PopTime', GetSystemTime() + math.random(20, 24) * 60 * 60) -- repop 20-24 hours after death
     end
 end
 
 xi.darkixion.onMobSpawn = function(mob)
     mob:setBaseSpeed(70)
     xi.darkixion.roamingMods(mob)
-    SetServerVariable('DarkIxion_PopTime', os.time())
+    SetServerVariable('DarkIxion_PopTime', GetSystemTime())
     mob:setLocalVar('wasKilled', 0)
     mob:setMod(xi.mod.SLEEPRES, 100)
     mob:setMod(xi.mod.STUNRES, 100)
@@ -400,7 +400,7 @@ end
 xi.darkixion.onMobRoam = function(mob)
     if
         mob:getLocalVar('RunAway') ~= 0 and
-        mob:getLocalVar('RunAway') + 60 < os.time()
+        mob:getLocalVar('RunAway') + 60 < GetSystemTime()
     then
         -- 60s of running away, time to repop somewhere else
         xi.darkixion.repop(mob)
@@ -431,7 +431,7 @@ xi.darkixion.onMobEngage = function(mob, target)
     mob:setMod(xi.mod.UDMGMAGIC, 0)
 
     mob:setLocalVar('run', 0)
-    mob:setLocalVar('PhaseChange', os.time() + math.random(60, 240))
+    mob:setLocalVar('PhaseChange', GetSystemTime() + math.random(60, 240))
 end
 
 xi.darkixion.onMobDisengage = function(mob)
@@ -447,10 +447,10 @@ xi.darkixion.onMobDisengage = function(mob)
         -- disengage, give one window of him standing still unclaimed before 'Running away'
         local waitTime = 15
         mob:stun(waitTime * 1000)
-        mob:setLocalVar('RunAway', os.time() + waitTime)
+        mob:setLocalVar('RunAway', GetSystemTime() + waitTime)
     else
         -- just reset time until despawn
-        mob:setLocalVar('RunAway', os.time())
+        mob:setLocalVar('RunAway', GetSystemTime())
     end
 
     -- no chance of him staying in this zone unless an ash is landed before he runs away and despawns

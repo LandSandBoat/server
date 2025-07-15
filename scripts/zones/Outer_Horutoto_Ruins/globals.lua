@@ -9,7 +9,7 @@ local ID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
 
 local function setTrioCooldown()
-    local pop = os.time() + math.random(2700, 3600) -- 45 to 60 minutes
+    local pop = GetSystemTime() + math.random(2700, 3600) -- 45 to 60 minutes
 
     for i = ID.mob.BALLOON_NM_OFFSET + 1, ID.mob.BALLOON_NM_OFFSET + 3 do
         GetMobByID(i):setLocalVar('pop', pop)
@@ -54,7 +54,7 @@ local outerHorutotoGlobal =
 
             local pop  = nm:getLocalVar('pop')
 
-            if os.time() > pop then
+            if GetSystemTime() > pop then
                 DisallowRespawn(phId, true)
                 DisallowRespawn(nmId, false)
                 UpdateNMSpawnPoint(nmId)

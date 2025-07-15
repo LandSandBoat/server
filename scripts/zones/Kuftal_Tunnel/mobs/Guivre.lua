@@ -213,7 +213,7 @@ end
 
 entity.onMobSpawn = function(mob)
     -- Guivre will despawn if not claimed within 3-5 hours.
-    mob:setLocalVar('despawnTime', math.random(10800, 18000) + os.time())
+    mob:setLocalVar('despawnTime', math.random(10800, 18000) + GetSystemTime())
     mob:setLocalVar('isPaused', 0)
     mob:setLocalVar('mobPath', 1)
     mob:pathThrough(pathStart, xi.path.flag.COORDS)
@@ -261,7 +261,7 @@ end
 
 entity.onMobRoam = function(mob)
     local despawnCheck = mob:getLocalVar('despawnTime')
-    if despawnCheck <= os.time() then
+    if despawnCheck <= GetSystemTime() then
         DespawnMob(mob:getID())
     end
 end
