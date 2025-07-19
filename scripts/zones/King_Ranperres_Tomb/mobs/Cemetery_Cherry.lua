@@ -14,7 +14,7 @@ mixins =
 local entity = {}
 
 local function spawnSaplings()
-    for i = ID.mob.CHERRY_SAPLING_OFFSET, ID.mob.CHERRY_SAPLING_OFFSET + 12 do
+    for i = ID.mob.CHERRY_SAPLING_OFFSET, ID.mob.CHERRY_SAPLING_OFFSET + 8 do
         local mob = GetMobByID(i)
         if mob ~= nil and mob:getName() == 'Cherry_Sapling' and not mob:isSpawned() then
             SpawnMob(i)
