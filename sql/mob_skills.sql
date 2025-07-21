@@ -2088,7 +2088,7 @@ INSERT INTO `mob_skills` VALUES (2070,1411,'dismemberment',0,0.0,7.0,2000,1000,4
 INSERT INTO `mob_skills` VALUES (2071,1412,'dire_straight',0,0.0,7.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2072,1413,'earth_shatter',1,0.0,15.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2073,1414,'sinker_drill',0,0.0,7.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2074,1415,'detonating_grip',0,0.0,7.0,2000,1000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2074,1415,'detonating_grip',2,0.0,7.0,2000,1000,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2075,1819,'overthrow',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2076,1820,'rock_smash',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2077,1821,'diamondhide',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
