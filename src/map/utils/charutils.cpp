@@ -4505,6 +4505,14 @@ namespace charutils
                         exp = std::fmin(exp, 300.f);
                     }
 
+                    //Skillchain EXP Bonus Multiplier added after the exp chain cap
+                    if (PMob->getMobMod(MOBMOD_SC_EXP_BONUS))
+                    {
+                        const float monsterbonus = 1.f + PMob->getMobMod(MOBMOD_SC_EXP_BONUS) / 100.f;
+                        exp *= monsterbonus;
+                        exp = std::fmin(exp,20000); //Cap at 20000 exp per mob with a SC of 1000 damage or higher against a mob yielding 2k EXP or more 
+                    }
+
                     if (mobCheck > EMobDifficulty::DecentChallenge)
                     {
                         if (PMember->expChain.chainTime > gettick() || PMember->expChain.chainTime == 0)

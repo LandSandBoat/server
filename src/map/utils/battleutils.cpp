@@ -4341,6 +4341,15 @@ namespace battleutils
         PDefender->takeDamage(damage, PAttacker, ATTACK_TYPE::SPECIAL,
                               appliedEle == ELEMENT_NONE ? DAMAGE_TYPE::NONE : static_cast<DAMAGE_TYPE>(elementOffset));
 
+        auto*  PMob  = dynamic_cast<CMobEntity*>(PDefender);
+        uint16 scmod = 0;
+        if (PMob->getMobMod(MOBMOD_SC_EXP_BONUS))
+        {
+            scmod = PMob->getMobMod(MOBMOD_SC_EXP_BONUS);
+        }
+        scmod += damage;
+        PMob->setMobMod(MOBMOD_SC_EXP_BONUS, scmod);
+
         battleutils::ClaimMob(PDefender, PAttacker);
         PDefender->updatemask |= UPDATE_STATUS;
 
