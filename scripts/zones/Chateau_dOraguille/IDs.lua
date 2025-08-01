@@ -33,6 +33,7 @@ zones[xi.zone.CHATEAU_DORAGUILLE] =
         HIS_MAJESTY_AWAITS            = 7283, -- Go, <name>. His Majesty awaits!
         HEIR_TO_LIGHT_EXTRA           = 7809, -- <name>! I never doubted your ability on the front line. We are truly in your debt. Proceed to the Audience Chamber. His Highness awaits!
         SAVAGE_BLADE_LEARNED          = 7959, -- You have learned the weapon skill Savage Blade!
+        FIT_CANCELED                  = 8128, -- The quest “Fit for a Prince” has been canceled.
         CELEBRATORY_GOODS             = 8471, -- An assortment of celebratory goods is available for purchase.
     },
     mob =
