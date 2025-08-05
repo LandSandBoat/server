@@ -26,7 +26,7 @@ xi.mobSkill =
     VENOM_SPRAY_1            =  277,
     PIT_AMBUSH_1             =  278,
     MANDIBULAR_BITE_1        =  279,
-
+    SUBSTITUTE               =  307,
     FROGKICK_1               =  308,
     SPORE_1                  =  309,
     QUEASYSHROOM_1           =  310,

@@ -57638,11 +57638,11 @@ INSERT INTO `mob_spawn_points` VALUES (17436962,'Stygian_Demon','Stygian Demon',
 INSERT INTO `mob_spawn_points` VALUES (17436963,'Demons_Elemental','Demon\'s Elemental',18,1.000,1.000,1.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17436964,'Dark_Spark','Dark Spark',48,62.000,-24.000,19.000,10);
 INSERT INTO `mob_spawn_points` VALUES (17436965,'Mimic','Mimic',49,189.783,20.290,20.761,77);
-INSERT INTO `mob_spawn_points` VALUES (17436966,'Marquis_Andrealphus','Marquis Andrealphus',50,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17436967,'Demon_Banneret','Demon Banneret',51,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17436968,'Demon_Secretary','Demon Secretary',52,0.000,0.000,0.000,127);
-INSERT INTO `mob_spawn_points` VALUES (17436969,'Demon_Banneret','Demon Banneret',51,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17436970,'Demon_Secretary','Demon Secretary',52,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17436966,'Marquis_Andrealphus','Marquis Andrealphus',50,-13.818,-24.539,20.325,245);
+INSERT INTO `mob_spawn_points` VALUES (17436967,'Demon_Banneret','Demon Banneret',51,20.000,-24.620,25.000,64);
+INSERT INTO `mob_spawn_points` VALUES (17436968,'Demon_Secretary','Demon Secretary',52,20.000,-24.527,30.000,64);
+INSERT INTO `mob_spawn_points` VALUES (17436969,'Demon_Banneret','Demon Banneret',51,20.000,-24.575,14.500,192);
+INSERT INTO `mob_spawn_points` VALUES (17436970,'Demon_Secretary','Demon Secretary',52,20.000,-24.528,9.500,192);
 
 -- ------------------------------------------------------------
 -- Castle Zvahl Keep (Zone 162)
