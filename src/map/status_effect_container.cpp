@@ -1515,10 +1515,10 @@ void CStatusEffectContainer::RemoveAllStatusEffectsInIDRange(EFFECT start, EFFEC
 /************************************************************************
  *                                                                       *
  *  Install the name of the effect to work with scripts                  *
- *                                                                       *
+ *  TODO: This function could use a clean up in a future PR              *
  ************************************************************************/
 
-void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
+auto CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect) -> void
 {
     if (StatusEffect->GetStatusID() >= MAX_EFFECTID)
     {
@@ -1541,7 +1541,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     bool effectFromItemEnchant = false;
     if (StatusEffect->GetSourceType() != EffectSourceType::SOURCE_NONE && StatusEffect->GetSourceTypeParam() > 0)
     {
-        if (StatusEffect->GetSourceType() == EffectSourceType::EQUIPPED_ITEM)
+        if (StatusEffect->GetSourceType() == EffectSourceType::SOURCE_EQUIPPED_ITEM)
         {
             auto PItem = itemutils::GetItemPointer(StatusEffect->GetSourceTypeParam());
             if (PItem != nullptr)
@@ -1580,6 +1580,20 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
         name.insert(0, "effects/");
         name.insert(name.size(), effects::EffectsParams[effect].Name);
     }
+
+    // Other effects that are not BRD Songs, COR Rolls, Food, or effects tied to enchantments/items.
+    else if (!effectFromItemEnchant &&
+             subType > 0 &&
+             StatusEffect->GetSourceType() != EffectSourceType::SOURCE_EQUIPPED_ITEM &&
+             StatusEffect->GetSourceType() != EffectSourceType::SOURCE_TEMPORARY_ITEM &&
+             StatusEffect->GetSourceType() != EffectSourceType::SOURCE_FOOD && // TODO: Asign EFFECT_SOURCE_FOOD to food item scripts.
+             effect != EFFECT_FOOD)                                            // Catch all food effects for now.
+    {
+        name.insert(0, "effects/");
+        name.insert(name.size(), effects::EffectsParams[effect].Name);
+    }
+
+    // This seems to be used for food items currently.
     else
     {
         CItem* Ptem = itemutils::GetItemPointer(subType);

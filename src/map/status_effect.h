@@ -772,10 +772,21 @@ class CBattleEntity;
 
 enum EffectSourceType : uint8_t
 {
-    SOURCE_NONE    = 0,
-    EQUIPPED_ITEM  = 1,
-    TEMPORARY_ITEM = 2,
-    MOB            = 3,
+    SOURCE_NONE           = 0,  // Default or None.
+    SOURCE_ITEM           = 1,  // Effect came from an item.
+    SOURCE_EQUIPPED_ITEM  = 2,  // Effect came from an enchantment or similar effect from equipped items.
+    SOURCE_TEMPORARY_ITEM = 3,  // Effect came from a temporary item.
+    SOURCE_MOB_SCRIPT     = 4,  // Effect came from a mob's script(Mechanics, Aura, etc)
+    SOURCE_MOB_ATTACK     = 5,  // Effect came from an additional effect attached to a mob's attack.
+    SOURCE_MOB_SKILL      = 6,  // Effect came from a mob skill.
+    SOURCE_FOOD           = 7,  // Effect came from a food item.
+    SOURCE_MAGIC_WHITE    = 8,  // Effect came from a white magic spell.
+    SOURCE_MAGIC_BLACK    = 9,  // Effect came from a black magic spell.
+    SOURCE_MAGIC_BLUE     = 10, // Effect came from a blue magic spell.
+    SOURCE_MAGIC_SONG     = 11, // Effect came from a song.
+    SOURCE_ABILITY        = 12, // Effect came from an ability.
+    SOURCE_WEAPONSKILL    = 13, // Effect came from a weaponskill.
+    SOURCE_ENVIRONMENT    = 14, // Effect came from an enviromental source such as a trap or hazard.
 };
 
 class CStatusEffect
