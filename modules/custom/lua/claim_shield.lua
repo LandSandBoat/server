@@ -123,6 +123,20 @@ local timerFunc = function(mob)
 
             member:printToPlayer(str, xi.msg.channel.SYSTEM_3, '')
 
+            -- Check if this player was in the entries list
+            local wasInEntries = false
+            for _, entity in pairs(entries) do
+                if entity:getID() == member:getID() then
+                    wasInEntries = true
+                    break
+                end
+            end
+
+            -- Inform player they were on the lottery list if they were in entries
+            if wasInEntries then
+                member:printToPlayer('You were on the lottery list.', xi.msg.channel.SYSTEM_3, '')
+            end
+
             -- Remove from entries table
             local pos = tableFindPosByID(entries, member)
             if pos then
@@ -135,10 +149,13 @@ local timerFunc = function(mob)
         for _, member in pairs(entries) do
             local str = string.format('Your group was not successful in the lottery for %s. (out of %i players)', mob:getPacketName(), numEntries)
             if #alliance == 1 then
-                str = string.format('Your were not successful in the lottery for %s. (out of %i players)', mob:getPacketName(), numEntries)
+                str = string.format('You were not successful in the lottery for %s. (out of %i players)', mob:getPacketName(), numEntries)
             end
 
             member:printToPlayer(str, xi.msg.channel.SYSTEM_3, '')
+
+            -- Players in the entries list were definitely on the lottery list
+            member:printToPlayer('You were on the lottery list.', xi.msg.channel.SYSTEM_3, '')
             mob:clearEnmityForEntity(member)
         end
     end
