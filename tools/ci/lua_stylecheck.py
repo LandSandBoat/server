@@ -99,7 +99,7 @@ class LuaStyleCheck:
             print(f"{error_string}: {self.filename}:{self.counter}")
 
             if not suppress_line_ref:
-                print(f"{self.lines[self.counter - 1].strip()}                              <-- HERE")
+                print(f"{self.lines[self.counter - 1].strip()}                              <-- HERE");
 
             print("")
 
@@ -349,6 +349,17 @@ class LuaStyleCheck:
             if len(paramList) != 2:
                 self.error(f"math.random() calls should have upper and lower bounds ({randString.group(0)}).")
 
+    def check_duplicate_function_calls_in_condition(self, condition_str):
+        """Detects duplicate method/function calls with identical targets and parameters in a condition string."""
+        # Match method or function calls: target:func(params) or target.func(params)
+        func_calls = re.findall(r'(\w+(?::|\.)\w+\s*\([^\)]*\))', condition_str)
+        seen = set()
+        for call in func_calls:
+            if call in seen:
+                self.error(f"Duplicate function call in condition: {call}")
+            else:
+                seen.add(call)
+
     def run_style_check(self):
         if self.filename is None:
             print("ERROR: No filename provided to LuaStyleCheck class.")
@@ -359,6 +370,7 @@ class LuaStyleCheck:
             in_block_comment    = False
             in_condition        = False
             full_condition      = ""
+            full_condition_original = ""
             uses_id             = False
             has_id_ref          = False
 
@@ -448,8 +460,10 @@ class LuaStyleCheck:
                 # If nothing is left on the line after removing, then the string breaks rules
                 # TODO: If we have a string inside parentheses, make sure it has and/or in the string
 
+                # Condition block handling
                 if contains_word('if')(code_line) or contains_word('elseif')(code_line) or in_condition:
                     full_condition += code_line
+                    full_condition_original += line.rstrip('\n')
 
                     match = re.search(r"\bthen\b\s*(.*)", code_line)
                     if match and match.group(1):
@@ -457,7 +471,7 @@ class LuaStyleCheck:
 
                     if contains_word('then')(code_line):
                         condition_str = full_condition.replace('elseif','').replace('if','').replace('then','').strip()
-                        paren_regex = regex.compile(r"\((([^\)\(]+)|(?R))*+\)", re.S)
+                        paren_regex = regex.compile(r"\((?:[^()]+|(?R))*\)", re.S)
                         removed_paren_str = regex.sub(paren_regex, "", condition_str)
 
                         if removed_paren_str == "":
@@ -469,8 +483,12 @@ class LuaStyleCheck:
                         if not in_condition and len(re.findall(r" and | or ", condition_str)) > 0 and len(condition_str) > 72:
                             self.error("Multiline conditional format required")
 
+                        # Use the original, unmodified condition string for duplicate function call check
+                        self.check_duplicate_function_calls_in_condition(full_condition_original)
+
                         in_condition   = False
                         full_condition = ""
+                        full_condition_original = ""
 
                     # Multiline conditions
                     else:
