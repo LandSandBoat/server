@@ -24,10 +24,11 @@ end
 
 entity.onMobFight = function(mob, target)
     local opMariselle = mob:getID()
+    local battleTime  = mob:getBattleTime()
 
     if
-        mob:getBattleTime() % 30 < 3 and
-        mob:getBattleTime() > 3
+        battleTime % 30 < 3 and
+        battleTime > 3
     then
         local xPos = mob:getXPos()
         local yPos = mob:getYPos()
@@ -51,16 +52,18 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    local teleTime = mob:getLocalVar('teleTime')
+    local teleTime   = mob:getLocalVar('teleTime')
+    local battleTime = mob:getBattleTime()
+
     if
-        mob:getBattleTime() - teleTime > 30 and
-        mob:getBattleTime() > 59 and
+        battleTime - teleTime > 30 and
+        battleTime > 59 and
         not xi.combat.behavior.isEntityBusy(mob)
     then
         local profLocation = mob:getLocalVar('spawnLocation')
         local randomPosition = math.random(1, 9)
         utils.mobTeleport(mob, 2000, professorTables.locations[profLocation][randomPosition])
-        mob:setLocalVar('teleTime', mob:getBattleTime())
+        mob:setLocalVar('teleTime', battleTime)
     end
 
     -- If players wander too far from professor and his teleport room he deaggros --

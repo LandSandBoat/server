@@ -19,10 +19,12 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local teleTime = mob:getLocalVar('teleTime')
+    local teleTime   = mob:getLocalVar('teleTime')
+    local battleTime = mob:getBattleTime()
+
     if
-        mob:getBattleTime() - teleTime > 30 and
-        mob:getBattleTime() > 59 and
+        battleTime - teleTime > 30 and
+        battleTime > 59 and
         not xi.combat.behavior.isEntityBusy(mob)
     then
         local profLocation = mob:getLocalVar('spawnLocation')

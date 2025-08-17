@@ -72,14 +72,15 @@ entity.onMobFight = function(mob, target)
         mob:getHP() <= changeHP
     then
         mob:setLocalVar('dmgToChange', 0)
+        local mobAnimationSub = mob:getAnimationSub()
 
-        if mob:getAnimationSub() == 1 then
+        if mobAnimationSub == 1 then
             outOfShell(mob)
             mob:setAnimationSub(2)
             mob:setTP(3000) -- Immediately TPs coming out of shell
         elseif
-            mob:getAnimationSub() == 2 or
-            mob:getAnimationSub() == 0
+            mobAnimationSub == 2 or
+            mobAnimationSub == 0
         then
             intoShell(mob)
         end

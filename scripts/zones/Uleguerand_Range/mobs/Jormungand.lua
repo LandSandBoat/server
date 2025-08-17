@@ -221,12 +221,13 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 
     -- Below 25% Jorm can Horrid Roar 3x
-    local roarCount = mob:getLocalVar('roarCount')
+    local roarCount       = mob:getLocalVar('roarCount')
+    local mobAnimationSub = mob:getAnimationSub()
 
     if
         mob:getHPP() <= 25 and
         skill:getID() == 1296 and -- Check for Horrid Roar
-        (mob:getAnimationSub() == 0 or mob:getAnimationSub() == 2) -- If it flies during horrid roar cancel the remainders
+        (mobAnimationSub == 0 or mobAnimationSub == 2) -- If it flies during horrid roar cancel the remainders
     then
         if roarCount < 2 then
             if not target:isBehind(mob, 96) then
